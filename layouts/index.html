@@ -1,0 +1,21 @@
+{{ define "main" }}
+    {{- partial "intro.html" . -}}
+
+        {{ $mainSection := index (.Site.Params.mainSections) 0 }}
+
+        <div class="p-5">
+            <h1>Recent {{ $mainSection }} posts</h1>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                {{ range first 3 (where .Site.RegularPages.ByDate.Reverse "Type" $mainSection) }}
+                <div class="col">
+                    {{- partial "blog-card.html" . -}}
+                </div>
+                {{ end }}
+            </div>
+
+            {{ if gt (len (where .Site.RegularPages.ByDate.Reverse "Type" $mainSection)) 3 }}
+                <a class="btn btn-outline-primary" href="{{ $mainSection | safeURL }}" role="button">More {{ $mainSection }} posts</a>    
+            {{ end }}    
+        </div>
+
+{{ end }}

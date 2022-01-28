@@ -1,0 +1,10 @@
+.img-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.img-wrap img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
