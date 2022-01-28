@@ -1,11 +1,38 @@
-<!DOCTYPE html>
-<html>
-    {{- partial "head.html" . -}}
-    <body>
-        {{- partial "header.html" . -}}
-        <div id="content">
-        {{- block "main" . }}{{- end }}
-        </div>
-        {{- partial "footer.html" . -}}
-    </body>
-</html>
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}" class="no-js">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <!-- <body class="td-{{ .Kind }}{{ with .Page.Params.body_class }} {{ . }}{{ end }}">
+    <header>
+      {{ partial "navbar.html" . }}
+    </header>
+    <div class="container-fluid td-default td-outer">
+      <main role="main" class="td-main">
+        {{ block "main" . }}{{ end }}
+      </main>
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partialCached "scripts.html" . }}
+  </body> -->
+
+
+  <body class="
+  {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) -}}
+  {{- print "list" -}}
+  {{- end -}}
+  {{- if eq $.Site.Params.defaultTheme `dark` -}}
+  {{- print " dark" }}
+  {{- end -}}
+  " id="top">
+      {{- partialCached "header.html" . .Page -}}
+      <main class="main">
+          {{- block "main" . }}{{ end }}
+      </main>
+      {{ partialCached "footer.html" . .Layout .Kind -}}
+  </body>
+
+  </html>
+
+
+

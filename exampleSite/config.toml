@@ -1,14 +1,16 @@
-baseURL = "https://gohugo.io"
-title = "Hugo Themes"
-author = "Steve Francia"
-copyright = "Copyright © 2008–2019, Steve Francia and the Hugo Authors; all rights reserved."
-paginate = 3
-languageCode = "en"
+baseURL = "https://hugo-hinode-demo.markdumay.org/"
+title = "hugo-hinode-demo.markdumay.org"
+author = "Mark Dumay"
+copyright = "Copyright © 2022 Mark Dumay; all rights reserved."
+paginate = 8
+languageCode = "en-us"
 DefaultContentLanguage = "en"
 enableInlineShortcodes = true
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
 ignoreErrors = ["error-remote-getjson"]
+theme = "hugo-theme-hinode"
+themesDir = "../.."
 
 [menu]
 
