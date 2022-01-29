@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-white ps-4 pe-4">
 	<div class="container-fluid">
         <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
             <span class="navbar-logo">{{ if .Site.Params.ui.navbar_logo }}{{ with resources.Get "icons/logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}</span><span class="fw-bold ">{{ .Site.Title }}</span>
