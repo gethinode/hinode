@@ -1,4 +1,11 @@
 //
+// Ensure main page is rendered to full viewport height
+//
+.main {
+    min-height: 100vh;
+}  
+
+//
 // Table of contents sidebar
 //
 .toc {

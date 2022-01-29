@@ -5,16 +5,24 @@
     </head>
 
     <body>
-        <header>
-        {{ partial "navbar.html" . }}
-        </header>
-        <div class="container-fluid">
-            <main role="main">
+
+        <div class="main d-flex flex-column">
+            <div class="justify-content-center">    
+                <header>
+                    {{ partial "navbar.html" . }}
+                </header>
+            </div>
+                  
+            <div class="justify-content-center flex-grow-1">
                 {{ block "main" . }}{{ end }}
-            </main>
-            {{- partial "social.html" . -}}
-            {{ partial "footer.html" . }}
-        </div>
+            </div>
+                  
+            <div class="justify-content-center">
+                {{- partial "social.html" . -}}
+                {{ partial "footer.html" . }}
+            </div>
+          </div>
+
         {{ partialCached "scripts.html" . }}
     </body>
 </html>
