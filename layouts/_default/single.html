@@ -1,28 +1,24 @@
 {{ define "main" }}
     {{ $lastmodstr := (partial "date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) }}
     {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
-
-
-
     
     <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
         <div class="col col-md-2 d-none d-md-block"></div>
-            <div class="col col-sm-12 col-md-8">
-                <h1>{{ .Title }}</h1>
-                <small class="text-muted text-uppercase">
-                    {{ $datestr | i18n "postedOnDate" }}
-                    {{ if ne $datestr $lastmodstr }}
-                    &nbsp{{ $lastmodstr | i18n "lastModified" }}
-                    {{ else }}
-                    &nbsp;&bull;&nbsp;
-                    {{ end }}
-                    {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
-                    &nbsp;&bull;
-                    {{ .WordCount }}&nbsp;{{ i18n "words" }}
-                </small>
-            </div>
-            <div class="col col-md-2 d-none d-md-block"></div>
-        </div>    
+        <div class="col col-sm-12 col-md-8">
+            <h1>{{ .Title }}</h1>
+            <small class="text-muted text-uppercase">
+                {{ $datestr | i18n "postedOnDate" }}
+                {{ if ne $datestr $lastmodstr }}
+                &nbsp{{ $lastmodstr | i18n "lastModified" }}
+                {{ else }}
+                &nbsp;&bull;&nbsp;
+                {{ end }}
+                {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
+                &nbsp;&bull;
+                {{ .WordCount }}&nbsp;{{ i18n "words" }}
+            </small>
+        </div>
+        <div class="col col-md-2 d-none d-md-block"></div>
     </div>    
 
     {{ if .Params.thumbnail }}
@@ -36,14 +32,15 @@
             <div class="col col-md-2 d-none d-md-block"></div>
         </div>    
     {{ end }}
-        
-    <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5 gap-3">
+    
+    <div class="row row-cols-1 row-cols-sm-2 p-5">
         <div class="col col-md-2 d-none d-md-block"></div>
-            <div class="col col-sm-12 col-md-8">                    
-                    {{ .Content }}
-            </div>
-            <div class="col col-md-2 d-none d-md-block"></div>
-        </div>    
+        <div class="col col-sm-12 col-md-8">
+                {{ .Content }}
+        </div>
+        <div class="col col-md-2 d-none d-md-block">
+            {{ partial "toc.html" . }}
+        </div>
     </div>    
 
 {{ end }}
