@@ -37,15 +37,15 @@
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-12 col-md-8">
             {{ .Content }}
-            <div class="row row-cols-2">
+            <div class="row row-cols-2 mt-5">
                 <div class="col">
                     {{ with .NextInSection }}
-                        <a class="next" href="{{.Permalink}}"><i class="fas fa-arrow-left"></i> {{.Title}}</a>
+                        <a class="next" href="{{ .Permalink }}"><i class="fas fa-arrow-left"></i> {{ .Title }}</a>
                     {{ end }}
                 </div>
                 <div class="col text-end">
                     {{ with .PrevInSection }}
-                        <a class="previous" href="{{.Permalink}}">{{.Title}} <i class="fas fa-arrow-right"></i></a>
+                        <a class="previous" href="{{ .Permalink }}">{{ .Title }} <i class="fas fa-arrow-right"></i></a>
                     {{ end }}
                 </div>
             </div>
