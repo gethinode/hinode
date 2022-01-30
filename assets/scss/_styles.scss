@@ -46,3 +46,9 @@
 .toc nav a code {
     font: inherit
 }
+
+
+// Remove underline from all links
+a:link, a:visited, a:hover, a:active { 
+    text-decoration: none; 
+}
