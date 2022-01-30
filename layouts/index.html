@@ -6,10 +6,17 @@
         <div class="p-5">
             <h1>Recent {{ $mainSection }} posts</h1>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                {{ range first 3 (where .Site.RegularPages.ByDate.Reverse "Type" $mainSection) }}
-                <div class="col">
-                    {{- partial "blog-card.html" . -}}
-                </div>
+                {{ $items := first 3 (where .Site.RegularPages.ByDate.Reverse "Type" $mainSection)}}
+                {{ $max := sub (len $items) 1 }}
+                {{ range $index, $element := $items }}
+                    <div class="col">
+                        {{- partial "blog-card.html" $element -}}
+                    </div>
+                    {{ if (lt $index $max) }}
+                    <div class="col d-block d-sm-none">
+                        <hr>
+                    </div>
+                    {{ end }}
                 {{ end }}
             </div>
 

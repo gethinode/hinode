@@ -2,10 +2,16 @@
     <div class="p-5">
         <h1>{{ .Title }}</h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            {{ range (.Paginate .RegularPagesRecursive).Pages }}
+            {{ $max := sub (len .Pages) 1 }}
+            {{ range $index, $element := (.Paginate .RegularPagesRecursive).Pages }}
                 <div class="col">
-                    {{- partial "blog-card.html" . -}}
+                    {{- partial "blog-card.html" $element -}}
                 </div>
+                {{ if (lt $index $max) }}
+                <div class="col d-block d-sm-none">
+                    <hr>
+                </div>
+                {{ end }}
             {{ end }}
         </div>
 
