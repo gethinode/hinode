@@ -1,5 +1,15 @@
 {{ define "main" }}
-{{ with .Content }}
-{{ . }}
-{{ end }}
+    <div class="p-5">
+        <h1>{{ .Title }}</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {{ range (.Paginate .RegularPagesRecursive).Pages }}
+                <div class="col">
+                    {{- partial "blog-card.html" . -}}
+                </div>
+            {{ end }}
+        </div>
+
+        {{- partial "pagination.html" . -}}
+    </div>
+
 {{ end }}
