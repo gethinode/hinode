@@ -1,18 +1,13 @@
 .search {
-    --background: transparent;
-    --text-color: $primary;
-    --primary-color: $primary;
     --width: 15rem;
-    --height: 2.5rem;      
     width: auto;
-    height: var(--height);
+    height: 2.5rem;
     position: relative;
     overflow: hidden;
     input[type="text"] {
-        position: relative;
-        width: var(--height);
-        height: var(--height);
-        color: var(--text-color);
+        padding-top: 0.1rem;
+        width: 1.5rem;
+        color: $secondary;
         border: 0;
         box-sizing: border-box;
         outline: none;
