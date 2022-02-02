@@ -11,7 +11,6 @@
 			<span class="toggler-icon bottom-bar"></span>
 		</button>
 
-
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 {{ $currentPage := . }}
@@ -29,13 +28,11 @@
                         <a class="nav-link{{if $active }} active{{end}}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with .Pre}}{{ $pre }}{{ end }}<span{{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with .Post}}{{ $post }}{{ end }}</a>
                     </li>
                 {{ end }}
-            
-
-                <!-- <li class="nav-item searchbar">
-                    <input class="search_input" type="text" name="" placeholder="Search...">
-                    <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                </li>        -->
             </ul>
+            <form class="d-flex search">
+                <input type="text" placeholder="Search" aria-label="Search">
+                <div class="symbol"><i class="fas fa-search text-muted"></i></div>
+            </form>
         </div>
 	</div>
 </nav>

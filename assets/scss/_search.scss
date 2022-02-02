@@ -1,44 +1,41 @@
-// Source: https://bootsnipp.com/snippets/GaeQR
-.searchbar{
-        margin-bottom: auto;
-        margin-top: auto;
-        height: 60px;
-        background-color: #353b48;
-        border-radius: 30px;
-        padding: 10px;
-}
-    
-.search_input{
-        color: white;
+.search {
+    --background: transparent;
+    --text-color: $primary;
+    --primary-color: $primary;
+    --width: 15rem;
+    --height: 2.5rem;      
+    width: auto;
+    height: var(--height);
+    position: relative;
+    overflow: hidden;
+    input[type="text"] {
+        position: relative;
+        width: var(--height);
+        height: var(--height);
+        color: var(--text-color);
         border: 0;
-        outline: 0;
-        background: none;
-        width: 0;
-        caret-color:transparent;
-        line-height: 40px;
-        transition: width 0.4s linear;
-}
-    
-.searchbar:hover > .search_input{
-        padding: 0 10px;
-        width: 450px;
-        caret-color:red;
-        transition: width 0.4s linear;
-}
-    
-.searchbar:hover > .search_icon{
-        background: white;
-        color: #e74c3c;
-}
-    
-.search_icon{
-        height: 40px;
-        width: 40px;
-        float: right;
+        box-sizing: border-box;
+        outline: none;
+        transition: width .6s ease;
+        z-index: 10;
+        opacity: 0;
+        cursor: pointer;
+        &:focus {
+            border-bottom: 1px solid $secondary;
+            z-index: 0;
+            opacity: 1;
+            width: var(--width);
+            padding-right: 1.5rem;
+        }
+    }
+    .symbol {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 1;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        border-radius: 50%;
-        color:white;
-        text-decoration:none;
+    }
 }
