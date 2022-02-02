@@ -29,10 +29,16 @@
                     </li>
                 {{ end }}
             </ul>
-            <form class="d-flex search">
+            <div class="d-flex d-none d-sm-block">
+                <form class="d-flex search">
+                    <input type="text" placeholder="Search" aria-label="Search">
+                    <div class="symbol"><i class="fas fa-search text-muted"></i></div>
+                </form>
+            </div>
+            <form class="d-flex d-block d-sm-none">
                 <input type="text" placeholder="Search" aria-label="Search">
                 <div class="symbol"><i class="fas fa-search text-muted"></i></div>
             </form>
         </div>
-	</div>
+    </div>
 </nav>
