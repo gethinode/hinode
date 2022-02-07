@@ -82,7 +82,7 @@ Source:
 
   // https://discourse.gohugo.io/t/range-length-or-last-element/3803/2
 
-  {{ $list := (where site.RegularPages "Type" "in" site.Params.mainSections) -}}
+  {{ $list := (site.RegularPages) -}}
   {{ $len := (len $list) -}}
 
   index.add(
