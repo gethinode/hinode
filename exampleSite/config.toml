@@ -17,6 +17,7 @@ mainSections = ["blog"]
 
 [params]
   license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
+  offlineSearch = true
 
 
 [params.homepage.social]

@@ -3,3 +3,20 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous">
 </script>
+
+<script 
+    src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js" 
+    integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" 
+    crossorigin="anonymous">
+</script>
+
+{{ $indexTemplate := resources.Get "js/index.js" -}}
+{{ $jsIndex := $indexTemplate | resources.ExecuteAsTemplate "index.js" . }}
+{{ $js := (slice  $jsIndex) | resources.Concat "js/main.js" }}
+
+{{ if not hugo.IsProduction }}
+    <script src="{{ $js.RelPermalink }}"></script>
+{{ else }}
+    {{ $js := $js | minify | fingerprint }}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}

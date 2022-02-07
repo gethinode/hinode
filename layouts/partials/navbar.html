@@ -12,6 +12,7 @@
 		</button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
+            {{ partial "search-input.html" . }}
             <ul class="navbar-nav ms-auto">
                 {{ $currentPage := . }}
                 {{ range .Site.Menus.main }}
@@ -29,16 +30,6 @@
                     </li>
                 {{ end }}
             </ul>
-            <div class="d-flex d-none d-sm-block">
-                <form class="d-flex search">
-                    <input type="text" placeholder="Search" aria-label="Search">
-                    <div class="symbol"><i class="fas fa-search text-muted"></i></div>
-                </form>
-            </div>
-            <form class="d-flex d-block d-sm-none">
-                <input type="text" placeholder="Search" aria-label="Search">
-                <div class="symbol"><i class="fas fa-search text-muted"></i></div>
-            </form>
         </div>
     </div>
 </nav>

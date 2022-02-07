@@ -78,3 +78,9 @@
 # Table of contents
 - id: toc
   translation: "What's on this Page"
+
+# Search
+- id: ui_search
+  translation: "Search this site..."
+- id: ui_no_results
+  translation: "No results for"
