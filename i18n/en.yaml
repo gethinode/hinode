@@ -84,3 +84,7 @@
   translation: "Search this site..."
 - id: ui_no_results
   translation: "No results for"
+
+# Draft
+- id: draft
+  translation: "Draft"

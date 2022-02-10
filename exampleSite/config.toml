@@ -62,12 +62,9 @@ mainSections = ["blog", "projects"]
     weight = 30
 
 [taxonomies]
-category = "categories"
-tag = "tags"
-series = "series"
+  tag = 'tags'
 
 [privacy]
-
   [privacy.vimeo]
     disabled = false
     simple = true
