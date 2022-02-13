@@ -1,0 +1,65 @@
+baseURL = "https://hugo-hinode-demo.markdumay.org/"
+canonifyURLs = false
+
+title = "Hinode"
+author = "Mark Dumay"
+copyright = "Copyright © 2022 Mark Dumay."
+paginate = 9
+languageCode = "en-us"
+enableInlineShortcodes = true
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors = ["error-remote-getjson"]
+enableEmoji = true
+
+# Multilingual
+defaultContentLanguage = "en"
+disableLanguages = ["nl"]
+
+
+
+mainSections = ["blog", "projects"]
+
+[taxonomies]
+  tag = 'tags'
+
+[privacy]
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+
+  [privacy.twitter]
+    disabled = false
+    enableDNT = true
+    simple = true
+
+  [privacy.instagram]
+    disabled = false
+    simple = true
+
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true
+
+[services]
+
+  [services.instagram]
+    disableInlineCSS = true
+
+  [services.twitter]
+    disableInlineCSS = true
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.80.0"
+    max = ""
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "node_modules/flexsearch"
+    target = "assets/js/vendor/flexsearch"

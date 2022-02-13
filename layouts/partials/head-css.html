@@ -1,14 +1,13 @@
-
-{{ $scssMain := "scss/main.scss"}}
-{{ if not hugo.IsProduction }}
-{{/* Note the missing postCSS. This makes it snappier to develop in Chrome, but makes it look sub-optimal in other browsers. */}}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" true) }}
-<link href="{{ $css.RelPermalink }}" rel="stylesheet">
-{{ else }}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" false) | postCSS | minify | fingerprint }}
-<link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-<link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
-{{ end }}
+{{ if eq (hugo.Environment) "development" -}}
+  {{ $options := (dict "targetPath" "main.css" "enableSourceMap" true "includePaths" (slice "node_modules")) -}}
+  {{ $css := resources.Get "scss/app.scss" | toCSS $options -}}
+  <link rel="stylesheet" href="{{ $css.Permalink | relURL }}">
+{{ else -}}
+  {{ $options := (dict "targetPath" "main.css" "outputStyle" "compressed" "includePaths" (slice "node_modules")) -}}
+  {{ $css := resources.Get "scss/app.scss" | toCSS $options | postCSS (dict "config" "config/postcss.config.js") -}}
+  {{ $secureCSS := $css | resources.Fingerprint "sha512" -}}
+  <link rel="stylesheet" href="{{ $secureCSS.Permalink }}" integrity="{{ $secureCSS.Data.Integrity }}" crossorigin="anonymous">
+{{ end -}}
 
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
