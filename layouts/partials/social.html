@@ -1,4 +1,4 @@
-<div class="row row-cols-1 row-cols-sm-4 bg-primary p-5 bg-opacity-25 align-items-center">
+<div class="row row-cols-1 row-cols-sm-4 bg-primary p-5 bg-opacity-{{ .Site.Params.themeOpacity | default "25" | safeHTML }} align-items-center">
     <div class="col col-md-2 d-none d-md-block"></div>
     <div class="col col-sm-6 col-md-4">
         <div class="fs-3 fw-bold">{{ .Site.Params.socialTitle }}</div>

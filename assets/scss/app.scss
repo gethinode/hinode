@@ -1,18 +1,21 @@
-/** Import Bootstrap functions */
+// Define template variables 
+$themeColor: {{ .Site.Params.themeColor | default "#007bff" }};
+
+// Import Bootstrap functions
 @import "bootstrap/scss/functions";
 
-/** Import theme variables */
+// Import theme variables
 @import "common/variables.scss";
 
-/** Import Bootstrap */
+// Import Bootstrap
 @import "bootstrap/scss/bootstrap";
 
-/** Import Font Awesome */
+// Import Font Awesome
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
-/** Import theme styles */
+// Import theme styles
 @import "components/blockquote.scss";
 @import "components/card.scss";
 @import "components/navbar.scss";
