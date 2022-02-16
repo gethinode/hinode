@@ -1,3 +1,5 @@
-offlineSearch = true
-themeColor = "#00b0f0"
-themeOpacity = "25"
+[style]
+    themeColor = "#00b0f0"
+    themeOpacity = "25"
+
+
