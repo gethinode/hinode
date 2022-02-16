@@ -37,6 +37,7 @@
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-12 col-md-8">
             {{ .Content }}
+
             <div class="row row-cols-2 mt-5">
                 <div class="col">
                     {{ with .NextInSection }}
@@ -49,10 +50,13 @@
                     {{ end }}
                 </div>
             </div>
+
         </div>
         <div class="col col-md-2 d-none d-md-block">
-            {{ partial "toc.html" . }}
-        </div>
+            {{- if and .Site.Params.toc.enabled .Params.includeToc | default true -}}
+                {{ partial "toc.html" . }}
+            {{ end }}
+            </div>
     </div>
 
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
