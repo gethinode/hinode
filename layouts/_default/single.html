@@ -55,4 +55,16 @@
         </div>
     </div>
 
+    {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
+        <div class="row row-cols-1 row-cols-sm-2 p-5">
+            <div class="col col-md-2 d-none d-md-block"></div>
+            <div class="col col-sm-12 col-md-8">
+                <hr>
+                {{ partial "comments.html" . }}
+            </div>
+            <div class="col col-md-2 d-none d-md-block">
+            </div>
+        </div>
+    {{ end }}
+
 {{ end }}
