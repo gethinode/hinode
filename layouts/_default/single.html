@@ -5,6 +5,10 @@
     <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-12 col-md-8">
+            {{ range .Params.tags }}
+                <a class="btn btn-light btn-sm" href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" role="button">{{ . }}</a>    
+            {{ end }}
+
             <h1>{{ .Title }}</h1>
             <small class="text-muted text-uppercase">
                 {{ $datestr | i18n "postedOnDate" }}
