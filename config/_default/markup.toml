@@ -25,7 +25,7 @@ defaultMarkdownHandler = "goldmark"
     [goldmark.parser]
         autoHeadingID = true
         autoHeadingIDType = 'github'
-    [markup.goldmark.parser.attribute]
+    [goldmark.parser.attribute]
         block = true
     [goldmark.renderer]
         hardWraps = false
