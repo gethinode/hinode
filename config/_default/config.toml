@@ -42,17 +42,25 @@ mainSections = ["blog", "projects"]
     privacyEnhanced = true
 
 [services]
-
   [services.instagram]
     disableInlineCSS = true
-
   [services.twitter]
     disableInlineCSS = true
+
+
+[outputFormats]
+  [outputFormats.XML]
+    isPlainText = false
+    mediaType = "application/xml"
+    isHtml = false
+    noUgly = true
+    permalinkable = false
+    name = "xml"
 
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.80.0"
+    min = "0.81.0"
     max = ""
   [[module.mounts]]
     source = "assets"
