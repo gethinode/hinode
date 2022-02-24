@@ -1,15 +1,11 @@
-/*
+/* Bootstrap variables overrides for theme. */
 
-Bootstrap variables overrides for theme.
-See https://github.com/twbs/bootstrap/pull/23260
-*/
+$primary:                       $themeColor;
 
-@fa-font-path :        "../webfonts";
+@fa-font-path:                  "../webfonts";
 
 // Remove the border from the focused navigation toggler
 $navbar-toggler-focus-width:    0 !default;
-
-$primary:                       $themeColor;
 
 $font-family-sans-serif:        'Inter', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $headings-font-weight:          600 !default;
@@ -18,5 +14,3 @@ $font-weight-light:             200 !default;
 $font-weight-normal:            300 !default;
 $font-weight-bold:              600 !default;
 $font-weight-bolder:            bolder !default;
-
-  
