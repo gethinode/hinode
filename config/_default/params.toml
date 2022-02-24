@@ -1,3 +1,7 @@
+[favicon]
+    logo = "img/favicon.png"
+    sizes = [16, 32, 48]
+
 [search]
     enabled = true
 

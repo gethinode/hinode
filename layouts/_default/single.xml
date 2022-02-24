@@ -1,0 +1,19 @@
+{{ define "main" }}
+	<browserconfig>
+		<msapplication>
+			<tile>
+				{{ with resources.Get "img/favicon.png" }} 
+					{{ $square70 := .Resize "70x70 CatmullRom" }} 
+					{{ $square150 := .Resize "150x150 CatmullRom" }} 
+					{{ $wide310 := .Fill "310x150 CatmullRom" }} 
+					{{ $square310 := .Resize "310x310 CatmullRom" }}
+					<square70x70logo src="{{ $square70.Permalink }}" />
+					<square150x150logo src="{{ $square150.Permalink }}" />
+					<wide310x150logo src="{{ $wide310.Permalink }}" />
+					<square310x310logo src="{{ $square310.Permalink }}" />
+				{{ end }}
+				<TileColor>#000000</TileColor>
+			</tile>
+		</msapplication>
+	</browserconfig>
+{{ end }}
