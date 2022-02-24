@@ -2,11 +2,14 @@
     <div class="col col-md-2 d-none d-md-block"></div>
     <div class="col col-sm-6 col-md-4">
         <p class="fs-1 fw-bold">{{ .Site.Params.introTitle }}</p>
-        <p>{{ .Site.Params.introCaption }}</p>
+        <p>{{ .Site.Params.introCaption | safeHTML }}</p>
+        {{ if .Site.Params.introLink }}
+            <a class="btn btn-outline-primary" href="{{ .Site.Params.introLink | safeURL }}" role="button">{{ .Site.Params.introLinkTitle | default "About" }}</a>    
+        {{ end }}
     </div>
     <div class="col col-sm-6 col-md-4">
         <div class="ratio ratio-4x3 img-wrap">
-            <img class="rounded" src="{{ .Site.Params.introPhoto | safeURL }}" alt="{{ .Site.Params.Title }}" />
+            <img class="rounded" src="{{ .Site.Params.main.featurePhoto | safeURL }}" alt="{{ .Site.Params.Title }}" />
         </div>
     </div>
     <div class="col col-md-2 d-none d-md-block"></div>

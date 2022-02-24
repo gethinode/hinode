@@ -9,8 +9,13 @@
     enabled = true
 
 [style]
-    themeColor = "#00b0f0"
-    themeOpacity = "25"
+    themeColor = "#ff7f50" #00b0f0
+    themeOpacity = "10"
+
+[main]
+    featurePhoto = "/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    logo = "/logo_embedded.svg"
+
 
 [comments]
     # enabled = false
