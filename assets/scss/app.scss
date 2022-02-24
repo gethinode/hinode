@@ -1,5 +1,5 @@
 // Define template variables 
-$themeColor: {{ .Site.Params.style.themeColor | default "#007bff" }};
+$themeColor: {{ site.Params.style.themeColor | default "#007bff" }};
 
 // Import Bootstrap functions
 @import "bootstrap/scss/functions";
