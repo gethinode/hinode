@@ -3,7 +3,7 @@ author: "Hugo Authors"
 title: "Another project"
 date: 2021-07-15
 description: "Another project"
-tags: ["project", "javascript", "go"]
+tags: ["javascript", "go"]
 thumbnail: https://picsum.photos/id/810/400/250
 ---
 

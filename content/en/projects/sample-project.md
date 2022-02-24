@@ -3,7 +3,7 @@ author: "Hugo Authors"
 title: "Sample project"
 date: 2021-07-15
 description: "A sample project"
-tags: ["project"]
+tags: ["html", "css"]
 thumbnail: https://picsum.photos/id/910/400/250
 ---
 
