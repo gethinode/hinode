@@ -4,7 +4,7 @@
         <p class="fs-1 fw-bold">{{ .Site.Params.introTitle }}</p>
         <p>{{ .Site.Params.introCaption | safeHTML }}</p>
         {{ if .Site.Params.introLink }}
-            <a class="btn btn-outline-primary" href="{{ .Site.Params.introLink | safeURL }}" role="button">{{ .Site.Params.introLinkTitle | default "About" }}</a>    
+            <p><a class="btn btn-outline-primary" href="{{ .Site.Params.introLink | safeURL }}" role="button">{{ .Site.Params.introLinkTitle | default "About" }}</a></p>
         {{ end }}
     </div>
     <div class="col col-sm-6 col-md-4">
