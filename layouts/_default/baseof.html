@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
-        {{ partial "head.html" . }}
+        {{ partial "head/head.html" . }}
     </head>
 
     <body>
@@ -9,7 +9,7 @@
         <div class="main d-flex flex-column">
             <div class="justify-content-center">    
                 <header>
-                    {{ partial "navbar.html" . }}
+                    {{ partial "assets/navbar.html" . }}
                 </header>
             </div>
                   
@@ -18,11 +18,11 @@
             </div>
                   
             <div class="justify-content-center">
-                {{- partial "social.html" . -}}
-                {{ partial "footer.html" . }}
+                {{- partial "footer/social.html" . -}}
+                {{ partial "footer/footer.html" . }}
             </div>
           </div>
 
-        {{ partialCached "scripts.html" . }}
+        {{ partialCached "footer/scripts.html" . }}
     </body>
 </html>

@@ -13,4 +13,6 @@
         {{ .Site.Title -}}
     {{ end -}}
 </title>
-{{ partialCached "head-css.html" . "asdf" -}}
+{{ partial "head/head-css.html" -}}
+
+{{ partialCached "head/favicon.html" . -}}
