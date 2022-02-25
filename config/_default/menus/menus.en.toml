@@ -13,6 +13,10 @@
   url = "/projects/"
   weight = 30
 
+[[main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 40
 
 [[social]]
   name = "LinkedIn"
