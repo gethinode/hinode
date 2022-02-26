@@ -49,6 +49,6 @@
     "shx": "^0.3.4"
   },
   "otherDependencies": {
-    "hugo": "0.92.1"
+    "hugo": "0.92.2"
   }
 }
