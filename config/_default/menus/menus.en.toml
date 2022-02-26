@@ -1,0 +1,37 @@
+[[main]]
+  name = "About"
+  url = "/about/"
+  weight = 10
+
+[[main]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 20
+
+[[main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 30
+
+[[main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 40
+
+[[social]]
+  name = "LinkedIn"
+  pre = "<i class=\"fab fa-linkedin fa-2x\"></i>"
+  url = "https://linkedin.com/"
+  weight = 10
+
+[[social]]
+  name = "GitHub"
+  pre = "<i class=\"fab fa-github fa-2x\"></i>"
+  url = "https://github.com/"
+  weight = 20
+
+[[social]]
+  name = "Medium"
+  pre = "<i class=\"fab fa-medium fa-2x\"></i>"
+  url = "https://medium.com/"
+  weight = 30

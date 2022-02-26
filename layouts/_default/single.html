@@ -1,10 +1,14 @@
 {{ define "main" }}
-    {{ $lastmodstr := (partial "date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) }}
-    {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
+    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) }}
+    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
     
     <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-12 col-md-8">
+            {{ range .Params.tags }}
+                <a class="btn btn-light btn-sm" href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" role="button">{{ . }}</a>    
+            {{ end }}
+
             <h1>{{ .Title }}</h1>
             <small class="text-muted text-uppercase">
                 {{ $datestr | i18n "postedOnDate" }}
@@ -37,22 +41,44 @@
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-12 col-md-8">
             {{ .Content }}
+
             <div class="row row-cols-2 mt-5">
                 <div class="col">
                     {{ with .NextInSection }}
-                        <a class="next" href="{{ .Permalink }}"><i class="fas fa-arrow-left"></i> {{ .Title }}</a>
+                        {{ $next := . }}
+                        {{ with  .OutputFormats.Get "html" -}}
+                            <a class="next" href="{{ $next.Permalink }}"><i class="fas fa-arrow-left"></i> {{ $next.Title }}</a>
+                        {{- end }}
                     {{ end }}
                 </div>
                 <div class="col text-end">
                     {{ with .PrevInSection }}
-                        <a class="previous" href="{{ .Permalink }}">{{ .Title }} <i class="fas fa-arrow-right"></i></a>
+                        {{ $prev := . }}
+                        {{ with  .OutputFormats.Get "html" -}}
+                            <a class="previous" href="{{ $prev.Permalink }}">{{ $prev.Title }} <i class="fas fa-arrow-right"></i></a>
+                        {{- end }}
                     {{ end }}
                 </div>
             </div>
+
         </div>
         <div class="col col-md-2 d-none d-md-block">
-            {{ partial "toc.html" . }}
-        </div>
+            {{- if and .Site.Params.toc.enabled .Params.includeToc | default true -}}
+                {{ partial "assets/toc.html" . }}
+            {{ end }}
+            </div>
     </div>
+
+    {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
+        <div class="row row-cols-1 row-cols-sm-2 p-5">
+            <div class="col col-md-2 d-none d-md-block"></div>
+            <div class="col col-sm-12 col-md-8">
+                <hr>
+                {{ partial "assets/comments.html" . }}
+            </div>
+            <div class="col col-md-2 d-none d-md-block">
+            </div>
+        </div>
+    {{ end }}
 
 {{ end }}

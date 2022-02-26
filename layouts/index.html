@@ -10,7 +10,7 @@
                     {{ $max := sub (len $items) 1 }}
                     {{ range $index, $element := $items }}
                         <div class="col">
-                            {{- partial "blog-card.html" $element -}}
+                            {{- partial "assets/blog-card.html" $element -}}
                         </div>
                         {{ if (lt $index $max) }}
                         <div class="col d-block d-sm-none">
@@ -31,7 +31,7 @@
                     {{ $items := first 3 ($taxonomy.Pages)}}
                     {{ range $index, $element := $items }}
                         <div class="col">
-                            {{- partial "project-card.html" $element -}}
+                            {{- partial "assets/project-card.html" $element -}}
                         </div>
                     {{ end }}
                 </div>

@@ -1,0 +1,28 @@
+[favicon]
+    logo = "img/favicon.png"
+    sizes = [16, 32, 48]
+
+[search]
+    enabled = true
+
+[toc]
+    enabled = true
+
+[style]
+    themeColor = "#ff7f50" #00b0f0
+    themeOpacity = "10"
+
+[main]
+    featurePhoto = "/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    logo = "/logo_embedded.svg"
+
+
+[comments]
+    # enabled = false
+    enabled = true
+    repo = "razonyang/hugo-theme-bootstrap-comments" # Replace with your repository.
+    #issueTerm = "pathname" # pathname, url, title, og:title
+    #label = "comment"
+    # By default, light and dark mode correspond to github-light and github-dark, respectively.
+    # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
+    #theme = "" 

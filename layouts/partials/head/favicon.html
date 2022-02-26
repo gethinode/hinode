@@ -1,0 +1,9 @@
+{{ if .Site.Params.favicon.logo }}
+    {{ $favicon := resources.Get .Site.Params.favicon.logo }} 
+    {{ range $i := .Site.Params.favicon.sizes }} 
+        {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) }}
+        <link rel="icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}" />
+    {{ end }} 
+    {{ $image := $favicon.Resize "180x CatmullRom" }}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ $image.Permalink }}" />
+{{ end}}

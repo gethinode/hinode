@@ -1,0 +1,69 @@
+// Define template variables 
+$themeColor: {{ site.Params.style.themeColor | default "#007bff" }};
+
+// Import Bootstrap functions
+@import "bootstrap/scss/functions";
+
+// Include default variable overrides
+@import "common/variables.scss";
+
+// Import Bootstrap configuration
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// Import Bootstrap layout & components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/placeholders";
+
+// Import Bootstrap helpers
+@import "bootstrap/scss/helpers";
+
+// Import Bootstrap utilities
+@import "bootstrap/scss/utilities/api";
+
+
+// Import Font Awesome
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
+
+// Import theme styles
+@import "components/blockquote.scss";
+@import "components/buttons.scss";
+@import "components/card.scss";
+@import "components/navbar.scss";
+@import "components/img.scss";
+@import "components/search.scss";
+@import "common/styles.scss";
+@import "layouts/reboot.scss";
+@import "layouts/type.scss";

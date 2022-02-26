@@ -1,0 +1,12 @@
+{{- $params := .Site.Params.comments -}}
+{{- with $params -}}
+<h2>Comments</h2>
+<script src="https://utteranc.es/client.js"
+  repo="{{ $params.repo }}"
+  issue-term="{{ default "pathname" $params.issueTerm }}"
+  label="{{ default "comment" $params.label }}"
+  theme="{{ default "github-light" $params.theme }}"
+  crossorigin="anonymous"
+  async>
+</script>
+{{- end -}}

@@ -1,0 +1,27 @@
+<div class="card border-0">
+    {{ if .Params.thumbnail }}
+        <a href="{{ .Permalink }}" class="text-decoration-none link-dark">
+            <div class="ratio ratio-16x9 card-img-wrap">
+                <img src="{{ .Params.thumbnail }}" class="card-img-top" alt="{{ .Params.title }}">
+            </div>
+        </a>
+    {{ end }}
+    <div class="card-body d-flex flex-column">
+        <p class="card-text">
+            <small class="text-muted text-uppercase">
+                {{ partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long") }}
+                &bull; {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
+                {{ if isset .Params "tags" }}
+                    {{ range first 1 .Params.tags }}
+                        &bull; <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary">{{ . }}</a>
+                    {{ end }}
+                {{ end }}
+            </small>
+        </p>
+
+        <a href="{{ .Permalink }}" class="text-decoration-none link-dark">
+            <h5 class="card-title">{{ .Params.title }}</h5>
+            <p class="card-text mb-4">{{ .Params.description }}</p>
+        </a>
+    </div>
+</div>

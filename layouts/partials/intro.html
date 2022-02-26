@@ -1,12 +1,15 @@
-<div class="row row-cols-1 row-cols-sm-4 bg-primary p-5 bg-opacity-25 align-items-center">
+<div class="row row-cols-1 row-cols-sm-4 bg-primary p-5 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-center">
     <div class="col col-md-2 d-none d-md-block"></div>
     <div class="col col-sm-6 col-md-4">
         <p class="fs-1 fw-bold">{{ .Site.Params.introTitle }}</p>
-        <p>{{ .Site.Params.introSubtitle }}</p>
+        <p>{{ .Site.Params.introCaption | safeHTML }}</p>
+        {{ if .Site.Params.introLink }}
+            <p><a class="btn btn-outline-primary" href="{{ .Site.Params.introLink | safeURL }}" role="button">{{ .Site.Params.introLinkTitle | default "About" }}</a></p>
+        {{ end }}
     </div>
     <div class="col col-sm-6 col-md-4">
         <div class="ratio ratio-4x3 img-wrap">
-            <img class="rounded" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Params.Title }}" />
+            <img class="rounded" src="{{ .Site.Params.main.featurePhoto | safeURL }}" alt="{{ .Site.Params.Title }}" />
         </div>
     </div>
     <div class="col col-md-2 d-none d-md-block"></div>

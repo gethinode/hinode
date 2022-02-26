@@ -1,0 +1,8 @@
+{{if .Site.Params.search.enabled -}}
+    <div class="d-flex d-none d-sm-block">
+        <form class="search position-relative flex-grow-1 me-auto">
+            <input id="search" class="form-control is-search" type="search" placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
+            <div id="suggestions" class="shadow bg-white rounded d-none"></div>
+        </form>
+    </div>
+{{ end -}}
