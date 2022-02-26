@@ -45,10 +45,11 @@
     "exec-bin": "^1.0.0",
     "flexsearch": "^0.7.21",
     "hugo-installer": "^3.1.0",
+    "postcss-cli": "^9.1.0",
     "purgecss-whitelister": "^2.4.0",
     "shx": "^0.3.4"
   },
   "otherDependencies": {
-    "hugo": "0.92.1"
+    "hugo": "0.92.2"
   }
 }
