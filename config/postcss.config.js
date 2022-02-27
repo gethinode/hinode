@@ -23,7 +23,9 @@ module.exports = {
           /alert-link/,
           /container-xxl/,
           /container-fluid/,
-          /^bg-opacity-\d+/
+          /^bg-opacity-\d+/,
+          /svg.*/, 
+          /fa.*/
         ],
         ...whitelister([
           './assets/scss/components/_blockquote.scss',
