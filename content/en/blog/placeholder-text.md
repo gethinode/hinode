@@ -4,7 +4,7 @@ title: "Placeholder Text"
 date: 2021-07-13
 description: "Lorem Ipsum Dolor Si Amet"
 tags: ["markdown", "text"]
-thumbnail: https://picsum.photos/id/1067/5760/3840
+thumbnail: img/city.jpg # https://picsum.photos/id/1067/5760/3840
 ---
 
 Lorem est tota propiore conpellat pectoribus de pectora summo. <!--more-->Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.

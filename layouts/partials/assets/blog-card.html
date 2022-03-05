@@ -1,9 +1,7 @@
 <div class="card border-0">
     {{ if .Params.thumbnail }}
         <a href="{{ .Permalink }}" class="text-decoration-none link-dark">
-            <div class="ratio ratio-16x9 card-img-wrap">
-                <img src="{{ .Params.thumbnail }}" class="card-img-top" alt="{{ .Params.title }}">
-            </div>
+            {{- partial "image.html" (dict "url" .Params.thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" .Params.title) -}}
         </a>
     {{ end }}
     <div class="card-body d-flex flex-column">
