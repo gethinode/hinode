@@ -8,9 +8,9 @@
         {{ end }}
     </div>
     <div class="col col-sm-6 col-md-4">
-        <div class="ratio ratio-4x3 img-wrap">
-            <img class="rounded" src="{{ .Site.Params.main.featurePhoto | safeURL }}" alt="{{ .Site.Params.Title }}" />
-        </div>
+        {{ if .Site.Params.main.featurePhoto }}
+            {{- partial "image.html" (dict "url" .Site.Params.main.featurePhoto "ratio" "4x3" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Site.Params.title) -}}
+        {{ end }}
     </div>
     <div class="col col-md-2 d-none d-md-block"></div>
 </div>

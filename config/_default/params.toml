@@ -13,7 +13,7 @@
     themeOpacity = "10"
 
 [main]
-    featurePhoto = "/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    featurePhoto = "img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     logo = "/logo_embedded.svg"
 
 

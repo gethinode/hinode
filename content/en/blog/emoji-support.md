@@ -4,10 +4,12 @@ title: "Emoji Support"
 date: 2021-07-15
 description: "Guide to emoji usage in Hugo"
 tags: ["emoji"]
-thumbnail: https://picsum.photos/id/184/4288/2848
+thumbnail: img/dunes.jpg # https://picsum.photos/id/184/4288/2848
+credits: Photo by <a href="https://unsplash.com/@timdegroot">Tim de Groot</a> on <a href="https://unsplash.com/photos/yNGQ830uFB4">Unsplash</a>
 ---
 
 Emoji can be enabled in a Hugo project in a number of ways.
+
 
 <!--more-->
 
