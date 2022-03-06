@@ -26,6 +26,7 @@ module.exports = {
           /^bg-opacity-\d+/,
           /svg.*/, 
           /fa.*/,
+          /ratio.*/,
           /suggestion.*/,
         ],
         ...whitelister([
