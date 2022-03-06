@@ -5,6 +5,7 @@ date: 2021-07-14
 description: A brief guide to setup KaTeX
 math: true
 thumbnail: img/bird.jpg # https://picsum.photos/id/130/3807/2538
+credits: Photo by <a href="https://unsplash.com/@ryanjacques">Ryan Jacques</a> on <a href="https://unsplash.com/photos/ywiAen4L4qA">Unsplash</a>
 ---
 
 Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.

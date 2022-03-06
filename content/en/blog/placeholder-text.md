@@ -5,12 +5,13 @@ date: 2021-07-13
 description: "Lorem Ipsum Dolor Si Amet"
 tags: ["markdown", "text"]
 thumbnail: img/city.jpg # https://picsum.photos/id/1067/5760/3840
+credits: Photo by <a href="https://unsplash.com/@kevinjyoung">Kevin Young</a> on <a href="https://unsplash.com/photos/-icmOdYWXuQ">Unsplash</a>
 ---
 
 Lorem est tota propiore conpellat pectoribus de pectora summo. <!--more-->Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.
 
 
-{{< figure src="/featured-placeholder.jpg" title="Placeholder" class="img-fluid">}}
+{{< image src="img/flowers.jpg" ratio="21x9" caption="Figure caption" class="rounded">}}
 
 1. Exierant elisi ambit vivere dedere
 2. Duce pollice
