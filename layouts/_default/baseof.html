@@ -5,9 +5,8 @@
     </head>
 
     <body>
-
         <div class="main d-flex flex-column">
-            <div class="justify-content-center">    
+            <div class="justify-content-center">
                 <header>
                     {{ partial "assets/navbar.html" . }}
                 </header>
@@ -21,7 +20,7 @@
                 {{- partial "footer/social.html" . -}}
                 {{ partial "footer/footer.html" . }}
             </div>
-          </div>
+        </div>
 
         {{ partialCached "footer/scripts.html" . }}
     </body>

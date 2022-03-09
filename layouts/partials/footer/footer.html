@@ -1,4 +1,4 @@
-<footer class="container text-center p-3">
+<footer class="container-fluid text-center p-3">
     <small class="text-secondary">
         {{- $copyright := printf "%s © %s %s All rights reserved." (i18n "copyright") (dateFormat "2006" now) .Site.Title }}
         {{ cond (gt (len .Site.Copyright) 0) .Site.Copyright $copyright }}
