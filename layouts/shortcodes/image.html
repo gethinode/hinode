@@ -65,6 +65,7 @@
             {{- with $lg.RelPermalink -}}, {{.}} 992w{{- end -}}
             {{- with $md.RelPermalink -}}, {{.}} 768w{{- end -}}
             {{- with $sm.RelPermalink -}}, {{.}} 576w{{- end -}}"
+        sizes="100vw"
         src="{{ $fallback.RelPermalink }}"
         alt="{{ $title }}">
         <figcaption class="figure-caption">{{ $caption }}</figcaption>

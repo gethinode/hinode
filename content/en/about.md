@@ -10,7 +10,7 @@ showComments: false
 <p style="text-align: center;">Hinode is a clean blog theme for Hugo, an open-source static site generator.</p>
 
 <section class="section section-sm mt-5">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row justify-content-center text-center">
     <div class="row justify-content-center text-center">
       <div class="col-lg-4">

@@ -1,42 +1,44 @@
 {{ define "main" }}
-    <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
-        <div class="col col-md-2 d-none d-md-block"></div>
-        <div class="col col-sm-12 col-md-8">
-            <h1>{{ .Name | humanize }}</h1>
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
+            <div class="col col-md-2 d-none d-md-block"></div>
+            <div class="col col-sm-12 col-md-8">
+                <h1>{{ .Name | humanize }}</h1>
 
-            {{ if eq .Kind "taxonomy" }}
-                <div class="row mt-5"></div>
-                {{ range $.Site.Taxonomies.tags.ByCount }}
-                    <div class="row mt-2">
-                        <div class="d-none d-sm-block col-sm-2 mt-auto text-right">
-                            {{ .Count }} {{ if gt .Count 1 }} Articles {{ else }} Article {{ end }}
+                {{ if eq .Kind "taxonomy" }}
+                    <div class="row mt-5"></div>
+                    {{ range $.Site.Taxonomies.tags.ByCount }}
+                        <div class="row mt-2">
+                            <div class="d-none d-sm-block col-sm-2 mt-auto text-right">
+                                {{ .Count }} {{ if gt .Count 1 }} Articles {{ else }} Article {{ end }}
+                            </div>
+                            <div class="col">
+                                <a href="/tags{{ .Name | relURL }}">{{ .Name | markdownify }}</a>
+                            </div>
                         </div>
-                        <div class="col">
-                            <a href="/tags{{ .Name | relURL }}">{{ .Name | markdownify }}</a>
+                    {{ end }}
+                {{ else }}
+                    {{ $dateFormat := default "Jan 2" (index .Site.Params "date_format") }}
+                    {{ $.Scratch.Set "lastYear" ""}}
+                    {{ range .Pages }}
+                        {{ $year := .Date.Year }}
+                        {{ $lastYear := $.Scratch.Get "lastYear"}}
+                        <div class="row mt-2">
+                            <div class="d-none d-sm-block col-sm-2 mt-auto text-right">
+                                <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                            </div>
+                            <div class="col">
+                                {{ if ne $year $lastYear }}
+                                    <p class="text-muted mt-5">{{ $year }}</p>
+                                    {{ $.Scratch.Set "lastYear" $year }}
+                                {{ end }}
+                                <a href="{{ .Permalink | relURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{end}}{{ .Title | markdownify }}</a>
+                            </div>
                         </div>
-                    </div>
+                    {{ end }}
                 {{ end }}
-            {{ else }}
-                {{ $dateFormat := default "Jan 2" (index .Site.Params "date_format") }}
-                {{ $.Scratch.Set "lastYear" ""}}
-                {{ range .Pages }}
-                    {{ $year := .Date.Year }}
-                    {{ $lastYear := $.Scratch.Get "lastYear"}}
-                    <div class="row mt-2">
-                        <div class="d-none d-sm-block col-sm-2 mt-auto text-right">
-                            <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-                        </div>
-                        <div class="col">
-                            {{ if ne $year $lastYear }}
-                                <p class="text-muted mt-5">{{ $year }}</p>
-                                {{ $.Scratch.Set "lastYear" $year }}
-                            {{ end }}
-                            <a href="{{ .Permalink | relURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{end}}{{ .Title | markdownify }}</a>
-                        </div>
-                    </div>
-                {{ end }}
-            {{ end }}
+            </div>
+            <div class="col col-md-2 d-none d-md-block"></div>
         </div>
-        <div class="col col-md-2 d-none d-md-block"></div>
-    </div> 
+    </div>
 {{ end }}
