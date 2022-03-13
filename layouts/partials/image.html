@@ -1,8 +1,9 @@
 <!-- 
     Render an image with responsive image sizing. The image should be available as resource stored in the "assets"
-    folder. Images are resized using default media breakpoints and are converted to webp format. A fallback image is
-    provided for older browsers. The image is wrapped in a figure if a caption is provided, else the image is wrapped
-    in a div with a ratio constraint. The partial supports the following arguments:
+    folder. Images are resized using default media breakpoints and are converted to webp format. The image is
+    processed using the quality setting specified in the [imaging] section of the main config file (defaults to 75).
+    A fallback image is provided for older browsers. The image is wrapped in a figure if a caption is provided, else
+    the image is wrapped in a div with a ratio constraint. The partial supports the following arguments:
     "url":          Required relative url of the image, e.g. "img/example.jpg"
     "ratio":        Bootstrap ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9".
     "outerClass":   Optional class attribute of the outer div element, e.g. "img-wrap".
@@ -43,12 +44,12 @@
     {{ $xxlDim = "1400x600" }}
 {{ end }}
 
-{{ $sm := ($img.Fill (printf "%s webp q90" $smDim)) }}
-{{ $md := ($img.Fill (printf "%s webp q90" $mdDim)) }}
-{{ $lg := ($img.Fill (printf "%s webp q90" $lgDim)) }}
-{{ $xl := ($img.Fill (printf "%s webp q90" $xlDim)) }}
-{{ $xxl := ($img.Fill (printf "%s webp q90" $xxlDim)) }}
-{{ $fallback := ($img.Fill (printf "%s jpg q90" $xxlDim)) }}
+{{ $sm := ($img.Fill (printf "%s webp" $smDim)) }}
+{{ $md := ($img.Fill (printf "%s webp" $mdDim)) }}
+{{ $lg := ($img.Fill (printf "%s webp" $lgDim)) }}
+{{ $xl := ($img.Fill (printf "%s webp" $xlDim)) }}
+{{ $xxl := ($img.Fill (printf "%s webp" $xxlDim)) }}
+{{ $fallback := ($img.Fill (printf "%s jpg" $xxlDim)) }}
 
 
 {{ with .caption }}
