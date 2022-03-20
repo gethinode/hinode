@@ -1,0 +1,79 @@
+<!-- Copied from doks -->
+{{ with .Title }}
+    {{ $.Scratch.Set "title" . }}
+{{ else }}
+    {{ $.Scratch.Set "title" .Site.Params.title }}
+{{ end }}
+
+{{ with .Description -}}
+    {{ $.Scratch.Set "description" . }}
+{{ else -}}
+    {{ with .Summary | plainify -}}
+        {{ $.Scratch.Set "description" . }}
+    {{ else -}}
+        {{ $.Scratch.Set "description" .Site.Params.description }}
+    {{ end -}}
+{{ end -}}
+
+{{ with .Params.thumbnail }}
+    {{ $.Scratch.Set "thumbnail" (. | absURL) }}
+{{ else }}
+    {{ with .Site.Params.schemaImage -}}    
+        {{ $.Scratch.Set "thumbnail" (. | absURL) }}
+    {{ else -}}
+        {{ $images := $.Resources.ByType "image" -}}
+        {{ $featured := $images.GetMatch "*feature*" -}}
+        {{ if not $featured -}}
+            {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+        {{ end -}}
+        {{ with $featured }}
+            {{ $.Scratch.Set "thumbnail" $featured.Permalink }}
+        {{ else -}}
+            {{ with $.Site.Params.images -}}
+                {{ $.Scratch.Set "thumbnail" (index . 0 | absURL) }}
+            {{ end -}}
+        {{ end -}}
+    {{ end -}}
+{{ end -}}
+
+
+{{ if eq .Kind "404" -}}
+    <meta name="robots" content="noindex, follow">
+{{ else }}
+  {{ with .Params.robots -}}
+    <meta name="robots" content="{{ . }}">
+  {{ else -}}
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  {{ end -}}
+{{ end -}}
+
+{{ if .IsHome -}}
+    <title>{{ .Site.Params.title }} {{ .Site.Params.titleSeparator }} {{ .Site.Params.titleAddition }}</title>
+{{ else -}}
+    <title>{{ .Site.Params.title }} {{ .Site.Params.titleSeparator }} {{ .Title }}</title>
+{{ end -}}
+
+    <meta name="description" content="{{ $.Scratch.Get "description" }}">
+
+{{ if $.Scratch.Get "paginator" }}
+    <link rel="canonical" href="{{ .Paginator.URL | absURL }}">
+    {{ if .Paginator.HasPrev -}}
+        <link rel="prev" href="{{ .Paginator.Prev.URL | absURL }}">
+    {{ end -}}
+    {{ if .Paginator.HasNext -}}
+        <link rel="next" href="{{ .Paginator.Next.URL | absURL }}">
+    {{ end -}}
+{{ else -}}
+    <link rel="canonical" href="{{ .Permalink }}">
+{{ end -}}
+
+{{ partial "head/opengraph.html" . }}
+{{ partial "head/twitter_cards.html" . }}
+
+{{ range .AlternativeOutputFormats -}}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+{{ end -}}
+
+{{ partial "head/structured-data.html" . }}

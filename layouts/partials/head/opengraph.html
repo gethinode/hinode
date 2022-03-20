@@ -1,0 +1,43 @@
+<!-- Copied from doks -->
+<meta property="og:locale" content="{{ .Site.Params.ogLocale }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $.Scratch.Get "title" }}">
+<meta property="og:description" content="{{ $.Scratch.Get "description" }}">
+{{ if $.Scratch.Get "paginator" -}}
+    {{ $paginator := .Paginate (where .Site.RegularPages.ByDate.Reverse "Section" "blog" ) -}}
+    <meta property="og:url" content="{{ .Paginator.URL | absURL }}">
+{{ else -}}
+    <meta property="og:url" content="{{ .Permalink }}">
+{{ end -}}
+{{ with .Site.Params.title -}}
+    <meta property="og:site_name" content="{{ . }}">
+{{ end -}}
+
+{{ $iso8601 := "2006-01-02T15:04:05-07:00" -}}
+{{ if .IsPage -}}
+    {{ if not .PublishDate.IsZero -}}
+        <meta property="article:published_time" {{ .PublishDate.Format $iso8601 | printf "content=%q" | safeHTMLAttr }}>
+    {{ else if not .Date.IsZero -}}
+        <meta property="article:published_time" {{ .Date.Format $iso8601 | printf "content=%q" | safeHTMLAttr }}>
+    {{ end -}}
+    {{ if not .Lastmod.IsZero -}}
+        <meta property="article:modified_time" {{ .Lastmod.Format $iso8601 | printf "content=%q" | safeHTMLAttr }}>
+    {{ end -}}
+{{ else -}}
+    {{ if not .Date.IsZero -}}
+        <meta property="og:updated_time" {{ .Lastmod.Format $iso8601 | printf "content=%q" | safeHTMLAttr }}>
+    {{ end -}}
+{{ end -}}
+
+<meta property="og:image" content="{{ $.Scratch.Get "thumbnail" }}"/>
+<meta property="og:image:alt" content="{{ $.Scratch.Get "title" }}">
+
+{{ with .Params.audio -}}
+    <meta property="og:audio" content="{{ . | absURL }}">
+{{ end -}}
+
+{{ with .Params.videos -}}
+    {{ range . -}}
+        <meta property="og:video" content="{{ . | absURL }}">
+    {{ end -}}
+{{ end -}}
