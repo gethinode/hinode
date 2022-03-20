@@ -1,18 +1,9 @@
-{{ $desc := .Page.Description | default (.Page.Content | safeHTML | truncate 150) -}}
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{{ hugo.Generator}}
-<meta name="robots" content="index, follow">
-<meta name="description" content="{{ $desc }}">
-
-<title>
-    {{- if .IsHome -}}
-        {{ .Site.Title -}}
-    {{ else -}}
-        {{ with .Title }}{{ . }} | {{ end -}}
-        {{ .Site.Title -}}
-    {{ end -}}
-</title>
-{{ partial "head/head-css.html" -}}
-
-{{ partialCached "head/favicon.html" . -}}
+{{ define "head" }}
+    {{ $desc := .Page.Description | default (.Page.Content | safeHTML | truncate 150) -}}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ hugo.Generator}}
+    {{ partial "head/stylesheet.html" -}}
+    {{ partial "head/seo.html" . }}
+    {{ partialCached "head/favicon.html" . -}}
+{{ end }}

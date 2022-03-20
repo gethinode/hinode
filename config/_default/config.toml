@@ -5,6 +5,7 @@ title = "Hinode"
 author = "Mark Dumay"
 copyright = "Copyright © 2022 Mark Dumay."
 paginate = 9
+enableRobotsTXT = true
 languageCode = "en-us"
 enableInlineShortcodes = true
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.

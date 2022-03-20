@@ -11,9 +11,3 @@ min_version = "0.81.0"
 [author]
   name = "Mark Dumay"
   homepage = "https://github.com/markdumay"
-
-# If porting an existing theme
-[original]
-  name = "Blist"
-  homepage = "https://apvarun.com"
-  repo = "https://github.com/apvarun/blist-hugo-theme"

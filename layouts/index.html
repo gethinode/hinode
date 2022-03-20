@@ -1,49 +1,49 @@
 {{ define "main" }}
     {{- partial "intro.html" . -}}
 
-    {{ range $section, $taxonomy := .Site.Sections }}
-        {{ if eq $section 0}}
+    {{ range $section, $taxonomy := .Site.Sections -}}
+        {{ if eq $section 0 -}}
             <div class="p-5">
                 <h1>Recent posts</h1>
                 <div class="container-fluid">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                        {{ $items := first 3 ($taxonomy.Pages.ByDate.Reverse)}}
-                        {{ $max := sub (len $items) 1 }}
-                        {{ range $index, $element := $items }}
+                        {{ $items := first 3 ($taxonomy.Pages.ByDate.Reverse) -}}
+                        {{ $max := sub (len $items) 1 -}}
+                        {{ range $index, $element := $items -}}
                             <div class="col">
                                 {{- partial "assets/blog-card.html" $element -}}
                             </div>
-                            {{ if (lt $index $max) }}
+                            {{ if (lt $index $max) -}}
                             <div class="col d-block d-sm-none">
                                 <hr>
                             </div>
-                            {{ end }}
-                        {{ end }}
+                            {{ end -}}
+                        {{ end -}}
                     </div>
                 </div>
 
-                {{ if gt (len $taxonomy.Pages) 3 }}
+                {{ if gt (len $taxonomy.Pages) 3 -}}
                     <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">More {{ $taxonomy.Title }} posts</a>    
-                {{ end }}    
+                {{ end -}}
             </div>
-        {{ else }}
+        {{ else -}}
             <div class="p-5">
                 <h1>{{ $taxonomy.Title }}</h1>
                 <div class="container-fluid">
                     <div class="row row-cols-1 g-4">
-                        {{ $items := first 3 ($taxonomy.Pages)}}
-                        {{ range $index, $element := $items }}
+                        {{ $items := first 3 ($taxonomy.Pages) -}}
+                        {{ range $index, $element := $items -}}
                             <div class="col">
                                 {{- partial "assets/project-card.html" $element -}}
                             </div>
-                        {{ end }}
+                        {{ end -}}
                     </div>
                 </div>
 
-                {{ if gt (len $taxonomy.Pages) 3 }}
-                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">More {{ $taxonomy.Title }}</a>    
-                {{ end }}    
+                {{ if gt (len $taxonomy.Pages) 3 -}}
+                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">More {{ $taxonomy.Title }}</a>
+                {{ end -}} 
             </div>
-        {{ end }}
-    {{ end }}        
-{{ end }}
+        {{ end -}}
+    {{ end -}}
+{{ end -}}

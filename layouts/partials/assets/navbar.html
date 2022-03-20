@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-sm bg-white navbar-light ps-4 pe-4">
 	<div class="container-fluid">
         <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
-            {{ if .Site.Params.main.logo }}
-                <img src="{{ .Site.Params.main.logo }}" alt="{{ .Site.Title }}" height="30rem">
-            {{ else }}
+            {{ if .Site.Params.main.logo -}}
+                <img src="{{ .Site.Params.main.logo }}" alt="{{ .Site.Title }} logo" height="30">
+            {{ else -}}
                 <span class="fw-bold ">{{ .Site.Title }}</span>
-            {{ end }}
+            {{ end -}}
         </a>
 
 		<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -16,23 +16,23 @@
 		</button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
-            {{ partial "assets/search-input.html" . }}
+            {{ partial "assets/search-input.html" . -}}
             <ul class="navbar-nav ms-auto">
-                {{ $currentPage := . }}
-                {{ range .Site.Menus.main }}
-                {{ $active := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
-                    {{ with .Page }}
-                        {{ $active = or $active ( $.IsDescendant .)  }}
-                    {{ end }}
-                    {{ $pre := .Pre }}
-                    {{ $post := .Post }}
-                    {{ $url := urls.Parse .URL }}
-                    {{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
+                {{ $currentPage := . -}}
+                {{ range .Site.Menus.main -}}
+                    {{ $active := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) -}}
+                    {{ with .Page -}}
+                        {{ $active = or $active ( $.IsDescendant .)  -}}
+                    {{ end -}}
+                    {{ $pre := .Pre -}}
+                    {{ $post := .Post -}}
+                    {{ $url := urls.Parse .URL -}}
+                    {{ $baseurl := urls.Parse $.Site.Params.Baseurl -}}
             
                     <li class="nav-item">
                         <a class="nav-link{{if $active }} active{{end}}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with .Pre}}{{ $pre }}{{ end }}<span{{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with .Post}}{{ $post }}{{ end }}</a>
                     </li>
-                {{ end }}
+                {{ end -}}
             </ul>
         </div>
     </div>
