@@ -1,5 +1,5 @@
 <div class="card border-0">
-    {{ if .Params.thumbnail }}
+    {{ if .Params.thumbnail -}}
         <a href="{{ .Permalink }}" class="text-decoration-none link-dark">
             {{- partial "image.html" (dict "url" .Params.thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" .Params.title) -}}
         </a>
@@ -7,13 +7,13 @@
     <div class="card-body d-flex flex-column">
         <p class="card-text">
             <small class="text-muted text-uppercase">
-                {{ partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long") }}
+                {{- partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long") -}}
                 &bull; {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
-                {{ if isset .Params "tags" }}
-                    {{ range first 1 .Params.tags }}
+                {{ if isset .Params "tags" -}}
+                    {{ range first 1 .Params.tags -}}
                         &bull; <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary">{{ . }}</a>
-                    {{ end }}
-                {{ end }}
+                    {{ end -}}
+                {{ end -}}
             </small>
         </p>
 

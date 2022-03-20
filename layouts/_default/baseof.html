@@ -1,27 +1,27 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
-        {{ partial "head/head.html" . }}
+        {{ block "head" . }}{{ end -}}
     </head>
 
     <body>
         <div class="main d-flex flex-column">
             <div class="justify-content-center">
                 <header>
-                    {{ partial "assets/navbar.html" . }}
+                    {{- partial "assets/navbar.html" . -}}
                 </header>
             </div>
                   
             <div class="justify-content-center flex-grow-1">
-                {{ block "main" . }}{{ end }}
+                {{ block "main" . }}{{ end -}}
             </div>
                   
             <div class="justify-content-center">
                 {{- partial "footer/social.html" . -}}
-                {{ partial "footer/footer.html" . }}
+                {{- partial "footer/footer.html" . -}}
             </div>
         </div>
 
-        {{ partialCached "footer/scripts.html" . }}
+        {{- partialCached "footer/scripts.html" . -}}
     </body>
 </html>

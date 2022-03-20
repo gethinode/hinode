@@ -1,23 +1,23 @@
-{{ define "main" }}
-    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) }}
-    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
+{{ define "main" -}}
+    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) -}}
+    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) -}}
     
     <div class="container-fluid">
         <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
             <div class="col col-md-2 d-none d-md-block"></div>
             <div class="col col-sm-12 col-md-8">
-                {{ range .Params.tags }}
+                {{ range .Params.tags -}}
                     <a class="btn btn-light btn-sm" href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" role="button">{{ . }}</a>    
-                {{ end }}
+                {{ end -}}
 
                 <h1>{{ .Title }}</h1>
                 <small class="text-muted text-uppercase">
-                    {{ $datestr | i18n "postedOnDate" }}
-                    {{ if ne $datestr $lastmodstr }}
-                    &nbsp{{ $lastmodstr | i18n "lastModified" }}
-                    {{ else }}
-                    &nbsp;&bull;&nbsp;
-                    {{ end }}
+                    {{ $datestr | i18n "postedOnDate" -}}
+                    {{ if ne $datestr $lastmodstr -}}
+                        &nbsp{{ $lastmodstr | i18n "lastModified" }}
+                    {{ else -}}
+                        &nbsp;&bull;&nbsp;
+                    {{ end -}}
                     {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
                     &nbsp;&bull;
                     {{ .WordCount }}&nbsp;{{ i18n "words" }}
@@ -26,7 +26,7 @@
             <div class="col col-md-2 d-none d-md-block"></div>
         </div>    
 
-        {{ if .Params.thumbnail }}
+        {{ if .Params.thumbnail -}}
             <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
                 <div class="col col-md-2 d-none d-md-block"></div>
                 <div class="col col-sm-12 col-md-8">
@@ -34,37 +34,35 @@
                 </div>
                 <div class="col col-md-2 d-none d-md-block"></div>
             </div>    
-        {{ end }}
+        {{ end -}}
         
         <div class="row row-cols-1 row-cols-sm-2 p-5">
             <div class="col col-md-2 d-none d-md-block"></div>
             <div class="col col-sm-12 col-md-8">
                 {{ .Content }}
-
                 <div class="row row-cols-2 mt-5">
                     <div class="col">
-                        {{ with .NextInSection }}
-                            {{ $next := . }}
+                        {{ with .NextInSection -}}
+                            {{ $next := . -}}
                             {{ with  .OutputFormats.Get "html" -}}
                                 <a class="next" href="{{ $next.Permalink }}"><i class="fas fa-arrow-left"></i> {{ $next.Title }}</a>
-                            {{- end }}
-                        {{ end }}
+                            {{- end -}}
+                        {{ end -}}
                     </div>
                     <div class="col text-end">
-                        {{ with .PrevInSection }}
-                            {{ $prev := . }}
+                        {{ with .PrevInSection -}}
+                            {{ $prev := . -}}
                             {{ with  .OutputFormats.Get "html" -}}
                                 <a class="previous" href="{{ $prev.Permalink }}">{{ $prev.Title }} <i class="fas fa-arrow-right"></i></a>
-                            {{- end }}
-                        {{ end }}
+                            {{- end -}}
+                        {{ end -}}
                     </div>
                 </div>
-
             </div>
             <div class="col col-md-2 d-none d-md-block">
                 {{- if and .Site.Params.toc.enabled .Params.includeToc | default true -}}
-                    {{ partial "assets/toc.html" . }}
-                {{ end }}
+                    {{ partial "assets/toc.html" . -}}
+                {{ end -}}
             </div>
         </div>
     </div>
@@ -81,6 +79,5 @@
                 </div>
             </div>
         </div>
-    {{ end }}
-
-{{ end }}
+    {{ end -}}
+{{ end -}}

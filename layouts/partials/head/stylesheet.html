@@ -1,0 +1,11 @@
+{{ $options := (dict "targetPath" "main.css" "enableSourceMap" true "includePaths" (slice "node_modules")) -}}
+{{ $css := resources.Get "scss/app.scss" | resources.ExecuteAsTemplate "style.app.scss" . | toCSS $options -}}
+{{ if eq (hugo.Environment) "development" -}}
+    <link rel="stylesheet" href="{{ $css.Permalink | relURL }}">
+{{ else -}}
+    {{ $secureCSS := $css | postCSS (dict "config" "config/postcss.config.js") | resources.Fingerprint "sha512" -}}
+    <link rel="stylesheet" href="{{ $secureCSS.Permalink }}" integrity="{{ $secureCSS.Data.Integrity }}" crossorigin="anonymous">
+{{ end -}}
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap">
