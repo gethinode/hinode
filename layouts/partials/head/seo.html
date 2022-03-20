@@ -16,7 +16,10 @@
 {{ end -}}
 
 {{ with .Params.thumbnail }}
-    {{ $.Scratch.Set "thumbnail" (. | absURL) }}
+    {{ $source := resources.Get . -}}
+    {{ $dim := "1280x640" -}}
+    {{ $img := ($source.Fill (printf "%s jpg" $dim)) -}}
+    {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) }}
 {{ else }}
     {{ with .Site.Params.schemaImage -}}    
         {{ $.Scratch.Set "thumbnail" (. | absURL) }}
