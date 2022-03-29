@@ -19,7 +19,7 @@
     {{ $source := resources.Get . -}}
     {{ $dim := "1280x640" -}}
     {{ $img := ($source.Fill (printf "%s jpg" $dim)) -}}
-    {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) }}
+    {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) -}}
 {{ else }}
     {{ with .Site.Params.schemaImage -}}    
         {{ $.Scratch.Set "thumbnail" (. | absURL) }}
@@ -30,10 +30,10 @@
             {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
         {{ end -}}
         {{ with $featured }}
-            {{ $.Scratch.Set "thumbnail" $featured.Permalink }}
+            {{ $.Scratch.Set "thumbnail" $featured.Permalink -}}
         {{ else -}}
             {{ with $.Site.Params.images -}}
-                {{ $.Scratch.Set "thumbnail" (index . 0 | absURL) }}
+                {{ $.Scratch.Set "thumbnail" (index . 0 | absURL) -}}
             {{ end -}}
         {{ end -}}
     {{ end -}}
