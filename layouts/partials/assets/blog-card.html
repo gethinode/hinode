@@ -11,7 +11,7 @@
                 &bull; {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
                 {{ if isset .Params "tags" -}}
                     {{ range first 1 .Params.tags -}}
-                        &bull; <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary">{{ . }}</a>
+                        &bull; <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary" aria-label="Tag: {{ . }}">{{ . }}</a>
                     {{ end -}}
                 {{ end -}}
             </small>

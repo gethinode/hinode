@@ -11,7 +11,7 @@
                     <small class="text-muted text-uppercase">
                         {{ range $index, $element := .Params.tags }}
                             {{ if gt $index 0 }}&bull; {{ end }}
-                            <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary">{{ . }}</a>
+                            <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary" aria-label="Tag: {{ . }}">{{ . }}</a>
                         {{ end }}
                     </small>
                 {{ end }}            
