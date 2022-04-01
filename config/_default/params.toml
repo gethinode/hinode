@@ -44,7 +44,7 @@ schemaSection = "blog"
     enabled = true
 
 [style]
-    themeColor = "#ff7f50" #00b0f0
+    themeColor = "#D43900" #00b0f0
     themeOpacity = "10"
 
 [main]
