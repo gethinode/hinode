@@ -21,8 +21,11 @@
         X-XSS-Protection = "1; mode=block"
         Content-Security-Policy = """\
             default-src 'self'; \
-            script-src 'report-sample' 'self' https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js https://utteranc.es/client.js; \
-            style-src 'report-sample' 'self' https://fonts.googleapis.com; \
+            script-src 'self' \
+                https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js \
+                https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js \
+                https://utteranc.es/client.js; \
+            style-src 'self' https://fonts.googleapis.com; \
             object-src 'none'; \
             base-uri 'self'; \
             connect-src 'self'; \
@@ -30,8 +33,7 @@
             frame-src 'self' https://utteranc.es; \
             img-src 'self'; \
             manifest-src 'self'; \
-            media-src 'self'; \
-            worker-src 'none'; \
+            media-src 'self' \
             """
         X-Frame-Options = "SAMEORIGIN"
         Referrer-Policy = "strict-origin"
