@@ -4,11 +4,20 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
+- type: document
+  path: content/en/about.md
+  label: About
+  match: "**/*"
 - type: directory
-  path: content
-  label: Pages
+  path: content/en/projects
+  label: Projects
   create: all
-  match: "*"
+  match: "**/*"
+- type: directory
+  path: content/en/blog
+  label: Blog
+  create: all
+  match: "**/*"
 upload_dir: config/_default/static/uploads
 public_path: "/uploads"
 front_matter_path: ''
