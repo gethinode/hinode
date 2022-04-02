@@ -4,19 +4,19 @@ auto_deploy: false
 admin_path: 
 webhook_url: 
 sections:
-- type: document
-  path: content/en/about.md
-  label: About
-- type: directory
-  path: content/en/projects
-  label: Projects
-  create: all
-  match: "**/*"
 - type: directory
   path: content/en/blog
   label: Blog
   create: all
   match: "**/*"
+- type: directory
+  path: content/en/projects
+  label: Projects
+  create: all
+  match: "**/*"
+- type: document
+  path: content/en/about.md
+  label: About
 upload_dir: assets/img
 public_path: "/img"
 front_matter_path: ''
