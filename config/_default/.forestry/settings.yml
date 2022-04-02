@@ -28,7 +28,7 @@ build:
   - HUGO_VERSION=0.83.1
   - HUGO_ENABLEGITINFO=true
   preview_output_directory: public
-  preview_docker_image: forestryio/hugo:latest
+  preview_docker_image: forestryio/hugo:node16
   mount_path: "/srv"
   working_dir: "/srv"
   instant_preview_command: npm run build
