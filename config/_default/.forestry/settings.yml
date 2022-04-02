@@ -25,10 +25,11 @@ file_template: ":filename:"
 build:
   preview_env:
   - HUGO_ENV=staging
-  - HUGO_VERSION=0.81.0
+  - HUGO_VERSION=0.83.1
+  - HUGO_ENABLEGITINFO=true
   preview_output_directory: public
   preview_docker_image: forestryio/hugo:latest
   mount_path: "/srv"
   working_dir: "/srv"
-  instant_preview_command: hugo server -D -E -F --renderToDisk -d public
+  instant_preview_command: npm run build
 version: 0.81.0
