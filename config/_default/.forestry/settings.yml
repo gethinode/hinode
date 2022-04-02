@@ -32,5 +32,5 @@ build:
   preview_docker_image: forestryio/hugo:node16
   mount_path: "/srv"
   working_dir: "/srv"
-  instant_preview_command: npm run build
+  instant_preview_command: npm run start
 version: 0.81.0
