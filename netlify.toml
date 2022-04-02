@@ -19,10 +19,38 @@
         Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options = "nosniff"
         X-XSS-Protection = "1; mode=block"
-        Content-Security-Policy = "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net https://utteranc.es; style-src 'self' https://fonts.googleapis.com"
+        Content-Security-Policy = """\
+            base-uri 'self'; \
+            child-src https://utteranc.es/client.js; \
+            default-src 'self'; \
+            font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; \
+            form-action 'self'; \
+            img-src 'self'; \
+            object-src 'none'; \
+            script-src 'self' 'report-sample' \
+                https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js \
+                https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js \
+                https://utteranc.es/client.js; \
+            style-src 'self' 'report-sample' https://fonts.googleapis.com \
+            """
         X-Frame-Options = "SAMEORIGIN"
         Referrer-Policy = "strict-origin"
-        Permissions-Policy = "vibrate=(), geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()"
+        Permissions-Policy = """\
+            vibrate=(), \
+            geolocation=(), \
+            midi=(), \
+            notifications=(), \
+            push=(), \
+            sync-xhr=(), \
+            microphone=(), \
+            camera=(), \
+            magnetometer=(), \
+            gyroscope=(), \
+            speaker=(), \
+            vibrate=(), \
+            fullscreen=(), \
+            payment=() \
+            """
         Cache-Control = "public, max-age=31536000"
         Access-Control-Allow-Origin = "*"
 
