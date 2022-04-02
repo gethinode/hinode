@@ -19,7 +19,7 @@
         Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options = "nosniff"
         X-XSS-Protection = "1; mode=block"
-        Content-Security-Policy = "default-src 'self'; font-src https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'"
+        Content-Security-Policy = "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net https://utteranc.es; style-src 'self' https://fonts.googleapis.com"
         X-Frame-Options = "SAMEORIGIN"
         Referrer-Policy = "strict-origin"
         Permissions-Policy = "vibrate=(), geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()"
