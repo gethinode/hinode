@@ -5,7 +5,7 @@ admin_path:
 webhook_url: 
 sections:
 - type: directory
-  path: config/_default/content
+  path: content
   label: Pages
   create: all
   match: "*"
