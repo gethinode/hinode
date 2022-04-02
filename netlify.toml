@@ -1,30 +1,47 @@
 [build]
-  publish = "public"
-  functions = "functions"
+    publish = "public"
+    functions = "functions"
 
 [build.environment]
-  NODE_VERSION = "16.13.1"
-  NPM_VERSION = "8.1.2"
+    NODE_VERSION = "16.13.1"
+    NPM_VERSION = "8.1.2"
 
 [context.production]
-  command = "npm run build"
+    command = "npm run build"
+
+[context.production.environment]
+    HUGO_VERSION = "0.83.1"
+    HUGO_ENV = "production"
+    HUGO_ENABLEGITINFO = "true"
+[[headers]]
+    for = "/*"
+    [headers.values]
+        Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options = "nosniff"
+        X-XSS-Protection = "1; mode=block"
+        Content-Security-Policy = "default-src 'self'; font-src https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'"
+        X-Frame-Options = "SAMEORIGIN"
+        Referrer-Policy = "strict-origin"
+        Permissions-Policy = "vibrate=(), geolocation=(), midi=(), notifications=(), push=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(), payment=()"
+        Cache-Control = "public, max-age=31536000"
+        Access-Control-Allow-Origin = "*"
 
 [context.deploy-preview]
-  command = "npm run build -- -b $DEPLOY_PRIME_URL"
+    command = "npm run build -- -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
-  command = "npm run build -- -b $DEPLOY_PRIME_URL"
+    command = "npm run build -- -b $DEPLOY_PRIME_URL"
 
 [context.next]
-  command = "npm run build"
+    command = "npm run build"
 
 [context.next.environment]
-  HUGO_ENV = "next"
+    HUGO_ENV = "next"
 
 [dev]
-  framework = "#custom"
-  command = "npm run start"
-  targetPort = 1313
-  port = 8888
-  publish = "public"
-  autoLaunch = false
+    framework = "#custom"
+    command = "npm run start"
+    targetPort = 1313
+    port = 8888
+    publish = "public"
+    autoLaunch = false
