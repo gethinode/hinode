@@ -25,7 +25,7 @@ file_template: ":filename:"
 build:
   preview_env:
   - HUGO_ENV=staging
-  - HUGO_VERSION=0.83.1
+  - HUGO_VERSION=0.92.2
   - HUGO_ENABLEGITINFO=true
   preview_output_directory: public
   install_dependencies_command: npm install
