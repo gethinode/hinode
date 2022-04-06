@@ -38,18 +38,13 @@
         X-Frame-Options = "SAMEORIGIN"
         Referrer-Policy = "strict-origin"
         Permissions-Policy = """\
-            vibrate=(), \
             geolocation=(), \
             midi=(), \
-            notifications=(), \
-            push=(), \
             sync-xhr=(), \
             microphone=(), \
             camera=(), \
             magnetometer=(), \
             gyroscope=(), \
-            speaker=(), \
-            vibrate=(), \
             fullscreen=(), \
             payment=() \
             """
