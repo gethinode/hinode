@@ -14,7 +14,7 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 
 ## YouTube Privacy Enhanced Shortcode
 
-{{< youtube ZJthWmvUzzc >}}
+{{< youtube id="ZJthWmvUzzc" class="video">}}
 
 <br>
 
@@ -30,4 +30,4 @@ Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-manageme
 
 ## Vimeo Simple Shortcode
 
-{{< vimeo_simple 48912912 >}}
+{{< vimeo_simple id="48912912" class="__h_video" >}}
