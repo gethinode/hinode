@@ -25,12 +25,12 @@
                 https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js \
                 https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js \
                 https://utteranc.es/client.js; \
-            style-src 'self' localhost:1313 https://utteranc.es https://fonts.googleapis.com https://cdn.jsdelivr.net https://www.youtube.com; \
+            style-src 'self' https://utteranc.es https://fonts.googleapis.com https://www.youtube.com; \
             object-src 'none'; \
             base-uri 'self'; \
-            connect-src 'self' localhost:1313 ws://localhost:1313/livereload; \
+            connect-src 'self'; \
             font-src 'self' https://fonts.gstatic.com; \
-            frame-src 'self' localhost:1313 https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
+            frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
             img-src 'self' https://i.vimeocdn.com https://i.ytimg.com; \
             manifest-src 'self'; \
             media-src 'self' \
