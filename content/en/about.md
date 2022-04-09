@@ -26,7 +26,7 @@ showComments: false
       <div class="col-lg-4">
       <i class="fa-solid fa-code fa-2xl"></i>
         <h2 class="h4">Development tools</h2>
-        <p>Code with confidence. Check styles, scripts, and markdown for errors and fix automatically or manually.</p>
+        <p>Use Node Package Manager to automate the build process and to keep track of dependencies.</p>
       </div>
     </div>
   </div>
@@ -39,7 +39,6 @@ Additional features include:
 * Code highlighting
 * Color customization
 * i18n support
-
 
 The Hinode theme is inspired by the following themes:
 * [Blist](https://github.com/apvarun/blist-hugo-theme) - a clean and fast blog theme for your Hugo site using Tailwind CSS.
