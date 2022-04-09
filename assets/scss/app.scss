@@ -51,7 +51,6 @@ $themeColor: {{ site.Params.style.themeColor | default "#007bff" }};
 // Import Bootstrap utilities
 @import "bootstrap/scss/utilities/api";
 
-
 // Import Font Awesome
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 @import "@fortawesome/fontawesome-free/scss/solid";
