@@ -6,7 +6,6 @@
     <br />
 </p>
 
-
 <!-- Badges -->
 <p align="center">
     <a href="https://app.netlify.com/sites/hinode-demo/deploys" alt="Netlify Status">
@@ -40,10 +39,9 @@
   <a href="#license">License</a>
 </p>
 
-
 ## About
-![Logo](https://raw.githubusercontent.com/markdumay/hugo-theme-hinode/main/static/logo.png)
 
+![Logo](https://raw.githubusercontent.com/markdumay/hugo-theme-hinode/main/static/logo.png)
 
 - [Online Demo][demo]
 - [PageSpeed Insights][pagespeed]
@@ -52,24 +50,24 @@
 Hinode is a clean blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
 
 Additional features include:
-* Comments
-* Social links
-* Blog pagination
-* Code highlighting
-* Color customization
-* i18n support
+
+- Comments
+- Social links
+- Blog pagination
+- Code highlighting
+- Color customization
+- i18n support
 
 <!-- TODO: add tutorial deep-link 
 Detailed background information is available on the author's [personal blog][blog].
 -->
 
-
 ## Prerequisites
+
 Hinode requires Git, Node.js and npm for local development and testing. Download the Git binary from the [official website][git_download]. Next, download and install [Node.js][nodejs] (it includes npm) for your platform.
 
-
-
 ## Installation
+
 Start a new Hinode project in three steps:
 
 ### 1. Create a new site
@@ -105,36 +103,40 @@ npm install
 npm run start
 ```
 
-
-
 ## Configuration
-The main site configuration is available in `./config/_default`. Some remarks:
-* Menu items - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
-* Content - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
-* Theme color - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility.
-* Comments - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
-* Security headings - The local development server uses the header configuration as provided by `server.toml`. Similar settings are provided in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
 
+The main site configuration is available in `./config/_default`. Some remarks:
+
+- Menu items - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
+- Content - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
+- Theme color - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility.
+- Comments - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
+- Security headings - The local development server uses the header configuration as provided by `server.toml`. Similar settings are provided in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
 
 ## Contributing
-1. Clone the repository and create a new branch 
+
+1. Clone the repository and create a new branch
+
     ```console
-    $ git checkout https://github.com/markdumay/hugo-theme-hinode.git -b name_for_new_branch
+    git checkout https://github.com/markdumay/hugo-theme-hinode.git -b name_for_new_branch
     ```
+
 2. Make and test the changes
 3. Submit a Pull Request with a comprehensive description of the changes
 
-
 ## Credits
+
 The Hinode theme is inspired by the following themes:
+
 - [Blist][blist] - a clean and fast blog theme for your Hugo site using Tailwind CSS.
 - [Doks][doks] - a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.
 
-
 ## Donate
+
 <a href="https://www.buymeacoffee.com/markdumay" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;"></a>
 
 ## License
+
 The `hugo-theme-hinode` codebase is released under the [MIT license][license]. The documentation (including the "README") is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
 <!-- MARKDOWN PUBLIC LINKS -->
