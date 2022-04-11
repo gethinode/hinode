@@ -74,7 +74,7 @@ Start a new Hinode project in three steps:
 
 ### 1. Create a new site
 
-Hinode is available as a child theme, and a starter theme:
+<!-- Hinode is available as a child theme, and a starter theme:
 
 - Use the Hinode child theme, if you do **not** plan to customize a lot, and/or need future Hinode updates.
 - Use the Hinode starter theme, if you plan to customize a lot, and/or do **not** need future Hinode updates.
@@ -87,7 +87,7 @@ Not quite sure? Use the Hinode child theme.
 git clone https://github.com/markdumay/hugo-theme-hinode-child.git my-hinode-site && cd my-hinode-site
 ```
 
-#### Hinode starter theme
+#### Hinode starter theme -->
 
 ```bash
 git clone https://github.com/markdumay/hugo-theme-hinode.git my-hinode-site && cd my-hinode-site
