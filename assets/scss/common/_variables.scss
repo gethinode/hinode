@@ -2,12 +2,12 @@
 
 $primary:                       $themeColor;
 
-@fa-font-path:                  "../webfonts";
+@fa-font-path:                  "../fonts";
 
 // Remove the border from the focused navigation toggler
 $navbar-toggler-focus-width:    0 !default;
 
-$font-family-sans-serif:        'Inter', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif:        "Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $headings-font-weight:          600 !default;
 $font-weight-lighter:           lighter !default;
 $font-weight-light:             200 !default;

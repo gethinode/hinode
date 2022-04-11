@@ -14,7 +14,7 @@
 }
 
 /* Lines of the Toggler */
-.toggler-icon{
+.toggler-icon {
     width: 30px;
     height: 3px;
     background-color: $primary;
@@ -23,7 +23,7 @@
 }
 
 /* Adds Space between the lines */
-.middle-bar{
+.middle-bar {
     margin: 5px auto;
 }
 
@@ -42,6 +42,7 @@
     transform: rotate(-45deg);
     transform-origin: 10% 90%;
 }
+
 /* State when navbar is opened (END) */
 
 /* State when navbar is collapsed (START) */
@@ -57,9 +58,10 @@
 .navbar-toggler.collapsed .bottom-bar {
     transform: rotate(0);
 }
+
 /* State when navbar is collapsed (END) */
 
 /* Color of Toggler when collapsed */
 .navbar-toggler.collapsed .toggler-icon {
-    background-color: #777777;
+    background-color: #777;
 }

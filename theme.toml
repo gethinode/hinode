@@ -1,11 +1,11 @@
 name = "Hinode"
 license = "MIT"
 licenselink = "https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE"
-description = "A clean blog theme for your Hugo site based on Bootstrap 5."
+description = "Hinode is a clean blog theme for Hugo, an open-source static site generator."
 homepage = "https://github.com/markdumay/hugo-theme-hinode"
 demosite = "https://hinode-demo.markdumay.org/"
 tags = ["blog", "minimal", "modern", "customizable", "search", "bootstrap"]
-features = ["bootstrap framework", "full text search", "page layouts"]
+features = ["security aware", "fast by default", "seo-ready", "development tools", "bootstrap framework", "netlify-ready", "full text search", "page layouts"]
 min_version = "0.81.0"
 
 [author]

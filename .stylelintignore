@@ -1,0 +1,4 @@
+assets/scss/common/_variables.scss
+assets/scss/vendor
+assets/scss/app.scss
+node_modules

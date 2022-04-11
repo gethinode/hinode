@@ -1,4 +1,8 @@
 /* Set hover color for primary button to white (overrides color contrast defined in mixin) */
-.btn-outline-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+.btn-outline-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
     color: #fff !important;
 }

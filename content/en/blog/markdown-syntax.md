@@ -16,6 +16,7 @@ This article offers a sample of basic Markdown syntax that can be used in Hugo c
 
 The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
 
+<!-- markdownlint-disable-next-line -->
 # H1
 
 ## H2
@@ -38,21 +39,19 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
 
-#### Blockquote without attribution
+### Blockquote without attribution
 
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.
 > **Note** that you can use _Markdown syntax_ within a blockquote.
 {.blockquote}
 
-#### Blockquote with attribution
+### Blockquote with attribution
 
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
 {.blockquote}
 
 [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
-
-
 
 <figure>
   <blockquote class="blockquote">
@@ -73,18 +72,16 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
 | Alice | 23  |
 {.table}
 
-
-#### Inline Markdown within tables
+### Inline Markdown within tables
 
 | Italics   | Bold     | Code   |
 | --------- | -------- | ------ |
 | _italics_ | **bold** | `code` |
 {.table}
 
-
 ## Code Blocks
 
-#### Code block with backticks
+### Code block with backticks
 
 ```html
 <!DOCTYPE html>
@@ -99,7 +96,8 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
 </html>
 ```
 
-#### Code block indented with four spaces
+<!-- markdownlint-disable MD046 -->
+### Code block indented with four spaces
 
     <!doctype html>
     <html lang="en">
@@ -111,8 +109,9 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
       <p>Test</p>
     </body>
     </html>
+<!-- markdownlint-enable MD046 -->
 
-#### Code block with Hugo's internal highlight shortcode
+### Code block with Hugo's internal highlight shortcode
 
 {{< highlight html >}}
 
@@ -130,19 +129,19 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
 
 ## List Types
 
-#### Ordered List
+### Ordered List
 
 1. First item
 2. Second item
 3. Third item
 
-#### Unordered List
+### Unordered List
 
 - List item
 - Another item
 - And another item
 
-#### Nested list
+### Nested list
 
 - Fruit
   - Apple
