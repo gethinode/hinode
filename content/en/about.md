@@ -1,7 +1,7 @@
 ---
 title: "About"
 description: "A clean blog theme for your Hugo site based on Bootstrap 5."
-date: "2019-02-28"
+date: "2022-04-11"
 showComments: false
 ---
 
@@ -37,6 +37,7 @@ Additional features include:
 * Comments
 * Social links
 * Blog pagination
+* Scrollspy
 * Code highlighting
 * Color customization
 * i18n support
