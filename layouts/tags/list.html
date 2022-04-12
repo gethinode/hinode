@@ -9,7 +9,7 @@
                     <div class="row mt-5"></div>
                     {{ range $.Site.Taxonomies.tags.ByCount }}
                         <div class="row mt-2">
-                            <div class="d-none d-sm-block col-sm-2 mt-auto text-right">
+                            <div class="d-none d-sm-block col-sm-3 mt-auto text-right">
                                 {{ .Count }} {{ if gt .Count 1 }} Articles {{ else }} Article {{ end }}
                             </div>
                             <div class="col">
@@ -24,7 +24,7 @@
                         {{ $year := .Date.Year }}
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
                         <div class="row mt-2">
-                            <div class="d-none d-sm-block col-sm-2 mt-auto text-right">
+                            <div class="d-none d-sm-block col-sm-3 mt-auto text-right">
                                 <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">{{ .Date.Format "Jan 2, 2006" }}</time>
                             </div>
                             <div class="col">
