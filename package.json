@@ -1,5 +1,5 @@
 {
-  "name": "hugo-theme-hinode",
+  "name": "@markdumay/hugo-theme-hinode",
   "version": "0.1.0",
   "description": "Hinode is a clean blog theme for Hugo, an open-source static site generator",
   "main": "index.js",
