@@ -72,10 +72,7 @@ Start a new Hinode project in three steps:
 
 ### 1. Create a new site
 
-<!-- Hinode is available as a child theme, and a starter theme:
-
-- Use the Hinode child theme, if you do **not** plan to customize a lot, and/or need future Hinode updates.
-- Use the Hinode starter theme, if you plan to customize a lot, and/or do **not** need future Hinode updates.
+Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of the Hinode theme. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
 
 Not quite sure? Use the Hinode child theme.
 
@@ -85,7 +82,7 @@ Not quite sure? Use the Hinode child theme.
 git clone https://github.com/markdumay/hugo-theme-hinode-child.git my-hinode-site && cd my-hinode-site
 ```
 
-#### Hinode starter theme -->
+#### Hinode main theme
 
 ```bash
 git clone https://github.com/markdumay/hugo-theme-hinode.git my-hinode-site && cd my-hinode-site
@@ -107,11 +104,11 @@ npm run start
 
 The main site configuration is available in `./config/_default`. Some remarks:
 
-- Menu items - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
-- Content - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
-- Theme color - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility.
-- Comments - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
-- Security headings - The local development server uses the header configuration as provided by `server.toml`. Similar settings are provided in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
+- **Menu items** - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
+- **Content** - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
+- **Theme color** - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility.
+- **Comments** - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
+- **Security headings** - The local development server uses the header configuration as provided by `server.toml`. Similar settings are defined in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
 
 ## Contributing
 
@@ -137,7 +134,7 @@ The Hinode theme is inspired by the following themes:
 
 ## License
 
-The `hugo-theme-hinode` codebase is released under the [MIT license][license]. The documentation (including the "README") is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
+The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under the [MIT license][license]. The documentation (including the "README") is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
 <!-- MARKDOWN PUBLIC LINKS -->
 [blist]: https://github.com/apvarun/blist-hugo-theme
@@ -163,3 +160,4 @@ The `hugo-theme-hinode` codebase is released under the [MIT license][license]. T
 [demo]: https://hinode-demo.markdumay.org/
 [license]: https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE
 [repository]: https://github.com/markdumay/hugo-theme-hinode.git
+[repository_child]: https://github.com/markdumay/hugo-theme-hinode-child.git
