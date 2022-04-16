@@ -8,6 +8,7 @@
     "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "npm run clean",
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
+    "prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "build:preview": "npm run build -D -F",

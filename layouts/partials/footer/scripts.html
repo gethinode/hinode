@@ -12,7 +12,7 @@
 
 {{ $indexTemplate := resources.Get "js/index.js" -}}
 {{ $jsIndex := $indexTemplate | resources.ExecuteAsTemplate "index.js" . }}
-{{ $js := (slice  $jsIndex) | resources.Concat "js/main.js" }}
+{{ $js := (slice $jsIndex) | resources.Concat "js/main.js" }}
 
 {{ if not hugo.IsProduction }}
     <script src="{{ $js.RelPermalink }}"></script>
