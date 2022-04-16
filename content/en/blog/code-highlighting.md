@@ -18,7 +18,7 @@ Use code fencing to highlight the syntax of a specific language.
   "themes": [],
   "projects": [],
   "configuration": {}
-  }
+}
 ```
 
 ```html
