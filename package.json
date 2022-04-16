@@ -1,6 +1,6 @@
 {
   "name": "@markdumay/hugo-theme-hinode",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Hinode is a clean blog theme for Hugo, an open-source static site generator",
   "main": "index.js",
   "publishConfig": {
@@ -28,6 +28,7 @@
     "precheck": "npm version",
     "check": "exec-bin node_modules/.bin/hugo/hugo version",
     "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
+    "create:syntax": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=monokailight > ./assets/scss/components/_syntax.scss",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
     "version": "auto-changelog -p && git add CHANGELOG.md"
   },
@@ -62,6 +63,6 @@
     "stylelint-config-standard-scss": "^3.0.0"
   },
   "otherDependencies": {
-    "hugo": "0.96.0"
+    "hugo": "0.97.0"
   }
 }
