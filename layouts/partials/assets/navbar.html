@@ -1,14 +1,14 @@
-<nav class="navbar navbar-expand-sm bg-white navbar-light ps-4 pe-4">
+<nav class="navbar navbar-expand-sm bg-white navbar-light m-3">
 	<div class="container-fluid">
         <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
             {{ if .Site.Params.main.logo -}}
                 <img src="{{ .Site.Params.main.logo }}" alt="{{ .Site.Title }} logo" height="30">
             {{ else -}}
-                <span class="fw-bold ">{{ .Site.Title }}</span>
+                <span class="fw-bold">{{ .Site.Title }}</span>
             {{ end -}}
         </a>
 
-		<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="toggler-icon top-bar"></span>
 			<span class="toggler-icon middle-bar"></span>
