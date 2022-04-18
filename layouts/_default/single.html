@@ -3,7 +3,7 @@
     {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) -}}
     
     <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
+        <div class="row row-cols-1 row-cols-sm-3 align-items-center p-3">
             <div class="col col-md-2 d-none d-md-block"></div>
             <div class="col col-sm-12 col-md-8">
                 {{ range .Params.tags -}}
@@ -27,7 +27,7 @@
         </div>    
 
         {{ if .Params.thumbnail -}}
-            <div class="row row-cols-1 row-cols-sm-3 align-items-center p-5">
+            <div class="row row-cols-1 row-cols-sm-3 align-items-center p-3">
                 <div class="col col-md-2 d-none d-md-block"></div>
                 <div class="col col-sm-12 col-md-8">
                     {{- partial "image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" .Params.credits) -}}
@@ -36,7 +36,7 @@
             </div>    
         {{ end -}}
         
-        <div class="row row-cols-1 row-cols-sm-2 p-5">
+        <div class="row row-cols-1 row-cols-sm-2 p-3">
             <div class="col col-md-2 d-none d-md-block"></div>
             <div class="col col-sm-12 col-md-8">
                 {{ .Content }}
@@ -69,7 +69,7 @@
 
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
         <div class="container-fluid">
-            <div class="row row-cols-1 row-cols-sm-2 p-5">
+            <div class="row row-cols-1 row-cols-sm-2 p-3">
                 <div class="col col-md-2 d-none d-md-block"></div>
                 <div class="col col-sm-12 col-md-8">
                     <hr>
