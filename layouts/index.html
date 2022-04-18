@@ -3,14 +3,14 @@
 
     {{ range $section, $taxonomy := .Site.Sections -}}
         {{ if eq $section 0 -}}
-            <div class="p-5">
+            <div class="p-4">
                 <h1>Recent posts</h1>
-                <div class="container-fluid">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                <div class="container-fluid p-0">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                         {{ $items := first 3 ($taxonomy.Pages.ByDate.Reverse) -}}
                         {{ $max := sub (len $items) 1 -}}
                         {{ range $index, $element := $items -}}
-                            <div class="col">
+                            <div class="col gx-4">
                                 {{- partial "assets/blog-card.html" $element -}}
                             </div>
                             {{ if (lt $index $max) -}}
@@ -27,13 +27,13 @@
                 {{ end -}}
             </div>
         {{ else -}}
-            <div class="p-5">
+            <div class="p-4">
                 <h1>{{ $taxonomy.Title }}</h1>
                 <div class="container-fluid">
                     <div class="row row-cols-1 g-4">
                         {{ $items := first 3 ($taxonomy.Pages) -}}
                         {{ range $index, $element := $items -}}
-                            <div class="col">
+                            <div class="col p-0">
                                 {{- partial "assets/project-card.html" $element -}}
                             </div>
                         {{ end -}}

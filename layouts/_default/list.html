@@ -1,7 +1,7 @@
 {{ define "main" -}}
-    <div class="p-5">
+    <div class="p-4">
         <h1>{{ .Title }}</h1>
-        <div class="container-fluid">
+        <div class="container-fluid p-0">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                 {{ $max := sub (len .Pages) 1 -}}
                 {{ range $index, $element := (.Paginate .RegularPagesRecursive).Pages -}}
