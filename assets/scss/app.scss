@@ -9,6 +9,7 @@ $themeColor: {{ site.Params.style.themeColor | default "#007bff" }};
 
 // Import Bootstrap configuration
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
 
