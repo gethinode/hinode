@@ -155,8 +155,8 @@ The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under
 <!-- MARKDOWN MAINTAINED LINKS -->
 <!-- TODO: add blog link
 [blog]: https://markdumay.com
--->
 [blog]: https://github.com/markdumay
+-->
 [demo]: https://hinode-demo.markdumay.org/
 [license]: https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE
 [repository]: https://github.com/markdumay/hugo-theme-hinode.git
