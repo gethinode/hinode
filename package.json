@@ -1,6 +1,6 @@
 {
   "name": "@markdumay/hugo-theme-hinode",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Hinode is a clean blog theme for Hugo, an open-source static site generator",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
     "create:syntax": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=monokailight > ./assets/scss/components/_syntax.scss",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
+    "upgrade": "npx npm-check-updates -u",
     "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "repository": {
@@ -40,26 +41,26 @@
   },
   "homepage": "https://github.com/markdumay/hugo-theme-hinode#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.1",
-    "@fullhuman/postcss-purgecss": "^4.1.3",
-    "autoprefixer": "^10.4.7",
-    "bootstrap": "^5.2.0",
-    "eslint": "^8.20.0",
+    "@fortawesome/fontawesome-free": "^6.2.0",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "autoprefixer": "^10.4.12",
+    "bootstrap": "^5.2.1",
+    "eslint": "^8.24.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.4",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.0.1",
     "exec-bin": "^1.0.0",
     "flexsearch": "^0.7.21",
-    "hugo-installer": "^3.1.0",
-    "markdownlint-cli2": "^0.4.0",
+    "hugo-installer": "^4.0.1",
+    "markdownlint-cli2": "^0.5.1",
     "postcss-cli": "^10.0.0",
     "purgecss-whitelister": "^2.4.0",
     "shx": "^0.3.4",
-    "stylelint": "^14.9.1",
+    "stylelint": "^14.13.0",
     "stylelint-config-standard-scss": "^5.0.0"
   },
   "otherDependencies": {
-    "hugo": "0.101.0"
+    "hugo": "0.104.2"
   }
 }
