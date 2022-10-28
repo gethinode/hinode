@@ -61,9 +61,10 @@ func GetTitleFunc(style string) func(s string) string {
 The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages.
 
 ### Bash (default shell)
+
 Use the `command` shortcode to generate a block with a default bash command prompt.
 
-```
+```html
 {{%/* command */%}}
 export MY_VAR=123
 {{%/* /command */%}}
@@ -76,7 +77,7 @@ export MY_VAR=123
 
 Specify `user` and `host` to add the user context to the prompt. In addition, use `(out)` to specify an output line and use `\` to denote a line continuation.
 
-```
+```html
 {{%/* command user="user" host="localhost" */%}}
 export MY_VAR=123
 echo "hello"
@@ -104,9 +105,10 @@ echo "goodbye"
 {{% /command %}}
 
 ### PowerShell
+
 Set the `shell` argument to `powershell` to generate a PowerShell terminal. Override the `prompt` to add a directory if needed. Use the backtick `` ` `` symbol to denote a line continuation.
 
-```
+```html
 {{%/* command prompt="PS C:\Users\User>" shell="powershell" */%}}
 Write-Host `
 'Hello' `
@@ -130,9 +132,10 @@ Write-Host 'Goodbye from PowerShell!'
 {{% /command %}}
 
 ### SQL
+
 Set the `shell` argument to `sql` to generate a SQL terminal. Use the `(con)` suffix to denote a line continuation.
 
-```
+```html
 {{%/* command prompt="mysql>" shell="sql" */%}}
 set @my_var = 'foo';
 set @my_other_var = 'bar';
