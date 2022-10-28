@@ -1,0 +1,70 @@
+{{ $host := .Get "host" }}
+{{ $user := .Get "user" }}
+{{ $prompt := .Get "prompt" }}
+{{ $filter := "(out)" }}
+{{ $input := trim .Inner "\n" }}
+
+{{ $shell := lower (.Get "shell") }}
+{{ $continuationPrompt := ">" }}
+{{ $continuationStr := "\\" }}
+{{ if eq $shell "powershell" }}
+    {{ if not $prompt }}{{ $prompt = "PS>" }}{{ end }}
+    {{ $continuationPrompt = ">>" }}
+    {{ $continuationStr = "`" }}
+{{ else if eq $shell "sql" }}
+    {{ if not $prompt }}{{ $prompt = "sql>" }}{{ end }}
+    {{ $continuationPrompt = "->" }}
+    {{ $continuationStr = "(con)" }}
+{{ else }}
+    {{ $shell = "bash" }}
+    {{ if not $prompt }}{{ $prompt = "$" }}{{ end }}
+    {{ if (and ($host) ($user)) }}
+        {{ $prompt = printf "[%s@%s] %s" $user $host $prompt}}
+    {{ end }}
+{{ end }}
+
+
+
+
+{{ $lines := split $input "\n" }}
+{{ $prefix := ""}}
+{{ $prevLine := "" }}
+{{ $refined := "" }}
+{{ range $line := $lines }}
+    {{ if hasPrefix $line $filter }}
+        {{ $prefix = printf "%s<span></span>" $prefix }}
+        {{ if eq $shell "sql" }}
+            {{ $line = printf "--%s" (strings.TrimPrefix $filter $line) }}
+        {{ else }}
+            {{ $line = printf "#%s" (strings.TrimPrefix $filter $line) }}
+        {{ end }}
+    {{ else if (strings.HasSuffix $prevLine $continuationStr) }}
+        {{ $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $continuationPrompt }}
+    {{ else }}
+        {{ $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $prompt }}
+    {{ end }}
+    {{ $prevLine = $line }}
+    {{ if (and (eq $shell "sql") (strings.HasSuffix $line $continuationStr)) }}
+        {{ $line = strings.TrimSuffix $continuationStr $line }}
+    {{ end }}
+    {{ $refined = printf "%s\n%s" $refined $line }}
+{{ end }}
+
+{{ $refined := trim $refined "\n" }}
+
+{{ $output := (transform.Highlight $refined $shell | safeHTML) }}
+
+
+
+{{ $insert := printf "<span class=\"command-line-prompt\">%s</span><span class=\"line\">" $prefix }}
+
+{{ $output := (replace $output ("<span class=\"line\">" | safeHTML) $insert 1 | safeHTML) }}
+
+{{ if eq $shell "sql"}}
+    {{ $output = (replace $output "<span class=\"c1\">--" "<span class=\"c1\">" | safeHTML) }}
+{{ else }}        
+    {{ $output = (replace $output "<span class=\"c1\">#" "<span class=\"c1\">" | safeHTML) }}
+    {{ $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) }}
+{{ end }}
+
+{{ $output }}

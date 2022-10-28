@@ -62,6 +62,7 @@ $themeColor: {{ site.Params.style.themeColor | default "#007bff" }};
 @import "components/buttons.scss";
 @import "components/card.scss";
 @import "components/clipboard.scss";
+@import "components/command.scss";
 @import "components/comments.scss";
 @import "components/navbar.scss";
 @import "components/img.scss";
