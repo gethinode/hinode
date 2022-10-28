@@ -55,6 +55,7 @@ Additional features include:
 - Social links
 - Blog pagination
 - Code highlighting
+- Command prompt
 - Color customization
 - i18n support
 
