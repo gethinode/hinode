@@ -17,9 +17,16 @@
 
 {{ with .Params.thumbnail }}
     {{ $source := resources.Get . -}}
-    {{ $dim := "1280x640" -}}
-    {{ $img := ($source.Fill (printf "%s jpg" $dim)) -}}
-    {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) -}}
+    {{ if not $source }}
+        {{ $source = resources.GetRemote . -}}
+    {{ end }}
+    {{ with $source }}
+        {{ $dim := "1280x640" -}}
+        {{ $img := (.Fill (printf "%s jpg" $dim)) -}}
+        {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) -}}
+    {{ else }}
+        {{ warnf "Cannot find thumbnail: %q" . }}
+    {{ end }}
 {{ else }}
     {{ with .Site.Params.schemaImage -}}    
         {{ $.Scratch.Set "thumbnail" (. | absURL) }}
