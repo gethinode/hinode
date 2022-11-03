@@ -41,7 +41,7 @@
 
 ## About
 
-![Logo](https://raw.githubusercontent.com/markdumay/hugo-theme-hinode/main/static/logo.png)
+![Logo](https://raw.githubusercontent.com/markdumay/hugo-theme-hinode/main/static/img/logo.png)
 
 - [Online Demo][demo]
 - [PageSpeed Insights][pagespeed]

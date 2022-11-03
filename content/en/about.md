@@ -5,7 +5,7 @@ date: "2022-04-11"
 showComments: false
 ---
 
-<p class="text-center"><img src="/logo_embedded.svg" class="img-fluid w-50" alt="Logo"></p>
+<p class="text-center"><img src="/img/logo_embedded.svg" class="img-fluid w-50" alt="Logo"></p>
 
 <center>Hinode is a clean blog theme for Hugo, an open-source static site generator.</center>
 
