@@ -21,10 +21,10 @@ schemaAuthorTwitter = "https://twitter.com/markdumay"
 schemaAuthorLinkedIn = "https://www.linkedin.com/in/markdumay/"
 schemaAuthorGitHub = "https://github.com/markdumay"
 schemaLocale = "en-US"
-schemaLogo = "logo512x512.png"
+schemaLogo = "img/logo512x512.png"
 schemaLogoWidth = 512
 schemaLogoHeight = 512
-schemaImage = "logo1280x640.png"
+schemaImage = "img/logo1280x640.png"
 schemaImageWidth = 1280
 schemaImageHeight = 640
 # schemaTwitter = "https://twitter.com/gethinode"
@@ -48,8 +48,8 @@ schemaSection = "blog"
     themeOpacity = "10"
 
 [main]
-    featurePhoto = "img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
-    logo = "/logo_embedded.svg"
+    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    logo = "/img/logo_embedded.svg"
 
 
 [comments]

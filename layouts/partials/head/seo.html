@@ -19,6 +19,10 @@
     {{ $source := resources.Get . -}}
     {{ if not $source }}
         {{ $source = resources.GetRemote . -}}
+        {{ if $source }}
+            {{ $filename := index (last 1 (split (delimit (split . "/") "," "") ",")) 0 }}
+            {{ $source = $source.Content | resources.FromString (printf "/img/%s" $filename) }}
+        {{ end }}
     {{ end }}
     {{ with $source }}
         {{ $dim := "1280x640" -}}
