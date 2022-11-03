@@ -22,6 +22,10 @@
 
 {{ if not $img }}
     {{ $img = resources.GetRemote .url -}}
+    {{ if $img }}
+        {{ $filename := index (last 1 (split (delimit (split .url "/") "," "") ",")) 0 }}
+        {{ $img = $img.Content | resources.FromString (printf "/img/%s" $filename) }}
+    {{ end }}
 {{ end}}
 
 {{ with $img }}
