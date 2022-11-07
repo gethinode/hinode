@@ -12,23 +12,15 @@
     "caption":      Optional figure caption.
 -->
 
-
-{{ $img := resources.GetMatch .url -}}
-{{ $ratio := .ratio}}
+{{ $url := .url -}}
+{{ $ratio := .ratio -}}
 {{ $outerClass := .outerClass -}}
 {{ $innerClass := .innerClass -}}
 {{ $title := .title -}}
 {{ $caption := .caption -}}
 
-{{ if not $img }}
-    {{ $img = resources.GetRemote .url -}}
-    {{ if $img }}
-        {{ $filename := index (last 1 (split (delimit (split .url "/") "," "") ",")) 0 }}
-        {{ $img = $img.Content | resources.FromString (printf "/img/%s" $filename) }}
-    {{ end }}
-{{ end}}
-
-{{ with $img }}
+{{ $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
+{{ with $img -}}
     <!-- default ratio 4x3 -->
     {{ $smDim := "576x432" -}}
     {{ $mdDim := "768x576" -}}
@@ -63,7 +55,6 @@
     {{ $xxl := ($img.Fill (printf "%s webp" $xxlDim)) -}}
     {{ $fallback := ($img.Fill (printf "%s jpg" $xxlDim)) -}}
 
-
     {{ with $caption -}}
         <figure class="figure">
             <img class="figure-img img-fluid {{ $innerClass }}"
@@ -92,6 +83,4 @@
                 alt="{{ $title }}">
         </div>
     {{ end -}}
-{{ else }}
-    {{ warnf "Cannot find image resource: %q" .url }}
-{{ end }}
+{{ end -}}

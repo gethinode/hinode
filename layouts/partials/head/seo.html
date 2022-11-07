@@ -1,46 +1,37 @@
-<!-- Copied from doks -->
-{{ with .Title }}
-    {{ $.Scratch.Set "title" . }}
-{{ else }}
-    {{ $.Scratch.Set "title" .Site.Params.title }}
-{{ end }}
+<!-- Adapted from doks -->
+{{ with .Title -}}
+    {{ $.Scratch.Set "title" . -}}
+{{ else -}}
+    {{ $.Scratch.Set "title" .Site.Params.title -}}
+{{ end -}}
 
 {{ with .Description -}}
-    {{ $.Scratch.Set "description" . }}
+    {{ $.Scratch.Set "description" . -}}
 {{ else -}}
     {{ with .Summary | plainify -}}
-        {{ $.Scratch.Set "description" . }}
+        {{ $.Scratch.Set "description" . -}}
     {{ else -}}
-        {{ $.Scratch.Set "description" .Site.Params.description }}
+        {{ $.Scratch.Set "description" .Site.Params.description -}}
     {{ end -}}
 {{ end -}}
 
-{{ with .Params.thumbnail }}
-    {{ $source := resources.Get . -}}
-    {{ if not $source }}
-        {{ $source = resources.GetRemote . -}}
-        {{ if $source }}
-            {{ $filename := index (last 1 (split (delimit (split . "/") "," "") ",")) 0 }}
-            {{ $source = $source.Content | resources.FromString (printf "/img/%s" $filename) }}
-        {{ end }}
-    {{ end }}
-    {{ with $source }}
+{{ with .Params.thumbnail -}}
+    {{ $source := partial "utilities/GetImage.html" (dict "url" .) -}}
+    {{ with $source -}}
         {{ $dim := "1280x640" -}}
         {{ $img := (.Fill (printf "%s jpg" $dim)) -}}
         {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) -}}
-    {{ else }}
-        {{ warnf "Cannot find thumbnail: %q" . }}
-    {{ end }}
-{{ else }}
+    {{ end -}}
+{{ else -}}
     {{ with .Site.Params.schemaImage -}}    
-        {{ $.Scratch.Set "thumbnail" (. | absURL) }}
+        {{ $.Scratch.Set "thumbnail" (. | absURL) -}}
     {{ else -}}
         {{ $images := $.Resources.ByType "image" -}}
         {{ $featured := $images.GetMatch "*feature*" -}}
         {{ if not $featured -}}
             {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
         {{ end -}}
-        {{ with $featured }}
+        {{ with $featured -}}
             {{ $.Scratch.Set "thumbnail" $featured.Permalink -}}
         {{ else -}}
             {{ with $.Site.Params.images -}}
