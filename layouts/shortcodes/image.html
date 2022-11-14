@@ -18,67 +18,7 @@
     {{ $title := .Get "title" }}
     {{ $caption := .Get "caption" }}
 
-    {{ $img := resources.GetMatch $url }}
-    {{ if not $img }}
-        {{ $img = resources.GetRemote $url -}}
-        {{ if $img }}
-            {{ $filename := index (last 1 (split (delimit (split $url "/") "," "") ",")) 0 }}
-            {{ $img = $img.Content | resources.FromString (printf "/img/%s" $filename) }}
-        {{ end }}
-    {{ end}}
-    
-    {{ with $img }}
-        <!-- default ratio 4x3 -->
-        {{ $smDim := "576x432" }}
-        {{ $mdDim := "768x576" }}
-        {{ $lgDim := "992x744" }}
-        {{ $xlDim := "1200x900" }}
-        {{ $xxlDim := "1400x1050" }}
-        
-        {{ if eq $ratio "1x1"}}
-            {{ $smDim = "576x576" }}
-            {{ $mdDim = "768x768" }}
-            {{ $lgDim = "992x992" }}
-            {{ $xlDim = "1200x1200" }}
-            {{ $xxlDim = "1400x1400" }}
-        {{ else if eq $ratio "16x9"}}
-            {{ $smDim = "576x324" }}
-            {{ $mdDim = "768x432" }}
-            {{ $lgDim = "992x558" }}
-            {{ $xlDim = "1200x675" }}
-            {{ $xxlDim = "1400x788" }}
-        {{ else if eq $ratio "21x9"}}
-            {{ $smDim = "576x247" }}
-            {{ $mdDim = "768x329" }}
-            {{ $lgDim = "992x425" }}
-            {{ $xlDim = "1200x514" }}
-            {{ $xxlDim = "1400x600" }}
-        {{ end }}
-        
-        {{ $sm := ($img.Fill (printf "%s webp" $smDim)) }}
-        {{ $md := ($img.Fill (printf "%s webp" $mdDim)) }}
-        {{ $lg := ($img.Fill (printf "%s webp" $lgDim)) }}
-        {{ $xl := ($img.Fill (printf "%s webp" $xlDim)) }}
-        {{ $xxl := ($img.Fill (printf "%s webp" $xxlDim)) }}
-        {{ $fallback := ($img.Fill (printf "%s jpg" $xxlDim)) }}
-        
-
-        <figure class="figure">
-            <img class="figure-img img-fluid {{ $class}}"
-            srcset="
-                {{- with $xxl.RelPermalink -}}{{.}} 1400w{{- end -}}
-                {{- with $xl.RelPermalink -}}, {{.}} 1200w{{- end -}}
-                {{- with $lg.RelPermalink -}}, {{.}} 992w{{- end -}}
-                {{- with $md.RelPermalink -}}, {{.}} 768w{{- end -}}
-                {{- with $sm.RelPermalink -}}, {{.}} 576w{{- end -}}"
-            sizes="100vw"
-            src="{{ $fallback.RelPermalink }}"
-            alt="{{ $title }}">
-            <figcaption class="figure-caption">{{ $caption }}</figcaption>
-        </figure>   
-    {{ else }}
-        {{ warnf "Cannot find image resource: %q" $url }}
-    {{ end }}    
+    {{ partial "image.html" (dict "url" $url "ratio" $ratio "innerClass" $class "title" $title "caption" $caption) -}}    
 {{ else }}
     {{ errorf "Missing value for param 'src': %s" .Position }}
 {{ end }}
