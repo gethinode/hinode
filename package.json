@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/markdumay/hugo-theme-hinode#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.2.0",
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.2",
@@ -61,7 +61,7 @@
     "postcss-cli": "^10.0.0",
     "purgecss-whitelister": "^2.4.0",
     "shx": "^0.3.4",
-    "stylelint": "^14.14.1",
+    "stylelint": "^14.15.0",
     "stylelint-config-standard-scss": "^6.1.0"
   },
   "otherDependencies": {
