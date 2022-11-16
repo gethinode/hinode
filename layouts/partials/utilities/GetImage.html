@@ -15,16 +15,18 @@
     {{ $remote = true -}}
 {{ end -}}
 
+
 {{ with $img -}}
     {{ if in $supportedMediaTypes (string $img.MediaType) -}}
         <!-- Rewrite the path of remote images to avoid storing processed files in the site's root -->
         <!-- Add a file extension based on the media type if needed to avoid Hugo processing errors -->
         {{ if $remote -}}
-            {{ $filename := index (last 1 (split (delimit (split $url "/") "," "") ",")) 0 -}}
+            {{ $path := (urls.Parse $url).Path }}
+            {{ $filename := index (last 1 (split (delimit (split $path "/") "," "") ",")) 0 -}}
             {{ if not (path.Ext $filename) -}}
                 {{ $extension := string $img.MediaType.SubType -}}
                 {{ $filename = printf "%s.%s" $filename $extension -}}
-            {{ end -}}
+                {{ end -}}
             {{ $img = $img.Content | resources.FromString (printf "/img/%s" $filename) -}}
         {{ end -}}
     {{ else -}}
