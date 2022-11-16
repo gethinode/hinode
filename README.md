@@ -8,6 +8,9 @@
 
 <!-- Badges -->
 <p align="center">
+    <a href="https://www.npmjs.com/package/@markdumay/hugo-theme-hinode" alt="npm package">
+        <img src="https://img.shields.io/npm/v/@markdumay/hugo-theme-hinode" />
+    </a>
     <a href="https://app.netlify.com/sites/hinode-demo/deploys" alt="Netlify Status">
         <img src="https://img.shields.io/netlify/151e88a3-d161-4045-856d-778fea43fc2f" />
     </a>
