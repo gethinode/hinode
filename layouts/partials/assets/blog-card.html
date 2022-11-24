@@ -7,7 +7,7 @@
     <div class="card-body d-flex flex-column p-0">
         <p class="card-text">
             <small class="text-muted text-uppercase">
-                {{- partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long") -}}
+                {{- partial "utilities/date.html" (dict "date" .Date "format" "long") -}}
                 &bull; {{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
                 {{ if isset .Params "tags" -}}
                     {{ range first 1 .Params.tags -}}

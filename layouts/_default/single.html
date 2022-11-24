@@ -1,6 +1,6 @@
 {{ define "main" -}}
-    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) -}}
-    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) -}}
+    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
     
     <div class="container-fluid">
         <div class="row row-cols-1 row-cols-sm-3 align-items-center p-3">
