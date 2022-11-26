@@ -29,6 +29,14 @@
   translation: "woorden"
 - id: copyright
   translation: "Copyright"
+- id: photoBy
+  translation: "Foto van"
+- id: photoOn
+  translation: "via"
+- id: article
+  translation: "Artikel"
+- id: articles
+  translation: "Artikelen"
 
 
 # 404 page
