@@ -10,7 +10,7 @@
                     {{ range $.Site.Taxonomies.tags.ByCount }}
                         <div class="row mt-2">
                             <div class="d-none d-sm-block col-sm-3 mt-auto text-right">
-                                {{ .Count }} {{ if gt .Count 1 }} Articles {{ else }} Article {{ end }}
+                                {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
                             </div>
                             <div class="col">
                                 <a href="/tags{{ .Name | relURL }}">{{ .Name | markdownify }}</a>
