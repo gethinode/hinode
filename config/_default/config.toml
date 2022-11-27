@@ -17,7 +17,6 @@ enableEmoji = true
 defaultContentLanguage = "en"
 # disableLanguages = ["nl"]
 DefaultContentLanguageInSubdir = true
-mainSections = ["blog", "projects"]
 
 [taxonomies]
   tag = 'tags'
