@@ -8,8 +8,8 @@
 
 <!-- Badges -->
 <p align="center">
-    <a href="https://www.npmjs.com/package/@markdumay/hugo-theme-hinode" alt="npm package">
-        <img src="https://img.shields.io/npm/v/@markdumay/hugo-theme-hinode" />
+    <a href="https://gohugo.io" alt="Hugo website">
+        <img src="https://img.shields.io/badge/generator-hugo-brightgreen" />
     </a>
     <a href="https://app.netlify.com/sites/hinode-demo/deploys" alt="Netlify Status">
         <img src="https://img.shields.io/netlify/151e88a3-d161-4045-856d-778fea43fc2f" />
@@ -60,7 +60,7 @@ Additional features include:
 - Code highlighting
 - Command prompt
 - Color customization
-- i18n support
+- Language switcher
 
 <!-- TODO: add tutorial deep-link 
 Detailed background information is available on the author's [personal blog][blog].
