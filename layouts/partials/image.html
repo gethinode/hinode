@@ -10,6 +10,7 @@
     "innerClass":   Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
     "caption":      Optional figure caption.
+    "inner":        Optional inner html code snippet.
 -->
 
 {{ $url := .url -}}
@@ -18,6 +19,7 @@
 {{ $innerClass := .innerClass -}}
 {{ $title := .title -}}
 {{ $caption := .caption -}}
+{{ $inner := .inner -}}
 
 {{ $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
 {{ with $img -}}
@@ -68,6 +70,7 @@
                 src="{{ $fallback.RelPermalink }}"
                 alt="{{ $title }}">
             <figcaption class="figure-caption">{{ . | safeHTML }}</figcaption>
+            {{ $inner }}
         </figure>
     {{ else -}}
         <div class="ratio ratio-{{ $ratio }} {{ $outerClass }}">
@@ -81,6 +84,7 @@
                 sizes="100vw"
                 src="{{ $fallback.RelPermalink }}"
                 alt="{{ $title }}">
+            {{ $inner }}
         </div>
     {{ end -}}
 {{ end -}}
