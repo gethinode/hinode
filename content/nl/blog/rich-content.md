@@ -1,15 +1,16 @@
 ---
 author: "Hugo Authors"
-title: "Rich Content"
+slug: "multimedia"
+title: "Multimedia"
 date: 2021-07-13
-description: "A brief description of Hugo Shortcodes"
+description: "Een overzicht van enkele Hugo Shortcodes"
 tags: ["shortcodes", "privacy"]
 thumbnail: img/flowers.jpg # https://picsum.photos/id/106/2592/1728
 photoCredits: <a href="https://unsplash.com/@flutterhappy">Arvee Marie</a>
 photoSource: <a href="https://unsplash.com/photos/YnfGtpt2gf4">Unsplash</a>
 ---
 
-Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes) for rich content, along with a [Privacy Config](https://gohugo.io/about/hugo-and-gdpr/) and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.
+Hugo biedt diverse [shortcodes](https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes) voor het toevoegen van multimedia, inclusief een [privacy configuratie](https://gohugo.io/about/hugo-and-gdpr/) en een verzameling van eenvoudige shortcodes voor het toevoegen van statische en no-JS versies van diverse sociale media.
 
 ## <!--more-->
 

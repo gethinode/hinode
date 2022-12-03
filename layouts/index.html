@@ -4,7 +4,7 @@
     {{ range $section, $taxonomy := .Site.Sections -}}
         {{ if eq $section 0 -}}
             <div class="p-4">
-                <h1>Recent posts</h1>
+                <h1>{{ T "recentPosts" }}</h1>
                 <div class="container-fluid p-0">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                         {{ $items := first 3 ($taxonomy.Pages.ByDate.Reverse) -}}
@@ -23,7 +23,7 @@
                 </div>
 
                 {{ if gt (len $taxonomy.Pages) 3 -}}
-                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">More {{ $taxonomy.Title }} posts</a>    
+                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">{{ T "morePosts" }}</a>    
                 {{ end -}}
             </div>
         {{ else -}}

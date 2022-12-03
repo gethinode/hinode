@@ -5,8 +5,21 @@
     [en.params]
         introTitle = "Welcome to Hinode!"
         introCaption = "A clean blog theme for your Hugo site based on Bootstrap 5."
-        introLink = "/about"
+        introLink = "/en/about"
         introLinkTitle = "About"
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
         socialTitle = "Follow me"
         socialCaption = "I work on everything coding and tweet developer memes"
+
+[nl]
+    languageName = "Nederlands"
+    contentDir = "content/nl"
+    weight = 2
+    [nl.params]
+        introTitle = "Welkom bij Hinode!"
+        introCaption = "Een thema voor Hugo gebaseerd op Bootstrap 5."
+        introLink = "/nl/over-mij"
+        introLinkTitle = "Over mij"
+        license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
+        socialTitle = "Volg mij"
+        socialCaption = "Ik doe aan programmeren en tweet memes"
