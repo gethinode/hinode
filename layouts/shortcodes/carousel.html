@@ -1,0 +1,32 @@
+<!-- 
+    Displays a carousel of several responsive images (see the image shortcode for more details). Add inner <img> 
+    elements to define individual image slides. The shortcode supports the following arguments:
+    "ratio":        Bootstrap ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9".
+-->
+
+{{ $ratio := "4x3" -}}
+{{ $class := "" -}}
+{{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
+{{ with .Get "class" }}{{ $class = . }}{{ end -}}
+{{ $id := .Ordinal -}}
+{{ $images :=  .Inner -}}
+{{ $items := len (findRE "carousel-item" $images) -}}
+
+<div id="carousel-{{ $id }}" class="carousel slide {{ $class }}" data-bs-ride="true">
+    <div class="carousel-indicators">
+        {{ range $index := (seq $items) -}}
+            <button type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide-to="{{ sub $index 1 }}" {{ if eq $index 1 }}class="active"{{ end }} aria-current="true" aria-label="Slide {{ $index }}"></button>
+        {{ end -}}
+    </div>
+    <div class="carousel-inner">
+        {{ $images }}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
