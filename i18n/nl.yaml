@@ -1,0 +1,101 @@
+# Content
+- id: postedOnDate
+  translation: "Gepubliceerd op {{ . }}"
+- id: lastModified
+  translation: "(Laats gewijzigd op {{ . }})"
+- id: translationsLabel
+  translation: "Overige talen: "
+- id: translationsSeparator
+  translation: ", "
+- id: readMore
+  translation: "Lees meer"
+- id: morePosts
+  translation: "Meer berichten"
+- id: olderPosts
+  translation: "Oudere berichten"
+- id: recentPosts
+  translation: "Recente berichten"
+- id: newerPosts
+  translation: "Nieuwere berichten"
+- id: previousPost
+  translation: "Vorig bericht"
+- id: nextPost
+  translation: "Volgend bericht"
+- id: read
+  translation: "leestijd"
+- id: minutesShort
+  translation: "min"
+- id: words
+  translation: "woorden"
+- id: copyright
+  translation: "Copyright"
+- id: photoBy
+  translation: "Foto van"
+- id: photoOn
+  translation: "via"
+- id: article
+  translation: "Artikel"
+- id: articles
+  translation: "Artikelen"
+
+
+# 404 page
+- id: pageNotFound
+  translation: "Oeps, deze pagina bestaat niet. Ga terug naar het"
+- id: pageNotFoundTitle
+  translation: "Niet gevonden"
+- id: pageNotFoundHome
+  translation: "begin"
+
+
+# Navigation
+- id: toggleNavigation
+  translation: "Toon/verberg navigatie"
+- id: languageSwitcherLabel
+  translation: "Taal"
+- id: gcseLabelShort
+  translation: "Zoeken"
+- id: gcseLabelLong
+  translation: "Zoeken op {{ .Site.Title }}"
+- id: gcseClose
+  translation: "Sluiten"
+
+# Staticman
+- id: noComment
+  translation: "Geen commentaar"
+- id: oneComment
+  translation: "commentaar"
+- id: moreComment
+  translation: "commentaar"
+- id: useMarkdown
+  translation: "Je kunt Markdown syntax gebruiken"
+- id: yourName
+  translation: "Jouw naam"
+- id: yourEmail
+  translation: "Jouw email adres"
+- id: yourWebsite
+  translation: "Jouw website"
+
+# Delayed Disqus
+- id: show
+  translation: "Tonen"
+- id: comments
+  translation: "commentaar" 
+
+# Related posts
+- id: seeAlso
+  translation: "Zie ook"
+
+# Table of contents
+- id: toc
+  translation: "Inhoudsopgave"
+
+# Search
+- id: ui_search
+  translation: "Zoeken op deze site..."
+- id: ui_no_results
+  translation: "Geen resultaten voor"
+
+# Draft
+- id: draft
+  translation: "Concept"

@@ -1,17 +1,19 @@
 ---
 author: "Mark Dumay"
-title: "Code Highlighting"
+slug: "code-markeren"
+title: "Code markeren"
 date: 2022-04-16
-description: "Examples on how to enable code highlighting"
+description: "Voorbeelden om de syntax van een taal te markeren."
 tags: ["code"]
 thumbnail: img/notepad.jpg
 photoCredits: <a href="https://unsplash.com/@frederickjmedina">Frederick Medina</a>
+# credits: Photo by <a href="https://unsplash.com/@frederickjmedina">Frederick Medina</a> on <a href="https://unsplash.com/photos/PdfRE-xB--s">Unsplash</a>
 photoSource: <a href="https://unsplash.com/photos/PdfRE-xB--s">Unsplash</a>
 ---
 
 ## Code Fencing
 
-Use code fencing to highlight the syntax of a specific language.
+Gebruik code fencing om de syntax voor een specifieke taal te markeren.
 
 ```json
 {
@@ -32,7 +34,7 @@ Use code fencing to highlight the syntax of a specific language.
 
 ## Highlight Partial
 
-Use the `highlight` partial to customize the layout of a specific code block.
+Gebruik de `highlight` partial om de lay-out van een taalfragment aan te passen.
 
 {{< highlight go "linenos=table,hl_lines=8 15-17,linenostart=199" >}}
 // GetTitleFunc returns a func that can be used to transform a string to
@@ -59,11 +61,11 @@ func GetTitleFunc(style string) func(s string) string {
 
 ## Command Prompt Shortcode
 
-The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages.
+De `command` shortcode simuleert een terminal voor `bash`, `powershell` of `sql` shell talen.
 
-### Bash (default shell)
+### Bash (standaard shell)
 
-Use the `command` shortcode to generate a block with a default bash command prompt.
+Gebruik de `command` shortcode om een bash terminal te simuleren.
 
 ```html
 {{%/* command */%}}
@@ -71,12 +73,12 @@ export MY_VAR=123
 {{%/* /command */%}}
 ```
 
-The result looks like this:
+Het resultaat ziet er als volgt uit:
 {{% command %}}
 export MY_VAR=123
 {{% /command %}}
 
-Specify `user` and `host` to add the user context to the prompt. In addition, use `(out)` to specify an output line and use `\` to denote a line continuation.
+Gebruik `user` en `host` om de gebruikerscontext mee te geven aan de prompt. Maak daarnaast gebruik van `(out)` om output aan te geven, met `\` als markering van een bijbehorende regel.
 
 ```html
 {{%/* command user="user" host="localhost" */%}}
@@ -92,7 +94,7 @@ echo "goodbye"
 {{%/* /command */%}}
 ```
 
-The result looks like this:
+Het resultaat ziet er als volgt uit:
 {{% command user="user" host="localhost" %}}
 export MY_VAR=123
 echo "hello"
@@ -107,7 +109,7 @@ echo "goodbye"
 
 ### PowerShell
 
-Set the `shell` argument to `powershell` to generate a PowerShell terminal. Override the `prompt` to add a directory if needed. Use the backtick `` ` `` symbol to denote a line continuation.
+Geef `powershell` op als waarde voor het argument `shell` om een PowerShell terminal te simuleren. Je kunt `prompt` aanpassen om een eventule directory aan te geven. Het backtick `` ` `` symbool geeft aan dat het commando doorgaat op de volgende regel.
 
 ```html
 {{%/* command prompt="PS C:\Users\User>" shell="powershell" */%}}
@@ -121,7 +123,7 @@ Write-Host 'Goodbye from PowerShell!'
 {{%/* /command */%}}
 ```
 
-The result looks like this:
+Het resultaat ziet er als volgt uit:
 {{% command prompt="PS C:\Users\User>" shell="powershell" %}}
 Write-Host `
 'Hello' `
@@ -134,7 +136,7 @@ Write-Host 'Goodbye from PowerShell!'
 
 ### SQL
 
-Set the `shell` argument to `sql` to generate a SQL terminal. Use the `(con)` suffix to denote a line continuation.
+Geef `sql` op als waarde voor het argument `shell` om een SQL terminal te simuleren. Gebruik `\` als markering van een bijbehorende regel.
 
 ```html
 {{%/* command prompt="mysql>" shell="sql" */%}}
@@ -160,7 +162,7 @@ order by last_name;
 {{%/* /command */%}}
 ```
 
-The result looks like this:
+Het resultaat ziet er als volgt uit:
 {{% command prompt="mysql>" shell="sql" %}}
 set @my_var = 'foo';
 set @my_other_var = 'bar';

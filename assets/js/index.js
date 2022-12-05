@@ -72,23 +72,24 @@ Source:
     tokenize: "forward",
     cache: 100,
     document: {
-      id: 'id',
-      store: [
-        "href", "title", "description"
-      ],
+      id: "id",
+      tag: "tag",
+      store: ["href", "title", "description"],
       index: ["title", "description", "content"]
     }
   });
 
   // https://discourse.gohugo.io/t/range-length-or-last-element/3803/2
-
-  {{ $list := (site.RegularPages) -}}
+  // Note: uses .Site.AllPages as .Site.RegularPages only returns content for the current language
+  //       pages without a title (such as browserconfig.xml) are excluded
+  {{ $list := where (where .Site.AllPages "Kind" "in" "page") "Title" "!=" "" }}
   {{ $len := (len $list) -}}
 
   index.add(
     {{ range $index, $element := $list -}}
       {
         id: {{ $index }},
+        tag: "{{ .Lang }}",
         href: "{{ .RelPermalink }}",
         title: {{ .Title | jsonify }},
         {{ with .Description -}}
@@ -109,7 +110,9 @@ Source:
   function show_results(){
     const maxResult = 5;
     var searchQuery = this.value;
-    var results = index.search(searchQuery, {limit: maxResult, enrich: true});
+    // filter the results for the currently tagged language
+    const lang = document.documentElement.lang;
+    var results = index.search(searchQuery, { index: ['title', 'description', 'content'], limit: maxResult, tag: lang, enrich: true });
 
     // flatten results since index.search() returns results for each indexed field
     const flatResults = new Map(); // keyed by href to dedupe results

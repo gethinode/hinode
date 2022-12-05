@@ -15,11 +15,8 @@ enableEmoji = true
 
 # Multilingual
 defaultContentLanguage = "en"
-disableLanguages = ["nl"]
-
-
-
-mainSections = ["blog", "projects"]
+# disableLanguages = ["nl"]
+DefaultContentLanguageInSubdir = true
 
 [taxonomies]
   tag = 'tags'

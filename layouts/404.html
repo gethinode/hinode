@@ -1,8 +1,8 @@
 {{ define "main"}}
     <main id="main">
       <div>
-       <h1 id="title">Not found</h1>
-          <p>Oops! This page doesn't exist. Try going back to our <a href="{{ "/" | relURL }}">home page</a>.</p>
+       <h1 id="title">{{ T "pageNotFoundTitle" }}</h1>
+       <p>{{ T "pageNotFound" }} <a href="{{ "/" | relURL }}">{{ T "pageNotFoundHome" }}</a>.</p>
       </div>
     </main>
 {{ end }}

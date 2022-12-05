@@ -1,8 +1,9 @@
 ---
 author: "Hugo Authors"
-title: "Sample project"
+slug: "voorbeeldproject"
+title: "Voorbeeldproject"
 date: 2021-07-15
-description: "A sample project"
+description: "Een voorbeeldproject"
 tags: ["html", "css"]
 thumbnail: img/laptop.jpg # https://picsum.photos/id/0/5616/3744
 photoCredits: <a href="https://unsplash.com/@alejandroescamilla">Alejandro Escamilla</a> 
