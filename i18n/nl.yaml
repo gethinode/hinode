@@ -2,7 +2,7 @@
 - id: postedOnDate
   translation: "Gepubliceerd op {{ . }}"
 - id: lastModified
-  translation: "(Laats gewijzigd op {{ . }})"
+  translation: "(Laatst gewijzigd op {{ . }})"
 - id: translationsLabel
   translation: "Overige talen: "
 - id: translationsSeparator
