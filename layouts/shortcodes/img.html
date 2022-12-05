@@ -1,0 +1,33 @@
+<!-- 
+    Renders a carousel item with a responsive image (see the image shortcode for more details). The shortcode
+    supports the following arguments:
+    "src":          Required relative url of the image, e.g. "img/example.jpg"
+    "ratio":        Bootstrap ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9".
+    "caption":      Optional carousel slide caption.
+-->
+
+{{- $src := .Get "src" -}}
+{{ $caption := .Get "caption" -}}
+{{- $ratio := "4x3" -}}
+{{ with .Parent -}}
+    {{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
+{{ else }}
+    {{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
+{{ end -}}
+
+{{- if $src -}}
+    <div class="carousel-item {{ if eq .Ordinal 0 }}active{{ end }}">
+        {{ partial "image.html" (dict "url" $src "ratio" $ratio "innerClass" "d-block w-100") }}
+        {{ with $caption }}
+            <div class="carousel-caption d-none d-md-block gradient">
+                <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>
+            </div>
+        {{ end }}
+    </div>
+{{ else -}}
+    {{ with .Parent -}}
+        {{ errorf "Missing value for param 'src': %s" .Position -}}
+    {{ else -}}
+        {{ errorf "Missing value for param 'src': %s" .Position -}}
+    {{ end -}}
+{{ end -}}

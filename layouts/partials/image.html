@@ -12,14 +12,15 @@
     "caption":      Optional figure caption.
 -->
 
-{{ $url := .url -}}
+{{- $url := .url -}}
 {{ $ratio := .ratio -}}
 {{ $outerClass := .outerClass -}}
 {{ $innerClass := .innerClass -}}
 {{ $title := .title -}}
 {{ $caption := .caption -}}
+{{ $inner := .inner -}}
 
-{{ $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
+{{- $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
 {{ with $img -}}
     <!-- default ratio 4x3 -->
     {{ $smDim := "576x432" -}}
@@ -48,14 +49,14 @@
         {{ $xxlDim = "1400x600" -}}
     {{ end -}}
 
-    {{ $sm := ($img.Fill (printf "%s webp" $smDim)) -}}
+    {{- $sm := ($img.Fill (printf "%s webp" $smDim)) -}}
     {{ $md := ($img.Fill (printf "%s webp" $mdDim)) -}}
     {{ $lg := ($img.Fill (printf "%s webp" $lgDim)) -}}
     {{ $xl := ($img.Fill (printf "%s webp" $xlDim)) -}}
     {{ $xxl := ($img.Fill (printf "%s webp" $xxlDim)) -}}
     {{ $fallback := ($img.Fill (printf "%s jpg" $xxlDim)) -}}
 
-    {{ with $caption -}}
+    {{- with $caption -}}
         <figure class="figure">
             <img class="figure-img img-fluid {{ $innerClass }}"
                 srcset="
@@ -68,8 +69,9 @@
                 src="{{ $fallback.RelPermalink }}"
                 alt="{{ $title }}">
             <figcaption class="figure-caption">{{ . | safeHTML }}</figcaption>
+            {{ $inner }}
         </figure>
-    {{ else -}}
+    {{- else -}}
         <div class="ratio ratio-{{ $ratio }} {{ $outerClass }}">
             <img class="img-fluid {{ $innerClass }}"
                 srcset="
@@ -81,6 +83,7 @@
                 sizes="100vw"
                 src="{{ $fallback.RelPermalink }}"
                 alt="{{ $title }}">
+            {{ $inner }}
         </div>
-    {{ end -}}
-{{ end -}}
+    {{- end -}}
+{{- end -}}
