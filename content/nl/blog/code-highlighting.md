@@ -136,7 +136,7 @@ Write-Host 'Goodbye from PowerShell!'
 
 ### SQL
 
-Geef `sql` op als waarde voor het argument `shell` om een SQL terminal te simuleren. Gebruik `\` als markering van een bijbehorende regel.
+Geef `sql` op als waarde voor het argument `shell` om een SQL terminal te simuleren. Gebruik `(con)` als markering van een bijbehorende regel.
 
 ```html
 {{%/* command prompt="mysql>" shell="sql" */%}}
