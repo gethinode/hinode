@@ -1,5 +1,8 @@
 // Define template variables 
-$themeColor: {{ site.Params.style.themeColor | default "#007bff" }};
+$themeColor:                    {{ site.Params.style.themeColor | default "#007bff" }};
+$carousel-control-prev-icon-bg: url("/img/carousel_prev.svg") !default;
+$carousel-control-next-icon-bg: url("/img/carousel_next.svg") !default;
+
 
 // Import Bootstrap functions
 @import "bootstrap/scss/functions";
