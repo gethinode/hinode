@@ -10,8 +10,8 @@
                 {{- partial "utilities/date.html" (dict "date" .Date "format" "long") -}}
                 &bull; {{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
                 {{ if isset .Params "tags" -}}
-                    {{ range first 1 .Params.tags -}}
-                        &bull; <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}" class="text-decoration-none text-primary" aria-label="Tag: {{ . }}">{{ . }}</a>
+                    {{ range first 1 (.GetTerms "tags") -}}
+                        &bull; <a href="{{ (path.Join .Page.RelPermalink) | relURL }}" class="text-decoration-none text-primary" aria-label="Tag: {{ .LinkTitle }}">{{ .LinkTitle }}</a>
                     {{ end -}}
                 {{ end -}}
             </small>

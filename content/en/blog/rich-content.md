@@ -3,7 +3,7 @@ author: "Hugo Authors"
 title: "Rich Content"
 date: 2021-07-13
 description: "A brief description of Hugo Shortcodes"
-tags: ["shortcodes", "privacy"]
+tags: ["shortcode", "privacy"]
 thumbnail: img/flowers.jpg # https://picsum.photos/id/106/2592/1728
 photoCredits: <a href="https://unsplash.com/@flutterhappy">Arvee Marie</a>
 photoSource: <a href="https://unsplash.com/photos/YnfGtpt2gf4">Unsplash</a>
