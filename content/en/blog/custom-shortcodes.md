@@ -187,7 +187,7 @@ Use the `image` shortcode to display a responsive image with a specific aspect r
 | Argument  | Required | Description |
 |-----------|----------|-------------|
 | src       | Yes | Required url of the image, e.g. "img/boots.jpg" or "https://picsum.photos/id/27/3264/1836". |
-| ratio     | No  | Optional aspect ratio of the image, either "1x1", "4x3", "16x9", or "21x9". It not specified the original aspect ratio of the image is preserved. |
+| ratio     | No  | Optional aspect ratio of the image, either "1x1", "4x3", "16x9", or "21x9". If set, the image is resized and cropped to match the ratio. Else the original aspect ratio of the image is kept. |
 | class     | No  | Optional class attribute of the inner `img` element, e.g. "rounded". |
 | title     | No  | Optional alternate text of the image. |
 | caption   | No  | Optional figure caption. |

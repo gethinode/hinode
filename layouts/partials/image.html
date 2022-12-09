@@ -5,8 +5,8 @@
     wrapped in a figure if a caption is provided, else the image is wrapped in a div with a ratio constraint. The
     partial supports the following arguments:
     "url":          Required relative url of the image, e.g. "img/example.jpg"
-    "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
-                    Instead, the original aspect ratio of the image is preserved.
+    "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". If set, the image is
+                    resized and cropped to match the ratio. Else the original aspect ratio of the image is kept.
     "outerClass":   Optional class attribute of the outer div element, e.g. "img-wrap".
     "innerClass":   Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
@@ -62,12 +62,27 @@
         {{ $xxlDim = printf "1400x%d" (int (math.Round (mul (div 1400.0 $img.Width) $img.Height))) -}}
     {{ end -}}
 
-    {{- $sm := ($img.Fill (printf "%s webp" $smDim)) -}}
-    {{ $md := ($img.Fill (printf "%s webp" $mdDim)) -}}
-    {{ $lg := ($img.Fill (printf "%s webp" $lgDim)) -}}
-    {{ $xl := ($img.Fill (printf "%s webp" $xlDim)) -}}
-    {{ $xxl := ($img.Fill (printf "%s webp" $xxlDim)) -}}
-    {{ $fallback := ($img.Fill (printf "%s jpg" $xxlDim)) -}}
+    {{- $sm := "" -}}
+    {{ $md := "" -}}
+    {{ $lg := "" -}}
+    {{ $xl := "" -}}
+    {{ $xxl := "" -}}
+    {{ $fallback := "" -}}
+    {{ if $ratio }}
+        {{- $sm = ($img.Fill (printf "%s webp" $smDim)) -}}
+        {{ $md = ($img.Fill (printf "%s webp" $mdDim)) -}}
+        {{ $lg = ($img.Fill (printf "%s webp" $lgDim)) -}}
+        {{ $xl = ($img.Fill (printf "%s webp" $xlDim)) -}}
+        {{ $xxl = ($img.Fill (printf "%s webp" $xxlDim)) -}}
+        {{ $fallback = ($img.Fill (printf "%s jpg" $xxlDim)) -}}
+    {{ else }}
+        {{- $sm = ($img.Fit (printf "%s webp" $smDim)) -}}
+        {{ $md = ($img.Fit (printf "%s webp" $mdDim)) -}}
+        {{ $lg = ($img.Fit (printf "%s webp" $lgDim)) -}}
+        {{ $xl = ($img.Fit (printf "%s webp" $xlDim)) -}}
+        {{ $xxl = ($img.Fit (printf "%s webp" $xxlDim)) -}}
+        {{ $fallback = ($img.Fit (printf "%s jpg" $xxlDim)) -}}
+    {{ end}}
 
     {{- with $caption -}}
         <figure class="figure">
