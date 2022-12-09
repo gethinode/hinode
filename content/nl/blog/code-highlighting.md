@@ -32,9 +32,9 @@ Gebruik code fencing om de syntax voor een specifieke taal te markeren.
 </div>
 ```
 
-## Highlight Partial
+## Highlight Shortcode
 
-Gebruik de `highlight` partial om de lay-out van een taalfragment aan te passen.
+Gebruik de `highlight` shortcode om de lay-out van een taalfragment aan te passen.
 
 {{< highlight go "linenos=table,hl_lines=8 15-17,linenostart=199" >}}
 // GetTitleFunc returns a func that can be used to transform a string to
