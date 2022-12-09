@@ -188,7 +188,7 @@ Gebruik de `image` shortcode om een adaptief plaatje met een specifieke verhoudi
 | Parameter | Verplicht | Toelichting |
 |-----------|----------|-------------|
 | src       | Ja  | Verplichte url van het plaatje, bijvoorbeeld "img/boots.jpg" of "https://picsum.photos/id/27/3264/1836". |
-| ratio     | Nee | Verhouding van het plaatje, de mogelijke waarden zijn "1x1", "4x3", "16x9", en "21x9". Als de verhouding niet is opgegeven dan wordt de verhouding van het originele bestand gebruikt. |
+| ratio     | Nee | Verhouding van het plaatje, de mogelijke waarden zijn "1x1", "4x3", "16x9", en "21x9". Indien opgegeven wordt het plaatje bijgesneden en verkleind om te voldoen aan de ratio. Als de verhouding niet is opgegeven dan wordt de verhouding van het originele bestand gebruikt. |
 | class     | Nee | Optionele `class` waarde van het `img` element, bijvoorbeeld "rounded". |
 | title     | Nee | Optionele beschrijving van het plaatje. |
 | caption   | Nee | Optioneel onderschrift van het plaatje. |
