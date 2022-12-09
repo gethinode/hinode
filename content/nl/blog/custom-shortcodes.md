@@ -49,12 +49,12 @@ Het resultaat ziet er als volgt uit:
 
 ## Image Shortcode
 
-Gebruik de `image` shortcode om een adaptief plaatje met een specifieke verhouding te tonen. De bron kan verwijzen naar een bestand in de `/assets/img` folder van je website of naar een publieke weblocatie. De shortcode genereert het plaatje als een zogenaamde [image set][mozilla_image] om deze te optimaliseren voor meerdere schermformaten en verschillende resoluties. Achter de schermen converteert Hugo de plaatjes naar een `WebP` bestandsformaat en slaat deze op in een lokale folder (`resources` of `public`). De geschikte bestandsformaten zijn `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp` en `.webp`. De shortcode ondersteunt de volgende parameters:
+Gebruik de `image` shortcode om een adaptief plaatje met een specifieke verhouding te tonen. De bron kan verwijzen naar een bestand in de `/assets/img` folder van je website of naar een publieke weblocatie. De shortcode genereert het plaatje als een zogenaamde [image set][mozilla_image] om deze te optimaliseren voor meerdere schermformaten en verschillende resoluties. Achter de schermen converteert Hugo de plaatjes naar een `WebP` bestandsformaat en slaat deze op in een lokale folder (`resources` of `public`). De kwaliteit van het plaatje kan worden opgegeven in de sectie `[imaging]` van de site [configuratie][hugo_imaging] (75 is de standaardwaarde). De geschikte bestandsformaten zijn `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp` en `.webp`. Een plaatje in het formaat `.jpeg` is beschikbaar voor oudere browsers. De shortcode ondersteunt de volgende parameters:
 
 | Parameter | Verplicht | Toelichting |
 |-----------|----------|-------------|
 | src       | Ja  | Verplichte url van het plaatje, bijvoorbeeld "img/boots.jpg" of "https://picsum.photos/id/27/3264/1836". |
-| ratio     | Nee | Verhouding van het plaatje, de mogelijke waarden zijn "1x1", "4x3" (standaard), "16x9", en "21x9". |
+| ratio     | Nee | Verhouding van het plaatje, de mogelijke waarden zijn "1x1", "4x3", "16x9", en "21x9". Als de verhouding niet is opgegeven dan wordt de verhouding van het originele bestand gebruikt. |
 | class     | Nee | Optionele `class` waarde van het `img` element, bijvoorbeeld "rounded". |
 | title     | Nee | Optionele beschrijving van het plaatje. |
 | caption   | Nee | Optioneel onderschrift van het plaatje. |
@@ -69,5 +69,5 @@ Ter illustratie toont de volgende shortcode een plaatje met afgeronde hoeken en 
 Het resultaat ziet er als volgt uit:
 {{< image src="img/flowers.jpg" ratio="21x9" caption="Onderschrift" class="rounded">}}
 
-<!-- MARKDOWN MAINTAINED LINKS -->
 [mozilla_image]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+[hugo_imaging]: https://gohugo.io/content-management/image-processing/#imaging-configuration
