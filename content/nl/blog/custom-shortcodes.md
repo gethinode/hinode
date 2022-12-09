@@ -47,6 +47,140 @@ Het resultaat ziet er als volgt uit:
   {{< img src="img/dunes.jpg" caption="slide 3" >}}
 {{< /carousel >}}
 
+## Command Prompt Shortcode
+
+De `command` shortcode simuleert een terminal voor `bash`, `powershell` of `sql` shell talen. De shortcode ondersteunt de volgende parameters:
+
+| Parameter | Verplicht | Toelichting |
+|-----------|----------|-------------|
+| user      | Nee | Optionele gebruiker om toe te voegen aan de prompt, bijvoorbeeld "user". |
+| host      | Nee | Optionele omgeving om toe te voegen aan de prompt, bijvoorbeeld "localhost". | 
+| prompt    | Nee | Optionele vervanging van de prompt, bijvoorbeeld "PS C:\Users\User>". |
+| shell     | Nee | Type shell, met ondersteuning voor "bash" (standaard), "powershell", of "sql". |
+{.table}
+
+### Bash (standaard shell)
+
+Gebruik de `command` shortcode om een bash terminal te simuleren.
+
+```html
+{{%/* command */%}}
+export MY_VAR=123
+{{%/* /command */%}}
+```
+
+Het resultaat ziet er als volgt uit:
+{{% command %}}
+export MY_VAR=123
+{{% /command %}}
+
+Gebruik `user` en `host` om de gebruikerscontext mee te geven aan de prompt. Maak daarnaast gebruik van `(out)` om output aan te geven, met `\` als markering van een bijbehorende regel.
+
+```html
+{{%/* command user="user" host="localhost" */%}}
+export MY_VAR=123
+echo "hello"
+(out)hello
+echo one \
+two \
+three
+(out)one two three
+echo "goodbye"
+(out)goodbye
+{{%/* /command */%}}
+```
+
+Het resultaat ziet er als volgt uit:
+{{% command user="user" host="localhost" %}}
+export MY_VAR=123
+echo "hello"
+(out)hello
+echo one \
+two \
+three
+(out)one two three
+echo "goodbye"
+(out)goodbye
+{{% /command %}}
+
+### PowerShell
+
+Geef `powershell` op als waarde voor het argument `shell` om een PowerShell terminal te simuleren. Je kunt `prompt` aanpassen om een eventule directory aan te geven. Het backtick `` ` `` symbool geeft aan dat het commando doorgaat op de volgende regel.
+
+```html
+{{%/* command prompt="PS C:\Users\User>" shell="powershell" */%}}
+Write-Host `
+'Hello' `
+'from' `
+'PowerShell!'
+(out)Hello from PowerShell!
+Write-Host 'Goodbye from PowerShell!'
+(out)Goodbye from PowerShell!
+{{%/* /command */%}}
+```
+
+Het resultaat ziet er als volgt uit:
+{{% command prompt="PS C:\Users\User>" shell="powershell" %}}
+Write-Host `
+'Hello' `
+'from' `
+'PowerShell!'
+(out)Hello from PowerShell!
+Write-Host 'Goodbye from PowerShell!'
+(out)Goodbye from PowerShell!
+{{% /command %}}
+
+### SQL
+
+Geef `sql` op als waarde voor het argument `shell` om een SQL terminal te simuleren. Gebruik `(con)` als markering van een bijbehorende regel.
+
+```html
+{{%/* command prompt="mysql>" shell="sql" */%}}
+set @my_var = 'foo';
+set @my_other_var = 'bar';
+CREATE TABLE people ((con)
+first_name VARCHAR(30) NOT NULL,(con)
+last_name VARCHAR(30) NOT NULL(con)
+);
+(out)Query OK, 0 rows affected (0.09 sec)
+insert into people(con)
+values ('John', 'Doe');
+(out)Query OK, 1 row affected (0.02 sec)
+select *(con)
+from people(con)
+order by last_name;
+(out)+------------+-----------+
+(out)| first_name | last_name |
+(out)+------------+-----------+
+(out)| John       | Doe       |
+(out)+------------+-----------+
+(out)1 row in set (0.00 sec)
+{{%/* /command */%}}
+```
+
+Het resultaat ziet er als volgt uit:
+{{% command prompt="mysql>" shell="sql" %}}
+set @my_var = 'foo';
+set @my_other_var = 'bar';
+CREATE TABLE people ((con)
+first_name VARCHAR(30) NOT NULL,(con)
+last_name VARCHAR(30) NOT NULL(con)
+);
+(out)Query OK, 0 rows affected (0.09 sec)
+insert into people(con)
+values ('John', 'Doe');
+(out)Query OK, 1 row affected (0.02 sec)
+select *(con)
+from people(con)
+order by last_name;
+(out)+------------+-----------+
+(out)| first_name | last_name |
+(out)+------------+-----------+
+(out)| John       | Doe       |
+(out)+------------+-----------+
+(out)1 row in set (0.00 sec)
+{{% /command %}}
+
 ## Image Shortcode
 
 Gebruik de `image` shortcode om een adaptief plaatje met een specifieke verhouding te tonen. De bron kan verwijzen naar een bestand in de `/assets/img` folder van je website of naar een publieke weblocatie. De shortcode genereert het plaatje als een zogenaamde [image set][mozilla_image] om deze te optimaliseren voor meerdere schermformaten en verschillende resoluties. Achter de schermen converteert Hugo de plaatjes naar een `WebP` bestandsformaat en slaat deze op in een lokale folder (`resources` of `public`). De kwaliteit van het plaatje kan worden opgegeven in de sectie `[imaging]` van de site [configuratie][hugo_imaging] (75 is de standaardwaarde). De geschikte bestandsformaten zijn `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp` en `.webp`. Een plaatje in het formaat `.jpeg` is beschikbaar voor oudere browsers. De shortcode ondersteunt de volgende parameters:

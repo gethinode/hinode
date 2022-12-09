@@ -46,6 +46,140 @@ The result looks like this:
   {{< img src="img/dunes.jpg" caption="slide 3" >}}
 {{< /carousel >}}
 
+## Command Prompt Shortcode
+
+The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages. The shortcode supports the following arguments:
+
+| Argument  | Required | Description |
+|-----------|----------|-------------|
+| user      | No | Optional user to add to the prompt, e.g. "user". |
+| host      | No | Optional host to add to the prompt, e.g. "localhost". | 
+| prompt    | No | Optional prompt override, e.g. "PS C:\Users\User>". |
+| shell     | No | Type of shell, either "bash" (default), "powershell", or "sql". |
+{.table}
+
+### Bash (default shell)
+
+Use the `command` shortcode to generate a block with a default bash command prompt.
+
+```html
+{{%/* command */%}}
+export MY_VAR=123
+{{%/* /command */%}}
+```
+
+The result looks like this:
+{{% command %}}
+export MY_VAR=123
+{{% /command %}}
+
+Specify `user` and `host` to add the user context to the prompt. In addition, use `(out)` to specify an output line and use `\` to denote a line continuation.
+
+```html
+{{%/* command user="user" host="localhost" */%}}
+export MY_VAR=123
+echo "hello"
+(out)hello
+echo one \
+two \
+three
+(out)one two three
+echo "goodbye"
+(out)goodbye
+{{%/* /command */%}}
+```
+
+The result looks like this:
+{{% command user="user" host="localhost" %}}
+export MY_VAR=123
+echo "hello"
+(out)hello
+echo one \
+two \
+three
+(out)one two three
+echo "goodbye"
+(out)goodbye
+{{% /command %}}
+
+### PowerShell
+
+Set the `shell` argument to `powershell` to generate a PowerShell terminal. Override the `prompt` to add a directory if needed. Use the backtick `` ` `` symbol to denote a line continuation.
+
+```html
+{{%/* command prompt="PS C:\Users\User>" shell="powershell" */%}}
+Write-Host `
+'Hello' `
+'from' `
+'PowerShell!'
+(out)Hello from PowerShell!
+Write-Host 'Goodbye from PowerShell!'
+(out)Goodbye from PowerShell!
+{{%/* /command */%}}
+```
+
+The result looks like this:
+{{% command prompt="PS C:\Users\User>" shell="powershell" %}}
+Write-Host `
+'Hello' `
+'from' `
+'PowerShell!'
+(out)Hello from PowerShell!
+Write-Host 'Goodbye from PowerShell!'
+(out)Goodbye from PowerShell!
+{{% /command %}}
+
+### SQL
+
+Set the `shell` argument to `sql` to generate a SQL terminal. Use the `(con)` suffix to denote a line continuation.
+
+```html
+{{%/* command prompt="mysql>" shell="sql" */%}}
+set @my_var = 'foo';
+set @my_other_var = 'bar';
+CREATE TABLE people ((con)
+first_name VARCHAR(30) NOT NULL,(con)
+last_name VARCHAR(30) NOT NULL(con)
+);
+(out)Query OK, 0 rows affected (0.09 sec)
+insert into people(con)
+values ('John', 'Doe');
+(out)Query OK, 1 row affected (0.02 sec)
+select *(con)
+from people(con)
+order by last_name;
+(out)+------------+-----------+
+(out)| first_name | last_name |
+(out)+------------+-----------+
+(out)| John       | Doe       |
+(out)+------------+-----------+
+(out)1 row in set (0.00 sec)
+{{%/* /command */%}}
+```
+
+The result looks like this:
+{{% command prompt="mysql>" shell="sql" %}}
+set @my_var = 'foo';
+set @my_other_var = 'bar';
+CREATE TABLE people ((con)
+first_name VARCHAR(30) NOT NULL,(con)
+last_name VARCHAR(30) NOT NULL(con)
+);
+(out)Query OK, 0 rows affected (0.09 sec)
+insert into people(con)
+values ('John', 'Doe');
+(out)Query OK, 1 row affected (0.02 sec)
+select *(con)
+from people(con)
+order by last_name;
+(out)+------------+-----------+
+(out)| first_name | last_name |
+(out)+------------+-----------+
+(out)| John       | Doe       |
+(out)+------------+-----------+
+(out)1 row in set (0.00 sec)
+{{% /command %}}
+
 ## Image Shortcode
 
 Use the `image` shortcode to display a responsive image with a specific aspect ratio. The source link can refer to either an image available in the `/assets/img` folder of your site or a public web location. The shortcode renders the image as a so-called [image set][mozilla_image] to optimize the image for different screen sizes and resolutions. Behind the scenes, Hugo renders the images in `WebP` format and stores them in a local folder (`resources` or `public`). The images are processed using the quality setting specified in the `[imaging]` section of the main [config file][hugo_imaging] (defaults to 75). Supported image types are `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp`, and `.webp`. A fallback image of type `.jpeg` is provided for older browsers.The shortcode supports the following arguments:
