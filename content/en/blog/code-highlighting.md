@@ -30,9 +30,9 @@ Use code fencing to highlight the syntax of a specific language.
 </div>
 ```
 
-## Highlight Partial
+## Highlight Shortcode
 
-Use the `highlight` partial to customize the layout of a specific code block.
+Use the `highlight` shortcode to customize the layout of a specific code block.
 
 {{< highlight go "linenos=table,hl_lines=8 15-17,linenostart=199" >}}
 // GetTitleFunc returns a func that can be used to transform a string to
