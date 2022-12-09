@@ -4,21 +4,28 @@
     section of the main config file (defaults to 75). A fallback image is provided for older browsers. The partial
     supports the following arguments:
     "src":          Required relative url of the image, e.g. "img/example.jpg"
-    "ratio":        Bootstrap ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9".
+    "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Leave empty to keep the
+                    original aspect ratio of the image.
     "class":        Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
     "caption":      Optional figure caption.
 -->
 
-{{ if isset .Params "src" }}
-    {{ $url := .Get "src" }}
-    {{ $ratio := "4x3" }}
-    {{ with .Get "ratio" }}{{ $ratio = . }}{{ end }}
-    {{ $class := .Get "class" }}
-    {{ $title := .Get "title" }}
-    {{ $caption := .Get "caption" }}
+{{- if isset .Params "src" -}}
+    {{ $url := .Get "src" -}}
+    {{- $validRatios := slice "1x1" "4x3" "16x9" "21x9" -}}
+    {{ $ratio := .Get "ratio" -}}
+    {{ if $ratio -}}
+        {{ if not (in $validRatios $ratio) -}}
+            {{ errorf "Invalid value for param 'ratio': %s" .Position -}}
+        {{ end -}}
+    {{ end -}}
+    
+    {{- $class := .Get "class" -}}
+    {{ $title := .Get "title" -}}
+    {{ $caption := .Get "caption" -}}
 
-    {{ partial "image.html" (dict "url" $url "ratio" $ratio "innerClass" $class "title" $title "caption" $caption) -}}    
-{{ else }}
-    {{ errorf "Missing value for param 'src': %s" .Position }}
-{{ end }}
+    {{- partial "image.html" (dict "url" $url "ratio" $ratio "innerClass" $class "title" $title "caption" $caption) -}} 
+{{ else -}}
+    {{ errorf "Missing value for param 'src': %s" .Position -}}
+{{ end -}}
