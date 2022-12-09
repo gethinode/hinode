@@ -2,13 +2,14 @@
     Renders a carousel item with a responsive image (see the image shortcode for more details). The shortcode
     supports the following arguments:
     "src":          Required relative url of the image, e.g. "img/example.jpg"
-    "ratio":        Bootstrap ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9".
+    "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
+                    Instead, the original aspect ratio of the image is preserved.
     "caption":      Optional carousel slide caption.
 -->
 
 {{- $src := .Get "src" -}}
 {{ $caption := .Get "caption" -}}
-{{- $ratio := "4x3" -}}
+{{- $ratio := "" -}}
 {{ with .Parent -}}
     {{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
 {{ else }}

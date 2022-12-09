@@ -1,10 +1,11 @@
 <!-- 
     Displays a carousel of several responsive images (see the image shortcode for more details). Add inner <img> 
     elements to define individual image slides. The shortcode supports the following arguments:
-    "ratio":        Bootstrap ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9".
+    "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
+                    Instead, the original aspect ratio of the image is preserved.
 -->
 
-{{ $ratio := "4x3" -}}
+{{ $ratio := "" -}}
 {{ $class := "" -}}
 {{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
 {{ with .Get "class" }}{{ $class = . }}{{ end -}}
