@@ -54,7 +54,7 @@ De `command` shortcode simuleert een terminal voor `bash`, `powershell` of `sql`
 | Parameter | Verplicht | Toelichting |
 |-----------|----------|-------------|
 | user      | Nee | Optionele gebruiker om toe te voegen aan de prompt, bijvoorbeeld "user". |
-| host      | Nee | Optionele omgeving om toe te voegen aan de prompt, bijvoorbeeld "localhost". | 
+| host      | Nee | Optionele omgeving om toe te voegen aan de prompt, bijvoorbeeld "localhost". |
 | prompt    | Nee | Optionele vervanging van de prompt, bijvoorbeeld "PS C:\Users\User>". |
 | shell     | Nee | Type shell, met ondersteuning voor "bash" (standaard), "powershell", of "sql". |
 {.table}
