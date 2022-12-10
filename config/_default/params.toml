@@ -46,6 +46,8 @@ schemaSection = "blog"
 [style]
     themeColor = "#D43900" #00b0f0
     themeOpacity = "10"
+    themeFont = "Inter"
+    themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap"
 
 [main]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
