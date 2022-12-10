@@ -1,5 +1,6 @@
 // Define template variables 
 $themeColor:                    {{ site.Params.style.themeColor | default "#007bff" }};
+$themeFont:                     {{ site.Params.style.themeFont | default "Inter" }};
 $carousel-control-prev-icon-bg: url("/img/carousel_prev.svg") !default;
 $carousel-control-next-icon-bg: url("/img/carousel_next.svg") !default;
 

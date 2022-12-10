@@ -110,7 +110,7 @@ The main site configuration is available in `./config/_default`. Some remarks:
 
 - **Menu items** - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
 - **Content** - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
-- **Theme color** - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility.
+- **Theme style** - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility. Additionally, set `themeFont` and `themeFontPath` to override the default font.
 - **Comments** - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
 - **Security policy** - The theme uses rather strict security policies by default. Be sure to include references to external sources in the header configuration to avoid broken links. The settings of the local development server are defined in `server.toml`. Similar settings are defined in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
 
