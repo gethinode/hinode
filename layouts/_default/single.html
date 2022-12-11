@@ -14,7 +14,7 @@
                 <small class="text-muted text-uppercase">
                     {{ $datestr | i18n "postedOnDate" -}}
                     {{ if ne $datestr $lastmodstr -}}
-                        &nbsp{{ $lastmodstr | i18n "lastModified" }}
+                        &nbsp{{ $lastmodstr | i18n "lastModified" }}&nbsp;&bull;&nbsp;
                     {{ else -}}
                         &nbsp;&bull;&nbsp;
                     {{ end -}}
