@@ -41,7 +41,10 @@
   translation: "Previous"
 - id: paginationNext
   translation: "Next"
-
+- id: paginationFirst
+  translation: "First"
+- id: paginationLast
+  translation: "Last"
 
 # 404 page
 - id: pageNotFound
