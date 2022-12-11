@@ -37,7 +37,10 @@
   translation: "Artikel"
 - id: articles
   translation: "Artikel"
-
+- id: paginationPrevious
+  translation: "Vorherige"
+- id: paginationNext
+  translation: "Nächste"
 
 # 404 page
 - id: pageNotFound
