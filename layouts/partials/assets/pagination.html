@@ -50,11 +50,11 @@
 
     {{- with .Prev }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">Previous</span></a>
+        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
       </li>
     {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">Previous</span></a>
+        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
       </li>
     {{- end }}
 
@@ -79,11 +79,11 @@
 
     {{- with .Next }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">Next</span></a>
+        <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationNext" }}</span></a>
       </li>
     {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">Next</span></a>
+        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ T "paginationNext" }}</span></a>
       </li>
     {{- end }}
 
@@ -110,14 +110,14 @@
     {{- with .First }}
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="First" class="page-link" role="button"><span aria-hidden="true">Previous</span></a>
+        <a href="{{ .URL }}" aria-label="First" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
       </li>
       {{- end }}
     {{- end }}
 
     {{- with .Prev }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">Previous</span></a>
+        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
       </li>
     {{- end }}
 
@@ -142,7 +142,7 @@
 
     {{- with .Next }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">Next</span></a>
+        <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationNext" }}</span></a>
       </li>
     {{- end }}
 

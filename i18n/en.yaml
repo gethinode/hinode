@@ -37,6 +37,10 @@
   translation: "Article"
 - id: articles
   translation: "Articles"
+- id: paginationPrevious
+  translation: "Previous"
+- id: paginationNext
+  translation: "Next"
 
 
 # 404 page
