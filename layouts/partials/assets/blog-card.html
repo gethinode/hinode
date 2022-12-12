@@ -8,7 +8,7 @@
         <p class="card-text">
             <small class="text-muted text-uppercase">
                 {{- partial "utilities/date.html" (dict "date" .Date "format" "long") -}}
-                &bull; {{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
+                &nbsp;&bull; {{ .ReadingTime }} {{ i18n "minutesShort" }} {{ i18n "read" }}
                 {{ if isset .Params "tags" -}}
                     {{ range first 1 (.GetTerms "tags") -}}
                         &bull; <a href="{{ (path.Join .Page.RelPermalink) | relURL }}" class="text-decoration-none text-primary" aria-label="Tag: {{ .LinkTitle }}">{{ .LinkTitle }}</a>
