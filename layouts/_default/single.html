@@ -14,10 +14,9 @@
                 <small class="text-muted text-uppercase">
                     {{ $datestr | i18n "postedOnDate" -}}
                     {{ if ne $datestr $lastmodstr -}}
-                        &nbsp{{ $lastmodstr | i18n "lastModified" }}&nbsp;&bull;&nbsp;
-                    {{ else -}}
-                        &nbsp;&bull;&nbsp;
+                        &nbsp;{{ $lastmodstr | i18n "lastModified" }}
                     {{ end -}}
+                    &nbsp;&bull;&nbsp;
                     {{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
                     &nbsp;&bull;
                     {{ .WordCount }}&nbsp;{{ i18n "words" }}
