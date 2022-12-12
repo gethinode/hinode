@@ -1,0 +1,108 @@
+# Content
+- id: postedOnDate
+  translation: "Veröffentlicht am {{ . }}"
+- id: lastModified
+  translation: "(Zuletzt verändert am {{ . }})"
+- id: translationsLabel
+  translation: "Andere Sprachen: "
+- id: translationsSeparator
+  translation: ", "
+- id: readMore
+  translation: "Weiterlesen"
+- id: morePosts
+  translation: "Weitere Beiträge"
+- id: olderPosts
+  translation: "Ältere Beiträge"
+- id: recentPosts
+  translation: "Aktuelle Beiträge"
+- id: newerPosts
+  translation: "Neuere Beiträge"
+- id: previousPost
+  translation: "Vorheriger Beitrag"
+- id: nextPost
+  translation: "Nächster Beitrag"
+- id: read
+  translation: "Lesezeit"
+- id: minutesShort
+  translation: "Min."
+- id: words
+  translation: "Wörter"
+- id: copyright
+  translation: "Copyright"
+- id: photoBy
+  translation: "Foto von"
+- id: photoOn
+  translation: "auf"
+- id: article
+  translation: "Artikel"
+- id: articles
+  translation: "Artikel"
+- id: paginationPrevious
+  translation: "Vorherige"
+- id: paginationNext
+  translation: "Nächste"
+- id: paginationFirst
+  translation: "Erste"
+- id: paginationLast
+  translation: "Letzte"
+
+# 404 page
+- id: pageNotFound
+  translation: "Ups! Diese Seite existiert nicht. Versuche es über die"
+- id: pageNotFoundTitle
+  translation: "Nicht gefunden"
+- id: pageNotFoundHome
+  translation: "Startseite"
+
+
+# Navigation
+- id: toggleNavigation
+  translation: "Navigation umschalten"
+- id: languageSwitcherLabel
+  translation: "Sprache"
+- id: gcseLabelShort
+  translation: "Suche"
+- id: gcseLabelLong
+  translation: "Suche {{ .Site.Title }}"
+- id: gcseClose
+  translation: "Schließen"
+
+# Staticman
+- id: noComment
+  translation: "Kein Kommentar"
+- id: oneComment
+  translation: "Kommentar"
+- id: moreComment
+  translation: "Kommentare"
+- id: useMarkdown
+  translation: "Du kannst Markdown-Syntax benutzen"
+- id: yourName
+  translation: "Dein Name"
+- id: yourEmail
+  translation: "Deine E-Mail-Adresse"
+- id: yourWebsite
+  translation: "Deine Webseite"
+
+# Delayed Disqus
+- id: show
+  translation: "Zeige"
+- id: comments
+  translation: "Kommentare"
+
+# Related posts
+- id: seeAlso
+  translation: "Siehe auch"
+
+# Table of contents
+- id: toc
+  translation: "Auf dieser Seite"
+
+# Search
+- id: ui_search
+  translation: "Durchsuche diese Seite..."
+- id: ui_no_results
+  translation: "Keine Ergebnisse für"
+
+# Draft
+- id: draft
+  translation: "Entwurf"
