@@ -5,7 +5,9 @@ $carousel-control-prev-icon-bg: url("/img/carousel_prev.svg") !default;
 $carousel-control-next-icon-bg: url("/img/carousel_next.svg") !default;
 
 
-// Import Bootstrap functions
+// Import Bootstrap banner and functions
+@import "bootstrap/scss/mixins/banner";
+@include bsBanner("");
 @import "bootstrap/scss/functions";
 
 // Include default variable overrides
