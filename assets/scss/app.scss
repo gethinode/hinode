@@ -1,17 +1,24 @@
-// Define template variables 
+// Define template variables
+// TODO: optimize, see https://discourse.gohugo.io/t/initialize-sass-variables-from-hugo-templates/42053
 $themeColor:                    {{ site.Params.style.themeColor | default "#007bff" }};
 $themeFont:                     {{ site.Params.style.themeFont | default "Inter" }};
-$carousel-control-prev-icon-bg: url("/img/carousel_prev.svg") !default;
-$carousel-control-next-icon-bg: url("/img/carousel_next.svg") !default;
+$primary:                       {{ site.Params.style.primary | default "#007bff" }};
+$secondary:                     {{ site.Params.style.secondary | default "#6c757d" }};
+$success:                       {{ site.Params.style.success | default "#198754" }};
+$info:                          {{ site.Params.style.info | default "#0dcaf0" }};
+$warning:                       {{ site.Params.style.warning | default "#ffc107" }};
+$danger:                        {{ site.Params.style.danger | default "#dc3545" }};
+$light:                         {{ site.Params.style.light | default "#f8f9fa" }};
+$dark:                          {{ site.Params.style.dark | default "#212529" }};
 
+// Include default variable overrides
+@import "common/variables.scss";
+@import "common/icons.scss";
 
 // Import Bootstrap banner and functions
 @import "bootstrap/scss/mixins/banner";
 @include bsBanner("");
 @import "bootstrap/scss/functions";
-
-// Include default variable overrides
-@import "common/variables.scss";
 
 // Import Bootstrap configuration
 @import "bootstrap/scss/variables";
@@ -79,3 +86,4 @@ $carousel-control-next-icon-bg: url("/img/carousel_next.svg") !default;
 @import "common/styles.scss";
 @import "layouts/reboot.scss";
 @import "layouts/type.scss";
+@import "common/export.scss";

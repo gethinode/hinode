@@ -16,7 +16,7 @@ for = '/**'
         connect-src 'self' localhost:1313 ws://localhost:1313/livereload; \
         font-src 'self' https://fonts.gstatic.com; \
         frame-src 'self' localhost:1313 https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
-        img-src 'self' https: data:; \
+        img-src 'self' https:; \
         manifest-src 'self'; \
         media-src 'self' \
         """
