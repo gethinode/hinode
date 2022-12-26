@@ -11,7 +11,28 @@ photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
 
 Bootstrap is an open-source web development framework originally created by Twitter. It uses a responsive, mobile-first approach that scales seamlessly across different screen sizes. Bootstrap includes an extensive collection of ready-to-use components, such as navigation bars, pagination controls, buttons, and much more. The Hinode theme exposes several of those components as Hugo shortcodes to simplify their usage within markdown content. The below paragraphs illustrate the available shortcodes and how to use them.
 
-## Carousel Shortcode
+## Alert
+
+Use the `alert` shortcode to display a contextual feedback message. The inner content is used as alert text. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No  | Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| dismissible | No  | Optional flag to indicate the alert is dismissible, defaults to false. |
+{.table}
+
+```html
+{{</* alert color="danger" */>}}
+A simple danger alert—check it out!
+{{</* /alert */>}}
+```
+
+The result looks like this:
+{{< alert color="danger" >}}
+A simple danger alert—check it out!
+{{< /alert >}}
+
+## Carousel
 
 Use the `carousel` shortcode to display a carousel of several images, with behavior similar as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
 
@@ -46,7 +67,7 @@ The result looks like this:
   {{< img src="img/dunes.jpg" caption="slide 3" >}}
 {{< /carousel >}}
 
-## Command Prompt Shortcode
+## Command Prompt
 
 The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages. The shortcode supports the following arguments:
 
@@ -180,7 +201,7 @@ order by last_name;
 (out)1 row in set (0.00 sec)
 {{% /command %}}
 
-## Image Shortcode
+## Image
 
 Use the `image` shortcode to display a responsive image with a specific aspect ratio. The source link can refer to either an image available in the `/assets/img` folder of your site or a public web location. The shortcode renders the image as a so-called [image set][mozilla_image] to optimize the image for different screen sizes and resolutions. Behind the scenes, Hugo renders the images in `WebP` format and stores them in a local folder (`resources` or `public`). The images are processed using the quality setting specified in the `[imaging]` section of the main [config file][hugo_imaging] (defaults to 75). Supported image types are `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp`, and `.webp`. A fallback image of type `.jpeg` is provided for older browsers.The shortcode supports the following arguments:
 
@@ -201,6 +222,52 @@ As an example, the following shortcode displays an image with rounded corners an
 
 The result looks like this:
 {{< image src="img/flowers.jpg" ratio="21x9" caption="Figure caption" class="rounded">}}
+
+## Spinner
+
+Use the `spinner` shortcode to indicate the loading state of a component or page. The inner content is used as alternative description. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No  | Optional theme color of the spinner, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| grow        | No  | Optional flag to indicate the spinner is growing instead of rotating, defaults to false. |
+| class       | No  | Optional class attribute of the spinner wrapping element, e.g. “text-center”. |
+{.table}
+
+```html
+{{</* spinner color="info" class="text-center" */>}}
+Loading...
+{{</* /spinner */>}}
+```
+
+The result looks like this:
+{{< spinner color="info" class="text-center" >}}
+Loading...
+{{< /spinner >}}
+
+## Tooltip
+
+Use the `tooltip` shortcode to display a tooltip for a hyperlink or button. The inner content is used as hyperlink text or button text. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| title       | Yes  | Title to display in the tooltip. |
+| href        | Yes  | Address for the button or hyperlink. |
+| type        | Yes  | Type of the element associated with the tooltip, either "link" or "button". |
+| placement   | No   | How to position the tooltip: "auto" (default), "top", "bottom", "left", or "right". 
+{.table}
+
+```html
+{{</* tooltip color="secondary" title="Tooltip" href="#" type="button" placement="top" */>}}
+Tooltip demonstration
+{{</* /tooltip */>}}
+```
+
+The result looks like this:
+{{< tooltip color="secondary" title="Tooltip" href="#" type="button" placement="top" >}}
+Tooltip demonstration
+{{< /tooltip >}}
 
 [mozilla_image]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
 [hugo_imaging]: https://gohugo.io/content-management/image-processing/#imaging-configuration
