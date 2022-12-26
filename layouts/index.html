@@ -23,7 +23,7 @@
                 </div>
 
                 {{ if gt (len $taxonomy.Pages) 3 -}}
-                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">{{ T "morePosts" }}</a>    
+                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">{{ T "morePosts" }}</a>
                 {{ end -}}
             </div>
         {{ else -}}
