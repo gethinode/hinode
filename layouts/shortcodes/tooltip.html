@@ -1,0 +1,51 @@
+<!-- 
+    Displays a tooltip. The shortcode supports the following arguments:
+    "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
+                    "danger", "warning", "info", "light", or "dark".
+    "title"         Required title to display in the tooltip.
+    "href"          Required address for the button or hyperlink.
+    "type"          Required type of the element associated with the tooltip, either "link" or "button".
+    "placement"     Optional position of the tooltip: "auto" (default), "top", "bottom", "left", or "right". 
+-->
+
+{{ $color := "primary" -}}
+{{ with .Get "color" }}{{ $color = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+{{ if not (in $supportedColors $color) -}}
+    {{ errorf "Invalid value for param 'color': %s" .Position -}}
+    {{ $color = "primary" -}}
+{{ end -}}
+
+{{ $title := "" -}}
+{{ with .Get "title" }}{{ $title = . }}{{ end -}}
+{{ if not $title -}}
+    {{ errorf "Missing value for param 'title': %s" .Position -}}
+{{ end -}}
+
+{{ $href := "" -}}
+{{ with .Get "href" }}{{ $href = . }}{{ end -}}
+{{ if not $href -}}
+    {{ errorf "Missing value for param 'href': %s" .Position -}}
+{{ end -}}
+
+{{ $type := "" -}}
+{{ with .Get "type" }}{{ $type = . }}{{ end -}}
+{{ $supportedTypes := slice "button" "link" -}}
+{{ if not (in $supportedTypes $type) -}}
+    {{ errorf "Invalid value for param 'type': %s" .Position -}}
+    {{ $type = "button" -}}
+{{ end -}}
+
+{{ $placement := "auto" -}}
+{{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
+{{ $supportedPlacements := slice "auto" "top" "bottom" "left" "right" -}}
+{{ if not (in $supportedPlacements $placement) -}}
+    {{ errorf "Invalid value for param 'placement': %s" .Position -}}
+    {{ $placement = "auto" -}}
+{{ end -}}
+
+<a href="{{ $href }}" 
+    {{ if eq $type "button" }}class="btn btn-{{ $color }}" role="button" {{ else }}class="link-{{ $color }}"{{ end }}
+    data-bs-toggle="tooltip" data-bs-title="{{ $title }}" data-bs-placement="{{ $placement }}">
+    {{ trim .Inner " \n" -}}
+</a> 
