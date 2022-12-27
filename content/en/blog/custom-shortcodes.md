@@ -21,6 +21,8 @@ Use the `alert` shortcode to display a contextual feedback message. The inner co
 | dismissible | No  | Optional flag to indicate the alert is dismissible, defaults to false. |
 {.table}
 
+As an example, the following shortcode displays a simple alert.
+
 ```html
 {{</* alert color="danger" */>}}
 A simple danger alert—check it out!
@@ -210,6 +212,7 @@ order by last_name;
 ```
 
 The result looks like this:
+
 {{% command prompt="mysql>" shell="sql" %}}
 set @my_var = 'foo';
 set @my_other_var = 'bar';
@@ -265,6 +268,8 @@ Use the `spinner` shortcode to indicate the loading state of a component or page
 | class       | No  | Optional class attribute of the spinner wrapping element, e.g. “text-center”. |
 {.table}
 
+As an example, the following shortcode displays a centered spinner.
+
 ```html
 {{</* spinner color="info" class="text-center" */>}}
 Loading...
@@ -288,14 +293,17 @@ Use the `tooltip` shortcode to display a tooltip for a hyperlink. Refer to the [
 | placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". 
 {.table}
 
+As an example, the following shortcode displays a tooltip for a colored hyperlink.
+
 ```html
-{{</* tooltip color="secondary" title="Tooltip" href="#" type="button" placement="top" */>}}
+{{</* tooltip color="warning" title="Tooltip" href="#" */>}}
 Tooltip demonstration
 {{</* /tooltip */>}}
 ```
 
 The result looks like this:
-{{< tooltip color="secondary" title="Tooltip" href="#" type="button" placement="top" >}}
+
+{{< tooltip color="warning" title="Tooltip" href="#" >}}
 Tooltip demonstration
 {{< /tooltip >}}
 
