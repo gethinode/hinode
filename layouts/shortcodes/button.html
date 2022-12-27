@@ -1,0 +1,79 @@
+<!-- 
+    Displays a button. The shortcode supports the following arguments:
+    "href"          Required address for the button or hyperlink.
+    "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
+    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
+    "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
+                    "danger", "warning", "info", "light", or "dark".
+    "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
+    "badge"         Optional positioned badge to display on top of the button.
+    "aria-label"    Optional label for the badge.
+    "tooltip"       Optional title to display in a tooltip.
+    "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
+-->
+
+{{ $error := false }}
+{{ $type := "button" -}}
+
+{{ $text := trim .Inner " \n" -}}
+{{ if not $text -}}
+    {{ errorf "Missing inner element text: %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $state := "enabled" -}}
+{{ with .Get "state" }}{{ $state = . }}{{ end -}}
+{{ $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
+{{ if not (in $supportedStates $state) -}}
+    {{ errorf "Invalid value for param 'state': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $size := "md" -}}
+{{ with .Get "size" }}{{ $size = . }}{{ end -}}
+{{ $supportedSizes := slice "sm" "md" "lg" -}}
+{{ if not (in $supportedSizes $size) -}}
+    {{ errorf "Invalid value for param 'size': %s" .Position -}}
+{{ end -}}
+
+{{ $color := "primary" -}}
+{{ with .Get "color" }}{{ $color = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+{{ if not (in $supportedColors $color) -}}
+    {{ errorf "Invalid value for param 'color': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $outlineParam := "false" -}}
+{{ $outline := false -}}
+{{ with .Get "outline" }}{{ $outlineParam = . }}{{ end -}}
+{{ $supportedFlags := slice "true" "false" -}}
+{{ if in $supportedFlags $outlineParam -}}
+    {{ if eq $outlineParam "true" }}{{ $outline = true }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'outline': %s" .Position -}}
+{{ end -}}
+
+{{ $badge := .Get "badge" -}}
+
+{{ $label := .Get "aria-label" -}}
+
+{{ $tooltip := .Get "tooltip" -}}
+
+{{ $href := .Get "href" -}}
+{{ if not $href -}}
+    {{ errorf "Missing value for param 'href': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $placement := "top" -}}
+{{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
+{{ $supportedPlacements := slice "top" "bottom" "left" "right" -}}
+{{ if not (in $supportedPlacements $placement) -}}
+    {{ errorf "Invalid value for param 'placement': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ if not $error }}
+    {{- partial "button.html" (dict "type" $type "text" $text "size" $size "color" $color "outline" $outline "badge" $badge "label" $label "tooltip" $tooltip "href" $href "state" $state "placement" $placement) -}} 
+{{ end }}

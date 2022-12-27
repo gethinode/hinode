@@ -32,6 +32,37 @@ The result looks like this:
 A simple danger alert—check it out!
 {{< /alert >}}
 
+## Button
+
+Use the `button` shortcode to display a button with a hyperlink. The inner content is used as button text. The button supports an optional badge and tooltip. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| href        | Yes  | Address for the button hyperlink. |
+| state       | No   | Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive". |
+| size        | No   | Optional size of the button, either "sm", "md" (default), or "lg". |
+| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| badge       | No   | Optional positioned badge to display on top of the button. |
+| outline     | No   | Optional flag indicating the button should be outlined, either "false" (default) or "true". |
+| aria-label  | No   | Optional label for the badge. |
+| tooltip     | No   | Optional title to display in a tooltip. Ignored for active/inactive buttons. |
+| placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". |
+{.table}
+
+As an example, the following shortcode displays a tooltip for a dark button with a badge.
+
+```html
+{{</* button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" */>}}
+Inbox
+{{</* /button */>}}
+```
+
+The result looks like this:
+
+{{< button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" >}}
+Inbox
+{{< /button >}}
+
 ## Carousel
 
 Use the `carousel` shortcode to display a carousel of several images, with behavior similar as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
@@ -247,15 +278,14 @@ Loading...
 
 ## Tooltip
 
-Use the `tooltip` shortcode to display a tooltip for a hyperlink or button. The inner content is used as hyperlink text or button text. The shortcode supports the following arguments:
+Use the `tooltip` shortcode to display a tooltip for a hyperlink. Refer to the [button shortcode]({{< ref "#button" >}} "button shortcode") on how to display a tooltip for a button instead. The inner content is used as hyperlink text. The shortcode supports the following arguments:
 
 | Argument    | Required | Description |
 |-------------|----------|-------------|
 | color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
 | title       | Yes  | Title to display in the tooltip. |
 | href        | Yes  | Address for the button or hyperlink. |
-| type        | Yes  | Type of the element associated with the tooltip, either "link" or "button". |
-| placement   | No   | How to position the tooltip: "auto" (default), "top", "bottom", "left", or "right". 
+| placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". 
 {.table}
 
 ```html
