@@ -66,6 +66,8 @@
   translation: "Zoeken op {{ .Site.Title }}"
 - id: gcseClose
   translation: "Sluiten"
+- id: home
+  translation: "Home"
 
 # Staticman
 - id: noComment

@@ -30,9 +30,22 @@ A simple danger alert—check it out!
 ```
 
 The result looks like this:
+
 {{< alert color="danger" >}}
 A simple danger alert—check it out!
 {{< /alert >}}
+
+## Breadcrumb
+
+Use the `breadcrumb` shortcode to display the current page’s location within the site's navigational hierarchy. The shortcode requires no arguments, see the following example.
+
+```html
+{{</* breadcrumb */>}}
+```
+
+The result looks like this:
+
+{{< breadcrumb >}}
 
 ## Button
 

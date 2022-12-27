@@ -66,6 +66,8 @@
   translation: "Search {{ .Site.Title }}"
 - id: gcseClose
   translation: "Close"
+- id: home
+  translation: "Home"
 
 # Staticman
 - id: noComment
