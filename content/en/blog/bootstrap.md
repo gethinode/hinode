@@ -109,11 +109,13 @@ Inbox
 
 ## Button Group
 
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-primary">Left</button>
-  <button type="button" class="btn btn-primary">Middle</button>
-  <button type="button" class="btn btn-primary">Right</button>
-</div>
+The button group is available as [custom shortcode]({{< ref "custom-shortcodes#button-group" >}} "custom shortcode"). The following example displays a group of three buttons.
+
+{{< button-group aria-label="Basic example" >}}
+  {{< button color="primary" href="#" >}}Left{{< /button >}}
+  {{< button color="primary" href="#" >}}Middle{{< /button >}}
+  {{< button color="primary" href="#" >}}Right{{< /button >}}
+{{< /button-group >}}
 
 ## Card
 

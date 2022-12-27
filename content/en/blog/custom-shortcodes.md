@@ -65,6 +65,34 @@ The result looks like this:
 Inbox
 {{< /button >}}
 
+
+## Button Group
+
+Use the `button-group` shortcode to display a group of buttons. Add inner `<button>` elements for each [button](#button). The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| aria-label  | No   | Optional assistive label for the button group. |
+{.table}
+
+As an example, the following shortcode displays a group of three buttons.
+
+```html
+{{</* button-group aria-label="Basic example" */>}}
+  {{</* button color="primary" href="#" */>}}Left{{</* /button */>}}
+  {{</* button color="primary" href="#" */>}}Middle{{</* /button */>}}
+  {{</* button color="primary" href="#" */>}}Right{{</* /button */>}}
+{{</* /button-group */>}}
+```
+The result looks like this:
+
+{{< button-group aria-label="Basic example" >}}
+  {{< button color="primary" href="#" >}}Left{{< /button >}}
+  {{< button color="primary" href="#" >}}Middle{{< /button >}}
+  {{< button color="primary" href="#" >}}Right{{< /button >}}
+{{< /button-group >}}
+
+
 ## Carousel
 
 Use the `carousel` shortcode to display a carousel of several images, with behavior similar as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
@@ -94,6 +122,7 @@ As an example, the following shortcode displays a centered carousel with three s
 ```
 
 The result looks like this:
+
 {{< carousel ratio="16x9" class="col-sm-12 col-lg-8 mx-auto" >}}
   {{< img src="img/coffee.jpg" caption="slide 1" >}}
   {{< img src="img/phone.jpg" caption="slide 2" >}}
