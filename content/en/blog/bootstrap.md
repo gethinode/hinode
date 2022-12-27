@@ -54,30 +54,11 @@ Bootstrap provides several UI components out of the box. The Hinode theme uses s
 
 ## Alerts
 
-<div class="alert alert-primary" role="alert">
-  A simple primary alert—check it out!
-</div>
-<div class="alert alert-secondary" role="alert">
-  A simple secondary alert—check it out!
-</div>
-<div class="alert alert-success" role="alert">
-  A simple success alert—check it out!
-</div>
-<div class="alert alert-danger" role="alert">
-  A simple danger alert—check it out!
-</div>
-<div class="alert alert-warning" role="alert">
-  A simple warning alert—check it out!
-</div>
-<div class="alert alert-info" role="alert">
-  A simple info alert—check it out!
-</div>
-<div class="alert alert-light" role="alert">
-  A simple light alert—check it out!
-</div>
-<div class="alert alert-dark" role="alert">
-  A simple dark alert—check it out!
-</div>
+The alert is available as [custom shortcode]({{< ref "custom-shortcodes#alert" >}} "custom shortcode"). The following shortcode displays a simple alert.
+
+{{< alert color="danger" >}}
+A simple danger alert—check it out!
+{{< /alert >}}
 
 ## Badge
 
@@ -92,19 +73,7 @@ Bootstrap provides several UI components out of the box. The Hinode theme uses s
 
 ### Buttons
 
-<button type="button" class="btn btn-primary">
-  Notifications <span class="badge text-bg-secondary">4</span>
-</button>
-
-### Positioned
-
-<button type="button" class="btn btn-primary position-relative">
-  Inbox
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    99+
-    <span class="visually-hidden">unread messages</span>
-  </span>
-</button>
+The badge for a button is available via a [custom shortcode]({{< ref "custom-shortcodes#button" >}} "custom shortcode").
 
 ## Breadcrumb
 
@@ -131,15 +100,12 @@ Bootstrap provides several UI components out of the box. The Hinode theme uses s
 
 ## Buttons
 
-<button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-secondary">Secondary</button>
-<button type="button" class="btn btn-success">Success</button>
-<button type="button" class="btn btn-danger">Danger</button>
-<button type="button" class="btn btn-warning">Warning</button>
-<button type="button" class="btn btn-info">Info</button>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-dark">Dark</button>
-<button type="button" class="btn btn-link">Link</button>
+The button is available as [custom shortcode]({{< ref "custom-shortcodes#button" >}} "custom shortcode"). The following example displays a tooltip for a dark button with a badge.
+
+{{< button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" >}}
+Inbox
+{{< /button >}}
+
 
 ## Button Group
 
@@ -161,6 +127,8 @@ Bootstrap provides several UI components out of the box. The Hinode theme uses s
 </div>
 
 ## Carousel
+
+The carousel is available as [custom shortcode]({{< ref "custom-shortcodes#carousel" >}} "custom shortcode"). The following example displays a centered carousel with three slides, 16x9 aspect ratio, and a relative width of 67% on large screens.
 
 {{< carousel ratio="16x9" class="col-sm-12 col-lg-8 mx-auto" >}}
   {{< img src="img/coffee.jpg" caption="slide 1" >}}
@@ -542,30 +510,11 @@ Bootstrap provides several UI components out of the box. The Hinode theme uses s
 
 ## Spinners
 
-<div class="spinner-border text-primary" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-secondary" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-success" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-danger" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-warning" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-info" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-light" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="spinner-border text-dark" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
+The spinner is available as [custom shortcode]({{< ref "custom-shortcodes#spinner" >}} "custom shortcode"). The following example displays a centered spinner:
+
+{{< spinner color="info" class="text-center" >}}
+Loading...
+{{< /spinner >}}
 
 ## Toasts
 
@@ -586,5 +535,8 @@ Bootstrap provides several UI components out of the box. The Hinode theme uses s
 
 ## Tooltips
 
-<p class="muted">Placeholder text to demonstrate some <a href="#" data-bs-toggle="tooltip" data-bs-title="Default tooltip">inline links</a> with tooltips. This is now just filler, no killer. Content placed here just to mimic the presence of <a href="#" data-bs-toggle="tooltip" data-bs-title="Another tooltip">real text</a>. And all that just to give you an idea of how tooltips would look when used in real-world situations. So hopefully you've now seen how <a href="#" data-bs-toggle="tooltip" data-bs-title="Another one here too">these tooltips on links</a> can work in practice, once you use them on <a href="#" data-bs-toggle="tooltip" data-bs-title="The last tip!">your own</a> site or project.
-</p>
+The tooltip is available as [custom shortcode]({{< ref "custom-shortcodes#tooltip" >}} "custom shortcode"). The following example displays a tooltip for a colored hyperlink:
+
+{{< tooltip color="warning" title="Tooltip" href="#" >}}
+Tooltip demonstration
+{{< /tooltip >}}
