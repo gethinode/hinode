@@ -11,7 +11,8 @@
 
 {{ $error := false }}
 
-{{ $page := .Site.GetPage (.Get "path") }}
+{{ $path := .Get "path" }}
+{{ $page := .Site.GetPage $path }}
 {{ if not $page }}
     {{ errorf "Invalid or missing value for param 'page': %s" .Position -}}
     {{ $error = true }}
@@ -54,19 +55,5 @@
 {{ end -}}
 
 {{ if not $error }}
-    {{ if eq $layout "minimal" }}{{ $class = printf "%s project-card" $class }}{{ end }}
-    {{ $params := dict "title" $page.Params.title "href" $page.Permalink "description" $page.Params.description "class" $class "color" $color "padding" $padding }}
-    {{ if eq $layout "rich" }}
-        {{ $header := partial "utilities/date.html" (dict "date" $page.Date "format" "long") -}}
-        {{ $header = printf "%s &bull; %d %s %s" $header $page.ReadingTime (i18n "minutesShort") (i18n "read") }}
-        {{ if isset $page.Params "tags" -}}
-            {{ range first 1 ($page.GetTerms "tags") -}}
-            {{ $link := "text-decoration-none text-primary" }}
-            {{ if $color }}{{ $link = "card-link" }}{{ end }}
-            {{ $header = printf "%s &bull; <a href=\"%s\" class=\"%s\" aria-label=\"Tag: %s\">%s</a>" $header ((path.Join .Page.RelPermalink) | relURL) $link .LinkTitle .LinkTitle }}
-            {{ end -}}
-        {{ end -}}
-        {{ $params = merge $params (dict "header" $header "thumbnail" $page.Params.thumbnail "orientation" $orientation) }}
-    {{ end }}
-    {{- partial "assets/card.html" $params -}}
+    {{- partial "assets/card.html" (dict "path" $path "class" $class "color" $color "padding" $padding "orientation" $orientation "layout" $layout) -}}
 {{ end }}

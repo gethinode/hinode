@@ -1,5 +1,9 @@
 <!-- 
-    Displays a Bootstrap card. The shortcode supports the following arguments:
+    Displays a Bootstrap card. Either specify a valid path, or set the arguments title, href, header, description, and
+    thumbnail individually. The latter arguments override any page attributes.
+    
+    The shortcode supports the following arguments:
+    "path"          Optional path of the page, override with other parameters.
     "title"         Required title of the card.
     "href"          Required address for the button or hyperlink.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
@@ -12,17 +16,19 @@
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
 -->
 
-{{ $title := .title }}
-{{ if not $title }}
-    {{ errorf "Missing value for param 'title'" -}}
+{{ $page := "" }}
+{{ if .path }}
+    {{ $page = site.GetPage .path }}
+    {{ if not $page }}
+        {{ errorf "Cannot find page: %s" .path -}}
+    {{ end }}
 {{ end }}
 
-{{ $href := .href }}
-{{ if not $href }}
-    {{ errorf "Missing value for param 'href'" -}}
-{{ end }}
-
-{{ $class := .class }}
+{{ $title := "" }}
+{{ $href := "" }}
+{{ $header := "" }}
+{{ $description := "" }}
+{{ $thumbnail := "" }}
 
 {{ $color := "" -}}
 {{ with .color }}{{ $color = . }}{{ end -}}
@@ -33,16 +39,52 @@
     {{ end -}}
 {{ end -}}
 
+{{ $layout := "rich" -}}
+{{ with .layout }}{{ $layout = . }}{{ end -}}
+{{ $supportedLayouts := slice "rich" "minimal" -}}
+{{ if not (in $supportedLayouts $layout) -}}
+    {{ errorf "Invalid value for param 'layout': %s" $layout -}}
+{{ end -}}
+
+{{ with $page }}
+    {{ if not $title }}{{ $title = $page.Params.title }}{{ end }}
+    {{ if not $href }}{{ $href = $page.Permalink  }}{{ end }}
+    {{ if not $description }}{{ $description = $page.Params.description }}{{ end }}
+    {{ if not $thumbnail }}{{ $thumbnail = $page.Params.thumbnail }}{{ end }}
+
+    {{ if not $header }}
+        {{ if eq $layout "rich" }}
+            {{ $header = partial "utilities/date.html" (dict "date" .Date "format" "long") -}}
+            {{ $header = printf "%s &bull; %d %s %s" $header .ReadingTime (i18n "minutesShort") (i18n "read") }}
+            {{ if isset .Params "tags" -}}
+                {{ range first 1 (.GetTerms "tags") -}}
+                    {{ $link := "text-decoration-none text-primary" }}
+                    {{ if $color }}{{ $link = "card-link" }}{{ end }}
+                    {{ $header = printf "%s &bull; <a href=\"%s\" class=\"%s\" aria-label=\"Tag: %s\">%s</a>" $header ((path.Join .Page.RelPermalink) | relURL) $link .LinkTitle .LinkTitle }}
+                {{ end -}}
+            {{ end -}}
+        {{ else }}
+            {{ $thumbnail = "" }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ if not $title }}
+    {{ errorf "Missing value for param 'title'" -}}
+{{ end }}
+
+{{ if not $href }}
+    {{ errorf "Missing value for param 'href'" -}}
+{{ end }}
+
+{{ $class := .class }}
+
 {{ $padding := "auto" }}
 {{ with .padding }}{{ $padding = . }}{{ end -}}
 {{ $supportedPaddings := slice "0" "1" "2" "3" "4" "5" "auto" -}}
 {{ if not (in $supportedPaddings $padding) -}}
     {{ errorf "Invalid value for param 'padding': %s" $padding -}}
 {{ end -}}
-
-{{ $header := .header }}
-{{ $description := .description }}
-{{ $thumbnail := .thumbnail }}
 
 {{ $orientation := "stacked" -}}
 {{ with .orientation }}{{ $orientation = . }}{{ end -}}
@@ -53,11 +95,16 @@
 {{ if eq $orientation "none" }}{{ $thumbnail = "" }}{{ end }}
 
 {{ define "partials/card-body.html" }}
+    {{ $header := .header }}
+    {{ $title := .title }}
+    {{ $href := .href }}
     {{ $color := .color }}
-    {{ with .header }}<p class="card-text"><small class="{{ if $color }}text-bg-{{ $color }}{{ else }}text-muted{{ end }} text-uppercase">{{ . | safeHTML }}</small></p>{{ end }}
-    <a href="{{ .href }}" class="text-decoration-none card-link">
-        <p class="card-title fs-5 fw-bold">{{ .title }}</p>
-        {{ with .description }}<p class="card-text mb-4 {{ if $color }}text-bg-{{ $color }}{{ end }}">{{ . }}</p>{{ end }}
+    {{ $description := .description }}
+    
+    {{ with $header }}<p class="card-text"><small class="{{ if $color }}text-bg-{{ $color }}{{ else }}text-muted{{ end }} text-uppercase">{{ . | safeHTML }}</small></p>{{ end }}
+    <a href="{{ $href }}" class="text-decoration-none card-link">
+        <p class="card-title fs-5 fw-bold">{{ $title }}</p>
+        {{ with $description }}<p class="card-text mb-4 {{ if $color }}text-bg-{{ $color }}{{ end }}">{{ . }}</p>{{ end }}
     </a>
 {{ end }}
 
@@ -73,22 +120,20 @@
                 </div>
             <div class="col-8">
                 <div class="card-body h-100 p-{{ $padding }}">
-                    {{ partial "card-body.html" . }}
+                    {{ partial "card-body.html" (dict "header" $header "title" $title "href" $href "color" $color "description" $description) }}
                 </div>
             </div>
         </div>
     </div>
 {{ else }}
-    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }}{{ $class }}">
+    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{ if $thumbnail -}}
             <a href="{{ $href }}">
                 {{- partial "image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
             </a>
         {{ end }}
         <div class="card-body d-flex flex-column p-{{ $padding }}">
-            {{ partial "card-body.html" . }}
+            {{ partial "card-body.html" (dict "header" $header "title" $title "href" $href "color" $color "description" $description) }}
         </div>
     </div>
 {{ end }}
-
-
