@@ -11,7 +11,7 @@
                         {{ $max := sub (len $items) 1 -}}
                         {{ range $index, $element := $items -}}
                             <div class="col gx-4">
-                                {{- partial "assets/blog-card.html" $element -}}
+                                {{- partial "assets/card.html" (dict "path" $element.File.Path "padding" "0" "class" "border-0") -}}
                             </div>
                             {{ if (lt $index $max) -}}
                             <div class="col d-block d-sm-none">
