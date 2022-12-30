@@ -2,7 +2,7 @@
     Displays a tooltip for a link. The shortcode supports the following arguments:
     "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
                     "danger", "warning", "info", "light", or "dark".
-    "title"         Required title to display in the tooltip.
+    "title"         Required text to display in the tooltip.
     "href"          Required address for the button or hyperlink.
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
 -->
@@ -10,8 +10,8 @@
 {{ $error := false }}
 {{ $type := "link" -}}
 
-{{ $text := trim .Inner " \n" -}}
-{{ if not $text -}}
+{{ $title := trim .Inner " \n" -}}
+{{ if not $title -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
     {{ $error = true }}
 {{ end -}}
@@ -41,5 +41,5 @@
 {{ end -}}
 
 {{ if not $error }}
-    {{- partial "button.html" (dict "type" $type "text" $text "color" $color "tooltip" $tooltip "href" $href "placement" $placement) -}} 
+    {{- partial "button.html" (dict "type" $type "title" $title "color" $color "tooltip" $tooltip "href" $href "placement" $placement) -}} 
 {{ end }}

@@ -1,6 +1,6 @@
 <!-- 
     Displays a button. The shortcode supports the following arguments:
-    "text"          Required text of the button.
+    "title"         Required title of the button.
     "href"          Required address for the button or hyperlink.
     "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
@@ -8,15 +8,15 @@
                     "danger", "warning", "info", "light", or "dark".
     "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
     "badge"         Optional positioned badge to display on top of the button.
-    "aria-label"    Optional label for the badge.
-    "tooltip"       Optional title to display in a tooltip. Ignored for active/inactive buttons.
+    "aria-label"    Optional assistive label for the badge.
+    "tooltip"       Optional text to display in a tooltip. Ignored for active/inactive buttons.
     "type"          Optional type of the element, either "link" or "button" (default).
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right".
 -->
 
-{{ $text := trim .text " \n" -}}
-{{ if not $text -}}
-    {{ errorf "Missing element text" -}}
+{{ $title := trim .title " \n" -}}
+{{ if not $title -}}
+    {{ errorf "Missing element title" -}}
 {{ end -}}
 
 {{ $state := "enabled" -}}
@@ -81,7 +81,7 @@
     {{ if eq $state "active" }}data-bs-toggle="button" aria-pressed="true"{{ end }}
     {{ if eq $state "inactive" }}data-bs-toggle="button" aria-pressed="false"{{ end }}
     >
-    {{ $text -}}
+    {{ $title -}}
     {{ with $badge }}
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ . }}

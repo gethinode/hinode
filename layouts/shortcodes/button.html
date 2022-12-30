@@ -15,8 +15,8 @@
 {{ $error := false }}
 {{ $type := "button" -}}
 
-{{ $text := trim .Inner " \n" -}}
-{{ if not $text -}}
+{{ $title := trim .Inner " \n" -}}
+{{ if not $title -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
     {{ $error = true }}
 {{ end -}}
@@ -75,5 +75,5 @@
 {{ end -}}
 
 {{ if not $error }}
-    {{- partial "button.html" (dict "type" $type "text" $text "size" $size "color" $color "outline" $outline "badge" $badge "label" $label "tooltip" $tooltip "href" $href "state" $state "placement" $placement) -}} 
+    {{- partial "button.html" (dict "type" $type "title" $title "size" $size "color" $color "outline" $outline "badge" $badge "label" $label "tooltip" $tooltip "href" $href "state" $state "placement" $placement) -}} 
 {{ end }}
