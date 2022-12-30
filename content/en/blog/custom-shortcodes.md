@@ -2,7 +2,7 @@
 author: "Mark Dumay"
 title: "Custom Shortcodes"
 date: 2022-12-05
-description: "Available shortcodes using Bootstrap components and styling"
+description: "Available shortcodes using Bootstrap components and styling."
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
 photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
@@ -49,7 +49,7 @@ The result looks like this:
 
 ## Button
 
-Use the `button` shortcode to display a button with a hyperlink. The inner content is used as button text. The button supports an optional badge and tooltip. The shortcode supports the following arguments:
+Use the `button` shortcode to display a button with a hyperlink. The inner content is used as button title. The button supports an optional badge and tooltip. The shortcode supports the following arguments:
 
 | Argument    | Required | Description |
 |-------------|----------|-------------|
@@ -105,6 +105,29 @@ The result looks like this:
   {{< button color="primary" href="#" >}}Right{{< /button >}}
 {{< /button-group >}}
 
+## Card
+
+Use the `card` shortcode to display a card that links to a content page. When using a rich layout, the card includes a thumbnail and a header.
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| path        | Yes | Required path of the page. |
+| class       | No  | Optional class attribute of the card element, e.g. “w-50”. |
+| color"      | No  | Optional theme color of the card, either "primary", "secondary", "success", "danger", "warning", "info", "light", or "dark". By default, no color is specified. |
+| padding     | No  | Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default). |
+| orientation | No  | Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none". |
+| layout      | No  | Optional layout of the card, either "rich" (default) or "minimal". |
+{.table}
+
+As an example, the following shortcode displays a colored, borderless horizontal card that links to the [Rich Content]({{< ref "rich-content" >}} "Rich Content") page.
+
+```html
+{{</* card path="rich-content" class="w-100 border-0" layout="rich" orientation="horizontal" color="info" */>}}
+```
+
+The result looks like this:
+
+{{< card path="rich-content" class="w-100 border-0" layout="rich" orientation="horizontal" color="info" >}}
 
 ## Carousel
 
