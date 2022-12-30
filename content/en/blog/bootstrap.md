@@ -9,7 +9,7 @@ photoCredits: <a href="https://unsplash.com/@frederickjmedina">Frederick Medina<
 photoSource: <a href="https://unsplash.com/photos/PdfRE-xB--s">Unsplash</a>
 ---
 
-Bootstrap provides several UI components out of the box. The Hinode theme uses several of these components for rendering, such as the navigation menu and scrollspy. A few components are made available as Hugo shortcode, see [Custom Shortcodes]({{< ref "custom-shortcodes" >}} "Custom Shortcodes"). You can embed the Bootstrap components themselves too. The below paragraphs demonstrate each of them.
+Bootstrap provides several out-of-the-box UI components. The Hinode theme uses several of these components for rendering, such as the navigation menu and scrollspy. A few components are made available as Hugo shortcode, see [Custom Shortcodes]({{< ref "custom-shortcodes" >}} "Custom Shortcodes"). You can embed the Bootstrap components themselves too. The paragraphs below demonstrate the available UI components.
 
 ## Accordion
 
