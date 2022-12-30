@@ -6,7 +6,7 @@
                 {{ $max := sub (len .Pages) 1 -}}
                 {{ range $index, $element := (.Paginate .RegularPagesRecursive).Pages -}}
                     <div class="col">
-                        {{- partial "assets/blog-card.html" $element -}}
+                        {{- partial "assets/card.html" (dict "path" $element.File.Path "padding" "0" "class" "border-0") -}}
                     </div>
                     {{ if (lt $index $max) -}}
                         <div class="col d-block d-sm-none">
