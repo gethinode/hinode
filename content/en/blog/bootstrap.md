@@ -102,14 +102,9 @@ The button group is available as [custom shortcode]({{< ref "custom-shortcodes#b
 
 ## Card
 
-<div class="card w-50">
-  <img src="/img/bd_placeholder_img.svg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+The card is available as [custom shortcode]({{< ref "custom-shortcodes#card" >}} "custom shortcode"). The following example displays a card that links to the [Rich Content]({{< ref "rich-content" >}} "Rich Content") page.
+
+{{< card path="rich-content" class="w-50" layout="rich" >}}
 
 ## Carousel
 
