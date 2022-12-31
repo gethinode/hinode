@@ -2,7 +2,7 @@
 author: "Mark Dumay"
 title: "Bootstrap Components"
 date: 2022-12-26
-description: "Overview of available Bootstrap components"
+description: "Overview of available Bootstrap components."
 tags: ["bootstrap"]
 thumbnail: img/boots.jpg
 photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>

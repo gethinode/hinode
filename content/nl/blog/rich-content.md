@@ -3,7 +3,7 @@ author: "Hugo Authors"
 slug: "multimedia"
 title: "Multimedia"
 date: 2021-07-13
-description: "Een overzicht van enkele Hugo Shortcodes"
+description: "Een overzicht van enkele Hugo Shortcodes."
 tags: ["shortcode", "privacy"]
 thumbnail: img/flowers.jpg # https://picsum.photos/id/106/2592/1728
 photoCredits: <a href="https://unsplash.com/@flutterhappy">Arvee Marie</a>

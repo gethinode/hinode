@@ -2,7 +2,7 @@
 author: "Mark Dumay"
 title: "Extra shortcodes"
 date: 2022-12-05
-description: "Beschikbare shortcodes die gebruik maken van Bootstrap componenten en vormgeving"
+description: "Beschikbare shortcodes die gebruik maken van Bootstrap componenten en vormgeving."
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
 photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>

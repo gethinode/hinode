@@ -3,7 +3,7 @@ author: "Hugo Authors"
 slug: "emoji-ondersteuning"
 title: "Emoji ondersteuning"
 date: 2021-07-15
-description: "Gids voor het gebruik van emoji met Hugo"
+description: "Gids voor het gebruik van emoji met Hugo."
 tags: ["emoji"]
 # thumbnail: img/dunes.jpg
 thumbnail: https://picsum.photos/id/184/4288/2848.jpg
