@@ -34,7 +34,7 @@
                         {{ $items := first 3 ($taxonomy.Pages) -}}
                         {{ range $index, $element := $items -}}
                             <div class="col p-0">
-                                {{- partial "assets/project-card.html" $element -}}
+                                {{- partial "assets/card.html" (dict "path" $element.File.Path "header" "none" "footer" "tags" "orientation" "none" "class" "h-100 project-card") -}}
                             </div>
                         {{ end -}}
                     </div>
