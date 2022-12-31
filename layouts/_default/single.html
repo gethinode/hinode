@@ -41,7 +41,7 @@
                     <div class="col">
                         {{ with .NextInSection -}}
                             {{ $next := . -}}
-                            {{ with  .OutputFormats.Get "html" -}}
+                            {{ with .OutputFormats.Get "html" -}}
                                 <a class="next" href="{{ $next.Permalink }}"><i class="fas fa-arrow-left"></i> {{ $next.Title }}</a>
                             {{- end -}}
                         {{ end -}}
@@ -49,7 +49,7 @@
                     <div class="col text-end">
                         {{ with .PrevInSection -}}
                             {{ $prev := . -}}
-                            {{ with  .OutputFormats.Get "html" -}}
+                            {{ with .OutputFormats.Get "html" -}}
                                 <a class="previous" href="{{ $prev.Permalink }}">{{ $prev.Title }} <i class="fas fa-arrow-right"></i></a>
                             {{- end -}}
                         {{ end -}}
