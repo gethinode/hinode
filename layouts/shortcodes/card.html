@@ -5,8 +5,11 @@
     "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
                     "warning", "info", "light", or "dark". By default, no color is specified.
     "padding":      Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
+    "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
+                    (default), "publication", "tags", and "none".
+    "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
+                    "publication", "tags", and "none" (default).
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
-    "layout"        Optional layout of the card, either "rich" (default) or "minimal".
 -->
 
 {{ $error := false }}
@@ -28,6 +31,19 @@
         {{ errorf "Invalid value for param 'color': %s" .Position -}}
         {{ $error = true }}
     {{ end -}}
+{{ end -}}
+
+{{ $header := "full" }}
+{{ with .Get "header" }}{{ $header = . }}{{ end -}}
+{{ $supportedKeywords := slice "full" "publication" "tags" "none" -}}
+{{ if not (in $supportedKeywords $header) -}}
+    {{ errorf "Invalid value for param 'header': %s" .Position -}}
+{{ end -}}
+
+{{ $footer := "none" }}
+{{ with .Get "footer" }}{{ $footer = . }}{{ end -}}
+{{ if not (in $supportedKeywords $footer) -}}
+    {{ errorf "Invalid value for param 'footer': %s" .Position -}}
 {{ end -}}
 
 {{ $padding := "auto" }}
@@ -55,5 +71,5 @@
 {{ end -}}
 
 {{ if not $error }}
-    {{- partial "assets/card.html" (dict "path" $path "class" $class "color" $color "padding" $padding "orientation" $orientation "layout" $layout) -}}
+    {{- partial "assets/card.html" (dict "path" $path "class" $class "color" $color "padding" $padding "header" $header "footer" $footer "orientation" $orientation) -}}
 {{ end }}
