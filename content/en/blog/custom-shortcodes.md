@@ -2,6 +2,7 @@
 author: "Mark Dumay"
 title: "Custom Shortcodes"
 date: 2022-12-05
+modified: 2022-12-31
 description: "Available shortcodes using Bootstrap components and styling."
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/sketch.jpg

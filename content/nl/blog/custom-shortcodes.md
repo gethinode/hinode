@@ -2,13 +2,13 @@
 author: "Mark Dumay"
 title: "Extra shortcodes"
 date: 2022-12-05
+modified: 2022-12-31
 description: "Beschikbare shortcodes die gebruik maken van Bootstrap componenten en vormgeving."
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
 photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
 photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
 ---
-
 
 Bootstrap is een open-source raamwerk voor het ontwikkelen van websites gemaakt door Twitter. Het volgt een aanpak die geschikt is voor meerdere schermformaten, inclusief mobiele apparaten. Bootstrap bevat een uitgebreide collectie van direct bruikbare componenten, zoals navigatiemenu's, paginering, knoppen, en nog veel meer. Om het gebruik hiervan in markdown pagina's te vergemakkelijken, stelt het Hinode thema enkele van deze componenten beschikbaar als Hugo shortcode. De onderstaande paragrafen bieden een overzicht en uitleg van de beschikbare shortcodes.
 
