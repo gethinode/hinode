@@ -7,6 +7,8 @@
   translation: "Andere Sprachen: "
 - id: translationsSeparator
   translation: ", "
+- id: more
+  translation: "Weitere {{ . }}"
 - id: readMore
   translation: "Weiterlesen"
 - id: morePosts

@@ -41,7 +41,8 @@
                 </div>
 
                 {{ if gt (len $taxonomy.Pages) 3 -}}
-                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">More {{ $taxonomy.Title }}</a>
+                    <br>
+                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">{{ $taxonomy.Title | i18n "more" }}</a>
                 {{ end -}} 
             </div>
         {{ end -}}
