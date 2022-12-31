@@ -1,10 +1,12 @@
+// stylelint-disable function-name-case
+
 @each $color, $value in $theme-colors {
     $contrast-color: color-contrast($value);
     $color-rgb: to-rgb($value);
-    
+
     .link-bg-#{$color} {
         color: $contrast-color !important; // stylelint-disable-line declaration-no-important
-        background-color: RGBA($color-rgb, var(--#{$prefix}bg-opacity, 1)) if($enable-important-utilities, !important, null);
+        background-color: RGBA($color-rgb, var(--#{$prefix}bg-opacity, 1)) if($enable-important-utilities, !important, null); // stylelint-disable-line annotation-no-unknown
 
         @if $link-shade-percentage != 0 {
             &:hover,

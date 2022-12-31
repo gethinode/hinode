@@ -1,3 +1,5 @@
+// stylelint-disable selector-pseudo-class-no-unknown
+
 :hinode-theme {
     --accordion-icon-active-color: #{$accordion-icon-active-color};
     --accordion-icon-color: #{$accordion-icon-color};
@@ -12,5 +14,5 @@
     --form-switch-color: #{$form-switch-color};
     --form-switch-focus-color: #{$form-switch-focus-color};
     --navbar-dark-color: #{$navbar-dark-color};
-    --navbar-light-icon-color: rgba($body-color, .75); // TODO: See https://github.com/twbs/bootstrap/pull/37720
+    --navbar-light-icon-color: rgba($body-color, 0.75); // TODO: See https://github.com/twbs/bootstrap/pull/37720
 }

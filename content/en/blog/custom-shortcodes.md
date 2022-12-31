@@ -78,7 +78,6 @@ The result looks like this:
 Inbox
 {{< /button >}}
 
-
 ## Button Group
 
 Use the `button-group` shortcode to display a group of buttons. Add inner `<button>` elements for each [button](#button). The shortcode supports the following arguments:
@@ -97,6 +96,7 @@ As an example, the following shortcode displays a group of three buttons.
   {{</* button color="primary" href="#" */>}}Right{{</* /button */>}}
 {{</* /button-group */>}}
 ```
+
 The result looks like this:
 
 {{< button-group aria-label="Basic example" >}}
@@ -356,7 +356,7 @@ Use the `tooltip` shortcode to display a tooltip for a hyperlink. Refer to the [
 | color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
 | title       | Yes  | Title to display in the tooltip. |
 | href        | Yes  | Address for the button or hyperlink. |
-| placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". 
+| placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". |
 {.table}
 
 As an example, the following shortcode displays a tooltip for a colored hyperlink.

@@ -89,7 +89,6 @@ The button is available as [custom shortcode]({{< ref "custom-shortcodes#button"
 Inbox
 {{< /button >}}
 
-
 ## Button Group
 
 The button group is available as [custom shortcode]({{< ref "custom-shortcodes#button-group" >}} "custom shortcode"). The following example displays a group of three buttons.
@@ -456,7 +455,6 @@ The carousel is available as [custom shortcode]({{< ref "custom-shortcodes#carou
     </div>
   </div>
 </div>
-
 
 ### Simple anchors
 
