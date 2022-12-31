@@ -4,9 +4,9 @@ title: "Custom Shortcodes"
 date: 2022-12-05
 description: "Available shortcodes using Bootstrap components and styling."
 tags: ["bootstrap", "shortcode"]
-thumbnail: img/boots.jpg
-photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
-photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
+thumbnail: img/sketch.jpg
+photoCredits: <a href="https://www.pexels.com/@picjumbo-com-55570/">picjumbo.com</a>
+photoSource: <a href="https://www.pexels.com/photo/white-printer-paper-196645/">Pexels</a>
 ---
 
 Bootstrap is an open-source web development framework originally created by Twitter. It uses a responsive, mobile-first approach that scales seamlessly across different screen sizes. Bootstrap includes an extensive collection of ready-to-use components, such as navigation bars, pagination controls, buttons, and much more. The Hinode theme exposes several of those components as Hugo shortcodes to simplify their usage within markdown content. The below paragraphs illustrate the available shortcodes and how to use them.
@@ -131,7 +131,7 @@ The result looks like this:
 
 ## Carousel
 
-Use the `carousel` shortcode to display a carousel of several images, with behavior similar as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
+Use the `carousel` shortcode to display a carousel of several images, with similar behavior as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
 
 | Argument  | Required | Description |
 |-----------|----------|-------------|

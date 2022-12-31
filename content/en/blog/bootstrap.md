@@ -4,9 +4,9 @@ title: "Bootstrap Components"
 date: 2022-12-26
 description: "Overview of available Bootstrap components"
 tags: ["bootstrap"]
-thumbnail: img/notepad.jpg
-photoCredits: <a href="https://unsplash.com/@frederickjmedina">Frederick Medina</a>
-photoSource: <a href="https://unsplash.com/photos/PdfRE-xB--s">Unsplash</a>
+thumbnail: img/boots.jpg
+photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
+photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
 ---
 
 Bootstrap provides several out-of-the-box UI components. The Hinode theme uses several of these components for rendering, such as the navigation menu and scrollspy. A few components are made available as Hugo shortcode, see [Custom Shortcodes]({{< ref "custom-shortcodes" >}} "Custom Shortcodes"). You can embed the Bootstrap components themselves too. The paragraphs below demonstrate the available UI components.
