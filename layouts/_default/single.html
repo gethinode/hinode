@@ -13,14 +13,8 @@
                 <h1>{{ .Title }}</h1>
                 <small class="text-muted text-uppercase">
                     {{ $datestr | i18n "postedOnDate" -}}
-                    {{ if ne $datestr $lastmodstr -}}
-                        &nbsp{{ $lastmodstr | i18n "lastModified" }}
-                    {{ else -}}
-                        &nbsp;&bull;&nbsp;
-                    {{ end -}}
-                    {{ .ReadingTime }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
-                    &nbsp;&bull;
-                    {{ .WordCount }}&nbsp;{{ i18n "words" }}
+                    {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} &bull;
+                    {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
                 </small>
             </div>
             <div class="col col-md-2 d-none d-md-block"></div>
