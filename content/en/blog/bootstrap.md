@@ -304,8 +304,6 @@ The carousel is available as [custom shortcode]({{< ref "custom-shortcodes#carou
 
 ## Popovers
 
-<!-- TODO: fix popover -->
-
 <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
 
 ## Progress
