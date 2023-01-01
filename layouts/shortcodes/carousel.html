@@ -6,12 +6,10 @@
     "class":        Optional class attribute of the carousel element, e.g. “w-75”.
 -->
 
-{{ $ratio := "" -}}
-{{ $class := "" -}}
-{{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
-{{ with .Get "class" }}{{ $class = . }}{{ end -}}
+{{ $ratio := .Get "ratio" -}}
+{{ $class := .Get "class" -}}
 {{ $id := .Ordinal -}}
-{{ $images :=  .Inner -}}
+{{ $images := .Inner -}}
 {{ $items := len (findRE "carousel-item" $images) -}}
 
 <div id="carousel-{{ $id }}" class="carousel slide {{ $class }}" data-bs-ride="true">
