@@ -3,7 +3,7 @@ canonifyURLs = false
 
 title = "Hinode"
 author = "Mark Dumay"
-copyright = "Copyright © 2022 Mark Dumay."
+copyright = "Copyright © 2023 Mark Dumay."
 paginate = 9
 enableRobotsTXT = true
 languageCode = "en-us"
