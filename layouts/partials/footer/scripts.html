@@ -3,7 +3,6 @@
 {{ $files := slice -}}
 {{ range $index, $file := resources.Match "js/**.js" -}}
     {{ $files = $files | append $file -}}
-    {{ warnf "File: %s" $file -}}
 {{ end -}}
 {{ $bundle := $files | resources.Concat $filename -}}
 {{ $js := $bundle | resources.ExecuteAsTemplate $filename . -}}
