@@ -68,5 +68,10 @@ DefaultContentLanguageInSubdir = true
     source = "static"
     target = "static"
   [[module.mounts]]
-    source = "node_modules/flexsearch"
+    source = "node_modules/bootstrap/dist/js"
+    target = "assets/js/vendor/bootstrap"
+    includeFiles = "*.bundle.js"
+  [[module.mounts]]
+    source = "node_modules/flexsearch/dist"
     target = "assets/js/vendor/flexsearch"
+    includeFiles = "*.bundle.js"
