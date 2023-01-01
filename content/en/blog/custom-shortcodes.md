@@ -12,6 +12,54 @@ photoSource: <a href="https://www.pexels.com/photo/white-printer-paper-196645/">
 
 Bootstrap is an open-source web development framework originally created by Twitter. It uses a responsive, mobile-first approach that scales seamlessly across different screen sizes. Bootstrap includes an extensive collection of ready-to-use components, such as navigation bars, pagination controls, buttons, and much more. The Hinode theme exposes several of those components as Hugo shortcodes to simplify their usage within markdown content. The below paragraphs illustrate the available shortcodes and how to use them.
 
+## Accordion
+
+Use the `accordion` shortcode to show a group of vertically collapsing and expanding items. Add `accordion-item` inner elements for each accordion item. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| class       | No  | Optional class attribute of the accordion element, e.g. “w-50”. |
+{.table}
+
+Add an inner `accordion-item` element for each item of the accordion. The `accordion-item` element supports the following arguments:
+
+| Argument  | Required | Description |
+|-----------|----------|-------------|
+| header      | Yes | Required header of the accordion element. |
+| class       | No  | Optional class attribute of the inner accordion element, e.g. “show”. |
+{.table}
+
+As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
+
+```html
+{{</* accordion */>}}
+  {{</* accordion-item header="Accordion Item #1" class="show" */>}}
+    This is the first item's accordion body. It supports HTML content. The item is shown by adding the value
+    <code>show</code> to the <code>class</code> argument.
+  {{</* /accordion-item */>}}
+  {{</* accordion-item header="Accordion Item #2" */>}}
+    This is the second item's accordion body. It too supports HTML content.
+  {{</* /accordion-item */>}}
+  {{</* accordion-item header="Accordion Item #3" */>}}
+    This is the third item's accordion body.
+  {{</* /accordion-item */>}}
+{{</* /accordion */>}}
+```
+
+The result looks like this:
+
+{{< accordion >}}
+  {{< accordion-item header="Accordion Item #1" class="show" >}}
+    This is the first item's accordion body. It supports HTML content. The item is shown by adding the value <code>show</code> to the <code>class</code> argument.
+  {{< /accordion-item >}}
+  {{< accordion-item header="Accordion Item #2" >}}
+    This is the second item's accordion body. It too supports HTML content.
+  {{< /accordion-item >}}
+  {{< accordion-item header="Accordion Item #3" >}}
+    This is the third item's accordion body.
+  {{< /accordion-item >}}
+{{< /accordion >}}
+
 ## Alert
 
 Use the `alert` shortcode to display a contextual feedback message. The inner content is used as alert text. The shortcode supports the following arguments:

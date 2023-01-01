@@ -1,0 +1,12 @@
+<!-- 
+    Displays a group of vertically collapsing and expanding items. Add accordion-item inner elements for each accordion
+    item. The shortcode supports the following arguments:
+    "class":        Optional class attribute of the accordion element, e.g. “w-50”.
+-->
+
+{{- $id := .Ordinal -}}
+{{ $class := .Get "class" -}}
+
+<div id="accordion-{{ $id }}" class="accordion {{ $class }}">
+    {{ .Inner }}
+</div>

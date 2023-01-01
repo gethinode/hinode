@@ -1,0 +1,38 @@
+<!-- 
+    Defines an individual accordion item. The shortcode supports the following arguments:
+    "header"        Required header of the accordion element.
+    "class"         Optional class attribute of the inner accordion element, e.g. “show”.
+-->
+
+{{- $id := .Ordinal -}}
+{{ $header := .Get "header" -}}
+{{ if not $header -}}
+    {{ if .Parent }}
+        {{ errorf "Missing value for param 'header': %s" .Parent.Position -}}
+    {{ else }}
+    {{ errorf "Missing value for param 'header': %s" .Position -}}
+    {{ end }}
+{{ end -}}
+
+{{ $class := .Get "class" -}}
+{{ $body := trim .Inner " \n" -}}
+{{ if not $body -}}
+    {{ if .Parent }}
+        {{ errorf "Missing inner element text: %s" .Parent.Position -}}
+    {{ else }}
+        {{ errorf "Missing inner element text: %s" .Position -}}
+    {{ end }}
+{{ end -}}
+
+<div class="accordion-item">
+    {{- with $header -}}
+    <h2 class="accordion-header m-0" id="accordion-heading-{{ $id }}">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-item-{{ $id }}" aria-expanded="true" aria-controls="accordion-item-{{ $id }}">
+        {{ . }}
+        </button>
+    </h2>
+    {{- end -}}
+    <div id="accordion-item-{{ $id }}" class="accordion-collapse collapse {{ $class }}" aria-labelledby="accordion-heading-{{ $id }}" data-bs-parent="#accordion-{{ .Parent.Ordinal }}">
+        <div class="accordion-body">{{ $body | safeHTML }}</div>
+    </div>
+</div>
