@@ -1,10 +1,11 @@
 <!-- 
     Displays a button. The shortcode supports the following arguments:
     "title"         Required title of the button.
-    "href"          Required address for the button or hyperlink.
+    "href"          Optional address for the button or hyperlink.
+    "id"            Optional id of the button, to be used in the DOM.
     "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
-    "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
+    "color"         Optional theme color of the element, either "primary" (default), "secondary", "success",
                     "danger", "warning", "info", "light", or "dark".
     "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
     "badge"         Optional positioned badge to display on top of the button.
@@ -18,6 +19,8 @@
 {{ if not $title -}}
     {{ errorf "Missing element title" -}}
 {{ end -}}
+
+{{ $id := .id }}
 
 {{ $state := "enabled" -}}
 {{ with .state }}{{ $state = . }}{{ end -}}
@@ -54,11 +57,7 @@
     {{ with .tooltip }}{{ $tooltip = . }}{{ end -}}
 {{ end -}}
 
-{{ $href := "" -}}
-{{ with .href }}{{ $href = . }}{{ end -}}
-{{ if not $href -}}
-    {{ errorf "Missing value for param 'href'" -}}
-{{ end -}}
+{{ $href := .href -}}
 
 {{ $type := "button" -}}
 {{ with .type }}{{ $type = . }}{{ end -}}
@@ -74,7 +73,8 @@
     {{ errorf "Invalid value for param 'placement': %s" $placement -}}
 {{ end -}}
 
-<a {{ if ne $state "disabled" }}href="{{ $href }}"{{ end }}
+<a {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
+    {{ with $id }}id="{{ . }}"{{ end }}
     {{ if eq $type "button" }}class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }}" role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end }}
     {{ else }}class="link-{{ $color }} position-relative"{{ end }}
     {{ with $tooltip }}data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end }}

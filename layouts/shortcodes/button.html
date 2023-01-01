@@ -1,6 +1,7 @@
 <!-- 
     Displays a button. The shortcode supports the following arguments:
-    "href"          Required address for the button or hyperlink.
+    "href"          Optional address for the button or hyperlink.
+    "id"            Optional id of the button, to be used in the DOM.
     "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
@@ -55,16 +56,10 @@
 {{ end -}}
 
 {{ $badge := .Get "badge" -}}
-
 {{ $label := .Get "aria-label" -}}
-
 {{ $tooltip := .Get "tooltip" -}}
-
 {{ $href := .Get "href" -}}
-{{ if not $href -}}
-    {{ errorf "Missing value for param 'href': %s" .Position -}}
-    {{ $error = true }}
-{{ end -}}
+{{ $id := .Get "id" -}}
 
 {{ $placement := "top" -}}
 {{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
@@ -75,5 +70,5 @@
 {{ end -}}
 
 {{ if not $error }}
-    {{- partial "button.html" (dict "type" $type "title" $title "size" $size "color" $color "outline" $outline "badge" $badge "label" $label "tooltip" $tooltip "href" $href "state" $state "placement" $placement) -}} 
+    {{- partial "button.html" (dict "type" $type "title" $title "size" $size "color" $color "outline" $outline "badge" $badge "label" $label "tooltip" $tooltip "href" $href "id" $id "state" $state "placement" $placement) -}} 
 {{ end }}
