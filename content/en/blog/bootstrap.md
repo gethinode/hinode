@@ -103,7 +103,7 @@ The button group is available as [custom shortcode]({{< ref "custom-shortcodes#b
 
 The card is available as [custom shortcode]({{< ref "custom-shortcodes#card" >}} "custom shortcode"). The following example displays a card that links to the [Rich Content]({{< ref "rich-content" >}} "Rich Content") page.
 
-{{< card path="rich-content" class="w-50" layout="rich" >}}
+{{< card path="rich-content" class="col-sm-12 col-lg-8 mx-auto" layout="rich" >}}
 
 ## Carousel
 
