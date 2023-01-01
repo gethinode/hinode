@@ -1,5 +1,5 @@
 {{ $options := (dict "targetPath" "main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules")) -}}
-{{ if hugo.IsProduction }}{{ $options = merge $options (dict "outputStyle" "compressed") }}{{ end }}
+{{ if hugo.IsProduction }}{{ $options = merge $options (dict "outputStyle" "compressed") }}{{ end -}}
 {{ $css := resources.Get "scss/app.scss" | resources.ExecuteAsTemplate "style.app.scss" . | toCSS $options -}}
 {{ partial "head/icons.html" (dict "css" $css) -}}
 
