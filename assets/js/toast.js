@@ -3,8 +3,8 @@ const toastTrigger = document.getElementById('toastButton')
 const toastLiveExample = document.getElementById('toastMessage')
 if (toastTrigger) {
   toastTrigger.addEventListener('click', () => {
+    // eslint-disable-next-line no-undef
     const toast = new bootstrap.Toast(toastLiveExample)
-
     toast.show()
   })
 }

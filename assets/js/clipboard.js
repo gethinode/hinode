@@ -23,6 +23,7 @@ const addCopyButtons = (clipboard) => {
           button.innerHTML = svgCheck
           setTimeout(() => (button.innerHTML = svgCopy), 2000)
         },
+        // eslint-disable-next-line n/handle-callback-err
         (error) => (button.innerHTML = 'Error')
       )
     })
