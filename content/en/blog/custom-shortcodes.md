@@ -102,14 +102,15 @@ Use the `button` shortcode to display a button with a hyperlink. The inner conte
 
 | Argument    | Required | Description |
 |-------------|----------|-------------|
-| href        | Yes  | Address for the button hyperlink. |
+| href        | No   | Optional address for the button or hyperlink. Automatically assigned when using collapse. |
 | state       | No   | Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive". |
 | size        | No   | Optional size of the button, either "sm", "md" (default), or "lg". |
 | color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
 | badge       | No   | Optional positioned badge to display on top of the button. |
 | outline     | No   | Optional flag indicating the button should be outlined, either "false" (default) or "true". |
 | aria-label  | No   | Optional label for the badge. |
-| tooltip     | No   | Optional title to display in a tooltip. Ignored for active/inactive buttons. |
+| tooltip     | No   |  Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/inactive buttons. |
+| collapse    | No   | Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons. |
 | placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". |
 {.table}
 
@@ -214,6 +215,39 @@ The result looks like this:
   {{< img src="img/phone.jpg" caption="slide 2" >}}
   {{< img src="img/dunes.jpg" caption="slide 3" >}}
 {{< /carousel >}}
+
+## Collapse
+
+Use the `collapse` shortcode to reveil or hide a panel. The panel can contain both HTML code and plain text. Link a button to the panel by assigning it's ID to the `collapse` attribute. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| id          | Yes      | Required unique id of the collapse element, e.g. "collapse-1". |
+| class       | No       | Optional class attribute of the inner panel element, e.g. “p-3”. |
+{.table}
+
+As an example, the following shortcode displays a button that, when clicked, triggers a panel to appear or disappear.
+
+```html
+{{</* button collapse="collapse-1" */>}}
+Trigger panel
+{{</* /button */>}}
+
+{{</* collapse id="collapse-1" class="p-3 border rounded" */>}}
+Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but 
+revealed when the user activates the relevant trigger.
+{{</* /collapse */>}}
+```
+
+The result looks like this:
+
+{{< button collapse="collapse-1" >}}
+Trigger panel
+{{< /button >}}
+
+{{< collapse id="collapse-1" class="p-3 border rounded" >}}
+Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but revealed when the user activates the relevant trigger.
+{{< /collapse >}}
 
 ## Command Prompt
 

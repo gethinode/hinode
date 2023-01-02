@@ -113,19 +113,15 @@ The result looks like this.
 
 ## Collapse
 
-<p>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-bs-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-  </div>
-</div>
+The collapse panel is available as [custom shortcode]({{< ref "custom-shortcodes#collapse" >}} "custom shortcode"). The following example displays a button that reveils a hidden panel:
+
+{{< button collapse="collapse-1" >}}
+Trigger panel
+{{< /button >}}
+
+{{< collapse id="collapse-1" class="p-3 border rounded" >}}
+Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but revealed when the user activates the relevant trigger.
+{{< /collapse >}}
 
 ## Dropdowns
 
@@ -503,3 +499,7 @@ The tooltip is available as [custom shortcode]({{< ref "custom-shortcodes#toolti
 {{< tooltip color="warning" title="Tooltip" href="#" >}}
 Tooltip demonstration
 {{< /tooltip >}}
+
+<!-- MARKDOWN PUBLIC LINKS -->
+[bs_badge_heading]: https://getbootstrap.com/docs/5.2/components/badge/#headings
+[bs_close_button]: https://getbootstrap.com/docs/5.2/components/close-button/
