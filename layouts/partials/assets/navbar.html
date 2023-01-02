@@ -1,62 +1,112 @@
-<nav class="navbar navbar-expand-sm bg-white navbar-light m-3">
+<!-- 
+    Displays a navigation header with a toggler. The shortcode supports the following arguments:
+    "page"          Required object reference to the current page.
+    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
+    "style"         Optional style of the navbar, either "light" (default) or "dark".
+    "color"         Optional background color of the navbar, either "primary", "secondary", "success",
+                    "danger", "warning", "info", "light", or "dark". The default color is none.
+-->
+
+{{ $page := .page -}}
+{{ if not $page -}}
+    {{ errorf "Missing value for param 'page'" -}}
+{{ end -}}
+
+{{ $size := "md" -}}
+{{ with .size }}{{ $size = . }}{{ end -}}
+{{ $supportedSizes := slice "xs" "sm" "md" "lg" "xl" -}}
+{{ if not (in $supportedSizes $size) -}}
+    {{ errorf "Invalid value for param 'size': %s" $size -}}
+{{ end -}}
+
+{{ $style := "light" -}}
+{{ with .style }}{{ $style = . }}{{ end -}}
+{{ $supportedStyles := slice "light" "dark" -}}
+{{ if not (in $supportedStyles $style) -}}
+    {{ errorf "Invalid value for param 'style': %s" $style -}}
+{{ end -}}
+
+{{ $inverseStyle := "light" -}}
+{{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
+
+{{ $color := "" -}}
+{{ with .color }}
+    {{ $color = . }}
+    {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+    {{ if not (in $supportedColors $color) -}}
+        {{ errorf "Invalid value for param 'color': %s" $color -}}
+    {{ end -}}
+{{ end -}}
+
+<nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} p-3">
 	<div class="container-fluid">
-        <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
-            {{ if .Site.Params.main.logo -}}
-                <img src="{{ .Site.Params.main.logo }}" alt="{{ .Site.Title }} logo" height="30">
+        <!-- Insert the brand logo or name -->
+        <a class="navbar-brand" href="{{ site.Home.RelPermalink }}">
+            {{ if site.Params.main.logo -}}
+                <img src="{{ site.Params.main.logo }}" alt="{{ site.Title }} logo" height="30">
             {{ else -}}
-                <span class="fw-bold">{{ .Site.Title }}</span>
+                <span class="fw-bold">{{ site.Title }}</span>
             {{ end -}}
         </a>
 
+        <!-- Insert navigation toggler -->
 		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="toggler-icon top-bar"></span>
-			<span class="toggler-icon middle-bar"></span>
-			<span class="toggler-icon bottom-bar"></span>
+			<span class="toggler-icon top-bar bg-{{ $inverseStyle }}"></span>
+			<span class="toggler-icon middle-bar bg-{{ $inverseStyle }}"></span>
+			<span class="toggler-icon bottom-bar bg-{{ $inverseStyle }}"></span>
 		</button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
-            {{ partial "assets/search-input.html" . -}}
+            <!-- Insert search input -->
+            {{ partial "assets/search-input.html" -}}
+            
+            <!-- Render top-menu items (maximum depth of 2) -->
             <ul class="navbar-nav ms-auto">
-                {{ $currentPage := . -}}
-                {{ range .Site.Menus.main -}}
-                    {{ $active := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) -}}
-                    {{ with .Page -}}
-                        {{ $active = or $active ( $.IsDescendant .)  -}}
-                    {{ end -}}
+                {{ range site.Menus.main -}}
+                    {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) -}}
+                    {{ with .Page -}}{{ $active = or $active ( $.IsDescendant .)  -}}{{ end -}}
                     {{ $pre := .Pre -}}
                     {{ $post := .Post -}}
                     {{ $url := urls.Parse .URL -}}
                     {{ $baseurl := urls.Parse $.Site.Params.Baseurl -}}
-            
-                    <li class="nav-item">
-                        <a class="nav-link {{ if $active }}active{{ end }}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with .Pre}}{{ $pre }}{{ end }}<span{{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with .Post}}{{ $post }}{{ end }}</a>
-                    </li>
+                    {{ if .HasChildren -}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ .Name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                {{ range .Children -}}
+                                    <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
+                                {{ end -}}
+                            </ul>
+                          </li>
+                    {{ else -}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ if $active }}active{{ end }}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with .Pre}}{{ $pre }}{{ end }}<span{{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with .Post}}{{ $post }}{{ end }}</a>
+                        </li>
+                    {{ end }}
                 {{ end -}}
 
-                {{ if .IsTranslated }}
-                {{ $currentLang := .Language.Lang }}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-globe"></i> {{ T "languageSwitcherLabel" }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        {{ range .AllTranslations }}
-                        <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .Permalink }}">{{ .Language.LanguageName  }}</a></li>
-                        {{ end -}}
-                    </ul>
-                  </li>
-                {{ else if .Site.IsMultiLingual }}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-regular fa-globe"></i> {{ T "languageSwitcherLabel" }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        {{ range .Site.Languages }}
-                        <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
-                        {{ end -}}
-                    </ul>
-                  </li>
+                <!-- Insert language switcher if applicable -->
+                {{ if or $page.IsTranslated site.IsMultiLingual }}
+                    {{ $currentLang := $page.Language.Lang }}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-regular fa-globe"></i> {{ T "languageSwitcherLabel" }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end ">
+                            {{ if $page.IsTranslated }}
+                                {{ range $page.AllTranslations -}}
+                                    <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .Permalink }}">{{ .Language.LanguageName  }}</a></li>
+                                {{ end -}}
+                            {{ else }}
+                                {{ range site.Languages -}}
+                                    <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
+                                {{ end -}}
+                            {{ end }}
+                        </ul>
+                    </li>
                 {{ end -}}
             </ul>
         </div>

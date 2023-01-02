@@ -1,0 +1,52 @@
+<!-- 
+    Displays a navigation header with a toggler. The menu items are derived from the site's configuration. Nested items
+    are supported at one-level depth. The navigation bar includes a search area and a language switcher if applicable.
+    The shortcode supports the following arguments:
+    "path"          Required path of the active page.
+    "size"          Optional breakpoint of the navbar toggler, either "xs", "sm", "md" (default), "lg", or "xl".
+    "style"         Optional style of the navbar, either "light" (default) or "dark".
+    "color"         Optional background color of the navbar, either "primary", "secondary", "success",
+                    "danger", "warning", "info", "light", or "dark". The default color is none.
+-->
+
+{{ $error := false }}
+
+{{ $path := .Get "path" }}
+{{ $page := .Site.GetPage $path }}
+{{ if not $page }}
+    {{ errorf "Invalid or missing value for param 'page': %s" .Position -}}
+    {{ $error = true -}}
+{{ end }}
+
+{{ $size := "md" -}}
+{{ with .Get "size" }}{{ $size = . }}{{ end -}}
+{{ $supportedSizes := slice "xs" "sm" "md" "lg" "xl" -}}
+{{ if not (in $supportedSizes $size) -}}
+    {{ errorf "Invalid value for param 'size': %s" $size -}}
+    {{ $error = true -}}
+{{ end -}}
+
+{{ $style := "light" -}}
+{{ with .Get "style" }}{{ $style = . }}{{ end -}}
+{{ $supportedStyles := slice "light" "dark" -}}
+{{ if not (in $supportedStyles $style) -}}
+    {{ errorf "Invalid value for param 'style': %s" $style -}}
+    {{ $error = true -}}
+{{ end -}}
+
+{{ $inverseStyle := "light" -}}
+{{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
+
+{{ $color := "" -}}
+{{ with .Get "color" }}
+    {{ $color = . }}
+    {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+    {{ if not (in $supportedColors $color) -}}
+        {{ errorf "Invalid value for param 'color': %s" $color -}}
+        {{ $error = true -}}
+    {{ end -}}
+{{ end -}}
+
+{{ if not $error -}}
+    {{- partial "assets/navbar.html" (dict "page" $page "size" $size "style" $style "color" $color ) -}}
+{{ end -}}
