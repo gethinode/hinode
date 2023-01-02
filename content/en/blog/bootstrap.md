@@ -37,18 +37,27 @@ A simple danger alert—check it out!
 
 ## Badge
 
+Badges can be added to headings and buttons. The following two sections illustrate how to use them.
+
 ### Headings
 
-<h1>Example heading <span class="badge bg-secondary">New</span></h1>
-<h2>Example heading <span class="badge bg-secondary">New</span></h2>
-<h3>Example heading <span class="badge bg-secondary">New</span></h3>
-<h4>Example heading <span class="badge bg-secondary">New</span></h4>
-<h5>Example heading <span class="badge bg-secondary">New</span></h5>
+Use HTML code to display a badge for a heading. See the Bootstrap [documentation][bs_badge_heading] for more options. The following example displays a badge for a heading of size six.
+
+```html
+<h6>Example heading <span class="badge bg-secondary">New</span></h6>
+```
+
+The result looks like this.
+
 <h6>Example heading <span class="badge bg-secondary">New</span></h6>
 
 ### Buttons
 
-The badge for a button is available via a [custom shortcode]({{< ref "custom-shortcodes#button" >}} "custom shortcode").
+The badge for a button is available via a [custom shortcode]({{< ref "custom-shortcodes#button" >}} "custom shortcode"). The following example displays a light button with a badge.
+
+{{< button color="light" href="#" badge="3" >}}
+Button
+{{< /button >}}
 
 ## Breadcrumb
 
