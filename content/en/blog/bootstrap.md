@@ -101,6 +101,14 @@ The carousel is available as [custom shortcode]({{< ref "custom-shortcodes#carou
 
 ## Close button
 
+Use HTML code to display a generic close button. See the Bootstrap [documentation][bs_close_button] for more options. The following example displays a button with default styling.
+
+```html
+<button type="button" class="btn-close" aria-label="Close"></button>
+```
+
+The result looks like this.
+
 <button type="button" class="btn-close" aria-label="Close"></button>
 
 ## Collapse
