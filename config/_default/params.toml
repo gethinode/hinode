@@ -3,6 +3,7 @@ title = "Hinode"
 titleSeparator = "-"
 titleAddition = "Clean Blog Theme"
 description = "Hinode is a clean blog theme for your Hugo site based on Bootstrap 5."
+fullCover = false
 
 ## Open Graph
 images = ["logo.png"]

@@ -5,22 +5,46 @@
     </head>
 
     <body>
-        <div class="main d-flex flex-column">
-            <div class="justify-content-center">
-                <header>
-                    {{- partial "assets/navbar.html" . -}}
-                </header>
+        <div class="d-flex flex-column min-vh-100">
+            <div class="">
+                {{- partial "assets/navbar.html" (dict "page" .) -}}                
             </div>
-                  
-            <div class="justify-content-center flex-grow-1">
+            {{ if .IsHome }}
+                {{ if .Site.Params.fullCover }}
+                    <div class="d-flex flex-fill">
+                        {{ block "featured" . }}{{ end -}}
+                    </div>
+                {{ else }}
+                    <div class="">
+                        {{ block "featured" . }}{{ end -}}
+                    </div>
+                    <div class="d-flex flex-fill">
+                        {{ block "main" . }}{{ end -}}
+                    </div>
+                    <div class="">
+                        {{- partial "footer/social.html" . -}}
+                        {{- partial "footer/footer.html" . -}}
+                    </div>
+                {{ end }}
+            {{ else }}
+                <div class="d-flex flex-fill">
+                    {{ block "main" . }}{{ end -}}
+                </div>
+                <div class="">
+                    {{- partial "footer/social.html" . -}}
+                    {{- partial "footer/footer.html" . -}}
+                </div>
+            {{ end }}
+    
+        </div>
+
+        {{ if and .IsHome .Site.Params.fullCover }}
+            <div class="">
                 {{ block "main" . }}{{ end -}}
             </div>
-                  
-            <div class="justify-content-center">
-                {{- partial "footer/social.html" . -}}
-                {{- partial "footer/footer.html" . -}}
-            </div>
-        </div>
+            {{- partial "footer/social.html" . -}}
+            {{- partial "footer/footer.html" . -}}
+        {{ end }}
 
         {{- partialCached "footer/scripts.html" . -}}
     </body>
