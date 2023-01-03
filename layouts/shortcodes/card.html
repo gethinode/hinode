@@ -29,7 +29,7 @@
     {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
     {{ if not (in $supportedColors $color) -}}
         {{ errorf "Invalid value for param 'color': %s" .Position -}}
-        {{ $error = true }}
+        {{ $error = true -}}
     {{ end -}}
 {{ end -}}
 
@@ -51,7 +51,7 @@
 {{ $supportedPaddings := slice "0" "1" "2" "3" "4" "5" "auto" -}}
 {{ if not (in $supportedPaddings $padding) -}}
     {{ errorf "Invalid value for param 'padding': %s" .Position -}}
-    {{ $error = true }}
+    {{ $error = true -}}
 {{ end -}}
 
 {{ $orientation := "stacked" -}}
@@ -59,7 +59,7 @@
 {{ $supportedOrientations := slice "stacked" "horizontal" "none" -}}
 {{ if not (in $supportedOrientations $orientation) -}}
     {{ errorf "Invalid value for param 'orientation': %s" .Position -}}
-    {{ $error = true }}
+    {{ $error = true -}}
 {{ end -}}
 
 {{ $layout := "rich" -}}
@@ -67,9 +67,9 @@
 {{ $supportedLayouts := slice "rich" "minimal" -}}
 {{ if not (in $supportedLayouts $layout) -}}
     {{ errorf "Invalid value for param 'layout': %s" .Position -}}
-    {{ $error = true }}
+    {{ $error = true -}}
 {{ end -}}
 
-{{ if not $error }}
+{{ if not $error -}}
     {{- partial "assets/card.html" (dict "path" $path "class" $class "color" $color "padding" $padding "header" $header "footer" $footer "orientation" $orientation) -}}
-{{ end }}
+{{ end -}}
