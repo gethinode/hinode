@@ -1,0 +1,115 @@
+<!-- 
+    Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered using a provided list of pages.
+    Cards on the same row are aligned to each other. The grid renders pages up to a provided maximum amount. The
+    remaining items are accessible via either a paginator or button to a list page (default behavior). Be aware a page
+    can only contain one paginator at a time.
+    
+    The shortcode supports the following arguments:
+    "page"          Required context of the current page.
+    "list"          Required array of pages.
+    "max"           Required maximum number of cards to display.
+    "cols"          Required number of columns for the grid, must be a value between 1 and 5.
+    "title"         Optional title of the card group.
+    "paginate"      Optional flag indicating if pagination should be added to the card group, if the list exceeds the
+                    maximum number of cards to display. 
+    "href"          Optional address for the button or hyperlink. If set, a button is added if the list exceeds the
+                    maximum number of cards to display.
+    "hrefTitle"     Optional title of the button or hyperlink as companion to href.
+
+    In addition, the following arguments are passed to the individual cards.
+    "class"         Optional class attribute of the card element, e.g. “w-50”.
+    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", or "dark". By default, no color is specified.
+    "padding":      Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
+    "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
+                    (default), "publication", "tags", and "none".
+    "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
+                    "publication", "tags", and "none" (default).
+    "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
+-->
+
+{{ $page := .page }}
+{{ if ne (printf "%T" $page) "*hugolib.pageState" }}
+    {{ errorf "Invalid value for param 'page'"}}
+{{ end }}
+
+{{ $list := .list }}
+{{ if ne (printf "%T" $list) "page.Pages" }}
+    {{ errorf "Invalid value for param 'items'"}}
+{{ end }}
+
+{{ $count := len $list -}}
+{{ $max := .max }}
+{{ if ne (printf "%T" $max) "int" }}
+    {{ errorf "Invalid value for param 'max'"}}
+{{ end }}
+{{ $max = math.Min $max $count }}
+
+{{ $cols := .cols }}
+{{ if or (lt $cols 1) (gt $cols 5) }}
+    {{ errorf "Invalid value for param 'cols': %d" $cols -}}
+{{ end }}
+{{ $colGrid := "row-cols-1" }}
+{{ if eq $cols 2 }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" }}
+{{ else if eq $cols 3 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-3" }}
+{{ else if eq $cols 4 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" }}
+{{ else if eq $cols 5 }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ end }}
+
+{{ $title := .title }}
+
+{{ $paginate := false }}
+{{ with .paginate }}
+    {{ if ne (printf "%T" .) "bool" }}
+        {{ errorf "Invalid value for param 'paginate'"}}
+    {{ end }}
+    {{ $paginate = . }}
+{{ end }}
+{{ if $paginate }}
+    {{ $list = ($page.Paginate $list $max).Pages }}
+{{ else }}
+    {{ $list = first $max $list }}
+{{ end }}
+
+{{ $moreURL := .href }}
+{{ $moreTitle := .hrefTitle }}
+
+{{ $class := .class }}
+{{ $color := .color }}
+{{ $padding := .padding }}
+{{ $header := .header }}
+{{ $footer := .footer }}
+{{ $orientation := .orientation }}
+
+
+<div class="container-fluid p-4">
+    {{ with $title }}<h1>{{ . }}</h1>{{ end }}
+    <div class="row {{ $colGrid }}">
+
+    {{ range $index, $element := first $max $list -}}
+        <div class="col pt-3 pb-3">
+            {{- partial "assets/card.html" (dict
+                "path" $element.File.Path
+                "class" (printf "%s" $class)
+                "color" $color
+                "padding" $padding
+                "header" $header
+                "footer" $footer
+                "orientation" $orientation
+                )
+            -}}
+        </div>
+        {{ if (lt $index (sub $max 1)) -}}
+        <div class="col d-block d-sm-none">
+            <hr>
+        </div>
+    {{ end -}}
+{{ end -}}
+    </div>
+    {{ if gt $count $max -}}
+        {{ if $paginate }}
+            {{- partial "assets/pagination.html" $page -}}
+        {{ else }}
+            <a class="btn btn-outline-primary" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
+        {{ end }}
+    {{ end -}} 
+</div>

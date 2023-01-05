@@ -1,22 +1,18 @@
 {{ define "main" -}}
-    <div class="p-4">
-        <h1>{{ .Title }}</h1>
-        <div class="container-fluid p-0">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                {{ $max := sub (len .Pages) 1 -}}
-                {{ range $index, $element := (.Paginate .RegularPagesRecursive).Pages -}}
-                    <div class="col">
-                        {{- partial "assets/card.html" (dict "path" $element.File.Path "padding" "0" "class" "border-0") -}}
-                    </div>
-                    {{ if (lt $index $max) -}}
-                        <div class="col d-block d-sm-none">
-                            <hr>
-                        </div>
-                    {{ end -}}
-                {{ end -}}
-            </div>
-        </div>
-
-        {{- partial "assets/pagination.html" . -}}
+    <div class="container-fluid flex-fill p-0">
+        {{- partial "assets/card-group.html" (dict 
+            "page" .
+            "list" .RegularPagesRecursive.ByDate.Reverse
+            "max" .Paginator.PageSize
+            "cols" 3
+            "title" .Title
+            "paginate" true
+            "class" "border-0"
+            "orientation" "stacked"
+            "padding" "0"
+            "header" "full"
+            "footer" "none"
+            ) 
+        -}}
     </div>
 {{ end -}}

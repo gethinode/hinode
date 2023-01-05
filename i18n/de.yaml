@@ -11,18 +11,22 @@
   translation: "Weitere {{ . }}"
 - id: readMore
   translation: "Weiterlesen"
-- id: morePosts
+- id: moreBlog
   translation: "Weitere Beiträge"
-- id: olderPosts
+- id: olderBlog
   translation: "Ältere Beiträge"
-- id: recentPosts
+- id: recentBlog
   translation: "Aktuelle Beiträge"
-- id: newerPosts
+- id: newerBlog
   translation: "Neuere Beiträge"
-- id: previousPost
+- id: previousBlog
   translation: "Vorheriger Beitrag"
-- id: nextPost
+- id: nextBlog
   translation: "Nächster Beitrag"
+- id: recentProjects
+  translation: "Projekte"
+- id: moreProjects
+  translation: "Weitere Projekte"
 - id: read
   translation: "Lesezeit"
 - id: minutesShort

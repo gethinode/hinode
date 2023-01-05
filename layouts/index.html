@@ -1,50 +1,55 @@
-{{ define "main" }}
-    {{- partial "intro.html" . -}}
+{{ define "featured" -}}
+    {{- partial "home/featured.html" . -}}
+{{ end -}}
 
-    {{ range $section, $taxonomy := .Site.Sections -}}
-        {{ if eq $section 0 -}}
-            <div class="p-4">
-                <h1>{{ T "recentPosts" }}</h1>
-                <div class="container-fluid p-0">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                        {{ $items := first 3 ($taxonomy.Pages.ByDate.Reverse) -}}
-                        {{ $max := sub (len $items) 1 -}}
-                        {{ range $index, $element := $items -}}
-                            <div class="col gx-4">
-                                {{- partial "assets/card.html" (dict "path" $element.File.Path "padding" "0" "class" "border-0") -}}
-                            </div>
-                            {{ if (lt $index $max) -}}
-                            <div class="col d-block d-sm-none">
-                                <hr>
-                            </div>
-                            {{ end -}}
-                        {{ end -}}
-                    </div>
-                </div>
-
-                {{ if gt (len $taxonomy.Pages) 3 -}}
-                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">{{ T "morePosts" }}</a>
-                {{ end -}}
-            </div>
-        {{ else -}}
-            <div class="p-4">
-                <h1>{{ $taxonomy.Title }}</h1>
-                <div class="container-fluid">
-                    <div class="row row-cols-1 g-4">
-                        {{ $items := first 3 ($taxonomy.Pages) -}}
-                        {{ range $index, $element := $items -}}
-                            <div class="col p-0">
-                                {{- partial "assets/card.html" (dict "path" $element.File.Path "header" "none" "footer" "tags" "orientation" "none" "class" "h-100 card-emphasize") -}}
-                            </div>
-                        {{ end -}}
-                    </div>
-                </div>
-
-                {{ if gt (len $taxonomy.Pages) 3 -}}
-                    <br>
-                    <a class="btn btn-outline-primary" href="{{ $taxonomy.Permalink | safeURL }}" role="button">{{ $taxonomy.Title | i18n "more" }}</a>
-                {{ end -}} 
-            </div>
+{{ define "main" -}}
+    {{ $page := . -}}
+    {{ range $index, $section := site.Params.mainSections -}}
+        {{ $pages := where site.RegularPages "Type" "in" $section -}}
+        {{ $sectionURL := "" -}}
+        {{ range $page := first 1 $pages -}}
+            {{ $sectionURL = $page.Parent.RelPermalink -}}
         {{ end -}}
+
+        <div class="container-fluid flex-fill p-0">
+            {{ $items := $pages.ByDate.Reverse -}}
+            {{ $title := (T (printf "recent%s" (strings.FirstUpper $section))) -}}
+            {{ $max := 3 -}}
+            {{ $moreTitle := (T (printf "more%s" (strings.FirstUpper $section))) -}}
+
+            {{ if (modBool $index 2) -}}
+                {{- partial "assets/card-group.html" (dict 
+                    "page" $page
+                    "list" $items
+                    "max" $max
+                    "cols" 3
+                    "title" $title
+                    "href" $sectionURL
+                    "hrefTitle" $moreTitle
+                    "class" "border-0"
+                    "orientation" "stacked"
+                    "padding" "0"
+                    "header" "full"
+                    "footer" "none"
+                    ) 
+                -}}
+            {{ else -}}
+                {{- partial "assets/card-group.html" (dict 
+                    "page" $page
+                    "list" $items
+                    "max" $max
+                    "cols" 1
+                    "title" $title
+                    "href" $sectionURL
+                    "hrefTitle" $moreTitle
+                    "class" "border-1 card-emphasize"
+                    "padding" "3"
+                    "header" "none"
+                    "footer" "tags"
+                    "orientation" "none"
+                    )
+                -}}
+            {{ end -}}
+        </div>
     {{ end -}}
 {{ end -}}
