@@ -5,6 +5,7 @@
     "style"         Optional style of the navbar, either "light" (default) or "dark".
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "light", or "dark". The default color is none.
+    "search"        Optional flag to include a search input, default is "true".
 -->
 
 {{ $page := .page -}}
@@ -38,6 +39,16 @@
     {{ end -}}
 {{ end -}}
 
+{{ $searchParam := "true" -}}
+{{ $search := false -}}
+{{ with .search }}{{ $searchParam = . }}{{ end -}}
+{{ $supportedFlags := slice "true" "false" -}}
+{{ if in $supportedFlags $searchParam -}}
+    {{ if eq $searchParam "true" }}{{ $search = true }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'search': %s" $search -}}
+{{ end -}}
+
 <nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} p-3">
 	<div class="container-fluid">
         <!-- Insert the brand logo or name -->
@@ -59,7 +70,7 @@
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <!-- Insert search input -->
-            {{ partial "assets/search-input.html" -}}
+            {{ if $search }}{{ partial "assets/search-input.html" -}}{{ end }}
             
             <!-- Render top-menu items (maximum depth of 2) -->
             <ul class="navbar-nav ms-auto">

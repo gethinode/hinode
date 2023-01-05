@@ -7,6 +7,7 @@
     "style"         Optional style of the navbar, either "light" (default) or "dark".
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "light", or "dark". The default color is none.
+    "search"        Optional flag to include a search input, default is "true".
 -->
 
 {{ $error := false }}
@@ -47,6 +48,16 @@
     {{ end -}}
 {{ end -}}
 
+{{ $searchParam := "true" -}}
+{{ $search := false -}}
+{{ with .Get "search" }}{{ $searchParam = . }}{{ end -}}
+{{ $supportedFlags := slice "true" "false" -}}
+{{ if in $supportedFlags $searchParam -}}
+    {{ if eq $searchParam "true" }}{{ $search = true }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'search': %s" .Position -}}
+{{ end -}}
+
 {{ if not $error -}}
-    {{- partial "assets/navbar.html" (dict "page" $page "size" $size "style" $style "color" $color ) -}}
+    {{- partial "assets/navbar.html" (dict "page" $page "size" $size "style" $style "color" $color "search" $search) -}}
 {{ end -}}
