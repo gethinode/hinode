@@ -49,6 +49,9 @@
     {{ errorf "Invalid value for param 'search': %s" $search -}}
 {{ end -}}
 
+{{ $pre := .Pre -}}
+{{ $post := .Post -}}
+
 <nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} p-3">
 	<div class="container-fluid">
         <!-- Insert the brand logo or name -->
@@ -74,16 +77,16 @@
             
             <!-- Render top-menu items (maximum depth of 2) -->
             <ul class="navbar-nav ms-auto">
-                {{ range site.Menus.main -}}
-                    {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) -}}
-                    {{ with .Page -}}{{ $active = or $active ( $.IsDescendant .)  -}}{{ end -}}
-                    {{ $pre := .Pre -}}
-                    {{ $post := .Post -}}
+                {{ range $menu := site.Menus.main -}}
+                    {{ $menu_item_url := $menu.URL | relLangURL }}
+                    {{ $page_url:= $page.RelPermalink | relLangURL }}
+                    {{ $active := hasPrefix $page_url $menu_item_url }}
+
                     {{ $url := urls.Parse .URL -}}
                     {{ $baseurl := urls.Parse $.Site.Params.Baseurl -}}
                     {{ if .HasChildren -}}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link {{ if $active }}link-dark{{ end }} dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ .Name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -94,7 +97,7 @@
                           </li>
                     {{ else -}}
                         <li class="nav-item">
-                            <a class="nav-link {{ if $active }}active{{ end }}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with .Pre}}{{ $pre }}{{ end }}<span{{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with .Post}}{{ $post }}{{ end }}</a>
+                            <a class="nav-link {{ if $active }}active{{ end }}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with $pre}}{{ . }}{{ end }}<span {{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with $post}}{{ . }}{{ end }}</a>
                         </li>
                     {{ end }}
                 {{ end -}}
