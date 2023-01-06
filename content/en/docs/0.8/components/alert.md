@@ -1,0 +1,37 @@
+---
+author: "Mark Dumay"
+title: "Alert"
+date: 2023-01-05
+description: "Use the alert shortcode to display a contextual feedback message."
+group: components
+---
+
+## Overview
+
+Use the `alert` shortcode to display a contextual feedback message. The inner content is used as alert text. 
+
+## Arguments
+
+The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No  | Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| dismissible | No  | Optional flag to indicate the alert is dismissible, defaults to false. |
+{.table}
+
+## Example
+
+As an example, the following shortcode displays a simple alert.
+
+```html
+{{</* alert color="danger" */>}}
+A simple danger alert—check it out!
+{{</* /alert */>}}
+```
+
+The result looks like this:
+
+{{< alert color="danger" >}}
+A simple danger alert—check it out!
+{{< /alert >}}
