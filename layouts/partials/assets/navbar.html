@@ -4,6 +4,7 @@
     "menus"         Optional name of the menu configuration, defaults to "main".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "style"         Optional style of the navbar, either "light" (default) or "dark".
+    "fixed"         Optional flag to indicate the navbar should stick to the top, defaults to false.
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
     "search"        Optional flag to include a search input, default is "true".
@@ -11,6 +12,8 @@
                     the site's parameter configuration. 
     "title"         Optional brand title, displayed when the logo is not set. Defaults to the site's title.
 -->
+
+{{ $supportedFlags := slice "true" "false" -}}
 
 {{ $page := .page -}}
 {{ if not $page -}}
@@ -38,6 +41,15 @@
     {{ errorf "Invalid value for param 'style': %s" $style -}}
 {{ end -}}
 
+{{ $fixedParam := "false" -}}
+{{ $fixed := false -}}
+{{ with .fixed }}{{ $fixedParam = . }}{{ end -}}
+{{ if in $supportedFlags $fixedParam -}}
+    {{ if eq $fixedParam "true" }}{{ $fixed = true }}{{ else }}{{ $fixed = false }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'fixed': %s" $fixedParam -}}
+{{ end -}}
+
 {{ $inverseStyle := "light" -}}
 {{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
 
@@ -53,27 +65,25 @@
 {{ $searchParam := "true" -}}
 {{ $search := true -}}
 {{ with .search }}{{ $searchParam = . }}{{ end -}}
-{{ $supportedFlags := slice "true" "false" -}}
 {{ if in $supportedFlags $searchParam -}}
     {{ if eq $searchParam "true" }}{{ $search = true }}{{ else }}{{ $search = false }}{{ end -}}
 {{ else -}}
     {{ errorf "Invalid value for param 'search': %s" $searchParam -}}
 {{ end -}}
 
+{{ $logo := site.Params.main.logo -}}
+{{ with .logo }}{{ $logo = . }}{{ end -}}
 
-{{ $logo := site.Params.main.logo }}
-{{ with .logo }}{{ $logo = . }}{{ end }}
-
-{{ $title := site.Title }}
-{{ if .title }}
-    {{ $title = .title }}
-    {{ if not .logo }}{{ $logo = "" }}{{ end }}
-{{ end }}
+{{ $title := site.Title -}}
+{{ if .title -}}
+    {{ $title = .title -}}
+    {{ if not .logo }}{{ $logo = "" }}{{ end -}}
+{{ end -}}
 
 {{ $pre := .Pre -}}
 {{ $post := .Post -}}
 
-<nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} p-3">
+<nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-3">
 	<div class="container-fluid">
         <!-- Insert sidebar toggler when page has a group parameter -->
         {{ if $page.Params.group }}
@@ -106,9 +116,9 @@
             <!-- Render top-menu items (maximum depth of 2) -->
             <ul class="navbar-nav ms-auto">
                 {{ range $menu := $menus -}}
-                    {{ $menu_item_url := $menu.URL | relLangURL }}
-                    {{ $page_url:= $page.RelPermalink | relLangURL }}
-                    {{ $active := hasPrefix $page_url $menu_item_url }}
+                    {{ $menu_item_url := $menu.URL | relLangURL -}}
+                    {{ $page_url:= $page.RelPermalink | relLangURL -}}
+                    {{ $active := hasPrefix $page_url $menu_item_url -}}
 
                     {{ $url := urls.Parse .URL -}}
                     {{ $baseurl := urls.Parse $.Site.Params.Baseurl -}}
@@ -138,15 +148,15 @@
                             <i class="fa-regular fa-globe"></i> {{ T "languageSwitcherLabel" }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end ">
-                            {{ if $page.IsTranslated }}
+                            {{ if $page.IsTranslated -}}
                                 {{ range $page.AllTranslations -}}
                                     <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .Permalink }}">{{ .Language.LanguageName  }}</a></li>
                                 {{ end -}}
-                            {{ else }}
+                            {{ else -}}
                                 {{ range site.Languages -}}
                                     <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
                                 {{ end -}}
-                            {{ end }}
+                            {{ end -}}
                         </ul>
                     </li>
                 {{ end -}}
