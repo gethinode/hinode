@@ -19,7 +19,7 @@ The shortcode supports the following arguments:
 | href        | No   | Optional address for the button or hyperlink. Automatically assigned when using collapse. |
 | state       | No   | Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive". |
 | size        | No   | Optional size of the button, either "sm", "md" (default), or "lg". |
-| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", "dark", "white" or "black". |
 | badge       | No   | Optional positioned badge to display on top of the button. |
 | outline     | No   | Optional flag indicating the button should be outlined, either "false" (default) or "true". |
 | aria-label  | No   | Optional label for the badge. |

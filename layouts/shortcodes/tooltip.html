@@ -1,7 +1,7 @@
 <!-- 
     Displays a tooltip for a link. The shortcode supports the following arguments:
     "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
-                    "danger", "warning", "info", "light", or "dark".
+                    "danger", "warning", "info", "light", "dark", "white" or "black".
     "title"         Required text to display in the tooltip.
     "href"          Required address for the button or hyperlink.
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
@@ -18,7 +18,7 @@
 
 {{ $color := "primary" -}}
 {{ with .Get "color" }}{{ $color = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
 {{ if not (in $supportedColors $color) -}}
     {{ errorf "Invalid value for param 'color': %s" .Position -}}
     {{ $error = true }}

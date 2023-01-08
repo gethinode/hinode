@@ -5,7 +5,7 @@
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "style"         Optional style of the navbar, either "light" (default) or "dark".
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
-                    "danger", "warning", "info", "light", or "dark". The default color is none.
+                    "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
     "search"        Optional flag to include a search input, default is "true".
     "logo"          Optional address of the logo image, defaults to the parameter "logo" set in the "main" section of
                     the site's parameter configuration. 
@@ -44,7 +44,7 @@
 {{ $color := "" -}}
 {{ with .color }}
     {{ $color = . }}
-    {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+    {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
     {{ if not (in $supportedColors $color) -}}
         {{ errorf "Invalid value for param 'color': %s" $color -}}
     {{ end -}}

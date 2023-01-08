@@ -16,7 +16,7 @@ The shortcode supports the following arguments:
 
 | Argument    | Required | Description |
 |-------------|----------|-------------|
-| color       | No  | Optional theme color of the spinner, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| color       | No  | Optional theme color of the spinner, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", "dark", "white" or "black". |
 | grow        | No  | Optional flag to indicate the spinner is growing instead of rotating, defaults to false. |
 | class       | No  | Optional class attribute of the spinner wrapping element, e.g. “text-center”. |
 {.table}

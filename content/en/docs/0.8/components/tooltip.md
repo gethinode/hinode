@@ -16,7 +16,7 @@ The shortcode supports the following arguments:
 
 | Argument    | Required | Description |
 |-------------|----------|-------------|
-| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", "dark", "white" or "black". |
 | title       | Yes  | Title to display in the tooltip. |
 | href        | Yes  | Address for the button or hyperlink. |
 | placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". |
