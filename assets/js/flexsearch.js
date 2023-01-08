@@ -142,6 +142,7 @@ Source:
           entry.appendChild(a);
   
           const title = document.createElement('span');
+          title.classList.add('text-start');
           title.textContent = doc.title;
           title.classList.add("suggestion__title");
           a.appendChild(title);
