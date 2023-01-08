@@ -75,8 +75,15 @@
 
 <nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} p-3">
 	<div class="container-fluid">
+        <!-- Insert sidebar toggler when page has a group parameter -->
+        {{ if $page.Params.group }}
+            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle docs navigation">
+                <i class="fa-solid fa-ellipsis"></i>
+            </button>
+        {{ end }}
+
         <!-- Insert the brand logo or name -->
-        <a class="navbar-brand" href="{{ site.Home.RelPermalink }}">
+        <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
             {{ if $logo -}}
                 <img src="{{ $logo }}" alt="{{ $title }} logo" height="30">
             {{ else -}}
@@ -84,9 +91,9 @@
             {{ end -}}
         </a>
 
-        <!-- Insert navigation toggler -->
+        <!-- Insert main navigation toggler -->
 		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle main navigation">
 			<span class="toggler-icon top-bar bg-{{ $inverseStyle }}"></span>
 			<span class="toggler-icon middle-bar bg-{{ $inverseStyle }}"></span>
 			<span class="toggler-icon bottom-bar bg-{{ $inverseStyle }}"></span>

@@ -82,6 +82,7 @@ $dark:                          {{ site.Params.style.dark | default "#212529" }}
 @import "components/img.scss";
 @import "components/popover.scss";
 @import "components/search.scss";
+@import "components/sidebar.scss";
 @import "components/syntax.scss";
 @import "components/vimeo.scss";
 @import "common/styles.scss";
