@@ -4,6 +4,7 @@ title: "Button"
 date: 2023-01-05
 description: "Use the button shortcode to display a button with a hyperlink."
 group: components
+layout: docs
 ---
 
 ## Overview

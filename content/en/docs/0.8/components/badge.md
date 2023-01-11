@@ -4,6 +4,7 @@ title: "Badge"
 date: 2023-01-11
 description: "Use the badge to enrich headings and buttons."
 group: components
+layout: docs
 ---
 
 ## Overview

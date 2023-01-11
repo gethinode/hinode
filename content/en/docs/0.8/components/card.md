@@ -4,6 +4,7 @@ title: "Card"
 date: 2023-01-05
 description: "Use the card shortcode to display a card that links to a content page."
 group: components
+layout: docs
 ---
 
 ## Overview

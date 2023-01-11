@@ -4,7 +4,7 @@ title: Contribute
 description: Contribute to the open-source development of the Hinode theme.
 date: 2023-01-06
 group: getting-started
-toc: true
+layout: docs
 ---
 
 1. Clone the repository and create a new branch

@@ -4,6 +4,7 @@ title: "Image"
 date: 2023-01-05
 description: "Use the image shortcode to display a responsive image with a specific aspect ratio."
 group: components
+layout: docs
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ title: "Carousel"
 date: 2023-01-05
 description: "Use the carousel shortcode to display a carousel of several images."
 group: components
+layout: docs
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ title: "Alert"
 date: 2023-01-05
 description: "Use the alert shortcode to display a contextual feedback message."
 group: components
+layout: docs
 ---
 
 ## Overview

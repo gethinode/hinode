@@ -4,6 +4,7 @@ title: "Command Prompt"
 date: 2023-01-05
 description: "The command shortcode generates terminal output for either Bash, PowerShell, or SQL shell languages."
 group: components
+layout: docs
 ---
 
 ## Overview

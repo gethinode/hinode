@@ -4,6 +4,7 @@ title: "Breadcrumb"
 date: 2023-01-05
 description: "Use the breadcrumb shortcode to display the current page’s location within the site's navigational hierarchy."
 group: components
+layout: docs
 ---
 
 ## Overview

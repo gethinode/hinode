@@ -4,6 +4,7 @@ title: "Button Group"
 date: 2023-01-05
 description: "Use the button-group shortcode to display a group of buttons."
 group: components
+layout: docs
 ---
 
 ## Overview

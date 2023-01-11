@@ -4,6 +4,7 @@ title: "Accordion"
 date: 2023-01-05
 description: "Use the accordion shortcode to show a group of vertically collapsing and expanding items."
 group: components
+layout: docs
 ---
 
 ## Overview

@@ -9,7 +9,7 @@ aliases:
   - "/en/docs/getting-started/"
   - "/en/getting-started/"
   - "/en/docs/"
-toc: true
+layout: docs
 ---
 
 Hinode is a clean blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies. More information is available on the [about]({{< ref "about" >}} "about") page.
