@@ -50,10 +50,10 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.3",
-    "eslint": "^8.29.0",
+    "eslint": "^8.31.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "exec-bin": "^1.0.0",
     "flexsearch": "^0.7.31",
@@ -62,10 +62,10 @@
     "postcss-cli": "^10.1.0",
     "purgecss-whitelister": "^2.4.0",
     "shx": "^0.3.4",
-    "stylelint": "^14.16.0",
+    "stylelint": "^14.16.1",
     "stylelint-config-standard-scss": "^6.1.0"
   },
   "otherDependencies": {
-    "hugo": "0.108.0"
+    "hugo": "0.109.0"
   }
 }
