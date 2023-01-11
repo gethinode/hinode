@@ -1,3 +1,5 @@
+{{- with partial "utilities/GetMenu" . }}{{ $.Scratch.Set "sidebar" . }}{{ end -}}
+
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>

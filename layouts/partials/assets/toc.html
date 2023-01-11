@@ -1,6 +1,6 @@
 {{ $items := len (findRE "<li.*?>(.|\n)*?</li>" .TableOfContents) -}}
 {{ if (gt $items 1) -}}
-    <div class="mb-5 my-md-0 ps-xl-3 mb-lg-5 text-muted sticky-top toc p-3 {{ if site.Params.fixedNav }}sticky-offset{{ end }}">
+    <div class="mb-5 my-md-0 ps-xl-3 mb-lg-5 p-3 text-muted sticky-top {{ if site.Params.fixedNav }}sticky-offset{{ end }} toc">
         <strong class="d-block h6 my-2 pb-2 border-bottom">{{ T "toc" }}</strong>
         {{ .TableOfContents }}
     </div>
