@@ -43,7 +43,7 @@
   pages:
     - title: Accordion
     - title: Alert
-    # - title: Badge
+    - title: Badge
     - title: Breadcrumb
     - title: Button
     - title: Button group
