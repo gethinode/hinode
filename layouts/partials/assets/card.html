@@ -133,7 +133,7 @@
 {{ if eq $orientation "none" }}{{ $thumbnail = "" }}{{ end -}}
 
 {{ if eq $orientation "horizontal" -}}
-    <div class="card mb-3 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} h-100 {{ $class }}">
+    <div class="card mb-3 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         <div class="row g-0">
             <div class="col-4">
                 {{ if $thumbnail -}}
@@ -154,7 +154,7 @@
         </div>
     </div>
 {{ else -}}
-    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} h-100 {{ $class }}">
+    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{ if $thumbnail -}}
             <a href="{{ $href }}">
                 {{- partial "image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
