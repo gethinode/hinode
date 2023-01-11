@@ -65,7 +65,6 @@ The main site configuration is available in `./config/_default`. Some remarks:
 | Security policy | The theme uses rather strict security policies by default. Be sure to include references to external sources in the header configuration to avoid broken links. The settings of the local development server are defined in `server.toml`. Similar settings are defined in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify]. |
 {.table}
 
-
 <!-- MARKDOWN PUBLIC LINKS -->
 [blist]: https://github.com/apvarun/blist-hugo-theme
 [bootstrap]: https://getbootstrap.com

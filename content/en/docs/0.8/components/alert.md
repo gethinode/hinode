@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-Use the `alert` shortcode to display a contextual feedback message. The inner content is used as alert text. 
+Use the `alert` shortcode to display a contextual feedback message. The inner content is used as alert text.
 
 ## Arguments
 

@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-Use the `breadcrumb` shortcode to display the current page’s location within the site's navigational hierarchy. 
+Use the `breadcrumb` shortcode to display the current page’s location within the site's navigational hierarchy.
 
 ## Arguments
 

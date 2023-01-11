@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-Use the `collapse` shortcode to reveil or hide a panel. The panel can contain both HTML code and plain text. Link a button to the panel by assigning it's ID to the `collapse` attribute. 
+Use the `collapse` shortcode to reveil or hide a panel. The panel can contain both HTML code and plain text. Link a button to the panel by assigning it's ID to the `collapse` attribute.
 
 ## Arguments
 

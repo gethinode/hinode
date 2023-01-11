@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-Use the `spinner` shortcode to indicate the loading state of a component or page. The inner content is used as alternative description. 
+Use the `spinner` shortcode to indicate the loading state of a component or page. The inner content is used as alternative description.
 
 ## Arguments
 

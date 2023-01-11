@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-Use the `accordion` shortcode to show a group of vertically collapsing and expanding items. Add `accordion-item` inner elements for each accordion item. 
+Use the `accordion` shortcode to show a group of vertically collapsing and expanding items. Add `accordion-item` inner elements for each accordion item.
 
 ## Arguments
 

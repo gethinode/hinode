@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages. 
+The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages.
 
 ## Arguments
 

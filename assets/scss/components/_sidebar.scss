@@ -1,9 +1,9 @@
-.dropdown-toggle { 
+.dropdown-toggle {
     outline: 0;
 }
 
 .btn-toggle {
-    padding: .25rem .5rem;
+    padding: 0.25rem 0.5rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.65);
     background-color: transparent;
@@ -18,7 +18,7 @@
         width: 1.25em;
         line-height: 0;
         content: $btn-toggle;
-        transition: transform .35s ease;
+        transition: transform 0.35s ease;
         transform-origin: 0.5em 50%;
     }
 }
