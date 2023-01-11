@@ -15,6 +15,9 @@
 
 {{ $supportedFlags := slice "true" "false" -}}
 
+{{- $id := 0 -}}
+{{ with .id }}{{ $id = . }}{{ end }}
+
 {{ $page := .page -}}
 {{ if not $page -}}
     {{ errorf "Missing value for param 'page'" -}}
@@ -102,14 +105,14 @@
         </a>
 
         <!-- Insert main navigation toggler -->
-		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle main navigation">
+		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
+			aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="Toggle main navigation">
 			<span class="toggler-icon top-bar bg-{{ $inverseStyle }}"></span>
 			<span class="toggler-icon middle-bar bg-{{ $inverseStyle }}"></span>
 			<span class="toggler-icon bottom-bar bg-{{ $inverseStyle }}"></span>
 		</button>
 
-        <div class="navbar-collapse collapse" id="navbarSupportedContent">
+        <div class="navbar-collapse collapse" id="navbarSupportedContent-{{ $id }}">
             <!-- Insert search input -->
             {{ if $search }}{{ partial "assets/search-input.html" -}}{{ end }}
             

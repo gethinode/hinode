@@ -15,6 +15,8 @@
 
 {{ $error := false }}
 
+{{ $id := add .Ordinal 1 }}
+
 {{ $path := .Get "path" }}
 {{ $page := .Site.GetPage $path }}
 {{ if not $page }}
@@ -69,5 +71,5 @@
 {{ with .Get "title" }}{{ $title = . }}{{ end -}}
 
 {{ if not $error -}}
-    {{- partial "assets/navbar.html" (dict "page" $page "size" $size "style" $style "color" $color "search" $searchParam "menus" $menus "logo" $logo "title" $title) -}}
+    {{- partial "assets/navbar.html" (dict "id" $id "page" $page "size" $size "style" $style "color" $color "search" $searchParam "menus" $menus "logo" $logo "title" $title) -}}
 {{ end -}}
