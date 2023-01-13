@@ -39,6 +39,7 @@ npm run build:debug
 ## Validating linting rules
 
 Use the the following command to analyze the source code and to test for any stylistic errors. The lint command validates three types of files in the `assets` folder and `content` folder:
+
 * Javascript (`assets/*.js`) using [eslint][eslint].
 * CSS and SASS (`assets/scss/**/*.{css,sass,scss,sss,less}`) using [stylelint][stylelint].
 * Markdown (`*.md` and `content/**/*.md`) using [markdownlint-cli2][markdownlint].
