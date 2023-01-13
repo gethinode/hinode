@@ -66,19 +66,14 @@ The main site configuration is available in `./config/_default`. Some remarks:
 {.table}
 
 <!-- MARKDOWN PUBLIC LINKS -->
-[blist]: https://github.com/apvarun/blist-hugo-theme
 [bootstrap]: https://getbootstrap.com
-[cc-by-nc-4.0]: https://creativecommons.org/licenses/by-nc/4.0/
 [contrast_checker]: https://accessibleweb.com/color-contrast-checker/
-[doks]: https://github.com/h-enk/doks
 [flexsearch]: https://github.com/nextapps-de/flexsearch
 [git_download]: https://git-scm.com
 [hugo]: https://gohugo.io
 [netlify]: https://www.netlify.com
 [nodejs]: https://nodejs.org
 [npm]: https://www.npmjs.com
-[observatory]: https://observatory.mozilla.org/analyze/hinode-demo.markdumay.org
-[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fhinode-demo.markdumay.org%2F
 [utterances]: https://utteranc.es
 
 <!-- MARKDOWN MAINTAINED LINKS -->
@@ -86,7 +81,5 @@ The main site configuration is available in `./config/_default`. Some remarks:
 [blog]: https://markdumay.com
 [blog]: https://github.com/markdumay
 -->
-[demo]: https://hinode-demo.markdumay.org/
-[license]: https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE
 [repository]: https://github.com/markdumay/hugo-theme-hinode.git
 [repository_child]: https://github.com/markdumay/hugo-theme-hinode-child.git
