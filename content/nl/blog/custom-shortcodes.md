@@ -203,5 +203,6 @@ Ter illustratie toont de volgende shortcode een plaatje met afgeronde hoeken en 
 Het resultaat ziet er als volgt uit:
 {{< image src="img/flowers.jpg" ratio="21x9" caption="Onderschrift" class="rounded">}}
 
+<!-- MARKDOWN PUBLIC LINKS -->
 [mozilla_image]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
 [hugo_imaging]: https://gohugo.io/content-management/image-processing/#imaging-configuration
