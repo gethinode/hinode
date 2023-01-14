@@ -1,9 +1,9 @@
 ---
 layout: docs
-title: Figures
+title: Scripts
 description: 
-date: 2023-01-06
-group: content
+date: 2023-01-14
+group: configuration
 layout: docs
 ---
 
