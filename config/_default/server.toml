@@ -1,3 +1,4 @@
+# toml-docs-start server-config
 [[headers]]
 for = '/**'
 [headers.values]
@@ -33,3 +34,4 @@ for = '/**'
         """
     Cache-Control = "public, max-age=31536000"
     Access-Control-Allow-Origin = "*"
+# toml-docs-end server-config
