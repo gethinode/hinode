@@ -60,12 +60,9 @@ schemaSection = "blog"
     light = "#f8f9fa"
     dark = "#212529"
 
-
-
 [main]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     logo = "/img/logo_embedded.svg"
-
 
 [comments]
     enabled = false
@@ -75,3 +72,41 @@ schemaSection = "blog"
     # By default, light and dark mode correspond to github-light and github-dark, respectively.
     # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
     #theme = "" 
+
+[links]
+    bootstrap = "https://getbootstrap.com"
+    bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
+    cc_by_nc_4_0 = "https://creativecommons.org/licenses/by-nc/4.0/"
+    commit_message = "https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"
+    contrast_checker = "https://accessibleweb.com/color-contrast-checker/"
+    css_codeguide = "https://codeguide.co/#css"
+    eslint = "https://eslint.org"
+    flexsearch = "https://github.com/nextapps-de/flexsearch"
+    git_download = "https://git-scm.com"
+    github_pr = "https://help.github.com/articles/about-pull-requests/"
+    github_rebase = "https://help.github.com/articles/about-git-rebase/"
+    html_codeguide = "https://codeguide.co/#html"
+    hugo = "https://gohugo.io"
+    hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
+    issue_tracker = "https://github.com/markdumay/hugo-theme-hinode/issues"
+    license = "https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE"
+    markdown_md013 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013---line-length"
+    markdown_md024 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md024---multiple-headings-with-the-same-content"
+    markdown_md026 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md026---trailing-punctuation-in-heading"
+    markdown_md033 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md033---inline-html"
+    markdown_md034 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md034---bare-url-used"
+    markdown_md051 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md051---link-fragments-should-be-valid"
+    markdown_md053 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md053---link-and-image-reference-definitions-should-be-needed"
+    markdown_rules = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md"
+    markdownlint = "https://github.com/DavidAnson/markdownlint-cli2"
+    mozilla_image = "https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
+    netlify = "https://www.netlify.com"
+    nodejs = "https://nodejs.org"
+    npm = "https://www.npmjs.com"
+    observatory = "https://observatory.mozilla.org/analyze/hinode-demo.markdumay.org"
+    pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fhinode-demo.markdumay.org%2F"
+    repository = "https://github.com/markdumay/hugo-theme-hinode"
+    repository_child = "https://github.com/markdumay/hugo-theme-hinode-child.git"
+    stylelint = "https://stylelint.io"
+    utterances = "https://utteranc.es"
+    wcag_contrast = "https://www.w3.org/TR/WCAG20/#visual-audio-contrast"

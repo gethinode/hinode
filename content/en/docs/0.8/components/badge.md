@@ -17,7 +17,7 @@ N/A
 
 ## Example
 
-Use HTML code to display a badge for a heading. See the Bootstrap [documentation][bs_badge_heading] for more options. The following example displays a badge for a heading of size four.
+Use HTML code to display a badge for a heading. See the Bootstrap [documentation]({{< param "links.bs_badge_heading" >}}) for more options. The following example displays a badge for a heading of size four.
 
 ```html
 <h6>Example heading of size four <span class="badge bg-secondary">New</span></h6>
@@ -26,6 +26,3 @@ Use HTML code to display a badge for a heading. See the Bootstrap [documentation
 The result looks like this.
 
 <h4>Example heading of size four <span class="badge bg-secondary">New</span></h4>
-
-<!-- MARKDOWN PUBLIC LINKS -->
-[bs_badge_heading]: https://getbootstrap.com/docs/5.2/components/badge/#headings

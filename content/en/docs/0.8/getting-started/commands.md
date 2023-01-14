@@ -6,7 +6,7 @@ group: getting-started
 layout: docs
 ---
 
-The Hinode theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies. The `package.json` file in the repository root defines several commands to simplify local development and testing. The following paragraphs describe the main commands.
+The Hinode theme uses [Node Package Manager]({{< param "links.npm" >}}) to automate the build process and to keep track of dependencies. The `package.json` file in the repository root defines several commands to simplify local development and testing. The following paragraphs describe the main commands.
 
 ## Starting a local server
 
@@ -40,9 +40,9 @@ npm run build:debug
 
 Use the the following command to analyze the source code and to test for any stylistic errors. The lint command validates three types of files in the `assets` folder and `content` folder:
 
-* Javascript (`assets/*.js`) using [eslint][eslint].
-* CSS and SASS (`assets/scss/**/*.{css,sass,scss,sss,less}`) using [stylelint][stylelint].
-* Markdown (`*.md` and `content/**/*.md`) using [markdownlint-cli2][markdownlint].
+* Javascript (`assets/*.js`) using [eslint]({{< param "links.eslint" >}}).
+* CSS and SASS (`assets/scss/**/*.{css,sass,scss,sss,less}`) using [stylelint]({{< param "links.stylelint" >}}).
+* Markdown (`*.md` and `content/**/*.md`) using [markdownlint-cli2]({{< param "links.markdownlint" >}}).
 
 The basic configuration of these linting tools is defined in the repository root.
 
@@ -73,9 +73,3 @@ Be sure to install the upgraded dependencies if needed:
 {{% command %}}
 npm install
 {{% /command %}}
-
-<!-- MARKDOWN PUBLIC LINKS -->
-[npm]: https://www.npmjs.com
-[eslint]: https://eslint.org
-[stylelint]: https://stylelint.io/
-[markdownlint]: https://github.com/DavidAnson/markdownlint-cli2
