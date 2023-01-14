@@ -55,3 +55,7 @@ a:active {
 .toc nav a code {
     font: inherit;
 }
+
+.tickmark li::marker {
+    content: "✓ ";
+}
