@@ -40,7 +40,7 @@ Additional features include:
 * Color customization
 * i18n support
 
-The Hinode theme is inspired by the following themes:
+Hinode is inspired by the following themes:
 
 * [Blist](https://github.com/apvarun/blist-hugo-theme) - a clean and fast blog theme for your Hugo site using Tailwind CSS.
 * [Doks](https://github.com/h-enk/doks) - a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.

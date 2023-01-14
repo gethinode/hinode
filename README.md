@@ -76,7 +76,7 @@ Start a new Hinode project in three steps:
 
 ### 1. Create a new site
 
-Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of the Hinode theme. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
+Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of Hinode. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
 
 Not quite sure? Use the Hinode child theme.
 
@@ -127,7 +127,7 @@ The main site configuration is available in `./config/_default`. Some remarks:
 
 ## Credits
 
-The Hinode theme is inspired by the following themes:
+Hinode is inspired by the following themes:
 
 - [Blist][blist] - a clean and fast blog theme for your Hugo site using Tailwind CSS.
 - [Doks][doks] - a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.
