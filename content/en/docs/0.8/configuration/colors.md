@@ -1,10 +1,90 @@
 ---
 layout: docs
 title: Colors
-description: 
+description: Use Bootstrap's color system to easily adjust your website's colors.
 date: 2023-01-14
 group: configuration
 layout: docs
 ---
 
-<!-- TODO: expand -->
+## Theme colors 
+
+Hinode uses Bootstrap's color system. You can adjust them in the `/config/_default/params.toml` file in the `style` section.
+
+```toml
+[style]
+    primary = "#D43900"
+    secondary = "#6c757d"
+    success = "#198754"
+    info = "#0dcaf0"
+    warning = "#ffc107"
+    danger = "#dc3545"
+    light = "#f8f9fa"
+    dark = "#212529"
+```
+
+In addition, the background colors `black` and `white` are available too. Below is an overview of the rendered colors.
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-primary rounded-3">Primary</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-secondary rounded-3">Secondary</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-success rounded-3">Success</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-danger rounded-3">Danger</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-warning rounded-3">Warning</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-info rounded-3">Info</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-light rounded-3">Light</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-dark rounded-3">Dark</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 text-bg-white rounded-3">White</div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-black text-white rounded-3">Black</div>
+    </div>
+</div>
+
+## Colored contrasting links
+
+Hinode defines additional classes to render links that contrast with their background. Simply add `link-bg-<color>` to the class of an `<a>` anchor element.
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-primary rounded-3"><a class="link-bg-primary" href="#">Primary</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-secondary rounded-3"><a class="link-bg-secondary" href="#">Secondary</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-success rounded-3"><a class="link-bg-success" href="#">Success</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-danger rounded-3"><a class="link-bg-danger" href="#">Danger</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-warning rounded-3"><a class="link-bg-warning" href="#">Warning</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-info rounded-3"><a class="link-bg-info" href="#">Info</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-light rounded-3"><a class="link-bg-light" href="#">Light</a></div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 mb-3 bg-dark rounded-3"><a class="link-bg-dark" href="#">Dark</a></div>
+    </div>
+</div>
