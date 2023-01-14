@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Introduction
-description: Get started with Hinode, a clean blog theme for your Hugo site based on Bootstrap 5.
+description: Get started with Hinode, a clean documentation and blog theme for your Hugo site based on Bootstrap 5.
 date: 2023-01-06
 group: getting-started
 aliases:
@@ -12,7 +12,7 @@ aliases:
 layout: docs
 ---
 
-Hinode is a clean blog theme for [Hugo]({{< param "links.hugo" >}}), an open-source static site generator. Based on the [Bootstrap 5]({{< param "links.bootstrap" >}}) framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch]({{< param "links.flexsearch" >}}) to enable full text search across your site. Finally, the theme uses [Node Package Manager]({{< param "links.npm" >}}) to automate the build process and to keep track of dependencies. More information is available on the [about]({{< ref "about" >}} "about") page.
+Hinode is a clean documentation and blog theme for [Hugo]({{< param "links.hugo" >}}), an open-source static site generator. Based on the [Bootstrap 5]({{< param "links.bootstrap" >}}) framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch]({{< param "links.flexsearch" >}}) to enable full text search across your site. Finally, the theme uses [Node Package Manager]({{< param "links.npm" >}}) to automate the build process and to keep track of dependencies. More information is available on the [about]({{< ref "about" >}} "about") page.
 
 ## Prerequisites
 

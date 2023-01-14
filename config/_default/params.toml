@@ -1,8 +1,8 @@
 ## Homepage
 title = "Hinode"
 titleSeparator = "-"
-titleAddition = "Clean Blog Theme"
-description = "Hinode is a clean blog theme for your Hugo site based on Bootstrap 5."
+titleAddition = "A Clean Theme for Hugo"
+description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
 fullCover = false
 fixedNav = true
 mainSections = ["blog", "projects"]

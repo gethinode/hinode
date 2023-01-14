@@ -1,7 +1,7 @@
 {
   "name": "@markdumay/hugo-theme-hinode",
   "version": "0.7.8",
-  "description": "Hinode is a clean blog theme for Hugo, an open-source static site generator",
+  "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "main": "index.js",
   "publishConfig": {
     "access": "public",

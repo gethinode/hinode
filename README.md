@@ -2,7 +2,7 @@
 
 <!-- Tagline -->
 <p align="center">
-    <b>A clean blog theme for your Hugo site based on Bootstrap 5</b>
+    <b>A clean documentation and blog theme for your Hugo site based on Bootstrap 5</b>
     <br />
 </p>
 
@@ -50,7 +50,7 @@
 - [PageSpeed Insights][pagespeed]
 - [Mozilla Observatory][observatory]
 
-Hinode is a clean blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
+Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
 
 Additional features include:
 
