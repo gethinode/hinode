@@ -2,6 +2,14 @@
   "name": "@markdumay/hugo-theme-hinode",
   "version": "0.7.8",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
+  "keywords": [
+    "hugo",
+    "theme",
+    "bootstrap",
+    "responsive",
+    "front-end",
+    "blog"
+  ],
   "main": "index.js",
   "publishConfig": {
     "access": "public",
@@ -39,7 +47,7 @@
     "type": "git",
     "url": "git+https://github.com/markdumay/hugo-theme-hinode.git"
   },
-  "author": "",
+  "author": "Mark Dumay",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/markdumay/hugo-theme-hinode/issues"
