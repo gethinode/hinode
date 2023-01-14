@@ -1,0 +1,10 @@
+<!-- Hugo considers all first-level directories to be a root section. As such, as "/en/docs/" is considered to be a
+     branch bundle, despite it not having an "_index.md" page. Being a branch bundle, Hugo uses a list template to
+    render the "/en/docs/" page. This overwrites the alias defined in "/en/docs/<ver>/getting-started/introduction/". 
+    
+    This empty list template is deliberately added to the "/layouts/docs/" directory to prevent Hugo from generating 
+    a list page for "/en/docs/" (all other nested sections). This enables the alias defined in 
+    "/en/docs/<version>/getting-started/introduction/".
+
+    See https://gohugo.io/content-management/sections/ for more details.
+    -->
