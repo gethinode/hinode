@@ -24,7 +24,7 @@ Start a new Hinode project in three steps:
 
 ### 1. Create a new site
 
-Hinode is available as a [child theme]({{< param "links.repository_child" >}}), and a [main theme]({{< param "links.repository" >}}). The child theme uses [npm]({{< param "links.npm" >}}) to link to the latest available version of the Hinode theme. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
+Hinode is available as a [child theme]({{< param "links.repository_child" >}}), and a [main theme]({{< param "links.repository" >}}). The child theme uses [npm]({{< param "links.npm" >}}) to link to the latest available version of Hinode. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
 
 Not quite sure? Use the Hinode child theme.
 

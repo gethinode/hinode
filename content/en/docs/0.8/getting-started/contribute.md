@@ -1,13 +1,13 @@
 ---
 layout: docs
 title: Contribute
-description: Contribute to the open-source development of the Hinode theme.
+description: Contribute to the open-source development of Hinode.
 date: 2023-01-06
 group: getting-started
 layout: docs
 ---
 
-The Hinode theme is fully open source and welcomes any contributions, either big or small. To streamline the contribution process, please take a moment to review the guidelines outlined in this article.
+Hinode is fully open source and welcomes any contributions, either big or small. To streamline the contribution process, please take a moment to review the guidelines outlined in this article.
 
 ## Using the issue tracker
 

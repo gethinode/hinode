@@ -9,7 +9,7 @@ layout: docs
 
 ## Overview
 
-Use the `toast` shortcode to display a dismissable message in the bottom-right corner of the screen. The Hinode theme defines a click event for a button with id `toastButton`. Modify the file `assets/js/toast.js` if needed.
+Use the `toast` shortcode to display a dismissable message in the bottom-right corner of the screen. Hinode defines a click event for a button with id `toastButton`. Modify the file `assets/js/toast.js` if needed.
 
 ## Arguments
 

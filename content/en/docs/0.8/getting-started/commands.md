@@ -6,7 +6,7 @@ group: getting-started
 layout: docs
 ---
 
-The Hinode theme uses [Node Package Manager]({{< param "links.npm" >}}) to automate the build process and to keep track of dependencies. The `package.json` file in the repository root defines several commands to simplify local development and testing. The following paragraphs describe the main commands.
+Hinode uses [Node Package Manager]({{< param "links.npm" >}}) to automate the build process and to keep track of dependencies. The `package.json` file in the repository root defines several commands to simplify local development and testing. The following paragraphs describe the main commands.
 
 ## Starting a local server
 
