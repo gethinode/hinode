@@ -56,11 +56,11 @@ npm run start
 
 The main site configuration is available in `./config/_default`. Some remarks:
 
-| Topic | Remarks |
-|-------|---------|
-| Menu items | `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer. |
-| Content | Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`. |
-| Theme style | Update `primary` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. Bootstrap's other key colors can be changed too. You can use the [WCAG Color Contrast Checker]({{< param "links.contrast_checker" >}}) to validate the contrast ratio of your color to improve accessibility. Additionally, set `themeFont` and `themeFontPath` to override the default font. |
-| Comments | Comments are powered by [utterances]({{< param "links.utterances" >}}), a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`. |
+| Topic           | Remarks |
+|-----------------|---------|
+| Menu items      | `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer. |
+| Content         | Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`. |
+| Theme style     | Update `primary` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. Bootstrap's other key colors can be changed too. You can use the [WCAG Color Contrast Checker]({{< param "links.contrast_checker" >}}) to validate the contrast ratio of your color to improve accessibility. Additionally, set `themeFont` and `themeFontPath` to override the default font. |
+| Comments        | Comments are powered by [utterances]({{< param "links.utterances" >}}), a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`. |
 | Security policy | The theme uses rather strict security policies by default. Be sure to include references to external sources in the header configuration to avoid broken links. The settings of the local development server are defined in `server.toml`. Similar settings are defined in the `netlify.toml` file provided in the repository's root when deploying to [Netlify]({{< param "links.netlify" >}}). |
 {.table}
