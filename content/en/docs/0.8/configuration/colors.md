@@ -50,7 +50,21 @@ In addition, the background colors `black` and `white` are available too. Below 
 
 ## Colored contrasting links
 
-Hinode defines additional classes to render links that contrast with their background. Simply add `link-bg-<color>` to the class of an `<a>` anchor element.
+Hinode defines additional classes to render links that contrast with their background. Simply add `link-bg-<color>` to the class of an `<a>` anchor element. The next example adds a link constrasting with the background color `bg-success`.
+
+```html
+<div class="col-md-2">
+    <div class="p-3 mb-3 bg-success rounded-3 text-center"><a class="link-bg-success" href="#">Success</a></div>
+</div>
+```
+
+The result looks like this.
+
+<div class="col-md-2">
+    <div class="p-3 mb-3 bg-success rounded-3 text-center"><a class="link-bg-success" href="#">Success</a></div>
+</div>
+
+Below grid illustrates the contrasting colors for each background.
 
 <div class="row">
     <div class="col-md-4">
