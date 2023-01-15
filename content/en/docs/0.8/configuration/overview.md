@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Overview
 description: Configure and customize Hinode to your liking using Hugo Templating and npm dependencies.
 date: 2023-01-14

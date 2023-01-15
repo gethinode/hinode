@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Contribute
 description: Contribute to the open-source development of Hinode.
 date: 2023-01-06

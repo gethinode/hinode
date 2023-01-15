@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Styles
 description: 
 date: 2023-01-14

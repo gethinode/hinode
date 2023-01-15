@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Navigation
 description: Help the user navigate your website using configurable navigation elements.
 date: 2023-01-15

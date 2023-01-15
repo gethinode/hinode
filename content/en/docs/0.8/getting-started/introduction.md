@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Introduction
 description: Get started with Hinode, a clean documentation and blog theme for your Hugo site based on Bootstrap 5.
 date: 2023-01-06

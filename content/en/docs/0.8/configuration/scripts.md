@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Scripts
 description: 
 date: 2023-01-14
