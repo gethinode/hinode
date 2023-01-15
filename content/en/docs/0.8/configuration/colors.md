@@ -11,17 +11,7 @@ layout: docs
 
 Hinode uses Bootstrap's color system. You can adjust them in the `/config/_default/params.toml` file in the `style` section.
 
-```toml
-[style]
-    primary = "#D43900"
-    secondary = "#6c757d"
-    success = "#198754"
-    info = "#0dcaf0"
-    warning = "#ffc107"
-    danger = "#dc3545"
-    light = "#f8f9fa"
-    dark = "#212529"
-```
+{{< toml-docs name="theme-colors" file="config/_default/params.toml" >}}
 
 In addition, the background colors `black` and `white` are available too. Below is an overview of the rendered colors.
 
