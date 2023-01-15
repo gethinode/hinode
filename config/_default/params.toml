@@ -42,7 +42,7 @@ schemaSection = "blog"
     style = "light"
     fixed = true
     search = true
-    breadcrumb = true
+    breadcrumb = false
     toc = true
     sidebar = true
 # toml-docs-end navigation
