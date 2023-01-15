@@ -1,4 +1,5 @@
 {{- define "partials/header.html" -}}
+    {{ if site.Params.navigation.breadcrumb }}{{ partial "breadcrumb.html" . }}{{ end -}}
     {{ if eq .Layout "docs"}}
         <h1>{{ .Title }}</h1>
     {{ else }}
@@ -68,8 +69,8 @@
 
 {{ define "main" -}}
     {{- $menu := .Scratch.Get "sidebar" -}}
-    
-    {{ if $menu -}}
+    {{- $sidebar := .Site.Params.navigation.sidebar | default true -}}
+    {{ if and $menu $sidebar -}}
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-labelledby="offcanvas-label">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper .Section }}</h5>
@@ -91,7 +92,7 @@
                     {{ partial "partials/footer.html" . }}
                 </div>
                 <div class="col col-lg-2 d-none d-lg-block mt-5">
-                    {{- if and .Site.Params.toc.enabled .Params.includeToc | default true -}}
+                    {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
                         {{ partial "assets/toc.html" . -}}
                     {{ end -}}
                 </div>
@@ -107,7 +108,7 @@
                     {{ partial "partials/footer.html" . }}
                 </div>
                 <div class="col col-md-2 d-none d-md-block">
-                    {{- if and .Site.Params.toc.enabled .Params.includeToc | default true -}}
+                    {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
                         {{ partial "assets/toc.html" . -}}
                     {{ end -}}
                 </div>

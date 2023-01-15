@@ -65,16 +65,17 @@
     {{ end -}}
 {{ end -}}
 
-{{ $searchParam := "true" -}}
-{{ $search := true -}}
-{{ with .search }}{{ $searchParam = . }}{{ end -}}
-{{ if in $supportedFlags $searchParam -}}
-    {{ if eq $searchParam "true" }}{{ $search = true }}{{ else }}{{ $search = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'search': %s" $searchParam -}}
+{{ $search := default true site.Params.navigation.search -}}
+{{ with .search }}
+    {{ $searchParam := . }}
+    {{ if in $supportedFlags $searchParam -}}
+        {{ if eq $searchParam "true" }}{{ $search = true }}{{ else }}{{ $search = false }}{{ end -}}
+    {{ else -}}
+        {{ errorf "Invalid value for param 'search': %s" $searchParam -}}
+    {{ end -}}
 {{ end -}}
 
-{{ $logo := site.Params.main.logo -}}
+{{ $logo := site.Params.navigation.logo -}}
 {{ with .logo }}{{ $logo = . }}{{ end -}}
 
 {{ $title := site.Title -}}

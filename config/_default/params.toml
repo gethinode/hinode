@@ -4,7 +4,6 @@ titleSeparator = "-"
 titleAddition = "A Clean Theme for Hugo"
 description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
 fullCover = false
-fixedNav = true
 mainSections = ["blog", "projects"]
 docs_version = "0.8"
 
@@ -36,16 +35,21 @@ schemaImageHeight = 640
 schemaGitHub = "https://github.com/markdumay/hugo-theme-hinode"
 schemaSection = "blog"
 
+# toml-docs-start navigation
+[navigation]
+    logo = "/img/logo_embedded.svg"
+    color = "white"
+    style = "light"
+    fixed = true
+    search = true
+    breadcrumb = true
+    toc = true
+    sidebar = true
+# toml-docs-end navigation
 
 [favicon]
     logo = "img/favicon.png"
     sizes = [16, 32, 48]
-
-[search]
-    enabled = true
-
-[toc]
-    enabled = true
 
 # toml-docs-start theme-colors
 [style]
@@ -64,7 +68,6 @@ schemaSection = "blog"
 
 [main]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
-    logo = "/img/logo_embedded.svg"
 
 [comments]
     enabled = false
