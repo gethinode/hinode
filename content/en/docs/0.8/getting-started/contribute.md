@@ -58,21 +58,21 @@ Adhering to the following process is the best way to get your work included in t
     git checkout -b <topic-branch-name>
     ```
 
-2. Commit your changes in logical chunks. Please adhere to these [git commit message guidelines]({{< param "links.commit_message" >}}). Use Git's [interactive rebase]({{< param "links.github_rebase" >}}) feature to tidy up your commits before making them public.
+1. Commit your changes in logical chunks. Please adhere to these [git commit message guidelines]({{< param "links.commit_message" >}}). Use Git's [interactive rebase]({{< param "links.github_rebase" >}}) feature to tidy up your commits before making them public.
 
-3. Locally merge (or rebase) the upstream development branch into your topic branch:
+1. Locally merge (or rebase) the upstream development branch into your topic branch:
 
     ```bash
     git pull [--rebase] upstream main
     ```
 
-4. Push your topic branch up to your fork:
+1. Push your topic branch up to your fork:
 
     ```bash
     git push origin <topic-branch-name>
     ```
 
-5. Open a [Pull Request]({{< param "links.github_pr" >}})with a clear title and description against the main branch.
+1. Open a [Pull Request]({{< param "links.github_pr" >}})with a clear title and description against the main branch.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to license your work under the terms of the [MIT license]({{< param "links.license" >}}) (if it includes code changes) and under the terms of the Creative Commons ([CC BY-NC 4.0)]({{< param "links.cc_by_nc_4_0" >}}) license (if it includes documentation changes).
 

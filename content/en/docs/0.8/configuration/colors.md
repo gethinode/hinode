@@ -7,7 +7,7 @@ group: configuration
 layout: docs
 ---
 
-## Theme colors 
+## Theme colors
 
 Hinode uses Bootstrap's color system. You can adjust them in the `/config/_default/params.toml` file in the `style` section.
 
