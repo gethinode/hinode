@@ -6,6 +6,7 @@
     <nav class="flex-shrink-0 ps-1 pt-3 sticky-top {{ if site.Params.navigation.fixed }}sticky-offset{{ end }}" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $url := split $page.Permalink "/" -}}
         {{- $page_slug := index $url (sub (len $url) 2) -}}
+        {{- $sectionBreak := false }}
 
         <ul class="list-unstyled ps-0">
         {{- range $index, $group := $data -}}
@@ -21,6 +22,7 @@
             {{- $is_active_group := eq $page.Params.group $group_slug -}}
 
             {{- if $group.pages }}
+                {{- $sectionBreak = true }}
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-{{ $index }}" aria-expanded="{{ if $is_active_group }}true{{ else }}false{{ end }}">
                         <div class="text-start flex-fill">{{ $group.title }}</div>
@@ -37,11 +39,15 @@
                     </div>
                 </li>
             {{- else }}
-                <li class="mt-1 mb-3 mx-2 border-top"></li>
+                <li class="mt-1 mb-1 {{ if $sectionBreak }}border-top{{ end }}"></li>
+                {{- $sectionBreak = false }}
                 <li>
                     <ul class="btn-toggle-nav list-unstyled fw-bold pb-1">
                         <li>
-                            <a href="/docs/{{ $.Site.Params.docs_version }}/{{ $group_slug }}/" class="link-dark d-inline-flex text-decoration-none rounded">
+                            {{- $doc_slug := $group.title | urlize -}}
+                            {{- $is_active := and $is_active_group (eq $page_slug $doc_slug) -}}
+                            {{- $href := relLangURL (path.Join $section site.Params.docs_version $doc_slug) -}}
+                            <a href="{{ $href }}" class="link-dark d-inline-flex text-decoration-none rounded {{ if $is_active }}active{{ end }}">
                                 {{ $group.title }}
                             </a>      
                         </li>
