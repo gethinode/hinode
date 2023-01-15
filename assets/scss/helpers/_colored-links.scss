@@ -1,5 +1,6 @@
 // stylelint-disable function-name-case
 
+// scss-docs-start colored-links
 @each $color, $value in $theme-colors {
     $contrast-color: color-contrast($value);
     $color-rgb: to-rgb($value);
@@ -16,3 +17,4 @@
         }
     }
 }
+// scss-docs-end colored-links

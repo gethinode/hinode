@@ -78,3 +78,9 @@ Hinode defines additional classes to render links that contrast with their backg
         <div class="p-3 mb-3 bg-dark rounded-3"><a class="link-bg-dark" href="#">Dark</a></div>
     </div>
 </div>
+
+## Generating helper
+
+The SCSS generator for the colored links is defined in `assets/scss/helpers/_colored-links.scss`.
+
+{{< scss-docs name="colored-links" file="assets/scss/helpers/_colored-links.scss" >}}
