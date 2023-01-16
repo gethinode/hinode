@@ -1,6 +1,6 @@
 // scss-docs-start sidebar
-.dropdown-toggle {
-    outline: 0;
+.sidebar {
+    top: $navbar-offset;
 }
 
 .btn-toggle {
@@ -23,6 +23,7 @@
         transform-origin: 0.5em 50%;
     }
 }
+// scss-docs-end sidebar
 
 .btn-toggle[aria-expanded="true"] {
     color: rgba(0, 0, 0, 0.85);
@@ -47,4 +48,6 @@
     }
 }
 
-// scss-docs-end sidebar
+.dropdown-toggle {
+    outline: 0;
+}

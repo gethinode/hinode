@@ -10,6 +10,7 @@ $warning:                       {{ site.Params.style.warning | default "#ffc107"
 $danger:                        {{ site.Params.style.danger | default "#dc3545" }};
 $light:                         {{ site.Params.style.light | default "#f8f9fa" }};
 $dark:                          {{ site.Params.style.dark | default "#212529" }};
+$navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Params.navigation.offset | default "3em" }}{{ else }}0em{{ end }};
 
 // Include default variable overrides
 @import "common/variables.scss";
@@ -72,7 +73,6 @@ $dark:                          {{ site.Params.style.dark | default "#212529" }}
 
 // Import theme styles
 @import "components/blockquote.scss";
-@import "components/breadcrumb.scss";
 @import "components/buttons.scss";
 @import "components/card.scss";
 @import "components/carousel.scss";
@@ -85,6 +85,7 @@ $dark:                          {{ site.Params.style.dark | default "#212529" }}
 @import "components/search.scss";
 @import "components/sidebar.scss";
 @import "components/syntax.scss";
+@import "components/toc.scss";
 @import "components/vimeo.scss";
 @import "common/styles.scss";
 @import "layouts/reboot.scss";
