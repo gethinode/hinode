@@ -18,6 +18,7 @@ The basic configuration of the navigation elements is set in the `navigation` se
 | color      | "white" | [Theme color]({{< ref "colors" >}}) of the navigation bar. Set the style to set the correct contrast of the menu items. |
 | style      | "light" | Style of the navigation bar, either "light" or "dark". It changes the colors of the menu items accordingly. |
 | fixed      | false   | Flag indicating to keep the navigation bar fixed at the top of the screen. |
+| offset     | "3em"   | Applies an [offset to main elements]({{< param "links.bs_navbar_placement" >}}) when `fixed` is set to true. |
 | search     | true    | Flag indicating to include a search input. |
 | breadcrumb | false   | Flag indicating to add breadcrumb navigation to the top of any single page. List pages are excluded. |
 | toc        | true    | Flag indicating to enable table of contents globally. Individual pages can override this setting in the frontmatter using the value `includeToc`. |
@@ -46,9 +47,7 @@ Using the sample configuration defined in the previous paragraph, the navigation
 
 ### Customization
 
-Hinode includes a navigation bar at the top of the screen by default. You can modify the configuration in the `layouts/_default/baseof.html` file. The navigation bar is also available as [shortcode]({{< ref "navbar" >}}). The file `assets/scss/components/_navbar.scss` contains the styling of the navbar. It defines the spacing to be added to the page's main content section when using a fixed navigation bar:
-
-{{< scss-docs name="fixed-nav" file="assets/scss/components/_navbar.scss" >}}
+Hinode includes a navigation bar at the top of the screen by default. You can modify the configuration in the `layouts/_default/baseof.html` file. The navigation bar is also available as [shortcode]({{< ref "navbar" >}}).
 
 ## Sidebar navigation
 
@@ -78,11 +77,13 @@ group: getting-started
 
 ### Customization
 
-The file `assets/scss/components/_sidebar.scss` contains the styling of the sidebar. It refers to a button `$btn-toggle` that is defined in `assets/scss/common/_icons.scss`.
+The file `assets/scss/components/_sidebar.scss` contains the styling of the sidebar. It refers to a button `$btn-toggle` that is defined in `assets/scss/common/_icons.scss`. It also defines the spacing to be added to the page's main content section when using a fixed navigation bar:
+
+{{< scss-docs name="sidebar" file="assets/scss/components/_sidebar.scss" >}}
 
 ## Breadcrumb
 
-Hinode supports optional breadcrumb navigation. The breadcrumb indicates the current page's location within the site's navigational hierarchy. It is automatically populated by Hugo. Enable the breadcrumb in the [basic navigation configuration](#basic-configuration). If enabled, all single pages will add a breadcrumb navigation to the top of the page.
+Hinode supports optional breadcrumb navigation. The breadcrumb indicates the current page's location within the site's navigational hierarchy. It is automatically populated by Hugo. Enable the breadcrumb in the [basic navigation configuration](#basic-configuration). If enabled, all single pages will add breadcrumb navigation to the top of the page.
 
 ### Example
 
@@ -92,9 +93,7 @@ When enabled, the breadcrumb looks like this:
 
 ### Customization
 
-The breadcrumb is also available as [shortcode]({{< ref "breadcrumb" >}}). The file `assets/scss/components/_breadcrumb.scss` contains the styling of the breadcrumb. It adds spacing to align the breadcrumb to the sidebar and table of contents:
-
-{{< scss-docs name="breadcrumb" file="assets/scss/components/_breadcrumb.scss" >}}
+The breadcrumb is also available as [shortcode]({{< ref "breadcrumb" >}}).
 
 ## Table of contents
 
@@ -102,6 +101,6 @@ Single pages can optionally show an [table of contents]({{< param "links.hugo_to
 
 ### Customization
 
-The table of contents borrows the spacing defined in the file `assets/scss/components/_navbar.scss`:
+The file `assets/scss/components/_toc.scss` defines the styling of the table of contents element. It adds spacing to align the element to the sidebar, amongst other styling:
 
-{{< scss-docs name="fixed-nav" file="assets/scss/components/_navbar.scss" >}}
+{{< scss-docs name="toc" file="assets/scss/components/_toc.scss" >}}
