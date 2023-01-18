@@ -71,12 +71,10 @@
     {{ end }}
 {{ end }}
 
-{{ $title := "" }}
-{{ $href := "" }}
-{{ $header := "" }}
-{{ $footer := "" }}
-{{ $description := "" }}
-{{ $thumbnail := "" }}
+{{ $title := .title }}
+{{ $href := .href }}
+{{ $description := .description }}
+{{ $thumbnail := .thumbnail }}
 
 {{ $color := "" -}}
 {{ with .color }}{{ $color = . }}{{ end -}}
@@ -101,14 +99,10 @@
 {{ end -}}
 
 {{ with $page -}}
-    {{ if not $title }}{{ $title = $page.Params.title }}{{ end -}}
-    {{ if not $href }}{{ $href = $page.Permalink  }}{{ end -}}
-    {{ if not $description }}{{ $description = $page.Params.description }}{{ end -}}
-    {{ if not $thumbnail }}{{ $thumbnail = $page.Params.thumbnail }}{{ end -}}
-{{ end -}}
-
-{{ if not $title -}}
-    {{ errorf "Missing value for param 'title'" -}}
+    {{ if not $title }}{{ $title = .Title }}{{ end -}}
+    {{ if not $href }}{{ $href = .Permalink  }}{{ end -}}
+    {{ if not $description }}{{ $description = .Description }}{{ end -}}
+    {{ if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
 {{ end -}}
 
 {{ if not $href -}}
