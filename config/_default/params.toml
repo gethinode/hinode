@@ -29,6 +29,20 @@
     sidebar = true
 # toml-docs-end navigation
 
+# toml-docs-start list
+[list]
+    [blog]
+        title = "Blog"
+        sort = "title"
+        reverse = false
+        cols = 3
+        color = ""
+        padding = "0"
+        header = "full"
+        footer = "none"
+        orientation = "stacked"
+# toml-docs-end list
+
 [favicon]
     logo = "img/favicon.png"
     sizes = [16, 32, 48]
@@ -87,6 +101,8 @@
     blist = "https://github.com/apvarun/blist-hugo-theme"
     bootstrap = "https://getbootstrap.com"
     bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
+    bs_breakpoints = "https://getbootstrap.com/docs/5.3/layout/breakpoints"
+    bs_grid = "https://getbootstrap.com/docs/5.3/layout/grid"
     bs_offcanvas = "https://getbootstrap.com/docs/5.3/components/offcanvas"
     bs_navbar_placement = "https://getbootstrap.com/docs/5.3/components/navbar/#placement"
     cc_by_nc_4_0 = "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -101,9 +117,11 @@
     github_rebase = "https://help.github.com/articles/about-git-rebase/"
     html_codeguide = "https://codeguide.co/#html"
     hugo = "https://gohugo.io"
+    hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_menus = "https://gohugo.io/content-management/menus/"
     hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
+    hugo_ordering = "https://gohugo.io/templates/lists/#order-content"
     hugo_templates = "https://gohugo.io/templates/introduction/"
     hugo_toc = "https://gohugo.io/content-management/toc"
     issue_tracker = "https://github.com/markdumay/hugo-theme-hinode/issues"

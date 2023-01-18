@@ -28,34 +28,34 @@
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
 -->
 
-{{ $page := .page }}
-{{ if ne (printf "%T" $page) "*hugolib.pageState" }}
-    {{ errorf "Invalid value for param 'page'"}}
-{{ end }}
+{{- $page := .page -}}
+{{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
+    {{- errorf "Invalid value for param 'page'" -}}
+{{- end -}}
 
 {{ $list := .list }}
-{{ if ne (printf "%T" $list) "page.Pages" }}
-    {{ errorf "Invalid value for param 'items'"}}
-{{ end }}
+{{- if ne (printf "%T" $list) "page.Pages" -}}
+    {{- errorf "Invalid value for param 'items'" -}}
+{{- end -}}
 
-{{ $count := len $list -}}
-{{ $max := .max }}
-{{ if ne (printf "%T" $max) "int" }}
-    {{ errorf "Invalid value for param 'max'"}}
-{{ end }}
-{{ $max = math.Min $max $count }}
+{{- $count := len $list -}}
+{{- $max := .max -}}
+{{- if ne (printf "%T" $max) "int" -}}
+    {{- errorf "Invalid value for param 'max'" -}}
+{{- end -}}
+{{- $max = math.Min $max $count -}}
 
-{{ $cols := .cols }}
-{{ if or (lt $cols 1) (gt $cols 5) }}
-    {{ errorf "Invalid value for param 'cols': %d" $cols -}}
-{{ end }}
-{{ $colGrid := "row-cols-1" }}
-{{ if eq $cols 2 }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" }}
-{{ else if eq $cols 3 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-3" }}
-{{ else if eq $cols 4 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" }}
-{{ else if eq $cols 5 }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ end }}
+{{- $cols := .cols -}}
+{{- if or (lt $cols 1) (gt $cols 5) -}}
+    {{- errorf "Invalid value for param 'cols': %d" $cols -}}
+{{- end -}}
+{{- $colGrid := "row-cols-1" -}}
+{{- if eq $cols 2 }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" -}}
+{{- else if eq $cols 3 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-3" -}}
+{{- else if eq $cols 4 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" -}}
+{{- else if eq $cols 5 }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ end -}}
 
-{{ $title := .title }}
+{{- $title := .title -}}
 
 {{ $paginate := false }}
 {{ with .paginate }}
@@ -64,52 +64,70 @@
     {{ end }}
     {{ $paginate = . }}
 {{ end }}
-{{ if $paginate }}
-    {{ $list = ($page.Paginate $list $max).Pages }}
-{{ else }}
+{{ if not $paginate }}
     {{ $list = first $max $list }}
 {{ end }}
 
-{{ $moreURL := .href }}
-{{ $moreTitle := .hrefTitle }}
+{{- $moreURL := .href -}}
+{{- $moreTitle := .hrefTitle -}}
 
-{{ $class := .class }}
-{{ $color := .color }}
-{{ $padding := .padding }}
-{{ $header := .header }}
-{{ $footer := .footer }}
-{{ $orientation := .orientation }}
-
+{{- $class := .class -}}
+{{- $color := .color -}}
+{{- $padding := .padding -}}
+{{- $header := .header -}}
+{{- $footer := .footer -}}
+{{- $orientation := .orientation -}}
 
 <div class="container-fluid p-4">
     {{ with $title }}<h1>{{ . }}</h1>{{ end }}
-    <div class="row {{ $colGrid }}">
-
-    {{ range $index, $element := first $max $list -}}
-        <div class="col pt-3 pb-3">
-            {{- partial "assets/card.html" (dict
-                "path" $element.File.Path
-                "class" (printf "h-100 %s" $class)
-                "color" $color
-                "padding" $padding
-                "header" $header
-                "footer" $footer
-                "orientation" $orientation
-                )
-            -}}
+    {{ if $paginate }}
+        <div class="row {{ $colGrid }}">
+            {{ $paginator := $page.Paginate $list }}
+            {{ range $index, $element := first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
+                <div class="col pt-3 pb-3">
+                    {{- partial "assets/card.html" (dict
+                        "path" $element.File.Path
+                        "class" (printf "h-100 %s" $class)
+                        "color" $color
+                        "padding" $padding
+                        "header" $header
+                        "footer" $footer
+                        "orientation" $orientation
+                        )
+                    -}}
+                </div>
+                {{- if (lt $index (sub $max 1)) -}}
+                    <div class="col d-block d-sm-none">
+                        <hr>
+                    </div>
+                {{- end -}}
+            {{ end }}
         </div>
-        {{ if (lt $index (sub $max 1)) -}}
-        <div class="col d-block d-sm-none">
-            <hr>
-        </div>
-    {{ end -}}
-{{ end -}}
-    </div>
-    {{ if gt $count $max -}}
-        {{ if $paginate }}
+        {{- if gt $paginator.TotalPages 1 -}}
             {{- partial "assets/pagination.html" $page -}}
-        {{ else }}
-            <a class="btn btn-outline-primary" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
-        {{ end }}
-    {{ end -}} 
+        {{- end -}} 
+    {{ else }}
+        <div class="row {{ $colGrid }}">
+            {{ range $index, $element := $list }}
+                <div class="col pt-3 pb-3">
+                    {{- partial "assets/card.html" (dict
+                        "path" $element.File.Path
+                        "class" (printf "h-100 %s" $class)
+                        "color" $color
+                        "padding" $padding
+                        "header" $header
+                        "footer" $footer
+                        "orientation" $orientation
+                        )
+                    -}}
+                </div>
+                {{- if (lt $index (sub $max 1)) -}}
+                    <div class="col d-block d-sm-none">
+                        <hr>
+                    </div>
+                {{- end -}}
+            {{ end }}
+        </div>
+        <a class="btn btn-outline-primary" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
+    {{ end }}
 </div>

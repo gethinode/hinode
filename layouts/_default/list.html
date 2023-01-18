@@ -1,18 +1,64 @@
-{{ define "main" -}}
-    <div class="container-fluid flex-fill p-0">
-        {{- partial "assets/card-group.html" (dict 
-            "page" .
-            "list" .RegularPagesRecursive.ByDate.Reverse
-            "max" .Paginator.PageSize
-            "cols" 3
-            "title" .Title
-            "paginate" true
-            "class" "border-0"
-            "orientation" "stacked"
-            "padding" "0"
-            "header" "full"
-            "footer" "none"
-            ) 
-        -}}
-    </div>
-{{ end -}}
+{{- define "main" -}}
+    {{- $title := .Title -}}
+    {{- $sort := "date" -}}
+    {{- $reverse := true -}}
+    {{- $orientation := "stacked" -}}
+    {{- $cols := 3 -}}
+    {{- $color := "" -}}
+    {{- $padding := "0" -}}
+    {{- $header := "full" -}}
+    {{- $footer := "none" -}}
+    
+    {{- $section := .Section }}
+    {{- with (index site.Params .Section) -}}
+        {{- with index . "title" }}{{ $title = . }}{{ end -}}
+        {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
+        {{- if (index . "reverse") }}{{ $reverse = true }}{{ else }}{{ $reverse = false }}{{ end -}}
+        {{- with index . "orientation" }}{{ $orientation = . }}{{ end -}}
+        {{- with index . "cols" }}{{ $cols = . }}{{ end -}}
+        {{- with index . "color" }}{{ $color = . }}{{ end -}}
+        {{- with index . "padding" }}{{ $padding = . }}{{ end -}}
+        {{- with index . "header" }}{{ $header = . }}{{ end -}}
+        {{- with index . "footer" }}{{ $footer = . }}{{ end -}}
+    {{- end -}}
+
+    {{- $list := .RegularPagesRecursive.ByDate -}}
+    {{- if eq $sort "weight" -}}
+        {{- $list = .RegularPagesRecursive.ByWeight -}}
+    {{- else if eq $sort "publication" -}}
+        {{- $list = .RegularPagesRecursive.ByPublishDate -}}
+    {{- else if eq $sort "expiration" -}}
+        {{- $list = .RegularPagesRecursive.ByExpiryDate -}}
+    {{- else if eq $sort "lastmod" -}}
+        {{- $list = .RegularPagesRecursive.ByLastmod -}}
+    {{- else if eq $sort "length" -}}
+        {{- $list = .RegularPagesRecursive.ByLength -}}
+    {{- else if eq $sort "title" -}}
+        {{- $list = .RegularPagesRecursive.ByTitle -}}
+    {{- else if eq $sort "linktitle" -}}
+        {{- $list = .RegularPagesRecursive.ByLinkTitle -}}
+    {{- else if ne $sort "date" -}}
+        {{- $list = .RegularPagesRecursive.ByParam $sort -}}        
+    {{- end -}}
+    {{- if $reverse -}}{{- $list = $list.Reverse -}}{{ end -}}
+
+     {{ if .Section }}
+        <div class="container-fluid flex-fill p-0">
+            {{- partial "assets/card-group.html" (dict 
+                "page" .
+                "list" $list
+                "max" (len $list)
+                "cols" $cols
+                "title" $title
+                "paginate" true
+                "class" "border-0"
+                "orientation" $orientation
+                "color" $color
+                "padding" $padding
+                "header" $header
+                "footer" $footer
+                ) 
+            -}}
+        </div>
+    {{ end }}
+{{- end -}}
