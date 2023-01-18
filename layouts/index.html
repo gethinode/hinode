@@ -4,7 +4,7 @@
 
 {{ define "main" -}}
     {{ $page := . -}}
-    {{ range $index, $section := site.Params.mainSections -}}
+    {{ range $index, $section := site.Params.home.sections -}}
         {{ $pages := where site.RegularPages "Type" "in" $section -}}
         {{ $sectionURL := "" -}}
         {{ range $page := first 1 $pages -}}

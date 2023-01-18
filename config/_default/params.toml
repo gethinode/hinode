@@ -1,39 +1,20 @@
-## Homepage
-title = "Hinode"
-titleSeparator = "-"
-titleAddition = "A Clean Theme for Hugo"
-description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
-fullCover = false
-mainSections = ["blog", "projects"]
-docs_version = "0.8"
+# toml-docs-start main
+[main]
+    separator = "-"
+    description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+# toml-docs-end main
 
-## Open Graph
-images = ["logo.png"]
-ogLocale = "en_US"
-domainTLD = "hinode-demo.markdumay.org"
+# toml-docs-start docs
+[docs]
+    version = "0.8"
+# toml-docs-end docs
 
-## Twitter Cards
-# twitterSite = "@gethinode"
-# twitterCreator = "@markdumay"
-
-## JSON-LD
-schemaType = "Organization"
-schemaName = "Hinode"
-schemaAuthor = "Mark Dumay"
-schemaAuthorTwitter = "https://twitter.com/markdumay"
-schemaAuthorLinkedIn = "https://www.linkedin.com/in/markdumay/"
-schemaAuthorGitHub = "https://github.com/markdumay"
-schemaLocale = "en-US"
-schemaLogo = "img/logo512x512.png"
-schemaLogoWidth = 512
-schemaLogoHeight = 512
-schemaImage = "img/logo1280x640.png"
-schemaImageWidth = 1280
-schemaImageHeight = 640
-# schemaTwitter = "https://twitter.com/gethinode"
-# schemaLinkedIn = ""
-schemaGitHub = "https://github.com/markdumay/hugo-theme-hinode"
-schemaSection = "blog"
+# toml-docs-start home
+[home]
+    sections = ["blog", "projects"]
+    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    fullCover = false
+# toml-docs-end home
 
 # toml-docs-start navigation
 [navigation]
@@ -67,8 +48,31 @@ schemaSection = "blog"
     themeFont = "Inter"
     themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap"
 
-[main]
-    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+[schema]
+    type = "Organization"
+    name = "Hinode"
+    locale = "en-US"
+    # twitter = "https://twitter.com/gethinode"
+    # linkedIn = ""
+    github = "https://github.com/markdumay/hugo-theme-hinode"
+    section = "blog"
+    [author]
+        name = "Mark Dumay"
+        twitter = "https://twitter.com/markdumay"
+        linkedin = "https://www.linkedin.com/in/markdumay/"
+        github = "https://github.com/markdumay"
+    [logo]
+        url = "img/logo512x512.png"
+        width = 512
+        height = 512
+    [image]
+        url = "img/logo1280x640.png"
+        width = 1280
+        height = 640
+
+[opengraph]
+    images = ["logo.png"]
+    locale = "en_US"
 
 [comments]
     enabled = false

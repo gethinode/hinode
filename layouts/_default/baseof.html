@@ -17,7 +17,7 @@
                 -}}
             </div>
             {{ if .IsHome -}}
-                {{ if .Site.Params.fullCover -}}
+                {{ if .Site.Params.home.fullCover -}}
                     <div class="d-flex flex-fill {{ if .Site.Params.navigation.fixed }}mt-5{{ end }}">
                         {{ block "featured" . }}{{ end -}}
                     </div>
@@ -44,7 +44,7 @@
             {{ end -}}
         </div>
 
-        {{ if and .IsHome .Site.Params.fullCover -}}
+        {{ if and .IsHome .Site.Params.home.fullCover -}}
             <div class="">
                 {{ block "main" . }}{{ end -}}
             </div>

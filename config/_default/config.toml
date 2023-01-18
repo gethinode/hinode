@@ -1,24 +1,30 @@
-baseURL = "https://hinode-demo.markdumay.org/"
-canonifyURLs = false
-
+# toml-docs-start main
 title = "Hinode"
-author = "Mark Dumay"
 copyright = "Copyright © 2023 Mark Dumay."
 paginate = 9
-enableRobotsTXT = true
-languageCode = "en-us"
-enableInlineShortcodes = true
 enableGitInfo = true
+# toml-docs-end main
+
+# additional settings
+baseURL = "https://hinode-demo.markdumay.org/"
+canonifyURLs = false
+enableEmoji = true
+enableRobotsTXT = true
+enableInlineShortcodes = true
+
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
 ignoreErrors = ["error-remote-getjson"]
-enableEmoji = true
-timeout = "60s"
 
-# Multilingual
+# toml-docs-start build
+timeout = "60s"
+# toml-docs-end build
+
+# toml-docs-start language
+languageCode = "en-us"
 defaultContentLanguage = "en"
-# disableLanguages = ["nl"]
-DefaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = true
+# toml-docs-end language
 
 [taxonomies]
   tag = 'tags'
