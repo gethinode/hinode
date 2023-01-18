@@ -10,7 +10,7 @@
         </div>
         <div class="col col-sm-6 col-md-4">
             {{ if .Site.Params.main.featurePhoto }}
-                {{- partial "image.html" (dict "url" .Site.Params.main.featurePhoto "ratio" "4x3" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Site.Params.title) -}}
+                {{- partial "image.html" (dict "url" .Site.Params.main.featurePhoto "ratio" "4x3" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Site.Title) -}}
             {{ end }}
         </div>
         <div class="col col-md-2 d-none d-md-block"></div>
