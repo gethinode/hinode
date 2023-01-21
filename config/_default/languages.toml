@@ -1,7 +1,9 @@
+# toml-docs-start lang-main
 [en]
     languageName = "English"
     contentDir = "content/en"
     weight = 1
+# toml-docs-end lang-main
 # toml-docs-start lang-param
     [en.params.head]
         tagline = "A Hugo Theme"

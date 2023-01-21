@@ -38,7 +38,7 @@ The following diagram illustrates the conceptual base design:
 
 ### Configuration
 
-Hinode uses several settings from Hugo's [main configuration]({{< param "links.hugo_config" >}}). Several extensions are defined in the [custom site parameters]({{< param "links.hugo_config_dir" >}}) and [language-specific configuration]({{< param "links.hugo_lang" >}}).
+Hinode uses several settings from Hugo's [main configuration]({{< param "links.hugo_config" >}}). Several extensions are defined in the [custom site parameters]({{< param "links.hugo_config_dir" >}}) and [language-specific configuration]({{< param "links.hugo_lang_config" >}}).
 
 #### Main configuration
 
@@ -72,7 +72,7 @@ The below configuration shows the default configuration set in `config/_default/
 
 #### Language-specific configuration
 
-Hinode supports [multilingual content]({{< param "links.hugo_lang" >}}). The following parameters are used in the site's footer, header, and meta data. Refer to the [languages]{{< ref "languages" >}}) section to review the various configuration options to enable multilingual content.
+Hinode supports [multilingual content]({{< param "links.hugo_lang_config" >}}). The following parameters are used in the site's footer, header, and meta data. Refer to the [languages]{{< ref "languages" >}}) section to review the various configuration options to enable multilingual content.
 
 | Section | Setting       | Default | Description |
 |---------|---------------|---------|-------------|
