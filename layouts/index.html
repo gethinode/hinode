@@ -1,55 +1,26 @@
-{{ define "featured" -}}
+{{- define "featured" -}}
     {{- partial "home/featured.html" . -}}
-{{ end -}}
+{{- end -}}
 
-{{ define "main" -}}
-    {{ $page := . -}}
-    {{ range $index, $section := site.Params.home.sections -}}
-        {{ $pages := where site.RegularPages "Type" "in" $section -}}
-        {{ $sectionURL := "" -}}
-        {{ range $page := first 1 $pages -}}
-            {{ $sectionURL = $page.Parent.RelPermalink -}}
-        {{ end -}}
+{{- define "main" -}}
+    {{- $page := . -}}
+    {{- range $index, $section := site.Params.home.sections -}}
+        {{- $pages := where site.RegularPages "Type" "in" $section -}}
+        {{- $sectionURL := "" -}}
+        {{- range $page := first 1 $pages -}}
+            {{- $sectionURL = $page.Parent.RelPermalink -}}
+        {{- end -}}
 
-        <div class="container-fluid flex-fill p-0">
-            {{ $items := $pages.ByDate.Reverse -}}
-            {{ $title := (T (printf "recent%s" (strings.FirstUpper $section))) -}}
-            {{ $max := 3 -}}
-            {{ $moreTitle := (T (printf "more%s" (strings.FirstUpper $section))) -}}
+        {{- $title := (T (printf "recent%s" (strings.FirstUpper $section))) -}}
+        {{- $moreTitle := (T (printf "more%s" (strings.FirstUpper $section))) -}}
 
-            {{ if (modBool $index 2) -}}
-                {{- partial "assets/card-group.html" (dict 
-                    "page" $page
-                    "list" $items
-                    "max" $max
-                    "cols" 3
-                    "title" $title
-                    "href" $sectionURL
-                    "hrefTitle" $moreTitle
-                    "class" "border-0"
-                    "orientation" "stacked"
-                    "padding" "0"
-                    "header" "full"
-                    "footer" "none"
-                    ) 
-                -}}
-            {{ else -}}
-                {{- partial "assets/card-group.html" (dict 
-                    "page" $page
-                    "list" $items
-                    "max" $max
-                    "cols" 1
-                    "title" $title
-                    "href" $sectionURL
-                    "hrefTitle" $moreTitle
-                    "class" "border-1 card-emphasize"
-                    "padding" "3"
-                    "header" "none"
-                    "footer" "tags"
-                    "orientation" "none"
-                    )
-                -}}
-            {{ end -}}
-        </div>
-    {{ end -}}
-{{ end -}}
+        {{- partial "assets/section-list.html" (dict 
+            "page" $page 
+            "section" $section 
+            "home" true 
+            "title" $title
+            "moreTitle" $moreTitle
+            "sectionURL" $sectionURL)
+        -}}
+    {{- end -}}
+{{- end -}}
