@@ -2,6 +2,7 @@
     languageName = "English"
     contentDir = "content/en"
     weight = 1
+# toml-docs-start lang-param
     [en.params.head]
         tagline = "A Hugo Theme"
     [en.params.feature]
@@ -13,6 +14,7 @@
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
         socialTitle = "Follow me"
         socialCaption = "I work on everything coding and tweet developer memes"
+# toml-docs-end lang-param
 
 [nl]
     languageName = "Nederlands"

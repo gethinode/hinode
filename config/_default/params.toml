@@ -134,6 +134,7 @@
     hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
     hugo_config_dir = "https://gohugo.io/getting-started/configuration/#configuration-directory"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
+    hugo_lang = "https://gohugo.io/content-management/multilingual/#configure-languages"
     hugo_menus = "https://gohugo.io/content-management/menus/"
     hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
     hugo_ordering = "https://gohugo.io/templates/lists/#order-content"
