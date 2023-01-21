@@ -1,7 +1,7 @@
 ---
 title: Layout
 description: Hinode uses a grid-based, responsive design for the home page, single pages and list pages.
-date: 2023-01-18
+date: 2023-01-21
 group: configuration
 layout: docs
 ---
@@ -229,16 +229,45 @@ Single pages follow the base layout but introduce two columns next to the body c
 
 ### Default layout
 
-<!-- TODO: explain default layout -->
+By default, single pages, such as a blog page, include the following elements in the body:
+
+- **Title** - the title of the page as set in the page's frontmatter.
+- **Metadata** - the date of the page, the modification date (if applicable), the read time, and the amount of words on the page.
+- **Tags** - links to any tags defined in the page's frontmatter.
+- **Description** - the description as defined in the page's frontmatter, or as summarized by Hugo if omitted in the frontmatter.
+- **Thumbnail** - a thumbnail image with figure caption that links to the photo credits (if defined in the frontmatter).
+- **Navigation links** - links on the bottom of the page that link to the previoud and next page within the current section.
+
+The below example illustrates the parameters used in the page's frontmatter:
+
+```yaml
+---
+author: Mark Dumay
+title: Another project
+date: 2021-07-15
+description: Another project.
+tags: ["javascript", "golang"]
+thumbnail: img/coffee.jpg
+photoCredits: <a href="https://unsplash.com/@kfred">Karl Fredrickson</a>
+photoSource: <a href="https://unsplash.com/photos/TYIzeCiZ_60">Unsplash</a>
+---
+```
 
 ### Documentation layout
 
-<!-- TODO: explain documentation layout -->
+Documentation pages use a more straightforward, simplified layout compared to the default layout. They include the following elements in their body:
 
-| Setting      | Default | Description |
-|--------------|---------|-------------|
-| docs_version | -       | Default version to use in documentation links. |
-{.table}
+- **Title** - the title of the page as set in the page's frontmatter.
+- **Description** - the description as defined in the page's frontmatter, or as summarized by Hugo if omitted in the frontmatter.
+- **Metadata** - a revision date and link to the latest git commit on the bottom of the page. Enable `enableGitInfo` in the [main configuration](#main-configuration) for the git commit message to work.
+
+Be sure to select the `docs` layout in the page's frontmatter to enable the documentation layout:
+
+```yml
+---
+layout: docs
+---
+```
 
 ### Example
 
@@ -277,3 +306,16 @@ Single pages follow the base layout but introduce two columns next to the body c
         </div>
     </div>
 </div>
+
+### Configuration
+
+The configuration of the documentation pages is set in the `docs` section of the site parameters. The folllowing settings are supported:
+
+| Setting      | Default | Description |
+|--------------|---------|-------------|
+| docs_version | -       | Default version to use in documentation links. |
+{.table}
+
+The below configuration shows the default configuration set in `config/_default/params.toml`.
+
+{{< toml-docs name="docs" file="config/_default/params.toml" >}}
