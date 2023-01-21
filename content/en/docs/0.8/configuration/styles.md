@@ -6,7 +6,7 @@ group: configuration
 layout: docs
 ---
 
-<!-- TODO: expand SCSS build process -->
+<!-- TODO: include dartsass -->
 
 Hinode uses Sass files to take advantage of variables, maps, and functions to generate the cascading style sheets of the website. By utilizing [npm]({{< ref "overview" >}}), Bootstrap's source Sass file are automatically ingested and kept up to date.
 
@@ -28,7 +28,7 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 
 4. Compile the Sass files
 
-   The partial `partials/head/stylesheet.html` reads the application entrypoint, configures the `node_modules` folder as import path, and compiles the stylesheet into a single file `main.css`. In production mode, the output is minified and linked to with a [fingerprint]({{< param "links.hugo_fingerprint" >}}).
+   The partial `partials/head/stylesheet.html` reads the application entrypoint, configures the `node_modules` folder as import path, and transpiles the stylesheet into a single file `main.css`. In production mode, the output is minified and linked to with a [fingerprint]({{< param "links.hugo_fingerprint" >}}).
 
 5. Link to the stylesheet in the base layout
 
