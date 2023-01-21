@@ -73,8 +73,10 @@
     dark = "#212529"
 # toml-docs-end theme-colors
     themeOpacity = "10"
+# toml-docs-start font
     themeFont = "Inter"
     themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap"
+# toml-docs-end font
 
 [schema]
     type = "Organization"
@@ -130,6 +132,7 @@
     git_download = "https://git-scm.com"
     github_pr = "https://help.github.com/articles/about-pull-requests/"
     github_rebase = "https://help.github.com/articles/about-git-rebase/"
+    google_fonts = "https://fonts.google.com"
     html_codeguide = "https://codeguide.co/#html"
     hugo = "https://gohugo.io"
     hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
