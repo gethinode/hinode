@@ -2,11 +2,14 @@
     languageName = "English"
     contentDir = "content/en"
     weight = 1
-    [en.params]
-        introTitle = "Welcome to Hinode!"
-        introCaption = "A clean documentation and blog theme for your Hugo site based on Bootstrap 5."
-        introLink = "/en/about"
-        introLinkTitle = "About"
+    [en.params.head]
+        tagline = "A Hugo Theme"
+    [en.params.feature]
+        message = "Welcome to Hinode!"
+        tagline = "A clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+        link = "/en/about"
+        caption = "About"
+    [en.params.footer]
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
         socialTitle = "Follow me"
         socialCaption = "I work on everything coding and tweet developer memes"
@@ -15,11 +18,14 @@
     languageName = "Nederlands"
     contentDir = "content/nl"
     weight = 2
-    [nl.params]
-        introTitle = "Welkom bij Hinode!"
-        introCaption = "Een thema voor Hugo gebaseerd op Bootstrap 5."
-        introLink = "/nl/over-mij"
-        introLinkTitle = "Over mij"
+    [nl.params.head]
+        tagline = "Een Hugo Thema"
+    [nl.params.feature]
+        message = "Welkom bij Hinode!"
+        tagline = "Een documentatie en blog thema voor Hugo gebaseerd op Bootstrap 5."
+        link = "/nl/over-mij"
+        caption = "Over mij"
+    [nl.params.footer]
         license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
         socialTitle = "Volg mij"
         socialCaption = "Ik doe aan programmeren en tweet memes"
