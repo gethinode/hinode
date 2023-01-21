@@ -18,6 +18,6 @@ Hinode uses Bootstrap's font configuration. The font stack includes support for 
 
 ## Customization
 
-The font stack is defined in the `assets/scss/common/_variables.scss` file. The variable `$themeFont` is initialized to the value in the [font configuration](#font-configuration). 
+The font stack is defined in the `assets/scss/common/_variables.scss` file. The variable `$themeFont` is initialized to the value in the [font configuration](#font-configuration).
 
 {{< scss-docs name="font" file="assets/scss/common/_variables.scss" >}}
