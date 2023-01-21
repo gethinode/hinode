@@ -17,7 +17,7 @@ The other two sections of interest are `devDependencies` and `otherDependencies`
 ```yml
 {
     "name": "@markdumay/hugo-theme-hinode",
-    "version": "0.7.8",
+    "version": "0.8.0",
     "scripts": {
         [...]
     },
@@ -27,7 +27,7 @@ The other two sections of interest are `devDependencies` and `otherDependencies`
         [...]
     },
     "otherDependencies": {
-        "hugo": "0.109.0"
+        "hugo": "0.110.0"
     }
 }
 ```
