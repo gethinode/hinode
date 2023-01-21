@@ -71,7 +71,7 @@ $navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Par
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
-// Import theme styles
+// Import Hinode theme styles
 @import "components/blockquote.scss";
 @import "components/buttons.scss";
 @import "components/card.scss";
