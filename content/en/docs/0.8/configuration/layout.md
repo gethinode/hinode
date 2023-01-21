@@ -10,7 +10,7 @@ Hinode uses Bootstrap's [grid system]({{< param "links.bs_grid" >}}) and [breakp
 
 ## Base layout
 
-The base layout defines a page skeleton of which all other pages are derived. It consists of four major sections, being a header, body, social footer, and bottom footer. It also loads sytlesheets, scripts, and generates the metadata. The header includes the [main navigation]({{< ref "navigation#main-navigation" >}}) and can be optionally fixed to the top. By default, the base layout is expanded to fill the entire available viewport. This means that all elements stretch horizontally across the entire viewport. The body also expands vertically, where the footers align to the bottom of the viewport. 
+The base layout defines a page skeleton of which all other pages are derived. It consists of four major sections, being a header, body, social footer, and bottom footer. It also loads sytlesheets, scripts, and generates the metadata. The header includes the [main navigation]({{< ref "navigation#main-navigation" >}}) and can be optionally fixed to the top. By default, the base layout is expanded to fill the entire available viewport. This means that all elements stretch horizontally across the entire viewport. The body also expands vertically, where the footers align to the bottom of the viewport.
 
 ### Example
 
