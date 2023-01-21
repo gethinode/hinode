@@ -7,14 +7,13 @@
 
 {{ $url := .url -}}
 {{ $supportedMediaTypes := slice "image/png" "image/jpeg" "image/gif" "image/tiff" "image/bmp" "image/webp" -}}
-{{ $remote := false -}}
-
-{{ $img := resources.GetMatch $url -}}
-{{ if (hasPrefix (lower $url) "http") -}}
+{{ $img := "" }}
+{{ $remote := hasPrefix (lower $url) "http" }}
+{{ if $remote }}
     {{ $img = resources.GetRemote $url -}}
-    {{ $remote = true -}}
-{{ end -}}
-
+{{ else }}
+    {{ $img = resources.GetMatch $url -}}
+{{ end }}
 
 {{ with $img -}}
     {{ if in $supportedMediaTypes (string $img.MediaType) -}}
