@@ -96,7 +96,7 @@ The home page introduces a feature element and provides a selection of the three
 
 ### Example
 
-The following diagram illustrates the conceptual layout of home page:
+The following diagram illustrates the conceptual layout of the home page:
 
 <div class="container-fluid text-center bg-light border rounded-3 bg-opacity-10 p-3">
     <div class="row g-3">
