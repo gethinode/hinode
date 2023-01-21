@@ -26,7 +26,7 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 
    The import order of the source files defines which variables and functions to use. In Sass, the first definition of a variable or function takes precedence. For example, to override the setting for the variable `$primary`, is needs to be defined prior to Bootstrap's definition in `_variables.scss`.
 
-4. Compile the Sass files
+4. Transpile the Sass files
 
    The partial `partials/head/stylesheet.html` reads the application entrypoint, configures the `node_modules` folder as import path, and transpiles the stylesheet into a single file `main.css`. In production mode, the output is minified and linked to with a [fingerprint]({{< param "links.hugo_fingerprint" >}}).
 
