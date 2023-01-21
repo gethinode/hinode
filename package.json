@@ -16,8 +16,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "init": "shx rm -rf .git && git init -b main",
-    "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "npm run clean",
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
     "prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
@@ -32,7 +30,6 @@
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\"",
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
     "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
-    "server": "exec-bin node_modules/.bin/hugo/hugo server",
     "test": "npm run -s lint",
     "env": "exec-bin node_modules/.bin/hugo/hugo env",
     "precheck": "npm version",
@@ -40,8 +37,7 @@
     "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
     "create:syntax": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=monokailight > ./assets/scss/components/_syntax.scss",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
-    "upgrade": "npx npm-check-updates -u",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "upgrade": "npx npm-check-updates -u"
   },
   "repository": {
     "type": "git",
