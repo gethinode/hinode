@@ -15,5 +15,9 @@ $font-weight-normal:            300 !default;
 $font-weight-bold:              600 !default;
 $font-weight-bolder:            bolder !default;
 
+strong {
+    font-weight:                600 !important;
+}
+// scss-docs-end font
 $black:                       #000 !default;
 $btn-toggle-color:              $black !default;
