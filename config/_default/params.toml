@@ -33,7 +33,7 @@
 [list]
     [blog]
         title = "Blog"
-        sort = "title"
+        sort = "date"
         reverse = false
         cols = 3
         color = ""
@@ -41,6 +41,20 @@
         header = "full"
         footer = "none"
         orientation = "stacked"
+        style = "border-0"
+        homepage = 3
+    [projects]
+        title = "Projects"
+        sort = "title"
+        reverse = false
+        cols = 1
+        color = ""
+        padding = "3"
+        header = "none"
+        footer = "tags"
+        orientation = "none"
+        style = "border-1 card-emphasize"
+        homepage = 3
 # toml-docs-end list
 
 [favicon]
@@ -118,6 +132,7 @@
     html_codeguide = "https://codeguide.co/#html"
     hugo = "https://gohugo.io"
     hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
+    hugo_config_dir = "https://gohugo.io/getting-started/configuration/#configuration-directory"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_menus = "https://gohugo.io/content-management/menus/"
     hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
