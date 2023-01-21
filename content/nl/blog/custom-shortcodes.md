@@ -2,15 +2,15 @@
 author: "Mark Dumay"
 title: "Extra shortcodes"
 date: 2022-12-05
-description: "Beschikbare shortcodes die gebruik maken van Bootstrap componenten en vormgeving"
+modified: 2022-12-31
+description: "Beschikbare shortcodes die gebruik maken van Bootstrap componenten en vormgeving."
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
 photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
 photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
 ---
 
-
-Bootstrap is een open-source raamwerk voor het ontwikkelen van websites gemaakt door Twitter. Het volgt een aanpak die geschikt is voor meerdere schermformaten, inclusief mobiele apparaten. Bootstrap bevat een uitgebreide collectie van direct bruikbare componenten, zoals navigatiemenu's, paginering, knoppen, en nog veel meer. Om het gebruik hiervan in markdown pagina's te vergemakkelijken, stelt het Hinode thema enkele van deze componenten beschikbaar als Hugo shortcode. De onderstaande paragrafen bieden een overzicht en uitleg van de beschikbare shortcodes.
+Bootstrap is een open-source raamwerk voor het ontwikkelen van websites gemaakt door Twitter. Het volgt een aanpak die geschikt is voor meerdere schermformaten, inclusief mobiele apparaten. Bootstrap bevat een uitgebreide collectie van direct bruikbare componenten, zoals navigatiemenu's, paginering, knoppen, en nog veel meer. Om het gebruik hiervan in markdown pagina's te vergemakkelijken, stelt Hinode enkele van deze componenten beschikbaar als Hugo shortcode. De onderstaande paragrafen bieden een overzicht en uitleg van de beschikbare shortcodes.
 
 ## Carousel Shortcode
 
@@ -183,7 +183,7 @@ order by last_name;
 
 ## Image Shortcode
 
-Gebruik de `image` shortcode om een adaptief plaatje met een specifieke verhouding te tonen. De bron kan verwijzen naar een bestand in de `/assets/img` folder van je website of naar een publieke weblocatie. De shortcode genereert het plaatje als een zogenaamde [image set][mozilla_image] om deze te optimaliseren voor meerdere schermformaten en verschillende resoluties. Achter de schermen converteert Hugo de plaatjes naar een `WebP` bestandsformaat en slaat deze op in een lokale folder (`resources` of `public`). De kwaliteit van het plaatje kan worden opgegeven in de sectie `[imaging]` van de site [configuratie][hugo_imaging] (75 is de standaardwaarde). De geschikte bestandsformaten zijn `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp` en `.webp`. Een plaatje in het formaat `.jpeg` is beschikbaar voor oudere browsers. De shortcode ondersteunt de volgende parameters:
+Gebruik de `image` shortcode om een adaptief plaatje met een specifieke verhouding te tonen. De bron kan verwijzen naar een bestand in de `/assets/img` folder van je website of naar een publieke weblocatie. De shortcode genereert het plaatje als een zogenaamde [image set]({{< param "links.mozilla_image" >}}) om deze te optimaliseren voor meerdere schermformaten en verschillende resoluties. Achter de schermen converteert Hugo de plaatjes naar een `WebP` bestandsformaat en slaat deze op in een lokale folder (`resources` of `public`). De kwaliteit van het plaatje kan worden opgegeven in de sectie `[imaging]` van de site [configuratie]({{< param "links.hugo_imaging" >}}) (75 is de standaardwaarde). De geschikte bestandsformaten zijn `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp` en `.webp`. Een plaatje in het formaat `.jpeg` is beschikbaar voor oudere browsers. De shortcode ondersteunt de volgende parameters:
 
 | Parameter | Verplicht | Toelichting |
 |-----------|----------|-------------|
@@ -202,6 +202,3 @@ Ter illustratie toont de volgende shortcode een plaatje met afgeronde hoeken en 
 
 Het resultaat ziet er als volgt uit:
 {{< image src="img/flowers.jpg" ratio="21x9" caption="Onderschrift" class="rounded">}}
-
-[mozilla_image]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
-[hugo_imaging]: https://gohugo.io/content-management/image-processing/#imaging-configuration

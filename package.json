@@ -1,7 +1,15 @@
 {
   "name": "@markdumay/hugo-theme-hinode",
   "version": "0.7.9",
-  "description": "Hinode is a clean blog theme for Hugo, an open-source static site generator",
+  "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
+  "keywords": [
+    "hugo",
+    "theme",
+    "bootstrap",
+    "responsive",
+    "front-end",
+    "blog"
+  ],
   "main": "index.js",
   "publishConfig": {
     "access": "public",
@@ -18,7 +26,7 @@
     "build:debug": "exec-bin node_modules/.bin/hugo/hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
     "clean": "shx rm -rf public resources",
-    "clean:install": "shx rm -rf package-lock.json node_modules ",
+    "clean:install": "shx rm -rf package-lock.json node_modules",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
     "lint:scripts": "eslint assets/js",
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\"",
@@ -39,7 +47,7 @@
     "type": "git",
     "url": "git+https://github.com/markdumay/hugo-theme-hinode.git"
   },
-  "author": "",
+  "author": "Mark Dumay",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/markdumay/hugo-theme-hinode/issues"
@@ -66,6 +74,6 @@
     "stylelint-config-standard-scss": "^6.1.0"
   },
   "otherDependencies": {
-    "hugo": "0.109.0"
+    "hugo": "0.110.0"
   }
 }

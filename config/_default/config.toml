@@ -1,23 +1,30 @@
+# toml-docs-start main
+title = "Hinode"
+copyright = "Copyright © 2023 Mark Dumay."
+paginate = 9
+enableGitInfo = true
+# toml-docs-end main
+
+# additional settings
 baseURL = "https://hinode-demo.markdumay.org/"
 canonifyURLs = false
-
-title = "Hinode"
-author = "Mark Dumay"
-copyright = "Copyright © 2022 Mark Dumay."
-paginate = 9
+enableEmoji = true
 enableRobotsTXT = true
-languageCode = "en-us"
 enableInlineShortcodes = true
+
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
 ignoreErrors = ["error-remote-getjson"]
-enableEmoji = true
-timeout = "60s"
 
-# Multilingual
+# toml-docs-start build
+timeout = "60s"
+# toml-docs-end build
+
+# toml-docs-start language
+languageCode = "en-us"
 defaultContentLanguage = "en"
-# disableLanguages = ["nl"]
-DefaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = true
+# toml-docs-end language
 
 [taxonomies]
   tag = 'tags'
@@ -68,5 +75,10 @@ DefaultContentLanguageInSubdir = true
     source = "static"
     target = "static"
   [[module.mounts]]
-    source = "node_modules/flexsearch"
+    source = "node_modules/bootstrap/dist/js"
+    target = "assets/js/vendor/bootstrap"
+    includeFiles = "*.bundle.js"
+  [[module.mounts]]
+    source = "node_modules/flexsearch/dist"
     target = "assets/js/vendor/flexsearch"
+    includeFiles = "*.bundle.js"

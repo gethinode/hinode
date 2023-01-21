@@ -1,0 +1,29 @@
+<!-- 
+    Displays an alert. The shortcode supports the following arguments:
+    "color":        Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", "white" or "black".
+    "dismissible"   Optional flag to indicate the alert is dismissible, defaults to false.
+-->
+
+{{ $color := "primary" -}}
+{{ with .Get "color" }}{{ $color = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+{{ if not (in $supportedColors $color) -}}
+    {{ errorf "Invalid value for param 'color': %s" .Position -}}
+    {{ $color = "primary" -}}
+{{ end -}}
+
+{{ $dismissibleParam := "false" -}}
+{{ $dismissible := false -}}
+{{ with .Get "dismissible" }}{{ $dismissibleParam = . }}{{ end -}}
+{{ $supportedFlags := slice "true" "false" -}}
+{{ if in $supportedFlags $dismissibleParam -}}
+    {{ if eq $dismissibleParam "true" }}{{ $dismissible = true }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'dismissible': %s" .Position -}}
+{{ end -}}
+
+<div class="alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}" role="alert">
+    {{ trim .Inner " \n" -}}
+    {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
+</div>

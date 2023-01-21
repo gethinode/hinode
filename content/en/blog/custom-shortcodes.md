@@ -2,18 +2,187 @@
 author: "Mark Dumay"
 title: "Custom Shortcodes"
 date: 2022-12-05
-description: "Available shortcodes using Bootstrap components and styling"
+modified: 2022-12-31
+description: "Available shortcodes using Bootstrap components and styling."
 tags: ["bootstrap", "shortcode"]
-thumbnail: img/boots.jpg
-photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
-photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
+thumbnail: img/sketch.jpg
+photoCredits: <a href="https://www.pexels.com/@picjumbo-com-55570/">picjumbo.com</a>
+photoSource: <a href="https://www.pexels.com/photo/white-printer-paper-196645/">Pexels</a>
 ---
 
 Bootstrap is an open-source web development framework originally created by Twitter. It uses a responsive, mobile-first approach that scales seamlessly across different screen sizes. Bootstrap includes an extensive collection of ready-to-use components, such as navigation bars, pagination controls, buttons, and much more. The Hinode theme exposes several of those components as Hugo shortcodes to simplify their usage within markdown content. The below paragraphs illustrate the available shortcodes and how to use them.
 
-## Carousel Shortcode
+## Accordion
 
-Use the `carousel` shortcode to display a carousel of several images, with behavior similar as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
+Use the `accordion` shortcode to show a group of vertically collapsing and expanding items. Add `accordion-item` inner elements for each accordion item. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| class       | No  | Optional class attribute of the accordion element, e.g. “w-50”. |
+{.table}
+
+Add an inner `accordion-item` element for each item of the accordion. The `accordion-item` element supports the following arguments:
+
+| Argument  | Required | Description |
+|-----------|----------|-------------|
+| header      | Yes | Required header of the accordion element. |
+| class       | No  | Optional class attribute of the inner accordion element, e.g. “show”. |
+{.table}
+
+As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
+
+```html
+{{</* accordion */>}}
+  {{</* accordion-item header="Accordion Item #1" class="show" */>}}
+    This is the first item's accordion body. It supports HTML content. The item is shown by adding the value
+    <code>show</code> to the <code>class</code> argument.
+  {{</* /accordion-item */>}}
+  {{</* accordion-item header="Accordion Item #2" */>}}
+    This is the second item's accordion body. It too supports HTML content.
+  {{</* /accordion-item */>}}
+  {{</* accordion-item header="Accordion Item #3" */>}}
+    This is the third item's accordion body.
+  {{</* /accordion-item */>}}
+{{</* /accordion */>}}
+```
+
+The result looks like this:
+
+{{< accordion >}}
+  {{< accordion-item header="Accordion Item #1" class="show" >}}
+    This is the first item's accordion body. It supports HTML content. The item is shown by adding the value <code>show</code> to the <code>class</code> argument.
+  {{< /accordion-item >}}
+  {{< accordion-item header="Accordion Item #2" >}}
+    This is the second item's accordion body. It too supports HTML content.
+  {{< /accordion-item >}}
+  {{< accordion-item header="Accordion Item #3" >}}
+    This is the third item's accordion body.
+  {{< /accordion-item >}}
+{{< /accordion >}}
+
+## Alert
+
+Use the `alert` shortcode to display a contextual feedback message. The inner content is used as alert text. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No  | Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| dismissible | No  | Optional flag to indicate the alert is dismissible, defaults to false. |
+{.table}
+
+As an example, the following shortcode displays a simple alert.
+
+```html
+{{</* alert color="danger" */>}}
+A simple danger alert—check it out!
+{{</* /alert */>}}
+```
+
+The result looks like this:
+
+{{< alert color="danger" >}}
+A simple danger alert—check it out!
+{{< /alert >}}
+
+## Breadcrumb
+
+Use the `breadcrumb` shortcode to display the current page’s location within the site's navigational hierarchy. The shortcode requires no arguments, see the following example.
+
+```html
+{{</* breadcrumb */>}}
+```
+
+The result looks like this:
+
+{{< breadcrumb >}}
+
+## Button
+
+Use the `button` shortcode to display a button with a hyperlink. The inner content is used as button title. The button supports an optional badge and tooltip. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| href        | No   | Optional address for the button or hyperlink. Automatically assigned when using collapse. |
+| state       | No   | Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive". |
+| size        | No   | Optional size of the button, either "sm", "md" (default), or "lg". |
+| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| badge       | No   | Optional positioned badge to display on top of the button. |
+| outline     | No   | Optional flag indicating the button should be outlined, either "false" (default) or "true". |
+| aria-label  | No   | Optional label for the badge. |
+| tooltip     | No   |  Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/inactive buttons. |
+| collapse    | No   | Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons. |
+| placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". |
+{.table}
+
+As an example, the following shortcode displays a tooltip for a dark button with a badge.
+
+```html
+{{</* button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" */>}}
+Inbox
+{{</* /button */>}}
+```
+
+The result looks like this:
+
+{{< button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" >}}
+Inbox
+{{< /button >}}
+
+## Button Group
+
+Use the `button-group` shortcode to display a group of buttons. Add inner `<button>` elements for each [button](#button). The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| aria-label  | No   | Optional assistive label for the button group. |
+{.table}
+
+As an example, the following shortcode displays a group of three buttons.
+
+```html
+{{</* button-group aria-label="Basic example" */>}}
+  {{</* button color="primary" href="#" */>}}Left{{</* /button */>}}
+  {{</* button color="primary" href="#" */>}}Middle{{</* /button */>}}
+  {{</* button color="primary" href="#" */>}}Right{{</* /button */>}}
+{{</* /button-group */>}}
+```
+
+The result looks like this:
+
+{{< button-group aria-label="Basic example" >}}
+  {{< button color="primary" href="#" >}}Left{{< /button >}}
+  {{< button color="primary" href="#" >}}Middle{{< /button >}}
+  {{< button color="primary" href="#" >}}Right{{< /button >}}
+{{< /button-group >}}
+
+## Card
+
+Use the `card` shortcode to display a card that links to a content page. When using a rich layout, the card includes a thumbnail and a header.
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| path        | Yes | Required path of the page. |
+| class       | No  | Optional class attribute of the card element, e.g. “w-50”. |
+| color       | No  | Optional theme color of the card, either "primary", "secondary", "success", "danger", "warning", "info", "light", or "dark". By default, no color is specified. |
+| padding     | No  | Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default). |
+| header      | No  | Optional header components of the card, displayed in small caps. Supported values are "full" (default), "publication", "tags", and "none". |
+| footer      | No  | Optional footer components of the card, displayed in small caps. Supported values are "full", "publication", "tags", and "none" (default). |
+| orientation | No  | Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none". |
+{.table}
+
+As an example, the following shortcode displays a colored, borderless horizontal card that links to the [Rich Content]({{< ref "rich-content" >}} "Rich Content") page. It includes a custom header and footer.
+
+```html
+{{</* ccard path="rich-content" class="w-100 border-0" orientation="horizontal" color="info" header="publication" footer="tags */>}}
+```
+
+The result looks like this:
+
+{{< card path="rich-content" class="w-100 border-0" orientation="horizontal" color="info" header="publication" footer="tags" >}}
+
+## Carousel
+
+Use the `carousel` shortcode to display a carousel of several images, with similar behavior as the [Image Shortcode](#image-shortcode). The shortcode supports the following arguments:
 
 | Argument  | Required | Description |
 |-----------|----------|-------------|
@@ -40,13 +209,47 @@ As an example, the following shortcode displays a centered carousel with three s
 ```
 
 The result looks like this:
+
 {{< carousel ratio="16x9" class="col-sm-12 col-lg-8 mx-auto" >}}
   {{< img src="img/coffee.jpg" caption="slide 1" >}}
   {{< img src="img/phone.jpg" caption="slide 2" >}}
   {{< img src="img/dunes.jpg" caption="slide 3" >}}
 {{< /carousel >}}
 
-## Command Prompt Shortcode
+## Collapse
+
+Use the `collapse` shortcode to reveil or hide a panel. The panel can contain both HTML code and plain text. Link a button to the panel by assigning it's ID to the `collapse` attribute. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| id          | Yes      | Required unique id of the collapse element, e.g. "collapse-1". |
+| class       | No       | Optional class attribute of the inner panel element, e.g. “p-3”. |
+{.table}
+
+As an example, the following shortcode displays a button that, when clicked, triggers a panel to appear or disappear.
+
+```html
+{{</* button collapse="collapse-1" */>}}
+Trigger panel
+{{</* /button */>}}
+
+{{</* collapse id="collapse-1" class="p-3 border rounded" */>}}
+Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but 
+revealed when the user activates the relevant trigger.
+{{</* /collapse */>}}
+```
+
+The result looks like this:
+
+{{< button collapse="collapse-1" >}}
+Trigger panel
+{{< /button >}}
+
+{{< collapse id="collapse-1" class="p-3 border rounded" >}}
+Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but revealed when the user activates the relevant trigger.
+{{< /collapse >}}
+
+## Command Prompt
 
 The `command` shortcode generates terminal output for either `bash`, `powershell`, or `sql` shell languages. The shortcode supports the following arguments:
 
@@ -158,6 +361,7 @@ order by last_name;
 ```
 
 The result looks like this:
+
 {{% command prompt="mysql>" shell="sql" %}}
 set @my_var = 'foo';
 set @my_other_var = 'bar';
@@ -180,7 +384,7 @@ order by last_name;
 (out)1 row in set (0.00 sec)
 {{% /command %}}
 
-## Image Shortcode
+## Image
 
 Use the `image` shortcode to display a responsive image with a specific aspect ratio. The source link can refer to either an image available in the `/assets/img` folder of your site or a public web location. The shortcode renders the image as a so-called [image set][mozilla_image] to optimize the image for different screen sizes and resolutions. Behind the scenes, Hugo renders the images in `WebP` format and stores them in a local folder (`resources` or `public`). The images are processed using the quality setting specified in the `[imaging]` section of the main [config file][hugo_imaging] (defaults to 75). Supported image types are `.png`, `.jpeg`, `.gif`, `.tiff`, `.bmp`, and `.webp`. A fallback image of type `.jpeg` is provided for older browsers.The shortcode supports the following arguments:
 
@@ -201,6 +405,87 @@ As an example, the following shortcode displays an image with rounded corners an
 
 The result looks like this:
 {{< image src="img/flowers.jpg" ratio="21x9" caption="Figure caption" class="rounded">}}
+
+## Spinner
+
+Use the `spinner` shortcode to indicate the loading state of a component or page. The inner content is used as alternative description. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No  | Optional theme color of the spinner, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| grow        | No  | Optional flag to indicate the spinner is growing instead of rotating, defaults to false. |
+| class       | No  | Optional class attribute of the spinner wrapping element, e.g. “text-center”. |
+{.table}
+
+As an example, the following shortcode displays a centered spinner.
+
+```html
+{{</* spinner color="info" class="text-center" */>}}
+Loading...
+{{</* /spinner */>}}
+```
+
+The result looks like this:
+{{< spinner color="info" class="text-center" >}}
+Loading...
+{{< /spinner >}}
+
+## Toast
+
+Use the `toast` shortcode to display a dismissable message in the bottom-right corner of the screen. The Hinode theme defines a click event for a button with id `toastButton`. Modify the file `assets/js/toast.js` if needed. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| header      | No  | Optional header of the toast message. Uses the site title by default. |
+{.table}
+
+As an example, the following shortcode displays a button that, when clicked, triggers the toast message.
+
+```html
+{{</* button id="toastButton" */>}}
+Show toast
+{{</* /button */>}}
+
+{{</* toast */>}}
+This is a toast message.
+{{</* /toast */>}}
+```
+
+The result looks like this:
+
+{{< button id="toastButton" >}}
+Show toast
+{{< /button >}}
+
+{{< toast >}}
+This is a toast message.
+{{< /toast >}}
+
+## Tooltip
+
+Use the `tooltip` shortcode to display a tooltip for a hyperlink. Refer to the [button shortcode]({{< ref "#button" >}} "button shortcode") on how to display a tooltip for a button instead. The inner content is used as hyperlink text. The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| color       | No   | Optional theme color of the element, either "primary" (default), "secondary", "success", "danger",  "warning", "info", "light", or "dark". |
+| title       | Yes  | Title to display in the tooltip. |
+| href        | Yes  | Address for the button or hyperlink. |
+| placement   | No   | How to position the tooltip: "top" (default), "bottom", "left", or "right". |
+{.table}
+
+As an example, the following shortcode displays a tooltip for a colored hyperlink.
+
+```html
+{{</* tooltip color="warning" title="Tooltip" href="#" */>}}
+Tooltip demonstration
+{{</* /tooltip */>}}
+```
+
+The result looks like this:
+
+{{< tooltip color="warning" title="Tooltip" href="#" >}}
+Tooltip demonstration
+{{< /tooltip >}}
 
 [mozilla_image]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
 [hugo_imaging]: https://gohugo.io/content-management/image-processing/#imaging-configuration

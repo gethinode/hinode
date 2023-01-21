@@ -1,58 +1,106 @@
-## Homepage
-title = "Hinode"
-titleSeparator = "-"
-titleAddition = "Clean Blog Theme"
-description = "Hinode is a clean blog theme for your Hugo site based on Bootstrap 5."
+# toml-docs-start main
+[main]
+    separator = "-"
+    description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+# toml-docs-end main
 
-## Open Graph
-images = ["logo.png"]
-ogLocale = "en_US"
-domainTLD = "hinode-demo.markdumay.org"
+# toml-docs-start docs
+[docs]
+    version = "0.8"
+# toml-docs-end docs
 
-## Twitter Cards
-# twitterSite = "@gethinode"
-# twitterCreator = "@markdumay"
+# toml-docs-start home
+[home]
+    sections = ["blog", "projects"]
+    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    fullCover = false
+# toml-docs-end home
 
-## JSON-LD
-schemaType = "Organization"
-schemaName = "Hinode"
-schemaAuthor = "Mark Dumay"
-schemaAuthorTwitter = "https://twitter.com/markdumay"
-schemaAuthorLinkedIn = "https://www.linkedin.com/in/markdumay/"
-schemaAuthorGitHub = "https://github.com/markdumay"
-schemaLocale = "en-US"
-schemaLogo = "img/logo512x512.png"
-schemaLogoWidth = 512
-schemaLogoHeight = 512
-schemaImage = "img/logo1280x640.png"
-schemaImageWidth = 1280
-schemaImageHeight = 640
-# schemaTwitter = "https://twitter.com/gethinode"
-# schemaLinkedIn = ""
-schemaGitHub = "https://github.com/markdumay/hugo-theme-hinode"
-schemaSection = "blog"
+# toml-docs-start navigation
+[navigation]
+    logo = "/img/logo_embedded.svg"
+    color = "white"
+    style = "light"
+    fixed = true
+    offset = "3em"
+    search = true
+    breadcrumb = false
+    toc = true
+    sidebar = true
+# toml-docs-end navigation
 
+# toml-docs-start list
+[list]
+    [blog]
+        title = "Blog"
+        sort = "date"
+        reverse = false
+        cols = 3
+        color = ""
+        padding = "0"
+        header = "full"
+        footer = "none"
+        orientation = "stacked"
+        style = "border-0"
+        homepage = 3
+    [projects]
+        title = "Projects"
+        sort = "title"
+        reverse = false
+        cols = 1
+        color = ""
+        padding = "3"
+        header = "none"
+        footer = "tags"
+        orientation = "none"
+        style = "border-1 card-emphasize"
+        homepage = 3
+# toml-docs-end list
 
 [favicon]
     logo = "img/favicon.png"
     sizes = [16, 32, 48]
 
-[search]
-    enabled = true
-
-[toc]
-    enabled = true
-
+# toml-docs-start theme-colors
 [style]
-    themeColor = "#D43900" #00b0f0
+    primary = "#D43900"
+    secondary = "#6c757d"
+    success = "#198754"
+    info = "#0dcaf0"
+    warning = "#ffc107"
+    danger = "#dc3545"
+    light = "#f8f9fa"
+    dark = "#212529"
+# toml-docs-end theme-colors
     themeOpacity = "10"
     themeFont = "Inter"
     themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap"
 
-[main]
-    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
-    logo = "/img/logo_embedded.svg"
+[schema]
+    type = "Organization"
+    name = "Hinode"
+    locale = "en-US"
+    # twitter = "https://twitter.com/gethinode"
+    # linkedIn = ""
+    github = "https://github.com/markdumay/hugo-theme-hinode"
+    section = "blog"
+    [author]
+        name = "Mark Dumay"
+        twitter = "https://twitter.com/markdumay"
+        linkedin = "https://www.linkedin.com/in/markdumay/"
+        github = "https://github.com/markdumay"
+    [logo]
+        url = "img/logo512x512.png"
+        width = 512
+        height = 512
+    [image]
+        url = "img/logo1280x640.png"
+        width = 1280
+        height = 640
 
+[opengraph]
+    images = ["logo.png"]
+    locale = "en_US"
 
 [comments]
     enabled = false
@@ -62,3 +110,62 @@ schemaSection = "blog"
     # By default, light and dark mode correspond to github-light and github-dark, respectively.
     # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
     #theme = "" 
+
+[links]
+    blist = "https://github.com/apvarun/blist-hugo-theme"
+    bootstrap = "https://getbootstrap.com"
+    bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
+    bs_breakpoints = "https://getbootstrap.com/docs/5.3/layout/breakpoints"
+    bs_grid = "https://getbootstrap.com/docs/5.3/layout/grid"
+    bs_offcanvas = "https://getbootstrap.com/docs/5.3/components/offcanvas"
+    bs_navbar_placement = "https://getbootstrap.com/docs/5.3/components/navbar/#placement"
+    cc_by_nc_4_0 = "https://creativecommons.org/licenses/by-nc/4.0/"
+    commit_message = "https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"
+    contrast_checker = "https://accessibleweb.com/color-contrast-checker/"
+    css_codeguide = "https://codeguide.co/#css"
+    doks = "https://github.com/h-enk/doks"
+    eslint = "https://eslint.org"
+    flexsearch = "https://github.com/nextapps-de/flexsearch"
+    fontawesome = "https://fontawesome.com"
+    git_download = "https://git-scm.com"
+    github_pr = "https://help.github.com/articles/about-pull-requests/"
+    github_rebase = "https://help.github.com/articles/about-git-rebase/"
+    html_codeguide = "https://codeguide.co/#html"
+    hugo = "https://gohugo.io"
+    hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
+    hugo_config_dir = "https://gohugo.io/getting-started/configuration/#configuration-directory"
+    hugo_fingerprint = "https://gohugo.io/hugo-pipes/fingerprint"
+    hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
+    hugo_i18n = "https://gohugo.io/functions/i18n"
+    hugo_lang = "https://gohugo.io/content-management/multilingual"
+    hugo_lang_config = "https://gohugo.io/content-management/multilingual/#configure-languages"
+    hugo_menus = "https://gohugo.io/content-management/menus/"
+    hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
+    hugo_ordering = "https://gohugo.io/templates/lists/#order-content"
+    hugo_templates = "https://gohugo.io/templates/introduction/"
+    hugo_toc = "https://gohugo.io/content-management/toc"
+    issue_tracker = "https://github.com/markdumay/hugo-theme-hinode/issues"
+    license = "https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE"
+    markdown_md013 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013---line-length"
+    markdown_md024 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md024---multiple-headings-with-the-same-content"
+    markdown_md026 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md026---trailing-punctuation-in-heading"
+    markdown_md033 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md033---inline-html"
+    markdown_md034 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md034---bare-url-used"
+    markdown_md051 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md051---link-fragments-should-be-valid"
+    markdown_md053 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md053---link-and-image-reference-definitions-should-be-needed"
+    markdown_rules = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md"
+    markdownlint = "https://github.com/DavidAnson/markdownlint-cli2"
+    mozilla_image = "https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
+    netlify = "https://www.netlify.com"
+    nodejs = "https://nodejs.org"
+    npm = "https://www.npmjs.com"
+    observatory = "https://observatory.mozilla.org/analyze/hinode-demo.markdumay.org"
+    package_npm = "https://www.npmjs.com/package/@markdumay/hugo-theme-hinode"
+    pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fhinode-demo.markdumay.org%2F"
+    repository = "https://github.com/markdumay/hugo-theme-hinode"
+    repository_child = "https://github.com/markdumay/hugo-theme-hinode-child.git"
+    repository_owner = "https://github.com/markdumay/"
+    semver = "https://semver.org"
+    stylelint = "https://stylelint.io"
+    utterances = "https://utteranc.es"
+    wcag_contrast = "https://www.w3.org/TR/WCAG20/#visual-audio-contrast"
