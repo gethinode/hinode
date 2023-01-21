@@ -38,6 +38,10 @@ The following diagram illustrates the conceptual base design:
 
 ### Configuration
 
+Hinode uses several settings from Hugo's [main configuration]({{< param "links.hugo_config" >}}). Several extensions are defined in the [custom site parameters]({{< param "links.hugo_config_dir" >}}) and [language-specific configuration]({{< param "links.hugo_lang" >}}).
+
+#### Main configuration
+
 The base layout uses the [main configuration]({{< param "links.hugo_config" >}}) of Hugo. The settings below are actively used by Hinode:
 
 | Setting       | Default | Description |
@@ -52,6 +56,8 @@ The below configuration shows the default configuration set in `config/_default/
 
 {{< toml-docs name="main" file="config/_default/config.toml" >}}
 
+#### Extended configuration
+
 Hinode uses the following extended settings in the `main` section of the `site parameters`:
 
 | Setting      | Default | Description |
@@ -63,6 +69,26 @@ Hinode uses the following extended settings in the `main` section of the `site p
 The below configuration shows the default configuration set in `config/_default/params.toml`.
 
 {{< toml-docs name="main" file="config/_default/params.toml" >}}
+
+#### Language-specific configuration
+
+Hinode supports [multilingual content]({{< param "links.hugo_lang" >}}). The following parameters are used in the site's footer, header, and meta data. Refer to the [languages]{{< ref "languages" >}}) section to review the various configuration options to enable multilingual content.
+
+| Section | Setting       | Default | Description |
+|---------|---------------|---------|-------------|
+| head    | tagline       | -       | Tagline used on the site's title for the home page. |
+| feature | message       | -       | Welcome message used in the featured section on the home page. |
+| feature | tagline       | -       | Tagline used below the welcome message in the featured section on the home page. |
+| feature | link          | -       | Call to action link in the featured section on the home page. |
+| feature | caption       | "About" | Call to action title in the featured section on the home page. |
+| footer  | license       | -       | License displayed on the site's footer. |
+| footer  | socialTitle   | -       | Title displayed in the site's social footer. |
+| footer  | socialCaption | -       | Caption displayed in the site's social footer. |
+{.table}
+
+The below configuration shows the default configuration set in `config/_default/languages.toml` for the English language.
+
+{{< toml-docs name="lang-param" file="config/_default/languages.toml" >}}
 
 ## Home page
 
