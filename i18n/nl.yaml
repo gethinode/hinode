@@ -1,4 +1,6 @@
 # Content
+- id: about
+  translation: "Over mij"
 - id: postedOnDate
   translation: "Gepubliceerd op {{ . }}"
 - id: lastModified

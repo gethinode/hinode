@@ -1,4 +1,6 @@
 # Content
+- id: about
+  translation: "About"
 - id: postedOnDate
   translation: "Posted on {{ . }}"
 - id: lastModified
@@ -59,7 +61,6 @@
   translation: "Not found"
 - id: pageNotFoundHome
   translation: "home page"
-
 
 # Navigation
 - id: toggleNavigation
