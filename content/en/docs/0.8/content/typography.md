@@ -6,8 +6,7 @@ group: content
 layout: docs
 ---
 
-Hinode uses a mix of basic Markdown syntax enriched with Bootstrap styling. The following paragraphs illustrate the most common applications. Refer to the Hugo documentation to review the extended description of supported [content formats]({{< param "links.hugo_content" >}}). It also contains links to external resource about Markdown.
-
+Hinode uses a mix of basic Markdown syntax enriched with Bootstrap styling for the typography. The following paragraphs illustrate the most common applications. Refer to the Hugo documentation to review the extended description of supported [content formats]({{< param "links.hugo_content" >}}). It also contains links to external resource about Markdown.
 
 ## Headings
 
