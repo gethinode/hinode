@@ -121,6 +121,7 @@
     bs_grid = "https://getbootstrap.com/docs/5.3/layout/grid"
     bs_offcanvas = "https://getbootstrap.com/docs/5.3/components/offcanvas"
     bs_navbar_placement = "https://getbootstrap.com/docs/5.3/components/navbar/#placement"
+    bs_tables = "https://getbootstrap.com/docs/5.3/content/tables"
     cc_by_nc_4_0 = "https://creativecommons.org/licenses/by-nc/4.0/"
     commit_message = "https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"
     contrast_checker = "https://accessibleweb.com/color-contrast-checker/"
