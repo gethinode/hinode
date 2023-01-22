@@ -82,6 +82,7 @@ Make a paragraph stand out by adding `.lead` class in HTML.
   This is a lead paragraph. It stands out from regular paragraphs.
 </p>
 ```
+
 The result looks like this:
 
 <p class="lead">
@@ -114,8 +115,8 @@ _This line of text renders as underlined._
 
 **This line of text renders as bold text.**
 
+<!-- markdownlint-disable-next-line -->
 *This line of text renders as italicized text.*
-
 
 ### HTML Styling
 
@@ -203,6 +204,7 @@ The result looks like this:
 
 Use a single backtick `` ` `` character to denote an inline code element. Use triple backticks `` ``` `` to denote the start and end of a code block. Add the language to the openeing backticks to specify the syntax. Hugo uses Chroma highlighting to style the syntax of [supported languages]({{< param "links.hugo_chroma" >}}). The following example defines an `HTML` code block.
 
+<!-- markdownlint-disable MD040 MD048 -->
 ~~~
 ```html
 <!DOCTYPE html>
@@ -217,6 +219,7 @@ Use a single backtick `` ` `` character to denote an inline code element. Use tr
 </html>
 ```
 ~~~
+<!-- markdownlint-enable MD040 MD048 -->
 
 The result looks like this:
 

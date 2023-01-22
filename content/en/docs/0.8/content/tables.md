@@ -102,7 +102,7 @@ The result looks like this:
 | 3. | Third item  | This is the third row  |
 {.table .table-striped-columns}
 
-### Hoverable rows 
+### Hoverable rows
 
 Add `.table-hover` to enable a hover state on the table rows.
 
@@ -146,11 +146,11 @@ The result looks like this:
 | 3. | Third item  |
 {.table .table-success .table-striped}
 
-## Table borders 
+## Table borders
 
 Adjust the borders of a table to match your style preferences.
 
-### Bordered tables 
+### Bordered tables
 
 Add `.table-bordered` for borders on all sides of the table and cells. Add an optional `border-<theme>` class to apply [theme colors]({{< ref "colors" >}}) to the table borders.
 
