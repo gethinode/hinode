@@ -1,0 +1,9 @@
+{{ $input := .Inner | markdownify }}
+{{ $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" }}
+{{ $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" }}
+{{ $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" }}
+{{ $class := .Get 0 | default "" }}
+{{ $old := "<table>" }}
+{{ $new := printf "<table class=\"table %s\">" $class }}
+{{ $input := replace $input $old $new }}
+{{ $input | safeHTML }}
