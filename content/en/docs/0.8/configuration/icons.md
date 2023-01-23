@@ -1,12 +1,12 @@
 ---
 title: Icons
-description: 
-date: 2023-01-22
+description: Configure secure access to icons from Bootstrap and Font Awesome.
+date: 2023-01-23
 group: configuration
 layout: docs
 ---
 
-<!-- TODO: expand -->
+Hinode processes the Bootstrap icons to ensure they adhere to the strict [content security policy]({{< ref "server" >}}). In addition, it provides access to the free icons of [Font Awesome]({{< param "links.fontawesome" >}}).
 
 ## Bootstrap icons
 
@@ -14,7 +14,7 @@ Bootstrap uses various embedded vector images (in <abbr title="Scalable Vector G
 
 ### Build pipeline
 
-Hinodes uses npm and mounted folders to create a flexibile virtual file system that is automatically kept up to date. Review the [overview]({{< ref "overview" >}}) for a detailed explanation. The build pipeline of the Bootstrap icons consists of five steps. It is intertwined with the [styles build process]({{< ref "styles" >}}).
+Hinodes uses npm and mounted folders to create a flexibile virtual file system that is automatically kept up to date. Review the [overview]({{< ref "overview" >}}) for a detailed explanation. The build pipeline of the Bootstrap icons consists of four steps. It is intertwined with the [build process for the stylesheets]({{< ref "styles" >}}).
 
 1. Override the inline Bootstrap icon definitions
 
@@ -47,7 +47,7 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 
 4. Process the icon files
 
-   Add the local icon files to the `assets/icons` folder with a filename as defined in step 1. The partial `partials/head/stylesheet.html` calls the partial `partials/head/icons.html` to process all icon files with the `.svg` extension recursively. The output is stored in the `icons` folder within the output directory (usually `public` when building the site). The icon files are referenced in the main stylesheet automtically.
+   Add the local icon files to the `assets/icons` folder with a filename as defined in step 1. The partial `partials/head/stylesheet.html` calls the partial `partials/head/icons.html` to process all icon files with the `.svg` extension recursively. The output is stored in the `icons` folder within the output directory (usually `public` when building the site). The icon files are referenced in the main stylesheet automatically.
 
 ### Icons definitions
 
@@ -63,10 +63,6 @@ The exported variables are defined in the file `assets/scss/common/_export.scss`
 
 ## Font Awesome icons
 
-[Font Awesome]({{< param "links.fontawesome" >}}) provides a collection of icons to be used freely on websites and other media. Hinode bundles the 
+[Font Awesome]({{< param "links.fontawesome" >}}) provides a collection of icons to be used freely on websites and other media. Hinode uses its <abbr title="Cascading Style Sheets">CSS</abbr> files and web fonts, as the [content security policy]({{< ref "server" >}}) prohibits the inline execution of stylesheets by the JavaScripts of Font Awesome. The CSS files are bundled with the main stylesheet. The web fonts are copied to the `/static/fonts` folder with the repository. Use the npm command `npm run copy:fonts` to copy the latest version of the files. The CSS files are referenced in the `assets/scss/app.scss` file. This is the current configuration:
 
 {{< scss-docs name="awesome" file="assets/scss/app.scss" >}}
-
-`package.json`
-
-"copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
