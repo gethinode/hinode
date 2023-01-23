@@ -68,9 +68,11 @@ $navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Par
 @import "bootstrap/scss/utilities/api";
 
 // Import Font Awesome
+// scss-docs-start awesome
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
+// scss-docs-end awesome
 
 // Import Hinode theme styles
 @import "components/blockquote.scss";
