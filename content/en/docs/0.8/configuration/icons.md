@@ -26,8 +26,7 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 
 2. Export the Sass variables
 
-   Export the required Sass variables by defining them in the `assets/scss/common/_export.scss` file. Hinode converts the variable names from kebab case to snake case to make them compatible with Hugo's variable naming convention. For example, the css variable `--form-switch-focus-color` is exposed as 
-   `.form_switch_focus_color` to the Hugo templates.
+   Export the required Sass variables by defining them in the `assets/scss/common/_export.scss` file. Hinode converts the variable names from kebab case to snake case to make them compatible with Hugo's variable naming convention. For example, the css variable `--form-switch-focus-color` is exposed as `.form_switch_focus_color` to the Hugo templates.
 
    ```scss
    :hinode-theme {
@@ -38,7 +37,7 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 3. Reference the Sass variables within each icon file
 
    Use [Hugo templating]({{< param "links.hugo_templates">}}) to reference the Sass variables for fill colors and stroke colors. For example, the file `assets/icons/form-switch-focus-bg-image.svg` defines the fill color as `{{ .form_switch_focus_color }}`. The entire vector definition is as such:
-    
+
    ```html
    <svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'>
        <circle r='3' fill='{{ .form_switch_focus_color }}'/>

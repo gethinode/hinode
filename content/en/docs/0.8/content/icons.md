@@ -146,7 +146,6 @@ The result looks like this:
     <div><i class="fa-solid fa-snowplow fa-fw bg-info"></i> Snowplow</div>
 </div>
 
-
 ## Lists
 
 Use the classes `fa-ul` and `fa-li` to replace default bullets in unordered lists. The following example illustrates how this works.
@@ -225,6 +224,7 @@ Font Awesome supports various animations by simply adding a animation class to t
     <i class="fa-solid fa-sync fa-spin"></i>
 </div>
 ```
+
 The result looks like this:
 
 <div class="fa-3x">
@@ -278,7 +278,6 @@ The following table describes the available classes.
 | `fa-pull-left` | Pulls an icon by floating it left and applying a margin-right |
 | `fa-pull-right` | Pulls an icon by floating it right and applying a margin-left |
 {{< /table >}}
-
 
 ## Stacking icons
 
