@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Collapse"
-date: 2023-01-05
+date: 2023-01-25
 description: "Use the collapse shortcode to reveil or hide a panel."
 group: components
 layout: docs
@@ -25,23 +25,13 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a button that, when clicked, triggers a panel to appear or disappear.
 
-```html
+{{< example lang="hugo" >}}
 {{</* button collapse="collapse-1" */>}}
-Trigger panel
+    Trigger panel
 {{</* /button */>}}
 
 {{</* collapse id="collapse-1" class="p-3 border rounded" */>}}
-Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but 
-revealed when the user activates the relevant trigger.
+    Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but 
+    revealed when the user activates the relevant trigger.
 {{</* /collapse */>}}
-```
-
-The result looks like this:
-
-{{< button collapse="collapse-1" >}}
-Trigger panel
-{{< /button >}}
-
-{{< collapse id="collapse-1" class="p-3 border rounded" >}}
-Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but revealed when the user activates the relevant trigger.
-{{< /collapse >}}
+{{< /example >}}

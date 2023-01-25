@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Button"
-date: 2023-01-05
+date: 2023-01-25
 description: "Use the button shortcode to display a button with a hyperlink."
 group: components
 layout: docs
@@ -33,14 +33,8 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a tooltip for a dark button with a badge.
 
-```html
+{{< example lang="hugo" >}}
 {{</* button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" */>}}
-Inbox
+    Inbox
 {{</* /button */>}}
-```
-
-The result looks like this:
-
-{{< button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" >}}
-Inbox
-{{< /button >}}
+{{< /example>}}

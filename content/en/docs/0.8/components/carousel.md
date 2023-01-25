@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Carousel"
-date: 2023-01-05
+date: 2023-01-25
 description: "Use the carousel shortcode to display a carousel of several images."
 group: components
 layout: docs
@@ -33,18 +33,10 @@ Add an inner `img` element for each slide of the carousel. The `img` element sup
 
 As an example, the following shortcode displays a centered carousel with three slides, 16x9 aspect ratio, and a relative width of 67% on large screens.
 
-```html
+{{< example lang="hugo" >}}
 {{</* carousel ratio="16x9" class="col-sm-12 col-lg-8 mx-auto" */>}}
   {{</* img src="img/coffee.jpg" caption="slide 1" */>}}
   {{</* img src="img/phone.jpg" caption="slide 2" */>}}
   {{</* img src="img/dunes.jpg" caption="slide 3" */>}}
 {{</* /carousel */>}}
-```
-
-The result looks like this:
-
-{{< carousel ratio="16x9" class="col-sm-12 col-lg-8 mx-auto" >}}
-  {{< img src="img/coffee.jpg" caption="slide 1" >}}
-  {{< img src="img/phone.jpg" caption="slide 2" >}}
-  {{< img src="img/dunes.jpg" caption="slide 3" >}}
-{{< /carousel >}}
+{{< /example >}}

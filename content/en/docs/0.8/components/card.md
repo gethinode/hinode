@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Card"
-date: 2023-01-05
+date: 2023-01-25
 description: "Use the card shortcode to display a card that links to a content page."
 group: components
 layout: docs
@@ -30,10 +30,6 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a colored, borderless horizontal card that links to the [Rich Content]({{< ref "rich-content" >}} "Rich Content") page. It includes a custom header and footer.
 
-```html
-{{</* card path="rich-content" class="w-100 border-0" orientation="horizontal" color="info" header="publication" footer="tags */>}}
-```
-
-The result looks like this:
-
-{{< card path="rich-content" class="w-100 border-0" orientation="horizontal" color="info" header="publication" footer="tags" >}}
+{{< example lang="hugo" >}}
+{{</* card path="rich-content" class="w-100 border-0" orientation="horizontal" color="info" header="publication" footer="tags" */>}}
+{{< /example >}}
