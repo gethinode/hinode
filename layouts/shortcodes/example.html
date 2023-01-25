@@ -1,0 +1,46 @@
+{{- /*
+  Usage: `example args`
+
+  `args` are all optional and can be one of the following:
+    * id: the `div`'s id - default: ""
+    * class: any extra class(es) to be added to the `div` - default: ""
+    * lang: language used to display the code. Use "hugo" to process Hugo (escaped) shortcodes - default: "html"
+    * show_markup: if the markup should be output in the HTML - default: `true`
+    * show_preview: if the preview should be output in the HTML - default: `true`
+
+    Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/example.html
+*/ -}}
+
+{{- $id := .Get "id" -}}
+{{- $class := .Get "class" -}}
+{{- $lang := .Get "lang" | default "html" -}}
+{{- $show_markup := .Get "show_markup" | default true -}}
+{{- $show_preview := .Get "show_preview" | default true -}}
+{{- $input := .Inner -}}
+{{- $content := .Inner -}}
+
+{{- if eq $lang "hugo" -}}
+    {{- $content = $content | markdownify }}
+    {{ $lang = "markdown" }}
+{{- end -}}
+
+<div class="rounded border">
+    {{- if eq $show_preview true -}}
+        <div {{ with $id }}id="{{ . }}"{{ end }} class="p-3 {{ with $class }} {{ . }}{{ end }}">
+            {{- $content -}}
+        </div>
+    {{- end -}}
+    <div class="d-flex align-items-center bg-light ps-3 pe-3 py-1 border-top border-bottom">
+        <small class="font-monospace text-muted text-uppercase">{{- $lang -}}</small>
+        <div class="d-flex ms-auto">
+            <button type="button" class="mt-0 me-0 border-0" title="Copy to clipboard">
+                <i class="fa-regular fa-clipboard"></i>
+            </button>
+        </div>
+    </div>
+    <div class="bg-light rounded p-1">
+        {{- if eq $show_markup true -}}
+            {{- highlight (trim $input "\n") $lang "" -}}
+        {{- end -}}
+    </div>
+</div>
