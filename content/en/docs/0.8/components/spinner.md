@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Spinner"
-date: 2023-01-05
+date: 2023-01-25
 description: "Use the spinner shortcode to indicate the loading state of a component or page."
 group: components
 layout: docs
@@ -26,13 +26,8 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a centered spinner.
 
-```html
+{{< example lang="hugo" >}}
 {{</* spinner color="info" class="text-center" */>}}
 Loading...
 {{</* /spinner */>}}
-```
-
-The result looks like this:
-{{< spinner color="info" class="text-center" >}}
-Loading...
-{{< /spinner >}}
+{{< /example>}}
