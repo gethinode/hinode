@@ -26,10 +26,10 @@ As an example, the following shortcode displays a button that, when clicked, tri
 
 {{< example lang="hugo" >}}
 {{</* button id="toastButton" */>}}
-Show toast
+    Show toast
 {{</* /button */>}}
 
 {{</* toast */>}}
-This is a toast message.
+    This is a toast message.
 {{</* /toast */>}}
 {{< /example >}}
