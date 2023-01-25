@@ -20,7 +20,7 @@
 {{- $content := .Inner -}}
 
 {{- if eq $lang "hugo" -}}
-    {{- $content = $content | markdownify }}
+    {{- $content = (trim $content "\n") | markdownify }}
     {{ $lang = "markdown" }}
 {{- end -}}
 
