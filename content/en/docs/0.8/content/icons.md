@@ -13,25 +13,25 @@ Hinode provides out-of-the box access to the free icons of [Font Awesome]({{< pa
 The [Font Awesome icon library]({{< param "links.fa_icons" >}}) provides access to more than 2.000 free and open-source icons. Simply search for a keyword and review the presented options. For example, searching for the keyword `music` and filtering for `free` returns a list of nearly 30 icons. Simply add the HTML statement to your Markdown content.
 
 ```html
-<i class="fa-regular fa-music"></i>
+<i class="fa-solid fa-music"></i>
 ```
 
 The result looks like this:
 
-<i class="fa-regular fa-music"></i>
+<i class="fa-solid fa-music"></i>
 
 The icons inherit the current styling options and as such blend in with text inline. For example, appply the [theme color]({{< ref "colors" >}}) `text-primary` to change the color of the icon.
 
 ```html
 <span class="text-primary">
-    <i class="fa-regular fa-music text-primary"></i>
+    <i class="fa-solid fa-music text-primary"></i>
 </span>
 ```
 
 The result looks like this:
 
 <span class="text-primary">
-    <i class="fa-regular fa-music"></i>
+    <i class="fa-solid fa-music"></i>
 </span>
 
 ## Sizing icons
