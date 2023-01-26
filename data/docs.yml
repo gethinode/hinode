@@ -20,15 +20,15 @@
     # - title: Comments
     # - title: Metadata
     - title: Server
-    - title: Deployment
+    # - title: Deployment
 
 - title: Content
   pages:
     - title: Typography
-    - title: Links and cross-references
-    - title: Images
+    # - title: Links and cross-references
+    # - title: Images
     - title: Tables
-    - title: Figures
+    # - title: Figures
     - title: Icons
 
 # - title: Forms
