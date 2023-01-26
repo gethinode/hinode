@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Toast"
-date: 2023-01-25
+date: 2023-01-26
 description: "Use the toast shortcode to display a dismissable message in the bottom-right corner of the screen."
 group: components
 layout: docs
@@ -29,7 +29,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
     Show toast
 {{</* /button */>}}
 
-{{</* toast */>}}
+{{</* toast header="Custom title" */>}}
     This is a toast message.
 {{</* /toast */>}}
 {{< /example >}}
