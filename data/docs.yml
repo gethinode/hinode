@@ -20,6 +20,7 @@
     # - title: Comments
     # - title: Metadata
     - title: Server
+    - title: Deployment
 
 - title: Content
   pages:
