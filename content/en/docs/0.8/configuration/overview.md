@@ -36,8 +36,9 @@ The other two sections of interest are `devDependencies` and `otherDependencies`
 
 Hugo supports the mounting of folders since version 0.56.0. Hinode takes advantage of this feature to create a virtual file system, combining assets from multiple sources. For example, the below section of the `/config/_default/config.toml` instructs Hugo to make Bootstrap's JavaScript distribution file `/node_modules/bootstrap/dist/js` available in the `/assets/js` folder. This file is then bundled with the JavaScript files defined in the `/assets/js` folder of Hinode.
 
-> When you add a mount, the default mount for the concerned target root is ignored: be sure to explicitly add it.
-{.blockquote}
+{{< alert color="primary" >}}
+    When you add a mount, the default mount for the concerned target root is ignored: be sure to explicitly add it.
+{{< /alert >}}
 
 ```toml
 [module]
