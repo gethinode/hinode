@@ -45,7 +45,7 @@
 
 - title: Components
   pages:
-    - title: Overview
+    # - title: Overview
     - title: Accordion
     - title: Alert
     - title: Badge
