@@ -83,7 +83,7 @@ Not quite sure? Use the Hinode child theme.
 #### Hinode child theme
 
 ```bash
-git clone https://github.com/markdumay/hugo-theme-hinode-child.git my-hinode-site && cd my-hinode-site
+git clone https://github.com/markdumay/gethinode/child.git my-hinode-site && cd my-hinode-site
 ```
 
 #### Hinode main theme
@@ -164,4 +164,4 @@ The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under
 [demo]: https://hinode-demo.markdumay.org/
 [license]: https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE
 [repository]: https://github.com/markdumay/hugo-theme-hinode.git
-[repository_child]: https://github.com/markdumay/hugo-theme-hinode-child.git
+[repository_child]: https://github.com/gethinode/child.git

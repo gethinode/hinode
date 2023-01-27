@@ -30,7 +30,7 @@ Not quite sure? Use the Hinode child theme.
 #### Hinode child theme
 
 ```bash
-git clone https://github.com/markdumay/hugo-theme-hinode-child.git my-hinode-site && cd my-hinode-site
+git clone https://github.com/gethinode/child.git my-hinode-site && cd my-hinode-site
 ```
 
 #### Hinode main theme
