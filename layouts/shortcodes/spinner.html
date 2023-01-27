@@ -1,0 +1,34 @@
+<!-- 
+    Displays a spinner. The shortcode supports the following arguments:
+    "color":        Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", "white" or "black".
+    "grow"          Optional flag to indicate the spinner is growing instead of rotating, defaults to false.
+    "class":        Optional class attribute of the spinner wrapping element, e.g. “text-center”.
+-->
+
+{{ $color := "primary" -}}
+{{ with .Get "color" }}{{ $color = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+{{ if not (in $supportedColors $color) -}}
+    {{ errorf "Invalid value for param 'color': %s" .Position -}}
+    {{ $color = "primary" -}}
+{{ end -}}
+
+{{ $growParam := "false" -}}
+{{ $grow := false -}}
+{{ with .Get "grow" }}{{ $growParam = . }}{{ end -}}
+{{ $supportedFlags := slice "true" "false" -}}
+{{ if in $supportedFlags $growParam -}}
+    {{ if eq $growParam "true" }}{{ $grow = true }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'grow': %s" .Position -}}
+{{ end -}}
+
+{{ $class := "" -}}
+{{ with .Get "class" }}{{ $class = . }}{{ end -}}
+
+{{ with $class }}<div class="{{ . }}">{{ end }}
+    <div class="spinner-{{ if $grow }}grow{{ else }}border{{ end }} text-{{ $color }}" role="status">
+        <span class="visually-hidden">{{ trim .Inner " \r\n" -}}</span>
+    </div>
+{{ if $class }}</div>{{ end }}

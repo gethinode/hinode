@@ -1,0 +1,24 @@
+<!-- 
+    Prepares a toast message. Use a trigger to display the message. The shortcode supports the following arguments:
+    "header":       Optional header of the toast message. Uses the site title by default.
+-->
+
+{{ $header := .Get "header" -}}
+{{ if not $header -}}
+    {{ $header = site.Title -}}
+{{ end -}}
+
+{{ $message := trim .Inner " \r\n" -}}
+{{ if not $message -}}
+    {{ errorf "Missing inner element text: %s" .Position -}}
+{{ end -}}
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastMessage" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">{{ $header }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">{{ $message }}</div>
+    </div>
+</div>

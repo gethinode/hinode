@@ -1,5 +1,5 @@
 <!-- Copied from doks -->
-<meta property="og:locale" content="{{ .Site.Params.ogLocale }}">
+<meta property="og:locale" content="{{ .Site.Params.opengraph.locale }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:title" content="{{ $.Scratch.Get "title" }}">
 <meta property="og:description" content="{{ $.Scratch.Get "description" }}">
@@ -9,7 +9,7 @@
 {{ else -}}
     <meta property="og:url" content="{{ .Permalink }}">
 {{ end -}}
-{{ with .Site.Params.title -}}
+{{ with .Site.Title -}}
     <meta property="og:site_name" content="{{ . }}">
 {{ end -}}
 

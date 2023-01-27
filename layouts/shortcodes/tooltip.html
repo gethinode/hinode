@@ -1,0 +1,45 @@
+<!-- 
+    Displays a tooltip for a link. The shortcode supports the following arguments:
+    "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
+                    "danger", "warning", "info", "light", "dark", "white" or "black".
+    "title"         Required text to display in the tooltip.
+    "href"          Required address for the button or hyperlink.
+    "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
+-->
+
+{{ $error := false }}
+{{ $type := "link" -}}
+
+{{ $title := trim .Inner " \r\n" -}}
+{{ if not $title -}}
+    {{ errorf "Missing inner element text: %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $color := "primary" -}}
+{{ with .Get "color" }}{{ $color = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+{{ if not (in $supportedColors $color) -}}
+    {{ errorf "Invalid value for param 'color': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $tooltip := .Get "title" -}}
+
+{{ $href := .Get "href" -}}
+{{ if not $href -}}
+    {{ errorf "Missing value for param 'href': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $placement := "top" -}}
+{{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
+{{ $supportedPlacements := slice "top" "bottom" "left" "right" -}}
+{{ if not (in $supportedPlacements $placement) -}}
+    {{ errorf "Invalid value for param 'placement': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ if not $error }}
+    {{- partial "button.html" (dict "type" $type "title" $title "color" $color "tooltip" $tooltip "href" $href "placement" $placement) -}} 
+{{ end }}

@@ -1,3 +1,5 @@
+{{- with partial "utilities/GetMenu" . }}{{ $.Scratch.Set "sidebar" . }}{{ end -}}
+
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
@@ -5,22 +7,50 @@
     </head>
 
     <body>
-        <div class="main d-flex flex-column">
-            <div class="justify-content-center">
-                <header>
-                    {{- partial "assets/navbar.html" . -}}
-                </header>
+        <div class="d-flex flex-column min-vh-100">
+            <div class="{{ if .Site.Params.navigation.fixed }}mb-4{{ end }}">
+                {{- partial "assets/navbar.html" (dict
+                    "page" .
+                    "fixed" (string .Site.Params.navigation.fixed)
+                    "color" (default "white" .Site.Params.navigation.color)
+                    "style" (default "light" .Site.Params.navigation.style))
+                -}}
             </div>
-                  
-            <div class="justify-content-center flex-grow-1">
+            {{ if .IsHome -}}
+                {{ if .Site.Params.home.fullCover -}}
+                    <div class="d-flex flex-fill {{ if .Site.Params.navigation.fixed }}mt-5{{ end }}">
+                        {{ block "featured" . }}{{ end -}}
+                    </div>
+                {{ else -}}
+                    <div class="{{ if .Site.Params.navigation.fixed }}mt-5{{ end }}">
+                        {{ block "featured" . }}{{ end -}}
+                    </div>
+                    <div class="d-flex flex-column flex-fill">
+                        {{ block "main" . }}{{ end -}}
+                    </div>
+                    <div class="">
+                        {{- partial "footer/social.html" . -}}
+                        {{- partial "footer/footer.html" . -}}
+                    </div>
+                {{ end -}}
+            {{ else -}}
+                <div class="d-flex flex-column flex-fill {{ if .Site.Params.navigation.fixed }}mt-5{{ end }}">
+                    {{ block "main" . }}{{ end -}}
+                </div>
+                <div class="">
+                    {{- partial "footer/social.html" . -}}
+                    {{- partial "footer/footer.html" . -}}
+                </div>
+            {{ end -}}
+        </div>
+
+        {{ if and .IsHome .Site.Params.home.fullCover -}}
+            <div class="">
                 {{ block "main" . }}{{ end -}}
             </div>
-                  
-            <div class="justify-content-center">
-                {{- partial "footer/social.html" . -}}
-                {{- partial "footer/footer.html" . -}}
-            </div>
-        </div>
+            {{- partial "footer/social.html" . -}}
+            {{- partial "footer/footer.html" . -}}
+        {{ end -}}
 
         {{- partialCached "footer/scripts.html" . -}}
     </body>

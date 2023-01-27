@@ -1,26 +1,34 @@
 # Content
+- id: about
+  translation: "About"
 - id: postedOnDate
   translation: "Posted on {{ . }}"
 - id: lastModified
-  translation: "(Last modified on {{ . }})"
+  translation: "Last modified on {{ . }}"
 - id: translationsLabel
   translation: "Other languages: "
 - id: translationsSeparator
   translation: ", "
+- id: more
+  translation: "More {{ . }}"
 - id: readMore
   translation: "Read More"
-- id: morePosts
+- id: moreBlog
   translation: "More Posts"
-- id: olderPosts
+- id: olderBlog
   translation: "Older Posts"
-- id: recentPosts
+- id: recentBlog
   translation: "Recent Posts"
-- id: newerPosts
+- id: newerBlog
   translation: "Newer Posts"
-- id: previousPost
+- id: previousBlog
   translation: "Previous Post"
-- id: nextPost
+- id: nextBlog
   translation: "Next Post"
+- id: recentProjects
+  translation: "Projects"
+- id: moreProjects
+  translation: "More Projects"
 - id: read
   translation: "read"
 - id: minutesShort
@@ -54,7 +62,6 @@
 - id: pageNotFoundHome
   translation: "home page"
 
-
 # Navigation
 - id: toggleNavigation
   translation: "Toggle navigation"
@@ -66,6 +73,8 @@
   translation: "Search {{ .Site.Title }}"
 - id: gcseClose
   translation: "Close"
+- id: home
+  translation: "Home"
 
 # Staticman
 - id: noComment

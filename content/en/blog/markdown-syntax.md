@@ -1,7 +1,7 @@
 ---
-author: "Hugo Authors"
-title: "Markdown Syntax Guide"
-description: "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
+author: Hugo Authors
+title: Markdown Syntax Guide
+description: Use Markdown syntax and basic HTML elements to style your Hugo content files.
 tags: ["markdown", "css", "html"]
 date: 2022-01-14
 thumbnail: img/phone.jpg # https://picsum.photos/id/160/3200/2119

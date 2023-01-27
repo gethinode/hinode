@@ -1,0 +1,81 @@
+{{- $page := .page }}
+{{- $section := .section }}
+{{- if not $section }}{{ errorf "Missing value for param 'section'" }}{{ end -}}
+{{- $home := .home }}
+{{ if ne (printf "%T" $home) "bool" }}
+    {{ errorf "Invalid value for param 'home'"}}
+{{ end }}
+{{- $title := .title -}}
+{{- $moreTitle := .moreTitle -}}
+{{- $sectionURL := .sectionURL -}}
+
+{{- $paginate := true -}}
+{{- $sort := "date" -}}
+{{- $reverse := true -}}
+{{- $orientation := "stacked" -}}
+{{- $cols := 3 -}}
+{{- $color := "" -}}
+{{- $padding := "0" -}}
+{{- $header := "full" -}}
+{{- $footer := "none" -}}
+{{- $style := "" -}}
+{{- $homepage := 3 -}}
+
+{{- with (index site.Params $section) -}}
+    {{- with index . "title" }}{{ $title = . }}{{ end -}}
+    {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
+    {{- if (index . "reverse") }}{{ $reverse = true }}{{ else }}{{ $reverse = false }}{{ end -}}
+    {{- with index . "orientation" }}{{ $orientation = . }}{{ end -}}
+    {{- with index . "cols" }}{{ $cols = . }}{{ end -}}
+    {{- with index . "color" }}{{ $color = . }}{{ end -}}
+    {{- with index . "padding" }}{{ $padding = . }}{{ end -}}
+    {{- with index . "header" }}{{ $header = . }}{{ end -}}
+    {{- with index . "footer" }}{{ $footer = . }}{{ end -}}
+    {{- with index . "style" }}{{ $style = . }}{{ end -}}
+{{- end -}}
+
+{{- $list := where site.RegularPages "Type" "in" $section -}}
+{{- $max := (len $list) -}}
+{{- if $home }}
+    {{ $paginate = false }}
+    {{ $max = $homepage }}
+{{ end -}}
+
+{{- if eq $sort "weight" -}}
+    {{- $list = $list.ByWeight -}}
+{{- else if eq $sort "publication" -}}
+    {{- $list = $list.ByPublishDate -}}
+{{- else if eq $sort "expiration" -}}
+    {{- $list = $list.ByExpiryDate -}}
+{{- else if eq $sort "lastmod" -}}
+    {{- $list = $list.ByLastmod -}}
+{{- else if eq $sort "length" -}}
+    {{- $list = $list.ByLength -}}
+{{- else if eq $sort "title" -}}
+    {{- $list = $list.ByTitle -}}
+{{- else if eq $sort "linktitle" -}}
+    {{- $list = $list.ByLinkTitle -}}
+{{- else if ne $sort "date" -}}
+    {{- $list = $list.ByParam $sort -}}        
+{{- end -}}
+{{- if $reverse -}}{{- $list = $list.Reverse -}}{{ end -}}
+
+<div class="container-fluid flex-fill p-0">
+    {{- partial "assets/card-group.html" (dict 
+        "page" $page
+        "list" $list
+        "max" 3
+        "cols" $cols
+        "title" $title
+        "href" $sectionURL
+        "hrefTitle" $moreTitle
+        "paginate" $paginate
+        "class" $style
+        "orientation" $orientation
+        "color" $color
+        "padding" $padding
+        "header" $header
+        "footer" $footer
+        ) 
+    -}}
+</div>

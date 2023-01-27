@@ -1,0 +1,5 @@
+{{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+Last updated: {{ $lastmodstr }}
+{{ with .GitInfo }}
+&bull;&nbsp;<a href="{{ site.Params.schema.gitHub }}/commit/{{ .Hash }}">{{ .Subject }} ({{ .AbbreviatedHash }})</a>
+{{ end -}}

@@ -1,0 +1,105 @@
+<!-- 
+    Displays a button. The shortcode supports the following arguments:
+    "title"         Required title of the button.
+    "href"          Optional address for the button or hyperlink.
+    "id"            Optional id of the button, to be used in the DOM.
+    "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
+    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
+    "color"         Optional theme color of the element, either "primary" (default), "secondary", "success",
+                    "danger", "warning", "info", "light", "dark", "white" or "black".
+    "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
+    "badge"         Optional positioned badge to display on top of the button.
+    "aria-label"    Optional assistive label for the badge.
+    "tooltip"       Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/
+                    inactive buttons.
+    "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons.
+    "type"          Optional type of the element, either "link" or "button" (default).
+    "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right".
+-->
+
+{{ $title := trim .title " \r\n" -}}
+{{ if not $title -}}
+    {{ errorf "Missing element title" -}}
+{{ end -}}
+
+{{ $id := .id }}
+
+{{ $state := "enabled" -}}
+{{ with .state }}{{ $state = . }}{{ end -}}
+{{ $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
+{{ if not (in $supportedStates $state) -}}
+    {{ errorf "Invalid value for param 'state': %s" $state -}}
+{{ end -}}
+
+{{ $size := "md" -}}
+{{ with .size }}{{ $size = . }}{{ end -}}
+{{ $supportedSizes := slice "sm" "md" "lg" -}}
+{{ if not (in $supportedSizes $size) -}}
+    {{ errorf "Invalid value for param 'size': %s" $size -}}
+{{ end -}}
+
+{{ $color := "primary" -}}
+{{ with .color }}{{ $color = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+{{ if not (in $supportedColors $color) -}}
+    {{ errorf "Invalid value for param 'color': %s" $color -}}
+{{ end -}}
+
+{{ $outline := false -}}
+{{ with .outline }}{{ $outline = . }}{{ end -}}
+
+{{ $badge := "" -}}
+{{ with .badge }}{{ $badge = . }}{{ end -}}
+
+{{ $label := "" -}}
+{{ with .label }}{{ $label = . }}{{ end -}}
+
+{{ $tooltip := "" -}}
+{{ if not (strings.HasSuffix $state "active") -}}
+    {{ with .tooltip }}{{ $tooltip = . }}{{ end -}}
+{{ end -}}
+
+{{ $href := .href -}}
+
+{{ $collapse := "" -}}
+{{ if not (strings.HasSuffix $state "active") -}}
+    {{ with .collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
+{{ end -}}
+
+{{ if $tooltip -}}
+    {{ if $collapse -}}
+        {{ errorf "Cannot use tooltip and collapse at the same time" -}}
+    {{ end -}}
+{{ end -}}
+
+{{ $type := "button" -}}
+{{ with .type }}{{ $type = . }}{{ end -}}
+{{ $supportedTypes := slice "button" "link" -}}
+{{ if not (in $supportedTypes $type) -}}
+    {{ errorf "Invalid value for param 'type': %s" $type -}}
+{{ end -}}
+
+{{ $placement := "top" -}}
+{{ with .placement }}{{ $placement = . }}{{ end -}}
+{{ $supportedPlacements := slice "top" "bottom" "left" "right" -}}
+{{ if not (in $supportedPlacements $placement) -}}
+    {{ errorf "Invalid value for param 'placement': %s" $placement -}}
+{{ end -}}
+
+<a {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
+    {{ with $id }}id="{{ . }}"{{ end }}
+    {{ if eq $type "button" }}class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }}" role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end }}
+    {{ else }}class="link-{{ $color }} position-relative"{{ end }}
+    {{ with $tooltip }}data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end }}
+    {{ with $collapse }}data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end }}
+    {{ if eq $state "active" }}data-bs-toggle="button" aria-pressed="true"{{ end }}
+    {{ if eq $state "inactive" }}data-bs-toggle="button" aria-pressed="false"{{ end }}
+    >
+    {{ $title -}}
+    {{ with $badge }}
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ . }}
+            {{ with $label }}<span class="visually-hidden">{{ . }}</span>{{ end }}
+        </span>
+    {{ end }}  
+</a>

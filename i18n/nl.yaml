@@ -1,26 +1,34 @@
 # Content
+- id: about
+  translation: "Over mij"
 - id: postedOnDate
   translation: "Gepubliceerd op {{ . }}"
 - id: lastModified
-  translation: "(Laatst gewijzigd op {{ . }})"
+  translation: "Laatst gewijzigd op {{ . }}"
 - id: translationsLabel
   translation: "Overige talen: "
 - id: translationsSeparator
   translation: ", "
+- id: more
+  translation: "Meer {{ . }}"
 - id: readMore
   translation: "Lees meer"
-- id: morePosts
+- id: moreBlog
   translation: "Meer berichten"
-- id: olderPosts
+- id: olderBlog
   translation: "Oudere berichten"
-- id: recentPosts
+- id: recentBlog
   translation: "Recente berichten"
-- id: newerPosts
+- id: newerBlog
   translation: "Nieuwere berichten"
-- id: previousPost
+- id: previousBlog
   translation: "Vorig bericht"
-- id: nextPost
+- id: nextBlog
   translation: "Volgend bericht"
+- id: recentProjects
+  translation: "Projecten"
+- id: moreProjects
+  translation: "Meer projecten"
 - id: read
   translation: "leestijd"
 - id: minutesShort
@@ -66,6 +74,8 @@
   translation: "Zoeken op {{ .Site.Title }}"
 - id: gcseClose
   translation: "Sluiten"
+- id: home
+  translation: "Home"
 
 # Staticman
 - id: noComment

@@ -1,0 +1,41 @@
+<!-- 
+    Generate vector icons from asset templates. It processes all svg files in the "assets/icons" folder and replaces
+    color references with their actual value. Color references should be defined in the provided css string as regular
+    css variables within a root section called ":hinode-theme". For example, the following section defines a regular
+    hex value and an rgba color code for two variables:
+
+    :hinode-theme {
+        --accordion-icon-active-color: #bf3300;
+        --navbar-dark-color: rgba(255, 255, 255, 0.55);
+    }
+
+    Variable names are converted from kebab case to snake case to make them compatible with Hugo's variable naming
+    convention. For example, the css variable '--accordion-icon-active-color' is available as 
+    ''.accordion_icon_active_color' within the Hugo template. The processed svg files are published to the "icons"
+    folder.
+    
+    The partial supports the following arguments:
+    "css":          Required css string content.
+-->
+
+{{- $css := .css -}}
+{{- $content := findRE ":hinode-theme\\s?{[^}]+}" $css.Content -}}
+{{- $items := split (index $content 0) ";" -}}
+{{- $params := dict -}}
+{{- range $index, $item := $items -}}
+    {{- $clean := trim $item "- \r\n{}" -}}
+    {{- $clean = strings.TrimPrefix ":hinode-theme" $clean -}}
+    {{- $clean = trim $clean "- \r\n{}" -}}
+    {{- $clean = replace $clean "-" "_" -}}
+    {{- with $clean -}}
+        {{- $pair := split . ":" -}}
+        {{- $key := trim (index $pair 0) " " -}}
+        {{- $value := trim (index $pair 1) " " -}}
+        {{- $params = merge $params (dict $key $value) -}}
+    {{- end }}
+{{- end -}}
+
+{{- range $index, $element := resources.Match "icons/**.svg" -}}
+    {{- $icon := resources.Get $element | resources.ExecuteAsTemplate $element $params -}}
+    {{- $icon.Publish -}}
+{{- end -}}

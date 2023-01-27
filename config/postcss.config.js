@@ -27,7 +27,7 @@ module.exports = {
         /fa.*/,
         /ratio.*/,
         /suggestion.*/,
-      ...whitelister([
+        ...whitelister([
           './assets/scss/components/_blockquote.scss',
           './assets/scss/components/_buttons.scss',
           './assets/scss/components/_card.scss',

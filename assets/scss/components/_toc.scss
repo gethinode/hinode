@@ -1,0 +1,44 @@
+//
+// Table of contents sidebar
+//
+// scss-docs-start toc
+.toc {
+    grid-area: toc;
+    right: 0;
+    z-index: 2;
+    height: calc(100vh - 7rem);
+    overflow-y: auto;
+    top: $navbar-offset;
+}
+
+// scss-docs-end toc
+
+.toc nav {
+    font-size: 0.875rem;
+}
+
+.toc nav ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.toc nav ul ul {
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+}
+
+.toc nav li {
+    margin-bottom: 0.25rem;
+}
+
+.toc nav a {
+    color: inherit;
+}
+
+.toc nav a:not(:hover) {
+    text-decoration: none;
+}
+
+.toc nav a code {
+    font: inherit;
+}

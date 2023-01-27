@@ -22,23 +22,23 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      {{ if eq .Site.Params.schemaType "Organization" -}}
+      {{ if eq .Site.Params.schema.type "Organization" -}}
         "@type": "Organization",
         "@id": {{ print $baseURL "#/schema/organization/1" }},
       {{ else -}}
         "@type": "Person",
         "@id": {{ print $baseURL "#/schema/person/1" }},
       {{ end -}}
-      "name": "{{ .Site.Params.schemaName }}",
+      "name": "{{ .Site.Params.schema.name }}",
       "url": {{ print $baseURL }},
       "sameAs": [
-        {{ with .Site.Params.schemaTwitter -}}
+        {{ with .Site.Params.schema.twitter -}}
         {{ . }}
         {{ end -}}
-        {{ with .Site.Params.schemaLinkedIn -}}
+        {{ with .Site.Params.schema.linkedin -}}
         , {{ . }}
         {{ end -}}
-        {{ with .Site.Params.schemaGitHub -}}
+        {{ with .Site.Params.schema.github -}}
         , {{ . }}
         {{ end -}}
       ],
@@ -46,10 +46,10 @@
         "logo": {
           "@type": "ImageObject",
           "@id": {{ print $baseURL "#/schema/image/1"}},
-          "url": {{ print $baseURL .Site.Params.schemaLogo }},
-          "width": {{- .Site.Params.schemaLogoWidth -}},
-          "height": {{- .Site.Params.schemaLogoHeight -}},
-          "caption": "{{- .Site.Params.schemaName -}}"
+          "url": {{ print $baseURL .Site.Params.schema.logo.url }},
+          "width": {{- .Site.Params.schema.logo.width -}},
+          "height": {{- .Site.Params.schema.logo.height -}},
+          "caption": "{{- .Site.Params.schema.name -}}"
         },
         "image": {
           "@id": {{ print $baseURL "#/schema/image/1" }}
@@ -58,10 +58,10 @@
         "image": {
           "@type": "ImageObject",
           "@id": {{ print $baseURL "#/schema/image/1"}},
-          "url": {{ print $baseURL .Site.Params.schemaImage }},
-          "width": {{- .Site.Params.schemaImageWidth -}},
-          "height": {{- .Site.Params.schemaImageHeight -}},
-          "caption": "{{- .Site.Params.schemaName -}}"
+          "url": {{ print $baseURL .Site.Params.schema.image.url }},
+          "width": {{- .Site.Params.schema.image.width -}},
+          "height": {{- .Site.Params.schema.image.height -}},
+          "caption": "{{- .Site.Params.schema.name -}}"
         }
       {{ end -}}
     },
@@ -69,9 +69,9 @@
       "@type": "WebSite",
       "@id": {{ print $baseURL "#/schema/website/1" }},
       "url": {{ print $baseURL }},
-      "name": "{{ .Site.Params.title }}",
-      "description": "{{ .Site.Params.description }}",
-      {{ if eq .Site.Params.schemaType "Organization" -}}
+      "name": "{{ .Site.Title }}",
+      "description": "{{ .Site.Params.main.description }}",
+      {{ if eq .Site.Params.schema.type "Organization" -}}
         "publisher": {
           "@id": {{ print $baseURL "#/schema/organization/1" }}
         }
@@ -94,7 +94,7 @@
       "isPartOf": {
         "@id": {{ print $baseURL "#/schema/website/1" }}
       },
-      {{ if eq .Site.Params.schemaType "Organization" -}}
+      {{ if eq .Site.Params.schema.type "Organization" -}}
         "about": {
           "@id": {{ print $baseURL "#/schema/organization/1" }}
         },
@@ -111,7 +111,7 @@
       "primaryImageOfPage": {
         "@id": {{ print .Permalink "#/schema/image/2" }}
       },
-      "inLanguage": "{{ .Site.Params.schemaLocale }}",
+      "inLanguage": "{{ .Site.Params.schema.locale }}",
       "potentialAction": [{
         "@type": "ReadAction", "target": [{{ .Permalink }}]
       }]
@@ -156,7 +156,7 @@
           "author": {
             "@id": {{ print $baseURL "#/schema/person/2" }}
           },
-          {{ if eq .Site.Params.schemaType "Organization" -}}
+          {{ if eq .Site.Params.schema.type "Organization" -}}
             "publisher": {
               "@id": {{ print $baseURL "#/schema/organization/1" }}
             },
@@ -177,15 +177,15 @@
         {
           "@type": "Person",
           "@id": {{ print $baseURL "#/schema/person/2" }},
-          "name": {{ .Site.Params.schemaAuthor }},
+          "name": {{ .Site.Params.schema.author.name }},
           "sameAs": [
-            {{ with .Site.Params.schemaAuthorTwitter -}}
+            {{ with .Site.Params.schema.author.twitter -}}
             {{ . }}
             {{ end -}}
-            {{ with .Site.Params.schemaAuthorLinkedIn -}}
+            {{ with .Site.Params.schema.author.linkedin -}}
             , {{ . }}
             {{ end -}}
-            {{ with .Site.Params.schemaAuthorGitHub -}}
+            {{ with .Site.Params.schema.author.github -}}
             , {{ . }}
             {{ end -}}
           ]

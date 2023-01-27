@@ -1,0 +1,8 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {{- range .Page.Ancestors.Reverse -}}
+            <li class="breadcrumb-item"><a href="{{ .Permalink }}">{{ if .Title }}{{ .Title }}{{ else }}{{ T "home" }}{{ end }}</a></li>
+        {{- end -}}
+        <li class="breadcrumb-item active" aria-current="page">{{ .Page.Title }}</li>
+    </ol>
+</nav>

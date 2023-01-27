@@ -2,7 +2,7 @@
 {{ $user := .Get "user" }}
 {{ $prompt := .Get "prompt" }}
 {{ $filter := "(out)" }}
-{{ $input := trim .Inner "\n" }}
+{{ $input := trim .Inner "\r\n" }}
 
 {{ $shell := lower (.Get "shell") }}
 {{ $continuationPrompt := ">" }}
@@ -50,7 +50,7 @@
     {{ $refined = printf "%s\n%s" $refined $line }}
 {{ end }}
 
-{{ $refined := trim $refined "\n" }}
+{{ $refined := trim $refined "\r\n" }}
 
 {{ $output := (transform.Highlight $refined $shell | safeHTML) }}
 

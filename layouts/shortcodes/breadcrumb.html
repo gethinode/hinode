@@ -1,0 +1,19 @@
+<!-- 
+    Displays a breadcrum for a specific page. The shortcode supports the following arguments:
+    "path"          Optional path of the page, defaults to current page.
+-->
+
+{{- $error := false -}}
+{{- $page := . -}}
+{{- $path := .Get "path"}}
+{{- if $path -}}
+    {{- $page = .Site.GetPage $path -}}
+    {{- if not $page -}}
+        {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
+        {{- $error = true -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if not $error -}}
+    {{- partial "breadcrumb.html" $page -}} 
+{{- end -}}

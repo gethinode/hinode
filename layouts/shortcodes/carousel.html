@@ -3,14 +3,13 @@
     elements to define individual image slides. The shortcode supports the following arguments:
     "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
                     Instead, the original aspect ratio of the image is preserved.
+    "class":        Optional class attribute of the carousel element, e.g. “w-75”.
 -->
 
-{{ $ratio := "" -}}
-{{ $class := "" -}}
-{{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
-{{ with .Get "class" }}{{ $class = . }}{{ end -}}
+{{ $ratio := .Get "ratio" -}}
+{{ $class := .Get "class" -}}
 {{ $id := .Ordinal -}}
-{{ $images :=  .Inner -}}
+{{ $images := .Inner -}}
 {{ $items := len (findRE "carousel-item" $images) -}}
 
 <div id="carousel-{{ $id }}" class="carousel slide {{ $class }}" data-bs-ride="true">

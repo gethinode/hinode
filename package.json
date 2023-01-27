@@ -1,15 +1,21 @@
 {
   "name": "@markdumay/hugo-theme-hinode",
-  "version": "0.7.8",
-  "description": "Hinode is a clean blog theme for Hugo, an open-source static site generator",
+  "version": "0.8.0-alpha",
+  "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
+  "keywords": [
+    "hugo",
+    "theme",
+    "bootstrap",
+    "responsive",
+    "front-end",
+    "blog"
+  ],
   "main": "index.js",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "init": "shx rm -rf .git && git init -b main",
-    "create": "exec-bin node_modules/.bin/hugo/hugo new",
     "prestart": "npm run clean",
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
     "prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
@@ -17,29 +23,27 @@
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "build:debug": "exec-bin node_modules/.bin/hugo/hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
-    "clean": "shx rm -rf public resources",
-    "clean:install": "shx rm -rf package-lock.json node_modules ",
+    "clean": "rimraf public resources",
+    "clean:install": "rimraf package-lock.json node_modules",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
     "lint:scripts": "eslint assets/js",
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\"",
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
     "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
-    "server": "exec-bin node_modules/.bin/hugo/hugo server",
     "test": "npm run -s lint",
-    "env": "env",
+    "env": "exec-bin node_modules/.bin/hugo/hugo env",
     "precheck": "npm version",
     "check": "exec-bin node_modules/.bin/hugo/hugo version",
     "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
     "create:syntax": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=monokailight > ./assets/scss/components/_syntax.scss",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
-    "upgrade": "npx npm-check-updates -u",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "upgrade": "npx npm-check-updates -u"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/markdumay/hugo-theme-hinode.git"
   },
-  "author": "",
+  "author": "Mark Dumay",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/markdumay/hugo-theme-hinode/issues"
@@ -50,22 +54,23 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.3",
-    "eslint": "^8.29.0",
+    "eslint": "^8.31.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "exec-bin": "^1.0.0",
     "flexsearch": "^0.7.31",
     "hugo-installer": "^4.0.1",
-    "markdownlint-cli2": "^0.5.1",
+    "markdownlint-cli2": "^0.6.0",
     "postcss-cli": "^10.1.0",
     "purgecss-whitelister": "^2.4.0",
+    "rimraf": "^4.1.2",
     "shx": "^0.3.4",
-    "stylelint": "^14.16.0",
+    "stylelint": "^14.16.1",
     "stylelint-config-standard-scss": "^6.1.0"
   },
   "otherDependencies": {
-    "hugo": "0.108.0"
+    "hugo": "0.110.0"
   }
 }

@@ -1,0 +1,23 @@
+<!-- 
+    Displays a hidden panel that can be reveiled by a trigger. The shortcode supports the following arguments:
+    "id"            Required unique id of the collapse element, e.g. "collapse-1".
+    "class"         Optional class attribute of the inner panel element, e.g. “p-3”.
+-->
+
+{{ $id := .Get "id" -}}
+{{ if not $id -}}
+    {{ errorf "Missing value for param 'id': %s" .Position -}}
+{{ end -}}
+
+{{ $class := .Get "class" }}
+
+{{- $body := trim .Inner " \r\n" -}}
+{{ if not $body -}}
+    {{ errorf "Missing inner element text: %s" .Position -}}
+{{ end -}}
+
+<p>
+    <div class="collapse" id="{{ $id }}">
+        <div class="{{ $class }}">{{ $body | safeHTML }}</div>
+    </div>
+</p>

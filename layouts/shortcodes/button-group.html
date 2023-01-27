@@ -1,0 +1,8 @@
+<!-- 
+    Displays a group of buttons. Add inner <button> elements for each button. The shortcode supports the following arguments:
+    "aria-label"    Optional assistive label for the button group.
+-->
+
+<div class="btn-group" role="group" {{ with .Get "aria-label" }}aria-label="{{ . }}"{{ end }}>
+    {{ .Inner }}
+</div>
