@@ -20,7 +20,7 @@
 {{- $content := .Inner -}}
 
 {{- if eq $lang "hugo" -}}
-    {{- $content = (trim $content "\n") | markdownify }}
+    {{- $content = (trim $content "\r\n") | markdownify }}
     {{ $lang = "markdown" }}
 {{- end -}}
 
@@ -40,7 +40,7 @@
     </div>
     <div class="bg-light rounded p-1">
         {{- if eq $show_markup true -}}
-            {{- highlight (trim $input "\n") $lang "" -}}
+            {{- highlight (trim $input "\r\n") $lang "" -}}
         {{- end -}}
     </div>
 </div>

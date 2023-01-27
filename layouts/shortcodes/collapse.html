@@ -11,7 +11,7 @@
 
 {{ $class := .Get "class" }}
 
-{{- $body := trim .Inner " \n" -}}
+{{- $body := trim .Inner " \r\n" -}}
 {{ if not $body -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
 {{ end -}}

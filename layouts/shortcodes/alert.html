@@ -28,6 +28,6 @@
 
 <div class="alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}" role="alert">
     {{ with $icon }}<i class="{{ . }} fa-2x fa-pull-left"></i>{{ end }}
-    {{ trim .Inner " \n" -}}
+    {{ trim .Inner " \r\n" -}}
     {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
 </div>

@@ -10,7 +10,7 @@
 {{ $error := false }}
 {{ $type := "link" -}}
 
-{{ $title := trim .Inner " \n" -}}
+{{ $title := trim .Inner " \r\n" -}}
 {{ if not $title -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
     {{ $error = true }}
