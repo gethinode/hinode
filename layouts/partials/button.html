@@ -17,7 +17,7 @@
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right".
 -->
 
-{{ $title := trim .title " \n" -}}
+{{ $title := trim .title " \r\n" -}}
 {{ if not $title -}}
     {{ errorf "Missing element title" -}}
 {{ end -}}

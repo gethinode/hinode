@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Breadcrumb"
-date: 2023-01-05
+date: 2023-01-27
 description: "Use the breadcrumb shortcode to display the current page’s location within the site's navigational hierarchy."
 group: components
 layout: docs
@@ -13,16 +13,19 @@ Use the `breadcrumb` shortcode to display the current page’s location within t
 
 ## Arguments
 
-The shortcode requires no arguments.
+The shortcode supports the following arguments:
+
+| Argument    | Required | Description |
+|-------------|----------|-------------|
+| path        | No       | Optional path of the page, defaults to current page.
+{.table}
 
 ## Example
 
 As an example, the following shortcode displays a breadcrumb for the current page.
 
-```html
-{{</* breadcrumb */>}}
-```
-
-The result looks like this:
-
-{{< breadcrumb >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* breadcrumb path="breadcrumb" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->

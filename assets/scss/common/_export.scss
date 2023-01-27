@@ -1,5 +1,6 @@
 // stylelint-disable selector-pseudo-class-no-unknown
 
+// scss-docs-start export
 :hinode-theme {
     --accordion-icon-active-color: #{$accordion-icon-active-color};
     --accordion-icon-color: #{$accordion-icon-color};
@@ -17,3 +18,5 @@
     --navbar-dark-color: #{$navbar-dark-color};
     --navbar-light-icon-color: rgba($body-color, 0.75); // TODO: See https://github.com/twbs/bootstrap/pull/37720
 }
+
+// scss-docs-end export

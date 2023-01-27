@@ -1,5 +1,6 @@
 // Define template variables
 // TODO: optimize, see https://discourse.gohugo.io/t/initialize-sass-variables-from-hugo-templates/42053
+//       requires installation of dart-sass, no cross-platform installation available yet
 $themeColor:                    {{ site.Params.style.themeColor | default "#007bff" }};
 $themeFont:                     {{ site.Params.style.themeFont | default "Inter" }};
 $primary:                       {{ site.Params.style.primary | default "#007bff" }};
@@ -67,9 +68,12 @@ $navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Par
 @import "bootstrap/scss/utilities/api";
 
 // Import Font Awesome
+// scss-docs-start awesome
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/regular";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
+// scss-docs-end awesome
 
 // Import Hinode theme styles
 @import "components/blockquote.scss";

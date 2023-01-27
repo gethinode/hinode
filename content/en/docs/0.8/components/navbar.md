@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Navbar"
-date: 2023-01-05
+date: 2023-01-27
 description: "Use the navbar shortcode to display a navigation header with a toggler."
 group: components
 layout: docs
@@ -33,10 +33,8 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a light navigation header.
 
-```html
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 {{</* navbar path="blog" color="light" size="sm" search="false" menus="sample" title="Brand" */>}}
-```
-
-The result looks like this:
-
-{{< navbar path="blog" color="light" size="sm" search="false" menus="sample" title="Brand" >}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->

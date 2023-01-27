@@ -7,6 +7,7 @@ $fa-font-path:                  "../fonts";
 // Remove the border from the focused navigation toggler
 $navbar-toggler-focus-width:    0 !default;
 
+// scss-docs-start font
 $font-family-sans-serif:        $themeFont, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $headings-font-weight:          600 !default;
 $font-weight-lighter:           lighter !default;
@@ -14,6 +15,11 @@ $font-weight-light:             200 !default;
 $font-weight-normal:            300 !default;
 $font-weight-bold:              600 !default;
 $font-weight-bolder:            bolder !default;
+
+strong {
+    font-weight:                600 !important;
+}
+// scss-docs-end font
 
 $black:                       #000 !default;
 $btn-toggle-color:              $black !default;

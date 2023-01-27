@@ -8,13 +8,13 @@
   */ -}}
   
   {{- $name := .Get "name" -}}
-  {{- $file := .Get "file" -}}
+  {{- $file := path.Clean (.Get "file") -}}
   
   {{- /* If any parameters are missing, print an error and exit */ -}}
   {{- if or (not $name) (not $file) -}}
     {{- errorf "%s: %q: Missing required parameters! Got: name=%q file=%q!" .Position .Name $name $file -}}
   {{- else -}}
-    {{- $capture_start := printf "# toml-docs-start %s\n" $name -}}
+    {{- $capture_start := printf "# toml-docs-start %s" $name -}}
     {{- $capture_end := printf "# toml-docs-end %s" $name -}}
     {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
   
@@ -28,5 +28,5 @@
     {{- $match = replace $match $capture_start "" -}}
     {{- $match = replace $match $capture_end "" -}}
     
-    {{- highlight $match "toml" "" -}}
+    {{- highlight (trim $match "\r\n") "toml" "" -}}
   {{- end -}}

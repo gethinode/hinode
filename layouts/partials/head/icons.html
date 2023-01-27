@@ -24,7 +24,7 @@
 {{ $params := dict }}
 {{ range $index, $item := $items }}
     {{ $clean := strings.TrimPrefix ":hinode-theme {\n" $item }}
-    {{ $clean = trim $clean "- \n}" }}
+    {{ $clean = trim $clean "- \r\n}" }}
     {{ $clean = replace $clean "-" "_" }}
     {{ with $clean }}
         {{ $pair := split . ":" }}

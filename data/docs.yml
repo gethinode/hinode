@@ -1,5 +1,4 @@
-# This file holds all sidebar menu's entries.
-# The logic for the sidebar generation is in "site/layouts/partials/docs-sidebar.html".
+# This file holds all menu entries for the docs sidebar
 
 - title: Getting started
   pages:
@@ -17,17 +16,19 @@
     - title: Languages
     - title: Styles
     - title: Scripts
-    - title: Comments
-    - title: Metadata
+    - title: Icons
+    # - title: Comments
+    # - title: Metadata
     - title: Server
+    # - title: Deployment
 
 - title: Content
   pages:
-    - title: Overview
     - title: Typography
-    - title: Images
+    # - title: Links and cross-references
+    # - title: Images
     - title: Tables
-    - title: Figures
+    # - title: Figures
     - title: Icons
 
 # - title: Forms
@@ -44,7 +45,7 @@
 
 - title: Components
   pages:
-    - title: Overview
+    # - title: Overview
     - title: Accordion
     - title: Alert
     - title: Badge

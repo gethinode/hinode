@@ -34,7 +34,7 @@ The English page is available by navigating to `/en/about` and the Dutch transla
 
 ## Internationalization
 
-Hinode uses Hugo's [internationalization function]({{< param "links.hugo_i18n" >}}) to translate keywords and messages. Translations are available in English, Dutch, and German. For example, the translation for the word `about` in the Dutch language is defined in `i18n/nl.yaml` (strictly speaking, it translates to `about me`). 
+Hinode uses Hugo's [internationalization function]({{< param "links.hugo_i18n" >}}) to translate keywords and messages. Translations are available in English, Dutch, and German. For example, the translation for the word `about` in the Dutch language is defined in `i18n/nl.yaml` (strictly speaking, it translates to `about me`).
 
 ```yml
 # Content

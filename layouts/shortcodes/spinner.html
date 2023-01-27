@@ -29,6 +29,6 @@
 
 {{ with $class }}<div class="{{ . }}">{{ end }}
     <div class="spinner-{{ if $grow }}grow{{ else }}border{{ end }} text-{{ $color }}" role="status">
-        <span class="visually-hidden">{{ trim .Inner " \n" -}}</span>
+        <span class="visually-hidden">{{ trim .Inner " \r\n" -}}</span>
     </div>
 {{ if $class }}</div>{{ end }}

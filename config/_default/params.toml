@@ -73,8 +73,10 @@
     dark = "#212529"
 # toml-docs-end theme-colors
     themeOpacity = "10"
+# toml-docs-start font
     themeFont = "Inter"
     themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap"
+# toml-docs-end font
 
 [schema]
     type = "Organization"
@@ -119,6 +121,7 @@
     bs_grid = "https://getbootstrap.com/docs/5.3/layout/grid"
     bs_offcanvas = "https://getbootstrap.com/docs/5.3/components/offcanvas"
     bs_navbar_placement = "https://getbootstrap.com/docs/5.3/components/navbar/#placement"
+    bs_tables = "https://getbootstrap.com/docs/5.3/content/tables"
     cc_by_nc_4_0 = "https://creativecommons.org/licenses/by-nc/4.0/"
     commit_message = "https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"
     contrast_checker = "https://accessibleweb.com/color-contrast-checker/"
@@ -127,13 +130,19 @@
     eslint = "https://eslint.org"
     flexsearch = "https://github.com/nextapps-de/flexsearch"
     fontawesome = "https://fontawesome.com"
+    fa_icons = "https://fontawesome.com/icons"
+    fa_styling = "https://fontawesome.com/docs/web/style/styling"
+    fa_animation = "https://fontawesome.com/docs/web/style/animate"
     git_download = "https://git-scm.com"
     github_pr = "https://help.github.com/articles/about-pull-requests/"
     github_rebase = "https://help.github.com/articles/about-git-rebase/"
+    google_fonts = "https://fonts.google.com"
     html_codeguide = "https://codeguide.co/#html"
     hugo = "https://gohugo.io"
     hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
     hugo_config_dir = "https://gohugo.io/getting-started/configuration/#configuration-directory"
+    hugo_content = "https://gohugo.io/content-management/formats"
+    hugo_chroma = "https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages"
     hugo_fingerprint = "https://gohugo.io/hugo-pipes/fingerprint"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_i18n = "https://gohugo.io/functions/i18n"
@@ -146,6 +155,7 @@
     hugo_toc = "https://gohugo.io/content-management/toc"
     issue_tracker = "https://github.com/markdumay/hugo-theme-hinode/issues"
     license = "https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE"
+    markdown_emoji = "https://gist.github.com/rxaviers/7360908"
     markdown_md013 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013---line-length"
     markdown_md024 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md024---multiple-headings-with-the-same-content"
     markdown_md026 = "https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md026---trailing-punctuation-in-heading"

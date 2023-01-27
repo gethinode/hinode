@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Button Group"
-date: 2023-01-05
+date: 2023-01-27
 description: "Use the button-group shortcode to display a group of buttons."
 group: components
 layout: docs
@@ -24,18 +24,12 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a group of three buttons.
 
-```html
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 {{</* button-group aria-label="Basic example" */>}}
   {{</* button color="primary" href="#" */>}}Left{{</* /button */>}}
   {{</* button color="primary" href="#" */>}}Middle{{</* /button */>}}
   {{</* button color="primary" href="#" */>}}Right{{</* /button */>}}
 {{</* /button-group */>}}
-```
-
-The result looks like this:
-
-{{< button-group aria-label="Basic example" >}}
-  {{< button color="primary" href="#" >}}Left{{< /button >}}
-  {{< button color="primary" href="#" >}}Middle{{< /button >}}
-  {{< button color="primary" href="#" >}}Right{{< /button >}}
-{{< /button-group >}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->

@@ -74,6 +74,7 @@ defaultContentLanguageInSubdir = true
   [[module.mounts]]
     source = "static"
     target = "static"
+# toml-docs-start javascript
   [[module.mounts]]
     source = "node_modules/bootstrap/dist/js"
     target = "assets/js/vendor/bootstrap"
@@ -82,3 +83,4 @@ defaultContentLanguageInSubdir = true
     source = "node_modules/flexsearch/dist"
     target = "assets/js/vendor/flexsearch"
     includeFiles = "*.bundle.js"
+# toml-docs-end javascript

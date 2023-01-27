@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Command Prompt"
-date: 2023-01-05
+date: 2023-01-27
 description: "The command shortcode generates terminal output for either Bash, PowerShell, or SQL shell languages."
 group: components
 layout: docs
@@ -29,21 +29,19 @@ The shortcode supports the following arguments:
 
 Use the `command` shortcode to generate a block with a default bash command prompt.
 
-```html
-{{%/* command */%}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* command */>}}
 export MY_VAR=123
-{{%/* /command */%}}
-```
-
-The result looks like this:
-{{% command %}}
-export MY_VAR=123
-{{% /command %}}
+{{</* /command */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 Specify `user` and `host` to add the user context to the prompt. In addition, use `(out)` to specify an output line and use `\` to denote a line continuation.
 
-```html
-{{%/* command user="user" host="localhost" */%}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* command user="user" host="localhost" */>}}
 export MY_VAR=123
 echo "hello"
 (out)hello
@@ -53,28 +51,17 @@ three
 (out)one two three
 echo "goodbye"
 (out)goodbye
-{{%/* /command */%}}
-```
-
-The result looks like this:
-{{% command user="user" host="localhost" %}}
-export MY_VAR=123
-echo "hello"
-(out)hello
-echo one \
-two \
-three
-(out)one two three
-echo "goodbye"
-(out)goodbye
-{{% /command %}}
+{{</* /command */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ### PowerShell
 
 Set the `shell` argument to `powershell` to generate a PowerShell terminal. Override the `prompt` to add a directory if needed. Use the backtick `` ` `` symbol to denote a line continuation.
 
-```html
-{{%/* command prompt="PS C:\Users\User>" shell="powershell" */%}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* command prompt="PS C:\Users\User>" shell="powershell" */>}}
 Write-Host `
 'Hello' `
 'from' `
@@ -82,26 +69,17 @@ Write-Host `
 (out)Hello from PowerShell!
 Write-Host 'Goodbye from PowerShell!'
 (out)Goodbye from PowerShell!
-{{%/* /command */%}}
-```
-
-The result looks like this:
-{{% command prompt="PS C:\Users\User>" shell="powershell" %}}
-Write-Host `
-'Hello' `
-'from' `
-'PowerShell!'
-(out)Hello from PowerShell!
-Write-Host 'Goodbye from PowerShell!'
-(out)Goodbye from PowerShell!
-{{% /command %}}
+{{</* /command */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ### SQL
 
 Set the `shell` argument to `sql` to generate a SQL terminal. Use the `(con)` suffix to denote a line continuation.
 
-```html
-{{%/* command prompt="mysql>" shell="sql" */%}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* command prompt="mysql>" shell="sql" */>}}
 set @my_var = 'foo';
 set @my_other_var = 'bar';
 CREATE TABLE people ((con)
@@ -121,29 +99,6 @@ order by last_name;
 (out)| John       | Doe       |
 (out)+------------+-----------+
 (out)1 row in set (0.00 sec)
-{{%/* /command */%}}
-```
-
-The result looks like this:
-
-{{% command prompt="mysql>" shell="sql" %}}
-set @my_var = 'foo';
-set @my_other_var = 'bar';
-CREATE TABLE people ((con)
-first_name VARCHAR(30) NOT NULL,(con)
-last_name VARCHAR(30) NOT NULL(con)
-);
-(out)Query OK, 0 rows affected (0.09 sec)
-insert into people(con)
-values ('John', 'Doe');
-(out)Query OK, 1 row affected (0.02 sec)
-select *(con)
-from people(con)
-order by last_name;
-(out)+------------+-----------+
-(out)| first_name | last_name |
-(out)+------------+-----------+
-(out)| John       | Doe       |
-(out)+------------+-----------+
-(out)1 row in set (0.00 sec)
-{{% /command %}}
+{{</* /command */>}}
+{{< /example >}}
+<!-- markdownlint-ensable MD037 -->

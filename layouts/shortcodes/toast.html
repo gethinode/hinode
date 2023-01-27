@@ -8,7 +8,7 @@
     {{ $header = site.Title -}}
 {{ end -}}
 
-{{ $message := trim .Inner " \n" -}}
+{{ $message := trim .Inner " \r\n" -}}
 {{ if not $message -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
 {{ end -}}
