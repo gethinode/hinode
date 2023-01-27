@@ -11,7 +11,7 @@
   */ -}}
   
   {{- $name := .Get "name" -}}
-  {{- $file := .Get "file" -}}
+  {{- $file := path.Clean (.Get "file") -}}
   {{- $strip_default := .Get "strip-default" | default "true" -}}
   
   {{- /* If any parameters are missing, print an error and exit */ -}}
