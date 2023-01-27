@@ -18,23 +18,24 @@
     "css":          Required css string content.
 -->
 
-{{ $css := .css }}
-{{ $content := findRE ":hinode-theme {[^}]+}" $css.Content }}
-{{ $items := split (index $content 0) ";" }}
-{{ $params := dict }}
-{{ range $index, $item := $items }}
-    {{ $clean := strings.TrimPrefix ":hinode-theme {\n" $item }}
-    {{ $clean = trim $clean "- \r\n}" }}
-    {{ $clean = replace $clean "-" "_" }}
-    {{ with $clean }}
-        {{ $pair := split . ":" }}
-        {{ $key := trim (index $pair 0) " " }}
-        {{ $value := trim (index $pair 1) " " }}
-        {{ $params = merge $params (dict $key $value) }}
-    {{ end }}
-{{ end }}
+{{- $css := .css -}}
+{{- $content := findRE ":hinode-theme\\s?{[^}]+}" $css.Content -}}
+{{- $items := split (index $content 0) ";" -}}
+{{- $params := dict -}}
+{{- range $index, $item := $items -}}
+    {{- $clean := trim $item "- \r\n{}" -}}
+    {{- $clean = strings.TrimPrefix ":hinode-theme" $clean -}}
+    {{- $clean = trim $clean "- \r\n{}" -}}
+    {{- $clean = replace $clean "-" "_" -}}
+    {{- with $clean -}}
+        {{- $pair := split . ":" -}}
+        {{- $key := trim (index $pair 0) " " -}}
+        {{- $value := trim (index $pair 1) " " -}}
+        {{- $params = merge $params (dict $key $value) -}}
+    {{- end }}
+{{- end -}}
 
-{{ range $index, $element := resources.Match "icons/**.svg" }}
-    {{ $icon := resources.Get $element | resources.ExecuteAsTemplate $element $params }}
-    {{ $icon.Publish }}
-{{ end }}
+{{- range $index, $element := resources.Match "icons/**.svg" -}}
+    {{- $icon := resources.Get $element | resources.ExecuteAsTemplate $element $params -}}
+    {{- $icon.Publish -}}
+{{- end -}}
