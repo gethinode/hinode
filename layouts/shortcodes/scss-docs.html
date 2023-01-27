@@ -20,7 +20,7 @@
   {{- else -}}
     {{- $capture_start := printf "// scss-docs-start %s\n" $name -}}
     {{- $capture_end := printf "// scss-docs-end %s" $name -}}
-    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
+    {{- $regex := printf `%s((?:.|\n)*)%s` (trim $capture_start "\n") (trim $capture_end "\n") -}}
   
     {{- /*
       TODO: figure out why we can't do the following and get the first group (the only capturing one)...

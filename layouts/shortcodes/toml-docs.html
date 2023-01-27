@@ -16,7 +16,7 @@
   {{- else -}}
     {{- $capture_start := printf "# toml-docs-start %s\n" $name -}}
     {{- $capture_end := printf "# toml-docs-end %s" $name -}}
-    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
+    {{- $regex := printf `%s((?:.|\n)*)%s` (trim $capture_start "\n") (trim $capture_end "\n") -}}
   
     {{- $match := findRE $regex (readFile $file) -}}
     {{- $match = index $match 0 -}}
