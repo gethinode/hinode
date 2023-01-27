@@ -8,7 +8,7 @@
   */ -}}
   
   {{- $name := .Get "name" -}}
-  {{- $file := .Get "file" -}}
+  {{- $file := path.Clean (.Get "file") -}}
   
   {{- /* If any parameters are missing, print an error and exit */ -}}
   {{- if or (not $name) (not $file) -}}
