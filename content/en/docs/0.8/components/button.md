@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Button"
-date: 2023-01-25
+date: 2023-01-27
 description: "Use the button shortcode to display a button with a hyperlink."
 group: components
 layout: docs
@@ -33,8 +33,10 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a tooltip for a dark button with a badge.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button color="dark" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" */>}}
     Inbox
 {{</* /button */>}}
 {{< /example>}}
+<!-- markdownlint-enable MD037 -->

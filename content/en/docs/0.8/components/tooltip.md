@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Tooltip"
-date: 2023-01-25
+date: 2023-01-27
 description: "Use the toast shortcode to display a dismissable message in the bottom-right corner of the screen."
 group: components
 layout: docs
@@ -27,8 +27,10 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a tooltip for a colored hyperlink.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* tooltip color="warning" title="Tooltip" href="#" */>}}
     Tooltip demonstration
 {{</* /tooltip */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->

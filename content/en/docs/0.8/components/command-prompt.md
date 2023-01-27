@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Command Prompt"
-date: 2023-01-25
+date: 2023-01-27
 description: "The command shortcode generates terminal output for either Bash, PowerShell, or SQL shell languages."
 group: components
 layout: docs
@@ -29,14 +29,17 @@ The shortcode supports the following arguments:
 
 Use the `command` shortcode to generate a block with a default bash command prompt.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command */>}}
 export MY_VAR=123
 {{</* /command */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 Specify `user` and `host` to add the user context to the prompt. In addition, use `(out)` to specify an output line and use `\` to denote a line continuation.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command user="user" host="localhost" */>}}
 export MY_VAR=123
@@ -50,11 +53,13 @@ echo "goodbye"
 (out)goodbye
 {{</* /command */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ### PowerShell
 
 Set the `shell` argument to `powershell` to generate a PowerShell terminal. Override the `prompt` to add a directory if needed. Use the backtick `` ` `` symbol to denote a line continuation.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command prompt="PS C:\Users\User>" shell="powershell" */>}}
 Write-Host `
@@ -66,11 +71,13 @@ Write-Host 'Goodbye from PowerShell!'
 (out)Goodbye from PowerShell!
 {{</* /command */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ### SQL
 
 Set the `shell` argument to `sql` to generate a SQL terminal. Use the `(con)` suffix to denote a line continuation.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command prompt="mysql>" shell="sql" */>}}
 set @my_var = 'foo';
@@ -94,3 +101,4 @@ order by last_name;
 (out)1 row in set (0.00 sec)
 {{</* /command */>}}
 {{< /example >}}
+<!-- markdownlint-ensable MD037 -->

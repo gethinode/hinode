@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Alert"
-date: 2023-01-25
+date: 2023-01-27
 description: "Use the alert shortcode to display a contextual feedback message."
 group: components
 layout: docs
@@ -25,8 +25,10 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays a simple alert.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* alert color="danger" */>}}
     A simple danger alert—check it out!
 {{</* /alert */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->

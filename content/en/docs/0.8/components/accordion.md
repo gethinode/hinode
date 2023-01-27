@@ -1,7 +1,7 @@
 ---
 author: "Mark Dumay"
 title: "Accordion"
-date: 2023-01-25
+date: 2023-01-27
 description: "Use the accordion shortcode to show a group of vertically collapsing and expanding items."
 group: components
 layout: docs
@@ -32,6 +32,7 @@ Add an inner `accordion-item` element for each item of the accordion. The `accor
 
 As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
 
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
   {{</* accordion-item header="Accordion Item #1" class="show" */>}}
@@ -46,4 +47,4 @@ As an example, the following shortcode displays an accordion with three elements
   {{</* /accordion-item */>}}
 {{</* /accordion */>}}
 {{< /example >}}
-
+<!-- markdownlint-enable MD037 -->
