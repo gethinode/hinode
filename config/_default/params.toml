@@ -22,7 +22,7 @@
     color = "white"
     style = "light"
     fixed = true
-    offset = "3em"
+    offset = "4em"
     search = true
     breadcrumb = false
     toc = true
