@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Badge"
-date: 2023-01-25
-description: "Use the badge to enrich headings and buttons."
+author: Mark Dumay
+title: Badge
+date: 2023-01-28
+description: Use the badge to enrich headings and buttons.
 group: components
 layout: docs
 ---

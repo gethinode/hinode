@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Spinner"
-date: 2023-01-27
-description: "Use the spinner shortcode to indicate the loading state of a component or page."
+author: Mark Dumay
+title: Spinner
+date: 2023-01-28
+description: Use the spinner shortcode to indicate the loading state of a component or page.
 group: components
 layout: docs
 ---

@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Button Group"
-date: 2023-01-27
-description: "Use the button-group shortcode to display a group of buttons."
+author: Mark Dumay
+title: Button Group
+date: 2023-01-28
+description: Use the button-group shortcode to display a group of buttons.
 group: components
 layout: docs
 ---

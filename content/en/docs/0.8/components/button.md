@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Button"
-date: 2023-01-27
-description: "Use the button shortcode to display a button with a hyperlink."
+author: Mark Dumay
+title: Button
+date: 2023-01-28
+description: Use the button shortcode to display a button with a hyperlink.
 group: components
 layout: docs
 ---

@@ -25,10 +25,9 @@
 - title: Content
   pages:
     - title: Typography
-    # - title: Links and cross-references
-    # - title: Images
+    - title: Links and cross-references
+    - title: Images and figures
     - title: Tables
-    # - title: Figures
     - title: Icons
 
 # - title: Forms
@@ -59,6 +58,7 @@
     - title: Command prompt
     # - title: Dropdowns
     # - title: List group
+    - title: Image
     # - title: Modal
     - title: Navbar
     # - title: Navs & tabs

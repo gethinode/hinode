@@ -22,7 +22,7 @@
     color = "white"
     style = "light"
     fixed = true
-    offset = "3em"
+    offset = "4em"
     search = true
     breadcrumb = false
     toc = true
@@ -146,8 +146,10 @@
     hugo_fingerprint = "https://gohugo.io/hugo-pipes/fingerprint"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_i18n = "https://gohugo.io/functions/i18n"
+    hugo_image = "https://gohugo.io/content-management/image-processing"
     hugo_lang = "https://gohugo.io/content-management/multilingual"
     hugo_lang_config = "https://gohugo.io/content-management/multilingual/#configure-languages"
+    hugo_links = "https://gohugo.io/content-management/cross-references"
     hugo_menus = "https://gohugo.io/content-management/menus/"
     hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
     hugo_ordering = "https://gohugo.io/templates/lists/#order-content"
