@@ -19,12 +19,13 @@
 {{- $input := .Inner -}}
 {{- $content := .Inner -}}
 
-{{- if eq $lang "hugo" -}}
+{{ $preprocess := slice "hugo" "markdown" }}
+{{- if in $preprocess $lang -}}
     {{- $content = (trim $content "\r\n") | markdownify }}
     {{ $lang = "markdown" }}
 {{- end -}}
 
-<div class="rounded border">
+<div class="rounded border mb-3">
     {{- if eq $show_preview true -}}
         <div {{ with $id }}id="{{ . }}"{{ end }} class="p-3 {{ with $class }} {{ . }}{{ end }}">
             {{- $content -}}
@@ -38,7 +39,7 @@
             </button>
         </div> -->
     </div>
-    <div class="bg-light rounded p-1">
+    <div class="rounded bg-light">
         {{- if eq $show_markup true -}}
             {{- highlight (trim $input "\r\n") $lang "" -}}
         {{- end -}}
