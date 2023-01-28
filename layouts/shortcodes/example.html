@@ -39,9 +39,9 @@
             </button>
         </div> -->
     </div>
-    {{- if eq $show_markup true -}}
-        {{- $output := highlight (trim $input "\r\n") $lang "" -}}
-        {{- $output = replace $output "chroma" "chroma m-0" -}}
-        {{- $output | safeHTML -}}
-    {{- end -}}
+    <div class="rounded bg-light">
+        {{- if eq $show_markup true -}}
+            {{- highlight (trim $input "\r\n") $lang "" -}}
+        {{- end -}}
+    </div>
 </div>
