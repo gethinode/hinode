@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Alert"
-date: 2023-01-27
-description: "Use the alert shortcode to display a contextual feedback message."
+author: Mark Dumay
+title: Alert
+date: 2023-01-28
+description: Use the alert shortcode to display a contextual feedback message.
 group: components
 layout: docs
 ---

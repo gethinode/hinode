@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Collapse"
-date: 2023-01-27
-description: "Use the collapse shortcode to reveil or hide a panel."
+author: Mark Dumay
+title: Collapse
+date: 2023-01-28
+description: Use the collapse shortcode to reveil or hide a panel.
 group: components
 layout: docs
 ---

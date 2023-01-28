@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Carousel"
-date: 2023-01-27
-description: "Use the carousel shortcode to display a carousel of several images."
+author: Mark Dumay
+title: Carousel
+date: 2023-01-28
+description: Use the carousel shortcode to display a carousel of several images.
 group: components
 layout: docs
 ---

@@ -1,8 +1,8 @@
 ---
-author: "Mark Dumay"
-title: "Navbar"
-date: 2023-01-27
-description: "Use the navbar shortcode to display a navigation header with a toggler."
+author: Mark Dumay
+title: Navbar
+date: 2023-01-28
+description: Use the navbar shortcode to display a navigation header with a toggler.
 group: components
 layout: docs
 ---
