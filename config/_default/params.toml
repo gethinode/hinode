@@ -146,6 +146,7 @@
     hugo_fingerprint = "https://gohugo.io/hugo-pipes/fingerprint"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_i18n = "https://gohugo.io/functions/i18n"
+    hugo_image = "https://gohugo.io/content-management/image-processing"
     hugo_lang = "https://gohugo.io/content-management/multilingual"
     hugo_lang_config = "https://gohugo.io/content-management/multilingual/#configure-languages"
     hugo_links = "https://gohugo.io/content-management/cross-references"
