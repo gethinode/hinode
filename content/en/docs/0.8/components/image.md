@@ -28,9 +28,8 @@ The shortcode supports the following arguments:
 
 As an example, the following shortcode displays an image with rounded corners and a 21x9 aspect ratio.
 
-```html
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 {{</* image src="img/flowers.jpg" ratio="21x9" caption="Figure caption" class="rounded" */>}}
-```
-
-The result looks like this:
-{{< image src="img/flowers.jpg" ratio="21x9" caption="Figure caption" class="rounded">}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
