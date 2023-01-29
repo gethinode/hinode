@@ -1,7 +1,7 @@
 ---
 title: Hosting and deployment
 description:
-date: 2023-01-28
+date: 2023-01-29
 group: getting-started
 layout: docs
 ---
