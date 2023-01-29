@@ -2,7 +2,7 @@
 title: Deployment
 description:
 date: 2023-01-26
-group: configuration
+group: getting-started
 layout: docs
 ---
 

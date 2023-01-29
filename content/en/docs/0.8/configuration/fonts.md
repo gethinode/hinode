@@ -1,12 +1,12 @@
 ---
 title: Fonts
 description: Configure a specific font to style your website.
-date: 2023-01-21
+date: 2023-01-28
 group: configuration
 layout: docs
 ---
 
-Hinode uses a configurable font stack that includes support for Emoji across browsers and devices. Review the configuration settings on how to update the font.
+Hinode uses a configurable font stack that includes support for Emoji across browsers and devices. Review the configuration settings below on how to update the font.
 
 ## Font configuration
 

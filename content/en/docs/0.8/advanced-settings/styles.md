@@ -1,8 +1,8 @@
 ---
 title: Styles
 description: Use extensible Sass files to generate the stylesheets for your website.
-date: 2023-01-21
-group: configuration
+date: 2023-01-28
+group: advanced-settings
 layout: docs
 ---
 

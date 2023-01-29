@@ -5,15 +5,20 @@
     - title: Introduction
     - title: Commands
     - title: Contribute
+    # - title: Deployment
 
 - title: Configuration
   pages:
-    - title: Overview
     - title: Layout
     - title: Colors
     - title: Fonts
-    - title: Navigation
     - title: Languages
+    - title: Navigation
+    # - title: Comments
+
+- title: Advanced settings
+  pages:
+    - title: Overview
     - title: Styles
     - title: Scripts
     - title: Icons

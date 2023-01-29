@@ -151,6 +151,7 @@
     hugo_lang_config = "https://gohugo.io/content-management/multilingual/#configure-languages"
     hugo_links = "https://gohugo.io/content-management/cross-references"
     hugo_menus = "https://gohugo.io/content-management/menus/"
+    hugo_mounts = "https://gohugo.io/hugo-modules/configuration/#module-config-mounts"
     hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
     hugo_ordering = "https://gohugo.io/templates/lists/#order-content"
     hugo_templates = "https://gohugo.io/templates/introduction/"
