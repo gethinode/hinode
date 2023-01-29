@@ -4,7 +4,7 @@
   pages:
     - title: Introduction
     - title: Commands
-    # - title: Deployment
+    - title: Hosting and deployment
     - title: Contribute
 
 - title: Configuration
