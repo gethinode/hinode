@@ -27,7 +27,7 @@ The basic configuration of the navigation elements is set in the `navigation` se
 
 The below configuration shows the default configuration set in `config/_default/params.toml`.
 
-{{< toml-docs name="navigation" file="config/_default/params.toml" >}}
+{{< docs name="navigation" file="config/_default/params.toml" >}}
 
 ## Main navigation
 
@@ -37,7 +37,7 @@ The main navigation uses [Hugo's menu system]({{< param "links.hugo_menus" >}}) 
 
 The navigation bar uses [Hugo's menu system]({{< param "links.hugo_menus" >}}) to generate the menu items. The navigation supports nesting at one level depth. The following example defines an example menu configuration called `sample` (the main configuration is called `main`).
 
-{{< toml-docs name="sample-navigation" file="config/_default/menus/menus.en.toml" >}}
+{{< docs name="sample-navigation" file="config/_default/menus/menus.en.toml" >}}
 
 ### Example
 
@@ -79,7 +79,7 @@ group: getting-started
 
 The file `assets/scss/components/_sidebar.scss` contains the styling of the sidebar. It refers to a button `$btn-toggle` that is defined in `assets/scss/common/_icons.scss`. It also defines the spacing to be added to the page's main content section when using a fixed navigation bar:
 
-{{< scss-docs name="sidebar" file="assets/scss/components/_sidebar.scss" >}}
+{{< docs name="sidebar" file="assets/scss/components/_sidebar.scss" >}}
 
 ## Breadcrumb
 
@@ -103,4 +103,4 @@ Single pages can optionally show an [table of contents]({{< param "links.hugo_to
 
 The file `assets/scss/components/_toc.scss` defines the styling of the table of contents element. It adds spacing to align the element to the sidebar, amongst other styling:
 
-{{< scss-docs name="toc" file="assets/scss/components/_toc.scss" >}}
+{{< docs name="toc" file="assets/scss/components/_toc.scss" >}}

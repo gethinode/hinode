@@ -32,4 +32,4 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 
 Mount the external JavaScript files to Hugo's virtual file system within the file `config/_default/config.toml`. The current configuration imports the relevant files of [Bootstrap]({{< param "links.bootstrap" >}}) and [FlexSearch]({{< param "links.flexsearch" >}}).
 
-{{< toml-docs name="javascript" file="config/_default/config.toml" >}}
+{{< docs name="javascript" file="config/_default/config.toml" >}}

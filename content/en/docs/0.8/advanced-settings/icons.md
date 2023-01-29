@@ -52,16 +52,16 @@ Hinodes uses npm and mounted folders to create a flexibile virtual file system t
 
 The icons are defined in the file `assets/scss/common/_icons.scss`. The current configuration is the following:
 
-{{< scss-docs name="icons" file="assets/scss/common/_icons.scss" >}}
+{{< docs name="icons" file="assets/scss/common/_icons.scss" >}}
 
 ### Export definitions
 
 The exported variables are defined in the file `assets/scss/common/_export.scss`. The current configuration is the following:
 
-{{< scss-docs name="export" file="assets/scss/common/_export.scss" >}}
+{{< docs name="export" file="assets/scss/common/_export.scss" >}}
 
 ## Font Awesome icons
 
 [Font Awesome]({{< param "links.fontawesome" >}}) provides a collection of icons to be used freely on websites and other media. See the [icons documentation]({{< relref "../content/icons" >}}) in the content section on how to use them to style your website. Hinode uses the <abbr title="Cascading Style Sheets">CSS</abbr> files and web fonts of Font Awesome, as the [content security policy]({{< ref "server" >}}) prohibits the inline execution of stylesheets by the JavaScripts of Font Awesome. The CSS files are bundled with the main stylesheet. The web fonts are copied to the `/static/fonts` folder with the repository. Use the npm command `npm run copy:fonts` to copy the latest version of the files. The CSS files are referenced in the `assets/scss/app.scss` file. This is the current configuration:
 
-{{< scss-docs name="awesome" file="assets/scss/app.scss" >}}
+{{< docs name="awesome" file="assets/scss/app.scss" >}}

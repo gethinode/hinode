@@ -54,7 +54,7 @@ The base layout uses the [main configuration]({{< param "links.hugo_config" >}})
 
 The below configuration shows the default configuration set in `config/_default/config.toml`.
 
-{{< toml-docs name="main" file="config/_default/config.toml" >}}
+{{< docs name="main" file="config/_default/config.toml" >}}
 
 #### Extended configuration
 
@@ -68,7 +68,7 @@ Hinode uses the following extended settings in the `main` section of the `site p
 
 The below configuration shows the default configuration set in `config/_default/params.toml`.
 
-{{< toml-docs name="main" file="config/_default/params.toml" >}}
+{{< docs name="main" file="config/_default/params.toml" >}}
 
 #### Language-specific configuration
 
@@ -88,7 +88,7 @@ Hinode supports [multilingual content]({{< param "links.hugo_lang_config" >}}). 
 
 The below configuration shows the default configuration set in `config/_default/languages.toml` for the English language.
 
-{{< toml-docs name="lang-param" file="config/_default/languages.toml" >}}
+{{< docs name="lang-param" file="config/_default/languages.toml" >}}
 
 ## Home page
 
@@ -149,7 +149,7 @@ The configuration of the home page is set in the `home` section of the `site par
 
 The below configuration shows the default configuration set in `config/_default/params.toml`.
 
-{{< toml-docs name="home" file="config/_default/params.toml" >}}
+{{< docs name="home" file="config/_default/params.toml" >}}
 
 ## List pages
 
@@ -221,7 +221,7 @@ The configuration of the list pages is set in the `list` section of the `site pa
 
 The below configuration shows the default configuration set in `config/_default/params.toml`.
 
-{{< toml-docs name="list" file="config/_default/params.toml" >}}
+{{< docs name="list" file="config/_default/params.toml" >}}
 
 ## Single pages
 
@@ -318,4 +318,4 @@ The configuration of the documentation pages is set in the `docs` section of the
 
 The below configuration shows the default configuration set in `config/_default/params.toml`.
 
-{{< toml-docs name="docs" file="config/_default/params.toml" >}}
+{{< docs name="docs" file="config/_default/params.toml" >}}
