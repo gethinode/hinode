@@ -1,7 +1,7 @@
 ---
 author: Mark Dumay
 title: Carousel
-date: 2023-01-28
+date: 2023-01-29
 description: Use the carousel shortcode to display a carousel of several images.
 group: components
 layout: docs
@@ -17,9 +17,13 @@ The shortcode supports the following arguments:
 
 | Argument  | Required | Description |
 |-----------|----------|-------------|
-| ratio     | No  | Aspect ratio of the image, either "1x1", "4x3" (default), "16x9", or "21x9". |
+| ratio     | No  | Aspect ratio of the image, either "1x1", "4x3", "16x9", or "21x9". If unspecified, the original aspect ratio is preserved. |
 | class     | No  | Optional class attribute of the `carousel` element, e.g. "w-75". |
 {.table}
+
+{{< alert >}}
+The carousel uses the original aspect ratio of the provided images when no aspect ratio is provided. Ensure the included images have a similar height and width to avoid inconsistent behavior.
+{{< /alert >}}
 
 Add an inner `img` element for each slide of the carousel. The `img` element supports the following arguments:
 
