@@ -3,14 +3,14 @@
     functions = "functions"
 
 [build.environment]
-    NODE_VERSION = "16.13.1"
-    NPM_VERSION = "8.6.0"
+    NODE_VERSION = "18.13.0"
+    NPM_VERSION = "8.19.3"
 
 [context.production]
     command = "npm run build"
 
 [context.production.environment]
-    HUGO_VERSION = "0.83.1"
+    HUGO_VERSION = "0.110.0"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
 [[headers]]
