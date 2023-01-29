@@ -25,7 +25,8 @@ Add an inner `accordion-item` element for each item of the accordion. The `accor
 | Argument  | Required | Description |
 |-----------|----------|-------------|
 | header      | Yes | Required header of the accordion element. |
-| class       | No  | Optional class attribute of the inner accordion element, e.g. “show”. |
+| class       | No  | Optional class attribute of the inner accordion element. |
+| show        | No  | Optional flag to indicate an item should be shown as collapsed. |
 {.table}
 
 ## Example
@@ -35,7 +36,7 @@ As an example, the following shortcode displays an accordion with three elements
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
-  {{</* accordion-item header="Accordion Item #1" class="show" */>}}
+  {{</* accordion-item header="Accordion Item #1" show="true" */>}}
     This is the first item's accordion body. It supports HTML content. The item is shown by adding the value
     <code>show</code> to the <code>class</code> argument.
   {{</* /accordion-item */>}}
