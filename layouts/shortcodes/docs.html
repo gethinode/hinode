@@ -1,0 +1,69 @@
+{{- /*
+    Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
+
+    Usage: `docs name="name" file="path/filename.<toml|scss>"`
+
+    Prints everything between `# toml-docs-start "name"` and `# toml-docs-end "name"`
+    comments in the docs, or between `// scss-docs-start` and `// scss-docs-end`.
+*/ -}}
+
+{{- $name := .Get "name" -}}
+{{- $file := path.Clean (.Get "file") -}}
+{{- $extension := path.Ext $file -}}
+{{- $capture_start := "" -}}
+{{- $capture_end := "" -}}
+
+{{- $id := printf "docs-collapse-%d" .Ordinal -}}
+
+{{- $supportedExtensions := slice ".scss" ".toml" -}}
+{{- if in $supportedExtensions $extension -}}
+    {{- if eq $extension ".toml" }}
+        {{- $capture_start = printf "# toml-docs-start %s" $name -}}
+        {{- $capture_end = printf "# toml-docs-end %s" $name -}}
+    {{- else -}}
+        {{- $capture_start = printf "// scss-docs-start %s" $name -}}
+        {{- $capture_end = printf "// scss-docs-end %s" $name -}}
+    {{- end -}}
+{{- else -}}
+    {{- errorf "File format not supported (line %s): %s" .Position $file -}}
+{{- end -}}
+
+{{ $supportedFlags := slice "true" "false" -}}
+{{ $showParam := "true" -}}
+{{ $show := true -}}
+{{ with .Get "show" }}{{ $showParam = . }}{{ end -}}
+{{ if in $supportedFlags $showParam -}}
+    {{ if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'show': %s" $showParam -}}
+{{ end -}}
+
+
+{{- /* If any parameters are missing, print an error and exit */ -}}
+{{- if or (not $name) (not $file) -}}
+    {{- errorf "%s: %q: Missing required parameters! Got: name=%q file=%q!" .Position .Name $name $file -}}
+{{- else -}}
+    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
+
+    {{- $match := findRE $regex (readFile $file) -}}
+    {{- $match = index $match 0 -}}
+
+    {{- if not $match -}}
+        {{- errorf "%s: %q: Got no matches for name=%q in file=%q!" .Position .Name $name $file -}}
+    {{- end -}}
+
+    {{- $match = replace $match $capture_start "" -}}
+    {{- $match = replace $match $capture_end "" -}}
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active font-monospace" href="#body-{{ $id }}" aria-current="page" data-bs-toggle="collapse" data-bs-target=".multi-{{ $id }}" aria-expanded="false" aria-controls="body-{{ $id }} footer-{{ $id }}"><small>{{ $file }}</small></a>
+        </li>
+    </ul>
+    <div class="border-start border-end border-bottom mb-3">
+        <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} bg-light" id="body-{{ $id }}">
+            {{- highlight (trim $match "\r\n") "toml" "" -}}
+        </div>
+        <div class="collapse multi-{{ $id }}{{ if not $show }} show{{ end }} p-3" id="footer-{{ $id }}"><i>...</i></div>
+    </div>
+{{- end -}}
