@@ -7,6 +7,6 @@
 {{- $id := .Ordinal -}}
 {{- $class := .Get "class" -}}
 
-<div id="accordion-{{ $id }}" class="accordion{{ with $class }} {{ . }}{{ end }}">
+<div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
     {{- .Inner -}}
 </div>

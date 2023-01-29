@@ -12,7 +12,7 @@
 {{ $images := .Inner -}}
 {{ $items := len (findRE "carousel-item" $images) -}}
 
-<div id="carousel-{{ $id }}" class="carousel slide {{ $class }}" data-bs-ride="true">
+<div id="carousel-{{ $id }}" class="carousel slide mb-3{{ with $class }} {{ . }}{{ end }}" data-bs-ride="true">
     <div class="carousel-indicators">
         {{ range $index := (seq $items) -}}
             <button type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide-to="{{ sub $index 1 }}" {{ if eq $index 1 }}class="active"{{ end }} aria-current="true" aria-label="Slide {{ $index }}"></button>
