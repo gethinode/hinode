@@ -13,21 +13,21 @@ As a static website, your Hinode site can be deployed virtually anywhere. Hugo p
 Before deciding on your hosting and deployment approach, review the following considerations.
 
 1. Include npm in your build process
-   
+
    Hinode uses npm to manage its dependencies. Visit the [Hinode introduction]({{< relref "introduction" >}}) and [commands overview]({{< relref "commands" >}}) for more details.
 
 2. Configure the build timeout
 
    You might encounter timeout errors when you generate a large site that contains many resources (such as images). Adjust the `timout` in `config/_default/config.toml` as needed.
-   
+
    {{< docs name="build" file="config/_default/config.toml" >}}
 
 3. Consider using build automation
-   
+
    Many popular Git providers provide the option to automate the build and deployment process (<abbr title="Continous Integration/Continuous Deployment">CI/CD</abbr>). You can trigger this process on each release to your main repository branch, or set up a preview during a Pull Request. The examples on this page assume you have a Git repository with GitHub.
 
 4. Understand the support for custom domain names
-   
+
    Most hosting providers provide a subdomain, such as `<username>.github.io`, to access your website by default. Usually you have the ability to use a custom domain instead, although additional services and configuration might be needed.
 
 5. Decide on multiregion and CDN support
@@ -59,7 +59,7 @@ The table below gives a brief overview of the features supported by a few select
 
 ## Host on Azure blob storage
 
-Azure supports hosting a static website directly from its blob storage. The service is [available for free]({{< param "links.az_blob_pricing" >}}) for the first 12 months (conditions apply). The next sections describe how to configure the cloud storage correctly and how to deploy your website from your local computer to Azure. 
+Azure supports hosting a static website directly from its blob storage. The service is [available for free]({{< param "links.az_blob_pricing" >}}) for the first 12 months (conditions apply). The next sections describe how to configure the cloud storage correctly and how to deploy your website from your local computer to Azure.
 <!-- Consider using [Azure's Static Web App]({{< relref "#host-as-azure-static-web-app" >}}) if you plan to automate your deployments. The Static Web Apps have better support for integration with your Git provider and are easier to scale. -->
 
 ### Assumptions
@@ -85,12 +85,13 @@ Deploy your site to Azure blob storage in six steps.
   {{< img src="img/azblob-step3.png" caption="Step 3. Configure environment variables" >}}
 {{< /carousel >}}
 
+<!-- markdownlint-disable MD037 -->
 {{< accordion >}}
   {{< accordion-item header="Step 1. Create a storage account" >}}
     If not done so already, sign up for an account on the [Azure website]({{< param "links.azure" >}}). Log in to the Azure portal and create a storage account. The storage account needs to have a unique name across Azure. Select a region that best fits your needs. Leave all other options to their default value.
   {{< /accordion-item >}}
   {{< accordion-item header="Step 2. Enable the static website" >}}
-    Go to the menu section `Data management` and select `Static website`. Set the toggle for `Static website` to `Enabled`. Azure will then create a storage container `$web` within your storage account to host your website. Capture the primary endpoint, for example `https://gethinode.z6.web.core.windows.net/`. Set the `Index document name` to `index.html`. Hit the `Save ` button when done.
+    Go to the menu section `Data management` and select `Static website`. Set the toggle for `Static website` to `Enabled`. Azure will then create a storage container `$web` within your storage account to host your website. Capture the primary endpoint, for example `https://gethinode.z6.web.core.windows.net/`. Set the `Index document name` to `index.html`. Hit the `Save` button when done.
   {{< /accordion-item >}}
   {{< accordion-item header="Step 3. Configure environment variables" >}}
     Go to the menu section `Security + networking` and select `Access keys`. Capture the storage account name, e.g. `gethinode`. Next, copy either of the two keys to your clipboard. Set the credentials on your local computer:
@@ -115,6 +116,7 @@ Deploy your site to Azure blob storage in six steps.
     Once the deployment has finished, visit the end point captured in step 2 to test the website in your browser.
   {{< /accordion-item >}}
 {{< /accordion >}}
+<!-- markdownlint-enable MD037 -->
 
 You can make your static website available via a custom domain. Visit the [Azure documentation]({{< param "links.az_blob_domain" >}}) on how to map a custom domain to your blob storage endpoint. The static website does not support configuration of HTTP headers. Use Azure CDN to [configure HTTP headers]({{< param "links.az_cdn_rules" >}}) for your static website instead. Review the [server configuration]({{< relref "server" >}}) to identify the recommended configuration of the Content Security Policy.
 
