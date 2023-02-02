@@ -1,0 +1,31 @@
+# toml-docs-start az-blob
+# By default, files are uploaded in an arbitrary order.
+# Files that match the regular expressions in the "Order" list
+# will be uploaded first, in the listed order.
+order = [".webp$", ".jpg$", ".gif$"]
+
+[targets]
+name = "hinode"
+URL = "azblob://$web"
+
+[[matchers]]
+# Cache static assets for 1 year.
+pattern = "^.+\\.(js|css|svg|ttf)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = true
+
+[[matchers]]
+pattern = "^.+\\.(png|jpg|webp)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = false
+
+[[matchers]]
+# Set custom content type for /sitemap.xml
+pattern = "^sitemap\\.xml$"
+contentType = "application/xml"
+gzip = true
+
+[[matchers]]
+pattern = "^.+\\.(html|xml|json)$"
+gzip = true
+# toml-docs-end az-blob

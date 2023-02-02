@@ -149,6 +149,7 @@
     hugo_chroma = "https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages"
     hugo_deploy = "https://gohugo.io/hosting-and-deployment/hugo-deploy"
     hugo_deployment = "https://gohugo.io/hosting-and-deployment"
+    hugo_config_deploy = "https://gohugo.io/hosting-and-deployment/hugo-deploy/#configure-the-deployment"
     hugo_fingerprint = "https://gohugo.io/hugo-pipes/fingerprint"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_i18n = "https://gohugo.io/functions/i18n"

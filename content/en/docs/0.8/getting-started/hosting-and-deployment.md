@@ -67,6 +67,12 @@ Azure supports hosting a static website directly from its blob storage. The serv
 - You have a Hinode website you are ready to deploy.
 - You do not already have a Azure storage account.
 
+### Preparations
+
+The configuration folder should include a file `config/production/deployment.toml`. If not, copy it from the [Hinode main repository]({{< param "links.repository" >}}). The deployment file contains the settings used by the command `hugo deploy`. The panel below shows the default deployment settings for Azure blob storage. A more detailed example is available on the [Hugo website]({{< param "links.hugo_config_deploy" >}}).
+
+{{< docs name="az-blob" file="config/production/deployment.toml" show="false" >}}
+
 ### Configure your site
 
 Deploy your site to Azure blob storage in six steps.
