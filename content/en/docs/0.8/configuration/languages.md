@@ -12,11 +12,11 @@ Hinode supports Hugo's [multilingual mode]({{< param "links.hugo_lang" >}}) to c
 
 Define the languages available to your site in the main site configuration. The below configuration shows the default configuration set in `config/_default/languages.toml` for the English language.
 
-{{< toml-docs name="lang-main" file="config/_default/languages.toml" >}}
+{{< docs name="lang-main" file="config/_default/languages.toml" >}}
 
 The default behavior is set in `config/_default/config.toml`. For example, you can set the `defaultContentLanguageInSubdir` to `false` to remove the language slug `/en` from your site entirely.
 
-{{< toml-docs name="language" file="config/_default/config.toml" >}}
+{{< docs name="language" file="config/_default/config.toml" >}}
 
 ## Content translation
 

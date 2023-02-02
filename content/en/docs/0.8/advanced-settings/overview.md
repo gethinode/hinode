@@ -1,8 +1,8 @@
 ---
 title: Overview
 description: Configure and customize Hinode to your liking using Hugo Templating and npm dependencies.
-date: 2023-01-14
-group: configuration
+date: 2023-01-28
+group: advanced-settings
 layout: docs
 ---
 
@@ -34,7 +34,7 @@ The other two sections of interest are `devDependencies` and `otherDependencies`
 
 ## Mounted folders
 
-Hugo supports the mounting of folders since version 0.56.0. Hinode takes advantage of this feature to create a virtual file system, combining assets from multiple sources. For example, the below section of the `/config/_default/config.toml` instructs Hugo to make Bootstrap's JavaScript distribution file `/node_modules/bootstrap/dist/js` available in the `/assets/js` folder. This file is then bundled with the JavaScript files defined in the `/assets/js` folder of Hinode.
+Hugo supports the [mounting of folders]({{< param "links.hugo_mounts" >}}) since version 0.56.0. Hinode takes advantage of this feature to create a virtual file system, combining assets from multiple sources. For example, the below section of the `/config/_default/config.toml` instructs Hugo to make Bootstrap's JavaScript distribution file `/node_modules/bootstrap/dist/js` available in the `/assets/js` folder. This file is then bundled with the JavaScript files defined in the `/assets/js` folder of Hinode.
 
 {{< alert color="primary" >}}
     When you add a mount, the default mount for the concerned target root is ignored: be sure to explicitly add it.

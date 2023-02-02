@@ -4,23 +4,26 @@
   pages:
     - title: Introduction
     - title: Commands
+    - title: Hosting and deployment
     - title: Contribute
 
 - title: Configuration
   pages:
-    - title: Overview
     - title: Layout
     - title: Colors
     - title: Fonts
-    - title: Navigation
     - title: Languages
+    - title: Navigation
+    # - title: Comments
+
+- title: Advanced settings
+  pages:
+    - title: Overview
     - title: Styles
     - title: Scripts
     - title: Icons
-    # - title: Comments
     # - title: Metadata
     - title: Server
-    # - title: Deployment
 
 - title: Content
   pages:
@@ -58,6 +61,7 @@
     - title: Command prompt
     # - title: Dropdowns
     # - title: List group
+    - title: Icon
     - title: Image
     # - title: Modal
     - title: Navbar

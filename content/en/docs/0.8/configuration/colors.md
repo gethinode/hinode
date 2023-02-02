@@ -10,7 +10,7 @@ layout: docs
 
 Hinode uses Bootstrap's color system. You can adjust them in the `/config/_default/params.toml` file in the `style` section.
 
-{{< toml-docs name="theme-colors" file="config/_default/params.toml" >}}
+{{< docs name="theme-colors" file="config/_default/params.toml" >}}
 
 In addition, the background colors `black` and `white` are available too. Below is an overview of the rendered colors.
 
@@ -90,4 +90,4 @@ Below grid illustrates the contrasting colors for each background.
 
 The SCSS generator for the colored links is defined in `assets/scss/helpers/_colored-links.scss`.
 
-{{< scss-docs name="colored-links" file="assets/scss/helpers/_colored-links.scss" >}}
+{{< docs name="colored-links" file="assets/scss/helpers/_colored-links.scss" >}}

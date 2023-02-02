@@ -2,7 +2,7 @@
 {{- $user := .Get "user" -}}
 {{- $prompt := .Get "prompt" -}}
 {{- $filter := "(out)" -}}
-{{- $input := trim .Inner "\r\n" -}}
+{{- $input := trim .Inner " \t\r\n" -}}
 
 {{- $shell := lower (.Get "shell") -}}
 {{- $continuationPrompt := ">" -}}
@@ -28,6 +28,7 @@
 {{- $prevLine := "" -}}
 {{- $refined := "" -}}
 {{- range $line := $lines -}}
+    {{- $line = trim $line " \t\r\n" -}}
     {{- if hasPrefix $line $filter -}}
         {{- $prefix = printf "%s<span></span>" $prefix -}}
         {{- if eq $shell "sql" -}}

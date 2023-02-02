@@ -1,28 +1,39 @@
 ---
 title: Icons
 description: Use out-of-the-box Font Awesome icons to style your website.
-date: 2023-01-24
+date: 2023-02-02
 group: content
 layout: docs
 ---
 
-Hinode provides out-of-the box access to the free icons of [Font Awesome]({{< param "links.fontawesome" >}}). The icon library provides various [styling options]({{< param "links.fa_styling" >}}). The below paragraphs illustrate how to apply the styling options compatible with Markdown, Bootstrap, and the [content security policy]({{< ref "server" >}}).
+Hinode provides out-of-the box access to the free icons of [Font Awesome]({{< param "links.fontawesome" >}}). The [shortcodes]({{< relref "icon" >}}) `fa`, `fab`, and `fas` are available to add these icons with as limited code as possible. The Font Awesome icon library provides various [styling options]({{< param "links.fa_styling" >}}). The below paragraphs illustrate how to apply the styling options compatible with Markdown, Bootstrap, and the [content security policy]({{< ref "server" >}}).
 
 ## Styling basics
 
-The [Font Awesome icon library]({{< param "links.fa_icons" >}}) provides access to more than 2.000 free and open-source icons. Simply search for a keyword and review the presented options. For example, searching for the keyword `music` and filtering for `free` returns a list of nearly 30 icons. Simply add the HTML statement to your Markdown content.
+The [Font Awesome icon library]({{< param "links.fa_icons" >}}) provides access to more than 2.000 free and open-source icons. Simply search for a keyword and review the presented options. For example, searching for the keyword `music` and filtering for `free` returns a list of nearly 30 icons. Use one of the following three [shortcodes]({{< relref "icon" >}}) to add an icon to your Markdown content:
 
-{{< example lang="html" >}}
-<i class="fa-solid fa-music"></i>
+- `fa` - regular Font Awesome icon library
+- `fab` - brands Font Awesome icon library
+- `fas` - solid Font Awesome icon library
+
+Specify the correct icon library and omit the `fa-` prefix from the icon name to insert an icon.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* fas music */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
-The icons inherit the current styling options and as such blend in with text inline. For example, appply the [theme color]({{< ref "colors" >}}) `text-primary` to change the color of the icon.
+The icons inherit the current styling options and as such blend in with text inline. For example, appply the [theme color]({{< ref "colors" >}}) `text-primary` of the outer HTML element `span` to change the color of the icon. You can also pass the class attribute directly to the shortcode, such as `text-info`.
 
-{{< example lang="html" >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 <span class="text-primary">
-    <i class="fa-solid fa-music text-primary"></i>
+    {{</* fas music */>}}
 </span>
+{{</* fas music text-info */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Sizing icons
 
@@ -32,15 +43,17 @@ Font Awesome supports both relative and absolute sizing. The following two secti
 
 Font Awesome includes a range of t-shirt based sizes that are relative to the browser's default font size of 16px. The icons align to the inline text. The following example illustrative the available relative sizes.
 
-{{< example lang="html" >}}
-<p><i class="fa-solid fa-coffee fa-2xs"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-<p><i class="fa-solid fa-coffee fa-xs"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-<p><i class="fa-solid fa-coffee fa-sm"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-<p><i class="fa-solid fa-coffee"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-<p><i class="fa-solid fa-coffee fa-lg"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-<p><i class="fa-solid fa-coffee fa-xl"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
-<p><i class="fa-solid fa-coffee fa-2xl"></i> When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+<p>{{</* fas coffee fa-2xs */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<p>{{</* fas coffee fa-xs */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<p>{{</* fas coffee fa-sm */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<p>{{</* fas coffee fa */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<p>{{</* fas coffee fa-lg */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<p>{{</* fas coffee fa-xl */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
+<p>{{</* fas coffee fa-2xl */>}} When my six o’clock alarm buzzes, I require a pot of good java.</p>
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 The table below illustrates the relative sizing classes and their equivalent relative and absolute font size.
 
@@ -50,6 +63,7 @@ The table below illustrates the relative sizing classes and their equivalent rel
 | `fa-2x`  | 0.625em | 10px |
 | `fa-xs`  | 0.75em  | 12px |
 | `fa-sm`  | 0.875em | 14px |
+| `fa`     | 1em     | 16px |
 | `fa-lg`  | 1.25em  | 20px |
 | `fa-xl`  | 1.5em   | 24px |
 | `fa-2xl` | 2em     | 32px |
@@ -59,18 +73,20 @@ The table below illustrates the relative sizing classes and their equivalent rel
 
 Font Awesome also supports absolute sizing on a scale of 1x to 10x. The icons do not necessarily align to their surrounding text. The following example illustrative the various absolute sizes.
 
-{{< example lang="html" >}}
-<i class="fa-solid fa-camera fa-1x"></i>
-<i class="fa-solid fa-camera fa-2x"></i>
-<i class="fa-solid fa-camera fa-3x"></i>
-<i class="fa-solid fa-camera fa-4x"></i>
-<i class="fa-solid fa-camera fa-5x"></i>
-<i class="fa-solid fa-camera fa-6x"></i>
-<i class="fa-solid fa-camera fa-7x"></i>
-<i class="fa-solid fa-camera fa-8x"></i>
-<i class="fa-solid fa-camera fa-9x"></i>
-<i class="fa-solid fa-camera fa-10x"></i>
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* fas camera fa-1x */>}}
+{{</* fas camera fa-2x */>}}
+{{</* fas camera fa-3x */>}}
+{{</* fas camera fa-4x */>}}
+{{</* fas camera fa-5x */>}}
+{{</* fas camera fa-6x */>}}
+{{</* fas camera fa-7x */>}}
+{{</* fas camera fa-8x */>}}
+{{</* fas camera fa-9x */>}}
+{{</* fas camera fa-10x */>}}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 The table below illustrates the absolute sizing classes and their equivalent font size.
 
@@ -93,44 +109,50 @@ The table below illustrates the absolute sizing classes and their equivalent fon
 
 Add `fa-fw` to the class of the HTML element referencing your icon to apply a fixed width. This ensures icons of varying icon width are properly aligned to each other. The following example illustrates how this works.
 
-{{< example lang="html" >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 <div class="fa-3x">
-    <div><i class="fa-solid fa-skating fa-fw bg-info"></i> Skating</div>
-    <div><i class="fa-solid fa-skiing fa-fw bg-info"></i> Skiing</div>
-    <div><i class="fa-solid fa-skiing-nordic fa-fw bg-info"></i> Nordic Skiing</div>
-    <div><i class="fa-solid fa-snowboarding fa-fw bg-info"></i> Snowboarding</div>
-    <div><i class="fa-solid fa-snowplow fa-fw bg-info"></i> Snowplow</div>
+    <div>{{</* fas skating fa-fw bg-info */>}} Skating</div>
+    <div>{{</* fas skiing fa-fw bg-info */>}} Skiing</div>
+    <div>{{</* fas skiing-nordic fa-fw bg-info */>}} Nordic Skiing</div>
+    <div>{{</* fas snowboarding fa-fw bg-info */>}} Snowboarding</div>
+    <div>{{</* fas snowplow fa-fw bg-info */>}} Snowplow</div>
 </div>
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Lists
 
 Use the classes `fa-ul` and `fa-li` to replace default bullets in unordered lists. The following example illustrates how this works.
 
-{{< example lang="html" >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 <ul class="fa-ul">
-    <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>List icons can</li>
-    <li><span class="fa-li"><i class="fa-solid fa-check-square"></i></span>be used to</li>
-    <li><span class="fa-li"><i class="fa-solid fa-spinner fa-pulse"></i></span>replace bullets</li>
-    <li><span class="fa-li"><i class="fa-regular fa-square"></i></span>in lists</li>
+    <li><span class="fa-li">{{</* fas circle-check */>}}</span>List icons can</li>
+    <li><span class="fa-li">{{</* fas check-square */>}}</span>be used to</li>
+    <li><span class="fa-li">{{</* fas spinner fa-pulse */>}}</span>replace bullets</li>
+    <li><span class="fa-li">{{</* fa square */>}}</span>in lists</li>
 </ul>
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Rotating icons
 
 Use specific classes to rotate the icon with a specific degree. The following example illustrates how this works.
 
-{{< example lang="html" >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 <div class="fa-3x">
-    <i class="fa-solid fa-snowboarding"></i>
-    <i class="fa-solid fa-snowboarding fa-rotate-90"></i>
-    <i class="fa-solid fa-snowboarding fa-rotate-180"></i>
-    <i class="fa-solid fa-snowboarding fa-rotate-270"></i>
-    <i class="fa-solid fa-snowboarding fa-flip-horizontal"></i>
-    <i class="fa-solid fa-snowboarding fa-flip-vertical"></i>
-    <i class="fa-solid fa-snowboarding fa-flip-both"></i>
+    {{</* fas snowboarding */>}}
+    {{</* fas snowboarding fa-rotate-90 */>}}
+    {{</* fas snowboarding fa-rotate-180 */>}}
+    {{</* fas snowboarding fa-rotate-270 */>}}
+    {{</* fas snowboarding fa-flip-horizontal */>}}
+    {{</* fas snowboarding fa-flip-vertical */>}}
+    {{</* fas snowboarding fa-flip-both */>}}
 </div>
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 The following classes are available:
 
@@ -149,17 +171,19 @@ The following classes are available:
 
 Font Awesome supports various animations by simply adding a animation class to the HTML element. The following example illustrates the available basic animations. Add custom styles to your [Sass files]({{< ref "styles" >}}) to apply additional [animation utilities]({{< param "links.fa_animation" >}}).
 
-{{< example lang="html" >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 <div class="fa-3x">
-    <i class="fa-solid fa-heart fa-beat"></i>
-    <i class="fa-solid fa-triangle-exclamation fa-fade"></i>
-    <i class="fa-solid fa-circle-info fa-beat-fade"></i>
-    <i class="fa-solid fa-basketball fa-bounce"></i>
-    <i class="fa-solid fa-camera-rotate fa-flip"></i>
-    <i class="fa-solid fa-bell fa-shake"></i>
-    <i class="fa-solid fa-sync fa-spin"></i>
+    {{</* fas heart fa-beat */>}}
+    {{</* fas triangle-exclamation fa-fade */>}}
+    {{</* fas circle-info fa-beat-fade */>}}
+    {{</* fas basketball fa-bounce */>}}
+    {{</* fas camera-rotate fa-flip */>}}
+    {{</* fas bell fa-shake */>}}
+    {{</* fas sync fa-spin */>}}
 </div>
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 The following table describes the available basic animation classes.
 
@@ -179,12 +203,14 @@ The following table describes the available basic animation classes.
 
 Use `fa-border` and `fa-pull-right` or `fa-pull-left` for easy pull quotes or article icons. The following example illustrates a quote.
 
-{{< example lang="html" >}}
-<i class="fa-solid fa-quote-left fa-2x fa-pull-left"></i>
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* fas quote-left fa-2x fa-pull-left */>}}
 Gatsby believed in the green light, the orgastic future that year by year recedes before us.
 It eluded us then, but that’s no matter — tomorrow we will run faster, stretch our arms further...
 And one fine morning — So we beat on, boats against the current, borne back ceaselessly into the past.
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 The following table describes the available classes.
 
@@ -200,28 +226,26 @@ The following table describes the available classes.
 
 Use the `fa-stack` class on the parent HTML element of the two icons you want to stack. Then add the `fa-stack-1x` class for the regularly sized icon and add the `fa-stack-2x` class for the larger icon. `fa-inverse` can be added to the icon with the `fa-stack-1x` to help with a knock-out looking effect. Add a [theme color]({{< ref "colors" >}}) such as `text-primary` to change the color of the icon. The following example illustrates the available options.
 
-{{< example lang="html" >}}
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
 <span class="fa-stack fa-2x">
-    <i class="fa-solid fa-square fa-stack-2x"></i>
-    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+    {{</* fas square fa-stack-2x */>}}
+    {{</* fab twitter fa-stack-1x fa-inverse */>}}
 </span>
 <span class="fa-stack fa-2x">
-    <i class="fa-solid fa-circle fa-stack-2x"></i>
-    <i class="fa-solid fa-flag fa-stack-1x fa-inverse"></i>
+    {{</* fas circle fa-stack-2x */>}}
+    {{</* fas flag fa-stack-1x fa-inverse */>}}
 </span>
 <span class="fa-stack fa-2x">
-    <i class="fa-solid fa-camera fa-stack-1x"></i>
-    <i class="fa-solid fa-ban fa-stack-2x text-danger"></i>
-</span>
-<span class="fa-stack fa-2x">
-    <i class="fa-solid fa-square fa-stack-2x"></i>
-    <i class="fa-solid fa-terminal fa-stack-1x fa-inverse"></i>
+    {{</* fas camera fa-stack-1x */>}}
+    {{</* fas ban fa-stack-2x text-danger */>}}
 </span>
 <span class="fa-stack fa-4x">
-    <i class="fa-solid fa-square fa-stack-2x"></i>
-    <i class="fa-solid fa-terminal fa-stack-1x fa-inverse"></i>
+    {{</* fas square fa-stack-2x */>}}
+    {{</* fas terminal fa-stack-1x fa-inverse */>}}
 </span>
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 The following table describes the available classes.
 
@@ -232,3 +256,4 @@ The following table describes the available classes.
 | `fa-stack-1x` | Used on the icon which should be displayed at base size when stacked |
 | `fa-stack-2x` | Used on the icon which should be displayed larger when stacked |
 | `fa-inverse`  | Inverts the color of the icon displayed at base size when stacked |
+{{< /table >}}

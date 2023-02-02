@@ -71,9 +71,11 @@ Adhering to the following process is the best way to get your work included in t
     git push origin <topic-branch-name>
     ```
 
-1. Open a [Pull Request]({{< param "links.github_pr" >}})with a clear title and description against the main branch.
+1. Open a [Pull Request]({{< param "links.github_pr" >}}) with a clear title and description against the main branch.
 
+{{< alert >}}
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to license your work under the terms of the [MIT license]({{< param "links.license" >}}) (if it includes code changes) and under the terms of the Creative Commons ([CC BY-NC 4.0)]({{< param "links.cc_by_nc_4_0" >}}) license (if it includes documentation changes).
+{{< /alert >}}
 
 ## Coding guidelines
 

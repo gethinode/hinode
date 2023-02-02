@@ -114,6 +114,10 @@
     #theme = "" 
 
 [links]
+    azure = "https://azure.microsoft.com"
+    az_blob_domain = "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-custom-domain-name"
+    az_blob_pricing = "https://azure.microsoft.com/en-us/free"
+    az_cdn_rules = "https://learn.microsoft.com/en-us/azure/cdn/cdn-standard-rules-engine-reference"
     blist = "https://github.com/apvarun/blist-hugo-theme"
     bootstrap = "https://getbootstrap.com"
     bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
@@ -143,6 +147,9 @@
     hugo_config_dir = "https://gohugo.io/getting-started/configuration/#configuration-directory"
     hugo_content = "https://gohugo.io/content-management/formats"
     hugo_chroma = "https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages"
+    hugo_deploy = "https://gohugo.io/hosting-and-deployment/hugo-deploy"
+    hugo_deployment = "https://gohugo.io/hosting-and-deployment"
+    hugo_config_deploy = "https://gohugo.io/hosting-and-deployment/hugo-deploy/#configure-the-deployment"
     hugo_fingerprint = "https://gohugo.io/hugo-pipes/fingerprint"
     hugo_frontmatter = "https://gohugo.io/content-management/front-matter"
     hugo_i18n = "https://gohugo.io/functions/i18n"
@@ -151,6 +158,7 @@
     hugo_lang_config = "https://gohugo.io/content-management/multilingual/#configure-languages"
     hugo_links = "https://gohugo.io/content-management/cross-references"
     hugo_menus = "https://gohugo.io/content-management/menus/"
+    hugo_mounts = "https://gohugo.io/hugo-modules/configuration/#module-config-mounts"
     hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
     hugo_ordering = "https://gohugo.io/templates/lists/#order-content"
     hugo_templates = "https://gohugo.io/templates/introduction/"
