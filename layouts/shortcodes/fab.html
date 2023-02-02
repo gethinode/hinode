@@ -1,0 +1,5 @@
+{{- if not (.Get 0) -}}
+    {{- errorf "Expected icon name: %s" .Position -}}
+{{- else -}}
+    <i class="fa-brands fa-{{ (delimit .Params " ") }}"></i>
+{{- end -}}
