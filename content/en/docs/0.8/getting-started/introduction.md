@@ -25,27 +25,27 @@ Start a new Hinode project in three steps:
 
     Hinode is available as a [child theme]({{< param "links.repository_child" >}}), and a [main theme]({{< param "links.repository" >}}). The child theme uses [npm]({{< param "links.npm" >}}) to link to the latest available version of Hinode. Unless you plan to customize a lot, it is recommended to use the child theme:
 
-    ```bash
+    {{< command >}}
     git clone https://github.com/gethinode/child.git my-hinode-site && cd my-hinode-site
-    ```
+    {{< /command >}}
 
     Use the main theme if you intend to customize the base code:
 
-    ```bash
+    {{< command >}}
     git clone https://github.com/markdumay/hugo-theme-hinode.git my-hinode-site && cd my-hinode-site
-    ```
+    {{< /command >}}
 
 2. Install dependencies
 
-    ```bash
+    {{< command >}}
     npm install
-    ```
+    {{< /command >}}
 
 3. Start the development server
 
-    ```bash
+    {{< command >}}
     npm run start
-    ```
+    {{< /command >}}
 
 ## Quick configuration settings
 
