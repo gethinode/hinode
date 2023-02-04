@@ -6,7 +6,7 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-baseURL = "https://hinode-demo.markdumay.org/"
+baseURL = "https://gethinode.com/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
