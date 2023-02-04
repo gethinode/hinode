@@ -32,7 +32,7 @@ Start a new Hinode project in three steps:
     Use the main theme if you intend to customize the base code:
 
     {{< command >}}
-    git clone https://github.com/markdumay/hugo-theme-hinode.git my-hinode-site && cd my-hinode-site
+    git clone https://github.com/gethinode/hinode.git my-hinode-site && cd my-hinode-site
     {{< /command >}}
 
 2. Install dependencies

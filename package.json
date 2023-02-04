@@ -1,5 +1,5 @@
 {
-  "name": "@markdumay/hugo-theme-hinode",
+  "name": "@gethinode/hinode",
   "version": "0.8.0-alpha",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
@@ -41,14 +41,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markdumay/hugo-theme-hinode.git"
+    "url": "git+https://github.com/gethinode/hinode.git"
   },
   "author": "Mark Dumay",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/markdumay/hugo-theme-hinode/issues"
+    "url": "https://github.com/gethinode/hinode/issues"
   },
-  "homepage": "https://github.com/markdumay/hugo-theme-hinode#readme",
+  "homepage": "https://github.com/gethinode/hinode#readme",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@fullhuman/postcss-purgecss": "^5.0.0",

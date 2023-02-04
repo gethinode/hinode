@@ -39,9 +39,9 @@ Adhering to the following process is the best way to get your work included in t
 1. Fork the project, clone your fork, and configure the remotes:
 
     ```bash
-    git clone https://github.com/<your-username>/hugo-theme-hinode.git
-    cd hugo-theme-hinode
-    git remote add upstream https://github.com/markdumay/hugo-theme-hinode
+    git clone https://github.com/<your-username>/hinode.git
+    cd hinode
+    git remote add upstream https://github.com/gethinode/hinode
     ```
 
 1. If you cloned a while ago, get the latest changes from upstream:

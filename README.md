@@ -17,17 +17,17 @@
     <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
         <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb" />
     </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/commits/main" alt="Last commit">
-        <img src="https://img.shields.io/github/last-commit/markdumay/hugo-theme-hinode.svg" />
+    <a href="https://github.com/gethinode/hinode/commits/main" alt="Last commit">
+        <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg" />
     </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/issues" alt="Issues">
-        <img src="https://img.shields.io/github/issues/markdumay/hugo-theme-hinode.svg" />
+    <a href="https://github.com/gethinode/hinode/issues" alt="Issues">
+        <img src="https://img.shields.io/github/issues/gethinode/hinode.svg" />
     </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/pulls" alt="Pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/markdumay/hugo-theme-hinode.svg" />
+    <a href="https://github.com/gethinode/hinode/pulls" alt="Pulls">
+        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg" />
     </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/markdumay/hugo-theme-hinode" />
+    <a href="https://github.com/gethinode/hinode/blob/main/LICENSE" alt="License">
+        <img src="https://img.shields.io/github/license/gethinode/hinode" />
     </a>
 </p>
 
@@ -44,7 +44,7 @@
 
 ## About
 
-![Logo](https://raw.githubusercontent.com/markdumay/hugo-theme-hinode/main/static/img/logo.png)
+![Logo](https://raw.githubusercontent.com/gethinode/hinode/main/static/img/logo.png)
 
 - [Online Demo][demo]
 - [PageSpeed Insights][pagespeed]
@@ -83,13 +83,13 @@ Not quite sure? Use the Hinode child theme.
 #### Hinode child theme
 
 ```bash
-git clone https://github.com/markdumay/gethinode/child.git my-hinode-site && cd my-hinode-site
+git clone https://github.com/gethinode/child.git my-hinode-site && cd my-hinode-site
 ```
 
 #### Hinode main theme
 
 ```bash
-git clone https://github.com/markdumay/hugo-theme-hinode.git my-hinode-site && cd my-hinode-site
+git clone https://github.com/gethinode/hinode.git my-hinode-site && cd my-hinode-site
 ```
 
 ### 2. Install dependencies
@@ -119,7 +119,7 @@ The main site configuration is available in `./config/_default`. Some remarks:
 1. Clone the repository and create a new branch
 
     ```console
-    git checkout https://github.com/markdumay/hugo-theme-hinode.git -b name_for_new_branch
+    git checkout https://github.com/gethinode/hinode.git -b name_for_new_branch
     ```
 
 2. Make and test the changes
@@ -152,8 +152,8 @@ The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under
 [netlify]: https://www.netlify.com
 [nodejs]: https://nodejs.org
 [npm]: https://www.npmjs.com
-[observatory]: https://observatory.mozilla.org/analyze/hinode-demo.markdumay.org
-[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fhinode-demo.markdumay.org%2F
+[observatory]: https://observatory.mozilla.org/analyze/demo.gethinode.com
+[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F
 [utterances]: https://utteranc.es
 
 <!-- MARKDOWN MAINTAINED LINKS -->
@@ -161,7 +161,7 @@ The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under
 [blog]: https://markdumay.com
 [blog]: https://github.com/markdumay
 -->
-[demo]: https://hinode-demo.markdumay.org/
-[license]: https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE
-[repository]: https://github.com/markdumay/hugo-theme-hinode.git
+[demo]: https://demo.gethinode.com/
+[license]: https://github.com/gethinode/hinode/blob/main/LICENSE
+[repository]: https://github.com/gethinode/hinode.git
 [repository_child]: https://github.com/gethinode/child.git

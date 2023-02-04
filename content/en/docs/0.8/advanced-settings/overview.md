@@ -16,7 +16,7 @@ The other two sections of interest are `devDependencies` and `otherDependencies`
 
 ```yml
 {
-    "name": "@markdumay/hugo-theme-hinode",
+    "name": "@gethinode/hinode",
     "version": "0.8.0",
     "scripts": {
         [...]
@@ -58,7 +58,7 @@ As another example, the Hinode child theme merges the key folders of the main th
 [module]
     [...]
     [[module.mounts]]
-        source = "node_modules/@markdumay/hugo-theme-hinode/i18n"
+        source = "node_modules/@gethinode/hinode/i18n"
         target = "i18n"
     [[module.mounts]]
         source = "i18n"
