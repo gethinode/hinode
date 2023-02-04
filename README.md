@@ -138,7 +138,7 @@ Hinode is inspired by the following themes:
 
 ## License
 
-The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under the [MIT license][license]. The documentation (including the "README") is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
+The `hinode` and `child` codebase is released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
 <!-- MARKDOWN PUBLIC LINKS -->
 [blist]: https://github.com/apvarun/blist-hugo-theme

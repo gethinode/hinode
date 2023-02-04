@@ -216,7 +216,7 @@ The configuration of the list pages is set in the `list` section of the `site pa
 | footer       | "none"       | Footer components of the card, displayed in small caps. Supported values are "full", "publication", "tags", and "none" (default). |
 | orientation  | "stacked"    | Placecement of the thumbnail, either "stacked" (default), "horizontal", or "none". |
 | style        | -            | Optional styling attributes added to card class, e.g. "border-0" to remove the borders. |
-| homepage     | 3            | Number of items to display on the home page (if defined in the [configuration](#configuration-1)), defaults to 3. |
+| homepage     | 3            | Maximum number of items to display on the home page (if defined in the [configuration](#configuration-1)), defaults to 3. |
 {.table}
 
 The below configuration shows the default configuration set in `config/_default/params.toml`.

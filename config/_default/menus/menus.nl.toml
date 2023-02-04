@@ -14,6 +14,18 @@
   weight = 30
 
 [[main]]
+  name = "Voorbeeldproject"
+  url = "/nl/projecten/voorbeeldproject/"
+  parent = "Projecten"
+  weight = 1
+
+[[main]]
+  name = "Ander project"
+  url = "/nl/projecten/ander-project/"
+  parent = "Projecten"
+  weight = 2
+
+[[main]]
   name = "Tags"
   url = "/tags/"
   weight = 40
