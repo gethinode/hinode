@@ -32,14 +32,17 @@
     {{- with index . "header" }}{{ $header = . }}{{ end -}}
     {{- with index . "footer" }}{{ $footer = . }}{{ end -}}
     {{- with index . "style" }}{{ $style = . }}{{ end -}}
+    {{- with index . "homepage" }}{{ $homepage = . }}{{ end -}}
 {{- end -}}
 
 {{- $list := where site.RegularPages "Type" "in" $section -}}
 {{- $max := (len $list) -}}
-{{- if $home }}
-    {{ $paginate = false }}
-    {{ $max = $homepage }}
+{{- if $home -}}
+    {{- $paginate = false -}}
+    {{- $max = int (math.Min $homepage $max) -}}
 {{ end -}}
+
+{{- $cols = int (math.Min $cols $max) -}}
 
 {{- if eq $sort "weight" -}}
     {{- $list = $list.ByWeight -}}
@@ -64,7 +67,7 @@
     {{- partial "assets/card-group.html" (dict 
         "page" $page
         "list" $list
-        "max" 3
+        "max" $max
         "cols" $cols
         "title" $title
         "href" $sectionURL
