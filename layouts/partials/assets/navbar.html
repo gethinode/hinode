@@ -92,7 +92,7 @@
         <!-- Insert sidebar toggler when applicable -->
         {{ if $page.Scratch.Get "sidebar" }}
             <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle docs navigation">
-                <i class="fa-solid fa-ellipsis"></i>
+                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
         {{ end }}
 
@@ -156,7 +156,7 @@
                     {{ $currentLang := $page.Language.Lang }}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-globe"></i> {{ T "languageSwitcherLabel" }}
+                            {{ partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end ">
                             {{ if $page.IsTranslated -}}
