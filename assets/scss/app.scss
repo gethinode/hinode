@@ -96,3 +96,6 @@ $navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Par
 @import "layouts/type.scss";
 @import "common/export.scss";
 @import "helpers/colored-links.scss";
+
+// Import theme placeholder
+@import "theme.scss";

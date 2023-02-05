@@ -1,0 +1,16 @@
+{{- $icon := .icon -}}
+{{- if not $icon -}}
+    {{- errorf "Expected value for param 'icon'" -}}
+{{- end -}}
+
+{{- $icon_class := split $icon " " -}}
+{{- $attr := delimit (after 1 $icon_class) " " -}}
+{{- if eq (index $icon_class 0) "fas" -}}
+    <i class="fa-solid fa-{{ $attr}}"></i>
+{{- else if eq (index $icon_class 0) "fab" -}}
+    <i class="fa-brands fa-{{ $attr }}"></i>
+{{- else if eq (index $icon_class 0) "fa" -}}
+    <i class="fa-regular fa-{{ $attr }}"></i>
+{{- else -}}
+    {{- errorf "Unrecognized icon class: %s" $icon_class -}}
+{{- end -}}
