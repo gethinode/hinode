@@ -139,7 +139,14 @@
                           </li>
                     {{ else -}}
                         <li class="nav-item">
-                            <a class="nav-link {{ if $active }}active{{ end }}" href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if ne $url.Host $baseurl.Host }}target="_blank" {{ end }}>{{ with $pre}}{{ . }}{{ end }}<span {{if $active }} class="active"{{end}}>{{ .Name }}</span>{{ with $post}}{{ . }}{{ end }}</a>
+                            {{- $external := ne $url.Host $baseurl.Host -}}
+                            <a class="nav-link {{ if $active }}active{{ end }}"
+                                href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if $external }}target="_blank" {{ end }}>
+                                {{ with $pre}}{{ . }}{{ end }}
+                                <span {{if $active }} class="active"{{end}}>{{ .Name }}</span>
+                                {{- with $post}}{{ . }}{{ end -}}
+                                {{- if $external }} {{ partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}{{ end -}}
+                            </a>
                         </li>
                     {{ end }}
                 {{ end -}}
