@@ -77,8 +77,6 @@ Hinode supports [multilingual content]({{< param "links.hugo_lang_config" >}}). 
 | Section | Setting       | Default | Description |
 |---------|---------------|---------|-------------|
 | head    | tagline       | -       | Tagline used on the site's title for the home page. |
-| feature | message       | -       | Welcome message used in the featured section on the home page. |
-| feature | tagline       | -       | Tagline used below the welcome message in the featured section on the home page. |
 | feature | link          | -       | Call to action link in the featured section on the home page. |
 | feature | caption       | "About" | Call to action title in the featured section on the home page. |
 | footer  | license       | -       | License displayed on the site's footer. |
