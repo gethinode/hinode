@@ -16,6 +16,7 @@
                     "publication", "tags", and "none" (default).
     "description"   Optional description of the card.
     "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+    "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
 -->
 
@@ -71,10 +72,7 @@
     {{ end }}
 {{ end }}
 
-{{ $title := .title }}
-{{ $href := .href }}
-{{ $description := .description }}
-{{ $thumbnail := .thumbnail }}
+{{- $icon := .icon -}}
 
 {{ $color := "" -}}
 {{ with .color }}{{ $color = . }}{{ end -}}
@@ -98,12 +96,7 @@
     {{ errorf "Invalid value for param 'footer': %s" $footer -}}
 {{ end -}}
 
-{{ with $page -}}
-    {{ if not $title }}{{ $title = .Title }}{{ end -}}
-    {{ if not $href }}{{ $href = .Permalink  }}{{ end -}}
-    {{ if not $description }}{{ $description = .Description }}{{ end -}}
-    {{ if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
-{{ end -}}
+    {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
 
 {{ if not $href -}}
     {{ errorf "Missing value for param 'href'" -}}
@@ -134,7 +127,13 @@
                     <a href="{{ $href }}">
                         {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
                     </a>
-                {{ end }}
+                {{- else if $icon -}}
+                    <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
+                        <a href="{{ $href }}"> 
+                            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
+                        </a>
+                    </div>
+                {{- end -}}
                 </div>
             <div class="col-8">
                 <div class="card-body d-flex p-{{ $padding }} flex-column h-100">
@@ -153,7 +152,13 @@
             <a href="{{ $href }}">
                 {{- partial "image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
             </a>
-        {{ end }}
+        {{- else if $icon -}}
+            <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
+                <a href="{{ $href }}"> 
+                    {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
+                </a>
+            </div>
+        {{- end -}}
         <div class="card-body d-flex flex-column p-{{ $padding }}">
             {{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}                    
             {{ partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) }}
