@@ -13,96 +13,96 @@
     "title"         Optional brand title, displayed when the logo is not set. Defaults to the site's title.
 -->
 
-{{ $supportedFlags := slice "true" "false" -}}
+{{- $supportedFlags := slice "true" "false" -}}
 
 {{- $id := 0 -}}
-{{ with .id }}{{ $id = . }}{{ end }}
+{{- with .id }}{{ $id = . }}{{ end -}}
 
-{{ $page := .page -}}
-{{ if not $page -}}
-    {{ errorf "Missing value for param 'page'" -}}
-{{ end -}}
+{{- $page := .page -}}
+{{- if not $page -}}
+    {{- errorf "Missing value for param 'page'" -}}
+{{- end -}}
 
-{{ $menuName := "main" }}
-{{ with .menus }}{{ $menuName = .}}{{ end -}}
-{{ $menus := index site.Menus $menuName -}}
-{{ if or (ne (printf "%T" $menus) "navigation.Menu") (ne (index $menus 0).Menu $menuName) -}}
-    {{ errorf "Invalid value for param 'menus': %s" $menuName -}}
-{{ end -}}
+{{- $menuName := "main" }}
+{{- with .menus }}{{ $menuName = .}}{{ end -}}
+{{- $menus := index site.Menus $menuName -}}
+{{- if or (ne (printf "%T" $menus) "navigation.Menu") (ne (index $menus 0).Menu $menuName) -}}
+    {{- errorf "Invalid value for param 'menus': %s" $menuName -}}
+{{- end -}}
 
-{{ $size := "md" -}}
-{{ with .size }}{{ $size = . }}{{ end -}}
-{{ $supportedSizes := slice "xs" "sm" "md" "lg" "xl" -}}
-{{ if not (in $supportedSizes $size) -}}
-    {{ errorf "Invalid value for param 'size': %s" $size -}}
-{{ end -}}
+{{- $size := "md" -}}
+{{- with .size }}{{ $size = . }}{{ end -}}
+{{- $supportedSizes := slice "xs" "sm" "md" "lg" "xl" -}}
+{{- if not (in $supportedSizes $size) -}}
+    {{- errorf "Invalid value for param 'size': %s" $size -}}
+{{- end -}}
 
-{{ $style := "light" -}}
-{{ with .style }}{{ $style = . }}{{ end -}}
-{{ $supportedStyles := slice "light" "dark" -}}
-{{ if not (in $supportedStyles $style) -}}
-    {{ errorf "Invalid value for param 'style': %s" $style -}}
-{{ end -}}
+{{- $style := "light" -}}
+{{- with .style }}{{ $style = . }}{{ end -}}
+{{- $supportedStyles := slice "light" "dark" -}}
+{{- if not (in $supportedStyles $style) -}}
+    {{- errorf "Invalid value for param 'style': %s" $style -}}
+{{- end -}}
 
-{{ $fixedParam := "false" -}}
-{{ $fixed := false -}}
-{{ with .fixed }}{{ $fixedParam = . }}{{ end -}}
-{{ if in $supportedFlags $fixedParam -}}
-    {{ if eq $fixedParam "true" }}{{ $fixed = true }}{{ else }}{{ $fixed = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'fixed': %s" $fixedParam -}}
-{{ end -}}
+{{- $fixedParam := "false" -}}
+{{- $fixed := false -}}
+{{- with .fixed }}{{ $fixedParam = . }}{{ end -}}
+{{- if in $supportedFlags $fixedParam -}}
+    {{- if eq $fixedParam "true" }}{{ $fixed = true }}{{ else }}{{ $fixed = false }}{{ end -}}
+{{- else -}}
+    {{- errorf "Invalid value for param 'fixed': %s" $fixedParam -}}
+{{- end -}}
 
-{{ $inverseStyle := "light" -}}
-{{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
+{{- $inverseStyle := "light" -}}
+{{- if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
 
-{{ $color := "" -}}
-{{ with .color }}
-    {{ $color = . }}
-    {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
-    {{ if not (in $supportedColors $color) -}}
-        {{ errorf "Invalid value for param 'color': %s" $color -}}
-    {{ end -}}
-{{ end -}}
+{{- $color := "" -}}
+{{- with .color -}}
+    {{- $color = . -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+    {{- if not (in $supportedColors $color) -}}
+        {{- errorf "Invalid value for param 'color': %s" $color -}}
+    {{- end -}}
+{{- end -}}
 
-{{ $search := default true site.Params.navigation.search -}}
-{{ with .search }}
-    {{ $searchParam := . }}
-    {{ if in $supportedFlags $searchParam -}}
-        {{ if eq $searchParam "true" }}{{ $search = true }}{{ else }}{{ $search = false }}{{ end -}}
-    {{ else -}}
-        {{ errorf "Invalid value for param 'search': %s" $searchParam -}}
-    {{ end -}}
-{{ end -}}
+{{- $search := default true site.Params.navigation.search -}}
+{{- with .search -}}
+    {{- $searchParam := . -}}
+    {{- if in $supportedFlags $searchParam -}}
+        {{- if eq $searchParam "true" }}{{ $search = true }}{{ else }}{{ $search = false }}{{ end -}}
+    {{- else -}}
+        {{- errorf "Invalid value for param 'search': %s" $searchParam -}}
+    {{- end -}}
+{{- end -}}
 
-{{ $logo := site.Params.navigation.logo -}}
-{{ with .logo }}{{ $logo = . }}{{ end -}}
+{{- $logo := site.Params.navigation.logo -}}
+{{- with .logo }}{{ $logo = . }}{{ end -}}
 
-{{ $title := site.Title -}}
-{{ if .title -}}
-    {{ $title = .title -}}
-    {{ if not .logo }}{{ $logo = "" }}{{ end -}}
-{{ end -}}
+{{- $title := site.Title -}}
+{{- if .title -}}
+    {{- $title = .title -}}
+    {{- if not .logo }}{{ $logo = "" }}{{ end -}}
+{{- end -}}
 
-{{ $pre := .Pre -}}
-{{ $post := .Post -}}
+{{- $pre := .Pre -}}
+{{- $post := .Post -}}
 
 <nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-3">
 	<div class="container-fluid">
         <!-- Insert sidebar toggler when applicable -->
-        {{ if $page.Scratch.Get "sidebar" }}
+        {{- if $page.Scratch.Get "sidebar" -}}
             <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle docs navigation">
                 {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
-        {{ end }}
+        {{- end -}}
 
         <!-- Insert the brand logo or name -->
         <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
-            {{ if $logo -}}
+            {{- if $logo -}}
                 <img src="{{ $logo }}" alt="{{ $title }} logo" height="30">
-            {{ else -}}
+            {{- else -}}
                 <span class="fw-bold">{{ $title }}</span>
-            {{ end -}}
+            {{- end -}}
         </a>
 
         <!-- Insert main navigation toggler -->
@@ -115,62 +115,62 @@
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent-{{ $id }}">
             <!-- Insert search input -->
-            {{ if $search }}{{ partial "assets/search-input.html" -}}{{ end }}
+            {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
             
             <!-- Render top-menu items (maximum depth of 2) -->
             <ul class="navbar-nav ms-auto">
-                {{ range $menu := $menus -}}
-                    {{ $menu_item_url := $menu.URL | relLangURL -}}
-                    {{ $page_url:= $page.RelPermalink | relLangURL -}}
-                    {{ $active := hasPrefix $page_url $menu_item_url -}}
+                {{- range $menu := $menus -}}
+                    {{- $menu_item_url := $menu.URL | relLangURL -}}
+                    {{- $page_url:= $page.RelPermalink | relLangURL -}}
+                    {{- $active := hasPrefix $page_url $menu_item_url -}}
 
-                    {{ $url := urls.Parse .URL -}}
-                    {{ $baseurl := urls.Parse $.Site.Params.Baseurl -}}
-                    {{ if .HasChildren -}}
+                    {{- $url := urls.Parse .URL -}}
+                    {{- $baseurl := urls.Parse $.Site.Params.Baseurl -}}
+                    {{- if .HasChildren -}}
                         <li class="nav-item dropdown">
                             <a class="nav-link {{ if $active }}link-dark{{ end }} dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ .Name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                {{ range .Children -}}
+                                {{- range .Children -}}
                                     <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
-                                {{ end -}}
+                                {{- end -}}
                             </ul>
                           </li>
-                    {{ else -}}
+                    {{- else -}}
                         <li class="nav-item">
                             {{- $external := ne $url.Host $baseurl.Host -}}
                             <a class="nav-link {{ if $active }}active{{ end }}"
                                 href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if $external }}target="_blank" {{ end }}>
-                                {{ with $pre}}{{ . }}{{ end }}
+                                {{- with $pre}}{{ . }}{{ end -}}
                                 <span {{if $active }} class="active"{{end}}>{{ .Name }}</span>
                                 {{- with $post}}{{ . }}{{ end -}}
                                 {{- if $external }} {{ partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}{{ end -}}
                             </a>
                         </li>
-                    {{ end }}
-                {{ end -}}
+                    {{- end -}}
+                {{- end -}}
 
                 <!-- Insert language switcher if applicable -->
-                {{ if or $page.IsTranslated site.IsMultiLingual }}
-                    {{ $currentLang := $page.Language.Lang }}
+                {{- if or $page.IsTranslated site.IsMultiLingual -}}
+                    {{- $currentLang := $page.Language.Lang -}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
+                            {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" -}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end ">
-                            {{ if $page.IsTranslated -}}
-                                {{ range $page.AllTranslations -}}
+                            {{- if $page.IsTranslated -}}
+                                {{- range $page.AllTranslations -}}
                                     <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .Permalink }}">{{ .Language.LanguageName  }}</a></li>
-                                {{ end -}}
-                            {{ else -}}
-                                {{ range site.Languages -}}
+                                {{- end -}}
+                            {{- else -}}
+                                {{- range site.Languages -}}
                                     <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
-                                {{ end -}}
-                            {{ end -}}
+                                {{- end -}}
+                            {{- end -}}
                         </ul>
                     </li>
-                {{ end -}}
+                {{- end -}}
             </ul>
         </div>
     </div>
