@@ -8,7 +8,8 @@
 */ -}}
 
 {{- $name := .Get "name" -}}
-{{- $file := path.Clean (.Get "file") -}}
+{{- $basePath := .Site.Params.docs.basePath -}}
+{{- $file := path.Join $basePath (path.Clean (.Get "file")) -}}
 {{- $extension := path.Ext $file -}}
 {{- $capture_start := "" -}}
 {{- $capture_end := "" -}}

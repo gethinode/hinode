@@ -7,6 +7,7 @@
 # toml-docs-start docs
 [docs]
     version = "0.8"
+    basePath = ""
 # toml-docs-end docs
 
 # toml-docs-start home
