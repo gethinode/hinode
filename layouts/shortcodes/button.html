@@ -1,6 +1,7 @@
 <!-- 
     Displays a button. The shortcode supports the following arguments:
     "href"          Optional address for the button or hyperlink. Automatically assigned when using collapse.
+    "relref"        Optional name of the page to link to. Replaces "href" with a relative link if set.
     "id"            Optional id of the button, to be used in the DOM.
     "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
@@ -62,7 +63,11 @@
 {{ $tooltip := .Get "tooltip" -}}
 {{ $collapse := .Get "collapse" -}}
 {{ $href := .Get "href" -}}
+{{ $relref := .Get "relref" }}
 {{ $id := .Get "id" -}}
+{{ if $relref }}
+    {{ $href = relref . $relref }}
+{{ end }}
 
 {{ $placement := "top" -}}
 {{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
