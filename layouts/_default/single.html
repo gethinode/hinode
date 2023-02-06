@@ -1,6 +1,6 @@
 {{- define "partials/header.html" -}}
     {{ if site.Params.navigation.breadcrumb }}{{ partial "breadcrumb.html" . }}{{ end -}}
-    {{ if eq .Layout "docs"}}
+    {{ if in (slice "docs" "minimal") .Layout }}
         <h1>{{ .Title }}</h1>
     {{ else }}
         {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
