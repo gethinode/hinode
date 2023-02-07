@@ -11,8 +11,8 @@
     <a href="https://gohugo.io" alt="Hugo website">
         <img src="https://img.shields.io/badge/generator-hugo-brightgreen" />
     </a>
-    <a href="https://app.netlify.com/sites/hinode-demo/deploys" alt="Netlify Status">
-        <img src="https://img.shields.io/netlify/151e88a3-d161-4045-856d-778fea43fc2f" />
+    <a href="https://app.netlify.com/sites/gethinode-demo/deploys" alt="Netlify Status">
+        <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67" />
     </a>
     <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
         <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb" />
