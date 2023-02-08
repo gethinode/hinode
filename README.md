@@ -54,13 +54,13 @@ Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source 
 
 Additional features include:
 
-* Support for multiple languages
-* Reusable Bootstrap components through configurable shortcodes and partials
-* Embedded comments through light-weight integration with GitHub via [utteranc.es][utterances]
-* Integrated sidebar navigation for content-heavy sections, such as documentation pages
-* Reponsive image handling for multiple screen sizes and resolutions
-* Optimized search results, scoring 100 points for SEO on [PageSpeed Insights][pagespeed]
-* Secure by default, scoring A+ on [Mozilla Observatory test][observatory]
+- Support for multiple languages
+- Reusable Bootstrap components through configurable shortcodes and partials
+- Embedded comments through light-weight integration with GitHub via [utteranc.es][utterances]
+- Integrated sidebar navigation for content-heavy sections, such as documentation pages
+- Reponsive image handling for multiple screen sizes and resolutions
+- Optimized search results, scoring 100 points for SEO on [PageSpeed Insights][pagespeed]
+- Secure by default, scoring A+ on [Mozilla Observatory test][observatory]
 
 Detailed information about Hinode is available on the [official website][website].
 
