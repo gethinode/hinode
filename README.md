@@ -54,17 +54,15 @@ Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source 
 
 Additional features include:
 
-- Comments
-- Social links
-- Blog pagination
-- Code highlighting
-- Command prompt
-- Color customization
-- Language switcher
+* Support for multiple languages
+* Reusable Bootstrap components through configurable shortcodes and partials
+* Embedded comments through light-weight integration with GitHub via [utteranc.es][utterances]
+* Integrated sidebar navigation for content-heavy sections, such as documentation pages
+* Reponsive image handling for multiple screen sizes and resolutions
+* Optimized search results, scoring 100 points for SEO on [PageSpeed Insights][pagespeed]
+* Secure by default, scoring A+ on [Mozilla Observatory test][observatory]
 
-<!-- TODO: add tutorial deep-link 
-Detailed background information is available on the author's [personal blog][blog].
--->
+Detailed information about Hinode is available on the [official website][website].
 
 ## Prerequisites
 
@@ -74,56 +72,39 @@ Hinode requires Git, Node.js and npm for local development and testing. Download
 
 Start a new Hinode project in three steps:
 
-### 1. Create a new site
+1. Create a new site
 
-Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of Hinode. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
+    Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of Hinode. Unless you plan to customize a lot, it is recommended to use the child theme:
 
-Not quite sure? Use the Hinode child theme.
+    ```bash
+    git clone https://github.com/gethinode/child.git my-hinode-site && cd my-hinode-site
+    ```
 
-#### Hinode child theme
+    Use the main theme if you intend to customize the base code:
 
-```bash
-git clone https://github.com/gethinode/child.git my-hinode-site && cd my-hinode-site
-```
+    ```bash
+    git clone https://github.com/gethinode/hinode.git my-hinode-site && cd my-hinode-site
+    ```
 
-#### Hinode main theme
+1. Install dependencies
 
-```bash
-git clone https://github.com/gethinode/hinode.git my-hinode-site && cd my-hinode-site
-```
+    ```bash
+    npm install
+    ```
 
-### 2. Install dependencies
+1. Start development server
 
-```bash
-npm install
-```
-
-### 3. Start development server
-
-```bash
-npm run start
-```
+    ```bash
+    npm run start
+    ```
 
 ## Configuration
 
-The main site configuration is available in `./config/_default`. Some remarks:
-
-- **Menu items** - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
-- **Content** - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
-- **Theme style** - Update `primary` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. Bootstrap's other key colors can be changed too. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility. Additionally, set `themeFont` and `themeFontPath` to override the default font.
-- **Comments** - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
-- **Security policy** - The theme uses rather strict security policies by default. Be sure to include references to external sources in the header configuration to avoid broken links. The settings of the local development server are defined in `server.toml`. Similar settings are defined in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
+See the [official documentation][getstarted] on how to configure your site.
 
 ## Contributing
 
-1. Clone the repository and create a new branch
-
-    ```console
-    git checkout https://github.com/gethinode/hinode.git -b name_for_new_branch
-    ```
-
-2. Make and test the changes
-3. Submit a Pull Request with a comprehensive description of the changes
+See the [official documentation][contribute] on how to contribute to the open-source development of Hinode.
 
 ## Credits
 
@@ -144,7 +125,6 @@ The `hinode` and `child` codebase is released under the [MIT license][license]. 
 [blist]: https://github.com/apvarun/blist-hugo-theme
 [bootstrap]: https://getbootstrap.com
 [cc-by-nc-4.0]: https://creativecommons.org/licenses/by-nc/4.0/
-[contrast_checker]: https://accessibleweb.com/color-contrast-checker/
 [doks]: https://github.com/h-enk/doks
 [flexsearch]: https://github.com/nextapps-de/flexsearch
 [git_download]: https://git-scm.com
@@ -157,11 +137,10 @@ The `hinode` and `child` codebase is released under the [MIT license][license]. 
 [utterances]: https://utteranc.es
 
 <!-- MARKDOWN MAINTAINED LINKS -->
-<!-- TODO: add blog link
-[blog]: https://markdumay.com
-[blog]: https://github.com/markdumay
--->
+[contribute]: https://gethinode.com/contribute
+[getstarted]: https://gethinode.com/docs
 [demo]: https://demo.gethinode.com/
 [license]: https://github.com/gethinode/hinode/blob/main/LICENSE
 [repository]: https://github.com/gethinode/hinode.git
 [repository_child]: https://github.com/gethinode/child.git
+[website]: https://gethinode.com/
