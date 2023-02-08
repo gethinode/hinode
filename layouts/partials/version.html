@@ -1,0 +1,18 @@
+<!-- 
+    Returns the current version defined in 'package.json` in the repository root, or in the documentation base path
+    ('params.docs.basePath') if specified. The returned version includes a 'v' prefix. The partial returns nothing
+    when no match is found. The partial does not require any arguments.
+-->
+
+{{- $file := "package.json" -}}
+{{- $basePath := .Site.Params.docs.basePath -}}
+{{- $file = path.Join $basePath (path.Clean $file) -}}
+
+{{- $regex := printf `"version":.*(\r\n|\r|\n)` -}}
+
+{{- $match := findRE $regex (readFile $file) -}}
+{{- $match = index $match 0 -}}
+
+{{- if $match -}}
+    {{- printf "v%s" (trim (index (split $match ":") 1) " \r\n,\"") -}}
+{{- end -}}
