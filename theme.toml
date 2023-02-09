@@ -1,4 +1,4 @@
-name = "Hinode"
+name = "b-nova"
 license = "MIT"
 licenselink = "https://github.com/gethinode/hinode/blob/main/LICENSE"
 description = "A clean documentation and blog theme for your Hugo site based on Bootstrap 5."
@@ -9,5 +9,5 @@ features = ["security aware", "fast by default", "seo-ready", "development tools
 min_version = "0.81.0"
 
 [author]
-  name = "Mark Dumay"
+  name = "Raffael
   homepage = "https://github.com/markdumay"
