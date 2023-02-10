@@ -20,7 +20,7 @@
 # toml-docs-start navigation
 [navigation]
     logo = "/img/logo_embedded.svg"
-    color = "white"
+    color = "body"
     style = "light"
     fixed = true
     offset = "4em"
