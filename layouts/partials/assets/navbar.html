@@ -151,6 +151,10 @@
                     {{- end -}}
                 {{- end -}}
 
+                <li class="nav-item py-2 py-md-1 col-12 col-md-auto">
+                    <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+                </li>
+
                 <!-- Insert language switcher if applicable -->
                 {{- if or $page.IsTranslated site.IsMultiLingual -}}
                     {{- $currentLang := $page.Language.Lang -}}
@@ -171,6 +175,39 @@
                         </ul>
                     </li>
                 {{- end -}}
+                              
+                <!-- Insert color mode switcher -->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
+                        {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
+                        <!-- TODO: i18n -->
+                        <span class="d-md-none">Color mode</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
+                        <li>
+                            <a class="dropdown-item" data-bs-theme-value="light">
+                                {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
+                                <!-- TODO: i18n -->
+                                Light
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" data-bs-theme-value="dark">
+                                {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
+                                <!-- TODO: i18n -->
+                                Dark
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" data-bs-theme-value="auto">
+                                {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
+                                <!-- TODO: i18n -->
+                                Auto
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
