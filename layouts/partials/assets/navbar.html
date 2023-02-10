@@ -59,7 +59,7 @@
 {{- $color := "" -}}
 {{- with .color -}}
     {{- $color = . -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" -}}
     {{- if not (in $supportedColors $color) -}}
         {{- errorf "Invalid value for param 'color': %s" $color -}}
     {{- end -}}
