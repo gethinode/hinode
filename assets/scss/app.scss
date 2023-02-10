@@ -24,6 +24,7 @@ $navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Par
 
 // Import Bootstrap configuration
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark.scss";
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
