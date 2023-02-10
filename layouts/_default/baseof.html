@@ -1,7 +1,7 @@
 {{- with partial "utilities/GetMenu" . }}{{ $.Scratch.Set "sidebar" . }}{{ end -}}
 
 <!doctype html>
-<html lang="{{ .Site.Language.Lang }}" class="no-js">
+<html lang="{{ .Site.Language.Lang }}" class="no-js" data-bs-theme="dark">
     <head>
         {{ block "head" . }}{{ end -}}
     </head>
