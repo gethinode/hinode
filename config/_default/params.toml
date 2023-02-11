@@ -143,6 +143,7 @@
     github_rebase = "https://help.github.com/articles/about-git-rebase/"
     google_fonts = "https://fonts.google.com"
     html_codeguide = "https://codeguide.co/#html"
+    hinode_docs = "https://gethinode.com/docs"
     hugo = "https://gohugo.io"
     hugo_config = "https://gohugo.io/getting-started/configuration/#all-configuration-settings"
     hugo_config_dir = "https://gohugo.io/getting-started/configuration/#configuration-directory"
