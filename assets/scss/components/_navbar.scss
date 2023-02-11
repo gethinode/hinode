@@ -65,3 +65,13 @@
 .navbar-toggler.collapsed .toggler-icon {
     background-color: #777;
 }
+
+@include color-mode(dark) {
+    .emphasis {
+        background-color: $white if($enable-important-utilities, !important, null);
+    }
+}
+
+.emphasis {
+    background-color: $black if($enable-important-utilities, !important, null);
+}
