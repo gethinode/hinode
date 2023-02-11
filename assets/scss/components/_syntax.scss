@@ -1,14 +1,27 @@
 .bg, .chroma, .chroma .err { 
+    // set to transparent background to avoid rendering issues with example shortcode
+    background-color: transparent !important; 
+}
+
+.syntax-highlight {
     background-color: var(--bs-light) if($enable-important-utilities, !important, null); 
+}
+
+.preview-background {
+    background-color: var(--bs-secondary-bg) if($enable-important-utilities, !important, null); 
 }
 
 @import "syntax-light";
 
 [data-bs-theme=dark] {
     .bg, .chroma, .chroma .err { 
-        background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null); 
+        // set to transparent background to avoid rendering issues with example shortcode
+        background-color: transparent !important; 
     }
 
+    .syntax-highlight {
+        background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null); 
+    }
     .bg, .chroma { 
         color: #c9d1d9 if($enable-important-utilities, !important, null);
     }
