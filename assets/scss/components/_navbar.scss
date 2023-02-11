@@ -1,3 +1,5 @@
+// stylelint-disable annotation-no-unknown
+
 // Source: https://jsfiddle.net/njhgr40m/
 
 /* Remove border from toggler */
@@ -75,3 +77,5 @@
 .emphasis {
     background-color: $black if($enable-important-utilities, !important, null);
 }
+
+// stylelint-enable annotation-no-unknown

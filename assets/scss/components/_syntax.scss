@@ -1,30 +1,38 @@
-.bg, .chroma, .chroma .err { 
+// stylelint-disable annotation-no-unknown
+@import "syntax-light";
+
+.bg,
+.chroma,
+.chroma .err {
     // set to transparent background to avoid rendering issues with example shortcode
-    background-color: transparent !important; 
+    background-color: transparent if($enable-important-utilities, !important, null);
 }
 
 .syntax-highlight {
-    background-color: var(--bs-light) if($enable-important-utilities, !important, null); 
+    background-color: var(--bs-light) if($enable-important-utilities, !important, null);
 }
 
 .preview-background {
-    background-color: var(--bs-secondary-bg) if($enable-important-utilities, !important, null); 
+    background-color: var(--bs-secondary-bg) if($enable-important-utilities, !important, null);
 }
 
-@import "syntax-light";
+[data-bs-theme="dark"] {
+    @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
 
-[data-bs-theme=dark] {
-    .bg, .chroma, .chroma .err { 
+    .bg,
+    .chroma,
+    .chroma .err {
         // set to transparent background to avoid rendering issues with example shortcode
-        background-color: transparent !important; 
+        background-color: transparent if($enable-important-utilities, !important, null);
     }
 
     .syntax-highlight {
-        background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null); 
-    }
-    .bg, .chroma { 
-        color: #c9d1d9 if($enable-important-utilities, !important, null);
+        background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null);
     }
 
-    @import "syntax-dark";    
+    .bg,
+    .chroma {
+        color: #c9d1d9 if($enable-important-utilities, !important, null);
+    }
 }
+// stylelint-enable annotation-no-unknown
