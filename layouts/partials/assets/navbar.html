@@ -91,7 +91,8 @@
 	<div class="container-fluid">
         <!-- Insert sidebar toggler when applicable -->
         {{- if $page.Scratch.Get "sidebar" -}}
-            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle docs navigation">
+            <!-- TODO: translate aria label -->
+            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle sidebar navigation">
                 {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
         {{- end -}}
