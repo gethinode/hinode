@@ -40,3 +40,27 @@
     transform: scale(1.01);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
+
+@include color-mode(dark) {
+    .card-body-link {
+        color: $gray-500 if($enable-important-utilities, !important, null);
+
+        @if $link-shade-percentage != 0 {
+            &:hover,
+            &:focus {
+                color: shade-color($gray-500, $link-shade-percentage) if($enable-important-utilities, !important, null);
+            }
+        }
+    }
+}
+
+.card-body-link {
+    color: $body-color if($enable-important-utilities, !important, null);
+
+    @if $link-shade-percentage != 0 {
+        &:hover,
+        &:focus {
+            color: tint-color($body-color, $link-shade-percentage) if($enable-important-utilities, !important, null);
+        }
+    }
+}

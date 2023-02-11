@@ -27,9 +27,9 @@
     {{- $color := .color -}}
     {{- $description := .description -}}
     
-    <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}link-dark{{ end }}">
-        <p class="card-title fs-5 fw-bold">{{ $title }}</p>
-        {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}link-dark{{ end }}">{{ . }}</p>{{ end -}}
+    <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
+            <p class="card-title fs-5 fw-bold">{{ $title }}</p>
+        {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
     </a>
 {{- end -}}
 
