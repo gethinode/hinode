@@ -236,7 +236,7 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="warning" title="Tooltip" href="#" */>}}
+{{</* tooltip color="primary" title="Tooltip" href="#" */>}}
     Tooltip demonstration
 {{</* /tooltip */>}}
 {{< /example >}}
