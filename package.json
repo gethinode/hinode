@@ -35,7 +35,9 @@
     "precheck": "npm version",
     "check": "exec-bin node_modules/.bin/hugo/hugo version",
     "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
-    "create:syntax": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=monokailight > ./assets/scss/components/_syntax.scss",
+    "create:syntax-light": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
+    "create:syntax-dark": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
+    "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark",
     "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
     "upgrade": "npx npm-check-updates -u"
   },
