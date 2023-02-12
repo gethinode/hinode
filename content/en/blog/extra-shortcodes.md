@@ -1,19 +1,17 @@
 ---
 author: Mark Dumay
 title: Extra shortcodes
-date: 2023-02-11
-description: Extra shortcodes
+date: 2023-02-12
+description: Use shortcodes to add common Bootstrap elements with ease.
 tags: ["code"]
-thumbnail: img/notepad.jpg
-photoCredits: <a href="https://unsplash.com/@frederickjmedina">Frederick Medina</a>
-photoSource: <a href="https://unsplash.com/photos/PdfRE-xB--s">Unsplash</a>
+thumbnail: img/paper.jpg
+photoCredits: <a href="https://www.pexels.com/@picjumbo-com-55570/">picjumbo.com</a>
+photoSource: <a href="https://www.pexels.com/photo/blue-pen-beside-black-smartphone-on-white-paper-196646/">Pexels</a>
 ---
 
 Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
 
 ## Accordion
-
-<!-- TODO: fix accordion icons and background -->
 
 As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
 
@@ -35,8 +33,6 @@ As an example, the following shortcode displays an accordion with three elements
 <!-- markdownlint-enable MD037 -->
 
 ## Alert
-
-<!-- TODO: fix alert icon -->
 
 As an example, the following shortcode displays a simple alert.
 
@@ -108,8 +104,6 @@ As an example, the following shortcode displays a stacked card with icon that li
 <!-- markdownlint-enable MD037 -->
 
 ## Carousel
-
-<!-- TODO: fix carousel icons and title -->
 
 As an example, the following shortcode displays a centered carousel with three slides, 16x9 aspect ratio, and a relative width of 67% on large screens.
 
