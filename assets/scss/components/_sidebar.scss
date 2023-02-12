@@ -63,7 +63,6 @@
             &:hover,
             &:focus {
                 color: $secondary;
-                // color: var(--bs-secondary-color);
                 background-color: tint-color($primary, 90%);
             }
         
@@ -74,8 +73,7 @@
 
         .btn-toggle[aria-expanded="true"] {
             color: var(--bs-secondary-color);
-            // color: var(--bs-tertiary-color);
-        }    
+        }
 
         .btn-toggle-nav a {
             padding: 0.1875rem 0.5rem;
@@ -85,7 +83,6 @@
             &:hover,
             &:focus {
                 color: $secondary;
-                // color: var(--bs-secondary-color);
                 background-color: tint-color($primary, 90%);
             }
 
