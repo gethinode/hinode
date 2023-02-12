@@ -4,6 +4,8 @@
  * Licensed under the Creative Commons Attribution 3.0 Unported License.
  */
 
+{{ if site.Params.main.enableDarkMode }}
+
 (() => {
   'use strict'
 
@@ -61,3 +63,5 @@
       })
   })
 })()
+
+{{ end }}

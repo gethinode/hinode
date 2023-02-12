@@ -11,6 +11,7 @@ $danger:                        {{ site.Params.style.danger | default "#dc3545" 
 $light:                         {{ site.Params.style.light | default "#f8f9fa" }};
 $dark:                          {{ site.Params.style.dark | default "#212529" }};
 $navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Params.navigation.offset | default "4em" }}{{ else }}0em{{ end }};
+$enable-dark-mode:              {{ site.Params.main.enableDarkMode | default true }} !default;
 
 // Include default variable overrides
 @import "common/variables.scss";

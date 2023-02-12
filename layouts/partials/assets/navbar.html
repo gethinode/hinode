@@ -75,6 +75,9 @@
     {{- end -}}
 {{- end -}}
 
+{{- $enableDarkMode := default true site.Params.main.enableDarkMode -}}
+{{- $enableLanguage := or $page.IsTranslated site.IsMultiLingual -}}
+
 {{- $logo := site.Params.navigation.logo -}}
 {{- with .logo }}{{ $logo = . }}{{ end -}}
 
@@ -151,12 +154,15 @@
                     {{- end -}}
                 {{- end -}}
 
-                <li class="nav-item py-2 py-md-1 col-12 col-md-auto">
-                    <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
-                </li>
+
+                {{- if or $enableLanguage $enableDarkMode -}}
+                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto">
+                        <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+                    </li>
+                {{- end -}}
 
                 <!-- Insert language switcher if applicable -->
-                {{- if or $page.IsTranslated site.IsMultiLingual -}}
+                {{- if $enableLanguage -}}
                     {{- $currentLang := $page.Language.Lang -}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -177,33 +183,34 @@
                 {{- end -}}
                               
                 <!-- Insert color mode switcher -->
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
-                        {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
-                        <span class="d-md-none"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
-                        <li>
-                            <a class="dropdown-item" data-bs-theme-value="light">
-                                {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
-                                {{ T "colorLight" }}
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" data-bs-theme-value="dark">
-                                {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
-                                {{ T "colorDark" }}
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" data-bs-theme-value="auto">
-                                {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
-                                {{ T "colorAuto" }}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                {{- if $enableDarkMode -}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
+                            {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
+                            <span class="d-md-none"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
+                            <li>
+                                <a class="dropdown-item" data-bs-theme-value="light">
+                                    {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
+                                    {{ T "colorLight" }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-bs-theme-value="dark">
+                                    {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
+                                    {{ T "colorDark" }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-bs-theme-value="auto">
+                                    {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
+                                    {{ T "colorAuto" }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {{- end -}}
             </ul>
         </div>
     </div>
