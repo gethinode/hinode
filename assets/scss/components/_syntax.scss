@@ -16,23 +16,25 @@
     background-color: var(--bs-secondary-bg) if($enable-important-utilities, !important, null);
 }
 
-[data-bs-theme="dark"] {
-    @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
+@if $enable-dark-mode {
+    [data-bs-theme="dark"] {
+        @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
 
-    .bg,
-    .chroma,
-    .chroma .err {
-        // set to transparent background to avoid rendering issues with example shortcode
-        background-color: transparent if($enable-important-utilities, !important, null);
-    }
+        .bg,
+        .chroma,
+        .chroma .err {
+            // set to transparent background to avoid rendering issues with example shortcode
+            background-color: transparent if($enable-important-utilities, !important, null);
+        }
 
-    .syntax-highlight {
-        background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null);
-    }
+        .syntax-highlight {
+            background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null);
+        }
 
-    .bg,
-    .chroma {
-        color: #c9d1d9 if($enable-important-utilities, !important, null);
+        .bg,
+        .chroma {
+            color: #c9d1d9 if($enable-important-utilities, !important, null);
+        }
     }
 }
 // stylelint-enable annotation-no-unknown
