@@ -68,14 +68,16 @@
     background-color: #777;
 }
 
-@include color-mode(dark) {
-    .emphasis {
-        background-color: $white if($enable-important-utilities, !important, null);
-    }
-}
-
 .emphasis {
     background-color: $black if($enable-important-utilities, !important, null);
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .emphasis {
+            background-color: $white if($enable-important-utilities, !important, null);
+        }
+    }
 }
 
 // stylelint-enable annotation-no-unknown
