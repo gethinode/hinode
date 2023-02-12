@@ -3,6 +3,10 @@
     top: $navbar-offset;
 }
 
+.sidebar-item {
+    color: black;
+}
+
 .btn-toggle {
     padding: 0.25rem 0.5rem;
     font-weight: 600;
@@ -11,7 +15,7 @@
 
     &:hover,
     &:focus {
-        color: rgba(0, 0, 0, 0.85);
+        color: black;
         background-color: tint-color($primary, 90%);
     }
 
@@ -24,10 +28,8 @@
     }
 }
 
-// scss-docs-end sidebar
-
 .btn-toggle[aria-expanded="true"] {
-    color: rgba(0, 0, 0, 0.85);
+    color: black;
 
     &::before {
         transform: rotate(90deg);
@@ -48,6 +50,50 @@
         font-weight: bold;
     }
 }
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .sidebar-item {
+            color: var(--bs-tertiary-color);
+        }
+
+        .btn-toggle {
+            color: var(--bs-tertiary-color);
+        
+            &:hover,
+            &:focus {
+                color: $secondary;
+                background-color: tint-color($primary, 90%);
+            }
+        
+            &::before {
+                content: $btn-toggle-dark;
+            }
+        }
+
+        .btn-toggle[aria-expanded="true"] {
+            color: var(--bs-secondary-color);
+        }
+
+        .btn-toggle-nav a {
+            padding: 0.1875rem 0.5rem;
+            margin-top: 0.125rem;
+            margin-left: 1.25rem;
+
+            &:hover,
+            &:focus {
+                color: $secondary;
+                background-color: tint-color($primary, 90%);
+            }
+
+            &.active {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// scss-docs-end sidebar
 
 .dropdown-toggle {
     outline: 0;
