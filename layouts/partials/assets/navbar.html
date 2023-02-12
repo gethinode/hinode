@@ -91,8 +91,7 @@
 	<div class="container-fluid">
         <!-- Insert sidebar toggler when applicable -->
         {{- if $page.Scratch.Get "sidebar" -}}
-            <!-- TODO: translate aria label -->
-            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle sidebar navigation">
+            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
                 {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
         {{- end -}}
@@ -182,29 +181,25 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
                         {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
-                        <!-- TODO: i18n -->
-                        <span class="d-md-none">Color mode</span>
+                        <span class="d-md-none"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
                         <li>
                             <a class="dropdown-item" data-bs-theme-value="light">
                                 {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
-                                <!-- TODO: i18n -->
-                                Light
+                                {{ T "colorLight" }}
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" data-bs-theme-value="dark">
                                 {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
-                                <!-- TODO: i18n -->
-                                Dark
+                                {{ T "colorDark" }}
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" data-bs-theme-value="auto">
                                 {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
-                                <!-- TODO: i18n -->
-                                Auto
+                                {{ T "colorAuto" }}
                             </a>
                         </li>
                     </ul>
