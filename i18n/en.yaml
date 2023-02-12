@@ -53,6 +53,16 @@
   translation: "First"
 - id: paginationLast
   translation: "Last"
+- id: toggleSidebar
+  translation: "Toggle sidebar navigation"  
+- id: colorMode
+  translation: "Color mode"
+- id: colorLight
+  translation: "Light"
+- id: colorDark
+  translation: "Dark"
+- id: colorAuto
+  translation: "Auto"
 
 # 404 page
 - id: pageNotFound

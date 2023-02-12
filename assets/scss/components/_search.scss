@@ -11,7 +11,7 @@
 .form-control.is-search {
     padding-right: 4rem;
     border: 1px solid transparent;
-    background: $gray-100;
+    background: var(--bs-tertiary-bg);
 }
 
 .form-control.is-search:focus {
@@ -29,9 +29,9 @@
     padding-right: 0.3125rem;
     padding-left: 0.3125rem;
     font-size: $font-size-base * 0.75;
-    color: $gray-700;
+    color: var(--bs-secondary-color);
     content: "Ctrl + /";
-    border: 1px solid $gray-300;
+    border: 1px solid var(--bs-border-color);
     border-radius: 0.25rem;
 }
 
@@ -59,12 +59,12 @@
 }
 
 #suggestions a:focus {
-    background: $gray-100;
+    background-color: var(--bs-tertiary-bg);
     outline: 0;
 }
 
 #suggestions div:not(:first-child) {
-    border-top: 1px dashed $gray-200;
+    border-top: 1px dashed var(--bs-border-color);
 }
 
 #suggestions div:first-child {
@@ -76,7 +76,7 @@
 }
 
 #suggestions a:hover {
-    background: $gray-100;
+    background-color: var(--bs-tertiary-bg);
 }
 
 #suggestions span {
@@ -86,12 +86,11 @@
 
 .suggestion__title {
     font-weight: $headings-font-weight;
-    color: $black;
 }
 
 .suggestion__description,
 .suggestion__no-results {
-    color: $gray-700;
+    color: var(--bs-secondary-color);
 }
 
 @include media-breakpoint-up(sm) {
@@ -106,7 +105,7 @@
     .suggestion__title {
         width: 9rem;
         padding-right: 1rem;
-        border-right: 1px solid $gray-200;
+        border-right: 1px solid var(--bs-border-color);
         display: inline-block;
         text-align: right;
     }
