@@ -6,7 +6,7 @@
         {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
         {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
         <h1>{{ .Title }}</h1>
-        <small class="text-muted text-uppercase">
+        <small class="text-body-secondary text-uppercase">
             {{ $datestr | i18n "postedOnDate" -}}
             {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }} &bull;
             {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} &bull;
