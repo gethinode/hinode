@@ -164,6 +164,12 @@ echo "goodbye"
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Docs
+
+Use the `docs` shortcode to display the content of a `toml` or `scss` file:
+
+{{< docs name="theme-colors" file="config/_default/params.toml" >}}
+
 ## Icon
 
 As an example, the following shortcodes show a square check, a brand logo, and a circle check.
