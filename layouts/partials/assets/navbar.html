@@ -97,6 +97,9 @@
             <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
                 {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
+        {{- else -}}
+            <!-- Insert spacing to center logo correctly on smaller screens -->
+            <div class="nav-spacing d-{{ $size }}-none"></div>
         {{- end -}}
 
         <!-- Insert the brand logo or name -->
@@ -111,6 +114,7 @@
         <!-- Insert main navigation toggler -->
 		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
 			aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="Toggle main navigation">
+            <!-- TODO: add i18n translation -->
 			<span class="toggler-icon top-bar emphasis"></span>
 			<span class="toggler-icon middle-bar emphasis"></span>
 			<span class="toggler-icon bottom-bar emphasis"></span>

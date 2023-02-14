@@ -29,7 +29,7 @@
                             </div>
                             <div class="col">
                                 {{ if ne $year $lastYear }}
-                                    <p class="text-muted mt-5">{{ $year }}</p>
+                                    <p class="text-body-secondary mt-5">{{ $year }}</p>
                                     {{ $.Scratch.Set "lastYear" $year }}
                                 {{ end }}
                                 <a href="{{ .Permalink | relURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{end}}{{ .Title | markdownify }}</a>
