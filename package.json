@@ -17,11 +17,11 @@
   },
   "scripts": {
     "prestart": "npm run clean",
-    "start": "hugo server --bind=0.0.0.0 --disableFastRender",
-    "prod": "hugo server --bind=0.0.0.0 --disableFastRender -e production",
+    "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
+    "prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
     "prebuild": "npm run clean",
-    "build": "hugo --gc --minify",
-    "build:debug": "hugo -e debug --debug",
+    "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
+    "build:debug": "exec-bin node_modules/.bin/hugo/hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
     "clean": "rimraf public resources",
     "clean:install": "rimraf package-lock.json node_modules",
@@ -31,13 +31,14 @@
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
     "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
     "test": "npm run -s lint",
-    "env": "hugo env",
+    "env": "exec-bin node_modules/.bin/hugo/hugo env",
     "precheck": "npm version",
-    "check": "hugo version",
+    "check": "exec-bin node_modules/.bin/hugo/hugo version",
     "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
-    "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
-    "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
+    "create:syntax-light": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
+    "create:syntax-dark": "exec-bin node_modules/.bin/hugo/hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
     "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark",
+    "postinstall": "hugo-installer --version otherDependencies.hugo --extended --destination node_modules/.bin/hugo",
     "upgrade": "npx npm-check-updates -u"
   },
   "repository": {
@@ -60,8 +61,9 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
+    "exec-bin": "^1.0.0",
     "flexsearch": "^0.7.31",
-    "hugo-bin": "^0.98.0",
+    "hugo-installer": "^4.0.1",
     "markdownlint-cli2": "^0.6.0",
     "postcss-cli": "^10.1.0",
     "purgecss-whitelister": "^2.4.0",
@@ -70,7 +72,7 @@
     "stylelint": "^15.1.0",
     "stylelint-config-standard-scss": "^7.0.0"
   },
-  "hugo-bin": {
-    "buildTags": "extended"
+  "otherDependencies": {
+    "hugo": "0.110.0"
   }
 }
