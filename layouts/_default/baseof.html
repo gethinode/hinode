@@ -7,12 +7,12 @@
     </head>
 
     <body>
-        <div class="d-flex flex-column min-vh-100">
+        <div class="d-flex flex-column min-vh-100{{ if and .IsHome .Site.Params.home.style }} {{ .Site.Params.home.style }}{{ end }}">
             <div class="{{ if .Site.Params.navigation.fixed }}mb-4{{ end }}">
                 {{- partial "assets/navbar.html" (dict
                     "page" .
                     "fixed" (string .Site.Params.navigation.fixed)
-                    "color" (default "white" .Site.Params.navigation.color)
+                    "color" (.Site.Params.navigation.color)
                     "style" (default "light" .Site.Params.navigation.style))
                 -}}
             </div>

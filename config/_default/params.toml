@@ -16,13 +16,13 @@
     sections = ["blog", "projects"]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     fullCover = false
+    style = ""
 # toml-docs-end home
 
 # toml-docs-start navigation
 [navigation]
     logo = "/img/logo_icon.svg"
     color = "body"
-    style = "light"
     fixed = true
     offset = "4em"
     search = true
