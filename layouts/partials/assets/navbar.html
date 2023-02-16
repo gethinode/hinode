@@ -3,7 +3,6 @@
     "page"          Required object reference to the current page.
     "menus"         Optional name of the menu configuration, defaults to "main".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
-    "style"         Optional style of the navbar, either "light" (default) or "dark".
     "fixed"         Optional flag to indicate the navbar should stick to the top, defaults to false.
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
@@ -37,13 +36,6 @@
     {{- errorf "Invalid value for param 'size': %s" $size -}}
 {{- end -}}
 
-{{- $style := "light" -}}
-{{- with .style }}{{ $style = . }}{{ end -}}
-{{- $supportedStyles := slice "light" "dark" -}}
-{{- if not (in $supportedStyles $style) -}}
-    {{- errorf "Invalid value for param 'style': %s" $style -}}
-{{- end -}}
-
 {{- $fixedParam := "false" -}}
 {{- $fixed := false -}}
 {{- with .fixed }}{{ $fixedParam = . }}{{ end -}}
@@ -52,9 +44,6 @@
 {{- else -}}
     {{- errorf "Invalid value for param 'fixed': %s" $fixedParam -}}
 {{- end -}}
-
-{{- $inverseStyle := "light" -}}
-{{- if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
 
 {{- $color := "" -}}
 {{- with .color -}}
