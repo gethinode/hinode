@@ -63,6 +63,8 @@
   translation: "Dunkel"
 - id: colorAuto
   translation: "Automatisch"
+- id: toggleMainNav
+  translation: "Hauptmenü anzuzeigen oder auszublenden"
 
 # 404 page
 - id: pageNotFound

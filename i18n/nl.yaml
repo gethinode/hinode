@@ -54,7 +54,7 @@
 - id: paginationLast
   translation: "Laatste"
 - id: toggleSidebar
-  translation: "Toon of verberg navigatie"  
+  translation: "Toon of verberg navigatie"
 - id: colorMode
   translation: "Modus"
 - id: colorLight
@@ -63,6 +63,8 @@
   translation: "Donker"
 - id: colorAuto
   translation: "Automatisch"
+- id: toggleMainNav
+  translation: "Toon of verberg hoofdnavigatie"
 
 # 404 page
 - id: pageNotFound

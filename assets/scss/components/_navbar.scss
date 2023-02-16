@@ -2,6 +2,15 @@
 
 // Source: https://jsfiddle.net/njhgr40m/
 
+.navbar {
+    transition: 0.5s ease-in-out;
+    background-color: none;
+}
+
+.nav-active, .navbar-expanded {
+    background-color: var(--bs-body-bg);
+}
+
 /* Remove border from toggler */
 .navbar-toggler {
     border: 0 !important;
