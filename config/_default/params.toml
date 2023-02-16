@@ -22,7 +22,6 @@
 [navigation]
     logo = "/img/logo_icon.svg"
     color = "body"
-    style = "light"
     fixed = true
     offset = "4em"
     search = true
