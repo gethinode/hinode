@@ -19,7 +19,7 @@ De volgende shortcode toont een accordion met drie elementen, waarvan de eerste 
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
   {{</* accordion-item header="Accordion Item #1" show="true" */>}}
-    Dit is de inhoud van het eerste element met ondersteuning voor HTML. De waarde <code>show</code> 
+    Dit is de inhoud van het eerste element met ondersteuning voor HTML. De waarde <code>show</code>
     voor het argument <code>class</code> geeft aan dat het element uitgeklapt moet worden.
   {{</* /accordion-item */>}}
   {{</* accordion-item header="Accordion Item #2" */>}}
