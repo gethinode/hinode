@@ -54,6 +54,7 @@ Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source 
 
 Additional features include:
 
+- Switching between light mode and dark mode
 - Support for multiple languages
 - Reusable Bootstrap components through configurable shortcodes and partials
 - Embedded comments through light-weight integration with GitHub via [utteranc.es][utterances]
