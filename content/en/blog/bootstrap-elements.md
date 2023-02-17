@@ -1,12 +1,12 @@
 ---
 author: Mark Dumay
-title: Extra shortcodes
-date: 2023-02-12
+title: Bootstrap elements
+date: 2023-02-17
 description: Use shortcodes to add common Bootstrap elements with ease.
-tags: ["code"]
-thumbnail: img/paper.jpg
-photoCredits: <a href="https://www.pexels.com/@picjumbo-com-55570/">picjumbo.com</a>
-photoSource: <a href="https://www.pexels.com/photo/blue-pen-beside-black-smartphone-on-white-paper-196646/">Pexels</a>
+tags: ["bootstrap", "shortcode"]
+thumbnail: img/boots.jpg
+photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
+photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
 ---
 
 Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
@@ -23,7 +23,7 @@ As an example, the following shortcode displays an accordion with three elements
     <code>show</code> to the <code>class</code> argument.
   {{</* /accordion-item */>}}
   {{</* accordion-item header="Accordion Item #2" */>}}
-    This is the second item's accordion body. It too supports HTML content.
+    This is the second item's accordion body. It supports HTML content too.
   {{</* /accordion-item */>}}
   {{</* accordion-item header="Accordion Item #3" */>}}
     This is the third item's accordion body.
@@ -46,7 +46,7 @@ As an example, the following shortcode displays a simple alert.
 
 ## Badge
 
-Use HTML code to display a badge for a heading. See the Bootstrap [documentation]({{< param "links.bs_badge_heading" >}}) for more options. The following example displays a badge for a heading of size four.
+Use HTML code to display a badge for a heading. See the Bootstrap [documentation]({{< param "links.bs_badge_heading" >}}) for more options.
 
 {{< example >}}
 <h1>Example heading of size one <span class="badge bg-secondary">New</span></h1>
@@ -59,7 +59,7 @@ Use HTML code to display a badge for a heading. See the Bootstrap [documentation
 
 ## Breadcrumb
 
-As an example, the following shortcode displays a breadcrumb for the current page.
+As an example, the following shortcode displays a breadcrumb for the blog page.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
@@ -95,7 +95,7 @@ As an example, the following shortcode displays a group of three buttons.
 
 ## Card
 
-As an example, the following shortcode displays a stacked card with icon that links to the [about]({{< ref "about" >}}) page. It includes a custom header and footer.
+As an example, the following shortcode displays a stacked card with icon that links to the [about]({{< ref "about" >}}) page. It includes a custom header.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

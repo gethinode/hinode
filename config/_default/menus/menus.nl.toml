@@ -47,3 +47,27 @@
   pre = "<i class=\"fab fa-medium fa-2x\"></i>"
   url = "https://medium.com/"
   weight = 30
+
+# toml-docs-start sample-navigation
+[[sample]]
+  name = "Blog"
+  url = "/blog/"
+  weight = 10
+
+[[sample]]
+  name = "Projecten"
+  url = "/projecten/"
+  weight = 20
+
+[[sample]]
+  name = "Voorbeeldproject"
+  url = "/nl/projecten/voorbeeldproject/"
+  parent = "Projecten"
+  weight = 1
+
+[[sample]]
+  name = "Ander project"
+  url = "/nl/projecten/ander-project/"
+  parent = "Projecten"
+  weight = 2
+# toml-docs-end sample-navigation

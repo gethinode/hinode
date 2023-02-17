@@ -87,8 +87,10 @@
                 {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
         {{- else -}}
-            <!-- Insert spacing to center logo correctly on smaller screens -->
-            <div class="nav-spacing d-{{ $size }}-none"></div>
+            <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
+            <button class="navbar-toggler collapsed ms-n3 invisible" type="button">
+                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+            </button>
         {{- end -}}
 
         <!-- Insert the brand logo or name -->
