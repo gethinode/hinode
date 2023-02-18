@@ -4,5 +4,5 @@
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-    color: #fff !important;
+    color: #fff if($enable-important-utilities, !important, null);
 }

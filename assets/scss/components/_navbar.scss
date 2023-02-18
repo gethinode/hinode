@@ -13,15 +13,15 @@
 
 /* Remove border from toggler */
 .navbar-toggler {
-    border: 0 !important;
+    border: 0 if($enable-important-utilities, !important, null);
 }
 
 .navbar-toggler:focus,
 .navbar-toggler:active,
 .navbar-toggler-icon:focus {
-    outline: none !important;
-    box-shadow: none !important;
-    border: 0 !important;
+    outline: none if($enable-important-utilities, !important, null);
+    box-shadow: none if($enable-important-utilities, !important, null);
+    border: 0 if($enable-important-utilities, !important, null);
 }
 
 /* Lines of the Toggler */
