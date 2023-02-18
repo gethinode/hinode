@@ -50,13 +50,13 @@
   },
   "homepage": "https://gethinode.com",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.2.1",
+    "@fortawesome/fontawesome-free": "^6.3.0",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.3",
-    "eslint": "^8.31.0",
+    "eslint": "^8.34.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "exec-bin": "^1.0.0",
@@ -67,8 +67,8 @@
     "purgecss-whitelister": "^2.4.0",
     "rimraf": "^4.1.2",
     "shx": "^0.3.4",
-    "stylelint": "^14.16.1",
-    "stylelint-config-standard-scss": "^6.1.0"
+    "stylelint": "^15.1.0",
+    "stylelint-config-standard-scss": "^7.0.1"
   },
   "otherDependencies": {
     "hugo": "0.110.0"
