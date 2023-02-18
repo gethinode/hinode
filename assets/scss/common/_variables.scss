@@ -17,7 +17,7 @@ $font-weight-bold:              600 !default;
 $font-weight-bolder:            bolder !default;
 
 strong {
-    font-weight:                600 !important;
+    font-weight:                600 if($enable-important-utilities, !important, null);
 }
 // scss-docs-end font
 

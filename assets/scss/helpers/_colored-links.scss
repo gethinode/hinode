@@ -1,4 +1,4 @@
-// stylelint-disable function-name-case
+// stylelint-disable function-name-case, declaration-no-important
 
 // scss-docs-start colored-links
 @each $color, $value in $theme-colors {
@@ -6,16 +6,20 @@
     $color-rgb: to-rgb($value);
 
     .link-bg-#{$color} {
-        color: $contrast-color !important; // stylelint-disable-line declaration-no-important
-        background-color: RGBA($color-rgb, var(--#{$prefix}bg-opacity, 1)) if($enable-important-utilities, !important, null); // stylelint-disable-line annotation-no-unknown
+        color: $contrast-color if($enable-important-utilities, !important, null); 
+        background-color: RGBA($color-rgb, var(--#{$prefix}bg-opacity, 1)) if($enable-important-utilities, !important, null);
 
         @if $link-shade-percentage != 0 {
             &:hover,
             &:focus {
-                color: if($contrast-color == $color-contrast-light, shade-color($contrast-color, $link-shade-percentage), tint-color($contrast-color, $link-shade-percentage)) !important; // stylelint-disable-line declaration-no-important
+                color: if($contrast-color == $color-contrast-light, 
+                shade-color($contrast-color, $link-shade-percentage),
+                tint-color($contrast-color, $link-shade-percentage))
+                    if($enable-important-utilities, !important, null);
             }
         }
     }
 }
 
 // scss-docs-end colored-links
+// stylelint-enable function-name-case, declaration-no-important
