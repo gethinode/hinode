@@ -97,7 +97,7 @@ $enable-dark-mode:              {{ site.Params.main.enableDarkMode | default tru
 @import "layouts/type.scss";
 @import "common/export.scss";
 @import "helpers/colored-links.scss";
-@import "helpers/hidden.scss";
+@import "helpers/display.scss";
 
 // Import theme placeholder
 @import "theme.scss";

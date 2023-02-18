@@ -1,0 +1,30 @@
+.hidden {
+    display: none;
+}
+
+// stylelint-disable annotation-no-unknown
+
+// scss-docs-start display-color
+.d-none-light {
+    display: none if($enable-important-utilities, !important, null); 
+}
+
+.d-none-dark {
+    display: block if($enable-important-utilities, !important, null);
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .d-none-light {
+            display: block if($enable-important-utilities, !important, null);
+        }
+
+        .d-none-dark {
+            display: none if($enable-important-utilities, !important, null);
+        }
+    }
+}
+
+// scss-docs-end display-color
+
+// stylelint-enable annotation-no-unknown
