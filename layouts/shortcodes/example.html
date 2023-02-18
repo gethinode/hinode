@@ -27,19 +27,19 @@
 
 <div class="rounded border mb-3">
     {{- if eq $show_preview true -}}
-        <div {{ with $id }}id="{{ . }}"{{ end }} class="p-3 {{ with $class }} {{ . }}{{ end }}">
+        <div {{ with $id }}id="{{ . }}"{{ end }} class="p-3 {{ with $class }} {{ . }}{{ end }} preview-background">
             {{- $content -}}
         </div>
     {{- end -}}
-    <div class="d-flex align-items-center bg-light ps-3 pe-3 py-1 border-top border-bottom">
-        <small class="font-monospace text-muted text-uppercase">{{- $lang -}}</small>
+    <div class="d-flex align-items-center ps-3 pe-3 py-1 border-top border-bottom syntax-highlight">
+        <small class="font-monospace text-body-secondary text-uppercase">{{- $lang -}}</small>
         <!-- <div class="d-flex ms-auto">
             <button type="button" class="mt-0 me-0 border-0" title="Copy to clipboard">
                 <i class="fa-regular fa-clipboard"></i>
             </button>
         </div> -->
     </div>
-    <div class="rounded bg-light">
+    <div class="rounded-bottom syntax-highlight">
         {{- if eq $show_markup true -}}
             {{- highlight (trim $input "\r\n") $lang "" -}}
         {{- end -}}

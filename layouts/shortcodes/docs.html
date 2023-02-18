@@ -70,7 +70,7 @@
         </li>
     </ul>
     <div class="border-start border-end border-bottom mb-3">
-        <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} bg-light" id="body-{{ $id }}">
+        <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
             {{- highlight (trim $match "\r\n") "toml" "" -}}
         </div>
         <div class="collapse multi-{{ $id }}{{ if not $show }} show{{ end }} p-3" id="footer-{{ $id }}"><i>...</i></div>

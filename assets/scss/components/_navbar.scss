@@ -1,4 +1,15 @@
+// stylelint-disable annotation-no-unknown
+
 // Source: https://jsfiddle.net/njhgr40m/
+
+.navbar {
+    transition: 0.5s ease-in-out;
+    background-color: none;
+}
+
+.nav-active, .navbar-expanded {
+    background-color: var(--bs-body-bg);
+}
 
 /* Remove border from toggler */
 .navbar-toggler {
@@ -65,3 +76,17 @@
 .navbar-toggler.collapsed .toggler-icon {
     background-color: #777;
 }
+
+.emphasis {
+    background-color: $black if($enable-important-utilities, !important, null);
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .emphasis {
+            background-color: $white if($enable-important-utilities, !important, null);
+        }
+    }
+}
+
+// stylelint-enable annotation-no-unknown

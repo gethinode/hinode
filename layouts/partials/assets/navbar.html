@@ -3,7 +3,6 @@
     "page"          Required object reference to the current page.
     "menus"         Optional name of the menu configuration, defaults to "main".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
-    "style"         Optional style of the navbar, either "light" (default) or "dark".
     "fixed"         Optional flag to indicate the navbar should stick to the top, defaults to false.
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
@@ -37,13 +36,6 @@
     {{- errorf "Invalid value for param 'size': %s" $size -}}
 {{- end -}}
 
-{{- $style := "light" -}}
-{{- with .style }}{{ $style = . }}{{ end -}}
-{{- $supportedStyles := slice "light" "dark" -}}
-{{- if not (in $supportedStyles $style) -}}
-    {{- errorf "Invalid value for param 'style': %s" $style -}}
-{{- end -}}
-
 {{- $fixedParam := "false" -}}
 {{- $fixed := false -}}
 {{- with .fixed }}{{ $fixedParam = . }}{{ end -}}
@@ -53,13 +45,10 @@
     {{- errorf "Invalid value for param 'fixed': %s" $fixedParam -}}
 {{- end -}}
 
-{{- $inverseStyle := "light" -}}
-{{- if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
-
 {{- $color := "" -}}
 {{- with .color -}}
     {{- $color = . -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" -}}
     {{- if not (in $supportedColors $color) -}}
         {{- errorf "Invalid value for param 'color': %s" $color -}}
     {{- end -}}
@@ -75,6 +64,9 @@
     {{- end -}}
 {{- end -}}
 
+{{- $enableDarkMode := default true site.Params.main.enableDarkMode -}}
+{{- $enableLanguage := or $page.IsTranslated site.IsMultiLingual -}}
+
 {{- $logo := site.Params.navigation.logo -}}
 {{- with .logo }}{{ $logo = . }}{{ end -}}
 
@@ -87,11 +79,16 @@
 {{- $pre := .Pre -}}
 {{- $post := .Post -}}
 
-<nav class="navbar navbar-expand-{{ $size }} navbar-{{ $style }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-3">
+<nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-3">
 	<div class="container-fluid">
         <!-- Insert sidebar toggler when applicable -->
         {{- if $page.Scratch.Get "sidebar" -}}
-            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="Toggle docs navigation">
+            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+            </button>
+        {{- else -}}
+            <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
+            <button class="navbar-toggler collapsed ms-n3 invisible" type="button">
                 {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
             </button>
         {{- end -}}
@@ -106,11 +103,11 @@
         </a>
 
         <!-- Insert main navigation toggler -->
-		<button class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
-			aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="Toggle main navigation">
-			<span class="toggler-icon top-bar bg-{{ $inverseStyle }}"></span>
-			<span class="toggler-icon middle-bar bg-{{ $inverseStyle }}"></span>
-			<span class="toggler-icon bottom-bar bg-{{ $inverseStyle }}"></span>
+		<button id="main-nav-toggler" class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
+			aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
+			<span class="toggler-icon top-bar emphasis"></span>
+			<span class="toggler-icon middle-bar emphasis"></span>
+			<span class="toggler-icon bottom-bar emphasis"></span>
 		</button>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent-{{ $id }}">
@@ -128,8 +125,8 @@
                     {{- $baseurl := urls.Parse $.Site.Params.Baseurl -}}
                     {{- if .HasChildren -}}
                         <li class="nav-item dropdown">
-                            <a class="nav-link {{ if $active }}link-dark{{ end }} dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ .Name }}
+                            <a class="nav-link {{ if $active }}active{{ end }} dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ if $active }}<span  class="active">{{ .Name }}</span>{{ else }}{{ .Name }}{{ end }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{- range .Children -}}
@@ -151,12 +148,19 @@
                     {{- end -}}
                 {{- end -}}
 
+
+                {{- if or $enableLanguage $enableDarkMode -}}
+                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto">
+                        <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+                    </li>
+                {{- end -}}
+
                 <!-- Insert language switcher if applicable -->
-                {{- if or $page.IsTranslated site.IsMultiLingual -}}
+                {{- if $enableLanguage -}}
                     {{- $currentLang := $page.Language.Lang -}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" -}}
+                            {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end ">
                             {{- if $page.IsTranslated -}}
@@ -168,6 +172,36 @@
                                     <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
                                 {{- end -}}
                             {{- end -}}
+                        </ul>
+                    </li>
+                {{- end -}}
+                              
+                <!-- Insert color mode switcher -->
+                {{- if $enableDarkMode -}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
+                            {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
+                            <span class="d-md-none"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
+                            <li>
+                                <a class="dropdown-item" data-bs-theme-value="light">
+                                    {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
+                                    {{ T "colorLight" }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-bs-theme-value="dark">
+                                    {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
+                                    {{ T "colorDark" }}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-bs-theme-value="auto">
+                                    {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
+                                    {{ T "colorAuto" }}
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 {{- end -}}
