@@ -25,6 +25,7 @@
         {{- $capture_start = printf "// scss-docs-start %s" $name -}}
         {{- $capture_end = printf "// scss-docs-end %s" $name -}}
     {{- end -}}
+    {{- $extension = strings.TrimLeft "." $extension  }}
 {{- else -}}
     {{- errorf "File format not supported (line %s): %s" .Position $file -}}
 {{- end -}}
@@ -71,7 +72,7 @@
     </ul>
     <div class="border-start border-end border-bottom mb-3">
         <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
-            {{- highlight (trim $match "\r\n") "toml" "" -}}
+            {{- highlight (trim $match "\r\n") $extension "" -}}
         </div>
         <div class="collapse multi-{{ $id }}{{ if not $show }} show{{ end }} p-3" id="footer-{{ $id }}"><i>...</i></div>
     </div>
