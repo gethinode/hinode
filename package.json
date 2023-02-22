@@ -18,7 +18,7 @@
   "scripts": {
     "prestart": "npm run clean",
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
-    "prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
+    "start:prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "build:debug": "exec-bin node_modules/.bin/hugo/hugo -e debug --debug",
