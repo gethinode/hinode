@@ -1,0 +1,62 @@
+/*!
+ * Copyright (c) 2016-2020 The Inter Project Authors.
+ * "Inter" is trademark of Rasmus Andersson.
+ * https://github.com/rsms/inter
+
+ * This Font Software is licensed under the SIL Open Font License, Version 1.1.
+ * This license is copied below, and is also available with a FAQ at:
+ * http://scripts.sil.org/OFL
+ */
+
+/* inter-200 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../fonts/inter-v12-latin-200.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/inter-v12-latin-200.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/inter-v12-latin-200.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/inter-v12-latin-200.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/inter-v12-latin-200.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/inter-v12-latin-200.svg#Inter') format('svg'); /* Legacy iOS */
+  }
+  /* inter-300 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/inter-v12-latin-300.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/inter-v12-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/inter-v12-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/inter-v12-latin-300.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/inter-v12-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/inter-v12-latin-300.svg#Inter') format('svg'); /* Legacy iOS */
+  }
+  /* inter-regular - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/inter-v12-latin-regular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/inter-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/inter-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/inter-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/inter-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/inter-v12-latin-regular.svg#Inter') format('svg'); /* Legacy iOS */
+  }
+  /* inter-600 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/inter-v12-latin-600.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/inter-v12-latin-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/inter-v12-latin-600.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/inter-v12-latin-600.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/inter-v12-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/inter-v12-latin-600.svg#Inter') format('svg'); /* Legacy iOS */
+  }

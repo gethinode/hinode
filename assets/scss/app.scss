@@ -100,5 +100,9 @@ $enable-important-utilities:    true !default;
 @import "helpers/colored-links.scss";
 @import "helpers/display.scss";
 
+{{- if not (hasPrefix (lower site.Params.style.themeFontPath) "http") -}}
+@import "fonts.scss";
+{{- end -}}
+
 // Import theme placeholder
 @import "theme.scss";
