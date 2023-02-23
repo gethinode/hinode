@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -18,7 +18,7 @@
   "scripts": {
     "prestart": "npm run clean",
     "start": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender",
-    "prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
+    "start:prod": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender -e production",
     "prebuild": "npm run clean",
     "build": "exec-bin node_modules/.bin/hugo/hugo --gc --minify",
     "build:debug": "exec-bin node_modules/.bin/hugo/hugo -e debug --debug",
@@ -56,6 +56,8 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
     "bootstrap": "^5.3.0-alpha1",
+    "cssnano": "^5.1.15",
+    "cssnano-preset-advanced": "^5.3.10",
     "eslint": "^8.34.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
