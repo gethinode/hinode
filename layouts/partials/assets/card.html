@@ -47,7 +47,7 @@
     <p class="card-text"><small class="{{ if $color }}text-bg-{{ $color }}{{ else }}text-body-secondary{{ end }} text-uppercase">
         {{- if in (slice "full" "publication") $keywords -}}
             {{- partial "utilities/date.html" (dict "date" $page.Date "format" "long") -}}&nbsp;&bull;
-            {{- $page.ReadingTime | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
+            {{ $page.ReadingTime | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
         {{- end -}}
 
         {{- if eq $keywords "full" -}}
