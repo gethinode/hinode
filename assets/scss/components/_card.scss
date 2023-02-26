@@ -1,5 +1,3 @@
-// stylelint-disable annotation-no-unknown
-
 // add zoom animation with opacity change on card img hover
 // source: https://stackoverflow.com/a/43816376
 
@@ -8,7 +6,16 @@
     position: relative;
 }
 
-.card-img-wrap::after {
+.card-zoom {
+    cursor: pointer;
+}
+
+.card-img-wrap img {
+    transition: transform 0.25s ease;
+    width: 100%;
+}
+
+.card-zoom::after .card-img-wrap img {
     content: "";
     position: absolute;
     top: 0;
@@ -20,16 +27,12 @@
     transition: opacity 0.25s;
 }
 
-.card-img-wrap img {
-    transition: transform 0.25s ease;
-    width: 100%;
-}
-
-.card-img-wrap:hover img {
+.card-zoom:hover .card-img-wrap img {
     transform: scale(1.1);
+    opacity: 0.5;
 }
 
-.card-img-wrap:hover::after {
+.card-zoom:hover::after .card-img-wrap img {
     opacity: 1;
 }
 
@@ -43,29 +46,31 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
+// stylelint-disable annotation-no-unknown
 .card-body-link {
     color: $body-color if($enable-important-utilities, !important, null);
-
-    @if $link-shade-percentage != 0 {
-        &:hover,
-        &:focus {
-            color: tint-color($body-color, $link-shade-percentage) if($enable-important-utilities, !important, null);
-        }
-    }
 }
 
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .card-body-link {
             color: $gray-500 if($enable-important-utilities, !important, null);
-
-            @if $link-shade-percentage != 0 {
-                &:hover,
-                &:focus {
-                    color: shade-color($gray-500, $link-shade-percentage) if($enable-important-utilities, !important, null);
-                }
-            }
         }
     }
 }
+
+.card-zoom card-body-link,
+.card-body-link {
+    &:hover,
+    &:focus {
+        color: shade-color($primary, $link-shade-percentage) if($enable-important-utilities, !important, null);
+    }
+}
+
 // stylelint-enable annotation-no-unknown
+
+// make tag-link clickable on top of the stretched-link.
+.card .tag-link {
+    z-index: 2;
+    position: relative;
+}

@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -71,7 +71,7 @@
     "purgecss-whitelister": "^2.4.0",
     "rimraf": "^4.1.2",
     "shx": "^0.3.4",
-    "stylelint": "^15.1.0",
+    "stylelint": "^15.2.0",
     "stylelint-config-standard-scss": "^7.0.1"
   },
   "otherDependencies": {

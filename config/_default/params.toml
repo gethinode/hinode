@@ -43,7 +43,7 @@
         header = "full"
         footer = "none"
         orientation = "stacked"
-        style = "border-0"
+        style = "border-0 card-zoom"
         homepage = 3
     [projects]
         title = "Projects"

@@ -27,7 +27,7 @@
     {{- $color := .color -}}
     {{- $description := .description -}}
     
-    <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
+    <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
             <p class="card-title fs-5 fw-bold">{{ $title }}</p>
         {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
     </a>
@@ -47,7 +47,7 @@
     <p class="card-text"><small class="{{ if $color }}text-bg-{{ $color }}{{ else }}text-body-secondary{{ end }} text-uppercase">
         {{- if in (slice "full" "publication") $keywords -}}
             {{- partial "utilities/date.html" (dict "date" $page.Date "format" "long") -}}&nbsp;&bull;
-            {{- $page.ReadingTime | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
+            {{ $page.ReadingTime | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
         {{- end -}}
 
         {{- if eq $keywords "full" -}}
@@ -58,8 +58,8 @@
         {{- if $color }}{{ $link = printf "link-bg-%s" $color }}{{ end -}}
 
         {{- range $index, $tag := first $maxTags ($page.GetTerms "tags") -}}
-            {{- if gt $index 0 }}&bull;&nbsp;{{ end -}}
-            <a href="{{ (path.Join $tag.Page.RelPermalink) | relURL }}" class="{{ $link }}" aria-label="tag: {{ $tag.LinkTitle }}">{{ $tag.LinkTitle }}</a>
+            {{- if gt $index 0 }}&nbsp;&bull;&nbsp;{{ end -}}
+            <a href="{{ (path.Join $tag.Page.RelPermalink) | relURL }}" class="{{ $link }} tag-link" aria-label="tag: {{ $tag.LinkTitle }}">{{ $tag.LinkTitle }}</a>
         {{- end -}}
     </small></p>
 {{- end -}}
@@ -129,50 +129,44 @@
 {{- end -}}
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 
-{{- if eq $orientation "horizontal" -}}
-    <div class="card mb-3 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
-        <div class="row g-0">
-            <div class="col-4">
-                {{- if $thumbnail -}}
-                    <a href="{{ $href }}">
+<article>
+    {{- if eq $orientation "horizontal" -}}
+        <div class="card mb-3 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
+            <div class="row g-0">
+                <div class="col-4">
+                    {{- if $thumbnail -}}
                         {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
-                    </a>
-                {{- else if $icon -}}
-                    <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
-                        <a href="{{ $href }}"> 
+                    {{- else if $icon -}}
+                        <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                             {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
-                        </a>
+                        </div>
+                    {{- end -}}
                     </div>
-                {{- end -}}
-                </div>
-            <div class="col-8">
-                <div class="card-body d-flex p-{{ $padding }} flex-column h-100">
-                    <div>{{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}</div>
-                    <div class="h-100">
-                        {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
+                <div class="col-8">
+                    <div class="card-body d-flex p-{{ $padding }} flex-column h-100">
+                        <div>{{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}</div>
+                        <div class="h-100">
+                            {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
+                        </div>
+                        <div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>
                     </div>
-                    <div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>
                 </div>
             </div>
         </div>
-    </div>
-{{- else -}}
-    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
-        {{- if $thumbnail -}}
-            <a href="{{ $href }}">
+    {{- else -}}
+        <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
+            {{- if $thumbnail -}}
                 {{- partial "image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
-            </a>
-        {{- else if $icon -}}
-            <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
-                <a href="{{ $href }}"> 
+            {{- else if $icon -}}
+                <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                     {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
-                </a>
+                </div>
+            {{- end -}}
+            <div class="card-body d-flex flex-column p-{{ $padding }}">
+                {{- partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) -}} 
+                {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
+                {{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}
             </div>
-        {{- end -}}
-        <div class="card-body d-flex flex-column p-{{ $padding }}">
-            {{- partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) -}} 
-            {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
-            {{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}
         </div>
-    </div>
-{{- end -}}
+    {{- end -}}
+</article>
