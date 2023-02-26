@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+.card-img-wrap img {
+    transition: transform 0.25s ease;
+    width: 100%;
+}
+
 .card-zoom::after .card-img-wrap img {
     content: "";
     position: absolute;
@@ -22,11 +27,6 @@
     background: rgba(255, 255, 255, 0.3);
     opacity: 0;
     transition: opacity 0.25s;
-}
-
-.card-img-wrap img {
-    transition: transform 0.25s ease;
-    width: 100%;
 }
 
 .card-zoom:hover .card-img-wrap img {
@@ -56,7 +56,7 @@
     @include color-mode(dark) {
         .card-body-link {
             color: $gray-500 if($enable-important-utilities, !important, null);
-       }
+        }
     }
 }
 
