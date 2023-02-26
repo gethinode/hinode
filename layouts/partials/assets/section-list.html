@@ -12,6 +12,7 @@
 {{- $paginate := true -}}
 {{- $sort := "date" -}}
 {{- $reverse := true -}}
+{{- $separator := false -}}
 {{- $orientation := "stacked" -}}
 {{- $cols := 3 -}}
 {{- $color := "" -}}
@@ -26,6 +27,7 @@
     {{- with index . "title" }}{{ $title = . }}{{ end -}}
     {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
     {{- if (index . "reverse") }}{{ $reverse = true }}{{ else }}{{ $reverse = false }}{{ end -}}
+    {{- if (index . "separator") }}{{ $separator = true }}{{ else }}{{ $separator = false }}{{ end -}}
     {{- with index . "orientation" }}{{ $orientation = . }}{{ end -}}
     {{- with index . "cols" }}{{ $cols = . }}{{ end -}}
     {{- with index . "color" }}{{ $color = . }}{{ end -}}
@@ -74,6 +76,7 @@
         "title" $title
         "href" $sectionURL
         "hrefTitle" $moreTitle
+        "separator" $separator
         "paginate" $paginate
         "class" $style
         "orientation" $orientation
