@@ -59,7 +59,7 @@
 
         {{- range $index, $tag := first $maxTags ($page.GetTerms "tags") -}}
             {{- if gt $index 0 }}&nbsp;&bull;&nbsp;{{ end -}}
-            <a href="{{ (path.Join $tag.Page.RelPermalink) | relURL }}" class="{{ $link }}" aria-label="tag: {{ $tag.LinkTitle }}">{{ $tag.LinkTitle }}</a>
+            <a href="{{ (path.Join $tag.Page.RelPermalink) | relURL }}" class="{{ $link }} tag-link" aria-label="tag: {{ $tag.LinkTitle }}">{{ $tag.LinkTitle }}</a>
         {{- end -}}
     </small></p>
 {{- end -}}
