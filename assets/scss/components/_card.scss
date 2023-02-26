@@ -69,3 +69,9 @@
 }
 
 // stylelint-enable annotation-no-unknown
+
+// make tag-link clickable on top of the stretched-link.
+.card .tag-link {
+    z-index: 2;
+    position: relative;
+}
