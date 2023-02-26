@@ -8,7 +8,11 @@
     position: relative;
 }
 
-.card-img-wrap::after {
+.card-zoom {
+    cursor: pointer;
+}
+
+.card-zoom::after .card-img-wrap img {
     content: "";
     position: absolute;
     top: 0;
@@ -25,11 +29,12 @@
     width: 100%;
 }
 
-.card-img-wrap:hover img {
+.card-zoom:hover .card-img-wrap img {
     transform: scale(1.1);
+    opacity: 0.5;
 }
 
-.card-img-wrap:hover::after {
+.card-zoom:hover::after .card-img-wrap img {
     opacity: 1;
 }
 
@@ -59,13 +64,12 @@
         .card-body-link {
             color: $gray-500 if($enable-important-utilities, !important, null);
 
-            @if $link-shade-percentage != 0 {
-                &:hover,
-                &:focus {
-                    color: shade-color($gray-500, $link-shade-percentage) if($enable-important-utilities, !important, null);
-                }
-            }
-        }
+.card-zoom card-body-link,
+.card-body-link {
+    &:hover,
+    &:focus {
+        color: shade-color($primary, $link-shade-percentage) if($enable-important-utilities, !important, null);
     }
 }
+
 // stylelint-enable annotation-no-unknown
