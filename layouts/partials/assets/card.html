@@ -129,7 +129,7 @@
 {{- end -}}
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 
-{{- if eq $orientation "horizontal" -}}
+<article>
     <div class="card mb-3 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         <div class="row g-0">
             <div class="col-4">
@@ -166,13 +166,4 @@
             <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                 <a href="{{ $href }}"> 
                     {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
-                </a>
-            </div>
-        {{- end -}}
-        <div class="card-body d-flex flex-column p-{{ $padding }}">
-            {{- partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) -}} 
-            {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
-            {{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}
-        </div>
-    </div>
-{{- end -}}
+</article>
