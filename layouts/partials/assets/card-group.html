@@ -15,6 +15,7 @@
     "href"          Optional address for the button or hyperlink. If set, a button is added if the list exceeds the
                     maximum number of cards to display.
     "hrefTitle"     Optional title of the button or hyperlink as companion to href.
+    "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
 
     In addition, the following arguments are passed to the individual cards.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
@@ -57,19 +58,27 @@
 
 {{- $title := .title -}}
 
-{{ $paginate := false }}
-{{ with .paginate }}
-    {{ if ne (printf "%T" .) "bool" }}
-        {{ errorf "Invalid value for param 'paginate'"}}
-    {{ end }}
-    {{ $paginate = . }}
-{{ end }}
-{{ if not $paginate }}
-    {{ $list = first $max $list }}
-{{ end }}
+{{- $paginate := false -}}
+{{- with .paginate -}}
+    {{- if ne (printf "%T" .) "bool" -}}
+        {{- errorf "Invalid value for param 'paginate'" -}}
+    {{- end -}}
+    {{- $paginate = . -}}
+{{- end -}}
+{{- if not $paginate -}}
+    {{- $list = first $max $list -}}
+{{- end -}}
 
 {{- $moreURL := .href -}}
 {{- $moreTitle := .hrefTitle -}}
+
+{{- $separator := false -}}
+{{- with .separator -}}
+    {{- if ne (printf "%T" .) "bool" -}}
+        {{- errorf "Invalid value for param 'separator'" -}}
+    {{- end -}}
+    {{- $separator = . -}}
+{{- end -}}
 
 {{- $class := .class -}}
 {{- $color := .color -}}
@@ -96,7 +105,7 @@
                         )
                     -}}
                 </div>
-                {{- if (lt $index (sub $max 1)) -}}
+                {{- if and (lt $index (sub $max 1)) $separator -}}
                     <div class="col d-block d-sm-none">
                         <hr>
                     </div>
@@ -121,7 +130,7 @@
                         )
                     -}}
                 </div>
-                {{- if (lt $index (sub $max 1)) -}}
+                {{- if and (lt $index (sub $max 1)) $separator -}}
                     <div class="col d-block d-sm-none">
                         <hr>
                     </div>

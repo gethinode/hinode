@@ -45,6 +45,7 @@
         orientation = "stacked"
         style = "border-0 card-zoom"
         homepage = 3
+        separator = true
     [projects]
         title = "Projects"
         sort = "title"
@@ -57,6 +58,7 @@
         orientation = "none"
         style = "border-1 card-emphasize"
         homepage = 3
+        separator = false
 # toml-docs-end list
 
 [favicon]
