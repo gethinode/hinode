@@ -1,5 +1,3 @@
-// stylelint-disable annotation-no-unknown
-
 // add zoom animation with opacity change on card img hover
 // source: https://stackoverflow.com/a/43816376
 
@@ -48,6 +46,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
+// stylelint-disable annotation-no-unknown
 .card-body-link {
     color: $body-color if($enable-important-utilities, !important, null);
 }
