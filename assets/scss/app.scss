@@ -1,18 +1,20 @@
-// Define template variables
-// TODO: optimize, see https://discourse.gohugo.io/t/initialize-sass-variables-from-hugo-templates/42053
-//       requires installation of dart-sass, no cross-platform installation available yet
-$themeFont:                     {{ site.Params.style.themeFont | default "Inter" }};
-$primary:                       {{ site.Params.style.primary | default "#007bff" }};
-$secondary:                     {{ site.Params.style.secondary | default "#6c757d" }};
-$success:                       {{ site.Params.style.success | default "#198754" }};
-$info:                          {{ site.Params.style.info | default "#0dcaf0" }};
-$warning:                       {{ site.Params.style.warning | default "#ffc107" }};
-$danger:                        {{ site.Params.style.danger | default "#dc3545" }};
-$light:                         {{ site.Params.style.light | default "#f8f9fa" }};
-$dark:                          {{ site.Params.style.dark | default "#212529" }};
-$navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Params.navigation.offset | default "4em" }}{{ else }}0em{{ end }};
-$enable-dark-mode:              {{ site.Params.main.enableDarkMode | default true }} !default;
+// Import Hugo variables from layouts/partials/head/stylesheet.html
+@use "hugo:vars" as v;
 $enable-important-utilities:    true !default;
+$theme-font:                    v.$theme-font;
+$primary:                       v.$primary;
+$secondary:                     v.$secondary;
+$success:                       v.$success;
+$info:                          v.$info;
+$warning:                       v.$warning;
+$danger:                        v.$danger;
+$light:                         v.$light;
+$dark:                          v.$dark;
+$navbar-offset:                 v.$navbar-offset;
+$enable-dark-mode:              v.$enable-dark-mode;
+$import-fonts:                  v.$import-fonts;
+$fa-css-prefix:                 fa !default;
+$fa-font-path:                  "../fonts";
 
 // Include default variable overrides
 @import "common/variables.scss";
