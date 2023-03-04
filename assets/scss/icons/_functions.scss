@@ -1,0 +1,16 @@
+@use "sass:string";
+
+$fa-prefix: "fa-var-";
+
+// Creates a map for Font Awesome icons. 
+@function create_icons_map($prefix, $keys, $vals) {
+    $map: ();
+    @each $key, $ignore in $keys {
+        @if string.index($key, $prefix) == 1 {
+            $id: string.slice($key, string.length($prefix) + 1);
+            $val: map-get($vals, "#{$fa-prefix}#{$id}");
+            $map: map-merge($map, ($id: $val) );
+        }
+    }
+    @return $map;
+}
