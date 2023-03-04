@@ -101,10 +101,8 @@ $fa-font-path:                  "../fonts";
 @import "common/export.scss";
 @import "helpers/colored-links.scss";
 @import "helpers/display.scss";
-
-{{- if not (hasPrefix (lower site.Params.style.themeFontPath) "http") -}}
-@import "fonts.scss";
-{{- end -}}
-
-// Import theme placeholder
 @import "theme.scss";
+
+@if $import-fonts {
+    @include meta.load-css(fonts);
+}
