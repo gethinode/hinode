@@ -1,18 +1,5 @@
 // Define template variables
-// TODO: optimize, see https://discourse.gohugo.io/t/initialize-sass-variables-from-hugo-templates/42053
-//       requires installation of dart-sass, no cross-platform installation available yet
-$themeFont:                     {{ site.Params.style.themeFont | default "Inter" }};
-$primary:                       {{ site.Params.style.primary | default "#007bff" }};
-$secondary:                     {{ site.Params.style.secondary | default "#6c757d" }};
-$success:                       {{ site.Params.style.success | default "#198754" }};
-$info:                          {{ site.Params.style.info | default "#0dcaf0" }};
-$warning:                       {{ site.Params.style.warning | default "#ffc107" }};
-$danger:                        {{ site.Params.style.danger | default "#dc3545" }};
-$light:                         {{ site.Params.style.light | default "#f8f9fa" }};
-$dark:                          {{ site.Params.style.dark | default "#212529" }};
-$navbar-offset:                 {{ if site.Params.navigation.fixed }}{{ site.Params.navigation.offset | default "4em" }}{{ else }}0em{{ end }};
-$enable-dark-mode:              {{ site.Params.main.enableDarkMode | default true }} !default;
-$enable-important-utilities:    true !default;
+@import "hugo:vars";
 
 // Include default variable overrides
 @import "common/variables.scss";
@@ -99,6 +86,11 @@ $enable-important-utilities:    true !default;
 @import "common/export.scss";
 @import "helpers/colored-links.scss";
 @import "helpers/display.scss";
+
+// TODO: include fonts with following statement in Dart Sass
+// @if $import-fonts {
+//     @include meta.load-css(fonts);
+// }
 
 {{- if not (hasPrefix (lower site.Params.style.themeFontPath) "http") -}}
 @import "fonts.scss";

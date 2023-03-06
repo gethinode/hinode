@@ -3,10 +3,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ hugo.Generator}}
-    {{ partial "head/stylesheet.html" -}}
+    {{ partial "head/stylesheet.html" . -}}
     {{ partial "head/seo.html" . }}
     {{ partialCached "head/favicon.html" . -}}
     {{ if gt (len .Site.Languages) 1}}
-    <meta name="lang" content="{{ .Site.Language }}" />
+    <meta name="lang" content="{{ .Site.Language }}">
     {{ end }}
 {{ end }}
