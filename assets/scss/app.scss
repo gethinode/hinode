@@ -1,59 +1,5 @@
-@use 'sass:meta';
-
-// Import Hugo variables from layouts/partials/head/stylesheet.html
-@use "hugo:vars" as v;
-$enable-important-utilities:    true !default;
-$theme-font:                    v.$theme-font;
-$primary:                       v.$primary;
-$secondary:                     v.$secondary;
-$success:                       v.$success;
-$info:                          v.$info;
-$warning:                       v.$warning;
-$danger:                        v.$danger;
-$light:                         v.$light;
-$dark:                          v.$dark;
-$navbar-offset:                 v.$navbar-offset;
-$enable-dark-mode:              v.$enable-dark-mode;
-$import-fonts:                  v.$import-fonts;
-$fa-css-prefix:                 fa !default;
-$fa-font-path:                  "../fonts";
-
-// Import Font Awesome
-// scss-docs-start awesome
-@use "icons/functions";
-
-@use "@fortawesome/fontawesome-free/scss/variables" as fa-vars with (
-    $fa-fw-width            : 1.25em, // was fa-divide(20em, 16)
-    $fa-li-margin           : 2.5em   // was 2em * fa-divide(5, 4)
-);
-
-@use "icons/regular" with (
-    $fa-font-path: $fa-font-path,
-    $fa-icons: functions.create_icons_map("fa-", meta.module-variables(v), meta.module-variables(fa-vars))
-);
-
-@use "@fortawesome/fontawesome-free/scss/solid" with (
-    $fa-font-path: $fa-font-path
-);
-
-@use "icons/brands" with (
-    $fa-font-path: $fa-font-path,
-    $fa-brand-icons: functions.create_icons_map("fab-", meta.module-variables(v), meta.module-variables(fa-vars))
-);
-
-@import '@fortawesome/fontawesome-free/scss/functions';
-@import '@fortawesome/fontawesome-free/scss/variables';
-@import '@fortawesome/fontawesome-free/scss/mixins';
-@import '@fortawesome/fontawesome-free/scss/core';
-@import '@fortawesome/fontawesome-free/scss/sizing';
-@import '@fortawesome/fontawesome-free/scss/fixed-width';
-@import '@fortawesome/fontawesome-free/scss/list';
-@import '@fortawesome/fontawesome-free/scss/bordered-pulled';
-@import '@fortawesome/fontawesome-free/scss/animated';
-@import '@fortawesome/fontawesome-free/scss/rotated-flipped';
-@import '@fortawesome/fontawesome-free/scss/stacked';
-@import '@fortawesome/fontawesome-free/scss/screen-reader';
-// scss-docs-end awesome
+// Define template variables
+@import "hugo:vars";
 
 // Include default variable overrides
 @import "common/variables.scss";
@@ -110,6 +56,14 @@ $fa-font-path:                  "../fonts";
 // Import Bootstrap utilities
 @import "bootstrap/scss/utilities/api";
 
+// Import Font Awesome
+// scss-docs-start awesome
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/brands";
+// scss-docs-end awesome
+
 // Import Hinode theme styles
 @import "components/blockquote.scss";
 @import "components/buttons.scss";
@@ -132,8 +86,15 @@ $fa-font-path:                  "../fonts";
 @import "common/export.scss";
 @import "helpers/colored-links.scss";
 @import "helpers/display.scss";
-@import "theme.scss";
 
-@if $import-fonts {
-    @include meta.load-css(fonts);
-}
+// TODO: include fonts with following statement in Dart Sass
+// @if $import-fonts {
+//     @include meta.load-css(fonts);
+// }
+
+{{- if not (hasPrefix (lower site.Params.style.themeFontPath) "http") -}}
+@import "fonts.scss";
+{{- end -}}
+
+// Import theme placeholder
+@import "theme.scss";

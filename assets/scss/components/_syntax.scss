@@ -1,6 +1,5 @@
 // stylelint-disable annotation-no-unknown
-@use 'sass:meta';
-@use "syntax-light";
+@import "syntax-light";
 
 .bg,
 .chroma,
@@ -19,7 +18,7 @@
 
 @if $enable-dark-mode {
     [data-bs-theme="dark"] {
-        @include meta.load-css(syntax-dark);
+        @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
 
         .bg,
         .chroma,
