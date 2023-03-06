@@ -83,7 +83,7 @@
     themeFontPath = "/fonts" # local path
 # toml-docs-end font
 # toml-docs-start build
-    purge = true
+    purge = false
 # toml-docs-end build
 
 [schema]
