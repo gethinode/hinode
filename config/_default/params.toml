@@ -82,6 +82,9 @@
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
     themeFontPath = "/fonts" # local path
 # toml-docs-end font
+# toml-docs-start build
+    purge = true
+# toml-docs-end build
 
 [schema]
     type = "Organization"

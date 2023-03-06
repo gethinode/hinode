@@ -26,6 +26,11 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 # toml-docs-end language
 
+# toml-docs-start build
+[build]
+  writeStats = true
+# toml-docs-end build
+  
 [taxonomies]
   tag = 'tags'
 
