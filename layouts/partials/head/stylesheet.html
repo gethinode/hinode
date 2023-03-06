@@ -29,7 +29,7 @@
     {{- $css = $css | resources.PostCSS $post_options -}}
 {{- end -}}
 
-{{- if eq (hugo.Environment) "development" -}}
+{{- if not hugo.IsProduction -}}
     <link rel="stylesheet" href="{{ $css.Permalink | relURL }}">
 {{- else -}}
     {{- $css = $css | fingerprint -}}
