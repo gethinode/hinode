@@ -2,10 +2,7 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "no-empty-source": null,
-    "indentation": 4,
-    "string-quotes": "double",
     "scss/comment-no-empty": null,
-    "max-line-length": null,
     "scss/at-extend-no-missing-placeholder": null,
     "scss/dollar-variable-colon-space-after": null,
     "scss/dollar-variable-empty-line-before": null,
