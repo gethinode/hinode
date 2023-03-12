@@ -89,12 +89,12 @@
 
 // TODO: include fonts with following statement in Dart Sass
 // @if $import-fonts {
-//     @include meta.load-css(fonts);
+//     @include meta.load-css(theme/fonts);
 // }
 
-{{- if not (hasPrefix (lower site.Params.style.themeFontPath) "http") -}}
-@import "fonts.scss";
-{{- end -}}
+{{ if (not (hasPrefix (lower site.Params.style.themeFontPath) "http")) }}
+    @import "theme/fonts.scss";
+{{ end }}
 
 // Import theme placeholder
-@import "theme.scss";
+@import "theme/theme.scss";

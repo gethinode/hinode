@@ -13,6 +13,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     ...whitelister([
       './assets/scss/components/_clipboard.scss',
       './assets/scss/components/_command.scss',
+      './assets/scss/components/_fonts.scss',
       './assets/scss/components/_search.scss',
       './assets/scss/components/_syntax.scss',
       './assets/scss/components/_syntax-dark.scss',
