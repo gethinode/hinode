@@ -92,9 +92,9 @@
 //     @include meta.load-css(theme/fonts);
 // }
 
-{{- if not (hasPrefix (lower site.Params.style.themeFontPath) "http") -}}
+{{ if (not (hasPrefix (lower site.Params.style.themeFontPath) "http")) }}
     @import "theme/fonts.scss";
-{{- end -}}
+{{ end }}
 
 // Import theme placeholder
 @import "theme/theme.scss";
