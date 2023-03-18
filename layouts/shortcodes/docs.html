@@ -9,23 +9,27 @@
 
 {{- $name := .Get "name" -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file := path.Join $basePath (path.Clean (.Get "file")) -}}
-{{- $extension := path.Ext $file -}}
+{{- $file := .Get "file" }}
+{{- if hasPrefix $file "./" -}}
+    {{- $file = path.Clean $file -}}
+{{- else -}}
+    {{- $file = path.Join $basePath (path.Clean $file) -}}
+{{- end -}}
+{{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
 {{- $capture_start := "" -}}
 {{- $capture_end := "" -}}
 
 {{- $id := printf "docs-collapse-%d" .Ordinal -}}
 
-{{- $supportedExtensions := slice ".scss" ".toml" -}}
+{{- $supportedExtensions := slice "js" "scss" "toml" -}}
 {{- if in $supportedExtensions $extension -}}
-    {{- if eq $extension ".toml" }}
+    {{- if eq $extension "toml" }}
         {{- $capture_start = printf "# toml-docs-start %s" $name -}}
         {{- $capture_end = printf "# toml-docs-end %s" $name -}}
     {{- else -}}
-        {{- $capture_start = printf "// scss-docs-start %s" $name -}}
-        {{- $capture_end = printf "// scss-docs-end %s" $name -}}
+        {{- $capture_start = printf "// %s-docs-start %s" $extension $name -}}
+        {{- $capture_end = printf "// %s-docs-end %s" $extension $name -}}
     {{- end -}}
-    {{- $extension = strings.TrimLeft "." $extension  }}
 {{- else -}}
     {{- errorf "File format not supported (line %s): %s" .Position $file -}}
 {{- end -}}
