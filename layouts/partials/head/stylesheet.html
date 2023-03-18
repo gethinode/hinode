@@ -32,7 +32,7 @@
 {{- if not hugo.IsProduction -}}
     <link rel="stylesheet" href="{{ $css.Permalink | relURL }}">
 {{- else -}}
-    {{- $css = $css | fingerprint -}}
+    {{- $css = $css | fingerprint | resources.PostProcess -}}
     <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 {{- end -}}
 {{- if hasPrefix (lower .Site.Params.style.themeFontPath) "http" -}}
