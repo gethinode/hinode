@@ -1,5 +1,6 @@
 // Bootstrap variables overrides for theme
 $enable-negative-margins:       true;
+$enable-important-utilities:    true !default;
 
 // Font awesome variables overrides for theme
 $fa-font-path:                  "../fonts";
@@ -8,7 +9,7 @@ $fa-font-path:                  "../fonts";
 $navbar-toggler-focus-width:    0 !default;
 
 // scss-docs-start font
-$font-family-sans-serif:        $themeFont, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif:        $theme-font, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $headings-font-weight:          600 !default;
 $font-weight-lighter:           lighter !default;
 $font-weight-light:             200 !default;

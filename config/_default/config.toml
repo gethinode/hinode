@@ -16,9 +16,9 @@ enableInlineShortcodes = true
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
 ignoreErrors = ["error-remote-getjson"]
 
-# toml-docs-start build
+# toml-docs-start timeout
 timeout = "60s"
-# toml-docs-end build
+# toml-docs-end timeout
 
 # toml-docs-start language
 languageCode = "en-us"
@@ -26,6 +26,11 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 # toml-docs-end language
 
+# toml-docs-start build
+[build]
+  writeStats = true
+# toml-docs-end build
+  
 [taxonomies]
   tag = 'tags'
 
