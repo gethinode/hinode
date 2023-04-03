@@ -24,7 +24,7 @@
     logo = "/img/logo_icon.svg"
     color = "body"
     fixed = true
-    offset = "4em"
+    offset = "5em"
     search = true
     breadcrumb = false
     toc = true
