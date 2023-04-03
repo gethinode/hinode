@@ -73,7 +73,7 @@ As an example, the following shortcode displays a tooltip for a dark button with
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button color="secondary" tooltip="Click on the inbox to view your unread messages" href="#" badge="99+" */>}}
+{{</* button color="secondary" tooltip="Click on the inbox to view your unread messages" href="#!" badge="99+" */>}}
     Inbox
 {{</* /button */>}}
 {{< /example>}}
@@ -86,9 +86,9 @@ As an example, the following shortcode displays a group of three buttons.
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button-group aria-label="Basic example" */>}}
-  {{</* button color="primary" href="#" */>}}Left{{</* /button */>}}
-  {{</* button color="primary" href="#" */>}}Middle{{</* /button */>}}
-  {{</* button color="primary" href="#" */>}}Right{{</* /button */>}}
+  {{</* button color="primary" href="#!" */>}}Left{{</* /button */>}}
+  {{</* button color="primary" href="#!" */>}}Middle{{</* /button */>}}
+  {{</* button color="primary" href="#!" */>}}Right{{</* /button */>}}
 {{</* /button-group */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
@@ -236,7 +236,7 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Tooltip" href="#" */>}}
+{{</* tooltip color="primary" title="Tooltip" href="#!" */>}}
     Tooltip demonstration
 {{</* /tooltip */>}}
 {{< /example >}}

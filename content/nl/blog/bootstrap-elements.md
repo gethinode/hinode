@@ -73,7 +73,7 @@ De volgende shortcode toont een knop met een label en een aanwijzing.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button color="secondary" tooltip="Toon je ongelezen berichten" href="#" badge="99+" */>}}
+{{</* button color="secondary" tooltip="Toon je ongelezen berichten" href="#!" badge="99+" */>}}
     Inbox
 {{</* /button */>}}
 {{< /example>}}
@@ -86,9 +86,9 @@ De volgende shortcode toont een groep van drie knoppen.
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button-group aria-label="Basic example" */>}}
-  {{</* button color="primary" href="#" */>}}Links{{</* /button */>}}
-  {{</* button color="primary" href="#" */>}}Midden{{</* /button */>}}
-  {{</* button color="primary" href="#" */>}}Rechts{{</* /button */>}}
+  {{</* button color="primary" href="#!" */>}}Links{{</* /button */>}}
+  {{</* button color="primary" href="#!" */>}}Midden{{</* /button */>}}
+  {{</* button color="primary" href="#!" */>}}Rechts{{</* /button */>}}
 {{</* /button-group */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
@@ -236,7 +236,7 @@ De volgende shortcode toont een uitleg voor een gekleurde link.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Tooltip" href="#" */>}}
+{{</* tooltip color="primary" title="Tooltip" href="#!" */>}}
     Tooltip demonstration
 {{</* /tooltip */>}}
 {{< /example >}}
