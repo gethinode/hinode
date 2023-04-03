@@ -159,7 +159,7 @@
                 {{- if $enableLanguage -}}
                     {{- $currentLang := $page.Language.Lang -}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end ">
@@ -179,7 +179,7 @@
                 <!-- Insert color mode switcher -->
                 {{- if $enableDarkMode -}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
+                        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
                             {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
                             <span class="d-md-none"></span>
                         </a>
