@@ -19,8 +19,9 @@
 {{- if $src -}}
     <div class="carousel-item {{ if eq .Ordinal 0 }}active{{ end }}">
         {{ partial "image.html" (dict "url" $src "ratio" $ratio "innerClass" "d-block w-100") }}
+        <div class="carousel-caption gradient"></div>
         {{ with $caption }}
-            <div class="carousel-caption d-none d-md-block gradient">
+            <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>
             </div>
         {{ end }}
