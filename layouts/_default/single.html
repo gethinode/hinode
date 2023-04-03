@@ -83,7 +83,7 @@
     
         <div class="container-fluid">
             <div class="row row-cols-md-2 row-cols-lg-3">
-                <div class="col col-md-3 col-lg-2 d-none mt-5 d-md-block">
+                <div class="col col-md-3 col-lg-2 d-none pt-5 d-md-block sidebar-overflow sticky-top">
                     {{ partial "assets/sidebar" (dict "page" . "menu" $menu) }}
                 </div>
                 <div class="col col-md-9 col-lg-8 mb-5 p-4">
@@ -91,7 +91,7 @@
                     {{ partial "partials/body.html" . }}
                     {{ partial "partials/footer.html" . }}
                 </div>
-                <div class="col col-lg-2 d-none d-lg-block mt-5">
+                <div class="col col-lg-2 d-none d-lg-block pt-5">
                     {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
                         {{ partial "assets/toc.html" . -}}
                     {{ end -}}
