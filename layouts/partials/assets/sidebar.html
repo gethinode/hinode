@@ -3,7 +3,7 @@
 {{- $data := .menu -}}
 
 {{ if $data }}
-    <nav class="sidebar flex-shrink-0 ps-1 pt-3 sticky-top" aria-label="{{ (strings.FirstUpper $section) }} navigation">
+    <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $url := split $page.Permalink "/" -}}
         {{- $page_slug := index $url (sub (len $url) 2) -}}
         {{- $sectionBreak := false }}

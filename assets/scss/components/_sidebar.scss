@@ -3,6 +3,12 @@
     top: $navbar-offset;
 }
 
+.sidebar-overflow {
+    top: $navbar-offset;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
 .sidebar-item {
     color: black;
 }

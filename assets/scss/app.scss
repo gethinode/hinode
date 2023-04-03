@@ -11,14 +11,14 @@
 @import "bootstrap/scss/functions";
 
 // Import Bootstrap configuration
-@import "hotfix/variables";
-@import "hotfix/variables-dark.scss";
-@import "hotfix/maps";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark.scss";
+@import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
 
 // Import Bootstrap layout & components
-@import "hotfix/root";
+@import "bootstrap/scss/root";
 @import "bootstrap/scss/reboot";
 @import "bootstrap/scss/type";
 @import "bootstrap/scss/images";
