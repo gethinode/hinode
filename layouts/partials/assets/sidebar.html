@@ -11,8 +11,7 @@
 
     {{- $doc_slug := $group.title | urlize -}}
     {{- $href := printf "%s/" (relLangURL (path.Join $baseURL $doc_slug)) -}}
-    {{ $collapsed := strings.HasPrefix $page.RelPermalink $href }}
-    {{ warnf "Page: %s" $href }}
+    {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
 
     <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}" aria-expanded="{{ if $collapsed }}true{{ else }}false{{ end }}">
