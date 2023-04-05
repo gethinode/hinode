@@ -69,6 +69,7 @@
 
 {{ define "main" -}}
     {{- $menu := .Scratch.Get "sidebar" -}}
+    {{- $version := .Scratch.Get "version" -}}
     {{- $sidebar := .Site.Params.navigation.sidebar | default true -}}
     {{ if and $menu $sidebar -}}
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-labelledby="offcanvas-label">
@@ -77,14 +78,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                {{ partial "assets/sidebar" (dict "page" . "menu" $menu) }}
+                {{ partial "assets/sidebar" (dict "page" . "menu" $menu "version" $version) }}
             </div>
         </div>
     
         <div class="container-fluid">
             <div class="row row-cols-md-2 row-cols-lg-3">
                 <div class="col col-md-3 col-lg-2 d-none pt-5 d-md-block sidebar-overflow sticky-top">
-                    {{ partial "assets/sidebar" (dict "page" . "menu" $menu) }}
+                    {{ partial "assets/sidebar" (dict "page" . "menu" $menu "version" $version) }}
                 </div>
                 <div class="col col-md-9 col-lg-8 mb-5 p-4">
                     {{ partial "partials/header.html" . }}

@@ -1,6 +1,7 @@
 {{- $page := .page }}
 {{- $section := $page.Section }}
 {{- $data := .menu -}}
+{{- $version := .version -}}
 
 {{- define "partials/sidebar/group.html" -}}
     {{- $page := .page -}}
@@ -79,9 +80,9 @@
 
 {{ if $data }}
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
-        {{- $sectionBreak := false }}
-        {{ $level := 0}}
-        {{ $baseURL := relLangURL (path.Join $section site.Params.docs.version) }}
+        {{- $sectionBreak := false -}}
+        {{- $level := 0 -}}
+        {{- $baseURL := relLangURL (path.Join $section $version) }}
 
         <ul class="list-unstyled ps-0">
         {{- range $index, $item := $data -}}
