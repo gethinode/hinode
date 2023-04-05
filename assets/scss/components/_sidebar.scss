@@ -11,7 +11,7 @@
 
 .sidebar-item {
     color: rgba(0, 0, 0, 0.65);
-    margin-left: 0rem !important;
+    margin-left: 0 !important;
     padding-left: 0.85rem !important;
 
     &.active,
@@ -69,7 +69,7 @@
     @include color-mode(dark) {
         .sidebar-item {
             color: var(--bs-tertiary-color);
-            margin-left: 0rem !important;
+            margin-left: 0 !important;
             padding-left: 0.85rem !important;
         
             &.active,
