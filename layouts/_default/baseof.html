@@ -1,4 +1,6 @@
+{{- $section := .Section }}
 {{- with partial "utilities/GetMenu" . }}{{ $.Scratch.Set "sidebar" . }}{{ end -}}
+{{ $.Scratch.Set "version" (site.Param (printf "%s.version" .Section)) }}
 
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js" data-bs-theme="dark">
