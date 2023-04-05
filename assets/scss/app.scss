@@ -53,9 +53,6 @@
 // Import Bootstrap helpers
 @import "bootstrap/scss/helpers";
 
-// Import Bootstrap utilities
-@import "bootstrap/scss/utilities/api";
-
 // Import Font Awesome
 // scss-docs-start awesome
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
@@ -98,3 +95,6 @@
 
 // Import theme placeholder
 @import "theme/theme.scss";
+
+// Import Bootstrap utilities API
+@import "bootstrap/scss/utilities/api";
