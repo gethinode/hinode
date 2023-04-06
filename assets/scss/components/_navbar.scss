@@ -24,6 +24,10 @@
     border: 0 if($enable-important-utilities, !important, null);
 }
 
+.fw-30 {
+    width: 30px !important;
+}
+
 /* Lines of the Toggler */
 .toggler-icon {
     width: 30px;

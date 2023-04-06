@@ -79,19 +79,21 @@
 {{- $pre := .Pre -}}
 {{- $post := .Post -}}
 
-<nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-3">
-	<div class="container-fluid">
+<nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-4">
+	<div class="container-fluid p-0">
         <!-- Insert sidebar toggler when applicable -->
-        {{- if $page.Scratch.Get "sidebar" -}}
-            <button class="navbar-toggler collapsed ms-n3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
-            </button>
-        {{- else -}}
-            <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
-            <button class="navbar-toggler collapsed ms-n3 invisible" type="button">
-                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
-            </button>
-        {{- end -}}
+        <div class="d-flex">
+            {{- if $page.Scratch.Get "sidebar" -}}
+                <button class="navbar-toggler fw-30 collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                    {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+                </button>
+            {{- else -}}
+                <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
+                <button class="navbar-toggler fw-30 collapsed p-0 mx-auto invisible" type="button">
+                    {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+                </button>
+            {{- end -}}
+        </div>
 
         <!-- Insert the brand logo or name -->
         <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
@@ -103,12 +105,14 @@
         </a>
 
         <!-- Insert main navigation toggler -->
-		<button id="main-nav-toggler" class="navbar-toggler collapsed me-n3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
-			aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
-			<span class="toggler-icon top-bar emphasis"></span>
-			<span class="toggler-icon middle-bar emphasis"></span>
-			<span class="toggler-icon bottom-bar emphasis"></span>
-		</button>
+        <div class="d-flex fw-30">
+            <button id="main-nav-toggler" class="navbar-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
+                aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
+                <span class="toggler-icon top-bar emphasis"></span>
+                <span class="toggler-icon middle-bar emphasis"></span>
+                <span class="toggler-icon bottom-bar emphasis"></span>
+            </button>
+        </div>
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent-{{ $id }}">
             <!-- Insert search input -->
