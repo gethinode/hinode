@@ -1,0 +1,5 @@
+{{ if site.Params.navigation.anchor }}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">{{ .Text | safeHTML }} <a href="#{{ .Anchor | safeURL }}"><i class="fa-solid fa-link anchor"></i></a></h{{ .Level }}>
+{{ else }}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</h{{ .Level }}>
+{{ end }}

@@ -18,3 +18,14 @@ a:active {
 .tickmark li::marker {
     content: "✓ ";
 }
+
+.anchor
+{
+    color: transparent;
+}
+
+.heading:hover .anchor 
+{
+    transition: 0.25s ease-in-out;
+    color: $primary;
+}
