@@ -124,17 +124,18 @@
                     {{- $menu_item_url := $menu.URL | relLangURL -}}
                     {{- $page_url:= $page.RelPermalink | relLangURL -}}
                     {{- $active := hasPrefix $page_url $menu_item_url -}}
-
+                    
                     {{- $url := urls.Parse .URL -}}
                     {{- $baseurl := urls.Parse $.Site.Params.Baseurl -}}
                     {{- if .HasChildren -}}
                         <li class="nav-item dropdown">
                             <a class="nav-link {{ if $active }}active{{ end }} dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ if $active }}<span  class="active">{{ .Name }}</span>{{ else }}{{ .Name }}{{ end }}
+                                {{ if $active }}<span class="active">{{ .Name }}</span>{{ else }}{{ .Name }}{{ end }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{- range .Children -}}
-                                    <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
+                                    {{- $child_active := eq $page_url .URL -}}
+                                    <li><a class="dropdown-item {{ if $child_active }}active{{ end }}" href="{{ .URL }}">{{ .Name }}</a></li>
                                 {{- end -}}
                             </ul>
                           </li>
