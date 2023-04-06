@@ -1,5 +1,4 @@
 {{ $filename := "js/main.bundle.js" -}}
-{{ if hugo.IsProduction }}{{ $filename = "js/main.bundle.min.js" }}{{ end -}}
 {{ $files := slice -}}
 {{ range $index, $file := resources.Match "js/**.js" -}}
     {{ $files = $files | append $file -}}
