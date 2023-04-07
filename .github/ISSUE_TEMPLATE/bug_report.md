@@ -27,8 +27,9 @@ If applicable, add a copy of Hugo's log messages.
 If applicable, add screenshots to help explain your problem.
 
 **Environment (please complete the following information):**
- - Host OS: [e.g. macOS Ventura 13.0]
- - Node version: [e.g. node v18.10.0]
+ - Hinode version: [e.g. v0.11.3]
+ - Host OS: [e.g. macOS Ventura 13.3]
+ - Node version: [e.g. node v18.15.0]
  - Hugo version: [e.g. hugo v0.109.0-47b12b83e636224e5e601813ff3e6790c191e371+extended darwin/amd64 BuildDate=2022-12-23T10:38:11Z VendorInfo=gohugoio]
  - Browser: [e.g. Google Chrome Version 108.0.5359.124 (Official Build) (arm64)]
 
