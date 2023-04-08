@@ -1,14 +1,20 @@
-{{ $filename := "js/main.bundle.js" -}}
+{{ $filename := .filename | default "js/main.bundle.js" -}}
+{{ $match := .match | default "{js/*.js,js/vendor/**.js}" }}
+{{ $page := .page }}
+
 {{ $files := slice -}}
-{{ range $index, $file := resources.Match "js/**.js" -}}
+{{ range $index, $file := resources.Match $match -}}
     {{ $files = $files | append $file -}}
 {{ end -}}
-{{ $bundle := $files | resources.Concat $filename -}}
-{{ $js := $bundle | resources.ExecuteAsTemplate $filename . -}}
 
-{{- if not hugo.IsProduction -}}
-    <script src="{{ $js.RelPermalink }}"></script>
-{{ else -}}
-    {{ $js = $js | minify | fingerprint -}}
-    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+{{ if gt (len $files) 0 }}
+    {{ $bundle := $files | resources.Concat $filename -}}
+    {{ $js := $bundle | resources.ExecuteAsTemplate $filename $page -}}
+
+    {{- if not hugo.IsProduction -}}
+        <script src="{{ $js.RelPermalink }}"></script>
+    {{ else -}}
+        {{ $js = $js | minify | fingerprint -}}
+        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+    {{ end -}}
 {{ end -}}

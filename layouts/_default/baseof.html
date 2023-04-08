@@ -3,12 +3,15 @@
 {{ $.Scratch.Set "version" (site.Param (printf "%s.version" .Section)) }}
 
 <!doctype html>
-<html lang="{{ .Site.Language.Lang }}" class="no-js" data-bs-theme="dark">
+<html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
         {{ block "head" . }}{{ end -}}
     </head>
 
     <body>
+        {{- if site.Params.main.enableDarkMode -}}
+            {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "page" .) -}}
+        {{- end -}}
         <div class="d-flex flex-column min-vh-100{{ if and .IsHome .Site.Params.home.style }} {{ .Site.Params.home.style }}{{ end }}">
             <div class="{{ if .Site.Params.navigation.fixed }}mb-4{{ end }}">
                 {{- partial "assets/navbar.html" (dict
@@ -54,6 +57,6 @@
             {{- partial "footer/footer.html" . -}}
         {{ end -}}
 
-        {{- partialCached "footer/scripts.html" . -}}
+        {{- partialCached "footer/scripts.html" (dict "page" .) }}
     </body>
 </html>
