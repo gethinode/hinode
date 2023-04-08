@@ -15,8 +15,8 @@
     "import-fonts"            (printf "%t" (not (hasPrefix (lower .Site.Params.style.themeFontPath) "http")))
 -}}
 
-{{- $options := (dict "transpiler" "libsass" "targetPath" "main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -}}
-{{/*- $options := (dict "transpiler" "dartsass" "targetPath" "main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -*/}}
+{{- $options := (dict "transpiler" "libsass" "targetPath" "css/main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -}}
+{{/*- $options := (dict "transpiler" "dartsass" "targetPath" "css/main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -*/}}
 {{- if hugo.IsProduction -}}
     {{- $options = merge $options (dict "outputStyle" "compressed") -}}
 {{- else -}}

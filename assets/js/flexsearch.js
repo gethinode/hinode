@@ -81,7 +81,7 @@ Source:
     // https://discourse.gohugo.io/t/range-length-or-last-element/3803/2
     // Note: uses .Site.AllPages as .Site.RegularPages only returns content for the current language
     //       pages without a title (such as browserconfig.xml) are excluded
-    {{ $list := where (where .Site.AllPages "Kind" "in" "page") "Title" "!=" "" }}
+    {{ $list := where (where site.AllPages "Kind" "in" "page") "Title" "!=" "" }}
     {{ $len := (len $list) -}}
   
     index.add(
