@@ -13,6 +13,40 @@
     "title"         Optional brand title, displayed when the logo is not set. Defaults to the site's title.
 -->
 
+<!-- Inline partial to render the color mode switcher -->
+{{- define "partials/navbar-mode.html" -}}
+    {{- $id := .id -}}
+    {{- $size := .size -}}
+    {{- $collapsed := .collapsed -}}
+
+    <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
+            {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}
+            <span class="d-md-none"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
+            <li>
+                <a class="dropdown-item" data-bs-theme-value="light" href="#!" {{ if $collapsed }}data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"{{ end }}>
+                    {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
+                    {{ T "colorLight" }}
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" data-bs-theme-value="dark" href="#!" {{ if $collapsed }}data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"{{ end }}>
+                    {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
+                    {{ T "colorDark" }}
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" data-bs-theme-value="auto" href="#!" {{ if $collapsed }}data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"{{ end }}>
+                    {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
+                    {{ T "colorAuto" }}
+                </a>
+            </li>
+        </ul>
+    </li>
+{{- end -}}
+
 {{- $supportedFlags := slice "true" "false" -}}
 
 {{- $id := 0 -}}
@@ -196,32 +230,8 @@
                               
                 <!-- Insert color mode switcher -->
                 {{- if $enableDarkMode -}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
-                            {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }}
-                            <span class="d-md-none"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
-                            <li>
-                                <a class="dropdown-item" data-bs-theme-value="light" href="#!">
-                                    {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
-                                    {{ T "colorLight" }}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" data-bs-theme-value="dark" href="#!">
-                                    {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
-                                    {{ T "colorDark" }}
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" data-bs-theme-value="auto" href="#!">
-                                    {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
-                                    {{ T "colorAuto" }}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    {{- partial "partials/navbar-mode.html" (dict "id" $id "size" $size "collapsed" true) -}}
+                    {{- partial "partials/navbar-mode.html" (dict "id" $id "size" $size "collapsed" false) -}}
                 {{- end -}}
             </ul>
         </div>
