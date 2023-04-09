@@ -174,8 +174,11 @@
                 {{- if $enableLanguage -}}
                     {{- $currentLang := $page.Language.Lang -}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
+                        </a>
+                        <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{- partial "assets/icon.html" (dict "icon" "fas globe") }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end ">
                             {{- if $page.IsTranslated -}}
