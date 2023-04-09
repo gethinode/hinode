@@ -6,6 +6,7 @@
     "fixed"         Optional flag to indicate the navbar should stick to the top, defaults to false.
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
+    "mode"          Optional flag to include a color mode switcher, default is "true" (if dark mode is enabled).
     "search"        Optional flag to include a search input, default is "true".
     "logo"          Optional address of the logo image, defaults to the parameter "logo" set in the "main" section of
                     the site's parameter configuration. 
@@ -65,6 +66,15 @@
 {{- end -}}
 
 {{- $enableDarkMode := default true site.Params.main.enableDarkMode -}}
+{{- with .mode -}}
+    {{- $darkModeParam := . -}}
+    {{- if in $supportedFlags $darkModeParam -}}
+        {{- if eq $darkModeParam "true" }}{{ $enableDarkMode = site.Params.main.enableDarkMode }}{{ else }}{{ $enableDarkMode = false }}{{ end -}}
+    {{- else -}}
+        {{- errorf "Invalid value for param 'darkMode': %s" $darkModeParam -}}
+    {{- end -}}
+{{- end -}}
+
 {{- $enableLanguage := or $page.IsTranslated site.IsMultiLingual -}}
 
 {{- $logo := site.Params.navigation.logo -}}
