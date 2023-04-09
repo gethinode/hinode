@@ -28,17 +28,24 @@
   setTheme(getPreferredTheme())
 
   const showActiveTheme = theme => {
-    const activeSelector = document.querySelector('.theme-icon-active')
-    const activeButton = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-    const activeIcon = activeButton.querySelector('i')
+    const activeSelectors = document.querySelectorAll('.theme-icon-active')
+    const activeButtons = document.querySelectorAll(`[data-bs-theme-value="${theme}"]`)
+    if (activeButtons.length > 0) {
+      const activeIcon = activeButtons[0].querySelector('i')
 
-    document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-      element.classList.remove('active')
-    })
+      document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+        element.classList.remove('active')
+      })
 
-    activeSelector.className = activeIcon.className
-    activeSelector.className = activeSelector.className.replace('theme-icon', 'theme-icon-active')
-    activeButton.classList.add('active')
+      for (let i = 0; i < activeSelectors.length; ++i) {
+        activeSelectors[i].className = activeIcon.className
+        activeSelectors[i].className = activeSelectors[i].className.replace('theme-icon', 'theme-icon-active')
+      }
+
+      for (let i = 0; i < activeButtons.length; ++i) {
+        activeButtons[i].classList.add('active')
+      }
+    }
   }
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
