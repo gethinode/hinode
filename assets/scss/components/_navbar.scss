@@ -11,6 +11,10 @@
     background-color: var(--bs-body-bg);
 }
 
+.navbar-expanded {
+    box-shadow: $box-shadow-sm;
+}
+
 /* Remove border from toggler */
 .navbar-toggler {
     border: 0 if($enable-important-utilities, !important, null);
