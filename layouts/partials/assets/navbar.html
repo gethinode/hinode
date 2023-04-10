@@ -199,9 +199,10 @@
 
 
                 {{- if or $enableLanguage $enableDarkMode -}}
-                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto">
+                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
                         <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
                     </li>
+                    <li><hr class="dropdown-divider-bg"></li>
                 {{- end -}}
 
                 <!-- Insert language switcher if applicable -->
