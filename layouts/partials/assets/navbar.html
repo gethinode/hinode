@@ -26,19 +26,19 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
             <li>
-                <a class="dropdown-item" data-bs-theme-value="light" href="#!" {{ if $collapsed }}data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"{{ end }}>
+                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
                     {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
                     {{ T "colorLight" }}
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" data-bs-theme-value="dark" href="#!" {{ if $collapsed }}data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"{{ end }}>
+                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="dark" href="#!">
                     {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
                     {{ T "colorDark" }}
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" data-bs-theme-value="auto" href="#!" {{ if $collapsed }}data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"{{ end }}>
+                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="auto" href="#!">
                     {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
                     {{ T "colorAuto" }}
                 </a>
