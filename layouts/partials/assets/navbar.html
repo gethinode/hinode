@@ -182,7 +182,7 @@
                                     <li><a class="dropdown-item {{ if $child_active }}active{{ end }}" href="{{ .URL }}">{{ .Name }}</a></li>
                                 {{- end -}}
                             </ul>
-                          </li>
+                        </li>
                     {{- else -}}
                         <li class="nav-item">
                             {{- $external := ne $url.Host $baseurl.Host -}}
