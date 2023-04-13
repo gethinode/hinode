@@ -198,7 +198,7 @@ De volgende shortcode toont een navigatiemenu.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar path="about" color="primary" size="md" search="false" menus="sample" title="Brand" */>}}
+{{</* navbar path="about" color="primary" size="md" search="false" menus="sample" title="Brand" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

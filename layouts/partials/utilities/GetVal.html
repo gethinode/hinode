@@ -1,0 +1,12 @@
+<!-- 
+    Retrieve the value from a key-value pair. The expected format is 'key="value"', including double quotes for the
+    value. Returns -1 when no valid value is found.
+-->
+
+{{- $input := (split . "=") -}}
+{{- $val := -1 -}}
+{{- if gt (len $input) 1 -}}
+    {{- $val = trim (index $input 1) "\"" -}}
+{{- end -}}
+
+{{- return $val -}}
