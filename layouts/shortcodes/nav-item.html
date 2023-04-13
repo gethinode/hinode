@@ -1,0 +1,42 @@
+<!-- 
+    Defines an individual nav item. The shortcode supports the following arguments:
+    "header"        Required header of the nav item.
+    "class"         Optional class attribute of the inner nav item.
+    "show"          Optional flag to indicate an item should be shown.
+-->
+
+{{- $id := .Ordinal -}}
+{{ $header := .Get "header" -}}
+{{ if not $header -}}
+    {{ if .Parent }}
+        {{ errorf "Missing value for param 'header': %s" .Parent.Position -}}
+    {{ else }}
+    {{ errorf "Missing value for param 'header': %s" .Position -}}
+    {{ end }}
+{{ end -}}
+
+{{ $class := .Get "class" -}}
+{{ $body := trim .Inner " \r\n" -}}
+{{ if not $body -}}
+    {{ if .Parent }}
+        {{ errorf "Missing inner element text: %s" .Parent.Position -}}
+    {{ else }}
+        {{ errorf "Missing inner element text: %s" .Position -}}
+    {{ end }}
+{{ end -}}
+
+{{ $supportedFlags := slice "true" "false" -}}
+{{ $showParam := "false" -}}
+{{ $show := false -}}
+{{ with .Get "show" }}{{ $showParam = . }}{{ end -}}
+{{ if in $supportedFlags $showParam -}}
+    {{ if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'show': %s" $showParam -}}
+{{ end -}}
+
+{{- $parent := printf "nav-%d" .Parent.Ordinal -}}
+
+<div class="tab-pane{{ if $show }} active{{ end }}" id="{{ $parent }}-{{ $id }}" role="tabpanel" aria-labelledby="{{ $parent }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }}>
+    {{ $body | markdownify | safeHTML }}
+</div>

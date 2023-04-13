@@ -192,6 +192,27 @@ As an example, the following shortcode displays an image with rounded corners an
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Nav
+
+As an example, the following shortcode displays a tab group with vertically aligned pills.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+  {{</* nav type="pills" vertical="true" */>}}
+    {{</* nav-item header="Nav Item #1" show="true" */>}}
+      This is the first item's nav body. It supports HTML content. The item is shown by adding the value
+      <code>show</code> to the <code>class</code> argument.
+    {{</* /nav-item */>}}
+    {{</* nav-item header="Nav Item #2" */>}}
+      This is the second item's nav body. It too supports HTML content.
+    {{</* /nav-item */>}}
+    {{</* nav-item header="Nav Item #3" */>}}
+      This is the third item's nav body.
+    {{</* /nav-item */>}}
+  {{</* /nav */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Navbar
 
 As an example, the following shortcode displays a light navigation header.

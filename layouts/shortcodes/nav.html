@@ -1,0 +1,57 @@
+<!-- 
+    Displays a tab group of multiple items. Add nav-item inner elements for each tab pane. The shortcode supports the
+    following arguments:
+    "type"          Optional type of the tab group, either "tabs", "pills", or "underline".
+    "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
+    "class":        Optional class attribute of the tab group, e.g. “nav-fill”.
+-->
+
+<!-- TODO: add fade support -->
+
+{{- $id := .Ordinal -}}
+{{- $class := .Get "class" -}}
+{{ $type := .Get "type" -}}
+{{ $supportedNavTypes := slice "tabs" "pills" "underline" -}}
+{{ if $type }}
+    {{ if not (in $supportedNavTypes $type) -}}
+        {{ errorf "Invalid value for param 'type': %s" $type -}}
+    {{ end -}}
+{{ end -}}
+
+{{ $supportedFlags := slice "true" "false" -}}
+{{ $verticalParam := "false" -}}
+{{ $vertical := false -}}
+{{ with .Get "vertical" }}{{ $verticalParam = . }}{{ end -}}
+{{ if in $supportedFlags $verticalParam -}}
+    {{ if eq $verticalParam "true" }}{{ $vertical = true }}{{ else }}{{ $vertical = false }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'vertical': %s" $verticalParam -}}
+{{- end -}}
+
+{{- if and (eq $type "tabs") $vertical -}}
+    {{- errorf "Tabs do not support vertical layout" -}}
+{{- end -}}
+
+{{- $inner := .Inner -}}
+{{- $items := findRE "data-header=\"(.+?)\"" $inner -}}
+{{- $showVal := findRE "data-show-id=\"(.+?)\"" $inner -}}
+{{- $showID := -1 -}}
+{{- if gt (len $showVal) 0 -}}
+    {{- $showID = int (partial "utilities/GetVal.html" (index $showVal 0)) -}}
+{{- end -}}
+
+{{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
+<div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
+    {{- range $index, $item := $items -}}
+        {{- $header := partial "utilities/GetVal.html" $item -}}
+        <button class="nav-link text-nowrap{{ if eq $index $showID }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
+                type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
+            {{ $header }}
+        </button>
+    {{ end -}}
+</div>
+
+<div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+    {{- $inner -}}
+</div>
+{{ if $vertical }}</div>{{ end }}
