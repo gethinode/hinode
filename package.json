@@ -67,10 +67,10 @@
     "markdownlint-cli2": "^0.6.0",
     "postcss-cli": "^10.1.0",
     "purgecss-whitelister": "^2.4.0",
-    "rimraf": "^4.4.1",
+    "rimraf": "^5.0.0",
     "shx": "^0.3.4",
     "stylelint": "^15.4.0",
-    "stylelint-config-standard-scss": "^7.0.1"
+    "stylelint-config-standard-scss": "^8.0.0"
   },
   "hugo-bin": {
     "buildTags": "extended"
