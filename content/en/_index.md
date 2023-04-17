@@ -1,6 +1,7 @@
 ---
-author: Mark Dumay
-title: Welcome to Hinode!
+author: N Inja
+title: 
 ---
 
-A clean documentation and blog theme for your Hugo site based on Bootstrap 5.
+We're discovering culture, art, technology, woes and yays from all around the world.    
+Deepening our understanding of everything. WowWow ink.

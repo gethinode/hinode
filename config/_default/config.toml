@@ -1,12 +1,12 @@
 # toml-docs-start main
 title = "Hinode"
-copyright = "Copyright © 2023 Mark Dumay."
+copyright = "Copyright © 2023 wow wow company - "
 paginate = 9
 enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-baseURL = "https://demo.gethinode.com/"
+baseURL = "https://643d78ec3ac0600b38aad3dd--lovely-blancmange-45f41c.netlify.app/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
