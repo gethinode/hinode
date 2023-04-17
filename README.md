@@ -133,8 +133,8 @@ The `hinode` and `child` codebase is released under the [MIT license][license]. 
 [netlify]: https://www.netlify.com
 [nodejs]: https://nodejs.org
 [npm]: https://www.npmjs.com
-[observatory]: https://observatory.mozilla.org/analyze/demo.gethinode.com
-[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F
+[observatory]: https://observatory.mozilla.org/analyze/flatfig.com
+[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fflatfig.com%2F
 [utterances]: https://utteranc.es
 
 <!-- MARKDOWN MAINTAINED LINKS -->

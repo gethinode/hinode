@@ -2,12 +2,12 @@ name = "Hinode"
 license = "MIT"
 licenselink = "https://github.com/gethinode/hinode/blob/main/LICENSE"
 description = "A clean documentation and blog theme for your Hugo site based on Bootstrap 5."
-homepage = "https://gethinode.com"
-demosite = "https://demo.gethinode.com"
+homepage = "https://flatfig.com"
+demosite = "https://flatfig.com"
 tags = ["blog", "documentation", "minimal", "modern", "customizable", "search", "bootstrap"]
 features = ["security aware", "fast by default", "seo-ready", "development tools", "bootstrap framework", "netlify-ready", "full text search", "page layouts"]
 min_version = "0.109.0"
 
 [author]
-  name = "Mark Dumay"
-  homepage = "https://github.com/markdumay"
+  name = "flatfig"
+  homepage = "https://github.com/creslinux/hinode"
