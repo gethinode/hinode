@@ -1,12 +1,12 @@
 # toml-docs-start main
-title = "Hinode"
-copyright = "Copyright © 2023 wow wow company - "
+title = "FlatFig"
+copyright = "Copyright © 2023 Flat Fig company - "
 paginate = 9
 enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-baseURL = "https://643d78ec3ac0600b38aad3dd--lovely-blancmange-45f41c.netlify.app/"
+baseURL = "https://flatfig.com/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
