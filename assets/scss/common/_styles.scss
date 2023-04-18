@@ -29,3 +29,51 @@ a:active {
     transition: 0.25s ease-in-out;
     color: $primary;
 }
+
+$utilities: map-merge(
+    $utilities,
+    (
+        "padding-start-wide": (
+            property: padding-left,
+            responsive: true,
+            class: psw,
+            values: (
+                0: 0,
+                1: 1.5 * $spacer,
+                2: 3 * $spacer,
+                3: 6 * $spacer,
+                4: 9 * $spacer,
+                5: 12 * $spacer,
+            )
+        ),
+        "padding-top-wide": (
+            property: padding-top,
+            responsive: true,
+            class: ptw,
+            values: (
+                0: 0,
+                1: 1.5 * $spacer,
+                2: 3 * $spacer,
+                3: 6 * $spacer,
+                4: 9 * $spacer,
+                5: 12 * $spacer,
+            )
+        ),
+        "font-size": map-merge(
+            map-get($utilities, "font-size"),
+            ( responsive: true ),
+        ),
+    )
+);
+
+@media screen and (orientation: portrait) {
+    .min-vh-custom {
+        min-height: 25vh !important
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .min-vh-custom {
+        min-height: 50vh !important
+    }
+}

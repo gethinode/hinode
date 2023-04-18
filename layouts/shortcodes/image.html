@@ -9,6 +9,7 @@
     "class":        Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
     "caption":      Optional figure caption.
+    "mode":         Optional flag indicating if the image should support color modes.
 -->
 
 {{- if isset .Params "src" -}}
@@ -24,8 +25,24 @@
     {{- $class := .Get "class" -}}
     {{ $title := .Get "title" -}}
     {{ $caption := .Get "caption" -}}
-
-    {{- partial "image.html" (dict "url" $url "ratio" $ratio "innerClass" $class "title" $title "caption" $caption) -}} 
+    {{ $supportedFlags := slice "true" "false" -}}
+    {{ $modeParam := "false" -}}
+    {{ $mode := false -}}
+    {{ with .Get "mode" }}{{ $modeParam = . }}{{ end -}}
+    {{ if in $supportedFlags $modeParam -}}
+        {{ if eq $modeParam "true" }}{{ $mode = true }}{{ else }}{{ $mode = false }}{{ end -}}
+    {{ else -}}
+        {{ errorf "Invalid value for param 'mode': %s" $modeParam -}}
+    {{ end -}}
+    
+    {{- partial "image.html" (dict 
+        "url" $url
+        "ratio" $ratio
+        "innerClass" $class
+        "title" $title
+        "caption" $caption
+        "mode" $mode)
+    -}} 
 {{ else -}}
     {{ errorf "Missing value for param 'src': %s" .Position -}}
 {{ end -}}
