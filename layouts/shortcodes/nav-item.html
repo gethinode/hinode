@@ -6,37 +6,49 @@
 -->
 
 {{- $id := .Ordinal -}}
-{{ $header := .Get "header" -}}
-{{ if not $header -}}
-    {{ if .Parent }}
-        {{ errorf "Missing value for param 'header': %s" .Parent.Position -}}
-    {{ else }}
-    {{ errorf "Missing value for param 'header': %s" .Position -}}
-    {{ end }}
-{{ end -}}
-
-{{ $class := .Get "class" -}}
-{{ $body := trim .Inner " \r\n" -}}
-{{ if not $body -}}
-    {{ if .Parent }}
-        {{ errorf "Missing inner element text: %s" .Parent.Position -}}
-    {{ else }}
-        {{ errorf "Missing inner element text: %s" .Position -}}
-    {{ end }}
-{{ end -}}
-
-{{ $supportedFlags := slice "true" "false" -}}
-{{ $showParam := "false" -}}
-{{ $show := false -}}
-{{ with .Get "show" }}{{ $showParam = . }}{{ end -}}
-{{ if in $supportedFlags $showParam -}}
-    {{ if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'show': %s" $showParam -}}
-{{ end -}}
-
 {{- $parent := printf "nav-%d" .Parent.Ordinal -}}
+{{- with (.Parent.Get "id") -}}
+    {{- $parent = . -}}
+{{- end -}}
 
-<div class="tab-pane{{ if $show }} active{{ end }}" id="{{ $parent }}-{{ $id }}" role="tabpanel" aria-labelledby="{{ $parent }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }}>
+{{- $fade := false -}}
+{{- if eq (.Parent.Get "fade") "true" -}}
+    {{- $fade = true -}}
+{{- end -}}
+
+{{- $header := .Get "header" -}}
+{{- if not $header -}}
+    {{- if .Parent -}}
+        {{- errorf "Missing value for param 'header': %s" .Parent.Position -}}
+    {{- else -}}
+        {{- errorf "Missing value for param 'header': %s" .Position -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $class := .Get "class" -}}
+{{- $body := trim .Inner " \r\n" -}}
+
+{{- $supportedFlags := slice "true" "false" -}}
+{{- $showParam := "false" -}}
+{{- $show := false -}}
+{{- with .Get "show" }}{{ $showParam = . }}{{ end -}}
+{{- if in $supportedFlags $showParam -}}
+    {{- if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
+{{- else -}}
+    {{- errorf "Invalid value for param 'show': %s" $showParam -}}
+{{- end -}}
+
+{{- $disabledParam := "false" -}}
+{{- $disabled := false -}}
+{{- with .Get "disabled" }}{{ $disabledParam = . }}{{ end -}}
+{{- if in $supportedFlags $disabledParam -}}
+    {{- if eq $disabledParam "true" }}{{ $disabled = true }}{{ else }}{{ $disabled = false }}{{ end -}}
+{{- else -}}
+    {{- errorf "Invalid value for param 'disabled': %s" $disabledParam -}}
+{{- end -}}
+
+<div class="tab-pane{{ if $show }} active {{ if $fade}}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}" id="{{ $parent }}-{{ $id }}" 
+    role="tabpanel" aria-labelledby="{{ $parent }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
+    data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
     {{ $body | markdownify | safeHTML }}
 </div>
