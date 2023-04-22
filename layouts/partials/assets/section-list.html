@@ -67,7 +67,7 @@
 {{- end -}}
 {{- if $reverse -}}{{- $list = $list.Reverse -}}{{ end -}}
 
-<div class="container-fluid flex-fill p-0{{ with $background }} bg-{{ . }}{{ end }}">
+<div class="container-xxl flex-fill p-0{{ with $background }} bg-{{ . }}{{ end }}">
     {{- partial "assets/card-group.html" (dict 
         "page" $page
         "list" $list
