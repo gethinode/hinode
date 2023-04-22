@@ -1,0 +1,62 @@
+<!-- 
+    Displays a tab group of multiple items. Each provided page resource is rendered as a tab pane. The shortcode
+    supports the following arguments:
+    "page"          Required context of the current page.
+    "list"          Required array of pages.
+    "title"         Optional title of the card group.
+    "type"          Optional type of the tab group, either "tabs", "pills", or "underline".
+    "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
+    "class":        Optional class attribute of the tab group, e.g. “nav-fill”.
+
+    In addition, the following arguments are passed to the individual tabs.
+    "class"         Optional class attribute of the tab element, e.g. “w-50”.
+    "color":        Optional theme color of the tab, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", or "body". By default, no color is specified.
+-->
+
+{{- $page := .page -}}
+{{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
+    {{- errorf "Invalid value for param 'page'" -}}
+{{- end -}}
+
+{{ $list := .list }}
+{{- if ne (printf "%T" $list) "resource.Resources" -}}
+    {{- errorf "Invalid value for param 'items'" -}}
+{{- end -}}
+
+{{- $title := .title -}}
+{{- $class := .class -}}
+{{- $color := .color -}}
+
+{{ $vertical := false }}
+{{ $type := "pills" }}
+{{- $id := .Ordinal -}}
+
+{{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
+<div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
+    {{- range $index, $item := $list -}}
+        {{ $show := eq $index 0}}
+        <button class="nav-link text-nowrap{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
+                type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
+            {{ $item.Title }}
+        </button>
+    {{ end -}}
+</div>
+
+<div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+    {{ range $index, $item := $list }}
+        {{ $header := $item.Title }}
+        {{ $body := $item.Content }}
+        {{ $show := eq $index 0}}
+        <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
+            {{- partial "assets/persona.html" (dict  
+                "title" $item.Title
+                "class" $class
+                "color" $color
+                "content" $item.Content
+                "thumbnail" $item.Params.Thumbnail
+            ) -}}
+        </div>    
+    {{ end }}
+</div>
+{{ if $vertical }}</div>{{ end }}
