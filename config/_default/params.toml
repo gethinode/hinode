@@ -17,6 +17,7 @@
     sections = ["blog", "projects"]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     fullCover = false
+    centerHeadline = false
     style = ""
 # toml-docs-end home
 

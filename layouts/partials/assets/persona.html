@@ -8,7 +8,8 @@
     "href"          Optional address for the button or hyperlink.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
     "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white", "black", or "body". By default, no color is specified.
+                    "warning", "info", "light", "dark", "white", "black", "body", or "tertiary". By default, no color is
+                    specified.
     "content"       Optional content of the card.
     "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
 -->
@@ -40,7 +41,7 @@
 {{- $color := "" -}}
 {{- with .color }}{{ $color = . }}{{ end -}}
 {{- if $color -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "tertiary" -}}
     {{- if not (in $supportedColors $color) -}}
         {{- errorf "Invalid value for param 'color': %s" $color -}}
     {{- end -}}

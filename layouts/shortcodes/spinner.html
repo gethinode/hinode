@@ -1,14 +1,14 @@
 <!-- 
     Displays a spinner. The shortcode supports the following arguments:
     "color":        Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white" or "black".
+                    "warning", "info", "light", "dark", "white", "black", "body", or "tertiary".
     "grow"          Optional flag to indicate the spinner is growing instead of rotating, defaults to false.
     "class":        Optional class attribute of the spinner wrapping element, e.g. “text-center”.
 -->
 
 {{ $color := "primary" -}}
 {{ with .Get "color" }}{{ $color = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "tertiary" -}}
 {{ if not (in $supportedColors $color) -}}
     {{ errorf "Invalid value for param 'color': %s" .Position -}}
     {{ $color = "primary" -}}
