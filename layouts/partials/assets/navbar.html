@@ -125,7 +125,7 @@
 {{- $post := .Post -}}
 
 <nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-4">
-	<div class="container-fluid p-0">
+	<div class="container-xxl p-0">
         <!-- Insert sidebar toggler when applicable -->
         <div class="d-flex">
             {{- if $page.Scratch.Get "sidebar" -}}
