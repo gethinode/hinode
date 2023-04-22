@@ -99,7 +99,7 @@ As an example, the following shortcode displays a stacked card with icon that li
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="w-50" color="light" header="publication" footer="none" */>}}
+{{</* card path="about" padding="3" class="w-50" color="tertiary" header="publication" footer="none" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
