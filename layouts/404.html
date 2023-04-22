@@ -1,8 +1,12 @@
 {{ define "main"}}
-    <main id="main">
-      <div>
-       <h1 id="title">{{ T "pageNotFoundTitle" }}</h1>
-       <p>{{ T "pageNotFound" }} <a href="{{ "/" | relURL }}">{{ T "pageNotFoundHome" }}</a>.</p>
-      </div>
-    </main>
+    <div class="container-xxl flex-fill d-flex align-content-center flex-wrap">
+        <div class="w-100 text-center">
+            <span class="text-secondary fw-bold">
+                <i class="fa-regular fa-face-frown fa-10x"></i>
+                <p class="display-1 mt-3 fw-bold">404</p>
+                <p class="fs-3">{{ T "pageNotFoundTitle" }}</p>
+            </span>
+            <p>{{ T "pageNotFound" }} <a href="{{ "/" | relURL }}">{{ T "pageNotFoundHome" }}</a>.</p>
+        </div>
+    </div>
 {{ end }}
