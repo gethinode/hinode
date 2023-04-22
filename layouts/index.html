@@ -4,6 +4,7 @@
 
 {{- define "main" -}}
     {{- $page := . -}}
+
     {{- range $index, $section := site.Params.home.sections -}}
         {{- $pages := where site.RegularPages "Type" "in" $section -}}
         {{- $sectionURL := "" -}}
@@ -20,5 +21,9 @@
             "moreTitle" $moreTitle
             "sectionURL" $sectionURL)
         -}}
+    {{- end -}}
+
+    {{- range $index, $section := site.Params.home.snippets -}}
+        {{- partial "assets/snippet-list.html" (dict "page" $page "section" $section) -}}
     {{- end -}}
 {{- end -}}
