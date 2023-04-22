@@ -192,6 +192,27 @@ De volgende shortcode toont een plaatje met afgeronde hoeken en een 21x9 verhoud
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Nav
+
+De volgende shortcode toont een groep met verticale tabbladen.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+  {{</* nav type="pills" vertical="true" */>}}
+    {{</* nav-item header="Nav Item #1" show="true" */>}}
+    Dit is de inhoud van het eerste element met ondersteuning voor HTML. De waarde <code>show</code>
+    voor het argument <code>class</code> geeft aan dat het element uitgeklapt moet worden.
+    {{</* /nav-item */>}}
+    {{</* nav-item header="Nav Item #2" */>}}
+    Dit is de inhoud van het tweede element. Het ondersteunt ook HTML.
+    {{</* /nav-item */>}}
+    {{</* nav-item header="Nav Item #3" */>}}
+    Dit is de inhoud van het derde element.
+    {{</* /nav-item */>}}
+  {{</* /nav */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Navbar
 
 De volgende shortcode toont een navigatiemenu.
