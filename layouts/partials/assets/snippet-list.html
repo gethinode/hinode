@@ -28,7 +28,7 @@
     <div class="container-xxl flex-fill p-0">
         {{ if eq $layout "tabs" }}
             <div class="p-0">
-                {{ with $title }}<p class="display-4 text-center pt-5">{{ . }}</p>{{ end }}
+                {{ with $title }}<p class="display-4 pt-5{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
                 <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto pt-5 pb-5">
                     {{- partial "assets/nav.html" (dict 
                         "page" $page
