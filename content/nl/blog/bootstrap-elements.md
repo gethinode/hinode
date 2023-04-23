@@ -95,7 +95,7 @@ De volgende shortcode toont een groep van drie knoppen.
 
 ## Card
 
-De volgende shortcode toont een kaart met een icoon dat linkt naar de [over mij]({{< ref "about" >}}) pagina. De kaart bevat een titel.
+De volgende shortcode toont een kaart dat linkt naar de [over mij]({{< ref "about" >}}) pagina. De kaart bevat een titel.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
