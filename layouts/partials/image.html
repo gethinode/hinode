@@ -137,7 +137,7 @@
     {{- end -}}
 
     {{- if $caption -}}
-        <figure {{ with $outerClass }}class="figure {{ . }}"{{ end }}>
+        <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
     {{ end }}
         <div class="{{ with $ratio }}ratio ratio-{{ . }}{{ end }}{{ if not $caption }} {{ $outerClass }}{{ end }}">
             <img class="img-fluid {{ $innerClass }}"
