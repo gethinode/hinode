@@ -14,9 +14,19 @@
         </small>
 
         <div class="mt-3">
-            {{ range (.GetTerms "tags") -}}
-                <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>    
-            {{ end -}}
+            <div class="d-none-dark">
+                {{ range (.GetTerms "tags") -}}
+                    <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>
+                    &nbsp;
+                {{ end -}}
+            </div>
+            
+            <div class="d-none-light">
+                {{ range (.GetTerms "tags") -}}
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>
+                    &nbsp;
+                {{ end -}}
+            </div>
         </div>
     {{ end }}
 {{ end -}}
