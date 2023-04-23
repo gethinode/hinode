@@ -15,7 +15,8 @@
 
         <div class="mt-3">
             {{ range (.GetTerms "tags") -}}
-                <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>    
+                <div class="d-none-dark"><a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a></div>
+                <div class="d-none-light"><a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a></div>
             {{ end -}}
         </div>
     {{ end }}
