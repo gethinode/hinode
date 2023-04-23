@@ -1,14 +1,14 @@
 <!-- 
     Displays an alert. The shortcode supports the following arguments:
     "color":        Optional theme color of the alert, either "primary" (default), "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white" or "black", "body", or "body-tertiary".
+                    "warning", "info", "light", "dark", "white" or "black".
     "dismissible"   Optional flag to indicate the alert is dismissible, defaults to false.
     "icon"          Optional class and name of a Font Awesome icon to include.
 -->
 
 {{ $color := "primary" -}}
 {{ with .Get "color" }}{{ $color = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "body" "body-tertiary" -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
 {{ if not (in $supportedColors $color) -}}
     {{ errorf "Invalid value for param 'color': %s" .Position -}}
     {{ $color = "primary" -}}
