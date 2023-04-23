@@ -6,7 +6,7 @@
     "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
-                    "danger", "warning", "info", "light", "dark", "white", "black", "body", or "tertiary".
+                    "danger", "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary".
     "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
     "badge"         Optional positioned badge to display on top of the button.
     "aria-label"    Optional label for the badge.
@@ -42,7 +42,7 @@
 
 {{ $color := "primary" -}}
 {{ with .Get "color" }}{{ $color = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "tertiary" -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
 {{ if not (in $supportedColors $color) -}}
     {{ errorf "Invalid value for param 'color': %s" .Position -}}
     {{ $error = true }}

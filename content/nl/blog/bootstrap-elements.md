@@ -99,7 +99,7 @@ De volgende shortcode toont een kaart met een icoon dat linkt naar de [over mij]
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="w-50" color="tertiary" header="publication" footer="none" */>}}
+{{</* card path="about" padding="3" class="w-50" color="body-tertiary" header="publication" footer="none" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
