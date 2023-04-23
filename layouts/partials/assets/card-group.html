@@ -88,7 +88,7 @@
 {{- $orientation := .orientation -}}
 
 <div class="container-fluid p-4">
-    {{ with $title }}<p class="display-4 mt-3{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+    {{ with $title }}<p class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
     {{ if $paginate }}
         <div class="row {{ $colGrid }}">
             {{ $paginator := $page.Paginate $list }}
