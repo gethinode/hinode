@@ -132,23 +132,14 @@
 
     {{- range $none := $modes -}}
         {{- if ne $none $mode -}}
-            {{- $outerClass = printf "%s d-none-%s" $outerClass $none -}}
+            {{- $outerClass = printf "%s d-none-%s" (or $outerClass "") $none -}}
         {{- end -}}
     {{- end -}}
 
     {{- if $caption -}}
-        <figure class="figure {{ $outerClass }}">
-            <img class="figure-img img-fluid {{ $innerClass }}"
-            {{ with $imgset -}}
-            srcset="{{ . }}"
-            sizes="100vw"
-            {{- end }}
-            src="{{ $fallbackURL }}"
-            alt="{{ $title }}">
-            <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
-        </figure>
-    {{- else -}}
-        <div class="{{ with $ratio }}ratio ratio-{{ . }}{{ end }} {{ $outerClass }}">
+        <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
+    {{ end }}
+        <div class="{{ with $ratio }}ratio ratio-{{ . }}{{ end }}{{ if not $caption }} {{ $outerClass }}{{ end }}">
             <img class="img-fluid {{ $innerClass }}"
                 {{ with $imgset -}}
                 srcset="{{ . }}"
@@ -157,7 +148,10 @@
                 src="{{ $fallbackURL }}"
                 alt="{{ $title }}">
         </div>
-    {{- end -}}
+    {{- if $caption -}}
+        <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
+    </figure>
+{{- end -}}
 {{- end -}}
 
 <!-- Initiate the regular or color-mode image -->
