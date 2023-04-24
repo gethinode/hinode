@@ -1,45 +1,36 @@
 +++
 title = "Traditional Tattoos"
-date = "2023-04-17T20:36:56+0530"
-author = "Tattoo Artist"
+date = "2023-04-24T10:30:13+0530"
+author = "Marine"
 authorTwitter = ""
 cover = ""
-tags = ['Japan', 'Indonesia', 'United States of America']
+tags = ['United States of America', 'US', 'Southern']
 keywords = ['Traditional', 'tattoos']
-description = "Traditional tattoos Popular in the United States and Japan"
+description = "Traditional tattoos Popular in the US, specifically in the Western and Southern regions"
 showFullContent = false
 readingTime = false
 hideComments = false
 color = ""
 draft = false
+thumbnail = 'img/tattoo/hV2KigoV0Ww.jpg'
+photoCredits = '<a href="https://unsplash.com/@donovan_valdivia">Andrew Valdivia</a>'
+photoSource = '<a href="https://unsplash.com/photos/hV2KigoV0Ww">Unsplash</a>'
 +++
-## Traditional Tattoos - Accurate Facts 
+## {{< fa vault >}} Traditional Tattoos - Accurate Facts 
 {{< alert color="success" dismissible="false" >}}  
-1. Traditional tattoos in the United States typically feature bold lines, bright colors, and classic Americana imagery like eagles, anchors, and pin-up girls.  
-1. Traditional tattoos in Japan are known as irezumi and have a long history dating back to the Edo period. These tattoos often feature images of mythological creatures, floral designs, and scenes from Japanese folklore.  
-1. Both American and Japanese traditional tattoos were originally hand-poked using a technique called tebori, but today they are commonly done with electric tattoo machines.  
+1. Traditional tattoos in the US are characterized by bold, black outlines and a limited color palette of red, yellow, green and blue.  
+1. The designs for Traditional tattoos are often inspired by nautical or maritime themes, such as anchors, ships, mermaids and swallows.  
+1. Traditional tattoos have a rich history in American culture, dating back to the early 20th century and being popularized by tattoo artists such as Norman 'Sailor Jerry' Collins.  
 {{< /alert >}}  
-## Traditional tattoos  
+## {{< fa pen-to-square >}} Traditional tattoos  
 
-Traditional Tattoos: A Pop Cultural Exchange Between United States and Japan
-
-The origin of tattoos can be traced back to ancient civilizations, but traditional tattoos have undoubtedly remained steadfast in popularity. For both the United States and Japan, traditional tattoos have become intertwined in popular culture as a form of personal expression and art.
-
-In the United States, traditional tattoos are largely associated with sailors who would get inked during their travels. Traditional American tattoos feature bold lines and bright colors, often depicting patriotic symbols or nautical themes. From the 1940s to the 1960s, tattoos became more mainstream in American culture, with many military men and women getting tattoos as a symbol of unity and camaraderie.
-
-In Japan, traditional tattoos, known as irezumi, are deeply rooted in the country's history and culture. Irezumi originally served as a form of punishment or marking for criminals, but evolved into a spiritual and artistic practice. Traditional Japanese tattoos often depict mythical creatures, such as dragons and koi fish, or scenes from nature, such as cherry blossom trees.
-
-Traditional tattoos from both the United States and Japan have become sought after by tattoo enthusiasts, further bridging the cultural gap between the two countries. Many tattoo artists have even incorporated elements from both traditional American and Japanese tattoos, creating a fusion style.
-
-However, it is important to note that traditional tattoos hold significant cultural and historical value for both the United States and Japan. It is essential to approach traditional tattooing with understanding and respect for the cultural and historical significance behind each design.
-
-In conclusion, traditional tattoos have become a popular form of expression and art in both the United States and Japan. While the two styles may differ in visual elements, their cultural significance unifies them as a testament to the power of personal expression.  
-{{< carousel class="col-sm-12                        col-lg-8 mx-auto" >}} 
-{{< img src="img/cf0bbe1dab2d424bb7658bcd1dab4e4c/cf0bbe1dab2d424bb7658bcd1dab4e4c-traditional-tattoos_4.jpg"                             caption="Traditional tattoos"                                 >}} 
-{{< img src="img/cf0bbe1dab2d424bb7658bcd1dab4e4c/cf0bbe1dab2d424bb7658bcd1dab4e4c-traditional-tattoos_3.jpg"                             caption="Traditional tattoos"                                 >}} 
-{{< img src="img/cf0bbe1dab2d424bb7658bcd1dab4e4c/cf0bbe1dab2d424bb7658bcd1dab4e4c-traditional-tattoos_0.jpg"                             caption="Traditional tattoos"                                 >}} 
-{{< img src="img/cf0bbe1dab2d424bb7658bcd1dab4e4c/cf0bbe1dab2d424bb7658bcd1dab4e4c-traditional-tattoos_1.jpg"                             caption="Traditional tattoos"                                 >}} 
-{{< img src="img/cf0bbe1dab2d424bb7658bcd1dab4e4c/cf0bbe1dab2d424bb7658bcd1dab4e4c-traditional-tattoos_2.jpg"                             caption="Traditional tattoos"                                 >}} 
+Traditional tattoos have been gaining popularity in the US, especially in the Western and Southern regions. These tattoos are often bold and colorful, with designs that are rooted in American and European tattooing traditions. While modern styles of tattooing have become more prevalent in recent years, traditional tattoos continue to hold a special appeal for many people.  Many traditional tattoo designs are inspired by sailor and military culture, as well as by folk art and Americana. These tattoos often feature images of anchors, swallows, ships, and other maritime symbols. Other common traditional designs include animals, flowers, and other motifs that have been popular in tattooing for decades.  One reason for the popularity of traditional tattoos is their timeless appeal. While other styles of tattooing may come and go in popularity, traditional designs have stood the test of time. They are classic and enduring, and can be adapted to suit any individual's taste or personality. Additionally, traditional tattoos often have a sense of history and heritage that many people find appealing.  Another reason for the popularity of traditional tattoos is their association with rebellion and non-conformity. In the past, getting a tattoo was seen as a radical act, and only certain groups of people (such as sailors and bikers) were known for having them. Today, tattoos are much more mainstream, but traditional designs still carry a sense of edginess and individuality.  Finally, traditional tattoos are often seen as a way to pay homage to the past. They can be a way to connect with one's ancestry, or to honor the culture and traditions of previous generations. In a fast-paced world that is constantly changing, traditional tattoos can provide a sense of continuity and stability.  In conclusion, traditional tattoos are a popular and enduring style of tattooing in the US. Their timeless designs, sense of history and heritage, and association with rebellion and non-conformity make them appealing to a wide range of people. Whether one is interested in connecting with the past, expressing individuality, or simply appreciating the artistry of tattooing, traditional tattoos have something to offer.  
+## {{< fa images >}} Traditional Tattoos - Gallery{{< carousel class="col-sm-12                        col-lg-8 mx-auto" >}} 
+{{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-traditional-tattoos_3.jpg"                             caption="Traditional tattoos"                                 >}} 
+{{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-traditional-tattoos_4.jpg"                             caption="Traditional tattoos"                                 >}} 
+{{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-traditional-tattoos_2.jpg"                             caption="Traditional tattoos"                                 >}} 
+{{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-traditional-tattoos_0.jpg"                             caption="Traditional tattoos"                                 >}} 
+{{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-traditional-tattoos_1.jpg"                             caption="Traditional tattoos"                                 >}} 
 {{< /carousel >}}  
 ## So You Want An American Traditional Tattoo | Tattoo Styles  
 
@@ -51,29 +42,29 @@ Tattoo artist, Myke Chambers, tells us what makes an American Traditional tattoo
 100 Traditional American Tattoos For Men.  
 
 {{< youtube id="wr6yrQohd-Y" width="50%" title="100 Traditional American Tattoos For Men" >}}
-## Questions Answered - Traditional Tattoos  
+## {{< fa plus >}} Traditional Tattoos Trivia 
 {{< accordion >}}  
   {{< accordion-item header="What is a traditional tattoo?" show="true" >}}  
-    Traditional tattoos are forms of body art that have been practiced for centuries and are still popular today. These tattoos are characterized by bold lines, bright colors, and simple designs.  
+    Traditional tattoos, also known as Americana tattoos, are a style of tattoo art that originated in the US in the early 1900s. Bold lines, bright colors, and simple designs are the hallmark of this style.  
   {{< /accordion-item >}}  
-  {{< accordion-item header="What are some traditional tattoo designs?" show="false" >}}  
-    Traditional tattoo designs include roses, anchors, eagles, skulls, panthers, and snakes. These designs are often done using bold lines and bright colors.  
+  {{< accordion-item header="What is the significance of traditional tattoos?" show="false" >}}  
+    Traditional tattoos are often used to express loyalty to a particular group or organization, such as the military or a biker gang. They may also represent a specific cultural or religious symbol, or simply be a form of self-expression and personal style.  
   {{< /accordion-item >}}  
-  {{< accordion-item header="What is the significance of traditional tattoos in the United States?" show="false" >}}  
-    Traditional tattoos have a long history in the United States and were popularized by sailors in the 19th and 20th centuries. They were seen as a way to show loyalty to one's ship or branch of service, and also as a form of self-expression.  
+  {{< accordion-item header="What are some popular traditional tattoo designs?" show="false" >}}  
+    Common designs include the anchor, eagle, skull, rose, pin-up girl, and various nautical and military symbols. Many traditional tattoos also feature slogans or phrases, such as 'True Love' or 'Semper Fi.'  
   {{< /accordion-item >}}  
-  {{< accordion-item header="What is the significance of traditional tattoos in Japan?" show="false" >}}  
-    Traditional tattoos in Japan have been practiced for centuries and were used to mark criminals and outcasts. Today, these tattoos are still popular and are seen as a form of art and expression. They often feature images from Japanese mythology, such as dragons and koi fish.  
+  {{< accordion-item header="What colors are typically used in traditional tattoos?" show="false" >}}  
+    Bold, bright colors such as red, blue, yellow, green, and black are commonly used in traditional tattoos. These colors are often set against a solid black outline, creating a striking and instantly recognizable look.  
   {{< /accordion-item >}}  
-  {{< accordion-item header="What is the process for getting a traditional tattoo?" show="false" >}}  
-    Getting a traditional tattoo typically involves working with a skilled artist to create a design that is meaningful and fitting to the individual. The process itself involves using a needle to inject ink into the skin, which can be painful and involve a significant healing process.  
+  {{< accordion-item header="Are traditional tattoos still popular today?" show="false" >}}  
+    Yes, traditional tattoos continue to be a popular tattoo style today, particularly in the Western and Southern regions of the US. Many tattoo artists enjoy working with traditional designs, and some specialize exclusively in this style.  
   {{< /accordion-item >}}  
 {{< /accordion >}}  
-## Traditional Tattoos - Marvelous Myths!  
+## {{< fa hand >}} Traditional Tattoos - Mind-Blowing Myths!  
 {{< alert color="info" dismissible="false" >}}  
-1. Traditional tattoos are only for men  
-1. Traditional tattoos have no meaning and are just random designs  
-1. Traditional tattoos are painful and take a long time to heal  
-1. Traditional tattoos are only done by unprofessional artists  
-1. Traditional tattoos are a dying art form and no longer relevant in modern society  
+1. Traditional tattoos are only for sailors and bikers  
+1. Traditional tattoos are always black and red  
+1. Traditional tattoos have no meaning and are just for decoration  
+1. Traditional tattoos are outdated and no longer popular  
+1. Traditional tattoos are only suitable for men and not for women  
 {{< /alert >}}  
