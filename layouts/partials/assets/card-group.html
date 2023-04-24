@@ -91,82 +91,50 @@
 
 <div class="container-fluid p-4 px-xxl-0">
     {{ with $title }}<p class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+    {{ $paginator := "" }}
     {{ if $paginate }}
-        <div class="row {{ $colGrid }}">
-            {{ $paginator := $page.Paginate $list }}
-            {{ $list = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
-            {{ range $index, $element := $list }}
-                {{- $params := (dict
-                    "class" (printf "h-100 %s" $class)
-                    "color" $color
-                    "padding" $padding
-                    "header" $header
-                    "footer" $footer
-                    "orientation" $orientation
-                )
-                }}
-                {{ if $element.IsPage }}
-                    {{ $params = merge $params (dict "path" $element.File.Path) }}
-                {{ else }}
-                    {{ $params = merge $params (dict
-                        "title" $element.Title
-                        "href" (or $element.Permalink "#!")
-                        "description" $element.Description
-                        "thumbnail" $element.Params.thumbnail
-                        "icon" $element.Params.icon
-                    ) }}
-                {{ end }}
+        {{ $paginator = $page.Paginate $list }}
+        {{ $list = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
+    {{ end }}
 
+    <div class="row {{ $colGrid }}">
+        {{ range $index, $element := $list }}
+            {{- $params := (dict
+                "class" (printf "h-100 %s" $class)
+                "color" $color
+                "padding" $padding
+                "header" $header
+                "footer" $footer
+                "orientation" $orientation
+            ) -}}
+            {{- if $element.IsPage -}}
+                {{- $params = merge $params (dict "path" $element.File.Path) -}}
+            {{- else -}}
+                {{- $params = merge $params (dict
+                    "title" $element.Title
+                    "href" (or $element.Permalink "#!")
+                    "description" $element.Description
+                    "thumbnail" $element.Params.thumbnail
+                    "icon" $element.Params.icon
+                ) -}}
+            {{- end -}}
 
-                <div class="col pt-3 pb-3">
-                    {{- partial "assets/card.html" $params -}}
+            <div class="col pt-3 pb-3">
+                {{- partial "assets/card.html" $params -}}
+            </div>
+            {{- if and (lt $index (sub $max 1)) $separator -}}
+                <div class="col d-block d-sm-none">
+                    <hr>
                 </div>
-                {{- if and (lt $index (sub $max 1)) $separator -}}
-                    <div class="col d-block d-sm-none">
-                        <hr>
-                    </div>
-                {{- end -}}
-            {{ end }}
-        </div>
+            {{- end -}}
+        {{- end -}}
+    </div>
+
+    {{ if $paginate }}
         {{- if gt $paginator.TotalPages 1 -}}
             <div class="pt-3">{{ partial "assets/pagination.html" $page }}</div>
         {{- end -}} 
     {{ else }}
-        <div class="row {{ $colGrid }}">
-            {{ range $index, $element := $list }}
-
-                {{- $params := (dict
-                    "class" (printf "h-100 %s" $class)
-                    "color" $color
-                    "padding" $padding
-                    "header" $header
-                    "footer" $footer
-                    "orientation" $orientation
-                )
-                }}
-                {{ if $element.IsPage }}
-                    {{ $params = merge $params (dict "path" $element.File.Path) }}
-                {{ else }}
-                    {{ $params = merge $params (dict
-                        "title" $element.Title
-                        "href" (or $element.Permalink "#!")
-                        "description" $element.Description
-                        "thumbnail" $element.Params.thumbnail
-                        "icon" $element.Params.icon
-                    ) }}
-                {{ end }}
-
-
-                <div class="col pt-3 pb-3">
-                    {{- partial "assets/card.html" $params -}}
-                </div>
-                {{- if and (lt $index (sub $max 1)) $separator -}}
-                    <div class="col d-block d-sm-none">
-                        <hr>
-                    </div>
-                {{- end -}}
-            {{ end }}
-        </div>
         {{ if gt $count $max }}
             <a class="btn btn-outline-primary" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
         {{ end }}
