@@ -34,12 +34,12 @@
     sidebar = true
 # toml-docs-end navigation
 
-# toml-docs-start list
-[list]
-    [blog]
+# toml-docs-start sections
+[sections]
+    [sections.blog]
         title = "Blog"
         sort = "date"
-        reverse = false
+        reverse = true
         cols = 3
         color = ""
         padding = "0"
@@ -49,7 +49,7 @@
         style = "border-0 card-zoom"
         homepage = 3
         separator = true
-    [projects]
+    [sections.projects]
         title = "Projects"
         sort = "title"
         reverse = false
@@ -62,7 +62,7 @@
         style = "border-1 card-emphasize"
         homepage = 3
         separator = false
-# toml-docs-end list
+# toml-docs-end sections
 
 [favicon]
     logo = "img/favicon.png"
