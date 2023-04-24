@@ -17,7 +17,7 @@ enableInlineShortcodes = true
 ignoreErrors = ["error-remote-getjson"]
 
 # toml-docs-start timeout
-timeout = "60s"
+timeout = "120s"
 # toml-docs-end timeout
 
 # toml-docs-start language
