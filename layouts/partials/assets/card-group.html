@@ -94,22 +94,32 @@
     {{ if $paginate }}
         <div class="row {{ $colGrid }}">
             {{ $paginator := $page.Paginate $list }}
-            {{ range $index, $element := first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
-                <div class="col pt-3 pb-3">
-                    {{- partial "assets/card.html" (dict
+            {{ $list = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
+            {{ range $index, $element := $list }}
+                {{- $params := (dict
+                    "class" (printf "h-100 %s" $class)
+                    "color" $color
+                    "padding" $padding
+                    "header" $header
+                    "footer" $footer
+                    "orientation" $orientation
+                )
+                }}
+                {{ if $element.IsPage }}
+                    {{ $params = merge $params (dict "path" $element.File.Path) }}
+                {{ else }}
+                    {{ $params = merge $params (dict
                         "title" $element.Title
                         "href" (or $element.Permalink "#!")
                         "description" $element.Description
                         "thumbnail" $element.Params.thumbnail
                         "icon" $element.Params.icon
-                        "class" (printf "h-100 %s" $class)
-                        "color" $color
-                        "padding" $padding
-                        "header" $header
-                        "footer" $footer
-                        "orientation" $orientation
-                        )
-                    -}}
+                    ) }}
+                {{ end }}
+
+
+                <div class="col pt-3 pb-3">
+                    {{- partial "assets/card.html" $params -}}
                 </div>
                 {{- if and (lt $index (sub $max 1)) $separator -}}
                     <div class="col d-block d-sm-none">
@@ -124,21 +134,31 @@
     {{ else }}
         <div class="row {{ $colGrid }}">
             {{ range $index, $element := $list }}
-                <div class="col pt-3 pb-3">
-                    {{- partial "assets/card.html" (dict
+
+                {{- $params := (dict
+                    "class" (printf "h-100 %s" $class)
+                    "color" $color
+                    "padding" $padding
+                    "header" $header
+                    "footer" $footer
+                    "orientation" $orientation
+                )
+                }}
+                {{ if $element.IsPage }}
+                    {{ $params = merge $params (dict "path" $element.File.Path) }}
+                {{ else }}
+                    {{ $params = merge $params (dict
                         "title" $element.Title
                         "href" (or $element.Permalink "#!")
                         "description" $element.Description
                         "thumbnail" $element.Params.thumbnail
                         "icon" $element.Params.icon
-                        "class" (printf "h-100 %s" $class)
-                        "color" $color
-                        "padding" $padding
-                        "header" $header
-                        "footer" $footer
-                        "orientation" $orientation
-                        )
-                    -}}
+                    ) }}
+                {{ end }}
+
+
+                <div class="col pt-3 pb-3">
+                    {{- partial "assets/card.html" $params -}}
                 </div>
                 {{- if and (lt $index (sub $max 1)) $separator -}}
                     <div class="col d-block d-sm-none">
