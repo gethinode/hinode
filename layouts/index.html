@@ -8,8 +8,8 @@
     {{- range $index, $section := site.Params.home.sections -}}
         {{- $pages := where site.RegularPages "Type" "in" $section -}}
         {{- $sectionURL := "" -}}
-        {{- range $page := first 1 $pages -}}
-            {{- $sectionURL = $page.Parent.RelPermalink -}}
+        {{- range $p := first 1 $pages -}}
+            {{- $sectionURL = $p.Parent.RelPermalink -}}
         {{- end -}}
 
         {{- $moreTitle := (T (printf "more%s" (strings.FirstUpper $section))) -}}
@@ -21,9 +21,5 @@
             "moreTitle" $moreTitle
             "sectionURL" $sectionURL)
         -}}
-    {{- end -}}
-
-    {{- range $index, $section := site.Params.home.snippets -}}
-        {{- partial "assets/snippet-list.html" (dict "page" $page "section" $section) -}}
     {{- end -}}
 {{- end -}}

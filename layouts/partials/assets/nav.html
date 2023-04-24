@@ -19,9 +19,14 @@
     {{- errorf "Invalid value for param 'page'" -}}
 {{- end -}}
 
+{{- $id := "0" -}}
+{{- with .id -}}
+    {{ $id = . }}
+{{ end }}
+
 {{ $list := .list }}
 {{- if ne (printf "%T" $list) "resource.Resources" -}}
-    {{- errorf "Invalid value for param 'items'" -}}
+    {{- errorf "Invalid value for param 'list'" -}}
 {{- end -}}
 
 {{- $title := .title -}}
@@ -30,33 +35,36 @@
 
 {{ $vertical := false }}
 {{ $type := "pills" }}
-{{- $id := .Ordinal -}}
 
-{{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
-<div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
-    {{- range $index, $item := $list -}}
-        {{ $show := eq $index 0}}
-        <button class="nav-link text-nowrap{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
-                type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
-            {{ $item.Title }}
-        </button>
-    {{ end -}}
-</div>
+{{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+<div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto pt-5 pb-5">
 
-<div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-    {{ range $index, $item := $list }}
-        {{ $header := $item.Title }}
-        {{ $body := $item.Content }}
-        {{ $show := eq $index 0}}
-        <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
-            {{- partial "assets/persona.html" (dict  
-                "title" $item.Title
-                "class" $class
-                "color" $color
-                "content" $item.Content
-                "thumbnail" $item.Params.Thumbnail
-            ) -}}
-        </div>    
-    {{ end }}
+    {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
+    <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
+        {{- range $index, $item := $list -}}
+            {{ $show := eq $index 0}}
+            <button class="nav-link text-nowrap{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
+                    type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
+                {{ $item.Title }}
+            </button>
+        {{ end -}}
+    </div>
+
+    <div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+        {{ range $index, $item := $list }}
+            {{ $header := $item.Title }}
+            {{ $body := $item.Content }}
+            {{ $show := eq $index 0}}
+            <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
+                {{- partial "assets/persona.html" (dict  
+                    "title" $item.Title
+                    "class" $class
+                    "color" $color
+                    "content" $item.Content
+                    "thumbnail" $item.Params.Thumbnail
+                ) -}}
+            </div>    
+        {{ end }}
+    </div>
+    {{ if $vertical }}</div>{{ end }}
 </div>
-{{ if $vertical }}</div>{{ end }}
