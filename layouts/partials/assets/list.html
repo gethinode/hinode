@@ -27,18 +27,19 @@
 {{- define "partials/list-img.html" -}}
     {{- $thumbnail := .thumbnail -}}
     {{- $style := .style -}}
-    
-    {{- partial "image.html" (dict "url" $thumbnail "outerClass" $style "mode" true) -}}
+    {{- $mode := .mode -}}
+    {{- partial "image.html" (dict "url" $thumbnail "outerClass" $style "mode" $mode) -}}
 {{- end -}}
 
 {{- $page := .page -}}
 {{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
-    {{- errorf "Invalid value for param 'page'" -}}
+    {{- errorf "partial [assets/list.html] - Invalid value for param 'page'" -}}
 {{- end -}}
 
+{{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
 {{ $list := .list }}
-{{- if ne (printf "%T" $list) "resource.Resources" -}}
-    {{- errorf "Invalid value for param 'items'" -}}
+{{- if not (in $supportedTypes (printf "%T" $list)) -}}
+{{- errorf "partial [assets/list.html] - Invalid value for param 'list'" -}}
 {{- end -}}
 
 {{- $title := .title -}}
@@ -47,7 +48,6 @@
 
 {{ $vertical := false }}
 {{ $type := "pills" }}
-{{- $id := .Ordinal -}}
 
 <div class="d-none d-md-block p-0">
     {{- range $index, $item := $list -}}
@@ -64,10 +64,10 @@
                         {{- $style = "reveal fade-bottom-n5 rotate-n5 ps-3" -}}
                         {{- if $odd }}{{ $style = "reveal fade-bottom-5 rotate-5 pe-3" }}{{ end }}
                     {{ end }}
-                    {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail "style" $style) }}
+                    {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail "style" $style "mode" $item.Params.colormode) }}
                 </div>
                 <div class="col-6{{ if $odd }} order-first{{ end }} psw-lg-5 p-5">
-                    {{ partial "partials/list-content.html" (dict "title" $item.Title "content" $item.Content )}}
+                    {{ partial "partials/list-content.html" (dict "title" $item.Title "content" (or $item.Description $item.Content)) }}
                 </div>
             </div>
         </div>
@@ -83,10 +83,10 @@
             {{ end }}
             <div class="row pt-5 pb-5 align-items-center flex-fill row-cols-2">
                 <div class="col-12 text-center">
-                    {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail)}}
+                    {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail "mode" $item.Params.colormode) }}
                 </div>
                 <div class="col-12 p-3">
-                    {{ partial "partials/list-content.html" (dict "title" $item.Title "content" $item.Content )}}
+                    {{ partial "partials/list-content.html" (dict "title" $item.Title "content" (or $item.Description $item.Content)) }}
                 </div>
             </div>
         </div>

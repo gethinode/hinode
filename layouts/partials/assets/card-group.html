@@ -34,9 +34,11 @@
     {{- errorf "Invalid value for param 'page'" -}}
 {{- end -}}
 
+{{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
 {{ $list := .list }}
-{{- if ne (printf "%T" $list) "page.Pages" -}}
-    {{- errorf "Invalid value for param 'items'" -}}
+{{- if not (in $supportedTypes (printf "%T" $list)) -}}
+    {{ warnf "Type: %T" $list }}
+    {{- errorf "Card-group - Invalid value for param 'list'" -}}
 {{- end -}}
 
 {{- $count := len $list -}}
@@ -95,7 +97,11 @@
             {{ range $index, $element := first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
                 <div class="col pt-3 pb-3">
                     {{- partial "assets/card.html" (dict
-                        "path" $element.File.Path
+                        "title" $element.Title
+                        "href" (or $element.Permalink "#!")
+                        "description" $element.Description
+                        "thumbnail" $element.Params.thumbnail
+                        "icon" $element.Params.icon
                         "class" (printf "h-100 %s" $class)
                         "color" $color
                         "padding" $padding
@@ -113,14 +119,18 @@
             {{ end }}
         </div>
         {{- if gt $paginator.TotalPages 1 -}}
-            {{- partial "assets/pagination.html" $page -}}
+            <div class="pt-3">{{ partial "assets/pagination.html" $page }}</div>
         {{- end -}} 
     {{ else }}
         <div class="row {{ $colGrid }}">
             {{ range $index, $element := $list }}
                 <div class="col pt-3 pb-3">
                     {{- partial "assets/card.html" (dict
-                        "path" $element.File.Path
+                        "title" $element.Title
+                        "href" (or $element.Permalink "#!")
+                        "description" $element.Description
+                        "thumbnail" $element.Params.thumbnail
+                        "icon" $element.Params.icon
                         "class" (printf "h-100 %s" $class)
                         "color" $color
                         "padding" $padding

@@ -11,7 +11,7 @@
 
 {{- $paginate := true -}}
 {{- $sort := "date" -}}
-{{- $reverse := true -}}
+{{- $order := "desc" -}}
 {{- $separator := false -}}
 {{- $orientation := "stacked" -}}
 {{- $cols := 3 -}}
@@ -22,11 +22,12 @@
 {{- $style := "" -}}
 {{- $homepage := 3 -}}
 {{- $background := "" -}}
+{{- $layout := "card" -}}
 
-{{- with (index site.Params $section) -}}
+{{- with (index site.Params.sections $section) -}}
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
     {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
-    {{- if (index . "reverse") }}{{ $reverse = true }}{{ else }}{{ $reverse = false }}{{ end -}}
+    {{- if (index . "reverse") }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
     {{- if (index . "separator") }}{{ $separator = true }}{{ else }}{{ $separator = false }}{{ end -}}
     {{- with index . "orientation" }}{{ $orientation = . }}{{ end -}}
     {{- with index . "cols" }}{{ $cols = . }}{{ end -}}
@@ -37,53 +38,72 @@
     {{- with index . "style" }}{{ $style = . }}{{ end -}}
     {{- with index . "homepage" }}{{ $homepage = . }}{{ end -}}
     {{- with index . "background" }}{{ $background = . }}{{ end -}}
+    {{- with index . "layout" }}{{ $layout = . }}{{ end -}}
 {{- end -}}
 
-{{- $list := where site.RegularPages "Type" "in" $section -}}
-{{- $max := (len $list) -}}
-{{- if $home -}}
-    {{- $paginate = false -}}
-    {{- $max = int (math.Min $homepage $max) -}}
-{{ end -}}
+{{ $list := where site.RegularPages "Type" "in" $section }}
+{{ $max := (len $list) -}}
+{{ if eq $max 0 }}
+    {{- $bundle := site.GetPage $section -}}
+    {{- $list = $bundle.Resources.Match "*" -}}
+    {{- $max = len $list -}}
+{{ end }}
+{{- $list = sort $list (printf "Params.%s" $sort) $order -}}
 
-{{- $cols = int (math.Min $cols $max) -}}
-
-{{- if eq $sort "weight" -}}
-    {{- $list = $list.ByWeight -}}
-{{- else if eq $sort "publication" -}}
-    {{- $list = $list.ByPublishDate -}}
-{{- else if eq $sort "expiration" -}}
-    {{- $list = $list.ByExpiryDate -}}
-{{- else if eq $sort "lastmod" -}}
-    {{- $list = $list.ByLastmod -}}
-{{- else if eq $sort "length" -}}
-    {{- $list = $list.ByLength -}}
-{{- else if eq $sort "title" -}}
-    {{- $list = $list.ByTitle -}}
-{{- else if eq $sort "linktitle" -}}
-    {{- $list = $list.ByLinkTitle -}}
-{{- else if ne $sort "date" -}}
-    {{- $list = $list.ByParam $sort -}}        
+{{- $supportedLayouts := slice "card" "list" "nav" -}}
+{{- if not (in $supportedLayouts $layout) -}}
+    {{- errorf "partial [assets/section-list.html] - Invalid value for param 'layout': %s" $layout -}}
 {{- end -}}
-{{- if $reverse -}}{{- $list = $list.Reverse -}}{{ end -}}
 
-<div class="container-xxl flex-fill p-0{{ with $background }} bg-{{ . }}{{ end }}">
-    {{- partial "assets/card-group.html" (dict 
+{{ if gt $max 0 }}
+    {{- if $home -}}
+        {{- $paginate = false -}}
+        {{- $max = int (math.Min $homepage $max) -}}
+    {{ end -}}
+    {{- $cols = int (math.Min $cols $max) -}}
+
+    {{- $params := (dict 
         "page" $page
         "list" $list
-        "max" $max
-        "cols" $cols
         "title" $title
-        "href" $sectionURL
-        "hrefTitle" $moreTitle
-        "separator" $separator
-        "paginate" $paginate
         "class" $style
-        "orientation" $orientation
         "color" $color
-        "padding" $padding
-        "header" $header
-        "footer" $footer
-        ) 
+        )
     -}}
-</div>
+    {{- $partial := "" -}}
+
+    <div class="container-fluid {{ with $background }} bg-{{ . }}{{  end }}">
+        <div class="container-xxl flex-fill p-0">
+            {{ if eq $layout "card" }}
+                {{- $partial = "assets/card-group.html" -}}
+                {{- $params = merge $params (dict 
+                    "max" $max
+                    "cols" $cols
+                    "href" $sectionURL
+                    "hrefTitle" $moreTitle
+                    "separator" $separator
+                    "paginate" $paginate
+                    "orientation" $orientation
+                    "padding" $padding
+                    "header" $header
+                    "footer" $footer
+                    ) 
+                -}}
+            {{ else if eq $layout "nav" }}
+                {{- $partial = "assets/nav.html" -}}
+                {{- $params = merge $params (dict 
+                    "layout" $layout
+                    "id" $section
+                    ) 
+                -}}
+            {{- else -}}
+                {{- $partial = "assets/list.html" -}}
+                {{- $params = merge $params (dict 
+                    "layout" $layout
+                    ) 
+                -}}
+            {{- end -}}
+            {{- partial $partial $params -}}
+        </div>
+    </div>
+{{- end -}}

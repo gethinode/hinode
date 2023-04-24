@@ -144,11 +144,11 @@
                 </div>
             <div class="col-8">
                 <div class="card-body d-flex p-{{ $padding }} flex-column h-100">
-                    <div>{{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}</div>
+                    {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}</div>{{ end }}
                     <div class="h-100">
                         {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
                     </div>
-                    <div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>
+                    {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>{{ end }}
                 </div>
             </div>
         </div>
@@ -163,9 +163,9 @@
             </div>
         {{- end -}}
         <div class="card-body d-flex flex-column p-{{ $padding }}">
-            {{- partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) -}} 
+            {{ if $page }}{{- partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) -}}{{ end }}
             {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
-            {{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}
+            {{ if $page }}{{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}{{ end }}
         </div>
     </div>
 {{- end -}}
