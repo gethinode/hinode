@@ -24,7 +24,7 @@
 {{- $background := "" -}}
 
 {{- with (index site.Params $section) -}}
-    {{- with index . "title" }}{{ $title = . }}{{ end -}}
+    {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
     {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
     {{- if (index . "reverse") }}{{ $reverse = true }}{{ else }}{{ $reverse = false }}{{ end -}}
     {{- if (index . "separator") }}{{ $separator = true }}{{ else }}{{ $separator = false }}{{ end -}}
