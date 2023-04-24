@@ -19,6 +19,11 @@
     {{- errorf "Invalid value for param 'page'" -}}
 {{- end -}}
 
+{{- $id := "0" -}}
+{{- with .id -}}
+    {{ $id = . }}
+{{ end }}
+
 {{ $list := .list }}
 {{- if ne (printf "%T" $list) "resource.Resources" -}}
     {{- errorf "Invalid value for param 'items'" -}}
@@ -30,7 +35,6 @@
 
 {{ $vertical := false }}
 {{ $type := "pills" }}
-{{- $id := .Ordinal -}}
 
 {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
 <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
