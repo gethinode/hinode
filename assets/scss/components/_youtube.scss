@@ -1,0 +1,42 @@
+// Adapted from https://github.com/gohugoio/hugo/tpl/tplimpl/embedded/templates/shortcodes/vimeo_simple.html
+.__h_video {
+    position: relative;
+    padding-bottom: 56.23%;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    background: #000;
+}
+
+.__h_video img {
+    width: 100%;
+    height: auto;
+    color: #000;
+}
+
+.__h_video .play {
+    height: 72px;
+    width: 72px;
+    left: 50%;
+    top: 50%;
+    margin-left: -36px;
+    margin-top: -36px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}

@@ -1,6 +1,6 @@
 +++
 title = "Yakuza Tattoos"
-date = "2023-04-24T10:30:14+0530"
+date = "2023-04-24T22:33:36+0530"
 author = "Marine"
 authorTwitter = ""
 cover = ""
@@ -16,7 +16,7 @@ thumbnail = 'img/tattoo/DWHzxQd_uOY.jpg'
 photoCredits = '<a href="https://unsplash.com/@thomexinxan">Hung Pham</a>'
 photoSource = '<a href="https://unsplash.com/photos/DWHzxQd_uOY">Unsplash</a>'
 +++
-## {{< fa vault >}} Yakuza Tattoos - Veracious Facts 
+## {{< fas vault >}} Yakuza Tattoos - Trustworthy Facts 
 {{< alert color="success" dismissible="false" >}}  
 1. Yakuza tattoos are usually full-body tattoos, covering the entire back, arms, and chest.  
 1. These tattoos are highly symbolic, with each element representing different meanings, such as loyalty, strength, and perseverance.  
@@ -31,17 +31,16 @@ Yakuza tattoos have been a popular trend in Japan for years. These tattoos, also
 {{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-yakuza-tattoos_3.jpg"                             caption="Yakuza tattoos"                                 >}} 
 {{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-yakuza-tattoos_0.jpg"                             caption="Yakuza tattoos"                                 >}} 
 {{< /carousel >}}  
-## 73-Year-Old Tattoo Artist Is A Legend In Japan  
+## Enjoy these insightful videos on Yakuza tattoos  
+   
+ *Horiyoshi III, given name Yoshihito Nakano, is one of the world's most legendary full-body-tattoo artists.The controversial history of ...* 
 
-Horiyoshi III, given name Yoshihito Nakano, is one of the world's most legendary full-body-tattoo artists.The controversial history of ...  
+{{< youtube id="lrgyYLQP7Vs" class="video" title="73-Year-Old Tattoo Artist Is A Legend In Japan" >}}
+   
+ *Tebori describes the hand-carven technique of Japanese tattooing. It's a traditional method that dates back to the 17th century, but ...* 
 
-{{< youtube id="lrgyYLQP7Vs" width="50%" title="73-Year-Old Tattoo Artist Is A Legend In Japan" >}}
-## How the Yakuza Made Tattoo Culture Illegal in Japan | Under the Ink  
-
-Tebori describes the hand-carven technique of Japanese tattooing. It's a traditional method that dates back to the 17th century, but ...  
-
-{{< youtube id="h9F1BmiTS1I" width="50%" title="How the Yakuza Made Tattoo Culture Illegal in Japan | Under the Ink" >}}
-## {{< fa hand >}} Yakuza Tattoos - Astonishing Myths!  
+{{< youtube id="h9F1BmiTS1I" class="video" title="How the Yakuza Made Tattoo Culture Illegal in Japan | Under the Ink" >}}
+## {{< fa hand >}} Yakuza Tattoos - Unbelievable Myths!  
 {{< alert color="info" dismissible="false" >}}  
 1. All Yakuza members have full-body tattoos  
 1. Yakuza tattoos are purely decorative  

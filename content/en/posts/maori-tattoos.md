@@ -1,6 +1,6 @@
 +++
 title = "Maori Tattoos"
-date = "2023-04-24T10:30:14+0530"
+date = "2023-04-24T22:33:35+0530"
 author = "Marine"
 authorTwitter = ""
 cover = ""
@@ -16,7 +16,7 @@ thumbnail = 'img/tattoo/7ilGcLNBhEo.jpg'
 photoCredits = '<a href="https://unsplash.com/@jordanmarchand">jordan marchand</a>'
 photoSource = '<a href="https://unsplash.com/photos/7ilGcLNBhEo">Unsplash</a>'
 +++
-## {{< fas vault >}} Maori Tattoos - Genuine Facts 
+## {{< fas vault >}} Maori Tattoos - Authentic Facts 
 {{< alert color="success" dismissible="false" >}}  
 1. Maori tattoos are called Tā Moko and were traditionally done using chisels made of bone or shell.  
 1. Tā Moko is a sacred art form in Maori culture and it is used to tell the story of a person's ancestry and social status.  
@@ -31,17 +31,15 @@ Maori tattoos, also known as Ta Moko, have been a significant part of the indige
 {{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-maori-tattoos_2.jpg"                             caption="Maori tattoos"                                 >}} 
 {{< img src="img/a870791d71b545f48812de717e140941/a870791d71b545f48812de717e140941-maori-tattoos_1.jpg"                             caption="Maori tattoos"                                 >}} 
 {{< /carousel >}}  
-## 100 Maori Tattoos For Men  
+## Enjoy these insightful videos on Maori tattoos  
+   
+ *Want to See the World's Best Maori Tattoo designs? Click here to visit our Gallery: ...* 
 
-Want to See the World's Best Maori Tattoo designs? Click here to visit our Gallery: ...  
+{{< youtube id="25M29AWAP7Q" class="video" title="100 Maori Tattoos For Men" >}}
+   
+ *The Māori culture in Auckland is practically synonymous with the culture of New Zealand itself. The country's indigenous ...* 
 
-{{< youtube id="25M29AWAP7Q" >}}
-
-## You&#39;ve seen Maori tattoos before, but getting one is a meaningful cultural event  
-
-The Māori culture in Auckland is practically synonymous with the culture of New Zealand itself. The country's indigenous ...  
-
-{{< youtube id="6uZjux0g-XE" width="50%" title="You&#39;ve seen Maori tattoos before, but getting one is a meaningful cultural event" >}}
+{{< youtube id="6uZjux0g-XE" class="video" title="You&#39;ve seen Maori tattoos before, but getting one is a meaningful cultural event" >}}
 ## {{< fa plus >}} Maori Tattoos Trivia 
 {{< accordion >}}  
   {{< accordion-item header="What are Maori tattoos?" show="true" >}}  
@@ -60,7 +58,7 @@ The Māori culture in Auckland is practically synonymous with the culture of New
     Yes, Maori culture places significant value on respect, so it is important to approach getting a Maori tattoo with respect and sensitivity. It is also important to do research on the cultural meanings and significance of certain designs before getting a tattoo. Additionally, some Maori people may feel that getting a Maori tattoo as a non-indigenous person is cultural appropriation, so it is important to approach the process with cultural sensitivity.  
   {{< /accordion-item >}}  
 {{< /accordion >}}  
-## {{< fa hand >}} Maori Tattoos - Amazing Myths!  
+## {{< fa hand >}} Maori Tattoos - Astonishing Myths!  
 {{< alert color="info" dismissible="false" >}}  
 1. Maori tattoos are just for fashion and don't have any cultural significance.  
 1. Maori tattoos are only for men and not for women.  
