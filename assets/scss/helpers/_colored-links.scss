@@ -1,25 +1,39 @@
-// stylelint-disable function-name-case, declaration-no-important
-
 // scss-docs-start colored-links
-@each $color, $value in $theme-colors {
-    $contrast-color: color-contrast($value);
-    $color-rgb: to-rgb($value);
+$custom-colors: (
+    "primary": "light", 
+    "secondary": "light", 
+    "success": "light", 
+    "danger": "light", 
+    "dark": "light", 
+    "black": "light",
+    "info": "dark", 
+    "warning": "dark", 
+    "light": "dark", 
+    "white": "dark",
+    "body": "adaptive",
+    "body-tertiary": "adaptive"
+);
+
+@each $color, $value in $custom-colors {
+    $main-color: var(--bs-body-color);
+    $emphasize-color: var(--bs-secondary-color);
+
+    @if $value == "light" {
+        $main-color: $white;
+        $emphasize-color: shade-color($main-color, $link-shade-percentage);
+    } @else if $value == "dark" {
+        $main-color: $black;
+        $emphasize-color: tint-color($main-color, $link-shade-percentage);
+    }
 
     .link-bg-#{$color} {
-        color: $contrast-color if($enable-important-utilities, !important, null); 
-        background-color: RGBA($color-rgb, var(--#{$prefix}bg-opacity, 1)) if($enable-important-utilities, !important, null);
+        color: $main-color if($enable-important-utilities, !important, null); 
 
-        @if $link-shade-percentage != 0 {
-            &:hover,
-            &:focus {
-                color: if($contrast-color == $color-contrast-light, 
-                shade-color($contrast-color, $link-shade-percentage),
-                tint-color($contrast-color, $link-shade-percentage))
-                    if($enable-important-utilities, !important, null);
-            }
+        &:hover,
+        &:focus {
+            color: $emphasize-color if($enable-important-utilities, !important, null);
         }
     }
 }
 
 // scss-docs-end colored-links
-// stylelint-enable function-name-case, declaration-no-important

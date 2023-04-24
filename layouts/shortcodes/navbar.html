@@ -7,7 +7,8 @@
     "size"          Optional breakpoint of the navbar toggler, either "xs", "sm", "md" (default), "lg", or "xl".
     "style"         Optional style of the navbar, either "light" (default) or "dark".
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
-                    "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
+                    "danger", "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". The
+                    default color is none.
     "mode"          Optional flag to include a color mode switcher, default is "true" (if dark mode is enabled).
     "search"        Optional flag to include a search input, default is "true".
     "logo"          Optional address of the logo image.
@@ -15,7 +16,7 @@
 -->
 
 {{ $error := false }}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body" "body-tertiary" -}}
 {{ $supportedFlags := slice "true" "false" -}}
 
 {{ $id := add .Ordinal 1 }}

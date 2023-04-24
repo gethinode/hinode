@@ -1,0 +1,33 @@
+<!-- 
+    Displays a custom persona card. The shortcode supports the following arguments:
+    "path"          Required path of the page.
+    "class"         Optional class attribute of the card element, e.g. “w-50”.
+    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", "white",  "black", or "body-tertiary". By default, no color
+                    is specified.
+-->
+
+{{- $error := false -}}
+
+{{- $path := .Get "path" -}}
+{{- $page := .Site.GetPage $path -}}
+{{- if not $page -}}
+    {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
+
+{{- $class := .Get "class" -}}
+
+{{- $color := "" -}}
+{{- with .Get "color" }}{{ $color = . }}{{ end -}}
+{{- if $color -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body-tertiary" -}}
+    {{- if not (in $supportedColors $color) -}}
+        {{- errorf "Invalid value for param 'color': %s" .Position -}}
+        {{- $error = true -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if not $error -}}
+    {{- partial "assets/persona.html" (dict "path" $path "class" $class "color" $color) -}}
+{{- end -}}

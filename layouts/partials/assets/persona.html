@@ -1,0 +1,94 @@
+<!-- 
+    Displays a custom persona card. Either specify a valid path, or set the arguments title, href, content, and
+    thumbnail individually. The latter arguments override any page attributes.
+    
+    The shortcode supports the following arguments:
+    "path"          Optional path of the page, override with other parameters.
+    "title"         Required title of the card.
+    "href"          Optional address for the button or hyperlink.
+    "class"         Optional class attribute of the card element, e.g. “w-50”.
+    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
+                    color is specified.
+    "content"       Optional content of the card.
+    "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+-->
+
+<!-- Inline partial to render the card's body -->
+{{- define "partials/persona-body.html" -}}
+    {{- $title := .title -}}
+    {{- $href := .href -}}
+    {{- $color := .color -}}
+    {{- $content := .content -}}
+    
+    <h3>{{ $title }}</h3>
+    {{ with $content }}<p>{{ . }}</p>{{ end -}}
+{{- end -}}
+
+{{- $page := "" }}
+{{- if .path }}
+    {{- $page = site.GetPage .path }}
+    {{- if not $page }}
+        {{- errorf "Cannot find page: %s" .path -}}
+    {{- end }}
+{{- end }}
+
+{{- $title := .title -}}
+{{- $href := .href -}}
+{{- $content := .content -}}
+{{- $thumbnail := .thumbnail -}}
+
+{{- $color := "" -}}
+{{- with .color }}{{ $color = . }}{{ end -}}
+{{- if $color -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
+    {{- if not (in $supportedColors $color) -}}
+        {{- errorf "Invalid value for param 'color': %s" $color -}}
+    {{- end -}}
+{{- end -}}
+
+{{- with $page -}}
+    {{- if not $title }}{{ $title = .Title }}{{ end -}}
+    {{- if not $href }}{{ $href = .Permalink  }}{{ end -}}
+    {{- if not $content }}{{ $content = .Content }}{{ end -}}
+    {{- if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
+{{- end -}}
+
+{{- $class := .class -}}
+
+<div class="d-none d-md-block">
+    <div class="persona position-relative row mt-5 align-middle p-3">
+        <div class="col-2">
+            <div class="position-absolute top-50 start-0 translate-middle-y col-4 ps-3">
+                {{- if $thumbnail -}}
+                    {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
+                {{ end }}
+            </div>
+        </div>
+        <div class="col-10 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 fs-md-5 fs-6 pe-5 pb-3">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-9">
+                    {{- partial "persona-body.html" (dict "title" $title "href" $href "color" $color "content" $content) -}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-md-none">
+    <div class="persona position-relative row mt-5 align-middle p-3 ptw-5">
+        <div class="col-12">
+            <div class="position-absolute top-25 start-50 translate-middle col-6">
+                {{- if $thumbnail -}}
+                    {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
+                {{ end }}
+            </div>
+        </div>
+        <div class="col-12 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 ptw-lg-5 ptw-3 ptw-sm-4 fs-md-5 fs-6 pb-3">
+            <div class="p-5">
+                {{- partial "persona-body.html" (dict "title" $title "href" $href "color" $color "content" $content) -}}
+            </div>
+        </div>
+    </div>
+</div>

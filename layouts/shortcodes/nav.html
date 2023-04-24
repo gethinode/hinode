@@ -3,12 +3,15 @@
     following arguments:
     "type"          Optional type of the tab group, either "tabs", "pills", or "underline".
     "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
+    "fade"          Optional flag to make tab panes fade in.
     "class":        Optional class attribute of the tab group, e.g. “nav-fill”.
 -->
 
-<!-- TODO: add fade support -->
+{{- $id := printf "nav-%d" .Ordinal -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
 
-{{- $id := .Ordinal -}}
 {{- $class := .Get "class" -}}
 {{ $type := .Get "type" -}}
 {{ $supportedNavTypes := slice "tabs" "pills" "underline" -}}
@@ -28,6 +31,12 @@
     {{ errorf "Invalid value for param 'vertical': %s" $verticalParam -}}
 {{- end -}}
 
+{{ $fadeParam := "false" -}}
+{{ with .Get "fade" }}{{ $fadeParam = . }}{{ end -}}
+{{ if not (in $supportedFlags $fadeParam) -}}
+    {{ errorf "Invalid value for param 'fade': %s" $fadeParam -}}
+{{- end -}}
+
 {{- if and (eq $type "tabs") $vertical -}}
     {{- errorf "Tabs do not support vertical layout" -}}
 {{- end -}}
@@ -40,18 +49,29 @@
     {{- $showID = int (partial "utilities/GetVal.html" (index $showVal 0)) -}}
 {{- end -}}
 
+{{ $disabled := slice -}}
+{{- $disabledVal := findRE "data-disabled-id=\"(.+?)\"" $inner -}}
+{{- range $item := $disabledVal -}}
+    {{- $disabled = $disabled | append (int (partial "utilities/GetVal.html" $item)) -}}
+{{- end -}}
+
+{{- $hasContent := gt (len (findRE "data-has-content=\"true\"" $inner)) 0 -}}
+
 {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
-<div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
+<div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
     {{- range $index, $item := $items -}}
         {{- $header := partial "utilities/GetVal.html" $item -}}
-        <button class="nav-link text-nowrap{{ if eq $index $showID }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
-                type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
+        {{- $itemDisabled := in $disabled $index -}}
+        <button class="nav-link text-nowrap{{ if eq $index $showID }} active{{ end }} {{ if $itemDisabled}} disabled {{end }}" id="{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#{{ $id }}-{{ $index }}" 
+                type="button" role="tab" aria-controls="{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
             {{ $header }}
         </button>
     {{ end -}}
 </div>
 
-<div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-    {{- $inner -}}
-</div>
+{{- if $hasContent -}}
+    <div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+        {{- $inner -}}
+    </div>
+{{- end -}}
 {{ if $vertical }}</div>{{ end }}

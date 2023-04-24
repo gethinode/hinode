@@ -95,11 +95,11 @@ As an example, the following shortcode displays a group of three buttons.
 
 ## Card
 
-As an example, the following shortcode displays a stacked card with icon that links to the [about]({{< ref "about" >}}) page. It includes a custom header.
+As an example, the following shortcode displays a stacked card that links to the [about]({{< ref "about" >}}) page. It includes a custom header.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="w-50" color="light" header="publication" footer="none" */>}}
+{{</* card path="about" padding="3" class="w-50" color="body-tertiary" header="publication" footer="none" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

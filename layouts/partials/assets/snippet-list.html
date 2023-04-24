@@ -1,0 +1,58 @@
+{{- $page := .page }}
+{{- $section := .section }}
+{{- if not $section }}{{ errorf "Missing value for param 'section'" }}{{ end -}}
+{{- $bundle := site.GetPage $section -}}
+
+{{- $title := $bundle.Title -}}
+{{- $sort := "date" -}}
+{{- $order := "desc" -}}
+{{- $style := "" -}}
+{{- $background := "" -}}
+{{- $color := "" -}}
+{{- $layout := "tabs" -}}
+
+{{- with (index site.Params $section) -}}
+    {{- with index . "title" }}{{ $title = . }}{{ end -}}
+    {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
+    {{- if (index . "reverse") }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
+    {{- with index . "style" }}{{ $style = . }}{{ end -}}
+    {{- with index . "background" }}{{ $background = . }}{{ end -}}
+    {{- with index . "color" }}{{ $color = . }}{{ end -}}
+    {{- with index . "layout" }}{{ $layout = . }}{{ end -}}
+{{- end -}}
+
+{{- $list := $bundle.Resources.Match "*" -}}
+{{- $list = sort $list (printf "Params.%s" $sort) $order -}}
+
+<div class="container-fluid {{ with $background }} bg-{{ . }}{{  end }}">
+    <div class="container-xxl flex-fill p-0">
+        {{ if eq $layout "tabs" }}
+            <div class="p-0">
+                {{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto pt-5 pb-5">
+                    {{- partial "assets/nav.html" (dict 
+                        "page" $page
+                        "list" $list
+                        "title" $title
+                        "class" $style
+                        "color" $color
+                        "layout" $layout
+                        ) 
+                    -}}
+                </div>
+            </div>
+        {{- else -}}
+            <div class="p-0">
+                {{- partial "assets/list.html" (dict 
+                    "page" $page
+                    "list" $list
+                    "title" $title
+                    "class" $style
+                    "color" $color
+                    "layout" $layout
+                    ) 
+                -}}
+            </div>
+        {{- end -}}
+    </div>
+</div>

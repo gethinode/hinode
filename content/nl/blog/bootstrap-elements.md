@@ -95,11 +95,11 @@ De volgende shortcode toont een groep van drie knoppen.
 
 ## Card
 
-De volgende shortcode toont een kaart met een icoon dat linkt naar de [over mij]({{< ref "about" >}}) pagina. De kaart bevat een titel.
+De volgende shortcode toont een kaart dat linkt naar de [over mij]({{< ref "about" >}}) pagina. De kaart bevat een titel.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="w-50" color="light" header="publication" footer="none" */>}}
+{{</* card path="about" padding="3" class="w-50" color="body-tertiary" header="publication" footer="none" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -189,6 +189,27 @@ De volgende shortcode toont een plaatje met afgeronde hoeken en een 21x9 verhoud
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* image src="img/flowers.jpg" ratio="21x9" caption="Onderschrift" class="rounded" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+## Nav
+
+De volgende shortcode toont een groep met verticale tabbladen.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+  {{</* nav type="pills" vertical="true" */>}}
+    {{</* nav-item header="Nav Item #1" show="true" */>}}
+    Dit is de inhoud van het eerste element met ondersteuning voor HTML. De waarde <code>show</code>
+    voor het argument <code>class</code> geeft aan dat het element uitgeklapt moet worden.
+    {{</* /nav-item */>}}
+    {{</* nav-item header="Nav Item #2" */>}}
+    Dit is de inhoud van het tweede element. Het ondersteunt ook HTML.
+    {{</* /nav-item */>}}
+    {{</* nav-item header="Nav Item #3" */>}}
+    Dit is de inhoud van het derde element.
+    {{</* /nav-item */>}}
+  {{</* /nav */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

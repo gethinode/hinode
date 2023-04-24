@@ -1,11 +1,11 @@
 {{- define "partials/header.html" -}}
     {{ if site.Params.navigation.breadcrumb }}{{ partial "breadcrumb.html" . }}{{ end -}}
     {{ if in (slice "docs" "minimal") .Layout }}
-        <h1>{{ .Title }}</h1>
+        {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
     {{ else }}
         {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
         {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
-        <h1>{{ .Title }}</h1>
+        {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
         <small class="text-body-secondary text-uppercase">
             {{ $datestr | i18n "postedOnDate" -}}
             {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }} &bull;
@@ -14,9 +14,19 @@
         </small>
 
         <div class="mt-3">
-            {{ range (.GetTerms "tags") -}}
-                <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>    
-            {{ end -}}
+            <div class="d-none-dark">
+                {{ range (.GetTerms "tags") -}}
+                    <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>
+                    &nbsp;
+                {{ end -}}
+            </div>
+            
+            <div class="d-none-light">
+                {{ range (.GetTerms "tags") -}}
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>
+                    &nbsp;
+                {{ end -}}
+            </div>
         </div>
     {{ end }}
 {{ end -}}
@@ -82,7 +92,7 @@
             </div>
         </div>
     
-        <div class="container-fluid">
+        <div class="container-xxl px-3 px-xxl-0">
             <div class="row row-cols-md-2 row-cols-lg-3">
                 <div class="col col-md-3 col-lg-2 d-none pt-5 d-md-block sidebar-overflow sticky-top">
                     {{ partial "assets/sidebar" (dict "page" . "menu" $menu "version" $version) }}
@@ -100,7 +110,7 @@
             </div>
         </div>
     {{ else }}
-        <div class="container-fluid">
+        <div class="container-xxl px-3 px-xxl-0">
             <div class="row row-cols-1 row-cols-sm-3">
                 <div class="col col-md-2 d-none d-md-block"></div>
                 <div class="col col-sm-12 col-md-8">

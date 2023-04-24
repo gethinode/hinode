@@ -5,6 +5,7 @@
     wrapped in a figure if a caption is provided, else the image is wrapped in a div with a ratio constraint. The
     partial supports the following arguments:
     "url":          Required relative url of the image, e.g. "img/example.jpg"
+    "mode":         Optional flag indicating if the image should support color modes.
     "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". If set, the image is
                     resized and cropped to match the ratio. Else the original aspect ratio of the image is kept.
     "outerClass":   Optional class attribute of the outer div element, e.g. "img-wrap".
@@ -13,105 +14,174 @@
     "caption":      Optional figure caption.
 -->
 
+{{- $validRatios := slice "1x1" "4x3" "16x9" "21x9" -}}
+{{- $ratio := .ratio -}}
+{{- $url := .url -}}
+{{- $mode := false -}}
+{{- with .mode -}}
+    {{ $mode = . -}}
+{{- end -}}
+{{- $outerClass := .outerClass -}}
+{{- $innerClass := .innerClass -}}
+{{- $title := .title -}}
+{{- $caption := .caption -}}
+{{- if ne (printf "%T" $mode) "bool" -}}
+    {{- errorf "Invalid value for param 'mode'" -}}
+{{- end -}}
+{{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 
-{{- $validRatios := slice "1x1" "4x3" "16x9" "21x9" }}
-{{ $ratio := .ratio -}}
-{{ $url := .url -}}
-{{ $outerClass := .outerClass -}}
-{{ $innerClass := .innerClass -}}
-{{ $title := .title -}}
-{{ $caption := .caption -}}
-{{ $inner := .inner -}}
 
-{{- $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
-{{ with $img -}}
-    {{ $smDim := "" -}}
-    {{ $mdDim := "" -}}
-    {{ $lgDim := "" -}}
-    {{ $xlDim := "" -}}
-    {{ $xxlDim := "" -}}
-    {{ if eq $ratio "4x3" -}}
-        {{ $smDim = "576x432" -}}
-        {{ $mdDim = "768x576" -}}
-        {{ $lgDim = "992x744" -}}
-        {{ $xlDim = "1200x900" -}}
-        {{ $xxlDim = "1400x1050" -}}
-    {{ else if eq $ratio "1x1" -}}
-        {{ $smDim = "576x576" -}}
-        {{ $mdDim = "768x768" -}}
-        {{ $lgDim = "992x992" -}}
-        {{ $xlDim = "1200x1200" -}}
-        {{ $xxlDim = "1400x1400" -}}
-    {{ else if eq $ratio "16x9" -}}
-        {{ $smDim = "576x324" -}}
-        {{ $mdDim = "768x432" -}}
-        {{ $lgDim = "992x558" -}}
-        {{ $xlDim = "1200x675" -}}
-        {{ $xxlDim = "1400x788" -}}
-    {{ else if eq $ratio "21x9" -}}
-        {{ $smDim = "576x247" -}}
-        {{ $mdDim = "768x329" -}}
-        {{ $lgDim = "992x425" -}}
-        {{ $xlDim = "1200x514" -}}
-        {{ $xxlDim = "1400x600" -}}
-    {{ else }}
-        {{ $smDim = printf "576x%d" (int (math.Round (mul (div 576.0 $img.Width) $img.Height))) -}}
-        {{ $mdDim = printf "768x%d" (int (math.Round (mul (div 768.0 $img.Width) $img.Height))) -}}
-        {{ $lgDim = printf "992x%d" (int (math.Round (mul (div 992.0 $img.Width) $img.Height))) -}}
-        {{ $xlDim = printf "1200x%d" (int (math.Round (mul (div 1200.0 $img.Width) $img.Height))) -}}
-        {{ $xxlDim = printf "1400x%d" (int (math.Round (mul (div 1400.0 $img.Width) $img.Height))) -}}
-    {{ end -}}
+<!-- Generate a fallback image of type jpg -->
+{{- define "partials/image-default.html" -}}
+    {{- $img := .img -}}
+    {{- $ratio := .ratio -}}
+    {{- $width := "1400" -}}
+    {{- $dim := "" -}}
+    {{- $fallback := "" -}}
 
-    {{- $sm := "" -}}
-    {{ $md := "" -}}
-    {{ $lg := "" -}}
-    {{ $xl := "" -}}
-    {{ $xxl := "" -}}
-    {{ $fallback := "" -}}
-    {{ if $ratio }}
-        {{- $sm = ($img.Fill (printf "%s webp" $smDim)) -}}
-        {{ $md = ($img.Fill (printf "%s webp" $mdDim)) -}}
-        {{ $lg = ($img.Fill (printf "%s webp" $lgDim)) -}}
-        {{ $xl = ($img.Fill (printf "%s webp" $xlDim)) -}}
-        {{ $xxl = ($img.Fill (printf "%s webp" $xxlDim)) -}}
-        {{ $fallback = ($img.Fill (printf "%s jpg" $xxlDim)) -}}
-    {{ else }}
-        {{- $sm = ($img.Fit (printf "%s webp" $smDim)) -}}
-        {{ $md = ($img.Fit (printf "%s webp" $mdDim)) -}}
-        {{ $lg = ($img.Fit (printf "%s webp" $lgDim)) -}}
-        {{ $xl = ($img.Fit (printf "%s webp" $xlDim)) -}}
-        {{ $xxl = ($img.Fit (printf "%s webp" $xxlDim)) -}}
-        {{ $fallback = ($img.Fit (printf "%s jpg" $xxlDim)) -}}
-    {{ end}}
+    {{- with $img -}}
+        {{- if eq $ratio "4x3" -}}
+            {{- $dim  = "1400x1050" }}
+        {{- else if eq $ratio "1x1" -}}
+            {{- $dim  = "1400x1400" }}
+        {{- else if eq $ratio "16x9" -}}
+            {{- $dim = "1400x788" -}}
+        {{- else if eq $ratio "21x9" -}}
+            {{- $dim = "1400x600" -}}
+        {{- else -}}
+            {{- $dim = printf "%sx%d" $width (int (math.Round (mul (div (float $width) $img.Width) $img.Height))) -}}
+        {{- end -}}
 
-    {{- with $caption -}}
-        <figure class="figure">
-            <img class="figure-img img-fluid {{ $innerClass }}"
-                srcset="
-                    {{- with $xxl.RelPermalink -}}{{.}} 1400w{{- end -}}
-                    {{- with $xl.RelPermalink -}}, {{.}} 1200w{{- end -}}
-                    {{- with $lg.RelPermalink -}}, {{.}} 992w{{- end -}}
-                    {{- with $md.RelPermalink -}}, {{.}} 768w{{- end -}}
-                    {{- with $sm.RelPermalink -}}, {{.}} 576w{{- end -}}"
-                sizes="100vw"
-                src="{{ $fallback.RelPermalink }}"
-                alt="{{ $title }}">
-            <figcaption class="figure-caption">{{ . | safeHTML }}</figcaption>
-            {{ $inner }}
-        </figure>
-    {{- else -}}
-        <div class="{{ with $ratio }}ratio ratio-{{ . }}{{ end }} {{ $outerClass }}">
-            <img class="img-fluid {{ $innerClass }}"
-                srcset="
-                    {{- with $xxl.RelPermalink -}}{{.}} 1400w{{- end -}}
-                    {{- with $xl.RelPermalink -}}, {{.}} 1200w{{- end -}}
-                    {{- with $lg.RelPermalink -}}, {{.}} 992w{{- end -}}
-                    {{- with $md.RelPermalink -}}, {{.}} 768w{{- end -}}
-                    {{- with $sm.RelPermalink -}}, {{.}} 576w{{- end -}}"
-                sizes="100vw"
-                src="{{ $fallback.RelPermalink }}"
-                alt="{{ $title }}">
-            {{ $inner }}
-        </div>
+        {{- if $ratio -}}
+            {{- $fallback = ($img.Fill (printf "%s jpg" $dim)) -}}
+        {{- else -}}
+            {{- $fallback = ($img.Fit (printf "%s jpg" $dim)) -}}
+        {{- end -}}
+        {{- $clean := path.Ext $img.RelPermalink -}}
+        {{- $ext := path.Ext $img.RelPermalink -}}
+        {{- $fallback = $fallback | resources.Copy (replace $img.RelPermalink $clean (printf "-%s%s" $dim $ext)) -}}
     {{- end -}}
+
+    {{- return $fallback -}}
+{{- end -}}
+
+
+<!-- Generate a image set of type webp -->
+{{- define "partials/image-scaled.html " -}}
+    {{- $img := .img -}}
+    {{- $ratio := .ratio -}}
+    {{- $imgset := "" -}}
+
+    {{- $widths := slice "576" "768" "992" "1200" "1400" -}}
+    {{- $dims := slice -}}
+    {{- with $img -}}
+        {{- if eq $ratio "4x3" -}}
+            {{- $dims  = slice "576x432" "768x576" "992x744" "1200x900"  "1400x1050" -}}
+        {{- else if eq $ratio "1x1" -}}
+            {{- $dims  = slice "576x576" "768x768" "992x992" "1200x1200" "1400x1400" -}}
+        {{- else if eq $ratio "16x9" -}}
+            {{- $dims = slice "576x324"  "768x432" "992x558" "1200x675"  "1400x788" -}}
+        {{- else if eq $ratio "21x9" -}}
+            {{- $dims = slice "576x247"  "768x329" "992x425" "1200x514"  "1400x600" -}}
+        {{- else -}}
+            {{- range $width := $widths -}}
+                {{- $dims = $dims | append (printf "%sx%d" $width (int (math.Round (mul (div (float $width) $img.Width) $img.Height)))) -}}
+            {{- end -}}
+        {{- end -}}
+
+        {{- $scaled := "" -}}
+        {{- range $index, $dim := $dims -}}
+            {{- $clean := path.Ext $img.RelPermalink -}}
+            {{- if $ratio -}}
+                {{- $scaled = $img.Fill (printf "%s webp" $dim) -}}
+            {{- else -}}
+                {{- $scaled = $img.Fit (printf "%s webp" $dim) -}}
+            {{- end -}}
+            {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean (printf "-%s.webp" $dim)) -}}
+            {{- $imgset = printf "%s, %s %sw" $imgset $scaled.RelPermalink (index $widths $index) -}}
+        {{- end -}}
+        {{- $imgset = strings.TrimPrefix ", " $imgset -}}
+    {{- end -}}
+
+    {{- return $imgset -}}
+{{- end -}}
+
+<!-- Define the img with optional caption -->
+{{- define "partials/image-definition.html" -}}
+    {{- $ratio := .ratio -}}
+    {{- $url := .url -}}
+    {{- $outerClass := .outerClass -}}
+    {{- $innerClass := .innerClass -}}
+    {{- $title := .title -}}
+    {{- $caption := .caption -}}
+    {{- $fallbackURL := "" -}}
+    {{- $imgset := "" -}}
+    {{- $mode := .mode -}}
+    {{- $modes := .modes -}}
+
+    {{- if hasSuffix $url "svg" -}}
+        {{- $fallbackURL = $url -}}
+    {{- else -}}
+        {{- $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
+        {{- if $img -}}
+            {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio) -}}
+            {{- $fallbackURL = $fallback.RelPermalink -}}
+            {{- $imgset = partial "partials/image-scaled.html " (dict "img" $img "ratio" $ratio) -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- range $none := $modes -}}
+        {{- if ne $none $mode -}}
+            {{- $outerClass = printf "%s d-none-%s" (or $outerClass "") $none -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- if $caption -}}
+        <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
+    {{ end }}
+        <div class="{{ with $ratio }}ratio ratio-{{ . }}{{ end }}{{ if not $caption }} {{ $outerClass }}{{ end }}">
+            <img class="img-fluid {{ $innerClass }}"
+                {{ with $imgset -}}
+                srcset="{{ . }}"
+                sizes="100vw"
+                {{- end }}
+                src="{{ $fallbackURL }}"
+                alt="{{ $title }}">
+        </div>
+    {{- if $caption -}}
+        <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
+    </figure>
+{{- end -}}
+{{- end -}}
+
+<!-- Initiate the regular or color-mode image -->
+{{- if $mode -}}
+    {{- $ext := path.Ext $url -}}
+    {{- $base := strings.TrimSuffix $ext $url -}}
+    {{- range $suffix := $modes -}}
+        {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
+    {{- end -}}
+
+    {{- range $suffix := $modes -}}
+        {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
+        {{- partial "partials/image-definition.html" (dict 
+            "ratio" $ratio
+            "url" $image
+            "outerClass" $outerClass
+            "innerClass" $innerClass
+            "title" $title
+            "caption" $caption
+            "mode" $suffix
+            "modes" $modes)
+        -}}
+    {{- end -}}
+{{- else -}}
+    {{- partial "partials/image-definition.html" (dict 
+        "ratio" $ratio
+        "url" $url
+        "outerClass" $outerClass
+        "innerClass" $innerClass
+        "title" $title
+        "caption" $caption)
+    -}}
 {{- end -}}

@@ -5,7 +5,8 @@
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "fixed"         Optional flag to indicate the navbar should stick to the top, defaults to false.
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
-                    "danger", "warning", "info", "light", "dark", "white" or "black". The default color is none.
+                    "danger", "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". The
+                    default color is none.
     "mode"          Optional flag to include a color mode switcher, default is "true" (if dark mode is enabled).
     "search"        Optional flag to include a search input, default is "true".
     "logo"          Optional address of the logo image, defaults to the parameter "logo" set in the "main" section of
@@ -83,7 +84,7 @@
 {{- $color := "" -}}
 {{- with .color -}}
     {{- $color = . -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" -}}
+    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
     {{- if not (in $supportedColors $color) -}}
         {{- errorf "Invalid value for param 'color': %s" $color -}}
     {{- end -}}
@@ -124,7 +125,7 @@
 {{- $post := .Post -}}
 
 <nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-4">
-	<div class="container-fluid p-0">
+	<div class="container-xxl p-0">
         <!-- Insert sidebar toggler when applicable -->
         <div class="d-flex">
             {{- if $page.Scratch.Get "sidebar" -}}

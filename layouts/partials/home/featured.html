@@ -1,18 +1,20 @@
-<div class="container-fluid flex-fill bg-primary bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} p-4">
-    <div class="row row-cols-1 row-cols-sm-3 align-items-center pt-5 pb-5 h-100">
-        <div class="col col-md-2 d-none d-md-block"></div>
-        <div class="col col-sm-6 col-md-4 text-center text-sm-start">
-            <p class="fs-1 fw-bold">{{ .Title }}</p>
-            <p>{{ .Content }}</p>
-            {{ if .Site.Params.feature.link }}
-                <p><a class="btn btn-primary" href="{{ .Site.Params.feature.link | safeURL }}" role="button">{{ .Site.Params.feature.caption | default (T "about") }}</a></p>
-            {{ end }}
+<div class="container-fluid flex-fill bg-primary bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }}">
+    <div class="container-xxl p-4">
+        <div class="row row-cols-1 row-cols-sm-3 align-items-center pt-5 pb-5 h-100">
+            <div class="col col-md-2 d-none d-md-block"></div>
+            <div class="col col-sm-6 col-md-4 text-center text-sm-start">
+                <p class="display-4">{{ .Title }}</p>
+                <p>{{ .Content }}</p>
+                {{ if .Site.Params.feature.link }}
+                    <p><a class="btn btn-primary" href="{{ .Site.Params.feature.link | safeURL }}" role="button">{{ .Site.Params.feature.caption | default (T "about") }}</a></p>
+                {{ end }}
+            </div>
+            <div class="col col-sm-6 col-md-4">
+                {{ if .Site.Params.home.featurePhoto }}
+                    {{- partial "image.html" (dict "url" .Site.Params.home.featurePhoto "ratio" "4x3" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Site.Title) -}}
+                {{ end }}
+            </div>
+            <div class="col col-md-2 d-none d-md-block"></div>
         </div>
-        <div class="col col-sm-6 col-md-4">
-            {{ if .Site.Params.home.featurePhoto }}
-                {{- partial "image.html" (dict "url" .Site.Params.home.featurePhoto "ratio" "4x3" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Site.Title) -}}
-            {{ end }}
-        </div>
-        <div class="col col-md-2 d-none d-md-block"></div>
     </div>
 </div>

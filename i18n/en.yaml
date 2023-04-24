@@ -68,9 +68,9 @@
 
 # 404 page
 - id: pageNotFound
-  translation: "Oops! This page doesn't exist. Try going back to our"
+  translation: "The page you are looking for does not exist or another error occurred. Try going back to our"
 - id: pageNotFoundTitle
-  translation: "Not found"
+  translation: "Page not found"
 - id: pageNotFoundHome
   translation: "home page"
 

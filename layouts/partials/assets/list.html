@@ -1,0 +1,94 @@
+<!-- 
+    Displays a list items with a thumbnail alternating between left and right alignment. The partial supports the
+    following arguments:
+    "page"          Required context of the current page.
+    "list"          Required array of pages.
+    "title"         Optional title of the card group.
+    "type"          Optional type of the tab group, either "tabs", "pills", or "underline".
+    "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
+    "class":        Optional class attribute of the tab group, e.g. “nav-fill”.
+
+    In addition, the following arguments are passed to the individual tabs.
+    "class"         Optional class attribute of the tab element, e.g. “w-50”.
+    "color":        Optional theme color of the tab, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", or "body". By default, no color is specified.
+-->
+
+<!-- Inline partial to render the list item's content -->
+{{- define "partials/list-content.html" -}}
+    {{- $title := .title -}}
+    {{- $content := .content -}}
+    
+    <h2>{{ $title }}</h2>
+    <div class="fs-md-5 fs-6">{{ $content }}</div>
+{{- end -}}
+
+<!-- Inline partial to render the list item's thumbnail -->
+{{- define "partials/list-img.html" -}}
+    {{- $thumbnail := .thumbnail -}}
+    {{- $style := .style -}}
+    
+    {{- partial "image.html" (dict "url" $thumbnail "outerClass" $style "mode" true) -}}
+{{- end -}}
+
+{{- $page := .page -}}
+{{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
+    {{- errorf "Invalid value for param 'page'" -}}
+{{- end -}}
+
+{{ $list := .list }}
+{{- if ne (printf "%T" $list) "resource.Resources" -}}
+    {{- errorf "Invalid value for param 'items'" -}}
+{{- end -}}
+
+{{- $title := .title -}}
+{{- $class := .class -}}
+{{- $color := .color -}}
+
+{{ $vertical := false }}
+{{ $type := "pills" }}
+{{- $id := .Ordinal -}}
+
+<div class="d-none d-md-block p-0">
+    {{- range $index, $item := $list -}}
+        {{- $odd := eq (mod $index 2) 1 -}}
+        <div class="container ratio-section d-flex flex-column">
+            {{ if eq $index 0 }}
+                {{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+            {{ end }}
+
+            <div class="row pt-5 pb-5 align-items-center flex-fill row-cols-2">
+                <div class="col-6{{ if $odd }} order-last{{ end }}">
+                    {{- $style := "reveal fade-bottom" -}}
+                    {{ if $item.Params.tilted }}
+                        {{- $style = "reveal fade-bottom-n5 rotate-n5 ps-3" -}}
+                        {{- if $odd }}{{ $style = "reveal fade-bottom-5 rotate-5 pe-3" }}{{ end }}
+                    {{ end }}
+                    {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail "style" $style) }}
+                </div>
+                <div class="col-6{{ if $odd }} order-first{{ end }} psw-lg-5 p-5">
+                    {{ partial "partials/list-content.html" (dict "title" $item.Title "content" $item.Content )}}
+                </div>
+            </div>
+        </div>
+    {{ end -}}
+</div>
+
+<div class="d-md-none">
+    {{- range $index, $item := $list -}}
+        {{- $odd := eq (mod $index 2) 1 -}}
+        <div class="container d-flex flex-column">
+            {{ if eq $index 0 }}
+                {{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+            {{ end }}
+            <div class="row pt-5 pb-5 align-items-center flex-fill row-cols-2">
+                <div class="col-12 text-center">
+                    {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail)}}
+                </div>
+                <div class="col-12 p-3">
+                    {{ partial "partials/list-content.html" (dict "title" $item.Title "content" $item.Content )}}
+                </div>
+            </div>
+        </div>
+    {{ end -}}
+</div>

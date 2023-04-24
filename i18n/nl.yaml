@@ -68,7 +68,7 @@
 
 # 404 page
 - id: pageNotFound
-  translation: "Oeps, deze pagina bestaat niet. Ga terug naar het"
+  translation: "Deze pagina bestaat niet of er is een andere fout opgetreden. Ga terug naar het"
 - id: pageNotFoundTitle
   translation: "Niet gevonden"
 - id: pageNotFoundHome

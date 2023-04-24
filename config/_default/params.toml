@@ -3,6 +3,7 @@
     separator = "-"
     description = "Entertaining, inspiring, and insightful content for tattoo lovers from all around the world"
     enableDarkMode = true
+    modes = ["light", "dark"]
 # toml-docs-end main
 
 # toml-docs-start docs
@@ -16,6 +17,7 @@
     sections = ["blog", "projects"]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     fullCover = false
+    centerHeadline = false
     style = ""
 # toml-docs-end home
 
@@ -52,7 +54,7 @@
         sort = "title"
         reverse = false
         cols = 1
-        color = ""
+        color = "body-tertiary"
         padding = "3"
         header = "none"
         footer = "tags"
