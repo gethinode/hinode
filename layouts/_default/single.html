@@ -32,7 +32,7 @@
 {{ end -}}
 
 {{ define "partials/body.html" -}}
-    {{ if eq .Layout "docs"}}
+    {{ if in (slice "docs" "minimal") .Layout }}
         <p class="lead mb-5">{{ .Description }}</p>
         {{ .Content }}
     {{ else }}
@@ -47,11 +47,11 @@
 {{ end -}}
 
 {{ define "partials/footer.html" -}}
-    {{ if eq .Layout "docs"}}
+    {{ if eq .Layout "docs" }}
         <div class="mt-5 small">
             {{ partial "utilities/git.html" . }}
         </div>
-    {{ else }}
+    {{ else if ne .Layout "minimal" }}
         <div class="row row-cols-2 mt-5 mb-3">
             <div class="col">
                 {{ with .NextInSection -}}
