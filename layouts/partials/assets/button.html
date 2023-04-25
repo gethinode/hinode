@@ -19,7 +19,7 @@
 
 {{ $title := trim .title " \r\n" -}}
 {{ if not $title -}}
-    {{ errorf "Missing element title" -}}
+    {{ errorf "partial [assets/button.html] - Missing element title" -}}
 {{ end -}}
 
 {{ $id := .id }}
@@ -28,21 +28,21 @@
 {{ with .state }}{{ $state = . }}{{ end -}}
 {{ $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
 {{ if not (in $supportedStates $state) -}}
-    {{ errorf "Invalid value for param 'state': %s" $state -}}
+    {{ errorf "partial [assets/button.html] - Invalid value for param 'state': %s" $state -}}
 {{ end -}}
 
 {{ $size := "md" -}}
 {{ with .size }}{{ $size = . }}{{ end -}}
 {{ $supportedSizes := slice "sm" "md" "lg" -}}
 {{ if not (in $supportedSizes $size) -}}
-    {{ errorf "Invalid value for param 'size': %s" $size -}}
+    {{ errorf "partial [assets/button.html] - Invalid value for param 'size': %s" $size -}}
 {{ end -}}
 
 {{ $color := "primary" -}}
 {{ with .color }}{{ $color = . }}{{ end -}}
 {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
 {{ if not (in $supportedColors $color) -}}
-    {{ errorf "Invalid value for param 'color': %s" $color -}}
+    {{ errorf "partial [assets/button.html] - Invalid value for param 'color': %s" $color -}}
 {{ end -}}
 
 {{ $outline := false -}}
@@ -68,7 +68,7 @@
 
 {{ if $tooltip -}}
     {{ if $collapse -}}
-        {{ errorf "Cannot use tooltip and collapse at the same time" -}}
+        {{ errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
     {{ end -}}
 {{ end -}}
 
@@ -76,14 +76,14 @@
 {{ with .type }}{{ $type = . }}{{ end -}}
 {{ $supportedTypes := slice "button" "link" -}}
 {{ if not (in $supportedTypes $type) -}}
-    {{ errorf "Invalid value for param 'type': %s" $type -}}
+    {{ errorf "partial [assets/button.html] - Invalid value for param 'type': %s" $type -}}
 {{ end -}}
 
 {{ $placement := "top" -}}
 {{ with .placement }}{{ $placement = . }}{{ end -}}
 {{ $supportedPlacements := slice "top" "bottom" "left" "right" -}}
 {{ if not (in $supportedPlacements $placement) -}}
-    {{ errorf "Invalid value for param 'placement': %s" $placement -}}
+    {{ errorf "partial [assets/button.html] - Invalid value for param 'placement': %s" $placement -}}
 {{ end -}}
 
 <a {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}

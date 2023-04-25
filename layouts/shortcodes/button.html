@@ -78,5 +78,19 @@
 {{ end -}}
 
 {{ if not $error }}
-    {{- partial "button.html" (dict "type" $type "title" $title "size" $size "color" $color "outline" $outline "badge" $badge "label" $label "tooltip" $tooltip "collapse" $collapse "href" $href "id" $id "state" $state "placement" $placement) -}} 
+    {{- partial "assets/button.html" (dict 
+        "type" $type
+        "title" $title
+        "size" $size
+        "color" $color
+        "outline" $outline
+        "badge" $badge
+        "label" $label
+        "tooltip" $tooltip
+        "collapse" $collapse
+        "href" $href
+        "id" $id
+        "state" $state
+        "placement" $placement)
+    -}} 
 {{ end }}

@@ -11,7 +11,7 @@
     {{ if .Parent }}
         {{ errorf "Missing value for param 'header': %s" .Parent.Position -}}
     {{ else }}
-    {{ errorf "Missing value for param 'header': %s" .Position -}}
+        {{ errorf "Missing value for param 'header': %s" .Position -}}
     {{ end }}
 {{ end -}}
 

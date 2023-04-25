@@ -3,10 +3,12 @@
     supports the following arguments:
     "page"          Required context of the current page.
     "list"          Required array of pages.
-    "title"         Optional title of the card group.
-    "type"          Optional type of the tab group, either "tabs", "pills", or "underline".
+    "title"         Optional title of the tab group.
+    "type"          Optional type of the tab group, either "tabs", "pills" (default), or "underline".
     "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
-    "class":        Optional class attribute of the tab group, e.g. “nav-fill”.
+    "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
+    "pane"          Optional style of the panes, either "none" (default) or "persona".
+    "width"         Optional responsive width of the tab group, either "50" or "100" (default).
 
     In addition, the following arguments are passed to the individual tabs.
     "class"         Optional class attribute of the tab element, e.g. “w-50”.
@@ -16,7 +18,7 @@
 
 {{- $page := .page -}}
 {{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
-    {{- errorf "Invalid value for param 'page'" -}}
+    {{- errorf "partial [assets/nav.html] - Invalid value for param 'page'" -}}
 {{- end -}}
 
 {{- $id := "0" -}}
@@ -24,21 +26,58 @@
     {{ $id = . }}
 {{ end }}
 
+{{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
 {{ $list := .list }}
-{{- if ne (printf "%T" $list) "resource.Resources" -}}
-    {{- errorf "Invalid value for param 'list'" -}}
+{{- if not (in $supportedTypes (printf "%T" $list)) -}}
+    {{- errorf "partial [assets/nav.html] - Invalid value for param 'list'" -}}
 {{- end -}}
+
+{{ $pane := "none" }}
+{{ with .pane }}
+    {{- $supportedPanes := slice "none" "persona" -}}
+    {{- $pane = . }}
+    {{- if not (in $supportedPanes $pane) -}}
+        {{- errorf "partial [assets/nav.html] - Invalid value for param 'pane'" -}}
+    {{- end -}}
+{{ end }}
+
+{{ $supportedWidths := slice 50 100 -}}
+{{ $widthParam := 100 -}}
+{{ $width := 100 }}
+{{ with .width }}{{ $widthParam = . }}{{ end -}}
+{{ if in $supportedWidths $widthParam -}}
+    {{ $width = int $widthParam }}
+{{ else -}}
+    {{ errorf "partial [assets/nav.html] - Invalid value for param 'width': %s" $widthParam -}}
+{{ end -}}
 
 {{- $title := .title -}}
 {{- $class := .class -}}
 {{- $color := .color -}}
 
+{{ $supportedFlags := slice "true" "false" -}}
+{{ $verticalParam := "false" -}}
 {{ $vertical := false }}
+{{ with .vertical }}{{ $verticalParam = . }}{{ end -}}
+{{ if in $supportedFlags $verticalParam -}}
+    {{ if eq $verticalParam "true" }}{{ $vertical = true }}{{ else }}{{ $vertical = false }}{{ end -}}
+{{ else -}}
+    {{ errorf "partial [assets/nav.html] - Invalid value for param 'vertical': %s" $verticalParam -}}
+{{ end -}}
+
 {{ $type := "pills" }}
+{{ with .type }}
+    {{ $type = . -}}
+    {{ $supportedNavTypes := slice "tabs" "pills" "underline" -}}
+    {{ if $type }}
+        {{ if not (in $supportedNavTypes $type) -}}
+            {{ errorf "partial [assets/nav.html] - Invalid value for param 'type': %s" $type -}}
+        {{ end -}}
+    {{ end -}}
+{{ end -}}
 
 {{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
-<div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto pt-5 pb-5">
-
+<div class="{{ if eq $width 50 }}col-sm-12 col-md-10 col-lg-8 col-xl-6{{ else }}col-12{{ end }} mx-auto pt-5 pb-5">
     {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
     <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
         {{- range $index, $item := $list -}}
@@ -56,13 +95,17 @@
             {{ $body := $item.Content }}
             {{ $show := eq $index 0}}
             <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
+                {{- if eq $pane "persona" -}}
                 {{- partial "assets/persona.html" (dict  
                     "title" $item.Title
                     "class" $class
                     "color" $color
-                    "content" $item.Content
+                    "content" (or $item.Description $item.Content)
                     "thumbnail" $item.Params.Thumbnail
                 ) -}}
+                {{- else -}}
+                    {{- (or $item.Description $item.Content) -}}
+                {{- end -}}
             </div>    
         {{ end }}
     </div>

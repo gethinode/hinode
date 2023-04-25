@@ -31,26 +31,26 @@
 
 {{- $page := .page -}}
 {{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
-    {{- errorf "Invalid value for param 'page'" -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'page'" -}}
 {{- end -}}
 
 {{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
 {{ $list := .list }}
 {{- if not (in $supportedTypes (printf "%T" $list)) -}}
     {{ warnf "Type: %T" $list }}
-    {{- errorf "Card-group - Invalid value for param 'list'" -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'list'" -}}
 {{- end -}}
 
 {{- $count := len $list -}}
 {{- $max := .max -}}
 {{- if ne (printf "%T" $max) "int" -}}
-    {{- errorf "Invalid value for param 'max'" -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'max'" -}}
 {{- end -}}
 {{- $max = math.Min $max $count -}}
 
 {{- $cols := .cols -}}
 {{- if or (lt $cols 1) (gt $cols 5) -}}
-    {{- errorf "Invalid value for param 'cols': %d" $cols -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'cols': %d" $cols -}}
 {{- end -}}
 {{- $colGrid := "row-cols-1" -}}
 {{- if eq $cols 2 }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" -}}
@@ -63,7 +63,7 @@
 {{- $paginate := false -}}
 {{- with .paginate -}}
     {{- if ne (printf "%T" .) "bool" -}}
-        {{- errorf "Invalid value for param 'paginate'" -}}
+        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'paginate'" -}}
     {{- end -}}
     {{- $paginate = . -}}
 {{- end -}}
@@ -77,7 +77,7 @@
 {{- $separator := false -}}
 {{- with .separator -}}
     {{- if ne (printf "%T" .) "bool" -}}
-        {{- errorf "Invalid value for param 'separator'" -}}
+        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'separator'" -}}
     {{- end -}}
     {{- $separator = . -}}
 {{- end -}}

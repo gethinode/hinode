@@ -69,7 +69,7 @@
 {{- if .path }}
     {{- $page = site.GetPage .path }}
     {{- if not $page }}
-        {{- errorf "Cannot find page: %s" .path -}}
+        {{- errorf "partial [assets/card.html] - Cannot find page: %s" .path -}}
     {{- end }}
 {{- end }}
 
@@ -84,7 +84,7 @@
 {{- if $color -}}
     {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
     {{- if not (in $supportedColors $color) -}}
-        {{- errorf "Invalid value for param 'color': %s" $color -}}
+        {{- errorf "partial [assets/card.html] - Invalid value for param 'color': %s" $color -}}
     {{- end -}}
 {{- end -}}
 
@@ -92,13 +92,13 @@
 {{- with .header }}{{ $header = . }}{{ end -}}
 {{- $supportedKeywords := slice "full" "publication" "tags" "none" -}}
 {{- if not (in $supportedKeywords $header) -}}
-    {{- errorf "Invalid value for param 'header': %s" $header -}}
+    {{- errorf "partial [assets/card.html] - Invalid value for param 'header': %s" $header -}}
 {{- end -}}
 
 {{- $footer := "none" -}}
 {{- with .footer }}{{ $footer = . }}{{ end -}}
 {{- if not (in $supportedKeywords $footer) -}}
-    {{- errorf "Invalid value for param 'footer': %s" $footer -}}
+    {{- errorf "partial [assets/card.html] - Invalid value for param 'footer': %s" $footer -}}
 {{- end -}}
 
 {{- with $page -}}
@@ -110,7 +110,7 @@
 {{- end -}}
 
 {{- if not $href -}}
-    {{- errorf "Missing value for param 'href'" -}}
+    {{- errorf "partial [assets/card.html] - Missing value for param 'href'" -}}
 {{- end -}}
 
 {{- $class := .class -}}
@@ -119,14 +119,14 @@
 {{- with .padding }}{{ $padding = . }}{{ end -}}
 {{- $supportedPaddings := slice "0" "1" "2" "3" "4" "5" "auto" -}}
 {{- if not (in $supportedPaddings $padding) -}}
-    {{- errorf "Invalid value for param 'padding': %s" $padding -}}
+    {{- errorf "partial [assets/card.html] - Invalid value for param 'padding': %s" $padding -}}
 {{- end -}}
 
 {{- $orientation := "stacked" -}}
 {{- with .orientation }}{{ $orientation = . }}{{ end -}}
 {{- $supportedOrientations := slice "stacked" "horizontal" "none" -}}
 {{- if not (in $supportedOrientations $orientation) -}}
-    {{- errorf "Invalid value for param 'orientation': %s" $orientation -}}
+    {{- errorf "partial [assets/card.html] - Invalid value for param 'orientation': %s" $orientation -}}
 {{- end -}}
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 
@@ -135,7 +135,7 @@
         <div class="row g-0">
             <div class="col-4">
                 {{- if $thumbnail -}}
-                    {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
                 {{- else if $icon -}}
                     <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                         {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
@@ -156,7 +156,7 @@
 {{- else -}}
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{- if $thumbnail -}}
-            {{- partial "image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
+            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
         {{- else if $icon -}}
             <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}

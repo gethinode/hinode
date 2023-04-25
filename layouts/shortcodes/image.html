@@ -35,7 +35,7 @@
         {{ errorf "Invalid value for param 'mode': %s" $modeParam -}}
     {{ end -}}
     
-    {{- partial "image.html" (dict 
+    {{- partial "assets/image.html" (dict 
         "url" $url
         "ratio" $ratio
         "innerClass" $class
