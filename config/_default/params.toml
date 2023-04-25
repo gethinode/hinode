@@ -15,7 +15,7 @@
 # toml-docs-start home
 [home]
     sections = ["blog", "projects"]
-    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    featurePhoto = "/img/fig.png" # source: https://unsplash.com/photos/ZX6BPboJrYk
     fullCover = false
     centerHeadline = false
     style = ""
@@ -36,8 +36,21 @@
 
 # toml-docs-start list
 [list]
+    [posts]
+        title = "Posts"
+        sort = "date"
+        reverse = true
+        cols = 3
+        color = ""
+        padding = "0"
+        header = "full"
+        footer = "none"
+        orientation = "stacked"
+        style = "border-0 card-zoom"
+        homepage = 3
+        separator = true
     [blog]
-        title = "Blog"
+        title = "Posts"
         sort = "date"
         reverse = false
         cols = 3
@@ -65,7 +78,7 @@
 # toml-docs-end list
 
 [favicon]
-    logo = "img/favicon.png"
+    logo = "img/fig2.png"
     sizes = [16, 32, 48]
 
 # toml-docs-start theme-colors

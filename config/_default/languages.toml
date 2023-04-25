@@ -8,8 +8,8 @@
     [en.params.head]
         tagline = "an everything site"
     [en.params.feature]
-        link = "/en/about"
-        caption = "About"
+        link = "/en/blog"
+        caption = "Fig About it"
     [en.params.footer]
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
         socialTitle = "Follow us"

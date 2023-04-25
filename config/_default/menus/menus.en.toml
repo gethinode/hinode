@@ -4,19 +4,19 @@
   weight = 10
 
 [[main]]
-  name = "Blog"
+  name = "Posts"
   url = "/blog/"
   weight = 20
 
-[[main]]
-  name = "Posts"
-  url = "/posts/"
-  weight = 30
+# [[main]]
+#   name = "Posts"
+#   url = "/posts/"
+#   weight = 30
 
 [[main]]
   name = "Projects"
   url = "/projects/"
-  weight = 40
+  weight = 30
 
 [[main]]
   name = "Sample project"
@@ -33,7 +33,7 @@
 [[main]]
   name = "Tags"
   url = "/tags/"
-  weight = 50
+  weight = 40
 
 [[social]]
   name = "LinkedIn"
@@ -59,15 +59,15 @@
   url = "/blog/"
   weight = 10
 
-[[sample]]
-  name = "Posts"
-  url = "/posts/"
-  weight = 20
+# [[sample]]
+#   name = "Posts"
+#   url = "/posts/"
+#   weight = 20
 
 [[sample]]
   name = "Projects"
   url = "/projects/"
-  weight = 30
+  weight = 20
 
 [[sample]]
   name = "Sample project"
