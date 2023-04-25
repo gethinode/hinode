@@ -61,7 +61,7 @@
         <div class="col-2">
             <div class="position-absolute top-50 start-0 translate-middle-y col-4 ps-3">
                 {{- if $thumbnail -}}
-                    {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
                 {{ end }}
             </div>
         </div>
@@ -81,7 +81,7 @@
         <div class="col-12">
             <div class="position-absolute top-25 start-50 translate-middle col-6">
                 {{- if $thumbnail -}}
-                    {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
                 {{ end }}
             </div>
         </div>

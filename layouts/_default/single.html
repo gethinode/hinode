@@ -1,5 +1,5 @@
 {{- define "partials/header.html" -}}
-    {{ if site.Params.navigation.breadcrumb }}{{ partial "breadcrumb.html" . }}{{ end -}}
+    {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
     {{ if in (slice "docs" "minimal") .Layout }}
         {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
     {{ else }}
@@ -40,7 +40,7 @@
         {{ if .Params.thumbnail -}}
             {{- $credits := "" -}}
             {{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
-            {{- partial "image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
+            {{- partial "assets/image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
         {{ end -}}
         {{ .Content }}
 {{ end }}

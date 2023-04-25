@@ -135,7 +135,7 @@
         <div class="row g-0">
             <div class="col-4">
                 {{- if $thumbnail -}}
-                    {{- partial "image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
                 {{- else if $icon -}}
                     <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                         {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
@@ -156,7 +156,7 @@
 {{- else -}}
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{- if $thumbnail -}}
-            {{- partial "image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
+            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
         {{- else if $icon -}}
             <div class="pt-{{ $padding }} ps-{{ $padding }} pe-{{ $padding }}">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
