@@ -3,3 +3,11 @@
 {{ else }}
 <h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</h{{ .Level }}>
 {{ end }}
+{{/*  {{- $attributes := "" -}}
+{{- with (index .Attributes "class") }}{{ $attributes = printf "<i class=\"%s\"></i>" . }}{{ end -}}
+
+{{ if site.Params.navigation.anchor }}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">{{ .Text | safeHTML }} {{ $attributes | safeHTML }} <a href="#{{ .Anchor | safeURL }}"><i class="fa-solid fa-link anchor"></i></a></h{{ .Level }}>
+{{ else }}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }} {{ $attributes | safeHTML }}</h{{ .Level }}>
+{{ end -}}  */}}
