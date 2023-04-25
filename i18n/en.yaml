@@ -27,8 +27,14 @@
   translation: "Next Post"
 - id: recentProjects
   translation: "Projects"
+- id: moreFeatures
+  translation: "More Features"
+- id: moreGuides
+  translation: "More Guides"
 - id: moreProjects
   translation: "More Projects"
+- id: moreUsers
+  translation: "More Users"
 - id: read
   translation: "read"
 - id: minutesShort
@@ -65,6 +71,8 @@
   translation: "Auto"
 - id: toggleMainNav
   translation: "Toggle main navigation"
+- id: demo
+  translation: "Demo"
 
 # 404 page
 - id: pageNotFound
