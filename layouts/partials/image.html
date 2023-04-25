@@ -26,7 +26,7 @@
 {{- $title := .title -}}
 {{- $caption := .caption -}}
 {{- if ne (printf "%T" $mode) "bool" -}}
-    {{- errorf "Invalid value for param 'mode'" -}}
+    {{- errorf "partial [assets/image.html] - Invalid value for param 'mode'" -}}
 {{- end -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 

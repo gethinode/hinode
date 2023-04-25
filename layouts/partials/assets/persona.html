@@ -29,7 +29,7 @@
 {{- if .path }}
     {{- $page = site.GetPage .path }}
     {{- if not $page }}
-        {{- errorf "Cannot find page: %s" .path -}}
+        {{- errorf "partial [assets/persona.html] - Cannot find page: %s" .path -}}
     {{- end }}
 {{- end }}
 
@@ -43,7 +43,7 @@
 {{- if $color -}}
     {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
     {{- if not (in $supportedColors $color) -}}
-        {{- errorf "Invalid value for param 'color': %s" $color -}}
+        {{- errorf "partial [assets/persona.html] - Invalid value for param 'color': %s" $color -}}
     {{- end -}}
 {{- end -}}
 

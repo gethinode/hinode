@@ -18,7 +18,7 @@
 
 {{- $page := .page -}}
 {{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
-    {{- errorf "Invalid value for param 'page'" -}}
+    {{- errorf "partial [assets/nav.html] - Invalid value for param 'page'" -}}
 {{- end -}}
 
 {{- $id := "0" -}}

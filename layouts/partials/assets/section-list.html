@@ -1,9 +1,9 @@
 {{- $page := .page }}
 {{- $section := .section }}
-{{- if not $section }}{{ errorf "Missing value for param 'section'" }}{{ end -}}
+{{- if not $section }}{{ errorf "partial [assets/section-list.html] - Missing value for param 'section'" }}{{ end -}}
 {{- $home := .home }}
 {{ if ne (printf "%T" $home) "bool" }}
-    {{ errorf "Invalid value for param 'home'"}}
+    {{ errorf "partial [assets/section-list.html] - Invalid value for param 'home'"}}
 {{ end }}
 {{- $title := .title -}}
 {{- $moreTitle := .moreTitle -}}

@@ -55,21 +55,21 @@
 
 {{- $page := .page -}}
 {{- if not $page -}}
-    {{- errorf "Missing value for param 'page'" -}}
+    {{- errorf "partial [assets/navbar.html] - Missing value for param 'page'" -}}
 {{- end -}}
 
 {{- $menuName := "main" }}
 {{- with .menus }}{{ $menuName = .}}{{ end -}}
 {{- $menus := index site.Menus $menuName -}}
 {{- if or (ne (printf "%T" $menus) "navigation.Menu") (ne (index $menus 0).Menu $menuName) -}}
-    {{- errorf "Invalid value for param 'menus': %s" $menuName -}}
+    {{- errorf "partial [assets/navbar.html] - Invalid value for param 'menus': %s" $menuName -}}
 {{- end -}}
 
 {{- $size := "md" -}}
 {{- with .size }}{{ $size = . }}{{ end -}}
 {{- $supportedSizes := slice "xs" "sm" "md" "lg" "xl" -}}
 {{- if not (in $supportedSizes $size) -}}
-    {{- errorf "Invalid value for param 'size': %s" $size -}}
+    {{- errorf "partial [assets/navbar.html] - Invalid value for param 'size': %s" $size -}}
 {{- end -}}
 
 {{- $fixedParam := "false" -}}
@@ -78,7 +78,7 @@
 {{- if in $supportedFlags $fixedParam -}}
     {{- if eq $fixedParam "true" }}{{ $fixed = true }}{{ else }}{{ $fixed = false }}{{ end -}}
 {{- else -}}
-    {{- errorf "Invalid value for param 'fixed': %s" $fixedParam -}}
+    {{- errorf "partial [assets/navbar.html] - Invalid value for param 'fixed': %s" $fixedParam -}}
 {{- end -}}
 
 {{- $color := "" -}}
@@ -86,7 +86,7 @@
     {{- $color = . -}}
     {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
     {{- if not (in $supportedColors $color) -}}
-        {{- errorf "Invalid value for param 'color': %s" $color -}}
+        {{- errorf "partial [assets/navbar.html] - Invalid value for param 'color': %s" $color -}}
     {{- end -}}
 {{- end -}}
 
@@ -96,7 +96,7 @@
     {{- if in $supportedFlags $searchParam -}}
         {{- if eq $searchParam "true" }}{{ $search = true }}{{ else }}{{ $search = false }}{{ end -}}
     {{- else -}}
-        {{- errorf "Invalid value for param 'search': %s" $searchParam -}}
+        {{- errorf "partial [assets/navbar.html] - Invalid value for param 'search': %s" $searchParam -}}
     {{- end -}}
 {{- end -}}
 
@@ -106,7 +106,7 @@
     {{- if in $supportedFlags $darkModeParam -}}
         {{- if eq $darkModeParam "true" }}{{ $enableDarkMode = site.Params.main.enableDarkMode }}{{ else }}{{ $enableDarkMode = false }}{{ end -}}
     {{- else -}}
-        {{- errorf "Invalid value for param 'darkMode': %s" $darkModeParam -}}
+        {{- errorf "partial [assets/navbar.html] - Invalid value for param 'darkMode': %s" $darkModeParam -}}
     {{- end -}}
 {{- end -}}
 
