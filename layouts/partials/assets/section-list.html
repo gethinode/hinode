@@ -23,6 +23,10 @@
 {{- $homepage := 3 -}}
 {{- $background := "" -}}
 {{- $layout := "card" -}}
+{{- $pane := "none" -}}
+{{- $type := "pills" -}}
+{{- $vertical := "false" -}}
+{{- $width := 100 -}}
 
 {{- with (index site.Params.sections $section) -}}
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
@@ -39,6 +43,10 @@
     {{- with index . "homepage" }}{{ $homepage = . }}{{ end -}}
     {{- with index . "background" }}{{ $background = . }}{{ end -}}
     {{- with index . "layout" }}{{ $layout = . }}{{ end -}}
+    {{- with index . "pane" }}{{ $pane = . }}{{ end -}}
+    {{- with index . "type" }}{{ $type = . }}{{ end -}}
+    {{- with index . "vertical" }}{{ $vertical = . }}{{ end -}}
+    {{- with index . "width" }}{{ $width = . }}{{ end -}}
 {{- end -}}
 
 {{ $list := where site.RegularPages "Type" "in" $section }}
@@ -94,6 +102,10 @@
                 {{- $params = merge $params (dict 
                     "layout" $layout
                     "id" $section
+                    "pane" $pane
+                    "type" $type
+                    "vertical" $vertical
+                    "width" $width
                     ) 
                 -}}
             {{- else -}}
