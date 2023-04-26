@@ -15,91 +15,118 @@
     "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons.
     "type"          Optional type of the element, either "link" or "button" (default).
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right".
+    "class"         Optional class attribute of the button element, e.g. “toc-button”.
+    "icon"          Optional Font Awesome icon class attribute, e.g. "fas sort".
+    "order"         Optional order of the icon, either "first" or "last" (default).
+    "justify"       Optional justification of the button title and icon, either "start", "end", "center" (default),
+                    "between", "around", or "evenly".
 -->
 
-{{ $title := trim .title " \r\n" -}}
-{{ if not $title -}}
-    {{ errorf "partial [assets/button.html] - Missing element title" -}}
-{{ end -}}
+{{- $title := trim .title " \r\n" -}}
+{{- if not $title -}}
+    {{- errorf "partial [assets/button.html] - Missing element title" -}}
+{{- end -}}
 
-{{ $id := .id }}
+{{- $id := .id }}
 
-{{ $state := "enabled" -}}
-{{ with .state }}{{ $state = . }}{{ end -}}
-{{ $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
-{{ if not (in $supportedStates $state) -}}
-    {{ errorf "partial [assets/button.html] - Invalid value for param 'state': %s" $state -}}
-{{ end -}}
+{{- $state := "enabled" -}}
+{{- with .state }}{{ $state = . }}{{ end -}}
+{{- $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
+{{- if not (in $supportedStates $state) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'state': %s" $state -}}
+{{- end -}}
 
-{{ $size := "md" -}}
-{{ with .size }}{{ $size = . }}{{ end -}}
-{{ $supportedSizes := slice "sm" "md" "lg" -}}
-{{ if not (in $supportedSizes $size) -}}
-    {{ errorf "partial [assets/button.html] - Invalid value for param 'size': %s" $size -}}
-{{ end -}}
+{{- $size := "md" -}}
+{{- with .size }}{{ $size = . }}{{ end -}}
+{{- $supportedSizes := slice "sm" "md" "lg" -}}
+{{- if not (in $supportedSizes $size) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'size': %s" $size -}}
+{{- end -}}
 
-{{ $color := "primary" -}}
-{{ with .color }}{{ $color = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
-{{ if not (in $supportedColors $color) -}}
-    {{ errorf "partial [assets/button.html] - Invalid value for param 'color': %s" $color -}}
-{{ end -}}
+{{- $color := "primary" -}}
+{{- with .color }}{{ $color = . }}{{ end -}}
+{{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+{{- if not (in $supportedColors $color) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'color': %s" $color -}}
+{{- end -}}
 
-{{ $outline := false -}}
-{{ with .outline }}{{ $outline = . }}{{ end -}}
+{{- $outline := false -}}
+{{- with .outline }}{{ $outline = . }}{{ end -}}
 
-{{ $badge := "" -}}
-{{ with .badge }}{{ $badge = . }}{{ end -}}
+{{- $badge := "" -}}
+{{- with .badge }}{{ $badge = . }}{{ end -}}
 
-{{ $label := "" -}}
-{{ with .label }}{{ $label = . }}{{ end -}}
+{{- $label := "" -}}
+{{- with .label }}{{ $label = . }}{{ end -}}
 
-{{ $tooltip := "" -}}
-{{ if not (strings.HasSuffix $state "active") -}}
-    {{ with .tooltip }}{{ $tooltip = . }}{{ end -}}
-{{ end -}}
+{{- $tooltip := "" -}}
+{{- if not (strings.HasSuffix $state "active") -}}
+    {{- with .tooltip }}{{ $tooltip = . }}{{ end -}}
+{{- end -}}
 
-{{ $href := .href -}}
+{{- $href := .href -}}
 
-{{ $collapse := "" -}}
-{{ if not (strings.HasSuffix $state "active") -}}
-    {{ with .collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
-{{ end -}}
+{{- $collapse := "" -}}
+{{- if not (strings.HasSuffix $state "active") -}}
+    {{- with .collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
+{{- end -}}
 
-{{ if $tooltip -}}
-    {{ if $collapse -}}
-        {{ errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
-    {{ end -}}
-{{ end -}}
+{{- if $tooltip -}}
+    {{- if $collapse -}}
+        {{- errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
+    {{- end -}}
+{{- end -}}
 
-{{ $type := "button" -}}
-{{ with .type }}{{ $type = . }}{{ end -}}
-{{ $supportedTypes := slice "button" "link" -}}
-{{ if not (in $supportedTypes $type) -}}
-    {{ errorf "partial [assets/button.html] - Invalid value for param 'type': %s" $type -}}
-{{ end -}}
+{{- $type := "button" -}}
+{{- with .type }}{{ $type = . }}{{ end -}}
+{{- $supportedTypes := slice "button" "link" -}}
+{{- if not (in $supportedTypes $type) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'type': %s" $type -}}
+{{- end -}}
 
-{{ $placement := "top" -}}
-{{ with .placement }}{{ $placement = . }}{{ end -}}
-{{ $supportedPlacements := slice "top" "bottom" "left" "right" -}}
-{{ if not (in $supportedPlacements $placement) -}}
-    {{ errorf "partial [assets/button.html] - Invalid value for param 'placement': %s" $placement -}}
-{{ end -}}
+{{- $placement := "top" -}}
+{{- with .placement }}{{ $placement = . }}{{ end -}}
+{{- $supportedPlacements := slice "top" "bottom" "left" "right" -}}
+{{- if not (in $supportedPlacements $placement) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'placement': %s" $placement -}}
+{{- end -}}
 
-<a {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
-    {{ with $id }}id="{{ . }}"{{ end }}
-    {{ if eq $type "button" }}class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }}" role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end }}
-    {{ else }}class="link-{{ $color }} position-relative"{{ end }}
-    {{ with $tooltip }}data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end }}
-    {{ with $collapse }}data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end }}
-    {{ if eq $state "active" }}data-bs-toggle="button" aria-pressed="true"{{ end }}
-    {{ if eq $state "inactive" }}data-bs-toggle="button" aria-pressed="false"{{ end }}
+{{- $class := .class }}
+{{- $icon := .icon }}
+
+{{- $order := "last" -}}
+{{- with .order }}{{ $order = . }}{{ end -}}
+{{- $supportedOrders := slice "first" "last" -}}
+{{- if not (in $supportedOrders $order) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'order': %s" $order -}}
+{{- end -}}
+
+{{- $justify := "center" -}}
+{{- with .justify }}{{ $justify = . }}{{ end -}}
+{{- $supportedJustify := slice "start" "end" "center" "between" "around" "evenly" -}}
+{{- if not (in $supportedJustify $justify) -}}
+    {{- errorf "partial [assets/button.html] - Invalid value for param 'justify': %s" $justify -}}
+{{- end -}}
+
+<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+    {{- with $id }}id="{{ . }}"{{ end -}}
+    {{- if eq $type "button" }}class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class }}" role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
+    {{- else }}class="link-{{ $color }} position-relative {{ $class }}"{{ end -}}
+    {{- with $tooltip }}data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end -}}
+    {{- with $collapse }}data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
+    {{- if eq $state "active" }}data-bs-toggle="button" aria-pressed="true"{{ end -}}
+    {{- if eq $state "inactive" }}data-bs-toggle="button" aria-pressed="false"{{ end -}}
     >
-    {{ $title -}}
-    {{ with $badge }}
+
+    <div class="d-flex justify-content-{{ $justify }}">
+        <div>{{ $title }}</div>
+        {{- with $icon }}<div class="align-self-center{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon) }}</div>{{ end }}
+    </div>
+
+    {{- with $badge }}
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ . }}
             {{ with $label }}<span class="visually-hidden">{{ . }}</span>{{ end }}
         </span>
-    {{ end }}  
+    {{- end -}}  
 </a>

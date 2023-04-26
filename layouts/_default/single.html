@@ -2,6 +2,7 @@
     {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
     {{ if in (slice "docs" "minimal") .Layout }}
         {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+        <p class="lead mb-5">{{ .Description }}</p>
     {{ else }}
         {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
         {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
@@ -28,22 +29,23 @@
                 {{ end -}}
             </div>
         </div>
+        <p class="lead mb-5 mt-3">{{ .Description }}</p>
     {{ end }}
 {{ end -}}
 
 {{ define "partials/body.html" -}}
-    {{ if in (slice "docs" "minimal") .Layout }}
-        <p class="lead mb-5">{{ .Description }}</p>
-        {{ .Content }}
-    {{ else }}
-        <p class="lead mb-5 mt-3">{{ .Description }}</p>
+    {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+        <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
+    {{- end -}}
+
+    {{ if not (in (slice "docs" "minimal") .Layout) }}
         {{ if .Params.thumbnail -}}
             {{- $credits := "" -}}
             {{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
             {{- partial "assets/image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
         {{ end -}}
-        {{ .Content }}
-{{ end }}
+    {{ end }}
+    {{ .Content }}
 {{ end -}}
 
 {{ define "partials/footer.html" -}}
@@ -82,7 +84,7 @@
     {{- $version := .Scratch.Get "version" -}}
     {{- $sidebar := .Site.Params.navigation.sidebar | default true -}}
     {{ if and $menu $sidebar -}}
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-labelledby="offcanvas-label">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-inledby="offcanvas-label">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper .Section }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

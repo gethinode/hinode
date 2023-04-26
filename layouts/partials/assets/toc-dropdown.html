@@ -1,0 +1,23 @@
+{{ $items := len (findRE "<li.*?>(.|\n)*?</li>" .TableOfContents) -}}
+{{ if (gt $items 1) -}}
+    <div class="d-grid gap-2 mx-auto">
+        {{ partial "assets/button.html" (dict 
+            "title" (T "toc") 
+            "color" "secondary" 
+            "outline" "true" 
+            "class" "toc-button" 
+            "icon" "fas sort"
+            "justify" "between"
+            "collapse" "toc-collapse"
+            "order" "last") 
+        -}}
+    </div>
+
+    <p>
+        <div class="collapse border bg-body-tertiary rounded p-1 navbar-nav-scroll" id="toc-collapse">
+            <div class="toc toc-panel text-body-secondary p-2">
+                <small>{{ .TableOfContents }}</small>
+            </div>
+        </div>
+    </p>
+{{ end -}}

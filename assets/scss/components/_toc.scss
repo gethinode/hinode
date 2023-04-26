@@ -1,8 +1,8 @@
 //
-// Table of contents sidebar
+// Table of contents sidebar & drop-down panel
 //
 // scss-docs-start toc
-.toc {
+.toc-sidebar {
     grid-area: toc;
     right: 0;
     z-index: 2;
@@ -15,6 +15,7 @@
 
 .toc nav {
     font-size: 0.875rem;
+    margin-bottom: -0.875rem;
 }
 
 .toc nav ul {
@@ -29,10 +30,22 @@
 
 .toc nav li {
     margin-bottom: 0.25rem;
+
+    &:hover {
+        color: var(--bs-primary);
+    }
 }
 
 .toc nav a {
     color: inherit;
+}
+
+.toc-panel nav a {
+    &.active,
+    &:hover,
+    &:focus {
+        color: var(--bs-primary);
+    }
 }
 
 .toc nav a:not(:hover) {
@@ -41,4 +54,22 @@
 
 .toc nav a code {
     font: inherit;
+}
+
+.toc-button {
+    --bs-btn-hover-color: var(--bs-primary);
+    --bs-btn-hover-bg: var(--bs-body-bg);
+    --bs-btn-hover-border-color: var(--bs-primary);
+    --bs-btn-active-color: var(--bs-primary);
+    --bs-btn-active-bg: var(--bs-body-bg);
+    --bs-btn-active-border-color: var(--bs-primary);
+
+    &.active,
+    &:hover,
+    &:focus {
+        color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        box-shadow: 0 0 0 4px var(--bs-primary-border-subtle);
+        outline: none;
+    }
 }
