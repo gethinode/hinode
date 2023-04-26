@@ -53,6 +53,17 @@
     --bs-btn-active-border-color: var(--bs-primary);
 }
 
+.toc-button {
+    &.active,
+    &:hover,
+    &:focus {
+        color: var(--bs-primary);
+        border-color: var(--bs-primary);
+        box-shadow: 0 0 0 4px var(--bs-primary-border-subtle);
+        outline: none;
+    }
+}
+
 .toc-panel nav a {
     &.active,
     &:hover,
