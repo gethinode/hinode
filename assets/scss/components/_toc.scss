@@ -30,6 +30,10 @@
 
 .toc nav li {
     margin-bottom: 0.25rem;
+
+    &:hover {
+        color: var(--bs-primary);
+    }
 }
 
 .toc nav a {
