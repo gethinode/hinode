@@ -40,6 +40,14 @@
     color: inherit;
 }
 
+.toc-panel nav a {
+    &.active,
+    &:hover,
+    &:focus {
+        color: var(--bs-primary);
+    }
+}
+
 .toc nav a:not(:hover) {
     text-decoration: none;
 }
@@ -55,9 +63,7 @@
     --bs-btn-active-color: var(--bs-primary);
     --bs-btn-active-bg: var(--bs-body-bg);
     --bs-btn-active-border-color: var(--bs-primary);
-}
 
-.toc-button {
     &.active,
     &:hover,
     &:focus {
@@ -65,13 +71,5 @@
         border-color: var(--bs-primary);
         box-shadow: 0 0 0 4px var(--bs-primary-border-subtle);
         outline: none;
-    }
-}
-
-.toc-panel nav a {
-    &.active,
-    &:hover,
-    &:focus {
-        color: var(--bs-primary);
     }
 }
