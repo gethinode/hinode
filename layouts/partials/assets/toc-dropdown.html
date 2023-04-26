@@ -1,7 +1,16 @@
 {{ $items := len (findRE "<li.*?>(.|\n)*?</li>" .TableOfContents) -}}
 {{ if (gt $items 1) -}}
-    <div class="d-grid gap-2 col-12 mx-auto">
-        {{ partial "assets/button.html" (dict "title" (T "toc") "color" "secondary" "outline" "true" "class" "toc-button" "icon" "fas sort" "collapse" "toc-collapse") }}
+    <div class="d-grid gap-2 mx-auto">
+        {{ partial "assets/button.html" (dict 
+            "title" (T "toc") 
+            "color" "secondary" 
+            "outline" "true" 
+            "class" "toc-button" 
+            "icon" "fas sort"
+            "justify" "between"
+            "collapse" "toc-collapse"
+            "order" "last") 
+        -}}
     </div>
 
     <p>
