@@ -257,8 +257,6 @@ De volgende shortcode toont een uitleg voor een gekleurde link.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Tooltip" href="#!" */>}}
-    Tooltip demonstration
-{{</* /tooltip */>}}
+{{</* tooltip color="primary" title="Tooltip" href="#!" */>}}Tooltip{{</* /tooltip */>}} demonstratie
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
