@@ -11,8 +11,8 @@
     {{ $bundle := $files | resources.Concat $filename -}}
     {{ $js := $bundle | resources.ExecuteAsTemplate $filename $page -}}
 
-    {{- if (not .Site.IsServer) -}}
-        {{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
+    {{- if (not site.IsServer) -}}
+        {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
         {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
         {{- end }}
