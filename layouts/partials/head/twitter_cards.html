@@ -1,7 +1,7 @@
 <!-- Copied from doks -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="{{ .Site.Params.twitterSite }}">
-<meta name="twitter:creator" content="{{ .Site.Params.twitterCreator }}">
+{{ with .Site.Params.twitterSite }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+{{ with .Site.Params.twitterCreator }}<meta name="twitter:creator" content="{{ . }}">{{ end }}
 <meta name="twitter:title" content="{{ $.Scratch.Get "title" }}">
 <meta name="twitter:description" content="{{ $.Scratch.Get "description" }}">
 <meta name="twitter:image" content="{{ $.Scratch.Get "thumbnail" }}">
