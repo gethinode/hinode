@@ -6,6 +6,7 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
+googleAnalytics = "G-T85PPZ36GN"
 baseURL = "https://demo.gethinode.com/"
 canonifyURLs = false
 enableEmoji = true
