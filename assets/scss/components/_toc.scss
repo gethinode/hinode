@@ -18,6 +18,12 @@
     margin-bottom: -0.875rem;
 }
 
+.toc nav a {
+    &:hover {
+        color: var(--bs-primary);
+    }
+}
+
 .toc nav ul {
     padding-left: 0;
     list-style: none;
@@ -30,10 +36,6 @@
 
 .toc nav li {
     margin-bottom: 0.25rem;
-
-    &:hover {
-        color: var(--bs-primary);
-    }
 }
 
 .toc nav a {
