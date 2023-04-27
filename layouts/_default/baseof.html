@@ -10,7 +10,7 @@
 
     <body>
         {{- if site.Params.main.enableDarkMode -}}
-            {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "page" .) -}}
+            {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" .) -}}
         {{- end -}}
         <div class="d-flex flex-column min-vh-100{{ if and .IsHome .Site.Params.home.style }} {{ .Site.Params.home.style }}{{ end }}">
             <div class="{{ if .Site.Params.navigation.fixed }}mb-4{{ end }}">
@@ -57,6 +57,6 @@
             {{- partial "footer/footer.html" . -}}
         {{ end -}}
 
-        {{- partialCached "footer/scripts.html" (dict "page" .) }}
+        {{- partialCached "footer/scripts.html" (dict "header" false "page" .) }}
     </body>
 </html>

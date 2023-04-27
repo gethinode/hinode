@@ -1,6 +1,7 @@
 {{ $filename := .filename | default "js/main.bundle.js" -}}
 {{ $match := .match | default "{js/*.js,js/vendor/**.js}" }}
 {{ $page := .page }}
+{{ $header := .header }}
 
 {{ $files := slice -}}
 {{ range $index, $file := resources.Match $match -}}
@@ -11,7 +12,7 @@
     {{ $bundle := $files | resources.Concat $filename -}}
     {{ $js := $bundle | resources.ExecuteAsTemplate $filename $page -}}
 
-    {{- if (not site.IsServer) -}}
+    {{- if and (not site.IsServer) $header -}}
         {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
         {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
