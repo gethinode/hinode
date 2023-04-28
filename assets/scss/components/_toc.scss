@@ -30,20 +30,12 @@
 
 .toc nav li {
     margin-bottom: 0.25rem;
-
-    &:hover {
-        color: var(--bs-primary);
-    }
 }
 
 .toc nav a {
     color: inherit;
-}
 
-.toc-panel nav a {
-    &.active,
-    &:hover,
-    &:focus {
+    &:hover {
         color: var(--bs-primary);
     }
 }
