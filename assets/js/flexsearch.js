@@ -159,10 +159,6 @@
     document.addEventListener('keydown', suggestionFocus);  
     document.addEventListener('click', hideSuggestions);
     initIndex();
-
-    {{ range .Site.Languages }}
-      {{ warnf "Lang: %s" . }}
-    {{ end }}
   }
 
 {{- end -}}
