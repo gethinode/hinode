@@ -8,7 +8,7 @@
     [en.params.head]
         tagline = "A Hugo Theme"
     [en.params.feature]
-        link = "/en/about"
+        link = "about"
         caption = "About"
     [en.params.footer]
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
@@ -23,7 +23,7 @@
     [nl.params.head]
         tagline = "Een Hugo Thema"
     [nl.params.feature]
-        link = "/nl/over-mij"
+        link = "over-mij"
         caption = "Over mij"
     [nl.params.footer]
         license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank'>CC BY-NC-SA 4.0</a>)."
