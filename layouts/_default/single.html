@@ -17,14 +17,14 @@
         <div class="mt-3">
             <div class="d-none-dark">
                 {{ range (.GetTerms "tags") -}}
-                    <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>
+                    <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
                     &nbsp;
                 {{ end -}}
             </div>
             
             <div class="d-none-light">
                 {{ range (.GetTerms "tags") -}}
-                    <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relURL }}" role="button">{{ .LinkTitle }}</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
                     &nbsp;
                 {{ end -}}
             </div>

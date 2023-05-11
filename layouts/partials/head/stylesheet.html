@@ -30,7 +30,7 @@
 {{- end -}}
 
 {{- if not hugo.IsProduction -}}
-    <link rel="stylesheet" href="{{ $css.Permalink | relURL }}">
+    <link rel="stylesheet" href="{{ $css.Permalink | relLangURL }}">
 {{- else -}}
     {{- $css = $css | fingerprint | resources.PostProcess -}}
     <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
