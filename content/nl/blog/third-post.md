@@ -1,6 +1,7 @@
 ---
 author: Mark Dumay
 title: Derde artikel
+slug: derde-artikel
 date: 2022-12-01
 description: Dit is mijn derde artikel.
 tags: ["blog"]

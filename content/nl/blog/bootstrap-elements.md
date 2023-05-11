@@ -1,6 +1,7 @@
 ---
 author: Mark Dumay
 title: Bootstrap elementen
+slug: bootstrap-elementen
 date: 2023-02-17
 description: Gebruik shortcodes om eenvoudig Bootstrap elementen toe te voegen.
 tags: ["bootstrap", "shortcode"]

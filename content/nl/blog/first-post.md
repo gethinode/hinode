@@ -1,6 +1,7 @@
 ---
 author: Mark Dumay
 title: Eerste artikel
+slug: eerste-artikel
 date: 2022-10-01
 description: Dit is mijn eerste artikel.
 tags: ["blog"]

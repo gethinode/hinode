@@ -1,6 +1,7 @@
 ---
 author: Mark Dumay
 title: Vierde artikel
+slug: vierde-artikel
 date: 2023-01-01
 description: Dit is mijn vierde artikel.
 tags: ["blog"]

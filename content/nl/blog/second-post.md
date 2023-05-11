@@ -1,6 +1,7 @@
 ---
 author: Mark Dumay
 title: Tweede artikel
+slug: tweede-artikel
 date: 2022-11-01
 description: Dit is mijn tweede artikel.
 tags: ["blog"]
