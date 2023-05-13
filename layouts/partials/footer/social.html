@@ -7,7 +7,7 @@
         </div>
         <div class="col text-sm-start text-center col-sm-6 col-md-4">
             {{ range .Site.Menus.social -}}
-                <a href="{{ .URL | relLangURL }}" target="_blank" rel="noopener" aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                <a href="{{ .URL | relLangURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
                     {{ .Pre | safeHTML }}
                 </a>
             {{ end -}}
