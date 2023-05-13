@@ -8,7 +8,7 @@
 {{- $title := .title -}}
 {{- $moreTitle := .moreTitle -}}
 {{- $sectionURL := .sectionURL -}}
-
+{{- $nested := .nested | default true -}}
 {{- $paginate := true -}}
 {{- $sort := "date" -}}
 {{- $order := "desc" -}}
@@ -32,6 +32,7 @@
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
     {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
     {{- if (index . "reverse") }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
+    {{- if $home }}{{- if (isset . "nested") }}{{ $nested = (index . "nested") }}{{ end -}}{{ end -}}
     {{- if (index . "separator") }}{{ $separator = true }}{{ else }}{{ $separator = false }}{{ end -}}
     {{- with index . "orientation" }}{{ $orientation = . }}{{ end -}}
     {{- with index . "cols" }}{{ $cols = . }}{{ end -}}
@@ -48,8 +49,20 @@
     {{- with index . "vertical" }}{{ $vertical = . }}{{ end -}}
     {{- with index . "width" }}{{ $width = . }}{{ end -}}
 {{- end -}}
+{{ if ne (printf "%T" $nested) "bool" }}
+    {{ errorf "partial [assets/section-list.html] - Invalid value for param 'nested'"}}
+{{ end }}
 
-{{ $list := where site.RegularPages "Type" "in" $section }}
+{{ $list := "" }}
+{{ if $nested }}
+    {{ $list = where site.RegularPages "Type" "in" $section }}
+{{ else if $home }}
+    {{ $sectionPage := site.GetPage "section" $section }}
+    {{ $list = $sectionPage.RegularPages }}
+{{ else }}
+    {{ $list = $page.RegularPages }}
+{{ end }}
+
 {{ $max := (len $list) -}}
 {{ if eq $max 0 }}
     {{- $bundle := site.GetPage $section -}}

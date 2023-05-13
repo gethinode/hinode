@@ -40,6 +40,7 @@
         title = "Blog"
         sort = "date"
         reverse = true
+        nested = true
         cols = 3
         color = ""
         padding = "0"
@@ -53,6 +54,7 @@
         title = "Projects"
         sort = "title"
         reverse = false
+        nested = true
         cols = 1
         color = "body-tertiary"
         padding = "3"
