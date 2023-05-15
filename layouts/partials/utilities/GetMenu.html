@@ -1,1 +1,6 @@
-{{ return index .Site.Data .Section }}
+{{- $menu := "" -}}
+{{- if .IsPage -}}
+    {{- $menu = index .Site.Data .Section -}}
+{{- end -}}
+
+{{- return $menu -}}
