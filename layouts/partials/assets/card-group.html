@@ -107,7 +107,8 @@
                 "footer" $footer
                 "orientation" $orientation
             ) -}}
-            {{- if $element.IsPage -}}
+            
+            {{- if $element.Permalink -}}
                 {{- $params = merge $params (dict "path" $element.File.Path) -}}
             {{- else -}}
                 {{- $params = merge $params (dict
