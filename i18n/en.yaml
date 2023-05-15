@@ -62,7 +62,7 @@
 - id: toggleSidebar
   translation: "Toggle sidebar navigation"
 - id: colorMode
-  translation: "Color mode"
+  translation: "Toggle theme"
 - id: colorLight
   translation: "Light"
 - id: colorDark

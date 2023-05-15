@@ -56,7 +56,7 @@
 - id: toggleSidebar
   translation: "Toon of verberg navigatie"
 - id: colorMode
-  translation: "Modus"
+  translation: "Pas modus aan"
 - id: colorLight
   translation: "Licht"
 - id: colorDark
