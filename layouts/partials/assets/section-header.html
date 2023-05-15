@@ -1,0 +1,46 @@
+{{- $title := .title -}}
+{{- $thumbnail := .thumbnail -}}
+{{- $icon := .icon -}}
+{{- $sectionHeader := .sectionHeader -}}
+{{- $description := .description -}}
+{{- $content := .content -}}
+
+{{- define "partials/section-header-img.html" -}}
+    {{- $title := .title -}}
+    {{- $thumbnail := .thumbnail -}}
+    {{- $icon := .icon -}}
+    {{ $padding := 5 }}
+
+    {{- if $thumbnail -}}
+        {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
+    {{- else if $icon -}}
+        <div class="text-secondary fw-bold">
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-10x" $icon)) -}}
+        </div>
+    {{- end -}}
+{{- end -}}
+
+<div class="container-fluid p-4 px-xxl-0">
+    {{ with $title }}<p class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+    {{ with $description }} <p class="lead mb-5">{{ . }}</p>{{ end }}
+    {{- if $content -}}
+        <div class="row row-cols-1 row-cols-lg-3 pt-5">
+            <div class="col col-lg-3 d-none d-lg-block"></div>
+            <div class="col col-sm-12 col-lg-6 text-center">
+                <div class="row row-cols-1{{ if ne $sectionHeader "justify-content-center" }} row-cols-sm-2{{ end }} row-gap-5 p-0 align-items-center flex-fill">
+                    {{- if eq $sectionHeader "justify-content-center" -}}
+                        <div class="col p-0 w-50 mx-auto pb-5">{{ partial "partials/section-header-img.html" (dict "title" $title "thumbnail" $thumbnail "icon" $icon )}}</div>
+                        <div class="col fs-md-5 fs-6">{{ $content }}</div>
+                    {{- else if eq $sectionHeader "justify-content-end" -}}
+                        <div class="col p-0">{{ partial "partials/section-header-img.html" (dict "title" $title "thumbnail" $thumbnail "icon" $icon )}}</div>
+                        <div class="col fs-md-5 fs-6 text-sm-start">{{ $content }}</div>
+                    {{- else -}}
+                        <div class="col fs-md-5 fs-6 text-sm-start">{{ $content }}</div>
+                        <div class="col p-0">{{ partial "partials/section-header-img.html" (dict "title" $title "thumbnail" $thumbnail "icon" $icon )}}</div>
+                    {{- end -}}
+                </div>
+            </div>
+            <div class="col col-lg-3 d-none d-lg-block"></div>
+        </div>
+    {{- end -}}
+</div>

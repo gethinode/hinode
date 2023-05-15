@@ -31,6 +31,8 @@
   translation: "More Features"
 - id: moreGuides
   translation: "More Guides"
+- id: moreOpensource
+  translation: "More Features"
 - id: moreProjects
   translation: "More Projects"
 - id: moreUsers
@@ -62,7 +64,7 @@
 - id: toggleSidebar
   translation: "Toggle sidebar navigation"
 - id: colorMode
-  translation: "Color mode"
+  translation: "Toggle theme"
 - id: colorLight
   translation: "Light"
 - id: colorDark

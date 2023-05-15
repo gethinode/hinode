@@ -33,19 +33,23 @@
                     <div class="d-flex flex-column flex-fill">
                         {{ block "main" . }}{{ end -}}
                     </div>
-                    <div class="">
-                        {{- partial "footer/social.html" . -}}
-                        {{- partial "footer/footer.html" . -}}
-                    </div>
+                    {{ if not .Site.Params.main.footerBelowFold }}
+                        <div class="">
+                            {{- partial "footer/social.html" . -}}
+                            {{- partial "footer/footer.html" . -}}
+                        </div>
+                    {{ end }}
                 {{ end -}}
             {{ else -}}
                 <div class="d-flex flex-column flex-fill {{ if .Site.Params.navigation.fixed }}mt-5{{ end }}">
                     {{ block "main" . }}{{ end -}}
                 </div>
-                <div class="">
-                    {{- partial "footer/social.html" . -}}
-                    {{- partial "footer/footer.html" . -}}
-                </div>
+                {{ if not .Site.Params.main.footerBelowFold }}
+                    <div class="">
+                        {{- partial "footer/social.html" . -}}
+                        {{- partial "footer/footer.html" . -}}
+                    </div>
+                {{ end }}
             {{ end -}}
         </div>
 
@@ -53,9 +57,16 @@
             <div class="">
                 {{ block "main" . }}{{ end -}}
             </div>
-            {{- partial "footer/social.html" . -}}
-            {{- partial "footer/footer.html" . -}}
-        {{ end -}}
+            <div class="">
+                {{- partial "footer/social.html" . -}}
+                {{- partial "footer/footer.html" . -}}
+            </div>
+        {{ else if .Site.Params.main.footerBelowFold }}
+            <div class="">
+                {{- partial "footer/social.html" . -}}
+                {{- partial "footer/footer.html" . -}}
+            </div>
+        {{ end }}
 
         {{- partialCached "footer/scripts.html" (dict "header" false "page" .) }}
     </body>

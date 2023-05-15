@@ -5,7 +5,7 @@
     The shortcode supports the following arguments:
     "path"          Optional path of the page, override with other parameters.
     "title"         Required title of the card.
-    "href"          Required address for the button or hyperlink.
+    "href"          Optional address for the button or hyperlink.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
     "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
                     "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
@@ -28,10 +28,17 @@
     {{- $color := .color -}}
     {{- $description := .description -}}
     
-    <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
+    {{- if $href -}}
+        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
+                <p class="card-title fs-5 fw-bold">{{ $title }}</p>
+            {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
+        </a>
+    {{- else -}}
+        <div>
             <p class="card-title fs-5 fw-bold">{{ $title }}</p>
-        {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
-    </a>
+            {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
+        </div>
+    {{- end -}}
 {{- end -}}
 
 <!-- Inline partial to render the card's header or footer -->
@@ -107,10 +114,6 @@
     {{- if not $description }}{{ $description = .Description }}{{ end -}}
     {{- if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
     {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
-{{- end -}}
-
-{{- if not $href -}}
-    {{- errorf "partial [assets/card.html] - Missing value for param 'href'" -}}
 {{- end -}}
 
 {{- $class := .class -}}

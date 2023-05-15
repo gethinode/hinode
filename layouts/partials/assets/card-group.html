@@ -58,8 +58,6 @@
 {{- else if eq $cols 4 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" -}}
 {{- else if eq $cols 5 }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ end -}}
 
-{{- $title := .title -}}
-
 {{- $paginate := false -}}
 {{- with .paginate -}}
     {{- if ne (printf "%T" .) "bool" -}}
@@ -90,7 +88,6 @@
 {{- $orientation := .orientation -}}
 
 <div class="container-fluid p-4 px-xxl-0">
-    {{ with $title }}<p class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
     {{ $paginator := "" }}
     {{ if $paginate }}
         {{ $paginator = $page.Paginate $list }}
@@ -107,13 +104,14 @@
                 "footer" $footer
                 "orientation" $orientation
             ) -}}
-            {{- if $element.IsPage -}}
+            
+            {{- if $element.Permalink -}}
                 {{- $params = merge $params (dict "path" $element.File.Path) -}}
             {{- else -}}
                 {{- $params = merge $params (dict
                     "title" $element.Title
-                    "href" (or $element.Permalink "#!")
-                    "description" $element.Description
+                    "href" $element.Permalink
+                    "description" (or $element.Description $element.Content)
                     "thumbnail" $element.Params.thumbnail
                     "icon" $element.Params.icon
                 ) -}}

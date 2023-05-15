@@ -56,7 +56,8 @@
         reverse = false
         nested = true
         cols = 1
-        color = "body-tertiary"
+        background = "body-tertiary"
+        color = "body"
         padding = "3"
         header = "none"
         footer = "tags"
