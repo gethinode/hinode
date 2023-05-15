@@ -31,6 +31,8 @@
   translation: "More Features"
 - id: moreGuides
   translation: "More Guides"
+- id: moreOpensource
+  translation: "More Features"
 - id: moreProjects
   translation: "More Projects"
 - id: moreUsers
