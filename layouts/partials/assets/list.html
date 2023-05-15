@@ -53,10 +53,6 @@
     {{- range $index, $item := $list -}}
         {{- $odd := eq (mod $index 2) 1 -}}
         <div class="container ratio-section d-flex flex-column">
-            {{ if eq $index 0 }}
-                {{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
-            {{ end }}
-
             <div class="row pt-5 pb-5 align-items-center flex-fill row-cols-2">
                 <div class="col-6{{ if $odd }} order-last{{ end }}">
                     {{- $style := "reveal fade-bottom" -}}
@@ -78,9 +74,6 @@
     {{- range $index, $item := $list -}}
         {{- $odd := eq (mod $index 2) 1 -}}
         <div class="container d-flex flex-column">
-            {{ if eq $index 0 }}
-                {{ with $title }}<p class="display-4 pt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
-            {{ end }}
             <div class="row pt-5 pb-5 align-items-center flex-fill row-cols-2">
                 <div class="col-12 text-center">
                     {{ partial "partials/list-img.html" (dict "thumbnail" $item.Params.Thumbnail "mode" $item.Params.colormode) }}
