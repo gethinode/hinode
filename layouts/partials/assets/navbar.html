@@ -166,39 +166,19 @@
             <!-- Render top-menu items (maximum depth of 2) -->
             <ul class="navbar-nav ms-auto">
                 {{- range $menu := $menus -}}
-                    {{- $menu_item_url := $menu.URL | relLangURL -}}
-                    {{- $page_url:= $page.RelPermalink | relLangURL -}}
-                    {{- $active := hasPrefix $page_url $menu_item_url -}}
-
-                    {{- $url := urls.Parse .URL -}}
-                    {{- $baseurl := urls.Parse $.Site.Params.Baseurl -}}
-                    {{- if .HasChildren -}}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link {{ if $active }}active{{ end }} dropdown-toggle" href="{{ .URL | relLangURL  }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ if $active }}<span class="active">{{ .Name }}</span>{{ else }}{{ .Name }}{{ end }}
-                            </a>
+                    <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
+                        {{- partial "assets/navbar-item.html" (dict "menu" $menu "page" $page) -}}
+                        {{- if .HasChildren -}}
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{- range .Children -}}
-                                    {{- $child_active := eq $page_url (.URL | relLangURL) -}}
-                                    <li><a class="dropdown-item {{ if $child_active }}active{{ end }}" href="{{ .URL | relLangURL  }}">{{ .Name }}</a></li>
+                                    {{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}
                                 {{- end -}}
                             </ul>
-                        </li>
-                    {{- else -}}
-                        <li class="nav-item">
-                            {{- $external := ne $url.Host $baseurl.Host -}}
-                            <a class="nav-link {{ if $active }}active{{ end }}"
-                                href="{{ with .Page }}{{ .RelPermalink }}{{ else }}{{ .URL | relLangURL }}{{ end }}" {{ if $external }}target="_blank" rel="noopener noreferrer" {{ end }}>
-                                {{- with $pre}}{{ . }}{{ end -}}
-                                <span {{if $active }} class="active"{{end}}>{{ .Name }}</span>
-                                {{- with $post}}{{ . }}{{ end -}}
-                                {{- if $external }} {{ partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}{{ end -}}
-                            </a>
-                        </li>
-                    {{- end -}}
+                        {{- end -}}
+                    </li>
                 {{- end -}}
 
-
+                <!-- Insert divider if applicable -->
                 {{- if or $enableLanguage $enableDarkMode -}}
                     <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
                         <div class="vr d-none d-md-flex h-100 mx-md-2"></div>

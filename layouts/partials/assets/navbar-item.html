@@ -1,0 +1,45 @@
+{{- $menu := .menu -}}
+{{- $parent := .parent -}}
+{{- $page := .page -}}
+{{- $class := .class -}}
+
+{{- $menuURL := (or $menu.PageRef $menu.URL) | relLangURL -}}
+{{- $pageURL := $page.RelPermalink | relLangURL -}}
+{{- $isActive := hasPrefix $pageURL $menuURL -}}
+{{- $isAlias := $menu.Params.alias -}}
+
+{{- $url := urls.Parse $menuURL -}}
+{{- $baseURL := urls.Parse $.Site.Params.Baseurl -}}
+{{- $isExternal := ne $url.Host $baseURL.Host -}}
+{{- $externalHref := "" }}
+{{- if $isExternal }}{{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer\"" }}{{ end -}}
+
+{{- $mainNav := urlize (lower $menu.Name) -}}
+{{- $childNav := "" -}}
+
+{{- $button := "" -}}
+{{- if $parent -}}
+    {{- $mainNav = urlize (lower $parent.Name) -}}
+    {{- $childNav = urlize (lower $menu.Name) -}}
+    {{- $class = printf "dropdown-item %s" $class -}}
+{{- else if $menu.HasChildren -}}
+    {{- $class = printf "nav-link dropdown-toggle %s" $class -}}
+    {{- $button = " role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" -}}
+{{- else -}}
+    {{- $class = printf "nav-link %s" $class -}}
+{{- end -}}
+{{- $params := "" -}}
+{{- if and $isAlias (not $isExternal) -}}
+    {{- $params = printf "?menu=%s" $mainNav -}}
+    {{- with $childNav }}{{ $params = printf "%s&child=%s" $params . }}{{ end -}}
+{{- end -}}
+
+<a class="{{ $class }}{{ if $isActive }} active{{ end }}" 
+    data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
+    href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
+    
+    {{- with $menu.Pre }}{{ . }}{{ end -}}
+    <span {{ if $isActive }} class="active"{{ end }}>{{ $menu.Name }}</span>
+    {{- with $menu.Post }}{{ . }}{{ end -}}
+    {{- if $isExternal }} {{ partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}{{ end -}}
+</a>
