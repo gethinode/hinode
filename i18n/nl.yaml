@@ -65,6 +65,10 @@
   translation: "Automatisch"
 - id: toggleMainNav
   translation: "Toon of verberg hoofdnavigatie"
+- id: addedFeature
+  translation: "Toegevoegd in"
+- id: deprecatedFeature
+  translation: "Verouderd in"
 
 # 404 page
 - id: pageNotFound

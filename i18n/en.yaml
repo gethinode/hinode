@@ -75,6 +75,10 @@
   translation: "Toggle main navigation"
 - id: demo
   translation: "Demo"
+- id: addedFeature
+  translation: "Added in"
+- id: deprecatedFeature
+  translation: "Deprecated in"
 
 # 404 page
 - id: pageNotFound
