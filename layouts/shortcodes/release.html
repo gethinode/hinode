@@ -1,0 +1,68 @@
+<!-- 
+    Displays a release button that links to a specific release. Use the optional state to indicate if it is a new or
+    deprecated feature.
+    "version":      Required version string, expects semver notation with a "v" prefix.
+    "state":        Optional state, either "new" or "deprecated".
+    "short":        Optional flag to indicate the release button should use short notation.
+-->
+
+{{- $error := false -}}
+{{- $version := .Get "version" -}}
+{{- $inline := false -}}
+
+{{- $state := "new" -}}
+{{- with .Get "state" }}{{ $state = . }}{{ end -}}
+{{- $supportedStates := slice "new" "deprecated" -}}
+{{- if not (in $supportedStates $state) -}}
+    {{- errorf "Invalid value for param 'state': %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
+
+{{- $shortParam := "false" -}}
+{{- $short := false -}}
+{{- with .Get "short" }}{{ $shortParam = . }}{{ end -}}
+{{- $supportedFlags := slice "true" "false" -}}
+{{- if in $supportedFlags $shortParam -}}
+    {{- if eq $shortParam "true" }}{{ $short = true }}{{ end -}}
+{{- else -}}
+    {{- errorf "Invalid value for param 'short': %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
+
+{{- $inlineParam := "false" -}}
+{{- $inline := false -}}
+{{- with .Get "inline" }}{{ $inlineParam = . }}{{ end -}}
+{{- $supportedFlags := slice "true" "false" -}}
+{{- if in $supportedFlags $inlineParam -}}
+    {{- if eq $inlineParam "true" }}{{ $inline = true }}{{ end -}}
+{{- else -}}
+    {{- errorf "Invalid value for param 'inline': %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
+
+{{- $title := $version -}}
+{{- $color := "success" -}}
+{{- if eq $state "deprecated" -}}
+    {{- $color = "secondary" -}}
+{{- end -}}
+
+{{- if not $short -}}
+    {{- if eq $state "deprecated" -}}
+        {{- $title = (printf "Deprecated in %s" $version) -}}
+    {{- else -}}
+        {{- $title = (printf "Added in %s" $version) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if not $error -}}
+    <div class="pb-3">
+    {{- partial "assets/button.html" (dict 
+        "title" $title
+        "href" (path.Join site.Params.docs.release $version)
+        "size" "sm"
+        "color" $color
+        "outline" "true"
+        "class" "rounded-2 fw-semibold")
+    -}} 
+    </div>
+{{- end -}}

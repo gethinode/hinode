@@ -6,6 +6,12 @@
 -->
 
 {{- $id := .Ordinal -}}
+{{- $parent := printf "accordion-%d" .Parent.Ordinal -}}
+{{- with (.Parent.Get "id") -}}
+    {{- $parent = . -}}
+{{- end -}}
+
+{{- $id := .Ordinal -}}
 {{ $header := .Get "header" -}}
 {{ if not $header -}}
     {{ if .Parent }}
@@ -34,8 +40,6 @@
 {{ else -}}
     {{ errorf "Invalid value for param 'show': %s" $showParam -}}
 {{ end -}}
-
-{{- $parent := printf "accordion-%d" .Parent.Ordinal -}}
 
 <div class="accordion-item">
     {{- with $header -}}

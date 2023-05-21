@@ -224,6 +224,16 @@ De volgende shortcode toont een navigatiemenu.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Release
+
+De volgende shortcode toont een knop voor een nieuwe release.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* release version="v0.14.1" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Spinner
 
 De volgende shortcode toont een ronddraaiende cirkel.
