@@ -1,12 +1,34 @@
 <!-- 
     Displays a group of vertically collapsing and expanding items. Add accordion-item inner elements for each accordion
     item. The shortcode supports the following arguments:
+    "id":           Optional id of the accordion, defaults to "accordion-" with a sequential number.
+    "always-open":  Optional flag to make accordion items stay open when another item is opened.
     "class":        Optional class attribute of the accordion element, e.g. “w-50”.
 -->
 
-{{- $id := .Ordinal -}}
+{{- $id := printf "accordion-%d" .Ordinal -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
 {{- $class := .Get "class" -}}
 
-<div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
-    {{- .Inner -}}
+{{- $openParam := "false" -}}
+{{- $open := false -}}
+{{- with .Get "always-open" }}{{ $openParam = . }}{{ end -}}
+{{- $supportedFlags := slice "true" "false" -}}
+{{- if in $supportedFlags $openParam -}}
+    {{- if eq $openParam "true" }}{{ $open = true }}{{ end -}}
+{{- else -}}
+    {{- errorf "Invalid value for param 'always-open': %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
+
+{{- $body := .Inner -}}
+{{- if $open -}}
+    {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
+    {{- $body = (replace .Inner $pattern "") | markdownify | safeHTML }}
+{{- end -}}
+
+<div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
+    {{- $body -}}
 </div>
