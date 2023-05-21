@@ -14,7 +14,10 @@
     {{ $color = "primary" -}}
 {{ end -}}
 
-{{ $icon := .Get "icon" }}
+{{ $icon := "" }}
+{{ with .Get "icon" }}
+    {{ $icon = partial "assets/icon.html" (dict "icon" (printf "%s fa-2x fa-pull-left" .)) }}
+{{ end }}
 
 {{ $dismissibleParam := "false" -}}
 {{ $dismissible := false -}}
