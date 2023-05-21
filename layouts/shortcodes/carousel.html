@@ -1,18 +1,23 @@
 <!-- 
     Displays a carousel of several responsive images (see the image shortcode for more details). Add inner <img> 
     elements to define individual image slides. The shortcode supports the following arguments:
+    "id":           Optional id of the carousel, defaults to "carousel-" with a sequential number.
     "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
                     Instead, the original aspect ratio of the image is preserved.
     "class":        Optional class attribute of the carousel element, e.g. “w-75”.
 -->
 
+{{- $id := printf "carousel-%d" .Ordinal -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
+
 {{ $ratio := .Get "ratio" -}}
 {{ $class := .Get "class" -}}
-{{ $id := .Ordinal -}}
 {{ $images := .Inner -}}
 {{ $items := len (findRE "carousel-item" $images) -}}
 
-<div id="carousel-{{ $id }}" class="carousel slide mb-3{{ with $class }} {{ . }}{{ end }}" data-bs-ride="true">
+<div id="{{ $id }}" class="carousel slide mb-3{{ with $class }} {{ . }}{{ end }}" data-bs-ride="true">
     <div class="carousel-indicators">
         {{ range $index := (seq $items) -}}
             <button type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide-to="{{ sub $index 1 }}" {{ if eq $index 1 }}class="active"{{ end }} aria-current="true" aria-label="Slide {{ $index }}"></button>
@@ -21,11 +26,11 @@
     <div class="carousel-inner">
         {{ $images }}
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ $id }}" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ $id }}" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
