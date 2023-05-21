@@ -6,12 +6,13 @@
     "icon"          Optional class and name of a Font Awesome icon to include.
 -->
 
+{{- $error := false -}}
 {{ $color := "primary" -}}
 {{ with .Get "color" }}{{ $color = . }}{{ end -}}
 {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
 {{ if not (in $supportedColors $color) -}}
     {{ errorf "Invalid value for param 'color': %s" .Position -}}
-    {{ $color = "primary" -}}
+    {{ $error = true -}}
 {{ end -}}
 
 {{ $icon := "" }}
@@ -27,10 +28,13 @@
     {{ if eq $dismissibleParam "true" }}{{ $dismissible = true }}{{ end -}}
 {{ else -}}
     {{ errorf "Invalid value for param 'dismissible': %s" .Position -}}
+    {{ $error = true -}}
 {{ end -}}
 
-<div class="alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}" role="alert">
-    {{ with $icon }}<i class="{{ . }} fa-2x fa-pull-left"></i>{{ end }}
-    {{ trim .Inner " \r\n" | markdownify | safeHTML -}}
-    {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
-</div>
+{{- if not $error -}}
+    <div class="alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}" role="alert">
+        {{ with $icon }}{{ . }}{{ end }}
+        {{ trim .Inner " \r\n" | markdownify | safeHTML -}}
+        {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
+    </div>
+{{- end -}}
