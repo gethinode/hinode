@@ -10,6 +10,8 @@
 [docs]
     version = "0.8"
     basePath = ""
+    github = "https://github.com/gethinode/hinode"
+    release = "https://github.com/gethinode/hinode/releases/tag/"
 # toml-docs-end docs
 
 # toml-docs-start home
