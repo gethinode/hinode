@@ -26,8 +26,6 @@
     {{ $id = . }}
 {{ end }}
 
-{{ warnf "Shortcode nav: %s" $id}}
-
 {{ $path := .Get "path" }}
 {{ $page := .Site.GetPage $path }}
 {{ if not $page }}

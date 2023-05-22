@@ -55,8 +55,6 @@
     {{ $id = . }}
 {{ end }}
 
-{{ warnf "Partial nav: %s" $id}}
-
 {{- $page := .page -}}
 {{- if not $page -}}
     {{- errorf "partial [assets/navbar.html] - Missing value for param 'page'" -}}
