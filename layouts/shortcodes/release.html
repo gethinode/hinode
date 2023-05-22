@@ -58,7 +58,7 @@
     <div class="pb-3">
     {{- partial "assets/button.html" (dict 
         "title" $title
-        "href" (path.Join site.Params.docs.release $version)
+        "href" (printf "%s/%s" (strings.TrimSuffix "/" site.Params.docs.release) $version)
         "size" "sm"
         "color" $color
         "outline" "true"

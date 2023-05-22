@@ -1,5 +1,6 @@
 <!-- 
     Displays a navigation header with a toggler. The partial supports the following arguments:
+    "id"            Optional id of the navbar toggler, defaults to "navbar-collapse-0".
     "page"          Required object reference to the current page.
     "menus"         Optional name of the menu configuration, defaults to "main".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
@@ -16,7 +17,6 @@
 
 <!-- Inline partial to render the color mode switcher -->
 {{- define "partials/navbar-mode.html" -}}
-    {{- $id := .id -}}
     {{- $size := .size -}}
     {{- $collapsed := .collapsed -}}
 
@@ -50,8 +50,10 @@
 
 {{- $supportedFlags := slice "true" "false" -}}
 
-{{- $id := 0 -}}
-{{- with .id }}{{ $id = . }}{{ end -}}
+{{- $id := printf "navbar-collapse-%d" 0 -}}
+{{ with .id }}
+    {{ $id = . }}
+{{ end }}
 
 {{- $page := .page -}}
 {{- if not $page -}}
@@ -155,15 +157,15 @@
 
         <!-- Insert main navigation toggler -->
         <div class="d-flex fw-30">
-            <button id="main-nav-toggler" class="navbar-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-{{ $id }}"
-                aria-controls="navbarSupportedContent-{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
+            <button id="main-nav-toggler" class="navbar-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}"
+                aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
                 <span class="toggler-icon top-bar emphasis"></span>
                 <span class="toggler-icon middle-bar emphasis"></span>
                 <span class="toggler-icon bottom-bar emphasis"></span>
             </button>
         </div>
 
-        <div class="navbar-collapse collapse" id="navbarSupportedContent-{{ $id }}">
+        <div class="navbar-collapse collapse" id="{{ $id }}">
             <!-- Insert search input -->
             {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
             
@@ -216,8 +218,8 @@
                               
                 <!-- Insert color mode switcher -->
                 {{- if $enableDarkMode -}}
-                    {{- partial "partials/navbar-mode.html" (dict "id" $id "size" $size "collapsed" true) -}}
-                    {{- partial "partials/navbar-mode.html" (dict "id" $id "size" $size "collapsed" false) -}}
+                    {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true) -}}
+                    {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false) -}}
                 {{- end -}}
             </ul>
         </div>

@@ -2,6 +2,7 @@
 {{- $parent := .parent -}}
 {{- $page := .page -}}
 {{- $class := .class -}}
+{{- $anchorClass := "" -}}
 
 {{- $menuURL := (or $menu.PageRef $menu.URL) | relLangURL -}}
 {{- $pageURL := $page.RelPermalink | relLangURL -}}
@@ -21,12 +22,12 @@
 {{- if $parent -}}
     {{- $mainNav = urlize (lower $parent.Name) -}}
     {{- $childNav = urlize (lower $menu.Name) -}}
-    {{- $class = printf "dropdown-item %s" $class -}}
+    {{- $anchorClass = "dropdown-item" -}}
 {{- else if $menu.HasChildren -}}
-    {{- $class = printf "nav-link dropdown-toggle %s" $class -}}
+    {{- $anchorClass = "nav-link dropdown-toggle" -}}
     {{- $button = " role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" -}}
 {{- else -}}
-    {{- $class = printf "nav-link %s" $class -}}
+    {{- $anchorClass = "nav-link" -}}
 {{- end -}}
 {{- $params := "" -}}
 {{- if and $isAlias (not $isExternal) -}}
@@ -34,7 +35,7 @@
     {{- with $childNav }}{{ $params = printf "%s&child=%s" $params . }}{{ end -}}
 {{- end -}}
 
-<a class="{{ $class }}{{ if $isActive }} active{{ end }}" 
+<a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{. }}{{ end }}" 
     data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
     href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
     

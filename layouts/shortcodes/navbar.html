@@ -2,6 +2,8 @@
     Displays a navigation header with a toggler. The menu items are derived from the site's configuration. Nested items
     are supported at one-level depth. The navigation bar includes a search area and a language switcher if applicable.
     The shortcode supports the following arguments:
+    "id"            Optional id of the navbar toggler, defaults to "navbar-collapse-n" with a sequential number n
+                    starting at 1.
     "path"          Required path of the active page.
     "menus"         Optional name of the menu configuration, defaults to "main".
     "size"          Optional breakpoint of the navbar toggler, either "xs", "sm", "md" (default), "lg", or "xl".
@@ -19,7 +21,10 @@
 {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "white" "black" "body" "body" "body-tertiary" -}}
 {{ $supportedFlags := slice "true" "false" -}}
 
-{{ $id := add .Ordinal 1 }}
+{{- $id := printf "navbar-collapse-%d" (add .Ordinal 1) -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
 
 {{ $path := .Get "path" }}
 {{ $page := .Site.GetPage $path }}
