@@ -252,12 +252,20 @@ De volgende shortcode toont een knop die een bericht laat verschijnen op het sch
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button id="toastButton" */>}}
-    Toon bericht
+{{</* button toast="toast-example-1" */>}}
+    Toon bericht 1
 {{</* /button */>}}
 
-{{</* toast header="Titel" */>}}
-    Dit is een bericht.
+{{</* button toast="toast-example-2" */>}}
+    Toon bericht 2
+{{</* /button */>}}
+
+{{</* toast id="toast-example-1" header="Eerste titel" */>}}
+    Dit is het eerste bericht.
+{{</* /toast */>}}
+
+{{</* toast id="toast-example-2" header="Tweede titel" */>}}
+    Dit is het tweede bericht.
 {{</* /toast */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
