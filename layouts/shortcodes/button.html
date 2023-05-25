@@ -14,6 +14,7 @@
                     inactive buttons.
     "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons.
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
+    "toast"         Optional id of the toast to display when the button is clicked.
 -->
 
 {{ $error := false }}
@@ -77,6 +78,8 @@
     {{ $error = true }}
 {{ end -}}
 
+{{- $toast := .Get "toast" -}}
+
 {{ if not $error }}
     {{- partial "assets/button.html" (dict 
         "type" $type
@@ -91,6 +94,7 @@
         "href" $href
         "id" $id
         "state" $state
-        "placement" $placement)
+        "placement" $placement
+        "toast" $toast)
     -}} 
 {{ end }}
