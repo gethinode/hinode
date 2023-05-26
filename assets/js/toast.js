@@ -11,11 +11,9 @@ function createFragment (htmlStr) {
 const container = '<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>'
 document.body.appendChild(createFragment(container))
 const parent = document.getElementById('toast-container')
-console.log(parent)
 
 document.querySelectorAll('[data-toast-target]').forEach(trigger => {
   const target = document.getElementById(trigger.getAttribute('data-toast-target'))
-  console.log(target)
   if (target !== null) {
     parent.appendChild(target)
 
