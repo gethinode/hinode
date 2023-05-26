@@ -79,6 +79,10 @@
   translation: "Added in"
 - id: deprecatedFeature
   translation: "Deprecated in"
+- id: shareLink
+  translation: "Share via"
+- id: copiedToClipboard
+  translation: "Copied to clipboard"
 
 # 404 page
 - id: pageNotFound

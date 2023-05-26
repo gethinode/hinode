@@ -251,12 +251,20 @@ As an example, the following shortcode displays a button that, when clicked, tri
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button id="toastButton" */>}}
-    Show toast
+{{</* button toast="toast-example-1" */>}}
+    Show toast 1
 {{</* /button */>}}
 
-{{</* toast header="Custom title" */>}}
-    This is a toast message.
+{{</* button toast="toast-example-2" */>}}
+    Show toast 2
+{{</* /button */>}}
+
+{{</* toast id="toast-example-1" header="First title" */>}}
+    This is the first toast message.
+{{</* /toast */>}}
+
+{{</* toast id="toast-example-2" header="Second title" */>}}
+    This is the second toast message.
 {{</* /toast */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

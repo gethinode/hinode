@@ -36,3 +36,10 @@ const addCopyButtons = (clipboard) => {
 if (navigator && navigator.clipboard) {
   addCopyButtons(navigator.clipboard)
 }
+
+document.querySelectorAll('[data-clipboard]').forEach(trigger => {
+  const text = trigger.getAttribute('data-clipboard')
+  trigger.addEventListener('click', () => {
+    navigator.clipboard.writeText(text)
+  })
+})

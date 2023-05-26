@@ -1,0 +1,28 @@
+<!-- 
+    Prepares a toast message. Use a trigger to display the message. The shortcode supports the following arguments:
+    "id"            Optional id of the toast message, defaults to "toast-message-0".
+    "header":       Optional header of the toast message.
+    "message":      Required toast message.
+-->
+
+{{- $id := printf "toast-message-%d" 0 -}}
+{{ with .id }}
+    {{ $id = . }}
+{{ end }}
+
+{{ $header := .header -}}
+{{ if not $header -}}
+    {{ $header = site.Title -}}
+{{ end -}}
+{{- $message := .message -}}
+{{ if not $message -}}
+    {{- errorf "partial [assets/toast.html] - Missing message text" -}}
+{{ end -}}
+
+<div id="{{ $id }}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        {{ with $header }}<strong class="me-auto">{{ . }}</strong>{{ end }}
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">{{ $message }}</div>
+</div>

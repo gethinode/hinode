@@ -36,6 +36,44 @@
     sidebar = true
 # toml-docs-end navigation
 
+# toml-docs-start sharing
+[sharing]
+    enabled = true
+    sort = "weight"
+    reverse = false
+
+[[sharing.providers]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
+    icon = "fab linkedin"
+    weight = 10
+
+[[sharing.providers]]
+    name = "Twitter"
+    url = "https://twitter.com/home?status={url}"
+    icon = "fab twitter"
+    weight = 20
+
+[[sharing.providers]]
+    name = "Facebook"
+    url = "https://www.facebook.com/sharer.php?u={url}"
+    icon = "fab facebook"
+    weight = 30
+
+[[sharing.providers]]
+    name = "WhatsApp"
+    url = "whatsapp://send?text={title}%20{url}"
+    icon = "fab whatsapp"
+    weight = 40
+
+[[sharing.providers]]
+    name = "email"
+    url = "{url}"
+    icon = "fas link"
+    weight = 50
+    clipboard = true
+# toml-docs-end sharing
+
 # toml-docs-start sections
 [sections]
     [sections.blog]
