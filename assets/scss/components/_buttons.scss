@@ -6,3 +6,22 @@
 .open > .dropdown-toggle.btn-primary {
     color: #fff if($enable-important-utilities, !important, null);
 }
+
+.btn-social {
+    --bs-btn-bg: transparent;
+    --bs-btn-border-width: none;
+    --bs-btn-color: var(--bs-secondary);
+    --bs-btn-border-color: none;
+    --bs-btn-hover-bg: none;
+    --bs-btn-hover-border-color: none;
+    --bs-btn-active-bg: none;
+    --bs-btn-active-border-color: none;
+}
+
+.btn-social:hover,
+.btn-social:focus,
+.btn-social:active,
+.btn-social.active,
+.open > .dropdown-toggle.btn-primary {
+    color: var(--bs-primary) if($enable-important-utilities, !important, null);
+}

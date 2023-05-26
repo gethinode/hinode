@@ -69,6 +69,10 @@
   translation: "Toegevoegd in"
 - id: deprecatedFeature
   translation: "Verouderd in"
+- id: shareLink
+  translation: "Delen via"
+- id: copiedToClipboard
+  translation: "Gekopieerd naar clipboard"
 
 # 404 page
 - id: pageNotFound

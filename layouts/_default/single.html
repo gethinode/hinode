@@ -2,6 +2,7 @@
     {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
     {{ if in (slice "docs" "minimal") .Layout }}
         {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+        {{ partial "assets/sharing.html" . }}
         <p class="lead mb-5">{{ .Description }}</p>
     {{ else }}
         {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
@@ -14,21 +15,24 @@
             {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
         </small>
 
-        <div class="mt-3">
-            <div class="d-none-dark">
-                {{ range (.GetTerms "tags") -}}
-                    <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
-                    &nbsp;
-                {{ end -}}
+        {{- if gt (len (.GetTerms "tags")) 0 -}}
+            <div class="mt-3">
+                <div class="d-none-dark">
+                    {{ range (.GetTerms "tags") -}}
+                        <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
+                        &nbsp;
+                    {{ end -}}
+                </div>
+                
+                <div class="d-none-light">
+                    {{ range (.GetTerms "tags") -}}
+                        <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
+                        &nbsp;
+                    {{ end -}}
+                </div>
             </div>
-            
-            <div class="d-none-light">
-                {{ range (.GetTerms "tags") -}}
-                    <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
-                    &nbsp;
-                {{ end -}}
-            </div>
-        </div>
+        {{- end -}}
+        {{ partial "assets/sharing.html" . }}
         <p class="lead mb-5 mt-3">{{ .Description }}</p>
     {{ end }}
 {{ end -}}

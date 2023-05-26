@@ -1,0 +1,27 @@
+{{- if .Site.Params.sharing.enabled -}}
+    {{- if or .Params.sharing (not (isset .Params "sharing")) -}}
+        {{- $page := . -}}
+        {{- $list := .Site.Params.sharing.providers -}}
+        {{- $sort := .Site.Params.sharing.sort | default "weight" -}}
+        {{- $order := .Site.Params.sharing.order | default "asc" -}}
+        {{- $list = sort $list $sort $order -}}
+        <div class="py-3 text-body-secondary">
+            {{ T "shareLink" }}
+            {{- range $index, $item := $list -}}
+                {{- $url := $item.url -}}
+                {{- $url = replace $url "{url}" $page.Permalink -}}
+                {{- $url = replace $url "{title}" (urlquery $page.Title) -}}
+                {{- $url = $url | safeURL -}}
+                {{- $target := "" -}}
+                {{- $clipboard := "" -}}
+                {{- if .clipboard -}}
+                    {{- $target = (printf "toast-message-%s-%d" (anchorize $item.name) $index ) -}}
+                    {{- $clipboard = $url -}}
+                    {{- $url = "#!" -}}
+                    {{- partial "assets/toast.html" (dict "id" $target "message" (T "copiedToClipboard")) -}}
+                {{- end -}}
+                {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" $item.icon "class" "btn-social px-1" )}}
+            {{- end -}}
+        </div>
+    {{- end -}}
+{{- end -}}
