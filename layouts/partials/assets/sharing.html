@@ -1,9 +1,10 @@
 {{- if .Site.Params.sharing.enabled -}}
     {{- if or .Params.sharing (not (isset .Params "sharing")) -}}
         {{- $page := . -}}
+        {{- $order := "asc" -}}
         {{- $list := .Site.Params.sharing.providers -}}
+        {{- if .Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
         {{- $sort := .Site.Params.sharing.sort | default "weight" -}}
-        {{- $order := .Site.Params.sharing.order | default "asc" -}}
         {{- $list = sort $list $sort $order -}}
         <div class="py-3 text-body-secondary">
             {{ T "shareLink" }}

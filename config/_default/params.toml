@@ -40,7 +40,7 @@
 [sharing]
     enabled = true
     sort = "weight"
-    order = "asc"
+    reverse = false
 
 [[sharing.providers]]
     name = "LinkedIn"
