@@ -38,7 +38,7 @@
 
 # toml-docs-start messages
 [messages]
-    placement = "middle-center"
+    placement = "bottom-right"
 # toml-docs-end messages
 
 # toml-docs-start sharing
