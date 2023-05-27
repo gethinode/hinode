@@ -26,4 +26,6 @@
 {{- else if eq $placement "bottom-right" }}{{ $position = "bottom-0 end-0" -}}
 {{- end -}}
 
-<div id="toast-container" class="toast-container position-fixed {{ $position }} p-3"></div>
+<div id="toast-container" class="toast-container position-fixed {{ $position }} p-3">
+    {{- partial "assets/toast.html" (dict "id" "toast-copied-code-message" "message" (printf "%s %s" (T "code")  (T "copiedToClipboard"))) -}}
+</div>

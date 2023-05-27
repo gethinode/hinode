@@ -14,6 +14,7 @@ const addCopyButtons = (clipboard) => {
     // 2. Create a button that will trigger a copy operation
     const button = document.createElement('button')
     button.className = 'clipboard-button'
+    button.setAttribute('data-toast-target', 'toast-copied-code-message')
     button.type = 'button'
     button.innerHTML = svgCopy
     button.addEventListener('click', () => {
