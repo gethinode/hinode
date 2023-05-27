@@ -36,6 +36,11 @@
     sidebar = true
 # toml-docs-end navigation
 
+# toml-docs-start messages
+[messages]
+    placement = "middle-center"
+# toml-docs-end messages
+
 # toml-docs-start sharing
 [sharing]
     enabled = true
