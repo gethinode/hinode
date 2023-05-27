@@ -68,6 +68,7 @@
             </div>
         {{ end }}
 
+        {{- partial "footer/toast-container.html" . -}}
         {{- partialCached "footer/scripts.html" (dict "header" false "page" .) }}
     </body>
 </html>

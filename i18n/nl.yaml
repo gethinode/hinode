@@ -72,7 +72,11 @@
 - id: shareLink
   translation: "Delen via"
 - id: copiedToClipboard
-  translation: "Gekopieerd naar clipboard"
+  translation: "gekopieerd naar clipboard"
+- id: link
+  translation: "Link"
+- id: code
+  translation: "Code"
 
 # 404 page
 - id: pageNotFound

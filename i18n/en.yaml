@@ -82,7 +82,11 @@
 - id: shareLink
   translation: "Share via"
 - id: copiedToClipboard
-  translation: "Copied to clipboard"
+  translation: "copied to clipboard"
+- id: link
+  translation: "Link"
+- id: code
+  translation: "Code"
 
 # 404 page
 - id: pageNotFound

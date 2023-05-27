@@ -4,6 +4,7 @@
     "header":       Optional header of the toast message. Uses the site title by default.
 -->
 
+{{- $error := false -}}
 {{- $id := printf "toast-message-%d" .Ordinal -}}
 {{- with .Get "id" }}{{ $id = . }}{{ end -}}
 {{ $header := .Get "header" -}}
@@ -11,6 +12,6 @@
 
 {{ if not $message -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
-{{ else }}
+{{ else if not $error -}}
     {{ partial "assets/toast.html" (dict "id" $id "header" $header "message" $message) }}
 {{ end -}}

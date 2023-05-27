@@ -1,0 +1,31 @@
+<!-- 
+    Defines a container to stack toast messages. By default, toast messages are displayed in the bottom right of the
+    viewport. Multiple toast messages are stacked vertically. Adjust the configuration by adjusting 'messages' in the
+    site parameters. The following arguments are supported:
+    "placement"     Optional position of the toast messages relative to the viewport: "top-left", "top-center",
+                    "top-right", "middle-left", "middle-center", "middle-right", "bottom-left", "bottom-center", or
+                    "bottom-right" (default).
+-->
+
+{{- $placement := "bottom-right" -}}
+{{- $position := "bottom-0 end-0" -}}
+{{- with site.Params.messages.placement }}{{ $placement = . }}{{ end -}}
+{{- $supportedPlacements := slice "top-left" "top-center" "top-right" "middle-left" "middle-center" "middle-right" "bottom-left" "bottom-center" "bottom-right" -}}
+{{- if not (in $supportedPlacements $placement) -}}
+    {{- errorf "partial [footer/toast-container.html] - Invalid value for param 'placement': %s" $placement -}}
+{{- end -}}
+
+{{- if eq $placement "top-left" }}{{ $position = "top-0 start-0" -}}
+{{- else if eq $placement "top-center" }}{{ $position = "top-0 start-50 translate-middle-x" -}}
+{{- else if eq $placement "top-right" }}{{ $position = "top-0 end-0" -}}
+{{- else if eq $placement "middle-left" }}{{ $position = "top-50 start-0 translate-middle-y" -}}
+{{- else if eq $placement "middle-center" }}{{ $position = "top-50 start-50 translate-middle" -}}
+{{- else if eq $placement "middle-right" }}{{ $position = "top-50 end-0 translate-middle-y" -}}
+{{- else if eq $placement "bottom-left" }}{{ $position = "bottom-0 start-0" -}}
+{{- else if eq $placement "bottom-center" }}{{ $position = "bottom-0 start-50 translate-middle-x" -}}
+{{- else if eq $placement "bottom-right" }}{{ $position = "bottom-0 end-0" -}}
+{{- end -}}
+
+<div id="toast-container" class="toast-container position-fixed {{ $position }} p-3">
+    {{- partial "assets/toast.html" (dict "id" "toast-copied-code-message" "message" (printf "%s %s" (T "code")  (T "copiedToClipboard"))) -}}
+</div>
