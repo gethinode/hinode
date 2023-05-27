@@ -3,7 +3,6 @@
 // the click event of the origin is linked as well.
 
 const container = document.getElementById('toast-container')
-console.log(container)
 if (container !== null) {
   // process all data-toast-target elements
   document.querySelectorAll('[data-toast-target]').forEach(trigger => {
