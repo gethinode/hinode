@@ -87,6 +87,8 @@
 {{- $footer := .footer -}}
 {{- $orientation := .orientation -}}
 
+{{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
+
 <div class="container-fluid p-4 px-xxl-0">
     {{ $paginator := "" }}
     {{ if $paginate }}
