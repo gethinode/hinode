@@ -142,7 +142,7 @@
                     {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
                 {{- else if $icon -}}
                     <div class="p-{{ $padding }} h-100 fa-wrapper d-flex align-items-center justify-content-center">
-                        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid text-secondary" $icon)) -}}
+                        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid text-secondary fa-fw" $icon)) -}}
                     </div>
                 {{- end -}}
             </div>
