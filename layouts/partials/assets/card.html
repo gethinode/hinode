@@ -136,7 +136,7 @@
 
 {{- if hasPrefix $orientation "horizontal" -}}
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
-        <div class="row g-0 row-cols-1">
+        <div class="row g-0 row-cols-1 h-100">
             <div class="col-4{{ if eq  $orientation "horizontal-sm" }} col-md-2{{ end }}">
                 {{- if $thumbnail -}}
                     {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
