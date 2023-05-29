@@ -18,17 +18,21 @@
         {{- if gt (len (.GetTerms "tags")) 0 -}}
             <div class="mt-3">
                 <div class="d-none-dark">
-                    {{ range (.GetTerms "tags") -}}
-                        <a class="btn btn-light btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
-                        &nbsp;
-                    {{ end -}}
+                    <div class="hstack gap-3">
+                        {{ range (.GetTerms "tags") -}}
+                            {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
+                            {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "light" "size" "sm") }}
+                        {{ end -}}
+                    </div>
                 </div>
                 
                 <div class="d-none-light">
-                    {{ range (.GetTerms "tags") -}}
-                        <a class="btn btn-outline-secondary btn-sm" href="{{ (path.Join .Page.RelPermalink) | relLangURL }}" role="button">{{ .LinkTitle }}</a>
-                        &nbsp;
-                    {{ end -}}
+                    <div class="hstack gap-3">
+                        {{ range (.GetTerms "tags") -}}
+                            {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
+                            {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "secondary" "size" "sm" "outline" "true") }}
+                        {{ end -}}
+                    </div>
                 </div>
             </div>
         {{- end -}}

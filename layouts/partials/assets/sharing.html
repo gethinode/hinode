@@ -6,7 +6,7 @@
         {{- if .Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
         {{- $sort := .Site.Params.sharing.sort | default "weight" -}}
         {{- $list = sort $list $sort $order -}}
-        <div class="py-3 text-body-secondary">
+        <div class="py-3 text-body-secondary hstack gap-2">
             {{ T "shareLink" }}
             {{- range $index, $item := $list -}}
                 {{- $url := $item.url -}}
@@ -21,7 +21,7 @@
                     {{- $url = "#!" -}}
                     {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link")  (T "copiedToClipboard"))) -}}
                 {{- end -}}
-                {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" $item.icon "class" "btn-social px-1" )}}
+                {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
             {{- end -}}
         </div>
     {{- end -}}
