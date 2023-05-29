@@ -75,10 +75,10 @@ Start a new Hinode project in three steps:
 
 1. Create a new site
 
-    Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of Hinode. Unless you plan to customize a lot, it is recommended to use the child theme:
+    Hinode is available as a [template][repository_template], and a [main repository][repository]. The template [npm][npm] to link to the latest available version of Hinode. Unless you plan to customize a lot, it is recommended to use the template:
 
     ```bash
-    git clone https://github.com/gethinode/child.git my-hinode-site && cd my-hinode-site
+    git clone https://github.com/gethinode/template.git my-hinode-site && cd my-hinode-site
     ```
 
     Use the main theme if you intend to customize the base code:
@@ -120,7 +120,7 @@ Hinode is inspired by the following themes:
 
 ## License
 
-The `hinode` and `child` codebase is released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
+The `hinode` and `template` codebase is released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) is licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
 <!-- MARKDOWN PUBLIC LINKS -->
 [blist]: https://github.com/apvarun/blist-hugo-theme
@@ -143,5 +143,5 @@ The `hinode` and `child` codebase is released under the [MIT license][license]. 
 [demo]: https://demo.gethinode.com/
 [license]: https://github.com/gethinode/hinode/blob/main/LICENSE
 [repository]: https://github.com/gethinode/hinode.git
-[repository_child]: https://github.com/gethinode/child.git
+[repository_template]: https://github.com/gethinode/template.git
 [website]: https://gethinode.com/
