@@ -34,7 +34,6 @@
     "env": "hugo env",
     "precheck": "npm version",
     "check": "hugo version",
-    "copy:fonts": "shx cp ./node_modules/@fortawesome/fontawesome-free/webfonts/* ./static/fonts/",
     "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
     "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
     "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark",
