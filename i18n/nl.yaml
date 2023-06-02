@@ -45,6 +45,8 @@
   translation: "Artikel"
 - id: articles
   translation: "Artikelen"
+- id: paginationNav
+  translation: "Pagina navigatie"
 - id: paginationPrevious
   translation: "Vorige"
 - id: paginationNext

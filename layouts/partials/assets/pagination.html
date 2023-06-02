@@ -22,9 +22,11 @@
 
 {{- if in $validFormats $format }}
   {{- if gt $page.Paginator.TotalPages 1 }}
-    <ul class="pagination pagination-{{ $format }} justify-content-center">
-      {{- partial (printf "partials/inline/pagination/%s" $format) $page }}
-    </ul>
+    <nav aria-label="{{ T "paginationNav" }}">
+      <ul class="pagination pagination-{{ $format }} justify-content-center">
+        {{- partial (printf "partials/inline/pagination/%s" $format) $page }}
+      </ul>
+    </nav>
   {{- end }}
 {{- else }}
   {{- errorf $msg2 (delimit $validFormats ", ") }}
@@ -50,11 +52,11 @@
 
     {{- with .Prev }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a>
       </li>
     {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
+        <a aria-disabled="true" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a>
       </li>
     {{- end }}
 
@@ -79,11 +81,11 @@
 
     {{- with .Next }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationNext" }}</span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a>
       </li>
     {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="{{ T "paginationNext" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ T "paginationNext" }}</span></a>
+        <a aria-disabled="true" aria-label="{{ T "paginationNext" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a>
       </li>
     {{- end }}
 
@@ -110,14 +112,14 @@
     {{- with .First }}
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationFirst" }}</span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-double-left"></i></span></a>
       </li>
       {{- end }}
     {{- end }}
 
     {{- with .Prev }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationPrevious" }}</span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a>
       </li>
     {{- end }}
 
@@ -142,7 +144,7 @@
 
     {{- with .Next }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true">{{ T "paginationNext" }}</span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a>
       </li>
     {{- end }}
 
