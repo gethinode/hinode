@@ -53,14 +53,16 @@
   translation: "Article"
 - id: articles
   translation: "Articles"
+- id: paginationNav
+  translation: "Page navigation"
 - id: paginationPrevious
-  translation: "Previous"
+  translation: "Previous page"
 - id: paginationNext
-  translation: "Next"
+  translation: "Next page"
 - id: paginationFirst
-  translation: "First"
+  translation: "First page"
 - id: paginationLast
-  translation: "Last"
+  translation: "Last page"
 - id: toggleSidebar
   translation: "Toggle sidebar navigation"
 - id: colorMode

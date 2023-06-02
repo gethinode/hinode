@@ -79,6 +79,9 @@ defaultContentLanguageInSubdir = true
   [[module.mounts]]
     source = "static"
     target = "static"
+  [[module.mounts]]
+    source = "static/fonts"
+    target = "static/fonts"
 # toml-docs-start javascript
   [[module.mounts]]
     source = "node_modules/bootstrap/dist/js"
@@ -89,3 +92,6 @@ defaultContentLanguageInSubdir = true
     target = "assets/js/vendor/flexsearch"
     includeFiles = "*.bundle.js"
 # toml-docs-end javascript
+  [[module.mounts]]
+    source = "node_modules/@fortawesome/fontawesome-free/webfonts"
+    target = "static/fonts"
