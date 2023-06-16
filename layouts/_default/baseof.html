@@ -1,6 +1,7 @@
 {{- $section := .Section }}
-{{- with partial "utilities/GetMenu" . }}{{ $.Scratch.Set "sidebar" . }}{{ end -}}
-{{ $.Scratch.Set "version" (site.Param (printf "%s.version" .Section)) }}
+{{- $version := partial "utilities/GetVersion.html" (dict "page" . "base" true) -}}
+{{- $.Scratch.Set "version" $version -}}
+{{ with partial "utilities/GetMenu" (dict "page" . "version" $version) }}{{ $.Scratch.Set "sidebar" . }}{{ end }}
 
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">

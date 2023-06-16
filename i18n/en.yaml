@@ -89,6 +89,8 @@
   translation: "Link"
 - id: code
   translation: "Code"
+- id: latest
+  translation: "latest"
 
 # 404 page
 - id: pageNotFound
