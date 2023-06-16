@@ -1,6 +1,12 @@
+{{- $page := .page -}}
+{{- $version := .version -}}
+
 {{- $menu := "" -}}
-{{- if .IsPage -}}
-    {{- $menu = index .Site.Data .Section -}}
+{{- if $page.IsPage -}}
+    {{- $menu = index site.Data (printf "%s-%s" $page.Section $version) -}}
+    {{ if not $menu }}
+        {{ $menu = index site.Data $page.Section }}
+    {{ end }}
 {{- end -}}
 
 {{- return $menu -}}
