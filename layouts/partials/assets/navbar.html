@@ -48,6 +48,39 @@
     </li>
 {{- end -}}
 
+<!-- Inline partial to render the version switcher -->
+{{- define "partials/navbar-versions.html" -}}
+    {{- $size := .size -}}
+    {{- $collapsed := .collapsed -}}
+    {{- $page := .page -}}
+    {{- $list := site.Params.docs.releases -}}
+    {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
+
+    <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-version-switch">
+            <span class="d-md-none"></span>{{ $version }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-version-switch">
+            {{- range $index, $item := $list -}}
+                {{- $active := eq $item.label $version -}}
+                {{ if $item.url }}
+                    <li>
+                        <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}" href="{{ $item.url }}">{{ $item.label }}
+                            {{ if $item.latest }} (T "latest"){{ end }}
+                            {{ if $active }}
+                                <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check") }}</span>
+                            {{ end }}
+                        </a>
+                    </li>
+                {{ else }}
+                    {{ if gt $index 0}}<li><hr class="dropdown-divider"></li>{{ end }}
+                    <li><span class="dropdown-header fs-6">{{ $item.label }}</span></li>
+                {{ end }}
+            {{- end -}}
+        </ul>
+    </li>
+{{- end -}}
+
 {{- $supportedFlags := slice "true" "false" -}}
 
 {{- $id := printf "navbar-collapse-%d" 0 -}}
@@ -111,6 +144,12 @@
         {{- errorf "partial [assets/navbar.html] - Invalid value for param 'darkMode': %s" $darkModeParam -}}
     {{- end -}}
 {{- end -}}
+
+{{- $enableVersions := false -}}
+{{ $list := site.Params.docs.releases }}
+{{ if $list }}
+    {{- $enableVersions = gt (len $list ) 1 -}}
+{{ end }}
 
 {{- $enableLanguage := or $page.IsTranslated site.IsMultiLingual -}}
 
@@ -185,7 +224,7 @@
                 {{- end -}}
 
                 <!-- Insert divider if applicable -->
-                {{- if or $enableLanguage $enableDarkMode -}}
+                {{- if or $enableLanguage $enableVersions -}}
                     <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
                         <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
                     </li>
@@ -216,8 +255,20 @@
                     </li>
                 {{- end -}}
                               
+                <!-- Insert version switcher -->
+                {{- if $enableVersions -}}
+                    {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true ) -}}
+                    {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false) -}}
+                {{- end -}}
+
                 <!-- Insert color mode switcher -->
                 {{- if $enableDarkMode -}}
+                    <!-- Insert divider -->
+                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
+                        <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+                    </li>
+                    <li><hr class="dropdown-divider-bg"></li>
+
                     {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true) -}}
                     {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false) -}}
                 {{- end -}}
