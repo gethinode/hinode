@@ -58,7 +58,7 @@
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
         <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-version-switch">
-            <span class="d-md-none"></span>{{ $version }}
+            {{ if $collapsed }}{{ site.Title }} {{ end }}{{ $version }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-version-switch">
             {{- range $index, $item := $list -}}
