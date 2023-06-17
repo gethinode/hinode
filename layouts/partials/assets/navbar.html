@@ -77,6 +77,13 @@
                     <li><span class="dropdown-header fs-6">{{ $item.label }}</span></li>
                 {{ end }}
             {{- end -}}
+            {{- if site.Params.docs.overview -}}
+                {{ if gt (len $list) 0 }}<li><hr class="dropdown-divider"></li>{{ end }}
+                <li>
+                    {{- $url := (path.Join site.Params.docs.overview) | relLangURL -}}
+                    <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" href="{{ $url }}">{{ T "allVersions" }}</a>
+                </li>
+            {{- end -}}
         </ul>
     </li>
 {{- end -}}
