@@ -91,6 +91,8 @@
   translation: "Code"
 - id: latest
   translation: "latest"
+- id: allVersions  
+  translation: "All versions"
 
 # 404 page
 - id: pageNotFound
