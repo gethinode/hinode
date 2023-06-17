@@ -65,6 +65,7 @@
                 {{- $active := eq $item.label $version -}}
                 {{ if $item.url }}
                     <li>
+                        {{- $url := (path.Join $item.url) | relLangURL -}}
                         <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}" href="{{ $url }}">{{ $item.label }}
                             {{ if $item.latest }} ({{ T "latest" }}){{ end }}
                             {{ if $active }}
