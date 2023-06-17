@@ -63,10 +63,14 @@
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-version-switch">
             {{- range $index, $item := $list -}}
                 {{- $active := eq $item.label $version -}}
+                {{- $disabled := false -}}
+                {{- if site.IsServer }}
+                    {{- $disabled = and $item.redirect (gt (len $item.redirect) 0) -}}
+                {{- end -}}
                 {{ if $item.url }}
                     <li>
                         {{- $url := (path.Join $item.url) | relLangURL -}}
-                        <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}" href="{{ $url }}">{{ $item.label }}
+                        <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
                             {{ if $item.latest }} ({{ T "latest" }}){{ end }}
                             {{ if $active }}
                                 <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check") }}</span>
