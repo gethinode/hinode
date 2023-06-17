@@ -65,7 +65,7 @@
                 {{- $active := eq $item.label $version -}}
                 {{ if $item.url }}
                     <li>
-                        <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}" href="{{ $item.url }}">{{ $item.label }}
+                        <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}" href="{{ $url }}">{{ $item.label }}
                             {{ if $item.latest }} ({{ T "latest" }}){{ end }}
                             {{ if $active }}
                                 <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check") }}</span>
