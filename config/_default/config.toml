@@ -27,6 +27,20 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 # toml-docs-end language
 
+# toml-docs-start redirect
+[outputFormats.REDIR]
+mediaType = "text/netlify"
+baseName = "_redirects"
+isPlainText = true
+notAlternative = true
+
+[mediaTypes."text/netlify"]
+delimiter = ""
+
+[outputs]
+home = ["HTML", "RSS", "REDIR"]
+# toml-docs-end redirect
+
 # toml-docs-start build
 [build]
   writeStats = true

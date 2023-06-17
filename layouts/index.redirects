@@ -1,6 +1,0 @@
-{{- $list := site.Params.docs.releases -}}
-{{- range $index, $item := $list -}}
-{{- if $item.redirect -}}
-{{ urls.JoinPath $item.url "/*" }}           {{ urls.JoinPath $item.redirect ":splat" }}  200
-{{- end -}}
-{{- end -}}
