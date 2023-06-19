@@ -1,7 +1,7 @@
 {{- range .Site.Params.docs.releases -}}
 {{- if .redirect -}}
 {{ urls.JoinPath .url "/*" }} {{ urls.JoinPath .redirect ":splat" }} 200
-{{- end -}}
+{{ end }}
 {{- end -}}
 {{ range $p := .Site.AllPages }}
 {{- range .Aliases -}}
