@@ -5,6 +5,6 @@
 {{- end -}}
 {{ range $p := .Site.AllPages }}
 {{- range .Aliases -}}
-{{ if hasPrefix . "." }}{{ urls.JoinPath $p.RelPermalink . }}{{ else }}{{ . }}{{ end }} {{ $p.Permalink }}
+{{ if hasPrefix . "." }}{{ urls.JoinPath $p.RelPermalink . }}{{ else }}{{ . }}{{ end }} {{ $p.RelPermalink }}
 {{ end }}
 {{- end -}}
