@@ -1,5 +1,10 @@
 {{- range .Site.Params.docs.releases -}}
 {{- if .redirect -}}
 {{ urls.JoinPath .url "/*" }} {{ urls.JoinPath .redirect ":splat" }} 200
+{{ end }}
 {{- end -}}
+{{ range $p := .Site.AllPages }}
+{{- range .Aliases -}}
+{{ if hasPrefix . "." }}{{ urls.JoinPath $p.RelPermalink . }}{{ else }}{{ . }}{{ end }} {{ $p.RelPermalink }}
+{{ end }}
 {{- end -}}
