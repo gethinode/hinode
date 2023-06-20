@@ -8,10 +8,13 @@
 
 # toml-docs-start docs
 [docs]
+    latest = "1.0"
     version = "0.8"
     basePath = ""
     github = "https://github.com/gethinode/hinode"
     release = "https://github.com/gethinode/hinode/releases/tag/"
+    checkVersion = true
+    latestURL = "https://demo.gethinode.com/"
 # toml-docs-end docs
 
 # toml-docs-start home

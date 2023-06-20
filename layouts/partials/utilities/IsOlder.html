@@ -1,0 +1,32 @@
+<!-- 
+    Returns true if the current version is older than the latest version defined in the docs section of the site
+    parameters. The verification supports semver patterns MAJOR.MINOR.PATCH with an optional suffix.
+    
+    Original code by solus on https://discourse.gohugo.io/t/sorting-semantic-version-numbers/40838/6.
+ -->
+
+{{ $current := .current }}
+{{ $latest := site.Params.docs.latest }}
+
+{{- define "partials/padZeroPrefix.html" -}}
+    {{- $padSize := 6 }}
+    {{- $paddedString := replaceRE "(\\d+)" (print (strings.Repeat (sub $padSize 1) "0") "$1") . }}
+    {{- $trimmedString := replaceRE (print "0+(\\d{" $padSize "})") "$1" $paddedString }}
+    {{- return $trimmedString }}
+{{- end -}}
+
+{{- define "partials/trimZeroPrefix.html" -}}
+    {{- return replaceRE "0+(\\d+)" "$1" . }}
+{{- end -}}
+
+{{- $isOlder := false -}}
+
+{{- if and $current $latest }}
+    {{- $versions := slice $current $latest }}
+    {{- $paddedVersions := apply $versions "partial" "padZeroPrefix" "." }}
+    {{- $sortedVersions := (sort $paddedVersions "value" "desc") }}
+    {{- $sortedVersions = apply $sortedVersions "partial" "trimZeroPrefix" "." }}
+    {{ $isOlder = ne (index $sortedVersions 0) $current }}
+{{- end -}}
+
+{{- return $isOlder -}}

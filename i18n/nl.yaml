@@ -83,6 +83,8 @@
   translation: "meest recente"
 - id: allVersions  
   translation: "Alle versies"
+- id: newerVersionAlert
+  translation: "Er is een nieuwere versie van {{ . }}!"
 
 # 404 page
 - id: pageNotFound

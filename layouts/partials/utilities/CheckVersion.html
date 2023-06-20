@@ -1,0 +1,7 @@
+{{ with .version }} 
+    {{- $isOlder := partial "utilities/IsOlder" (dict "current" .) -}}
+    {{- if $isOlder }}
+        {{- $.Scratch.Set "pageAlertMsg" (printf "There is a newer version of %s!" site.Title) -}}
+        {{- $.Scratch.Set "pageAlertURL" "https://getbootstrap.com/docs" -}}
+    {{- end -}}
+{{- end -}}

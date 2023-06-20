@@ -1,0 +1,15 @@
+{{- $page := .page -}}
+{{- if not $page -}}
+    {{- errorf "partial [assets/page-alert.html] - Missing value for param 'page'" -}}
+{{- end -}}
+
+{{- $pageAlertMsg := $page.Scratch.Get "pageAlertMsg" -}}
+{{- $pageAlertURL := $page.Scratch.Get "pageAlertURL" -}}
+{{- $version := $page.Scratch.Get "version" -}}
+
+{{- if $pageAlertMsg -}}
+    <div id="page-alert" class="alert alert-primary alert-no-decoration fade show d-flex align-items-center small m-0 py-1" data-page-alert-version="{{ $version }}">
+        <a href="{{ with $pageAlertURL }}{{ . }}{{ else }}#!{{ end }}" class="text-decoration-none flex-grow-1 text-center">{{ $pageAlertMsg }}</a>
+        <button id="page-alert-btn-close" type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+{{- end -}}
