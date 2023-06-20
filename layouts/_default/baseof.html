@@ -3,10 +3,9 @@
 {{- $.Scratch.Set "version" $version -}}
 {{ with partial "utilities/GetMenu" (dict "page" . "version" $version) }}{{ $.Scratch.Set "sidebar" . }}{{ end }}
 
-{{- if site.Params.docs.checkVersion -}}
-    {{ with $version }} 
-        {{- $isOlder := partial "utilities/IsOlder" (dict "current" .) -}}
-        {{- if $isOlder }}
+{{- if and site.Params.docs.checkVersion $version -}}
+    {{- if ne $version "latest" -}}
+        {{- if partial "utilities/IsOlder" (dict "current" $version) -}}
             {{- $.Scratch.Set "pageAlertMsg" (T "newerVersionAlert" site.Title) -}}
             {{- $.Scratch.Set "pageAlertURL" (or site.Params.docs.latestURL site.baseURL) -}}
         {{- end -}}
