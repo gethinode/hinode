@@ -181,110 +181,113 @@
 {{- if eq $color "black" }}{{ $theme = "dark" }}{{ end -}}
 {{- if eq $color "white" }}{{ $theme = "light" }}{{ end -}}
 
-<nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} {{ if $fixed }}fixed-top{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
-	<div class="container-xxl p-0">
-        <!-- Insert sidebar toggler when applicable -->
-        <div class="d-flex">
-            {{- if $page.Scratch.Get "sidebar" -}}
-                <button class="navbar-toggler fw-30 collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                    {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+<div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
+    {{- partial "assets/page-alert.html" (dict "page" $page) -}}
+    <nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
+        <div class="container-xxl p-0">
+            <!-- Insert sidebar toggler when applicable -->
+            <div class="d-flex">
+                {{- if $page.Scratch.Get "sidebar" -}}
+                    <button class="navbar-toggler fw-30 collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+                    </button>
+                {{- else -}}
+                    <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
+                    <button class="navbar-toggler fw-30 collapsed p-0 mx-auto invisible" type="button">
+                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+                    </button>
+                {{- end -}}
+            </div>
+    
+            <!-- Insert the brand logo or name -->
+            <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
+                {{- if $logo -}}
+                    <img src="{{ $logo }}" alt="{{ $title }} logo" height="30">
+                {{- else -}}
+                    <span class="fw-bold">{{ $title }}</span>
+                {{- end -}}
+            </a>
+    
+            <!-- Insert main navigation toggler -->
+            <div class="d-flex fw-30">
+                <button id="main-nav-toggler" class="navbar-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}"
+                    aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
+                    <span class="toggler-icon top-bar emphasis"></span>
+                    <span class="toggler-icon middle-bar emphasis"></span>
+                    <span class="toggler-icon bottom-bar emphasis"></span>
                 </button>
-            {{- else -}}
-                <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
-                <button class="navbar-toggler fw-30 collapsed p-0 mx-auto invisible" type="button">
-                    {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
-                </button>
-            {{- end -}}
-        </div>
-
-        <!-- Insert the brand logo or name -->
-        <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
-            {{- if $logo -}}
-                <img src="{{ $logo }}" alt="{{ $title }} logo" height="30">
-            {{- else -}}
-                <span class="fw-bold">{{ $title }}</span>
-            {{- end -}}
-        </a>
-
-        <!-- Insert main navigation toggler -->
-        <div class="d-flex fw-30">
-            <button id="main-nav-toggler" class="navbar-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}"
-                aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
-                <span class="toggler-icon top-bar emphasis"></span>
-                <span class="toggler-icon middle-bar emphasis"></span>
-                <span class="toggler-icon bottom-bar emphasis"></span>
-            </button>
-        </div>
-
-        <div class="navbar-collapse collapse" id="{{ $id }}">
-            <!-- Insert search input -->
-            {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
-            
-            <!-- Render top-menu items (maximum depth of 2) -->
-            <ul class="navbar-nav ms-auto">
-                {{- range $menu := $menus -}}
-                    <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
-                        {{- partial "assets/navbar-item.html" (dict "menu" $menu "page" $page) -}}
-                        {{- if .HasChildren -}}
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                {{- range .Children -}}
-                                    {{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}
+            </div>
+    
+            <div class="navbar-collapse collapse" id="{{ $id }}">
+                <!-- Insert search input -->
+                {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
+                
+                <!-- Render top-menu items (maximum depth of 2) -->
+                <ul class="navbar-nav ms-auto">
+                    {{- range $menu := $menus -}}
+                        <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
+                            {{- partial "assets/navbar-item.html" (dict "menu" $menu "page" $page) -}}
+                            {{- if .HasChildren -}}
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    {{- range .Children -}}
+                                        {{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}
+                                    {{- end -}}
+                                </ul>
+                            {{- end -}}
+                        </li>
+                    {{- end -}}
+    
+                    <!-- Insert divider if applicable -->
+                    {{- if or $enableLanguage $enableVersions -}}
+                        <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
+                            <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+                        </li>
+                        <li><hr class="dropdown-divider-bg"></li>
+                    {{- end -}}
+    
+                    <!-- Insert language switcher if applicable -->
+                    {{- if $enableLanguage -}}
+                        {{- $currentLang := $page.Language.Lang -}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
+                            </a>
+                            <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe") }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end ">
+                                {{- if $page.IsTranslated -}}
+                                    {{- range $page.AllTranslations -}}
+                                        <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .Permalink }}">{{ .Language.LanguageName  }}</a></li>
+                                    {{- end -}}
+                                {{- else -}}
+                                    {{- range site.Languages -}}
+                                        <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
+                                    {{- end -}}
                                 {{- end -}}
                             </ul>
-                        {{- end -}}
-                    </li>
-                {{- end -}}
-
-                <!-- Insert divider if applicable -->
-                {{- if or $enableLanguage $enableVersions -}}
-                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
-                        <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
-                    </li>
-                    <li><hr class="dropdown-divider-bg"></li>
-                {{- end -}}
-
-                <!-- Insert language switcher if applicable -->
-                {{- if $enableLanguage -}}
-                    {{- $currentLang := $page.Language.Lang -}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
-                        </a>
-                        <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{- partial "assets/icon.html" (dict "icon" "fas globe") }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end ">
-                            {{- if $page.IsTranslated -}}
-                                {{- range $page.AllTranslations -}}
-                                    <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .Permalink }}">{{ .Language.LanguageName  }}</a></li>
-                                {{- end -}}
-                            {{- else -}}
-                                {{- range site.Languages -}}
-                                    <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
-                                {{- end -}}
-                            {{- end -}}
-                        </ul>
-                    </li>
-                {{- end -}}
-                              
-                <!-- Insert version switcher -->
-                {{- if $enableVersions -}}
-                    {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true ) -}}
-                    {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false) -}}
-                {{- end -}}
-
-                <!-- Insert color mode switcher -->
-                {{- if $enableDarkMode -}}
-                    <!-- Insert divider -->
-                    <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
-                        <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
-                    </li>
-                    <li><hr class="dropdown-divider-bg"></li>
-
-                    {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true) -}}
-                    {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false) -}}
-                {{- end -}}
-            </ul>
+                        </li>
+                    {{- end -}}
+                                    
+                    <!-- Insert version switcher -->
+                    {{- if $enableVersions -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true ) -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false) -}}
+                    {{- end -}}
+    
+                    <!-- Insert color mode switcher -->
+                    {{- if $enableDarkMode -}}
+                        <!-- Insert divider -->
+                        <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
+                            <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
+                        </li>
+                        <li><hr class="dropdown-divider-bg"></li>
+    
+                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true) -}}
+                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false) -}}
+                    {{- end -}}
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

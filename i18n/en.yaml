@@ -91,8 +91,10 @@
   translation: "Code"
 - id: latest
   translation: "latest"
-- id: allVersions  
+- id: allVersions
   translation: "All versions"
+- id: newerVersionAlert
+  translation: "There is a newer version of {{ . }}!"
 
 # 404 page
 - id: pageNotFound
