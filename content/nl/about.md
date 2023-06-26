@@ -3,6 +3,7 @@ slug: over-mij
 title: Over mij
 description: Een blog en documentatie thema voor Hugo gebaseerd op Bootstrap 5.
 date: 2023-02-17
+updated: 2023-06-26
 showComments: false
 ---
 
@@ -36,8 +37,8 @@ Overige functies:
 * Omschakelen tussen donkere en lichte modus
 * Ondersteuning voor meerdere talen
 * Herbruikbare Bootstrap componenten via shortcodes en partials
+* Versiebeheer van documentatiepagina's, inclusief secundaire navigate en selectie van versies
 * Integreren van commentaar via [utteranc.es]({{< param "links.utterances" >}})
-* Secundaire navigatie voor bijvoorbeeld documentatie
 * Optimalisering van foto's voor meerdere schermafmetingen en resoluties
 * Optimale zoekresultaten, met 100 punten voor SEO volgens [PageSpeed Insights]({{< param "links.pagespeed" >}})
 * Veilige communicatie, met een score van A+ volgens [Mozilla Observatory]({{< param "links.observatory" >}})
