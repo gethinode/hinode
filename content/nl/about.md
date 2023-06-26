@@ -37,7 +37,7 @@ Overige functies:
 * Omschakelen tussen donkere en lichte modus
 * Ondersteuning voor meerdere talen
 * Herbruikbare Bootstrap componenten via shortcodes en partials
-* Versiebeheer van documentatiepagina's, inclusief secundaire navigate en selectie van versies
+* Versiebeheer van documentatiepagina's, inclusief secundaire navigatie en selectie van versies
 * Integreren van commentaar via [utteranc.es]({{< param "links.utterances" >}})
 * Optimalisering van foto's voor meerdere schermafmetingen en resoluties
 * Optimale zoekresultaten, met 100 punten voor SEO volgens [PageSpeed Insights]({{< param "links.pagespeed" >}})
