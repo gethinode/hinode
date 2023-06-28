@@ -5,7 +5,7 @@ description = "A clean documentation and blog theme for your Hugo site based on 
 homepage = "https://gethinode.com"
 demosite = "https://demo.gethinode.com"
 tags = ["blog", "documentation", "minimal", "modern", "customizable", "search", "bootstrap"]
-features = ["security aware", "fast by default", "seo-ready", "development tools", "bootstrap framework", "netlify-ready", "full text search", "page layouts"]
+features = ["security aware", "fast by default", "seo-ready", "development tools", "bootstrap framework", "netlify-ready", "full text search", "page layouts", "versioned documentation"]
 min_version = "0.109.0"
 
 [author]
