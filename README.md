@@ -27,7 +27,7 @@
         <img src="https://img.shields.io/github/issues/gethinode/hinode.svg" />
     </a>
     <a href="https://github.com/gethinode/hinode/pulls" alt="Pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg" />
+        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode?label=open%20pulls" />
     </a>
     <a href="https://github.com/gethinode/hinode/blob/main/LICENSE" alt="License">
         <img src="https://img.shields.io/github/license/gethinode/hinode" />
