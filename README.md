@@ -9,28 +9,28 @@
 <!-- Badges -->
 <p align="center">
     <a href="https://gohugo.io" alt="Hugo website">
-        <img src="https://img.shields.io/badge/generator-hugo-brightgreen" />
+        <img src="https://img.shields.io/badge/generator-hugo-brightgreen">
     </a>
     <a href="https://www.npmjs.com/package/%40gethinode/hinode" alt="npm package">
-        <img src="https://img.shields.io/npm/v/%40gethinode/hinode" />
+        <img src="https://img.shields.io/npm/v/%40gethinode/hinode">
     </a>
     <a href="https://app.netlify.com/sites/gethinode-demo/deploys" alt="Netlify Status">
-        <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67" />
+        <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67">
     </a>
     <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
-        <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb" />
+        <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb">
     </a>
     <a href="https://github.com/gethinode/hinode/commits/main" alt="Last commit">
-        <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg" />
+        <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg">
     </a>
     <a href="https://github.com/gethinode/hinode/issues" alt="Issues">
-        <img src="https://img.shields.io/github/issues/gethinode/hinode.svg" />
+        <img src="https://img.shields.io/github/issues/gethinode/hinode.svg">
     </a>
     <a href="https://github.com/gethinode/hinode/pulls" alt="Pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode?label=open%20pulls" />
+        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg">
     </a>
     <a href="https://github.com/gethinode/hinode/blob/main/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/gethinode/hinode" />
+        <img src="https://img.shields.io/github/license/gethinode/hinode">
     </a>
 </p>
 
