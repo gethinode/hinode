@@ -11,6 +11,9 @@
     <a href="https://gohugo.io" alt="Hugo website">
         <img src="https://img.shields.io/badge/generator-hugo-brightgreen" />
     </a>
+    <a href="https://www.npmjs.com/package/%40gethinode/hinode" alt="npm package">
+        <img src="https://img.shields.io/npm/v/%40gethinode/hinode" />
+    </a>
     <a href="https://app.netlify.com/sites/gethinode-demo/deploys" alt="Netlify Status">
         <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67" />
     </a>
