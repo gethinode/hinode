@@ -8,7 +8,8 @@
     "bootstrap",
     "responsive",
     "front-end",
-    "blog"
+    "blog",
+    "documentation"
   ],
   "main": "index.js",
   "publishConfig": {
