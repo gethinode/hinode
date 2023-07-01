@@ -30,7 +30,7 @@
     fixed = true
     offset = "3.8em"
     search = true
-    breadcrumb = false
+    breadcrumb = true
     toc = true
     sidebar = true
 # toml-docs-end navigation
