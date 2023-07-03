@@ -1,23 +1,23 @@
 # This file holds all menu entries for the docs sidebar
 
-- title: Product launch
+- title: Productlancering
   icon: fas rocket
   color: primary
   date: 2023-07-01
   url: https://github.com/gethinode/hinode/releases/tag/v0.15.2
   content:
-    Lorem ipsum dolor sit amet.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
 
-- title: I18N support
+- title: Internationalisering
   icon: fas globe
   color: success
   date: 2023-05-06
   url: v0.14.0
   content:
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+    Lorem ipsum dolor sit amet.
 
-- title: New feature
+- title: Nieuwe functie
   icon: fas house
   color: warning
   date: 2023-02-04

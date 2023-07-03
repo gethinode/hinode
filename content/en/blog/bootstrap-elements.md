@@ -245,6 +245,16 @@ Loading...
 {{< /example>}}
 <!-- markdownlint-enable MD037 -->
 
+## Timeline
+
+As an example, the following shortcode displays a timeline with the file `data/timeline-en.yml` as data.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* timeline data="timeline-en" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Toast
 
 As an example, the following shortcode displays a button that, when clicked, triggers the toast message.
