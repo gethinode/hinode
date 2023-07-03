@@ -137,7 +137,7 @@ $semi-circle-border: 0.2rem;
 .timeline-panel-end {
     top: 50%;
     position: absolute;
-    width: calc($var(--timeline-icon-radius) * 2);
+    width: calc(var(--timeline-icon-radius) * 2);
     width: 2 * $connector-radius;
     height: 50%;
     border-top: $semi-circle-border solid var(--timeline-highlight);
