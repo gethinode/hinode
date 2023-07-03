@@ -1,3 +1,4 @@
+// scss-docs-start timeline
 $connector-radius: 0.8rem;
 $semi-circle-radius: 8rem;
 $semi-circle-border: 0.2rem;
@@ -11,6 +12,8 @@ $semi-circle-border: 0.2rem;
       --timeline-highlight: var(--#{$prefix}#{$state});
     }
 }
+
+// scss-docs-end timeline
 
 .timeline {
     position: relative;
