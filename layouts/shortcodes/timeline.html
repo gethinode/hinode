@@ -12,12 +12,12 @@
     {{ $error = true }}
 {{ end -}}
 
-
 <!-- Inline partial to render icon -->
 {{- define "partials/timeline-icon.html" -}}
+    {{- $col := default 6 .col -}}
     {{- $icon := .icon -}}
     {{- $direction := .direction -}}
-    <div class="col-6 d-flex justify-content-{{ $direction }} align-items-center">
+    <div class="col-{{ $col }} d-flex justify-content-{{ $direction }} align-items-center">
         <div class="d-flex">
             <div class="d-flex timeline-semi-circle-{{ $direction }} fa-wrapper align-items-center justify-content-center">
                 {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $icon)) }}
@@ -27,36 +27,61 @@
     </div>
 {{- end -}}
 
-
 <!-- Inline partial to render icon -->
 {{- define "partials/timeline-panel.html" -}}
+    {{- $col := default 6 .col -}}
     {{- $content := .content -}}
     {{- $color := .color -}}
     {{- $title := .title -}}
+    {{- $url := .url -}}
+    {{- $date := .date -}}
+    {{ if and $url (not (hasPrefix $url "http")) }}
+        {{ $url = path.Join site.Params.docs.release $url }}
+    {{ end }}
     {{- $direction := .direction -}}
 
-    <div class="col-6 d-flex align-items-center">
+    <div class="col-{{ $col }} d-flex align-items-center">
         <div class="d-flex h-100">
             <div class="timeline-panel-{{ $direction }}"></div>
             <div class="timeline-description-text-{{ $direction }} p-3">
-                <p class="fs-4 fw-bold mb-0 text-uppercase text-{{ $color }}">{{ $title }}</p>
-                {{ $content }}
+                {{ with $url }}
+                    <p class="mb-0"><a class="fs-4 fw-bold text-uppercase link-{{ $color }}" href="{{ . }}">{{ $title }}</a></p>
+                {{ else}}
+                    <p class="fs-4 fw-bold mb-0 text-uppercase text-{{ $color }}">{{ $title }}</p>
+                {{ end }}
+                {{ if $date }}
+                    {{ $datestr := (partial "utilities/date.html" (dict "date" $date "format" "long")) -}}
+                    <p class="mb-0"><small class="text-body-secondary text-uppercase">{{ $datestr -}}</small></p>
+                {{ end }}
+                <p class="mt-3 mb-0">{{ $content }}</p>
             </div>
         </div>
     </div>    
 {{- end -}}
 
+<!-- Render default timeline -->
 <div class="container p-0 d-none d-md-block mb-5">
     {{ range $index, $item := $entries }}
         <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
             {{ if eq (mod $index 2) 1 }}
-                {{ partial "partials/timeline-panel.html" (dict "content" $item.content "color" $item.color "title" $item.title "direction" "start") }}
+                {{ partial "partials/timeline-panel.html" (dict "content" $item.content "color" $item.color "title" $item.title "date" $item.date "url" $item.url "direction" "start") }}
                 {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "start") }}
             {{ else }}
                 {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end") }}
-                {{ partial "partials/timeline-panel.html" (dict "content" $item.content "color" $item.color "title" $item.title "direction" "end") }}
+                {{ partial "partials/timeline-panel.html" (dict "content" $item.content "color" $item.color "title" $item.title "date" $item.date "url" $item.url "direction" "end") }}
             {{ end }}
         </div>
         <div class="row timeline g-0 p-3"> </div>
+    {{ end }}
+</div>
+
+<!-- Render timeline for smaller devices -->
+<div class="container p-0 d-block d-md-none">
+    {{ range $index, $item := $entries }}
+        <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
+            {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}
+            {{ partial "partials/timeline-panel.html" (dict "content" $item.content "color" $item.color "title" $item.title "date" $item.date "url" $item.url "direction" "end" "col" 9) }}
+        </div>
+        <div class="row timeline-sm g-0 p-3"> </div>
     {{ end }}
 </div>

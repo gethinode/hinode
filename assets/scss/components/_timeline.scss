@@ -5,6 +5,8 @@ $semi-circle-border: 0.2rem;
 
 :root {
     --timeline-highlight: var(--bs-primary);
+    --timeline-icon-radius: #{$semi-circle-radius};
+    --timeline-offset: 50%
 }
 
 @each $state in map-keys($theme-colors) {
@@ -15,11 +17,16 @@ $semi-circle-border: 0.2rem;
 
 // scss-docs-end timeline
 
-.timeline {
+.timeline, .timeline-sm {
     position: relative;
 }
 
-.timeline::before {
+.timeline-sm {
+    --timeline-icon-radius: calc(#{$semi-circle-radius} / 2);
+    --timeline-offset: 25%
+}
+
+.timeline::before, .timeline-sm::before {
     content: "";
     width: 2 * $semi-circle-border;
     margin: 0 auto;
@@ -28,9 +35,13 @@ $semi-circle-border: 0.2rem;
     inset: 0;
 }
 
+.timeline-sm::before {
+    margin: 0 calc(var(--timeline-offset) - #{$semi-circle-border});
+}
+
 .timeline-semi-circle-start, .timeline-semi-circle-end {
-    width: $semi-circle-radius;
-    height: $semi-circle-radius;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
     border-radius: 100%;
     position: relative;
 }
@@ -45,8 +56,8 @@ $semi-circle-border: 0.2rem;
 
 .timeline-semi-circle-start::before {
     content: "";
-    width: $semi-circle-radius;
-    height: $semi-circle-radius;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
     border-radius: 100%;
     border: $semi-circle-border solid;
     position: absolute;
@@ -58,8 +69,8 @@ $semi-circle-border: 0.2rem;
     content: "";
     left: 0;
     top: 0;
-    width: $semi-circle-radius;
-    height: $semi-circle-radius;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
     border-radius: 100%;
     border: $semi-circle-border solid;
     position: absolute;
@@ -69,8 +80,8 @@ $semi-circle-border: 0.2rem;
 
 .timeline-semi-circle-end::before {
     content: "";
-    width: $semi-circle-radius;
-    height: $semi-circle-radius;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
     border-radius: 100%;
     border: $semi-circle-border solid;
     position: absolute;
@@ -82,8 +93,8 @@ $semi-circle-border: 0.2rem;
     content: "";
     left: 0;
     top: 0;
-    width: $semi-circle-radius;
-    height: $semi-circle-radius;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
     border-radius: 100%;
     border: $semi-circle-border solid;
     position: absolute;
@@ -102,10 +113,10 @@ $semi-circle-border: 0.2rem;
 }
 
 .timeline-panel-start, .timeline-panel-end, .timeline-connector-start, .timeline-connector-end {
-    top: $semi-circle-radius / 2;
+    top: calc(var(--timeline-icon-radius) / 2);
     position: relative;
-    width: $semi-circle-radius / 2;
-    height: $semi-circle-border + $semi-circle-radius / 2;
+    width: calc(var(--timeline-icon-radius) / 2);
+    height: calc($semi-circle-border + var(--timeline-icon-radius) / 2);
     border: $semi-circle-border solid var(--timeline-highlight);
     border-bottom: none;
     border-right: none;
@@ -116,7 +127,7 @@ $semi-circle-border: 0.2rem;
     top: 50%;
     right: 50%;
     position: absolute;
-    width: $semi-circle-radius * 2;
+    width: calc(var(--timeline-icon-radius) * 2);
     width: 2 * $connector-radius;
     height: 50%;
     border-top: $semi-circle-border solid var(--timeline-highlight);
@@ -126,7 +137,7 @@ $semi-circle-border: 0.2rem;
 .timeline-panel-end {
     top: 50%;
     position: absolute;
-    width: $semi-circle-radius * 2;
+    width: calc($var(--timeline-icon-radius) * 2);
     width: 2 * $connector-radius;
     height: 50%;
     border-top: $semi-circle-border solid var(--timeline-highlight);
@@ -138,7 +149,7 @@ $semi-circle-border: 0.2rem;
     content: "";
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: var(--timeline-offset);
     margin: (-$connector-radius) 0 0 (-$connector-radius);
     width: 2 * $connector-radius;
     height: 2 * $connector-radius;
