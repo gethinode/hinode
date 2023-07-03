@@ -1,0 +1,27 @@
+# This file holds all menu entries for the docs sidebar
+
+- title: Product launch
+  icon: fas rocket
+  color: primary
+  content:
+    Lorem ipsum dolor sit amet.
+
+- title: I18N support
+  icon: fas globe
+  color: success
+  content:
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+
+- title: New feature
+  icon: fas house
+  color: warning
+  content:
+    Cupiditate ducimus officiis quod!
+
+- title: Beta release
+  icon: fas heart
+  color: info
+  content:
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.

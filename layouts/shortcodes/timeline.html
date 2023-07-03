@@ -1,0 +1,61 @@
+{{ $error := false }}
+
+{{- $data := .Get "data" -}}
+{{ if not $data -}}
+    {{ errorf "Missing param 'data': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ $entries := index site.Data $data }}
+{{ if not $entries -}}
+    {{ errorf "Invalid timeline data '%s': %s" $data .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+
+<div class="container p-0 d-none d-md-block mb-5">
+    {{ range $index, $item := $entries }}
+        {{ if eq (mod $index 2) 0 }}
+            <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <div class="d-flex">
+                        <div class="d-flex timeline-semi-circle-end fa-wrapper align-items-center justify-content-center">
+                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $item.icon)) }}
+                        </div>
+                        <div class="timeline-connector-end"></div>
+                    </div>
+                </div>
+                <div class="col-6 d-flex justify-content-start align-items-center">
+                    <div class="d-flex h-100">
+                        <div class="timeline-panel-end"></div>
+                        <div class="timeline-description-text-end p-3">
+                            <p class="fs-4 fw-bold mb-0 text-uppercase text-{{ $item.color }}">{{ $item.title }}</p>
+                            {{ $item.content }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{ else }}
+            <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0">
+                <div class="col-6 d-flex align-items-center">
+                    <div class="d-flex h-100">
+                        <div class="timeline-description-text-start p-3">
+                            <p class="fs-4 fw-bold mb-0 text-uppercase text-{{ $item.color }}">{{ $item.title }}</p>
+                            {{ $item.content }}
+                        </div>
+                        <div class="timeline-panel-start"></div>
+                    </div>
+                </div>
+                <div class="col-6 d-flex align-items-center">
+                    <div class="d-flex">
+                        <div class="timeline-connector-start"></div>
+                        <div class="d-flex timeline-semi-circle-start fa-wrapper align-items-center justify-content-center">
+                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $item.icon)) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{ end }}
+        <div class="row timeline g-0 p-3"> </div>
+    {{ end }}
+</div>
