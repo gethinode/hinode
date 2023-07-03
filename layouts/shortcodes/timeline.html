@@ -13,18 +13,25 @@
 {{ end -}}
 
 
+<!-- Inline partial to render icon -->
+{{- define "partials/timeline-icon.html" -}}
+    {{- $icon := .icon -}}
+    {{- $direction := .direction -}}
+    <div class="col-6 d-flex justify-content-{{ $direction }} align-items-center">
+        <div class="d-flex">
+            <div class="d-flex timeline-semi-circle-{{ $direction }} fa-wrapper align-items-center justify-content-center">
+                {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $icon)) }}
+            </div>
+            <div class="timeline-connector-{{ $direction }} {{ if eq $direction "start" }} order-first{{ end }}"></div>
+        </div>
+    </div>
+{{- end -}}
+
 <div class="container p-0 d-none d-md-block mb-5">
     {{ range $index, $item := $entries }}
         {{ if eq (mod $index 2) 0 }}
             <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
-                <div class="col-6 d-flex justify-content-end align-items-center">
-                    <div class="d-flex">
-                        <div class="d-flex timeline-semi-circle-end fa-wrapper align-items-center justify-content-center">
-                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $item.icon)) }}
-                        </div>
-                        <div class="timeline-connector-end"></div>
-                    </div>
-                </div>
+                {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end") }}
                 <div class="col-6 d-flex justify-content-start align-items-center">
                     <div class="d-flex h-100">
                         <div class="timeline-panel-end"></div>
@@ -46,14 +53,7 @@
                         <div class="timeline-panel-start"></div>
                     </div>
                 </div>
-                <div class="col-6 d-flex align-items-center">
-                    <div class="d-flex">
-                        <div class="timeline-connector-start"></div>
-                        <div class="d-flex timeline-semi-circle-start fa-wrapper align-items-center justify-content-center">
-                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $item.icon)) }}
-                        </div>
-                    </div>
-                </div>
+                {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "start") }}
             </div>
         {{ end }}
         <div class="row timeline g-0 p-3"> </div>
