@@ -41,9 +41,9 @@
     {{- $direction := .direction -}}
 
     <div class="col-{{ $col }} d-flex align-items-center">
-        <div class="d-flex h-100">
+        <div class="d-flex h-100 w-100">
             <div class="timeline-panel-{{ $direction }}"></div>
-            <div class="timeline-description-text-{{ $direction }} p-3">
+            <div class="timeline-description-text-{{ $direction }} p-3 w-100">
                 {{ with $url }}
                     <p class="mb-0"><a class="fs-4 fw-bold text-uppercase link-{{ $color }}" href="{{ . }}">{{ $title }}</a></p>
                 {{ else}}
