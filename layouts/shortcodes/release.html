@@ -58,7 +58,7 @@
     <div class="pb-3">
     {{- partial "assets/button.html" (dict 
         "title" $title
-        "href" (printf "%s/%s" (strings.TrimSuffix "/" site.Params.docs.release) $version)
+        "href" (partial "partials/utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $version))
         "size" "sm"
         "color" $color
         "outline" "true"
