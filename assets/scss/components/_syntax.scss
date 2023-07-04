@@ -13,7 +13,7 @@
 }
 
 .preview-background {
-    background-color: var(--bs-secondary-bg) if($enable-important-utilities, !important, null);
+    background-color: var(--bs-dark-bg-subtle) if($enable-important-utilities, !important, null);
 }
 
 @if $enable-dark-mode {
