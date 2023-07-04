@@ -246,6 +246,16 @@ Loading...
 {{< /example>}}
 <!-- markdownlint-enable MD037 -->
 
+## Timeline
+
+De volgende shortcode toont een tijdslijn met het bestand `data/timeline-nl.yml` als input.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* timeline data="timeline-nl" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Toast
 
 De volgende shortcode toont een knop die een bericht laat verschijnen op het scherm.

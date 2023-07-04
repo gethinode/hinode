@@ -1,0 +1,165 @@
+// scss-docs-start timeline
+$connector-radius: 0.8rem;
+$semi-circle-radius: 8rem;
+$semi-circle-border: 0.2rem;
+
+:root {
+    --timeline-highlight: var(--bs-primary);
+    --timeline-icon-radius: #{$semi-circle-radius};
+    --timeline-offset: 50%;
+    --timeline-connector-bg: var(--bs-body-bg);
+}
+
+@each $state in map-keys($theme-colors) {
+    .timeline-#{$state} {
+      --timeline-highlight: var(--#{$prefix}#{$state});
+    }
+
+    .timeline-bg-#{$state} {
+        --timeline-connector-bg: var(--#{$prefix}#{$state}-bg-subtle);
+      }
+  }
+
+// scss-docs-end timeline
+
+.timeline, .timeline-sm {
+    position: relative;
+}
+
+.timeline-sm {
+    --timeline-icon-radius: calc(#{$semi-circle-radius} / 2);
+    --timeline-offset: 25%
+}
+
+.timeline::before, .timeline-sm::before {
+    content: "";
+    width: 2 * $semi-circle-border;
+    margin: 0 auto;
+    background: var(--bs-body-color);
+    position: absolute;
+    inset: 0;
+}
+
+.timeline-sm::before {
+    margin: 0 calc(var(--timeline-offset) - #{$semi-circle-border});
+}
+
+.timeline-semi-circle-start, .timeline-semi-circle-end {
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
+    border-radius: 100%;
+    position: relative;
+}
+
+.timeline-semi-circle-start {
+    left: -$semi-circle-border;
+}
+
+.timeline-semi-circle-end {
+    left: $semi-circle-border;
+}
+
+.timeline-semi-circle-start::before {
+    content: "";
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
+    border-radius: 100%;
+    border: $semi-circle-border solid;
+    position: absolute;
+    border-color: transparent var(--timeline-highlight) var(--timeline-highlight) var(--timeline-highlight);
+    transform: rotate(-90deg);
+}
+
+.timeline-semi-circle-start::after {
+    content: "";
+    left: 0;
+    top: 0;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
+    border-radius: 100%;
+    border: $semi-circle-border solid;
+    position: absolute;
+    border-color: var(--timeline-highlight) var(--timeline-highlight) var(--timeline-highlight) transparent;
+    transform: rotate(-45deg);
+}
+
+.timeline-semi-circle-end::before {
+    content: "";
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
+    border-radius: 100%;
+    border: $semi-circle-border solid;
+    position: absolute;
+    border-color: transparent var(--timeline-highlight) var(--timeline-highlight) var(--timeline-highlight);
+    transform: rotate(-225deg);
+}
+
+.timeline-semi-circle-end::after {
+    content: "";
+    left: 0;
+    top: 0;
+    width: var(--timeline-icon-radius);
+    height: var(--timeline-icon-radius);
+    border-radius: 100%;
+    border: $semi-circle-border solid;
+    position: absolute;
+    border-color: var(--timeline-highlight) var(--timeline-highlight) var(--timeline-highlight) transparent;
+    transform: rotate(-180deg);
+}
+
+.timeline-description-text-start {
+    border-bottom: $semi-circle-border solid var(--timeline-highlight);
+    margin-right: 2 * $connector-radius;
+}
+
+.timeline-description-text-end {
+    border-bottom: $semi-circle-border solid var(--timeline-highlight);
+    margin-left: 2 * $connector-radius;
+}
+
+.timeline-panel-start, .timeline-panel-end, .timeline-connector-start, .timeline-connector-end {
+    top: calc(var(--timeline-icon-radius) / 2);
+    position: relative;
+    width: calc(var(--timeline-icon-radius) / 2);
+    height: calc($semi-circle-border + var(--timeline-icon-radius) / 2);
+    border: $semi-circle-border solid var(--timeline-highlight);
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
+.timeline-panel-start {
+    top: 50%;
+    right: 50%;
+    position: absolute;
+    width: calc(var(--timeline-icon-radius) * 2);
+    width: 2 * $connector-radius;
+    height: 50%;
+    border-top: $semi-circle-border solid var(--timeline-highlight);
+    border-left: $semi-circle-border solid var(--timeline-highlight);
+}
+
+.timeline-panel-end {
+    top: 50%;
+    position: absolute;
+    width: calc(var(--timeline-icon-radius) * 2);
+    width: 2 * $connector-radius;
+    height: 50%;
+    border-top: $semi-circle-border solid var(--timeline-highlight);
+    border-right: $semi-circle-border solid var(--timeline-highlight);
+}
+
+.timeline-dot::after {
+    display: inline-block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: var(--timeline-offset);
+    margin: (-$connector-radius) 0 0 (-$connector-radius);
+    width: 2 * $connector-radius;
+    height: 2 * $connector-radius;
+    border-radius: 100%;
+    border: ($semi-circle-border * 1.5) solid var(--timeline-connector-bg);
+    color: var(--timeline-highlight);
+    background: var(--timeline-highlight);
+}
