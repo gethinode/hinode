@@ -59,7 +59,7 @@
                         <a class="fs-5 fw-bold text-uppercase link-{{ $color }} text-break align-middle" href="{{ . }}">{{ $title }}</a>
                         <span class="badge rounded-pill text-bg-{{ $color }} ms-1">{{ if $badge }}<a class="link-bg-{{ $color }}" href="{{ . }}">{{ $badge }}</a>{{ end }}</span>
                     {{ else}}
-                        <span class="fs-5 fw-bold text-uppercase link-{{ $color }} text-break align-middle">{{ $title }}</span>
+                        <span class="fs-5 fw-bold text-uppercase text-{{ $color }} text-break align-middle">{{ $title }}</span>
                         <span class="badge rounded-pill text-bg-{{ $color }} ms-1">{{ if $badge }}{{ $badge }}{{ end }}</span>
                     {{ end }}
                 </div>
