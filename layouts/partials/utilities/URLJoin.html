@@ -1,0 +1,16 @@
+{{- $base := .base -}}
+{{- if not $base }}
+    {{- errorf "partial [assets/utilities/URLJoin.html] - Expected param 'base'" -}}
+{{- end -}}
+
+{{- $path := .path -}}
+{{- if not $path }}
+    {{- errorf "partial [assets/utilities/URLJoin.html] - Expected param 'path'" -}}
+{{- end -}}
+
+{{- $url := $path -}}
+{{- if not (hasPrefix $path "http") -}}
+    {{- $url = printf "%s/%s" (strings.TrimSuffix "/" $base) $path -}}
+{{- end }}
+
+{{- return $url -}}
