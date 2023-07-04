@@ -13,6 +13,14 @@
     {{ $error = true }}
 {{ end -}}
 
+{{ $background := "" -}}
+{{ with .Get "background" }}{{ $background = . }}{{ end -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+{{ if and $background (not (in $supportedColors $background)) -}}
+    {{ errorf "Invalid value for param 'background': %s" .Position -}}
+    {{ $error = true -}}
+{{ end -}}
+
 <!-- Inline partial to render icon -->
 {{- define "partials/timeline-icon.html" -}}
     {{- $col := default 6 .col -}}
@@ -66,7 +74,7 @@
 {{- end -}}
 
 <!-- Render default timeline -->
-<div class="container p-0 d-none d-md-block mb-5">
+<div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-bg-{{ . }}{{ end }}">
     {{ range $index, $item := $entries }}
         <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
             {{ if eq (mod $index 2) 1 }}
@@ -82,7 +90,7 @@
 </div>
 
 <!-- Render timeline for smaller devices -->
-<div class="container p-0 d-block d-md-none">
+<div class="container p-0 d-block d-md-none {{ with $background }} timeline-bg-{{ . }}{{ end }}">
     {{ range $index, $item := $entries }}
         <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
             {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}
