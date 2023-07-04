@@ -45,9 +45,9 @@
     {{- $badge := .badge -}}
     {{- $url := .url -}}
     {{- $date := .date -}}
-    {{ if and $url (not (hasPrefix $url "http")) }}
+    {{- if and $url (not (hasPrefix $url "http")) -}}
         {{ $url = path.Join site.Params.docs.release $url }}
-    {{ end }}
+    {{- end -}}
     {{- $direction := .direction -}}
 
     <div class="col-{{ $col }} d-flex align-items-center">
