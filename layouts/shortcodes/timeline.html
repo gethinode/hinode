@@ -46,7 +46,7 @@
     {{- $url := .url -}}
     {{- $date := .date -}}
     {{- if and $url (not (hasPrefix $url "http")) -}}
-        {{ $url = path.Join site.Params.docs.release $url }}
+        {{- $url = partial "partials/utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $url) }}
     {{- end -}}
     {{- $direction := .direction -}}
 
