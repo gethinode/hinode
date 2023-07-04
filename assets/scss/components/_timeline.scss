@@ -6,14 +6,19 @@ $semi-circle-border: 0.2rem;
 :root {
     --timeline-highlight: var(--bs-primary);
     --timeline-icon-radius: #{$semi-circle-radius};
-    --timeline-offset: 50%
+    --timeline-offset: 50%;
+    --timeline-connector-bg: var(--bs-body-bg);
 }
 
 @each $state in map-keys($theme-colors) {
     .timeline-#{$state} {
       --timeline-highlight: var(--#{$prefix}#{$state});
     }
-}
+
+    .timeline-bg-#{$state} {
+        --timeline-connector-bg: var(--#{$prefix}#{$state}-bg-subtle);
+      }
+  }
 
 // scss-docs-end timeline
 
@@ -154,7 +159,7 @@ $semi-circle-border: 0.2rem;
     width: 2 * $connector-radius;
     height: 2 * $connector-radius;
     border-radius: 100%;
-    border: ($semi-circle-border * 1.5) solid var(--bs-body-bg);
+    border: ($semi-circle-border * 1.5) solid var(--timeline-connector-bg);
     color: var(--timeline-highlight);
     background: var(--timeline-highlight);
 }

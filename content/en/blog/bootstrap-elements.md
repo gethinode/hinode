@@ -127,7 +127,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
     Trigger panel
 {{</* /button */>}}
 
-{{</* collapse id="collapse-1" class="p-3 border rounded" */>}}
+{{</* collapse id="collapse-1" class="p-3 border rounded bg-primary-subtle" */>}}
     Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but
     revealed when the user activates the relevant trigger.
 {{</* /collapse */>}}
@@ -251,7 +251,7 @@ As an example, the following shortcode displays a timeline with the file `data/t
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline-en" */>}}
+{{</* timeline data="timeline-en" background="dark" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
