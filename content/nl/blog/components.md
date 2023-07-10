@@ -18,6 +18,6 @@ De volgende shortcode toont een interactieve kaart van Amsterdam.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-  {{</* map lat=52.377 long=4.90 zoom=13 popup="Amsterdam CS" popup-lat=52.378062 popup-long=4.900562 */>}}
+{{</* map lat=52.377 long=4.90 zoom=13 popup="Amsterdam CS" popup-lat=52.378062 popup-long=4.900562 */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
