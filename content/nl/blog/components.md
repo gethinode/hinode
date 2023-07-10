@@ -3,7 +3,7 @@ author: Mark Dumay
 title: Componenten
 slug: componenten
 date: 2023-07-10
-description: Gebruik shortcodes om voorgedefinieerde componenten toe te voegen die gebruikmaken van externe libraries.
+description: Gebruik shortcodes om voorgedefiniëerde componenten toe te voegen die gebruikmaken van externe libraries.
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/puzzle.jpg
 photoCredits: <a href="https://unsplash.com/@ryoji__iwata">Ryoji Iwata</a>
