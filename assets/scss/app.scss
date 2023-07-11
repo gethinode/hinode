@@ -53,14 +53,6 @@
 // Import Bootstrap helpers
 @import "bootstrap/scss/helpers";
 
-// Import Font Awesome
-// scss-docs-start awesome
-@import "@fortawesome/fontawesome-free/scss/fontawesome";
-@import "@fortawesome/fontawesome-free/scss/regular";
-@import "@fortawesome/fontawesome-free/scss/solid";
-@import "@fortawesome/fontawesome-free/scss/brands";
-// scss-docs-end awesome
-
 // Import Hinode theme styles
 @import "components/alert.scss";
 @import "components/blockquote.scss";
