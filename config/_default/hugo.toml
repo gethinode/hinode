@@ -96,6 +96,14 @@ home = ["HTML", "RSS", "REDIR"]
   [[module.mounts]]
     source = "static/fonts"
     target = "static/fonts"
+  [[module.mounts]]
+    source = "node_modules/leaflet/dist"
+    target = "assets/js/vendor/leaflet"
+    includeFiles = "leaflet.js"
+  [[module.mounts]]
+    source = "node_modules/leaflet/dist/images"
+    target = "static/css/images"
+    includeFiles = "*.png"
 # toml-docs-start javascript
   [[module.mounts]]
     source = "node_modules/bootstrap/dist/js"
