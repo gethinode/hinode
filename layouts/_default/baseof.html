@@ -80,5 +80,11 @@
 
         {{- partial "footer/toast-container.html" . -}}
         {{- partialCached "footer/scripts.html" (dict "header" false "page" .) }}
+        {{- $modules := site.Params.modules.optional | intersect .Params.modules -}}
+        {{- range $index, $mod := $modules -}}
+            {{- $filename := printf "js/%s.bundle.js" $mod -}}
+            {{- $match := printf "js/modules/%s/**.js" $mod -}}
+            {{- partial "footer/scripts.html" (dict "filename" $filename "match" $match "header" false "page" .) }}
+        {{- end -}}
     </body>
 </html>
