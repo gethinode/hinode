@@ -7,6 +7,7 @@ tags: ["bootstrap", "shortcode"]
 thumbnail: img/puzzle.jpg
 photoCredits: <a href="https://unsplash.com/@ryoji__iwata">Ryoji Iwata</a>
 photoSource: <a href="https://unsplash.com/photos/5siQcvSxCP8">Unsplash</a>
+modules: ["leaflet"]
 ---
 
 Hinode provides several shortcodes on top of the common [Bootstrap elements]({{< relref "bootstrap-elements" >}}). Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
