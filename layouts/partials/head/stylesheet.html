@@ -1,3 +1,18 @@
+{{- $source := .source | default "scss/app.scss" -}}
+{{- $target := .target | default "css/main.css" -}}
+{{- $page := .page -}}
+{{- $core := .core | default true -}}
+
+{{ if $core }}
+    {{- $modules := site.Params.modules.core -}}
+    {{- $source = trim $source "{}" -}}
+    {{- $matches := slice $source -}}
+    {{- range $index, $mod := $modules -}}
+        {{- $matches = $matches | append (printf "scss/modules/%s/%s.scss" $mod $mod) -}}
+    {{- end -}}
+    {{- $source = printf "{%s}" (delimit $matches ",") }}
+{{- end -}}
+
 {{- $navbarOffset := "0em" -}}
 {{- if .Site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
 {{- $vars := dict 
@@ -14,16 +29,20 @@
     "enable-dark-mode"        (printf "%t" ((default true .Site.Params.main.enableDarkMode)))
     "import-fonts"            (printf "%t" (not (hasPrefix (lower .Site.Params.style.themeFontPath) "http")))
 -}}
+{{- $options := (dict "transpiler" "libsass" "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules" "assets/scss/modules/fontawesome") "vars" $vars) -}}
 
-{{- $options := (dict "transpiler" "libsass" "targetPath" "css/main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -}}
-{{/*- $options := (dict "transpiler" "dartsass" "targetPath" "css/main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -*/}}
-{{- if hugo.IsProduction -}}
-    {{- $options = merge $options (dict "outputStyle" "compressed") -}}
-{{- else -}}
-    {{- $options = merge $options (dict "outputStyle" "expanded") -}}
+{{ warnf "Processing scss pattern: %s" $source}}
+{{- $bundle := "" -}}
+{{- range $index, $file := resources.Match $source -}}
+    {{- warnf " - Processing css file: %s" $file }}
+    {{- $css := (resources.GetMatch $file | resources.ExecuteAsTemplate "style.app.scss" . | toCSS $options) -}}
+    {{- $bundle = delimit (slice $bundle $css.Content) "" -}}
 {{- end -}}
-{{- $css := resources.Get "scss/app.scss" | resources.ExecuteAsTemplate "style.app.scss" . | toCSS $options -}}
-{{- partial "head/icons.html" (dict "css" $css) -}}
+{{- $css := resources.FromString $target $bundle -}}
+
+{{ if $core }}
+    {{- partial "head/icons.html" (dict "css" $css) -}}
+{{ end }}
 {{- if .Site.Params.style.purge -}}
     {{- $post_options := dict "config" "config" -}}
     {{- $css = $css | resources.PostCSS $post_options -}}
