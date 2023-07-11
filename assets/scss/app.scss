@@ -53,6 +53,9 @@
 // Import Bootstrap helpers
 @import "bootstrap/scss/helpers";
 
+// Import Leaflet
+@import "leaflet/dist/leaflet";
+
 // Import Font Awesome
 // scss-docs-start awesome
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
