@@ -1,12 +1,14 @@
-{{ $filename := .filename | default "js/main.bundle.js" -}}
-{{ $match := .match | default "{js/*.js,js/vendor/**.js}" }}
-{{ $page := .page }}
-{{ $header := .header }}
+{{- $filename := .filename | default "js/main.bundle.js" -}}
+{{- $match := .match | default "{js/*.js,js/vendor/**.js}" -}}
+{{- $page := .page -}}
+{{- $header := .header -}}
 
-{{ $files := slice -}}
-{{ range $index, $file := resources.Match $match -}}
-    {{ $files = $files | append $file -}}
-{{ end -}}
+{{- warnf "Processing js pattern: %s" $match -}}
+{{- $files := slice -}}
+{{- range $index, $file := resources.Match $match -}}
+    {{- warnf " - Processing file: %s" $file }}
+    {{- $files = $files | append $file -}}
+{{- end -}}
 
 {{ if gt (len $files) 0 }}
     {{ $bundle := $files | resources.Concat $filename -}}
@@ -18,7 +20,7 @@
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
         {{- end }}
     {{- end -}}
-    
+
     {{- if not hugo.IsProduction -}}
         <script src="{{ $js.Permalink }}"></script>
     {{ else -}}
