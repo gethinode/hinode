@@ -3,7 +3,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ hugo.Generator}}
-    {{ partial "head/stylesheet.html" . -}}
+    {{ partial "head/stylesheet.html" -}}
+    {{- if hasPrefix (lower .Site.Params.style.themeFontPath) "http" -}}
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link rel="stylesheet" href="{{ .Site.Params.style.themeFontPath | default "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" }}">
+    {{- end -}}
     {{ partial "head/seo.html" . }}
     {{ partialCached "head/favicon.html" . -}}
     {{ if gt (len .Site.Languages) 1}}

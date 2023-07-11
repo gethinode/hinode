@@ -35,8 +35,3 @@
     {{- $css = $css | fingerprint | resources.PostProcess -}}
     <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 {{- end -}}
-{{- if hasPrefix (lower .Site.Params.style.themeFontPath) "http" -}}
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link rel="stylesheet" href="{{ .Site.Params.style.themeFontPath | default "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" }}">
-{{- end -}}
