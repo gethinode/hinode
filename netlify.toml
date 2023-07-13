@@ -35,7 +35,7 @@
             connect-src 'self'; \
             font-src 'self' https://*.netlify.app https://fonts.gstatic.com; \
             frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com \
-                app.netlify.com; \
+                app.netlify.com https://www.google.com; \
             img-src 'self' https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://tile.openstreetmap.org; \
             manifest-src 'self'; \
             media-src 'self' \
