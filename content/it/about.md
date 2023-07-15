@@ -1,9 +1,8 @@
 ---
-slug: over-mij
-title: Over mij
+slug: chi-sono
+title: Chi sono
 description: Een blog en documentatie thema voor Hugo gebaseerd op Bootstrap 5.
-date: 2023-02-17
-updated: 2023-06-26
+date: 2023-07-15
 showComments: false
 ---
 

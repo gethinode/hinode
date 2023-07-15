@@ -2,7 +2,7 @@
 author: "Hugo Authors"
 slug: "voorbeeldproject"
 title: "Voorbeeldproject"
-url: "projecten/voorbeeldproject"
+url: "guide/voorbeeldproject"
 date: 2021-07-15
 description: "Een voorbeeldproject."
 tags: ["html", "css"]

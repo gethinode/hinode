@@ -1,6 +1,6 @@
 [[main]]
-  name = "Over mij"
-  pageRef = "/over-mij/"
+  name = "Chi sono"
+  pageRef = "/chi-sono/"
   weight = 10
 
 [[main]]
@@ -9,21 +9,10 @@
   weight = 20
 
 [[main]]
-  name = "Projecten"
-  pageRef = "/projecten/"
+  name = "Guide"
+  pageRef = "/guide/"
   weight = 30
 
-[[main]]
-  name = "Voorbeeldproject"
-  pageRef = "/projecten/voorbeeldproject/"
-  parent = "Projecten"
-  weight = 1
-
-[[main]]
-  name = "Ander project"
-  pageRef = "/projecten/ander-project/"
-  parent = "Projecten"
-  weight = 2
 
 [[main]]
   name = "Tags"
@@ -54,20 +43,4 @@
   pageRef = "/blog/"
   weight = 10
 
-[[sample]]
-  name = "Projecten"
-  pageRef = "/projecten/"
-  weight = 20
-
-[[sample]]
-  name = "Voorbeeldproject"
-  pageRef = "/projecten/voorbeeldproject/"
-  parent = "Projecten"
-  weight = 1
-
-[[sample]]
-  name = "Ander project"
-  pageRef = "/projecten/ander-project/"
-  parent = "Projecten"
-  weight = 2
 # toml-docs-end sample-navigation

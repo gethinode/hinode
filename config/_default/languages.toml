@@ -16,16 +16,16 @@
         socialCaption = "I work on everything coding and tweet developer memes"
 # toml-docs-end lang-param
 
-[nl]
-    languageName = "Nederlands"
-    contentDir = "content/nl"
+[it]
+    languageName = "Italiano"
+    contentDir = "content/it"
     weight = 2
-    [nl.params.head]
-        tagline = "Een Hugo Thema"
-    [nl.params.feature]
-        link = "over-mij"
-        caption = "Over mij"
-    [nl.params.footer]
-        license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Volg mij"
-        socialCaption = "Ik doe aan programmeren en tweet memes"
+    [it.params.head]
+        tagline = "Monfit"
+    [it.params.feature]
+        link = "chi-sono"
+        caption = "Chi sono"
+    [it.params.footer]
+        license = "Quest'opera è distribuita con Licenza Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+        socialTitle = "Seguimi"
+        socialCaption = "Esperto informatico appassionato del proprio territorio"
