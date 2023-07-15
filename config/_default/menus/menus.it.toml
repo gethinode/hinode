@@ -13,7 +13,6 @@
   pageRef = "/guide/"
   weight = 30
 
-
 [[main]]
   name = "Tags"
   pageRef = "/tags/"

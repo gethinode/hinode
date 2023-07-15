@@ -1,4 +1,4 @@
 ---
 author: Katheryn Fox
-title: Projects
+title: Guides
 ---
