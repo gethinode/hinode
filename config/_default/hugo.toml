@@ -2,7 +2,7 @@
 title = "Hinode"
 copyright = "Copyright © 2023 Mark Dumay."
 paginate = 9
-enableGitInfo = true
+enableGitInfo = false
 # toml-docs-end main
 
 # additional settings
@@ -21,8 +21,8 @@ timeout = "180s"
 # toml-docs-end timeout
 
 # toml-docs-start language
-languageCode = "en-us"
-defaultContentLanguage = "en"
+languageCode = "it-it"
+defaultContentLanguage = "it"
 defaultContentLanguageInSubdir = true
 # toml-docs-end language
 

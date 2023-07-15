@@ -2,7 +2,7 @@
 author: "Hugo Authors"
 slug: "ander-project"
 title: "Ander project"
-url: "projecten/ander-project"
+url: "guide/ander-project"
 date: 2021-07-15
 description: "Een ander project."
 tags: ["javascript", "golang"]

@@ -1,0 +1,150 @@
+# Content
+- id: about
+  translation: "Chi sono"
+- id: postedOnDate
+  translation: "Pubblicato il {{ . }}"
+- id: lastModified
+  translation: "Ultima modifica il {{ . }}"
+- id: translationsLabel
+  translation: "Altre lingue: "
+- id: translationsSeparator
+  translation: ", "
+- id: more
+  translation: "Mostra {{ . }}"
+- id: readMore
+  translation: "Mostra di più"
+- id: moreBlog
+  translation: "Mostra più articoli"
+- id: olderBlog
+  translation: "Vecchi articoli"
+- id: recentBlog
+  translation: "Articoli più recenti"
+- id: newerBlog
+  translation: "Nuovi articoli"
+- id: previousBlog
+  translation: "Precedenti articoli"
+- id: nextBlog
+  translation: "Articolo successivo"
+- id: recentProjects
+  translation: "Guide recenti"
+- id: moreProjects
+  translation: "Mostra più guide"
+- id: read
+  translation: "di lettura"
+- id: minutesShort
+  translation: "min"
+- id: words
+  translation: "parole"
+- id: copyright
+  translation: "Copyright"
+- id: photoBy
+  translation: "Foto di"
+- id: photoOn
+  translation: "su"
+- id: article
+  translation: "Articolo"
+- id: articles
+  translation: "Articoli"
+- id: paginationNav
+  translation: "Navigazione della pagina"
+- id: paginationPrevious
+  translation: "Pagina precedente"
+- id: paginationNext
+  translation: "Pagina successiva"
+- id: paginationFirst
+  translation: "Prima pagina"
+- id: paginationLast
+  translation: "Ultima pagina"
+- id: toggleSidebar
+  translation: "Cambia la navigazione della barra laterale"
+- id: colorMode
+  translation: "Cambia il tema"
+- id: colorLight
+  translation: "Chiaro"
+- id: colorDark
+  translation: "Scuro"
+- id: colorAuto
+  translation: "Automatico"
+- id: toggleMainNav
+  translation: "Cambia la navigazione principale"
+- id: addedFeature
+  translation: "Aggiunta in"
+- id: deprecatedFeature
+  translation: "Eliminato in"
+- id: shareLink
+  translation: "Condivi via"
+- id: copiedToClipboard
+  translation: "Copiato negli appunt"
+- id: link
+  translation: "Link"
+- id: code
+  translation: "Codice"
+- id: latest
+  translation: "Ultimo"
+- id: allVersions  
+  translation: "Tutte le versioni"
+- id: newerVersionAlert
+  translation: "C'è una nuova versione di {{ . }}!"
+
+# 404 page
+- id: pageNotFound
+  translation: "La pagina che state cercando non esiste o si è verificato un altro errore. Provi a tornare alla nostra"
+- id: pageNotFoundTitle
+  translation: "Pagina non trovata"
+- id: pageNotFoundHome
+  translation: "pagina principale"
+
+
+# Navigation
+- id: toggleNavigation
+  translation: "Barra di navigazione"
+- id: languageSwitcherLabel
+  translation: "Lingua"
+- id: gcseLabelShort
+  translation: "Cerca"
+- id: gcseLabelLong
+  translation: "Cerca {{ .Site.Title }}"
+- id: gcseClose
+  translation: "Chiudi"
+- id: home
+  translation: "Pagina principale"
+
+# Staticman
+- id: noComment
+  translation: "Nessun commento"
+- id: oneComment
+  translation: "commento"
+- id: moreComment
+  translation: "commenti"
+- id: useMarkdown
+  translation: "Puoi usare il linguaggio Markdown"
+- id: yourName
+  translation: "Il tuo nome"
+- id: yourEmail
+  translation: "Il tuo indirizzo email"
+- id: yourWebsite
+  translation: "Il tuo sito web"
+
+# Delayed Disqus
+- id: show
+  translation: "Mostra"
+- id: comments
+  translation: "Commenti" 
+
+# Related posts
+- id: seeAlso
+  translation: "Vedi anche"
+
+# Table of contents
+- id: toc
+  translation: "In questa pagina"
+
+# Search
+- id: ui_search
+  translation: "Cerca su questo sito..."
+- id: ui_no_results
+  translation: "Nessun risultato per"
+
+# Draft
+- id: draft
+  translation: "Bozza"
