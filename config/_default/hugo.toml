@@ -1,6 +1,6 @@
 # toml-docs-start main
-title = "Hinode"
-copyright = "Copyright © 2023 Mark Dumay."
+title = "Monfit"
+copyright = "Copyright © 2023 Marco Aiolo."
 paginate = 9
 enableGitInfo = false
 # toml-docs-end main

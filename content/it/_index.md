@@ -1,6 +1,6 @@
 ---
 author: Mark Dumay
-title: Welkom bij Hinode!
+title: Benvenuto su Monfit!
 ---
 
-Een documentatie en blog thema voor Hugo gebaseerd op Bootstrap 5.
+Un semplice blog dove scoprire nuovi sentieri per vivere il Monferrato sotto una nuova luce.
