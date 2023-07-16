@@ -1,21 +1,21 @@
 # toml-docs-start main
 [main]
     separator = "-"
-    description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+    description = "Un semplice blog dove scoprire nuovi sentieri per vivere il Monferrato sotto una nuova luce."
     enableDarkMode = true
     modes = ["light", "dark"]
 # toml-docs-end main
 
 # toml-docs-start docs
 [docs]
-    github = "https://github.com/gethinode/hinode"
-    release = "https://github.com/gethinode/hinode/releases/tag/"
+    github = "https://github.com/zelix888/monfit"
+    release = "https://github.com/zelix888/monfit/releases/tag/"
     checkVersion = false
 # toml-docs-end docs
 
 # toml-docs-start home
 [home]
-    sections = ["blog", "projects"]
+    sections = ["blog"]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     fullCover = false
     centerHeadline = false
@@ -94,8 +94,8 @@
         style = "border-0 card-zoom"
         homepage = 3
         separator = true
-    [sections.projects]
-        title = "Projects"
+    [sections.guides]
+        title = "Guides"
         layout = "card"
         sort = "title"
         reverse = false
@@ -139,17 +139,17 @@
 
 [schema]
     type = "Organization"
-    name = "Hinode"
+    name = "Monfit"
     locale = "en-US"
     # twitter = "https://twitter.com/gethinode"
     # linkedIn = ""
-    github = "https://github.com/gethinode/hinode"
+    github = "https://github.com/zelix888/monfit"
     section = "blog"
     [author]
-        name = "Mark Dumay"
+        name = "Marco Aiolo"
         # twitter = "https://twitter.com/markdumay"
-        linkedin = "https://www.linkedin.com/in/markdumay/"
-        github = "https://github.com/markdumay"
+        linkedin = "https://www.linkedin.com/in/marcoaiolo/"
+        github = "https://github.com/zelix888/"
     [logo]
         url = "img/logo512x512.png"
         width = 512

@@ -1,8 +1,8 @@
 ---
-author: "Hugo Authors"
-slug: "ander-project"
-title: "Ander project"
-url: "guide/ander-project"
+author: "Marco"
+slug: "altro-progetto"
+title: "Altro Progetto"
+url: "guide/altro-progetto"
 date: 2021-07-15
 description: "Een ander project."
 tags: ["javascript", "golang"]

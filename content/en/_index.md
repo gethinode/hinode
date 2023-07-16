@@ -1,6 +1,6 @@
 ---
-author: Mark Dumay
-title: Welcome to Hinode!
+author: Marco Aiolo
+title: Welcome to Monfit!
 ---
 
-A clean documentation and blog theme for your Hugo site based on Bootstrap 5.
+A simple blog where you can discover new trails to live the Monferrato under a new light.
