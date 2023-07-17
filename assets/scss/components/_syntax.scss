@@ -1,5 +1,5 @@
 // stylelint-disable annotation-no-unknown
-@import "syntax-light";
+@import "components/syntax-light";
 
 .bg,
 .chroma,
@@ -18,7 +18,7 @@
 
 @if $enable-dark-mode {
     [data-bs-theme="dark"] {
-        @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
+        @import "components/syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
 
         .bg,
         .chroma,

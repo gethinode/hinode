@@ -96,17 +96,13 @@ home = ["HTML", "RSS", "REDIR"]
   [[module.mounts]]
     source = "static/fonts"
     target = "static/fonts"
-# toml-docs-start javascript
-  [[module.mounts]]
-    source = "node_modules/bootstrap/dist/js"
-    target = "assets/js/vendor/bootstrap"
-    includeFiles = "*.bundle.js"
-  [[module.mounts]]
-    source = "node_modules/flexsearch/dist"
-    target = "assets/js/vendor/flexsearch"
-    includeFiles = "*.bundle.js"
-# toml-docs-end javascript
+# toml-docs-start modules
   [[module.imports]]
-    path = "github.com/gethinode/mod-leaflet"
+    path = "github.com/gethinode/mod-bootstrap"
+  [[module.imports]]
+    path = "github.com/gethinode/mod-flexsearch"
   [[module.imports]]
     path = "github.com/gethinode/mod-fontawesome"
+  [[module.imports]]
+    path = "github.com/gethinode/mod-leaflet"
+# toml-docs-end modules

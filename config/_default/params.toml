@@ -8,9 +8,9 @@
 
 # toml-docs-start modules
 [modules]
-    # core = ["bootstrap", "flexsearch", "fontawesome"] #TODO
-    core = ["fontawesome"]
+    core = ["bootstrap", "flexsearch", "fontawesome"]
     optional = ["leaflet"]
+    excludeSCSS = ["bootstrap"]
 # toml-docs-end modules
 
 # toml-docs-start docs
