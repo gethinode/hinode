@@ -1,30 +1,52 @@
+{{- $source := .source | default "scss/app.scss" -}}
+{{- $target := .target | default "css/main.css" -}}
+{{- $page := .page -}}
+{{- $core := .core | default true -}}
+
+{{- $modules := "" -}}
+{{ if $core }}
+    {{- if reflect.IsSlice site.Params.modules.excludeSCSS -}}
+        {{- $modules = complement site.Params.modules.excludeSCSS site.Params.modules.core -}}
+    {{ else }}
+        {{- $modules = site.Params.modules.core -}}
+    {{ end }}
+{{- end -}}
+
 {{- $navbarOffset := "0em" -}}
-{{- if .Site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
+{{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
 {{- $vars := dict 
-    "theme-font"              (default "Inter" .Site.Params.style.themeFont)
-    "primary"                 (default "#007bff" .Site.Params.style.primary)
-    "secondary"               (default "#6c757d" .Site.Params.style.secondary)
-    "success"                 (default "#198754" .Site.Params.style.success)
-    "info"                    (default "#0dcaf0" .Site.Params.style.info)
-    "warning"                 (default "#ffc107" .Site.Params.style.warning)
-    "danger"                  (default "#dc3545" .Site.Params.style.danger)
-    "light"                   (default "#f8f9fa" .Site.Params.style.light)
-    "dark"                    (default "#212529" .Site.Params.style.dark)
+    "theme-font"              (default "Inter" site.Params.style.themeFont)
+    "primary"                 (default "#007bff" site.Params.style.primary)
+    "secondary"               (default "#6c757d" site.Params.style.secondary)
+    "success"                 (default "#198754" site.Params.style.success)
+    "info"                    (default "#0dcaf0" site.Params.style.info)
+    "warning"                 (default "#ffc107" site.Params.style.warning)
+    "danger"                  (default "#dc3545" site.Params.style.danger)
+    "light"                   (default "#f8f9fa" site.Params.style.light)
+    "dark"                    (default "#212529" site.Params.style.dark)
     "navbar-offset"           $navbarOffset
-    "enable-dark-mode"        (printf "%t" ((default true .Site.Params.main.enableDarkMode)))
-    "import-fonts"            (printf "%t" (not (hasPrefix (lower .Site.Params.style.themeFontPath) "http")))
+    "enable-dark-mode"        (printf "%t" ((default true site.Params.main.enableDarkMode)))
+    "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))
 -}}
 
-{{- $options := (dict "transpiler" "libsass" "targetPath" "css/main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -}}
-{{/*- $options := (dict "transpiler" "dartsass" "targetPath" "css/main.css" "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules") "vars" $vars) -*/}}
-{{- if hugo.IsProduction -}}
-    {{- $options = merge $options (dict "outputStyle" "compressed") -}}
-{{- else -}}
-    {{- $options = merge $options (dict "outputStyle" "expanded") -}}
+<!-- TODO: remove debug statement -->
+{{ $match := "scss/**.scss" }}
+{{ $files := sort (resources.Match $match) "Key" "asc" }}
+{{ warnf "Processing pattern: %s" $match}}
+{{- range $index, $file := $files -}}
+    {{/*- warnf " - Processing file: %s" $file.Key */}}
 {{- end -}}
-{{- $css := resources.Get "scss/app.scss" | resources.ExecuteAsTemplate "style.app.scss" . | toCSS $options -}}
-{{- partial "head/icons.html" (dict "css" $css) -}}
-{{- if .Site.Params.style.purge -}}
+
+{{- $options := (dict "transpiler" "libsass" "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
+{{- $bundle := partial "utilities/bundle" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss") -}}
+{{/* warnf "Bundle: %s" $bundle.Content */}}
+
+{{- $css := $bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
+
+{{ if $core }}
+    {{- partial "head/icons.html" (dict "css" $css) -}}
+{{ end }}
+{{- if site.Params.style.purge -}}
     {{- $post_options := dict "config" "config" -}}
     {{- $css = $css | resources.PostCSS $post_options -}}
 {{- end -}}
@@ -34,9 +56,4 @@
 {{- else -}}
     {{- $css = $css | fingerprint | resources.PostProcess -}}
     <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
-{{- end -}}
-{{- if hasPrefix (lower .Site.Params.style.themeFontPath) "http" -}}
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link rel="stylesheet" href="{{ .Site.Params.style.themeFontPath | default "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" }}">
 {{- end -}}
