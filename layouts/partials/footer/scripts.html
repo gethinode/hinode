@@ -2,29 +2,26 @@
 {{- $match := .match | default "{js/*.js,js/vendor/**.js}" -}}
 {{- $page := .page -}}
 {{- $header := .header -}}
+{{- $core := .core | default false -}}
 
-{{- warnf "Processing js pattern: %s" $match -}}
-{{- $files := slice -}}
-{{- range $index, $file := resources.Match $match -}}
-    {{- warnf " - Processing file: %s" $file }}
-    {{- $files = $files | append $file -}}
+{{- $modules := "" -}}
+{{ if $core }}
+    {{- $modules = site.Params.modules.core -}}
 {{- end -}}
 
-{{ if gt (len $files) 0 }}
-    {{ $bundle := $files | resources.Concat $filename -}}
-    {{ $js := $bundle | resources.ExecuteAsTemplate $filename $page -}}
+{{- $bundle := partial "utilities/bundle" (dict "match" $match "filename" $filename "modules" $modules "basepath" "js/modules" "all" true) -}}
+{{- $js := $bundle | resources.ExecuteAsTemplate $filename $page -}}
 
-    {{- if and (not site.IsServer) $header -}}
-        {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
-        {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
-            <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
-        {{- end }}
-    {{- end -}}
+{{- if and (not site.IsServer) $header -}}
+    {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
+    {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
+    {{- end }}
+{{- end -}}
 
-    {{- if not hugo.IsProduction -}}
-        <script src="{{ $js.Permalink }}"></script>
-    {{ else -}}
-        {{ $js = $js | minify | fingerprint -}}
-        <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
-    {{ end -}}
+{{- if not hugo.IsProduction -}}
+    <script src="{{ $js.Permalink }}"></script>
+{{ else -}}
+    {{ $js = $js | minify | fingerprint -}}
+    <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end -}}

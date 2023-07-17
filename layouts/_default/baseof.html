@@ -79,7 +79,7 @@
         {{ end }}
 
         {{- partial "footer/toast-container.html" . -}}
-        {{- partialCached "footer/scripts.html" (dict "header" false "page" .) }}
+        {{- partialCached "footer/scripts.html" (dict "header" false "page" . "core" true) }}
         {{- $modules := site.Params.modules.optional | intersect .Params.modules -}}
         {{- range $index, $mod := $modules -}}
             {{- $filename := printf "js/%s.bundle.js" $mod -}}

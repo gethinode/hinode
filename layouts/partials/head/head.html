@@ -6,7 +6,7 @@
     {{ partial "head/stylesheet.html" -}}
     {{- $modules := site.Params.modules.optional | intersect .Page.Params.modules -}}
     {{- range $index, $mod := $modules -}}
-        {{- $source := printf "scss/modules/%s/%s.scss" $mod $mod -}}
+        {{- $source := printf "scss/%s.scss" $mod -}}
         {{- $target := printf "css/%s.css" $mod -}}
         {{- partial "head/stylesheet.html" (dict "source" $source "target" $target "core" false "page" .) }}
     {{- end -}}

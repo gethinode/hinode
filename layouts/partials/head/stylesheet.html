@@ -3,14 +3,13 @@
 {{- $page := .page -}}
 {{- $core := .core | default true -}}
 
+{{- $modules := "" -}}
 {{ if $core }}
-    {{- $modules := site.Params.modules.core -}}
-    {{- $source = trim $source "{}" -}}
-    {{- $matches := slice $source -}}
-    {{- range $index, $mod := $modules -}}
-        {{- $matches = $matches | append (printf "scss/modules/%s/%s.scss" $mod $mod) -}}
-    {{- end -}}
-    {{- $source = printf "{%s}" (delimit $matches ",") }}
+    {{- if reflect.IsSlice site.Params.modules.excludeSCSS -}}
+        {{- $modules = complement site.Params.modules.excludeSCSS site.Params.modules.core -}}
+    {{ else }}
+        {{- $modules = site.Params.modules.core -}}
+    {{ end }}
 {{- end -}}
 
 {{- $navbarOffset := "0em" -}}
@@ -29,16 +28,20 @@
     "enable-dark-mode"        (printf "%t" ((default true .Site.Params.main.enableDarkMode)))
     "import-fonts"            (printf "%t" (not (hasPrefix (lower .Site.Params.style.themeFontPath) "http")))
 -}}
-{{- $options := (dict "transpiler" "libsass" "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "includePaths" (slice "node_modules" "assets/scss/modules/fontawesome") "vars" $vars) -}}
 
-{{ warnf "Processing scss pattern: %s" $source}}
-{{- $bundle := "" -}}
-{{- range $index, $file := resources.Match $source -}}
-    {{- warnf " - Processing css file: %s" $file }}
-    {{- $css := (resources.GetMatch $file | resources.ExecuteAsTemplate "style.app.scss" . | toCSS $options) -}}
-    {{- $bundle = delimit (slice $bundle $css.Content) "" -}}
+<!-- TODO: remove debug statement -->
+{{ $match := "scss/**.scss" }}
+{{ $files := sort (resources.Match $match) "Key" "asc" }}
+{{ warnf "Processing pattern: %s" $match}}
+{{- range $index, $file := $files -}}
+    {{/*- warnf " - Processing file: %s" $file.Key */}}
 {{- end -}}
-{{- $css := resources.FromString $target $bundle -}}
+
+{{- $options := (dict "transpiler" "libsass" "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
+{{- $bundle := partial "utilities/bundle" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss") -}}
+{{/* warnf "Bundle: %s" $bundle.Content */}}
+
+{{- $css := $bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
 
 {{ if $core }}
     {{- partial "head/icons.html" (dict "css" $css) -}}
