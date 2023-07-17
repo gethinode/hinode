@@ -13,7 +13,7 @@
 {{- end -}}
 
 {{- $navbarOffset := "0em" -}}
-{{- if .Site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
+{{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
 {{- $vars := dict 
     "theme-font"              (default "Inter" .Site.Params.style.themeFont)
     "primary"                 (default "#007bff" .Site.Params.style.primary)
