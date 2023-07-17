@@ -15,18 +15,18 @@
 {{- $navbarOffset := "0em" -}}
 {{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
 {{- $vars := dict 
-    "theme-font"              (default "Inter" .Site.Params.style.themeFont)
-    "primary"                 (default "#007bff" .Site.Params.style.primary)
-    "secondary"               (default "#6c757d" .Site.Params.style.secondary)
-    "success"                 (default "#198754" .Site.Params.style.success)
-    "info"                    (default "#0dcaf0" .Site.Params.style.info)
-    "warning"                 (default "#ffc107" .Site.Params.style.warning)
-    "danger"                  (default "#dc3545" .Site.Params.style.danger)
-    "light"                   (default "#f8f9fa" .Site.Params.style.light)
-    "dark"                    (default "#212529" .Site.Params.style.dark)
+    "theme-font"              (default "Inter" site.Params.style.themeFont)
+    "primary"                 (default "#007bff" site.Params.style.primary)
+    "secondary"               (default "#6c757d" site.Params.style.secondary)
+    "success"                 (default "#198754" site.Params.style.success)
+    "info"                    (default "#0dcaf0" site.Params.style.info)
+    "warning"                 (default "#ffc107" site.Params.style.warning)
+    "danger"                  (default "#dc3545" site.Params.style.danger)
+    "light"                   (default "#f8f9fa" site.Params.style.light)
+    "dark"                    (default "#212529" site.Params.style.dark)
     "navbar-offset"           $navbarOffset
-    "enable-dark-mode"        (printf "%t" ((default true .Site.Params.main.enableDarkMode)))
-    "import-fonts"            (printf "%t" (not (hasPrefix (lower .Site.Params.style.themeFontPath) "http")))
+    "enable-dark-mode"        (printf "%t" ((default true site.Params.main.enableDarkMode)))
+    "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))
 -}}
 
 <!-- TODO: remove debug statement -->
@@ -46,7 +46,7 @@
 {{ if $core }}
     {{- partial "head/icons.html" (dict "css" $css) -}}
 {{ end }}
-{{- if .Site.Params.style.purge -}}
+{{- if site.Params.style.purge -}}
     {{- $post_options := dict "config" "config" -}}
     {{- $css = $css | resources.PostCSS $post_options -}}
 {{- end -}}
