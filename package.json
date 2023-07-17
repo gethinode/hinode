@@ -17,7 +17,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "prestart": "npm run clean",
+    "prestart": "npm run clean && npm run mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender",
     "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender -e production",
     "prebuild": "npm run clean",
@@ -32,8 +32,9 @@
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
     "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
     "mod:init": "hugo mod init github.com/gethinode/hinode",
-    "mod:update": "npm run -s mod:tidy && hugo mod get -u",
+    "mod:update": "hugo mod get -u ./... && npm run -s mod:vendor && npm run -s mod:tidy",
     "mod:tidy": "hugo mod tidy",
+    "mod:vendor": "hugo mod vendor",
     "test": "npm run -s lint",
     "env": "hugo env",
     "precheck": "npm version",
