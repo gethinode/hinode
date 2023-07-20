@@ -9,6 +9,7 @@
     {{ errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" }}
 {{ end }}
 
+// Import Bootstrap configuration (mounted by core Bootstrap module)
 @import "bootstrap.scss";
 
 // Import Hinode theme styles
@@ -51,5 +52,5 @@
 // Import theme placeholder
 @import "theme/theme.scss";
 
-// Import Bootstrap utilities API
+// Import Bootstrap utilities API  (mounted by core Bootstrap module)
 @import "modules/bootstrap/utilities/api";
