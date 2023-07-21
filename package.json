@@ -19,7 +19,7 @@
   "scripts": {
     "prestart": "npm run clean && npm run mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender",
-    "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender -e production",
+    "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
     "prebuild": "npm run clean",
     "build": "hugo --gc --minify",
     "build:debug": "hugo -e debug --debug",
