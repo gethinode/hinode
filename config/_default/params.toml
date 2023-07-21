@@ -9,8 +9,9 @@
 # toml-docs-start modules
 [modules]
     core = ["bootstrap", "flexsearch", "fontawesome"]
-    optional = ["leaflet"]
+    optional = ["leaflet", "katex"]
     excludeSCSS = ["bootstrap"]
+    disableTemplate = ["katex"]
 # toml-docs-end modules
 
 # toml-docs-start docs

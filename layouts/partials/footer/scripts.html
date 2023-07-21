@@ -3,6 +3,7 @@
 {{- $page := .page -}}
 {{- $header := .header -}}
 {{- $core := .core | default false -}}
+{{- $skipTemplate := .skipTemplate | default false -}}
 
 {{- $modules := "" -}}
 {{ if $core }}
@@ -10,7 +11,10 @@
 {{- end -}}
 
 {{- $bundle := partial "utilities/bundle" (dict "match" $match "filename" $filename "modules" $modules "basepath" "js/modules" "all" true) -}}
-{{- $js := $bundle | resources.ExecuteAsTemplate $filename $page -}}
+{{- $js := $bundle -}}
+{{- if not $skipTemplate -}}
+    {{- $js = $bundle | resources.ExecuteAsTemplate $filename $page -}}
+{{- end -}}
 
 {{- if and (not site.IsServer) $header -}}
     {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
