@@ -1,7 +1,7 @@
 {{- /*
     Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
 
-    Usage: `file path="path/to/filename" lang="lang" show="true"`
+    Usage: `file path="path/to/filename" lang="lang" show="true" full="true"`
 
     Prints the full content of any given file supported by the Chroma syntax highlighter.
 */ -}}
@@ -28,6 +28,15 @@
     {{ errorf "Invalid value for param 'show': %s" $showParam -}}
 {{ end -}}
 
+{{ $fullParam := "true" -}}
+{{ $full := true -}}
+{{ with .Get "full" }}{{ $fullParam = . }}{{ end -}}
+{{ if in $supportedFlags $fullParam -}}
+    {{ if eq $fullParam "true" }}{{ $full = true }}{{ else }}{{ $full = false }}{{ end -}}
+{{ else -}}
+    {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
+{{ end -}}
+
 {{- /* If any parameters are missing, print an error and exit */ -}}
 {{- if not $file -}}
     {{- errorf "%s: %q: Missing required parameters! Got: path=%q!" .Position .Name $file -}}
@@ -46,7 +55,7 @@
                 data-bs-target=".multi-{{ $id }}" 
                 aria-expanded="false" 
                 aria-controls="body-{{ $id }} footer-{{ $id }}">
-                <small>{{ strings.TrimPrefix $basePath $file }}</small>
+                <small>{{ if $full }}{{ strings.TrimPrefix $basePath $file }}{{ else }}{{ path.Base $file }}{{ end }}</small>
             </a>
         </li>
     </ul>
