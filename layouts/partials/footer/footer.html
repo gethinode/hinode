@@ -1,7 +1,7 @@
 <footer class="container-fluid text-center p-3">
     <div class="container-xxl text-center">
         <small class="text-secondary">
-            {{- $copyright := printf "%s © %s %s All rights reserved." (i18n "copyright") (dateFormat "2006" now) .Site.Title }}
+            {{- $copyright := printf "%s © %s %s %s." (T "copyright") (dateFormat "2006" now) .Site.Title (T "rights") }}
             {{ cond (gt (len .Site.Copyright) 0) .Site.Copyright $copyright }}
             {{ .Site.Params.footer.license | safeHTML }}
         </small>

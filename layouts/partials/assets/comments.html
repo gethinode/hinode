@@ -1,6 +1,6 @@
 {{- $params := .Site.Params.comments -}}
 {{- with $params -}}
-<h2>Comments</h2>
+<h2>{{ T "comments" }}</h2>
 <script src="https://utteranc.es/client.js"
   repo="{{ $params.repo }}"
   issue-term="{{ default "pathname" $params.issueTerm }}"

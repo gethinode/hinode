@@ -1,38 +1,22 @@
 {{- /*
     Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
 
-    Usage: `docs name="name" file="path/filename.<toml|scss>"`
+    Usage: `file path="path/to/filename" lang="lang" show="true"`
 
-    Prints everything between `# toml-docs-start "name"` and `# toml-docs-end "name"`
-    comments in the docs, or between `// scss-docs-start` and `// scss-docs-end`.
+    Prints the full content of any given file supported by the Chroma syntax highlighter.
 */ -}}
 
-{{- $name := .Get "name" -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file := .Get "file" }}
+{{- $file := .Get "path" }}
 {{- if hasPrefix $file "./" -}}
     {{- $file = path.Clean $file -}}
 {{- else -}}
     {{- $file = path.Join $basePath (path.Clean $file) -}}
 {{- end -}}
+
 {{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
-{{- $capture_start := "" -}}
-{{- $capture_end := "" -}}
-
+{{- $lang := .Get "lang" | default $extension -}}
 {{- $id := printf "docs-collapse-%d" .Ordinal -}}
-
-{{- $supportedExtensions := slice "js" "scss" "toml" -}}
-{{- if in $supportedExtensions $extension -}}
-    {{- if eq $extension "toml" }}
-        {{- $capture_start = printf "# toml-docs-start %s" $name -}}
-        {{- $capture_end = printf "# toml-docs-end %s" $name -}}
-    {{- else -}}
-        {{- $capture_start = printf "// %s-docs-start %s" $extension $name -}}
-        {{- $capture_end = printf "// %s-docs-end %s" $extension $name -}}
-    {{- end -}}
-{{- else -}}
-    {{- errorf "File format not supported (line %s): %s" .Position $file -}}
-{{- end -}}
 
 {{ $supportedFlags := slice "true" "false" -}}
 {{ $showParam := "true" -}}
@@ -44,24 +28,14 @@
     {{ errorf "Invalid value for param 'show': %s" $showParam -}}
 {{ end -}}
 
-
 {{- /* If any parameters are missing, print an error and exit */ -}}
-{{- if or (not $name) (not $file) -}}
-    {{- errorf "%s: %q: Missing required parameters! Got: name=%q file=%q!" .Position .Name $name $file -}}
+{{- if not $file -}}
+    {{- errorf "%s: %q: Missing required parameters! Got: path=%q!" .Position .Name $file -}}
 {{- else -}}
+
     {{- /* Force-check if the file exists */ -}}
     {{ $tmp := os.Stat $file }}
-
-    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
-    {{- $match := findRE $regex (readFile $file) -}}
-    {{- $match = index $match 0 -}}
-
-    {{- if not $match -}}
-        {{- errorf "%s: %q: Got no matches for name=%q in file=%q!" .Position .Name $name $file -}}
-    {{- end -}}
-
-    {{- $match = replace $match $capture_start "" -}}
-    {{- $match = replace $match $capture_end "" -}}
+    {{- $content := readFile $file -}}
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -78,7 +52,7 @@
     </ul>
     <div class="border-start border-end border-bottom mb-3">
         <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
-            {{- highlight (trim $match "\r\n") $extension "" -}}
+            {{- highlight (trim $content "\r\n") $lang "" -}}
         </div>
         <div class="collapse multi-{{ $id }}{{ if not $show }} show{{ end }} p-3" id="footer-{{ $id }}"><i>...</i></div>
     </div>

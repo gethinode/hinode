@@ -37,6 +37,8 @@
   translation: "woorden"
 - id: copyright
   translation: "Copyright"
+- id: rights
+  translation: "Alle rechten voorbehouden"
 - id: photoBy
   translation: "Foto van"
 - id: photoOn
@@ -129,7 +131,7 @@
 - id: show
   translation: "Tonen"
 - id: comments
-  translation: "commentaar" 
+  translation: "Reacties" 
 
 # Related posts
 - id: seeAlso

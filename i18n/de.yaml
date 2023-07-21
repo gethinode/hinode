@@ -37,6 +37,8 @@
   translation: "Wörter"
 - id: copyright
   translation: "Copyright"
+- id: rights
+  translation: "Alle Rechte vorbehalten"
 - id: photoBy
   translation: "Foto von"
 - id: photoOn

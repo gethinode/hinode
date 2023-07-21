@@ -1,5 +1,0 @@
-{{- if not (.Get 0) -}}
-    {{- errorf "Expected icon name: %s" .Position -}}
-{{- else -}}
-    {{- partial "assets/icon.html" (dict "icon" (printf "fa %s" (delimit .Params " "))) }}
-{{- end -}}
