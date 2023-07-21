@@ -49,8 +49,10 @@
 {{- if or (not $name) (not $file) -}}
     {{- errorf "%s: %q: Missing required parameters! Got: name=%q file=%q!" .Position .Name $name $file -}}
 {{- else -}}
-    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
+    {{- /* Force-check if the file exists */ -}}
+    {{ $tmp := os.Stat $file }}
 
+    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
     {{- $match := findRE $regex (readFile $file) -}}
     {{- $match = index $match 0 -}}
 
