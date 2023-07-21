@@ -1,7 +1,7 @@
 ---
 author: Mark Dumay
 title: Components
-date: 2023-07-10
+date: 2023-07-21
 description: Use shortcodes to add predefined components powered by external libraries.
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/puzzle.jpg
@@ -16,7 +16,6 @@ Hinode provides several shortcodes on top of the common [Bootstrap elements]({{<
 
 As an example, the following markdown renders two formulas using the KaTeX typesetting library.
 
-<!-- markdownlint-disable MD037 -->
 {{< example lang="markdown" >}}
 This is an inline $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formula
 
@@ -25,8 +24,6 @@ This is not an inline formula:
 $$x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}$$  
 $$\forall x \in X, \quad \exists y \leq \epsilon$$
 {{< /example >}}
-<!-- markdownlint-enable MD037 -->
-
 
 ## Map
 
