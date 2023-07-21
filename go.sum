@@ -8,12 +8,16 @@ github.com/gethinode/mod-flexsearch v1.1.0 h1:7BCMyQDlYlskNXuazt8Jg/jg9WREexu2xV
 github.com/gethinode/mod-flexsearch v1.1.0/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-flexsearch v1.1.1 h1:zHypfKR/rWPAwqNXvo09Pp3vGqU4w3r7d2VtMudIzkI=
 github.com/gethinode/mod-flexsearch v1.1.1/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
+github.com/gethinode/mod-flexsearch v1.1.2 h1:vA/jHxLq9xxkYGS9cmAoLNIkEBW+iLVCcQ8qKyEa+R4=
+github.com/gethinode/mod-flexsearch v1.1.2/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-fontawesome v1.0.2 h1:ZSK6D20/w4y5GnfYfTBB58uHD0ChIfkpKfRGwioS9rg=
 github.com/gethinode/mod-fontawesome v1.0.2/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.1.0 h1:rsDzUI+3ZlS/do2ff3ne8/z3KwHeysmuA+WsXlumXXk=
 github.com/gethinode/mod-fontawesome v1.1.0/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.2.0 h1:2nWYEjpUKu6IJ6kOh2WDlDUqRQ/dUGw6mJWIdMTA3O0=
 github.com/gethinode/mod-fontawesome v1.2.0/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
+github.com/gethinode/mod-fontawesome v1.2.1 h1:k7z5ZRsNxCohZjlZm8jVAzmTPk17c6xMYBAjAXHs13I=
+github.com/gethinode/mod-fontawesome v1.2.1/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
@@ -24,3 +28,5 @@ github.com/gethinode/mod-leaflet v0.2.3 h1:QQI4h+IH0jZ7fx4q0um2YIEiYBoW3OAfW8qHz
 github.com/gethinode/mod-leaflet v0.2.3/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
 github.com/gethinode/mod-leaflet v0.3.1 h1:H5MaOa+BB1KuVw7abTqfIn/SNzzRsAyx/WQoSe+2Ykc=
 github.com/gethinode/mod-leaflet v0.3.1/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
+github.com/gethinode/mod-leaflet v0.3.3 h1:isnjja6VRFvVWBatYSouh46TXSJg2C4/E2BQTrQw+yI=
+github.com/gethinode/mod-leaflet v0.3.3/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
