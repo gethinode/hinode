@@ -14,6 +14,12 @@
     disableTemplate = ["katex"]
 # toml-docs-end modules
 
+# toml-docs-start debugging
+[debugging]
+    showJS = false
+    showSCSS = false
+# toml-docs-end debugging
+
 # toml-docs-start docs
 [docs]
     github = "https://github.com/gethinode/hinode"
