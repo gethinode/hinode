@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.16.0-beta",
+  "version": "0.16.0-beta2",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -19,7 +19,7 @@
   "scripts": {
     "prestart": "npm run clean && npm run mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender",
-    "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender -e production",
+    "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
     "prebuild": "npm run clean",
     "build": "hugo --gc --minify",
     "build:debug": "hugo -e debug --debug",
@@ -39,9 +39,10 @@
     "env": "hugo env",
     "precheck": "npm version",
     "check": "hugo version",
-    "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark",
+    "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark && npm run -s update:syntax-dark",
     "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
     "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax-dark": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
     "upgrade": "npx npm-check-updates -u"
   },
   "repository": {
@@ -69,6 +70,7 @@
     "markdownlint-cli2": "^0.8.1",
     "postcss-cli": "^10.1.0",
     "purgecss-whitelister": "^2.4.0",
+    "replace-in-files-cli": "^2.2.0",
     "rimraf": "^5.0.0",
     "shx": "^0.3.4",
     "stylelint": "^15.6.0",

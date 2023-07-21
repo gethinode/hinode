@@ -18,6 +18,8 @@
     {{- errorf "partial [assets/bundle.html] - Cannot derive file extension of match pattern: %s" $match -}}
 {{- end -}}
 
+{{- $debugging := .debugging | default false -}}
+
 {{- if $modules -}}
     {{- $match = trim $match "{}" -}}
     {{- $matches := slice $match -}}
@@ -46,10 +48,11 @@
     {{ $sorted = $sorted | append $file.resource }}
 {{- end -}}
 
-<!-- TODO: remove temp debug statement -->
-{{ warnf "Processing pattern: %s" $match}}
-{{- range $index, $file := $sorted -}}
-    {{- warnf " - Processing file: %s" $file }}
+{{- if $debugging -}}
+    {{ warnf "Processing pattern: %s" $match}}
+    {{- range $index, $file := $sorted -}}
+        {{- warnf " - Processing file: %s" $file }}
+    {{- end -}}
 {{- end -}}
 
 {{/* warnf "FILES: %s" $sorted */}}

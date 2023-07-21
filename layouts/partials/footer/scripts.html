@@ -10,7 +10,7 @@
     {{- $modules = site.Params.modules.core -}}
 {{- end -}}
 
-{{- $bundle := partial "utilities/bundle" (dict "match" $match "filename" $filename "modules" $modules "basepath" "js/modules" "all" true) -}}
+{{- $bundle := partial "utilities/bundle" (dict "match" $match "filename" $filename "modules" $modules "basepath" "js/modules" "all" true "debugging" site.Params.debugging.showJS) -}}
 {{- $js := $bundle -}}
 {{- if not $skipTemplate -}}
     {{- $js = $bundle | resources.ExecuteAsTemplate $filename $page -}}
