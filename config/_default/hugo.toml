@@ -88,14 +88,23 @@ home = ["HTML", "RSS", "REDIR"]
     min = "0.110.0"
     max = ""
   [[module.mounts]]
+    source = "archetypes"
+    target = "archetypes"
+  [[module.mounts]]
     source = "assets"
     target = "assets"
+  [[module.mounts]]
+    source = "i18n"
+    target = "i18n"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
   [[module.mounts]]
     source = "static"
     target = "static"
   [[module.mounts]]
-    source = "static/fonts"
-    target = "static/fonts"
+    source = "netlify.toml"
+    target = "assets/config/netlify.toml"
 # toml-docs-start modules
   [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap"
