@@ -79,6 +79,19 @@
         {{ end }}
 
         {{- partial "footer/toast-container.html" . -}}
-        {{- partialCached "footer/scripts.html" (dict "header" false "page" .) }}
+        {{- partialCached "footer/scripts.html" (dict "header" false "page" . "core" true) }}
+        {{- $modules := site.Params.modules.optional | intersect .Params.modules -}}
+        {{- range $index, $mod := $modules -}}
+            {{- $filename := printf "js/%s.bundle.js" $mod -}}
+            {{- $match := printf "js/modules/%s/**.js" $mod -}}
+            {{- $skipTemplate := false -}}
+            {{- if reflect.IsSlice site.Params.modules.disableTemplate -}}
+                {{- if in site.Params.modules.disableTemplate $mod}}
+                    {{- $skipTemplate = true -}}
+                {{- end -}}
+            {{- end -}}
+
+            {{- partial "footer/scripts.html" (dict "filename" $filename "match" $match "header" false "skipTemplate" $skipTemplate "page" .) }}
+        {{- end -}}
     </body>
 </html>

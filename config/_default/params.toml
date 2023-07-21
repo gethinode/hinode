@@ -6,6 +6,14 @@
     modes = ["light", "dark"]
 # toml-docs-end main
 
+# toml-docs-start modules
+[modules]
+    core = ["bootstrap", "flexsearch", "fontawesome"]
+    optional = ["leaflet", "katex"]
+    excludeSCSS = ["bootstrap"]
+    disableTemplate = ["katex"]
+# toml-docs-end modules
+
 # toml-docs-start docs
 [docs]
     github = "https://github.com/gethinode/hinode"
