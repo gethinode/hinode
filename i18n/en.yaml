@@ -45,6 +45,8 @@
   translation: "words"
 - id: copyright
   translation: "Copyright"
+- id: rights
+  translation: "All rights reserved"
 - id: photoBy
   translation: "Photo by"
 - id: photoOn
@@ -138,7 +140,7 @@
 - id: show
   translation: "Show"
 - id: comments
-  translation: "comments" 
+  translation: "Comments" 
 
 # Related posts
 - id: seeAlso
