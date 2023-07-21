@@ -39,9 +39,9 @@
     "env": "hugo env",
     "precheck": "npm version",
     "check": "hugo version",
+    "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark",
     "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
     "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
-    "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark",
     "upgrade": "npx npm-check-updates -u"
   },
   "repository": {
