@@ -12,6 +12,10 @@
     {{- end -}}
 {{- end -}}
 
+{{- if and .IsPage (not (in .Site.Params.modules.core "bootstrap")) -}}
+    {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
+{{- end -}}
+
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
