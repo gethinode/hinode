@@ -5,10 +5,6 @@
 @import "common/variables.scss";
 @import "common/icons.scss";
 
-{{ if not (in site.Params.modules.core "bootstrap") }}
-    {{ errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" }}
-{{ end }}
-
 // Import Bootstrap configuration (mounted by core Bootstrap module)
 @import "bootstrap.scss";
 

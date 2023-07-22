@@ -105,11 +105,14 @@
     {{- errorf "partial [assets/navbar.html] - Missing value for param 'page'" -}}
 {{- end -}}
 
-{{- $menuName := "main" }}
-{{- with .menus }}{{ $menuName = .}}{{ end -}}
+{{- $defaultMenu := "main" }}
+{{- $menuName := $defaultMenu }}
+{{- with .menus }}{{ $menuName = . }}{{ end -}}
 {{- $menus := index site.Menus $menuName -}}
 {{- if or (ne (printf "%T" $menus) "navigation.Menu") (ne (index $menus 0).Menu $menuName) -}}
-    {{- errorf "partial [assets/navbar.html] - Invalid value for param 'menus': %s" $menuName -}}
+    {{- if ne $menuName $defaultMenu }}
+        {{- errorf "partial [assets/navbar.html] - Invalid value for param 'menus': %s" $menuName -}}
+    {{- end -}}
 {{- end -}}
 
 {{- $size := "md" -}}
@@ -238,7 +241,7 @@
                     {{- end -}}
     
                     <!-- Insert divider if applicable -->
-                    {{- if or $enableLanguage $enableVersions -}}
+                    {{- if and $menus (or $enableLanguage $enableVersions) -}}
                         <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
                             <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
                         </li>
