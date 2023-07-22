@@ -56,10 +56,11 @@
 - [PageSpeed Insights][pagespeed]
 - [Mozilla Observatory][observatory]
 
-Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
+Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme supports [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
 
 Additional features include:
 
+- Flexible configuration of Hugo modules
 - Switching between light mode and dark mode
 - Support for multiple languages
 - Reusable Bootstrap components through configurable shortcodes and partials
