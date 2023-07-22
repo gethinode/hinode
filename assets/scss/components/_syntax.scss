@@ -10,6 +10,7 @@
 
 .syntax-highlight {
     background-color: var(--bs-light) if($enable-important-utilities, !important, null);
+    overflow-x: auto;
 }
 
 .preview-background {
@@ -29,6 +30,7 @@
 
         .syntax-highlight {
             background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null);
+            overflow-x: auto;
         }
 
         .bg,
