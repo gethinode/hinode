@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.16.3",
+  "version": "0.16.4",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -20,7 +20,7 @@
     "prestart": "npm run clean && npm run mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender",
     "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && npm run -s mod:install",
     "build": "hugo --gc --minify",
     "build:debug": "hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
@@ -32,6 +32,7 @@
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
     "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
     "mod:clean": "hugo mod clean",
+    "mod:install": "hugo mod get ./... && npm run -s mod:vendor && npm run -s mod:tidy",
     "mod:update": "hugo mod get -u ./... && npm run -s mod:vendor && npm run -s mod:tidy",
     "mod:tidy": "hugo mod tidy",
     "mod:vendor": "rimraf _vendor && hugo mod vendor",
@@ -43,7 +44,7 @@
     "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
     "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
     "update:syntax-dark": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
-    "upgrade": "npx npm-check-updates -u"
+    "upgrade": "npx npm-check-updates -u && mod:update"
   },
   "repository": {
     "type": "git",

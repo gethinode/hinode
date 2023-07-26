@@ -23,9 +23,11 @@
     {{- end }}
 {{- end -}}
 
-{{- if not hugo.IsProduction -}}
-    <script src="{{ $js.Permalink }}"></script>
-{{ else -}}
-    {{ $js = $js | minify | fingerprint -}}
-    <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- if gt (len $js.Content) 0 -}}
+    {{- if not hugo.IsProduction -}}
+        <script src="{{ $js.Permalink }}"></script>
+    {{ else -}}
+        {{ $js = $js | minify | fingerprint -}}
+        <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+    {{ end -}}
 {{ end -}}

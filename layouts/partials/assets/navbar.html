@@ -150,7 +150,7 @@
     {{- end -}}
 {{- end -}}
 
-{{- $enableDarkMode := default true site.Params.main.enableDarkMode -}}
+{{- $enableDarkMode := default false site.Params.main.enableDarkMode -}}
 {{- with .mode -}}
     {{- $darkModeParam := . -}}
     {{- if in $supportedFlags $darkModeParam -}}
