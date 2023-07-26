@@ -3,7 +3,7 @@
         {{- range $index, $item := .Page.Ancestors.Reverse -}}
             {{- $title := .Title -}}
             {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
-            {{- $address := or .Permalink (.Params.Redirect | absLangURL) -}}
+            {{- $address := or .RelPermalink (.Params.Redirect | relLangURL) -}}
             {{ if $address }}
                 <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
             {{ else }}

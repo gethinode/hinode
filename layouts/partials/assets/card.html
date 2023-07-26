@@ -111,7 +111,7 @@
 
 {{- with $page -}}
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
-    {{- if not $href }}{{ $href = .Permalink  }}{{ end -}}
+    {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
     {{- if not $description }}{{ $description = .Description }}{{ end -}}
     {{- if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
     {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}

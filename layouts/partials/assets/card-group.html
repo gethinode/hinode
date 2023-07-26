@@ -107,12 +107,12 @@
                 "orientation" $orientation
             ) -}}
             
-            {{- if $element.Permalink -}}
+            {{- if $element.RelPermalink -}}
                 {{- $params = merge $params (dict "path" $element.File.Path) -}}
             {{- else -}}
                 {{- $params = merge $params (dict
                     "title" $element.Title
-                    "href" $element.Permalink
+                    "href" $element.RelPermalink
                     "description" (or $element.Description $element.Content)
                     "thumbnail" $element.Params.thumbnail
                     "icon" $element.Params.icon
