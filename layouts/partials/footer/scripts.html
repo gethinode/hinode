@@ -1,3 +1,4 @@
+{{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $filename := .filename | default "js/main.bundle.js" -}}
 {{- $match := .match | default "{js/*.js,js/vendor/**.js}" -}}
 {{- $page := .page -}}
@@ -25,9 +26,9 @@
 
 {{- if gt (len $js.Content) 0 -}}
     {{- if not hugo.IsProduction -}}
-        <script src="{{ $js.RelPermalink }}"></script>
+        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}"></script>
     {{ else -}}
         {{ $js = $js | minify | fingerprint -}}
-        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end -}}
 {{ end -}}
