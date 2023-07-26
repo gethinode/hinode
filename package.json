@@ -44,7 +44,7 @@
     "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
     "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
     "update:syntax-dark": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
-    "upgrade": "npx npm-check-updates -u && mod:update"
+    "upgrade": "npx npm-check-updates -u && npm run -s mod:update"
   },
   "repository": {
     "type": "git",
