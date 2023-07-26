@@ -6,7 +6,7 @@
 {{- $modules := "" -}}
 {{ if $core }}
     {{- if reflect.IsSlice site.Params.modules.excludeSCSS -}}
-        {{- $modules = complement site.Params.modules.excludeSCSS site.Params.modules.core -}}
+        {{- $modules = complement site.Params.modules.excludeSCSS (or site.Params.modules.core slice) -}}
     {{ else }}
         {{- $modules = site.Params.modules.core -}}
     {{ end }}
