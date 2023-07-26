@@ -10,7 +10,7 @@
             {{ T "shareLink" }}
             {{- range $index, $item := $list -}}
                 {{- $url := $item.url -}}
-                {{- $url = replace $url "{url}" $page.RelPermalink -}}
+                {{- $url = replace $url "{url}" $page.Permalink -}}
                 {{- $url = replace $url "{title}" (urlquery $page.Title) -}}
                 {{- $url = $url | safeURL -}}
                 {{- $target := "" -}}
