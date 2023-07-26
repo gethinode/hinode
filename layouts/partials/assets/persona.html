@@ -49,7 +49,7 @@
 
 {{- with $page -}}
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
-    {{- if not $href }}{{ $href = .Permalink  }}{{ end -}}
+    {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
     {{- if not $content }}{{ $content = .Content }}{{ end -}}
     {{- if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
 {{- end -}}

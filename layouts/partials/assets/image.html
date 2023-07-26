@@ -98,7 +98,7 @@
                 {{- $scaled = $img.Fit (printf "%s webp" $dim) -}}
             {{- end -}}
             {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean (printf "-%s.webp" $dim)) -}}
-            {{- $imgset = printf "%s, %s %sw" $imgset $scaled.Permalink (index $widths $index) -}}
+            {{- $imgset = printf "%s, %s %sw" $imgset $scaled.RelPermalink (index $widths $index) -}}
         {{- end -}}
         {{- $imgset = strings.TrimPrefix ", " $imgset -}}
     {{- end -}}
@@ -145,7 +145,7 @@
                 srcset="{{ . }}"
                 sizes="100vw"
                 {{- end }}
-                src="{{ absURL $fallbackURL }}"
+                src="{{ $fallbackURL }}"
                 alt="{{ $title }}">
         </div>
     {{- if $caption -}}
