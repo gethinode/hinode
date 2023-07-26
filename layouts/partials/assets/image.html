@@ -15,6 +15,7 @@
 -->
 
 {{- $validRatios := slice "1x1" "4x3" "16x9" "21x9" -}}
+{{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $ratio := .ratio -}}
 {{- $url := .url -}}
 {{- $mode := false -}}
@@ -68,6 +69,7 @@
 
 <!-- Generate a image set of type webp -->
 {{- define "partials/image-scaled.html " -}}
+    {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
     {{- $img := .img -}}
     {{- $ratio := .ratio -}}
     {{- $imgset := "" -}}
@@ -98,7 +100,11 @@
                 {{- $scaled = $img.Fit (printf "%s webp" $dim) -}}
             {{- end -}}
             {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean (printf "-%s.webp" $dim)) -}}
+            {{- if $absoluteURL -}}
+                {{- $imgset = printf "%s, %s %sw" $imgset $scaled.Permalink (index $widths $index) -}}
+            {{- else -}}
             {{- $imgset = printf "%s, %s %sw" $imgset $scaled.RelPermalink (index $widths $index) -}}
+            {{- end -}}
         {{- end -}}
         {{- $imgset = strings.TrimPrefix ", " $imgset -}}
     {{- end -}}
@@ -108,6 +114,7 @@
 
 <!-- Define the img with optional caption -->
 {{- define "partials/image-definition.html" -}}
+    {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
     {{- $ratio := .ratio -}}
     {{- $url := .url -}}
     {{- $outerClass := .outerClass -}}
@@ -125,7 +132,11 @@
         {{- $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
         {{- if $img -}}
             {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio) -}}
-            {{- $fallbackURL = $fallback.RelPermalink -}}
+                {{- if $absoluteURL -}}
+                    {{- $fallbackURL = $fallback.Permalink -}}
+                {{- else -}}
+                    {{- $fallbackURL = $fallback.RelPermalink -}}
+                {{- end -}}
             {{- $imgset = partial "partials/image-scaled.html " (dict "img" $img "ratio" $ratio) -}}
         {{- end -}}
     {{- end -}}

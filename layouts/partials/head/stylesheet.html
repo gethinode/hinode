@@ -1,3 +1,4 @@
+{{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $source := .source | default "scss/app.scss" -}}
 {{- $target := .target | default "css/main.css" -}}
 {{- $page := .page -}}
@@ -43,8 +44,8 @@
 {{- end -}}
 
 {{- if not hugo.IsProduction -}}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    <link rel="stylesheet" href="{{ if $absoluteURL }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}">
 {{- else -}}
     {{- $css = $css | fingerprint | resources.PostProcess -}}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ if $absoluteURL }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 {{- end -}}
