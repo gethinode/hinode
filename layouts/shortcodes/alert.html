@@ -4,10 +4,27 @@
                     "warning", "info", "light", "dark", "white" or "black".
     "dismissible"   Optional flag to indicate the alert is dismissible, defaults to false.
     "icon"          Optional class and name of a Font Awesome icon to include.
+    "type"          Optional type of the alert, either "danger" or "info". Generates an alert with related color and
+                    icon.
 -->
 
 {{- $error := false -}}
 {{ $color := "primary" -}}
+{{ $icon := "" }}
+{{ $type := "" -}}
+
+{{ with .Get "type" }}{{ $type = . }}{{ end -}}
+{{ $supportedTypes := slice "danger" "info" -}}
+{{ if $type }}
+    {{ if not (in $supportedTypes $type) -}}
+        {{ errorf "Invalid value for param 'type': %s" .Position -}}
+        {{ $error = true -}}
+    {{ else }}
+        {{ $color = $type }}
+        {{ if eq $type "danger" }}{{ $icon = "fas triangle-exclamation" }}{{ else }}{{ $icon = "fa lightbulb" }}{{ end }}
+    {{ end -}}
+{{ end -}}
+
 {{ with .Get "color" }}{{ $color = . }}{{ end -}}
 {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
 {{ if not (in $supportedColors $color) -}}
@@ -15,9 +32,9 @@
     {{ $error = true -}}
 {{ end -}}
 
-{{ $icon := "" }}
-{{ with .Get "icon" }}
-    {{ $icon = partial "assets/icon.html" (dict "icon" (printf "%s fa-2x fa-pull-left" .)) }}
+{{ with .Get "icon" }}{{ $icon = . }}{{ end }}
+{{ with $icon }}
+    {{ $icon = partial "assets/icon.html" (dict "icon" (printf "%s fa-2x fa-fw" .)) }}
 {{ end }}
 
 {{ $dismissibleParam := "false" -}}
@@ -32,9 +49,11 @@
 {{ end -}}
 
 {{- if not $error -}}
-    <div class="alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}" role="alert">
-        {{ with $icon }}{{ . }}{{ end }}
-        {{ trim .Inner " \r\n" | markdownify | safeHTML -}}
-        {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
+    <div class="d-flex alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}" role="alert">
+        {{ with $icon }}<div class="pt-1 pe-2">{{ . }}</div>{{ end }}
+        <div class="flex-grow-1 my-auto">
+            {{ trim .Inner " \r\n" | markdownify | safeHTML -}}
+            {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
+        </div>
     </div>
 {{- end -}}
