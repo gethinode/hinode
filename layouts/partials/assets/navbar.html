@@ -21,11 +21,11 @@
     {{- $collapsed := .collapsed -}}
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
-        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
             {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}
             <span class="d-md-none"></span>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
                     {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
