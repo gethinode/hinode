@@ -1,0 +1,882 @@
+<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery -->
+<!-- markdownlint-disable MD003 MD022 MD041 -->
+---
+author: Joost Mans
+title: Hinode changes
+date: 2023-07-21T13:41:48.543Z
+description: An overview of the changes to the Hinode template that were made for this site
+tags: ["blog", "Hinode"]
+thumbnail: img/changes.jpg
+photoCredits: <a href="https://unsplash.com/@brett_jordan" target="_blank">Brett Jordan</a>
+photoSource: <a href="https://unsplash.com/photos/gJUZjwy2EgE" target="_blank">Unsplash</a>
+---
+<!-- markdownlint-enable MD022 MD041 -->
+
+The foundation of this site is [Hinode](https://github.com/gethinode/hinode). This post provides an overview of the changes that were made to the Hinode theme, to get to the current design of this site. Obviously the information in this blog is very specific for this site, but if there is something of interest with respect to the layout on this site, it should be described here.
+
+Note that the following changes are described elsewhere:
+
+- A sharing button for [Mastodon](/blog/mastodon).
+- A shortcode for the [gallery](/blog/mgallery).
+- A shortcode for a different way of displaying [images](/blog/mimage).
+
+## Basic modifications to the configuration files
+
+There are more modification to the configuration files than mentioned here, but they are explained with the specific topic.
+
+The following are the modifications to `config/_default/hugo.toml`.
+
+```toml
+title = "Myrthos"
+copyright = "Copyright © 2023 Myrthos."
+baseURL = "https://myrthos.net/"
+```
+
+In the `[privacy]` section add the following to disable GoogleAnalytics.
+
+```toml
+  [privacy.googleanalytics]
+    disabled = true
+    respectDoNotTrack = true
+```
+
+These are the modifications to the Content Security Policy (CSP) elements in `config/_default/server.toml`.
+
+```toml
+    Content-Security-Policy = """\
+        default-src 'self'; \
+        script-src 'self' filesystem: \
+            https://utteranc.es/client.js https://cdn.jsdelivr.net \
+            'sha256-zqrgdmVTCHeZA3joAgSlAjQWAQSAPSJwoKyRhD8nqnc=' 'sha256-Yl2Mo78PNibh19ibhdKx03FFbKW9+8fljFAUUyUY1IQ=' \
+            'sha256-avLhcj2GD+l0pju24dWnj9qz5CZkAxQ6WrkK1IaSva4='; \
+        style-src 'self' 'unsafe-hashes' https://utteranc.es https://fonts.googleapis.com https://www.youtube.com https://cdn.jsdelivr.net \
+            'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
+            'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=';\
+        object-src 'none'; \
+        base-uri 'self'; \
+        connect-src 'self' \
+            https://cdn.jsdelivr.net; \
+        font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; \
+        frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
+        img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com https://cdn.jsdelivr.net; \
+        manifest-src 'self'; \
+        media-src 'self' \
+        """
+```
+
+The hashes in the above are for the support of Goat and Katex.
+
+In `config/_default/params.toml` change `schema`, `opengraph` and `comments` to the following:
+
+```toml
+[schema]
+    type = "Organization"
+    name = "Myrthos"
+    locale = "en-US"
+    github = "https://github.com/myrthos/myrthos-site"
+    section = "blog"
+    [author]
+        name = "Joost Mans"
+        twitter = "https://twitter.com/therealmyrthos"
+        github = "https://github.com/myrthos"
+    [logo]
+        url = "img/Logo_Rotated_light.png"
+        width = 390
+        height = 350
+    [image]
+        url = "img/Logo_Rotated_Text_light.png"
+        width = 1359
+        height = 390
+
+[opengraph]
+    images = ["Logo_Rotated_Text_light.png"]
+    locale = "en_US"
+
+[comments]
+    enabled = true
+    repo = "https://github.com/myrthos/myrthos-site"
+```
+
+## Remove multi-language support
+
+In `config/_default/hugo.toml` set the following:
+
+```toml
+defaultContentLanguageInSubdir = false  
+disableLanguages = ['nl']
+```
+
+This disables the Dutch language, leaving only the English language, but still provides the option to enable a language in the future in an easy way. The [Hinode](https://gethinode.com/docs/configuration/languages/) documentation has information on completely removing the Dutch language.
+
+## ASAP font support
+
+The Myrthos site uses the ASAP font, which is different from the default Hinode font.
+
+Go to [this page](https://gwfh.mranftl.com/) and select the ASAP font for 200, 300, 600 and regular.  
+Download the zip file and extract it to `static/fonts`.
+
+Edit `config/_default/params.toml` and change `themeFont` to: `themeFont = "asap"`.
+
+Edit `assets/scss/common/_variables.scss` and change this line: `$font-weight-normal:            regular !default;`
+
+Edit `assets/scss/theme/fonts.scss` and replace the entire contents with the CSS code generated by selecting `Historic Support` on the site. Also add the following at the top of the file:
+
+```scss
+/*!
+ * Copyright 2018 The Asap Project Authors
+ * https://github.com/Omnibus-Type/Asap
+
+ * This Font Software is licensed under the SIL Open Font License, Version 1.1.
+ * This license is copied below, and is also available with a FAQ at:
+ * https://scripts.sil.org/OFL
+ */
+ ```
+
+Remove all the files named `inter-*.*` in `static/fonts`.
+
+## favicon support
+
+The Myrthos site uses different favicon files, which are: `android-chrome.png`, `apple-touch-icon.png`, `favicon.png` and `safari-pinned-tab.svg`. They are all stored in `assets/img/favicon`.
+
+To support these favicon files change the `[favicon]` section in  `config/_default/params.toml` to:
+
+```toml
+[favicon]
+    logo = "img/favicon/favicon.png"
+    logoSize = 48
+    logoSizes = [32, 16]
+    LogoApple = "img/favicon/apple-touch-icon.png"
+    logoAppleSize = 180
+    logoAppleSizes = [152, 120, 76, 60]
+    LogoAndroid = "img/favicon/android-chrome.png"
+    logoAndroidSize = 256
+    logoAndroidSizes = [192]
+    maskIcon = "img/favicon/safari-pinned-tab.svg"
+```
+
+Change the file `layouts/partials/head/favicon.html` into the following:
+
+```go-html-template
+{{ if .Site.Params.favicon.logo -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.logo -}}
+    <link rel="icon" type="image/png" sizes="{{.Site.Params.favicon.logoSize}}x{{.Site.Params.favicon.logoSize}}" href="{{ $favicon.Permalink }}">
+    {{ range $i := .Site.Params.favicon.logoSizes -}} 
+        {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) -}}
+        <link rel="icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}">
+    {{ end -}} 
+{{ end -}}
+{{ if .Site.Params.favicon.LogoApple -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.LogoApple -}}
+    <link rel="apple-touch-icon" type="image/png" sizes="{{.Site.Params.favicon.logoAppleSize}}x{{.Site.Params.favicon.logoAppleSize}}" href="{{ $favicon.Permalink }}">
+    {{ range $i := .Site.Params.favicon.logoAppleSizes -}} 
+        {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) -}}
+        <link rel="apple-touch-icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}">
+    {{ end -}} 
+{{ end -}}
+{{ if .Site.Params.favicon.LogoAndroid -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.LogoAndroid -}}
+    <link rel="icon" type="image/png" sizes="{{.Site.Params.favicon.logoAndroidSize}}x{{.Site.Params.favicon.logoAndroidSize}}" href="{{ $favicon.Permalink }}">
+    {{ range $i := .Site.Params.favicon.logoAndroidSizes -}} 
+        {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) -}}
+        <link rel="icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}">
+    {{ end -}} 
+{{ end -}}
+{{ if .Site.Params.favicon.maskIcon -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.maskIcon -}}
+    <link rel="mask-icon" href="{{ $favicon.Permalink }}" color="#5bbad5">
+{{ end -}}
+```
+
+For completeness also change the file `layouts/default/single.xml` the line:  
+`{{ with resources.Get "img/favicon.png" }}`
+to  
+`{{ with resources.Get "img/favicon/android-chrome.png" }}`
+
+## Footer changes
+
+Add to `assets/scss/theme/theme.scss` the following:
+
+```scss
+// Remove the background from the table. Apply to th and td
+.table-noBG {
+    background:transparent !important;
+}
+
+// For the footer table, remove the background.
+// Also make the column width 50%, so that the title centers correctly
+.table-footer-col {
+    background:transparent !important;
+    width: 50%;
+}
+```
+
+Change in `/config/_default/languages.toml` the `en.params.footer` en `nl.params.footer` sections to:
+
+```toml
+    [en.params.footer]
+        license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+        socialTitle = "Social Media"
+        footerTitle = "Site Links"
+
+    [nl.params.footer]
+        license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+        socialTitle = "Sociale Media"
+        footerTitle = "Site Links"
+```
+
+Change `layouts/partials/footer/social.html` to:
+
+```go-html-template
+<div class="container-fluid">
+    <div  class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-top">
+        <div class="col col-md-2 d-none d-md-block"></div>
+        <div class="col col-sm-6 col-md-4">
+            <table class="table table-borderless">
+                <thead>
+                    <tr><th colspan="2" class="text-center table-noBG">
+                       <div class="fs-3 fw-bold">{{ .Site.Params.footer.footerTitle }}</div>
+                    </th></tr>
+                </thead>
+            {{ range $index, $link := .Site.Menus.footer -}}
+            <tr> 
+                <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
+                <td class="text-start table-footer-col">
+                    <a href="{{ $link.PageRef | relLangURL }}" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ $link.Pre | safeHTML }}
+                    </a>
+                </td>
+            </tr>
+            {{ end -}}
+            </table>
+        </div>
+        <div class="col col-sm-6 col-md-4">
+            
+            <table class="table table-borderless">
+                <thead>
+                    <tr><th colspan="2" class="text-center table-noBG">
+                       <div class="fs-3 fw-bold">{{ .Site.Params.footer.socialTitle }}</div>
+                    </th></tr>
+                </thead>
+            {{ range $index, $link := .Site.Menus.social -}}
+            <tr> 
+                <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
+                <td class="text-start table-footer-col">
+                    <a href="{{ $link.URL | relLangURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ $link.Pre | safeHTML }}
+                    </a>
+                </td>
+            </tr>
+            {{ end -}}
+            </table>
+        </div>
+        <div class="col col-md-2 d-none d-md-block"></div>
+    </div>
+</div>
+```
+
+Add to `config/_default/menus/menus.en.toml` the following:
+
+```toml
+[[footer]]
+  name = "About"
+  pre = "<i class=\"fas fa-address-card fa-xl\"></i>"
+  pageRef = "/about/"
+  url = "/about/"
+  weight = 5
+
+[[footer]]
+  name = "Contact"
+  pre = "<i class=\"fas fa-envelope fa-xl\"></i>"
+  pageRef = "/contact/"
+  url = "/contact/"
+  weight = 10
+
+[[footer]]
+  name = "Terms of use"
+  pre = "<i class=\"fas fa-building fa-xl\"></i>"
+  pageRef = "/terms/"
+  weight = 30
+
+[[footer]]
+  name = "Privacy Policy"
+  pre = "<i class=\"fas fa-user-shield fa-xl\"></i>"
+  pageRef = "/privacy/"
+  weight = 40
+
+[[footer]]
+  name = "Credits"
+  pre = "<i class=\"fa fa-file-lines fa-xl\"></i>"
+  pageRef = "/credits/"
+  weight = 50
+```
+
+Override `[[social]]` with:
+
+```toml
+[[social]]
+  name = "LinkedIn"
+  pre = "<i class=\"fab fa-linkedin fa-xl\"></i>"
+  url = "https://linkedin.com/in/joost-mans-a201b333"
+  weight = 10
+
+[[social]]
+  name = "GitHub"
+  pre = "<i class=\"fab fa-github fa-xl\"></i>"
+  url = "https://github.com/myrthos"
+  weight = 20
+
+[[social]]
+  name = "Twitter"
+  pre = "<i class=\"fab fa-square-twitter fa-xl\"></i>"
+  url = "https://twitter.com/therealmyrthos"
+  weight = 30
+
+[[social]]
+  name = "Mastodon"
+  pre = "<i class=\"fab fa-mastodon fa-xl\"></i>"
+  url = "https://techhub.social/@Myrthos"
+  weight = 40
+```
+
+## Header changes
+
+In `config/_default/params.toml` change `breadcrumb` to `true` to enable breadcrumbs.  
+In `assets/scss/components/_breadcrumb.scss` change `padding-top` to `0.5 * $navbar-offset;`
+
+In `config/_default/menus/menus.en.toml` replace the `[[main]]` section with:
+
+```toml
+[[main]]
+  name = "Blog"
+  pageRef = "/blog/"
+  weight = 10
+
+[[main]]
+  name = "Projects"
+  pageRef = "/projects/"
+  weight = 20
+
+[[main]]
+  name = "Documentation"
+  pageRef = "/docs/"
+  weight = 30
+
+[[main]]
+  name = "Gallery"
+  pageRef = "/gallery/"
+  weight = 40
+
+[[main]]
+  name = "Tags"
+  pageRef = "/tags/"
+  weight = 50
+```
+
+In `static/img`, the following logos exist:
+
+- The site logo (the rotated logo with text)
+  - `Logo_Rotated_Text_dark.png`
+  - `Logo_Rotated_Text_light.png`
+- The rotated logo with no text
+  - `Logo_Rotated_dark.png`
+  - `Logo_Rotated_light.png`
+- The logo with text
+  - `Logo_Text_dark.png`
+  - `Logo_Text_light.png`
+- The logo with no text
+  - `Logo_dark.png`
+  - `Logo_light.png`
+
+Each logo has a `dark` and a `light` version, as there is a different logo depending on the selected color.
+
+Change in `config/_default/params.toml` in the `navigation` section `logo` to:  
+ `logo = "/img/Logo_Rotated_Text_zzz.png"`
+
+Change in `layouts/partials/assets/navbar.html` the line:  
+`<img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30">`
+to:
+
+```html
+{{- $logo_l := replace $logo "zzz" "light" -}}
+{{- $logo_d := replace $logo "zzz" "dark" -}}
+<div class="d-none-light"><img src="{{if $absoluteURL }}{{ absURL $logo_d }}{{ else }}{{ $logo_d }}{{ end }}" alt="{{ $title }} logo" height="50"></div>
+<div class="d-none-dark"><img src="{{if $absoluteURL }}{{ absURL $logo_l }}{{ else }}{{ $logo_l }}{{ end }}" alt="{{ $title }} logo" height="50"></div>
+```
+
+## Move search box to the right
+
+I prefer the search box to be next to the navigation bar. To achieve this the below change is needed.
+
+In `layouts/partials/assets/navbar.html` move this line:
+
+```html
+<!-- Insert search input -->
+{{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}       
+```
+
+to below the line with: `<ul class="navbar-nav ms-auto">`.
+
+Also the border of the search box could stand out a bit more. To accomplish that open the file `assets/scss/components/_search.scss`.  
+in the class `.form-control.is-search` change the line `border: 1px solid transparent;` to `border: 1px solid body;`
+
+## Update sharing providers
+
+I prefer it when a link to an external page opens in a new page, so I made some modifications to enable that. In addition, I also want to show a tooltip when hovering over the sharing buttons.
+
+In `config/_default/params.toml` in the `[[sharing,providers]]` sections, for each of the available sections, add the line `target = "_blank"`, like this:
+
+```toml
+[[sharing.providers]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
+    icon = "fab linkedin"
+    target = "_blank"
+    weight = 10
+
+[[sharing.providers]]
+    name = "Twitter"
+    url = "https://twitter.com/home?status={url}"
+    icon = "fab twitter"
+    target = "_blank"
+    weight = 20
+
+[[sharing.providers]]
+    name = "Facebook"
+    url = "https://www.facebook.com/sharer.php?u={url}"
+    icon = "fab facebook"
+    target = "_blank"
+    weight = 30
+
+[[sharing.providers]]
+    name = "WhatsApp"
+    url = "whatsapp://send?text={title}%20{url}"
+    icon = "fab whatsapp"
+    target = "_blank"
+    weight = 40
+```
+
+To enable the target and showing the tooltip change `layouts/partials/assets/sharing.html`.  
+
+Change the line:
+
+```go-html-template
+{{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
+```
+
+to:
+
+```go-html-template
+{{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "target" $item.target "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
+```
+
+In addition change `layouts/partials/assets/button.html`.
+
+Change the line:
+
+```go-html-template
+<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
+```
+
+to:
+
+```go-html-template
+<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }} {{ with .target }}target="{{ . }}"{{ end }}{{ end }}
+```
+
+I also wanted to add Mastodon as a sharing button, but that requires a bit more changes and because of that I've made a [separate blog post](/blog/mastodon) for that.
+
+## Color changes
+
+Change the colors in `config/_default/params.toml` to:
+
+```toml
+    primary = "#0070E0"     # Celtic Blue
+    secondary = "#6c757d"   # Slate Grey
+    success = "#198754"     # Sea Green
+    info = "#1FBDDC"        # Aero
+    warning = "#ffc107"     # Amber
+    danger = "#dc3545"      # Rusty Red
+    light = "#f8f9fa"       # Sea Salt
+    dark = "#212529"        # Eerie Black
+```
+
+## Katex support
+
+To enable the use of formulas in Markdown files, support for [Katex](https://github.com/KaTeX/KaTeX) was added. The steps to accomplish this are described below.
+
+Create the file `layouts/partials/assets/katex.html`, with the following contents:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]})});</script>
+```
+
+This will enable to load the Katex javascript and CSS files. Note that the required hash for the last line in that file and the location to load the files from: `https://cdn.jsdeliver.net` have been already added in the `config/_default/server.toml` file.
+
+In the file `layouts/partials/head/head.html` add `{{ if .Params.math }}{{ partial "assets/katex.html" . }}{{ end }}` to load the Katex partial in the HTML head section.
+
+In the markdown file that needs support for formulas, enable that support by adding `math: true` in the frontmatter.
+
+## Adding a Gallery section
+
+To add a gallery section to the site, to which the user can navigate, open `config/_default/params.toml` and add to `[sections]` the following:
+
+```toml
+    [sections.gallery]
+        title = "Gallery"
+        layout = "card"
+        sort = "title"
+        reverse = false 
+        nested = true
+        background = ""
+        color = ""
+        style = "border-0 card-zoom"
+        cols = 3
+        padding = "0"
+        header = "publication"
+        footer = "tags"
+        orientation = "stacked"
+        homepage = 3
+        separator = true
+```
+
+As the gallery should also be displayed on the home page, add `"gallery"` to the `sections` field of `[home]` in the `params.toml` file.
+
+Create the folder `gallery` in the `content` folder. The navigation option for the gallery has already been added in [Header changes](#header-changes).
+
+### Structure
+
+The way that galleries are used on this site, requires a few more changes. The following shows an example of what the directory structure looks like when using multiple galleries:
+
+```text
+content/en
+  gallery
+    _index.md
+    gal1
+      index.md
+      <image resources>
+    gal2
+      index.md
+      <image resources>
+    gal3
+      index.md
+      <image resources>
+```
+
+Each of the `index.md` files need to have the `layout: gallery` in the frontmatter, to make sure the layout of the page is done correctly. Additionally to enable the use of Lightbox, also `lightbox: true` needs to be added to the frontmatter. next to that each of the `index.md` files needs one or more calls to the `mgallery` shortcode. For an explanation of the use of that shortcode, check the [mgallery](/blog/mgallery) blog and the [documentation](/docs/shortcodes/mgallery/overview).
+
+### Changes to the default layout
+
+The `_index.md` file will collect the information from the `index.md` files in the folders and show a list of all the available galleries, as defined by the frontmatter of the index files. Also an image could be added in the frontmatter and displayed in the list.  
+Normally that image would also be displayed on the gallery page itself. As the page already has a gallery of images, this doesn't look good, so to prevent that from happening a change needs to be made to `layouts/_default/single.html`.
+
+Also, because of the chosen structure, the breadcrumbs will look off when viewing a gallery page. To correct that another change needs to be made to `layouts/_default/single.html`.
+
+Open the file `layouts/_default/single.html` and search for the word `minimal`. There should be three occurrences. In the first two occurrences `minimal` is part of a slice. Add in both those slices also `"gallery"`. In the first occurrence the breadcrumbs are handled and the second one prevents the display of the image specified in the frontmatter, will not be displayed on the page.
+
+## Documentation changes
+
+For Myrthos there will be multiple documentation sets. Hinode supports documentation, but only one set with multiple versions. However it is possible to "abuse" the Hinode implementation to achieve what is desired. The below information uses two example documentation sets named `project-1` and `PROJect2`. The strange capitalization is used for testing purposes.
+
+Create `content/docs`. In that directory create one folder per documentation set.
+
+In the folder of the documentation set, create a folder for each section.
+
+In the section folder create the document pages.
+
+As an example this structure is used:
+
+```goat
+docs --+-- project-1 --+-- section1 --+-- chapter-1.md                                     
+       |               |              |
+       |               |              +-- chapter-2.md
+       |               |
+       |               +-- section2 --+-- chapter-21.md
+       |                              |
+       |                              +-- chapter-22.md
+       |
+       +-- PROJect2 ---+-- project-A -+-- chapter-A1.md
+                       |              |
+                       |              +-- chapter-A2.md
+                       |
+                       +-- project-B -+-- chapter-B1.md
+                                      |
+                                      +-- chapter-B2.md
+```
+
+### Frontmatter
+
+For all document pages add in the frontmatter (next to author, description, date and title) the following:
+
+```yaml
+layout: docs
+```
+
+This is required, so that the page is rendered properly as a documentation page.
+
+For the documentation page that is to be the first page of the document, aliases should be added in the frontmatter so that when navigating to this document it will always start on that page. Example for `chapter-1.md`:
+
+```yaml
+aliases:
+  - "/docs/project-1/section1/chapter-1"
+  - "/docs/project-1/chapter-1/"
+  - "/docs/project-1/"
+```
+
+Only one page in the entire documentation set should have these aliases.  
+Note that the aliases do not have to be the same as the folder names. The aliases is what Hugo will use when building the site to create the folders. However I find it very confusing when the final site is using a different navigation structure, so I keep the names the same.
+
+All other pages than this first page, should add the following in the frontmatter:
+
+```yaml
+_build:
+  list: never
+```
+
+This prevents those pages to be listed in the Documentation overview page. Only the first page will be listed. Note that the title of this page will also be used in that Documentation overview page.
+
+### Configuration
+
+In `config/_default/params.toml` add the different documentation sets, which in Hinode are releases. Example:
+
+```toml
+[[docs.releases]]
+    label = "First Project"
+    url = "/docs/project-1"
+
+[[docs.releases]]
+    label = "Second Project"
+    url = "/docs/PROJect2"
+```
+
+Also make sure that in the `[docs]` section the following is set:
+
+```toml
+    contentPath ="/docs/"
+```
+
+In addition also add to `config/_default/params.toml` the following section:
+
+```toml
+    [sections.docs]
+        title = "Documentation"
+        layout = "card"     # card, list, nav
+        sort = "title"      # date, lastmod, weight, title or custom as defined in page frontmatter
+        reverse = false 
+        nested = false      # indicate the content should be listed recursively for the entire section.
+        background = ""     # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
+        color = ""          # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
+        style = "border-0 card-zoom" # Styling attributes for each element
+        cols = 3            # 1..5
+        padding = "0"       # “0”, “1”, “2”, “3”, “4”, “5”, or “auto”
+        header = "publication"     # Header of card: “full” (default), “publication”, “tags”, and “none”.
+        footer = "tags"     # Footer of card: “full”, “publication”, “tags”, and “none” (default).
+        orientation = "stacked" # Thumbnail: “stacked” (default), “horizontal”, or “none”
+        homepage = 3        # Number of cards to display
+        separator = true    # Show separator line between items, or not      
+```
+
+in the `data` folder add the TOC for each of the documentation sets in a YAML file. The file name is made up of `docs` followed by a `-` and the name of the documentation set folder, which is also the same as in `[[docs.releases]]`. In this examples the files `docs-project-1.yaml` and `docs-PROJect2.yaml` are to be created.
+
+For these examples the contents of these files are respectively:
+
+```yaml
+- title: Section1
+  pages:
+    - title: Chapter 1
+    - title: Chapter 2
+
+- title: Section2
+  pages:
+    - title: Chapter 21
+    - title: Chapter 22
+```
+
+and
+
+```yaml
+- title: Project A
+  pages:
+    - title: Chapter A1
+    - title: Chapter A2
+
+- title: Project B
+  pages:
+    - title: Chapter B1
+    - title: Chapter B2
+```
+
+Note that the names should be identical to the folder structure used, where a `-` in the folder name can be replaced by a space in the yaml files. Also capitalization is ignored.
+
+### Enable thumbnail defined in frontmatter
+
+By default, thumbnail images that are defined in the frontmatter of the page are not shown on the page when `layout` is set to `docs`. To give the documentation section the same look and feel as the rest of the site, this has been enabled as described below.
+
+In `layouts/_default/single.html`, search for the following line:
+
+```go-html-template
+{{ if .Params.thumbnail -}}
+```
+
+Above that line there is a slice defined. Remove from that slice `"docs"`.
+
+Normally the image will only be displayed on the introduction page of the documentation, as that is the only location where the thumbnail is specified. However, it will show an image on every page where the thumbnail is defined in the frontmatter.
+
+### Not showing the releases dropdown
+
+By default the Hinode template will show the releases, in this case the documentation sets, in a drop-down menu. Which looks fine, but it only shows when a documentation page is active. The below steps disables the display of this drop-down list.
+
+First add the following in the `[docs]` section of the `config/_default/params.toml` file to have an option to show or not show the releases drop-down list. If the option is not added, the default behavior of the Hinode template is used.
+
+```toml
+[docs]
+    hideReleases = true    # Hide the releases drop down when true
+```
+
+Additionally `layouts/partials/assets/navbar.html` needs to be modified.  
+The line that has `{{ if $list }}` is to be replaced with: `{{ if and $list (not site.Params.docs.hideReleases) }}`.  
+This will not show the releases drop-down menu when `hideReleases` is true. If it is not defined or false, the drop-down menu will be shown.
+
+### Documentation overview page
+
+Instead of the drop down list, that only shows when a documentation page is visible, a menu item named `Documentation` is to be added. For this link to work a file named `_index.md` is needed in the `/docs/` folder, with the following contents:
+
+```yaml
+---
+title: Documentation
+description: The below cards provide an overview of the available documentation sets.
+nested: false
+---
+```
+
+Hugo renders the `_index.md` file in the `docs` folder as a list. for this to work properly, the frontmatter of the document pages need to be configured as described in [Frontmatter](#Frontmatter).
+
+### Add documentation set name to TOC
+
+With multiple documentation sets, it would also be nice to know what documentation set someone is reading at a given moment. For this the tile of the documentation set can be displayed above the TOC.  
+This can be turned off or on with the `showDocTOCTitle` parameter in the `docs` section of `config/_default/params.toml`.
+
+```toml
+[docs]
+    showDocTOCTitle = true # Show the (short) title of the document above the TOC
+```
+
+For this to work, the `layouts/partials/assets/sidebar.html` needs to be modified.  
+Above the line with `<ul class="list-unstyled ps-0">`  add the following:
+
+```go-html-template
+        {{- if site.Params.docs.ShowDocTOCTitle -}}
+            <h5>{{ strings.Replace $version "-" " "}}</h5>
+        {{- end -}}
+```
+
+If a directory in `docs/` has capitals, they are replaced by lower case letters when Hugo builds everything. As a result the navigation via the TOC does not work anymore. Because of that also the following change in `layouts/partials/assets/sidebar.html` is needed:  
+Replace  
+`{{- $baseURL := relLangURL (path.Join $section $version) }}`  
+to  
+`{{- $baseURL := relLangURL (path.Join $section (strings.ToLower $version)) }}`  
+This will remove any capitalization from the `$version` string. This is the string that holds the release, or in this case the name of the documentation set folder.
+
+### Disable git information
+
+To disable the git information at the bottom of a docs page, add the following in the [docs] section of the `config/_default/params.toml` file to have an option to show or not show the git information. If the option is not added, the default behavior of the Hinode template is used.
+
+```toml
+[docs]
+    hideGitInfo = true     # Hide git information at the bottom of a docs page when true
+```
+
+Also, in `layouts/_default/single.html` search for `{{ if eq .Layout "docs" }}`. Wrap what is inside this if statement in a check for `hideGitInfo` as follows:
+
+```go-html-template
+    {{ if eq .Layout "docs" }}
+        {{ if not .Site.Params.docs.hideGitInfo }}
+            <div class="mt-5 small">
+                {{ partial "utilities/git.html" . }}
+            </div>
+        {{ end }}
+```
+
+## Home page changes
+
+There are a few changes to the way the home page is displayed. The sections that are displayed on the home page and the image in the top blue block are defined in the `[home]` section of `config/_default/params.toml`, which has been changed to:
+
+```toml
+[home]
+    sections = ["blog", "projects", "gallery"]
+    featurePhoto = "/img/electronics.jpg" 
+    photoCredits = "<a href=\"https://unsplash.com/@alexkixa\" target=\"_blank\">Alexandre Debiève</a> @ <a href=\"https://unsplash.com/photos/FO7JIlwjOtU\" target=\"_blank\">Unsplash</a>"
+    title = "Electronics close-up image"
+    fullCover = false
+    centerHeadline = false
+    style = ""
+```
+
+This also shows the last 3 galleries on the front page.
+
+The layout of the top blue bar is defined in `layouts/partials/home/featured.html`, which has been changed to:
+
+```go-html-template
+<div class="container-fluid flex-fill bg-primary bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }}">
+    <div class="container-xxl p-4">
+        <div class="row row-cols-1 row-cols-sm-3 align-items-center pt-5 pb-1 h-100">
+            <div class="col col-sm-8 text-center text-sm-start">
+                <p class="display-4">{{ .Title }}</p>
+                <p>{{ .Content }}</p>
+                {{ if .Site.Params.feature.link }}
+                    <p><a class="btn btn-primary" href="{{ .Site.Params.feature.link | safeURL }}" role="button">{{ .Site.Params.feature.caption | default (T "about") }}</a></p>
+                {{ end }}
+            </div>
+            <div class="col col-sm-4 col-md-4">
+                {{ if .Site.Params.home.featurePhoto }}
+                    {{- partial "assets/mimage.html" (dict "url" .Site.Params.home.featurePhoto 
+                                                           "credits" .Site.Params.home.photoCredits 
+                                                           "ratio" "4x3" 
+                                                           "outerClass" "img-wrap" 
+                                                           "innerClass" "rounded"
+                                                           "captionClass" "caption-align-right text-italic"
+                                                           "title" .Site.Params.home.title) -}}
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+This makes the content area in the top blue bar wider, provides more space for the text and adds a credit to the image.
+
+## Different display of caption in images on single pages
+
+As I preferred to have more options on how to display images and their caption, I created a shortcode named `mimage`. This shortcode is compatible with the Hinode `image` shortcode, but adds a number of options, like being able to change the way the caption is displayed.
+
+When the frontmatter of a single page has `thumbnail` defined and optionally `photoCredits` and `photoSource`, the `image` shortcode is called from `layouts/_default/single.html` to display the image with the optional caption.
+
+The `image` shortcode is replaced with the `mimage` shortcode, so that the credits can be moved to the right side of the image and be displayed in italic. Next to that I also prefer to show a photo icon instead of the text `Photo by`.
+
+To accomplish this the following two lines in `layouts/_default/single.html`:
+
+```go-html-template
+{{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
+{{- partial "assets/image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
+
+```
+
+are to be replaced with:
+
+```go-html-template
+{{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s %s %s" .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
+{{- partial "assets/mimage.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
+
+```
+
+Obviously this only works when the `mimage` shortcode is installed, which is explained [here](/blog/mimage).
+
+## Additional empty line before the comments
+
+I think the space between the last line of the content and the horizontal line for the comments is too small. To make it bigger open the file `layouts/_default/single.html` and search for `<hr>`, prefix that with a break, so that the line becomes `<br><hr>`.

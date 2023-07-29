@@ -150,3 +150,7 @@
 # Draft
 - id: draft
   translation: "Concept"
+
+# Mastodon
+- id: mastodon
+  translation: "Voer je Mastodon instance in, waar de pagina gedeeld moet worden"

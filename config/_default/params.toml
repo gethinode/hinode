@@ -23,7 +23,8 @@
 
 # toml-docs-start docs
 [docs]
-    github = "https://github.com/gethinode/hinode"
+    contentPath ="/docs/"
+    #github = "https://github.com/gethinode/hinode"
     release = "https://github.com/gethinode/hinode/releases/tag/"
     checkVersion = false
     hideReleases = true    # Hide the releases drop down when true
@@ -31,18 +32,20 @@
     showDocTOCTitle = true # Show the (short) title of the document above the TOC    
 
 [[docs.releases]]
-    label = "First Project"
-    url = "/docs/project-1"
+    label = "Shortcodes"
+    url = "/docs/shortcodes"
 
 [[docs.releases]]
-    label = "Second Project"
-    url = "/docs/PROJect2"
+    label = "XProject"
+    url = "/docs/xproject"
 # toml-docs-end docs
 
 # toml-docs-start home
 [home]
     sections = ["blog", "projects", "gallery"]
-    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    featurePhoto = "/img/electronics.jpg" 
+    photoCredits = "<a href=\"https://unsplash.com/@alexkixa\" target=\"_blank\">Alexandre Debiève</a> @ <a href=\"https://unsplash.com/photos/FO7JIlwjOtU\" target=\"_blank\">Unsplash</a>"
+    title = "Electronics close-up image"
     fullCover = false
     centerHeadline = false
     style = ""
@@ -99,6 +102,15 @@
     icon = "fab whatsapp"
     target = "_blank"
     weight = 40
+
+[[sharing.providers]]
+    name = "Mastodon"
+    url = "#"
+    icon = "fab mastodon"
+    id = "mastodon"
+    source = "share?text={title}&url={url}"
+    prompt = "mastodon"
+    weight = 45
 
 [[sharing.providers]]
     name = "email"

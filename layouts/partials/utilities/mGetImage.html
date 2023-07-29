@@ -1,0 +1,57 @@
+<!-- 
+    Cspell:ignore warnf
+
+    Modified from layouts/partials/utilities/GetImage.html
+        Changes:    Added option "page" which should contain .Page, for loading an image relative to the current page.
+                    Added Cspell ignore list
+
+    Retrieve a local or remote resource compatible with Hugo's image processing. The path of a remote image is
+    rewritten to ensure processed files are stored in the final '/img' folder. The partial returns nil if the
+    resource cannot be found or is incompatible. The partial supports the following arguments:
+    "url":          Required path or url of the image, e.g. "img/example.jpg" or "https://example.com/img.jpg"
+    "page":         Optional .Page, which is used to load the image relative to the current page.
+-->
+
+{{ $url := .url -}}
+{{ $page := .page -}}
+{{ $supportedMediaTypes := slice "image/png" "image/jpeg" "image/gif" "image/tiff" "image/bmp" "image/webp" -}}
+{{ $img := "" }}
+{{ $remote := hasPrefix (lower $url) "http" }}
+{{ if $remote }}
+    {{ $img = resources.GetRemote $url -}}
+{{ else }}
+    {{ $img = resources.GetMatch $url -}}
+    {{ if and (not $img) $page }}
+        {{ $img = $page.Resources.GetMatch $url }}
+        {{ if not $img }}
+            <!-- Do we have a headless bundle? -->
+            {{- $headless := $page.GetPage "headless" -}}
+            {{- if $headless -}}
+                {{ $img = $headless.Resources.GetMatch $url }}
+            {{- end}}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ with $img -}}
+    {{ if in $supportedMediaTypes (string $img.MediaType) -}}
+        <!-- Rewrite the path of remote images to avoid storing processed files in the site's root -->
+        <!-- Add a file extension based on the media type if needed to avoid Hugo processing errors -->
+        {{ if $remote -}}
+            {{ $path := (urls.Parse $url).Path }}
+            {{ $filename := index (last 1 (split (delimit (split $path "/") "," "") ",")) 0 -}}
+            {{ if not (path.Ext $filename) -}}
+                {{ $extension := string $img.MediaType.SubType -}}
+                {{ $filename = printf "%s.%s" $filename $extension -}}
+            {{ end -}}
+            {{ $img = $img.Content | resources.FromString (printf "/img/%s" $filename) -}}
+        {{ end -}}
+    {{ else -}}
+        {{ warnf "Image type '%s' is not supported: %s" $img.MediaType $url -}}
+        {{ $img = "" -}}
+    {{ end -}}
+{{ else -}}    
+    {{ warnf "Cannot find image resource: %q" $url -}}
+{{ end -}}
+
+{{ return $img -}}

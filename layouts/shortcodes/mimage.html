@@ -1,0 +1,88 @@
+<!-- 
+
+    Cspell:ignore shortcodes isset errorf mimage outerclass EXIF
+
+    Modified from layouts/shortcodes/image.html
+        Changes:    Added ratio option 3x2
+                    Added option "outer" to define an outer <div> class
+                    Added option "text" to define a class for the caption text
+                    Added option "credits" to specify the credits of the image
+                    Added option "autoCaption" to derive the caption and credits  from a txt file or the EXIF of 
+                          the image, when the caption is not specified.
+                    Changed "class" parameter to "inner"
+                    Added Cspell ignore list
+
+    Render a local or remote image with responsive image sizing. Images are resized using default media breakpoints
+    and are converted to webp format. The image is processed using the quality setting specified in the [imaging]
+    section of the main config file (defaults to 75). A fallback image is provided for older browsers. The partial
+    supports the following arguments:
+    "src":          Required relative url of the image, e.g. "img/example.jpg"
+                    It is either a URL, an image located in the assets folder or an image located relatively to the 
+                    current page. This is also the search order for the image.
+    "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". Leave empty to keep the
+                    original aspect ratio of the image.
+    "inner":        Optional class attribute of the inner img element, e.g. "rounded".
+    "class"         identical to inner for backwards compatibility
+    "outer":        Optional class attribute of the outer div element, e.g. "img-wrap".
+    "text":         Optional class attribute of the caption, e.g. "text-center".
+    "title":        Optional alternate text of the image.
+    "caption":      Optional figure caption text.
+    "credits":      Optional figure credits text.
+    "autoCaption":  Optional flag, when "true" and "caption" is not set, it will derive the caption an d credits from a file at 
+                    the same location as the image file, but with the extension ".txt" or if that does not exist, from the image 
+                    EXIF "ImageDescription" and "Artist" tags. Default is "false".
+                    If the condition is met and "caption"/credits is not set, it will also make the title equal to the caption.
+    "mode":         Optional flag indicating if the image should support color modes. Default is "false".
+-->
+
+{{- if isset .Params "src" -}}
+    {{ $url := .Get "src" -}}
+    {{- $validRatios := slice "1x1" "3x2" "4x3" "16x9" "21x9" -}}
+    {{ $ratio := .Get "ratio" -}}
+    {{ if $ratio -}}
+        {{ if not (in $validRatios $ratio) -}}
+            {{ errorf "Invalid value for param 'ratio': %s" .Position -}}
+        {{ end -}}
+    {{ end -}}
+    
+    {{- $class := "" -}}
+    {{- with .Get "class" -}}{{- $class = . -}}{{- end -}}
+    {{- with .Get "inner" -}}{{- $class = . -}}{{- end -}}
+    {{- $outer := .Get "outer" -}}
+    {{- $text := .Get "text" -}}
+    {{- $title := .Get "title" -}}
+    {{- $title := .Get "title" -}}
+    {{- $credits := .Get "credits" -}}
+    
+    {{ $caption := .Get "caption" -}}
+    {{ $supportedFlags := slice "true" "false" -}}
+    {{ $modeParam := "false" -}}
+    {{ $mode := false -}}
+    {{ with .Get "mode" }}{{ $modeParam = . }}{{ end -}}
+    {{ if in $supportedFlags $modeParam -}}
+        {{ if eq $modeParam "true" }}{{ $mode = true }}{{ else }}{{ $mode = false }}{{ end -}}
+    {{ else -}}
+        {{ errorf "Invalid value for param 'mode': %s" $modeParam -}}
+    {{ end -}}
+
+    {{- $autoCaption := default "false" (.Get "autoCaption") -}}
+    {{ if not (in $supportedFlags $autoCaption) -}}
+        {{ errorf "Invalid value for param 'autoCaption': %s" $autoCaption -}}
+    {{ end -}}
+
+    {{- partial "assets/mimage.html" (dict 
+        "url" $url
+        "page" .Page
+        "ratio" $ratio
+        "innerClass" $class
+        "outerClass" $outer
+        "captionClass" $text
+        "title" $title
+        "caption" $caption
+        "credits" $credits
+        "autoCaption" $autoCaption
+        "mode" $mode)
+    -}} 
+{{ else -}}
+    {{ errorf "Missing value for param 'src': %s" .Position -}}
+{{ end -}}

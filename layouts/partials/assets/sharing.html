@@ -21,7 +21,24 @@
                     {{- $url = "#!" -}}
                     {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link")  (T "copiedToClipboard"))) -}}
                 {{- end -}}
-                {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "target" $item.target "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
+                {{- $params := (dict "toast" $target 
+                                     "clipboard" $clipboard 
+                                     "href" $url 
+                                     "tooltip" $item.name 
+                                     "icon" (printf "%s fa-fw" $item.icon) 
+                                     "class" "btn-social p-0") 
+                -}}
+                {{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}                                    
+                {{- with $item.target -}} {{- $params = merge $params (dict "target" $item.target) -}} {{- end -}}                                    
+                {{- with $item.source -}} 
+                    {{- $source := $item.source -}}
+                    {{- $source = strings.Replace $source "{url}" $page.Permalink -}}
+                    {{- $source = strings.Replace $source "{title}" (urlquery $page.Title) -}}
+                    {{- $source = $source | safeURL -}}
+                    {{- $params = merge $params (dict "source" $source) -}} 
+                {{- end -}}                                    
+                {{- with $item.prompt -}} {{- $params = merge $params (dict "prompt" (i18n $item.prompt)) -}} {{- end -}}                                    
+                {{ partial "assets/button.html" $params }}                
             {{- end -}}
         </div>
     {{- end -}}

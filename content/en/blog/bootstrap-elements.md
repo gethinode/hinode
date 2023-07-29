@@ -5,8 +5,9 @@ date: 2023-05-20
 description: Use shortcodes to add common Bootstrap elements with ease.
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
-photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
-photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
+photoCredits: <a href="https://unsplash.com/@nate_dumlao" target="_blank">Nathan Dumlao</a>
+photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII" target="_blank">Unsplash</a>
+draft: true
 ---
 
 Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
@@ -127,7 +128,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
     Trigger panel
 {{</* /button */>}}
 
-{{</* collapse id="collapse-1" class="p-3 border rounded bg-primary-subtle" */>}}
+{{</* collapse id="collapse-1" class="p-3 border rounded" */>}}
     Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but
     revealed when the user activates the relevant trigger.
 {{</* /collapse */>}}
@@ -243,16 +244,6 @@ As an example, the following shortcode displays a centered spinner.
 Loading...
 {{</* /spinner */>}}
 {{< /example>}}
-<!-- markdownlint-enable MD037 -->
-
-## Timeline
-
-As an example, the following shortcode displays a timeline with the file `data/timeline-en.yml` as data.
-
-<!-- markdownlint-disable MD037 -->
-{{< example lang="hugo" >}}
-{{</* timeline data="timeline-en" background="dark" */>}}
-{{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
 ## Toast

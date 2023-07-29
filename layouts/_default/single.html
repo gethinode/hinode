@@ -49,8 +49,8 @@
     {{ if not (in (slice "docs" "minimal" "gallery") .Layout) }}
         {{ if .Params.thumbnail -}}
             {{- $credits := "" -}}
-            {{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
-            {{- partial "assets/image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
+            {{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s %s %s" .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
+            {{- partial "assets/mimage.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
         {{ end -}}
     {{ end }}
     {{ .Content }}
@@ -84,7 +84,7 @@
         </div>
     {{ end }}
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
-        <hr>
+        <br/><hr>
         {{ partial "assets/comments.html" . }}
     {{ end -}}
 {{ end -}}

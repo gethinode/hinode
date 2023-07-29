@@ -36,6 +36,8 @@
 @import "helpers/colored-links.scss";
 @import "helpers/display.scss";
 
+@import "components/mimage.scss";
+
 // TODO: include fonts with following statement in Dart Sass
 // @if $import-fonts {
 //     @include meta.load-css(theme/fonts);

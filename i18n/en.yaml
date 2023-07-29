@@ -159,3 +159,7 @@
 # Draft
 - id: draft
   translation: "Draft"
+
+# Mastodon
+- id: mastodon
+  translation: "Enter your Mastodon instance where the page should be shared"

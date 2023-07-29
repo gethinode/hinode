@@ -1,0 +1,79 @@
+// Additional ratio for bootstrap ratios
+.ratio-3x2 {
+  --bs-aspect-ratio: 66.67%;
+}
+
+// Italic text. In a caption needs to be preceded by a caption style
+.text-italic {
+  font-style: italic;
+}
+
+// Define the class for the left, right and center captions
+// This will generate the classes: caption-left, caption-center, caption-right
+$caption-pos: (
+  "right": right,
+  "center": center,
+  "left": left
+) !default;
+
+// Use this when also using the table layout for the display with image-center and image-float
+@each $key, $pos in $caption-pos {
+  .caption-#{$key} {
+    display: table-caption;
+    text-align: #{$pos};
+    caption-side: bottom;
+    line-height: 1.05rem;
+    padding: 0.1rem 0.5rem 0
+  }
+}
+
+// Use this when not using the table layout for the display
+@each $key, $pos in $caption-pos {
+  .caption-align-#{$key} {
+    text-align: #{$pos};
+    caption-side: bottom;
+    line-height: 1.05rem;
+    padding: 0.1rem 0.5rem 0
+  }
+}
+// Center the image and its caption
+.image-center{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  word-break: break-word;
+}
+
+// Make the image float on the left side, with the document text wrapped around the image
+.image-float-left{
+  display: table;
+  float: left;
+  margin-right: 7px;
+}
+
+// Make the image float on the right side, with the document text wrapped around the image
+.image-float-right{
+  display: table;
+  float: right;
+  margin-left: 7px;
+}
+
+// Change the cursor to a hand pointer
+.image-pointer {
+  cursor: pointer;
+}
+
+// Define the class for the corner radius per column
+$image-radius: (
+  "1": 14px,
+  "2": 12px,
+  "3": 10px,
+  "4": 8px,
+  "5": 6px
+) !default;
+
+@each $key, $radius in $image-radius {
+  .image-radius-#{$key} {
+    border-radius: #{$radius};
+  }
+}
