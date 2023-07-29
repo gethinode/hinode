@@ -1,52 +1,51 @@
 [[main]]
-  name = "About"
-  pageRef = "/about/"
-  weight = 10
-
-[[main]]
   name = "Blog"
   pageRef = "/blog/"
-  weight = 20
+  weight = 10
 
 [[main]]
   name = "Projects"
   pageRef = "/projects/"
+  weight = 20
+
+[[main]]
+  name = "Documentation"
+  pageRef = "/docs/"
   weight = 30
 
 [[main]]
-  name = "Sample project"
-  pageRef = "/projects/sample-project/"
-  parent = "Projects"
-  weight = 1
-
-[[main]]
-  name = "Another project"
-  pageRef = "/projects/another-project/"
-  parent = "Projects"
-  weight = 2
+  name = "Gallery"
+  pageRef = "/gallery/"
+  weight = 40
 
 [[main]]
   name = "Tags"
   pageRef = "/tags/"
-  weight = 40
+  weight = 50
 
 [[social]]
   name = "LinkedIn"
-  pre = "<i class=\"fab fa-linkedin fa-2x\"></i>"
-  url = "https://linkedin.com/"
+  pre = "<i class=\"fab fa-linkedin fa-xl\"></i>"
+  url = "https://linkedin.com/in/joost-mans-a201b333"
   weight = 10
 
 [[social]]
   name = "GitHub"
-  pre = "<i class=\"fab fa-github fa-2x\"></i>"
-  url = "https://github.com/"
+  pre = "<i class=\"fab fa-github fa-xl\"></i>"
+  url = "https://github.com/myrthos"
   weight = 20
 
 [[social]]
-  name = "Medium"
-  pre = "<i class=\"fab fa-medium fa-2x\"></i>"
-  url = "https://medium.com/"
+  name = "Twitter"
+  pre = "<i class=\"fab fa-square-twitter fa-xl\"></i>"
+  url = "https://twitter.com/therealmyrthos"
   weight = 30
+
+[[social]]
+  name = "Mastodon"
+  pre = "<i class=\"fab fa-mastodon fa-xl\"></i>"
+  url = "https://techhub.social/@Myrthos"
+  weight = 40
 
 # toml-docs-start sample-navigation
 [[sample]]
@@ -71,3 +70,35 @@
   parent = "Projects"
   weight = 2
 # toml-docs-end sample-navigation
+
+[[footer]]
+  name = "About"
+  pre = "<i class=\"fas fa-address-card fa-xl\"></i>"
+  pageRef = "/about/"
+  url = "/about/"
+  weight = 5
+
+[[footer]]
+  name = "Contact"
+  pre = "<i class=\"fas fa-envelope fa-xl\"></i>"
+  pageRef = "/contact/"
+  url = "/contact/"
+  weight = 10
+
+[[footer]]
+  name = "Terms of use"
+  pre = "<i class=\"fas fa-building fa-xl\"></i>"
+  pageRef = "/terms/"
+  weight = 30
+
+[[footer]]
+  name = "Privacy Policy"
+  pre = "<i class=\"fas fa-user-shield fa-xl\"></i>"
+  pageRef = "/privacy/"
+  weight = 40
+
+[[footer]]
+  name = "Credits"
+  pre = "<i class=\"fa fa-file-lines fa-xl\"></i>"
+  pageRef = "/credits/"
+  weight = 50

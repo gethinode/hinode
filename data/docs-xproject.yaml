@@ -1,0 +1,10 @@
+# This file holds all menu entries for the docs sidebar
+
+- title: Introduction
+  pages:
+    - title: Overview
+
+- title: Section 1
+  pages:
+    - title: Page 1
+    - title: Page 2

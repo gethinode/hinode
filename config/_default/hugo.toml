@@ -1,13 +1,13 @@
 # toml-docs-start main
-title = "Hinode"
-copyright = "Copyright © 2023 Mark Dumay."
+title = "Myrthos"
+copyright = "Copyright © 2023 Myrthos."
 paginate = 9
 enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-googleAnalytics = "G-T85PPZ36GN"
-baseURL = "https://demo.gethinode.com/"
+googleAnalytics = ""
+baseURL = "https://myrthos.net/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
@@ -24,7 +24,8 @@ timeout = "180s"
 # toml-docs-start language
 languageCode = "en-us"
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false  
+disableLanguages = ['nl']
 # toml-docs-end language
 
 # toml-docs-start redirect
@@ -66,6 +67,10 @@ home = ["HTML", "RSS", "REDIR"]
   [privacy.youtube]
     disabled = false
     privacyEnhanced = true
+
+  [privacy.googleanalytics]
+    disabled = true
+    respectDoNotTrack = true    
 
 [services]
   [services.instagram]

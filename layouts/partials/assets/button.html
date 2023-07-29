@@ -113,7 +113,7 @@
 {{- $toast := .toast -}}
 {{- $clipboard := .clipboard -}}
 
-<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
+<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }} {{ with .target }}target="{{ . }}"{{ end }}{{ end }}
     {{ with $id }}id="{{ . }}"{{ end }}
     {{ with $toast }}data-toast-target="{{ $toast }}"{{ end }}
     {{ with $clipboard }}data-clipboard="{{ $clipboard }}"{{ end }}

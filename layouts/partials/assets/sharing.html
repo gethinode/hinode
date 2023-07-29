@@ -21,7 +21,7 @@
                     {{- $url = "#!" -}}
                     {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link")  (T "copiedToClipboard"))) -}}
                 {{- end -}}
-                {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
+                {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "target" $item.target "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
             {{- end -}}
         </div>
     {{- end -}}

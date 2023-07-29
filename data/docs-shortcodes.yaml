@@ -1,0 +1,19 @@
+# This file holds all menu entries for the docs sidebar
+# cSpell:ignore mimage mgallery 
+
+- title: Introduction
+  pages:
+    - title: Overview
+
+- title: mimage
+  pages:
+    - title: Overview
+    - title: Installation
+    - title: Usage
+    - title: Demo
+
+- title: mgallery
+  pages:
+    - title: Overview
+    - title: Installation
+    - title: Usage

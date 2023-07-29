@@ -1,11 +1,29 @@
 <!-- Source: https://davelage.com/posts/hugo-favicons/ -->
-{{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{ if .Site.Params.favicon.logo -}}
     {{ $favicon := resources.Get .Site.Params.favicon.logo -}}
-    {{ range $i := .Site.Params.favicon.sizes -}} 
+    <link rel="icon" type="image/png" sizes="{{.Site.Params.favicon.logoSize}}x{{.Site.Params.favicon.logoSize}}" href="{{ $favicon.Permalink }}">
+    {{ range $i := .Site.Params.favicon.logoSizes -}} 
         {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) -}}
-        <link rel="icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ if $absoluteURL }}{{ $image.Permalink }}{{ else }}{{ $image.RelPermalink }}{{ end }}">
+        <link rel="icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}">
     {{ end -}} 
-    {{ $image := $favicon.Resize "180x CatmullRom" -}}
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ if $absoluteURL }}{{ $image.Permalink }}{{ else }}{{ $image.RelPermalink }}{{ end }}">
+{{ end -}}
+{{ if .Site.Params.favicon.LogoApple -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.LogoApple -}}
+    <link rel="apple-touch-icon" type="image/png" sizes="{{.Site.Params.favicon.logoAppleSize}}x{{.Site.Params.favicon.logoAppleSize}}" href="{{ $favicon.Permalink }}">
+    {{ range $i := .Site.Params.favicon.logoAppleSizes -}} 
+        {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) -}}
+        <link rel="apple-touch-icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}">
+    {{ end -}} 
+{{ end -}}
+{{ if .Site.Params.favicon.LogoAndroid -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.LogoAndroid -}}
+    <link rel="icon" type="image/png" sizes="{{.Site.Params.favicon.logoAndroidSize}}x{{.Site.Params.favicon.logoAndroidSize}}" href="{{ $favicon.Permalink }}">
+    {{ range $i := .Site.Params.favicon.logoAndroidSizes -}} 
+        {{ $image := $favicon.Resize (printf "%dx%d CatmullRom" $i $i) -}}
+        <link rel="icon" type="image/png" sizes="{{$i}}x{{$i}}" href="{{ $image.Permalink }}">
+    {{ end -}} 
+{{ end -}}
+{{ if .Site.Params.favicon.maskIcon -}}
+    {{ $favicon := resources.Get .Site.Params.favicon.maskIcon -}}
+    <link rel="mask-icon" href="{{ $favicon.Permalink }}" color="#5bbad5">
 {{ end -}}

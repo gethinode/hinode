@@ -1,6 +1,6 @@
 {{- define "partials/header.html" -}}
     {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
-    {{ if in (slice "docs" "minimal") .Layout }}
+    {{ if in (slice "minimal" "gallery") .Layout }}
         {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
         {{ partial "assets/sharing.html" . }}
         <p class="lead mb-5">{{ .Description }}</p>
@@ -46,7 +46,7 @@
         <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
     {{- end -}}
 
-    {{ if not (in (slice "docs" "minimal") .Layout) }}
+    {{ if not (in (slice "docs" "minimal" "gallery") .Layout) }}
         {{ if .Params.thumbnail -}}
             {{- $credits := "" -}}
             {{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
@@ -58,9 +58,11 @@
 
 {{ define "partials/footer.html" -}}
     {{ if eq .Layout "docs" }}
-        <div class="mt-5 small">
-            {{ partial "utilities/git.html" . }}
-        </div>
+        {{ if not .Site.Params.docs.hideGitInfo }}
+            <div class="mt-5 small">
+                {{ partial "utilities/git.html" . }}
+            </div>
+        {{ end }}
     {{ else if ne .Layout "minimal" }}
         <div class="row row-cols-2 mt-5 mb-3">
             <div class="col">

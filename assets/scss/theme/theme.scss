@@ -1,2 +1,14 @@
 // Placeholder to quickly add your own styles
 // The file is included last in the build pipeline
+
+// Remove the background from the table. Apply to th and td
+.table-noBG {
+    background:transparent !important;
+}
+
+// For the footer table, remove the background.
+// Also make the column width 50%, so that the title centers correctly
+.table-footer-col {
+    background:transparent !important;
+    width: 50%;
+}

@@ -82,7 +82,11 @@
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
-        {{- $baseURL := relLangURL (path.Join $section $version) }}
+        {{- $baseURL := relLangURL (path.Join $section (strings.ToLower $version)) }}
+
+        {{- if site.Params.docs.ShowDocTOCTitle -}}
+            <h5>{{ strings.Replace $version "-" " "}}</h5>
+        {{- end -}}
 
         <ul class="list-unstyled ps-0">
         {{- range $index, $item := $data -}}

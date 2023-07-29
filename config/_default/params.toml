@@ -26,11 +26,22 @@
     github = "https://github.com/gethinode/hinode"
     release = "https://github.com/gethinode/hinode/releases/tag/"
     checkVersion = false
+    hideReleases = true    # Hide the releases drop down when true
+    hideGitInfo = true     # Hide git information at the bottom of a docs page when true
+    showDocTOCTitle = true # Show the (short) title of the document above the TOC    
+
+[[docs.releases]]
+    label = "First Project"
+    url = "/docs/project-1"
+
+[[docs.releases]]
+    label = "Second Project"
+    url = "/docs/PROJect2"
 # toml-docs-end docs
 
 # toml-docs-start home
 [home]
-    sections = ["blog", "projects"]
+    sections = ["blog", "projects", "gallery"]
     featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
     fullCover = false
     centerHeadline = false
@@ -40,7 +51,7 @@
 # toml-docs-start navigation
 [navigation]
     anchor = true
-    logo = "/img/logo_icon.svg"
+    logo = "/img/Logo_Rotated_Text_zzz.png"
     color = "body"
     fixed = true
     offset = "3.8em"
@@ -65,24 +76,28 @@
     name = "LinkedIn"
     url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
     icon = "fab linkedin"
+    target = "_blank"
     weight = 10
 
 [[sharing.providers]]
     name = "Twitter"
     url = "https://twitter.com/home?status={url}"
     icon = "fab twitter"
+    target = "_blank"
     weight = 20
 
 [[sharing.providers]]
     name = "Facebook"
     url = "https://www.facebook.com/sharer.php?u={url}"
     icon = "fab facebook"
+    target = "_blank"
     weight = 30
 
 [[sharing.providers]]
     name = "WhatsApp"
     url = "whatsapp://send?text={title}%20{url}"
     icon = "fab whatsapp"
+    target = "_blank"
     weight = 40
 
 [[sharing.providers]]
@@ -125,26 +140,66 @@
         style = "border-1 card-emphasize"
         homepage = 3
         separator = false
+    [sections.gallery]
+        title = "Gallery"
+        layout = "card"
+        sort = "title"
+        reverse = false 
+        nested = true
+        background = ""
+        color = ""
+        style = "border-0 card-zoom"
+        cols = 3
+        padding = "0"
+        header = "publication"
+        footer = "tags"
+        orientation = "stacked"
+        homepage = 3
+        separator = true
+    [sections.docs]
+        title = "Documentation"
+        layout = "card"     # card, list, nav
+        sort = "title"      # date, lastmod, weight, title or custom as defined in page frontmatter
+        reverse = false 
+        nested = false      # indicate the content should be listed recursively for the entire section.
+        background = ""     # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
+        color = ""          # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
+        style = "border-0 card-zoom" # Styling attributes for each element
+        cols = 3            # 1..5
+        padding = "0"       # “0”, “1”, “2”, “3”, “4”, “5”, or “auto”
+        header = "publication"     # Header of card: “full” (default), “publication”, “tags”, and “none”.
+        footer = "tags"     # Footer of card: “full”, “publication”, “tags”, and “none” (default).
+        orientation = "stacked" # Thumbnail: “stacked” (default), “horizontal”, or “none”
+        homepage = 3        # Number of cards to display
+        separator = true    # Show separator line between items, or not          
 # toml-docs-end sections
 
 [favicon]
-    logo = "img/favicon.png"
-    sizes = [16, 32, 48]
+    logo = "img/favicon/favicon.png"
+    logoSize = 48
+    logoSizes = [32, 16]
+    LogoApple = "img/favicon/apple-touch-icon.png"
+    logoAppleSize = 180
+    logoAppleSizes = [152, 120, 76, 60]
+    LogoAndroid = "img/favicon/android-chrome.png"
+    logoAndroidSize = 256
+    logoAndroidSizes = [192]
+    maskIcon = "img/favicon/safari-pinned-tab.svg"
 
 # toml-docs-start theme-colors
 [style]
-    primary = "#d43900"
-    secondary = "#6c757d"
-    success = "#198754"
-    info = "#0dcaf0"
-    warning = "#ffc107"
-    danger = "#dc3545"
-    light = "#f8f9fa"
-    dark = "#212529"
+    primary = "#0070E0"     # Celtic Blue
+    secondary = "#6c757d"   # Slate Grey
+    success = "#198754"     # Sea Green
+    info = "#1FBDDC"        # Aero
+    warning = "#ffc107"     # Amber
+    danger = "#dc3545"      # Rusty Red
+    light = "#f8f9fa"       # Sea Salt
+    dark = "#212529"        # Eerie Black
 # toml-docs-end theme-colors
     themeOpacity = "10"
 # toml-docs-start font
-    themeFont = "Inter"
+    themeFont = "asap"
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
     themeFontPath = "/fonts" # local path
 # toml-docs-end font
@@ -154,33 +209,30 @@
 
 [schema]
     type = "Organization"
-    name = "Hinode"
+    name = "Myrthos"
     locale = "en-US"
-    # twitter = "https://twitter.com/gethinode"
-    # linkedIn = ""
-    github = "https://github.com/gethinode/hinode"
+    github = "https://github.com/myrthos/myrthos-site"
     section = "blog"
     [author]
-        name = "Mark Dumay"
-        # twitter = "https://twitter.com/markdumay"
-        linkedin = "https://www.linkedin.com/in/markdumay/"
-        github = "https://github.com/markdumay"
+        name = "Joost Mans"
+        twitter = "https://twitter.com/therealmyrthos"
+        github = "https://github.com/myrthos"
     [logo]
-        url = "img/logo512x512.png"
-        width = 512
-        height = 512
+        url = "img/Logo_Rotated_light.png"
+        width = 390
+        height = 350
     [image]
-        url = "img/logo1280x640.png"
-        width = 1280
-        height = 640
+        url = "img/Logo_Rotated_Text_light.png"
+        width = 1359
+        height = 390
 
 [opengraph]
-    images = ["logo.png"]
+    images = ["Logo_Rotated_Text_light.png"]
     locale = "en_US"
 
 [comments]
-    enabled = false
-    repo = "" # Replace with your repository.
+    enabled = true
+    repo = "https://github.com/myrthos/myrthos-site"
     #issueTerm = "pathname" # pathname, url, title, og:title
     #label = "comment"
     # By default, light and dark mode correspond to github-light and github-dark, respectively.

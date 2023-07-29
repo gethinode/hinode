@@ -163,7 +163,7 @@
 
 {{- $enableVersions := false -}}
 {{ $list := site.Params.docs.releases }}
-{{ if $list }}
+{{ if and $list (not site.Params.docs.hideReleases) }}
     {{- $enableVersions = gt (len $list ) 1 -}}
 {{ end }}
 
@@ -206,7 +206,10 @@
             <!-- Insert the brand logo or name -->
             <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
                 {{- if $logo -}}
-                    <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30">
+                    {{- $logo_l := replace $logo "zzz" "light" -}}
+                    {{- $logo_d := replace $logo "zzz" "dark" -}}
+                    <div class="d-none-light"><img src="{{if $absoluteURL }}{{ absURL $logo_d }}{{ else }}{{ $logo_d }}{{ end }}" alt="{{ $title }} logo" height="50"></div>
+                    <div class="d-none-dark"><img src="{{if $absoluteURL }}{{ absURL $logo_l }}{{ else }}{{ $logo_l }}{{ end }}" alt="{{ $title }} logo" height="50"></div>
                 {{- else -}}
                     <span class="fw-bold">{{ $title }}</span>
                 {{- end -}}
@@ -222,12 +225,11 @@
                 </button>
             </div>
     
-            <div class="navbar-collapse collapse" id="{{ $id }}">
-                <!-- Insert search input -->
-                {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
-                
+            <div class="navbar-collapse collapse" id="{{ $id }}">              
                 <!-- Render top-menu items (maximum depth of 2) -->
                 <ul class="navbar-nav ms-auto">
+                    <!-- Insert search input -->
+                    {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}                    
                     {{- range $menu := $menus -}}
                         <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
                             {{- partial "assets/navbar-item.html" (dict "menu" $menu "page" $page) -}}

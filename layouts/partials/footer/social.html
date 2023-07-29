@@ -1,16 +1,44 @@
 <div class="container-fluid">
-    <div class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-center">
+    <div  class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-top">
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-6 col-md-4">
-            <div class="fs-3 fw-bold">{{ .Site.Params.footer.socialTitle }}</div>
-            <p>{{ .Site.Params.footer.socialCaption }}</p>
-        </div>
-        <div class="col text-sm-start text-center col-sm-6 col-md-4">
-            {{ range .Site.Menus.social -}}
-                <a href="{{ .URL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
-                    {{ .Pre | safeHTML }}
-                </a>
+            <table class="table table-borderless">
+                <thead>
+                    <tr><th colspan="2" class="text-center table-noBG">
+                       <div class="fs-3 fw-bold">{{ .Site.Params.footer.footerTitle }}</div>
+                    </th></tr>
+                </thead>
+            {{ range $index, $link := .Site.Menus.footer -}}
+            <tr> 
+                <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
+                <td class="text-start table-footer-col">
+                    <a href="{{ $link.PageRef | relLangURL }}" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ $link.Pre | safeHTML }}
+                    </a>
+                </td>
+            </tr>
             {{ end -}}
+            </table>
+        </div>
+        <div class="col col-sm-6 col-md-4">
+            
+            <table class="table table-borderless">
+                <thead>
+                    <tr><th colspan="2" class="text-center table-noBG">
+                       <div class="fs-3 fw-bold">{{ .Site.Params.footer.socialTitle }}</div>
+                    </th></tr>
+                </thead>
+            {{ range $index, $link := .Site.Menus.social -}}
+            <tr> 
+                <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
+                <td class="text-start table-footer-col">
+                    <a href="{{ $link.URL | relLangURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ $link.Pre | safeHTML }}
+                    </a>
+                </td>
+            </tr>
+            {{ end -}}
+            </table>
         </div>
         <div class="col col-md-2 d-none d-md-block"></div>
     </div>
