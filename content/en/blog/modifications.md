@@ -502,26 +502,11 @@ Change the colors in `config/_default/params.toml` to:
 
 ## Katex support
 
-To enable the use of formulas in Markdown files, support for [Katex](https://github.com/KaTeX/KaTeX) was added. The steps to accomplish this are described below.
+Katex is now supported as a Hinode module. All that is needed to enable Katex and be able to visualize formulas is to add the following to the frontmatter of the file in which the formulas are to be displayed:
 
-Create the file `layouts/partials/assets/katex.html`, with the following contents:
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
-<!-- The loading of KaTeX is deferred to speed up page rendering -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
-<!-- To automatically render math in text elements, include the auto-render extension: -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}]})});</script>
+```yaml
+modules: ["katex"]
 ```
-
-This will enable to load the Katex javascript and CSS files. Note that the required hash for the last line in that file and the location to load the files from: `https://cdn.jsdeliver.net` have been already added in the `config/_default/server.toml` file.
-
-In the file `layouts/partials/head/head.html` add `{{ if .Params.math }}{{ partial "assets/katex.html" . }}{{ end }}` to load the Katex partial in the HTML head section.
-
-In the markdown file that needs support for formulas, enable that support by adding `math: true` in the frontmatter.
 
 ## Adding a Gallery section
 
