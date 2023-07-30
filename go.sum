@@ -36,3 +36,7 @@ github.com/gethinode/mod-leaflet v0.3.1 h1:H5MaOa+BB1KuVw7abTqfIn/SNzzRsAyx/WQoS
 github.com/gethinode/mod-leaflet v0.3.1/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
 github.com/gethinode/mod-leaflet v0.3.3 h1:isnjja6VRFvVWBatYSouh46TXSJg2C4/E2BQTrQw+yI=
 github.com/gethinode/mod-leaflet v0.3.3/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
+github.com/myrthos/mod-mgallery v0.1.1 h1:mU6FwSL5sFv6zEWHflOAeWuoFrr4800tPx+bDOU5Or8=
+github.com/myrthos/mod-mgallery v0.1.1/go.mod h1:VqXPYp9gY+dxGQw+TP9zVgqgEHJFvlhL8Hhzar8CZAs=
+github.com/myrthos/mod-mgallery v0.1.2 h1:E49B5vneFLT1cc+f3W7oV0W9xbWd5Ld4IIw3+idIOOI=
+github.com/myrthos/mod-mgallery v0.1.2/go.mod h1:VqXPYp9gY+dxGQw+TP9zVgqgEHJFvlhL8Hhzar8CZAs=
