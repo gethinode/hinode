@@ -9,7 +9,7 @@
 {{- $isActive := hasPrefix $pageURL $menuURL -}}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}
-{{- $icon := .icon | default site.Params.main.externalLinks.icon -}}
+{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 
 {{- $url := urls.Parse $menuURL -}}
@@ -23,7 +23,7 @@
         {{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer\"" }}
     {{- end -}}
 
-    {{- if $icon -}}
+    {{- if $cue -}}
         {{ $suffix = partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
     {{- end -}}
 {{ end -}}
