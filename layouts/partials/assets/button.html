@@ -22,6 +22,10 @@
                     "between", "around", or "evenly".
     "toast"         Optional id of the toast to display when the button is clicked.
     "clipboard"     Optional text to be copied to the clipboard when the button is clicked.
+    "cue"           Optional flag to indicate if an external link should show a visual cue, defaults to setting
+                    "main.externalLinks.cue" in the site's parameters.
+    "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
+                    "main.externalLinks.tab" in the site's parameters.
 -->
 
 {{- $title := trim .title " \r\n" -}}
@@ -95,6 +99,7 @@
 {{- end -}}
 
 {{- $class := .class }}
+{{ with $badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
 
 {{- $order := "last" -}}
 {{- with .order }}{{ $order = . }}{{ end -}}
@@ -113,8 +118,27 @@
 {{- $toast := .toast -}}
 {{- $clipboard := .clipboard -}}
 
+{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{- $isExternal := ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
+{{- $target := "" -}}
+{{- $rel := "" -}}
+
+{{- if $isExternal -}}
+    {{- if $tab -}}
+        {{- $target = "_blank" -}}
+        {{- $rel = "noopener noreferrer" -}}
+    {{- end -}}
+
+    {{- if and $title $cue -}}
+        {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
+        {{- $title = printf "%s %s" $title $suffix | safeHTML -}}
+    {{- end -}}
+{{- end -}}
+
 <a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
     {{ with $id }}id="{{ . }}"{{ end }}
+    {{ with $target }}target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}
     {{ with $toast }}data-toast-target="{{ $toast }}"{{ end }}
     {{ with $clipboard }}data-clipboard="{{ $clipboard }}"{{ end }}
     {{ if eq $type "button" }}class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class }}"
@@ -127,8 +151,8 @@
     >
 
     <div class="d-flex justify-content-{{ $justify }}">
-        <div>{{ $title }}</div>
-        {{- with $icon }}<div class="align-self-center{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon) }}</div>{{ end }}
+        <div class="my-auto">{{ $title }}</div>
+        {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon) }}</div>{{ end }}
     </div>
 
     {{- with $badge }}
