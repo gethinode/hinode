@@ -6,8 +6,8 @@
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
     [main.externalLinks]
-        cue = true
-        tab = true
+        cue = false
+        tab = false
 # toml-docs-end main
 
 # toml-docs-start modules
