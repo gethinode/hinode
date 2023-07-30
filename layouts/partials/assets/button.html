@@ -99,6 +99,7 @@
 {{- end -}}
 
 {{- $class := .class }}
+{{ with $badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
 
 {{- $order := "last" -}}
 {{- with .order }}{{ $order = . }}{{ end -}}
