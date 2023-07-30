@@ -15,6 +15,7 @@
     "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive
                     buttons.
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
+    "class"         Optional class attribute of the button element, e.g. “p-5”.
     "icon"          Font Awesome icon class attribute, required unless button title is set. An example value is
                     "fas sort".
     "order"         Optional order of the icon, either "first" or "last" (default).
@@ -80,6 +81,7 @@
 {{ if $relref }}
     {{ $href = relref . $relref }}
 {{ end }}
+{{ $class := .Get "class" -}}
 
 {{ $placement := "top" -}}
 {{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
@@ -124,6 +126,7 @@
         "href" $href
         "id" $id
         "state" $state
+        "class" $class
         "placement" $placement
         "icon" $icon
         "order" $order
