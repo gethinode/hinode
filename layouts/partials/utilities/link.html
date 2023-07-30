@@ -1,0 +1,43 @@
+{{ $destination := .destination }}
+{{- if not $destination -}}
+    {{- errorf "partial [utilities/link.html] - Missing param 'destination'" -}}
+{{- end -}}
+
+{{- $target := "" -}}
+{{- $rel := "" -}}
+{{- $case := .case | default true }}
+{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{- $isExternal := ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host -}}
+
+{{ $text := .text }}
+{{- if not $text -}}
+    {{ if $isExternal }}
+        {{ $text = (urls.Parse (absURL $destination)).Host }}
+    {{ else }}
+        {{ $target := site.GetPage $destination }}
+        {{ if not $target }}
+            {{- errorf "partial [utilities/link.html] - Cannot find page: %s" $destination -}}
+        {{ else }}
+            {{ $text = $target.Title }}
+            {{ if not $case }}{{ $text = lower $text }}{{ end }}
+            {{ $destination = $target.RelPermalink }}
+        {{ end }}
+    {{ end }}
+{{- end -}}
+
+{{- if $isExternal -}}
+    {{- if $tab -}}
+        {{- $target = "_blank" -}}
+        {{- $rel = "noopener noreferrer" -}}
+    {{- end -}}
+
+    {{- if $cue -}}
+        {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
+        {{- $text = printf "%s %s" $text $suffix | safeHTML -}}
+    {{- end -}}
+{{ else }}
+    {{ $destination = relLangURL $destination }}
+{{- end -}}
+
+<a href="{{ $destination | safeURL }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ $text }}</a>

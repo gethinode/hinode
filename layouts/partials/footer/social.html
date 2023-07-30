@@ -1,3 +1,4 @@
+{{- $tab := site.Params.main.externalLinks.tab -}}
 <div class="container-fluid">
     <div class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-center">
         <div class="col col-md-2 d-none d-md-block"></div>
@@ -7,7 +8,7 @@
         </div>
         <div class="col text-sm-start text-center col-sm-6 col-md-4">
             {{ range .Site.Menus.social -}}
-                <a href="{{ .URL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                <a href="{{ .URL }}" {{ if $tab }} target="_blank" rel="noopener noreferrer"{{ end }} aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
                     {{ .Pre | safeHTML }}
                 </a>
             {{ end -}}
