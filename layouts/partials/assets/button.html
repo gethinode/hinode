@@ -26,6 +26,7 @@
                     "main.externalLinks.cue" in the site's parameters.
     "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
                     "main.externalLinks.tab" in the site's parameters.
+    "attributes"    Optional dictionary of key-value pairs added as custom attributes to the button element ('<a>').
 -->
 
 {{- $title := trim .title " \r\n" -}}
@@ -136,6 +137,8 @@
     {{- end -}}
 {{- end -}}
 
+{{- $attributes := .attributes -}}
+
 <a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
     {{ with $id }}id="{{ . }}"{{ end }}
     {{ with $target }}target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}
@@ -148,6 +151,9 @@
     {{ with $collapse }}data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end }}
     {{ if eq $state "active" }}data-bs-toggle="button" aria-pressed="true"{{ end }}
     {{ if eq $state "inactive" }}data-bs-toggle="button" aria-pressed="false"{{ end }}
+    {{ range $key, $val := $attributes }}
+        {{ print $key | safeHTMLAttr }}="{{ $val }}"
+    {{ end }}
     >
 
     <div class="d-flex justify-content-{{ $justify }}">

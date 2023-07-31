@@ -63,6 +63,7 @@
     enabled = true
     sort = "weight"
     reverse = false
+    webshare = true
 
 [[sharing.providers]]
     name = "LinkedIn"
