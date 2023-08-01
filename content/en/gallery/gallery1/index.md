@@ -10,7 +10,7 @@ thumbnail: img/boots.jpg
 layout: gallery
 # This loads the lightbox script
 lightbox: true
-modules: ["lightbox"]
+modules: ["mgallery"]
 ---
 <!-- markdownlint-enable MD003 MD022 MD041 -->
 
