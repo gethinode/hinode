@@ -33,7 +33,7 @@
     const activeSelectors = document.querySelectorAll('.theme-icon-active')
     const activeButtons = document.querySelectorAll(`[data-bs-theme-value="${theme}"]`)
     if (activeButtons.length > 0) {
-      const activeIcon = activeButtons[0].querySelector('i')
+      const activeIcon = activeButtons[0].querySelector('span')
 
       document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
         element.classList.remove('active')
