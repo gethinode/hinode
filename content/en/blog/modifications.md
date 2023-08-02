@@ -227,6 +227,7 @@ Change in `/config/_default/languages.toml` the `en.params.footer` en `nl.params
 Change `layouts/partials/footer/social.html` to:
 
 ```go-html-template
+{{- $tab := site.Params.main.externalLinks.tab -}}
 <div class="container-fluid">
     <div  class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-top">
         <div class="col col-md-2 d-none d-md-block"></div>
@@ -237,12 +238,16 @@ Change `layouts/partials/footer/social.html` to:
                        <div class="fs-3 fw-bold">{{ .Site.Params.footer.footerTitle }}</div>
                     </th></tr>
                 </thead>
-            {{ range $index, $link := .Site.Menus.footer -}}
+            {{ range .Site.Menus.footer -}}
             <tr> 
-                <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
+                <td class="text-end table-footer-col">{{ .Name | safeHTML }}</td>
                 <td class="text-start table-footer-col">
-                    <a href="{{ $link.PageRef | relLangURL }}" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
-                        {{ $link.Pre | safeHTML }}
+                    <a href="{{ .PageRef | relLangURL }}" rel="noopener noreferrer" aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ if hasPrefix .Pre "<i" }}
+                            {{ .Pre | safeHTML }}
+                        {{ else }}
+                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-2x" .Pre) )}}
+                        {{ end }}    
                     </a>
                 </td>
             </tr>
@@ -257,12 +262,16 @@ Change `layouts/partials/footer/social.html` to:
                        <div class="fs-3 fw-bold">{{ .Site.Params.footer.socialTitle }}</div>
                     </th></tr>
                 </thead>
-            {{ range $index, $link := .Site.Menus.social -}}
+            {{ range .Site.Menus.social -}}
             <tr> 
-                <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
+                <td class="text-end table-footer-col">{{ .Name | safeHTML }}</td>
                 <td class="text-start table-footer-col">
-                    <a href="{{ $link.URL | relLangURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
-                        {{ $link.Pre | safeHTML }}
+                    <a href="{{ .URL }}" {{ if $tab }} target="_blank" rel="noopener noreferrer"{{ end }} aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ if hasPrefix .Pre "<i" }}
+                            {{ .Pre | safeHTML }}
+                        {{ else }}
+                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-2x" .Pre) )}}
+                        {{ end }}                        
                     </a>
                 </td>
             </tr>
@@ -279,33 +288,33 @@ Add to `config/_default/menus/menus.en.toml` the following:
 ```toml
 [[footer]]
   name = "About"
-  pre = "<i class=\"fas fa-address-card fa-xl\"></i>"
+  pre = "fas fa-address-card fa-xl"
   pageRef = "/about/"
   url = "/about/"
   weight = 5
 
 [[footer]]
   name = "Contact"
-  pre = "<i class=\"fas fa-envelope fa-xl\"></i>"
+  pre = "fas fa-envelope fa-xl"
   pageRef = "/contact/"
   url = "/contact/"
   weight = 10
 
 [[footer]]
   name = "Terms of use"
-  pre = "<i class=\"fas fa-building fa-xl\"></i>"
+  pre = "fas fa-building fa-xl"
   pageRef = "/terms/"
   weight = 30
 
 [[footer]]
   name = "Privacy Policy"
-  pre = "<i class=\"fas fa-user-shield fa-xl\"></i>"
+  pre = "fas fa-user-shield fa-xl"
   pageRef = "/privacy/"
   weight = 40
 
 [[footer]]
   name = "Credits"
-  pre = "<i class=\"fa fa-file-lines fa-xl\"></i>"
+  pre = "fa fa-file-lines fa-xl"
   pageRef = "/credits/"
   weight = 50
 ```
@@ -315,25 +324,25 @@ Override `[[social]]` with:
 ```toml
 [[social]]
   name = "LinkedIn"
-  pre = "<i class=\"fab fa-linkedin fa-xl\"></i>"
+  pre = "fab linkedin"
   url = "https://linkedin.com/in/joost-mans-a201b333"
   weight = 10
 
 [[social]]
   name = "GitHub"
-  pre = "<i class=\"fab fa-github fa-xl\"></i>"
+  pre = "fab fa-github"
   url = "https://github.com/myrthos"
   weight = 20
 
 [[social]]
   name = "Twitter"
-  pre = "<i class=\"fab fa-square-twitter fa-xl\"></i>"
+  pre = "fab fa-square-twitter"
   url = "https://twitter.com/therealmyrthos"
   weight = 30
 
 [[social]]
   name = "Mastodon"
-  pre = "<i class=\"fab fa-mastodon fa-xl\"></i>"
+  pre = "fab fa-mastodon"
   url = "https://techhub.social/@Myrthos"
   weight = 40
 ```
@@ -455,7 +464,7 @@ In `config/_default/params.toml` in the `[[sharing,providers]]` sections, for ea
     weight = 40
 ```
 
-To enable the target and showing the tooltip change `layouts/partials/assets/sharing.html`.  
+To enable showing the tooltip change `layouts/partials/assets/sharing.html`.  
 
 Change the line:
 
@@ -466,24 +475,22 @@ Change the line:
 to:
 
 ```go-html-template
-{{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "target" $item.target "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
-```
-
-In addition change `layouts/partials/assets/button.html`.
-
-Change the line:
-
-```go-html-template
-<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
-```
-
-to:
-
-```go-html-template
-<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }} {{ with .target }}target="{{ . }}"{{ end }}{{ end }}
+{{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
 ```
 
 I also wanted to add Mastodon as a sharing button, but that requires a bit more changes and because of that I've made a [separate blog post](/blog/mastodon) for that.
+
+## External links to a new tab
+
+Change in `config/_default.params.toml` the section `main.externalLinks` to the following:
+
+```toml
+    [main.externalLinks]
+        cue = true
+        tab = true
+```
+
+This will make external links (such as the sharing buttons) open in  a separate tab. It will also add a cue to external links.
 
 ## Color changes
 
