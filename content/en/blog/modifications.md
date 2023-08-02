@@ -12,7 +12,7 @@ photoSource: <a href="https://unsplash.com/photos/gJUZjwy2EgE" target="_blank">U
 ---
 <!-- markdownlint-enable MD022 MD041 -->
 
-The foundation of this site is [Hinode](https://github.com/gethinode/hinode). This post provides an overview of the changes that were made to the Hinode theme, to get to the current design of this site. Obviously the information in this blog is very specific for this site, but if there is something of interest with respect to the layout on this site, it should be described here.
+The foundation of this site is {{< link "https://github.com/gethinode/hinode" >}}Hinode{{< /link >}}. This post provides an overview of the changes that were made to the Hinode theme, to get to the current design of this site. Obviously the information in this blog is very specific for this site, but if there is something of interest with respect to the layout on this site, it should be described here.
 
 Note that the following changes are described elsewhere:
 
@@ -106,13 +106,13 @@ defaultContentLanguageInSubdir = false
 disableLanguages = ['nl']
 ```
 
-This disables the Dutch language, leaving only the English language, but still provides the option to enable a language in the future in an easy way. The [Hinode](https://gethinode.com/docs/configuration/languages/) documentation has information on completely removing the Dutch language.
+This disables the Dutch language, leaving only the English language, but still provides the option to enable a language in the future in an easy way. The {{< link "https://gethinode.com/docs/configuration/languages/" >}}Hinode{{< /link >}} documentation has information on completely removing the Dutch language.
 
 ## ASAP font support
 
 The Myrthos site uses the ASAP font, which is different from the default Hinode font.
 
-Go to [this page](https://gwfh.mranftl.com/) and select the ASAP font for 200, 300, 600 and regular.  
+Go to {{< link "https://gwfh.mranftl.com/" >}}this page{{< /link >}} and select the ASAP font for 200, 300, 600 and regular.  
 Download the zip file and extract it to `static/fonts`.
 
 Edit `config/_default/params.toml` and change `themeFont` to: `themeFont = "asap"`.
@@ -439,28 +439,24 @@ In `config/_default/params.toml` in the `[[sharing,providers]]` sections, for ea
     name = "LinkedIn"
     url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
     icon = "fab linkedin"
-    target = "_blank"
     weight = 10
 
 [[sharing.providers]]
     name = "Twitter"
     url = "https://twitter.com/home?status={url}"
     icon = "fab twitter"
-    target = "_blank"
     weight = 20
 
 [[sharing.providers]]
     name = "Facebook"
     url = "https://www.facebook.com/sharer.php?u={url}"
     icon = "fab facebook"
-    target = "_blank"
     weight = 30
 
 [[sharing.providers]]
     name = "WhatsApp"
     url = "whatsapp://send?text={title}%20{url}"
     icon = "fab whatsapp"
-    target = "_blank"
     weight = 40
 ```
 
