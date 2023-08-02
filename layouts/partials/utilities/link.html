@@ -34,7 +34,7 @@
 
     {{- if $cue -}}
         {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
-        {{- $text = printf "%s %s" $text $suffix | safeHTML -}}
+        {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
     {{- end -}}
 {{ else }}
     {{ $destination = relLangURL $destination }}

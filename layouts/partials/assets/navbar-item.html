@@ -61,5 +61,5 @@
     {{ end -}}
     <span {{ if $isActive }} class="active"{{ end }}>{{ if not $isIcon }}{{ $menu.Name }}{{ end }}</span>
     {{- with $menu.Post }}{{ . }}{{ end -}}
-    {{- if not $isIcon }} {{ $suffix }}{{ end -}}
+    {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
 </a>

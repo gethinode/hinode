@@ -133,7 +133,7 @@
 
     {{- if and $title $cue -}}
         {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
-        {{- $title = printf "%s %s" $title $suffix | safeHTML -}}
+        {{- $title = printf "%s&nbsp;%s" $title $suffix | safeHTML -}}
     {{- end -}}
 {{- end -}}
 
