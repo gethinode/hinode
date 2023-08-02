@@ -41,22 +41,22 @@
     {{- with .First }}
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-double-left"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-left") }}</span></a>
       </li>
       {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true"><i class="fas fa-angle-double-left"></i></span></a>
+        <a aria-disabled="true" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-left") }}</span></a>
       </li>
       {{- end }}
     {{- end }}
 
     {{- with .Prev }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-left") }}</span></a>
       </li>
     {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a>
+        <a aria-disabled="true" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-left") }}</span></a>
       </li>
     {{- end }}
 
@@ -81,22 +81,22 @@
 
     {{- with .Next }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-right") }}</span></a>
       </li>
     {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="{{ T "paginationNext" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a>
+        <a aria-disabled="true" aria-label="{{ T "paginationNext" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-right") }}</span></a>
       </li>
     {{- end }}
 
     {{- with .Last }}
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationLast" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-double-right"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationLast" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-right") }}</span></a>
       </li>
       {{- else }}
       <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="{{ T "paginationLast" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true"><i class="fas fa-angle-double-right"></i></span></a>
+        <a aria-disabled="true" aria-label="{{ T "paginationLast" }}" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-right") }}</span></a>
       </li>
       {{- end }}
     {{- end }}
@@ -112,14 +112,14 @@
     {{- with .First }}
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-double-left"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-left") }}</span></a>
       </li>
       {{- end }}
     {{- end }}
 
     {{- with .Prev }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-left"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-left") }}</span></a>
       </li>
     {{- end }}
 
@@ -144,14 +144,14 @@
 
     {{- with .Next }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-right"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-right") }}</span></a>
       </li>
     {{- end }}
 
     {{- with .Last }}
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
-        <a href="{{ .URL }}" aria-label="{{ T "paginationLast" }}" class="page-link" role="button"><span aria-hidden="true"><i class="fas fa-angle-double-right"></i></span></a>
+        <a href="{{ .URL }}" aria-label="{{ T "paginationLast" }}" class="page-link" role="button"><span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-right") }}</span></a>
       </li>
       {{- end }}
     {{- end }}

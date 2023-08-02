@@ -16,6 +16,10 @@
     optional = ["leaflet", "katex"]
     excludeSCSS = ["bootstrap"]
     disableTemplate = ["katex"]
+    [modules.fontawesome]
+        inline = true
+        debug = true
+        skipMissing = false
 # toml-docs-end modules
 
 # toml-docs-start debugging

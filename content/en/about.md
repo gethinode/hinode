@@ -2,7 +2,7 @@
 title: About
 description: Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5.
 date: 2022-04-11
-updated: 2023-06-26
+updated: 2023-08-02
 showComments: false
 ---
 
@@ -12,17 +12,17 @@ showComments: false
     <div class="container-fluid">
         <div class="row justify-content-center text-center">
             <div class="col-lg-4">
-                <i class="fa-brands fa-bootstrap fa-2xl"></i>
+                {{< icon fab bootstrap fa-2xl >}}
                 <h2 class="h4">Bootstrap framework</h2>
                 <p>Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source Sass files.</p>
             </div>
             <div class="col-lg-4">
-                <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
+                {{< icon fas magnifying-glass fa-2xl >}}
                 <h2 class="h4">Full text search</h2>
                 <p>Search your site with FlexSearch, a full-text search library with zero dependencies.</p>
             </div>
             <div class="col-lg-4">
-                <i class="fa-solid fa-code fa-2xl"></i>
+                {{< icon fas code fa-2xl >}}
                 <h2 class="h4">Development tools</h2>
                 <p>Use Node Package Manager to automate the build process and to keep track of dependencies.</p>
             </div>
