@@ -37,13 +37,13 @@
 
 [[social]]
   name = "Twitter"
-  pre = "fab fa-square-twitter fa-xl"
+  pre = "fab fa-square-twitter"
   url = "https://twitter.com/therealmyrthos"
   weight = 30
 
 [[social]]
   name = "Mastodon"
-  pre = "fab fa-mastodon fa-xl"
+  pre = "fab fa-mastodon"
   url = "https://techhub.social/@Myrthos"
   weight = 40
 
@@ -73,32 +73,32 @@
 
 [[footer]]
   name = "About"
-  pre = "<i class=\"fas fa-address-card fa-xl\"></i>"
+  pre = "fas fa-address-card fa-xl"
   pageRef = "/about/"
   url = "/about/"
   weight = 5
 
 [[footer]]
   name = "Contact"
-  pre = "<i class=\"fas fa-envelope fa-xl\"></i>"
+  pre = "fas fa-envelope fa-xl"
   pageRef = "/contact/"
   url = "/contact/"
   weight = 10
 
 [[footer]]
   name = "Terms of use"
-  pre = "<i class=\"fas fa-building fa-xl\"></i>"
-  pageRef = "/terms/"\"></i>
+  pre = "fas fa-building fa-xl"
+  pageRef = "/terms/"
   weight = 30
 
 [[footer]]
   name = "Privacy Policy"
-  pre = "<i class=\"fas fa-user-shield fa-xl\"></i>"
+  pre = "fas fa-user-shield fa-xl"
   pageRef = "/privacy/"
   weight = 40
 
 [[footer]]
   name = "Credits"
-  pre = "<i class=\"fa fa-file-lines fa-xl\"></i>"
+  pre = "fa fa-file-lines fa-xl"
   pageRef = "/credits/"
   weight = 50
