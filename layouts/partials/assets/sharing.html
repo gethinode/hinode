@@ -28,16 +28,18 @@
                                      "icon" (printf "%s fa-fw" $item.icon) 
                                      "class" "btn-social p-0") 
                 -}}
-                {{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}                                    
-                {{- with $item.target -}} {{- $params = merge $params (dict "target" $item.target) -}} {{- end -}}                                    
+                {{- $attributes := dict -}}
+                {{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}
+
                 {{- with $item.source -}} 
                     {{- $source := $item.source -}}
                     {{- $source = strings.Replace $source "{url}" $page.Permalink -}}
                     {{- $source = strings.Replace $source "{title}" (urlquery $page.Title) -}}
                     {{- $source = $source | safeURL -}}
-                    {{- $params = merge $params (dict "source" $source) -}} 
+                    {{- $attributes = merge $attributes (dict "data-m-src" $source) -}} 
                 {{- end -}}                                    
-                {{- with $item.prompt -}} {{- $params = merge $params (dict "prompt" (i18n $item.prompt)) -}} {{- end -}}                                    
+                {{- with $item.prompt -}} {{- $attributes = merge $attributes (dict "data-m-prompt" (i18n $item.prompt)) -}} {{- end -}}    
+                {{- with $attributes -}} {{- $params = merge $params (dict "attributes" $attributes) -}} {{- end -}}
                 {{ partial "assets/button.html" $params }}                
             {{- end -}}
             {{ if .Site.Params.sharing.webshare }}

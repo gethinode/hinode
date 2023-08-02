@@ -140,8 +140,6 @@
 {{- $attributes := .attributes -}}
 
 <a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
-    {{ with .source }}data-m-src="{{ . }}"{{ end }}
-    {{ with .prompt }}data-m-prompt="{{ . }}"{{ end }}
     {{ with $id }}id="{{ . }}"{{ end }}
     {{ with $target }}target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}
     {{ with $toast }}data-toast-target="{{ $toast }}"{{ end }}
