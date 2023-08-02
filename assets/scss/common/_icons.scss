@@ -23,19 +23,3 @@ $btn-toggle:                                    url("/icons/btn-toggle.svg") !de
 $btn-toggle-dark:                               url("/icons/btn-toggle-dark.svg") !default;
 
 // scss-docs-end icons
-
-.fa-wrapper {
-    container: wrapper / inline-size;
-}
-
-// define fallback size for browsers not supporting containers
-.fa-fluid {
-    font-size: 5rem;
-}
-
-// set size based on container width
-@container (min-width: 0) {
-    .fa-wrapper .fa-fluid {
-        font-size: 60cqi;
-    }
-}
