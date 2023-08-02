@@ -9,12 +9,24 @@
 {{- $isActive := hasPrefix $pageURL $menuURL -}}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}
+{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 
 {{- $url := urls.Parse $menuURL -}}
 {{- $baseURL := urls.Parse $.Site.Params.Baseurl -}}
 {{- $isExternal := ne $url.Host $baseURL.Host -}}
 {{- $externalHref := "" }}
-{{- if $isExternal }}{{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer\"" }}{{ end -}}
+{{- $suffix := "" }}
+
+{{- if $isExternal }}
+    {{- if $tab -}}
+        {{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer\"" }}
+    {{- end -}}
+
+    {{- if $cue -}}
+        {{ $suffix = partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
+    {{- end -}}
+{{ end -}}
 
 {{- $mainNav := urlize (lower $menu.Name) -}}
 {{- $childNav := "" -}}
@@ -40,9 +52,14 @@
     {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
     data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
     href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
-    
-    {{- with $menu.Pre }}{{ . }}{{ end -}}
+    {{- with $menu.Pre }}
+        {{ if hasPrefix . "<i" }}
+            {{ . | safeHTML }}
+        {{ else }}
+            {{ partial "assets/icon.html" (dict "icon" . )}}
+        {{ end }}
+    {{ end -}}
     <span {{ if $isActive }} class="active"{{ end }}>{{ if not $isIcon }}{{ $menu.Name }}{{ end }}</span>
     {{- with $menu.Post }}{{ . }}{{ end -}}
-    {{- if and $isExternal (not $isIcon)}} {{ partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}{{ end -}}
+    {{- if not $isIcon }} {{ $suffix }}{{ end -}}
 </a>

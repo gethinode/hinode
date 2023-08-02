@@ -40,6 +40,10 @@
                 {{- with $item.prompt -}} {{- $params = merge $params (dict "prompt" (i18n $item.prompt)) -}} {{- end -}}                                    
                 {{ partial "assets/button.html" $params }}                
             {{- end -}}
+            {{ if .Site.Params.sharing.webshare }}
+                {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
+                {{ partial "assets/button.html" (dict "href" "#!" "icon" "fas share-nodes fa-fw" "id" "btn-webshare" "class" "btn-social p-0" "attributes" $attr )}}
+            {{- end -}}
         </div>
     {{- end -}}
 {{- end -}}

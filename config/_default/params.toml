@@ -5,6 +5,9 @@
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
+    [main.externalLinks]
+        cue = false
+        tab = false
 # toml-docs-end main
 
 # toml-docs-start modules
@@ -13,6 +16,10 @@
     optional = ["leaflet", "katex", "mgallery"]
     excludeSCSS = ["bootstrap"]
     disableTemplate = ["katex"]
+    [modules.fontawesome]
+        inline = true
+        debug = true
+        skipMissing = false
 # toml-docs-end modules
 
 # toml-docs-start debugging
@@ -74,6 +81,7 @@
     enabled = true
     sort = "weight"
     reverse = false
+    webshare = true
 
 [[sharing.providers]]
     name = "LinkedIn"

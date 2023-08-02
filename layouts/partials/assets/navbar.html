@@ -21,26 +21,26 @@
     {{- $collapsed := .collapsed -}}
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
-        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme">
-            {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon-active") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
+            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}</span>
             <span class="d-md-none"></span>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
-                    {{- partial "assets/icon.html" (dict "icon" "fas sun theme-icon") }}
+                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>&nbsp;
                     {{ T "colorLight" }}
                 </a>
             </li>
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="dark" href="#!">
-                    {{- partial "assets/icon.html" (dict "icon" "fas moon theme-icon") }}
+                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw") }}</span>&nbsp;
                     {{ T "colorDark" }}
                 </a>
             </li>
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="auto" href="#!">
-                    {{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke theme-icon" ) }}
+                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke fa-fw" ) }}</span>&nbsp;
                     {{ T "colorAuto" }}
                 </a>
             </li>
@@ -73,7 +73,7 @@
                         <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
                             {{ if $item.latest }} ({{ T "latest" }}){{ end }}
                             {{ if $active }}
-                                <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check") }}</span>
+                                <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check fa-fw") }}</span>
                             {{ end }}
                         </a>
                     </li>
@@ -193,12 +193,12 @@
             <div class="d-flex">
                 {{- if $page.Scratch.Get "sidebar" -}}
                     <button class="navbar-toggler fw-30 collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw") -}}
                     </button>
                 {{- else -}}
                     <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
                     <button class="navbar-toggler fw-30 collapsed p-0 mx-auto invisible" type="button">
-                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis") -}}
+                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw") -}}
                     </button>
                 {{- end -}}
             </div>
@@ -256,10 +256,10 @@
                         {{- $currentLang := $page.Language.Lang -}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{- partial "assets/icon.html" (dict "icon" "fas globe") }} {{ T "languageSwitcherLabel" }}
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw") }} {{ T "languageSwitcherLabel" }}
                             </a>
                             <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{- partial "assets/icon.html" (dict "icon" "fas globe") }}
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw") }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end ">
                                 {{- if $page.IsTranslated -}}

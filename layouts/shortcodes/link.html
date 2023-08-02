@@ -1,0 +1,55 @@
+<!-- 
+    Generates a link for a given named link or url. The shortcode supports a single unnamed parameter, or various named
+    parameters. The unnamed parameter is recognized as a named link if it does not contain any "/", otherwise it is
+    treated as a url. Any inner text is rendered as the link title, otherwise it uses the host name (for external links)
+    or page name (for internal links). The shortcode supports the following named arguments:
+    "name"          Optional name of the link maintained in the "links" section of the site's parameters. If omitted,
+                    the "url" argument should be provided instead.
+    "url"           Optional url of the link, including the scheme ("http" or "https"). If omitted, the "name" argument
+                    should be provided instead.
+    "cue"           Optional flag to indicate if an external link should show a visual cue, defaults to setting
+                    "main.externalLinks.cue" in the site's parameters.
+    "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
+                    "main.externalLinks.tab" in the site's parameters.
+    "case"          Optional flag to indicate if the retrieved title (e.g. no inner text is provided) of an internal
+                    link should use its original case, defaults to true. If false, the title is set to lower case.
+-->
+
+{{- $error := false -}}
+{{ $name := "" }}
+{{ $url := "" }}
+{{ $case := true }}
+{{ $cue := site.Params.main.externalLinks.cue }}
+{{ $tab := site.Params.main.externalLinks.tab }}
+
+{{ if .IsNamedParams }}
+    {{ $name = .Get "name" }}
+    {{ $url = .Get "url" }}
+    {{ $cue = .Get "cue" | default site.Params.main.externalLinks.cue }}
+    {{ $tab = .Get "tab" | default site.Params.main.externalLinks.tab }}
+    {{ $case = .Get "case" | default true }}
+{{ else if strings.Contains (.Get 0) "/" }}
+    {{ $url = .Get 0 }}
+{{ else }}
+    {{ $name = .Get 0 }}
+{{ end }}
+
+{{ if not (or $name $url) }}
+    {{ errorf "Expected param 'name' or 'url': %s" .Position -}}
+    {{ $error = true -}}
+{{ end }}
+
+{{ if $name }}
+    {{ $url = index site.Params.links $name }}
+    {{ if not $url }}
+        {{ errorf "Cannot find link '%s': %s" $name .Position -}}
+        {{ $error = true -}}
+    {{ end }}
+{{ end }}
+
+{{ $text := trim .Inner " \r\n" | markdownify | safeHTML }}
+
+{{- if not $error -}}
+    {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case) }}
+{{- end -}}
+

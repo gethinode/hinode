@@ -1,3 +1,4 @@
+{{- $tab := site.Params.main.externalLinks.tab -}}
 <div class="container-fluid">
     <div  class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-top">
         <div class="col col-md-2 d-none d-md-block"></div>
@@ -32,8 +33,12 @@
             <tr> 
                 <td class="text-end table-footer-col">{{ $link.Name | safeHTML }}</td>
                 <td class="text-start table-footer-col">
-                    <a href="{{ $link.URL | relLangURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
-                        {{ $link.Pre | safeHTML }}
+                    <a href="{{ $link.URL }}" {{ if $tab }} target="_blank" rel="noopener noreferrer"{{ end }} aria-label="{{ $link.Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ if hasPrefix $link.Pre "<i" }}
+                            {{ $link.Pre | safeHTML }}
+                        {{ else }}
+                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-2x" $link.Pre) )}}
+                    {{ end }}                        
                     </a>
                 </td>
             </tr>

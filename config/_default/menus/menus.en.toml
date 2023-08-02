@@ -25,25 +25,25 @@
 
 [[social]]
   name = "LinkedIn"
-  pre = "<i class=\"fab fa-linkedin fa-xl\"></i>"
+  pre = "fab linkedin"
   url = "https://linkedin.com/in/joost-mans-a201b333"
   weight = 10
 
 [[social]]
   name = "GitHub"
-  pre = "<i class=\"fab fa-github fa-xl\"></i>"
+  pre = "fab fa-github"
   url = "https://github.com/myrthos"
   weight = 20
 
 [[social]]
   name = "Twitter"
-  pre = "<i class=\"fab fa-square-twitter fa-xl\"></i>"
+  pre = "fab fa-square-twitter fa-xl"
   url = "https://twitter.com/therealmyrthos"
   weight = 30
 
 [[social]]
   name = "Mastodon"
-  pre = "<i class=\"fab fa-mastodon fa-xl\"></i>"
+  pre = "fab fa-mastodon fa-xl"
   url = "https://techhub.social/@Myrthos"
   weight = 40
 
@@ -88,7 +88,7 @@
 [[footer]]
   name = "Terms of use"
   pre = "<i class=\"fas fa-building fa-xl\"></i>"
-  pageRef = "/terms/"
+  pageRef = "/terms/"\"></i>
   weight = 30
 
 [[footer]]

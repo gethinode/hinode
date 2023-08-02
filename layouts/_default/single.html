@@ -69,7 +69,8 @@
                 {{ with .NextInSection -}}
                     {{ $next := . -}}
                     {{ with .OutputFormats.Get "html" -}}
-                        <a class="next" href="{{ $next.RelPermalink }}"><i class="fas fa-arrow-left"></i> {{ $next.Title }}</a>
+                        <a class="next" href="{{ $next.RelPermalink }}">
+                            {{- partial "assets/icon.html" (dict "icon" "fas arrow-left") }}&nbsp;{{ $next.Title }}</a>
                     {{- end -}}
                 {{ end -}}
             </div>
@@ -77,7 +78,7 @@
                 {{ with .PrevInSection -}}
                     {{ $prev := . -}}
                     {{ with .OutputFormats.Get "html" -}}
-                        <a class="previous" href="{{ $prev.RelPermalink }}">{{ $prev.Title }} <i class="fas fa-arrow-right"></i></a>
+                        <a class="previous" href="{{ $prev.RelPermalink }}">{{ $prev.Title }}&nbsp;{{- partial "assets/icon.html" (dict "icon" "fas arrow-right") }}</a>
                     {{- end -}}
                 {{ end -}}
             </div>
