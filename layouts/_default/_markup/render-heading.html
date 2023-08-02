@@ -1,5 +1,5 @@
 {{ if site.Params.navigation.anchor }}
-<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">{{ .Text | safeHTML }} <a href="#{{ .Anchor | safeURL }}"><i class="fa-solid fa-link anchor"></i></a></h{{ .Level }}>
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">{{ .Text | safeHTML }} <a href="#{{ .Anchor | safeURL }}">{{- partial "assets/icon.html" (dict "icon" "fas link anchor") }}</a></h{{ .Level }}>
 {{ else }}
 <h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</h{{ .Level }}>
 {{ end }}
