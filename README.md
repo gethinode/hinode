@@ -1,10 +1,8 @@
-# Hugo Theme Hinode
+This the repository for the Myrthos site. It is a site that is still in development and isn't even online yet.
 
-<!-- Tagline -->
-<p align="center">
-    <b>A clean documentation and blog theme for your Hugo site based on Bootstrap 5</b>
-    <br />
-</p>
+The site is intended to be used as my playground, where I post blogs, write about projects, create documentation and show photo's about the things that interest me.
+
+This is a [Hugo][hugo] site that uses [Hinode][repository] as a template.
 
 <!-- Badges -->
 <p align="center">
@@ -14,7 +12,7 @@
     <a href="https://gethinode.com" alt="Hinode theme">
         <img src="https://img.shields.io/badge/theme-hinode-blue">
     </a>
-    <a href="https://www.npmjs.com/package/%40gethinode/hinode" alt="npm package">
+ <!--   <a href="https://www.npmjs.com/package/%40gethinode/hinode" alt="npm package">
         <img src="https://img.shields.io/npm/v/%40gethinode/hinode">
     </a>
     <a href="https://app.netlify.com/sites/gethinode-demo/deploys" alt="Netlify Status">
@@ -22,112 +20,31 @@
     </a>
     <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
         <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb">
-    </a>
-    <a href="https://github.com/gethinode/hinode/commits/main" alt="Last commit">
+    </a> -->
+    <a href="https://github.com/myrthos/myrthos-site/commits/main" alt="Last commit">
         <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg">
     </a>
-    <a href="https://github.com/gethinode/hinode/issues" alt="Issues">
+    <a href="https://github.com/myrthos/myrthos-site/issues" alt="Issues">
         <img src="https://img.shields.io/github/issues/gethinode/hinode.svg">
     </a>
-    <a href="https://github.com/gethinode/hinode/pulls" alt="Pulls">
+    <a href="https://github.com/myrthos/myrthos-site/pulls" alt="Pulls">
         <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg">
     </a>
-    <a href="https://github.com/gethinode/hinode/blob/main/LICENSE" alt="License">
+    <a href="https://github.com/myrthos/myrthos-site/blob/main/LICENSE" alt="License">
         <img src="https://img.shields.io/github/license/gethinode/hinode">
     </a>
 </p>
 
-<!-- Table of Contents -->
-<p align="center">
-  <a href="#about">About</a> •
-  <a href="#prerequisites">Prerequisites</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#configuration">Configuration</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#donate">Donate</a> •
-  <a href="#license">License</a>
-</p>
-
-## About
-
-![Logo](https://raw.githubusercontent.com/gethinode/hinode/main/static/img/logo.png)
-
-- [Online Demo][demo]
-- [PageSpeed Insights][pagespeed]
-- [Mozilla Observatory][observatory]
-
-Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme supports [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
-
-Additional features include:
-
-- Flexible configuration of Hugo modules
-- Switching between light mode and dark mode
-- Support for multiple languages
-- Reusable Bootstrap components through configurable shortcodes and partials
-- Embedded comments through light-weight integration with GitHub via [utteranc.es][utterances]
-- Integrated sidebar navigation for content-heavy sections, such as documentation pages
-- Reponsive image handling for multiple screen sizes and resolutions
-- Optimized search results, scoring 100 points for SEO on [PageSpeed Insights][pagespeed]
-- Secure by default, scoring A+ on [Mozilla Observatory test][observatory]
-
+The contents of this repository is not intended to be used as a Hugo template, nor is it developed as such. It is a modified version of Hinode, with all the deviations and additions described in a blog post. If you are looking for a template, you are much better of using Hinode as that is supported.  
 Detailed information about Hinode is available on the [official website][website].
 
 ## Prerequisites
 
-Hinode requires Git, Node.js and npm for local development and testing. Download the Git binary from the [official website][git_download]. Next, download and install [Node.js][nodejs] (it includes npm) for your platform.
-
-## Installation
-
-Start a new Hinode project in three steps:
-
-1. Create a new site
-
-    Hinode is available as a [template][repository_template], and a [main repository][repository]. The template [npm][npm] to link to the latest available version of Hinode. Unless you plan to customize a lot, it is recommended to use the template:
-
-    ```bash
-    git clone https://github.com/gethinode/template.git my-hinode-site && cd my-hinode-site
-    ```
-
-    Use the main theme if you intend to customize the base code:
-
-    ```bash
-    git clone https://github.com/gethinode/hinode.git my-hinode-site && cd my-hinode-site
-    ```
-
-1. Install dependencies
-
-    ```bash
-    npm install
-    ```
-
-1. Start development server
-
-    ```bash
-    npm run start
-    ```
-
-## Configuration
-
-See the [official documentation][getstarted] on how to configure your site.
-
-## Contributing
-
-See the [official documentation][contribute] on how to contribute to the open-source development of Hinode.
-
-## Credits
-
-Hinode is inspired by the following themes:
-
-- [Blist][blist] - a clean and fast blog theme for your Hugo site using Tailwind CSS.
-- [Doks][doks] - a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.
-
-## Donate
-
-<a href="https://www.buymeacoffee.com/markdumay" target="_blank" rel="noopener noreferrer"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;"></a>
+Hinode requires Git, Node.js and npm for local development and testing, and so does this repository. It also requires bootstrap.
 
 ## License
 
-The `hinode` and `template` codebase is released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) is licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
+The `myrthos` and `Hinode` codebases are both released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) and gallery is licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
 <!-- MARKDOWN PUBLIC LINKS -->
 [blist]: https://github.com/apvarun/blist-hugo-theme
