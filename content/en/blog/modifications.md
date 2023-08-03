@@ -94,7 +94,45 @@ In `config/_default/params.toml` change `schema`, `opengraph` and `comments` to 
 
 [comments]
     enabled = true
-    repo = "https://github.com/myrthos/myrthos-site"
+    repo = "myrthos/myrthos-site"
+    issueTerm = "pathname" # pathname, url, title, og:title
+    label = "Comment"
+    # By default, light and dark mode correspond to github-light and github-dark, respectively.
+    # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
+    theme = "" 
+```
+
+## Make comments aware of the theme
+
+The comments are managed by {{< link "https://utteranc.es/" >}}Utterances{{< /link >}}. It requires the installation of a small piece of javascript that , amongst others, also specifies the theme to use. This is managed in `layouts/partials/assets/comments.html`. However this uses a fixed theme that can be specified in the `comments.theme` parameter in `config/_default/params.toml`. Because of that the theme of the comments does not change when the theme of the site is changed between dark and light.
+
+To resolve this the `theme` parameter should be set as specified in the previous paragraph. Furthermore the contents of `layouts/partials/assets/comments.html` should be replaced with:
+
+```go-html-template
+{{- $params := .Site.Params.comments -}}
+{{- with $params -}}
+<h2>{{ T "comments" }}</h2>
+<div class="d-none-light">
+  <script src="https://utteranc.es/client.js"
+    repo="{{ $params.repo }}"
+    issue-term="{{ default "pathname" $params.issueTerm }}"
+    label="{{ default "comment" $params.label }}"
+    theme="{{ default "github-dark" $params.theme }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+<div class="d-none-dark">
+  <script src="https://utteranc.es/client.js"
+    repo="{{ $params.repo }}"
+    issue-term="{{ default "pathname" $params.issueTerm }}"
+    label="{{ default "comment" $params.label }}"
+    theme="{{ default "github-light" $params.theme }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+{{- end -}}
 ```
 
 ## Remove multi-language support
