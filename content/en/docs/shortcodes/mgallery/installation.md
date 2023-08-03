@@ -23,7 +23,7 @@ If it has not yet been installed, also edit `/assets/scss/app.scss` and add the 
 @import "components/mimage.scss";
 ```
 
-The `mgallery` shortcode and all accompanying files are available as a {{< link https://github.com/myrthos/mod-mgallery >}}Hinode module{{< /link >}}.  
+The `mgallery` shortcode and all accompanying files are available as a {{< link "https://github.com/myrthos/mod-mgallery" >}}Hinode module{{< /link >}}.  
 To load this module at startup add the following to the `[module]` section in `config/_default/hugo.toml`:
 
 ```toml
