@@ -33,6 +33,10 @@ To load this module at startup add the following to the `[module]` section in `c
 
 And to the `[modules]` section in `config/_default/params/params.toml`, add `"mgallery"` to the `optional` parameter.
 
+After this the module will be automatically loaded when `npm run start`, or `npm run build` is executed on the command line.
+
+Installing the `mgallery` on a non-Hinode theme installation, is not supported. The `mgallery` shortcode assumes it is used on a Hinode themed page and because of that certain bootstrap classes will be present. The gallery will simply not look as it should, because of the missing styling.
+
 ## Further configuration
 
 As the goal is to load the javascript file only when it is needed, an entry in the frontmatter of the file where the `mgallery` shortcode is used, is required, which is the following:
