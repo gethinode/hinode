@@ -1,3 +1,5 @@
+# About this site
+
 This the repository for the Myrthos site. It is a site that is still in development and isn't even online yet.
 
 The site is intended to be used as my playground, where I post blogs, write about projects, create documentation and show photo's about the things that interest me.
