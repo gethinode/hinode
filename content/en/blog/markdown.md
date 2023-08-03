@@ -618,10 +618,10 @@ Inline it looks like this:
 
 ```markdown
 Inline stle:
-![alt text](https://img.youtube.com/vi/WE58YisgFeQ/0.jpg "Video Logo 1")
+![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 1")
 ```
 
-inline style: ![alt text](https://img.youtube.com/vi/WE58YisgFeQ/0.jpg "Video Logo 1")
+inline style: ![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 1")
 
 By reference it looks like this:
 
@@ -629,10 +629,10 @@ By reference it looks like this:
 Reference style:
 ![alt text][logo]
 
-[logo]: https://img.youtube.com/vi/WE58YisgFeQ/0.jpg "Video Logo 2"
+[logo]: https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 2"
 ```
 
-Reference style![alt text](https://img.youtube.com/vi/WE58YisgFeQ/0.jpg "Video Logo 2")
+Reference style![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 2")
 
 [Top^](#markdown)
 
