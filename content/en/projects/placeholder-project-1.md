@@ -7,4 +7,4 @@ tags: ["pic", "c"]
 icon: fas microchip
 ---
 
-To be specified
+To be specified.

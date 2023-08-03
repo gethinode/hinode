@@ -87,28 +87,24 @@
     name = "LinkedIn"
     url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
     icon = "fab linkedin"
-    target = "_blank"
     weight = 10
 
 [[sharing.providers]]
     name = "Twitter"
     url = "https://twitter.com/home?status={url}"
     icon = "fab twitter"
-    target = "_blank"
     weight = 20
 
 [[sharing.providers]]
     name = "Facebook"
     url = "https://www.facebook.com/sharer.php?u={url}"
     icon = "fab facebook"
-    target = "_blank"
     weight = 30
 
 [[sharing.providers]]
     name = "WhatsApp"
     url = "whatsapp://send?text={title}%20{url}"
     icon = "fab whatsapp"
-    target = "_blank"
     weight = 40
 
 [[sharing.providers]]

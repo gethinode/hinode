@@ -3,4 +3,5 @@ assets/js/analytics.js
 assets/js/flexsearch.js
 assets/js/sharing.js
 assets/js/vendor
+assets/js/mastodon.js
 node_modules

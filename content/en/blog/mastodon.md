@@ -132,7 +132,7 @@ The buttons are displayed on a page, by means of the code in `layouts/partials/a
 or, when the modifications as described in the [Hinode Changes](/blog/modifications/#update-sharing-providers) blog have already been done, this line:
 
 ```go-html-template
-{{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "target" $item.target "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
+{{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
 ```
 
 Replace that line with the following:
@@ -145,34 +145,26 @@ Replace that line with the following:
                                      "icon" (printf "%s fa-fw" $item.icon) 
                                      "class" "btn-social p-0") 
                 -}}
-                {{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}                                    
-                {{- with $item.target -}} {{- $params = merge $params (dict "target" $item.target) -}} {{- end -}}                                    
+                {{- $attributes := dict -}}
+                {{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}
+
                 {{- with $item.source -}} 
                     {{- $source := $item.source -}}
                     {{- $source = strings.Replace $source "{url}" $page.Permalink -}}
                     {{- $source = strings.Replace $source "{title}" (urlquery $page.Title) -}}
                     {{- $source = $source | safeURL -}}
-                    {{- $params = merge $params (dict "source" $source) -}} 
+                    {{- $attributes = merge $attributes (dict "data-m-src" $source) -}} 
                 {{- end -}}                                    
-                {{- with $item.prompt -}} {{- $params = merge $params (dict "prompt" (i18n $item.prompt)) -}} {{- end -}}                                    
-                {{ partial "assets/button.html" $params }}
+                {{- with $item.prompt -}} {{- $attributes = merge $attributes (dict "data-m-prompt" (i18n $item.prompt)) -}} {{- end -}}    
+                {{- with $attributes -}} {{- $params = merge $params (dict "attributes" $attributes) -}} {{- end -}}
+                {{ partial "assets/button.html" $params }}  
 ```
 
-This change will include the target and tooltip changes that are described in the [Hinode Changes](/blog/modifications/#update-sharing-providers) blog.
+This change will include the tooltip change that is described in the [Hinode Changes](/blog/modifications/#update-sharing-providers) blog.
 
-In this code the dictionary that is sent to a button, is split up to allow adding the extra functionality, which is only added when that extra information is defined in `layouts/partials/assets/sharing.html`.`layouts/partials/assets/sharing.html`
+In this code the dictionary that is sent to a button, is split up to allow adding the extra functionality, which is only added when that extra information is defined in `config/_default/params.toml`.
 
-The `id` and `target` fields are added as they are, to the dictionary. The `source` field is processed to replace the `{url}` with the actual page link and `{title}` with the title of the page. Finally the `prompt` field is replaced by the actual text in the language file that belongs to the specified language id in the `prompt` field.  
+The `id` field is added to the dictionary. The `source` field is processed to replace the `{url}` with the actual page link and `{title}` with the title of the page. Finally the `prompt` field is replaced by the actual text in the language file that belongs to the specified language id in the `prompt` field. These two parameters are then added as a dictionary for the `attributes` field.  
 Finally the complete dictionary is sent to the button partial.
 
-As a last step the button partial `layouts/partials/assets/button.html` needs to be modified to be able to process the extra fields in the dictionary.
-
-Replace the complete line that starts with `<a aria-label="{{ $title }}"` to the following:
-
-```go-html--template
-<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }} {{ with .target }}target="{{ . }}"{{ end }}{{ end }}
-    {{ with .source }}data-m-src="{{ . }}"{{ end }}
-    {{ with .prompt }}data-m-prompt="{{ . }}"{{ end }}
-```
-
-This will add all the required information to the link for the Mastodon button, while all the other buttons are not influenced. Note that this change also adds the target and tooltip changes that are described in the [Hinode Changes](/blog/modifications/#update-sharing-providers) blog.
+The button partial will take care of creating the correct link for Mastodon.
