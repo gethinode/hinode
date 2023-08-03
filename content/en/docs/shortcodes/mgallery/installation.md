@@ -12,118 +12,35 @@ _build:
 <!-- markdownlint-enable MD022 MD041 -->
 ## Installation
 
-If you want to use the `mgallery` shortcode in your Hugo site, using the Hinode template, just copy the following files from the Myrthos repository to your site, using the same folder structure and filenames:
+If you want to use the `mgallery` shortcode in your Hugo site, using the Hinode template, the first step is to copy the following file from the Myrthos repository to your site, using the same folder structure and filename:
 
-- /layouts/shortcodes/mgallery.html
 - /assets/scss/components/_mimage.scss
-- /assets/scss/components/_mgallery.scss
 
-Note that `assets/scss/components/_mimage.scss` could already have been installed, as it is used by the `mimage` shortcode.
-
-Also edit `/assets/scss/app.scss` and add the lines:
+Note that `assets/scss/components/_mimage.scss` could already have been installed, as it is used by the `mimage` shortcode.  
+If it has not yet been installed, also edit `/assets/scss/app.scss` and add the line:
 
 ```scss
 @import "components/mimage.scss";
-@import "components/mgallery.scss";
 ```
 
-Note that the line with `mimage.scss` might already be present when the `mimage` shortcode has been installed.
-
-As Lightbox 2 is used, this needs to be installed as well. There are three ways to get it:
-
-- Using NPM
-- Loading the files from Github
-- Loading from a CDN
-
-The following sections explains what is needed for each of them. Note that for each of the installation methods the goal is to load the javascript and css files conditionally, so that they are only loaded when there is an actual gallery to display.
-
-If this shortcode is to be used in a Hugo site not using Hinode, be aware that the shortcode is dependent on Bootstrap. And also the used scss files need to be processed into CSS files.
-
-### install Lightbox using NPM
-
-For this to work, NPM needs to be installed, which should be available when using Hinode.
-
-From the base directory execute the following:
-
-```bash
-npm install lightbox2 --save
-```
-
-This creates the folder `node_modules/lightbox2`.
-
-Add to `config/_default/hugo.toml` the following mounts in the `[module]` section:
+The `mgallery` shortcode and all accompanying files are available as a {{< link "https://github.com/myrthos/mod-mgallery" >}}Hinode module{{< /link >}}.  
+To load this module at startup add the following to the `[module]` section in `config/_default/hugo.toml`:
 
 ```toml
-  [[module.mounts]]
-    source = "node_modules/lightbox2/dist/js"
-    target = "static/js"
-    includeFiles = "lightbox-plus-jquery.min.*"
-  [[module.mounts]]
-    source = "node_modules/lightbox2/dist/css"
-    target = "static/css"
-    includeFiles = "lightbox.min.css"
-  [[module.mounts]]
-    source = "node_modules/lightbox2/dist/images"
-    target = "static/images"
-    includeFiles = "*.*"
+  [[module.imports]]
+    path = "github.com/myrthos/mod-mgallery"
 ```
 
-Create the folders `static/css` and `static/images`.
+And to the `[modules]` section in `config/_default/params/params.toml`, add `"mgallery"` to the `optional` parameter.
 
-Create a file named `layout/partials/assets/gallery-lightbox.html` and add the following to it:
+After this the module will be automatically loaded when `npm run start`, or `npm run build` is executed on the command line.
 
-```html
-<link rel="stylesheet" href="/css/lightbox.min.css" />
-<script src="/js/lightbox-plus-jquery.min.js"></script>
+Installing the `mgallery` on a non-Hinode theme installation, is not supported. The `mgallery` shortcode assumes it is used on a Hinode themed page and because of that certain bootstrap classes will be present. The gallery will simply not look as it should, because of the missing styling.
+
+## Further configuration
+
+As the goal is to load the javascript file only when it is needed, an entry in the frontmatter of the file where the `mgallery` shortcode is used, is required, which is the following:
+
+```yaml
+modules: ["mgallery"]
 ```
-
-Note that if you are already using jQuery on your site, you should use instead of `lightbox-plus-jquery.min.js` the file `lightbox.min.js`.
-
-### install Lightbox from Github
-
-Download the latest files from [Github](https://github.com/lokesh/lightbox2/releases).
-
-From the downloaded zip file, copy the file `dist/css/lightbox.min.css` to static/css.  
-Copy the file `dist/js/lightbox-plus-jquery.min.js` to static/js.  
-Copy the files from `dist/images` to static/images.
-
-Create a file named `layout/partials/assets/gallery-lightbox.html` and add the following to it:
-
-```html
-<link rel="stylesheet" href="/css/lightbox.min.css" />
-<script src="/js/lightbox-plus-jquery.min.js"></script>
-```
-
-Note that if you are already using jQuery on your site, you should copy/use instead of `lightbox-plus-jquery.min.js` the file `lightbox.min.js`.
-
-### install Lightbox using a CDN
-
-Lightbox is also available on CDNJS.
-
-Create a file named `layout/partials/assets/gallery-lightbox.html` and add the following to it:
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css">
-<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox-plus-jquery.min.js"></script>
-```
-
-[This page](https://www.jsdelivr.com/package/npm/lightbox2) shows the most recent version, so the version numbers in the above two lines can be adopted accordingly.
-
-Note that if you are already using jQuery on your site, you should copy/use instead of `lightbox-plus-jquery.min.js` the file `lightbox.min.js`.
-
-#### Configuring server.toml
-
-In the Hinode template, the Content-Security-Policy in `config/_default/server.toml` will prevent loading the files from the CDN. To enable this add `https://cdn.jsdelivr.net` to the following sections in `Content-Security-Policy`: `script-src`, `style-src`, `img-src` and `connect-src`.  
-Note that these might already be available in the file.
-
-## Further configurations
-
-As the goal is to have the user load the javascript and CSS files only when they are needed, the files are loaded conditionally.
-
-Open the file `layout/partials/head/head.html` and add before the line `{{ if gt (len .Site.Languages) 1}}` the following:
-
-```go-html-template
-    {{if .Params.lightbox }}{{ partial "assets/gallery-lightbox.html" . }}{{ end }}
-```
-
-This will only load the lightbox javascript and class files when in the frontmatter of the page using the `mgallery` shortcode, the following is present: `lightbox: true`.

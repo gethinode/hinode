@@ -9,8 +9,7 @@ for = '/**'
         default-src 'self'; \
         script-src 'self' filesystem: \
             https://utteranc.es/client.js https://cdn.jsdelivr.net \
-            'sha256-zqrgdmVTCHeZA3joAgSlAjQWAQSAPSJwoKyRhD8nqnc=' 'sha256-Yl2Mo78PNibh19ibhdKx03FFbKW9+8fljFAUUyUY1IQ=' \
-            'sha256-avLhcj2GD+l0pju24dWnj9qz5CZkAxQ6WrkK1IaSva4='; \
+            ; \
         style-src 'self' 'unsafe-hashes' https://utteranc.es https://fonts.googleapis.com https://www.youtube.com https://cdn.jsdelivr.net \
             'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
             'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=';\

@@ -11,12 +11,12 @@
     command = "npm run build"
 
 [context.production.environment]
-    HUGO_VERSION = "0.110.0"
+    HUGO_VERSION = "0.114.0"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
 # toml-docs-end netlify
 
-[[headers]]
+[[headers]] 
     for = "/*"
     [headers.values]
         Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
@@ -27,17 +27,19 @@
             child-src 'self' app.netlify.com; \
             script-src 'self' \
                 https://*.netlify.app app.netlify.com netlify-cdp-loader.netlify.app \
-                https://utteranc.es/client.js https://*.google-analytics.com https://*.googletagmanager.com; \
-            style-src 'self' \
-                https://*.netlify.app https://utteranc.es https://fonts.googleapis.com https://www.youtube.com; \
-            object-src 'none'; \
+                https://utteranc.es/client.js https://cdn.jsdelivr.net; \
+            style-src 'self' 'unsafe-hashes' https://*.netlify.app https://utteranc.es https://www.youtube.com https://cdn.jsdelivr.net \
+                'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
+                'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=' \
+                'sha256-uVrOu323DbALvO9XLsXSo1N3peMVuTC/lcentqDkW8A=';\
+            object-src 'self'; \
             base-uri 'self'; \
-            connect-src 'self'
-                https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; \
-            font-src 'self' https://*.netlify.app https://fonts.gstatic.com; \
-            frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com \
-                app.netlify.com; \
-            img-src 'self' data: https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
+            connect-src 'self' \
+                https://cdn.jsdelivr.net; \
+            font-src 'self' https://*.netlify.app https://fonts.gstatic.com https://cdn.jsdelivr.net; \
+            frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
+            img-src 'self' data: https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com \
+                https://cdn.jsdelivr.net https://tile.openstreetmap.org; \
             manifest-src 'self'; \
             media-src 'self' \
             """

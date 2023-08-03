@@ -1,7 +1,7 @@
 {
-  "name": "@gethinode/hinode",
-  "version": "0.17.2",
-  "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
+  "name": "@myrthos/myrthos-site",
+  "version": "0.1.0",
+  "description": "Myrthos is a personal blog based on Hugo and the Hinode theme",
   "keywords": [
     "hugo",
     "theme",
@@ -9,7 +9,8 @@
     "responsive",
     "front-end",
     "blog",
-    "documentation"
+    "documentation",
+    "projects"
   ],
   "main": "index.js",
   "publishConfig": {
@@ -48,14 +49,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gethinode/hinode.git"
+    "url": "git+https://github.com/myrthos/myrthos-site.git"
   },
-  "author": "Mark Dumay",
+  "author": "Myrthos",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gethinode/hinode/issues"
+    "url": "https://github.com/myrthos/myrthos-site/issues"
   },
-  "homepage": "https://gethinode.com",
+  "homepage": "https://myrthos.net",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fullhuman/postcss-purgecss": "^5.0.0",
