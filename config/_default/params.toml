@@ -61,7 +61,8 @@
 # toml-docs-start navigation
 [navigation]
     anchor = true
-    logo = "/img/Logo_Rotated_Text_zzz.png"
+    logo = "/img/Logo_Rotated_Text50_zzz.webp"
+    logoWidth = 174
     color = "body"
     fixed = true
     offset = "3.8em"

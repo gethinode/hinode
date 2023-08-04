@@ -44,26 +44,25 @@ These are the modifications to the Content Security Policy (CSP) elements in `co
 
 ```toml
     Content-Security-Policy = """\
-        default-src 'self'; \
-        script-src 'self' filesystem: \
-            https://utteranc.es/client.js https://cdn.jsdelivr.net \
-            ; \
-        style-src 'self' 'unsafe-hashes' https://utteranc.es https://fonts.googleapis.com https://www.youtube.com https://cdn.jsdelivr.net \
+        default-src 'none'; \
+        script-src 'self' 'report-sample' https://utteranc.es/client.js; \
+        style-src 'self' 'unsafe-hashes' 'report-sample' https://utteranc.es https://www.youtube.com \
             'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
             'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=';\
         object-src 'none'; \
         base-uri 'self'; \
-        connect-src 'self' \
-            https://cdn.jsdelivr.net; \
-        font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; \
+        connect-src 'self'; \
+        font-src 'self'; \
         frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
-        img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com https://cdn.jsdelivr.net; \
+        frame-ancestors 'none'; \
+        img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com; \
         manifest-src 'self'; \
-        media-src 'self' \
+        media-src 'self'; \
+        form-action 'self'; \
         """
 ```
 
-The hashes in the above are for the support of Goat and Katex.
+The hashes in the above are for the support of Goat and Utterances.
 
 In `config/_default/params.toml` change `schema`, `opengraph` and `comments` to the following:
 
@@ -421,22 +420,14 @@ In `config/_default/menus/menus.en.toml` replace the `[[main]]` section with:
 In `static/img`, the following logos exist:
 
 - The site logo (the rotated logo with text)
-  - `Logo_Rotated_Text_dark.png`
-  - `Logo_Rotated_Text_light.png`
-- The rotated logo with no text
-  - `Logo_Rotated_dark.png`
-  - `Logo_Rotated_light.png`
-- The logo with text
-  - `Logo_Text_dark.png`
-  - `Logo_Text_light.png`
-- The logo with no text
-  - `Logo_dark.png`
-  - `Logo_light.png`
+  - `Logo_Rotated_Text50_dark.webp`
+  - `Logo_Rotated_Text50_light.webp`
 
-Each logo has a `dark` and a `light` version, as there is a different logo depending on the selected color.
+The logo has a `dark` and a `light` version, as there is a different logo depending on the selected color.
 
 Change in `config/_default/params.toml` in the `navigation` section `logo` to:  
- `logo = "/img/Logo_Rotated_Text_zzz.png"`
+ `logo = "/img/Logo_Rotated_Text50_zzz.png"`
+and add the following: `logoWidth = 174`.
 
 Change in `layouts/partials/assets/navbar.html` the line:  
 `<img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30">`
@@ -445,8 +436,8 @@ to:
 ```html
 {{- $logo_l := replace $logo "zzz" "light" -}}
 {{- $logo_d := replace $logo "zzz" "dark" -}}
-<div class="d-none-light"><img src="{{if $absoluteURL }}{{ absURL $logo_d }}{{ else }}{{ $logo_d }}{{ end }}" alt="{{ $title }} logo" height="50"></div>
-<div class="d-none-dark"><img src="{{if $absoluteURL }}{{ absURL $logo_l }}{{ else }}{{ $logo_l }}{{ end }}" alt="{{ $title }} logo" height="50"></div>
+<div class="d-none-light"><img src="{{if $absoluteURL }}{{ absURL $logo_d }}{{ else }}{{ $logo_d }}{{ end }}" alt="{{ $title }} logo" height="50" {{with site.Params.navigation.logoWidth}}width="{{- site.Params.navigation.logoWidth -}}"{{ end }}></div>
+<div class="d-none-dark"><img src="{{if $absoluteURL }}{{ absURL $logo_l }}{{ else }}{{ $logo_l }}{{ end }}" alt="{{ $title }} logo" height="50" {{with site.Params.navigation.logoWidth}}width="{{- site.Params.navigation.logoWidth -}}"{{ end }}></div>
 ```
 
 ## Move search box to the right
