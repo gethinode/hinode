@@ -78,7 +78,7 @@
 [[sharing.providers]]
     name = "Twitter"
     url = "https://twitter.com/home?status={url}"
-    icon = "fab twitter"
+    icon = "fab x-twitter"
     weight = 20
 
 [[sharing.providers]]
