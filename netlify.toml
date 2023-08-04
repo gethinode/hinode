@@ -25,23 +25,21 @@
         Content-Security-Policy = """\
             default-src 'self'; \
             child-src 'self' app.netlify.com; \
-            script-src 'self' \
-                https://*.netlify.app app.netlify.com netlify-cdp-loader.netlify.app \
-                https://utteranc.es/client.js https://cdn.jsdelivr.net; \
-            style-src 'self' 'unsafe-hashes' https://*.netlify.app https://utteranc.es https://www.youtube.com https://cdn.jsdelivr.net \
+            script-src 'self' 'report-sample' https://utteranc.es/client.js; \
+            style-src 'self' 'unsafe-hashes' 'report-sample' https://utteranc.es https://www.youtube.com \
                 'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
                 'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=' \
                 'sha256-uVrOu323DbALvO9XLsXSo1N3peMVuTC/lcentqDkW8A=';\
             object-src 'self'; \
             base-uri 'self'; \
-            connect-src 'self' \
-                https://cdn.jsdelivr.net; \
-            font-src 'self' https://*.netlify.app https://fonts.gstatic.com https://cdn.jsdelivr.net; \
+            connect-src 'self'; \
+            font-src 'self' ; \
             frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
-            img-src 'self' data: https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com \
-                https://cdn.jsdelivr.net https://tile.openstreetmap.org; \
+            img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com \
+                https://tile.openstreetmap.org; \
             manifest-src 'self'; \
-            media-src 'self' \
+            media-src 'self'; \
+            form-action 'self'; \
             """
         X-Frame-Options = "SAMEORIGIN"
         Referrer-Policy = "strict-origin"
