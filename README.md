@@ -1,10 +1,10 @@
 # About this site
 
-This the repository for the Myrthos site. It is a site that is still in development and isn't even online yet.
+This the repository for the [Myrthos site](https://myrthos.net). It is a site that is still in development to outgrow its infancy.
 
 The site is intended to be used as my playground, where I post blogs, write about projects, create documentation and show photo's about the things that interest me.
 
-This is a [Hugo][hugo] site that uses [Hinode][repository] as a template.
+It is a [Hugo][hugo] site that uses the [Hinode][repository] theme with some modifications.
 
 <!-- Badges -->
 <p align="center">
@@ -14,60 +14,50 @@ This is a [Hugo][hugo] site that uses [Hinode][repository] as a template.
     <a href="https://gethinode.com" alt="Hinode theme">
         <img src="https://img.shields.io/badge/theme-hinode-blue">
     </a>
- <!--   <a href="https://www.npmjs.com/package/%40gethinode/hinode" alt="npm package">
-        <img src="https://img.shields.io/npm/v/%40gethinode/hinode">
+    <a href="https://stats.uptimerobot.com/8yg4PiOXlQ" alt="UptimeRobot Status">
+        <img src="https://img.shields.io/uptimerobot/status/m794949079-97ae91d35b05b4d81325dada">
+    <!-- </a>
+    <a href="https://github.com/myrthos/myrthos-site/releases" alt="Last commit">
+        <img src="https://img.shields.io/github/v/release/myrthos/myrthos-site">
     </a>
-    <a href="https://app.netlify.com/sites/gethinode-demo/deploys" alt="Netlify Status">
-        <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67">
-    </a>
-    <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
-        <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb">
-    </a> -->
+    <a href="https://github.com/myrthos/myrthos-site/releases" alt="Last commit">
+        <img src="https://img.shields.io/github/release-date/myrthos/myrthos-site">
+    </a> -->   
     <a href="https://github.com/myrthos/myrthos-site/commits/main" alt="Last commit">
-        <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg">
+        <img src="https://img.shields.io/github/last-commit/myrthos/myrthos-site/main">
     </a>
-    <a href="https://github.com/myrthos/myrthos-site/issues" alt="Issues">
-        <img src="https://img.shields.io/github/issues/gethinode/hinode.svg">
+    <a href="https://github.com/myrthos/myrthos-site/labels/bug" alt="bugs">
+        <img src="https://img.shields.io/github/issues/myrthos/myrthos-site/bug">
     </a>
     <a href="https://github.com/myrthos/myrthos-site/pulls" alt="Pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg">
+        <img src="https://img.shields.io/github/issues-pr/myrthos/myrthos-site">
     </a>
     <a href="https://github.com/myrthos/myrthos-site/blob/main/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/gethinode/hinode">
+        <img src="https://img.shields.io/github/license/myrthos/myrthos-site">
     </a>
 </p>
 
-The contents of this repository is not intended to be used as a Hugo template, nor is it developed as such. It is a modified version of Hinode, with all the deviations and additions described in a blog post. If you are looking for a template, you are much better of using Hinode as that is supported.  
+Although based on a Hugo theme, this repository is not developed to be used as a Hugo theme. It is a modified version of the Hinode theme and developed as a specific implementation, with all the deviations and additions described in a blog post. If you are looking for a theme, you are much better of using Hinode as that is supported.  
 Detailed information about Hinode is available on the [official website][website].
 
 ## Prerequisites
 
-Hinode requires Git, Node.js and npm for local development and testing, and so does this repository. It also requires bootstrap.
+Hinode requires [Git](git_download), [Node.js](nodejs) and [npm](npm), and so does this repository. It also requires [bootstrap](bootstrap) (which is installed by npm).
 
 ## License
 
-The `myrthos` and `Hinode` codebases are both released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) and gallery is licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
+The `myrthos` and `Hinode` codebases are both released under the [MIT license][license]. The blogs, documentation, gallery and projects codebases are licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
 <!-- MARKDOWN PUBLIC LINKS -->
-[blist]: https://github.com/apvarun/blist-hugo-theme
 [bootstrap]: https://getbootstrap.com
 [cc-by-nc-4.0]: https://creativecommons.org/licenses/by-nc/4.0/
-[doks]: https://github.com/h-enk/doks
-[flexsearch]: https://github.com/nextapps-de/flexsearch
 [git_download]: https://git-scm.com
 [hugo]: https://gohugo.io
-[netlify]: https://www.netlify.com
 [nodejs]: https://nodejs.org
 [npm]: https://www.npmjs.com
-[observatory]: https://observatory.mozilla.org/analyze/demo.gethinode.com
-[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F
-[utterances]: https://utteranc.es
+[observatory]: https://observatory.mozilla.org/analyze/myrthos.net
+[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fmyrthos.net%2F
 
 <!-- MARKDOWN MAINTAINED LINKS -->
-[contribute]: https://gethinode.com/contribute
-[getstarted]: https://gethinode.com/docs
-[demo]: https://demo.gethinode.com/
-[license]: https://github.com/gethinode/hinode/blob/main/LICENSE
 [repository]: https://github.com/gethinode/hinode.git
-[repository_template]: https://github.com/gethinode/template.git
-[website]: https://gethinode.com/
+
