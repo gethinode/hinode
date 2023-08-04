@@ -103,7 +103,7 @@
             {{- if $absoluteURL -}}
                 {{- $imgset = printf "%s, %s %sw" $imgset $scaled.Permalink (index $widths $index) -}}
             {{- else -}}
-            {{- $imgset = printf "%s, %s %sw" $imgset $scaled.RelPermalink (index $widths $index) -}}
+                {{- $imgset = printf "%s, %s %sw" $imgset $scaled.RelPermalink (index $widths $index) -}}
             {{- end -}}
         {{- end -}}
         {{- $imgset = strings.TrimPrefix ", " $imgset -}}
