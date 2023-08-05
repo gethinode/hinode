@@ -1,10 +1,15 @@
-{{- /*
+<!-- 
     Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
 
-    Usage: `file path="path/to/filename" lang="lang" show="true" full="true"`
-
-    Prints the full content of any given file supported by the Chroma syntax highlighter.
-*/ -}}
+    Print the full content of any given file supported by the Chroma syntax highlighter. The shortcode supports the
+    following arguments:
+    "path"          Path of the input file. The path is relative to the `basePath` defined in the `docs` section of the
+                    site's parameters. If the file starts with `./`, the path of the repository is used as base path instead.
+    "lang"          Language to be used by the syntax highlighter.
+    "show"          If unset, shows the panel with the code in collapsed state. By default, the panel is expanded.
+    "full"          If unset, shows the filename only. By default, the full relative path is shown.
+    "class"         Optional class argument of the tab control.
+-->
 
 {{- $basePath := .Site.Params.docs.basePath -}}
 {{- $file := .Get "path" }}
