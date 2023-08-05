@@ -1,11 +1,19 @@
-{{- /*
+<!-- 
     Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
 
-    Usage: `docs name="name" file="path/filename.<toml|scss>"`
+    Capture a code snippet from a `toml` or `scss` input file. The shortcode scans for named markers in a local file:   
+    - For `.toml` files, use `# toml-docs-start` and `# toml-docs-end` followed by the snippet name
+    - For `.scss` files, use `// scss-docs-start` and `// scss-docs-end` followed by the snippet name
+    
+    The snippet between the two markers is then rendered using syntax highlighting. The shortcode supports the
+    following named arguments:
 
-    Prints everything between `# toml-docs-start "name"` and `# toml-docs-end "name"`
-    comments in the docs, or between `// scss-docs-start` and `// scss-docs-end`.
-*/ -}}
+    "name"          Name of the code snippet, used to identify the relevant section of the input file.
+    "file"          Path of the input file. The path is relative to the `basePath` defined in the `docs` section of the site's parameters (see [page layout]({{< relref "layout#configuration-3" >}})). If the file starts with `./`, the path of the repository is used as base path instead.
+    "show"          If unset, shows the panel with the code snippet in collapsed state. By default, the panel is expanded.
+    "full"          If unset, shows the filename only. By default, the full relative path is shown.
+    "class"         Optional class argument of the tab control.
+-->
 
 {{- $name := .Get "name" -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
