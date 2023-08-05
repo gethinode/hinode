@@ -1,4 +1,14 @@
-<!-- Inspired by the timeline snippet from Siddharth Panchal at https://bootsnipp.com/snippets/Q0ppE -->
+<!-- 
+    Inspired by the timeline snippet from Siddharth Panchal at https://bootsnipp.com/snippets/Q0ppE
+    
+    Show items ordered on a vertical timelime. The shortcode supports the following arguments:
+    "data"          Required filename of the timeline input. You can omit the file extension. The file should reside in
+                    the "data" folder.
+    "background"    Optional border color of the connector dots, defaults to the body background color. If set, uses a
+                    subtle background color that is adaptive to the current color mode.
+    "class"         Optional class attribute of the timeline's container.
+-->
+
 {{ $error := false }}
 
 {{- $data := .Get "data" -}}
@@ -20,6 +30,8 @@
     {{ errorf "Invalid value for param 'background': %s" .Position -}}
     {{ $error = true -}}
 {{ end -}}
+
+{{- $class := .Get "class" -}}
 
 <!-- Inline partial to render icon -->
 {{- define "partials/timeline-icon.html" -}}
@@ -74,7 +86,7 @@
 {{- end -}}
 
 <!-- Render default timeline -->
-<div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-bg-{{ . }}{{ end }}">
+<div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}">
     {{ range $index, $item := $entries }}
         <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
             {{ if eq (mod $index 2) 1 }}
@@ -90,7 +102,7 @@
 </div>
 
 <!-- Render timeline for smaller devices -->
-<div class="container p-0 d-block d-md-none {{ with $background }} timeline-bg-{{ . }}{{ end }}">
+<div class="container p-0 d-block d-md-none {{ with $background }} timeline-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}">
     {{ range $index, $item := $entries }}
         <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
             {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}

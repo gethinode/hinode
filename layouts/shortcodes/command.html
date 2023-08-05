@@ -1,3 +1,13 @@
+<!-- 
+    Generates terminal output for either `bash`, `powershell`, or `sql` shell languages. The shortcode supports the
+    following named arguments:
+    "user"          Optional user to add to the prompt, e.g. "user".
+    "host"          Optional host to add to the prompt, e.g. "localhost".
+    "prompt"        Optional prompt override, e.g. "PS C:\Users\User>".
+    "shell"         Type of shell, either "bash" (default), "powershell", or "sql".
+    "class"         Optional class attribute of the command element.
+-->
+
 {{- $host := .Get "host" -}}
 {{- $user := .Get "user" -}}
 {{- $prompt := .Get "prompt" -}}
@@ -60,6 +70,8 @@
     {{- $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) -}}
 {{- end -}}
 
-<div class="mb-3 syntax-highlight">
+{{- $class := .Get "class" -}}
+
+<div class="mb-3 syntax-highlight{{ with $class }} {{ . }}{{ end }}">
     {{- $output -}}
 </div>

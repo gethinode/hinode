@@ -3,6 +3,7 @@
     "id"            Optional id of the toast message, defaults to "toast-message-0".
     "header":       Optional header of the toast message.
     "message":      Required toast message.
+    "class":        Optional class attribute of the toast element.
 -->
 
 {{- $id := printf "toast-message-%d" 0 -}}
@@ -19,7 +20,9 @@
     {{- errorf "partial [assets/toast.html] - Missing message text" -}}
 {{ end -}}
 
-<div id="{{ $id }}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+{{- $class := .class -}}
+
+<div id="{{ $id }}" class="toast{{ with $class }} {{ . }}{{ end }}" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
         {{ with $header }}<strong class="me-auto">{{ . }}</strong>{{ end }}
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
