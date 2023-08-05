@@ -5,6 +5,7 @@
     "title"         Required text to display in the tooltip.
     "href"          Required address for the button or hyperlink.
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
+    "class"         Optional class attribute of the tooltip's button element.
 -->
 
 {{ $error := false }}
@@ -40,6 +41,8 @@
     {{ $error = true }}
 {{ end -}}
 
+{{- $class := .Get "class" -}}
+
 {{ if not $error }}
-    <div class="d-inline-flex">{{- partial "assets/button.html" (dict "type" $type "title" $title "color" $color "tooltip" $tooltip "href" $href "placement" $placement) -}}</div>
+    <div class="d-inline-flex">{{- partial "assets/button.html" (dict "type" $type "title" $title "color" $color "tooltip" $tooltip "href" $href "placement" $placement "class" $class) -}}</div>
 {{ end }}

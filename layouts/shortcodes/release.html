@@ -4,6 +4,7 @@
     "version":      Required version string, expects semver notation with a "v" prefix.
     "state":        Optional state, either "new" or "deprecated".
     "short":        Optional flag to indicate the release button should use short notation.
+    "class":        Optional class attribute of the button element.
 -->
 
 {{- $error := false -}}
@@ -54,6 +55,8 @@
     {{- end -}}
 {{- end -}}
 
+{{- $class := .Get "class" -}}
+
 {{- if not $error -}}
     <div class="pb-3">
     {{- partial "assets/button.html" (dict 
@@ -62,7 +65,7 @@
         "size" "sm"
         "color" $color
         "outline" "true"
-        "class" "rounded-2 fw-semibold")
+        "class" (trim (printf "rounded-2 fw-semibold %s" $class) " "))
     -}} 
     </div>
 {{- end -}}
