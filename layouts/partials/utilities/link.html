@@ -40,4 +40,6 @@
     {{ $destination = relLangURL $destination }}
 {{- end -}}
 
-<a href="{{ $destination | safeURL }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ $text }}</a>
+{{- $class := .class -}}
+
+<a {{ with $class }}class="{{ . }}" {{ end }}href="{{ $destination | safeURL }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ $text }}</a>
