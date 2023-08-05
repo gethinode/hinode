@@ -1,42 +1,42 @@
 {{- /*
-  Usage: `example args`
-
-  `args` are all optional and can be one of the following:
-    * id: the `div`'s id - default: ""
-    * class: any extra class(es) to be added to the `div` - default: ""
-    * lang: language used to display the code. Use "hugo" to process Hugo (escaped) shortcodes - default: "html"
-    * show_markup: if the markup should be output in the HTML - default: `true`
-    * show_preview: if the preview should be output in the HTML - default: `true`
-
-    Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/example.html
-*/ -}}
-
-{{- $id := .Get "id" -}}
-{{- $class := .Get "class" -}}
-{{- $lang := .Get "lang" | default "html" -}}
-{{- $show_markup := .Get "show_markup" | default true -}}
-{{- $show_preview := .Get "show_preview" | default true -}}
-{{- $input := .Inner -}}
-{{- $content := .Inner -}}
-
-{{ $preprocess := slice "hugo" "markdown" }}
-{{- if in $preprocess $lang -}}
-    {{- $content = (trim $content "\r\n") | markdownify }}
-    {{ $lang = "markdown" }}
-{{- end -}}
-
-<div class="rounded border mb-3">
-    {{- if eq $show_preview true -}}
-        <div {{ with $id }}id="{{ . }}"{{ end }} class="p-3 {{ with $class }} {{ . }}{{ end }} preview-background">
-            {{- $content -}}
-        </div>
-    {{- end -}}
-    <div class="d-flex align-items-center ps-3 pe-3 py-1 border-top border-bottom syntax-highlight">
-        <small class="font-monospace text-body-secondary text-uppercase">{{- $lang -}}</small>
-    </div>
-    <div class="rounded-bottom syntax-highlight">
-        {{- if eq $show_markup true -}}
-            {{- highlight (trim $input "\r\n") $lang "" -}}
-        {{- end -}}
-    </div>
-</div>
+    Usage: `example args`
+  
+    `args` are all optional and can be one of the following:
+      * id: the `div`'s id - default: ""
+      * class: any extra class(es) to be added to the `div` - default: ""
+      * lang: language used to display the code. Use "hugo" to process Hugo (escaped) shortcodes - default: "html"
+      * show_markup: if the markup should be output in the HTML - default: `true`
+      * show_preview: if the preview should be output in the HTML - default: `true`
+  
+      Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/example.html
+  */ -}}
+  
+  {{- $id := .Get "id" -}}
+  {{- $class := .Get "class" -}}
+  {{- $lang := .Get "lang" | default "html" -}}
+  {{- $show_markup := .Get "show_markup" | default true -}}
+  {{- $show_preview := .Get "show_preview" | default true -}}
+  {{- $input := .Inner -}}
+  {{- $content := .Inner -}}
+  
+  {{ $preprocess := slice "hugo" "markdown" }}
+  {{- if in $preprocess $lang -}}
+      {{- $content = (trim $content "\r\n") | markdownify }}
+      {{ $lang = "markdown" }}
+  {{- end -}}
+  
+  <div class="rounded border preview-background mb-3">
+      {{- if eq $show_preview true -}}
+          <div {{ with $id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $class }} {{ . }}{{ end }}">
+              {{- $content -}}
+          </div>
+      {{- end -}}
+      {{- if eq $show_markup true -}}
+          <div class="d-flex align-items-center ps-3 pe-3 py-1{{ if $show_preview }} border-top{{ else }} rounded-top{{ end }} border-bottom syntax-highlight">
+              <small class="font-monospace text-body-secondary text-uppercase">{{- $lang -}}</small>
+          </div>
+          <div class="rounded-bottom syntax-highlight border-none">
+              {{- highlight (trim $input "\r\n") $lang "" -}}
+          </div>
+      {{- end -}}
+  </div>
