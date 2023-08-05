@@ -1,11 +1,11 @@
-<!-- Cspell:ignore ovlpos ovlx ovly ovlperc lightbox mgallery mimage Eiffeltower -->
+<!-- Cspell:ignore ovlpos ovlx ovly ovlperc lightbox mgallery mimage Eiffeltower webp galeindhoven -->
 <!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 title: A historic view
 description: Using a magnifying glass to see the past
 date: 2023-08-03
 tags: ["photo", "Eindhoven", "old"]
-thumbnail: img/boots.jpg
+thumbnail: img/galeindhoven.webp
 # This prevents the thumbnail to be displayed on the page and used only in the list
 layout: gallery
 # This loads the lightbox script
