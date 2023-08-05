@@ -53,6 +53,8 @@
     {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
 {{ end -}}
 
+{{- $class := .Get "class" -}}
+
 {{- /* If any parameters are missing, print an error and exit */ -}}
 {{- if or (not $name) (not $file) -}}
     {{- errorf "%s: %q: Missing required parameters! Got: name=%q file=%q!" .Position .Name $name $file -}}
@@ -71,7 +73,7 @@
     {{- $match = replace $match $capture_start "" -}}
     {{- $match = replace $match $capture_end "" -}}
 
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs{{ with $class }} {{ . }}{{ end }}">
         <li class="nav-item">
             <a class="nav-link active font-monospace" 
                 href="#body-{{ $id }}" 
