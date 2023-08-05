@@ -1,16 +1,16 @@
-{{- /*
-    Usage: `example args`
-  
-    `args` are all optional and can be one of the following:
-      * id: the `div`'s id - default: ""
-      * class: any extra class(es) to be added to the `div` - default: ""
-      * lang: language used to display the code. Use "hugo" to process Hugo (escaped) shortcodes - default: "html"
-      * show_markup: if the markup should be output in the HTML - default: `true`
-      * show_preview: if the preview should be output in the HTML - default: `true`
-  
-      Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/example.html
-  */ -}}
-  
+<!-- 
+    Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/example.html
+
+    Display a code example and render a preview of the same input. The shortcode accepts the languages supported by
+    Hugo's highlight function. The shortcode supports the following named arguments:
+
+    "id"            Optional identifier of the element's container.
+    "lang"          Language used to display the code. Use "hugo" to process Hugo (escaped) shortcodes, default value is "html".
+    "show_markup"   If the markup should be output in the HTML, defaults to "true".
+    "show_preview"  If the preview should be output in the HTML, defaults to "true".
+    "class"         Optional class attributes of the element's container.
+-->
+
   {{- $id := .Get "id" -}}
   {{- $class := .Get "class" -}}
   {{- $lang := .Get "lang" | default "html" -}}
