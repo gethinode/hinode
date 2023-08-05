@@ -18,11 +18,12 @@
 {{ end -}}
 
 {{ with .Params.thumbnail -}}
-    {{ $source := partial "utilities/GetImage.html" (dict "url" .) -}}
-    {{ with $source -}}
+    {{ $img := partial "utilities/GetImage.html" (dict "url" .) -}}
+    {{ with $img -}}
         {{ $dim := "1280x640" -}}
-        {{ $img := (.Fill (printf "%s jpg" $dim)) -}}
-        {{ $.Scratch.Set "thumbnail" ($img.Permalink | absURL) -}}
+        {{ $scaled := (.Fill (printf "%s jpg" $dim)) -}}
+        {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink ".jpg" (printf "-%s.jpg" $dim)) -}}
+        {{ $.Scratch.Set "thumbnail" ($scaled.Permalink | absURL) -}}
     {{ end -}}
 {{ else -}}
     {{ with .Site.Params.schema.image.url -}}    

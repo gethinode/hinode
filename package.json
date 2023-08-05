@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.17.3",
+  "version": "0.17.4",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -17,14 +17,13 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "prestart": "npm run clean && npm run mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender",
     "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
-    "prebuild": "npm run clean && npm run -s mod:install",
+    "prebuild": "npm run clean:public && npm run -s mod:install",
     "build": "hugo --gc --minify",
     "build:debug": "hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
-    "clean": "rimraf public resources",
+    "clean:public": "rimraf public",
     "clean:install": "rimraf package-lock.json node_modules",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
     "lint:scripts": "eslint assets/js",

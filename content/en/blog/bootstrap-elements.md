@@ -1,7 +1,7 @@
 ---
 author: Mark Dumay
 title: Bootstrap elements
-date: 2023-05-20
+date: 2023-08-05
 description: Use shortcodes to add common Bootstrap elements with ease.
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
@@ -169,6 +169,28 @@ echo "goodbye"
 Use the `docs` shortcode to display the content of a `js`, `scss` or `toml` file:
 
 {{< docs name="theme-colors" file="config/_default/params.toml" >}}
+
+## Example
+
+Use the `example` shortcode to display a code example and to render a preview of the same input.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* command */>}}
+export MY_VAR=123
+{{</* /command */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+## File
+
+Use the `file` shortcode to print and highlight the full content of a given input file.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Icon
 

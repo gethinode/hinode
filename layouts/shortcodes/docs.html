@@ -1,11 +1,23 @@
-{{- /*
+<!-- 
     Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
 
-    Usage: `docs name="name" file="path/filename.<toml|scss>"`
+    Capture a code snippet from a `toml` or `scss` input file. The shortcode scans for named markers in a local file:   
+    - For `.toml` files, use `# toml-docs-start` and `# toml-docs-end` followed by the snippet name
+    - For `.scss` files, use `// scss-docs-start` and `// scss-docs-end` followed by the snippet name
+    
+    The snippet between the two markers is then rendered using syntax highlighting. The shortcode supports the
+    following named arguments:
 
-    Prints everything between `# toml-docs-start "name"` and `# toml-docs-end "name"`
-    comments in the docs, or between `// scss-docs-start` and `// scss-docs-end`.
-*/ -}}
+    "name"          Name of the code snippet, used to identify the relevant section of the input file.
+    "file"          Path of the input file. The path is relative to the `basePath` defined in the `docs` section of the
+                    site's parameters. If the file starts with `./`, the path of the repository is used as base path instead.
+    "show"          If unset, shows the panel with the code snippet in collapsed state. By default, the panel is
+                    expanded.
+    "full"          If unset, shows the filename only. By default, the full relative path is shown.
+    "id"            Optional id of the collapse panel, defaults to "docs-collapse-n" with a sequential number n
+                    starting at 1.
+    "class"         Optional class argument of the tab control.
+-->
 
 {{- $name := .Get "name" -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
@@ -20,6 +32,9 @@
 {{- $capture_end := "" -}}
 
 {{- $id := printf "docs-collapse-%d" .Ordinal -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
 
 {{- $supportedExtensions := slice "js" "scss" "toml" -}}
 {{- if in $supportedExtensions $extension -}}
@@ -53,6 +68,8 @@
     {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
 {{ end -}}
 
+{{- $class := .Get "class" -}}
+
 {{- /* If any parameters are missing, print an error and exit */ -}}
 {{- if or (not $name) (not $file) -}}
     {{- errorf "%s: %q: Missing required parameters! Got: name=%q file=%q!" .Position .Name $name $file -}}
@@ -71,7 +88,7 @@
     {{- $match = replace $match $capture_start "" -}}
     {{- $match = replace $match $capture_end "" -}}
 
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs{{ with $class }} {{ . }}{{ end }}">
         <li class="nav-item">
             <a class="nav-link active font-monospace" 
                 href="#body-{{ $id }}" 

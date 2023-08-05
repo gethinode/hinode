@@ -2,6 +2,7 @@
     Prepares a toast message. Use a trigger to display the message. The shortcode supports the following arguments:
     "id"            Optional id of the toast message, defaults to "toast-message-n" with sequence n.
     "header":       Optional header of the toast message. Uses the site title by default.
+    "class"         Optional class attribute of the toast element.
 -->
 
 {{- $error := false -}}
@@ -10,8 +11,10 @@
 {{ $header := .Get "header" -}}
 {{ $message := trim .Inner " \r\n" -}}
 
+{{- $class := .Get "class" -}}
+
 {{ if not $message -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
 {{ else if not $error -}}
-    {{ partial "assets/toast.html" (dict "id" $id "header" $header "message" $message) }}
+    {{ partial "assets/toast.html" (dict "id" $id "header" $header "message" $message "class" $class) }}
 {{ end -}}
