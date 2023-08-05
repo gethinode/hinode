@@ -2,7 +2,7 @@
 author: Mark Dumay
 title: Bootstrap elementen
 slug: bootstrap-elementen
-date: 2023-02-17
+date: 2023-08-05
 description: Gebruik shortcodes om eenvoudig Bootstrap elementen toe te voegen.
 tags: ["bootstrap", "shortcode"]
 thumbnail: img/boots.jpg
@@ -170,6 +170,28 @@ echo "goodbye"
 Gebruik de volgende shortcode om de inhoud van een `toml` of `scss` bestand te tonen.
 
 {{< docs name="theme-colors" file="config/_default/params.toml" >}}
+
+## Example
+
+Gebruik de `example` shortcode om zowel de input als een voorbeeld van code te tonen.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* command */>}}
+export MY_VAR=123
+{{</* /command */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+## File
+
+Gebruik de `file` shortcode om de volledige inhoud van een bestand te tonen, inclusief taalafhankelijke opmaak.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Icon
 

@@ -1,10 +1,17 @@
-{{- /*
+<!-- 
     Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
 
-    Usage: `file path="path/to/filename" lang="lang" show="true" full="true"`
-
-    Prints the full content of any given file supported by the Chroma syntax highlighter.
-*/ -}}
+    Print the full content of any given file supported by the Chroma syntax highlighter. The shortcode supports the
+    following arguments:
+    "path"          Path of the input file. The path is relative to the `basePath` defined in the `docs` section of the
+                    site's parameters. If the file starts with `./`, the path of the repository is used as base path instead.
+    "lang"          Language to be used by the syntax highlighter.
+    "show"          If unset, shows the panel with the code in collapsed state. By default, the panel is expanded.
+    "full"          If unset, shows the filename only. By default, the full relative path is shown.
+    "id"            Optional id of the collapse panel, defaults to "file-collapse-n" with a sequential number n
+                    starting at 1.
+    "class"         Optional class argument of the tab control.
+-->
 
 {{- $basePath := .Site.Params.docs.basePath -}}
 {{- $file := .Get "path" }}
@@ -16,7 +23,10 @@
 
 {{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
 {{- $lang := .Get "lang" | default $extension -}}
-{{- $id := printf "docs-collapse-%d" .Ordinal -}}
+{{- $id := printf "file-collapse-%d" .Ordinal -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
 
 {{ $supportedFlags := slice "true" "false" -}}
 {{ $showParam := "true" -}}
@@ -37,6 +47,8 @@
     {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
 {{ end -}}
 
+{{- $class := .Get "class" -}}
+
 {{- /* If any parameters are missing, print an error and exit */ -}}
 {{- if not $file -}}
     {{- errorf "%s: %q: Missing required parameters! Got: path=%q!" .Position .Name $file -}}
@@ -46,7 +58,7 @@
     {{ $tmp := os.Stat $file }}
     {{- $content := readFile $file -}}
 
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs{{ with $class }} {{ . }}{{ end }}">
         <li class="nav-item">
             <a class="nav-link active font-monospace" 
                 href="#body-{{ $id }}" 
