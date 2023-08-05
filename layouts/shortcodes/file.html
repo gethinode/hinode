@@ -8,6 +8,8 @@
     "lang"          Language to be used by the syntax highlighter.
     "show"          If unset, shows the panel with the code in collapsed state. By default, the panel is expanded.
     "full"          If unset, shows the filename only. By default, the full relative path is shown.
+    "id"            Optional id of the collapse panel, defaults to "file-collapse-n" with a sequential number n
+                    starting at 1.
     "class"         Optional class argument of the tab control.
 -->
 
@@ -21,7 +23,10 @@
 
 {{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
 {{- $lang := .Get "lang" | default $extension -}}
-{{- $id := printf "docs-collapse-%d" .Ordinal -}}
+{{- $id := printf "file-collapse-%d" .Ordinal -}}
+{{ with .Get "id" }}
+    {{ $id = . }}
+{{ end }}
 
 {{ $supportedFlags := slice "true" "false" -}}
 {{ $showParam := "true" -}}
