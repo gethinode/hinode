@@ -229,7 +229,7 @@
                 <!-- Render top-menu items (maximum depth of 2) -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Insert search input -->
-                    {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}                    
+                    {{- if $search }}{{ partial "assets/search-input.html" (dict "class" "border") -}}{{ end -}}                    
                     {{- range $menu := $menus -}}
                         <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">
                             {{- partial "assets/navbar-item.html" (dict "menu" $menu "page" $page) -}}

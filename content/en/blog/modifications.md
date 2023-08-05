@@ -446,15 +446,19 @@ I prefer the search box to be next to the navigation bar. To achieve this the be
 
 In `layouts/partials/assets/navbar.html` move this line:
 
-```html
+```go-template-html
 <!-- Insert search input -->
 {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}       
 ```
 
 to below the line with: `<ul class="navbar-nav ms-auto">`.
 
-Also the border of the search box could stand out a bit more. To accomplish that open the file `assets/scss/components/_search.scss`.  
-in the class `.form-control.is-search` change the line `border: 1px solid transparent;` to `border: 1px solid body;`
+Also the border of the search box could stand out a bit more. To accomplish that open the file, change the above line to:
+
+```go-template-html
+<!-- Insert search input -->
+{{- if $search }}{{ partial "assets/search-input.html" (dict "class" "border")-}}{{ end -}}       
+```
 
 ## Update sharing providers
 
