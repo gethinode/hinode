@@ -13,6 +13,7 @@
                     "main.externalLinks.tab" in the site's parameters.
     "case"          Optional flag to indicate if the retrieved title (e.g. no inner text is provided) of an internal
                     link should use its original case, defaults to true. If false, the title is set to lower case.
+    "class"         Optional class attribute of the anchor element.
 -->
 
 {{- $error := false -}}
@@ -49,7 +50,9 @@
 
 {{ $text := trim .Inner " \r\n" | markdownify | safeHTML }}
 
+{{- $class := .Get "class" -}}
+
 {{- if not $error -}}
-    {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case) }}
+    {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class) }}
 {{- end -}}
 
