@@ -14,6 +14,6 @@ On this site your privacy is valued and there are no cookies, tracking codes or 
 
 There are however a few external components that are being used, which are listed below and might have some impact on your privacy.
 
-For the comments, [Utterances](https://utteranc.es/) is being used. Utterances claims not to be using any tracking. For reading comments your privacy should be safe. If you want to add a comment, you need to have a Github account and at that point your privacy is limited to what Github [states](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) about it.
+For the comments, [Utterances](https://utteranc.es/) is being used. Utterances claims not to be using any tracking. For reading comments your privacy should be safe anyway. If you want to add a comment, you need to have a Github account.
 
-This site is hosted on Netlify and they have access to the IP address and the browser you use, because it is in their server logs. This is not different from any other site you are visiting.
+This site is hosted on Netlify and they have access to the IP address, the browser you use and some other stuff, because it is in their server logs. This is not different from any other site you are visiting.

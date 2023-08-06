@@ -13,7 +13,7 @@
 # toml-docs-start modules
 [modules]
     core = ["bootstrap", "flexsearch", "fontawesome"]
-    optional = ["leaflet", "katex", "mgallery"]
+    optional = ["katex", "mgallery"]
     excludeSCSS = ["bootstrap"]
     disableTemplate = ["katex"]
     [modules.fontawesome]
@@ -91,8 +91,8 @@
     weight = 10
 
 [[sharing.providers]]
-    name = "Twitter"
-    url = "https://twitter.com/home?status={url}"
+    name = "X"
+    url = "https://x.com/home?status={url}"
     icon = "fab x-twitter"
     weight = 20
 
@@ -118,7 +118,7 @@
     weight = 45
 
 [[sharing.providers]]
-    name = "email"
+    name = "Clipboard"
     url = "{url}"
     icon = "fas link"
     weight = 50
@@ -232,8 +232,9 @@
     section = "blog"
     [author]
         name = "Joost Mans"
-        twitter = "https://twitter.com/therealmyrthos"
+        x = "https://x.com/therealmyrthos"
         github = "https://github.com/myrthos"
+        mastodon = "https://techhub.social/@Myrthos"
     [logo]
         url = "img/Logo_Rotated_light.png"
         width = 390

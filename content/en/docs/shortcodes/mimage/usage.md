@@ -6,6 +6,7 @@ title: mimage usage
 date: 2023-07-04
 Description: Description on how to use the mimage shortcode
 layout: docs
+showComments: false
 _build:
   list: never
 ---
