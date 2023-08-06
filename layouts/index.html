@@ -5,7 +5,7 @@
 {{- define "main" -}}
     {{- $page := . -}}
 
-    {{- range $index, $section := site.Params.home.sections -}}
+    {{- range $index, $section := or site.Params.home.sections site.Sections -}}
         {{- $sectionPage := site.GetPage "section" $section -}}
         {{- $sectionURL := $sectionPage.RelPermalink -}}
         {{- $title := $sectionPage.Title -}}
