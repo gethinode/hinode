@@ -75,8 +75,9 @@ In `config/_default/params.toml` change `schema`, `opengraph` and `comments` to 
     section = "blog"
     [author]
         name = "Joost Mans"
-        twitter = "https://twitter.com/therealmyrthos"
+        x = "https://x.com/therealmyrthos"
         github = "https://github.com/myrthos"
+        mastodon = "https://techhub.social/@Myrthos"
     [logo]
         url = "img/Logo_Rotated_light.png"
         width = 390
@@ -371,9 +372,9 @@ Override `[[social]]` with:
   weight = 20
 
 [[social]]
-  name = "Twitter"
-  pre = "fab fa-square-twitter"
-  url = "https://twitter.com/therealmyrthos"
+  name = "X"
+  pre = "fab fa-square-x-twitter"
+  url = "https://x.com/therealmyrthos"
   weight = 30
 
 [[social]]
@@ -474,9 +475,9 @@ In `config/_default/params.toml` in the `[[sharing,providers]]` sections, for ea
     weight = 10
 
 [[sharing.providers]]
-    name = "Twitter"
-    url = "https://twitter.com/home?status={url}"
-    icon = "fab twitter"
+    name = "X"
+    url = "https://x.com/home?status={url}"
+    icon = "fab x-twitter"
     weight = 20
 
 [[sharing.providers]]
@@ -490,6 +491,13 @@ In `config/_default/params.toml` in the `[[sharing,providers]]` sections, for ea
     url = "whatsapp://send?text={title}%20{url}"
     icon = "fab whatsapp"
     weight = 40
+
+[[sharing.providers]]
+    name = "Clipboard"
+    url = "{url}"
+    icon = "fas link"
+    weight = 50
+    clipboard = true    
 ```
 
 To enable showing the tooltip change `layouts/partials/assets/sharing.html`.  

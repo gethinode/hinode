@@ -36,9 +36,9 @@
   weight = 20
 
 [[social]]
-  name = "Twitter"
-  pre = "fab fa-square-twitter"
-  url = "https://twitter.com/therealmyrthos"
+  name = "X"
+  pre = "fab fa-square-x-twitter"
+  url = "https://x.com/therealmyrthos"
   weight = 30
 
 [[social]]
