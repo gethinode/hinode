@@ -13,7 +13,8 @@
         {{- $icon := $sectionPage.Params.Icon -}}
         {{- $content := $sectionPage.Content -}}
 
-        {{- $moreTitle := (T (printf "more%s" (strings.FirstUpper $section))) -}}
+        {{- $sectionTitle := strings.FirstUpper $section -}}
+        {{- $moreTitle := or (T (printf "more%s" $sectionTitle)) (printf (T "more" $sectionTitle)) -}}
 
         {{- partial "assets/section-list.html" (dict 
             "page" $page 
