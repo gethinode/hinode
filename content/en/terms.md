@@ -16,7 +16,7 @@ photoSource: <a href="https://unsplash.com/photos/TtJ0CLjLi6w" target="_blank">U
 
 We appreciate your opinion when you add your comment, but since your opinion isn't the only opinion, there are rules in place. These rules are based on the law we operate under and our ideas on what we want to allow or disallow.
 
-The basis of these rules is that we want to have a discussion that allows everyone to participate and in which people are not excluded. Your contribution to a discussion should be meaningful and bring the discussion forward and not scare people away.
+The basis of these rules is that we want to have a discussion that allows everyone to participate and in which people are not excluded. Your contribution to a discussion should be meaningful and on-topic.
 
 ## Applicable laws
 
