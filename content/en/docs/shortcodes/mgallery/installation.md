@@ -6,6 +6,7 @@ title: mgallery shortcode installation
 date: 2023-07-04
 Description: Information on how to install the mgallery shortcode
 layout: docs
+showComments: false
 _build:
   list: never
 ---

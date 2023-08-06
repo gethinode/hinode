@@ -6,6 +6,7 @@ title: mgallery demo
 date: 2023-07-04
 Description: A demonstration of some usages of the mgallery shortcode
 layout: docs
+showComments: false
 modules: ["mgallery"]
 _build:
   list: never

@@ -6,6 +6,7 @@ title: Page 2
 date: 2023-07-04
 Description: Just a second page
 layout: docs
+showComments: false
 _build:
   list: never
 ---

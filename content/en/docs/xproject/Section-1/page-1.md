@@ -6,6 +6,7 @@ title: Page 1
 date: 2023-07-04
 Description: Just a first page
 layout: docs
+showComments: false
 _build:
   list: never
 ---

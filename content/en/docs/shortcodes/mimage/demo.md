@@ -6,6 +6,7 @@ title: mimage demo
 date: 2023-07-04
 Description: A demonstration of some usages of the mimage shortcode
 layout: docs
+showComments: false
 _build:
   list: never
 ---

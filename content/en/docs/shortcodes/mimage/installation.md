@@ -6,6 +6,7 @@ title: mimage shortcode installation
 date: 2023-07-04
 Description: Information on how to install the mimage shortcode
 layout: docs
+showComments: false
 _build:
   list: never
 ---
