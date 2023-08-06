@@ -1,4 +1,4 @@
-module github.com/gethinode/hinode
+module github.com/markdumay/minimal
 
 go 1.19
 
