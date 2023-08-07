@@ -1,3 +1,4 @@
+<!-- CSpell:ignore Hinode codebases -->
 # About this site
 
 This the repository for the [Myrthos site](https://myrthos.net). It is a site that is still in development to outgrow its infancy.
@@ -16,11 +17,11 @@ It is a [Hugo][hugo] site that uses the [Hinode][repository] theme with some mod
     </a>
     <a href="https://stats.uptimerobot.com/8yg4PiOXlQ" alt="UptimeRobot Status">
         <img src="https://img.shields.io/uptimerobot/status/m794949079-97ae91d35b05b4d81325dada">
-    <!-- </a>
-    <a href="https://github.com/myrthos/myrthos-site/releases" alt="Last commit">
+    </a>
+    <!-- <a href="https://github.com/myrthos/myrthos-site/releases" alt="Last release">
         <img src="https://img.shields.io/github/v/release/myrthos/myrthos-site">
     </a>
-    <a href="https://github.com/myrthos/myrthos-site/releases" alt="Last commit">
+    <a href="https://github.com/myrthos/myrthos-site/releases" alt="Release date">
         <img src="https://img.shields.io/github/release-date/myrthos/myrthos-site">
     </a> -->
     <a href="https://github.com/myrthos/myrthos-site/commits/main" alt="Last commit">
@@ -37,14 +38,14 @@ It is a [Hugo][hugo] site that uses the [Hinode][repository] theme with some mod
     </a>
 </p>
 
-Although based on a Hugo theme, this repository is not developed to be used as a Hugo theme. It is a modified version of the Hinode theme and developed as a specific implementation, with all the deviations and additions described in a blog post. If you are looking for a theme, you are much better of using Hinode as that is supported.  
+Although based on a Hugo theme, this repository is not developed to be used as a Hugo theme. It is a modified version of the Hinode theme and developed as a specific implementation, with all the deviations and additions described in a blog post. If you are looking for a theme, you are much better of using Hinode, as that is supported.  
 Detailed information about Hinode is available on the [official website][website].
 
 The Myrthos site scores an A+ on [Mozilla Observatory][observatory], an A+ on [SSL Labs][ssllabs] and 99% on [pageSpeed][pagespeed] (98% for mobile).
 
 ## Prerequisites
 
-Hinode requires [Git][git_download], [Node.js][nodejs] and [npm][npm], and so does this repository. It also requires [bootstrap][bootstrap] (which is installed by npm).
+Hinode requires [Git][git_download], [Node.js][nodejs] and [npm][npm], and so does this repository. It also requires [bootstrap][bootstrap] (which is installed automatically).
 
 ## License
 
