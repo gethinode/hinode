@@ -40,17 +40,16 @@ It is a [Hugo][hugo] site that uses the [Hinode][repository] theme with some mod
 Although based on a Hugo theme, this repository is not developed to be used as a Hugo theme. It is a modified version of the Hinode theme and developed as a specific implementation, with all the deviations and additions described in a blog post. If you are looking for a theme, you are much better of using Hinode as that is supported.  
 Detailed information about Hinode is available on the [official website][website].
 
-The Myrthos site scores an A+ on [Mozilla Observatory](observatory), an A+ on [SSL Labs](ssllabs) and 99% on [pageSpeed](pagespeed) (98% for mobile).
+The Myrthos site scores an A+ on [Mozilla Observatory][observatory], an A+ on [SSL Labs][ssllabs] and 99% on [pageSpeed][pagespeed] (98% for mobile).
 
 ## Prerequisites
 
-Hinode requires [Git](git_download), [Node.js](nodejs) and [npm](npm), and so does this repository. It also requires [bootstrap](bootstrap) (which is installed by npm).
+Hinode requires [Git][git_download], [Node.js][nodejs] and [npm][npm], and so does this repository. It also requires [bootstrap][bootstrap] (which is installed by npm).
 
 ## License
 
 The `myrthos` and `Hinode` codebases are both released under the [MIT license][license]. The blogs, documentation, gallery and projects codebases are licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
 
-<!-- MARKDOWN PUBLIC LINKS -->
 [bootstrap]: https://getbootstrap.com
 [cc-by-nc-4.0]: https://creativecommons.org/licenses/by-nc/4.0/
 [git_download]: https://git-scm.com
@@ -60,8 +59,6 @@ The `myrthos` and `Hinode` codebases are both released under the [MIT license][l
 [observatory]: https://observatory.mozilla.org/analyze/myrthos.net
 [pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fmyrthos.net%2F
 [ssllabs]: https://www.ssllabs.com/ssltest/analyze.html?d=myrthos.net
-
-<!-- MARKDOWN MAINTAINED LINKS -->
 [repository]: https://github.com/gethinode/hinode.git
 [website]: https://gethinode.com
 [license]: https://github.com/myrthos/myrthos-site/blob/main/LICENSE
