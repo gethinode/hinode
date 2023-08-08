@@ -52,7 +52,7 @@
 {{ end -}}
 
     {{ if .IsHome -}}
-        <title>{{ .Site.Title }} {{ .Site.Params.main.separator }} {{ .Site.Params.head.tagline }}</title>
+        <title>{{ .Site.Title }} {{ if .Site.Params.head.tagline }} {{ .Site.Params.main.separator }} {{ .Site.Params.head.tagline }}{{ end }}</title>
     {{ else -}}
         <title>{{ .Site.Title }} {{ .Site.Params.main.separator }} {{ .Title }}</title>
     {{ end -}}
