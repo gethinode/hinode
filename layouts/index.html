@@ -9,7 +9,7 @@
         {{- $sectionPage := site.GetPage "section" $section -}}
         {{- $sectionURL := $sectionPage.RelPermalink -}}
         {{- $title := $sectionPage.Title -}}
-        {{- $thumbnail := $sectionPage.Params.Thumbnail -}}
+        {{- $thumbnail := (or (and (reflect.IsMap $sectionPage.Params.Thumbnail) $sectionPage.Params.Thumbnail.url) $sectionPage.Params.Thumbnail) -}}
         {{- $icon := $sectionPage.Params.Icon -}}
         {{- $content := $sectionPage.Content -}}
 

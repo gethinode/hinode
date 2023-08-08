@@ -51,7 +51,7 @@
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
     {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
     {{- if not $content }}{{ $content = .Content }}{{ end -}}
-    {{- if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
+    {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
 {{- end -}}
 
 {{- $class := .class -}}

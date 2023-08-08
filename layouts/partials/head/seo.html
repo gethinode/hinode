@@ -17,7 +17,8 @@
     {{ end -}}
 {{ end -}}
 
-{{ with .Params.thumbnail -}}
+{{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
+{{ with $thumbnail -}}
     {{ $img := partial "utilities/GetImage.html" (dict "url" .) -}}
     {{ with $img -}}
         {{ $dim := "1280x640" -}}

@@ -6,7 +6,8 @@
             <p>{{ .Content }}<p>
         </div>
         <div class="col text-sm-start text-center col-sm-6 col-lg-4 order-2 order-sm-3">
-            {{- $thumbnail := or .Params.thumbnail .Site.Params.home.featurePhoto -}}
+            {{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
+            {{- $thumbnail = or $thumbnail .Site.Params.home.featurePhoto -}}
             {{ if .Site.Params.home.featurePhoto }}
                 {{ warnf "DEPRECATED: parameter `Params.home.featurePhoto` has been deprecated in release v0.18"}}
             {{ end }}

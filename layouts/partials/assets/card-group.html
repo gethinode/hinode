@@ -110,11 +110,12 @@
             {{- if $element.RelPermalink -}}
                 {{- $params = merge $params (dict "path" $element.File.Path) -}}
             {{- else -}}
+                {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
                 {{- $params = merge $params (dict
                     "title" $element.Title
                     "href" $element.RelPermalink
                     "description" (or $element.Description $element.Summary)
-                    "thumbnail" $element.Params.thumbnail
+                    "thumbnail" $thumbnail
                     "icon" $element.Params.icon
                 ) -}}
             {{- end -}}
