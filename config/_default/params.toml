@@ -47,6 +47,9 @@
     url = "/docs/xproject"
 # toml-docs-end docs
 
+[multipage]
+    showPaginator = false        # If false, shows previous and next arrows
+
 # toml-docs-start home
 [home]
     sections = ["blog", "projects", "gallery"]
@@ -131,7 +134,7 @@
         title = "Blog"
         sort = "date"
         reverse = true
-        nested = true
+        nested = false
         cols = 3
         color = ""
         padding = "0"
@@ -146,8 +149,8 @@
         layout = "card"
         sort = "title"
         reverse = false
-        nested = true
-        cols = 1
+        nested = false
+        cols = 2
         background = "body-tertiary"
         color = "body"
         padding = "3"
@@ -157,12 +160,13 @@
         style = "border-1 card-emphasize"
         homepage = 3
         separator = false
+        multipage = true        # Used for multi-page sections
     [sections.gallery]
         title = "Gallery"
         layout = "card"
         sort = "title"
-        reverse = false 
-        nested = true
+        reverse = true 
+        nested = false
         background = ""
         color = ""
         style = "border-0 card-zoom"

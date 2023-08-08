@@ -32,6 +32,7 @@
 {{- $type := "pills" -}}
 {{- $vertical := "false" -}}
 {{- $width := 100 -}}
+{{- $multipage := false -}}
 
 {{- with (index site.Params.sections $section) -}}
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
@@ -54,6 +55,7 @@
     {{- with index . "type" }}{{ $type = . }}{{ end -}}
     {{- with index . "vertical" }}{{ $vertical = . }}{{ end -}}
     {{- with index . "width" }}{{ $width = . }}{{ end -}}
+    {{- if index . "multipage" }}{{ $multipage = true }}{{ $nested = false }}{{ end -}}
 {{- end -}}
 {{ if ne (printf "%T" $nested) "bool" }}
     {{ errorf "partial [assets/section-list.html] - Invalid value for param 'nested'"}}
@@ -66,7 +68,11 @@
     {{ $sectionPage := site.GetPage "section" $section }}
     {{ $list = $sectionPage.RegularPages }}
 {{ else }}
-    {{ $list = $page.RegularPages }}
+    {{ if $multipage }}
+        {{ $list = $page.Pages }}
+    {{ else }}
+        {{ $list = $page.RegularPages }}
+    {{ end }}
 {{ end }}
 
 {{ $max := (len $list) -}}

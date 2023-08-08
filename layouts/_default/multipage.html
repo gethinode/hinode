@@ -1,0 +1,256 @@
+{{- define "partials/multi-header.html" -}}
+    {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
+    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
+    {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+    <small class="text-body-secondary text-uppercase">
+        {{ $datestr | i18n "postedOnDate" -}}
+        {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }} 
+        &bull;
+        {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} 
+        &bull;
+        {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
+    </small>
+
+    {{- if gt (len (.GetTerms "tags")) 0 -}}
+        <div class="mt-3">
+            <div class="d-none-dark">
+                <div class="hstack gap-3">
+                    {{ range (.GetTerms "tags") -}}
+                        {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
+                        {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "light" "size" "sm") }}
+                    {{ end -}}
+                </div>
+            </div>
+          
+            <div class="d-none-light">
+                <div class="hstack gap-3">
+                    {{ range (.GetTerms "tags") -}}
+                        {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
+                        {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "secondary" "size" "sm" "outline" "true") }}
+                    {{ end -}}
+                </div>
+            </div>
+        </div>
+    {{- end -}}
+    {{ partial "assets/sharing.html" . }}
+    <p class="lead mb-5 mt-3">{{ .Description }}</p>
+{{ end -}}
+
+{{ define "partials/multi-body.html" -}}
+    {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+        <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
+    {{- end -}}
+
+    {{ if .Params.thumbnail -}}
+        {{- $credits := "" -}}
+        {{- if .Params.photoCredits }}
+            {{ if .Params.PhotoSource }}
+                {{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s %s %s" .Params.photoCredits (T "photoOn") .Params.PhotoSource }}
+            {{ end }}
+        {{ end -}}
+        {{- partial "assets/mimage.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
+    {{ end -}}
+    {{ .Content }}
+{{ end -}}
+
+
+{{ define "partials/multi-pagination.html" -}}
+    {{- $page := . }}
+
+    {{- if not .Site.Params.multipage.showPaginator -}}
+        <!-- Show left/right page navigators -->
+        <div class="row row-cols-2 mt-5 mb-3">
+            <div class="col">
+                <!-- Check if there is a previous page -->
+                {{ with $page.Paginator.HasPrev -}}
+                    <!-- get the pager -->
+                    {{ $prev := $page.Paginator.Prev -}}
+                    <!-- Get the page -->
+                    {{ range $prev.Pages }}
+                        <!-- Show the icon and page title with link -->
+                        <a class="next" href="{{ .RelPermalink }}">
+                            {{- partial "assets/icon.html" (dict "icon" "fas arrow-left") }}&nbsp;{{ .Title }}
+                        </a>
+                    {{- end -}}
+                {{ end -}}
+            </div>
+            <div class="col text-end">
+                <!-- Check if there is a next page -->
+                {{ with $page.Paginator.HasNext -}}
+                    <!-- get the pager -->
+                    {{ $next := $page.Paginator.Next -}}
+                    <!-- Get the page -->
+                    {{ range $next.Pages }}
+                        <!-- Show the icon and page title with link -->
+                        <a class="previous" href="{{ .RelPermalink }}">
+                            {{ .Title }}&nbsp;{{- partial "assets/icon.html" (dict "icon" "fas arrow-right") }}
+                        </a>
+                    {{- end -}}
+                {{ end -}}
+            </div>
+        </div>
+    {{- else -}}
+        <!-- Show paginator -->
+        <ul class="pagination pagination-default">
+            {{- with $page.Paginator }}
+                {{- $currentPageNumber := .PageNumber }}
+
+                {{- with .First }}
+                    {{- if ne $currentPageNumber .PageNumber }}
+                        <li class="page-item">
+                            <a href="{{ .URL }}" aria-label="First" class="page-link" role="button">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                    {{- else }}
+                        <li class="page-item disabled">
+                            <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+
+                {{- with .Prev }}
+                    <li class="page-item">
+                        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {{- else }}
+                    <li class="page-item disabled">
+                        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {{- end }}
+
+                {{- $slots := 5 }}
+                {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $slots 2))) }}
+                {{- $end := math.Min .TotalPages (sub (add $start $slots) 1) }}
+                {{- if lt (add (sub $end $start) 1) $slots }}
+                    {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
+                {{- end }}
+
+                {{- range $k := seq $start $end }}
+                    {{- if eq $.Paginator.PageNumber $k }}
+                        <li class="page-item active">
+                            <a aria-current="page" aria-label="Page {{ $k }}" class="page-link" role="button">
+                                {{ $k }}
+                            </a>
+                        </li>
+                    {{- else }}
+                        <li class="page-item">
+                            <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" aria-label="Page {{ $k }}" class="page-link" role="button">
+                                {{ $k }}
+                            </a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+
+                {{- with .Next }}
+                    <li class="page-item">
+                        <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">
+                            &raquo;</span>
+                        </a>
+                    </li>
+                {{- else }}
+                    <li class="page-item disabled">
+                        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">
+                            &raquo;</span>
+                        </a>
+                    </li>
+                {{- end }}
+
+                {{- with .Last }}
+                    {{- if ne $currentPageNumber .PageNumber }}
+                        <li class="page-item">
+                            <a href="{{ .URL }}" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">
+                                &raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    {{- else }}
+                        <li class="page-item disabled">
+                            <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+            {{- end }}
+        </ul>
+    {{- end -}}
+{{ end }}
+
+{{ define "partials/multi-footer.html" -}}
+    {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
+        <br/><hr>
+        {{ partial "assets/comments.html" . }}
+    {{ end -}}
+{{ end -}}
+
+
+{{ define "main" }}
+    {{ $paginator := .Paginate (.RegularPages.ByParam "pagenumber") 1 }}
+  
+    {{ $totalPages := $paginator.TotalPages }}
+    {{ $page := . }}
+
+    {{ range $paginator.Pages }}
+        {{- $menu := .Scratch.Get "sidebar" -}}
+        {{- $version := .Scratch.Get "version" -}}
+        {{- $sidebar := .Site.Params.navigation.sidebar | default true -}}
+        {{ if and $menu $sidebar -}}
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-inledby="offcanvas-label">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper .Section }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    {{ partial "assets/sidebar" (dict "page" . "menu" $menu "version" $version) }}
+                </div>
+            </div>
+
+            <div class="container-xxl px-3 px-xxl-0">
+                <div class="row row-cols-md-2 row-cols-lg-3">
+                    <div class="col col-md-3 col-lg-2 d-none pt-5 d-md-block sidebar-overflow sticky-top">
+                        {{ partial "assets/sidebar" (dict "page" . "menu" $menu "version" $version) }}
+                    </div>
+                    <div class="col col-md-9 col-lg-8 mb-5 p-4">
+                        {{ partial "partials/multi-header.html" . }}
+                        {{ partial "partials/multi-body.html" . }}
+                        {{ if gt $totalPages 1 }}
+                            {{ template "partials/multi-pagination.html" $page }}
+                        {{ end }}
+                        {{ partial "partials/multi-footer.html" . }}
+                    </div>
+                    <div class="col col-lg-2 d-none d-lg-block pt-5">
+                        {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+                            {{ partial "assets/toc.html" . -}}
+                        {{ end -}}
+                    </div>
+                </div>
+            </div>
+        {{ else }}
+            <div class="container-xxl px-3 px-xxl-0">
+                <div class="row row-cols-1 row-cols-sm-3">
+                    <div class="col col-md-2 d-none d-md-block"></div>
+                    <div class="col col-sm-12 col-md-8">
+                        {{ partial "partials/multi-header.html" . }}
+                        {{ partial "partials/multi-body.html" . }}
+                        {{ if gt $totalPages 1 }}
+                            {{ template "partials/multi-pagination.html" $page }}
+                        {{ end }}                    
+                        {{ partial "partials/multi-footer.html" . }}
+                    </div>
+                    <div class="col col-md-2 d-none d-md-block">
+                        {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+                            {{ partial "assets/toc.html" . -}}
+                        {{ end -}}
+                    </div>
+                </div>    
+            </div>
+        {{ end }}
+    {{ end }}
+{{ end }}
