@@ -114,7 +114,7 @@
                 {{- $params = merge $params (dict
                     "title" $element.Title
                     "href" $element.RelPermalink
-                    "description" (or $element.Description $element.Summary)
+                    "description" (partial "utilities/GetDescription.html" $element)
                     "thumbnail" $thumbnail
                     "icon" $element.Params.icon
                 ) -}}

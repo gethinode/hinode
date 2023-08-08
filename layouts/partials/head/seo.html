@@ -7,15 +7,8 @@
     {{ $.Scratch.Set "title" .Site.Title -}}
 {{ end -}}
 
-{{ with .Description -}}
-    {{ $.Scratch.Set "description" . -}}
-{{ else -}}
-    {{ with .Summary | plainify -}}
-        {{ $.Scratch.Set "description" . -}}
-    {{ else -}}
-        {{ $.Scratch.Set "description" .Site.Params.main.description -}}
-    {{ end -}}
-{{ end -}}
+{{ $description := or (partial "utilities/GetDescription.html" .) .Site.Params.main.description }}
+{{ $.Scratch.Set "description" $description -}}
 
 {{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
 {{ with $thumbnail -}}
