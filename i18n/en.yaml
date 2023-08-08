@@ -120,6 +120,9 @@
 - id: home
   translation: "Home"
 
+- id: poweredBy
+  translation: "Powered by {{ . }}."
+
 # Staticman
 - id: noComment
   translation: "No comment"

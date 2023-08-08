@@ -5,6 +5,7 @@
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
+    endorse = true
     [main.externalLinks]
         cue = false
         tab = false

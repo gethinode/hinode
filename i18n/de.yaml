@@ -91,6 +91,9 @@
 - id: home
   translation: "Startseite"
 
+- id: poweredBy
+  translation: "Ermöglicht durch {{ . }}."
+
 # Staticman
 - id: noComment
   translation: "Kein Kommentar"
