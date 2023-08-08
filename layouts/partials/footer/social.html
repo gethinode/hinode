@@ -1,10 +1,19 @@
+{{ if .Site.Params.footer.socialTitle }}
+    {{ warnf "DEPRECATED: parameter `Params.home.socialTitle` has been deprecated in release v0.18"}}
+{{ end }}
+{{ if .Site.Params.footer.socialCaption }}
+    {{ warnf "DEPRECATED: parameter `Params.home.socialCaption` has been deprecated in release v0.18"}}
+{{ end }}
+
 {{- $tab := site.Params.main.externalLinks.tab -}}
 <div class="container-fluid">
     <div class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-center">
         <div class="col col-md-2 d-none d-md-block"></div>
         <div class="col col-sm-6 col-md-4">
-            <div class="fs-3 fw-bold">{{ .Site.Params.footer.socialTitle }}</div>
-            <p>{{ .Site.Params.footer.socialCaption }}</p>
+            {{ if gt .Site.Menus.social 0 }}
+                <div class="fs-3 fw-bold">{{ or .Site.Params.footer.socialTitle .Site.Params.social.title }}</div>
+                <p>{{ or .Site.Params.footer.socialCaption .Site.Params.social.caption }}</p>
+            {{ end }}
         </div>
         <div class="col text-sm-start text-center col-sm-6 col-md-4">
             {{ range .Site.Menus.social -}}
