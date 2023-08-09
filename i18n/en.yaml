@@ -163,3 +163,11 @@
 # Mastodon
 - id: mastodon
   translation: "Enter your Mastodon instance where the page should be shared"
+
+# Multi Page
+- id: multipage_other
+  translation: "Other pages in this"
+- id: multipage_project
+  translation: "project"
+- id: multipage_page
+  translation: "Page"

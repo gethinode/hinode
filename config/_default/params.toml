@@ -1,7 +1,7 @@
 # toml-docs-start main
 [main]
     separator = "-"
-    description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+    description = "Myrthos is a site creating blogs and projects about electronics, software development and photography."
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
@@ -31,8 +31,8 @@
 # toml-docs-start docs
 [docs]
     contentPath ="/docs/"
-    #github = "https://github.com/gethinode/hinode"
-    release = "https://github.com/gethinode/hinode/releases/tag/"
+    github = "https://github.com/myrthos/myrthos-site"
+    release = "https://github.com/myrthos/myrthos-site/releases/tag/"
     checkVersion = false
     hideReleases = true    # Hide the releases drop down when true
     hideGitInfo = true     # Hide git information at the bottom of a docs page when true
@@ -48,7 +48,7 @@
 # toml-docs-end docs
 
 [multipage]
-    showPaginator = false        # If false, shows previous and next arrows
+    paginator = "list"       # The paginator to show, valid options are: "arrows", "list", "box", "dropdown"
 
 # toml-docs-start home
 [home]

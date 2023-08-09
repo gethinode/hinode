@@ -1,5 +1,5 @@
 ---
-title: Page 2
+title: Page Title 2
 pagenumber:  2
 ---
 

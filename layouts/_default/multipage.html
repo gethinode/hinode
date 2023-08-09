@@ -1,3 +1,11 @@
+{{/* cSpell: ignore multipage lastmodstr datestr mimage pagenumber inledby */}}
+
+{{/* Originally from the partial _default/single.html */}}
+{{/* Modifications: Separated footer in a pagination and comments part */}}
+{{/*                Added option (in params.toml) to show pagination in different ways */}}
+{{/*                Removed .Layout checks, as there is only the multipage layout */}}
+
+
 {{- define "partials/multi-header.html" -}}
     {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
     {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
@@ -58,7 +66,14 @@
 {{ define "partials/multi-pagination.html" -}}
     {{- $page := . }}
 
-    {{- if not .Site.Params.multipage.showPaginator -}}
+    {{- $paginatorMode := "arrows" }}
+    {{- with .Site.Params.multipage.paginator -}}{{- $paginatorMode = . -}}{{- end -}}
+    {{- $validModes := slice "arrows" "list" "box" "dropdown" -}}
+    {{- if not (in $validModes $paginatorMode) -}}
+        {{- $paginatorMode = "arrows" }}
+    {{- end -}}        
+
+    {{- if eq $paginatorMode "arrows" -}}
         <!-- Show left/right page navigators -->
         <div class="row row-cols-2 mt-5 mb-3">
             <div class="col">
@@ -90,100 +105,32 @@
                 {{ end -}}
             </div>
         </div>
-    {{- else -}}
+    {{- else if eq $paginatorMode "box" -}}
         <!-- Show paginator -->
-        <ul class="pagination pagination-default">
-            {{- with $page.Paginator }}
-                {{- $currentPageNumber := .PageNumber }}
-
-                {{- with .First }}
-                    {{- if ne $currentPageNumber .PageNumber }}
-                        <li class="page-item">
-                            <a href="{{ .URL }}" aria-label="First" class="page-link" role="button">
-                                <span aria-hidden="true">&laquo;&laquo;</span>
-                            </a>
-                        </li>
-                    {{- else }}
-                        <li class="page-item disabled">
-                            <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1">
-                                <span aria-hidden="true">&laquo;&laquo;</span>
-                            </a>
-                        </li>
-                    {{- end }}
-                {{- end }}
-
-                {{- with .Prev }}
-                    <li class="page-item">
-                        <a href="{{ .URL }}" aria-label="Previous" class="page-link" role="button">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                {{- else }}
-                    <li class="page-item disabled">
-                        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                {{- end }}
-
-                {{- $slots := 5 }}
-                {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $slots 2))) }}
-                {{- $end := math.Min .TotalPages (sub (add $start $slots) 1) }}
-                {{- if lt (add (sub $end $start) 1) $slots }}
-                    {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
-                {{- end }}
-
-                {{- range $k := seq $start $end }}
-                    {{- if eq $.Paginator.PageNumber $k }}
-                        <li class="page-item active">
-                            <a aria-current="page" aria-label="Page {{ $k }}" class="page-link" role="button">
-                                {{ $k }}
-                            </a>
-                        </li>
-                    {{- else }}
-                        <li class="page-item">
-                            <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" aria-label="Page {{ $k }}" class="page-link" role="button">
-                                {{ $k }}
-                            </a>
-                        </li>
-                    {{- end }}
-                {{- end }}
-
-                {{- with .Next }}
-                    <li class="page-item">
-                        <a href="{{ .URL }}" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">
-                            &raquo;</span>
-                        </a>
-                    </li>
-                {{- else }}
-                    <li class="page-item disabled">
-                        <a aria-disabled="true" aria-label="Next" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">
-                            &raquo;</span>
-                        </a>
-                    </li>
-                {{- end }}
-
-                {{- with .Last }}
-                    {{- if ne $currentPageNumber .PageNumber }}
-                        <li class="page-item">
-                            <a href="{{ .URL }}" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">
-                                &raquo;&raquo;</span>
-                            </a>
-                        </li>
-                    {{- else }}
-                        <li class="page-item disabled">
-                            <a aria-disabled="true" aria-label="Last" class="page-link" role="button" tabindex="-1">
-                                <span aria-hidden="true">&raquo;&raquo;</span>
-                            </a>
-                        </li>
-                    {{- end }}
-                {{- end }}
-            {{- end }}
+        {{ partial "assets/pagination.html" . }}
+    {{- else if eq $paginatorMode "list" -}}
+        {{- $currentPageNumber := .Paginator.PageNumber }}
+        <!-- ToDo: Change last part to actual section -->
+        <h5>{{- (i18n "multipage_other") }}&nbsp;{{ (i18n "multipage_project") -}}</h5>
+        <ul>
+        {{- range $k := seq 1 .Paginator.TotalPages -}}
+            {{- $onPage := false -}}
+            {{- if not (eq $currentPageNumber $k)}}
+            <li>
+                {{- (i18n "multipage_page") }}&nbsp;{{ $k -}}:&nbsp;
+                <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" class="">
+                    {{ range (index $.Paginator.Pagers (sub $k 1)).Pages }}{{ .Title }}{{ end -}}
+                </a>
+            </li>
+            {{- end -}}
+        {{- end -}}
         </ul>
     {{- end -}}
 {{ end }}
 
+
 {{ define "partials/multi-footer.html" -}}
+    <!-- Show comments when enabled -->
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
         <br/><hr>
         {{ partial "assets/comments.html" . }}
@@ -192,10 +139,13 @@
 
 
 {{ define "main" }}
-    {{ $paginator := .Paginate (.RegularPages.ByParam "pagenumber") 1 }}
-  
-    {{ $totalPages := $paginator.TotalPages }}
     {{ $page := . }}
+
+    {{/* Create paginator from the regular pages */}}
+    {{ $paginator := .Paginate (.RegularPages.ByParam "pagenumber") 1 }}
+
+    {{/* Calculate the number of pages in the paginator */}}
+    {{ $totalPages := $paginator.TotalPages }}
 
     {{ range $paginator.Pages }}
         {{- $menu := .Scratch.Get "sidebar" -}}
