@@ -1,4 +1,4 @@
-module github.com/markdumay/minimal-test
+module github.com/gethinode/hinode-test
 
 go 1.19
 

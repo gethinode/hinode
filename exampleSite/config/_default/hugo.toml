@@ -73,6 +73,6 @@ home = ["HTML", "RSS", "REDIR"]
     name = "xml"
 
 [module]
-  replacements = 'github.com/markdumay/minimal -> ../..'
+  replacements = 'github.com/gethinode/hinode -> ../..'
   [[module.imports]]
-    path = "github.com/markdumay/minimal"
+    path = "github.com/gethinode/hinode"
