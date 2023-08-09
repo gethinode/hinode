@@ -111,6 +111,9 @@
 - id: home
   translation: "Home"
 
+- id: poweredBy
+  translation: "Mede mogelijk gemaakt door {{ . }}."
+
 # Staticman
 - id: noComment
   translation: "Geen commentaar"

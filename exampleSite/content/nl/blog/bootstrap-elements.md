@@ -5,9 +5,12 @@ slug: bootstrap-elementen
 date: 2023-08-05
 description: Gebruik shortcodes om eenvoudig Bootstrap elementen toe te voegen.
 tags: ["bootstrap", "shortcode"]
-thumbnail: img/boots.jpg
-photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
-photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
+thumbnail:
+  url: img/boots.jpg
+  author: Nathan Dumlao
+  authorURL: https://unsplash.com/@nate_dumlao
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/QLPWQvHvmII
 ---
 
 Hinode beschikt over meerdere shortcodes om eenvoudig Bootstrap elementen toe te voegen aan je website. De [officiële documentatie]({{< param "links.hinode_docs" >}}) bevat meer details.

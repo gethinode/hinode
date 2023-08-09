@@ -1,0 +1,35 @@
+defaultMarkdownHandler = "goldmark"
+
+[highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineAnchors = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = false
+    noClasses = false
+    tabWidth = 2
+    ## Update the 'create:syntax' command in package.json to modify the style
+    ## The first two lines have been modified to remove the background color
+    # style = "monokailight" 
+
+[goldmark]
+    [goldmark.extensions]
+        definitionList = true
+        footnote = true
+        linkify = true
+        strikethrough = true
+        table = true
+        taskList = true
+        typographer = true
+    [goldmark.parser]
+        autoHeadingID = true
+        autoHeadingIDType = 'github'
+    [goldmark.parser.attribute]
+        block = true
+    [goldmark.renderer]
+        hardWraps = false
+        unsafe = true
+        xhtml = false

@@ -5,9 +5,12 @@ slug: componenten
 date: 2023-07-21
 description: Gebruik shortcodes om voorgedefiniëerde componenten toe te voegen die gebruikmaken van externe libraries.
 tags: ["bootstrap", "shortcode"]
-thumbnail: img/puzzle.jpg
-photoCredits: <a href="https://unsplash.com/@ryoji__iwata">Ryoji Iwata</a>
-photoSource: <a href="https://unsplash.com/photos/5siQcvSxCP8">Unsplash</a>
+thumbnail:
+  url: img/puzzle.jpg
+  author: Ryoji Iwata
+  authorURL: https://unsplash.com/@ryoji__iwata
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/5siQcvSxCP8
 modules: ["katex", "leaflet"]
 ---
 
@@ -35,3 +38,5 @@ De volgende shortcode toont een interactieve kaart van Amsterdam.
 {{</* map lat=52.377 long=4.90 zoom=13 popup="Amsterdam CS" popup-lat=52.378062 popup-long=4.900562 */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
+
+[bar]({{< param "links" >}})

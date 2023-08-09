@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.17.4",
+  "version": "0.18.0-alpha",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -18,9 +18,11 @@
   },
   "scripts": {
     "start": "hugo server --bind=0.0.0.0 --disableFastRender",
+    "start:example": "hugo server --bind=0.0.0.0 --disableFastRender -s exampleSite",
     "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
     "prebuild": "npm run clean:public && npm run -s mod:install",
     "build": "hugo --gc --minify",
+    "build:example": "hugo --gc --minify -s exampleSite",
     "build:debug": "hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
     "clean:public": "rimraf public",
@@ -28,8 +30,8 @@
     "lint": "npm run -s lint:scripts && npm run -s lint:styles && npm run -s lint:markdown",
     "lint:scripts": "eslint assets/js",
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\"",
-    "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\"",
-    "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\"",
+    "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\" \"exampleSite/**/*.md\"",
+    "lint:markdown-fix": "markdownlint-cli2-fix \"*.md\" \"content/**/*.md\" \"exampleSite/**/*.md\"",
     "mod:clean": "hugo mod clean",
     "mod:install": "hugo mod get ./... && npm run -s mod:vendor && npm run -s mod:tidy",
     "mod:update": "hugo mod get -u ./... && npm run -s mod:vendor && npm run -s mod:tidy",

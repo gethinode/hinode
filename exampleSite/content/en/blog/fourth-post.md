@@ -4,9 +4,12 @@ title: Fourth post
 date: 2023-01-01
 description: This is my fourth blog post.
 tags: ["blog"]
-thumbnail: img/flowers.jpg # https://picsum.photos/id/106/2592/1728
-photoCredits: <a href="https://unsplash.com/@flutterhappy">Arvee Marie</a>
-photoSource: <a href="https://unsplash.com/photos/YnfGtpt2gf4">Unsplash</a>
+thumbnail:
+  url: img/flowers.jpg
+  author: Arvee Marie
+  authorURL: https://unsplash.com/@flutterhappy
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/YnfGtpt2gf4
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus libero in felis accumsan, vitae imperdiet metus vehicula. Quisque nec dignissim purus. In id dui porta sapien posuere viverra nec vel nisi. Sed varius tincidunt lectus, quis sagittis felis interdum id. Proin purus odio, ultrices auctor libero convallis, volutpat gravida turpis. Ut commodo metus orci, quis sagittis lectus rhoncus non. Nulla et lectus tortor. Suspendisse quam felis, molestie non odio quis, consequat venenatis orci. Etiam sed turpis sit amet elit scelerisque imperdiet. Sed suscipit felis non nibh suscipit egestas. Nulla sodales libero non rhoncus consequat. Nunc in elit at est cursus congue ut ac velit. Cras luctus libero augue, id semper sapien volutpat ultrices.

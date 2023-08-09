@@ -1,33 +1,15 @@
 # toml-docs-start lang-main
 [en]
     languageName = "English"
-    contentDir = "content/en"
+    contentDir = "content"
     weight = 1
 # toml-docs-end lang-main
 # toml-docs-start lang-param
     [en.params.head]
         tagline = "A Hugo Theme"
-    [en.params.feature]
-        link = "about"
-        caption = "About"
+    [en.params.social]
+        title = "Follow me"
+        caption = "I work on everything coding and tweet developer memes"
     [en.params.footer]
-        license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Follow me"
-        socialCaption = "I work on everything coding and tweet developer memes"
+        # license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
 # toml-docs-end lang-param
-
-[nl]
-    languageName = "Nederlands"
-    contentDir = "content/nl"
-    weight = 2
-    [nl.params.head]
-        tagline = "Een Hugo Thema"
-    [nl.params.feature]
-        link = "over-mij"
-        caption = "Over mij"
-    [nl.params.footer]
-        license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Volg mij"
-        socialCaption = "Ik doe aan programmeren en tweet memes"
-    [nl.params.sections.projects]
-        title = "Projecten"

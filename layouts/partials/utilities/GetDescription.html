@@ -1,0 +1,12 @@
+{{- $page := . -}}
+{{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
+    {{- errorf "partial [utilities/GetDescription.html] - Expected page context" -}}
+{{- end -}}
+
+{{- $decription := $page.Description -}}
+{{- if not $decription -}}
+    {{- $decription = $page.Summary -}}
+    {{- if $page.Truncated }}{{ $decription = print $decription "..." }}{{ end -}}}
+{{- end -}}
+
+{{- return $decription -}}
