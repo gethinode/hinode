@@ -165,9 +165,13 @@
   translation: "Enter your Mastodon instance where the page should be shared"
 
 # Multi Page
-- id: multipage_other
-  translation: "Other pages in this"
-- id: multipage_project
-  translation: "project"
 - id: multipage_page
   translation: "Page"
+- id: multipage_pages
+  translation: "The pages in this"
+# Potentially multi-page could be used in blogs and projects
+- id: multipage_blog
+  translation: "blog"
+- id: multipage_projects
+  translation: "project"
+

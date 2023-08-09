@@ -68,7 +68,7 @@
 
     {{- $paginatorMode := "arrows" }}
     {{- with .Site.Params.multipage.paginator -}}{{- $paginatorMode = . -}}{{- end -}}
-    {{- $validModes := slice "arrows" "list" "box" "dropdown" -}}
+    {{- $validModes := slice "arrows" "list" "buttons" "dropdown" -}}
     {{- if not (in $validModes $paginatorMode) -}}
         {{- $paginatorMode = "arrows" }}
     {{- end -}}        
@@ -105,26 +105,38 @@
                 {{ end -}}
             </div>
         </div>
-    {{- else if eq $paginatorMode "box" -}}
-        <!-- Show paginator -->
+
+    <!-- Show paginator buttons -->
+    {{- else if eq $paginatorMode "buttons" -}}
         {{ partial "assets/pagination.html" . }}
+
+    <!-- Show a list of pages -->
     {{- else if eq $paginatorMode "list" -}}
+        <!-- Save the current page number -->
         {{- $currentPageNumber := .Paginator.PageNumber }}
-        <!-- ToDo: Change last part to actual section -->
-        <h5>{{- (i18n "multipage_other") }}&nbsp;{{ (i18n "multipage_project") -}}</h5>
-        <ul>
+        <!-- Show header header -->
+        {{- $section := printf "multipage_%s" $page.Section -}}
+        <h5>{{- (i18n "multipage_pages") }}&nbsp;{{ (i18n $section) -}}</h5>
+        <!-- List the pages-->
+        <div  class="list-group">
         {{- range $k := seq 1 .Paginator.TotalPages -}}
-            {{- $onPage := false -}}
-            {{- if not (eq $currentPageNumber $k)}}
-            <li>
+            {{- $active := "" -}}
+            <!-- When the page to list is the current page, show it italic and disabled -->
+            {{- if eq $currentPageNumber $k}}
+                {{- $active = "disabled text-italic" -}}
+            {{- end -}}            
+            <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" class="list-group-item list-group-item-action {{ $active }}">
+                <!-- Show page number -->
                 {{- (i18n "multipage_page") }}&nbsp;{{ $k -}}:&nbsp;
-                <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" class="">
-                    {{ range (index $.Paginator.Pagers (sub $k 1)).Pages }}{{ .Title }}{{ end -}}
-                </a>
-            </li>
-            {{- end -}}
+                <!-- Show page title -->
+                {{ range (index $.Paginator.Pagers (sub $k 1)).Pages }}{{ .Title }}{{ end -}}
+            </a>
         {{- end -}}
-        </ul>
+        </div>
+
+    <!-- Show a dropdown box -->
+    {{- else if eq $paginatorMode "dropdown" -}}
+
     {{- end -}}
 {{ end }}
 
