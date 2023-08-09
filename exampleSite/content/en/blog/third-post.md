@@ -4,9 +4,12 @@ title: Third post
 date: 2022-12-01
 description: This is my third blog post.
 tags: ["blog"]
-thumbnail: https://picsum.photos/id/184/4288/2848.jpg
-photoCredits: <a href="https://unsplash.com/@timdegroot">Tim de Groot</a>
-photoSource: <a href="https://unsplash.com/photos/yNGQ830uFB4">Unsplash</a>
+thumbnail:
+  url: https://picsum.photos/id/184/4288/2848.jpg
+  author: Tim de Groot
+  authorURL: https://unsplash.com/@timdegroot
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/yNGQ830uFB4
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id scelerisque ligula. Vestibulum eu lorem tortor. Suspendisse tristique ultrices mauris, non maximus lorem faucibus in. Suspendisse sagittis eleifend dapibus. Curabitur dignissim luctus sapien eu consequat. Proin congue dui vel ipsum bibendum varius. Pellentesque cursus nisi metus, egestas eleifend ipsum sollicitudin vitae. Sed vitae erat elementum, semper turpis sed, molestie nulla.

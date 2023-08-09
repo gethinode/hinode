@@ -4,9 +4,12 @@ title: Second post
 date: 2022-11-01
 description: This is my second blog post.
 tags: ["blog"]
-thumbnail: img/phone.jpg # https://picsum.photos/id/160/3200/2119
-photoCredits: <a href="https://unsplash.com/@thomweerd">Thom</a> 
-photoSource: <a href="https://unsplash.com/photos/Zdcq3iKly6g">Unsplash</a>
+thumbnail:
+  url: img/phone.jpg
+  author: Thom
+  authorURL: https://unsplash.com/@thomweerd
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/Zdcq3iKly6g
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sollicitudin sapien. Ut porttitor lectus eu tempor ultricies. Sed semper tincidunt nibh pellentesque condimentum. Vivamus dictum sem eu rhoncus semper. Vestibulum convallis congue tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris magna urna, egestas sit amet ligula quis, viverra semper arcu. Praesent laoreet nunc vitae nulla posuere facilisis.

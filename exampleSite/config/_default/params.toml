@@ -1,0 +1,183 @@
+[main]
+    separator = "-"
+    description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+    enableDarkMode = true
+    modes = ["light", "dark"]
+    canonifyAssetsURLs = false
+    [main.externalLinks]
+        cue = true
+        tab = true
+
+[modules]
+    core = ["bootstrap", "flexsearch", "fontawesome"]
+    optional = ["leaflet", "katex"]
+    excludeSCSS = ["bootstrap"]
+    disableTemplate = ["katex"]
+    [modules.fontawesome]
+        inline = true
+        debug = true
+        skipMissing = false
+
+[debugging]
+    showJS = false
+    showSCSS = false
+
+[docs]
+    basePath = "/" # TODO: replace
+    github = "https://github.com/gethinode/hinode"
+    release = "https://github.com/gethinode/hinode/releases/tag/"
+    checkVersion = false
+
+[home]
+    sections = ["blog", "projects"]
+    fullCover = false
+    centerHeadline = false
+    style = ""
+
+[navigation]
+    anchor = true
+    logo = "/img/logo_icon.svg"
+    color = "body"
+    fixed = true
+    offset = "3.8em"
+    search = true
+    breadcrumb = true
+    toc = true
+    sidebar = true
+
+[messages]
+    placement = "bottom-right"
+
+[sharing]
+    enabled = true
+    sort = "weight"
+    reverse = false
+    webshare = true
+
+[[sharing.providers]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
+    icon = "fab linkedin"
+    weight = 10
+
+[[sharing.providers]]
+    name = "Twitter"
+    url = "https://twitter.com/home?status={url}"
+    icon = "fab x-twitter"
+    weight = 20
+
+[[sharing.providers]]
+    name = "Facebook"
+    url = "https://www.facebook.com/sharer.php?u={url}"
+    icon = "fab facebook"
+    weight = 30
+
+[[sharing.providers]]
+    name = "WhatsApp"
+    url = "whatsapp://send?text={title}%20{url}"
+    icon = "fab whatsapp"
+    weight = 40
+
+[[sharing.providers]]
+    name = "email"
+    url = "{url}"
+    icon = "fas link"
+    weight = 50
+    clipboard = true
+
+[sections]
+    [sections.blog]
+        title = "Blog"
+        sort = "date"
+        reverse = true
+        cols = 3
+        color = ""
+        padding = "0"
+        header = "full"
+        footer = "none"
+        orientation = "stacked"
+        style = "border-0 card-zoom"
+        homepage = 3
+        separator = true
+    [sections.projects]
+        title = "Projects"
+        layout = "card"
+        sort = "title"
+        reverse = false
+        nested = true
+        cols = 1
+        background = "body-tertiary"
+        color = "body"
+        padding = "3"
+        header = "none"
+        footer = "tags"
+        orientation = "horizontal"
+        style = "border-1 card-emphasize"
+        homepage = 3
+        separator = false
+
+[favicon]
+    logo = "img/favicon.png"
+    sizes = [16, 32, 48]
+
+# toml-docs-start theme-colors
+[style]
+    primary = "#d43900"
+    secondary = "#6c757d"
+    success = "#198754"
+    info = "#0dcaf0"
+    warning = "#ffc107"
+    danger = "#dc3545"
+    light = "#f8f9fa"
+    dark = "#212529"
+    themeOpacity = "10"
+    themeFont = "Inter"
+    # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
+    themeFontPath = "/fonts" # local path
+    purge = true
+# toml-docs-end theme-colors
+
+[schema]
+    type = "Organization"
+    name = "Hinode"
+    locale = "en-US"
+    # twitter = "https://twitter.com/gethinode"
+    # linkedIn = ""
+    github = "https://github.com/gethinode/hinode"
+    section = "blog"
+    [author]
+        name = "Mark Dumay"
+        # twitter = "https://twitter.com/markdumay"
+        linkedin = "https://www.linkedin.com/in/markdumay/"
+        github = "https://github.com/markdumay"
+    [logo]
+        url = "img/logo512x512.png"
+        width = 512
+        height = 512
+    [image]
+        url = "img/logo1280x640.png"
+        width = 1280
+        height = 640
+
+[opengraph]
+    images = ["logo.png"]
+    locale = "en_US"
+
+[comments]
+    enabled = false
+    repo = "" # Replace with your repository.
+    #issueTerm = "pathname" # pathname, url, title, og:title
+    #label = "comment"
+    # By default, light and dark mode correspond to github-light and github-dark, respectively.
+    # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
+    #theme = "" 
+
+[links]
+    bs_badge_heading = "https://getbootstrap.com/docs/5.3/components/badge/#headings"
+    hinode_docs = "https://gethinode.com"
+    hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
+    mozilla_image = "https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
+    observatory = "https://observatory.mozilla.org/analyze/demo.gethinode.com"
+    pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F"
+    utterances = "https://utteranc.es"
+    hinode = "https://gethinode.com"

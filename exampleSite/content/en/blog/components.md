@@ -4,9 +4,12 @@ title: Components
 date: 2023-07-21
 description: Use shortcodes to add predefined components powered by external libraries.
 tags: ["bootstrap", "shortcode"]
-thumbnail: img/puzzle.jpg
-photoCredits: <a href="https://unsplash.com/@ryoji__iwata">Ryoji Iwata</a>
-photoSource: <a href="https://unsplash.com/photos/5siQcvSxCP8">Unsplash</a>
+thumbnail:
+  url: img/puzzle.jpg
+  author: Ryoji Iwata
+  authorURL: https://unsplash.com/@ryoji__iwata
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/5siQcvSxCP8
 modules: ["katex", "leaflet"]
 ---
 
