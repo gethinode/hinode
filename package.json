@@ -22,7 +22,7 @@
     "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
     "prebuild": "npm run clean:public && npm run -s mod:install",
     "build": "hugo --gc --minify",
-    "build:example": "hugo --gc --minify -s exampleSite",
+    "build:example": "npm run -s prebuild && hugo --gc --minify -s exampleSite",
     "build:debug": "hugo -e debug --debug",
     "build:preview": "npm run build -D -F",
     "clean:public": "rimraf public",
