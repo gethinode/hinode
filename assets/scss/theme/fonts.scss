@@ -33,7 +33,20 @@
           url('../fonts/asap-v30-latin-300.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
           url('../fonts/asap-v30-latin-300.svg#Asap') format('svg'); /* Legacy iOS */
    }
- 
+   /* asap-400 - latin */
+   @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Asap';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/asap-v30-latin-400.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/asap-v30-latin-400.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/asap-v30-latin-400.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+         url('../fonts/asap-v30-latin-400.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
+         url('../fonts/asap-v30-latin-400.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+         url('../fonts/asap-v30-latin-400.svg#Asap') format('svg'); /* Legacy iOS */
+  }
+
    /* asap-regular - latin */
    @font-face {
      font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
