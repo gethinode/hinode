@@ -1,14 +1,14 @@
 # toml-docs-start netlify
 [build]
-    publish = "public"
-    functions = "functions"
+    publish = "exampleSite/public"
+    # functions = "functions"
 
 [build.environment]
-    NODE_VERSION = "18.16.1"
-    NPM_VERSION = "9.5.1"
+    NODE_VERSION = "18.17.0"
+    NPM_VERSION = "9.6.7"
 
 [context.production]
-    command = "npm run build"
+    command = "npm run build:example"
 
 [context.production.environment]
     HUGO_VERSION = "0.110.0"
@@ -63,20 +63,14 @@
         Access-Control-Allow-Origin = "*"
 
 [context.deploy-preview]
-    command = "npm run build -- -b $DEPLOY_PRIME_URL"
+    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
-    command = "npm run build -- -b $DEPLOY_PRIME_URL"
-
-[context.next]
-    command = "npm run build"
-
-[context.next.environment]
-    HUGO_ENV = "next"
+    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
 
 [dev]
     framework = "#custom"
-    command = "npm run start"
+    command = "npm run start:example"
     targetPort = 1313
     port = 8888
     publish = "public"

@@ -1,12 +1,34 @@
 [[main]]
-  name = "Home"
-  pageRef = "/"
+  name = "About"
+  pageRef = "/about/"
   weight = 10
 
 [[main]]
-  name = "Tags"
-  pageRef = "/tags"
+  name = "Blog"
+  pageRef = "/blog/"
   weight = 20
+
+[[main]]
+  name = "Projects"
+  pageRef = "/projects/"
+  weight = 30
+
+[[main]]
+  name = "Sample project"
+  pageRef = "/projects/sample-project/"
+  parent = "Projects"
+  weight = 1
+
+[[main]]
+  name = "Another project"
+  pageRef = "/projects/another-project/"
+  parent = "Projects"
+  weight = 2
+
+[[main]]
+  name = "Tags"
+  pageRef = "/tags/"
+  weight = 40
 
 [[social]]
   name = "LinkedIn"

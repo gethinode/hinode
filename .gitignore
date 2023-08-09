@@ -1,5 +1,5 @@
 /_vendor
-/public
+public/
 resources/
 node_modules/
 

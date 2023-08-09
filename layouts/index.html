@@ -4,17 +4,23 @@
 
 {{- define "main" -}}
     {{- $page := . -}}
+    {{- $sections := site.Params.home.sections -}}
+    {{- if not $sections -}}
+        {{ range $section := site.Sections }}
+            {{ $sections = $sections | append $section.Type }}
+        {{ end }}
+    {{- end -}}
 
-    {{- range $index, $section := site.Params.home.sections -}}
+    {{- range $index, $section := $sections -}}
         {{- $sectionPage := site.GetPage "section" $section -}}
         {{- $sectionURL := $sectionPage.RelPermalink -}}
-        {{- $title := $sectionPage.Title -}}
-        {{- $thumbnail := $sectionPage.Params.Thumbnail -}}
+        {{- $title := or $sectionPage.Title $sectionPage.Type -}}
+        {{- $thumbnail := (or (and (reflect.IsMap $sectionPage.Params.Thumbnail) $sectionPage.Params.Thumbnail.url) $sectionPage.Params.Thumbnail) -}}
         {{- $icon := $sectionPage.Params.Icon -}}
-        {{- $description := $sectionPage.Description -}}
         {{- $content := $sectionPage.Content -}}
-
-        {{- $moreTitle := (T (printf "more%s" (strings.FirstUpper $section))) -}}
+        {{- $sectionTitle := strings.FirstUpper $sectionPage.Type -}}
+        {{- $moreTitle := T (printf "more%s" $sectionTitle) }}
+        {{- $moreTitle = or $moreTitle (printf (T "more" (pluralize $sectionTitle))) -}}
 
         {{- partial "assets/section-list.html" (dict 
             "page" $page 

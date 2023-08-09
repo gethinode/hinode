@@ -4,6 +4,10 @@
             {{- $copyright := printf "%s © %s %s %s." (T "copyright") (dateFormat "2006" now) .Site.Title (T "rights") }}
             {{ cond (gt (len .Site.Copyright) 0) .Site.Copyright $copyright }}
             {{ .Site.Params.footer.license | safeHTML }}
+            {{ if .Site.Params.main.endorse }}
+                {{ $link := partial "utilities/link" (dict "destination" (index site.Params.links "hinode") "text" "Hinode" "class" "link-secondary") }}
+                {{ T "poweredBy" $link | safeHTML }}
+            {{ end }}
         </small>
     </div>
 </footer>

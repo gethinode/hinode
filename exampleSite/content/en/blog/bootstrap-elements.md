@@ -4,9 +4,12 @@ title: Bootstrap elements
 date: 2023-08-05
 description: Use shortcodes to add common Bootstrap elements with ease.
 tags: ["bootstrap", "shortcode"]
-thumbnail: img/boots.jpg
-photoCredits: <a href="https://unsplash.com/@nate_dumlao">Nathan Dumlao</a>
-photoSource: <a href="https://unsplash.com/photos/QLPWQvHvmII">Unsplash</a>
+thumbnail:
+  url: img/boots.jpg
+  author: Nathan Dumlao
+  authorURL: https://unsplash.com/@nate_dumlao
+  origin: Unsplash
+  originURL: https://unsplash.com/photos/QLPWQvHvmII
 ---
 
 Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.

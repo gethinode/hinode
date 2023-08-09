@@ -1,34 +1,26 @@
-# toml-docs-start main
 title = "Hinode"
 copyright = "Copyright © 2023 Mark Dumay."
 paginate = 9
 enableGitInfo = true
-# toml-docs-end main
 
 # additional settings
-# googleAnalytics = "G-xxxxxxxxxx"
-baseURL = "https://example.com/"
+googleAnalytics = "G-T85PPZ36GN"
+baseURL = "https://demo.gethinode.com/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
 enableInlineShortcodes = true
-summaryLength = 20
 
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
 ignoreErrors = ["error-remote-getjson"]
 
-# toml-docs-start timeout
 timeout = "180s"
-# toml-docs-end timeout
 
-# toml-docs-start language
 languageCode = "en-us"
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
-# toml-docs-end language
+defaultContentLanguageInSubdir = true
 
-# toml-docs-start redirect
 [outputFormats.REDIR]
 mediaType = "text/netlify"
 baseName = "_redirects"
@@ -40,12 +32,9 @@ delimiter = ""
 
 [outputs]
 home = ["HTML", "RSS", "REDIR"]
-# toml-docs-end redirect
 
-# toml-docs-start build
 [build]
   writeStats = true
-# toml-docs-end build
   
 [taxonomies]
   tag = 'tags'
@@ -84,37 +73,6 @@ home = ["HTML", "RSS", "REDIR"]
     name = "xml"
 
 [module]
-  [module.hugoVersion]
-    extended = true
-    min = "0.110.0"
-    max = ""
-  [[module.mounts]]
-    source = "archetypes"
-    target = "archetypes"
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.mounts]]
-    source = "i18n"
-    target = "i18n"
-  [[module.mounts]]
-    source = "layouts"
-    target = "layouts"
-  [[module.mounts]]
-    source = "static"
-    target = "static"
-  [[module.mounts]]
-    source = "netlify.toml"
-    target = "assets/config/netlify.toml"
-# toml-docs-start modules
+  replacements = 'github.com/gethinode/hinode -> ../..'
   [[module.imports]]
-    path = "github.com/gethinode/mod-bootstrap"
-  [[module.imports]]
-    path = "github.com/gethinode/mod-flexsearch"
-  [[module.imports]]
-    path = "github.com/gethinode/mod-fontawesome"
-  [[module.imports]]
-    path = "github.com/gethinode/mod-katex"
-  [[module.imports]]
-    path = "github.com/gethinode/mod-leaflet"
-# toml-docs-end modules
+    path = "github.com/gethinode/hinode"
