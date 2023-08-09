@@ -6,12 +6,13 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-googleAnalytics = "G-T85PPZ36GN"
-baseURL = "https://demo.gethinode.com/"
+# googleAnalytics = "G-xxxxxxxxxx"
+baseURL = "https://example.com/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
 enableInlineShortcodes = true
+summaryLength = 20
 
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
@@ -24,7 +25,7 @@ timeout = "180s"
 # toml-docs-start language
 languageCode = "en-us"
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 # toml-docs-end language
 
 # toml-docs-start redirect

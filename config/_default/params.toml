@@ -38,8 +38,7 @@
 
 # toml-docs-start home
 [home]
-    sections = ["blog", "projects"]
-    featurePhoto = "/img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    # sections = ["posts"]
     fullCover = false
     centerHeadline = false
     style = ""
@@ -103,37 +102,21 @@
 # toml-docs-end sharing
 
 # toml-docs-start sections
-[sections]
-    [sections.blog]
-        title = "Blog"
-        sort = "date"
-        reverse = true
-        nested = true
-        cols = 3
-        color = ""
-        padding = "0"
-        header = "full"
-        footer = "none"
-        orientation = "stacked"
-        style = "border-0 card-zoom"
-        homepage = 3
-        separator = true
-    [sections.projects]
-        title = "Projects"
-        layout = "card"
-        sort = "title"
-        reverse = false
-        nested = true
-        cols = 1
-        background = "body-tertiary"
-        color = "body"
-        padding = "3"
-        header = "none"
-        footer = "tags"
-        orientation = "horizontal"
-        style = "border-1 card-emphasize"
-        homepage = 3
-        separator = false
+# [sections]
+#     [sections.posts]
+#         title = "Posts"
+#         sort = "date"
+#         reverse = true
+#         nested = true
+#         cols = 3
+#         color = ""
+#         padding = "0"
+#         header = "full"
+#         footer = "none"
+#         orientation = "stacked"
+#         style = "border-0 card-zoom"
+#         homepage = 3
+#         separator = true
 # toml-docs-end sections
 
 [favicon]
@@ -197,11 +180,4 @@
     #theme = "" 
 
 [links]
-    bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
-    hinode_docs = "https://gethinode.com/docs"
-    hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
-    mozilla_image = "https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
-    observatory = "https://observatory.mozilla.org/analyze/demo.gethinode.com"
-    pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F"
-    utterances = "https://utteranc.es"
- 
+    hinode = "https://gethinode.com"
