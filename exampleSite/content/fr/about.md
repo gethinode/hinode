@@ -25,7 +25,7 @@ showComments: false
       </div>
       <div class="col-lg-4">
         {{< icon fas code fa-2xl >}}
-        <h2 class="h4">Ontwikkelgereedschap</h2>
+        <h2 class="h4">Outils de développement</h2>
         <p>Utilisez Node Package Manager pour automatiser le processus de construction et suivre les dépendances.</p>
       </div>
     </div>
