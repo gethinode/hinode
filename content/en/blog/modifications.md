@@ -1,4 +1,4 @@
-<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery webp -->
+<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery webp navgrey navshort -->
 <!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
@@ -908,3 +908,11 @@ Obviously this only works when the `mimage` shortcode is installed, which is exp
 ## Additional empty line before the comments
 
 I think the space between the last line of the content and the horizontal line for the comments is too small. To make it bigger open the file `layouts/_default/single.html` and search for `<hr>`, prefix that with a break, so that the line becomes `<br><hr>`.
+
+## Remove unused buttons in pagination
+
+{{< mimage src="img/navgrey.png" outer="image-float-right" >}}When there are multiple pages to show in a list and it exceeds a certain threshold a paginator is shown that makes it possible to navigate to the other pages. These are buttons with numbers and to the left, buttons to go to the first page or to the previous page and to the right, buttons to go to the last page and the next page, as is shown in the example image to the right.
+
+As the current page selection is page 1, the left two buttons are greyed out. However I prefer to not to show them when they are greyed out, as they cannot be used anyway.
+
+{{< mimage src="img/navshort.png" outer="image-float-right" >}}To accomplish this open the file `layouts/partials/assets/pagination.html` and search for the lines `<li class="page-item disabled">`. There are four occurrences. Remove that line and the two following lines (or comment them out) to disable displaying the greyed-out buttons. Using the same example, this will result in the image to the right.
