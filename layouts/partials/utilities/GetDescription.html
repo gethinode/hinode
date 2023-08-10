@@ -3,10 +3,16 @@
     {{- errorf "partial [utilities/GetDescription.html] - Expected page context" -}}
 {{- end -}}
 
-{{- $decription := $page.Description -}}
-{{- if not $decription -}}
-    {{- $decription = $page.Summary -}}
-    {{- if $page.Truncated }}{{ $decription = print $decription "..." }}{{ end -}}}
+{{- $description := "" -}}
+{{- if not $page.RelPermalink -}}
+    {{- $description = $page.Content -}}
+{{ else }}
+    {{- $description = $page.Description -}}
 {{- end -}}
 
-{{- return $decription -}}
+{{- if not $description -}}
+    {{- $description = $page.Summary -}}
+    {{- if $page.Truncated }}{{ $description = print $description "..." }}{{ end -}}}
+{{- end -}}
+
+{{- return $description -}}

@@ -97,7 +97,7 @@
                 data-bs-target=".multi-{{ $id }}" 
                 aria-expanded="false" 
                 aria-controls="body-{{ $id }} footer-{{ $id }}">
-                <small>{{ if $full }}{{ strings.TrimPrefix $basePath $file }}{{ else }}{{ path.Base $file }}{{ end }}</small>
+                <small>{{ if $full }}{{ strings.TrimPrefix "/" (strings.TrimPrefix $basePath $file) }}{{ else }}{{ path.Base $file }}{{ end }}</small>
             </a>
         </li>
     </ul>

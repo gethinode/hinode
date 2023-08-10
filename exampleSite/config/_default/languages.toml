@@ -13,6 +13,10 @@
     [en.params.footer]
         # license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
 # toml-docs-end lang-param
+    [en.params.sections.blog]
+        reference = "More Posts"
+    [en.params.sections.projects]
+        reference = "More Projects"
 
 [nl]
     languageName = "Nederlands"
@@ -25,5 +29,8 @@
         caption = "Ik doe aan programmeren en tweet memes"
     [nl.params.footer]
         # license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+    [nl.params.sections.blog]
+        reference = "Meer artikelen"
     [nl.params.sections.projects]
         title = "Projecten"
+        reference = "Meer projecten"
