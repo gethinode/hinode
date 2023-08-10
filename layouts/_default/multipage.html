@@ -1,4 +1,4 @@
-{{/* cSpell: ignore multipage lastmodstr datestr mimage pagenumber inledby */}}
+{{/* cSpell: ignore multipage lastmodstr datestr mimage pagenumber inledby mpagination */}}
 
 {{/* Originally from the partial _default/single.html */}}
 {{/* Modifications: Separated footer in a pagination and comments part */}}
@@ -63,84 +63,6 @@
 {{ end -}}
 
 
-{{ define "partials/multi-pagination.html" -}}
-    {{- $page := . }}
-
-    {{- $paginatorMode := "arrows" }}
-    {{- with .Site.Params.multipage.paginator -}}{{- $paginatorMode = . -}}{{- end -}}
-    {{- $validModes := slice "arrows" "list" "buttons" "dropdown" -}}
-    {{- if not (in $validModes $paginatorMode) -}}
-        {{- $paginatorMode = "arrows" }}
-    {{- end -}}        
-
-    {{- if eq $paginatorMode "arrows" -}}
-        <!-- Show left/right page navigators -->
-        <div class="row row-cols-2 mt-5 mb-3">
-            <div class="col">
-                <!-- Check if there is a previous page -->
-                {{ with $page.Paginator.HasPrev -}}
-                    <!-- get the pager -->
-                    {{ $prev := $page.Paginator.Prev -}}
-                    <!-- Get the page -->
-                    {{ range $prev.Pages }}
-                        <!-- Show the icon and page title with link -->
-                        <a class="next" href="{{ .RelPermalink }}">
-                            {{- partial "assets/icon.html" (dict "icon" "fas arrow-left") }}&nbsp;{{ .Title }}
-                        </a>
-                    {{- end -}}
-                {{ end -}}
-            </div>
-            <div class="col text-end">
-                <!-- Check if there is a next page -->
-                {{ with $page.Paginator.HasNext -}}
-                    <!-- get the pager -->
-                    {{ $next := $page.Paginator.Next -}}
-                    <!-- Get the page -->
-                    {{ range $next.Pages }}
-                        <!-- Show the icon and page title with link -->
-                        <a class="previous" href="{{ .RelPermalink }}">
-                            {{ .Title }}&nbsp;{{- partial "assets/icon.html" (dict "icon" "fas arrow-right") }}
-                        </a>
-                    {{- end -}}
-                {{ end -}}
-            </div>
-        </div>
-
-    <!-- Show paginator buttons -->
-    {{- else if eq $paginatorMode "buttons" -}}
-        {{ partial "assets/pagination.html" . }}
-
-    <!-- Show a list of pages -->
-    {{- else if eq $paginatorMode "list" -}}
-        <!-- Save the current page number -->
-        {{- $currentPageNumber := .Paginator.PageNumber }}
-        <!-- Show header header -->
-        {{- $section := printf "multipage_%s" $page.Section -}}
-        <h5>{{- (i18n "multipage_pages") }}&nbsp;{{ (i18n $section) -}}</h5>
-        <!-- List the pages-->
-        <div  class="list-group">
-        {{- range $k := seq 1 .Paginator.TotalPages -}}
-            {{- $active := "" -}}
-            <!-- When the page to list is the current page, show it italic and disabled -->
-            {{- if eq $currentPageNumber $k}}
-                {{- $active = "disabled text-italic" -}}
-            {{- end -}}            
-            <a href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" class="list-group-item list-group-item-action {{ $active }}">
-                <!-- Show page number -->
-                {{- (i18n "multipage_page") }}&nbsp;{{ $k -}}:&nbsp;
-                <!-- Show page title -->
-                {{ range (index $.Paginator.Pagers (sub $k 1)).Pages }}{{ .Title }}{{ end -}}
-            </a>
-        {{- end -}}
-        </div>
-
-    <!-- Show a dropdown box -->
-    {{- else if eq $paginatorMode "dropdown" -}}
-
-    {{- end -}}
-{{ end }}
-
-
 {{ define "partials/multi-footer.html" -}}
     <!-- Show comments when enabled -->
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
@@ -183,7 +105,7 @@
                         {{ partial "partials/multi-header.html" . }}
                         {{ partial "partials/multi-body.html" . }}
                         {{ if gt $totalPages 1 }}
-                            {{ template "partials/multi-pagination.html" $page }}
+                            {{ partial "assets/mpagination.html" (dict "page" $page "mode" .Site.Params.multipage.paginator) }}
                         {{ end }}
                         {{ partial "partials/multi-footer.html" . }}
                     </div>
@@ -202,7 +124,7 @@
                         {{ partial "partials/multi-header.html" . }}
                         {{ partial "partials/multi-body.html" . }}
                         {{ if gt $totalPages 1 }}
-                            {{ template "partials/multi-pagination.html" $page }}
+                            {{ partial "assets/mpagination.html" (dict "page" $page "mode" .Site.Params.multipage.paginator) }}
                         {{ end }}                    
                         {{ partial "partials/multi-footer.html" . }}
                     </div>

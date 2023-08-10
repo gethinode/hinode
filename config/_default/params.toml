@@ -48,7 +48,7 @@
 # toml-docs-end docs
 
 [multipage]
-    paginator = "list"      # The paginator to show at the bottom of the page. Valid options are: 
+    paginator = "list"    # The paginator to show at the bottom of the page when the layout is "multipage". Valid options are: 
                             # "arrows"   Shows arrows to the left/right if there is a next/previous page
                             # "list"     Shows a list of available pages
                             # "buttons"  Shows navigation buttons (centered)

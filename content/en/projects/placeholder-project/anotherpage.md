@@ -1,5 +1,5 @@
 ---
-title: Page Title 3
+title: Page Title 3 and some more to make it a lengthy title
 pagenumber: 3
 ---
 

@@ -1,0 +1,148 @@
+<!-- 
+    Cspell:ignore multipage errorf mpagination
+
+    Render paginator navigation items
+    partial supports the following arguments:
+    "page":   Required page this is called in (usually the '.')
+    "mode":   Optional mode can be one of the following:
+              "arrows"   Shows arrows to the left/right if there is a next/previous page (default)
+              "list"     Shows a list of available pages (centered)
+              "buttons"  Shows navigation buttons (centered)
+              "dropdown" Shows a drop-down box and the available pages (centered)
+-->
+
+<!-- The page parameter is required -->
+{{- $page := .page -}}
+
+<!-- Check what paginator mode to display -->
+{{- $paginatorMode := "arrows" }}
+{{- with .mode -}}{{- $paginatorMode = . -}}{{- end -}}
+{{- $validModes := slice "arrows" "list" "buttons" "dropdown" -}}
+{{- if not (in $validModes $paginatorMode) -}}
+    {{- errorf "partial [assets/mpagination.html] - invalid mode specified" -}}
+{{- end -}}        
+
+<!-- Show left/right page navigator arrows -->
+{{- if eq $paginatorMode "arrows" -}}
+    <div class="row row-cols-2 mt-5 mb-3">
+        <div class="col">
+            <!-- Check if there is a previous page -->
+            {{ with $page.Paginator.HasPrev -}}
+                <!-- get the pager -->
+                {{ $prev := $page.Paginator.Prev -}}
+                <!-- Get the page -->
+                {{ range $prev.Pages }}
+                    <!-- Show the icon and page title with link -->
+                    <a class="previous" href="{{ .RelPermalink }}">
+                        {{- partial "assets/icon.html" (dict "icon" "fas arrow-left") }}&nbsp;{{ .Title }}
+                    </a>
+                {{- end -}}
+            {{ end -}}
+        </div>
+        <div class="col text-end">
+            <!-- Check if there is a next page -->
+            {{ with $page.Paginator.HasNext -}}
+                <!-- get the pager -->
+                {{ $next := $page.Paginator.Next -}}
+                <!-- Get the page -->
+                {{ range $next.Pages }}
+                    <!-- Show the icon and page title with link -->
+                    <a class="next" href="{{ .RelPermalink }}">
+                        {{ .Title }}&nbsp;{{- partial "assets/icon.html" (dict "icon" "fas arrow-right") }}
+                    </a>
+                {{- end -}}
+            {{ end -}}
+        </div>
+    </div>
+
+<!-- Show paginator buttons -->
+{{- else if eq $paginatorMode "buttons" -}}
+    {{ partial "assets/pagination.html" $page }}
+
+<!-- Show a list of pages -->
+{{- else if eq $paginatorMode "list" -}}
+    <!-- Save the current page number -->
+    {{- $currentPageNumber := $page.Paginator.PageNumber }}
+    <!-- Create a container with the text centered -->
+    <div class="container text-center">
+        <!-- A row withy the contents centered -->
+        <div class="row justify-content-md-center">
+            <!-- A filler column to the left -->
+            <div class="col"></div>
+                <!-- A column that automatically adjusts to the text length -->
+                <div class="col col-md-auto">
+                    <!-- Start of the list box -->
+                    <div  class="list-group">
+                        <!-- Show header -->
+                        {{- $section := printf "multipage_%s" $page.Section -}}
+                        <a href="" class="list-group-item disabled bg-primary bg-opacity-10 fw-bolder fs-5">
+                        {{- (i18n "multipage_pages") }}&nbsp;{{ (i18n $section) -}}</a>
+                        <!-- List the pages-->
+                        {{- range $k := seq 1 $page.Paginator.TotalPages -}}
+                            {{- $active := "list-group-item-primary bg-opacity-10 border-1" -}}
+                            <!-- When the page to list is the current page, show it italic and disabled -->
+                            {{- if eq $currentPageNumber $k}}
+                                {{- $active = "bg-primary bg-opacity-10 disabled border-1" -}}
+                            {{- end -}}            
+                            <a href="{{ (index $page.Paginator.Pagers (sub $k 1)).URL }}" class="list-group-item list-group-item-action {{ $active }}">
+                                <!-- Show page number -->
+                                {{- (i18n "multipage_page") }}&nbsp;{{ $k -}}:&nbsp;
+                                <!-- Show page title -->
+                                {{ range (index $page.Paginator.Pagers (sub $k 1)).Pages }}{{ .Title }}{{ end -}}
+                            </a>
+                        {{- end -}}
+                    </div>
+                </div>
+            <!-- A filler column to the right -->
+            <div class="col"></div>
+        </div>
+    </div>
+
+<!-- Show a dropdown box -->
+{{- else if eq $paginatorMode "dropdown" -}}
+    <!-- Save the current page number -->
+    {{- $currentPageNumber := $page.Paginator.PageNumber }}
+    <!-- Create a container with the text centered -->
+    <div class="container text-center">
+        <!-- A row withy the contents centered -->
+        <div class="row justify-content-md-center">
+            <!-- A filler column to the left -->
+            <div class="col"></div>
+                <!-- A column that automatically adjusts to the text length -->
+                <div class="col col-md-auto">
+                    <!-- Start of the dropdown -->
+                    <div  class="dropup">
+                        <!-- Show header -->
+                        <button class="btn dropdown-toggle bg-primary bg-opacity-10 fw-bolder fs-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{- $section := printf "multipage_%s" $page.Section -}}
+                            {{- (i18n "multipage_pages") }}&nbsp;{{ (i18n $section) -}}
+                        </button>
+                        <!-- List the pages-->
+                        <ul class="dropdown-menu bg-primary bg-opacity-25">
+                        {{- range $k := seq 1 $page.Paginator.TotalPages -}}
+                            {{- $active := "" -}}
+                            {{- $current := false -}}
+                            <!-- When the page to list is the current page, show it italic and disabled -->
+                            {{- if eq $currentPageNumber $k}}
+                                {{- $active = "active disabled" -}}
+                                {{- $current = true -}}
+                            {{- end -}}
+                            <li>
+                            <a href="{{ (index $page.Paginator.Pagers (sub $k 1)).URL }}" class="dropdown-item {{ $active }}">
+                                <!-- Show page number -->
+                                {{- (i18n "multipage_page") }}&nbsp;{{ $k -}}:&nbsp;
+                                <!-- Show page title -->
+                                {{ range (index $page.Paginator.Pagers (sub $k 1)).Pages }}{{ .Title }}{{ end -}}
+                            </a>
+                            </li>
+                        {{- end -}}
+                        </ul>
+                    </div>
+                </div>
+            <!-- A filler column to the right -->
+            <div class="col"></div>
+        </div>
+    </div>
+{{- end -}}
+
+
