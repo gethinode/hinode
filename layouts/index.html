@@ -19,7 +19,10 @@
         {{- $icon := $sectionPage.Params.Icon -}}
         {{- $content := $sectionPage.Content -}}
         {{- $sectionTitle := strings.FirstUpper $sectionPage.Type -}}
-        {{- $moreTitle := T (printf "more%s" $sectionTitle) }}
+        {{- $moreTitle := "" -}}
+        {{- with (index site.Params.sections $section) -}}
+            {{- with index . "reference" }}{{ $moreTitle = . }}{{ end -}}
+        {{- end -}}
         {{- $moreTitle = or $moreTitle (printf (T "more" (pluralize $sectionTitle))) -}}
 
         {{- partial "assets/section-list.html" (dict 
