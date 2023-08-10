@@ -32,6 +32,8 @@ github.com/gethinode/mod-fontawesome v1.2.3 h1:RHWd+E72+m29xaC45m/3CF35C201jehw0
 github.com/gethinode/mod-fontawesome v1.2.3/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.2.4 h1:SqE3CQ+boaBIhrVh3MPu4nz0uoHPfEH5t60nNY1CfsI=
 github.com/gethinode/mod-fontawesome v1.2.4/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
+github.com/gethinode/mod-fontawesome v1.2.5 h1:RqkLRj6+s+gM4nKd0IwNMMDA8cRmxfp0fxkVH4FdAGU=
+github.com/gethinode/mod-fontawesome v1.2.5/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
