@@ -9,10 +9,10 @@
   translation: "Min."
 - id: words
   translation: "Wörter"
-- id: photoBy
-  translation: "Foto von"
-- id: photoOn
-  translation: "auf"
+- id: photoFull
+  translation: "Foto von %s auf %s"
+- id: photoShort
+  translation: "Foto von {{ . }}"
 - id: draft
   translation: "Entwurf"
 

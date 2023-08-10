@@ -67,16 +67,16 @@
             {{- end }}
 
             {{- if and $author $origin }}
-                {{ $credits = printf "%s %s %s %s" (T "photoBy") $author (T "photoOn") $origin }}
+                {{ $credits = printf (T "photoFull") $author $origin }}
             {{ else if $author }}
-                {{ $credits = printf "%s %s" (T "photoBy") $author }}
+                {{ $credits = T "photoShort" $author }}
             {{ end }}
         {{ else }}
             {{- $thumbnail = .Params.Thumbnail -}}
             {{ if or .Params.photoCredits .Params.photoSource }}
                 {{ warnf "DEPRECATED: frontmatter variables `photoCredits` and `photoSource` have been deprecated in release v0.18: %s" .RelPermalink }}
             {{ end }}
-            {{- if and .Params.photoCredits .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end -}}
+            {{- if and .Params.photoCredits .Params.PhotoSource }}{{ $credits = printf (T "photoFull") .Params.photoCredits .Params.PhotoSource }}{{ end -}}
         {{- end -}}
 
         {{ if $thumbnail -}}
