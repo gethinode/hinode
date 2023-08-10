@@ -5,6 +5,7 @@
     "state":        Optional state, either "new" or "deprecated".
     "short":        Optional flag to indicate the release button should use short notation.
     "class":        Optional class attribute of the button element.
+    "inline":       If set, renders the release button inline (defaults to false).
 -->
 
 {{- $error := false -}}
@@ -58,7 +59,7 @@
 {{- $class := .Get "class" -}}
 
 {{- if not $error -}}
-    <div class="pb-3">
+    {{- if not $inline }}<div class="pb-3">{{ end -}}
     {{- partial "assets/button.html" (dict 
         "title" $title
         "href" (partial "partials/utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $version))
@@ -67,5 +68,5 @@
         "outline" "true"
         "class" (trim (printf "rounded-2 fw-semibold %s" $class) " "))
     -}} 
-    </div>
+    {{- if not $inline }}</div>{{ end -}}
 {{- end -}}
