@@ -49,6 +49,25 @@
     {{- $color = "secondary" -}}
 {{- end -}}
 
+{{- $icon := "" -}}
+{{- $tooltip := "" -}}
+{{- if eq $state "deprecated" -}}
+    {{- if $short -}}
+        {{- $icon = "fas trash-can" -}}
+        {{- $tooltip = T "deprecatedFeature" $version -}}
+    {{ else }}
+        {{- $title = T "deprecatedFeature" $version -}}
+    {{- end -}}
+{{- else -}}
+    {{- if $short -}}
+        {{- $icon = "fas rocket" -}}
+        {{- $tooltip = T "addedFeature" $version -}}
+    {{ else }}
+        {{- $title = T "addedFeature" $version -}}
+    {{- end -}}
+{{- end -}}
+
+
 {{- if not $short -}}
     {{- if eq $state "deprecated" -}}
         {{- $title = T "deprecatedFeature" $version -}}
@@ -76,6 +95,9 @@
         "color" $color
         "outline" "true"
         "size" $size
+        "icon" $icon
+        "tooltip" $tooltip
+        "order" "first"
         "class" (trim (printf "rounded-2 fw-semibold %s" $class) " "))
     -}} 
     {{- if not $inline }}</div>{{ end -}}
