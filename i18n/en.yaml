@@ -1,60 +1,40 @@
-# Content
-- id: about
-  translation: "About"
+# Single pages
 - id: postedOnDate
   translation: "Posted on {{ . }}"
 - id: lastModified
   translation: "Last modified on {{ . }}"
-- id: translationsLabel
-  translation: "Other languages: "
-- id: translationsSeparator
-  translation: ", "
-- id: more
-  translation: "More {{ . }}"
-- id: readMore
-  translation: "Read More"
-- id: moreBlog
-  translation: "More Posts"
-- id: olderBlog
-  translation: "Older Posts"
-- id: recentBlog
-  translation: "Recent Posts"
-- id: newerBlog
-  translation: "Newer Posts"
-- id: previousBlog
-  translation: "Previous Post"
-- id: nextBlog
-  translation: "Next Post"
-- id: recentProjects
-  translation: "Projects"
-- id: moreFeatures
-  translation: "More Features"
-- id: moreGuides
-  translation: "More Guides"
-- id: moreOpensource
-  translation: "More Features"
-- id: moreProjects
-  translation: "More Projects"
-- id: moreUsers
-  translation: "More Users"
 - id: read
   translation: "read"
 - id: minutesShort
   translation: "min"
 - id: words
   translation: "words"
-- id: copyright
-  translation: "Copyright"
-- id: rights
-  translation: "All rights reserved"
 - id: photoBy
   translation: "Photo by"
 - id: photoOn
   translation: "on"
+- id: draft
+  translation: "Draft"
+
+# List pages
 - id: article
   translation: "Article"
 - id: articles
   translation: "Articles"
+- id: more
+  translation: "More {{ . }}"
+
+# Sharing
+- id: shareLink
+  translation: "Share via"
+- id: copiedToClipboard
+  translation: "copied to clipboard"
+- id: link
+  translation: "Link"
+- id: code
+  translation: "Code"
+
+# Pagination
 - id: paginationNav
   translation: "Page navigation"
 - id: paginationPrevious
@@ -65,8 +45,8 @@
   translation: "First page"
 - id: paginationLast
   translation: "Last page"
-- id: toggleSidebar
-  translation: "Toggle sidebar navigation"
+
+# Navigation
 - id: colorMode
   translation: "Toggle theme"
 - id: colorLight
@@ -77,20 +57,28 @@
   translation: "Auto"
 - id: toggleMainNav
   translation: "Toggle main navigation"
-- id: demo
-  translation: "Demo"
+- id: home
+  translation: "Home"
+- id: languageSwitcherLabel
+  translation: "Language"
+
+# Table of contents
+- id: toc
+  translation: "On this page"
+- id: seeAlso
+  translation: "See also"
+
+# Sidebar
+- id: toggleSidebar
+  translation: "Toggle sidebar navigation"
+
+# Feature
 - id: addedFeature
-  translation: "Added in"
+  translation: "Added in {{ . }}"
 - id: deprecatedFeature
-  translation: "Deprecated in"
-- id: shareLink
-  translation: "Share via"
-- id: copiedToClipboard
-  translation: "copied to clipboard"
-- id: link
-  translation: "Link"
-- id: code
-  translation: "Code"
+  translation: "Deprecated in {{ . }}"
+
+# Versioning
 - id: latest
   translation: "latest"
 - id: allVersions
@@ -100,65 +88,22 @@
 
 # 404 page
 - id: pageNotFound
-  translation: "The page you are looking for does not exist or another error occurred. Try going back to our"
+  translation: "The page you are looking for does not exist or another error occurred. Try going back to our {{ . }}."
 - id: pageNotFoundTitle
   translation: "Page not found"
 - id: pageNotFoundHome
   translation: "home page"
 
-# Navigation
-- id: toggleNavigation
-  translation: "Toggle navigation"
-- id: languageSwitcherLabel
-  translation: "Language"
-- id: gcseLabelShort
-  translation: "Search"
-- id: gcseLabelLong
-  translation: "Search {{ .Site.Title }}"
-- id: gcseClose
-  translation: "Close"
-- id: home
-  translation: "Home"
-
+# Footer
+- id: copyright
+  translation: "Copyright"
+- id: rights
+  translation: "All rights reserved"
 - id: poweredBy
   translation: "Powered by {{ . }}."
 
-# Staticman
-- id: noComment
-  translation: "No comment"
-- id: oneComment
-  translation: "comment"
-- id: moreComment
-  translation: "comments"
-- id: useMarkdown
-  translation: "You can use Markdown syntax"
-- id: yourName
-  translation: "Your name"
-- id: yourEmail
-  translation: "Your email address"
-- id: yourWebsite
-  translation: "You website"
-
-# Delayed Disqus
+# Comments
 - id: show
   translation: "Show"
 - id: comments
   translation: "Comments" 
-
-# Related posts
-- id: seeAlso
-  translation: "See also"
-
-# Table of contents
-- id: toc
-  translation: "On this page"
-
-# Search
-- id: ui_search
-  translation: "Search this site..."
-- id: ui_no_results
-  translation: "No results for"
-
-# Draft
-- id: draft
-  translation: "Draft"
