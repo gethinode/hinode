@@ -87,7 +87,6 @@
         {{- $paginate = false -}}
         {{- $max = int (math.Min $homepage $max) -}}
     {{ end -}}
-    {{- $cols = int (math.Min $cols $max) -}}
 
     {{- $params := (dict 
         "page" $page
