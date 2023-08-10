@@ -49,9 +49,9 @@
 
 {{- if not $short -}}
     {{- if eq $state "deprecated" -}}
-        {{- $title = (printf "Deprecated in %s" $version) -}}
+        {{- $title = T "deprecatedFeature" $version -}}
     {{- else -}}
-        {{- $title = (printf "Added in %s" $version) -}}
+        {{- $title = T "addedFeature" $version -}}
     {{- end -}}
 {{- end -}}
 
