@@ -17,8 +17,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "start": "hugo server --bind=0.0.0.0 --disableFastRender",
-    "start:example": "hugo server --bind=0.0.0.0 --disableFastRender -s exampleSite",
+    "start": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings",
+    "start:example": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -s exampleSite",
     "start:prod": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
     "prebuild": "npm run clean:public && npm run -s mod:install",
     "build": "hugo --gc --minify",
