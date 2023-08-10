@@ -4,6 +4,7 @@
     "version":      Required version string, expects semver notation with a "v" prefix.
     "state":        Optional state, either "new" or "deprecated".
     "short":        Optional flag to indicate the release button should use short notation.
+    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "class":        Optional class attribute of the button element.
     "inline":       If set, renders the release button inline (defaults to false).
 -->
@@ -56,6 +57,14 @@
     {{- end -}}
 {{- end -}}
 
+{{- $size := "md" -}}
+{{- with .Get "size" }}{{ $size = . }}{{ end -}}
+{{- $supportedSizes := slice "sm" "md" "lg" -}}
+{{- if not (in $supportedSizes $size) -}}
+    {{- errorf "Invalid value for param 'size': %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
+
 {{- $class := .Get "class" -}}
 
 {{- if not $error -}}
@@ -66,6 +75,7 @@
         "size" "sm"
         "color" $color
         "outline" "true"
+        "size" $size
         "class" (trim (printf "rounded-2 fw-semibold %s" $class) " "))
     -}} 
     {{- if not $inline }}</div>{{ end -}}
