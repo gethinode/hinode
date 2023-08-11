@@ -16,7 +16,7 @@ weight = 30
 [[main]]
 name = "Exemple de projet"
 pageRef = "/projets/exemple-de-projet/"
-parent = "Projects"
+parent = "Projets"
 weight = 1
 
 [[main]]
@@ -62,7 +62,7 @@ weight = 20
 [[sample]]
 name = "Exemple de projet"
 pageRef = "/projets/exemple-de-projet/"
-parent = "Projects"
+parent = "Projets"
 weight = 1
 
 [[sample]]
