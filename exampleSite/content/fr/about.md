@@ -15,7 +15,7 @@ showComments: false
     <div class="row justify-content-center text-center">
       <div class="col-lg-4">
         {{< icon fab bootstrap fa-2xl >}}
-        <h2 class="h4">Framework Boostrap</h2>
+        <h2 class="h4">Framework Bootstrap</h2>
         <p>Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site avec les fichiers source Sass.</p>
       </div>
       <div class="col-lg-4">
