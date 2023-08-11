@@ -12,3 +12,8 @@
     background:transparent !important;
     width: 50%;
 }
+
+// Override the distance between pagination items, to make it a bit smaller.
+.pagination .mpage-item {
+    margin: 0.1rem;
+}
