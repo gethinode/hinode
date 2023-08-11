@@ -1,0 +1,88 @@
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        --bs-primary: #{$primary-text-emphasis-dark};
+        --bs-primary-dark: #{$primary-bg-subtle-dark};
+        --bs-primary-bg-subtle: #{$primary-bg-subtle-dark};
+        --bg-primary-subtle: RGBA(var(--bs-primary-rgb), var(--bs-link-opacity, 0.1));
+
+        .bg-primary-subtle {
+            background-color: var(--bg-primary-subtle) if($enable-important-utilities, !important, null);
+        }        
+        
+        .accordion-button {
+            background-color: var(--bg-primary-subtle);
+        }
+
+        .form-check-input:checked {
+          background-color: var(--bs-primary);
+          border-color: var(--bs-primary); }
+        
+        .form-check-input[type="checkbox"]:indeterminate {
+          background-color: var(--bs-primary);
+          border-color: var(--bs-primary);
+         }
+        
+        .form-range::-webkit-slider-thumb {
+          background-color: var(--bs-primary);
+        }
+        
+        .form-range::-moz-range-thumb {
+          background-color: var(--bs-primary);
+        }
+                
+        .btn-outline-primary {
+          --bs-btn-color: var(--bs-primary);
+          --bs-btn-border-color: var(--bs-primary);
+          --bs-btn-hover-bg: var(--bs-primary);
+          --bs-btn-hover-border-color: var(--bs-primary);
+          --bs-btn-active-bg: var(--bs-primary);
+          --bs-btn-active-border-color: var(--bs-primary);
+          --bs-btn-disabled-color: var(--bs-primary);
+          --bs-btn-disabled-border-color: var(--bs-primary);
+        }
+        
+        .link-primary {
+          color: var(--bs-primary) if($enable-important-utilities, !important, null);
+          text-decoration-color: var(--bs-primary) if($enable-important-utilities, !important, null);
+          &:hover,
+          &:focus {
+            color: var(--bs-primary-dark) if($enable-important-utilities, !important, null);
+            text-decoration-color: var(--bs-primary-dark) if($enable-important-utilities, !important, null);              
+          }
+        }
+
+        .nav-pills {
+          --bs-nav-pills-link-active-bg: var(--bs-primary);
+        }
+        
+        .pagination {
+          --bs-pagination-active-bg: var(--bs-primary);
+          --bs-pagination-active-border-color: var(--bs-primary);
+        }
+        
+        .progress,
+        .progress-stacked {
+          --bs-progress-bar-bg: var(--bs-primary);
+        }
+        
+        .list-group {
+          --bs-list-group-active-bg: var(--bs-primary);
+          --bs-list-group-active-border-color: var(--bs-primary);
+         }
+        
+        .clipboard-button:hover {
+          color: var(--bs-primary); }
+        
+        .clipboard-button:hover > svg {
+          fill: var(--bs-primary);
+        }
+        
+        .toggler-icon {
+          background-color: var(--bs-primary);
+        }
+        
+        .heading:hover .anchor {
+          color: var(--bs-primary); 
+        }
+    }
+}

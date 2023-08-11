@@ -30,7 +30,7 @@
                     <div class="hstack gap-3">
                         {{ range (.GetTerms "tags") -}}
                             {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
-                            {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "secondary" "size" "sm" "outline" "true") }}
+                            {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "primary" "size" "sm" "outline" "true") }}
                         {{ end -}}
                     </div>
                 </div>

@@ -13,6 +13,10 @@
     {{ end }}
 {{- end -}}
 
+{{ if and site.Params.style.darkModeTint (not (findRE `\d+%` site.Params.style.darkModeTint)) }}
+    {{- errorf "partial [head/stylesheet.html] - Invalid value for site param 'style.darkModeTint': %s" site.Params.style.darkModeTint -}}
+{{ end}}
+
 {{- $navbarOffset := "0em" -}}
 {{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
 {{- $vars := dict 
@@ -28,6 +32,8 @@
     "navbar-offset"           $navbarOffset
     "enable-dark-mode"        (printf "%t" ((default true site.Params.main.enableDarkMode)))
     "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))
+    "dark-mode-shade"         (default "0%" site.Params.style.darkModeShade)
+    "dark-mode-tint"          (default "0%" site.Params.style.darkModeTint)
 -}}
 
 {{- $options := (dict "transpiler" "libsass" "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
