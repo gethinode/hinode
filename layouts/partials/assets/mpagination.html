@@ -103,7 +103,7 @@
                         <li class="mpage-item">
                             <a href="{{ .URL }}" 
                                 aria-label="{{ T "paginationFirst" }}" 
-                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                {{ if $tooltips }}title="{{ T "paginationFirst" }}: {{ $tooltip }}"{{ end }}                     
                                 class="page-link" 
                                 role="button"
                             >
@@ -119,7 +119,7 @@
                     <li class="mpage-item">
                         <a href="{{ .URL }}" 
                             aria-label="{{ T "paginationPrevious" }}" 
-                            {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                            {{ if $tooltips }}title="{{ T "paginationPrevious" }}: {{ $tooltip }}"{{ end }}                     
                             class="page-link" 
                             role="button"
                         >
@@ -142,7 +142,7 @@
                         <li class="mpage-item active disabled">
                             <a aria-current="page" 
                                 aria-label="{{ T "multipage_page" }} {{ $k }}"
-                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}
+                                {{ if $tooltips }}title="{{ T "multipage_page" }} {{ $k }}: {{ $tooltip }}"{{ end }}
                                 class="page-link" 
                                 role="button"
                             >
@@ -154,7 +154,7 @@
                         <li class="mpage-item">
                             <a href="{{ (index $page.Paginator.Pagers (sub $k 1)).URL }}" 
                                 aria-label="{{ T "multipage_page" }} {{ $k }}" 
-                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                {{ if $tooltips }}title="{{ T "multipage_page" }} {{ $k }}: {{ $tooltip }}"{{ end }}                     
                                 class="page-link" 
                                 role="button"
                             >
@@ -170,7 +170,7 @@
                         <li class="mpage-item">
                             <a href="{{ .URL }}" 
                                 aria-label="{{ T "paginationNext" }}" 
-                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                {{ if $tooltips }}title="{{ T "paginationNext" }}: {{ $tooltip }}"{{ end }}                     
                                 class="page-link" 
                                 role="button"
                             >
@@ -186,7 +186,7 @@
                         <li class="mpage-item">
                             <a href="{{ .URL }}" 
                                 aria-label="{{ T "paginationLast" }}" 
-                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                {{ if $tooltips }}title="{{ T "paginationLast" }}: {{ $tooltip }}"{{ end }}                     
                                 class="page-link" 
                                 role="button"
                             >
