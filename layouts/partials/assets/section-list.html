@@ -66,7 +66,11 @@
     {{ $list = where site.RegularPages "Type" "in" $section }}
 {{ else if $home }}
     {{ $sectionPage := site.GetPage "section" $section }}
-    {{ $list = $sectionPage.RegularPages }}
+    {{ if $multipage }}
+        {{ $list = $sectionPage.Pages }}
+    {{ else }}
+        {{ $list = $sectionPage.RegularPages }}
+    {{ end }}
 {{ else }}
     {{ if $multipage }}
         {{ $list = $page.Pages }}
