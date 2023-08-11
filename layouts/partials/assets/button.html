@@ -9,7 +9,8 @@
                     "danger", "warning", "info", "light", "dark", "white", or "black".
     "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
     "badge"         Optional positioned badge to display on top of the button.
-    "aria-label"    Optional assistive label for the badge.
+    "label"         Optional assistive label for the button or badge. The label is applied to the badge instead of the
+                    button when a badge has been defined. Default value of the button aria-label is its title.
     "tooltip"       Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/
                     inactive buttons.
     "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons.
@@ -139,7 +140,7 @@
 
 {{- $attributes := .attributes -}}
 
-<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+<a aria-label="{{ or $label $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
     {{- with $id }}id="{{ . }}"{{ end -}}
     {{- with $target }}target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
     {{- with $toast }}data-toast-target="{{ $toast }}"{{ end -}}
