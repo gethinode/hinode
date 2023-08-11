@@ -48,11 +48,17 @@
 # toml-docs-end docs
 
 [multipage]
-    paginator = "list"    # The paginator to show at the bottom of the page when the layout is "multipage". Valid options are: 
+    # These parameters are only valid when the layout of a page is set to "multipage"
+    paginator = "buttons"    # The paginator to show at the bottom of the page. Valid options are: 
                             # "arrows"   Shows arrows to the left/right if there is a next/previous page
-                            # "list"     Shows a list of available pages
                             # "buttons"  Shows navigation buttons (centered)
+                            # "list"     Shows a list of available pages
                             # "dropdown" Shows a drop-down box and the available pages (centered) 
+                            # "dropup"   Shows a drop-up box and the available pages (centered) 
+    tooltips = "on"         # When paginator="buttons", enables ("on") or disables ("off") the display of tooltips 
+                            #  when hovering over the buttons. Not used in the other paginator options.
+    positions = 4           # When paginator="buttons", Sets the maximum number of button positions.
+                            # Not used in the other paginator options.
 
 # toml-docs-start home
 [home]

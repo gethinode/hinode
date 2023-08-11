@@ -105,7 +105,11 @@
                         {{ partial "partials/multi-header.html" . }}
                         {{ partial "partials/multi-body.html" . }}
                         {{ if gt $totalPages 1 }}
-                            {{ partial "assets/mpagination.html" (dict "page" $page "mode" .Site.Params.multipage.paginator) }}
+                            {{ partial "assets/mpagination.html" (dict "page" $page 
+                                                                       "mode" .Site.Params.multipage.paginator 
+                                                                       "tooltips" .Site.Params.multipage.tooltips
+                                                                       "positions" .Site.Params.multipage.positions
+                                                                 ) }}
                         {{ end }}
                         {{ partial "partials/multi-footer.html" . }}
                     </div>
@@ -124,7 +128,11 @@
                         {{ partial "partials/multi-header.html" . }}
                         {{ partial "partials/multi-body.html" . }}
                         {{ if gt $totalPages 1 }}
-                            {{ partial "assets/mpagination.html" (dict "page" $page "mode" .Site.Params.multipage.paginator) }}
+                            {{ partial "assets/mpagination.html" (dict "page" $page 
+                                                                       "mode" .Site.Params.multipage.paginator 
+                                                                       "tooltips" .Site.Params.multipage.tooltips
+                                                                       "positions" .Site.Params.multipage.positions
+                                                                 ) }}
                         {{ end }}                    
                         {{ partial "partials/multi-footer.html" . }}
                     </div>
