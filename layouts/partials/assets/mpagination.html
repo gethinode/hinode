@@ -1,31 +1,60 @@
 <!-- 
-    Cspell:ignore multipage errorf mpagination
+    Cspell:ignore multipage errorf mpagination dropup
 
     Render paginator navigation items
     partial supports the following arguments:
-    "page":   Required page this is called in (usually the '.')
-    "mode":   Optional mode can be one of the following:
-              "arrows"   Shows arrows to the left/right if there is a next/previous page (default)
-              "list"     Shows a list of available pages (centered)
-              "buttons"  Shows navigation buttons (centered)
-              "dropdown" Shows a drop-down box and the available pages (centered)
+    "page":     Required page this is called in (usually the '.')
+    "mode":     Optional mode can be one of the following:
+                "arrows"   Shows arrows to the left/right if there is a next/previous page (default)
+                "list"     Shows a list of available pages (centered)
+                "buttons"  Shows navigation buttons (centered) (default)
+                "dropdown" Shows a drop-down box and the available pages (centered)
+                "dropup"   Shows a drop-up box and the available pages (centered)
+    "tooltips"  Enables ("on") or disables ("off") the display of tooltips when the mode is "buttons"
+                Defaults to "on".
+    "positions" The maximum number of page buttons to show. Defaults to 5, minimum is 2.
+                Only valid when the mode is "buttons"
 -->
 
 <!-- The page parameter is required -->
-{{- $page := .page -}}
+{{- $page := . -}}
+{{- with .page -}}
+    {{- $page = . -}}
+{{- else -}}
+    {{- errorf "partial [assets/mpagination.html] - page is a required parameter" -}} 
+{{- end -}}
 
 <!-- Check what paginator mode to display -->
-{{- $paginatorMode := "arrows" }}
+{{- $paginatorMode := "buttons" }}
 {{- with .mode -}}{{- $paginatorMode = . -}}{{- end -}}
-{{- $validModes := slice "arrows" "list" "buttons" "dropdown" -}}
+{{- $validModes := slice "arrows" "list" "buttons" "dropdown" "dropup" -}}
 {{- if not (in $validModes $paginatorMode) -}}
     {{- errorf "partial [assets/mpagination.html] - invalid mode specified" -}}
 {{- end -}}        
 
+<!-- Check if tooltips on buttons are enabled -->
+{{- $supportedFlags := slice "on" "off" -}}
+{{- $tooltips := true }}
+{{- with .tooltips -}}
+    {{- if not (in $supportedFlags .) -}}
+        {{- errorf "partial [assets/mpagination.html] - invalid tooltips specified" -}}
+    {{- end -}}        
+    {{- if eq . "off" -}}{{- $tooltips = false -}}{{- end -}}
+{{- end -}}
+
+{{- $positions := 5 -}}
+{{- with .positions -}}
+    {{- if lt . 2 -}}
+        {{- errorf "partial [assets/mpagination.html] - Number of positions should be 2 or more" -}}
+    {{- else -}}
+        {{- $positions = . -}}
+    {{- end -}}
+{{- end -}}    
+
 <!-- Show left/right page navigator arrows -->
 {{- if eq $paginatorMode "arrows" -}}
     <div class="row row-cols-2 mt-5 mb-3">
-        <div class="col">
+        <div class="col"><div class=""></div>
             <!-- Check if there is a previous page -->
             {{ with $page.Paginator.HasPrev -}}
                 <!-- get the pager -->
@@ -55,9 +84,121 @@
         </div>
     </div>
 
+
 <!-- Show paginator buttons -->
 {{- else if eq $paginatorMode "buttons" -}}
-    {{ partial "assets/pagination.html" $page }}
+    {{- $tooltip := "" -}}
+    <!-- Start of navigation -->
+    <nav aria-label="{{ T "paginationNav" }}">
+        <ul class="pagination justify-content-center">
+            <!-- Go through the pages in the paginator -->
+            {{- with $page.Paginator }}
+                <!-- Save the current page number -->
+                {{- $currentPageNumber := .PageNumber }}
+
+                <!-- Show the first page icon (<<), if the current page is not the first page -->
+                {{- with .First }}
+                    {{- if ne $currentPageNumber .PageNumber }}
+                        {{- range .Pages -}}{{- $tooltip = .Title -}}{{- end -}}
+                        <li class="mpage-item">
+                            <a href="{{ .URL }}" 
+                                aria-label="{{ T "paginationFirst" }}" 
+                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                class="page-link" 
+                                role="button"
+                            >
+                                <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-left") }}</span>
+                            </a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+
+                <!-- Show the previous page icon (<), if the current page is not the first page -->
+                {{- with .Prev }}
+                    {{- range .Pages -}}{{- $tooltip = .Title -}}{{- end -}}
+                    <li class="mpage-item">
+                        <a href="{{ .URL }}" 
+                            aria-label="{{ T "paginationPrevious" }}" 
+                            {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                            class="page-link" 
+                            role="button"
+                        >
+                            <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-left") }}</span>
+                        </a>
+                    </li>
+                {{- end }}
+
+                <!-- Determine the amount of pages to show -->
+                {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $positions 2))) }}
+                {{- $end := math.Min .TotalPages (sub (add $start $positions) 1) }}
+                {{- if lt (add (sub $end $start) 1) $positions }}
+                    {{- $start = math.Max 1 (add (sub $end $positions) 1) }}
+                {{- end }}
+
+                <!-- Show a maximum of $positions pages, disable the current page -->
+                {{- range $k := seq $start $end }}
+                    {{- if eq $page.Paginator.PageNumber $k }}
+                    {{ $tooltip = T "multipage_this" }}
+                        <li class="mpage-item active disabled">
+                            <a aria-current="page" 
+                                aria-label="{{ T "multipage_page" }} {{ $k }}"
+                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}
+                                class="page-link" 
+                                role="button"
+                            >
+                                {{ $k }}
+                            </a>
+                        </li>
+                    {{- else }}
+                        {{- range (index $page.Paginator.Pagers (sub $k 1)).Pages -}}{{- $tooltip = .Title -}}{{- end -}}
+                        <li class="mpage-item">
+                            <a href="{{ (index $page.Paginator.Pagers (sub $k 1)).URL }}" 
+                                aria-label="{{ T "multipage_page" }} {{ $k }}" 
+                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                class="page-link" 
+                                role="button"
+                            >
+                                {{ $k }}
+                            </a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+
+                <!-- Show the next page icon (>), if the current page is not the last page -->
+                {{- with .Next }}
+                    {{- range .Pages -}}{{- $tooltip = .Title -}}{{- end -}}
+                        <li class="mpage-item">
+                            <a href="{{ .URL }}" 
+                                aria-label="{{ T "paginationNext" }}" 
+                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                class="page-link" 
+                                role="button"
+                            >
+                                <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angle-right") }}</span>
+                            </a>
+                </li>
+                {{- end }}
+
+                <!-- Show the last page icon (>>), if the current page is not the last page -->
+                {{- with .Last }}
+                    {{- if ne $currentPageNumber .PageNumber }}
+                        {{- range .Pages -}}{{- $tooltip = .Title -}}{{- end -}}
+                        <li class="mpage-item">
+                            <a href="{{ .URL }}" 
+                                aria-label="{{ T "paginationLast" }}" 
+                                {{ if $tooltips }}title="{{- $tooltip -}}"{{ end }}                     
+                                class="page-link" 
+                                role="button"
+                            >
+                                <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" "fas angles-right") }}</span>
+                            </a>
+                        </li>
+                    {{- end }}
+                {{- end }}
+            {{- end }}  
+        </ul>
+    </nav>
+
 
 <!-- Show a list of pages -->
 {{- else if eq $paginatorMode "list" -}}
@@ -79,10 +220,10 @@
                         {{- (i18n "multipage_pages") }}&nbsp;{{ (i18n $section) -}}</a>
                         <!-- List the pages-->
                         {{- range $k := seq 1 $page.Paginator.TotalPages -}}
-                            {{- $active := "list-group-item-primary bg-opacity-10 border-1" -}}
+                            {{- $active := "" -}}
                             <!-- When the page to list is the current page, show it italic and disabled -->
                             {{- if eq $currentPageNumber $k}}
-                                {{- $active = "bg-primary bg-opacity-10 disabled border-1" -}}
+                                {{- $active = "disabled text-italic" -}}
                             {{- end -}}            
                             <a href="{{ (index $page.Paginator.Pagers (sub $k 1)).URL }}" class="list-group-item list-group-item-action {{ $active }}">
                                 <!-- Show page number -->
@@ -98,8 +239,8 @@
         </div>
     </div>
 
-<!-- Show a dropdown box -->
-{{- else if eq $paginatorMode "dropdown" -}}
+<!-- Show a dropdown/dropup box -->
+{{- else if or (eq $paginatorMode "dropdown") (eq $paginatorMode "dropup") -}}
     <!-- Save the current page number -->
     {{- $currentPageNumber := $page.Paginator.PageNumber }}
     <!-- Create a container with the text centered -->
@@ -111,21 +252,19 @@
                 <!-- A column that automatically adjusts to the text length -->
                 <div class="col col-md-auto">
                     <!-- Start of the dropdown -->
-                    <div  class="dropup">
+                    <div  class="{{- $paginatorMode -}}">
                         <!-- Show header -->
                         <button class="btn dropdown-toggle bg-primary bg-opacity-10 fw-bolder fs-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{- $section := printf "multipage_%s" $page.Section -}}
                             {{- (i18n "multipage_pages") }}&nbsp;{{ (i18n $section) -}}
                         </button>
                         <!-- List the pages-->
-                        <ul class="dropdown-menu bg-primary bg-opacity-25">
+                        <ul class="dropdown-menu">
                         {{- range $k := seq 1 $page.Paginator.TotalPages -}}
                             {{- $active := "" -}}
-                            {{- $current := false -}}
                             <!-- When the page to list is the current page, show it italic and disabled -->
                             {{- if eq $currentPageNumber $k}}
-                                {{- $active = "active disabled" -}}
-                                {{- $current = true -}}
+                                {{- $active = "disabled text-italic" -}}
                             {{- end -}}
                             <li>
                             <a href="{{ (index $page.Paginator.Pagers (sub $k 1)).URL }}" class="dropdown-item {{ $active }}">

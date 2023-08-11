@@ -165,6 +165,8 @@
   translation: "Enter your Mastodon instance where the page should be shared"
 
 # Multi Page
+- id: multipage_this
+  translation: "This page"
 - id: multipage_page
   translation: "Page"
 - id: multipage_pages
