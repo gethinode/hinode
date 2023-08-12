@@ -51,13 +51,9 @@
           }
         }
 
-        .nav-pills {
-          --bs-nav-pills-link-active-bg: var(--bs-primary);
-        }
-        
         .pagination {
-          --bs-pagination-active-bg: var(--bs-primary);
-          --bs-pagination-active-border-color: var(--bs-primary);
+          --bs-pagination-color: var(--bs-body-bg);
+          --bs-pagination-bg: var(--bs-primary);
         }
         
         .progress,
