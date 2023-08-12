@@ -48,6 +48,10 @@
     font: inherit;
 }
 
+#toc-collapse {
+    border-color: var(--bs-secondary-color) !important;
+}
+
 .toc-button {
     --bs-btn-hover-color: var(--bs-primary);
     --bs-btn-hover-bg: var(--bs-body-bg);
@@ -63,5 +67,22 @@
         border-color: var(--bs-primary);
         box-shadow: 0 0 0 4px var(--bs-primary-border-subtle);
         outline: none;
+    }
+}
+
+@if $enable-dark-mode {
+    [data-bs-theme="dark"] {
+        .toc-button {
+            --bs-btn-color: var(--bs-body-color);
+            --bs-btn-border-color: var(--bs-body-color);
+        }
+
+        #toc-collapse {
+            border-color: var(--bs-body-color) !important;
+        }
+
+        .toc nav a {
+            color: var(--bs-body-color);
+        }
     }
 }

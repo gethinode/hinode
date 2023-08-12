@@ -8,6 +8,8 @@
 }
 
 .btn-social {
+    background-color: transparent;
+    
     --bs-btn-bg: transparent;
     --bs-btn-border-width: none;
     --bs-btn-color: var(--bs-secondary);
@@ -23,5 +25,6 @@
 .btn-social:active,
 .btn-social.active,
 .open > .dropdown-toggle.btn-primary {
+    background-color: transparent;
     color: var(--bs-primary) if($enable-important-utilities, !important, null);
 }

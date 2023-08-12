@@ -26,7 +26,11 @@
 
 # Sharing
 - id: shareLink
-  translation: "Diese Seite teilen"
+  translation: "Diese Seite teilen per {{ . }}"
+- id: shareSystem
+  translation: "Betriebssystem"
+- id: copyToClipboard
+  translation: "In Zwischenablage kopieren"
 - id: copiedToClipboard
   translation: "Der Text befindet sich in die Zwischenablage"
 - id: link

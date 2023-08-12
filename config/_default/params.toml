@@ -135,6 +135,8 @@
     dark = "#212529"
 # toml-docs-end theme-colors
     themeOpacity = "10"
+    darkModeShade = "20%"
+    darkModeTint = "40%"
 # toml-docs-start font
     themeFont = "Inter"
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path

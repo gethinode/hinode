@@ -1,0 +1,30 @@
+.footer {
+    // background-color: $gray-800 if($enable-important-utilities, !important, null);
+    color: var(--bs-secondary) if($enable-important-utilities, !important, null);
+}
+
+.link-bg-footer {
+    color: var(--bs-secondary) if($enable-important-utilities, !important, null);
+    
+    &:hover,
+    &:focus {
+        color: var(--bs-tertiary-color) if($enable-important-utilities, !important, null);
+    }
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .footer {
+            color: $gray-500 if($enable-important-utilities, !important, null);
+        }
+
+        .link-bg-footer {
+            color: $gray-500 if($enable-important-utilities, !important, null);
+            
+            &:hover,
+            &:focus {
+                color: $gray-400 if($enable-important-utilities, !important, null);
+            }
+        }
+    }
+}

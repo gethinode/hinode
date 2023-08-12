@@ -30,7 +30,8 @@
 {{ $path := .Get "path" }}
 {{ $page := .Site.GetPage $path }}
 {{ if not $page }}
-    {{ errorf "Invalid or missing value for param 'page': %s" .Position -}}
+    {{ errorf "Invalid or missing value for param 'path': %s" $path -}}
+    {{ errorf " - Location: %s" .Position -}}
     {{ $error = true -}}
 {{ end }}
 

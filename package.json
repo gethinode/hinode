@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.18.0-beta",
+  "version": "0.18.0-beta2",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -41,10 +41,16 @@
     "env": "hugo env",
     "precheck": "npm version",
     "check": "hugo version",
-    "create:syntax": "npm run -s create:syntax-light & npm run -s create:syntax-dark && npm run -s update:syntax-dark",
-    "create:syntax-light": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
-    "create:syntax-dark": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
-    "update:syntax-dark": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
+    "create:syntax": "npm-run-all update:syntax:**",
+    "update:syntax:light1": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
+    "update:syntax:light2": "replace-in-files --string=\"#0086b3\" --replacement=\"#006b8f\" ./assets/scss/components/_syntax-light.scss",
+    "update:syntax:light3": "replace-in-files --string=\"#009999\" --replacement=\"#007a7a\" ./assets/scss/components/_syntax-light.scss",
+    "update:syntax:light4": "replace-in-files --string=\"#999988\" --replacement=\"#6d6d5d\" ./assets/scss/components/_syntax-light.scss",
+    "update:syntax:dark1": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark2": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark3": "replace-in-files --string=\"#8b949e\" --replacement=\"#979fa8\" ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark4": "replace-in-files --string=\".na {  }\" --replacement=\".na { color: #00cccc }\" ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark5": "replace-in-files --string=\".nb {  }\" --replacement=\".nb { color: #00a2d8 }\" ./assets/scss/components/_syntax-dark.scss",
     "upgrade": "npx npm-check-updates -u && npm run -s mod:update"
   },
   "repository": {
@@ -69,6 +75,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "hugo-bin": "^0.113.0",
     "markdownlint-cli2": "^0.8.1",
+    "npm-run-all": "^4.1.5",
     "postcss-cli": "^10.1.0",
     "purgecss-whitelister": "^2.4.0",
     "replace-in-files-cli": "^2.2.0",
