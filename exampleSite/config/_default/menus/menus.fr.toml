@@ -1,0 +1,73 @@
+[[main]]
+name = "À propos"
+pageRef = "/a-propos/"
+weight = 10
+
+[[main]]
+name = "Blog"
+pageRef = "/blog/"
+weight = 20
+
+[[main]]
+name = "Projets"
+pageRef = "/projets/"
+weight = 30
+
+[[main]]
+name = "Exemple de projet"
+pageRef = "/projets/exemple-de-projet/"
+parent = "Projets"
+weight = 1
+
+[[main]]
+name = "Autre projet"
+pageRef = "/projets/autre-projet/"
+parent = "Projets"
+weight = 2
+
+[[main]]
+name = "Tags"
+pageRef = "/tags/"
+weight = 40
+
+[[social]]
+name = "LinkedIn"
+pre = "fab linkedin"
+url = "https://linkedin.com/"
+weight = 10
+
+[[social]]
+name = "GitHub"
+pre = "fab fa-github"
+url = "https://github.com/"
+weight = 20
+
+[[social]]
+name = "Medium"
+pre = "fab medium"
+url = "https://medium.com/"
+weight = 30
+
+# toml-docs-start sample-navigation
+[[sample]]
+name = "Blog"
+pageRef = "/blog/"
+weight = 10
+
+[[sample]]
+name = "Projets"
+pageRef = "/projets/"
+weight = 20
+
+[[sample]]
+name = "Exemple de projet"
+pageRef = "/projets/exemple-de-projet/"
+parent = "Projets"
+weight = 1
+
+[[sample]]
+name = "Autre projet"
+pageRef = "/projets/autre-projet/"
+parent = "Projets"
+weight = 2
+# toml-docs-end sample-navigation
