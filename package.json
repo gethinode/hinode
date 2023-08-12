@@ -50,7 +50,7 @@
     "update:syntax:dark2": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark3": "replace-in-files --string=\"#8b949e\" --replacement=\"#979fa8\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark4": "replace-in-files --string=\".na {  }\" --replacement=\".na { color: #00cccc }\" ./assets/scss/components/_syntax-dark.scss",
-    "update:syntax:dark5": "replace-in-files --string=\".nb {  }\" --replacement=\".nb { color: #00a2d8  }\" ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark5": "replace-in-files --string=\".nb {  }\" --replacement=\".nb { color: #00a2d8 }\" ./assets/scss/components/_syntax-dark.scss",
     "upgrade": "npx npm-check-updates -u && npm run -s mod:update"
   },
   "repository": {
