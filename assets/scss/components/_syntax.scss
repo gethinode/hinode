@@ -13,10 +13,6 @@
     overflow-x: auto;
 }
 
-.preview-background {
-    background-color: var(--bs-dark-bg-subtle) if($enable-important-utilities, !important, null);
-}
-
 @if $enable-dark-mode {
     [data-bs-theme="dark"] {
         @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
