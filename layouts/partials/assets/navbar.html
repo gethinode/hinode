@@ -222,9 +222,9 @@
             <div class="d-flex fw-30">
                 <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}"
                     aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
-                    <span class="toggler-icon top-bar emphasis"></span>
-                    <span class="toggler-icon middle-bar emphasis"></span>
-                    <span class="toggler-icon bottom-bar emphasis"></span>
+                    <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                    <span class="toggler-icon middle-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                    <span class="toggler-icon bottom-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
                 </button>
             </div>
     

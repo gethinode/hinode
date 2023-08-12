@@ -51,7 +51,6 @@
 .toggler-icon {
     width: 30px;
     height: 3px;
-    background-color: $primary;
     display: block;
     transition: all 0.2s;
 }
@@ -100,15 +99,21 @@
     background-color: #777;
 }
 
-.emphasis {
+.emphasis-light {
     background-color: $black if($enable-important-utilities, !important, null);
 }
 
-@if $enable-dark-mode {
-    @include color-mode(dark) {
-        .emphasis {
-            background-color: $white if($enable-important-utilities, !important, null);
-        }
+.emphasis-dark {
+    background-color: $white if($enable-important-utilities, !important, null);
+}
+
+.emphasis, {
+    background-color: $black if($enable-important-utilities, !important, null);
+}
+
+@include color-mode(dark) {
+    .emphasis {
+        background-color: $white if($enable-important-utilities, !important, null);
     }
 }
 
