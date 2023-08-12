@@ -15,6 +15,7 @@ const addCopyButtons = (clipboard) => {
     const button = document.createElement('button')
     button.className = 'clipboard-button'
     button.setAttribute('data-toast-target', 'toast-copied-code-message')
+    button.setAttribute('aria-label', '{{ T "copyToClipboard" }}')
     button.type = 'button'
     button.innerHTML = svgCopy
     button.addEventListener('click', () => {

@@ -1,5 +1,5 @@
 // stylelint-disable annotation-no-unknown
-@import "components/syntax-light";
+@import "syntax-light";
 
 .bg,
 .chroma,
@@ -13,13 +13,9 @@
     overflow-x: auto;
 }
 
-.preview-background {
-    background-color: var(--bs-dark-bg-subtle) if($enable-important-utilities, !important, null);
-}
-
 @if $enable-dark-mode {
     [data-bs-theme="dark"] {
-        @import "components/syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
+        @import "syntax-dark"; // stylelint-disable-line no-invalid-position-at-import-rule
 
         .bg,
         .chroma,

@@ -22,7 +22,7 @@
     {{- $collapsed := .collapsed -}}
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
-        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "colorMode" }}" aria-expanded="false" id="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
             <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}</span>
             <span class="d-md-none"></span>
         </a>
@@ -182,15 +182,18 @@
 {{- $pre := .Pre -}}
 {{- $post := .Post -}}
 
-{{- $theme := "" -}}
-{{- if eq $color "black" }}{{ $theme = "dark" }}{{ end -}}
-{{- if eq $color "white" }}{{ $theme = "light" }}{{ end -}}
-
+{{- $theme := "light" -}}
+{{- if in (slice "primary" "secondary" "success" "danger" "black") $color }}{{ $theme = "dark" }}{{ end -}}
+{{- if in (slice "body" "body-tertiary") $color }}{{ $theme = "" }}{{ end -}}
 {{- $class := .class -}}
 
-<div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
+{{- $contrast := false -}}
+{{- if in (slice "primary" "secondary" "success" "danger") $color }}{{ $contrast = true }}{{ end -}}
+
+
+<div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
-    <nav class="navbar navbar-expand-{{ $size }} {{ with $color }}bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
+    <nav class="navbar navbar-expand-{{ $size }}{{ if $contrast }} navbar-contrast{{ end }}{{ with $color }} bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
         <div class="container-xxl p-0">
             <!-- Insert sidebar toggler when applicable -->
             <div class="d-flex">
@@ -217,11 +220,11 @@
     
             <!-- Insert main navigation toggler -->
             <div class="d-flex fw-30">
-                <button id="main-nav-toggler" class="navbar-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}"
+                <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}"
                     aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
-                    <span class="toggler-icon top-bar emphasis"></span>
-                    <span class="toggler-icon middle-bar emphasis"></span>
-                    <span class="toggler-icon bottom-bar emphasis"></span>
+                    <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                    <span class="toggler-icon middle-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                    <span class="toggler-icon bottom-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
                 </button>
             </div>
     
@@ -237,7 +240,7 @@
                             {{- if .HasChildren -}}
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     {{- range .Children -}}
-                                        {{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}
+                                        <li>{{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}</li>
                                     {{- end -}}
                                 </ul>
                             {{- end -}}
@@ -256,10 +259,10 @@
                     {{- if $enableLanguage -}}
                         {{- $currentLang := $page.Language.Lang -}}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
                                 {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw") }} {{ T "languageSwitcherLabel" }}
                             </a>
-                            <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
                                 {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw") }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end ">
