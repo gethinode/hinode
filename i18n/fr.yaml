@@ -1,0 +1,115 @@
+# Single pages
+- id: postedOnDate
+  translation: "Posté le {{ . }}"
+- id: lastModified
+  translation: "Dernière modification le {{ . }}"
+- id: read
+  translation: "de lecture"
+- id: minutesShort
+  translation: "min"
+- id: words
+  translation: "mots"
+- id: photoFull
+  translation: "Photo par %s sur %s"
+- id: photoShort
+  translation: "Photo par {{ . }}"
+- id: photoOn
+  translation: "sur"
+- id: draft
+  translation: "Brouillon"
+
+# List pages
+- id: article
+  translation: "Article"
+- id: articles
+  translation: "Articles"
+- id: more
+  translation: "Plus {{ . }}"
+
+# Sharing
+- id: shareLink
+  translation: "Partager via {{ . }}"
+- id: shareSystem
+  translation: "system" # placeholder
+- id: copyToClipboard
+  translation: "copy to clipboard" # placeholder
+- id: copiedToClipboard
+  translation: "copié dans le presse-papier"
+- id: link
+  translation: "Lien"
+- id: code
+  translation: "Code"
+
+# Pagination
+- id: paginationNav
+  translation: "Navigation de la page"
+- id: paginationPrevious
+  translation: "Page précédente"
+- id: paginationNext
+  translation: "Page suivante"
+- id: paginationFirst
+  translation: "Première page"
+- id: paginationLast
+  translation: "Dernière page"
+
+# Navigation
+- id: colorMode
+  translation: "Changer le thème"
+- id: colorLight
+  translation: "Clair"
+- id: colorDark
+  translation: "Sombre"
+- id: colorAuto
+  translation: "Auto"
+- id: toggleMainNav
+  translation: "Afficher/Masquer la navigation principale"
+- id: home
+  translation: "Accueil"
+- id: languageSwitcherLabel
+  translation: "Langage"
+
+# Table of contents
+- id: toc
+  translation: "Sur cette page"
+- id: seeAlso
+  translation: "Voir également"
+
+# Sidebar
+- id: toggleSidebar
+  translation: "Afficher/Masquer la barre latérale"
+
+# Feature
+- id: addedFeature
+  translation: "Ajouté dans {{ . }}"
+- id: deprecatedFeature
+  translation: "Obsolète dans {{ . }}"
+
+# Versioning
+- id: latest
+  translation: "dernière"
+- id: allVersions
+  translation: "Toutes les versions"
+- id: newerVersionAlert
+  translation: "Il existe une nouvelle version de {{ . }}!"
+
+# 404 page
+- id: pageNotFound
+  translation: "La page que vous recherchez n'existe pas ou une autre erreur s'est produite.Essayez de revenir à notre {{ . }}."
+- id: pageNotFoundTitle
+  translation: "Page non trouvée"
+- id: pageNotFoundHome
+  translation: "page d'accueil"
+
+# Footer
+- id: copyright
+  translation: "Copyright"
+- id: rights
+  translation: "Tous droits réservés"
+- id: poweredBy
+  translation: "Propulsé par {{ . }}."
+
+# Comments
+- id: show
+  translation: "Afficher"
+- id: comments
+  translation: "Commentaires" 

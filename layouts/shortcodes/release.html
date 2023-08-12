@@ -4,7 +4,9 @@
     "version":      Required version string, expects semver notation with a "v" prefix.
     "state":        Optional state, either "new" or "deprecated".
     "short":        Optional flag to indicate the release button should use short notation.
+    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
     "class":        Optional class attribute of the button element.
+    "inline":       If set, renders the release button inline (defaults to false).
 -->
 
 {{- $error := false -}}
@@ -42,30 +44,61 @@
 {{- end -}}
 
 {{- $title := $version -}}
-{{- $color := "success" -}}
+{{- $color := "primary" -}}
 {{- if eq $state "deprecated" -}}
     {{- $color = "secondary" -}}
 {{- end -}}
 
+{{- $icon := "" -}}
+{{- $tooltip := "" -}}
+{{- if eq $state "deprecated" -}}
+    {{- if $short -}}
+        {{- $icon = "fas trash-can" -}}
+        {{- $tooltip = T "deprecatedFeature" $version -}}
+    {{ else }}
+        {{- $title = T "deprecatedFeature" $version -}}
+    {{- end -}}
+{{- else -}}
+    {{- if $short -}}
+        {{- $icon = "fas rocket" -}}
+        {{- $tooltip = T "addedFeature" $version -}}
+    {{ else }}
+        {{- $title = T "addedFeature" $version -}}
+    {{- end -}}
+{{- end -}}
+
+
 {{- if not $short -}}
     {{- if eq $state "deprecated" -}}
-        {{- $title = (printf "Deprecated in %s" $version) -}}
+        {{- $title = T "deprecatedFeature" $version -}}
     {{- else -}}
-        {{- $title = (printf "Added in %s" $version) -}}
+        {{- $title = T "addedFeature" $version -}}
     {{- end -}}
+{{- end -}}
+
+{{- $size := "md" -}}
+{{- with .Get "size" }}{{ $size = . }}{{ end -}}
+{{- $supportedSizes := slice "sm" "md" "lg" -}}
+{{- if not (in $supportedSizes $size) -}}
+    {{- errorf "Invalid value for param 'size': %s" .Position -}}
+    {{- $error = true -}}
 {{- end -}}
 
 {{- $class := .Get "class" -}}
 
 {{- if not $error -}}
-    <div class="pb-3">
+    {{- if not $inline }}<div class="pb-3">{{ end -}}
     {{- partial "assets/button.html" (dict 
         "title" $title
         "href" (partial "partials/utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $version))
         "size" "sm"
         "color" $color
         "outline" "true"
+        "size" $size
+        "icon" $icon
+        "tooltip" $tooltip
+        "order" "first"
         "class" (trim (printf "rounded-2 fw-semibold %s" $class) " "))
     -}} 
-    </div>
+    {{- if not $inline }}</div>{{ end -}}
 {{- end -}}

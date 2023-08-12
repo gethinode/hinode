@@ -112,8 +112,8 @@
 {{- with $page -}}
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
     {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
-    {{- if not $description }}{{ $description = .Description }}{{ end -}}
-    {{- if not $thumbnail }}{{ $thumbnail = .Params.thumbnail }}{{ end -}}
+    {{- if not $description }}{{ $description = partial "utilities/GetDescription.html" . }}{{ end -}}
+    {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
     {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
 {{- end -}}
 

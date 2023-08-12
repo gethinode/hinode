@@ -1,0 +1,53 @@
+# toml-docs-start lang-main
+[en]
+languageName = "English"
+contentDir = "content/en"
+weight = 1
+# toml-docs-end lang-main
+# toml-docs-start lang-param
+[en.params.head]
+tagline = "A Hugo Theme"
+[en.params.social]
+title = "Follow me"
+caption = "I work on everything coding and tweet developer memes"
+[en.params.footer]
+# license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+# toml-docs-end lang-param
+[en.params.sections.blog]
+reference = "More Posts"
+[en.params.sections.projects]
+reference = "More Projects"
+
+[nl]
+languageName = "Nederlands"
+contentDir = "content/nl"
+weight = 2
+[nl.params.head]
+tagline = "Een Hugo Thema"
+[nl.params.social]
+title = "Volg mij"
+caption = "Ik doe aan programmeren en tweet memes"
+[nl.params.footer]
+# license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+[nl.params.sections.blog]
+reference = "Meer artikelen"
+[nl.params.sections.projects]
+title = "Projecten"
+reference = "Meer projecten"
+
+[fr]
+languageName = "Français"
+contentDir = "content/fr"
+weight = 2
+[fr.params.head]
+tagline = "Un thème Hugo"
+[fr.params.social]
+title = "Suivez-moi"
+caption = "Je code et je tweet des mèmes de développeurs."
+[fr.params.footer]
+# license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+[fr.params.sections.blog]
+reference = "Plus d'articles"
+[fr.params.sections.projects]
+title = "Projets"
+reference = "Plus de projets"

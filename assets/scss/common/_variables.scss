@@ -2,9 +2,6 @@
 $enable-negative-margins:       true;
 $enable-important-utilities:    true !default;
 
-// Font awesome variables overrides for theme
-$fa-font-path:                  "../fonts";
-
 // Remove the border from the focused navigation toggler
 $navbar-toggler-focus-width:    0 !default;
 
@@ -28,3 +25,10 @@ $btn-toggle-color:              $black !default;
 $carousel-dark-indicator-active-bg:  #ffffff !default;
 $carousel-dark-caption-color:        #ffffff !default;
 $carousel-dark-control-icon-filter:  invert(0) grayscale(100) !default;
+
+// scss-docs-start color-mode
+$primary-text-emphasis-dark:        mix(white, $primary, $dark-mode-tint) !default;
+$link-color-dark:                   mix(white, $primary, $dark-mode-tint) !default;
+$primary-bg-subtle-dark:            mix(black, $primary, $dark-mode-shade) !default;
+$primary-border-subtle-dark:        mix(black, $primary, $dark-mode-shade / 2) !default;
+// scss-docs-end color-mode

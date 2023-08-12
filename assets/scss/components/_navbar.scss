@@ -11,6 +11,22 @@
     background-color: var(--bs-body-bg);
 }
 
+.nav-link {
+    margin: 0 .15rem;
+}
+
+.navbar-contrast .nav-link.active, .navbar-contrast .nav-link.show, .navbar-contrast .nav-link:hover {
+    border-bottom: solid 1px var(--bs-navbar-hover-color);
+    margin-bottom: -1px;
+}
+
+.navbar-contrast {
+    --bs-navbar-color: white !important;
+    --bs-navbar-hover-color: white !important;
+    --bs-navbar-disabled-color: white !important;
+    --bs-navbar-active-color: white !important;
+}
+
 .navbar-expanded {
     box-shadow: $box-shadow-sm;
 }
@@ -36,7 +52,6 @@
 .toggler-icon {
     width: 30px;
     height: 3px;
-    background-color: $primary;
     display: block;
     transition: all 0.2s;
 }
@@ -85,15 +100,21 @@
     background-color: #777;
 }
 
-.emphasis {
+.emphasis-light {
     background-color: $black if($enable-important-utilities, !important, null);
 }
 
-@if $enable-dark-mode {
-    @include color-mode(dark) {
-        .emphasis {
-            background-color: $white if($enable-important-utilities, !important, null);
-        }
+.emphasis-dark {
+    background-color: $white if($enable-important-utilities, !important, null);
+}
+
+.emphasis, {
+    background-color: $black if($enable-important-utilities, !important, null);
+}
+
+@include color-mode(dark) {
+    .emphasis {
+        background-color: $white if($enable-important-utilities, !important, null);
     }
 }
 

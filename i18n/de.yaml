@@ -1,52 +1,46 @@
-# Content
-- id: about
-  translation: "Über mich"
+# Single pages
 - id: postedOnDate
   translation: "Veröffentlicht am {{ . }}"
 - id: lastModified
   translation: "Zuletzt verändert am {{ . }}"
-- id: translationsLabel
-  translation: "Andere Sprachen: "
-- id: translationsSeparator
-  translation: ", "
-- id: more
-  translation: "Weitere {{ . }}"
-- id: readMore
-  translation: "Weiterlesen"
-- id: moreBlog
-  translation: "Weitere Beiträge"
-- id: olderBlog
-  translation: "Ältere Beiträge"
-- id: recentBlog
-  translation: "Aktuelle Beiträge"
-- id: newerBlog
-  translation: "Neuere Beiträge"
-- id: previousBlog
-  translation: "Vorheriger Beitrag"
-- id: nextBlog
-  translation: "Nächster Beitrag"
-- id: recentProjects
-  translation: "Projekte"
-- id: moreProjects
-  translation: "Weitere Projekte"
 - id: read
   translation: "Lesezeit"
 - id: minutesShort
   translation: "Min."
 - id: words
   translation: "Wörter"
-- id: copyright
-  translation: "Copyright"
-- id: rights
-  translation: "Alle Rechte vorbehalten"
-- id: photoBy
-  translation: "Foto von"
-- id: photoOn
-  translation: "auf"
+- id: photoFull
+  translation: "Foto von %s auf %s"
+- id: photoShort
+  translation: "Foto von {{ . }}"
+- id: draft
+  translation: "Entwurf"
+
+# List pages
 - id: article
   translation: "Artikel"
 - id: articles
   translation: "Artikel"
+- id: more
+  translation: "Weitere {{ . }}"
+
+# Sharing
+- id: shareLink
+  translation: "Diese Seite teilen per {{ . }}"
+- id: shareSystem
+  translation: "Betriebssystem"
+- id: copyToClipboard
+  translation: "In Zwischenablage kopieren"
+- id: copiedToClipboard
+  translation: "Der Text befindet sich in die Zwischenablage"
+- id: link
+  translation: "Link zur Webseite"
+- id: code
+  translation: "Code"
+
+# Pagination
+- id: paginationNav
+  translation: "Navigation auf der Seite"
 - id: paginationPrevious
   translation: "Vorherige"
 - id: paginationNext
@@ -55,78 +49,65 @@
   translation: "Erste"
 - id: paginationLast
   translation: "Letzte"
-- id: toggleSidebar
-  translation: "Menünavigation anzuzeigen oder auszublenden"
+
+# Navigation
 - id: colorMode
-  translation: "Modus"
+  translation: "Thema umschalten"
 - id: colorLight
-  translation: "Licht"
+  translation: "Light"
 - id: colorDark
-  translation: "Dunkel"
+  translation: "Dark"
 - id: colorAuto
-  translation: "Automatisch"
+  translation: "Auto"
 - id: toggleMainNav
   translation: "Hauptmenü anzuzeigen oder auszublenden"
+- id: home
+  translation: "Startseite"
+- id: languageSwitcherLabel
+  translation: "Sprache"
+
+# Table of contents
+- id: toc
+  translation: "Auf dieser Seite"
+- id: seeAlso
+  translation: "Siehe auch"
+
+# Sidebar
+- id: toggleSidebar
+  translation: "Menünavigation anzuzeigen oder auszublenden"
+
+# Feature
+- id: addedFeature
+  translation: "Eingefügt seit {{ . }}"
+- id: deprecatedFeature
+  translation: "Veraltet seit {{ . }}"
+
+# Versioning
+- id: latest
+  translation: "neueste"
+- id: allVersions
+  translation: "Alle Versionen"
+- id: newerVersionAlert
+  translation: "Es gibt eine neuere Version von {{ . }}!"
 
 # 404 page
 - id: pageNotFound
-  translation: "Diese Seite existiert nicht. Versuche es über die"
+  translation: "Diese Seite existiert nicht. Versuche es über die {{ . }}"
 - id: pageNotFoundTitle
   translation: "Nicht gefunden"
 - id: pageNotFoundHome
   translation: "Startseite"
 
+# Footer
+- id: copyright
+  translation: "Copyright"
+- id: rights
+  translation: "Alle Rechte vorbehalten"
+- id: poweredBy
+  translation: "Ermöglicht durch {{ . }}."
 
-# Navigation
-- id: toggleNavigation
-  translation: "Navigation umschalten"
-- id: languageSwitcherLabel
-  translation: "Sprache"
-- id: gcseLabelShort
-  translation: "Suche"
-- id: gcseLabelLong
-  translation: "Suche {{ .Site.Title }}"
-- id: gcseClose
-  translation: "Schließen"
-- id: home
-  translation: "Startseite"
-
-# Staticman
-- id: noComment
-  translation: "Kein Kommentar"
-- id: oneComment
-  translation: "Kommentar"
-- id: moreComment
-  translation: "Kommentare"
-- id: useMarkdown
-  translation: "Du kannst Markdown-Syntax benutzen"
-- id: yourName
-  translation: "Dein Name"
-- id: yourEmail
-  translation: "Deine E-Mail-Adresse"
-- id: yourWebsite
-  translation: "Deine Webseite"
-
-# Delayed Disqus
+# Comments
 - id: show
   translation: "Zeige"
 - id: comments
   translation: "Kommentare"
-
-# Related posts
-- id: seeAlso
-  translation: "Siehe auch"
-
-# Table of contents
-- id: toc
-  translation: "Auf dieser Seite"
-
-# Search
-- id: ui_search
-  translation: "Durchsuche diese Seite..."
-- id: ui_no_results
-  translation: "Keine Ergebnisse für"
-
-# Draft
-- id: draft
-  translation: "Entwurf"

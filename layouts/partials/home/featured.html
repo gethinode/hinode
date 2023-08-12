@@ -9,8 +9,13 @@
                 {{ end }}
             </div>
             <div class="col col-sm-4 col-md-4">
+                {{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
+                {{- $thumbnail = or $thumbnail .Site.Params.home.featurePhoto -}}
                 {{ if .Site.Params.home.featurePhoto }}
-                    {{- partial "assets/mimage.html" (dict "url" .Site.Params.home.featurePhoto 
+                    {{ warnf "DEPRECATED: parameter `Params.home.featurePhoto` has been deprecated in release v0.18"}}
+                {{ end }}
+                {{ if $thumbnail }}
+                    {{- partial "assets/mimage.html" (dict "url" $thumbnail 
                                                            "credits" .Site.Params.home.photoCredits 
                                                            "ratio" "4x3" 
                                                            "outerClass" "img-wrap" 
@@ -20,5 +25,6 @@
                 {{ end }}
             </div>
         </div>
+        <div class="col col-lg-2 d-none d-lg-block bg-info order-4"></div>
     </div>
 </div>

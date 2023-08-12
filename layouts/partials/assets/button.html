@@ -9,7 +9,8 @@
                     "danger", "warning", "info", "light", "dark", "white", or "black".
     "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
     "badge"         Optional positioned badge to display on top of the button.
-    "aria-label"    Optional assistive label for the badge.
+    "label"         Optional assistive label for the button or badge. The label is applied to the badge instead of the
+                    button when a badge has been defined. Default value of the button aria-label is its title.
     "tooltip"       Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/
                     inactive buttons.
     "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons.
@@ -139,23 +140,22 @@
 
 {{- $attributes := .attributes -}}
 
-<a aria-label="{{ $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end }}
-    {{ with $id }}id="{{ . }}"{{ end }}
-    {{ with $target }}target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}
-    {{ with $toast }}data-toast-target="{{ $toast }}"{{ end }}
-    {{ with $clipboard }}data-clipboard="{{ $clipboard }}"{{ end }}
-    {{ if eq $type "button" }}class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class }}"
-    role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end }}
-    {{ else }} class="link-{{ $color }} position-relative {{ $class }}"{{ end }}
-    {{ with $tooltip }}data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end }}
-    {{ with $collapse }}data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end }}
-    {{ if eq $state "active" }}data-bs-toggle="button" aria-pressed="true"{{ end }}
-    {{ if eq $state "inactive" }}data-bs-toggle="button" aria-pressed="false"{{ end }}
-    {{ range $key, $val := $attributes }}
-        {{ print $key | safeHTMLAttr }}="{{ $val }}"
-    {{ end }}
+<a aria-label="{{ or $label $title }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+    {{- with $id }} id="{{ . }}"{{ end -}}
+    {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
+    {{- with $toast }} data-toast-target="{{ $toast }}"{{ end -}}
+    {{- with $clipboard }} data-clipboard="{{ $clipboard }}"{{ end -}}
+    {{- if eq $type "button" }} class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class -}}"
+    role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
+    {{- else }} class="link-{{ $color }} position-relative {{ $class }}"{{ end -}}
+    {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end -}}
+    {{- with $collapse }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
+    {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
+    {{- if eq $state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
+    {{- range $key, $val := $attributes -}}
+        {{ printf " %s=\"%s\"" $key $val | safeHTMLAttr }}
+    {{- end -}}
     >
-
     <div class="d-flex justify-content-{{ $justify }}">
         <div class="my-auto">{{ $title }}</div>
         {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon) }}</div>{{ end }}

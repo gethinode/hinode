@@ -5,6 +5,7 @@
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
+    endorse = true
     [main.externalLinks]
         cue = true
         tab = true
@@ -144,7 +145,7 @@
         title = "Blog"
         sort = "date"
         reverse = true
-        nested = false
+        nested = true
         cols = 3
         color = ""
         padding = "0"
@@ -159,8 +160,8 @@
         layout = "card"
         sort = "title"
         reverse = false
-        nested = false
-        cols = 2
+        nested = true
+        cols = 1
         background = "body-tertiary"
         color = "body"
         padding = "3"
@@ -170,39 +171,6 @@
         style = "border-1 card-emphasize"
         homepage = 3
         separator = false
-        multipage = true        # Used for multi-page sections
-    [sections.gallery]
-        title = "Gallery"
-        layout = "card"
-        sort = "title"
-        reverse = true 
-        nested = false
-        background = ""
-        color = ""
-        style = "border-0 card-zoom"
-        cols = 3
-        padding = "0"
-        header = "publication"
-        footer = "tags"
-        orientation = "stacked"
-        homepage = 3
-        separator = true
-    [sections.docs]
-        title = "Documentation"
-        layout = "card"     # card, list, nav
-        sort = "title"      # date, lastmod, weight, title or custom as defined in page frontmatter
-        reverse = false 
-        nested = false      # indicate the content should be listed recursively for the entire section.
-        background = ""     # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
-        color = ""          # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
-        style = "border-0 card-zoom" # Styling attributes for each element
-        cols = 3            # 1..5
-        padding = "0"       # “0”, “1”, “2”, “3”, “4”, “5”, or “auto”
-        header = "publication"     # Header of card: “full” (default), “publication”, “tags”, and “none”.
-        footer = "tags"     # Footer of card: “full”, “publication”, “tags”, and “none” (default).
-        orientation = "stacked" # Thumbnail: “stacked” (default), “horizontal”, or “none”
-        homepage = 3        # Number of cards to display
-        separator = true    # Show separator line between items, or not          
 # toml-docs-end sections
 
 [favicon]
@@ -229,6 +197,8 @@
     dark = "#212529"        # Eerie Black
 # toml-docs-end theme-colors
     themeOpacity = "10"
+    darkModeShade = "20%"
+    darkModeTint = "40%"
 # toml-docs-start font
     themeFont = "asap"
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
@@ -272,11 +242,4 @@
     theme = "" 
 
 [links]
-    bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
-    hinode_docs = "https://gethinode.com/docs"
-    hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
-    mozilla_image = "https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
-    observatory = "https://observatory.mozilla.org/analyze/demo.gethinode.com"
-    pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F"
-    utterances = "https://utteranc.es"
- 
+    hinode = "https://gethinode.com"

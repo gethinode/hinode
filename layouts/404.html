@@ -1,12 +1,13 @@
 {{ define "main"}}
-    <div class="container-xxl flex-fill d-flex align-content-center flex-wrap">
+    <div class="container-xxl flex-fill d-flex align-content-center flex-wrap feature">
         <div class="w-100 text-center">
             <span class="text-secondary fw-bold">
                 {{ partial "assets/icon.html" (dict "icon" "fa face-frown fa-10x") }}
                 <p class="display-1 mt-3 fw-bold">404</p>
                 <p class="fs-3">{{ T "pageNotFoundTitle" }}</p>
             </span>
-            <p>{{ T "pageNotFound" }} <a href="{{ "/" | relLangURL }}">{{ T "pageNotFoundHome" }}</a>.</p>
+            {{- $home := printf "<a href=\"%s\">%s</a>" ("/" | relLangURL) (T "pageNotFoundHome") -}}
+            <p>{{ T "pageNotFound" $home | safeHTML }}</p>
         </div>
     </div>
 {{ end }}
