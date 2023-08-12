@@ -28,7 +28,11 @@
 
 # Sharing
 - id: shareLink
-  translation: "Partager via"
+  translation: "Partager via {{ . }}"
+- id: shareSystem
+  translation: "system" # placeholder
+- id: copyToClipboard
+  translation: "copy to clipboard" # placeholder
 - id: copiedToClipboard
   translation: "copié dans le presse-papier"
 - id: link
