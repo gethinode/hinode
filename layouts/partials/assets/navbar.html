@@ -240,7 +240,7 @@
                             {{- if .HasChildren -}}
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     {{- range .Children -}}
-                                        {{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}
+                                        <li>{{- partial "assets/navbar-item.html" (dict "menu" . "parent" $menu "page" $page) -}}</li>
                                     {{- end -}}
                                 </ul>
                             {{- end -}}
