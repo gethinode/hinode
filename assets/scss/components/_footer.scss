@@ -5,6 +5,7 @@
 
 .link-bg-footer {
     color: var(--bs-secondary) if($enable-important-utilities, !important, null);
+    
     &:hover,
     &:focus {
         color: var(--bs-tertiary-color) if($enable-important-utilities, !important, null);
@@ -19,6 +20,7 @@
 
         .link-bg-footer {
             color: $gray-500 if($enable-important-utilities, !important, null);
+            
             &:hover,
             &:focus {
                 color: $gray-400 if($enable-important-utilities, !important, null);
