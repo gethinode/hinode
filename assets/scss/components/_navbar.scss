@@ -11,11 +11,7 @@
     background-color: var(--bs-body-bg);
 }
 
-.navbar-contrast .nav-link.active, .navbar-contrast .nav-link.show {
-    font-weight: bold;
-}
-
-.navbar-contrast .nav-link:hover, .navbar-contrast .nav-link:focus {
+.navbar-contrast .nav-link.active, .navbar-contrast .nav-link.show, .navbar-contrast .nav-link:hover {
     text-decoration: underline;
 }
 
@@ -24,6 +20,7 @@
     --bs-navbar-hover-color: white !important;
     --bs-navbar-disabled-color: white !important;
     --bs-navbar-active-color: white !important;
+    text-decoration: none;
 }
 
 .navbar-expanded {
