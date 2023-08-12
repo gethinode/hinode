@@ -1,7 +1,7 @@
 ---
 author: Mark Dumay
 title: Bootstrap elements
-date: 2023-08-05
+date: 2023-08-12
 description: Use shortcodes to add common Bootstrap elements with ease.
 tags: ["bootstrap", "shortcode"]
 thumbnail:
@@ -244,7 +244,7 @@ As an example, the following shortcode displays a light navigation header.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar id="navbar-sample" path="about" color="primary" size="md" search="false" menus="sample" title="Brand" mode="false" */>}}
+{{</* navbar id="navbar-sample" path="blog" color="primary" size="md" search="false" menus="sample" title="Brand" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
