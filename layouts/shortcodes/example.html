@@ -25,7 +25,7 @@
     {{ $lang = "markdown" }}
 {{- end -}}
 
-<div class="rounded border preview-background mb-3">
+<div class="rounded border mb-3">
     {{- if eq $show_preview true -}}
         <div {{ with $id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $class }} {{ . }}{{ end }}">
             {{- $content -}}
@@ -33,7 +33,7 @@
     {{- end -}}
     {{- if eq $show_markup true -}}
         <div class="d-flex align-items-center ps-3 pe-3 py-1{{ if $show_preview }} border-top{{ else }} rounded-top{{ end }} border-bottom syntax-highlight">
-            <small class="font-monospace text-body-secondary text-uppercase">{{- $lang -}}</small>
+            <small class="font-monospace text-body text-uppercase">{{- $lang -}}</small>
         </div>
         <div class="rounded-bottom syntax-highlight border-none">
             {{- highlight (trim $input "\r\n") $lang "" -}}
