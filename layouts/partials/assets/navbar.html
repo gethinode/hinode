@@ -191,7 +191,7 @@
 {{- if in (slice "primary" "secondary" "success" "danger") $color }}{{ $contrast = true }}{{ end -}}
 
 
-<div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
+<div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
     <nav class="navbar navbar-expand-{{ $size }}{{ if $contrast }} navbar-contrast{{ end }}{{ with $color }} bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
         <div class="container-xxl p-0">
