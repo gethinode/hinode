@@ -11,8 +11,13 @@
     background-color: var(--bs-body-bg);
 }
 
+.nav-link {
+    margin: 0 .15rem 0 .15rem;
+}
+
 .navbar-contrast .nav-link.active, .navbar-contrast .nav-link.show, .navbar-contrast .nav-link:hover {
-    text-decoration: underline;
+    border-bottom: solid 1px var(--bs-navbar-hover-color);
+    margin-bottom: -1px;
 }
 
 .navbar-contrast {
@@ -20,7 +25,6 @@
     --bs-navbar-hover-color: white !important;
     --bs-navbar-disabled-color: white !important;
     --bs-navbar-active-color: white !important;
-    text-decoration: none;
 }
 
 .navbar-expanded {
