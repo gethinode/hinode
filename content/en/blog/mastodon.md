@@ -6,9 +6,12 @@ title: Adding Mastodon as a sharing provider
 date: 2023-07-24
 description: An overview of the changes that are made to the Hinode template for sharing posts on Mastodon.
 tags: ["blog", "Hinode", "Mastodon"]
-thumbnail: img/elephant.jpg
-photoCredits: <a href="https://unsplash.com/@bepnamanh" target="_blank">Nam Anh</a>
-photoSource: <a href="https://unsplash.com/images/animals/elephant" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/elephant.jpg
+    author: Nam Anh
+    authorURL: https://unsplash.com/@bepnamanh"
+    origin: Unsplash
+    originURL: https://unsplash.com/images/animals/elephant
 ---
 <!-- markdownlint-enable MD022 MD041 -->
 

@@ -24,7 +24,7 @@
 {{- $padding := "0" -}}
 {{- $header := "full" -}}
 {{- $footer := "none" -}}
-{{- $style := "" -}}
+{{- $style := "border-0 card-zoom" -}}
 {{- $homepage := 3 -}}
 {{- $background := "" -}}
 {{- $layout := "card" -}}
@@ -97,7 +97,6 @@
         {{- $paginate = false -}}
         {{- $max = int (math.Min $homepage $max) -}}
     {{ end -}}
-    {{- $cols = int (math.Min $cols $max) -}}
 
     {{- $params := (dict 
         "page" $page

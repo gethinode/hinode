@@ -8,6 +8,9 @@
 // Import Bootstrap configuration (mounted by core Bootstrap module)
 @import "bootstrap.scss";
 
+// Include dark mode overrides
+@import "common/variables-dark.scss";
+
 // Import Hinode theme styles
 @import "components/alert.scss";
 @import "components/blockquote.scss";
@@ -18,6 +21,8 @@
 @import "components/clipboard.scss";
 @import "components/command.scss";
 @import "components/comments.scss";
+@import "components/feature.scss";
+@import "components/footer.scss";
 @import "components/navbar.scss";
 @import "components/img.scss";
 @import "components/pagination.scss";

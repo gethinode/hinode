@@ -30,7 +30,7 @@
                     <div class="hstack gap-3">
                         {{ range (.GetTerms "tags") -}}
                             {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
-                            {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "secondary" "size" "sm" "outline" "true") }}
+                            {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "primary" "size" "sm" "outline" "true") }}
                         {{ end -}}
                     </div>
                 </div>
@@ -46,11 +46,42 @@
         <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
     {{- end -}}
 
-    {{ if not (in (slice "docs" "minimal" "gallery") .Layout) }}
-        {{ if .Params.thumbnail -}}
-            {{- $credits := "" -}}
-            {{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s %s %s" .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
-            {{- partial "assets/mimage.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
+    {{ if not (in (slice "minimal" "gallery") .Layout) }}
+        {{- $thumbnail := "" -}}
+        {{- $credits := "" -}}
+        
+        {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
+        {{- if reflect.IsMap .Params.Thumbnail -}}
+            {{- $thumbnail = .Params.Thumbnail.url -}}
+            {{- $author := "" -}}
+            {{- if and .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author }}
+                {{- $author = partial "utilities/link" (dict "destination" .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author) -}}
+            {{- else if .Params.Thumbnail.author }}
+                {{- $author = .Params.Thumbnail.author -}}
+            {{- end -}}
+
+            {{- $origin := "" -}}
+            {{- if and .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin }}
+                {{- $origin = partial "utilities/link" (dict "destination" .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin) -}}
+            {{- else if .Params.Thumbnail.origin }}
+                {{- $origin = .Params.Thumbnail.origin -}}
+            {{- end }}
+
+            {{- if and $author $origin }}
+                {{ $credits = printf "%s %s %s %s" $icon $author (T "photoOn") $origin }}
+            {{ else if $author }}
+                {{ $credits = printf "%s %s" $icon $author }}
+            {{ end }}
+        {{ else }}
+            {{- $thumbnail = .Params.Thumbnail -}}
+            {{ if or .Params.photoCredits .Params.photoSource }}
+                {{ warnf "DEPRECATED: frontmatter variables `photoCredits` and `photoSource` have been deprecated in release v0.18: %s" .RelPermalink }}
+            {{ end }}
+            {{- if and .Params.photoCredits .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" $icon .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end -}}
+        {{- end -}}
+
+        {{ if $thumbnail -}}
+            {{- partial "assets/mimage.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
         {{ end -}}
     {{ end }}
     {{ .Content }}

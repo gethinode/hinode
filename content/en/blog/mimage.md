@@ -6,9 +6,12 @@ title: A different image shortcode
 date: 2023-07-24
 description: Add more options to the image shortcode.
 tags: ["blog", "Hinode", "image"]
-thumbnail: img/mimage.jpg
-photoCredits: <a href="https://unsplash.com/@carlheyerdahl" target="_blank">Carl Heyerdahl</a>
-photoSource: <a href="https://unsplash.com/photos/KE0nC8-58MQ" target="_blank">Unsplash</a>
+thumbnail:
+    url: img/mimage.jpg
+    author: Carl Heyerdahl
+    authorURL: https://unsplash.com/@carlheyerdahl
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/KE0nC8-58MQ
 ---
 <!-- markdownlint-enable MD022 MD041 -->
 ## Introduction

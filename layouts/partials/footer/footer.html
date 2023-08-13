@@ -1,9 +1,13 @@
-<footer class="container-fluid text-center p-3">
+<footer class="container-fluid footer text-center p-3">
     <div class="container-xxl text-center">
-        <small class="text-secondary">
+        <small>
             {{- $copyright := printf "%s © %s %s %s." (T "copyright") (dateFormat "2006" now) .Site.Title (T "rights") }}
             {{ cond (gt (len .Site.Copyright) 0) .Site.Copyright $copyright }}
             {{ .Site.Params.footer.license | safeHTML }}
+            {{ if .Site.Params.main.endorse }}
+                {{ $link := partial "utilities/link" (dict "destination" (index site.Params.links "hinode") "text" "Hinode" "class" "link-bg-footer") }}
+                {{ T "poweredBy" $link | safeHTML }}
+            {{ end }}
         </small>
     </div>
 </footer>

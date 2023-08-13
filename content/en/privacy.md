@@ -4,9 +4,12 @@ description: Privacy is an essential choice in the development of this site
 date: 2023-07-25
 #updated: 2023-02-11
 showComments: false
-thumbnail: img/privacy.jpg
-photoCredits: <a href="https://unsplash.com/@jdent" target="_blank">Jason Dent</a>
-photoSource: <a href="https://unsplash.com/photos/JFk0dVyvdvw" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/privacy.jpg
+    author: Jason Dent
+    authorURL: https://unsplash.com/@jdent"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/5yn5rGI5IUw
 ---
 <!-- CSpell:ignore -->
 

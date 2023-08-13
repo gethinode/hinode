@@ -6,9 +6,12 @@ description: Get in touch
 date: 2023-07-24
 #updated: 2023-02-11
 showComments: false
-thumbnail: img/contact.jpg
-photoCredits: <a href="https://unsplash.com/@melindagimpel" target="_blank">Melinda Gimpel</a>
-photoSource: <a href="https://unsplash.com/photos/5Ne6mMQtIdo" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/contact.jpg
+    author: Melinda Gimpel
+    authorURL: https://unsplash.com/@melindagimpel"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/5yn5rGI5IUw
 ---
 <!-- markdownlint-enable MD004 MD018 MD022 MD041 -->
 

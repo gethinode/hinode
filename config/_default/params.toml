@@ -5,6 +5,7 @@
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
+    endorse = true
     [main.externalLinks]
         cue = true
         tab = true
@@ -63,12 +64,6 @@
 # toml-docs-start home
 [home]
     sections = ["blog", "projects", "gallery"]
-    featurePhoto = "/img/electronics.jpg" 
-    photoCredits = "<a href=\"https://unsplash.com/@alexkixa\" target=\"_blank\">Alexandre Debiève</a> @ <a href=\"https://unsplash.com/photos/FO7JIlwjOtU\" target=\"_blank\">Unsplash</a>"
-    title = "Electronics close-up image"
-    fullCover = false
-    centerHeadline = false
-    style = ""
 # toml-docs-end home
 
 # toml-docs-start navigation
@@ -144,7 +139,7 @@
         title = "Blog"
         sort = "date"
         reverse = true
-        nested = false
+        nested = true
         cols = 3
         color = ""
         padding = "0"
@@ -159,8 +154,8 @@
         layout = "card"
         sort = "title"
         reverse = false
-        nested = false
-        cols = 2
+        nested = true
+        cols = 1
         background = "body-tertiary"
         color = "body"
         padding = "3"
@@ -174,7 +169,7 @@
     [sections.gallery]
         title = "Gallery"
         layout = "card"
-        sort = "title"
+        sort = "date"
         reverse = true 
         nested = false
         background = ""
@@ -202,7 +197,7 @@
         footer = "tags"     # Footer of card: “full”, “publication”, “tags”, and “none” (default).
         orientation = "stacked" # Thumbnail: “stacked” (default), “horizontal”, or “none”
         homepage = 3        # Number of cards to display
-        separator = true    # Show separator line between items, or not          
+        separator = true    # Show separator line between items, or not                  
 # toml-docs-end sections
 
 [favicon]
@@ -229,6 +224,8 @@
     dark = "#212529"        # Eerie Black
 # toml-docs-end theme-colors
     themeOpacity = "10"
+    darkModeShade = "20%"
+    darkModeTint = "40%"
 # toml-docs-start font
     themeFont = "asap"
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
@@ -272,11 +269,4 @@
     theme = "" 
 
 [links]
-    bs_badge_heading = "https://getbootstrap.com/docs/5.2/components/badge/#headings"
-    hinode_docs = "https://gethinode.com/docs"
-    hugo_imaging = "https://gohugo.io/content-management/image-processing/#imaging-configuration"
-    mozilla_image = "https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
-    observatory = "https://observatory.mozilla.org/analyze/demo.gethinode.com"
-    pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F"
-    utterances = "https://utteranc.es"
- 
+    hinode = "https://gethinode.com"

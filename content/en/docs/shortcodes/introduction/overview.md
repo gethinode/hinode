@@ -5,9 +5,12 @@ author: Joost Mans
 title: New Shortcodes
 date: 2023-07-25
 Description: Overview of the new shortcodes and partials created for this site.
-thumbnail: img/construction.jpg
-photoCredits: <a href="https://unsplash.com/@ashkfor121" target="_blank">Ashkan Forouzani</a>
-photoSource: <a href="https://unsplash.com/photos/_Y82jqFIBgw" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/construction.jpg
+    author: Ashkan Forouzani
+    authorURL: https://unsplash.com/@ashkfor121"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/_Y82jqFIBgw
 icon: fas book
 tags: ["documentation", "shortcodes", "partials"]
 layout: docs

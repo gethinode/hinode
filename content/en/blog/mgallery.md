@@ -6,9 +6,12 @@ title: Adding a gallery
 date: 2023-07-24
 description: Add a gallery to Hinode.
 tags: ["blog", "Hinode", "gallery"]
-thumbnail: img/mgallery.jpg
-photoCredits: <a href="https://unsplash.com/@rocinante_11" target="_blank">Mick Haupt</a>
-photoSource: <a href="https://unsplash.com/photos/VbI0LMaGMlg" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/mgallery.jpg
+    author: Mick Haupt
+    authorURL: https://unsplash.com/@rocinante_11"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/VbI0LMaGMlg
 ---
 <!-- markdownlint-enable MD022 MD041 -->
 ## Introduction

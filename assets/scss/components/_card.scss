@@ -64,6 +64,18 @@
     }
 }
 
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .card-zoom card-body-link,
+        .card-body-link {
+            &:hover,
+            &:focus {
+                color: $primary-bg-subtle-dark if($enable-important-utilities, !important, null);
+            }
+        }
+    }
+}
+
 // stylelint-enable annotation-no-unknown
 
 // make tag-link clickable on top of the stretched-link.

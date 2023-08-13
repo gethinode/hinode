@@ -6,9 +6,12 @@ description: Myrthos is a personal site devoted to my electronics and software p
 date: 2023-07-24
 #updated: 2023-02-11
 showComments: false
-thumbnail: img/about.jpg
-photoCredits: <a href="https://unsplash.com/@iamfelicia" target="_blank">Felicia Buitenwerf</a>
-photoSource: <a href="https://unsplash.com/photos/5yn5rGI5IUw" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/about.jpg
+    author: Felicia Buitenwerf
+    authorURL: https://unsplash.com/@iamfelicia"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/5yn5rGI5IUw
 ---
 <!-- markdownlint-enable MD018 MD022 MD041 -->
   

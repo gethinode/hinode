@@ -6,9 +6,12 @@ title: Markdown
 date: 2023-07-21T13:40:45.334Z
 description: Showing possible Markdown options, which also shows what is and what is not supported.
 tags: ["blog", "markdown"]
-thumbnail: img/mark.jpg
-photoCredits: <a href="https://unsplash.com/@victoriakubiaki" target="_blank">Victória Kubiaki</a>
-photoSource: <a href="https://unsplash.com/photos/OukRLogaKPE" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/mark.jpg
+    author: Victória Kubiaki
+    authorURL: https://unsplash.com/@victoriakubiaki"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/OukRLogaKPE
 modules: ["katex"]
 ---  
 <!-- markdownlint-enable MD022 MD041 -->

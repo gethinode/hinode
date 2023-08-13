@@ -7,17 +7,11 @@
     {{ $.Scratch.Set "title" .Site.Title -}}
 {{ end -}}
 
-{{ with .Description -}}
-    {{ $.Scratch.Set "description" . -}}
-{{ else -}}
-    {{ with .Summary | plainify -}}
-        {{ $.Scratch.Set "description" . -}}
-    {{ else -}}
-        {{ $.Scratch.Set "description" .Site.Params.main.description -}}
-    {{ end -}}
-{{ end -}}
+{{ $description := or (partial "utilities/GetDescription.html" .) .Site.Params.main.description }}
+{{ $.Scratch.Set "description" $description -}}
 
-{{ with .Params.thumbnail -}}
+{{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
+{{ with $thumbnail -}}
     {{ $img := partial "utilities/GetImage.html" (dict "url" .) -}}
     {{ with $img -}}
         {{ $dim := "1280x640" -}}
@@ -58,7 +52,7 @@
 {{ end -}}
 
     {{ if .IsHome -}}
-        <title>{{ .Site.Title }} {{ .Site.Params.main.separator }} {{ .Site.Params.head.tagline }}</title>
+        <title>{{ .Site.Title }} {{ if .Site.Params.head.tagline }} {{ .Site.Params.main.separator }} {{ .Site.Params.head.tagline }}{{ end }}</title>
     {{ else -}}
         <title>{{ .Site.Title }} {{ .Site.Params.main.separator }} {{ .Title }}</title>
     {{ end -}}

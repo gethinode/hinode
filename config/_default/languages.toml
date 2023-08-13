@@ -10,10 +10,12 @@
     [en.params.feature]
         link = "about"
         caption = "About"
+    [en.params.social]
+        title = "Social Media"
+        caption = ""
     [en.params.footer]
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Social Media"
-        footerTitle = "Site Links"
+        title = "Site Links"
 # toml-docs-end lang-param
 
 [nl]
@@ -25,7 +27,9 @@
     [nl.params.feature]
         link = "over-mij"
         caption = "Over mij"
+    [nl.params.social]
+        title = "Sociale Media"
+        caption = ""        
     [nl.params.footer]
         license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Sociale Media"
-        footerTitle = "Site Links"
+        title = "Volg mij"

@@ -6,9 +6,12 @@ description: Here are the terms of service for this site
 date: 2023-07-25
 #updated: 2023-02-11
 showComments: false
-thumbnail: img/terms.jpg
-photoCredits: <a href="https://unsplash.com/@markuswinkler" target="_blank">Markus Winkler</a>
-photoSource: <a href="https://unsplash.com/photos/TtJ0CLjLi6w" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/terms.jpg
+    author: Markus Winkler
+    authorURL: https://unsplash.com/@markuswinkler"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/TtJ0CLjLi6w
 ---
 <!-- markdownlint-enable MD018 MD022 MD041-->
   

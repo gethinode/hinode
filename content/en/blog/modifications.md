@@ -4,11 +4,15 @@
 author: Joost Mans
 title: Hinode changes
 date: 2023-07-21T13:41:48.543Z
+lastmod: 2023-08-13
 description: An overview of the changes to the Hinode template that were made for this site
 tags: ["blog", "Hinode"]
-thumbnail: img/changes.jpg
-photoCredits: <a href="https://unsplash.com/@brett_jordan" target="_blank">Brett Jordan</a>
-photoSource: <a href="https://unsplash.com/photos/gJUZjwy2EgE" target="_blank">Unsplash</a>
+thumbnail:
+    url: /img/changes.jpg
+    author: Brett Jordan
+    authorURL: https://unsplash.com/@brett_jordan"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/gJUZjwy2EgE
 ---
 <!-- markdownlint-enable MD022 MD041 -->
 
@@ -247,18 +251,18 @@ Add to `assets/scss/theme/theme.scss` the following:
 }
 ```
 
-Change in `/config/_default/languages.toml` the `en.params.footer` en `nl.params.footer` sections to:
+Change in `/config/_default/languages.toml` the following:
 
 ```toml
+    [en.params.feature]
+        link = "about"
+        caption = "About"
+    [en.params.social]
+        title = "Social Media"
+        caption = ""
     [en.params.footer]
         license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Social Media"
-        footerTitle = "Site Links"
-
-    [nl.params.footer]
-        license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
-        socialTitle = "Sociale Media"
-        footerTitle = "Site Links"
+        title = "Site Links"
 ```
 
 Change `layouts/partials/footer/social.html` to:
@@ -382,6 +386,13 @@ Override `[[social]]` with:
   pre = "fab fa-mastodon"
   url = "https://techhub.social/@Myrthos"
   weight = 40
+```
+
+Add to `i18n/en.yaml`:
+
+```yaml
+- id: about
+  translation: "About"
 ```
 
 ## Header changes
@@ -559,9 +570,9 @@ To add a gallery section to the site, to which the user can navigate, open `conf
     [sections.gallery]
         title = "Gallery"
         layout = "card"
-        sort = "title"
+        sort = "date"
         reverse = false 
-        nested = true
+        nested = false
         background = ""
         color = ""
         style = "border-0 card-zoom"
@@ -833,20 +844,38 @@ Also, in `layouts/_default/single.html` search for `{{ if eq .Layout "docs" }}`.
 
 ## Home page changes
 
-There are a few changes to the way the home page is displayed. The sections that are displayed on the home page and the image in the top blue block are defined in the `[home]` section of `config/_default/params.toml`, which has been changed to:
+There are a few changes to the way the home page is displayed. The sections that are displayed on the home page and the image in the top blue block are defined in `content/en/index.md`, which is to be changed to:
+
+```go-html-template
+<!-- CSpell:ignore Joost alexandre Debiève -->
+<!-- markdownlint-disable MD003 MD018 MD022 MD041-->
+---
+author: Joost Mans
+title: Welcome to this site!
+thumbnail:
+    url: /img/electronics.jpg
+    author: Alexandre Debiève
+    authorURL: https://unsplash.com/@alexkixa
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/FO7JIlwjOtU
+---
+<!-- markdownlint-disable MD018 MD022 MD041-->
+
+A site that is dedicated to sharing some of the stuff that I like. At the moment, also a site that is under development and to which still quite some content needs to be added.  
+I happen to like numerous things, but in this case what I will write about and share is mostly about developing this site, my electronics and software projects, and photography.
+
+The most recent topics can be found in the below sections and all information can be accessed by navigating the menu above.  
+If you are interested in who I am and why this site is named Myrthos, hit the About button below.
+```
+
+Furthermore the `home` section in the file `/config/_default/params.toml` needs to be changed to:
 
 ```toml
 [home]
     sections = ["blog", "projects", "gallery"]
-    featurePhoto = "/img/electronics.jpg" 
-    photoCredits = "<a href=\"https://unsplash.com/@alexkixa\" target=\"_blank\">Alexandre Debiève</a> @ <a href=\"https://unsplash.com/photos/FO7JIlwjOtU\" target=\"_blank\">Unsplash</a>"
-    title = "Electronics close-up image"
-    fullCover = false
-    centerHeadline = false
-    style = ""
 ```
 
-This also shows the last 3 galleries on the front page.
+This makes sure to shows the last 3 blogs, projects and galleries on the front page.
 
 The layout of the top blue bar is defined in `layouts/partials/home/featured.html`, which has been changed to:
 
@@ -862,17 +891,40 @@ The layout of the top blue bar is defined in `layouts/partials/home/featured.htm
                 {{ end }}
             </div>
             <div class="col col-sm-4 col-md-4">
-                {{ if .Site.Params.home.featurePhoto }}
-                    {{- partial "assets/mimage.html" (dict "url" .Site.Params.home.featurePhoto 
-                                                           "credits" .Site.Params.home.photoCredits 
+                {{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
+                {{- $author := "" -}}
+                {{- if and .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author }}
+                    {{- $author = partial "utilities/link" (dict "destination" .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author) -}}
+                {{- else if .Params.Thumbnail.author }}
+                    {{- $author = .Params.Thumbnail.author -}}
+                {{- end -}}
+    
+                {{- $origin := "" -}}
+                {{- if and .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin }}
+                    {{- $origin = partial "utilities/link" (dict "destination" .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin) -}}
+                {{- else if .Params.Thumbnail.origin }}
+                    {{- $origin = .Params.Thumbnail.origin -}}
+                {{- end }}
+    
+                {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
+                {{- $credits := "" -}}
+                {{- if and $author $origin }}
+                {{ $credits = printf "%s %s %s %s" $icon $author (T "photoOn") $origin }}
+                {{ else if $author }}
+                    {{ $credits = printf "%s %s" $icon $author }}
+                {{ end }}
+                {{ if $thumbnail }}
+                    {{- partial "assets/mimage.html" (dict "url" $thumbnail 
+                                                           "credits" $credits 
                                                            "ratio" "4x3" 
                                                            "outerClass" "img-wrap" 
                                                            "innerClass" "rounded"
                                                            "captionClass" "caption-align-right text-italic"
-                                                           "title" .Site.Params.home.title) -}}
+                                                           "title" .Site.Title) -}}
                 {{ end }}
             </div>
         </div>
+        <div class="col col-lg-2 d-none d-lg-block bg-info order-4"></div>
     </div>
 </div>
 ```
@@ -883,24 +935,48 @@ This makes the content area in the top blue bar wider, provides more space for t
 
 As I preferred to have more options on how to display images and their caption, I created a shortcode named `mimage`. This shortcode is compatible with the Hinode `image` shortcode, but adds a number of options, like being able to change the way the caption is displayed.
 
-When the frontmatter of a single page has `thumbnail` defined and optionally `photoCredits` and `photoSource`, the `image` shortcode is called from `layouts/_default/single.html` to display the image with the optional caption.
+When the frontmatter of a single page has `thumbnail` defined, the `image` shortcode is called from `layouts/_default/single.html` to display the image with the optional caption.
 
 The `image` shortcode is replaced with the `mimage` shortcode, so that the credits can be moved to the right side of the image and be displayed in italic. Next to that I also prefer to show a photo icon instead of the text `Photo by`.
 
-To accomplish this the following two lines in `layouts/_default/single.html`:
+To accomplish this the below needs to be changed in `layouts/_default/single.html`.
+
+Search for the line `{{- if reflect.IsMap .Params.Thumbnail -}}`. Before that line add the following:
 
 ```go-html-template
-{{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" (T "photoBy") .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
-{{- partial "assets/image.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
-
+{{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
 ```
 
-are to be replaced with:
+Change these lines:
 
 ```go-html-template
-{{- if .Params.photoCredits }}{{ if .Params.PhotoSource }}{{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s %s %s" .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end }}{{ end -}}
-{{- partial "assets/mimage.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
+{{- if and $author $origin }}
+    {{ $credits = printf (T "photoFull") $author $origin }}
+{{ else if $author }}
+    {{ $credits = T "photoShort" $author }}
+{{ end }}
+```
 
+to
+
+```go-html-template
+{{- if and $author $origin }}
+    {{ $credits = printf "%s %s %s %s" $icon $author (T "photoOn") $origin }}
+{{ else if $author }}
+    {{ $credits = printf "%s %s" $icon $author }}
+{{ end }}
+```
+
+And this line
+
+```go-html-template
+{{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
+```
+
+is to be replaced with
+
+```go-html-template
+{{- partial "assets/mimage.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
 ```
 
 Obviously this only works when the `mimage` shortcode is installed, which is explained [here](/blog/mimage).

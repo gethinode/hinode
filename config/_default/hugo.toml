@@ -6,12 +6,13 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-googleAnalytics = ""
+#googleAnalytics = ""
 baseURL = "https://myrthos.net/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
 enableInlineShortcodes = true
+summaryLength = 20
 
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456

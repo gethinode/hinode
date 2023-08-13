@@ -6,9 +6,13 @@ description: To be able to create this site there are a number of people that sh
 date: 2023-07-25
 #updated: 2023-02-11
 showComments: false
-thumbnail: img/credits.jpg
-photoCredits: <a href="https://unsplash.com/@florianklauer" target="_blank">Florian Klauer</a>
-photoSource: <a href="https://unsplash.com/photos/mk7D-4UCfmg" target="_blank">Unsplash</a>
+showComments: false
+thumbnail:
+    url: /img/about.jpg
+    author: Florian Klauer
+    authorURL: https://unsplash.com/@florianklauer"
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/mk7D-4UCfmg
 ---
 <!-- markdownlint-enable MD018 MD022 MD041-->
 

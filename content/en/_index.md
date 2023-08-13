@@ -1,8 +1,14 @@
-<!-- CSpell:ignore Joost -->
+<!-- CSpell:ignore Joost alexandre Debiève -->
 <!-- markdownlint-disable MD003 MD018 MD022 MD041-->
 ---
 author: Joost Mans
 title: Welcome to this site!
+thumbnail:
+    url: /img/electronics.jpg
+    author: Alexandre Debiève
+    authorURL: https://unsplash.com/@alexkixa
+    origin: Unsplash
+    originURL: https://unsplash.com/photos/FO7JIlwjOtU
 ---
 <!-- markdownlint-disable MD018 MD022 MD041-->
 
