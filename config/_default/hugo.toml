@@ -6,7 +6,7 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-googleAnalytics = ""
+#googleAnalytics = ""
 baseURL = "https://myrthos.net/"
 canonifyURLs = false
 enableEmoji = true

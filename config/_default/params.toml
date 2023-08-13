@@ -64,12 +64,6 @@
 # toml-docs-start home
 [home]
     sections = ["blog", "projects", "gallery"]
-    featurePhoto = "/img/electronics.jpg" 
-    photoCredits = "<a href=\"https://unsplash.com/@alexkixa\" target=\"_blank\">Alexandre Debiève</a> @ <a href=\"https://unsplash.com/photos/FO7JIlwjOtU\" target=\"_blank\">Unsplash</a>"
-    title = "Electronics close-up image"
-    fullCover = false
-    centerHeadline = false
-    style = ""
 # toml-docs-end home
 
 # toml-docs-start navigation
@@ -171,6 +165,39 @@
         style = "border-1 card-emphasize"
         homepage = 3
         separator = false
+        multipage = true        # Used for multi-page sections
+    [sections.gallery]
+        title = "Gallery"
+        layout = "card"
+        sort = "date"
+        reverse = true 
+        nested = false
+        background = ""
+        color = ""
+        style = "border-0 card-zoom"
+        cols = 3
+        padding = "0"
+        header = "publication"
+        footer = "tags"
+        orientation = "stacked"
+        homepage = 3
+        separator = true
+    [sections.docs]
+        title = "Documentation"
+        layout = "card"     # card, list, nav
+        sort = "title"      # date, lastmod, weight, title or custom as defined in page frontmatter
+        reverse = false 
+        nested = false      # indicate the content should be listed recursively for the entire section.
+        background = ""     # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
+        color = ""          # “primary”, “secondary”, “success”, “danger”, “warning”, “info”, “light”, “dark”, “white”, “black”, “body”, or “body-tertiary”
+        style = "border-0 card-zoom" # Styling attributes for each element
+        cols = 3            # 1..5
+        padding = "0"       # “0”, “1”, “2”, “3”, “4”, “5”, or “auto”
+        header = "publication"     # Header of card: “full” (default), “publication”, “tags”, and “none”.
+        footer = "tags"     # Footer of card: “full”, “publication”, “tags”, and “none” (default).
+        orientation = "stacked" # Thumbnail: “stacked” (default), “horizontal”, or “none”
+        homepage = 3        # Number of cards to display
+        separator = true    # Show separator line between items, or not                  
 # toml-docs-end sections
 
 [favicon]

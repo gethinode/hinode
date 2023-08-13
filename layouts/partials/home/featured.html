@@ -10,18 +10,35 @@
             </div>
             <div class="col col-sm-4 col-md-4">
                 {{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
-                {{- $thumbnail = or $thumbnail .Site.Params.home.featurePhoto -}}
-                {{ if .Site.Params.home.featurePhoto }}
-                    {{ warnf "DEPRECATED: parameter `Params.home.featurePhoto` has been deprecated in release v0.18"}}
+                {{- $author := "" -}}
+                {{- if and .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author }}
+                    {{- $author = partial "utilities/link" (dict "destination" .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author) -}}
+                {{- else if .Params.Thumbnail.author }}
+                    {{- $author = .Params.Thumbnail.author -}}
+                {{- end -}}
+    
+                {{- $origin := "" -}}
+                {{- if and .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin }}
+                    {{- $origin = partial "utilities/link" (dict "destination" .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin) -}}
+                {{- else if .Params.Thumbnail.origin }}
+                    {{- $origin = .Params.Thumbnail.origin -}}
+                {{- end }}
+    
+                {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
+                {{- $credits := "" -}}
+                {{- if and $author $origin }}
+                {{ $credits = printf "%s %s %s %s" $icon $author (T "photoOn") $origin }}
+                {{ else if $author }}
+                    {{ $credits = printf "%s %s" $icon $author }}
                 {{ end }}
                 {{ if $thumbnail }}
                     {{- partial "assets/mimage.html" (dict "url" $thumbnail 
-                                                           "credits" .Site.Params.home.photoCredits 
+                                                           "credits" $credits 
                                                            "ratio" "4x3" 
                                                            "outerClass" "img-wrap" 
                                                            "innerClass" "rounded"
                                                            "captionClass" "caption-align-right text-italic"
-                                                           "title" .Site.Params.home.title) -}}
+                                                           "title" .Site.Title) -}}
                 {{ end }}
             </div>
         </div>

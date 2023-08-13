@@ -13,7 +13,7 @@
             <table class="table table-borderless">
                 <thead>
                     <tr><th colspan="2" class="text-center table-noBG">
-                       <div class="fs-3 fw-bold">{{ or .Site.Params.footer.footerTitle }}</div>
+                       <div class="fs-3 fw-bold">{{ or .Site.Params.footer.title }}</div>
                     </th></tr>
                 </thead>
             {{ range .Site.Menus.footer -}}
@@ -37,7 +37,7 @@
             <table class="table table-borderless">
                 <thead>
                     <tr><th colspan="2" class="text-center table-noBG">
-                       <div class="fs-3 fw-bold">{{ or .Site.Params.footer.socialTitle .Site.Params.social.title }}</div>
+                       <div class="fs-3 fw-bold">{{ .Site.Params.social.title }}</div>
                     </th></tr>
                 </thead>
             {{ range .Site.Menus.social -}}

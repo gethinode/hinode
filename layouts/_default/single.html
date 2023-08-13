@@ -46,10 +46,11 @@
         <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
     {{- end -}}
 
-    {{ if not (in (slice "docs" "minimal" "gallery") .Layout) }}
+    {{ if not (in (slice "minimal" "gallery") .Layout) }}
         {{- $thumbnail := "" -}}
         {{- $credits := "" -}}
         
+        {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
         {{- if reflect.IsMap .Params.Thumbnail -}}
             {{- $thumbnail = .Params.Thumbnail.url -}}
             {{- $author := "" -}}
@@ -67,20 +68,20 @@
             {{- end }}
 
             {{- if and $author $origin }}
-                {{ $credits = printf (T "photoFull") $author $origin }}
+                {{ $credits = printf "%s %s %s %s" $icon $author (T "photoOn") $origin }}
             {{ else if $author }}
-                {{ $credits = T "photoShort" $author }}
+                {{ $credits = printf "%s %s" $icon $author }}
             {{ end }}
         {{ else }}
             {{- $thumbnail = .Params.Thumbnail -}}
             {{ if or .Params.photoCredits .Params.photoSource }}
                 {{ warnf "DEPRECATED: frontmatter variables `photoCredits` and `photoSource` have been deprecated in release v0.18: %s" .RelPermalink }}
             {{ end }}
-            {{- if and .Params.photoCredits .Params.PhotoSource }}{{ $credits = printf (T "photoFull") .Params.photoCredits .Params.PhotoSource }}{{ end -}}
+            {{- if and .Params.photoCredits .Params.PhotoSource }}{{ $credits = printf "%s %s %s %s" $icon .Params.photoCredits (T "photoOn") .Params.PhotoSource }}{{ end -}}
         {{- end -}}
 
         {{ if $thumbnail -}}
-            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
+            {{- partial "assets/mimage.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
         {{ end -}}
     {{ end }}
     {{ .Content }}

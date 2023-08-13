@@ -39,6 +39,8 @@
   translation: "Link"
 - id: code
   translation: "Code"
+- id: about
+  translation: "About"
 
 # Pagination
 - id: paginationNav

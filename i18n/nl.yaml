@@ -13,6 +13,8 @@
   translation: "Foto van %s via %s"
 - id: photoShort
   translation: "Foto van {{ . }}"
+- id: photoOn
+  translation: "op"
 - id: draft
   translation: "Concept"
 
@@ -37,6 +39,8 @@
   translation: "Link"
 - id: code
   translation: "Code"
+- id: about
+  translation: "Over mij"
 
 # Pagination
 - id: paginationNav
@@ -111,4 +115,21 @@
   translation: "Tonen"
 - id: comments
   translation: "Reacties" 
+
+# Mastodon
+- id: mastodon
+  translation: "Voeg je Mastodon instance in waar de pagina gedeeld moet worden"
+
+# Multi Page
+- id: multipage_this
+  translation: "Deze pagina"
+- id: multipage_page
+  translation: "Pagina"
+- id: multipage_pages
+  translation: "de pagina's in dit"
+# Potentially multi-page could be used in blogs and projects
+- id: multipage_blog
+  translation: "blog"
+- id: multipage_projects
+  translation: "project"
 
