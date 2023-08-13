@@ -1,6 +1,6 @@
 ---
 author: Marco Aiolo
-title: Welcome to Monfit!
+title: Explore the Monferrato on Monfit!
 ---
 
-A simple blog where you can discover new trails to live the Monferrato under a new light.
+Discover new trails that tell the story and beauty of these enchanting lands.

@@ -1,6 +1,6 @@
 ---
-author: Mark Dumay
-title: Benvenuto su Monfit!
+author: Marco Aiolo
+title: Esplora il Monferrato su Monfit!
 ---
 
-Un semplice blog dove scoprire nuovi sentieri per vivere il Monferrato sotto una nuova luce.
+Scopri nuovi percorsi che raccontano la storia e la bellezza di queste terre incantevoli.

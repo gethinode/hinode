@@ -6,7 +6,7 @@
 # toml-docs-end lang-main
 # toml-docs-start lang-param
     [en.params.head]
-        tagline = "Monfit"
+        tagline = "The Monferrato you don't expect"
     [en.params.feature]
         link = "about"
         caption = "About"
@@ -21,7 +21,7 @@
     contentDir = "content/it"
     weight = 2
     [it.params.head]
-        tagline = "Monfit"
+        tagline = "Il Monferrato che non ti aspetti"
     [it.params.feature]
         link = "chi-sono"
         caption = "Chi sono"

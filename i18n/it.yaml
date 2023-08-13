@@ -74,7 +74,7 @@
 - id: shareLink
   translation: "Condivi via"
 - id: copiedToClipboard
-  translation: "Copiato negli appunt"
+  translation: "copiato negli appunti"
 - id: link
   translation: "Link"
 - id: code
