@@ -2,6 +2,7 @@
     color: inherit;
 }
 
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
 .alert a {
     color: inherit;
     
@@ -14,3 +15,4 @@
         text-decoration-color: var(--bs-body);
     }    
 }
+/* stylelint-enable declaration-block-no-redundant-longhand-properties */
