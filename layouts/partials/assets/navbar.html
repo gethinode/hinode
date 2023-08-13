@@ -185,11 +185,11 @@
 {{- $theme := "light" -}}
 {{- if in (slice "primary" "secondary" "success" "danger" "black") $color }}{{ $theme = "dark" }}{{ end -}}
 {{- if in (slice "body" "body-tertiary") $color }}{{ $theme = "" }}{{ end -}}
+{{- if not $color }}{{ $theme = "" }}{{ end -}}
 {{- $class := .class -}}
 
 {{- $contrast := false -}}
 {{- if in (slice "primary" "secondary" "success" "danger") $color }}{{ $contrast = true }}{{ end -}}
-
 
 <div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
