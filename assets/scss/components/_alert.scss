@@ -1,3 +1,16 @@
-.alert-no-decoration {
-    --bs-alert-border-radius: none;
+.alert code {
+    color: inherit;
+}
+
+.alert a {
+    color: inherit;
+    
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+        text-decoration-line: underline;
+        text-decoration-style: dotted;
+        text-decoration-color: var(--bs-body);
+    }    
 }
