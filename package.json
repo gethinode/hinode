@@ -47,10 +47,11 @@
     "update:syntax:light3": "replace-in-files --string=\"#009999\" --replacement=\"#007a7a\" ./assets/scss/components/_syntax-light.scss",
     "update:syntax:light4": "replace-in-files --string=\"#999988\" --replacement=\"#6d6d5d\" ./assets/scss/components/_syntax-light.scss",
     "update:syntax:dark1": "hugo gen chromastyles --style=github-dark > ./assets/scss/components/_syntax-dark.scss",
-    "update:syntax:dark2": "replace-in-files --string=\"#ffffcc\" --replacement=\"#b8b800\" ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark2": "replace-in-files --string=\"#ffffcc\" --replacement=\"#373700\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark3": "replace-in-files --string=\"#8b949e\" --replacement=\"#979fa8\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark4": "replace-in-files --string=\".na {  }\" --replacement=\".na { color: #00cccc }\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark5": "replace-in-files --string=\".nb {  }\" --replacement=\".nb { color: #00a2d8 }\" ./assets/scss/components/_syntax-dark.scss",
+    "update:syntax:dark6": "replace-in-files --string=\"#6e7681\" --replacement=\"#999fa8\" ./assets/scss/components/_syntax-dark.scss",
     "upgrade": "npx npm-check-updates -u && npm run -s mod:update"
   },
   "repository": {

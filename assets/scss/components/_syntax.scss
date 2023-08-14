@@ -8,6 +8,10 @@
     background-color: transparent if($enable-important-utilities, !important, null);
 }
 
+.chroma {
+    display: flex;
+}
+
 .syntax-highlight {
     background-color: var(--bs-light) if($enable-important-utilities, !important, null);
     overflow-x: auto;
