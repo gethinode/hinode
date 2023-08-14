@@ -23,7 +23,7 @@
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
         <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "colorMode" }}" aria-expanded="false" id="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
-            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}</span>
+            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>{{ if $collapsed }} {{ T "colorMode" }} {{ end }}
             <span class="d-md-none"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
