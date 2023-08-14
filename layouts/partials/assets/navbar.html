@@ -1,6 +1,7 @@
 <!-- 
     Displays a navigation header with a toggler. The partial supports the following arguments:
-    "id"            Optional id of the navbar toggler, defaults to "navbar-collapse-0".
+    "id"            Optional id of the navbar, defaults to "navbar-0". The id is used by several child elements,
+                    including a color mode switcher, version switcher, and collapse panel.
     "page"          Required object reference to the current page.
     "menus"         Optional name of the menu configuration, defaults to "main".
     "size"          Optional size of the button, either "sm", "md" (default), or "lg".
@@ -20,13 +21,14 @@
 {{- define "partials/navbar-mode.html" -}}
     {{- $size := .size -}}
     {{- $collapsed := .collapsed -}}
+    {{- $id := .id -}}
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
-        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "colorMode" }}" aria-expanded="false" id="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
-            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }} {{ if $collapsed }} {{ T "colorMode" }} {{ end }}</span>
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "colorMode" }}" aria-expanded="false" id="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
+            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>{{ if $collapsed }} {{ T "colorMode" }} {{ end }}
             <span class="d-md-none"></span>
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-color-theme{{ if $collapsed }}-collapsed{{ end }}">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
                     <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>&nbsp;
@@ -55,13 +57,14 @@
     {{- $collapsed := .collapsed -}}
     {{- $page := .page -}}
     {{- $list := site.Params.docs.releases -}}
+    {{- $id := .id -}}
     {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
-        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navbar-version-switch">
+        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
             {{ if $collapsed }}{{ site.Title }} {{ end }}{{ $version }}
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-version-switch">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-version-switch">
             {{- range $index, $item := $list -}}
                 {{- $active := eq $item.label $version -}}
                 {{- $disabled := false -}}
@@ -97,7 +100,7 @@
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $supportedFlags := slice "true" "false" -}}
 
-{{- $id := printf "navbar-collapse-%d" 0 -}}
+{{- $id := printf "navbar-%d" 0 -}}
 {{ with .id }}
     {{ $id = . }}
 {{ end }}
@@ -228,7 +231,7 @@
                 </button>
             </div>
     
-            <div class="navbar-collapse collapse" id="{{ $id }}">
+            <div class="navbar-collapse collapse" id="{{ $id }}-collapse">
                 <!-- Insert search input -->
                 {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
                 
@@ -281,8 +284,8 @@
                                     
                     <!-- Insert version switcher -->
                     {{- if $enableVersions -}}
-                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true ) -}}
-                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false) -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true "id" .id) -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false "id" .id) -}}
                     {{- end -}}
     
                     <!-- Insert color mode switcher -->
@@ -293,8 +296,8 @@
                         </li>
                         <li><hr class="dropdown-divider-bg"></li>
     
-                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true) -}}
-                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false) -}}
+                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true "id" .id) -}}
+                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false "id" .id) -}}
                     {{- end -}}
                 </ul>
             </div>
