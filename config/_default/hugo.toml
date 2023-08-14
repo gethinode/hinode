@@ -95,6 +95,9 @@ home = ["HTML", "RSS", "REDIR"]
     source = "assets"
     target = "assets"
   [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
     source = "i18n"
     target = "i18n"
   [[module.mounts]]
