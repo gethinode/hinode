@@ -40,8 +40,7 @@
       })
 
       for (let i = 0; i < activeSelectors.length; ++i) {
-        activeSelectors[i].className = activeIcon.className
-        activeSelectors[i].className = activeSelectors[i].className.replace('theme-icon', 'theme-icon-active')
+        activeSelectors[i].innerHTML = activeIcon.innerHTML
       }
 
       for (let i = 0; i < activeButtons.length; ++i) {
