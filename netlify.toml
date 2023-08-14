@@ -32,7 +32,7 @@
                 'sha256-uVrOu323DbALvO9XLsXSo1N3peMVuTC/lcentqDkW8A=';\
             object-src 'self'; \
             base-uri 'self'; \
-            connect-src 'self'; \
+            connect-src 'self' https://myrthos.goatcounter.com/count; \
             font-src 'self' ; \
             frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
             frame-ancestors 'none'; \
