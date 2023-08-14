@@ -29,7 +29,11 @@
         .form-range::-moz-range-thumb {
           background-color: var(--bs-primary);
         }
-                
+
+        .alert-primary {
+          --bs-alert-bg: var(--bg-primary-subtle);
+        }
+        
         .btn-outline-primary {
           --bs-btn-color: var(--bs-primary);
           --bs-btn-border-color: var(--bs-primary);

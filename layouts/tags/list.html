@@ -25,7 +25,9 @@
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
                         <div class="row mt-2">
                             <div class="d-none d-sm-block col-sm-3 mt-auto text-right">
-                                <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                                <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
+                                    {{ (partial "utilities/date.html" (dict "date" .Date "format" "medium")) }}
+                                </time>
                             </div>
                             <div class="col">
                                 {{ if ne $year $lastYear }}
