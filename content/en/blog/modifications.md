@@ -49,7 +49,7 @@ These are the modifications to the Content Security Policy (CSP) elements in `co
 ```toml
     Content-Security-Policy = """\
         default-src 'none'; \
-        script-src 'self' 'report-sample' https://utteranc.es/client.js; \
+        script-src 'self' 'report-sample' https://utteranc.es/client.js http://gc.zgo.at/count.js; \
         style-src 'self' 'unsafe-hashes' 'report-sample' https://utteranc.es https://www.youtube.com \
             'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
             'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=';\
@@ -65,6 +65,8 @@ These are the modifications to the Content Security Policy (CSP) elements in `co
         form-action 'self'; \
         """
 ```
+
+And when using Netlify also to `netlify.toml`.
 
 The hashes in the above are for the support of Goat and Utterances.
 
@@ -984,3 +986,49 @@ Obviously this only works when the `mimage` shortcode is installed, which is exp
 ## Additional empty line before the comments
 
 I think the space between the last line of the content and the horizontal line for the comments is too small. To make it bigger open the file `layouts/_default/single.html` and search for `<hr>`, prefix that with a break, so that the line becomes `<br><hr>`.
+
+## Adding GoatCounter as analytics tool
+
+Hugo and also Hinode come with GoogleAnalytics out of the box. For this site this has been disabled and a more privacy friendly tool is used, named {{< link "https://www.goatcounter.com" >}}GoatCounter{{< /link >}}.
+
+For this the following is added to `config/_default/params.toml`:
+
+```toml
+[analytics]
+    [analytics.goatcounter]
+        name = "name"
+        enable = true
+```
+
+Note that `"name"` should be replaced with the actual GoatCounter account name.  
+GoatCounter can be disabled by setting `enable` to false.
+
+And to `layouts/partials/footer/scripts.html` this part:
+
+```go-html-template
+{{- if and (not site.IsServer) $header -}}
+    {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
+    {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
+    {{- end }}
+{{- end -}}
+```
+
+Is to be replaced with:
+
+```go-html-template
+{{- if and (not site.IsServer) $header -}}
+    {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
+    {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
+    {{- end }}
+    {{- if and site.Params.Analytics.GoatCounter.Enable site.Params.Analytics.GoatCounter.name -}}
+        <script 
+            data-goatcounter="https://{{- site.Params.Analytics.GoatCounter.name -}}.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js">
+        </script>
+    {{- end }}
+{{- end -}}
+```
+
+This allows usage of either Google Analytics or GoatCounter or both.

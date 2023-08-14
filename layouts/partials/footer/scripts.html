@@ -22,6 +22,12 @@
     {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
     {{- end }}
+    {{- if and site.Params.Analytics.GoatCounter.Enable site.Params.Analytics.GoatCounter.name -}}
+        <script 
+            data-goatcounter="https://{{- site.Params.Analytics.GoatCounter.name -}}.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js">
+        </script>
+    {{- end }}
 {{- end -}}
 
 {{- if gt (len $js.Content) 0 -}}

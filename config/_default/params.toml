@@ -29,6 +29,13 @@
     showSCSS = false
 # toml-docs-end debugging
 
+# toml-docs-start analytics
+[analytics]
+    [analytics.goatcounter]
+        name = "myrthos"
+        enable = true
+# toml-docs-end analytics
+
 # toml-docs-start docs
 [docs]
     contentPath ="/docs/"
@@ -48,6 +55,7 @@
     url = "/docs/xproject"
 # toml-docs-end docs
 
+# toml-docs-start multipage
 [multipage]
     # These parameters are only valid when the layout of a page is set to "multipage"
     paginator = "buttons"    # The paginator to show at the bottom of the page. Valid options are: 
@@ -60,6 +68,7 @@
                             #  when hovering over the buttons. Not used in the other paginator options.
     positions = 4           # When paginator="buttons", Sets the maximum number of button positions.
                             # Not used in the other paginator options.
+# toml-docs-end multipage
 
 # toml-docs-start home
 [home]
