@@ -23,10 +23,16 @@ $semi-circle-border: 0.2rem;
 }
 
 .timeline-sm {
-    --timeline-icon-radius: calc(#{$semi-circle-radius} / 2);
+    --timeline-icon-radius: calc(#{$semi-circle-radius} / 2.4);
     --timeline-offset: 25%
 }
 
+@include media-breakpoint-up(sm) {
+    .timeline-sm {
+        --timeline-icon-radius: calc(#{$semi-circle-radius} / 2);
+    }
+}
+  
 .timeline::before, .timeline-sm::before {
     content: "";
     width: 2 * $semi-circle-border;
