@@ -220,7 +220,8 @@
     {{- if or $caption $credits -}}
         <!-- Add camera to credits -->
         {{- if $credits -}}
-            {{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s" $credits }}
+            {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
+            {{ $credits = printf "%s %s" $icon $credits }}
         {{- end -}}
         <!-- Place credits in brackets if there is both a caption and a credit -->
         {{- $break := "" -}}

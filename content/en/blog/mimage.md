@@ -138,7 +138,7 @@ When the caption or credits have not been found yet, an attempt is made to read 
 
 One of the changes that is not further detailed out here is that the ratio of 3x2 has been added. This has been made par tof the code that creates the `imgset`, which is used in the below code. This is a set of images of different sizes that will be used for different screen sizes.
 
-```go-html-template {linenos=true, hl_Lines=["1" "4" "13-26"]}
+```go-html-template {linenos=true, hl_Lines=["1" "4" "13-27"]}
 {{- if or $caption $credits -}}
     <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
 {{ end }}
@@ -154,7 +154,8 @@ One of the changes that is not further detailed out here is that the ratio of 3x
 {{- if or $caption $credits -}}
     <!-- Add camera to credits -->
     {{- if $credits -}}
-        {{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s" $credits }}
+        {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
+        {{ $credits = printf "%s %s" $icon $credits }}
     {{- end -}}
     <!-- Place credits in brackets if there is both a caption and a credit -->
     {{- $break := "" -}}
