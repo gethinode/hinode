@@ -83,6 +83,10 @@
 
         .toc nav a {
             color: var(--bs-body-color);
+
+            &:hover {
+                color: white;
+            }
         }
     }
 }
