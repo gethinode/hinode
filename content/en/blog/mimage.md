@@ -77,7 +77,7 @@ If the shortcode is used in a page bundle (`index.md` or `_index.md`) the code o
 
 ```yaml
 ---
-headless: true{linenos=true}
+headless: true
 ---
 ```
 
