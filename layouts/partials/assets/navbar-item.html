@@ -6,7 +6,7 @@
 
 {{- $menuURL := (or $menu.PageRef $menu.URL) | relLangURL -}}
 {{- $pageURL := $page.RelPermalink | relLangURL -}}
-{{- $isActive := hasPrefix $pageURL $menuURL -}}
+{{- $isActive := or (and (hasPrefix $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
