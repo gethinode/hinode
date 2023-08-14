@@ -102,7 +102,7 @@
 </div>
 
 <!-- Render timeline for smaller devices -->
-<div class="container p-0 d-block d-md-none {{ with $background }} timeline-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}">
+<div class="container p-0 d-block d-md-none small{{ with $background }} timeline-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}">
     {{ range $index, $item := $entries }}
         <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
             {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}

@@ -18,6 +18,8 @@ github.com/gethinode/mod-flexsearch v1.1.4 h1:dJvwBxYlLe/VGlctLn8k89STJ5toATIjNn
 github.com/gethinode/mod-flexsearch v1.1.4/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-flexsearch v1.2.0 h1:SSMpWzK9SMbi9QRYfil9PJZLLWWLHWzlTc69UxtSWAA=
 github.com/gethinode/mod-flexsearch v1.2.0/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
+github.com/gethinode/mod-flexsearch v1.3.0 h1:RbfEDw219Y1rOVp9lHmy5ePdF9lyPalDu2J5oVeejrU=
+github.com/gethinode/mod-flexsearch v1.3.0/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-flexsearch v1.4.0 h1:5e/NVRLyWzUZ9fO/fNsM5o+O7nw+xyln2rfEOtbgfWc=
 github.com/gethinode/mod-flexsearch v1.4.0/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-fontawesome v1.0.2 h1:ZSK6D20/w4y5GnfYfTBB58uHD0ChIfkpKfRGwioS9rg=
@@ -56,3 +58,5 @@ github.com/myrthos/mod-mgallery v0.1.7 h1:DSKj+ZBVVEA6J8EHhwf4m+wtKdYGtvn/gHJFJN
 github.com/myrthos/mod-mgallery v0.1.7/go.mod h1:VqXPYp9gY+dxGQw+TP9zVgqgEHJFvlhL8Hhzar8CZAs=
 github.com/myrthos/mod-mgallery v0.1.8 h1:qN2cwrnC+U5OywZ2ZYDUpULKML5pn8hhJJ0J0hzQHhQ=
 github.com/myrthos/mod-mgallery v0.1.8/go.mod h1:VqXPYp9gY+dxGQw+TP9zVgqgEHJFvlhL8Hhzar8CZAs=
+github.com/myrthos/mod-mgallery v0.1.9 h1:n7uDSL+L7f3dKzukpvUWIpSsJXKo0Eb1LGPmWQmRydk=
+github.com/myrthos/mod-mgallery v0.1.9/go.mod h1:VqXPYp9gY+dxGQw+TP9zVgqgEHJFvlhL8Hhzar8CZAs=

@@ -30,9 +30,9 @@
 - id: shareLink
   translation: "Partager via {{ . }}"
 - id: shareSystem
-  translation: "system" # placeholder
+  translation: "système"
 - id: copyToClipboard
-  translation: "copy to clipboard" # placeholder
+  translation: "copier dans le presse-papier"
 - id: copiedToClipboard
   translation: "copié dans le presse-papier"
 - id: link
