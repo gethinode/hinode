@@ -55,7 +55,7 @@ These are the modifications to the Content Security Policy (CSP) elements in `co
             'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=';\
         object-src 'none'; \
         base-uri 'self'; \
-        connect-src 'self'; \
+        connect-src 'self' https://myrthos.goatcounter.com/count; \
         font-src 'self'; \
         frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
         frame-ancestors 'none'; \
