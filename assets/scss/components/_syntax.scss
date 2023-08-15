@@ -12,6 +12,10 @@
     display: flex;
 }
 
+.chroma code {
+    flex: 1;
+}
+
 .syntax-highlight {
     background-color: var(--bs-light) if($enable-important-utilities, !important, null);
     overflow-x: auto;
