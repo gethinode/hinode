@@ -64,7 +64,7 @@ Detailed information about Hinode is available on the [official website][website
 
 Hinode is a [Hugo theme that uses modules][hugo_modules] to install and maintain various components. It can be installed using either Hugo or npm. If you would like to take advantage of automation, the npm approach is recommended. Refer to the [Hinode template][repository_template] for installation instructions with npm.
 
-The installation instructions in this readme install Hinode as a regular Hugo theme. Hinode requires the following software to be installed on your local machine. 
+The installation instructions in this readme install Hinode as a regular Hugo theme. Hinode requires the following software to be installed on your local machine.
 
 - [Go binary][golang_download]
 - [Hugo][nodejs] (extended version)
