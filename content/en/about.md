@@ -1,5 +1,3 @@
-<!-- CSpell:ignore Buitenwerf Joost agilist Baldur Icewind Planescape blinkingdot Rendelius rpgdot rpgwatch Stijn Arhu Jamstack Hinode lastmod -->
-<!-- markdownlint-disable MD003 MD018 MD022 MD041 -->
 ---
 title: About
 description: Myrthos is a personal site devoted to my electronics and software projects, photography and other tech stuff
@@ -13,7 +11,7 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/5yn5rGI5IUw
 ---
-<!-- markdownlint-enable MD018 MD022 MD041 -->
+<!-- CSpell:ignore Buitenwerf Joost agilist Baldur Icewind Planescape blinkingdot Rendelius rpgdot rpgwatch Stijn Arhu Jamstack Hinode lastmod -->
   
 ## TL;DR  
 
@@ -36,7 +34,7 @@ After some time, I got more involved on the technical side of RPGDot and redesig
 Then, in the year 2005, Rendelius decided to sell RPGDot to Jolt (which is a different company now than it was then). Jolt wanted to earn lots of money with the site and decided that it should be plastered with ads. I made the changes for that, even if I did not like them, and we went live with that site in 2006. After a couple of months I figured this was not what I signed up for and decided to leave RPGDot. You should know that all the work for RPGDot was voluntary work, for me and the other staff members. RPGDot was going in the wrong direction as far as I was concerned, so I decided to start a new site, focussing on the same thing as RPGDot; Reporting news about games.  
 I discussed this with the other staff members and all of them thought it was a great idea and would join me once the new site was live. The only thing that was left to do is to make that new site. I started that, together with Arhu from the RPGDot forums. We created a new site from scratch. He did the front-end and I did the back-end. That is how we created {{< link "https://www.rpgwatch.com" >}}RPGWatch{{< /link >}} and went live in October 2006, with a first version.
 
-I never made any money with RPGWatch. The ads were not paying much, so I was actually loosing money. At a certain point I decided to drop the ads completely and to go to a donation model, where visitors of RPGWatch donated money that would keep RPGWatch running. That worked and I went on with RPGWatch for a lot of years after that.
+I never made any money on RPGWatch. The ads were not paying much, so I was actually loosing money. At a certain point I decided to drop the ads completely and to go to a donation model, where visitors of RPGWatch donated money that would keep RPGWatch running. That worked and I went on with RPGWatch for a lot of years after that.
 
 Somewhere around 2017-2018, I found myself spending less time on RPGWatch. there was still some technical stuff that needed to be done, but I lost interest in doing that. I also found myself playing less games, which was the core focus of the site. Besides that there were also personal changes that drifted me away from RPGWatch.  
 As a result I went back to photography as a hobby. Something I had spent a lot of time with when I was a lot younger. A while after that I also went back to designing electronics. A hobby which I spent a lot of time on until I was about 30 years old (which was in the previous century :wink:). And to get that electronics to work I also got back into software development (for something else than a site), which was what I had been doing a lot earlier in my professional career.

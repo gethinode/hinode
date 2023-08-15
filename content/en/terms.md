@@ -1,5 +1,3 @@
-<!-- CSpell:ignore Markus Winkler lastmod -->
-<!-- markdownlint-disable MD003 MD018 MD022 MD041-->
 ---
 title: Terms of Service
 description: Here are the terms of service for this site
@@ -13,7 +11,7 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/TtJ0CLjLi6w
 ---
-<!-- markdownlint-enable MD018 MD022 MD041-->
+<!-- CSpell:ignore Markus Winkler lastmod -->
   
 ## Introduction
 

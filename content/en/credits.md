@@ -1,5 +1,3 @@
-<!-- CSpell:ignore Florian Klauer Hinode Dumay Lightbox Lokesh Dhakar shortcode Cristian Specht lastmod -->
-<!-- markdownlint-disable MD003 MD018 MD022 MD041-->
 ---
 title: Credits
 description: To be able to create this site there are a number of people that should get credits for what they have made
@@ -13,7 +11,7 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/mk7D-4UCfmg
 ---
-<!-- markdownlint-enable MD018 MD022 MD041-->
+<!-- CSpell:ignore Florian Klauer Hinode Dumay Lightbox Lokesh Dhakar shortcode Cristian Specht lastmod -->
 
 The core of this site is based on the {{< link "https://github.com/gethinode/hinode" >}}Hinode{{< /link >}} theme for Hugo, which was created by Mark Dumay. It is an excellent theme and Mark is also very supportive. A demo of the Hinode template can be found {{< link "https://demo.gethinode.com/en" >}}here{{< /link >}}.
 
