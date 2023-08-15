@@ -1,9 +1,8 @@
-<!-- cSpell:ignore Joost hinode dataprompt urlquery -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: Adding Mastodon as a sharing provider
 date: 2023-07-24
+lastmod: 2023-08-15
 description: An overview of the changes that are made to the Hinode template for sharing posts on Mastodon.
 tags: ["blog", "Hinode", "Mastodon"]
 thumbnail:
@@ -13,12 +12,12 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/images/animals/elephant
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost hinode dataprompt urlquery lastmod -->
 
-At the top of most of the pages there are sharing buttons. Next to the available sharing buttons like Twitter and Facebook, I also wanted to add a sharing button for Mastodon. This is a bit more complicated than with most of the other providers. What makes it more difficult is that for Mastodon the page is to be shared on the actual instance where the user is logged in.  
+At the top of most of the pages there are sharing buttons. Next to the available sharing buttons like WhatsApp and Facebook, I also wanted to add a sharing button for Mastodon. This is a bit more complicated than with most of the other providers. What makes it more difficult is that for Mastodon the page is to be shared on the actual instance where the user is logged in.  
 There is no way of knowing what that instance is, so we will have to ask the user first to what instance the post should be shared.
 
-To accomplish this there are a few changes that are needed to be made to existing partials and there is some javascript code that will take care of the interaction with the user to ask for the Mastodon instance. Also it should be noted that this is a description about how to add it to the Hinode template.
+To accomplish this there are a few changes that are needed to be made to existing partials and there is some javascript code that will take care of the interaction with the user to ask for the Mastodon instance. Also it should be noted that this is a description about how to add it to the Hinode template, but the Javascript code is independent of that.
 
 The first step is to add the sharing information for Mastodon in `config/_default/params.toml`.
 
@@ -35,7 +34,7 @@ The first step is to add the sharing information for Mastodon in `config/_defaul
 
 Change `weight`, to match the position where the mastodon button is to be placed.
 
-Next is to add the language specific information, which will be used when interacting with the user. Add the following to `i18n/en.yaml`.
+Next add the language specific information, which will be used when interacting with the user. Add the following to `i18n/en.yaml`.
 
 ```yaml
 # Mastodon
@@ -132,7 +131,7 @@ The buttons are displayed on a page, by means of the code in `layouts/partials/a
 {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
 ```
 
-or, when the modifications as described in the [Hinode Changes](/blog/modifications/#update-sharing-providers) blog have already been done, this line:
+or, when the modifications as described in the {{< link "/blog/modifications/#update-sharing-providers" >}}Hinode Changes{{< /link >}} blog have already been done, this line:
 
 ```go-html-template
 {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
@@ -141,31 +140,31 @@ or, when the modifications as described in the [Hinode Changes](/blog/modificati
 Replace that line with the following:
 
 ```go-html-template
-                {{- $params := (dict "toast" $target 
-                                     "clipboard" $clipboard 
-                                     "href" $url 
-                                     "tooltip" $item.name 
-                                     "icon" (printf "%s fa-fw" $item.icon) 
-                                     "class" "btn-social p-0") 
-                -}}
-                {{- $attributes := dict -}}
-                {{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}
-
-                {{- with $item.source -}} 
-                    {{- $source := $item.source -}}
-                    {{- $source = strings.Replace $source "{url}" $page.Permalink -}}
-                    {{- $source = strings.Replace $source "{title}" (urlquery $page.Title) -}}
-                    {{- $source = $source | safeURL -}}
-                    {{- $attributes = merge $attributes (dict "data-m-src" $source) -}} 
-                {{- end -}}                                    
-                {{- with $item.prompt -}} {{- $attributes = merge $attributes (dict "data-m-prompt" (i18n $item.prompt)) -}} {{- end -}}    
-                {{- with $attributes -}} {{- $params = merge $params (dict "attributes" $attributes) -}} {{- end -}}
-                {{ partial "assets/button.html" $params }}  
+{{- $params := (dict "toast" $target 
+                        "clipboard" $clipboard 
+                        "href" $url 
+                        "tooltip" $item.name 
+                        "icon" (printf "%s fa-fw" $item.icon) 
+                        "class" "btn-social p-0"
+                        "label" (T "shareLink" $item.name)) 
+-}}
+{{- $attributes := dict -}}
+{{- with $item.id -}} {{- $params = merge $params (dict "id" $item.id) -}} {{- end -}}
+{{- with $item.source -}} 
+    {{- $source := $item.source -}}
+    {{- $source = strings.Replace $source "{url}" $page.Permalink -}}
+    {{- $source = strings.Replace $source "{title}" (urlquery $page.Title) -}}
+    {{- $source = $source | safeURL -}}
+    {{- $attributes = merge $attributes (dict "data-m-src" $source) -}} 
+{{- end -}}                                    
+{{- with $item.prompt -}} {{- $attributes = merge $attributes (dict "data-m-prompt" (i18n $item.prompt)) -}} {{- end -}}    
+{{- with $attributes -}} {{- $params = merge $params (dict "attributes" $attributes) -}} {{- end -}}
+{{ partial "assets/button.html" $params }}                
 ```
 
-This change will include the tooltip change that is described in the [Hinode Changes](/blog/modifications/#update-sharing-providers) blog.
+This change will include the tooltip change that is described in the {{< link "/blog/modifications/#update-sharing-providers" >}}Hinode Changes{{< /link >}} blog.
 
-In this code the dictionary that is sent to a button, is split up to allow adding the extra functionality, which is only added when that extra information is defined in `config/_default/params.toml`.
+In the above code the dictionary that is sent to a button, is split up to allow adding the extra functionality, which is only added when that extra information is defined in `config/_default/params.toml`.
 
 The `id` field is added to the dictionary. The `source` field is processed to replace the `{url}` with the actual page link and `{title}` with the title of the page. Finally the `prompt` field is replaced by the actual text in the language file that belongs to the specified language id in the `prompt` field. These two parameters are then added as a dictionary for the `attributes` field.  
 Finally the complete dictionary is sent to the button partial.

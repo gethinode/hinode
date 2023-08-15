@@ -1,9 +1,8 @@
-<!-- cSpell:ignore Joost shortcode Hinode getimage Exif mimage shortcodes mgetimage linenos frontmatter autocaption imgset srcset -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: A different image shortcode
 date: 2023-07-24
+lastmod: 2023-08-15
 description: Add more options to the image shortcode.
 tags: ["blog", "Hinode", "image"]
 thumbnail:
@@ -13,7 +12,7 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/KE0nC8-58MQ
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost shortcode Hinode getimage Exif mimage shortcodes mgetimage linenos frontmatter autocaption imgset srcset lastmod -->
 ## Introduction
 
 Hinode has already a very functional way of displaying images in content, which is the `image` shortcode that can be found in `layouts/shortcodes/image.html` file. This shortcode makes use of the `layouts/partials/utilities/Getimage.html` and the `layouts/partials/assets/image.html` partials for the actual work.
@@ -40,13 +39,13 @@ Additionally the following file is needed:
 
 - The class definitions used in the `mimage` shortcode, in the file `assets/scss/components/_mimage.scss`.
 
-The detailed information on how to use and install the shortcode is available in the [documentation](/docs/shortcodes/mimage/overview).
+The detailed information on how to use and install the shortcode is available in the {{< link "/docs/shortcodes/mimage/overview" >}}documentation{{< /link >}}.
 
 ## Code explanation
 
 ### Loading the image
 
-The source code of the shortcode starts with a check of all the parameters (see also [this page](/docs/shortcodes/mimage/usage) for all the parameters).  
+The source code of the shortcode starts with a check of all the parameters (see also {{< link "/docs/shortcodes/mimage/usage" >}}this page{{< /link >}} for all the parameters).  
 One of these parameters is `src`, which specifies which image to load. This is part of the code that takes care of loading the image in `layouts/partials/utilities/mGetImage.html`.
 
 ```go-html-template {linenos=true,hl_Lines=["10-19"]}
@@ -72,7 +71,7 @@ One of these parameters is `src`, which specifies which image to load. This is p
 {{ end }}
 ```
 
-The highlighted part is the part that was added by me. The `mGetImage` partial has tow input parameters, `url` and `page`. What happens in this snippet is that first a check is performed on whether or not the `url` is for a remote image. If so it tries to load that image. If not, we get to line 9, which tries to load the specified image from the `assets` folder. If that fails and the `page` parameter has been set to point ot the current page the code reaches line 11.  
+The highlighted part is the part that was added by me. The `mGetImage` partial has two input parameters, `url` and `page`. What happens in this snippet is that first a check is performed on whether or not the `url` is for a remote image. If so it tries to load that image. If not, we get to line 9, which tries to load the specified image from the `assets` folder. If that fails and the `page` parameter has been set to point to the current page, the code reaches line 11.  
 If the shortcode is used in a page bundle (`index.md` or `_index.md`) the code on line 11 will try to load the image relative to the page. If this image cannot be found or when the page where the shortcode is used is not a page bundle, the code will go to line 14 to check if there is a headless page bundle defined.  This is true when there is a folder `headless` in the same folder as where the page with the shortcode is located, and in that `headless` folder there is an `index.md` file with the following frontmatter:
 
 ```yaml
@@ -85,7 +84,7 @@ If this cannot be found, no image will be found either. If it is present a searc
 
 ### Caption and credits
 
-The caption and credits for the image is specified when the shortcode is used or either derived from a file or from the Exif information of the image. The following shows the code that takes care of that:
+The caption and credits for the image is specified when the shortcode is used or, either derived from a file or from the Exif information of the image. The following shows the code that takes care of that:
 
 ```go-html-template {linenos=true}
 <!-- Check if we need to derive the caption automatically from non-remote images -->
@@ -121,7 +120,7 @@ The caption and credits for the image is specified when the shortcode is used or
 {{- end -}}  
 ```
 
-This code is only executed when `autocaption` has been set to "true", the image is not remote and the caption and/or the credits have not been set.
+This code is only executed when `autocaption` has been set to "true", the image is not remote and the caption and/or the credits have not been set as a parameter.
 
 Line 6 builds the name of the text file that has the caption and/or credits for the current image. The name of the file is the same as the name of the image being processed, but with the extension `.txt`. Following that a check is performed if the file exists and if so, it will read the file.  
 The format of the file is expected to be as follows:
@@ -136,7 +135,7 @@ When the caption or credits have not been found yet, an attempt is made to read 
 
 ## Displaying the image
 
-One of the changes that is not further detailed out here is that the ratio of 3x2 has been added. This has been made par tof the code that creates the `imgset`, which is used in the below code. This is a set of images of different sizes that will be used for different screen sizes.
+One of the changes that is not further detailed out here is that the ratio of 3x2 has been added. This has been made part of the code that creates the `imgset`, which is used in the below code. This is a set of images of different sizes that will be used for different screen sizes.
 
 ```go-html-template {linenos=true, hl_Lines=["1" "4" "13-27"]}
 {{- if or $caption $credits -}}
@@ -170,7 +169,7 @@ One of the changes that is not further detailed out here is that the ratio of 3x
 
 The major change this code has compared to the original code, is the addition of the caption and credits, and how classes are assigned to the image and the caption/credits. The changed code is highlighted.
 
-When there is neither a caption or credits, both the `outerClass` and `innerClass` are assigned to the image. When either the caption or credits exits the image and the capt6ion/credits are wrapped in a `figure` and the `outerClass` is assigned to the figure, the `innerClass` to the image, and `captionClass` to the caption/credits. Furthermore a camera is added in front of the credits.
+When there is neither a caption or credits, both the `outerClass` and `innerClass` are assigned to the image. When either the caption or credits exits, the image and the capt6ion/credits are wrapped in a `figure` and the `outerClass` is assigned to the figure, the `innerClass` to the image, and `captionClass` to the caption/credits. Furthermore a camera icon is added in front of the credits.
 
 Compared to the parameters of the shortcode, `outerClass` corresponds to `outer`, `innerClass` to `inner` and `captionClass` to `text`.
 

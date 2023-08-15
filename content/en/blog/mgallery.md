@@ -1,9 +1,8 @@
-<!-- cSpell:ignore Joost shortcode Hinode mgallery Haupt lightbox mimage exif linenos frontmatter animage ovlpos ovlx ovly ovlperc divs -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: Adding a gallery
 date: 2023-07-24
+lastmod: 2023-08-15
 description: Add a gallery to Hinode.
 tags: ["blog", "Hinode", "gallery"]
 thumbnail:
@@ -13,10 +12,10 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/VbI0LMaGMlg
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost shortcode Hinode mgallery Haupt lightbox mimage exif linenos frontmatter animage ovlpos ovlx ovly ovlperc divs lastmod shortcodes -->
 ## Introduction
 
-One thing that Hinode does not have is a gallery. There are loads of galleries to choose from, but I wanted something that kept within the theme of the site. As a result, I settled on creating the gallery myself and using [Lightbox 2](https://lokeshdhakar.com/projects/lightbox2/) as a way to view the individual pictures in the gallery.
+One thing that Hinode does not have is a gallery. There are loads of galleries to choose from, but I wanted something that kept within the theme of the site. As a result, I settled on creating the gallery myself and using {{< link "https://lokeshdhakar.com/projects/lightbox2/" >}}Lightbox 2 {{< /link >}} as a way to view the individual pictures in the gallery.
 
 The `mgallery` shortcode offers the following features:
 
@@ -26,9 +25,9 @@ The `mgallery` shortcode offers the following features:
 - Define a variable number of columns, ranging from 2 to 5.
 - Add an optional overlay to the image, in the center or in one of the four corners of the image (not for the thumbnails).
 - Let the gallery fit in the look and feel of the site.
-- Get the image caption from a file or the image Exif information.
+- Get the image caption and credits from a file or the image Exif information.
 
-Details on how to install and use the `mgallery` shortcode, can be found in the [documentation](/docs/shortcodes/mgallery/overview).
+Details on how to install and use the `mgallery` shortcode, can be found in the {{< link "/docs/shortcodes/mgallery/overview" >}}documentation{{< /link >}}.
 
 ## Displaying the gallery
 
@@ -38,23 +37,23 @@ In this implementation of the `mgallery` shortcode, showing thumbnails in a grid
 
 {{< mimage src="img/grid.jpg" caption="Images displayed in a grid" outer="image-center" text="caption-center text-italic">}}
 
-The width of each grid element is always the same and is determined by the number of columns the gallery has. Because of that each of the images is scaled to fit that width. The height of the grid elements on a row is based on the tallest image on that row. When there are horizontal and vertical images on a row, the result is a blank area in the grid elements that have a horizontal image.
+The width of each grid element is always the same and is determined by the number of columns the gallery has. Because of that each of the image thumbnails is scaled to fit that width. The height of the grid elements on a row is based on the tallest image on that row. When there are horizontal and vertical images on a row, the result is a blank area in the grid elements that have a horizontal image.
 
-A mason is a person who lays bricks. To prevent a wall to have holes, the bricks are fitted in such a ways that no holes will appear. The same is true for a masonry gallery. The images are fitted in such a way that there are no empty spaces, such as in a grid (except at the end perhaps). The `mgallery` shortcode supports a masonry as shown in the below image.
+A mason is a person who lays bricks. To prevent a wall to have holes, the bricks are fitted in such a ways that no holes will appear. The same is true for a masonry gallery. The images are fitted in such a way that there are no empty spaces. The `mgallery` shortcode supports a masonry as shown in the below image.
 
 {{< mimage src="img/masonry.jpg" caption="Images displayed in a masonry" outer="image-center" text="caption-center text-italic">}}
 
-The width of each masonry element is always the same and is determined by the number of columns the gallery has. Because of that each of the images is scaled to fit that width. There is no alignment of images in the vertical direction. In the vertical direction images are 'fitted' to the image above, so that the distance between images is always the same.
+The width of each masonry element is always the same and is determined by the number of columns the gallery has. Because of that each of the image thumbnails is scaled to fit that width. There is no alignment of images in the vertical direction. In the vertical direction images are 'fitted' to the image above, so that the distance between images is always the same.
 
 If all images in a gallery have the same size, there is no visual difference between a grid and a masonry. At least not on a larger screen. On a smaller screen the number of columns will be reduced in a grid to try and keep the image size somewhat the same. In a masonry, the entire masonry is resized, making the masonry look the same, but with smaller images on a smaller screen.
 
 ## Code explanation
 
-See the [installation](/docs/shortcodes/mgallery/installation) section of the `mgallery` documentation for information on where to find the `mgallery` shortcode source file.
+See the {{< link "/docs/shortcodes/mgallery/installation" >}}installation{{< /link >}} section of the `mgallery` documentation for information on where to find the `mgallery` shortcode source file.
 
 ### Loading the images
 
-The source code of the shortcode starts with a check of all the parameters (see also [this page](/docs/shortcodes/mgallery/usage) for all the parameters).  
+The source code of the shortcode starts with a check of all the parameters (see also {{< link "/docs/shortcodes/mgallery/usage" >}}this page{{< /link >}} for all the parameters).  
 One of these parameters is `list`, which specifies which images should be displayed. This is the code that takes care of loading the set of images.
 
 ```go-html-template {linenos=true}
@@ -86,7 +85,7 @@ One of these parameters is `list`, which specifies which images should be displa
 {{- end -}}
 ```
 
-If the shortcode is used in a page bundle page (`index.md` or `_index.md`) the check for `.Page.BundleType` in line 6 will be true. It will be false when the shortcode is used on any other page.
+If the shortcode is used in a page bundle file, (`index.md` or `_index.md`), the check for `.Page.BundleType` in line 6 will be true. It will be false when the shortcode is used on any other page.
 
 The default state for the `list` parameter is that all images in the bundle resource will be used, this is what happens in line 5. When the page is a page bundle and the `list` parameter is defined a search for the files that match the blob as specified in `list` will be performed (line 9) and following that filtered to remove all files that are not images (line 11).
 
@@ -95,7 +94,7 @@ In this case this is true when there is a folder `headless` in the same folder a
 
 ```yaml
 ---
-headless: true{linenos=true}
+headless: true
 ---
 ```
 
@@ -161,11 +160,11 @@ The code fragment for creating the thumbnails is as follows:
 {{- $resized := .Fill (printf "%dx%d q80 CatMullRom" $width $height) | resources.Copy $thumbName -}}
 ```
 
-In line 1 the name of the thumbnail is generated, in order to create a user-friendly name for that thumbnail. It will be the basename of the image, postfixed with `_t` and the value of the `thumb` parameter. It could be something like img/animage_t21x9.img
+In line 1 the name of the thumbnail is generated, in order to create a user-friendly name for that thumbnail. It will be the basename of the image, postfixed with `_t` and the ratio value of the `thumb` parameter. It could be something like img/animage_t21x9.jpg
 
-In line 5, the maximum width of the thumbnail is calculated. which is the window size (872 pixels) divided by the number of columns. Based on that width, the height of the thumbnail is calculated, based on the `thumb` parameter, in lines 12-50. In, the somewhat unlikely case, that the calculated height, happens to be larger than the image height, the height is made equal to the image Height and the width is recalculated.
+In line 5, the maximum width of the thumbnail is calculated. which is the window size (872 pixels) divided by the number of columns. Based on that width, the height of the thumbnail is calculated, based on the `thumb` parameter, in lines 12-50. In, the somewhat rare case, that the calculated height, happens to be larger than the image height, the height is made equal to the image Height and the width is recalculated.
 
-Finally in line 53, the actual creation of the thumbnail happens. The resulting thumbnail will have the specified size, without deformation. The `.Fill` will use cropping and resizing to reach the specified size.
+Finally in line 53, the actual creation of the thumbnail happens. The resulting thumbnail will have the specified size, without deformation. The `.Fill` operation will use cropping and resizing to reach the specified size.
 
 ### Caption and credits
 
@@ -261,13 +260,13 @@ ovlperc|Optional percentage for the size of the logo related to the size of the 
 
 When an overlay image has been defined and the `ovlperc` is defined and not equal to 0, a scaling of the overlay image will take place. If for example the percentage is 10, the overlay image will be resized to 10 percent of the image size to which it is to be added. This happens in lines 6-9.
 
-In lines 13-30 the position of the overlay image is determined. When adding the overlay image the left top position in the image it is to be added to, should be specified. This is what is calculated in lines 15-30.
+In lines 13-30 the position of the overlay image is determined. When adding the overlay image.
 
 The actual operation of adding the overlay image is done in lines 33 and 34.
 
 ### Showing the image
 
-Then the images is to be displayed.
+Then the images are to be displayed.
 
 ```go-html-template {linenos=true}
 <div class="col gallery-pad-{{ $gap -}}">
@@ -301,11 +300,11 @@ Then the images is to be displayed.
 </div>
 ```
 
-Line 1 defines the vertical gap between the images. Line 2 defines if the image will be zoomed when hovering over it and line 3 defines the ratio in which the image will be displayed.  In line 8, if the radius has been enabled, the radius of the corners is determined.
+Line 1 defines the vertical gap between the images. Line 2 defines if the image will be zoomed when hovering over it and line 3 defines the ratio in which the image will be displayed. In line 8, if the radius has been enabled, the radius of the corners is determined.
 
-Lines 12-19 constructs the credits string, which is displayed differently in lightbox, depending on whether or not there is a caption.
+Lines 12-19 constructs the credits and caption strings, which is displayed in lightbox.
 
-Finally, line 22 builds the link the will open lightbox when the thumbnail is clicked, and line 23 shows the thumbnail. In these two lines the following elements are relevant:
+Finally, line 22 builds the link that will open lightbox when the thumbnail is clicked, and line 23 shows the thumbnail. In these two lines the following elements are relevant:
 
 - `$imageResult` is the image to display in lightbox (optionally with overlay image).
 - All images with the same `data-lightbox`, will belong together and can be navigated to from within Lightbox.
@@ -334,7 +333,7 @@ The container that contains all the thumbnails is defined by a set of classes, w
 
 For a grid, a fluid container is used, which will result in changing the image sizes and the number of columns when displayed on a smaller device. Furthermore, also the horizontal space between the images is specified. The number of columns has been calculated before and stored in `$colCard`.
 
-For a masonry, a masonry container is used. the number of columns is defined and also here the horizontal space between the images is set.
+For a masonry, a masonry container is used. the number of columns is defined and also the horizontal space between the images is set.
 
 Note that a grid will use primarily bootstrap classes, whereas a masonry will use a mixture of bootstrap and self defined classes.
 

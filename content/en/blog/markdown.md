@@ -1,9 +1,8 @@
-<!-- cSpell:ignore goldmark blockquotes frontmatter xcab XFFFD someid someclass somevalue linenos linenostart stle mynote katex emojist healthcheck linkify strikethrough blackfriday myclass monokai lineanchors shortcode shortcodes Hinode relref fontawesome borderless viewports joost Hinode Victória Kubiaki -->
-<!-- markdownlint-disable MD003 MD022 MD041 MD046 -->
 ---
 author: Joost Mans
 title: Markdown
 date: 2023-07-21T13:40:45.334Z
+lastmod: 2023-08-15
 description: Showing possible Markdown options, which also shows what is and what is not supported.
 tags: ["blog", "markdown"]
 thumbnail:
@@ -14,13 +13,12 @@ thumbnail:
     originURL: https://unsplash.com/photos/OukRLogaKPE
 modules: ["katex"]
 ---  
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore goldmark blockquotes frontmatter xcab XFFFD someid someclass somevalue linenos linenostart stle mynote katex emojist healthcheck linkify strikethrough blackfriday myclass monokai lineanchors shortcode shortcodes Hinode relref fontawesome borderless viewports joost Hinode Victória Kubiaki lastmod -->
+<!-- markdownlint-disable MD025 -->
 
-I use this file to show what is supported and what is not by various markdown processes. I've added it here to see what is supported in Hugo and Hinode.
+I use this document to show what is supported and what is not by various markdown processes. I've added it here to see what is supported in Hugo and Hinode.
 
-There is a focus in this document on markdown as it is used by Github, which uses GFM (Github Flavored Markdown) and is specified [here](https://github.github.com/gfm/), and Goldmark, which is used by Hugo and is specified [here](https://github.com/yuin/goldmark/). Next to that there are also Hinode's additions that can be used in markdown, based on bootstrap and shortcodes, of which the documentation can be found [here](https://demo.gethinode.com/en/blog/bootstrap-elements/).
-
-In Hugo, apparently creating a horizontal ruler by using minus signs isn't giving the expected result.
+There is a focus in this document on markdown as it is used by Github, which uses GFM (Github Flavored Markdown) and is specified {{< link "https://github.github.com/gfm/" >}}here{{< /link >}}, and Goldmark, which is used by Hugo and is specified {{< link "https://github.com/yuin/goldmark/" >}}here{{< /link >}}. Next to that there are also Hinode's additions that can be used in markdown, based on bootstrap and shortcodes, of which the documentation can be found {{< link "https://demo.gethinode.com/en/blog/bootstrap-elements/" >}}here{{< /link >}}.
 
 ## Table of Contents
 
@@ -50,11 +48,11 @@ In Hugo, apparently creating a horizontal ruler by using minus signs isn't givin
     - [Fenced code blocks](#fenced-code-blocks)
     - [Hugo additional options](#hugo-additional-options)
   - [Links](#links)
+    - [Hinode extension](#hinode-extension)
   - [Blockquotes](#blockquotes)
     - [Hinode additional options](#hinode-additional-options-2)
   - [Images](#images)
   - [Horizontal rule](#horizontal-rule)
-  - [Minus signs](#minus-signs)
   - [Footnotes](#footnotes)
   - [Tables](#tables)
     - [Hinode additional options](#hinode-additional-options-3)
@@ -67,7 +65,7 @@ In Hugo, apparently creating a horizontal ruler by using minus signs isn't givin
 
 ## Tabs
 
-The behavior of tabs is not defined, but Hugo, GFM and code all do the following: Tabs are preserved and shown. A tab at the beginning of a line will result in a code block being created and the tab being lost.
+The behavior of tabs is not defined, but Hugo, GFM and VSCode all do the following: Tabs are preserved and shown. A tab at the beginning of a line will result in a code block being created and the tab being lost.
 
 ## Escaping Markdown characters
 
@@ -250,9 +248,9 @@ Text can be emphasized by making it bold, italic or strike-through.
 
 ### Bold
 
-Bold text is accomplish by embedding text in two asterisks or two underscores
+Bold text is accomplished by embedding text in two asterisks or two underscores.
 
-```markdown
+```text
 Some **bold text** and some __more bold text__
 ```
 
@@ -262,7 +260,7 @@ Some **bold text** and some **more bold text**
 
 Italics are accomplished by embedding text in asterisk or underscores
 
-```markdown
+```text
 Some *italic text* and some more _italic text_
 ```
 
@@ -308,7 +306,7 @@ This is<sub>subscript</sub>
 
 Lists can be ordered or unordered. An ordered list uses numbers, followed by either a `.` or a `)` character.
 
-```markdown
+```text
 1. First ordered item
 2. Second ordered item
 5. The actual number is irrelevant. It just needs to be a number
@@ -323,7 +321,7 @@ The list starts with the first number given and will increment that number for t
 An ordered list can also have sub-items.\
 In the next examples a space at the end or the beginning of a line is indicated by means of a `⋅` character, to make it more visual.
 
-```markdown
+```text
 1. First ordered item
 2. Second ordered item
 ⋅⋅⋅1. And three spaces to create the sub-list
@@ -339,7 +337,7 @@ In the next examples a space at the end or the beginning of a line is indicated 
 
 A list can also be unordered.
 
-```markdown
+```text
 * Using a star
 - Or using a minus
 + Or using a plus
@@ -352,7 +350,7 @@ A list can also be unordered.
 
 And can also have a sub-items
 
-```markdown
+```text
 * Using a star
 - Or using a minus
 ⋅⋅⋅* Prefix with three spaces and use any of the three allowed unordered list characters
@@ -367,7 +365,7 @@ And can also have a sub-items
 
 To create a new line in a list and continue with text for that list item. Add two characters at the end of a list item or the '\\' character.
 
-```markdown
+```text
 1. First line of this item in the list⋅⋅
    Second line of that first item
 2. Second item
@@ -379,10 +377,10 @@ Second line of that first item
 
 To layout that second line properly in the Markdown file. It can be prefixed by as many spaces as needed, as those spaces are ignored.
 
-Task lists are not supported by all renderers, but GFM, Hugo and code do.  
+Task lists are not supported by all renderers, but GFM, Hugo and VSCode do.  
 To render a task list brackets are used, with an optional `x` character between the brackets.
 
-```markdown
+```text
 - [x] Option one
 - [ ] Option two
   - [x] Option two.one
@@ -396,7 +394,7 @@ To render a task list brackets are used, with an optional `x` character between 
 - [x] Option three
 - [ ] Option 4
 
-Hugo also supports definition lists. GFM does not and for Code it depends on the used viewer.
+Hugo also supports definition lists. GFM does not and for VSCode it depends on the used viewer.
 
 ```markdown
 Someone
@@ -442,7 +440,7 @@ This `inline code` is part of the sentence.
 
 ### Indented code block
 
-indented code blocks start with 4 spaces and has a blank line preceding it.
+indented code blocks start with 4 spaces and have a blank line preceding it.
 <!-- markdownlint-disable MD046 -->
     This is an indented block
 
@@ -461,12 +459,12 @@ var s = "Some string";
 alert(s);  
 \`\`\`
 
-```javascript
+```text
 var s = "Some string";
 alert(s);
 ```
 
-To fenced code blocks, a language can be added to enable syntax highlighting. See the supported languages [here](https://highlightjs.org/static/demo/) and for Hugo [here](https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages).
+To fenced code blocks, a language can be added to enable syntax highlighting. See the supported languages {{< link "https://highlightjs.org/static/demo/" >}}here{{< /link >}} and for Hugo {{< link "https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages" >}}here{{< /link >}}.
 
 Example:  
 \`\`\`javascript  
@@ -488,7 +486,7 @@ Fenced code blocks can be indented with up to 3 spaces. In that case the same am
 
 ### Hugo additional options
 
-Line numbering can be turned on by using the optional syntax highlighting identifier with {linenos=true} and disabled with {linenos=false}
+Line numbering can be turned on by using the optional syntax highlighting identifier with `{linenos=true}` and disabled with `{linenos=false}`.
 
 ```javascript {linenos=true}
 var s = "Some string";
@@ -496,8 +494,8 @@ var s = "Some string";
 alert(s);
 ```
 
-The starting line number can also be added by using {linenostart=5} in case the line number should start at line 5.  
-Next to that specific lines can also be highlighted by using {hl_Lines=[1, 3]} or a set of lines, like {hl_Lines=["2-3"]}
+The starting line number can also be added by using `{linenostart=5}` in case the line number should start at line 5.  
+Next to that specific lines can also be highlighted by using `{hl_Lines=[1, 3]}` or a set of lines, like `{hl_Lines=["2-3"]}`.
 
 ```javascript {linenos=true,linenostart=5,hl_Lines=["2-3"]}
 var s = "Some string";
@@ -539,7 +537,7 @@ This can also be combined if the reference is the text to display by using a dir
 ```markdown
 Here is a [direct reference]
 
-This requires after this, in another paragraph, the definition of the reference:
+This requires after this, somewhere in the document, the definition of the reference:
 [direct reference]: https://duckduckgo.com/
 ```
 
@@ -557,42 +555,54 @@ A link can also be used in a direct way.
 
 ```markdown
 <https://duckduckgo.com/>
-<mailto:myrthos@myrthos.net>
-<myrthos@myrthos.net>
+<mailto:me@somewhere.net>
+<her@somewhere.net>
 ```
 
 <https://duckduckgo.com/>  
-<mailto:myrthos@myrthos.net>  
-<myrthos@myrthos.net>
+<mailto:me@somewhere.net>  
+<her@somewhere.net>
 
 Both Hugo and GFM support the autolink extension, which allows to do this as well:
 
 ```markdown
 https://duckduckgo.com/
-myrthos@myrthos.net
+him@somewhere.net
 ```
 
 <!-- markdownlint-disable MD034 -->
 https://duckduckgo.com/  
-myrthos@myrthos.net
-<!-- markdownlint-enable MD034 -->
+him@somewhere.net
+
 [Top^](#markdown)
+
+### Hinode extension
+
+Hinode supports an additional manner of showing a link by using the `link` shortcode.
+
+```go-html-template
+{{</* link "https://duckduckgo.com/" */>}}link to DuckDuckGo{{</* /link */>}}
+```
+
+{{< link "https://duckduckgo.com/" >}}link to DuckDuckGo{{< /link >}}
+
+It has the advantage that it can be configured to open external links in a new tab and provide an indication that the link leaves this site, as is the case on this site.
 
 ## Blockquotes
 
 Blockquotes are used to indent text and use the `>` character. This character can be prefixed with up to 3 spaces.
 
-```markdown
+```text
 > It can be used for multiple lines. But if you don't add two spaces at the end of the previous line, they will be concatenated.
 
-> This is the first line with the spaces at the end.  
+> This is the first line with two spaces at the end.  
 > And this is the second line, which we can make very long to make sure that it wraps, so it gives us an idea of what happens in that case. In contrast to quotes, a blockquote can contain markdown, like **bold** or *italic text*.
 ```
 
 <!-- markdownlint-disable MD028 -->
 > It can be used for multiple lines. But if you don't add two spaces at the end of the previous line, they will be concatenated.
 
-> This is the first line with teo spaces at the end.  
+> This is the first line with two spaces at the end.  
 > And this is the second line, which we can make very long to make sure that it wraps, so it gives us an idea of what happens in that case. In contrast to quotes, a blockquote can contain Markdown, like **bold** or *italic text*.
 <!-- markdownlint-enable MD028 -->
 
@@ -606,7 +616,7 @@ The following Markdown generates a blockquote, add `{.blockquote}` at the bottom
 {.blockquote}
 ```
 
-> Some quoted text.
+> Some quoted text.  
 > **Note** that you can use *Markdown syntax* within a blockquote.
 {.blockquote}
 
@@ -619,23 +629,23 @@ Images can be added inline or by reference. By hovering over the logo the altern
 Note this will not be parsed the same on all Markdown parsers.  
 Inline it looks like this:
 
-```markdown
-Inline stle:
-![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 1")
+```text
+Inline stle: ![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 1")
 ```
 
 inline style: ![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 1")
 
 By reference it looks like this:
 
-```markdown
-Reference style:
-![alt text][logo]
+```text
+Reference style: ![alt text][logo]
 
 [logo]: https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 2"
 ```
 
-Reference style![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 2")
+Reference style: ![alt text][logo]
+
+[logo]: https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video Logo 2"
 
 [Top^](#markdown)
 
@@ -643,12 +653,13 @@ Reference style![alt text](https://img.youtube.com/vi/j47I36LZQVc/0.jpg "Video L
 
 A horizontal rule is placed when there are at least three asterisks, underscores or minus signs. There can be more, but not less. It is also allowed to have spaces between the characters, at the end of the line and a maximum of 3 spaces at the beginning of the line.
 
-```markdown
+```text
 Asterisks 
 ***  
 Underscores
 ___  
 Minus signs
+
 ---
 ```
 
@@ -659,9 +670,11 @@ Asterisks
 Underscores  
 ___
 
-Minus signs  
+Minus signs
+
 ---
 <!-- markdownlint-enable MD035 -->
+When using minus signs an empty line is required before the 3 minus signs.
 
 [Top^](#markdown)
 
@@ -669,12 +682,14 @@ Minus signs
 
 Footnotes aren't supported by all Markdown parsers, but many do.
 
-```markdown
+```text
 My first single line footnote[^1].
 
 This will be a footnote with multiple lines[^2].  
 
 It doesn't have to be numbers, words can also be used[^mynote]. However, it will be replaced by a number when rendered.
+
+The footnotes can be placed anywhere in the document, but when rendered, will be placed at the bottom of the page.
 
 [^1]: This is my footnote.  
 [^2]: The first line is post-fixed with 2 spaces .  
@@ -690,6 +705,8 @@ This will be a footnote with multiple lines[^2].
 
 It doesn't have to be numbers, words can also be used[^mynote]. However, it will be replaced by a number when rendered.
 
+The footnotes can be placed anywhere in the document, but when rendered, will be placed at the bottom of the page.
+
 [^1]: This is my footnote.
 [^2]: The first line is post-fixed with 2 spaces.
   The second line is pre-fixed with two spaces.
@@ -704,7 +721,7 @@ It doesn't have to be numbers, words can also be used[^mynote]. However, it will
 Tables aren't supported by all Markdown parsers, but many do.  
 Tables are created by using pipes `|` and dashes `-`.
 
-```markdown
+```text
 | Tables   | Are      | Cool     |  
 |----------|----------| ---------|  
 | column 1 | column 2 | column 3 |  
@@ -720,7 +737,7 @@ There must be at least 3 dashes separating each header cell.
 The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily.  
 Also inline Markdown is supported.
 
-```markdown
+```text
 Markdown | Less | Pretty  
 --- | --- | ---  
 *Still* | `renders` | **nicely**  
@@ -737,7 +754,7 @@ A colon at the left followed by a minimum of 3 dashes aligns the column to the l
 A colon at the right preceded by a minimum of 3 dashes aligns the column to the right.  
 A colon at both the left and right with between them at least 3 dashes, centers the column.
 
-```markdown
+```text
 | Tables        | Are           | Cool  |  
 | ------------- |:-------------:| -----:|  
 | col 3 is      | right-aligned | $1600 |  
@@ -749,13 +766,13 @@ A colon at both the left and right with between them at least 3 dashes, centers 
 | col 3 is      | right-aligned | $1600 |  
 | col 2 is      | centered      |   $12 |
 
-The alignment of the columns in Hugo is achieved by applying a style to the HTML table columns. If however Content-Security-Policy is active, like in Hinode, the styling is blocked. Resulting in the alignment not working. Hinode provides a solution for that by adding the option to use classes.
+The alignment of the columns in Hugo is achieved by applying a style to the HTML table columns. If however Content-Security-Policy is active, like in Hinode and on this site, the styling is blocked. Resulting in the alignment not working. Hinode provides a solution for that by adding the option to use classes.
 
 ### Hinode additional options
 
 Hinode adds enhancements to displaying tables. Add `{.table}` at the bottom of the block to apply the correct styling. You can mix the content with inline Markdown.
 
-```markdown
+```text
 | Italics   | Bold     | Code   |
 | --------- | -------- | ------ |
 | *italics* | **bold** | `code` |
@@ -767,16 +784,16 @@ Hinode adds enhancements to displaying tables. Add `{.table}` at the bottom of t
 | *italics* | **bold** | `code` |
 {.table}
 
-There are more enhancements in Hinode related to tables, which can be found [here](https://gethinode.com/docs/content/tables/).
+There are more enhancements in Hinode related to tables, which can be found {{< link "https://gethinode.com/docs/content/tables/" >}}here{{< /link >}}.
 
 [Top^](#markdown)
 
 ## Formula
 
-Formulas are not supported by all Markdown parsers. If they are then they use the LaTex markup. [This](https://en.wikibooks.org/wiki/LaTeX/Mathematics) is a useful reference. An editor to try it out can be found on [CodeCogs](https://www.codecogs.com/latex/eqneditor.php).\
+Formulas are not supported by all Markdown parsers. If they are then they use the LaTex markup. {{< link "https://en.wikibooks.org/wiki/LaTeX/Mathematics" >}}This{{< /link >}} is a useful reference. An editor to try it out can be found on {{< link "https://www.codecogs.com/latex/eqneditor.php" >}}CodeCogs{{< /link >}}.  
 A formula line is prefixed and postfixed with a single dollar sign (inline formula) or a double dollar sign.
 
-```markdown
+```text
 This is an inline $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formula
 $$x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}$$
 $$\forall x \in X, \quad \exists y \leq \epsilon$$
@@ -786,6 +803,8 @@ This is an inline $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formula
 $$x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}$$  
 $$\forall x \in X, \quad \exists y \leq \epsilon$$
 
+On Hinode and this site, the above shows the proper formulas, because the `Katex` module is used.
+
 [Top^](#markdown)
 
 ## Inline HTML
@@ -793,7 +812,7 @@ $$\forall x \in X, \quad \exists y \leq \epsilon$$
 it is possible to use raw html in Markdown. For the most part it will work.  
 Using Markdown in HTML, usually does not work very well, so it is best to use HTML tags.
 
-For security reasons, this options is disabled by default in HUGO, but enabled in Hinode by default.
+For security reasons, this option is disabled by default in HUGO, but enabled in Hinode by default.
 
 ```html
 <dl>
@@ -823,9 +842,7 @@ Use the HTML element <abbr> for abbreviations and acronyms to show the expanded 
 
 Videos, like YouTube videos can only be added, using an image with a link in Markdown. It is not possible to define the size in that way.
 
-Note: On NextCloud, this does not work
-
-```markdown
+```text
 [![IMAGE ALT TEXT](https://img.youtube.com/vi/j47I36LZQVc/0.jpg)](https://www.youtube.com/watch?v=j47I36LZQVc)
 ```
 
@@ -847,20 +864,35 @@ alt="IMAGE ALT TEXT" width="480" height="360" border="10" /></a>
 
 ## Emojis
 
-Emojist are supported in HUGO when the following is set in the config file:  
-`enableEmoji = true`
+Emojis are supported in HUGO when the following is set in the config file: `enableEmoji = true`
 
-Following that it is possible to use one of the supported emoji surrounded by colon characters.
+Following that, it is possible to use one of the supported emoji surrounded by colon characters.
 
-`:smile: :cry: :wink:`
+```text
+:smile : :cry : :wink : 
+```
+
+Note that the space before the second colon in each of the texts, should not be used. It is used here, because Hugo renders the emojis in the code block as well.
 
 :smile: :cry: :wink:
 
-See [here](https://www.unicode.org/emoji/charts/emoji-list.html) for a list of allowed emojis.
+See {{< link "https://www.unicode.org/emoji/charts/emoji-list.html" >}}here{{< /link >}} for a list of allowed emojis.
 
 ## Diagrams
 
-HUGO supports [GoAT](https://github.com/bep/goat) diagrams natively.
+HUGO supports {{< link "https://github.com/bep/goat" >}}GoAT{{< /link >}} diagrams natively.
+
+```text
+      .               .                .               .--- 1          .-- 1     / 1
+     / \              |                |           .---+            .-+         +
+    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
+   +     +        |       |        |       |    ---+            ---+          +
+  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
+ /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
+ 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
+```
+
+To enable this in a code block, the language of te code block needs to be set to `goat`.
 
 ```goat
       .               .                .               .--- 1          .-- 1     / 1
@@ -877,7 +909,8 @@ For this the information needs to be in a code block with the language specifica
 Note that if Content-Security-Policy is active, the result will generate a number of errors, because Hugo generates font-styles for the numbers, which will be blocked.
 
 In Hugo, Mermaid is not supported by default, but it can be added. Check out [this link](https://gohugo.io/content-management/diagrams/#mermaid-diagrams) for more information.  
-Note that when Content-Security-Policy has been enabled, the mermaid javascript file generates a lot of `style-src` blocks. This can only be prevented when `unsafe-inline` is added to the `style-src` and all hashes are removed from the list (as when a hash is present `unsafe-inline` is ignored).
+Note that when Content-Security-Policy has been enabled, the mermaid javascript file generates a lot of `style-src` blocks. This can only be prevented when `unsafe-inline` is added to the `style-src` and all hashes are removed from the list (as when a hash is present `unsafe-inline` is ignored).  
+Because of this Mermaid is not supported on Hinode and this site, as using `unsafe-inline` makes Content-Security-Policy pointless.
 
 Similar to goat, a mermaid diagram is a code block with the language set to 'mermaid'.
 
@@ -903,7 +936,7 @@ When invisible information is needed to be stored in the markdown file, use the 
 <!-- This line will not be rendered -->
 ```
 
-And outside the fenced block:  
+And outside the fenced block this line should not be visible:  
 <!-- This line will not be rendered -->
 
 Note that the start of the comment needs to be on a line of its own and can be prefixed with up to 3 spaces. With more spaces or prefixed with any other character than a space the entire comment block will be shown.

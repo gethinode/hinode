@@ -1,10 +1,8 @@
-<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery webp navgrey navshort -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: Hinode changes
 date: 2023-07-21T13:41:48.543Z
-lastmod: 2023-08-13
+lastmod: 2023-08-15
 description: An overview of the changes to the Hinode template that were made for this site
 tags: ["blog", "Hinode"]
 thumbnail:
@@ -14,15 +12,15 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/gJUZjwy2EgE
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery webp navgrey navshort goatcounter publishdate pubdate -->
 
 The foundation of this site is {{< link "https://github.com/gethinode/hinode" >}}Hinode{{< /link >}}. This post provides an overview of the changes that were made to the Hinode theme, to get to the current design of this site. Obviously the information in this blog is very specific for this site, but if there is something of interest with respect to the layout on this site, it should be described here.
 
 Note that the following changes are described elsewhere:
 
-- A sharing button for [Mastodon](/blog/mastodon).
-- A shortcode for the [gallery](/blog/mgallery).
-- A shortcode for a different way of displaying [images](/blog/mimage).
+- A sharing button for {{< link "/blog/mastodon" >}}Mastodon{{< /link >}}.
+- A shortcode for the {{< link "/blog/mgallery" >}}gallery{{< /link >}}.
+- A shortcode for a different way of displaying {{< link "/blog/mimage" >}}images{{< /link >}}.
 
 ## Basic modifications to the configuration files
 
@@ -527,7 +525,7 @@ to:
 {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "tooltip" $item.name "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" )}}
 ```
 
-I also wanted to add Mastodon as a sharing button, but that requires a bit more changes and because of that I've made a [separate blog post](/blog/mastodon) for that.
+I also wanted to add Mastodon as a sharing button, but that requires a bit more changes and because of that I've made a {{< link "/blog/mastodon" >}}separate blog post{{< /link >}} for that.
 
 ## External links to a new tab
 
@@ -610,7 +608,7 @@ content/en
       <image resources>
 ```
 
-Each of the `index.md` files need to have the `layout: gallery` in the frontmatter, to make sure the layout of the page is done correctly. Additionally to enable the use of Lightbox, also `lightbox: true` needs to be added to the frontmatter. next to that each of the `index.md` files needs one or more calls to the `mgallery` shortcode. For an explanation of the use of that shortcode, check the [mgallery](/blog/mgallery) blog and the [documentation](/docs/shortcodes/mgallery/overview).
+Each of the `index.md` files need to have the `layout: gallery` in the frontmatter, to make sure the layout of the page is done correctly. Additionally to enable the use of Lightbox, also `lightbox: true` needs to be added to the frontmatter. next to that each of the `index.md` files needs one or more calls to the `mgallery` shortcode. For an explanation of the use of that shortcode, check the {{< link "/blog/mgallery" >}}mgallery{{< /link >}} blog and the {{< link "/docs/shortcodes/mgallery/overview" >}}documentation{{< /link >}}.
 
 ### Changes to the default layout
 
@@ -981,7 +979,7 @@ is to be replaced with
 {{- partial "assets/mimage.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
 ```
 
-Obviously this only works when the `mimage` shortcode is installed, which is explained [here](/blog/mimage).
+Obviously this only works when the `mimage` shortcode is installed, which is explained {{< link "/blog/mimage" >}}here{{< /link >}}.
 
 ## Additional empty line before the comments
 
