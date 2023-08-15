@@ -56,54 +56,42 @@
 - [PageSpeed Insights][pagespeed]
 - [Mozilla Observatory][observatory]
 
-Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme supports [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
-
-Additional features include:
-
-- Flexible configuration of Hugo modules
-- Switching between light mode and dark mode
-- Support for multiple languages
-- Reusable Bootstrap components through configurable shortcodes and partials
-- Embedded comments through light-weight integration with GitHub via [utteranc.es][utterances]
-- Integrated sidebar navigation for content-heavy sections, such as documentation pages
-- Reponsive image handling for multiple screen sizes and resolutions
-- Optimized search results, scoring 100 points for SEO on [PageSpeed Insights][pagespeed]
-- Secure by default, scoring A+ on [Mozilla Observatory test][observatory]
+Hinode is a clean documentation and blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme supports [Node Package Manager][npm] (npm) to automate the build process and to keep track of dependencies.
 
 Detailed information about Hinode is available on the [official website][website].
 
 ## Prerequisites
 
-Hinode requires Git, Node.js and npm for local development and testing. Download the Git binary from the [official website][git_download]. Next, download and install [Node.js][nodejs] (it includes npm) for your platform.
+Hinode is a [Hugo theme that uses modules][hugo_modules] to install and maintain various components. It can be installed using either Hugo or npm. If you would like to take advantage of automation, the npm approach is recommended. Refer to the [Hinode template][repository_template] for installation instructions with npm.
+
+The installation instructions in this readme install Hinode as a regular Hugo theme. Hinode requires the following software to be installed on your local machine.
+
+- [Go binary][golang_download]
+- [Hugo][nodejs] (extended version)
+
+[Git][git_download] is recommended, but is not a strict requirement.
 
 ## Installation
 
 Start a new Hinode project in three steps:
 
-1. Create a new site
-
-    Hinode is available as a [template][repository_template], and a [main repository][repository]. The template [npm][npm] to link to the latest available version of Hinode. Unless you plan to customize a lot, it is recommended to use the template:
+1. **Create a new site**
 
     ```bash
-    git clone https://github.com/gethinode/template.git my-hinode-site && cd my-hinode-site
+    hugo new site my-hinode-site && cd my-hinode-site
     ```
 
-    Use the main theme if you intend to customize the base code:
+1. **Initialize the module system**
 
     ```bash
-    git clone https://github.com/gethinode/hinode.git my-hinode-site && cd my-hinode-site
+    hugo mod init example.com/my-hinode-site
+    echo "[[module.imports]]\npath = 'github.com/gethinode/hinode'" >> hugo.toml
     ```
 
-1. Install dependencies
+1. **Start a development server**
 
     ```bash
-    npm install
-    ```
-
-1. Start development server
-
-    ```bash
-    npm run start
+    hugo server
     ```
 
 ## Configuration
@@ -127,7 +115,7 @@ Hinode is inspired by the following themes:
 
 ## License
 
-The `hinode` and `template` codebase is released under the [MIT license][license]. The documentation (including the "README" and `docs` codebase) is licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license.
+The `hinode`, `docs`, and `template` codebase is released under the [MIT license][license]. The documentation of Hinode is licensed under the Creative Commons [(CC BY-NC 4.0)][cc-by-nc-4.0] license. This includes all files within the repository's `/content` and `/exampleSite/content` folders and their children, as well as the "README" in the repository root. This applies to all public repositories maintained by `gethinode` on GitHub, including the `gethinode/hinode`, `gethinode/template`, and `gethinode/docs` repositories, unless specified otherwise.
 
 <!-- MARKDOWN PUBLIC LINKS -->
 [blist]: https://github.com/apvarun/blist-hugo-theme
@@ -137,6 +125,8 @@ The `hinode` and `template` codebase is released under the [MIT license][license
 [flexsearch]: https://github.com/nextapps-de/flexsearch
 [git_download]: https://git-scm.com
 [hugo]: https://gohugo.io
+[hugo_download]: https://gohugo.io/installation
+[hugo_modules]: https://gohugo.io/hugo-modules/
 [netlify]: https://www.netlify.com
 [nodejs]: https://nodejs.org
 [npm]: https://www.npmjs.com
@@ -147,6 +137,7 @@ The `hinode` and `template` codebase is released under the [MIT license][license
 <!-- MARKDOWN MAINTAINED LINKS -->
 [contribute]: https://gethinode.com/contribute
 [getstarted]: https://gethinode.com/docs
+[golang_download]: https://go.dev/dl/
 [demo]: https://demo.gethinode.com/
 [license]: https://github.com/gethinode/hinode/blob/main/LICENSE
 [repository]: https://github.com/gethinode/hinode.git

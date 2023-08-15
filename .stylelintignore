@@ -1,7 +1,6 @@
 assets/scss/common/_variables.scss
 assets/scss/components/_syntax-dark.scss
 assets/scss/components/_syntax-light.scss
-assets/scss/hotfix
 assets/scss/vendor
 assets/scss/theme/fonts.scss
 assets/scss/app.scss
