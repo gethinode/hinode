@@ -1,8 +1,8 @@
-<!-- Cspell:ignore ovlpos ovlx ovly ovlperc lightbox mgallery galgrafitti webp -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 title: Placeholder 1
 description: A placeholder for a future gallery
+date: 2023-08-01
+lastmod: 2023-08-15
 tags: ["photo"]
 thumbnail: img/galgrafitti.webp
 # This prevents the thumbnail to be displayed on the page and used only in the list
@@ -11,7 +11,7 @@ layout: gallery
 lightbox: true
 modules: ["mgallery"]
 ---
-<!-- markdownlint-enable MD003 MD022 MD041 -->
+<!-- Cspell:ignore ovlpos ovlx ovly ovlperc lightbox mgallery galgrafitti webp lastmod -->
 
 Someday this stops being a placeholder.
 
