@@ -1,21 +1,20 @@
-<!-- cSpell:ignore Joost Getimage someimage mimage shortcode autocaption exif shortcodes Hinode frontmatter -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: mimage usage
 date: 2023-07-04
+lastmod: 2023-08-15
 Description: Description on how to use the mimage shortcode
 layout: docs
 showComments: false
 _build:
   list: never
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost Getimage someimage mimage shortcode autocaption exif shortcodes Hinode frontmatter lastmod -->
 
 ## mimage shortcode
 
 The source code of the `mimage` shortcode is located in `layouts/shortcodes/mimage.html`.  
-The purpose of this shortcode is to load an image from the internet or from the site and to show it on the page. The actual functionality is handled for the most part in the `mimage` partial.
+The purpose of this shortcode is to load an image from the internet or from the site and to show it on the page. The actual functionality is handled for the most part in the `layouts/partials/assets/mimage.html` partial.
 
 ### Parameters
 
@@ -125,8 +124,8 @@ url|Required parameter, which specifies the image to load. See also the [src](#i
 <nobr>image-radius-x</nobr>|creates rounded corners on the image. 'x' is a value from 1 to 5. Where 1 is the largest radius and 5, the smallest.
 {.table}
 
-When the `mimage` partial is used to replace the `image` partial in an other existing Hinode partial, only the `text-italic` and `image-radius-x` classes from the above table will work, as the other classes will most likely conflict with the already used classes in that Hinode partial.  
-To still be able to align the caption properly in that case, the following classes are defined.
+When the `mimage` partial is used to replace the `image` partial in an other existing Hinode partial, only the `text-italic` and `image-radius-x` classes from the above table will certainly work, as the other classes might conflict with the already used classes in that Hinode partial.  
+To still be able to align the caption properly in that case, the following classes can be used:
 
 Class|Description
 ---|---

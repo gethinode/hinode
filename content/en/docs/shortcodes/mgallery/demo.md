@@ -1,9 +1,8 @@
-<!-- cSpell:ignore Joost mgallery shortcode -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: mgallery demo
 date: 2023-07-04
+lastmod: 2023-08-15
 Description: A demonstration of some usages of the mgallery shortcode
 layout: docs
 showComments: false
@@ -11,7 +10,7 @@ modules: ["mgallery"]
 _build:
   list: never
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost mgallery shortcode lastmod -->
 
 A gallery can be configured in many ways. First there is the option to show it as a grid or a masonry. The default thumbnail ratio is different for a grid and a masonry. For a grid it is 1x1 and for a masonry the original image ratio is used, because a masonry will only look like a masonry when the images are not equally sized. A few of the possible options are shown below.
 

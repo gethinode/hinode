@@ -1,20 +1,19 @@
-<!-- cSpell:ignore Joost mgallery shortcode shortcodes ovlpos ovlx ovly ovlperc frontmatter jfif webp -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: mgallery usage
 date: 2023-07-04
+lastmod: 2023-08-15
 Description: Description on how to use the mgallery shortcode
 layout: docs
 showComments: false
 _build:
   list: never
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost mgallery shortcode shortcodes ovlpos ovlx ovly ovlperc frontmatter jfif webp lastmod -->
 
 ## mgallery shortcode
 
-The source code of the `mgallery` shortcode is located in `layouts/shortcodes/mgallery.html`.  
+The source code of the `mgallery` shortcode is to be found in `layouts/shortcodes/mgallery.html`.  
 The purpose of this shortcode is to load a defined set of images, create thumbnails of those images and place them in a gallery.
 
 ### Parameters
@@ -23,7 +22,7 @@ The `mgallery` shortcode supports the below parameters.
 
 Parameter|Description
 ---|---
-list|Optional blob used to determine where to fetch the list of images from, like "img/\*", with img being the name of a folder relative to the current page bundle file or relative to a headless folder for all non page bundle files. If not specified the blob is "\*". See also the [Image Source](#image-source) section below for more info.
+list|Optional blob used to determine where to fetch the list of images from, like `"img/*"`, with img being the name of a folder relative to the current page bundle file or relative to a headless folder for all non page bundle files. If not specified the blob is `"*"`. See also the [Image Source](#image-source) section below for more info.
 type|Optional parameter to change the way the gallery is displayed. The following options exist:<br/>"grid"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default. Show the images on a row-column-grid.<br/>"masonry" Show in a masonry style where the images are in columns of the same size, but there are no rows.<br/>Note that the actual masonry functionality only shows when "thumb" is "regular". In the other "thumb" options, it will look like a grid.
 thumb|Optional setting for resizing the image into a thumbnail image. The image resizing is performed by both resizing and cropping the image, without stretching or compressing the image. The resulting thumbnail image can never be larger than the actual width and height of the image. The following options are valid:<br/>"regular" Default setting for "type" is "masonry". Creates thumbnails with the same aspect ratio as the image<br/>"1x1"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default setting for "type" is "grid". Creates square thumbnails<br/>"3x2"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 3x2<br/>"4x3"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 4x3<br/>"16x9"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 16x9<br/>"21x9"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 21x9
 cols|Optional parameter that will set the number of columns in which the images will be organized. The values 2..5 are supported.
@@ -43,7 +42,7 @@ The below sections provide more information about the following parameters: [src
 
 #### Image source
 
-In order to load the the set of images as specified in `list` the following options are available:
+In order to load the the set of images as specified in `list` the following will happen:
 
 - When the page from where the `mgallery` shortcode is called, is a page bundle file (`index.md` or `_index.md`) a scan is performed in all page bundle resources for all image files matching the specified blob.
 - When the page from where the `mgallery` shortcode is called is not a page bundle file, a scan is performed in the `headless` folder for all files matching the blob. The `headless` folder should be located in the same directory as the page. In that folder there should be an `index.md` file with the frontmatter `headless: true`.

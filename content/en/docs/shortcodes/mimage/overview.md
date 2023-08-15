@@ -1,15 +1,14 @@
-<!-- cSpell:ignore Joost mimage shortcode Hinode exif -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: mimage shortcode overview
 date: 2023-07-04
+lastmod: 2023-08-15
 Description: overview of the mimage functionality
 layout: docs
 _build:
   list: never
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost mimage shortcode Hinode exif lastmod -->
 The `mimage` shortcode is a copy of the Hinode `image` shortcode. The latter shortcode uses two partials, located in `assets/image.md` and `utilities/GetImage.md`. These two partials have been copied to respectively `assets/mimage.md` and `utilities/mGetImage.md`. All changes to the shortcode and partials are made in the copied version.
 
 the `mimage` shortcode is a front for the `assets/mimage.md` partial, which takes care of most of the work in showing the image. The `utilities/mGetImage` partial is called by the `assets/mimage` partial, to load the image. In addition there are also some additional classes made available in `assets/scss/_mimage.scss`. The newly created shortcode and partials are backwards compatible with the original shortcode and partials.

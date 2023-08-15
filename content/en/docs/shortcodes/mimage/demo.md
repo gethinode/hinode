@@ -1,16 +1,15 @@
-<!-- cSpell:ignore Joost mimage shortcode Letraset Aldus Clintock consectetur undoubtable Finibus Bonorum Malorum amet exif -->
-<!-- markdownlint-disable MD003 MD022 MD041 -->
 ---
 author: Joost Mans
 title: mimage demo
 date: 2023-07-04
+lastmod: 2023-08-15
 Description: A demonstration of some usages of the mimage shortcode
 layout: docs
 showComments: false
 _build:
   list: never
 ---
-<!-- markdownlint-enable MD022 MD041 -->
+<!-- cSpell:ignore Joost mimage shortcode Letraset Aldus Clintock consectetur undoubtable Finibus Bonorum Malorum amet exif lastmod -->
 
 ## Example 1
 
@@ -48,7 +47,7 @@ The next example shows an image that is centered (actually it is larger than the
 
 ## Example 3
 
-This third example shows an image that is somewhat smaller than the available window space and is centered. A caption is provided, so even though the `autoCaption` parameter is "true", a caption in a text file or the Exif file will not used. The credits in either of them will be used however as that is not specified.
+This third example shows an image that is somewhat smaller than the available window space and is centered. A caption is provided, so even though the `autoCaption` parameter is "true", a caption in a text file or the Exif file will not used. The credits in either of them will be used however because that parameter is not specified.
 
 <!-- markdownlint-disable MD037 -->
 ```go-html-template
