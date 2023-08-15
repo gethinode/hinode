@@ -5,4 +5,3 @@ node_modules/
 
 .DS_store
 .hugo_build.lock
-hugo_stats.json
