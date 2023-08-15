@@ -1021,10 +1021,11 @@ Is to be replaced with:
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
     {{- end }}
     {{- if and site.Params.Analytics.GoatCounter.Enable site.Params.Analytics.GoatCounter.name -}}
-        <script 
-            data-goatcounter="https://{{- site.Params.Analytics.GoatCounter.name -}}.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js">
-        </script>
+        <script data-goatcounter="https://{{- site.Params.Analytics.GoatCounter.name -}}.goatcounter.com/count"
+                async src="//gc.zgo.at/count.v3.js"
+                crossorigin="anonymous"
+                integrity="sha384-QGgNMMRFTi8ul5kHJ+vXysPe8gySvSA/Y3rpXZiRLzKPIw8CWY+a3ObKmQsyDr+a">
+        </script>    
     {{- end }}
 {{- end -}}
 ```
