@@ -36,7 +36,7 @@
             font-src 'self' ; \
             frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
             frame-ancestors 'none'; \
-            img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com; \
+            img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com https://myrthos.goatcounter.com/count; \
             manifest-src 'self'; \
             media-src 'self'; \
             form-action 'self'; \
