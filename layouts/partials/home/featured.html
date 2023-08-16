@@ -24,12 +24,11 @@
                     {{- $origin = .Params.Thumbnail.origin -}}
                 {{- end }}
     
-                {{- $icon := partial "assets/icon.html" (dict "icon" "fas fa-camera") }}
                 {{- $credits := "" -}}
                 {{- if and $author $origin }}
-                {{ $credits = printf "%s %s %s %s" $icon $author (T "photoOn") $origin }}
+                {{ $credits = printf "%s %s %s" $author (T "photoOn") $origin }}
                 {{ else if $author }}
-                    {{ $credits = printf "%s %s" $icon $author }}
+                    {{ $credits = printf "%s" $author }}
                 {{ end }}
                 {{ if $thumbnail }}
                     {{- partial "assets/mimage.html" (dict "url" $thumbnail 
