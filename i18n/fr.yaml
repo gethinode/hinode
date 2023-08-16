@@ -94,7 +94,7 @@
 
 # 404 page
 - id: pageNotFound
-  translation: "La page que vous recherchez n'existe pas ou une autre erreur s'est produite.Essayez de revenir à notre {{ . }}."
+  translation: "La page que vous recherchez n'existe pas ou une autre erreur s'est produite. Essayez de revenir à notre {{ . }}."
 - id: pageNotFoundTitle
   translation: "Page non trouvée"
 - id: pageNotFoundHome
@@ -112,4 +112,4 @@
 - id: show
   translation: "Afficher"
 - id: comments
-  translation: "Commentaires" 
+  translation: "Commentaires"
