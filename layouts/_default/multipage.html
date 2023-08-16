@@ -1,68 +1,7 @@
-{{/* cSpell: ignore multipage lastmodstr datestr mimage pagenumber inledby mpagination */}}
+{{/* cSpell: ignore multipage pagenumber inledby mpagination */}}
 
 {{/* Originally from the partial _default/single.html */}}
-{{/* Modifications: Separated footer in a pagination and comments part */}}
-{{/*                Added option (in params.toml) to show pagination in different ways */}}
-{{/*                Removed .Layout checks, as there is only the multipage layout */}}
-
-
-{{- define "partials/multi-header.html" -}}
-    {{ if site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
-    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
-    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
-    {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
-    <small class="text-body-secondary text-uppercase">
-        {{ $datestr | i18n "postedOnDate" -}}
-        {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }} 
-        &bull;
-        {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} 
-        &bull;
-        {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
-    </small>
-
-    {{- if gt (len (.GetTerms "tags")) 0 -}}
-        <div class="mt-3">
-            <div class="d-none-dark">
-                <div class="hstack gap-3">
-                    {{ range (.GetTerms "tags") -}}
-                        {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
-                        {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "light" "size" "sm") }}
-                    {{ end -}}
-                </div>
-            </div>
-          
-            <div class="d-none-light">
-                <div class="hstack gap-3">
-                    {{ range (.GetTerms "tags") -}}
-                        {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
-                        {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "secondary" "size" "sm" "outline" "true") }}
-                    {{ end -}}
-                </div>
-            </div>
-        </div>
-    {{- end -}}
-    {{ partial "assets/sharing.html" . }}
-    <p class="lead mb-5 mt-3">{{ .Description }}</p>
-{{ end -}}
-
-{{ define "partials/multi-body.html" -}}
-    {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
-        <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
-    {{- end -}}
-
-    {{ if .Params.thumbnail -}}
-        {{- $credits := "" -}}
-        {{- if .Params.photoCredits }}
-            {{ if .Params.PhotoSource }}
-                {{ $credits = printf "<i class=\"fa-solid fa-camera\"></i> %s %s %s" .Params.photoCredits (T "photoOn") .Params.PhotoSource }}
-            {{ end }}
-        {{ end -}}
-        {{- partial "assets/mimage.html" (dict "url" .Params.thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "captionClass" "caption-align-right text-italic" "title" .Params.title "caption" $credits) -}}
-    {{ end -}}
-    {{ .Content }}
-{{ end -}}
-
-
+{{/* Modifications: Add paginator */}}
 {{ define "partials/multi-footer.html" -}}
     <!-- Show comments when enabled -->
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
@@ -70,7 +9,6 @@
         {{ partial "assets/comments.html" . }}
     {{ end -}}
 {{ end -}}
-
 
 {{ define "main" }}
     {{ $page := . }}
@@ -102,8 +40,8 @@
                         {{ partial "assets/sidebar" (dict "page" . "menu" $menu "version" $version) }}
                     </div>
                     <div class="col col-md-9 col-lg-8 mb-5 p-4">
-                        {{ partial "partials/multi-header.html" . }}
-                        {{ partial "partials/multi-body.html" . }}
+                        {{ partial "partials/header.html" . }}
+                        {{ partial "partials/body.html" . }}
                         {{ if gt $totalPages 1 }}
                             {{ partial "assets/mpagination.html" (dict "page" $page 
                                                                        "mode" .Site.Params.multipage.paginator 
@@ -125,8 +63,8 @@
                 <div class="row row-cols-1 row-cols-sm-3">
                     <div class="col col-md-2 d-none d-md-block"></div>
                     <div class="col col-sm-12 col-md-8">
-                        {{ partial "partials/multi-header.html" . }}
-                        {{ partial "partials/multi-body.html" . }}
+                        {{ partial "partials/header.html" . }}
+                        {{ partial "partials/body.html" . }}
                         {{ if gt $totalPages 1 }}
                             {{ partial "assets/mpagination.html" (dict "page" $page 
                                                                        "mode" .Site.Params.multipage.paginator 
