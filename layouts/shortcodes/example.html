@@ -21,7 +21,7 @@
 
 {{ $preprocess := slice "hugo" "markdown" }}
 {{- if in $preprocess $lang -}}
-    {{- $content = (trim $content "\r\n") | markdownify }}
+    {{- $content = (trim $content "\r\n") | .Page.RenderString }}
     {{ $lang = "markdown" }}
 {{- end -}}
 

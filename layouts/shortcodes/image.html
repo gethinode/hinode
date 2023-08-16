@@ -4,8 +4,11 @@
     section of the main config file (defaults to 75). A fallback image is provided for older browsers. The partial
     supports the following arguments:
     "src":          Required relative url of the image, e.g. "img/example.jpg"
-    "ratio":        Optional ratio of the image, either "1x1", "4x3", "16x9", or "21x9". Leave empty to keep the
+    "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". Leave empty to keep the
                     original aspect ratio of the image.
+    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only
+                    the crop area is adjusted.
+    "wrapper":      Optional class attributes of the wrapper element, e.g. "mx-auto".
     "class":        Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
     "caption":      Optional figure caption.
@@ -14,7 +17,7 @@
 
 {{- if isset .Params "src" -}}
     {{ $url := .Get "src" -}}
-    {{- $validRatios := slice "1x1" "4x3" "16x9" "21x9" -}}
+    {{- $validRatios := slice "1x1" "3x2" "4x3" "16x9" "21x9" -}}
     {{ $ratio := .Get "ratio" -}}
     {{ if $ratio -}}
         {{ if not (in $validRatios $ratio) -}}
@@ -23,6 +26,7 @@
     {{ end -}}
     
     {{- $class := .Get "class" -}}
+    {{- $wrapper := .Get "wrapper" -}}
     {{ $title := .Get "title" -}}
     {{ $caption := .Get "caption" -}}
     {{ $supportedFlags := slice "true" "false" -}}
@@ -34,14 +38,25 @@
     {{ else -}}
         {{ errorf "Invalid value for param 'mode': %s" $modeParam -}}
     {{ end -}}
+    {{ $portraitParam := "false" -}}
+    {{ $portrait := false -}}
+    {{ with .Get "portrait" }}{{ $portraitParam = . }}{{ end -}}
+    {{ if in $supportedFlags $portraitParam -}}
+        {{ if eq $portraitParam "true" }}{{ $portrait = true }}{{ else }}{{ $portrait = false }}{{ end -}}
+    {{ else -}}
+        {{ errorf "Invalid value for param 'portrait': %s" $portraitParam -}}
+    {{ end -}}
     
     {{- partial "assets/image.html" (dict 
         "url" $url
         "ratio" $ratio
+        "outerClass" $wrapper
         "innerClass" $class
         "title" $title
         "caption" $caption
-        "mode" $mode)
+        "mode" $mode
+        "portrait" $portrait
+        "page" .Page)
     -}} 
 {{ else -}}
     {{ errorf "Missing value for param 'src': %s" .Position -}}
