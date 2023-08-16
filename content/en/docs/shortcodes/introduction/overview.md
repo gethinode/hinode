@@ -7,7 +7,7 @@ Description: Overview of the new shortcodes and partials created for this site.
 thumbnail:
     url: /img/construction.jpg
     author: Ashkan Forouzani
-    authorURL: https://unsplash.com/@ashkfor121"
+    authorURL: https://unsplash.com/@ashkfor121
     origin: Unsplash
     originURL: https://unsplash.com/photos/_Y82jqFIBgw
 icon: fas book

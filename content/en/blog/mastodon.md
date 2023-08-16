@@ -8,7 +8,7 @@ tags: ["blog", "Hinode", "Mastodon"]
 thumbnail:
     url: /img/elephant.jpg
     author: Nam Anh
-    authorURL: https://unsplash.com/@bepnamanh"
+    authorURL: https://unsplash.com/@bepnamanh
     origin: Unsplash
     originURL: https://unsplash.com/images/animals/elephant
 ---

@@ -8,7 +8,7 @@ tags: ["blog", "markdown"]
 thumbnail:
     url: /img/mark.jpg
     author: Victória Kubiaki
-    authorURL: https://unsplash.com/@victoriakubiaki"
+    authorURL: https://unsplash.com/@victoriakubiaki
     origin: Unsplash
     originURL: https://unsplash.com/photos/OukRLogaKPE
 modules: ["katex"]

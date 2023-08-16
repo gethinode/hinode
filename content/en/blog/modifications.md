@@ -8,7 +8,7 @@ tags: ["blog", "Hinode"]
 thumbnail:
     url: /img/changes.jpg
     author: Brett Jordan
-    authorURL: https://unsplash.com/@brett_jordan"
+    authorURL: https://unsplash.com/@brett_jordan
     origin: Unsplash
     originURL: https://unsplash.com/photos/gJUZjwy2EgE
 ---

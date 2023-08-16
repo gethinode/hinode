@@ -8,7 +8,7 @@ tags: ["blog", "Hinode", "gallery"]
 thumbnail:
     url: /img/mgallery.jpg
     author: Mick Haupt
-    authorURL: https://unsplash.com/@rocinante_11"
+    authorURL: https://unsplash.com/@rocinante_11
     origin: Unsplash
     originURL: https://unsplash.com/photos/VbI0LMaGMlg
 ---
