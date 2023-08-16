@@ -275,7 +275,6 @@ The call to the `assets/mpagination.html` partial has a maximum of four paramete
 
 ```toml
 [multipage]
-    # These parameters are only valid when the layout of a page bundle is set to "multipage"
     paginator = "buttons"   # The paginator to show at the bottom of the page. Valid options are: 
                             # "arrows"   Shows arrows to the left/right if there is a next/previous page
                             # "buttons"  Shows navigation buttons (centered)
@@ -288,7 +287,7 @@ The call to the `assets/mpagination.html` partial has a maximum of four paramete
                             # Not used in the other paginator options.
 ```
 
-The accompanying comments should provide sufficient explanation. The following sections shows screenshots of the different `paginator` options.
+The accompanying comments should provide sufficient explanation. The following sections show screenshots of the different `paginator` options.
 
 ### buttons
 

@@ -1,7 +1,7 @@
 <!-- CSpell:ignore Hinode codebases -->
 # About this site
 
-This the repository for the [Myrthos site](https://myrthos.net). It is a site that is still in development to outgrow its infancy.
+This the repository for [myrthos.net](https://myrthos.net). It is a site that is still in development to outgrow its infancy.
 
 The site is intended to be used as my playground, where I post blogs, write about projects, create documentation and show photo's about the things that interest me.
 
