@@ -12,6 +12,7 @@
     "innerClass":   Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
     "caption":      Optional figure caption.
+    "page":         Optional page context, used to match page resources.
 -->
 
 {{- $validRatios := slice "1x1" "4x3" "16x9" "21x9" -}}
@@ -30,6 +31,7 @@
     {{- errorf "partial [assets/image.html] - Invalid value for param 'mode'" -}}
 {{- end -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
+{{- $page := .page -}}
 
 
 <!-- Generate a fallback image of type jpg -->
@@ -125,11 +127,12 @@
     {{- $imgset := "" -}}
     {{- $mode := .mode -}}
     {{- $modes := .modes -}}
+    {{- $page := .page -}}
 
     {{- if hasSuffix $url "svg" -}}
         {{- $fallbackURL = $url -}}
     {{- else -}}
-        {{- $img := partial "utilities/GetImage.html" (dict "url" $url) -}}
+        {{- $img := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
         {{- if $img -}}
             {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio) -}}
                 {{- if $absoluteURL -}}
@@ -183,7 +186,8 @@
             "title" $title
             "caption" $caption
             "mode" $suffix
-            "modes" $modes)
+            "modes" $modes
+            "page" $page)
         -}}
     {{- end -}}
 {{- else -}}
@@ -193,6 +197,7 @@
         "outerClass" $outerClass
         "innerClass" $innerClass
         "title" $title
-        "caption" $caption)
+        "caption" $caption
+        "page" $page)
     -}}
 {{- end -}}
