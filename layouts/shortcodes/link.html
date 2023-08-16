@@ -1,8 +1,9 @@
 <!-- 
     Generates a link for a given named link or url. The shortcode supports a single unnamed parameter, or various named
-    parameters. The unnamed parameter is recognized as a named link if it does not contain any "/", otherwise it is
-    treated as a url. Any inner text is rendered as the link title, otherwise it uses the host name (for external links)
-    or page name (for internal links). The shortcode supports the following named arguments:
+    parameters. The unnamed parameter is recognized as a url if it starts with "http", else it is treated as either a
+    named link or internal reference (in that order). Any inner text is rendered as the link title, otherwise it uses
+    the host name (for external links), link title (for internal links), or anchor name (for any local references
+    containing a `#`). The shortcode supports the following named arguments:
     "name"          Optional name of the link maintained in the "links" section of the site's parameters. If omitted,
                     the "url" argument should be provided instead.
     "url"           Optional url of the link, including the scheme ("http" or "https"). If omitted, the "name" argument
@@ -22,6 +23,8 @@
 {{ $case := true }}
 {{ $cue := site.Params.main.externalLinks.cue }}
 {{ $tab := site.Params.main.externalLinks.tab }}
+{{ $text := trim .Inner " \r\n" | markdownify | safeHTML }}
+{{- $anchor := "" -}}
 
 {{ if .IsNamedParams }}
     {{ $name = .Get "name" }}
@@ -43,16 +46,38 @@
 {{ if $name }}
     {{ $url = index site.Params.links $name }}
     {{ if not $url }}
-        {{ errorf "Cannot find link '%s': %s" $name .Position -}}
-        {{ $error = true -}}
+        {{ $url = $name }}
+        {{- if strings.Contains $url "#" }}
+            {{ $segments := split $url "#" }}
+            {{- if ne (len $segments) 2 }}
+                {{ errorf "Malformed path, expected one anchor '#' only: '%s' at %s" $url .Position -}}
+            {{ else }}
+                {{- $url = index $segments 0 -}}            
+                {{- $anchor = index $segments 1 -}}            
+                {{ if not $url }}
+                    {{- $url = strings.TrimSuffix "/" .Page.RelPermalink -}}
+                    {{- with .Page.Language }}{{ $url = strings.TrimPrefix (path.Join "/" .Lang) $url}}{{ end -}}
+                {{ end }}
+            {{ end }}
+        {{ end }}
     {{ end }}
 {{ end }}
 
-{{ $text := trim .Inner " \r\n" | markdownify | safeHTML }}
-
 {{- $class := .Get "class" -}}
 
+{{- $isExternal := ne (urls.Parse (absURL $url)).Host (urls.Parse site.BaseURL).Host -}}
+{{- if not $isExternal -}}
+    {{- $ref := .Page.GetPage $url -}}
+    {{- if not $ref -}}
+        {{- errorf "Cannot find page: '%s' at %s" $url .Position -}}
+        {{- $error = true -}}
+    {{- end -}}
+{{- end -}}
+
+{{ with $anchor }}
+    {{ $url = printf "%s#%s" $url .}}
+{{ end }}
 {{- if not $error -}}
-    {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class) }}
+    {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class "page" .Page) }}
 {{- end -}}
 
