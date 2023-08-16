@@ -26,6 +26,7 @@
     {{ end -}}
     
     {{- $class := .Get "class" -}}
+    {{- $wrapper := .Get "wrapper" -}}
     {{ $title := .Get "title" -}}
     {{ $caption := .Get "caption" -}}
     {{ $supportedFlags := slice "true" "false" -}}
@@ -49,6 +50,7 @@
     {{- partial "assets/image.html" (dict 
         "url" $url
         "ratio" $ratio
+        "outerClass" $wrapper
         "innerClass" $class
         "title" $title
         "caption" $caption
