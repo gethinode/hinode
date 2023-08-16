@@ -4,6 +4,8 @@
     "id":           Optional id of the carousel, defaults to "carousel-" with a sequential number.
     "ratio":        Optional ratio of the images, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
                     Instead, the original aspect ratio of the image is preserved.
+    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The images themselves are not rotated,
+                    only the crop area is adjusted.
     "class":        Optional class attribute of the carousel element, e.g. “w-75”.
 -->
 
@@ -12,7 +14,6 @@
     {{ $id = . }}
 {{ end }}
 
-{{ $ratio := .Get "ratio" -}}
 {{ $class := .Get "class" -}}
 {{ $images := .Inner -}}
 {{ $items := len (findRE "carousel-item" $images) -}}

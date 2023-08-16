@@ -8,6 +8,8 @@
     "mode":         Optional flag indicating if the image should support color modes.
     "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". If set, the image is
                     resized and cropped to match the ratio. Else the original aspect ratio of the image is kept.
+    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only
+                    the crop area is adjusted.
     "outerClass":   Optional class attribute of the outer div element, e.g. "img-wrap".
     "innerClass":   Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
@@ -41,10 +43,34 @@
 {{- $page := .page -}}
 
 
+{{- define "partials/image-portrait.html" -}}
+    {{- $dimensions := slice }}
+    {{- $dim := .dim -}}
+    {{- $dimensions = $dimensions | append $dim -}}
+    {{- $portraits := slice }}
+    {{- range $d := $dimensions -}}
+        {{- $p := split $d "x" }}
+        {{ if ne (len $p) 2 }}
+            {{- warnf "partial [assets/image.html] - Invalid dimension: %s" $d -}}
+            {{- $portraits = $portraits | append $d -}}
+        {{- else -}}
+            {{- $portraits = $portraits | append (printf "%sx%s" (index $p 1) (index $p 0)) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $ret := "" }}
+    {{- if reflect.IsSlice $dim -}}
+        {{ $ret = $portraits -}}
+    {{- else if gt (len $portraits) 0 -}}
+        {{- $ret = index $portraits 0 -}}
+    {{- end -}}
+    {{- return $ret -}}
+{{- end -}}
+
 <!-- Generate a fallback image of type jpg -->
 {{- define "partials/image-default.html" -}}
     {{- $img := .img -}}
     {{- $ratio := .ratio -}}
+    {{- $portrait := and .portrait .ratio -}}
     {{- $width := "1400" -}}
     {{- $dim := "" -}}
     {{- $fallback := "" -}}
@@ -62,6 +88,10 @@
             {{- $dim = "1400x600" -}}
         {{- else -}}
             {{- $dim = printf "%sx%d" $width (int (math.Round (mul (div (float $width) $img.Width) $img.Height))) -}}
+        {{- end -}}
+
+        {{- if $portrait -}}
+            {{- $dim = partial "partials/image-portrait.html" (dict "dim" $dim) -}}
         {{- end -}}
 
         {{- if $ratio -}}
@@ -83,6 +113,7 @@
     {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
     {{- $img := .img -}}
     {{- $ratio := .ratio -}}
+    {{- $portrait := and .portrait .ratio -}}
     {{- $imgset := "" -}}
 
     {{- $widths := slice "576" "768" "992" "1200" "1400" -}}
@@ -102,6 +133,10 @@
             {{- range $width := $widths -}}
                 {{- $dims = $dims | append (printf "%sx%d" $width (int (math.Round (mul (div (float $width) $img.Width) $img.Height)))) -}}
             {{- end -}}
+        {{- end -}}
+
+        {{- if $portrait -}}
+            {{- $dims = partial "partials/image-portrait.html" (dict "dim" $dims) -}}
         {{- end -}}
 
         {{- $scaled := "" -}}
@@ -129,6 +164,7 @@
 {{- define "partials/image-definition.html" -}}
     {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
     {{- $ratio := .ratio -}}
+    {{- $portrait := .portrait -}}
     {{- $url := .url -}}
     {{- $outerClass := .outerClass -}}
     {{- $innerClass := .innerClass -}}
@@ -145,13 +181,13 @@
     {{- else -}}
         {{- $img := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
         {{- if $img -}}
-            {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio) -}}
+            {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio "portrait" $portrait) -}}
                 {{- if $absoluteURL -}}
                     {{- $fallbackURL = $fallback.Permalink -}}
                 {{- else -}}
                     {{- $fallbackURL = $fallback.RelPermalink -}}
                 {{- end -}}
-            {{- $imgset = partial "partials/image-scaled.html " (dict "img" $img "ratio" $ratio) -}}
+            {{- $imgset = partial "partials/image-scaled.html " (dict "img" $img "ratio" $ratio "portrait" $portrait) -}}
         {{- end -}}
     {{- end -}}
 
@@ -164,7 +200,7 @@
     {{- if $caption -}}
         <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
     {{ end }}
-        <div class="{{ with $ratio }}ratio ratio-{{ . }}{{ end }}{{ if not $caption }} {{ $outerClass }}{{ end }}">
+        <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
             <img class="img-fluid {{ $innerClass }}"
                 {{ with $imgset -}}
                 srcset="{{ . }}"
@@ -191,6 +227,7 @@
         {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
         {{- partial "partials/image-definition.html" (dict 
             "ratio" $ratio
+            "portrait" $portrait
             "url" $image
             "outerClass" $outerClass
             "innerClass" $innerClass
@@ -204,6 +241,7 @@
 {{- else -}}
     {{- partial "partials/image-definition.html" (dict 
         "ratio" $ratio
+        "portrait" $portrait
         "url" $url
         "outerClass" $outerClass
         "innerClass" $innerClass
