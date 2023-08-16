@@ -133,7 +133,11 @@
 
     {{ if $paginate }}
         {{- if gt $paginator.TotalPages 1 -}}
-            <div class="pt-3">{{ partial "assets/pagination.html" (dict "page" $page "format" "terse") }}</div>
+            <div class="pt-3">{{ partial "assets/mpagination.html" (dict "page" $page 
+                                                                         "mode" "buttons" 
+                                                                         "tooltips" "no"
+                                                                         "positions" 4) }}
+            </div>
         {{- end -}} 
     {{ else }}
         {{ if gt $count $max }}

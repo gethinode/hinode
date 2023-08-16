@@ -12,7 +12,7 @@ thumbnail:
     origin: Unsplash
     originURL: https://unsplash.com/photos/gJUZjwy2EgE
 ---
-<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery webp navgrey navshort goatcounter publishdate pubdate -->
+<!-- cSpell:ignore Joost Hinode googleanalytics Katex frontmatter catmull opengraph gelicenseerd onder sociale borderless subdir shortcode hugolib errorf shortcodes lastmod Alexandre Debiève mimage lightbox mgallery webp navgrey navshort goatcounter publishdate pubdate mpagination -->
 
 The foundation of this site is {{< link "https://github.com/gethinode/hinode" >}}Hinode{{< /link >}}. This post provides an overview of the changes that were made to the Hinode theme, to get to the current design of this site. Obviously the information in this blog is very specific for this site, but if there is something of interest with respect to the layout on this site, it should be described here.
 
@@ -47,7 +47,7 @@ These are the modifications to the Content Security Policy (CSP) elements in `co
 ```toml
     Content-Security-Policy = """\
         default-src 'none'; \
-        script-src 'self' 'report-sample' https://utteranc.es/client.js https://gc.zgo.at/count.js; \
+        script-src 'self' 'report-sample' https://utteranc.es/client.js https://gc.zgo.at/count.v3.js; \
         style-src 'self' 'unsafe-hashes' 'report-sample' https://utteranc.es https://www.youtube.com \
             'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs=' 'sha256-XzJlZKVo+ff9ozww9Sr2p/2TbJXITZuaWMZ9p53zN1U=' \
             'sha256-hqhQ1AAR6jgr9lel8hs9sNOeqSwsGx6HH+B7TkLcmyY=' 'sha256-9HupEqQsOKAA3TMVtaZh8USULhFpwYGuWFk+44sVSgg=';\
@@ -57,7 +57,7 @@ These are the modifications to the Content Security Policy (CSP) elements in `co
         font-src 'self'; \
         frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
         frame-ancestors 'none'; \
-        img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com; \
+        img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://img.youtube.com https://myrthos.goatcounter.com/count; \
         manifest-src 'self'; \
         media-src 'self'; \
         form-action 'self'; \
@@ -1031,3 +1031,21 @@ Is to be replaced with:
 ```
 
 This allows usage of either Google Analytics or GoatCounter or both.
+
+## Replace pagination of cards
+
+This part can only be done when the `assets/mpagination.html` partial has been installed. Once that is done the paginator that is used when displaying the cards on the section pages, is replaced. For this open the file `layouts/partials/assets/card-group.html` and replace the line:
+
+```go-html-template
+<div class="pt-3">{{ partial "assets/pagination.html" (dict "page" $page "format" "terse") }}</div>
+```
+
+with:
+
+```go-html-template
+<div class="pt-3">{{ partial "assets/mpagination.html" (dict "page" $page 
+                                                             "mode" "buttons" 
+                                                             "tooltips" "no"
+                                                             "positions" 4) }}
+</div>
+```
