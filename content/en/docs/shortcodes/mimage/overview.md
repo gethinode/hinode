@@ -15,7 +15,6 @@ the `mimage` shortcode is a front for the `assets/mimage.md` partial, which take
 
 The following are the changes that are made to the `mimage` shortcode and underlying partials:
 
-- Added a ratio option of 3x2, as several photo cameras have that ratio.
 - Added the parameter "outer" for the outer class to wrap both the image and the caption in.
 - Added the parameter "inner" for the image class to be used instead of the current shortcode's "class" parameter (although it still exists).
 - Added the parameter "text for the caption class.

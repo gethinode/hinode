@@ -2,7 +2,7 @@
 author: Joost Mans
 title: mimage usage
 date: 2023-07-04
-lastmod: 2023-08-15
+lastmod: 2023-08-17
 Description: Description on how to use the mimage shortcode
 layout: docs
 showComments: false
@@ -22,10 +22,11 @@ The mimage shortcode supports the below parameters.
 
 Parameter|Description
 ---|---
-src|Required url or relative path of the image, e.g. "img/example.jpg". It is either a URL, an image located in the assets folder or an image located relatively to the current page. This is also the search order for the image.
+src|Required url or relative path of the image, e.g. "img/example.jpg". It is either a URL, an image located in the assets folder or an image located relatively to the current page. See also {{< link "#image-source" >}}Image-source{{< /link >}}.
 title|Optional alternative title of the image.
 mode|Optional flag indicating if the image should support color modes. Default is "false".
 ratio|Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". Do not use the parameter to keep the original aspect ratio of the image.
+portrait|Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only the crop area is adjusted.
 outer|Optional class attribute of the outer div element, e.g. "img-wrap".
 inner|Optional class attribute of the inner img element, e.g. "rounded".
 class|Optional class attribute of the inner img element. Available for backwards compatibility. When both 'inner' and 'class' are provided, 'class' will be ignored.
@@ -43,9 +44,9 @@ In order to load the image as specified in `src` the following steps are taken:
 
 1. Check if `src` starts with "http", if so, load the image from the link specified in `src`, else goto 2.
    If loading the image from the internet fails, stop processing.
-2. Try to load the image from the `assets` folder. Usually images are located in `assets/img`, this would mean the image could be specified like `img/someimage.jpg`. If the image cannot be found, goto 3.
-3. Try to load the image relative to the location of the current page bundle. This means that this only works when the page with the shortcode is an `index.md` or `_index.md` file. If the `src` is `img/someimage.jpg`, the image should be located in the `img` folder relative to the page bundle file the shortcode is called from. If this fails goto 4.
-4. Search for a folder `headless` relative to the current page. In that folder there should be an `index.md` file with the frontmatter `headless: true`. If this is the case, the image is searched for, relative to that `headless` folder. So, if the `src` is `img/someimage.jpg`, the image should be located in the `headless/img` folder relative to the page from where the shortcode is used.
+2. Try to load the image relative to the location of the current page bundle. This means that this only works when the page with the shortcode is an `index.md` or `_index.md` file. If the `src` is `img/someimage.jpg`, the image should be located in the `img` folder relative to the page bundle file the shortcode is called from. If this fails goto 3.
+3. Search for a folder `headless` relative to the current page. In that folder there should be an `index.md` file with the frontmatter `headless: true`. If this is the case, the image is searched for, relative to that `headless` folder. So, if the `src` is `img/someimage.jpg`, the image should be located in the `headless/img` folder relative to the page from where the shortcode is used. If the image cannot be found, goto 4.
+4. Try to load the image from the `assets` folder. Usually images are located in `assets/img`, this would mean the image could be specified like `img/someimage.jpg`.
 
 #### mode
 
@@ -79,6 +80,7 @@ title|Optional alternative title of the image.
 mode|Optional flag indicating if the image should support color modes. Default is "false".
 page|Optional page resource, which is required when the image to load is relative to the current page. The `mimage` shortcode uses `.Page` for this parameter.
 ratio|Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". Do not use the parameter to keep the original aspect ratio of the image.
+portrait|Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only the crop area is adjusted.
 outerClass|Optional class attribute of the outer div element, e.g. "img-wrap".
 innerClass|Optional class attribute of the inner img element, e.g. "rounded".
 captionClass|Optional class attribute of the caption, e.g. "text-center".

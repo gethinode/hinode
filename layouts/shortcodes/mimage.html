@@ -18,9 +18,11 @@
     supports the following arguments:
     "src":          Required relative url of the image, e.g. "img/example.jpg"
                     It is either a URL, an image located in the assets folder or an image located relatively to the 
-                    current page. This is also the search order for the image.
+                    current page. 
     "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". Leave empty to keep the
                     original aspect ratio of the image.
+    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only
+                    the crop area is adjusted.                    
     "inner":        Optional class attribute of the inner img element, e.g. "rounded".
     "class"         identical to inner for backwards compatibility
     "outer":        Optional class attribute of the outer div element, e.g. "img-wrap".
@@ -70,18 +72,28 @@
         {{ errorf "Invalid value for param 'autoCaption': %s" $autoCaption -}}
     {{ end -}}
 
+    {{ $portraitParam := "false" -}}
+    {{ $portrait := false -}}
+    {{ with .Get "portrait" }}{{ $portraitParam = . }}{{ end -}}
+    {{ if in $supportedFlags $portraitParam -}}
+        {{ if eq $portraitParam "true" }}{{ $portrait = true }}{{ else }}{{ $portrait = false }}{{ end -}}
+    {{ else -}}
+        {{ errorf "Invalid value for param 'portrait': %s" $portraitParam -}}
+    {{ end -}}
+
     {{- partial "assets/mimage.html" (dict 
         "url" $url
-        "page" .Page
         "ratio" $ratio
-        "innerClass" $class
         "outerClass" $outer
+        "innerClass" $class
         "captionClass" $text
         "title" $title
         "caption" $caption
         "credits" $credits
         "autoCaption" $autoCaption
-        "mode" $mode)
+        "mode" $mode
+        "portrait" $portrait
+        "page" .Page)
     -}} 
 {{ else -}}
     {{ errorf "Missing value for param 'src': %s" .Position -}}

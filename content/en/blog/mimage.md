@@ -2,7 +2,7 @@
 author: Joost Mans
 title: A different image shortcode
 date: 2023-07-24
-lastmod: 2023-08-15
+lastmod: 2023-08-17
 description: Add more options to the image shortcode.
 tags: ["image", "Hinode", "Hugo", "Blog"]
 thumbnail:
@@ -19,7 +19,6 @@ The Hinode theme, I am using on this site, has already a very functional way of 
 
 Even though the `image` shortcode already did a lot of things very well, I still wanted a few changes, which were the following:
 
-- Add a ratio option of 3x2, as several photo cameras have that ratio.
 - Add the parameter "outer" for the outer class to wrap both the image and the caption in.
 - Add the parameter "inner" for the inner class to replace the current shortcode's "class" parameter.
   But keep that parameter for backwards compatibility (both will work and the "inner" parameter overrides the "class" parameter, when they both exist).
@@ -27,7 +26,7 @@ Even though the `image` shortcode already did a lot of things very well, I still
 - Add the parameter "credits" to specify the credits for the image.
 - Add the parameter "caption" to specify the caption text of the image.
 - Add the parameter "autoCaption" to derive the caption and credits from a txt file or the EXIF of the image, when "caption" is not specified.
-- Add the possibility to load an image relative to the current page.
+- Add the possibility to load an image relative to the current page, even when it is not a page bundle file.
 
 The new shortcode and underlying functionality is still compatible with the existing functionality and I could have just changed the relevant files, however, I decided to copy the existing code into new files and make the changes there, leaving the original ones untouched. It is just neater that way. This resulted in the following new files:
 
@@ -48,7 +47,7 @@ The detailed information on how to use and install the shortcode is available in
 The source code of the shortcode starts with a check of all the parameters (see also {{< link "/docs/shortcodes/mimage/usage" >}}this page{{< /link >}} for all the parameters).  
 One of these parameters is `src`, which specifies which image to load. This is part of the code that takes care of loading the image in `layouts/partials/utilities/mGetImage.html`.
 
-```go-html-template {linenos=true,hl_Lines=["10-19"]}
+```go-html-template {linenos=true,hl_Lines=["12-18"]}
 {{ $url := .url -}}
 {{ $page := .page -}}
 
@@ -57,22 +56,25 @@ One of these parameters is `src`, which specifies which image to load. This is p
 {{ if $remote }}
     {{ $img = resources.GetRemote $url -}}
 {{ else }}
-    {{ $img = resources.GetMatch $url -}}
-    {{ if and (not $img) $page }}
+    {{ if $page }}
         {{ $img = $page.Resources.GetMatch $url }}
-        {{ if not $img }}
-            <!-- Do we have a headless bundle? -->
-            {{- $headless := $page.GetPage "headless" -}}
-            {{- if $headless -}}
-                {{ $img = $headless.Resources.GetMatch $url }}
-            {{- end}}
+    {{ end }}
+    {{ if not $img }}
+        <!-- Do we have a headless bundle? -->
+        {{ $headless := $page.GetPage "headless" }}
+        {{ if $headless }}
+            {{- $img = $headless.Resources.GetMatch $url -}}
         {{ end }}
     {{ end }}
+    {{ if not $img }}
+        {{ $img = resources.GetMatch $url }}
+    {{ end }}
 {{ end }}
+
 ```
 
-The highlighted part is the part that was added by me. The `mGetImage` partial has two input parameters, `url` and `page`. What happens in this snippet is that first a check is performed on whether or not the `url` is for a remote image. If so it tries to load that image. If not, we get to line 9, which tries to load the specified image from the `assets` folder. If that fails and the `page` parameter has been set to point to the current page, the code reaches line 11.  
-If the shortcode is used in a page bundle (`index.md` or `_index.md`) the code on line 11 will try to load the image relative to the page. If this image cannot be found or when the page where the shortcode is used is not a page bundle, the code will go to line 14 to check if there is a headless page bundle defined.  This is true when there is a folder `headless` in the same folder as where the page with the shortcode is located, and in that `headless` folder there is an `index.md` file with the following frontmatter:
+The highlighted part is the part that was added by me. The `mGetImage` partial has two input parameters, `url` and `page`. What happens in this snippet is that first a check is performed on whether or not the `url` is for a remote image. If so it tries to load that image. If not, we get to line 9.  
+If the shortcode is used in a page bundle (`index.md` or `_index.md`) the code on line 11 will try to load the image relative to the page. If this image cannot be found or when the page where the shortcode is used is not a page bundle, the code will go to line 12 to check if there is a headless page bundle defined.  This is true when there is a folder `headless` in the same folder as where the page with the shortcode is located, and in that `headless` folder there is an `index.md` file with the following frontmatter:
 
 ```yaml
 ---
@@ -80,7 +82,7 @@ headless: true
 ---
 ```
 
-If this cannot be found, no image will be found either. If it is present a search for the image as specified in the `src` parameter, will be performed in the `headless` folder.
+If the image cannot be found, the code tries to load the specified image from the `assets` folder. If that also fails, no image will be found.
 
 ### Caption and credits
 
