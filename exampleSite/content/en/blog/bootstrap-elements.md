@@ -217,6 +217,31 @@ As an example, the following shortcode displays an image with rounded corners an
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Link
+
+As an example, the following shortcodes render links in different formats.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+
+- {{</* link hinode >}}Named link with default settings{{< /link */>}}
+- {{</* link name=hinode cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
+- {{</* link name=hinode cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
+- {{</* link hinode /*/>}}
+- {{</* link href="https://developer.mozilla.org" >}}External link{{< /link */>}}
+- {{</* link "./projects/another-project" >}}Internal link with title{{< /link */>}}
+- {{</* link url="projects/another-project" /*/>}}
+- {{</* link url="/projects/another-project" /*/>}}
+- {{</* link url="../projects/another-project" case=false /*/>}}
+- {{</* link "/about/" /*/>}}
+- {{</* link "/fr/about/" /*/>}}
+- {{</* link "/fr/about" >}}About (French){{< /link */>}}
+- {{</* link "#image" /*/>}}
+- {{</* link "components/#map" /*/>}}
+
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Nav
 
 As an example, the following shortcode displays a tab group with vertically aligned pills.
