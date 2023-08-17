@@ -22,4 +22,4 @@ The width of each masonry element is always the same and is determined by the nu
 
 If all images in a gallery have the same size, there is no visual difference between a grid and a masonry. At least not on a larger screen. On a smaller screen the number of columns will be reduced in a grid to try and keep the size of the thumbnails somewhat the same. In a masonry, the entire masonry is resized, making the masonry look the same, but with smaller images on a smaller screen.
 
-Check the [usage](../usage) page for the details on how to use the shortcode, and the [installation](../installation) page on how to install the shortcode.
+Check the {{< link "usage" >}}usage{{< /link >}} page for the details on how to use the shortcode, and the {{< link "installation" >}}installation{{< /link >}} page on how to install the shortcode.

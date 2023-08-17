@@ -22,7 +22,7 @@ The `mgallery` shortcode supports the below parameters.
 
 Parameter|Description
 ---|---
-list|Optional blob used to determine where to fetch the list of images from, like `"img/*"`, with img being the name of a folder relative to the current page bundle file or relative to a headless folder for all non page bundle files. If not specified the blob is `"*"`. See also the [Image Source](#image-source) section below for more info.
+list|Optional blob used to determine where to fetch the list of images from, like `"img/*"`, with img being the name of a folder relative to the current page bundle file or relative to a headless folder for all non page bundle files. If not specified the blob is `"*"`. See also the {{< link "#image-source" >}}Image Source{{< /link >}} section below for more info.
 type|Optional parameter to change the way the gallery is displayed. The following options exist:<br/>"grid"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default. Show the images on a row-column-grid.<br/>"masonry" Show in a masonry style where the images are in columns of the same size, but there are no rows.<br/>Note that the actual masonry functionality only shows when "thumb" is "regular". In the other "thumb" options, it will look like a grid.
 thumb|Optional setting for resizing the image into a thumbnail image. The image resizing is performed by both resizing and cropping the image, without stretching or compressing the image. The resulting thumbnail image can never be larger than the actual width and height of the image. The following options are valid:<br/>"regular" Default setting for "type" is "masonry". Creates thumbnails with the same aspect ratio as the image<br/>"1x1"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default setting for "type" is "grid". Creates square thumbnails<br/>"3x2"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 3x2<br/>"4x3"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 4x3<br/>"16x9"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 16x9<br/>"21x9"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates thumbnails with a wxh ratio of 21x9
 cols|Optional parameter that will set the number of columns in which the images will be organized. The values 2..5 are supported.
@@ -38,7 +38,7 @@ ovly|Optional offset in pixels for the y direction of the overlay image in pixel
 ovlperc|Optional percentage for the size of the logo related to the size of the image. By default the logo is not resized.
 {.table}
 
-The below sections provide more information about the following parameters: [src](#image-source), [mode](#mode) and [autoCaption](#autocaption).
+The below section provides more information about the {{< link "#image-source" >}}list{{< /link >}} parameter.
 
 #### Image source
 

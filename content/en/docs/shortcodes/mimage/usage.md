@@ -35,7 +35,7 @@ credits|Optional image credits text.
 autocaption|Optional parameter, which when "true" and 'caption' is not defined, will try to determine the caption/credits. Default is "false".
 {.table}
 
-The below sections provide more information about the following parameters: [src](#image-source), [mode](#mode) and [autoCaption](#autocaption).
+The below sections provide more information about the following parameters: {{< link "#image-source" >}}src{{< /link >}}, {{< link "#mode" >}}mode{{< /link >}} and {{< link "#autocaption" >}}autocaption{{< /link >}}.
 
 #### Image Source
 
@@ -74,7 +74,7 @@ The mimage partial supports the below parameters.
 
 Parameter|Description
 ---|---
-url|Required url or relative path of the image, e.g. "img/example.jpg". It is either a URL, an image located in the assets folder or an image located relatively to the current page. See also the [src](#image-source) parameter of the `mimage` shortcode.
+url|Required url or relative path of the image, e.g. "img/example.jpg". It is either a URL, an image located in the assets folder or an image located relatively to the current page. See also the {{< link "#image-source" >}}src{{< /link >}} parameter of the `mimage` shortcode.
 title|Optional alternative title of the image.
 mode|Optional flag indicating if the image should support color modes. Default is "false".
 page|Optional page resource, which is required when the image to load is relative to the current page. The `mimage` shortcode uses `.Page` for this parameter.
@@ -84,7 +84,7 @@ innerClass|Optional class attribute of the inner img element, e.g. "rounded".
 captionClass|Optional class attribute of the caption, e.g. "text-center".
 caption|Optional image caption text.
 credits|Optional image credits text.
-autocaption|Optional parameter, which when "true" and 'caption' is not defined, will try to determine the caption/credits. Default is "false". See also the [autoCaption](#autocaption) parameter of the `mimage` shortcode.
+autocaption|Optional parameter, which when "true" and 'caption' is not defined, will try to determine the caption/credits. Default is "false". See also the {{< link "#autocaption" >}}autoCaption{{< /link >}} parameter of the `mimage` shortcode.
 {.table}
 
 ## mGetImage partial
@@ -98,7 +98,7 @@ The `mGetImage` partial supports the below parameters
 
 Parameter|Description
 ---|---
-url|Required parameter, which specifies the image to load. See also the [src](#image-source) parameter of the `mimage` shortcode.
+url|Required parameter, which specifies the image to load. See also the {{< link "#image-source" >}}src{{< /link >}} parameter of the `mimage` shortcode.
 page|Optional parameter, which specifies the current page. This parameter is only required when the image to load is located relatively to the page. Usually the value `.Page` is used for this parameter.
 {.table}
 
@@ -113,7 +113,7 @@ There are a number of classes defined that can be used with the `mimage` shortco
 
 Class|Description
 ---|---
-url|Required parameter, which specifies the image to load. See also the [src](#image-source) parameter of the `mimage` shortcode.
+url|Required parameter, which specifies the image to load. See also the {{< link "#image-source" >}}src{{< /link >}} parameter of the `mimage` shortcode.
 <nobr>text-italic</nobr>|Used for the caption text, to make it italic.
 <nobr>caption-right</nobr>|Align the caption and credits to the bottom right of the image.
 <nobr>caption-center</nobr>|Align the caption and credits to the center of the image.

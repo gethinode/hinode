@@ -24,4 +24,4 @@ The following are the changes that are made to the `mimage` shortcode and underl
 - Added the parameter "autoCaption" to derive the caption and credits from a txt file or the EXIF of the image, when "caption" is not specified.
 - Added the possibility to load an image relative to the current page.
 
-Check the [usage](../usage) page for the details on how to use this new functionality, and the [installation](../installation) page on how to install the `mimage` functionality.
+Check the {{< link "usage" >}}usage{{< /link >}} page for the details on how to use this new functionality, and the {{< link "installation" >}}installation{{< /link >}} page on how to install the `mimage` functionality.
