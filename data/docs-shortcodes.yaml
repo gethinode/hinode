@@ -5,6 +5,13 @@
   pages:
     - title: Overview
 
+- title: mgallery
+  pages:
+    - title: Overview
+    - title: Installation
+    - title: Usage
+    - title: Demo
+
 - title: mimage
   pages:
     - title: Overview
@@ -12,9 +19,4 @@
     - title: Usage
     - title: Demo
 
-- title: mgallery
-  pages:
-    - title: Overview
-    - title: Installation
-    - title: Usage
-    - title: Demo
+
