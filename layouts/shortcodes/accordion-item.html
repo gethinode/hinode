@@ -50,6 +50,6 @@
     </h2>
     {{- end -}}
     <div id="{{ $parent }}-item-{{ $id }}" class="accordion-collapse collapse{{ if $show }} show{{ end }}{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $parent }}-heading-{{ $id }}" data-bs-parent="#{{ $parent }}">
-        <div class="accordion-body">{{ $body | markdownify | safeHTML }}</div>
+        <div class="accordion-body">{{ $body | .Page.RenderString | safeHTML }}</div>
     </div>
 </div>

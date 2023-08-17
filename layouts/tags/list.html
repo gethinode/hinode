@@ -13,7 +13,7 @@
                                 {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
                             </div>
                             <div class="col">
-                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ .Name | markdownify }}</a>
+                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ .Name | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}
@@ -34,7 +34,7 @@
                                     <p class="text-body-secondary mt-5">{{ $year }}</p>
                                     {{ $.Scratch.Set "lastYear" $year }}
                                 {{ end }}
-                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{end}}{{ .Title | markdownify }}</a>
+                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{end}}{{ .Title | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}
