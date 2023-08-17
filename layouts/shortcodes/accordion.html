@@ -26,7 +26,7 @@
 {{- $body := .Inner -}}
 {{- if $open -}}
     {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
-    {{- $body = (replace .Inner $pattern "") | markdownify | safeHTML }}
+    {{- $body = (replace .Inner $pattern "") | .Page.RenderString | safeHTML }}
 {{- end -}}
 
 <div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">

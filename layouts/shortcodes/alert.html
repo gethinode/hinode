@@ -55,7 +55,7 @@
     <div class="d-flex alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}{{ with $class }} {{ . }}{{ end }}" role="alert">
         {{ with $icon }}<div class="pt-1 pe-2">{{ . }}</div>{{ end }}
         <div class="flex-grow-1 my-auto">
-            {{ trim .Inner " \r\n" | markdownify | safeHTML -}}
+            {{ trim .Inner " \r\n" | .Page.RenderString | safeHTML -}}
             {{ if $dismissible }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>{{ end }}
         </div>
     </div>

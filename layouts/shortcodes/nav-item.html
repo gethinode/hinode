@@ -50,5 +50,5 @@
 <div class="tab-pane{{ if $show }} active {{ if $fade}}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}" id="{{ $parent }}-{{ $id }}" 
     role="tabpanel" aria-labelledby="{{ $parent }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
     data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
-    {{ $body | markdownify | safeHTML }}
+    {{ $body | .Page.RenderString | safeHTML }}
 </div>
