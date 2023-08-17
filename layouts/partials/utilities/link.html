@@ -38,7 +38,21 @@
             {{- $anchor = index $segments 1 -}}            
         {{ end }}
     {{ end }}
+    {{- $destination = strings.TrimSuffix "/" $destination -}}
     {{- $ref := $page.GetPage $destination -}}
+
+    {{- if not $ref }}
+        {{- $segments := split $destination "/" -}}
+        {{- if and (hasPrefix $destination "/")  (gt (len $segments) 1) -}}
+            {{- $prefix := index $segments 1 -}}
+            {{- $page := .Page -}}
+            {{ with index (where site.Sites "Language.Lang" $prefix) 0 }}
+                {{- $path := printf "/%s" (strings.TrimPrefix (printf "/%s/" $prefix) $destination) }}
+                {{- $ref = .GetPage $path -}}
+            {{ end }}
+        {{- end -}}
+    {{- end -}}
+
     {{- if not $ref -}}
         {{- errorf "partial [utilities/link.html] - Cannot find page: %s" $destination -}}
     {{- else -}}
