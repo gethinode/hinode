@@ -8,7 +8,7 @@
     {{ $responsive = (slice "table-responsive") -}}
 {{- end -}}
 
-{{- $input := .Inner | markdownify }}
+{{- $input := .Inner | .Page.RenderString }}
 {{- $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" -}}
 {{- $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" -}}
 {{- $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" -}}
