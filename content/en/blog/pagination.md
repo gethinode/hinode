@@ -4,7 +4,7 @@ title: Multi-page articles
 date: 2023-08-15
 lastmod: 2023-08-15
 description: Adding the option to create multi-page articles with pagination
-tags: ["blog", "pagination"]
+tags: ["pagination", "hugo", "Hinode", "blog"]
 thumbnail:
     url: /img/pages.webp
     author: Olga Tutunaru
@@ -15,7 +15,7 @@ thumbnail:
 <!-- cSpell:ignore Joost lastmod Tutunaru webp jmooring frontmatter multipage pagenumber mpfolder anotherpage thispage Hinode linenos linenostart isset errorf myproject offcanvas offcanvass inledby mpagination dropup mimage pagbut pagbutfirst pagbutlast pagarrow paglist pagdrop pagdroplist -->
 For the projects articles I am planning to write, I need the option to split an article over multiple pages. These pages belong together and it needs to be possible to navigate from one page to the other. On top of that it needs to have as little configuration as possible.
 
-While searching for potential ways to solve this, I found this solution by {{< link "https://github.com/jmooring/hugo-testing/tree/hugo-forum-topic-29161" >}}jmooring{{< /link >}}, which I felt was a nice solution.
+While searching for potential ways to solve this, I found this solution by {{< link "https://github.com/jmooring/hugo-testing/tree/hugo-forum-topic-29161" >}}jmooring{{< /link >}}, which I felt was a nice solution. It is a generic solution for Hugo and I *only* had to make it work for the Hinode theme, I am using. The following describes the steps I took to accomplish this.
 
 ## Basic set-up
 
@@ -330,3 +330,7 @@ When the dropdown button is clicked, the list shows below the button. Page 1 is 
 
 <br>
 For the dropup button, the list shows above the button and the triangle in that button, points up.
+
+## Wrap-up
+
+The provided solutions works as long as there is no need for another layout to be defined. On my site there is a different layout for documentation and Gallery, so I can't use it for those sections. But, I can use it for blogs and projects, which is sufficient for my needs.

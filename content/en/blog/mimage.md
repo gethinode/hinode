@@ -4,7 +4,7 @@ title: A different image shortcode
 date: 2023-07-24
 lastmod: 2023-08-15
 description: Add more options to the image shortcode.
-tags: ["blog", "Hinode", "image"]
+tags: ["image", "Hinode", "Hugo", "Blog"]
 thumbnail:
     url: img/mimage.jpg
     author: Carl Heyerdahl
@@ -15,7 +15,7 @@ thumbnail:
 <!-- cSpell:ignore Joost shortcode Hinode getimage Exif mimage shortcodes mgetimage linenos frontmatter autocaption imgset srcset lastmod -->
 ## Introduction
 
-Hinode has already a very functional way of displaying images in content, which is the `image` shortcode that can be found in `layouts/shortcodes/image.html` file. This shortcode makes use of the `layouts/partials/utilities/Getimage.html` and the `layouts/partials/assets/image.html` partials for the actual work.
+The Hinode theme, I am using on this site, has already a very functional way of displaying images in content, which is the `image` shortcode that can be found in `layouts/shortcodes/image.html` file. This shortcode makes use of the `layouts/partials/utilities/Getimage.html` and the `layouts/partials/assets/image.html` partials for the actual work.
 
 Even though the `image` shortcode already did a lot of things very well, I still wanted a few changes, which were the following:
 

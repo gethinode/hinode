@@ -4,7 +4,7 @@ title: Adding a gallery
 date: 2023-07-24
 lastmod: 2023-08-15
 description: Add a gallery to Hinode.
-tags: ["blog", "Hinode", "gallery"]
+tags: ["gallery", "lightbox", "Hinode", "Hugo", "blog"]
 thumbnail:
     url: /img/mgallery.jpg
     author: Mick Haupt
@@ -15,7 +15,7 @@ thumbnail:
 <!-- cSpell:ignore Joost shortcode Hinode mgallery Haupt lightbox mimage exif linenos frontmatter animage ovlpos ovlx ovly ovlperc divs lastmod shortcodes -->
 ## Introduction
 
-One thing that Hinode does not have is a gallery. There are loads of galleries to choose from, but I wanted something that kept within the theme of the site. As a result, I settled on creating the gallery myself and using {{< link "https://lokeshdhakar.com/projects/lightbox2/" >}}Lightbox 2 {{< /link >}} as a way to view the individual pictures in the gallery.
+One thing that the Hinode theme does not have is a gallery. There are loads of galleries to choose from, also usuable with Hugo, but I wanted something that kept within the theme of the site. As a result, I settled on creating the gallery myself and using {{< link "https://lokeshdhakar.com/projects/lightbox2/" >}}Lightbox 2 {{< /link >}} as a way to view the individual pictures in the gallery.
 
 The `mgallery` shortcode offers the following features:
 

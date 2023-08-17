@@ -4,7 +4,7 @@ title: Adding Mastodon as a sharing provider
 date: 2023-07-24
 lastmod: 2023-08-15
 description: An overview of the changes that are made to the Hinode template for sharing posts on Mastodon.
-tags: ["blog", "Hinode", "Mastodon"]
+tags: ["Mastodon", "Hinode", "Hugo", "blog"]
 thumbnail:
     url: /img/elephant.jpg
     author: Nam Anh
@@ -14,10 +14,10 @@ thumbnail:
 ---
 <!-- cSpell:ignore Joost hinode dataprompt urlquery lastmod -->
 
-At the top of most of the pages there are sharing buttons. Next to the available sharing buttons like WhatsApp and Facebook, I also wanted to add a sharing button for Mastodon. This is a bit more complicated than with most of the other providers. What makes it more difficult is that for Mastodon the page is to be shared on the actual instance where the user is logged in.  
+At the top of most of the pages on this site there are sharing buttons. Next to the available sharing buttons like WhatsApp and Facebook, I also wanted to add a sharing button for Mastodon. This is a bit more complicated than with most of the other providers. What makes it more difficult is that for Mastodon the page is to be shared on the actual instance where the user is logged in.  
 There is no way of knowing what that instance is, so we will have to ask the user first to what instance the post should be shared.
 
-To accomplish this there are a few changes that are needed to be made to existing partials and there is some javascript code that will take care of the interaction with the user to ask for the Mastodon instance. Also it should be noted that this is a description about how to add it to the Hinode template, but the Javascript code is independent of that.
+To accomplish this there are a few changes that are needed to be made to existing partials and there is some javascript code that will take care of the interaction with the user to ask for the Mastodon instance. Also it should be noted that this is a description about how to add it to the Hinode theme in Hugo, but the Javascript code is independent of that.
 
 The first step is to add the sharing information for Mastodon in `config/_default/params.toml`.
 

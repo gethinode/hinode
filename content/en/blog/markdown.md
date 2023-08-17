@@ -4,7 +4,7 @@ title: Markdown
 date: 2023-07-21T13:40:45.334Z
 lastmod: 2023-08-15
 description: Showing possible Markdown options, which also shows what is and what is not supported.
-tags: ["blog", "markdown"]
+tags: ["markdown", "Hugo", "Hinode", "blog"]
 thumbnail:
     url: /img/mark.jpg
     author: Victória Kubiaki
