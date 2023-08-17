@@ -3,7 +3,7 @@ title: A historic view
 description: Using a magnifying glass to see the past
 date: 2023-08-03
 lastmod: 2023-08-15
-tags: ["photo", "Eindhoven", "old"]
+tags: ["city", "old", "photo"]
 thumbnail: img/galeindhoven.webp
 # This prevents the thumbnail to be displayed on the page and used only in the list
 layout: gallery
