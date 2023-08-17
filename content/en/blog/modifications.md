@@ -452,6 +452,12 @@ to:
 <div class="d-none-dark"><img src="{{if $absoluteURL }}{{ absURL $logo_l }}{{ else }}{{ $logo_l }}{{ end }}" alt="{{ $title }} logo" height="50" {{with site.Params.navigation.logoWidth}}width="{{- site.Params.navigation.logoWidth -}}"{{ end }}></div>
 ```
 
+Because of this the navigation bar is higher and could obstruct headers when navigated to. To prevent this, change the `offset` parameter in the `navigation` section of `config/_default/params.toml`:
+
+```toml
+    offset = "4.3em"
+```
+
 ## Move search box to the right
 
 I prefer the search box to be next to the navigation bar. To achieve this the below change is needed.

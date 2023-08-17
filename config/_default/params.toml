@@ -82,7 +82,7 @@
     logoWidth = 174
     color = "body"
     fixed = true
-    offset = "3.8em"
+    offset = "4.3em"
     search = true
     breadcrumb = true
     toc = true
