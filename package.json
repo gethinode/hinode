@@ -82,7 +82,7 @@
     "replace-in-files-cli": "^2.2.0",
     "rimraf": "^5.0.1",
     "shx": "^0.3.4",
-    "stylelint": "^15.10.2",
+    "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^10.0.0"
   },
   "hugo-bin": {
