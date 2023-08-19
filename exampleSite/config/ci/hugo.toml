@@ -1,0 +1,22 @@
+# cachedir default on POSIX: '/tmp/hugo_cache_runner'
+# cachedir default on Windows: '~\AppData\Local\hugo_cache'
+
+[caches]
+  [caches.assets]
+    dir = ':cacheDir/resources/_gen' # map to cacheDir instead of resourceDir to utilize GitHub action/cache
+    maxAge = -1
+  [caches.getcsv]
+    dir = ':cacheDir/:project'
+    maxAge = -1
+  [caches.getjson]
+    dir = ':cacheDir/:project'
+    maxAge = -1
+  [caches.getresource]
+    dir = ':cacheDir/:project'
+    maxAge = -1
+  [caches.images]
+    dir = ':cacheDir/resources/_gen' # map to cacheDir instead of resourceDir to utilize GitHub action/cache
+    maxAge = -1
+  [caches.modules]
+    dir = ':cacheDir/modules'
+    maxAge = -1
