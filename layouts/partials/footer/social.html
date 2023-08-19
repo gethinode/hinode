@@ -5,27 +5,29 @@
     {{ warnf "DEPRECATED: parameter `Params.home.socialCaption` has been deprecated in release v0.18"}}
 {{ end }}
 
-{{- $tab := site.Params.main.externalLinks.tab -}}
-<div class="container-fluid">
-    <div class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-center">
-        <div class="col col-md-2 d-none d-md-block"></div>
-        <div class="col col-sm-6 col-md-4">
-            {{ if gt .Site.Menus.social 0 }}
-                <div class="fs-3 fw-bold">{{ or .Site.Params.footer.socialTitle .Site.Params.social.title }}</div>
-                <p>{{ or .Site.Params.footer.socialCaption .Site.Params.social.caption }}</p>
-            {{ end }}
+{{ if gt .Site.Menus.social 0 }}
+    {{- $tab := site.Params.main.externalLinks.tab -}}
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-sm-4 bg-primary p-3 bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }} align-items-center">
+            <div class="col col-md-2 d-none d-md-block"></div>
+            <div class="col col-sm-6 col-md-4">
+                {{ if gt .Site.Menus.social 0 }}
+                    <div class="fs-3 fw-bold">{{ or .Site.Params.footer.socialTitle .Site.Params.social.title }}</div>
+                    <p>{{ or .Site.Params.footer.socialCaption .Site.Params.social.caption }}</p>
+                {{ end }}
+            </div>
+            <div class="col text-sm-start text-center col-sm-6 col-md-4">
+                {{ range .Site.Menus.social -}}
+                    <a href="{{ .URL }}" {{ if $tab }} target="_blank" rel="noopener noreferrer"{{ end }} aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{ if hasPrefix .Pre "<i" }}
+                            {{ .Pre | safeHTML }}
+                        {{ else }}
+                            {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-2x" .Pre) )}}
+                        {{ end }}
+                    </a>
+                {{ end -}}
+            </div>
+            <div class="col col-md-2 d-none d-md-block"></div>
         </div>
-        <div class="col text-sm-start text-center col-sm-6 col-md-4">
-            {{ range .Site.Menus.social -}}
-                <a href="{{ .URL }}" {{ if $tab }} target="_blank" rel="noopener noreferrer"{{ end }} aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
-                    {{ if hasPrefix .Pre "<i" }}
-                        {{ .Pre | safeHTML }}
-                    {{ else }}
-                        {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-2x" .Pre) )}}
-                    {{ end }}
-                </a>
-            {{ end -}}
-        </div>
-        <div class="col col-md-2 d-none d-md-block"></div>
     </div>
-</div>
+{{ end }}
