@@ -1,0 +1,44 @@
+name: TEMP Update Hugo dependencies
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *' # run daily at 03:00 AM
+
+permissions:
+  pull-requests: write
+
+jobs:
+  update-mod:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [20.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Perform clean install of npm
+      run: npm ci
+
+    - name: Update Hugo module dependencies
+      run: npm run mod:update
+
+    - name: Test for changes
+      id: test-for-changes
+      run: echo "GIT_CHANGES=$(git status -s | grep 'go.mod\|go.sum')" >> "$GITHUB_OUTPUT"
+
+    - name: TEMP Capture changes
+      if: ${{ steps.test-for-changes.outputs.GIT_CHANGES }}
+      env:
+        GIT_CHANGES: ${{ steps.test-for-changes.outputs.GIT_CHANGES }}
+      run: echo "$GIT_CHANGES"
