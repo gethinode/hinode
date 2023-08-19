@@ -33,6 +33,9 @@ jobs:
     - name: Update Hugo module dependencies
       run: npm run mod:update
 
+    - name: TEMP
+      run: git status -s
+
     - name: Test for changes
       id: test-for-changes
       run: |
