@@ -9,14 +9,17 @@ on:
     branches: [ main ]
 
 env:
-  LINT_OS: 'ubuntu-latest'
-  LINT_NODE_VERSION: '20.x'
   CACHE_KEY: 'hugo-hinode'
   CACHE_PATH: '/tmp/hugo_cache_runner'
 
 jobs:
   lint:
-    runs-on: ${{ env.LINT_OS }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [20.x]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout repository
@@ -25,7 +28,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ env.LINT_NODE_VERSION }}
+        node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
 
