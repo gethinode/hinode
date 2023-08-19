@@ -38,7 +38,7 @@ jobs:
       run: echo "GIT_CHANGES=$(git status -s | grep 'go.mod\|go.sum')" >> "$GITHUB_OUTPUT"
 
     - name: TEMP Capture changes
-      if: ${{ steps.test-for-changes.outputs.GIT_CHANGES }}
+      # if: ${{ steps.test-for-changes.outputs.GIT_CHANGES }}
       env:
         GIT_CHANGES: ${{ steps.test-for-changes.outputs.GIT_CHANGES }}
       run: echo "$GIT_CHANGES"
