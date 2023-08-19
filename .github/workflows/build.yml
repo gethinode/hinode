@@ -65,10 +65,10 @@ jobs:
     - name: Use Hugo cache
       uses: actions/cache@v3
       with:
-        path: $CACHE_PATH
-        key: ${{ runner.os }}-${{ env.$CACHE_KEY }}
+        path: ${{ env.CACHE_PATH }}
+        key: ${{ runner.os }}-${{ env.CACHE_KEY }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.$CACHE_KEY }}
+          ${{ runner.os }}-${{ env.CACHE_KEY }}
 
     - name: Build main site
       run: npm run build:cache

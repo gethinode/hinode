@@ -14,7 +14,7 @@ env:
 
 jobs:
   build:
-    runs-on: $OS
+    runs-on: ${{ env.OS }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,8 +22,8 @@ jobs:
       - name: Setup .npmrc file to publish to npm
         uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
-          registry-url: $REGISTRY_URL
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.REGISTRY_URL }}
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
   
