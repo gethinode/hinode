@@ -11,7 +11,7 @@ on:
 env:
   CACHE_KEY: 'hugo-hinode'
   CACHE_PATH_POSIX: '/tmp/hugo_cache_runner'
-  CACHE_PATH_WIN: '~\AppData\Local\hugo_cache_runner'
+  CACHE_PATH_WIN: '~\AppData\Local\hugo_cache'
 
 jobs:
   lint:
