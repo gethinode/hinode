@@ -16,7 +16,7 @@ env:
 
 jobs:
   lint:
-    runs-on: $LINT_OS
+    runs-on: ${{ env.LINT_OS }}
 
     steps:
     - name: Checkout repository
@@ -25,7 +25,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: $LINT_NODE_VERSION
+        node-version: ${{ env.LINT_NODE_VERSION }}
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
 
@@ -66,9 +66,9 @@ jobs:
       uses: actions/cache@v3
       with:
         path: $CACHE_PATH
-        key: ${{ runner.os }}-$CACHE_KEY
+        key: ${{ runner.os }}-${{ env.$CACHE_KEY }}
         restore-keys: |
-          ${{ runner.os }}-$CACHE_KEY
+          ${{ runner.os }}-${{ env.$CACHE_KEY }}
 
     - name: Build main site
       run: npm run build:cache
