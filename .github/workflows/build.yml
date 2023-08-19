@@ -12,7 +12,6 @@ env:
   CACHE_KEY: 'hugo-hinode'
   CACHE_PATH_POSIX: '/tmp/hugo_cache_runner'
   CACHE_PATH_WIN: '~\AppData\Local\hugo_cache_runner'
-  CACHE_PATH: ${{ runner.os == 'Windows' && $env:CACHE_PATH_WIN || $env:CACHE_PATH_POSIX }}
 
 jobs:
   lint:
@@ -70,7 +69,7 @@ jobs:
     - name: Use Hugo cache
       uses: actions/cache@v3
       with:
-        path: ${{ env.CACHE_PATH }}
+        path: ${{ runner.os == 'Windows' && $env:CACHE_PATH_WIN || $env:CACHE_PATH_POSIX }}
         key: ${{ runner.os }}-${{ env.CACHE_KEY }}
         restore-keys: |
           ${{ runner.os }}-${{ env.CACHE_KEY }}
