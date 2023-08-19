@@ -36,11 +36,7 @@ jobs:
     - name: Test for changes
       id: test-for-changes
       run: |
-        {
-          echo 'GIT_CHANGES<<EOF'
-          git status -s | grep 'go.mod\|go.sum'
-          echo EOF
-        } >> "$GITHUB_ENV"
+        echo "GIT_CHANGES=$(git status -s | grep 'go.mod\|go.sum')" >> "$GITHUB_OUTPUT"
 
     - name: TEMP Capture changes
       # if: ${{ steps.test-for-changes.outputs.GIT_CHANGES }}
