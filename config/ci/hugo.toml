@@ -1,5 +1,5 @@
 # cachedir default on POSIX: '/tmp/hugo_cache_runner'
-# cachedir default on Windows: '~\AppData\Local\hugo_cache_runner'
+# cachedir default on Windows: '~\AppData\Local\hugo_cache'
 
 [caches]
   [caches.assets]
