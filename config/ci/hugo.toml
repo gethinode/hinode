@@ -1,0 +1,2 @@
+cachedir = '/tmp/hugo_cache_runner/'
+resourcedir = '/tmp/hugo_cache_runner/resources/'
