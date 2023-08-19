@@ -10,7 +10,9 @@ on:
 
 env:
   CACHE_KEY: 'hugo-hinode'
-  CACHE_PATH: '/tmp/hugo_cache_runner'
+  CACHE_PATH_POSIX: '/tmp/hugo_cache_runner'
+  CACHE_PATH_WIN: '~\AppData\Local\hugo_cache_runner'
+  CACHE_PATH: ${{ runner.os == 'Windows' && $env:CACHE_PATH_WIN || $env:CACHE_PATH_POSIX }}
 
 jobs:
   lint:
