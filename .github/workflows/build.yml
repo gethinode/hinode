@@ -1,5 +1,6 @@
-name: build
+name: Lint & build
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*
@@ -8,23 +9,73 @@ on:
     branches: [ main ]
 
 jobs:
+  lint:
+    env:
+      OS: 'ubuntu-latest'
+      NODE_VERSION: '20.x'
+    
+    runs-on: $OS
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: $NODE_VERSION
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Perform clean install of npm
+      run: npm ci
+
+    - name: Lint the source files
+      run: npm run lint      
+
   build:
+    needs: lint
+
+    env:
+      CACHE_KEY: 'hugo-hinode'
+      CACHE_PATH: '/tmp/hugo_cache_runner'
+      NODE_VERSION: '20.x'
+
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-        node-version: [16.x, 18.x, 20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [16.x, 18.x, 20.x]
 
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
-    - run: npm ci
-    - run: npm run build
-    - run: npm run build:example
+
+    - name: Perform clean install of npm
+      run: npm ci
+
+    # Cache Hugo cachedir and resourcedir (configured in config/ci/hugo.toml) for each OS
+    # No additional cache invalidation is needed, Hugo uses checksums itself
+    - name: Use Hugo cache
+      uses: actions/cache@v3
+      with:
+        path: $CACHE_PATH
+        key: ${{ runner.os }}-$CACHE_KEY
+        restore-keys: |
+          ${{ runner.os }}-$CACHE_KEY
+
+    - name: Build main site
+      run: npm run build:cache
+
+    # The example site is to be published to demo.gethinode.com
+    - name: Build example site
+      run: npm run build:example:ci
