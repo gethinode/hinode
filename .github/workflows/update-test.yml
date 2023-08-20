@@ -35,11 +35,16 @@ jobs:
       run: |
         MOD_OUTPUT=$(npm run mod:update 2>&1)
         echo "$MOD_OUTPUT"
-        echo "MOD_UPDATES=$(echo \"$MOD_OUTPUT\" | grep '^go: ' | cut -c 5- | sort -u)" >> "$GITHUB_ENV"
+        echo "MOD_UPDATES=$(echo \"$MOD_OUTPUT\" | grep '^go: ' | cut -c 5- | sort -u)" >> "$GITHUB_OUTPUT"
 
-    - name: Use the value
-      run: |
-        printf '%s\n' "$MOD_UPDATES"
+    - name: Get output
+      env:
+        MOD_UPDATES: ${{ steps.mod-updates.outputs.MOD_UPDATES }}
+      run: echo "[Output] $MOD_UPDATES"
+
+    # - name: Use the value
+    #   run: |
+    #     printf '%s\n' "$MOD_UPDATES"
     
     # - name: Create Pull Request
     #   uses: gethinode-actions/create-pull-request@v5
