@@ -155,6 +155,8 @@
       "row-cols-sm-3",
       "row-cols-sm-4",
       "search",
+      "search-input",
+      "search-suggestions",
       "shadow",
       "svg-inline--fa",
       "switch-mode-collapsed",
@@ -177,8 +179,6 @@
       "-theme",
       "-theme-collapsed",
       "navbar-0-collapse",
-      "search",
-      "suggestions",
       "toast-container",
       "toast-copied-code-message"
     ]
