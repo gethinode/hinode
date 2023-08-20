@@ -42,7 +42,7 @@ jobs:
         echo "pr_body=$pr_body" >> $GITHUB_OUTPUT
 
     - name: Create Pull Request
-      uses: gethinode-actions/create-pull-request
+      uses: gethinode-actions/create-pull-request@v5
       with:
         token: ${{ secrets.HUGO_MOD_PR }}
         commit-message: 'fix: update Hugo module dependencies'
