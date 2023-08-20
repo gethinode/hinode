@@ -36,7 +36,9 @@ jobs:
         MOD_OUTPUT=$(npm run mod:update 2>&1)
         echo "$MOD_OUTPUT"  
         MOD_UPDATES=$(echo "$MOD_OUTPUT" | grep '^go: ' | cut -c 5- | sort -u)
-        echo "MOD_UPDATES=\"$MOD_UPDATES\"" >> "$GITHUB_OUTPUT"
+        echo 'MOD_UPDATES<<EOF' >> $GITHUB_OUTPUT
+        echo "$MOD_UPDATES" >> "$GITHUB_OUTPUT"
+        echo 'EOF' >> $GITHUB_OUTPUT
 
     - name: Get output
       env:
