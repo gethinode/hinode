@@ -1,5 +1,6 @@
 # cachedir default on POSIX: '/tmp/hugo_cache_runner'
 # cachedir default on Windows: '~\AppData\Local\hugo_cache'
+# cachedir default on macOS: '/Users/runner/Library/Caches/hugo_cache'
 
 [caches]
   [caches.assets]
