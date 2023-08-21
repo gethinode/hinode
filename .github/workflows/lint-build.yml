@@ -15,12 +15,7 @@ env:
 
 jobs:
   lint:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [20.x]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
@@ -29,7 +24,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: lts/*
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
 
