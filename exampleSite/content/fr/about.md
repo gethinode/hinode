@@ -7,30 +7,19 @@ updated: 2023-08-02
 showComments: false
 ---
 
-<p class="text-center"><svg class="img-fluid w-50"><use href="/img/logo_var.svg#logo"></use></svg></p>
+{{< image src="/img/logo_var.svg#logo" class="img-fluid w-50" wrapper="text-center" >}}
 
-<section class="section section-sm mt-5">
-  <div class="container-fluid">
-    <div class="row justify-content-center text-center">
-    <div class="row justify-content-center text-center">
-      <div class="col-lg-4">
-        {{< icon fab bootstrap fa-2xl >}}
-        <h2 class="h4">Framework Bootstrap</h2>
-        <p>Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site avec les fichiers source Sass.</p>
-      </div>
-      <div class="col-lg-4">
-        {{< icon fas magnifying-glass fa-2xl >}}
-        <h2 class="h4">Recherche en texte intégral</h2>
-        <p>Recherchez votre site avec FlexSearch, une bibliothèque de recherche en texte intégral avec zéro dépendances.</p>
-      </div>
-      <div class="col-lg-4">
-        {{< icon fas code fa-2xl >}}
-        <h2 class="h4">Outils de développement</h2>
-        <p>Utilisez Node Package Manager pour automatiser le processus de construction et suivre les dépendances.</p>
-      </div>
-    </div>
-  </div>
-</section>
+{{< card-group class="text-center border-0" padding="3" >}}
+    {{< card title="Framework Bootstrap" icon="fab bootstrap" >}}
+        Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site avec les fichiers source Sass.
+    {{< /card >}}
+    {{< card title="Recherche en texte intégral" icon="fas magnifying-glass" >}}
+        Recherchez votre site avec FlexSearch, une bibliothèque de recherche en texte intégral avec zéro dépendances.
+    {{< /card >}}
+    {{< card title="Outils de développement" icon="fas code" >}}
+        Utilisez Node Package Manager pour automatiser le processus de construction et suivre les dépendances.
+    {{< /card >}}
+{{< /card-group >}}
 
 Les fonctionnalités supplémentaires incluent:
 
