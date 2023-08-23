@@ -4,7 +4,7 @@
                     including a color mode switcher, version switcher, and collapse panel.
     "page"          Required object reference to the current page.
     "menus"         Optional name of the menu configuration, defaults to "main".
-    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
+    "size"          Optional breakpoint of the navbar toggler, either "xs", "sm", "md" (default), "lg", or "xl".
     "fixed"         Optional flag to indicate the navbar should stick to the top, defaults to false.
     "color"         Optional background color of the navbar, either "primary", "secondary", "success",
                     "danger", "warning", "info", "white", "black", "body", or "body-tertiary". The default color is
@@ -174,7 +174,32 @@
 {{- $enableLanguage := or $page.IsTranslated site.IsMultiLingual -}}
 
 {{- $logo := site.Params.navigation.logo -}}
-{{- with .logo }}{{ $logo = . }}{{ end -}}
+{{- $logoLight := "" -}}
+{{- $logoDark := "" -}}
+{{- with .logo }}
+    {{ $logo = . }}
+{{- end -}}
+{{- if $enableDarkMode -}}
+    {{ $ext := path.Ext $logo -}}
+    {{- $logoLight = printf "%s-light%s" (strings.TrimSuffix $ext $logo) $ext -}}
+    {{- $logoDark = printf "%s-dark%s" (strings.TrimSuffix $ext $logo) $ext -}}
+    {{- $light := fileExists (path.Join "/static" $logoLight) -}}
+    {{- $dark := fileExists (path.Join "/static" $logoDark) -}}
+    {{- if and $light (not $dark) -}}
+        {{- warnf "partial [assets/navbar.html] - Missing file: %s" $logoDark -}}
+        {{- $logoLight = "" -}}
+        {{- $logoDark = "" -}}
+    {{- end -}}
+    {{- if and (not $light) $dark -}}
+        {{- warnf "partial [assets/navbar.html] - Missing file: %s" $logoLight -}}
+        {{- $logoLight = "" -}}
+        {{- $logoDark = "" -}}
+    {{- end -}}
+    {{- if not (or $light $dark) -}}
+        {{- $logoLight = "" -}}
+        {{- $logoDark = "" -}}
+    {{- end -}}
+{{- end -}}
 
 {{- $title := site.Title -}}
 {{- if .title -}}
@@ -214,7 +239,10 @@
     
             <!-- Insert the brand logo or name -->
             <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
-                {{- if $logo -}}
+                {{- if (and $logoLight $logoDark) -}}
+                    <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-dark" alt="{{ $title }} logo" height="30">
+                    <img src="{{if $absoluteURL }}{{ absURL $logoDark }}{{ else }}{{ $logoDark }}{{ end }}" class="d-none-light" alt="{{ $title }} logo" height="30">
+                {{- else if $logo -}}
                     <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30">
                 {{- else -}}
                     <span class="fw-bold">{{ $title }}</span>

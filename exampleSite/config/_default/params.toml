@@ -44,6 +44,7 @@
     breadcrumb = true
     toc = true
     sidebar = true
+    size = "md"
 
 [messages]
     placement = "bottom-right"
