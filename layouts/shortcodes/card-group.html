@@ -1,0 +1,50 @@
+<!-- 
+    Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered using a provided list of pages.
+    Cards on the same row are aligned to each other. The grid renders pages up to a provided maximum amount. The
+    remaining items are accessible via either a paginator or button to a list page (default behavior). Be aware a page
+    can only contain one paginator at a time.
+    
+    The shortcode supports the following arguments:
+    "cols"          Required number of columns for the grid, must be a value between 1 and 5.
+    "title"         Optional title of the card group.
+    "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
+    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3" (default), "4", or "5".
+
+    In addition, the following arguments are passed to the individual cards.
+    "class"         Optional class attribute of the card element, e.g. “w-50”.
+    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", or "body". By default, no color is specified.
+    "padding":      Optional padding of the content, either "0", "1", "2", "3" (default), "4", "5", or "auto".
+    "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
+                    (default), "publication", "tags", and "none".
+    "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
+                    "publication", "tags", and "none" (default).
+    "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
+-->
+
+{{- $cols := 3 -}}
+{{ with .Get "cols" }}{{ $cols = int . }}{{ end -}}
+{{- $title := .Get "title" -}}
+{{- $separator := .Get "separator" -}}
+{{- $class := .Get "class" -}}
+{{- $wrapper := .Get "wrapper" -}}
+{{- $color := .Get "color" -}}
+{{- $padding := .Get "padding" | default "3" -}}
+{{- $header := .Get "header" -}}
+{{- $footer := .Get "footer" -}}
+{{- $orientation := .Get "orientation" -}}
+
+{{- partial "assets/card-group.html" (dict 
+    "page" .Page
+    "cards" .Inner
+    "cols" $cols
+    "title" $title
+    "separator" $separator
+    "class" $class
+    "color" $color
+    "padding" $padding
+    "header" $header
+    "footer" $footer
+    "orientation" $orientation
+    ) 
+-}}
