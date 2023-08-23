@@ -195,6 +195,10 @@
         {{- $logoLight = "" -}}
         {{- $logoDark = "" -}}
     {{- end -}}
+    {{- if not (or $light $dark) -}}
+        {{- $logoLight = "" -}}
+        {{- $logoDark = "" -}}
+    {{- end -}}
 {{- end -}}
 
 {{- $title := site.Title -}}
