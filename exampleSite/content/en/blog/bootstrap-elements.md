@@ -22,11 +22,10 @@ As an example, the following shortcode displays an accordion with three elements
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
   {{</* accordion-item header="Accordion Item #1" show="true" */>}}
-    This is the first item's accordion body. It supports HTML content. The item is shown by adding the value
-    <code>show</code> to the <code>class</code> argument.
+    This is the first item's accordion body. It supports HTML content, if enabled in the goldmark renderer. The item is shown by adding the value `show` to the `class` argument.
   {{</* /accordion-item */>}}
   {{</* accordion-item header="Accordion Item #2" */>}}
-    This is the second item's accordion body. It supports HTML content too.
+    This is the second item's accordion body.
   {{</* /accordion-item */>}}
   {{</* accordion-item header="Accordion Item #3" */>}}
     This is the third item's accordion body.
@@ -102,7 +101,28 @@ As an example, the following shortcode displays a stacked card that links to the
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="w-50" color="body-tertiary" header="publication" footer="none" */>}}
+{{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary" header="publication" footer="none" /*/>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+## Card group
+
+As an example, the following shortcode displays a card group of three elements.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* card-group padding="3" */>}}
+    {{</* card title="Bootstrap framework" icon="fab bootstrap" */>}}
+        Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source
+        Sass files.
+    {{</* /card */>}}
+    {{</* card title="Full text search" icon="fas magnifying-glass" */>}}
+        Search your site with FlexSearch, a full-text search library with zero dependencies.
+    {{</* /card */>}}
+    {{</* card title="Development tools" icon="fas code" */>}}
+        Use Node Package Manager to automate the build process and to keep track of dependencies.
+    {{</* /card */>}}
+{{</* /card-group */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -250,11 +270,10 @@ As an example, the following shortcode displays a tab group with vertically alig
 {{< example lang="hugo" >}}
   {{</* nav type="pills" vertical="true" */>}}
     {{</* nav-item header="Nav Item #1" show="true" */>}}
-      This is the first item's nav body. It supports HTML content. The item is shown by adding the value
-      <code>show</code> to the <code>class</code> argument.
+      This is the first item's nav body. It supports HTML content, if enabled in the goldmark renderer. The item is shown by adding the value `show` to the `class` argument.
     {{</* /nav-item */>}}
     {{</* nav-item header="Nav Item #2" */>}}
-      This is the second item's nav body. It too supports HTML content.
+      This is the second item's nav body.
     {{</* /nav-item */>}}
     {{</* nav-item header="Nav Item #3" */>}}
       This is the third item's nav body.

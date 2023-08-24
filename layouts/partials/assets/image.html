@@ -2,14 +2,25 @@
     Render a local or remote image with responsive image sizing. Images are resized using default media breakpoints
     and are converted to webp format. The image is processed using the quality setting specified in the [imaging]
     section of the main config file (defaults to 75). A fallback image is provided for older browsers. The image is
-    wrapped in a figure if a caption is provided, else the image is wrapped in a div with a ratio constraint. The
-    partial supports the following arguments:
-    "url":          Required relative url of the image, e.g. "img/example.jpg"
+    wrapped in a figure if a caption is provided, else the image is wrapped in a div with a ratio constraint.
+    
+    If the url starts with 'http', the image is retrieved from an external location. Else, the url is matched with a
+    page resource and site asset (in that order). The path of a remote image is rewritten to ensure processed files are
+    stored in the final '/img' folder. 
+    
+    The partial supports the following bitmap image formats: "png", "jpeg", "gif", "tiff", "bmp", and  "webp". Vector
+    graphics of type "svg" are supported too, although these images do no support additional processing. This means
+    the arguments "ratio" and "portrait" have no effect for vector images. Vector graphics support an optional anchor
+    "#" in their url to denote a styling reference.
+    
+    The partial supports the following arguments:
+    "url":          Required path or url of the image, e.g. "img/example.jpg"
     "mode":         Optional flag indicating if the image should support color modes.
     "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". If set, the image is
-                    resized and cropped to match the ratio. Else the original aspect ratio of the image is kept.
+                    resized and cropped to match the ratio. Else the original aspect ratio of the image is kept. Not
+                    applicable to vector graphics.
     "portrait":     Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only
-                    the crop area is adjusted.
+                    the crop area is adjusted. Not applicable to vector graphics.
     "outerClass":   Optional class attribute of the outer div element, e.g. "img-wrap".
     "innerClass":   Optional class attribute of the inner img element, e.g. "rounded".
     "title":        Optional alternate text of the image.
@@ -171,13 +182,24 @@
     {{- $title := .title -}}
     {{- $caption := .caption -}}
     {{- $fallbackURL := "" -}}
+    {{- $anchor := "" -}}
     {{- $imgset := "" -}}
     {{- $mode := .mode -}}
     {{- $modes := .modes -}}
     {{- $page := .page -}}
+    {{- $isVector := false -}}
+
+    {{- $segments := split $url "#" -}}
+    {{- if gt (len $segments) 2 -}}
+        {{- errorf "Invalid path or url: %q" $url -}}
+    {{- else if eq (len $segments) 2 }}
+        {{- $url = index $segments 0 -}}
+        {{- $anchor = index $segments 1 -}}
+    {{- end -}}
 
     {{- if hasSuffix $url "svg" -}}
         {{- $fallbackURL = $url -}}
+        {{- $isVector = true -}}
     {{- else -}}
         {{- $img := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
         {{- if $img -}}
@@ -200,6 +222,7 @@
     {{- if $caption -}}
         <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
     {{ end }}
+    {{- if not $isVector -}}
         <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
             <img class="img-fluid {{ $innerClass }}"
                 {{ with $imgset -}}
@@ -209,6 +232,13 @@
                 src="{{ $fallbackURL }}"
                 alt="{{ $title }}">
         </div>
+    {{ else }}
+        <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
+            <svg class="{{ $innerClass }}">
+                <use href="{{ $fallbackURL }}{{ with $anchor }}#{{ . }}{{ end }}"></use>
+            </svg>
+        </div>
+    {{ end }}
     {{- if $caption -}}
         <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
     </figure>

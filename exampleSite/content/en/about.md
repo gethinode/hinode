@@ -6,29 +6,19 @@ updated: 2023-08-02
 showComments: false
 ---
 
-<p class="text-center"><svg class="img-fluid w-50"><use href="/img/logo_var.svg#logo"></use></svg></p>
+{{< image src="/img/logo_var.svg#logo" class="img-fluid w-50" wrapper="text-center" >}}
 
-<section class="section section-sm mt-5 mb-5">
-    <div class="container-fluid">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-4">
-                {{< icon fab bootstrap fa-2xl >}}
-                <h2 class="h4">Bootstrap framework</h2>
-                <p>Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source Sass files.</p>
-            </div>
-            <div class="col-lg-4">
-                {{< icon fas magnifying-glass fa-2xl >}}
-                <h2 class="h4">Full text search</h2>
-                <p>Search your site with FlexSearch, a full-text search library with zero dependencies.</p>
-            </div>
-            <div class="col-lg-4">
-                {{< icon fas code fa-2xl >}}
-                <h2 class="h4">Development tools</h2>
-                <p>Use Node Package Manager to automate the build process and to keep track of dependencies.</p>
-            </div>
-        </div>
-    </div>
-</section>
+{{< card-group class="text-center border-0" padding="3" >}}
+    {{< card title="Bootstrap framework" icon="fab bootstrap" >}}
+        Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source Sass files.
+    {{< /card >}}
+    {{< card title="Full text search" icon="fas magnifying-glass" >}}
+        Search your site with FlexSearch, a full-text search library with zero dependencies.
+    {{< /card >}}
+    {{< card title="Development tools" icon="fas code" >}}
+        Use Node Package Manager to automate the build process and to keep track of dependencies.
+    {{< /card >}}
+{{< /card-group >}}
 
 Additional features include:
 

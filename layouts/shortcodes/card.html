@@ -1,31 +1,37 @@
 <!-- 
-    Displays a Bootstrap card that links to a page. The shortcode supports the following arguments:
-    "path"          Required path of the page.
+    Displays a Bootstrap card that links to a page. Any inner text is used as description The shortcode supports the
+    following arguments:
+    "path"          Optional path of the page.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
-    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
+    "color"         Optional theme color of the card, either "primary", "secondary", "success", "danger",
                     "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
                     color is specified.
-    "padding":      Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
+    "padding"       Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
+    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3" (default), "4", or "5".
     "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
                     (default), "publication", "tags", and "none".
     "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
                     "publication", "tags", and "none" (default).
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
+    "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+    "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
 -->
 
 {{ $error := false }}
 
 {{ $path := .Get "path" }}
-{{ $page := .Site.GetPage $path }}
-{{ if not $page }}
-    {{ errorf "Invalid or missing value for param 'path': %s" .Position -}}
-    {{ $error = true }}
+{{ $page := .Page }}
+{{ with $path }}
+    {{ $page = $.Site.GetPage $path }}
+    {{ if not $page }}
+        {{ errorf "Invalid or missing value for param 'path': %s" .Position -}}
+        {{ $error = true }}
+    {{ end }}
 {{ end }}
 
-{{ $class := .Get "class" }}
+{{- $class := partial "utilities/GetArg" (dict "page" . "arg" "class" "merge" true) -}}
 
-{{ $color := "" -}}
-{{ with .Get "color" }}{{ $color = . }}{{ end -}}
+{{- $color := partial "utilities/GetArg" (dict "page" . "arg" "color") -}}
 {{ if $color }}
     {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
     {{ if not (in $supportedColors $color) -}}
@@ -34,43 +40,64 @@
     {{ end -}}
 {{ end -}}
 
-{{ $header := "full" }}
-{{ with .Get "header" }}{{ $header = . }}{{ end -}}
+{{- $header := partial "utilities/GetArg" (dict "page" . "arg" "header") | default "full" -}}
 {{ $supportedKeywords := slice "full" "publication" "tags" "none" -}}
 {{ if not (in $supportedKeywords $header) -}}
     {{ errorf "Invalid value for param 'header': %s" .Position -}}
 {{ end -}}
 
-{{ $footer := "none" }}
-{{ with .Get "footer" }}{{ $footer = . }}{{ end -}}
+{{- $footer := partial "utilities/GetArg" (dict "page" . "arg" "footer") | default "none" -}}
 {{ if not (in $supportedKeywords $footer) -}}
     {{ errorf "Invalid value for param 'footer': %s" .Position -}}
 {{ end -}}
 
-{{ $padding := "auto" }}
-{{ with .Get "padding" }}{{ $padding = . }}{{ end -}}
+{{- $padding := partial "utilities/GetArg" (dict "page" . "arg" "padding") | default "auto" -}}
 {{ $supportedPaddings := slice "0" "1" "2" "3" "4" "5" "auto" -}}
 {{ if not (in $supportedPaddings $padding) -}}
     {{ errorf "Invalid value for param 'padding': %s" .Position -}}
     {{ $error = true -}}
 {{ end -}}
 
-{{ $orientation := "stacked" -}}
-{{ with .Get "orientation" }}{{ $orientation = . }}{{ end -}}
+{{- $gutter := partial "utilities/GetArg" (dict "page" . "arg" "gutter") | default "3" -}}
+{{ $supportedGutters:= slice "0" "1" "2" "3" "4" "5" -}}
+{{ if not (in $supportedGutters $gutter) -}}
+    {{ errorf "Invalid value for param 'gutter': %s" .Position -}}
+    {{ $error = true -}}
+{{ end -}}
+
+{{- $orientation := partial "utilities/GetArg" (dict "page" . "arg" "orientation") | default "stacked" -}}
 {{ $supportedOrientations := slice "stacked" "horizontal" "none" -}}
 {{ if not (in $supportedOrientations $orientation) -}}
     {{ errorf "Invalid value for param 'orientation': %s" .Position -}}
     {{ $error = true -}}
 {{ end -}}
 
-{{ $layout := "rich" -}}
-{{ with .Get "layout" }}{{ $layout = . }}{{ end -}}
+{{- $layout := partial "utilities/GetArg" (dict "page" . "arg" "layout") | default "rich" -}}
 {{ $supportedLayouts := slice "rich" "minimal" -}}
 {{ if not (in $supportedLayouts $layout) -}}
     {{ errorf "Invalid value for param 'layout': %s" .Position -}}
     {{ $error = true -}}
 {{ end -}}
 
+{{ $description := .Inner }}
+{{ $title := .Get "title" }}
+{{ $icon := .Get "icon" }}
+{{ $thumbnail := .Get "thumbnail" }}
+
 {{ if not $error -}}
-    {{- partial "assets/card.html" (dict "path" $path "class" $class "color" $color "padding" $padding "header" $header "footer" $footer "orientation" $orientation) -}}
+    <div class="g-{{ $gutter }}">
+        {{- partial "assets/card.html" (dict 
+            "path" $path
+            "title" $title
+            "class" (printf "h-100 %s" $class)
+            "color" $color
+            "padding" $padding
+            "header" $header
+            "footer" $footer
+            "orientation" $orientation
+            "description" $description
+            "icon" $icon
+            "thumbnail" $thumbnail
+        ) -}}
+    </div>
 {{ end -}}
