@@ -80,7 +80,7 @@
     {{ $error = true -}}
 {{ end -}}
 
-{{ $description := .Inner }}
+{{ $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
 {{ $title := .Get "title" }}
 {{ $icon := .Get "icon" }}
 {{ $thumbnail := .Get "thumbnail" }}
