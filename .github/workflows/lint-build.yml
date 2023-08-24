@@ -29,8 +29,9 @@ jobs:
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
 
-    - name: Perform clean install of npm
-      run: npm ci
+    # [24/AUG/23] Adjusted from npm ci to prevent EBADPLATFORM error due to fsevents
+    - name: Install npm
+      run: npm i
 
     - name: Lint the source files
       run: npm run lint      
@@ -57,8 +58,15 @@ jobs:
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
 
+    # [24/AUG/23] Adjusted from npm ci for non-macOS to prevent EBADPLATFORM error due to fsevents
     - name: Perform clean install of npm
-      run: npm ci
+      run:  |
+        if [ "$RUNNER_OS" == "macOS" ]; then
+          npm ci
+        else
+          npm i
+        fi
+      shell: bash
 
     # Cache Hugo cachedir and resourcedir (configured in config/ci/hugo.toml) for each OS
     # No additional cache invalidation is needed, Hugo uses checksums itself
