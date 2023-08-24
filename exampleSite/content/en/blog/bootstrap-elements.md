@@ -111,7 +111,7 @@ As an example, the following shortcode displays a card group of three elements.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card-group class="border-0" color="primary" padding="3" */>}}
+{{</* card-group padding="3" */>}}
     {{</* card title="Bootstrap framework" icon="fab bootstrap" */>}}
         Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source
         Sass files.
