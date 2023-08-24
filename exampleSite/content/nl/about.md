@@ -7,30 +7,20 @@ updated: 2023-08-02
 showComments: false
 ---
 
-<p class="text-center"><svg class="img-fluid w-50"><use href="/img/logo_var.svg#logo"></use></svg></p>
 
-<section class="section section-sm mt-5">
-  <div class="container-fluid">
-    <div class="row justify-content-center text-center">
-    <div class="row justify-content-center text-center">
-      <div class="col-lg-4">
-        {{< icon fab bootstrap fa-2xl >}}
-        <h2 class="h4">Bootstrap raamwerk</h2>
-        <p>Bouw snelle websites geschikt voor mobiele en desktop schermen met Bootstrap 5. Pas de site eenvoudig aan met bronbestanden in Sass.</p>
-      </div>
-      <div class="col-lg-4">
-        {{< icon fas magnifying-glass fa-2xl >}}
-        <h2 class="h4">Volledig doorzoekbaar</h2>
-        <p>Doorzoek je site met FlexSearch, een software bibliotheek zonder afhankelijkheden.</p>
-      </div>
-      <div class="col-lg-4">
-        {{< icon fas code fa-2xl >}}
-        <h2 class="h4">Ontwikkelgereedschap</h2>
-        <p>Gebruik Node Package Manager om het bouwproces inclusief versiebeheer volledig te automatiseren.</p>
-      </div>
-    </div>
-  </div>
-</section>
+{{< image src="/img/logo_var.svg#logo" class="img-fluid w-50" wrapper="text-center" >}}
+
+{{< card-group class="text-center border-0" padding="3" >}}
+    {{< card title="Bootstrap raamwerk" icon="fab bootstrap" >}}
+        Bouw snelle websites geschikt voor mobiele en desktop schermen met Bootstrap 5. Pas de site eenvoudig aan met bronbestanden in Sass.
+    {{< /card >}}
+    {{< card title="Volledig doorzoekbaar" icon="fas magnifying-glass" >}}
+        Doorzoek je site met FlexSearch, een software bibliotheek zonder afhankelijkheden.
+    {{< /card >}}
+    {{< card title="Ontwikkelgereedschap" icon="fas code" >}}
+        Gebruik Node Package Manager om het bouwproces inclusief versiebeheer volledig te automatiseren.
+    {{< /card >}}
+{{< /card-group >}}
 
 Overige functies:
 

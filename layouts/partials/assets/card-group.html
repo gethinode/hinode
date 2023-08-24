@@ -7,6 +7,7 @@
     The shortcode supports the following arguments:
     "page"          Required context of the current page.
     "list"          Required array of pages.
+    "cards"         Optional string of rendered cards.
     "max"           Required maximum number of cards to display.
     "cols"          Required number of columns for the grid, must be a value between 1 and 5.
     "title"         Optional title of the card group.
@@ -30,21 +31,61 @@
 -->
 
 {{- $page := .page -}}
-{{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'page'" -}}
+
+{{- if not (in (slice "*hugolib.pageState" "*hugolib.pageForShortcode") (printf "%T" $page)) -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'page': %T" $page -}}
 {{- end -}}
 
 {{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
-{{ $list := .list }}
-{{- if not (in $supportedTypes (printf "%T" $list)) -}}
-    {{ warnf "Type: %T" $list }}
+{{ $pages := .list }}
+{{- if and $pages (not (in $supportedTypes (printf "%T" $pages))) -}}
+    {{ warnf "Type: %T" $pages }}
     {{- errorf "partial [assets/card-group.html] - Invalid value for param 'list'" -}}
 {{- end -}}
+{{ $cards := .cards }}
+
+{{- $paginate := false -}}
+{{- with .paginate -}}
+    {{- if ne (printf "%T" .) "bool" -}}
+        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'paginate'" -}}
+    {{- end -}}
+    {{- $paginate = . -}}
+{{- end -}}
+
+{{ $paginator := "" }}
+{{ if $paginate }}
+    {{ $paginator = $page.Paginate $pages }}
+    {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
+{{ end }}
+{{ $list := slice }}
+{{ range $index, $element := $pages }}
+    {{ $params := dict }}
+    <!-- regular page -->
+    {{- if $element.RelPermalink -}}
+        {{- $params = merge $params (dict "path" $element.File.Path) -}}
+    <!-- headless page -->
+    {{- else -}}
+        {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
+        {{- $params = merge $params (dict
+            "title" $element.Title
+            "href" $element.RelPermalink
+            "description" (partial "utilities/GetDescription.html" $element)
+            "thumbnail" $thumbnail
+            "icon" $element.Params.icon
+        ) -}}
+    {{- end -}}
+
+    {{- $list = $list | append $params }}
+{{ end }}
 
 {{- $count := len $list -}}
-{{- $max := .max -}}
-{{- if ne (printf "%T" $max) "int" -}}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'max'" -}}
+{{- $max := $count -}}
+{{- with .max }}
+    {{- if ne (printf "%T" .) "int" -}}
+        {{- warnf "partial [assets/card-group.html] - Invalid value for param 'max': %s" . -}}
+    {{- else -}}
+        {{- $max = . -}}
+    {{- end -}}
 {{- end -}}
 {{- $max = math.Min $max $count -}}
 
@@ -58,13 +99,6 @@
 {{- else if eq $cols 4 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" -}}
 {{- else if eq $cols 5 }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ end -}}
 
-{{- $paginate := false -}}
-{{- with .paginate -}}
-    {{- if ne (printf "%T" .) "bool" -}}
-        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'paginate'" -}}
-    {{- end -}}
-    {{- $paginate = . -}}
-{{- end -}}
 {{- if not $paginate -}}
     {{- $list = first $max $list -}}
 {{- end -}}
@@ -89,13 +123,7 @@
 
 {{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
-<div class="container-fluid p-4 px-xxl-0">
-    {{ $paginator := "" }}
-    {{ if $paginate }}
-        {{ $paginator = $page.Paginate $list }}
-        {{ $list = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
-    {{ end }}
-
+<div class="container-fluid p-4 px-xxl-0 ">
     <div class="row {{ $colGrid }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
@@ -106,19 +134,7 @@
                 "footer" $footer
                 "orientation" $orientation
             ) -}}
-
-            {{- if $element.RelPermalink -}}
-                {{- $params = merge $params (dict "path" $element.File.Path) -}}
-            {{- else -}}
-                {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
-                {{- $params = merge $params (dict
-                    "title" $element.Title
-                    "href" $element.RelPermalink
-                    "description" (partial "utilities/GetDescription.html" $element)
-                    "thumbnail" $thumbnail
-                    "icon" $element.Params.icon
-                ) -}}
-            {{- end -}}
+            {{- $params = merge $params $element }}
 
             <div class="col pt-3 pb-3">
                 {{- partial "assets/card.html" $params -}}
@@ -129,6 +145,7 @@
                 </div>
             {{- end -}}
         {{- end -}}
+        {{- print $cards | safeHTML }}
     </div>
 
     {{ if $paginate }}

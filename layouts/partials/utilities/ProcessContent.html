@@ -1,0 +1,13 @@
+<!-- 
+    Purges any HTML comments from raw content, if applicable. The partial supports the following arguments:
+    "page"          Required page context, used to render shortcodes properly.
+    "raw"           Raw page content, e.g. .Page.RawContent.
+-->
+
+{{ $page := .page -}}
+{{ $raw := .raw -}}
+{{- if site.Params.debugging.purgeHTMLComments -}}
+    {{- $raw = replaceRE "<!--(.|\n)*?-->" "" $raw -}}
+{{- end -}}
+{{ $content := $raw | $page.RenderString | safeHTML }}
+{{ return $content }}
