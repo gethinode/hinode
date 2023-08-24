@@ -87,7 +87,7 @@
     "stylelint-config-standard-scss": "^10.0.0"
   },
   "optionalDependencies": {
-    "fsevents": "^2.3.3"
+    "fsevents": "*"
   },
   "hugo-bin": {
     "buildTags": "extended"
