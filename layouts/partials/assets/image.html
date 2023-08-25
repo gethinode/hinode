@@ -222,8 +222,8 @@
     {{- if $caption -}}
         <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
     {{ end }}
-    {{- if not $isVector -}}
-        <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
+    <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
+        {{- if not $anchor -}}
             <img class="img-fluid {{ $innerClass }}"
                 {{ with $imgset -}}
                 srcset="{{ . }}"
@@ -231,14 +231,12 @@
                 {{- end }}
                 src="{{ $fallbackURL }}"
                 alt="{{ $title }}">
-        </div>
-    {{ else }}
-        <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
+        {{- else }}
             <svg class="{{ $innerClass }}">
-                <use href="{{ $fallbackURL }}{{ with $anchor }}#{{ . }}{{ end }}"></use>
+                <use href="{{ $fallbackURL }}#{{ $anchor }}"></use>
             </svg>
-        </div>
-    {{ end }}
+        {{ end }}
+    </div>
     {{- if $caption -}}
         <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
     </figure>
