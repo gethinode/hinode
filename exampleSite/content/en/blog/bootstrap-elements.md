@@ -237,6 +237,22 @@ As an example, the following shortcode displays an image with rounded corners an
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+As an example, the following shortcode displays a regular vector image.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* image src="/img/logo_icon.svg" class="col-sm-6 col-lg-4" wrapper="text-center" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+As an example, the following shortcode displays a vector image with a symbol reference.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* image src="/img/logo_var.svg#logo" class="col-sm-6 col-lg-4" wrapper="text-center" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Link
 
 As an example, the following shortcodes render links in different formats.
