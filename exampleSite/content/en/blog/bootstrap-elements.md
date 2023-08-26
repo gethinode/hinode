@@ -355,11 +355,11 @@ As an example, the following shortcode displays a button that, when clicked, tri
 {{</* /button */>}}
 
 {{</* toast id="toast-example-1" header="First title" */>}}
-    This is the first toast message.
+    This is the first toast message. It supports `markdown.`
 {{</* /toast */>}}
 
 {{</* toast id="toast-example-2" header="Second title" */>}}
-    This is the second toast message.
+    This is the second toast message. It supports `markdown.`
 {{</* /toast */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
