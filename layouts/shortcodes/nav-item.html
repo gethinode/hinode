@@ -5,50 +5,66 @@
     "show"          Optional flag to indicate an item should be shown.
 -->
 
-{{- $id := .Ordinal -}}
-{{- $parent := printf "nav-%d" .Parent.Ordinal -}}
-{{- with (.Parent.Get "id") -}}
-    {{- $parent = . -}}
-{{- end -}}
+{{ $current := "" }}
+{{ $error := false -}}
 
-{{- $fade := false -}}
-{{- if eq (.Parent.Get "fade") "true" -}}
-    {{- $fade = true -}}
-{{- end -}}
-
-{{- $header := .Get "header" -}}
-{{- if not $header -}}
-    {{- if .Parent -}}
-        {{- errorf "Missing value for param 'header': %s" .Parent.Position -}}
-    {{- else -}}
-        {{- errorf "Missing value for param 'header': %s" .Position -}}
+{{ if not .Parent }}
+    {{ errorf "The nav-item shortcode should be contained within a nav shortcode: %s" .Position }}
+{{ else }}
+    {{- $id := .Ordinal -}}
+    {{- $parent := printf "nav-%d" .Parent.Ordinal -}}
+    {{- with (.Parent.Get "id") -}}
+        {{- $parent = . -}}
     {{- end -}}
-{{- end -}}
 
-{{- $class := .Get "class" -}}
-{{- $body := trim .Inner " \r\n" -}}
+    {{- $fade := false -}}
+    {{- if eq (.Parent.Get "fade") "true" -}}
+        {{- $fade = true -}}
+    {{- end -}}
 
-{{- $supportedFlags := slice "true" "false" -}}
-{{- $showParam := "false" -}}
-{{- $show := false -}}
-{{- with .Get "show" }}{{ $showParam = . }}{{ end -}}
-{{- if in $supportedFlags $showParam -}}
-    {{- if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
-{{- else -}}
-    {{- errorf "Invalid value for param 'show': %s" $showParam -}}
-{{- end -}}
+    {{- $header := .Get "header" -}}
+    {{- if not $header -}}
+        {{- errorf "Missing value for param 'header': %s" .Parent.Position -}}
+    {{- end -}}
 
-{{- $disabledParam := "false" -}}
-{{- $disabled := false -}}
-{{- with .Get "disabled" }}{{ $disabledParam = . }}{{ end -}}
-{{- if in $supportedFlags $disabledParam -}}
-    {{- if eq $disabledParam "true" }}{{ $disabled = true }}{{ else }}{{ $disabled = false }}{{ end -}}
-{{- else -}}
-    {{- errorf "Invalid value for param 'disabled': %s" $disabledParam -}}
-{{- end -}}
+    {{- $class := .Get "class" -}}
+    {{- $body := trim .Inner " \r\n" | .Page.RenderString -}}
 
-<div class="tab-pane{{ if $show }} active {{ if $fade}}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}" id="{{ $parent }}-{{ $id }}" 
-    role="tabpanel" aria-labelledby="{{ $parent }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
-    data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
-    {{ $body | .Page.RenderString | safeHTML }}
-</div>
+    {{- $supportedFlags := slice "true" "false" -}}
+    {{- $showParam := "false" -}}
+    {{- $show := false -}}
+    {{- with .Get "show" }}{{ $showParam = . }}{{ end -}}
+    {{- if in $supportedFlags $showParam -}}
+        {{- if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
+    {{- else -}}
+        {{- errorf "Invalid value for param 'show': %s" $showParam -}}
+    {{- end -}}
+
+    {{- $disabledParam := "false" -}}
+    {{- $disabled := false -}}
+    {{- with .Get "disabled" }}{{ $disabledParam = . }}{{ end -}}
+    {{- if in $supportedFlags $disabledParam -}}
+        {{- if eq $disabledParam "true" }}{{ $disabled = true }}{{ else }}{{ $disabled = false }}{{ end -}}
+    {{- else -}}
+        {{- errorf "Invalid value for param 'disabled': %s" $disabledParam -}}
+    {{- end -}}
+
+    {{ $output := partial "assets/nav-item" (dict 
+        "id" $id
+        "parentID" $parent
+        "fade" $fade
+        "header" $header
+        "class" $class
+        "body" $body
+        "show" $show
+        "disabled" $disabled
+        )
+    }}
+
+    {{ $current := .Parent.Scratch.Get "inner" }}
+    {{ if $current }}
+        {{ .Parent.Scratch.Set "inner" (print $current $output) }}
+    {{ else }}
+        {{ .Parent.Scratch.Set "inner" $output }}
+    {{ end }}
+{{ end }}
