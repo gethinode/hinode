@@ -19,5 +19,5 @@
 {{- if not $title }}
     {{ errorf "Missing title: %s" .Position -}}
 {{ else -}}
-    <span class="badge bg-{{ $color }}{{ with $class }} {{ . }}{{ end }}">{{ $title | plainify }}</span>
+    <span class="badge text-bg-{{ $color }}{{ with $class }} {{ . }}{{ end }}">{{ $title | plainify }}</span>
 {{ end -}}
