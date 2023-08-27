@@ -23,8 +23,9 @@ jobs:
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
 
-    - name: Perform clean install of npm
-      run: npm ci
+    # [26/AUG/23] Adjusted from npm ci to prevent EBADPLATFORM error due to fsevents
+    - name: Install npm
+      run: npm i
 
     - name: Update Hugo module dependencies
       id: mod-updates
