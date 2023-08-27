@@ -165,7 +165,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
 {{</* /button */>}}
 
 {{</* collapse id="collapse-1" class="p-3 border rounded bg-primary-subtle" */>}}
-    Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but
+    Some placeholder content for the collapse component. This panel is *hidden by default* but
     revealed when the user activates the relevant trigger.
 {{</* /collapse */>}}
 {{< /example >}}
