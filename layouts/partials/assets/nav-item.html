@@ -1,0 +1,29 @@
+<!-- 
+    Defines an individual nav item. The shortcode supports the following arguments:
+    
+    "id"            Required unique ID of the nav-item.
+    "parentID"      Required ID of the parent (e.g. nav control).
+    "class"         Optional class attributes to be added to the nav-item.
+    "fade"          Optional flag to make the tab pane fade in.
+    "header"        Required header of the nav item.
+    "class"         Optional class attribute of the nav item.
+    "body"          The body content of the nav-item, supports Markdown and HTML (if enabled).
+    "show"          Optional flag to indicate the item should be shown as expanded (only one can be shown at a time).
+    "disabled"      Optional flag to indicate the item should be in a disabled state.
+-->
+
+{{- $id := .id -}}
+{{- $parentID := .parentID -}}
+{{- $class := .class -}}
+{{- $fade := .fade -}}
+{{- $header := .header -}}
+{{- $class := .class -}}
+{{- $body := .body -}}
+{{- $show := .show -}}
+{{- $disabled := .disabled -}}
+
+<div class="tab-pane{{ if $show }} active {{ if $fade }}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}{{ with $class }} {{ . }}{{ end }}" id="{{ $parentID }}-{{ $id }}" 
+    role="tabpanel" aria-labelledby="{{ $parentID }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
+    data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
+    {{ $body }}
+</div>

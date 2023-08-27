@@ -32,7 +32,7 @@
 {{ $type := "button" -}}
 
 {{- $icon := .Get "icon" }}
-{{ $title := trim .Inner " \r\n" -}}
+{{ $title := trim .Inner " \r\n" | .Page.RenderString -}}
 {{ if not (or $title $icon) -}}
     {{ errorf "Missing icon or inner element text: %s" .Position -}}
     {{ $error = true }}
@@ -113,7 +113,7 @@
 {{- $tab := .Get "tab" | default site.Params.main.externalLinks.tab -}}
 
 {{ if not $error }}
-    {{- partial "assets/button.html" (dict 
+    {{- $output := partial "assets/button.html" (dict 
         "type" $type
         "title" $title
         "size" $size
@@ -134,5 +134,16 @@
         "cue" $cue
         "tab" $tab
         "toast" $toast)
-    -}} 
+    -}}
+
+    {{- if .Parent -}}
+        {{ $current := .Parent.Scratch.Get "inner" }}
+        {{ if $current }}
+            {{ .Parent.Scratch.Set "inner" (print $current $output) }}
+        {{ else }}
+            {{ .Parent.Scratch.Set "inner" $output }}
+        {{ end }}
+    {{- else -}}
+        {{ $output | safeHTML }}
+    {{- end -}}
 {{ end }}

@@ -3,6 +3,13 @@
     "aria-label"    Optional assistive label for the button group.
 -->
 
+{{ $inner := .Scratch.Get "inner" }}
+{{ $input := trim .Inner " \r\n" }}
+{{ if $input }}
+    {{ $input = replace $input "\n" "\n  " }}
+    {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input }}
+{{ end }}
+
 <div class="btn-group" role="group" {{ with .Get "aria-label" }}aria-label="{{ . }}"{{ end }}>
-    {{ .Inner }}
+    {{ $inner | safeHTML }}
 </div>

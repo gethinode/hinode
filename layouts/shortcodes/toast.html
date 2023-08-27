@@ -9,7 +9,7 @@
 {{- $id := printf "toast-message-%d" .Ordinal -}}
 {{- with .Get "id" }}{{ $id = . }}{{ end -}}
 {{ $header := .Get "header" -}}
-{{ $message := trim .Inner " \r\n" -}}
+{{ $message := trim .Inner " \r\n" | .Page.RenderString -}}
 
 {{- $class := .Get "class" -}}
 

@@ -38,7 +38,10 @@
         }
 
         .bg,
-        .chroma {
+        .chroma,
+        .chroma .ge,
+        .chroma .gl,
+        .chroma .gs {
             color: #c9d1d9 if($enable-important-utilities, !important, null);
         }
     }

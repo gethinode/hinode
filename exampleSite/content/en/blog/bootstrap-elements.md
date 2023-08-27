@@ -22,7 +22,8 @@ As an example, the following shortcode displays an accordion with three elements
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
   {{</* accordion-item header="Accordion Item #1" show="true" */>}}
-    This is the first item's accordion body. It supports HTML content, if enabled in the goldmark renderer. The item is shown by adding the value `show` to the `class` argument.
+    This is the first item's accordion body. It supports HTML content, if enabled in the goldmark
+    renderer. The item is shown by adding the value `show` to the `class` argument.
   {{</* /accordion-item */>}}
   {{</* accordion-item header="Accordion Item #2" */>}}
     This is the second item's accordion body.
@@ -48,16 +49,29 @@ As an example, the following shortcode displays a simple alert.
 
 ## Badge
 
-Use HTML code to display a badge for a heading. See the Bootstrap [documentation]({{< param "links.bs_badge_heading" >}}) for more options.
+Use the badge shortcode to display a badge for a heading.
 
+<!-- markdownlint-disable MD037 -->
 {{< example >}}
-<h1>Example heading of size one <span class="badge bg-secondary">New</span></h1>
-<h2>Example heading of size two <span class="badge bg-secondary">New</span></h2>
-<h3>Example heading of size three <span class="badge bg-secondary">New</span></h3>
-<h4>Example heading of size four <span class="badge bg-secondary">New</span></h4>
-<h5>Example heading of size five <span class="badge bg-secondary">New</span></h5>
-<h6>Example heading of size six <span class="badge bg-secondary">New</span></h6>
+Heading 1 {{</* badge title="New" */>}}
+{.h1}
+
+Heading 2 {{</* badge title="New" */>}}
+{.h2}
+
+Heading 3 {{</* badge title="New" */>}}
+{.h3}
+
+Heading 4 {{</* badge title="New" */>}}
+{.h4}
+
+Heading 5 {{</* badge title="New" */>}}
+{.h5}
+
+Heading 6 {{</* badge title="New" */>}}
+{.h6}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Breadcrumb
 
@@ -151,7 +165,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
 {{</* /button */>}}
 
 {{</* collapse id="collapse-1" class="p-3 border rounded bg-primary-subtle" */>}}
-    Some placeholder content for the collapse component. This panel is <i>hidden by default</i> but
+    Some placeholder content for the collapse component. This panel is *hidden by default* but
     revealed when the user activates the relevant trigger.
 {{</* /collapse */>}}
 {{< /example >}}
@@ -237,6 +251,22 @@ As an example, the following shortcode displays an image with rounded corners an
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+As an example, the following shortcode displays a regular vector image.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* image src="/img/logo_icon.svg" class="col-sm-6 col-lg-4" wrapper="text-center" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+As an example, the following shortcode displays a vector image with a symbol reference.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* image src="/img/logo_var.svg#logo" class="col-sm-6 col-lg-4" wrapper="text-center" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Link
 
 As an example, the following shortcodes render links in different formats.
@@ -270,7 +300,8 @@ As an example, the following shortcode displays a tab group with vertically alig
 {{< example lang="hugo" >}}
   {{</* nav type="pills" vertical="true" */>}}
     {{</* nav-item header="Nav Item #1" show="true" */>}}
-      This is the first item's nav body. It supports HTML content, if enabled in the goldmark renderer. The item is shown by adding the value `show` to the `class` argument.
+      This is the first item's nav body. It supports HTML content, if enabled in the goldmark
+      renderer. The item is shown by adding the value `show` to the `class` argument.
     {{</* /nav-item */>}}
     {{</* nav-item header="Nav Item #2" */>}}
       This is the second item's nav body.
@@ -339,11 +370,11 @@ As an example, the following shortcode displays a button that, when clicked, tri
 {{</* /button */>}}
 
 {{</* toast id="toast-example-1" header="First title" */>}}
-    This is the first toast message.
+    This is the first toast message. It supports `markdown.`
 {{</* /toast */>}}
 
 {{</* toast id="toast-example-2" header="Second title" */>}}
-    This is the second toast message.
+    This is the second toast message. It supports `markdown.`
 {{</* /toast */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
@@ -354,6 +385,6 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Tooltip" href="#!" */>}}Tooltip{{</* /tooltip */>}} demonstration
+{{</* tooltip color="primary" title="Tooltip caption" href="#!" */>}}Tooltip{{</* /tooltip */>}} demonstration
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

@@ -1,0 +1,23 @@
+<!-- 
+    Adds an inline badge. The shortcode supports the following arguments:
+    "title"         Required title of the badge.
+    "class"         Optional class attributes of the badge element.
+    "color"         Optional theme color of the element, either "primary", "secondary" (default), "success",
+                    "danger", "warning", "info", "light", "dark", "white", or "black".
+-->
+
+{{- $error := false -}}
+{{- $title := .Get "title" -}}
+{{- $class := .Get "class" -}}
+{{- $color := "secondary" -}}
+{{- with .Get "color" }}{{ $color = . }}{{ end -}}
+{{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
+{{- if not (in $supportedColors $color) -}}
+    {{- errorf "Invalid value for param 'color': %s" .Position -}}
+{{- end -}}
+
+{{- if not $title }}
+    {{ errorf "Missing title: %s" .Position -}}
+{{ else -}}
+    <span class="badge text-bg-{{ $color }}{{ with $class }} {{ . }}{{ end }}">{{ $title | plainify }}</span>
+{{ end -}}

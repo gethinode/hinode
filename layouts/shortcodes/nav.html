@@ -41,7 +41,13 @@
     {{- errorf "Tabs do not support vertical layout" -}}
 {{- end -}}
 
-{{- $inner := .Inner -}}
+{{ $inner := .Scratch.Get "inner" }}
+{{ $input := trim .Inner " \r\n" }}
+{{ if $input }}
+    {{ $input = replace $input "\n" "\n  " }}
+    {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input }}
+{{ end }}
+
 {{- $items := findRE "data-header=\"(.+?)\"" $inner -}}
 {{- $showVal := findRE "data-show-id=\"(.+?)\"" $inner -}}
 {{- $showID := -1 -}}
@@ -71,7 +77,7 @@
 
 {{- if $hasContent -}}
     <div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-        {{- $inner -}}
+        {{- $inner | safeHTML -}}
     </div>
 {{- end -}}
 {{ if $vertical }}</div>{{ end }}
