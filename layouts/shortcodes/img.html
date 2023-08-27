@@ -9,35 +9,32 @@
     "caption":      Optional carousel slide caption.
 -->
 
-{{- $src := .Get "src" -}}
-{{ $caption := .Get "caption" -}}
-{{- $ratio := "" -}}
-{{ with .Parent -}}
-    {{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
+{{ if not .Parent }}
+    {{ errorf "The img shortcode should be contained within a carousel shortcode: %s" .Position }}
 {{ else }}
-    {{ with .Get "ratio" }}{{ $ratio = . }}{{ end -}}
-{{ end -}}
-{{- $portrait := false -}}
-{{ with .Parent -}}
-    {{ with .Get "portrait" }}{{ $portrait = . }}{{ end -}}
-{{ else }}
-    {{ with .Get "portrait" }}{{ $portrait = . }}{{ end -}}
-{{ end -}}
+    {{- $src := .Get "src" -}}
+    {{- if $src -}}
+        {{- $caption := .Get "caption" -}}
+        {{- $ratio := partial "utilities/GetArg" (dict "page" . "arg" "ratio") -}}
+        {{- $portrait := partial "utilities/GetArg" (dict "page" . "arg" "portrait") | default false -}}
+        {{- $active := eq .Ordinal 0 -}}
+        {{- $output := partial "assets/carousel-item" (dict 
+            "page" .Page
+            "active" $active
+            "src" $src
+            "caption" $caption
+            "ratio" $ratio
+            "portrait" $portrait                
+        ) }}
 
-{{- if $src -}}
-    <div class="carousel-item {{ if eq .Ordinal 0 }}active{{ end }}">
-        {{ partial "assets/image.html" (dict "url" $src "ratio" $ratio "page" .Page "innerClass" "d-block w-100" "portrait" $portrait) }}
-        <div class="carousel-caption gradient"></div>
-        {{ with $caption }}
-            <div class="carousel-caption d-none d-md-block">
-                <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>
-            </div>
+        {{ $current := .Parent.Scratch.Get "inner" }}
+        {{ if $current }}
+            {{ .Parent.Scratch.Set "inner" (print $current $output) }}
+        {{ else }}
+            {{ .Parent.Scratch.Set "inner" $output }}
         {{ end }}
-    </div>
-{{ else -}}
-    {{ with .Parent -}}
-        {{ errorf "Missing value for param 'src': %s" .Position -}}
+    
     {{ else -}}
-        {{ errorf "Missing value for param 'src': %s" .Position -}}
+        {{ errorf "Missing value for param 'src': %s" .Parent.Position -}}
     {{ end -}}
 {{ end -}}

@@ -1,0 +1,16 @@
+{{- $page := .page -}}
+{{- $active := .active -}}
+{{- $src := .src -}}
+{{- $caption := .caption -}}
+{{- $ratio := .ratio -}}
+{{- $portrait := .portrait -}}
+
+<div class="carousel-item{{ if $active }} active{{ end }}">
+    {{ partial "assets/image.html" (dict "url" $src "ratio" $ratio "page" $page "innerClass" "d-block w-100" "portrait" $portrait) }}
+    <div class="carousel-caption gradient"></div>
+    {{ with $caption }}
+        <div class="carousel-caption d-none d-md-block">
+            <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>
+        </div>
+    {{ end }}
+</div>
