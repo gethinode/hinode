@@ -18,6 +18,6 @@
 
 <p>
     <div class="collapse" id="{{ $id }}">
-        <div class="{{ $class }}">{{ $body | safeHTML }}</div>
+        <div class="{{ $class }}">{{ $body | .Page.RenderString }}</div>
     </div>
 </p>
