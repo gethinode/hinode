@@ -347,7 +347,7 @@ Loading...
 
 ## Timeline
 
-As an example, the following shortcode displays a timeline with the file `data/timeline-en.yml` as data.
+As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
