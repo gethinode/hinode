@@ -49,15 +49,26 @@ As an example, the following shortcode displays a simple alert.
 
 ## Badge
 
-Use HTML code to display a badge for a heading. See the Bootstrap [documentation]({{< param "links.bs_badge_heading" >}}) for more options.
+Use the badge shortcode to display a badge for a heading.
 
 {{< example >}}
-<h1>Example heading of size one <span class="badge bg-secondary">New</span></h1>
-<h2>Example heading of size two <span class="badge bg-secondary">New</span></h2>
-<h3>Example heading of size three <span class="badge bg-secondary">New</span></h3>
-<h4>Example heading of size four <span class="badge bg-secondary">New</span></h4>
-<h5>Example heading of size five <span class="badge bg-secondary">New</span></h5>
-<h6>Example heading of size six <span class="badge bg-secondary">New</span></h6>
+Heading 1 {{</* badge title="New" */>}}
+{.h1}
+
+Heading 2 {{</* badge title="New" */>}}
+{.h2}
+
+Heading 3 {{</* badge title="New" */>}}
+{.h3}
+
+Heading 4 {{</* badge title="New" */>}}
+{.h4}
+
+Heading 5 {{</* badge title="New" */>}}
+{.h5}
+
+Heading 6 {{</* badge title="New" */>}}
+{.h6}
 {{< /example >}}
 
 ## Breadcrumb
