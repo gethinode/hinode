@@ -1,5 +1,6 @@
 # Hugo Theme Hinode
 
+<!-- markdownlint-disable MD033 -->
 <!-- Tagline -->
 <p align="center">
     <b>A clean documentation and blog theme for your Hugo site based on Bootstrap 5</b>
@@ -47,6 +48,7 @@
   <a href="#donate">Donate</a> •
   <a href="#license">License</a>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## About
 
@@ -111,7 +113,9 @@ Hinode is inspired by the following themes:
 
 ## Donate
 
+<!-- markdownlint-disable MD033 -->
 <a href="https://www.buymeacoffee.com/markdumay" target="_blank" rel="noopener noreferrer"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;"></a>
+<!-- markdownlint-enable MD033 -->
 
 ## License
 
