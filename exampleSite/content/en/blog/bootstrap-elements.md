@@ -51,6 +51,7 @@ As an example, the following shortcode displays a simple alert.
 
 Use the badge shortcode to display a badge for a heading.
 
+<!-- markdownlint-disable MD037 -->
 {{< example >}}
 Heading 1 {{</* badge title="New" */>}}
 {.h1}
@@ -70,6 +71,7 @@ Heading 5 {{</* badge title="New" */>}}
 Heading 6 {{</* badge title="New" */>}}
 {.h6}
 {{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Breadcrumb
 
