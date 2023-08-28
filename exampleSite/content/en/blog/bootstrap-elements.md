@@ -20,7 +20,7 @@ As an example, the following shortcode displays the full text of an abbreviation
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* abbr html */>}}
+{{</* abbr "CI/CD" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

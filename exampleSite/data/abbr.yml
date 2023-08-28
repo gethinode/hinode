@@ -6,3 +6,6 @@
 
 - id: svg
   long: "Scalable Vector Graphics"
+
+- id: ci/cd
+  long: "Continous Integration/Continuous Deployment"
