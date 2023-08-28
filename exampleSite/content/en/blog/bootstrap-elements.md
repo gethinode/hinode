@@ -21,7 +21,6 @@ As an example, the following shortcode displays the full text of an abbreviation
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* abbr html */>}}
-{{</* abbr key="HTML1" data="abbr" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
