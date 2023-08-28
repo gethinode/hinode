@@ -14,6 +14,17 @@ thumbnail:
 
 Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
 
+## Abbr
+
+As an example, the following shortcode displays the full text of an abbreviation on hover.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* abbr html */>}}
+{{</* abbr key="HTML1" data="abbr" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Accordion
 
 As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
