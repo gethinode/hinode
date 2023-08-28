@@ -17,6 +17,7 @@
                     "publication", "tags", and "none" (default).
     "description"   Optional description of the card.
     "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+    "alt"           Optional alternate text for the thumbnail, uses "title" by default.
     "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
     "orientation"   Optional placecement of the thumbnail or icon, either "stacked" (default), "horizontal",
                     "horizontal-sm" or "none".
@@ -82,6 +83,7 @@
 {{- end }}
 
 {{- $title := .title -}}
+{{- $alt := .alt -}}
 {{- $href := .href -}}
 {{- $description := .description -}}
 {{- $thumbnail := .thumbnail -}}
@@ -160,7 +162,7 @@
 {{- else -}}
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{- if $thumbnail -}}
-            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" $title) -}}
+            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" (or $alt $title)) -}}
         {{- else if $icon -}}
             <div class="p-{{ $padding }}">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}

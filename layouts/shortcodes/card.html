@@ -15,6 +15,7 @@
                     "publication", "tags", and "none" (default).
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
     "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+    "alt"           Optional alternate text for the thumbnail, uses "title" by default.
     "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
 -->
 
@@ -82,6 +83,7 @@
 
 {{ $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
 {{ $title := .Get "title" }}
+{{ $alt := .Get "alt" }}
 {{ $icon := .Get "icon" }}
 {{ $thumbnail := .Get "thumbnail" }}
 
@@ -99,6 +101,7 @@
             "description" $description
             "icon" $icon
             "thumbnail" $thumbnail
+            "alt" $alt
         ) -}}
     </div>
 {{ end -}}
