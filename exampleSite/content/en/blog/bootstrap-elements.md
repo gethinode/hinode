@@ -14,6 +14,16 @@ thumbnail:
 
 Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
 
+## Abbr
+
+As an example, the following shortcode displays the full text of an abbreviation on hover.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* abbr "CI/CD" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Accordion
 
 As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
@@ -347,11 +357,11 @@ Loading...
 
 ## Timeline
 
-As an example, the following shortcode displays a timeline with the file `data/timeline-en.yml` as data.
+As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline-en" background="dark" */>}}
+{{</* timeline data="timeline" background="dark" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
