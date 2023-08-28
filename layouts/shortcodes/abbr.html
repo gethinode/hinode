@@ -1,0 +1,64 @@
+<!-- 
+    Creates an HTML element that shows the long form of an abbrevitation. The abbreviation data is centrally stored in a
+    data file. By default, the shortcode uses "abbr.yaml" with translation support.
+    
+    The data file is expected to store key-value pairs, where "id" is the lower-case abbrevation and "long" its long
+    form. The following example illustrates this using YML:
+
+    - id: css
+      long: "Cascading Style Sheets"
+
+    The shortcode supports the following arguments:
+    "key"           Required case-insensitive key of the abbreviation. In shorthand notation, this is the first (and
+                    only) matched argument.
+    "data"          Optional filename of the abbrevation input. It defaults to "abbr.yaml" with translation support.
+                    You can omit the file extension. The file should reside in the "data" folder. The data supports
+                    language extensions. For example, "abbr.en.yaml" refers to the English translation of the
+                    abbrevation data. The filename "abbr.yaml" is used when no suitable translation is found.
+-->
+
+{{ $error := false }}
+
+{{ $key := "" }}
+{{- if .IsNamedParams }}{{ $key = .Get "key" }}{{ else }}{{ $key = .Get 0 }}{{ end }}
+
+{{ if not $key -}}
+    {{ errorf "Missing param 'key': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{- $data := .Get "data" | default "abbr" -}}
+{{ if not $data -}}
+    {{ errorf "Missing param 'data': %s" .Position -}}
+    {{ $error = true }}
+{{ end -}}
+
+{{ if not $error }}
+    {{/* Try language-specific file first */}}
+    {{ $path := path.Join (path.Dir $data) (printf "%s.%s" (path.BaseName $data) .Page.Language.Lang) (path.Ext $data) }}
+    {{ $entries := index site.Data $path }}
+    {{/* Use exact provided path as backup */}}
+    {{ if not $entries -}}
+        {{ $entries = index site.Data $data }}
+    {{ end }}
+    {{ if not $entries -}}
+        {{ errorf "Invalid abbrevation data '%s': %s" $data .Position -}}
+        {{ $error = true }}
+    {{ end -}}
+
+    {{ $title := "" }}
+    {{ if not $error }}
+        {{ $elements := (where $entries "id" (lower $key)) }}
+        {{ if gt (len $elements) 0 }}
+            {{ $title = index (index $elements 0) "long" }}
+        {{ end -}}
+        {{ if not $title -}}
+            {{ errorf "Cannot find value for '%s': %s" $key .Position -}}
+            {{ $error = true }}
+        {{ end -}}
+    {{ end }}
+
+    {{ if not $error }}
+        <abbr title="{{ $title }}">{{ $key }}</abbr>
+    {{ end }}
+{{ end }}

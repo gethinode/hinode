@@ -1,0 +1,8 @@
+- id: css
+  long: "Cascading Style Sheets"
+
+- id: html
+  long: "HyperText Markup Language"
+
+- id: svg
+  long: "Scalable Vector Graphics"
