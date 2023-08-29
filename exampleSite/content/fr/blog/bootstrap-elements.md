@@ -380,7 +380,7 @@ Chargement...
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-## Tooltip
+## Infobulle
 
 À titre d'exemple, le shortcode suivant affiche une infobulle pour un lien hypertexte coloré.
 
