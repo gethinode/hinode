@@ -110,11 +110,11 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 ## Carte
 
-À titre d'exemple, le shortcode suivant affiche une carte empilée qui renvoie à la page [à propos]({{< ref "a-propos" >}}). Elle inclut un en-tête personnalisé.
+À titre d'exemple, le shortcode suivant affiche une carte empilée qui renvoie à la page [à propos]({{< ref "about" >}}). Elle inclut un en-tête personnalisé.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="a-propos" padding="3" class="col-6 mx-auto" color="body-tertiary" header="publication" footer="none" /*/>}}
+{{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary" header="publication" footer="none" /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
