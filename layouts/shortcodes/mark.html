@@ -1,0 +1,23 @@
+<!-- 
+    Highlights text by applying a background color. The shortcode supports the following arguments:
+    "color":        Optional theme color of the highlight, either "primary", "secondary", "success", "danger",
+                    "warning", "info", "light", "dark", "white" or "black". By default, the highlight uses the color of
+                    the HTML mark function.
+    "class":        Optional class attribute of the highlight element.
+-->
+
+{{- $error := false -}}
+{{ $color := .Get "color" -}}
+{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
+{{ if and $color (not (in $supportedColors $color)) -}}
+    {{ errorf "Invalid value for param 'color': %s" .Position -}}
+    {{ $error = true -}}
+{{ end -}}
+
+{{- $class := .Get "class" -}}
+
+{{- if $color }}{{ $class = printf "%s text-bg-%s" $class $color }}{{ end -}}
+
+{{- if not $error -}}
+    <mark{{ with $class }} class="{{ . }}"{{ end }}>{{ trim .Inner " \r\n" | .Page.RenderString -}}</mark>
+{{- end -}}
