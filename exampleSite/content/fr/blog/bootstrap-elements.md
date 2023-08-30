@@ -1,6 +1,7 @@
 ---
 author: Mark Dumay
 title: Éléments Bootstrap
+slug: elements-bootstrap
 date: 2023-08-12
 description: Utilisez des shortcodes pour ajouter facilement des éléments Bootstrap courants.
 tags: ["bootstrap", "shortcode"]
@@ -285,8 +286,8 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 - {{</* link url="/projects/another-project" /*/>}}
 - {{</* link url="../projects/another-project" case=false /*/>}}
 - {{</* link "/about/" /*/>}}
-- {{</* link "/fr/about/" /*/>}}
-- {{</* link "/fr/about" >}}About (French){{< /link */>}}
+- {{</* link "/en/about/" /*/>}}
+- {{</* link "/en/about" >}}About (Anglais){{< /link */>}}
 - {{</* link "#image" /*/>}}
 - {{</* link "components/#map" /*/>}}
 
