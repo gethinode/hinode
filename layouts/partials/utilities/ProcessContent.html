@@ -9,5 +9,5 @@
 {{- if site.Params.debugging.purgeHTMLComments -}}
     {{- $raw = replaceRE "<!--(.|\n)*?-->" "" $raw -}}
 {{- end -}}
-{{ $content := $raw | $page.RenderString | safeHTML }}
+{{ $content := emojify $raw | $page.RenderString }}
 {{ return $content }}

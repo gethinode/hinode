@@ -1,0 +1,7 @@
+<!-- 
+    Displays text as superscript, provided as unnamed argument.
+-->
+
+{{- $text := .Get 0 -}}
+
+<sup>{{ $text | .Page.RenderString -}}</sup>
