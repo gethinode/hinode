@@ -1,4 +1,7 @@
 {{- define "main" -}}
+    <!-- Ignore empty content, see https://github.com/gohugoio/hugo/issues/11406 -->
+    {{- $content := "" -}}
+    {{- if .Content }}{{ $content = partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}{{ end -}}
     {{- partial "assets/section-list.html" (dict 
         "page" .
         "section" .Type
@@ -6,7 +9,7 @@
         "nested" .Params.Nested
         "title" (or .Title .Type)
         "description" .Description
-        "content" .Content
+        "content" $content
         "paginate" true)
     -}}
 {{- end -}}
