@@ -355,6 +355,22 @@ Loading...
 {{< /example>}}
 <!-- markdownlint-enable MD037 -->
 
+## Sub
+
+As an example, the following shortcode displays subscript text.
+
+{{< example >}}
+H{{</* sub 2 */>}}O is a liquid.
+{{< /example >}}
+
+## Sup
+
+As an example, the following shortcode displays superscript text.
+
+{{< example >}}
+2{{</* sup 10 */>}} is 1024.
+{{< /example >}}
+
 ## Timeline
 
 As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.
