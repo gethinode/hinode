@@ -302,6 +302,16 @@ As an example, the following shortcodes render links in different formats.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Mark
+
+Use the `mark` shortcode to highlight text. The inner content is used as input.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+Use the mark shortcode to {{</* mark >}}highlight{{< /mark */>}} specific text.
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Nav
 
 As an example, the following shortcode displays a tab group with vertically aligned pills.
