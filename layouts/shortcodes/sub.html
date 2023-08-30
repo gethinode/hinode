@@ -1,0 +1,7 @@
+<!-- 
+    Displays text as subscript, provided as unnamed argument.
+-->
+
+{{- $text := .Get 0 -}}
+
+<sub>{{ $text | .Page.RenderString -}}</sub>
