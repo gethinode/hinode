@@ -7,8 +7,8 @@
 -->
 
 {{- $error := false -}}
-{{- $title := .Get "title" -}}
-{{- $class := .Get "class" -}}
+{{- $title := .Get "title" | default "" -}}
+{{- $class := .Get "class" | default "" -}}
 {{- $color := "secondary" -}}
 {{- with .Get "color" }}{{ $color = . }}{{ end -}}
 {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}

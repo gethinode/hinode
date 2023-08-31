@@ -5,7 +5,7 @@
 
 {{- $error := false -}}
 {{- $page := . -}}
-{{- $path := .Get "path"}}
+{{- $path := .Get "path" | default "" }}
 {{- if $path -}}
     {{- $page = .Site.GetPage $path -}}
     {{- if not $page -}}

@@ -35,7 +35,7 @@
     {{ $error = true }}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{ if not $error }}
     {{/* Try language-specific file first */}}

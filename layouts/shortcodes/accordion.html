@@ -10,7 +10,7 @@
 {{ with .Get "id" }}
     {{ $id = . }}
 {{ end }}
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- $openParam := "false" -}}
 {{- $open := false -}}

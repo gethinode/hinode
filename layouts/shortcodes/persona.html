@@ -9,14 +9,14 @@
 
 {{- $error := false -}}
 
-{{- $path := .Get "path" -}}
+{{- $path := .Get "path" | default "" -}}
 {{- $page := .Site.GetPage $path -}}
 {{- if not $page -}}
     {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
     {{- $error = true -}}
 {{- end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- $color := "" -}}
 {{- with .Get "color" }}{{ $color = . }}{{ end -}}

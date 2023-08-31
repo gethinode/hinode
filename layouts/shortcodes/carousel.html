@@ -14,7 +14,7 @@
     {{ $id = . }}
 {{ end }}
 
-{{ $class := .Get "class" -}}
+{{ $class := .Get "class" | default "" -}}
 
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}

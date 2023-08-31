@@ -27,7 +27,7 @@
     {{ $id = . }}
 {{ end }}
 
-{{ $path := .Get "path" }}
+{{ $path := .Get "path" | default "" }}
 {{ $page := .Site.GetPage $path }}
 {{ if not $page }}
     {{ errorf "Invalid or missing value for param 'path': %s" $path -}}
@@ -86,7 +86,7 @@
 {{ $title := "" -}}
 {{ with .Get "title" }}{{ $title = . }}{{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{ if not $error -}}
     {{- partial "assets/navbar.html" (dict 

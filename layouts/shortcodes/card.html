@@ -21,7 +21,7 @@
 
 {{ $error := false }}
 
-{{ $path := .Get "path" }}
+{{ $path := or (.Get "path") "" }}
 {{ $page := .Page }}
 {{ with $path }}
     {{ $page = $.Site.GetPage $path }}
@@ -82,10 +82,10 @@
 {{ end -}}
 
 {{ $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
-{{ $title := .Get "title" }}
-{{ $alt := .Get "alt" }}
-{{ $icon := .Get "icon" }}
-{{ $thumbnail := .Get "thumbnail" }}
+{{ $title := .Get "title" | default "" -}}
+{{ $alt := .Get "alt" | default "" -}}
+{{ $icon := .Get "icon" | default "" -}}
+{{ $thumbnail := .Get "thumbnail" | default "" -}}
 
 {{ if not $error -}}
     <div class="g-{{ $gutter }}">

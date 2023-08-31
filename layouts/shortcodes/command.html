@@ -8,9 +8,9 @@
     "class"         Optional class attribute of the command element.
 -->
 
-{{- $host := .Get "host" -}}
-{{- $user := .Get "user" -}}
-{{- $prompt := .Get "prompt" -}}
+{{- $host := .Get "host" | default "" -}}
+{{- $user := .Get "user" | default "" -}}
+{{- $prompt := .Get "prompt" | default "" -}}
 {{- $filter := "(out)" -}}
 {{- $input := trim .Inner " \t\r\n" -}}
 
@@ -70,7 +70,7 @@
     {{- $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) -}}
 {{- end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 <div class="mb-3 syntax-highlight{{ with $class }} {{ . }}{{ end }}">
     {{- $output -}}

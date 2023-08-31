@@ -11,8 +11,8 @@
     "class"         Optional class attributes of the element's container.
 -->
 
-{{- $id := .Get "id" -}}
-{{- $class := .Get "class" -}}
+{{- $id := .Get "id" | default "" -}}
+{{- $class := .Get "class" | default "" -}}
 {{- $lang := .Get "lang" | default "markdown" -}}
 {{- $show_markup := .Get "show_markup" | default true -}}
 {{- $show_preview := .Get "show_preview" | default true -}}

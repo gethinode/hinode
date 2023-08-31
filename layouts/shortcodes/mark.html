@@ -7,14 +7,14 @@
 -->
 
 {{- $error := false -}}
-{{ $color := .Get "color" -}}
+{{ $color := .Get "color" | default "" -}}
 {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
 {{ if and $color (not (in $supportedColors $color)) -}}
     {{ errorf "Invalid value for param 'color': %s" .Position -}}
     {{ $error = true -}}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- if $color }}{{ $class = printf "%s text-bg-%s" $class $color }}{{ end -}}
 

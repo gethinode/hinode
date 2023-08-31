@@ -10,11 +10,10 @@
 -->
 
 {{- $error := false -}}
-{{- $version := .Get "version" -}}
+{{- $version := .Get "version" | default "" -}}
 {{- $inline := false -}}
 
-{{- $state := "new" -}}
-{{- with .Get "state" }}{{ $state = . }}{{ end -}}
+{{- $state := .Get "state" | default "new" -}}
 {{- $supportedStates := slice "new" "deprecated" -}}
 {{- if not (in $supportedStates $state) -}}
     {{- errorf "Invalid value for param 'state': %s" .Position -}}
@@ -84,7 +83,7 @@
     {{- $error = true -}}
 {{- end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- if not $error -}}
     {{- if not $inline }}<div class="pb-3">{{ end -}}
