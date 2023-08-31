@@ -8,7 +8,7 @@
 {{ $arg := .arg -}}
 {{ $merge := .merge -}}
 {{ $val := "" }}
-{{ with $page.Get $arg }}{{ $val := . }}{{ end }}
+{{ with $page.Get $arg }}{{ $val = . }}{{ end }}
 
 {{- with $page.Parent -}}
     {{ with .Get $arg }}
