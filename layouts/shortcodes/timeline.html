@@ -14,7 +14,7 @@
 {{ $error := false }}
 {{- $page := .Page -}}
 
-{{- $data := .Get "data" -}}
+{{- $data := .Get "data" | default "" -}}
 {{ if not $data -}}
     {{ errorf "Missing param 'data': %s" .Position -}}
     {{ $error = true }}
@@ -40,7 +40,7 @@
     {{ $error = true -}}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 <!-- Inline partial to render icon -->
 {{- define "partials/timeline-icon.html" -}}

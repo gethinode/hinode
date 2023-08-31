@@ -12,8 +12,8 @@
     {{ $id = . }}
 {{ end }}
 
-{{- $class := .Get "class" -}}
-{{ $type := .Get "type" -}}
+{{- $class := .Get "class" | default "" -}}
+{{ $type := .Get "type" | default "" -}}
 {{ $supportedNavTypes := slice "tabs" "pills" "underline" -}}
 {{ if $type }}
     {{ if not (in $supportedNavTypes $type) -}}

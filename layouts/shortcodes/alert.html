@@ -49,7 +49,7 @@
     {{ $error = true -}}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- if not $error -}}
     <div class="d-flex alert alert-{{ $color }} {{ if $dismissible }}alert-dismissible fade show{{ end }}{{ with $class }} {{ . }}{{ end }}" role="alert">

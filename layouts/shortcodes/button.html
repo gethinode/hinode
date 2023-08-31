@@ -31,7 +31,7 @@
 {{ $error := false }}
 {{ $type := "button" -}}
 
-{{- $icon := .Get "icon" }}
+{{- $icon := .Get "icon" | default "" }}
 {{ $title := trim .Inner " \r\n" | .Page.RenderString -}}
 {{ if not (or $title $icon) -}}
     {{ errorf "Missing icon or inner element text: %s" .Position -}}
@@ -71,17 +71,17 @@
     {{ errorf "Invalid value for param 'outline': %s" .Position -}}
 {{ end -}}
 
-{{ $badge := .Get "badge" -}}
-{{ $label := .Get "aria-label" -}}
-{{ $tooltip := .Get "tooltip" -}}
-{{ $collapse := .Get "collapse" -}}
-{{ $href := .Get "href" -}}
-{{ $relref := .Get "relref" }}
-{{ $id := .Get "id" -}}
+{{ $badge := .Get "badge" | default "" -}}
+{{ $label := .Get "aria-label" | default "" -}}
+{{ $tooltip := .Get "tooltip" | default "" -}}
+{{ $collapse := .Get "collapse" | default "" -}}
+{{ $href := .Get "href" | default "" -}}
+{{ $relref := .Get "relref" | default "" -}}
+{{ $id := .Get "id" | default "" -}}
 {{ if $relref }}
     {{ $href = relref . $relref }}
 {{ end }}
-{{ $class := .Get "class" -}}
+{{ $class := .Get "class" | default "" -}}
 
 {{ $placement := "top" -}}
 {{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
@@ -91,7 +91,7 @@
     {{ $error = true }}
 {{ end -}}
 
-{{- $toast := .Get "toast" -}}
+{{- $toast := .Get "toast" | default "" -}}
 
 {{- $order := "last" -}}
 {{- with .Get "order" }}{{ $order = . }}{{ end -}}

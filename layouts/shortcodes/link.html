@@ -30,13 +30,13 @@
 {{- $anchor := "" -}}
 
 {{ if .IsNamedParams }}
-    {{ $href = .Get "href" }}
-    {{ $name = .Get "name" }}
-    {{ $url = .Get "url" }}
-    {{ $cue = .Get "cue" | default site.Params.main.externalLinks.cue }}
-    {{ $tab = .Get "tab" | default site.Params.main.externalLinks.tab }}
+    {{ $href = .Get "href" | default "" -}}
+    {{ $name = .Get "name" | default "" -}}
+    {{ $url = .Get "url" | default "" -}}
+    {{ $cue = .Get "cue" | default site.Params.main.externalLinks.cue -}}
+    {{ $tab = .Get "tab" | default site.Params.main.externalLinks.tab -}}
     {{ $case = .Get "case" | default true }}
-    {{- $class := .Get "class" -}}
+    {{- $class := .Get "class" | default "" -}}
 {{ else }}
     {{ $href = .Get 0 }}
 {{ end }}

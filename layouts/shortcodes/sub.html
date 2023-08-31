@@ -2,6 +2,6 @@
     Displays text as subscript, provided as unnamed argument.
 -->
 
-{{- $text := .Get 0 -}}
+{{- $text := .Get 0 | default "" -}}
 
 <sub>{{ $text | .Page.RenderString -}}</sub>

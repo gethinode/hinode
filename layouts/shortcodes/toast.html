@@ -8,10 +8,10 @@
 {{- $error := false -}}
 {{- $id := printf "toast-message-%d" .Ordinal -}}
 {{- with .Get "id" }}{{ $id = . }}{{ end -}}
-{{ $header := .Get "header" -}}
+{{ $header := .Get "header" | default "" -}}
 {{ $message := trim .Inner " \r\n" | .Page.RenderString -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{ if not $message -}}
     {{ errorf "Missing inner element text: %s" .Position -}}

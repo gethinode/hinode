@@ -16,19 +16,19 @@
 -->
 
 {{- if isset .Params "src" -}}
-    {{ $url := .Get "src" -}}
+    {{ $url := .Get "src" | default "" -}}
     {{- $validRatios := slice "1x1" "3x2" "4x3" "16x9" "21x9" -}}
-    {{ $ratio := .Get "ratio" -}}
+    {{ $ratio := .Get "ratio" | default "" -}}
     {{ if $ratio -}}
         {{ if not (in $validRatios $ratio) -}}
             {{ errorf "Invalid value for param 'ratio': %s" .Position -}}
         {{ end -}}
     {{ end -}}
     
-    {{- $class := .Get "class" -}}
-    {{- $wrapper := .Get "wrapper" -}}
-    {{ $title := .Get "title" -}}
-    {{ $caption := .Get "caption" -}}
+    {{- $class := .Get "class" | default "" -}}
+    {{- $wrapper := .Get "wrapper" | default "" -}}
+    {{ $title := .Get "title" | default "" -}}
+    {{ $caption := .Get "caption" | default "" -}}
     {{ $supportedFlags := slice "true" "false" -}}
     {{ $modeParam := "false" -}}
     {{ $mode := false -}}

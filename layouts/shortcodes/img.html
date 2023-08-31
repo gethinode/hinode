@@ -12,9 +12,9 @@
 {{ if not .Parent }}
     {{ errorf "The img shortcode should be contained within a carousel shortcode: %s" .Position }}
 {{ else }}
-    {{- $src := .Get "src" -}}
+    {{- $src := .Get "src" | default "" -}}
     {{- if $src -}}
-        {{- $caption := .Get "caption" -}}
+        {{- $caption := .Get "caption" | default "" -}}
         {{- $ratio := partial "utilities/GetArg" (dict "page" . "arg" "ratio") -}}
         {{- $portrait := partial "utilities/GetArg" (dict "page" . "arg" "portrait") | default false -}}
         {{- $active := eq .Ordinal 0 -}}

@@ -19,9 +19,9 @@
     "class"         Optional class argument of the tab control.
 -->
 
-{{- $name := .Get "name" -}}
+{{- $name := .Get "name" | default "" -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file := .Get "file" }}
+{{- $file := .Get "file" | default "" -}}
 {{- if hasPrefix $file "./" -}}
     {{- $file = path.Clean $file -}}
 {{- else -}}
@@ -68,7 +68,7 @@
     {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- /* If any parameters are missing, print an error and exit */ -}}
 {{- if or (not $name) (not $file) -}}

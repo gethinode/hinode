@@ -10,7 +10,7 @@
 {{- $error := false -}}
 {{- $title := "" -}}
 {{- if .IsNamedParams }}{{ $title = .Get "title" }}{{ else }}{{ $title = .Get 0 }}{{ end }}
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 {{- $color := "" -}}
 {{- with .Get "color" }}{{ $color = . }}{{ end -}}
 {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}

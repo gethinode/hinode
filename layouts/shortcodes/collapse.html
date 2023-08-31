@@ -4,12 +4,12 @@
     "class"         Optional class attribute of the inner panel element, e.g. “p-3”.
 -->
 
-{{ $id := .Get "id" -}}
+{{ $id := .Get "id" | default "" -}}
 {{ if not $id -}}
     {{ errorf "Missing value for param 'id': %s" .Position -}}
 {{ end -}}
 
-{{ $class := .Get "class" }}
+{{ $class := .Get "class" | default "" }}
 
 {{- $body := trim .Inner " \r\n" -}}
 {{ if not $body -}}

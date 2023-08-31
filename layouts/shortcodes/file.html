@@ -14,7 +14,7 @@
 -->
 
 {{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file := .Get "path" }}
+{{- $file := .Get "path" | default "" -}}
 {{- if hasPrefix $file "./" -}}
     {{- $file = path.Clean $file -}}
 {{- else -}}
@@ -47,7 +47,7 @@
     {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- /* If any parameters are missing, print an error and exit */ -}}
 {{- if not $file -}}

@@ -22,12 +22,12 @@
         {{- $fade = true -}}
     {{- end -}}
 
-    {{- $header := .Get "header" -}}
+    {{- $header := .Get "header" | default "" -}}
     {{- if not $header -}}
         {{- errorf "Missing value for param 'header': %s" .Parent.Position -}}
     {{- end -}}
 
-    {{- $class := .Get "class" -}}
+    {{- $class := .Get "class" | default "" -}}
     {{- $body := trim .Inner " \r\n" | .Page.RenderString -}}
 
     {{- $supportedFlags := slice "true" "false" -}}

@@ -25,9 +25,9 @@
     {{ $error = true }}
 {{ end -}}
 
-{{ $tooltip := .Get "title" -}}
+{{ $tooltip := .Get "title" | default "" -}}
 
-{{ $href := .Get "href" -}}
+{{ $href := .Get "href" | default "" -}}
 {{ if not $href -}}
     {{ errorf "Missing value for param 'href': %s" .Position -}}
     {{ $error = true }}
@@ -41,7 +41,7 @@
     {{ $error = true }}
 {{ end -}}
 
-{{- $class := .Get "class" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{ if not $error }}
     <div class="d-inline-flex">

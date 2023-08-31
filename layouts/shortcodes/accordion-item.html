@@ -12,7 +12,7 @@
 {{- end -}}
 
 {{- $id := .Ordinal -}}
-{{ $header := .Get "header" -}}
+{{ $header := .Get "header" | default "" -}}
 {{ if not $header -}}
     {{ if .Parent }}
         {{ errorf "Missing value for param 'header': %s" .Parent.Position -}}
@@ -21,7 +21,7 @@
     {{ end }}
 {{ end -}}
 
-{{ $class := .Get "class" -}}
+{{ $class := .Get "class" | default "" -}}
 {{ $body := trim .Inner " \r\n" -}}
 {{ if not $body -}}
     {{ if .Parent }}
