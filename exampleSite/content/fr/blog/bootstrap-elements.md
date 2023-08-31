@@ -285,8 +285,8 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 - {{</* link url="/projects/another-project" /*/>}}
 - {{</* link url="../projects/another-project" case=false /*/>}}
 - {{</* link "/about/" /*/>}}
-- {{</* link "/fr/about/" /*/>}}
-- {{</* link "/fr/about" >}}About (French){{< /link */>}}
+- {{</* link "/en/about/" /*/>}}
+- {{</* link "/en/about" >}}About (Anglais){{< /link */>}}
 - {{</* link "#image" /*/>}}
 - {{</* link "components/#map" /*/>}}
 
