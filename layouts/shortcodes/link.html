@@ -63,8 +63,7 @@
             {{- $url = index $segments 0 -}}            
             {{- $anchor = index $segments 1 -}}            
             {{ if not $url }}
-                {{- $url = strings.TrimSuffix "/" .Page.RelPermalink -}}
-                {{- with .Page.Language }}{{ $url = strings.TrimPrefix (path.Join "/" .Lang) $url}}{{ end -}}
+                {{ $url = .Page.File.Path }}
             {{ end }}
         {{ end }}
     {{ else }}
