@@ -33,12 +33,12 @@
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
                 <p class="card-title fs-5 fw-bold">{{ $title }}</p>
-            {{ with $description }}<p class="card-text mb-4 {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
+            {{ with $description }}<p class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">{{ . }}</p>{{ end -}}
         </a>
     {{- else -}}
         <div>
-            <p class="card-title fs-5 fw-bold">{{ $title }}</p>
-            {{ with $description }}<p class="card-text mb-4">{{ . }}</p>{{ end -}}
+            {{ with $title }}<p class="card-title fs-5 fw-bold">{{ . }}</p>{{ end -}}
+            {{ with $description }}<p class="card-text">{{ . }}</p>{{ end -}}
         </div>
     {{- end -}}
 {{- end -}}

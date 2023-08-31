@@ -17,6 +17,7 @@
                     maximum number of cards to display.
     "hrefTitle"     Optional title of the button or hyperlink as companion to href.
     "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
+    "wrapper"       Optional class attributes of the wrapper element, e.g. "xxx".
 
     In addition, the following arguments are passed to the individual cards.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
@@ -120,10 +121,11 @@
 {{- $header := .header -}}
 {{- $footer := .footer -}}
 {{- $orientation := .orientation -}}
+{{- $wrapper := .wrapper | default "p-4 px-xxl-0" -}}
 
 {{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
-<div class="container-fluid p-4 px-xxl-0 ">
+<div class="container-fluid {{ with $wrapper }}{{ . }}{{ end }}">
     <div class="row {{ $colGrid }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
