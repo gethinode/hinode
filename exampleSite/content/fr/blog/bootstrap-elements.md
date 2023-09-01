@@ -125,7 +125,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card-group padding="3" */>}}
+{{</* card-group padding="3" gutter="3" */>}}
     {{</* card title="Framework Bootstrap" icon="fab bootstrap" */>}}
         Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site
         avec les fichiers source Sass.
