@@ -48,6 +48,10 @@
     color: $body-color if($enable-important-utilities, !important, null);
 }
 
+.card-body-margin {
+    margin-bottom: $spacer * 1.5; // equals mb-4
+}
+
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .card-body-link {

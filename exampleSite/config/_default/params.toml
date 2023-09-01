@@ -98,7 +98,7 @@
         header = "full"
         footer = "none"
         orientation = "stacked"
-        style = "border-0 card-zoom"
+        style = "border-0 card-zoom card-body-margin"
         homepage = 3
         separator = true
     [sections.projects]
@@ -114,7 +114,7 @@
         header = "none"
         footer = "tags"
         orientation = "horizontal"
-        style = "border-1 card-emphasize"
+        style = "border-1 card-emphasize card-body-margin"
         homepage = 3
         separator = false
 
