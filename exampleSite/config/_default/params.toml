@@ -113,8 +113,8 @@
         padding = "3"
         header = "none"
         footer = "tags"
-        orientation = "horizontal"
-        style = "border-1 card-emphasize card-body-margin"
+        orientation = "horizontal-sm"
+        style = "border-1 card-emphasize"
         homepage = 3
         separator = false
 
