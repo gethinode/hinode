@@ -88,11 +88,11 @@
 {{ $thumbnail := .Get "thumbnail" | default "" -}}
 
 {{ if not $error -}}
-    {{ if ne $gutter "0" }}<div class="g-{{ $gutter }}">{{ end }}
-    {{- partial "assets/card.html" (dict 
+    {{- $output := partial "assets/card.html" (dict 
         "path" $path
         "title" $title
         "class" (printf "h-100 %s" $class)
+        "gutter" $gutter
         "color" $color
         "padding" $padding
         "header" $header
@@ -103,5 +103,15 @@
         "thumbnail" $thumbnail
         "alt" $alt
     ) -}}
-    {{ if ne $gutter "0" }}</div>{{ end }}
+
+    {{ with .Parent }}
+        {{ $current := .Scratch.Get "inner" }}
+        {{ if $current }}
+            {{ .Scratch.Set "inner" (print $current $output) }}
+        {{ else }}
+            {{ .Scratch.Set "inner" $output }}
+        {{ end }}
+    {{ else }}
+        {{ print $output | safeHTML }}
+    {{ end }}
 {{ end -}}

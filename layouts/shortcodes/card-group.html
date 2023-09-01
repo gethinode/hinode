@@ -37,9 +37,16 @@
 {{- $footer := .Get "footer" | default "" -}}
 {{- $orientation := .Get "orientation" | default "" -}}
 
+{{ $inner := .Scratch.Get "inner" }}
+{{ $input := trim .Inner " \r\n" }}
+{{ if $input }}
+    {{ $input = replace $input "\n" "\n  " }}
+    {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input }}
+{{ end }}
+
 {{- partial "assets/card-group.html" (dict 
     "page" .Page
-    "cards" .Inner
+    "cards" $inner
     "cols" $cols
     "gutter" $gutter
     "title" $title
