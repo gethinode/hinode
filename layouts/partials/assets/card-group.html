@@ -138,12 +138,11 @@
 {{- $header := .header -}}
 {{- $footer := .footer -}}
 {{- $orientation := .orientation -}}
-<!-- "p-4 px-xxl-0" -->
-{{- $wrapper := .wrapper | default "px-xxl-0" -}}
+{{- $wrapper := .wrapper | default "p-4 px-xxl-0" -}}
 
 {{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
-<div class="container-fluid {{ with $wrapper }}{{ . }}{{ end }}">
+<div class="container-fluid {{ $wrapper }}">
     <div class="row {{ $colGrid }} g-{{ $gutter }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
