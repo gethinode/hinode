@@ -9,7 +9,7 @@
     "list"          Required array of pages.
     "cards"         Optional string of rendered cards.
     "max"           Required maximum number of cards to display.
-    "cols"          Required number of columns for the grid, must be a value between 1 and 5.
+    "cols"          Required number of columns for the grid, must be a value between 1 and 5, or set to "auto".
     "title"         Optional title of the card group.
     "paginate"      Optional flag indicating if pagination should be added to the card group, if the list exceeds the
                     maximum number of cards to display. 
@@ -132,12 +132,13 @@
 {{- $header := .header -}}
 {{- $footer := .footer -}}
 {{- $orientation := .orientation -}}
-{{- $wrapper := .wrapper | default "p-4 px-xxl-0" -}}
+<!-- "p-4 px-xxl-0" -->
+{{- $wrapper := .wrapper | default "px-xxl-0" -}}
 
 {{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
 <div class="container-fluid {{ with $wrapper }}{{ . }}{{ end }}">
-    <div class="row {{ $colGrid }}">
+    <div class="row {{ $colGrid }} px-3 py-4 g-4">
         {{ range $index, $element := $list }}
             {{- $params := (dict
                 "class" (printf "h-100 %s" $class)
@@ -149,7 +150,7 @@
             ) -}}
             {{- $params = merge $params $element }}
 
-            <div class="col pt-3 pb-3">
+            <div class="col">
                 {{- partial "assets/card.html" $params -}}
             </div>
             {{- if and (lt $index (sub $max 1)) $separator -}}
