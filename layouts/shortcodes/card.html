@@ -8,7 +8,7 @@
                     "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
                     color is specified.
     "padding"       Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
-    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3" (default), "4", or "5".
+    "gutter"        Gutter between columns in a group, either "0" (default), "1", "2", "3", "4", or "5".
     "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
                     (default), "publication", "tags", and "none".
     "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
@@ -60,7 +60,7 @@
     {{ $error = true -}}
 {{ end -}}
 
-{{- $gutter := partial "utilities/GetArg" (dict "page" . "arg" "gutter") | default "3" -}}
+{{- $gutter := partial "utilities/GetArg" (dict "page" . "arg" "gutter") | default "0" -}}
 {{ $supportedGutters:= slice "0" "1" "2" "3" "4" "5" -}}
 {{ if not (in $supportedGutters $gutter) -}}
     {{ errorf "Invalid value for param 'gutter': %s" .Position -}}
@@ -88,20 +88,20 @@
 {{ $thumbnail := .Get "thumbnail" | default "" -}}
 
 {{ if not $error -}}
-    <div class="g-{{ $gutter }}">
-        {{- partial "assets/card.html" (dict 
-            "path" $path
-            "title" $title
-            "class" (printf "h-100 %s" $class)
-            "color" $color
-            "padding" $padding
-            "header" $header
-            "footer" $footer
-            "orientation" $orientation
-            "description" $description
-            "icon" $icon
-            "thumbnail" $thumbnail
-            "alt" $alt
-        ) -}}
-    </div>
+    {{ if ne $gutter "0" }}<div class="g-{{ $gutter }}">{{ end }}
+    {{- partial "assets/card.html" (dict 
+        "path" $path
+        "title" $title
+        "class" (printf "h-100 %s" $class)
+        "color" $color
+        "padding" $padding
+        "header" $header
+        "footer" $footer
+        "orientation" $orientation
+        "description" $description
+        "icon" $icon
+        "thumbnail" $thumbnail
+        "alt" $alt
+    ) -}}
+    {{ if ne $gutter "0" }}</div>{{ end }}
 {{ end -}}
