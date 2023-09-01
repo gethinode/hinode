@@ -382,9 +382,9 @@ H{{</* sub 2 */>}}O est un liquide.
 À titre d'exemple, le shortcode suivant affiche du texte en exposant.
 
 <!-- markdownlint-disable MD037 -->
-{{< exemple >}}
+{{< example >}}
 2{{</* sup 10 */>}} équivaut à 1024.
-{{< /exemple >}}
+{{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
 ## Chronologie
