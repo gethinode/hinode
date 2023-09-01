@@ -15,6 +15,16 @@ thumbnail:
 
 Hinode propose plusieurs shortcodes qui enveloppent des composants Bootstrap courants. Consultez la [documentation officielle]({{< param "links.hinode_docs" >}}) pour plus de détails.
 
+## Abbr
+
+À titre d'exemple, le shortcode suivant affiche le texte complet d'une abréviation lorsque survolé.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* abbr "CI/CD" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Accordéon
 
 À titre d'exemple, le shortcode suivant affiche un accordéon avec trois éléments, dont le premier élément est déplié.
@@ -294,6 +304,16 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Mark
+
+Utilisez le shortcode `mark` pour mettre en évidence le texte. Le contenu interne est utilisé en tant qu'entrée.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+Utilisez le shortcode `mark` pour {{</* mark >}}mettre en évidence{{< /mark */>}} un texte spécifique.
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Navigation
 
 À titre d'exemple, le shortcode suivant affiche un groupe d'onglets avec des onglets alignés verticalement.
@@ -345,6 +365,26 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 Chargement...
 {{</* /spinner */>}}
 {{< /example>}}
+<!-- markdownlint-enable MD037 -->
+
+## Sub
+
+À titre d'exemple, le shortcode suivant affiche du texte en indice.
+
+<!-- markdownlint-disable MD037 -->
+{{< example >}}
+H{{</* sub 2 */>}}O est un liquide.
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+## Sup
+
+À titre d'exemple, le shortcode suivant affiche du texte en exposant.
+
+<!-- markdownlint-disable MD037 -->
+{{< example >}}
+2{{</* sup 10 */>}} équivaut à 1024.
+{{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
 ## Chronologie
