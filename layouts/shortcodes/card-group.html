@@ -8,7 +8,7 @@
     "cols"          Required number of columns for the grid, must be a value between 1 and 5.
     "title"         Optional title of the card group.
     "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
-    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3" (default), "4", or "5".
+    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3", "4" (default), or "5".
     "wrapper"       Optional class attributes of the wrapper element, e.g. "xxx".
     "responsive"    Optional flag if the number of columns should be responsive, defaults to "true".
 
@@ -25,6 +25,7 @@
 -->
 
 {{- $cols := .Get "cols" | default "3" -}}
+{{- $gutter := .Get "gutter" | default "4" -}}
 {{- $title := .Get "title" | default "" -}}
 {{- $separator := .Get "separator" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
@@ -40,6 +41,7 @@
     "page" .Page
     "cards" .Inner
     "cols" $cols
+    "gutter" $gutter
     "title" $title
     "separator" $separator
     "wrapper" $wrapper
