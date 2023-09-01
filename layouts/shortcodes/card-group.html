@@ -24,8 +24,7 @@
     "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
 -->
 
-{{- $cols := 3 -}}
-{{ with .Get "cols" }}{{ $cols = int . }}{{ end -}}
+{{- $cols := .Get "cols" | default "3" -}}
 {{- $title := .Get "title" | default "" -}}
 {{- $separator := .Get "separator" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
