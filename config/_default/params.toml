@@ -116,7 +116,7 @@
 #         header = "full"
 #         footer = "none"
 #         orientation = "stacked"
-#         style = "border-0 card-zoom"
+#         style = "border-0 card-zoom card-body-margin"
 #         homepage = 3
 #         separator = true
 # toml-docs-end sections
