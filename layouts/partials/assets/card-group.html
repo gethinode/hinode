@@ -9,7 +9,7 @@
     "list"          Required array of pages.
     "cards"         Optional string of rendered cards.
     "max"           Required maximum number of cards to display.
-    "cols"          Required number of columns for the grid, must be a value between 1 and 5, or set to "auto".
+    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3", "4" (default), or "5".
     "title"         Optional title of the card group.
     "paginate"      Optional flag indicating if pagination should be added to the card group, if the list exceeds the
                     maximum number of cards to display. 
@@ -111,6 +111,12 @@
 {{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
 {{ end -}}
 
+{{- $gutter := .gutter | default "4" -}}
+{{- $supportedGutters := slice "0" "1" "2" "3" "4" "5" -}}
+{{- if not (in $supportedGutters $gutter) -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'gutter': %s" $gutter -}}
+{{- end -}}
+
 {{- if not $paginate -}}
     {{- $list = first $max $list -}}
 {{- end -}}
@@ -138,7 +144,7 @@
 {{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
 <div class="container-fluid {{ with $wrapper }}{{ . }}{{ end }}">
-    <div class="row {{ $colGrid }} px-3 py-4 g-4">
+    <div class="row {{ $colGrid }} g-{{ $gutter }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
                 "class" (printf "h-100 %s" $class)
