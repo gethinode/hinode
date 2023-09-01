@@ -18,6 +18,7 @@
     "hrefTitle"     Optional title of the button or hyperlink as companion to href.
     "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
     "wrapper"       Optional class attributes of the wrapper element, e.g. "xxx".
+    "responsive"    Optional flag if the number of columns should be responsive, defaults to "true".
 
     In addition, the following arguments are passed to the individual cards.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
@@ -90,15 +91,25 @@
 {{- end -}}
 {{- $max = math.Min $max $count -}}
 
-{{- $cols := .cols -}}
-{{- if or (lt $cols 1) (gt $cols 5) -}}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'cols': %d" $cols -}}
+{{- $responsive := .responsive | default true -}}
+{{- with .responsive -}}
+    {{- if ne (printf "%T" .) "bool" -}}
+        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'responsive'" -}}
+    {{- end -}}
 {{- end -}}
-{{- $colGrid := "row-cols-1" -}}
-{{- if eq $cols 2 }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" -}}
-{{- else if eq $cols 3 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-3" -}}
-{{- else if eq $cols 4 }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" -}}
-{{- else if eq $cols 5 }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ end -}}
+
+{{- $cols := string .cols | default "3" -}}
+{{- $supportedCols := slice "0" "1" "2" "3" "4" "5" "auto" -}}
+{{- if not (in $supportedCols $cols) -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'cols': %s" $cols -}}
+{{- end -}}
+{{- $colGrid := "" -}}
+{{- if eq $cols "1" }}{{ $colGrid = "row-cols-1" -}}
+{{- else if eq $cols "2" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" }}{{ else }}{{ $colGrid = "row-cols-2" }}{{ end -}}
+{{- else if eq $cols "3" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-3" }}{{ else }}{{ $colGrid = "row-cols-3" }}{{ end -}}
+{{- else if eq $cols "4" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" }}{{ else }}{{ $colGrid = "row-cols-4" }}{{ end -}}
+{{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
+{{ end -}}
 
 {{- if not $paginate -}}
     {{- $list = first $max $list -}}

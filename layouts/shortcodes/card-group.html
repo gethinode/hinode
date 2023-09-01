@@ -10,6 +10,7 @@
     "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
     "gutter"        Gutter between columns in a group, either "0", "1", "2", "3" (default), "4", or "5".
     "wrapper"       Optional class attributes of the wrapper element, e.g. "xxx".
+    "responsive"    Optional flag if the number of columns should be responsive, defaults to "true".
 
     In addition, the following arguments are passed to the individual cards.
     "class"         Optional class attribute of the card element, e.g. “w-50”.
@@ -29,6 +30,7 @@
 {{- $separator := .Get "separator" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
 {{- $wrapper := .Get "wrapper" | default "" -}}
+{{- $responsive := .Get "responsive" | default true -}}
 {{- $color := .Get "color" | default "" -}}
 {{- $padding := .Get "padding" | default "3" -}}
 {{- $header := .Get "header" | default "" -}}
@@ -42,6 +44,7 @@
     "title" $title
     "separator" $separator
     "wrapper" $wrapper
+    "responsive" $responsive
     "class" $class
     "color" $color
     "padding" $padding
