@@ -11,6 +11,7 @@
                     "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
                     color is specified.
     "padding":      Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
+    "gutter"        Gutter between columns in a group, either "0" (default), "1", "2", "3", "4", or "5".
     "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
                     (default), "publication", "tags", and "none".
     "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
@@ -128,6 +129,12 @@
     {{- errorf "partial [assets/card.html] - Invalid value for param 'padding': %s" $padding -}}
 {{- end -}}
 
+{{- $gutter := .gutter | default "0" -}}
+{{ $supportedGutters:= slice "0" "1" "2" "3" "4" "5" -}}
+{{ if not (in $supportedGutters $gutter) -}}
+    {{- errorf "partial [assets/card.html] - Invalid value for param 'gutter': %s" $gutter -}}
+{{ end -}}
+
 {{- $orientation := "stacked" -}}
 {{- with .orientation }}{{ $orientation = . }}{{ end -}}
 {{- $supportedOrientations := slice "stacked" "horizontal" "horizontal-sm" "none" -}}
@@ -136,6 +143,7 @@
 {{- end -}}
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 
+{{ if ne $gutter "0" }}<div class="g-{{ $gutter }}">{{ end }}
 {{- if hasPrefix $orientation "horizontal" -}}
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         <div class="row g-0 row-cols-1 h-100">
@@ -175,3 +183,4 @@
         </div>
     </div>
 {{- end -}}
+{{ if ne $gutter "0" }}</div>{{ end }}
