@@ -1,7 +1,5 @@
 {{- define "main" -}}
-    <!-- Ignore empty content, see https://github.com/gohugoio/hugo/issues/11406 -->
-    {{- $content := "" -}}
-    {{- if .Content }}{{ $content = partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}{{ end -}}
+    {{- $content := partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) -}}
     {{- partial "assets/section-list.html" (dict 
         "page" .
         "section" .Type
