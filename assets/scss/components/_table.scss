@@ -1,11 +1,13 @@
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .table-striped, .table-striped-columns {
-            --bs-table-striped-bg: var(--bs-tertiary-color);
+            --bs-table-striped-bg: var(--bs-tertiary-bg);
+            --bs-table-striped-color: var(--bs-body-color);
         }
 
         .table-hover {
-            --bs-table-hover-bg: var(--bs-tertiary-color);
+            --bs-table-hover-bg: var(--bs-tertiary-bg);
+            --bs-table-striped-color: var(--bs-body-color);
         }
     }
 }

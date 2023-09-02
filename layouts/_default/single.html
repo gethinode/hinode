@@ -84,8 +84,7 @@
         {{ end -}}
     {{ end }}
 
-    <!-- Ignore empty content, see https://github.com/gohugoio/hugo/issues/11406 -->
-    {{- if .Content }}{{ partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}{{ end -}}
+    {{ partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}
 {{ end -}}
 
 {{ define "partials/footer.html" -}}
