@@ -9,6 +9,8 @@
     [main.externalLinks]
         cue = false
         tab = false
+    [main.build]
+        transpiler = "libsass"
 # toml-docs-end main
 
 # toml-docs-start modules
