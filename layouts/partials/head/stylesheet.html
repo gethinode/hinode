@@ -1,8 +1,18 @@
+{{- $transpiler := site.Params.main.build.transpiler | default "libsass" -}}
+{{- $supportedTranspilers := slice "libsass" "dartsass" -}}
+{{- if not (in $supportedTranspilers $transpiler) -}}
+    {{- errorf "partial [head/stylesheet.html] - Invalid value for param 'transpiler': %s" $transpiler -}}
+{{- end -}}
+
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
-{{- $source := .source | default "scss/app.scss" -}}
+{{- $source := .source }}
+{{- if not $source -}}
+    {{- if eq $transpiler "dartsass" }}{{ $source = "scss/app-dart.scss" }}{{ else }}{{ $source = "scss/app.scss" }}{{ end -}}
+{{- end -}}
 {{- $target := .target | default "css/main.css" -}}
 {{- $page := .page -}}
 {{- $core := .core | default true -}}
+
 
 {{- $modules := "" -}}
 {{ if $core }}
@@ -36,7 +46,7 @@
     "dark-mode-tint"          (default "0%" site.Params.style.darkModeTint)
 -}}
 
-{{- $options := (dict "transpiler" "libsass" "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
+{{- $options := (dict "transpiler" $transpiler "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
 {{- $bundle := partial "utilities/bundle" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
 
 {{- $css := $bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
