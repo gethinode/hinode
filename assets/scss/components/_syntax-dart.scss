@@ -1,0 +1,49 @@
+// stylelint-disable annotation-no-unknown
+@import "syntax-light";
+
+.bg,
+.chroma,
+.chroma .err {
+    // set to transparent background to avoid rendering issues with example shortcode
+    background-color: transparent if($enable-important-utilities, !important, null);
+}
+
+.chroma {
+    display: flex;
+}
+
+.chroma code {
+    flex: 1;
+}
+
+.syntax-highlight {
+    background-color: var(--bs-light) if($enable-important-utilities, !important, null);
+    overflow-x: auto;
+}
+
+@if $enable-dark-mode {
+    [data-bs-theme="dark"] {
+        @include meta.load-css(syntax-dark);
+
+        .bg,
+        .chroma,
+        .chroma .err {
+            // set to transparent background to avoid rendering issues with example shortcode
+            background-color: transparent if($enable-important-utilities, !important, null);
+        }
+
+        .syntax-highlight {
+            background-color: var(--bs-tertiary-bg) if($enable-important-utilities, !important, null);
+            overflow-x: auto;
+        }
+
+        .bg,
+        .chroma,
+        .chroma .ge,
+        .chroma .gl,
+        .chroma .gs {
+            color: #c9d1d9 if($enable-important-utilities, !important, null);
+        }
+    }
+}
+// stylelint-enable annotation-no-unknown
