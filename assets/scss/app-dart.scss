@@ -1,0 +1,56 @@
+@use "sass:meta";
+
+// Define template variables
+@use "hugo:vars" as h; // note: modified for dart-sass
+
+// Include default variable overrides
+@import "common/variables-dart.scss"; // note: modified for dart-sass
+@import "common/icons.scss";
+
+// Import Bootstrap configuration (mounted by core Bootstrap module)
+@import "bootstrap-dart.scss"; // note: modified for dart-sass
+
+// Include dark mode overrides
+@import "common/variables-dark.scss";
+
+// Import Hinode theme styles
+@import "components/alert.scss";
+@import "components/blockquote.scss";
+@import "components/breadcrumb.scss";
+@import "components/buttons.scss";
+@import "components/card.scss";
+@import "components/carousel.scss";
+@import "components/clipboard.scss";
+@import "components/command.scss";
+@import "components/comments.scss";
+@import "components/feature.scss";
+@import "components/footer.scss";
+@import "components/navbar.scss";
+@import "components/img.scss";
+@import "components/pagination.scss";
+@import "components/persona.scss";
+@import "components/popover.scss";
+@import "components/sidebar.scss";
+@import "components/syntax-dart.scss"; // note: modified for dart-sass
+@import "components/table.scss";
+@import "components/timeline.scss";
+@import "components/toc.scss";
+@import "components/vimeo.scss";
+@import "common/animation.scss";
+@import "common/styles.scss";
+@import "layouts/reboot.scss";
+@import "layouts/type.scss";
+@import "common/export.scss";
+@import "helpers/colored-links.scss";
+@import "helpers/display.scss";
+
+// note: modified for dart-sass
+@if h.$import-fonts {
+    @include meta.load-css(theme/fonts);
+}
+
+// Import theme placeholder
+@import "theme/theme.scss";
+
+// Import Bootstrap utilities API  (mounted by core Bootstrap module)
+@import "modules/bootstrap/utilities/api";
