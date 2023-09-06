@@ -1,25 +1,15 @@
 # toml-docs-start netlify
 [build]
     publish = "exampleSite/public"
+    command = "npm run build:example"
 
 [build.environment]
-    NODE_VERSION = "18.17.1"
-    NPM_VERSION = "9.6.7"
-
-[context.production]
-    command = """\
-    curl -LJO https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
-    tar -xf dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
-    rm dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
-    export PATH=/opt/build/repo/dart-sass:$PATH && \
-    npm run build:example \
-    """
-
-[context.production.environment]
     DART_SASS_VERSION = "1.66.1"
     HUGO_VERSION = "0.118.2"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
+    NODE_VERSION = "18.17.1"
+    NPM_VERSION = "9.6.7"
 # toml-docs-end netlify
 
 [[headers]]
@@ -81,3 +71,19 @@
     port = 8888
     publish = "public"
     autoLaunch = false
+
+# toml-docs-start plugins
+[[plugins]]
+    package = "@gethinode/netlify-plugin-dartsass"
+
+[[plugins]]
+    package = "netlify-plugin-hugo-cache-resources"
+	[plugins.inputs]
+	# Redirected in exampleSite/config/_default/hugo.toml
+	# srcdir = ""
+
+[[plugins]]
+    package = "@netlify/plugin-lighthouse"
+    # [plugins.inputs]
+    # output_path = "reports/lighthouse.html"
+# toml-docs-end plugins
