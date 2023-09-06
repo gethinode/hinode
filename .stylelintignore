@@ -3,5 +3,6 @@ assets/scss/components/_syntax-dark.scss
 assets/scss/components/_syntax-light.scss
 assets/scss/vendor
 assets/scss/theme/fonts.scss
+assets/scss/app-dart.scss
 assets/scss/app.scss
 node_modules
