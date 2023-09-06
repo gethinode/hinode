@@ -5,8 +5,8 @@ paginate = 9
 enableGitInfo = true
 
 # additional settings
-# googleAnalytics = "G-T85PPZ36GN"
-baseURL = "https://dart.gethinode.com/"
+googleAnalytics = "G-T85PPZ36GN"
+baseURL = "https://demo.gethinode.com/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true
