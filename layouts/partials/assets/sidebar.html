@@ -9,9 +9,10 @@
     {{- $level := .level -}}
     {{- $baseURL := .baseURL -}}
     {{- $group := .group -}}
+    {{- $data := .menu -}}
 
     {{- $doc_slug := $group.title | urlize -}}
-    {{- $href := printf "%s/" (relLangURL (path.Join $baseURL $doc_slug)) -}}
+    {{- $href := or $group.link (printf "%s/" (relLangURL (path.Join $baseURL $doc_slug))) -}}
     {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
 
     <li class="mb-1">
@@ -28,6 +29,7 @@
                             "level" (add $level 1)
                             "baseURL" $href
                             "group" $item
+                            "menu" $data
                             )
                         }}
                     {{- else -}}
@@ -37,6 +39,8 @@
                             "level" $level
                             "baseURL" $href
                             "title" $item.title
+                            "href" $item.link
+                            "menu" $data
                             )
                         }}
                     {{ end -}}
@@ -47,15 +51,17 @@
 {{ end -}}
 
 {{- define "partials/sidebar/item.html" -}}
-    {{ $page := .page }}
-    {{ $sectionBreak := .sectionBreak }}
+    {{- $page := .page -}}
+    {{- $sectionBreak := .sectionBreak -}}
     {{- $level := .level -}}
-    {{ $baseURL := .baseURL}}
-    {{ $title := .title}}
+    {{- $baseURL := .baseURL -}}
+    {{- $title := .title -}}
+    {{- $href := .href -}}
+    {{- $data := .menu -}}
 
     {{- $doc_slug := $title | urlize -}}
-    {{- $href := printf "%s/" (relLangURL (path.Join $baseURL $doc_slug)) -}}
-    {{ $active := eq $page.RelPermalink $href }}
+    {{- $href := or $href (printf "%s/" (relLangURL (path.Join $baseURL $doc_slug))) -}}
+    {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
 
     {{ if eq $level 0}}
         <li class="mt-1 mb-1 {{ if $sectionBreak }}border-top{{ end }}"></li>
@@ -63,17 +69,27 @@
         <li>
             <ul class="btn-toggle-nav list-unstyled fw-bold pb-1">
                 <li>
-                    <a href="{{ $href }}" class="sidebar-item text-decoration-none rounded {{ if $active }}active{{ end }}">
-                        {{ $title }}
-                    </a>      
+                    {{ $class := "sidebar-item text-decoration-none rounded" }}
+                    {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
+                    {{ $link := partial "utilities/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+                    {{ if $link }}
+                        {{ print $link | safeHTML }}
+                    {{ else }}
+                        {{- errorf "partial [utilities/sidebar.html] - Invalid link in file: %s" ($page.Scratch.Get "sidebarFilename") -}}
+                    {{ end }}
                 </li>
             </ul>
         </li>
     {{ else }}
         <li>
-            <a href="{{ $href }}" class="sidebar-item text-decoration-none rounded small {{ if $active }}active{{ end }}">
-                {{ $title }}
-            </a>      
+            {{ $class := "sidebar-item text-decoration-none rounded small" }}
+            {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
+            {{ $link := partial "utilities/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+            {{ if $link }}
+                {{ print $link | safeHTML }}
+            {{ else }}
+                {{- errorf "partial [utilities/sidebar.html] - Invalid link in file: %s" ($page.Scratch.Get "sidebarFilename") -}}
+            {{ end }}
         </li>
     {{ end }}
 {{ end -}}
@@ -94,6 +110,7 @@
                     "level" (add $level 1)
                     "baseURL" $baseURL
                     "group" $item
+                    "menu" $data
                     )
                 }}
             {{- else }}
@@ -103,6 +120,8 @@
                     "level" $level
                     "baseURL" $baseURL
                     "title" $item.title
+                    "href" $item.link
+                    "menu" $data
                     )
                 }}
             {{- end }}
