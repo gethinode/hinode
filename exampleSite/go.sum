@@ -10,6 +10,8 @@ github.com/gethinode/mod-flexsearch v1.3.0 h1:RbfEDw219Y1rOVp9lHmy5ePdF9lyPalDu2
 github.com/gethinode/mod-flexsearch v1.3.0/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-flexsearch v1.4.0 h1:5e/NVRLyWzUZ9fO/fNsM5o+O7nw+xyln2rfEOtbgfWc=
 github.com/gethinode/mod-flexsearch v1.4.0/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
+github.com/gethinode/mod-flexsearch v1.4.1 h1:z+GKvhJ4v6BsZsWVZRgbO9WcmSZEVUkb3Q9a09yXtd8=
+github.com/gethinode/mod-flexsearch v1.4.1/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-fontawesome v1.2.4 h1:SqE3CQ+boaBIhrVh3MPu4nz0uoHPfEH5t60nNY1CfsI=
 github.com/gethinode/mod-fontawesome v1.2.4/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.2.5 h1:RqkLRj6+s+gM4nKd0IwNMMDA8cRmxfp0fxkVH4FdAGU=
@@ -18,8 +20,12 @@ github.com/gethinode/mod-fontawesome v1.3.0 h1:oudeDBlAKu8vqYxumWuq5SG5F5itm33Ng
 github.com/gethinode/mod-fontawesome v1.3.0/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.3.1 h1:EdnBuG2B+bi06OcYmcL1NfSxHpRMEGu8TXUqEEpVH4g=
 github.com/gethinode/mod-fontawesome v1.3.1/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
+github.com/gethinode/mod-fontawesome v1.3.2 h1:qLJSbAFR2T33BuBtC2Iulm9wZql3cy7AhXjxc2YGzBU=
+github.com/gethinode/mod-fontawesome v1.3.2/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-katex v1.0.1/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.2 h1:pIG4n3qLl/IVe7BEiwn+GL8r5lOCtF6FDxlcrPKdAXk=
 github.com/gethinode/mod-katex v1.0.2/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-leaflet v0.3.4 h1:oY+YQ0JiJuhFQNrk9XgFdg0NMsTUQPXNfnILp4ia4r4=
 github.com/gethinode/mod-leaflet v0.3.4/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
+github.com/gethinode/mod-leaflet v0.3.5 h1:69Bv/6zRXhbcTzo7TMr58h3ry47srHRpM1k81LrLbYU=
+github.com/gethinode/mod-leaflet v0.3.5/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
