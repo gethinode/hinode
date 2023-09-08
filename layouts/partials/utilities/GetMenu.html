@@ -1,12 +1,17 @@
 {{- $page := .page -}}
 {{- $version := .version -}}
+{{- $sidebarFilename := "" -}}
 
 {{- $menu := "" -}}
 {{- if $page.IsPage -}}
-    {{- $menu = index site.Data (printf "%s-%s" $page.Section $version) -}}
+    {{- $sidebarFilename = printf "%s-%s" $page.Section $version -}}
+    {{- $menu = index site.Data $sidebarFilename -}}
     {{ if not $menu }}
-        {{ $menu = index site.Data $page.Section }}
+        {{- $sidebarFilename = $page.Section -}}
+        {{ $menu = index site.Data $sidebarFilename }}
     {{ end }}
 {{- end -}}
+
+{{ if $menu }}{{ with $sidebarFilename }}{{ $page.Scratch.Set "sidebarFilename" (path.Join "data" .) }}{{ end }}{{ end -}}
 
 {{- return $menu -}}
