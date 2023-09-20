@@ -34,7 +34,7 @@
                                     <p class="text-body-secondary mt-5">{{ $year }}</p>
                                     {{ $.Scratch.Set "lastYear" $year }}
                                 {{ end }}
-                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{end}}{{ .Title | .Page.RenderString }}</a>
+                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{ end }}{{ .Title | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}
