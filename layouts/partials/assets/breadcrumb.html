@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         {{- range $index, $item := .Page.Ancestors.Reverse -}}
-            {{- $title := .Title -}}
+            {{- $title := .LinkTitle -}}
             {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
             {{- $address := or .RelPermalink (.Params.Redirect | relLangURL) -}}
             {{ if $address }}
@@ -10,6 +10,6 @@
                 <li class="breadcrumb-item">{{ $title }}</li>
             {{ end }}
         {{- end -}}
-        <li class="breadcrumb-item active" aria-current="page">{{ .Page.Title }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ .Page.LinkTitle }}</li>
     </ol>
 </nav>
