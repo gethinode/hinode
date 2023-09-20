@@ -87,11 +87,15 @@
 {{ $icon := .Get "icon" | default "" -}}
 {{ $thumbnail := .Get "thumbnail" | default "" -}}
 
+{{ if .Parent }}
+    {{ $class = (printf "h-100 %s" $class) }}
+{{ end }}
+
 {{ if not $error -}}
     {{- $output := partial "assets/card.html" (dict 
         "path" $path
         "title" $title
-        "class" (printf "h-100 %s" $class)
+        "class" $class
         "gutter" $gutter
         "color" $color
         "padding" $padding
