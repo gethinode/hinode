@@ -69,7 +69,7 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@gethinode/netlify-plugin-dartsass": "^0.2.0",
     "@netlify/plugin-lighthouse": "^5.0.0",
-    "autoprefixer": "^10.4.15",
+    "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.1",
     "cssnano-preset-advanced": "^6.0.1",
     "eslint": "^8.49.0",
