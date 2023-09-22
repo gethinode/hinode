@@ -6,6 +6,7 @@ $enable-important-utilities:    true !default;
 $navbar-toggler-focus-width:    0 !default;
 
 $font-family-sans-serif:        h.$theme-font, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-size-base:                h.$font-size-base !default;;
 $headings-font-weight:          600 !default;
 $font-weight-lighter:           lighter !default;
 $font-weight-light:             200 !default;

@@ -30,6 +30,7 @@
 {{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
 {{- $vars := dict 
     "theme-font"              (default "Inter" site.Params.style.themeFont)
+    "font-size-base"          (default "1rem" site.Params.style.fontSizeBase)
     "primary"                 (default "#007bff" site.Params.style.primary)
     "secondary"               (default "#6c757d" site.Params.style.secondary)
     "success"                 (default "#198754" site.Params.style.success)
