@@ -71,6 +71,6 @@
     {{- end -}}
 {{- end -}}
 
-{{ if not $error }}
+{{ if not $error -}}
     <a {{ with $class }}class="{{ . }}" {{ end }}href="{{ $destination | safeURL }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ $text }}</a>
-{{ end }}
+{{- end }}
