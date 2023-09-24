@@ -29,3 +29,7 @@ github.com/gethinode/mod-leaflet v0.3.4 h1:oY+YQ0JiJuhFQNrk9XgFdg0NMsTUQPXNfnILp
 github.com/gethinode/mod-leaflet v0.3.4/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
 github.com/gethinode/mod-leaflet v0.3.5 h1:69Bv/6zRXhbcTzo7TMr58h3ry47srHRpM1k81LrLbYU=
 github.com/gethinode/mod-leaflet v0.3.5/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
+github.com/gethinode/mod-lottie v1.0.0 h1:1CUZMcgN5FAyjjyuP3qkaOQ6M5sv6HUAbosW4sIT5VE=
+github.com/gethinode/mod-lottie v1.0.0/go.mod h1:erRCgSL2FCfKHI0jQbSpM+g0jXl7SjKVJrh7kWGteKs=
+github.com/gethinode/mod-lottie v1.0.1 h1:+IE7xtnSVQpJS56oBJq9RWKZeFEfxrOZAqE3BSrS/u0=
+github.com/gethinode/mod-lottie v1.0.1/go.mod h1:erRCgSL2FCfKHI0jQbSpM+g0jXl7SjKVJrh7kWGteKs=

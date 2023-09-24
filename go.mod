@@ -8,4 +8,5 @@ require (
 	github.com/gethinode/mod-fontawesome v1.3.2 // indirect
 	github.com/gethinode/mod-katex v1.0.2 // indirect
 	github.com/gethinode/mod-leaflet v0.3.5 // indirect
+	github.com/gethinode/mod-lottie v1.0.1 // indirect
 )

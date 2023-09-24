@@ -1,7 +1,7 @@
 ---
 author: Mark Dumay
 title: Components
-date: 2023-07-21
+date: 2023-09-23
 description: Use shortcodes to add predefined components powered by external libraries.
 tags: ["bootstrap", "shortcode"]
 thumbnail:
@@ -10,10 +10,20 @@ thumbnail:
   authorURL: https://unsplash.com/@ryoji__iwata
   origin: Unsplash
   originURL: https://unsplash.com/photos/5siQcvSxCP8
-modules: ["katex", "leaflet"]
+modules: ["katex", "leaflet", "lottie"]
 ---
 
 Hinode provides several shortcodes on top of the common [Bootstrap elements]({{< relref "bootstrap-elements" >}}). Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
+
+## Animation
+
+As an example, the following shortcode shows an animation that plays on hover.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* animation data="gatin.json" auto=false hover=true class="col-6 mx-auto" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
 
 ## Formula (KaTeX)
 
