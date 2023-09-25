@@ -241,13 +241,14 @@ Use the `file` shortcode to print and highlight the full content of a given inpu
 
 ## Icon
 
-As an example, the following shortcodes show a square check, a brand logo, and a circle check.
+As an example, the following shortcodes show a square check, a brand logo, a circle check, and a custom icon.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* fa square-check */>}}
 {{</* fab linkedin */>}}
 {{</* fas circle-check */>}}
+{{</* icon custom activity */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
