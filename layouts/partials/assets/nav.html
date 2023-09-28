@@ -9,6 +9,7 @@
     "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
     "pane"          Optional style of the panes, either "none" (default) or "persona".
     "width"         Optional responsive width of the tab group, either "50" or "100" (default).
+    "wrap"          Optional flag to enable word wrapping of tab titles, defaults to false.
 
     In addition, the following arguments are passed to the individual tabs.
     "class"         Optional class attribute of the tab element, e.g. “w-50”.
@@ -54,6 +55,7 @@
 {{- $title := .title -}}
 {{- $class := .class -}}
 {{- $color := .color -}}
+{{- $wrap := .wrap | default false -}}
 
 {{ $supportedFlags := slice "true" "false" -}}
 {{ $verticalParam := "false" -}}
@@ -81,7 +83,7 @@
     <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
         {{- range $index, $item := $list -}}
             {{ $show := eq $index 0}}
-            <button class="nav-link text-nowrap{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
+            <button class="nav-link {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
                     type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
                 {{ $item.Title }}
             </button>
