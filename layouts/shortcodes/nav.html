@@ -5,6 +5,7 @@
     "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
     "fade"          Optional flag to make tab panes fade in.
     "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
+    "wrap"          Optional flag to enable word wrapping of tab titles, defaults to false.
 -->
 
 {{- $id := printf "nav-%d" .Ordinal -}}
@@ -35,6 +36,13 @@
 {{ with .Get "fade" }}{{ $fadeParam = . }}{{ end -}}
 {{ if not (in $supportedFlags $fadeParam) -}}
     {{ errorf "Invalid value for param 'fade': %s" $fadeParam -}}
+{{- end -}}
+
+{{ $wrapParam := "false" -}}
+{{- $wrap := false -}}
+{{ with .Get "wrap" }}{{ $wrapParam = . }}{{ end -}}
+{{ if not (in $supportedFlags $wrapParam) -}}
+    {{ errorf "Invalid value for param 'wrap': %s" $wrapParam -}}
 {{- end -}}
 
 {{- if and (eq $type "tabs") $vertical -}}
@@ -68,7 +76,7 @@
     {{- range $index, $item := $items -}}
         {{- $header := partial "utilities/GetVal.html" $item -}}
         {{- $itemDisabled := in $disabled $index -}}
-        <button class="nav-link text-nowrap{{ if eq $index $showID }} active{{ end }} {{ if $itemDisabled}} disabled {{end }}" id="{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#{{ $id }}-{{ $index }}" 
+        <button class="nav-link{{ if not $wrap }} text-nowrap{{ end }}{{ if eq $index $showID }} active{{ end }}{{ if $itemDisabled}} disabled {{end }}" id="{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#{{ $id }}-{{ $index }}" 
                 type="button" role="tab" aria-controls="{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
             {{ $header }}
         </button>
