@@ -4,8 +4,8 @@
     command = "npm run build:example"
 
 [build.environment]
-    DART_SASS_VERSION = "1.68.0"
-    HUGO_VERSION = "0.118.2"
+    DART_SASS_VERSION = "1.69.0"
+    HUGO_VERSION = "0.119.0"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
     NODE_VERSION = "18.18.0"
