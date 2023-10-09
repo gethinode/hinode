@@ -28,6 +28,7 @@
     "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
                     "main.externalLinks.tab" in the site's parameters.
     "attributes"    Optional dictionary of key-value pairs added as custom attributes to the button element ('<a>').
+    "spacing"       Optional flag to add spacing to the inline button, defaults to "true".
 -->
 
 {{- $title := trim .title " \r\n" -}}
@@ -126,6 +127,8 @@
 {{- $target := "" -}}
 {{- $rel := "" -}}
 
+{{- $spacing := .spacing | default true -}}
+
 {{- if $isExternal -}}
     {{- if $tab -}}
         {{- $target = "_blank" -}}
@@ -167,4 +170,4 @@
             {{ with $label }}<span class="visually-hidden">{{ . }}</span>{{ end }}
         </span>
     {{- end -}}  
-</a>
+</a>{{ if $spacing }}&nbsp;{{- end }}

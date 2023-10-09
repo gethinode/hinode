@@ -18,7 +18,7 @@
         {{- if gt (len (.GetTerms "tags")) 0 -}}
             <div class="mt-3">
                 <div class="d-none-dark">
-                    <div class="hstack gap-3">
+                    <div class="hstack gap-1">
                         {{ range (.GetTerms "tags") -}}
                             {{- $url := (path.Join .Page.RelPermalink) | relLangURL -}}
                             {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "light" "size" "sm") }}

@@ -26,6 +26,7 @@
                     "main.externalLinks.cue" in the site's parameters.
     "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
                     "main.externalLinks.tab" in the site's parameters.
+    "spacing"       Optional flag to add spacing to the inline button, defaults to "true".
 -->
 
 {{ $error := false }}
@@ -112,6 +113,8 @@
 {{- $cue := .Get "cue" | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .Get "tab" | default site.Params.main.externalLinks.tab -}}
 
+{{- $spacing := .Get "spacing" | default (not .Parent) -}}
+
 {{ if not $error }}
     {{- $output := partial "assets/button.html" (dict 
         "type" $type
@@ -133,7 +136,8 @@
         "justify" $justify
         "cue" $cue
         "tab" $tab
-        "toast" $toast)
+        "toast" $toast
+        "spacing" $spacing)
     -}}
 
     {{- if .Parent -}}

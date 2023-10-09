@@ -6,6 +6,7 @@
     "href"          Required address for the button or hyperlink.
     "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
     "class"         Optional class attribute of the tooltip's button element.
+    "spacing"       Optional flag to add spacing to the inline tooltip, defaults to "true".
 -->
 
 {{ $error := false }}
@@ -43,8 +44,19 @@
 
 {{- $class := .Get "class" | default "" -}}
 
+{{- $spacing := .Get "spacing" | default true -}}
+
 {{ if not $error }}
     <div class="d-inline-flex">
-        {{- partial "assets/button.html" (dict "type" $type "title" $title "color" $color "tooltip" $tooltip "href" $href "placement" $placement "class" $class) -}}
+        {{- partial "assets/button.html" (dict 
+            "type" $type
+            "title" $title
+            "color" $color
+            "tooltip" $tooltip
+            "href" $href
+            "placement" $placement
+            "class" $class
+            "spacing" $spacing) 
+        -}}
     </div>
 {{ end }}
