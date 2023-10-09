@@ -97,7 +97,8 @@
         "icon" $icon
         "tooltip" $tooltip
         "order" "first"
-        "class" (trim (printf "rounded-2 fw-semibold %s" $class) " "))
+        "class" (trim (printf "rounded-2 fw-semibold %s" $class) " ")
+        "spacing" $inline)
     -}} 
     {{- if not $inline }}</div>{{ end -}}
 {{- end -}}

@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.20.7",
+  "version": "0.21.0-alpha",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -20,7 +20,8 @@
     "prestart": "npm run -s mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings",
     "start:example": "npm run -s prestart && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -s exampleSite",
-    "start:prod": "npm run -s prestart  && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -e production",
+    "start:prod": "npm run -s prestart  && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings --minify -e production",
+    "start:example:prod": "npm run -s prestart  && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings --minify -e production -s exampleSite",
     "prebuild": "npm run clean:public && npm run -s mod:vendor",
     "build": "hugo --gc --minify",
     "build:cache": "npm run -s prebuild && hugo config | grep cachedir && hugo --gc --minify -e ci",
