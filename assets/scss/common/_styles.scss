@@ -15,6 +15,27 @@ a:active {
     min-height: 100vh;
 }
 
+.fullscreen {
+    --navbar-offset: #{$navbar-offset};
+    min-height: calc(100vh - var(--navbar-offset));
+}
+
+.main-content {
+    margin-top: $navbar-offset;
+}
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "cursor": (
+      property: margin-left margin-right,
+      class: mx,
+      responsive: true,
+      values: auto 0,
+    )
+  )
+);
+
 .tickmark li::marker {
     content: "✓ ";
 }
