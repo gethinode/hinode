@@ -17,6 +17,7 @@ a:active {
 
 .fullscreen {
     --navbar-offset: #{$navbar-offset};
+
     min-height: calc(100vh - var(--navbar-offset));
 }
 
