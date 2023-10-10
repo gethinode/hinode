@@ -1,0 +1,73 @@
+{{- $page := .page -}}
+{{- $headings := .headings -}}
+{{- $orientation := .orientation | default "stacked" -}}
+{{- $actions := .actions -}}
+{{- $colWidth := .colWidth | default 6 }}
+
+{{- define "partials/list/featured-body.html" }}
+    {{- $page := .page -}}
+    {{- $headings := .headings -}}
+    {{- $orientation := .orientation | default "stacked" -}}
+    {{- $actions := .actions -}}
+
+    <div class="row justify-content-end">
+        <div class="text-center {{ if ne $orientation "stacked" }} text-md-start{{ end }} col-md-8">
+            {{ with $page.Title }}<p class="display-4">{{ . }}</p>{{ end }}
+            <span class="fs-5 text-muted">{{ $page.Description }}</span>
+
+            {{ if $actions }}
+                <div class="hstack gap-3 justify-content-center{{ if ne $orientation "stacked" }} justify-content-md-start{{ end }} pt-5 pt-md-3">
+                    {{ range $actions }}
+                        {{ partial "assets/button.html" (dict "href" .url "icon" .icon "title" .title "outline" .outline "order" "last" "justify" "start") }}
+                    {{ end }}
+                </div>
+            {{ end }}
+        </div>
+    </div>
+{{- end -}}
+
+{{- define "partials/list/featured-illustration.html" }}
+    {{- $page := .page -}}
+
+    {{ with $page.Params.icon }}
+        {{ if eq (lower (path.Ext .)) ".json" }}
+            {{ partial "assets/animation.html" (dict "data" . "loop" false "hover" true "class" "col-8 mx-auto text-center") }}
+        {{ else }}
+            {{ partial "assets/icon.html" (dict "icon" . "wrapper" "col-8 mx-auto text-center")}}
+        {{ end }}
+    {{ else }}
+        {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
+        {{- if $thumbnail }}
+            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "img-wrap col-8 mx-auto mx-md-0 pb-5 pb-md-0" "innerClass" "rounded" "title" .Site.Title) }}
+        {{ end }}
+    {{ end }}
+{{- end -}}
+
+<div class="container-fluid {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
+    <div class="container-xxl p-4 px-xxl-0{{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
+        {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
+            <div>{{ partial "assets/breadcrumb.html" $page }}</div>
+        {{ end -}}
+        {{ if eq $orientation "stacked" }}
+            <div class="col-12 col-md-{{ $colWidth }} m-auto text-center h-100">
+                {{ partial "partials/list/featured-illustration.html" (dict "page" $page) }}
+                {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
+            </div>
+        {{ else }}
+            <div class="row row-cols-1 row-cols-md-2 flex-fill">
+                <div class="col col-12 col-md-{{ $colWidth }} order-1 order-md-0 my-md-auto">
+                    {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
+                </div>
+                <div class="col col-12 col-md-{{ sub 12 $colWidth }} order-0 order-md-1 text-center my-md-auto align-items-end">
+                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page) }}
+                </div>
+            </div>
+        {{ end }}
+
+        {{ with $headings }}
+            <div class="col col-12 p-0 pt-5">
+                {{ partial "assets/toc-main.html" (dict "headings" .) }}
+            </div>
+        {{ end }}
+    </div>
+</div>
