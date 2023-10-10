@@ -52,8 +52,7 @@
     anchor = true
     logo = "/img/logo_icon.svg"
     color = "body"
-    fixed = true
-    offset = "3.8em"
+    offset = "5.5rem"
     search = true
     breadcrumb = true
     toc = true
