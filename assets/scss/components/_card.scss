@@ -15,6 +15,10 @@
     width: 100%;
 }
 
+.card-icon {
+    color: $secondary;
+}
+
 .card-zoom::after .card-img-wrap img {
     content: "";
     position: absolute;
