@@ -14,7 +14,9 @@
 {{- $moreTitle := .moreTitle -}}
 {{- $sectionURL := .sectionURL -}}
 {{- $nested := .nested | default true -}}
+{{- $simple := .simple | default false -}}
 {{- $paginate := true -}}
+{{- $kind := .kind | default "regular" -}}
 {{- $sort := "date" -}}
 {{- $order := "desc" -}}
 {{- $separator := false -}}
@@ -55,14 +57,24 @@
     {{- with index . "type" }}{{ $type = . }}{{ end -}}
     {{- with index . "vertical" }}{{ $vertical = . }}{{ end -}}
     {{- with index . "width" }}{{ $width = . }}{{ end -}}
+    {{- with index . "kind" }}{{ $kind = . }}{{ end -}}
     {{- with index . "ratio" }}{{ $ratio = . }}{{ end -}}
 {{- end -}}
 {{ if ne (printf "%T" $nested) "bool" }}
     {{ errorf "partial [assets/section-list.html] - Invalid value for param 'nested'"}}
 {{ end }}
 
-{{ $list := "" }}
-{{ if $nested }}
+{{ $list := slice }}
+{{ if eq $kind "taxonomy" }}
+    {{ $filter := page.Params.filter }}
+    {{ with $filter }}
+        {{ with index site.Taxonomies $section $filter }}
+            {{ $list = .Pages }}
+        {{ end }}
+    {{ else }}
+        {{ $list = where site.Pages (printf ".Params.%s" $section) "!=" nil }}
+    {{ end }}
+{{ else if $nested }}
     {{ $list = where site.RegularPages "Type" "in" $section }}
 {{ else if $home }}
     {{ $sectionPage := site.GetPage "section" $section }}
@@ -90,6 +102,11 @@
         {{- $max = int (math.Min $homepage $max) -}}
     {{ end -}}
 
+    {{ if $simple }}
+        {{ $title = "" }}
+        {{ $background = "" }}
+    {{ end }}
+
     {{- $params := (dict 
         "page" $page
         "list" $list
@@ -106,8 +123,8 @@
     -}}
     {{- $partial := "" -}}
 
-    <div class="container-fluid {{ with $background }} bg-{{ . }}{{  end }}">
-        <div class="container-xxl flex-fill p-0">
+    <div class="container-fluid {{ with $background }} bg-{{ . }}{{ end }} p-0">
+        <div class="container-xxl flex-fill p-4 px-xxl-0 pb-5">
             {{- partial "assets/section-header.html" $params -}}
             
             {{ if eq $layout "card" }}
