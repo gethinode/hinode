@@ -45,6 +45,10 @@
     fullCover = false
     centerHeadline = false
     style = ""
+    [home.feature]
+        orientation = "horizontal"
+        color = "primary"
+        colWidth = 6
 # toml-docs-end home
 
 # toml-docs-start navigation
