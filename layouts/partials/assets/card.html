@@ -152,7 +152,7 @@
                     {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
                 {{- else if $icon -}}
                     <div class="p-{{ $padding }} h-100 fa-wrapper d-flex align-items-center justify-content-center">
-                        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid text-secondary fa-fw" $icon)) -}}
+                        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid fa-fw" $icon)) -}}
                     </div>
                 {{- end -}}
             </div>
@@ -173,7 +173,7 @@
             {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" (or $alt $title)) -}}
         {{- else if $icon -}}
             <div class="p-{{ $padding }}">
-                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x text-secondary" $icon)) -}}
+                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x" $icon)) -}}
             </div>
         {{- end -}}
         <div class="card-body d-flex flex-column p-{{ $padding }}">
