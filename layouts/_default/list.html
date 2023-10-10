@@ -1,13 +1,119 @@
 {{- define "main" -}}
-    {{- $content := partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) -}}
-    {{- partial "assets/section-list.html" (dict 
-        "page" .
-        "section" .Type
-        "home" false
-        "nested" .Params.Nested
-        "title" (or .Title .Type)
-        "description" .Description
-        "content" $content
-        "paginate" true)
-    -}}
+    {{- $page := . -}}
+    {{- $orientation := "horizontal" -}}
+    {{- $sections := slice -}}
+    {{- $actions := $page.Params.actions -}}
+    {{- $headings := slice -}}
+    {{- $layout := $page.Params.layout -}}
+
+    {{ if $page.IsHome }}
+        {{- $orientation = site.Params.home.feature.orientation | default "horizontal" -}}
+        {{- $actions = (or $actions site.Params.featured.actions) -}}
+        {{- $sections = site.Params.home.sections -}}
+        {{- if not $sections -}}
+            {{ range $section := site.Sections }}
+                {{ $sections = $sections | append $section.Type }}
+            {{ end }}
+        {{- end -}}
+    {{ else }}
+        {{ $headings = $headings | append $page.Title }}
+        {{- range .Fragments.Headings }}
+            {{- range .Headings }}
+                {{- $headings = $headings | append .Title -}}
+            {{- end -}}
+        {{- end -}}
+
+        {{ $sections = $sections | append $page.Type }}
+        {{ with $page.Params.sections }}
+            {{ $sections = $sections | append . }}
+        {{ end }}
+    {{ end }}
+
+    {{/* Generate section content first to determine headings */}}
+    {{ $body := "" }}
+    {{- range $index, $section := $sections -}}
+        {{- $sectionPage := site.GetPage "section" $section -}}
+        {{- $sectionURL := $sectionPage.RelPermalink -}}
+        {{- $title := or $sectionPage.Title $sectionPage.Type -}}
+
+        {{- with (index site.Params.sections $section) -}}
+            {{- with index . "title" }}{{ $title = or . $title }}{{ end -}}
+        {{- end -}}
+    
+        {{- $thumbnail := (or (and (reflect.IsMap $sectionPage.Params.Thumbnail) $sectionPage.Params.Thumbnail.url) $sectionPage.Params.Thumbnail) -}}
+        {{- $icon := $sectionPage.Params.Icon -}}
+        {{- $content := $sectionPage.Content -}}
+        {{- $sectionTitle := strings.FirstUpper $sectionPage.Type -}}
+        {{- $moreTitle := "" -}}
+        {{- with (index site.Params.sections $section) -}}
+            {{- with index . "reference" }}{{ $moreTitle = . }}{{ end -}}
+        {{- end -}}
+        {{- $moreTitle = or $moreTitle (printf (T "more" (pluralize $sectionTitle))) -}}
+
+        {{- $sectionContent := trim (partial "assets/section-list.html" (dict 
+            "page" $page 
+            "section" $section 
+            "home" $page.IsHome
+            "simple" (eq $section $page.Section)
+            "nested" $page.IsHome
+            "thumbnail" $thumbnail
+            "icon" $icon
+            "content" $content
+            "moreTitle" $moreTitle
+            "sectionURL" $sectionURL)) " \r\n"
+        -}}
+
+        {{ if $sectionContent }}
+            {{- if not $page.IsHome }}{{ $headings = $headings | append $title }}{{ end -}}
+            {{- $body = printf "%s%s" $body $sectionContent }}
+        {{ end }}
+    {{- end -}}
+
+    {{/* Display featured section */}}
+    {{- if or (eq $layout "featured") $page.IsHome -}}
+        {{- partial "list/featured.html" (dict "page" . "headings" $headings "actions" $actions "orientation" $orientation) -}}
+    {{- end -}}
+
+    {{/* Display main content */}}
+    <div class="container-xxl px-4 px-xxl-0">
+        {{- if ne $layout "featured" -}}
+            {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
+                <div>{{ partial "assets/breadcrumb.html" $page }}</div>
+            {{ end -}}
+        {{- end -}}
+
+        <div class="row row-cols-1 row-cols-sm-2">
+            <div class="col col-sm-12 col-md-8">
+                {{ if and (ne $layout "featured") (not $page.IsHome) }}
+                    {{ with $page.Title }}<p id="{{ anchorize . }}" class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+                {{ end }}
+                {{ if ($page.Params.menu) }}
+                    {{- partial "assets/section-menu.html" $page -}}
+                {{- end -}}
+                {{- $content := partial "utilities/ProcessContent" (dict "page" $page "raw" $page.RawContent) -}}
+                {{ $content | safeHTML }}
+                {{ if and (and (and $sections (eq (len $sections) 1)) (not $body)) (not $content) }}
+                    <p class="pt-4">{{- T "emptyList" }}.</p>
+                {{ end }}
+            </div>
+            {{ with $page.Params.contact }}
+                {{- $contact := site.GetPage . }}
+                {{- if not $contact }}
+                    {{- errorf "Error processing content file '%s' - Cannot find contact: %s" $page.File . -}}
+                {{- else -}}
+                    {{ $color := site.Params.contact.color | default "primary" }}
+                    {{ $style := site.Params.contact.style | default "shadow" }}
+                    <div class="col col-md-4 d-none d-md-block pt-5">
+                        {{- partial "assets/card.html" (dict "path" $page.Params.contact "color" $color "header" "none" "footer" "none" "ratio" "1x1" "class" (printf "w-75 mx-auto mt-4 %s" $style)) -}}
+                    </div>
+                    <div class="col col-sm-12 d-md-none pt-5">
+                        {{- partial "assets/card.html" (dict "path" $page.Params.contact "color" $color "header" "none" "footer" "none" "orientation" "horizontal" "class" $style) -}}
+                    </div>
+                {{- end }}
+            {{ end }}
+        </div>    
+    </div>
+
+    {{/* Display generated sections */}}
+    {{ $body | safeHTML }}
 {{- end -}}
