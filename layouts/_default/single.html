@@ -120,6 +120,11 @@
 {{ end -}}
 
 {{ define "main" -}}
+    {{- $download := .Params.download -}}
+    {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
+        {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
+    {{- end -}}
+    
     {{- $menu := .Scratch.Get "sidebar" -}}
     {{- $version := .Scratch.Get "version" -}}
     {{- $sidebar := .Site.Params.navigation.sidebar | default true -}}
@@ -146,12 +151,12 @@
                 </div>
                 <div class="col col-lg-2 d-none d-lg-block pt-5">
                     {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
-                        {{ partial "assets/toc.html" . -}}
+                        {{ partial "assets/toc.html" (dict "page" . "download" $download) -}}
                     {{ end -}}
                 </div>
             </div>
         </div>
-    {{ else }}
+    {{ else if $sidebar }}
         <div class="container-xxl px-3 px-xxl-0">
             <div class="row row-cols-1 row-cols-sm-3">
                 <div class="col col-md-2 d-none d-md-block"></div>
@@ -162,7 +167,22 @@
                 </div>
                 <div class="col col-md-2 d-none d-md-block">
                     {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
-                        {{ partial "assets/toc.html" . -}}
+                        {{ partial "assets/toc.html" (dict "page" . "download" $download) -}}
+                    {{ end -}}
+                </div>
+            </div>    
+        </div>
+    {{ else }}
+        <div class="container-xxl px-3 px-xxl-0">
+            <div class="row row-cols-1 row-cols-sm-2">
+                <div class="col col-sm-12 col-md-9">
+                    {{ partial "partials/header.html" . }}
+                    {{ partial "partials/body.html" . }}
+                    {{ partial "partials/footer.html" . }}
+                </div>
+                <div class="col col-md-3 d-none d-md-block">
+                    {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+                        {{ partial "assets/toc.html" (dict "page" . "download" $download) -}}
                     {{ end -}}
                 </div>
             </div>    
