@@ -1,0 +1,20 @@
+{{- $page := . -}}
+{{ $items := $page.Parent.Sections }}
+{{ if not $page.Parent.Section }}
+    {{ $items = $page.Sections }}
+{{ end }}
+
+{{- if gt (len $items) 0 }}
+    <nav class="navbar navbar-expand navbar-services p-0 fs-5">
+        <div class="container-fluid p-0 pb-3">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {{- range $items }}
+                        {{ $active := eq $page.RelPermalink .RelPermalink }}
+                        <li class="nav-item"><a class="nav-link{{ if $active }} active{{ end }}" href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                    {{- end }}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{{- end }}

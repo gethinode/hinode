@@ -1,0 +1,20 @@
+{{ $headings := .headings | default slice }}
+{{- range .Fragments.Headings }}
+    {{- range .Headings }}
+        {{- $headings = $headings | append .Title -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if gt (len $headings) 1 }}
+<nav class="navbar navbar-expand navbar-services p-0 fs-5">
+    <div class="container-fluid p-0 pb-3 border-bottom">
+        <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {{- range $headings }}
+                        <li class="nav-item"><a class="nav-link" href="#{{ anchorize . }}">{{ . }}</a></li>
+                    {{- end }}
+                </ul>
+        </div>
+    </div>
+</nav>
+{{- end }}
