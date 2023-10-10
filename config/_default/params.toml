@@ -45,6 +45,10 @@
     fullCover = false
     centerHeadline = false
     style = ""
+    [home.feature]
+        orientation = "horizontal"
+        color = "primary"
+        colWidth = 6
 # toml-docs-end home
 
 # toml-docs-start navigation
@@ -52,8 +56,7 @@
     anchor = true
     logo = "/img/logo_icon.svg"
     color = "body"
-    fixed = true
-    offset = "3.8em"
+    offset = "5.5rem"
     search = true
     breadcrumb = true
     toc = true

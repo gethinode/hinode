@@ -23,6 +23,8 @@
   translation: "Artikelen"
 - id: more
   translation: "Meer {{ . }}"
+- id: emptyList
+  translation: "Geen artikelen gevonden"
 
 # Sharing
 - id: shareLink
@@ -37,6 +39,8 @@
   translation: "Link"
 - id: code
   translation: "Code"
+- id: download
+  translation: "Download artikel"
 
 # Pagination
 - id: paginationNav
