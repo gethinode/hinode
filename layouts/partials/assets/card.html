@@ -18,6 +18,8 @@
                     "publication", "tags", and "none" (default).
     "description"   Optional description of the card.
     "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+    "ratio"         Optional ratio of the thumbnail image, defaults to "16x9" (stacked orientation) or "1x1" (horizontal
+                    orientation).
     "alt"           Optional alternate text for the thumbnail, uses "title" by default.
     "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
     "orientation"   Optional placecement of the thumbnail or icon, either "stacked" (default), "horizontal",
@@ -88,6 +90,7 @@
 {{- $href := .href -}}
 {{- $description := .description -}}
 {{- $thumbnail := .thumbnail -}}
+{{- $ratio := .ratio -}}
 {{- $icon := .icon -}}
 
 {{- $color := "" -}}
@@ -149,9 +152,9 @@
         <div class="row g-0 row-cols-1 h-100">
             <div class="col-4{{ if eq  $orientation "horizontal-sm" }} col-md-2{{ end }}">
                 {{- if $thumbnail -}}
-                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "1x1") "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
                 {{- else if $icon -}}
-                    <div class="p-{{ $padding }} h-100 fa-wrapper d-flex align-items-center justify-content-center">
+                    <div class="card-icon p-{{ $padding }} h-100 fa-wrapper d-flex align-items-center justify-content-center">
                         {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid fa-fw" $icon)) -}}
                     </div>
                 {{- end -}}
@@ -170,9 +173,9 @@
 {{- else -}}
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{- if $thumbnail -}}
-            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" (or $alt $title)) -}}
+            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "16x9") "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" (or $alt $title)) -}}
         {{- else if $icon -}}
-            <div class="p-{{ $padding }}">
+            <div class="card-icon  p-{{ $padding }}">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x" $icon)) -}}
             </div>
         {{- end -}}
