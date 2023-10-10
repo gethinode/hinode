@@ -32,6 +32,7 @@
 {{- $type := "pills" -}}
 {{- $vertical := "false" -}}
 {{- $width := 100 -}}
+{{- $ratio := "" -}}
 
 {{- with (index site.Params.sections $section) -}}
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
@@ -54,6 +55,7 @@
     {{- with index . "type" }}{{ $type = . }}{{ end -}}
     {{- with index . "vertical" }}{{ $vertical = . }}{{ end -}}
     {{- with index . "width" }}{{ $width = . }}{{ end -}}
+    {{- with index . "ratio" }}{{ $ratio = . }}{{ end -}}
 {{- end -}}
 {{ if ne (printf "%T" $nested) "bool" }}
     {{ errorf "partial [assets/section-list.html] - Invalid value for param 'nested'"}}
@@ -94,6 +96,7 @@
         "title" $title
         "icon" $icon
         "thumbnail" $thumbnail
+        "ratio" $ratio
         "sectionHeader" $sectionHeader
         "description" $description
         "content" $content
