@@ -16,6 +16,16 @@ modules: ["katex", "leaflet"]
 
 Hinode propose plusieurs shortcodes en plus des [éléments Bootstrap]({{< relref "bootstrap-elements" >}}) courants. Consultez la [documentation officielle]({{< param "links.hinode_docs" >}}) pour plus de détails.
 
+## Animation
+
+À titre d'exemple, le shortcode suivant affiche une animation qui se déclenche au survol.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* animation data="gatin.json" auto=false hover=true class="col-6 mx-auto" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Formule (KaTeX)
 
 À titre d'exemple, le markdown suivant affiche deux formules en utilisant la bibliothèque de composition typographique KaTeX.
