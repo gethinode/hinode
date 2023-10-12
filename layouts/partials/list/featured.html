@@ -10,19 +10,17 @@
     {{- $orientation := .orientation | default "stacked" -}}
     {{- $actions := .actions -}}
 
-    <div class="row justify-content-end">
-        <div class="text-center {{ if ne $orientation "stacked" }} text-md-start{{ end }} col-md-8">
-            {{ with $page.Title }}<p class="display-4">{{ . }}</p>{{ end }}
-            <span class="fs-5 text-muted">{{ $page.Description }}</span>
+    <div class="text-center {{ if ne $orientation "stacked" }}text-md-start{{ else }}pt-4{{ end }}">
+        {{ with $page.Title }}<p class="display-4">{{ . }}</p>{{ end }}
+        <span class="fs-5 text-muted">{{ $page.Description }}</span>
 
-            {{ if $actions }}
-                <div class="hstack gap-3 justify-content-center{{ if ne $orientation "stacked" }} justify-content-md-start{{ end }} pt-5 pt-md-3">
-                    {{ range $actions }}
-                        {{ partial "assets/button.html" (dict "href" .url "icon" .icon "title" .title "outline" .outline "order" "last" "justify" "start") }}
-                    {{ end }}
-                </div>
-            {{ end }}
-        </div>
+        {{ if $actions }}
+            <div class="hstack{{ if gt (len $actions) 1 }} gap-3{{ end }} justify-content-center{{ if ne $orientation "stacked" }} justify-content-md-start{{ end }} pt-5 pt-md-3">
+                {{ range $actions }}
+                    {{ partial "assets/button.html" (dict "href" .url "icon" .icon "title" .title "outline" .outline "order" "last" "justify" "start") }}
+                {{ end }}
+            </div>
+        {{ end }}
     </div>
 {{- end -}}
 
@@ -31,14 +29,14 @@
 
     {{ with $page.Params.icon }}
         {{ if eq (lower (path.Ext .)) ".json" }}
-            {{ partial "assets/animation.html" (dict "data" . "loop" false "hover" true "class" "col-8 mx-auto text-center") }}
+            {{ partial "assets/animation.html" (dict "data" . "loop" false "hover" true "class" "col-6 mx-auto text-center") }}
         {{ else }}
-            {{ partial "assets/icon.html" (dict "icon" . "wrapper" "col-8 mx-auto text-center")}}
+            {{ partial "assets/icon.html" (dict "icon" . "wrapper" "col-6 mx-auto text-center")}}
         {{ end }}
     {{ else }}
         {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
         {{- if $thumbnail }}
-            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "img-wrap col-8 mx-auto mx-md-0 pb-5 pb-md-0" "innerClass" "rounded" "title" .Site.Title) }}
+            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "img-wrap mx-auto mx-md-0 pb-5 pb-md-0" "innerClass" "rounded" "title" .Site.Title) }}
         {{ end }}
     {{ end }}
 {{- end -}}
@@ -48,10 +46,13 @@
         {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
             <div>{{ partial "assets/breadcrumb.html" $page }}</div>
         {{ end -}}
+
         {{ if eq $orientation "stacked" }}
-            <div class="col-12 col-md-{{ $colWidth }} m-auto text-center h-100">
-                {{ partial "partials/list/featured-illustration.html" (dict "page" $page) }}
-                {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
+            <div class="row justify-content-center flex-fill">
+                <div class="col-12 col-md-{{ $colWidth }} m-auto text-center">
+                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page) }}
+                    {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
+                </div>
             </div>
         {{ else }}
             <div class="row row-cols-1 row-cols-md-2 flex-fill">
