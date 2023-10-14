@@ -8,7 +8,7 @@
     HUGO_VERSION = "0.119.0"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
-    NODE_VERSION = "18.18.0"
+    NODE_VERSION = "18.18.2"
     NPM_VERSION = "9.8.1"
 # toml-docs-end netlify
 
