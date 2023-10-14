@@ -48,7 +48,7 @@
     [home.feature]
         orientation = "horizontal"
         color = "primary"
-        colWidth = 6
+        width = 4
 # toml-docs-end home
 
 # toml-docs-start navigation
