@@ -36,6 +36,11 @@
     fullCover = false
     centerHeadline = false
     style = ""
+    [home.feature]
+        orientation = "horizontal"
+        color = "primary"
+        width = 4
+        align = "start"
 
 [navigation]
     anchor = true

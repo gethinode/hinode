@@ -1,18 +1,31 @@
 {{- define "main" -}}
     {{- $page := . -}}
-    {{- $orientation := "horizontal" -}}
+    {{- $orientation :=  site.Params.list.feature.orientation | default "horizontal" -}}
+    {{- $width := site.Params.list.feature.width | default 6 -}}
+    {{- $justify := site.Params.list.feature.justify | default "center" -}}
+    {{- $align := site.Params.list.feature.align | default "center" -}}
     {{- $sections := slice -}}
+    {{- $sections = $sections | append $page.Type -}}
+    {{ with $page.Params.sections }}
+        {{ $sections = $sections | append . }}
+    {{ end }}
     {{- $actions := $page.Params.actions -}}
     {{- $headings := slice -}}
     {{- $layout := $page.Params.layout -}}
 
     {{ if $page.IsHome }}
-        {{- $orientation = site.Params.home.feature.orientation | default "horizontal" -}}
+        {{- $orientation = or site.Params.home.feature.orientation $orientation -}}
+        {{- $width = or site.Params.home.feature.width $width -}}
+        {{- $justify = or site.Params.home.feature.justify $justify -}}
+        {{- $align = or site.Params.home.feature.align $align -}}
         {{- $actions = (or $actions site.Params.featured.actions) -}}
-        {{- $sections = site.Params.home.sections -}}
-        {{- if not $sections -}}
-            {{ range $section := site.Sections }}
-                {{ $sections = $sections | append $section.Type }}
+        {{- if not $page.Params.sections -}}
+            {{- with site.Params.home.sections }}
+                {{ $sections = $sections | append . }}
+            {{ else }}
+                {{ range $section := site.Sections }}
+                    {{ $sections = $sections | append $section.Type }}
+                {{ end }}
             {{ end }}
         {{- end -}}
     {{ else }}
@@ -22,11 +35,6 @@
                 {{- $headings = $headings | append .Title -}}
             {{- end -}}
         {{- end -}}
-
-        {{ $sections = $sections | append $page.Type }}
-        {{ with $page.Params.sections }}
-            {{ $sections = $sections | append . }}
-        {{ end }}
     {{ end }}
 
     {{/* Generate section content first to determine headings */}}
@@ -55,7 +63,7 @@
             "section" $section 
             "home" $page.IsHome
             "simple" (eq $section $page.Section)
-            "nested" $page.IsHome
+            "nested" (and $page.IsHome (eq $section $page.Section))
             "thumbnail" $thumbnail
             "icon" $icon
             "content" $content
@@ -71,7 +79,15 @@
 
     {{/* Display featured section */}}
     {{- if or (eq $layout "featured") $page.IsHome -}}
-        {{- partial "list/featured.html" (dict "page" . "headings" $headings "actions" $actions "orientation" $orientation) -}}
+        {{- partial "list/featured.html" (dict 
+            "page" .
+            "headings" $headings
+            "actions" $actions
+            "orientation" $orientation
+            "width" $width
+            "justify" $justify
+            "align" $align) 
+        -}}
     {{- end -}}
 
     {{/* Display main content */}}
