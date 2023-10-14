@@ -2,20 +2,35 @@
 {{- $headings := .headings -}}
 {{- $orientation := .orientation | default "stacked" -}}
 {{- $actions := .actions -}}
-{{- $colWidth := .colWidth | default 6 }}
+{{- $width := .width | default 6 }}
+{{- if or (lt $width 1) (gt $width 12) -}}
+    {{- $width = 6 -}}
+    {{- warnf "partial [list/featured.html] - Invalid column width: %d" $width -}}
+{{ end -}}
+{{- $justify := .justify | default "center" -}}
+{{- $supportedJustify := slice "start" "end" "center" "between" "around" "evenly" -}}
+{{- if not (in $supportedJustify $justify) -}}
+    {{- errorf "partial [list/featured.html] - Invalid value for param 'justify': %s" $justify -}}
+{{- end -}}
+{{- $align := .align | default "center" -}}
+{{- $supportedAlign := slice "start" "end" "center" -}}
+{{- if not (in $supportedAlign $align) -}}
+    {{- errorf "partial [list/featured.html] - Invalid value for param 'align': %s" $align -}}
+{{- end -}}
 
 {{- define "partials/list/featured-body.html" }}
     {{- $page := .page -}}
     {{- $headings := .headings -}}
     {{- $orientation := .orientation | default "stacked" -}}
     {{- $actions := .actions -}}
+    {{- $align := .align | default "center" -}}
 
-    <div class="text-center {{ if ne $orientation "stacked" }}text-md-start{{ else }}pt-4{{ end }}">
+    <div class="text-{{ $align }}">
         {{ with $page.Title }}<p class="display-4">{{ . }}</p>{{ end }}
         <span class="fs-5 text-muted">{{ $page.Description }}</span>
 
         {{ if $actions }}
-            <div class="hstack{{ if gt (len $actions) 1 }} gap-3{{ end }} justify-content-center{{ if ne $orientation "stacked" }} justify-content-md-start{{ end }} pt-5 pt-md-3">
+            <div class="hstack{{ if gt (len $actions) 1 }} gap-3{{ end }} justify-content-{{ $align}} pt-5 pt-md-3">
                 {{ range $actions }}
                     {{ partial "assets/button.html" (dict "href" .url "icon" .icon "title" .title "outline" .outline "order" "last" "justify" "start") }}
                 {{ end }}
@@ -26,6 +41,7 @@
 
 {{- define "partials/list/featured-illustration.html" }}
     {{- $page := .page -}}
+    {{- $style := printf "img-wrap mx-auto mx-md-0 %s" .style -}}
 
     {{ with $page.Params.icon }}
         {{ if eq (lower (path.Ext .)) ".json" }}
@@ -36,7 +52,7 @@
     {{ else }}
         {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
         {{- if $thumbnail }}
-            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" "img-wrap mx-auto mx-md-0 pb-5 pb-md-0" "innerClass" "rounded" "title" .Site.Title) }}
+            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" $style "innerClass" "rounded" "title" .Site.Title) }}
         {{ end }}
     {{ end }}
 {{- end -}}
@@ -49,18 +65,18 @@
 
         {{ if eq $orientation "stacked" }}
             <div class="row justify-content-center flex-fill">
-                <div class="col-12 col-md-{{ $colWidth }} m-auto text-center">
-                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page) }}
+                <div class="col-12 col-md-{{ $width }} m-auto text-center">
+                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page "style" "pb-4") }}
                     {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
                 </div>
             </div>
         {{ else }}
-            <div class="row row-cols-1 row-cols-md-2 flex-fill">
-                <div class="col col-12 col-md-{{ $colWidth }} order-1 order-md-0 my-md-auto">
-                    {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
+            <div class="flex-fill row row-cols-1 row-cols-md-2 justify-content-{{ $justify }}">
+                <div class="col col-12 col-md-{{ $width }} order-1 order-md-0 my-md-auto">
+                    {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions "align" $align) }}
                 </div>
-                <div class="col col-12 col-md-{{ sub 12 $colWidth }} order-0 order-md-1 text-center my-md-auto align-items-end">
-                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page) }}
+                <div class="col col-12 col-md-{{ if gt $width 6 }}{{ sub 12 $width }}{{ else }}{{ $width }}{{ end }} order-0 order-md-1 text-center my-md-auto">
+                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page "style" "pb-4 pb-md-0") }}
                 </div>
             </div>
         {{ end }}
