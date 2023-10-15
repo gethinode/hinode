@@ -100,7 +100,7 @@
 
         <div class="row row-cols-1 row-cols-sm-2">
             <div class="col col-sm-12 col-md-8">
-                {{ if and (ne $layout "featured") (not $page.IsHome) }}
+                {{ if not $page.IsHome }}
                     {{ with $page.Title }}<p id="{{ anchorize . }}" class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
                 {{ end }}
                 {{ if ($page.Params.menu) }}
