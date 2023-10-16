@@ -17,6 +17,7 @@
 {{- if not (in $supportedAlign $align) -}}
     {{- errorf "partial [list/featured.html] - Invalid value for param 'align': %s" $align -}}
 {{- end -}}
+{{- $breadcrumb := and (not $page.IsHome) site.Params.navigation.breadcrumb -}}
 
 {{- define "partials/list/featured-body.html" }}
     {{- $page := .page -}}
@@ -59,9 +60,9 @@
     {{ end }}
 {{- end -}}
 
-<div class="container-fluid {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
-    <div class="container-xxl pb-4 px-4 px-xxl-0{{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
-        {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
+<div class="container-fluid p-0 {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
+    <div class="container-xxl {{ if $breadcrumb }} pb-4 px-4 {{ else }} p-4 {{ end }} px-xxl-0 {{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
+        {{ if $breadcrumb }}
             <div>{{ partial "assets/breadcrumb.html" $page }}</div>
         {{ end -}}
 
