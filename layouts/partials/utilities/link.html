@@ -26,7 +26,7 @@
     {{- end -}}
 
     {{- if $cue -}}
-        {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
+        {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs" "spacing" false) }}
         {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
     {{- end -}}
 {{- else -}}
