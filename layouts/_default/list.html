@@ -62,7 +62,7 @@
             "page" $page 
             "section" $section 
             "home" $page.IsHome
-            "simple" (eq $section $page.Section)
+            "simple" (eq (len $sections) 1)
             "nested" (and $page.IsHome (eq $section $page.Section))
             "thumbnail" $thumbnail
             "icon" $icon
@@ -101,7 +101,7 @@
         <div class="row row-cols-1 row-cols-sm-2">
             <div class="col col-sm-12 col-md-8">
                 {{ if not $page.IsHome }}
-                    {{ with $page.Title }}<p id="{{ anchorize . }}" class="display-4 mt-3{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+                    {{ with $page.Title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
                 {{ end }}
                 {{ if ($page.Params.menu) }}
                     {{- partial "assets/section-menu.html" $page -}}
