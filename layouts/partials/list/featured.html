@@ -58,7 +58,7 @@
 {{- end -}}
 
 <div class="container-fluid {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
-    <div class="container-xxl p-4 px-xxl-0{{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
+    <div class="container-xxl pb-4 px-4 px-xxl-0{{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
         {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
             <div>{{ partial "assets/breadcrumb.html" $page }}</div>
         {{ end -}}
