@@ -17,6 +17,7 @@
 {{- if not (in $supportedAlign $align) -}}
     {{- errorf "partial [list/featured.html] - Invalid value for param 'align': %s" $align -}}
 {{- end -}}
+{{- $breadcrumb := and (not $page.IsHome) site.Params.navigation.breadcrumb -}}
 
 {{- define "partials/list/featured-body.html" }}
     {{- $page := .page -}}
@@ -43,11 +44,13 @@
     {{- $page := .page -}}
     {{- $style := printf "img-wrap mx-auto mx-md-0 %s" .style -}}
 
-    {{ with $page.Params.icon }}
-        {{ if eq (lower (path.Ext .)) ".json" }}
-            {{ partial "assets/animation.html" (dict "data" . "loop" false "hover" true "class" "col-6 mx-auto text-center") }}
+    {{ if $page.Params.icon }}
+        {{- $icon := (or (and (reflect.IsMap $page.Params.Icon) $page.Params.Icon.url) $page.Params.Icon) -}}
+        {{- $mode := and (reflect.IsMap $page.Params.Icon) $page.Params.Icon.mode -}}
+        {{ if eq (lower (path.Ext $icon)) ".json" }}
+            {{ partial "assets/animation.html" (dict "data" $icon "mode" $mode "loop" false "hover" true "class" "col-6 mx-auto text-center") }}
         {{ else }}
-            {{ partial "assets/icon.html" (dict "icon" . "wrapper" "col-6 mx-auto text-center")}}
+            {{ partial "assets/icon.html" (dict "icon" "mode" $mode $icon "wrapper" "col-6 mx-auto text-center")}}
         {{ end }}
     {{ else }}
         {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
@@ -57,9 +60,9 @@
     {{ end }}
 {{- end -}}
 
-<div class="container-fluid {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
-    <div class="container-xxl pb-4 px-4 px-xxl-0{{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
-        {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
+<div class="container-fluid p-0 {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
+    <div class="container-xxl {{ if $breadcrumb }} pb-4 px-4 {{ else }} p-4 {{ end }} px-xxl-0 {{ if site.Params.home.fullCover }} fullscreen{{ end }} d-flex flex-column">
+        {{ if $breadcrumb }}
             <div>{{ partial "assets/breadcrumb.html" $page }}</div>
         {{ end -}}
 
