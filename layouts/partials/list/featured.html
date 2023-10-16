@@ -43,11 +43,13 @@
     {{- $page := .page -}}
     {{- $style := printf "img-wrap mx-auto mx-md-0 %s" .style -}}
 
-    {{ with $page.Params.icon }}
-        {{ if eq (lower (path.Ext .)) ".json" }}
-            {{ partial "assets/animation.html" (dict "data" . "loop" false "hover" true "class" "col-6 mx-auto text-center") }}
+    {{ if $page.Params.icon }}
+        {{- $icon := (or (and (reflect.IsMap $page.Params.Icon) $page.Params.Icon.url) $page.Params.Icon) -}}
+        {{- $mode := and (reflect.IsMap $page.Params.Icon) $page.Params.Icon.mode -}}
+        {{ if eq (lower (path.Ext $icon)) ".json" }}
+            {{ partial "assets/animation.html" (dict "data" $icon "mode" $mode "loop" false "hover" true "class" "col-6 mx-auto text-center") }}
         {{ else }}
-            {{ partial "assets/icon.html" (dict "icon" . "wrapper" "col-6 mx-auto text-center")}}
+            {{ partial "assets/icon.html" (dict "icon" "mode" $mode $icon "wrapper" "col-6 mx-auto text-center")}}
         {{ end }}
     {{ else }}
         {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
