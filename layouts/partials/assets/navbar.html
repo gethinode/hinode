@@ -154,6 +154,8 @@
         {{- errorf "partial [assets/navbar.html] - Invalid value for param 'search': %s" $searchParam -}}
     {{- end -}}
 {{- end -}}
+{{- $searchModal := and $search site.Params.navigation.searchModal -}}
+
 
 {{- $enableDarkMode := default false site.Params.main.enableDarkMode -}}
 {{- with .mode -}}
@@ -221,7 +223,7 @@
 
 <div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
-    <nav class="navbar navbar-expand-{{ $size }}{{ if $contrast }} navbar-contrast{{ end }}{{ with $color }} bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
+    <nav class="navbar {{ if $fixed }}navbar-fixed-top{{ end }}  navbar-expand-{{ $size }}{{ if $contrast }} navbar-contrast{{ end }}{{ with $color }} bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
         <div class="container-xxl p-0">
             <!-- Insert sidebar toggler when applicable -->
             <div class="d-flex">
@@ -261,7 +263,7 @@
     
             <div class="navbar-collapse collapse" id="{{ $id }}-collapse">
                 <!-- Insert search input -->
-                {{- if $search }}{{ partial "assets/search-input.html" -}}{{ end -}}
+                {{- if and $search (not $searchModal)  }}{{ partial "assets/search-input.html" }}{{ end -}}
                 
                 <!-- Render top-menu items (maximum depth of 2) -->
                 <ul class="navbar-nav ms-auto">
@@ -286,15 +288,21 @@
                         <li><hr class="dropdown-divider-bg"></li>
                     {{- end -}}
     
+                    <!-- Insert version switcher -->
+                    {{- if $enableVersions -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true "id" .id) -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false "id" .id) -}}
+                    {{- end -}}
+
                     <!-- Insert language switcher if applicable -->
                     {{- if $enableLanguage -}}
                         {{- $currentLang := $page.Language.Lang -}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
-                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw") }} {{ T "languageSwitcherLabel" }}
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }} {{ T "languageSwitcherLabel" }}
                             </a>
                             <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
-                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw") }}
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end ">
                                 {{- if $page.IsTranslated -}}
@@ -310,25 +318,49 @@
                         </li>
                     {{- end -}}
                                     
-                    <!-- Insert version switcher -->
-                    {{- if $enableVersions -}}
-                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true "id" .id) -}}
-                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false "id" .id) -}}
-                    {{- end -}}
-    
                     <!-- Insert color mode switcher -->
                     {{- if $enableDarkMode -}}
-                        <!-- Insert divider -->
+                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true "id" .id) -}}
+                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false "id" .id) -}}
+                    {{- end -}}
+
+                    <!-- Insert modal search button -->
+                    {{- if $searchModal }}
                         <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block">
                             <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
                         </li>
                         <li><hr class="dropdown-divider-bg"></li>
     
-                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true "id" .id) -}}
-                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false "id" .id) -}}
-                    {{- end -}}
+                        <a class="nav-link d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
+                            {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }} {{ T "ui_search" }}
+                        </a>
+                        <a class="nav-link d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
+                            {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}
+                        </a>
+                    {{ end -}}
                 </ul>
             </div>
         </div>
     </nav>
 </div>
+
+{{/* Insert modal search element */}}
+{{- if $searchModal }}
+    <div class="modal fade search-modal" tabindex="-1" id="search-modal" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content h-50">
+                <div class="modal-header">
+                    <div class="w-100">
+                        <form class="search position-relative me-auto">
+                            <input id="search-input-modal" class="search-input form-control is-search" tabindex="1" type="search" placeholder="{{ T "ui_search" }}..." aria-label="{{ T "ui_search" }}" autocomplete="off">
+                        </form>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-2">
+                    <div class="search-suggestions bg-body" data-no-results="{{ T "ui_no_results" }}"></div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{{ end -}}

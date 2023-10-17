@@ -58,6 +58,7 @@
     color = "body"
     offset = "5.5rem"
     search = true
+    searchModal = false
     breadcrumb = true
     toc = true
     sidebar = true

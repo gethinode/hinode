@@ -49,6 +49,7 @@
     fixed = true
     offset = "5.5rem"
     search = true
+    searchModal = false
     breadcrumb = true
     toc = true
     sidebar = true
@@ -145,7 +146,8 @@
     themeFont = "Inter"
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
     themeFontPath = "/fonts" # local path
-    purge = true
+    purge = false
+    # purge = true
 # toml-docs-end theme-colors
 
 [schema]
