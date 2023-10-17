@@ -131,7 +131,7 @@
     {{- $dims := slice -}}
     {{- with $img -}}
         {{- if eq $ratio "4x3" -}}
-            {{- $dims  = slice "576x432" "768x576" "992x744" "1200x900"  "1400x1050" -}}
+            {{- $dims = slice "576x432" "768x576" "992x744" "1200x900"  "1400x1050" -}}
         {{- else if eq $ratio "3x2" -}}
             {{- $dims = slice "576x384"  "768x512" "992x661" "1200x800"  "1400x933" -}}
         {{- else if eq $ratio "1x1" -}}
@@ -224,12 +224,24 @@
     {{ end }}
     <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
         {{- if not $anchor -}}
+            {{- $input := (split (path.BaseName $fallbackURL) "-") | collections.Reverse -}}
+            {{- $width := "" -}}
+            {{- $height := "" -}}
+            {{- if gt ($input | len) 1 -}}
+                {{- $dim := (split (index $input 0) "x") -}}
+                {{- if eq ($dim | len) 2 -}}
+                    {{- $width = index $dim 0 -}}
+                    {{- $height = index $dim 1 -}}
+                {{- end -}}
+            {{- end }}
             <img class="img-fluid {{ $innerClass }}"
                 {{ with $imgset -}}
                 srcset="{{ . }}"
                 sizes="100vw"
                 {{- end }}
                 src="{{ $fallbackURL }}"
+                {{ with $height }}height="{{ . }}"{{ end }}
+                {{ with $width }}width="{{ . }}"{{ end }}
                 alt="{{ $title }}">
         {{- else }}
             <svg class="{{ $innerClass }}">
