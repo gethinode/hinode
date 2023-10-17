@@ -33,8 +33,3 @@ Overige functies:
 * Optimale zoekresultaten, met 100 punten voor SEO volgens [PageSpeed Insights]({{< param "links.pagespeed" >}})
 * Veilige communicatie, met een score van A+ volgens [Mozilla Observatory]({{< param "links.observatory" >}})
 {.tickmark}
-
-Hinode is geinspireerd door de volgende thema's:
-
-* [Blist](https://github.com/apvarun/blist-hugo-theme) - een blog thema voor Hugo op basis van Tailwind CSS.
-* [Doks](https://github.com/h-enk/doks) - een Hugo thema voor het bouwen van veilige, snelle, en SEO-geoptimaliseerde documentatiesites, die je eenvoudig kunt actualiseren en aanpassen.

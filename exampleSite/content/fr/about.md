@@ -31,9 +31,4 @@ Les fonctionnalités supplémentaires incluent:
 - Gestion d'images adaptatives pour plusieurs tailles d'écran et résolutions.
 - Résultats de recherche optimisés, obtenant un score de 100 points pour le référencement (SEO) sur [PageSpeed Insights]({{< param "links.pagespeed" >}}).
 - Sécurisé par défaut, obtenant un score A+ au test [Mozilla Observatory]({{< param "links.observatory" >}})
-  {.tickmark}
-
-Hinode est inspiré par les thèmes suivants:
-
-- [Blist](https://github.com/apvarun/blist-hugo-theme) - Un thème de blog pour Hugo basé sur Tailwind CSS.
-- [Doks](https://github.com/h-enk/doks) - Un thème Hugo pour la création de sites de documentation sécurisés, rapides et optimisés pour le référencement (SEO), que vous pouvez facilement mettre à jour et personnaliser.
+{.tickmark}
