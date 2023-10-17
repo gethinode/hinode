@@ -31,19 +31,19 @@
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
-                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>&nbsp;
+                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false) }}</span>&nbsp;
                     {{ T "colorLight" }}
                 </a>
             </li>
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="dark" href="#!">
-                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw") }}</span>&nbsp;
+                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw" "spacing" false) }}</span>&nbsp;
                     {{ T "colorDark" }}
                 </a>
             </li>
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="auto" href="#!">
-                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke fa-fw" ) }}</span>&nbsp;
+                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke fa-fw" "spacing" false) }}</span>&nbsp;
                     {{ T "colorAuto" }}
                 </a>
             </li>
