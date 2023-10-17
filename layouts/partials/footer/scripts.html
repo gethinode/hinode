@@ -26,9 +26,9 @@
 
 {{- if gt (len $js.Content) 0 -}}
     {{- if not hugo.IsProduction -}}
-        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}"></script>
+        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}"{{ if not $header }} async{{ end }}></script>
     {{ else -}}
         {{ $js = $js | minify | fingerprint -}}
-        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"{{ if not $header }} async{{ end }}></script>
     {{ end -}}
 {{ end -}}

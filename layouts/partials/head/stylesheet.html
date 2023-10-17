@@ -56,14 +56,14 @@
         {{- partial "head/icons.html" (dict "css" $css) -}}
     {{ end }}
     {{- if site.Params.style.purge -}}
-        {{- $post_options := dict "config" "config" -}}
+        {{- $post_options := dict "config" "config" "noMap" hugo.IsProduction -}}
         {{- $css = $css | resources.PostCSS $post_options -}}
     {{- end -}}
 
     {{- if not hugo.IsProduction -}}
         <link rel="stylesheet" href="{{ if $absoluteURL }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}">
     {{- else -}}
-        {{- $css = $css | fingerprint | resources.PostProcess -}}
+        {{- $css = $css | minify | fingerprint | resources.PostProcess -}}
         <link rel="stylesheet" href="{{ if $absoluteURL }}{{ $css.Permalink }}{{ else }}{{ $css.RelPermalink }}{{ end }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
     {{- end -}}
 {{- end -}}
