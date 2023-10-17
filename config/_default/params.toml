@@ -49,6 +49,7 @@
         orientation = "horizontal"
         color = "primary"
         width = 4
+        align = "start"
 # toml-docs-end home
 
 # toml-docs-start navigation
