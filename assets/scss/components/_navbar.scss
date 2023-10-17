@@ -108,7 +108,7 @@
     background-color: $white if($enable-important-utilities, !important, null);
 }
 
-.emphasis, {
+.emphasis {
     background-color: $black if($enable-important-utilities, !important, null);
 }
 
