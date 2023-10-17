@@ -10,7 +10,12 @@
             {{- end -}}
         {{- end -}}
 
-        {{- partial "footer/scripts.html" (dict "filename" $filename "match" $match "header" false "skipTemplate" $skipTemplate "page" .) }}
+        {{ $state := "" }}
+        {{- with (index site.Params.modules $mod) -}}
+            {{- with index . "state" }}{{ $state = . }}{{ end -}}
+        {{- end -}}
+
+        {{- partial "footer/scripts.html" (dict "filename" $filename "match" $match "header" false "skipTemplate" $skipTemplate "state" $state "page" .) }}
     {{- end -}}
 {{- end -}}
 
