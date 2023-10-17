@@ -19,6 +19,8 @@
     optional = ["leaflet", "katex", "lottie"]
     excludeSCSS = ["bootstrap"]
     disableTemplate = ["katex"]
+    [modules.katex]
+        state = "defer"
     [modules.fontawesome]
         inline = true
         debug = true
@@ -49,6 +51,7 @@
         orientation = "horizontal"
         color = "primary"
         width = 4
+        align = "start"
 # toml-docs-end home
 
 # toml-docs-start navigation
