@@ -75,6 +75,10 @@
         .toc-button {
             --bs-btn-color: var(--bs-body-color);
             --bs-btn-border-color: var(--bs-body-color);
+
+            &:hover {
+                background-color: transparent;
+            }
         }
 
         #toc-collapse {
