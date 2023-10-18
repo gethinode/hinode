@@ -1,0 +1,22 @@
+@media (hover: none) {
+    abbr[title] {
+        position: relative;
+        text-decoration: underline dotted;
+    }
+    
+    abbr[title]:hover::after,
+    abbr[title]:focus::after {
+        content: attr(title);
+        position: absolute;
+        left: 0;
+        bottom: -30px;
+        width: auto;
+        white-space: nowrap;
+        background-color: var(--bs-body-bg);
+        color: var(--bs-tooltip-color);
+        border-radius: 3px;
+        box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
+        font-size: 14px;
+        padding: 3px 5px;
+    }
+}
