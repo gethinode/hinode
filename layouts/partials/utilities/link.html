@@ -35,25 +35,12 @@
         {{- if ne (len $segments) 2 }}
             {{- errorf "partial [utilities/link.html] - Malformed path, expected one anchor '#' only: %s" $destination -}}
         {{ else }}
-            {{- $destination = index $segments 0 -}}            
-            {{- $anchor = index $segments 1 -}}            
+            {{- $destination = index $segments 0 -}}
+            {{- $anchor = index $segments 1 -}}
         {{ end }}
     {{ end }}
-    {{- $destination = strings.TrimSuffix "/" $destination -}}
-    {{- $ref := $page.GetPage $destination -}}
 
-    {{- if not $ref }}
-        {{- $segments := split $destination "/" -}}
-        {{- if and (hasPrefix $destination "/")  (gt (len $segments) 1) -}}
-            {{- $prefix := index $segments 1 -}}
-            {{- $page := .Page -}}
-            {{ with index (where site.Sites "Language.Lang" $prefix) 0 }}
-                {{- $path := printf "/%s" (strings.TrimPrefix (printf "/%s/" $prefix) $destination) }}
-                {{- $ref = .GetPage $path -}}
-            {{ end }}
-        {{- end -}}
-    {{- end -}}
-
+    {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
     {{- if not $ref -}}
         {{- errorf "partial [utilities/link.html] - Cannot find page: %s" $destination -}}
         {{- $error = true -}}

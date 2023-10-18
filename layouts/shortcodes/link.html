@@ -73,27 +73,9 @@
 
 {{- $isExternal := ne (urls.Parse (absURL $url)).Host (urls.Parse site.BaseURL).Host -}}
 {{- if not $isExternal -}}
-    {{- $url = strings.TrimSuffix "/" $url -}}
-
-    {{- $ref := "" -}}
+    {{ $ref := partial "utilities/GetPage.html" (dict "url" $url "page" .Page) }}
     {{- if not $ref -}}
-        {{- $ref = .Page.GetPage $url -}}
-    {{- end -}}
-
-    {{- if not $ref }}
-        {{- $segments := split $url "/" -}}
-        {{- if and (hasPrefix $url "/")  (gt (len $segments) 1) -}}
-            {{- $prefix := index $segments 1 -}}
-            {{- $page := .Page -}}
-            {{ with index (where site.Sites "Language.Lang" $prefix) 0 }}
-                {{- $path := printf "/%s" (strings.TrimPrefix (printf "/%s/" $prefix) $url) }}
-                {{- $ref = .GetPage $path -}}
-            {{ end }}
-        {{- end -}}
-    {{- end -}}
-
-    {{- if not $ref -}}
-        {{- errorf "Cannot find page: '%s' at %s" $href .Position -}}
+        {{- errorf "Cannot find page: '%s' at %s" $url .Position -}}
         {{- $error = true -}}
     {{- end -}}
 {{- end -}}
@@ -101,9 +83,7 @@
 {{ with $anchor }}
     {{ $url = printf "%s#%s" $url .}}
 {{ end }}
+
 {{- if not $error -}}
     {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class "page" .Page) }}
 {{- end -}}
-
-
-
