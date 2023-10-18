@@ -63,6 +63,6 @@
     {{ end }}
 
     {{ if not $error }}
-        <abbr {{ with $class }}class="{{ . }}"{{ end }} title="{{ $title }}">{{ $key }}</abbr>
+        <abbr {{ with $class }}class="{{ . }}"{{ end }} title="{{ $title }}" tabindex="0">{{ $key }}</abbr>
     {{ end }}
 {{ end }}
