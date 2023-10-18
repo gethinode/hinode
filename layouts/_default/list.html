@@ -42,6 +42,18 @@
     {{- range $index, $section := $sections -}}
         {{- $sectionPage := site.GetPage "section" $section -}}
         {{- $sectionURL := $sectionPage.RelPermalink -}}
+        {{ with $sectionPage.Params.redirect}}
+            {{ $target := partial "utilities/GetPage.html" (dict "url" . "page" $page) }}
+            {{- if not $target -}}
+                {{ if eq (printf "%T" $page.File) "*hugolib.fileInfo"}}
+                    {{- errorf "Cannot find redirect target on page '%s': %s" $page.File . -}}
+                {{ else }}
+                    {{- errorf "Cannot find redirect target: %s" . -}}
+                {{ end }}
+            {{ else }}
+                {{- $sectionURL = $target.RelPermalink -}}
+            {{ end }}
+        {{ end }}
         {{- $title := or $sectionPage.Title $sectionPage.Type -}}
 
         {{- with (index site.Params.sections $section) -}}
