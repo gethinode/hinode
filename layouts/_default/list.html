@@ -1,5 +1,11 @@
 {{- define "featured" }}
-    {{- $headings := $.Scratch.Get "headings" -}}
+    {{- $sections := $.Scratch.Get "sections" -}}
+    {{- $headings := slice }}
+    {{ if .Params.sectionMenu }}
+        {{ range $sections }}
+            {{ $headings = $headings | append .title }}
+        {{ end }}
+    {{ end }}
 
     {{- $page := . -}}
     {{- $orientation := site.Params.list.feature.orientation | default "horizontal" -}}
@@ -33,86 +39,9 @@
 
 {{- define "main" -}}
     {{- $page := . -}}
-    {{- $sections := slice -}}
-    {{- $sections = $sections | append $page.Type -}}
-    {{ with $page.Params.sections }}
-        {{ $sections = $sections | append . }}
-    {{ end }}
-    {{- $headings := slice -}}
+    {{- $sections := $.Scratch.Get "sections" -}}
     {{- $layout := $page.Params.layout -}}
 
-    {{ if $page.IsHome }}
-        {{- if not $page.Params.sections -}}
-            {{- with site.Params.home.sections }}
-                {{ $sections = $sections | append . }}
-            {{ else }}
-                {{ range $section := site.Sections }}
-                    {{ $sections = $sections | append $section.Type }}
-                {{ end }}
-            {{ end }}
-        {{- end -}}
-    {{ else }}
-        {{ $headings = $headings | append $page.Title }}
-        {{- range .Fragments.Headings }}
-            {{- range .Headings }}
-                {{- $headings = $headings | append .Title -}}
-            {{- end -}}
-        {{- end -}}
-    {{ end }}
-
-    {{/* Generate section content first to determine headings */}}
-    {{ $body := "" }}
-    {{- range $index, $section := $sections -}}
-        {{- $sectionPage := site.GetPage "section" $section -}}
-        {{- $sectionURL := $sectionPage.RelPermalink -}}
-        {{ with $sectionPage.Params.redirect}}
-            {{ $target := partial "utilities/GetPage.html" (dict "url" . "page" $page) }}
-            {{- if not $target -}}
-                {{ if eq (printf "%T" $page.File) "*hugolib.fileInfo"}}
-                    {{- errorf "Cannot find redirect target on page '%s': %s" $page.File . -}}
-                {{ else }}
-                    {{- errorf "Cannot find redirect target: %s" . -}}
-                {{ end }}
-            {{ else }}
-                {{- $sectionURL = $target.RelPermalink -}}
-            {{ end }}
-        {{ end }}
-        {{- $title := or $sectionPage.Title $sectionPage.Type -}}
-
-        {{- with (index site.Params.sections $section) -}}
-            {{- with index . "title" }}{{ $title = or . $title }}{{ end -}}
-        {{- end -}}
-    
-        {{- $thumbnail := (or (and (reflect.IsMap $sectionPage.Params.Thumbnail) $sectionPage.Params.Thumbnail.url) $sectionPage.Params.Thumbnail) -}}
-        {{- $icon := $sectionPage.Params.Icon -}}
-        {{- $content := $sectionPage.Content -}}
-        {{- $sectionTitle := strings.FirstUpper $sectionPage.Type -}}
-        {{- $moreTitle := "" -}}
-        {{- with (index site.Params.sections $section) -}}
-            {{- with index . "reference" }}{{ $moreTitle = . }}{{ end -}}
-        {{- end -}}
-        {{- $moreTitle = or $moreTitle (printf (T "more" (pluralize $sectionTitle))) -}}
-
-        {{- $sectionContent := trim (partial "assets/section-list.html" (dict 
-            "page" $page 
-            "section" $section 
-            "home" $page.IsHome
-            "simple" (eq (len $sections) 1)
-            "nested" (and $page.IsHome (eq $section $page.Section))
-            "thumbnail" $thumbnail
-            "icon" $icon
-            "content" $content
-            "moreTitle" $moreTitle
-            "sectionURL" $sectionURL)) " \r\n"
-        -}}
-
-        {{ if $sectionContent }}
-            {{- if not $page.IsHome }}{{ $headings = $headings | append $title }}{{ end -}}
-            {{- $body = printf "%s%s" $body $sectionContent }}
-        {{ end }}
-    {{- end -}}
-
-    {{/* Display main content */}}
     <div class="container-xxl flex-fill px-4 px-xxl-0">
         {{- if ne $layout "featured" -}}
             {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
@@ -130,7 +59,7 @@
                 {{- end -}}
                 {{- $content := partial "utilities/ProcessContent" (dict "page" $page "raw" $page.RawContent) -}}
                 {{ $content | safeHTML }}
-                {{ if and (and (and $sections (eq (len $sections) 1)) (not $body)) (not $content) }}
+                {{ if and (and $sections (eq (len $sections) 1)) (not $content) }}
                     <p class="pt-4">{{- T "emptyList" }}.</p>
                 {{ end }}
             </div>
@@ -153,5 +82,7 @@
     </div>
 
     {{/* Display generated sections */}}
-    {{ $body | safeHTML }}
+    {{ range $sections }}
+        {{ .content | safeHTML }}
+    {{ end }}
 {{- end -}}

@@ -40,18 +40,9 @@
 {{- end -}}
 
 {{- /* Define section headings */ -}}
-{{- $headings := slice -}}
-{{ if .Fragments }}
-    {{ $headings = $headings | append .Title }}
-    {{- range .Fragments.Headings }}
-        {{- range .Headings }}
-            {{- $headings = $headings | append .Title -}}
-        {{- end -}}
-    {{- end -}}
-{{ end }}
-{{- $.Scratch.Set "headings" $headings -}}
+{{ $sections := partial "utilities/GetSections.html" . }}
+{{- $.Scratch.Set "sections" $sections -}}
 
-{{- $section := .Section }}
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
 
 <!doctype html>
