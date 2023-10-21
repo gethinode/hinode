@@ -15,6 +15,12 @@ a:active {
     min-height: 100vh;
 }
 
+.fullcover {
+    --navbar-height: #{$navbar-height};
+
+    min-height: calc(100vh - var(--navbar-height));
+}
+
 .fullscreen {
     --navbar-offset: #{$navbar-offset};
 

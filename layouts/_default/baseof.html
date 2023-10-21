@@ -39,7 +39,20 @@
     {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
 {{- end -}}
 
+{{- /* Define section headings */ -}}
+{{- $headings := slice -}}
+{{ if .Fragments }}
+    {{ $headings = $headings | append .Title }}
+    {{- range .Fragments.Headings }}
+        {{- range .Headings }}
+            {{- $headings = $headings | append .Title -}}
+        {{- end -}}
+    {{- end -}}
+{{ end }}
+{{- $.Scratch.Set "headings" $headings -}}
+
 {{- $section := .Section }}
+{{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
 
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
@@ -49,22 +62,38 @@
 
     <body>
         {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" .) -}}
-        <div class="d-flex flex-column min-vh-100{{ if .IsHome }}{{ with .Site.Params.home.style }} {{ . }}{{ end }}{{ end }}">
-            {{- partial "assets/navbar.html" (dict
-                "page" .
-                "fixed" (string site.Params.navigation.fixed)
-                "color" site.Params.navigation.color
-                "style" (default "light" site.Params.navigation.style)
-                "size" (default "md" site.Params.navigation.size))
-            -}}
-
-            <div class="flex-fill main-content{{ if .Site.Params.main.footerBelowFold }} fullscreen{{ end }} pb-4">
-                {{ block "main" . }}{{ end -}}
+        <div class="d-flex flex-column min-vh-100">
+            <div class="{{ if $fullCover }} fullscreen{{ end }}{{ if .IsHome }} {{ .Site.Params.home.style }}{{ end }}">
+                {{- partial "assets/navbar.html" (dict
+                    "page" .
+                    "fixed" (string site.Params.navigation.fixed)
+                    "color" site.Params.navigation.color
+                    "style" (default "light" site.Params.navigation.style)
+                    "size" (default "md" site.Params.navigation.size))
+                -}}
+                <div class="main-content">
+                    {{ block "featured" . }}{{ end -}}
+                </div>
+                {{ if .Site.Params.main.footerBelowFold }}
+                    <div class="flex-fill">
+                        {{ block "main" . }}{{ end -}}
+                    </div>
+                {{ end }}
             </div>
 
+            {{ if not .Site.Params.main.footerBelowFold }}
+                <div class="flex-fill">
+                    {{ block "main" . }}{{ end -}}
+                </div>
+                {{- partial "footer/social.html" . -}}
+                {{- partial "footer/footer.html" . -}}
+            {{ end }}
+        </div>
+
+        {{ if .Site.Params.main.footerBelowFold }}
             {{- partial "footer/social.html" . -}}
             {{- partial "footer/footer.html" . -}}
-        </div>
+        {{ end }}
 
         {{- partial "footer/toast-container.html" . -}}
         {{- partialCached "footer/scripts.html" (dict "header" false "page" . "core" true) }}

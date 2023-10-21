@@ -18,6 +18,7 @@ strong {
     font-weight:                600 if($enable-important-utilities, !important, null);
 }
 
+$navbar-height:                 h.$navbar-height;
 $navbar-offset:                 h.$navbar-offset;
 $primary:                       h.$primary;
 $secondary:                     h.$secondary;
