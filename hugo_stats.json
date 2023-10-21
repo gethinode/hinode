@@ -30,7 +30,6 @@
       "align-items-center",
       "align-self-center",
       "bg-body",
-      "bg-info",
       "bg-opacity-10",
       "bg-primary",
       "bottom-0",
@@ -82,15 +81,12 @@
       "flex-column",
       "flex-fill",
       "flex-grow-1",
-      "flex-row",
       "footer",
       "form-control",
       "fs-3",
       "fs-5",
-      "fullscreen",
       "fw-30",
       "fw-bold",
-      "h-100",
       "hstack",
       "img-fluid",
       "img-wrap",
@@ -169,8 +165,7 @@
       "toast-container",
       "toast-header",
       "toggler-icon",
-      "top-bar",
-      "w-100"
+      "top-bar"
     ],
     "ids": [
       "-theme",

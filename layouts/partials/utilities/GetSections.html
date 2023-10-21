@@ -1,0 +1,76 @@
+{{- $page := . -}}
+
+{{/* Add title for current page */}}
+{{- $items := slice -}}
+{{ $items = $items | append (dict "title" .Title "content" "" )}}
+
+{{/* Identify page sections */}}
+{{- $sections := slice -}}
+{{- $sections = $sections | append $page.Type -}}
+{{ with $page.Params.sections }}
+    {{ $sections = $sections | append . }}
+{{ end }}
+
+{{ if $page.IsHome }}
+    {{- if not $page.Params.sections -}}
+        {{- with site.Params.home.sections }}
+            {{ $sections = $sections | append . }}
+        {{ else }}
+            {{ range $section := site.Sections }}
+                {{ $sections = $sections | append $section.Type }}
+            {{ end }}
+        {{ end }}
+    {{- end -}}
+{{ end }}
+
+{{/* Generate title and content for each section */}}
+{{- range $index, $section := $sections -}}
+    {{- $sectionPage := site.GetPage "section" $section -}}
+    {{- $sectionURL := $sectionPage.RelPermalink -}}
+    {{ with $sectionPage.Params.redirect}}
+        {{ $target := partial "utilities/GetPage.html" (dict "url" . "page" $page) }}
+        {{- if not $target -}}
+            {{ if eq (printf "%T" $page.File) "*hugolib.fileInfo"}}
+                {{- errorf "Cannot find redirect target on page '%s': %s" $page.File . -}}
+            {{ else }}
+                {{- errorf "Cannot find redirect target: %s" . -}}
+            {{ end }}
+        {{ else }}
+            {{- $sectionURL = $target.RelPermalink -}}
+        {{ end }}
+    {{ end }}
+    {{- $title := or $sectionPage.Title $sectionPage.Type -}}
+
+    {{- with (index site.Params.sections $section) -}}
+        {{- with index . "title" }}{{ $title = or . $title }}{{ end -}}
+    {{- end -}}
+
+    {{- $thumbnail := (or (and (reflect.IsMap $sectionPage.Params.Thumbnail) $sectionPage.Params.Thumbnail.url) $sectionPage.Params.Thumbnail) -}}
+    {{- $icon := $sectionPage.Params.Icon -}}
+    {{- $content := $sectionPage.Content -}}
+    {{- $sectionTitle := strings.FirstUpper $sectionPage.Type -}}
+    {{- $moreTitle := "" -}}
+    {{- with (index site.Params.sections $section) -}}
+        {{- with index . "reference" }}{{ $moreTitle = . }}{{ end -}}
+    {{- end -}}
+    {{- $moreTitle = or $moreTitle (printf (T "more" (pluralize $sectionTitle))) -}}
+
+    {{- $sectionContent := trim (partial "assets/section-list.html" (dict 
+        "page" $page 
+        "section" $section 
+        "home" $page.IsHome
+        "simple" (eq (len $sections) 1)
+        "nested" (and $page.IsHome (eq $section $page.Section))
+        "thumbnail" $thumbnail
+        "icon" $icon
+        "content" $content
+        "moreTitle" $moreTitle
+        "sectionURL" $sectionURL)) " \r\n"
+    -}}
+
+    {{ if $sectionContent }}
+        {{ $items = $items | append (dict "title" $title "content" $sectionContent)}}
+    {{ end }}
+{{- end -}}
+
+{{ return $items }}
