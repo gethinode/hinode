@@ -20,6 +20,6 @@
     {{- end -}}
 {{- end -}}
 
-{{ with $title }}<p id="{{ anchorize . }}" class="display-4 pt-4{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+{{ with $title }}<p id="{{ anchorize . }}" class="display-4 py-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
 {{ with $description }} <p class="lead mb-5">{{ . }}</p>{{ end }}
 {{ $content }}
