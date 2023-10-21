@@ -404,11 +404,11 @@ H{{</* sub 2 */>}}O est un liquide.
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button toast="toast-example-1" */>}}
-    Affiche la notifiaction #1
+    Affiche la notification #1
 {{</* /button */>}}
 
 {{</* button toast="toast-example-2" */>}}
-    Affiche la notifiaction #1
+    Affiche la notification #1
 {{</* /button */>}}
 
 {{</* toast id="toast-example-1" header="Premier titre" */>}}
