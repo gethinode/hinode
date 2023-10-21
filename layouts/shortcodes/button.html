@@ -27,6 +27,7 @@
     "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
                     "main.externalLinks.tab" in the site's parameters.
     "spacing"       Optional flag to add spacing to the inline button, defaults to "true".
+    "wrapper"       Optional element to wrap the button.
 -->
 
 {{ $error := false }}
@@ -139,6 +140,10 @@
         "toast" $toast
         "spacing" $spacing)
     -}}
+
+    {{ with .Get "wrapper" }}
+        {{ $output = printf `<div class="%s">%s</div>` . $output }}
+    {{ end }}
 
     {{- if .Parent -}}
         {{ $current := .Parent.Scratch.Get "inner" }}

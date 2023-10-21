@@ -6,6 +6,7 @@
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
     endorse = true
+    footerBelowFold = false
     [main.externalLinks]
         cue = false
         tab = false
@@ -59,6 +60,7 @@
     anchor = true
     logo = "/img/logo_icon.svg"
     color = "body"
+    fixed = true
     offset = "5.5rem"
     search = true
     searchModal = false

@@ -1,16 +1,12 @@
-{{- define "main" -}}
+{{- define "featured" }}
+    {{- $headings := $.Scratch.Get "headings" -}}
+
     {{- $page := . -}}
-    {{- $orientation :=  site.Params.list.feature.orientation | default "horizontal" -}}
+    {{- $orientation := site.Params.list.feature.orientation | default "horizontal" -}}
     {{- $width := site.Params.list.feature.width | default 6 -}}
     {{- $justify := site.Params.list.feature.justify | default "center" -}}
     {{- $align := site.Params.list.feature.align | default "center" -}}
-    {{- $sections := slice -}}
-    {{- $sections = $sections | append $page.Type -}}
-    {{ with $page.Params.sections }}
-        {{ $sections = $sections | append . }}
-    {{ end }}
     {{- $actions := $page.Params.actions -}}
-    {{- $headings := slice -}}
     {{- $layout := $page.Params.layout -}}
 
     {{ if $page.IsHome }}
@@ -19,6 +15,33 @@
         {{- $justify = or site.Params.home.feature.justify $justify -}}
         {{- $align = or site.Params.home.feature.align $align -}}
         {{- $actions = (or $actions site.Params.featured.actions) -}}
+    {{ end }}
+
+    {{/* Display featured section */}}
+    {{- if or (eq $layout "featured") $page.IsHome -}}
+        {{- partial "list/featured.html" (dict 
+            "page" .
+            "headings" $headings
+            "actions" $actions
+            "orientation" $orientation
+            "width" $width
+            "justify" $justify
+            "align" $align) 
+        -}}
+    {{- end -}}
+{{ end }}
+
+{{- define "main" -}}
+    {{- $page := . -}}
+    {{- $sections := slice -}}
+    {{- $sections = $sections | append $page.Type -}}
+    {{ with $page.Params.sections }}
+        {{ $sections = $sections | append . }}
+    {{ end }}
+    {{- $headings := slice -}}
+    {{- $layout := $page.Params.layout -}}
+
+    {{ if $page.IsHome }}
         {{- if not $page.Params.sections -}}
             {{- with site.Params.home.sections }}
                 {{ $sections = $sections | append . }}
@@ -87,19 +110,6 @@
             {{- if not $page.IsHome }}{{ $headings = $headings | append $title }}{{ end -}}
             {{- $body = printf "%s%s" $body $sectionContent }}
         {{ end }}
-    {{- end -}}
-
-    {{/* Display featured section */}}
-    {{- if or (eq $layout "featured") $page.IsHome -}}
-        {{- partial "list/featured.html" (dict 
-            "page" .
-            "headings" $headings
-            "actions" $actions
-            "orientation" $orientation
-            "width" $width
-            "justify" $justify
-            "align" $align) 
-        -}}
     {{- end -}}
 
     {{/* Display main content */}}

@@ -4,6 +4,7 @@
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
+    footerBelowFold = false
     [main.externalLinks]
         cue = true
         tab = true
