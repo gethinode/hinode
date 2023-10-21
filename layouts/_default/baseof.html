@@ -63,7 +63,7 @@
     <body>
         {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" .) -}}
         <div class="d-flex flex-column min-vh-100">
-            <div class="{{ if $fullCover }} fullscreen{{ end }}{{ if .IsHome }} {{ .Site.Params.home.style }}{{ end }}">
+            <div class="d-flex flex-column {{ if $fullCover }} fullscreen{{ end }}{{ if .IsHome }} {{ .Site.Params.home.style }}{{ end }}">
                 {{- partial "assets/navbar.html" (dict
                     "page" .
                     "fixed" (string site.Params.navigation.fixed)
@@ -75,16 +75,12 @@
                     {{ block "featured" . }}{{ end -}}
                 </div>
                 {{ if .Site.Params.main.footerBelowFold }}
-                    <div class="flex-fill">
-                        {{ block "main" . }}{{ end -}}
-                    </div>
+                    {{ block "main" . }}{{ end -}}
                 {{ end }}
             </div>
 
             {{ if not .Site.Params.main.footerBelowFold }}
-                <div class="flex-fill">
-                    {{ block "main" . }}{{ end -}}
-                </div>
+                {{ block "main" . }}{{ end -}}
                 {{- partial "footer/social.html" . -}}
                 {{- partial "footer/footer.html" . -}}
             {{ end }}
