@@ -5,7 +5,7 @@
 {{ if eq (path.Ext $path) ".svg" }}
     {{ $path := path.Join "static" .path }}
     {{ if fileExists $path }}
-        {{ with findRE `viewBox="\d+[\s,]\d+[\s,]\d+[\s,]\d+"` (readFile $path) 1 }}
+        {{ with findRE `viewBox="\d*\.?\d+[\s,]\d*\.?\d+[\s,]\d*\.?\d+[\s,]\d*\.?\d+"` (readFile $path) 1 }}
             {{ $content := split (index (split (index . 0) `"`) 1) " " }}
             {{ $viewbox_width := float (index $content 2) }}
             {{ $viewbox_height := float (index $content 3) }}
