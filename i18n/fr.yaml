@@ -67,6 +67,8 @@
   translation: "Accueil"
 - id: languageSwitcherLabel
   translation: "Langage"
+- id: close
+  translation: "Fermer"
 
 # Table of contents
 - id: toc

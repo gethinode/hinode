@@ -33,3 +33,11 @@ a.btn {
     margin-top: $spacer * .25;
     margin-bottom: $spacer * .25;
 }
+
+.btn-close {
+    background-color: transparent if($enable-important-utilities, !important, null);
+    background-image: var(--#{$prefix}btn-close-bg) if($enable-important-utilities, !important, null);
+    background-position: center if($enable-important-utilities, !important, null);
+    background-repeat: no-repeat if($enable-important-utilities, !important, null);
+    background-size: $btn-close-width if($enable-important-utilities, !important, null);
+}

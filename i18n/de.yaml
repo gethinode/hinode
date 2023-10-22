@@ -65,6 +65,8 @@
   translation: "Startseite"
 - id: languageSwitcherLabel
   translation: "Sprache"
+- id: close
+  translation: "Schließen"
 
 # Table of contents
 - id: toc

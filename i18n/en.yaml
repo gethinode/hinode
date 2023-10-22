@@ -71,6 +71,8 @@
   translation: "Home"
 - id: languageSwitcherLabel
   translation: "Language"
+- id: close
+  translation: "Close"
 
 # Table of contents
 - id: toc

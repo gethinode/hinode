@@ -25,7 +25,7 @@
 <div id="{{ $id }}" class="toast{{ with $class }} {{ . }}{{ end }}" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
         {{ with $header }}<strong class="me-auto">{{ . }}</strong>{{ end }}
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{ T "close" }}"></button>
     </div>
     <div class="toast-body">{{ $message }}</div>
 </div>
