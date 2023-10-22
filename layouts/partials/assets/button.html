@@ -161,7 +161,7 @@
     >
     <div class="d-flex justify-content-{{ $justify }}">
         <div class="my-auto">{{ $title | safeHTML }}</div>
-        {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon) }}</div>{{ end }}
+        {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon "spacing" false) }}</div>{{ end }}
     </div>
 
     {{- with $badge }}
