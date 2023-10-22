@@ -28,3 +28,8 @@
     background-color: transparent;
     color: var(--bs-primary) if($enable-important-utilities, !important, null);
 }
+
+a.btn {
+    margin-top: $spacer * .25;
+    margin-bottom: $spacer * .25;
+}
