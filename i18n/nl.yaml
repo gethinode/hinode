@@ -69,6 +69,8 @@
   translation: "Home"
 - id: languageSwitcherLabel
   translation: "Taal"
+- id: close
+  translation: "Sluiten"
 
 # Table of contents
 - id: toc
