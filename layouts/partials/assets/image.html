@@ -40,9 +40,7 @@
 {{- $url := .url -}}
 
 {{- $mode := false -}}
-{{- with .mode -}}
-    {{ $mode = . -}}
-{{- end -}}
+{{- with .mode }}{{ $mode = . }}{{ end -}}
 {{- $outerClass := .outerClass -}}
 {{- $innerClass := .innerClass -}}
 {{- $title := .title -}}
@@ -68,12 +66,14 @@
             {{- $portraits = $portraits | append (printf "%sx%s" (index $p 1) (index $p 0)) -}}
         {{- end -}}
     {{- end -}}
+
     {{- $ret := "" }}
     {{- if reflect.IsSlice $dim -}}
         {{ $ret = $portraits -}}
     {{- else if gt (len $portraits) 0 -}}
         {{- $ret = index $portraits 0 -}}
     {{- end -}}
+
     {{- return $ret -}}
 {{- end -}}
 
@@ -87,29 +87,23 @@
     {{- $fallback := "" -}}
 
     {{- with $img -}}
-        {{- if eq $ratio "4x3" -}}
-            {{- $dim  = "1400x1050" }}
-        {{- else if eq $ratio "3x2" -}}
-            {{- $dim  = "1400x933" }}
-        {{- else if eq $ratio "1x1" -}}
-            {{- $dim  = "1400x1400" }}
-        {{- else if eq $ratio "16x9" -}}
-            {{- $dim = "1400x788" -}}
-        {{- else if eq $ratio "21x9" -}}
-            {{- $dim = "1400x600" -}}
+        {{- if eq $ratio "4x3" -}}{{- $dim  = "1400x1050" }}
+        {{- else if eq $ratio "3x2" -}}{{- $dim  = "1400x933" }}
+        {{- else if eq $ratio "1x1" -}}{{- $dim  = "1400x1400" }}
+        {{- else if eq $ratio "16x9" -}}{{- $dim = "1400x788" -}}
+        {{- else if eq $ratio "21x9" -}}{{- $dim = "1400x600" -}}
         {{- else -}}
             {{- $dim = printf "%sx%d" $width (int (math.Round (mul (div (float $width) $img.Width) $img.Height))) -}}
         {{- end -}}
 
-        {{- if $portrait -}}
-            {{- $dim = partial "partials/image-portrait.html" (dict "dim" $dim) -}}
-        {{- end -}}
+        {{- if $portrait -}}{{- $dim = partial "partials/image-portrait.html" (dict "dim" $dim) -}}{{- end -}}
 
         {{- if $ratio -}}
             {{- $fallback = ($img.Fill (printf "%s jpg" $dim)) -}}
         {{- else -}}
             {{- $fallback = ($img.Fit (printf "%s jpg" $dim)) -}}
         {{- end -}}
+
         {{- $clean := path.Ext $img.RelPermalink -}}
         {{- $ext := path.Ext $img.RelPermalink -}}
         {{- $fallback = $fallback | resources.Copy (replace $img.RelPermalink $clean (printf "-%s%s" $dim $ext)) -}}
@@ -158,6 +152,7 @@
             {{- else -}}
                 {{- $scaled = $img.Fit (printf "%s webp" $dim) -}}
             {{- end -}}
+
             {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean (printf "-%s.webp" $dim)) -}}
             {{- if $absoluteURL -}}
                 {{- $imgset = printf "%s, %s %sw" $imgset $scaled.Permalink (index $widths $index) -}}
@@ -165,6 +160,7 @@
                 {{- $imgset = printf "%s, %s %sw" $imgset $scaled.RelPermalink (index $widths $index) -}}
             {{- end -}}
         {{- end -}}
+        
         {{- $imgset = strings.TrimPrefix ", " $imgset -}}
     {{- end -}}
 
@@ -204,11 +200,11 @@
         {{- $img := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
         {{- if $img -}}
             {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio "portrait" $portrait) -}}
-                {{- if $absoluteURL -}}
-                    {{- $fallbackURL = $fallback.Permalink -}}
-                {{- else -}}
-                    {{- $fallbackURL = $fallback.RelPermalink -}}
-                {{- end -}}
+            {{- if $absoluteURL -}}
+                {{- $fallbackURL = $fallback.Permalink -}}
+            {{- else -}}
+                {{- $fallbackURL = $fallback.RelPermalink -}}
+            {{- end -}}
             {{- $imgset = partial "partials/image-scaled.html " (dict "img" $img "ratio" $ratio "portrait" $portrait) -}}
         {{- end -}}
     {{- end -}}
@@ -219,30 +215,31 @@
         {{- end -}}
     {{- end -}}
 
+    {{- $width := "" -}}
+    {{- $height := "" -}}
+    {{- $input := (split (path.BaseName $fallbackURL) "-") | collections.Reverse -}}
+    {{ if $isVector }}
+        {{- $height = "500" -}}
+        {{ $width = string (partial "utilities/GetWidth.html" (dict "path" $fallbackURL "height" 500)) }}
+    {{- else if gt ($input | len) 1 -}}
+        {{- $dim := (split (index $input 0) "x") -}}
+        {{- if eq ($dim | len) 2 -}}
+            {{- $width = index $dim 0 -}}
+            {{- $height = index $dim 1 -}}
+        {{- end -}}
+    {{- end }}
+
     {{- if $caption -}}
         <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
     {{ end }}
-    <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">
+    <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">        
         {{- if not $anchor -}}
-            {{- $input := (split (path.BaseName $fallbackURL) "-") | collections.Reverse -}}
-            {{- $width := "" -}}
-            {{- $height := "" -}}
-            {{- if gt ($input | len) 1 -}}
-                {{- $dim := (split (index $input 0) "x") -}}
-                {{- if eq ($dim | len) 2 -}}
-                    {{- $width = index $dim 0 -}}
-                    {{- $height = index $dim 1 -}}
-                {{- end -}}
-            {{- end }}
             <img class="img-fluid {{ $innerClass }}"
-                {{ with $imgset -}}
-                srcset="{{ . }}"
-                sizes="100vw"
-                {{- end }}
                 src="{{ $fallbackURL }}"
+                {{ with $imgset -}} srcset="{{ . }}" sizes="100vw"{{- end }}
                 {{ with $height }}height="{{ . }}"{{ end }}
                 {{ with $width }}width="{{ . }}"{{ end }}
-                alt="{{ $title }}">
+                {{ with $title }}alt="{{ . }}"{{ end }}>
         {{- else }}
             <svg class="{{ $innerClass }}">
                 <use href="{{ $fallbackURL }}#{{ $anchor }}"></use>
@@ -250,12 +247,24 @@
         {{ end }}
     </div>
     {{- if $caption -}}
-        <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
-    </figure>
+            <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
+        </figure>
     {{- end -}}
 {{- end -}}
 
+
 <!-- Initiate the regular or color-mode image -->
+{{ $params := dict }}
+{{- $params = merge $params (dict
+    "ratio" $ratio
+    "portrait" $portrait
+    "outerClass" $outerClass
+    "innerClass" $innerClass
+    "title" $title
+    "caption" $caption
+    "page" $page)
+-}}
+
 {{- if $mode -}}
     {{- $ext := path.Ext $url -}}
     {{- $base := strings.TrimSuffix $ext $url -}}
@@ -265,28 +274,14 @@
 
     {{- range $suffix := $modes -}}
         {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
-        {{- partial "partials/image-definition.html" (dict 
-            "ratio" $ratio
-            "portrait" $portrait
+        {{- $params = merge $params (dict
             "url" $image
-            "outerClass" $outerClass
-            "innerClass" $innerClass
-            "title" $title
-            "caption" $caption
             "mode" $suffix
-            "modes" $modes
-            "page" $page)
+            "modes" $modes)
         -}}
+        {{- partial "partials/image-definition.html" $params -}}
     {{- end -}}
-{{- else -}}
-    {{- partial "partials/image-definition.html" (dict 
-        "ratio" $ratio
-        "portrait" $portrait
-        "url" $url
-        "outerClass" $outerClass
-        "innerClass" $innerClass
-        "title" $title
-        "caption" $caption
-        "page" $page)
-    -}}
+{{ else }}
+    {{- $params = merge $params (dict "url" $url) -}}
+    {{- partial "partials/image-definition.html" $params -}}
 {{- end -}}
