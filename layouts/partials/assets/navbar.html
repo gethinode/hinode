@@ -240,7 +240,7 @@
             </div>
     
             <!-- Insert the brand logo or name -->
-            <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}">
+            <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
                 {{- if (and $logoLight $logoDark) -}}
                     {{ $width := partial "utilities/GetWidth.html" (dict "path" $logoLight "height" 30) }}
                     <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-dark" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
