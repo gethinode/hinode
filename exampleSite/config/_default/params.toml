@@ -48,6 +48,7 @@
     logo = "/img/logo_icon.svg"
     color = "body"
     fixed = true
+    horizontal = false
     offset = "5.5rem"
     search = true
     searchModal = false

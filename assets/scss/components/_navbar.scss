@@ -119,3 +119,75 @@
 }
 
 // stylelint-enable annotation-no-unknown
+
+:root {
+    --dropdown-horizontal-bg: var(--#{$prefix}light);
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        --dropdown-horizontal-bg: var(--#{$prefix}tertiary-bg);
+    }
+}
+
+$dropdown-transition: opacity .15s ease-in-out !default;
+
+.dropdown-horizontal {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $next: breakpoint-next($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($next, $grid-breakpoints);
+
+        @include media-breakpoint-up($next) {
+            &#{$infix} { 
+                position: static !important; 
+            } 
+    
+            &#{$infix} > .dropdown-menu {
+                opacity: 0;
+                display: block;
+                visibility: hidden;
+                background-color: var(--dropdown-horizontal-bg) if($enable-important-utilities, !important, null);
+                width: 100%;
+                height: auto;
+                text-align: center;
+                border-radius: 0;
+                border: 0;
+                margin-top: calc((-1.5 * $spacer) - 2px);
+                padding-top: calc(1 * $spacer + 2px);
+                padding-bottom: 1 * $spacer;
+                box-shadow: 0.125rem 0.25rem rgba(0, 0, 0, .075);
+            
+                @include transition($dropdown-transition);
+            }
+    
+            &#{$infix} > .dropdown-menu.show {
+                visibility: visible;
+                opacity: 1;
+            }
+    
+            &#{$infix} > .dropdown-menu > li {
+                display: inline-block;
+                padding-left: $spacer;
+                padding-right: $spacer;
+            }
+    
+            &#{$infix} > .dropdown-menu > li > a {
+                padding-left: .25 * $spacer;
+                padding-right: .25 * $spacer;
+
+                &.active,
+                &:hover,
+                &:focus {
+                    color: var(--bs-body-color);
+                    border-bottom: solid 1px var(--bs-navbar-hover-color);
+                    margin-bottom: -1px;
+                    background-color: transparent;
+                }
+            }
+            
+            &#{$infix} > .nav-link.show {
+                background-color: var(--dropdown-horizontal-bg) if($enable-important-utilities, !important, null);
+            }            
+        }
+    }
+}
