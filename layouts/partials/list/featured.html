@@ -79,7 +79,7 @@
                 <div class="col col-12 col-md-{{ $width }} order-1 order-md-0 my-md-auto">
                     {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions "align" $align) }}
                 </div>
-                <div class="col col-12 col-md-{{ if gt $width 6 }}{{ sub 12 $width }}{{ else }}{{ $width }}{{ end }} order-0 order-md-1 text-center my-md-auto">
+                <div class="col col-12 col-md-{{ if gt $width 6 }}{{ sub 12 $width }}{{ else }}{{ $width }}{{ end }} order-0 order-md-1 text-center my-md-auto align-self-end">
                     {{ partial "partials/list/featured-illustration.html" (dict "page" $page "style" "pb-4 pb-md-0") }}
                 </div>
             </div>
