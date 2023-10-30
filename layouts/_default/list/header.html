@@ -1,0 +1,35 @@
+{{- $sections := $.Scratch.Get "sections" -}}
+{{- $headings := slice }}
+{{ if .Params.sectionMenu }}
+    {{ range $sections }}
+        {{ $headings = $headings | append .title }}
+    {{ end }}
+{{ end }}
+
+{{- $orientation := site.Params.list.feature.orientation | default "horizontal" -}}
+{{- $width := site.Params.list.feature.width | default 6 -}}
+{{- $justify := site.Params.list.feature.justify | default "center" -}}
+{{- $align := site.Params.list.feature.align | default "center" -}}
+{{- $actions := .Params.actions -}}
+{{- $layout := .Params.layout -}}
+
+{{ if .IsHome }}
+    {{- $orientation = or site.Params.home.feature.orientation $orientation -}}
+    {{- $width = or site.Params.home.feature.width $width -}}
+    {{- $justify = or site.Params.home.feature.justify $justify -}}
+    {{- $align = or site.Params.home.feature.align $align -}}
+    {{- $actions = (or $actions site.Params.featured.actions) -}}
+{{ end }}
+
+{{/* Display featured section */}}
+{{- if or (eq $layout "featured") .IsHome -}}
+    {{- partial "list/featured.html" (dict 
+        "page" .
+        "headings" $headings
+        "actions" $actions
+        "orientation" $orientation
+        "width" $width
+        "justify" $justify
+        "align" $align) 
+    -}}
+{{- end -}}

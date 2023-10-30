@@ -1,40 +1,5 @@
 {{- define "featured" }}
-    {{- $sections := $.Scratch.Get "sections" -}}
-    {{- $headings := slice }}
-    {{ if .Params.sectionMenu }}
-        {{ range $sections }}
-            {{ $headings = $headings | append .title }}
-        {{ end }}
-    {{ end }}
-
-    {{- $page := . -}}
-    {{- $orientation := site.Params.list.feature.orientation | default "horizontal" -}}
-    {{- $width := site.Params.list.feature.width | default 6 -}}
-    {{- $justify := site.Params.list.feature.justify | default "center" -}}
-    {{- $align := site.Params.list.feature.align | default "center" -}}
-    {{- $actions := $page.Params.actions -}}
-    {{- $layout := $page.Params.layout -}}
-
-    {{ if $page.IsHome }}
-        {{- $orientation = or site.Params.home.feature.orientation $orientation -}}
-        {{- $width = or site.Params.home.feature.width $width -}}
-        {{- $justify = or site.Params.home.feature.justify $justify -}}
-        {{- $align = or site.Params.home.feature.align $align -}}
-        {{- $actions = (or $actions site.Params.featured.actions) -}}
-    {{ end }}
-
-    {{/* Display featured section */}}
-    {{- if or (eq $layout "featured") $page.IsHome -}}
-        {{- partial "list/featured.html" (dict 
-            "page" .
-            "headings" $headings
-            "actions" $actions
-            "orientation" $orientation
-            "width" $width
-            "justify" $justify
-            "align" $align) 
-        -}}
-    {{- end -}}
+    {{ .Render "list/header" }}
 {{ end }}
 
 {{- define "main" -}}
@@ -50,40 +15,9 @@
             {{ end -}}
         {{- end -}}
 
-        <div class="row row-cols-1 row-cols-sm-2">
-            <div class="col col-sm-12 col-md-8">
-                {{ if not $page.IsHome }}
-                    {{ with $page.Title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
-                {{ end }}
-                {{ if ($page.Params.menu) }}
-                    {{- partial "assets/section-menu.html" $page -}}
-                {{- end -}}
-                {{- $loading := "" -}}
-                {{- if or (eq $layout "featured") $page.IsHome -}}
-                    {{- if $fullCover}}{{ $loading = site.Params.main.loading }}{{ end }}
-                {{ end }}
-                {{- $content := partial "utilities/ProcessContent" (dict "page" $page "raw" $page.RawContent "loading" $loading) -}}
-                {{ $content | safeHTML }}
-                {{ if and (and $sections (eq (len $sections) 1)) (not $content) }}
-                    <p class="pt-4">{{- T "emptyList" }}.</p>
-                {{ end }}
-            </div>
-            {{ with $page.Params.contact }}
-                {{- $contact := site.GetPage . }}
-                {{- if not $contact }}
-                    {{- errorf "Error processing content file '%s' - Cannot find contact: %s" $page.File . -}}
-                {{- else -}}
-                    {{ $color := site.Params.contact.color | default "primary" }}
-                    {{ $style := site.Params.contact.style | default "shadow" }}
-                    <div class="col col-md-4 d-none d-md-block pt-5">
-                        {{- partial "assets/card.html" (dict "path" $page.Params.contact "color" $color "header" "none" "footer" "none" "ratio" "1x1" "class" (printf "w-75 mx-auto mt-4 %s" $style)) -}}
-                    </div>
-                    <div class="col col-sm-12 d-md-none pt-5">
-                        {{- partial "assets/card.html" (dict "path" $page.Params.contact "color" $color "header" "none" "footer" "none" "orientation" "horizontal" "class" $style) -}}
-                    </div>
-                {{- end }}
-            {{ end }}
-        </div>    
+        {{ .Render "list/body" }}
+
+        {{ .Render "list/footer" }}
     </div>
 
     {{/* Display generated sections */}}
@@ -91,6 +25,6 @@
         {{ .content | safeHTML }}
     {{ end }}
 
-    {{/* Fill remaining space to push footer to viewport bottom */}}
+    {{/* Fill remaining space to push page footer to viewport bottom */}}
     <div class="container-fluid flex-fill"></div>
 {{- end -}}
