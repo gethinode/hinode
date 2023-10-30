@@ -227,14 +227,14 @@
     <nav class="navbar {{ if $fixed }}navbar-fixed-top{{ end }} navbar-expand-{{ $size }}{{ if $contrast }} navbar-contrast{{ end }}{{ with $color }} bg-{{ . }}{{ end }} p-4"{{ with $theme }} data-bs-theme="{{ . }}"{{ end }}>
         <div class="container-xxl p-0">
             <!-- Insert sidebar toggler when applicable -->
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 {{- if $page.Scratch.Get "sidebar" -}}
-                    <button class="navbar-toggler fw-30 collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                    <button class="navbar-toggler collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
                         {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw") -}}
                     </button>
                 {{- else -}}
                     <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
-                    <button class="navbar-toggler fw-30 collapsed p-0 mx-auto invisible" type="button">
+                    <button class="navbar-toggler collapsed p-0 mx-auto invisible" type="button">
                         {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw") -}}
                     </button>
                 {{- end -}}
@@ -255,7 +255,7 @@
             </a>
     
             <!-- Insert main navigation toggler -->
-            <div class="d-flex fw-30">
+            <div class="d-flex">
                 <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}-collapse"
                     aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
                     <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
