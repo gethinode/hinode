@@ -41,3 +41,7 @@ $secondary-text-emphasis-dark:      mix(white, h.$secondary, h.$dark-mode-tint) 
 $link-color-dark:                   mix(white, h.$primary, h.$dark-mode-tint) !default;
 $primary-bg-subtle-dark:            mix(black, h.$primary, h.$dark-mode-shade) !default;
 $primary-border-subtle-dark:        mix(black, h.$primary, calc(h.$dark-mode-shade / 2)) !default;
+
+$dropdown-transition: opacity .15s ease-in-out !default;
+$dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);
+$dropdown-horizontal-padding-y: calc(1rem + 2px);

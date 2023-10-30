@@ -34,3 +34,9 @@ $link-color-dark:                   mix(white, $primary, $dark-mode-tint) !defau
 $primary-bg-subtle-dark:            mix(black, $primary, $dark-mode-shade) !default;
 $primary-border-subtle-dark:        mix(black, $primary, $dark-mode-shade / 2) !default;
 // scss-docs-end color-mode
+
+// scss-docs-start horizontal-nav
+$dropdown-transition: opacity .15s ease-in-out !default;
+$dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);
+$dropdown-horizontal-padding-y: calc(1rem + 2px);
+// scss-docs-end horizontal-nav

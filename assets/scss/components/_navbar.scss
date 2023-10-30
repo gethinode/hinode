@@ -130,8 +130,6 @@
     }
 }
 
-$dropdown-transition: opacity .15s ease-in-out !default;
-
 .dropdown-horizontal {
     @each $breakpoint in map-keys($grid-breakpoints) {
         $next: breakpoint-next($breakpoint, $grid-breakpoints);
@@ -152,9 +150,9 @@ $dropdown-transition: opacity .15s ease-in-out !default;
                 text-align: center;
                 border-radius: 0;
                 border: 0;
-                margin-top: calc((-1.5 * $spacer) - 2px);
-                padding-top: calc(1 * $spacer + 2px);
-                padding-bottom: 1 * $spacer;
+                margin-top: $dropdown-horizontal-margin-top;
+                padding-top: $dropdown-horizontal-padding-y;
+                padding-bottom: $dropdown-horizontal-padding-y;
                 box-shadow: 0.125rem 0.25rem rgba(0, 0, 0, .075);
             
                 @include transition($dropdown-transition);
