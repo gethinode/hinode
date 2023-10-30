@@ -39,11 +39,14 @@
     {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
 {{- end -}}
 
-{{- /* Define section headings */ -}}
-{{ $sections := partial "utilities/GetSections.html" . }}
-{{- $.Scratch.Set "sections" $sections -}}
-
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
+{{- $.Scratch.Set "fullCover" $fullCover -}}
+
+{{- /* Define section headings */ -}}
+{{- $loading := "" -}}
+{{- if $fullCover }}{{ $loading = .Site.Params.main.loading }}{{ end -}}
+{{ $sections := partial "utilities/GetSections.html" (dict "page" . "loading" $loading) }}
+{{- $.Scratch.Set "sections" $sections -}}
 
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">

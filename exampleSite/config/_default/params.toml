@@ -5,6 +5,7 @@
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
     footerBelowFold = false
+    loading = "lazy"
     [main.externalLinks]
         cue = true
         tab = true

@@ -36,6 +36,7 @@
 {{- $width := 100 -}}
 {{- $ratio := "" -}}
 {{- $wrap := false -}}
+{{- $loading := .loading -}}
 
 {{- with (index site.Params.sections $section) -}}
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
@@ -121,6 +122,7 @@
         "content" $content
         "class" $style
         "color" $color
+        "loading" $loading
         )
     -}}
     {{- $partial := "" -}}

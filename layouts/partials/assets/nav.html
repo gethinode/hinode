@@ -78,6 +78,14 @@
     {{ end -}}
 {{ end -}}
 
+{{- $loading := .loading -}}
+{{- $validSettings := slice "lazy" "eager" -}}
+{{- if $loading -}}
+    {{ if not (in $validSettings $loading) -}}
+        {{- errorf "partial [assets/nav.html] - Invalid value for param 'loading': %s" $loading -}}
+    {{ end -}}
+{{- end -}}
+
 <div class="{{ if eq $width 50 }}col-sm-12 col-md-10 col-lg-8 col-xl-6{{ else }}col-12{{ end }} mx-auto pt-5 pb-5">
     {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
     <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
@@ -104,6 +112,7 @@
                     "color" $color
                     "content" (partial "utilities/GetDescription.html" $item)
                     "thumbnail" $thumbnail
+                    "loading" $loading
                 ) -}}
                 {{- else -}}
                     {{- (or $item.Description $item.Content) -}}

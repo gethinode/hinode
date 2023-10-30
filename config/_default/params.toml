@@ -7,6 +7,7 @@
     canonifyAssetsURLs = false
     endorse = true
     footerBelowFold = false
+    loading = "lazy"
     [main.externalLinks]
         cue = false
         tab = false
