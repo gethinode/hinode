@@ -56,12 +56,20 @@
 
 {{- $class := .class -}}
 
+{{- $loading := .loading -}}
+{{- $validSettings := slice "lazy" "eager" -}}
+{{- if $loading -}}
+    {{ if not (in $validSettings $loading) -}}
+        {{- errorf "partial [assets/persona.html] - Invalid value for param 'loading': %s" $loading -}}
+    {{ end -}}
+{{- end -}}
+
 <div class="d-none d-md-block">
     <div class="persona position-relative row mt-5 align-middle p-3">
         <div class="col-2">
             <div class="position-absolute top-50 start-0 translate-middle-y col-4 ps-3">
                 {{- if $thumbnail -}}
-                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5" "loading" $loading) -}}
                 {{ end }}
             </div>
         </div>
@@ -81,7 +89,7 @@
         <div class="col-12">
             <div class="position-absolute top-25 start-50 translate-middle col-6">
                 {{- if $thumbnail -}}
-                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5") -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "innerClass" "rounded-5" "loading" $loading) -}}
                 {{ end }}
             </div>
         </div>

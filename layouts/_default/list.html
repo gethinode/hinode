@@ -40,6 +40,7 @@
 {{- define "main" -}}
     {{- $page := . -}}
     {{- $sections := $.Scratch.Get "sections" -}}
+    {{- $fullCover := $.Scratch.Get "fullCover" -}}
     {{- $layout := $page.Params.layout -}}
 
     <div class="container-xxl px-4 px-xxl-0">
@@ -57,7 +58,11 @@
                 {{ if ($page.Params.menu) }}
                     {{- partial "assets/section-menu.html" $page -}}
                 {{- end -}}
-                {{- $content := partial "utilities/ProcessContent" (dict "page" $page "raw" $page.RawContent) -}}
+                {{- $loading := "" -}}
+                {{- if or (eq $layout "featured") $page.IsHome -}}
+                    {{- if $fullCover}}{{ $loading = site.Params.main.loading }}{{ end }}
+                {{ end }}
+                {{- $content := partial "utilities/ProcessContent" (dict "page" $page "raw" $page.RawContent "loading" $loading) -}}
                 {{ $content | safeHTML }}
                 {{ if and (and $sections (eq (len $sections) 1)) (not $content) }}
                     <p class="pt-4">{{- T "emptyList" }}.</p>

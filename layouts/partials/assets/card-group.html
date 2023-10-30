@@ -144,6 +144,14 @@
 {{- $ratio := .ratio -}}
 {{- $wrapper := .wrapper | default "p-0" -}}
 
+{{- $loading := .loading -}}
+{{- $validSettings := slice "lazy" "eager" -}}
+{{- if $loading -}}
+    {{ if not (in $validSettings $loading) -}}
+        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'loading': %s" $loading -}}
+    {{ end -}}
+{{- end -}}
+
 {{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
 <div class="container-fluid {{ $wrapper }}">
@@ -157,6 +165,7 @@
                 "footer" $footer
                 "orientation" $orientation
                 "ratio" $ratio
+                "loading" $loading
             ) -}}
             {{- $params = merge $params $element }}
 
