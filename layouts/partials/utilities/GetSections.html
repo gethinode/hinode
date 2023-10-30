@@ -3,7 +3,7 @@
 
 {{/* Add title for current page */}}
 {{- $items := slice -}}
-{{ $items = $items | append (dict "title" .Title "content" "" )}}
+{{ $items = $items | append (dict "title" $page.Title "content" "" )}}
 
 {{/* Identify page sections */}}
 {{- $sections := slice -}}
