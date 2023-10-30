@@ -27,6 +27,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
       './_vendor/github.com/gethinode/mod-leaflet/dist/leaflet.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_carousel.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_dropdown.scss',
+      './_vendor/github.com/twbs/bootstrap/scss/_modal.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_reboot.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_tooltip.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_transitions.scss',
