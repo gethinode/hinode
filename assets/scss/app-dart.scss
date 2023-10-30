@@ -5,6 +5,7 @@
 
 // Include default variable overrides
 @import "common/variables-dart.scss"; // note: modified for dart-sass
+@import "theme/variables.scss";
 @import "common/icons.scss";
 
 // Import Bootstrap configuration (mounted by core Bootstrap module)
