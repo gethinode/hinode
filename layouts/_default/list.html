@@ -42,7 +42,7 @@
     {{- $sections := $.Scratch.Get "sections" -}}
     {{- $layout := $page.Params.layout -}}
 
-    <div class="container-xxl flex-fill px-4 px-xxl-0">
+    <div class="container-xxl px-4 px-xxl-0">
         {{- if ne $layout "featured" -}}
             {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
                 <div>{{ partial "assets/breadcrumb.html" $page }}</div>
@@ -85,4 +85,7 @@
     {{ range $sections }}
         {{ .content | safeHTML }}
     {{ end }}
+
+    {{/* Fill remaining space to push footer to viewport bottom */}}
+    <div class="container-fluid flex-fill"></div>
 {{- end -}}
