@@ -28,8 +28,9 @@
     {{- $thumbnail := .thumbnail -}}
     {{- $style := .style -}}
     {{- $mode := .mode -}}
+    {{- $title := .title -}}
     {{- $loading := .loading -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "outerClass" $style "mode" $mode "loading" $loading) -}}
+    {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "outerClass" $style "mode" $mode "loading" $loading) -}}
 {{- end -}}
 
 {{- $page := .page -}}
@@ -70,7 +71,7 @@
                         {{- $style = "reveal fade-bottom-n5 rotate-n5 ps-3" -}}
                         {{- if $odd }}{{ $style = "reveal fade-bottom-5 rotate-5 pe-3" }}{{ end }}
                     {{ end }}
-                    {{ partial "partials/list-img.html" (dict "thumbnail" $thumbnail "style" $style "mode" $item.Params.colormode "loading" $loading) }}
+                    {{ partial "partials/list-img.html" (dict "thumbnail" $thumbnail "title" $item.Title "style" $style "mode" $item.Params.colormode "loading" $loading) }}
                 </div>
                 <div class="col-6{{ if $odd }} order-first{{ end }} psw-lg-5 p-5">
                     {{ partial "partials/list-content.html" (dict "title" $item.Title "content" (or $item.Description $item.Content)) }}
@@ -87,7 +88,7 @@
         <div class="container d-flex flex-column">
             <div class="row pt-5 pb-5 align-items-center flex-fill row-cols-2">
                 <div class="col-12 text-center">
-                    {{ partial "partials/list-img.html" (dict "thumbnail" $thumbnail "mode" $item.Params.colormode "loading" $loading) }}
+                    {{ partial "partials/list-img.html" (dict "thumbnail" $thumbnail "title" $item.Title "mode" $item.Params.colormode "loading" $loading) }}
                 </div>
                 <div class="col-12 p-3">
                     {{ partial "partials/list-content.html" (dict "title" $item.Title "content" (partial "utilities/GetDescription.html" $item)) }}
