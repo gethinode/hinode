@@ -1,0 +1,23 @@
+{{- $sections := $.Scratch.Get "sections" -}}
+{{- $fullCover := $.Scratch.Get "fullCover" -}}
+{{- $layout := .Params.layout -}}
+
+<div class="row row-cols-1 row-cols-sm-2">
+    <div class="col col-sm-12 col-md-8">
+        {{ if not .IsHome }}
+            {{ with .Title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+        {{ end }}
+        {{ if (.Params.menu) }}
+            {{- partial "assets/section-menu.html" . -}}
+        {{- end -}}
+        {{- $loading := "" -}}
+        {{- if or (eq $layout "featured") .IsHome -}}
+            {{- if $fullCover }}{{ $loading = site.Params.main.loading }}{{ end }}
+        {{ end }}
+        {{- $content := partial "utilities/ProcessContent" (dict "page" . "raw" .RawContent "loading" $loading) -}}
+        {{ $content | safeHTML }}
+        {{ if and (and $sections (eq (len $sections) 1)) (not $content) }}
+            <p class="pt-4">{{- T "emptyList" }}.</p>
+        {{ end }}
+    </div>
+</div>

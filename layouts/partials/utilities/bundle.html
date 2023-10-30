@@ -55,8 +55,6 @@
     {{- end -}}
 {{- end -}}
 
-{{/* warnf "FILES: %s" $sorted */}}
-
 {{ $bundle := "" }}
 {{ if gt (len $sorted) 0 }}
     {{ $bundle = $sorted | resources.Concat $filename -}}
