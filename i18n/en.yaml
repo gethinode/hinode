@@ -79,6 +79,8 @@
   translation: "On this page"
 - id: seeAlso
   translation: "See also"
+- id: sectionMenu
+  translation: "Select a topic"
 
 # Sidebar
 - id: toggleSidebar

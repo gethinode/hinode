@@ -1,8 +1,17 @@
 {{ define "main" }}
-    <div class="container-xxl flex-fill px-4 px-xxl-0">
+    {{- $page := . -}}
+    {{- $layout := $page.Params.layout -}}
+
+    <div class="container-xxl flex-fill p-4 px-xxl-0">
         <div class="row row-cols-1 row-cols-sm-3">
             <div class="col col-md-2 d-none d-md-block"></div>
             <div class="col col-sm-12 col-md-8">
+                {{- if ne $layout "featured" -}}
+                    {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
+                        <div>{{ partial "assets/breadcrumb.html" $page }}</div>
+                    {{ end -}}
+                {{- end -}}
+
                 <p class="display-4 mt-5">{{ .Name | humanize }}</p>
 
                 {{ if eq .Kind "taxonomy" }}
