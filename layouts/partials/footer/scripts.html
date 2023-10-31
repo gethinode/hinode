@@ -25,10 +25,10 @@
     {{- $js = $bundle | resources.ExecuteAsTemplate $filename $page -}}
 {{- end -}}
 
-{{- if and (not site.IsServer) $header -}}
+{{- if and (not hugo.IsServer) $header -}}
     {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
-    {{- if and (not $pc.Disable) (hasPrefix site.GoogleAnalytics "G-") }}
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.GoogleAnalytics }}"></script>
+    {{- if and (not $pc.Disable) (hasPrefix site.Config.Services.GoogleAnalytics.ID "G-") }}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.Config.Services.GoogleAnalytics.ID }}"></script>
     {{- end }}
 {{- end -}}
 
