@@ -68,7 +68,7 @@
             {{- range $index, $item := $list -}}
                 {{- $active := eq $item.label $version -}}
                 {{- $disabled := false -}}
-                {{- if site.IsServer }}
+                {{- if hugo.IsServer }}
                     {{- $disabled = and $item.redirect (gt (len $item.redirect) 0) -}}
                 {{- end -}}
                 {{ if $item.url }}
