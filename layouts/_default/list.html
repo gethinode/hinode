@@ -8,7 +8,7 @@
     {{- $fullCover := $.Scratch.Get "fullCover" -}}
     {{- $layout := $page.Params.layout -}}
 
-    <div class="container-xxl px-4 px-xxl-0">
+    <div class="container-xxl p-4 px-xxl-0">
         {{- if ne $layout "featured" -}}
             {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
                 <div>{{ partial "assets/breadcrumb.html" $page }}</div>
