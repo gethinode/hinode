@@ -94,3 +94,7 @@
         }
     }
 }
+
+.section-menu > .nav-link.active, .section-menu > .nav-link:hover {
+    color: var(--bs-primary);
+}

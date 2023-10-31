@@ -77,6 +77,8 @@
   translation: "Inhoudsopgave"
 - id: seeAlso
   translation: "Zie ook"
+- id: sectionMenu
+  translation: "Selecteer een onderwerp"
 
 # Sidebar
 - id: toggleSidebar
