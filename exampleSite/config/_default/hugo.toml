@@ -5,7 +5,6 @@ paginate = 9
 enableGitInfo = true
 
 # additional settings
-googleAnalytics = "G-T85PPZ36GN"
 baseURL = "https://demo.gethinode.com/"
 canonifyURLs = false
 enableEmoji = true
@@ -63,6 +62,8 @@ home = ["HTML", "RSS", "REDIR"]
     disableInlineCSS = true
   [services.twitter]
     disableInlineCSS = true
+  [services.googleAnalytics]
+    ID = "G-T85PPZ36GN"
 
 [outputFormats]
   [outputFormats.XML]

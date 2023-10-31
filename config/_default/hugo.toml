@@ -6,7 +6,6 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-# googleAnalytics = "G-xxxxxxxxxx"
 baseURL = "https://example.com/"
 canonifyURLs = false
 enableEmoji = true
@@ -73,6 +72,8 @@ home = ["HTML", "RSS", "REDIR"]
     disableInlineCSS = true
   [services.twitter]
     disableInlineCSS = true
+  [services.googleAnalytics]
+    # ID = "G-xxxxxxxxxx"
 
 [outputFormats]
   [outputFormats.XML]

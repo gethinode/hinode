@@ -12,7 +12,7 @@
 
 {{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
 {{- if (and (not .Site.IsServer) (not $pc.Disable)) -}}
-    {{ with .Site.GoogleAnalytics -}}
+    {{ with .Site.Config.Services.GoogleAnalytics.ID -}}
         {{ if hasPrefix . "G-"}}
             {{ template "__ga_js_set_doNotTrack" $ }}
 
