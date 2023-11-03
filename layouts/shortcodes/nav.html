@@ -1,7 +1,7 @@
 <!-- 
     Displays a tab group of multiple items. Add nav-item inner elements for each tab pane. The shortcode supports the
     following arguments:
-    "type"          Optional type of the tab group, either "tabs", "pills", or "underline".
+    "type"          Optional type of the tab group, either "tabs", "pills", "underline", or "callout".
     "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
     "fade"          Optional flag to make tab panes fade in.
     "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
@@ -15,7 +15,7 @@
 
 {{- $class := .Get "class" | default "" -}}
 {{ $type := .Get "type" | default "" -}}
-{{ $supportedNavTypes := slice "tabs" "pills" "underline" -}}
+{{ $supportedNavTypes := slice "tabs" "pills" "underline" "callout" -}}
 {{ if $type }}
     {{ if not (in $supportedNavTypes $type) -}}
         {{ errorf "Invalid value for param 'type': %s" $type -}}
@@ -71,8 +71,18 @@
 
 {{- $hasContent := gt (len (findRE "data-has-content=\"true\"" $inner)) 0 -}}
 
-{{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
+{{ $alternative := .Scratch.Get "alternative" }}
+{{ if and (eq $type "callout") $alternative }}
+    <div class="d-lg-none">
+        <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }} nav-callout">
+            {{- $alternative | safeHTML -}}
+        </div>
+    </div>
+    <div class="d-none d-lg-block">
+{{ end }}
+
 <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
+    {{ if $vertical }}<div class="row"><div class="col-auto">{{ end }}
     {{- range $index, $item := $items -}}
         {{- $header := partial "utilities/GetVal.html" $item -}}
         {{- $itemDisabled := in $disabled $index -}}
@@ -81,11 +91,13 @@
             {{ $header }}
         </button>
     {{ end -}}
-</div>
-
-{{- if $hasContent -}}
-    <div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-        {{- $inner | safeHTML -}}
+    {{ if $vertical }}</div><div class="col">{{ end }}
+        {{- if $hasContent -}}
+        <div class="tab-content w-100 {{ if not $vertical }} {{ end }}{{ if eq $type "tabs" }}border border-bottom-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+            {{- $inner | safeHTML -}}
+        </div>
+    {{- end -}}
+    {{ if $vertical }}</div></div>{{ end }}
     </div>
-{{- end -}}
-{{ if $vertical }}</div>{{ end }}
+
+{{ if and (eq $type "callout") $alternative }}</div>{{ end }}

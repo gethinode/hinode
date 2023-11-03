@@ -10,6 +10,8 @@
     "body"          The body content of the nav-item, supports Markdown and HTML (if enabled).
     "show"          Optional flag to indicate the item should be shown as expanded (only one can be shown at a time).
     "disabled"      Optional flag to indicate the item should be in a disabled state.
+    "type"          Optional type of the item to render, supports "accordion" as alternative format. Defaults to
+                    "tab-pane".
 -->
 
 {{- $id := .id -}}
@@ -21,9 +23,33 @@
 {{- $body := .body -}}
 {{- $show := .show -}}
 {{- $disabled := .disabled -}}
+{{- $type := .type -}}
+{{- $illustration := .illustration -}}
 
-<div class="tab-pane{{ if $show }} active {{ if $fade }}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}{{ with $class }} {{ . }}{{ end }}" id="{{ $parentID }}-{{ $id }}" 
-    role="tabpanel" aria-labelledby="{{ $parentID }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
-    data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
-    {{ $body }}
-</div>
+{{ if eq $type "accordion" }}
+    <div class="accordion-item{{ if $show }} show{{ end }}{{ with $class }} {{ . }}{{ end }}">
+        {{- with $header -}}
+            <h2 class="accordion-header m-0" id="accordion-{{ $parentID }}-heading-{{ $id }}">
+                <button class="accordion-button collapsed {{ if $disabled }} text-secondary{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{ $parentID }}-item-{{ $id }}" aria-expanded="false" aria-controls="accordion-{{ $parentID }}-item-{{ $id }}"{{ if $disabled }} disabled{{ end }}>
+                    {{ if $illustration }}
+                        <div class="row">
+                            <div class="col-3 col-sm-2 my-auto">{{ $illustration | safeHTML }}</div>
+                            <div class="col-9 col-sm-10 fs-6 fs-sm-5 my-auto">{{ . }}</div>
+                        </div>
+                    {{ else }}
+                        {{ . }}
+                    {{ end }}
+                </button>
+            </h2>
+        {{- end -}}
+        <div id="accordion-{{ $parentID }}-item-{{ $id }}" class="accordion-collapse collapse{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $parentID }}-heading-{{ $id }}" data-bs-parent="#accordion-{{ $parentID }}">
+            <div class="accordion-body">{{- $body | safeHTML -}}</div>
+        </div>
+    </div>
+{{ else }}
+    <div class="tab-pane{{ if $show }} active {{ if $fade }}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}{{ with $class }} {{ . }}{{ end }}" id="{{ $parentID }}-{{ $id }}" 
+        role="tabpanel" aria-labelledby="{{ $parentID }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
+        data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
+        {{ $body }}
+    </div>
+{{ end }}

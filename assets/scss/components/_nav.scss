@@ -1,0 +1,103 @@
+.nav-tabs > .nav-link.active {
+    border-bottom-color: var(--bs-body-bg) !important;
+    border-bottom-style: solid !important;
+    z-index: 1;
+}
+
+.nav-callout {
+    --#{$prefix}nav-callout-bg: var(--#{$prefix}light);
+    --#{$prefix}nav-callout-active-bg: var(--bs-primary-bg-subtle);
+    --#{$prefix}nav-callout-gap: #{$nav-underline-gap};
+    
+    column-gap: var(--#{$prefix}nav-callout-gap) !important;
+}
+
+.nav-callout > .tab-content {
+    background-color: var(--#{$prefix}nav-callout-bg);
+    padding: 2 * $spacer;
+    margin-top: 0 !important;
+}
+
+.nav-callout > .nav-link {
+    display: flex;
+    text-align: start;
+    vertical-align: text-top;
+    border-radius: 0;
+    padding: 0 0 (4 * $spacer) 0;
+    border-bottom: none;
+}
+
+.nav-callout > .nav-link.active {
+    background-image: linear-gradient(to top right, var(--#{$prefix}nav-callout-bg) 50%, transparent 0);
+    background-size: 50% (3 * $spacer);
+    background-repeat: no-repeat;
+    background-position: 50% bottom;
+    font-weight: 600;
+    color: var(--bs-nav-underline-link-active-color);
+}
+
+.nav-callout .accordion-button {
+    background-color: var(--#{$prefix}nav-callout-bg) !important;
+    border: solid;
+    border-color: var(--#{$prefix}border-color);
+    border-radius: var(--#{$prefix}accordion-inner-border-radius) !important;
+    margin-bottom: 0;
+
+    &:focus {
+        border-bottom: none !important;
+        box-shadow: none;
+    }
+
+    &:not(.collapsed) {
+        box-shadow: none;
+    }
+}
+
+.nav-callout > .accordion-item {
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
+    border: none;
+}
+
+.nav-callout .accordion-button[aria-expanded="false"] {
+    border-bottom: solid !important;
+    border-color: var(--#{$prefix}border-color) !important;
+    border-radius: var(--#{$prefix}accordion-inner-border-radius);
+}
+
+.nav-callout .accordion-button[aria-expanded="true"] {
+    border-color: var(--#{$prefix}border-color) !important;
+    border-bottom: none !important;
+    border-radius: var(--#{$prefix}accordion-inner-border-radius) var(--#{$prefix}accordion-inner-border-radius) 0 0 !important;
+    padding-bottom: 3 * $spacer;
+    background-image: linear-gradient(to top right, var(--#{$prefix}nav-callout-active-bg) 50%, transparent 0);
+    background-size: 10% (2.5 * $spacer);
+    background-repeat: no-repeat;
+    background-position: 10% bottom;
+}
+
+.nav-callout .accordion-collapse {
+    background-color: var(--#{$prefix}nav-callout-active-bg) !important;
+    border-radius: 0 0 var(--#{$prefix}accordion-inner-border-radius) var(--#{$prefix}accordion-inner-border-radius);
+    border-top: none !important;
+    border-left: solid;
+    border-right: solid;
+    border-bottom: solid;
+    border-color: var(--#{$prefix}border-color);
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .nav-callout {
+            --#{$prefix}nav-callout-bg: var(--#{$prefix}tertiary-bg);
+        }
+
+        .nav-callout .accordion-button[aria-expanded="true"] {
+            background-image: linear-gradient(to top right, shade-color($primary, 70%) 50%, transparent 0);
+        }
+
+        .nav-callout .accordion-collapse {
+            background-color: shade-color($primary, 70%) !important;
+        }
+    }
+}
