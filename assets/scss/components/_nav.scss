@@ -8,6 +8,7 @@
     --#{$prefix}nav-callout-bg: var(--#{$prefix}light);
     --#{$prefix}nav-callout-active-bg: var(--bs-primary-bg-subtle);
     --#{$prefix}nav-callout-gap: #{$nav-underline-gap};
+    
     column-gap: var(--#{$prefix}nav-callout-gap) !important;
 }
 
@@ -36,19 +37,10 @@
 }
 
 .nav-callout .accordion-button {
+    background-color: var(--#{$prefix}nav-callout-bg) !important;
     border: solid;
     border-color: var(--#{$prefix}border-color);
     border-radius: var(--#{$prefix}accordion-inner-border-radius) !important;
-}
-
-.nav-callout > .accordion-item {
-    margin-top: 2 * $spacer;
-    margin-bottom: 2 * $spacer;
-    border: none;
-}
-
-.nav-callout .accordion-button {
-    background-color: var(--#{$prefix}nav-callout-bg) !important;
     margin-bottom: 0;
 
     &:focus {
@@ -61,13 +53,19 @@
     }
 }
 
-.nav-callout .accordion-button[aria-expanded=false] {
+.nav-callout > .accordion-item {
+    margin-top: 2 * $spacer;
+    margin-bottom: 2 * $spacer;
+    border: none;
+}
+
+.nav-callout .accordion-button[aria-expanded="false"] {
     border-bottom: solid !important;
     border-color: var(--#{$prefix}border-color) !important;
     border-radius: var(--#{$prefix}accordion-inner-border-radius);
 }
 
-.nav-callout .accordion-button[aria-expanded=true] {
+.nav-callout .accordion-button[aria-expanded="true"] {
     border-color: var(--#{$prefix}border-color) !important;
     border-bottom: none !important;
     border-radius: var(--#{$prefix}accordion-inner-border-radius) var(--#{$prefix}accordion-inner-border-radius) 0 0 !important;
@@ -94,7 +92,7 @@
             --#{$prefix}nav-callout-bg: var(--#{$prefix}tertiary-bg);
         }
 
-        .nav-callout .accordion-button[aria-expanded=true] {
+        .nav-callout .accordion-button[aria-expanded="true"] {
             background-image: linear-gradient(to top right, shade-color($primary, 70%) 50%, transparent 0);
         }
 
