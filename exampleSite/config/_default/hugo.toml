@@ -74,6 +74,12 @@ home = ["HTML", "RSS", "REDIR"]
     permalinkable = false
     name = "xml"
 
+[minify]
+  [minify.tdewolff.js]
+    keepVarNames = true
+    precision = 0
+    version = 2022
+
 [module]
   replacements = 'github.com/gethinode/hinode -> ../..'
   [[module.imports]]
