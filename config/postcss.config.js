@@ -14,6 +14,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     ...whitelister([
       './assets/scss/components/_clipboard.scss',
       './assets/scss/components/_command.scss',
+      './assets/scss/components/_nav.scss',
       './assets/scss/components/_navbar.scss',
       './assets/scss/components/_search.scss',
       './assets/scss/components/_syntax.scss',

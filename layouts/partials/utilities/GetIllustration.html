@@ -1,0 +1,21 @@
+{{- $item := .item -}}
+{{- $illustration := "" -}}
+{{- $style := "img-wrap mx-auto mx-md-0" -}}
+{{- $size := .size | default "col-12 col-sm-4 col-lg-12" -}}
+
+{{ if $item.Params.icon }}
+    {{- $icon := (or (and (reflect.IsMap $item.Params.Icon) $item.Params.Icon.url) $item.Params.Icon) -}}
+    {{- $mode := and (reflect.IsMap $item.Params.Icon) $item.Params.Icon.mode -}}
+    {{ if eq (lower (path.Ext $icon)) ".json" }}
+        {{ $illustration = partial "assets/animation.html" (dict "data" $icon "mode" $mode "loop" false "hover" true "class" (printf "mx-auto text-center %s" $size)) }}
+    {{ else }}
+        {{ $illustration = partial "assets/icon.html" (dict "icon" "mode" $mode $icon "wrapper" "mx-auto text-center")}}
+    {{ end }}
+{{ else }}
+    {{- $thumbnail := (or (and (reflect.IsMap $item.Params.Thumbnail) $item.Params.Thumbnail.url) $item.Params.Thumbnail) -}}
+    {{- if $thumbnail }}
+        {{ $illustration = partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" $style "innerClass" "rounded" "title" $item.Site.Title) }}
+    {{ end }}
+{{ end }}
+
+{{ return $illustration }}

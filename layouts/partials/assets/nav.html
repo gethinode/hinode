@@ -4,7 +4,7 @@
     "page"          Required context of the current page.
     "list"          Required array of pages.
     "title"         Optional title of the tab group.
-    "type"          Optional type of the tab group, either "tabs", "pills" (default), or "underline".
+    "type"          Optional type of the tab group, either "tabs", "pills" (default), "underline" or "callout".
     "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
     "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
     "pane"          Optional style of the panes, either "none" (default) or "persona".
@@ -70,7 +70,7 @@
 {{ $type := "pills" }}
 {{ with .type }}
     {{ $type = . -}}
-    {{ $supportedNavTypes := slice "tabs" "pills" "underline" -}}
+    {{ $supportedNavTypes := slice "tabs" "pills" "underline" "callout" -}}
     {{ if $type }}
         {{ if not (in $supportedNavTypes $type) -}}
             {{ errorf "partial [assets/nav.html] - Invalid value for param 'type': %s" $type -}}
@@ -86,8 +86,31 @@
     {{ end -}}
 {{- end -}}
 
-<div class="{{ if eq $width 50 }}col-sm-12 col-md-10 col-lg-8 col-xl-6{{ else }}col-12{{ end }} mx-auto pt-5 pb-5">
+<div class="{{ if eq $width 50 }}col-sm-12 col-md-10 col-lg-8 col-xl-6{{ else }}col-12{{ end }} mx-auto">
     {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
+    {{ if eq $type "callout" }}
+        <div class="d-lg-none">
+            <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }} nav-callout">
+                {{- range $index, $item := $list -}}
+                    {{ partial "assets/nav-item" (dict 
+                        "id" $index
+                        "parentID" $id
+                        "fade" false
+                        "header" $item.Title
+                        "class" $class
+                        "body" (or $item.Description $item.Content)
+                        "show" false
+                        "disabled" false
+                        "type" "accordion"
+                        "illustration" (partial "utilities/GetIllustration.html" (dict "item" $item "size" "col-12"))
+                        )
+                    }}
+                {{ end -}}
+            </div>
+        </div>
+        <div class="d-none d-lg-block">
+    {{ end }}
+
     <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
         {{- range $index, $item := $list -}}
             {{ $show := eq $index 0}}
@@ -96,29 +119,39 @@
                 {{ $item.Title }}
             </button>
         {{ end -}}
+
+        <div class="tab-content {{ if eq $type "tabs" }}border border-bottom-0  p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+            {{ range $index, $item := $list }}
+                {{ $header := $item.Title }}
+                {{ $body := $item.Content }}
+                {{ $show := eq $index 0}}
+                {{- $thumbnail := (or (and (reflect.IsMap $item.Params.Thumbnail) $item.Params.Thumbnail.url) $item.Params.Thumbnail) -}}
+                <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
+                    {{- if eq $pane "persona" -}}
+                        {{- partial "assets/persona.html" (dict  
+                            "title" $item.Title
+                            "class" $class
+                            "color" $color
+                            "content" (partial "utilities/GetDescription.html" $item)
+                            "thumbnail" $thumbnail
+                            "loading" $loading
+                        ) -}}
+                    {{- else -}}
+                        {{ $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) }}
+                        {{ if $illustration }}
+                            <div class="row">
+                                <div class="col-12 col-lg-10 order-1 order-lg-0">{{- (or $item.Description $item.Content) -}}</div>
+                                <div class="col-12 col-lg-2 order-0 order-lg-1">{{ $illustration | safeHTML }}</div>
+                            </div>
+                        {{ else }}
+                            {{- (or $item.Description $item.Content) -}}
+                        {{ end }}
+                    {{- end -}}
+                </div>    
+            {{ end }}
+        </div>
     </div>
 
-    <div class="tab-content {{ if eq $type "tabs" }}border border-top-0 p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-        {{ range $index, $item := $list }}
-            {{ $header := $item.Title }}
-            {{ $body := $item.Content }}
-            {{ $show := eq $index 0}}
-            {{- $thumbnail := (or (and (reflect.IsMap $item.Params.Thumbnail) $item.Params.Thumbnail.url) $item.Params.Thumbnail) -}}
-            <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
-                {{- if eq $pane "persona" -}}
-                {{- partial "assets/persona.html" (dict  
-                    "title" $item.Title
-                    "class" $class
-                    "color" $color
-                    "content" (partial "utilities/GetDescription.html" $item)
-                    "thumbnail" $thumbnail
-                    "loading" $loading
-                ) -}}
-                {{- else -}}
-                    {{- (or $item.Description $item.Content) -}}
-                {{- end -}}
-            </div>    
-        {{ end }}
-    </div>
+    {{ if eq $type "callout" }}</div>{{ end }}
     {{ if $vertical }}</div>{{ end }}
 </div>

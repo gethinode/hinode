@@ -22,6 +22,8 @@
         {{- $fade = true -}}
     {{- end -}}
 
+    {{- $type := .Parent.Get "type" -}}
+
     {{- $header := .Get "header" | default "" -}}
     {{- if not $header -}}
         {{- errorf "Missing value for param 'header': %s" .Parent.Position -}}
@@ -58,6 +60,7 @@
         "body" $body
         "show" $show
         "disabled" $disabled
+        "type" $type
         )
     }}
 
@@ -66,5 +69,25 @@
         {{ .Parent.Scratch.Set "inner" (print $current $output) }}
     {{ else }}
         {{ .Parent.Scratch.Set "inner" $output }}
+    {{ end }}
+
+    {{ $alternative := partial "assets/nav-item" (dict 
+        "id" $id
+        "parentID" $parent
+        "fade" $fade
+        "header" $header
+        "class" $class
+        "body" $body
+        "show" $show
+        "disabled" $disabled
+        "type" "accordion"
+        )
+    }}
+
+    {{ $current := .Parent.Scratch.Get "alternative" }}
+    {{ if $current }}
+        {{ .Parent.Scratch.Set "alternative" (print $current $alternative) }}
+    {{ else }}
+        {{ .Parent.Scratch.Set "alternative" $alternative }}
     {{ end }}
 {{ end }}
