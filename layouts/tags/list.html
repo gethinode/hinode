@@ -18,7 +18,7 @@
                     <div class="row mt-5"></div>
                     {{ range $.Site.Taxonomies.tags.ByCount }}
                         <div class="row mt-2">
-                            <div class="d-none d-sm-block col-sm-3 mt-auto text-right">
+                            <div class="col-3 mt-auto text-right">
                                 {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
                             </div>
                             <div class="col">
