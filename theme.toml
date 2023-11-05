@@ -6,7 +6,7 @@ homepage = "https://gethinode.com"
 demosite = "https://demo.gethinode.com"
 tags = ["blog", "documentation", "minimal", "modern", "customizable", "search", "bootstrap"]
 features = ["security aware", "fast by default", "seo-ready", "development tools", "bootstrap framework", "netlify-ready", "full text search", "page layouts", "versioned documentation"]
-min_version = "0.118.0" # fixes Hugo issue #11406
+min_version = "0.120.0"
 
 [author]
   name = "Mark Dumay"

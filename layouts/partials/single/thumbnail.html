@@ -1,20 +1,22 @@
+{{- $page := .page -}}
+{{- $class := printf "img-wrap %s" .class -}}
 {{- $thumbnail := "" -}}
 {{- $credits := "" -}}
 
-{{- if reflect.IsMap .Params.Thumbnail -}}
-    {{- $thumbnail = .Params.Thumbnail.url -}}
+{{- if reflect.IsMap $page.Params.Thumbnail -}}
+    {{- $thumbnail = $page.Params.Thumbnail.url -}}
     {{- $author := "" -}}
-    {{- if and .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author }}
-        {{- $author = partial "utilities/link" (dict "destination" .Params.Thumbnail.authorURL "text" .Params.Thumbnail.author) -}}
-    {{- else if .Params.Thumbnail.author }}
-        {{- $author = .Params.Thumbnail.author -}}
+    {{- if and $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author }}
+        {{- $author = partial "utilities/link" (dict "destination" $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author) -}}
+    {{- else if $page.Params.Thumbnail.author }}
+        {{- $author = $page.Params.Thumbnail.author -}}
     {{- end -}}
 
     {{- $origin := "" -}}
-    {{- if and .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin }}
-        {{- $origin = partial "utilities/link" (dict "destination" .Params.Thumbnail.originURL "text" .Params.Thumbnail.origin) -}}
-    {{- else if .Params.Thumbnail.origin }}
-        {{- $origin = .Params.Thumbnail.origin -}}
+    {{- if and $page.Params.Thumbnail.originURL "text" $page.Params.Thumbnail.origin }}
+        {{- $origin = partial "utilities/link" (dict "destination" $page.Params.Thumbnail.originURL "text" $page.Params.Thumbnail.origin) -}}
+    {{- else if $page.Params.Thumbnail.origin }}
+        {{- $origin = $page.Params.Thumbnail.origin -}}
     {{- end }}
 
     {{- if and $author $origin }}
@@ -23,13 +25,13 @@
         {{ $credits = T "photoShort" $author }}
     {{ end }}
 {{ else }}
-    {{- $thumbnail = .Params.Thumbnail -}}
-    {{ if or .Params.photoCredits .Params.photoSource }}
-        {{ warnf "DEPRECATED: frontmatter variables `photoCredits` and `photoSource` have been deprecated in release v0.18: %s" .RelPermalink }}
+    {{- $thumbnail = $page.Params.Thumbnail -}}
+    {{ if or $page.Params.photoCredits $page.Params.photoSource }}
+        {{ warnf "DEPRECATED: frontmatter variables `photoCredits` and `photoSource` have been deprecated in release v0.18: %s" $page.RelPermalink }}
     {{ end }}
-    {{- if and .Params.photoCredits .Params.PhotoSource }}{{ $credits = printf (T "photoFull") .Params.photoCredits .Params.PhotoSource }}{{ end -}}
+    {{- if and $page.Params.photoCredits $page.Params.PhotoSource }}{{ $credits = printf (T "photoFull") $page.Params.photoCredits $page.Params.PhotoSource }}{{ end -}}
 {{- end -}}
 
 {{ if $thumbnail -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" "img-wrap" "innerClass" "rounded" "title" .Params.title "caption" $credits) -}}
+    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" $class "innerClass" "rounded" "title" $page.Params.title "caption" $credits) -}}
 {{ end -}}
