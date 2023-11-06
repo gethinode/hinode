@@ -19,11 +19,22 @@
     "mode":         Optional flag indicating if the image should support color modes.
 -->
 
-{{- if isset .Params "src" -}}
-    {{ $error := false -}}
-    {{ $url := .Get "src" | default "" -}}
+{{- $url := "" -}}
+{{- $ratio := "" -}}
+{{- $wrapper := "" -}}
+{{- $class := "" -}}
+{{- $title := "" -}}
+{{- $caption := "" -}}
+{{- $mode := false -}}
+{{- $portrait := false -}}
+{{- $loading := "" -}}
+{{- $error := false -}}
+
+{{- if .IsNamedParams -}}
+    {{ $url = .Get "src" | default "" -}}
+    
     {{- $validRatios := slice "1x1" "3x2" "4x3" "16x9" "21x9" -}}
-    {{ $ratio := .Get "ratio" | default "" -}}
+    {{ $ratio = .Get "ratio" | default "" -}}
     {{ if $ratio -}}
         {{ if not (in $validRatios $ratio) -}}
             {{ errorf "Invalid value for param 'ratio': %s" .Position -}}
@@ -31,10 +42,10 @@
         {{ end -}}
     {{ end -}}
     
-    {{- $class := .Get "class" | default "" -}}
-    {{- $wrapper := .Get "wrapper" | default "" -}}
+    {{- $class = .Get "class" | default "" -}}
+    {{- $wrapper = .Get "wrapper" | default "" -}}
 
-    {{- $loading := .Get "loading" | default "" -}}
+    {{- $loading = .Get "loading" | default "" -}}
     {{- $validSettings := slice "lazy" "eager" -}}
     {{- if $loading -}}
         {{ if not (in $validSettings $loading) -}}
@@ -42,14 +53,12 @@
             {{ $error = true -}}
         {{ end -}}
     {{- end -}}
-    {{- $lazy := eq $loading "lazy" -}}
     
-    {{ $title := .Get "title" | default "" -}}
-    {{ $caption := .Get "caption" | default "" -}}
+    {{ $title = .Get "title" | default "" -}}
+    {{ $caption = .Get "caption" | default "" -}}
 
     {{ $supportedFlags := slice "true" "false" -}}
     {{ $modeParam := "false" -}}
-    {{ $mode := false -}}
     {{ with .Get "mode" }}{{ $modeParam = . }}{{ end -}}
     {{ if in $supportedFlags $modeParam -}}
         {{ if eq $modeParam "true" }}{{ $mode = true }}{{ else }}{{ $mode = false }}{{ end -}}
@@ -59,7 +68,6 @@
     {{ end -}}
 
     {{ $portraitParam := "false" -}}
-    {{ $portrait := false -}}
     {{ with .Get "portrait" }}{{ $portraitParam = . }}{{ end -}}
     {{ if in $supportedFlags $portraitParam -}}
         {{ if eq $portraitParam "true" }}{{ $portrait = true }}{{ else }}{{ $portrait = false }}{{ end -}}
@@ -67,21 +75,26 @@
         {{ errorf "Invalid value for param 'portrait': %s" $portraitParam -}}
         {{ $error = true -}}
     {{ end -}}
-    
-    {{- if not $error -}}
-        {{- partial "assets/image.html" (dict 
-            "url" $url
-            "ratio" $ratio
-            "outerClass" $wrapper
-            "innerClass" $class
-            "title" $title
-            "caption" $caption
-            "mode" $mode
-            "portrait" $portrait
-            "loading" $loading
-            "page" .Page)
-        -}} 
-    {{- end -}}
 {{ else -}}
-    {{ errorf "Missing value for param 'src': %s" .Position -}}
+    {{ $url = .Get 0 }}
 {{ end -}}
+
+{{ if not $url }}
+    {{ errorf "Missing value for param 'src': %s" .Position -}}
+    {{- $error = true -}}
+{{ end }}
+
+{{- if not $error -}}
+    {{- partial "assets/image.html" (dict 
+        "url" $url
+        "ratio" $ratio
+        "outerClass" $wrapper
+        "innerClass" $class
+        "title" $title
+        "caption" $caption
+        "mode" $mode
+        "portrait" $portrait
+        "loading" $loading
+        "page" .Page)
+    -}} 
+{{- end -}}

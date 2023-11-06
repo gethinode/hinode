@@ -14,3 +14,8 @@
     height: 100%;
     object-fit: cover;
 }
+
+.mirrorred {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
