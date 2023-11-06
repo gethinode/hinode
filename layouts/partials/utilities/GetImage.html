@@ -10,6 +10,7 @@
 
 {{ $url := .url -}}
 {{ $page := .page -}}
+{{ $mirror := false }}
 
 {{ $supportedMediaTypes := slice "image/png" "image/jpeg" "image/gif" "image/tiff" "image/bmp" "image/webp" -}}
 {{ $img := "" }}
@@ -38,6 +39,34 @@
             {{ end -}}
             {{ $img = $img.Content | resources.FromString (printf "/img/%s" $filename) -}}
         {{ end -}}
+
+        <!-- 
+            Rotate the image if needed based on EXIF orientation. EXIF defines the following values:
+            (source: https://sirv.com/help/articles/rotate-photos-to-be-upright/#EXIF_orientation_values)
+            1 = 0 degrees: the correct orientation, no adjustment is required.
+            2 = 0 degrees, mirrored: image has been flipped back-to-front.
+            3 = 180 degrees: image is upside down.
+            4 = 180 degrees, mirrored: image has been flipped back-to-front and is upside down.
+            5 = 90 degrees: image has been flipped back-to-front and is on its side.
+            6 = 90 degrees, mirrored: image is on its side.
+            7 = 270 degrees: image has been flipped back-to-front and is on its far side.
+            8 = 270 degrees, mirrored: image is on its far side.
+        -->
+        {{ with $img.Exif }}
+            {{ $filter := "" }}
+            {{ $orientation := .Tags.Orientation }}
+            {{ if or (eq $orientation 3) (eq $orientation 4) }}
+                {{ $filter = images.Process "r180" }}
+            {{ else if or (eq $orientation 5) (eq $orientation 6) }}
+                {{ $filter = images.Process "r270" }}
+            {{ else if or (eq $orientation 7) (eq $orientation 8) }}
+                {{ $filter = images.Process "r90" }}
+            {{ end }}
+            {{ with $filter }}{{ $img = $img.Filter . }}{{ end }}
+
+            {{- $isMirrored := slice 2 4 5 7 -}}
+            {{- if (in $isMirrored $orientation) }}{{ $mirror = true }}{{ end -}}
+        {{ end }}
     {{ else -}}
         {{ warnf "Image type '%s' is not supported: %s" $img.MediaType $url -}}
         {{ $img = "" -}}
@@ -46,4 +75,4 @@
     {{ warnf "Cannot find image resource: %q" $url -}}
 {{ end -}}
 
-{{ return $img -}}
+{{ return (dict "resource" $img "mirror" $mirror) -}}

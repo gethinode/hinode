@@ -12,8 +12,10 @@
 
 {{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
 {{ with $thumbnail -}}
-    {{ $img := partial "utilities/GetImage.html" (dict "url" .) -}}
-    {{ with $img -}}
+{{- $res := partial "utilities/GetImage.html" (dict "url" .) -}}
+{{- $img := "" -}}
+{{ with $res }}{{ $img = $res.resource }}{{ end }}
+{{ with $img -}}
         {{ $dim := "1280x640" -}}
         {{ $scaled := (.Fill (printf "%s jpg" $dim)) -}}
         {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink ".jpg" (printf "-%s.jpg" $dim)) -}}

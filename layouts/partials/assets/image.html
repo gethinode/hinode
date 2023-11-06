@@ -210,7 +210,12 @@
         {{- $fallbackURL = $url -}}
         {{- $isVector = true -}}
     {{- else -}}
-        {{- $img := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
+        {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
+        {{- $img := "" -}}
+        {{ with $res }}
+            {{ $img = $res.resource }}
+            {{ if $res.mirror }}{{ $innerClass = printf "%s mirrorred" $innerClass }}{{ end }}
+        {{ end }}
         {{- if $img -}}
             {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio "portrait" $portrait) -}}
             {{- if $absoluteURL -}}
