@@ -186,7 +186,7 @@
             <div class="pt-3">{{ partial "assets/pagination.html" (dict "page" $page "format" "terse") }}</div>
         {{- end -}} 
     {{ else }}
-        {{ if gt $count $max }}
+        {{ if and (gt $count $max) $moreTitle }}
             <a class="btn btn-outline-primary" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
         {{ end }}
     {{ end }}
