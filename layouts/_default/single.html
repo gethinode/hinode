@@ -7,7 +7,6 @@
         <div class="d-md-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
     {{- end -}}
     {{ .Render "single/body" }}
-    {{ partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}
 
     {{ .Render "single/footer" }}
     {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
@@ -17,11 +16,6 @@
 {{ end -}}
 
 {{ define "main" -}}
-    {{- $download := .Params.download -}}
-    {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-        {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
-    {{- end -}}
-    
     {{- $menu := .Scratch.Get "sidebar" -}}
     {{- $version := .Scratch.Get "version" -}}
 
