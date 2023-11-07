@@ -1,5 +1,6 @@
 {{- $page := .page -}}
-{{- $class := printf "img-wrap %s" .class -}}
+{{- $class := printf "img-wrap" -}}
+{{- with .class }}{{ $class := printf "img-wrap %s" . }}{{ end -}}
 {{- $ratio := .ratio | default "21x9" -}}
 {{- $thumbnail := "" -}}
 {{- $credits := "" -}}
