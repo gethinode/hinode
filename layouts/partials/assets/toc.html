@@ -1,17 +1,7 @@
 {{- $page := .page -}}
-{{- $download := .download -}}
 
 {{ $items := len (findRE "<li.*?>(.|\n)*?</li>" $page.TableOfContents) -}}
-{{ if or $download (gt $items 1) -}}
-    <div class="toc toc-sidebar mb-5 my-md-0 ps-xl-3 mb-lg-5 p-3 text-body-secondary sticky-top">
-        {{ with $download }}
-            <div class="mb-5">
-                {{ $attr := dict "download" (path.Base .) }}
-                {{ partial "assets/button.html" (dict "href" . "title" (T "download" ) "color" "primary" "outline" "true" "icon" "fas download" "attributes" $attr) }}
-            </div>
-        {{ end }}
-
-        <strong class="d-block h6 my-2 pb-2 border-bottom">{{ T "toc" }}</strong>
-        {{ $page.TableOfContents }}
-    </div>
+{{ if gt $items 1 -}}
+    <strong class="d-block h6 my-2 pb-2 border-bottom">{{ T "toc" }}</strong>
+    {{ $page.TableOfContents }}
 {{ end -}}
