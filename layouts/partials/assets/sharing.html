@@ -1,11 +1,28 @@
 {{- if .Site.Params.sharing.enabled -}}
-    {{- if or .Params.sharing (not (isset .Params "sharing")) -}}
+    {{- $sharing := true -}}
+    {{ if isset .Params "sharing" }}
+        {{ $sharing = .Params.sharing }}
+    {{ else }}
+        {{- with (index site.Params.pages .Type ) -}}
+            {{ if isset . "sharing" }}
+                {{ $sharing = (index . "sharing") }}
+            {{ end }}
+        {{- end -}}
+    {{ end }}
+
+    {{- if $sharing -}}
         {{- $page := . -}}
         {{- $order := "asc" -}}
         {{- $list := .Site.Params.sharing.providers -}}
         {{- if .Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
         {{- $sort := .Site.Params.sharing.sort | default "weight" -}}
         {{- $list = sort $list $sort $order -}}
+
+        {{- $download := .Params.download -}}
+        {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
+            {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
+        {{- end -}}
+        
         <div class="py-3 text-body-secondary hstack gap-1">
             {{ T "shareLink" "" }}
             {{- range $index, $item := $list -}}
@@ -26,6 +43,10 @@
             {{ if .Site.Params.sharing.webshare }}
                 {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
                 {{ partial "assets/button.html" (dict "href" "#!" "icon" "fas share-nodes fa-fw" "id" "btn-webshare" "class" "btn-social p-0" "attributes" $attr "label" (T "shareLink" (T "shareSystem")) "spacing" false) }}
+            {{- end -}}
+            {{ with $download }}
+                {{ $attr := dict "download" (path.Base .) }}
+                {{ partial "assets/button.html" (dict "href" . "icon" "fas download fa-fw" "class" "btn-social p-0" "attributes" $attr "spacing" false) }}
             {{- end -}}
         </div>
     {{- end -}}

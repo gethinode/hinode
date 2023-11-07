@@ -1,7 +1,7 @@
 {{- $page := .page }}
 {{- $section := .section }}
 {{- if not $section }}{{ errorf "partial [assets/section-list.html] - Missing value for param 'section'" }}{{ end -}}
-{{- $home := .home }}
+{{- $home := .home | default false }}
 {{ if ne (printf "%T" $home) "bool" }}
     {{ errorf "partial [assets/section-list.html] - Invalid value for param 'home'"}}
 {{ end }}
@@ -37,6 +37,7 @@
 {{- $ratio := "" -}}
 {{- $wrap := false -}}
 {{- $loading := .loading -}}
+{{- $wrapper := .wrapper | default "p-4 px-xxl-0 pb-5" -}}
 
 {{- with (index site.Params.sections $section) -}}
     {{- with index . "title" }}{{ $title = or $.title . }}{{ end -}}
@@ -77,6 +78,12 @@
     {{ else }}
         {{ $list = where site.Pages (printf ".Params.%s" $section) "!=" nil }}
     {{ end }}
+{{ else if eq $kind "related" }}
+    {{ if $page.Keywords}}
+        {{ $keywords := keyVals "tags" $page.Keywords }}
+        {{ $opts := dict "namedSlices" (slice $keywords) }}
+        {{ $list = site.RegularPages.Related $opts }}
+    {{ end }}
 {{ else if $nested }}
     {{ $list = where site.RegularPages "Type" "in" $section }}
 {{ else if $home }}
@@ -100,7 +107,7 @@
 {{- end -}}
 
 {{ if gt $max 0 }}
-    {{- if $home -}}
+    {{- if or $home (eq $kind "related") -}}
         {{- $paginate = false -}}
         {{- $max = int (math.Min $homepage $max) -}}
     {{ end -}}
@@ -128,7 +135,7 @@
     {{- $partial := "" -}}
 
     <div class="container-fluid {{ with $background }} bg-{{ . }}{{ end }} p-0">
-        <div class="container-xxl p-4 px-xxl-0 pb-5">
+        <div class="container-xxl {{ $wrapper }}">
             {{- partial "assets/section-header.html" $params -}}
             
             {{ if eq $layout "card" }}

@@ -26,6 +26,9 @@
                             </div>
                         </div>
                     {{ end }}
+                    {{ if eq $.Site.Taxonomies.tags 0 }}
+                        <p class="pt-4">{{- T "emptyTags" }}.</p>
+                    {{ end }}
                 {{ else }}
                     {{ $dateFormat := default "Jan 2" (index .Site.Params "date_format") }}
                     {{ $.Scratch.Set "lastYear" ""}}

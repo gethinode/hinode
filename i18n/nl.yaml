@@ -25,6 +25,8 @@
   translation: "Meer {{ . }}"
 - id: emptyList
   translation: "Geen artikelen gevonden"
+- id: emptyTags
+  translation: "Geen tags gevonden"
 
 # Sharing
 - id: shareLink

@@ -1,5 +1,6 @@
 {{- $page := .page -}}
 {{- $class := printf "img-wrap %s" .class -}}
+{{- $ratio := .ratio | default "21x9" -}}
 {{- $thumbnail := "" -}}
 {{- $credits := "" -}}
 
@@ -33,5 +34,5 @@
 {{- end -}}
 
 {{ if $thumbnail -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "21x9" "outerClass" $class "innerClass" "rounded" "title" $page.Params.title "caption" $credits) -}}
+    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" $ratio "outerClass" $class "innerClass" "rounded" "title" $page.Params.title "caption" $credits) -}}
 {{ end -}}
