@@ -1,12 +1,31 @@
-{{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
-{{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
+{{- $metadata := "full" -}}
+{{ if isset .Params "metadata" }}
+    {{ $metadata = .Params.metadata }}
+{{ else }}
+    {{- with (index site.Params.pages .Type ) -}}
+        {{ if isset . "metadata" }}{{ $metadata = (index . "metadata") }}{{ end }}
+    {{- end -}}
+{{ end }}
+
+{{- $supportedStates := slice "full" "original" "none" -}}
+{{- if not (in $supportedStates $metadata) -}}
+    {{- errorf "layout [_default/single/header.html] - Invalid value for param 'metadata': %s" $metadata -}}
+{{- end -}}
+
 {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
-<small class="text-body-secondary text-uppercase">
-    {{ $datestr | i18n "postedOnDate" -}}
-    {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }} &bull;
-    {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} &bull;
-    {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
-</small>
+{{ if ne $metadata "none" }}
+    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
+    <small class="text-body-secondary text-uppercase">
+        {{ $datestr | i18n "postedOnDate" -}}
+        {{ if eq $metadata "full" }}
+            {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }}
+        {{ end }}
+        &bull;
+        {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} &bull;
+        {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
+    </small>
+{{ end }}
 
 {{- if gt (len (.GetTerms "tags")) 0 -}}
     <div class="mt-3">
