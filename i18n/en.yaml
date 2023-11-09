@@ -30,6 +30,16 @@
 - id: emptyTags
   translation: "No tags found"
 
+# Languages
+- id: lang_de
+  translation: "German"
+- id: lang_en
+  translation: "English"
+- id: lang_nl
+  translation: "Dutch"
+- id: lang_fr
+  translation: "French"
+
 # Sharing
 - id: shareLink
   translation: "Share via {{ . }}"
