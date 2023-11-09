@@ -28,6 +28,16 @@
 - id: emptyTags
   translation: "Geen tags gevonden"
 
+# Languages
+- id: lang_de
+  translation: "Duits"
+- id: lang_en
+  translation: "Engels"
+- id: lang_nl
+  translation: "Nederlands"
+- id: lang_fr
+  translation: "Frans"
+
 # Sharing
 - id: shareLink
   translation: "Delen via {{ . }}"

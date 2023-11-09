@@ -21,9 +21,18 @@
 
 <div class="toc toc-sidebar mb-5 my-md-0 ps-xl-3 mb-lg-5 p-3 text-body-secondary sticky-top">
     {{ with $download }}
+        {{ $title := (T "download" ) }}
+        {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
+        {{ if and $lang (ne (string site.LanguageCode) $lang) }}
+            {{ range site.Languages }}
+                {{ if eq .LanguageCode $lang }}
+                    {{ $title = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
         <div class="mb-5 text-center">
             {{ $attr := dict "download" (path.Base .) }}
-            {{ partial "assets/button.html" (dict "href" . "title" (T "download" ) "color" "primary" "outline" "true" "icon" "fas download" "size" "sm" "attributes" $attr) }}
+            {{ partial "assets/button.html" (dict "href" . "title" $title "color" "primary" "outline" "true" "icon" "fas download" "size" "sm" "attributes" $attr) }}
         </div>
     {{ end }}
 
