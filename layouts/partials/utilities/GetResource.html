@@ -1,0 +1,25 @@
+<!-- 
+    Retrieve a local or remote resource. If the url starts with 'http', the resource is retrieved from an external
+    location. Else, the url is matched with a page resource and site asset (in that order). The partial returns nil if
+    the resource cannot be found. The partial supports the following arguments:
+    "url"           Required path or url of the resource, e.g. "img/example.jpg" or "https://example.com/img.jpg"
+    "page"          Optional page context, used to retrieve a resource from page resources.
+-->
+
+{{ $url := .url -}}
+{{ $page := .page -}}
+
+{{ $res := "" }}
+{{ $remote := hasPrefix (lower $url) "http" }}
+{{ if $remote }}
+    {{ $res = resources.GetRemote $url -}}
+{{ else }}
+    {{ if $page }}
+        {{ $res = $page.Resources.Get $url -}}
+    {{ end }}
+    {{ if not $res }}
+        {{ $res = resources.GetMatch $url }}
+    {{ end }}
+{{ end }}
+
+{{ return $res -}}

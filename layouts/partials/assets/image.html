@@ -223,6 +223,12 @@
     {{- if hasSuffix $url "svg" -}}
         {{- $fallbackURL = $url -}}
         {{- $isVector = true -}}
+        {{- $res := partial "utilities/GetResource.html" (dict "url" $url "page" $page) -}}
+        {{ if not $res }}
+            {{- if not (fileExists (path.Join "/static" $url)) -}}
+                {{ warnf "Cannot find vector image resource: %q" $url -}}
+            {{ end }}
+        {{ end }}
     {{- else -}}
         {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
         {{- $img := "" -}}
