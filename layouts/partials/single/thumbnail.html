@@ -35,5 +35,5 @@
 {{- end -}}
 
 {{ if $thumbnail -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" $ratio "outerClass" $class "innerClass" "rounded" "title" $page.Params.title "caption" $credits) -}}
+    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" $ratio "outerClass" $class "innerClass" "rounded" "title" $page.Params.title "caption" $credits "priority" "high") -}}
 {{ end -}}
