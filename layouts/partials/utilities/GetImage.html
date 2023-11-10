@@ -13,18 +13,8 @@
 {{ $mirror := false }}
 
 {{ $supportedMediaTypes := slice "image/png" "image/jpeg" "image/gif" "image/tiff" "image/bmp" "image/webp" -}}
-{{ $img := "" }}
 {{ $remote := hasPrefix (lower $url) "http" }}
-{{ if $remote }}
-    {{ $img = resources.GetRemote $url -}}
-{{ else }}
-    {{ if $page }}
-        {{ $img = $page.Resources.Get $url -}}
-    {{ end }}
-    {{ if not $img }}
-        {{ $img = resources.GetMatch $url }}
-    {{ end }}
-{{ end }}
+{{- $img := partial "utilities/GetResource.html" (dict "url" $url "page" $page) -}}
 
 {{ with $img -}}
     {{ if in $supportedMediaTypes (string $img.MediaType) -}}
