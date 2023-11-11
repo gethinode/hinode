@@ -50,7 +50,7 @@
     <div class="col-{{ $col }} d-flex justify-content-{{ $direction }} align-items-center">
         <div class="d-flex">
             <div class="d-flex timeline-semi-circle-{{ $direction }} fa-wrapper align-items-center justify-content-center">
-                {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $icon)) }}
+                {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid" $icon) "spacing" false) }}
             </div>
             <div class="timeline-connector-{{ $direction }} {{ if eq $direction "start" }} order-first{{ end }}"></div>
         </div>
