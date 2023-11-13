@@ -84,6 +84,8 @@
         {{ $opts := dict "namedSlices" (slice $keywords) }}
         {{ $list = site.RegularPages.Related $opts }}
     {{ end }}
+{{ else if $page.IsSection }}
+    {{ $list = $page.Pages }}
 {{ else if $nested }}
     {{ $list = where site.RegularPages "Type" "in" $section }}
 {{ else if $home }}
