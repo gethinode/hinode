@@ -2,10 +2,11 @@
     {{- $page := . -}}
     {{- $layout := $page.Params.layout -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+    {{- $hasSidebar := site.Params.navigation.sidebar | default true -}}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
-        <div class="row row-cols-1 row-cols-{{ $breakpoint.prev }}-3">
-            <div class="col col-{{ $breakpoint.current }}-2 d-none d-{{ $breakpoint.current }}-block"></div>
+        <div class="row row-cols-1 row-cols-{{ $breakpoint.prev }}-{{ if $hasSidebar }}3{{ else }}2{{ end }}">
+            {{ if $hasSidebar }}<div class="col col-{{ $breakpoint.current }}-2 d-none d-{{ $breakpoint.current }}-block"></div>{{ end }}
             <div class="col col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.current }}-8">
                 {{- if ne $layout "featured" -}}
                     {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
