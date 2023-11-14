@@ -1,11 +1,12 @@
 {{ define "main" }}
     {{- $page := . -}}
     {{- $layout := $page.Params.layout -}}
+    {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
-        <div class="row row-cols-1 row-cols-sm-3">
-            <div class="col col-md-2 d-none d-md-block"></div>
-            <div class="col col-sm-12 col-md-8">
+        <div class="row row-cols-1 row-cols-{{ $breakpoint.prev }}-3">
+            <div class="col col-{{ $breakpoint.current }}-2 d-none d-{{ $breakpoint.current }}-block"></div>
+            <div class="col col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.current }}-8">
                 {{- if ne $layout "featured" -}}
                     {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
                         <div>{{ partial "assets/breadcrumb.html" $page }}</div>
@@ -36,7 +37,7 @@
                         {{ $year := .Date.Year }}
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
                         <div class="row mt-2">
-                            <div class="d-none d-sm-block col-sm-3 mt-auto text-right">
+                            <div class="d-none d-{{ $breakpoint.prev }}-block col-{{ $breakpoint.prev }}-3 mt-auto text-right">
                                 <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
                                     {{ (partial "utilities/date.html" (dict "date" .Date "format" "medium")) }}
                                 </time>
@@ -52,7 +53,7 @@
                     {{ end }}
                 {{ end }}
             </div>
-            <div class="col col-md-2 d-none d-md-block"></div>
+            <div class="col col-{{ $breakpoint.current }}-2 d-none d-{{ $breakpoint.current }}-block"></div>
         </div>
     </div>
 {{ end }}

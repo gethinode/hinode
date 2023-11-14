@@ -8,6 +8,7 @@
     endorse = true
     footerBelowFold = false
     loading = "lazy"
+    breakpoint = "md"
     [main.externalLinks]
         cue = false
         tab = false

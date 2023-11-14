@@ -48,6 +48,9 @@
 {{ $sections := partial "utilities/GetSections.html" (dict "page" . "loading" $loading) }}
 {{- $.Scratch.Set "sections" $sections -}}
 
+{{- /* Define main breakpoint */ -}}
+{{- $.Scratch.Set "breakpoint" (partial "utilities/GetBreakpoint.html") }}
+
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
