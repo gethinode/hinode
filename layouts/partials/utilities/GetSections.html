@@ -48,7 +48,8 @@
 
     {{- $thumbnail := (or (and (reflect.IsMap $sectionPage.Params.Thumbnail) $sectionPage.Params.Thumbnail.url) $sectionPage.Params.Thumbnail) -}}
     {{- $icon := $sectionPage.Params.Icon -}}
-    {{- $content := $sectionPage.Content -}}
+    {{- $content := "" -}}
+    {{ if not $sectionPage.IsSection }}{{ $content = $sectionPage.Content }}{{ end -}}
     {{- $sectionTitle := strings.FirstUpper $sectionPage.Type -}}
     {{- $moreTitle := "" -}}
     {{- with (index site.Params.sections $section) -}}
