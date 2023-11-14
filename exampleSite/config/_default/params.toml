@@ -6,6 +6,7 @@
     canonifyAssetsURLs = false
     footerBelowFold = false
     loading = "lazy"
+    breakpoint = "md"
     [main.externalLinks]
         cue = true
         tab = true

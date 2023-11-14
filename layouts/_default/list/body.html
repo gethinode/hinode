@@ -1,9 +1,10 @@
 {{- $sections := $.Scratch.Get "sections" -}}
 {{- $fullCover := $.Scratch.Get "fullCover" -}}
+{{- $breakpoint := $.Scratch.Get "breakpoint" -}}
 {{- $layout := .Params.layout -}}
 
-<div class="row row-cols-1 row-cols-sm-2">
-    <div class="col col-sm-12 col-md-8">
+<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
+    <div class="col-12 col-{{ $breakpoint.current }}-9">
         {{ if not .IsHome }}
             {{ with .Title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
         {{ end }}
@@ -15,9 +16,12 @@
             {{- if $fullCover }}{{ $loading = site.Params.main.loading }}{{ end }}
         {{ end }}
         {{- $content := partial "utilities/ProcessContent" (dict "page" . "raw" .RawContent "loading" $loading) -}}
-        {{ $content | safeHTML }}
+        {{- $content | safeHTML -}}
         {{ if and (and $sections (eq (len $sections) 1)) (not $content) }}
             <p class="pt-4">{{- T "emptyList" }}.</p>
         {{ end }}
     </div>
-</div>
+    <div class="col col-{{ $breakpoint.current }}-3 d-none d-{{ $breakpoint.current }}-block">
+        {{/* Empty in default layout */}}        
+    </div>
+</div>    

@@ -36,6 +36,7 @@
 -->
 
 {{- $page := .page -}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
 
 {{- if not (in (slice "*hugolib.pageState" "*hugolib.pageForShortcode") (printf "%T" $page)) -}}
     {{- errorf "partial [assets/card-group.html] - Invalid value for param 'page': %T" $page -}}
@@ -108,10 +109,10 @@
 {{- end -}}
 {{- $colGrid := "" -}}
 {{- if eq $cols "1" }}{{ $colGrid = "row-cols-1" -}}
-{{- else if eq $cols "2" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-1 row-cols-md-2" }}{{ else }}{{ $colGrid = "row-cols-2" }}{{ end -}}
-{{- else if eq $cols "3" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-3" }}{{ else }}{{ $colGrid = "row-cols-3" }}{{ end -}}
-{{- else if eq $cols "4" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-2 row-cols-md-4" }}{{ else }}{{ $colGrid = "row-cols-4" }}{{ end -}}
-{{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = "row-cols-1 row-cols-sm-3 row-cols-md-5" }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
+{{- else if eq $cols "2" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-2" }}{{ end -}}
+{{- else if eq $cols "3" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-3" }}{{ end -}}
+{{- else if eq $cols "4" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-4" }}{{ end -}}
+{{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
 {{ end -}}
 
 {{- $gutter := .gutter | default "4" -}}
