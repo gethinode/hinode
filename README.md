@@ -9,32 +9,32 @@
 
 <!-- Badges -->
 <p align="center">
-    <a href="https://gohugo.io" alt="Hugo website">
-        <img src="https://img.shields.io/badge/generator-hugo-brightgreen">
+    <a href="https://gohugo.io">
+        <img src="https://img.shields.io/badge/generator-hugo-brightgreen" alt="Hugo website">
     </a>
-    <a href="https://gethinode.com" alt="Hinode theme">
-        <img src="https://img.shields.io/badge/theme-hinode-blue">
+    <a href="https://gethinode.com">
+        <img src="https://img.shields.io/badge/theme-hinode-blue" alt="Hinode theme">
     </a>
-    <a href="https://www.npmjs.com/package/%40gethinode/hinode" alt="npm package">
-        <img src="https://img.shields.io/npm/v/%40gethinode/hinode">
+    <a href="https://www.npmjs.com/package/%40gethinode/hinode">
+        <img src="https://img.shields.io/npm/v/%40gethinode/hinode" alt="npm package">
     </a>
-    <a href="https://app.netlify.com/sites/gethinode-demo/deploys" alt="Netlify Status">
-        <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67">
+    <a href="https://app.netlify.com/sites/gethinode-demo/deploys">
+        <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67"  alt="Netlify Status">
     </a>
-    <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
-        <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb">
+    <a href="https://stats.uptimerobot.com/xyGVYhLJmV">
+        <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb" alt="UptimeRobot Status">
     </a>
-    <a href="https://github.com/gethinode/hinode/commits/main" alt="Last commit">
-        <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg">
+    <a href="https://github.com/gethinode/hinode/commits/main">
+        <img src="https://img.shields.io/github/last-commit/gethinode/hinode.svg" alt="Last commit">
     </a>
-    <a href="https://github.com/gethinode/hinode/issues" alt="Issues">
-        <img src="https://img.shields.io/github/issues/gethinode/hinode.svg">
+    <a href="https://github.com/gethinode/hinode/issues">
+        <img src="https://img.shields.io/github/issues/gethinode/hinode.svg" alt="Issues">
     </a>
-    <a href="https://github.com/gethinode/hinode/pulls" alt="Pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg">
+    <a href="https://github.com/gethinode/hinode/pulls">
+        <img src="https://img.shields.io/github/issues-pr-raw/gethinode/hinode.svg" alt="Pulls">
     </a>
-    <a href="https://github.com/gethinode/hinode/blob/main/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/gethinode/hinode">
+    <a href="https://github.com/gethinode/hinode/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/gethinode/hinode" alt="License">
     </a>
 </p>
 
