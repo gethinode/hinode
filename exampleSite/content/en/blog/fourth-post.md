@@ -1,9 +1,10 @@
 ---
 author: Mark Dumay
-title: Fourth post
+title: Fourth post (excluded from search)
 date: 2023-01-01
-description: This is my fourth blog post.
+description: This is my fourth blog post. It is excluded from the search index.
 tags: ["blog"]
+searchExclude: true
 thumbnail:
   url: img/flowers.jpg
   author: Arvee Marie
