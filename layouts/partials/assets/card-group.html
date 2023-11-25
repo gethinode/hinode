@@ -67,7 +67,7 @@
 {{ range $index, $element := $pages }}
     {{ $params := dict }}
     <!-- regular page -->
-    {{- if $element.RelPermalink -}}
+    {{- if and $element.RelPermalink $element.File -}}
         {{- $params = merge $params (dict "path" $element.File.Path) -}}
     <!-- headless page -->
     {{- else -}}
