@@ -30,9 +30,9 @@
 - id: shareSystem
   translation: "Betriebssystem"
 - id: copyToClipboard
-  translation: "In Zwischenablage kopieren"
+  translation: "In die Zwischenablage kopieren"
 - id: copiedToClipboard
-  translation: "Der Text befindet sich in die Zwischenablage"
+  translation: "befindet sich in der Zwischenablage"
 - id: link
   translation: "Link zur Webseite"
 - id: code
