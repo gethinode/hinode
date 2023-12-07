@@ -44,7 +44,7 @@
     {{- with index . "sectionHeader" }}{{ $sectionHeader = . }}{{ end -}}
     {{- with index . "sort" }}{{ $sort = . }}{{ end -}}
     {{- if (index . "reverse") }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
-    {{- if $home }}{{- if (isset . "nested") }}{{ $nested = (index . "nested") }}{{ end -}}{{ end -}}
+    {{- if (isset . "nested") }}{{ $nested = (index . "nested") }}{{ end -}}
     {{- if (index . "separator") }}{{ $separator = true }}{{ else }}{{ $separator = false }}{{ end -}}
     {{- with index . "orientation" }}{{ $orientation = . }}{{ end -}}
     {{- with index . "cols" }}{{ $cols = . }}{{ end -}}
@@ -64,6 +64,10 @@
     {{- with index . "ratio" }}{{ $ratio = . }}{{ end -}}
     {{- with index . "wrap" }}{{ $wrap = . }}{{ end -}}
 {{- end -}}
+
+{{ if isset $page.Params "nested" }}
+    {{ $nested = $page.Params.nested }}
+{{ end }}
 {{ if ne (printf "%T" $nested) "bool" }}
     {{ errorf "partial [assets/section-list.html] - Invalid value for param 'nested'"}}
 {{ end }}
@@ -84,15 +88,19 @@
         {{ $opts := dict "namedSlices" (slice $keywords) }}
         {{ $list = site.RegularPages.Related $opts }}
     {{ end }}
-{{ else if $page.IsSection }}
-    {{ $list = $page.Pages }}
-{{ else if $nested }}
-    {{ $list = where site.RegularPages "Type" "in" $section }}
 {{ else if $home }}
     {{ $sectionPage := site.GetPage "section" $section }}
-    {{ $list = $sectionPage.RegularPages }}
+    {{ if $nested }}
+        {{ $list = $sectionPage.RegularPagesRecursive }}
+    {{ else }}
+        {{ $list = $sectionPage.Pages }}
+    {{ end }}
 {{ else }}
-    {{ $list = $page.RegularPages }}
+    {{ if $nested }}
+        {{ $list = $page.RegularPagesRecursive }}
+    {{ else }}
+        {{ $list = $page.Pages }}
+    {{ end }}
 {{ end }}
 
 {{ $max := (len $list) -}}
