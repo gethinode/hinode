@@ -71,7 +71,7 @@
     "@gethinode/netlify-plugin-dartsass": "^0.2.0",
     "@netlify/plugin-lighthouse": "^5.0.0",
     "autoprefixer": "^10.4.16",
-    "cssnano": "^6.0.1",
+    "cssnano": "^6.0.2",
     "cssnano-preset-advanced": "^6.0.2",
     "eslint": "^8.55.0",
     "eslint-config-standard": "^17.1.0",
