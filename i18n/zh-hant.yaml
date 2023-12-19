@@ -1,0 +1,135 @@
+# Single pages
+- id: postedOnDate
+  translation: "發佈於 {{ . }}"
+- id: lastModified
+  translation: "最後修改於 {{ . }}"
+- id: read
+  translation: "閱讀"
+- id: minutesShort
+  translation: "分鐘"
+- id: words
+  translation: "字"
+- id: photoFull
+  translation: "照片由 %s 於 %s 拍攝"
+- id: photoShort
+  translation: "照片由 {{ . }} 拍攝"
+- id: photoOn
+  translation: "於"
+- id: draft
+  translation: "草稿"
+
+# List pages
+- id: article
+  translation: "文章"
+- id: articles
+  translation: "文章"
+- id: more
+  translation: "更多 {{ . }}"
+- id: emptyList
+  translation: "沒有找到文章"
+- id: emptyTags
+  translation: "沒有找到標籤"
+
+# Languages
+- id: lang_de
+  translation: "German"
+- id: lang_en
+  translation: "English"
+- id: lang_nl
+  translation: "Dutch"
+- id: lang_fr
+  translation: "French"
+
+# Sharing
+- id: shareLink
+  translation: "分享至 {{ . }}"
+- id: shareSystem
+  translation: "系統"
+- id: copyToClipboard
+  translation: "複製到剪貼板"
+- id: copiedToClipboard
+  translation: "已複製到剪貼板"
+- id: link
+  translation: "連結"
+- id: code
+  translation: "程式碼"
+- id: download
+  translation: "下載文章"
+
+# Pagination
+- id: paginationNav
+  translation: "頁面導航"
+- id: paginationPrevious
+  translation: "上一頁"
+- id: paginationNext
+  translation: "下一頁"
+- id: paginationFirst
+  translation: "第一頁"
+- id: paginationLast
+  translation: "最後一頁"
+
+# Navigation
+- id: colorMode
+  translation: "切換主題"
+- id: colorLight
+  translation: "亮色"
+- id: colorDark
+  translation: "暗色"
+- id: colorAuto
+  translation: "自動"
+- id: toggleMainNav
+  translation: "切換主導航"
+- id: home
+  translation: "首頁"
+- id: languageSwitcherLabel
+  translation: "語言"
+- id: close
+  translation: "關閉"
+
+# Table of contents
+- id: toc
+  translation: "本頁目錄"
+- id: seeAlso
+  translation: "參見"
+- id: sectionMenu
+  translation: "選擇一個主題"
+
+# Sidebar
+- id: toggleSidebar
+  translation: "切換側邊欄導航"
+
+# Feature
+- id: addedFeature
+  translation: "新增於 {{ . }}"
+- id: deprecatedFeature
+  translation: "已棄用於 {{ . }}"
+
+# Versioning
+- id: latest
+  translation: "最新"
+- id: allVersions
+  translation: "所有版本"
+- id: newerVersionAlert
+  translation: "有一個更新版本的 {{ . }}!"
+
+# 404 page
+- id: pageNotFound
+  translation: "您訪問的頁面不存在或發生了其他錯誤。請返回我們的{{ . }}。"
+- id: pageNotFoundTitle
+  translation: "頁面未找到"
+- id: pageNotFoundHome
+  translation: "首頁"
+
+# Footer
+- id: copyright
+  translation: "Copyright"
+- id: rights
+  translation: "版權所有"
+- id: poweredBy
+  translation: "由 {{ . }} 提供支持。"
+
+# Comments
+- id: show
+  translation: "顯示"
+- id: comments
+  translation: "評論"
