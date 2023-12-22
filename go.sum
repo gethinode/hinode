@@ -70,6 +70,8 @@ github.com/gethinode/mod-fontawesome v1.5.1 h1:C7goQY4HrEua/lpjC++laydNKBuYo1+30
 github.com/gethinode/mod-fontawesome v1.5.1/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.6.1 h1:iqOgDGdw7Bs4hnzjF/8JsUn10omyKQZTglLqNenT1K0=
 github.com/gethinode/mod-fontawesome v1.6.1/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
+github.com/gethinode/mod-fontawesome v1.7.2 h1:BCm7SQrLZz7TALe9sx4OsIOMJkbGkAqQega/9/BL4Qo=
+github.com/gethinode/mod-fontawesome v1.7.2/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
