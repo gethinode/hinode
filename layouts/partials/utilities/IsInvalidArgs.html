@@ -61,6 +61,16 @@
             {{ end }}
         {{ end }}
     {{ end }}
+
+    {{/* validate required arguments */}}
+    {{ range $key, $val := $definitions }}
+        {{ if not $val.optional }}
+            {{ if not (in $args $key )}}
+                {{ warnf "[%s] argument '%s': expected value" $structure $key }}
+                {{ $error = true }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
 {{ end }}
 
 {{ return $error }}
