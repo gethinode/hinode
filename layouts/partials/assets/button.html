@@ -67,7 +67,7 @@
 {{- with .badge }}{{ $badge = . }}{{ end -}}
 
 {{- $label := "" -}}
-{{- with .label }}{{ $label = . }}{{ end -}}
+{{- if .label }}{{ $label = .label }}{{ else }}{{ $label = $title }}{{ end -}}
 
 {{- $tooltip := "" -}}
 {{- if not (strings.HasSuffix $state "active") -}}
@@ -143,7 +143,8 @@
 
 {{- $attributes := .attributes -}}
 
-<a aria-label="{{ (or $label $title) | safeHTML }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+<a aria-label="{{ (or $label $title) | safeHTML }}"
+    {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
     {{- with $id }} id="{{ . }}"{{ end -}}
     {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
     {{- with $toast }} data-toast-target="{{ $toast }}"{{ end -}}

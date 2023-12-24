@@ -14,11 +14,7 @@
     {{ $error =  true }}
 {{ end }}
 
-{{ $args := .args }}
-{{ if not $args }}
-    {{- errorf "partial [utilities/ValidateArgs.html] - Missing value for param 'args'" -}}
-    {{ $error =  true }}
-{{ end }}
+{{ $args := .args | default slice }}
 
 {{ $definitions := (index site.Data.structures $structure).arguments }}
 {{ if not $definitions }}
@@ -40,15 +36,11 @@
         {{ end }}
         {{ if $extra }}{{ $expected = $expected | append $extra }}{{ end }}
         {{ $actual := printf "%T" $val }}
-        {{ if not (in $expected $actual ) }}
-            {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure $key (delimit $expected ", ") $actual }}
-            {{ $error = true }}
-        {{ end }}
-
-        {{/* validate required argument */}}
-        {{ if and (not $def.optional) (not $val) }}
-            {{ warnf "[%s] argument '%s': expected value" $structure $key }}
-            {{ $error = true }}
+        {{ if $val }}
+            {{ if not (in $expected $actual ) }}
+                {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure $key (delimit $expected ", ") $actual }}
+                {{ $error = true }}
+            {{ end }}
         {{ end }}
 
         {{/* validate permitted values */}}
@@ -65,6 +57,16 @@
         {{ else if and $def.options.max (in (slice "int" "float" "float64") $actual) }}
             {{ if (gt $val $def.options.max) }}
                 {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure $key $val $def.options.min $def.options.max}}
+                {{ $error = true }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{/* validate required arguments */}}
+    {{ range $key, $val := $definitions }}
+        {{ if not $val.optional }}
+            {{ if not (in $args $key )}}
+                {{ warnf "[%s] argument '%s': expected value" $structure $key }}
                 {{ $error = true }}
             {{ end }}
         {{ end }}
