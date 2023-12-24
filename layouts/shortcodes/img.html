@@ -15,8 +15,8 @@
     {{- $src := .Get "src" | default "" -}}
     {{- if $src -}}
         {{- $caption := .Get "caption" | default "" -}}
-        {{- $ratio := partial "utilities/GetArg" (dict "page" . "arg" "ratio") -}}
-        {{- $portrait := partial "utilities/GetArg" (dict "page" . "arg" "portrait") | default false -}}
+        {{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
+        {{- $portrait := partial "utilities/GetArgParent" (dict "page" . "arg" "portrait") | default false -}}
         {{- $active := eq .Ordinal 0 -}}
         {{- $output := partial "assets/carousel-item" (dict 
             "page" .Page

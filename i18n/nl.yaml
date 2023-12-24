@@ -131,3 +131,18 @@
   translation: "Tonen"
 - id: comments
   translation: "Reacties" 
+
+
+# Arguments
+- id: name
+  translation: "Naam"
+- id: type
+  translation: "Type"
+- id: required 
+  translation: "Verplicht"
+- id: default
+  translation: "Standaardwaarde"
+- id: comment
+  translation: "Toelichting"
+- id: supportedValues
+  translation: "Toegestane waarden"

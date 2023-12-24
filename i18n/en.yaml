@@ -133,3 +133,17 @@
   translation: "Show"
 - id: comments
   translation: "Comments" 
+
+# Arguments
+- id: name
+  translation: "Name"
+- id: type
+  translation: "Type"
+- id: required 
+  translation: "Required"
+- id: default
+  translation: "Default"
+- id: comment
+  translation: "Comment"
+- id: supportedValues
+  translation: "Supported values"
