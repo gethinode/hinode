@@ -1,0 +1,74 @@
+<!-- 
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+{{ $aliases := dict "path" "string" "select" "string" "url" "string" }}
+
+{{ $structure := .structure }}
+{{ if not $structure }}
+    {{- errorf "partial [utilities/ValidateArgs.html] - Missing value for param 'structure'" -}}
+    {{ $error =  true }}
+{{ end }}
+
+{{ $args := .args }}
+{{ if not $args }}
+    {{- errorf "partial [utilities/ValidateArgs.html] - Missing value for param 'args'" -}}
+    {{ $error =  true }}
+{{ end }}
+
+{{ $definitions := (index site.Data.structures $structure).arguments }}
+{{ if not $definitions }}
+    {{- errorf "partial [utilities/ValidateArgs.html] - Missing definitions: %s" $structure -}}
+    {{ $error =  true }}
+{{ end }}
+
+{{ if not $error }}
+    {{ range $key, $val := $args }}
+        {{ $def := index $definitions $key }}
+        {{ if and (not $val) $def.default }}{{ $val = $def.default }}{{ end }}
+
+        {{/* validate type */}}
+        {{ $expected := slice | append $def.type }}
+        {{ $extra := slice }}
+        {{ range $expected }}
+            {{ $alias := index $aliases . }}
+            {{ if $alias }}{{ $extra = $extra | append $alias }}{{ end }}
+        {{ end }}
+        {{ if $extra }}{{ $expected = $expected | append $extra }}{{ end }}
+        {{ $actual := printf "%T" $val }}
+        {{ if not (in $expected $actual ) }}
+            {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure $key (delimit $expected ", ") $actual }}
+            {{ $error = true }}
+        {{ end }}
+
+        {{/* validate required argument */}}
+        {{ if and (not $def.optional) (not $val) }}
+            {{ warnf "[%s] argument '%s': expected value" $structure $key }}
+            {{ $error = true }}
+        {{ end }}
+
+        {{/* validate permitted values */}}
+        {{ if and $def.options.values (eq $actual "select") }}
+            {{ if and (not $def.optional) (not (in $def.options.values $val)) }}
+                {{ warnf "[%s] argument '%s': unexpected value '%s'" $structure $key $val }}
+                {{ $error = true }}
+            {{ end }}
+        {{ else if and $def.options.min (in (slice "int" "float" "float64") $actual) }}
+            {{ if lt $val $def.options.min }}
+                {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure $key $val $def.options.min $def.options.max}}
+                {{ $error = true }}
+            {{ end }}
+        {{ else if and $def.options.max (in (slice "int" "float" "float64") $actual) }}
+            {{ if (gt $val $def.options.max) }}
+                {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure $key $val $def.options.min $def.options.max}}
+                {{ $error = true }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return $error }}
