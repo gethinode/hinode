@@ -17,14 +17,14 @@ arguments:
       type: url
       optional: true
       comment: >-
-        Optional address for the button or hyperlink.
+        Address for the button or hyperlink.
       group: partial
     class:
       type: string
       optional: true
       parent: merge
       comment: >-
-        Optional class attribute of the card element, e.g. “w-50”.
+        Class attribute of the card element, e.g. “w-50”.
     color:
       type: select
       optional: true
@@ -51,7 +51,7 @@ arguments:
       default: auto
       parent: cascade
       comment: >-
-        Optional padding of the content.
+        Padding of the content.
       options:
         values:
           - "0"
@@ -82,7 +82,7 @@ arguments:
       default: full
       parent: cascade
       comment: >-
-        Optional header components of the card, displayed in small caps. 
+        Header components of the card, displayed in small caps. 
       options:
         values:
           - full
@@ -95,7 +95,7 @@ arguments:
       default: none
       parent: cascade
       comment: >-
-        Optional footer components of the card, displayed in small caps.
+        Footer components of the card, displayed in small caps.
       options:
         values:
           - full
@@ -108,7 +108,7 @@ arguments:
         - template.HTML
       optional: true
       comment: >-
-        Optional description of the card.
+        Description of the card.
       group: partial
     loading:
       type: select
@@ -128,7 +128,7 @@ arguments:
       type: path
       optional: true
       comment: >-
-        Optional thumbnail image url, displayed on top or the left of the card.
+        Thumbnail image url, displayed on top or the left of the card.
     ratio:
       type: select
       optional: true
@@ -170,5 +170,5 @@ arguments:
 body:
   optional: true
   comment: >-
-    Optional description of the card.
+    Description of the card.
   group: shortcode
