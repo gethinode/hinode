@@ -22,6 +22,19 @@
     {{ $error =  true }}
 {{ end }}
 
+{{ $child := .child }}
+{{ if $child }}
+    {{ $extra_def := (index site.Data.structures $child).arguments }}
+    {{ if not $extra_def }}
+        {{- errorf "partial [utilities/ValidateArgs.html] - Missing definitions: %s" $child -}}
+        {{ $error =  true }}
+    {{ else }}
+        {{ range $key, $val := $extra_def }}
+            {{ if $val.parent }}{{ $definitions = merge $definitions (dict $key $val) }}{{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
 {{ $namedArgs := true }}
 
 {{ if not $error }}
