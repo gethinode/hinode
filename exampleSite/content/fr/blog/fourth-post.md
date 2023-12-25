@@ -1,6 +1,6 @@
 ---
 author: Mark Dumay
-title: Quatrième article
+title: Quatrième article (exclu de la recherche)
 slug: quatrieme-article
 date: 2023-01-01
 description: Ceci est mon quatrième article de blog. Il est exclu de l'index de recherche.
