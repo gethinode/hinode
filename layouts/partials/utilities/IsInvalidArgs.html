@@ -35,6 +35,8 @@
     {{ end }}
 {{ end }}
 
+{{ $group := .group }}
+
 {{ $namedArgs := true }}
 
 {{ if not $error }}
@@ -111,7 +113,13 @@
     {{ $max := len $args }}
     {{ $expected := 0 }}
     {{ range $key, $val := $definitions }}
-        {{ if not $val.optional }}
+        {{ $skip := false }}
+        {{ $groups := slice | append $val.group }}
+        {{ if and $group $val.group }}
+            {{ $skip = not (in $groups $group )}}
+        {{ end }}
+
+        {{ if and (not $skip) (not $val.optional) }}
             {{ if $namedArgs }}
                 {{ if not (isset $args $key) }}
                     {{ warnf "[%s] argument '%s': expected value" $structure $key }}

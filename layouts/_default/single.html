@@ -1,6 +1,6 @@
 {{- define "partials/single-main.html" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
+    {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
 
     {{ .Render "single/header" }}
 

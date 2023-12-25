@@ -10,7 +10,7 @@
             <div class="col col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.current }}-8">
                 {{- if ne $layout "featured" -}}
                     {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
-                        <div>{{ partial "assets/breadcrumb.html" $page }}</div>
+                        <div>{{ partial "assets/breadcrumb.html" (dict "page" $page) }}</div>
                     {{ end -}}
                 {{- end -}}
 
