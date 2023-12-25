@@ -30,7 +30,6 @@
 {{ $parent := false -}}
 {{ with .Get "parent" }}{{ $parent = partial "utilities/CastBool.html" . }}{{ end -}}
 
-
 <!-- Main code -->
 {{ if not $error }}    
     {{ $table := printf "| %s | %s | %s | %s | %s |\n| --- | --- | --- | --- | --- |" 
