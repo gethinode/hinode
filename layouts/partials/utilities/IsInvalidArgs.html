@@ -90,7 +90,7 @@
     {{ range $key, $val := $definitions }}
         {{ if not $val.optional }}
             {{ if $namedArgs }}
-                {{ if not (in $args $key )}}
+                {{ if not (isset $args $key )}}
                     {{ warnf "[%s] argument '%s': expected value" $structure $key }}
                     {{ $error = true }}
                 {{ end }}
