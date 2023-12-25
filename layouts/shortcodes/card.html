@@ -6,7 +6,7 @@
 
 {{ $error := false }}
 
-<!-- Validate and initialize arguments -->
+<!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card" "args" .Params) }}
     {{ errorf "Invalid arguments: %s" .Position -}}
     {{ $error = true }}

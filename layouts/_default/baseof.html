@@ -1,5 +1,12 @@
 {{- define "partials/optional-scripts.html" -}}
-    {{- $modules := site.Params.modules.optional | intersect .Params.modules -}}
+{{ $page_modules := slice }}
+{{ if reflect.IsMap .Params.modules }}
+    {{ $page_modules = .Params.modules }}
+{{ else }}
+    {{ $page_modules = $page_modules | append .Params.modules }}
+{{ end }}
+
+{{- $modules := site.Params.modules.optional | intersect $page_modules -}}
     {{- range $index, $mod := $modules -}}
         {{- $filename := printf "js/%s.bundle.js" $mod -}}
         {{- $match := printf "js/modules/%s/**.js" $mod -}}
