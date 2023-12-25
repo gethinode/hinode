@@ -1,34 +1,31 @@
 <!-- 
-    Displays a group of vertically collapsing and expanding items. Add accordion-item inner elements for each accordion
-    item. The shortcode supports the following arguments:
-    "id":           Optional id of the accordion, defaults to "accordion-" with a sequential number.
-    "always-open":  Optional flag to make accordion items stay open when another item is opened.
-    "class":        Optional class attribute of the accordion element, e.g. “w-50”.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $id := printf "accordion-%d" .Ordinal -}}
-{{ with .Get "id" }}
-    {{ $id = . }}
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "accordion" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
 {{ end }}
-{{- $class := .Get "class" | default "" -}}
 
-{{- $openParam := "false" -}}
-{{- $open := false -}}
-{{- with .Get "always-open" }}{{ $openParam = . }}{{ end -}}
-{{- $supportedFlags := slice "true" "false" -}}
-{{- if in $supportedFlags $openParam -}}
-    {{- if eq $openParam "true" }}{{ $open = true }}{{ end -}}
-{{- else -}}
-    {{- errorf "Invalid value for param 'always-open': %s" .Position -}}
-    {{- $error = true -}}
-{{- end -}}
+<!-- Main code -->
+{{ if not $error }}
+    {{- $id := printf "accordion-%d" .Ordinal -}}
+    {{ with .Get "id" }}{{ $id = . }}{{ end }}
+    {{- $class := .Get "class" | default "" -}}
+    {{- $open := false -}}
+    {{ with .Get "always-open" }}{{ $open = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{- $body := .Inner -}}
+    {{- if $open -}}
+        {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
+        {{- $body = (replace .Inner $pattern "") | .Page.RenderString | safeHTML }}
+    {{- end -}}
 
-{{- $body := .Inner -}}
-{{- if $open -}}
-    {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
-    {{- $body = (replace .Inner $pattern "") | .Page.RenderString | safeHTML }}
-{{- end -}}
-
-<div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
-    {{- $body -}}
-</div>
+    <div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
+        {{- $body -}}
+    </div>
+{{ end }}
