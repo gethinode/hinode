@@ -27,6 +27,10 @@
     {{ end }}
 {{ end }}
 
+{{ $parent := false -}}
+{{ with .Get "parent" }}{{ $parent = partial "utilities/CastBool.html" . }}{{ end -}}
+
+
 <!-- Main code -->
 {{ if not $error }}    
     {{ $table := printf "| %s | %s | %s | %s | %s |\n| --- | --- | --- | --- | --- |" 
@@ -39,6 +43,7 @@
         {{ if and $group $val.group }}
             {{ $skip = not (in $groups $group )}}
         {{ end }}
+        {{ if $parent }}{{ $skip = not (in (slice "cascade" "merge") $val.parent) }}{{ end }}
     
         {{ if not $skip }}
             {{ $type := $val.type }}
