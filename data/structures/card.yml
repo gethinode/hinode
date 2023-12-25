@@ -7,12 +7,13 @@ arguments:
       type: string
       optional: true
       comment: >-
-        Title of the card.
+        Title of the card, replaces the title of the referenced page (if any).
     path:
       type: path
       optional: true
       comment: >-
-        Path of the page, override with other parameters.
+        Path of the page that the card reference to. If omitted, specify the
+        title, icon, thumbnail, and description (inner content) as needed.
     href:
       type: url
       optional: true
