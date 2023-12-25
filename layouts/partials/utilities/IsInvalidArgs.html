@@ -14,7 +14,7 @@
     {{ $error =  true }}
 {{ end }}
 
-{{ $args := .args | default slice }}
+{{ $args := .args | default dict }}
 
 {{ $definitions := (index site.Data.structures $structure).arguments }}
 {{ if not $definitions }}
@@ -100,7 +100,7 @@
     {{ range $key, $val := $definitions }}
         {{ if not $val.optional }}
             {{ if $namedArgs }}
-                {{ if not (isset $args $key )}}
+                {{ if not (isset $args $key) }}
                     {{ warnf "[%s] argument '%s': expected value" $structure $key }}
                     {{ $error = true }}
                 {{ end }}
