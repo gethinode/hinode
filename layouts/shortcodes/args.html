@@ -1,21 +1,33 @@
+<!-- 
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
 {{ $error := false }}
 
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "args" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{ $structure := "" }}
 {{- if .IsNamedParams }}{{ $structure = .Get "structure" }}{{ else }}{{ $structure = .Get 0 }}{{ end }}
-{{ if not $structure }}
-    {{- errorf "Invalid or missing value for param 'structure': %s" .Position -}}
-    {{ $error =  true }}
-{{ end }}
-
-{{ $definitions := (index site.Data.structures $structure).arguments }}
-{{ if not $definitions }}
-    {{- errorf "Cannot find data structure '%s': %s" $structure .Position -}}
-    {{ $error =  true }}
-{{ end }}
-
 {{ $group := "" }}
-{{- if .IsNamedParams }}{{ $group = .Get "group" }}{{ else }}{{ $group = .Get 1 }}{{ end }}
+{{- if .IsNamedParams }}{{ $group = .Get "group" | default "" }}{{ else }}{{ $group = .Get 1 | default "" }}{{ end }}
+{{ $definitions := "" }}
 
+{{ if not $error }}    
+    {{ $definitions = (index site.Data.structures $structure).arguments }}
+    {{ if not $definitions }}
+        {{- errorf "Cannot find data structure '%s': %s" $structure .Position -}}
+        {{ $error =  true }}
+    {{ end }}
+{{ end }}
+
+<!-- Main code -->
 {{ if not $error }}    
     {{ $table := printf "| %s | %s | %s | %s | %s |\n| --- | --- | --- | --- | --- |" 
         (T "name") (T "type") (T "required") (T "default") (T "comment") 
@@ -47,9 +59,9 @@
             {{ $max := "" }}
             {{ if and $val.options.values (eq $type "select") }}
                 {{ $comment = printf "%s %s: [%s]." $comment (T "supportedValues") (delimit $val.options.values ", ") }}
-            {{ else if $val.options.min (in (slice "int" "float" "float64") $type) }}
+            {{ else if and $val.options.min (in (slice "int" "float" "float64") $type) }}
                 {{ $min = $val.options.min }}
-            {{ else if $val.options.max (in (slice "int" "float" "float64") $type) }}
+            {{ else if and $val.options.max (in (slice "int" "float" "float64") $type) }}
                 {{ $max = $val.options.max }}
             {{ end }}
             {{ if and $min $max }}
