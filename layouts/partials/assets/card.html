@@ -4,7 +4,7 @@
     Visit gethinode.com/license for more details.
 -->
 
-<!-- Validate and initialize arguments -->
+<!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card" "args" .) }}
     {{- errorf "partial [assets/card.html] - Invalid arguments" -}}
 {{ end }}
