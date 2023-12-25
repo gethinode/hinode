@@ -3,8 +3,9 @@ author: Mark Dumay
 title: Quatrième article
 slug: quatrieme-article
 date: 2023-01-01
-description: Ceci est mon quatrième article.
+description: Ceci est mon quatrième article de blog. Il est exclu de l'index de recherche.
 tags: ["blog"]
+searchExclude: true
 thumbnail:
   url: img/flowers.jpg
   author: Arvee Marie
