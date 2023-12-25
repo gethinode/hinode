@@ -1,0 +1,80 @@
+comment: >-
+  Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered
+  using a provided list of pages. Cards on the same row are aligned to each
+  other. The grid renders pages up to a provided maximum amount. The remaining
+  items are accessible via either a paginator or button to a list page (default
+  behavior). Be aware a page can only contain one paginator at a time.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: true
+    comment: Context of the current page.
+  title:
+    type: string
+    optional: true
+    comment: >-
+      Title of the card, replaces the title of the referenced page (if any).
+  gutter:
+    type: int
+    optional: true
+    default: 4
+    comment: Gutter between columns in a group.
+    options:
+      min: 0
+      max: 5
+  list:
+    type:
+      - page.Pages
+      - resource.Resources
+    optional: true
+    comment: Array of pages to be rendered as cards.
+  cards:
+    type: string
+    optional: true
+    comment: String of rendered cards.
+  max:
+    type: int
+    optional: true
+    comment: Maximum number of cards to display.
+  cols:
+    type: int
+    optional: true
+    default: 3
+    comment: Number of grid columns.
+    options:
+      min: 1
+      max: 5
+  paginate:
+    type: bool
+    optional: true
+    comment: >-
+      Flag indicating if pagination should be added to the card group, if the
+      list exceeds the maximum number of cards to display. 
+  href:
+    type: string
+    optional: true
+    comment: >-
+      address for the button or hyperlink. If set, a button is added if the
+      list exceeds the maximum number of cards to display.
+  hrefTitle:
+    type: string
+    optional: true
+    comment: >-
+      Title of the button or hyperlink as companion to href.
+  separator:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate a horizontal line should be added between items on small screens.
+  wrapper:
+    type: string
+    optional: true
+    comment: >-
+      Class attributes of the wrapper element, e.g. "p-4 px-xxl-0".
+  responsive:
+    type: bool
+    optional: true
+    comment: >-
+      Flag indicating if the number of columns should be responsive, defaults to "true".

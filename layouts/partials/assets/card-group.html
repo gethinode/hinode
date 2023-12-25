@@ -1,68 +1,41 @@
 <!-- 
-    Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered using a provided list of pages.
-    Cards on the same row are aligned to each other. The grid renders pages up to a provided maximum amount. The
-    remaining items are accessible via either a paginator or button to a list page (default behavior). Be aware a page
-    can only contain one paginator at a time.
-    
-    The shortcode supports the following arguments:
-    "page"          Required context of the current page.
-    "list"          Required array of pages.
-    "cards"         Optional string of rendered cards.
-    "max"           Required maximum number of cards to display.
-    "cols"          Required number of columns for the grid, must be a value between 1 and 5.
-    "gutter"        Gutter between columns in a group, either "0", "1", "2", "3", "4" (default), or "5".
-    "title"         Optional title of the card group.
-    "paginate"      Optional flag indicating if pagination should be added to the card group, if the list exceeds the
-                    maximum number of cards to display. 
-    "href"          Optional address for the button or hyperlink. If set, a button is added if the list exceeds the
-                    maximum number of cards to display.
-    "hrefTitle"     Optional title of the button or hyperlink as companion to href.
-    "separator"     Optional flag to indicate a horizontal line should be added between items on small screens.
-    "wrapper"       Optional class attributes of the wrapper element, e.g. "p-4 px-xxl-0".
-    "responsive"    Optional flag if the number of columns should be responsive, defaults to "true".
-
-    In addition, the following arguments are passed to the individual cards.
-    "class"         Optional class attribute of the card element, e.g. “w-50”.
-    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", or "body". By default, no color is specified.
-    "padding":      Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
-    "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
-                    (default), "publication", "tags", and "none".
-    "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
-                    "publication", "tags", and "none" (default).
-    "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
-    "ratio"         Optional ratio of the thumbnail image, defaults to "16x9" (stacked orientation) or "1x1" (horizontal
-                    orientation).
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card-group" "child" "card" "args" .) }}
+    {{- errorf "partial [assets/card.html] - Invalid arguments" -}}
+{{ end }}
+
+<!-- Initialize arguments and default values -->
 {{- $page := .page -}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
-
-{{- if not (in (slice "*hugolib.pageState" "*hugolib.pageForShortcode") (printf "%T" $page)) -}}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'page': %T" $page -}}
-{{- end -}}
-
-{{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
 {{ $pages := .list }}
-{{- if and $pages (not (in $supportedTypes (printf "%T" $pages))) -}}
-    {{ warnf "Type: %T" $pages }}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'list'" -}}
-{{- end -}}
 {{ $cards := .cards }}
+{{- $paginate := .paginate | default false -}}
+{{- $moreURL := .href -}}
+{{- $moreTitle := .hrefTitle -}}
+{{- $gutter := .gutter | default 4 -}}
+{{- $separator := .separator | default false -}}
+{{- $class := .class -}}
+{{- $color := .color -}}
+{{- $padding := .padding -}}
+{{- $header := .header -}}
+{{- $footer := .footer -}}
+{{- $orientation := .orientation -}}
+{{- $ratio := .ratio -}}
+{{- $wrapper := .wrapper | default "p-0" -}}
+{{- $loading := .loading -}}
 
-{{- $paginate := false -}}
-{{- with .paginate -}}
-    {{- if ne (printf "%T" .) "bool" -}}
-        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'paginate'" -}}
-    {{- end -}}
-    {{- $paginate = . -}}
-{{- end -}}
-
+<!-- Override arguments -->
 {{ $paginator := "" }}
 {{ if $paginate }}
     {{ $paginator = $page.Paginate $pages }}
     {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
 {{ end }}
+
 {{ $list := slice }}
 {{ range $index, $element := $pages }}
     {{ $params := dict }}
@@ -86,27 +59,10 @@
 
 {{- $count := len $list -}}
 {{- $max := $count -}}
-{{- with .max }}
-    {{- if ne (printf "%T" .) "int" -}}
-        {{- warnf "partial [assets/card-group.html] - Invalid value for param 'max': %s" . -}}
-    {{- else -}}
-        {{- $max = . -}}
-    {{- end -}}
-{{- end -}}
-{{- $max = math.Min $max $count -}}
-
+{{- $max = math.Min (.max | default $count) $count -}}
 {{- $responsive := .responsive | default true -}}
-{{- with .responsive -}}
-    {{- if ne (printf "%T" .) "bool" -}}
-        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'responsive'" -}}
-    {{- end -}}
-{{- end -}}
-
 {{- $cols := string .cols | default "3" -}}
-{{- $supportedCols := slice "0" "1" "2" "3" "4" "5" "auto" -}}
-{{- if not (in $supportedCols $cols) -}}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'cols': %s" $cols -}}
-{{- end -}}
+
 {{- $colGrid := "" -}}
 {{- if eq $cols "1" }}{{ $colGrid = "row-cols-1" -}}
 {{- else if eq $cols "2" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-2" }}{{ end -}}
@@ -115,46 +71,13 @@
 {{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
 {{ end -}}
 
-{{- $gutter := .gutter | default "4" -}}
-{{- $supportedGutters := slice "0" "1" "2" "3" "4" "5" -}}
-{{- if not (in $supportedGutters $gutter) -}}
-    {{- errorf "partial [assets/card-group.html] - Invalid value for param 'gutter': %s" $gutter -}}
-{{- end -}}
-
 {{- if not $paginate -}}
     {{- $list = first $max $list -}}
 {{- end -}}
 
-{{- $moreURL := .href -}}
-{{- $moreTitle := .hrefTitle -}}
+{{- if and (eq $cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
-{{- $separator := false -}}
-{{- with .separator -}}
-    {{- if ne (printf "%T" .) "bool" -}}
-        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'separator'" -}}
-    {{- end -}}
-    {{- $separator = . -}}
-{{- end -}}
-
-{{- $class := .class -}}
-{{- $color := .color -}}
-{{- $padding := .padding -}}
-{{- $header := .header -}}
-{{- $footer := .footer -}}
-{{- $orientation := .orientation -}}
-{{- $ratio := .ratio -}}
-{{- $wrapper := .wrapper | default "p-0" -}}
-
-{{- $loading := .loading -}}
-{{- $validSettings := slice "lazy" "eager" -}}
-{{- if $loading -}}
-    {{ if not (in $validSettings $loading) -}}
-        {{- errorf "partial [assets/card-group.html] - Invalid value for param 'loading': %s" $loading -}}
-    {{ end -}}
-{{- end -}}
-
-{{- if and (eq $cols 1) (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
-
+<!-- Main code -->
 <div class="container-fluid {{ $wrapper }}">
     <div class="row {{ $colGrid }} g-{{ $gutter }}">
         {{ range $index, $element := $list }}
