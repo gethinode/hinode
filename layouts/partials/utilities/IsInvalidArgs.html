@@ -57,6 +57,16 @@
             {{ end }}
             {{ if $extra }}{{ $expected = $expected | append $extra }}{{ end }}
             {{ $actual := printf "%T" $val }}
+
+            {{/* cast supported types from string */}}
+            {{ if and (in $expected "bool") (in (slice "true" "false") $val) }}
+                {{ $actual = "bool" }}
+            {{ else if and (in $expected "int") (findRE `^-?\d+$` $val) }}
+                {{ $actual = "int" }}
+            {{ else if and (in $expected "float") (findRE `^(?:[1-9]\d*|0)?(?:\.\d+)?$` $val) }}
+                {{ $actual = "float" }}
+            {{ end }}
+
             {{ if $val }}
                 {{ if not (in $expected $actual ) }}
                     {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure $key (delimit $expected ", ") $actual }}
