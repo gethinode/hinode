@@ -1,52 +1,31 @@
 <!-- 
-    Displays a release button that links to a specific release. Use the optional state to indicate if it is a new or
-    deprecated feature.
-    "version":      Required version string, expects semver notation with a "v" prefix.
-    "state":        Optional state, either "new" or "deprecated".
-    "short":        Optional flag to indicate the release button should use short notation.
-    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
-    "class":        Optional class attribute of the button element.
-    "inline":       If set, renders the release button inline (defaults to false).
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $error := false -}}
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "release" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $version := .Get "version" | default "" -}}
-{{- $inline := false -}}
-
 {{- $state := .Get "state" | default "new" -}}
-{{- $supportedStates := slice "new" "deprecated" -}}
-{{- if not (in $supportedStates $state) -}}
-    {{- errorf "Invalid value for param 'state': %s" .Position -}}
-    {{- $error = true -}}
-{{- end -}}
-
-{{- $shortParam := "false" -}}
 {{- $short := false -}}
-{{- with .Get "short" }}{{ $shortParam = . }}{{ end -}}
-{{- $supportedFlags := slice "true" "false" -}}
-{{- if in $supportedFlags $shortParam -}}
-    {{- if eq $shortParam "true" }}{{ $short = true }}{{ end -}}
-{{- else -}}
-    {{- errorf "Invalid value for param 'short': %s" .Position -}}
-    {{- $error = true -}}
-{{- end -}}
-
-{{- $inlineParam := "false" -}}
+{{ with .Get "short" }}{{ $short = partial "utilities/CastBool.html" . }}{{ end -}}
 {{- $inline := false -}}
-{{- with .Get "inline" }}{{ $inlineParam = . }}{{ end -}}
-{{- $supportedFlags := slice "true" "false" -}}
-{{- if in $supportedFlags $inlineParam -}}
-    {{- if eq $inlineParam "true" }}{{ $inline = true }}{{ end -}}
-{{- else -}}
-    {{- errorf "Invalid value for param 'inline': %s" .Position -}}
-    {{- $error = true -}}
-{{- end -}}
-
+{{ with .Get "inline" }}{{ $short = partial "utilities/CastBool.html" . }}{{ end -}}
 {{- $title := $version -}}
 {{- $color := "primary" -}}
 {{- if eq $state "deprecated" -}}
     {{- $color = "secondary" -}}
 {{- end -}}
+{{- $size := .Get "size" | default "md" -}}
+{{- $class := .Get "class" | default "" -}}
 
 {{- $icon := "" -}}
 {{- $tooltip := "" -}}
@@ -66,7 +45,6 @@
     {{- end -}}
 {{- end -}}
 
-
 {{- if not $short -}}
     {{- if eq $state "deprecated" -}}
         {{- $title = T "deprecatedFeature" $version -}}
@@ -75,16 +53,7 @@
     {{- end -}}
 {{- end -}}
 
-{{- $size := "md" -}}
-{{- with .Get "size" }}{{ $size = . }}{{ end -}}
-{{- $supportedSizes := slice "sm" "md" "lg" -}}
-{{- if not (in $supportedSizes $size) -}}
-    {{- errorf "Invalid value for param 'size': %s" .Position -}}
-    {{- $error = true -}}
-{{- end -}}
-
-{{- $class := .Get "class" | default "" -}}
-
+<!-- Main code -->
 {{- if not $error -}}
     {{- if not $inline }}<div class="pb-3">{{ end -}}
     {{- partial "assets/button.html" (dict 
