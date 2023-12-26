@@ -3,17 +3,13 @@
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 -->
+{{- $error := false -}}
 
-{{ $error := false }}
+{{- if partial "utilities/IsInvalidArgs.html" (dict "structure" "sup" "args" .Params) -}}
+    {{- errorf "Invalid arguments: %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
 
-<!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "sup" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
-
-<!-- Initialize arguments -->
 {{- $text := .Get 0 | default "" -}}
 
-<!-- Main code -->
 <sup>{{ $text | .Page.RenderString -}}</sup>
