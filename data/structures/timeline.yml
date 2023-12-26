@@ -1,0 +1,31 @@
+comment: >-
+  Shows items ordered on a vertical timelime.
+arguments:
+  data:
+    type: string
+    optional: false
+    comment: >-
+      Filename of the timeline input data. You can omit the file extension. The
+      file should reside in the data folder.
+  background:
+    type: select
+    optional: true
+    comment: >-
+      Border color of the connector dots, defaults to the body background color.
+      If set, uses a subtle background color that is adaptive to the current
+      color mode.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+  class:
+    type: string
+    optional: true
+    comment: >-
+      Class attribute of the timeline's container.
