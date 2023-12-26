@@ -84,7 +84,7 @@
 
             {{ if $val }}
                 {{ if not (in $expected $actual ) }}
-                    {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure $key (delimit $expected ", ") $actual }}
+                    {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure (string $key) (delimit $expected ", ") $actual }}
                     {{ $error = true }}
                 {{ end }}
             {{ end }}
@@ -97,12 +97,12 @@
                 {{ end }}
             {{ else if and $def.options.min (in (slice "int" "float" "float64") $actual) }}
                 {{ if lt $val $def.options.min }}
-                    {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure $key $val $def.options.min $def.options.max}}
+                    {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure (string $key) $val $def.options.min $def.options.max}}
                     {{ $error = true }}
                 {{ end }}
             {{ else if and $def.options.max (in (slice "int" "float" "float64") $actual) }}
                 {{ if (gt $val $def.options.max) }}
-                    {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure $key $val $def.options.min $def.options.max}}
+                    {{ warnf "[%s] argument '%s': value '%s' out of range [$d, $d]" $structure (string $key) $val $def.options.min $def.options.max}}
                     {{ $error = true }}
                 {{ end }}
             {{ end }}
