@@ -90,9 +90,9 @@
             {{ end }}
 
             {{/* validate permitted values */}}
-            {{ if and $def.options.values (eq $actual "select") }}
-                {{ if and (not $def.optional) (not (in $def.options.values $val)) }}
-                    {{ warnf "[%s] argument '%s': unexpected value '%s'" $structure $key $val }}
+            {{ if and $def.options.values (eq $actual "string") }}
+                {{ if and $val (not (in $def.options.values $val)) }}
+                    {{ warnf "[%s] argument '%s': unexpected value '%s'" $structure (string $key) $val }}
                     {{ $error = true }}
                 {{ end }}
             {{ else if and $def.options.min (in (slice "int" "float" "float64") $actual) }}
