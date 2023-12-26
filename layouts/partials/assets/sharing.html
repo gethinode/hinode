@@ -36,7 +36,7 @@
                     {{- $target = (printf "toast-message-%s-%d" (anchorize $item.name) $index ) -}}
                     {{- $clipboard = $url -}}
                     {{- $url = "#!" -}}
-                    {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link")  (T "copiedToClipboard"))) -}}
+                    {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link") (T "copiedToClipboard"))) -}}
                 {{- end -}}
                 {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" "label" (T "shareLink" $item.name) "spacing" false) }}
             {{- end -}}
