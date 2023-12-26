@@ -25,6 +25,20 @@
   translation: "Articles"
 - id: more
   translation: "Plus {{ . }}"
+- id: emptyList
+  translation: "Aucun articles trouvé"
+- id: emptyTags
+  translation: "Aucun tags trouvé"
+
+# Languages
+- id: lang_de
+  translation: "Allemand"
+- id: lang_en
+  translation: "Anglais"
+- id: lang_nl
+  translation: "Néerlandais"
+- id: lang_fr
+  translation: "Français"
 
 # Sharing
 - id: shareLink
@@ -39,6 +53,8 @@
   translation: "Lien"
 - id: code
   translation: "Code"
+- id: download
+  translation: "Télécharger l'article"
 
 # Pagination
 - id: paginationNav
@@ -75,6 +91,8 @@
   translation: "Sur cette page"
 - id: seeAlso
   translation: "Voir également"
+- id: sectionMenu
+  translation: "Selectionner un topic"
 
 # Sidebar
 - id: toggleSidebar
@@ -115,3 +133,17 @@
   translation: "Afficher"
 - id: comments
   translation: "Commentaires"
+
+# Arguments
+- id: name
+  translation: "Name"
+- id: type
+  translation: "Type"
+- id: required 
+  translation: "Required"
+- id: default
+  translation: "Default"
+- id: comment
+  translation: "Comment"
+- id: supportedValues
+  translation: "Supported values"
