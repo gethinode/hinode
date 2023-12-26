@@ -76,7 +76,7 @@
                 {{ $comment = printf "%s %s: <=%d." $comment (T "supportedValues") $max }}
             {{ end }}
 
-            {{ $table = printf "%s\n| %s | %s | %s | %s | %s |" $table $key $type $required (or $val.default "") $comment }}
+            {{ $table = printf "%s\n| %s | %s | %s | %s | %s |" $table $key $type $required (or (string $val.default) "") $comment }}
         {{ end }}
     {{ end }}
 

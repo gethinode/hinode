@@ -1,0 +1,13 @@
+{{ $path := .data }}
+{{ $page := .page }}
+
+{{/* Try language-specific file first */}}
+{{ $i18nPath := path.Join (path.Dir $path) (printf "%s.%s" (path.BaseName $path) $page.Language.Lang) (path.Ext $path) }}
+{{ $data := index site.Data $i18nPath }}
+
+{{/* Use exact provided path as backup */}}
+{{ if not $data -}}
+    {{ $data = index site.Data $path }}
+{{ end }}
+
+{{ return $data }}

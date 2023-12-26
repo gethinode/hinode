@@ -1,0 +1,5 @@
+comment: >-
+  Returns the current version defined in 'package.json` in the repository root,
+  or in the documentation base path ('params.docs.basePath') if specified. The
+  returned version includes a 'v' prefix. The partial returns nothing when no
+  match is found. The partial does not require any arguments.
