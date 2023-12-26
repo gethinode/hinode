@@ -12,7 +12,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      class attribute of the button element, e.g. “p-5”.
+      Class attribute of the button element, e.g. “p-5”.
   color:
     type: select
     optional: true
