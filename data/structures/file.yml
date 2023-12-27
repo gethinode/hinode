@@ -12,8 +12,9 @@ arguments:
   lang:
     type: string
     optional: true
-    comment: Language to be used by the syntax highlighter. If not set, the
-    language is derived from the file extension.
+    comment: >-
+      Language to be used by the syntax highlighter. If not set, the
+      language is derived from the file extension.
   show:
     type: bool
     optional: true
