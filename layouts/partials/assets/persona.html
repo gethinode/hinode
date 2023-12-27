@@ -84,18 +84,7 @@
     </div>
 </div>
 
-<div class="d-md-none">
-    <div class="persona position-relative row mt-5 align-middle p-3 ptw-5">
-        <div class="col-12">
-            <div class="position-absolute top-25 start-50 translate-middle col-6">
-                {{- if $thumbnail -}}
-                    {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "ratio" "1x1" "innerClass" "rounded-5" "loading" $loading) -}}
-                {{ end }}
-            </div>
-        </div>
-        <div class="col-12 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 ptw-lg-5 ptw-3 ptw-sm-4 fs-md-5 fs-6 pb-3">
-            <div class="p-5">
-                {{- partial "persona-body.html" (dict "title" $title "href" $href "color" $color "content" $content) -}}
+                <div class="p-3">
             </div>
         </div>
     </div>
