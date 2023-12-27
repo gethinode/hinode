@@ -4,20 +4,16 @@ arguments:
   header:
     type: string
     optional: false
-    comment: >-
-      Header of the accordion item.
+    comment: Header of the accordion item.
   show:
     type: bool
     optional: true
-    comment: >-
-      flag to indicate an item should be shown as collapsed.
+    comment: Flag to indicate an item should be shown as collapsed.
   class:
     type: string
     optional: true
-    comment: >-
-      Class attribute of the accordion item.
+    comment: Class attribute of the accordion item.
 body:
   optional: false
-  comment: >-
-    Content of the accordion item.
+  comment: Content of the accordion item.
   group: shortcode

@@ -1,24 +1,18 @@
 <!-- 
-    Generates a link for a given named link or url. The shortcode supports a single unnamed parameter, or various named
-    parameters. The unnamed parameter is recognized as a url if it starts with "http", else it is treated as either a
-    named link or internal reference (in that order). Any inner text is rendered as the link title, otherwise it uses
-    the host name (for external links), link title (for internal links), or anchor name (for any local references
-    containing a `#`). The shortcode supports the following named arguments:
-    "href"          Required reference to either an external link (if it starts with http), a named link (if it can be
-                    found in params.links), or internal reference. External and internal references may include an
-                    anchor "#".
-    "name"          Alias of href.
-    "url"           Alias of href.
-    "cue"           Optional flag to indicate if an external link should show a visual cue, defaults to setting
-                    "main.externalLinks.cue" in the site's parameters.
-    "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
-                    "main.externalLinks.tab" in the site's parameters.
-    "case"          Optional flag to indicate if the retrieved title (e.g. no inner text is provided) of an internal
-                    link should use its original case, defaults to true. If false, the title is set to lower case.
-    "class"         Optional class attribute of the anchor element.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $error := false -}}
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "link" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{ $href := "" }}
 {{ $name := "" }}
 {{ $url := "" }}
@@ -84,6 +78,7 @@
     {{ $url = printf "%s#%s" $url .}}
 {{ end }}
 
+<!-- Main code -->
 {{- if not $error -}}
-    {{ partial "utilities/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class "page" .Page) }}
+    {{ partial "assets/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class "page" .Page) }}
 {{- end -}}

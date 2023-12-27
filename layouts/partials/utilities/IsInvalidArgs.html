@@ -36,7 +36,6 @@
 {{ end }}
 
 {{ $group := .group }}
-
 {{ $namedArgs := true }}
 
 {{ if not $error }}
@@ -48,6 +47,13 @@
             {{ $namedArgs = false }}
             {{ range $d := $definitions }}
                 {{ if eq $d.position $key }}{{ $def = $d }}{{ end }}
+            {{ end }}
+        {{ end }}
+
+        {{ if $def }}
+            {{ $groups := slice | append $def.group }}
+            {{ if and $group $def.group }}
+                {{ if not (in $groups $group )}}{{ $def = "" }}{{ end }}
             {{ end }}
         {{ end }}
 
@@ -73,20 +79,20 @@
             {{ if $extra }}{{ $expected = $expected | append $extra }}{{ end }}
             {{ $actual := printf "%T" $val }}
 
-            {{/* cast supported types from string */}}
+            {{/* cast supported types from/to string */}}
             {{ if and (in $expected "bool") (in (slice "true" "false") $val) }}
                 {{ $actual = "bool" }}
             {{ else if and (in $expected "int") (findRE `^-?\d+$` $val) }}
                 {{ $actual = "int" }}
             {{ else if and (in $expected "float") (findRE `^(?:[1-9]\d*|0)?(?:\.\d+)?$` $val) }}
                 {{ $actual = "float" }}
+            {{ else if and (in $expected "string") (in (slice "bool" "int" "float" "float64") $actual) }}
+                {{ $actual = "string" }}
             {{ end }}
 
-            {{ if $val }}
-                {{ if not (in $expected $actual ) }}
-                    {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure (string $key) (delimit $expected ", ") $actual }}
-                    {{ $error = true }}
-                {{ end }}
+            {{ if and $val (not (in $expected $actual)) }}
+                {{ warnf "[%s] argument '%s': expected type '%s', got '%s'" $structure (string $key) (delimit $expected ", ") $actual }}
+                {{ $error = true }}
             {{ end }}
 
             {{/* validate permitted values */}}
