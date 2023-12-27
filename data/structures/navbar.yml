@@ -1,0 +1,102 @@
+comment: >-
+  Displays a navigation header with a toggler. The menu items are derived from
+  the site's configuration. Nested items are supported at one-level depth. The
+  navigation bar includes a search area and a language switcher if applicable.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
+  path:
+    type: path
+    optional: false
+    comment: Path of the active page.
+    group: shortcode
+  title:
+    type: string
+    optional: true
+    comment: >- 
+      Brand title, displayed when the logo is not set. Defaults to the site's
+      title.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the navbar container.
+  color:
+    type: select
+    optional: true
+    comment: Background theme color of the navbar.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - white
+        - black
+        - body
+        - body-tertiary
+  id:
+    type: string
+    optional: true
+    comment: >-
+      ID of the navbar, defaults to "navbar-0". The id is used by several child
+      elements, including a color mode switcher, version switcher, and collapse
+      panel.
+  menus:
+    type: string
+    optional: true
+    default: main
+    comment: Name of the menu configuration.
+  size:
+    type: select
+    optional: true
+    comment: Breakpoint of the navbar toggler.
+    default: md
+    options:
+      values:
+        - xs
+        - sm
+        - md
+        - lg
+        - xl
+  style:
+    type: select
+    optional: true
+    default: light
+    comment: Style of the navbar.
+    options:
+      values:
+        - light
+        - dark
+  mode:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag to include a color mode switcher, defaults to "true" when dark mode
+      is enabled.
+  search:
+    type: bool
+    optional: true
+    default: true
+    comment: Flag to include a search input.
+  fixed:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to indicate the navbar should stick to the top.
+    group: partial
+  logo:
+    type: path
+    optional: true
+    comment: >-
+      Address of the logo image, defaults to the parameter "logo" set in the
+      "main" section of the site's parameter configuration.
