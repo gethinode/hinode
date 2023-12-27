@@ -15,14 +15,13 @@
 
 {{ $error := false -}}
 
+<!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "docs" "args" .Params) }}
     {{ errorf "Invalid arguments: %s" .Position -}}
     {{ $error = true }}
 {{ end }}
 
 <!-- Initialize arguments -->
-
-<!-- Validate arguments -->
 {{- $name := .Get "name" | default "" -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
 {{- $file := .Get "file" | default "" -}}
@@ -54,7 +53,7 @@
 {{ $full := .Get "full" | default true -}}
 {{- $class := .Get "class" | default "" -}}
 
-{{- /* If any parameters are missing, print an error and exit */ -}}
+<!-- Main code -->
 {{- if not $error -}}
     {{- /* Force-check if the file exists */ -}}
     {{ $tmp := os.Stat $file }}
