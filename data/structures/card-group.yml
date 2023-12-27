@@ -72,9 +72,9 @@ arguments:
     type: string
     optional: true
     comment: >-
-      Class attributes of the wrapper element, e.g. "p-4 px-xxl-0".
+      Class attributes of the wrapper element, e.g. `p-4 px-xxl-0`.
   responsive:
     type: bool
     optional: true
     comment: >-
-      Flag indicating if the number of columns should be responsive, defaults to "true".
+      Flag indicating if the number of columns should be responsive, defaults to `true`.

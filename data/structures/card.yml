@@ -138,8 +138,8 @@ arguments:
     optional: true
     parent: cascade
     comment: >-
-      Ratio of the thumbnail image, defaults to "16x9" (stacked orientation)
-      or "1x1" (horizontal orientation).
+      Ratio of the thumbnail image, defaults to `16x9` (stacked orientation)
+      or `1x1` (horizontal orientation).
     options:
       values:
         - 1x1
@@ -153,7 +153,7 @@ arguments:
     optional: true
     release: v0.19.0
     comment: >-
-      Alternate text for the thumbnail, uses "title" by default.
+      Alternate text for the thumbnail, uses `title` by default.
   icon:
     type: string
     optional: true

@@ -1,19 +1,19 @@
 <!-- 
-    Displays a carousel of several responsive images (see the image shortcode for more details). Add inner <img> 
-    elements to define individual image slides. The shortcode supports the following arguments:
-    "id":           Optional id of the carousel, defaults to "carousel-" with a sequential number.
-    "ratio":        Optional ratio of the images, either "1x1", "4x3", "16x9", or "21x9". Other values are ignored.
-                    Instead, the original aspect ratio of the image is preserved.
-    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The images themselves are not rotated,
-                    only the crop area is adjusted.
-    "class":        Optional class attribute of the carousel element, e.g. “w-75”.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $id := printf "carousel-%d" .Ordinal -}}
-{{ with .Get "id" }}
-    {{ $id = . }}
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "carousel" "args" .Params ) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
 {{ end }}
 
+<!-- Initialize arguments -->
+{{- $id := .Get "id" | default (printf "carousel-%d" .Ordinal) -}}
 {{ $class := .Get "class" | default "" -}}
 
 {{ $inner := .Scratch.Get "inner" }}
@@ -24,6 +24,7 @@
 {{ end }}
 {{ $items := len (findRE "carousel-item" $inner) -}}
 
+<!-- Main code -->
 <div id="{{ $id }}" class="carousel slide mb-3{{ with $class }} {{ . }}{{ end }}" data-bs-ride="true">
     <div class="carousel-indicators">
         {{ range $index := (seq $items) -}}

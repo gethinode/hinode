@@ -1,0 +1,15 @@
+comment: Defines a hidden panel that can be reveiled by a trigger.
+arguments:
+  id:
+    type: string
+    optional: false
+    comment: >-
+      ID of the collapse element, e.g. `collapse-1`.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the  inner panel element, e.g. `p-3`.
+body:
+  type: string
+  optional: false
+  comment: Inner <img> elements that define the individual image slides.

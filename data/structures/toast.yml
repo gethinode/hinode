@@ -1,11 +1,11 @@
 comment: >-
- Prepares a toast message. Use a trigger to display the message.
+  Prepares a toast message. Use a trigger to display the message.
 arguments:
   id:
     type: string
     optional: true
     comment: >-
-      ID of the toast message, defaults to "toast-message-n" with sequence n.
+      ID of the toast message, defaults to `toast-message-n` with sequence n.
   header:
     type: string
     optional: true
