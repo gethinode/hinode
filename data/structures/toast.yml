@@ -1,5 +1,5 @@
 comment: >-
- Prepares a toast message. Use a trigger to display the message.
+  Prepares a toast message. Use a trigger to display the message.
 arguments:
   id:
     type: string
