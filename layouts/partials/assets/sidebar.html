@@ -71,7 +71,7 @@
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-                    {{ $link := partial "utilities/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+                    {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
                     {{ if $link }}
                         {{ print $link | safeHTML }}
                     {{ else }}
@@ -84,7 +84,7 @@
         <li>
             {{ $class := "sidebar-item text-decoration-none rounded small" }}
             {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-            {{ $link := partial "utilities/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+            {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
             {{ if $link }}
                 {{ print $link | safeHTML }}
             {{ else }}

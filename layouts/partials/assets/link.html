@@ -1,9 +1,20 @@
-{{ $destination := .destination }}
-{{- if not $destination -}}
-    {{- errorf "partial [utilities/link.html] - Missing param 'destination'" -}}
-{{- end -}}
+<!-- 
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
 
-{{- $error := false -}}
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "link" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/link.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $destination := .destination }}
+
 {{- $target := "" -}}
 {{- $rel := "" -}}
 {{- $case := .case | default true }}
@@ -15,6 +26,7 @@
 {{- $text := .text -}}
 {{- $class := .class -}}
 
+<!-- Main code -->
 {{- if $isExternal -}}
     {{- if not $text -}}
         {{- $text = (urls.Parse (absURL $destination)).Host -}}
@@ -33,7 +45,7 @@
     {{- if strings.Contains $destination "#" }}
         {{ $segments := split $destination "#" }}
         {{- if ne (len $segments) 2 }}
-            {{- errorf "partial [utilities/link.html] - Malformed path, expected one anchor '#' only: %s" $destination -}}
+            {{- errorf "partial [assets/link.html] - Malformed path, expected one anchor '#' only: %s" $destination -}}
         {{ else }}
             {{- $destination = index $segments 0 -}}
             {{- $anchor = index $segments 1 -}}
@@ -42,7 +54,7 @@
 
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
     {{- if not $ref -}}
-        {{- errorf "partial [utilities/link.html] - Cannot find page: %s" $destination -}}
+        {{- errorf "partial [assets/link.html] - Cannot find page: %s" $destination -}}
         {{- $error = true -}}
     {{- else -}}
         {{- $destination = $ref.RelPermalink -}}
