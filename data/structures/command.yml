@@ -1,19 +1,19 @@
 comment: >-
-  Generates terminal output for either "bash", "powershell", or "sql" shell
+  Generates terminal output for either `bash`, `powershell`, or `sql` shell
   languages. 
 arguments:
   user:
     type: string
     optional: true
-    comment: User to add to the prompt, e.g. "user".
+    comment: User to add to the prompt, e.g. `user`.
   host:
     type: string
     optional: true
-    comment: Host to add to the prompt, e.g. "localhost".
+    comment: Host to add to the prompt, e.g. `localhost`.
   prompt:
     type: string
     optional: true
-    comment: Prompt override, e.g. "PS C:\Users\User>".
+    comment: Prompt override, e.g. `PS C:\Users\User>`.
   shell:
     type: select
     optional: true
@@ -32,9 +32,9 @@ body:
   type: string
   optional: false
   comment: >-
-    The shell commands and their output. Start a line with "(out)" to specify
+    The shell commands and their output. Start a line with `(out)` to specify
     an output line. Use the following line continuation characters for each
     supported language:
      - bash: backslash symbol
      - PowerShell: backtick symbol
-     - sql: "(con)" line suffix
+     - sql: `(con)` line suffix

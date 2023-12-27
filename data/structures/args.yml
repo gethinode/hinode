@@ -9,7 +9,7 @@ arguments:
     comment: >-
       Name of the data file that contains argument definitions. Supported data
       formats include JSON, TOML, YAML, and XML. You can omit the file
-      extension. The file should reside in the "data/structures" folder.
+      extension. The file should reside in the `data/structures` folder.
   group:
     type: string
     position: 1
@@ -24,4 +24,4 @@ arguments:
     optional: true
     comment: >-
       Flag to filter only arguments that have a parent attribute (either
-      "cascade" or "merge").
+      `cascade` or `merge`).

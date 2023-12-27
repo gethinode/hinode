@@ -10,7 +10,7 @@ arguments:
   src:
     type: string
     optional: false
-    comment: Path or url of the image, e.g. "img/example.jpg".
+    comment: Path or url of the image, e.g. `img/example.jpg`.
   ratio:
     type: string
     optional: true

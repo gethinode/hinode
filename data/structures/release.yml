@@ -5,7 +5,7 @@ arguments:
   version:
     type: string
     optional: false
-    comment: Version string, expects semver notation with a "v" prefix.
+    comment: Version string, expects semver notation with a `v` prefix.
   state:
     type: select
     optional: true

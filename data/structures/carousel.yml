@@ -6,7 +6,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      ID of the carousel, defaults to "carousel-" with a sequential number.
+      ID of the carousel, defaults to `carousel-` with a sequential number.
   ratio:
     type: string
     optional: true

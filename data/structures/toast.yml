@@ -5,7 +5,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      ID of the toast message, defaults to "toast-message-n" with sequence n.
+      ID of the toast message, defaults to `toast-message-n` with sequence n.
   header:
     type: string
     optional: true

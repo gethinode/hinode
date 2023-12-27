@@ -6,22 +6,22 @@ comment: >-
   for older browsers. The image is wrapped in a figure if a caption is provided,
   else the image is wrapped in a div with a ratio constraint.
   
-  If the url starts with "http", the image is retrieved from an external
+  If the url starts with `http`, the image is retrieved from an external
   location. Else, the url is matched with a page resource and site asset (in
   that order). The path of a remote image is rewritten to ensure processed files
   are stored in the final '/img' folder. 
   
-  The partial supports the following bitmap image formats: "png", "jpeg", "gif",
-  "tiff", "bmp", and  "webp". Vector graphics of type "svg" are supported too,
+  The partial supports the following bitmap image formats: `png`, `jpeg`, `gif`,
+  `tiff`, `bmp`, and  `webp`. Vector graphics of type `svg` are supported too,
   although these images do no support additional processing. This means the
-  arguments "ratio" and "portrait" have no effect for vector images. Vector
-  graphics support an optional anchor "#" in their url to denote a symbol
+  arguments `ratio` and `portrait` have no effect for vector images. Vector
+  graphics support an optional anchor `#` in their url to denote a symbol
   reference.
 arguments:
   url:
     type: string
     optional: true
-    comment: Path or url of the image, e.g. "img/example.jpg".
+    comment: Path or url of the image, e.g. `img/example.jpg`.
   src:
     type: string
     optional: true
@@ -101,8 +101,8 @@ arguments:
   wrapper:
     type: string
     optional: true
-    comment: Class attributes of the wrapper element, e.g. "mx-auto".
+    comment: Class attributes of the wrapper element, e.g. `mx-auto`.
   class:
     type: string
     optional: true
-    comment: Class attribute of the inner img element, e.g. "rounded".
+    comment: Class attribute of the inner img element, e.g. `rounded`.

@@ -5,8 +5,8 @@ arguments:
     type: path
     optional: true
     comment: >-
-      Path of the page that defines the card content. You can set "title",
-      "href", "thumbnail" and the inner content individually too.
+      Path of the page that defines the card content. You can set `title`,
+      `href`, `thumbnail` and the inner content individually too.
   title:
     type:
       - string

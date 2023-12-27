@@ -47,7 +47,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      ID of the navbar, defaults to "navbar-0". The id is used by several child
+      ID of the navbar, defaults to `navbar-0`. The id is used by several child
       elements, including a color mode switcher, version switcher, and collapse
       panel.
   menus:
@@ -81,7 +81,7 @@ arguments:
     optional: true
     default: true
     comment: >-
-      Flag to include a color mode switcher, defaults to "true" when dark mode
+      Flag to include a color mode switcher, defaults to `true` when dark mode
       is enabled.
   search:
     type: bool
@@ -98,5 +98,5 @@ arguments:
     type: path
     optional: true
     comment: >-
-      Address of the logo image, defaults to the parameter "logo" set in the
-      "main" section of the site's parameter configuration.
+      Address of the logo image, defaults to the parameter `logo` set in the
+      `main` section of the site's parameter configuration.
