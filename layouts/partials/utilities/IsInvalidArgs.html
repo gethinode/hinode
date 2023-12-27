@@ -36,7 +36,6 @@
 {{ end }}
 
 {{ $group := .group }}
-
 {{ $namedArgs := true }}
 
 {{ if not $error }}
@@ -48,6 +47,13 @@
             {{ $namedArgs = false }}
             {{ range $d := $definitions }}
                 {{ if eq $d.position $key }}{{ $def = $d }}{{ end }}
+            {{ end }}
+        {{ end }}
+
+        {{ if $def }}
+            {{ $groups := slice | append $def.group }}
+            {{ if and $group $def.group }}
+                {{ if not (in $groups $group )}}{{ $def = "" }}{{ end }}
             {{ end }}
         {{ end }}
 
