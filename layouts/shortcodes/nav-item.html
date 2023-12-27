@@ -1,13 +1,19 @@
 <!-- 
-    Defines an individual nav item. The shortcode supports the following arguments:
-    "header"        Required header of the nav item.
-    "class"         Optional class attribute of the inner nav item.
-    "show"          Optional flag to indicate an item should be shown.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
 {{ $current := "" }}
 {{ $error := false -}}
 
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav-item" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{ if not .Parent }}
     {{ errorf "The nav-item shortcode should be contained within a nav shortcode: %s" .Position }}
 {{ else }}
@@ -21,37 +27,14 @@
     {{- if eq (.Parent.Get "fade") "true" -}}
         {{- $fade = true -}}
     {{- end -}}
-
-    {{- $type := .Parent.Get "type" -}}
-
     {{- $header := .Get "header" | default "" -}}
-    {{- if not $header -}}
-        {{- errorf "Missing value for param 'header': %s" .Parent.Position -}}
-    {{- end -}}
-
     {{- $class := .Get "class" | default "" -}}
     {{- $body := trim .Inner " \r\n" | .Page.RenderString -}}
+    {{- $show := .Get "show" | default false -}}
+    {{- $disabled := .Get "disabled" | default false -}}
 
-    {{- $supportedFlags := slice "true" "false" -}}
-    {{- $showParam := "false" -}}
-    {{- $show := false -}}
-    {{- with .Get "show" }}{{ $showParam = . }}{{ end -}}
-    {{- if in $supportedFlags $showParam -}}
-        {{- if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
-    {{- else -}}
-        {{- errorf "Invalid value for param 'show': %s" $showParam -}}
-    {{- end -}}
-
-    {{- $disabledParam := "false" -}}
-    {{- $disabled := false -}}
-    {{- with .Get "disabled" }}{{ $disabledParam = . }}{{ end -}}
-    {{- if in $supportedFlags $disabledParam -}}
-        {{- if eq $disabledParam "true" }}{{ $disabled = true }}{{ else }}{{ $disabled = false }}{{ end -}}
-    {{- else -}}
-        {{- errorf "Invalid value for param 'disabled': %s" $disabledParam -}}
-    {{- end -}}
-
-    {{ $output := partial "assets/nav-item" (dict 
+    <!-- Main code -->
+    {{ $output := partial "assets/nav-item.html" (dict 
         "id" $id
         "parentID" $parent
         "fade" $fade
@@ -60,7 +43,6 @@
         "body" $body
         "show" $show
         "disabled" $disabled
-        "type" $type
         )
     }}
 
@@ -80,7 +62,7 @@
         "body" $body
         "show" $show
         "disabled" $disabled
-        "type" "accordion"
+        "item_type" "accordion"
         )
     }}
 

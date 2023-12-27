@@ -1,98 +1,47 @@
 <!-- 
-    Displays a tab group of multiple items. Each provided page resource is rendered as a tab pane. The shortcode
-    supports the following arguments:
-    "page"          Required context of the current page.
-    "list"          Required array of pages.
-    "title"         Optional title of the tab group.
-    "type"          Optional type of the tab group, either "tabs", "pills" (default), "underline" or "callout".
-    "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
-    "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
-    "pane"          Optional style of the panes, either "none" (default) or "persona".
-    "width"         Optional responsive width of the tab group, either "50" or "100" (default).
-    "wrap"          Optional flag to enable word wrapping of tab titles, defaults to false.
-
     In addition, the following arguments are passed to the individual tabs.
     "class"         Optional class attribute of the tab element, e.g. “w-50”.
     "color":        Optional theme color of the tab, either "primary", "secondary", "success", "danger",
                     "warning", "info", "light", "dark", or "body". By default, no color is specified.
 -->
 
+
+<!-- 
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav" "args" . "group" "partial") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $page := .page -}}
-{{- if ne (printf "%T" $page) "*hugolib.pageState" -}}
-    {{- errorf "partial [assets/nav.html] - Invalid value for param 'page'" -}}
-{{- end -}}
-
-{{- $id := "0" -}}
-{{- with .id -}}
-    {{ $id = . }}
-{{ end }}
-
-{{- $supportedTypes := slice "page.Pages" "resource.Resources" -}}
+{{- $id := .id | default "0" -}}
 {{ $list := .list }}
-{{- if not (in $supportedTypes (printf "%T" $list)) -}}
-    {{- errorf "partial [assets/nav.html] - Invalid value for param 'list'" -}}
-{{- end -}}
-
-{{ $pane := "none" }}
-{{ with .pane }}
-    {{- $supportedPanes := slice "none" "persona" -}}
-    {{- $pane = . }}
-    {{- if not (in $supportedPanes $pane) -}}
-        {{- errorf "partial [assets/nav.html] - Invalid value for param 'pane'" -}}
-    {{- end -}}
-{{ end }}
-
-{{ $supportedWidths := slice 50 100 -}}
-{{ $widthParam := 100 -}}
-{{ $width := 100 }}
-{{ with .width }}{{ $widthParam = . }}{{ end -}}
-{{ if in $supportedWidths $widthParam -}}
-    {{ $width = int $widthParam }}
-{{ else -}}
-    {{ errorf "partial [assets/nav.html] - Invalid value for param 'width': %s" $widthParam -}}
-{{ end -}}
-
+{{ $pane := .pane | default "none" }}
+{{ $width := .width | default 100 }}
 {{- $title := .title -}}
 {{- $class := .class -}}
 {{- $color := .color -}}
 {{- $wrap := .wrap | default false -}}
+{{ $vertical := .vertical | default false }}
+{{ $type := .type | default "pills" }}
+{{- $loading := .loading | default "eager" -}}
 
-{{ $supportedFlags := slice "true" "false" -}}
-{{ $verticalParam := "false" -}}
-{{ $vertical := false }}
-{{ with .vertical }}{{ $verticalParam = . }}{{ end -}}
-{{ if in $supportedFlags $verticalParam -}}
-    {{ if eq $verticalParam "true" }}{{ $vertical = true }}{{ else }}{{ $vertical = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "partial [assets/nav.html] - Invalid value for param 'vertical': %s" $verticalParam -}}
-{{ end -}}
-
-{{ $type := "pills" }}
-{{ with .type }}
-    {{ $type = . -}}
-    {{ $supportedNavTypes := slice "tabs" "pills" "underline" "callout" -}}
-    {{ if $type }}
-        {{ if not (in $supportedNavTypes $type) -}}
-            {{ errorf "partial [assets/nav.html] - Invalid value for param 'type': %s" $type -}}
-        {{ end -}}
-    {{ end -}}
-{{ end -}}
-
-{{- $loading := .loading -}}
-{{- $validSettings := slice "lazy" "eager" -}}
-{{- if $loading -}}
-    {{ if not (in $validSettings $loading) -}}
-        {{- errorf "partial [assets/nav.html] - Invalid value for param 'loading': %s" $loading -}}
-    {{ end -}}
-{{- end -}}
-
+<!-- Main code -->
 <div class="{{ if eq $width 50 }}col-sm-12 col-md-10 col-lg-8 col-xl-6{{ else }}col-12{{ end }} mx-auto">
     {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
     {{ if eq $type "callout" }}
         <div class="d-lg-none">
             <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }} nav-callout">
                 {{- range $index, $item := $list -}}
-                    {{ partial "assets/nav-item" (dict 
+                    {{ partial "assets/nav-item.html" (dict 
                         "id" $index
                         "parentID" $id
                         "fade" false
@@ -101,7 +50,7 @@
                         "body" (or $item.Description $item.Content)
                         "show" false
                         "disabled" false
-                        "type" "accordion"
+                        "item_type" "accordion"
                         "illustration" (partial "utilities/GetIllustration.html" (dict "item" $item "size" "col-12"))
                         )
                     }}
