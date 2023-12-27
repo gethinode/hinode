@@ -21,7 +21,7 @@ arguments:
   url:
     type: string
     optional: true
-    comment: Path or url of the image, e.g. "img/example.jpg"
+    comment: Path or url of the image, e.g. "img/example.jpg".
   src:
     type: string
     optional: true
