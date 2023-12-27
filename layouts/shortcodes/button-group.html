@@ -1,8 +1,19 @@
 <!-- 
-    Displays a group of buttons. Add inner <button> elements for each button. The shortcode supports the following arguments:
-    "aria-label"    Optional assistive label for the button group.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "button-group" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $label := .Get "label" | default (.Get "aria-label") }}
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
 {{ if $input }}
@@ -10,6 +21,9 @@
     {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input }}
 {{ end }}
 
-<div class="btn-group" role="group" {{ with .Get "aria-label" }}aria-label="{{ . }}"{{ end }}>
-    {{ $inner | safeHTML }}
-</div>
+<!-- Main code -->
+{{ if not $error }}
+    <div class="btn-group" role="group" {{ with $label }}aria-label="{{ . }}"{{ end }}>
+        {{ $inner | safeHTML }}
+    </div>
+{{ end }}
