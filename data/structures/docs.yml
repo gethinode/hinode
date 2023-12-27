@@ -36,5 +36,5 @@ arguments:
     type: string
     optional: true
     comment: >-
-      Optional id of the collapse panel holding the code snippet, defaults to
+      ID of the collapse panel holding the code snippet, defaults to
       `docs-collapse-n` with a sequential number `n` starting at `1`.
