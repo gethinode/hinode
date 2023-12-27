@@ -1,18 +1,27 @@
 <!-- 
-    Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 
-    Print the full content of any given file supported by the Chroma syntax highlighter. The shortcode supports the
-    following arguments:
-    "path"          Path of the input file. The path is relative to the `basePath` defined in the `docs` section of the
-                    site's parameters. If the file starts with `./`, the path of the repository is used as base path instead.
-    "lang"          Language to be used by the syntax highlighter.
-    "show"          If unset, shows the panel with the code in collapsed state. By default, the panel is expanded.
-    "full"          If unset, shows the filename only. By default, the full relative path is shown.
-    "id"            Optional id of the collapse panel, defaults to "file-collapse-n" with a sequential number n
-                    starting at 1.
-    "class"         Optional class argument of the tab control.
+    This source code adapts the original embedded shortcode as maintained by the The Bootstrap Authors. It introduces
+    the following modifications:
+     - Added validation of shortcode arguments
+     - Modified the layout
+    
+    The original source code is available on:
+    Source: https://github.com/twbs/bootstrap/blob/main/site/layouts/shortcodes/scss-docs.html
+    Copyright (c) 2011-2023 The Bootstrap Authors. Licensed under The MIT License (MIT).
 -->
 
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "file" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $basePath := .Site.Params.docs.basePath -}}
 {{- $file := .Get "path" | default "" -}}
 {{- if hasPrefix $file "./" -}}
@@ -23,37 +32,13 @@
 
 {{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
 {{- $lang := .Get "lang" | default $extension -}}
-{{- $id := printf "file-collapse-%d" .Ordinal -}}
-{{ with .Get "id" }}
-    {{ $id = . }}
-{{ end }}
-
-{{ $supportedFlags := slice "true" "false" -}}
-{{ $showParam := "true" -}}
-{{ $show := true -}}
-{{ with .Get "show" }}{{ $showParam = . }}{{ end -}}
-{{ if in $supportedFlags $showParam -}}
-    {{ if eq $showParam "true" }}{{ $show = true }}{{ else }}{{ $show = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'show': %s" $showParam -}}
-{{ end -}}
-
-{{ $fullParam := "true" -}}
-{{ $full := true -}}
-{{ with .Get "full" }}{{ $fullParam = . }}{{ end -}}
-{{ if in $supportedFlags $fullParam -}}
-    {{ if eq $fullParam "true" }}{{ $full = true }}{{ else }}{{ $full = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'full': %s" $fullParam -}}
-{{ end -}}
-
+{{- $id := .Get "id" | default (printf "file-collapse-%d" .Ordinal) -}}
+{{ $show := .Get "show" | default true -}}
+{{ $full := .Get "full" | default true -}}
 {{- $class := .Get "class" | default "" -}}
 
-{{- /* If any parameters are missing, print an error and exit */ -}}
-{{- if not $file -}}
-    {{- errorf "%s: %q: Missing required parameters! Got: path=%q!" .Position .Name $file -}}
-{{- else -}}
-
+<!-- Main code -->
+{{- if not $error -}}
     {{- /* Force-check if the file exists */ -}}
     {{ $tmp := os.Stat $file }}
     {{- $content := readFile $file -}}
