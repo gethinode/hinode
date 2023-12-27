@@ -1,24 +1,18 @@
 <!-- 
-    Render a local or remote image with responsive image sizing. Images are resized using default media breakpoints
-    and are converted to webp format. The image is processed using the quality setting specified in the [imaging]
-    section of the main config file (defaults to 75). A fallback image is provided for older browsers. The partial
-    supports the following arguments:
-    "src":          Required relative url of the image, e.g. "img/example.jpg"
-    "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". Leave empty to keep the
-                    original aspect ratio of the image.
-    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only
-                    the crop area is adjusted.
-    "loading":      Optional loading behavior of the image, either "eager" (default) or "lazy". The loading of lazily
-                    loaded images is deferred until the image is within scrolling range of the viewport. This should
-                    reduce the initial loading time of the website. It is recommended to lazily load only those images
-                    that are below the page fold.
-    "wrapper":      Optional class attributes of the wrapper element, e.g. "mx-auto".
-    "class":        Optional class attribute of the inner img element, e.g. "rounded".
-    "title":        Optional alternate text of the image.
-    "caption":      Optional figure caption.
-    "mode":         Optional flag indicating if the image should support color modes.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image" "child" "nav-item" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $url := "" -}}
 {{- $ratio := "" -}}
 {{- $wrapper := "" -}}
@@ -32,49 +26,15 @@
 
 {{- if .IsNamedParams -}}
     {{ $url = .Get "src" | default "" -}}
-    
-    {{- $validRatios := slice "1x1" "3x2" "4x3" "16x9" "21x9" -}}
-    {{ $ratio = .Get "ratio" | default "" -}}
-    {{ if $ratio -}}
-        {{ if not (in $validRatios $ratio) -}}
-            {{ errorf "Invalid value for param 'ratio': %s" .Position -}}
-            {{ $error = true -}}
-        {{ end -}}
-    {{ end -}}
-    
+    {{ $url = .Get "url" | default $url -}}
+    {{ $ratio = .Get "ratio" | default "" -}}    
     {{- $class = .Get "class" | default "" -}}
     {{- $wrapper = .Get "wrapper" | default "" -}}
-
     {{- $loading = .Get "loading" | default "" -}}
-    {{- $validSettings := slice "lazy" "eager" -}}
-    {{- if $loading -}}
-        {{ if not (in $validSettings $loading) -}}
-            {{ errorf "Invalid value for param 'loading': %s" .Position -}}
-            {{ $error = true -}}
-        {{ end -}}
-    {{- end -}}
-    
     {{ $title = .Get "title" | default "" -}}
     {{ $caption = .Get "caption" | default "" -}}
-
-    {{ $supportedFlags := slice "true" "false" -}}
-    {{ $modeParam := "false" -}}
-    {{ with .Get "mode" }}{{ $modeParam = . }}{{ end -}}
-    {{ if in $supportedFlags $modeParam -}}
-        {{ if eq $modeParam "true" }}{{ $mode = true }}{{ else }}{{ $mode = false }}{{ end -}}
-    {{ else -}}
-        {{ errorf "Invalid value for param 'mode': %s" $modeParam -}}
-        {{ $error = true -}}
-    {{ end -}}
-
-    {{ $portraitParam := "false" -}}
-    {{ with .Get "portrait" }}{{ $portraitParam = . }}{{ end -}}
-    {{ if in $supportedFlags $portraitParam -}}
-        {{ if eq $portraitParam "true" }}{{ $portrait = true }}{{ else }}{{ $portrait = false }}{{ end -}}
-    {{ else -}}
-        {{ errorf "Invalid value for param 'portrait': %s" $portraitParam -}}
-        {{ $error = true -}}
-    {{ end -}}
+    {{ with .Get "mode" }}{{ $mode = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{ with .Get "portrait" }}{{ $portrait = partial "utilities/CastBool.html" . }}{{ end -}}
 {{ else -}}
     {{ $url = .Get 0 }}
 {{ end -}}
@@ -84,12 +44,13 @@
     {{- $error = true -}}
 {{ end }}
 
+<!-- Main code -->
 {{- if not $error -}}
     {{- partial "assets/image.html" (dict 
         "url" $url
         "ratio" $ratio
-        "outerClass" $wrapper
-        "innerClass" $class
+        "wrapper" $wrapper
+        "class" $class
         "title" $title
         "caption" $caption
         "mode" $mode

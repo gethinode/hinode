@@ -1,80 +1,37 @@
 <!-- 
-    Render a local or remote image with responsive image sizing. Images are resized using default media breakpoints
-    and are converted to webp format. The image is processed using the quality setting specified in the [imaging]
-    section of the main config file (defaults to 75). A fallback image is provided for older browsers. The image is
-    wrapped in a figure if a caption is provided, else the image is wrapped in a div with a ratio constraint.
-    
-    If the url starts with 'http', the image is retrieved from an external location. Else, the url is matched with a
-    page resource and site asset (in that order). The path of a remote image is rewritten to ensure processed files are
-    stored in the final '/img' folder. 
-    
-    The partial supports the following bitmap image formats: "png", "jpeg", "gif", "tiff", "bmp", and  "webp". Vector
-    graphics of type "svg" are supported too, although these images do no support additional processing. This means
-    the arguments "ratio" and "portrait" have no effect for vector images. Vector graphics support an optional anchor
-    "#" in their url to denote a styling reference.
-    
-    The partial supports the following arguments:
-    "url":          Required path or url of the image, e.g. "img/example.jpg"
-    "mode":         Optional flag indicating if the image should support color modes.
-    "ratio":        Optional ratio of the image, either "1x1", "3x2", "4x3", "16x9", or "21x9". If set, the image is
-                    resized and cropped to match the ratio. Else the original aspect ratio of the image is kept. Not
-                    applicable to vector graphics.
-    "portrait":     Optional flag to adjust the ratio from landscape to portrait. The image itself is not rotated, only
-                    the crop area is adjusted. Not applicable to vector graphics.
-    "loading":      Optional loading behavior of the image, either "eager" (default) or "lazy". The loading of lazily
-                    loaded images is deferred until the image is within scrolling range of the viewport. This should
-                    reduce the initial loading time of the website. It is recommended to lazily load only those images
-                    that are below the page fold.
-    "priority":     Optional fetch priority of the image, either "high", "low", or "auto" (default). The priority
-                    provides a hint to the browser on how it should prioritize the fetch of the image relative to other
-                    images. The implementation is experimental and currently only supported by Chrome, Edge, and Opera.
-                    (https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchpriority#browser_compatibility).
-    "outerClass":   Optional class attribute of the outer div element, e.g. "img-wrap".
-    "innerClass":   Optional class attribute of the inner img element, e.g. "rounded".
-    "title":        Optional alternate text of the image.
-    "caption":      Optional figure caption.
-    "page":         Optional page context, used to match page resources.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/image.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $destination := .destination }}
+
+<!-- Initialize arguments -->
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
-{{- $validRatios := slice "1x1" "3x2" "4x3" "16x9" "21x9" -}}
 {{- $ratio := .ratio -}}
-{{- if $ratio -}}
-    {{ if not (in $validRatios $ratio) -}}
-        {{- errorf "partial [assets/image.html] - Invalid value for param 'ratio'" -}}
-    {{ end -}}
-{{- end -}}
 {{- $portrait := .portrait -}}
 {{- $url := .url -}}
 
-{{- $mode := false -}}
-{{- with .mode }}{{ $mode = . }}{{ end -}}
-{{- $outerClass := .outerClass -}}
-{{- $innerClass := .innerClass -}}
+{{- $mode := .mode -}}
+{{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
+{{- $wrapper := .wrapper -}}
+{{- $class := .class -}}
 {{- $title := .title -}}
 {{- $caption := .caption -}}
-{{- if ne (printf "%T" $mode) "bool" -}}
-    {{- errorf "partial [assets/image.html] - Invalid value for param 'mode'" -}}
-{{- end -}}
-{{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 {{- $page := .page -}}
 
 {{- $loading := .loading -}}
-{{- $validSettings := slice "lazy" "eager" -}}
-{{- if $loading -}}
-    {{ if not (in $validSettings $loading) -}}
-        {{- errorf "partial [assets/image.html] - Invalid value for param 'loading'" -}}
-    {{ end -}}
-{{- end -}}
 {{- $lazy := eq $loading "lazy" -}}
-
 {{- $priority := .priority -}}
-{{- $validPriorities := slice "high" "low" "auto" -}}
-{{- if $priority -}}
-    {{ if not (in $validPriorities $priority) -}}
-        {{- errorf "partial [assets/image.html] - Invalid value for param 'priority'" -}}
-    {{ end -}}
-{{- end -}}
 {{- if eq $priority "auto" }}{{ $priority = "" }}{{ end -}}
 
 {{- define "partials/image-portrait.html" -}}
@@ -137,7 +94,6 @@
     {{- return $fallback -}}
 {{- end -}}
 
-
 <!-- Generate a image set of type webp -->
 {{- define "partials/image-scaled.html " -}}
     {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -198,8 +154,8 @@
     {{- $ratio := .ratio -}}
     {{- $portrait := .portrait -}}
     {{- $url := .url -}}
-    {{- $outerClass := .outerClass -}}
-    {{- $innerClass := .innerClass -}}
+    {{- $wrapper := .wrapper -}}
+    {{- $class := .class -}}
     {{- $title := .title -}}
     {{- $caption := .caption -}}
     {{- $fallbackURL := "" -}}
@@ -234,7 +190,7 @@
         {{- $img := "" -}}
         {{ with $res }}
             {{ $img = $res.resource }}
-            {{ if $res.mirror }}{{ $innerClass = printf "%s mirrorred" $innerClass }}{{ end }}
+            {{ if $res.mirror }}{{ $class = printf "%s mirrorred" $class }}{{ end }}
         {{ end }}
         {{- if $img -}}
             {{- $fallback := partial "partials/image-default.html" (dict "img" $img "ratio" $ratio "portrait" $portrait) -}}
@@ -249,7 +205,7 @@
 
     {{- range $none := $modes -}}
         {{- if ne $none $mode -}}
-            {{- $outerClass = printf "%s d-none-%s" (or $outerClass "") $none -}}
+            {{- $wrapper = printf "%s d-none-%s" (or $wrapper "") $none -}}
         {{- end -}}
     {{- end -}}
 
@@ -268,11 +224,11 @@
     {{- end }}
 
     {{- if $caption -}}
-        <figure {{ with $outerClass }}class="{{ . }}"{{ end }}>
+        <figure {{ with $wrapper }}class="{{ . }}"{{ end }}>
     {{ end }}
-    <div class="{{ if not $caption }}{{ $outerClass }}{{ end }}">        
+    <div class="{{ if not $caption }}{{ $wrapper }}{{ end }}">        
         {{- if not $anchor -}}
-            <img class="img-fluid {{ $innerClass }}"
+            <img class="img-fluid {{ $class }}"
                 src="{{ $fallbackURL }}"
                 {{ if $lazy }}loading="lazy"{{ end }}
                 {{ with $priority }}fetchpriority="{{ . }}"{{ end }}
@@ -281,7 +237,7 @@
                 {{ with $width }}width="{{ . }}"{{ end }}
                 {{ with $title }}alt="{{ . }}"{{ end }}>
         {{- else }}
-            <svg class="{{ $innerClass }}">
+            <svg class="{{ $class }}">
                 <use href="{{ $fallbackURL }}#{{ $anchor }}"></use>
             </svg>
         {{ end }}
@@ -292,14 +248,13 @@
     {{- end -}}
 {{- end -}}
 
-
 <!-- Initiate the regular or color-mode image -->
 {{ $params := dict }}
 {{- $params = merge $params (dict
     "ratio" $ratio
     "portrait" $portrait
-    "outerClass" $outerClass
-    "innerClass" $innerClass
+    "wrapper" $wrapper
+    "class" $class
     "title" $title
     "caption" $caption
     "lazy" $lazy

@@ -12,7 +12,7 @@
     {{ $padding := 5 }}
 
     {{- if $thumbnail -}}
-        {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
+        {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100" "title" $title) -}}
     {{- else if $icon -}}
         <div class="text-secondary fw-bold">
             {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-10x" $icon)) -}}
