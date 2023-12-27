@@ -1,0 +1,27 @@
+comment: >-
+  Display a code example and render a preview of the same input. The shortcode
+  accepts the languages supported by Hugo's highlight function.
+arguments:
+  lang:
+    type: string
+    optional: true
+    default: markdown
+    comment: Language used to display the code.
+  show_markup:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the markup should be output in the HTML.
+  show_preview:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the preview should be output in the HTML.
+  class:
+    type: string
+    optional: true
+    comment: Class attributes of the element's container.
+body:
+  type: string
+  optional: false
+  comment: The example input.
