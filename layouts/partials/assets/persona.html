@@ -1,30 +1,18 @@
 <!-- 
-    Displays a custom persona card. Either specify a valid path, or set the arguments title, href, content, and
-    thumbnail individually. The latter arguments override any page attributes.
-    
-    The shortcode supports the following arguments:
-    "path"          Optional path of the page, override with other parameters.
-    "title"         Required title of the card.
-    "href"          Optional address for the button or hyperlink.
-    "class"         Optional class attribute of the card element, e.g. “w-50”.
-    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
-                    color is specified.
-    "content"       Optional content of the card.
-    "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
+    Copyright © 2023 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-<!-- Inline partial to render the card's body -->
-{{- define "partials/persona-body.html" -}}
-    {{- $title := .title -}}
-    {{- $href := .href -}}
-    {{- $color := .color -}}
-    {{- $content := .content -}}
-    
-    <h3>{{ $title }}</h3>
-    {{ with $content }}<p>{{ . }}</p>{{ end -}}
-{{- end -}}
+{{ $error := false }}
 
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "persona" "args" . "group" "partial") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $page := "" }}
 {{- if .path }}
     {{- $page = site.GetPage .path }}
@@ -38,14 +26,7 @@
 {{- $content := .content -}}
 {{- $thumbnail := .thumbnail -}}
 
-{{- $color := "" -}}
-{{- with .color }}{{ $color = . }}{{ end -}}
-{{- if $color -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
-    {{- if not (in $supportedColors $color) -}}
-        {{- errorf "partial [assets/persona.html] - Invalid value for param 'color': %s" $color -}}
-    {{- end -}}
-{{- end -}}
+{{- $color := .color -}}
 
 {{- with $page -}}
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
@@ -55,37 +36,68 @@
 {{- end -}}
 
 {{- $class := .class -}}
-
 {{- $loading := .loading -}}
-{{- $validSettings := slice "lazy" "eager" -}}
-{{- if $loading -}}
-    {{ if not (in $validSettings $loading) -}}
-        {{- errorf "partial [assets/persona.html] - Invalid value for param 'loading': %s" $loading -}}
-    {{ end -}}
+{{- $tab := site.Params.main.externalLinks.tab -}}
+{{- $isExternal := ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
+{{- $target := "" -}}
+{{- $rel := "" -}}
+{{- if and $isExternal $tab -}}
+    {{- $target = "_blank" -}}
+    {{- $rel = "noopener noreferrer" -}}
 {{- end -}}
 
-<div class="d-none d-md-block">
-    <div class="persona position-relative row mt-5 align-middle p-3">
-        <div class="col-2">
-            <div class="position-absolute top-50 start-0 translate-middle-y col-4 ps-3">
-                {{- if $thumbnail -}}
-                    {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "ratio" "1x1" "innerClass" "rounded-5" "loading" $loading) -}}
-                {{ end }}
+<!-- Inline partial to render the card's body -->
+{{- define "partials/persona-body.html" -}}
+    {{- $title := .title -}}
+    {{- $content := .content -}}
+    
+    <h3>{{ $title }}</h3>
+    {{ with $content }}<p>{{ . }}</p>{{ end -}}
+{{- end -}}
+
+<!-- Main code -->
+{{- if not $error -}}
+    {{ with $href }}
+        <a href="{{ . }}" aria-label="{{ $title | safeHTML }}"
+            {{- with $target }} target="{{ . }}"{{ end }}
+            {{ with $rel }} rel="{{ . }}"{{ end -}}
+        >
+    {{ end }}
+    <div class="d-none d-md-block">
+        <div class="persona position-relative row mt-5 align-middle p-3">
+            <div class="col-2">
+                <div class="position-absolute top-50 start-0 translate-middle-y col-4 ps-3">
+                    {{- if $thumbnail -}}
+                        {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "ratio" "1x1" "innerClass" "rounded-5" "loading" $loading) -}}
+                    {{ end }}
+                </div>
             </div>
-        </div>
-        <div class="col-10 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 fs-md-5 fs-6 pe-5 pb-3">
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-9">
-                    {{- partial "persona-body.html" (dict "title" $title "href" $href "color" $color "content" $content) -}}
+            <div class="col-10 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 fs-md-5 fs-6 pe-5 pb-3">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-9">
+                        {{- partial "persona-body.html" (dict "title" $title "content" $content) -}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="d-md-none">
+        <div class="persona position-relative row mt-5 align-middle p-3 ptw-5">
+            <div class="col-12">
+                <div class="position-absolute top-25 start-50 translate-middle col-6">
+                    {{- if $thumbnail -}}
+                        {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "ratio" "1x1" "innerClass" "rounded-5" "loading" $loading) -}}
+                    {{ end }}
+                </div>
+            </div>
+            <div class="col-12 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 ptw-lg-5 ptw-3 ptw-sm-4 fs-md-5 fs-6 pb-3">
                 <div class="p-3">
+                    {{- partial "persona-body.html" (dict "title" $title "content" $content) -}}
+                </div>
             </div>
         </div>
     </div>
-</div>
+    {{ if $href }}</a>{{ end }}
+{{ end }}
