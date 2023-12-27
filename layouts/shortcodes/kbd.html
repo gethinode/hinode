@@ -24,6 +24,7 @@
     {{ $title = .Get 0 }}
 {{ end }}
 
+<!-- Main code -->
 {{- if not $error }}
     <kbd {{ if or $color $class }}class="{{ with $color }}text-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}"{{ end }}>{{ $title | plainify }}</kbd>
 {{ end -}}
