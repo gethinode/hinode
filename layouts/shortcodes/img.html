@@ -15,7 +15,7 @@
 <!-- Initialize arguments -->
 {{ if not .Parent }}
     {{ errorf "The img shortcode should be contained within a carousel shortcode: %s" .Position }}
-{{ else }}
+{{ else if not $error }}
     {{- $src := .Get "src" | default "" -}}
     {{- $caption := .Get "caption" | default "" -}}
     {{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
