@@ -22,10 +22,10 @@
     {{- $body := .Inner -}}
     {{- if $open -}}
         {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
-        {{- $body = (replace .Inner $pattern "") | .Page.RenderString | safeHTML }}
+        {{- $body = (replace .Inner $pattern "") }}
     {{- end -}}
 
     <div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
-        {{- $body -}}
+        {{- $body | safeHTML -}}
     </div>
 {{ end }}
