@@ -6,7 +6,7 @@
 
 <!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card-group" "child" "card" "args" .) }}
-    {{- errorf "partial [assets/card.html] - Invalid arguments" -}}
+    {{- errorf "partial [assets/card-group.html] - Invalid arguments" -}}
 {{ end }}
 
 <!-- Initialize arguments and default values -->

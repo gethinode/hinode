@@ -31,18 +31,20 @@
 {{- if eq $lang "hugo" }}{{ $lang = "markdown" }}{{ end -}}
 
 <!-- Main code -->
-<div class="rounded border mb-3">
-    {{- if eq $show_preview true -}}
-        <div {{ with $id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $class }} {{ . }}{{ end }}">
-            {{- $content | .Page.RenderString -}}
-        </div>
-    {{- end -}}
-    {{- if eq $show_markup true -}}
-        <div class="d-flex align-items-center ps-3 pe-3 py-1{{ if $show_preview }} border-top{{ else }} rounded-top{{ end }} border-bottom syntax-highlight">
-            <small class="font-monospace text-body text-uppercase">{{- $lang -}}</small>
-        </div>
-        <div class="rounded-bottom syntax-highlight border-none">
-            {{- highlight (trim $content "\r\n") $lang "" -}}
-        </div>
-    {{- end -}}
-</div>
+{{ if not $error }}
+    <div class="rounded border mb-3">
+        {{- if eq $show_preview true -}}
+            <div {{ with $id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $class }} {{ . }}{{ end }}">
+                {{- $content | .Page.RenderString | safeHTML -}}
+            </div>
+        {{- end -}}
+        {{- if eq $show_markup true -}}
+            <div class="d-flex align-items-center ps-3 pe-3 py-1{{ if $show_preview }} border-top{{ else }} rounded-top{{ end }} border-bottom syntax-highlight">
+                <small class="font-monospace text-body text-uppercase">{{- $lang -}}</small>
+            </div>
+            <div class="rounded-bottom syntax-highlight border-none">
+                {{- highlight (trim $content "\r\n") $lang "" | safeHTML -}}
+            </div>
+        {{- end -}}
+    </div>
+{{ end }}

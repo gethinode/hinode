@@ -13,30 +13,25 @@
 {{ end }}
 
 <!-- Initialize arguments -->
-{{- $responsiveVals := slice "none" "sm" "md" "lg" "xl" "xxl" -}}
-{{- $responsive := intersect .Params $responsiveVals -}}
-{{- $main := complement $responsive .Params -}}
-
-{{- if in $responsive "none" -}}
-    {{- $responsive = slice -}}
-{{- else if not $responsive -}}
-    {{ $responsive = slice -}}
-{{- end -}}
+{{ $breakpoint := "" }}
+{{ $class := "" }}
+{{- if .IsNamedParams -}}
+    {{ $breakpoint = .Get "breakpoint" }}
+    {{ $class = .Get "class" | default "" }}
+{{ else }}
+    {{ $breakpoint = .Get 0 }}
+{{ end }}
+{{ if eq $breakpoint "none" }}{{ $breakpoint = "" }}{{ end }}
 
 <!-- Main code -->
 {{- $input := .Inner | .Page.RenderString }}
 {{- $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" -}}
 {{- $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" -}}
 {{- $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" -}}
-{{- $class := delimit $main " " -}}
 {{- $old := "<table>" -}}
 {{- $new := printf "<table class=\"table %s\">" $class -}}
 {{ $input := replace $input $old $new -}}
-{{ $attr := "" }}
-{{ range $responsive }}
-    {{ $attr = printf "%s table-responsive-%s" $attr . }}
-{{ end }}
 
-{{- if $responsive }}<div class="table-responsive {{ trim $attr " " }}">{{ end -}}
+<div class="{{- with $breakpoint }}table-responsive table-responsive-{{ . }}{{ end -}}">
 {{ $input | safeHTML }}
-{{- if $responsive }}</div>{{ end -}}
+</div>

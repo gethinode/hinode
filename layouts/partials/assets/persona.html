@@ -8,7 +8,7 @@
 
 <!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "persona" "args" . "group" "partial") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ errorf "partial [assets/persona.html] - Invalid arguments" -}}
     {{ $error = true }}
 {{ end }}
 
