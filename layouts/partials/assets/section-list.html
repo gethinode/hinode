@@ -32,7 +32,7 @@
 {{- $layout := "card" -}}
 {{- $pane := "none" -}}
 {{- $type := "pills" -}}
-{{- $vertical := "false" -}}
+{{- $vertical := false -}}
 {{- $width := 100 -}}
 {{- $ratio := "" -}}
 {{- $wrap := false -}}
@@ -58,11 +58,11 @@
     {{- with index . "layout" }}{{ $layout = . }}{{ end -}}
     {{- with index . "pane" }}{{ $pane = . }}{{ end -}}
     {{- with index . "type" }}{{ $type = . }}{{ end -}}
-    {{- with index . "vertical" }}{{ $vertical = . }}{{ end -}}
+    {{- with index . "vertical" }}{{ $vertical = partial "utilities/CastBool.html" . }}{{ end -}}
     {{- with index . "width" }}{{ $width = . }}{{ end -}}
     {{- with index . "kind" }}{{ $kind = . }}{{ end -}}
     {{- with index . "ratio" }}{{ $ratio = . }}{{ end -}}
-    {{- with index . "wrap" }}{{ $wrap = . }}{{ end -}}
+    {{- with index . "wrap" }}{{ $wrap = partial "utilities/CastBool.html" . }}{{ end -}}
 {{- end -}}
 
 {{ if isset $page.Params "nested" }}
@@ -148,6 +148,8 @@
         <div class="container-xxl {{ $wrapper }}">
             {{- partial "assets/section-header.html" $params -}}
             
+            {{ warnf "[%s] vertical: %t" $page.Title $vertical}}
+
             {{- $params := (dict 
                 "page" $page
                 "list" $list
