@@ -148,8 +148,6 @@
         <div class="container-xxl {{ $wrapper }}">
             {{- partial "assets/section-header.html" $params -}}
             
-            {{ warnf "[%s] vertical: %t" $page.Title $vertical}}
-
             {{- $params := (dict 
                 "page" $page
                 "list" $list
