@@ -30,7 +30,7 @@
     {{- $mode := .mode -}}
     {{- $title := .title -}}
     {{- $loading := .loading -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "outerClass" $style "mode" $mode "loading" $loading) -}}
+    {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "wrapper" $style "mode" $mode "loading" $loading) -}}
 {{- end -}}
 
 {{- $page := .page -}}
