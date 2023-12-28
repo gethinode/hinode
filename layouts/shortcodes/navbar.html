@@ -17,7 +17,7 @@
 {{ $path := .Get "path" }}
 {{ $page := "" }}
 {{ if $path }}{{ $page = .Site.GetPage $path }}{{ end }}
-{{ if not $page }}
+{{ if and $path (not $page) }}
     {{ errorf "Cannot find page '%s': %s" $path .Position -}}
     {{ $error = true -}}
 {{ end }}
