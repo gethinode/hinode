@@ -86,8 +86,9 @@
                 {{ $actual = "int" }}
             {{ else if and (in $expected "float") (findRE `^(?:[1-9]\d*|0)?(?:\.\d+)?$` $val) }}
                 {{ $actual = "float" }}
-            {{ else if and (in $expected "string") (in (slice "bool" "int" "float" "float64") $actual) }}
+            {{ else if and (in $expected "string") (in (slice "bool" "int" "int64" "float" "float64") $actual) }}
                 {{ $actual = "string" }}
+                {{ $val = string $val }}
             {{ end }}
 
             {{ if and $val (not (in $expected $actual)) }}
