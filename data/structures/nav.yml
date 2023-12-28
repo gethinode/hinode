@@ -58,12 +58,12 @@ arguments:
   width:
     type: select
     optional: true
-    default: 100
+    default: "100"
     comment: Responsive width of the tab group.
     options:
       values:
-        - 50
-        - 100
+        - "50"
+        - "100"
     group: partial
   loading:
     type: select
