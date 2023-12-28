@@ -7,7 +7,7 @@
 {{ $error := false -}}
 
 <!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "link" "args" .Params ) }}
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "kbd" "args" .Params ) }}
     {{ errorf "Invalid arguments: %s" .Position -}}
     {{ $error = true }}
 {{ end }}
