@@ -19,6 +19,7 @@
       "hr",
       "html",
       "i",
+      "iframe",
       "img",
       "input",
       "li",
@@ -39,14 +40,8 @@
       "sub",
       "sup",
       "svg",
-      "table",
-      "tbody",
-      "td",
-      "th",
-      "thead",
       "time",
       "title",
-      "tr",
       "ul",
       "use"
     ],
@@ -379,8 +374,6 @@
       "syntax-highlight",
       "tab-content",
       "tab-pane",
-      "table",
-      "table-responsive",
       "tag-link",
       "text-bg-body",
       "text-bg-body-tertiary",
@@ -440,7 +433,8 @@
       "visually-hidden",
       "vr",
       "w-100",
-      "w-50"
+      "w-50",
+      "youtube-embedded"
     ],
     "ids": [
       "-theme",
