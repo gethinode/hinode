@@ -39,13 +39,18 @@ arguments:
     optional: true
     comment: Maximum number of cards to display.
   cols:
-    type: int
+    type: select
     optional: true
-    default: 3
+    default: "3"
     comment: Number of grid columns.
     options:
-      min: 1
-      max: 5
+      values:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "auto"
   paginate:
     type: bool
     optional: true
