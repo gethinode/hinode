@@ -75,7 +75,6 @@
                             "color" $color
                             "content" (partial "utilities/GetDescription.html" $item)
                             "thumbnail" $thumbnail
-                            "loading" $loading
                         ) -}}
                     {{- else -}}
                         {{ $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) }}
