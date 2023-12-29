@@ -85,7 +85,11 @@ arguments:
     comment: >-         
       Assistive label for the button or badge. The label is applied
       to the badge instead of the button when a badge has been defined.
-      The default value of the button aria-label is its title.
+  aria-label:
+    type: string
+    optional: true
+    comment: Alias for label.
+    group: shortcode
   tooltip:
     type: string
     optional: true
