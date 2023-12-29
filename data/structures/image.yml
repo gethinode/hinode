@@ -21,7 +21,10 @@ arguments:
   url:
     type: string
     optional: true
-    comment: Path or url of the image, e.g. `img/example.jpg`.
+    comment: >-
+      Path or url of the image, e.g. `img/example.jpg`. Images with multiple
+      color modes are expected to have a basename that ends with either `-dark`
+      or `-light`.
   src:
     type: string
     optional: true
@@ -39,9 +42,12 @@ arguments:
     type: bool
     default: false
     optional: true
-    comment: Flag indicating if the image should support color modes.
+    comment: >-
+      Flag indicating if the image should support color modes. If set, the
+      shortcode searches for images that having a matching color-mode suffix
+      such as `-light` or `-dark`.
   ratio:
-    type: string
+    type: select
     optional: true
     comment: >-
       Ratio of the image. If set, the image is resized and cropped to match the
@@ -62,6 +68,7 @@ arguments:
       Flag to adjust the ratio from landscape to portrait. The image itself is
       not rotated, only the crop area is adjusted. Not applicable to vector
       graphics.
+    release: v0.18.3
   loading:
     type: select
     default: eager
@@ -75,6 +82,7 @@ arguments:
       values:
         - eager
         - lazy
+    release: v0.21.0
   priority:
     type: select
     default: auto
@@ -102,6 +110,7 @@ arguments:
     type: string
     optional: true
     comment: Class attributes of the wrapper element, e.g. `mx-auto`.
+    release: v0.18.3
   class:
     type: string
     optional: true
