@@ -19,7 +19,6 @@
       "hr",
       "html",
       "i",
-      "iframe",
       "img",
       "input",
       "li",
@@ -433,8 +432,7 @@
       "visually-hidden",
       "vr",
       "w-100",
-      "w-50",
-      "youtube-embedded"
+      "w-50"
     ],
     "ids": [
       "-theme",

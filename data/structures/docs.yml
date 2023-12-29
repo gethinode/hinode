@@ -30,11 +30,15 @@ arguments:
     optional: true
     default: true
     comment: >-
-      If unset, shows the filename only. By default, the full relative path is
-      shown.
+      If unset, shows the filename only. By default, the entire path (relative
+      to the base path) is shown.
   id:
     type: string
     optional: true
     comment: >-
       ID of the collapse panel holding the code snippet, defaults to
       `docs-collapse-n` with a sequential number `n` starting at `1`.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the tab control that wraps the docs element.
