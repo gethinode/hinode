@@ -2,11 +2,17 @@ comment: >-
   Display a code example and render a preview of the same input. The shortcode
   accepts the languages supported by Hugo's highlight function.
 arguments:
+  id:
+    type: string
+    optional: true
+    comment: Identifier of the element’s container.
   lang:
     type: string
     optional: true
     default: markdown
-    comment: Language used to display the code.
+    comment: >-
+      Language used to display the code. Use `hugo` to process Hugo (escaped)
+      shortcodes.
   show_markup:
     type: bool
     optional: true
