@@ -6,7 +6,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      ID of the accordion, defaults to “accordion-n” with a sequential number n.
+      ID of the accordion, defaults to `accordion-n` with a sequential number n.
   always-open:
     type: bool
     optional: true
@@ -15,4 +15,4 @@ arguments:
   class:
     type: string
     optional: true
-    comment: Class attribute of the accordion, e.g. “w-50”.
+    comment: Class attribute of the accordion, e.g. `w-50`.
