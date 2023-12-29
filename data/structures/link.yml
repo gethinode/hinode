@@ -25,8 +25,8 @@ arguments:
     position: 0
     optional: true
     comment: >-
-       Reference to either an external link (if it starts with http), a named
-       link (if it can be found in params.links), or internal reference.
+       Reference to either an external link (if it starts with `http`), a named
+       link (if it can be found in `params.links`), or internal reference.
        Both external and internal references may include an anchor `#`.
   name:
     type: string
