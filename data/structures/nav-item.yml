@@ -9,7 +9,7 @@ arguments:
   parentID:
     type: string
     optional: false
-    comment: ID of the parent (e.g. nav control).
+    comment: Identifier of the parent (e.g. nav control).
     group: partial
   header:
     type: string

@@ -48,7 +48,7 @@ arguments:
   id:
     type: string
     optional: true
-    comment: ID of the button, to be used in the DOM.
+    comment: Identifier of the button, to be used in the DOM.
   state:
     type: select
     optional: true
@@ -154,7 +154,7 @@ arguments:
   toast:
     type: string
     optional: true
-    comment: ID of the toast to display when the button is clicked.
+    comment: Identifier (ID) of the toast to display when the button is clicked.
   clipboard:
     type:
       - string
