@@ -16,7 +16,13 @@
 {{ $color := .Get "color" | default "danger" -}}
 {{ $icon := .Get "icon" | default "" }}
 {{ $type := .Get "type" | default "" -}}
-{{ if eq $type "danger" }}{{ $icon = "fas triangle-exclamation" }}{{ else if eq $type "info" }}{{ $icon = "fa lightbulb" }}{{ end }}
+{{ if eq $type "danger" }}
+    {{ $icon = "fas triangle-exclamation" }}
+    {{ $color = "danger" }}
+{{ else if eq $type "info" }}
+    {{ $icon = "fa lightbulb" }}
+    {{ $color = "info" }}
+{{ end }}
 {{ with $icon }}
     {{ $icon = partial "assets/icon.html" (dict "icon" (printf "%s fa-2x fa-fw" .)) }}
 {{ end }}
