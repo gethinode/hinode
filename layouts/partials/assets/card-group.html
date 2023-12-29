@@ -84,12 +84,13 @@
             {{- $params := (dict
                 "class" (printf "h-100 %s" $class)
                 "color" $color
-                "padding" $padding
-                "header" $header
                 "footer" $footer
-                "orientation" $orientation
-                "ratio" $ratio
+                "gutter" $gutter
+                "header" $header
                 "loading" $loading
+                "orientation" $orientation
+                "padding" $padding
+                "ratio" $ratio
             ) -}}
             {{- $params = merge $params $element }}
 
