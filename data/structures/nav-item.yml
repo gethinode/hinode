@@ -1,10 +1,10 @@
 comment: >-
-  Defines an individual nav item.
+  Defines an individual item.
 arguments:
   id:
     type: string
     optional: true
-    comment: Identification of the nav-item.
+    comment: Identification of the item.
   parentID:
     type: string
     optional: false
@@ -13,12 +13,12 @@ arguments:
   header:
     type: string
     optional: false
-    comment: Header of the nav item.
+    comment: Header of the item.
   show:
     type: bool
     optional: true
     comment: >-
-      Flag to indicate the nav item should be shown. Only one can be shown at a
+      Flag to indicate if the item should be shown. Only one can be shown at a
       time.
   disabled:
     type: bool
@@ -32,13 +32,13 @@ arguments:
   class:
     type: string
     optional: true
-    comment: Class attribute of the nav item.
+    comment: Class attribute of the item.
   body:
     type:
       - string
       - template.HTML
     optional: true
-    comment: The body content of the nav-item, supports Markdown and HTML (if enabled).
+    comment: The body content of the item, supports Markdown and HTML (if enabled).
     group: partial
   item_type:
     type: select
@@ -51,5 +51,5 @@ arguments:
     group: partial
 body:
   optional: false
-  comment: Content of the nav item.
+  comment: Content of the item.
   group: shortcode
