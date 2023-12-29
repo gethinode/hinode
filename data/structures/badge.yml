@@ -3,7 +3,7 @@ comment: >-
 arguments:
   title:
     type: string
-    optional: true
+    optional: false
     comment: >-
       Title of the badge.
   class:
