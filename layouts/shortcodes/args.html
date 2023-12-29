@@ -63,16 +63,15 @@
             {{ $max := "" }}
             {{ if and $val.options.values (eq $type "select") }}
                 {{ $comment = printf "%s %s: [%s]." $comment (T "supportedValues") (delimit $val.options.values ", ") }}
-            {{ else if and $val.options.min (in (slice "int" "float" "float64") $type) }}
-                {{ $min = $val.options.min }}
-            {{ else if and $val.options.max (in (slice "int" "float" "float64") $type) }}
-                {{ $max = $val.options.max }}
+            {{ else if in (slice "int" "float" "float64") $type }}
+                {{ if eq (printf "%T" $val.options.min) "int" }}{{ $min = int $val.options.min }}{{ end }}
+                {{ if eq (printf "%T" $val.options.max) "int" }}{{ $max = int $val.options.max }}{{ end }}
             {{ end }}
-            {{ if and $min $max }}
+            {{ if and (eq (printf "%T" $min) "int") (eq (printf "%T" $max) "int") }}
                 {{ $comment = printf "%s %s: [%d, %d]." $comment (T "supportedValues") $min $max }}
-            {{ else if $min }}
+            {{ else if (eq (printf "%T" $min) "int") }}
                 {{ $comment = printf "%s %s: >=%d." $comment (T "supportedValues") $min }}
-            {{ else if $max }}
+            {{ else if (eq (printf "%T" $max) "int") }}
                 {{ $comment = printf "%s %s: <=%d." $comment (T "supportedValues") $max }}
             {{ end }}
 
