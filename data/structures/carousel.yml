@@ -1,14 +1,14 @@
 comment: >-
   Displays a carousel of several responsive images (see the image shortcode for
-  more details). Add inner <img> elements to define individual image slides.
+  more details). Add inner `img` elements to define individual image slides.
 arguments:
   id:
     type: string
     optional: true
     comment: >-
-      ID of the carousel, defaults to `carousel-` with a sequential number.
+      ID of the carousel, defaults to `carousel-n` with a sequential number `n`.
   ratio:
-    type: string
+    type: select
     optional: true
     comment: >-
       Ratio of the images. If set, the images are resized and cropped to match the
@@ -28,11 +28,12 @@ arguments:
       Flag to adjust the ratio from landscape to portrait. The images themselves
       are not rotated, only the crop area is adjusted. Not applicable to vector
       graphics.
+    release: v0.18.3
   class:
     type: string
     optional: true
-    comment: Class attribute of the carousel element, e.g. “w-75”.
+    comment: Class attribute of the carousel element, e.g. `w-75`.
 body:
   type: string
   optional: false
-  comment: Inner <img> elements that define the individual image slides.
+  comment: Inner `img` elements that define the individual image slides.
