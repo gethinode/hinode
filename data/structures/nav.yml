@@ -44,7 +44,7 @@ arguments:
   class:
     type: string
     optional: true
-    comment: Class attribute of the tab group, e.g. “nav-fill”.
+    comment: Class attribute of the tab group, e.g. `nav-fill`.
   pane:
     type: select
     optional: true
