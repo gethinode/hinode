@@ -18,7 +18,7 @@ arguments:
     type: select
     optional: true
     default: bash
-    comment: Type of shell
+    comment: Type of shell.
     options:
       values:
         - bash
