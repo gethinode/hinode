@@ -6,7 +6,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      Class attribute of the wrapping element, e.g. “text-center”.
+      Class attribute of the wrapping element, e.g. `text-center`.
   color:
     type: select
     optional: true
