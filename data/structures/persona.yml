@@ -16,7 +16,7 @@ arguments:
   class:
     type: string
     optional: true
-    comment: Class attribute of the card element, e.g. “w-50”.
+    comment: Class attribute of the card element, e.g. `w-50`.
   color:
     type: select
     optional: true
