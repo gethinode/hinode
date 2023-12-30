@@ -132,4 +132,6 @@ home = ["HTML", "RSS", "REDIR"]
     path = "github.com/gethinode/mod-leaflet"
   [[module.imports]]
     path = "github.com/gethinode/mod-lottie"
+  [[module.imports]]
+    path = "github.com/gethinode/mod-utils"
 # toml-docs-end modules
