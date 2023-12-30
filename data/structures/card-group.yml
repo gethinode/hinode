@@ -11,11 +11,11 @@ arguments:
       - '*hugolib.pageForShortcode'
     optional: true
     comment: Context of the current page.
+    group: partial
   title:
     type: string
     optional: true
-    comment: >-
-      Title of the card, replaces the title of the referenced page (if any).
+    comment: Title of the card group.
   gutter:
     type: int
     optional: true
@@ -24,20 +24,24 @@ arguments:
     options:
       min: 0
       max: 5
+    release: v0.19.0
   list:
     type:
       - page.Pages
       - resource.Resources
     optional: true
     comment: Array of pages to be rendered as cards.
+    group: partial
   cards:
     type: string
     optional: true
     comment: String of rendered cards.
+    group: partial
   max:
     type: int
     optional: true
     comment: Maximum number of cards to display.
+    group: partial
   cols:
     type: select
     optional: true
@@ -51,23 +55,27 @@ arguments:
         - "4"
         - "5"
         - "auto"
+    release: v0.19.0
   paginate:
     type: bool
     optional: true
     comment: >-
       Flag indicating if pagination should be added to the card group, if the
       list exceeds the maximum number of cards to display. 
+    group: partial
   href:
     type: string
     optional: true
     comment: >-
-      address for the button or hyperlink. If set, a button is added if the
+      Address for the button or hyperlink. If set, a button is added if the
       list exceeds the maximum number of cards to display.
+    group: partial
   hrefTitle:
     type: string
     optional: true
     comment: >-
       Title of the button or hyperlink as companion to href.
+    group: partial
   separator:
     type: bool
     optional: true

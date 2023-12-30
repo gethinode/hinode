@@ -9,7 +9,7 @@ arguments:
     optional: true
     comment: >-
       Theme color of the highlight. By default, the highlight uses the color of
-      the HTML mark function.
+      the HTML mark function (usually yellow).
     options:
       values:
         - primary

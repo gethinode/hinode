@@ -21,19 +21,20 @@ arguments:
     comment: >-
       If unset, shows the panel with the code in collapsed state. By default,
       the panel is expanded.
-  full: 
-    type: string
+  full:
+    type: bool
     optional: true
+    default: true
     comment: >-
-      If unset, shows the filename only. By default, the full relative path is
-      shown.
+      If unset, shows the filename only. By default, the entire path (relative
+      to the base path) is shown.
   id: 
     type: string
     optional: true
     comment: >- 
-      ID of the collapse panel, defaults to `file-collapse-n` with a sequential
-      number `n` starting at 1.
+      Identifier of the collapse panel, defaults to `file-collapse-n` with a
+      sequential number `n` starting at 1.
   class:
     type: string
     optional: true
-    comment: Class argument of the tab control.
+    comment: Class attribute of the tab control that wraps the file element.

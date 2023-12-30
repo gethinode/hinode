@@ -24,9 +24,10 @@
     {{- end -}}
 
     {{- $fade := false -}}
-    {{- if eq (.Parent.Get "fade") "true" -}}
-        {{- $fade = true -}}
-    {{- end -}}
+    {{ with .Get "fade" }}{{ $fade = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{- $parentFade := false }}
+    {{ with .Parent.Get "fade" }}{{ $parentFade = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{ $fade = or $fade $parentFade }}
     {{- $header := .Get "header" | default "" -}}
     {{- $class := .Get "class" | default "" -}}
     {{- $body := trim .Inner " \r\n" | .Page.RenderString -}}

@@ -14,9 +14,11 @@
 {{- $gutter := .Get "gutter" | default "4" -}}
 {{- $title := .Get "title" | default "" -}}
 {{- $separator := .Get "separator" | default "" -}}
-{{- $class := .Get "class" | default "" -}}
 {{- $wrapper := .Get "wrapper" | default "" -}}
 {{- $responsive := .Get "responsive" | default true -}}
+
+<!-- Initialize arguments passed to individual cards -->
+{{- $class := .Get "class" | default "" -}}
 {{- $color := .Get "color" | default "" -}}
 {{- $padding := .Get "padding" | default "auto" -}}
 {{- $header := .Get "header" | default "" -}}

@@ -28,7 +28,12 @@ arguments:
   color:
     type: select
     optional: true
-    comment: Background theme color of the navbar.
+    comment: >-
+      Background theme color of the navbar. Set the color to `body` or
+      `body-tertiary` for the navbar to respond to color mode  changes (e.g.
+      switching between dark and light). The navigation bar is transparent when
+      no color is set, but is set to the body color when scrolling to enhance
+      the contrast.
     options:
       values:
         - primary
@@ -47,9 +52,9 @@ arguments:
     type: string
     optional: true
     comment: >-
-      ID of the navbar, defaults to `navbar-0`. The id is used by several child
-      elements, including a color mode switcher, version switcher, and collapse
-      panel.
+      Identification of the navbar, defaults to `navbar-0`. The id is used by
+      several child elements, including a color mode switcher, version switcher,
+      and collapse panel.
   menus:
     type: string
     optional: true
@@ -76,6 +81,7 @@ arguments:
       values:
         - light
         - dark
+    group: partial
   mode:
     type: bool
     optional: true

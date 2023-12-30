@@ -28,7 +28,7 @@
 {{ $outline := false -}}
 {{ with .Get "outline" }}{{ $outline = partial "utilities/CastBool.html" . }}{{ end -}}
 {{ $badge := .Get "badge" | default "" -}}
-{{ $label := .Get "label" | default "" -}}
+{{ $label := or (.Get "label") (.Get "aria-label") | default "" -}}
 {{ $tooltip := .Get "tooltip" | default "" -}}
 {{ $collapse := .Get "collapse" | default "" -}}
 {{ $href := .Get "href" | default "" -}}

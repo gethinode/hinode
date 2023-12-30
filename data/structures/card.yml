@@ -108,15 +108,14 @@ arguments:
       - string
       - template.HTML
     optional: true
-    parent: cascade
     comment: >-
       Description of the card.
     group: partial
   loading:
     type: select
     optional: true
-    default: eager
     parent: cascade
+    default: eager
     comment: >-
       Loading behavior of the image. The loading of lazily loaded images is
       deferred until the image is within scrolling range of the viewport. This
@@ -130,7 +129,6 @@ arguments:
   thumbnail:
     type: path
     optional: true
-    parent: cascade
     comment: >-
       Thumbnail image url, displayed on top or the left of the card.
   ratio:
@@ -157,7 +155,6 @@ arguments:
   icon:
     type: string
     optional: true
-    parent: cascade
     comment: >-
       Font Awesome icon, displayed on top or the left of the card.
   orientation:

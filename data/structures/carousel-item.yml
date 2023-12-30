@@ -24,6 +24,7 @@ arguments:
         - 4x3
         - 16x9
         - 21x9
+    group: partial
   portrait:
     type: bool
     optional: true
@@ -32,6 +33,7 @@ arguments:
       Flag to adjust the ratio from landscape to portrait. The image itself
       is not rotated, only the crop area is adjusted. Not applicable to vector
       graphics.
+    group: partial
   loading:
     type: select
     default: eager

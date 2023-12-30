@@ -12,7 +12,7 @@ arguments:
     type: string
     optional: true
     comment: >-
-      Class attribute of the button element, e.g. “p-5”.
+      Class attribute of the button element, e.g. `p-5`.
   color:
     type: select
     optional: true
@@ -48,7 +48,7 @@ arguments:
   id:
     type: string
     optional: true
-    comment: ID of the button, to be used in the DOM.
+    comment: Identifier of the button, to be used in the DOM.
   state:
     type: select
     optional: true
@@ -61,7 +61,7 @@ arguments:
         - active
         - inactive
   size:
-    type: string
+    type: select
     optional: true
     default: md
     comment: Size of the button.
@@ -85,7 +85,12 @@ arguments:
     comment: >-         
       Assistive label for the button or badge. The label is applied
       to the badge instead of the button when a badge has been defined.
-      The default value of the button aria-label is its title.
+      The default value of the button's assistive label is its title.
+  aria-label:
+    type: string
+    optional: true
+    comment: Alias for label.
+    group: shortcode
   tooltip:
     type: string
     optional: true
@@ -108,7 +113,7 @@ arguments:
         - link
         - button
   placement:
-    type: string
+    type: select
     optional: true
     default: top
     comment: Position of the tooltip.
@@ -134,7 +139,7 @@ arguments:
         - first
         - last
   justify:
-    type: string
+    type: select
     optional: true
     default: center
     comment: Justification of the button title and icon.
@@ -149,7 +154,7 @@ arguments:
   toast:
     type: string
     optional: true
-    comment: ID of the toast to display when the button is clicked.
+    comment: Identifier (ID) of the toast to display when the button is clicked.
   clipboard:
     type:
       - string
@@ -174,6 +179,7 @@ arguments:
     comment: >-
       Dictionary of key-value pairs added as custom attributes to the button
       element ('<a>').
+    group: partial
   spacing:
     type: bool
     optional: true
