@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.22.0-beta5",
+  "version": "0.22.0-beta6",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -36,7 +36,7 @@
     "lint:styles": "stylelint \"assets/scss/**/*.{css,sass,scss,sss,less}\" --allow-empty-input",
     "lint:markdown": "markdownlint-cli2 \"*.md\" \"content/**/*.md\" \"exampleSite/**/*.md\"",
     "mod:clean": "hugo mod clean",
-    "mod:update": "rimraf _vendor && hugo mod get -u ./... && hugo mod get -u && npm run -s mod:vendor && npm run -s mod:tidy",
+    "mod:update": "rimraf _vendor && hugo mod get && npm run -s mod:vendor && npm run -s mod:tidy",
     "mod:tidy": "hugo mod tidy && hugo mod tidy -s exampleSite",
     "mod:vendor": "rimraf _vendor && hugo mod vendor",
     "test": "npm run -s lint",
