@@ -23,7 +23,7 @@ arguments:
     type: select
     optional: true
     default: md
-    comment: Size of the button
+    comment: Size of the button.
     options:
       values:
         - sm
@@ -36,4 +36,5 @@ arguments:
   inline:
     type: bool
     optional: true
-    comment: Flag to render the release button inline (defaults to false).
+    default: false
+    comment: Flag to render the release button inline.
