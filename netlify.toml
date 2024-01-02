@@ -23,15 +23,15 @@
             child-src 'self' app.netlify.com; \
             script-src 'self' \
                 https://*.netlify.app app.netlify.com netlify-cdp-loader.netlify.app \
-                https://utteranc.es/client.js https://*.google-analytics.com https://*.googletagmanager.com; \
+                https://*.google-analytics.com https://*.googletagmanager.com; \
             style-src 'self' \
-                https://*.netlify.app https://utteranc.es https://fonts.googleapis.com https://www.youtube.com; \
+                https://*.netlify.app https://fonts.googleapis.com https://www.youtube.com; \
             object-src 'none'; \
             base-uri 'self'; \
             connect-src 'self'
                 https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; \
             font-src 'self' https://*.netlify.app https://fonts.gstatic.com; \
-            frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com \
+            frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com \
                 app.netlify.com; \
             img-src 'self' data: https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
             manifest-src 'self'; \
