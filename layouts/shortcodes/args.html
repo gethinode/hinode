@@ -68,7 +68,7 @@
                 {{ if eq (printf "%T" $val.options.max) "int" }}{{ $max = int $val.options.max }}{{ end }}
             {{ end }}
             {{ if and (eq (printf "%T" $min) "int") (eq (printf "%T" $max) "int") }}
-                {{ $comment = printf "%s %s: [%d, %d]." $comment (T "supportedValues") $min $max }}
+                {{ $comment = printf "%s %s: [%d - %d]." $comment (T "supportedValues") $min $max }}
             {{ else if (eq (printf "%T" $min) "int") }}
                 {{ $comment = printf "%s %s: >=%d." $comment (T "supportedValues") $min }}
             {{ else if (eq (printf "%T" $max) "int") }}
