@@ -189,14 +189,5 @@
     images = ["logo.png"]
     locale = "en_US"
 
-[comments]
-    enabled = false
-    repo = "" # Replace with your repository.
-    #issueTerm = "pathname" # pathname, url, title, og:title
-    #label = "comment"
-    # By default, light and dark mode correspond to github-light and github-dark, respectively.
-    # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
-    #theme = "" 
-
 [links]
     hinode = "https://gethinode.com"

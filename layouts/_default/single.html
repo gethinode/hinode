@@ -10,10 +10,6 @@
     {{ .Render "single/body" }}
 
     {{ .Render "single/footer" }}
-    {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
-        <hr>
-        {{ partial "assets/comments.html" . }}
-    {{ end -}}
 {{ end -}}
 
 {{ define "main" -}}

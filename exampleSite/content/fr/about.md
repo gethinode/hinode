@@ -27,7 +27,6 @@ Les fonctionnalités supplémentaires incluent:
 - Prise en charge de plusieurs langues
 - Composants bootstrap réutilisables à travers des codes et partiels configurables
 - Documentation versionnée, incluant une navigation latérale et un sélecteur de version.
-- Commentaires intégrés via une intégration légère avec GitHub via [utteranc.es]({{< param "links.utterances" >}})
 - Gestion d'images adaptatives pour plusieurs tailles d'écran et résolutions.
 - Résultats de recherche optimisés, obtenant un score de 100 points pour le référencement (SEO) sur [PageSpeed Insights]({{< param "links.pagespeed" >}}).
 - Sécurisé par défaut, obtenant un score A+ au test [Mozilla Observatory]({{< param "links.observatory" >}})

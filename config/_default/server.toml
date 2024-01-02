@@ -7,15 +7,14 @@ for = '/**'
     X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = """\
         default-src 'self'; \
-        script-src 'self' \
-            https://utteranc.es/client.js https://*.google-analytics.com https://*.googletagmanager.com; \
-        style-src 'self' https://utteranc.es https://fonts.googleapis.com https://www.youtube.com; \
+        script-src 'self' https://*.google-analytics.com https://*.googletagmanager.com; \
+        style-src 'self' https://fonts.googleapis.com https://www.youtube.com; \
         object-src 'none'; \
         base-uri 'self'; \
         connect-src 'self'
             https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; \
         font-src 'self' https://fonts.gstatic.com; \
-        frame-src 'self' https://utteranc.es https://www.youtube-nocookie.com https://www.youtube.com; \
+        frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; \
         img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
         manifest-src 'self'; \
         media-src 'self' \
