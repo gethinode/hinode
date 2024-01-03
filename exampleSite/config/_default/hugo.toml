@@ -79,6 +79,8 @@ home = ["HTML", "RSS", "REDIR"]
     keepVarNames = true
     precision = 0
     version = 2022
+  [minify.tdewolff.html]
+    keepWhitespace = true
 
 [module]
   replacements = 'github.com/gethinode/hinode -> ../..'
