@@ -1,10 +1,26 @@
-{{- $page := . -}}
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "section-menu" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/section-menu.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page -}}
 {{ $items := $page.Parent.Sections }}
 {{ if not $page.Parent.Section }}
     {{ $items = $page.Sections }}
 {{ end }}
 
-{{- if gt (len $items) 0 }}
+<!-- Main code -->
+{{- if and (not $error) (gt (len $items) 0) }}
     <div class="d-grid gap-2 mx-auto d-md-none">
         {{ partial "assets/button.html" (dict 
             "title" (T "sectionMenu") 
