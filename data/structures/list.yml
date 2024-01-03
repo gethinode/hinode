@@ -1,0 +1,55 @@
+comment: >-
+  Displays a list of items with a thumbnail alternating between left and right
+  alignment.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Required context of the current page.
+    group: partial
+  list:
+    type:
+      - 'page.Pages'
+      - 'resource.Resources'
+    optional: false
+    comment: Required array of pages.
+    group: partial
+  title:
+    type: string
+    optional: true
+    comment: Optional title of the card group.
+  loading:
+    type: select
+    default: eager
+    optional: true
+    comment: >-
+      Loading behavior of the image. The loading of lazily loaded images is
+      deferred until the image is within scrolling range of the viewport. This
+      should reduce the initial loading time of the website. It is recommended
+      to lazily load only those images that are below the pagefold.
+    options:
+      values:
+        - eager
+        - lazy
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the tab element, e.g. “w-50”.
+  color:
+    type: select
+    optional: true
+    comment: >-
+      Theme color of the element.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - body

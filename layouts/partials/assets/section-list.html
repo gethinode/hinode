@@ -189,13 +189,8 @@
                 {{- $partial = "assets/list.html" -}}
                 {{- $params = merge $params (dict 
                     "title" $title
-                    "icon" $icon
-                    "thumbnail" $thumbnail
-                    "ratio" $ratio
-                    "description" $description
                     "color" $color
                     "loading" $loading
-                    "layout" $layout
                     ) 
                 -}}
             {{- end -}}
