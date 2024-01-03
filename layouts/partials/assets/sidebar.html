@@ -1,7 +1,22 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "sidebar" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/sidebar.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $page := .page }}
-{{- $section := $page.Section }}
 {{- $data := .menu -}}
 {{- $version := .version -}}
+{{- $section := $page.Section }}
 
 {{- define "partials/sidebar/group.html" -}}
     {{- $page := .page -}}
@@ -94,7 +109,8 @@
     {{ end }}
 {{ end -}}
 
-{{ if $data }}
+<!-- Main code -->
+{{ if and (not $error) $data }}
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
