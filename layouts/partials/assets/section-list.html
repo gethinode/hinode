@@ -130,31 +130,14 @@
     {{- $params := (dict 
         "page" $page
         "list" $list
-        "title" $title
-        "icon" $icon
-        "thumbnail" $thumbnail
-        "ratio" $ratio
-        "sectionHeader" $sectionHeader
-        "description" $description
-        "content" $content
         "class" $style
-        "color" $color
-        "loading" $loading
         )
     -}}
     {{- $partial := "" -}}
 
     <div class="container-fluid {{ with $background }} bg-{{ . }}{{ end }} p-0">
         <div class="container-xxl {{ $wrapper }}">
-            {{- partial "assets/section-header.html" $params -}}
-            
-            {{- $params := (dict 
-                "page" $page
-                "list" $list
-                "class" $style
-                )
-            -}}
-        
+            {{- partial "assets/section-header.html" (dict  "title" $title "description" $description "content" $content) -}}
             {{ if eq $layout "card" }}
                 {{- $partial = "assets/card-group.html" -}}
                 {{- $params = merge $params (dict 
