@@ -1,39 +1,19 @@
-<!-- Source: https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/pagination.html -->
-<!-- Modifications: centered pagination, replaced previous/next with text -->
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 
-{{- $validFormats := slice "default" "terse" }}
+    This source code adapts the original partial as maintained by the Hugo repository. It introduces the
+    following modifications:
+     - Centered the pagination element
+     - Standardized validation of partial arguments
+     - Replaced previous / next navigation with text
+    
+    The original source code is available on:
+    https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/pagination.html
+    Copyright 2022 The Hugo Authors. Licensed under the Apache License, Version 2.0.
+  -->
 
-{{- $msg1 := "When passing a map to the internal pagination template, one of the elements must be named 'page', and it must be set to the context of the current page." }}
-{{- $msg2 := "The 'format' specified in the map passed to the internal pagination template is invalid. Valid choices are: %s." }}
-
-{{- $page := . }}
-{{- $format := "default" }}
-
-{{- if reflect.IsMap . }}
-  {{- with .page }}
-    {{- $page = . }}
-  {{- else }}
-    {{- errorf $msg1 }}
-  {{- end }}
-  {{- with .format }}
-    {{- $format = lower . }}
-  {{- end }}
-{{- end }}
-
-{{- if in $validFormats $format }}
-  {{- if gt $page.Paginator.TotalPages 1 }}
-    <nav aria-label="{{ T "paginationNav" }}">
-      <ul class="pagination pagination-{{ $format }} justify-content-center">
-        {{- partial (printf "partials/inline/pagination/%s" $format) $page }}
-      </ul>
-    </nav>
-  {{- end }}
-{{- else }}
-  {{- errorf $msg2 (delimit $validFormats ", ") }}
-{{- end -}}
-
-{{/* Format: default
-{{/* --------------------------------------------------------------------- */}}
 {{- define "partials/inline/pagination/default" }}
   {{- with .Paginator }}
     {{- $currentPageNumber := .PageNumber }}
@@ -103,8 +83,6 @@
   {{- end }}
 {{- end -}}
 
-{{/* Format: terse
-{{/* --------------------------------------------------------------------- */}}
 {{- define "partials/inline/pagination/terse" }}
   {{- with .Paginator }}
     {{- $currentPageNumber := .PageNumber }}
@@ -157,3 +135,24 @@
     {{- end }}
   {{- end }}
 {{- end -}}
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "pagination" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/pagination.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page }}
+{{- $format := .format | default "default" }}
+
+<!-- Main code -->
+{{- if and (not $error) (gt $page.Paginator.TotalPages 1) }}
+  <nav aria-label="{{ T "paginationNav" }}">
+    <ul class="pagination pagination-{{ $format }} justify-content-center">
+      {{- partial (printf "partials/inline/pagination/%s" $format) $page }}
+    </ul>
+  </nav>
+{{- end }}

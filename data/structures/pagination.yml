@@ -1,0 +1,21 @@
+comment: >-
+  Adds a pagination element to a page. This allows to split long lists across
+  multiple pages to ease navigation. Set 'paginate' in the site configuration to
+  define the maximum amount of items to display on a list page.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
+  format:
+    type: select
+    optional: true
+    default: default
+    comment:
+    options:
+      values:
+        - default
+        - terse
