@@ -37,6 +37,6 @@
     {{ end }}
 
     {{ if $toc }}
-        {{ partial "assets/toc.html" (dict "page" . "download" $download) }}
+        {{ partial "assets/toc.html" (dict "page" .) }}
     {{ end -}}
 </div>

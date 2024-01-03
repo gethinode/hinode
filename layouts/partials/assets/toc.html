@@ -1,7 +1,23 @@
-{{- $page := .page -}}
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
 
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "toc" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/toc.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page -}}
 {{ $items := len (findRE "<li.*?>(.|\n)*?</li>" $page.TableOfContents) -}}
-{{ if gt $items 1 -}}
+
+<!-- Main code -->
+{{ if and (not $error) (gt $items 1) -}}
     <strong class="d-block h6 my-2 pb-2 border-bottom">{{ T "toc" }}</strong>
     {{ $page.TableOfContents }}
 {{ end -}}

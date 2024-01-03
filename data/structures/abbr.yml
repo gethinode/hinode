@@ -1,9 +1,11 @@
 comment: >-
-  Creates an HTML element that shows the long form of an abbrevitation. The abbreviation data is centrally stored in a
-  data file. By default, the shortcode uses `abbr.yaml` with translation support.
+  Creates an HTML element that shows the long form of an abbrevitation. The
+  abbreviation data is centrally stored in a data file. By default, the
+  shortcode uses `abbr.yaml` with translation support.
   
-  The data file is expected to store key-value pairs, where `id` is the lower-case abbrevation and `long` its long
-  form. The following example illustrates this using YML:
+  The data file is expected to store key-value pairs, where `id` is the
+  lower-case abbrevation and `long` its long form. The following example
+  illustrates this using YML:
 
   - id: css
     long: `Cascading Style Sheets`

@@ -1,9 +1,27 @@
-{{- if .Site.Params.sharing.enabled -}}
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "sharing" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/sharing.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $page := .page }}
+
+<!-- Main code -->
+{{- if and (not $error) $page.Site.Params.sharing.enabled -}}
     {{- $sharing := true -}}
-    {{ if isset .Params "sharing" }}
-        {{ $sharing = .Params.sharing }}
+    {{ if isset $page.Params "sharing" }}
+        {{ $sharing = $page.Params.sharing }}
     {{ else }}
-        {{- with (index site.Params.pages .Type ) -}}
+        {{- with (index $page.Site.Params.pages .Type ) -}}
             {{ if isset . "sharing" }}
                 {{ $sharing = (index . "sharing") }}
             {{ end }}
@@ -11,16 +29,15 @@
     {{ end }}
 
     {{- if $sharing -}}
-        {{- $page := . -}}
         {{- $order := "asc" -}}
-        {{- $list := .Site.Params.sharing.providers -}}
-        {{- if .Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
-        {{- $sort := .Site.Params.sharing.sort | default "weight" -}}
+        {{- $list := $page.Site.Params.sharing.providers -}}
+        {{- if $page.Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
+        {{- $sort := $page.Site.Params.sharing.sort | default "weight" -}}
         {{- $list = sort $list $sort $order -}}
 
-        {{- $download := .Params.download -}}
+        {{- $download := $page.Params.download -}}
         {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-            {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
+            {{- errorf "Cannot find download file for page '%s': %s" $page.File.Path $download -}}
         {{- end -}}
         
         <div class="py-3 text-body-secondary hstack gap-1">
@@ -40,7 +57,7 @@
                 {{- end -}}
                 {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" "label" (T "shareLink" $item.name) "spacing" false) }}
             {{- end -}}
-            {{ if .Site.Params.sharing.webshare }}
+            {{ if $page.Site.Params.sharing.webshare }}
                 {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
                 {{ partial "assets/button.html" (dict "href" "#!" "icon" "fas share-nodes fa-fw" "id" "btn-webshare" "class" "btn-social p-0" "attributes" $attr "label" (T "shareLink" (T "shareSystem")) "spacing" false) }}
             {{- end -}}

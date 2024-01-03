@@ -6,19 +6,16 @@ arguments:
       - string
       - template.HTML
     optional: true
-    comment: >-
-      Title of the button, required unless icon is set.
+    comment: Title of the button, required unless icon is set.
   class:
     type: string
     optional: true
-    comment: >-
-      Class attribute of the button element, e.g. `p-5`.
+    comment: Class attribute of the button element, e.g. `p-5`.
   color:
     type: select
     optional: true
     default: primary
-    comment: >-
-      Theme color of the element.
+    comment: Theme color of the element.
     options:
       values:
         - primary
