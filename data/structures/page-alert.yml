@@ -1,0 +1,14 @@
+comment: >-
+  Adds a dismissible alert message to the top of the page, above the main menu.
+  The alert uses the following scratch variables:
+    - pageAlertMsg
+    - pageAlertURL
+    - version
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
