@@ -8,7 +8,7 @@
 
 <!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "navbar-item" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/toast.html] - Invalid arguments" -}}
+    {{- errorf "partial [assets/navbar-item.html] - Invalid arguments" -}}
     {{ $error = true }}
 {{ end }}
 
