@@ -8,7 +8,7 @@
 
 <!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "toc" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/to-dropdownc.html] - Invalid arguments" -}}
+    {{- errorf "partial [assets/toc-dropdown.html] - Invalid arguments" -}}
     {{ $error = true }}
 {{ end }}
 
