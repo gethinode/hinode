@@ -50,6 +50,12 @@ arguments:
         - accordion
         - tab-pane
     group: partial
+  illustration:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    group: partial
 body:
   optional: false
   comment: Content of the item.
