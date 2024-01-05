@@ -4,7 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ hugo.Generator}}
     {{ partialCached "head/stylesheet-core.html" . -}}
-    {{- $modules := site.Params.modules.optional | intersect .Page.Params.modules -}}
+
+    {{ $page_modules := slice | append .Page.Params.modules }}
+    {{- $modules := site.Params.modules.optional | intersect $page_modules -}}
     {{- range $index, $mod := $modules -}}
         {{- $source := printf "scss/%s.scss" $mod -}}
         {{- $target := printf "css/%s.css" $mod -}}
