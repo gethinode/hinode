@@ -404,7 +404,7 @@ As an example, the following shortcode displays superscript text.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-## Table 
+## Table
 
 As an example, the following shortcode displays a responsive table.
 
