@@ -404,6 +404,22 @@ As an example, the following shortcode displays superscript text.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Table
+
+As an example, the following shortcode displays a responsive table.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="markdown" >}}
+{{</* table */>}}
+| #  | Heading | Heading | Heading | Heading | Heading | Heading | Heading | Heading | Heading |
+|----|---------|---------|---------|---------|---------|---------|---------|---------|---------|
+| 1. | cell    | cel     | cel     | cel     | cel     | cel     | cel     | cel     | cel     |
+| 2. | cell    | cel     | cel     | cel     | cel     | cel     | cel     | cel     | cel     |
+| 3. | cell    | cel     | cel     | cel     | cel     | cel     | cel     | cel     | cel     |
+{{</* /table */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Timeline
 
 As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.

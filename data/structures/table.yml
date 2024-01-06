@@ -23,7 +23,7 @@ arguments:
   class:
     type: string
     optional: true
-    comment: Class attribute of the table element, e.g. “table-striped-columns w-auto”.
+    comment: Class attribute of the table element, e.g. `table-striped-columns w-auto`.
 body:
   type: string
   optional: false

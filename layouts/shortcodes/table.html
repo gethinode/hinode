@@ -21,7 +21,6 @@
 {{ else }}
     {{ $breakpoint = .Get 0 }}
 {{ end }}
-{{ if eq $breakpoint "none" }}{{ $breakpoint = "" }}{{ end }}
 
 <!-- Main code -->
 {{- $input := .Inner | .Page.RenderString }}
@@ -32,6 +31,12 @@
 {{- $new := printf "<table class=\"table %s\">" $class -}}
 {{ $input := replace $input $old $new -}}
 
-<div class="{{- with $breakpoint }}table-responsive table-responsive-{{ . }}{{ end -}}">
-{{ $input | safeHTML }}
-</div>
+{{ if not $error }}
+    {{ if eq $breakpoint "none" }}
+        {{ $input | safeHTML }}
+    {{ else }}
+        <div class="table-responsive{{- with $breakpoint }}-{{ . }}{{ end -}}">
+        {{ $input | safeHTML }}
+        </div>
+    {{ end }}
+{{ end }}
