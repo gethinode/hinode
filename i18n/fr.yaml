@@ -136,14 +136,14 @@
 
 # Arguments
 - id: name
-  translation: "Name"
+  translation: "Nom"
 - id: type
   translation: "Type"
 - id: required 
-  translation: "Required"
+  translation: "Requis"
 - id: default
-  translation: "Default"
+  translation: "Défaut"
 - id: comment
-  translation: "Comment"
+  translation: "Commentaire"
 - id: supportedValues
-  translation: "Supported values"
+  translation: "Valeurs supportées"
