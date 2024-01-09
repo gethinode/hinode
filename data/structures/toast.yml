@@ -1,0 +1,29 @@
+comment: >-
+  Prepares a toast message. Use a trigger to display the message.
+arguments:
+  id:
+    type: string
+    optional: true
+    comment: >-
+      Unique identifier of the toast message, defaults to `toast-message-n`
+      with sequence n.
+  header:
+    type: string
+    optional: true
+    comment: Header of the toast message. Uses the site title by default.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the toast element.
+  message:
+    type:
+      - string
+      - template.HTML
+    optional: false
+    comment: Toast message.
+    group: partial
+body:
+  type: string
+  optional: false
+  comment: Toast mesage.
+  group: shortcode

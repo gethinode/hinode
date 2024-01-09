@@ -1,0 +1,26 @@
+comment: >-
+  Embeds a responsive video player for YouTube videos. Only the ID of the video
+  is required. In privacy-enhanced mode, YouTube will not store information
+  about visitors on your website unless the user plays the embedded video.
+arguments:
+  title:
+    type: string
+    optional: true
+    comment: >-
+      Title of the video.
+  class:
+    type: string
+    optional: true
+    position: 1
+    comment: >-
+      Class attribute of the video wrapper element.
+  id:
+    type: string
+    optional: false
+    position: 0
+    comment: Identifier of the video to be embedded.
+  autoplay:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag indicating the video should start playing immediately when loaded.

@@ -1,0 +1,50 @@
+comment: >-
+ Displays a tooltip for a link. The inner content is used as hyperlink text.
+arguments:
+  title:
+    type: string
+    optional: true
+    comment: Plain text to display in the tooltip.
+  href:
+    type: url
+    optional: true
+    comment: Address for the button or hyperlink.
+  class:
+    type: string
+    optional: true
+    parent: merge
+    comment: Class attribute of the tooltip's button element.
+  color:
+    type: select
+    optional: true
+    default: dark
+    comment: Theme color of the element.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+  placement:
+    type: select
+    optional: true
+    default: top
+    comment: Position of the tooltip.
+    options:
+      values:
+        - top
+        - bottom
+        - left
+        - right
+  spacing:
+    type: bool
+    optional: true
+    default: true
+    comment: Flag to add spacing to the inline tooltip.
+body:
+  optional: false
+  comment: Hyperlink text.

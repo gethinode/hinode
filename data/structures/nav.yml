@@ -1,0 +1,82 @@
+comment: >-
+  Displays a tab group of multiple items. Add nav-item inner elements for each
+  tab pane. 
+arguments:
+  id:
+    type: string
+    optional: true
+    comment: >-
+      Identifier of the tab group, uses a generated sequence if not specified.
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
+  list:
+    type:
+      - page.Pages
+      - resource.Resources
+    optional: true
+    comment: Array of pages to be rendered as nav items.
+    group: partial
+  type:
+    type: select
+    optional: true
+    comment: Type of the tab group.
+    options:
+      values:
+        - tabs
+        - pills
+        - underline
+        - callout
+  vertical:
+    type: bool
+    default: false
+    optional: true
+    comment: Flag to show vertical tabs instead of horizontal tabs.
+  wrap:
+    type: bool
+    default: false
+    optional: true
+    comment: Flag to enable word wrapping of tab titles.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the tab group, e.g. `nav-fill`.
+  pane:
+    type: select
+    optional: true
+    default: none
+    comment: Style of the panes.
+    options:
+      values:
+        - none
+        - persona
+    group: partial
+  width:
+    type: select
+    optional: true
+    default: "100"
+    comment: Responsive width of the tab group.
+    options:
+      values:
+        - "50"
+        - "100"
+    group: partial
+  loading:
+    type: select
+    optional: true
+    default: eager
+    parent: cascade
+    comment: >-
+      Loading behavior of the image. The loading of lazily loaded images is
+      deferred until the image is within scrolling range of the viewport. This
+      should reduce the initial loading time of the website. It is recommended
+      to lazily load only those images that are below the page fold.
+    options:
+      values:
+        - lazy
+        - eager
+    group: partial

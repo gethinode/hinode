@@ -1,0 +1,62 @@
+comment: >-
+  Defines an individual item.
+arguments:
+  id:
+    type: string
+    optional: true
+    comment: Identification of the item.
+    group: partial
+  parentID:
+    type: string
+    optional: false
+    comment: Identification of the parent (e.g. nav control).
+    group: partial
+  header:
+    type: string
+    optional: false
+    comment: Header of the item.
+  show:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if the item should be shown. Only one can be shown at a
+      time.
+  disabled:
+    type: bool
+    optional: true
+    comment: Flag to indicate the item should be in a disabled state.
+  fade:
+    type: bool
+    optional: true
+    comment: Flag to make the tab pane fade in.
+    parent: cascade
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the item.
+  body:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: The body content of the item, supports Markdown and HTML (if enabled).
+    group: partial
+  item_type:
+    type: select
+    optional: true
+    comment: Type of the item to render.
+    options:
+      values:
+        - accordion
+        - tab-pane
+    group: partial
+  illustration:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    group: partial
+body:
+  optional: false
+  comment: Content of the item.
+  group: shortcode

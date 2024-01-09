@@ -1,0 +1,27 @@
+comment: >-
+  Generates a markdown table of structured arguments. The argument definitions are
+  expected to be defined in a data file identified by a provided structure name.
+arguments:
+  structure:
+    type: string
+    position: 0
+    optional: false
+    comment: >-
+      Name of the data file that contains argument definitions. Supported data
+      formats include JSON, TOML, YAML, and XML. You can omit the file
+      extension. The file should reside in the `data/structures` folder.
+  group:
+    type: string
+    position: 1
+    optional: true
+    comment: >-
+      Name of the group filter. This is typically used when a shortcode and
+      partial have common arguments. The group filter binds a specific argument
+      to a particular group. By default, an argument belongs to all groups.
+  parent:
+    type: bool
+    position: 2
+    optional: true
+    comment: >-
+      Flag to filter only arguments that have a parent attribute (either
+      `cascade` or `merge`).

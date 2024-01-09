@@ -1,30 +1,48 @@
 <!-- 
-    Displays a Bootstrap card. Either specify a valid path, or set the arguments title, href, header, description, and
-    thumbnail individually. The latter arguments override any page attributes.
-    
-    The shortcode supports the following arguments:
-    "path"          Optional path of the page, override with other parameters.
-    "title"         Required title of the card.
-    "href"          Optional address for the button or hyperlink.
-    "class"         Optional class attribute of the card element, e.g. “w-50”.
-    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
-                    color is specified.
-    "padding":      Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
-    "gutter"        Gutter between columns in a group, either "0" (default), "1", "2", "3", "4", or "5".
-    "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
-                    (default), "publication", "tags", and "none".
-    "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
-                    "publication", "tags", and "none" (default).
-    "description"   Optional description of the card.
-    "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
-    "ratio"         Optional ratio of the thumbnail image, defaults to "16x9" (stacked orientation) or "1x1" (horizontal
-                    orientation).
-    "alt"           Optional alternate text for the thumbnail, uses "title" by default.
-    "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
-    "orientation"   Optional placecement of the thumbnail or icon, either "stacked" (default), "horizontal",
-                    "horizontal-sm" or "none".
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card" "args" .) }}
+    {{- errorf "partial [assets/card.html] - Invalid arguments" -}}
+{{ end }}
+
+<!-- Initialize arguments and default values -->
+{{- $alt := .alt -}}
+{{- $class := .class -}}
+{{- $color := .color -}}
+{{- $description := .description -}}
+{{- $footer := .footer | default "none" -}}
+{{- $gutter := .gutter | default "0" -}}
+{{- $header := .header | default "full" -}}
+{{- $href := .href -}}
+{{- $icon := .icon -}}
+{{- $loading := .loading -}}
+{{- $orientation := .orientation | default "stacked" -}}
+{{- $padding := .padding | default "auto" -}}
+{{- $ratio := .ratio -}}
+{{- $thumbnail := .thumbnail -}}
+{{- $title := .title -}}
+
+<!-- Override arguments -->
+{{- $page := "" }}
+{{- if .path }}
+    {{- $page = site.GetPage .path }}
+    {{- if not $page }}
+        {{- errorf "partial [assets/card.html] - Cannot find page: %s" .path -}}
+    {{- end }}
+{{- end }}
+{{- with $page -}}
+    {{- if not $title }}{{ $title = .Title }}{{ end -}}
+    {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
+    {{- if not $description }}{{ $description = partial "utilities/GetDescription.html" . }}{{ end -}}
+    {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
+    {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
+{{- end -}}
+
+{{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 
 <!-- Inline partial to render the card's body -->
 {{- define "partials/card-body.html" -}}
@@ -77,90 +95,16 @@
     </small></p>
 {{- end -}}
 
-{{- $page := "" }}
-{{- if .path }}
-    {{- $page = site.GetPage .path }}
-    {{- if not $page }}
-        {{- errorf "partial [assets/card.html] - Cannot find page: %s" .path -}}
-    {{- end }}
-{{- end }}
-
-{{- $title := .title -}}
-{{- $alt := .alt -}}
-{{- $href := .href -}}
-{{- $description := .description -}}
-{{- $thumbnail := .thumbnail -}}
-{{- $ratio := .ratio -}}
-{{- $icon := .icon -}}
-
-{{- $color := "" -}}
-{{- with .color }}{{ $color = . }}{{ end -}}
-{{- if $color -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
-    {{- if not (in $supportedColors $color) -}}
-        {{- errorf "partial [assets/card.html] - Invalid value for param 'color': %s" $color -}}
-    {{- end -}}
-{{- end -}}
-
-{{- $header := "full" -}}
-{{- with .header }}{{ $header = . }}{{ end -}}
-{{- $supportedKeywords := slice "full" "publication" "tags" "none" -}}
-{{- if not (in $supportedKeywords $header) -}}
-    {{- errorf "partial [assets/card.html] - Invalid value for param 'header': %s" $header -}}
-{{- end -}}
-
-{{- $footer := "none" -}}
-{{- with .footer }}{{ $footer = . }}{{ end -}}
-{{- if not (in $supportedKeywords $footer) -}}
-    {{- errorf "partial [assets/card.html] - Invalid value for param 'footer': %s" $footer -}}
-{{- end -}}
-
-{{- with $page -}}
-    {{- if not $title }}{{ $title = .Title }}{{ end -}}
-    {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
-    {{- if not $description }}{{ $description = partial "utilities/GetDescription.html" . }}{{ end -}}
-    {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
-    {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
-{{- end -}}
-
-{{- $class := .class -}}
-
-{{- $padding := "auto" -}}
-{{- with .padding }}{{ $padding = . }}{{ end -}}
-{{- $supportedPaddings := slice "0" "1" "2" "3" "4" "5" "auto" -}}
-{{- if not (in $supportedPaddings $padding) -}}
-    {{- errorf "partial [assets/card.html] - Invalid value for param 'padding': %s" $padding -}}
-{{- end -}}
-
-{{- $gutter := .gutter | default "0" -}}
-{{ $supportedGutters:= slice "0" "1" "2" "3" "4" "5" -}}
-{{ if not (in $supportedGutters $gutter) -}}
-    {{- errorf "partial [assets/card.html] - Invalid value for param 'gutter': %s" $gutter -}}
-{{ end -}}
-
-{{- $orientation := "stacked" -}}
-{{- with .orientation }}{{ $orientation = . }}{{ end -}}
-{{- $supportedOrientations := slice "stacked" "horizontal" "horizontal-sm" "none" -}}
-{{- if not (in $supportedOrientations $orientation) -}}
-    {{- errorf "partial [assets/card.html] - Invalid value for param 'orientation': %s" $orientation -}}
-{{- end -}}
-{{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
-
-{{- $loading := .loading -}}
-{{- $validSettings := slice "lazy" "eager" -}}
-{{- if $loading -}}
-    {{ if not (in $validSettings $loading) -}}
-        {{- errorf "partial [assets/card.html] - Invalid value for param 'loading': %s" $loading -}}
-    {{ end -}}
-{{- end -}}
-
+<!-- Main code -->
 {{ if ne $gutter "0" }}<div class="g-{{ $gutter }}">{{ end }}
+
 {{- if hasPrefix $orientation "horizontal" -}}
+    <!-- Render horizontal card -->
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         <div class="row g-0 row-cols-1 h-100">
             <div class="col-4{{ if eq  $orientation "horizontal-sm" }} col-md-2{{ end }}">
                 {{- if $thumbnail -}}
-                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "1x1") "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title "loading" $loading) -}}
+                    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "1x1") "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100" "title" $title "loading" $loading) -}}
                 {{- else if $icon -}}
                     <div class="card-icon p-{{ $padding }} h-100 fa-wrapper d-flex align-items-center justify-content-center">
                         {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid fa-fw" $icon)) -}}
@@ -179,9 +123,10 @@
         </div>
     </div>
 {{- else -}}
+    <!-- Render stacked / default card -->
     <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
         {{- if $thumbnail -}}
-            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "16x9") "outerClass" "card-img-wrap" "innerClass" "card-img-top" "title" (or $alt $title) "loading" $loading) -}}
+            {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "16x9") "wrapper" "card-img-wrap" "class" "card-img-top" "title" (or $alt $title) "loading" $loading) -}}
         {{- else if $icon -}}
             <div class="card-icon  p-{{ $padding }}">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x" $icon)) -}}
@@ -194,4 +139,5 @@
         </div>
     </div>
 {{- end -}}
+
 {{ if ne $gutter "0" }}</div>{{ end }}

@@ -1,0 +1,40 @@
+comment: >-
+ Displays a release button that links to a specific release. Use the state to
+ indicate if it is a new or deprecated feature.
+arguments:
+  version:
+    type: string
+    optional: false
+    comment: Version string, expects semver notation with a `v` prefix.
+  state:
+    type: select
+    optional: true
+    default: new
+    comment: State of the feature.
+    options:
+      values:
+        - new
+        - deprecated
+  short:
+    type: bool
+    optional: true
+    comment: Flag to indicate the release button should use short notation.
+  size:
+    type: select
+    optional: true
+    default: md
+    comment: Size of the button.
+    options:
+      values:
+        - sm
+        - md
+        - lg
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the button element.
+  inline:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to render the release button inline.

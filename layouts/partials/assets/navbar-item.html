@@ -1,22 +1,37 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "navbar-item" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/navbar-item.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page -}}
 {{- $menu := .menu -}}
 {{- $parent := .parent -}}
-{{- $page := .page -}}
 {{- $class := .class -}}
-{{- $anchorClass := "" -}}
+{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 
 {{- $menuURL := (or $menu.PageRef $menu.URL) | relLangURL -}}
 {{- $pageURL := $page.RelPermalink | relLangURL -}}
 {{- $isActive := or (and (hasPrefix $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}
-{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
-{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 
 {{- $url := urls.Parse $menuURL -}}
 {{- $baseURL := urls.Parse $.Site.Params.Baseurl -}}
 {{- $isExternal := ne $url.Host $baseURL.Host -}}
 {{- $externalHref := "" }}
 {{- $suffix := "" }}
+{{- $anchorClass := "" -}}
 
 {{- if $isExternal }}
     {{- if $tab -}}
@@ -48,18 +63,22 @@
     {{- with $childNav }}{{ $params = printf "%s&child=%s" $params . }}{{ end -}}
 {{- end -}}
 
-<a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{. }}{{ end }}" 
-    {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
-    data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
-    href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
-    {{- with $menu.Pre }}
-        {{ if hasPrefix . "<i" }}
-            {{ . | safeHTML }}
-        {{ else }}
-            {{ partial "assets/icon.html" (dict "icon" . )}}
-        {{ end }}
-    {{ end -}}
-    <span {{ if $isActive }} class="active"{{ end }}>{{ if not $isIcon }}{{ $menu.Name }}{{ end }}</span>
-    {{- with $menu.Post }}{{ . }}{{ end -}}
-    {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
-</a>
+<!-- Main code -->
+{{ if not $error }}
+    <a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{. }}{{ end }}" 
+        {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
+        data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
+        href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
+        
+        {{- with $menu.Pre }}
+            {{ if hasPrefix . "<i" }}
+                {{ . | safeHTML }}
+            {{ else }}
+                {{ partial "assets/icon.html" (dict "icon" (string .) )}}
+            {{ end }}
+        {{ end -}}
+        <span {{ if $isActive }} class="active"{{ end }}>{{ if not $isIcon }}{{ $menu.Name }}{{ end }}</span>
+        {{- with $menu.Post }}{{ . }}{{ end -}}
+        {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
+    </a>
+{{ end }}

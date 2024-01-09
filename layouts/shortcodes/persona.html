@@ -1,33 +1,41 @@
 <!-- 
-    Displays a custom persona card. The shortcode supports the following arguments:
-    "path"          Required path of the page.
-    "class"         Optional class attribute of the card element, e.g. “w-50”.
-    "color":        Optional theme color of the card, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white",  "black", "body", or "body-tertiary". By default, no
-                    color is specified.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $error := false -}}
+{{ $error := false }}
 
-{{- $path := .Get "path" | default "" -}}
-{{- $page := .Site.GetPage $path -}}
-{{- if not $page -}}
-    {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
-    {{- $error = true -}}
-{{- end -}}
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "persona" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
 
-{{- $class := .Get "class" | default "" -}}
-
-{{- $color := "" -}}
-{{- with .Get "color" }}{{ $color = . }}{{ end -}}
-{{- if $color -}}
-    {{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
-    {{- if not (in $supportedColors $color) -}}
-        {{- errorf "Invalid value for param 'color': %s" .Position -}}
+<!-- Initialize arguments -->
+{{- $path := .Get "path" -}}
+{{ if $path }}
+    {{- if not .Site.GetPage $path -}}
+        {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
         {{- $error = true -}}
     {{- end -}}
-{{- end -}}
+{{ end }}
+{{- $class := .Get "class" | default "" -}}
+{{- $color := .Get "color" | default "" -}}
+{{- $title := .Get "title" -}}
+{{- $href := .Get "href" -}}
+{{- $content := trim .Inner " \r\n" | .Page.RenderString -}}
+{{- $thumbnail := .Get "thumbnail" -}}
 
+<!-- Main code -->
 {{- if not $error -}}
-    {{- partial "assets/persona.html" (dict "path" $path "class" $class "color" $color) -}}
+    {{- partial "assets/persona.html" (dict 
+        "path" $path 
+        "class" $class 
+        "color" $color
+        "title" $title
+        "href" $href
+        "content" $content
+        "thumbnail" $thumbnail
+    ) -}}
 {{- end -}}

@@ -1,21 +1,42 @@
-{{- $responsiveVals := slice "table-responsive" "table-responsive-none" "table-responsive-sm" "table-responsive-md" "table-responsive-lg" "table-responsive-xl" "table-responsive-xxl" -}}
-{{- $responsive := intersect .Params $responsiveVals -}}
-{{- $main := complement $responsive .Params -}}
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
 
-{{- if in $responsive "table-responsive-none" -}}
-    {{- $responsive = "" -}}
-{{- else if not $responsive -}}
-    {{ $responsive = (slice "table-responsive") -}}
-{{- end -}}
+{{ $error := false }}
 
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "table" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $breakpoint := "" }}
+{{ $class := "" }}
+{{- if .IsNamedParams -}}
+    {{ $breakpoint = .Get "breakpoint" }}
+    {{ $class = .Get "class" | default "" }}
+{{ else }}
+    {{ $breakpoint = .Get 0 }}
+{{ end }}
+
+<!-- Main code -->
 {{- $input := .Inner | .Page.RenderString }}
 {{- $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" -}}
 {{- $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" -}}
 {{- $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" -}}
-{{- $class := delimit $main " " -}}
 {{- $old := "<table>" -}}
 {{- $new := printf "<table class=\"table %s\">" $class -}}
 {{ $input := replace $input $old $new -}}
-{{- with $responsive }}<div class="{{ delimit . " " }}">{{ end -}}
-{{ $input | safeHTML }}
-{{- with $responsive }}</div>{{ end -}}
+
+{{ if not $error }}
+    {{ if eq $breakpoint "none" }}
+        {{ $input | safeHTML }}
+    {{ else }}
+        <div class="table-responsive{{- with $breakpoint }}-{{ . }}{{ end -}}">
+        {{ $input | safeHTML }}
+        </div>
+    {{ end }}
+{{ end }}

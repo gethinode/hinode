@@ -1,0 +1,16 @@
+comment: Displays a breadcrumb for a specific page.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Page to display the breadcrumb for.
+    group: partial
+  path:
+    type: string
+    optional: true
+    comment: Path of the page to display the breadcrumb for.
+    group: shortcode
+
+

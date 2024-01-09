@@ -1,0 +1,8 @@
+comment: >-
+  Displays text in superscript.
+arguments:
+  text:
+    type: string
+    optional: false
+    position: 0
+    comment: Text to display in superscript. You can omit the argument name.

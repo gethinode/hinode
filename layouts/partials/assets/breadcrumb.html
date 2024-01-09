@@ -1,6 +1,24 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "breadcrumb" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/breadcrumb.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $page := .page }}
+
+<!-- Main code -->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        {{- range $index, $item := .Page.Ancestors.Reverse -}}
+        {{- range $index, $item := $page.Ancestors.Reverse -}}
             {{- $title := .LinkTitle -}}
             {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
             {{- $address := or .RelPermalink (.Params.Redirect | relLangURL) -}}
@@ -10,6 +28,6 @@
                 <li class="breadcrumb-item">{{ $title }}</li>
             {{ end }}
         {{- end -}}
-        <li class="breadcrumb-item active" aria-current="page">{{ .Page.LinkTitle }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ $page.LinkTitle }}</li>
     </ol>
 </nav>

@@ -1,0 +1,8 @@
+comment: >-
+  Displays text in subscript.
+arguments:
+  text:
+    type: string
+    optional: false
+    position: 0
+    comment: Text to display in subscript. You can omit the argument name.

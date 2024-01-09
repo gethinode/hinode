@@ -1,0 +1,40 @@
+comment: >-
+  Generates terminal output for either `bash`, `powershell`, or `sql` shell
+  languages. 
+arguments:
+  user:
+    type: string
+    optional: true
+    comment: User to add to the prompt, e.g. `user`.
+  host:
+    type: string
+    optional: true
+    comment: Host to add to the prompt, e.g. `localhost`.
+  prompt:
+    type: string
+    optional: true
+    comment: Prompt override, e.g. `PS C:\Users\User>`.
+  shell:
+    type: select
+    optional: true
+    default: bash
+    comment: Type of shell.
+    options:
+      values:
+        - bash
+        - powershell
+        - sql
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the command element.
+body:
+  type: string
+  optional: false
+  comment: >-
+    The shell commands and their output. Start a line with `(out)` to specify
+    an output line. Use the following line continuation characters for each
+    supported language:
+     - bash: backslash symbol
+     - PowerShell: backtick symbol
+     - sql: `(con)` line suffix

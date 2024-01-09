@@ -1,23 +1,23 @@
 <!-- 
-    Highlights text by applying a background color. The shortcode supports the following arguments:
-    "color":        Optional theme color of the highlight, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white" or "black". By default, the highlight uses the color of
-                    the HTML mark function.
-    "class":        Optional class attribute of the highlight element.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $error := false -}}
-{{ $color := .Get "color" | default "" -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
-{{ if and $color (not (in $supportedColors $color)) -}}
-    {{ errorf "Invalid value for param 'color': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
+{{ $error := false -}}
 
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "mark" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $color := .Get "color" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
 
-{{- if $color }}{{ $class = printf "%s text-bg-%s" $class $color }}{{ end -}}
-
+<!-- Main code -->
 {{- if not $error -}}
+    {{- if $color }}{{ $class = printf "%s text-bg-%s" $class $color }}{{ end -}}
     <mark{{ with $class }} class="{{ . }}"{{ end }}>{{ trim .Inner " \r\n" | .Page.RenderString -}}</mark>
 {{- end -}}

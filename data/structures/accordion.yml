@@ -1,0 +1,18 @@
+comment: >-
+  Use the accordion to show a group of vertically collapsing and expanding
+  items. Add accordion-item inner elements for each accordion item.
+arguments:
+  id:
+    type: string
+    optional: true
+    comment: >-
+      ID of the accordion, defaults to `accordion-n` with a sequential number n.
+  always-open:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to make accordion items stay open when another item is opened.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the accordion, e.g. `w-50`.

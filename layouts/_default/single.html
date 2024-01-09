@@ -1,19 +1,15 @@
 {{- define "partials/single-main.html" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" . }}{{ end -}}
+    {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
 
     {{ .Render "single/header" }}
 
     {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
-        <div class="d-{{ $breakpoint.current }}-none pb-5">{{ partial "assets/toc-dropdown.html" . }}</div>
+        <div class="d-{{ $breakpoint.current }}-none pb-5">{{ partial "assets/toc-dropdown.html" (dict "page" .) }}</div>
     {{- end -}}
     {{ .Render "single/body" }}
 
     {{ .Render "single/footer" }}
-    {{- if and .Site.Params.comments.enabled .Params.showComments | default true -}}
-        <hr>
-        {{ partial "assets/comments.html" . }}
-    {{ end -}}
 {{ end -}}
 
 {{ define "main" -}}

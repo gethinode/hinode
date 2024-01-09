@@ -1,0 +1,30 @@
+comment: >-
+  Makes a markdown table responsive. Responsive tables scroll horizontally to
+  improve their layout on smaller screens.
+arguments:
+  breakpoint:
+    type: select
+    optional: true
+    position: 0
+    comment: >-
+      By default, the table shortcode is responsive for all viewports. When a
+      breakpoint is set, the table will behave normally and not scroll
+      horizontally from the provided breakpoint and up. Use `none` to disable
+      this behavior. You can specify multiple breakpoints when using positional
+      arguments.
+    options:
+      values:
+        - none
+        - sm
+        - md
+        - lg
+        - xl
+        - xxl
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the table element, e.g. `table-striped-columns w-auto`.
+body:
+  type: string
+  optional: false
+  comment: Table input in markdown format.

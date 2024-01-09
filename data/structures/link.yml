@@ -1,0 +1,74 @@
+comment: >-
+  Generates a link for a given named link or url. The shortcode supports a
+  single unnamed parameter, or various named parameters. The unnamed parameter
+  is recognized as a url if it starts with `http`, else it is treated as either
+  a named link or internal reference (in that order). Any inner text is rendered
+  as the link title, otherwise it uses the host name (for external links), link
+  title (for internal links), or anchor name (for any local references
+  containing a `#`).
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    group: partial
+    comment: Context of the current page.
+  destination: 
+    type: string
+    optional: false
+    group: partial
+    comment: >-
+       Target destination.
+  href: 
+    type: string
+    position: 0
+    optional: true
+    comment: >-
+       Reference to either an external link (if it starts with `http`), a named
+       link (if it can be found in `params.links`), or internal reference.
+       Both external and internal references may include an anchor `#`.
+  name:
+    type: string
+    optional: true
+    comment: Alias of href.
+  url:
+    type: string
+    optional: true
+    comment: Alias of href.
+  cue:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should show a visual cue, defaults to
+      setting `main.externalLinks.cue` in the site's parameters.
+  tab:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should open in a new tab, defaults to
+      setting `main.externalLinks.tab` in the site's parameters.
+  case:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag to indicate if the retrieved title (e.g. no inner text is provided)
+      of an internal link should use its original case. If false, the title is
+      set to lower case.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the anchor element.
+  text:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    group: partial
+    comment: Link title.
+body:
+  type: string
+  optional: true
+  group: shortcode
+  comment: Link title.

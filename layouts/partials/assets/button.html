@@ -1,73 +1,32 @@
 <!-- 
-    Displays a button. The shortcode supports the following arguments:
-    "title"         Title of the button, required unless icon is set.
-    "href"          Optional address for the button or hyperlink.
-    "id"            Optional id of the button, to be used in the DOM.
-    "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
-    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
-    "color"         Optional theme color of the element, either "primary" (default), "secondary", "success",
-                    "danger", "warning", "info", "light", "dark", "white", or "black".
-    "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
-    "badge"         Optional positioned badge to display on top of the button.
-    "label"         Optional assistive label for the button or badge. The label is applied to the badge instead of the
-                    button when a badge has been defined. Default value of the button aria-label is its title.
-    "tooltip"       Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/
-                    inactive buttons.
-    "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive buttons.
-    "type"          Optional type of the element, either "link" or "button" (default).
-    "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right".
-    "class"         Optional class attribute of the button element, e.g. “toc-button”.
-    "icon"          Font Awesome icon class attribute, required unless title is set. An example value is "fas sort".
-    "order"         Optional order of the icon, either "first" or "last" (default).
-    "justify"       Optional justification of the button title and icon, either "start", "end", "center" (default),
-                    "between", "around", or "evenly".
-    "toast"         Optional id of the toast to display when the button is clicked.
-    "clipboard"     Optional text to be copied to the clipboard when the button is clicked.
-    "cue"           Optional flag to indicate if an external link should show a visual cue, defaults to setting
-                    "main.externalLinks.cue" in the site's parameters.
-    "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
-                    "main.externalLinks.tab" in the site's parameters.
-    "attributes"    Optional dictionary of key-value pairs added as custom attributes to the button element ('<a>').
-    "spacing"       Optional flag to add spacing to the inline button, defaults to "true".
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "button" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/button.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $title := trim .title " \r\n" -}}
 {{- $icon := .icon }}
 {{- if not (or $title $icon) -}}
     {{- errorf "partial [assets/button.html] - Missing element title or icon" -}}
+    {{ $error = true }}
 {{- end -}}
 
 {{- $id := .id }}
-
-{{- $state := "enabled" -}}
-{{- with .state }}{{ $state = . }}{{ end -}}
-{{- $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
-{{- if not (in $supportedStates $state) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'state': %s" $state -}}
-{{- end -}}
-
-{{- $size := "md" -}}
-{{- with .size }}{{ $size = . }}{{ end -}}
-{{- $supportedSizes := slice "sm" "md" "lg" -}}
-{{- if not (in $supportedSizes $size) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'size': %s" $size -}}
-{{- end -}}
-
-{{- $color := "primary" -}}
-{{- with .color }}{{ $color = . }}{{ end -}}
-{{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
-{{- if not (in $supportedColors $color) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'color': %s" $color -}}
-{{- end -}}
-
-{{- $outline := false -}}
-{{- with .outline }}{{ $outline = . }}{{ end -}}
-
-{{- $badge := "" -}}
-{{- with .badge }}{{ $badge = . }}{{ end -}}
-
-{{- $label := "" -}}
-{{- with .label }}{{ $label = . }}{{ end -}}
+{{- $state := .state  | default "enabled" -}}
+{{- $size := .size | default "md" -}}
+{{- $color := .color | default "primary" -}}
+{{- $outline := .outline | default false -}}
+{{- $badge := .badge | default "" -}}
+{{- $label := .label | default $title -}}
 
 {{- $tooltip := "" -}}
 {{- if not (strings.HasSuffix $state "active") -}}
@@ -75,58 +34,28 @@
 {{- end -}}
 
 {{- $href := .href -}}
-
 {{- $collapse := "" -}}
 {{- if not (strings.HasSuffix $state "active") -}}
     {{- with .collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
 {{- end -}}
 
-{{- if $tooltip -}}
-    {{- if $collapse -}}
-        {{- errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
-    {{- end -}}
+{{- if and $tooltip $collapse -}}
+    {{- errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
+    {{ $error = true }}
 {{- end -}}
-
-{{- $type := "button" -}}
-{{- with .type }}{{ $type = . }}{{ end -}}
-{{- $supportedTypes := slice "button" "link" -}}
-{{- if not (in $supportedTypes $type) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'type': %s" $type -}}
-{{- end -}}
-
-{{- $placement := "top" -}}
-{{- with .placement }}{{ $placement = . }}{{ end -}}
-{{- $supportedPlacements := slice "top" "bottom" "left" "right" -}}
-{{- if not (in $supportedPlacements $placement) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'placement': %s" $placement -}}
-{{- end -}}
-
-{{- $class := .class }}
+{{- $type := .type | default "button" -}}
+{{- $placement := .placement | default "top" -}}
+{{- $class := .class | default "" }}
 {{ with $badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
-
-{{- $order := "last" -}}
-{{- with .order }}{{ $order = . }}{{ end -}}
-{{- $supportedOrders := slice "first" "last" -}}
-{{- if not (in $supportedOrders $order) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'order': %s" $order -}}
-{{- end -}}
-
-{{- $justify := "center" -}}
-{{- with .justify }}{{ $justify = . }}{{ end -}}
-{{- $supportedJustify := slice "start" "end" "center" "between" "around" "evenly" -}}
-{{- if not (in $supportedJustify $justify) -}}
-    {{- errorf "partial [assets/button.html] - Invalid value for param 'justify': %s" $justify -}}
-{{- end -}}
-
+{{- $order := .order | default "last" -}}
+{{- $justify := .justify | default "center" -}}
 {{- $toast := .toast -}}
 {{- $clipboard := .clipboard -}}
-
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 {{- $isExternal := ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
 {{- $target := "" -}}
 {{- $rel := "" -}}
-
 {{- $spacing := .spacing | default true -}}
 
 {{- if $isExternal -}}
@@ -143,31 +72,35 @@
 
 {{- $attributes := .attributes -}}
 
-<a aria-label="{{ (or $label $title) | safeHTML }}" {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
-    {{- with $id }} id="{{ . }}"{{ end -}}
-    {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
-    {{- with $toast }} data-toast-target="{{ $toast }}"{{ end -}}
-    {{- with $clipboard }} data-clipboard="{{ $clipboard }}"{{ end -}}
-    {{- if eq $type "button" }} class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class -}}"
-    role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
-    {{- else }} class="link-{{ $color }} position-relative {{ $class }}"{{ end -}}
-    {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end -}}
-    {{- with $collapse }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
-    {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
-    {{- if eq $state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
-    {{- range $key, $val := $attributes -}}
-        {{ printf " %s=\"%s\"" $key $val | safeHTMLAttr }}
-    {{- end -}}
-    >
-    <div class="d-flex justify-content-{{ $justify }}">
-        <div class="my-auto">{{ $title | safeHTML }}</div>
-        {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon "spacing" false) }}</div>{{ end }}
-    </div>
+<!-- Main code -->
+{{ if not $error }}
+    <a aria-label="{{ (or $label $title) | safeHTML }}"
+        {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+        {{- with $id }} id="{{ . }}"{{ end -}}
+        {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
+        {{- with $toast }} data-toast-target="{{ $toast }}"{{ end -}}
+        {{- with $clipboard }} data-clipboard="{{ $clipboard }}"{{ end -}}
+        {{- if eq $type "button" }} class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class -}}"
+        role="button" {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
+        {{- else }} class="link-{{ $color }} position-relative {{ $class }}"{{ end -}}
+        {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end -}}
+        {{- with $collapse }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
+        {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
+        {{- if eq $state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
+        {{- range $key, $val := $attributes -}}
+            {{ printf " %s=\"%s\"" $key $val | safeHTMLAttr }}
+        {{- end -}}
+        >
+        <div class="d-flex justify-content-{{ $justify }}">
+            <div class="my-auto">{{ $title | safeHTML }}</div>
+            {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon "spacing" false) }}</div>{{ end }}
+        </div>
 
-    {{- with $badge }}
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ . }}
-            {{ with $label }}<span class="visually-hidden">{{ . }}</span>{{ end }}
-        </span>
-    {{- end -}}  
-</a>{{ if $spacing }}&nbsp;{{- end }}
+        {{- with $badge }}
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ . }}
+                {{ with $label }}<span class="visually-hidden">{{ . }}</span>{{ end }}
+            </span>
+        {{- end -}}  
+    </a>{{ if $spacing }}&nbsp;{{- end }}
+{{ end }}

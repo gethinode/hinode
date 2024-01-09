@@ -1,0 +1,27 @@
+comment: Highlights text by applying a background color.
+arguments:
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the highlight element.
+  color:
+    type: select
+    optional: true
+    comment: >-
+      Theme color of the highlight. By default, the highlight uses the color of
+      the HTML mark function (usually yellow).
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - white
+        - black
+body:
+  optional: false
+  comment: Text to be marked.

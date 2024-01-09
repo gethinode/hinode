@@ -1,49 +1,27 @@
 <!-- 
-    Displays a tab group of multiple items. Add nav-item inner elements for each tab pane. The shortcode supports the
-    following arguments:
-    "type"          Optional type of the tab group, either "tabs", "pills", "underline", or "callout".
-    "vertical"      Optional flag to show vertical tabs instead of horizontal tabs (default).
-    "fade"          Optional flag to make tab panes fade in.
-    "class"         Optional class attribute of the tab group, e.g. “nav-fill”.
-    "wrap"          Optional flag to enable word wrapping of tab titles, defaults to false.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $id := printf "nav-%d" .Ordinal -}}
-{{ with .Get "id" }}
-    {{ $id = . }}
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav" "child" "nav-item" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
 {{ end }}
 
+<!-- Initialize arguments -->
+{{- $id := .Get "id" | default (printf "nav-%d" .Ordinal) -}}
 {{- $class := .Get "class" | default "" -}}
 {{ $type := .Get "type" | default "" -}}
 {{ $supportedNavTypes := slice "tabs" "pills" "underline" "callout" -}}
-{{ if $type }}
-    {{ if not (in $supportedNavTypes $type) -}}
-        {{ errorf "Invalid value for param 'type': %s" $type -}}
-    {{ end -}}
-{{ end -}}
 
-{{ $supportedFlags := slice "true" "false" -}}
-{{ $verticalParam := "false" -}}
 {{ $vertical := false -}}
-{{ with .Get "vertical" }}{{ $verticalParam = . }}{{ end -}}
-{{ if in $supportedFlags $verticalParam -}}
-    {{ if eq $verticalParam "true" }}{{ $vertical = true }}{{ else }}{{ $vertical = false }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'vertical': %s" $verticalParam -}}
-{{- end -}}
-
-{{ $fadeParam := "false" -}}
-{{ with .Get "fade" }}{{ $fadeParam = . }}{{ end -}}
-{{ if not (in $supportedFlags $fadeParam) -}}
-    {{ errorf "Invalid value for param 'fade': %s" $fadeParam -}}
-{{- end -}}
-
-{{ $wrapParam := "false" -}}
-{{- $wrap := false -}}
-{{ with .Get "wrap" }}{{ $wrapParam = . }}{{ end -}}
-{{ if not (in $supportedFlags $wrapParam) -}}
-    {{ errorf "Invalid value for param 'wrap': %s" $wrapParam -}}
-{{- end -}}
+{{ with .Get "vertical" }}{{ $vertical = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ $wrap := false -}}
+{{ with .Get "wrap" }}{{ $wrap = partial "utilities/CastBool.html" . }}{{ end -}}
 
 {{- if and (eq $type "tabs") $vertical -}}
     {{- errorf "Tabs do not support vertical layout" -}}
@@ -81,6 +59,7 @@
     <div class="d-none d-lg-block">
 {{ end }}
 
+<!-- Main code -->
 <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
     {{ if $vertical }}<div class="row"><div class="col-auto">{{ end }}
     {{- range $index, $item := $items -}}

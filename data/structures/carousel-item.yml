@@ -1,0 +1,59 @@
+comment: Renders a carousel item with a responsive image.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
+  src:
+    type: string
+    optional: false
+    comment: Path or url of the image, e.g. `img/example.jpg`.
+  ratio:
+    type: string
+    optional: true
+    comment: >-
+      Ratio of the image. If set, the image is resized and cropped to match the
+      ratio. Else the original aspect ratio of the image is kept.
+    options:
+      values:
+        - 1x1
+        - 3x2
+        - 4x3
+        - 16x9
+        - 21x9
+    group: partial
+  portrait:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to adjust the ratio from landscape to portrait. The image itself
+      is not rotated, only the crop area is adjusted. Not applicable to vector
+      graphics.
+    group: partial
+  loading:
+    type: select
+    default: eager
+    optional: true
+    comment: >-
+      Loading behavior of the image. The loading of lazily loaded images is
+      deferred until the image is within scrolling range of the viewport. This
+      should reduce the initial loading time of the website. It is recommended
+      to lazily load only those images that are below the pagefold.
+    options:
+      values:
+        - eager
+        - lazy
+  caption:
+    type: string
+    optional: true
+    comment: Carousel slide caption.
+  active:
+    type: bool
+    optional: true
+    comment: >-
+      Sets the current carousel item as active (only one item at a time). By
+      default, the first slide is made active.

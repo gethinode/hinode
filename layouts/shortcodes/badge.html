@@ -1,23 +1,23 @@
 <!-- 
-    Adds an inline badge. The shortcode supports the following arguments:
-    "title"         Required title of the badge.
-    "class"         Optional class attributes of the badge element.
-    "color"         Optional theme color of the element, either "primary", "secondary" (default), "success",
-                    "danger", "warning", "info", "light", "dark", "white", or "black".
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
-{{- $error := false -}}
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "badge" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $title := .Get "title" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
-{{- $color := "secondary" -}}
-{{- with .Get "color" }}{{ $color = . }}{{ end -}}
-{{- $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
-{{- if not (in $supportedColors $color) -}}
-    {{- errorf "Invalid value for param 'color': %s" .Position -}}
-{{- end -}}
+{{- $color := .Get "color" | default "secondary" -}}
 
-{{- if not $title }}
-    {{ errorf "Missing title: %s" .Position -}}
-{{ else -}}
+<!-- Main code -->
+{{- if not $error }}
     <span class="badge text-bg-{{ $color }}{{ with $class }} {{ . }}{{ end }}">{{ $title | plainify }}</span>
 {{ end -}}

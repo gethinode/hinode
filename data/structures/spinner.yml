@@ -1,0 +1,36 @@
+comment: >-
+  Use the spinner shortcode to indicate the loading state of a component or
+  page. The inner content is used as alternative description. 
+arguments:
+  class:
+    type: string
+    optional: true
+    comment: >-
+      Class attribute of the wrapping element, e.g. `text-center`.
+  color:
+    type: select
+    optional: true
+    default: primary
+    comment: >-
+      Theme color of the element.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - white
+        - black
+  grow:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to indicate the spinner is growing instead of rotating.
+body:
+  optional: false
+  comment: >-
+    Alternative description.

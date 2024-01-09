@@ -1,6 +1,14 @@
 <!-- 
-    Displays text as subscript, provided as unnamed argument.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
+{{- $error := false -}}
+
+{{- if partial "utilities/IsInvalidArgs.html" (dict "structure" "sub" "args" .Params) -}}
+    {{- errorf "Invalid arguments: %s" .Position -}}
+    {{- $error = true -}}
+{{- end -}}
 
 {{- $text := .Get 0 | default "" -}}
 

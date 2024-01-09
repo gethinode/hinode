@@ -1,0 +1,25 @@
+{{ $page := .page }}
+{{ $input := .input }}
+{{ $args := .args }}
+
+{{- $responsiveVals := slice "table-responsive" "table-responsive-none" "table-responsive-sm" "table-responsive-md" "table-responsive-lg" "table-responsive-xl" "table-responsive-xxl" -}}
+{{- $responsive := intersect $args $responsiveVals -}}
+{{- $main := complement $responsive $args -}}
+
+{{- if in $responsive "table-responsive-none" -}}
+    {{- $responsive = "" -}}
+{{- else if not $responsive -}}
+    {{ $responsive = (slice "table-responsive") -}}
+{{- end -}}
+
+{{- $input := $input | $page.RenderString }}
+{{- $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" -}}
+{{- $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" -}}
+{{- $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" -}}
+{{- $class := delimit $main " " -}}
+{{- $old := "<table>" -}}
+{{- $new := printf "<table class=\"table %s\">" $class -}}
+{{ $input := replace $input $old $new -}}
+{{- with $responsive }}<div class="{{ delimit . " " }}">{{ end -}}
+{{ $input | safeHTML }}
+{{- with $responsive }}</div>{{ end -}}

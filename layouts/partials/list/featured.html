@@ -56,7 +56,7 @@
     {{ else }}
         {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
         {{- if $thumbnail }}
-            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "outerClass" $style "innerClass" "rounded" "title" $page.Site.Title "priority" "high") }}
+            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "wrapper" $style "class" "rounded" "title" $page.Site.Title "priority" "high") }}
         {{ end }}
     {{ end }}
 {{- end -}}
@@ -64,7 +64,7 @@
 <div class="container-fluid p-0 {{ with site.Params.home.feature.color }} bg-{{ . }} bg-opacity-{{ site.Params.style.themeOpacity | default "25" | safeHTML }}{{ end }}">
     <div class="container-xxl p-4 px-xxl-0 {{ if site.Params.home.fullCover }} fullcover{{ end }} d-flex flex-column">
         {{ if $breadcrumb }}
-            <div>{{ partial "assets/breadcrumb.html" $page }}</div>
+            <div>{{ partial "assets/breadcrumb.html" (dict "page" $page) }}</div>
         {{ end -}}
 
         {{ if eq $orientation "stacked" }}

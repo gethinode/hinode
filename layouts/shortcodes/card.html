@@ -1,28 +1,36 @@
 <!-- 
-    Displays a Bootstrap card that links to a page. Any inner text is used as description. The shortcode supports the
-    following arguments:
-    "path"          Optional path of the page. If omitted, specify the title, icon, thumbnail, and body as needed. 
-    "title"         Optional title of the card.
-    "class"         Optional class attribute of the card element, e.g. “w-50”.
-    "color"         Optional theme color of the card, either "primary", "secondary", "success", "danger",
-                    "warning", "info", "light", "dark", "white", "black", "body", or "body-tertiary". By default, no
-                    color is specified.
-    "padding"       Optional padding of the content, either "0", "1", "2", "3", "4", "5", or "auto" (default).
-    "gutter"        Gutter between columns in a group, either "0" (default), "1", "2", "3", "4", or "5".
-    "header"        Optional header components of the card, displayed in small caps. Supported values are "full"
-                    (default), "publication", "tags", and "none".
-    "footer"        Optional footer components of the card, displayed in small caps. Supported values are "full",
-                    "publication", "tags", and "none" (default).
-    "orientation"   Optional placecement of the thumbnail, either "stacked" (default), "horizontal", or "none".
-    "thumbnail"     Optional thumbnail image url, displayed on top or the left of the card.
-    "alt"           Optional alternate text for the thumbnail, uses "title" by default.
-    "icon"          Optional Font Awesome icon, displayed on top or the left of the card.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
 {{ $error := false }}
 
-{{ $path := or (.Get "path") "" }}
-{{ $page := .Page }}
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments and default values -->
+{{- $alt := .Get "alt" -}}
+{{- $class := partial "utilities/GetArgParent" (dict "page" . "arg" "class" "merge" true) -}}
+{{- $color := partial "utilities/GetArgParent" (dict "page" . "arg" "color") -}}
+{{- $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML -}}
+{{- $footer := partial "utilities/GetArgParent" (dict "page" . "arg" "footer") | default "none" -}}
+{{- $gutter := partial "utilities/GetArgParent" (dict "page" . "arg" "gutter") | default "0" -}}
+{{- $header := partial "utilities/GetArgParent" (dict "page" . "arg" "header") | default "full" -}}
+{{- $icon := .Get "icon" -}}
+{{- $loading := .Get "loading" -}}
+{{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") | default "stacked" -}}
+{{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") | default "auto" -}}
+{{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") | default "" -}}
+{{- $page := .Page -}}
+{{- $path := .Get "path" -}}
+{{- $thumbnail := .Get "thumbnail" -}}
+{{- $title := .Get "title" -}}
+
+<!-- Override arguments -->
 {{ if $path }}
     {{ $page = $.Site.GetPage $path }}
     {{ if not $page }}
@@ -31,67 +39,13 @@
     {{ end }}
 {{ end }}
 
-{{- $class := partial "utilities/GetArg" (dict "page" . "arg" "class" "merge" true) -}}
-
-{{- $color := partial "utilities/GetArg" (dict "page" . "arg" "color") -}}
-{{ if $color }}
-    {{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" "body" "body-tertiary" -}}
-    {{ if not (in $supportedColors $color) -}}
-        {{ errorf "Invalid value for param 'color': %s" .Position -}}
-        {{ $error = true -}}
-    {{ end -}}
-{{ end -}}
-
-{{- $header := partial "utilities/GetArg" (dict "page" . "arg" "header") | default "full" -}}
-{{ $supportedKeywords := slice "full" "publication" "tags" "none" -}}
-{{ if not (in $supportedKeywords $header) -}}
-    {{ errorf "Invalid value for param 'header': %s" .Position -}}
-{{ end -}}
-
-{{- $footer := partial "utilities/GetArg" (dict "page" . "arg" "footer") | default "none" -}}
-{{ if not (in $supportedKeywords $footer) -}}
-    {{ errorf "Invalid value for param 'footer': %s" .Position -}}
-{{ end -}}
-
-{{- $padding := partial "utilities/GetArg" (dict "page" . "arg" "padding") | default "auto" -}}
-{{ $supportedPaddings := slice "0" "1" "2" "3" "4" "5" "auto" -}}
-{{ if not (in $supportedPaddings $padding) -}}
-    {{ errorf "Invalid value for param 'padding': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{- $gutter := partial "utilities/GetArg" (dict "page" . "arg" "gutter") | default "0" -}}
-{{ $supportedGutters:= slice "0" "1" "2" "3" "4" "5" -}}
-{{ if not (in $supportedGutters $gutter) -}}
-    {{ errorf "Invalid value for param 'gutter': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{- $orientation := partial "utilities/GetArg" (dict "page" . "arg" "orientation") | default "stacked" -}}
-{{ $supportedOrientations := slice "stacked" "horizontal" "none" -}}
-{{ if not (in $supportedOrientations $orientation) -}}
-    {{ errorf "Invalid value for param 'orientation': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{- $layout := partial "utilities/GetArg" (dict "page" . "arg" "layout") | default "rich" -}}
-{{ $supportedLayouts := slice "rich" "minimal" -}}
-{{ if not (in $supportedLayouts $layout) -}}
-    {{ errorf "Invalid value for param 'layout': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{ $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
-{{ $title := .Get "title" | default "" -}}
-{{ $alt := .Get "alt" | default "" -}}
-{{ $icon := .Get "icon" | default "" -}}
-{{ $thumbnail := .Get "thumbnail" | default "" -}}
-
 {{ if .Parent }}
     {{ $class = (printf "h-100 %s" $class) }}
 {{ end }}
 
+<!-- Main code -->
 {{ if not $error -}}
+    <!-- Render card -->
     {{- $output := partial "assets/card.html" (dict 
         "path" $path
         "title" $title
@@ -103,11 +57,14 @@
         "footer" $footer
         "orientation" $orientation
         "description" $description
+        "ratio" $ratio
         "icon" $icon
         "thumbnail" $thumbnail
+        "loading" $loading
         "alt" $alt
     ) -}}
 
+    <!-- Pass output to parent or current stream -->
     {{ with .Parent }}
         {{ $current := .Scratch.Get "inner" }}
         {{ if $current }}

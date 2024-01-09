@@ -1,20 +1,26 @@
 <!-- 
-    Generates terminal output for either `bash`, `powershell`, or `sql` shell languages. The shortcode supports the
-    following named arguments:
-    "user"          Optional user to add to the prompt, e.g. "user".
-    "host"          Optional host to add to the prompt, e.g. "localhost".
-    "prompt"        Optional prompt override, e.g. "PS C:\Users\User>".
-    "shell"         Type of shell, either "bash" (default), "powershell", or "sql".
-    "class"         Optional class attribute of the command element.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "command" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $host := .Get "host" | default "" -}}
 {{- $user := .Get "user" | default "" -}}
 {{- $prompt := .Get "prompt" | default "" -}}
 {{- $filter := "(out)" -}}
 {{- $input := trim .Inner " \t\r\n" -}}
+{{- $class := .Get "class" | default "" -}}
 
-{{- $shell := lower (.Get "shell") -}}
+{{- $shell := lower (.Get "shell") | default "bash" -}}
 {{- $continuationPrompt := ">" -}}
 {{- $continuationStr := "\\" -}}
 {{- if eq $shell "powershell" -}}
@@ -33,45 +39,46 @@
     {{- end -}}
 {{- end -}}
 
-{{- $lines := split $input "\n" -}}
-{{- $prefix := "" -}}
-{{- $prevLine := "" -}}
-{{- $refined := "" -}}
-{{- range $line := $lines -}}
-    {{- $line = trim $line " \t\r\n" -}}
-    {{- if hasPrefix $line $filter -}}
-        {{- $prefix = printf "%s<span></span>" $prefix -}}
-        {{- if eq $shell "sql" -}}
-            {{- $line = printf "--%s" (strings.TrimPrefix $filter $line) -}}
+<!-- Main code -->
+{{ if not $error }}
+    {{- $lines := split $input "\n" -}}
+    {{- $prefix := "" -}}
+    {{- $prevLine := "" -}}
+    {{- $refined := "" -}}
+    {{- range $line := $lines -}}
+        {{- $line = trim $line " \t\r\n" -}}
+        {{- if hasPrefix $line $filter -}}
+            {{- $prefix = printf "%s<span></span>" $prefix -}}
+            {{- if eq $shell "sql" -}}
+                {{- $line = printf "--%s" (strings.TrimPrefix $filter $line) -}}
+            {{- else -}}
+                {{- $line = printf "#%s" (strings.TrimPrefix $filter $line) -}}
+            {{- end -}}
+        {{- else if (strings.HasSuffix $prevLine $continuationStr) -}}
+            {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $continuationPrompt -}}
         {{- else -}}
-            {{- $line = printf "#%s" (strings.TrimPrefix $filter $line) -}}
+            {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $prompt -}}
         {{- end -}}
-    {{- else if (strings.HasSuffix $prevLine $continuationStr) -}}
-        {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $continuationPrompt -}}
+        {{- $prevLine = $line -}}
+        {{- if (and (eq $shell "sql") (strings.HasSuffix $line $continuationStr)) -}}
+            {{- $line = strings.TrimSuffix $continuationStr $line -}}
+        {{- end -}}
+        {{- $refined = printf "%s\n%s" $refined $line -}}
+    {{- end -}}
+
+    {{- $refined := trim $refined "\r\n" -}}
+    {{- $output := (transform.Highlight $refined $shell | safeHTML) -}}
+    {{- $insert := printf "<span class=\"command-line-prompt\">%s</span><span class=\"line\">" $prefix -}}
+    {{- $output := (replace $output ("<span class=\"line\">" | safeHTML) $insert 1 | safeHTML) -}}
+
+    {{- if eq $shell "sql" -}}
+        {{- $output = (replace $output "<span class=\"c1\">--" "<span class=\"c1\">" | safeHTML) -}}
     {{- else -}}
-        {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $prompt -}}
+        {{- $output = (replace $output "<span class=\"c1\">#" "<span class=\"c1\">" | safeHTML) -}}
+        {{- $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) -}}
     {{- end -}}
-    {{- $prevLine = $line -}}
-    {{- if (and (eq $shell "sql") (strings.HasSuffix $line $continuationStr)) -}}
-        {{- $line = strings.TrimSuffix $continuationStr $line -}}
-    {{- end -}}
-    {{- $refined = printf "%s\n%s" $refined $line -}}
-{{- end -}}
 
-{{- $refined := trim $refined "\r\n" -}}
-{{- $output := (transform.Highlight $refined $shell | safeHTML) -}}
-{{- $insert := printf "<span class=\"command-line-prompt\">%s</span><span class=\"line\">" $prefix -}}
-{{- $output := (replace $output ("<span class=\"line\">" | safeHTML) $insert 1 | safeHTML) -}}
-
-{{- if eq $shell "sql" -}}
-    {{- $output = (replace $output "<span class=\"c1\">--" "<span class=\"c1\">" | safeHTML) -}}
-{{- else -}}
-    {{- $output = (replace $output "<span class=\"c1\">#" "<span class=\"c1\">" | safeHTML) -}}
-    {{- $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) -}}
-{{- end -}}
-
-{{- $class := .Get "class" | default "" -}}
-
-<div class="mb-3 syntax-highlight{{ with $class }} {{ . }}{{ end }}">
-    {{- $output -}}
-</div>
+    <div class="mb-3 syntax-highlight{{ with $class }} {{ . }}{{ end }}">
+        {{- $output -}}
+    </div>
+{{ end }}

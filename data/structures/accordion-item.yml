@@ -1,0 +1,19 @@
+comment: >-
+  Defines an individual accordion item.
+arguments:
+  header:
+    type: string
+    optional: false
+    comment: Header of the accordion item.
+  show:
+    type: bool
+    optional: true
+    comment: Flag to indicate an item should be shown as collapsed.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the accordion item.
+body:
+  optional: false
+  comment: Content of the accordion item.
+  group: shortcode

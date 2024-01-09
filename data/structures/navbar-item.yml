@@ -1,0 +1,34 @@
+comment: >-
+  Defines an individual item of the navigation bar.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
+  menu:
+    type: '*navigation.MenuEntry'
+    optional: false
+    comment: Menu data to use for the navbar item.
+  parent:
+    type: '*navigation.MenuEntry'
+    optional: true
+    comment: Parent of the current navbar item.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the item.
+  cue:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should show a visual cue, defaults
+      to the setting `main.externalLinks.cue` in the site's parameters.
+  tab:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should open in a new tab, defaults
+      to setting `main.externalLinks.tab` in the site's parameters.

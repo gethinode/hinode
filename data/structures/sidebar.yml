@@ -1,0 +1,24 @@
+comment: >-
+  Renders the sidebar navigation of a single page. It is intended to be used as
+  companion to the main navigation and is typically used in content-heavy
+  sections, such as documentation pages. On smaller screens, the sidebar is
+  replaced with an offcanvas element. In this case, the main navigation receives
+  an additional toggler on the left of the screen.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+    group: partial
+  menu:
+    type: '[]interface {}'
+    optional: true
+    comment: Path of the sidebar navigation menu.
+  version:
+    type: string
+    optional: true
+    comment: >-
+      Version of the sidebar navigation, used to define the base URL of
+      generated links, together with the page's section.

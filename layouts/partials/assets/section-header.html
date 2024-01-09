@@ -1,25 +1,23 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "section-header" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/section-header.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $title := .title -}}
-{{- $thumbnail := .thumbnail -}}
-{{- $icon := .icon -}}
-{{- $sectionHeader := .sectionHeader -}}
 {{- $description := .description -}}
 {{- $content := .content -}}
 
-{{- define "partials/section-header-img.html" -}}
-    {{- $title := .title -}}
-    {{- $thumbnail := .thumbnail -}}
-    {{- $icon := .icon -}}
-    {{ $padding := 5 }}
-
-    {{- if $thumbnail -}}
-        {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" "1x1" "outerClass" "h-100 card-img-wrap" "innerClass" "rounded-start card-img-h100" "title" $title) -}}
-    {{- else if $icon -}}
-        <div class="text-secondary fw-bold">
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-10x" $icon)) -}}
-        </div>
-    {{- end -}}
-{{- end -}}
-
+<!-- Main code -->
 {{ with $title }}<p id="{{ anchorize . }}" class="display-4 py-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
 {{ with $description }} <p class="lead mb-5">{{ . }}</p>{{ end }}
 {{ $content }}

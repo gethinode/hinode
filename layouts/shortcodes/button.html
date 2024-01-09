@@ -1,36 +1,18 @@
 <!-- 
-    Displays a button. The shortcode supports the following arguments:
-    "href"          Optional address for the button or hyperlink. Automatically assigned when using collapse.
-    "relref"        Optional name of the page to link to. Replaces "href" with a relative link if set.
-    "id"            Optional id of the button, to be used in the DOM.
-    "state"         Optional state of the button, either "enabled" (default), "disabled", "active", or "inactive".
-    "size"          Optional size of the button, either "sm", "md" (default), or "lg".
-    "color":        Optional theme color of the element, either "primary" (default), "secondary", "success",
-                    "danger", "warning", "info", "light", "dark", "white", or "black".
-    "outline"       Optional flag indicating the button should be outlined, either "false" (default) or "true".
-    "badge"         Optional positioned badge to display on top of the button.
-    "aria-label"    Optional label for the badge.
-    "tooltip"       Optional text to display in a tooltip. Cannot be used together with collapse. Ignored for active/
-                    inactive buttons.
-    "collapse"      Optional panel to collapse. Cannot be used together with tooltip. Ignored for active/inactive
-                    buttons.
-    "placement"     Optional position of the tooltip: "top" (default), "bottom", "left", or "right". 
-    "class"         Optional class attribute of the button element, e.g. “p-5”.
-    "icon"          Font Awesome icon class attribute, required unless button title is set. An example value is
-                    "fas sort".
-    "order"         Optional order of the icon, either "first" or "last" (default).
-    "justify"       Optional justification of the button title and icon, either "start", "end", "center" (default),
-                    "between", "around", or "evenly".
-    "toast"         Optional id of the toast to display when the button is clicked.
-    "cue"           Optional flag to indicate if an external link should show a visual cue, defaults to setting
-                    "main.externalLinks.cue" in the site's parameters.
-    "tab"           Optional flag to indicate if an external link should open in a new tab, defaults to setting
-                    "main.externalLinks.tab" in the site's parameters.
-    "spacing"       Optional flag to add spacing to the inline button, defaults to "true".
-    "wrapper"       Optional element to wrap the button.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
 {{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "button" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{ $type := "button" -}}
 
 {{- $icon := .Get "icon" | default "" }}
@@ -40,41 +22,13 @@
     {{ $error = true }}
 {{ end -}}
 
-{{ $state := "enabled" -}}
-{{ with .Get "state" }}{{ $state = . }}{{ end -}}
-{{ $supportedStates := slice "enabled" "disabled" "active" "inactive" -}}
-{{ if not (in $supportedStates $state) -}}
-    {{ errorf "Invalid value for param 'state': %s" .Position -}}
-    {{ $error = true }}
-{{ end -}}
-
-{{ $size := "md" -}}
-{{ with .Get "size" }}{{ $size = . }}{{ end -}}
-{{ $supportedSizes := slice "sm" "md" "lg" -}}
-{{ if not (in $supportedSizes $size) -}}
-    {{ errorf "Invalid value for param 'size': %s" .Position -}}
-{{ end -}}
-
-{{ $color := "primary" -}}
-{{ with .Get "color" }}{{ $color = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" "white" "black" -}}
-{{ if not (in $supportedColors $color) -}}
-    {{ errorf "Invalid value for param 'color': %s" .Position -}}
-    {{ $error = true }}
-{{ end -}}
-
-{{ $outlineParam := "false" -}}
+{{ $state := .Get "state" | default "enabled" -}}
+{{ $size := .Get "size" | default "md" -}}
+{{ $color := .Get "color" | default "primary" -}}
 {{ $outline := false -}}
-{{ with .Get "outline" }}{{ $outlineParam = . }}{{ end -}}
-{{ $supportedFlags := slice "true" "false" -}}
-{{ if in $supportedFlags $outlineParam -}}
-    {{ if eq $outlineParam "true" }}{{ $outline = true }}{{ end -}}
-{{ else -}}
-    {{ errorf "Invalid value for param 'outline': %s" .Position -}}
-{{ end -}}
-
+{{ with .Get "outline" }}{{ $outline = partial "utilities/CastBool.html" . }}{{ end -}}
 {{ $badge := .Get "badge" | default "" -}}
-{{ $label := .Get "aria-label" | default "" -}}
+{{ $label := or (.Get "label") (.Get "aria-label") | default "" -}}
 {{ $tooltip := .Get "tooltip" | default "" -}}
 {{ $collapse := .Get "collapse" | default "" -}}
 {{ $href := .Get "href" | default "" -}}
@@ -84,38 +38,18 @@
     {{ $href = relref . $relref }}
 {{ end }}
 {{ $class := .Get "class" | default "" -}}
-
-{{ $placement := "top" -}}
-{{ with .Get "placement" }}{{ $placement = . }}{{ end -}}
-{{ $supportedPlacements := slice "top" "bottom" "left" "right" -}}
-{{ if not (in $supportedPlacements $placement) -}}
-    {{ errorf "Invalid value for param 'placement': %s" .Position -}}
-    {{ $error = true }}
-{{ end -}}
-
+{{ $placement := .Get "placement" | default "top" -}}
 {{- $toast := .Get "toast" | default "" -}}
+{{- $order := .Get "order" | default "last" -}}
+{{- $justify := .Get "justify" | default "center" -}}
+{{- $cue := site.Params.main.externalLinks.cue -}}
+{{ with .Get "cue" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
+{{- $tab := default site.Params.main.externalLinks.tab -}}
+{{ with .Get "tab" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
+{{- $spacing := default (not .Parent) -}}
+{{ with .Get "spacing" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
 
-{{- $order := "last" -}}
-{{- with .Get "order" }}{{ $order = . }}{{ end -}}
-{{- $supportedOrders := slice "first" "last" -}}
-{{- if not (in $supportedOrders $order) -}}
-    {{ errorf "Invalid value for param 'order': %s" .Position -}}
-    {{ $error = true }}
-{{- end -}}
-
-{{- $justify := "center" -}}
-{{- with .Get "justify" }}{{ $justify = . }}{{ end -}}
-{{- $supportedJustify := slice "start" "end" "center" "between" "around" "evenly" -}}
-{{- if not (in $supportedJustify $justify) -}}
-    {{ errorf "Invalid value for param 'justify': %s" .Position -}}
-    {{ $error = true }}
-{{- end -}}
-
-{{- $cue := .Get "cue" | default site.Params.main.externalLinks.cue -}}
-{{- $tab := .Get "tab" | default site.Params.main.externalLinks.tab -}}
-
-{{- $spacing := .Get "spacing" | default (not .Parent) -}}
-
+<!-- Main code -->
 {{ if not $error }}
     {{- $output := partial "assets/button.html" (dict 
         "type" $type

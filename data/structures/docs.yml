@@ -1,0 +1,44 @@
+comment: >-
+    Capture a code snippet from a `toml` or `scss` input file. The shortcode scans for named markers in a local file:   
+    - For `.toml` files, use `# toml-docs-start` and `# toml-docs-end` followed by the snippet name
+    - For `.scss` files, use `// scss-docs-start` and `// scss-docs-end` followed by the snippet name
+    
+    The snippet between the two markers is then rendered using syntax highlighting.
+arguments:
+  name:
+    type: string
+    optional: false
+    comment: >-
+      Name of the code snippet, used to identify the relevant section of the
+      input file.
+  file:
+    type: string
+    optional: false
+    comment: >-
+      Path of the input file. The path is relative to the `basePath` defined in
+      the `docs` section of the site's parameters. If the file starts with `./`,
+      the path of the repository is used as base path instead.
+  show:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      If unset, shows the panel with the code snippet in collapsed state. By
+      default, the panel is expanded.
+  full:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      If unset, shows the filename only. By default, the entire path (relative
+      to the base path) is shown.
+  id:
+    type: string
+    optional: true
+    comment: >-
+      ID of the collapse panel holding the code snippet, defaults to
+      `docs-collapse-n` with a sequential number `n` starting at `1`.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the tab control that wraps the docs element.

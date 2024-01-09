@@ -9,7 +9,7 @@
             {{ with .Title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
         {{ end }}
         {{ if (.Params.menu) }}
-            {{- partial "assets/section-menu.html" . -}}
+            {{- partial "assets/section-menu.html" (dict "page" .) -}}
         {{- end -}}
         {{- $loading := "" -}}
         {{- if or (eq $layout "featured") .IsHome -}}

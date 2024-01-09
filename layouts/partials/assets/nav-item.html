@@ -1,19 +1,19 @@
+
 <!-- 
-    Defines an individual nav item. The shortcode supports the following arguments:
-    
-    "id"            Required unique ID of the nav-item.
-    "parentID"      Required ID of the parent (e.g. nav control).
-    "class"         Optional class attributes to be added to the nav-item.
-    "fade"          Optional flag to make the tab pane fade in.
-    "header"        Required header of the nav item.
-    "class"         Optional class attribute of the nav item.
-    "body"          The body content of the nav-item, supports Markdown and HTML (if enabled).
-    "show"          Optional flag to indicate the item should be shown as expanded (only one can be shown at a time).
-    "disabled"      Optional flag to indicate the item should be in a disabled state.
-    "type"          Optional type of the item to render, supports "accordion" as alternative format. Defaults to
-                    "tab-pane".
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
+{{ $error := false -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav-item" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/nav-item.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
 {{- $id := .id -}}
 {{- $parentID := .parentID -}}
 {{- $class := .class -}}
@@ -23,9 +23,10 @@
 {{- $body := .body -}}
 {{- $show := .show -}}
 {{- $disabled := .disabled -}}
-{{- $type := .type -}}
+{{- $type := .item_type -}}
 {{- $illustration := .illustration -}}
 
+<!-- Main code -->
 {{ if eq $type "accordion" }}
     <div class="accordion-item{{ if $show }} show{{ end }}{{ with $class }} {{ . }}{{ end }}">
         {{- with $header -}}

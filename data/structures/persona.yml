@@ -1,0 +1,60 @@
+comment: >-
+  Display a custom persona card.
+arguments:
+  path:
+    type: path
+    optional: true
+    comment: >-
+      Path of the page that defines the card content. You can set `title`,
+      `href`, `thumbnail` and the inner content individually too.
+  title:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: Title of the card.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the card element, e.g. `w-50`.
+  color:
+    type: select
+    optional: true
+    default: primary
+    comment: Theme color of the element.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - white
+        - black
+        - body
+        - body-tertiary
+  href:
+    type:
+      - string
+      - template.URL
+    optional: true
+    comment: Address for the button or hyperlink.
+  content:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: Content of the card.
+    group: partial
+  thumbnail:
+    type: url
+    optional: true
+    comment: Thumbnail image url, displayed on top or the left of the card.
+body:
+  optional: true
+  comment: >-
+    Description of the card.
+  group: shortcode

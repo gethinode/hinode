@@ -1,45 +1,28 @@
 <!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
     Inspired by the timeline snippet from Siddharth Panchal at https://bootsnipp.com/snippets/Q0ppE
-    
-    Show items ordered on a vertical timelime. The shortcode supports the following arguments:
-    "data"          Required filename of the timeline input. You can omit the file extension. The file should reside in
-                    the "data" folder. The data supports language extensions. For example, "timeline.en.yaml" refers to
-                    the English translation of the timeline data. The filename "timeline.yaml" is used when no suitable
-                    translation is found.
-    "background"    Optional border color of the connector dots, defaults to the body background color. If set, uses a
-                    subtle background color that is adaptive to the current color mode.
-    "class"         Optional class attribute of the timeline's container.
 -->
 
 {{ $error := false }}
-{{- $page := .Page -}}
 
-{{- $data := .Get "data" | default "" -}}
-{{ if not $data -}}
-    {{ errorf "Missing param 'data': %s" .Position -}}
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "timeline" "args" .Params) }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
     {{ $error = true }}
-{{ end -}}
-
-{{/* Try language-specific file first */}}
-{{ $path := path.Join (path.Dir $data) (printf "%s.%s" (path.BaseName $data) .Page.Language.Lang) (path.Ext $data) }}
-{{ $entries := index site.Data $path }}
-{{/* Use exact provided path as backup */}}
-{{ if not $entries -}}
-    {{ $entries = index site.Data $data }}
 {{ end }}
-{{ if not $entries -}}
-    {{ errorf "Invalid timeline data '%s': %s" $data .Position -}}
+
+<!-- Initialize arguments -->
+{{- $page := .Page -}}
+{{- $data := partial "utilities/GetI18nData.html" (dict "page" $page "data" (.Get "data"))}}
+{{ if not $data -}}
+    {{ errorf "Invalid timeline data '%s': %s" .Get "data" .Position -}}
     {{ $error = true }}
 {{ end -}}
 
-{{ $background := "" -}}
-{{ with .Get "background" }}{{ $background = . }}{{ end -}}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "light" "dark" -}}
-{{ if and $background (not (in $supportedColors $background)) -}}
-    {{ errorf "Invalid value for param 'background': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
+{{ $background := .Get "background" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
 
 <!-- Inline partial to render icon -->
@@ -95,9 +78,10 @@
     </div>    
 {{- end -}}
 
+<!-- Main code -->
 <!-- Render default timeline -->
 <div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}">
-    {{ range $index, $item := $entries }}
+    {{ range $index, $item := $data }}
         <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
             {{ if eq (mod $index 2) 1 }}
                 {{ partial "partials/timeline-panel.html" (dict "page" $page "content" $item.content "color" $item.color "title" $item.title "badge" $item.badge "date" $item.date "url" $item.url "direction" "start") }}
@@ -113,7 +97,7 @@
 
 <!-- Render timeline for smaller devices -->
 <div class="container p-0 d-block d-md-none small{{ with $background }} timeline-bg-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}">
-    {{ range $index, $item := $entries }}
+    {{ range $index, $item := $data }}
         <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
             {{ partial "partials/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}
             {{ partial "partials/timeline-panel.html" (dict "page" $page "content" $item.content "color" $item.color "title" $item.title "badge" $item.badge "date" $item.date "url" $item.url "direction" "end" "col" 9) }}

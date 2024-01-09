@@ -1,0 +1,190 @@
+comment: >-
+  Display a button with a hyperlink.
+arguments:
+  title:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: Title of the button, required unless icon is set.
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the button element, e.g. `p-5`.
+  color:
+    type: select
+    optional: true
+    default: primary
+    comment: Theme color of the element.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - white
+        - black
+  href:
+    type:
+      - string
+      - template.URL
+    optional: true
+    comment: >-
+      Address for the button or hyperlink. Automatically assigned when using
+      collapse.
+  relref:
+    type: string
+    optional: true
+    comment: >-
+      Name of the page to link to. Replaces `href` with a relative link if set.
+    group: shortcode
+  id:
+    type: string
+    optional: true
+    comment: Identifier of the button, to be used in the DOM.
+  state:
+    type: select
+    optional: true
+    default: enabled
+    comment: State of the button. 
+    options:
+      values:
+        - enabled
+        - disabled
+        - active
+        - inactive
+  size:
+    type: select
+    optional: true
+    default: md
+    comment: Size of the button.
+    options:
+      values:
+        - sm
+        - md
+        - lg
+  outline:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag indicating the button should be outlined.
+  badge:
+    type: string
+    optional: true
+    comment: Positioned badge to display on top of the button.
+  label:
+    type: string
+    optional: true
+    comment: >-         
+      Assistive label for the button or badge. The label is applied
+      to the badge instead of the button when a badge has been defined.
+      The default value of the button's assistive label is its title.
+  aria-label:
+    type: string
+    optional: true
+    comment: Alias for label.
+    group: shortcode
+  tooltip:
+    type: string
+    optional: true
+    comment: >-
+      Text to display in a tooltip. Cannot be used together with 
+      collapse. Ignored for active/inactive buttons.
+  collapse:
+    type: string
+    optional: true
+    comment: >-
+      Panel to collapse. Cannot be used together with tooltip. Ignored for
+      active/inactive buttons.
+  type:
+    type: select
+    optional: true
+    default: button
+    comment: Type of the element.
+    options:
+      values:
+        - link
+        - button
+  placement:
+    type: select
+    optional: true
+    default: top
+    comment: Position of the tooltip.
+    options:
+      values:
+        - top
+        - bottom
+        - left
+        - right
+  icon:
+    type: string
+    optional: true
+    comment: >-
+      Font Awesome icon class attribute, required unless title is set. An
+      example value is `fas sort`.
+  order:
+    type: select
+    optional: true
+    default: last
+    comment: Order of the icon
+    options:
+      values:
+        - first
+        - last
+  justify:
+    type: select
+    optional: true
+    default: center
+    comment: Justification of the button title and icon.
+    options:
+      values:
+        - start
+        - end
+        - center
+        - between
+        - around
+        - evenly
+  toast:
+    type: string
+    optional: true
+    comment: Identifier (ID) of the toast to display when the button is clicked.
+  clipboard:
+    type:
+      - string
+      - template.URL
+    optional: true
+    comment: Text to be copied to the clipboard when the button is clicked.
+  cue:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should show a visual cue, defaults
+      to the setting `main.externalLinks.cue` in the site's parameters.
+  tab:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should open in a new tab, defaults
+      to setting `main.externalLinks.tab` in the site's parameters.
+  attributes:
+    type: map[string]interface {}
+    optional: true
+    comment: >-
+      Dictionary of key-value pairs added as custom attributes to the button
+      element ('<a>').
+    group: partial
+  spacing:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag to add spacing to the inline button.
+  wrapper:
+    type: string
+    optional: true
+    comment: Element class of the button wrapper.
+    group: shortcode

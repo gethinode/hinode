@@ -1,5 +1,22 @@
-{{ $items := len (findRE "<li.*?>(.|\n)*?</li>" .TableOfContents) -}}
-{{ if (gt $items 1) -}}
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "toc" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/toc-dropdown.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page -}}
+{{ $items := len (findRE "<li.*?>(.|\n)*?</li>" $page.TableOfContents) -}}
+
+{{ if and (not $error) (gt $items 1) -}}
     <div class="d-grid gap-2 mx-auto">
         {{ partial "assets/button.html" (dict 
             "title" (T "toc") 
@@ -16,7 +33,7 @@
     <p>
         <div class="collapse border bg-body-tertiary rounded p-1 navbar-nav-scroll" id="toc-collapse">
             <div class="toc toc-panel text-body p-2">
-                <small>{{ .TableOfContents }}</small>
+                <small>{{ $page.TableOfContents }}</small>
             </div>
         </div>
     </p>

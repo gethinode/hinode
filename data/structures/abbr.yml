@@ -1,0 +1,35 @@
+comment: >-
+  Creates an HTML element that shows the long form of an abbrevitation. The
+  abbreviation data is centrally stored in a data file. By default, the
+  shortcode uses `abbr.yaml` with translation support.
+  
+  The data file is expected to store key-value pairs, where `id` is the
+  lower-case abbrevation and `long` its long form. The following example
+  illustrates this using YML:
+
+  - id: css
+    long: `Cascading Style Sheets`
+arguments:
+  key:
+    type: string
+    position: 0
+    optional: false
+    comment: >-
+      Case-insensitive key of the abbreviation. In shorthand notation, this is
+      the first (and only) matched argument. Non-alphanumeric keys must be quoted.
+  data:
+    type: string
+    default: abbr.yaml
+    optional: true
+    comment: >-
+      Filename of the abbrevation input. You can omit the file extension. The
+      file should reside in the `data` folder. The data supports language
+      extensions. For example, `abbr.en.yaml` refers to the English translation
+      of the abbrevation data. The filename `abbr.yaml` is used when no suitable
+      translation is found.
+  class:
+    type: string
+    optional: true
+    comment: >-
+      Class attribute of the abbr element. For example, specify `initialism` for
+      a slightly smaller font size.

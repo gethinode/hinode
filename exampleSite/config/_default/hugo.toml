@@ -1,6 +1,6 @@
 resourcedir = '../resources/'
 title = "Hinode"
-copyright = "Copyright © 2023 Mark Dumay."
+copyright = "Copyright © 2024 Mark Dumay."
 paginate = 9
 enableGitInfo = true
 
@@ -79,6 +79,8 @@ home = ["HTML", "RSS", "REDIR"]
     keepVarNames = true
     precision = 0
     version = 2022
+  [minify.tdewolff.html]
+    keepWhitespace = true
 
 [module]
   replacements = 'github.com/gethinode/hinode -> ../..'

@@ -1,93 +1,42 @@
 <!-- 
-    Displays a navigation header with a toggler. The menu items are derived from the site's configuration. Nested items
-    are supported at one-level depth. The navigation bar includes a search area and a language switcher if applicable.
-    The shortcode supports the following arguments:
-    "id"            Optional id of the navbar toggler, defaults to "navbar-collapse-n" with a sequential number n
-                    starting at 1.
-    "path"          Required path of the active page.
-    "menus"         Optional name of the menu configuration, defaults to "main".
-    "size"          Optional breakpoint of the navbar toggler, either "xs", "sm", "md" (default), "lg", or "xl".
-    "style"         Optional style of the navbar, either "light" (default) or "dark".
-    "color"         Optional background color of the navbar, either "primary", "secondary", "success",
-                    "danger", "warning", "info", "white", "black", "body", or "body-tertiary". The default color is
-                    none.
-    "mode"          Optional flag to include a color mode switcher, default is "true" (if dark mode is enabled).
-    "search"        Optional flag to include a search input, default is "true".
-    "logo"          Optional address of the logo image.
-    "title"         Optional brand title, displayed when the logo is not set.
-    "class":        Optional class attribute of the navbar container.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
 -->
 
 {{ $error := false }}
-{{ $supportedColors := slice "primary" "secondary" "success" "danger" "warning" "info" "white" "black" "body" "body" "body-tertiary" -}}
-{{ $supportedFlags := slice "true" "false" -}}
 
-{{- $id := printf "navbar-collapse-%d" (add .Ordinal 1) -}}
-{{ with .Get "id" }}
-    {{ $id = . }}
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "navbar" "args" .Params "group" "shortcode") }}
+    {{ errorf "Invalid arguments: %s" .Position -}}
+    {{ $error = true }}
 {{ end }}
 
-{{ $path := .Get "path" | default "" }}
-{{ $page := .Site.GetPage $path }}
-{{ if not $page }}
-    {{ errorf "Invalid or missing value for param 'path': %s" $path -}}
-    {{ errorf " - Location: %s" .Position -}}
+<!-- Initialize arguments -->
+{{- $id := .Get "id" | default (printf "navbar-collapse-%d" (add .Ordinal 1)) -}}
+{{ $path := .Get "path" }}
+{{ $page := "" }}
+{{ if $path }}{{ $page = .Site.GetPage $path }}{{ end }}
+{{ if and $path (not $page) }}
+    {{ errorf "Cannot find page '%s': %s" $path .Position -}}
     {{ $error = true -}}
 {{ end }}
 
-{{ $menus := "main" -}}
-{{ with .Get "menus" }}{{ $menus = .}}{{ end -}}
-
-{{ $size := "md" -}}
-{{ with .Get "size" }}{{ $size = . }}{{ end -}}
-{{ $supportedSizes := slice "xs" "sm" "md" "lg" "xl" -}}
-{{ if not (in $supportedSizes $size) -}}
-    {{ errorf "Invalid value for param 'size': %s" $size -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{ $style := "light" -}}
-{{ with .Get "style" }}{{ $style = . }}{{ end -}}
-{{ $supportedStyles := slice "light" "dark" -}}
-{{ if not (in $supportedStyles $style) -}}
-    {{ errorf "Invalid value for param 'style': %s" $style -}}
-    {{ $error = true -}}
-{{ end -}}
-
+{{ $menus := .Get "menus" | default "main" -}}
+{{ $size := .Get "size" | default "md" -}}
+{{ $style := .Get "style" | default "light" -}}
 {{ $inverseStyle := "light" -}}
 {{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
-
-{{ $color := "" -}}
-{{ with .Get "color" }}
-    {{ $color = . }}
-    {{ if not (in $supportedColors $color) -}}
-        {{ errorf "Invalid value for param 'color': %s" $color -}}
-        {{ $error = true -}}
-    {{ end -}}
-{{ end -}}
-
-{{ $searchParam := "true" -}}
-{{ with .Get "search" }}{{ $searchParam = . }}{{ end -}}
-{{ if not (in $supportedFlags $searchParam) -}}
-    {{ errorf "Invalid value for param 'search': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{ $modeParam := "true" -}}
-{{ with .Get "mode" }}{{ $modeParam = . }}{{ end -}}
-{{ if not (in $supportedFlags $modeParam) -}}
-    {{ errorf "Invalid value for param 'mode': %s" .Position -}}
-    {{ $error = true -}}
-{{ end -}}
-
-{{ $logo := "" -}}
-{{ with .Get "logo" }}{{ $logo = . }}{{ end -}}
-
-{{ $title := "" -}}
-{{ with .Get "title" }}{{ $title = . }}{{ end -}}
-
+{{ $color := .Get "color" | default "" -}}
+{{ $searchParam := true -}}
+{{ with .Get "search" }}{{ $searchParam = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ $modeParam := true -}}
+{{ with .Get "mode" }}{{ $modeParam = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ $logo := .Get "logo" | default "" -}}
+{{ $title := .Get "title" | default "" -}}
 {{- $class := .Get "class" | default "" -}}
 
+<!-- Main code -->
 {{ if not $error -}}
     {{- partial "assets/navbar.html" (dict 
         "id" $id 

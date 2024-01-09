@@ -1,10 +1,41 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+    This source code adapts the original embedded shortcode as maintained by the Hugo repository. It introduces the
+    following modifications:
+     - Isolated the styles to comply with the Content Security Policy
+     - Added validation of shortcode arguments
+     - Modified the layout
+    
+    The original source code is available on:
+    https://github.com/gohugoio/hugo/tpl/tplimpl/embedded/templates/shortcodes/youtube.html
+    Copyright 2022 The Hugo Authors. Licensed under the Apache License, Version 2.0.
+-->
+
 {{- $pc := .Page.Site.Config.Privacy.YouTube -}}
 {{- if not $pc.Disable -}}
-{{- $ytHost := cond $pc.PrivacyEnhanced  "www.youtube-nocookie.com" "www.youtube.com" -}}
-{{- $id := .Get "id" | default (.Get 0) -}}
-{{- $class := .Get "class" | default (.Get 1) -}}
-{{- $title := .Get "title" | default "YouTube Video" }}
-<div class="youtube-embedded {{ $class }}">
-  <iframe src="https://{{ $ytHost }}/embed/{{ $id }}?origin={{ .Site.BaseURL }}{{ with .Get "autoplay" }}{{ if eq . "true" }}&autoplay=1{{ end }}{{ end }}" allowfullscreen title="{{ $title }}"></iframe>
-</div>
+  {{ $error := false }}
+
+  <!-- Validate arguments -->
+  {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "youtube" "args" .Params) }}
+      {{ errorf "Invalid arguments: %s" .Position -}}
+      {{ $error = true }}
+  {{ end }}
+  
+  <!-- Initialize arguments -->
+  {{- $id := .Get "id" | default (.Get 0) -}}
+  {{- $class := .Get "class" | default (.Get 1) -}}
+  {{- $title := .Get "title" | default "YouTube Video" }}
+  {{- $autoplay := false }}
+  {{ with .Get "autoplay" }}{{ $autoplay = partial "utilities/CastBool.html" . }}{{ end -}}
+  {{- $host := cond $pc.PrivacyEnhanced  "www.youtube-nocookie.com" "www.youtube.com" -}}
+  
+  <!-- Main code -->
+  <div class="youtube-embedded {{ $class }}">
+    <iframe src="https://{{ $host }}/embed/{{ $id }}?origin={{ .Site.BaseURL }}{{ if $autoplay }}&autoplay=1{{ end }}"
+      allowfullscreen title="{{ $title }}">
+    </iframe>
+  </div>
 {{ end -}}
