@@ -76,7 +76,7 @@
                         {{ partial "partials/list-img.html" (dict "thumbnail" $thumbnail "title" $item.Title "mode" $item.Params.colormode "loading" $loading) }}
                     </div>
                     <div class="col-12 p-3">
-                        {{ partial "partials/list-content.html" (dict "title" $item.Title "content" (partial "utilities/GetDescription.html" $item)) }}
+                        {{ partial "partials/list-content.html" (dict "title" $item.Title "content" (or $item.Description $item.Content)) }}
                     </div>
                 </div>
             </div>
