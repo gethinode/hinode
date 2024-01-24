@@ -2,13 +2,20 @@
 
 // Source: https://jsfiddle.net/njhgr40m/
 
+
 .navbar {
+    --bs-navbar-expanded-color: var(--bs-body-bg);
+
     transition: 0.5s ease-in-out;
     background-color: transparent;
+
+    @each $state, $val in $theme-colors {
+        --bs-navbar-color-#{$state}: #{$val};
+    }
 }
 
 .nav-active, .navbar-expanded {
-    background-color: var(--bs-body-bg);
+    background-color: var(--bs-navbar-expanded-color);
 }
 
 .nav-link {
@@ -29,6 +36,30 @@
 
 .navbar-expanded {
     box-shadow: $box-shadow-sm;
+}
+
+.navbar-overlay-dark {
+    --bs-navbar-color: #{$navbar-dark-color};
+    --bs-navbar-hover-color: #{$navbar-dark-hover-color};
+    --bs-navbar-disabled-color: #{$navbar-dark-disabled-color};
+    --bs-navbar-active-color: #{$navbar-dark-active-color};
+    --bs-navbar-brand-color: #{$navbar-dark-brand-color};
+    --bs-navbar-brand-hover-color: #{$navbar-dark-brand-hover-color};
+    --bs-navbar-toggler-border-color: #{$navbar-dark-toggler-border-color};
+}
+
+.navbar-overlay-light, .navbar-overlay-dark.nav-active, .navbar-overlay-dark.navbar-expanded {
+    --bs-navbar-color: #{$navbar-light-color};
+    --bs-navbar-hover-color: #{$navbar-light-hover-color};
+    --bs-navbar-disabled-color: #{$navbar-light-disabled-color};
+    --bs-navbar-active-color: #{$navbar-light-active-color};
+    --bs-navbar-brand-color: #{$navbar-light-brand-color};
+    --bs-navbar-brand-hover-color: #{$navbar-light-brand-hover-color};
+    --bs-navbar-toggler-border-color: #{$navbar-light-toggler-border-color};
+}
+
+.nav-item .vr {
+    color: var(--bs-navbar-color);
 }
 
 /* Remove border from toggler */

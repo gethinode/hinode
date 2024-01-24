@@ -71,6 +71,8 @@
                 {{- partial "assets/navbar.html" (dict
                     "page" .
                     "fixed" site.Params.navigation.fixed
+                    "overlay" site.Params.navigation.overlay
+                    "overlayMode" site.Params.navigation.overlayMode
                     "color" site.Params.navigation.color
                     "style" (default "light" site.Params.navigation.style)
                     "size" (default "md" site.Params.navigation.size))

@@ -52,6 +52,8 @@
     logo = "/img/logo_icon.svg"
     color = "body"
     fixed = true
+    overlay = false
+    overlayMode = "dark"
     horizontal = false
     offset = "5.5rem"
     search = true
