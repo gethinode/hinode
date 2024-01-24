@@ -26,8 +26,10 @@
     {{- errorf "partial [head/stylesheet.html] - Invalid value for site param 'style.darkModeTint': %s" site.Params.style.darkModeTint -}}
 {{ end}}
 
-{{- $navbarOffset := "0em" -}}
-{{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4em" }}{{ end }}
+{{- $navbarOffset := "0rem" -}}
+{{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4rem" }}{{ end }}
+{{- $overlayOffset := $navbarOffset -}}
+{{- if site.Params.navigation.overlay }}{{ $overlayOffset = "0rem" }}{{ end }}
 {{- $vars := dict 
     "theme-font"              (default "Inter" site.Params.style.themeFont)
     "font-size-base"          (default "1rem" site.Params.style.fontSizeBase)
@@ -39,8 +41,9 @@
     "danger"                  (default "#dc3545" site.Params.style.danger)
     "light"                   (default "#f8f9fa" site.Params.style.light)
     "dark"                    (default "#212529" site.Params.style.dark)
-    "navbar-height"           (site.Params.navigation.offset | default "4em")
+    "navbar-height"           (site.Params.navigation.offset | default "4rem")
     "navbar-offset"           $navbarOffset
+    "overlay-offset"          $overlayOffset
     "enable-dark-mode"        (printf "%t" ((default true site.Params.main.enableDarkMode)))
     "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))
     "dark-mode-shade"         (default "0%" site.Params.style.darkModeShade)

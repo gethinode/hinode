@@ -19,3 +19,11 @@
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+.background-img {
+    --overlay-offset: #{$overlay-offset};
+
+    height: calc(100vh - var(--overlay-offset));
+    width: 100vw;
+    object-fit: cover;
+}

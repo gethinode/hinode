@@ -100,6 +100,26 @@ arguments:
     default: false
     comment: Flag to indicate the navbar should stick to the top.
     group: partial
+  overlay:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to indicate if the navbar should render as an overlay on the current
+      page.
+    group: partial
+    release: v0.22.6
+  overlayMode:
+    type: select
+    optional: true
+    default: dark
+    comment: Color mode of the overlay.
+    options:
+      values:
+        - light
+        - dark
+    group: partial
+    release: v0.23.0
   logo:
     type: path
     optional: true

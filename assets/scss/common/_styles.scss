@@ -22,13 +22,13 @@ a:active {
 }
 
 .fullscreen {
-    --navbar-offset: #{$navbar-offset};
+    --overlay-offset: #{$overlay-offset};
 
-    min-height: calc(100vh - var(--navbar-offset));
+    min-height: calc(100vh - var(--overlay-offset));
 }
 
 .main-content {
-    margin-top: $navbar-offset;
+    margin-top: $overlay-offset;
 }
 
 $utilities: map-merge(
