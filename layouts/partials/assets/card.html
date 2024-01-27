@@ -19,12 +19,24 @@
 {{- $header := .header | default "full" -}}
 {{- $href := .href -}}
 {{- $icon := .icon -}}
+{{- $iconStyle := "" -}}
+{{- $align := .align | default "start" -}}
+{{- $style := .style | default "" -}}
 {{- $loading := .loading -}}
 {{- $orientation := .orientation | default "stacked" -}}
 {{- $padding := .padding | default "auto" -}}
 {{- $ratio := .ratio -}}
 {{- $thumbnail := .thumbnail -}}
 {{- $title := .title -}}
+{{- $subtle := .subtle -}}
+{{- $colorStyle := "" -}}
+{{ if $color }}
+    {{ if $subtle }}
+        {{- $colorStyle = printf "bg-%s-subtle text-%s-emphasis" $color $color -}}
+    {{ else }}
+        {{- $colorStyle = printf "bg-%s text-bg-%s" $color $color -}}
+    {{ end }}
+{{ end }}
 
 <!-- Override arguments -->
 {{- $page := "" }}
@@ -41,6 +53,13 @@
     {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
     {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
 {{- end -}}
+
+{{ if (hasPrefix $orientation "horizontal") }}
+    {{ if not $style }}{{ $style = "fa-fluid fa-fw" }}{{ end }}
+{{ else }}
+    {{ if not $style }}{{ $style = "fa-4x" }}{{ end }}
+    {{- $iconStyle = "pb-3" -}}
+{{ end }}
 
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 
@@ -100,18 +119,18 @@
 
 {{- if hasPrefix $orientation "horizontal" -}}
     <!-- Render horizontal card -->
-    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
+    <div class="card {{ $colorStyle }} {{ $class }}">
         <div class="row g-0 row-cols-1 h-100">
-            <div class="col-4{{ if eq  $orientation "horizontal-sm" }} col-md-2{{ end }}">
+            <div class="{{ if eq $orientation "horizontal-sm" }}col-2{{ else }}col-4{{ end }}">
                 {{- if $thumbnail -}}
                     {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "1x1") "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100" "title" $title "loading" $loading) -}}
                 {{- else if $icon -}}
-                    <div class="card-icon p-{{ $padding }} h-100 fa-wrapper d-flex align-items-center justify-content-center">
-                        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fluid fa-fw" $icon)) -}}
+                    <div class="card-icon p-{{ $padding }} h-100 fa-wrapper d-flex align-items-{{ $align}} justify-content-center {{ $iconStyle }}">
+                        {{- partial "assets/icon.html" (dict "icon" (printf "%s %s" $icon $style)) -}}
                     </div>
                 {{- end -}}
             </div>
-            <div class="col-8{{ if eq  $orientation "horizontal-sm" }} col-md-10{{ end }}">
+            <div class="{{ if eq $orientation "horizontal-sm" }}col-10{{ else }}col-8{{ end }}">
                 <div class="card-body d-flex p-{{ $padding }} flex-column h-100">
                     {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}</div>{{ end }}
                     <div class="h-100">
@@ -124,12 +143,12 @@
     </div>
 {{- else -}}
     <!-- Render stacked / default card -->
-    <div class="card {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} {{ $class }}">
+    <div class="card {{ $colorStyle }} {{ $class }} text-{{ $align }}">
         {{- if $thumbnail -}}
             {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "16x9") "wrapper" "card-img-wrap" "class" "card-img-top" "title" (or $alt $title) "loading" $loading) -}}
         {{- else if $icon -}}
-            <div class="card-icon  p-{{ $padding }}">
-                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-4x" $icon)) -}}
+            <div class="card-icon p-{{ $padding }} {{ $iconStyle }} text-{{ $align }}">
+                {{- partial "assets/icon.html" (dict "icon" (printf "%s %s" $icon $style)) -}}
             </div>
         {{- end -}}
         <div class="card-body d-flex flex-column p-{{ $padding }}">

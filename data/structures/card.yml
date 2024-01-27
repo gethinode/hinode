@@ -157,19 +157,39 @@ arguments:
     optional: true
     comment: >-
       Font Awesome icon, displayed on top or the left of the card.
+  align:
+    type: select
+    optional: true
+    default: start
+    release: v0.23.0-alpha2
+    comment: Icon alignment.
+    options:
+      values:
+        - start
+        - end
+        - center
+  style:
+    type: string
+    optional: true
+    release: v0.23.0-alpha2
+    comment: Icon style.
   orientation:
     type: select
     optional: true
     default: stacked
     parent: cascade
-    comment: >-
-      Placement of the thumbnail or icon.
+    comment: Placement of the thumbnail or icon.
     options:
       values:
         - stacked
         - horizontal
         - horizontal-sm
         - none
+  subtle:
+    type: bool
+    optional: true
+    release: v0.23.0-alpha2
+    comment: Apply subtle background colors.
 body:
   optional: true
   comment: >-

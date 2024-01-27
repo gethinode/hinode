@@ -24,6 +24,9 @@
 {{- $header := .Get "header" | default "" -}}
 {{- $footer := .Get "footer" | default "" -}}
 {{- $orientation := .Get "orientation" | default "" -}}
+{{- $align := .Get "align" | default "start" -}}
+{{- $style := .Get  "style" | default "" -}}
+{{- $subtle := .Get "subtle" | default false -}}
 
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
