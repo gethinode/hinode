@@ -21,6 +21,9 @@
 {{- $gutter := partial "utilities/GetArgParent" (dict "page" . "arg" "gutter") | default "0" -}}
 {{- $header := partial "utilities/GetArgParent" (dict "page" . "arg" "header") | default "full" -}}
 {{- $icon := .Get "icon" -}}
+{{- $align := partial "utilities/GetArgParent" (dict "page" . "arg" "align") | default "start" -}}
+{{- $style := partial "utilities/GetArgParent" (dict "page" . "arg" "style") | default "" -}}
+{{- $subtle := partial "utilities/GetArgParent" (dict "page" . "arg" "subtle") | default false -}}
 {{- $loading := .Get "loading" -}}
 {{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") | default "stacked" -}}
 {{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") | default "auto" -}}
@@ -59,6 +62,9 @@
         "description" $description
         "ratio" $ratio
         "icon" $icon
+        "align" $align
+        "style" $style
+        "subtle" $subtle
         "thumbnail" $thumbnail
         "loading" $loading
         "alt" $alt

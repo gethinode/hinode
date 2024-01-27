@@ -102,7 +102,7 @@
                 </div>
             {{- end -}}
         {{- end -}}
-        {{- print $cards | safeHTML }}
+        {{if $cards }}{{- print $cards | safeHTML }}{{ end }}
     </div>
 
     {{ if $paginate }}
