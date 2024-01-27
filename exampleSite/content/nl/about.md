@@ -10,7 +10,7 @@ showComments: false
 
 {{< image src="/img/logo_var.svg#logo" class="img-fluid w-50" wrapper="text-center" >}}
 
-{{< card-group class="text-center border-0" padding="3" >}}
+{{< card-group align="center" class="border-0" padding="3" >}}
     {{< card title="Bootstrap raamwerk" icon="fab bootstrap" >}}
         Bouw snelle websites geschikt voor mobiele en desktop schermen met Bootstrap 5. Pas de site eenvoudig aan met bronbestanden in Sass.
     {{< /card >}}

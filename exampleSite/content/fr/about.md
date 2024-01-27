@@ -9,7 +9,7 @@ showComments: false
 
 {{< image src="/img/logo_var.svg#logo" class="img-fluid w-50" wrapper="text-center" >}}
 
-{{< card-group class="text-center border-0" padding="3" >}}
+{{< card-group align="center" class="border-0" padding="3" >}}
     {{< card title="Framework Bootstrap" icon="fab bootstrap" >}}
         Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site avec les fichiers source Sass.
     {{< /card >}}

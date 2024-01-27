@@ -8,7 +8,7 @@ showComments: false
 
 {{< image src="/img/logo_var.svg#logo" class="img-fluid w-50" wrapper="text-center" >}}
 
-{{< card-group class="text-center border-0" padding="3" >}}
+{{< card-group align="center" class="border-0" padding="3" >}}
     {{< card title="Bootstrap framework" icon="fab bootstrap" >}}
         Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source Sass files.
     {{< /card >}}
