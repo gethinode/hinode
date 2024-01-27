@@ -159,6 +159,7 @@ arguments:
       Font Awesome icon, displayed on top or the left of the card.
   align:
     type: select
+    parent: cascade
     optional: true
     default: start
     release: v0.23.0-alpha2
@@ -170,6 +171,7 @@ arguments:
         - center
   style:
     type: string
+    parent: cascade
     optional: true
     release: v0.23.0-alpha2
     comment: Icon style.
@@ -187,6 +189,7 @@ arguments:
         - none
   subtle:
     type: bool
+    parent: cascade
     optional: true
     release: v0.23.0-alpha2
     comment: Apply subtle background colors.

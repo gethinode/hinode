@@ -33,31 +33,36 @@
 {{- $loading := .loading -}}
 
 <!-- Override arguments -->
+{{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
 {{ $paginator := "" }}
-{{ if $paginate }}
+{{ if and $isPages $paginate }}
     {{ $paginator = $page.Paginate $pages }}
     {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
 {{ end }}
 
 {{ $list := slice }}
-{{ range $index, $element := $pages }}
-    {{ $params := dict }}
-    <!-- regular page -->
-    {{- if and $element.RelPermalink $element.File -}}
-        {{- $params = merge $params (dict "path" $element.File.Path) -}}
-    <!-- headless page -->
-    {{- else -}}
-        {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
-        {{- $params = merge $params (dict
-            "title" $element.Title
-            "href" $element.RelPermalink
-            "description" (partial "utilities/GetDescription.html" $element)
-            "thumbnail" $thumbnail
-            "icon" $element.Params.icon
-        ) -}}
-    {{- end -}}
+{{ if $isPages }}
+    {{ range $index, $element := $pages }}
+        {{ $params := dict }}
+        <!-- regular page -->
+        {{- if and $element.RelPermalink $element.File -}}
+            {{- $params = merge $params (dict "path" $element.File.Path) -}}
+        <!-- headless page -->
+        {{- else -}}
+            {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
+            {{- $params = merge $params (dict
+                "title" $element.Title
+                "href" $element.RelPermalink
+                "description" (partial "utilities/GetDescription.html" $element)
+                "thumbnail" $thumbnail
+                "icon" $element.Params.icon
+            ) -}}
+        {{- end -}}
 
-    {{- $list = $list | append $params }}
+        {{- $list = $list | append $params }}
+    {{ end }}
+{{ else if $pages }}
+    {{ $list = $list | append $pages }}
 {{ end }}
 
 {{- $count := len $list -}}
