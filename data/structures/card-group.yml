@@ -31,7 +31,7 @@ arguments:
       - 'resource.Resources'
       - '[]map[string]interface {}'
     optional: true
-    comment: Array of pages to be rendered as cards.
+    comment: Array of pages or structured content to be rendered as cards.
     group: partial
   cards:
     type: string
