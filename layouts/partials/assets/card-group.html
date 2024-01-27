@@ -27,6 +27,9 @@
 {{- $orientation := .orientation -}}
 {{- $ratio := .ratio -}}
 {{- $wrapper := .wrapper | default "p-0" -}}
+{{- $style := .style -}}
+{{- $align := .align -}}
+{{- $subtle := .subtle }}
 {{- $loading := .loading -}}
 
 <!-- Override arguments -->
@@ -90,6 +93,9 @@
                 "orientation" $orientation
                 "padding" $padding
                 "ratio" $ratio
+                "subtle" $subtle
+                "style" $style
+                "align" $align
             ) -}}
             {{- $params = merge $params $element }}
 
