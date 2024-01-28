@@ -5,6 +5,7 @@
 
 .navbar {
     --bs-navbar-expanded-color: var(--bs-body-bg);
+    --bs-navbar-toggler-color: var(--bs-navbar-hover-color);
 
     transition: 0.5s ease-in-out;
     background-color: transparent;
@@ -32,6 +33,7 @@
     --bs-navbar-hover-color: white !important;
     --bs-navbar-disabled-color: white !important;
     --bs-navbar-active-color: white !important;
+    --bs-navbar-toggler-color: white;
 }
 
 .navbar-expanded {
@@ -46,6 +48,7 @@
     --bs-navbar-brand-color: #{$navbar-dark-brand-color};
     --bs-navbar-brand-hover-color: #{$navbar-dark-brand-hover-color};
     --bs-navbar-toggler-border-color: #{$navbar-dark-toggler-border-color};
+    --bs-navbar-toggler-color: white;
 }
 
 .navbar-overlay-light, .navbar-overlay-dark.nav-active, .navbar-overlay-dark.navbar-expanded {
@@ -56,6 +59,7 @@
     --bs-navbar-brand-color: #{$navbar-light-brand-color};
     --bs-navbar-brand-hover-color: #{$navbar-light-brand-hover-color};
     --bs-navbar-toggler-border-color: #{$navbar-light-toggler-border-color};
+    --bs-navbar-toggler-color: black;
 }
 
 .nav-item .vr {
@@ -128,19 +132,11 @@
 
 /* Color of Toggler when collapsed */
 .navbar-toggler.collapsed .toggler-icon {
-    background-color: #777;
+    background-color: var(--bs-navbar-toggler-color);
 }
 
-.emphasis-light {
-    background-color: $black if($enable-important-utilities, !important, null);
-}
-
-.emphasis-dark {
-    background-color: $white if($enable-important-utilities, !important, null);
-}
-
-.emphasis {
-    background-color: $black if($enable-important-utilities, !important, null);
+.emphasis, .emphasis-dark, .emphasis-light {
+    background-color: var(--bs-navbar-toggler-color);
 }
 
 @include color-mode(dark) {
