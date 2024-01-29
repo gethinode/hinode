@@ -75,11 +75,13 @@ The installation instructions in this readme install Hinode as a regular Hugo th
 
 ## Installation
 
+<!-- markdownlint-disable MD033 -->
 <details>
 <summary>Installation notes for Windows</summary>
 
 The installation for Windows requires PowerShell v7. Download it from the Microsoft Store as needed. Check your current version with the command `$PSVersionTable`.
 </details>
+<!-- markdownlint-enable MD033 -->
 
 Start a new Hinode project in three steps:
 
