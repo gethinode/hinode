@@ -75,6 +75,14 @@ The installation instructions in this readme install Hinode as a regular Hugo th
 
 ## Installation
 
+<!-- markdownlint-disable MD033 -->
+<details>
+<summary>Installation notes for Windows</summary>
+
+The installation for Windows requires PowerShell v7. Download it from the Microsoft Store as needed. Check your current version with the command `$PSVersionTable`.
+</details>
+<!-- markdownlint-enable MD033 -->
+
 Start a new Hinode project in three steps:
 
 1. **Create a new site**
@@ -83,14 +91,15 @@ Start a new Hinode project in three steps:
     hugo new site my-hinode-site && cd my-hinode-site
     ```
 
-1. **Initialize the module system**
+2. **Initialize the module system**
 
     ```bash
     hugo mod init example.com/my-hinode-site
-    echo "[[module.imports]]\npath = 'github.com/gethinode/hinode'" >> hugo.toml
+    echo "[[module.imports]]" >> hugo.toml
+    echo "path = 'github.com/gethinode/hinode'" >> hugo.toml
     ```
 
-1. **Start a development server**
+3. **Start a development server**
 
     ```bash
     hugo server
