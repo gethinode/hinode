@@ -24,6 +24,9 @@
     disableTemplate = ["katex"]
     [modules.katex]
         state = "defer"
+    [modules.flexsearch]
+        frontmatter = false
+        filter = ""
     [modules.fontawesome]
         inline = true
         debug = true
