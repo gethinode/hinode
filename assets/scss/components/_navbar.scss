@@ -17,6 +17,7 @@
 
 .nav-active, .navbar-expanded {
     background-color: var(--bs-navbar-expanded-color);
+    border-bottom: 1px solid var(--bs-secondary-bg);
 }
 
 .nav-link {
