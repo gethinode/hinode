@@ -122,7 +122,7 @@
         {{- end -}} 
     {{ else }}
         {{ if and (gt $count $max) $moreTitle }}
-            <a class="btn btn-outline-primary" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
+            <a class="btn btn-outline-primary mt-4" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
         {{ end }}
     {{ end }}
 </div>
