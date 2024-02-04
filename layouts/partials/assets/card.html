@@ -24,7 +24,7 @@
 {{- $style := .style | default "" -}}
 {{- $loading := .loading -}}
 {{- $orientation := .orientation | default "stacked" -}}
-{{- $padding := .padding | default "auto" -}}
+{{- $padding := (string .padding) | default "auto" -}}
 {{- $ratio := .ratio -}}
 {{- $thumbnail := .thumbnail -}}
 {{- $title := .title -}}
