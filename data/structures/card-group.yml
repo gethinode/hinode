@@ -43,6 +43,9 @@ arguments:
     optional: true
     comment: Maximum number of cards to display.
     group: partial
+    options:
+      min: 1
+      max: 10
   cols:
     type: select
     optional: true
