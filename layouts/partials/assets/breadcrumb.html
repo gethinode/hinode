@@ -16,18 +16,20 @@
 {{ $page := .page }}
 
 <!-- Main code -->
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        {{- range $index, $item := $page.Ancestors.Reverse -}}
-            {{- $title := .LinkTitle -}}
-            {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
-            {{- $address := or .RelPermalink (.Params.Redirect | relLangURL) -}}
-            {{ if $address }}
-                <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
-            {{ else }}
-                <li class="breadcrumb-item">{{ $title }}</li>
-            {{ end }}
-        {{- end -}}
-        <li class="breadcrumb-item active" aria-current="page">{{ $page.LinkTitle }}</li>
-    </ol>
-</nav>
+{{ if not $error }}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {{- range $index, $item := $page.Ancestors.Reverse -}}
+                {{- $title := .LinkTitle -}}
+                {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
+                {{- $address := or .RelPermalink (.Params.Redirect | relLangURL) -}}
+                {{ if $address }}
+                    <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
+                {{ else }}
+                    <li class="breadcrumb-item">{{ $title }}</li>
+                {{ end }}
+            {{- end -}}
+            <li class="breadcrumb-item active" aria-current="page">{{ $page.LinkTitle }}</li>
+        </ol>
+    </nav>
+{{ end }}
