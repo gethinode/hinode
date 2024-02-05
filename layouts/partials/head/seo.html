@@ -7,7 +7,7 @@
     {{ $.Scratch.Set "title" .Site.Title -}}
 {{ end -}}
 
-{{ $description := or (partial "utilities/GetDescription.html" .) .Site.Params.main.description }}
+{{ $description := or (partial "utilities/GetDescription.html" (dict "page" .)) .Site.Params.main.description }}
 {{ if gt (strings.RuneCount $description) 150 }}
     {{ $description = print (substr $description 0 150) "..." }}
 {{ end }}

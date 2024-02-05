@@ -73,7 +73,7 @@
                             "title" $item.Title
                             "class" $class
                             "color" $color
-                            "content" (partial "utilities/GetDescription.html" $item)
+                            "content" (partial "utilities/GetDescription.html" (dict "page" $item))
                             "thumbnail" $thumbnail
                         ) -}}
                     {{- else -}}

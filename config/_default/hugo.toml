@@ -135,5 +135,5 @@ home = ["HTML", "RSS", "REDIR"]
   [[module.imports]]
     path = "github.com/gethinode/mod-lottie"
   [[module.imports]]
-    path = "github.com/gethinode/mod-utils"
+    path = "github.com/gethinode/mod-utils/v2"
 # toml-docs-end modules
