@@ -86,8 +86,8 @@
 
 // stylelint-enable annotation-no-unknown
 
-// make tag-link clickable on top of the stretched-link.
-.card .tag-link {
+// make tag-link and card-button clickable on top of the stretched-link.
+.card .tag-link, .card .card-button {
     z-index: 2;
     position: relative;
 }

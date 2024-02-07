@@ -125,7 +125,8 @@ As an example, the following shortcode displays a stacked card that links to the
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary" header="publication" footer="none" /*/>}}
+{{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
+  header="publication" footer="none" button=true /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
