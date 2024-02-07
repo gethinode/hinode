@@ -41,7 +41,10 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
+        # 2024-02-07: temp disabled macOS due to Dart Sass installation error
+        # see https://github.com/sass/homebrew-sass/issues/57 
+        # os: [macos-latest, windows-latest, ubuntu-latest]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version: [18.x, 20.x]
 
@@ -63,9 +66,7 @@ jobs:
         if [ "$RUNNER_OS" == "Linux" ]; then
           sudo snap install dart-sass
         elif [ "$RUNNER_OS" == "macOS" ]; then
-          brew tap sass/sass
-          brew extract --version=1.69.7 sass/sass/sass homebrew/cask-versions
-          brew install sass@1.69.7
+          brew install sass/sass/sass
         elif [ "$RUNNER_OS" == "Windows" ]; then
           choco install sass
         fi
