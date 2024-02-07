@@ -29,6 +29,7 @@
 {{- $thumbnail := .thumbnail -}}
 {{- $title := .title -}}
 {{- $subtle := .subtle -}}
+{{- $button := .button -}}
 {{- $colorStyle := "" -}}
 {{ if $color }}
     {{ if $subtle }}
@@ -69,6 +70,7 @@
     {{- $href := .href -}}
     {{- $color := .color -}}
     {{- $description := .description -}}
+    {{- $button := .button -}}
     
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
@@ -120,7 +122,7 @@
 {{- if hasPrefix $orientation "horizontal" -}}
     <!-- Render horizontal card -->
     <div class="card {{ $colorStyle }} {{ $class }}">
-        <div class="row g-0 row-cols-1 h-100">
+        <div class="row g-0 row-cols-1 h-100{{ if $button }} pb-5{{ end }}">
             <div class="{{ if eq $orientation "horizontal-sm" }}col-4 col-md-2{{ else }}col-4{{ end }}">
                 {{- if $thumbnail -}}
                     {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" (or $ratio "1x1") "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100" "title" $title "loading" $loading) -}}
@@ -131,12 +133,15 @@
                 {{- end -}}
             </div>
             <div class="{{ if eq $orientation "horizontal-sm" }}col-8 col-md-10{{ else }}col-8{{ end }}">
-                <div class="card-body d-flex p-{{ $padding }} flex-column h-100">
+                <div class="card-body d-flex p-{{ $padding }} flex-column h-100 flex-fill">
                     {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) }}</div>{{ end }}
-                    <div class="h-100">
-                        {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
+                    <div class="flex-fill">
+                        {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description "button" $button) -}}
                     </div>
                     {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>{{ end }}
+                    {{ if $button }}
+                        <div>{{ partial "assets/button.html" (dict "title" (T "readMore") "href" $href "outline" true "size" "sm" "class" "card-button mb-n4") }}</div>
+                    {{ end }}
                 </div>
             </div>
         </div>
@@ -156,6 +161,14 @@
             {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
             {{ if $page }}{{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}{{ end }}
         </div>
+        {{ if $button }}
+            <div class="row p-{{ $padding }}" >
+                <div class="{{ if eq $orientation "horizontal-sm" }}col-4 col-md-2{{ else if eq $orientation "horizontal" }}col-4{{ end }}"></div>
+                <div class="col {{ if eq $orientation "horizontal-sm" }}px-2{{ else if eq $orientation "horizontal"}}px-1 {{ else }}px-2 pt-1{{ end }}">
+                    {{ partial "assets/button.html" (dict "title" (T "readMore") "href" $href "outline" true "size" "sm" "class" "card-button") }}
+                </div>
+            </div>
+        {{ end }}
     </div>
 {{- end -}}
 

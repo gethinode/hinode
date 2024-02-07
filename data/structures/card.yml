@@ -193,6 +193,13 @@ arguments:
     optional: true
     release: v0.23.0-alpha2
     comment: Apply subtle background colors.
+  button:
+    type: bool
+    parent: cascade
+    optional: true
+    release: v0.23.0-beta
+    comment: >-
+      Flag indicating the cards should include a button that links to the provided address.
 body:
   optional: true
   comment: >-

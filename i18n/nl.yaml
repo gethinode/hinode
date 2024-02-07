@@ -27,6 +27,8 @@
   translation: "Geen artikelen gevonden"
 - id: emptyTags
   translation: "Geen tags gevonden"
+- id: readMore
+  translation: "Lees meer"
 
 # Languages
 - id: lang_de

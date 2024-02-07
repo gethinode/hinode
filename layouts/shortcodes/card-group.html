@@ -27,6 +27,7 @@
 {{- $align := .Get "align" | default "start" -}}
 {{- $style := .Get  "style" | default "" -}}
 {{- $subtle := .Get "subtle" | default false -}}
+{{- $button := .Get "button" | default false -}}
 
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
@@ -51,5 +52,9 @@
     "header" $header
     "footer" $footer
     "orientation" $orientation
+    "align" $align
+    "style" $style
+    "subtle" $subtle
+    "button" $button
     ) 
 -}}

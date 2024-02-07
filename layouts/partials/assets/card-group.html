@@ -31,6 +31,7 @@
 {{- $align := .align -}}
 {{- $subtle := .subtle }}
 {{- $loading := .loading -}}
+{{- $button := .button -}}
 
 <!-- Override arguments -->
 {{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
@@ -101,6 +102,7 @@
                 "subtle" $subtle
                 "style" $style
                 "align" $align
+                "button" $button
             ) -}}
             {{- $params = merge $params $element }}
 

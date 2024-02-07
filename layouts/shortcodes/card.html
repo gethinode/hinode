@@ -32,6 +32,7 @@
 {{- $path := .Get "path" -}}
 {{- $thumbnail := .Get "thumbnail" -}}
 {{- $title := .Get "title" -}}
+{{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") | default false -}}
 
 <!-- Override arguments -->
 {{ if $path }}
@@ -68,6 +69,7 @@
         "thumbnail" $thumbnail
         "loading" $loading
         "alt" $alt
+        "button" $button
     ) -}}
 
     <!-- Pass output to parent or current stream -->
