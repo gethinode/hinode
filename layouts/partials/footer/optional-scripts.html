@@ -1,0 +1,25 @@
+{{ $page_modules := slice }}
+{{ if reflect.IsMap .Params.modules }}
+    {{ $page_modules = .Params.modules }}
+{{ else }}
+    {{ $page_modules = $page_modules | append .Params.modules }}
+{{ end }}
+
+{{- $modules := site.Params.modules.optional | intersect $page_modules  -}}
+{{- range $index, $mod := $modules -}}
+    {{- $filename := printf "js/%s.bundle.js" $mod -}}
+    {{- $match := printf "js/modules/%s/**.js" $mod -}}
+    {{- $skipTemplate := false -}}
+    {{- if reflect.IsSlice site.Params.modules.disableTemplate -}}
+        {{- if in site.Params.modules.disableTemplate $mod}}
+            {{- $skipTemplate = true -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{ $state := "" }}
+    {{- with (index site.Params.modules $mod) -}}
+        {{- with index . "state" }}{{ $state = . }}{{ end -}}
+    {{- end -}}
+
+    {{- partial "footer/scripts.html" (dict "filename" $filename "match" $match "header" false "skipTemplate" $skipTemplate "state" $state "page" .) }}
+{{- end -}}
