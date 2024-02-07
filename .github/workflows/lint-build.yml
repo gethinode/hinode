@@ -63,6 +63,7 @@ jobs:
         if [ "$RUNNER_OS" == "Linux" ]; then
           sudo snap install dart-sass
         elif [ "$RUNNER_OS" == "macOS" ]; then
+          brew tap sass/sass
           brew extract --version=1.69.7 sass/sass/sass homebrew/cask-versions
           brew install sass@1.69.7
         elif [ "$RUNNER_OS" == "Windows" ]; then
