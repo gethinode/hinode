@@ -1,0 +1,19 @@
+{{- $menu := .Scratch.Get "sidebar" -}}
+{{- $version := .Scratch.Get "version" -}}
+{{ $sidebar := "" }}
+{{- $hasSidebar := .Site.Params.navigation.sidebar | default true -}}
+{{ if and $menu $hasSidebar  }}{{ $sidebar = partial "assets/sidebar.html" (dict "page" . "menu" $menu "version" $version) }}{{ end }}
+
+{{ if $sidebar -}}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-inledby="offcanvas-label">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper $.Section }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ T "close" }}"></button>
+        </div>
+        <div class="offcanvas-body">
+            {{ $sidebar | safeHTML }}
+        </div>
+    </div>
+{{ else if .Site.Params.navigation.sidebar }}
+    &nbsp;
+{{ end }}

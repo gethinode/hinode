@@ -1,0 +1,11 @@
+{{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+{{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
+
+{{ .Render "single/header" }}
+
+{{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+    <div class="d-{{ $breakpoint.current }}-none pb-5">{{ partial "assets/toc-dropdown.html" (dict "page" .) }}</div>
+{{- end -}}
+{{ .Render "single/body" }}
+
+{{ .Render "single/footer" }}
