@@ -3,8 +3,18 @@
     {{ $sidebar := .Render "single/sidebar" }}
     {{ $toc := .Render "single/panel-toc" }}
 
-    {{ $sidebar | safeHTML }}
-    
+    {{ with $sidebar }}
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-inledby="offcanvas-label">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper $.Section }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ T "close" }}"></button>
+            </div>
+            <div class="offcanvas-body">
+                {{ . | safeHTML }}
+            </div>
+        </div>
+    {{ end }}
+
     <div class="container-xxl flex-fill p-4 px-xxl-0">
         {{ if $sidebar -}}
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
