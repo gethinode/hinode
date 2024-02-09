@@ -41,10 +41,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
-        # 2024-02-07: temp disabled macOS due to Dart Sass installation error
-        # see https://github.com/sass/homebrew-sass/issues/57 
-        # os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [macos-latest, windows-latest, ubuntu-latest]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version: [18.x, 20.x]
 
