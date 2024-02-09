@@ -16,8 +16,8 @@
 {{- $title := trim .title " \r\n" -}}
 {{- $icon := .icon }}
 {{- if not (or $title $icon) -}}
-    {{- errorf "partial [assets/button.html] - Missing element title or icon" -}}
-    {{ $error = true }}
+    {{- warnf "partial [assets/button.html] - Missing element title or icon" -}}
+    {{ $title = T "linkPlaceholder" }}
 {{- end -}}
 
 {{- $id := .id }}
