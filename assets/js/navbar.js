@@ -13,8 +13,12 @@ if (navbar !== null && togglers !== null) {
   window.onscroll = () => {
     if (window.scrollY > 75) {
       navbar.classList.add('nav-active')
+      const storedTheme = localStorage.getItem('theme')
+      navbar.setAttribute('data-bs-theme', storedTheme)
     } else {
       navbar.classList.remove('nav-active')
+      const defaultTheme = navbar.getAttribute('data-bs-overlay')
+      navbar.setAttribute('data-bs-theme', defaultTheme)
     }
   }
 

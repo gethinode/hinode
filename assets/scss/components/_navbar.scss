@@ -41,28 +41,6 @@
     box-shadow: $box-shadow-sm;
 }
 
-.navbar-overlay-dark {
-    --bs-navbar-color: #{$navbar-dark-color};
-    --bs-navbar-hover-color: #{$navbar-dark-hover-color};
-    --bs-navbar-disabled-color: #{$navbar-dark-disabled-color};
-    --bs-navbar-active-color: #{$navbar-dark-active-color};
-    --bs-navbar-brand-color: #{$navbar-dark-brand-color};
-    --bs-navbar-brand-hover-color: #{$navbar-dark-brand-hover-color};
-    --bs-navbar-toggler-border-color: #{$navbar-dark-toggler-border-color};
-    --bs-navbar-toggler-color: white;
-}
-
-.navbar-overlay-light, .navbar-overlay-dark.nav-active, .navbar-overlay-dark.navbar-expanded {
-    --bs-navbar-color: #{$navbar-light-color};
-    --bs-navbar-hover-color: #{$navbar-light-hover-color};
-    --bs-navbar-disabled-color: #{$navbar-light-disabled-color};
-    --bs-navbar-active-color: #{$navbar-light-active-color};
-    --bs-navbar-brand-color: #{$navbar-light-brand-color};
-    --bs-navbar-brand-hover-color: #{$navbar-light-brand-hover-color};
-    --bs-navbar-toggler-border-color: #{$navbar-light-toggler-border-color};
-    --bs-navbar-toggler-color: black;
-}
-
 .nav-item .vr {
     color: var(--bs-navbar-color);
 }
