@@ -1,8 +1,10 @@
 {{ define "head" }}
+    {{- $version := strings.TrimPrefix "v" (partialCached "assets/version.html" .) -}}
     {{ $desc := .Page.Description | default (.Page.Content | safeHTML | truncate 150) -}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ hugo.Generator}}
+    {{ hugo.Generator }}
+    <meta name="theme" content="{{ printf "Hinode %s" $version }}">
     {{ partialCached "head/stylesheet-core.html" . -}}
 
     {{ $page_modules := slice | append .Page.Params.modules }}
