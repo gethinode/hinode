@@ -3,7 +3,36 @@ const togglers = document.querySelectorAll('.main-nav-toggler')
 const modeSelectors = document.querySelectorAll('.switch-mode-collapsed')
 const colorsBG = ['body', 'secondary', 'tertiary']
 
+function updateNavbar () {
+  if (window.scrollY > 75) {
+    navbar.classList.add('nav-active')
+    const storedTheme = localStorage.getItem('theme')
+    navbar.setAttribute('data-bs-theme', storedTheme)
+  } else {
+    navbar.classList.remove('nav-active')
+    const defaultTheme = navbar.getAttribute('data-bs-overlay')
+    navbar.setAttribute('data-bs-theme', defaultTheme)
+  }
+}
+
+if ((navbar !== null) && (window.performance.getEntriesByType)) {
+  if (window.performance.getEntriesByType('navigation')[0].type === 'reload') {
+    updateNavbar()
+  }
+}
+
 if (navbar !== null && togglers !== null) {
+  // observe state changes to the site's color mode
+  const html = document.querySelector('html')
+  const config = {
+    attributes: true,
+    attributeFilter: ['data-bs-theme']
+  }
+  const Observer = new MutationObserver((mutationrecords) => {
+    updateNavbar()
+  })
+  Observer.observe(html, config)
+
   // initialize background color
   const color = (navbar.getAttribute('data-navbar-color') || 'body')
   const bg = colorsBG.includes(color) ? `var(--bs-${color}-bg)` : `var(--bs-navbar-color-${color})`
@@ -11,15 +40,7 @@ if (navbar !== null && togglers !== null) {
 
   // set the navbar background color to opaque when scrolling past a breakpoint
   window.onscroll = () => {
-    if (window.scrollY > 75) {
-      navbar.classList.add('nav-active')
-      const storedTheme = localStorage.getItem('theme')
-      navbar.setAttribute('data-bs-theme', storedTheme)
-    } else {
-      navbar.classList.remove('nav-active')
-      const defaultTheme = navbar.getAttribute('data-bs-overlay')
-      navbar.setAttribute('data-bs-theme', defaultTheme)
-    }
+    updateNavbar()
   }
 
   // set the navbar background color to opaque when expanded
