@@ -18,6 +18,6 @@
 
 <!-- Main code -->
 {{ if and (not $error) (gt $items 1) -}}
-    <strong class="d-block h6 my-2 pb-2 border-bottom">{{ T "toc" }}</strong>
+    <strong class="d-block h6 my-2 pb-2">{{ T "toc" }}:</strong>
     {{ $page.TableOfContents }}
 {{ end -}}

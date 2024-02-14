@@ -26,15 +26,14 @@
             "icon" "fas sort"
             "justify" "between"
             "collapse" "toc-collapse"
-            "order" "last") 
-        -}}
+            "order" "last"
+            "spacing" false
+        ) -}}
     </div>
 
-    <p>
-        <div class="collapse border bg-body-tertiary rounded p-1 navbar-nav-scroll" id="toc-collapse">
-            <div class="toc toc-panel text-body p-2">
-                <small>{{ $page.TableOfContents }}</small>
-            </div>
+    <div class="collapse border bg-body-tertiary rounded p-1 navbar-nav-scroll" id="toc-collapse">
+        <div class="toc toc-panel text-body p-2">
+            <small>{{ $page.TableOfContents }}</small>
         </div>
-    </p>
+    </div>
 {{ end -}}
