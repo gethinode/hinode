@@ -50,6 +50,9 @@
 
 #toc-collapse {
     border-color: var(--bs-secondary-color) !important;
+    border-radius: 0 0 var(--bs-border-radius) var(--bs-border-radius) !important;
+    margin-top: -1.5rem;
+    padding-top: 1.5rem !important;
 }
 
 .toc-button {
@@ -59,6 +62,8 @@
     --bs-btn-active-color: var(--bs-primary);
     --bs-btn-active-bg: var(--bs-body-bg);
     --bs-btn-active-border-color: var(--bs-primary);
+
+    background-color: var(--#{$prefix}body-bg) !important;
 
     &.active,
     &:hover,
