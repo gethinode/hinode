@@ -1,17 +1,15 @@
 {{- $download := .Params.download -}}
-{{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-    {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
-{{- end -}}
 
-{{- $toc := .Site.Params.navigation.toc -}}
-{{ if $toc }}
+{{- $includeToc := false -}}
+{{- if .Site.Params.navigation.toc -}}
+    {{ $includeToc = true }}
     {{ if isset .Params "includeToc" }}
-        {{ $toc = .Params.includeToc }}
+        {{ $includeToc = .Params.includeToc }}
     {{ else }}
         {{- with (index site.Params.pages .Type) -}}
             {{ if isset . "includetoc" }}
-                {{ $toc = index . "includetoc" }}
-                {{ if ne (printf "%T" $toc) "bool" }}
+                {{ $includeToc = index . "includetoc" }}
+                {{ if ne (printf "%T" $includeToc) "bool" }}
                     {{ errorf "Expected bool value in site parameters: pages.%s.includeToc" $.Type }}
                 {{ end }}
             {{ end }}
@@ -19,24 +17,20 @@
     {{ end }}
 {{ end }}
 
-<div class="toc toc-sidebar mb-5 my-md-0 ps-xl-3 mb-lg-5 p-3 text-body-secondary sticky-top">
-    {{ with $download }}
-        {{ $title := (T "download" ) }}
-        {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
-        {{ if and $lang (ne (string site.LanguageCode) $lang) }}
-            {{ range site.Languages }}
-                {{ if eq .LanguageCode $lang }}
-                    {{ $title = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
-                {{ end }}
-            {{ end }}
-        {{ end }}
-        <div class="mb-5 text-center">
-            {{ $attr := dict "download" (path.Base .) }}
-            {{ partial "assets/button.html" (dict "href" . "title" $title "color" "primary" "outline" "true" "icon" "fas download" "size" "sm" "attributes" $attr) }}
+<div class="toc toc-sidebar mb-5 my-md-0 mb-lg-5 p-3 text-body-secondary sticky-top">
+    {{ if $download }}
+        <div class="mb-5 p-0">
+            {{ partial "assets/download.html" (dict 
+                "download" $download
+                "outline" true
+                "size" "sm"
+                "order" "last"
+            ) }}
         </div>
     {{ end }}
 
-    {{ if $toc }}
-        {{ partial "assets/toc.html" (dict "page" .) }}
+    {{ if $includeToc }}
+        {{ $index := partial "assets/toc.html" (dict "page" .) }}
+        {{ $index | safeHTML }}
     {{ end -}}
 </div>

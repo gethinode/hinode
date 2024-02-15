@@ -35,7 +35,7 @@
         {{- $sort := $page.Site.Params.sharing.sort | default "weight" -}}
         {{- $list = sort $list $sort $order -}}
 
-        {{- $download := $page.Params.download -}}
+        {{- $download := partial "utilities/GetTargetPath.html" (dict "path" $page.Params.download  "page" $page) -}}
         {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
             {{- errorf "Cannot find download file for page '%s': %s" $page.File.Path $download -}}
         {{- end -}}
