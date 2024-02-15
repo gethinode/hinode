@@ -10,7 +10,7 @@ require (
 	github.com/gethinode/mod-katex v1.0.5 // indirect
 	github.com/gethinode/mod-leaflet v1.0.0 // indirect
 	github.com/gethinode/mod-lottie v1.4.2 // indirect
-	github.com/gethinode/mod-utils/v2 v2.0.3 // indirect
+	github.com/gethinode/mod-utils/v2 v2.1.0 // indirect
 	github.com/nextapps-de/flexsearch v0.0.0-20240110101704-4c3966709f85 // indirect
 	github.com/twbs/bootstrap v5.3.2+incompatible // indirect
 )
