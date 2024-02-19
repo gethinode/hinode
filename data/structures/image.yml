@@ -115,3 +115,8 @@ arguments:
     type: string
     optional: true
     comment: Class attribute of the inner img element, e.g. `rounded`.
+  figclass:
+    type: string
+    optional: true
+    comment: Class attribute of the figure caption, e.g. `px-4`.
+    release: v0.23.0-beta

@@ -27,6 +27,8 @@
 {{- $class := .class -}}
 {{- $title := .title -}}
 {{- $caption := .caption -}}
+{{- $figclass := .figclass -}}
+
 {{- $page := .page -}}
 
 {{- $loading := .loading -}}
@@ -158,6 +160,7 @@
     {{- $class := .class -}}
     {{- $title := .title -}}
     {{- $caption := .caption -}}
+    {{- $figclass := .figclass -}}
     {{- $fallbackURL := "" -}}
     {{- $anchor := "" -}}
     {{- $imgset := "" -}}
@@ -243,7 +246,7 @@
         {{ end }}
     </div>
     {{- if $caption -}}
-            <figcaption class="figure-caption">{{ $caption | safeHTML }}</figcaption>
+            <figcaption class="figure-caption{{ with $figclass }} {{ . }}{{ end }}">{{ $caption | safeHTML }}</figcaption>
         </figure>
     {{- end -}}
 {{- end -}}
@@ -257,6 +260,7 @@
     "class" $class
     "title" $title
     "caption" $caption
+    "figclass" $figclass
     "lazy" $lazy
     "priority" $priority
     "page" $page)
