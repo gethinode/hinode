@@ -1,9 +1,12 @@
 {{- $page := .page -}}
-{{- $class := printf "img-wrap" -}}
-{{- with .class }}{{ $class = printf "img-wrap %s" . }}{{ end -}}
+{{- $wrapper := printf "img-wrap" -}}
+{{- with .wrapper }}{{ $wrapper = printf "img-wrap %s" . }}{{ end -}}
+{{ $class := "rounded" }}
+{{ with .class }}{{ $class = . }}{{ end }}
 {{- $ratio := .ratio | default "21x9" -}}
 {{- $thumbnail := "" -}}
 {{- $credits := "" -}}
+{{ $figclass := .figclass }}
 
 {{- if reflect.IsMap $page.Params.Thumbnail -}}
     {{- $thumbnail = $page.Params.Thumbnail.url -}}
@@ -35,5 +38,5 @@
 {{- end -}}
 
 {{ if $thumbnail -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" $ratio "wrapper" $class "class" "rounded" "title" $page.Params.title "caption" $credits "priority" "high") -}}
+    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" $ratio "wrapper" $wrapper "class" $class "title" $page.Params.title "caption" $credits "figclass" $figclass "priority" "high") -}}
 {{ end -}}
