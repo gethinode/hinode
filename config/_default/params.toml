@@ -31,6 +31,9 @@
         inline = true
         debug = true
         skipMissing = false
+    [modules.utils]
+        filter = "[^0-9A-Za-zŽžÀ-ÿ ;.,\\/'’\"]-"
+        raw = false        
 # toml-docs-end modules
 
 # toml-docs-start debugging
