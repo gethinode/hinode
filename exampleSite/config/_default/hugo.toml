@@ -83,6 +83,5 @@ home = ["HTML", "RSS", "REDIR"]
     keepWhitespace = true
 
 [module]
-  replacements = 'github.com/gethinode/hinode -> ../..'
   [[module.imports]]
     path = "github.com/gethinode/hinode"
