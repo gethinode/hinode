@@ -4,7 +4,7 @@ const cssnano = require('cssnano')({
 })
 const whitelister = require('purgecss-whitelister')
 const purgecss = require('@fullhuman/postcss-purgecss')({
-  content: ['./exampleSite/hugo_stats.json'],
+  content: ['./hugo_stats.json'],
   defaultExtractor: (content) => {
     const els = JSON.parse(content).htmlElements
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
@@ -12,18 +12,18 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
   dynamicAttributes: ['data-bs-theme'],
   safelist: [
     ...whitelister([
-      './assets/scss/components/_clipboard.scss',
-      './assets/scss/components/_command.scss',
-      './assets/scss/components/_nav.scss',
-      './assets/scss/components/_navbar.scss',
-      './assets/scss/components/_search.scss',
-      './assets/scss/components/_syntax.scss',
-      './assets/scss/components/_syntax-dark.scss',
-      './assets/scss/components/_syntax-light.scss',
-      './assets/scss/components/_table.scss',
-      './assets/scss/components/_video.scss',
-      './assets/scss/theme/fonts.scss',
-      './assets/scss/theme/theme.scss',
+      '../assets/scss/components/_clipboard.scss',
+      '../assets/scss/components/_command.scss',
+      '../assets/scss/components/_nav.scss',
+      '../assets/scss/components/_navbar.scss',
+      '../assets/scss/components/_search.scss',
+      '../assets/scss/components/_syntax.scss',
+      '../assets/scss/components/_syntax-dark.scss',
+      '../assets/scss/components/_syntax-light.scss',
+      '../assets/scss/components/_table.scss',
+      '../assets/scss/components/_video.scss',
+      '../assets/scss/theme/fonts.scss',
+      '../assets/scss/theme/theme.scss',
       './_vendor/github.com/gethinode/mod-flexsearch/assets/scss/modules/flexsearch/flexsearch.scss',
       './_vendor/github.com/gethinode/mod-katex/dist/katex.scss',
       './_vendor/github.com/gethinode/mod-leaflet/dist/leaflet.scss',
