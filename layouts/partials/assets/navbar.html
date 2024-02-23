@@ -22,26 +22,26 @@
 
     <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
         <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "colorMode" }}" aria-expanded="false" id="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
-            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>{{ if $collapsed }}&nbsp;{{ T "colorMode" }} {{ end }}
+            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>{{ if $collapsed }}&nbsp;{{ T "colorMode" }}{{ end }}
             <span class="d-md-none"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
                     <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false) }}</span>&nbsp;
-                    {{ T "colorLight" }}
+                    {{- T "colorLight" }}
                 </a>
             </li>
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="dark" href="#!">
                     <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw" "spacing" false) }}</span>&nbsp;
-                    {{ T "colorDark" }}
+                    {{- T "colorDark" }}
                 </a>
             </li>
             <li>
                 <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="auto" href="#!">
                     <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke fa-fw" "spacing" false) }}</span>&nbsp;
-                    {{ T "colorAuto" }}
+                    {{- T "colorAuto" }}
                 </a>
             </li>
         </ul>
@@ -72,7 +72,7 @@
                     <li>
                         {{- $url := (path.Join $item.url) | relLangURL -}}
                         <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
-                            {{ if $item.latest }} ({{ T "latest" }}){{ end }}
+                            {{ if $item.latest }}&nbsp;({{ T "latest" }}){{ end }}
                             {{ if $active }}
                                 <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check fa-fw") }}</span>
                             {{ end }}
@@ -259,10 +259,10 @@
                         {{- $currentLang := $page.Language.Lang -}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
-                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}&nbsp;{{ T "languageSwitcherLabel" }}&nbsp;
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}&nbsp;{{ T "languageSwitcherLabel" }}
                             </a>
                             <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
-                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" true) }}
+                                {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end ">
                                 {{- if $page.IsTranslated -}}
@@ -292,7 +292,7 @@
                         <li><hr class="dropdown-divider-bg"></li>
     
                         <a class="nav-link d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
-                            {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }} {{ T "ui_search" }}
+                            {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}&nbsp;{{ T "ui_search" }}
                         </a>
                         <a class="nav-link d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
                             {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}
