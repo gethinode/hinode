@@ -50,10 +50,10 @@ Please complete the following information where applicable.
 
 ## Hugo environment
 
-Copy the output of `hugo env` here.
+Copy the output of `hugo env` or `npm run env` here.
 
 ```bash
-[hugo env output]
+[env output]
 ```
 
 ## Additional context
