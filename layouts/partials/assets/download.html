@@ -1,4 +1,5 @@
 {{- $download := partial "utilities/GetTargetPath.html" (dict "path" .download "page" page) -}}
+{{- $title := .title }}
 {{- $color := .color | default "primary" -}}
 {{- $outline := .outline | default true -}}
 {{- $icon := .icon | default "fas download" -}}
@@ -12,13 +13,14 @@
 {{- end -}}
 
 {{ with $download }}
-    {{ $title := "" }}
-    {{ if not $minimal }}{{ $title = (T "download" ) }}{{ end }}
-    {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
-    {{ if and $lang (ne (string site.LanguageCode) $lang) }}
-        {{ range site.Languages }}
-            {{ if eq .LanguageCode $lang }}
-                {{ $title = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
+    {{ if not $title }}
+        {{ if not $minimal }}{{ $title = (T "download" ) }}{{ end }}
+        {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
+        {{ if and $lang (ne (string site.LanguageCode) $lang) }}
+            {{ range site.Languages }}
+                {{ if eq .LanguageCode $lang }}
+                    {{ $title = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
+                {{ end }}
             {{ end }}
         {{ end }}
     {{ end }}
