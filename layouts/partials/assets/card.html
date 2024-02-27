@@ -140,7 +140,8 @@
                     </div>
                     {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>{{ end }}
                     {{ if $button }}
-                        <div>{{ partial "assets/button.html" (dict "title" (T "readMore") "href" $href "outline" true "size" "sm" "class" "card-button mb-n4") }}</div>
+                        {{ $label := $title | default (T "readMore") }}
+                        <div>{{ partial "assets/button.html" (dict "title" $label "icon" "fas chevron-right" "href" $href "outline" true "size" "sm" "class" "card-button mb-n4") }}</div>
                     {{ end }}
                 </div>
             </div>
@@ -162,10 +163,11 @@
             {{ if $page }}{{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}{{ end }}
         </div>
         {{ if $button }}
+            {{ $label := $title | default (T "readMore") }}
             <div class="row p-{{ $padding }}" >
                 <div class="{{ if eq $orientation "horizontal-sm" }}col-4 col-md-2{{ else if eq $orientation "horizontal" }}col-4{{ end }}"></div>
                 <div class="col {{ if eq $orientation "horizontal-sm" }}px-2{{ else if eq $orientation "horizontal"}}px-1 {{ else }}px-2 pt-1{{ end }}">
-                    {{ partial "assets/button.html" (dict "title" (T "readMore") "href" $href "outline" true "size" "sm" "class" "card-button") }}
+                    {{ partial "assets/button.html" (dict "title" $label "href" $href "outline" true "size" "sm" "class" "card-button") }}
                 </div>
             </div>
         {{ end }}
