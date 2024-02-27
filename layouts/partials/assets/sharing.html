@@ -62,8 +62,17 @@
                 {{ partial "assets/button.html" (dict "href" "#!" "icon" "fas share-nodes fa-fw" "id" "btn-webshare" "class" "btn-social p-0" "attributes" $attr "label" (T "shareLink" (T "shareSystem")) "spacing" false) }}
             {{- end -}}
             {{ with $download }}
+                {{ $label := (T "download" ) }}
+                {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
+                {{ if and $lang (ne (string site.LanguageCode) $lang) }}
+                    {{ range site.Languages }}
+                        {{ if eq .LanguageCode $lang }}
+                            {{ $label = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
                 {{ $attr := dict "download" (path.Base .) }}
-                {{ partial "assets/button.html" (dict "href" . "icon" "fas download fa-fw" "class" "btn-social p-0" "attributes" $attr "spacing" false) }}
+                {{ partial "assets/button.html" (dict "href" . "icon" "fas download fa-fw" "label" $label "class" "btn-social p-0" "attributes" $attr "spacing" false) }}
             {{- end -}}
         </div>
     {{- end -}}
