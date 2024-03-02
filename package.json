@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.23.0-beta7",
+  "version": "0.23.0-beta8",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -70,7 +70,7 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@gethinode/netlify-plugin-dartsass": "^0.2.0",
     "@netlify/plugin-lighthouse": "^6.0.0",
-    "autoprefixer": "^10.4.17",
+    "autoprefixer": "^10.4.18",
     "cssnano": "^6.0.5",
     "cssnano-preset-advanced": "^6.0.5",
     "eslint": "^8.57.0",
@@ -78,7 +78,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
-    "hugo-bin": "^0.119.0",
+    "hugo-bin": "^0.120.7",
     "markdownlint-cli2": "^0.12.1",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
@@ -87,8 +87,8 @@
     "replace-in-files-cli": "^2.2.0",
     "rimraf": "^5.0.5",
     "shx": "^0.3.4",
-    "stylelint": "^15.11.0",
-    "stylelint-config-standard-scss": "^11.1.0"
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard-scss": "^13.0.0"
   },
   "optionalDependencies": {
     "@gethinode/netlify-plugin-dartsass": "^0.2.0",
