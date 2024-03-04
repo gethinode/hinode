@@ -94,3 +94,8 @@ arguments:
     optional: true
     comment: >-
       Flag indicating if the number of columns should be responsive, defaults to `true`.
+  hook:
+    type: string
+    optional: true
+    comment: Render hook for the card partial.
+    group: partial

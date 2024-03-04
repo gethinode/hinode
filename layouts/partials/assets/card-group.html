@@ -32,6 +32,7 @@
 {{- $subtle := .subtle }}
 {{- $loading := .loading -}}
 {{- $button := .button -}}
+{{- $hook := .hook | default "assets/card.html" }}
 
 <!-- Override arguments -->
 {{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
@@ -107,7 +108,7 @@
             {{- $params = merge $params $element }}
 
             <div class="col">
-                {{- partial "assets/card.html" $params -}}
+                {{- partial $hook $params -}}
             </div>
             {{- if and (lt $index (sub $max 1)) $separator -}}
                 <div class="col d-block d-sm-none">
