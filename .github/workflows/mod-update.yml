@@ -38,7 +38,7 @@ jobs:
         echo 'EOF' >> $GITHUB_OUTPUT
 
     - name: Create Pull Request
-      uses: gethinode-actions/create-pull-request@v5
+      uses: gethinode-actions/create-pull-request@v6
       with:
         token: ${{ secrets.HUGO_MOD_PR }}
         commit-message: 'fix: update Hugo module dependencies'

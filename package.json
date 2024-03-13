@@ -68,11 +68,11 @@
   "homepage": "https://gethinode.com",
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
-    "@gethinode/netlify-plugin-dartsass": "^0.2.0",
+    "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "@netlify/plugin-lighthouse": "^6.0.0",
     "autoprefixer": "^10.4.18",
-    "cssnano": "^6.0.5",
-    "cssnano-preset-advanced": "^6.0.5",
+    "cssnano": "^6.1.0",
+    "cssnano-preset-advanced": "^6.1.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -91,7 +91,7 @@
     "stylelint-config-standard-scss": "^13.0.0"
   },
   "optionalDependencies": {
-    "@gethinode/netlify-plugin-dartsass": "^0.2.0",
+    "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "@netlify/plugin-lighthouse": "*",
     "fsevents": "*",
     "netlify-plugin-hugo-cache-resources": "^0.2.1"
