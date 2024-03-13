@@ -36,6 +36,8 @@
 {{- end -}}
 
 {{- range $index, $element := resources.Match "icons/**.svg" -}}
-    {{- $icon := resources.Get $element | resources.ExecuteAsTemplate $element $params -}}
-    {{- $icon.Publish -}}
+    {{ with resources.Get $element }}
+        {{- $icon := . | resources.ExecuteAsTemplate $element $params -}}
+        {{- $icon.Publish -}}
+    {{ end }}
 {{- end -}}
