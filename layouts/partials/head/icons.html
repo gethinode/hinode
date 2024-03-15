@@ -36,6 +36,6 @@
 {{- end -}}
 
 {{- range resources.Match "icons/**.svg" -}}
-    {{- $icon := . | resources.ExecuteAsTemplate . $params -}}
+    {{- $icon := . | resources.ExecuteAsTemplate .RelPermalink $params -}}
     {{- $icon.Publish -}}
 {{- end -}}
