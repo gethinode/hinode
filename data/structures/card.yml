@@ -162,7 +162,7 @@ arguments:
     parent: cascade
     optional: true
     default: start
-    release: v0.23.0-alpha2
+    release: v0.23.0
     comment: Icon alignment.
     options:
       values:
@@ -173,7 +173,7 @@ arguments:
     type: string
     parent: cascade
     optional: true
-    release: v0.23.0-alpha2
+    release: v0.23.0
     comment: Icon style.
   orientation:
     type: select
@@ -191,13 +191,13 @@ arguments:
     type: bool
     parent: cascade
     optional: true
-    release: v0.23.0-alpha2
+    release: v0.23.0
     comment: Apply subtle background colors.
   button:
     type: bool
     parent: cascade
     optional: true
-    release: v0.23.0-beta
+    release: v0.23.0
     comment: >-
       Flag indicating the cards should include a button that links to the provided address.
   buttonLabel:
