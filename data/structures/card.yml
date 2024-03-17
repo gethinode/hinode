@@ -200,6 +200,12 @@ arguments:
     release: v0.23.0-beta
     comment: >-
       Flag indicating the cards should include a button that links to the provided address.
+  buttonLabel:
+    type: string
+    optional: true
+    release: v0.23.2
+    comment: >-
+      Label of the link button, defaults to the card title.
   hook:
     type: string
     optional: true
