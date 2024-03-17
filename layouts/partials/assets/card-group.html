@@ -32,6 +32,7 @@
 {{- $subtle := .subtle }}
 {{- $loading := .loading -}}
 {{- $button := .button -}}
+{{- $buttonLabel := .buttonLabel -}}
 {{- $hook := .hook | default "assets/card.html" }}
 
 <!-- Override arguments -->
@@ -104,6 +105,7 @@
                 "style" $style
                 "align" $align
                 "button" $button
+                "buttonLabel" $buttonLabel
             ) -}}
             {{- $params = merge $params $element }}
 
