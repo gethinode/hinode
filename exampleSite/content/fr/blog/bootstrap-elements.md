@@ -125,7 +125,8 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary" header="publication" footer="none" /*/>}}
+{{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
+  header="publication" footer="none" button=true /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
