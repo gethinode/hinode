@@ -19,6 +19,7 @@
 {{- $class := "" -}}
 {{- $title := "" -}}
 {{- $caption := "" -}}
+{{- $figclass := "" -}}
 {{- $mode := false -}}
 {{- $portrait := false -}}
 {{- $loading := "" -}}
@@ -33,6 +34,7 @@
     {{- $loading = .Get "loading" | default "" -}}
     {{ $title = .Get "title" | default "" -}}
     {{ $caption = .Get "caption" | default "" -}}
+    {{ $figclass = .Get "figclass" | default "" -}}
     {{ with .Get "mode" }}{{ $mode = partial "utilities/CastBool.html" . }}{{ end -}}
     {{ with .Get "portrait" }}{{ $portrait = partial "utilities/CastBool.html" . }}{{ end -}}
 {{ else -}}
@@ -53,6 +55,7 @@
         "class" $class
         "title" $title
         "caption" $caption
+        "figclass" $figclass
         "mode" $mode
         "portrait" $portrait
         "loading" $loading
