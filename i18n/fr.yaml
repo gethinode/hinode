@@ -29,6 +29,8 @@
   translation: "Aucun articles trouvé"
 - id: emptyTags
   translation: "Aucun tags trouvé"
+- id: readMore
+  translation: "Lire plus"
 
 # Languages
 - id: lang_de
