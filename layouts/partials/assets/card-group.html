@@ -121,7 +121,7 @@
         {{if $cards }}{{- print $cards | safeHTML }}{{ end }}
     </div>
 
-    {{ if $paginate }}
+    {{ if $paginator }}
         {{- if gt $paginator.TotalPages 1 -}}
             <div class="pt-3">{{ partial "assets/pagination.html" (dict "page" $page "format" "terse") }}</div>
         {{- end -}} 
