@@ -126,6 +126,10 @@
 
 // stylelint-enable annotation-no-unknown
 
+.navbar .dropdown-divider-bg {
+    color: var(--#{$prefix}navbar-color);
+}
+
 :root {
     --dropdown-horizontal-bg: var(--#{$prefix}light);
 }
