@@ -186,13 +186,13 @@
             <!-- Insert sidebar toggler when applicable -->
             <div class="d-flex align-items-center">
                 {{- if $page.Scratch.Get "sidebar" -}}
-                    <button class="navbar-toggler collapsed p-0 mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw") -}}
+                    <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
                     </button>
                 {{- else -}}
                     <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
-                    <button class="navbar-toggler collapsed p-0 mx-auto invisible" type="button">
-                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw") -}}
+                    <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
+                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
                     </button>
                 {{- end -}}
             </div>
