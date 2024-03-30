@@ -1,0 +1,149 @@
+# Single pages
+- id: postedOnDate
+  translation: "Opublikowano {{ . }}"
+- id: lastModified
+  translation: "Ostatnia modyfikacja {{ . }}"
+- id: read
+  translation: "czytania"
+- id: minutesShort
+  translation: "min"
+- id: words
+  translation: "słów"
+- id: photoFull
+  translation: "Zdjęcie autorstwa %s z %s"
+- id: photoShort
+  translation: "Zdjęcie autorstwa {{ . }}"
+- id: photoOn
+  translation: "z"
+- id: draft
+  translation: "Wersja robocza"
+
+# List pages
+- id: article
+  translation: "Artykuł"
+- id: articles
+  translation: "Artykuły"
+- id: more
+  translation: "Więcej {{ . }}"
+- id: emptyList
+  translation: "Brak artykułów"
+- id: emptyTags
+  translation: "Brak tagów"
+
+# Languages
+- id: lang_de
+  translation: "Niemiecki"
+- id: lang_en
+  translation: "Angielski"
+- id: lang_nl
+  translation: "Niderlandzki"
+- id: lang_fr
+  translation: "Francuski"
+
+# Sharing
+- id: shareLink
+  translation: "Udostępnij przez {{ . }}"
+- id: shareSystem
+  translation: "system"
+- id: copyToClipboard
+  translation: "skopiuj do schowka"
+- id: copiedToClipboard
+  translation: "skopiowany do schowka"
+- id: link
+  translation: "Link"
+- id: code
+  translation: "Kod"
+- id: download
+  translation: "Pobierz artykuł"
+
+# Pagination
+- id: paginationNav
+  translation: "Nawigacja strony"
+- id: paginationPrevious
+  translation: "Poprzednia strona"
+- id: paginationNext
+  translation: "Następna strona"
+- id: paginationFirst
+  translation: "Pierwsza strona"
+- id: paginationLast
+  translation: "Ostatnia strona"
+
+# Navigation
+- id: colorMode
+  translation: "Tryb koloru"
+- id: colorLight
+  translation: "Jasny"
+- id: colorDark
+  translation: "Ciemny"
+- id: colorAuto
+  translation: "Automatyczny"
+- id: toggleMainNav
+  translation: "Przełącz główną nawigację"
+- id: home
+  translation: "Strona główna"
+- id: languageSwitcherLabel
+  translation: "Język"
+- id: close
+  translation: "Zamknij"
+
+# Table of contents
+- id: toc
+  translation: "Na tej stronie"
+- id: seeAlso
+  translation: "Zobacz również"
+- id: sectionMenu
+  translation: "Wybierz temat"
+
+# Sidebar
+- id: toggleSidebar
+  translation: "Przełącz nawigację na pasku bocznym"
+
+# Feature
+- id: addedFeature
+  translation: "Dodano w {{ . }}"
+- id: deprecatedFeature
+  translation: "Stała się przestarzała w {{ . }}"
+
+# Versioning
+- id: latest
+  translation: "najnowsza"
+- id: allVersions
+  translation: "Wszystkie wersje"
+- id: newerVersionAlert
+  translation: "Jest dostępna nowsza wersja {{ . }}!"
+
+# 404 page
+- id: pageNotFound
+  translation: "Strona, której szukasz nie istnieje albo wystąpił inny błąd. Spróbuj wrócić do naszej {{ . }}."
+- id: pageNotFoundTitle
+  translation: "Nie znaleziono strony"
+- id: pageNotFoundHome
+  translation: "strony głównej"
+
+# Footer
+- id: copyright
+  translation: "Copyright"
+- id: rights
+  translation: "Wszelkie prawa zastrzeżone"
+- id: poweredBy
+  translation: "Strona oparta o {{ . }}."
+
+# Comments
+- id: show
+  translation: "Pokaż"
+- id: comments
+  translation: "Komentarze" 
+
+# Arguments
+- id: name
+  translation: "Nazwa"
+- id: type
+  translation: "Typ"
+- id: required 
+  translation: "Wymagany"
+- id: default
+  translation: "Domyślny"
+- id: comment
+  translation: Komentarz
+- id: supportedValues
+  translation: "Obsługiwane wartości"
