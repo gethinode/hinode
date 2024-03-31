@@ -48,8 +48,9 @@
     @import "theme/fonts.scss";
 {{ end }}
 
-// Import theme placeholder
+// Import theme placeholders
+@import "theme/base.scss";
 @import "theme/theme.scss";
 
-// Import Bootstrap utilities API  (mounted by core Bootstrap module)
+// Import Bootstrap utilities API (mounted by core Bootstrap module)
 @import "modules/bootstrap/utilities/api";
