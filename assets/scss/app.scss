@@ -44,17 +44,13 @@
 @import "helpers/colored-links.scss";
 @import "helpers/display.scss";
 
-// TODO: include fonts with following statement in Dart Sass
-// @if $import-fonts {
-//     @include meta.load-css(theme/fonts);
-// }
-
 {{ if (not (hasPrefix (lower site.Params.style.themeFontPath) "http")) }}
     @import "theme/fonts.scss";
 {{ end }}
 
-// Import theme placeholder
+// Import theme placeholders
+@import "theme/base.scss";
 @import "theme/theme.scss";
 
-// Import Bootstrap utilities API  (mounted by core Bootstrap module)
+// Import Bootstrap utilities API (mounted by core Bootstrap module)
 @import "modules/bootstrap/utilities/api";
