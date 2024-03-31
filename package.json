@@ -71,8 +71,8 @@
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "@netlify/plugin-lighthouse": "^6.0.0",
     "autoprefixer": "^10.4.19",
-    "cssnano": "^6.1.1",
-    "cssnano-preset-advanced": "^6.1.1",
+    "cssnano": "^6.1.2",
+    "cssnano-preset-advanced": "^6.1.2",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -87,7 +87,7 @@
     "replace-in-files-cli": "^2.2.0",
     "rimraf": "^5.0.5",
     "shx": "^0.3.4",
-    "stylelint": "^16.2.1",
+    "stylelint": "^16.3.1",
     "stylelint-config-standard-scss": "^13.0.0"
   },
   "optionalDependencies": {
