@@ -1,10 +1,10 @@
 // scss-docs-start sidebar
 .sidebar {
-    top: $navbar-offset;
+    top: var(--navbar-offset);
 }
 
 .sidebar-overflow {
-    top: $navbar-offset;
+    top: var(--navbar-offset);
     max-height: 90vh;
     overflow-y: auto;
 }

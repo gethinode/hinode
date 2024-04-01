@@ -27,7 +27,11 @@
 {{ end}}
 
 {{- $navbarOffset := "0rem" -}}
-{{- if site.Params.navigation.fixed }}{{ $navbarOffset = site.Params.navigation.offset | default "4rem" }}{{ end }}
+{{- $navbarOffsetXS := "0rem" -}}
+{{- if site.Params.navigation.fixed }}
+    {{ $navbarOffset = site.Params.navigation.offset | default "4rem" }}
+    {{ $navbarOffsetXS = site.Params.navigation.offsetXS | default $navbarOffset }}
+{{ end }}
 {{- $overlayOffset := $navbarOffset -}}
 {{- if site.Params.navigation.overlay }}{{ $overlayOffset = "0rem" }}{{ end }}
 {{- $vars := dict 
@@ -43,6 +47,8 @@
     "dark"                    (default "#212529" site.Params.style.dark)
     "navbar-height"           (site.Params.navigation.offset | default "4rem")
     "navbar-offset"           $navbarOffset
+    "navbar-offset-xs"        $navbarOffsetXS
+    "navbar-size"             (site.Params.navigation.size | default "md")
     "overlay-offset"          $overlayOffset
     "enable-dark-mode"        (printf "%t" ((default true site.Params.main.enableDarkMode)))
     "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))

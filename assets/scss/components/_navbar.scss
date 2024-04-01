@@ -132,6 +132,13 @@
 
 :root {
     --dropdown-horizontal-bg: var(--#{$prefix}light);
+    --navbar-offset: #{$navbar-offset-xs};
+}
+@include media-breakpoint-up(#{$navbar-size}) {
+    :root {
+        --navbar-offset: #{$navbar-offset};
+    }
+
 }
 
 @if $enable-dark-mode {
