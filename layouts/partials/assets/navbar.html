@@ -209,7 +209,7 @@
                             {{ $width := partial "utilities/GetWidth.html" (dict "path" $logo "height" 30) }}
                             <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
                         {{- else -}}
-                            <div class="navbar-title fw-bold bg-info h-100">{{ $title }}</div>
+                            <div class="navbar-title fw-bold h-100">{{ $title }}</div>
                         {{- end -}}
                     </a>
                 </div>
