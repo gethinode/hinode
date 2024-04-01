@@ -183,42 +183,46 @@
         {{ if $overlay }}data-navbar-color="{{ $color }}"{{ end }}
         >
         <div class="container-xxl p-0">
-            <!-- Insert sidebar toggler when applicable -->
-            <div class="d-flex align-items-center">
-                {{- if $page.Scratch.Get "sidebar" -}}
-                    <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+            <div class="d-flex navbar-container justify-content-center">
+                <!-- Insert sidebar toggler when applicable -->
+                <div class="">
+                    {{- if $page.Scratch.Get "sidebar" -}}
+                        <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                            {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+                        </button>
+                    {{- else -}}
+                        <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
+                        <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
+                            {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+                        </button>
+                    {{- end -}}
+                </div>
+        
+                <!-- Insert the brand logo or name -->
+                <div class="{{ if (or $logoLight $logo) }}mx-auto{{ else }}flex-grow-1 flex-{{ $size }}-grow-0{{ end }}">
+                    <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
+                        {{- if (and $logoLight $logoDark) -}}
+                            {{ $width := partial "utilities/GetWidth.html" (dict "path" $logoLight "height" 30) }}
+                            <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-dark" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
+                            <img src="{{if $absoluteURL }}{{ absURL $logoDark }}{{ else }}{{ $logoDark }}{{ end }}" class="d-none-light" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
+                        {{- else if $logo -}}
+                            {{ $width := partial "utilities/GetWidth.html" (dict "path" $logo "height" 30) }}
+                            <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
+                        {{- else -}}
+                            <div class="navbar-title fw-bold bg-info h-100">{{ $title }}</div>
+                        {{- end -}}
+                    </a>
+                </div>
+        
+                <!-- Insert main navigation toggler -->
+                <div>
+                    <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}-collapse"
+                        aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
+                        <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                        <span class="toggler-icon middle-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                        <span class="toggler-icon bottom-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
                     </button>
-                {{- else -}}
-                    <!-- Insert invisible sidebar toggler to center logo correctly on smaller screens -->
-                    <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
-                        {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
-                    </button>
-                {{- end -}}
-            </div>
-    
-            <!-- Insert the brand logo or name -->
-            <a class="navbar-brand mx-auto" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
-                {{- if (and $logoLight $logoDark) -}}
-                    {{ $width := partial "utilities/GetWidth.html" (dict "path" $logoLight "height" 30) }}
-                    <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-dark" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                    <img src="{{if $absoluteURL }}{{ absURL $logoDark }}{{ else }}{{ $logoDark }}{{ end }}" class="d-none-light" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                {{- else if $logo -}}
-                    {{ $width := partial "utilities/GetWidth.html" (dict "path" $logo "height" 30) }}
-                    <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                {{- else -}}
-                    <span class="fw-bold">{{ $title }}</span>
-                {{- end -}}
-            </a>
-    
-            <!-- Insert main navigation toggler -->
-            <div class="d-flex">
-                <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}-collapse"
-                    aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
-                    <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
-                    <span class="toggler-icon middle-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
-                    <span class="toggler-icon bottom-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
-                </button>
+                </div>
             </div>
     
             <div class="navbar-collapse collapse" id="{{ $id }}-collapse">

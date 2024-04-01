@@ -134,11 +134,41 @@
     --dropdown-horizontal-bg: var(--#{$prefix}light);
     --navbar-offset: #{$navbar-offset-xs};
 }
+
+.navbar-title {
+    display: inline-block;
+    white-space: normal;
+    text-align: center !important;
+    vertical-align: middle;
+    padding: 0 $spacer 0 $spacer;
+    width: 100% !important;
+}
+
+.navbar-container {
+    width: 100% !important;
+}
+
+.navbar-brand {
+    margin-right: 0;
+}
+
 @include media-breakpoint-up(#{$navbar-size}) {
     :root {
         --navbar-offset: #{$navbar-offset};
     }
 
+    .navbar-container {
+        width: auto !important;
+    }
+
+    .navbar-title {
+        text-align: initial !important;
+        padding: 0;
+    }
+
+    .navbar-brand {
+        margin-right: var(--bs-navbar-brand-margin-end);
+    }
 }
 
 @if $enable-dark-mode {
