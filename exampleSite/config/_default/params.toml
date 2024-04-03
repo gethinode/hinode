@@ -59,6 +59,7 @@
     overlayMode = "dark"
     horizontal = false
     offset = "5.5rem"
+    offsetXS = "5.5rem"
     search = true
     searchModal = false
     breadcrumb = true
