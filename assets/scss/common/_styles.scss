@@ -28,7 +28,7 @@ a:active {
 }
 
 .main-content {
-    margin-top: $overlay-offset;
+    margin-top: var(--navbar-offset);
 }
 
 $utilities: map-merge(
