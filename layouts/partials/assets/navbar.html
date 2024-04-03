@@ -185,7 +185,7 @@
         <div class="container-xxl p-0">
             <div class="d-flex navbar-container justify-content-center">
                 <!-- Insert sidebar toggler when applicable -->
-                <div class="">
+                <div class="d-flex align-items-center">
                     {{- if $page.Scratch.Get "sidebar" -}}
                         <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
                             {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
@@ -215,7 +215,7 @@
                 </div>
         
                 <!-- Insert main navigation toggler -->
-                <div>
+                <div class="d-flex align-items-center">
                     <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}-collapse"
                         aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
                         <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
