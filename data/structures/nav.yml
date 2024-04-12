@@ -18,6 +18,7 @@ arguments:
     type:
       - page.Pages
       - resource.Resources
+      - '[]map[string]interface {}'
     optional: true
     comment: Array of pages to be rendered as nav items.
     group: partial
