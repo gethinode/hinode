@@ -90,6 +90,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-${{ env.CACHE_KEY }}
 
+    - name: Display environment
+      run: npm run env
+
     - name: Build main site
       run: npm run build:cache
 
