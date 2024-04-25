@@ -41,7 +41,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [macos-12, windows-latest, ubuntu-latest]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version: [18.x, 20.x]
 
@@ -88,6 +88,9 @@ jobs:
         key: ${{ runner.os }}-${{ env.CACHE_KEY }}
         restore-keys: |
           ${{ runner.os }}-${{ env.CACHE_KEY }}
+
+    - name: Display environment
+      run: npm run env
 
     - name: Build main site
       run: npm run build:cache
