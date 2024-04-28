@@ -112,6 +112,7 @@
 {{- $fixed := .fixed | default false -}}
 {{- $overlay := .overlay | default false -}}
 {{- $overlayMode := .overlayMode | default "dark" -}}
+{{- if eq $overlayMode "none" }}{{ $overlayMode = "" }}{{ end }}
 {{- $color := .color | default "" -}}
 {{- $search := .search | default site.Params.navigation.search -}}
 {{- $searchModal := and $search site.Params.navigation.searchModal -}}
