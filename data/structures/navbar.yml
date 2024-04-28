@@ -118,6 +118,7 @@ arguments:
       values:
         - light
         - dark
+        - none
     group: partial
     release: v0.23.0
   logo:
