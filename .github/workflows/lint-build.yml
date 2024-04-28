@@ -41,7 +41,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-12, windows-latest, ubuntu-latest]
+        os: [macos-latest, windows-latest, ubuntu-latest]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version: [18.x, 20.x]
 
@@ -51,6 +51,11 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
 
+    - name: Install Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ">1.0.0"
+      
     - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
