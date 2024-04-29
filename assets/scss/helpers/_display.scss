@@ -5,12 +5,16 @@
 // stylelint-disable annotation-no-unknown
 
 // scss-docs-start display-color
-.d-none-light {
+.d-none-light, .d-none-inline-light {
     display: none if($enable-important-utilities, !important, null); 
 }
 
 .d-none-dark {
     display: block if($enable-important-utilities, !important, null);
+}
+
+.d-none-inline-dark {
+    display: inline if($enable-important-utilities, !important, null);
 }
 
 @if $enable-dark-mode {
@@ -19,7 +23,11 @@
             display: block if($enable-important-utilities, !important, null);
         }
 
-        .d-none-dark {
+        .d-none-inline-light {
+            display: inline if($enable-important-utilities, !important, null);
+        }
+
+        .d-none-dark, .d-none-inline-dark {
             display: none if($enable-important-utilities, !important, null);
         }
     }
