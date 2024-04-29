@@ -204,8 +204,8 @@
                     <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
                         {{- if (and $logoLight $logoDark) -}}
                             {{ $width := partial "utilities/GetWidth.html" (dict "path" $logoLight "height" 30) }}
-                            <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-dark" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                            <img src="{{if $absoluteURL }}{{ absURL $logoDark }}{{ else }}{{ $logoDark }}{{ end }}" class="d-none-light" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
+                            <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-inline-dark" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
+                            <img src="{{if $absoluteURL }}{{ absURL $logoDark }}{{ else }}{{ $logoDark }}{{ end }}" class="d-none-inline-light" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
                         {{- else if $logo -}}
                             {{ $width := partial "utilities/GetWidth.html" (dict "path" $logo "height" 30) }}
                             <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
