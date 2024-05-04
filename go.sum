@@ -96,6 +96,8 @@ github.com/gethinode/mod-fontawesome v1.8.0 h1:YEuCmvCdzcemF1eFK35Wnp1asKKO3/xbx
 github.com/gethinode/mod-fontawesome v1.8.0/go.mod h1:uvuC2YL8mdXNp6NRzFOu4TWsHvtY9AZ8YxJkF23/M/8=
 github.com/gethinode/mod-fontawesome v1.8.1 h1:iyvULrpaGizQoI5Vl9WjFYcMGWefdyG90NGK2UKax+k=
 github.com/gethinode/mod-fontawesome v1.8.1/go.mod h1:xBKsZH3WJtMOItZVlp9SbO51uaBy6IbvUZSKpNu3b6Y=
+github.com/gethinode/mod-fontawesome v1.8.2 h1:LAzLytyh9c9gLzBWMju6Gtp3uEojhBQEYw0o38EUKZY=
+github.com/gethinode/mod-fontawesome v1.8.2/go.mod h1:xBKsZH3WJtMOItZVlp9SbO51uaBy6IbvUZSKpNu3b6Y=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
@@ -110,6 +112,8 @@ github.com/gethinode/mod-katex v1.0.5 h1:AVhcTINYory0ygChQERf8PcyJkbT1oqhmLRF6ES
 github.com/gethinode/mod-katex v1.0.5/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.7 h1:FTEhvi3r+O5lPeOxB7OsanFZuAB14yC5fIk3DqhkNyY=
 github.com/gethinode/mod-katex v1.0.7/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
+github.com/gethinode/mod-katex v1.0.8 h1:tFGFz/JIEogCz4wvUsUncrOsOupPxsjP+TwU/3NxIjY=
+github.com/gethinode/mod-katex v1.0.8/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-leaflet v0.2.3 h1:QQI4h+IH0jZ7fx4q0um2YIEiYBoW3OAfW8qHzbRCDPk=
 github.com/gethinode/mod-leaflet v0.2.3/go.mod h1:uGggt87x4Fw7wBoJpSiUvNkYg+s/Ujne7klAX2rxMRk=
 github.com/gethinode/mod-leaflet v0.3.1 h1:H5MaOa+BB1KuVw7abTqfIn/SNzzRsAyx/WQoSe+2Ykc=
@@ -124,6 +128,8 @@ github.com/gethinode/mod-leaflet v0.4.0 h1:Xc6c1UTf4m1saQLFfFWT5sEpwj25xVGuS8csG
 github.com/gethinode/mod-leaflet v0.4.0/go.mod h1:yr+bUKAstifdB16mbYh69OayAmgPOlNUubAmVn5eL2M=
 github.com/gethinode/mod-leaflet v1.0.0 h1:HdnWafOGkkK1hYGfqLYF3pp9dAFS/caxlzML9sO1rCc=
 github.com/gethinode/mod-leaflet v1.0.0/go.mod h1:Ei0x9WiL7Dbi4JeG6yI1CE63bT1QJ8sKi67Jea1wFSE=
+github.com/gethinode/mod-leaflet v1.0.1 h1:L4Coe6HTD9O0Txs1S8AtVg+6/TEneSF9i6fJK8jdWUw=
+github.com/gethinode/mod-leaflet v1.0.1/go.mod h1:Ei0x9WiL7Dbi4JeG6yI1CE63bT1QJ8sKi67Jea1wFSE=
 github.com/gethinode/mod-lottie v1.0.0 h1:1CUZMcgN5FAyjjyuP3qkaOQ6M5sv6HUAbosW4sIT5VE=
 github.com/gethinode/mod-lottie v1.0.0/go.mod h1:erRCgSL2FCfKHI0jQbSpM+g0jXl7SjKVJrh7kWGteKs=
 github.com/gethinode/mod-lottie v1.0.1 h1:+IE7xtnSVQpJS56oBJq9RWKZeFEfxrOZAqE3BSrS/u0=
