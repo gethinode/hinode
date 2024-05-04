@@ -66,6 +66,15 @@ arguments:
       Flag indicating if pagination should be added to the card group, if the
       list exceeds the maximum number of cards to display. 
     group: partial
+  pagination:
+    type: int
+    optional: true
+    comment: >-
+      Number of elements per page in pagination, overrides site settings.
+    group: partial
+    options:
+      min: 1
+    release: v0.23.12
   href:
     type: string
     optional: true
