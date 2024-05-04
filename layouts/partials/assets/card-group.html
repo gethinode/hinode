@@ -39,7 +39,11 @@
 {{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
 {{ $paginator := "" }}
 {{ if and $isPages $paginate }}
-    {{ $paginator = $page.Paginate $pages .max }}
+    {{ with .pagination }}
+        {{ $paginator = $page.Paginate $pages . }}
+    {{ else }}
+        {{ $paginator = $page.Paginate $pages }}
+    {{ end }}
     {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
 {{ end }}
 
