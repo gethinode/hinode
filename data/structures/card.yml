@@ -211,6 +211,14 @@ arguments:
     optional: true
     comment: Render hook for the image partial.
     group: partial
+  sizes:
+    type: string
+    default: 100vw
+    optional: true
+    comment: >-
+      One or more strings separated by commas, indicating the source sizes of an
+      image set.
+    group: partial
 body:
   optional: true
   comment: >-

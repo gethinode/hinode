@@ -98,6 +98,14 @@ arguments:
         - low
         - auto
     group: partial
+  sizes:
+    type: string
+    default: 100vw
+    optional: true
+    comment: >-
+      One or more strings separated by commas, indicating the source sizes of an
+      image set.
+    group: partial
   title:
     type: string
     optional: true

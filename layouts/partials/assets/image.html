@@ -35,6 +35,8 @@
 {{- $lazy := eq $loading "lazy" -}}
 {{- $priority := .priority -}}
 {{- if eq $priority "auto" }}{{ $priority = "" }}{{ end -}}
+{{- $sizes := .sizes | default "100vw" -}}
+
 
 {{- define "partials/image-portrait.html" -}}
     {{- $dimensions := slice }}
@@ -168,6 +170,7 @@
     {{- $modes := .modes -}}
     {{- $lazy := .lazy -}}
     {{- $page := .page -}}
+    {{- $sizes := .sizes -}}
     {{- $priority := .priority -}}
     {{- $isVector := false -}}
 
@@ -235,7 +238,7 @@
                 src="{{ $fallbackURL }}"
                 {{ if $lazy }}loading="lazy"{{ end }}
                 {{ with $priority }}fetchpriority="{{ . }}"{{ end }}
-                {{ with $imgset -}}srcset="{{ . }}" sizes="100vw"{{- end }}
+                {{ with $imgset -}}srcset="{{ . }}" sizes="{{ $sizes }}"{{- end }}
                 {{ with $height }}height="{{ . }}"{{ end }}
                 {{ with $width }}width="{{ . }}"{{ end }}
                 {{ with $title }}alt="{{ . }}"{{ end }}>
@@ -263,6 +266,7 @@
     "figclass" $figclass
     "lazy" $lazy
     "priority" $priority
+    "sizes" $sizes
     "page" $page)
 -}}
 

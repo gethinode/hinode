@@ -78,12 +78,38 @@
 {{- $responsive := .responsive | default true -}}
 {{- $cols := string .cols | default "3" -}}
 
+{{- $sizes := "100vw" }}
 {{- $colGrid := "" -}}
-{{- if eq $cols "1" }}{{ $colGrid = "row-cols-1" -}}
-{{- else if eq $cols "2" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-2" }}{{ end -}}
-{{- else if eq $cols "3" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-3" }}{{ end -}}
-{{- else if eq $cols "4" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-4" }}{{ end -}}
-{{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
+{{- if eq $cols "1" }}
+    {{ $colGrid = "row-cols-1" -}}
+{{- else if eq $cols "2" }}
+    {{ if $responsive }}
+        {{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}
+    {{ else }}
+        {{ $colGrid = "row-cols-2" }}
+    {{ end -}}
+    {{ $sizes = printf "(min-width: %s) 50vw, 100vw" $breakpoint.currentSize }}
+{{- else if eq $cols "3" }}
+    {{ if $responsive }}
+        {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current }}
+    {{ else }}
+        {{ $colGrid = "row-cols-3" }}
+    {{ end -}}
+    {{ $sizes = printf "(min-width: %s) 33.3vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
+{{- else if eq $cols "4" }}
+    {{ if $responsive }}
+        {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current }}
+    {{ else }}
+        {{ $colGrid = "row-cols-4" }}
+    {{ end -}}
+    {{ $sizes = printf "(min-width: %s) 25vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
+{{- else if eq $cols "5" }}
+    {{ if $responsive }}
+        {{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}
+    {{ else }}
+        {{ $colGrid = "row-cols-5" }}
+    {{ end -}}
+    {{ $sizes = printf "(min-width: %s) 20vw, (min-width: %s) 33.3vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
 {{ end -}}
 
 {{- if not $paginate -}}
@@ -102,6 +128,7 @@
                 "footer" $footer
                 "header" $header
                 "loading" $loading
+                "sizes" $sizes
                 "orientation" $orientation
                 "padding" $padding
                 "ratio" $ratio
