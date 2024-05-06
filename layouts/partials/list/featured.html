@@ -3,6 +3,7 @@
 {{- $orientation := .orientation | default "stacked" -}}
 {{- $actions := .actions -}}
 {{- $width := .width | default 6 }}
+{{ $sizes := "100vw" }}
 {{- if or (lt $width 1) (gt $width 12) -}}
     {{- $width = 6 -}}
     {{- warnf "partial [list/featured.html] - Invalid column width: %d" $width -}}
@@ -18,6 +19,11 @@
     {{- errorf "partial [list/featured.html] - Invalid value for param 'align': %s" $align -}}
 {{- end -}}
 {{- $breadcrumb := and (not $page.IsHome) site.Params.navigation.breadcrumb -}}
+
+{{- define "partials/list/featured-sizes.html" }}
+    {{ $sizes := printf "(min-width: 768px) %dvw, 50vw" (int (math.Round (div (mul .width 100) 12))) }}
+    {{ return $sizes }}
+{{ end }}
 
 {{- define "partials/list/featured-body.html" }}
     {{- $page := .page -}}
@@ -44,6 +50,7 @@
 {{- define "partials/list/featured-illustration.html" }}
     {{- $page := .page -}}
     {{- $style := printf "img-wrap mx-auto mx-md-0 %s" .style -}}
+    {{ $sizes := .sizes }}
 
     {{ if $page.Params.icon }}
         {{- $icon := (or (and (reflect.IsMap $page.Params.Icon) $page.Params.Icon.url) $page.Params.Icon) -}}
@@ -56,7 +63,7 @@
     {{ else }}
         {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
         {{- if $thumbnail }}
-            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "wrapper" $style "class" "rounded" "title" $page.Site.Title "priority" "high") }}
+            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "sizes" $sizes "wrapper" $style "class" "rounded" "title" $page.Site.Title "priority" "high") }}
         {{ end }}
     {{ end }}
 {{- end -}}
@@ -70,7 +77,8 @@
         {{ if eq $orientation "stacked" }}
             <div class="row justify-content-center flex-fill">
                 <div class="col-12 col-md-{{ $width }} m-auto text-center">
-                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page "style" "pb-4") }}
+                    {{ $sizes = partial "partials/list/featured-sizes.html" (dict "width" $width) }}
+                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page "sizes" $sizes "style" "pb-4") }}
                     {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions) }}
                 </div>
             </div>
@@ -79,8 +87,11 @@
                 <div class="col col-12 col-md-{{ $width }} order-1 order-md-0 my-md-auto">
                     {{ partial "partials/list/featured-body.html" (dict "page" $page "headings" $headings "orientation" $orientation "actions" $actions "align" $align) }}
                 </div>
-                <div class="col col-12 col-md-{{ if gt $width 6 }}{{ sub 12 $width }}{{ else }}{{ $width }}{{ end }} order-0 order-md-1 text-center my-md-auto align-self-end">
-                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page "style" "pb-4 pb-md-0") }}
+                {{ $newWidth := $width }}
+                {{ if gt $width 6 }}{{ $newWidth = sub 12 $width }}{{ end }}
+                {{ $sizes = partial "partials/list/featured-sizes.html" (dict "width" $newWidth) }}
+                <div class="col col-12 col-md-{{ $newWidth }} order-0 order-md-1 text-center my-md-auto align-self-end">
+                    {{ partial "partials/list/featured-illustration.html" (dict "page" $page "sizes" $sizes "style" "pb-4 pb-md-0") }}
                 </div>
             </div>
         {{ end }}
