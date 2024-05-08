@@ -1,6 +1,10 @@
 // add zoom animation with opacity change on card img hover
 // source: https://stackoverflow.com/a/43816376
 
+.card-img {
+    background-color: var(--#{$prefix}secondary-bg);
+}
+
 .card-img-wrap {
     overflow: hidden;
     position: relative;
