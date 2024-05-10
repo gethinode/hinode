@@ -53,7 +53,10 @@
 {{- $clipboard := .clipboard -}}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
-{{- $isExternal := ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
+{{- $isExternal := false }}
+{{ if in (slice "http" "https") ((urls.Parse (absURL $href)).Scheme) }}
+    {{ $isExternal = ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
+{{ end }}
 {{- $target := "" -}}
 {{- $rel := "" -}}
 {{- $spacing := .spacing | default true -}}
