@@ -14,6 +14,7 @@
 
 <!-- Initialize arguments -->
 {{- $page := .page -}}
+{{- $breakpoint := .page.Scratch.Get "breakpoint" -}}
 {{ $items := $page.Parent.Sections }}
 {{ if not $page.Parent.Section }}
     {{ $items = $page.Sections }}
@@ -21,7 +22,7 @@
 
 <!-- Main code -->
 {{- if and (not $error) (gt (len $items) 0) }}
-    <div class="d-grid gap-2 mx-auto d-md-none">
+    <div class="d-grid gap-2 mx-auto d-{{ $breakpoint.prev }}-none">
         {{ partial "assets/button.html" (dict 
             "title" (T "sectionMenu") 
             "color" "secondary" 
@@ -45,7 +46,9 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand navbar-services p-0 fs-5 d-none d-md-block">
+    <div class="d-{{ $breakpoint.prev }}-none mb-5"></div>
+
+    <nav class="navbar navbar-expand navbar-services p-0 fs-5 d-none d-{{ $breakpoint.prev }}-block mb-5">
         <div class="container-fluid p-0 pb-3">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
