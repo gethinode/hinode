@@ -4,12 +4,12 @@
     command = "npm run build:example"
 
 [build.environment]
-    DART_SASS_VERSION = "1.72.0"
-    HUGO_VERSION = "0.124.0"
+    DART_SASS_VERSION = "1.77.0"
+    HUGO_VERSION = "0.125.7"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
-    NODE_VERSION = "18.19.1"
-    NPM_VERSION = "10.2.4"
+    NODE_VERSION = "18.20.2"
+    NPM_VERSION = "10.5.0"
 # toml-docs-end netlify
 
 [[headers]]
