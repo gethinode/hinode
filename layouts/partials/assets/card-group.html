@@ -33,6 +33,7 @@
 {{- $loading := .loading -}}
 {{- $button := .button -}}
 {{- $buttonLabel := .buttonLabel -}}
+{{- $buttonType := .buttonType -}}
 {{- $hook := .hook | default "assets/card.html" }}
 
 <!-- Override arguments -->
@@ -137,6 +138,7 @@
                 "align" $align
                 "button" $button
                 "buttonLabel" $buttonLabel
+                "buttonType" $buttonType
             ) -}}
             {{- $params = merge $params $element }}
 

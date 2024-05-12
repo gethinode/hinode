@@ -95,3 +95,7 @@
     z-index: 2;
     position: relative;
 }
+
+.card-button-link {
+    text-decoration: underline if($enable-important-utilities, !important, null);
+}

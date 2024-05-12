@@ -103,6 +103,16 @@ arguments:
     optional: true
     comment: >-
       Flag indicating if the number of columns should be responsive, defaults to `true`.
+  buttonType:
+    type: select
+    optional: true
+    default: button
+    release: v0.23.18
+    comment: Type of the button elements.
+    options:
+      values:
+        - link
+        - button
   hook:
     type: string
     optional: true
