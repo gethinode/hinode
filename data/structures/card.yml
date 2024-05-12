@@ -206,6 +206,17 @@ arguments:
     release: v0.23.2
     comment: >-
       Label of the link button, defaults to the card title.
+  buttonType:
+    type: select
+    parent: cascade
+    optional: true
+    default: button
+    comment: Type of the button element.
+    release: v0.23.18
+    options:
+      values:
+        - link
+        - button
   hook:
     type: string
     optional: true

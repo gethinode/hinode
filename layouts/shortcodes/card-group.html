@@ -28,6 +28,7 @@
 {{- $style := .Get  "style" | default "" -}}
 {{- $subtle := .Get "subtle" | default false -}}
 {{- $button := .Get "button" | default false -}}
+{{- $buttonType := .Get "buttonType" | default "" -}}
 
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
@@ -56,5 +57,6 @@
     "style" $style
     "subtle" $subtle
     "button" $button
+    "buttonType" $buttonType
     ) 
 -}}
