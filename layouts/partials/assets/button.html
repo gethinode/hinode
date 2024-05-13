@@ -85,7 +85,7 @@
         {{- with $clipboard }} data-clipboard="{{ $clipboard }}"{{ end -}}
         {{- if eq $type "button" }} class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class -}}"
         {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
-        {{- else }} class="link-{{ $color }} position-relative {{ $class }}"{{ end -}}
+        {{- else }} class="btn btn-link link-{{ $color }} position-relative {{ $class }}"{{ end -}}
         {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end -}}
         {{- with $collapse }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
         {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
