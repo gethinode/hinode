@@ -41,3 +41,7 @@ a.btn {
     background-repeat: no-repeat if($enable-important-utilities, !important, null);
     background-size: $btn-close-width if($enable-important-utilities, !important, null);
 }
+
+.btn-link {
+    --bs-btn-padding-x: 0;
+}
