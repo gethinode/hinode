@@ -291,6 +291,7 @@ As an example, the following shortcodes render links in different formats.
 - {{</* link name=hinode cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
 - {{</* link hinode /*/>}}
 - {{</* link href="https://developer.mozilla.org" >}}External link{{< /link */>}}
+- {{</* link href="https://demo.gethinode.com/en/about/" >}}Surrogate external link{{< /link */>}}
 - {{</* link "./projects/another-project" >}}Internal link with title{{< /link */>}}
 - {{</* link url="projects/another-project" /*/>}}
 - {{</* link url="/projects/another-project" /*/>}}
