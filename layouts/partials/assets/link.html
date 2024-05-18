@@ -13,7 +13,7 @@
 {{ end }}
 
 <!-- Initialize arguments -->
-{{ $destination := .destination }}
+{{ $destination := strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination }}
 
 {{- $target := "" -}}
 {{- $rel := "" -}}
