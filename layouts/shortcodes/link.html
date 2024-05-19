@@ -18,6 +18,7 @@
 {{ $url := "" }}
 {{ $class := "" }}
 {{ $case := true }}
+{{ $external := false }}
 {{ $cue := site.Params.main.externalLinks.cue }}
 {{ $tab := site.Params.main.externalLinks.tab }}
 {{ $text := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
@@ -30,6 +31,7 @@
     {{- $cue = .Get "cue" | default site.Params.main.externalLinks.cue -}}
     {{- $tab = .Get "tab" | default site.Params.main.externalLinks.tab -}}
     {{- $case = .Get "case" | default true -}}
+    {{- $external = .Get "external" | default false -}}
     {{- $class = .Get "class" | default "" -}}
 {{ else }}
     {{ $href = .Get 0 }}
@@ -42,7 +44,11 @@
 {{ end }}
 
 {{- if hasPrefix $href "http" -}}
+    {{- if $external -}}
+        {{ $url = $href }}
+    {{- else -}}
     {{ $url = strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $href }}
+    {{- end -}}
 {{- else if not (strings.Contains $href "/") -}}
     {{ $url = index site.Params.links $href }}
 {{- end -}}
@@ -65,7 +71,12 @@
     {{ end }}
 {{ end }}
 
-{{- $isExternal := ne (urls.Parse (absURL $url)).Host (urls.Parse site.BaseURL).Host -}}
+{{ if and $external (not (hasPrefix $url "http")) }}
+    {{ errorf "External link must start with 'http': %s" .Position -}}
+    {{ $error = true -}}
+{{ end }}
+
+{{- $isExternal := or (ne (urls.Parse (absURL $url)).Host (urls.Parse site.BaseURL).Host) $external -}}
 {{- if not $isExternal -}}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url "page" .Page) }}
     {{- if not $ref -}}
@@ -80,5 +91,5 @@
 
 <!-- Main code -->
 {{- if not $error -}}
-    {{ partial "assets/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "class" $class "page" .Page) }}
+    {{ partial "assets/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "external" $external "class" $class "page" .Page) }}
 {{- end -}}

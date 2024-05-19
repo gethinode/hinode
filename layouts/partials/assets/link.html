@@ -18,9 +18,10 @@
 {{- $target := "" -}}
 {{- $rel := "" -}}
 {{- $case := .case | default true }}
+{{- $external := .external | default false }}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
-{{- $isExternal := ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host -}}
+{{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
 {{- $page := .page -}}
 {{- $anchor := "" -}}
 {{- $text := .text -}}
