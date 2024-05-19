@@ -56,6 +56,12 @@ arguments:
       Flag to indicate if the retrieved title (e.g. no inner text is provided)
       of an internal link should use its original case. If false, the title is
       set to lower case.
+  external:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to indicate if a link that contains baseURL host should be forced as external.
   class:
     type: string
     optional: true
