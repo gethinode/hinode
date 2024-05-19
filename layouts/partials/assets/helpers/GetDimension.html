@@ -1,0 +1,13 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+{{ $ratio := .ratio }}
+
+{{ $dim := "" }}
+{{ $matches := first 1 (where site.Data.dimensions "ratio" $ratio) }}
+{{ if eq ($matches | len) 1 }}
+    {{ $dim = (index $matches 0).dimensions }}
+{{ end }}
+
+{{ return $dim }}

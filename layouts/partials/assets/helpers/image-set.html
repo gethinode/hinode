@@ -1,0 +1,39 @@
+{{- $url := .url -}}
+{{ $img := .img }}
+{{ $absoluteURL := .absoluteURL }}
+{{ $dims := .dims }}
+{{- $ratio := .ratio -}}
+{{ $hook := .hook }}
+{{ $transform := .transform }}
+{{ $format := .format }}
+{{ $includeWidth := .includeWidth | default true }}
+
+{{ $host := (urls.Parse $url).Hostname }}
+{{ $dir := (urls.Parse $url).Path }}
+{{ $file := index ((split $dir "/") | collections.Reverse) 0 }}
+{{ $dir = strings.TrimSuffix $file $dir }}
+
+{{ $imgset := slice }}
+{{- range $index, $dim := $dims -}}
+    {{ $width := (int (index (split $dim "x") 0)) }}
+    {{ $height := (int (index (split $dim "x") 1)) }}
+
+    {{- $element := partial (printf "assets/adapters/%s.html" $hook) (dict 
+        "host" $host
+        "dir" $dir
+        "file" $file
+        "img" $img
+        "absoluteURL" $absoluteURL
+        "transform" $transform
+        "width" $width
+        "height" $height
+        "format" $format
+    )}}
+    {{ if $includeWidth }}
+        {{ $imgset = $imgset | append (printf "%s %dw" $element $width) }}
+    {{ else }}
+        {{ $imgset = $imgset | append $element }}
+    {{ end }}
+{{- end -}}
+
+{{ return (delimit $imgset ", ") }}
