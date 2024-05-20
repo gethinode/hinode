@@ -72,9 +72,11 @@
 <!-- Derive image width and height -->
 {{ $width := "" }}
 {{ $height := "" }}
-{{ range $dim := ($dims | last 1) }}
-    {{ $width = (int (index (split $dim "x") 0)) }}
-    {{ $height = (int (index (split $dim "x") 1)) }}
+{{ with $dims }}
+    {{ range $dim := (. | last 1) }}
+        {{ $width = (int (index (split $dim "x") 0)) }}
+        {{ $height = (int (index (split $dim "x") 1)) }}
+    {{ end }}
 {{ end }}
 
 <!-- Generate image urls -->
