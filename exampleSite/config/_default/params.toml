@@ -70,6 +70,14 @@
 [messages]
     placement = "bottom-right"
 
+[dam]
+    dimensions = "dimensions.yml"
+
+[[dam.providers]]
+    name = "Cloudinary"
+    pattern = "cloudinary"
+    adapter = "assets/adapters/cloudinary.html"
+
 [sharing]
     enabled = true
     sort = "weight"

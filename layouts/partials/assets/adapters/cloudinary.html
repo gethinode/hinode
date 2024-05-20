@@ -33,7 +33,7 @@
     {{ $operation := "" }}
     {{ if $format }}
         {{ $operation = printf "%s,h_%d,w_%d" $transform $height $width }}
-        {{ $file = printf "%s.%s" (path.BaseName $file) $format }}
+        {{ $file = printf "%s.%s" (strings.TrimSuffix (path.Ext $file) $file) $format }}
     {{ else }}
         {{ $operation = printf "f_auto,%s,h_%d,w_%d" $transform $height $width }}
     {{ end }}
