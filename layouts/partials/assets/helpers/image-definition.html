@@ -65,7 +65,7 @@
 
     {{ $widths := partial "assets/helpers/GetDimension.html" (dict "ratio" "auto") }}
     {{ range $width := $widths -}}
-        {{- $dims = $dims | append (printf "%sx%d" $width (int (math.Round (mul (div (float $width) $img.Width) $img.Height)))) -}}
+        {{- $dims = $dims | append (printf "%dx%d" (int $width) (int (math.Round (mul (div (float $width) $img.Width) $img.Height)))) -}}
     {{- end -}}
 {{ end }}
 
