@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="{{ .Site.Params.style.themeFontPath | default "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" }}">
     {{ else if .Site.Params.style.themeFontPreload }}
         {{ $font := .Site.Params.style.themeFontPreload }}
-        <link rel="preload" href="{{ $font }}" as="font" type="font/{{ strings.TrimPrefix "." (path.Ext $font) }}" crossorigin>
+        <link rel="preload" href="{{ path.Join site.Home.RelPermalink $font }}" as="font" type="font/{{ strings.TrimPrefix "." (path.Ext $font) }}" crossorigin>
     {{- end -}}
     {{ partial "head/seo.html" . }}
     {{ partialCached "head/favicon.html" . -}}
