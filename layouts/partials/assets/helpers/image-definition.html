@@ -30,11 +30,18 @@
     {{- $anchor = index $segments 1 -}}
 {{- end -}}
 
-<!-- TODO: improve CDN detection / handling -->
-{{ $hook := "hugo" }}
-{{ if findRE "cloudinary" (urls.Parse $url).Hostname }}
-    {{ $hook = "cloudinary" }}
-{{- end -}}
+<!-- Identify image provider -->
+{{ $hook := "" }}
+{{ range $provider, $val := site.Params.images }}
+    {{ if not $hook }}    
+        {{ with index $val "host" }}
+            {{ if (findRE . (urls.Parse $url).Hostname) }}
+                {{ $hook = $provider }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ if not $hook }}{{ $hook = "hugo" }}{{ end }}
 
 <!-- Define image dimensions -->
 {{ $dims := slice }}
