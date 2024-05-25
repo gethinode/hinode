@@ -1,0 +1,43 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/adapter/imgix.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $host := .host }}
+{{ $dir := .dir }}
+{{ $file := .file }}
+{{ $format := .format }}
+{{ $transform := .transform }}
+{{ $height := .height }}
+{{ $width := .width }}
+{{ if eq $transform "fill" }}{{ $transform = "crop" }}{{ else }}{{ $transform = "max" }}{{ end }}
+{{ $element := "" }}
+
+<!-- Validate image format is supported -->
+{{ if and $format (not (in (slice "avif" "gif" "jp2" "jpg" "json" "jxr" "pjpg" "mp4" "png" "png8" "png32" "webm" "webp" "blurhash") $format)) }}
+    {{ warnf "Image format not supported by imgix: %s.%s" (path.BaseName $file) $format }}
+    {{ $format = "jpg" }}
+{{ end }}
+
+<!-- Generate image URL -->
+{{ if not $error }}
+    {{ $operation := "" }}
+    {{ if $format }}
+        {{ $operation = printf "fm=%s&fit=%s&h=%d&w=%d" $format $transform $height $width }}
+    {{ else }}
+        {{ $operation = printf "f_auto&fit=%s&h=%d&w=%d" $transform $height $width }}
+    {{ end }}
+    {{- $element = printf "%s?%s" (urls.JoinPath (slice "https://" $host $dir $file)) $operation -}}
+{{ end }}
+
+{{ return $element }}
