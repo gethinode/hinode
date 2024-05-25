@@ -68,8 +68,7 @@
     }
 }
 
-.card-zoom card-body-link,
-.card-body-link {
+.card-zoom .card-body-link {
     &:hover,
     &:focus {
         color: shade-color($primary, $link-shade-percentage) if($enable-important-utilities, !important, null);
@@ -78,8 +77,7 @@
 
 @if $enable-dark-mode {
     @include color-mode(dark) {
-        .card-zoom card-body-link,
-        .card-body-link {
+        .card-zoom .card-body-link {
             &:hover,
             &:focus {
                 color: $primary-bg-subtle-dark if($enable-important-utilities, !important, null);
