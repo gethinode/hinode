@@ -5,19 +5,24 @@
     {{ $page_modules = $page_modules | append .Params.modules }}
 {{ end }}
 
-{{- $modules := site.Params.modules.optional | intersect $page_modules  -}}
+{{ $config := page.Scratch.Get "modules" }}
+{{ if not $config }}
+    {{ errorf "partial [footer/optional-scripts.html] - Cannot initialize module configuration" }}
+{{ end }}
+
+{{- $modules := $config.optional | intersect $page_modules  -}}
 {{- range $index, $mod := $modules -}}
     {{- $filename := printf "js/%s.bundle.js" $mod -}}
     {{- $match := printf "js/modules/%s/**.js" $mod -}}
     {{- $skipTemplate := false -}}
-    {{- if reflect.IsSlice site.Params.modules.disableTemplate -}}
-        {{- if in site.Params.modules.disableTemplate $mod}}
+    {{- if reflect.IsSlice $config.disableTemplate -}}
+        {{- if in $config.disableTemplate $mod}}
             {{- $skipTemplate = true -}}
         {{- end -}}
     {{- end -}}
 
     {{ $state := "" }}
-    {{- with (index site.Params.modules $mod) -}}
+    {{- with (index $config.modules $mod) -}}
         {{- with index . "state" }}{{ $state = . }}{{ end -}}
     {{- end -}}
 

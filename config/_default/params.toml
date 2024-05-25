@@ -18,28 +18,35 @@
 
 # toml-docs-start modules
 [modules]
-    core = ["bootstrap", "flexsearch", "fontawesome"]
-    optional = ["leaflet", "katex", "lottie"]
-    excludeSCSS = ["bootstrap"]
-    disableTemplate = ["katex"]
-    [modules.katex]
-        state = "defer"
+    [modules.bootstrap]
+        integration = "core"
+        excludeSCSS = true
     [modules.flexsearch]
+        integration = "core"
         frontmatter = false
         filter = ""
     [modules.fontawesome]
+        integration = "core"
         inline = true
         debug = true
         skipMissing = false
+    [modules.katex]
+        # integration = "optional"
+        disableTemplate = true
+        state = "defer"
+    [modules.leaflet]
+        integration = "optional"
+    [modules.lottie]
+        integration = "optional"
     [modules.utils]
         filter = "[^0-9A-Za-zŽžÀ-ÿ ;.,\\/'’\"]-"
-        raw = false        
+        raw = false
 # toml-docs-end modules
 
 # toml-docs-start debugging
 [debugging]
     showJS = false
-    showSCSS = false
+    showSCSS = true
     purgeHTMLComments = false
 # toml-docs-end debugging
 
