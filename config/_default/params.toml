@@ -36,6 +36,16 @@
         raw = false        
 # toml-docs-end modules
 
+# toml-docs-start images
+[images]
+    [images.cloudinary]
+        host = "cloudinary"
+    [images.imagekit]
+        host = "imagekit"
+    [images.imgix]
+        host = "imgix"
+# toml-docs-end images
+
 # toml-docs-start debugging
 [debugging]
     showJS = false

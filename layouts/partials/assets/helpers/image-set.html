@@ -13,12 +13,19 @@
 {{ $file := index ((split $dir "/") | collections.Reverse) 0 }}
 {{ $dir = strings.TrimSuffix $file $dir }}
 
+{{ $adapter := (printf "assets/adapters/%s.html" $hook) }}
+{{ if not (fileExists (path.Join "/layouts/partials" $adapter)) }}
+    {{ warnf "Cannot find adapter: %s" (path.Join "/layouts/partials" $adapter) }}
+    {{ $hook = "hugo" }}
+    {{ $adapter = "assets/adapters/hugo.html" }}
+{{ end }}
+
 {{ $imgset := slice }}
 {{- range $index, $dim := $dims -}}
     {{ $width := (int (index (split $dim "x") 0)) }}
     {{ $height := (int (index (split $dim "x") 1)) }}
 
-    {{- $element := partial (printf "assets/adapters/%s.html" $hook) (dict 
+    {{- $element := partial $adapter (dict 
         "host" $host
         "dir" $dir
         "file" $file
