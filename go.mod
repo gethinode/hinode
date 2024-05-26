@@ -4,13 +4,13 @@ go 1.19
 
 require (
 	github.com/airbnb/lottie-web v5.12.2+incompatible // indirect
-	github.com/gethinode/mod-bootstrap v1.2.8 // indirect
-	github.com/gethinode/mod-flexsearch v1.11.3 // indirect
-	github.com/gethinode/mod-fontawesome v1.8.2 // indirect
-	github.com/gethinode/mod-katex v1.0.9 // indirect
-	github.com/gethinode/mod-leaflet v1.0.1 // indirect
-	github.com/gethinode/mod-lottie v1.4.7 // indirect
-	github.com/gethinode/mod-utils/v2 v2.3.0 // indirect
+	github.com/gethinode/mod-bootstrap v1.3.0 // indirect
+	github.com/gethinode/mod-flexsearch v1.12.0 // indirect
+	github.com/gethinode/mod-fontawesome v1.9.0 // indirect
+	github.com/gethinode/mod-katex v1.1.0 // indirect
+	github.com/gethinode/mod-leaflet v1.1.0 // indirect
+	github.com/gethinode/mod-lottie v1.5.0 // indirect
+	github.com/gethinode/mod-utils/v2 v2.3.1 // indirect
 	github.com/nextapps-de/flexsearch v0.0.0-20240110101704-4c3966709f85 // indirect
 	github.com/twbs/bootstrap v5.3.3+incompatible // indirect
 )
