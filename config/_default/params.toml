@@ -56,7 +56,7 @@
 # toml-docs-start debugging
 [debugging]
     showJS = false
-    showSCSS = true
+    showSCSS = false
     purgeHTMLComments = false
 # toml-docs-end debugging
 
