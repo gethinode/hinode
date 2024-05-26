@@ -13,10 +13,9 @@
     {{- end -}}
 {{- end -}}
 
-{{- /* Validate module configuration */ -}}
-{{- if and .IsPage (not (in .Site.Params.modules.core "bootstrap")) -}}
-    {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
-{{- end -}}
+{{- /* Initialize module configuration */ -}}
+{{- $modules := partial "utilities/InitModules.html" (dict "page" .) -}}
+{{- $.Scratch.Set "modules" $modules -}}
 
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
 {{- $.Scratch.Set "fullCover" $fullCover -}}
