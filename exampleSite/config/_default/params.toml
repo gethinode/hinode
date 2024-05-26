@@ -13,31 +13,6 @@
     [main.build]
         transpiler = "dartsass"
 
-[modules]
-    [modules.bootstrap]
-        integration = "core"
-        excludeSCSS = true
-    [modules.flexsearch]
-        integration = "core"
-        frontmatter = false
-        filter = ""
-    [modules.fontawesome]
-        integration = "core"
-        inline = true
-        debug = true
-        skipMissing = false
-    [modules.katex]
-        # integration = "optional"
-        disableTemplate = true
-        state = "defer"
-    [modules.leaflet]
-        integration = "optional"
-    [modules.lottie]
-        integration = "optional"
-    [modules.utils]
-        filter = "[^0-9A-Za-zŽžÀ-ÿ ;.,\\/'’\"]-"
-        raw = false
-
 [debugging]
     showJS = false
     showSCSS = false

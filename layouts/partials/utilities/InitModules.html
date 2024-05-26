@@ -45,8 +45,6 @@
 
 {{ $modules := dict "modules" $modules "core" $core "optional" $optional "excludeSCSS" $excludeSCSS "disableTemplate" $disableTemplate }}
 
-{{ warnf "mods: %s" $modules }}
-
 {{- if and $page.IsPage (not (in $core "bootstrap")) -}}
     {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
 {{- end -}}
