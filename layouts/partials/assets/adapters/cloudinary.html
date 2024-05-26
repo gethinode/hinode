@@ -1,0 +1,43 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/adapter/cloudinary.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $host := .host }}
+{{ $dir := .dir }}
+{{ $file := .file }}
+{{ $format := .format }}
+{{ $transform := .transform }}
+{{ $height := .height }}
+{{ $width := .width }}
+{{ if eq $transform "fill" }}{{ $transform = "c_fill" }}{{ else }}{{ $transform = "c_fit" }}{{ end }}
+{{ $element := "" }}
+
+<!-- Split path between upload dir and sub dir -->
+{{ $newdir := urls.JoinPath (index (split $dir "upload") 0) "upload" }}
+{{ $file = urls.JoinPath (index (split $dir "upload") 1) $file }}
+{{ $dir = $newdir }}
+
+<!-- Generate image URL -->
+{{ if not $error }}
+    {{ $operation := "" }}
+    {{ if $format }}
+        {{ $operation = printf "%s,h_%d,w_%d" $transform $height $width }}
+        {{ $file = printf "%s.%s" (strings.TrimSuffix (path.Ext $file) $file) $format }}
+    {{ else }}
+        {{ $operation = printf "f_auto,%s,h_%d,w_%d" $transform $height $width }}
+    {{ end }}
+    {{- $element = urls.JoinPath (slice "https://" $host $dir $operation $file) -}}
+{{ end }}
+
+{{ return $element }}

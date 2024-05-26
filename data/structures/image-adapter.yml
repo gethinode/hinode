@@ -1,0 +1,62 @@
+comment: >-
+  Defines the interface to be implemented by a CDN image adapter.
+arguments:
+  host:
+    type: string
+    optional: true
+    comment: >-
+      Host of an URL. For example, the host of the URL
+      'https://example.com/first/second/third.webp' equals 'example.com'.
+  dir:
+    type: string
+    optional: true
+    comment: >-
+      All but the last element of an URL extension. For example, the dir of the
+      URL 'https://example.com/first/second/third.webp' equals '/first/second/'.
+  file:
+    type: string
+    optional: false
+    comment: >-
+      The last element of an URL extension. For example, the file of the
+      URL 'https://example.com/first/second/third.webp' equals 'third.webp'.
+  absoluteURL:
+    type: string
+    optional: true
+    default: false
+    comment: >-
+      Defines if a local image should use absolute instead of relative paths.
+  img:
+    type: "*resources.resourceAdapter"
+    optional: true
+    comment: >-
+      Image resource to process. Must be set when handling local images.
+  format:
+    type: select
+    optional: true
+    comment: >-
+      Image format; leave empty for an auto format (if supported) or default
+      format (usually jpg).
+    options:
+      values:
+        - png
+        - jpg
+        - gif
+        - tiff
+        - bmp
+        - webp
+  transform:
+    type: select
+    optional: false
+    comment: Image transformation.
+    options:
+      values:
+        - fill
+        - fit
+  height:
+    type: int
+    optional: false
+    comment: Height of the image in pixels.
+  width:
+    type: int
+    optional: false
+    comment: Width of the image in pixels.

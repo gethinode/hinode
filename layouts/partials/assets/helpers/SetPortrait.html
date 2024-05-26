@@ -1,0 +1,23 @@
+{{- $dim := .dim -}}
+
+{{- $dimensions := slice }}
+{{- $dimensions = $dimensions | append $dim -}}
+{{- $portraits := slice }}
+{{- range $d := $dimensions -}}
+    {{- $p := split $d "x" }}
+    {{ if ne (len $p) 2 }}
+        {{- warnf "partial [assets/image.html] - Invalid dimension: %s" $d -}}
+        {{- $portraits = $portraits | append $d -}}
+    {{- else -}}
+        {{- $portraits = $portraits | append (printf "%sx%s" (index $p 1) (index $p 0)) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $ret := "" }}
+{{- if reflect.IsSlice $dim -}}
+    {{ $ret = $portraits -}}
+{{- else if gt (len $portraits) 0 -}}
+    {{- $ret = index $portraits 0 -}}
+{{- end -}}
+
+{{- return $ret -}}

@@ -15,7 +15,7 @@ for = '/**'
             https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; \
         font-src 'self' https://fonts.gstatic.com; \
         frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com; \
-        img-src 'self' data: https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
+        img-src 'self' data: https://*.imgix.net https://*.imagekit.io https://*.cloudinary.com https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
         manifest-src 'self'; \
         media-src 'self' \
         """
