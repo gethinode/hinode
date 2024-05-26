@@ -50,25 +50,25 @@
     )
 -}}
 
-{{- if $mode -}}
-    {{- $ext := path.Ext $url -}}
-    {{- $base := strings.TrimSuffix $ext $url -}}
-    {{- range $suffix := $modes -}}
-        {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
-    {{- end -}}
-
-    {{- range $suffix := $modes -}}
-        {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
-        {{- $params = merge $params (dict
-            "url" $image
-            "mode" $suffix
-            "modes" $modes)
-        -}}
-    {{- end -}}
-{{ else }}
-    {{- $params = merge $params (dict "url" $url) -}}
-{{- end -}}
-
 {{ if not $error }}
-    {{- partial "assets/helpers/image-definition.html" $params -}}
+    {{- if $mode -}}
+        {{- $ext := path.Ext $url -}}
+        {{- $base := strings.TrimSuffix $ext $url -}}
+        {{- range $suffix := $modes -}}
+            {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
+        {{- end -}}
+
+        {{- range $suffix := $modes -}}
+            {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
+            {{- $params = merge $params (dict
+                "url" $image
+                "mode" $suffix
+                "modes" $modes)
+            -}}
+            {{- partial "assets/helpers/image-definition.html" $params -}}
+        {{- end -}}
+    {{ else }}
+        {{- $params = merge $params (dict "url" $url) -}}
+        {{- partial "assets/helpers/image-definition.html" $params -}}
+    {{- end -}}
 {{ end }}
