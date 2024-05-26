@@ -1,0 +1,54 @@
+{{ $page := .page }}
+
+{{ $core := slice }}
+{{ $optional := slice }}
+{{ $excludeSCSS := slice }}
+{{ $disableTemplate := slice }}
+{{ $modules := dict }}
+
+{{ range $key, $mod := $page.Site.Params.modules }}
+    {{ if eq $key "core" }}
+        {{ warnf "DEPRECATED: module parameter `core` has been deprecated in release v0.23.22" }}
+        {{ $core = $core | append $mod }}
+    {{ else if eq $key "optional" }}
+        {{ warnf "DEPRECATED: module parameter `optional` has been deprecated in release v0.23.22" }}
+        {{ $optional = $optional | append $mod }}
+    {{ else if eq $key "excludescss" }}
+        {{ warnf "DEPRECATED: module parameter `excludeSCSS` has been deprecated in release v0.23.22" }}
+        {{ $excludeSCSS = $excludeSCSS | append $mod }}
+    {{ else if eq $key "disabletemplate" }}
+        {{ warnf "DEPRECATED: module parameter `disableTemplate` has been deprecated in release v0.23.22" }}
+        {{ $disableTemplate = $disableTemplate | append $mod }}
+    {{ else if reflect.IsMap $mod }}
+        {{ $integration := index $mod "integration" }}
+        {{ if eq $integration "core" }}
+            {{ $core = $core | append $key }}
+        {{ else if eq $integration "optional" }}
+            {{ $optional = $optional | append $key }}
+        {{ else if $integration }}
+            {{ warnf "Unrecognized module integration setting: %s" $integration }}
+        {{ end }}
+        
+        {{ if eq (index $mod "excludeSCSS") true }}
+            {{ $excludeSCSS = $excludeSCSS | append $key }}
+        {{ end }}
+
+        {{ if eq (index $mod "disableTemplate") true }}
+            {{ $disableTemplate = $disableTemplate | append $key }}
+        {{ end }}
+
+        {{ $modules = merge $modules (dict $key $mod) }}
+    {{ else }}
+        {{ warnf "Unsupported module parameter: %s" $key }}
+    {{ end }}
+{{ end }}
+
+{{ $modules := dict "modules" $modules "core" $core "optional" $optional "excludeSCSS" $excludeSCSS "disableTemplate" $disableTemplate }}
+
+{{ warnf "mods: %s" $modules }}
+
+{{- if and $page.IsPage (not (in $core "bootstrap")) -}}
+    {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
+{{- end -}}
+
+{{ return $modules }}

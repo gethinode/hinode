@@ -14,11 +14,16 @@
 {{- $core := .core | default true -}}
 
 {{- $modules := "" -}}
+{{ $config := page.Scratch.Get "modules" }}
+{{ if not $config }}
+    {{ errorf "partial [head/stylesheet.html] - Cannot initialize module configuration" }}
+{{ end }}
+
 {{ if $core }}
-    {{- if reflect.IsSlice site.Params.modules.excludeSCSS -}}
-        {{- $modules = complement site.Params.modules.excludeSCSS (or site.Params.modules.core slice) -}}
+    {{- if reflect.IsSlice $config.excludeSCSS -}}
+        {{- $modules = complement $config.excludeSCSS (or $config.core slice) -}}
     {{ else }}
-        {{- $modules = site.Params.modules.core -}}
+        {{- $modules = $config.core -}}
     {{ end }}
 {{- end -}}
 

@@ -14,9 +14,14 @@
     {{- errorf "partial [footer/script.html] - Invalid value for param 'processing': %s" $state -}}
 {{- end -}}
 
+{{ $config := page.Scratch.Get "modules" }}
+{{ if not $config }}
+    {{ errorf "partial [footer/scripts.html] - Cannot initialize module configuration" }}
+{{ end }}
+
 {{- $modules := "" -}}
 {{ if $core }}
-    {{- $modules = site.Params.modules.core -}}
+    {{- $modules = $config.core -}}
 {{- end -}}
 
 {{- $bundle := partial "utilities/bundle" (dict "match" $match "filename" $filename "modules" $modules "basepath" "js/modules" "all" true "debugging" site.Params.debugging.showJS) -}}
