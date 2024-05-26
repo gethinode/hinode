@@ -8,16 +8,16 @@
 
 {{ range $key, $mod := $page.Site.Params.modules }}
     {{ if eq $key "core" }}
-        {{ warnf "DEPRECATED: module parameter `core` has been deprecated in release v0.23.22" }}
+        {{ warnf "DEPRECATED: module parameter `core` has been deprecated in release v0.24.0" }}
         {{ $core = $core | append $mod }}
     {{ else if eq $key "optional" }}
-        {{ warnf "DEPRECATED: module parameter `optional` has been deprecated in release v0.23.22" }}
+        {{ warnf "DEPRECATED: module parameter `optional` has been deprecated in release v0.24.0" }}
         {{ $optional = $optional | append $mod }}
     {{ else if eq $key "excludescss" }}
-        {{ warnf "DEPRECATED: module parameter `excludeSCSS` has been deprecated in release v0.23.22" }}
+        {{ warnf "DEPRECATED: module parameter `excludeSCSS` has been deprecated in release v0.24.0" }}
         {{ $excludeSCSS = $excludeSCSS | append $mod }}
     {{ else if eq $key "disabletemplate" }}
-        {{ warnf "DEPRECATED: module parameter `disableTemplate` has been deprecated in release v0.23.22" }}
+        {{ warnf "DEPRECATED: module parameter `disableTemplate` has been deprecated in release v0.24.0" }}
         {{ $disableTemplate = $disableTemplate | append $mod }}
     {{ else if reflect.IsMap $mod }}
         {{ $integration := index $mod "integration" }}
