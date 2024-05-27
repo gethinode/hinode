@@ -65,15 +65,15 @@
 {{ else }}
     {{ $transform = "fit" }}
     {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
-    {{ with $res }}
+    {{ if and $res $res.resource }}
         {{ $img = $res.resource }}
         {{ if $res.mirror }}{{ $class = printf "%s mirrorred" $class }}{{ end }}
-    {{ end }}
 
-    {{ $widths := partial "assets/helpers/GetDimension.html" (dict "ratio" "auto") }}
-    {{ range $width := $widths -}}
-        {{- $dims = $dims | append (printf "%dx%d" (int $width) (int (math.Round (mul (div (float $width) $img.Width) $img.Height)))) -}}
-    {{- end -}}
+        {{ $widths := partial "assets/helpers/GetDimension.html" (dict "ratio" "auto") }}
+        {{ range $width := $widths -}}
+            {{- $dims = $dims | append (printf "%dx%d" (int $width) (int (math.Round (mul (div (float $width) $img.Width) $img.Height)))) -}}
+        {{- end -}}
+    {{ end }}
 {{ end }}
 
 <!-- Derive image width and height -->
