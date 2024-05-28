@@ -19,7 +19,9 @@ comment: >-
   reference.
 arguments:
   url:
-    type: string
+    type:
+      - string
+      - template.URL
     optional: true
     comment: >-
       Path or url of the image, e.g. `img/example.jpg`. Images with multiple
@@ -128,3 +130,11 @@ arguments:
     optional: true
     comment: Class attribute of the figure caption, e.g. `px-4`.
     release: v0.23.0
+  plain:
+    type: bool
+    default: false
+    optional: true
+    comment:
+      Flag to indicate if the image should render a plain image instead of an
+      image set. When set, no transformations are applied to the image.
+    release: v0.24.0-beta5

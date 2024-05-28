@@ -26,6 +26,7 @@
 {{- $priority := .priority -}}
 {{- if eq $priority "auto" }}{{ $priority = "" }}{{ end -}}
 {{- $sizes := .sizes | default "100vw" -}}
+{{- $plain := .plain | default false -}}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $url := .url -}}
@@ -47,6 +48,7 @@
     "priority" $priority
     "sizes" $sizes
     "absoluteURL" $absoluteURL
+    "plain" $plain
     )
 -}}
 

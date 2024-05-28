@@ -14,12 +14,12 @@
 {{- $url := .url -}}
 {{- $mode := .mode -}}
 {{- $modes := .modes -}}
+{{- $plain := .plain | default false }}
 
 {{- $fallbackURL := "" -}}
 {{- $anchor := "" -}}
 {{- $imgset := "" -}}
 {{- $isVector := false -}}
-
 
 <!-- Split url into base and anchor when applicable (only relevant for vector images) -->
 {{- $segments := split $url "#" -}}
@@ -79,15 +79,17 @@
 <!-- Derive image width and height -->
 {{ $width := "" }}
 {{ $height := "" }}
-{{ with $dims }}
-    {{ range $dim := (. | last 1) }}
-        {{ $width = (int (index (split $dim "x") 0)) }}
-        {{ $height = (int (index (split $dim "x") 1)) }}
+{{ if not $plain }}
+    {{ with $dims }}
+        {{ range $dim := (. | last 1) }}
+            {{ $width = (int (index (split $dim "x") 0)) }}
+            {{ $height = (int (index (split $dim "x") 1)) }}
+        {{ end }}
     {{ end }}
 {{ end }}
 
 <!-- Generate image urls -->
-{{ if hasSuffix $url "svg" }}
+{{ if or (hasSuffix $url "svg") $plain }}
     {{- $fallbackURL = $url -}}
 {{ else }}
     {{- $fallbackURL = partial "assets/helpers/image-set.html" (dict "url" $url "img" $img "dims" ($dims | last 1) "transform" $transform "hook" $hook "format" "jpg" "includeWidth" false) -}}
