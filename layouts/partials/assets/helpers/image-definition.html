@@ -62,7 +62,7 @@
     {{ $transform = "fill" }}
     {{ $dims = partial "assets/helpers/GetDimension.html" (dict "ratio" $ratio) }}
     {{ if not $dims }}{{ errorf "partial [assets/image.html] - Cannot find dimension data: %s" $ratio }}{{ end }}
-{{ else }}
+{{ else if not $plain }}
     {{ $transform = "fit" }}
     {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
     {{ if and $res $res.resource }}
