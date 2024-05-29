@@ -1,0 +1,29 @@
+{{- $url := .url -}}
+{{- $account := .account -}}
+{{- $container := .container -}}
+{{ $hook := .hook }}
+
+{{ $host := (urls.Parse $url).Hostname }}
+{{ $dir := (urls.Parse $url).Path }}
+{{ $file := index ((split $dir "/") | collections.Reverse) 0 }}
+{{ $dir = strings.TrimSuffix $file $dir }}
+{{ $error := false }}
+
+{{ $adapter := (printf "assets/adapters/%s-rewrite.html" $hook) }}
+{{ if not (fileExists (path.Join "/layouts/partials" $adapter)) }}
+    {{ warnf "Cannot find adapter: %s" (path.Join "/layouts/partials" $adapter) }}
+    {{ $error = true }}
+{{ end }}
+
+{{ $result := $url }}
+{{ if not $error }}
+    {{ $result = partial $adapter (dict 
+        "account" $account
+        "container" $container
+        "host" $host
+        "dir" $dir
+        "file" $file
+    )}}
+{{ end }}
+
+{{ return $result }}

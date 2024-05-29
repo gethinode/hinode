@@ -32,16 +32,27 @@
 
 <!-- Identify image provider -->
 {{ $hook := "" }}
+{{ $account := "" }}
+{{ $container := "" }}
+{{ $rewrite := false }}
 {{ range $provider, $val := site.Params.images }}
     {{ if not $hook }}    
         {{ with index $val "host" }}
             {{ if (findRE . (urls.Parse $url).Hostname) }}
                 {{ $hook = $provider }}
+                {{ with index $val "account" }}{{ $account = . }}{{ end }}
+                {{ with index $val "rewrite" }}{{ $rewrite = . }}{{ end }}
+                {{ with index $val "container" }}{{ $container = . }}{{ end }}
             {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}
 {{ if not $hook }}{{ $hook = "hugo" }}{{ end }}
+
+<!-- Rewrite the origin URL if applicable -->
+{{ if $rewrite }}
+    {{ $url = partial "assets/helpers/image-rewrite.html" (dict "url" $url "account" $account "container" $container "hook" $hook) }}
+{{ end }}
 
 <!-- Define image dimensions -->
 {{ $dims := slice }}

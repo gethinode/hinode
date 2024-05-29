@@ -1,0 +1,29 @@
+comment: >-
+  Rewrites an origin URL to a target URL as supported by a CDN image adapter.
+arguments:
+  account:
+    type: string
+    optional: true
+    comment: Account name of the origin server.
+  container:
+    type: string
+    optional: true
+    comment: Container name of the origin server.
+  host:
+    type: string
+    optional: true
+    comment: >-
+      Host of an URL. For example, the host of the URL
+      'https://example.com/first/second/third.webp' equals 'example.com'.
+  dir:
+    type: string
+    optional: true
+    comment: >-
+      All but the last element of an URL extension. For example, the dir of the
+      URL 'https://example.com/first/second/third.webp' equals '/first/second/'.
+  file:
+    type: string
+    optional: false
+    comment: >-
+      The last element of an URL extension. For example, the file of the
+      URL 'https://example.com/first/second/third.webp' equals 'third.webp'.
