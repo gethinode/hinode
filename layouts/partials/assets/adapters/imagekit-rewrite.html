@@ -1,0 +1,30 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image-adapter-rewrite" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/adapter/imagekit-rewrite.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $account :=  .account }}
+{{ $container := trim .container "/" }}
+{{ $host := .host }}
+{{ $dir := .dir }}
+{{ $file := .file }}
+{{ $element := "" }}
+{{ with $container }}{{ $dir = strings.TrimPrefix (printf "/%s" .) $dir }}{{ end }}
+
+{{ if ne $host "ik.imagekit.io" }}
+    {{ $element = urls.JoinPath (slice "https://ik.imagekit.io" $account $dir $file) }}
+{{ else }}
+    {{ $element = urls.JoinPath (slice "https://" $host $dir $file) }}
+{{ end }}
+
+{{ return $element }}
