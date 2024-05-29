@@ -87,7 +87,7 @@
     "replace-in-files-cli": "^2.2.0",
     "rimraf": "^5.0.7",
     "shx": "^0.3.4",
-    "stylelint": "^16.6.0",
+    "stylelint": "^16.6.1",
     "stylelint-config-standard-scss": "^13.1.0"
   },
   "optionalDependencies": {
