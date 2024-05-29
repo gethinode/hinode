@@ -27,7 +27,7 @@
     {{ $url = urls.JoinPath "https://" $host $url }}
 {{ end }}
 
-<!-- Initialize image if needed -->
+<!-- Initialize image if needed, do not raise additional warnings -->
 {{ $format := .format | default "webp" }}
 {{ if and (not $img) (ne $format "svg") }}
     {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" page) -}}
@@ -37,7 +37,6 @@
     {{ end }}
 
     {{ if not $img }}
-        {{ errorf "partial [assets/adapter/hugo.html] - Expected 'img' argument" -}}
         {{ $error = true }}
     {{ end }}
 {{ end }}
