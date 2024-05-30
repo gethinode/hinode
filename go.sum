@@ -174,6 +174,8 @@ github.com/gethinode/mod-lottie v1.4.7 h1:5Hes0xY/l8ygzJ8YQIzdqCmvGrDQs8D8qZ/vR1
 github.com/gethinode/mod-lottie v1.4.7/go.mod h1:FvcG3NjXOBOnwou0QvXYNPHpybxwT6yxmSh4N+nBD9s=
 github.com/gethinode/mod-lottie v1.5.0 h1:LwEEY+p+sPrN01yz7GyVOsF5lZ4qMln69+gAxJs1DDA=
 github.com/gethinode/mod-lottie v1.5.0/go.mod h1:FvcG3NjXOBOnwou0QvXYNPHpybxwT6yxmSh4N+nBD9s=
+github.com/gethinode/mod-lottie v1.5.1 h1:84ZmOTKJH75wsd/YjPaaBRkTeLnmRROv9iFlQVMC+jA=
+github.com/gethinode/mod-lottie v1.5.1/go.mod h1:z0Q6EADM7pN7gmhCzDx2VR4uG5mxn9qbsphtxjIkssY=
 github.com/gethinode/mod-utils v1.0.0 h1:cqHm2xS5uDiJzRm1KfHaNbq6uMVDKLhQa8/BuTZ1nhY=
 github.com/gethinode/mod-utils v1.0.0/go.mod h1:ONJm3pHCq7nvaPNjusLZNCeCbhOhSBH4HVKHwK1FdYE=
 github.com/gethinode/mod-utils v1.0.1 h1:jhZGlGFHHL1f5HXbBMXfiZ2gCz4TVafAzjnRPTIBSEE=
@@ -206,6 +208,8 @@ github.com/gethinode/mod-utils/v2 v2.3.2 h1:QxYtHqeiLfAg+38ULFr3qYwNuypcnV1Kzsmm
 github.com/gethinode/mod-utils/v2 v2.3.2/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
 github.com/gethinode/mod-utils/v2 v2.3.3 h1:dewgQgAyPJJ1lA2WhowHaFqVaeLjUNYgxDO4mE3v0F0=
 github.com/gethinode/mod-utils/v2 v2.3.3/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
+github.com/gethinode/mod-utils/v2 v2.3.4 h1:4OmUsLW7FyQL7vJhg/Iy9E7nFXWL955qCtsj6yWU51M=
+github.com/gethinode/mod-utils/v2 v2.3.4/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3 h1:H/qVR5O4BXjRjD+5PZB+r4ug2BSJ2Of4RtwOntd+OKo=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/nextapps-de/flexsearch v0.0.0-20240108021025-afd75f742f22 h1:re7L8FxbXQpnX8BgzkdUnDpsUmloGNyLmiy2ZCln8pg=
