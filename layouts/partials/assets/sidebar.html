@@ -27,7 +27,7 @@
     {{- $data := .menu -}}
 
     {{- $doc_slug := $group.title | urlize -}}
-    {{- $href := or $group.link (printf "%s/" (relLangURL (path.Join $baseURL $doc_slug))) -}}
+    {{- $href := or $group.link (partial "utilities/GetStaticURL" (dict "url" $doc_slug)) -}}
     {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
 
     <li class="mb-1">

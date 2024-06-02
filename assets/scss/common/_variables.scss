@@ -5,6 +5,8 @@ $enable-important-utilities:    true !default;
 // Remove the border from the focused navigation toggler
 $navbar-toggler-focus-width:    0 !default;
 
+$base-url:                      $base-url;
+
 // scss-docs-start font
 $font-family-sans-serif:        $theme-font, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-base:                $font-size-base !default;;
