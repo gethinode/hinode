@@ -35,7 +35,9 @@
     {{- end }}
 {{- end -}}
 
+{{ $base := partial "utilities/GetStaticURL" (dict "url" "/") }}
 {{- range resources.Match "icons/**.svg" -}}
-    {{- $icon := . | resources.ExecuteAsTemplate .RelPermalink $params -}}
+    {{- $target := strings.TrimPrefix $base .RelPermalink -}}
+    {{- $icon := . | resources.ExecuteAsTemplate $target $params -}}
     {{- $icon.Publish -}}
 {{- end -}}

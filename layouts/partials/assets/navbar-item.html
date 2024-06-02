@@ -19,9 +19,10 @@
 {{- $class := .class -}}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{- $baseURL := $page.Scratch.Get "baseURL" -}}
 
-{{- $menuURL := (or $menu.PageRef $menu.URL) | relLangURL -}}
-{{- $pageURL := $page.RelPermalink | relLangURL -}}
+{{- $menuURL := urls.JoinPath $baseURL ((or $menu.PageRef $menu.URL) | relLangURL) -}}
+{{- $pageURL := $page.RelPermalink -}}
 {{- $isActive := or (and (hasPrefix $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}

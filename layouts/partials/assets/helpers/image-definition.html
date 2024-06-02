@@ -101,7 +101,7 @@
 
 <!-- Generate image urls -->
 {{ if or (hasSuffix $url "svg") $plain }}
-    {{- $fallbackURL = $url -}}
+    {{- $fallbackURL = partial "utilities/GetStaticURL" (dict "url" $url) -}}
 {{ else }}
     {{- $fallbackURL = partial "assets/helpers/image-set.html" (dict "url" $url "img" $img "dims" ($dims | last 1) "transform" $transform "hook" $hook "format" "jpg" "includeWidth" false) -}}
     {{- $imgset = partial "assets/helpers/image-set.html" (dict "url" $url "img" $img "dims" $dims "transform" $transform "hook" $hook) -}}

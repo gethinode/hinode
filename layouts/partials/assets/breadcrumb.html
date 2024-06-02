@@ -22,7 +22,7 @@
             {{- range $index, $item := $page.Ancestors.Reverse -}}
                 {{- $title := .LinkTitle -}}
                 {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
-                {{- $address := or .RelPermalink (.Params.Redirect | relLangURL) -}}
+                {{- $address := or .RelPermalink .Params.Redirect -}}
                 {{ if $address }}
                     <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
                 {{ else }}

@@ -29,6 +29,10 @@
 {{- /* Define main breakpoint */ -}}
 {{- $.Scratch.Set "breakpoint" (partial "utilities/GetBreakpoint.html") }}
 
+{{- /* Define base URL */ -}}
+{{ $lang := site.LanguageCode | default site.Language.Lang }}
+{{ $.Scratch.Set "baseURL" (strings.TrimSuffix (printf "%s/" $lang) site.Home.RelPermalink) }}
+
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
