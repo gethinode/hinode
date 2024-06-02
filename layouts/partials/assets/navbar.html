@@ -99,6 +99,7 @@
 {{- $search := .search | default site.Params.navigation.search -}}
 {{- $searchModal := and $search site.Params.navigation.searchModal -}}
 {{- $enableDarkMode := .mode | default site.Params.main.enableDarkMode -}}
+{{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 
 {{- $enableVersions := false -}}
 {{ $list := site.Params.docs.releases }}
@@ -114,8 +115,15 @@
 {{- $logoDark := "" -}}
 {{- if $enableDarkMode -}}
     {{ $ext := path.Ext $logo -}}
-    {{- $logoLight = printf "%s-light%s" (strings.TrimSuffix $ext $logo) $ext -}}
-    {{- $logoDark = printf "%s-dark%s" (strings.TrimSuffix $ext $logo) $ext -}}
+    {{- $ext := path.Ext $logo -}}
+    {{- $base := strings.TrimSuffix $ext $logo -}}
+    {{- range $suffix := $modes -}}
+        {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
+    {{- end -}}
+
+    {{- $logoLight = printf "%s-light%s" $base $ext -}}
+    {{- $logoDark = printf "%s-dark%s" $base $ext -}}
+    
     {{- $light := fileExists (path.Join "/static" $logoLight) -}}
     {{- $dark := fileExists (path.Join "/static" $logoDark) -}}
     {{- if and $light (not $dark) -}}
