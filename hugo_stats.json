@@ -9,7 +9,6 @@
       "form",
       "head",
       "html",
-      "i",
       "img",
       "input",
       "label",
@@ -56,7 +55,6 @@
       "col-sm-12",
       "collapse",
       "collapsed",
-      "container",
       "container-fluid",
       "container-xxl",
       "d-flex",
@@ -106,6 +104,7 @@
       "me-auto",
       "middle-bar",
       "min-vh-100",
+      "mode-switch",
       "ms-auto",
       "ms-md-3",
       "mt-3",
@@ -122,10 +121,10 @@
       "navbar-container",
       "navbar-expand-md",
       "navbar-fixed-top",
+      "navbar-mode-selector",
       "navbar-nav",
       "navbar-toggler",
       "no-js",
-      "one-quarter",
       "order-0",
       "order-1",
       "order-md-0",
@@ -167,13 +166,12 @@
       "toast-container",
       "toast-header",
       "toggler-icon",
-      "top-bar",
-      "vh-100"
+      "top-bar"
     ],
     "ids": [
-      "",
       "navbar-0-collapse",
-      "switch",
+      "navbar-mode",
+      "navbar-mode-checkbox",
       "toast-container",
       "toast-copied-code-message"
     ]
