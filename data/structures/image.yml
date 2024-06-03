@@ -137,4 +137,4 @@ arguments:
     comment:
       Flag to indicate if the image should render a plain image instead of an
       image set. When set, no transformations are applied to the image.
-    release: v0.24.0-beta5
+    release: v0.24.0
