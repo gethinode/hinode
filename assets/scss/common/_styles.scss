@@ -1,3 +1,9 @@
+@if $enable-dark-mode {
+    body { 
+        transition: background-color 0.5s, color 0.5s; 
+    }
+}
+
 //
 // Remove underline from all links
 //
