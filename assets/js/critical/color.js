@@ -27,6 +27,15 @@
     }
   }
 
+  const toggleTheme = function () {
+    const mode = document.documentElement.getAttribute('data-bs-theme')
+    const target = mode === 'dark' ? 'light' : 'dark'
+
+    localStorage.setItem('theme', target)
+    setTheme(target)
+    showActiveTheme(target)
+  }
+
   setTheme(getPreferredTheme())
 
   const showActiveTheme = theme => {
@@ -66,6 +75,25 @@
           setTheme(theme)
           showActiveTheme(theme)
         })
+      })
+
+      document.querySelectorAll('.ball').forEach(ball => {
+        ball.classList.add('notransition');
+      })
+      
+      const chk = document.querySelectorAll('.navbar-mode-selector')
+      for (let i = 0; i < chk.length; ++i) {
+        if (storedTheme === 'light') {
+          chk[i].click()
+        }
+        chk[i].addEventListener('change', function () {
+          toggleTheme()
+        })
+      }
+
+      document.querySelectorAll('.ball').forEach(ball => {
+        ball.offsetHeight; // flush css changes
+        ball.classList.remove('notransition');
       })
   })
 })()
