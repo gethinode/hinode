@@ -9,53 +9,45 @@
 (() => {
   'use strict'
 
+  const supportedThemes = ['auto', 'dark', 'light'];
+
+  // retrieves the currently stored theme from local storage (cookie)
   const storedTheme = localStorage.getItem('theme')
 
-  const getPreferredTheme = () => {
-    if (storedTheme) {
-      return storedTheme
-    }
-
+  // retrieves the theme preferred by the client, defaults to light
+  function getPreferredTheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
-  const setTheme = function (theme) {
+  // retrieves the current theme, either from local storage or client's preferences
+  function getTheme() {
+    if (storedTheme) {
+      return storedTheme
+    } else {
+      const preference = getPreferredTheme()
+      localStorage.setItem('theme', preference)
+      return preference
+    }
+  }
+
+  // applies and stores requested theme
+  function setTheme(theme) {
+    if (!supportedThemes.includes(theme)) {
+      theme = 'auto'
+    }
+    localStorage.setItem('theme', theme)
+
     if (theme === 'auto') {
-      document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+      document.documentElement.setAttribute('data-bs-theme', (getPreferredTheme()))
     } else {
       document.documentElement.setAttribute('data-bs-theme', theme)
     }
   }
 
-  const toggleTheme = function () {
-    const mode = document.documentElement.getAttribute('data-bs-theme')
-    const target = mode === 'dark' ? 'light' : 'dark'
-
-    localStorage.setItem('theme', target)
+  // alternates the currently active theme
+  function toggleTheme() {
+    const target = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
     setTheme(target)
-    showActiveTheme(target)
-  }
-
-  setTheme(getPreferredTheme())
-
-  const showActiveTheme = theme => {
-    const activeSelectors = document.querySelectorAll('.theme-icon-active')
-    const activeButtons = document.querySelectorAll(`[data-bs-theme-value="${theme}"]`)
-    if (activeButtons.length > 0) {
-      const activeIcon = activeButtons[0].querySelector('span')
-
-      document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-        element.classList.remove('active')
-      })
-
-      for (let i = 0; i < activeSelectors.length; ++i) {
-        activeSelectors[i].innerHTML = activeIcon.innerHTML
-      }
-
-      for (let i = 0; i < activeButtons.length; ++i) {
-        activeButtons[i].classList.add('active')
-      }
-    }
   }
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -65,36 +57,26 @@
   })
 
   window.addEventListener('DOMContentLoaded', () => {
-    showActiveTheme(getPreferredTheme())
+    setTheme(getTheme())
 
-    document.querySelectorAll('[data-bs-theme-value]')
-      .forEach(toggle => {
-        toggle.addEventListener('click', () => {
-          const theme = toggle.getAttribute('data-bs-theme-value')
-          localStorage.setItem('theme', theme)
-          setTheme(theme)
-          showActiveTheme(theme)
-        })
-      })
-
-      document.querySelectorAll('.ball').forEach(ball => {
-        ball.classList.add('notransition');
-      })
-      
-      const chk = document.querySelectorAll('.navbar-mode-selector')
-      for (let i = 0; i < chk.length; ++i) {
-        if (storedTheme === 'light') {
-          chk[i].click()
-        }
-        chk[i].addEventListener('change', function () {
-          toggleTheme()
-        })
+    document.querySelectorAll('.ball').forEach(ball => {
+      ball.classList.add('notransition');
+    })
+    
+    const chk = document.querySelectorAll('.navbar-mode-selector')
+    for (let i = 0; i < chk.length; ++i) {
+      if (document.documentElement.getAttribute('data-bs-theme') === 'light') {
+        chk[i].click()
       }
-
-      document.querySelectorAll('.ball').forEach(ball => {
-        ball.offsetHeight; // flush css changes
-        ball.classList.remove('notransition');
+      chk[i].addEventListener('change', function () {
+        toggleTheme()
       })
+    }
+
+    document.querySelectorAll('.ball').forEach(ball => {
+      ball.offsetHeight; // flush css changes
+      ball.classList.remove('notransition');
+    })
   })
 })()
 
