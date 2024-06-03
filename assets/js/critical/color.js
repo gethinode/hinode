@@ -42,6 +42,10 @@
     } else {
       document.documentElement.setAttribute('data-bs-theme', theme)
     }
+
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = (document.documentElement.getAttribute('data-bs-theme') === 'light')
+    })
   }
 
   // alternates the currently active theme
@@ -58,26 +62,31 @@
 
   window.addEventListener('DOMContentLoaded', () => {
     setTheme(getTheme())
+    const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
 
     document.querySelectorAll('.ball').forEach(ball => {
       ball.classList.add('notransition');
     })
     
-    const chk = document.querySelectorAll('.navbar-mode-selector')
-    for (let i = 0; i < chk.length; ++i) {
-      if (document.documentElement.getAttribute('data-bs-theme') === 'light') {
-        chk[i].click()
-      }
-      chk[i].addEventListener('change', function () {
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = light
+      chk.addEventListener('change', function () {
         toggleTheme()
       })
-    }
+    })
 
     document.querySelectorAll('.ball').forEach(ball => {
       ball.offsetHeight; // flush css changes
       ball.classList.remove('notransition');
     })
   })
+
+  window.addEventListener('load', () => {
+    const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = light
+    })
+  });  
 })()
 
 {{- end -}}
