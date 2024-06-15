@@ -7,7 +7,7 @@
   "date": "2022-07-08T22:53:33.000Z",
   "title": "Best Places to Work in Los Angeles: MK Partners!",
   "Slug": "best-places-to-work-in-los-angeles-mk-partners",
-  "description": "It feels like just yesterday that we were celebrating our back-to-back annual achievement being certified a Great Place to Work, and now we’re proud to announce that MK Partners has officially been recognized (<a href="https://labusinessjournal.com/bptw2021/">again</a>!) by the LA Business Journal as one of the <a href="https://labusinessjournal.com/bptw2021/">Best Places to Work in Los Angeles</a> for the second year in a row!.",
+  "description": "It feels like just yesterday that we were celebrating our back-to-back annual achievement being certified a Great Place to Work, and now we’re proud to announce that MK Partners has officially been recognized again by the LA Business Journal as one of the Best Places to Work in Los Angeles</a> for the second year in a row!.",
   "tags": ["best-places-to-work","los-angeles","work-culture","trailblazer","salesforce"],
   "author": {
     "name": Chris Stegall,

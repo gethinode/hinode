@@ -7,7 +7,7 @@
   "date": "2023-06-06T21:17:23.000Z",
   "title": "Join us Thursday for June’s Mambo Merge Office Hours!",
   "Slug": "join-us-thursday-for-junes-mambo-merge-office-hours",
-  "description": "We’re in the home stretch of the run-up to Summer ’23 and all those release notes, new features, functions, updates, and upgrades may have crammed our brains a bit — which makes this the perfect time for new (and experienced) Mambo Merge users to brush up on the basics, see a speedy demo of updated functionality, and get Qs to all their most pressing As! Tomorrow’s the next installment of <a href="https://cloud.news.mambomerge.app/officehours">Mambo Merge ‘Office Hours</a>’!.",
+  "description": "We’re in the home stretch of the run-up to Summer ’23 and all those release notes, new features, functions, updates, and upgrades...",
   "tags": ["mambo-merge","salesforce-docgen","appexchange","salesforce-app","salesforce"],
   "author": {
     "name": Chris Stegall,

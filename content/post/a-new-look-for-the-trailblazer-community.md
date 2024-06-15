@@ -7,7 +7,7 @@
   "date": "2023-02-28T23:48:37.000Z",
   "title": "A New Look for the Trailblazer Community",
   "Slug": "a-new-look-for-the-trailblazer-community",
-  "description": "This Trailblazer Community update is so fresh, I swear I saw the site go down briefly while they made the update. Just in time for <a href="https://www.salesforce.com/trailblazerdx/">TDX</a> (that’s Trailblazer DX now for those of you that haven’t been keeping up), the online home of the Trailblazer Community’s got a <a href="https://trailhead.salesforce.com/trailblazer-community/groups/0F9300000001omnCAA?tab=discussion&amp;sort=LAST_MODIFIED_DATE_DESC">little bit of a facelift today</a> to improve the experience and unify the UX across Salesforce’s various web pages, communities, etc….",
+  "description": "This Trailblazer Community update is so fresh, I swear I saw the site go down briefly while they made the update. Just in time for TDX...",
   "tags": ["salesforce-trailblazer","tdx","trailblazercommunity","salesforce","salesforce-admin"],
   "author": {
     "name": Chris Stegall,

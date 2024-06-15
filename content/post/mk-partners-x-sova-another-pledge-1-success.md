@@ -7,7 +7,7 @@
   "date": "2019-06-13T12:01:00.000Z",
   "title": "MK Partners x SOVA: Another Pledge 1% Success",
   "Slug": "mk-partners-x-sova-another-pledge-1-success",
-  "description": "Last week we had the privilege and pleasure of continuing our Pledge 1% commitment. This time with another successful volunteer day at <a href="https://www.jfsla.org/sova">SOVA</a>!.",
+  "description": "Last week we had the privilege and pleasure of continuing our Pledge 1% commitment. This time with another successful volunteer day at SOVA!",
   "tags": ["salesforce","volunteering","volunteer","la","pledge-1"],
   "author": {
     "name": Chris Stegall,

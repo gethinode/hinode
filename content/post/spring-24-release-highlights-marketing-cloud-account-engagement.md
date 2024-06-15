@@ -7,7 +7,7 @@
   "date": "2024-01-04T00:23:03.000Z",
   "title": "Spring ’24 Release Highlights: Marketing Cloud Account Engagement",
   "Slug": "spring-24-release-highlights-marketing-cloud-account-engagement",
-  "description": "As we say “goodbye” to 2023 and welcome 2024, the <a href="https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm&amp;release=248&amp;type=5">Spring ’24 Release Notes</a> have been unwrapped and Trailblazers everywhere are poring over them in the new year! Let’s slip into some comfy clothes, enjoy a nice cup of tea or coffee, and begin our quest to break down some of the highlights..",
+  "description": "As we say “goodbye” to 2023 and welcome 2024, the Spring ’24 Release Notes have been unwrapped and Trailblazers everywhere are poring over them in the new year!",
   "tags": ["salesforce","spring-24-release","salesforce-release","salesforce-spring-24","release-highlights"],
   "author": {
     "name": Jessie Penaloza,

@@ -7,7 +7,7 @@
   "date": "2024-06-10T22:52:59.000Z",
   "title": "Last Chance: Lock in $300+ Off Dreamforce This Year",
   "Slug": "last-chance-lock-in-300-off-dreamforce-this-year",
-  "description": "Tomorrow’s the day that Dreamforce ’24 ticket sales kick off — but if you <a href="https://www.salesforce.com/form/dreamforce/df24-save-the-date/">act fast</a> (like, in the next 8 hours fast), you can lock in what Salesforce is calling “best Dreamforce deal, ever”!.",
+  "description": "Tomorrow’s the day that Dreamforce ’24 ticket sales kick off — but if you act fast (like, in the next 8 hours fast), you can lock in what Salesforce is calling “best Dreamforce deal, ever”!.",
   "tags": ["salesforce-event","salesforce-dreamforce","salesforce","dreamforce","df24"],
   "author": {
     "name": Chris Stegall,

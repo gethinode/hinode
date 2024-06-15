@@ -7,7 +7,7 @@
   "date": "2021-06-28T18:34:33.000Z",
   "title": "Mark Your Calendars: Best Salesforce Events June 28, 2021 — July 2, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-june-28-2021-july-2-2021",
-  "description": "Okay readers, this week will be a bit different because Salesforce changed some things up on me, so there is no need to open your calendars and get planning. The good news, that I hope you all are aware of, is that the Trailhead platform has been restructured and has a new look! If you haven’t checked it out, <a href="https://trailhead.salesforce.com/">open up a new tab and check it out right now</a>. As you will notice, the new site is easier to navigate and more organized! As your go-to for all Salesforce related events, that made my life ten times easier, as now I don’t have to scour the ecosystem any more to find events. Most of them are all in one place now!.",
+  "description": "The Trailhead platform has been restructured and has a new look!",
   "tags": ["trailblazercommunity","salesforce-event","trailheadx","trailhead","salesforce"],
   "author": {
     "name": Caylin Schmenk,

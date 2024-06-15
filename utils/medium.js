@@ -132,6 +132,7 @@ const convertRssItem = (item) => {
   } else if (story.mdContent.indexOf('<h4>') > 0 && story.mdContent.indexOf('<h4>') < 5) {
     story.description = utils.substringbetween(story.mdContent, '<h4>', '</h4>')
   }
+  story.description = story.description.replaceAll("<[^>]*>", "")
 
   const figureRegex = /<figure>(.*?)<\/figure>/gmi
   const figureTags = story.mdContent.match(figureRegex)

@@ -7,7 +7,7 @@
   "date": "2022-09-16T15:16:52.000Z",
   "title": "Dreamforce Preview: Subjects I’m Most Looking Forward to as a Marketer",
   "Slug": "dreamforce-preview-subjects-im-most-looking-forward-to-as-a-marketer",
-  "description": "<a href="http://www.dreamforce.com"><em>Dreamforce</em></a> is next week &amp; I’m about as excited as a kid going to an Auto Convention. It’s expected there will be some waiting for some of these features in Marketing Cloud to fully evolve, but as a marketer, here’s what I’m looking forward to:.",
+  "description": "Dreamforce is next week! I’m about as excited as a kid going to an Auto Convention. It’s expected there will be some waiting for some of these features in Marketing Cloud to fully evolve, but as a marketer, here’s what I’m looking forward to...",
   "tags": ["marketing-cloud","dreamforce","pardot","salesforce-event","salesforce"],
   "author": {
     "name": Tommy Holden,

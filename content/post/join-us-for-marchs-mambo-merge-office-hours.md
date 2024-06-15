@@ -7,7 +7,7 @@
   "date": "2023-03-03T22:57:42.000Z",
   "title": "Join us for March’s Mambo Merge Office Hours!",
   "Slug": "join-us-for-marchs-mambo-merge-office-hours",
-  "description": "The Spring ’23 release is live, February’s falling behind us, and Trailblazers from all over are headed up to <a href="https://medium.com/creme-de-la-crm/trailblazerdx-is-two-weeks-out-d7fbc26a6dee">TDX</a> next week — and that means it’s time for another installment of our regular Mambo Merge ‘Office Hours’ session!.",
+  "description": "The Spring ’23 release is live, February’s falling behind us, and Trailblazers from all over are headed up to TDX next week — and that means it’s time for another installment of our regular Mambo Merge ‘Office Hours’ session!.",
   "tags": ["salesforce","salesforce-appexchange","mambo-merge","salesforce-app","appexchange"],
   "author": {
     "name": Chris Stegall,

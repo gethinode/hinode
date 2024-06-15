@@ -7,7 +7,7 @@
   "date": "2021-07-28T21:29:21.000Z",
   "title": "Slack + Salesforce, How to Catch Up on the New Paradigm",
   "Slug": "slack-salesforce-how-to-catch-up-on-the-new-paradigm",
-  "description": "The biggest news out of Dreamforce last year was Salesforce’s acquisition of Slack — this week, <a href="https://www.salesforce.com/news/press-releases/2021/07/21/salesforce-slack-deal-close/">it became official</a>! And while most of us are familiar with the communication platform, surprisingly there’s only a 5% overlap between organizations that use both Salesforce and Slack in their day-to-day operations..",
+  "description": "The biggest news out of Dreamforce last year was Salesforce’s acquisition of Slack — this week, it became official!",
   "tags": ["trailhead","salesforce","salesforce-slack","slack-acquisition","slack"],
   "author": {
     "name": Chris Stegall,

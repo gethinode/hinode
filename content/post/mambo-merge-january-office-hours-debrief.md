@@ -7,7 +7,7 @@
   "date": "2024-01-30T22:07:08.000Z",
   "title": "Mambo Merge January Office Hours — Debrief",
   "Slug": "mambo-merge-january-office-hours-debrief",
-  "description": "This month marked our first ‘Office Hours’ webinar for 2024. We provided a quick beginner’s intro to the app and covered some of the latest features and functionality that are currently available within our latest release on the <a href="https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000GCzIXUA1">AppExchange</a>..",
+  "description": "This month marked our first ‘Office Hours’ webinar for 2024. We provided a quick beginner’s intro to the app and covered some of the latest features and functionality that are currently available within our latest release on the AppExchange.",
   "tags": ["gendoc","salesforce","mambo-merge","salesforce-doc-gen","salesforce-document"],
   "author": {
     "name": Jessie Penaloza,

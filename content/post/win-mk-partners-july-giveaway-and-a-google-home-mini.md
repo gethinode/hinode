@@ -7,7 +7,7 @@
   "date": "2021-07-09T20:45:50.000Z",
   "title": "Win MK Partners’ July Giveaway and a Google Home Mini!",
   "Slug": "win-mk-partners-july-giveaway-and-a-google-home-mini",
-  "description": "July kicked off with a short week, but it’s officially underway - and that means it’s time for a brand new <a href="https://gleam.io/sCpsF/mk-partners-july-giveaway">MK Partners’ Giveaway</a>! The contest is open now and we’ve kept in the expanded entry options from last month..",
+  "description": "July kicked off with a short week, but it’s officially underway - and that means it’s time for a brand new Giveaway! The contest is open now and we’ve kept in the expanded entry options from last month..",
   "tags": ["giveaway-contest","contests","giveaway","contests-and-giveaways","salesforce"],
   "author": {
     "name": Chris Stegall,

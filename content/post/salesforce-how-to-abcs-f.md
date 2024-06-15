@@ -7,7 +7,7 @@
   "date": "2019-06-21T15:21:19.000Z",
   "title": "Salesforce “How To” ABCs: F",
   "Slug": "salesforce-how-to-abcs-f",
-  "description": "With the <a href="https://medium.com/creme-de-la-crm/summer-19-release-highlights-back-to-the-classics-7b9abe9e6cf9">Summer ’19 Release</a> officially rolled out, your plate’s been packed with a ton of exciting new <a href="https://medium.com/creme-de-la-crm/salesforce-summer-19-release-highlights-free-surveys-5e55e6c928be">features</a>, <a href="https://medium.com/creme-de-la-crm/salesforce-summer-19-release-highlights-branding-enhancements-a65062bfcd3d">updates</a>, and <a href="https://medium.com/creme-de-la-crm/salesforce-summer-19-release-highlights-enhanced-related-lists-72656e1d436a">upgrades</a>! But, practicing all that awesome new stuff can sometimes make it easy to forget the Salesforce skills you haven’t had to use in a while..",
+  "description": "With the Summer ’19 Release officially rolled out, your plate’s been packed with a ton of exciting new features.",
   "tags": ["salesforce-org","salesforce-how-to-abcs","salesforce","salesforce-admin","how-to"],
   "author": {
     "name": Chris Stegall,

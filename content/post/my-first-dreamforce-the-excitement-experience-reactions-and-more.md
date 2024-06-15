@@ -7,7 +7,7 @@
   "date": "2022-09-29T20:56:40.000Z",
   "title": "My First Dreamforce — The Excitement, Experience, Reactions and More",
   "Slug": "my-first-dreamforce-the-excitement-experience-reactions-and-more",
-  "description": "First-time experiences create reactions and emotions you would have never imagined. And, while everyone’s experience is unique, there are commonalities we all share. The same goes for <a href="https://www.salesforce.com/plus/experience/Dreamforce_2022">Dreamforce</a>, which is <a href="https://www.salesforce.com/">Salesforce’s</a> annual event that brings together tens of thousands of trailblazers to San Francisco, CA — its headquarters. Once there, you’ll get to experience the biggest platform announcements along with thousands of sessions and curated keynote speakers for the all products and services that Salesforce has to offer. Broken down into three days (Sep 20th — 22nd) this year, it also marked the first time this event took place in “Full-Force” since the pandemic first began..",
+  "description": "First-time experiences create reactions and emotions you would have never imagined. And, while everyone’s experience is unique, there are commonalities we all share. ",
   "tags": ["salesforce","salesforce-event","df22","dreamforce-2022","dreamforce"],
   "author": {
     "name": Jessie Penaloza,

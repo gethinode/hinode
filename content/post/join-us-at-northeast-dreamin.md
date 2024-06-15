@@ -7,7 +7,7 @@
   "date": "2022-04-19T21:47:32.000Z",
   "title": "Join Us At Northeast Dreamin’",
   "Slug": "join-us-at-northeast-dreamin",
-  "description": "Our Trailblazer journey takes us over to the city of Providence, RI. Where we explore their convention center located on Sabin street. Here, <a href="https://northeastdreamin.com/">Northeast Dreamin’</a> will take place on April 28th and 29th. This in-person event is built around Salesforce learning, growing network relationships, and having fun. Connect with other Trailblazers and explore the exhibit hall to check out all the sponsors who contributed to this event. Make sure to pick up your badge at the front registration along with any goodies they have in-store for attendees. Find out what breakout sessions you plan on adding to your schedule and be sure to allocate some time for the keynote speakers. Lastly, don’t forget to check out the demo jam and welcome ceremony towards the end of the first day! Agenda with full details for both days can be seen<a href="https://northeastdreamin.com/2022-agenda/"> here</a>..",
+  "description": "Our Trailblazer journey takes us over to the city of Providence, RI...",
   "tags": ["mambo-merge","events","rhode-island","trailblazer","salesforce"],
   "author": {
     "name": Jessie Penaloza,

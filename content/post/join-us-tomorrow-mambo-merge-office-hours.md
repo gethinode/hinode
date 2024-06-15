@@ -7,7 +7,7 @@
   "date": "2024-01-17T16:20:16.000Z",
   "title": "Join us Tomorrow —  Mambo Merge Office Hours!",
   "Slug": "join-us-tomorrow-mambo-merge-office-hours",
-  "description": "The Spring ’24 Release Weekends are beginning and with them a new year to look forward to as we seek new experiences, challenges, and obstacles to “Blaze A New Trail”. Partners, Consultants, Admins, and Users all over the world will be spending this entire month learning, testing, and trying all the new Salesforce functionality that just dropped with this new release, it’s a perfect time for Mambo Merge users to brush up on their skills with our speedy demo of updated functionality, and submit all your questions to get the most pressing answers in tomorrow’s the next installment of <a href="https://cloud.news.mambomerge.app/officehours">Mambo Merge ‘Office Hours</a>’!.",
+  "description": "The Spring ’24 Release Weekends are beginning and with them a new year to look forward to as we seek new experiences, challenges, and obstacles to “Blaze A New Trail”.",
   "tags": ["mambo-merge","document-generation","salesforce","salesforce-doc-gen","salesforce-app"],
   "author": {
     "name": Jessie Penaloza,

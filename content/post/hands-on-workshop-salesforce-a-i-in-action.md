@@ -7,7 +7,7 @@
   "date": "2020-08-17T20:49:49.000Z",
   "title": "Hands on Workshop: Salesforce A.I. in Action!",
   "Slug": "hands-on-workshop-salesforce-a-i-in-action",
-  "description": "Ready to get some first-hand A.I. experience in Salesforce? Whether you’re curious about the capabilities of <a href="https://www.salesforce.com/products/platform/solutions/ai-services/">Einstein</a>, eager to get your feet wet harnessing artificial intelligence in an org, or just want to see a real world application of organizations that are using A.I. to improve their operations, you’re in luck!.",
+  "description": "Ready to get some first-hand A.I. experience in Salesforce? Whether you’re curious about the capabilities of Einstein, eager to get your feet wet harnessing artificial intelligence in an org, or just want to see a real world application of organizations that are using A.I. to improve their operations, you’re in luck!.",
   "tags": ["artificial-intelligence","einstein","hands-on-workshop","salesforce-einstein","salesforce-ai"],
   "author": {
     "name": Chris Stegall,

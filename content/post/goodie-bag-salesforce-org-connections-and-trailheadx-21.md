@@ -7,7 +7,7 @@
   "date": "2021-07-15T23:05:11.000Z",
   "title": "Goodie Bag: Salesforce.org Connections and TrailheaDX ‘21",
   "Slug": "goodie-bag-salesforce-org-connections-and-trailheadx-21",
-  "description": "<a href="https://www.salesforce.com/trailheadx/">TrailheaDX</a> was <a href="https://www.youtube.com/watch?v=WJXP-gy0qcY">the year’s best Salesforce event</a> yet — and it just got a little better with the arrival of the some sweet post-conference goodies! <a href="https://www.salesforce.com/connections/">Salesforce.org’s Connections ’21</a> also followed up their look at how non-profits can improve their operations with technology with a “thank you” pack of their own!.",
+  "description": "TrailheaDX was the year’s best Salesforce event yet — and it just got a little better with the arrival of the some sweet post-conference goodies! Salesforce.org’s Connections ’21 also followed up their look at how non-profits can improve their operations with technology with a “thank you” pack of their own!.",
   "tags": ["salesforce-connections","salesforce-trailhead","salesforce","salesforce-admin","trailheadx"],
   "author": {
     "name": Chris Stegall,

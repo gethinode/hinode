@@ -7,7 +7,7 @@
   "date": "2021-12-02T00:08:56.000Z",
   "title": "MK Partners’ December Giveaway is Live!",
   "Slug": "mk-partners-december-giveaway-is-live",
-  "description": "The year is winding down, but this month’s contest is just heating up — it’s time for <a href="https://gleam.io/eFgZS/mk-partners-december-giveaway">MK Partners’ December Giveaway</a>! The contest is <a href="https://gleam.io/eFgZS/mk-partners-december-giveaway">open now</a> and we’ve kept in the expanded entry options from last month..",
+  "description": "The year is winding down, but this month’s contest is just heating up — it’s time for our December Giveaway</a>! The contest is open now and we’ve kept in the expanded entry options from last month.",
   "tags": ["contests-and-giveaways","contests","giveaway-contest","giveaway"],
   "author": {
     "name": Chris Stegall,

@@ -7,7 +7,7 @@
   "date": "2019-04-24T12:01:01.000Z",
   "title": "Salesforce FAQs: How to Install Data Loader",
   "Slug": "salesforce-faqs-how-to-install-data-loader",
-  "description": "Last week I began writing another installment of our <a href="https://medium.com/tag/salesforce-how-to-abcs/archive">Salesforce “How to” ABCs</a>, this time on exporting data, when I realized I hadn’t yet installed <a href="https://help.salesforce.com/articleView?id=data_loader.htm&amp;type=0">Data Loader</a> on my new computer..",
+  "description": "Last week I began writing another installment of our Salesforce “How to” ABCs, this time on exporting data, when I realized I hadn’t yet installed Data Loader on my new computer.",
   "tags": ["salesforce-data-loader","dataloader","salesforce-how-to","salesforce","salesforce-faqs"],
   "author": {
     "name": Chris Stegall,

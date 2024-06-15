@@ -7,7 +7,7 @@
   "date": "2024-05-17T22:31:44.000Z",
   "title": "A Texas-Sized Community Conference",
   "Slug": "a-texas-sized-community-conference",
-  "description": "As community conferences (aka Dreamin’ events) ramp up this time of the year, you’ll probably notice more and more Salesforce snapshots in your social feeds that give a glimpse of what these events are all about. In just two weeks Salesforce admins, developers, architects, marketers, and more will head back to the <a href="https://meetattexas.com/">AT&amp;T Executive Conference Center</a> once again for Texas Dreamin’!.",
+  "description": "As community conferences (aka Dreamin’ events) ramp up this time of the year, you’ll probably notice more and more Salesforce snapshots in your social feeds that give a glimpse of what these events are all about...",
   "tags": ["texas-dreamin","salesforce","salesforce-communities","salesforce-event","trailblazercommunity"],
   "author": {
     "name": Jessie Penaloza,

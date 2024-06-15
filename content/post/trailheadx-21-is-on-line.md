@@ -7,7 +7,7 @@
   "date": "2021-04-23T21:01:33.000Z",
   "title": "TrailheaDX ’21 is On! (line)",
   "Slug": "trailheadx-21-is-on-line",
-  "description": "The second biggest event of the Salesforce year after Dreamforce, <a href="https://www.salesforce.com/trailheadx">TrailheaDX</a> was formerly the developer conference but has since expanded to offer content, learning opportunities, and invitations to everyone in the Salesforce ecosystem. And in 2021, everyone’s invited!.",
+  "description": "The second biggest event of the Salesforce year after Dreamforce, TrailheaDX was formerly the developer conference but has since expanded to offer content, learning opportunities, and invitations to everyone in the Salesforce ecosystem. And in 2021, everyone’s invited!.",
   "tags": ["trailblazer","salesforce","salesforce-event","trailhead","trailheadx"],
   "author": {
     "name": Chris Stegall,

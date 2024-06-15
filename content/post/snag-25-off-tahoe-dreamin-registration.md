@@ -7,7 +7,7 @@
   "date": "2024-04-09T19:48:10.000Z",
   "title": "Snag $25 Off Tahoe Dreamin’ Registration!",
   "Slug": "snag-25-off-tahoe-dreamin-registration",
-  "description": "<a href="https://tahoedreamin.com/">Tahoe Dreamin</a>’ is definitely one of the most beautiful locations for a Salesforce community conference, nestled in the Sierra Nevada mountains overlooking California and Nevada’s shared lake — but this year it’s got a new admirer: your wallet! Or your company’s..",
+  "description": "Tahoe Dreamin’ is definitely one of the most beautiful locations for a Salesforce community conference..",
   "tags": ["salesforce-event","tahoe-dreamin","salesforce","td24","tahoe-dreamin-24"],
   "author": {
     "name": Chris Stegall,

@@ -7,7 +7,7 @@
   "date": "2021-06-30T20:22:17.000Z",
   "title": "Last Chance to Enter MK Partner’s June Giveaway!",
   "Slug": "last-chance-to-enter-mk-partners-june-giveaway",
-  "description": "June’s gloom is about to be cast aside for July’s heat, but there’s still a few hours left to get entered (or re-entered) to win <a href="https://gleam.io/competitions/dwIcM-mk-partners-june-giveaway">this month’s Google Home Mini giveaway</a>!.",
+  "description": "June’s gloom is about to be cast aside for July’s heat, but there’s still a few hours left to get entered (or re-entered) to win this month’s Google Home Mini giveaway!",
   "tags": ["contests","contests-and-giveaways","giveaway","giveaway-contest","salesforce-giveaways"],
   "author": {
     "name": Chris Stegall,

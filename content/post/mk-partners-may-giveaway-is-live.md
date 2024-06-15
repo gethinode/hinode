@@ -7,7 +7,7 @@
   "date": "2021-05-04T20:22:49.000Z",
   "title": "MK Partners’ May Giveaway is Live!",
   "Slug": "mk-partners-may-giveaway-is-live",
-  "description": "It’s officially May and, maybe for the first time in 21 years, we made it through the end of April without seeing a thousand gifs of Justin Timberlake singing “it’s gonna be May”! That also means it’s time for a brand new <a href="https://gleam.io/HO4VM/mk-partners-may-giveaway">MK Partners’ Giveaway</a>! The contest is open now and we’ve kept in the expanded entry options from last month..",
+  "description": "It’s officially May and, maybe for the first time in 21 years, we made it through the end of April without seeing a thousand gifs of Justin Timberlake singing “it’s gonna be May”!",
   "tags": ["giveaway","contests","contests-and-giveaways","salesforce","google-home-mini"],
   "author": {
     "name": Chris Stegall,

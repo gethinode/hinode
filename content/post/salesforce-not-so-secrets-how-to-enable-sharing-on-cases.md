@@ -7,7 +7,7 @@
   "date": "2018-11-26T13:01:01.000Z",
   "title": "Salesforce (not so) Secrets: How to Enable Sharing on Cases",
   "Slug": "salesforce-not-so-secrets-how-to-enable-sharing-on-cases",
-  "description": "Customer Experience is more important than ever. <a href="https://www.salesforce.com/hub/service/everything-about-customer-experience-management/">Effective CX </a>bolsters customer satisfaction, retention, and drives future revenue growth. Ineffective CX is the fastest way to turn your customers into evangelists for the competition..",
+  "description": "Customer Experience is more important than ever.",
   "tags": ["how-to","customer-experience","customer-service","salesforce","salesforce-productivity"],
   "author": {
     "name": Chris Stegall,

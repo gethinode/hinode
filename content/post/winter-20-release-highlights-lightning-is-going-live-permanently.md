@@ -7,7 +7,7 @@
   "date": "2019-10-04T16:59:07.000Z",
   "title": "Winter ’20 Release Highlights: Lightning is Going Live, Permanently",
   "Slug": "winter-20-release-highlights-lightning-is-going-live-permanently",
-  "description": "It’s officially spooky season! October is here, and with it, piles of pumpkins are popping up in the produce aisle, (comfortingly) fake spider webs are stretching across the corners of doorframes, and we’re all desperately searching our notes apps for that “great Halloween costume idea I had— I know I wrote it down somewhere”. All that that can only mean one thing: there’s a brand new <a href="https://releasenotes.docs.salesforce.com/en-us/winter20/release-notes/salesforce_release_notes.htm">Salesforce Release</a> on the way!.",
+  "description": "It’s officially spooky season! October is here, and with it, piles of pumpkins are popping up in the produce aisle...",
   "tags": ["salesforce","winter-20","winter-20-release","salesforce-release","release-highlights"],
   "author": {
     "name": Chris Stegall,

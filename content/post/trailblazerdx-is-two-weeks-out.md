@@ -7,7 +7,7 @@
   "date": "2023-02-22T23:09:49.000Z",
   "title": "TrailblazerDX is Two Weeks Out!",
   "Slug": "trailblazerdx-is-two-weeks-out",
-  "description": "The first of Salesforce’s “big” annual events is on the horizon — <a href="https://www.salesforce.com/trailblazerdx/">TrailblazerDX</a> is heading back to San Francisco in just two short weeks!.",
+  "description": "The first of Salesforce’s “big” annual events is on the horizon — TrailblazerDX is heading back to San Francisco in just two short weeks!.",
   "tags": ["salesforce","salesforce-event","salesforce-trailblazerdx","trailheadx","trailblazerdx"],
   "author": {
     "name": Chris Stegall,

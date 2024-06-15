@@ -7,7 +7,7 @@
   "date": "2023-04-04T18:26:51.000Z",
   "title": "Last Chance to Win: Take Your Next Salesforce Certification Exam for Free!",
   "Slug": "last-chance-to-win-take-your-next-salesforce-certification-exam-for-free",
-  "description": "With <a href="https://www.youtube.com/watch?v=ADt4yUn49E0">TrailblazerDX</a> in the rearview and the <a href="https://medium.com/creme-de-la-crm/releasehighlights/home">Summer ’23 Release</a> just over the horizon, our feeds are full of new features, product news, and the inspiring Trailblazer stories that get us fired up to continue improving our Salesforce skill set!.",
+  "description": "With TrailblazerDX in the rearview and the Summer ’23 Release just over the horizon, our feeds are full of new features, product news, and the inspiring Trailblazer stories that get us fired up to continue improving our Salesforce skill set!.",
   "tags": ["giveaway","salesforce","salesforce-certification","tdx","salesforce-summer-23"],
   "author": {
     "name": Chris Stegall,

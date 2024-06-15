@@ -7,7 +7,7 @@
   "date": "2021-06-16T22:15:23.000Z",
   "title": "TrailheaDX ’21 Update",
   "Slug": "trailheadx-21-update",
-  "description": "<a href="https://www.salesforce.com/trailheadx/">TrailheaDX 2021</a> is next week and now’s the time to prep for success! Caylin sat down to take a quick run through all the latest news and updates surrounding the event, so head over to <a href="https://www.youtube.com/channel/UCXmSwyf8nsmpnSeOXD1JpPg/featured">our YouTube channel</a> or watch the video below to get the full scoop!.",
+  "description": "TrailheaDX 2021 is next week and now’s the time to prep for success! Caylin sat down to take a quick run through all the latest news and updates surrounding the event, so head over to our YouTube channel or watch the video below to get the full scoop!",
   "tags": ["salesforce-event","trailheadx","salesforce","trailheadx-2021","trailheadx-21"],
   "author": {
     "name": Chris Stegall,

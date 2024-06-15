@@ -7,7 +7,7 @@
   "date": "2020-01-15T13:01:01.000Z",
   "title": "Validation Rules, Dependent Fields, and Nested IFs, ANDs, NOTs, and ORs",
   "Slug": "validation-rules-dependent-fields-and-nested-ifs-ands-nots-and-ors",
-  "description": "Today’s post comes to us straight from the trenches. Well, not the trenches — Awesome <a href="https://www.salesforce.com/products/">Salesforce</a> Admins don’t work in trenches, but this was a practical puzzle as opposed to a hypothetical one, so it’s straight from the real world at least. Let’s set the stage..",
+  "description": "Today’s post comes to us straight from the trenches. Well, not the trenches — Awesome Salesforce Admins don’t work in trenches, but this was a practical puzzle as opposed to a hypothetical one, so it’s straight from the real world at least. Let’s set the stage..",
   "tags": ["admin","validation-rule","formula-fields","salesforce","salesforce-admin"],
   "author": {
     "name": Chris Stegall,

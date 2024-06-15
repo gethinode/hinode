@@ -7,7 +7,7 @@
   "date": "2024-01-26T23:30:50.000Z",
   "title": "Shape the Salesforce Product Roadmap: Prioritization Voting is Live until Feb. 9!",
   "Slug": "shape-the-salesforce-product-roadmap-prioritization-voting-is-live-until-feb-9",
-  "description": "We talk a lot about new <a href="https://medium.com/tag/release-highlights/archive">Salesforce releases</a> here. With three every year (Winter, Spring, and Summer) it feels like there’s always something “new and improved” right around the corner. And, while the <a href="https://trailblazer.salesforce.com/ideaSearch">IdeaExchange</a> has long existed as an outlet for influence — where users’ suggestions can be shared with the Salesforce community at large and voted up or down based on shared demand, it’s sometimes felt underpowered in terms of immediate impact..",
+  "description": "We talk a lot about new Salesforce releases here. With three every year (Winter, Spring, and Summer) it feels like there’s always something “new and improved” right around the corner...",
   "tags": ["salesforce-ideaexchange","prioritization","salesforce-release","salesforce","release-highlights"],
   "author": {
     "name": Chris Stegall,

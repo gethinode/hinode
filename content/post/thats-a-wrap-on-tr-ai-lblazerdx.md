@@ -7,7 +7,7 @@
   "date": "2024-03-11T15:27:27.000Z",
   "title": "That’s A Wrap on Tr(AI)lblazerDX",
   "Slug": "thats-a-wrap-on-tr-ai-lblazerdx",
-  "description": "TDX is a wrap and we’ll be rolling out recap content, but if you missed it, be sure to <a href="https://www.salesforce.com/form/event/tdx25-save-the-date/">save the date</a> for next year. And, if oyu’re eager to dive into this years’ content, use <a href="https://www.salesforce.com/plus">Salesforce+</a> to watch all the sessions streamed and available online!.",
+  "description": "TDX is a wrap and we’ll be rolling out recap content, but if you missed it, be sure to save the date for next year. And, if you're eager to dive into this years’ content, use Salesforce+ to watch all the sessions streamed and available online!",
   "tags": ["tdx25","salesforce-event","tdx","salesforce-tdx-25","salesforce-tdx"],
   "author": {
     "name": Jessie Penaloza,

@@ -7,7 +7,7 @@
   "date": "2021-01-26T00:18:38.000Z",
   "title": "2-Minute Org Charts in Google Sheets",
   "Slug": "2-minute-org-charts-in-google-sheets",
-  "description": "Everyone probably has their go-to application for creating stunning, readable organizational charts — but when you need to whip one up in a hurry it’s not always worth the effort of firing up Illustrator or your design software of choice. When you just need something presentable in a hurry, a placeholder perhaps, or any situation where the information and arrangement is more important than the final presentation, there’s a super speedy way to spin one up in <a href="http://sheets.google.com/">Google Sheets</a>!.",
+  "description": "Everyone probably has their go-to application for creating stunning, readable organizational charts — but when you need to whip one up in...",
   "tags": ["google-sheets","how-to","org-chart-software","google-workspace","org-charts"],
   "author": {
     "name": Chris Stegall,

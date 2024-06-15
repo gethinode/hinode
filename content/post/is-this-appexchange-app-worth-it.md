@@ -7,7 +7,7 @@
   "date": "2023-08-08T18:14:01.000Z",
   "title": "Is this AppExchange App “Worth It”?",
   "Slug": "is-this-appexchange-app-worth-it",
-  "description": "The <a href="https://appexchange.salesforce.com/">Salesforce AppExchange</a> is full of handy tools, helpful add-ons, and creative solutions to common problems — but it can also sometimes feel like an overwhelming wall of options. Free apps give you an opportunity to test drive a solution and see if it’s the cure for what ails your org. But, with the steady increase in “freemium offerings” that give you a taste for free but make you buy the meal, more and more users find themselves wondering “Do I really need to buy ______?” In today’s post we’ll run through the questions you should ask yourself, and your organization, before you pull the trigger on that paid install. Let’s get to it!.",
+  "description": "The Salesforce AppExchange is full of handy tools, helpful add-ons, and creative solutions to common problems — but it can also sometimes feel like an overwhelming wall of options.",
   "tags": ["salesforce-appexchange","salesforce-admin","salesforce-app","salesforce","appexchange"],
   "author": {
     "name": Chris Stegall,

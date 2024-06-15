@@ -7,7 +7,7 @@
   "date": "2021-07-30T15:46:43.000Z",
   "title": "Last Chance to Enter MK Partner’s July Giveaway!",
   "Slug": "last-chance-to-enter-mk-partners-july-giveaway",
-  "description": "The fireworks are long-since faded, the longest day of the year is in the rearview mirror, and the climbing Summer temps are nearing their peak, which means it’s almost time to close <a href="https://gleam.io/sCpsF/mk-partners-july-giveaway">MK Partners’ July Giveaway</a> and tomorrow’s your last chance to get <a href="https://gleam.io/sCpsF/mk-partners-july-giveaway">entered (or re-entered) to win</a>!.",
+  "description": "The fireworks are long-since faded, the longest day of the year is in the rearview mirror, and the climbing Summer temps are nearing their peak, which means it’s almost time to close the July Giveaway and tomorrow’s your last chance to get entered (or re-entered) to win!",
   "tags": ["contests","contests-and-giveaways","giveaway","salesforce","giveaway-contest"],
   "author": {
     "name": Chris Stegall,
