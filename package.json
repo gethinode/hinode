@@ -69,10 +69,12 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
     "cssnano": "^7.0.2",
     "cssnano-preset-advanced": "^7.0.2",
     "hugo-bin": "0.124.0",
-    "purgecss-whitelister": "^2.4.0"
+    "purgecss-whitelister": "^2.4.0",
+    "rss-to-json": "^2.1.1"
   },
   "devDependencies": {
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",

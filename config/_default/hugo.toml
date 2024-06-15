@@ -1,6 +1,8 @@
 # toml-docs-start main
-title = "Hinode"
-copyright = "Copyright © 2024 Mark Dumay."
+title = "Creme de la CRM"
+copyright = "Copyright © 2024 MK Partners."
+description = "Your source for all things Salesforce"
+endorse = false
 paginate = 9
 enableGitInfo = true
 # toml-docs-end main
@@ -73,7 +75,7 @@ home = ["HTML", "RSS", "REDIR"]
   [services.twitter]
     disableInlineCSS = true
   [services.googleAnalytics]
-    # ID = "G-xxxxxxxxxx"
+    ID = "G-5J2YGH2W74"
 
 [outputFormats]
   [outputFormats.XML]

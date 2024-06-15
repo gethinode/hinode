@@ -1,0 +1,38 @@
+---
+{
+  "priority":"0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2020-10-26T22:02:15.000Z",
+  "title": "Mark Your Calendars: Best Upcoming Events October 26, 2020 — October 30, 2020",
+  "Slug": "mark-your-calendars-best-upcoming-events-october-26-2020-october-30-2020",
+  "description": "You know, this is where one would usually introduce a Halloween related joke, but Halloween isn’t my thing. Salesforce is my thing, okay. However, even though Halloween isn’t my thing I do have some Halloween themed events for you this week, as well as the normal ones. Also, all but one event is on Thursday, October 29th so sit back, open up your calendar, clear it out and let’s get planning!.",
+  "tags": ["salesforce-event","salesforce-admin","salesforce","events","virtual-events"],
+  "author": {
+    "name": Caylin Schmenk,
+    "title": undefined,
+    "jpeg": undefined
+  },
+  "layout": "single",
+  "thumbnail": {
+    "url": "/img/1_eiQ_y0ErfqhGM6y_4IsXeQ.jpeg"
+  }
+}
+---
+You know, this is where one would usually introduce a Halloween related joke, but Halloween isn’t my thing. Salesforce is my thing, okay. However, even though Halloween isn’t my thing I do have some Halloween themed events for you this week, as well as the normal ones. Also, all but one event is on Thursday, October 29th so sit back, open up your calendar, clear it out and let’s get planning!
+For our only event not on the 29th, [](https:https://www.salesforce.com/form/events/webinars/form-rss/2637582//www.salesforce.com/form/events/webinars/form-rss/2735662) is on Tuesday, October 27th. Starting at 9am (PDT) Tableau is teaming up with Salesforce to talk with you about using your data to drive engagement and growth to drive consumer engagement. The speakers will also discuss how to maximize value for your brand and advertising partners, about top Tableau D2C user cases and much more.
+At 9am (PDT) on our busiest day of the week, you have two options! The first option is the [](https://www.salesforce.com/form/events/webinars/form-rss/2558830). This is an exclusive look at the new features on this platform. The speakers will also discuss the new additions to Audience Studio, Datorama, Social Studio, Einstein and Distributed Marketing.
+The second option is for nonprofits in an [](https://www.salesforce.com/form/sfdo/ngo/intro-to-managing-your-programs-webinar/).
+Salesforce is giving an introduction to the free Program Management Module. The overall goal of this program is to save time and money by removing the old way of manually entering data to having it automated. They will also talk about the new feature, setting up recurring services for groups, as well as old features like segmenting programs and connecting clients to programs.
+Our large event of the day is taking place at 11am (PDT) and luckily is only an hour long. [A](https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&amp;referrer=https%3A%2F%2Fsalesforce.quip.com%2F&amp;eventid=2706395&amp;sessionid=1&amp;key=ED6E88109BD7597CAFA827AD997681A5&amp;regTag=&amp;sourcepage=register) is a virtual event made for those in the Salesforce Partner world and is designed to inspire, grow and bring us together. With the likes of Kori O’Brien, Amy Mahoney, Michael Hartman and Adam Blitzer the event will be not only informative but encouraging as well! You can bet someone from MK Partners will be attending this event.
+The saying goes that it’s 5 o’clock somewhere, but in pandemic time, wine o’clock can be whenever! The Sacramento, CA Salesforce User group is hosting [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-user-group-sacramento-united-states-presents-favorite-features-and-ideas-virtual-happy-hour/) at 3pm (PDT). End your day early with a drink, a snack and the desire to talk about your favorite Salesforce Feature or Idea from the IdeaExchange. Not only will you be sharing ideas and features, but you will also get to participate in demos! They are also going to spend time reviewing job openings, troubleshooting and just flat out socializing.
+For our Candian friends out there, this event is for you! [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-admin-group-vancouver-canada-presents-winter-21-highlights-and-canadian-salary-survey-results/) at 5pm (PDT) is going to walk you through the admin features released in this Highlight and the Salary Survey. For those of us who don’t know about the Salary Survey, it’s a Candian wide salary survey collected that covers Salesforce specific roles in the country. This group is going over the results to empower everyone to reach their salary goals and potential!
+Another 5pm (PDT) event [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-admin-group-seattle-united-states-presents-october-halloween-happy-hour/) is perfectly themed for the week and going to ease you into the weekend! This is strictly a social hour, so feel free to wear a costume, use a themed background and share your recipes for your Halloween themed drinks and snacks! They are going to break everyone up into groups for 10 to 15 mins and then switch it up so everyone can have an easier time socializing on Zoom. Have a happy Halloween and stay safe!
+
+## 
+
+Last week, we started with **5 Ways Health Plans Can Deliver Experiences that Improve Member Satisfaction and Business Outcomes **where health care providers talked about reimagining how customers receive their health care services and support. We heard MCC’s story about using Salesforce in **Program Management and More with the Montana Conservation Corps**.
+For those who wanted to learn more on how they can deliver in person customer service with their business, the event **How to Tailor Self-Service Buying Journeys for B2B Customers, ft. Palo Alto Networks** educated viewers on that. **Career Readiness: Moving from Current to Future State** discussed how to navigate short and long term changes in technology and how it enhances relationships.
+For those who wanted to learn more about Salesforce in general and how to use it in their business **How to Keep Customers from Falling Through the Cracks with Salesforce Anywhere** was very informative for that crowd. We got to listen to some Org Confessions for a good laugh and also helped you implement the best practices for your org in **OrgConfessions Funny. Not Funny. Lessons in Implementation Best Practice with Elements.Cloud.** Finally, we ended with a workshop that brought the digital experience to our partners via External Apps in **Make a Mobile Publisher App for Communities Hands-On Virtual Workshop**. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know your thoughts!
+Also, make sure to [let us know](https://www.mkpartners.com/contact/) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud.

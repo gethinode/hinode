@@ -1,0 +1,38 @@
+---
+{
+  "priority":"0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2020-12-07T21:58:21.000Z",
+  "title": "Mark Your Calendars: Best Upcoming Events December 7, 2020 — December 11, 2020",
+  "Slug": "mark-your-calendars-best-upcoming-events-december-7-2020-december-11-2020",
+  "description": "We have a very busy week ahead of us and though we are smack dab in the middle of the holiday season, it’s not time to be lazy. So sit back, open up your calendar, and let’s get planning!.",
+  "tags": ["salesforce","salesforce-event","remote","virtual-events","wfh"],
+  "author": {
+    "name": Caylin Schmenk,
+    "title": undefined,
+    "jpeg": undefined
+  },
+  "layout": "single",
+  "thumbnail": {
+    "url": "/img/1_2Zhy_AN89BUluVDBYeVRzg.jpeg"
+  }
+}
+---
+We have a very busy week ahead of us and though we are smack dab in the middle of the holiday season, it’s not time to be lazy. So sit back, open up your calendar, and let’s get planning!
+Starting off this week, the Seattle, WA Salesforce Admin group is hosting their meeting about [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-admin-group-seattle-united-states-presents-december-7th-seattle-group-meeting/). Regardless of where you stand in the ecosystem or want to get into it, it’s important to consider the 3 F’s (Family, Freedom and Finances) and how that will affect you. Gordon Lee, a Solutions Architect at Salesforce, will be providing you with a formula of sorts to help you plan for your future at 5pm (PT).
+For those of you who like the content of the Pardot event I mentioned earlier, but want a different topic, well then you are in luck! The [](https://register.gotowebinar.com/rt/44974834794543887?source=Calendar) is the same exact thing, except with Salesforce Marketing Cloud. This event takes place at 7am (PT) on Tuesday, December 8th.
+Then at 9am (PT) [](https://www.salesforce.com/form/sfdo/ngo/optimizing-campaign-performance/) is going to teach nonprofits how to build a successful digital campaign! The future holds 2 things right now: uncertainty and technology is keeping businesses afloat and nonprofits need to plan for that! If you also want to learn how to analyze your campaigns performance and optimize how you reach out across different channels, then sign up!
+The Denver, CO Salesforce Admin group is hosting the [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-admin-group-denver-united-states-presents-denver-admins-holiday-meeting/) at 4pm (MST) which will be a celebration! They have a few things going on during this meeting, so let me break it down for ya. First, if you have a holiday drink or food recipe you would like to share, then reach out to the group leader! They will let you do a short demo during the meeting and if you’re like me (aka have no holiday recipes) then take notes! Then they will be playing BINGO (you have to register because they are sending out the cards in advance) and the winners will get a free certification voucher! Also, this year they have decided to support SafeHouse and provided multiple links on how you can help and give back! Finally, they will be sending out the annual salary survey (also beforehand) and talking about those results in the meeting.
+Another fun event happening that night is the [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-user-group-oakland-united-states-presents-2020-joint-holidayarty/)! The Oakland User group, San Francisco Admin group and San Francisco Nonprofit group decided to join forces again to host this second annual group holiday party! They will be playing BINGO, trivia, and will have a few other events in store for you! If you want more details about the event, you will need to register and it’s starting at 5:30pm (PT).
+The biggest event of the week, [](https://www.salesforce.org/events/trailblazers-together/)**,** is happening on Wednesday, December 9th! Starting at 8:30am (PT), Wayne Brady is hosting the event, featuring Pitbull and Megan Smith as guest speakers! For those of you who don’t know what Trailblazers Together is, it’s basically a celebration of the community and gives you the opportunity to network and connect more. Towards the end of the 3 hour event (if you decide to attend the pre show at 8am), attendees will have the opportunity to join Community Connection Circles, which is the forum for the community to network and engage.
+Finally on Thursday, December 10th at 9am (PT) [](https://www.salesforce.com/form/sfdo/ngo/top-trends-impacting-nonprofits-now/) is back with its third annual report, but this time with additional information on how nonprofits can continue (or start depending on your situation) to get through the pandemic successfully. They will focus on the 3 areas: digital experience, managing through change and planning for the future. They will talk about the challenges and opportunities when using technology, the organization challenges and strategies in relation to the pandemic, and concerns and optimism when trying to achieve your mission.
+
+## 
+
+Last week was a nice mix of productive and fun events! **How to Scale Customer Experiences with Einstein** taught you how AI can help create personalized messages to clients across multiple channels. **Trust at Every Touchpoint: Perspectives on what COVID-19 teaches us about Cybersecurity Preparedness** taught you how to protect your business, employees and customers during this time. We got to show off our ugly sweaters, talked about the Winter ’21 releases and virtual Salesforce conferences and events, and played a game of Never Have I Ever Salesforce Worst Practices in **Winter Wonderland &amp; Ugly Sweaters. **We heard about Movable Ink capabilities on a visual experience platform, reviewing integrations and getting to see a few examples of in market with a shared customer with Salesforce in **Market Cloud and Moveable Ink.**
+In **Salary Guide Analysis + Year-End Reporting** we were shown how to use Pardot data for the year-end reporting and a Salary Guide Analysis for Marketing Automation Professionals. We got to see the tools, languages and services you need to deliver apps and features that are successful in **An Inside Look at How Small &amp; Growing Businesses Create Apps Fast with Heroku.**
+The Las Vegas, NV Women in Tech group hosted their second meeting, **Farwell 2020! Adios! Adieu! Ciao! (Virtual)**, where they discussed the group goals, got some feedback from the group and gave away some swag. Then multiple Salesforce Women in Tech groups joined forces to host **Holiday Happy Hour!** to share this year’s achievements and things you are thankful for.
+Last but most certainly not least, we had the kickoff to **Dreamforce to You 2020**! Marc Benioff was joined by a multitude of guest speakers from Salesforce, to government representatives, to big companies and to a late night tv host. Oh and of course Metallica was there (duh)! They had a few big announcements and gave an update on DreamforceTX coming in the following weeks! Tweet us @mkpartners and let us know your thoughts about the keynote speech!
+Also, make sure to tweet us if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud.

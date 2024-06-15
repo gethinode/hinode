@@ -1,0 +1,37 @@
+---
+{
+  "priority":"0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2020-06-22T15:27:19.000Z",
+  "title": "Mark Your Calendars: Best Upcoming Events June 22, 2020 — June 26, 2020",
+  "Slug": "mark-your-calendars-best-upcoming-events-june-22-2020-june-26-2020",
+  "description": "Do you know what is happening this upcoming week?! TRAILHEADX Y’ALL!! I don’t know about you, but I have been WAITING for this event since January. Yeah it’s virtual this year, but who cares! There is sooo much to learn from this event that your system will go into overload! Don’t worry, I haven’t forgotten about some of our other events too, but I’m just really excited about TrailheaDX. So sit back, open up your calendars and let’s get planning!.",
+  "tags": ["trailhead","trailheadx","wfh","salesforce-developer","salesforce-event"],
+  "author": {
+    "name": Caylin Schmenk,
+    "title": undefined,
+    "jpeg": undefined
+  },
+  "layout": "single",
+  "thumbnail": {
+    "url": "/img/1_CWfFflCIkmfEnXZC_edG9Q.jpeg"
+  }
+}
+---
+Do you know what is happening this upcoming week?! TRAILHEADX Y’ALL!! I don’t know about you, but I have been WAITING for this event since January. Yeah it’s virtual this year, but who cares! There is sooo much to learn from this event that your system will go into overload! Don’t worry, I haven’t forgotten about some of our other events too, but I’m just really excited about TrailheaDX. So sit back, open up your calendars and let’s get planning!
+{{< image src="/img/1_ejIq1R4De_S56nX2oBtJlA.png" title="Image" >}}
+
+Okay let’s jump right into the bread and butter of this upcoming week’s events: [](https://www.salesforce.com/trailheadx/). It’s virtual, live and coming at you with a new vibe! They have 80 (80!!!!) sessions and I know we can’t do them all, but we most certainly can try! The event is scheduled on Thursday, June 25th from about 8:30am to about 3pm, so pack a lunch and bring it to your desktop because you are not going to be able to walk away! I can’t wait to find out who the fireside chat speaker will be too! If you haven’t been to this event and don’t know what I’m talking about, let me break it down for you. This event is geared towards Admins, Devs and Architects. It’s Salesforce’s second biggest event, behind Dreamforce. It’s a great way to learn, connect and overall help you improve your Salesforce skill set. There are demos, the latest technology, announcements from executives, networking opportunities, Q&amp;A sessions… basically you name it, they have it. I’ve BEEN registered for this event, have you?
+We are all used to having virtual events by now, but some type of events are harder to host than others, especially fundraising events. Also on Thursday, June 25th [](https://www.salesforce.com/form/sfdo/ngo/fundraising-events-online/) is teaching you just that. If you run a non-profit organization, this is a really important skill to learn, as virtual events aren’t going away anytime soon. Clare Mitchell, the CIO from Gigi’s Playhouse, will be speaking about the set up, tools and how to collect data for these kinds of events.
+Earlier on in the week, we’ve got a few different events going on. Starting on Monday, June 22nd at 5pm (PDT) the [San Francisco WIT Group](https://trailblazercommunitygroups.com/san-francisco-ca-women-in-tech-group/) is hosting a [](https://trailblazercommunitygroups.com/events/details/salesforce-san-francisco-ca-women-in-tech-group-presents-san-francisco-wit-happy-hour/)! It’s a good way to end the day with some networking and sharing success stories with a drink in hand. Honestly that is not a bad way to start the week.
+Additionally, the [San Francisco Developers Group](https://trailblazercommunitygroups.com/san-francisco-ca-developers-group/) will be hosting a meeting on the same day and time to talk about a few things! [](https://trailblazercommunitygroups.com/events/details/salesforce-san-francisco-ca-developers-group-presents-road-to-tdx20-w-kavindra-patel-salesforce-development-from-the-high-seas-w-stephan-chandler-garcia/) will get you Devs excited! Kavindra Patel will be helping you prep for TrailheaDX by explaining how it will work this year and you might get some teasers. You do know he is the VP Trailhead Strategic Events and Programs at Salesforce, right? On the other hand, Stephan is a Developer Evangelist at Salesforce and has been on the high seas developing for months now! He will be sharing that experience and who knows, maybe you too will want to become a digital nomad by the end of this meeting.
+On Tuesday, June 23rd there is a webinar about increasing your company’s visibility with Pardot. [](https://register.gotowebinar.com/rt/6263009941202190082?source=Calendar) will teach you how Google and SEO works and how to get your search engine rank higher in the results. Pardot ties in to this because it can help nurture and track prospects who find you in these search results. You can also request a 1:1 after this meeting if you are looking for more information or help.
+If you are an architect looking to build an effective integration strategy then you should join [](https://www.salesforce.com/form/sfdo/sfdo/integration-strategy-ask-an-architect/) on Wednesday, June 24th. This will help you learn step by step on how to keep all of that data across multiple systems in sync. Tom Leddy and Richard Booth from Salesforce.org will be your guide during this webinar.
+
+## 
+
+Last week had a lot of content too! **Salesforce Release Readiness **gave us so many previews on so many different topics. It was almost overwhelming, but hopefully I helped you get your calendar organized. Additionally, the **Higher Ed Summit** happened and that too was a huge event! Did you get to hear Arianna Huffington, Trevor Noah, Soledad O’Brien and Samatha Power speak?
+The community group events had a lot of guest speaker action too! Richard Cunningham from Blendery Inc joined the Corte Madrea, CA Admin group to talk about large event registration solutions in Salesforce. Stacy Jewell at Business Valuation Resources and Chris Bayerle from Idealist Consulting joined the Portland, OR B2B Marketers group to talk about all things Pardot. The Denver, CO Developers group hosted a lighting mini hack session and finally the all of the San Francisco, CA groups hosted **Salesforce DevOps for Admins: Empowering your Team with Practical Advice. **Tweet us [@mkpartners](http://twitter.com/mkpartners) and let us know your thoughts!
+Also, make sure to tweet us if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud.

@@ -1,0 +1,44 @@
+---
+{
+  "priority":"0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2020-09-11T14:31:01.000Z",
+  "title": "Mark Your Calendars: Best Upcoming Events September 14, 2020 — September 18, 2020",
+  "Slug": "mark-your-calendars-best-upcoming-events-september-14-2020-september-18-2020",
+  "description": "Too many events, too little time. It’s a doozy this week. So sit back, open up your calendar and let’s get planning!.",
+  "tags": ["salesforce-communities","remote","salesforce","salesforce-event","wfh"],
+  "author": {
+    "name": Caylin Schmenk,
+    "title": undefined,
+    "jpeg": undefined
+  },
+  "layout": "single",
+  "thumbnail": {
+    "url": "/img/1_ua4hfa3bcy6bmzOh9zxlfA.jpeg"
+  }
+}
+---
+Too many events, too little time. It’s a doozy this week. So sit back, open up your calendar and let’s get planning!
+We are kicking off this week on the other side of the pond in the UK! On Tuesday, September 15th at 11am (BST) (so for those of us on the other side of the pond that’s early…) [](https://www.salesforce.com/uk/form/sfdo/sfdo/safe-secure-salesforce-platform/) is here for those who want to learn a little about the Salesforce platform. Online threats and hacking have become more common and as a client, you want to make sure your data is secure. This webinar will educate you on Salesforce’s standards, protections and the measures they take in order to secure your datas safety.
+Who doesn’t need help with closing a sale?! At 9am (PST) [](https://news.mkpartners.com/WebinarEnlist) will help teach you how to close that deal in Covid times. Just because teams can’t collaborate in person anymore doesn’t mean that the collaboration should stop! Between the 3 tips to help your sales team and hearing from a Trailblazer share their experience you are sure to get your team closing deals like it’s nobody’s business!
+Same day, different time but different event. At 11am (PST) Salesforce is hosting guest speakers from the LA Chargers in [](https://www.salesforce.com/form/events/webinars/form-rss/2628596). LA Chargers knew that they had to keep their existing fans happy, while also marketing to a new fanbase. With the help of Salesforce, they were able to grow and overcome the challenges that they faced, becoming one of the most innovative teams in the NFL.
+Okay so kids aren’t going back to schools and not applying to colleges. What do you do? Well in [](https://www.salesforce.com/form/sfdo/edu/new-recruitment-marketing-learners/) that is happening at 11am (PST) on Thursday, September 17th you will learn how to help stabilize your programs in the non-traditional classroom settings. In this Salesforce webinar you will master ways to create email campaigns to help drive enrollments, deliver that personalized branding of your institution to mass audiences and provide the right content at the correct time.
+Salesforce Release Readiness. Yup, you read that right; hopefully you didn’t get whiplash. [](https://www.salesforce.com/form/event/release-readiness-winter-21/?source=Calendar) release is already upon us! I feel like I just wrote about the Summer Release Readiness!! Luckily at the end of this week we only have 2 previews. On Friday, September 18th at 9am to 10:15am we have the Developer Preview and then at 11:15am to 12:30pm we have the Admin Preview. These are both live and at PST, so make sure you got those times blocked off!
+
+## 
+
+This week I decided to make a separate section just for the community group meeting just because there are so many good ones, that I couldn’t possibly pass any of them up! Just make sure these don’t interfere with the events above.
+The Denver, CO Admin group will be hosting the one and only Peter Coffee, the VP Strategic Research at Salesforce in [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-admin-group-denver-united-states-presents-peter-coffee-on-you-decide-exploring-your-top-five-questions-about-winning-in-the-next-normal/). The hosts want you to submit and make the decision on what you want Peter to talk about! This will take place on Tuesday, September 15th at 4pm (MST) and you do need to reserve your seat.
+The Phoenix, AZ Women in Tech group is hosting [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-women-in-tech-group-phoenix-united-states-presents-maximum-impact-minimum-expense-with-alyssa-abbey/). With a lot of businesses conducting layoffs you want to make sure you are adding value to the company while you are working from home. This event is on Tuesday, September 15th at 5pm (MST) and you will need to register for this event ahead of time.
+The Portland, OR Marketers (Pardot) group will have guest speakers to teach us how to [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-marketer-group-pardot-portland-united-states-presents-use-marketing-automation-to-scale-client-success/). This event is geared towards marketers who are looking to win customer success and experience or even improve team collaboration. This event is on Wednesday, September 16th at 4pm (PST).
+The Denver, CO Developer group is having a presentation about [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-developer-group-denver-united-states-presents-10-ways-to-get-creative-with-lightning-components/). The speaker, Eric Smith, goal is to help make your user org more friendly and improve your experience. This event is also on Wednesday, September 16th but at 5:30pm (MST).
+The Missoula, MT User group is doing an [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-user-group-missoula-united-states-presents-missoula-mt-salesforce-user-group-september-meeting-intro-to-process-builders-2020-09-18/) as their September group meeting. They have guest speakers from ATG Cognizant to walk us through the introduction process automation. This event is on Friday, September 18th at 2:30pm (MST).
+Finally, the Las Vegas, NV Women in Tech group is having [](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-women-in-tech-group-las-vegas-united-states-presents-las-vegas-women-connect/)**!** The whole point of this event is just to talk, set some goals, meet some new people, discuss about being a woman in the workforce and complain about 2020 for a bit. This event is on Friday, September 18th at 4:15pm (PST) and is a great way to decompress from your week.
+
+## 
+
+Last week was also jam packed with events! First thing on Tuesday morning the Seattle Group Meeting hosted **Create Your Own Experience: Build Your Salesforce Portfolio** for those looking to gain more experience in the Salesforce environment. Then we learned how to utilize Sales Cloud and Tableau to capture data in **Learn How Tableau Can Empower Your Sales Operations with Data Insight.** Moving on to Wednesday we had **5 Things Universities Can Do Now to Digitally Transform.** The purpose of this webinar was to help you build a roadmap for digital learning and teach you five things you can do to enable and achieve digital transformation and success. Afterward, a highlight event was a **Story of Resilience: A Conversation with Sara Blakely**, where the Founder and CEO of SPANX talked about the rise of her brand, how she is helping female entrepreneurs during Covid-19, gave advice to small businesses and answered questions.
+This week the events ended on a Thursday. **5 Ways that Top Service Teams are Gearing up for Holiday 2020** was for those interested in learning about how some ways service teams are pivoting their digital strategies to deal with the upcoming and new holiday demands and pressures in Covid-19 times. Finally, **How to Master Being the Only Woman in Zoom** taught us females about body language, word choice for biased conversations and how your words can affect others. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know your thoughts!
+Also, make sure to [let us know](http://www.mkpartners.com) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud.

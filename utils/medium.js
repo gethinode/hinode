@@ -1,9 +1,6 @@
 const utils = require('./utils')
 const { parse } = require('rss-to-json')
 
-
-
-
 const compileFrontMatter = (story) => {
   const publishDate = new Date(story.date).toJSON()
   const author = { name: story.author }
@@ -50,7 +47,8 @@ const getContentAfterFirstFigure = (content) => {
 const scrapeFromRSS = async () => {
   const PREVIOUS_POSTS_BODY = await utils.readFile('posts.json')
   let previousPostMap = JSON.parse(PREVIOUS_POSTS_BODY)
-  const ENDPOINT = 'https://medium.com/feed/creme-de-la-crm'
+  // const ENDPOINT = 'https://medium.com/feed/creme-de-la-crm'
+  const ENDPOINT = 'https://medium.com/feed/creme-de-la-crm/tagged/volunteer'
   // let res = await utils.callOut({method:"get", url:ENDPOINT});
   const DATA = await parse(ENDPOINT)
   // console.log("DATA",DATA);
@@ -109,7 +107,7 @@ const convertRssItem = (item) => {
   story.author = item.author
   story.cremeUrl = 'https://cremedelacrm.com/post/' + fileName
   story.slug = utils.substringbeforelast(fileName, '-')
-  story.localFileName = 'content/post/' + fileName
+  story.localFileName = 'content/post/' + story.slug
   story.title = item.title
   story.date = new Date(item.published)
   story.tags = item.category

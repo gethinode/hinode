@@ -1,7 +1,7 @@
 # toml-docs-start main
 [main]
     separator = "-"
-    description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
+    description = "Your source for all things Salesforce."
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
@@ -91,7 +91,7 @@
 
 [[sharing.providers]]
     name = "Twitter"
-    url = "https://twitter.com/home?status={url}"
+    url = "https://x.com/intent/post?text={url}"
     icon = "fab x-twitter"
     weight = 20
 
@@ -164,17 +164,17 @@
 
 [schema]
     type = "Organization"
-    name = "Hinode"
+    name = "Creme de la CRM"
     locale = "en-US"
-    # twitter = "https://twitter.com/gethinode"
-    # linkedIn = ""
-    github = "https://github.com/gethinode/hinode"
-    section = "blog"
+    twitter = "https://twitter.com/cremedelacrm_"
+    linkedIn = "https://www.linkedin.com/company/creme-de-la-crm/"
+    github = "https://github.com/Creme-de-la-CRM/"
+    section = "post"
     [author]
-        name = "Mark Dumay"
-        # twitter = "https://twitter.com/markdumay"
-        linkedin = "https://www.linkedin.com/in/markdumay/"
-        github = "https://github.com/markdumay"
+        name = "Creme de la CRM"
+        twitter = "https://twitter.com/cremedelacrm_"
+        linkedin = "https://www.linkedin.com/company/creme-de-la-crm/"
+    github = "https://github.com/Creme-de-la-CRM/"
     [logo]
         url = "img/logo512x512.png"
         width = 512
@@ -189,4 +189,4 @@
     locale = "en_US"
 
 [links]
-    hinode = "https://gethinode.com"
+    hinode = "https://cremedelacrm.com"
