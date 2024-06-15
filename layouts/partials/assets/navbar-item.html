@@ -19,9 +19,14 @@
 {{- $class := .class -}}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
-
-{{- $menuURL := (or $menu.PageRef $menu.URL) | relLangURL -}}
-{{- $pageURL := $page.RelPermalink | relLangURL -}}
+{{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
+{{- $menuURL := "" -}}
+{{ if or (strings.HasPrefix $menu.PageRef "http") (strings.HasPrefix $menu.URL "http") }}
+    {{ $menuURL = or $menu.PageRef $menu.URL }}
+{{ else }}
+    {{- $menuURL = urls.JoinPath $baseURL ((or $menu.PageRef $menu.URL) | relLangURL) -}}
+{{ end }}
+{{- $pageURL := $page.RelPermalink -}}
 {{- $isActive := or (and (hasPrefix $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}

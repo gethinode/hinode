@@ -24,7 +24,7 @@
                                 {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
                             </div>
                             <div class="col-9">
-                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ .Page.Title | .Page.RenderString }}</a>
+                                <a href="{{ .Page.RelPermalink }}">{{ .Page.Title | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}
@@ -48,7 +48,7 @@
                                     <p class="text-body-secondary mt-5">{{ $year }}</p>
                                     {{ $.Scratch.Set "lastYear" $year }}
                                 {{ end }}
-                                <a href="{{ (path.Join .Page.RelPermalink) | relLangURL }}">{{ if .Draft }}{{ T "draft" | upper }}: {{ end }}{{ .Title | .Page.RenderString }}</a>
+                                <a href="{{ .Page.RelPermalink }}">{{ if .Draft }}{{ T "draft" | upper }}: {{ end }}{{ .Title | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}

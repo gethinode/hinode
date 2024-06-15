@@ -1,8 +1,6 @@
 // stylelint-disable annotation-no-unknown
 
 // Source: https://jsfiddle.net/njhgr40m/
-
-
 .navbar {
     --bs-navbar-expanded-color: var(--bs-body-bg);
     --bs-navbar-toggler-color: var(--bs-navbar-hover-color);
@@ -235,4 +233,62 @@
             }            
         }
     }
+}
+
+// adapted from https://www.codeply.com/p/UsTEwDkzNp#
+.checkbox {
+	opacity: 0;
+	position: absolute;
+}
+
+.mode-switch {
+    --#{$prefix}mode-switch-width: 50px;
+}
+
+.mode-switch .label {
+	border-color: var(--#{$prefix}border-color);
+    border-style: solid;
+    border-width: 1px;
+	border-radius: var(--#{$prefix}mode-switch-width);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	position: relative;
+	height: calc(1px + var(--#{$prefix}mode-switch-width) / 2);
+	width: var(--#{$prefix}mode-switch-width);
+    transform: scale(0.9);
+}
+
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
+.mode-switch .label .ball {
+    background-color: var(--#{$prefix}secondary-bg);
+	border-radius: 50%;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: calc((var(--#{$prefix}mode-switch-width) / 2) - 5px);
+	width: calc((var(--#{$prefix}mode-switch-width) / 2) - 5px);
+	transition: transform 0.2s linear;
+}
+
+.mode-switch .checkbox:checked + .label .ball {
+	transform: translateX(calc((var(--#{$prefix}mode-switch-width) / 2) - 1px));
+}
+
+.mode-switch .fa-moon {
+	color: $yellow;
+    transform: scale(0.8);
+}
+
+.mode-switch .fa-sun {
+	color: var(--#{$prefix}bs-body-color);
+    transform: scale(0.8);
 }

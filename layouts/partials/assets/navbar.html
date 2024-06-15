@@ -16,36 +16,16 @@
 
 <!-- Inline partial to render the color mode switcher -->
 {{- define "partials/navbar-mode.html" -}}
-    {{- $size := .size -}}
-    {{- $collapsed := .collapsed -}}
-    {{- $id := .id -}}
+    {{- $id := .id | default "navbar-mode" -}}
 
-    <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
-        <a class="nav-link dropdown-toggle" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "colorMode" }}" aria-expanded="false" id="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
-            <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw") }}</span>{{ if $collapsed }}&nbsp;{{ T "colorMode" }}{{ end }}
-            <span class="d-md-none"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-theme{{ if $collapsed }}-collapsed{{ end }}">
-            <li>
-                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="light" href="#!">
-                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false) }}</span>&nbsp;
-                    {{- T "colorLight" }}
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="dark" href="#!">
-                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw" "spacing" false) }}</span>&nbsp;
-                    {{- T "colorDark" }}
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" data-bs-theme-value="auto" href="#!">
-                    <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke fa-fw" "spacing" false) }}</span>&nbsp;
-                    {{- T "colorAuto" }}
-                </a>
-            </li>
-        </ul>
-    </li>
+    <div class="d-flex mode-switch align-items-center" id="{{ $id }}">
+        <input type="checkbox" class="checkbox navbar-mode-selector" id="{{ $id }}-checkbox" />
+        <label class="label" for="{{ $id }}-checkbox">
+            {{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false) }}
+            {{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw" "spacing" false) }}
+            <div class="ball"></div>
+        </label>
+    </div>
 {{- end -}}
 
 <!-- Inline partial to render the version switcher -->
@@ -53,6 +33,7 @@
     {{- $size := .size -}}
     {{- $collapsed := .collapsed -}}
     {{- $page := .page -}}
+    {{- $baseURL := .baseURL -}}
     {{- $list := site.Params.docs.releases -}}
     {{- $id := .id -}}
     {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
@@ -70,7 +51,7 @@
                 {{- end -}}
                 {{ if $item.url }}
                     <li>
-                        {{- $url := (path.Join $item.url) | relLangURL -}}
+                        {{- $url := (urls.JoinPath $baseURL $item.url) | relLangURL -}}
                         <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
                             {{ if $item.latest }}&nbsp;({{ T "latest" }}){{ end }}
                             {{ if $active }}
@@ -86,7 +67,7 @@
             {{- if site.Params.docs.overview -}}
                 {{ if gt (len $list) 0 }}<li><hr class="dropdown-divider"></li>{{ end }}
                 <li>
-                    {{- $url := (path.Join site.Params.docs.overview) | relLangURL -}}
+                    {{- $url := (urls.JoinPath $baseURL site.Params.docs.overview) | relLangURL -}}
                     <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" href="{{ $url }}">{{ T "allVersions" }}</a>
                 </li>
             {{- end -}}
@@ -98,6 +79,7 @@
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $id := .id | default (printf "navbar-%d" 0) -}}
 {{- $page := .page -}}
+{{- $baseURL := $page.Scratch.Get "baseURL" -}}
 
 {{- $defaultMenu := "main" -}}
 {{- $menuName := .menus | default $defaultMenu }}
@@ -117,6 +99,7 @@
 {{- $search := .search | default site.Params.navigation.search -}}
 {{- $searchModal := and $search site.Params.navigation.searchModal -}}
 {{- $enableDarkMode := .mode | default site.Params.main.enableDarkMode -}}
+{{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 
 {{- $enableVersions := false -}}
 {{ $list := site.Params.docs.releases }}
@@ -132,8 +115,15 @@
 {{- $logoDark := "" -}}
 {{- if $enableDarkMode -}}
     {{ $ext := path.Ext $logo -}}
-    {{- $logoLight = printf "%s-light%s" (strings.TrimSuffix $ext $logo) $ext -}}
-    {{- $logoDark = printf "%s-dark%s" (strings.TrimSuffix $ext $logo) $ext -}}
+    {{- $ext := path.Ext $logo -}}
+    {{- $base := strings.TrimSuffix $ext $logo -}}
+    {{- range $suffix := $modes -}}
+        {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
+    {{- end -}}
+
+    {{- $logoLight = printf "%s-light%s" $base $ext -}}
+    {{- $logoDark = printf "%s-dark%s" $base $ext -}}
+    
     {{- $light := fileExists (path.Join "/static" $logoLight) -}}
     {{- $dark := fileExists (path.Join "/static" $logoDark) -}}
     {{- if and $light (not $dark) -}}
@@ -151,6 +141,10 @@
         {{- $logoDark = "" -}}
     {{- end -}}
 {{- end -}}
+
+{{ if $logo }}{{ $logo = urls.JoinPath $baseURL $logo }}{{ end }}
+{{ if $logoLight }}{{ $logoLight = urls.JoinPath $baseURL $logoLight }}{{ end }}
+{{ if $logoDark }}{{ $logoDark = urls.JoinPath $baseURL $logoDark }}{{ end }}
 
 {{- $title := site.Title -}}
 {{- if .title -}}
@@ -255,8 +249,8 @@
     
                     <!-- Insert version switcher -->
                     {{- if $enableVersions -}}
-                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true "id" .id) -}}
-                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false "id" .id) -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true "id" .id "baseURL" $baseURL) -}}
+                        {{- partial "partials/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false "id" .id "baseURL" $baseURL) -}}
                     {{- end -}}
 
                     <!-- Insert language switcher if applicable -->
@@ -276,7 +270,7 @@
                                     {{- end -}}
                                 {{- else -}}
                                     {{- range site.Languages -}}
-                                        <li><a class="dropdown-item" href="/{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
+                                        <li><a class="dropdown-item" href="{{ urls.JoinPath $baseURL .Lang }}">{{ default .Lang .LanguageName }}</a></li>
                                     {{- end -}}
                                 {{- end -}}
                             </ul>
@@ -286,7 +280,6 @@
                     <!-- Insert color mode switcher -->
                     {{- if $enableDarkMode -}}
                         {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" true "id" .id) -}}
-                        {{- partial "partials/navbar-mode.html" (dict "size" $size "collapsed" false "id" .id) -}}
                     {{- end -}}
 
                     <!-- Insert modal search button -->

@@ -26,8 +26,8 @@
     {{- $group := .group -}}
     {{- $data := .menu -}}
 
-    {{- $doc_slug := $group.title | urlize -}}
-    {{- $href := or $group.link (printf "%s/" (relLangURL (path.Join $baseURL $doc_slug))) -}}
+    {{- $doc_slug := urls.JoinPath  $baseURL ($group.title | urlize) -}}
+    {{- $href := or $group.link (partial "utilities/GetStaticURL" (dict "url" $doc_slug)) -}}
     {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
 
     <li class="mb-1">
@@ -71,11 +71,14 @@
     {{- $level := .level -}}
     {{- $baseURL := .baseURL -}}
     {{- $title := .title -}}
-    {{- $href := .href -}}
     {{- $data := .menu -}}
+    {{ $href := "" }}
 
-    {{- $doc_slug := $title | urlize -}}
-    {{- $href := or $href (printf "%s/" (relLangURL (path.Join $baseURL $doc_slug))) -}}
+    {{ with .href }}
+        {{- $href = (partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL .))) -}}
+    {{ else }}
+        {{- $href =  partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL ($title | urlize))) -}}
+    {{ end }}
     {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
 
     {{ if eq $level 0}}

@@ -9,44 +9,49 @@
 (() => {
   'use strict'
 
+  const supportedThemes = ['auto', 'dark', 'light'];
+
+  // retrieves the currently stored theme from local storage (cookie)
   const storedTheme = localStorage.getItem('theme')
 
-  const getPreferredTheme = () => {
-    if (storedTheme) {
-      return storedTheme
-    }
-
+  // retrieves the theme preferred by the client, defaults to light
+  function getPreferredTheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
-  const setTheme = function (theme) {
-    if (theme === 'auto') {
-      document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+  // retrieves the current theme, either from local storage or client's preferences
+  function getTheme() {
+    if (storedTheme) {
+      return storedTheme
     } else {
-      document.documentElement.setAttribute('data-bs-theme', theme)
+      const preference = getPreferredTheme()
+      localStorage.setItem('theme', preference)
+      return preference
     }
   }
 
-  setTheme(getPreferredTheme())
-
-  const showActiveTheme = theme => {
-    const activeSelectors = document.querySelectorAll('.theme-icon-active')
-    const activeButtons = document.querySelectorAll(`[data-bs-theme-value="${theme}"]`)
-    if (activeButtons.length > 0) {
-      const activeIcon = activeButtons[0].querySelector('span')
-
-      document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-        element.classList.remove('active')
-      })
-
-      for (let i = 0; i < activeSelectors.length; ++i) {
-        activeSelectors[i].innerHTML = activeIcon.innerHTML
-      }
-
-      for (let i = 0; i < activeButtons.length; ++i) {
-        activeButtons[i].classList.add('active')
-      }
+  // applies and stores requested theme
+  function setTheme(theme) {
+    if (!supportedThemes.includes(theme)) {
+      theme = 'auto'
     }
+    localStorage.setItem('theme', theme)
+
+    if (theme === 'auto') {
+      document.documentElement.setAttribute('data-bs-theme', (getPreferredTheme()))
+    } else {
+      document.documentElement.setAttribute('data-bs-theme', theme)
+    }
+
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = (document.documentElement.getAttribute('data-bs-theme') === 'light')
+    })
+  }
+
+  // alternates the currently active theme
+  function toggleTheme() {
+    const target = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
+    setTheme(target)
   }
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -56,18 +61,32 @@
   })
 
   window.addEventListener('DOMContentLoaded', () => {
-    showActiveTheme(getPreferredTheme())
+    setTheme(getTheme())
+    const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
 
-    document.querySelectorAll('[data-bs-theme-value]')
-      .forEach(toggle => {
-        toggle.addEventListener('click', () => {
-          const theme = toggle.getAttribute('data-bs-theme-value')
-          localStorage.setItem('theme', theme)
-          setTheme(theme)
-          showActiveTheme(theme)
-        })
+    document.querySelectorAll('.ball').forEach(ball => {
+      ball.classList.add('notransition');
+    })
+    
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = light
+      chk.addEventListener('change', function () {
+        toggleTheme()
       })
+    })
+
+    document.querySelectorAll('.ball').forEach(ball => {
+      ball.offsetHeight; // flush css changes
+      ball.classList.remove('notransition');
+    })
   })
+
+  window.addEventListener('load', () => {
+    const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = light
+    })
+  });  
 })()
 
 {{- end -}}

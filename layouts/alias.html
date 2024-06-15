@@ -1,11 +1,12 @@
+{{ $lang := site.LanguageCode | default site.Language.Lang }}
 <!DOCTYPE html>
-<html{{ with site.LanguageCode | default site.Language.Lang }} lang="{{ . }}"{{ end }}>
+<html {{ with $lang }}lang="{{ . }}"{{ end }}>
   <head>
     <title>{{ .Permalink }}</title>
     <link rel="canonical" href="{{ .Permalink }}">
     <meta name="robots" content="noindex">
     <meta charset="utf-8">
     <noscript><meta http-equiv="refresh" content="0; url={{ .Permalink }}"></noscript>
-    <script src="/js/alias.js"></script>
+    <script src='{{ partial "utilities/GetStaticURL" (dict "url" "js/alias.js") }}'></script>
   </head>
 </html>
