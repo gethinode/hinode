@@ -222,6 +222,8 @@ github.com/gethinode/mod-utils/v2 v2.3.6 h1:Ta+WKc83sK9ZROKmUwS4pA32Qm0bQqoMmWHE
 github.com/gethinode/mod-utils/v2 v2.3.6/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
 github.com/gethinode/mod-utils/v2 v2.3.7 h1:FFsUPO7NBp9Bhjovf0Ki5hnDGfeMKV/3RNz1Qpv7+oQ=
 github.com/gethinode/mod-utils/v2 v2.3.7/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
+github.com/gethinode/mod-utils/v2 v2.3.8 h1:zAiDRCb3SsP9z6PUkCaiRLHOpqFhVf0xVhVOoTZNmAI=
+github.com/gethinode/mod-utils/v2 v2.3.8/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3 h1:H/qVR5O4BXjRjD+5PZB+r4ug2BSJ2Of4RtwOntd+OKo=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/nextapps-de/flexsearch v0.0.0-20240108021025-afd75f742f22 h1:re7L8FxbXQpnX8BgzkdUnDpsUmloGNyLmiy2ZCln8pg=
