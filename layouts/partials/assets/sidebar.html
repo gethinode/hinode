@@ -75,7 +75,11 @@
     {{ $href := "" }}
 
     {{ with .href }}
-        {{- $href = (partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL .))) -}}
+        {{ if hasPrefix . "http" }}
+            {{ $href = . }}
+        {{ else }}
+            {{- $href = (partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL .))) -}}
+        {{ end }}
     {{ else }}
         {{- $href =  partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL ($title | urlize))) -}}
     {{ end }}
