@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "com-cremedelacrm-web"
+  },
+  "targets": {
+    "com-cremedelacrm-web": {
+      "hosting": {
+        "com-cremedelacrm-dev": [
+          "com-cremedelacrm-dev"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
