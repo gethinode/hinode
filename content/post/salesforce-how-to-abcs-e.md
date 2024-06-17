@@ -1,26 +1,22 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-04-26T13:26:37-07:00",
-  "title": "Salesforce \"How To\" ABCs: E",
+  "title": 'Salesforce "How To" ABCs: E',
   "Slug": "salesforce-how-to-abcs-e",
   "description": "We're smack dab in the middle of the Spring '19 and Summer '19 Releases and, while that means there are a bunch of awesome new features and updates to familiarize ourselves with...",
   "tags": ["abcs", "data loader", "spring-19", "admin", "export", "data"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/salesforce-18-wheeler.jpeg"
-  }
+  "thumbnail": { "url": "/img/salesforce-18-wheeler.jpeg" },
 }
 ---
-
-
-{{< image src="/img/salesforce-18-wheeler.jpeg" title="Lpatop with dataloader and an 18 wheeler" >}}
 
 We're smack dab in the middle of the [Spring '19](https://medium.com/creme-de-la-crm/spring-19-release-the-final-countdown-1f7b24a1dc1) and [Summer '19 Releases](https://medium.com/creme-de-la-crm/new-release-test-drive-the-summer-19-sandbox-preview-4b307f78fb7f) and, while that means there are a bunch of awesome new features and updates to familiarize ourselves with, it also means the occasional long-ago learned Salesforce skill will sneak right out of our heads into the fog of the forgotten.
 
@@ -84,7 +80,7 @@ Now, choose the object you’d like to export. If you don’t see the object you
 
 {{< image src="/img/list-of-objects.jpeg" title="List of objects" >}}
 
-Once you’ve selected the object you want (for this example, we’ll select ‘Accounts’), select/name the CSV file and the location you’d like to export to. *Note: here you can create a new file or overwrite an existing one.*
+Once you’ve selected the object you want (for this example, we’ll select ‘Accounts’), select/name the CSV file and the location you’d like to export to. _Note: here you can create a new file or overwrite an existing one._
 
 {{< image src="/img/arrow-pointing-to-target.jpeg" title="Arrow pointing to target" >}}
 

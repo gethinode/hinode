@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: F",
   "Slug": "salesforce-how-to-abcs-f",
   "description": "With the Summer ’19 Release officially rolled out, your plate’s been packed with a ton of exciting new features.",
-  "tags": ["salesforce-org","salesforce-how-to-abcs","salesforce","salesforce-admin","how-to"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-org",
+      "salesforce-how-to-abcs",
+      "salesforce",
+      "salesforce-admin",
+      "how-to",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_tLe3mVRp8_UR_YuilTBJTw.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_tLe3mVRp8_UR_YuilTBJTw.jpeg" },
 }
 ---
+
 With the [Summer ’19 Release](https://medium.com/creme-de-la-crm/summer-19-release-highlights-back-to-the-classics-7b9abe9e6cf9) officially rolled out, your plate’s been packed with a ton of exciting new [features](https://medium.com/creme-de-la-crm/salesforce-summer-19-release-highlights-free-surveys-5e55e6c928be), [updates](https://medium.com/creme-de-la-crm/salesforce-summer-19-release-highlights-branding-enhancements-a65062bfcd3d), and [upgrades](https://medium.com/creme-de-la-crm/salesforce-summer-19-release-highlights-enhanced-related-lists-72656e1d436a)! But, practicing all that awesome new stuff can sometimes make it easy to forget the Salesforce skills you haven’t had to use in a while.
 Luckily, for times like that, there’s Google!
 In today’s post, we’ll continue our [alphabetic look](https://medium.com/tag/salesforce-how-to-abcs/archive) at the most commonly searched Salesforce tasks, so you can jog your memory and get back to work fast! This time, we’re looking at the letter “F”, as in “How to Find Your Org ID”.
