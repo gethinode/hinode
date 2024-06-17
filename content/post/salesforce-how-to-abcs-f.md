@@ -27,7 +27,7 @@ Let’s jump in!
 {{< image src="/img/1_P8f5q7G0apGBHlt4P79vzA.jpeg" title="Image" >}}
 
 To start, we’ll need to navigate to the Setup page. So click the cog in the top right corner of your org.
-{{< image src="/img/proxy/1_PPFrUEdq2Asx44LdibAUAg.jpeg" title="Image" >}}
+{{< image src="/img/1_PPFrUEdq2Asx44LdibAUAg.jpeg" title="Image" >}}
 
 And then click “Setup” in the dropdown menu.
 {{< image src="/img/1_vOR_DnjVJ67UFtI36fE6Nw.jpeg" title="Image" >}}

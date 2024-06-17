@@ -42,7 +42,7 @@
 
 # toml-docs-start home
 [home]
-    # sections = ["posts"]
+    # sections = ["post"]
     fullCover = false
     centerHeadline = false
     style = ""

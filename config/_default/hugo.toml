@@ -8,7 +8,7 @@ enableGitInfo = true
 # toml-docs-end main
 
 # additional settings
-baseURL = "https://example.com/"
+# baseURL = "https://example.com/"
 canonifyURLs = false
 enableEmoji = true
 enableRobotsTXT = true

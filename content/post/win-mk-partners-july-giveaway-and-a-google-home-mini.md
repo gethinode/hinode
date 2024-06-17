@@ -16,7 +16,7 @@
   },
   "layout": "single",
   "thumbnail": {
-    "url": "/img/max/1010/0_RNT40Obgw676XPMD.jpeg"
+    "url": "/img/0_RNT40Obgw676XPMD.jpeg"
   }
 }
 ---

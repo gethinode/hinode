@@ -16,7 +16,7 @@
   },
   "layout": "single",
   "thumbnail": {
-    "url": "/img/proxy/0_NxZc0bnI6G6_qnTi"
+    "url": "/img/0_NxZc0bnI6G6_qnTi"
   }
 }
 ---

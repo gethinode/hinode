@@ -33,7 +33,7 @@ No matter the occasion, visiting a new city always calls for a quick check on th
 ## The Agenda
 
 After Wednesday’s activities, the [agenda](https://www.texasdreamin.org/agenda.html) goes into full effect on Thursday, May 30th. The opening Keynote starts at 9 am and from there the event sessions, extended sessions, breakouts, and ongoing activities take place. If you need to update your headshot for the next interview, LinkedIn profile, or passport renewal then make sure to swing by the Headshot photo locations available each day.
-{{< image src="/img/max/1005/1_xnAUIbX5OarTwUDpkwboDw.png" title="Image" >}}
+{{< image src="/img/1_xnAUIbX5OarTwUDpkwboDw.png" title="Image" >}}
 
 
 ## Demo Jam

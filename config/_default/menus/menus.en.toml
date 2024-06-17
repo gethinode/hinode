@@ -11,19 +11,25 @@
 [[social]]
   name = "LinkedIn"
   pre = "fab linkedin"
-  url = "https://linkedin.com/"
+  url = "https://www.linkedin.com/company/creme-de-la-crm/"
+  weight = 10
+
+[[social]]
+  name = "Twitter"
+  pre = "fab twitter"
+  url = "https://twitter.com/cremedelacrm_"
   weight = 10
 
 [[social]]
   name = "GitHub"
   pre = "fab fa-github"
-  url = "https://github.com/"
+  url = "https://github.com/Creme-de-la-CRM/"
   weight = 20
 
 [[social]]
   name = "Medium"
   pre = "fab medium"
-  url = "https://medium.com/"
+  url = "https://medium.com/creme-de-la-crm"
   weight = 30
 
 # toml-docs-start sample-navigation

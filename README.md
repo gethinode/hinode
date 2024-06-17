@@ -1,3 +1,4 @@
+
 # Hugo Theme Hinode
 
 <!-- markdownlint-disable MD033 -->

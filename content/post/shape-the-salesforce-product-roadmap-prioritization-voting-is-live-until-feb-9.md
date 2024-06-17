@@ -16,7 +16,7 @@
   },
   "layout": "single",
   "thumbnail": {
-    "url": "/img/max/700/0_mJpnLEHxpheFv5Xc.jpeg"
+    "url": "/img/0_mJpnLEHxpheFv5Xc.jpeg"
   }
 }
 ---

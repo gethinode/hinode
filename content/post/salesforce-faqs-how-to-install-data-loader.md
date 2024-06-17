@@ -66,7 +66,7 @@ And then double-click the ‘install.command’ file (on PC, it’s the ‘insta
 {{< image src="/img/1_QnmHRZ7C2k5IRhstHNIYQA.jpeg" title="Image" >}}
 
 If you see an error like the one below about the file being from an unidentified developer, click ‘Ok’.
-{{< image src="/img/max/1002/1_NT8sLRrsKk1Lpqt9mWmnEg.jpeg" title="Image" >}}
+{{< image src="/img/1_NT8sLRrsKk1Lpqt9mWmnEg.jpeg" title="Image" >}}
 
 Then hold ‘Ctrl’, click the ‘install.command’ file again, and select ‘Open’.
 {{< image src="/img/1_h4AEO5cwc3m907_uow78Gg.jpeg" title="Image" >}}

@@ -36,7 +36,7 @@ Create the Dynamic List (in Prospects -&gt; Segmentation Lists -&gt; “+ Add L
 {{< image src="/img/1_s_rgDAglQmDVJ_EnD8iGNw.png" title="Image" >}}
 
 Check the “Dynamic List” Checkbox.
-{{< image src="/img/max/1016/1_yF_nhb_HxfOyjpmEuSoIhg.png" title="Image" >}}
+{{< image src="/img/1_yF_nhb_HxfOyjpmEuSoIhg.png" title="Image" >}}
 
 Set Your Rules and Run.
 {{< image src="/img/1_5zSGw1Qmp8JhG0pcpkN9_w.png" title="Image" >}}
@@ -62,7 +62,7 @@ Now this looks a bit more familiar. Set your filter criteria like you would set 
 {{< image src="/img/1_1zekHCLL0HL7kljHIdssTA.png" title="Image" >}}
 
 Give your new Data Extension a name you’ll recognize, put it in the appropriate folder, etc…
-{{< image src="/img/max/1003/1_2rmUMX59BKYSZUEYfOkI9Q.png" title="Image" >}}
+{{< image src="/img/1_2rmUMX59BKYSZUEYfOkI9Q.png" title="Image" >}}
 
 And now you have a Data Extension you can use in Your Email or Journey! And, just like a Dynamic List, when they enter the list, by meeting the criteria, they can be sent straight into the appropriate journey!
 Congratulations! You just created a Dynamic List in Marketing Cloud!
