@@ -1,26 +1,22 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-11-08T14:29:39-07:00",
-  "title": "Salesforce \"How To\" ABCs: G",
+  "title": 'Salesforce "How To" ABCs: G',
   "Slug": "salesforce-how-to-abcs-g",
   "description": "With the time change behind us, there’s a good chance you’re reading this basked in the light of your computer screen as the inky blackness of early-afternoon seeps between your curtains...",
   "tags": ["salesforce", "security", "token", "whitelist", "admin", "how to"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/laptop-with-glasses-and-plant.jpeg"
-  }
+  "thumbnail": { "url": "/img/laptop-with-glasses-and-plant.jpeg" },
 }
 ---
-
-
-{{< image src="/img/laptop-with-glasses-and-plant.jpeg" title="Laptop with glasses and a plant" >}}
 
 With the time change behind us, there’s a good chance you’re reading this basked in the light of your computer screen as the inky blackness of early-afternoon seeps between your curtains. But while we watch, helplessly, our days dragged deeper into the ever-expanding realm of night, the most common [Salesforce](https://www.salesforce.com/products/) queries know no rest. Fields still need to be created, users activated, passwords reset, and so we’re back with another (softly-lit) installment of our Salesforce “How to” ABCs! The series where we scour google for the most-commonly searched Salesforce help requests, letter by letter, to help make our fellow-users’ days a little bit easier.
 

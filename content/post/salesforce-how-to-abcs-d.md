@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,21 +8,28 @@
   "title": "Salesforce “How To” ABCs: D",
   "Slug": "salesforce-how-to-abcs-d",
   "description": "How to Delete a User.",
-  "tags": ["how-to","salesforce-how-to-abcs","salesforce-admin","salesforce-users","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "how-to",
+      "salesforce-how-to-abcs",
+      "salesforce-admin",
+      "salesforce-users",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_2qzXta0lmRJ0mnefgcAhdQ.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_2qzXta0lmRJ0mnefgcAhdQ.jpg" },
 }
 ---
+
 Like the Library of Alexandria, the Salesforce ecosystem contains an [unmatched collection](https://www.salesforce.com/services/learn/overview/) of knowledge, insight, and history. And, like the ill-fated library, it can sometimes feel like all of the handy, practical knowledge that you’ve acquired over the years has disappeared. Gone in a puff of smoke.
 But you have something the ancient Alexandrians didn’t — Google!
-When the never-ending supply of new, helpful [Salesforce tips and tricks](https://trailhead.salesforce.com/?sfdc_modal=trailhead-welcome&amp;utm_source=sfdc&amp;utm_medium=web-landing-page&amp;utm_campaign=trailhead_corp&amp;d=7010M000000NvUW) pushes something more basic out of your brain you can turn to the web and refresh your memory.
+When the never-ending supply of new, helpful [Salesforce tips and tricks](https://trailhead.salesforce.com/?sfdc_modal=trailhead-welcome&utm_source=sfdc&utm_medium=web-landing-page&utm_campaign=trailhead_corp&d=7010M000000NvUW) pushes something more basic out of your brain you can turn to the web and refresh your memory.
 Today, we’ll continue our journey through the most commonly forgotten (and then searched) tasks with another installment of the [Salesforce “How To” ABCs](https://medium.com/tag/salesforce-how-to-abcs/latest)! This time it’s ‘D’ as in “How to Delete a User”.
 Let’s get started!
 {{< image src="/img/1_8KwaKw2dx5FB_3ZTnjijpQ.jpeg" title="Image" >}}
@@ -60,6 +67,6 @@ And you’re all set! You’ll still the user on your list of users, but you’l
 {{< image src="/img/1_ilPTipILIBJzwgiS_4lFGg.jpeg" title="Image" >}}
 
 Congratulations your user’s been deactivated!
-Just a heads up, while that user will no longer count toward’s your org’s available licenses, if you’re not adding a new user and want to instead reduce your license count you’ll still need to reach out to your Salesforce rep — removing users won’t automatically reduce your bill accordingly. And here’s a [helpful list](https://help.salesforce.com/articleView?id=users_deactivate_considerations.htm&amp;type=5) with a few other things to consider when deactivating accounts.
+Just a heads up, while that user will no longer count toward’s your org’s available licenses, if you’re not adding a new user and want to instead reduce your license count you’ll still need to reach out to your Salesforce rep — removing users won’t automatically reduce your bill accordingly. And here’s a [helpful list](https://help.salesforce.com/articleView?id=users_deactivate_considerations.htm&type=5) with a few other things to consider when deactivating accounts.
 If you still have questions, would like help managing your org, or want to learn more about best-practices regarding user-management, [drop us a line](https://www.mkpartners.com/article/contact/contact) — we’re happy to help!
 As always, follow us here for more Salesforce tips, tricks, and “How to” ABCs! And in the meantime, keep working hard smart and happy. We’ll see you in the cloud!

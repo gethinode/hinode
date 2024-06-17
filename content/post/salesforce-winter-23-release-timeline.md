@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,16 +9,15 @@
   "Slug": "salesforce-winter-23-release-timeline",
   "description": "Dreamforce is on the horizon, pumpkin spice is back at Starbucks, and the sun is spending less and less time in the sky each day which can…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_CRU2ARBJxwGbjCphONH80w.webp"
-  }
+  "thumbnail": { "url": "/img/1_CRU2ARBJxwGbjCphONH80w.png" },
 }
 ---
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,19 +9,17 @@
   "Slug": "winter-22-release-highlights-improved-ux-increased-adoption-and-fewer-mis-clicks",
   "description": "Dreamforce is right around the corner and, while Salesforce’s huge annual event is soaking up the spotlight, there’s something else on the…",
   "tags": ["dreamforce", "winter22"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_9InVJ19weTx43bnshtkT-Q.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_9InVJ19weTx43bnshtkT-Q.jpeg" },
 }
 ---
-
 
 {{< image src="/img/1_9InVJ19weTx43bnshtkT-Q.jpeg" >}}
 
@@ -41,7 +39,7 @@ With Winter ’22, whether you’re rolling out a new page layout, new process, 
 
 Explain intricacies, complexities, and best-practices tied to element-specific prompts, right on your users’ pages. So no matter how overwhelmed they were by all the orientation materials, you can be sure that on day 1 they’ll hit the platform running and be able to keep up with their teams.
 
-{{< image src="/img/imrpoved-ux-winter-22-release.png" >}}
+{{< image src="/img/improved-ux-winter-22-release.png" >}}
 
 Accessible from ‘Setup’, the targeted prompts also give app designers and admins another tool to ensure that new systems are used the right way, right from the start. Because demos, meetings, handbooks, etc… are helpful — but there’s nothing like something right on the screen reminding you exactly how to use that “field” or what the next step (or two, or three) in the process are going to look like.
 
@@ -57,7 +55,7 @@ Previously, when you created in-app guidance and assigned it to a record page wi
 
 Now, you’ll no longer have to choose! And your users never have to go without a gentle reminder on those less-frequent use-cases. Again, improving understanding, simplifying the UX, reducing clicks, and driving adoption.
 
-{{< image src="/img/imrpoved-ux-winter-22-release2.png" >}}
+{{< image src="/img/improved-ux-winter-22-release2.png" >}}
 
 Any time you can reduce the number of clicks required for your users, without sacrificing understanding or cross-team consistency, you’re going to reap big benefits, and that’s what makes both of these improvements so noteworthy.
 

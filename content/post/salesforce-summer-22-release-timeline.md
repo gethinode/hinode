@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "salesforce-summer-22-release-timeline",
   "description": "TrailblazerDX is behind us, Midwest Dreamin’ is on the horizon, and the steadily rising temps on the thermometer all point to one thing —…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_CyEQhMgtq0MuKgIOa5QhKQ.webp"
-  }
+  "thumbnail": { "url": "/img/1_CyEQhMgtq0MuKgIOa5QhKQ.png" },
 }
 ---
+
 TrailblazerDX is behind us, Midwest Dreamin’ is on the horizon, and the steadily rising temps on the thermometer all point to one thing — the Salesforce Summer ’22 release is on the way! As always, we’ll be peppering the lead-up to launch with another round of [Release Highlights](https://medium.com/creme-de-la-crm/tagged/release-highlights) posts to show-off our picks for the most-anticipated updates, upgrades, and new features, and today we’ll be talking through the timeline so you can be sure to not miss a thing in this release cycle.
 
 Let’s dive in!

@@ -1,26 +1,31 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-02-12T10:26:39-07:00",
-  "title": "Salesforce \"How To\" ABCs: H",
+  "title": 'Salesforce "How To" ABCs: H',
   "Slug": "salesforce-how-to-abcs-h",
   "description": "How to Hide Fields in Salesforce...",
-  "tags": ["salesforce", "hidden", "hide", "fields", "admin", "tutorial", "page layout"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "tags":
+    [
+      "salesforce",
+      "hidden",
+      "hide",
+      "fields",
+      "admin",
+      "tutorial",
+      "page layout",
+    ],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/laptop-with-coffee-and-plant.jpeg"
-  }
+  "thumbnail": { "url": "/img/laptop-with-coffee-and-plant.jpeg" },
 }
 ---
-
-
-{{< image src="/img/laptop-with-coffee-and-plant.jpeg" title="Laptop with Salesforce open and a cup of coffee" >}}
 
 As we drift gently into another Spring, our spirits buoyed by the daily-increase in our allotted daylight, our rekindled ambitions reflected in the colorful buds of future flowers bursting against the bleary backdrop that too-long blanketed our Wintery world, admins everywhere find themselves shaking off the holiday haze and googling those things that “they definitely, definitely knew how to do just a few months ago”.
 
@@ -96,7 +101,7 @@ Now click “Save”
 
 And you’re all set, the field is now hidden from the page layout!
 
-*(Note: You can’t remove “required” fields, they’ll always have to be displayed on edit and create).
+\*(Note: You can’t remove “required” fields, they’ll always have to be displayed on edit and create).
 
 ### “Hiding” Fields from Users or Profiles
 
@@ -140,7 +145,7 @@ Click "Save"
 
 And you’re all set! Any users assigned to that profile will no longer see the field when they access a record on that object!
 
-*(Note: If you’re trying to hide several fields at once, there is a more convenient method using the Enhanced Profile User Interface that we’ll tackle in an upcoming post).*
+_(Note: If you’re trying to hide several fields at once, there is a more convenient method using the Enhanced Profile User Interface that we’ll tackle in an upcoming post)._
 
 ### Use Record Types to Hide an Irrelevant Field
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,22 +9,17 @@
   "Slug": "salesforce-how-to-abcs-k",
   "description": "How to Know Which Page Layout is Used",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_exp-4vf61bkxbR-rqEGxAA.webp"
-  }
+  "thumbnail": { "url": "/img/1_exp-4vf61bkxbR-rqEGxAA.webp" },
 }
 ---
-
-How to Know Which Page Layout is Used
-
-{{< image src="/img/1_exp-4vf61bkxbR-rqEGxAA.webp">}}
 
 With less than two weeks to go, Trailblazers everywhere are getting ready for Dreamforce ’22! And, after all those sessions, keynotes, and feature reveals, when they get back to work on Monday many will find themselves googling things they “swore they knew how to do, even just three months ago”. That makes this the perfect time for another installment of our [Salesforce “How to” ABCs](https://medium.com/creme-de-la-crm/tagged/salesforce-how-to-abcs)! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help trailblazers find the answers they’re looking for fast!
 

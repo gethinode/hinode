@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: C",
   "Slug": "salesforce-how-to-abcs-c",
   "description": "How to Create a Dashboard.",
-  "tags": ["dashboard","how-to","salesforce-dashboard","salesforce","salesforce-how-to-abcs"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "dashboard",
+      "how-to",
+      "salesforce-dashboard",
+      "salesforce",
+      "salesforce-how-to-abcs",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_jeAOzGrWZnhntQ8OGUIYrA.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_jeAOzGrWZnhntQ8OGUIYrA.jpg" },
 }
 ---
+
 [Salesforce](https://www.salesforce.com/) can seem huge. It’s powerful, flexible, and always growing, always improving. With so many [products](https://www.salesforce.com/products/), features, [releases](https://medium.com/creme-de-la-crm/spring-19-release-the-final-countdown-1f7b24a1dc1), and updates, it’s easy to forget how to do some of the things that seemed so simple in the first weeks of your implementation.
 In today’s post, we’ll continue our trek through the most common (and most commonly forgotten) Salesforce tasks — it’s another installment of the [Salesforce “How to” ABCs](https://medium.com/tag/salesforce-how-to-abcs/latest)!
 For the letter “C” we’ll be covering how to create a dashboard, so you can keep an eye on all of your important metrics at-a-glance. Let’s jump in!

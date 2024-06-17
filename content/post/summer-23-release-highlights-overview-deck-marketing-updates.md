@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "summer-23-release-highlights-overview-deck-marketing-updates",
   "description": "Marketing Cloud and Account Engagement",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_KK4SIEKibyDpQMl1S6uELQ.webp"
-  }
+  "thumbnail": { "url": "/img/1_KK4SIEKibyDpQMl1S6uELQ.png" },
 }
 ---
-Marketing Cloud and Account Engagement
-
-{{< image src="/img/1_KK4SIEKibyDpQMl1S6uELQ.webp">}}
 
 With a bit under 2 weeks before the last orgs are live on Summer ’23, if you haven’t started prepping your users on what to expect, you’ll want to get started ASAP! Luckily, the Summer ’23 Overview Deck is designed to help you do just that!
 

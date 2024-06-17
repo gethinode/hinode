@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,38 +8,45 @@
   "title": "Salesforce “How To” ABCs: B",
   "Slug": "salesforce-how-to-abcs-b",
   "description": "How to Build a Report.",
-  "tags": ["salesforce","report","how-to","salesforce-reports","salesforce-how-to-abcs"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "report",
+      "how-to",
+      "salesforce-reports",
+      "salesforce-how-to-abcs",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_j3a6nhGfCBQFeoa79A2Q8Q.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_j3a6nhGfCBQFeoa79A2Q8Q.jpg" },
 }
 ---
+
 We know how it is. You can do so much with Salesforce that sometimes all the awesome new tips and tricks you’re picking up push something else right back out of your brain. You flip through your implementation and training notes, double check the documentation, try to track down that trailhead you remember doing — and then ultimately turn to Google.
 In the **Salesforce “how to” ABCs** series, we run through the most-commonly searched questions to help you (and the rest of us) find those answers fast. Today we’ll tackle the letter ‘B’: How to Build a Report!
 Let’s get started!
-{{< image src="/img/1_l2n9pKGjrhcUuZ9gqxR9Ng.jpeg" title="Image" >}}
+{{< image src="/img/1_l2n9pKGjrhcUuZ9gqxR9Ng.jpg" title="Image" >}}
 
 Today, we’ll be walking through building an opportunity report, but the technique will be the same whether you need to report on leads, accounts, activities, or anything else!
-We’ll also assume that you already have the [necessary permissions](https://help.salesforce.com/articleView?id=reports_custom.htm&amp;type=5) to create custom reports. If not, just reach out to your admin and let them know you’d like to get started diving into the data for yourself!
+We’ll also assume that you already have the [necessary permissions](https://help.salesforce.com/articleView?id=reports_custom.htm&type=5) to create custom reports. If not, just reach out to your admin and let them know you’d like to get started diving into the data for yourself!
 
 ## Building a Report
 
 First up, navigate to the Reports tab.
-{{< image src="/img/1_pVs7Mm8JWR6g_X_0Ovlo0A.jpeg" title="Image" >}}
+{{< image src="/img/1_pVs7Mm8JWR6g_X_0Ovlo0A.jpg" title="Image" >}}
 
 If you don’t have a Reports tab, you can find Reports in the App Launcher by clicking the launcher’s 3x3 tile in the top left, and then scrolling down to “Reports” (or typing it into the search bar).
-{{< image src="/img/1_3zcPAJpcL0fp4zlqVfAPOg.jpeg" title="Image" >}}
+{{< image src="/img/1_3zcPAJpcL0fp4zlqVfAPOg.jpg" title="Image" >}}
 
-{{< image src="/img/1_s7Vj5oS6gKg90I3uiXMczA.jpeg" title="Image" >}}
+{{< image src="/img/1_s7Vj5oS6gKg90I3uiXMczA.jpg" title="Image" >}}
 
 That’ll land you on your reports page. Now, click “New Report” in the top right.
-{{< image src="/img/1_s_PB8ZniIk0ii0vJQTiW_Q.jpeg" title="Image" >}}
+{{< image src="/img/1_s_PB8ZniIk0ii0vJQTiW_Q.jpg" title="Image" >}}
 
 That will pop open the “Choose Report Type” window. Simply enter your desired report type in the search bar and select it — in this case we’ll search and select “Opportunities”.
 {{< image src="/img/1_geIT147Onteuw3caU5LOZg.jpeg" title="Image" >}}
@@ -63,11 +70,11 @@ Above your columns on the left, you’ll see your “Groups” listed. This is w
 Lastly, above “Groups” you’ll see the tabs to switch between the Outline view (where we are currently), and the Filter view (where you’ll be able to limit which data is pulled into the report).
 {{< image src="/img/1_XTDDccLXQJPUSQfNPK3igw.jpeg" title="Image" >}}
 
-
 ## Filters
 
 And by now you’ve likely noticed that our preview pane is pretty empty.
 Luckily, Salesforce makes it clear why:
+
 <pre>No records returned. Try changing report filters:</pre><pre> - Set the Close Date filter to All Time.<br> - Edit other filters in the filter panel.</pre>{{< image src="/img/1_maUUu2_DUO7HQym1CsWZmA.jpeg" title="Image" >}}
 
 There’s a filter limiting the data our report is pulling in. To eliminate the filter, either click “All Time”…
@@ -95,7 +102,6 @@ Navigate back to the Outline tab by clicking “Outline” in the top left.
 {{< image src="/img/1_cxzSj1yeUCM9KO74tqzCeg.jpeg" title="Image" >}}
 
 {{< image src="/img/1_Qgc29dJq86UPpBKJR8kGVQ.png" title="Image" >}}
-
 
 ## Columns
 

@@ -20,7 +20,7 @@ summaryLength = 20
 ignoreErrors = ["error-remote-getjson"]
 
 # toml-docs-start timeout
-timeout = "180s"
+timeout = "240s"
 # toml-docs-end timeout
 
 # toml-docs-start language

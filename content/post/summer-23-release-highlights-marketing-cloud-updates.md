@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "summer-23-release-highlights-marketing-cloud-updates",
   "description": "CloudPages and Content Builder Changes",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_bijWgglvvBVggGj6OoT_8A.webp"
-  }
+  "thumbnail": { "url": "/img/1_bijWgglvvBVggGj6OoT_8A.png" },
 }
 ---
-CloudPages and Content Builder Changes
-
-{{< image src="/img/1_bijWgglvvBVggGj6OoT_8A.webp">}}
 
 For two weeks we’ve been exploring the [Release Highlights Module](https://trailhead.salesforce.com/content/learn/modules/summer-23-release-highlights) to see what new updates and features are available across all industries, and poring over the [Feature Matrix](https://trailhead.salesforce.com/trailblazer-community/feed/0D54S00000Plvm5SAB) so you don’t have! And now, with so much content available (and less than a week before these updates get deployed to organizations all over the world) let’s continue our deep dive into the most impactful features from a day-to-day perspective.
 

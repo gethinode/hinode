@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,16 +9,15 @@
   "Slug": "slack-app-highlights-the-chatgpt-app",
   "description": "As the sun makes its final celestial crossing in March and, with it, draws another calendrical Q1 to a close, there can be little doubt…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_8USkpFgcwhUH1aDVRwjBPw.webp"
-  }
+  "thumbnail": { "url": "/img/1_8USkpFgcwhUH1aDVRwjBPw.jpg" },
 }
 ---
 

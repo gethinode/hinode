@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,22 +9,17 @@
   "Slug": "summer-23-release-highlights-clone-lightning-apps",
   "description": "IN-BLOG EXTRA: A Feature to Avoid",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_2HU2EBlfV9h5rLDjPE-MZQ.webp"
-  }
+  "thumbnail": { "url": "/img/1_2HU2EBlfV9h5rLDjPE-MZQ.jpg" },
 }
 ---
-
-IN-BLOG EXTRA: A Feature to Avoid
-
-{{< image src="/img/1_2HU2EBlfV9h5rLDjPE-MZQ.webp">}}
 
 It’s officially June and we’re barely over a week away from the last (and largest) Summer ’23 Release Weekend! You’re coming down to the wire on your [last chance to read, prep](https://medium.com/creme-de-la-crm/releasehighlights/home), test, and try all of the new features, updates, and upgrades before they hit production.
 
@@ -43,6 +38,7 @@ For in-house admins, particularly those whose Salesforce responsibilities sit al
 And, for those with partners or consultants doing their admin, this will be a budget savings as well as a time savings because that reduction in billable hours required means a smaller invoice at the end of the month (or more time to really build out the “nice to haves” from your design meetings).
 
 [According to the release notes](https://help.salesforce.com/s/articleView?id=release-notes.rn_customization_general_clone_app.htm&release=244&type=5):
+
 > “To quickly create a custom Lightning app based on an existing custom app, use the Clone action in the App Manager. As you progress through the Clone application wizard, you can configure the app details, app options, utility bar and more. You can also use the Quick Save option at any step and skip the rest to copy the configuration as is. This feature is available only for custom Lightning apps. It isn’t available for standard, connected, managed, community, or classic apps.”
 
 We can’t wait to see this in orgs everywhere!
@@ -52,6 +48,7 @@ We can’t wait to see this in orgs everywhere!
 Apologies for the scary heading, but this cryptic release notes has us cautiously ringing the admin alarms.
 
 Veteran release note readers will recognize the title “[Keep Working with Tab-Focused Dialogs](https://help.salesforce.com/s/articleView?id=release-notes.rn_console_dialogs.htm&release=244&type=5)”, in fact we may have covered it in the past in regards to in-app user support and UX, but Summer ’23 has appended an eye-catching (“Release Update)” to that title and the [following, somewhat spooky, text beneath it](https://help.salesforce.com/s/articleView?id=release-notes.rn_console_dialogs.htm&release=244&type=5):
+
 > This release update has been postponed indefinitely and not enforced in its present form. Don’t enable it.
 
 There’s no indication what will happen if an admin does enable it and we’d like to think it won’t be anything irreversible or overly dramatic but, to err on the side of caution, we recommend avoiding flipping that switch until we get the go ahead from the platform.

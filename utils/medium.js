@@ -53,7 +53,7 @@ const scrapeFromRSS = async () => {
   let previousPostMap = JSON.parse(PREVIOUS_POSTS_BODY);
   // const ENDPOINT = 'https://medium.com/feed/creme-de-la-crm'
   const ENDPOINT =
-    "https://medium.com/feed/creme-de-la-crm/tagged/silicon valley";
+    "https://medium.com/feed/creme-de-la-crm/tagged/salesforce integration";
   // let res = await utils.callOut({method:"get", url:ENDPOINT});
   const DATA = await parse(ENDPOINT);
   // console.log("DATA",DATA);

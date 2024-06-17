@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,22 +9,17 @@
   "Slug": "salesforce-how-to-abcs-j",
   "description": "How to Join Reports",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_Od818aUeJhXMfN3gm-GrEw.webp"
-  }
+  "thumbnail": { "url": "/img/1_Od818aUeJhXMfN3gm-GrEw.webp" },
 }
 ---
-
-How to Join Reports
-
-{{< image src="/img/1_Od818aUeJhXMfN3gm-GrEw.webp">}}
 
 As we are close to wrapping up Summer ’22 and Trailblazers everywhere are getting ready for Dreamforce ’22, many will find themselves googling things they “swore they knew how to do, even just six months ago”. That makes this the perfect time for another installment of our [Salesforce “How to” ABCs](https://medium.com/tag/salesforce-how-to-abcs/archive)! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help trailblazers find the answers they’re looking for fast!
 

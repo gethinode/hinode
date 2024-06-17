@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,16 +9,15 @@
   "Slug": "release-highlights-sign-up-for-your-summer-23-pre-release-org",
   "description": "This Summer’s set to be packed with highly-anticipated releases: Barbie, Oppenheimer, and, of course, the Salesforce Summer ’23 Release!",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_IAlhqwjBq1v8UjndoE2rKQ.webp"
-  }
+  "thumbnail": { "url": "/img/1_IAlhqwjBq1v8UjndoE2rKQ.png" },
 }
 ---
 
