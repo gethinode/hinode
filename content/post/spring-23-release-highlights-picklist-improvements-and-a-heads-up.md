@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "spring-23-release-highlights-picklist-improvements-and-a-heads-up",
   "description": "As we continue our countdown to the Salesforce Spring ’23 release, we’re once again peppering the lead-up to launch with our picks for the…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_vnLx_XwGbzkxUNyj4AjPHg.webp"
-  }
+  "thumbnail": { "url": "/img/1_vnLx_XwGbzkxUNyj4AjPHg.png" },
 }
 ---
+
 As we continue our [countdown to the Salesforce Spring ’23 release](https://medium.com/creme-de-la-crm/salesforce-spring-23-release-timeline-45f1c9cc11ed), we’re once again peppering the lead-up to launch with our picks for the most exciting updates, upgrades, and improvements heading to orgs everywhere! That’s right, it’s another round of [Release Highlights](https://medium.com/tag/release-highlights) — and this time we’re taking a look at some changes to Picklists that will have admins cheering (and one that might be a bit of a headache if you’ve been avoiding best practices).
 
 Let’s dive in!
@@ -33,11 +33,11 @@ And, for those with partners or firms doing the admin work in Salesforce, that�
 
 This was [previously a Beta feature](https://help.salesforce.com/s/articleView?id=sf.fields_picklist_bulk_manage_picklist_values.htm&type=5), but it’s going wide with the release (aka, “Generally Available”) and to access it, all you have to do is:
 
-*Go to the custom field definition page for the picklist field.*
+_Go to the custom field definition page for the picklist field._
 
-*In the Values and Inactive Values sections, there's a checkbox next to each picklist value.*
+_In the Values and Inactive Values sections, there's a checkbox next to each picklist value._
 
-*You can select multiple values and use one of the new buttons: **Delete Selected**, **Deactivate Selected**, **Replace Selected**, or **Activate Selected**.*
+_You can select multiple values and use one of the new buttons: **Delete Selected**, **Deactivate Selected**, **Replace Selected**, or **Activate Selected**._
 
 And you’ll be saving time in no time!
 
@@ -47,9 +47,9 @@ This is another ([former) Beta feature](https://help.salesforce.com/s/articleVie
 
 All admins willl need to do is:
 
-*Head to the Inactive Values section of the picklist field, and click **Delete Unused Values**.*
+_Head to the Inactive Values section of the picklist field, and click **Delete Unused Values**._
 
-*After you delete unused values, if a picklist is unbound and the total number of inactive values falls below the limit, the picklist is set to bound!*
+_After you delete unused values, if a picklist is unbound and the total number of inactive values falls below the limit, the picklist is set to bound!_
 
 Easy peasy.
 

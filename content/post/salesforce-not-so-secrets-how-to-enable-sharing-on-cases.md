@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce (not so) Secrets: How to Enable Sharing on Cases",
   "Slug": "salesforce-not-so-secrets-how-to-enable-sharing-on-cases",
   "description": "Customer Experience is more important than ever.",
-  "tags": ["how-to","customer-experience","customer-service","salesforce","salesforce-productivity"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "how-to",
+      "customer-experience",
+      "customer-service",
+      "salesforce",
+      "salesforce-productivity",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_9XLbWI3kCElO_W3d33e98A.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_9XLbWI3kCElO-W3d33e98A.jpg" },
 }
 ---
+
 Customer Experience is more important than ever. [Effective CX ](https://www.salesforce.com/hub/service/everything-about-customer-experience-management/)bolsters customer satisfaction, retention, and drives future revenue growth. Ineffective CX is the fastest way to turn your customers into evangelists for the competition.
 And, as businesses adapt to the changing landscape of customer expectations, your audience’s tolerance for mediocre support is disappearing. Today’s customers expect (and deserve) responsive, personal, and engaging contact.
 Two of the most important variables when it comes to your customers’ experience are velocity and consistency. Today’s audience expects responses in minutes, not days — across a variety of mediums. And repeating their account number, address, and issue to each new point of contact is frustrating and a surefire way to encourage them to start looking elsewhere.

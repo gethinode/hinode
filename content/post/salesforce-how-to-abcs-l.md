@@ -35,7 +35,7 @@ Today’s letter is “L” as in, “How to Login As Another User”. Let’s d
 {{< image src="/img/0_x1MOlKtDJBDqx_fU" title="Image" >}}
 
 Next, go to the “Home” tab and click on “Security” to generate the drop-down menu below. From there select “Login Access Policies”.
-{{< image src="/img/0_r_2avQutbNnFcBeI" title="Image" >}}
+{{< image src="/img/0_r-2avQutbNnFcBeI.png" title="Image" >}}
 
 Within the login access policies window, enable “administrators can log in as any user”.
 {{< image src="/img/0_S_ESToG__ilUK_on" title="Image" >}}
@@ -59,7 +59,7 @@ Next, locate “Security Controls” and click to generate the drop-down list. T
 {{< image src="/img/0_ddk9IEH3MUvFVtV2" title="Image" >}}
 
 On the login access policies screen go ahead and enable “administrators can log in as any user”.
-{{< image src="/img/0_wRzGC0si_Q2Ksj8z" title="Image" >}}
+{{< image src="/img/0_wRzGC0si_Q2Ksj8z.png" title="Image" >}}
 
 Make sure to “save” as you’ll get a confirmation with the “changes saved”.
 {{< image src="/img/0_Ca12BbkNVxejE_CD" title="Image" >}}

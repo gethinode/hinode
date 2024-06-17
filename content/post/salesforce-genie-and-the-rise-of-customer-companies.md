@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "salesforce-genie-and-the-rise-of-customer-companies",
   "description": "Dreamforce marked the introduction of Salesforce Genie (and a rapid spike in Google searches).",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_UB2U0St4w0ixeyFoQLANQw.webp"
-  }
+  "thumbnail": { "url": "/img/1_UB2U0St4w0ixeyFoQLANQw.png" },
 }
 ---
-Dreamforce marked the introduction of Salesforce Genie (and a rapid spike in Google searches).
-
-{{< image src="/img/1_lusUtE4DcxHstWaTya9WWQ.webp">}}
 
 Like many new Salesforce offerings, the Dreamforce intro was packed with talking points about the platform’s potential, flexibility, and broad applicability — despite being a bit light on the nitty gritty details. That’s nothing new, but admins and devs everywhere have been waiting for the inevitable reveal of exactly what, how, and why Salesforce Genie is the future — and now we’re starting to see some glimpses of that.
 
@@ -59,9 +55,9 @@ Except when all that data lives in silos, can’t be molded into recognizable pa
 
 So how does Salesforce Genie Customer Data Cloud aim to solve that? Genie adds two powerful new capabilities to the Customer 360 experience Salesforce clients are aiming for:
 
-* Real-Time Data
+- Real-Time Data
 
-* Powerful Visualization and Data Recognition
+- Powerful Visualization and Data Recognition
 
 Genie promises to integrate all of an organizations disparate data sources into a central, easily understandable, and widely configurable customer profile that will reveal in real time a customer’s entire interaction with your brand, across media. Imagine unifying Sales, Support, Marketing, and more, across sites, apps, in stores, etc… to get a true understanding of what works and what doesn’t in your processes. Not to mention, what your customers have already seen and know when it comes time to recommend content or offerings.
 

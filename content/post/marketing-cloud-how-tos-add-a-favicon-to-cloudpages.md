@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "marketing-cloud-how-tos-add-a-favicon-to-cloudpages",
   "description": "When the ancient Greek philosophers used to debate about what it was, exactly, that made someone “Human” — they’d bounced between…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/woman-mac-sticky-notes.webp"
-  }
+  "thumbnail": { "url": "/img/1_OFrddLNi9q4ZTUJ5vKQMlg.jpg" },
 }
 ---
+
 When the ancient Greek philosophers used to debate about what it was, exactly, that made someone “Human” — they’d bounced between potential criteria and definitions, their scope ever-narrowing, but seemingly always harrowed by some new exception that disproved their rule.
 
 But that’s only because they didn’t have the internet yet. If they had, they’d have been able to quickly realize that a human is simply “someone who currently has too many tabs open on their browser”.
@@ -34,14 +34,14 @@ That’s also why no Landing Page, form, site, etc… is complete without one. B
 All you need is the image you’d like to use for your favicon, [this video](https://www.youtube.com/watch?v=wX0rDNyVn74), and this snippet of code:
 
 ```html
-<link rel="shortcut icon" type="image/png" href="YOUR_IMAGE_URL_HERE">
+<link rel="shortcut icon" type="image/png" href="YOUR_IMAGE_URL_HERE" />
 ```
 
 {{< youtube id="wX0rDNyVn74" >}}
 
 For the short version, give it a watch at 2x speed!
 
-For the really short version, add that snippet in the ``<head>`` tag of your pages HTML, and swap in the URL of your favicon where it says ‘YOUR_IMAGE_URL_HERE’ in the code snippet!
+For the really short version, add that snippet in the `<head>` tag of your pages HTML, and swap in the URL of your favicon where it says ‘YOUR_IMAGE_URL_HERE’ in the code snippet!
 
 And now your CloudPages finally have favicons of their very own!
 

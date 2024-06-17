@@ -61,7 +61,7 @@ Disadvantages
 
 Whether you’re utilizing Sales Cloud or starting from scratch, there are two additional options to consider. CPQ can streamline and personalize product and service offerings for sales teams, generating professional-looking quotes, proposals, contracts, and other documents. Meanwhile, Visualforce lets you create custom user interfaces for Salesforce applications to showcase data, engage with users, and generate a range of documents, such as PDFs and Excel spreadsheets.
 
-{{< image src="/img/1_DEaSfAjyEqjAnPuDr4RHxQ.webp">}}
+{{< image src="/img/1_DEaSfAjyEqjAnPuDr4RHxQ.png">}}
 _CPQ Quote Example_
 
 Disadvantages

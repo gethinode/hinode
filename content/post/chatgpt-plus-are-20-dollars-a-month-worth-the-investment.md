@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,22 +8,22 @@
   "title": "ChatGPT Plus? Are $20 Dollars A Month Worth The Investment?",
   "Slug": "chatgpt-plus-are-20-dollars-a-month-worth-the-investment",
   "description": "It was only a matter of time before a subscription model was put into motion..",
-  "tags": ["chatgpt","ai","artificial-intelligence","ai-tools","ai-business"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    ["chatgpt", "ai", "artificial-intelligence", "ai-tools", "ai-business"],
+  "author":
+    {
+      "name": Jessie Penaloza,
+      "title": Digital Marketing Coordinator,
+      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_ek9TCfC_blIGHhp6g7IZpw.png"
-  }
+  "thumbnail": { "url": "/img/1_ek9TCfC_blIGHhp6g7IZpw.png" },
 }
 ---
+
 ChatGPT represents a major breakthrough in the computer world, demonstrating the ability to process vast amounts of information in real-time. This is a significant accomplishment that adds to the question of how far we as individuals will continue to push the limits of technology. But before we get there, we need to assess if investing in such technology is worth the time. Especially since a new subscription model is now available to purchase.
 First made available to the public in November of 2022 it quickly gained widespread popularity, reaching 1 million users in its first week of release. As we approach the three-month mark since its launch, a subscription model has been introduced. The question remains, will people be willing to pay the monthly fee of $20 or the yearly fee of $240 for this upgrade? Let’s examine the features and benefits offered.
-{{< image src="/img/max/1022/1_rY_861arVo17zYXt_bJ54Q.png" title="Image" >}}
-
+{{< image src="/img/1_rY_861arVo17zYXt_bJ54Q.png" title="Image" >}}
 
 ## Available Even When Demand Is High
 

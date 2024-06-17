@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,22 +9,17 @@
   "Slug": "salesforce-document-generation-thats-better-than-competitor-c",
   "description": "Mambo Merge eliminates pain points one document at a time.",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_kMk9FJy1V6wyYIlnRZWgmw.webp"
-  }
+  "thumbnail": { "url": "/img/1_kMk9FJy1V6wyYIlnRZWgmw.png" },
 }
 ---
-
-Mambo Merge eliminates pain points one document at a time.
-
-{{< image src="/img/1_kMk9FJy1V6wyYIlnRZWgmw.webp">}}
 
 As a [Salesforce](https://www.salesforce.com/) administrator, developer, or consultant, generating documents is likely an essential part of your users’ day-to-day tasks. However, not all document-generation apps are created equal. [Mambo Merge](https://www.mambomerge.com/) is a unique app doc-gen app in that it not only helps you (and your users) create professional docs, right from Salesforce with the push of a button, but also helps save your org time and effort with setup, maintenance, and support compared to the competition!
 

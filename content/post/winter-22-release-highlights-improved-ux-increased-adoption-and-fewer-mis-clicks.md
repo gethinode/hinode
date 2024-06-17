@@ -17,11 +17,9 @@
       "jpeg": "/img/chris-stegall_128-128.jpeg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_9InVJ19weTx43bnshtkT-Q.jpeg" },
+  "thumbnail": { "url": "/img/1_9InVJ19weTx43bnshtkT-Q.jpg" },
 }
 ---
-
-{{< image src="/img/1_9InVJ19weTx43bnshtkT-Q.jpeg" >}}
 
 Dreamforce is right around the corner and, while Salesforce’s huge annual event is soaking up the spotlight, there’s something else on the horizon that’ll be a boon to orgs everywhere — the Winter ’22 Release! If you’re anything like me, your web browsers are currently aclutter with hundreds of tabs open to [the release notes](https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm&type=5&release=234), scouring for the most impactful, exciting, and long-awaited new features, updates, and upgrades heading to Salesforce.
 

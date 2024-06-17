@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "2-Minute Org Charts in Google Sheets",
   "Slug": "2-minute-org-charts-in-google-sheets",
   "description": "Everyone probably has their go-to application for creating stunning, readable organizational charts — but when you need to whip one up in...",
-  "tags": ["google-sheets","how-to","org-chart-software","google-workspace","org-charts"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "google-sheets",
+      "how-to",
+      "org-chart-software",
+      "google-workspace",
+      "org-charts",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_EoNHH_G7wrckz2YSRUmVHw.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_EoNHH_G7wrckz2YSRUmVHw.jpg" },
 }
 ---
+
 Everyone probably has their go-to application for creating stunning, readable organizational charts — but when you need to whip one up in a hurry it’s not always worth the effort of firing up Illustrator or your design software of choice. When you just need something presentable in a hurry, a placeholder perhaps, or any situation where the information and arrangement is more important than the final presentation, there’s a super speedy way to spin one up in [Google Sheets](http://sheets.google.com/)!
 Today we’ll walk through the sub-2-minute process and have you back to working on the meat of your presentation or proposal in no time. Let’s get started!
 First, enter the URL “[sheets.new](https://sheets.new/)” to launch a brand new Google Sheet (the Google Workspace equivalent of Excel).

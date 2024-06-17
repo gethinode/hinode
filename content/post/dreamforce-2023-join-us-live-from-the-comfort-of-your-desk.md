@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,23 +8,23 @@
   "title": "Dreamforce 2023: Join Us Live (From the Comfort of your Desk)!",
   "Slug": "dreamforce-2023-join-us-live-from-the-comfort-of-your-desk",
   "description": "Sit back, Tune-in, and Enjoy — right from your favorite chair.",
-  "tags": ["dreamforce","dreamforce-2023","salesforce-event","salesforce","df23"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    ["dreamforce", "dreamforce-2023", "salesforce-event", "salesforce", "df23"],
+  "author":
+    {
+      "name": Jessie Penaloza,
+      "title": Digital Marketing Coordinator,
+      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_J6RxfRvCRuN1JdKa_WBkaA.png"
-  }
+  "thumbnail": { "url": "/img/1_J6RxfRvCRuN1JdKa_WBkaA.png" },
 }
 ---
+
 The time has come to officially kick off [Dreamforce](https://www.salesforce.com/dreamforce/) 2023 taking place over in San Fransisco once again. Between Sep 12–14th there will be a HUGE emphasis on Artificial Intelligence (AI) so anticipate a lot of discussions around the topic as we are eager to learn more about this innovative technology.
 Join our [Mambo Merge](https://www.mambomerge.com/) and [MK Partners](https://www.mkpartners.com/) teams as they prepare a series of livestreams to keep those not able to attend up to date with the latest findings and highlights for each day. The series will begin with a kickoff each day in the morning then followed up with a recap later in the evening to cover all the findings.
 Get comfy, grab a snack, and get ready to tune in this week. You’re not gonna want to miss out.
-{{< image src="/img/max/1000/1_Jb64z5SMihB4d77IHO6X5Q.png" title="Image" >}}
-
+{{< image src="/img/1_Jb64z5SMihB4d77IHO6X5Q.png" title="Image" >}}
 
 ## Day 1 — September 12th
 

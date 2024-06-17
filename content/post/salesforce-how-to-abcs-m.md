@@ -54,13 +54,13 @@ Once the rule is set, now you can traverse your Sales Cloud Accounts records and
 {{< image src="/img/0_bSndBEbvWc3XcHJQ" title="Image" >}}
 
 First up, you will be prompted with all accounts which have been identified as Potential Duplicate Records. Simply select all that apply and proceed by pressing on “Next”.
-{{< image src="/img/0_m90ooDzFxbeNYj1K" title="Image" >}}
+{{< image src="/img/0_m90ooDzFxbeNYj1K.png" title="Image" >}}
 
 Go ahead and traverse each Account record fields to identify which data will be merged. Once all fields have been reviewed proceed by pressing “Next”.
-{{< image src="/img/0_0yJjnPWLqT5sYwGL" title="Image" >}}
+{{< image src="/img/0_0yJjnPWLqT5sYwGL.png" title="Image" >}}
 
 Once the merge is applied there is no way to undo this. Now is the time to go back if needed to double-check everything. Once you are ready proceed by confirming the “Merge”. (A dialogue box may appear confirming the merge was successful)
-{{< image src="/img/0_sABX9C_nlL02Wo3P" title="Image" >}}
+{{< image src="/img/0_sABX9C-nlL02Wo3P.png" title="Image" >}}
 
 Heading back to Accounts you will now notice the Potential Duplicates component no longer flags duplicates on this Account record.
 {{< image src="/img/0_bRDsf3xx7sxIJH6m" title="Image" >}}

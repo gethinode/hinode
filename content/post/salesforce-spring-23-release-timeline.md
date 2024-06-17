@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,16 +9,15 @@
   "Slug": "salesforce-spring-23-release-timeline",
   "description": "The new year is in full swing, the confetti’s been cleaned up, and we’re (mostly) used to writing “/23” on dates by now, and that all…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpeg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_BNkw0-xNPo5rr_rA4x-ecg.webp"
-  }
+  "thumbnail": { "url": "/img/1_BNkw0-xNPo5rr_rA4x-ecg.png" },
 }
 ---
 
@@ -26,7 +25,7 @@ The new year is in full swing, the confetti’s been cleaned up, and we’re (mo
 
 Let’s dive in!
 
-{{< image src="/img/1_UR02Opq_8QYZY7Nw3uRszg.webp">}}
+{{< image src="/img/1_UR02Opq_8QYZY7Nw3uRszg.jpg">}}
 
 ### Sandbox Previews Go Live — January 6
 
