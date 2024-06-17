@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: L",
   "Slug": "salesforce-how-to-abcs-l",
   "description": "How to Login as Another User.",
-  "tags": ["salesforce","salesforce-how-to","salesforce-admin","how-to","salesforce-how-to-abcs"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-how-to",
+      "salesforce-admin",
+      "how-to",
+      "salesforce-how-to-abcs",
+    ],
+  "author":
+    {
+      "name": Jessie Penaloza,
+      "title": Digital Marketing Coordinator,
+      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_NxZc0bnI6G6_qnTi"
-  }
+  "thumbnail": { "url": "/img/0_NxZc0bnI6G6_qnTi.png" },
 }
 ---
+
 Dreamforce has completed its 20th anniversary and with it, many trailblazers rejoiced in coming together once again since the pandemic first began. Lots of people were meeting for the first time in-person, while others were just happy to reconnect with friends and colleagues. With so much activity, news, and information filling the airwaves, many will find themselves googling things they “know they’ve done before — but it was a while ago”. And that makes this the perfect time for another installment of our Salesforce “How to” ABCs! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help trailblazers find the answers they’re looking for fast!
 Today’s letter is “L” as in, “How to Login As Another User”. Let’s dive in!
 {{< image src="/img/0_lw5D_C_dReB05AnP" title="Image" >}}

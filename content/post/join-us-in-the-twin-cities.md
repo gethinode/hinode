@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Join Us in the Twin Cities",
   "Slug": "join-us-in-the-twin-cities",
   "description": "Mambo Merge attends the next community event.",
-  "tags": ["salesforce-event","mambo-moves","mambo-merge","salesforce","midwest-dreamin"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "mambo-moves",
+      "mambo-merge",
+      "salesforce",
+      "midwest-dreamin",
+    ],
+  "author":
+    {
+      "name": Jessie Penaloza,
+      "title": Digital Marketing Coordinator,
+      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_aGn8y9aVF_yq8LxC"
-  }
+  "thumbnail": { "url": "/img/0_aGn8y9aVF_yq8LxC.jpg" },
 }
 ---
+
 Many trailblazers look forward to this annual meet and greet over at the Hyatt Regency in Minneapolis. [Midwest Dreamin’](https://www.midwestdreamin.com/) includes Speaker Sessions, its Keynote, DemoJam, and activities all around the venue. Make sure to stop by each sponsor booth to check off your “Sponsor Passport”, collect all stamps, and enter the MDW raffle.
 Speaking of sponsors, [Mambo Merge](https://www.mambomerge.com/) will be sponsoring once again, so get your Mambo groove on and get ready to participate in our #MamboMergePose. Join one of our staff members or ask a fellow trailblazer. Raise your hands, strike the pose, and shine away. Capture the moment, share, and get your MWD’23 passport stamped! And be sure to include the #MamboMergePose tag.
 {{< image src="/img/1_hnpS2tVzvXPKthom33p7ww.png" title="Image" >}}

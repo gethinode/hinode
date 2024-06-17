@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Shape the Salesforce Product Roadmap: Prioritization Voting is Live until Feb. 9!",
   "Slug": "shape-the-salesforce-product-roadmap-prioritization-voting-is-live-until-feb-9",
   "description": "We talk a lot about new Salesforce releases here. With three every year (Winter, Spring, and Summer) it feels like there’s always something “new and improved” right around the corner...",
-  "tags": ["salesforce-ideaexchange","prioritization","salesforce-release","salesforce","release-highlights"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-ideaexchange",
+      "prioritization",
+      "salesforce-release",
+      "salesforce",
+      "release-highlights",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_mJpnLEHxpheFv5Xc.jpeg"
-  }
+  "thumbnail": { "url": "/img/0_mJpnLEHxpheFv5Xc.jpg" },
 }
 ---
+
 We talk a lot about new [Salesforce releases](https://medium.com/tag/release-highlights/archive) here. With three every year (Winter, Spring, and Summer) it feels like there’s always something “new and improved” right around the corner. And, while the [IdeaExchange](https://trailblazer.salesforce.com/ideaSearch) has long existed as an outlet for influence — where users’ suggestions can be shared with the Salesforce community at large and voted up or down based on shared demand, it’s sometimes felt underpowered in terms of immediate impact.
 Sure, you could cast your vote, bookmark the idea to keep tabs on it, and hope every time you cracked open the newest release notes you’d find your dream addition somewhere on the list. But starting at the end of 2019, Salesforce began giving users even more say in the product and project roadmap — thanks to [prioritization voting](https://ideas.salesforce.com/s/prioritization)!
 {{< image src="/img/1_6kIes67Ysea9Ci4W1RenCA.png" title="Image" >}}

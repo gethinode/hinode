@@ -1,6 +1,6 @@
 # toml-docs-start main
 title = "Creme de la CRM"
-copyright = "Copyright © 2024 MK Partners."
+copyright = "Copyright © 2024 Creme de la CRM"
 description = "Your source for all things Salesforce"
 endorse = false
 paginate = 9

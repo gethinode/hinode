@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Marketing Cloud Account Engagement (Pardot): Completion Actions vs Engagement Studio",
   "Slug": "marketing-cloud-account-engagement-pardot-completion-actions-vs-engagement-studio",
   "description": "Marketing Cloud Account Engagement is a powerful tool for marketing and sales teams and it’s rich in functionality that, if your migrating over from a more shallow, essentially email-only platform like Constant Contact, MailChimp, etc…, is definitely worth a closer look. As tempting as it may be to simply replicate your current process in the new platform, if you make a straight 1:1 migration, you’ll be leaving a lot of potential on the table..",
-  "tags": ["marketing-cloud","pardot","account-engagment","salesforce","mc-account-engagement"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "marketing-cloud",
+      "pardot",
+      "account-engagment",
+      "salesforce",
+      "mc-account-engagement",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_wmT6IPHSndlO0_S3.jpeg"
-  }
+  "thumbnail": { "url": "/img/0_wmT6IPHSndlO0-S3.jpg" },
 }
 ---
+
 Marketing Cloud Account Engagement is a powerful tool for marketing and sales teams and it’s rich in functionality that, if your migrating over from a more shallow, essentially email-only platform like Constant Contact, MailChimp, etc…, is definitely worth a closer look. As tempting as it may be to simply replicate your current process in the new platform, if you make a straight 1:1 migration, you’ll be leaving a lot of potential on the table.
 One of [Marketing Cloud Account Engagement’s](http://www.pardot.com) tools most commonly-overlooked by new users and admins is Engagement Studio. From an outsider perspective the use-cases might seem obvious — to create adaptive, personalized journeys for your prospects, to ensure they engage with the material most relevant to them, their roles, and their position and potential in your pipeline.
 But, when you’re adapting an existing process into Marketing Cloud Account Engagement, it can be a bit trickier to determine what should be handled by Engagement Studio vs. what can be accomplished with Completion Actions on the relevant list email, landing page, or form (especially if Marketing Cloud Account Engagement is brand new to you). So today, we’ll take a look at one of the simplest ways to determine which tool’s the right one for the job.

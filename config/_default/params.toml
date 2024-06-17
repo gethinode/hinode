@@ -5,7 +5,7 @@
     enableDarkMode = true
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
-    endorse = true
+    endorse = false
     footerBelowFold = false
     loading = "lazy"
     breakpoint = "md"

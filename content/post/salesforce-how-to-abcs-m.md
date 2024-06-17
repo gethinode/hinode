@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: M",
   "Slug": "salesforce-how-to-abcs-m",
   "description": "How to Merge Accounts.",
-  "tags": ["salesforce","salesforce-how-to-abcs","salesforce-how-to","how-to","salesforce-admin"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-how-to-abcs",
+      "salesforce-how-to",
+      "how-to",
+      "salesforce-admin",
+    ],
+  "author":
+    {
+      "name": Jessie Penaloza,
+      "title": Digital Marketing Coordinator,
+      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_RcjkXqGtEN_bmgI3"
-  }
+  "thumbnail": { "url": "/img/0_RcjkXqGtEN_bmgI3.png" },
 }
 ---
+
 As we set off into November, [Salesforce Days](https://1.salesforce-partners.com/salesforcedays#/) has added its sessions for the month. That means that lots of trailblazers will begin an immersive experience designed to empower all types of learners and support partners and those new to the Ecosystem. Helping them grow and build a better understanding of the Salesforce platform. With so much new information up in the air, many will find themselves googling things they “sewar they used to know… but it’s been a while”. And that makes this the perfect time for another installment of our Salesforce “How to” ABCs! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help trailblazers find the answers they’re looking for fast!
 Today’s letter is “M” as in, “How to Merge Accounts”. Let’s dive in!
 {{< image src="/img/0_2E5_DnIS_72_8UHF" title="Image" >}}
@@ -34,7 +41,7 @@ Next up, we need to create and activate a duplication rule. Head over to the “
 Next, click on “New Rule” and select “Account” within the dropdown menu to build out the criteria to identify your duplication rule.
 {{< image src="/img/0_Lyvny6xtKHIdWNzM" title="Image" >}}
 
-Under Rule Details, you will need to define a “Rule Name”. Keep it simple but use the “Description” box if you need to provide additional information. Leave the “Record-Security Level” as is. Within “Actions”, keep everything as is, but make sure to check the “Report” box within “Action On Edit”. Lastly, but more importantly make sure to select “Standard Account Matching Rule” within Matching Rules. This setting tells Salesforce to do all the leg work and validate records using the predefined matching rules. If you would like to learn more about what’s (under the hood) check out the Salesforce [Standard Account Matching Rule](https://help.salesforce.com/s/articleView?id=sf.matching_rules_standard_account_rule.htm&amp;type=5) article. Once ready, save your rule settings to proceed.
+Under Rule Details, you will need to define a “Rule Name”. Keep it simple but use the “Description” box if you need to provide additional information. Leave the “Record-Security Level” as is. Within “Actions”, keep everything as is, but make sure to check the “Report” box within “Action On Edit”. Lastly, but more importantly make sure to select “Standard Account Matching Rule” within Matching Rules. This setting tells Salesforce to do all the leg work and validate records using the predefined matching rules. If you would like to learn more about what’s (under the hood) check out the Salesforce [Standard Account Matching Rule](https://help.salesforce.com/s/articleView?id=sf.matching_rules_standard_account_rule.htm&type=5) article. Once ready, save your rule settings to proceed.
 {{< image src="/img/0_5KjH0veB9O79dW7r" title="Image" >}}
 
 Review the settings of your rule before proceeding to activate it. You will have the option to Edit, Delete or Clone if needed. Before you can activate your rule you need to make sure the “Standard Account Matching Rule” is activated. If not, simply click on the link and hit the “Activate” button. A green check mark will appear next to it once activated. Lastly, once the matching rule is active you can proceed to “Activate” your duplication rule.

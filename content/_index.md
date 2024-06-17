@@ -1,12 +1,12 @@
 ---
-title: Salesforce Summer ’24 Release Dates
-description: Mark your calendars now so you don’t miss out on the Salesforce Summer ’24 Release!.
+title: Dreamforce Registration is Open
+description: Register today to attend on September 17 in San Francisco.
 thumbnail:
-    url: /img/1_qO_Wfwmkj1A35k1QyOxFMA.png
-    author: Chris Stegall
+  url: /img/1_uHUAaq9S_X25WDsUbwbcXg.png
+  author: Chris Stegall
 actions:
   get-started:
-    url: "/post/summer-24-release-highlights-dates-you-don-t-want-to-miss/"
+    url: "post/dreamforce-registration-is-open/"
     title: "Read more"
     icon: "fas book-open"
 ---
