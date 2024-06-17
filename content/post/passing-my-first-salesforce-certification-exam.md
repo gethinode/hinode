@@ -1,0 +1,42 @@
+---
+{
+  "priority":"0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2022-10-24T08:00:00-07:00",
+  "title": "Passing My First Salesforce Certification Exam",
+  "Slug": "passing-my-first-salesforce-certification-exam",
+  "description": "The journey that lead me to become a certified professional.",
+  "tags": [],
+  "author": {
+    "name": "Jessie Penaloza",
+    "title": "Content Contributor",
+    "webp": "/img/jesus-penaloza_88-88.webp",
+    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
+  },
+  "layout": "single",
+  "thumbnail": {
+    "url": "/img/0_xNaJpD-3xrhK1iSP.png"
+  }
+}
+---
+The journey that lead me to become a certified professional.
+
+{{< image src="/img/0_xNaJpD-3xrhK1iSP.png">}}
+
+The Salesforce ecosystem brings people together in more ways than one can imagine. From community events, virtual meet-ups, webinars, Dreamforce and more people come together with common goals in mind. Building up your Salesforce credentials helps grow and highlight your skills. The simplest way to start is by going to [trailhead](https://trailhead.salesforce.com) and completing modules or trails to obtain points and badges. Based on your interests or role these modules will help enhance your understanding of the [Salesforce](https://www.salesforce.com/) platform. Once you’ve decided on a role and would like to prove your understanding with hands-on experience use [credentials](https://trailhead.salesforce.com/en/credentials/administratoroverview/) within trailhead to identify the type of exams available for certification. Getting certified with Salesforce products and services gives you a competitive edge which may lead to growth or new career opportunities.
+
+Being part of this ecosystem for just over one year and having a chance to work with colleagues who really enjoy what they do each and every day provides a better perspective to pursuing more and striving to become a better version of myself. While at Dreamforce last month I found out that certification exams were being provided (free of charge) for anyone who would like to participate. Of course, seating was limited for each session so you had to stop by, wait in line and sign up. If you made the cut then you would receive a test taker authorization code which will be used to verify your identity and take the exam. You would sit down and follow some simple instructions before you began taking the exam. Since each person may be taking a different type of exam you would be provided with a different time limit to complete and submit your responses. Once completed, the system would verify the submitted response. You would be provided an email with a breakdown of the sections defined by the exam along with a percentage breakdown to let you know how much was achieved (1–100%) for each section. If passed, another email would follow and contain your certification plus badge.
+
+As I’m pursuing a Marketing role within this ecosystem the first exam that I took earlier this year was the “Pardot Specialist” which I did not pass. However, this time around and with guidance from my boss I was recommended to try out one of the new certifications called “Salesforce Associate” which was fairly new and just added earlier this month. This certification is an entry-level credential designed for trailblazers who are new to Salesforce with less than 6 months of experience and who are interested in understanding and using the Salesforce Customer 360 Platform. Once I read more into this I came to realize it was perfect and a great way to test my skills of what I’ve learned so far.
+
+The [Salesforce Associate](https://trailhead.salesforce.com/en/credentials/associate) exam is broken down into four major sections: Salesforce Ecosystem, Navigation, Data Model and Reports and Dashboards. Each has a different weight that contributes to the overall score for passing. A [trailmix](https://trailhead.salesforce.com/users/strailhead/trailmixes/prepare-for-your-salesforce-certified-associate-credential) and [module](https://trailhead.salesforce.com/content/learn/modules/cert-prep-salesforce-certified-associate) are available for you to prepare as well as reaching out to the trailblazer community for additional hints, tips and tricks. In preparation for my exam, while at Dreamforce, I decided to jump on the module first — using some of the practice questions available to get a feel and sense of the materials covered. After completing the module I came to realize that most if not all the information provided I had experienced at some point in my current position. Meaning that I had been exposed to the four major sections in some shape, form or way without even knowing it!
+
+During the last six months, I been involved in community events which helped me connect with more trailblazers all around the world, while at the same time helping me better understand the Salesforce Ecosystem. From Cactusforce, Northeast, Midwest, and Tahoe Dreamin’s, and now Dreamforce I’ve constantly been engaging with products and services Salesforce has to offer. At the same time, growing my trailhead has helped me understand how to communicate with other trailblazers for assistance and support.
+
+With the monthly webinars or email campaigns I’ve helped put together I was constantly interacting with the Salesforce portal and its navigation to make adjustments. In my first three months, I compiled articles to demonstrate certain functionalities of our app. We navigated the portal and made changes, then created documentation for others to use. Data Models, Reports and Dashboards came to me in the form of training. At first glance I didn’t fully understand what was going on but, after tackling some myself I was able to better understand and comprehend. But I didn’t realize how much I had retained until I began taking the test.
+
+The resources are available for you to prepare and be ready to tackle your first certification. Pass or no pass as my boss once told me, you must try in order to find out where you stand. Even if you don’t pass the first time you’ll have a better understanding of what type of material you need to prepare for next time. If you have a chance to take a certification go for it and that’s what I did.
+
+I look forward to my tackling my next certification because I know that I have the potential to learn more about Salesforce and so do you. It’s been a pleasure to share my story and we’ll see you in the cloud.

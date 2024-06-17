@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,18 @@
   "title": "MK Partners x SOVA: Another Pledge 1% Success",
   "Slug": "mk-partners-x-sova-another-pledge-1-success",
   "description": "Last week we had the privilege and pleasure of continuing our Pledge 1% commitment. This time with another successful volunteer day at SOVA!",
-  "tags": ["salesforce","volunteering","volunteer","la","pledge-1"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags": ["salesforce", "volunteering", "volunteer", "la", "pledge-1"],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1__PekwfmHFVR246SfkhuR5w.jpeg"
-  }
+  "thumbnail": { "url": "/img/1__PekwfmHFVR246SfkhuR5w.jpeg" },
 }
 ---
+
 Last week we had the privilege and pleasure of continuing our Pledge 1% commitment. This time with another successful volunteer day at [SOVA](https://www.jfsla.org/sova)!
 Nestled in the heart of the valley, and much more than a food pantry, SOVA provides free groceries and a wide variety of services to more than 9,000 of our neighbors. Across all of their LA locations , they serve and support more than 100,000 Angelenos of all ages, races, and ethnicities.
 SOVA was established by [JFSLA](https://www.jfsla.org/page.aspx?pid=183) who have themselves been serving greater Los Angeles for more than 160 years (seriously, they were the first charitable organization established in LA way back in the 19th Century!).
