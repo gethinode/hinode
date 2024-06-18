@@ -27,7 +27,7 @@ Unlike other apps that require custom configurations, additional objects, or map
 
 While many apps offer a trial period, few offer a free base tier. Offering a free edition drives interest and engagement, and connects with the Salesforce community. While it may not have all the features of a paid edition, it still helps generate more documents than many paid apps.
 
-{{< image src="/img/1_wOFUF2iKSuRe2fAjFFfWGQ.webp">}}
+{{< image src="/img/1_wOFUF2iKSuRe2fAjFFfWGQ.jpg">}}
 
 Creating the look and feel of each document can be expensive, but Mambo Merge provides the tools you need to create and revise documents without breaking the bank. And unlike other apps that make it difficult to make adjustments, Mambo Merge makes it easy to control your documents and revise them as many times as you need.
 
@@ -35,7 +35,7 @@ Other apps require data to leave Salesforce in order to generate documents, but 
 
 Other apps only solve problems within their scope, Mambo Merge thrives on new opportunities to expand its functionality. Many of Mambo Merge’s most-celebrated features are the results of solutions being built for clients’ unique use cases! New functionality is always being developed and the feature list continues to grow, and we encourage clients to share new challenges or ideas we can build towards to enhance the feature set.
 
-{{< image src="/img/1_ot7dcQyVUFQiGWTlCcibRw.webp">}}
+{{< image src="/img/1_ot7dcQyVUFQiGWTlCcibRw.jpg">}}
 
 Our customer-friendly team provides an upbeat and positive attitude to existing and potential customers that reach out. We focus on providing solutions that resolve your problems and want to ensure your overall experience is above expectations. While we may not have all the answers, we are committed to presenting you with the utmost respect and giving you options to yield solutions.
 

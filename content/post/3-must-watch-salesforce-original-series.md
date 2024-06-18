@@ -53,7 +53,7 @@ Full disclosure — I’m also a huge fan of the show because I was one of t
 ## How I Solved It
 
 Last, but not least, [](https://www.salesforce.com/plus/series/how_i_solved_it)\*\* \*\*(which also has a new Season out now!) gives viewers a closer look at how Salesforce Admins solve business problems using automation, data, and security tools.
-{{< image src="/img/1_jJjS3r_M6aeo8L5damTzTQ.png" title="Image" >}}
+{{< image src="/img/1_jJjS3r-M6aeo8L5damTzTQ.png" title="Image" >}}
 
 Tonally, **HISI **is sort of a blend between [](https://www.salesforce.com/plus/series/trailblazer)and [](https://www.salesforce.com/plus/series/legends_of_low_code)\*\* \*\*in that it highlights individual Trailblazer’s inspirational efforts, but with more of a focus on individual use-cases and business requirements — just without the time pressure or dramatic musical stings of a reality competition.
 The show features all sorts of common, and more creative, use cases like managing user requests, automation, combining Slack and Flow, applying CRM Analytics, and more! It’s well worth a watch for new and experienced admins alike.

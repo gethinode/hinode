@@ -33,7 +33,7 @@ First, enter the URL “[sheets.new](https://sheets.new/)” to launch a brand n
 {{< image src="/img/1_lb75lzYEqvVipf6CHp7Ilw.png" title="Image" >}}
 
 You’ll see a brand new spreadsheet and, while you don’t need to label your columns for this, I have here to make this tutorial a little easier to follow.
-{{< image src="/img/1_Yh_ovU4_izhs__WqXbZ8aA.png" title="Image" >}}
+{{< image src="/img/1_Yh-ovU4_izhs-_WqXbZ8aA.png" title="Image" >}}
 
 Basically, we’re going to make a two column table with names and titles in the lefthand column, and each title’s respective manager in the righthand column. Begin by entering your names and titles first.
 {{< image src="/img/1_7Ai1Vu9tLZauQPx_YkXJDQ.png" title="Image" >}}

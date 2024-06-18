@@ -12,7 +12,7 @@
     ["salesforce-dev", "trailblazer", "salesforce-event", "salesforce-admin"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_Zf_fbav9juocmEWvipd_9w.jpg" },
+  "thumbnail": { "url": "/img/1_Zf-fbav9juocmEWvipd-9w.jpg" },
 }
 ---
 

@@ -17,7 +17,7 @@
       "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_exp-4vf61bkxbR-rqEGxAA.webp" },
+  "thumbnail": { "url": "/img/1_exp-4vf61bkxbR-rqEGxAA.png" },
 }
 ---
 
@@ -25,29 +25,29 @@ With less than two weeks to go, Trailblazers everywhere are getting ready for Dr
 
 Today’s letter is “K” as in, “How to Know Which Page Layout is Used”. Let’s dive in!
 
-{{< image src="/img/1_Uouc45Kyv_z992ir9hryUw.webp">}}
+{{< image src="/img/1_Uouc45Kyv_z992ir9hryUw.jpg">}}
 
 Starting with Classic for those who may still have an org instance somewhere in the cloud far far away... The straightforward method to access a page layout is right from the record page. In our example we take a look at the opportunity object and traverse down to a specific record page.
 
-{{< image src="/img/1_rSjwVVIyCu11k_fwXFLTOg.webp">}}
+{{< image src="/img/1_rSjwVVIyCu11k_fwXFLTOg.jpg">}}
 
 Within the record page we select “Edit Layout” to quickly pull up they layout properties.
 
-{{< image src="/img/1_8IdJxKnjK-WLr51zGSsQqw.webp">}}
+{{< image src="/img/1_8IdJxKnjK-WLr51zGSsQqw.jpg">}}
 
 The current layout in use is displayed with the ability to configure and make property changes as needed.
 
-{{< image src="/img/1_w1E-tsfwDqcJ4RWBbAGoSA.webp">}}
+{{< image src="/img/1_w1E-tsfwDqcJ4RWBbAGoSA.jpg">}}
 
 Turning the tables Lighting requires us look elsewhere to find this information. Nothing too complex but maybe just a few different steps to yield the same result.
 
 Within an object page you would do the same as classic and traverse to a record page. Select the setup gear at the top right and choose “Edit Page” within the dropdown menu.
 
-{{< image src="/img/1__YRsyFewCbDOdWvelqNZAA.webp">}}
+{{< image src="/img/1__YRsyFewCbDOdWvelqNZAA.jpg">}}
 
 Next, you would select a component and scroll down until the “Assign Page Layout” section appears. From here, you will notice a (previewed) label placed under the current layout applied for this component. At the same time you can select the current layout to make changes or click on the “View all layouts” available for this object. Lastly you can quickly jump to the page layout assignments for opportunities using he “Assign Page Layout” link.
 
-{{< image src="/img/1_QfvYVI0B1CVVVpgiwvbfOQ.webp">}}
+{{< image src="/img/1_QfvYVI0B1CVVVpgiwvbfOQ.jpg">}}
 
 Of course, if you still need a hand getting started or just getting more out of your org in general, [drop us a line](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE)! We’re always happy to help.
 

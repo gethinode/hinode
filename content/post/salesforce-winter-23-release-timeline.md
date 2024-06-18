@@ -25,7 +25,7 @@ Dreamforce is on the horizon, pumpkin spice is back at Starbucks, and the sun is
 
 Let’s dive in!
 
-{{< image src="/img/1_uA1F01YvZka1PA2G8cJy4Q.webp">}}
+{{< image src="/img/1_uA1F01YvZka1PA2G8cJy4Q.jpg">}}
 
 ### Sandbox Previews Go Live — August 26
 

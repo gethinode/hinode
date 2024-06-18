@@ -29,7 +29,7 @@ Admins can now sign up for a [pre-release environment](https://www.salesforce.co
 
 If you are signing up for a new instance, don’t overlook the option to select your Pre-Release Edition!
 
-{{< image src="/img/1_Pn53488EtxK9r-u3ld4zYw.webp">}}
+{{< image src="/img/1_Pn53488EtxK9r-u3ld4zYw.jpg">}}
 
 Maybe you want to pick the same edition you use internally, so you can get a true preview of what’s to come (and don’t fall in love with any functionality you won’t end up seeing once the release is live). But maybe you want to see all the bells and whistles so you can get a feel for the full potential of the platform and gameplan if there’s a potential upgrade in the cards. Or maybe you’re a completionist and you’ll be using 3 emails so you can sign up for one of each (we see you, partners, and we know you’re just trying to preview the effects across your various clients’ orgs).
 

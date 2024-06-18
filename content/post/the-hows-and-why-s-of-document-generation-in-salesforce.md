@@ -29,7 +29,7 @@ To begin answering this question we need to understand how data is stored and us
 
 One of the simplest ways to generate documents within Salesforce is by using Reports or Email Templates. Simply choose the Objects and Fields, Select the Records, set the filter criteria, and generate your output. Export results to either one of the following formats; PDF, Excel, CSV, or Word. Schedule output to be sent at specific intervals to specific recipients. Use API to automate each process.
 
-{{< image src="/img/0_WNA6RgSU_93fCU0Y.webp">}}
+{{< image src="/img/0_WNA6RgSU_93fCU0Y.jpg">}}
 _Report Example_
 
 Disadvantages
@@ -46,7 +46,7 @@ Disadvantages
 
 A more elaborate and tech-savvy way of generating documents includes rules which define criteria that must be met to initiate document generation and design templates for different use cases. Followed by establishing the action that will trigger the rule to generate each document for each criteria met within Objects, Fields, or Records. Custom code can be used to merge data from an external system or automate processes.
 
-{{< image src="/img/0_U_l0-WgGlwfjuUjC.webp">}}
+{{< image src="/img/0_U_l0-WgGlwfjuUjC.jpg">}}
 _Workflow Rule Example_
 
 Disadvantages
@@ -80,7 +80,7 @@ Each app may utilize one or more of the built-in tools as part of its custom sol
 
 One significant difference between these apps and built-in methods is the degree of flexibility and customization available for each unique use case. Allowing you to create the experience your customers need.
 
-{{< image src="/img/1_1zVfy7AMtwsS2udtyEXuHw.webp">}}
+{{< image src="/img/1_1zVfy7AMtwsS2udtyEXuHw.png">}}
 _The AppExchange_
 
 Disadvantages

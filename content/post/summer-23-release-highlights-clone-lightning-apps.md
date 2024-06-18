@@ -31,7 +31,7 @@ Let’s dive in!
 
 This is one of those features that non-Admins (potentially just non-Partners) have probably assumed just always existed. And, while there are certainly some existing time-saving tips and tricks for duplicating previously created apps within an org — the addition of an actual Clone function is set to be a tremendous time saver, especially for those who don’t have Salesforce App Building as a more regular part of their daily routine.
 
-{{< image src="/img/1_XRKLf_vxVHRWUhWKw_Gtpg.webp">}}
+{{< image src="/img/1_XRKLf_vxVHRWUhWKw_Gtpg.png">}}
 
 For in-house admins, particularly those whose Salesforce responsibilities sit alongside other job duties, or those who typically spend more time supporting their users than building new on-platform apps — this is going to open up a world of possibility by removing another layer of administration and essentially turning a customization process into a configuration one!
 

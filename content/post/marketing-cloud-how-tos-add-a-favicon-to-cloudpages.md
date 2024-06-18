@@ -27,7 +27,7 @@ But that’s only because they didn’t have the internet yet. If they had, they
 
 And that’s why favicons are so important! We’re all capable, at a glance, of instantly navigating back to “just the tab we were looking for” thanks to the handy little pictographs we’ve become experts at recognizing.
 
-{{< image src="/img/1_XUjTFPJkA8ChDY7k_5utrQ.webp">}}
+{{< image src="/img/1_XUjTFPJkA8ChDY7k_5utrQ.jpg">}}
 
 That’s also why no Landing Page, form, site, etc… is complete without one. But getting one added to your CloudPages isn’t a very well-documented process — until now!
 
@@ -45,7 +45,7 @@ For the really short version, add that snippet in the `<head>` tag of your pages
 
 And now your CloudPages finally have favicons of their very own!
 
-{{< image src="/img/1_ku4-_FeW7SDfVLf8ig_FBg.webp">}}
+{{< image src="/img/1_ku4-_FeW7SDfVLf8ig_FBg.jpg">}}
 
 Of course if you have additional questions about getting your CloudPages stood up or behaving correctly, or need a hand with a different part of the Salesforce product suite — [drop us a line](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE)! We’re always happy to help.
 

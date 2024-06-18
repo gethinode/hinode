@@ -23,7 +23,7 @@
 
 Help your customers do moar! within their Org.
 
-{{< image src="/img/1_G9iF1_3M_tEe0jjCH1evjw.webp">}}
+{{< image src="/img/1_G9iF1_3M_tEe0jjCH1evjw.jpg">}}
 
 Salesforce makes it easy to track all the necessary data to generate documents for quotes, invoices, work orders and more. But, what if you need to maintain the same look and feel as your existing documents, or need some additional customization? What if you want to restrict the ability to generate documents based on select users or user groups? Or maybe, you want to automate certain tasks after the document is generated. That’s where [Mambo Merge](https://www.mambomerge.com/) can help!
 

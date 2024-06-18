@@ -18,7 +18,7 @@
     ],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_VMh3LDR9jlMLifZJcjn_uQ.jpg" },
+  "thumbnail": { "url": "/img/1_VMh3LDR9jlMLifZJcjn-uQ.jpg" },
 }
 ---
 

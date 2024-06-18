@@ -29,7 +29,7 @@ Pre-Release Org-Signup, Release Note Reveal Day, when to expect the Summer ’23
 
 Of course, if video isn’t your thing and you just want to see the deets — we’ve got you covered right here as well!
 
-{{< image src="/img/1_K6tAcfxFdBgS1wS2aXOMYQ.webp">}}
+{{< image src="/img/1_K6tAcfxFdBgS1wS2aXOMYQ.png">}}
 
 Don’t forget to sign up for your pre-release orgs tomorrow and, of course, subscribe here because we’ll be continuing our [countdown to Summer ’23](https://medium.com/tag/release-highlights)with posts, previews, insights, and more on all the latest updates, upgrades, and features headed to orgs everywhere this Summer!
 

@@ -37,7 +37,7 @@ That second one will point you toward all the additional release resources as th
 
 And, if you’re curious how I conduct my release notes review — let’s do a little walk through. I generally do a sort of curated wander down the nav bar on the left side of the release notes page beginning, of course, with “[Salesforce Overall](https://help.salesforce.com/s/articleView?id=release-notes.rn_general.htm&release=244&type=5)”/”[General Enhancements](https://help.salesforce.com/s/articleView?id=release-notes.rn_general_enhancements.htm&language=en_US&release=244&type=5)” to get a feel for big, platform-wide improvements (and inevitably see where we stand in the countdown to MFA enforcement).
 
-{{< image src="/img/1_uebLxCiao4joSFhqAoRucQ.webp">}}
+{{< image src="/img/1_uebLxCiao4joSFhqAoRucQ.jpg">}}
 
 This section is typically very admin/partner-centered and, along with some updates to contract/product visibility it looks like we’ll be seeing:
 
@@ -67,7 +67,7 @@ Once I’m through the General Enhancements, I’ll continue down the left-hand 
 
 Eventually, you’ll probably have a browser that’s jam-packed with tabs and looks a little something like this.
 
-{{< image src="/img/1_TaIIQKiofjOiiWl4tLqvBQ.webp">}}
+{{< image src="/img/1_TaIIQKiofjOiiWl4tLqvBQ.jpg">}}
 
 And that’s why these round-ups and highlight posts are so important! Because we know most Trailblazers don’t have the time to read up on all the relevant updates in there. Heck, all those tabs aren’t even 1/3 of what’s in the Summer ’23 update! Those are just the ones that I hit on my first scan through for relevance.
 

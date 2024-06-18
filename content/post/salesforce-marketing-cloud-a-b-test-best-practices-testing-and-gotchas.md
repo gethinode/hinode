@@ -25,27 +25,27 @@ First off, I’m extremely excited to attend _The Doobie Brothers_ 50th Annivers
 
 Common Question: “How Can a User Perform A/B Testing Within an Email? The Best Practices from Salesforce are below as to how & design a proper A/B Test = OVERALL SETUP:
 
-{{< image src="/img/1_kVp5mfNd-jHazNF0aPBEUA.webp">}}
+{{< image src="/img/1_kVp5mfNd-jHazNF0aPBEUA.jpg">}}
 
 NAVIGATION BEST PRACTICES: (ABOVE): In the Email Studio Suite, navigate to the “A/B Testing” tab. Click into it and then hit the “Create A/B Test” button in the upper right-hand corner of the page.
 
 Upon clicking the button, a user will be redirected to the “Test Management” interface. Recall to use the “TEST TYPE” tools to A/B what a user would like to send. Subject line A/B testing is displayed below (BELOW):
 
-{{< image src="/img/1_lw5NQpRFEPKFzHOJ_SmoRQ.webp">}}
+{{< image src="/img/1_lw5NQpRFEPKFzHOJ_SmoRQ.jpg">}}
 
 NEXT: Select Lists, Groups, or Subscribers to launch the A/B Test. A sample of items selected is (BELOW):
 
-{{< image src="/img/1_TGXRN6SKF5VcEaqMWRU-bQ.webp">}}
+{{< image src="/img/1_TGXRN6SKF5VcEaqMWRU-bQ.jpg">}}
 
 NEXT: Define a test audience in terms of percentage of how a user would ideally like to schedule an outbound A/B test email send. The example has a test audience measured at 65% between the two subject lines. However, this asset can also be altered based on the conditions of the audience (BELOW):
 
-{{< image src="/img/1_OC-_xFxmq761cYOULCewNQ.webp">}}
+{{< image src="/img/1_OC-_xFxmq761cYOULCewNQ.jpg">}}
 
 NEXT: Determine how the winning audience should be determined via the “Higher Unique Open Rate” or “Higher Unique Click-Through rate (CTR).” An “Evaluation Period” will also need to be thorough. As a Best Practice, it’s recommended that it should be in terms of “Days” to be calculated with regards to the full audience involved. Selecting the “FINISH” button will properly power this program (BELOW):
 
-{{< image src="/img/1_r6KGdKX9DHZKBUDiEVE0EQ.webp">}}
+{{< image src="/img/1_r6KGdKX9DHZKBUDiEVE0EQ.jpg">}}
 
-{{< image src="/img/1_Ie0U9TG9eKPL8HBrWBE2sg.webp">}}
+{{< image src="/img/1_Ie0U9TG9eKPL8HBrWBE2sg.jpg">}}
 
 FURTHER CONSIDERATIONS & “GOTCHA’S”: During the setup process, it’s important to define the right email templates to test, test size by percentage, Contacts to send to, & the “From & Send Options”. Additionally, it should be properly decided as to whether the A/B Test should be deployed immediately, or at a particular date & time. Think of the process as a user would be sending out a regular Marketing Cloud email to a subscriber, but in the A/B Test process, its dual emails to manage upon a send.
 

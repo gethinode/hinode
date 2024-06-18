@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,24 +8,31 @@
   "title": "Trailblazer Community Meetup — Pi Day Extravaganza Recap",
   "Slug": "trailblazer-community-meetup-pi-day-extravaganza-recap",
   "description": "In 2009, The U.S. Congress designated every March 14th to be remembered as Pi Day (a.k.a π, the numerical value) to celebrate and spur more interest in math and science. Sure enough, this day also happened to land on, the legendary physicist, Albert Einstein’s birthday. To celebrate both occasions, the Irvine Salesforce Admin Group decide to throw together an in-person Pi Day Extravaganza!.",
-  "tags": ["salesforce-event","trailblazercommunity","salesforce-communities","salesforce-trailblazer","trailblazer"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "trailblazercommunity",
+      "salesforce-communities",
+      "salesforce-trailblazer",
+      "trailblazer",
+    ],
+  "author":
+    {
+      "name": Jessie Penaloza,
+      "title": Digital Marketing Coordinator,
+      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_u2StLxNEJpBRZ2ncxSdsgg.png"
-  }
+  "thumbnail": { "url": "/img/1_u2StLxNEJpBRZ2ncxSdsgg.png" },
 }
 ---
+
 In 2009, The U.S. Congress designated every March 14th to be remembered as Pi Day (a.k.a π, the numerical value) to celebrate and spur more interest in math and science. Sure enough, this day also happened to land on, the legendary physicist, Albert Einstein’s birthday. To celebrate both occasions, the Irvine Salesforce Admin Group decide to throw together an in-person Pi Day Extravaganza!
 Let’s recap this Pi-rrific experience.
 
 ## Pies All around
 
-This meetup took place at the [Pitfire Mar Vista](https://www.google.com/maps/place/Pitfire+Pizza/@33.9946815,-118.4387608,15z/data=!4m2!3m1!1s0x0:0x8e1d4aec8c3342ca?sa=X&amp;ved=1t:2428&amp;ictx=111) location near the crossings between the 405 Freeway and 90 West. Those SoCal Trailblazers nearby splurged and indulged in a variety of savory pizzas and assortment of sweet and savory pies, there was something for every type of taste bud. Vegan and vegetarian options were available, ensuring a diverse culinary experience for all who attended. Fountain beverages were included but alcoholic drinks required a purchase.
+This meetup took place at the [Pitfire Mar Vista](https://www.google.com/maps/place/Pitfire+Pizza/@33.9946815,-118.4387608,15z/data=!4m2!3m1!1s0x0:0x8e1d4aec8c3342ca?sa=X&ved=1t:2428&ictx=111) location near the crossings between the 405 Freeway and 90 West. Those SoCal Trailblazers nearby splurged and indulged in a variety of savory pizzas and assortment of sweet and savory pies, there was something for every type of taste bud. Vegan and vegetarian options were available, ensuring a diverse culinary experience for all who attended. Fountain beverages were included but alcoholic drinks required a purchase.
 
 ## Activities
 
@@ -33,8 +40,7 @@ If you didn’t know, last week Tr(AI)lblazerDX attendees won a Guinness World R
 {{< image src="/img/1_h1zWlnZ2UY5ML28AiB75WA.png" title="Image" >}}
 
 It was nice to know fellow Einsteine-rs came together and competed in the pie-eating contest taking place. Along with the Social Bingo and Jeopardy activities, many exciting prizes were given away. Like this Data Rockstar Astro plush. Too bad it didn’t come with that sweet guiiitarrrr…
-{{< image src="/img/0_lNHwX8_auhh6aJPw" title="Image" >}}
-
+{{< image src="/img/0_lNHwX8_auhh6aJPw.jpg" title="Image" >}}
 
 ## In Conclusion
 

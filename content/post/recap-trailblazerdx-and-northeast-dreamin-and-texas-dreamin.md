@@ -17,7 +17,7 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_62Pt7paYo9XWKW3ud5MDYg.webp" },
+  "thumbnail": { "url": "/img/1_62Pt7paYo9XWKW3ud5MDYg.png" },
 }
 ---
 

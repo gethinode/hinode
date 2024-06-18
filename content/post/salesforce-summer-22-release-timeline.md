@@ -25,7 +25,7 @@ TrailblazerDX is behind us, Midwest Dreamin’ is on the horizon, and the steadi
 
 Let’s dive in!
 
-{{< image src="/img/1_7x2fmHGJWyF6cKZ6dw_KYA.webp">}}
+{{< image src="/img/1_7x2fmHGJWyF6cKZ6dw_KYA.jpg">}}
 
 ### Sandbox Previews Go Live — May 6 + 7
 

@@ -13,3 +13,7 @@ do
 done
 
 echo ${ARRAY[@]}
+
+
+// write a linux terminal command to find all files in a directory that end with .jpeg and update them to end with .jpg instead
+find . -type f -name "*.jpeg" -exec bash -c 'mv "$1" "${1%.jpeg}.jpg"' _ {} \;

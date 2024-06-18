@@ -61,7 +61,7 @@ And sure, every admin’s going to agree that having infinite inactive picklist 
 
 For now, we’ll see a toggle in the picklist settings that allows us to remove the upper limit on the number of inactive values:
 
-{{< image src="/img/1_wFoGjK9-SfCvtrqYpQTSnw.webp">}}
+{{< image src="/img/1_wFoGjK9-SfCvtrqYpQTSnw.jpg">}}
 
 …but starting in Summer ’23 that option will disappear and we’ll all be limited to 4,000 such values.
 

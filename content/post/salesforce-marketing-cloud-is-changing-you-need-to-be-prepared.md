@@ -36,14 +36,14 @@ Surprisingly, some larger B2C clients have been recently utilizing Pardot, as it
 
 As mentioned, recently I’ve seen more B2C interest in Pardot, and for good reason. For instance, Pardot’s _Engagement Studio_ functionality has always been extremely underrated and I watched its “Silent” rollout as a consultant back in Summer 2016. I was floored by the release, and have always tried to promote it heavily to clients. It was a huge improvement from the former “Drip Campaign Editor” functionality and it has also gained additional curiosity & popularity amongst clients. This could be why some larger B2C clients have migrated over to Pardot instead of using Marketing Cloud as there is just a general ease of use.
 
-{{< image src="/img/1_Dp_-ROU_cMDkVYiyYPEo4A.webp">}}
+{{< image src="/img/1_Dp_-ROU_cMDkVYiyYPEo4A.jpg">}}
 **_Example of a Pardot Drip Campaign Workflow (2015)_**
 
 Wow! This was now 7 years-ago? Talk about taking a stroll down memory lane! It’s worth noting that despite the surprise release of _Engagement Studio_ in Pardot in Summer 2016; the former drip editor was still an available option for a user to facilitate campaigns for at least a few years after the release.
 
 Here are modern flow examples from both *Engagement Studio*and _Journey Builder_:
 
-{{< image src="/img/1_3NrndT227lHdZb0ww-0JRA.webp">}}
+{{< image src="/img/1_3NrndT227lHdZb0ww-0JRA.jpg">}}
 **_Example of a Pardot Engagement Studio Workflow (2022)_**
 
 {{< image src="/img/0_xOE-lEbrsm_-ACs9.png">}}
