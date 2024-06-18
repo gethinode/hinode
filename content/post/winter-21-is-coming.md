@@ -9,20 +9,19 @@
   "Slug": "winter-21-is-coming",
   "description": "It may feel like it was a long time ago when the phrase “Winter is coming” still sparked eager anticipation, but that’s about to change…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/winter-21.jpeg"
-  }
+  "thumbnail": { "url": "/img/winter-21.jpg" },
 }
 ---
 
-{{< image src="/img/winter-21.jpeg" >}}
+{{< image src="/img/winter-21.jpg" >}}
 
 It may feel like it was a long time ago when the phrase "Winter is coming" still sparked eager anticipation, but that's about to change! No, they're not re-shooting the last two seasons of GOT. Even more useful, the [Salesforce Winter '21 Release](https://releasenotes.docs.salesforce.com/en-us/winter21/release-notes/rn_other_resources.htm) is on the way!
 

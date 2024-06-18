@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-june-21-2021-june-25-2021",
   "description": "The days are getting longer and so is our event list! Events big and small are happening this week, and there is something for everyone...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/june-2021-calendar4.jpeg"
-  }
+  "thumbnail": { "url": "/img/june-2021-calendar4.jpg" },
 }
 ---
 
-
-{{< image src="/img/june-2021-calendar4.jpeg" >}}
+{{< image src="/img/june-2021-calendar4.jpg" >}}
 
 The days are getting longer and so is our event list! Events big and small are happening this week, and there is something for everyone (except a Summer Solstice event, sorry ladies). So sit back, open up your calendar, and let’s get planning!
 
@@ -45,13 +43,12 @@ Moving on from my confusion, our other Friday, June 25th event is occuring at 12
 
 We are ending the week on a Saturday for those of you who can’t attend an event during the week. The San Ramon, CA Admin group is hosting [Flow into Summer ’21 and TDX ’21 Quiz](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-admin-group-san-ramon-united-states-presents-flow-into-summer21-and-tdx-21-quiz/). The Summer ’21 release includes updates to flows and they will be teaching viewers these updates step by step with a technical architect. They will end the meeting with a TDX quiz, so make sure to tune in to TrailheaDX, because the prize is a voucher
 
-Recap
-------
+## Recap
 
-The Indianapolis, IN Women in Tech group started the week with *Reunited & it Feels so Good*! They had their first in-person meeting in over a year; what did you guys talk about? The Santa Barbara, CA Salesforce Admin group taught viewers how to create Apex-involved utilities for flows and processes in *Supercharge Processes and Flows with Invocable Apex*. The annual *Education Summit* occurred with Michelle Obama as one of the speakers, did you enjoy it?
+The Indianapolis, IN Women in Tech group started the week with _Reunited & it Feels so Good_! They had their first in-person meeting in over a year; what did you guys talk about? The Santa Barbara, CA Salesforce Admin group taught viewers how to create Apex-involved utilities for flows and processes in _Supercharge Processes and Flows with Invocable Apex_. The annual _Education Summit_ occurred with Michelle Obama as one of the speakers, did you enjoy it?
 
-*All About Apps! Mini Demos of our Favorite Apps*, hosted by the St. Louis, MO Salesforce Nonprofit User group, demoed their favorite apps for nonprofits, and gave away some swag; did you win? Our second nonprofit event, *The Mystery Donor: How did Nonprofits in the Netherlands Perform in Secret Research on Online Giving*, went over research Salesforce secretly conducted from 630 companies across 9 countries by becoming a secret donor. They also went over tactics that businesses can use for your donors’ experience, and 5 ways to improve the online giving experience and boost fundraising income.
+_All About Apps! Mini Demos of our Favorite Apps_, hosted by the St. Louis, MO Salesforce Nonprofit User group, demoed their favorite apps for nonprofits, and gave away some swag; did you win? Our second nonprofit event, _The Mystery Donor: How did Nonprofits in the Netherlands Perform in Secret Research on Online Giving_, went over research Salesforce secretly conducted from 630 companies across 9 countries by becoming a secret donor. They also went over tactics that businesses can use for your donors’ experience, and 5 ways to improve the online giving experience and boost fundraising income.
 
-The *Success Anywhere World Tour* kicked off to teach others how companies are using Customer 360 innovations to succeed. We had a chance to hear about the new features coming out this year, including additions to Interaction Studio, Einstein, Pardot and a few other platforms in *Marketing Cloud June 2021 New Feature Overview*. The Bozeman, MT Salesforce Nonprofit user group ended the week with an In-person Nonprofit User Group Meeting to talk about duplicate and matching rules. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
+The _Success Anywhere World Tour_ kicked off to teach others how companies are using Customer 360 innovations to succeed. We had a chance to hear about the new features coming out this year, including additions to Interaction Studio, Einstein, Pardot and a few other platforms in _Marketing Cloud June 2021 New Feature Overview_. The Bozeman, MT Salesforce Nonprofit user group ended the week with an In-person Nonprofit User Group Meeting to talk about duplicate and matching rules. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 
 Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE&utm_source=mkp&utm_medium=referral&utm_campaign=logigear-mkp-tpp) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

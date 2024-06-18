@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-july-5-2021-july-9-2021",
   "description": "Most of the events this week are for those in sales or trying to sell, well… anything. We also address a few other important topics as...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/july-2021-calendar2.jpeg"
-  }
+  "thumbnail": { "url": "/img/july-2021-calendar2.jpg" },
 }
 ---
 
-
-{{< image src="/img/july-2021-calendar2.jpeg" >}}
+{{< image src="/img/july-2021-calendar2.jpg" >}}
 
 Most of the events this week are for those in sales or trying to sell, well… anything. We also address a few other important topics as well. Sorry that I don’t have fun events for you, but it can’t be all fun and games all of the time at Salesforce. So sit back, open up your calendars and let’s get planning!
 
@@ -37,8 +35,7 @@ Next on Thursday, July 29th we have [Grow Revenue with a Hybrid B2B Sales Model:
 
 Ending the week on a similar note, [Consumer Goods and the Great B2B Digital Acceleration](https://www.salesforce.com/form/events/webinars/form-rss/3302694) will focus more on consumer good companies and how they had to pivot to become both digital and face to face in order to serve their customers. Viewers will hear how these companies accelrated their digital investments to drive growth and deliver stronger relationships. Salesforce will also go over the results of their latest survey of global consumer good companies. This event is also on Thursday, July 29th, but at 11am (PT).
 
-Recap
-------
+## Recap
 
 I actually didn’t write about events last week (sorry about it). However, if you attended something great, tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what it was (and how we get on the invite list for next time)!
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "is-overlapping-tech-killing-your-it-budget",
   "description": "Starting a business is rarely simple and it’s not uncommon, after a few years (or even days!), to step back and be surprised by the…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/brand-bubbles.jpeg"
-  }
+  "thumbnail": { "url": "/img/brand-bubbles.jpg" },
 }
 ---
-
-
-{{< image src="/img/brand-bubbles.jpeg" >}}
 
 Starting a business is rarely simple and it's not uncommon, after a few years (or even days!), to step back and be surprised by the tangled web of tech you've built to support your operations.
 

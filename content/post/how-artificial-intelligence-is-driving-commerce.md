@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "How Artificial Intelligence is Driving Commerce",
   "Slug": "how-artificial-intelligence-is-driving-commerce",
   "description": "Artificial Intelligence has been boosting bottom lines and easing employee endeavors for years now and, while almost every organization at this point has begun implementing some AI tools of their own (or at least have it on their IT roadmap), it’s always exciting to hear new use-cases and the real-world results they’ve engendered. One of the most exciting areas for the application of AI in business is commerce, “e” and otherwise — and today we’ll be taking a look at how organizations have leveraged Salesforce’s Einstein Artificial Intelligence platform to drive revenue and results..",
-  "tags": ["artificial-intelligence","salesforce-einstein","ai","ecommerce","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "artificial-intelligence",
+      "salesforce-einstein",
+      "ai",
+      "ecommerce",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_MhikcXv0Wsmw1CsNx4Mf2Q.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_MhikcXv0Wsmw1CsNx4Mf2Q.jpg" },
 }
 ---
+
 Artificial Intelligence has been boosting bottom lines and easing employee endeavors for years now and, while almost every organization at this point has begun implementing some AI tools of their own (or at least have it on their IT roadmap), it’s always exciting to hear new use-cases and the real-world results they’ve engendered. One of the most exciting areas for the application of AI in business is commerce, “e” and otherwise — and today we’ll be taking a look at how organizations have leveraged Salesforce’s Einstein Artificial Intelligence platform to drive revenue and results.
 Let’s dive in!
 
@@ -30,7 +37,6 @@ Ask anyone in e-commerce about their most-watched shop metric and you’ll likel
 In fact, Salesforce AI for Commerce customers see an average 26% increase in AOV! That’s like a reverse sale, where you get 1 free customer for every 4 you sell to!
 But what exactly is AI being used for to push that number up? It really comes down to two areas of influence, Customer Experience and Business Intelligence.
 {{< image src="/img/1_gszx5ShXJQul8oIWI7lzzQ.png" title="Image" >}}
-
 
 ## Customer Experience
 

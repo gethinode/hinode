@@ -1,27 +1,25 @@
 ---
 {
-"priority":"0.5",
-"haveYoutube": true,
-"haveGithubGist": false,
-"haveTwitter": false,
-"date": "2021-12-24T15:08:21-07:00",
-"title": "Generate Personalized Holiday Cards in Salesforce",
-"Slug": "generate-personalized-holiday-cards-in-salesforce",
-"description": "We’re right in the middle of the holiday stretch and it’s about that time where marketing, sales, success, and support teams start sending…",
-"tags": [],
-"author": {
-"name": "Chris Stegall",
-"title": "Digital Marketing Coordinator",
-"webp": "/img/chris-stegall_128-128.webp",
-"jpeg": "/img/chris-stegall_128-128.jpeg"
-},
-"layout": "single",
-"thumbnail": {
-    "url": "/img/holiday_cards.png"
-  }
+  "priority": "0.5",
+  "haveYoutube": true,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2021-12-24T15:08:21-07:00",
+  "title": "Generate Personalized Holiday Cards in Salesforce",
+  "Slug": "generate-personalized-holiday-cards-in-salesforce",
+  "description": "We’re right in the middle of the holiday stretch and it’s about that time where marketing, sales, success, and support teams start sending…",
+  "tags": [],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
+  "layout": "single",
+  "thumbnail": { "url": "/img/holiday_cards.png" },
 }
 ---
-
 
 {{< image src="/img/holiday_cards.png">}}
 

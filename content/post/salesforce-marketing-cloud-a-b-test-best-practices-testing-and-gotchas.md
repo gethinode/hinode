@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,19 +9,19 @@
   "Slug": "salesforce-marketing-cloud-a-b-test-best-practices-testing-and-gotchas",
   "description": "First off, I’m extremely excited to attend The Doobie Brothers 50th Anniversary Concert in Inglewood, CA at the YouTube theater this…",
   "tags": [],
-  "author": {
-    "name": "Tommy Holden",
-    "title": "Content Contributor",
-    "webp": "/img/tommy-holden_128-128.webp",
-    "jpeg": "/img/tommy-holden_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Tommy Holden",
+      "title": "Content Contributor",
+      "webp": "/img/tommy-holden_128-128.webp",
+      "jpeg": "/img/tommy-holden_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_hmNsTt2D71Zdk7hnM5J4BQ.webp"
-  }
+  "thumbnail": { "url": "/img/1_hmNsTt2D71Zdk7hnM5J4BQ.jpg" },
 }
 ---
-First off, I’m extremely excited to attend *The Doobie Brothers* 50th Anniversary Concert in Inglewood, CA at the YouTube theater this upcoming Sunday on October 2nd with their original lineup (and you should too!) Somewhat related, A/B Testing is sort of like comparing two songs off their 1973 album *The Captain & Me* — as in which song better engages an audience, *China Grove* or *Long Train Running ?*That’s a *REAL* tough one to decipher, but thankfully Marketing Cloud has the background to investigate such capabilities when it comes to A/B Testing for general email use!
+
+First off, I’m extremely excited to attend _The Doobie Brothers_ 50th Anniversary Concert in Inglewood, CA at the YouTube theater this upcoming Sunday on October 2nd with their original lineup (and you should too!) Somewhat related, A/B Testing is sort of like comparing two songs off their 1973 album _The Captain & Me_ — as in which song better engages an audience, _China Grove_ or *Long Train Running ?*That’s a _REAL_ tough one to decipher, but thankfully Marketing Cloud has the background to investigate such capabilities when it comes to A/B Testing for general email use!
 
 Common Question: “How Can a User Perform A/B Testing Within an Email? The Best Practices from Salesforce are below as to how & design a proper A/B Test = OVERALL SETUP:
 

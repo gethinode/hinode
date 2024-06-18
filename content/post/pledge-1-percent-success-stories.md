@@ -1,24 +1,22 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-02-20T16:32:26-07:00",
   "title": "Pledge 1% Success Stories",
   "Slug": "pledge-1-percent-success-stories",
   "description": "Another Amazing Day at SOVA!",
   "tags": ["sova", "pledge", "mk partners", "volunteer", "nonprofit"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/pledge-1-percent.webp"
-  }
+  "thumbnail": { "url": "/img/pledge-1-percent.webp" },
 }
 ---
-
 
 {{< image src="/img/pledge-1-percent.webp" title="Pledge 1 percent" >}}
 

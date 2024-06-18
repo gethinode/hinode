@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "5 Things We Love About TDX: A Valentine’s Day Tribute to Trailblazers",
   "Slug": "5-things-we-love-about-tdx-a-valentines-day-tribute-to-trailblazers",
   "description": "TrailblazerDX is less than a month away and, as Trailblazers around the world gear up for the annual Salesforce developer conference, we find ourselves looking forward to another amazing gathering and reflecting on the incredible TDX experiences we’ve shared over the years..",
-  "tags": ["trailheaddx","tdx24","salesforce-tdx","trailblazerdx","salesforce-event"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "trailheaddx",
+      "tdx24",
+      "salesforce-tdx",
+      "trailblazerdx",
+      "salesforce-event",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_1xrbMzuOWd3vVdSRQaMMZA.png"
-  }
+  "thumbnail": { "url": "/img/1_1xrbMzuOWd3vVdSRQaMMZA.png" },
 }
 ---
+
 [TrailblazerDX ](https://www.salesforce.com/trailblazerdx)is less than a month away and, as Trailblazers around the world gear up for the annual Salesforce developer conference, we find ourselves looking forward to another amazing gathering and reflecting on the incredible TDX experiences we’ve shared over the years.
 And what better day than Valentine’s Day to run through the things we love most about TDX! As hearts, and candies, and candy hearts, and hearty candies take over the timelines — here’s our top 5 things we love about TDX!
 
@@ -34,7 +41,7 @@ So now, whether you’re a seasoned developer, an aspiring admin, or a business 
 ## Product Announcements and Insights
 
 Every year TDX plays host to the reveal of some new exciting features and products for the platform. Last year we saw [EinsteinGPT ](https://www.salesforce.com/news/press-releases/2023/03/07/einstein-generative-ai/)take the stage, the introduction of a new Mascot (Flo the flying squirrel) — along with some improvements to Flow itself, Trailhead upgrades, and more!
-{{< image src="/img/1_q8PdaI2TtYyV0eEeRxWwLA.jpeg" title="Image" >}}
+{{< image src="/img/1_q8PdaI2TtYyV0eEeRxWwLA.jpg" title="Image" >}}
 
 Every year we’re eager to see what Salesforce is excited to show off and love the chance to take the good news back home to our colleagues and clients!
 
@@ -47,7 +54,7 @@ These thought-provoking sessions always serve to ignite our passion for technolo
 
 ## Helpful Community Sessions
 
-TDX offers a diverse array of sessions covering the everything from deep-dive technical how-to’s, insights into the latest trends, best practices, innovative solutions, and even fun community workshops to help build the connections that make the platform and its user-groups so rewarding! And we’re no stranger to speaking ourselves, returning this year with 3 sessions on [Slack](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.49532582.1685950131.1707777742-1627426254.1707170226&amp;search=rodriguez), [Tableau](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.49532582.1685950131.1707777742-1627426254.1707170226&amp;search=stegall), and [AI chatbots](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.49532582.1685950131.1707777742-1627426254.1707170226&amp;search=kaufman)!
+TDX offers a diverse array of sessions covering the everything from deep-dive technical how-to’s, insights into the latest trends, best practices, innovative solutions, and even fun community workshops to help build the connections that make the platform and its user-groups so rewarding! And we’re no stranger to speaking ourselves, returning this year with 3 sessions on [Slack](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.49532582.1685950131.1707777742-1627426254.1707170226&search=rodriguez), [Tableau](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.49532582.1685950131.1707777742-1627426254.1707170226&search=stegall), and [AI chatbots](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.49532582.1685950131.1707777742-1627426254.1707170226&search=kaufman)!
 {{< image src="/img/1_waMERxj_AZRp6xD3AR27yQ.png" title="Image" >}}
 
 We love these, typically user-led, sessions because they empower us to expand our skills, deepen our knowledge, and stay ahead of the curve (a challenge in the ever-evolving tech space).

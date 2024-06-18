@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,20 +9,19 @@
   "Slug": "summer-23-release-highlights-updated-and-complete-timeline",
   "description": "The biggest news this week isn’t [SUCCESSION SPOILER], at least, not anymore. And that’s because we’ve gotten some updated info on the…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_TdovCC_ZmjB-c5_EMf7XiQ.webp"
-  }
+  "thumbnail": { "url": "/img/1_TdovCC_ZmjB-c5_EMf7XiQ.webp" },
 }
 ---
 
-The biggest news this week isn’t ***[SUCCESSION SPOILER]***, at least, not anymore. And that’s because we’ve gotten some updated info on the Salesforce Summer ’23 Release ! That’s right, Trailblazers everywhere will now know when to expect, well, everything!
+The biggest news this week isn’t **_[SUCCESSION SPOILER]_**, at least, not anymore. And that’s because we’ve gotten some updated info on the Salesforce Summer ’23 Release ! That’s right, Trailblazers everywhere will now know when to expect, well, everything!
 
 Pre-Release Org-Signup, Release Note Reveal Day, when to expect the Summer ’23 Trailhead Module and more! Chris and Jessie sat down to discuss the updated info, start the countdown clocks, and get a bit more in-depth about what each step on the timeline means for admins everywhere!
 

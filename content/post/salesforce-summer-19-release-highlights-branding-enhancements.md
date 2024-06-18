@@ -1,26 +1,25 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-05-29T11:03:06-07:00",
   "title": "Salesforce Summer ’19 Release Highlights: Branding Enhancements",
   "Slug": "salesforce-summer-19-release-highlights-branding-enhancements",
   "description": "April’s showers are behind us, May’s flowers are bursting into bloom, and the world is spinning its way back to the hottest part of our orbit...",
-  "tags": ["summer 19", "release", "salesforce", "branding", "admin", "custom color"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "tags":
+    ["summer 19", "release", "salesforce", "branding", "admin", "custom color"],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/summer-19-on-phone.jpeg"
-  }
+  "thumbnail": { "url": "/img/summer-19-on-phone.jpg" },
 }
 ---
 
-
-{{< image src="/img/summer-19-on-phone.jpeg" title="Salesforce Summer 19 image on phone" >}}
+{{< image src="/img/summer-19-on-phone.jpg" title="Salesforce Summer 19 image on phone" >}}
 
 April’s showers are behind us, May’s flowers are bursting into bloom, and the world is spinning its way back to the hottest part of our orbit (for those of us in the Northern hemisphere, anyway) and that can only mean one thing — the [Summer ’19 Release](https://releasenotes.docs.salesforce.com/en-us/summer19/release-notes/salesforce_release_notes.htm) is almost here!
 

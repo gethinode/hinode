@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-06-03T10:34:15-07:00",
   "title": "Summer 19 Release Highlights Back to the Classics",
   "Slug": "summer-19-release-highlights-back-to-the-classics",
   "description": "It’s officially June and that means we’re only weeks away from a new NBA champion, even warmer weather, and a brand new Salesforce Release...",
   "tags": ["summer 19", "classic", "release", "lightning", "activity"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/salesforce-toy-car.jpeg"
-  }
+  "thumbnail": { "url": "/img/salesforce-toy-car.jpg" },
 }
 ---
 
-
-{{< image src="/img/salesforce-toy-car.jpeg" title="Red toy car with the Salesforce character inside" >}}
+{{< image src="/img/salesforce-toy-car.jpg" title="Red toy car with the Salesforce character inside" >}}
 
 It’s officially June and that means we’re only weeks away from a new NBA champion, even warmer weather, and a brand new Salesforce Release. That’s right, [Summer ’19](https://releasenotes.docs.salesforce.com/en-us/summer19/release-notes/salesforce_release_notes.htm) is already peeking over the horizon!
 
@@ -32,7 +30,7 @@ Let’s dive in!
 
 Switching between Lightning and Classic is easy, but keeping your place isn’t always as simple — until now! With the rollout of the Summer ’19 Release, Salesforce will start keeping you on the [same page](https://releasenotes.docs.salesforce.com/en-us/summer19/release-notes/rn_context_switch_classic_to_lex.htm) when you swap back and forth between UIs.
 
-{{< image src="/img/lightning-and-classic-page.jpeg" title="Comparison of lightning and classic record pages" >}}
+{{< image src="/img/lightning-and-classic-page.jpg" title="Comparison of lightning and classic record pages" >}}
 
 Whether your users are popping between the two to make use of some UI-exclusive functionality or because they prefer the look and feel of one experience over the other, they’ll save time and effort that used to be wasted navigating back to the page/record they want to update.
 

@@ -14,10 +14,10 @@
       "name": "Jesus Penaloza",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/jesus-penaloza_88-88.webp",
-      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+      "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/0_P0TD1Og5I52s6i_k.jpeg" },
+  "thumbnail": { "url": "/img/0_P0TD1Og5I52s6i_k.jpg" },
 }
 ---
 

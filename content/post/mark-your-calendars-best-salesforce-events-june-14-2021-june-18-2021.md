@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-june-14-2021-june-18-2021",
   "description": "Summer is almossst here and I can smell the sunscreen and BBQs already! I don’t have any BBQ or Happy Hour events, but that doesn’t mean...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/june-2021-calendar3.jpeg"
-  }
+  "thumbnail": { "url": "/img/june-2021-calendar3.jpg" },
 }
 ---
 
-
-{{< image src="/img/june-2021-calendar3.jpeg" >}}
+{{< image src="/img/june-2021-calendar3.jpg" >}}
 
 Summer is almossst here and I can smell the sunscreen and BBQs already! I don’t have any BBQ or Happy Hour events, but that doesn’t mean the calendar isn’t full. In fact, it’s one of the busiest weeks we’ve had in a while! So sit back, open up your calendar, and let’s get planning!
 
@@ -43,8 +41,7 @@ If you aren’t curious about becoming successful anywhere, well I do have a [Ma
 
 We are ending the week with another in-person event (I’m so glad that we are transitioning back to in-person events)! The Bozeman, MT Salesforce Nonprofit user group is having an [In-person Nonprofit User Group Meeting](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-nonprofit-user-group-bozeman-united-states-presents-in-person-non-profit-user-group-meeting-june-17th-at-noon/) on June 17th, at 12pm (MDT). This will be hosted at a conference room in an office and will be providing lunch, so you MUST RSVP. This meeting will center around duplicate and matching rules, and may discuss other topics if time permits. Follow the link, as they included a Trailhead module if you are unfamiliar with the topic and want to brief yourself on it before joining the meeting.
 
-Recap
-------
+## Recap
 
 Last week, we started off the week with the Seattle, WA Salesforce Admin group for the Seattle Group Meeting which focused on certifications, learning pathways, and career development in the Salesforce ecosystem. Salesforce has its annual Industries Summit; which session did you like the most? The Lexington Salesforce Admin group had How to land your first job in the Salesforce ecosystem and then Grow with guest speaker, Austin Sherman.
 

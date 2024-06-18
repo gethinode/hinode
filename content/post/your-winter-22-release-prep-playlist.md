@@ -23,7 +23,7 @@
       "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_FYffLIJg2t3nln7_cdF0bA.jpeg" },
+  "thumbnail": { "url": "/img/1_FYffLIJg2t3nln7_cdF0bA.jpg" },
 }
 ---
 
@@ -32,7 +32,7 @@ Luckily, Salesforce is again making it easy for admins and devs everywhere to ge
 You can log into your trailhead account, navigate to the module, and earn your Winter ’22 release badge right now!
 The trails are broken out by product and use-case to make it easy to just hit the highlights that are most relevant to you and your org (if you don’t feel like earning the entire badge).
 In [sales](https://trailhead.salesforce.com/en/content/learn/modules/winter-22-release-highlights/whats-new-sales-winter-22), you’ll see how Pipeline Inspection Enhancements use new AI-powered close date predictions to see which sales opportunities are most and least likely to close within each month.
-{{< image src="/img/1_4q_4eWafBaYaka07noaOmw.jpeg" title="Image" >}}
+{{< image src="/img/1_4q_4eWafBaYaka07noaOmw.jpg" title="Image" >}}
 
 On the [marketing side](https://trailhead.salesforce.com/en/content/learn/modules/winter-22-release-highlights/whats-new-marketing-loyalty-management-winter-22), you’ll see how enhancements to Salesforce CDP get a complete picture of every individual, intelligently engage with your customers, and deliver new levels of personalization.
 {{< image src="/img/1_eo57LFK95qXVA_vSQ6er4g.png" title="Image" >}}

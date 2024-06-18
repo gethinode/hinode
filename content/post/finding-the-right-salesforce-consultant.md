@@ -11,10 +11,10 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/appexchange-listing-magnified.jpeg" },
+  "thumbnail": { "url": "/img/appexchange-listing-magnified.jpg" },
 }
 ---
 
@@ -55,7 +55,7 @@ Every project is a two-way street in terms of requirements, requests, and commun
 
 ### Location Location Location
 
-{{< image src="/img/los-angeles-skyline.jpeg" title="Los Angeles Skyline" >}}
+{{< image src="/img/los-angeles-skyline.jpg" title="Los Angeles Skyline" >}}
 
 While modern technology empowers remote workforces like never before, there are still some important aspects to consider when it comes to the location of your selected partner and their staff.
 

@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-03-19T08:00:00-07:00",
   "title": "Remote Work Tools: Free Phone Calls in Gmail",
   "Slug": "remote-work-tools-free-phone-calls-in-gmail",
   "description": "With more and more workplaces making a rapid transition to remote operations, some snags and obstacles are inevitable. And, while it’s…",
   "tags": ["calls", "remote", "google", "g suite", "pardot"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/macbook-and-plant-on-desk.jpeg"
-  }
+  "thumbnail": { "url": "/img/macbook-and-plant-on-desk.jpg" },
 }
 ---
 
-
-{{< image src="/img/macbook-and-plant-on-desk.jpeg" title="macbook and plant on desk" >}}
+{{< image src="/img/macbook-and-plant-on-desk.jpg" title="macbook and plant on desk" >}}
 
 With more and more workplaces making a rapid transition to remote operations, some snags and obstacles are inevitable. And, while it’s possible to make a smooth swap-over with the right tools, planning, and procedures in place — given the current circumstances, not every office has those luxuries. Plus, sometimes there’s just no time for triage or support when that important call starts in two minutes and your softphone’s not working.
 
@@ -28,8 +26,7 @@ In this series of blogs, we’ll be sharing our tips and tools for navigating po
 
 Let’s dive in!
 
-Making Calls from Gmail
------------------------
+## Making Calls from Gmail
 
 This one’s simple and straightforward, but it’s saved more than a few meetings in its time, so it’s worth sharing. If, for whatever reason, your work phone’s on the fritz and your landline, if you even have one, if being used by one of your “new colleagues”, you can still make outbound calls, right from Gmail!
 
@@ -45,7 +42,7 @@ Click it, and then click on “Make a Call” right above the phone icon.
 
 Enter the number you’d like to call.
 
-{{< image src="/img/1_Zz9Ik00vJ6kcXjBneFfbxQ.jpeg" title="" >}}
+{{< image src="/img/1_Zz9Ik00vJ6kcXjBneFfbxQ.jpg" title="" >}}
 
 And then click the call field that populates to dial!
 
@@ -53,7 +50,7 @@ And then click the call field that populates to dial!
 
 And now you’re connected!
 
-{{< image src="/img/1_zgcZHM5GXO-qBKp9ZX81dQ.jpeg" title="" >}}
+{{< image src="/img/1_zgcZHM5GXO-qBKp9ZX81dQ.jpg" title="" >}}
 
 Lastly, you might need to grant microphone access if you haven’t previously, but there’s a one-click pop-up to walk you through that if you need to.
 

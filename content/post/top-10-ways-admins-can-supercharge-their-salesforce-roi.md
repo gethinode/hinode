@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2021-09-21T15:10:10-07:00",
   "title": "Top 10 Ways Admins Can Supercharge Their Salesforce ROI",
   "Slug": "top-10-ways-admins-can-supercharge-their-salesforce-roi",
   "description": "Dreamforce is officially underway! And, in addition to the admittedly shrunken down, invite-only, in-person event in San Francisco — over…",
   "tags": ["salesforce", "admin"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/10-ways-admins-supercharge-roi.jpeg"
-  }
+  "thumbnail": { "url": "/img/10-ways-admins-supercharge-roi.jpg" },
 }
 ---
 
-
-{{< image src="/img/10-ways-admins-supercharge-roi.jpeg">}}
+{{< image src="/img/10-ways-admins-supercharge-roi.jpg">}}
 
 Dreamforce is officially underway! And, in addition to the admittedly shrunken down, invite-only, in-person event in San Francisco — over 100,000 Trailblazers around the world are logging on and tuning in to catch the action live and on demand on Salesforce+.
 

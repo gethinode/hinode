@@ -12,14 +12,14 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/laptop-with-cauldron.jpeg" },
+  "thumbnail": { "url": "/img/laptop-with-cauldron.jpg" },
 }
 ---
 
-{{< image src="/img/laptop-with-cauldron.jpeg" title="Laptop with a cauldron on the screen" >}}
+{{< image src="/img/laptop-with-cauldron.jpg" title="Laptop with a cauldron on the screen" >}}
 
 Spring is the season of rebirth. The barren wastes of Winter begin to be punctuated by stalks of new growth, the monochrome horizon broken by flashes of color and life as the world warms and returns to a more comfortable axial orientation.
 
@@ -41,7 +41,7 @@ The good news for them is, those times are coming back!
 
 The short and sweet version is that Salesforce (pre-Lightning) used to keep a bit more of the “behind the scenes” action visible in the URL bar.
 
-{{< image src="/img/url-hack-in-classic.jpeg" title="Example of a URL hack in classic" >}}
+{{< image src="/img/url-hack-in-classic.jpg" title="Example of a URL hack in classic" >}}
 
 See all that stuff at the end of the URL after the “&”? That’s URL magic passing extra information to Salesforce about what to do once it lands on the page. And, because of that, if you knew how Salesforce responded to specific URL additions, you could do some pretty special things, like pre-populate records with information when you created them!
 

@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-07-08T10:13:15-07:00",
   "title": "Summer ’20 Release Highlights: Even Better Opportunity Splits!",
   "Slug": "summer-20-release-highlights-even-better-opportunity-splits",
   "description": "Summer seemed to creep in a bit more slowly this year while we’re all cooped up in quarantine, but the rising temperatures, late sunsets...",
   "tags": ["admin", "release"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/summer-20.jpeg"
-  }
+  "thumbnail": { "url": "/img/summer-20.jpg" },
 }
 ---
 
-
-{{< image src="/img/summer-20.jpeg" >}}
+{{< image src="/img/summer-20.jpg" >}}
 
 Summer seemed to creep in a bit more slowly this year while we're all cooped up in quarantine, but the rising temperatures, late sunsets, and last weekend's annual cacophony of aerial explosions can only mean one thing --- Summer's officially here and that means the [Salesforce Summer '20 Release](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/salesforce_release_notes.htm) is right around the corner!
 
@@ -32,7 +30,7 @@ Today, we're taking a look at the new and improved [Opportunity Splits](https:/
 
 For the uninitiated, opp splits allow you to accurately divvy up opportunity revenue to the relevant team members that contributed to its closing. So, let's say you have a sales rep and a tech team up to do a pitch and a demo for a prospective client. If they're each entitled to a commission on the closed deal, or they each get measured on their activities-to-revenue won, with opp splits you can give them each "credit" for their contribution to the deal and split up the revenue, commissions, glory etc.. appropriately!
 
-{{< image src="/img/edit-opportunity-splits.jpeg" >}}
+{{< image src="/img/edit-opportunity-splits.jpg" >}}
 
 ### So What's Changing?
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "join-us-in-raising-money-and-in-person-if-you-can-for-those-in-need-in-ukraine",
   "description": "As School kicks back off and Summer winds down, the media’s attention has drifted away from the ongoing calamity in Ukraine. But, with a…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/stand-with-ukraine.webp"
-  }
+  "thumbnail": { "url": "/img/stand-with-ukraine.webp" },
 }
 ---
+
 As School kicks back off and Summer winds down, the media’s attention has drifted away from the ongoing calamity in Ukraine. But, with a war still being waged and local support more important than ever, we’re teaming up with Salesforce and ixlayer to host a [fundraiser](https://www.heartsforukraine.us/salesforceevent), raffle, and donation opportunity for everyone that would like to help.
 
 The safest way for us to help save lives is to align with an organization that has the expertise to do so. Enter Hearts for Ukraine. The mission is simple; deliver critical supplies directly to hospitals, shelters, schools, orphanages, nursing homes, refugee support centers, and the territorial defense forces of Ukraine. Targeted deliveries are made without wasting time on storing non-essential goods.

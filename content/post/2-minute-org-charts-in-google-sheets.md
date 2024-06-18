@@ -39,34 +39,34 @@ Basically, we’re going to make a two column table with names and titles in the
 {{< image src="/img/1_7Ai1Vu9tLZauQPx_YkXJDQ.png" title="Image" >}}
 
 Once those are in, simply copy the relevant “name/title data” and paste it in the righthand column, next to those people/titles that report to them.
-{{< image src="/img/1_0hH7L7_i2YTotYfvzKsmhA.png" title="Image" >}}
+{{< image src="/img/1_0hH7L7-i2YTotYfvzKsmhA.png" title="Image" >}}
 
 And repeat until everyone is labelled appropriately.
 {{< image src="/img/1_u9LafWz2I20QjXP23jQ8Ig.png" title="Image" >}}
 
 **Note: Any name/title cell that has a blank cell next to it will appear at the top of a hierarchy, so here our CEO has a blank cell next to them, meaning they’ll be at the top of the chart. If you were making a joint chart for multiple teams and wanted them to be separate, you’d have two (or more) name/title cells with empty adjacent cells and the results would be two (or more) side by side charts essentially.**
 Once all the data is entered, simply select the entire table (and make sure not to select the column labels if you chose to use them).
-{{< image src="/img/1_bj_vzuTvAGAZG9FTsvNJiQ.png" title="Image" >}}
+{{< image src="/img/1_bj-vzuTvAGAZG9FTsvNJiQ.png" title="Image" >}}
 
 Then select **Insert -&gt; Chart** from the toolbar.
-{{< image src="/img/1_xOeG1xEaUAd5dBu0BH6k2Q.jpeg" title="Image" >}}
+{{< image src="/img/1_xOeG1xEaUAd5dBu0BH6k2Q.jpg" title="Image" >}}
 
 That will produce a “No Data” chart on your page that can be moved or sized.
 {{< image src="/img/1_hJRseq267cJWkwuqEzxWEA.png" title="Image" >}}
 
 On the right hand side, in the Chart Editor menu, click on the “Chart Type” picklist, scroll down, and select the “Organizational Chart”.
-{{< image src="/img/1_0QHWNZ27LAcmSgGLNFt69g.jpeg" title="Image" >}}
+{{< image src="/img/1_0QHWNZ27LAcmSgGLNFt69g.jpg" title="Image" >}}
 
-{{< image src="/img/1_pKnyR0RYx4r2xmy7O9pdFQ.jpeg" title="Image" >}}
+{{< image src="/img/1_pKnyR0RYx4r2xmy7O9pdFQ.jpg" title="Image" >}}
 
 Now, you may need to resize your chart to fit all of the data, but you’ll have a completely organized and labelled organizational chart to copy and paste wherever you need it!
 {{< image src="/img/1_vXTCgjvC6Dpd19OHhi39Qg.png" title="Image" >}}
 
 If you’d like to make any tweaks to size, colors, etc… you can click the three-dot icon in the upper right of your chart and select “Edit chart”.
-{{< image src="/img/1_0_Q15jNEit4cCJEVqCAkSA.jpeg" title="Image" >}}
+{{< image src="/img/1_0_Q15jNEit4cCJEVqCAkSA.jpg" title="Image" >}}
 
 And that will bring back the edit panel where, on the “Customize” tab you can tweak to your heart’s content.
-{{< image src="/img/1_2oipyTLpFotWZO_kkWHh7g.png" title="Image" >}}
+{{< image src="/img/1_2oipyTLpFotWZO-kkWHh7g.png" title="Image" >}}
 
 And now you’re all set! 1 org chart, in a flash!
 I’ll also add one more helpful hint if you’re planning on making this chart more final draft than first: if you want to add some additional formatting to the labels, say, having the name appear above the title, you’ll have to do that in the cells you’re using to generate the chart.

@@ -23,7 +23,7 @@
       "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/0_xNaJpD_3xrhK1iSP.png" },
+  "thumbnail": { "url": "/img/0_xNaJpD3xrhK1iSP.png" },
 }
 ---
 

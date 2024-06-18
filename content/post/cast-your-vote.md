@@ -1,27 +1,25 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "date": "2020-01-23T14:19:04-07:00",
   "title": "Cast Your Vote!",
   "Slug": "cast-your-vote",
   "description": "And help craft the Salesforce feature roadmap of your dreams.",
   "tags": ["releases", "ideaexchange", "roadmap", "spring 20"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/two-girls-on-one-laptop.jpeg"
-  }
+  "thumbnail": { "url": "/img/two-girls-on-one-laptop.jpg" },
 }
 ---
 
-
-{{< image src="/img/two-girls-on-one-laptop.jpeg" title="Two girls using one laptop" >}}
+{{< image src="/img/two-girls-on-one-laptop.jpg" title="Two girls using one laptop" >}}
 
 We talk a lot about new [Salesforce releases](https://medium.com/tag/release-highlights/archive) here. With three every year ([Winter](https://medium.com/creme-de-la-crm/winter-20-release-highlights-lightning-is-going-live-permanently-1f439d4103e8), [Spring](https://medium.com/creme-de-la-crm/spring-20-release-highlights-samesite-cookies-integrations-and-preparing-for-google-chrome-80-9955cb7e4a41), and [Summer](https://medium.com/creme-de-la-crm/summer-19-release-highlights-back-to-the-classics-7b9abe9e6cf9)) it feels like there’s always something “new and improved” right around the corner. And, while the [IdeaExchange](https://trailblazer.salesforce.com/ideaSearch) has long existed as an outlet for influence — where users’ suggestions can be shared with the Salesforce community at large and voted up or down based on shared demand, it’s sometimes felt underpowered in terms of immediate impact.
 

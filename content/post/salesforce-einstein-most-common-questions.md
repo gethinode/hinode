@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce Einstein — Most Common Questions",
   "Slug": "salesforce-einstein-most-common-questions",
   "description": "As a Salesforce Einstein Champion I field a lot of questions about “just what it is, exactly?” and how artificial intelligence fits into the Salesforce Platform and, while I’m always happy to chat about it, I figured I’d take a moment here to address the Qs I hear most often!.",
-  "tags": ["salesforce-einstein","artificial-intelligence","einstein","salesforce","salesforce-ai"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-einstein",
+      "artificial-intelligence",
+      "einstein",
+      "salesforce",
+      "salesforce-ai",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_0aUBMBT5X8bX5_js352xAQ.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_0aUBMBT5X8bX5_js352xAQ.jpg" },
 }
 ---
+
 As a Salesforce Einstein Champion I field a lot of questions about “just what it is, exactly?” and how artificial intelligence fits into the [Salesforce Platform](https://www.salesforce.com/products/einstein/overview/) and, while I’m always happy to chat about it, I figured I’d take a moment here to address the Qs I hear most often!
 So, from most frequent to least, let’s run through the list of everything [Einstein](https://www.salesforce.com/products/einstein/overview/)!
 

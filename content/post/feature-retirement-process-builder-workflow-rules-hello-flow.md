@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Feature Retirement: Process Builder + Workflow Rules — Hello Flow!",
   "Slug": "feature-retirement-process-builder-workflow-rules-hello-flow",
   "description": "This has been in the works for a while, and it was made official at Dreamforce this year — Process Builder and Workflow Rules are being retired and the focus moving forward will be the ever-expanding power and feature-set of Flow..",
-  "tags": ["salesforce","salesforce-flow","workflow-rule","salesforce-admin","process-builder"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-flow",
+      "workflow-rule",
+      "salesforce-admin",
+      "process-builder",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_8ayTU5Pv0VmFItGz.jpeg"
-  }
+  "thumbnail": { "url": "/img/0_8ayTU5Pv0VmFItGz.jpg" },
 }
 ---
+
 This has been in the works for a while, and it was made official at Dreamforce this year — Process Builder and Workflow Rules are being retired and the focus moving forward will be the ever-expanding power and feature-set of [Flow](https://medium.com/creme-de-la-crm/spring-21-release-highlights-lightning-flow-improvements-and-a-rebrand-b711e31989dd).
 We [talked about Salesforce Flow](https://medium.com/creme-de-la-crm/spring-21-release-highlights-lightning-flow-improvements-and-a-rebrand-b711e31989dd) when it made it’s debut, and there were rumblings, even then, that it looked to be gearing itself up to be Salesforce’s flagship tool for automation, and now we have a timeline for the transition.
 Today, we’ll quickly run through what to expect and when to expect it!

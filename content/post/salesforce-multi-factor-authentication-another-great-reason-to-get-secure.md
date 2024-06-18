@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "salesforce-multi-factor-authentication-another-great-reason-to-get-secure",
   "description": "Securing access to your org is priority one for protecting your data. And one of the easiest, most effective ways to improve security is…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/mk-security.jpeg"
-  }
+  "thumbnail": { "url": "/img/mk-security.jpg" },
 }
 ---
 
-
-{{< image src="/img/mk-security.jpeg" >}}
+{{< image src="/img/mk-security.jpg" >}}
 
 Securing access to your org is priority one for protecting your data. And one of the easiest, most effective ways to improve security is multi-factor authentication (MFA). Most people are familiar with the concept --- on top of a username and password combo, users also have their identities confirmed along one (or more) additional avenues.
 

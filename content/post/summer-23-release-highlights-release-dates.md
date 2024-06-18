@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,29 +9,29 @@
   "Slug": "summer-23-release-highlights-release-dates",
   "description": "It seems like Spring has only just sprung (and in some cities it’s still a bit Winter-y) but, with this weekend welcoming in April we know…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_bXI7n8K1R8brwTqCVaDR2Q.webp"
-  }
+  "thumbnail": { "url": "/img/1_bXI7n8K1R8brwTqCVaDR2Q.webp" },
 }
 ---
+
 It seems like Spring has only just sprung (and in some cities it’s still a bit Winter-y) but, with this weekend welcoming in April we know that the Salesforce Summer Release can’t be far behind!
 
 As always, we’ll be peppering the countdown to “go live” with another round of our [Release Highlights](https://medium.com/tag/release-highlights) — collecting and collating the important dates and deadlines, perusing the release notes to gather the most exciting and important updates headed to orgs everywhere, and ensuring that you and your team can hit the ground running once Summer ’23 launches!
 
 So what do we know so far? Interestingly, a bit less than usual. We know the Go-Live dates aka Release Weekends for Summer ’23. And those are:
 
-* May 6, 2023
+- May 6, 2023
 
-* June 3, 2023
+- June 3, 2023
 
-* June 10, 2023
+- June 10, 2023
 
 And, given previous releases we can make an educated guess that the May date will be a “*First Release Weekend (Limited, Pilot participation)”*with the remaining June dates being the wider releases that see all orgs get the update.
 

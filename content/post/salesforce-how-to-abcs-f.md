@@ -23,7 +23,7 @@
       "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_tLe3mVRp8_UR_YuilTBJTw.jpeg" },
+  "thumbnail": { "url": "/img/1_tLe3mVRp8_UR_YuilTBJTw.jpg" },
 }
 ---
 
@@ -31,27 +31,27 @@ With the [Summer ’19 Release](https://medium.com/creme-de-la-crm/summer-19-rel
 Luckily, for times like that, there’s Google!
 In today’s post, we’ll continue our [alphabetic look](https://medium.com/tag/salesforce-how-to-abcs/archive) at the most commonly searched Salesforce tasks, so you can jog your memory and get back to work fast! This time, we’re looking at the letter “F”, as in “How to Find Your Org ID”.
 Let’s jump in!
-{{< image src="/img/1_P8f5q7G0apGBHlt4P79vzA.jpeg" title="Image" >}}
+{{< image src="/img/1_P8f5q7G0apGBHlt4P79vzA.jpg" title="Image" >}}
 
 To start, we’ll need to navigate to the Setup page. So click the cog in the top right corner of your org.
-{{< image src="/img/1_PPFrUEdq2Asx44LdibAUAg.jpeg" title="Image" >}}
+{{< image src="/img/1_PPFrUEdq2Asx44LdibAUAg.jpg" title="Image" >}}
 
 And then click “Setup” in the dropdown menu.
-{{< image src="/img/1_vOR_DnjVJ67UFtI36fE6Nw.jpeg" title="Image" >}}
+{{< image src="/img/1_vOR_DnjVJ67UFtI36fE6Nw.jpg" title="Image" >}}
 
 That’ll take you to the Setup Homepage.
-{{< image src="/img/1_FP4GLv1FrFvA_O00_vg6eg.jpeg" title="Image" >}}
+{{< image src="/img/1_FP4GLv1FrFvA_O00_vg6eg.jpg" title="Image" >}}
 
 Now, on the left side, select “Company Settings” and then “Company Information”.
-{{< image src="/img/1_Bd4i3R_Obl5MX9SW6zfGVg.jpeg" title="Image" >}}
+{{< image src="/img/1_Bd4i3R_Obl5MX9SW6zfGVg.jpg" title="Image" >}}
 
-{{< image src="/img/1_g0dYd70QN7Ar6_Iw6djyVA.jpeg" title="Image" >}}
+{{< image src="/img/1_g0dYd70QN7Ar6_Iw6djyVA.jpg" title="Image" >}}
 
 You can also type “Company Information” into the Quick Find bar and select it from there.
-{{< image src="/img/1_C2U1m7UHT0tfOHpDUjdPRQ.jpeg" title="Image" >}}
+{{< image src="/img/1_C2U1m7UHT0tfOHpDUjdPRQ.jpg" title="Image" >}}
 
 Now you’ll be seeing your org’s Company Information. All that’s left to do is locate the field labelled “Salesforce.com Organization ID”!
-{{< image src="/img/1_B5WUyyaDk_U5HXcUFJHKSg.jpeg" title="Image" >}}
+{{< image src="/img/1_B5WUyyaDk_U5HXcUFJHKSg.jpg" title="Image" >}}
 
 Congratulations, you did it! Now you can use that ID whenever you need it (most often when logging support cases to activate new features)!
 Feel free to drop any questions in the comments below and, if you need more help getting your org set-up, configured, or just want some guidance crafting your overall Salesforce strategy, [give us a call](https://www.mkpartners.com/article/contact/contact) — we’re always happy to help!

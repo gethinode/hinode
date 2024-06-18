@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,37 +9,37 @@
   "Slug": "spring-23-release-highlights-marketing-cloud-account-engagement-pardot-general-enhancements",
   "description": "Well, the time has finally come. Salesforce has officially posted release notes for the official Spring ‘23 debut of Marketing Cloud…",
   "tags": [],
-  "author": {
-    "name": "Tommy Holden",
-    "title": "Content Contributor",
-    "webp": "/img/tommy-holden_128-128.webp",
-    "jpeg": "/img/tommy-holden_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Tommy Holden",
+      "title": "Content Contributor",
+      "webp": "/img/tommy-holden_128-128.webp",
+      "jpeg": "/img/tommy-holden_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_IPa0hHSJ0NsTGPZ_.webp"
-  }
+  "thumbnail": { "url": "/img/0_IPa0hHSJ0NsTGPZ_.webp" },
 }
 ---
-Well, the time has finally come. Salesforce has officially posted release notes for the official Spring ‘23 debut of *Marketing Cloud Account Engagement*(AKA: Ex-Pardot).**It’s worth noting that prior release information for this new product suite was more or less quite vague until now. Via newly recently released official published information, we’re starting to see where this new platform is headed known as “General Enhancements” within the Spring ’23 Release Notes.
+
+Well, the time has finally come. Salesforce has officially posted release notes for the official Spring ‘23 debut of _Marketing Cloud Account Engagement_(AKA: Ex-Pardot).\*\*It’s worth noting that prior release information for this new product suite was more or less quite vague until now. Via newly recently released official published information, we’re starting to see where this new platform is headed known as “General Enhancements” within the Spring ’23 Release Notes.
 
 1. **Account Engagement Optimizer (Beta Release Only):**
 
 {{< image src="/img/1_p-16eEL7f-tKEe1VV0oVIg.webp">}}
 
-Now an end-user can receive automated & actionable recommendations to improve efficiency & stay ahead of issues within a desired business unit. The recommendations that the Optimizer settings provides can improve email sending deployments, enhanced visitor tracking, & an overall status for your business unit to know know if anything critical needs immediate attention. There’s also an *Optimizer Table Action Manager* to pause and prioritize actions.
+Now an end-user can receive automated & actionable recommendations to improve efficiency & stay ahead of issues within a desired business unit. The recommendations that the Optimizer settings provides can improve email sending deployments, enhanced visitor tracking, & an overall status for your business unit to know know if anything critical needs immediate attention. There’s also an _Optimizer Table Action Manager_ to pause and prioritize actions.
 
-***Please Note***This feature is a Beta Service Release at this time. Any use of the Beta Service is subject to the applicable Beta Services Terms provided at [Agreements and Terms](https://www.salesforce.com/company/legal/agreements/).
+**_Please Note_**This feature is a Beta Service Release at this time. Any use of the Beta Service is subject to the applicable Beta Services Terms provided at [Agreements and Terms](https://www.salesforce.com/company/legal/agreements/).
 
 **So, How Do You Access This Exciting Beta Release Exactly?**Opting into the beta from your business unit dashboard or by navigating to the Optimizer page can be completed within an end-user’s Account Engagement Settings. When applicable, recommendations include a direct link to the area of the app to which the recommendation settings focuses on.
 
-**2. Domain Validation Is Being Changed Up: *This is important***Sending domain validation now requires ***Proof of Ownership.***For each of your sending domains, Account Engagement generates a unique validation key that you copy and paste into your DNS record. When you validate your domain, the system checks your DNS record to confirm that the TXT entry matches the validation key in your business unit. That said, Domains that you validated previously with DKIM ***still*** remain validated. However, existing domains that weren’t validated previously now require the new validation method. It’s also worth nothing that the DomainKey Policy column is being removed from the Domain Management page. Although, the DomainKey column is still present. While we recommend adding a DomainKey entry to your DNS records, it’s not a mandatory requirement.
+**2. Domain Validation Is Being Changed Up: _This is important_**Sending domain validation now requires **_Proof of Ownership._**For each of your sending domains, Account Engagement generates a unique validation key that you copy and paste into your DNS record. When you validate your domain, the system checks your DNS record to confirm that the TXT entry matches the validation key in your business unit. That said, Domains that you validated previously with DKIM **_still_** remain validated. However, existing domains that weren’t validated previously now require the new validation method. It’s also worth nothing that the DomainKey Policy column is being removed from the Domain Management page. Although, the DomainKey column is still present. While we recommend adding a DomainKey entry to your DNS records, it’s not a mandatory requirement.
 
-**Where & How:**All of the above****changes apply to all Account Engagement editions. From the Domain Management page in Account Engagement, copy the validation key for your sending domain and add it to your DNS as a TXT entry. After the key is added, verify the domain in Account Engagement by checking the DNS entries.
+**Where & How:**All of the above\*\*\*\*changes apply to all Account Engagement editions. From the Domain Management page in Account Engagement, copy the validation key for your sending domain and add it to your DNS as a TXT entry. After the key is added, verify the domain in Account Engagement by checking the DNS entries.
 
-***Also*** — **New Account Engagement Business Units Have New Settings set on by default to Protect Prospect Privacy Including:** *First-Party Tracking*, *Force HTTPS*, *Honor Do Not Track*, and *Request Opt-In* from all visitors. The Max Tracking Cookie Duration setting now defaults to 365 days. An Account Engagement administrator can edit the default settings at any time. These changes affect only customers who are new after Spring ’23 release and don’t override existing settings in your business unit.
+**_Also_** — **New Account Engagement Business Units Have New Settings set on by default to Protect Prospect Privacy Including:** _First-Party Tracking_, _Force HTTPS_, _Honor Do Not Track_, and _Request Opt-In_ from all visitors. The Max Tracking Cookie Duration setting now defaults to 365 days. An Account Engagement administrator can edit the default settings at any time. These changes affect only customers who are new after Spring ’23 release and don’t override existing settings in your business unit.
 
-**3. *Also VERY Important* Options to Run Automation Rules in Real-Time Is Officially Being Retired = This is a legacy Pardot setting which is being scrapped and is effective in all Account Engagement editions as of June 2023.**Post retirement, existing automation rules that use this setting continue to run but don’t run in real-time. When you create a new rule or edit an existing rule, the option to run in real time is no longer available.
+**3. _Also VERY Important_ Options to Run Automation Rules in Real-Time Is Officially Being Retired = This is a legacy Pardot setting which is being scrapped and is effective in all Account Engagement editions as of June 2023.**Post retirement, existing automation rules that use this setting continue to run but don’t run in real-time. When you create a new rule or edit an existing rule, the option to run in real time is no longer available.
 
 **4. New Feature: External Action Error Table — Keep Your Automations Running Reliably Within a Consolidated Setting:**
 

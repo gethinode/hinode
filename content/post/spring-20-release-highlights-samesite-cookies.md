@@ -22,14 +22,14 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/laptop-wood-flowers.jpeg" },
+  "thumbnail": { "url": "/img/laptop-wood-flowers.jpg" },
 }
 ---
 
-{{< image src="/img/laptop-wood-flowers.jpeg" title="Laptop on a wood table with flowers" >}}
+{{< image src="/img/laptop-wood-flowers.jpg" title="Laptop on a wood table with flowers" >}}
 
 The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere. From sweater-free lunch-strolls, to slightly more sunlit evening commutes, the coming season is already sneaking its way into our lives and that can only mean one thing — the [Spring ’20 Salesforce release](https://www.salesforce.com/blog/2020/01/spring-20-release-preview.html) is right around the corner!
 
@@ -54,7 +54,7 @@ That first bullet is fairly simple to address, all you’ll need to do is requir
 
 But, if you haven’t made the switch to requiring HTTPS access in your org yet, you’ll want to do it now. Simply head over to “Session Settings” in Setup and ensure that “Require secure connections (HTTPS)” and “Require secure connections (HTTPS) for all third-party domains” are both enabled.
 
-{{< image src="/img/require-secure-connections.jpeg" title="Require secure connections" >}}
+{{< image src="/img/require-secure-connections.jpg" title="Require secure connections" >}}
 
 They default to “enabled” at this point, but it’s worth checking now just to ensure you’re not hit with a bunch of calls from your Chrome users come February.
 
@@ -64,7 +64,7 @@ Before Chrome 80 gets widely-released, you’ll want to test any of your custom 
 
 Using the latest version of Chrome and a Spring ’20 Sandbox you’ll want to navigate to chrome://flagsand enable the “SameSite by default cookies” and “Cookies without SameSite must be secure” experiments.
 
-{{< image src="/img/chrome-flags.jpeg" title="Chrome flags settings" >}}
+{{< image src="/img/chrome-flags.jpg" title="Chrome flags settings" >}}
 
 Then simply test your integrations and, if you catch any regressions, update the ‘SameSite’ attribute on cookies used for cross-domain communication to:
 

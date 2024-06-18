@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "salesforce-videos-how-tos-news-and-more",
   "description": "Some things you have to see to believe. Other things are just easier to learn when you can actually watch them happen (as opposed to…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/mk-youtube-page.jpeg"
-  }
+  "thumbnail": { "url": "/img/mk-youtube-page.jpg" },
 }
 ---
 
-
-{{< image src="/img/mk-youtube-page.jpeg" >}}
+{{< image src="/img/mk-youtube-page.jpg" >}}
 
 Some things you have to see to believe. Other things are just easier to learn when you can actually watch them happen (as opposed to trying to mentally animate a series of screenshots as you scroll through a list of instructions).
 

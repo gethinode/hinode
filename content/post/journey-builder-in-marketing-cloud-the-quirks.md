@@ -14,10 +14,10 @@
       "name": "Tommy Holden",
       "title": "Content Contributor",
       "webp": "/img/tommy-holden_128-128.webp",
-      "jpeg": "/img/tommy-holden_128-128.jpeg",
+      "jpeg": "/img/tommy-holden_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_-9TcVTwgFc3ufAeVsvwgsA.png" },
+  "thumbnail": { "url": "/img/1_9TcVTwgFc3ufAeVsvwgsA.png" },
 }
 ---
 

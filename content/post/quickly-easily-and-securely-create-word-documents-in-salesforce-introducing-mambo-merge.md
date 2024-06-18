@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-06-04T15:43:13-07:00",
   "title": "Quickly, Easily, and Securely Create Word Documents in Salesforce — Introducing Mambo Merge!",
   "Slug": "quickly-easily-and-securely-create-word-documents-in-salesforce-introducing-mambo-merge",
   "description": "Whether it’s Billing creating invoices, Sales creating quotes...",
   "tags": ["admin", "word", "document", "mail", "merge", "mambo"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/imac-with-dinosaur.jpeg"
-  }
+  "thumbnail": { "url": "/img/imac-with-dinosaur.jpg" },
 }
 ---
 
-
-{{< image src="/img/imac-with-dinosaur.jpeg" >}}
+{{< image src="/img/imac-with-dinosaur.jpg" >}}
 
 Duplicate effort is the bane of users everywhere and one of the biggest obstacles to adoption. And it makes sense. We’ve probably all experienced a new system roll-out, promising to deliver efficiency, ease of use, and of course management’s much-coveted reporting and metrics. But then, when it arrives, you’re left doing your job twice — once, the way you’ve always done it, and then again, entering what you’ve just done in the new system. It’s a recipe for reduced throughput and reduced morale, which is why it’s so important to make sure your systems actually benefit your users’ day-to-day.
 
@@ -30,7 +28,7 @@ And today, that synergy is getting even easier — with the introduction of [Mam
 
 ### Generate Word Documents with the Click of a Button
 
-{{< image src="/img/mambo-merge-component.jpeg" >}}
+{{< image src="/img/mambo-merge-component.jpg" >}}
 
 Whether it’s Billing creating invoices, Sales creating quotes, Logistics creating BOLs, or HR creating employment documentation — if your users have to create Word Documents, they shouldn’t have to enter information twice (or rely on copy and paste). With Mambo Merge, one click will generate their document de jour, with data right from your Salesforce org.
 

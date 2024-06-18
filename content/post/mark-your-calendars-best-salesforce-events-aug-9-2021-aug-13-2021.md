@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-aug-9-2021-aug-13-2021",
   "description": "I miss seeing all of those community events. I’m part of a few community groups but we have yet to have an event, so hopefully some of you...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/august-2021-calendar2.jpeg"
-  }
+  "thumbnail": { "url": "/img/august-2021-calendar2.jpg" },
 }
 ---
 
-
-{{< image src="/img/august-2021-calendar2.jpeg" >}}
+{{< image src="/img/august-2021-calendar2.jpg" >}}
 
 I miss seeing all of those community events. I’m part of a few community groups but we have yet to have an event, so hopefully some of you have gotten to see your groups virtually or in person recently! As a result, my blog posts are almost getting shorter every week. But don’t worry, you still need to sit back, open up your calendars and get planning!
 
@@ -35,9 +33,8 @@ On Thursday, August 12th we have 2 events occurring at 11am (PDT). First up we h
 
 Our second event is for those in the education sector. If you haven’t heard yet, the American Rescue Plan (ARP) provides federal funding for higher education. If you work in this industry and are curious how to use this money wisely and the impact it could have, then consider signing up for [How Higher Ed Can Drive Student Success with ARP Funding](https://www.salesforce.com/form/sfdo/edu/student-success-arp-funding/?_ga=2.219273055.737934146.1628188096-1449393581.1625164245). During this event, viewers will learn about the acceptable use of federal funding, how that can be used to support students, and how technology can help reimagine this experience for students.
 
-Recap
-------
+## Recap
 
-Last week Trailhead News held multiple *Exclusive Interview* sessions to talk about the new Developer site being updated and relaunched! We had a panel discussion that discussed challenges and myths around advertising sales, the evolution of advertising sales, and how Media Cloud can simplify all of this in *Simplifying the Complexity of Cross-Channel Advertising Sales*. We had the first of many Slack related events, *Building for the Slack App Directory* to teach Developers more about the Slack App Dictionary, the ins and outs of building a Slack app, and advice on how to launch your app.Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
+Last week Trailhead News held multiple _Exclusive Interview_ sessions to talk about the new Developer site being updated and relaunched! We had a panel discussion that discussed challenges and myths around advertising sales, the evolution of advertising sales, and how Media Cloud can simplify all of this in _Simplifying the Complexity of Cross-Channel Advertising Sales_. We had the first of many Slack related events, _Building for the Slack App Directory_ to teach Developers more about the Slack App Dictionary, the ins and outs of building a Slack app, and advice on how to launch your app.Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 
 Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE&utm_source=mkp&utm_medium=referral&utm_campaign=logigear-mkp-tpp) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

@@ -11,10 +11,10 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/laptop-with-glasses-and-plant.jpeg" },
+  "thumbnail": { "url": "/img/laptop-with-glasses-and-plant.jpg" },
 }
 ---
 
@@ -46,27 +46,27 @@ Creating or resetting your security token is as simple as a few clicks.
 
 First, navigate to your personal settings by clicking on your profile icon in the top right corner of your org.
 
-{{< image src="/img/clicking-user-avatar.jpeg" title="Arrow pointing to user avatar" >}}
+{{< image src="/img/clicking-user-avatar.jpg" title="Arrow pointing to user avatar" >}}
 
 And select “Settings” from the menu that drops down.
 
-{{< image src="/img/arrow-pointing-to-user-settings.jpeg" title="Arrow pointing to user settings" >}}
+{{< image src="/img/arrow-pointing-to-user-settings.jpg" title="Arrow pointing to user settings" >}}
 
 That’ll land you on your personal information page. Now click “Reset My Security Token” on the left hand side of the screen (or enter “Reset” in the Quick find box and then select it).
 
-{{< image src="/img/reset-my-security-token.jpeg" title="Arrow pointing to reset my security token" >}}
+{{< image src="/img/reset-my-security-token.jpg" title="Arrow pointing to reset my security token" >}}
 
 And once you’re on your Reset Security Token Page, simply click “Reset Security Token”.
 
-{{< image src="/img/reset-security-token-button.jpeg" title="Arrow pointing to reset security token button" >}}
+{{< image src="/img/reset-security-token-button.jpg" title="Arrow pointing to reset security token button" >}}
 
 ==!! REMEMBER: This will render any existing uses of your previous security token void/obsolete, so be careful if you think you have any existing connections you might break. !!==
 
 And once you’ve clicked it, you’re almost there! You’ll see the notification that a new security token has been emailed to you — just head over to your inbox and look for the email from Salesforce!
 
-{{< image src="/img/check-your-email.jpeg" title="Check your email" >}}
+{{< image src="/img/check-your-email.jpg" title="Check your email" >}}
 
-{{< image src="/img/email-security-token.jpeg" title="Email of security token" >}}
+{{< image src="/img/email-security-token.jpg" title="Email of security token" >}}
 
 `I've already reset mine again, so please don't try to use this security token to hack your way into my super-secret trailhead playground please. Thank you.`
 
@@ -80,11 +80,11 @@ If you jumped straight to this section to find your existing security token, wel
 
 Existing security tokens aren’t saved anywhere “in-org” so you’ll need to find the email you were sent when you created it the first time. The easiest way to do that is to search “Salesforce Developers security token”.
 
-{{< image src="/img/email-search-security-token.jpeg" title="Searching for security token in email" >}}
+{{< image src="/img/email-search-security-token.jpg" title="Searching for security token in email" >}}
 
 Click into the most recent email and there you have it!
 
-{{< image src="/img/email-security-token.jpeg" title="Email of security token" >}}
+{{< image src="/img/email-security-token.jpg" title="Email of security token" >}}
 
 `I've already reset mine again, so please don't try to use this security token to hack your way into my super-secret trailhead playground please. Thank you.`
 

@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-06-09T15:49:31-07:00",
   "title": "The Best Time to Backup",
   "Slug": "the-best-time-to-backup",
   "description": "Since the Library of Alexandria, we’ve known the importance of data backups. There’s nothing else that delivers that specific, crushing, disheartening feeling like losing something you’ve worked on...",
   "tags": ["admin", "undo", "button", "salesforce", "app", "exchange"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/guy-staring-at-macbook.jpeg"
-  }
+  "thumbnail": { "url": "/img/guy-staring-at-macbook.jpg" },
 }
 ---
 
-
-{{< image src="/img/guy-staring-at-macbook.jpeg" >}}
+{{< image src="/img/guy-staring-at-macbook.jpg" >}}
 
 Since the [Library of Alexandria](https://en.wikipedia.org/wiki/Library_of_Alexandria), we’ve known the importance of data backups. There’s nothing else that delivers that specific, crushing, disheartening feeling like losing something you’ve worked on and having to start over from scratch. And, when it comes to your business data, systems and relationships developed over years — a data loss can bring the entire operation to a grinding halt.
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce Announces Hyperforce!",
   "Slug": "salesforce-announces-hyperforce",
   "description": "No, it’s not a new branch of the military to combat excitement — it’s a re-architecture of Salesforce! Hyperforce was designed to deliver a more-powerful and more-scalable platform especially for governments and global clients dealing with stricter requirements around data management and storage..",
-  "tags": ["public-sector","salesforce-platofrm","salesforce","salesforce-news","hyperforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "public-sector",
+      "salesforce-platofrm",
+      "salesforce",
+      "salesforce-news",
+      "hyperforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_5P00kpcnBeAnLXK3DE6qhA.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_5P00kpcnBeAnLXK3DE6qhA.jpg" },
 }
 ---
+
 No, it’s not a new branch of the military to combat excitement — it’s a re-architecture of Salesforce! [Hyperforce](https://www.salesforce.com/news/press-releases/2020/12/02/introducing-salesforce-hyperforce/) was designed to deliver a more-powerful and more-scalable platform especially for governments and global clients dealing with stricter requirements around data management and storage.
 
 ## Choose Where Your Data Resides

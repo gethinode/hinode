@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "lets-build-developing-apps-and-components-on-the-salesforce-platforms",
   "description": "One of Salesforce’s biggest strengths as a platform has always been its ability to be adapted, customized, configured, and built-on to…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/lets-build.jpeg"
-  }
+  "thumbnail": { "url": "/img/lets-build.jpg" },
 }
 ---
-
-
-{{< image src="/img/lets-build.jpeg" >}}
 
 One of Salesforce’s biggest strengths as a platform has always been its ability to be adapted, customized, configured, and built-on to develop a system that perfectly matches each organization’s needs. And, while the reviews and testimonials speak for themselves, a lot of people are still curious to see that “construction” in action — so we’re launching a video series!
 

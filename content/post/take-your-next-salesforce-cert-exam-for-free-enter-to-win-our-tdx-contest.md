@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Take Your Next Salesforce Cert Exam for Free: Enter to Win our TDX Contest!",
   "Slug": "take-your-next-salesforce-cert-exam-for-free-enter-to-win-our-tdx-contest",
   "description": "With TrailblazerDX in full swing, our feeds are full of new features, product news, and the inspiring Trailblazer stories that get us fired up to continue improving our Salesforce skill set!.",
-  "tags": ["tdx","salesforce","salesforce-certification","salesforce-certs","giveaway"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "tdx",
+      "salesforce",
+      "salesforce-certification",
+      "salesforce-certs",
+      "giveaway",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_tBoHG_9S2lGImqVB9rE1TQ.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_tBoHG_9S2lGImqVB9rE1TQ.jpg" },
 }
 ---
+
 With [TrailblazerDX](https://www.salesforce.com/trailblazerdx) in full swing, our feeds are full of new features, product news, and the inspiring Trailblazer stories that get us fired up to continue improving our Salesforce skill set!
 Whether it’s the latest in Einstein AI, Slack, Salesforce Genie, or the rest of the Salesforce product line, there’s nothing like a big Salesforce event to get you psyched up to tackle your next cert exam — and maybe yours will be free!
 That’s right, in honor of TDX (and especially those that weren’t able to make the trip to SF and so are following along virtually), we wanted to help one lucky Trailblazer keep their Salesforce career climbing, and so for the next week our [Mambo Merge x TDX ’23 Cert Contest is Live](https://gleam.io/gYzqg/mambo-merge-x-tdx-23-giveaway)!

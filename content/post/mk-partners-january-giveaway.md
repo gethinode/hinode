@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "MK Partners’ January Giveaway!",
   "Slug": "mk-partners-january-giveaway",
   "description": "New year, familiar contest! We’re back with January’s MK Partners’ Giveaway and entries are open now!.",
-  "tags": ["salesforce-partners","salesforce-admin","giveaway","mk-partners","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-partners",
+      "salesforce-admin",
+      "giveaway",
+      "mk-partners",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_9On5No_kjF9K1yOMfjPFqw.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_9On5No_kjF9K1yOMfjPFqw.jpg" },
 }
 ---
+
 New year, familiar contest! We’re back with January’s MK Partners’ Giveaway and entries are open now!
 1 lucky winner at the end of the month will get a $50 Amazon gift card and be crowned 2021’s first giveaway champ.
 There are lots of ways to enter, and you can do one (or all of them) right now, just click the link below to get started:

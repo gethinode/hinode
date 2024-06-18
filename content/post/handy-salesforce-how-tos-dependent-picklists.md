@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "handy-salesforce-how-tos-dependent-picklists",
   "description": "Super long picklists slow down workflow, introduce opportunities for errors, and are just bad UX. As admins, it can feel like a constant balancing act between pared down picklists and data specificity. After all, you need your inputs to be granular enough to have value...",
   "tags": ["admin", "how to"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/how-to-dependent-picklist.jpeg"
-  }
+  "thumbnail": { "url": "/img/how-to-dependent-picklist.jpg" },
 }
 ---
-
-
-{{< image src="/img/how-to-dependent-picklist.jpeg" >}}
 
 Super long picklists slow down workflow, introduce opportunities for errors, and are just bad UX. As admins, it can feel like a constant balancing act between pared down picklists and data specificity. After all, you need your inputs to be granular enough to have value, but don’t want to ask your users to sort through 15 versions of almost identical model numbers to select the right product. Enter picklist dependencies!
 

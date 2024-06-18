@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Marketing Cloud for “Pardot Speakers”: How to Automate a Segmentation List / Dynamic Lists",
   "Slug": "marketing-cloud-for-pardot-speakers-how-to-automate-a-segmentation-list-dynamic-lists",
   "description": "Whether it’s Pardot’s nominal transition to Marketing Cloud Account Engagement, a “platform migration” for your marketing team, or a “new job, new tech-stack” situation — it seems more and more Marketers and Salesforce (and/or Pardot) Admins are picking up Marketing Cloud..",
-  "tags": ["pardot","marketing-cloud","salesforce-how-to","salesforce","pardot-marketing-cloud"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "pardot",
+      "marketing-cloud",
+      "salesforce-how-to",
+      "salesforce",
+      "pardot-marketing-cloud",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_ZDw7t_lFQHMFEnlcdxT9qQ.png"
-  }
+  "thumbnail": { "url": "/img/1_ZDw7t-lFQHMFEnlcdxT9qQ.png" },
 }
 ---
+
 Whether it’s Pardot’s nominal transition to Marketing Cloud Account Engagement, a “platform migration” for your marketing team, or a “new job, new tech-stack” situation — it seems more and more Marketers and Salesforce (and/or Pardot) Admins are picking up Marketing Cloud.
 As a user of both, but certified in Pardot before my introduction to MC, I figured I could lend a hand providing the “translations” I wish I had during my learning curve.
 I’d know exactly what I want to do in Pardot, but have the hardest time making sense of where similar functionality would live in Marketing Cloud. Segmentation Lists, Data Extensions, Engagement Programs, Journeys, Prospects, Contacts — there’s almost a shared language, but sometimes the “grammar” is so different they’re incomprehensible.

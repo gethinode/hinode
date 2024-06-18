@@ -16,7 +16,7 @@
       "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1__PekwfmHFVR246SfkhuR5w.jpeg" },
+  "thumbnail": { "url": "/img/1__PekwfmHFVR246SfkhuR5w.jpg" },
 }
 ---
 
@@ -25,14 +25,14 @@ Nestled in the heart of the valley, and much more than a food pantry, SOVA provi
 SOVA was established by [JFSLA](https://www.jfsla.org/page.aspx?pid=183) who have themselves been serving greater Los Angeles for more than 160 years (seriously, they were the first charitable organization established in LA way back in the 19th Century!).
 The community center is an amazing place where support, sustenance, and opportunity are freely available. And because SOVA’s top priority is to preserve and respect the dignity and individuality of those who seek help, there are always plenty of friendly faces, personal attention, and welcoming service in the comfortable and colorful front-of-the-house.
 Our most recent volunteer session once again took us to the warehouse where our team helped transform several pallets of produce, non-perishables, and pantry staples into pre-packed and ready-to-distribute bags of groceries.
-{{< image src="/img/1_qUx8tDH3WwcyCCGF6IbyrA.jpeg" title="Image" >}}
+{{< image src="/img/1_qUx8tDH3WwcyCCGF6IbyrA.jpg" title="Image" >}}
 
 It wasn’t our first time helping with this prep process and so, with our team spread out around the building, we set to work stocking supplies, bagging groceries, making boxes, packing completed sets, and ultimately stacking our sealed-and-ready-to-go servings onto pallets prepped for distribution. With our “assembly line” in full-swing we were able to prep and pack over 250 families’ groceries in a little under 2 hours!
-{{< image src="/img/1_MxL7GA34wVj3XEM2sx1vZg.jpeg" title="Image" >}}
+{{< image src="/img/1_MxL7GA34wVj3XEM2sx1vZg.jpg" title="Image" >}}
 
 The best part is, the time and effort we contributed also freed up regular volunteers to focus on the most important aspect of their day, helping our neighbors in need face to face.
 It’s a tremendous feeling, being able to do real good as an organization, and we can’t wait until our next Pledge 1% sesh.
-{{< image src="/img/1_rzz_wbTOVVsS0IhjwCkdpg.jpeg" title="Image" >}}
+{{< image src="/img/1_rzz_wbTOVVsS0IhjwCkdpg.jpg" title="Image" >}}
 
 If you or someone you know in LA could use some support, please help them find [SOVA’s information](https://www.jfsla.org/Page.aspx?pid=290) and, if you’d like to your organization to Pledge 1%, consider them as an effective and inspiring [volunteer opportunity](https://www.jfsla.org/page.aspx?pid=292).
 In the meantime, keep working hard, smart, and happy — and we’ll see you in the cloud.

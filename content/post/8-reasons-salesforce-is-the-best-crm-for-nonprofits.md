@@ -23,7 +23,7 @@
       "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/0_ILKLScRM6IMf778t.jpeg" },
+  "thumbnail": { "url": "/img/0_ILKLScRM6IMf778t.jpg" },
 }
 ---
 
@@ -34,7 +34,7 @@ Let’s dive in!
 
 ## Cost
 
-{{< image src="/img/0_zoVXXko98KeHukkd.jpeg" title="Image" >}}
+{{< image src="/img/0_zoVXXko98KeHukkd.jpg" title="Image" >}}
 
 I wish we could title this section differently, and it really shouldn’t be the first one because it’s hardly the “best reason” to roll out Salesforce — but cost is such an important consideration for nonprofits that I figured we should knock this out of the way first.
 Salesforce donates 10 licenses to nonprofits!
@@ -45,7 +45,7 @@ Ok, and now that we’ve got your cost concerns out of the way, we can focus on 
 
 ## Visibility, Metrics, and Tracking — All Your Info in One Place
 
-{{< image src="/img/0_ryZn4QxUw8SHlqBd.jpeg" title="Image" >}}
+{{< image src="/img/0_ryZn4QxUw8SHlqBd.jpg" title="Image" >}}
 
 Everything you do matters. With finite resources and noble goals, wasted efforts are missed opportunities to better serve your cause. With Salesforce, you have the ability to track, record, and dive into any of your data, empowering you and your organization to make more informed decisions.
 From insight and reporting into fundraising efforts, to tracking the progress of grant requests — all of your information and activities are in one place, in one system, and visible to whoever needs access. You can run reports on engagement, see which of your campaigns are the most successful, assign your employees to different activities, donors, and/or households to avoid duplicated efforts, and get a 360-degree view of your whole organization. Not to mention the ability to better predict what kind of donation pipeline you’re looking at for the next quarter, year, etc… to help you better plan your future.
@@ -53,7 +53,7 @@ No more separate excel spreadsheets, and dropbox folders, and waiting for “Mar
 
 ## The Salesforce Community — An Ohana of Helpers
 
-{{< image src="/img/0_wgvr_DVO6mgX3uQl.jpeg" title="Image" >}}
+{{< image src="/img/0_wgvr_DVO6mgX3uQl.jpg" title="Image" >}}
 
 Salesforce isn’t just the most widely-used and most steadily-growing CRM, it’s also home to the largest community of willing helpers, on- and offline. Everyone in the Salesforce community is considered a part of their Ohana, the Hawaiian concept of family. Employees, partners, customers, and fans all form a community providing helpful questions and answers, live and online training courses, resources, and support — you’ll be hard-pressed to find an issue someone else hasn’t faced already, coupled with a handy guide for accomplishing whatever it is you’d like to do.
 With sub-communities specializing in everything from 501Cs to 401Ks, you can ask for help from the users and admins who have experience sitting right where you are, at any stage of your deployment. Community events help organizations network, share best practices, and get direct help and advice.
@@ -63,7 +63,7 @@ It’s pretty incredible, but it’s also easy to see what keeps organizations c
 
 ## Automation and Effort Multiplication
 
-{{< image src="/img/0_cnwKFaTUOG0UyuD0.jpeg" title="Image" >}}
+{{< image src="/img/0_cnwKFaTUOG0UyuD0.jpg" title="Image" >}}
 
 Ever wish you had an assistant? Or better yet, a clone? A spare version of you that knew all the same stuff, did things the same way, and could come in an hour or two early every day to take care of all the boring stuff you have to spend time on before you get into the “meat” of your work? Now you can!
 We all have parts of our workflow that aren’t “productive” themselves, but that make us more productive. Organizing the list of donors and phone numbers for “thank you” calls, planning the day/week/month and updating the sticky notes all over our monitor, divvying up the assignments for the fundraiser to make sure everybody knows what they’ll be responsible for etc… While Salesforce’s cloning module may still be a ways away, you can use it to automate all of those “work prep” activities, leaving your true self free to focus on the actions that really have an impact.
@@ -73,7 +73,7 @@ Imagine how much more you could accomplish with another “you” handling the g
 
 ## Build your Own Community
 
-{{< image src="/img/0_r9OWY5Irwm6Oje6g.jpeg" title="Image" >}}
+{{< image src="/img/0_r9OWY5Irwm6Oje6g.jpg" title="Image" >}}
 
 Self-service, personal involvement, and community engagement are no longer extraordinary features, they’re 21st century expectations. Necessities. Whether it’s a portal to connect your donors with giving opportunities and event information, or a place for your volunteers to sign-up, schedule, plan, and share upcoming campaigns and efforts, or a one-stop-site for your beneficiaries to enroll in your services, learn more about your organization, and find additional help — web-based communities are a powerful tool for nonprofits to expand their effective reach.
 With Salesforce Experience Cloud, rolling out online communities is easier than ever. With your branding, your messaging, and your functionality — all without having to worry about how to code accounts, passwords, usernames, etc… .
@@ -82,14 +82,14 @@ Communities are a fixture of modern nonprofits, private brands, and organization
 
 ## Nonprofit Success Pack
 
-{{< image src="/img/0_hcdJT2ouXBd_m2nG.jpeg" title="Image" >}}
+{{< image src="/img/0_hcdJT2ouXBd_m2nG.jpg" title="Image" >}}
 
 Want to get started ASAP? The [Nonprofit Success Pack](https://www.salesforce.org/nonprofit/nonprofit-success-pack/) (NPSP) is designed to help you and your org do just that! The NPSP is an open-source addition to Salesforce that comes “pre-baked” with industry-standard architecture, constituent and donor management components, and was designed and built by nonprofits to help others get up and running quickly, seamlessly, and inline with industry best practices.
 The NPSP enables organizations to manage donations, memberships, relationships, and company affiliations right out of the box, as well as gifts, recurring payments and so much more. And at MK Partners we’re especially well-equipped to help organizations get it rolling smoothly because some of our team helped develop the original NPSP in the early days of Salesforce!
 
 ## Reach Out Everywhere
 
-{{< image src="/img/0_f6GQUmhPbLlyNv9L.jpeg" title="Image" >}}
+{{< image src="/img/0_f6GQUmhPbLlyNv9L.jpg" title="Image" >}}
 
 Nowadays, your customers are everywhere. They’re still calling and writing (though less than they used to), but they’re also tweeting, ‘gramming, facebook live-ing, they’re hitting you up on messenger, whats app, and sliding into your DMs. And if you’re not responding (or even worse, not present) you’re missing out on a huge chunk of your potential.
 The concepts of “business channels” and “business hours” are fading to the same forces that claimed the phrase “please wait six to eight weeks for delivery”. What customers used to consider an unavoidable inconvenience of doing business has transformed into an expectation that businesses will be where their customers are — or miss out on the conversation.
@@ -97,13 +97,13 @@ Luckily, Salesforce makes keeping in touch easy, across all channels. Email mana
 
 ## Salesforce Cares and Creates a Culture of Caring
 
-{{< image src="/img/0_u0BwR5YLIvem231i.jpeg" title="Image" >}}
+{{< image src="/img/0_u0BwR5YLIvem231i.jpg" title="Image" >}}
 
 The last, but perhaps most significant, reason Salesforce is such a boon to nonprofits is that Salesforce really cares. Like, really really cares. They pride themselves on the charitable culture they produce in the workplace, the good work they do in their own communities, and the help they provide nonprofits everywhere to maximize their effectiveness.
 That’s why Salesforce developed the Nonprofit Success Pack and why they have a team of dedicated support staff focused on getting new nonprofits up and running quickly! Instead of treating charitable orgs as “nice-to-have-but-non-revenue-generating-afterthoughts”, Salesforce treats their charitable clientele with the attention, care, and gratitude of a company that really cares about doing good.
 In fact, Salesforce founded their own philanthropic movement with the [Pledge 1% campaign](https://pledge1percent.org/) that first rolled out as an internal goal for corporate giving, and has since expanded to a group of more than 1,000 companies — all of whom pledge to donate 1% of their time, products, and/or revenue to charitable causes. At MK Partners that translates to revenue donations, service donations to nonprofit clients, and monthly employee volunteer days at organizations all over Los Angeles!
 Couple all that goodness under a brand-umbrella that loves to brag about their clients’ successes and boost their causes — and you’ll see Salesforce is a recipe for nonprofit success.
-{{< image src="/img/0_ZN0HD6LZxGo0K4AL.jpeg" title="Image" >}}
+{{< image src="/img/0_ZN0HD6LZxGo0K4AL.jpg" title="Image" >}}
 
 If you’re interested in learning more about how MK Partners can help your organization roll-out Salesforce, and how we’ve helped similar organizations in the past — [give us a call](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N30000001gF9jEAE)! And if you’d like to do some more reading on the subject (or have something to show off to the higher-ups), check out this handy booklet on all the benefits of choosing a CRM that cares!
 Until then, keep working hard, smart, and happy! We’ll see you in the cloud.

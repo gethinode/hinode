@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "winter-21-release-highlights-the-movie",
   "description": "Ok, not really a movie, but a YouTube video where Caylin and I run through our top picks for the most-anticipated updates, upgrades, and…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/mkpartners-youtube.jpeg"
-  }
+  "thumbnail": { "url": "/img/mkpartners-youtube.jpg" },
 }
 ---
-
-
-{{< image src="/img/mkpartners-youtube.jpeg" >}}
 
 Ok, not really a movie, but a YouTube video where Caylin and I run through our top picks for the most-anticipated updates, upgrades, and features landing with the [Salesforce Winter '21 Release](https://releasenotes.docs.salesforce.com/en-us/winter21/release-notes/salesforce_release_notes.htm)!
 

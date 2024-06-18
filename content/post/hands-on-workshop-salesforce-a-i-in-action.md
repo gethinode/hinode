@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Hands on Workshop: Salesforce A.I. in Action!",
   "Slug": "hands-on-workshop-salesforce-a-i-in-action",
   "description": "Ready to get some first-hand A.I. experience in Salesforce? Whether you’re curious about the capabilities of Einstein, eager to get your feet wet harnessing artificial intelligence in an org, or just want to see a real world application of organizations that are using A.I. to improve their operations, you’re in luck!.",
-  "tags": ["artificial-intelligence","einstein","hands-on-workshop","salesforce-einstein","salesforce-ai"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "artificial-intelligence",
+      "einstein",
+      "hands-on-workshop",
+      "salesforce-einstein",
+      "salesforce-ai",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_rPi0NrYfv785ZAb7WRFI6g.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_rPi0NrYfv785ZAb7WRFI6g.jpg" },
 }
 ---
+
 Ready to get some first-hand A.I. experience in Salesforce? Whether you’re curious about the capabilities of [Einstein](https://www.salesforce.com/products/platform/solutions/ai-services/), eager to get your feet wet harnessing artificial intelligence in an org, or just want to see a real world application of organizations that are using A.I. to improve their operations, you’re in luck!
 Next Thursday, August 27th, I’ll be leading a hands on workshop where we’ll be walking through how a support department uses Einstein Prediction Builder to more accurately forecast which customers are likely to have an escalation so they can proactively improve their service, instead of waiting until things to go sideways.
 Here are the details:

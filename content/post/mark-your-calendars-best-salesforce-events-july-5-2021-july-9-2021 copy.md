@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,19 +9,17 @@
   "Slug": "mark-your-calendars-best-salesforce-events-july-12-2021-july-16-2021",
   "description": "July be looking so fly with all of these events! This upcoming week, the events are geared towards teaching teams, regardless if they are...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/july-2021-calendar2.png"
-  }
+  "thumbnail": { "url": "/img/july-2021-calendar2.png" },
 }
 ---
-
 
 {{< image src="/img/july-2021-calendar2.png" >}}
 
@@ -39,9 +37,8 @@ Our next event is for Admins newer to the ecosystem or Admins who just need a re
 
 We are ending our week on Thursday, July 15th with [5 Ways to Connect a Disconnected Account Team](https://www.salesforce.com/form/events/webinars/form-rss/3260367). Starting at 11am (PDT) sales leaders will discuss the 5 common pitfalls every and all sales teams face, and how to avoid them. They will talk about simplifying account handoffs, improving visibility within documentation, and accelerating deals, leading to an overall customer-centric account team. Additionally, they will talk about onboarding, and provide you with resources and tools for the account team on all ends.
 
-Recap
-------
+## Recap
 
-Last week we had another event in the *Success Anywhere World Tour* with Bentley Motors and RBC Wealth Management on how they use Customer 360. Then we had a Thursday packed full of events, including the first ever *Consulting Dreamin’*! How did you like it? Did it make you want to start up or work for a Salesforce consulting company? We got to hear about the new partnership between Amazon Web Service and Salesforce in *AWS and Salesforce: Managing Date Across Your Organization*, which will allow for data to be more centralized and allow for innovation to increase and accelerate, specifically for the nonprofit and education sectors. Salesforce hosted *Automating Feedback and Transforming Customer Experience* to highlight the automation of collecting feedback across customer journeys and how to analyze that information to help improve customer experience, but also how to analyze trends and opportunities. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
+Last week we had another event in the _Success Anywhere World Tour_ with Bentley Motors and RBC Wealth Management on how they use Customer 360. Then we had a Thursday packed full of events, including the first ever _Consulting Dreamin’_! How did you like it? Did it make you want to start up or work for a Salesforce consulting company? We got to hear about the new partnership between Amazon Web Service and Salesforce in _AWS and Salesforce: Managing Date Across Your Organization_, which will allow for data to be more centralized and allow for innovation to increase and accelerate, specifically for the nonprofit and education sectors. Salesforce hosted _Automating Feedback and Transforming Customer Experience_ to highlight the automation of collecting feedback across customer journeys and how to analyze that information to help improve customer experience, but also how to analyze trends and opportunities. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 
 Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE&utm_source=mkp&utm_medium=referral&utm_campaign=logigear-mkp-tpp) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

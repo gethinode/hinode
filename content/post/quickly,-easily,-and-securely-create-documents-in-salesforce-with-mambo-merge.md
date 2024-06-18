@@ -1,24 +1,23 @@
 ---
 {
-"priority":"0.5",
-"haveYoutube": false,
-"haveGithubGist": false,
-"haveTwitter": false,
-"date": "2022-01-06T12:17:48-07:00",
-"title": "Quickly, Easily, and Securely Create Documents in Salesforce With Mambo Merge!",
-"Slug": "quickly,-easily,-and-securely-create-documents-in-salesforce-with-mambo-merge",
-"description": "Your data, straight into the format you need: Word, PDF, Powerpoint, HTML, and more — all with the click of a button.",
-"tags": [],
-"author": {
-"name": "Chris Stegall",
-"title": "Digital Marketing Coordinator",
-"webp": "/img/chris-stegall_128-128.webp",
-"jpeg": "/img/chris-stegall_128-128.jpeg"
-},
-"layout": "single",
-"thumbnail": {
-    "url": "/img/1_mK0BQY8FIAGqGsbYF6BVvQ.png"
-  }
+  "priority": "0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2022-01-06T12:17:48-07:00",
+  "title": "Quickly, Easily, and Securely Create Documents in Salesforce With Mambo Merge!",
+  "Slug": "quickly,-easily,-and-securely-create-documents-in-salesforce-with-mambo-merge",
+  "description": "Your data, straight into the format you need: Word, PDF, Powerpoint, HTML, and more — all with the click of a button.",
+  "tags": [],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
+  "layout": "single",
+  "thumbnail": { "url": "/img/1_mK0BQY8FIAGqGsbYF6BVvQ.png" },
 }
 ---
 
@@ -32,7 +31,7 @@ And now, that synergy is getting even easier — with [Mambo Merge](https://appe
 
 ### Generate Documents with the Click of a Button
 
-{{< image src="/img/0_Pe1T6pGdV1YAc3k4.jpeg">}}
+{{< image src="/img/0_Pe1T6pGdV1YAc3k4.jpg">}}
 
 Whether it’s Billing creating invoices, Sales creating quotes, Logistics creating BOLs, or HR creating employment documentation — if your users have to create Word Documents, they shouldn’t have to enter information twice (or rely on copy and paste). With Mambo Merge, one click will generate their document de jour, with data right from your Salesforce org.
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "review-salesforce-connections-21",
   "description": "Salesforce’s Connections (virtual) conference was last week and, while there were some technical hiccups, the livestream did eventually get...",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.webp"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/video-call.jpeg"
-  }
+  "thumbnail": { "url": "/img/video-call.jpg" },
 }
 ---
 
-
-{{< image src="/img/video-call.jpeg" >}}
+{{< image src="/img/video-call.jpg" >}}
 
 Salesforce’s [Connections (virtual) conference](https://www.salesforce.com/connections/) was last week and, while there were some technical hiccups, the livestream did eventually get underway and viewers from all over the world were able to tune in to the keynote delivered from the top of Salesforce park and the sessions presented from all over the world!
 

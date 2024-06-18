@@ -1,26 +1,33 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-04-29T10:04:40-07:00",
   "title": "COVID-19 Update: All 2020 Salesforce Events Go Virtual",
   "Slug": "covid-19-update-all-2020-salesforce-events-go-virtual",
   "description": "With the pandemic pushing most of our planned in-person events online, virtual meet-ups, meetings, seminars, and conferences are quickly filling up our calendars again...",
-  "tags": ["covid", "online", "virtual", "dreamforce", "trailheadx", "tableau", "pardot"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "tags":
+    [
+      "covid",
+      "online",
+      "virtual",
+      "dreamforce",
+      "trailheadx",
+      "tableau",
+      "pardot",
+    ],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/einstein-looking-2020.jpeg"
-  }
+  "thumbnail": { "url": "/img/einstein-looking-2020.jpg" },
 }
 ---
 
-
-{{< image src="/img/einstein-looking-2020.jpeg" title="Einstein looking out toward 2020" >}}
+{{< image src="/img/einstein-looking-2020.jpg" title="Einstein looking out toward 2020" >}}
 
 With the pandemic pushing most of our planned in-person events online, virtual meet-ups, meetings, seminars, and conferences are quickly filling up our calendars again. Last week [we took a look](https://www.mkpartners.com/blog/to-do-upcoming-salesforce-virtual-events.html) at some of the upcoming Salesforce (virtual) events we’re looking forward to most — but this week, Salesforce made an [announcement](https://www.salesforce.com/company/news-press/stories/2020/3/salesforce-coronavirus/) that’ll add even more to the community’s “can’t miss” list. All of Salesforce’s planned 2020 events will now be remote.
 

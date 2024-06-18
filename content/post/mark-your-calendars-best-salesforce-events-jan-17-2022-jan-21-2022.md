@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,20 @@
   "title": "Mark Your Calendars: Best Salesforce Events Jan 17, 2022 — Jan 21, 2022",
   "Slug": "mark-your-calendars-best-salesforce-events-jan-17-2022-jan-21-2022",
   "description": "What a week I have lined up for y’all! Break is over and it’s time to get back to business! The end of the fiscal year is approaching us which means it’s time to reset and refocus, which most of the events this week focuses on. So sit back, open up your calendars, and let’s get planning!.",
-  "tags": ["salesforce-dev","salesforce-event","salesforce","salesforce-admin","cactusforce"],
-  "author": {
-    "name": Caylin Schmenk,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags":
+    [
+      "salesforce-dev",
+      "salesforce-event",
+      "salesforce",
+      "salesforce-admin",
+      "cactusforce",
+    ],
+  "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_JZfpipNJDrGJo25g.jpeg"
-  }
+  "thumbnail": { "url": "/img/0_JZfpipNJDrGJo25g.jpg" },
 }
 ---
+
 What a week I have lined up for y’all! Break is over and it’s time to get back to business! The end of the fiscal year is approaching us which means it’s time to reset and refocus, which most of the events this week focuses on. So sit back, open up your calendars, and let’s get planning!
 We are starting the week with [](https://salesforce.zoom.us/webinar/register/WN_v6UtYp1OStG2dpbylX4v9w) on Tuesday, January 18 at 10am (PST). This 2 day event is here to help those who want guidance on Sales Cloud. The hosts will focus on frequently asked questions, best practices, perform demos, and end the session with a chance to ask an expert any questions regarding Sales Cloud. Once you register you will get links for both days, but pay attention because Day 1 is on the 18th and Day 2 is on the 25th. Day 1 will focus on user and data management basics, customization, and MFAs, while Day 2 will have a different set of content. Tune in next week where I will let you know all about Day 2.
 Also on Tuesday at 10am (PST) we have another episode in the [](https://trailhead.salesforce.com/live/broadcasts/a2r3k000001dKcn/pathfinder-learning-series-love-to-live-the-v2mom-key-to-career-success). This 30 minutes episode is here to help you set your goals for 2022! In this session you will get an introduction to V2MOMs (if you have no idea what these are), how to apply it, and how it can and will help you both professionally and personally. I recommend taking the V2MOM badge before or after the event!
@@ -27,7 +29,7 @@ For those of you who need help deciding on what social media channel to use for 
 Then on Wednesday, January 19, [](https://www.salesforce.com/form/events/webinars/form-rss/3582840) is taking place at 11am (PST). We can all agree that 2021 was a weird and confusing year. You might have had opportunities to meet with employees and clients in-person, but covid was like mmm let me ruin that for you, so you couldn’t go. Well if you are missing all of those in-person moments, or are like me and your job is to bring people together, then this event is for you! Quip’s CRO, Alyene Schneidewind and Author, Priya Parker will have a fireside chat (I’m a sucker for these) to discuss and share how to share a sense of purpose with your team(s), and rebuild gatherings in order to keep your team together. They will also talk about hybrid meetings and company culture, strategic assembly, defining intentions with gatherings, and reshaping meeting structures to align with the purpose of those meetings. You know I’m already registered for this event.
 The biggest event of the month is finally here and here at MK Partners, we’ve been preparing for months! [](https://www.cactusforce.com/) will be both virtual and in-person this year! Starting on Thursday, January 20th, the virtual sessions will kick off at 9am (MST) and the in-person sessions will be on Friday, January 21 at 9am (MST). This community conference is for Developers, Configurators, and Architects, with dozens of sessions and speakers to help them solve everyday problems and challenges! Even better, MK Partners is sponsoring the event through our app Mambo Merge, and our CEO, Matt Kaufman, has a 602 Talk on Friday at 11:45am (PST)! In addition to Matt, Jesus in marketing, and myself will be in attendance, while you will get to e-meet Chris virtually at our booth. If you want to learn more about Mambo Merge, both Jesus and Chris have written blog posts about Mambo Merge in preparation for the event that you can check out on the [Cactusforce blog](https://www.cactusforce.com/blog) or our own [blog](https://medium.com/creme-de-la-crm)! Make sure to stop by our virtual or in-person booth and say hi!
 
-## 
+##
 
 Last week Wonkhe joined Salesforce In S**ealing the Cracks: Connecting with Students for Wellbeing and Success** to discuss creating an “inclusive and communicative environment with technology to support students’ wellbeing and success.” We had 2 Trailhead Live events back to back. First, **Build Your Personal Portfolio on Salesforce** taught viewers how to create a personal online portfolio, and best practices for sharing it publicly, so that you could market y-o-u! Our second Trailhead Live event, **Salesforce Fundamentals Lite** taught the fundamentals and how to build a career to all of the newbies in the ecosystem.
 Finally, Salesforce hosted **How to Go from Customer Feedback to Actionable Insights**, which was a great event for those who have a ton of customer data, but don’t know what to do with it or improve it. The speaker taught viewers how to evolve the customer experience data into actionable insights in order to increase customer satisfaction and engagement! Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!

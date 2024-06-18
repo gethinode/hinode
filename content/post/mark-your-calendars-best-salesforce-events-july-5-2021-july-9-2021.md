@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-july-5-2021-july-9-2021",
   "description": "Summer is in full swing and I’m already melting awayyyy. Hopefully the events this week can give me life, because honestly I don’t know...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/july-2021-calendar.jpeg"
-  }
+  "thumbnail": { "url": "/img/july-2021-calendar.jpg" },
 }
 ---
 
-
-{{< image src="/img/july-2021-calendar.jpeg" >}}
+{{< image src="/img/july-2021-calendar.jpg" >}}
 
 Summer is in full swing and I’m already melting awayyyy. Hopefully the events this week can give me life, because honestly I don’t know what I’m going to do in this heat.
 
@@ -37,8 +35,7 @@ With the announcement that Amazon Web Services is partnering up with Salesforce 
 
 Finally, and also taking place at 9am (PT) , Salesforce is hosting [Automating Feedback and Transforming Customer Experience](https://www.salesforce.com/form/events/webinars/form-rss/3262053). As the title says, this conversation is to highlight the automation of collecting feedback across customer journeys and how to analyze that information to help improve customer experience. You will also learn how to analyze trends and opportunities, and action feedback so that costumes feel heard.
 
-Recap
-------
+## Recap
 
 We don’t have a recap from last week, as all I talked about was TrailheaDX and how that went. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know how TrailheaDX went for you!
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,19 @@
   "title": "Salesforce Winter ’19 Highlights — Pardot in Lightning Experience",
   "Slug": "salesforce-winter-19-highlights-pardot-in-lightning-experience-needs-links-before-publishing",
   "description": "The days are getting shorter, pants are getting longer, and radiators all over the world are waking up from their Summer slumbers. The seasons are changing and that means one thing — a new Salesforce release is here!.",
-  "tags": ["pardot","marketing","winter-19-release","reporting","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    ["pardot", "marketing", "winter-19-release", "reporting", "salesforce"],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_Q_db1j_nu1ejcsEpaH_j4w.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_Q_db1j_nu1ejcsEpaH_j4w.jpg" },
 }
 ---
+
 The days are getting shorter, pants are getting longer, and radiators all over the world are waking up from their Summer slumbers. The seasons are changing and that means one thing — a new Salesforce release is here!
 Last week we took a look at the new [Lightning Reports: Dive Deeper](https://medium.com/creme-de-la-crm/salesforce-winter-19-release-highlights-lightning-reports-dig-deeper-2483d8a7a6dc) feature to help users get more insight into the details and relationships behind their data. Today, we’ll keep our data-lover hats on and head over to sales and marketing for a look at one of the coolest new bits of the [Winter ’19 Release](https://www.salesforce.com/campaign/releases/winter-19/overview/?d=cta-body-promo-39): Pardot in Lightning Experience!
 Pardot and Salesforce have been staples of the marketing world for years and now they’re finally fully connected! Offering a single platform for both the sales and marketing departments to maintain 360-degree visibility into their customers, prospects, campaigns, and what it takes to get to “Closed — Won”.
@@ -61,6 +62,7 @@ The Analytics Studio gives you detailed, relevant B2B marketing analytics in an 
 
 A personal favorite for us here is the multi-touch attribution dashboard. It gives us great insight into which campaigns are driving the most leads, closing the most deals, and driving the most revenue. We can see how each campaign and touch plays a part in the path from prospect to client, and it removes the guesswork from determining if those middle-ground campaigns between “lead created” and “deal closed” are effective.
 To take a look at the Pardot in Lightning Experience, hit play on the video below:
+
 <iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2Ff2eSjYMKvSQ%3Ffeature%3Doembed&amp;url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Df2eSjYMKvSQ&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2Ff2eSjYMKvSQ%2Fhqdefault.jpg&amp;key=a19fcc184b9711e1b4764040d3dc5c07&amp;type=text%2Fhtml&amp;schema=youtube" width="854" height="480" frameborder="0" scrolling="no">[https://medium.com/media/35786c1af4131d0d60a7524c2d6924d7/href](https://medium.com/media/35786c1af4131d0d60a7524c2d6924d7/href)</iframe>And if you’d like to find out how we could help your sales and marketing teams harness this powerful new platform, [reach out to us](https://www.mkpartners.com/article/contact/contact) — we’d love to help!
 In the meantime, stay tuned here for more Winter ’19 Release highlights and let us know in the comments if there’s something specific you’d like us to cover!
 Happy working!

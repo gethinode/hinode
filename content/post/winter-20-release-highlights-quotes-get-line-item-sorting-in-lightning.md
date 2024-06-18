@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Winter ’20 Release Highlights: Quotes get Line-Item Sorting in Lightning",
   "Slug": "winter-20-release-highlights-quotes-get-line-item-sorting-in-lightning",
   "description": "With the long, hot days of Summer melting away into the cool, abbreviated sunlight of September, we’re trading swimsuits for spiced-fruits, beach blankets for ski slopes, and air conditioning for seat warmers..",
-  "tags": ["winter-20-release","release-highlights","salesforce-release","winter-20","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "winter-20-release",
+      "release-highlights",
+      "salesforce-release",
+      "winter-20",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_Oeh7LBdYiSfnALB6Ca4k3g.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_Oeh7LBdYiSfnALB6Ca4k3g.jpg" },
 }
 ---
+
 With the long, hot days of Summer melting away into the cool, abbreviated sunlight of September, we’re trading swimsuits for spiced-fruits, beach blankets for ski slopes, and air conditioning for seat warmers.
 It also means there’s a brand new Salesforce release on the way — that’s right, we’re only weeks away from the [Winter ’20 Release](https://releasenotes.docs.salesforce.com/en-us/winter20/release-notes/salesforce_release_notes.htm)! And, because we know most people prefer raking leaves to reading release notes, we’re back with another round of highlights showing off the features, updates, and upgrades that we’re most excited to see in our orgs!
 In today’s post we’ll be covering a [long-requested](https://success.salesforce.com/ideaView?id=08730000000YHmBAAW) Lightning ability that’s finally coming to Quotes, [line item sorting](https://releasenotes.docs.salesforce.com/en-us/winter20/release-notes/rn_sales_sort_quote_line_items.htm)!

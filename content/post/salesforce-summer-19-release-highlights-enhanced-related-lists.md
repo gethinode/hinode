@@ -1,25 +1,23 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "date": "2019-05-20T11:27:25-07:00",
   "title": "Salesforce Summer ’19 Release Highlights: Enhanced Related Lists!",
   "Slug": "salesforce-summer-19-release-highlights-enhanced-related-lists",
   "description": "For the first time in 8 years, Game of Thrones fans and non-fans can finally agree that Winter is over. The sun is shining, thermometers are climbing, and a brand new Salesforce Release...",
   "tags": ["summer 19", "salesforce", "related", "lists", "enhanced"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/woman-outside-flowers-macbook.webp"
-  }
+  "thumbnail": { "url": "/img/woman-outside-flowers-macbook.webp" },
 }
 ---
-
 
 {{< image src="/img/woman-outside-flowers-macbook.webp" title="Sitting outside with flowers on Salesforce" >}}
 

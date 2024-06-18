@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,26 +8,28 @@
   "title": "Mark Your Calendars: Best Salesforce Events June 28, 2021 — July 2, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-june-28-2021-july-2-2021",
   "description": "The Trailhead platform has been restructured and has a new look!",
-  "tags": ["trailblazercommunity","salesforce-event","trailheadx","trailhead","salesforce"],
-  "author": {
-    "name": Caylin Schmenk,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags":
+    [
+      "trailblazercommunity",
+      "salesforce-event",
+      "trailheadx",
+      "trailhead",
+      "salesforce",
+    ],
+  "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_djJep5KTgpOLsmY_9vTsqQ.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_djJep5KTgpOLsmY_9vTsqQ.jpg" },
 }
 ---
+
 Okay readers, this week will be a bit different because Salesforce changed some things up on me, so there is no need to open your calendars and get planning. The good news, that I hope you all are aware of, is that the Trailhead platform has been restructured and has a new look! If you haven’t checked it out, [open up a new tab and check it out right now](https://trailhead.salesforce.com/). As you will notice, the new site is easier to navigate and more organized! As your go-to for all Salesforce related events, that made my life ten times easier, as now I don’t have to scour the ecosystem any more to find events. Most of them are all in one place now!
 Now for the (slight) bad news: finding community group meetings that are occurring in the coming week has become harder. If you haven’t checked out the new and improved community group section, you can now find groups by region, product, role and a few other things. Additionally, you will see featured groups, the groups you are involved in, and a general “all groups’’ section. It is nice because the groups are more transparent and easier to check out, and they even let you know the last time they were active! However, as mentioned, they don’t tell you what group is having an event anymore in the coming weeks; you have to find the group you want and check to see if they are having an event. So until I figure out an efficient way to get those events to you, community group meetings will probably be missing for a few weeks. (I know I’m going to miss seeing those Happy Hours scheduled too).
-Now that that news is out of the way, and I sit outside on this nice summer day, I decided I would also talk about [TrailheaDX](https://www.salesforce.com/trailheadx/), one of Salesforce biggest events of the year, behind Dreamforce. For those of you who missed it, TrailheaDX really delivered this year for being virtual! For starters, it was organized and ran smoothly during the whole event (unlike Connections 2021 *cough cough*). They started with a performance from Fitz and the Tantrums, which led into the keynote with Leah McGowen-Hare and Parker Harris. They got to do a small in-person keynote at Salesforce park with a small audience! This keynote was very helpful, as it focused on updates and new improvements to the ecosystem, rather than a sales pitch.
+Now that that news is out of the way, and I sit outside on this nice summer day, I decided I would also talk about [TrailheaDX](https://www.salesforce.com/trailheadx/), one of Salesforce biggest events of the year, behind Dreamforce. For those of you who missed it, TrailheaDX really delivered this year for being virtual! For starters, it was organized and ran smoothly during the whole event (unlike Connections 2021 _cough cough_). They started with a performance from Fitz and the Tantrums, which led into the keynote with Leah McGowen-Hare and Parker Harris. They got to do a small in-person keynote at Salesforce park with a small audience! This keynote was very helpful, as it focused on updates and new improvements to the ecosystem, rather than a sales pitch.
 Then we transitioned to the sessions and demos! The sessions were spread out between five channels and there was an additional tab for the demos. I found the sessions useful and inspiring, so hopefully you did as well! Personally I had a tie for my favorite session: Fireside Chat with Mindy Kaling and True to the Core. Mindy had some great advice and her conversation was of course funny. Then True to the Core was savage, per usual, and this year the executives got to be back in-person! They also dropped some news about Dreamforce, that I will disclose at a later date in a Youtube video.
 Overall it was a great one day event that covered a variety of topics for Admins and Devs. If you missed TrailheaDX and are bummed out (it was a good one), Salesforce will be dropping the rewind, so don’t worry. All of their sessions and product demos will be included. Chris Stegall and myself will be doing a review video about TrailheaDX as well, so stay tuned for that!
 
-## 
+##
 
 Last week the Portland, OR Women in Tech group hosted **Salesforce Certification: The Why, How, and Virtual Test Taking Tips **with a Salesforce Developer who talked about Salesforce certifications, why they are important, how to prepare, and tips for taking it virtually. We got an exclusive look at the new features coming to Trailhead in **What’s New in myTrailhead?** We also got an exclusive look at the Pardot product roadmap for the rest of 2021 in **Pardot Product Roadmap: Powering the Next Generation of B2B Marketing**. I already gave a major recap of TrailheaDX, but whose watch party did you attend?
 The San Francisco, CA group hosted a **B2B Marketing/ Pardot User Group Virtual Happy Hour**. Then we had the San Diego, CA Nonprofit User group host a **Salesforce Virtual Lunch meet up** for some casual chit chat. Supposedly **Texas Dreamin’** occurred, but I never found out. Someone in Texas, let me know if it happened and if you liked it! The Women in Tech group of Frisco, TX hosted **Respecting Data Privacy Laws on Salesforce**, to make sure you are aware of any requirements that might hinder you when you are designing customer solutions for clients. They also were giving out a voucher; did you win it? We ended the week on a Saturday with the San Ramon, CA Admin group who hosted **Flow into Summer ’21 and TDX ’21 Quiz** to talk about the Summer ’21 release and give out a voucher for whoever won the TDX quiz. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
-Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE&amp;utm_source=mkp&amp;utm_medium=referral&amp;utm_campaign=logigear-mkp-tpp) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!
+Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE&utm_source=mkp&utm_medium=referral&utm_campaign=logigear-mkp-tpp) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

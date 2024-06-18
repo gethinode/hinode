@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "dreamtx-reviewed",
   "description": "Dreamforce 2020 is over, Salesforce’s annual whirlwind week of news, sessions, and guest spots has come to a close, and the recordings…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/caylin-review-video.jpeg"
-  }
+  "thumbnail": { "url": "/img/caylin-review-video.jpg" },
 }
 ---
-
-
-{{< image src="/img/caylin-review-video.jpeg" >}}
 
 Dreamforce 2020 is over, Salesforce's annual whirlwind week of news, sessions, and guest spots has come to a close, and the [recordings are up](https://medium.com/creme-de-la-crm/dreamforce-2020-highlights-recordings-and-more-2e54a6c96d73) for any and all who missed the happenings live.
 

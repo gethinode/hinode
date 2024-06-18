@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,19 +9,17 @@
   "Slug": "best-places-to-work-in-los-angeles-mk-partners",
   "description": "It feels like just yesterday that we were celebrating our back-to-back annual achievement being certified a Great Place to Work…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_JmG7BtlMt4Zgdha3niunLg.png"
-  }
+  "thumbnail": { "url": "/img/1_JmG7BtlMt4Zgdha3niunLg.png" },
 }
 ---
-
 
 It feels like just yesterday that we were celebrating our back-to-back annual achievement being certified a Great Place to Work, and now we’re proud to announce that MK Partners has officially been recognized ([again](https://labusinessjournal.com/bptw2021/)!) by the LA Business Journal as one of the [Best Places to Work in Los Angeles](https://labusinessjournal.com/bptw2021/) for the second year in a row!
 

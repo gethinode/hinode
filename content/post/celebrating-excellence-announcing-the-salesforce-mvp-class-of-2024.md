@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,22 +8,27 @@
   "title": "Celebrating Excellence: Announcing the Salesforce MVP Class of 2024!",
   "Slug": "celebrating-excellence-announcing-the-salesforce-mvp-class-of-2024",
   "description": "Salesforce MVPs are Trailblazers that defy metaphor in their contributions to, and their place within, the Salesforce community. They’ve been called guides, beacons, mentors, tentpoles, cheerleaders, community leaders, and more — but nothing quite captures the breadth and depth of their unique expertise, passion, dedication, and contributions to the Salesforce community at large..",
-  "tags": ["salesforce-mvp","salesforce-admin","salesforce-trailblazer","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-mvp",
+      "salesforce-admin",
+      "salesforce-trailblazer",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_cZT4H9carB3vHbQkGXlR_Q.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_cZT4H9carB3vHbQkGXlR_Q.jpg" },
 }
 ---
+
 Salesforce MVPs are Trailblazers that defy metaphor in their contributions to, and their place within, the Salesforce community. They’ve been called guides, beacons, mentors, tentpoles, cheerleaders, community leaders, and more — but nothing quite captures the breadth and depth of their unique expertise, passion, dedication, and contributions to the Salesforce community at large.
 These Trailblazers inspire, educate, and empower others, driving positive change and elevating the community to new heights. And now, it’s time to celebrate their extraordinary contributions as we proudly announce the 2024 class of Salesforce MVPs!
 {{< image src="/img/1_ryQ6RC2dEZd6IntIMZ1uOA.png" title="Image" >}}
-
 
 ## A Tradition of Excellence
 
@@ -43,7 +48,6 @@ From thought-provoking discussions to heartfelt testimonials, this event should 
 
 The Salesforce MVP program is more than just a professional recognition — it’s a symbol of commitment, dedication, and impact. These MVPs represent some of the best and brightest minds in the Salesforce world, driving innovation, fostering collaboration, and inspiring others to reach their full potential. By celebrating their achievements, we honor the collective spirit of Trailblazers everywhere and reaffirm our commitment to building a stronger, more inclusive community.
 {{< image src="/img/1_9BP5AukQVGZ5aHJT6VAGiQ.png" title="Image" >}}
-
 
 ## How You Can Participate
 

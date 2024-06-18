@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-june-7-2021-june-11-2021",
   "description": "I’ll be in the middle of the woods during this week, so y’all will have to let me know what events you attend and how you like them! So...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/lin-schmenk_128-128.jpeg",
-    "jpeg": "/img/lin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/lin-schmenk_128-128.jpg",
+      "jpeg": "/img/lin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/june-2021-calendar2.jpeg"
-  }
+  "thumbnail": { "url": "/img/june-2021-calendar2.jpg" },
 }
 ---
 
-
-{{< image src="/img/june-2021-calendar2.jpeg" >}}
+{{< image src="/img/june-2021-calendar2.jpg" >}}
 
 I’ll be in the middle of the woods during this week, so y’all will have to let me know what events you attend and how you like them! So sit back, open up your calendar, and let’s get planning!
 
@@ -39,8 +37,7 @@ Next at 3pm the Salt Lake City, UT Salesforce Developer group wants to spend tim
 
 If you all have noticed, all of the Dreamin conferences are coming back! And [CzechDreamin](https://czechdreamin.com/) is coming back virtually for a 2 hour event also on Thursday, June 10th (but they are several hours ahead of the USA so pay attention to the date and times). From 5pm to 7pm (CEST) this conference will focus on a little bit of everything Salesforce. They want to make sure there is something for everyone and plan on each session having 20 slides that last 20 seconds each! No pressure on the speakers or anything lol. They may even have a surprise for you once you get your ticket (it’s free, but you still need one)!
 
-Recap
-------
+## Recap
 
 The main attraction of last week, Connections 2021, was back to teach marketers, commerce professionals, and digital leaders more about new and upcoming experiences in the Salesforce ecosystem. You can head over to [MK Partners Youtube page](https://youtu.be/k0o251Q7PrQ) to hear about Chris Stegall’s and my experience and thoughts about Connections if you are interested. The San Diego Salesforce User group and the San Francisco Salesforce Marketer group both hosted a watch party for Connections 2021, but just for the keynote speech. A Tale of Digital Transformation to Rescue Millions by 2030, the only other event of the week, discussed how the International Justice Mission (IJM) rallied global societies to invest in and reform justice systems in poorer areas of the world. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 

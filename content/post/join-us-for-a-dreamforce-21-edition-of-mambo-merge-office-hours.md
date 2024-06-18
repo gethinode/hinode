@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "join-us-for-a-dreamforce-21-edition-of-mambo-merge-office-hours",
   "description": "It’s almost that time again! Dreamforce ’21 is right around the corner, and this time admins, devs, users, and trailblazers all around the…",
   "tags": ["mambo merge", "dreamdorce"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/mambo-merge-office-hours.jpeg"
-  }
+  "thumbnail": { "url": "/img/mambo-merge-office-hours.jpg" },
 }
 ---
 
-
-{{< image src="/img/mambo-merge-office-hours.jpeg" >}}
+{{< image src="/img/mambo-merge-office-hours.jpg" >}}
 
 It’s almost that time again! Dreamforce ’21 is right around the corner, and this time admins, devs, users, and trailblazers all around the world will be able to join us for a special Dreamforce edition of our regular Mambo Merge Office hours session!
 
@@ -33,7 +31,7 @@ It’s a chance to get a speedy beginner’s intro to the app, get some experien
 
 The session is Thursday, September 23rd at 10:30am (PT), and you can sign up [right here, right now](https://events.mkpartners.com/MamboMergeOfficeHours!
 
-{{< image src="/img/mambo-merge-office-hours-screen.jpeg" >}}
+{{< image src="/img/mambo-merge-office-hours-screen.jpg" >}}
 
 You’ll want to install Mambo Merge ahead of time as well, so grab a free, up-to-date edition from the AppExchange (or ask an admin to) and we’ll look forward to seeing you there!
 

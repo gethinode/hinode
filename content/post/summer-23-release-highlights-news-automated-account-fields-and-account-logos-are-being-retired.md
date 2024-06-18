@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "summer-23-release-highlights-news-automated-account-fields-and-account-logos-are-being-retired",
   "description": "Ok, this one is definitely more of a lowlight.",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_6mNXVosxZgkpL960MVU68g.webp"
-  }
+  "thumbnail": { "url": "/img/1_6mNXVosxZgkpL960MVU68g.webp" },
 }
 ---
+
 Ok, this one is definitely more of a lowlight.
 
 As we continue our countdown to Summer ’23 (the final release weekend is only two weeks away!), today we’re mixing it up a bit by taking a look at a few features that are actually going away, as opposed to being added to the platform.

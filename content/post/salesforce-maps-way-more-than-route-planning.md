@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-10-22T15:16:51-07:00",
   "title": "Salesforce Maps Way More Than Route Planning",
   "Slug": "salesforce-maps-way-more-than-route-planning",
   "description": "When Salesforce acquired MapAnything 6 months ago, it picked up much more than a trip-planning tool. Built natively on the Salesforce Platform, MapAnything pioneered pairing advanced...",
   "tags": ["mapanything", "map", "admin"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/map-on-ipad.jpeg"
-  }
+  "thumbnail": { "url": "/img/map-on-ipad.jpg" },
 }
 ---
 
-
-{{< image src="/img/map-on-ipad.jpeg" title="Map on an iPad" >}}
+{{< image src="/img/map-on-ipad.jpg" title="Map on an iPad" >}}
 
 When Salesforce acquired [MapAnything](https://mapanything.com/) 6 months ago, it picked up much more than a trip-planning tool. Built natively on the Salesforce Platform, MapAnything pioneered pairing advanced, location-based information with already data-rich Salesforce orgs to produce even more intelligent, actionable info — and a variety of ROI-capturing applications!
 
@@ -34,7 +32,7 @@ With use-cases coming in from all sorts of surprising corners (law firms, real e
 
 On October 30th (next Wednesday) from 1:30p-2:30p Pacific time, we’ll be live and online, taking a tour through our favorite creative use cases for Salesforce Maps and running a demo showing off the most impressive, lesser-known functionality. If you’d like to join — [sign up right here](http://pardot.mkpartners.com/SalesforceMapsWebinar)!
 
-{{< image src="/img/girl-on-computer-looking-at-map.jpeg" title="Girl on a computer looking at a map" >}}
+{{< image src="/img/girl-on-computer-looking-at-map.jpg" title="Girl on a computer looking at a map" >}}
 
 We’ll email you calendar invite, and later, all the login details so you can watch and learn from the comfort of your home, office, or pre-Halloween prep space!
 

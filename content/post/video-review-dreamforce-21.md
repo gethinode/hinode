@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "video-review-dreamforce-21",
   "description": "Dreamforce Everywhere, aka Dreamforce ’21, is officially in the books and the first post-pandemic, in-person Salesforce event was a hit!",
   "tags": ["dreamforce"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce21.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce21.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce21.jpeg" >}}
+{{< image src="/img/dreamforce21.jpg" >}}
 
 Dreamforce Everywhere, aka Dreamforce ’21, is officially in the books and the first post-pandemic, in-person Salesforce event was a hit!
 

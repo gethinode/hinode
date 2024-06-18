@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "need-to-start-up-a-salesforce-developer-org",
   "description": "Whether it’s to test out Salesforce features and functionality, teach yourself some new tricks, follow along with a Trailhead Trail, build…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/imac-how-to.jpeg"
-  }
+  "thumbnail": { "url": "/img/imac-how-to.jpg" },
 }
 ---
 
-
-{{< image src="/img/imac-how-to.jpeg" >}}
+{{< image src="/img/imac-how-to.jpg" >}}
 
 Whether it’s to test out Salesforce features and functionality, teach yourself some new tricks, follow along with a Trailhead Trail, build a proof-of-concept for your company or client, test the waters as an admin or developer for your own organization, or any of a hundred other reasons — spinning up a developer org is a super useful ability to have.
 And thankfully, Salesforce makes it easy!

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "summer-22-release-highlights-lightning-component-layout-enhancements-and-strengthened-formula",
   "description": "Dynamic related lists and new formulas help provide additional ways for Admins to solve problems.",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_Nz2uEoh1u10SHrvn.png"
-  }
+  "thumbnail": { "url": "/img/0_Nz2uEoh1u10SHrvn.png" },
 }
 ---
+
 Dynamic related lists and new formulas help provide additional ways for Admins to solve problems.
 
 {{< image src="/img/0_Nz2uEoh1u10SHrvn.png">}}

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,20 @@
   "title": "Mark Your Calendars: Best Upcoming Events June 22, 2020 — June 26, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-june-22-2020-june-26-2020",
   "description": "Do you know what is happening this upcoming week?! TRAILHEADX Y’ALL!! I don’t know about you, but I have been WAITING for this event since January. Yeah it’s virtual this year, but who cares! There is sooo much to learn from this event that your system will go into overload! Don’t worry, I haven’t forgotten about some of our other events too, but I’m just really excited about TrailheaDX. So sit back, open up your calendars and let’s get planning!.",
-  "tags": ["trailhead","trailheadx","wfh","salesforce-developer","salesforce-event"],
-  "author": {
-    "name": Caylin Schmenk,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags":
+    [
+      "trailhead",
+      "trailheadx",
+      "wfh",
+      "salesforce-developer",
+      "salesforce-event",
+    ],
+  "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_CWfFflCIkmfEnXZC_edG9Q.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_CWfFflCIkmfEnXZC_edG9Q.jpg" },
 }
 ---
+
 Do you know what is happening this upcoming week?! TRAILHEADX Y’ALL!! I don’t know about you, but I have been WAITING for this event since January. Yeah it’s virtual this year, but who cares! There is sooo much to learn from this event that your system will go into overload! Don’t worry, I haven’t forgotten about some of our other events too, but I’m just really excited about TrailheaDX. So sit back, open up your calendars and let’s get planning!
 {{< image src="/img/1_ejIq1R4De_S56nX2oBtJlA.png" title="Image" >}}
 
@@ -30,7 +32,7 @@ Additionally, the [San Francisco Developers Group](https://trailblazercommunityg
 On Tuesday, June 23rd there is a webinar about increasing your company’s visibility with Pardot. [](https://register.gotowebinar.com/rt/6263009941202190082?source=Calendar) will teach you how Google and SEO works and how to get your search engine rank higher in the results. Pardot ties in to this because it can help nurture and track prospects who find you in these search results. You can also request a 1:1 after this meeting if you are looking for more information or help.
 If you are an architect looking to build an effective integration strategy then you should join [](https://www.salesforce.com/form/sfdo/sfdo/integration-strategy-ask-an-architect/) on Wednesday, June 24th. This will help you learn step by step on how to keep all of that data across multiple systems in sync. Tom Leddy and Richard Booth from Salesforce.org will be your guide during this webinar.
 
-## 
+##
 
 Last week had a lot of content too! **Salesforce Release Readiness **gave us so many previews on so many different topics. It was almost overwhelming, but hopefully I helped you get your calendar organized. Additionally, the **Higher Ed Summit** happened and that too was a huge event! Did you get to hear Arianna Huffington, Trevor Noah, Soledad O’Brien and Samatha Power speak?
 The community group events had a lot of guest speaker action too! Richard Cunningham from Blendery Inc joined the Corte Madrea, CA Admin group to talk about large event registration solutions in Salesforce. Stacy Jewell at Business Valuation Resources and Chris Bayerle from Idealist Consulting joined the Portland, OR B2B Marketers group to talk about all things Pardot. The Denver, CO Developers group hosted a lighting mini hack session and finally the all of the San Francisco, CA groups hosted **Salesforce DevOps for Admins: Empowering your Team with Practical Advice. **Tweet us [@mkpartners](http://twitter.com/mkpartners) and let us know your thoughts!

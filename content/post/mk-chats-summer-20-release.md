@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mk-chats-summer-20-release",
   "description": "The Salesforce Summer ’20 Release is live and the release notes are… long. Join MK Partners’ own Chris and Caylin for a quick video…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/summer-20-highlights.jpeg"
-  }
+  "thumbnail": { "url": "/img/summer-20-highlights.jpg" },
 }
 ---
 
-
-{{< image src="/img/summer-20-highlights.jpeg" >}}
+{{< image src="/img/summer-20-highlights.jpg" >}}
 
 The Salesforce Summer '20 Release is live and the release notes are... long. Join [MK Partners](https://www.mkpartners.com/)' own Chris and Caylin for a quick video summary of our favorite new features in orgs everywhere.
 

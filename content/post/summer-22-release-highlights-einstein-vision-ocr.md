@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "summer-22-release-highlights-einstein-vision-ocr",
   "description": "We’re two weekends away from Summer ’22 being live in orgs everywhere and we’re back with another round of Release Highlights — this time…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_HsX6Kh9UgR_5prXZdIlm1w.webp"
-  }
+  "thumbnail": { "url": "/img/1_HsX6Kh9UgR_5prXZdIlm1w.webp" },
 }
 ---
+
 We’re two weekends away from Summer ’22 being live in orgs everywhere and we’re back with another round of [Release Highlights](https://medium.com/creme-de-la-crm/tagged/release-highlights) — this time with a look at a time-saving new superpower of everyone’s favorite AI, Einstein! We’ll also be taking a look at another, somewhat cryptic, Einstein mention in the release notes that admins will want to keep their eyes on as more information rolls out.
 
 Let’s dive in!
@@ -38,6 +38,7 @@ Admins (and devs) will a essentially pass completed forms into the platform as a
 ### Einstein Data Exploration Consent
 
 Next up is a short blurb that appears in a multitude of places in the [release notes](https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm&type=5&release=238&language=en_US) which suggests that Salesforce is eager to spread the word but, unusually, the details in all those mentions seem pretty sparse. In fact, all it really says is:
+
 > Allow Data Analysis with Einstein Data Exploration Consent:
 > Work smarter with Einstein features when you permit Salesforce data scientists to explore and improve your data.
 

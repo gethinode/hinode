@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Win MK Partners’ July Giveaway and a Google Home Mini!",
   "Slug": "win-mk-partners-july-giveaway-and-a-google-home-mini",
   "description": "July kicked off with a short week, but it’s officially underway - and that means it’s time for a brand new Giveaway! The contest is open now and we’ve kept in the expanded entry options from last month..",
-  "tags": ["giveaway-contest","contests","giveaway","contests-and-giveaways","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "giveaway-contest",
+      "contests",
+      "giveaway",
+      "contests-and-giveaways",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_RNT40Obgw676XPMD.jpeg"
-  }
+  "thumbnail": { "url": "/img/0_RNT40Obgw676XPMD.jpg" },
 }
 ---
+
 July kicked off with a short week, but it’s officially underway - and that means it’s time for a brand new [MK Partners’ Giveaway](https://gleam.io/sCpsF/mk-partners-july-giveaway)! The contest is open now and we’ve kept in the expanded entry options from last month.
 And again, at the end of the month, 1 lucky winner will get a Google Home Mini and the bragging rights to claim they’re July’s luckiest entrant!
 There are lots of ways to enter, and you can do one (or all of them) right now, just [click the link](https://gleam.io/sCpsF/mk-partners-july-giveaway) below to get started:

@@ -11,10 +11,10 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/salesforce-18-wheeler.jpeg" },
+  "thumbnail": { "url": "/img/salesforce-18-wheeler.jpg" },
 }
 ---
 
@@ -26,7 +26,7 @@ In today's post we'll continue our [alphabetic walkthrough](https://medium.com/
 
 Let's dive in!
 
-{{< image src="/img/google-how-to-e.jpeg" title="Googling Salesforce how to e" >}}
+{{< image src="/img/google-how-to-e.jpg" title="Googling Salesforce how to e" >}}
 
 The first thing we need to do is determine which tool we'll use to export the data and that'll mostly come down to *why* you're doing an export. Salesforce gives us two primary instruments for managing an export --- 'Data Loader' and 'Data Export' in the Setup Menu.
 
@@ -50,7 +50,7 @@ Now we can get started! Begin by opening Data Loader.
 
 Then click ‘Export’ (or, if you want to also export archived activity records and soft-deleted records, click ‘Export All’).
 
-{{< image src="/img/arrow-pointing-to-export-button.jpeg" title="Arrow pointing to export button" >}}
+{{< image src="/img/arrow-pointing-to-export-button.jpg" title="Arrow pointing to export button" >}}
 
 That will open the Log In prompt.
 
@@ -62,73 +62,73 @@ Be sure to specify if you’re logging into a production or sandbox environment 
 
 And then click ‘Log in’.
 
-{{< image src="/img/arrow-pointing-to-login.jpeg" title="Arrow pointing to login" >}}
+{{< image src="/img/arrow-pointing-to-login.jpg" title="Arrow pointing to login" >}}
 
 You’ll then see another window open, ready for your username and password. Enter the credentials for the environment you’d like to export from.
 
-{{< image src="/img/arrow-pointing-to-credentials.jpeg" title="Arrow pointing to credentials" >}}
+{{< image src="/img/arrow-pointing-to-credentials.jpg" title="Arrow pointing to credentials" >}}
 
 You’ll then need to ‘Allow’ Data Loader access to your basic information and to manage your data.
 
-{{< image src="/img/arrow-pointing-to-allow-access.jpeg" title="Arrow pointing to allow access" >}}
+{{< image src="/img/arrow-pointing-to-allow-access.jpg" title="Arrow pointing to allow access" >}}
 
 And then, once logged in, click the now activated ‘Next’ button.
 
-{{< image src="/img/arrow-pointing-to-next.jpeg" title="Arrow pointing to next button" >}}
+{{< image src="/img/arrow-pointing-to-next.jpg" title="Arrow pointing to next button" >}}
 
 Now, choose the object you’d like to export. If you don’t see the object you’re looking for, check the ‘Show all Salesforce objects’ checkbox.
 
-{{< image src="/img/list-of-objects.jpeg" title="List of objects" >}}
+{{< image src="/img/list-of-objects.jpg" title="List of objects" >}}
 
 Once you’ve selected the object you want (for this example, we’ll select ‘Accounts’), select/name the CSV file and the location you’d like to export to. _Note: here you can create a new file or overwrite an existing one._
 
-{{< image src="/img/arrow-pointing-to-target.jpeg" title="Arrow pointing to target" >}}
+{{< image src="/img/arrow-pointing-to-target.jpg" title="Arrow pointing to target" >}}
 
 Once you’ve done that, click ‘Next’.
 
-{{< image src="/img/arrow-pointing-to-objects-next.jpeg" title="Arrow pointing to objects next" >}}
+{{< image src="/img/arrow-pointing-to-objects-next.jpg" title="Arrow pointing to objects next" >}}
 
 That brings us to the ‘Step 3: Edit your query prompt’.
 
-{{< image src="/img/edit-your-query.jpeg" title="Edit your query" >}}
+{{< image src="/img/edit-your-query.jpg" title="Edit your query" >}}
 
 Here we’ll create the SOQL query for our data export. Don’t let those initials spook you, even if you’ve never heard of SOQL before (it stands for Salesforce Object Query Language), Data Loader will generate the query for you — all you have to do is make the selections you want on this screen.
 
 For the sake of our example export, let’s select ‘ID’,
 
-{{< image src="/img/choose-the-query-fields.jpeg" title="Choose the query field" >}}
+{{< image src="/img/choose-the-query-fields.jpg" title="Choose the query field" >}}
 
 ‘Name’,
 
-{{< image src="/img/check-name.jpeg" title="Check name box" >}}
+{{< image src="/img/check-name.jpg" title="Check name box" >}}
 
 and ‘BillingState’.
 
-{{< image src="/img/check-billingstate.jpeg" title="Check billingstate box" >}}
+{{< image src="/img/check-billingstate.jpg" title="Check billingstate box" >}}
 
 You’ll notice that as we’ve made our selections, our SOQL query has been automatically generated in the box below.
 
-{{< image src="/img/arrow-pointing-to-query.jpeg" title="Arrow pointing to query" >}}
+{{< image src="/img/arrow-pointing-to-query.jpg" title="Arrow pointing to query" >}}
 
 You can also add conditions to limit/filter which data you export. For example, if we wanted to only export our accounts that had more than 500 employees we’d select the appropriate ‘Field’, ‘Operation’, and ‘Value’,
 
-{{< image src="/img/arrow-pointing-to-condition.jpeg" title="Arrow pointing to condition" >}}
+{{< image src="/img/arrow-pointing-to-condition.jpg" title="Arrow pointing to condition" >}}
 
 And then click ‘Add condition’ to see it added to our query.
 
-{{< image src="/img/arrow-pointing-to-add-condition.jpeg" title="Arrow pointing to add condition" >}}
+{{< image src="/img/arrow-pointing-to-add-condition.jpg" title="Arrow pointing to add condition" >}}
 
 Once you have all of your fields and conditions set, click ‘Finish’.
 
-{{< image src="/img/arrow-pointing-to-finish-button.jpeg" title="Arrow pointing to finish button" >}}
+{{< image src="/img/arrow-pointing-to-finish-button.jpg" title="Arrow pointing to finish button" >}}
 
 You’ll see a warning prompt pop up, confirming that you’d like to begin your export. Click ‘Yes’.
 
-{{< image src="/img/arrow-pointing-to-yes.jpeg" title="Arrow pointing to yes" >}}
+{{< image src="/img/arrow-pointing-to-yes.jpg" title="Arrow pointing to yes" >}}
 
 You’ll then see a progress window and, ultimately, an “Operation Finished” window when the extraction is complete. Here you can click ‘OK’ to close the prompt or ‘View Extraction’ to see the data you’ve exported.
 
-{{< image src="/img/operation-finished.jpeg" title="Operation finished" >}}
+{{< image src="/img/operation-finished.jpg" title="Operation finished" >}}
 
 If you choose to view the extraction, the CSV viewer will open, revealing your results.
 
@@ -136,7 +136,7 @@ If you choose to view the extraction, the CSV viewer will open, revealing your r
 
 You’ll also be able to find the CSV file in the destination you chose initially.
 
-{{< image src="/img/csv-file-in-folder.jpeg" title="CSV file in folder" >}}
+{{< image src="/img/csv-file-in-folder.jpg" title="CSV file in folder" >}}
 
 And you're all set! Your data is saved as that CSV and ready to be used however you need it!
 

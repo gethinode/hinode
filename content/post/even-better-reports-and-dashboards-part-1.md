@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,27 +8,32 @@
   "title": "Even Better Reports and Dashboards — Part 1",
   "Slug": "even-better-reports-and-dashboards-part-1",
   "description": "Reports and Dashboards are two of the most celebrated features of Salesforce, and rightly so. They contextualize the chaotic. They organize, illuminate, and illustrate insights into our operations on a daily, quarterly, yearly scale. Refining the ever-increasing supply of data into digestible, actionable intelligence is a necessity for 21st century orgs, and so improvements to Salesforce’s reporting capabilities are a boon to businesses everywhere..",
-  "tags": ["salesforce","spring-19-release","reporting","reports-and-dashboards","salesforce-reports"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "spring-19-release",
+      "reporting",
+      "reports-and-dashboards",
+      "salesforce-reports",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_vBiHdWKgeqype_LmDbm_NA.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_vBiHdWKgeqype_LmDbm_NA.jpg" },
 }
 ---
+
 Reports and Dashboards are two of the most celebrated features of [Salesforce](https://www.salesforce.com/products/), and rightly so. They contextualize the chaotic. They organize, illuminate, and illustrate insights into our operations on a daily, quarterly, yearly scale. Refining the ever-increasing supply of data into digestible, actionable intelligence is a necessity for 21st century orgs, and so improvements to Salesforce’s reporting capabilities are a boon to businesses everywhere.
 Happily for us (and admins all over the world) the Spring ’19 Release that dropped last month was packed with feature and functionality upgrades that make reports and dashboards even more effective, intelligent, and enlightening. In this two-part post we’ll run through our favorite data-delivery improvements included in the release and how they’re empowering admins to be even more productive.
 Today we’ll talk about the upgrades to reporting, and next week we’ll walk through the exciting updates to dashboards.
 Let’s get to it!
-{{< image src="/img/1_QYU4XSsG10KvMBkOfayR2g.jpeg" title="Image" >}}
-
+{{< image src="/img/1_QYU4XSsG10KvMBkOfayR2g.jpg" title="Image" >}}
 
 ## Reporting
-
 
 ## Joined Reports in Lightning
 
@@ -37,7 +42,7 @@ The ability to wed reports with different, but complementary, data enables even 
 {{< image src="/img/1_D__UDu5aXsq_LDbJmq56yw.png" title="Image" >}}
 
 A few of Salesforce’s favorite use-cases are a three-block sales report providing a complete view of “accounts”, “opportunities”, and “cases” so you can see the whole customer flow, and a three-block customer service report made up of cases filtered by “open”, “in progress”, and “closed” to provide a high-level overview of the entire CS pipeline.
-You can check out even more examples of effective joined reports [right here](https://help.salesforce.com/articleView?id=reports_examples_joined.htm&amp;type=5), and the best part is you’ll no longer be limited to operating in Classic!
+You can check out even more examples of effective joined reports [right here](https://help.salesforce.com/articleView?id=reports_examples_joined.htm&type=5), and the best part is you’ll no longer be limited to operating in Classic!
 
 ## Improved Report Run Page
 
@@ -48,7 +53,7 @@ First, column headers are now “sticky” so no matter how long your report is,
 That’s pretty neat!
 And the second report run page improvement is the addition of summary headers at the top of your reports to help you quickly gauge your most important metrics at a glance! Now, summarized metrics in your report (like grand totals, sub-totals, record counts, formula column results, etc…) appear at the top of the page in an easy-to-read, larger font.
 The (up to 8!) summarized metrics appear automatically from left to right in the same order they appear in the report and that means no more scrolling and scanning through the whole thing to find the summaries you care about most. This feature’s especially valuable for shared reports where your audience will have varying degrees of interest, time, and willingness to dig through the data and it can also help you identify the important, impactful metrics that ought to make it onto a dashboard.
-{{< image src="/img/1_owSAiid5QGQ4tORHdD5cMA.jpeg" title="Image" >}}
+{{< image src="/img/1_owSAiid5QGQ4tORHdD5cMA.jpg" title="Image" >}}
 
 And with both features now standard on the report run page, even your most over-sized, data-packed, and field-full constructions can be quickly understood by users at every level of your org!
 
@@ -64,7 +69,7 @@ No more unused white space or obscuring ellipses, unless you want them.
 
 This is another one for Excel fans (and those of us who were used to this in Classic), conditional formatting! When you want your users to be able to gauge their goal progress at-a-glance or want the C-Suite to be able to get a speedy grasp of where the operation is on-target versus at-risk, [conditional formatting](https://releasenotes.docs.salesforce.com/en-us/spring19/release-notes/rn_rd_reports_conditionalformat.htm) provides an easy, visual way to contextualize report results.
 Spring ’19 introduced conditional formatting in Lightning as a beta, so it’s live now and can be applied to any of your summary or matrix reports. And Salesforce added a few improvements over its Classic application as well. Now you can apply up to five formatting rules to a report, define up to three bins for each rule you apply, and, best of all, you can customize the colors!
-{{< image src="/img/1_JEtcLThWbhqnC239BXIMJg.jpeg" title="Image" >}}
+{{< image src="/img/1_JEtcLThWbhqnC239BXIMJg.jpg" title="Image" >}}
 
 You can finally get those colorful summaries back into your weekly team meetings without having to bounce back and forth between Lightning and Classic!
 
@@ -72,11 +77,11 @@ You can finally get those colorful summaries back into your weekly team meetings
 
 Matrix reports are awesome and offer a unique way to summarize and compare huge quantities of data. But that also means they can be large, complex, and difficult to digest on one screen without a ton of scrolling. Until Stacked Summaries, that is!
 In the footer of your matrix reports, you’ll now see a toggle for “[Stacked Summaries](https://releasenotes.docs.salesforce.com/en-us/spring19/release-notes/rn_rd_reports_stackedsummaries.htm)” that, when flipped, consolidates your matrices into neatly organized summaries on their appropriate rows.
-{{< image src="/img/1_LIqxx0JNfTI_SGsjYaGYBQ.jpeg" title="Image" >}}
+{{< image src="/img/1_LIqxx0JNfTI_SGsjYaGYBQ.jpg" title="Image" >}}
 
 Admins and users no longer have to scroll left and right, back and forth trying to compare each field, and the reduced real estate requirements mean you’re no longer stuck busying both of your monitors with one extra-wide report. Just open your favorite matrix report, flip the toggle in the footer, and enjoy!
 
-## 
+##
 
 Another update designed to eliminate the need to bounce back and forth between Classic and Lightning Experience is the addition of Historical Tracking Reports in LE. While matrix reports have had this functionality for a while, now tabular historical tracking reports are also getting support, cutting down on the clicks it takes to see what’s changed!
 {{< image src="/img/1_5511609rRDXjtJoZ1xakBw.png" title="Image" >}}

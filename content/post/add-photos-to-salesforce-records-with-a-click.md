@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,25 +9,21 @@
   "Slug": "add-photos-to-salesforce-records-with-a-click",
   "description": "Whether it’s a headshot for Contacts, a logo for Accounts, an item shot for Products, or anything else you can think up, adding photos to...",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/salesforce-record.jpeg"
-  }
+  "thumbnail": { "url": "/img/salesforce-record.jpg" },
 }
 ---
 
-
-{{< image src="/img/salesforce-record.jpeg" >}}
-
 Whether it's a headshot for Contacts, a logo for Accounts, an item shot for Products, or anything else you can think up, adding photos to records in Salesforce can be a boon to UX, humanize your org, and help cut down on user errors caused by text-heavy screens. That's why we built [Photo Uploader](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N30000001TKzOEAW)!
 
-{{< image src="/img/photo-uploader.jpeg" >}}
+{{< image src="/img/photo-uploader.jpg" >}}
 
 For more than a decade, [Photo Uploader](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N30000001TKzOEAW) has been helping Admins add images to their orgs and give their users the ability (if they want) to update records with images as well. Installation is easy, then simply add the component to your desired page layouts, set your permissions, and upload away!
 

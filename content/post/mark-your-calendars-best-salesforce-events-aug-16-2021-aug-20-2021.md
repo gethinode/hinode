@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-aug-16-2021-aug-20-2021",
   "description": "Summer is almost over and I’m just sitting here like whatttt, we just got started! Has anyone been to any in-person Salesforce related...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/desk-planner.jpeg"
-  }
+  "thumbnail": { "url": "/img/desk-planner.jpg" },
 }
 ---
 
-
-{{< image src="/img/desk-planner.jpeg" >}}
+{{< image src="/img/desk-planner.jpg" >}}
 
 Summer is almost over and I’m just sitting here like whatttt, we just got started! Has anyone been to any in-person Salesforce related events yet? I’m curious to see how they went, so tweet us @mkpartners to let me know! Okay let’s get into this week, so sit back, open up your calendars and get planning!
 
@@ -35,9 +33,8 @@ Also on Wednesday, August 18th we have a unique Salesforce webinar focusing on h
 
 Our last event is a recurring event on Thursday, August 19th at 9am (PST). The [Marketing Cloud August 2021 New Feature Overview](https://www.salesforce.com/form/events/webinars/form-rss/3258298) has product experts talk about the new features and additions to products such as Einstein, Pardot, Interaction Studio and many more! Definitely a meeting worth your time if you are in marketing, an Admin, or in sales.
 
-Recap
-------
+## Recap
 
-Last week FILA joined Salesforce in *How FILA Reduces Holiday Shopping Friction* to teach businesses how to handle and streamline online services during the holidays. Marketers had a chance to learn *The Top 5 Real-Time Personalization Trends in 2021* to help them with strategies and insights they could bring back to their company and help their marketing teams succeed! Newbees to the Salesforce ecosystem got to learn more about CRM in *What is Customer Relationship Management*? Lastly, those in the education sector learned how they can spend federal funding to support their students in *How Higher Ed Can Drive Student Success with ARP Funding*. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
+Last week FILA joined Salesforce in _How FILA Reduces Holiday Shopping Friction_ to teach businesses how to handle and streamline online services during the holidays. Marketers had a chance to learn _The Top 5 Real-Time Personalization Trends in 2021_ to help them with strategies and insights they could bring back to their company and help their marketing teams succeed! Newbees to the Salesforce ecosystem got to learn more about CRM in _What is Customer Relationship Management_? Lastly, those in the education sector learned how they can spend federal funding to support their students in _How Higher Ed Can Drive Student Success with ARP Funding_. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 
 Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE&utm_source=mkp&utm_medium=referral&utm_campaign=logigear-mkp-tpp) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

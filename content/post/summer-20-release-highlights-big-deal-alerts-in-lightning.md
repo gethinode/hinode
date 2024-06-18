@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,26 +9,23 @@
   "Slug": "summer-20-release-highlights-big-deal-alerts-in-lightning",
   "description": "The Salesforce Summer ’20 Release is officially live and we’re back with one last highlight that’s in orgs now. This time, it’s a...",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/cookie-coffee.jpeg"
-  }
+  "thumbnail": { "url": "/img/cookie-coffee.jpg" },
 }
 ---
 
-
-{{< image src="/img/cookie-coffee.jpeg" >}}
+{{< image src="/img/cookie-coffee.jpg" >}}
 
 The [Salesforce](https://www.salesforce.com/products/) Summer '20 Release is officially live and we're back with one last [highlight](https://medium.com/tag/release-highlights/archive) that's in orgs now. This time, it's a much-loved feature from Classic that's finally making the move to Lightning Experience --- [Big Deal Alerts](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/rn_sales_opportunities_big_deal_alerts.htm)!
 
-Big Deal Alerts
----------------
+## Big Deal Alerts
 
 If you're not familiar, Big Deal Alerts are an easy way to setup automated email notifications for opportunities that reach a threshold of amount and probability. Whether it's for keeping a sales director in the loop, catching the contracting department up to speed, or triggering a third-party process --- they're a great way to save your team time and effort and make sure nothing slips through the cracks.
 

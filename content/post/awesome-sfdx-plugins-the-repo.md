@@ -12,14 +12,14 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/macbook-vscode.jpeg" },
+  "thumbnail": { "url": "/img/macbook-vscode.jpg" },
 }
 ---
 
-{{< image src="/img/macbook-vscode.jpeg" title="Macbook with VS Code open" >}}
+{{< image src="/img/macbook-vscode.jpg" title="Macbook with VS Code open" >}}
 
 Developing for [Salesforce](https://www.salesforce.com/products/) is a key part of the platform’s powerful flexibility. On top of robust out-of-the-box functionality and seemingly-limitless configuration options, coding your own solutions to unique business-needs is what really elevates Salesforce above its competitors and makes it the most successful CRM in the world.
 

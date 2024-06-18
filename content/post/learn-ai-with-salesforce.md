@@ -11,14 +11,14 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpeg",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/laptop-brain.jpeg" },
+  "thumbnail": { "url": "/img/laptop-brain.jpg" },
 }
 ---
 
-{{< image src="/img/laptop-brain.jpeg" >}}
+{{< image src="/img/laptop-brain.jpg" >}}
 
 Artificial Intelligence has grown from sci-fi catch-all to business necessity in the course of a few short years. AI jumped from a seemingly endless “demo” cycle (“this one can play chess”, “this one can play jeopardy”) to fully-developed data tools and now admins, devs, and executives everywhere are eager to ensure they’re equipped to use, understand, and implement it effectively.
 

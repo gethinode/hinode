@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "public-sector-salesforce-experts",
   "description": "Trained eyes will have noticed some cool changes to the AppExchange in the last week — especially when it comes to finding the right…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/capitol.jpeg"
-  }
+  "thumbnail": { "url": "/img/capitol.jpg" },
 }
 ---
 
-
-{{< image src="/img/capitol.jpeg" >}}
+{{< image src="/img/capitol.jpg" >}}
 
 Trained eyes will have noticed some cool changes to the [AppExchange](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE) in the last week --- especially when it comes to finding the right Salesforce partner. Alongside more granular filtering options and the freshly released "consultant finder" wizard, the most helpful and exciting update seems to be new Partner Navigator Achievements that are now reflected on the Expertise tab!
 

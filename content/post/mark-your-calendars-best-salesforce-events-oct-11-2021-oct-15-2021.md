@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-oct-11-2021-oct-15-2021",
   "description": "I have a short, but a mixed bag of events for you this week. Some are short, some are very long, and some aren’t even Salesforce events…",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/october-2021-pumpkins.jpeg"
-  }
+  "thumbnail": { "url": "/img/october-2021-pumpkins.jpg" },
 }
 ---
 
-
-{{< image src="/img/october-2021-pumpkins.jpeg" >}}
+{{< image src="/img/october-2021-pumpkins.jpg" >}}
 
 I have a short, but a mixed bag of events for you this week. Some are short, some are very long, and some aren’t even Salesforce events. Regardless, you are bound to learn something this week! So sit back, open up your calendars, and let’s get planning!
 
@@ -35,11 +33,10 @@ Then on Thursday, October 14th at 6am (PST) the UN Global Compact is hosting [Ho
 
 Our second Trailhead Live event of the week is at 12pm (PST) on Tuesday, October 14th. [True to the Core: IdeaExchange](https://trailhead.salesforce.com/live/broadcasts/a2r3k000001dKLm/true-to-the-core-live-ideaexchange) is occurring so you can meet the team working on the reimagined IdeaExchange. You’ll get a chance to see the newest features coming out this month and maybe even what’s to come after this month… fingers crossed! There is also a live question and answer section and a chance for you to provide feedback about the new IdeaExchange.
 
-Recap
-------
+## Recap
 
-Last week Salesforce was joined by Emerald, to talk about key marketing takeaways from this year so that you can start planning for 2022 in *5 B2B Marketing Takeaways to Inform Your 2022 Marketing Plans*. Then in *Gathering Feedback through Mobile Devices* Salesforce talked about gathering feedback and improving the customer experience on mobile devices that dropped in the Winter ’22 Release. We kicked off the *Skill Up on Slack: Slack Basics* to help new users get started with Slack not only get set up, but some general best practices.
+Last week Salesforce was joined by Emerald, to talk about key marketing takeaways from this year so that you can start planning for 2022 in _5 B2B Marketing Takeaways to Inform Your 2022 Marketing Plans_. Then in _Gathering Feedback through Mobile Devices_ Salesforce talked about gathering feedback and improving the customer experience on mobile devices that dropped in the Winter ’22 Release. We kicked off the _Skill Up on Slack: Slack Basics_ to help new users get started with Slack not only get set up, but some general best practices.
 
-We heard about *Security in the Age of Work from Anywhere* where experts from Salesforce’s Healthcare and Life Science department talked about solutions in the government, security, and compliance sectors due to their employees now getting to work from anywhere in the world. Finally, newbies in the Salesforce ecosystem got a chance to really get their foot in the door in the *[Trailblazer Connect Career Fair: Germany, Austria, Switzerland, and Poland](*! Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
+We heard about _Security in the Age of Work from Anywhere_ where experts from Salesforce’s Healthcare and Life Science department talked about solutions in the government, security, and compliance sectors due to their employees now getting to work from anywhere in the world. Finally, newbies in the Salesforce ecosystem got a chance to really get their foot in the door in the _[Trailblazer Connect Career Fair: Germany, Austria, Switzerland, and Poland](_! Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 
 Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

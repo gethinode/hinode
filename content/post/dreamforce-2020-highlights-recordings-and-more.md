@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "dreamforce-2020-highlights-recordings-and-more",
   "description": "Last week was a whirlwind on top of an already accelerated 2020, so it’s no surprise if you weren’t able to catch all the sessions…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce-to-you-outside.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce-to-you-outside.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce-to-you-outside.jpeg" >}}
+{{< image src="/img/dreamforce-to-you-outside.jpg" >}}
 
 Last week was a whirlwind on top of an already accelerated 2020, so it's no surprise if you weren't able to catch all the sessions, stories, and seminars of Dreamforce that you wanted to. But the good news is, with this year's installment being virtual, you have a whole year to catch up --- and you can [start right now](https://www.salesforce.com/dreamforce/)!
 

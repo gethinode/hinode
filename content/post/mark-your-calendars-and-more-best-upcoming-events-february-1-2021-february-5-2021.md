@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,14 @@
   "title": "Mark Your Calendars (and More): Best Upcoming Events February 1, 2021 — February 5, 2021",
   "Slug": "mark-your-calendars-and-more-best-upcoming-events-february-1-2021-february-5-2021",
   "description": "It’s been a few months since I’ve written about something other than the events taking place during the week. And while I was hosting a happy hour for my team the other week at MK Partners I realized I should be telling people what we do for fun during this hour! Sometimes these events consist of chit chat and sometimes we have an activity. So this week I’m going to focus on a few activities you can play with your team and/or company virtually that don’t require apps or screen sharing. So sit back, open up your calendars, pick a day to have a team or company happy hour and let’s get planning!!.",
-  "tags": ["salesforce-event","wfh","virtual-events","culture","remote-work"],
-  "author": {
-    "name": Caylin Schmenk,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags":
+    ["salesforce-event", "wfh", "virtual-events", "culture", "remote-work"],
+  "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_olEH9KakMcD_dMlVmMx52w.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_olEH9KakMcD_dMlVmMx52w.jpg" },
 }
 ---
+
 It’s been a few months since I’ve written about something other than the events taking place during the week. And while I was hosting a happy hour for my team the other week at MK Partners I realized I should be telling people what we do for fun during this hour! Sometimes these events consist of chit chat and sometimes we have an activity. So this week I’m going to focus on a few activities you can play with your team and/or company virtually that don’t require apps or screen sharing. So sit back, open up your calendars, pick a day to have a team or company happy hour and let’s get planning!!
 A few weeks ago my team participated in a scavenger hunt. Scavenger hunts are one of the perfect virtual games because you can have any number of participants, you don’t need to install anything or use another piece of technology and other members of their household can join in! You also learn about your team during this activity. A lot of scavenger hunts require you to find an item, such as a penny or a book, however you can add items that require more thought, like something that is the color blue or makes noise. Everyone comes back with their interpretations of that item and there is usually a story behind some of them!
 One game you can passively play over the week, every few weeks is BINGO. Obviously due to the pandemic, there are now tons of pandemic BINGO cards on the internet and you can support a small business by purchasing the pdf cards from sites such as Etsy. Once you get the cards (or make your own) you can send everyone a card at the beginning of the work week and see who won at the end of the week! It’s a great way to take a social break and reconnect with your coworkers for something not work related.

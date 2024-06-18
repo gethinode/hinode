@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "dreamforce-to-you-what-we-know-about-dreamforce-2020",
   "description": "Dreamforce 2020 is kicking off next week and it’ll be a big change from the Dreamforce we’re used to as the event moves from the streets…",
   "tags": ["dreamforce"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce-app.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce-app.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce-app.jpeg" >}}
+{{< image src="/img/dreamforce-app.jpg" >}}
 
 Dreamforce 2020 is kicking off next week and it'll be a big change from the Dreamforce we're used to as the event moves from the streets of San Francisco to computer screens all around the world!
 

@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-05-15T11:43:34-07:00",
   "title": "Salesforce Summer 19 Release Highlights Free Surveys",
   "Slug": "salesforce-summer-19-release-highlights-free-surveys",
   "description": "Let’s continue our run through the coolest updates, upgrades, and features coming with the Summer ’19 Release with a look at some new license-free functionality — Salesforce Surveys!",
   "tags": ["summer 19", "salesforce", "survey", "email", "invitation"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/using-salesforce-and-a-cookie.jpeg"
-  }
+  "thumbnail": { "url": "/img/using-salesforce-and-a-cookie.jpg" },
 }
 ---
 
-
-{{< image src="/img/using-salesforce-and-a-cookie.jpeg" title="Using salesforce while eating a cookie" >}}
+{{< image src="/img/using-salesforce-and-a-cookie.jpg" title="Using salesforce while eating a cookie" >}}
 
 Let’s continue our run through the coolest updates, upgrades, and features coming with the Summer ’19 Release with a look at some new license-free functionality — [Salesforce Surveys](https://releasenotes.docs.salesforce.com/en-us/summer19/release-notes/rn_general_salesforce_surveys.htm)!
 

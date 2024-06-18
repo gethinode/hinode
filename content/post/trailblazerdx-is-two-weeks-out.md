@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "TrailblazerDX is Two Weeks Out!",
   "Slug": "trailblazerdx-is-two-weeks-out",
   "description": "The first of Salesforce’s “big” annual events is on the horizon — TrailblazerDX is heading back to San Francisco in just two short weeks!.",
-  "tags": ["salesforce","salesforce-event","salesforce-trailblazerdx","trailheadx","trailblazerdx"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-event",
+      "salesforce-trailblazerdx",
+      "trailheadx",
+      "trailblazerdx",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_fus4gGvvFNOI9vbmmMBU9w.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_fus4gGvvFNOI9vbmmMBU9w.jpg" },
 }
 ---
+
 The first of Salesforce’s “big” annual events is on the horizon — [TrailblazerDX](https://www.salesforce.com/trailblazerdx/) is heading back to San Francisco in just two short weeks!
 Formerly “TrailheaDX” (and formerly a very dev-centered event), recent years have seen it rebranded for the broader Trailblazer community and, with the newer moniker, “TrailblazerDX”.
 As always, a star-studded lineup of speakers from around the Salesforce ecosystem (as well as Hollywood and the world of entertainment) will take to the stages at Moscone to share success stories, product developments, and tips for building your career, brand, or app on the platform!

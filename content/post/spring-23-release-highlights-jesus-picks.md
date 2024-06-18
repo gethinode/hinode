@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "spring-23-release-highlights-jesus-picks",
   "description": "Inclusive Data, Real-Time Automation, Auto-MFA, Field-Level Security, and More!",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0_ObgV6mF__cK4FeRQ.png"
-  }
+  "thumbnail": { "url": "/img/0_ObgV6mF__cK4FeRQ.png" },
 }
 ---
+
 Inclusive Data, Changes to Real-Time Automation, Auto-MFA, Field-Level Security, and More!
 
 {{< image src="/img/0_ObgV6mF__cK4FeRQ.png">}}
@@ -39,7 +39,7 @@ Within the Marketing Cloud realm looks like Account Engagement (formerly Pardot)
 Security is always a priority topic as all roles within an organization may be affected and required to take action. As of February ’22 MFA (Multi-Factor Authentication) was on everyone's radar. Almost a year later Salesforce will begin auto-enabling MFA within production orgs via two phases. Phase one was available as of Winter ’23 but will go into effect as of Spring ’23. Simply use the [Trust Status](https://status.salesforce.com/) site to search for your org instance and obtain an approximate effective date. Phase two releases in Spring ’23 and will go into effect starting Summer ’23. Any instance that does not fall within either will be notified at a later date. Read more about some preparation tips [here](https://help.salesforce.com/s/articleView?id=release-notes.rn_security_mfa_auto_enablement_phase2.htm&type=5&release=242https://help.salesforce.com/s/articleView?id=release-notes.rn_security_mfa_auto_enablement_phase2.htm&type=5&release=242).
 
 **Choose the Permission Sets Display When Setting Field-Level Security (Beta)**
-Another customization that falls within the permission changes coming with this release consist of providing a simplified method to change field-level security for permission sets and object permissions. As this feature is still in a beta version modifications are likely to continue until it becomes permanent within the release. It's nice to see a new solution provided to manage permissions at all stages. Will be available in both Lightning and Classic editions. Simply head over to the User Management Settings to enable *Field-Level Security for Permission Sets During Field Creation*. Make sure to provide feedback that can impact what the final release will include. Read more about it [here](https://help.salesforce.com/s/articleView?id=release-notes.rn_permissions_fls_permsets.htm&type=5&release=242).
+Another customization that falls within the permission changes coming with this release consist of providing a simplified method to change field-level security for permission sets and object permissions. As this feature is still in a beta version modifications are likely to continue until it becomes permanent within the release. It's nice to see a new solution provided to manage permissions at all stages. Will be available in both Lightning and Classic editions. Simply head over to the User Management Settings to enable _Field-Level Security for Permission Sets During Field Creation_. Make sure to provide feedback that can impact what the final release will include. Read more about it [here](https://help.salesforce.com/s/articleView?id=release-notes.rn_permissions_fls_permsets.htm&type=5&release=242).
 
 **Final Thoughts**
 As always, we’ll keep the Release Highlights rolling as we get closer to launch day and, if there’s something in the Release Notes that caught your eye and you’d like us to cover, feel free to drop it in the comments here!

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "dreamforce-21-speakers-announced",
   "description": "As we continue our countdown to the world-leading CRM’s biggest event, we keep picking up new bits of information that inspire…",
   "tags": ["dreamforce"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce-2021-speakers-monitor.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce-2021-speakers-monitor.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce-2021-speakers-monitor.jpeg" >}}
+{{< image src="/img/dreamforce-2021-speakers-monitor.jpg" >}}
 
 As we continue our countdown to the world-leading CRM’s biggest event, we keep picking up new bits of information that inspire anticipation. Today, Salesforce announced the keynote speakers to expect to see in San Francisco!
 

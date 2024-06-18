@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce How To’s: Transform ‘Location’ to ‘Text’ in a Formula Field",
   "Slug": "salesforce-how-tos-transform-location-to-text-in-a-formula-field",
   "description": "Today’s Salesforce admin tip comes straight from the trenches! There are a lot of neat tricks you can do with formula fields and they’re sometimes an admin’s best tool for creatively manipulating data across objects and records, especially if you’re already near your lookup limit. But, while formula fields have no issues with complex calculations, currencies, or most data types, one thing they don’t account for is location data as stored in Salesforce..",
-  "tags": ["salesforce-how-to","salesforce-admin","formula-fields","admin-tricks","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-how-to",
+      "salesforce-admin",
+      "formula-fields",
+      "admin-tricks",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_YIFkcQEcYDgduZ2aGF3PIg.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_YIFkcQEcYDgduZ2aGF3PIg.jpg" },
 }
 ---
+
 Today’s Salesforce admin tip comes straight from the trenches! There are a lot of neat tricks you can do with formula fields and they’re sometimes an admin’s best tool for creatively manipulating data across objects and records, especially if you’re already near your lookup limit. But, while formula fields have no issues with complex calculations, currencies, or most data types, one thing they don’t account for is location data as stored in Salesforce.
 So what do you do if, for example, you want to add location data to a record in a formula field? There’s no checkbox for the location data type when you’re creating a formula field and, if you select “text” and then make a really simple formula like: “Account.BillingAddress”, you get the following syntax error:
 {{< image src="/img/1_FDorbhK_RBrK0VFwpS5jbg.png" title="Image" >}}

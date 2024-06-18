@@ -36,87 +36,87 @@ In today’s post we’ll walk through setting up Shared Case rules, so your CX 
 ## Let’s get started!
 
 To begin, head to “Setup” by clicking on the gear wheel in the top right of your Salesforce instance.
-{{< image src="/img/1_a96nd_WDiTSosfGHHHO8NA.jpeg" title="Image" >}}
+{{< image src="/img/1_a96nd_WDiTSosfGHHHO8NA.jpg" title="Image" >}}
 
 And then select “Setup” from the dropdown menu.
-{{< image src="/img/1_n7_YAkUkQo1VE_6JLmO_nw.jpeg" title="Image" >}}
+{{< image src="/img/1_n7_YAkUkQo1VE_6JLmO_nw.jpg" title="Image" >}}
 
 And that’ll take you to the Setup!
-{{< image src="/img/1_ZX7WEAqrlKespX2LkacQKw.jpeg" title="Image" >}}
+{{< image src="/img/1_ZX7WEAqrlKespX2LkacQKw.jpg" title="Image" >}}
 
 Now, look to the Setup Menu on the left hand side of your screen. Scroll down to Security and click the ‘&gt;’ to expand it.
-{{< image src="/img/1_UJHcsm_3CLHOcEfezbzfCQ.jpeg" title="Image" >}}
+{{< image src="/img/1_UJHcsm_3CLHOcEfezbzfCQ.jpg" title="Image" >}}
 
 Scroll down and select ‘Sharing Settings’
-{{< image src="/img/1_mJajvcL2l0mWB5NXghV8Jw.jpeg" title="Image" >}}
+{{< image src="/img/1_mJajvcL2l0mWB5NXghV8Jw.jpg" title="Image" >}}
 
 Note: In the future, you can save yourself the clicks by typing “Sharing Settings” directly into the search bar at the top of the Setup Menu. In fact, you’ll probably only need to type the first few letters.
-{{< image src="/img/1___Ds6olWqIR_VEIY8tuGjw.jpeg" title="Image" >}}
+{{< image src="/img/1___Ds6olWqIR_VEIY8tuGjw.jpg" title="Image" >}}
 
 Perfect! You should now find yourself on the Sharing Settings page.
-{{< image src="/img/1_ImO3eKWLsfSdbTZK3kF9TA.jpeg" title="Image" >}}
+{{< image src="/img/1_ImO3eKWLsfSdbTZK3kF9TA.jpg" title="Image" >}}
 
 Find the ‘Organization-Wide Defaults’ section (usually front and center) and click the ‘Edit’ button at the top.
-{{< image src="/img/1_WLQux6hGkFrlessQd33N6Q.jpeg" title="Image" >}}
+{{< image src="/img/1_WLQux6hGkFrlessQd33N6Q.jpg" title="Image" >}}
 
 Navigate down to “Case” and use the dropdown menu to change its default to “Public Read Only”.
-{{< image src="/img/1_Aa8w7FTSZtmGT1LtCMkQGg.jpeg" title="Image" >}}
+{{< image src="/img/1_Aa8w7FTSZtmGT1LtCMkQGg.jpg" title="Image" >}}
 
 **Note: After this next step you’ll likely get a pop-up notification from Salesforce. Don’t reflexively dismiss it. Do your best to fight that internet auto-pilot.**
 Click ‘Save’.
-{{< image src="/img/1_JUKJaKb57m_T004E6gsvZg.jpeg" title="Image" >}}
+{{< image src="/img/1_JUKJaKb57m_T004E6gsvZg.jpg" title="Image" >}}
 
 Ok, there’s that semi-spooky pop-up notification that you didn’t immediately dismiss (way to go!).
-{{< image src="/img/1_LCp3r0s8bB1eZycfVeFQ1g.jpeg" title="Image" >}}
+{{< image src="/img/1_LCp3r0s8bB1eZycfVeFQ1g.jpg" title="Image" >}}
 
 It actually only looks scary, it’s just letting you know that Salesforce is going to take some time recalculating things based on our change. Once the process is complete you’ll receive a notification email that you’re clear to keep working.
 Click “Ok” to dismiss the pop-up.
-{{< image src="/img/1_ykT5Ago3uBcJ2j5FLPF8GQ.jpeg" title="Image" >}}
+{{< image src="/img/1_ykT5Ago3uBcJ2j5FLPF8GQ.jpg" title="Image" >}}
 
 You’ll now see a yellow alert bar at the top of the page (and a few atop the lower sections) letting you know that Salesforce is processing the changes.
-{{< image src="/img/1_ChJh3c0b2BfpYCpGfKFCyA.jpeg" title="Image" >}}
+{{< image src="/img/1_ChJh3c0b2BfpYCpGfKFCyA.jpg" title="Image" >}}
 
 All you have to do is wait for your email notification that it’s finished.
-{{< image src="/img/1_BY_SpaAHOpjj_7dqli18dQ.jpeg" title="Image" >}}
+{{< image src="/img/1_BY_SpaAHOpjj_7dqli18dQ.jpg" title="Image" >}}
 
 **Note: In my sandbox environment the changes took about a minute.**
 And now you’re ready to get back to work! Scroll down the “Sharing Settings” page until you see ‘Case Sharing Rules’ and click ‘New’.
-{{< image src="/img/1_za8xE7_7JwTsfcePhOxASg.jpeg" title="Image" >}}
+{{< image src="/img/1_za8xE7_7JwTsfcePhOxASg.jpg" title="Image" >}}
 
 Almost there! Now you’ll see the available fields for your new case sharing rule with required fields highlighted by a red bar.
-{{< image src="/img/1_hvNVtrag5yVVVV_v7yWzjA.jpeg" title="Image" >}}
+{{< image src="/img/1_hvNVtrag5yVVVV_v7yWzjA.jpg" title="Image" >}}
 
 Begin by giving your sharing rule a label (this will be the name you see later when selecting which rules to apply).
-{{< image src="/img/1_UkqNj_o0pI4odCx076WwZg.jpeg" title="Image" >}}
+{{< image src="/img/1_UkqNj_o0pI4odCx076WwZg.jpg" title="Image" >}}
 
 Hit ‘enter’, ‘tab’, or click into the ‘Rule Name’ field and Salesforce will auto-populate it for you.
-{{< image src="/img/1_2_kPwF7yQzAxuuDktmYL7Q.jpeg" title="Image" >}}
+{{< image src="/img/1_2_kPwF7yQzAxuuDktmYL7Q.jpg" title="Image" >}}
 
 Adding a Description is optional, but it’s a good habit to get into. Your future-self will thank you if you ever come back to make additional changes.
 Now, pop down to ‘Step 3’ and use the dropdown on the right set ‘Public Groups’ to “All Internal Users”.
-{{< image src="/img/1_gwbZ5Ye3wzVyDVVQLRZkHg.jpeg" title="Image" >}}
+{{< image src="/img/1_gwbZ5Ye3wzVyDVVQLRZkHg.jpg" title="Image" >}}
 
 Then do the same for ‘Public Groups’ in ‘Step 4’.
-{{< image src="/img/1_MdHy_y4sV_WQCHxGbjQqvw.jpeg" title="Image" >}}
+{{< image src="/img/1_MdHy_y4sV_WQCHxGbjQqvw.jpg" title="Image" >}}
 
 In ‘Step 5’ use the dropdown to change ‘Case Access’ to “Read/Write”.
-{{< image src="/img/1_gHGfa0xima_MLOSfo3kQfw.jpeg" title="Image" >}}
+{{< image src="/img/1_gHGfa0xima_MLOSfo3kQfw.jpg" title="Image" >}}
 
 And then click “Save” at the bottom!
-{{< image src="/img/1_tKOJrnX8inS10kWmi_PVIQ.jpeg" title="Image" >}}
+{{< image src="/img/1_tKOJrnX8inS10kWmi_PVIQ.jpg" title="Image" >}}
 
 But wait, there’a another pop-up! That’s ok, it’s just Salesforce letting you know that it’s going to take a second to get everything recalculated.
-{{< image src="/img/1_xYMkKs2HedNuskxVgRF5Ug.jpeg" title="Image" >}}
+{{< image src="/img/1_xYMkKs2HedNuskxVgRF5Ug.jpg" title="Image" >}}
 
 Click “OK” to dismiss the pop-up.
-{{< image src="/img/1_Nor_ScXweBqp1z4L0xOJCQ.jpeg" title="Image" >}}
+{{< image src="/img/1_Nor_ScXweBqp1z4L0xOJCQ.jpg" title="Image" >}}
 
 And then wait for one of those confirmation emails to let you know everything’s been processed.
-{{< image src="/img/1_97BR40A3qfXaCI43xpyQ1Q.jpeg" title="Image" >}}
+{{< image src="/img/1_97BR40A3qfXaCI43xpyQ1Q.jpg" title="Image" >}}
 
 And that’s it!
 You’ve successfully set up case sharing for your users! Now they’ll be able to help each other keep your customers smiling, even when a case’s primary rep isn’t available.
-{{< image src="/img/1_WeReEVJF_Hnr4kBprj_clQ.jpeg" title="Image" >}}
+{{< image src="/img/1_WeReEVJF_Hnr4kBprj_clQ.jpg" title="Image" >}}
 
 Congratulations! You’ve just taken a big step toward improving your Customer Experience.
 If you’re interested in more not-so secret Salesforce tips, tricks, and tweaks — stay tuned!

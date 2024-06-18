@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "prioritization-tips-for-tackling-your-daily-agenda",
   "description": "Remote work starting to make you feel stuck in a rut? Struggling to get started tackling your daily to-do list? You’re not alone!",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/to-do-list.jpeg"
-  }
+  "thumbnail": { "url": "/img/to-do-list.jpg" },
 }
 ---
 
-
-{{< image src="/img/to-do-list.jpeg" >}}
+{{< image src="/img/to-do-list.jpg" >}}
 
 Remote work starting to make you feel stuck in a rut? Struggling to get started tackling your daily to-do list? You’re not alone!
 

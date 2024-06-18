@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce Expertise: Managed Services (and More!)",
   "Slug": "salesforce-expertise-managed-services-and-more",
   "description": "A few months ago we talked about a subtle change to the AppExchange that’s making it a lot easier for organizations to find best-fit partners for Salesforce implementation and celebrated our recognition as Experts in the Public Sector space. And today we’re proud to announce another round of updates and a few more areas of expertise worth celebrating!.",
-  "tags": ["appexchange","managed-services","manufacturing","salesforce-partners","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "appexchange",
+      "managed-services",
+      "manufacturing",
+      "salesforce-partners",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_rGq8mevpiPJAuRUSOHoNqA.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_rGq8mevpiPJAuRUSOHoNqA.jpg" },
 }
 ---
+
 A few months ago [we talked](https://medium.com/creme-de-la-crm/public-sector-salesforce-experts-a169bd3dd802) about a subtle change to the AppExchange that’s making it a lot easier for organizations to find best-fit partners for Salesforce implementation and celebrated our [recognition as Experts in the Public Sector](https://medium.com/creme-de-la-crm/public-sector-salesforce-experts-a169bd3dd802) space. And today we’re proud to announce another round of updates and a few more areas of expertise worth celebrating!
 Along with a slew of new specializations, MK Partners is now recognized as an expert in Managed Services!
 {{< image src="/img/1_JMs_wpZex6xPoUG_7pcPHQ.png" title="Image" >}}

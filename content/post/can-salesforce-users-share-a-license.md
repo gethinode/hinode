@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,19 +9,17 @@
   "Slug": "can-salesforce-users-share-a-license",
   "description": "When it comes to cloud-based applications like Salesforce, typical pricing models are based on a per-user-license…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0__cc9oxngc8Cv8Oov.jpg"
-  }
+  "thumbnail": { "url": "/img/0__cc9oxngc8Cv8Oov.jpg" },
 }
 ---
-
 
 When it comes to cloud-based applications like [Salesforce](https://www.salesforce.com/products/), typical pricing models are based on a per-user-license. Unfortunately that can result in some pretty hefty invoices if you’re an organization with a lot of employees or had hoped to use Salesforce for a high-count, low-frequency business task.
 

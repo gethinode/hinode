@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce Einstein’s Newest Milestone",
   "Slug": "salesforce-einsteins-newest-milestone",
   "description": "Salesforce Einstein has been proving the relevance and effectiveness of AI for business for a while now, and it just hit a major benchmark in terms of adoption: 80+ Billion AI-powered predictions per day!.",
-  "tags": ["ai","salesforce-ai","salesforce","artificial-intelligence","salesforce-einstein"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "ai",
+      "salesforce-ai",
+      "salesforce",
+      "artificial-intelligence",
+      "salesforce-einstein",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": Marketing Director,
+      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_X3LTvOr_hpbnZZWm9UHtWA.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_X3LTvOr_hpbnZZWm9UHtWA.jpg" },
 }
 ---
+
 [Salesforce Einstein](https://www.salesforce.com/products/einstein/overview/) has been proving the relevance and effectiveness of AI for business for a while now, and it just hit a major benchmark in terms of adoption: 80+ Billion AI-powered predictions per day!
 We’ve [covered Einstein Prediction Builder (EPB) before](https://medium.com/creme-de-la-crm/getting-to-know-ai-einstein-prediction-builder-9bab65ba87d0); it’s a tremendous tool for sales departments, service, marketing, commerce, HR, and more. By harnessing the power of artificial intelligence to recognize patterns and relationships across your org’s data, it drives additional value out of the work you’re already doing in Salesforce. And now there are enough businesses and agencies on board that EPB delivers (numerically) more than 10 predictions per person, per day, for the entire global population!
 {{< image src="/img/1_9gxsGAKIYNqS80Nat4VL2g.png" title="Image" >}}

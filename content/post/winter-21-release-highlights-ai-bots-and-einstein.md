@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "winter-21-release-highlights-ai-bots-and-einstein",
   "description": "It feels like Fall is just getting underway, but the Salesforce Winter ’21 Release is already on the horizon, and that means we’re back…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/fall-coffee.jpeg"
-  }
+  "thumbnail": { "url": "/img/fall-coffee.jpg" },
 }
 ---
 
-
-{{< image src="/img/fall-coffee.jpeg" >}}
+{{< image src="/img/fall-coffee.jpg" >}}
 
 It feels like Fall is just getting underway, but the [Salesforce Winter '21 Release](https://releasenotes.docs.salesforce.com/en-us/winter21/release-notes/salesforce_release_notes.htm) is already on the horizon, and that means we're back with another round of [Release Highlights](https://medium.com/creme-de-la-crm/tagged/release-highlights)!
 

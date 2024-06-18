@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,13 @@
   "title": "Mark Your Calendars: Best Upcoming Events June 29, 2020 — July 3, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-june-29-2020-july-3-2020",
   "description": "Salesforce and myself are taking it easy on the amount of events coming your way next week. We didn’t want to overload your mind with more information after everything you learned from TrailheaDX this week and make you forget everything. I mean… it still looks like a lot of events, but don’t worry, you will be fine! So sit back, open up your calendars and let’s get planning!.",
-  "tags": ["salesforce-event","salesforce","wfh","remote","virtual-events"],
-  "author": {
-    "name": Caylin Schmenk,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags": ["salesforce-event", "salesforce", "wfh", "remote", "virtual-events"],
+  "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_nt5SO91padBrygw67CxLDQ.jpeg"
-  }
+  "thumbnail": { "url": "/img/1_nt5SO91padBrygw67CxLDQ.jpg" },
 }
 ---
+
 Salesforce and myself are taking it easy on the amount of events coming your way next week. We didn’t want to overload your mind with more information after everything you learned from TrailheaDX this week and make you forget everything. I mean… it still looks like a lot of events, but don’t worry, you will be fine! So sit back, open up your calendars and let’s get planning!
 
 ## Tuesday, June 30th
@@ -30,10 +25,10 @@ If you weren’t able to attend TrailheaDX or any of the Summer ’20 Release ev
 
 ## Wednesday, July 1st
 
-If you are anything like my mom and sister then you will be thrilled for Wednesday, July 1st event. As part of the [](https://www.salesforce.com/form/sflive/stories-of-resilience-4/?utm_medium=email&amp;eid=ss-esmb-wb&amp;nc=7010M000001z6gbQAA&amp;d=7010M000001z6lgQAA) series, Salesforce is hosting [Chip and Joanna Gaines](https://www.salesforce.com/form/sflive/stories-of-resilience-4/?utm_medium=email&amp;eid=ss-esmb-wb&amp;nc=7010M000001z6gbQAA&amp;d=7010M000001z6lgQAA)! We know them as the “fixer upper couple” from HGTV, but they are also the creators of the huge brand Magnolia that you see in every Target. They will be talking about their beginnings to building a massive business and brand.
+If you are anything like my mom and sister then you will be thrilled for Wednesday, July 1st event. As part of the [](https://www.salesforce.com/form/sflive/stories-of-resilience-4/?utm_medium=email&eid=ss-esmb-wb&nc=7010M000001z6gbQAA&d=7010M000001z6lgQAA) series, Salesforce is hosting [Chip and Joanna Gaines](https://www.salesforce.com/form/sflive/stories-of-resilience-4/?utm_medium=email&eid=ss-esmb-wb&nc=7010M000001z6gbQAA&d=7010M000001z6lgQAA)! We know them as the “fixer upper couple” from HGTV, but they are also the creators of the huge brand Magnolia that you see in every Target. They will be talking about their beginnings to building a massive business and brand.
 Additionally, on Wednesday, the Circle of Success series is hosting another discussion. Starting at 4pm (PDT) [](https://register.gotowebinar.com/rt/8549624702940878093?source=Calendar) is hosting a group of about 10 attendees to discuss ways you can collaborate efficiently and effectively. They will talk about using tools such as Quip and Chatter to help build and unite a team and increase its productivity. You as an attendee will also be invited to share tips and tricks on how you work successfully with your team virtually. Sounds like an intimate and helpful event to me.
 
-## 
+##
 
 Kicking off last week we started out in San Francisco with the **Road to TDX20 w Kavindra Patel + Salesforce Development from the High Seas w Stephan Chandler-Garcia** hosted by SF Dev group and had a **Happy Hour** with the SF WIT group. We learned about increasing your company’s visibility with Pardot in **Getting Started: Pardot: Google Organic Basics Accelerator Webinar** and how to build an effective integration strategy in **Building a Data Integration Strategy that Maximizes ROI.** Hopefully those of you in the nonprofit field learned how to host a virtual event in **How to Bring Your (usually in-person) Fundraising Events Online.**
 And last but most certainly not least, we had **TrailheaDX**! We learned so much, got a performance from Jennifer Hudson and heard Trevor Noah speak about racial inequality in the United States and in South Africa. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know your thoughts!

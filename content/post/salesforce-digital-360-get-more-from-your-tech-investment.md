@@ -1,29 +1,27 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
   "date": "2021-07-21T14:24:14-08:00",
   "title": "Salesforce Digital 360: Get More from Your Tech Investment",
   "Slug": "salesforce-digital-360-get-more-from-your-tech-investment",
-  "description": "Is Digital 360 worth the hype? The short answer is \"absolutely.\"",
+  "description": 'Is Digital 360 worth the hype? The short answer is "absolutely."',
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/salesforce-digital-360.jpeg"
-  }
+  "thumbnail": { "url": "/img/salesforce-digital-360.jpg" },
 }
 ---
 
-
-{{< image src="/img/salesforce-digital-360.jpeg" >}}
+{{< image src="/img/salesforce-digital-360.jpg" >}}
 
 Is Digital 360 worth the hype? The short answer is “absolutely.”
 
@@ -43,22 +41,19 @@ Beyond that, Digital 360 helps our clients better analyze their role in the cust
 
 Digital 360 is so valuable to businesses because it combines industry-leading marketing, commerce, and experience clouds to help create seamless online interactions. It also has three exceptionally important aspects responsible for the success of its users:
 
-It’s driven by data.
---------------------
+## It’s driven by data.
 
 By integrating your commerce systems, marketing technology, service portals, and social media together on a cloud-based platform, you can effectively create a more educated strategy.
 
-It’s obsessed with customers.
------------------------------
+## It’s obsessed with customers.
 
 After compiling and organizing all of your data, you’ll be able to create personalized experiences for everyone, essentially giving you the power to please every customer.
 
-It’s future-proof.
-------------------
+## It’s future-proof.
 
 Instead of a standard software update, Digital 360 is designed as an evolving technology in itself. In other words, everyone and everything else adapts to Digital 360, as it’s become the industry standard of making companies (and technologies) absolutely agile.
 
------------------------------------------
+---
 
 As you can see, Digital 360 offers customizable tools to streamline every aspect of your business. So how do you get started? Projects at MK Partners always begin with a business process walkthrough to really get an understanding of your current operations. Our goal is to take the way things work, what’s made you successful, and translate those into functional pieces of Salesforce. We’re not looking for a one-size-fits-all solution. Because we find that it doesn’t really drive adoption when you tell people who are already good at their jobs, “Hey we’ve got a new piece of technology and you’re going to have to learn how to do your job completely differently to take advantage of it.”
 

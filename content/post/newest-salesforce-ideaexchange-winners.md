@@ -1,27 +1,25 @@
 ---
 {
-"priority":"0.5",
-"haveYoutube": false,
-"haveGithubGist": false,
-"haveTwitter": false,
-"date": "2021-12-17T15:20:52-07:00",
-"title": "Newest Salesforce Ideaexchange Winners!",
-"Slug": "newest-salesforce-ideaexchange-winners",
-"description": "As you may know, the Salesforce IdeaExchange is one of my favorite features of the platform — offering Trailblazers, users, admins, and…",
-"tags": [],
-"author": {
-"name": "Chris Stegall",
-"title": "Digital Marketing Coordinator",
-"webp": "/img/chris-stegall_128-128.webp",
-"jpeg": "/img/chris-stegall_128-128.jpeg"
-},
-"layout": "single",
-"thumbnail": {
-    "url": "/img/1_BsdRryJAIK6IfkKefLUGOg.png"
-  }
+  "priority": "0.5",
+  "haveYoutube": false,
+  "haveGithubGist": false,
+  "haveTwitter": false,
+  "date": "2021-12-17T15:20:52-07:00",
+  "title": "Newest Salesforce Ideaexchange Winners!",
+  "Slug": "newest-salesforce-ideaexchange-winners",
+  "description": "As you may know, the Salesforce IdeaExchange is one of my favorite features of the platform — offering Trailblazers, users, admins, and…",
+  "tags": [],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
+  "layout": "single",
+  "thumbnail": { "url": "/img/1_BsdRryJAIK6IfkKefLUGOg.png" },
 }
 ---
-
 
 {{< image src="/img/1_BsdRryJAIK6IfkKefLUGOg.png">}}
 

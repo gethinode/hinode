@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "2020-save-20-on-your-first-year-of-gsuite",
   "description": "As 2020 pushed workplaces remote, the limits of some businesses’ existing infrastructure have become painfully apparent. With tech debts…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/woman-laptop-gsuite.jpeg"
-  }
+  "thumbnail": { "url": "/img/woman-laptop-gsuite.jpg" },
 }
 ---
-
-
-{{< image src="/img/woman-laptop-gsuite.jpeg" >}}
 
 As 2020 pushed workplaces remote, the limits of some businesses' existing infrastructure have become painfully apparent. With tech debts being (proverbially) prematurely called for payment, and businesses of all sizes trying to navigate a shrunken economy, being able to operate remotely at full-strength (and ideally lowered costs) can make all the difference in the world.
 

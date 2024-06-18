@@ -1,26 +1,24 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-06-27T09:42:06-07:00",
   "title": "Salesforce Open Source: Lightning Web Components",
   "Slug": "salesforce-open-source-lightning-web-components",
   "description": "Last year, Salesforce released Lightning Web Components — a new and improved programming model for building Lightning components and web apps. Now, they’re opening the code up to the community!",
   "tags": ["lwc", "developer", "salesforce", "open", "source"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/book-with-pen-on-top.jpeg"
-  }
+  "thumbnail": { "url": "/img/book-with-pen-on-top.jpg" },
 }
 ---
 
-
-{{< image src="/img/book-with-pen-on-top.jpeg" title="Book with a pen on top of it" >}}
+{{< image src="/img/book-with-pen-on-top.jpg" title="Book with a pen on top of it" >}}
 
 Last year, Salesforce released Lightning Web Components — a new and improved programming model for building Lightning components and web apps. Now, they’re opening the code up to the community!
 

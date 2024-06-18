@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "dreamforce-2021-dreamforce-everywhere-updates",
   "description": "Dreamforce 2021 is officially “Dreamforce Everywhere” and that means multiple cities around the world, in-person and online events, and ...",
   "tags": ["dreamforce"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.webp"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce-2021-video.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce-2021-video.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce-2021-video.jpeg" >}}
+{{< image src="/img/dreamforce-2021-video.jpg" >}}
 
 Dreamforce 2021 is officially “Dreamforce Everywhere” and that means multiple cities around the world, in-person and online events, and more as we slowly begin the transition back to pre-covid-style professional events!
 

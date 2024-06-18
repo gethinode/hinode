@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": true,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,18 +9,18 @@
   "Slug": "recap-trailblazerdx-and-northeast-dreamin-and-texas-dreamin",
   "description": "April ended with a trio of high-demand, high-turnout, and high-value Salesforce events thrown by the platform and its ever-growing…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Marketing Director",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_62Pt7paYo9XWKW3ud5MDYg.webp"
-  }
+  "thumbnail": { "url": "/img/1_62Pt7paYo9XWKW3ud5MDYg.webp" },
 }
 ---
+
 April ended with a trio of high-demand, high-turnout, and high-value Salesforce events thrown by the platform and its ever-growing community of users, champions, and Trailblazers!
 
 [TrailblazerDX](https://www.salesforce.com/trailblazerdx/) took over Moscone in San Francisco for West Coaster’s while the East Coast community gathered in Providence, RI for [Northeast Dreamin’](https://northeastdreamin.com/) and those in the South gathered in Austin for [Texas Dreamin’](https://www.texasdreamin.org/)!

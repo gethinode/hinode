@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "whats-driving-digital-transformations",
   "description": "With the pandemic pushing so many workplaces remote, the rise of the Digital HQ, and an ever-expanding landscape of integratabtle business...",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.webp"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/digital-transformations1.jpeg"
-  }
+  "thumbnail": { "url": "/img/digital-transformations1.jpg" },
 }
 ---
 
-
-{{< image src="/img/digital-transformations1.jpeg" >}}
+{{< image src="/img/digital-transformations1.jpg" >}}
 
 With the pandemic pushing so many workplaces remote, the rise of the Digital HQ, and an ever-expanding landscape of integratabtle business platforms — this isn’t the first time you’re hearing about Digital Transformation (DX, for short). But, are those the causes of the recent efforts by organizations everywhere to modernize, streamline, and digitize their processes, or is DX the inevitable conclusion of businesses’ strategic efforts to improve and align every aspect of their operations?
 

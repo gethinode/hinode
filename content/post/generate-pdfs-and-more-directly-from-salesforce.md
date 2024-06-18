@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,17 @@
   "Slug": "generate-pdfs-and-more-directly-from-salesforce",
   "description": "Generating documents straight from Salesforce is one of the most powerful ways to transform your data into time-savings for your team —...",
   "tags": ["mambo merge"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/mambo-merge-pdf-desktop.jpeg"
-  }
+  "thumbnail": { "url": "/img/mambo-merge-pdf-desktop.jpg" },
 }
 ---
-
-
-{{< image src="/img/mambo-merge-pdf-desktop.jpeg" >}}
 
 Generating documents straight from Salesforce is one of the most powerful ways to transform your data into time-savings for your team — that’s why we built [Mambo Merge](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3u00000MBinOEAT). And Mambo Merge just rolled out some brand new, much-asked-for functionality — the ability to generate PDFs, directly from your data!
 

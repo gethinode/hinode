@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,35 +9,31 @@
   "Slug": "summer-20-release-highlights-share-css-styles-across-lwcs",
   "description": "The Salesforce Summer ’20 Release will be live for everyone this weekend and it’s packed with improvements, updates, and features sure to...",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/imac-markers.jpeg"
-  }
+  "thumbnail": { "url": "/img/imac-markers.jpg" },
 }
 ---
 
-
-{{< image src="/img/imac-markers.jpeg" >}}
+{{< image src="/img/imac-markers.jpg" >}}
 
 The [Salesforce Summer '20 Release](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/salesforce_release_notes.htm) will be live for everyone this weekend and it's packed with improvements, updates, and features sure to make admins (and users) smile. In this round of our [Release Highlights Series](https://medium.com/tag/release-highlights/archive) we'll take a look at one of our favorite new timesavers, shared CSS styles!
 
 Let's take a look!
 
-Shared CSS Styles with Lightning Web Components
------------------------------------------------
+## Shared CSS Styles with Lightning Web Components
 
 Whether it's about branding, UX, or simply personal principle, having a consistent look and feel across your org drives adoption, understanding, and use-ability. And achieving that cross-component synchronicity is getting even easier (and faster!) , thanks to Summer '20's [tweaks to CSS styling and LWCs](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/rn_lwc_css_share.htm).
 
 Now, you'll be able to define styles in the CSS module, and import the module into all the components that you'd like to share those styles. Set it once, and apply it everywhere --- a huge time saver for both admins and graphic teams!
 
-How Does it Work?
------------------
+## How Does it Work?
 
 Instead of setting the CSS styling individually for each LWC, all you'll need to do post-Summer '20 is create a component that contains a CSS file and a configuration file --- these will compose your CSS module.
 

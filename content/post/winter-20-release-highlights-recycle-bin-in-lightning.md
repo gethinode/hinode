@@ -1,26 +1,25 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-09-11T16:12:35-07:00",
   "title": "Winter '20 Release Highlights: Recycle Bin in Lightning",
   "Slug": "winter-20-release-highlights-recycle-bin-in-lightning",
   "description": "It’s September again and that means school’s getting back in session, we have less than a month before it’s time to wake up Greenday, and there’s a brand new Salesforce Release on the way...",
-  "tags": ["winter 20", "release", "recycle", "bin", "lightning", "ideaexchange"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "tags":
+    ["winter 20", "release", "recycle", "bin", "lightning", "ideaexchange"],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/two-women-red-hair-laptop.jpeg"
-  }
+  "thumbnail": { "url": "/img/two-women-red-hair-laptop.jpg" },
 }
 ---
 
-
-{{< image src="/img/two-women-red-hair-laptop.jpeg" >}}
+{{< image src="/img/two-women-red-hair-laptop.jpg" >}}
 
 It’s September again and that means school’s getting back in session, we have less than a month before it’s time to [wake up Greenday](https://www.youtube.com/watch?v=NU9JoFKlaZ0), and there’s a brand new Salesforce Release on the way. That’s right, the [Winter ’20 Release](https://releasenotes.docs.salesforce.com/en-us/winter20/release-notes/salesforce_release_notes.htm) is almost here!
 

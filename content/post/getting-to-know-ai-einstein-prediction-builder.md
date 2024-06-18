@@ -1,26 +1,22 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2020-06-01T08:21:53-07:00",
   "title": "Getting to Know AI: Einstein Prediction Builder",
   "Slug": "getting-to-know-ai-einstein-prediction-builder",
   "description": "Artificial intelligence is everywhere today. And it’s more than a digital way of transforming data...",
   "tags": ["ai", "admin"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/laptop-on-desk-einstein.jpeg"
-  }
+  "thumbnail": { "url": "/img/laptop-on-desk-einstein.jpg" },
 }
 ---
-
-
-{{< image src="/img/laptop-on-desk-einstein.jpeg" >}}
 
 Artificial intelligence is everywhere today. And it’s more than a digital way of transforming data into insight and action— it’s an extra set of hands and eyes, an extra brain in the brainstorm and, just like your team, it gets better at its job and improves its understanding of your business every day.
 We live in a time when organizations of all sizes have an unprecedented amount of data but, for many, translating that data into value can seem like an insurmountable task. That’s where AI really shines.
@@ -50,43 +46,43 @@ Curious how companies are already employing Einstein Prediction Builder to get r
 
 #### Sales:
 
-* Intelligent Forecasting (How much of the sales pipeline is actually going to close?)
-* Lead and Opportunity Scoring (Which leads are likely to convert and where should reps spend their time?)
-* Propensity to Buy (Which Accounts should be pitched which products?)
+- Intelligent Forecasting (How much of the sales pipeline is actually going to close?)
+- Lead and Opportunity Scoring (Which leads are likely to convert and where should reps spend their time?)
+- Propensity to Buy (Which Accounts should be pitched which products?)
 
 #### Service:
 
-* Churn Risk (Which customers are at risk of attriting?)
-* Upselling + Cross-Selling (Which customers are likely to be interested in which additional products?)
-* Next Incident (Which clients are likely to log a case soon? So you can be proactive with your outreach)
-Onboarding Success (Who’s likely to buy in fully from the start, and which clients will need help driving adoption?)
+- Churn Risk (Which customers are at risk of attriting?)
+- Upselling + Cross-Selling (Which customers are likely to be interested in which additional products?)
+- Next Incident (Which clients are likely to log a case soon? So you can be proactive with your outreach)
+  Onboarding Success (Who’s likely to buy in fully from the start, and which clients will need help driving adoption?)
 
 #### Marketing:
 
-* Lifetime Value (How much will this customer spend with us over the course of our relationship?)
-* Ad-Spend Value (Which campaigns are likely to be effective, and how much revenue can we expect per ad dollar spent?)
+- Lifetime Value (How much will this customer spend with us over the course of our relationship?)
+- Ad-Spend Value (Which campaigns are likely to be effective, and how much revenue can we expect per ad dollar spent?)
 
 #### Commerce:
 
-* Repeat Business Likelihood (How likely is a customer to make a follow-up purchase)
-* Return Management (How likely is this customer to return this product?)
+- Repeat Business Likelihood (How likely is a customer to make a follow-up purchase)
+- Return Management (How likely is this customer to return this product?)
 
 #### Internal (HR, IT, Finance, etc…)
 
-* Offer Acceptance (How likely is a candidate to accept the job offer?)
-* Staff Growth (How well does our hiring pipeline align with out projected business growth?)
-* Payment Risk (Which Accounts are likely to default? Which are likely to be late? How late?)
-* Project Risk (How likely is our team to hit the project deadline?)
-* Equipment Loss (How likely is any given piece of equipment to fail?)
+- Offer Acceptance (How likely is a candidate to accept the job offer?)
+- Staff Growth (How well does our hiring pipeline align with out projected business growth?)
+- Payment Risk (Which Accounts are likely to default? Which are likely to be late? How late?)
+- Project Risk (How likely is our team to hit the project deadline?)
+- Equipment Loss (How likely is any given piece of equipment to fail?)
 
-The only real limit is your ability to come up with questions that will help your business succeed, and that’s as easy as asking “What do I wish I knew 1 year ago? Or 5 years ago?”. Or as simple as: “If I knew _______, I’d feel better about this.”
+The only real limit is your ability to come up with questions that will help your business succeed, and that’s as easy as asking “What do I wish I knew 1 year ago? Or 5 years ago?”. Or as simple as: “If I knew **\_\_\_**, I’d feel better about this.”
 
 Then let Einstein Prediction Builder fill in the blanks for you!
 
 ### Register for the Webinar
 
 Ready for a more in-depth look Einstein Prediction Builder and how it’s being used to drive intelligent businesses around the world?
-Join us on June 25th at 10am PDT for our webinar *[Getting to Know AI: Einstein Prediction Builder](https://events.mkpartners.com/GettingToKnowAI)*. In it we’ll introduce more of the platform’s core functionality, walk through building a sample prediction, and take a deeper dive into actual business cases and their results. Registration is open now.
+Join us on June 25th at 10am PDT for our webinar _[Getting to Know AI: Einstein Prediction Builder](https://events.mkpartners.com/GettingToKnowAI)_. In it we’ll introduce more of the platform’s core functionality, walk through building a sample prediction, and take a deeper dive into actual business cases and their results. Registration is open now.
 We’ll also be recording the webinar and releasing it alongside some additional reading material with expanded use cases for all who register — so feel free to sign up, even if you won’t be able to attend on the day.
-*[REGISTER HERE](https://events.mkpartners.com/GettingToKnowAI)*
+_[REGISTER HERE](https://events.mkpartners.com/GettingToKnowAI)_
 Until then, keep working hard, smart, and happy. And we’ll see you in the cloud.

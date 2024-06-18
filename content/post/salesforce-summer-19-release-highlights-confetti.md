@@ -1,24 +1,22 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "date": "2019-05-08T13:08:15-07:00",
   "title": "Salesforce Summer 19 Release Highlights Confetti",
   "Slug": "salesforce-summer-19-release-highlights-confetti",
   "description": "With the weather warming up, sleeves getting shorter, and the days getting longer, it can only mean one thing: The Summer ’19 Release is right around the corner!",
   "tags": ["admin", "summer 19", "release", "confetti"],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/confetti-on-phone.gif"
-  }
+  "thumbnail": { "url": "/img/confetti-on-phone.gif" },
 }
 ---
-
 
 {{< image src="/img/confetti-on-phone.gif" title="Confetti falling on phone" >}}
 
@@ -34,7 +32,7 @@ Your office may have done away with the sales bell/horn/gong, but this Summer yo
 
 When users reach a designated stage on the sales path (like say, winning an opportunity), you can shower their screen in digital confetti to cheer them on. Add acclaim to every step of the pipeline, your team’s current objectives, or simply to the stages that need some love (nothing helps with housekeeping like some novelty). You’ll be able to adjust the frequency of the festivities too, so the excitement won’t lose its luster from overuse.
 
-{{< image src="/img/celebration-settings.jpeg" title="Settings for celebrations" >}}
+{{< image src="/img/celebration-settings.jpg" title="Settings for celebrations" >}}
 
 The only other thing you’ll have to decide is whether you want to give your reps a heads up or let them be surprised by their first festive fluttering!
 

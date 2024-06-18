@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "mark-your-calendars-best-salesforce-events-aug-23-2021-aug-27-2021",
   "description": "Last week we had a Slack event thrown into the mix and this week I have Google events coming your way! So sit back, open up your calendars...",
   "tags": [],
-  "author": {
-    "name": "Caylin Schmenk",
-    "title": "Events",
-    "webp": "/img/caylin-schmenk_128-128.jpeg",
-    "jpeg": "/img/caylin-schmenk_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Caylin Schmenk",
+      "title": "Events",
+      "webp": "/img/caylin-schmenk_128-128.jpg",
+      "jpeg": "/img/caylin-schmenk_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/august-2021-calendar3.jpeg"
-  }
+  "thumbnail": { "url": "/img/august-2021-calendar3.jpg" },
 }
 ---
 
-
-{{< image src="/img/august-2021-calendar3.jpeg" >}}
+{{< image src="/img/august-2021-calendar3.jpg" >}}
 
 Last week we had a Slack event thrown into the mix and this week I have Google events coming your way! So sit back, open up your calendars and get planning!
 
@@ -35,9 +33,8 @@ Then at 11am (PST) we have 2 different Salesforce events, so it’s time to be p
 
 Our second 11am (PST) event is [5 Ways to Make Territory Planning Easier this Season, featuring DocuSign](https://www.salesforce.com/form/events/webinars/form-rss/3308769) to integrate intelligent territory planning for maximizing revenue growth. You’ll hear about best practices for the territory planning cycle, and how Salesforce’s solutions help companies optimize coverage and realign when the conditions change. Additionally, you’ll hear from DocuSign on how they managed to carve out 3000 territories due to Salesforce.
 
-Recap
-------
+## Recap
 
-We kicked off last week celebrating Slack officially joining Salesforce in *Success from Anywhere: Your Digital HQ* to hear how the two “are coming together to create your digital HQ for success from anywhere.” In *From Sourcing Practices to Legal Agreements: How to Drive Sustainability into Your Supply Chain*, we hear how to focus on data-driven climate action and how businesses can all achieve this on a scale that causes a positive impact. We had a unique Salesforce Trailhead Live webinar focusing on homelessness in *Homelessness: How Can You Help* to shed light on the misunderstood and complex issue, and how government and nonprofits work together to solve this challenge. We ended with the monthly *The Marketing Cloud August 2021 New Feature Overview* webinar that is always giving us updates about the new features and additions to products to Marketing Cloud. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
+We kicked off last week celebrating Slack officially joining Salesforce in _Success from Anywhere: Your Digital HQ_ to hear how the two “are coming together to create your digital HQ for success from anywhere.” In _From Sourcing Practices to Legal Agreements: How to Drive Sustainability into Your Supply Chain_, we hear how to focus on data-driven climate action and how businesses can all achieve this on a scale that causes a positive impact. We had a unique Salesforce Trailhead Live webinar focusing on homelessness in _Homelessness: How Can You Help_ to shed light on the misunderstood and complex issue, and how government and nonprofits work together to solve this challenge. We ended with the monthly _The Marketing Cloud August 2021 New Feature Overview_ webinar that is always giving us updates about the new features and additions to products to Marketing Cloud. Tweet us [@mkpartners](http://www.twitter.com/mkpartners) and let us know what your favorite event was!
 
 Also, make sure to [let us know](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE) if you think there are any events worth mentioning and what event you are excited about this upcoming week. And, as always, we will see you in the cloud!

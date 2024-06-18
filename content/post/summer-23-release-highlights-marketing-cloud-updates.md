@@ -14,7 +14,7 @@
       "name": "Jessie Penaloza",
       "title": "Content Contributor",
       "webp": "/img/jesus-penaloza_88-88.webp",
-      "jpeg": "/img/jesus-penaloza_88-88.jpeg",
+      "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_bijWgglvvBVggGj6OoT_8A.png" },

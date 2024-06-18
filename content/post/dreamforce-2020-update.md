@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,25 +9,23 @@
   "Slug": "dreamforce-2020-update",
   "description": "There’s news in the world of Dreamforce — the huge annual celebration of all things Salesforce!",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce-to-you.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce-to-you.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce-to-you.jpeg" >}}
+{{< image src="/img/dreamforce-to-you.jpg" >}}
 
 There's news in the world of Dreamforce --- the huge annual celebration of all things Salesforce!
 
-What had been (a bit vaguely) presented as the 2020 incarnation of Dreamforce: [*Dreamforce to You*](https://www.salesforce.com/dreamforce/), taking place from November-December has gotten an update on dates, events, and opportunities to participate!
+What had been (a bit vaguely) presented as the 2020 incarnation of Dreamforce: [_Dreamforce to You_](https://www.salesforce.com/dreamforce/), taking place from November-December has gotten an update on dates, events, and opportunities to participate!
 
 First up, while Dreamforce to You has technically kicked off with the opportunity to get personalized demos of Customer 360 from your AEs, the festivities as we've come to know them will really spin up with Marc Benioff's keynote on December 2nd (originally scheduled for tomorrow, 11/12)!
 

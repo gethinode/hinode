@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,20 @@
   "title": "Dreamforce Preview: Subjects I’m Most Looking Forward to as a Marketer",
   "Slug": "dreamforce-preview-subjects-im-most-looking-forward-to-as-a-marketer",
   "description": "Dreamforce is next week! I’m about as excited as a kid going to an Auto Convention. It’s expected there will be some waiting for some of these features in Marketing Cloud to fully evolve, but as a marketer, here’s what I’m looking forward to...",
-  "tags": ["marketing-cloud","dreamforce","pardot","salesforce-event","salesforce"],
-  "author": {
-    "name": Tommy Holden,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags":
+    [
+      "marketing-cloud",
+      "dreamforce",
+      "pardot",
+      "salesforce-event",
+      "salesforce",
+    ],
+  "author": { "name": Tommy Holden, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_MonN19ygOLZAwXdkaDdb7A.png"
-  }
+  "thumbnail": { "url": "/img/1_MonN19ygOLZAwXdkaDdb7A.png" },
 }
 ---
+
 [](http://www.dreamforce.com) is next week &amp; I’m about as excited as a kid going to an Auto Convention. It’s expected there will be some waiting for some of these features in Marketing Cloud to fully evolve, but as a marketer, here’s what I’m looking forward to:
 <strong>Datorama:</strong> Datorama allows you to combine your disparate marketing sources into one model and view it in customized dashboards. These capabilities can be combined through various metrics, dimensions, and KPIs. The Datorama Platform has a customized data model featuring pre-defined data relationships, so it combines terms across advertising platforms and standardizes the data to all work together &amp; quickly:
 {{< image src="/img/1_Sxl1BPXmFFOoUDZmgbckOQ.png" title="Image" >}}

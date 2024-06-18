@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,28 +9,25 @@
   "Slug": "spring-21-release-highlights-einstein-opportunity-scoring-improved-accuracy",
   "description": "With 2021 now well underway, it’s time to start prepping for the next pack of updates, upgrades, and new features headed to Salesforce…",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/einstein-opportunity-scoring.jpeg"
-  }
+  "thumbnail": { "url": "/img/einstein-opportunity-scoring.jpg" },
 }
 ---
 
-
-{{< image src="/img/einstein-opportunity-scoring.jpeg" >}}
+{{< image src="/img/einstein-opportunity-scoring.jpg" >}}
 
 With 2021 now well underway, it's time to start prepping for the next pack of updates, upgrades, and new features headed to Salesforce with the Spring '21 Release!
 
 As always, in the lead-up to launch, we'll be reading over the release notes and rounding up the highlights that we're most excited to see in our orgs (and our clients'). So let's get started!
 
-Enable Einstein Opportunity Scoring with Less Data
---------------------------------------------------
+## Enable Einstein Opportunity Scoring with Less Data
 
 As a Salesforce Einstein Champion, I'll admit I get a little more excited than the average user over updates to Salesforce's Artificial Intelligence systems --- so of course I'm looking forward to this.
 

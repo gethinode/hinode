@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,21 +9,19 @@
   "Slug": "dreamforce-2020-keynote-speakers-announced",
   "description": "",
   "tags": [],
-  "author": {
-    "name": "Chris Stegall",
-    "title": "Digital Marketing Coordinator",
-    "webp": "/img/chris-stegall_128-128.webp",
-    "jpeg": "/img/chris-stegall_128-128.jpeg"
-  },
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Digital Marketing Coordinator",
+      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/chris-stegall_128-128.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/dreamforce-laptop.jpeg"
-  }
+  "thumbnail": { "url": "/img/dreamforce-laptop.jpg" },
 }
 ---
 
-
-{{< image src="/img/dreamforce-laptop.jpeg" >}}
+{{< image src="/img/dreamforce-laptop.jpg" >}}
 
 The [Dreamforce 2020](https://www.salesforce.com/dreamforce/) keynote is less than two weeks away (with the rest of Dreamforce taking the form of DreamTX a couple weeks after that)! And today we got some insight on who we can expect to see speak on December 2nd!
 

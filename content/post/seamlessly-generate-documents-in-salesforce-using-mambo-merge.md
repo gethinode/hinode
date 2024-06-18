@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -9,16 +9,15 @@
   "Slug": "seamlessly-generate-documents-in-salesforce-using-mambo-merge",
   "description": "Help your customers do moar! within their Org.",
   "tags": [],
-  "author": {
-    "name": "Jessie Penaloza",
-    "title": "Content Contributor",
-    "webp": "/img/jesus-penaloza_88-88.webp",
-    "jpeg": "/img/jesus-penaloza_88-88.jpeg"
-  },
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Content Contributor",
+      "webp": "/img/jesus-penaloza_88-88.webp",
+      "jpeg": "/img/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_G9iF1_3M_tEe0jjCH1evjw.webp"
-  }
+  "thumbnail": { "url": "/img/1_G9iF1_3M_tEe0jjCH1evjw.webp" },
 }
 ---
 
