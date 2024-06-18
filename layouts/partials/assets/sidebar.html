@@ -121,7 +121,8 @@
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
-        {{- $baseURL := relLangURL (path.Join $section $version) }}
+        {{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
+        {{- $baseURL = urls.JoinPath $baseURL $section $version | relLangURL -}}
 
         <ul class="list-unstyled ps-0">
         {{- range $index, $item := $data -}}
