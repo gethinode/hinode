@@ -26,8 +26,8 @@
     {{- $group := .group -}}
     {{- $data := .menu -}}
 
-    {{- $doc_slug := urls.JoinPath  $baseURL ($group.title | urlize) -}}
-    {{- $href := or $group.link (partial "utilities/GetStaticURL" (dict "url" $doc_slug)) -}}
+    {{- $doc_slug := urls.JoinPath $baseURL ($group.title | urlize) -}}
+    {{- $href := or $group.link $doc_slug -}}
     {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
 
     <li class="mb-1">
@@ -78,10 +78,10 @@
         {{ if hasPrefix . "http" }}
             {{ $href = . }}
         {{ else }}
-            {{- $href = (partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL .))) -}}
+            {{- $href = urls.JoinPath $baseURL . -}}
         {{ end }}
     {{ else }}
-        {{- $href =  partial "utilities/GetStaticURL" (dict "url" (urls.JoinPath $baseURL ($title | urlize))) -}}
+        {{- $href = urls.JoinPath $baseURL ($title | urlize) -}}
     {{ end }}
     {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
 
@@ -121,7 +121,8 @@
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
-        {{- $baseURL := relLangURL (path.Join $section $version) }}
+        {{ $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
+        {{ $baseURL = urls.JoinPath "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $version | relLangURL)) }}
 
         <ul class="list-unstyled ps-0">
         {{- range $index, $item := $data -}}
