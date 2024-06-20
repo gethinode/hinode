@@ -17,7 +17,7 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_bXI7n8K1R8brwTqCVaDR2Q.webp" },
+  "thumbnail": { "url": "/img/1_bXI7n8K1R8brwTqCVaDR2Q.jpg" },
 }
 ---
 
@@ -35,7 +35,7 @@ So what do we know so far? Interestingly, a bit less than usual. We know the Go-
 
 And, given previous releases we can make an educated guess that the May date will be a “*First Release Weekend (Limited, Pilot participation)”*with the remaining June dates being the wider releases that see all orgs get the update.
 
-{{< image src="/img/1__sO0ne8eT7WKG4jCVFVXHw.png">}}
+{{< image src="/img/1__sO0ne8eT7WKG4jCVFVXHw.jpg">}}
 
 But, given that we know the pilot weekend is just about a month away — it’s a bit surprising that we don’t have any release notes, dates for sandbox previews, a release module on Trailhead, etc…! We’re still waiting on the rollout of all those bells and whistles so we can dive into the detail sand see what Salesforce has in store for Summer ‘23!
 

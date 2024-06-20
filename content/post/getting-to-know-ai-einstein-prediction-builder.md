@@ -40,7 +40,7 @@ With Prediction Builder you can create predictions on any and every Salesforce O
 
 ### Use Cases
 
-{{< image src="/img/einstein-dashboard.jpeg" >}}
+{{< image src="/img/1_s7kQJI0v2Qfk-d0R9SoKhw.jpg" >}}
 
 Curious how companies are already employing Einstein Prediction Builder to get results? We’ll dive into these in more depth in the [webinar](https://events.mkpartners.com/GettingToKnowAI) but at a high-level, organizations are already seeing results in:
 

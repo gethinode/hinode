@@ -45,7 +45,7 @@ Another big update that’s sure to put a smile on marketers (and their managers
 
 Great news! These changes apply to all Pardot editions (See Below):
 
-{{< image src="/img/0_beC5lhZCMMm3IK4g.jpg">}}
+{{< image src="/img/0_beC5lhZCMMm3IK4g.png">}}
 _Recent Example from Salesforce.com (2022)_
 
 Regardless of what we’ll be calling Pardot by this time next year, it’s amazing to see useful, novel features like this still hitting the product roadmap and it’s a great sign that, while Pardot is being moved under the Marketing Cloud wing, they’re not backing off any of the functionality or power of the platform.

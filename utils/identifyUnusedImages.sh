@@ -17,3 +17,7 @@ echo ${ARRAY[@]}
 
 // write a linux terminal command to find all files in a directory that end with .jpeg and update them to end with .jpg instead
 find . -type f -name "*.jpeg" -exec bash -c 'mv "$1" "${1%.jpeg}.jpg"' _ {} \;
+
+
+// write a linux terminal command to find all files in a directory that start with 1*6 and replace it to start with 1_6 instead
+find . -type f -name "1*6*" -exec bash -c 'mv "$1" "${1/1*6/1_6}"' _ {} \;

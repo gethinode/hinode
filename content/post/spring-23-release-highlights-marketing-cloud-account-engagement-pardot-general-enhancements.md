@@ -17,7 +17,7 @@
       "jpeg": "/img/tommy-holden_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/0_IPa0hHSJ0NsTGPZ_.webp" },
+  "thumbnail": { "url": "/img/0_IPa0hHSJ0NsTGPZ_.png" },
 }
 ---
 
@@ -25,7 +25,7 @@ Well, the time has finally come. Salesforce has officially posted release notes 
 
 1. **Account Engagement Optimizer (Beta Release Only):**
 
-{{< image src="/img/1_p-16eEL7f-tKEe1VV0oVIg.jpg">}}
+{{< image src="/img/1_p-16eEL7f-tKEe1VV0oVIg.png">}}
 
 Now an end-user can receive automated & actionable recommendations to improve efficiency & stay ahead of issues within a desired business unit. The recommendations that the Optimizer settings provides can improve email sending deployments, enhanced visitor tracking, & an overall status for your business unit to know know if anything critical needs immediate attention. There’s also an _Optimizer Table Action Manager_ to pause and prioritize actions.
 
@@ -43,11 +43,11 @@ Now an end-user can receive automated & actionable recommendations to improve ef
 
 **4. New Feature: External Action Error Table — Keep Your Automations Running Reliably Within a Consolidated Setting:**
 
-{{< image src="/img/1_YKwQvcEj1c5lVOoAVLl4Kw.jpg">}}
+{{< image src="/img/1_YKwQvcEj1c5lVOoAVLl4Kw.png">}}
 
 Review third-party app integration error root causes & deep dive into which automations, steps, & actions are affected. Looking at the above graphic, an end-user can identify, diagnose, & fix errors preventing automations from running as expected. This change occurs to the Account Engagement Lightning App in Plus, Advanced, and Premium editions. In addition, a consolidated third-party app usage table is available in one setting within the Usage and Limits tab:
 
-{{< image src="/img/1_e3kKsT6yYOhfSuupkTrsbQ.jpg">}}
+{{< image src="/img/1_e3kKsT6yYOhfSuupkTrsbQ.png">}}
 
 **5. API & Integration Alterations & Removal(s):** Also note, there will be some upcoming changes to the existing offerings with 3rd party connectors which legacy Pardot users have been known to use. There will be official retirements this year for *Webex, (April 1st, 2023) & Slack Beta (February 13th, 2023)*platforms. The *ReadyTalk *connector was retired as of November 2022*.*However, a Version 5 API Beta platform will be available for expanded support on 28 objects. This includes multi-select table actions for bulk processing of records.
 

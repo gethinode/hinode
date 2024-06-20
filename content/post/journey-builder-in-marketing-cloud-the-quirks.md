@@ -27,7 +27,7 @@ I always celebrate Thanksgiving by watching one of my favorite movies of all-tim
 
 1. **Copying Activities Are Straightforward:**What’s interesting is how this feature wasn’t available a few years ago where an end-user can go and copy activities within a Journey Track. It saves time and the interface is slick. Essentially, when you copy activities within a track, it’s stored in a clipboard as a “Drag & Drop” button on the left-hand command side of the Journey Track screen:
 
-{{< image src="/img/Drag-and-Drop-journey-builder-screenshot.webp" title="The Interface to Select Activities Within a Journey Track to Copy. To Finalize, Select the “Copy Selection” Button on the Upper Right-Hand Side of the Screen." >}}
+{{< image src="/img/1_9v-r8vR2Fzj1ZuPe_pG7ig.png" title="The Interface to Select Activities Within a Journey Track to Copy. To Finalize, Select the “Copy Selection” Button on the Upper Right-Hand Side of the Screen." >}}
 _The Interface to Select Activities Within a Journey Track to Copy. To Finalize, Select the “Copy Selection” Button on the Upper Right-Hand Side of the Screen._
 
 {{< image src="/img/copies-activity-clipboard-journey-builder-screenshot.png" >}}
