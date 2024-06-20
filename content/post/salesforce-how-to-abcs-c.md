@@ -38,7 +38,7 @@ To begin, we’ll need to navigate to Dashboards, so click the appropriate tab a
 Or, open the App Launcher, and search/select “Dashboards” from there.
 {{< image src="/img/1_a80S4150LytbrrU8uXAOCg.jpg" title="Image" >}}
 
-{{< image src="/img/1_4kidYjF_bxL4FLT2BQH2aQ.jpg" title="Image" >}}
+{{< image src="/img/1_4kidYjF-bxL4FLT2BQH2aQ.jpg" title="Image" >}}
 
 Both methods will land you on your Dashboards page. To create a new dashboard, click the “New Dashboard” button in the upper right corner.
 {{< image src="/img/1_IVd69JG2HHvNrWrbCQGCyw.jpg" title="Image" >}}
@@ -46,10 +46,10 @@ Both methods will land you on your Dashboards page. To create a new dashboard, c
 That’ll open the new dashboard dialogue, so begin by giving your new board a name.
 {{< image src="/img/1_5TXjPpISQNZraeH1OBz4Ag.jpg" title="Image" >}}
 
-{{< image src="/img/1_rumk3mcGz_nGNloqLyECFQ.jpg" title="Image" >}}
+{{< image src="/img/1_rumk3mcGz-nGNloqLyECFQ.jpg" title="Image" >}}
 
 A brief description.
-{{< image src="/img/1_GmWMTy62_0sTwyYT2RrHJA.jpg" title="Image" >}}
+{{< image src="/img/1_GmWMTy62-0sTwyYT2RrHJA.jpg" title="Image" >}}
 
 And then click “Create” at the bottom.
 {{< image src="/img/1_TxJn3K7nLUg0tu7H1tF9nQ.jpg" title="Image" >}}
@@ -73,7 +73,7 @@ To summarize our report as a vertical bar graph, click the appropriate button un
 {{< image src="/img/1_SbmFAgDqj9jrhT3ox4PTWw.jpg" title="Image" >}}
 
 Make any of the adjustments you’d like and, once you’re satisfied with your summary, click “Add”.
-{{< image src="/img/1_9_8BMq_6xuWRHgURjr_cCg.jpg" title="Image" >}}
+{{< image src="/img/1_9-8BMq_6xuWRHgURjr_cCg.jpg" title="Image" >}}
 
 And you’ll see your new report/summary widget added to the dashboard!
 {{< image src="/img/1_ONmFOLvKvRtXIG0avEzi3w.jpg" title="Image" >}}
@@ -110,7 +110,7 @@ To add some more graphs and charts, click “+ Component” again.
 That will, again, open the select report dialogue. Simply highlight and select your additional reports, finalize their graph/chart settings, and click “Add” again.
 {{< image src="/img/1_pIncbzGiIod3eO5jSILLMA.jpg" title="Image" >}}
 
-{{< image src="/img/1_NiI3H_1MPqXenAH2SwuB_w.jpg" title="Image" >}}
+{{< image src="/img/1_NiI3H_1MPqXenAH2SwuB-w.jpg" title="Image" >}}
 
 {{< image src="/img/1_9NKp-hSa3O0Sjt9_TcT-uw.jpg" title="Image" >}}
 

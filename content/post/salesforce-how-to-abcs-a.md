@@ -28,11 +28,11 @@ Today’s letter is ‘A’ as in “How to Add Products to a Price Book?”
 We’ll break this post down into three parts, so you can jump right to the help you need. First, we’ll walk through creating a price book. If you already have the price book you need, skip ahead to part two where we’ll tackle creating a new product. And, if you already have your product and your price book ready to go, skip to part three where we’ll show you how to get it listed in the right place!
 Let’s dive in!
 
-##
+## Creating a Price Book
 
 First thing’s first, we’ll need a [price book](https://help.salesforce.com/articleView?id=pricebooks_landing_page.htm&type=5). Price books allow you to manage all of your products and their pricing in one place. The Standard Price Book is like the master book of all your products (and their pricing) and you can create additional price books to manage prices for market segments, shipping regions, promo campaigns, and more.
 To begin, click on the App Launcher in the top left of your Salesforce instance (the little nine-tiled icon that lights up when you hover over it).
-{{< image src="/img/1__8tgRMI4UKrbIyTRMMtBsQ.jpg" title="Image" >}}
+{{< image src="/img/1_-8tgRMI4UKrbIyTRMMtBsQ.jpg" title="Image" >}}
 
 Then scroll down and select “Price Books” (or enter “price books” in the search bar and find it that way).
 {{< image src="/img/1_iGbMxxVG7NQCfLbs9D9lYA.jpg" title="Image" >}}
@@ -50,7 +50,7 @@ That’ll open the pop-up for a new price book creation.
 {{< image src="/img/1_iRGaG7E88PaSq4SzTL7Byg.jpg" title="Image" >}}
 
 Enter the name of your new price book, add a little description, and check the “active” box to ensure that the price book is enabled. Don’t check the “Is Standard Price Book” unless you’re trying to create a new master price list.
-{{< image src="/img/1_eKRRnAN7AuD8VzDWj_Melg.jpg" title="Image" >}}
+{{< image src="/img/1_eKRRnAN7AuD8VzDWj-Melg.jpg" title="Image" >}}
 
 Then click “Save”.
 {{< image src="/img/1_6RnGgHPECvgrRG5UhBmkEQ.jpg" title="Image" >}}
@@ -60,10 +60,10 @@ Congratulations, your new price book has been created and you’ll be taken to t
 
 If you already have your products created, jump ahead to step three and we’ll get them added! If not, read on and we’ll quickly run through the product creation process.
 
-##
+## Creating Products
 
 To begin creating our product(s), click on the App Launcher in the top left.
-{{< image src="/img/1_bomVjTckbvl50YczOeF_5A.jpg" title="Image" >}}
+{{< image src="/img/1_bomVjTckbvl50YczOeF-5A.jpg" title="Image" >}}
 
 Scroll down a bit and select “Products” in the App Launcher (or type “products” into the search bar and select it from there).
 {{< image src="/img/1_N0NLRYPXxmq3Loll1B5tQQ.jpg" title="Image" >}}
@@ -83,22 +83,22 @@ Today we’ll be walking through creating a brand new product, but it’s also p
 {{< image src="/img/1_05TgEezJ8ETGf7kLTolzQQ.jpg" title="Image" >}}
 
 But let’s whip up a brand new product now. From your Products’ List View, click “New” in the top right.
-{{< image src="/img/1__AKw2eOMbGip7sahspOXKw.jpg" title="Image" >}}
+{{< image src="/img/1_-AKw2eOMbGip7sahspOXKw.jpg" title="Image" >}}
 
 That’ll open the New Product pop-up!
 {{< image src="/img/1_9SnNybVieXoPPfEAe3XtoA.jpg" title="Image" >}}
 
 Simply enter the new product’s name and click the “Active” checkbox if you’d like the product to be live in your system. There are also fields for Product Code, Product Family, and a Product Description so you can keep things a bit more organized.
-{{< image src="/img/1_SC8mrMKt_8H7H8mHRXKpaw.jpg" title="Image" >}}
+{{< image src="/img/1_SC8mrMKt-8H7H8mHRXKpaw.jpg" title="Image" >}}
 
 Then click “Save”.
 {{< image src="/img/1_JNZmCQpxziV8VbPOrXp9Lg.jpg" title="Image" >}}
 
 Now your product is active and created, but you’ll need to add a “Standard Price” before you can add it to your desired price book. From the Product’s page (where you landed after clicking “Save”), click “Related” in the top left.
-{{< image src="/img/1_nOifqxjG5BlsA0S_9hZt9g.jpg" title="Image" >}}
+{{< image src="/img/1_nOifqxjG5BlsA0S-9hZt9g.jpg" title="Image" >}}
 
 The Related page will show you which price books the product belongs to but, because this one’s brand new, it’ll show a ‘(0)’.
-{{< image src="/img/1_o_MK3uZwaNLgHXl9mZWNJw.jpg" title="Image" >}}
+{{< image src="/img/1_o-MK3uZwaNLgHXl9mZWNJw.jpg" title="Image" >}}
 
 Click the “Add Standard Price” button on the right-hand side.
 {{< image src="/img/1_kDC69SA1CZ5_oGB0CQpMjw.jpg" title="Image" >}}
@@ -117,11 +117,11 @@ Now, on the “Related” tab you’ll see your new product is listed in your St
 
 And that means we’re ready for step three!
 
-##
+## Adding Products
 
 First up, we need to navigate to the product’s page (if you’re coming from step 2, you’re all set — just skip ahead until we catch up to you on the “Related” tab of your product).
 To begin, click on the App Launcher in the top left.
-{{< image src="/img/1_bomVjTckbvl50YczOeF_5A.jpg" title="Image" >}}
+{{< image src="/img/1_bomVjTckbvl50YczOeF-5A.jpg" title="Image" >}}
 
 Scroll down a bit and select “Products” in the App Launcher (or type “products” into the search bar and select it from there).
 {{< image src="/img/1_N0NLRYPXxmq3Loll1B5tQQ.jpg" title="Image" >}}
@@ -133,10 +133,10 @@ If you’re on “Recently Viewed” and want to see all of your products, click
 {{< image src="/img/1_0svASGWxALpm_t7llqLolg.jpg" title="Image" >}}
 
 Now, select the product you’d like to add to your price book.
-{{< image src="/img/1__KbP58BwgbXjBy2zjmOFyg.jpg" title="Image" >}}
+{{< image src="/img/1_-KbP58BwgbXjBy2zjmOFyg.jpg" title="Image" >}}
 
 On the product’s page, click the “Related” tab on the top left.
-{{< image src="/img/1_nOifqxjG5BlsA0S_9hZt9g.jpg" title="Image" >}}
+{{< image src="/img/1_nOifqxjG5BlsA0S-9hZt9g.jpg" title="Image" >}}
 
 Now you’ll be able to see which price books already contain your product.
 {{< image src="/img/1_SuFxw6IOEef7ZQD0CxNxnw.jpg" title="Image" >}}
@@ -148,7 +148,7 @@ That’ll bring up the “Add to Pricebook” pop-up.
 {{< image src="/img/1_jQFN_to3VIiD7rW6JmRTug.jpg" title="Image" >}}
 
 Select the price book where you’d like to add the product.
-{{< image src="/img/1_SLXg4OOgGCxf_oQr1IiNBQ.jpg" title="Image" >}}
+{{< image src="/img/1_SLXg4OOgGCxf-oQr1IiNBQ.jpg" title="Image" >}}
 
 And then select the currency you’d like to use.
 {{< image src="/img/1_zmaaLLxvFk5X6kZ0gPbE1Q.jpg" title="Image" >}}

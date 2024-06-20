@@ -29,7 +29,7 @@ It’s a chance to get a speedy beginner’s intro to the app, get some experien
 
 The next session is tomorrow, July 8th at 10:30am (PT), and you can sign up [right here, right now](https://events.mkpartners.com/MamboMergeOfficeHours)!
 
-{{< image src="/img/mambo-merge-pdf.jpeg" >}}
+{{< image src="/img/mambo-merge-pdf.jpg" >}}
 
 You’ll want to install [Mambo Merge](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3u00000MBinOEAT) ahead of time as well, so grab a free, up-to-date edition from the [AppExchange](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3u00000MBinOEAT) (or ask an admin to) and we’ll look forward to seeing you there!
 

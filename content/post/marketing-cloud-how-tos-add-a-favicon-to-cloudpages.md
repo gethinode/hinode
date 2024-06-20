@@ -27,7 +27,7 @@ But that’s only because they didn’t have the internet yet. If they had, they
 
 And that’s why favicons are so important! We’re all capable, at a glance, of instantly navigating back to “just the tab we were looking for” thanks to the handy little pictographs we’ve become experts at recognizing.
 
-{{< image src="/img/1_XUjTFPJkA8ChDY7k_5utrQ.jpg">}}
+{{< image src="/img/1_XUjTFPJkA8ChDY7k_5utrQ.png">}}
 
 That’s also why no Landing Page, form, site, etc… is complete without one. But getting one added to your CloudPages isn’t a very well-documented process — until now!
 

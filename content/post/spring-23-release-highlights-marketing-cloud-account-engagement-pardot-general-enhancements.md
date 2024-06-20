@@ -17,7 +17,7 @@
       "jpeg": "/img/tommy-holden_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/0_IPa0hHSJ0NsTGPZ_.png" },
+  "thumbnail": { "url": "/img/0_IPa0hHSJ0NsTGPZ_.webp" },
 }
 ---
 

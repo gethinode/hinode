@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2024-06-20T18:02:38.000Z",
+  "date": "2024-06-18T18:02:38.000Z",
   "title": "See You There: Dreamin’ in Color 2024!",
   "Slug": "see-you-there-dreamin-in-color-2024",
   "description": "This year marks Dreamin’ In Color’s 3rd annual community conference for Black, Latinx, and Hispanic individuals engaged with or interested in the Salesforce platform...",
@@ -22,7 +22,7 @@
       "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_i_J8YbwFLolIk44c2II3hw.png" },
+  "thumbnail": { "url": "/img/1_i-J8YbwFLolIk44c2II3hw.png" },
 }
 ---
 
@@ -67,9 +67,9 @@ Dreamin’ in Color continues with a full agenda on its 2nd day going until 5 pm
 Throughout the event take the opportunity to meet Trailblazers you wish to connect and network with. Wine, beer, and other drinks along with some appetizers and food may be served during the happy hours activities so enjoy some food and have a down-to-earth conversation with the person right next to you.
 Leverage these moments to learn more and make connections that may nudge your career opportunities to their next level.
 
-## Say Hello! [Crème de la CRM](https://cremedelacrm.com/)
+## Say Hello!
 
-Are you speaking and want to give a quick interview about your session for some LinkedIn content? Maybe you’d like to tell us why attendees should visit your booth. We’ll be there to gather and share the latest news for this 2-day event. Stop by and say hello when, and if you get a chance.
+Are you speaking and want to give a quick interview about your session for some LinkedIn content? Maybe you’d like to tell us why attendees should visit your booth. We’ll be there to gather and share the latest news for this 2-day event. Stop by and say hello to the [Crème de la CRM](https://cremedelacrm.com/) team if you get a chance.
 
 ## What are you looking for?
 

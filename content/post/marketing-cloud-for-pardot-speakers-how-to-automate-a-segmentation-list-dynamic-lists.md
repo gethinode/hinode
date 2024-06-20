@@ -40,10 +40,10 @@ What we want is to automate the production and maintenance of a list of Prospect
 
 Pardot “speakers” will recognize this functionality as a Dynamic List (or an Automation Rule in certain circumstances).
 Create the Dynamic List (in Prospects -&gt; Segmentation Lists -&gt; “+ Add List”)
-{{< image src="/img/1_s_rgDAglQmDVJ_EnD8iGNw.png" title="Image" >}}
+{{< image src="/img/1_s_rgDAglQmDVJ-EnD8iGNw.png" title="Image" >}}
 
 Check the “Dynamic List” Checkbox.
-{{< image src="/img/1_yF_nhb_HxfOyjpmEuSoIhg.png" title="Image" >}}
+{{< image src="/img/1_yF-nhb-HxfOyjpmEuSoIhg.png" title="Image" >}}
 
 Set Your Rules and Run.
 {{< image src="/img/1_5zSGw1Qmp8JhG0pcpkN9_w.png" title="Image" >}}

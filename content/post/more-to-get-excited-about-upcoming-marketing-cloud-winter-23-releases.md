@@ -23,7 +23,7 @@
 
 _Salesforce’s Northern Trail Sample Image for MC Intelligence: Ecommerce Marketing Insights App_
 
-{{< image src="/img/1_t0MwDMEfEMJqbAC59mraLg.jpg">}}
+{{< image src="/img/1_t0MwDMEfEMJqbAC59mraLg.png">}}
 _Salesforce’s Northern Trail Sample Image for Social Sprout_
 
 Two new & exciting Intelligence sub-products will be making their debut for the Winter ’23 Marketing Cloud release = **_Sprout Social_ _Connector_ & _Ecommerce Marketing Insights App_.** These are in the release notes and seem to be flying under the radar a bit, so shedding light on their upcoming capabilities is, without a doubt, important. Both products are available in all MC Intelligence Editions (Starter, Growth, & Plus).
