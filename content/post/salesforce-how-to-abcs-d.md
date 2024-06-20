@@ -55,16 +55,16 @@ Almost there! On your User Edit page locate the ‘Active’ checkbox and click 
 {{< image src="/img/1_YXUrekQtMydm7SLxzbyf2Q.jpg" title="Image" >}}
 
 That’ll trigger a pop-up dialogue box warning you what will happen when you deactivate the user — removing them from all delegated groups and sharing privileges, etc… It also helpfully lets you know that you’ll still be able to transfer the deactivated users records to an active user and that they’ll still show up under “Managed Users”.
-{{< image src="/img/1_gECFVIp90YT_kl0ew__VIw.jpg" title="Image" >}}
+{{< image src="/img/1_gECFVIp90YT-kl0ew__VIw.jpg" title="Image" >}}
 
 Click ‘OK” when you’re ready to continue.
 {{< image src="/img/1_MYUj5fbTVItW5B3ld3B72Q.jpg" title="Image" >}}
 
 Lastly, click “Save” on the User Edit page to finalize the deactivation.
-{{< image src="/img/1__WaKTPmcVnCqqPSErnop0g.jpg" title="Image" >}}
+{{< image src="/img/1_-WaKTPmcVnCqqPSErnop0g.jpg" title="Image" >}}
 
 And you’re all set! You’ll still the user on your list of users, but you’ll notice they’re no longer listed as “Active”!
-{{< image src="/img/1_ilPTipILIBJzwgiS_4lFGg.jpg" title="Image" >}}
+{{< image src="/img/1_ilPTipILIBJzwgiS-4lFGg.jpg" title="Image" >}}
 
 Congratulations your user’s been deactivated!
 Just a heads up, while that user will no longer count toward’s your org’s available licenses, if you’re not adding a new user and want to instead reduce your license count you’ll still need to reach out to your Salesforce rep — removing users won’t automatically reduce your bill accordingly. And here’s a [helpful list](https://help.salesforce.com/articleView?id=users_deactivate_considerations.htm&type=5) with a few other things to consider when deactivating accounts.

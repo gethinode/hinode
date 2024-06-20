@@ -27,21 +27,21 @@ Most notably, at least from a marketing perspective, is the sudden adoption (or 
 
 There are two mentions on the Genie product page (now branded as the “Genie Customer Data Cloud”).
 
-{{< image src="/img/1_vEjIdbLycAMhJVPrj5a2cg.jpg">}}
+{{< image src="/img/1_vEjIdbLycAMhJVPrj5a2cg.png">}}
 
 Peppered throughout recent posts and collateral.
 
-{{< image src="/img/1_7dBHjmDKlORwfH1of3u_dQ.jpg">}}
+{{< image src="/img/1_7dBHjmDKlORwfH1of3u_dQ.png">}}
 
-{{< image src="/img/1_Lugu5c0dm9x5-wb320P3rA.jpg">}}
+{{< image src="/img/1_Lugu5c0dm9x5-wb320P3rA.png">}}
 
 And even landing a top spot on the Salesforce blog to drive clicks.
 
-{{< image src="/img/1_dz16MgNB9CYXC07El7hSIw.jpg">}}
+{{< image src="/img/1_dz16MgNB9CYXC07El7hSIw.png">}}
 
 Even some SEO targetting.
 
-{{< image src="/img/1_smY2hTcIt78gQ2YwVDJgdQ.jpg">}}
+{{< image src="/img/1_smY2hTcIt78gQ2YwVDJgdQ.png">}}
 
 It’s clear that Salesforce is betting most companies aspire to being “customer companies” and it’s a fairly natural progression of the previous “Customer 360" messaging, uniting all the touchpoints between you and your customers to deliver a personalized, complete, and satisfying experience that improves both their appreciation of your work or products and captures data that will make you a more effective organization at catering to their needs and expectations.
 

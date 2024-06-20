@@ -17,7 +17,7 @@
       "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/1_G9iF1_3M_tEe0jjCH1evjw.webp" },
+  "thumbnail": { "url": "/img/1_G9iF1_3M_tEe0jjCH1evjw.png" },
 }
 ---
 
@@ -31,6 +31,6 @@ Our FREE edition includes the ability to take your existing Word documents and e
 
 Need more than one button per instance or maybe you want to customize labels and need to include dropdown lists? How about being able to save various configurations in order to set up various buttons or drop down lists based on who is using Mambo Merge? Or maybe you need to use Flow, Bulk and Batch Merge or simply need to have something else happen within your Org once the document is generated?. The built-in API found within the PRO edition allows you to tell Mambo Merge exactly what to do after a document is generated!How about creating Excel or HTML documents, or converting your document into a PDF before emailing it out? Our Standard and PRO editions unlock more benefits in order to save you time and automate tasks!
 
-Sign up for our monthly [‘Office Hours’](https://events.mkpartners.com/MamboMergeOfficeHours) webinar (recommended for our new installers) or our monthly [‘Closer Look’](https://events.mkpartners.com/MamboMergeCloserLook) webinar (for those looking to learn more) to show you how Mambo Merge can help your customers do more within their Org.
+Sign up for our monthly [Office Hours](https://events.mkpartners.com/MamboMergeOfficeHours) webinar (recommended for our new installers) or our monthly [Closer Look](https://events.mkpartners.com/MamboMergeCloserLook) webinar (for those looking to learn more) to show you how Mambo Merge can help your customers do more within their Org.
 
 And, as always, we’ll see you in the cloud!

@@ -59,7 +59,7 @@ Once the campaign is created you will be taken to its campaign record.
 {{< image src="/img/0_xasHOTL7y8vGdqdr.png" title="Image" >}}
 
 Within each campaign record, you can upload attachments such as presentation decks, product or service specs, datasheets, etc. Easily create new contacts, opportunities, or cases linked to the campaign. Maintaining all information in one central location.
-{{< image src="/img/0_86opHANBNrqPCU0.png" title="Image" >}}
+{{< image src="/img/0_86opHANBNrqPCU0S.png" title="Image" >}}
 
 Additional reading materials can be found within [trailhead](https://trailhead.salesforce.com/content/learn/modules/campaign_basics) and if you still need a hand getting started or just getting more out of your org in general, [drop us a line!](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE) We’re always happy to help.
 And we’ll see you in the cloud.

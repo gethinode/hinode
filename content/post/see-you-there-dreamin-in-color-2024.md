@@ -4,10 +4,10 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2024-06-18T18:02:38.000Z",
+  "date": "2024-06-20T18:02:38.000Z",
   "title": "See You There: Dreamin’ in Color 2024!",
   "Slug": "see-you-there-dreamin-in-color-2024",
-  "description": "This year marks Dreamin’ In Color’s 3rd annual community conference for Black, Latinx, and Hispanic individuals engaged with or interested in the Salesforce platform and its integrated technologies, such as Tableau, MuleSoft, Slack, and AI. It’ll take place at the International Hotel and Resort, a change from previous years’ location and the first installment to take place in New Orleans, LA!.",
+  "description": "This year marks Dreamin’ In Color’s 3rd annual community conference for Black, Latinx, and Hispanic individuals engaged with or interested in the Salesforce platform...",
   "tags":
     [
       "trailblazercommunity",
@@ -38,7 +38,7 @@ Visiting a new location always calls for a quick check on the weather, so here�
 
 This is the first year to feature a Spanish-language track and a focus on Latinx and Hispanic communities: Soñando En Color.
 If you plan to attend, be ready for a curated set of sessions, speakers, activities, and more for Latinx and Hispanic individuals on top of what you have experienced if attended before.
-Check out their entire Soñando En Color itinerary [here](https://www.dreaminincolor.me/sonandoencolor).
+Check out their entire [Soñando En Color itinerary](https://www.dreaminincolor.me/sonandoencolor).
 
 ## The Agenda
 
@@ -52,7 +52,7 @@ From finding the next group meetup to learning more about sponsors and activitie
 ## A Mardi Gras Awards Reception
 
 The end of the first day will conclude with a Mardi Gras themed gathering at the Intercontinental. This activity will encourage each attendee to wear colors that include purple for justice, green for faith, and gold for power. So, make sure to pack an extra set of clothes for this part of the event to enjoy and dance the night away!
-But don&#39;t worry as masks will be provided to get your Mardi Gras groove and take some pictures to remember the moment. Embrace the culture and learn something new.
+But don't worry as masks will be provided to get your Mardi Gras groove and take some pictures to remember the moment. Embrace the culture and learn something new.
 
 ## Keynote
 

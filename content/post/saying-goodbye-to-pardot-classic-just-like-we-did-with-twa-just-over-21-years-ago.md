@@ -34,12 +34,12 @@ _Rooftop View of the Former TWA T5 From 1962, Now an On-Site Hotel at JFK. A Pho
 
 This is a similar strategy from an eventual integration & rebranding perspective in what American Airlines has done over the years with various acquisitions of airlines (& not just TWA). For instance, USAirways, Piedmont, Reno Air, PSA, AirCal, & America West in some way, shape, or form, have all been acquired by American. Salesforce has done this as well in terms of strategy with stacking up its library by acquiring companies over the years to make their overall product suite stronger = EG: Tableau, Exact Target, Slack, Demandware, Quip, etc. Salesforce’s acquisition of Atlanta-based Pardot in 2013 was a key example of Salesforce being ahead of the curve from a B2B-Marketing Automation standpoint. And yet Pardot still holds up as a brand on its own more than 10-years after Salesforce acquired them. In certain use cases, it has even branched out to be a reliable B2C-Marketing platform as well.
 
-{{< image src="/img/1_TmCMkNfCXNQbJjR6YPjF0g.jpg">}}
+{{< image src="/img/1_TmCMkNfCXNQbJjR6YPjF0g.png">}}
 _An American Airlines Employee Private Event at the TWA Hotel Terminal Which Closed Down the Upper Level Restaurant(s) in the Terminal During My Stay. Ironic Considering AA Acquired TWA Back in 2001 & Subsequently Shut Down Terminal 5 in Favor of Their Own. That Said, AA gets a Pass. They’ve Always Been Solid Over the Years as an AAdvantage Frequent Flyer Member._
 
 **What Can Also Be Said:** The retirement of “Pardot Classic” _IS NOT_ a full-on retirement of the entire Pardot system for right now. So don’t panic, just be proactive with monitoring this overall transition. Think of “Classic” being an old release which you were used to & Salesforce wants you to move forward with its best technology available to you as a user.
 
-{{< image src="/img/1_L4XnhMAI2Gnsln8JA-p78Q.jpg">}}
+{{< image src="/img/1_L4XnhMAI2Gnsln8JA-p78Q.png">}}
 _The “Pardot Classic” Form Settings Interface Back in Summer 2015. Wow, Now I Feel Really Old…_
 
 **As of October 17, 2022, With the Retirement of “Pardot Classic” Here Are the Best Practices With Maintaining Current Pardot Org-Based Settings:**
@@ -56,7 +56,7 @@ _The “Pardot Classic” Form Settings Interface Back in Summer 2015. Wow, Now 
 
 1. **Stocking Stuffer:** More TWA Hotel photos at New York — Kennedy Int’l (which I took) from my stay a week ago are posted below!
 
-{{< image src="/img/1_V1Qjo5YK5ifD4bWJFp7HVg.jpg">}}
+{{< image src="/img/1_V1Qjo5YK5ifD4bWJFp7HVg.png">}}
 _The T5 Tarmac: “Connie,” a Lockheed Constellation From the 1940s-50s is Preserved & Also Has a Bar Inside._
 
 {{< image src="/img/1_anNHsftip9_buWqC7JSepg.jpg">}}

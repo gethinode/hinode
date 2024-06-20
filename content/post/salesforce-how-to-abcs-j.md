@@ -25,31 +25,31 @@ As we are close to wrapping up Summer ’22 and Trailblazers everywhere are gett
 
 Today’s letter is “J” as in, “How to Join Reports”. Let’s dive in!
 
-{{< image src="/img/1_Mi5c38q2R1bmmyGa08VRPA.jpg">}}
+{{< image src="/img/1_Mi5c38q2R1bmmyGa08VRPA.png">}}
 
 This answer is two fold— because in Lightning Experience Salesforce does all the heavy lifting with a drop down selection once a report has been created. So make sure to click on the “New Report” tab and select the report type you want to create. Note that this selection will determine the principal report type and common fields for the joined reports. Just make sure your initial report has all the necessary fields that needs to be shared between all the reports and you should be good to go.
 
 Once the repot has been created then head over to the upper left corner of the report builder and select **Report**> **Join Report** and click on **Apply**.
 
-{{< image src="/img/1_3ViqjB6Og5_3naQrwkPpHA.jpg">}}
+{{< image src="/img/1_3ViqjB6Og5_3naQrwkPpHA.png">}}
 
 Too add other report types to the newly created joined report, click on **Add Block**
 
-{{< image src="/img/1_62KUdvgp9JGR1KBkkbxr9w.jpg">}}
+{{< image src="/img/1_62KUdvgp9JGR1KBkkbxr9w.png">}}
 
 From here just customize the columns, groups, filters and formulas and Save. Don’t forget to give your Joined Report a name. Lastly run the report to test it out and make sure the data you need all shows up as it should.
 
 If you need to use Salesforce Classic to create a join report than just follow the same steps to choose a principal (primary) report type to determine the common fields. Once the report builder opens up go ahead and and select **Tabular Format**> **Joined.**
 
-{{< image src="/img/1_-rMEMUYjAvdn3M8_XGShgw.jpg">}}
+{{< image src="/img/1_-rMEMUYjAvdn3M8_XGShgw.png">}}
 
 From here to add other reports simply click on the **Add Report Type**.
 
-{{< image src="/img/1_WO0gCkTKiGH20jRBabEMDQ.jpg">}}
+{{< image src="/img/1_WO0gCkTKiGH20jRBabEMDQ.png">}}
 
 Choose a report type and click **OK**.
 
-{{< image src="/img/1_c5sBS7qnFiWzc3M0odLJ_A.jpg">}}
+{{< image src="/img/1_c5sBS7qnFiWzc3M0odLJ_A.png">}}
 
 Same as before make sure to give your report a name and save it. Customize the columns, groups, filters and formulas to present the information you seek.
 

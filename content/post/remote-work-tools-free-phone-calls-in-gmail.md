@@ -34,11 +34,11 @@ If your organization uses [GSuite](https://gsuite.google.com/), it’ll already 
 
 Once you’re in your inbox, find the phone icon in the lower left corner.
 
-{{< image src="/img/1_iDon1Zpsg3GYKKah3LlwgQ.webp" title="" >}}
+{{< image src="/img/1_iDon1Zpsg3GYKKah3LlwgQ.jpg" title="" >}}
 
 Click it, and then click on “Make a Call” right above the phone icon.
 
-{{< image src="/img/1_oG0I2dDyosVZzoIp00idPQ.webp" title="" >}}
+{{< image src="/img/1_oG0I2dDyosVZzoIp00idPQ.jpg" title="" >}}
 
 Enter the number you’d like to call.
 
@@ -46,7 +46,7 @@ Enter the number you’d like to call.
 
 And then click the call field that populates to dial!
 
-{{< image src="/img/1_5z92hNkyDErLFbsp1a_UJw.webp" title="" >}}
+{{< image src="/img/1_5z92hNkyDErLFbsp1a_UJw.jpg" title="" >}}
 
 And now you’re connected!
 

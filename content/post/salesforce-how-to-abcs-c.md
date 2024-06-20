@@ -86,7 +86,7 @@ Congratulations! Your dashboard (although a bit sparse) is ready for deployment!
 
 Now, let’s cover making some changes and additions — pretty common once your team starts getting used to seeing their data summarized and gets a feel for the info that would help them be more productive
 To begin changing an existing dashboard, click “Edit” in the upper right corner.
-{{< image src="/img/1_VNKMmrH__QCEBhsrh5Tq9g.jpg" title="Image" >}}
+{{< image src="/img/1_VNKMmrH_-QCEBhsrh5Tq9g.jpg" title="Image" >}}
 
 Let’s say your team requested that the stages (x-axis) on that initial report be flipped, so the value’s increase from left to right instead of right to left. To do that, we’ll click the pencil icon above the graph/chart to edit it.
 {{< image src="/img/1_fwZ76kRjoXDlDbH7l0WJMQ.jpg" title="Image" >}}
@@ -112,13 +112,13 @@ That will, again, open the select report dialogue. Simply highlight and select y
 
 {{< image src="/img/1_NiI3H_1MPqXenAH2SwuB_w.jpg" title="Image" >}}
 
-{{< image src="/img/1_9NKp_hSa3O0Sjt9_TcT_uw.jpg" title="Image" >}}
+{{< image src="/img/1_9NKp-hSa3O0Sjt9_TcT-uw.jpg" title="Image" >}}
 
 If, like on this Opportunity History Report chart, you’re seeing some of your data cut off by the chart’s edges you can resize it. Click once on the chart to select it. (You’ll know it’s selected when you see the bounding box and anchors appear in the corners and along the edges).
 {{< image src="/img/1_dNy2KoH8WnaPceQptNjELA.jpg" title="Image" >}}
 
 Then, simply click and hold the bounding box anchor you’d like to adjust and drag the chart out to the desired dimensions!
-{{< image src="/img/1_0DTSJ_1c70c_wivL_wXWYQ.jpg" title="Image" >}}
+{{< image src="/img/1_0DTSJ-1c70c-wivL_wXWYQ.jpg" title="Image" >}}
 
 Now, repeat those steps to add all the components you’d like and we’ll walk through rearranging them on the dashboard!
 {{< image src="/img/1_nLRwnAckvWirid0PENZbXg.jpg" title="Image" >}}

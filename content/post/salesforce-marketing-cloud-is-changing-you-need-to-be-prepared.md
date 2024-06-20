@@ -32,18 +32,17 @@ Los Angeles, CA — May 9th, 2022: [Salesforce](http://salesforce.com) has final
 
 **IMPLEMENTATION HISTORY**: Previously, some clients clearly didn’t need all the functionality in the Marketing Cloud universe & rested easy with Pardot instead (mostly B2B companies). Larger B2C clients were more than likely going to be geared toward using Marketing Cloud as they tended to have extremely huge databases and required critical use of suites such as _Automation Studio, Social Studio, Audience Builder, Contact Builder,_ _Journey Builder,_ and the use of SQL servers.
 
-Surprisingly, some larger B2C clients have been recently utilizing Pardot, as it has become a more mature platform within the overall Salesforce product line. Marketing Cloud also has a significantly higher sticker price over Pardot as well.
-
+Surprisingly, some larger B2C clients have been recently utilizing Pardot, as it has become a more mature platform within the overall Salesforce product line. Marketing Cloud also has a significantly higher sticker price over Pardot as well
 As mentioned, recently I’ve seen more B2C interest in Pardot, and for good reason. For instance, Pardot’s _Engagement Studio_ functionality has always been extremely underrated and I watched its “Silent” rollout as a consultant back in Summer 2016. I was floored by the release, and have always tried to promote it heavily to clients. It was a huge improvement from the former “Drip Campaign Editor” functionality and it has also gained additional curiosity & popularity amongst clients. This could be why some larger B2C clients have migrated over to Pardot instead of using Marketing Cloud as there is just a general ease of use.
 
-{{< image src="/img/1_Dp_-ROU_cMDkVYiyYPEo4A.jpg">}}
+{{< image src="/img/1_Dp_-ROU_cMDkVYiyYPEo4A.png">}}
 **_Example of a Pardot Drip Campaign Workflow (2015)_**
 
 Wow! This was now 7 years-ago? Talk about taking a stroll down memory lane! It’s worth noting that despite the surprise release of _Engagement Studio_ in Pardot in Summer 2016; the former drip editor was still an available option for a user to facilitate campaigns for at least a few years after the release.
 
 Here are modern flow examples from both *Engagement Studio*and _Journey Builder_:
 
-{{< image src="/img/1_3NrndT227lHdZb0ww-0JRA.jpg">}}
+{{< image src="/img/1_3NrndT227lHdZb0ww-0JRA.png">}}
 **_Example of a Pardot Engagement Studio Workflow (2022)_**
 
 {{< image src="/img/0_xOE-lEbrsm_-ACs9.png">}}
