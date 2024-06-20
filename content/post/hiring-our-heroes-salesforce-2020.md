@@ -17,11 +17,9 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/raising-hand-in-meeting.jpg" },
+  "thumbnail": { "url": "/img/raising-hand-in-meeting.png" },
 }
 ---
-
-{{< image src="/img/raising-hand-in-meeting.jpg" >}}
 
 Salesforce is an industry leader in doing good. From starting the [Pledge 1% movement](https://medium.com/creme-de-la-crm/pledge-1-success-stories-602f06c2b3bb?source=collection_home---4------0-----------------------) to supporting worthy causes around the world --- their charitable contributions to communities everywhere are unmatched.
 

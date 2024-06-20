@@ -17,11 +17,9 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/dreamforce-app.jpg" },
+  "thumbnail": { "url": "/img/dreamforce-app.png" },
 }
 ---
-
-{{< image src="/img/dreamforce-app.jpg" >}}
 
 Dreamforce 2020 is kicking off next week and it'll be a big change from the Dreamforce we're used to as the event moves from the streets of San Francisco to computer screens all around the world!
 

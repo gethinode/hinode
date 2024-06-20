@@ -17,11 +17,11 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/capitol.jpg" },
+  "thumbnail": { "url": "/img/capitol.png" },
 }
 ---
 
-{{< image src="/img/capitol.jpg" >}}
+{{< image src="/img/capitol.png" >}}
 
 Trained eyes will have noticed some cool changes to the [AppExchange](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE) in the last week --- especially when it comes to finding the right Salesforce partner. Alongside more granular filtering options and the freshly released "consultant finder" wizard, the most helpful and exciting update seems to be new Partner Navigator Achievements that are now reflected on the Expertise tab!
 

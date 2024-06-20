@@ -17,13 +17,9 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/dreamforce-to-you.jpg" },
+  "thumbnail": { "url": "/img/dreamforce-to-you.png" },
 }
 ---
-
-{{< image src="/img/dreamforce-to-you.jpg" >}}
-
-There's news in the world of Dreamforce --- the huge annual celebration of all things Salesforce!
 
 What had been (a bit vaguely) presented as the 2020 incarnation of Dreamforce: [_Dreamforce to You_](https://www.salesforce.com/dreamforce/), taking place from November-December has gotten an update on dates, events, and opportunities to participate!
 
