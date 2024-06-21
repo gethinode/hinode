@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "The Secret to Salesforce’s Sense of Community",
   "Slug": "the-secret-to-salesforces-sense-of-community",
   "description": "Let’s get you connected to the “glue” of the Salesforce ecosystem — Trailblazer Community Groups!.",
-  "tags": ["salesforce-dev","salesforce","trailblazercommunity","salesforce-communities","salesforce-admin"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-dev",
+      "salesforce",
+      "trailblazercommunity",
+      "salesforce-communities",
+      "salesforce-admin",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_b9nlZkvqlx6YVGgDQy2fiQ.png"
-  }
+  "thumbnail": { "url": "/img/1_b9nlZkvqlx6YVGgDQy2fiQ.png" },
 }
 ---
+
 Connecting with fellow Trailblazers during Salesforce and Community events brings joy and excitement to everyone. But what about the times in between? How do you find new ways to meet individuals with similar interests?
 By joining a Trailblazer Community Group you have a chance to meet and collaborate with Trailblazers, based on location, role, and interests!
 Let’s get started.
@@ -31,13 +38,11 @@ Let’s get started.
 Start by heading over to the [Trailblazer Community Group](https://trailblazercommunitygroups.com/) site and search for meetings based on city or topic. Make sure to log in using your Trailhead account to be able to register if anything catches your attention. From the latest and greatest AI topics to more traditional roles and interests there is always a meeting type for everyone. These groups cater to both in-person and virtual sync. So, pick one and dive into the details.
 {{< image src="/img/1_z0mpwP2Q_5aXLdKvzi_4ww.png" title="Image" >}}
 
-
 ## RSVP For A Meeting
 
 Now that you’ve found something local to meet in person or jump on a virtual call — make sure to RSVP. This will notify the Group you are interested and provide a confirmation or QR code for you to use at the meeting. These meetings are usually free to attend and may include some food, snacks, beverages and giveaways to welcome the new gathering.
 There is usually a cut-off date to confirm so make sure to look at the details in case you find one but forget to click on the RSVP button.
 {{< image src="/img/1_6usZYGiWuPF_2G30hzVdlw.png" title="Image" >}}
-
 
 ## Attend and Network
 

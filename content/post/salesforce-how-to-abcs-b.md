@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-01-25T13:01:01.000Z",
+  "date": "2029-01-25T13:01:01.000Z",
   "title": "Salesforce “How To” ABCs: B",
   "Slug": "salesforce-how-to-abcs-b",
   "description": "How to Build a Report.",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_j3a6nhGfCBQFeoa79A2Q8Q.jpg" },

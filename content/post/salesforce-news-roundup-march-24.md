@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce News Roundup: March ‘24",
   "Slug": "salesforce-news-roundup-march-24",
   "description": "March isn’t over yet (in fact tomorrow marks the kick-off of March Madness), but our reading lists are already packed with interesting and informative articles from around the world of Salesforce!.",
-  "tags": ["salesforce-admin","ai","salesforce-dev","salesforce-news","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-admin",
+      "ai",
+      "salesforce-dev",
+      "salesforce-news",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_OAYpa3uvKRYO1kxCmlm1KQ.png"
-  }
+  "thumbnail": { "url": "/img/1_OAYpa3uvKRYO1kxCmlm1KQ.png" },
 }
 ---
+
 March isn’t over yet (in fact tomorrow marks the kick-off of March Madness), but our reading lists are already packed with interesting and informative articles from around the world of Salesforce!
 In today’s post we’re going to highlight some of this month’s Salesforce articles that are just too good to “spring” past.
 Let’s dive in!
@@ -63,7 +70,6 @@ See how Einstein Copilot custom actions [allows developers to build conversation
 
 And [discover the power of Model Builder](https://developer.salesforce.com/blogs/2024/03/use-model-builder-to-integrate-databricks-models-with-salesforce), an AI platform that enables teams to build, train, and deploy AI models using external platforms and data in Data Cloud!
 {{< image src="/img/1_7NUDpT_85VgoY27KGLEPOQ.png" title="Image" >}}
-
 
 ## Conclusion
 

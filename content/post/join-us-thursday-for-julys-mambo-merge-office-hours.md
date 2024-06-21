@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/0__7hv4KCNq_cfkCiX.jpg" },

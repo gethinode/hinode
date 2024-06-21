@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,20 @@
   "title": "AppExchange Review: Gauge by CS Toolkit — Effortless Customer Success Insights",
   "Slug": "appexchange-review-gauge-by-cs-toolkit-effortless-customer-success-insights",
   "description": "Within the realm of Customer Success in Salesforce, numerous options exist for documenting interactions with Customers. However, there’s often a desire to quickly gauge a customer’s sentiment with just a glance at their record. Whether in Sales or Support, understanding whether a customer is satisfied or discontent is crucial. And that’s where Gauge comes into play! The app adds a visual gauge and tracks customer sentiment notes, offering an overview of all customers and their shared sentiments..",
-  "tags": ["salesforce-app","salesforce-app-reviews","salesforce","salesforce-appexchange","salesforce-admin"],
-  "author": {
-    "name": Cynthia McDonald,
-    "title": undefined,
-    "jpeg": undefined
-  },
+  "tags":
+    [
+      "salesforce-app",
+      "salesforce-app-reviews",
+      "salesforce",
+      "salesforce-appexchange",
+      "salesforce-admin",
+    ],
+  "author": { "name": Cynthia McDonald, "title": undefined, "jpeg": undefined },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_zx5wADxR6084nozVtukiCQ.png"
-  }
+  "thumbnail": { "url": "/img/1_zx5wADxR6084nozVtukiCQ.png" },
 }
 ---
+
 Within the realm of Customer Success in Salesforce, numerous options exist for documenting interactions with Customers. However, there’s often a desire to quickly gauge a customer’s sentiment with just a glance at their record. Whether in Sales or Support, understanding whether a customer is satisfied or discontent is crucial. And that’s where [Gauge ](https://appexchange.salesforce.com/appxListingDetail?listingId=e4303641-9a4c-4357-80bf-ec9f06594610)comes into play! The app adds a visual gauge and tracks customer sentiment notes, offering an overview of all customers and their shared sentiments.
 Every company strives to maintain happy customers who’ll continue to choose their services, but recurring issues (or multiple issues with the same client) can build to discontent, resentment, and attrition. There’s often a gap in effectively engaging customer issues when Support Representatives and Sales Team Members lack insight into previous engagements, especially when it makes customers feel like their past issues are being treated with indifference, poorly documented, or ignored.
 {{< image src="/img/1_95fnIkqFyxZMqk8BVULZ7A.png" title="Image" >}}

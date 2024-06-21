@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Customize (Each) PDF Generated in Your Salesforce Org (and More!)",
   "Slug": "customize-each-pdf-generated-in-your-salesforce-org-and-more",
   "description": "We’ve got an exciting how-to session set up for next week’s Mambo Merge Office Hours!.",
-  "tags": ["document-generation","salesforce-docgen","salesforce-document","mambo-merge","salesforce-app"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "document-generation",
+      "salesforce-docgen",
+      "salesforce-document",
+      "mambo-merge",
+      "salesforce-app",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_93QRIopmz1PmVmYkEF_qyA.png"
-  }
+  "thumbnail": { "url": "/img/1_93QRIopmz1PmVmYkEF_qyA.png" },
 }
 ---
+
 We’ve got an exciting how-to session set up for next week’s Mambo Merge Office Hours!
 With the Mambo Merge Spring ’24 Release live, it’s the perfect time for Mambo Merge users to brush up on their skills with a speedy demo of updated functionality at our upcoming installment of [Mambo Merge ‘Office Hours](https://cloud.news.mambomerge.app/officehours)’!
 In next week’s webinar, our expert presenter Cynthia will be showcasing some new features added to our upcoming release 2.3.0. These features will allow you to include watermarks to your generated documents that get converted to PDF through our Mambo Studio. You’ll have the ability to change the font, size, angle, and color of your watermark for each template used.

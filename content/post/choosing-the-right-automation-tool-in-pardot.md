@@ -7,21 +7,21 @@
   "date": "2021-11-05T22:15:26.000Z",
   "title": "Choosing the Right Automation Tool in Pardot",
   "Slug": "choosing-the-right-automation-tool-in-pardot",
-  "description": "Choosing the right tool for the task is the first step of any successful endeavor. But, with a platform as flexible and feature-rich as Pardot, where there are so many automation tools and multiple solutions to any one use-case, how can you be sure you choose correctly?.",
+  "description": "Choosing the right tool for the task is the first step of any successful endeavor.",
   "tags":
     ["pardot-admin", "pardot-automation", "pardot", "marketing", "salesforce"],
   "author":
     {
-      "name": Jessie Penaloza,
-      "title": Digital Marketing Coordinator,
-      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_eULMBm6Y4oheMKzZ9h1iVA.png" },
 }
 ---
 
-Choosing the right tool for the task is the first step of any successful endeavor. But, with a platform as flexible and feature-rich as Pardot, where there are so many automation tools and multiple solutions to any one use-case, how can you be sure you choose correctly?
+But, with a platform as flexible and feature-rich as Pardot, where there are so many automation tools and multiple solutions to any one use-case, how can you be sure you choose correctly?
 In today’s post, we’ll take a look at the various click-saving tools and techniques available in Pardot, and how you can determine which one’s the right fit for any individual scenario!
 A great place to start, and this is true with most Salesforce offerings, is Trailhead! The “[Choose the Right Automation Tool](https://trailhead.salesforce.com/en/content/learn/modules/pardot-process-automation/choose-the-right-automation-tool?trail_id=increase-engagement-and-nurture-leads-with-pardot&trailmix_creator_id=strailhead&trailmix_slug=get-started-with-pardot)” module visually explains the various tools and their applicability with a flowchart.
 {{< image src="/img/1_dEus_C06Vhg3Oz2ly0Jg_g.jpg" title="Image" >}}

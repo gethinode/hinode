@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2018-11-19T13:01:01.000Z",
+  "date": "2028-11-19T13:01:01.000Z",
   "title": "Salesforce Winter ’19 Highlights — Pardot in Lightning Experience",
   "Slug": "salesforce-winter-19-highlights-pardot-in-lightning-experience-needs-links-before-publishing",
   "description": "The days are getting shorter, pants are getting longer, and radiators all over the world are waking up from their Summer slumbers. The seasons are changing and that means one thing — a new Salesforce release is here!.",
@@ -12,9 +12,9 @@
     ["pardot", "marketing", "winter-19-release", "reporting", "salesforce"],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_Q_db1j_nu1ejcsEpaH_j4w.jpg" },

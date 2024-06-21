@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: Q",
   "Slug": "salesforce-how-to-abcs-q",
   "description": "How to query deleted records.",
-  "tags": ["salesforce-admin","salesforce-how-to-abcs","salesforce","soql","salesforce-how-to"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-admin",
+      "salesforce-how-to-abcs",
+      "salesforce",
+      "soql",
+      "salesforce-how-to",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_ngoFjBwBumy0QzD6j__3gA.png"
-  }
+  "thumbnail": { "url": "/img/1_ngoFjBwBumy0QzD6j__3gA.png" },
 }
 ---
+
 Community conferences like [Midwest](https://www.midwestdreamin.com/) and [Mile High](https://www.milehighdreamin.com/) are in full swing, Dreamforce is on the horizon and, with all the traveling to and fro, hither and yon, admins and devs everywhere might find themselves googling things they swear they “knew how to do, just last month” and that makes it the perfect time for the next installment of our [Salesforce “How to” ABCs](https://medium.com/creme-de-la-crm/salesforcehowtoabcs/home)! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help Trailblazers find the answers they’re looking for fast!
 Today’s letter is “Q” as in, “How to query deleted records”. Let’s dive in!
 Today&#39;s topic sees us diving into [SOQL](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm), Salesforce Object Query Language, used to read information stored in your org’s database. There are many use-cases for SOQL and it can help make our lives a bit easier, but it also may feel overwhelming and difficult to understand. Worry not as many resources available today can help simplify the ease of use to extract all sorts of information within a Salesforce org.
@@ -51,7 +58,6 @@ If you had not already noticed each time you changed a setting the query would b
 If we read this back it says to include the following fields (Account Number, Account Name, and Is The Record Deleted Flag) from all the Account records where the flag IsDeleted is set to true which means a record within the account object has been deleted.
 Pressing the <strong>Query</strong> button will output a list view. As you can see we had created three test accounts within the Accounts object and then deleted them to test and ensure the populated on the query results list view below.
 {{< image src="/img/1_nhrTzmba1l7fz67J_zQI7A.png" title="Image" >}}
-
 
 ## Using Anonymous Window
 

@@ -1,7 +1,7 @@
 ---
 {
   "priority": "0.5",
-  "date": "2019-06-27T09:42:06-07:00",
+  "date": "2029-06-27T09:42:06-07:00",
   "title": "Salesforce Open Source: Lightning Web Components",
   "Slug": "salesforce-open-source-lightning-web-components",
   "description": "Last year, Salesforce released Lightning Web Components — a new and improved programming model for building Lightning components and web apps. Now, they’re opening the code up to the community!",

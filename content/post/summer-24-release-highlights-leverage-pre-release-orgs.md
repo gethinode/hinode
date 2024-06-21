@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Summer ’24 Release Highlights: Leverage Pre-Release Orgs",
   "Slug": "summer-24-release-highlights-leverage-pre-release-orgs",
   "description": "As Salesforce Partners, Clients, and Users begin to receive more emails in their inboxes for the Summer ’24 Release — others get ahead of the game by leveraging stand-alone environments within each release..",
-  "tags": ["salesforce-admin","salesforce-summer-24","salesforce-release","summer-24-release","salesforce"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-admin",
+      "salesforce-summer-24",
+      "salesforce-release",
+      "summer-24-release",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_ePC_vbxxfrtEXx_IgYWBuw.png"
-  }
+  "thumbnail": { "url": "/img/1_ePC_vbxxfrtEXx_IgYWBuw.png" },
 }
 ---
+
 As Salesforce Partners, Clients, and Users begin to receive more emails in their inboxes for the Summer ’24 Release — others get ahead of the game by leveraging stand-alone environments within each release.
 Let’s Dive In!
 

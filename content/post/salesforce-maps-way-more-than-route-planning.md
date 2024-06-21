@@ -1,7 +1,7 @@
 ---
 {
   "priority": "0.5",
-  "date": "2019-10-22T15:16:51-07:00",
+  "date": "2029-10-22T15:16:51-07:00",
   "title": "Salesforce Maps Way More Than Route Planning",
   "Slug": "salesforce-maps-way-more-than-route-planning",
   "description": "When Salesforce acquired MapAnything 6 months ago, it picked up much more than a trip-planning tool. Built natively on the Salesforce Platform, MapAnything pioneered pairing advanced...",
@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/map-on-ipad.jpg" },
 }
 ---
-
-{{< image src="/img/map-on-ipad.jpg" title="Map on an iPad" >}}
 
 When Salesforce acquired [MapAnything](https://mapanything.com/) 6 months ago, it picked up much more than a trip-planning tool. Built natively on the Salesforce Platform, MapAnything pioneered pairing advanced, location-based information with already data-rich Salesforce orgs to produce even more intelligent, actionable info — and a variety of ROI-capturing applications!
 

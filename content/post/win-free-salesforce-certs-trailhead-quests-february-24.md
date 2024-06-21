@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,24 @@
   "title": "How to Get Free Salesforce Certifications: Trailhead Quests February ‘24",
   "Slug": "win-free-salesforce-certs-trailhead-quests-february-24",
   "description": "Valentine’s Day is behind us and TDX is on the horizon, but there’s still a week left to complete February’s Trailhead Quests for your chance to win free Salesforce Certification Vouchers (and more)!.",
-  "tags": ["salesforce-certs","salesforce-trailblazer","salesforce-trailhead","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-certs",
+      "salesforce-trailblazer",
+      "salesforce-trailhead",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_UTYbGoSj1sVJ_7l7EWya2g.png"
-  }
+  "thumbnail": { "url": "/img/1_UTYbGoSj1sVJ_7l7EWya2g.png" },
 }
 ---
+
 Valentine’s Day is behind us and TDX is on the horizon, but there’s still a week left to complete February’s Trailhead Quests for your chance to win free Salesforce Certification Vouchers (and more)!
 Let’s take a look at February’s chances to win!
 

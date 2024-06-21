@@ -2,7 +2,7 @@
 {
   "priority": "0.5",
   "haveTwitter": true,
-  "date": "2019-08-22T08:15:34-07:00",
+  "date": "2039-08-22T08:15:34-07:00",
   "title": "Awesome SFDX Plugins: the Repo",
   "Slug": "awesome-sfdx-plugins-the-repo",
   "description": "Developing for Salesforce is a key part of the platform’s powerful flexibility. On top of robust out-of-the-box functionality and seemingly-limitless configuration options...",
@@ -12,14 +12,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/macbook-vscode.jpg" },
 }
 ---
-
-{{< image src="/img/macbook-vscode.jpg" title="Macbook with VS Code open" >}}
 
 Developing for [Salesforce](https://www.salesforce.com/products/) is a key part of the platform’s powerful flexibility. On top of robust out-of-the-box functionality and seemingly-limitless configuration options, coding your own solutions to unique business-needs is what really elevates Salesforce above its competitors and makes it the most successful CRM in the world.
 

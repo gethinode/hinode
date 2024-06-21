@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-04-24T12:01:01.000Z",
+  "date": "2029-04-24T12:01:01.000Z",
   "title": "Salesforce FAQs: How to Install Data Loader",
   "Slug": "salesforce-faqs-how-to-install-data-loader",
   "description": "Last week I began writing another installment of our Salesforce “How to” ABCs, this time on exporting data, when I realized I hadn’t yet installed Data Loader on my new computer.",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_YrtPx5UH7u9GbPQvrzbwWQ.jpg" },

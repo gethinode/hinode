@@ -17,9 +17,9 @@
     ],
   "author":
     {
-      "name": Jessie Penaloza,
-      "title": Digital Marketing Coordinator,
-      "jpeg": /img/contributors/jesus-penaloza_88-88.jpg,
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_i-J8YbwFLolIk44c2II3hw.png" },

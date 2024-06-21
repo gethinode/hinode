@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,21 +8,22 @@
   "title": "Score Free Salesforce Certs (and a Free Dreamforce Ticket)!",
   "Slug": "score-free-salesforce-certs-and-a-free-dreamforce-ticket",
   "description": "Don’t miss your chance to complete May’s Trailhead Quests.",
-  "tags": ["dreamforce","salesforce","salesforce-training","free","trailhead"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    ["dreamforce", "salesforce", "salesforce-training", "free", "trailhead"],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_m5tkzOE8jMeXNqFYg_trrg.png"
-  }
+  "thumbnail": { "url": "/img/1_m5tkzOE8jMeXNqFYg_trrg.png" },
 }
 ---
-We’re smack dab in the middle of May, so it’s the perfect time* to hop on [Trailhead ](https://trailhead.salesforce.com/quests)and complete some [Quests ](https://trailhead.salesforce.com/quests)for a chance to win some free Salesforce Cert Vouchers, a Dreamforce 24 pass, and more!
+
+We’re smack dab in the middle of May, so it’s the perfect time\* to hop on [Trailhead ](https://trailhead.salesforce.com/quests)and complete some [Quests ](https://trailhead.salesforce.com/quests)for a chance to win some free Salesforce Cert Vouchers, a Dreamforce 24 pass, and more!
 This month <strong>Salesforce is giving away 220 Certification vouchers</strong> so there’s a huge opportunity to expand your professional skillset this month!
-***It’s the perfect time because all the quests are officially live and you still have 2 weeks to get as many done as you want.**
+**\*It’s the perfect time because all the quests are officially live and you still have 2 weeks to get as many done as you want.**
 Let’s take a look at some of your chances to win!
 
 ## Score a Dreamforce Pass (or a t-shirt) with #BuiltWithEinstein Quest

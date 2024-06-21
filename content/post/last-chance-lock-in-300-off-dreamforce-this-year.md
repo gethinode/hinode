@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Last Chance: Lock in $300+ Off Dreamforce This Year",
   "Slug": "last-chance-lock-in-300-off-dreamforce-this-year",
   "description": "Tomorrow’s the day that Dreamforce ’24 ticket sales kick off — but if you act fast (like, in the next 8 hours fast), you can lock in what Salesforce is calling “best Dreamforce deal, ever”!.",
-  "tags": ["salesforce-event","salesforce-dreamforce","salesforce","dreamforce","df24"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "salesforce-dreamforce",
+      "salesforce",
+      "dreamforce",
+      "df24",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_dxLs79BFMYP0i2kqAfpf4w.png"
-  }
+  "thumbnail": { "url": "/img/1_dxLs79BFMYP0i2kqAfpf4w.png" },
 }
 ---
+
 Tomorrow’s the day that Dreamforce ’24 ticket sales kick off — but if you [act fast](https://www.salesforce.com/form/dreamforce/df24-save-the-date/) (like, in the next 8 hours fast), you can lock in what Salesforce is calling “best Dreamforce deal, ever”!
 {{< image src="/img/1_r38EuWIBjR3KMEx9jiRx4Q.png" title="Image" >}}
 

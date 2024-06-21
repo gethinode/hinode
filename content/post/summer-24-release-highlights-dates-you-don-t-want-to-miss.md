@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,28 +8,34 @@
   "title": "Summer ’24 Release Highlights: Dates You Don’t Want to Miss!",
   "Slug": "summer-24-release-highlights-dates-you-don-t-want-to-miss",
   "description": "Depending on where you are, the weather may not be showing it, but we’re well on the way to the Salesforce Summer ’24 Release!.",
-  "tags": ["summer-24-release","release-highlights","salesforce-release","salesforce-summer-24","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "summer-24-release",
+      "release-highlights",
+      "salesforce-release",
+      "salesforce-summer-24",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_qO_Wfwmkj1A35k1QyOxFMA.png"
-  }
+  "thumbnail": { "url": "/img/1_qO_Wfwmkj1A35k1QyOxFMA.png" },
 }
 ---
+
 Depending on where you are, the weather may not be showing it, but we’re well on the way to the Salesforce Summer ’24 Release!
 As always, we’ll be peppering the countdown to “go live” with another round of our [Release Highlights](https://medium.com/tag/release-highlights) — collecting and collating the important dates and deadlines, perusing the release notes to gather the most exciting and important updates headed to orgs everywhere, and ensuring that you and your team can hit the ground running once Summer ’24 launches!
 And now we know the dates admins and devs will want to keep their eyes on as we get closer to release day.
 Let’s dive in!
 {{< image src="/img/1_v18w4PNUAgIi2chFdbzwaA.png" title="Image" >}}
 
-
 ## Pre-Release Org Sign-Up — April 18
 
-Ina couple weeks, admins will be able to sign up for a [pre-release environment](https://www.salesforce.com/form/signup/prerelease-summer23/?_ga=2.55265259.1341205535.1681922652-1161755802.1667412373&amp;_gl=1*1f139ea*_ga*MTE2MTc1NTgwMi4xNjY3NDEyMzcz*_ga_EE9XB9ZV8F*MTY4MjExMTg3NC4xMC4wLjE2ODIxMTE4NzQuMC4wLjA.), which is full of all the Summer ’24 features, free to explore to your heart’s content! And, if you have a previous instance of a pre-release org from the Spring ’24 release, you can save yourself the signup and [simply log back into that org](https://gs0.salesforce.com/?_ga=2.164653311.1341205535.1681922652-1161755802.1667412373) once the orgs go live! (Don’t worry, we won’t judge you for having to reset your password).
+Ina couple weeks, admins will be able to sign up for a [pre-release environment](https://www.salesforce.com/form/signup/prerelease-summer23/?_ga=2.55265259.1341205535.1681922652-1161755802.1667412373&_gl=1*1f139ea*_ga*MTE2MTc1NTgwMi4xNjY3NDEyMzcz*_ga_EE9XB9ZV8F*MTY4MjExMTg3NC4xMC4wLjE2ODIxMTE4NzQuMC4wLjA.), which is full of all the Summer ’24 features, free to explore to your heart’s content! And, if you have a previous instance of a pre-release org from the Spring ’24 release, you can save yourself the signup and [simply log back into that org](https://gs0.salesforce.com/?_ga=2.164653311.1341205535.1681922652-1161755802.1667412373) once the orgs go live! (Don’t worry, we won’t judge you for having to reset your password).
 
 ## Release Notes Go Live — April 24
 

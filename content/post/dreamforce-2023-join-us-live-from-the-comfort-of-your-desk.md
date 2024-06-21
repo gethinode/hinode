@@ -12,9 +12,9 @@
     ["dreamforce", "dreamforce-2023", "salesforce-event", "salesforce", "df23"],
   "author":
     {
-      "name": Jessie Penaloza,
-      "title": Digital Marketing Coordinator,
-      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_J6RxfRvCRuN1JdKa_WBkaA.png" },

@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-10-04T16:59:07.000Z",
+  "date": "2029-10-04T16:59:07.000Z",
   "title": "Winter ’20 Release Highlights: Lightning is Going Live, Permanently",
   "Slug": "winter-20-release-highlights-lightning-is-going-live-permanently",
   "description": "It’s officially spooky season! October is here, and with it, piles of pumpkins are popping up in the produce aisle...",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_D4lAZiI2FKbaVWkBoTD5lg.jpg" },

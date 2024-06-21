@@ -11,9 +11,9 @@
   "tags": ["salesforce-contest", "contests", "salesforce", "giveaway"],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/0_l9LXQZ95G0V3fdk6.jpg" },

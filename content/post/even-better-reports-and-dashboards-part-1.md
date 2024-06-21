@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-03-20T12:01:03.000Z",
+  "date": "2029-03-20T12:01:03.000Z",
   "title": "Even Better Reports and Dashboards — Part 1",
   "Slug": "even-better-reports-and-dashboards-part-1",
   "description": "Reports and Dashboards are two of the most celebrated features of Salesforce, and rightly so. They contextualize the chaotic. They organize, illuminate, and illustrate insights into our operations on a daily, quarterly, yearly scale. Refining the ever-increasing supply of data into digestible, actionable intelligence is a necessity for 21st century orgs, and so improvements to Salesforce’s reporting capabilities are a boon to businesses everywhere..",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_vBiHdWKgeqype_LmDbm_NA.jpg" },

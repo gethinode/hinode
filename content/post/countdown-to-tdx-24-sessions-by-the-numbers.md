@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Countdown to TDX ‘24— Sessions by the Numbers",
   "Slug": "countdown-to-tdx-24-sessions-by-the-numbers",
   "description": "As we clear the 2-week countdown for TrailblazerDX many look for all the resources available to get more insights and share knowledge between each other and the Trailblazer community. As Salesforce continues to release more and more information before their event look for us to help digest the details with some helpful visuals to make sense of it all..",
-  "tags": ["tdx24","salesforce-tdx","salesforce","salesforce-tdx-24","salesforce-event"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "tdx24",
+      "salesforce-tdx",
+      "salesforce",
+      "salesforce-tdx-24",
+      "salesforce-event",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_VgNJUzwfi6d8Go3Qs0D9Lg.png"
-  }
+  "thumbnail": { "url": "/img/1_VgNJUzwfi6d8Go3Qs0D9Lg.png" },
 }
 ---
+
 As we clear the 2-week countdown for [TrailblazerDX](https://go.mkp.dev/TDXPromo) many look for all the resources available to get more insights and share knowledge between each other and the Trailblazer community. As Salesforce continues to release more and more information before their event look for us to help digest the details with some helpful visuals to make sense of it all.
 Share with us what you like in the comments below. Without further ado, let’s dive in.
 Each TrailblazerDX resources like [Salesforce Admins](https://admin.salesforce.com/blog/2023/the-trailblazerdx-2024-call-for-participation-is-now-open) provide a breakdown of the benefits of presenting a session, steps to submit sessions, the different session types, topics of interest to consider, and much more. This year thousands of sessions were submitted but only hundreds were selected and refined to be included.
@@ -35,9 +42,8 @@ We shift to the <strong>Breakout</strong> (30–40 min) sessions next which span
 {{< image src="/img/1_ZxF6QN0_Qwelrt7ilJ4JsQ.png" title="Image" >}}
 
 The rest of the sessions which cover the last third of the catalog consist of <strong>Campfires</strong>, <strong>Roundtables</strong>, and <strong>Hands-on Workshops</strong>. These type of sessions are tailored for small group discussions, community leaders, and hands-on training. Many will appreciate them so check your calendar and slot in a few.
-Save the best for last we say, and that we do. The [Keynotes](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.162352380.1542455395.1708397860-1675937078.1707170307&amp;_gac=1.188007258.1708047977.CjwKCAiAibeuBhAAEiwAiXBoJORYB8CXJfB7nLtkMt8e_3FtXzY7PDa1DyjAloM7DoN4qkAppOzD3BoC3PkQAvD_BwE&amp;tab.day=20240306&amp;search.sessiontypebraidlearnmorehrefhttpswwwsalesforcecomtrailblazerdxfaqlearnmoretargetblanklearnmorea=sessionType_keynote), are the creme of the crop and the reason why many look to hear from Industry Leaders who shape the Salesforce world. This year these sessions will be taking place on the first day. You will want to slot these into your agenda and make sure to tune in. Everyone from around the world will be watching.
+Save the best for last we say, and that we do. The [Keynotes](https://reg.salesforce.com/flow/plus/tdx24/sessioncatalog/page/Catalog?_ga=2.162352380.1542455395.1708397860-1675937078.1707170307&_gac=1.188007258.1708047977.CjwKCAiAibeuBhAAEiwAiXBoJORYB8CXJfB7nLtkMt8e_3FtXzY7PDa1DyjAloM7DoN4qkAppOzD3BoC3PkQAvD_BwE&tab.day=20240306&search.sessiontypebraidlearnmorehrefhttpswwwsalesforcecomtrailblazerdxfaqlearnmoretargetblanklearnmorea=sessionType_keynote), are the creme of the crop and the reason why many look to hear from Industry Leaders who shape the Salesforce world. This year these sessions will be taking place on the first day. You will want to slot these into your agenda and make sure to tune in. Everyone from around the world will be watching.
 {{< image src="/img/1_jnb8o8t_H8_N4fZU4yvtFA.png" title="Image" >}}
-
 
 ## Session Levels
 
@@ -58,7 +64,6 @@ As a first-timer or ongoing attendee keep in mind that everyone is helpful and w
 Every Salesforce event has a livestream component that runs simultaneously alongside the days of the event. So, if you cannot attend in person, log into [Salesforce+](https://www.salesforce.com/plus), and stream for FREE! Of course, not all sessions will be able to stream but the Keynotes for sure along with some selected sessions.
 Make sure to check the agenda and see if the <strong>Available on Salesforce+</strong> is marked. If yes, then you can watch it (once it gets published). While keynotes are livestreamed in real-time the rest of the sessions may not. Check the site, once you have selected your sessions, to see if they will be streamed in real time. If not, check back in a day or two and they should be up.
 {{< image src="/img/1_Ym3_tbLT_hpqv_pK6q4zQg.png" title="Image" >}}
-
 
 ## In Closing
 

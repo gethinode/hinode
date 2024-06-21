@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "The Way the Cookie Crumbles: the Elimination of Third Party Cookies",
   "Slug": "the-way-the-cookie-crumbles-the-elimination-of-third-party-cookies",
   "description": "Managing the Transition and Maintaining Personalized Marketing Experiences.",
-  "tags": ["pardot","cookies","salesforce-marketing","marketing-cloud","salesforce"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "pardot",
+      "cookies",
+      "salesforce-marketing",
+      "marketing-cloud",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_iVdA0chCm7NIugqSXWzy6g.png"
-  }
+  "thumbnail": { "url": "/img/1_iVdA0chCm7NIugqSXWzy6g.png" },
 }
 ---
+
 In recent years, several policies and regulations have been implemented to ensure that identities are secured and consent is obtained before personal data can be used for online advertising. While third-party cookies violated these basic principles time and time again, new initiatives (and subsequently, new tools) are opening the opportunity for a cookieless online environment that ultimately provides a more personalized digital experience, without the privacy issues.
 As we get one quarter closer to the end of cookies (remember, firms like Google are preparing to completely block third-party cookies forever), we hope to provide a refresher on the actions required to ease tension and prepare your brand for the transition.
 
@@ -34,5 +41,6 @@ Tools such as first-party cookies allow websites to offer personalized user expe
 ## How to Prepare
 
 <strong>Make a list of actions and bring the right people into the discussion.</strong>
+
 <ul><li>Identify all third-party cookies currently being used on your website.</li><li>Prioritize which cookies are essential for your website to function and which need to be removed or adjusted.</li><li>Evaluate alternative tracking methods like first-party and identity-based marketing.</li><li>Implement alternative tracking methods like contextual advertising to best suit your business needs.</li><li>Update your website’s privacy policy to reflect the changes in both tracking and data collection practices.</li><li>Communicate the changes to your users through various channels such as website, email, social, chat, and more.</li><li>Provide users with an opt-in or opt-out option to secure their data privacy preferences.</li><li>Monitor the website user experience and performance to identify improvement opportunities.</li><li>Optimize practices to improve user engagement.</li><li>Stay up-to-date with the latest privacy regulations and best practices to ensure compliance and reduce potential risks.</li></ul>There are many resources available online that go into more detail for each of the to-do items on the list above. Of course, if you still need a hand getting started, would like a second set of eyes on your existing site setup, or are curious how the cookie regs may impact your Marketing Cloud or Pardot efforts, [drop us a line](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE)! We’re always happy to help.
 As always, will see you in the cloud.

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Summer ’24 Release Highlights: Record Pages Get a Glow Up",
   "Slug": "summer-24-release-highlights-record-pages-get-a-glow-up",
   "description": "As we continue our countdown to the Salesforce Summer ’24 Release, we’re back with another round of Release Highlights!",
-  "tags": ["salesforce-summer-24","salesforce-admin","summer-24-release","salesforce","salesforce-release"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-summer-24",
+      "salesforce-admin",
+      "summer-24-release",
+      "salesforce",
+      "salesforce-release",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_glPGSj_jnqTlFjAb4wrMVQ.png"
-  }
+  "thumbnail": { "url": "/img/1_glPGSj_jnqTlFjAb4wrMVQ.png" },
 }
 ---
+
 As we continue our [countdown to the Salesforce Summer ’24 Release](https://cremedelacrm.com/post/summer-24-release-highlights-dates-you-don-t-want-to-miss/), we’re back with another round of [Release Highlights](https://cremedelacrm.com/)! The series where we pore through the pages and pages of release notes and present our picks for the most exciting, innovative, and org-influential updates, upgrades, and features headed our way (and yours) when the release goes live in late-May/early-June.
 Today we’re taking a look at a couple improvements that are sure to appeal to the more aesthetically inclined. Changes that will decrease visual clutter, improve readability, at-a-glance clarity, and, most importantly, accessibility!
 Let’s dive in!
@@ -27,7 +34,7 @@ Let’s dive in!
 ## Blank Spaces (for field alignment)
 
 Since Taylor Swift’s moved on to TTPD, Salesforce can now try their hand as ‘Blank Space’ providers without fear of copyright strikes from the music industry’s mainstay. But unlike Taylor’s **Blank Space**, Salesforce’s isn’t for writing names, but instead for spacing out fields for better alignment and visual clarity on record pages — specifically pages with Dynamic Forms enabled.
-Admins will now be able to customize field alignment in Dynamic Form field sections with the [new Blank Space component](https://help.salesforce.com/s/articleView?id=release-notes.rn_lab_df_blank_space.htm&amp;release=250&amp;type=5). It’ll provide the option to both:
+Admins will now be able to customize field alignment in Dynamic Form field sections with the [new Blank Space component](https://help.salesforce.com/s/articleView?id=release-notes.rn_lab_df_blank_space.htm&release=250&type=5). It’ll provide the option to both:
 Separate fields vertically inside a field section, by providing a blank space with a row height of 1 (left image) or…
 {{< image src="/img/1_Mrk6K0QYKyq6Qg9wF1MVDg.png" title="Image" >}}
 

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Snag $25 Off Tahoe Dreamin’ Registration!",
   "Slug": "snag-25-off-tahoe-dreamin-registration",
   "description": "Tahoe Dreamin’ is definitely one of the most beautiful locations for a Salesforce community conference..",
-  "tags": ["salesforce-event","tahoe-dreamin","salesforce","td24","tahoe-dreamin-24"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "tahoe-dreamin",
+      "salesforce",
+      "td24",
+      "tahoe-dreamin-24",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_hqvzyBpRRkssF4Kgqd2qkw.png"
-  }
+  "thumbnail": { "url": "/img/1_hqvzyBpRRkssF4Kgqd2qkw.png" },
 }
 ---
+
 [Tahoe Dreamin](https://tahoedreamin.com/)’ is definitely one of the most beautiful locations for a Salesforce community conference, nestled in the Sierra Nevada mountains overlooking California and Nevada’s shared lake — but this year it’s got a new admirer: your wallet! Or your company’s.
 In fact, this may be the most affordable year for TD yet! Conference passes are already priced at a super reasonable $199 and, we’re super excited to announce, you can save an extra $25 with the promo code<strong> cremedelacrm25</strong> !
 That knocks full [registration ](https://tahoedreamin.com/register/)down to $175 for full conference access and, with hotels still as low as $69/night, it may be the best chance (and excuse) to get up to Tahoe Dreamin for a while!

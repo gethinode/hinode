@@ -1,7 +1,7 @@
 ---
 {
   "priority": "0.5",
-  "date": "2019-09-11T16:12:35-07:00",
+  "date": "2029-09-11T16:12:35-07:00",
   "title": "Winter '20 Release Highlights: Recycle Bin in Lightning",
   "Slug": "winter-20-release-highlights-recycle-bin-in-lightning",
   "description": "It’s September again and that means school’s getting back in session, we have less than a month before it’s time to wake up Greenday, and there’s a brand new Salesforce Release on the way...",

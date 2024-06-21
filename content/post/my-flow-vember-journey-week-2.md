@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "My Flow-vember Journey — Week 2",
   "Slug": "my-flow-vember-journey-week-2",
   "description": "As I mentioned last week, learning to “Flow” is not a race so, if you get overwhelmed with info and ideas, take a rest, recupe’, and try again when you’re feeling ready! You can always go back and read the material again, or ask a question on the Trailhead forums too. You’ll be automating tasks in your Salesforce org in no time!.",
-  "tags": ["salesforce-automation","salesforce-flow","salesforce","flow-vember","salesforce-admin"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-automation",
+      "salesforce-flow",
+      "salesforce",
+      "flow-vember",
+      "salesforce-admin",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_YbNQe_OVC23t3vUnjO3Lxw.png"
-  }
+  "thumbnail": { "url": "/img/1_YbNQe_OVC23t3vUnjO3Lxw.png" },
 }
 ---
+
 As I mentioned last week, learning to “Flow” is not a race so, if you get overwhelmed with info and ideas, take a rest, recupe’, and try again when you’re feeling ready! You can always go back and read the material again, or ask a question on the Trailhead forums too. You’ll be automating tasks in your Salesforce org in no time!
 In this installment of My Flow-vember Journey, we continue our experience as we traverse through even more Modules and Trails. Remember, you can follow along using the [Flow-vember Trailmix](https://trailhead.salesforce.com/users/cstegall/trailmixes/flow-vember).
 

@@ -11,9 +11,9 @@
   "tags": ["cloud", "silicon-valley", "tech", "software", "salesforce"],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_PaGrkA9bNfEsV8AO9JO3OQ.png" },

@@ -7,7 +7,7 @@
   "date": "2024-02-23T22:30:09.000Z",
   "title": "Celebrating Excellence: Announcing the Salesforce MVP Class of 2024!",
   "Slug": "celebrating-excellence-announcing-the-salesforce-mvp-class-of-2024",
-  "description": "Salesforce MVPs are Trailblazers that defy metaphor in their contributions to, and their place within, the Salesforce community. They’ve been called guides, beacons, mentors, tentpoles, cheerleaders, community leaders, and more — but nothing quite captures the breadth and depth of their unique expertise, passion, dedication, and contributions to the Salesforce community at large..",
+  "description": "Salesforce MVPs are Trailblazers that defy metaphor in their contributions to, and their place within, the Salesforce community.",
   "tags":
     [
       "salesforce-mvp",
@@ -17,16 +17,16 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_cZT4H9carB3vHbQkGXlR_Q.jpg" },
 }
 ---
 
-Salesforce MVPs are Trailblazers that defy metaphor in their contributions to, and their place within, the Salesforce community. They’ve been called guides, beacons, mentors, tentpoles, cheerleaders, community leaders, and more — but nothing quite captures the breadth and depth of their unique expertise, passion, dedication, and contributions to the Salesforce community at large.
+They’ve been called guides, beacons, mentors, tentpoles, cheerleaders, community leaders, and more — but nothing quite captures the breadth and depth of their unique expertise, passion, dedication, and contributions to the Salesforce community at large.
 These Trailblazers inspire, educate, and empower others, driving positive change and elevating the community to new heights. And now, it’s time to celebrate their extraordinary contributions as we proudly announce the 2024 class of Salesforce MVPs!
 {{< image src="/img/1_ryQ6RC2dEZd6IntIMZ1uOA.png" title="Image" >}}
 

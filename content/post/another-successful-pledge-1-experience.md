@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Another Successful Pledge 1% Experience",
   "Slug": "another-successful-pledge-1-experience",
   "description": "Salesforce Healthcare and Life Sciences Team and MK Partners volunteer at Second Harvest Food Bank.",
-  "tags": ["salesforce-volunteer","pledge-1","salesforce-admin","salesforce","salesforce-partners"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-volunteer",
+      "pledge-1",
+      "salesforce-admin",
+      "salesforce",
+      "salesforce-partners",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_A1ucS0788rDv_5iJqqULJA.png"
-  }
+  "thumbnail": { "url": "/img/1_A1ucS0788rDv_5iJqqULJA.png" },
 }
 ---
+
 This week we had the opportunity to volunteer with the Salesforce Healthcare and Life Sciences Team in Irvine and, with our combined forces, support the local community in Orange County!
 [Second Harvest Food Bank](https://feedoc.org/) strives to provide access to delicious and nutritious fruits and vegetables to provide healthy foods for Orange County families and the community. They work hard and dedicate their resources, from all teams, to ensure everything is possible and provide nutritious food to those who need it most.
 We had the opportunity to work alongside one of their harvesting teams and pick some delicious butternut squash. These vegetables are rich in nutrients, antioxidants and support immune health to maintain better skin, eyes, and digestion.

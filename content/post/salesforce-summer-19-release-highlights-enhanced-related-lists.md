@@ -2,7 +2,7 @@
 {
   "priority": "0.5",
   "haveYoutube": true,
-  "date": "2019-05-20T11:27:25-07:00",
+  "date": "2029-05-20T11:27:25-07:00",
   "title": "Salesforce Summer ’19 Release Highlights: Enhanced Related Lists!",
   "Slug": "salesforce-summer-19-release-highlights-enhanced-related-lists",
   "description": "For the first time in 8 years, Game of Thrones fans and non-fans can finally agree that Winter is over. The sun is shining, thermometers are climbing, and a brand new Salesforce Release...",
@@ -15,11 +15,9 @@
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
-  "thumbnail": { "url": "/img/woman-outside-flowers-macbook.webp" },
+  "thumbnail": { "url": "/img/1_SLaK5r3_oBmTl7NW-uY6wQ.jpg" },
 }
 ---
-
-{{< image src="/img/woman-outside-flowers-macbook.webp" title="Sitting outside with flowers on Salesforce" >}}
 
 For the first time in 8 years, Game of Thrones fans and non-fans can finally agree that Winter is over. The sun is shining, thermometers are climbing, and a brand new [Salesforce Release](https://releasenotes.docs.salesforce.com/en-us/summer19/release-notes/salesforce_release_notes.htm) is only a couple more weeks away — it’s nearly Summer ’19!
 

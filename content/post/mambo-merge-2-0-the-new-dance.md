@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Mambo Merge 2.0 — The New Dance",
   "Slug": "mambo-merge-2-0-the-new-dance",
   "description": "Winter ’24 release notes are soon coming to a help-dot-Salesforce near you and, with them, a chance to re-calibrate some of those essential skills and leverage new functionality launched in the release. While AI is paving the way for faster and simpler automation for existing tasks, one must still harness the fundamentals in order to stay ahead of the curve..",
-  "tags": ["salesforce","salesforce-app","appexchange","mambo-merge","salesforce-doc-gen"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-app",
+      "appexchange",
+      "mambo-merge",
+      "salesforce-doc-gen",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_IHBu4sZC994Fjs3r7FiYGQ.png"
-  }
+  "thumbnail": { "url": "/img/1_IHBu4sZC994Fjs3r7FiYGQ.png" },
 }
 ---
+
 Winter ’24 release notes are soon coming to a help-dot-Salesforce near you and, with them, a chance to re-calibrate some of those essential skills and leverage new functionality launched in the release. While AI is paving the way for faster and simpler automation for existing tasks, one must still harness the fundamentals in order to stay ahead of the curve.
 And speaking of realeases, with the rollout of Mambo Merge version 2.0, existing users will appreciate the enhancements of the app’s fundamentals along with some much-needed Mambo-inspired labels. If you are in need of an App that helps simplify document generation within Salesforce, look no further. This is the product that keeps on giving by seamlessly integrating the features you need while being 100% native to your org.
 Check out what the fuss is all about and get a glimpse at some of the enhancements and fixes that come bundled upon installation — Download it today, within the [AppExchange](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000GCzIXUA1).
@@ -62,4 +69,3 @@ Coming to a close we have some improvements within our saved Routines which allo
 
 Check out the [Mambo Merge](https://www.mambomerge.com/) website for all the new features and enhancements released on each new installment. I hope you are as excited as we are and look forward to connecting with more trailblazers to showcase our famous and popular #MamboMergePose! Our favorite way to connect and illustrate that the people at Mambo Merge are friendly, helpful, and energized to tackle the challenges presented by our customers and potential clients. Until next time, put your dancing shoes on, and we’ll see you in the cloud.
 {{< image src="/img/1_Mf0z7UBoKWvtmguVBs7Bmw.png" title="Image" >}}
-

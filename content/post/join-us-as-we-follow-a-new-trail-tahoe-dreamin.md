@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,18 @@
   "title": "Join Us As We Follow A New Trail — Tahoe Dreamin’",
   "Slug": "join-us-as-we-follow-a-new-trail-tahoe-dreamin",
   "description": "Our Trailblazer journey continues as we head over to the beautiful resort city of South Lake Tahoe, CA. Here will join other amazing Trailblazers in a relaxing and fun environment. With this being their fifth Community Conference they are happy and proud to be able host and operate this event by people in the Salesforce Community, for the Salesforce Community..",
-  "tags": ["salesforce","mambo-merge","networking","events","tahoe"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags": ["salesforce", "mambo-merge", "networking", "events", "tahoe"],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_PdtjAxNtOEgO_yS2Ns0zFw.png"
-  }
+  "thumbnail": { "url": "/img/1_PdtjAxNtOEgO_yS2Ns0zFw.png" },
 }
 ---
+
 Our Trailblazer journey continues as we head over to the beautiful resort city of South Lake Tahoe, CA. Here will join other amazing Trailblazers in a relaxing and fun environment. With this being their fifth Community Conference they are happy and proud to be able host and operate this event by people in the Salesforce Community, for the Salesforce Community.
 Taking place at the Harrah’s Convention Center, [Tahoe Dreamin’](https://tahoedreamin.com/) will run from August 4th through the 5th. This in-person event is geared around Salesforce learning, building relationships, and having fun. Connect with other Trailblazers, Admins, Developers, Architects, and Partners and engage with all of the sponsors who contribute to this event. You’ll want to make sure to pick up your badge at the registration desk along with any goodies they have in-store for attendees. Find out what breakout sessions you plan on adding to your calendar and be sure attend the keynote speakers. Lastly, don’t forget to check out the happy hour networking sessions each day!
 

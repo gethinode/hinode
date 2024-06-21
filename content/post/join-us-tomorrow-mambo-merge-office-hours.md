@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Join us Tomorrow —  Mambo Merge Office Hours!",
   "Slug": "join-us-tomorrow-mambo-merge-office-hours",
   "description": "The Spring ’24 Release Weekends are beginning and with them a new year to look forward to as we seek new experiences, challenges, and obstacles to “Blaze A New Trail”.",
-  "tags": ["mambo-merge","document-generation","salesforce","salesforce-doc-gen","salesforce-app"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "mambo-merge",
+      "document-generation",
+      "salesforce",
+      "salesforce-doc-gen",
+      "salesforce-app",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_a33ovX3U_rO6j3ghjP1KKQ.png"
-  }
+  "thumbnail": { "url": "/img/1_a33ovX3U_rO6j3ghjP1KKQ.png" },
 }
 ---
+
 The Spring ’24 Release Weekends are beginning and with them a new year to look forward to as we seek new experiences, challenges, and obstacles to “Blaze A New Trail”. Partners, Consultants, Admins, and Users all over the world will be spending this entire month learning, testing, and trying all the new Salesforce functionality that just dropped with this new release, it’s a perfect time for Mambo Merge users to brush up on their skills with our speedy demo of updated functionality, and submit all your questions to get the most pressing answers in tomorrow’s the next installment of [Mambo Merge ‘Office Hours](https://cloud.news.mambomerge.app/officehours)’!
 It’s a chance to get a quick beginner’s intro to the app, get some experience building templates of your own, help shape future development, and request the new features you’d like to see most!
 For those already using our App we “Thank You” and look forward to connecting with you once more this year. We have lots of new features and functionality available, so we encourage you to sit down, pour a cup of coffee or tea, and join us.

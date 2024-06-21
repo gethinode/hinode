@@ -12,9 +12,9 @@
     ["chatgpt", "ai", "artificial-intelligence", "ai-tools", "ai-business"],
   "author":
     {
-      "name": Jessie Penaloza,
-      "title": Digital Marketing Coordinator,
-      "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg,
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_ek9TCfC_blIGHhp6g7IZpw.png" },

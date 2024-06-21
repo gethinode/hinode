@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Build Your Salesforce Journey (and your Career) Using Trailhead",
   "Slug": "build-your-salesforce-journey-and-your-career-using-trailhead",
   "description": "Tap into the Trailhead hub and explore various learning options to open up new opportunities. All at your own pace..",
-  "tags": ["salesforce-admin","trailhead","salesforce","salesforce-careers","trailblazercommunity"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-admin",
+      "trailhead",
+      "salesforce",
+      "salesforce-careers",
+      "trailblazercommunity",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_6khGZbJ6p7RNzToFikKcwA.png"
-  }
+  "thumbnail": { "url": "/img/1_6khGZbJ6p7RNzToFikKcwA.png" },
 }
 ---
+
 As you begin to build your knowledge-base in the Salesforce ecosystem you realize that learning the platform does not depend on how quickly you pick things up or how many times you can recite what you just learned. It’s more about how well you can retain the information presented to you as well as how relevant it becomes to your every day tasks and efforts. In primary school, attention may have been awarded to students who completed their in-classroom assignments first but, while this approach did work well for those who caught on quickly, it did not ensure everyone would master the material. Teaching is all about identifying people’s learning capabilities and building lessons and activities around them effectively.
 Trailhead strives to do just that, and teach everyone what Salesforce is all about by applying practices provided by individuals just like you.
 

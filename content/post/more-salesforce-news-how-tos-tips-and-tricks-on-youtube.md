@@ -12,9 +12,9 @@
     ["videos", "salesforce-news", "youtube", "salesforce", "salesforce-videos"],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/0_mBL_s4p8tF5yf7YM.jpg" },

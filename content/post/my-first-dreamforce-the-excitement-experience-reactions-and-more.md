@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,19 @@
   "title": "My First Dreamforce — The Excitement, Experience, Reactions and More",
   "Slug": "my-first-dreamforce-the-excitement-experience-reactions-and-more",
   "description": "First-time experiences create reactions and emotions you would have never imagined. And, while everyone’s experience is unique, there are commonalities we all share. ",
-  "tags": ["salesforce","salesforce-event","df22","dreamforce-2022","dreamforce"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    ["salesforce", "salesforce-event", "df22", "dreamforce-2022", "dreamforce"],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_2BgW_NM0VmNlNEd4rwaqcQ.png"
-  }
+  "thumbnail": { "url": "/img/1_2BgW_NM0VmNlNEd4rwaqcQ.png" },
 }
 ---
+
 First-time experiences create reactions and emotions you would have never imagined. And, while everyone’s experience is unique, there are commonalities we all share. The same goes for [Dreamforce](https://www.salesforce.com/plus/experience/Dreamforce_2022), which is [Salesforce’s](https://www.salesforce.com/) annual event that brings together tens of thousands of trailblazers to San Francisco, CA — its headquarters. Once there, you’ll get to experience the biggest platform announcements along with thousands of sessions and curated keynote speakers for the all products and services that Salesforce has to offer. Broken down into three days (Sep 20th — 22nd) this year, it also marked the first time this event took place in “Full-Force” since the pandemic first began.
 While there are many offsite activities taking place at the same time during this event, it’s good to know that most of these do not require an event badge to attend. But, having your badge to access the main locations was key since they were being scanned every time you entered a facility. The main event took place in the following facilities: [Moscone Center](https://www.moscone.com/) (North, South and West), [Yerba Buena Center](https://ybca.org/) and the [Marriot Marquis](https://www.marriott.com/en-us/hotels/sfodt-san-francisco-marriott-marquis/overview/).
 Most events find ways to have attendees engage with staff and activities taking place each day. Dreamforce was no different and, based on your objective, you were able to participate in all sorts of activities to be rewarded after completing key tasks. Some required more engagement than others but each provided a chance to obtain some really cool swag. The trading post became the one-stop shop where people would be able to pick up their very first trailblazer hoodie and a company plushie of their choice. The tasks required you to participate in activities found all around the first floor in Moscone West building. I personally appreciated the hoodie for its lightweight, comfort and fit. For my plushie, I chose Cody since both of us will be rocking our hoodies.

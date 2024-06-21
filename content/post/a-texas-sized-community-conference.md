@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "A Texas-Sized Community Conference",
   "Slug": "a-texas-sized-community-conference",
   "description": "As community conferences (aka Dreamin’ events) ramp up this time of the year, you’ll probably notice more and more Salesforce snapshots in your social feeds that give a glimpse of what these events are all about...",
-  "tags": ["texas-dreamin","salesforce","salesforce-communities","salesforce-event","trailblazercommunity"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "texas-dreamin",
+      "salesforce",
+      "salesforce-communities",
+      "salesforce-event",
+      "trailblazercommunity",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_Uvj80Qifu6Ro53bChk4Aig.png"
-  }
+  "thumbnail": { "url": "/img/1_Uvj80Qifu6Ro53bChk4Aig.png" },
 }
 ---
+
 As community conferences (aka Dreamin’ events) ramp up this time of the year, you’ll probably notice more and more Salesforce snapshots in your social feeds that give a glimpse of what these events are all about. In just two weeks Salesforce admins, developers, architects, marketers, and more will head back to the [AT&amp;T Executive Conference Center](https://meetattexas.com/) once again for Texas Dreamin’!
 This year’s installment will bring Trailblazers back to Austin, TX, and kick off by hosting sponsors, speakers, and potential MVPs at a Speakers Reception between 6–8 pm on Wednesday, May 29th.
 Let’s Dive In.
@@ -29,12 +36,10 @@ Let’s Dive In.
 No matter the occasion, visiting a new city always calls for a quick check on the weather, so here’s what we’ve got in store for Austin, TX. A hot summer drive for those commuting from the local states but a nice “summer vibes” getaway for folks traveling from the Midwest or East. Either way, make sure to bring sunscreen, light comfortable clothes, and comfy shoes to keep you cool and focused.
 {{< image src="/img/1_uqgD37ibX_RtqRhCmaja0w.png" title="Image" >}}
 
-
 ## The Agenda
 
 After Wednesday’s activities, the [agenda](https://www.texasdreamin.org/agenda.html) goes into full effect on Thursday, May 30th. The opening Keynote starts at 9 am and from there the event sessions, extended sessions, breakouts, and ongoing activities take place. If you need to update your headshot for the next interview, LinkedIn profile, or passport renewal then make sure to swing by the Headshot photo locations available each day.
 {{< image src="/img/1_xnAUIbX5OarTwUDpkwboDw.png" title="Image" >}}
-
 
 ## Demo Jam
 

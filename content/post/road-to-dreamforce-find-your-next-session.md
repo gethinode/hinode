@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Road To Dreamforce: Find Your Next Session",
   "Slug": "road-to-dreamforce-find-your-next-session",
   "description": "With less than a week before showtime, it’s time to start sorting out our Dreamforce schedules!.",
-  "tags": ["salesforce","salesforce-admin","dreamforce","salesforce-event","salesforce-ai"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-admin",
+      "dreamforce",
+      "salesforce-event",
+      "salesforce-ai",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_j5n9byX_RdZZUnKiTLdmvw.png"
-  }
+  "thumbnail": { "url": "/img/1_j5n9byX_RdZZUnKiTLdmvw.png" },
 }
 ---
+
 With less than a week before showtime, it’s time to start sorting out our Dreamforce schedules!
 Thousands of sessions got submitted to the Dreamforce portal months prior to September, and most of them don’t make it past the first screening. Some get accepted, some get wait listed, and eventually, the winning picks are released by Role, Industry, Product, and Level!
 With over forty thousand attendees headed to San Francisco next week, and a huge assortment of sessions to sift through, here’s our handy guide for making sure you don’t miss “sesh”es most relevant to you!
@@ -30,7 +37,6 @@ Instead of scrolling the Sessions Catalog, Dreamforce offers these [Trail Maps](
 Check them out and take a look at what might interest you.
 {{< image src="/img/1__1EiwNE4_12F_bLh4MgjMQ.png" title="Image" >}}
 
-
 ## Use The Catalog, Find Your Sessions
 
 Every year thousands of sessions are included as part of the three-day event and this year the “AI theme” is in full force which consists of close to 600 sessions and counting. Anticipate attendees overflowing them, as everyone is interested on how AI will be implemented into every product of the Salesforce ecosystem. It’s the beginning of a new era and with it a chance to get ahead of this “game-changing” technology that is going to revolutionize the way humans utilize technology moving forward.
@@ -40,7 +46,6 @@ While everyone has a personal interest in attending Dreamforce every year, many 
 As with previous years, the filters along with the search box make it a great combination to refine and locate sessions that interest you the most. With over three days of coverage and so many activities happening over the various venues having a plan will be a lifesaver and allow you to better experience the event without stressing about spending too much time looking for sessions to attend.
 If you’ve been to Dreamforce then you’ll know that the streets, walkways, pavements, and even seating areas are going to make you feel like you are at Disneyland hoping from one line to the next. Plan ahead and identify when and where each of your sessions will be taking place.
 {{< image src="/img/1_ZRLzw3_Eht6He_n6L9NQ4Q.png" title="Image" >}}
-
 
 ## Some Helpful Tips
 

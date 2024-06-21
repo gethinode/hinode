@@ -2,7 +2,7 @@
 {
   "priority": "0.5",
   "haveTwitter": true,
-  "date": "2019-12-05T13:10:06-07:00",
+  "date": "2029-12-05T13:10:06-07:00",
   "title": "Four New Year Resolutions for You and Your Org",
   "Slug": "four-new-years-resolutions-for-you-and-your-org",
   "description": "With less than a month left in the decade, 2020 is not the distant future anymore, it is basically tomorrow. As always, this time of year is marked by reflection and resolution...",

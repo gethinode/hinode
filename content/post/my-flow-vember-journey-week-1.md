@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "My Flow-vember Journey — Week 1",
   "Slug": "my-flow-vember-journey-week-1",
   "description": "The ability to use technology to perform tasks with little to no human interaction is what automation is all about. More and more, each day, tasks that impact various aspects of our daily lives are being automated. From filtering those unwanted emails to using voice assistants to get us from point A to B. The ability to perform tasks “in the background” frees up time and resources to do more every day..",
-  "tags": ["salesforce","automation","flow-vember","salesforce-flow","salesforce-admin"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "automation",
+      "flow-vember",
+      "salesforce-flow",
+      "salesforce-admin",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_AVbWNeQcx8lruHWsqyLqwA.png"
-  }
+  "thumbnail": { "url": "/img/1_AVbWNeQcx8lruHWsqyLqwA.png" },
 }
 ---
+
 The ability to use technology to perform tasks with little to no human interaction is what automation is all about. More and more, each day, tasks that impact various aspects of our daily lives are being automated. From filtering those unwanted emails to using voice assistants to get us from point A to B. The ability to perform tasks “in the background” frees up time and resources to do more every day.
 In the Salesforce ecosystem, every moment an Admin or Dev can free up resources translates to additional time gained for their next task. By using Flows one can automate tasks, reduce user errors, and connect Salesforce to external 3rd party systems. Think of a Flow as a “virtual assistant” ready to, with the appropriate set of instructions, complete tasks within your Salesforce org.
 In this installment of My Flow-vember Journey, we’ll walk you down the experience of learning how to “flow” for the first time. Remember, you can follow along using the [Flow-vember Trailmix](https://trailhead.salesforce.com/users/cstegall/trailmixes/flow-vember).
@@ -32,7 +39,6 @@ First up are the basics or fundamentals, as I like to call them. These are your 
 Flow Builder is your friend and the tool you’ll need to generate and implement Flows within Salesforce. Based on the type of Flow you want to build you’ll need to configure it accordingly. You’ll always begin by defining the flow requirements such as the object, trigger conditions, and available actions. From there you can begin using the Flow Builder logic to define your Flow.
 {{< image src="/img/1_TCkBKKVf5oBY8lUM4A_OMA.png" title="Image" >}}
 
-
 ## Learn To “Flow”
 
 Three key components as you get started and will need to pick up on are Elements, Resources, and Variables. Elements are the building blocks that allow you to add interactions, data, and logic within a Flow. Resources are containers that help store all sorts of information and can be used within each Element. Variables are a specific type of Resource that allows you to store information and can only be changed within a Flow.
@@ -40,7 +46,6 @@ Three key components as you get started and will need to pick up on are Elements
 
 By using a combination of these three initial components you can begin developing Flows within each of the Hands-On Challenges to test what you’ve learned and get some hands-on experience. As more Elements and Resources get introduced you will begin to connect the dots and see how each Flow evolves.
 {{< image src="/img/1_XdF7Cq7LYDjRACZ5m06Eag.png" title="Image" >}}
-
 
 ## Takeaways So Far
 

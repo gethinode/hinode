@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: U",
   "Slug": "salesforce-how-to-abcs-u",
   "description": "How to Use Salesforce.",
-  "tags": ["salesforce","crm","salesforce-how-to-abcs","salesforce-admin","salesforce-crm"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "crm",
+      "salesforce-how-to-abcs",
+      "salesforce-admin",
+      "salesforce-crm",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_ujsvk_HuAQtkPlfgUXDqbg.png"
-  }
+  "thumbnail": { "url": "/img/1_ujsvk_HuAQtkPlfgUXDqbg.png" },
 }
 ---
+
 In 2024, there’s a good chance you’ve heard of Salesforce. And, if you’re here, I’m almost 100% certain you have. As the world’s leading CRM and the source of so many life-changing opportunities, a thriving community, and rich app-ecosystem — it’s a platform that thousands of new Trailblazers take to each day. But how do you get started and how do businesses actually “use” Salesforce. That’s likely why so many folks are Googling “Salesforce how to use”!
 {{< image src="/img/1_vNyd_W7BILQXhmHhJG2n5Q.png" title="Image" >}}
 
@@ -42,28 +49,24 @@ Salesforce is a CRM solution that helps you focus on your organization’s relat
 Let’s look at some of the uses of Salesforce and provide resources to those who wish to learn more about them.
 
 > <strong>Track A Prospect</strong>
-As a cloud-based CRM, Salesforce is designed to be a B2B software to help businesses track customer interactions and sales data. For businesses the ability to locate potential customers or clients who may be interested in your business. Within Salesforce, these individuals are called [](https://www.salesforce.com/resources/articles/what-is-sales-prospecting/). They have the means to purchase a product or service but have not yet engaged with a company on the sales process.
-To begin a potential customer’s lifecycle simply [track a prospect by creating a lead](https://trailhead.salesforce.com/content/learn/modules/prospect-tracking-with-salesforce-leads-quick-look/track-prospects-with-salesforce-leads). Head over to the Sales console to get started. Once created, you may begin to track the company or person with whom you wish to do business.
-{{< image src="/img/1_XRYcuZbl_rcRns9aGsCwpg.png" title="Image" >}}
-
+> As a cloud-based CRM, Salesforce is designed to be a B2B software to help businesses track customer interactions and sales data. For businesses the ability to locate potential customers or clients who may be interested in your business. Within Salesforce, these individuals are called [](https://www.salesforce.com/resources/articles/what-is-sales-prospecting/). They have the means to purchase a product or service but have not yet engaged with a company on the sales process.
+> To begin a potential customer’s lifecycle simply [track a prospect by creating a lead](https://trailhead.salesforce.com/content/learn/modules/prospect-tracking-with-salesforce-leads-quick-look/track-prospects-with-salesforce-leads). Head over to the Sales console to get started. Once created, you may begin to track the company or person with whom you wish to do business.
+> {{< image src="/img/1_XRYcuZbl_rcRns9aGsCwpg.png" title="Image" >}}
 
 > <strong>Track A Company</strong>
-At the same time, Salesforce uses [](https://help.salesforce.com/s/articleView?id=sf.accounts.htm&amp;type=5) as its name for businesses (and, in some cases, people). Accounts store information about a company while person Accounts store information about individual customers. Keeping you up to date on any updates or changes to each Account at all times.
-The ability to create new contacts, build new cases, create a history, combine data, and store information all in one central location. Allowing all essential departments to learn about their customers when it matters most.
-{{< image src="/img/1_IIotQ0S2XlOMKSkIg4wl7w.png" title="Image" >}}
-
+> At the same time, Salesforce uses [](https://help.salesforce.com/s/articleView?id=sf.accounts.htm&type=5) as its name for businesses (and, in some cases, people). Accounts store information about a company while person Accounts store information about individual customers. Keeping you up to date on any updates or changes to each Account at all times.
+> The ability to create new contacts, build new cases, create a history, combine data, and store information all in one central location. Allowing all essential departments to learn about their customers when it matters most.
+> {{< image src="/img/1_IIotQ0S2XlOMKSkIg4wl7w.png" title="Image" >}}
 
 > <strong>Add A Deal</strong>
-There comes a time when an Account or Contact (individual linked to an Account) has begun discussing a potential deal that is in the works. These potential future sales are called [](https://help.salesforce.com/s/articleView?id=sf.opportunities.htm&amp;type=5) within Salesforce. They are used to forecast potential sales and build a pipeline for your revenue sources.
-Quickly identify at which stage of the pipeline your Opportunities are to ensure each deal is closed and won.
-{{< image src="/img/1_7PGq9Pxtbt2wVJbVRG499g.png" title="Image" >}}
-
+> There comes a time when an Account or Contact (individual linked to an Account) has begun discussing a potential deal that is in the works. These potential future sales are called [](https://help.salesforce.com/s/articleView?id=sf.opportunities.htm&type=5) within Salesforce. They are used to forecast potential sales and build a pipeline for your revenue sources.
+> Quickly identify at which stage of the pipeline your Opportunities are to ensure each deal is closed and won.
+> {{< image src="/img/1_7PGq9Pxtbt2wVJbVRG499g.png" title="Image" >}}
 
 > <strong>Create Reports and Dashboards</strong>
-Now that you have established Leads, Accounts, and Opportunities you can use tools to consolidate all the information, make conclusions, and act on decisions based on real-time data. This is a core functionality of the Salesforce platform that is practically used by many if not all users in the ecosystem.
-While [](https://help.salesforce.com/s/articleView?id=sf.reports_build_lex.htm&amp;type=5) offer real-time snapshots of data sets, [](https://trailhead.salesforce.com/content/learn/projects/quickstart-reports/quickstart-reports-3) present data through visual elements like charts, graphics, and tables. Based on what you plan to evaluate and whom you plan to share it with to assess choose accordingly.
-{{< image src="/img/1_TO6LWBJBFGFq3euEWMDFkA.png" title="Image" >}}
-
+> Now that you have established Leads, Accounts, and Opportunities you can use tools to consolidate all the information, make conclusions, and act on decisions based on real-time data. This is a core functionality of the Salesforce platform that is practically used by many if not all users in the ecosystem.
+> While [](https://help.salesforce.com/s/articleView?id=sf.reports_build_lex.htm&type=5) offer real-time snapshots of data sets, [](https://trailhead.salesforce.com/content/learn/projects/quickstart-reports/quickstart-reports-3) present data through visual elements like charts, graphics, and tables. Based on what you plan to evaluate and whom you plan to share it with to assess choose accordingly.
+> {{< image src="/img/1_TO6LWBJBFGFq3euEWMDFkA.png" title="Image" >}}
 
 ## AI — Included With Every Product Line
 

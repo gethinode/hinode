@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Join Us at the Original Community Run Event — Midwest Dreamin’",
   "Slug": "join-us-at-the-original-community-run-event-midwest-dreamin",
   "description": "Our Trailblazer journey continues as we hitch a flight over to the city of Minneapolis, MN where we’ll be exploring the original community run event, led by a ‘Super User Group’ of Salesforce professionals and community leaders, Midwest Dreamin’!.",
-  "tags": ["trailblazer","salesforce","trailblazercommunity","salesforce-event","midwest-dreamin"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "trailblazer",
+      "salesforce",
+      "trailblazercommunity",
+      "salesforce-event",
+      "midwest-dreamin",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_SaRHoQ99eQV2fRzUCZ5ZLg.png"
-  }
+  "thumbnail": { "url": "/img/1_SaRHoQ99eQV2fRzUCZ5ZLg.png" },
 }
 ---
+
 Our Trailblazer journey continues as we hitch a flight over to the city of Minneapolis, MN where we’ll be exploring the original community run event, led by a ‘Super User Group’ of Salesforce professionals and community leaders, Midwest Dreamin’!
 Taking place at the Hyatt Regency, [Midwest Dreamin’](https://www.midwestdreamin.com/) will run from July 20th through the 22nd. This in-person event is like a “mini Dreamforce” geared around Salesforce learning, building relationships, and having fun. Connect with other Trailblazers, Admins and Developers. Engage with all of the sponsors who contributed to this event. You’ll want to make sure to pick up your badge at the registration desk along with any goodies they have in-store for attendees. Find out what breakout sessions you plan on adding to your calendar and be sure attend the keynote speakers. Lastly, don’t forget to check out the Mega Demo Jam finale which takes place on the 22nd!
 If you’re attending, stay up to date of all the changes to the agenda, sessions, speakers, attendees community and much more by using their convenient [Whova](https://whova.com/) App. Easily downloaded and installed from the Google or Apple stores.

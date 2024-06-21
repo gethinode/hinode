@@ -6,7 +6,7 @@ const compileFrontMatter = (story) => {
   const author = { name: story.author };
   if (story.author === "Jessie Penaloza") {
     author.title = "Digital Marketing Coordinator";
-    author.image = "/img/contributors/jesus-penaloza_88-88.jpg";
+    author.image = ""/img/contributors/jesus-penaloza_88-88.jpg"";
   } else if (story.author === "Chris Stegall") {
     author.title = "Marketing Director";
     author.image = "/img/contributors/chris-stegall_128-128.jpg";

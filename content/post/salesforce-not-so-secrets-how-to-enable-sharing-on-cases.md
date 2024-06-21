@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2018-11-26T13:01:01.000Z",
+  "date": "2028-11-26T13:01:01.000Z",
   "title": "Salesforce (not so) Secrets: How to Enable Sharing on Cases",
   "Slug": "salesforce-not-so-secrets-how-to-enable-sharing-on-cases",
   "description": "Customer Experience is more important than ever.",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_9XLbWI3kCElO-W3d33e98A.jpg" },

@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Free Salesforce Certification Vouchers for TDX Attendees Have Been Sent!",
   "Slug": "free-salesforce-certification-vouchers-for-tdx-attendees-have-been-sent",
   "description": "If you attended this year’s TrailblazerDX at the beginning of March, you’ve got a treat in your inbox today! This morning Salesforce sent out the promised certification vouchers for folks who registered for Full Conference passes!.",
-  "tags": ["tdx24","salesforce-certs","salesforce-certification","salesforce","salesforce-tdx"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "tdx24",
+      "salesforce-certs",
+      "salesforce-certification",
+      "salesforce",
+      "salesforce-tdx",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_8_bbAYZvxM8ZlRuog6cZAQ.png"
-  }
+  "thumbnail": { "url": "/img/1_8_bbAYZvxM8ZlRuog6cZAQ.png" },
 }
 ---
+
 If you attended this year’s TrailblazerDX at the beginning of March, you’ve got a treat in your inbox today! This morning Salesforce sent out the promised certification vouchers for folks who registered for Full Conference passes!
 It’s an up to $200 value and, when coupled with the steep discounts we saw for TDX registration this year, it means this year’s was one of the most affordable TDXs in a while! Especially if you’re local and don’t have to shell out for travel and lodging. And double “especially” if you were already planning on taking a cert exam this year!
 {{< image src="/img/1_KgxBUEF6tpO8p0OAbIDQXQ.png" title="Image" >}}

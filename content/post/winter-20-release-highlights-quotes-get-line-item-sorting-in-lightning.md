@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-09-25T12:01:01.000Z",
+  "date": "2029-09-25T12:01:01.000Z",
   "title": "Winter ’20 Release Highlights: Quotes get Line-Item Sorting in Lightning",
   "Slug": "winter-20-release-highlights-quotes-get-line-item-sorting-in-lightning",
   "description": "With the long, hot days of Summer melting away into the cool, abbreviated sunlight of September, we’re trading swimsuits for spiced-fruits, beach blankets for ski slopes, and air conditioning for seat warmers..",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_Oeh7LBdYiSfnALB6Ca4k3g.jpg" },

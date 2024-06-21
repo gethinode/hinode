@@ -7,21 +7,21 @@
   "date": "2021-08-11T23:59:31.000Z",
   "title": "Avoiding Inbox Overload in Pardot",
   "Slug": "avoiding-inbox-overload-in-pardot",
-  "description": "Let’s face it, no one’s a fan of too-frequent communication. Whether it’s family, friends, your favorite musical act, or organizations you’ve once done business with, we all have a personal limit where “trying to stay top of mind” suddenly starts to feel like spam. And when it comes to your marketing efforts, avoiding the dreaded “mark as spam” is one of the keys to your continued success..",
+  "description": "Let’s face it, no one’s a fan of too-frequent communication.",
   "tags":
     ["pardot-how-to", "pardot", "salesforce-how-to", "marketing", "salesforce"],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_6M4s2YiYODTGo8917K4aDw.jpg" },
 }
 ---
 
-Let’s face it, no one’s a fan of too-frequent communication. Whether it’s family, friends, your favorite musical act, or organizations you’ve once done business with, we all have a personal limit where “trying to stay top of mind” suddenly starts to feel like spam. And when it comes to your marketing efforts, avoiding the dreaded “mark as spam” is one of the keys to your continued success.
+Whether it’s family, friends, your favorite musical act, or organizations you’ve once done business with, we all have a personal limit where “trying to stay top of mind” suddenly starts to feel like spam. And when it comes to your marketing efforts, avoiding the dreaded “mark as spam” is one of the keys to your continued success.
 Besides just not showing up in your prospects’ main inbox anymore, every one of those “spam” labels affect your domain’s sender-reputation, meaning if you bug enough people — nobody might see your newsletter/offers/updates in the future. Bad news for sure.
 So how do you make sure, with all your separate segmentation lists, campaigns, and prospect journeys that you won’t be clogging up your contacts’ inbox in a way that ruffles their feathers? Today we’ll run through 2 simple tricks to help you keep your frequency-of-contact in the sweet spot.
 

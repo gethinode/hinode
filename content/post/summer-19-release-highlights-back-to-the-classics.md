@@ -1,7 +1,7 @@
 ---
 {
   "priority": "0.5",
-  "date": "2019-06-03T10:34:15-07:00",
+  "date": "2029-06-03T10:34:15-07:00",
   "title": "Summer 19 Release Highlights Back to the Classics",
   "Slug": "summer-19-release-highlights-back-to-the-classics",
   "description": "It’s officially June and that means we’re only weeks away from a new NBA champion, even warmer weather, and a brand new Salesforce Release...",

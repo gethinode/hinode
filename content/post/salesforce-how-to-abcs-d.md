@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-02-28T13:01:01.000Z",
+  "date": "2029-02-28T13:01:01.000Z",
   "title": "Salesforce “How To” ABCs: D",
   "Slug": "salesforce-how-to-abcs-d",
   "description": "How to Delete a User.",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_2qzXta0lmRJ0mnefgcAhdQ.jpg" },

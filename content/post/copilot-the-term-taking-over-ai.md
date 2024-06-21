@@ -1,26 +1,34 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
   "date": "2024-03-19T22:29:16.000Z",
   "title": "Copilot: The Term Taking over AI",
   "Slug": "copilot-the-term-taking-over-ai",
-  "description": "The evolution of artificial intelligence (AI) over the last few years is one of the most remarkable tech narratives of our time. Its rapid development has not only revolutionized industries worldwide but has also ignited intense debates about its implications. From enhancing efficiency in manufacturing to personalizing online experiences, AI’s transformative power is undeniable. Yet, as it infiltrates deeper into our daily lives, questions about its ethical boundaries, job displacement, and societal impact have sparked vigorous discussions..",
-  "tags": ["salesforce","ai","salesforce-einstein","artificial-intelligence","microsoft-copilot"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "description": "The evolution of artificial intelligence (AI) over the last few years is one of the most remarkable tech narratives of our time.",
+  "tags":
+    [
+      "salesforce",
+      "ai",
+      "salesforce-einstein",
+      "artificial-intelligence",
+      "microsoft-copilot",
+    ],
+  "author":
+    {
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_AEULgQpEuIjPi0ARzuk1_w.png"
-  }
+  "thumbnail": { "url": "/img/1_AEULgQpEuIjPi0ARzuk1_w.png" },
 }
 ---
-The evolution of artificial intelligence (AI) over the last few years is one of the most remarkable tech narratives of our time. Its rapid development has not only revolutionized industries worldwide but has also ignited intense debates about its implications. From enhancing efficiency in manufacturing to personalizing online experiences, AI’s transformative power is undeniable. Yet, as it infiltrates deeper into our daily lives, questions about its ethical boundaries, job displacement, and societal impact have sparked vigorous discussions.
+
+Its rapid development has not only revolutionized industries worldwide but has also ignited intense debates about its implications. From enhancing efficiency in manufacturing to personalizing online experiences, AI’s transformative power is undeniable. Yet, as it infiltrates deeper into our daily lives, questions about its ethical boundaries, job displacement, and societal impact have sparked vigorous discussions.
+
 Now, for the first time, we’re starting to see a shared bit of branding emerge across AI platforms and offerings, to perhaps placate some of those objections: the rise of the AI “Copilot”.
 
 ## Copilot

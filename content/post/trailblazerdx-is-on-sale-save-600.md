@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,18 @@
   "title": "TrailblazerDX is On Sale! Save $600",
   "Slug": "trailblazerdx-is-on-sale-save-600",
   "description": "TrailblazerDX is the annual Salesforce developer conference and attendance just got more affordable!.",
-  "tags": ["trailblazerdx","tdx24","salesforce-event","tdx","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags": ["trailblazerdx", "tdx24", "salesforce-event", "tdx", "salesforce"],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_wKzIPa0msMwZXrPiYsJ5oQ.png"
-  }
+  "thumbnail": { "url": "/img/1_wKzIPa0msMwZXrPiYsJ5oQ.png" },
 }
 ---
+
 TrailblazerDX is **the **annual Salesforce developer conference and attendance just got more affordable!
 For a limited time, [Trailblazers can register](https://go.mkp.dev/TDXPromo) and use the [promo code VALENTINE](https://go.mkp.dev/TDXPromo) to save $600, knocking the registration fee down to $399!
 {{< image src="/img/1__vRR_MDldQBq5hO_s5RHqw.png" title="Image" >}}

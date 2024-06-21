@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Cactusforce is this Week!—More Code, Less Fluff",
   "Slug": "cactusforce-is-this-week-more-code-less-fluff",
   "description": "This year Arizona’s 6th annual community conference for Salesforce developers and architects will be taking place at the ASU SkySong Innovation Center. A change from previous years&#39; locations, this venue will be a first over at Scottsdale, AZ. The official start date will be Friday, Jan 26th but sponsors, speakers, and MVPs will be arriving a earlier to enjoy a VIP dinner (4–6 pm) on Thursday, Jan 25th. (An add-on at Registration may be required if you wish to attend)..",
-  "tags": ["salesforce-event","salesforce-communities","salesforce","salesforce-developer","cactusforce"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "salesforce-communities",
+      "salesforce",
+      "salesforce-developer",
+      "cactusforce",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_FsHycEeKE0_UDNnKxHwo2w.png"
-  }
+  "thumbnail": { "url": "/img/1_FsHycEeKE0_UDNnKxHwo2w.png" },
 }
 ---
+
 This year Arizona’s 6th annual community conference for Salesforce developers and architects will be taking place at the [ASU SkySong Innovation Center](https://www.google.com/maps/place/Skysong+Innovations/@33.464197,-111.9257224,17z/data=!3m1!4b1!4m6!3m5!1s0x872b09668d43c8df:0xfa005986e622da2c!8m2!3d33.464197!4d-111.9231421!16s%2Fg%2F1hc25hmjf?entry=ttu). A change from previous years&#39; locations, this venue will be a first over at Scottsdale, AZ. The [official start date](https://www.cactusforce.com/) will be Friday, Jan 26th but sponsors, speakers, and MVPs will be arriving a earlier to enjoy a VIP dinner (4–6 pm) on Thursday, Jan 25th. (An add-on at Registration may be required if you wish to attend).
 After the dinner, everyone attending in person is encouraged to attend the “Welcome Celebration” (6–8 pm) to indulge in the networking festivities. Make sure to [RSVP](https://trailblazercommunitygroups.com/events/details/salesforce-salesforce-developer-group-phoenix-united-states-presents-cactusforce-2024-welcome-celebration/) if you plan to attend.
 
@@ -28,12 +35,10 @@ After the dinner, everyone attending in person is encouraged to attend the “We
 No matter the occasion, visiting a new location always calls for a quick check on the weather, so here’s what we’ve got in store at Scottsdale, AZ. A bit cool for those commuting from the local states but maybe just right for folks traveling from the Midwest or East. Either way, make sure to bring comfortable clothes and shoes to keep you feeling good and focused.
 {{< image src="/img/1_sTHMsaQQQBp5iLiBSkPRuw.png" title="Image" >}}
 
-
 ## The Agenda
 
 After Thursday’s activities, the event goes into full effect on Friday, January 26th. Starting at 7 am attendees can stop by and pick up their badges at the registration desks. From there the event begins at 8 am while around +30 [Breakout Sessions and Workshops](https://www.cactusforce.com/sessions) start at 9 am and run around 40–50 minutes each. Whether it is Apex, Account Forecasting, Orchestration Loopback, Data Cloud, or more there are plenty of activities to check out throughout the day.
 {{< image src="/img/1_lbS2DCNY_ImFfYe7fqGLZA.png" title="Image" >}}
-
 
 ## Demo Jam
 

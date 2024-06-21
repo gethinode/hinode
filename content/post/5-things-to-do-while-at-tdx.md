@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,19 @@
   "title": "5 Things To Do While at TDX",
   "Slug": "5-things-to-do-while-at-tdx",
   "description": "We are only days away from TrailblazerDX and people from all parts of the world will be arriving in the Bay Area. Expect delays to get a cup of coffee or even find an Uber to get you to and from the airport. While you worry about how to maneuver the ins and outs of the city. Let us help you by consolidating some things to add to your to-do list..",
-  "tags": ["tdx","salesforce-tdx","salesforce-event","trailblazerdx","tdx24"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    ["tdx", "salesforce-tdx", "salesforce-event", "trailblazerdx", "tdx24"],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/0__8iL6oSLyYvXKfjM.jpg"
-  }
+  "thumbnail": { "url": "/img/0__8iL6oSLyYvXKfjM.jpg" },
 }
 ---
+
 We are only days away from TrailblazerDX and people from all parts of the world will be arriving in the Bay Area. Expect delays to get a cup of coffee or even find an Uber to get you to and from the airport. While you worry about how to maneuver the ins and outs of the city. Let us help you by consolidating some things to add to your to-do list.
 
 ## Attend The Music Performance: A Semi-charmed Kinda Life
@@ -27,9 +28,9 @@ We are only days away from TrailblazerDX and people from all parts of the world 
 Third Eye Blind headlines as the guest music performance at TDX this year. Enjoy appetizers, drinks, and great music to close out the first day at TDX. Make sure to arrive early because seating will be limited.
 
 > Date: **March 6th**  
->Starts**:** **6:00 pm (PST)**  
->Location: [](https://www.livenation.com/venue/KovZpZAJ6nlA/the-masonic-events)  
->Entry: **Free (with a TDX registration)**
+> Starts**:** **6:00 pm (PST)**  
+> Location: [](https://www.livenation.com/venue/KovZpZAJ6nlA/the-masonic-events)  
+> Entry: **Free (with a TDX registration)**
 
 ## Attend Happy Hour Events (Various Throughout Each Day)
 
@@ -37,9 +38,9 @@ Many sponsors or collaborators will put together networking activities such as h
 If you work with Salesforce then chances are you stopped by their site and found some helpful articles to use for your everyday tasks. Expect an open bar, and perhaps a fun activity or two, as they anticipate another successful activity.
 
 > Host: **SF Ben**Date: **March 7th**  
->Starts**:** **5:00 pm (PST)**  
->Location: [](http://www.thehouseofshields.com/)  
->Entry: [](https://content.salesforceben.com/tdx-happyhour) **online to attend**
+> Starts**:** **5:00 pm (PST)**  
+> Location: [](http://www.thehouseofshields.com/)  
+> Entry: [](https://content.salesforceben.com/tdx-happyhour) **online to attend**
 
 ## Visit The Salesforce Tower
 

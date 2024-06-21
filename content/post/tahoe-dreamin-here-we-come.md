@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Tahoe Dreamin’ — Here we come!",
   "Slug": "tahoe-dreamin-here-we-come",
   "description": "Some of you might still remember it as NorCal Dreamin’. Unlike events such as Dreamforce, Connections, TrailheaDX, and others, Tahoe Dreamin’ holds a distinct quality that sets it apart — it’s a true community gathering! Organized by trailblazers, for trailblazers, creating a one-of-a-kind experience..",
-  "tags": ["salesforce-event","trailblazercommunity","salesforce-group","tahoe-dreamin","salesforce"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "trailblazercommunity",
+      "salesforce-group",
+      "tahoe-dreamin",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_hDbcCHRStoqAoAugJ2uFzQ.png"
-  }
+  "thumbnail": { "url": "/img/1_hDbcCHRStoqAoAugJ2uFzQ.png" },
 }
 ---
+
 Some of you might still remember it as NorCal Dreamin’. Unlike events such as Dreamforce, Connections, TrailheaDX, and others, Tahoe Dreamin’ holds a distinct quality that sets it apart — it’s a true community gathering! Organized by trailblazers, for trailblazers, creating a one-of-a-kind experience.
 Taking place on July 20th and 21st at the Harrah’s Convention Center — this in-person event helps us connect, build new relationships, and reconnect with others we haven’t seen in a while. Admins, Developers, Architects, Partners, Consultants, and Trailblazers are eager to share their experiences, while at the same time trying to discover and share innovations that can help them solve everyday tasks.
 You’ll want to make sure to pick up your badge at the registration desk along with any goodies they have in store for attendees. Find out what breakout [sessions](https://tahoedreamin.com/2023-sessions/) you plan on attending while also considering some of their [workshops](https://tahoedreamin.com/2023-workshops/) (a new addition to the agenda). Be sure to visit the sponsors for additional perks they may have in store. Lastly, don’t forget to check out the happy hour networking session taking place Thursday the 20th!

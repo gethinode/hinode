@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,20 +8,27 @@
   "title": "Salesforce Summer ’24 Release Highlights: AI-Automated Automation",
   "Slug": "salesforce-summer-24-release-highlights-ai-automated-automation",
   "description": "There’s a lot of exciting updates heading our way in Summer ’24 (and of course we’re cataloguing our picks for the most impactful, impressive, and innovative right here) — but this one’s got all the right ingredients to be extra influential on orgs, operations, and admins!.",
-  "tags": ["summer-24-release","release-highlights","salesforce-release","salesforce-summer-24","salesforce"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "summer-24-release",
+      "release-highlights",
+      "salesforce-release",
+      "salesforce-summer-24",
+      "salesforce",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_OQV2X3DWyFdajWZys2AAVw.png"
-  }
+  "thumbnail": { "url": "/img/1_OQV2X3DWyFdajWZys2AAVw.png" },
 }
 ---
+
 There’s a lot of exciting updates heading our way in Summer ’24 (and of course we’re cataloguing our picks for the most impactful, impressive, and innovative right here) — but this one’s got all the right ingredients to be extra influential on orgs, operations, and admins!
-Today we’ll be taking a look at the intersection of artificial intelligence and automation — [Einstein Generated Flow Drafts](https://help.salesforce.com/s/articleView?id=release-notes.rn_automate_flow_builder_get_help_building_flows_with_einstein_for_flow.htm&amp;release=250&amp;type=5)!
+Today we’ll be taking a look at the intersection of artificial intelligence and automation — [Einstein Generated Flow Drafts](https://help.salesforce.com/s/articleView?id=release-notes.rn_automate_flow_builder_get_help_building_flows_with_einstein_for_flow.htm&release=250&type=5)!
 
 ## Automated Automation Generation
 

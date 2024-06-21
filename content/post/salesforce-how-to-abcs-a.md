@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2018-12-28T13:01:01.000Z",
+  "date": "2028-12-28T13:01:01.000Z",
   "title": "Salesforce “How To” ABCs: A",
   "Slug": "salesforce-how-to-abcs-a",
   "description": "<em>How to Add Products to a Price Book</em>.",
@@ -12,9 +12,9 @@
     ["salesforce-how-to-abcs", "salesforce", "product", "book-price", "how-to"],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_hhMc29O7-pC51h5hMctzKQ.jpg" },

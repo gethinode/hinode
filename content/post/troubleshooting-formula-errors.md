@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-07-29T16:38:14.000Z",
+  "date": "2029-07-29T16:38:14.000Z",
   "title": "Troubleshooting Formula Errors",
   "Slug": "troubleshooting-formula-errors",
   "description": "Formulas are one of Salesforce’s most powerful tools for manipulating, understanding, and exploring your data. From automating routine calculations to enforcing data best-practices, formulas are a key component of making your org work the way you want it to. But what do you do when one of those pesky errors stands between you and your vision?.",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_JwH1p88bpVCuFfJ0DjcVCA.jpg" },
@@ -53,7 +53,7 @@ Today’s example comes straight from the [Trailblazer community](https://succes
 
 > IF( Opportunity.RecordTypeId = “012G00000010fD7”,  
 > (  
-> ( Day_Rate_Price**c /(Opportunity.Existing_Monthly_Rate**c /30.4)_ SIP_Renewal_Max_Factor_Product**c )+((Day_Rate_Price**c-(Opportunity.Existing_Monthly_Rate**c /30.4)/Day_Rate_Price**c)_ SIP_Payout_Factor_Inc_Product\_\_c )),
+> ( Day*Rate_Price**c /(Opportunity.Existing_Monthly_Rate**c /30.4)* SIP*Renewal_Max_Factor_Product**c )+((Day_Rate_Price**c-(Opportunity.Existing_Monthly_Rate**c /30.4)/Day_Rate_Price**c)* SIP_Payout_Factor_Inc_Product\_\_c )),
 
 > IF(ISPICKVAL( Opportunity.Pursuit_Type**c ,”Upsell”),SIP_Payout_Factor_Inc_Product**c),
 

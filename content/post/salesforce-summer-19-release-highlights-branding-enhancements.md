@@ -1,7 +1,7 @@
 ---
 {
   "priority": "0.5",
-  "date": "2019-05-29T11:03:06-07:00",
+  "date": "2029-05-29T11:03:06-07:00",
   "title": "Salesforce Summer ’19 Release Highlights: Branding Enhancements",
   "Slug": "salesforce-summer-19-release-highlights-branding-enhancements",
   "description": "April’s showers are behind us, May’s flowers are bursting into bloom, and the world is spinning its way back to the hottest part of our orbit...",

@@ -4,7 +4,7 @@
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2019-06-21T15:21:19.000Z",
+  "date": "2029-06-21T15:21:19.000Z",
   "title": "Salesforce “How To” ABCs: F",
   "Slug": "salesforce-how-to-abcs-f",
   "description": "With the Summer ’19 Release officially rolled out, your plate’s been packed with a ton of exciting new features.",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_tLe3mVRp8-UR-YuilTBJTw.jpg" },

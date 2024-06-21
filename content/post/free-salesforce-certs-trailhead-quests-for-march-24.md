@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Free Salesforce Certs: Trailhead Quests for March‘24",
   "Slug": "free-salesforce-certs-trailhead-quests-for-march-24",
   "description": "Don’t miss your last chance at this month’s free certs!.",
-  "tags": ["salesforce-certification","salesforce-certs","salesforce-admin","salesforce","salesforce-trailhead"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-certification",
+      "salesforce-certs",
+      "salesforce-admin",
+      "salesforce",
+      "salesforce-trailhead",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_1NYNS9O2exvx5UwqpJTEcg.png"
-  }
+  "thumbnail": { "url": "/img/1_1NYNS9O2exvx5UwqpJTEcg.png" },
 }
 ---
+
 It’s the last week before this month is gone so don’t miss out! Complete the following Trailhead Quests for a chance to win some free Salesforce Cert Vouchers (and more)!
 Let’s take a look at some of your chances to win!
 

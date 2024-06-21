@@ -8,13 +8,12 @@
   "title": "Connecting Remote Worforces - Slack as a Digital Workspace.",
   "Slug": "connecting-remote-workforces — slack-as-a-digital-workspace
     connecting-remote-workforces — slack-as-a-digital-workspace",
-  "description": "As businesses continue to strive for growth, adapting to the change is essential in order to survive…",
+  "description": "As businesses continue to strive for growth, adapting to the change is essential in order to survive.",
   "tags": [],
   "author":
     {
       "name": "Jessie Penaloza",
       "title": "Digital Marketing Coordinator",
-      "webp": "jesus-penaloza_88-88.webp",
       "jpeg": "jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
@@ -22,7 +21,7 @@
 }
 ---
 
-As businesses continue to strive for growth, adapting to the change is essential in order to survive. This includes, but isn’t limited to, their products, services, staff, operations and, most importantly, communication. Many businesses have several global office locations, while more still have dispersed remote workforces as a result of the pandemic. All of which requires them to take into consideration the legal and compliance requirements of each location, to comply with regulations — in addition to managing timezones, and maintaining cohesion and culture, even without regular face-to-face meetings.
+This includes, but isn’t limited to, their products, services, staff, operations and, most importantly, communication. Many businesses have several global office locations, while more still have dispersed remote workforces as a result of the pandemic. All of which requires them to take into consideration the legal and compliance requirements of each location, to comply with regulations — in addition to managing timezones, and maintaining cohesion and culture, even without regular face-to-face meetings.
 
 Even before March 2020, companies have long sought ways to improve day-to-day operations and comms without the need to have everyone physically present. The digital era has blossomed during the past ten years but really transformed in the last few. While remote teams used to be the exception, they’re now the rule.
 

@@ -19,8 +19,6 @@
 }
 ---
 
-{{< image src="/img/two-girls-on-one-laptop.jpg" title="Two girls using one laptop" >}}
-
 We talk a lot about new [Salesforce releases](https://medium.com/tag/release-highlights/archive) here. With three every year ([Winter](https://medium.com/creme-de-la-crm/winter-20-release-highlights-lightning-is-going-live-permanently-1f439d4103e8), [Spring](https://medium.com/creme-de-la-crm/spring-20-release-highlights-samesite-cookies-integrations-and-preparing-for-google-chrome-80-9955cb7e4a41), and [Summer](https://medium.com/creme-de-la-crm/summer-19-release-highlights-back-to-the-classics-7b9abe9e6cf9)) it feels like there’s always something “new and improved” right around the corner. And, while the [IdeaExchange](https://trailblazer.salesforce.com/ideaSearch) has long existed as an outlet for influence — where users’ suggestions can be shared with the Salesforce community at large and voted up or down based on shared demand, it’s sometimes felt underpowered in terms of immediate impact.
 
 Sure, you could cast your vote, bookmark the idea to keep tabs on it, and hope every time you cracked open the newest release notes you’d find your dream addition somewhere on the list. But starting at the end of 2019, Salesforce began giving users even more say in the product and project roadmap — thanks to [prioritization voting](https://ideas.salesforce.com/s/prioritization)!

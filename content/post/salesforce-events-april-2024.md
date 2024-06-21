@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce Events —  April 2024",
   "Slug": "salesforce-events-april-2024",
   "description": "This month is starting to look pretty busy if you are a Trailblazer who doesn’t miss a beat and loves to attend Salesforce events. With less than 5 months before Dreamforce, Salesforce isn’t slowing down, and is hosting a series of events to keep everyone moving, meeting, and mingling!.",
-  "tags": ["salesforce-event","salesforce","salesforce-admin","salesforce-world-tour","salesforce-communities"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-event",
+      "salesforce",
+      "salesforce-admin",
+      "salesforce-world-tour",
+      "salesforce-communities",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_fWXwe_u3u5GmZ_LpdghHAA.png"
-  }
+  "thumbnail": { "url": "/img/1_fWXwe_u3u5GmZ_LpdghHAA.png" },
 }
 ---
+
 This month is starting to look pretty busy if you are a Trailblazer who doesn’t miss a beat and loves to attend Salesforce events. With less than 5 months before Dreamforce, Salesforce isn’t slowing down, and is hosting a series of events to keep everyone moving, meeting, and mingling!
 In this month’s installment of “Upcoming Salesforce Events” we’ll take a quick tour of the events taking place this month.
 Let’s Dive in!

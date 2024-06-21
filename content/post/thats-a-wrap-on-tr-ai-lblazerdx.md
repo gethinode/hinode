@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,19 @@
   "title": "That’s A Wrap on Tr(AI)lblazerDX",
   "Slug": "thats-a-wrap-on-tr-ai-lblazerdx",
   "description": "TDX is a wrap and we’ll be rolling out recap content, but if you missed it, be sure to save the date for next year. And, if you're eager to dive into this years’ content, use Salesforce+ to watch all the sessions streamed and available online!",
-  "tags": ["tdx25","salesforce-event","tdx","salesforce-tdx-25","salesforce-tdx"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    ["tdx25", "salesforce-event", "tdx", "salesforce-tdx-25", "salesforce-tdx"],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_1qHsJ4LPmCxXlE4bWm9kHg.png"
-  }
+  "thumbnail": { "url": "/img/1_1qHsJ4LPmCxXlE4bWm9kHg.png" },
 }
 ---
+
 TDX is a wrap and we’ll be rolling out recap content, but if you missed it, be sure to [save the date](https://www.salesforce.com/form/event/tdx25-save-the-date/) for next year. And, if oyu’re eager to dive into this years’ content, use [Salesforce+](https://www.salesforce.com/plus) to watch all the sessions streamed and available online!
 {{< image src="/img/1_e2AhaBYwfcQgUBfnNbVIYA.png" title="Image" >}}
 

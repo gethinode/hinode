@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: P",
   "Slug": "salesforce-how-to-abcs-p",
   "description": "How to Print a Report.",
-  "tags": ["salesforce","salesforce-how-to-abcs","salesforce-reports","salesforce-how-to","salesforce-users"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-how-to-abcs",
+      "salesforce-reports",
+      "salesforce-how-to",
+      "salesforce-users",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_tDivhVzQVMzHZiHLVLKu0Q.png"
-  }
+  "thumbnail": { "url": "/img/1_tDivhVzQVMzHZiHLVLKu0Q.png" },
 }
 ---
+
 As Spring break draws trailblazers, friends, and family out into the sun for seasonal activities like hitting the beach, exploring new cities, and spending time with loved ones — it’ll be no surprise if all those new memories push out some long-ago-learned Salesforce skills. And that makes this the perfect time for another installment of our Salesforce “How to” ABCs! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help trailblazers find the answers they’re looking for fast!
 Today’s letter is “P” as in, “How to print a report”. Let’s dive in!
 A key benefit of using Salesforce is the ability to generate reports, which can provide valuable insights into your company’s performance, customer behavior plus more.
@@ -41,7 +48,7 @@ If satisfied, print your report using the browser printing preferences or export
 ## Customize The Look and Feel Of Each Report
 
 Alright, now let’s talk tools that’ll let us improve look and feel. AppExchange solutions like [Mambo Merge](https://www.mambomerge.com/) offer the ability to fully personalize the appearance of your reports. Create templates that outline the desired layout to easily configure the distribution of those who require it for analysis purposes, ensuring a consistent view every time.
-Navigate the [AppExchange](https://appexchange.salesforce.com/listingDetail?listingId=a0N3u00000MBinOEAT&amp;tab=e) and download the application. Following installation, establish a configuration that permits the creation of documents based on the information gathered from reports.
+Navigate the [AppExchange](https://appexchange.salesforce.com/listingDetail?listingId=a0N3u00000MBinOEAT&tab=e) and download the application. Following installation, establish a configuration that permits the creation of documents based on the information gathered from reports.
 Using its simple wizard to create, edit or remove configurations for each report.
 {{< image src="/img/1_RcmlyZH_K_BzNM4eVa20Ww.png" title="Image" >}}
 

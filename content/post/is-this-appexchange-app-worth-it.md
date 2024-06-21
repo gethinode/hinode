@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,19 +8,26 @@
   "title": "Is this AppExchange App “Worth It”?",
   "Slug": "is-this-appexchange-app-worth-it",
   "description": "The Salesforce AppExchange is full of handy tools, helpful add-ons, and creative solutions to common problems — but it can also sometimes feel like an overwhelming wall of options.",
-  "tags": ["salesforce-appexchange","salesforce-admin","salesforce-app","salesforce","appexchange"],
-  "author": {
-    "name": Chris Stegall,
-    "title": Marketing Director,
-    "jpeg": /img/contributors/chris-stegall_128-128.jpeg
-  },
+  "tags":
+    [
+      "salesforce-appexchange",
+      "salesforce-admin",
+      "salesforce-app",
+      "salesforce",
+      "appexchange",
+    ],
+  "author":
+    {
+      "name": Chris Stegall,
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_R4oDLgcagWREGnm19rwOvA.png"
-  }
+  "thumbnail": { "url": "/img/1_R4oDLgcagWREGnm19rwOvA.png" },
 }
 ---
-The [Salesforce AppExchange](https://appexchange.salesforce.com/) is full of handy tools, helpful add-ons, and creative solutions to common problems — but it can also sometimes feel like an overwhelming wall of options. Free apps give you an opportunity to test drive a solution and see if it’s the cure for what ails your org. But, with the steady increase in “freemium offerings” that give you a taste for free but make you buy the meal, more and more users find themselves wondering “Do I really need to buy ______?” In today’s post we’ll run through the questions you should ask yourself, and your organization, before you pull the trigger on that paid install. Let’s get to it!
+
+The [Salesforce AppExchange](https://appexchange.salesforce.com/) is full of handy tools, helpful add-ons, and creative solutions to common problems — but it can also sometimes feel like an overwhelming wall of options. Free apps give you an opportunity to test drive a solution and see if it’s the cure for what ails your org. But, with the steady increase in “freemium offerings” that give you a taste for free but make you buy the meal, more and more users find themselves wondering “Do I really need to buy **\_\_**?” In today’s post we’ll run through the questions you should ask yourself, and your organization, before you pull the trigger on that paid install. Let’s get to it!
 
 ## Does it Solve an Existing Issue?
 
@@ -34,11 +41,13 @@ The AppExchange does have several powerful tools that make businesses run better
 
 Alright, so you’ve found it. You identified your issue, scoped out your ideal solution, found a suitable match on the app store — done, right? Not quite. The next question to ask is “How does this app work?”.
 You don’t need to be a coder, or a “techie”, or know the difference between SOQL, SQL, and SOL. All you need is an understanding of what the app is asking of you, what it’s asking of Salesforce, and you have to know (and believe) that how it works isn’t magic, but logic.
-Take, for instance, [Mambo Merge](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000GCzIXUA1&amp;cta=gin). What does it do?: Populates a template document with data from your Salesforce org. How does it work? Don’t panic — most of the times this info is right in the description. Check it out:
+Take, for instance, [Mambo Merge](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000GCzIXUA1&cta=gin). What does it do?: Populates a template document with data from your Salesforce org. How does it work? Don’t panic — most of the times this info is right in the description. Check it out:
 {{< image src="/img/1_p9ZPC282iaZyOPnhhJ1vlQ.png" title="Image" >}}
 
 **Surprisingly, it took more than:**
+
 <pre>import mambo_merge<br><br>if button_push == true:<br>     from(org) &#39;ctrl + c&#39;<br>     to(document) &#39;ctrl + v&#39;</pre>The short version is that, “Instantly [perform a secure mail merge to] generate professional Word, PowerPoint, Excel and PDF documents with data from Salesforce”. **Note: It can also generate HTML docs now.**
+
 So now you know that when you push a button, something (Mambo Merge’s code) populates your template document with data mapped from your Salesforce fields. No magic, it’s pretty straightforward.
 Also, that “Native” in the listing tells us it’s built in Salesforce (in this case as a Lightning Web Component), so your data never leaves your org.
 (Also, the free version’s a complete, fully-functional app, not a freemium “test drive” so you can use it and, if the base model meets your needs, you’re all set!)
@@ -67,9 +76,9 @@ Salesforce was built on the idea of customization, improvement, and the flexibil
 {{< image src="/img/1_P7_5Dm1ctGNbRevvUqrwbw.png" title="Image" >}}
 
 This is the last question we’ll want to ask, but probably the very first one you actually check. We get it. When you’re shopping and you see something you like, you check the price tag before you try it on. But when it comes to the AppExchange, it’s way more valuable to know all of the above answers first, so that when you do check the price you can gauge more than its nominal cost, you can determine its value.
-Now, pricing structures can get a little bit murky on the AppExchange. Some apps are priced per user per month (or per year or per day), others provide X actions free and then charge you for each additional action. Flat rates, start-up fees, 1-time implementation charges, there’s a lot to consider and a bit of math to do in most cases before you’ll confidently be able to tell the higher-ups, “This is the solution we need and it’s going to cost us $_____”.
+Now, pricing structures can get a little bit murky on the AppExchange. Some apps are priced per user per month (or per year or per day), others provide X actions free and then charge you for each additional action. Flat rates, start-up fees, 1-time implementation charges, there’s a lot to consider and a bit of math to do in most cases before you’ll confidently be able to tell the higher-ups, “This is the solution we need and it’s going to cost us $**\_**”.
 So, here are the important variables: Initial costs (set-up, implementation, integration, etc… fees), recurring costs (user/org/annual/etc… licenses), add-on costs (fees per-action/use-case, charges for exceeding your license, etc… anything that potentially adds a future charge on top of your recurring/license fees). Take those three variables and add them up, being sure to multiply the recurring costs by the appropriate number of weeks/months/years that you plan on using it.
-Initial Costs + (Recurring Costs * App Use Lifetime) + Add-On Costs = Total App Cost
+Initial Costs + (Recurring Costs \* App Use Lifetime) + Add-On Costs = Total App Cost
 It’s important to consider how long you plan on using the app because if it’s going to be a keystone of your Salesforce operation, you’ll basically be using it forever. If you just need a solution to help you handle a particularly gnarly import, or do a one-time data clean-up, you’ll be able to minimize your payments by unsubscribing once you’ve accomplished your task.
 Note: On those quick jobs, be careful to check if the app has a minimal contract length, any sort of early-termination charge, or a start-up fee that would make a use-and-lose strategy like that more costly.
 And once you have your cost math done, you’re ready to make an informed decision!

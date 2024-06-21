@@ -7,7 +7,7 @@
   "date": "2024-06-14T23:47:24.000Z",
   "title": "Dreamforce Registration is Open!",
   "Slug": "dreamforce-registration-is-open",
-  "description": "It’s officially time to start thinking about Dreamforce! The next one. Dreamforce ’24..",
+  "description": "It’s officially time to start thinking about Dreamforce!",
   "tags":
     [
       "dreamforce",
@@ -18,9 +18,9 @@
     ],
   "author":
     {
-      "name": Chris Stegall,
-      "title": Marketing Director,
-      "jpeg": /img/contributors/chris-stegall_128-128.jpeg,
+      "name": "Chris Stegall",
+      "title": "Marketing Director",
+      "webp": "/img/contributors/chris-stegall_128-128.webp",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_uHUAaq9S_X25WDsUbwbcXg.png" },

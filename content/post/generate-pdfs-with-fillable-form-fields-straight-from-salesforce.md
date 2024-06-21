@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Generate PDFs, with Fillable Form Fields, Straight from Salesforce",
   "Slug": "generate-pdfs-with-fillable-form-fields-straight-from-salesforce",
   "description": "Learn how you can use Mambo Merge with LibreOffice to generate PDFs for your customers, clients, and company!.",
-  "tags": ["salesforce","mambo-merge","salesforce-doc-gen","salesforce-appexchange","document-generation"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "mambo-merge",
+      "salesforce-doc-gen",
+      "salesforce-appexchange",
+      "document-generation",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_gFHJs5N9jZQmr1_ty0eifw.png"
-  }
+  "thumbnail": { "url": "/img/1_gFHJs5N9jZQmr1_ty0eifw.png" },
 }
 ---
+
 Learn how you can use Mambo Merge with LibreOffice to generate PDFs for your customers, clients, and company!
 Tr(AI)lblazerDX has come and gone but more content is on the horizon as we have a special edition of Mambo Merge Office Hours in store for everyone next week!
 This installment of [Mambo Merge ‘Office Hours](https://cloud.news.mambomerge.app/officehours)’ will take a look at various use cases that require us to seek additional resources to provide a complete solution to our customers.

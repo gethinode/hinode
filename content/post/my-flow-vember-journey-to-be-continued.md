@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "My Flow-vember Journey — To Be Continued",
   "Slug": "my-flow-vember-journey-to-be-continued",
   "description": "Hooray! As Flow-vember draws to a close, I’ve completed our Flow-vember Trailmix and learned a ton about Salesforce’s awesome automation tool (and hopefully you have too)! So what’s next? How can you continue to build on that knowledge, and make sure you still have it long after the holidays have passed?.",
-  "tags": ["salesforce","salesforce-flow","salesforce-automation","salesforce-admin","flow-vember"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-flow",
+      "salesforce-automation",
+      "salesforce-admin",
+      "flow-vember",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_8QW0Ybe8fsnDvicaXm2r0Q.png"
-  }
+  "thumbnail": { "url": "/img/1_8QW0Ybe8fsnDvicaXm2r0Q.png" },
 }
 ---
+
 Hooray! As Flow-vember draws to a close, I’ve completed our [Flow-vember Trailmix](https://trailhead.salesforce.com/users/cstegall/trailmixes/flow-vember) and learned a ton about Salesforce’s awesome automation tool (and hopefully you have too)! So what’s next? How can you continue to build on that knowledge, and make sure you still have it long after the holidays have passed?
 In this installment of My Flow-vember Journey, we’ll chat about concluding this quest, consolidate our takeaways from the experience, and offer some insight into retaining the knowledge and potential next steps!
 

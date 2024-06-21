@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Salesforce “How To” ABCs: R",
   "Slug": "salesforce-how-to-abcs-r",
   "description": "How to reset a security token.",
-  "tags": ["salesforce","salesforce-admin","salesforce-how-to","salesforce-how-to-abcs","salesforce-security"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce",
+      "salesforce-admin",
+      "salesforce-how-to",
+      "salesforce-how-to-abcs",
+      "salesforce-security",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_1MqR8r2qdU3mIXiWKb02DA.png"
-  }
+  "thumbnail": { "url": "/img/1_1MqR8r2qdU3mIXiWKb02DA.png" },
 }
 ---
+
 With less than one month to go before [Dreamforce](https://www.salesforce.com/dreamforce/), the coverage is pouring in about the proffered sessions, speakers, schedule, and the big concert over at Chase Center (new venue this year) in San Fransisco! This year the Foo Fighters will make their appearance at Dreamfest once again and we’ll prepare to meet thousands of Trailblazers from all over the world in ‘the City’. And, as all that news and planning and preparation and excitement starts to fill our brains to the brim, that makes it the perfect time for another installment of our [Salesforce “How to” ABCs](https://medium.com/tag/salesforce-how-to-abcs)! The series where we tackle the most commonly Googled Salesforce questions, letter by letter, to help trailblazers find the answers they’re looking for fast!
 Today’s letter is “R” as in, “How to reset a security token”. Let’s dive in!
 Security tokens consist of unique alphanumeric codes that create an additional layer of security (such as multi-factor authentication MFA) to your existing Salesforce login credentials. Whether it&#39;s a company, client, or partner org, each set of login credentials is assigned a security token which is automatically generated when a password is reset.

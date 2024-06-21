@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,25 @@
   "title": "Summer ’24 Release Highlights: Release Resources",
   "Slug": "summer-24-release-highlights-release-resources",
   "description": "Free Tools to Get You (and Your Org) Ready!.",
-  "tags": ["summer-24-release","salesforce-release","salesforce-admin","salesforce","salesforce-summer-24"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "summer-24-release",
+      "salesforce-release",
+      "salesforce-admin",
+      "salesforce",
+      "salesforce-summer-24",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_F75UUodvuYWgEnBs2pQbUA.png"
-  }
+  "thumbnail": { "url": "/img/1_F75UUodvuYWgEnBs2pQbUA.png" },
 }
 ---
+
 The Summer ’24 Release has officially begun rolling out to orgs everywhere! Be sure you’re as up to date and ready as other Trailblazers by checking out all the release resources that Salesforce has to offer for Summer ‘24!
 <strong>Note:</strong> Remember that not all features included on the release notes go live during the Release weekends so make sure to use the [Release Readiness Trailblazers](https://trailhead.salesforce.com/trailblazer-community/groups/0F9300000001okuCAA) group to stay up to date with community members’ latest findings and observations.
 
@@ -49,7 +56,7 @@ Enjoy learning and earning points within your Trailhead account after completing
 
 ## Release Notes (If All Else Fails)
 
-If you still need more clarification then head back to the raw notes. The one and only [Release Notes](https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm&amp;release=250&amp;type=5) that everyone enjoys digging into as soon as they are available three times a year.
+If you still need more clarification then head back to the raw notes. The one and only [Release Notes](https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm&release=250&type=5) that everyone enjoys digging into as soon as they are available three times a year.
 
 ## Ready To Go Live?
 

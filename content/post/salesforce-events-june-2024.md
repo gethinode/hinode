@@ -1,6 +1,6 @@
 ---
 {
-  "priority":"0.5",
+  "priority": "0.5",
   "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
@@ -8,18 +8,24 @@
   "title": "Salesforce Events — June 2024",
   "Slug": "salesforce-events-june-2024",
   "description": "The sun is setting a little later each day and it feels like Summer is already here, but it won’t be official for a few more weeks. Along with the weather, Trailblazer community conferences and Salesforce events are heating up too, as June means we’re only three months away from Dreamforce!.",
-  "tags": ["salesforce-world-tour","salesforce","salesforce-event","trailblazercommunity"],
-  "author": {
-    "name": Jessie Penaloza,
-    "title": Digital Marketing Coordinator,
-    "jpeg": /img/contributors/jesus-penaloza_88-88.jpeg
-  },
+  "tags":
+    [
+      "salesforce-world-tour",
+      "salesforce",
+      "salesforce-event",
+      "trailblazercommunity",
+    ],
+  "author":
+    {
+      "name": "Jessie Penaloza",
+      "title": "Digital Marketing Coordinator",
+      "jpeg": "/img/contributors/jesus-penaloza_88-88.jpg",
+    },
   "layout": "single",
-  "thumbnail": {
-    "url": "/img/1_nAVQMaJ3BHleC6IJEjxmAg.png"
-  }
+  "thumbnail": { "url": "/img/1_nAVQMaJ3BHleC6IJEjxmAg.png" },
 }
 ---
+
 The sun is setting a little later each day and it feels like Summer is already here, but it won’t be official for a few more weeks. Along with the weather, Trailblazer community conferences and Salesforce events are heating up too, as June means we’re only three months away from Dreamforce!
 Let’s take a look at what’s coming up on Salesforce calendars everywhere for June!
 Let’s Begin!
