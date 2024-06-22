@@ -157,6 +157,12 @@ arguments:
     optional: true
     comment: >-
       Font Awesome icon, displayed on top or the left of the card.
+  iconRounded:
+    type: bool
+    parent: cascade
+    optional: true
+    release: v0.24.8
+    comment: Stack the icon in a round container.
   align:
     type: select
     parent: cascade
