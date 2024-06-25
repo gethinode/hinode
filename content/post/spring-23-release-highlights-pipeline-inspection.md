@@ -8,7 +8,7 @@
   "title": "Spring ’23 Release Highlights: Pipeline Inspection",
   "Slug": "spring-23-release-highlights-pipeline-inspection",
   "description": "Pipeline Inspection is one of the many features which will be receiving upgrades within the Salesforce product suite for its big Spring ’23…",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Tommy Holden",

@@ -21,8 +21,6 @@
 }
 ---
 
-{{< image src="/img/imac-how-to.jpg" >}}
-
 Whether it’s to test out Salesforce features and functionality, teach yourself some new tricks, follow along with a Trailhead Trail, build a proof-of-concept for your company or client, test the waters as an admin or developer for your own organization, or any of a hundred other reasons — spinning up a developer org is a super useful ability to have.
 And thankfully, Salesforce makes it easy!
 In this video you can have your very own org up and running in 5-minutes! (Well, 6.25 minutes. But, if you skip the first minute and fifteen seconds by clicking here, get this page open in another tab , and then press play— boom, five minutes!). Enjoy!

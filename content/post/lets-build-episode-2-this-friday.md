@@ -14,14 +14,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/lets-build.jpg" },
 }
 ---
-
-{{< image src="/img/lets-build.jpg" >}}
 
 Last Friday we went live with episode 1 of our brand new Let's Build series and we brainstormed our way into building a field mapper to make admin lives even easier --- tomorrow, we're tackling the development!
 

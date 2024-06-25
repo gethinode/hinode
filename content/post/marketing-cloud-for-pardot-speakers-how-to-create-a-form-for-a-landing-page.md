@@ -7,7 +7,7 @@
   "date": "2022-12-01T23:23:41.000Z",
   "title": "Marketing Cloud for “Pardot Speakers”: How to Create a Form for a Landing Page",
   "Slug": "marketing-cloud-for-pardot-speakers-how-to-create-a-form-for-a-landing-page",
-  "description": "“Pardot” was my introduction to the marketing aspect of the Salesforce ecosystem, hence I will always remember it that way. My trailblazer career began by compiling emails with custom redirects, building out forms and mapping them to landing pages. Followed by reviewing engagement metrics and analyzing prospect behaviors. With all the changes in the “Pardot” horizon, some of which are taking place as we speak, it’s no surprise that the latest naming convention is something everyone will need to adapt as Marketing Cloud Account Management (MCAM) will eventually be the name everyone will be using and the “Pardot” name will go down in the history books..",
+  "description": "Pardot was my introduction to the marketing aspect of the Salesforce ecosystem, hence I will always remember it that way.",
   "tags":
     ["marketing-automation", "sfmc", "pardot", "salesforce", "marketing-cloud"],
   "author":
@@ -21,7 +21,7 @@
 }
 ---
 
-“Pardot” was my introduction to the marketing aspect of the Salesforce ecosystem, hence I will always remember it that way. My trailblazer career began by compiling emails with custom redirects, building out forms and mapping them to landing pages. Followed by reviewing engagement metrics and analyzing prospect behaviors. With all the changes in the “Pardot” horizon, some of which are taking place as we speak, it’s no surprise that the latest naming convention is something everyone will need to adapt as Marketing Cloud Account Management (MCAM) will eventually be the name everyone will be using and the “Pardot” name will go down in the history books.
+My trailblazer career began by compiling emails with custom redirects, building out forms and mapping them to landing pages. Followed by reviewing engagement metrics and analyzing prospect behaviors. With all the changes in the “Pardot” horizon, some of which are taking place as we speak, it’s no surprise that the latest naming convention is something everyone will need to adapt as Marketing Cloud Account Management (MCAM) will eventually be the name everyone will be using and the “Pardot” name will go down in the history books.
 New or existing Pardot Users will begin to further expand their knowledgebase and skills by utilizing more and more of the tools Marketing Cloud (MC) has to offer. As I am currently transitioning, I’ve come to realize there is a learning curve in place. But don’t worry, it’s not as bad as one would think. Let me share some helpful tips I picked up along the way.
 Because there are many tools within MC, we’ll begin by outlining the steps necessary to build a Landing Page (LP) followed by adding a form to it. Followed by outlining the differences and sharing some helpful tips. With that said, let’s get started. Before we do, we must quickly address how data is collected between “Pardot” and MC.
 Inside “Pardot” forms are created by defining unique attributes like name, tags, domain, etc. Followed by defining the prospect default or custom fields with a type and data format.

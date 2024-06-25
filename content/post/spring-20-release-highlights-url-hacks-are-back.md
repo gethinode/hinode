@@ -12,14 +12,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/laptop-with-cauldron.jpg" },
 }
 ---
-
-{{< image src="/img/laptop-with-cauldron.jpg" title="Laptop with a cauldron on the screen" >}}
 
 Spring is the season of rebirth. The barren wastes of Winter begin to be punctuated by stalks of new growth, the monochrome horizon broken by flashes of color and life as the world warms and returns to a more comfortable axial orientation.
 

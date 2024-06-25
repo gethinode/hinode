@@ -6,24 +6,21 @@
   "haveTwitter": false,
   "date": "2021-11-19T13:48:44-07:00",
   "title": "Run Your Office Secret Santa, Right in Salesforce",
-  "Slug": "run-your-office-secret-santa,-right-in-salesforce",
-  "description": "With the holidays on the horizon, if your team, department, or office is planning a gift exchange — you can save yourself the spreadsheets…",
+  "Slug": "run-your-office-secret-santa-right-in-salesforce",
+  "description": "With the holidays on the horizon, if your team, department, or office is planning a gift exchange — you can save yourself the spreadsheets and run the entire operation right out of your Salesforce org!",
   "tags": [],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_pdL5TI6AN-yDlkg5G7mEgg.png" },
 }
 ---
 
-{{< image src="/img/1_pdL5TI6AN-yDlkg5G7mEgg.png">}}
-
-With the holidays on the horizon, if your team, department, or office is planning a gift exchange — you can save yourself the spreadsheets and run the entire operation right out of your Salesforce org! All thanks to the [Gift Exchange app](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4UzUAL), by Salesforce.
+All thanks to the [Gift Exchange app](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4UzUAL), by Salesforce.
 
 This is admittedly exciting news for whoever your resident organizer is, but I’ll admit to feeling some minor disappointment because I was looking forward to building our own.
 

@@ -8,13 +8,12 @@
   "title": "Summer ’22 Release Highlights: Lightning Component Layout Enhancements and Strengthened Formula…",
   "Slug": "summer-22-release-highlights-lightning-component-layout-enhancements-and-strengthened-formula",
   "description": "Dynamic related lists and new formulas help provide additional ways for Admins to solve problems.",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Jessie Penaloza",
       "title": "Content Contributor",
       "webp": "/img/jesus-penaloza_88-88.webp",
-      "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/0_Nz2uEoh1u10SHrvn.png" },

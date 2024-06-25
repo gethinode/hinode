@@ -21,8 +21,6 @@
 }
 ---
 
-{{< image src="/img/mk-youtube-page.jpg" >}}
-
 Some things you have to see to believe. Other things are just easier to learn when you can actually watch them happen (as opposed to trying to mentally animate a series of screenshots as you scroll through a list of instructions).
 
 Say you wanted to spin up a dev org?

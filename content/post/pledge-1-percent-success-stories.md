@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/pledge-1-percent.webp" },
 }
 ---
-
-{{< image src="/img/pledge-1-percent.webp" title="Pledge 1 percent" >}}
 
 Valentine’s Day is all about sharing love, spreading joy, and showing how much you care about those closest to you. And there’s hardly a better way to flex your affection than to spend the day helping your local community! That’s why we spent cupid’s favorite holiday with one of our favorite local resources: SOVA!
 

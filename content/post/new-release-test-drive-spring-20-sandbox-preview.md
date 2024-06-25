@@ -18,8 +18,6 @@
 }
 ---
 
-{{< image src="/img/butterfly.jpg" title="Butterfly on a flower" >}}
-
 The hearths have just started to warm, the halls are barely even decked, and the holidays aren’t even in full swing yet, but the Salesforce Spring ’20 Release is coming up fast! Before long we’ll be swapping our stockings for sunglasses, our presents for picnic baskets, and once again heading out into the sunshine to enjoy the warm weather and all the brand new features, updates, and upgrades heading to our orgs!
 
 We’re still waiting on the release notes, but if you’re ready to start test-driving the newest features in your favorite sandbox ASAP, now’s the time to make sure all your ‘i’s are dotted and ‘t’s crossed. In today’s post we’ll run through everything you need to do to make sure your sandbox environment gets included in the roll out.

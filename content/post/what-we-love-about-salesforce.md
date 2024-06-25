@@ -7,7 +7,7 @@
   "date": "2023-02-14T20:39:45.000Z",
   "title": "What We Love about Salesforce",
   "Slug": "what-we-love-about-salesforce",
-  "description": "Chocolates and flowers have been flying off the shelves, Cupid’s arrows are whizzing above our heads, and last minute reservations are being frantically booked at romantic restaurants everywhere — it’s officially Valentine’s Day! And what better day to take a look at all the things we love about Salesforce!.",
+  "description": "Chocolates and flowers have been flying off the shelves, Cupid’s arrows are whizzing above our heads, and last minute reservations are being frantically booked at romantic restaurants everywhere — it’s officially Valentine’s Day!",
   "tags":
     [
       "salesforce-development",
@@ -20,14 +20,15 @@
     {
       "name": Chris Stegall,
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_vuUnC2RHXMRrjazlTaHZVQ.png" },
 }
 ---
 
-Chocolates and flowers have been flying off the shelves, Cupid’s arrows are whizzing above our heads, and last minute reservations are being frantically booked at romantic restaurants everywhere — it’s officially Valentine’s Day! And what better day to take a look at all the things we love about Salesforce!
+What better day to take a look at all the things we love about Salesforce!
+
 We asked around the office (well, the [digital HQ](https://www.salesforce.com/ap/blog/2022/03/customer-success-anywhere-digital-hq.html)), and these are our teams top picks for “What We Love About Salesforce”!
 
 > “The Trailblazer Community”

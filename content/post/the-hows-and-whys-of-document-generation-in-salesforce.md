@@ -6,14 +6,13 @@
   "haveTwitter": false,
   "date": "2023-03-14T08:00:00-07:00",
   "title": "The How’s (and Why’s) of Document Generation in Salesforce",
-  "Slug": "the-hows-and-why-s-of-document-generation-in-salesforce",
+  "Slug": "the-hows-and-whys-of-document-generation-in-salesforce",
   "description": "Built-In Tools vs. AppExchange Solutions",
-  "tags": [],
+  "tags": ["AppExchange"],
   "author":
     {
       "name": "Jessie Penaloza",
       "title": "Content Contributor",
-      "webp": "/img/jesus-penaloza_88-88.webp",
       "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",
@@ -35,11 +34,8 @@ _Report Example_
 Disadvantages
 
 - Requires the skills (and permissions/access) to create, save, export, etc… reports and to verify the accuracy of the resulting data.
-
 - Requires effort to adapt reports and data to the document formats you want.
-
 - Requires knowledge and implementation of email template functionality.
-
 - Requires custom code for automating processes.
 
 ### Workflow Rules and Process Builder
@@ -52,9 +48,7 @@ _Workflow Rule Example_
 Disadvantages
 
 - Requires understanding Workflow Rules functionality and the skills to develop templates.
-
 - Whenever changes are made to triggers or templates, rules need to be reconfigured.
-
 - Document generation using this method is not straightforward and requires users with knowledge of coding.
 
 ### CPQ (Configure, Price, Quote) or Visualforce
@@ -67,9 +61,7 @@ _CPQ Quote Example_
 Disadvantages
 
 - You must first configure a set of products and services for each document, and then specify any additional data you wish to include.
-
 - This method is also limited to a subset of the Salesforce platform.
-
 - More importantly, Visualforce requires you to understand and write code.
 
 ### Lightning Components (a.k.a — AppExchange)

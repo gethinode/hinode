@@ -8,7 +8,7 @@
   "title": "Summer ’22 Release Highlights: Pardot Completion Action Upgrades",
   "Slug": "summer-22-release-highlights-pardot-completion-action-upgrades",
   "description": "“You Learn Pretty Quick to Put First Things First and, in the Car Business, Product Comes First” — Lee Iacocca, Chrysler Corporation…",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Tommy Holden",

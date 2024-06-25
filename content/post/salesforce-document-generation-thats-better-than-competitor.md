@@ -6,14 +6,13 @@
   "haveTwitter": false,
   "date": "2023-01-25T08:00:00-07:00",
   "title": "Salesforce Document Generation That’s Better Than Competitor__c",
-  "Slug": "salesforce-document-generation-thats-better-than-competitor-c",
+  "Slug": "salesforce-document-generation-thats-better-than-competitor",
   "description": "Mambo Merge eliminates pain points one document at a time.",
   "tags": [],
   "author":
     {
       "name": "Jessie Penaloza",
       "title": "Content Contributor",
-      "webp": "/img/jesus-penaloza_88-88.webp",
       "jpeg": "/img/jesus-penaloza_88-88.jpg",
     },
   "layout": "single",

@@ -8,7 +8,7 @@
   "title": "Spring ’23 Release Highlights: Jesus’ Picks",
   "Slug": "spring-23-release-highlights-jesus-picks",
   "description": "Inclusive Data, Real-Time Automation, Auto-MFA, Field-Level Security, and More!",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Jessie Penaloza",
@@ -20,10 +20,6 @@
   "thumbnail": { "url": "/img/0_ObgV6mF__cK4FeRQ.png" },
 }
 ---
-
-Inclusive Data, Changes to Real-Time Automation, Auto-MFA, Field-Level Security, and More!
-
-{{< image src="/img/0_ObgV6mF__cK4FeRQ.png">}}
 
 The time has come once again to pore over the [release notes](https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm&type=5&release=242), pick the features we’re most excited about, and share those picks with you as we countdown to the Salesforce Spring ’23 Release! Our goal’s to help you hit the ground running and take full advantage of the coolest new products, features, and functionality! That’s right, we’re back with another round of [Release Highlights](https://medium.com/tag/release-highlights)!
 

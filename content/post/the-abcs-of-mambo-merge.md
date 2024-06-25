@@ -7,7 +7,7 @@
   "date": "2023-06-05T22:50:10.000Z",
   "title": "The ABCs of Mambo Merge",
   "Slug": "the-abcs-of-mambo-merge",
-  "description": "The basics that make Mambo Merge ‘the Best’.",
+  "description": "The basics that make Mambo Merge.",
   "tags":
     [
       "mambo-moves",

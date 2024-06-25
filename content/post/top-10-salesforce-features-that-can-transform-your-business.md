@@ -96,7 +96,10 @@ With Custom Metadata Types, “You can create your own declarative developer fra
 
 <strong>Creating Effective To-Do Lists</strong>:
 
-<ul><li>Add tasks directly from your Salesforce home page or related records.</li><li>Set due dates and priorities for each task.</li><li>Monitor and update your tasks regularly to stay on top of your workload.</li></ul>
+- Add tasks directly from your Salesforce home page or related records.
+- Set due dates and priorities for each task.
+- Monitor and update your tasks regularly to stay on top of your workload.
+
 ## Schema Builder — 
 
 [Schema Builder](https://help.salesforce.com/s/articleView?id=sf.schema_builder.htm&language=en_US&type=5) is a tool that provides a visual representation of your Salesforce data model. This feature is extremely useful for understanding the relationships between objects and fields, and for designing and modifying the data model without writing code.
@@ -104,21 +107,28 @@ With Custom Metadata Types, “You can create your own declarative developer fra
 
 <strong>Using Schema Builder</strong>:
 
-<ul><li>Access Schema Builder from the Setup menu.</li><li>Drag and drop objects to create relationships.</li><li>Use the visual map to identify and fix issues in your data model.</li></ul>
-## **BONUS!**
+- Access Schema Builder from the Setup menu.
+- Drag and drop objects to create relationships.
+- Use the visual map to identify and fix issues in your data model.
 
-## Macros (Service Cloud) — 
+## BONUS! Macros (Service Cloud)
 
-Available in Service Cloud, [Macros ](https://help.salesforce.com/s/articleView?id=sf.macros_def.htm&type=5)in Salesforce are a powerful yet often underutilized tool that can automate repetitive tasks. They allow users to execute a series of actions with a single click, such as sending emails, updating records, and creating tasks. For customer service representatives using the Service Cloud, this means handling common issues swiftly, improving response times and customer satisfaction.
-<strong>How to Use Macros</strong>:
+Available in Service Cloud, [Macros](https://help.salesforce.com/s/articleView?id=sf.macros_def.htm&type=5) in Salesforce are a powerful yet often underutilized tool that can automate repetitive tasks. They allow users to execute a series of actions with a single click, such as sending emails, updating records, and creating tasks. For customer service representatives using the Service Cloud, this means handling common issues swiftly, improving response times and customer satisfaction.
+**How to Use Macros**:
 
-<ul><li>Identify repetitive tasks in your workflow.</li><li>Create a macro to automate these actions.</li><li>Apply the macro to relevant cases or records to save time and reduce errors.</li></ul>
-## Debug Logs — 
+- Identify repetitive tasks in your workflow.
+- Create a macro to automate these actions.
+- Apply the macro to relevant cases or records to save time and reduce errors.
+
+## Debug Logs
 
 [Debug Logs](https://help.salesforce.com/s/articleView?id=sf.code_debug_log.htm&type=5) in Salesforce capture detailed information about system processes, making it easier to troubleshoot and debug issues. This feature is invaluable for developers and administrators who need to understand the behavior of their Salesforce implementation and identify the root causes of problems.
-<strong>Utilizing Debug Logs</strong>:
+**Utilizing Debug Logs**:
 
-<ul><li>Enable debug logging for specific users or processes.</li><li>Review the logs to identify errors or performance issues.</li><li>Use the insights gained to optimize and fix your Salesforce applications.</li></ul>
+- Enable debug logging for specific users or processes.
+- Review the logs to identify errors or performance issues.
+- Use the insights gained to optimize and fix your Salesforce applications.
+
 ## Don’t See ‘Em? — Ask Your Admin!
 
 Something catch your eye that’s missing from your org? Ask your admin!

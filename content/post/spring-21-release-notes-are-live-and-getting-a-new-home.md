@@ -7,21 +7,18 @@
   "date": "2020-12-21T14:20:22-08:00",
   "title": "Spring ’21 Release Notes are Live (and Getting a New Home)!",
   "Slug": "spring-21-release-notes-are-live-and-getting-a-new-home",
-  "description": "Not to jump straight past the year-end festivities, but if you’re already practicing writing your “2021”s, then you know there’s a lot in…",
-  "tags": [],
+  "description": "Not to jump straight past the year-end festivities, but if you’re already practicing writing your “2021s, then you know there’s a lot in…",
+  "tags": ["Release Notes"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/heart-bear-21.jpg" },
 }
 ---
-
-{{< image src="/img/heart-bear-21.jpg">}}
 
 Not to jump straight past the year-end festivities, but if you're already practicing writing your "2021"s, then you know there's a lot in store next year in the world of Salesforce, like the Spring '21 Release!
 

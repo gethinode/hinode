@@ -14,14 +14,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/motorcycle-on-computer.jpg" },
 }
 ---
-
-{{< image src="/img/motorcycle-on-computer.jpg" >}}
 
 The Salesforce Summer ’20 Release will be live in every org this weekend, so now’s the time to dig into those release notes and catch up on all the upcoming upgrades, updates, and improvements! And, because not everyone has time to pore over all the nitty-gritty details, we’re back with another round of Release Highlights — today, we’ll be taking a look at the improvements coming to Salesforce Communities!
 

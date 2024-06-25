@@ -21,8 +21,6 @@
 }
 ---
 
-{{< image src="/img/marketing-journey.jpg" >}}
-
 As a marketer with more than 15 years of experience, the idea of marketing automation was a bit foreign to me, and even seemed slightly out of reach. In fact, it wasn't even a blip on my radar until last year, as I started to become more entrenched in learning the Salesforce CRM platform. I was aware of Marketing Technology and knew there were different ways of marketing ... different from what I had practiced as a brand/product/marketing manager up until 2018. And yes, over the years there were elements of email and social media experiences woven into my more "traditional" marketing training. But after seeing how tech-infused marketing had become and how companies and customers relate as a result of this change, I became eager to learn more.
 
 ## What is marketing automation?

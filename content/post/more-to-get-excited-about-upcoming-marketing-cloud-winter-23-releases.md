@@ -8,7 +8,7 @@
   "title": "More to Get Excited About — Upcoming Marketing Cloud Winter ’23 Releases",
   "Slug": "more-to-get-excited-about-upcoming-marketing-cloud-winter-23-releases",
   "description": "Enhance & Optimize your respective activity with Sprout Social Connector & Ecommerce Marketing Insights App!",
-  "tags": [],
+  "tags": ["Marketing Cloud"],
   "author":
     {
       "name": "Tommy Holden",

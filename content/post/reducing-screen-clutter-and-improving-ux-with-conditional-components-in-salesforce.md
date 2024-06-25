@@ -4,7 +4,7 @@
   "date": "2021-08-13T15:43:13-07:00",
   "title": "Reducing Screen Clutter and Improving UX with Conditional Components in Salesforce",
   "Slug": "quickly-easily-and-securely-create-word-documents-in-salesforce-introducing-mambo-merge",
-  "description": "User experience is one of the biggest contributors to adoption, understanding, and platform success. And, with a system like Salesforce...",
+  "description": "User experience is one of the biggest contributors to adoption, understanding, and platform success.",
   "tags": ["ux", "salesforce", "tutorial", "page layout"],
   "author":
     {
@@ -18,9 +18,7 @@
 }
 ---
 
-{{< image src="/img/improve-salesforce-ux.jpg" >}}
-
-User experience is one of the biggest contributors to adoption, understanding, and platform success. And, with a system like Salesforce, that makes it super easy to add so much data, detail, and functionality — finding the line between clarity and clutter, while still maximizing the amount of actionable data in your org can feel like a tightrope walk. Once you add in non-admin users of various skillsets and expectations when it comes to their daily processes and ideal system/info complexity, anything you can do as an admin to improve UX and minimize mis-clicks is a blessing.
+With a system like Salesforce, that makes it super easy to add so much data, detail, and functionality — finding the line between clarity and clutter, while still maximizing the amount of actionable data in your org can feel like a tightrope walk. Once you add in non-admin users of various skillsets and expectations when it comes to their daily processes and ideal system/info complexity, anything you can do as an admin to improve UX and minimize mis-clicks is a blessing.
 
 In today’s post, we’ll talk about one of my favorite features in Salesforce Lightning — the ability to add or remove components and elements from the screen, based on context! Let’s dive in.
 

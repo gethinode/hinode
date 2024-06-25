@@ -21,8 +21,6 @@
 }
 ---
 
-{{< image src="/img/1_BsdRryJAIK6IfkKefLUGOg.png">}}
-
 As you may know, the [Salesforce IdeaExchange](https://ideas.salesforce.com/s/search) is one of [my favorite features](/creme-de-la-crm/cast-your-vote-30562a3a1f60) of the platform — offering Trailblazers, users, admins, and devs around the world the opportunity to shape the feature roadmap and prioritize the updates that will have the biggest impacts on their day-to-day efforts. So, even on the rare occasion that the result of your “How do I do X in Salesforce?” search is a disappointing “You can’t”, the IdeaExchange appends a hopeful “…yet” because you’ll inevitably find others asking for the same and, in a best case scenario, you’ll already see which release it’s been approved and slated for!
 
 And that’s what makes today so special — it’s [IdeaExchange winners day](https://ideas.salesforce.com/s/winners)! The day we get to find out which features are votes bumped up into reality, and when we can expect to see them hit our orgs. It’s one of my favorite Salesforce emails every year but, if you’re not poring over their missives like me, you might have missed it. So, let’s take a look at what the userbase elected to see brought to fruition in the upcoming releases!

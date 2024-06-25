@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/summer-20.jpg" },
 }
 ---
-
-{{< image src="/img/summer-20.jpg" >}}
 
 Summer seemed to creep in a bit more slowly this year while we're all cooped up in quarantine, but the rising temperatures, late sunsets, and last weekend's annual cacophony of aerial explosions can only mean one thing --- Summer's officially here and that means the [Salesforce Summer '20 Release](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/salesforce_release_notes.htm) is right around the corner!
 

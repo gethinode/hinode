@@ -8,13 +8,12 @@
   "title": "Summer ’23 Release Highlights: Updated (and Complete) Timeline",
   "Slug": "summer-23-release-highlights-updated-and-complete-timeline",
   "description": "The biggest news this week isn’t [SUCCESSION SPOILER], at least, not anymore. And that’s because we’ve gotten some updated info on the…",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_TdovCC_ZmjB-c5_EMf7XiQ.webp" },

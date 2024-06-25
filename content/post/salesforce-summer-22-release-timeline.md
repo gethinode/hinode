@@ -7,7 +7,7 @@
   "date": "2022-05-17T08:00:00-07:00",
   "title": "Salesforce Summer ’22 Release Timeline",
   "Slug": "salesforce-summer-22-release-timeline",
-  "description": "TrailblazerDX is behind us, Midwest Dreamin’ is on the horizon, and the steadily rising temps on the thermometer all point to one thing —…",
+  "description": "TrailblazerDX is behind us, Midwest Dreamin’ is on the horizon, and the steadily rising temps on the thermometer all point to one thing…",
   "tags": [],
   "author":
     {

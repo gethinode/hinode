@@ -13,7 +13,6 @@
     {
       "name": "Tommy Holden",
       "title": "Content Contributor",
-      "webp": "/img/tommy-holden_128-128.webp",
       "jpeg": "/img/tommy-holden_128-128.jpg",
     },
   "layout": "single",
@@ -23,14 +22,18 @@
 
 Los Angeles, CA — May 9th, 2022: [Salesforce](http://salesforce.com) has finally decided to rename the acquisitions which have been pieced into its Marketing-based functionality over the years. Overall, the new naming conventions make sense, but it will take some time getting used to as a user. It’s all part of a program called “MC Easy” recently revealed/announced at the Salesforce World Tour in Sydney, Australia.
 
-**OVERALL HISTORY**: Salesforce purchased the former “Exact Target”, based in Indianapolis, Indiana around 2013. That platform became what we now know\**as *Email Studio\* within the Salesforce Marketing Cloud Ecosystem. Frankly, it hasn’t changed all that much since its initial integration — and is still using legacy features such as “Data Extensions,” “Guided Sends”, and various UX / UI properties from the old days.
+## OVERALL HISTORY
+
+Salesforce purchased the former “Exact Target”, based in Indianapolis, Indiana around 2013. That platform became what we now know\**as *Email Studio\* within the Salesforce Marketing Cloud Ecosystem. Frankly, it hasn’t changed all that much since its initial integration — and is still using legacy features such as “Data Extensions,” “Guided Sends”, and various UX / UI properties from the old days.
 
 {{< image src="/img/0_lHK6hZK4SnZQ8iiC.png">}}
 **_Example of Uploading into a Data Extension (2018)_**
 
 “Exact Target” was acquired by Salesforce for mostly B2C Marketing purposes. It was also purchased, somewhat in tandem, with Pardot which served as a B2B marketing-based acquisition product back in 2012 based in Atlanta, Georgia. That said, Marketing Cloud has always been the heavy hitter from an implementation perspective as a consultant. Yet, there has also been some backtracking in terms of use cases in using both systems within the last several years regarding best practices.
 
-**IMPLEMENTATION HISTORY**: Previously, some clients clearly didn’t need all the functionality in the Marketing Cloud universe & rested easy with Pardot instead (mostly B2B companies). Larger B2C clients were more than likely going to be geared toward using Marketing Cloud as they tended to have extremely huge databases and required critical use of suites such as _Automation Studio, Social Studio, Audience Builder, Contact Builder,_ _Journey Builder,_ and the use of SQL servers.
+## IMPLEMENTATION HISTORY
+
+Previously, some clients clearly didn’t need all the functionality in the Marketing Cloud universe & rested easy with Pardot instead (mostly B2B companies). Larger B2C clients were more than likely going to be geared toward using Marketing Cloud as they tended to have extremely huge databases and required critical use of suites such as _Automation Studio, Social Studio, Audience Builder, Contact Builder,_ _Journey Builder,_ and the use of SQL servers.
 
 Surprisingly, some larger B2C clients have been recently utilizing Pardot, as it has become a more mature platform within the overall Salesforce product line. Marketing Cloud also has a significantly higher sticker price over Pardot as well
 As mentioned, recently I’ve seen more B2C interest in Pardot, and for good reason. For instance, Pardot’s _Engagement Studio_ functionality has always been extremely underrated and I watched its “Silent” rollout as a consultant back in Summer 2016. I was floored by the release, and have always tried to promote it heavily to clients. It was a huge improvement from the former “Drip Campaign Editor” functionality and it has also gained additional curiosity & popularity amongst clients. This could be why some larger B2C clients have migrated over to Pardot instead of using Marketing Cloud as there is just a general ease of use.
@@ -53,7 +56,9 @@ Here are modern flow examples from both *Engagement Studio*and _Journey Builder_
 {{< image src="/img/0_qFbcj0jeOdJe8NcY.png">}}
 _Engagement Studio: Select, Copy, & Paste Functionality (2022)_
 
-**CURRENT BEST PRACTICES:** It’s better to evaluate whether to implement Marketing Cloud or Pardot on a case-by-case basis, regardless of a customer being B2B or B2C. This is largely dependent on the specific marketing verticals and overall cost structure of the organization.
+## CURRENT BEST PRACTICES
+
+It’s better to evaluate whether to implement Marketing Cloud or Pardot on a case-by-case basis, regardless of a customer being B2B or B2C. This is largely dependent on the specific marketing verticals and overall cost structure of the organization.
 
 Recently, Pardot has been heavily pushed for clients to have it hosted within Sales Cloud’s “Lightning” platform. This has been primarily for the benefit of Sales & Account-based marketing groups (especially with regards to the release of the “Pardot Engage” program). The former Pardot “Classic” mode is slated to be fully retired by October 2022. Native login areas for Pardot have also been mostly phased out. Yet, Marketing Cloud has stayed independent as its own primary “stand alone” B2C Marketing Salesforce-based platform retaining direct login areas.
 
@@ -103,15 +108,21 @@ Let’s just say, these changes are not going to occur overnight. It’s probabl
 
 Regardless, it will be interesting to see how both _Engagement Studio_ and _Journey Builder_ programs play out in the new “MC Easy” platform, because they essentially perform the same duties. Recall, Pardot & Marketing Cloud as Salesforce platforms have always remained independent of each other until now.
 
-**MARKETING CLOUD AS A MAJOR HUB:** One can actually see this when logging into account within the Salesforce customer support portal. For instance, to login there are only two options to do so at this point. You can only use either your “Trailhead” _OR_ “Marketing Cloud” credentials. It’s actually only been this way for a little while and I’ve always been curious about it. There is nothing wrong with this approach, but it seems like legacy Pardot customer support might already be phased out entirely.
+## MARKETING CLOUD AS A MAJOR HUB
+
+One can actually see this when logging into account within the Salesforce customer support portal. For instance, to login there are only two options to do so at this point. You can only use either your “Trailhead” _OR_ “Marketing Cloud” credentials. It’s actually only been this way for a little while and I’ve always been curious about it. There is nothing wrong with this approach, but it seems like legacy Pardot customer support might already be phased out entirely.
 
 {{< image src="/img/0_bO_eBFjeTCgajHdK.png">}}
 _Default Login Options on the Salesforce.com Help Page_
 
-**KEY TAKEAWAYS:** What’s shocking is how Pardot will eventually be sitting within the Marketing Cloud ecosystem. It’s been fully independent of Marketing Cloud for around a decade post acquisition, and is now finally being integrated within the Marketing Cloud universe.
+## KEY TAKEAWAYS
+
+What’s shocking is how Pardot will eventually be sitting within the Marketing Cloud ecosystem. It’s been fully independent of Marketing Cloud for around a decade post acquisition, and is now finally being integrated within the Marketing Cloud universe.
 
 Another huge change is that _Social Studio_ is being completely retired. It’s a little odd, as I recall within some pre-sales processes over the last few years where *Social Studio*was scoped out as a popular request by clients. It’s more than likely that some of the _Social Studio_ features are going to be rolled up into one of the other parts of the Marketing Cloud system overall. That said, it’s difficult to tell where those specific features will reside.
 
-**FINAL THOUGHTS:**Whether a marketing client is either B2B or B2C based,\*\*\*\*this is a major transition between Pardot & Marketing Cloud product lines within the[Salesforce.com](http://salesforce.com) universe. It’s almost like several airlines fully combining business operations after years of procrastination during a merger. It’s also anticipated that it will take time for many clients to fully migrate off of Pardot “Classic” mode by the end of 2022 & ensure all new features are installed & properly configured.
+## FINAL THOUGHTS
+
+Whether a marketing client is either B2B or B2C based,\*\*\*\*this is a major transition between Pardot & Marketing Cloud product lines within the[Salesforce.com](http://salesforce.com) universe. It’s almost like several airlines fully combining business operations after years of procrastination during a merger. It’s also anticipated that it will take time for many clients to fully migrate off of Pardot “Classic” mode by the end of 2022 & ensure all new features are installed & properly configured.
 
 I do believe all of the changes look promising. I’m sure it will be for the best, and I’m looking forward to see what occurs next. Now we just need to find out if our Pardot certifications will be renamed as well…

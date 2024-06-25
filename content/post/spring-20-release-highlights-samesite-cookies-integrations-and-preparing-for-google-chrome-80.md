@@ -7,7 +7,7 @@
   "date": "2020-01-09T13:01:01.000Z",
   "title": "Spring ’20 Release Highlights: SameSite Cookies, Integrations, and Preparing for Google Chrome 80",
   "Slug": "spring-20-release-highlights-samesite-cookies-integrations-and-preparing-for-google-chrome-80",
-  "description": "The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere. From sweater-free lunch-strolls, to slightly more sunlit evening commutes, the coming season is already sneaking its way into our lives and that can only mean one thing — the Spring ’20 Salesforce release is right around the corner!.",
+  "description": "The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere.",
   "tags":
     [
       "chrome",
@@ -20,14 +20,14 @@
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_4N_qEF8nvAEZNq9NkdJ0CA.jpg" },
 }
 ---
 
-The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere. From sweater-free lunch-strolls, to slightly more sunlit evening commutes, the coming season is already sneaking its way into our lives and that can only mean one thing — the [Spring ’20 Salesforce release ](https://www.salesforce.com/blog/2020/01/spring-20-release-preview.html)is right around the corner!
+From sweater-free lunch-strolls, to slightly more sunlit evening commutes, the coming season is already sneaking its way into our lives and that can only mean one thing — the [Spring ’20 Salesforce release ](https://www.salesforce.com/blog/2020/01/spring-20-release-preview.html)is right around the corner!
 As always, we’ve pored through the [release notes](https://releasenotes.docs.salesforce.com/en-us/spring20/release-notes/salesforce_release_notes.htm) and played around in our [preview orgs](https://medium.com/creme-de-la-crm/new-release-test-drive-spring-20-sandbox-preview-ebc7801ee6bf) to find the most-impactful features, updates, and upgrades headed for orgs everywhere. And, while most of these articles center around what to expect from changes on Salesforce’s side of things, this time it’s actually an update from Google Chrome that admins may have to act on. In today’s post we’ll be taking a look at changes coming to SameSite cookies, Google Chrome 80, and how they might affect your Salesforce integrations.
 Let’s dive in!
 
@@ -56,8 +56,10 @@ Then simply test your integrations and, if you catch any regressions, update the
 
 <pre>SameSite=None; Secure</pre>Test again, and they should all be back up and running! Salesforce does note (and it’s a good note) that:
 
-> While you test your cookies, consider what’s the most secure SameSite value that works for each cookie. If a cookie is intended to be accessed only in a first-party context, you can apply SameSite=Lax or SameSite=Strict to prevent external access. Explicitly setting SameSite=Lax means that you’re not relying on default browser behavior.
-> And now your org and integrations should be all set for the Chrome 80 release!
-> As always, if you need a hand ensuring that your org is ready and up-to-date, want some help building secure integrations, or anything else Salesforce-related, [drop us a line ](https://www.mkpartners.com/article/contact/contact)— MK Partners is here to help!
-> Stay tuned here on the blog for more Spring ’20 release highlights and, until next time, keep working hard, smart, and happy!
-> We’ll see you in the cloud.
+While you test your cookies, consider what’s the most secure SameSite value that works for each cookie. If a cookie is intended to be accessed only in a first-party context, you can apply SameSite=Lax or SameSite=Strict to prevent external access. Explicitly setting SameSite=Lax means that you’re not relying on default browser behavior.
+
+And now your org and integrations should be all set for the Chrome 80 release!
+
+Stay tuned here on the blog for more Spring ’20 release highlights and, until next time, keep working hard, smart, and happy!
+
+We’ll see you in the cloud.

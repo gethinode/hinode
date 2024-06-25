@@ -7,7 +7,7 @@
   "date": "2020-04-24T12:16:00.000Z",
   "title": "To Do: Upcoming Salesforce (Virtual) Events",
   "Slug": "to-do-upcoming-salesforce-virtual-events",
-  "description": "Over the last several months we’ve collectively watched our calendars reshape. As events are cancelled or postponed, and meetings made scarce or moved online, it can be easy to disconnect — to try to protect your expectations from being dashed by yet another “update” email or (hopefully) a refund..",
+  "description": "Over the last several months we’ve collectively watched our calendars reshape.",
   "tags":
     [
       "salesforce",
@@ -27,7 +27,7 @@
 }
 ---
 
-Over the last several months we’ve collectively watched our calendars reshape. As events are cancelled or postponed, and meetings made scarce or moved online, it can be easy to disconnect — to try to protect your expectations from being dashed by yet another “update” email or (hopefully) a refund.
+As events are cancelled or postponed, and meetings made scarce or moved online, it can be easy to disconnect — to try to protect your expectations from being dashed by yet another “update” email or (hopefully) a refund.
 But having things to look forward to is important. And, in these uncertain times, maybe even more important — as that event-optimism also reverberates a now nostalgic note of normalcy.
 The Salesforce community, its culture, and its people have always been one of the best parts of the platform’s ecosystem and, while we may not have the chance to see some of our friends face-to-face for a while, the community’s ensuring that there’s still plenty of socializing, learning, and sharing to be done in 2020. In today’s post we’ll be taking a look at the upcoming events we’re looking forward to most. Best of all, because these are remote, they’ll be open to people all over the world, as opposed to just those able to make the trip.
 Get your calendars ready, and let’s dive in!

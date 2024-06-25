@@ -8,7 +8,7 @@
   "title": "Spring ’23 Release Highlights: Marketing Cloud Account Engagement (Pardot)— General Enhancements",
   "Slug": "spring-23-release-highlights-marketing-cloud-account-engagement-pardot-general-enhancements",
   "description": "Well, the time has finally come. Salesforce has officially posted release notes for the official Spring ‘23 debut of Marketing Cloud…",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Tommy Holden",

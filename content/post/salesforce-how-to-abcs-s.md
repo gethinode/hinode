@@ -36,7 +36,7 @@ Trailblazers, admins, users, and execs all use Reports and Dashboards to gain in
 > To get started head over to your org and click on either the <strong>Reports </strong>or <strong>Dashboard</strong> tab followed by selecting the <strong>All Folders</strong> option from the navigation on the left-hand side.
 > {{< image src="/img/1_mbeAGrGFew6nVllEAc34SA.png" title="Image" >}}
 
-Within <strong>All Folders</strong>, locate the folder that contains the report you wish to share. Click on its <strong>down arrow</strong> and select <strong>Share</strong> from the dropdown.
+Within **All Folders**, locate the folder that contains the report you wish to share. Click on its <strong>down arrow</strong> and select <strong>Share</strong> from the dropdown.
 
 > Reports and Dashboards follow similar steps afterwards with the only difference being in one screen versus the other. For the remainder of the steps will be using the Reports tab during each screenshot.
 > Next, assign access based on which type of users you want to share. Within the <strong>Share With</strong> dropdown, you will have the option to choose between <strong>Users</strong>, <strong>Roles</strong>, <strong>Roles and Subordinates</strong>, or <strong>Public Groups</strong>.

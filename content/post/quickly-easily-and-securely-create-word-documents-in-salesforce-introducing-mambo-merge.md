@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/imac-with-dinosaur.jpg" },
 }
 ---
-
-{{< image src="/img/imac-with-dinosaur.jpg" >}}
 
 Duplicate effort is the bane of users everywhere and one of the biggest obstacles to adoption. And it makes sense. We’ve probably all experienced a new system roll-out, promising to deliver efficiency, ease of use, and of course management’s much-coveted reporting and metrics. But then, when it arrives, you’re left doing your job twice — once, the way you’ve always done it, and then again, entering what you’ve just done in the new system. It’s a recipe for reduced throughput and reduced morale, which is why it’s so important to make sure your systems actually benefit your users’ day-to-day.
 

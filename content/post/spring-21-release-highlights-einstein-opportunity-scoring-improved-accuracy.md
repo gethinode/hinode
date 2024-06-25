@@ -7,23 +7,18 @@
   "date": "2021-01-07T08:46:33-08:00",
   "title": "Spring ’21 Release Highlights — Einstein Opportunity Scoring, Improved Accuracy with Less Data",
   "Slug": "spring-21-release-highlights-einstein-opportunity-scoring-improved-accuracy",
-  "description": "With 2021 now well underway, it’s time to start prepping for the next pack of updates, upgrades, and new features headed to Salesforce…",
-  "tags": [],
+  "description": "With 2021 now well underway, it’s time to start prepping for the next pack of updates, upgrades, and new features headed to Salesforce with the Spring '21 Release!",
+  "tags": ["Release Notes"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/einstein-opportunity-scoring.jpg" },
 }
 ---
-
-{{< image src="/img/einstein-opportunity-scoring.jpg" >}}
-
-With 2021 now well underway, it's time to start prepping for the next pack of updates, upgrades, and new features headed to Salesforce with the Spring '21 Release!
 
 As always, in the lead-up to launch, we'll be reading over the release notes and rounding up the highlights that we're most excited to see in our orgs (and our clients'). So let's get started!
 

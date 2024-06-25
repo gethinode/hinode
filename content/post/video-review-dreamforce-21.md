@@ -1,10 +1,10 @@
 ---
 {
   "priority": "0.5",
-  "haveYoutube": true,
+  "haveYoutube": false,
   "haveGithubGist": false,
   "haveTwitter": false,
-  "date": "2021-10-11T08:46:33-07:00",
+  "date": "2021-10-11T08:46:33.000Z",
   "title": "Video Review: Dreamforce ‘21",
   "Slug": "video-review-dreamforce-21",
   "description": "Dreamforce Everywhere, aka Dreamforce ’21, is officially in the books and the first post-pandemic, in-person Salesforce event was a hit!",
@@ -13,17 +13,12 @@
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/dreamforce21.jpg" },
 }
 ---
-
-{{< image src="/img/dreamforce21.jpg" >}}
-
-Dreamforce Everywhere, aka Dreamforce ’21, is officially in the books and the first post-pandemic, in-person Salesforce event was a hit!
 
 The invite-only event was limited to 5,000 trailblazers, which make sit extra special that MK Partners received 3 invites in recognition of our efforts, expertise, and participation in the ecosystem.
 

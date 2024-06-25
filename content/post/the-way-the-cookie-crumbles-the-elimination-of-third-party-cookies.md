@@ -40,7 +40,18 @@ Tools such as first-party cookies allow websites to offer personalized user expe
 
 ## How to Prepare
 
-<strong>Make a list of actions and bring the right people into the discussion.</strong>
+Make a list of actions and bring the right people into the discussion.
 
-<ul><li>Identify all third-party cookies currently being used on your website.</li><li>Prioritize which cookies are essential for your website to function and which need to be removed or adjusted.</li><li>Evaluate alternative tracking methods like first-party and identity-based marketing.</li><li>Implement alternative tracking methods like contextual advertising to best suit your business needs.</li><li>Update your website’s privacy policy to reflect the changes in both tracking and data collection practices.</li><li>Communicate the changes to your users through various channels such as website, email, social, chat, and more.</li><li>Provide users with an opt-in or opt-out option to secure their data privacy preferences.</li><li>Monitor the website user experience and performance to identify improvement opportunities.</li><li>Optimize practices to improve user engagement.</li><li>Stay up-to-date with the latest privacy regulations and best practices to ensure compliance and reduce potential risks.</li></ul>There are many resources available online that go into more detail for each of the to-do items on the list above. Of course, if you still need a hand getting started, would like a second set of eyes on your existing site setup, or are curious how the cookie regs may impact your Marketing Cloud or Pardot efforts, [drop us a line](https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gF9jEAE)! We’re always happy to help.
+- Identify all third-party cookies currently being used on your website.
+- Prioritize which cookies are essential for your website to function and which need to be removed or adjusted.
+- Evaluate alternative tracking methods like first-party and identity-based marketing.
+- Implement alternative tracking methods like contextual advertising to best suit your business needs.
+- Update your website’s privacy policy to reflect the changes in both tracking and data collection practices.
+- Communicate the changes to your users through various channels such as website, email, social, chat, and more.
+- Provide users with an opt-in or opt-out option to secure their data privacy preferences.
+- Monitor the website user experience and performance to identify improvement opportunities.
+- Optimize practices to improve user engagement.
+- Stay up-to-date with the latest privacy regulations and best practices to ensure compliance and reduce potential risks.
+- There are many resources available online that go into more detail for each of the to-do items on the list above.
+
 As always, will see you in the cloud.

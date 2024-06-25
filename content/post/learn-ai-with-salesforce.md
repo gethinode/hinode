@@ -4,23 +4,20 @@
   "date": "2020-06-30T09:51:43-07:00",
   "title": "Learn AI With Salesforce!",
   "Slug": "learn-ai-with-salesforce",
-  "description": "Artificial Intelligence has grown from sci-fi catch-all to business necessity in the course of a few short years. AI jumped from a seemingly endless ...",
+  "description": "Artificial Intelligence has grown from sci-fi catch-all to business necessity in the course of a few short years.",
   "tags": ["ai", "einstein"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/laptop-brain.jpg" },
 }
 ---
 
-{{< image src="/img/laptop-brain.jpg" >}}
-
-Artificial Intelligence has grown from sci-fi catch-all to business necessity in the course of a few short years. AI jumped from a seemingly endless “demo” cycle (“this one can play chess”, “this one can play jeopardy”) to fully-developed data tools and now admins, devs, and executives everywhere are eager to ensure they’re equipped to use, understand, and implement it effectively.
+AI jumped from a seemingly endless “demo” cycle (“this one can play chess”, “this one can play jeopardy”) to fully-developed data tools and now admins, devs, and executives everywhere are eager to ensure they’re equipped to use, understand, and implement it effectively.
 
 As a [Salesforce Einstein](https://www.salesforce.com/products/einstein/overview/) Champion, I get the inside scoop on some of the coolest new developments in the space, and I’m excited to announce that the world of AI is about to get a lot more accessible! Salesforce is launching a new series of webinars to help everyone harness the power of artificial intelligence, whatever your current level of comfort!
 

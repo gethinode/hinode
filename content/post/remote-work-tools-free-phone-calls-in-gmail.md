@@ -18,8 +18,6 @@
 }
 ---
 
-{{< image src="/img/macbook-and-plant-on-desk.jpg" title="macbook and plant on desk" >}}
-
 With more and more workplaces making a rapid transition to remote operations, some snags and obstacles are inevitable. And, while it’s possible to make a smooth swap-over with the right tools, planning, and procedures in place — given the current circumstances, not every office has those luxuries. Plus, sometimes there’s just no time for triage or support when that important call starts in two minutes and your softphone’s not working.
 
 In this series of blogs, we’ll be sharing our tips and tools for navigating pop-up jams on the work-from-home front. Today, that means an alternative way to quickly dial out, for free, if your cell or softphone is experiencing it’s own little crisis: phone calls in Gmail!

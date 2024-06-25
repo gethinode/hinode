@@ -7,7 +7,7 @@
   "date": "2023-09-26T23:25:44.000Z",
   "title": "Winter ’24 Release Highlights: Are You Ready To Go Live?!",
   "Slug": "winter-24-release-highlights-are-you-ready-to-go-live",
-  "description": "It’s been seven weeks since the Winter ’24 Release Notes were first posted online. Dreamforce has come and gone, along with Release Readiness sessions for both Admin and Developers. These included an explanation of top features from the Winter ’24 release along with live demos and Q&amp;A from product experts. In case you didn&#39;t have a chance to tune in go ahead and check them out on Salesforce+ with the links above..",
+  "description": "It’s been seven weeks since the Winter ’24 Release Notes were first posted online.",
   "tags":
     [
       "salesforce-release-notes",
@@ -27,7 +27,7 @@
 }
 ---
 
-It’s been seven weeks since the Winter ’24 Release Notes were first posted online. Dreamforce has come and gone, along with Release Readiness sessions for both [Admin](https://www.salesforce.com/plus/experience/dreamforce_2023/series/administrators_at_dreamforce_2023/episode/episode-s1e3) and [Developers](https://www.salesforce.com/plus/experience/dreamforce_2023/series/developers_at_dreamforce_2023/episode/episode-s1e3). These included an explanation of top features from the Winter ’24 release along with live demos and Q&amp;A from product experts. In case you didn&#39;t have a chance to tune in go ahead and check them out on Salesforce+ with the links above.
+Dreamforce has come and gone, along with Release Readiness sessions for both [Admin](https://www.salesforce.com/plus/experience/dreamforce_2023/series/administrators_at_dreamforce_2023/episode/episode-s1e3) and [Developers](https://www.salesforce.com/plus/experience/dreamforce_2023/series/developers_at_dreamforce_2023/episode/episode-s1e3). These included an explanation of top features from the Winter ’24 release along with live demos and Q&amp;A from product experts. In case you didn&#39;t have a chance to tune in go ahead and check them out on Salesforce+ with the links above.
 And right here we continue our coverage of our [Release Highlights](https://medium.com/creme-de-la-crm/releasehighlights/home) by wrapping up some of the final steps left before every org has access to the newest features in their production environment.
 All episodes of the Release Readiness Live sessions will be available on [Salesforce+](https://www.salesforce.com/plus/experience/release_readiness_live/series/release_readiness_live_winter_24) to watch. These include both Dreamforce sessions (Admin / Developer) followed by the [two-day event](https://www.salesforce.com/plus/experience/release_readiness_live) that covers the additional four (Sales / CRM Analytics / Service / Flow). Then a final wrap-up session that includes the best highlights of all combined.
 {{< image src="/img/1_6_0KveVefrrinnXCxoF_nw.png" title="Image" >}}

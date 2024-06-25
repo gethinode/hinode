@@ -14,14 +14,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/imac-markers.jpg" },
 }
 ---
-
-{{< image src="/img/imac-markers.jpg" >}}
 
 The [Salesforce Summer '20 Release](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/salesforce_release_notes.htm) will be live for everyone this weekend and it's packed with improvements, updates, and features sure to make admins (and users) smile. In this round of our [Release Highlights Series](https://medium.com/tag/release-highlights/archive) we'll take a look at one of our favorite new timesavers, shared CSS styles!
 

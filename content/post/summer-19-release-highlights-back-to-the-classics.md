@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/salesforce-toy-car.jpg" },
 }
 ---
-
-{{< image src="/img/salesforce-toy-car.jpg" title="Red toy car with the Salesforce character inside" >}}
 
 It’s officially June and that means we’re only weeks away from a new NBA champion, even warmer weather, and a brand new Salesforce Release. That’s right, [Summer ’19](https://releasenotes.docs.salesforce.com/en-us/summer19/release-notes/salesforce_release_notes.htm) is already peeking over the horizon!
 

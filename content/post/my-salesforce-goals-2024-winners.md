@@ -7,7 +7,7 @@
   "date": "2024-04-10T18:21:17.000Z",
   "title": "My Salesforce Goals — 2024 Winners",
   "Slug": "my-salesforce-goals-2024-winners",
-  "description": "Whether this is your first day in the Salesforce ecosystem or you have many years under your belt, the goals you decide to pursue on your Salesforce journey impact the things you do every day. And, one thing that makes goals easier to achieve, is a terrific support network of shared interests and endeavors, like the Trailblazer community!.",
+  "description": "Whether this is your first day in the Salesforce ecosystem or you have many years under your belt, the goals you decide to pursue on your Salesforce journey impact the things you do every day.",
   "tags":
     [
       "salesforce-admin",
@@ -27,7 +27,7 @@
 }
 ---
 
-Whether this is your first day in the Salesforce ecosystem or you have many years under your belt, the goals you decide to pursue on your Salesforce journey impact the things you do every day. And, one thing that makes goals easier to achieve, is a terrific support network of shared interests and endeavors, like the Trailblazer community!
+One thing that makes goals easier to achieve, is a terrific support network of shared interests and endeavors, like the Trailblazer community!
 Trailblazers create ways to help shape and impact those around them. That is why contests such as <strong>#mysalesforcegoals</strong> help bring the best out of everyone in the Salesforce communities from all over the world.
 Let’s Learn More!
 

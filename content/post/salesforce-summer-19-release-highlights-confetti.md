@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/confetti-on-phone.gif" },
 }
 ---
-
-{{< image src="/img/confetti-on-phone.gif" title="Confetti falling on phone" >}}
 
 With the weather warming up, sleeves getting shorter, and the days getting longer, it can only mean one thing: The Summer '19 Release is right around the corner!
 

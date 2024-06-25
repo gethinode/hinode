@@ -39,25 +39,25 @@ Within Salesforce, Whitelisting (Allowlisting) is used in the same way and is es
 
 ## How To Whitelist (Allowlist) In Salesforce
 
-First up you head over to the <strong>Gear</strong> icon on your org’s homepage and select <strong>Setup</strong> from the dropdown.
+First up you head over to the **Gear** icon on your org’s homepage and select **Setup** from the dropdown.
 {{< image src="/img/1_1YC4w7IZKL7g6wcR_9wwRg.png" title="Image" >}}
 
-Within the Home tab search <strong>Network</strong> and click into <strong>Network Access </strong>result.
+Within the Home tab search **Network** and click into **Network Access **result.
 {{< image src="/img/1_dfJhklRSguQi77UBmsyf5g.png" title="Image" >}}
 
-Once inside the Network Access window click on <strong>New</strong> to define a new IP range.
+Once inside the Network Access window click on **New** to define a new IP range.
 {{< image src="/img/1_Vw6kvJfJIqDc_7wLkX9_tA.png" title="Image" >}}
 
-Set the <strong>start</strong> and <strong>end</strong> ranges along with a short <strong>description</strong> to remember 6 to 9 months down the road or when someone else needs to take over.
+Set the **start** and **end** ranges along with a short **description** to remember 6 to 9 months down the road or when someone else needs to take over.
 {{< image src="/img/1_Qh33xyFXCyG5Jf5woVZMCA.png" title="Image" >}}
 
-Once you are ready to proceed click on <strong>Save</strong>.
+Once you are ready to proceed click on **Save**.
 {{< image src="/img/1_DjgMDKQ_NYGwQ1X1j_lTXg.png" title="Image" >}}
 
 Now your Trusted IP addresses will be defined with the option to remove or modify at any time. At this point devices within the IP range will be granted access to the network or system.
 
-> You can also grant access to individual IPs by setting the start and end to the same.
-> {{< image src="/img/1_YTqrMWDw1dX1R9zfaXhUpQ.png" title="Image" >}}
+You can also grant access to individual IPs by setting the start and end to the same.
+{{< image src="/img/1_YTqrMWDw1dX1R9zfaXhUpQ.png" title="Image" >}}
 
 And now you (and your users and systems) are all set!
 Just like Whitelist and Blacklist (the opposite of Whitelist) are known terms within the cyber security industry new terminology is always rising to improve communication and understanding between individuals. That is why terms like “Allowlist” (Whitelist) and “Blocklist” (Blacklist) are terms one would encounter instead.

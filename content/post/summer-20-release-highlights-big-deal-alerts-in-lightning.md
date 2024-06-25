@@ -14,14 +14,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/cookie-coffee.jpg" },
 }
 ---
-
-{{< image src="/img/cookie-coffee.jpg" >}}
 
 The [Salesforce](https://www.salesforce.com/products/) Summer '20 Release is officially live and we're back with one last [highlight](https://medium.com/tag/release-highlights/archive) that's in orgs now. This time, it's a much-loved feature from Classic that's finally making the move to Lightning Experience --- [Big Deal Alerts](https://releasenotes.docs.salesforce.com/en-us/summer20/release-notes/rn_sales_opportunities_big_deal_alerts.htm)!
 

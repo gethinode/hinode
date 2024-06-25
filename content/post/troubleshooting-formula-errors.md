@@ -7,7 +7,7 @@
   "date": "2029-07-29T16:38:14.000Z",
   "title": "Troubleshooting Formula Errors",
   "Slug": "troubleshooting-formula-errors",
-  "description": "Formulas are one of Salesforce’s most powerful tools for manipulating, understanding, and exploring your data. From automating routine calculations to enforcing data best-practices, formulas are a key component of making your org work the way you want it to. But what do you do when one of those pesky errors stands between you and your vision?.",
+  "description": "Formulas are one of Salesforce’s most powerful tools for manipulating, understanding, and exploring your data.",
   "tags":
     [
       "salesforce-admin",
@@ -20,15 +20,17 @@
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_JwH1p88bpVCuFfJ0DjcVCA.jpg" },
 }
 ---
 
-Formulas are one of [Salesforce’s ](https://www.salesforce.com/products/)most powerful tools for manipulating, understanding, and exploring your data. From automating routine calculations to enforcing data best-practices, formulas are a key component of making your org work the way you want it to. But what do you do when one of those pesky errors stands between you and your vision?
+From automating routine calculations to enforcing data best-practices, formulas are a key component of making your org work the way you want it to. But what do you do when one of those pesky errors stands between you and your vision?
+
 In today’s post, we’ll walkthrough troubleshooting a formula error from start to finish, so you can learn what to ask, and how to react, when you’re not getting the results you expect.
+
 Let’s dive in!
 
 ## The Problem
@@ -119,5 +121,9 @@ Replacing “Test B2” with out desired value yields:
 Congratulations, you’re now equipped to troubleshoot your own formulas!
 All you have to do next time is remember these steps:
 
-<ol><li>Determine what you want your formula to do and how you want it to do it.</li><li>Simplify the formula as much as possible and write it out using clean, indented code.</li><li>Add your parameters one at a time, checking for syntax and functionality as you go.</li><li>Enjoy your fully-functional final formula!</li></ol>And, if you still need a hand getting your formulas firing on all cylinders or want some more in-depth help configuring and customizing your org, [drop us a line](https://www.mkpartners.com/article/contact/contact)! We’re always happy to help.
+1. Determine what you want your formula to do and how you want it to do it.
+2. Simplify the formula as much as possible and write it out using clean, indented code.
+3. Add your parameters one at a time, checking for syntax and functionality as you go.
+4. Enjoy your fully-functional final formula!
+
 In the meantime, keep working hard, smart, and happy! We’ll see you in the cloud.

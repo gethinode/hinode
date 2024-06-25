@@ -11,14 +11,11 @@
       "name": "Chris Stegall",
       "title": "Digital Marking Coordinator",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/laptop-with-glass.jpg" },
 }
 ---
-
-{{< image src="/img/laptop-with-glass.jpg" title="Laptop with an empty glass" >}}
 
 [Punxsutawney Phil](https://weather.com/news/news/2020-01-30-groundhog-day-punxsutawney-phil-did-he-see-his-shadow) must be an admin because Spring ’20 is right around the corner and that means there’s no time for shadows, superstitions, or extended Winters! Just like us, he’s probably pawing through the [release notes](https://releasenotes.docs.salesforce.com/en-us/spring20/release-notes/salesforce_release_notes.htm) right now and looking for the most exciting new features, updates, and upgrades heading to our orgs!
 

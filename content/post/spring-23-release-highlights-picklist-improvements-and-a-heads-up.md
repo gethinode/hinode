@@ -8,13 +8,12 @@
   "title": "Spring ’23 Release Highlights: Picklist Improvements (and a “Heads Up!”)",
   "Slug": "spring-23-release-highlights-picklist-improvements-and-a-heads-up",
   "description": "As we continue our countdown to the Salesforce Spring ’23 release, we’re once again peppering the lead-up to launch with our picks for the…",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_vnLx_XwGbzkxUNyj4AjPHg.png" },

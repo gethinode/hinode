@@ -8,13 +8,12 @@
   "title": "Summer ’22 Release Highlights: Einstein (Vision) OCR",
   "Slug": "summer-22-release-highlights-einstein-vision-ocr",
   "description": "We’re two weekends away from Summer ’22 being live in orgs everywhere and we’re back with another round of Release Highlights — this time…",
-  "tags": [],
+  "tags": ["release"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
       "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_HsX6Kh9UgR_5prXZdIlm1w.webp" },

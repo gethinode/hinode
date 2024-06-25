@@ -7,15 +7,8 @@
   "date": "2023-09-15T20:16:49.000Z",
   "title": "Winter ’24 Release Highlights: General Enhancements",
   "Slug": "winter-24-release-highlights-general-enhancements",
-  "description": "With Dreamforce in the rearview mirror, we’re continuing our countdown to the wide launch of the Salesforce Winter ’24 Release!.",
-  "tags":
-    [
-      "salesforce-winter-24",
-      "salesforce-release",
-      "release-highlights",
-      "salesforce",
-      "winter-24-release",
-    ],
+  "description": "With Dreamforce in the rearview mirror, we’re continuing our countdown to the wide launch of the Salesforce Winter ’24 Release!",
+  "tags": ["release-highlights", "salesforce", "winter-24"],
   "author":
     {
       "name": "Jessie Penaloza",
@@ -27,7 +20,6 @@
 }
 ---
 
-With Dreamforce in the rearview mirror, we’re continuing our countdown to the wide launch of the Salesforce Winter ’24 Release!
 While Dreamforce was full of future feature and product announcements, we still have many more updates and upgrades headed our way during the two remaining Winter ’24 Release Weekends. In this Release Highlights, we’ll focus on pointing out some of the general enhancements coming to the platform this Winter!
 
 ## Improved UI Elements
@@ -50,15 +42,17 @@ Simply enter the number of actions to display within a Related list and define e
 This [next one](https://help.salesforce.com/s/articleView?id=release-notes.rn_experiences_files_publiclink.htm&release=246&type=5) comes in the form of sharing and security protocols. As you may or may not be aware, by default and prior to this update, public link sharing for Salesforce files is enabled and defaults to 30 days. Well, with this enhancement you will now be able to set a specific duration of days along with a password required (which is auto-generated).
 {{< image src="/img/1_gLEWQKUS5jFRRj2bDHmymw.png" title="Image" >}}
 
-Simply head over to your org’s home page and configure the settings within the <strong>Content Deliveries and Public Links</strong>.
+Simply head over to your org’s home page and configure the settings within the **Content Deliveries and Public Links**.
 {{< image src="/img/1_o7RDXxjwhPAL1iOg7uE4EA.png" title="Image" >}}
 
 ## Disabled Keyboard Shortcuts
 
-Looks like many have asked about having [this enhancement](https://help.salesforce.com/s/articleView?id=release-notes.rn_general_disable_keyboard_shortcuts.htm&release=246&type=5) and their voices have been heard. By default, Salesforce shortcuts are enabled and can become a nuisance if working with multiple programs outside the Salesforce platform. That is why starting Winter ’24 the user experience can be accommodated to those who wish to disable it, period. Simply head over to the <strong>Help Menu</strong> and click on <strong>View Keyboard Shortcuts</strong> to toggle the on/off option.
+Looks like many have asked about having [this enhancement](https://help.salesforce.com/s/articleView?id=release-notes.rn_general_disable_keyboard_shortcuts.htm&release=246&type=5) and their voices have been heard. By default, Salesforce shortcuts are enabled and can become a nuisance if working with multiple programs outside the Salesforce platform. That is why starting Winter ’24 the user experience can be accommodated to those who wish to disable it, period. Simply head over to the **Help Menu** and click on **View Keyboard Shortcuts** to toggle the on/off option.
 
 ## What To Expect
 
 With the Release Weekends rapidly approaching expect input and feedback for Trailblazers who’ve started to have some time to test drive these features firsthand. Keep an eye out for new findings on some of these changes and prepare your users for changes that will affect their daily org operations.
+
 Keep us posted on your findings, share with us what caught your attention, and we’ll be happy to cover it in more depth here on the blog! Until next time, keep working hard, smart, and happy.
+
 And we’ll see you in the cloud!

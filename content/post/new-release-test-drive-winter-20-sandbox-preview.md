@@ -18,8 +18,6 @@
 }
 ---
 
-{{< image src="/img/drawing-salesforce-winter-20.jpg" title="Drawing the Salesforce Winter 20 logo" >}}
-
 It feels like we’re still smack dab in the middle of Hot Girl Summer, but the Salesforce Winter ’20 Release is coming up fast! Pretty soon we’ll be swapping our swimsuits for sweaters, our sandals for stockings, and sledding into a bunch of brand new features and upgrades in our orgs.
 
 (Unless you’re in the southern hemisphere, of course — in which case, things are just heating up. A fact that’s finally getting a [little iconographic love](https://twitter.com/jmmougeolle/status/1133753891907080194?s=20) from the Salesforce Design team!)

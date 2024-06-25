@@ -21,8 +21,6 @@
 }
 ---
 
-{{< image src="/img/video-call.jpg" >}}
-
 Salesforce’s [Connections (virtual) conference](https://www.salesforce.com/connections/) was last week and, while there were some technical hiccups, the livestream did eventually get underway and viewers from all over the world were able to tune in to the keynote delivered from the top of Salesforce park and the sessions presented from all over the world!
 
 Caylin and I attended, and then sat down to recap and review our experience at Salesforce Connections ‘21!
