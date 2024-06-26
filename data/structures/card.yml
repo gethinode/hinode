@@ -175,6 +175,19 @@ arguments:
         - start
         - end
         - center
+  scroll:
+    type: bool
+    parent: cascade
+    optional: true
+    group: partial
+    comment: >-
+      Enables horizontal scrolling of the cards. By default, the card group
+      wraps any cards beyond the amount of defined columns to a new line. When
+      `scroll` is set to true, a horizontal scroll bar is added instead.
+  wrapper:
+    type: string
+    optional: true
+    comment: Element class of the card wrapper.
   style:
     type: string
     parent: cascade

@@ -1,0 +1,34 @@
+@mixin scrollbar(
+  $foreground-color: var(--bs-primary),
+  $background-color: var(--bs-tertiary-bg),
+  $size: 10px
+) {
+	// For Safari and Chrome (to force appearance in Chrome)
+	&::-webkit-scrollbar {
+		width: $size;
+		height: $size;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: calc($size / 2);
+		background: $foreground-color;
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: calc($size / 2);
+		background: $background-color;
+	}
+
+	// Standard version (Firefox, only appears on scroll)
+	@supports (-moz-appearance:none) {
+		scrollbar-color: $foreground-color $background-color;
+	}
+}
+
+.scrollbar-horizontal
+{
+    @include scrollbar;
+
+	overflow-x: scroll;
+	margin: auto;
+}

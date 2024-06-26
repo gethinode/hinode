@@ -97,3 +97,56 @@
 .card-button-link {
     text-decoration: underline if($enable-important-utilities, !important, null);
 }
+
+// support horizontally scrollable card groups
+.card-container-wrapper {
+	position: relative;
+}
+
+div.card-container-wrapper::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	height: calc(100% - 2rem);
+	background: linear-gradient(
+		90deg, 
+		var(--bs-body-bg) 0%,
+		transparent 1.5rem,
+		transparent calc(100% - 1.5rem),
+		var(--bs-body-bg) 100%
+	);
+	pointer-events: none;
+}
+
+.card-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+	gap: 1.5rem;
+    margin-bottom: 2rem;
+	scroll-snap-type: x proximity;
+}
+
+.card-block-1 {
+    width: 80%;
+	scroll-snap-align: center;
+}
+
+.card-block-2 {
+    width: 40%;
+	scroll-snap-align: center;
+}
+
+.card-block-3 {
+    width: 27%;
+	scroll-snap-align: center;
+}
+
+.card-block-4 {
+    width: 20%;
+	scroll-snap-align: center;
+}
+
+.card-block-5 {
+    width: 16%;
+	scroll-snap-align: center;
+}
