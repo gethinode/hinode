@@ -35,6 +35,7 @@
 {{- $buttonLabel := .buttonLabel -}}
 {{- $buttonType := .buttonType -}}
 {{- $iconRounded := .iconRounded }}
+{{- $scroll := .scroll | default false }}
 {{- $hook := .hook | default "assets/card.html" }}
 
 <!-- Override arguments -->
@@ -82,37 +83,34 @@
 
 {{- $sizes := "100vw" }}
 {{- $colGrid := "" -}}
-{{- if eq $cols "1" }}
-    {{ $colGrid = "row-cols-1" -}}
-{{- else if eq $cols "2" }}
-    {{ if $responsive }}
-        {{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}
-    {{ else }}
-        {{ $colGrid = "row-cols-2" }}
+{{ if $scroll }}
+    {{- $colGrid = (printf "card-block-%d" $cols) -}}
+{{ else }}
+    {{ $colGrid = printf "row-cols-%s" $cols }}
+    {{- if eq $cols "1" }}
+        {{ $colGrid = "row-cols-1" -}}
+    {{- else if eq $cols "2" }}
+        {{ if $responsive }}
+            {{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}
+        {{ end -}}
+        {{ $sizes = printf "(min-width: %s) 50vw, 100vw" $breakpoint.currentSize }}
+    {{- else if eq $cols "3" }}
+        {{ if $responsive }}
+            {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current }}
+        {{ end -}}
+        {{ $sizes = printf "(min-width: %s) 33.3vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
+    {{- else if eq $cols "4" }}
+        {{ if $responsive }}
+            {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current }}
+        {{ end -}}
+        {{ $sizes = printf "(min-width: %s) 25vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
+    {{- else if eq $cols "5" }}
+        {{ if $responsive }}
+            {{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}
+        {{ end -}}
+        {{ $sizes = printf "(min-width: %s) 20vw, (min-width: %s) 33.3vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
     {{ end -}}
-    {{ $sizes = printf "(min-width: %s) 50vw, 100vw" $breakpoint.currentSize }}
-{{- else if eq $cols "3" }}
-    {{ if $responsive }}
-        {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current }}
-    {{ else }}
-        {{ $colGrid = "row-cols-3" }}
-    {{ end -}}
-    {{ $sizes = printf "(min-width: %s) 33.3vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
-{{- else if eq $cols "4" }}
-    {{ if $responsive }}
-        {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current }}
-    {{ else }}
-        {{ $colGrid = "row-cols-4" }}
-    {{ end -}}
-    {{ $sizes = printf "(min-width: %s) 25vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
-{{- else if eq $cols "5" }}
-    {{ if $responsive }}
-        {{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}
-    {{ else }}
-        {{ $colGrid = "row-cols-5" }}
-    {{ end -}}
-    {{ $sizes = printf "(min-width: %s) 20vw, (min-width: %s) 33.3vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
-{{ end -}}
+{{ end }}
 
 {{- if not $paginate -}}
     {{- $list = first $max $list -}}
@@ -121,8 +119,8 @@
 {{- if and (eq $cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
 <!-- Main code -->
-<div class="container-fluid {{ $wrapper }}">
-    <div class="row {{ $colGrid }} g-{{ $gutter }}">
+<div class="container {{ $wrapper }} {{ if $scroll }}card-container-wrapper{{ end }}">
+    <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100{{ else }}{{ $colGrid }}{{ end }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
                 "class" (printf "h-100 %s" $class)

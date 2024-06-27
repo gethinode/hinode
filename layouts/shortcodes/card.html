@@ -35,6 +35,9 @@
 {{- $title := .Get "title" -}}
 {{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") | default false -}}
 {{- $buttonType := partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType") | default "" -}}
+{{- $cols := partial "utilities/GetArgParent" (dict "page" . "arg" "cols") | default 3 -}}
+{{- $scroll := partial "utilities/GetArgParent" (dict "page" . "arg" "scroll") | default false -}}
+{{- $wrapper := "" -}}
 
 <!-- Override arguments -->
 {{ if $path }}
@@ -48,6 +51,11 @@
 {{ if .Parent }}
     {{ $class = (printf "h-100 %s" $class) }}
 {{ end }}
+
+{{ if $scroll }}
+    {{ $wrapper = printf "card-block-%d p-0" $cols }}
+{{ end }}
+
 
 <!-- Main code -->
 {{ if not $error -}}
@@ -69,6 +77,8 @@
         "align" $align
         "style" $style
         "subtle" $subtle
+        "scroll" $scroll
+        "wrapper" $wrapper
         "thumbnail" $thumbnail
         "loading" $loading
         "alt" $alt

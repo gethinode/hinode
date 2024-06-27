@@ -11,6 +11,7 @@
 
 <!-- Initialize arguments and default values -->
 {{- $alt := .alt -}}
+{{- $wrapper := .wrapper -}}
 {{- $class := .class -}}
 {{- $color := .color -}}
 {{- $description := .description -}}
@@ -126,7 +127,7 @@
 {{- end -}}
 
 <!-- Main code -->
-{{ if ne $gutter "0" }}<div class="g-{{ $gutter }}">{{ end }}
+{{ if or (ne $gutter "0") ($wrapper) }}<div class="g-{{ $gutter }} {{ $wrapper }}">{{ end }}
 
 {{ $stack := "fa-2x" }}
 
@@ -243,4 +244,4 @@
     </div>
 {{- end -}}
 
-{{ if ne $gutter "0" }}</div>{{ end }}
+{{ if or (ne $gutter "0") ($wrapper) }}</div>{{ end }}

@@ -92,7 +92,8 @@ arguments:
     type: bool
     optional: true
     comment: >-
-      Flag to indicate a horizontal line should be added between items on small screens.
+      Flag to indicate a horizontal line should be added between items on small
+      screens.
   wrapper:
     type: string
     optional: true
@@ -102,7 +103,8 @@ arguments:
     type: bool
     optional: true
     comment: >-
-      Flag indicating if the number of columns should be responsive, defaults to `true`.
+      Flag indicating if the number of columns should be responsive, defaults to
+      `true`.
   buttonType:
     type: select
     optional: true
@@ -113,6 +115,13 @@ arguments:
       values:
         - link
         - button
+  scroll:
+    type: bool
+    optional: true
+    comment: >-
+      Enables horizontal scrolling of the cards. By default, the card group
+      wraps any cards beyond the amount of defined columns to a new line. When
+      `scroll` is set to true, a horizontal scroll bar is added instead.
   hook:
     type: string
     optional: true
