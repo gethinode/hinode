@@ -230,7 +230,7 @@
                 {{- if and $search (not $searchModal)  }}{{ partial "assets/search-input.html" }}{{ end -}}
                 
                 <!-- Render top-menu items (maximum depth of 2) -->
-                <ul class="navbar-nav{{ if $flex }} d-flex w-100{{ end }}">
+                <ul class="navbar-nav {{ if $flex }}d-flex w-100{{ else }}ms-auto{{ end }}">
                     {{- range $menu := $menus -}}
                         {{ if $menu.Params.spacing }}
                             <li class="nav-item flex-grow-1"></li>
