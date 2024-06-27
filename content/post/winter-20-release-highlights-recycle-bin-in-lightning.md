@@ -5,8 +5,7 @@
   "title": "Winter '20 Release Highlights: Recycle Bin in Lightning",
   "Slug": "winter-20-release-highlights-recycle-bin-in-lightning",
   "description": "It’s September again and that means school’s getting back in session, we have less than a month before it’s time to wake up Greenday, and there’s a brand new Salesforce Release on the way...",
-  "tags":
-    ["winter 20", "release", "recycle", "bin", "lightning", "ideaexchange"],
+  "tags": ["winter-20", "release", "lightning", "ideaexchange"],
   "author":
     {
       "name": "Chris Stegall",

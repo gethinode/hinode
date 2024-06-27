@@ -8,14 +8,7 @@
   "title": "Goodie Bag: Salesforce.org Connections and TrailheaDX ‘21",
   "Slug": "goodie-bag-salesforce-org-connections-and-trailheadx-21",
   "description": "TrailheaDX was the year’s best Salesforce event yet — and it just got a little better with the arrival of the some sweet post-conference goodies! Salesforce.org’s Connections ’21 also followed up their look at how non-profits can improve their operations with technology with a “thank you” pack of their own!.",
-  "tags":
-    [
-      "salesforce-connections",
-      "salesforce-trailhead",
-      "salesforce",
-      "salesforce-admin",
-      "trailheadx",
-    ],
+  "tags": ["connections", "trailhead", "administrator", "trailheadx"],
   "author":
     {
       "name": "Chris Stegall",

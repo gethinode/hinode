@@ -8,14 +8,7 @@
   "title": "Copilot: The Term Taking over AI",
   "Slug": "copilot-the-term-taking-over-ai",
   "description": "The evolution of artificial intelligence (AI) over the last few years is one of the most remarkable tech narratives of our time.",
-  "tags":
-    [
-      "salesforce",
-      "ai",
-      "salesforce-einstein",
-      "artificial-intelligence",
-      "microsoft-copilot",
-    ],
+  "tags": ["artificial-intelligence", "einstein", "copilot"],
   "author":
     {
       "name": "Chris Stegall",

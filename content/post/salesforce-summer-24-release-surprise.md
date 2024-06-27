@@ -9,13 +9,7 @@
   "Slug": "salesforce-summer-24-release-surprise",
   "description": "Release Notes are here early!!.",
   "tags":
-    [
-      "summer-24",
-      "salesforce",
-      "salesforce-summer-24",
-      "release-highlights",
-      "salesforce-release",
-    ],
+    ["summer-24", "salesforce", "summer-24", "release-highlights", "release"],
   "author":
     {
       "name": Chris Stegall,

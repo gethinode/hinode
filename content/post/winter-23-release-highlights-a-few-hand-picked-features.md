@@ -8,7 +8,7 @@
   "title": "Winter ’23 Release Highlights: A Few Hand-Picked Features",
   "Slug": "winter-23-release-highlights-a-few-hand-picked-features",
   "description": "Pardot, Slack, and More!",
-  "tags": [],
+  "tags": ["winter-23", "release"],
   "author":
     {
       "name": "Jessie Penaloza",

@@ -8,19 +8,12 @@
   "title": "To Do: Upcoming Salesforce (Virtual) Events",
   "Slug": "to-do-upcoming-salesforce-virtual-events",
   "description": "Over the last several months we’ve collectively watched our calendars reshape.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-event",
-      "salesforce-admin",
-      "trailheadx",
-      "events",
-    ],
+  "tags": ["administrator", "trailheadx", "events"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_7PqI8IZJBKRfRILxFFklFw.jpg" },

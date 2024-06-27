@@ -8,14 +8,7 @@
   "title": "Dreamforce Registration is Open!",
   "Slug": "dreamforce-registration-is-open",
   "description": "It’s officially time to start thinking about Dreamforce!",
-  "tags":
-    [
-      "dreamforce",
-      "dreamforce-24",
-      "dreamforce-2024",
-      "salesforce-dreamforce",
-      "df24",
-    ],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",

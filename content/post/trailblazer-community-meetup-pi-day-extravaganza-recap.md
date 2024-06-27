@@ -8,14 +8,7 @@
   "title": "Trailblazer Community Meetup — Pi Day Extravaganza Recap",
   "Slug": "trailblazer-community-meetup-pi-day-extravaganza-recap",
   "description": "In 2009, The U.S. Congress designated every March 14th to be remembered as Pi Day (a.k.a π, the numerical value) to celebrate and spur more interest in math and science.",
-  "tags":
-    [
-      "salesforce-event",
-      "trailblazercommunity",
-      "salesforce-communities",
-      "salesforce-trailblazer",
-      "trailblazer",
-    ],
+  "tags": ["events", "communities", "trailblazer"],
   "author":
     {
       "name": "Jessie Penaloza",

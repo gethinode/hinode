@@ -12,7 +12,7 @@
     [
       "how-to",
       "salesforce-how-to-abcs",
-      "salesforce-admin",
+      "administrator",
       "salesforce-users",
       "salesforce",
     ],

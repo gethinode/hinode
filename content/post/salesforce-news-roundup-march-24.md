@@ -8,14 +8,7 @@
   "title": "Salesforce News Roundup: March ‘24",
   "Slug": "salesforce-news-roundup-march-24",
   "description": "March isn’t over yet (in fact tomorrow marks the kick-off of March Madness), but our reading lists are already packed with interesting and informative articles from around the world of Salesforce!.",
-  "tags":
-    [
-      "salesforce-admin",
-      "ai",
-      "salesforce-dev",
-      "salesforce-news",
-      "salesforce",
-    ],
+  "tags": ["administrator", "artifical-intelligence", "developer", "news"],
   "author":
     {
       "name": Chris Stegall,

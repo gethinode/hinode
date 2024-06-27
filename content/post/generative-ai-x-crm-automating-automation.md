@@ -8,14 +8,7 @@
   "title": "Generative AI x CRM: Automating Automation",
   "Slug": "generative-ai-x-crm-automating-automation",
   "description": "The 21st Century may well be remembered as the era of the AI celebrity. From Deep Blue toppling one of the all-time greats in chess (technically a ’90s accomplishment) to Watson making television history on Jeopardy; from Self-Driving Cars taking to the streets, to “smartphone assistants” in pockets all over the world; and of course, most recently, from the introduction of Salesforce Einstein AI, to the front-page domination of ChatGPT..",
-  "tags":
-    [
-      "einstein-gpt",
-      "ai",
-      "artificial-intelligence",
-      "salesforce-ai",
-      "salesforce",
-    ],
+  "tags": ["einstein", "gpt", "artificial-intelligence"],
   "author":
     {
       "name": "Chris Stegall",

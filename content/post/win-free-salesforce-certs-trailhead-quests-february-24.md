@@ -8,13 +8,7 @@
   "title": "How to Get Free Salesforce Certifications: Trailhead Quests February ‘24",
   "Slug": "win-free-salesforce-certs-trailhead-quests-february-24",
   "description": "Valentine’s Day is behind us and TDX is on the horizon, but there’s still a week left to complete February’s Trailhead Quests for your chance to win free Salesforce Certification Vouchers (and more)!.",
-  "tags":
-    [
-      "salesforce-certs",
-      "salesforce-trailblazer",
-      "salesforce-trailhead",
-      "salesforce",
-    ],
+  "tags": ["certification", "trailblazer", "trailhead"],
   "author":
     {
       "name": Chris Stegall,

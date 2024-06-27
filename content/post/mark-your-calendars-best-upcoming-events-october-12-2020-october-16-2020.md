@@ -8,8 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events October 12, 2020 — October 16, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-october-12-2020-october-16-2020",
   "description": "Wow this week I’m a little shook cause I don’t have a single Trailhead community group event! Also, I hope your calendars are cleared for Tuesday and Thursday cause there is a lot going on during those days. So sit back, open up your calendar and let’s get planning!.",
-  "tags":
-    ["salesforce", "wfh", "remote", "salesforce-event", "salesforce-admin"],
+  "tags": ["events", "administrator"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_an44nhOv7CxwVeHKS5IRgQ.jpg" },

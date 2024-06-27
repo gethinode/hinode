@@ -8,8 +8,7 @@
   "title": "Marketing Cloud for “Pardot Speakers”: How to Create a Form for a Landing Page",
   "Slug": "marketing-cloud-for-pardot-speakers-how-to-create-a-form-for-a-landing-page",
   "description": "Pardot was my introduction to the marketing aspect of the Salesforce ecosystem, hence I will always remember it that way.",
-  "tags":
-    ["marketing-automation", "sfmc", "pardot", "salesforce", "marketing-cloud"],
+  "tags": ["automation", "pardot", "marketing-cloud"],
   "author":
     {
       "name": "Jessie Penaloza",

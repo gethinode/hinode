@@ -8,14 +8,7 @@
   "title": "Troubleshooting Formula Errors",
   "Slug": "troubleshooting-formula-errors",
   "description": "Formulas are one of Salesforce’s most powerful tools for manipulating, understanding, and exploring your data.",
-  "tags":
-    [
-      "salesforce-admin",
-      "troubleshooting",
-      "formula-fields",
-      "salesforce",
-      "salesforce-formulas",
-    ],
+  "tags": ["administrator", "troubleshooting", "formulas"],
   "author":
     {
       "name": "Chris Stegall",

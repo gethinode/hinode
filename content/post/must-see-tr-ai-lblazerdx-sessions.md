@@ -8,14 +8,7 @@
   "title": "Must-See Tr(AI)lblazerDX Sessions",
   "Slug": "must-see-tr-ai-lblazerdx-sessions",
   "description": "Bringing you more of the TDX experience right to the comfort of your home — here we include a few sessions shared by our collaborators right from the Theaters on the show floor a few weeks ago. You won’t find these on Salesforce+, so catch ’em here!.",
-  "tags":
-    [
-      "salesforce-dev",
-      "salesforce-event",
-      "salesforce-tdx",
-      "salesforce",
-      "tdx24",
-    ],
+  "tags": ["developer", "events", "tdx"],
   "author":
     {
       "name": "Jessie Penaloza",

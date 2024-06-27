@@ -8,8 +8,7 @@
   "title": "That’s A Wrap on Tr(AI)lblazerDX",
   "Slug": "thats-a-wrap-on-tr-ai-lblazerdx",
   "description": "TDX is a wrap and we’ll be rolling out recap content, but if you missed it, be sure to save the date for next year. And, if you're eager to dive into this years’ content, use Salesforce+ to watch all the sessions streamed and available online!",
-  "tags":
-    ["tdx25", "salesforce-event", "tdx", "salesforce-tdx-25", "salesforce-tdx"],
+  "tags": ["events", "tdx"],
   "author":
     {
       "name": "Jessie Penaloza",

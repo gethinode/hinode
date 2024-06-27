@@ -8,14 +8,7 @@
   "title": "TDX Meet-the-Speakers: Chris Stegall",
   "Slug": "tdx-meet-the-speakers-chris-stegall",
   "description": "The countdown to TDX is underway, this year’s Agenda Builder is live, and Trailblazers all over the world are picking sessions and packing their schedules for another amazing event in San Francisco..",
-  "tags":
-    [
-      "tdx24",
-      "salesforce-event",
-      "salesforce-tdx",
-      "salesforce-tdx24",
-      "trailblazerdx",
-    ],
+  "tags": ["events", "tdx", "trailblazer"],
   "author":
     {
       "name": Chris Stegall,

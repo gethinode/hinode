@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events May 17, 2021 — May 21, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-may-17-2021-may-21-2021",
   "description": "Phew we have another week filled with so many events that I only wrote about a few! I recommend pursuing all the different Salesforce event links to see if there is anything else you want to attend. It’s a very productive week in the Salesforce ecosystem, so I recommend you sit back, open up your calendar, and get planning!.",
-  "tags":
-    [
-      "salesforce-admin",
-      "events",
-      "trailblazer",
-      "trailblazercommunity",
-      "salesforce-event",
-    ],
+  "tags": ["administrator", "events", "trailblazer", "trailblazer", "events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_0_s8EjuIMYeSldCso9v3ig.jpg" },

@@ -8,14 +8,7 @@
   "title": "Guest Post: AM to PM, A Day in the Life of a Project Manager",
   "Slug": "guest-post-am-to-pm-a-day-in-the-life-of-a-project-manager",
   "description": "As a Project Manager, you’re part conductor, part diagnostician, and part lineman (it is football season, after all). It’s a role that requires juggling many hats, but the rewards are immense, and every day provides a new opportunity to learn and grow with your clients and team..",
-  "tags":
-    [
-      "project-management",
-      "salesforce",
-      "salesforce-pm",
-      "salesforce-partners",
-      "project-manager",
-    ],
+  "tags": ["project-management", "partners", "project-manager"],
   "author":
     {
       "name": Chris Stegall,

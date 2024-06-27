@@ -8,14 +8,7 @@
   "title": "Spring ’24 Release Highlights: Release Resources",
   "Slug": "spring-24-release-highlights-release-resources",
   "description": "The first Spring ’24 Release Weekend is behind us (the smaller, pilot weekend) and that means orgs everywhere are rapidly approaching the day Spring ’24 features going live for them as well! We still have some time before all deployments are live but here is a quick list of resources to check off to make sure all your users, departments, and stakeholders are ready to revel in the updates and upgrades (and that you as an admin are prepared to roll them out effectively)..",
-  "tags":
-    [
-      "spring-24-release",
-      "salesforce-release",
-      "release-highlights",
-      "salesforce",
-      "salesforce-spring-24",
-    ],
+  "tags": ["spring-24", "release", "release-highlights"],
   "author":
     {
       "name": "Jessie Penaloza",

@@ -8,14 +8,7 @@
   "title": "Slack + Salesforce, How to Catch Up on the New Paradigm",
   "Slug": "slack-salesforce-how-to-catch-up-on-the-new-paradigm",
   "description": "The biggest news out of Dreamforce last year was Salesforce’s acquisition of Slack — this week, it became official!",
-  "tags":
-    [
-      "trailhead",
-      "salesforce",
-      "salesforce-slack",
-      "slack-acquisition",
-      "slack",
-    ],
+  "tags": ["trailhead", "slack"],
   "author":
     {
       "name": "Chris Stegall",

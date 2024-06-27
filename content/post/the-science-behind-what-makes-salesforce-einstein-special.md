@@ -8,14 +8,7 @@
   "title": "The Science Behind What Makes Salesforce Einstein Special",
   "Slug": "the-science-behind-what-makes-salesforce-einstein-special",
   "description": "Artificial Intelligence is revolutionizing the way organizations do business and the dramatically increasing value of their data (and the tools they use to collect it all).",
-  "tags":
-    [
-      "salesforce-einstein",
-      "salesforce",
-      "artificial-intelligence",
-      "salesforce-ai",
-      "ai",
-    ],
+  "tags": ["einstein", "artificial-intelligence"],
   "author":
     {
       "name": "Chris Stegall",

@@ -8,14 +8,7 @@
   "title": "Salesforce (not so) Secrets: How to Enable Sharing on Cases",
   "Slug": "salesforce-not-so-secrets-how-to-enable-sharing-on-cases",
   "description": "Customer Experience is more important than ever.",
-  "tags":
-    [
-      "how-to",
-      "customer-experience",
-      "customer-service",
-      "salesforce",
-      "salesforce-productivity",
-    ],
+  "tags": ["how-to", "customer-experience", "customer-service", "productivity"],
   "author":
     {
       "name": "Chris Stegall",

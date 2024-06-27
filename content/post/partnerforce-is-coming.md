@@ -8,14 +8,7 @@
   "title": "Partnerforce is Coming!",
   "Slug": "partnerforce-is-coming",
   "description": "February plays host to a significant Salesforce event in terms of its impact on the platform, implementations, and support — but one that also tends to slip by a little bit under the radar: Partnerforce!.",
-  "tags":
-    [
-      "salesforce-partners",
-      "salesforce-event",
-      "cloud-computing",
-      "salesforce",
-      "cloudtech",
-    ],
+  "tags": ["partners", "events"],
   "author":
     {
       "name": "Chris Stegall",

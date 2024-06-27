@@ -8,14 +8,7 @@
   "title": "Join Us in the Twin Cities",
   "Slug": "join-us-in-the-twin-cities",
   "description": "Mambo Merge attends the next community event.",
-  "tags":
-    [
-      "salesforce-event",
-      "mambo-moves",
-      "mambo-merge",
-      "salesforce",
-      "midwest-dreamin",
-    ],
+  "tags": ["events", "mambo-merge", "salesforce", "midwest-dreamin"],
   "author":
     {
       "name": "Jessie Penaloza",

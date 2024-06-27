@@ -8,7 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events December 7, 2020 — December 11, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-december-7-2020-december-11-2020",
   "description": "We have a very busy week ahead of us and though we are smack dab in the middle of the holiday season, it’s not time to be lazy. So sit back, open up your calendar, and let’s get planning!.",
-  "tags": ["salesforce", "salesforce-event", "remote", "virtual-events", "wfh"],
+  "tags": ["events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_2Zhy_AN89BUluVDBYeVRzg.jpg" },

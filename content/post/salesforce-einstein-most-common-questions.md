@@ -8,14 +8,7 @@
   "title": "Salesforce Einstein — Most Common Questions",
   "Slug": "salesforce-einstein-most-common-questions",
   "description": "As a Salesforce Einstein Champion I field a lot of questions about “just what it is, exactly?” and how artificial intelligence fits into the Salesforce Platform and, while I’m always happy to chat about it, I figured I’d take a moment here to address the Qs I hear most often!.",
-  "tags":
-    [
-      "salesforce-einstein",
-      "artificial-intelligence",
-      "einstein",
-      "salesforce",
-      "salesforce-ai",
-    ],
+  "tags": ["artificial-intelligence", "einstein"],
   "author":
     {
       "name": "Chris Stegall",

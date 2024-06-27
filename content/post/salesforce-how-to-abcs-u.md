@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: U",
   "Slug": "salesforce-how-to-abcs-u",
   "description": "How to Use Salesforce.",
-  "tags":
-    [
-      "salesforce",
-      "crm",
-      "salesforce-how-to-abcs",
-      "salesforce-admin",
-      "salesforce-crm",
-    ],
+  "tags": ["crm", "how-to", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

@@ -8,8 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events Sep 6, 2021 — Sep 10, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-sep-6-2021-sep-10-2021",
   "description": "Thirsty for events Thursday anyone? Well the universe has decided that EVERY EVENT this week will be on Thursday, September 9th, so “drink” up. Also, they are all morning events, so you will have to pick what event is the best suited for you. But luckily all of these events are virtual, so it doesn’t matter where you are! So sit back, open up our calendars and get planning!.",
-  "tags":
-    ["google", "tech", "salesforce-admin", "salesforce-event", "salesforce"],
+  "tags": ["google", "tech", "administrator", "events", "salesforce"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_vIxaTQsPkgJ295LPButg0A.jpg" },

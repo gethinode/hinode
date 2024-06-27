@@ -8,14 +8,7 @@
   "title": "Countdown to TDX ‘24— Sessions by the Numbers",
   "Slug": "countdown-to-tdx-24-sessions-by-the-numbers",
   "description": "As we clear the 2-week countdown for TrailblazerDX many look for all the resources available to get more insights and share knowledge between each other and the Trailblazer community. As Salesforce continues to release more and more information before their event look for us to help digest the details with some helpful visuals to make sense of it all..",
-  "tags":
-    [
-      "tdx24",
-      "salesforce-tdx",
-      "salesforce",
-      "salesforce-tdx-24",
-      "salesforce-event",
-    ],
+  "tags": ["tdx", "events"],
   "author":
     {
       "name": "Jessie Penaloza",

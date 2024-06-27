@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: S",
   "Slug": "salesforce-how-to-abcs-s",
   "description": "How to Share Reports and Dashboards.",
-  "tags":
-    [
-      "salesforce-reports",
-      "salesforce-how-to-abcs",
-      "salesforce",
-      "salesforce-how-to",
-      "salesforce-admin",
-    ],
+  "tags": ["reports", "how-to", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

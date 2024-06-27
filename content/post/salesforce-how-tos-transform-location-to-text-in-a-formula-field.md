@@ -8,14 +8,7 @@
   "title": "Salesforce How To’s: Transform ‘Location’ to ‘Text’ in a Formula Field",
   "Slug": "salesforce-how-tos-transform-location-to-text-in-a-formula-field",
   "description": "Today’s Salesforce admin tip comes straight from the trenches! There are a lot of neat tricks you can do with formula fields and they’re sometimes an admin’s best tool for creatively manipulating data across objects and records, especially if you’re already near your lookup limit. But, while formula fields have no issues with complex calculations, currencies, or most data types, one thing they don’t account for is location data as stored in Salesforce..",
-  "tags":
-    [
-      "salesforce-how-to",
-      "salesforce-admin",
-      "formula-fields",
-      "admin-tricks",
-      "salesforce",
-    ],
+  "tags": ["how-to", "administrator", "formulas"],
   "author":
     {
       "name": "Chris Stegall",

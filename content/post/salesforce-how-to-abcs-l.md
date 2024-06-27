@@ -11,8 +11,8 @@
   "tags":
     [
       "salesforce",
-      "salesforce-how-to",
-      "salesforce-admin",
+      "how-to",
+      "administrator",
       "how-to",
       "salesforce-how-to-abcs",
     ],

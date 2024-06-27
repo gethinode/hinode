@@ -8,14 +8,7 @@
   "title": "Mambo Merge 2.0 — The New Dance",
   "Slug": "mambo-merge-2-0-the-new-dance",
   "description": "Winter ’24 release notes are soon coming to a help-dot-Salesforce near you and, with them, a chance to re-calibrate some of those essential skills and leverage new functionality launched in the release. While AI is paving the way for faster and simpler automation for existing tasks, one must still harness the fundamentals in order to stay ahead of the curve..",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-app",
-      "appexchange",
-      "mambo-merge",
-      "salesforce-doc-gen",
-    ],
+  "tags": ["app", "appexchange"],
   "author":
     {
       "name": "Jessie Penaloza",

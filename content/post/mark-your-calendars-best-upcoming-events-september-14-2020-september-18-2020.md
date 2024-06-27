@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events September 14, 2020 — September 18, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-september-14-2020-september-18-2020",
   "description": "Too many events, too little time. It’s a doozy this week. So sit back, open up your calendar and let’s get planning!.",
-  "tags":
-    [
-      "salesforce-communities",
-      "remote",
-      "salesforce",
-      "salesforce-event",
-      "wfh",
-    ],
+  "tags": ["communities", "events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_ua4hfa3bcy6bmzOh9zxlfA.jpg" },

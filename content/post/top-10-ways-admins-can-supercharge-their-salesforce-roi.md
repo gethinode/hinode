@@ -5,7 +5,7 @@
   "title": "Top 10 Ways Admins Can Supercharge Their Salesforce ROI",
   "Slug": "top-10-ways-admins-can-supercharge-their-salesforce-roi",
   "description": "Dreamforce is officially underway!",
-  "tags": ["salesforce", "admin"],
+  "tags": ["administrator"],
   "author":
     {
       "name": "Chris Stegall",

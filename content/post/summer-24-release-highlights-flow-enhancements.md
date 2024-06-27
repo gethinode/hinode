@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: Flow Enhancements",
   "Slug": "summer-24-release-highlights-flow-enhancements",
   "description": "Updates, Changes, or Additions that go with the flow.",
-  "tags":
-    [
-      "salesforce-admin",
-      "summer-24-release",
-      "salesforce-summer-24",
-      "salesforce",
-      "salesforce-release",
-    ],
+  "tags": ["administrator", "summer-24", "release"],
   "author":
     {
       "name": "Jessie Penaloza",

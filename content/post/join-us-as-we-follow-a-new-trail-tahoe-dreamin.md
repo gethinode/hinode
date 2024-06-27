@@ -8,7 +8,7 @@
   "title": "Join Us As We Follow A New Trail — Tahoe Dreamin’",
   "Slug": "join-us-as-we-follow-a-new-trail-tahoe-dreamin",
   "description": "Our Trailblazer journey continues as we head over to the beautiful resort city of South Lake Tahoe, CA. Here will join other amazing Trailblazers in a relaxing and fun environment. With this being their fifth Community Conference they are happy and proud to be able host and operate this event by people in the Salesforce Community, for the Salesforce Community..",
-  "tags": ["salesforce", "mambo-merge", "networking", "events", "tahoe"],
+  "tags": ["mambo-merge", "networking", "events", "tahoe"],
   "author":
     {
       "name": "Jessie Penaloza",

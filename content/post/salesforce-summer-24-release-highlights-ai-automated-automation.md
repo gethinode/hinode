@@ -8,14 +8,7 @@
   "title": "Salesforce Summer ’24 Release Highlights: AI-Automated Automation",
   "Slug": "salesforce-summer-24-release-highlights-ai-automated-automation",
   "description": "There’s a lot of exciting updates heading our way in Summer ’24 (and of course we’re cataloguing our picks for the most impactful, impressive, and innovative right here) — but this one’s got all the right ingredients to be extra influential on orgs, operations, and admins!.",
-  "tags":
-    [
-      "summer-24-release",
-      "release-highlights",
-      "salesforce-release",
-      "salesforce-summer-24",
-      "salesforce",
-    ],
+  "tags": ["release-highlights", "release", "summer-24"],
   "author":
     {
       "name": Chris Stegall,

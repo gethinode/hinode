@@ -8,8 +8,7 @@
   "title": "5 Things To Do While at TDX",
   "Slug": "5-things-to-do-while-at-tdx",
   "description": "We are only days away from TrailblazerDX and people from all parts of the world will be arriving in the Bay Area. Expect delays to get a cup of coffee or even find an Uber to get you to and from the airport. While you worry about how to maneuver the ins and outs of the city. Let us help you by consolidating some things to add to your to-do list..",
-  "tags":
-    ["tdx", "salesforce-tdx", "salesforce-event", "trailblazerdx", "tdx24"],
+  "tags": ["tdx", "events", "trailblazer"],
   "author":
     {
       "name": "Jessie Penaloza",

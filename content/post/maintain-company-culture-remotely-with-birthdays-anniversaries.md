@@ -8,7 +8,7 @@
   "title": "Maintain Company Culture Remotely with Birthdays & Anniversaries",
   "Slug": "maintain-company-culture-remotely-with-birthdays-anniversaries",
   "description": "With the global pandemic drastically reshaping the working world, companies everywhere are looking for ways to maintain their long-developed company cultures, especially with the sudden shift to remote work and a physically distant workforce..",
-  "tags": ["wfh", "appexchange", "salesforce", "copany-culture", "remote"],
+  "tags": ["appexchange"],
   "author":
     {
       "name": "Chris Stegall",

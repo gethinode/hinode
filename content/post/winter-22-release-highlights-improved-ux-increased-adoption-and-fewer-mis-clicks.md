@@ -8,7 +8,7 @@
   "title": "Winter ’22 Release Highlights: Improved UX, Increased Adoption, and Fewer Mis-clicks",
   "Slug": "winter-22-release-highlights-improved-ux-increased-adoption-and-fewer-mis-clicks",
   "description": "Dreamforce is right around the corner and, while Salesforce’s huge annual event is soaking up the spotlight, there’s something else on the…",
-  "tags": ["dreamforce", "winter22"],
+  "tags": ["dreamforce", "winter-22"],
   "author":
     {
       "name": "Chris Stegall",

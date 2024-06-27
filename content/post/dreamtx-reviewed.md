@@ -8,13 +8,12 @@
   "title": "DreamTX Reviewed",
   "Slug": "dreamtx-reviewed",
   "description": "Dreamforce 2020 is over, Salesforce’s annual whirlwind week of news, sessions, and guest spots has come to a close, and the recordings…",
-  "tags": [],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/caylin-review-video.jpg" },

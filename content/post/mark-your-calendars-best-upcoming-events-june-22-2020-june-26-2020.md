@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events June 22, 2020 — June 26, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-june-22-2020-june-26-2020",
   "description": "Do you know what is happening this upcoming week?! TRAILHEADX Y’ALL!! I don’t know about you, but I have been WAITING for this event since January. Yeah it’s virtual this year, but who cares! There is sooo much to learn from this event that your system will go into overload! Don’t worry, I haven’t forgotten about some of our other events too, but I’m just really excited about TrailheaDX. So sit back, open up your calendars and let’s get planning!.",
-  "tags":
-    [
-      "trailhead",
-      "trailheadx",
-      "wfh",
-      "salesforce-developer",
-      "salesforce-event",
-    ],
+  "tags": ["trailhead", "developer", "events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_CWfFflCIkmfEnXZC_edG9Q.jpg" },

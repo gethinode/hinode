@@ -8,7 +8,6 @@ const compileFrontMatter = (story) => {
     author.title = "Digital Marketing Coordinator";
     author.image = "/img/contributors/jesus-penaloza_88-88.jpg";
   } else if (story.author === "Chris Stegall") {
-    z;
     author.title = "Marketing Director";
     author.image = "/img/contributors/chris-stegall_352x352.jpg";
   }

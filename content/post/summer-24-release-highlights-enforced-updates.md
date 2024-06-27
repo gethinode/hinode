@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: Enforced Updates",
   "Slug": "summer-24-release-highlights-enforced-updates",
   "description": "Better prep, because you don’t have a choice with these..",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-release",
-      "salesforce-admin",
-      "summer-24-release",
-      "salesforce-summer-24",
-    ],
+  "tags": ["release", "administrator", "summer-24"],
   "author":
     {
       "name": "Jessie Penaloza",

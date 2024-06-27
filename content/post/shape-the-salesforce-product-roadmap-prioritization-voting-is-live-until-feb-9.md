@@ -8,14 +8,7 @@
   "title": "Shape the Salesforce Product Roadmap: Prioritization Voting is Live until Feb. 9!",
   "Slug": "shape-the-salesforce-product-roadmap-prioritization-voting-is-live-until-feb-9",
   "description": "We talk a lot about new Salesforce releases here. With three every year (Winter, Spring, and Summer) it feels like there’s always something “new and improved” right around the corner...",
-  "tags":
-    [
-      "salesforce-ideaexchange",
-      "prioritization",
-      "salesforce-release",
-      "salesforce",
-      "release-highlights",
-    ],
+  "tags": ["ideaexchange", "prioritization", "release", "release-highlights"],
   "author":
     {
       "name": "Chris Stegall",

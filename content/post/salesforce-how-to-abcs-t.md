@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: T",
   "Slug": "salesforce-how-to-abcs-t",
   "description": "How to turn off Multi-Factor Authentication (MFA).",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-trailblazer",
-      "salesforce-admin",
-      "salesforce-how-to-abcs",
-      "salesforce-how-to",
-    ],
+  "tags": ["trailblazer", "administrator", "how-to"],
   "author":
     {
       "name": "Jessie Penaloza",

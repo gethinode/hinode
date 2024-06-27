@@ -8,14 +8,7 @@
   "title": "The Way the Cookie Crumbles: the Elimination of Third Party Cookies",
   "Slug": "the-way-the-cookie-crumbles-the-elimination-of-third-party-cookies",
   "description": "Managing the Transition and Maintaining Personalized Marketing Experiences.",
-  "tags":
-    [
-      "pardot",
-      "cookies",
-      "salesforce-marketing",
-      "marketing-cloud",
-      "salesforce",
-    ],
+  "tags": ["pardot", "cookies", "marketing-cloud"],
   "author":
     {
       "name": "Jessie Penaloza",

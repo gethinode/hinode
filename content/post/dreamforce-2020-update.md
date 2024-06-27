@@ -8,13 +8,12 @@
   "title": "Dreamforce 2020 Update",
   "Slug": "dreamforce-2020-update",
   "description": "There’s news in the world of Dreamforce — the huge annual celebration of all things Salesforce!",
-  "tags": [],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/dreamforce-to-you.png" },

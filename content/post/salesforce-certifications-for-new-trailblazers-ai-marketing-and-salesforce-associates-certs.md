@@ -8,14 +8,7 @@
   "title": "Salesforce Certifications for New Trailblazers: AI, Marketing, and Salesforce Associates Certs",
   "Slug": "salesforce-certifications-for-new-trailblazers-ai-marketing-and-salesforce-associates-certs",
   "description": "If you’re looking to launch your Salesforce career or are eager to bag your first cert after a little bit of exposure to the platform — the Salesforce ‘Associate’ certifications are designed to be an excellent entry point to demonstrate your newfound skills..",
-  "tags":
-    [
-      "salesforce-admin",
-      "salesforce",
-      "salesforce-certification",
-      "salesforce-certs",
-      "salesforce-certified",
-    ],
+  "tags": ["administrator", "certification", "certified"],
   "author":
     {
       "name": "Jessie Penaloza",

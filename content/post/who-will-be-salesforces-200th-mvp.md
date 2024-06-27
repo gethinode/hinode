@@ -8,7 +8,7 @@
   "title": "Who Will be Salesforce’s 200th MVP?",
   "Slug": "who-will-be-salesforces-200th-mvp",
   "description": "The Trailblazer Community has been one of the defining strengths of Salesforce for years and an undeniable contributor to the platform’s long term growth and success.",
-  "tags": ["salesforce", "mvp", "community", "trailblazer"],
+  "tags": ["mvp", "communities", "trailblazer"],
   "author":
     {
       "name": Chris Stegall,

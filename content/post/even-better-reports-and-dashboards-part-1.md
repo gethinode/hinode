@@ -8,14 +8,7 @@
   "title": "Even Better Reports and Dashboards — Part 1",
   "Slug": "even-better-reports-and-dashboards-part-1",
   "description": "Reports and Dashboards are two of the most celebrated features of Salesforce, and rightly so. They contextualize the chaotic. They organize, illuminate, and illustrate insights into our operations on a daily, quarterly, yearly scale. Refining the ever-increasing supply of data into digestible, actionable intelligence is a necessity for 21st century orgs, and so improvements to Salesforce’s reporting capabilities are a boon to businesses everywhere..",
-  "tags":
-    [
-      "salesforce",
-      "spring-19-release",
-      "reporting",
-      "reports-and-dashboards",
-      "salesforce-reports",
-    ],
+  "tags": ["spring-19", "reporting", "reports-and-dashboards"],
   "author":
     {
       "name": "Chris Stegall",

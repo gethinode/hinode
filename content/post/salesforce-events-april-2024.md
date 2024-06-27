@@ -8,14 +8,7 @@
   "title": "Salesforce Events —  April 2024",
   "Slug": "salesforce-events-april-2024",
   "description": "This month is starting to look pretty busy if you are a Trailblazer who doesn’t miss a beat and loves to attend Salesforce events. With less than 5 months before Dreamforce, Salesforce isn’t slowing down, and is hosting a series of events to keep everyone moving, meeting, and mingling!.",
-  "tags":
-    [
-      "salesforce-event",
-      "salesforce",
-      "salesforce-admin",
-      "salesforce-world-tour",
-      "salesforce-communities",
-    ],
+  "tags": ["events", "administrator", "world-tour", "communities"],
   "author":
     {
       "name": "Jessie Penaloza",

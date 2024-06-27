@@ -8,14 +8,7 @@
   "title": "Free Salesforce Certs: Trailhead Quests for March‘24",
   "Slug": "free-salesforce-certs-trailhead-quests-for-march-24",
   "description": "Don’t miss your last chance at this month’s free certs!.",
-  "tags":
-    [
-      "salesforce-certification",
-      "salesforce-certs",
-      "salesforce-admin",
-      "salesforce",
-      "salesforce-trailhead",
-    ],
+  "tags": ["certification", "administrator", "trailhead"],
   "author":
     {
       "name": "Jessie Penaloza",

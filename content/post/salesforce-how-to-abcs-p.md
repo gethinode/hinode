@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: P",
   "Slug": "salesforce-how-to-abcs-p",
   "description": "How to Print a Report.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-how-to-abcs",
-      "salesforce-reports",
-      "salesforce-how-to",
-      "salesforce-users",
-    ],
+  "tags": ["reports", "how-to", "users"],
   "author":
     {
       "name": "Jessie Penaloza",

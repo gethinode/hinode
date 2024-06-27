@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: Record Pages Get a Glow Up",
   "Slug": "summer-24-release-highlights-record-pages-get-a-glow-up",
   "description": "As we continue our countdown to the Salesforce Summer ’24 Release, we’re back with another round of Release Highlights!",
-  "tags":
-    [
-      "salesforce-summer-24",
-      "salesforce-admin",
-      "summer-24-release",
-      "salesforce",
-      "salesforce-release",
-    ],
+  "tags": ["summer-24", "administrator", "release"],
   "author":
     {
       "name": Chris Stegall,

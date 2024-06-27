@@ -8,13 +8,7 @@
   "title": "Salesforce Events — June 2024",
   "Slug": "salesforce-events-june-2024",
   "description": "The sun is setting a little later each day and it feels like Summer is already here, but it won’t be official for a few more weeks. Along with the weather, Trailblazer community conferences and Salesforce events are heating up too, as June means we’re only three months away from Dreamforce!.",
-  "tags":
-    [
-      "salesforce-world-tour",
-      "salesforce",
-      "salesforce-event",
-      "trailblazercommunity",
-    ],
+  "tags": ["world-tour", "events", "trailblazer"],
   "author":
     {
       "name": "Jessie Penaloza",

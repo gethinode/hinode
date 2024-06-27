@@ -8,14 +8,7 @@
   "title": "Join Us At Cactusforce ‘23",
   "Slug": "join-us-at-cactusforce-23",
   "description": "And Catch Mambo Merge at Demo Jam!.",
-  "tags":
-    [
-      "cactusforce",
-      "salesforce-dev",
-      "salesforce-event",
-      "mambo-merge",
-      "salesforce-developer",
-    ],
+  "tags": ["developer", "events", "communities"],
   "author":
     {
       "name": "Jessie Penaloza",

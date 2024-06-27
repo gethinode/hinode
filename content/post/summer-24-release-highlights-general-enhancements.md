@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: General Enhancements",
   "Slug": "summer-24-release-highlights-general-enhancements",
   "description": "Updates Admins will Need to Know About.",
-  "tags":
-    [
-      "release-highlights",
-      "salesforce-summer-24",
-      "salesforce-release",
-      "salesforce",
-      "summer-24-release",
-    ],
+  "tags": ["release-highlights", "summer-24", "release"],
   "author":
     {
       "name": "Jessie Penaloza",

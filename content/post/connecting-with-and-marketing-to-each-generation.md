@@ -8,14 +8,7 @@
   "title": "Connecting With, and Marketing to, Each Generation",
   "Slug": "connecting-with-and-marketing-to-each-generation",
   "description": "As Gen A(I) enters the workforce, a quick refresher and a new audience..",
-  "tags":
-    [
-      "salesforce-marketing",
-      "marketing",
-      "generation-alpha",
-      "salesforce",
-      "generation",
-    ],
+  "tags": ["marketing", "artificial-intelligence"],
   "author":
     {
       "name": "Jessie Penaloza",

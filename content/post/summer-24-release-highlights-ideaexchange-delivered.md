@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: IdeaExchange Delivered",
   "Slug": "summer-24-release-highlights-ideaexchange-delivered",
   "description": "Trailblazer-Requested Features Headed to Orgs Everywhere!.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-ideaexchange",
-      "salesforce-release",
-      "summer-24-release",
-      "salesforce-summer-24",
-    ],
+  "tags": ["ideaexchange", "release", "summer-24"],
   "author":
     {
       "name": "Jessie Penaloza",

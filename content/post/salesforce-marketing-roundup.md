@@ -8,14 +8,7 @@
   "title": "Salesforce Marketing Roundup",
   "Slug": "salesforce-marketing-roundup",
   "description": "A compilation and refresher of useful principles.",
-  "tags":
-    [
-      "marketing",
-      "email-marketing",
-      "marketing-cloud",
-      "salesforce-marketing",
-      "salesforce",
-    ],
+  "tags": ["marketing", "marketing-cloud"],
   "author":
     {
       "name": "Jessie Penaloza",

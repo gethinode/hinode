@@ -8,13 +8,7 @@
   "title": "Release Highlights: Sales Cloud Readiness Release Live - Recap",
   "Slug": "release-highlights-sales-cloud-readiness-release-live-recap",
   "description": "The remaining Orgs in the Salesforce ecosystem have gotten their Spring ’24 push so we’re all up to date on the latest!.",
-  "tags":
-    [
-      "release-highlights",
-      "salesforce-release",
-      "spring-24-release",
-      "salesforce-spring-24",
-    ],
+  "tags": ["release-highlights", "release", "spring-24"],
   "author":
     {
       "name": "Jessie Penaloza",

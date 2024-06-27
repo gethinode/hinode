@@ -8,14 +8,7 @@
   "title": "Another Successful Pledge 1% Experience",
   "Slug": "another-successful-pledge-1-experience",
   "description": "Salesforce Healthcare and Life Sciences Team and MK Partners volunteer at Second Harvest Food Bank.",
-  "tags":
-    [
-      "salesforce-volunteer",
-      "pledge-1",
-      "salesforce-admin",
-      "salesforce",
-      "salesforce-partners",
-    ],
+  "tags": ["volunteer", "pledge-1", "administrator", "partners"],
   "author":
     {
       "name": "Jessie Penaloza",

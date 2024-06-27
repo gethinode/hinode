@@ -8,13 +8,7 @@
   "title": "See You There: Dreamin’ in Color 2024!",
   "Slug": "see-you-there-dreamin-in-color-2024",
   "description": "This year marks Dreamin’ In Color’s 3rd annual community conference for Black, Latinx, and Hispanic individuals engaged with or interested in the Salesforce platform...",
-  "tags":
-    [
-      "trailblazercommunity",
-      "salesforce",
-      "salesforce-event",
-      "dreamin-in-color",
-    ],
+  "tags": ["trailblazer", "events", "dreamin"],
   "author":
     {
       "name": "Jessie Penaloza",

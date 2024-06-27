@@ -7,15 +7,8 @@
   "date": "2023-06-26T21:27:21.000Z",
   "title": "Save Time and Clicks with Salesforce Keyboard Shortcuts",
   "Slug": "save-time-and-clicks-with-salesforce-keyboard-shortcuts",
-  "description": "Salesforce is an amazing tool. Allowing you to better organize, manage, and even automate your activities. But even with workflow rules, macros, quick text, and more — awesome admins (and their users) are always looking for another edge to help them get through the repetitive bits even faster..",
-  "tags":
-    [
-      "salesforce-automation",
-      "salesforce-productivity",
-      "salesforce",
-      "salesforce-admin",
-      "salesforce-ux",
-    ],
+  "description": "Salesforce is an amazing tool. Allowing you to better organize, manage, and even automate your activities.",
+  "tags": ["automation", "productivity", "administrator", "ux"],
   "author":
     {
       "name": "Chris Stegall",
@@ -27,7 +20,7 @@
 }
 ---
 
-[Salesforce](https://www.salesforce.com/products/) is an amazing tool. Allowing you to better organize, manage, and even automate your activities. But even with workflow rules, macros, quick text, and more — awesome admins (and their users) are always looking for another edge to help them get through the repetitive bits even faster.
+But even with workflow rules, macros, quick text, and more — awesome admins (and their users) are always looking for another edge to help them get through the repetitive bits even faster.
 And there’s good news on that front! Back in the Spring ’19 Release, Salesforce rolled out keyboard shortcuts that’ve been helping admins save time for more than 3 years now!
 In today’s post (and for newer admins who missed the buzz the first time) we’ll run through our favorite keyboard shortcuts for cutting down the clicks and speeding up your Salesforce-ing.
 **Note: The shortcuts will be presented with their Mac keys first, then the PC option, but for the most part all you need to do is mentally swap the “command(⌘)” key for the “control” key on your PC and you’ll be fine!**

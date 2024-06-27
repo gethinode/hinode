@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events May 3, 2021 — May 7, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-may-3-2021-may-7-2021",
   "description": "Short and sweet is my motto this week. Hopefully it gives you a little break, cause last week was super full of fun events! So sit back, open up your calendar, and let’s get planning!.",
-  "tags":
-    [
-      "salesforce-event",
-      "virtual-events",
-      "salesforce-admin",
-      "trailblazer",
-      "salesforce",
-    ],
+  "tags": ["events", "administrator", "trailblazer"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_VMh3LDR9jlMLifZJcjn-uQ.jpg" },

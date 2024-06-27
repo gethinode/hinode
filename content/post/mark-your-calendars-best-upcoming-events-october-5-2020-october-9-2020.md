@@ -8,7 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events October 5, 2020 — October 9, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-october-5-2020-october-9-2020",
   "description": "Another week, more events. We got a little bit of this and a little bit of that this upcoming week, so sit back, open up your calendar and let’s get planning!.",
-  "tags": ["wfh", "remote", "salesforce", "salesforce-event", "virtual-events"],
+  "tags": ["events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_CicM8Kn1diQh_WQ36U94_A.jpg" },

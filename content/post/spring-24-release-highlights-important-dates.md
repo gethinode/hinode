@@ -8,14 +8,7 @@
   "title": "Spring ’24 Release Highlights: Important Dates",
   "Slug": "spring-24-release-highlights-important-dates",
   "description": "It may still be mid-Winter when you look out the windows but today’s a big day on the road to the Salesforce Spring ’24 Release — Pre-Release org sign ups are live! And then next week we’ll get release notes and that means Spring ’24 is just over the horizon!.",
-  "tags":
-    [
-      "spring-24-release",
-      "salesforce-admin",
-      "salesforce-spring-24",
-      "release-highlights",
-      "salesforce-release",
-    ],
+  "tags": ["spring-24", "administrator", "release-highlights", "release"],
   "author":
     {
       "name": Chris Stegall,

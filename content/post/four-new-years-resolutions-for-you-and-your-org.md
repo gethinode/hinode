@@ -6,27 +6,17 @@
   "title": "Four New Year Resolutions for You and Your Org",
   "Slug": "four-new-years-resolutions-for-you-and-your-org",
   "description": "With less than a month left in the decade, 2020 is not the distant future anymore, it is basically tomorrow. As always, this time of year is marked by reflection and resolution...",
-  "tags":
-    [
-      "salesforce optimizer",
-      "volunteer",
-      "dreamforce",
-      "pledge",
-      "trailblazer",
-    ],
+  "tags": ["optimizer", "volunteer", "dreamforce", "pledge", "trailblazer"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/january-calendar.jpg" },
 }
 ---
-
-{{< image src="/img/january-calendar.jpg" title="January calendar" >}}
 
 With less than a month left in the decade, 2020 isn’t the distant future anymore, it’s basically tomorrow. As always, this time of year is marked by reflection and resolution. Acknowledgement and assessment of where we’ve been and an optimistic pivot toward the year (and years) to come. It’s the perfect time to lay out your objectives, personal and professional, and make a plan to welcome next December with full sails and a boatload of new accomplishments. With that in mind we’ve put together a list of goals for companies, admins, and users to kick off 2020 right and ensure that the next decade in your Salesforce org starts off strong.
 

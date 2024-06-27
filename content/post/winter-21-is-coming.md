@@ -8,7 +8,7 @@
   "title": "Winter 21 is Coming",
   "Slug": "winter-21-is-coming",
   "description": "It may feel like it was a long time ago when the phrase Winter is coming still sparked eager anticipation, but that’s about to change…",
-  "tags": ["release"],
+  "tags": ["winter-21", "release"],
   "author":
     {
       "name": "Chris Stegall",

@@ -8,14 +8,7 @@
   "title": "Salesforce Marketing Cloud Implementation Checklist",
   "Slug": "salesforce-marketing-cloud-implementation-checklist",
   "description": "Salesforce Marketing Cloud is only getting stronger within its own universe in the Salesforce ecosystem. Overall, it can be complicated as it’s a huge platform in general.",
-  "tags":
-    [
-      "marketing",
-      "salesforce-marketing",
-      "salesforce",
-      "cloud-marketing-tips",
-      "marketing-cloud",
-    ],
+  "tags": ["marketing", "marketing-cloud"],
   "author": { "name": Tommy Holden, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_tFC6t2JhcaJ_vXuVeMxVhA.png" },

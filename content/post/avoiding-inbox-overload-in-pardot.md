@@ -8,8 +8,7 @@
   "title": "Avoiding Inbox Overload in Pardot",
   "Slug": "avoiding-inbox-overload-in-pardot",
   "description": "Let’s face it, no one’s a fan of too-frequent communication.",
-  "tags":
-    ["pardot-how-to", "pardot", "salesforce-how-to", "marketing", "salesforce"],
+  "tags": ["pardot", "how-to", "marketing"],
   "author":
     {
       "name": "Chris Stegall",

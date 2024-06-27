@@ -8,14 +8,7 @@
   "title": "My Flow-vember Journey — Week 2",
   "Slug": "my-flow-vember-journey-week-2",
   "description": "As I mentioned last week, learning to “Flow” is not a race so, if you get overwhelmed with info and ideas, take a rest, recupe’, and try again when you’re feeling ready! You can always go back and read the material again, or ask a question on the Trailhead forums too. You’ll be automating tasks in your Salesforce org in no time!.",
-  "tags":
-    [
-      "salesforce-automation",
-      "salesforce-flow",
-      "salesforce",
-      "flow-vember",
-      "salesforce-admin",
-    ],
+  "tags": ["automation", "flow", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

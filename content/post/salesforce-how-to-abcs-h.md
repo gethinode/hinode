@@ -11,9 +11,9 @@
       "hidden",
       "hide",
       "fields",
-      "admin",
+      "administrator",
       "tutorial",
-      "page layout",
+      "page-layout",
     ],
   "author":
     {

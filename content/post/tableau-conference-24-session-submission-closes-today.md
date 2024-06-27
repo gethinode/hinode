@@ -8,14 +8,7 @@
   "title": "Tableau Conference ’24 Session Submission Closes Today!",
   "Slug": "tableau-conference-24-session-submission-closes-today",
   "description": "Ready to take the stage at TC24 and share your Analytics insights with the rest of the Datafam?! Well today’s the last day to submit those sessions for your chance to be selected!.",
-  "tags":
-    [
-      "tableau-conference-24",
-      "tc24",
-      "salesforce",
-      "tableau",
-      "tableau-conference",
-    ],
+  "tags": ["tableau-conference", "tableau"],
   "author":
     {
       "name": Chris Stegall,

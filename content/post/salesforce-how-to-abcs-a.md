@@ -8,8 +8,7 @@
   "title": "Salesforce “How To” ABCs: A",
   "Slug": "salesforce-how-to-abcs-a",
   "description": "<em>How to Add Products to a Price Book</em>.",
-  "tags":
-    ["salesforce-how-to-abcs", "salesforce", "product", "book-price", "how-to"],
+  "tags": ["salesforce-how-to-abcs", "product", "book-price", "how-to"],
   "author":
     {
       "name": "Chris Stegall",

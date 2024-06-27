@@ -8,14 +8,7 @@
   "title": "Salesforce Announces Hyperforce!",
   "Slug": "salesforce-announces-hyperforce",
   "description": "No, it’s not a new branch of the military to combat excitement — it’s a re-architecture of Salesforce! Hyperforce was designed to deliver a more-powerful and more-scalable platform especially for governments and global clients dealing with stricter requirements around data management and storage..",
-  "tags":
-    [
-      "public-sector",
-      "salesforce-platofrm",
-      "salesforce",
-      "salesforce-news",
-      "hyperforce",
-    ],
+  "tags": ["public-sector", "platofrm", "news", "hyperforce"],
   "author":
     {
       "name": "Chris Stegall",

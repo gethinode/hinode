@@ -8,13 +8,12 @@
   "title": "Need to Start Up a Salesforce Developer Org",
   "Slug": "need-to-start-up-a-salesforce-developer-org",
   "description": "Whether it’s to test out Salesforce features and functionality, teach yourself some new tricks, follow along with a Trailhead Trail, build…",
-  "tags": [],
+  "tags": ["developer"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/imac-how-to.jpg" },

@@ -9,13 +9,7 @@
   "Slug": "salesforce-how-to-abcs-q",
   "description": "How to query deleted records.",
   "tags":
-    [
-      "salesforce-admin",
-      "salesforce-how-to-abcs",
-      "salesforce",
-      "soql",
-      "salesforce-how-to",
-    ],
+    ["administrator", "salesforce-how-to-abcs", "salesforce", "soql", "how-to"],
   "author":
     {
       "name": "Jessie Penaloza",

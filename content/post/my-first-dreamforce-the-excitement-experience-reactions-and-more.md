@@ -8,8 +8,7 @@
   "title": "My First Dreamforce — The Excitement, Experience, Reactions and More",
   "Slug": "my-first-dreamforce-the-excitement-experience-reactions-and-more",
   "description": "First-time experiences create reactions and emotions you would have never imagined. And, while everyone’s experience is unique, there are commonalities we all share. ",
-  "tags":
-    ["salesforce", "salesforce-event", "df22", "dreamforce-2022", "dreamforce"],
+  "tags": ["events", "dreamforce"],
   "author":
     {
       "name": "Jessie Penaloza",

@@ -8,14 +8,7 @@
   "title": "Salesforce Einstein’s Newest Milestone",
   "Slug": "salesforce-einsteins-newest-milestone",
   "description": "Salesforce Einstein has been proving the relevance and effectiveness of AI for business for a while now, and it just hit a major benchmark in terms of adoption: 80+ Billion AI-powered predictions per day!.",
-  "tags":
-    [
-      "ai",
-      "salesforce-ai",
-      "salesforce",
-      "artificial-intelligence",
-      "salesforce-einstein",
-    ],
+  "tags": ["artificial-intelligence", "einstein"],
   "author":
     {
       "name": "Chris Stegall",

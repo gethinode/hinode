@@ -8,19 +8,12 @@
   "title": "TrailheaDX Recap",
   "Slug": "trailheadx-recap",
   "description": "TrailheaDX was last week and (based on the reviews) may have been the best virtual Salesforce event to date!.",
-  "tags":
-    [
-      "salesforce",
-      "trailhead",
-      "trailheadx",
-      "salesforce-trailheadx",
-      "trailheadx-21",
-    ],
+  "tags": ["trailhead", "tdx"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_BM_x1nxbf9y2F38D2H_8tQ.jpg" },

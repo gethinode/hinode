@@ -8,7 +8,7 @@
   "title": "Do You Recognize This Salesforce?",
   "Slug": "do-you-recognize-this-salesforce-part-1",
   "description": "The World's Leading CRM has chagned A LOT over the years...",
-  "tags": ["tech", "software", "cloud", "salesforce", "silicon-valley"],
+  "tags": ["tech", "software", "cloud", "silicon-valley"],
   "author":
     {
       "name": "Chris Stegall",

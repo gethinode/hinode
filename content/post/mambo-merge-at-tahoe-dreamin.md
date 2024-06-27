@@ -4,20 +4,19 @@
   "date": "2021-10-21T10:38:18-07:00",
   "Slug": "mambo-merge-at-tahoe-dreamin",
   "description": "Next week will see the return of Salesforce trailblazers to one of the most special (and scenic) annual events for the CRM and its...",
-  "tags": ["mambo merge", "salesforce", "tahoe dreamin"],
+  "tags": ["dreamin"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/tahoe-dreamin-mambo-merge.jpg" },
 }
 ---
 
-Next week will see the return of Salesforce t.jpg"azers to one of the most special (and scenic) annual events for the CRM and its community — [Tahoe Dreamin’](https://www.norcaldreamin.com/).
+Next week will see the return of Salesforce Trailblazers to one of the most special (and scenic) annual events for the CRM and its community — [Tahoe Dreamin’](https://www.norcaldreamin.com/).
 
 Those of you in the ecosystem for a while might still refer to it as NorCal Dreamin’ and, unlike Dreamforce, Connections, TrailheaDX, etc… — one of the things that makes [Tahoe Dreamin’](https://www.norcaldreamin.com/) so special is that it’s a community event! By trailblazers, for trailblazers, and a unique opportunity to gain insight from all levels of Salesforce access and experience.
 

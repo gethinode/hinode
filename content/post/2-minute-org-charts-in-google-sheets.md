@@ -8,14 +8,7 @@
   "title": "2-Minute Org Charts in Google Sheets",
   "Slug": "2-minute-org-charts-in-google-sheets",
   "description": "Everyone probably has their go-to application for creating stunning, readable organizational charts — but when you need to whip one up in...",
-  "tags":
-    [
-      "google-sheets",
-      "how-to",
-      "org-chart-software",
-      "google-workspace",
-      "org-charts",
-    ],
+  "tags": ["google", "how-to", "org-charts"],
   "author":
     {
       "name": "Chris Stegall",

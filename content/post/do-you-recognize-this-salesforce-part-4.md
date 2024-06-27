@@ -8,7 +8,7 @@
   "title": "Do You Recognize This Salesforce?",
   "Slug": "do-you-recognize-this-salesforce-part-4",
   "description": "Part 4: 2016–2020.",
-  "tags": ["salesforce", "silicon-valley", "cloud", "software", "tech"],
+  "tags": ["silicon-valley", "cloud", "software", "tech"],
   "author":
     {
       "name": "Chris Stegall",

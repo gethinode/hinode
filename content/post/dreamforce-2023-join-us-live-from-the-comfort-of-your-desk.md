@@ -8,8 +8,7 @@
   "title": "Dreamforce 2023: Join Us Live (From the Comfort of your Desk)!",
   "Slug": "dreamforce-2023-join-us-live-from-the-comfort-of-your-desk",
   "description": "Sit back, Tune-in, and Enjoy — right from your favorite chair.",
-  "tags":
-    ["dreamforce", "dreamforce-2023", "salesforce-event", "salesforce", "df23"],
+  "tags": ["dreamforce", "events"],
   "author":
     {
       "name": "Jessie Penaloza",

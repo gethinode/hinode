@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: N",
   "Slug": "salesforce-how-to-abcs-n",
   "description": "How to Create a New Campaign.",
-  "tags":
-    [
-      "salesforce-how-to-abcs",
-      "salesforce-how-to",
-      "salesforce-lightning",
-      "salesforce",
-      "salesforce-admin",
-    ],
+  "tags": ["how-to", "lightning", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

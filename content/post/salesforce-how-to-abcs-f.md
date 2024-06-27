@@ -13,7 +13,7 @@
       "salesforce-org",
       "salesforce-how-to-abcs",
       "salesforce",
-      "salesforce-admin",
+      "administrator",
       "how-to",
     ],
   "author":

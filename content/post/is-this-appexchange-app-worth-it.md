@@ -8,14 +8,7 @@
   "title": "Is this AppExchange App “Worth It”?",
   "Slug": "is-this-appexchange-app-worth-it",
   "description": "The Salesforce AppExchange is full of handy tools, helpful add-ons, and creative solutions to common problems — but it can also sometimes feel like an overwhelming wall of options.",
-  "tags":
-    [
-      "salesforce-appexchange",
-      "salesforce-admin",
-      "salesforce-app",
-      "salesforce",
-      "appexchange",
-    ],
+  "tags": ["administrator", "app", "appexchange"],
   "author":
     {
       "name": Chris Stegall,

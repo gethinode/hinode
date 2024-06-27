@@ -8,14 +8,7 @@
   "title": "5 Things We Love About TDX: A Valentine’s Day Tribute to Trailblazers",
   "Slug": "5-things-we-love-about-tdx-a-valentines-day-tribute-to-trailblazers",
   "description": "TrailblazerDX is less than a month away and, as Trailblazers around the world gear up for the annual Salesforce developer conference, we find ourselves looking forward to another amazing gathering and reflecting on the incredible TDX experiences we’ve shared over the years..",
-  "tags":
-    [
-      "trailheaddx",
-      "tdx24",
-      "salesforce-tdx",
-      "trailblazerdx",
-      "salesforce-event",
-    ],
+  "tags": ["trailhead", "tdx", "trailblazer", "events"],
   "author":
     {
       "name": "Chris Stegall",

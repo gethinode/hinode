@@ -5,13 +5,12 @@
   "title": "Finding the Right Salesforce Consultant",
   "Slug": "finding-the-right-salesforce-consultant",
   "description": "Whether you’re a brand new client getting ready for rollout or a platform veteran with a vision for improving your current system — finding the right Salesforce partner is the (not so) secret key to project success.",
-  "tags": ["consultant", "partner", "clients", "projects", "use cases"],
+  "tags": ["consultants", "partners", "clients", "projects"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/appexchange-listing-magnified.jpg" },

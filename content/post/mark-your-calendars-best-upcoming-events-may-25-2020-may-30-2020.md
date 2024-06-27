@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events May 25, 2020 — May 30, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-may-25-2020-may-30-2020",
   "description": "This upcoming week a lot of the Trailblazer community groups are hosting events. Due to the Memorial Day holiday (in the United States anyways) there aren’t any events on Monday, so enjoy your time off! It’s a busy week and we don’t have a lot of time for chit chat, so sit back, open up your calendars and let’s get planning!.",
-  "tags":
-    [
-      "wfh",
-      "salesforce-event",
-      "remote",
-      "salesforce-communities",
-      "salesforce",
-    ],
+  "tags": ["events", "communities"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_yzJR1RbQS3TkiagVHlqfyg.jpg" },

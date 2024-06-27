@@ -8,8 +8,7 @@
   "title": "Dreamforce ’23 Certs + Sessions Giveaways",
   "Slug": "dreamforce-23-certs-sessions-giveaways",
   "description": "Dreamforce 2023 is officially underway! And, as AI takes center stage at Moscone, now’s your chance to get entered to win a voucher for Salesforce’s Newest Cert: the AI Associate!.",
-  "tags":
-    ["salesforce", "df23", "dreamforce", "salesforce-admin", "dreamforce-2023"],
+  "tags": ["dreamforce", "administrator"],
   "author":
     {
       "name": Chris Stegall,

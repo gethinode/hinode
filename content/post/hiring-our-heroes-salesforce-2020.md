@@ -8,13 +8,12 @@
   "title": "Hiring Our Heroes x Salesforce 2020",
   "Slug": "hiring-our-heroes-salesforce-2020",
   "description": "Salesforce is an industry leader in doing good. From starting the Pledge 1% movement to supporting worthy causes around the world — their…",
-  "tags": [],
+  "tags": ["pledge-1"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/raising-hand-in-meeting.png" },

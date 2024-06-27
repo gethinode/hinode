@@ -12,9 +12,9 @@
     [
       "salesforce",
       "salesforce-how-to-abcs",
-      "salesforce-how-to",
       "how-to",
-      "salesforce-admin",
+      "how-to",
+      "administrator",
     ],
   "author":
     {

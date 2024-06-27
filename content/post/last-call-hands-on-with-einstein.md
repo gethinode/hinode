@@ -9,13 +9,7 @@
   "Slug": "last-call-hands-on-with-einstein",
   "description": "In case you missed it, this Thursday we’re hosting a Hands on Workshop and walking through one of the most useful features of AI in Salesforce — Prediction Builder!.",
   "tags":
-    [
-      "artificial-intelligence",
-      "hands-on-workshop",
-      "salesforce-ai",
-      "salesforce-einstein",
-      "salesforce-event",
-    ],
+    ["artificial-intelligence", "hands-on-workshop", "einstein", "events"],
   "author":
     {
       "name": "Chris Stegall",

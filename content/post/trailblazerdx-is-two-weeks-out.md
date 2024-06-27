@@ -8,19 +8,12 @@
   "title": "TrailblazerDX is Two Weeks Out!",
   "Slug": "trailblazerdx-is-two-weeks-out",
   "description": "The first of Salesforce’s “big” annual events is on the horizon — TrailblazerDX is heading back to San Francisco in just two short weeks!.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-event",
-      "salesforce-trailblazerdx",
-      "trailheadx",
-      "trailblazerdx",
-    ],
+  "tags": ["events", "tdx", "trailhead", "trailblazer"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_fus4gGvvFNOI9vbmmMBU9w.jpg" },

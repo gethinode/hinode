@@ -8,7 +8,7 @@
   "title": "ABM + CRM — 3 HIGH LEVEL KEYS FOR SUCCESS:",
   "Slug": "abm-crm-3-high-level-keys-for-success",
   "description": "Account-Based Marketing has been a strategy, well, forever. At least since the first CEO said, “I want someone to go win the XYZ account — they’re a perfect fit for our product!”. However, over the years it’s evolved — and for the better. The current playbook involves joining CRM data with a personalized outbound marketing strategy, specific to the brand being pursued..",
-  "tags": ["abm", "marketing", "crm", "salesforce", "pardot"],
+  "tags": ["marketing", "crm", "pardot"],
   "author": { "name": Tommy Holden, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_MjBKK55aDVwZUarBuzHPcg.png" },

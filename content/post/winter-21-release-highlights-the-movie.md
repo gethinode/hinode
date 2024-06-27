@@ -8,7 +8,7 @@
   "title": "Winter ’21 Release Highlights — the Movie!",
   "Slug": "winter-21-release-highlights-the-movie",
   "description": "Ok, not really a movie, but a YouTube video where Caylin and I run through our top picks for the most-anticipated updates, upgrades, and…",
-  "tags": [],
+  "tags": ["winter-21", "release"],
   "author":
     {
       "name": "Chris Stegall",

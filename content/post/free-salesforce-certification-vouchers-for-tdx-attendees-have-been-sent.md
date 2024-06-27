@@ -8,14 +8,7 @@
   "title": "Free Salesforce Certification Vouchers for TDX Attendees Have Been Sent!",
   "Slug": "free-salesforce-certification-vouchers-for-tdx-attendees-have-been-sent",
   "description": "If you attended this year’s TrailblazerDX at the beginning of March, you’ve got a treat in your inbox today! This morning Salesforce sent out the promised certification vouchers for folks who registered for Full Conference passes!.",
-  "tags":
-    [
-      "tdx24",
-      "salesforce-certs",
-      "salesforce-certification",
-      "salesforce",
-      "salesforce-tdx",
-    ],
+  "tags": ["tdx", "certification"],
   "author":
     {
       "name": Chris Stegall,

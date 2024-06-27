@@ -8,14 +8,7 @@
   "title": "Summer ’23 Release Highlights: Marketing Cloud Account Engagement (Pardot)",
   "Slug": "summer-23-release-highlights-marketing-cloud-account-engagement-pardot",
   "description": "External Triggers, Dashboards and Business Units.",
-  "tags":
-    [
-      "salesforce-summer-23",
-      "salesforce-release",
-      "pardot",
-      "release-highlights",
-      "summer-23-release",
-    ],
+  "tags": ["release", "pardot", "release-highlights", "summer-23"],
   "author":
     {
       "name": "Jessie Penaloza",

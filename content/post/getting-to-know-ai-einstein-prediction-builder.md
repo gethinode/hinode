@@ -5,13 +5,12 @@
   "title": "Getting to Know AI: Einstein Prediction Builder",
   "Slug": "getting-to-know-ai-einstein-prediction-builder",
   "description": "Artificial intelligence is everywhere today. And it’s more than a digital way of transforming data...",
-  "tags": ["ai", "admin"],
+  "tags": ["artificial-intelligence", "administrator"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/laptop-on-desk-einstein.jpg" },

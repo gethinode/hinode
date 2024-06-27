@@ -6,7 +6,7 @@
   "title": "Awesome SFDX Plugins: the Repo",
   "Slug": "awesome-sfdx-plugins-the-repo",
   "description": "Developing for Salesforce is a key part of the platform’s powerful flexibility. On top of robust out-of-the-box functionality and seemingly-limitless configuration options...",
-  "tags": ["sfdx", "vs code", "plugins", "repo"],
+  "tags": ["sfdx", "vs-code", "developer"],
   "author":
     {
       "name": "Chris Stegall",

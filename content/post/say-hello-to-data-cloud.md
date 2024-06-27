@@ -8,14 +8,7 @@
   "title": "Say Hello To Data Cloud!",
   "Slug": "say-hello-to-data-cloud",
   "description": "Unleash your data into the CRM World.",
-  "tags":
-    [
-      "cloud-data",
-      "salesforce-data",
-      "salesforce",
-      "salesforce-tools",
-      "salesforce-admin",
-    ],
+  "tags": ["data-cloud", "data", "tools", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

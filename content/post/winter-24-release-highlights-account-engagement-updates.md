@@ -8,14 +8,7 @@
   "title": "Winter ’24 Release Highlights: Account Engagement Updates",
   "Slug": "winter-24-release-highlights-account-engagement-updates",
   "description": "Just two weeks after the release notes went live, today’s the day the very first orgs are saying “hello” to Winter ‘24!.",
-  "tags":
-    [
-      "salesforce-winter-24",
-      "pardot",
-      "release-highlights",
-      "winter-24-release",
-      "salesforce-release",
-    ],
+  "tags": ["pardot", "release", "winter-24"],
   "author":
     {
       "name": "Jessie Penaloza",

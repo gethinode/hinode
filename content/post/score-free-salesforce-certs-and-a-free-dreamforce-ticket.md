@@ -8,8 +8,7 @@
   "title": "Score Free Salesforce Certs (and a Free Dreamforce Ticket)!",
   "Slug": "score-free-salesforce-certs-and-a-free-dreamforce-ticket",
   "description": "Don’t miss your chance to complete May’s Trailhead Quests.",
-  "tags":
-    ["dreamforce", "salesforce", "salesforce-training", "free", "trailhead"],
+  "tags": ["dreamforce", "training", "free", "trailhead"],
   "author":
     {
       "name": Chris Stegall,

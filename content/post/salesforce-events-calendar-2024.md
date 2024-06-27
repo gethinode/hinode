@@ -8,14 +8,7 @@
   "title": "Salesforce Events Calendar: 2024",
   "Slug": "salesforce-events-calendar-2024",
   "description": "<em>Updated: 03/26/2024</em>.",
-  "tags":
-    [
-      "salesforce",
-      "dreamforce",
-      "salesforce-event-dates",
-      "salesforce-admin",
-      "salesforce-event",
-    ],
+  "tags": ["dreamforce", "administrator", "events"],
   "author":
     {
       "name": Chris Stegall,

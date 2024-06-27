@@ -8,7 +8,7 @@
   "title": "Winter ’23 Release Highlights: Looking Into the Future With Einstein Search",
   "Slug": "winter-23-release-highlights-looking-into-the-future-with-einstein-search",
   "description": "A Major Overhaul In Search Features Via Salesforce is Upcoming.",
-  "tags": [],
+  "tags": ["winter-23", "release"],
   "author":
     {
       "name": "Tommy Holden",
@@ -51,16 +51,12 @@ Einstein in Marketing Cloud offers a range of opportunities for you to analyze, 
 
 Einstein Search provides improved search experience at no additional cost. Einstein Search for Knowledge, which is now generally available, makes it easier for service agents to locate relevant articles. Users can also interact with new Einstein Search Answers enhancements and save answers and links to their clipboards:
 
-- [\*\*Boost Agent Productivity with Einstein Search for Knowledge](https://help.salesforce.com/s/articleView?id=release-notes.rn_search_esk_ga.htm&type=5&language=en_US&release=240):\*\*
+- [Boost Agent Productivity with Einstein Search for Knowledge](https://help.salesforce.com/s/articleView?id=release-notes.rn_search_esk_ga.htm&type=5&language=en_US&release=240):
   Service agents can find relevant articles faster and respond to customers more accurately for expedited case resolution. Einstein Search for Knowledge is now generally available.
 
-- [\*\*Resolve Cases Quickly with Interactive Einstein Search Answers (Pilot)](https://help.salesforce.com/s/articleView?id=release-notes.rn_search_enhanced_answers.htm&type=5&language=en_US&release=240):\*\*
+- [Resolve Cases Quickly with Interactive Einstein Search Answers (Pilot)](https://help.salesforce.com/s/articleView?id=release-notes.rn_search_enhanced_answers.htm&type=5&language=en_US&release=240):
   Agents can take immediate action by using Einstein Search Answers to extract the most relevant information from a knowledge article. The returned answers are just three lines so that agents can copy the answer and its internal link to their clipboard and then share it without leaving the page. Previously, agents opened the record page and then copied the URL and section of an article.
 
 ## BOTTOM LINE:
 
-**Search queries for agents using the Einstein platform should be good to go with these new enhancements. “Einstein Search” has significantly improved as returned answers (**answers and links) can be saved to user’s respective clipboard(s).
-
-Make sure to contact us whenever you would like to use this platform as we’re more than happy to provide expertise to help out regarding this new [release feature!](https://www.mkpartners.com/)
-
-And as always, reach out to any of us at [MK Partners for Marketing Cloud Expertise!](https://www.mkpartners.com/)
+Search queries for agents using the Einstein platform should be good to go with these new enhancements. “Einstein Search” has significantly improved as returned answers (answers and links) can be saved to user’s respective clipboard(s).

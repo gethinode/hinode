@@ -8,14 +8,7 @@
   "title": "Dreamforce 2023: Some Hidden Gems",
   "Slug": "dreamforce-2023-some-hidden-gems",
   "description": "The little things that make the experience special.",
-  "tags":
-    [
-      "salesforce-dreamforce",
-      "df23",
-      "dreamforce-2023",
-      "salesforce",
-      "dreamforce",
-    ],
+  "tags": ["dreamforce", "events"],
   "author":
     {
       "name": "Jessie Penaloza",

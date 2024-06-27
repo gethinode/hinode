@@ -8,14 +8,7 @@
   "title": "Admin Tool Box: Save Time and Sanity with External IDs",
   "Slug": "admin-tool-box-save-time-and-sanity-with-external-ids",
   "description": "Salesforce orgs are only as good as their data, so making sure your imports and upserts are up to snuff is step one for every awesome admin. When your users are eager to get up and running, finding that sweet spot between data sanitation/management and speed is key..",
-  "tags":
-    [
-      "external-id",
-      "dataloader",
-      "salesforce-admin",
-      "salesforce",
-      "salesforcetips",
-    ],
+  "tags": ["dataloader", "administrator"],
   "author":
     {
       "name": "Chris Stegall",

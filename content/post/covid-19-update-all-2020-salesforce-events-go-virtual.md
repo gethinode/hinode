@@ -5,16 +5,7 @@
   "title": "COVID-19 Update: All 2020 Salesforce Events Go Virtual",
   "Slug": "covid-19-update-all-2020-salesforce-events-go-virtual",
   "description": "With the pandemic pushing most of our planned in-person events online, virtual meet-ups, meetings, seminars, and conferences are quickly filling up our calendars again.",
-  "tags":
-    [
-      "covid",
-      "online",
-      "virtual",
-      "dreamforce",
-      "trailheadx",
-      "tableau",
-      "pardot",
-    ],
+  "tags": ["covid19", "dreamforce", "trailheadx", "tableau", "pardot"],
   "author":
     {
       "name": "Chris Stegall",

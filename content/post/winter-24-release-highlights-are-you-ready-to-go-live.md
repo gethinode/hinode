@@ -8,14 +8,7 @@
   "title": "Winter ’24 Release Highlights: Are You Ready To Go Live?!",
   "Slug": "winter-24-release-highlights-are-you-ready-to-go-live",
   "description": "It’s been seven weeks since the Winter ’24 Release Notes were first posted online.",
-  "tags":
-    [
-      "salesforce-release-notes",
-      "release-highlights",
-      "salesforce-release",
-      "salesforce-winter-24",
-      "winter-24",
-    ],
+  "tags": ["release", "winter-24"],
   "author":
     {
       "name": "Jessie Penaloza",

@@ -8,7 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events Aug. 2, 2021 — Aug. 6, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-aug-2-2021-aug-6-2021",
   "description": "Another short week, just like me. I’m pretty sure I’ve used this line before, but I’m so short that I can use it multiple times. I’ve got...",
-  "tags": [],
+  "tags": ["events"],
   "author":
     {
       "name": "Caylin Schmenk",
@@ -20,8 +20,6 @@
   "thumbnail": { "url": "/img/august-2021-calendar.jpg" },
 }
 ---
-
-{{< image src="/img/august-2021-calendar.jpg" >}}
 
 Another short week, just like me. I’m pretty sure I’ve used this line before, but I’m so short that I can use it multiple times. I’ve got just three events for you, so no need to buckle up. Just sit back, open up your calendars and let’s get planning!
 

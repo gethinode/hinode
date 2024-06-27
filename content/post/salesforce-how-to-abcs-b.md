@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: B",
   "Slug": "salesforce-how-to-abcs-b",
   "description": "How to Build a Report.",
-  "tags":
-    [
-      "salesforce",
-      "report",
-      "how-to",
-      "salesforce-reports",
-      "salesforce-how-to-abcs",
-    ],
+  "tags": ["how-to", "reports"],
   "author":
     {
       "name": "Chris Stegall",

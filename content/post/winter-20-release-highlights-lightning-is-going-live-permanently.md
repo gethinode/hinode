@@ -8,19 +8,12 @@
   "title": "Winter ’20 Release Highlights: Lightning is Going Live, Permanently",
   "Slug": "winter-20-release-highlights-lightning-is-going-live-permanently",
   "description": "It’s officially spooky season! October is here, and with it, piles of pumpkins are popping up in the produce aisle...",
-  "tags":
-    [
-      "salesforce",
-      "winter-20",
-      "winter-20-release",
-      "salesforce-release",
-      "release-highlights",
-    ],
+  "tags": ["winter-20", "release"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_D4lAZiI2FKbaVWkBoTD5lg.jpg" },

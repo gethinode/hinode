@@ -5,7 +5,7 @@
   "title": "Pledge 1% Success Stories",
   "Slug": "pledge-1-percent-success-stories",
   "description": "Another Amazing Day at SOVA!",
-  "tags": ["sova", "pledge", "mk partners", "volunteer", "nonprofit"],
+  "tags": ["sova", "pledge", "volunteer", "nonprofit"],
   "author":
     {
       "name": "Chris Stegall",

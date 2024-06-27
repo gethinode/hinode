@@ -8,14 +8,7 @@
   "title": "Q & A with Matt K! Query a Salesforce Report",
   "Slug": "q-a-with-matt-k-query-a-salesforce-report",
   "description": "We’re back with another Q &amp; A with Matt K, our weekly series where Matt sits down to tackle Salesforce questions from the community — unrehearsed and unedited to demonstrate what it looks like when we encounter, evaluate, troubleshoot, and resolve real-world issues and use-cases!.",
-  "tags":
-    [
-      "salesforce-dev",
-      "salesforce-development",
-      "salesforce",
-      "salesforce-integration",
-      "q-and-a-with-matt-k",
-    ],
+  "tags": ["developer", "integration", "q-and-a"],
   "author":
     {
       "name": Chris Stegall,

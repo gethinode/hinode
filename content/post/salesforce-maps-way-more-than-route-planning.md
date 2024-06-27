@@ -5,7 +5,7 @@
   "title": "Salesforce Maps Way More Than Route Planning",
   "Slug": "salesforce-maps-way-more-than-route-planning",
   "description": "When Salesforce acquired MapAnything 6 months ago, it picked up much more than a trip-planning tool. Built natively on the Salesforce Platform, MapAnything pioneered pairing advanced...",
-  "tags": ["mapanything", "map", "admin"],
+  "tags": ["map", "administrator"],
   "author":
     {
       "name": "Chris Stegall",

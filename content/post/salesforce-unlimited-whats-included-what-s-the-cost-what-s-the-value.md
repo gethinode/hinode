@@ -8,14 +8,7 @@
   "title": "Salesforce Unlimited+: What’s Included? What’s the Cost? What’s the Value?",
   "Slug": "salesforce-unlimited-whats-included-what-s-the-cost-what-s-the-value",
   "description": "(and where to learn more).",
-  "tags":
-    [
-      "salesforce-admin",
-      "salesforce-pricing",
-      "unlimited-edition",
-      "salesforce-partners",
-      "salesforce",
-    ],
+  "tags": ["administrator", "pricing", "unlimited-edition", "partners"],
   "author":
     {
       "name": Chris Stegall,

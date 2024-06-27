@@ -8,13 +8,12 @@
   "title": "Dreamforce 2020: Big News on the Way!",
   "Slug": "dreamforce-2020-big-news-on-the-way",
   "description": "Dreamforce has been burning a hole in our calendars all year and, while we found out fairly early on that this year’s circumstances will…",
-  "tags": [],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/newspaper-tablet.jpg" },

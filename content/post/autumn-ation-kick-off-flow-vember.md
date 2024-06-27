@@ -8,14 +8,7 @@
   "title": "Autumn-ation Kick-Off: Flow-vember",
   "Slug": "autumn-ation-kick-off-flow-vember",
   "description": "With Halloweekend behind us, it’s officially time to acknowledge the changing leaves, the shortening days, and the quickly brisk-ening air — it’s Fall, or as we call it, “Autmn-ation” — the season of time-savings!.",
-  "tags":
-    [
-      "autumn-ation",
-      "flow-vember",
-      "salesforce",
-      "automation",
-      "salesforce-flow",
-    ],
+  "tags": ["flow", "automation"],
   "author":
     {
       "name": Chris Stegall,

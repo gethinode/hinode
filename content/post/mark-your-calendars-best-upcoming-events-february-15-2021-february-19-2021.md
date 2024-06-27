@@ -8,7 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events February 15, 2021 — February 19, 2021",
   "Slug": "mark-your-calendars-best-upcoming-events-february-15-2021-february-19-2021",
   "description": "My best friend texted me earlier today saying that “it still feels like January” and she’s right! We are almost done with winter, and I’ve just realized that! I don’t think I’ve made any winter related jokes in my posts either! And even worse, I still haven’t thought of something! So I guess you should sit back, open up your calendars and get planning, while I think of something clever for next week’s post before it’s too late..",
-  "tags": ["salesforce-event", "virtual-events", "salesforce", "wfh", "remote"],
+  "tags": ["events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_LjHPgFvkGjOgz14E3Pk4Iw.jpg" },

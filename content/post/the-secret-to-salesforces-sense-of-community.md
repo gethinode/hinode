@@ -8,14 +8,7 @@
   "title": "The Secret to Salesforce’s Sense of Community",
   "Slug": "the-secret-to-salesforces-sense-of-community",
   "description": "Let’s get you connected to the glue of the Salesforce ecosystem — Trailblazer Community Groups!",
-  "tags":
-    [
-      "salesforce-dev",
-      "salesforce",
-      "trailblazercommunity",
-      "salesforce-communities",
-      "salesforce-admin",
-    ],
+  "tags": ["developer", "trailblazer", "communities", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

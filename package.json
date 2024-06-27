@@ -24,7 +24,7 @@
     "start:example:prod": "npm run -s prestart  && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings --minify -e production -s exampleSite",
     "prebuild": "npm run clean:public && npm run -s mod:vendor",
     "buildOld": "hugo --gc --minify --debug --verbose",
-    "build": "hugo --gc --debug --verbose",
+    "build": "hugo --gc --minify",
     "build:cache": "npm run -s prebuild && hugo config | grep cachedir && hugo --gc --minify -e ci",
     "build:example": "npm run -s prebuild && hugo --gc --minify -s exampleSite",
     "build:example:ci": "npm run -s prebuild && hugo --gc --minify -s exampleSite -e ci",

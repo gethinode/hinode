@@ -5,7 +5,7 @@
   "title": "Summer ’20 Release Highlights: Even Better Opportunity Splits!",
   "Slug": "summer-20-release-highlights-even-better-opportunity-splits",
   "description": "Summer seemed to creep in a bit more slowly this year while we’re all cooped up in quarantine, but the rising temperatures, late sunsets...",
-  "tags": ["admin", "release"],
+  "tags": ["administrator", "release"],
   "author":
     {
       "name": "Chris Stegall",

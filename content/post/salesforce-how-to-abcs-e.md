@@ -5,7 +5,8 @@
   "title": 'Salesforce "How To" ABCs: E',
   "Slug": "salesforce-how-to-abcs-e",
   "description": "We're smack dab in the middle of the Spring '19 and Summer '19 Releases and, while that means there are a bunch of awesome new features and updates to familiarize ourselves with...",
-  "tags": ["abcs", "data loader", "spring-19", "admin", "export", "data"],
+  "tags":
+    ["abcs", "data loader", "spring-19", "administrator", "export", "data"],
   "author":
     {
       "name": "Chris Stegall",

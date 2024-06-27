@@ -8,7 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events June 29, 2020 — July 3, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-june-29-2020-july-3-2020",
   "description": "Salesforce and myself are taking it easy on the amount of events coming your way next week. We didn’t want to overload your mind with more information after everything you learned from TrailheaDX this week and make you forget everything. I mean… it still looks like a lot of events, but don’t worry, you will be fine! So sit back, open up your calendars and let’s get planning!.",
-  "tags": ["salesforce-event", "salesforce", "wfh", "remote", "virtual-events"],
+  "tags": ["events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_nt5SO91padBrygw67CxLDQ.jpg" },

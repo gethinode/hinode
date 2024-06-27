@@ -8,13 +8,12 @@
   "title": "2020: Save 20% on Your First Year of GSuite",
   "Slug": "2020-save-20-on-your-first-year-of-gsuite",
   "description": "As 2020 pushed workplaces remote, the limits of some businesses’ existing infrastructure have become painfully apparent. With tech debts…",
-  "tags": [],
+  "tags": ["google"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/woman-laptop-gsuite.jpg" },

@@ -8,19 +8,12 @@
   "title": "Winter ’24 Release Highlights: IdeaExchange UX Winners",
   "Slug": "winter-24-release-highlights-ideaexchange-ux-winners",
   "description": "With Midwest Dreamin’ wrapping up today, Mile High Dreamin’ taking place next week, and Dreamforce already peeking over the horizon, the Winter ’24 Salesforce release is nearly here and, with it, a whole new slate of features, updates, and upgrades that are eagerly anticipated by admins, devs, and users alike!.",
-  "tags":
-    [
-      "salesforce-release",
-      "winter-24-release",
-      "salesforce-winter-24",
-      "release-highlights",
-      "salesforce",
-    ],
+  "tags": ["release", "winter-24"],
   "author":
     {
       "name": Chris Stegall,
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_H_fkPNm_4AzYSSNynK6H1Q.png" },

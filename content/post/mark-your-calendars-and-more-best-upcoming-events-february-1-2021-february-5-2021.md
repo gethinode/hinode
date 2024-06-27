@@ -8,8 +8,7 @@
   "title": "Mark Your Calendars (and More): Best Upcoming Events February 1, 2021 — February 5, 2021",
   "Slug": "mark-your-calendars-and-more-best-upcoming-events-february-1-2021-february-5-2021",
   "description": "It’s been a few months since I’ve written about something other than the events taking place during the week. And while I was hosting a happy hour for my team the other week at MK Partners I realized I should be telling people what we do for fun during this hour! Sometimes these events consist of chit chat and sometimes we have an activity. So this week I’m going to focus on a few activities you can play with your team and/or company virtually that don’t require apps or screen sharing. So sit back, open up your calendars, pick a day to have a team or company happy hour and let’s get planning!!.",
-  "tags":
-    ["salesforce-event", "wfh", "virtual-events", "culture", "remote-work"],
+  "tags": ["events", "culture"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_olEH9KakMcD_dMlVmMx52w.jpg" },

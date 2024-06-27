@@ -8,14 +8,7 @@
   "title": "Summer ‘24 Release Highlights: Marketing Cloud Account Engagement",
   "Slug": "summer-24-release-highlights-marketing-cloud-account-engagement",
   "description": "You don’t want to miss these!.",
-  "tags":
-    [
-      "release-highlights",
-      "salesforce-release",
-      "salesforce-summer-24",
-      "summer-24-release",
-      "salesforce",
-    ],
+  "tags": ["release-highlights", "release", "summer-24"],
   "author":
     {
       "name": "Jessie Penaloza",

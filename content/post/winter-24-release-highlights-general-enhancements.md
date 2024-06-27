@@ -8,7 +8,7 @@
   "title": "Winter ’24 Release Highlights: General Enhancements",
   "Slug": "winter-24-release-highlights-general-enhancements",
   "description": "With Dreamforce in the rearview mirror, we’re continuing our countdown to the wide launch of the Salesforce Winter ’24 Release!",
-  "tags": ["release-highlights", "salesforce", "winter-24"],
+  "tags": ["release", "winter-24"],
   "author":
     {
       "name": "Jessie Penaloza",

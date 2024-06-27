@@ -8,8 +8,7 @@
   "title": "More Salesforce News, How-To’s, Tips, and Tricks on YouTube",
   "Slug": "more-salesforce-news-how-tos-tips-and-tricks-on-youtube",
   "description": "Keeping up with the latest in Salesforce and cloud technology can be tough because there’s just so much content to cover, not to mention updates, releases, and acquisitions. We do our best to deliver helpful information and news here on the blog but, if you’re more of a visual learner or prefer to be able to just listen while you take care of other work, you’re in luck!.",
-  "tags":
-    ["videos", "salesforce-news", "youtube", "salesforce", "salesforce-videos"],
+  "tags": ["videos", "news", "youtube"],
   "author":
     {
       "name": "Chris Stegall",

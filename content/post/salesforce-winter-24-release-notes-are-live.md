@@ -8,14 +8,7 @@
   "title": "Salesforce Winter ’24 Release Notes are Live!",
   "Slug": "salesforce-winter-24-release-notes-are-live",
   "description": "It’s that time of year again — the seemingly-speediest section of the Salesforce calendar where the combination of Community Events and the countdown to Dreamforce cause the days to fly by with avalanche-esque acceleration. And, as the long days of Summer begin to shorten once again, and San Francisco preps for the annual influx of Trailblazers, it also means we’re rapidly approaching the third and final Salesforce release of the year — the Winter ’24 Release!.",
-  "tags":
-    [
-      "salesforce-release",
-      "salesforce",
-      "winter-24-release",
-      "release-highlights",
-      "salesforce-winter-24",
-    ],
+  "tags": ["release", "winter-24", "release-highlights"],
   "author":
     {
       "name": Chris Stegall,

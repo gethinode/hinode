@@ -8,14 +8,7 @@
   "title": "Salesforce Revolutionizes Pandemic Safety with Vaccine Cloud",
   "Slug": "salesforce-revolutionizes-pandemic-safety-with-vaccine-cloud",
   "description": "The COVID-19 pandemic has rewritten the rulebook on events, workplaces, and operations overall — giving rise to the digital HQ and giving us all some surprising experience and insight into the realm of testing, vaccination, and managing medical records and data..",
-  "tags":
-    [
-      "salesforce-vaccine-cloud",
-      "vaccine-cloud",
-      "covid19",
-      "covid",
-      "salesforce",
-    ],
+  "tags": ["vaccine-cloud", "covid19"],
   "author":
     {
       "name": Chris Stegall,

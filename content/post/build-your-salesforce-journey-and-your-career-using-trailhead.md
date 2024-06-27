@@ -8,14 +8,7 @@
   "title": "Build Your Salesforce Journey (and your Career) Using Trailhead",
   "Slug": "build-your-salesforce-journey-and-your-career-using-trailhead",
   "description": "Tap into the Trailhead hub and explore various learning options to open up new opportunities. All at your own pace..",
-  "tags":
-    [
-      "salesforce-admin",
-      "trailhead",
-      "salesforce",
-      "salesforce-careers",
-      "trailblazercommunity",
-    ],
+  "tags": ["administrator", "trailhead", "career", "trailblazer"],
   "author":
     {
       "name": "Jessie Penaloza",

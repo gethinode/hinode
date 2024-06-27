@@ -8,8 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events April 26, 2021 — April 30, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-april-26-2021-april-30-2021",
   "description": "The last week of April is hefty. No spring cleaning for your calendar or schedule here. If anything I’m filling your calendar up, but don’t worry, it’s all good events and webinars. So sit back, open up your calendar, and let’s get planning!.",
-  "tags":
-    ["salesforce-dev", "trailblazer", "salesforce-event", "salesforce-admin"],
+  "tags": ["developer", "trailblazer", "events", "administrator"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_Zf-fbav9juocmEWvipd-9w.jpg" },

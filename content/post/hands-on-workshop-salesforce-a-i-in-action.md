@@ -8,14 +8,7 @@
   "title": "Hands on Workshop: Salesforce A.I. in Action!",
   "Slug": "hands-on-workshop-salesforce-a-i-in-action",
   "description": "Ready to get some first-hand A.I. experience in Salesforce? Whether you’re curious about the capabilities of Einstein, eager to get your feet wet harnessing artificial intelligence in an org, or just want to see a real world application of organizations that are using A.I. to improve their operations, you’re in luck!.",
-  "tags":
-    [
-      "artificial-intelligence",
-      "einstein",
-      "hands-on-workshop",
-      "salesforce-einstein",
-      "salesforce-ai",
-    ],
+  "tags": ["artificial-intelligence", "einstein"],
   "author":
     {
       "name": "Chris Stegall",

@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: V",
   "Slug": "salesforce-how-to-abcs-v",
   "description": "How to View Field-Level History.",
-  "tags":
-    [
-      "salesforce-trust",
-      "salesforce",
-      "salesforce-how-to-abcs",
-      "salesforce-admin",
-      "how-to",
-    ],
+  "tags": ["trust", "administrator", "how-to"],
   "author":
     {
       "name": "Jessie Penaloza",

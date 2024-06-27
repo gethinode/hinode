@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” Abcs: I",
   "Slug": "salesforce-“how-to”-abcs:-i",
   "description": "How to Index a Field",
-  "tags":
-    [
-      "database",
-      "sfdc",
-      "salesforce",
-      "salesforce-how-to",
-      "salesforce-how-to-abcs",
-    ],
+  "tags": ["database", "how-to"],
   "author":
     {
       "name": "Chris Stegall",

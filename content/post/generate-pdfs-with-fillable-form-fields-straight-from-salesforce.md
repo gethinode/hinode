@@ -8,14 +8,7 @@
   "title": "Generate PDFs, with Fillable Form Fields, Straight from Salesforce",
   "Slug": "generate-pdfs-with-fillable-form-fields-straight-from-salesforce",
   "description": "Learn how you can use Mambo Merge with LibreOffice to generate PDFs for your customers, clients, and company!.",
-  "tags":
-    [
-      "salesforce",
-      "mambo-merge",
-      "salesforce-doc-gen",
-      "salesforce-appexchange",
-      "document-generation",
-    ],
+  "tags": ["appexchange", "document-generation"],
   "author":
     {
       "name": "Jessie Penaloza",

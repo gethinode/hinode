@@ -8,14 +8,7 @@
   "title": "Tune In: Managing Salesforce Errors",
   "Slug": "tune-in-managing-salesforce-errors",
   "description": "From Logging to Observability.",
-  "tags":
-    [
-      "salesforce-event",
-      "salesforce-dev",
-      "salesforce-webinar",
-      "salesforce",
-      "salesforce-development",
-    ],
+  "tags": ["events", "developer", "webinar"],
   "author":
     {
       "name": Chris Stegall,

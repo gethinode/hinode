@@ -8,14 +8,7 @@
   "title": "A Texas-Sized Community Conference",
   "Slug": "a-texas-sized-community-conference",
   "description": "As community conferences (aka Dreamin’ events) ramp up this time of the year, you’ll probably notice more and more Salesforce snapshots in your social feeds that give a glimpse of what these events are all about...",
-  "tags":
-    [
-      "texas-dreamin",
-      "salesforce",
-      "salesforce-communities",
-      "salesforce-event",
-      "trailblazercommunity",
-    ],
+  "tags": ["dreamin", "communities", "events", "trailblazer"],
   "author":
     {
       "name": "Jessie Penaloza",

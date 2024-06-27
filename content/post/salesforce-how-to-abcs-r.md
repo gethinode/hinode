@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: R",
   "Slug": "salesforce-how-to-abcs-r",
   "description": "How to reset a security token.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-admin",
-      "salesforce-how-to",
-      "salesforce-how-to-abcs",
-      "salesforce-security",
-    ],
+  "tags": ["administrator", "how-to", "security"],
   "author":
     {
       "name": "Jessie Penaloza",

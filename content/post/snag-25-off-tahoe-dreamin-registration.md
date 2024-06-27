@@ -8,14 +8,7 @@
   "title": "Snag $25 Off Tahoe Dreamin’ Registration!",
   "Slug": "snag-25-off-tahoe-dreamin-registration",
   "description": "Tahoe Dreamin’ is definitely one of the most beautiful locations for a Salesforce community conference..",
-  "tags":
-    [
-      "salesforce-event",
-      "tahoe-dreamin",
-      "salesforce",
-      "td24",
-      "tahoe-dreamin-24",
-    ],
+  "tags": ["events", "dreamin", "tahoe"],
   "author":
     {
       "name": Chris Stegall,

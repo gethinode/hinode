@@ -8,14 +8,7 @@
   "title": "Q & A with Matt K! Don’t Make this Mistake as a Salesforce Developer",
   "Slug": "q-a-with-matt-k-dont-make-this-mistake-as-a-salesforce-developer",
   "description": "We’re kicking off the new year with a new series: “Q &amp; A with Matt K!”..",
-  "tags":
-    [
-      "q-and-a-with-matt-k",
-      "apex",
-      "salesforce-apex",
-      "salesforce-developer",
-      "salesforce",
-    ],
+  "tags": ["q-and-a", "apex", "developer"],
   "author":
     {
       "name": Chris Stegall,

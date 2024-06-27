@@ -5,7 +5,7 @@
   "title": 'Salesforce "How To" ABCs: G',
   "Slug": "salesforce-how-to-abcs-g",
   "description": "With the time change behind us, there’s a good chance you’re reading this basked in the light of your computer screen as the inky blackness of early-afternoon seeps between your curtains...",
-  "tags": ["salesforce", "security", "token", "whitelist", "admin", "how to"],
+  "tags": ["security", "token", "whitelist", "administrator", "how to"],
   "author":
     {
       "name": "Chris Stegall",

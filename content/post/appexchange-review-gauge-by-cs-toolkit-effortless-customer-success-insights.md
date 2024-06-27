@@ -8,14 +8,7 @@
   "title": "AppExchange Review: Gauge by CS Toolkit — Effortless Customer Success Insights",
   "Slug": "appexchange-review-gauge-by-cs-toolkit-effortless-customer-success-insights",
   "description": "Within the realm of Customer Success in Salesforce, numerous options exist for documenting interactions with Customers. However, there’s often a desire to quickly gauge a customer’s sentiment with just a glance at their record. Whether in Sales or Support, understanding whether a customer is satisfied or discontent is crucial. And that’s where Gauge comes into play! The app adds a visual gauge and tracks customer sentiment notes, offering an overview of all customers and their shared sentiments..",
-  "tags":
-    [
-      "salesforce-app",
-      "salesforce-app-reviews",
-      "salesforce",
-      "salesforce-appexchange",
-      "salesforce-admin",
-    ],
+  "tags": ["app", "review", "appexchange", "administrator"],
   "author": { "name": Cynthia McDonald, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_zx5wADxR6084nozVtukiCQ.png" },

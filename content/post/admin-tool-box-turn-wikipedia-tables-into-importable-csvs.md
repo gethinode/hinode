@@ -8,7 +8,7 @@
   "title": "Admin Tool Box: Turn Wikipedia Tables into Importable CSVs",
   "Slug": "admin-tool-box-turn-wikipedia-tables-into-importable-csvs",
   "description": "Wikipedia is an indispensable and unmatched product of the Third Industrial Revolution.",
-  "tags": ["salesforce", "csv", "import-salesforce", "data", "wikipedia"],
+  "tags": ["import", "data"],
   "author":
     {
       "name": "Chris Stegall",

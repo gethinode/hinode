@@ -9,13 +9,7 @@
   "Slug": "mark-your-calendars-best-salesforce-events-nov-1-2021-nov-5-2021",
   "description": "I may be out on vacation, but these events sure aren’t! In fact this week and next week has some fun conferences and summits in store for you! So sit back, open up your calendars, and let’s get planning!.",
   "tags":
-    [
-      "trailblazer",
-      "salesforce-admin",
-      "trailblazercommunity",
-      "salesforce-event",
-      "salesforce",
-    ],
+    ["trailblazer", "administrator", "trailblazer", "events", "salesforce"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_KORnYZTd89Ncxi6KrFre1Q.png" },

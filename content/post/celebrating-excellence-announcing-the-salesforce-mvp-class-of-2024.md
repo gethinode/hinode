@@ -8,13 +8,7 @@
   "title": "Celebrating Excellence: Announcing the Salesforce MVP Class of 2024!",
   "Slug": "celebrating-excellence-announcing-the-salesforce-mvp-class-of-2024",
   "description": "Salesforce MVPs are Trailblazers that defy metaphor in their contributions to, and their place within, the Salesforce community.",
-  "tags":
-    [
-      "salesforce-mvp",
-      "salesforce-admin",
-      "salesforce-trailblazer",
-      "salesforce",
-    ],
+  "tags": ["mvp", "administrator", "trailblazer"],
   "author":
     {
       "name": "Chris Stegall",

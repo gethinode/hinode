@@ -8,20 +8,17 @@
   "title": "Hidden Perks of the Salesforce Community: Ohana Pears!",
   "Slug": "hidden-perks-of-the-salesforce-community-ohana-pears",
   "description": "It's no secret that one of the best parts of Salesforce is the welcoming, enthusiastic, and eager-to-help community.",
-  "tags": [],
+  "tags": ["communities"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/card-present.jpg" },
 }
 ---
-
-{{< image src="/img/card-present.jpg">}}
 
 It's no secret that one of the best parts of Salesforce is the welcoming, enthusiastic, and eager-to-help [community](https://trailblazers.salesforce.com/). From the outside, it seems like everybody knows, supports, and amplifies each other --- and, while you might expect that career camaraderie to be exclusive, all it takes is a little activity in the [Trailblazer Community](https://trailblazers.salesforce.com/), on [Twitter](https://twitter.com/mkpartners), or at [events](https://medium.com/creme-de-la-crm/mark-your-calendars-best-upcoming-events-july-20-2020-july-24-2020-57bff213f727) and you'll soon find yourself with a bunch of new Salesforce friends! But those aren't the only ways to make meaningful connections on the platform, and today we'll be talking about a (slightly) hidden gem that's one of our favorites --- Ohana Pears!
 

@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events Jan 17, 2022 — Jan 21, 2022",
   "Slug": "mark-your-calendars-best-salesforce-events-jan-17-2022-jan-21-2022",
   "description": "What a week I have lined up for y’all! Break is over and it’s time to get back to business! The end of the fiscal year is approaching us which means it’s time to reset and refocus, which most of the events this week focuses on. So sit back, open up your calendars, and let’s get planning!.",
-  "tags":
-    [
-      "salesforce-dev",
-      "salesforce-event",
-      "salesforce",
-      "salesforce-admin",
-      "cactusforce",
-    ],
+  "tags": ["developer", "events", "salesforce", "administrator", "cactusforce"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/0_JZfpipNJDrGJo25g.jpg" },

@@ -9,13 +9,7 @@
   "Slug": "join-us-at-the-original-community-run-event-midwest-dreamin",
   "description": "Our Trailblazer journey continues as we hitch a flight over to the city of Minneapolis, MN where we’ll be exploring the original community run event, led by a ‘Super User Group’ of Salesforce professionals and community leaders, Midwest Dreamin’!.",
   "tags":
-    [
-      "trailblazer",
-      "salesforce",
-      "trailblazercommunity",
-      "salesforce-event",
-      "midwest-dreamin",
-    ],
+    ["trailblazer", "salesforce", "trailblazer", "events", "midwest-dreamin"],
   "author":
     {
       "name": "Jessie Penaloza",

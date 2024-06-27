@@ -8,14 +8,7 @@
   "title": "Marketing Cloud for “Pardot Speakers”: How to Automate a Segmentation List / Dynamic Lists",
   "Slug": "marketing-cloud-for-pardot-speakers-how-to-automate-a-segmentation-list-dynamic-lists",
   "description": "Whether it’s Pardot’s nominal transition to Marketing Cloud Account Engagement, a “platform migration” for your marketing team, or a “new job, new tech-stack” situation — it seems more and more Marketers and Salesforce (and/or Pardot) Admins are picking up Marketing Cloud..",
-  "tags":
-    [
-      "pardot",
-      "marketing-cloud",
-      "salesforce-how-to",
-      "salesforce",
-      "pardot-marketing-cloud",
-    ],
+  "tags": ["pardot", "marketing-cloud", "how-to"],
   "author":
     {
       "name": "Chris Stegall",

@@ -13,7 +13,7 @@
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_vnLx_XwGbzkxUNyj4AjPHg.png" },
@@ -32,23 +32,20 @@ And, for those with partners or firms doing the admin work in Salesforce, that�
 
 This was [previously a Beta feature](https://help.salesforce.com/s/articleView?id=sf.fields_picklist_bulk_manage_picklist_values.htm&type=5), but it’s going wide with the release (aka, “Generally Available”) and to access it, all you have to do is:
 
-_Go to the custom field definition page for the picklist field._
-
-_In the Values and Inactive Values sections, there's a checkbox next to each picklist value._
-
-_You can select multiple values and use one of the new buttons: **Delete Selected**, **Deactivate Selected**, **Replace Selected**, or **Activate Selected**._
+1. Go to the custom field definition page for the picklist field.
+2. In the Values and Inactive Values sections, there's a checkbox next to each picklist value.
+3. You can select multiple values and use one of the new buttons: **Delete Selected**, **Deactivate Selected**, **Replace Selected**, or **Activate Selected**.
 
 And you’ll be saving time in no time!
 
 ### Clean Up Inactive Picklist Values
 
-This is another ([former) Beta feature](https://help.salesforce.com/s/articleView?id=sf.fields_picklist_delete_inactive_values.htm&type=5), going to general availability in Spring ’23 — the [ability to bulk delete inactive unused picklist values, manage inactive picklist values, and enforce limits on inactive values for custom picklists](https://help.salesforce.com/s/articleView?id=release-notes.rn_fields_picklist_delete_inactive_values_ga.htm&type=5&release=242) (the goal being to make it easier for admins to improve system performance and overall health). Not to mention save their sanity and clicks, by turning all those one-off efforts into a more manageable bulk process!
+This is another [former Beta feature](https://help.salesforce.com/s/articleView?id=sf.fields_picklist_delete_inactive_values.htm&type=5), going to general availability in Spring ’23 — the [ability to bulk delete inactive unused picklist values, manage inactive picklist values, and enforce limits on inactive values for custom picklists](https://help.salesforce.com/s/articleView?id=release-notes.rn_fields_picklist_delete_inactive_values_ga.htm&type=5&release=242) (the goal being to make it easier for admins to improve system performance and overall health). Not to mention save their sanity and clicks, by turning all those one-off efforts into a more manageable bulk process!
 
-All admins willl need to do is:
+All admins will need to do is:
 
-_Head to the Inactive Values section of the picklist field, and click **Delete Unused Values**._
-
-_After you delete unused values, if a picklist is unbound and the total number of inactive values falls below the limit, the picklist is set to bound!_
+1. Head to the Inactive Values section of the picklist field, and click Delete Unused Values.
+2. After you delete unused values, if a picklist is unbound and the total number of inactive values falls below the limit, the picklist is set to bound!
 
 Easy peasy.
 
@@ -66,6 +63,6 @@ For now, we’ll see a toggle in the picklist settings that allows us to remove 
 
 So, if that’s going to affect your org, now’s the time to start cracking down and cleaning up! (And I’ll bet you’re really glad about that newfound ability to mass cleanup those inactive values we mentioned earlier).
 
-Tomorrow’s the very first day org’s will start seeing Spring ’23 (but for most of us, we’re [still a couple weeks away](https://medium.com/creme-de-la-crm/salesforce-spring-23-release-timeline-45f1c9cc11ed)) so, as always, stay tuned here for more [Release Highlights](https://medium.com/tag/release-highlights) as well as your standard Salesforce news, tips, and tricks — and feel free to drop your favorite Spring ’23 features in the comments!
+Tomorrow’s the very first day org’s will start seeing Spring ’23, but for most of us, we’re [still a couple weeks away](https://medium.com/creme-de-la-crm/salesforce-spring-23-release-timeline-45f1c9cc11ed) so, as always, stay tuned here for more [Release Highlights](https://medium.com/tag/release-highlights) as well as your standard Salesforce news, tips, and tricks — and feel free to drop your favorite Spring ’23 features in the comments!
 
 Until next time, keep working hard, smart, and happy. And we’ll see you in the cloud!

@@ -8,14 +8,7 @@
   "title": "Einstein Coffee Chat",
   "Slug": "einstein-coffee-chat",
   "description": "If you’re eager to explore the real-world benefits of Einstein Prediction Builder, or have a question you’ve always wanted answered about how AI can help drive productivity, next week’s your chance!.",
-  "tags":
-    [
-      "salesforce-einstein",
-      "salesforce",
-      "artificial-intelligence",
-      "ai",
-      "salesforce-event",
-    ],
+  "tags": ["einstein", "artificial-intelligence", "events"],
   "author":
     {
       "name": "Chris Stegall",

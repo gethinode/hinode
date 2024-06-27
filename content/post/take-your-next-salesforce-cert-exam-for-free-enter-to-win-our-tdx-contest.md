@@ -8,14 +8,7 @@
   "title": "Take Your Next Salesforce Cert Exam for Free: Enter to Win our TDX Contest!",
   "Slug": "take-your-next-salesforce-cert-exam-for-free-enter-to-win-our-tdx-contest",
   "description": "With TrailblazerDX in full swing, our feeds are full of new features, product news, and the inspiring Trailblazer stories that get us fired up to continue improving our Salesforce skill set!.",
-  "tags":
-    [
-      "tdx",
-      "salesforce",
-      "salesforce-certification",
-      "salesforce-certs",
-      "giveaway",
-    ],
+  "tags": ["tdx", "certification", "giveaway"],
   "author":
     {
       "name": "Chris Stegall",

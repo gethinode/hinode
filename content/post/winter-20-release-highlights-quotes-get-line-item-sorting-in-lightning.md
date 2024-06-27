@@ -8,19 +8,12 @@
   "title": "Winter ’20 Release Highlights: Quotes get Line-Item Sorting in Lightning",
   "Slug": "winter-20-release-highlights-quotes-get-line-item-sorting-in-lightning",
   "description": "With the long, hot days of Summer melting away into the cool, abbreviated sunlight of September, we’re trading swimsuits for spiced-fruits, beach blankets for ski slopes, and air conditioning for seat warmers..",
-  "tags":
-    [
-      "winter-20-release",
-      "release-highlights",
-      "salesforce-release",
-      "winter-20",
-      "salesforce",
-    ],
+  "tags": ["release", "winter-20"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_Oeh7LBdYiSfnALB6Ca4k3g.jpg" },

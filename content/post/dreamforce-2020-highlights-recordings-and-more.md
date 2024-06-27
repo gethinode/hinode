@@ -8,13 +8,12 @@
   "title": "Dreamforce 2020 Highlights, Recordings, and More!",
   "Slug": "dreamforce-2020-highlights-recordings-and-more",
   "description": "Last week was a whirlwind on top of an already accelerated 2020, so it’s no surprise if you weren’t able to catch all the sessions…",
-  "tags": [],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/dreamforce-to-you-outside.jpg" },

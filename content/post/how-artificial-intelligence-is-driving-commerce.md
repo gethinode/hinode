@@ -8,14 +8,7 @@
   "title": "How Artificial Intelligence is Driving Commerce",
   "Slug": "how-artificial-intelligence-is-driving-commerce",
   "description": "Artificial Intelligence has been boosting bottom lines and easing employee endeavors for years now and, while almost every organization at this point has begun implementing some AI tools of their own (or at least have it on their IT roadmap), it’s always exciting to hear new use-cases and the real-world results they’ve engendered. One of the most exciting areas for the application of AI in business is commerce, “e” and otherwise — and today we’ll be taking a look at how organizations have leveraged Salesforce’s Einstein Artificial Intelligence platform to drive revenue and results..",
-  "tags":
-    [
-      "artificial-intelligence",
-      "salesforce-einstein",
-      "ai",
-      "ecommerce",
-      "salesforce",
-    ],
+  "tags": ["artificial-intelligence", "einstein", "ecommerce"],
   "author":
     {
       "name": "Chris Stegall",

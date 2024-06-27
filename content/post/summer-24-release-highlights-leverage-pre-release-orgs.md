@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: Leverage Pre-Release Orgs",
   "Slug": "summer-24-release-highlights-leverage-pre-release-orgs",
   "description": "As Salesforce Partners, Clients, and Users begin to receive more emails in their inboxes for the Summer ’24 Release — others get ahead of the game by leveraging stand-alone environments within each release..",
-  "tags":
-    [
-      "salesforce-admin",
-      "salesforce-summer-24",
-      "salesforce-release",
-      "summer-24-release",
-      "salesforce",
-    ],
+  "tags": ["administrator", "summer-24", "release"],
   "author":
     {
       "name": "Jessie Penaloza",

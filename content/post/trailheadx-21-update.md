@@ -8,19 +8,12 @@
   "title": "TrailheaDX ’21 Update",
   "Slug": "trailheadx-21-update",
   "description": "TrailheaDX 2021 is next week and now’s the time to prep for success! Caylin sat down to take a quick run through all the latest news and updates surrounding the event, so head over to our YouTube channel or watch the video below to get the full scoop!",
-  "tags":
-    [
-      "salesforce-event",
-      "trailheadx",
-      "salesforce",
-      "trailheadx-2021",
-      "trailheadx-21",
-    ],
+  "tags": ["events", "trailhead", "tdx"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_jGk2iIEixhfcr13vuAGVuw.jpg" },

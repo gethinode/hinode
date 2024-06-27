@@ -8,14 +8,7 @@
   "title": "Feature Retirement: Process Builder + Workflow Rules — Hello Flow!",
   "Slug": "feature-retirement-process-builder-workflow-rules-hello-flow",
   "description": "This has been in the works for a while, and it was made official at Dreamforce this year — Process Builder and Workflow Rules are being retired and the focus moving forward will be the ever-expanding power and feature-set of Flow..",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-flow",
-      "workflow-rule",
-      "salesforce-admin",
-      "process-builder",
-    ],
+  "tags": ["flow", "automation", "administrator", "process-builder"],
   "author":
     {
       "name": "Chris Stegall",

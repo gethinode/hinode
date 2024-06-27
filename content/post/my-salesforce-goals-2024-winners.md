@@ -8,14 +8,7 @@
   "title": "My Salesforce Goals — 2024 Winners",
   "Slug": "my-salesforce-goals-2024-winners",
   "description": "Whether this is your first day in the Salesforce ecosystem or you have many years under your belt, the goals you decide to pursue on your Salesforce journey impact the things you do every day.",
-  "tags":
-    [
-      "salesforce-admin",
-      "salesforce",
-      "salesforce-trailblazer",
-      "trailblazercommunity",
-      "salesforce-communities",
-    ],
+  "tags": ["administrator", "trailblazer", "communities"],
   "author":
     {
       "name": "Jessie Penaloza",

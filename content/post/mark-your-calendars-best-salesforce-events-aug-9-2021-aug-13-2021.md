@@ -8,7 +8,7 @@
   "title": "Mark Your Calendars: Best Salesforce Events Aug. 9, 2021 — Aug. 13, 2021",
   "Slug": "mark-your-calendars-best-salesforce-events-aug-9-2021-aug-13-2021",
   "description": "I miss seeing all of those community events. I’m part of a few community groups but we have yet to have an event, so hopefully some of you...",
-  "tags": [],
+  "tags": ["events"],
   "author":
     {
       "name": "Caylin Schmenk",
@@ -20,8 +20,6 @@
   "thumbnail": { "url": "/img/august-2021-calendar2.jpg" },
 }
 ---
-
-{{< image src="/img/august-2021-calendar2.jpg" >}}
 
 I miss seeing all of those community events. I’m part of a few community groups but we have yet to have an event, so hopefully some of you have gotten to see your groups virtually or in person recently! As a result, my blog posts are almost getting shorter every week. But don’t worry, you still need to sit back, open up your calendars and get planning!
 

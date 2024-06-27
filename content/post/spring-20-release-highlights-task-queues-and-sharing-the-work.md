@@ -5,7 +5,7 @@
   "title": "Spring '20 Release Highlights: Task Queues and Sharing the Work",
   "Slug": "spring-20-release-highlights-task-queues-and-sharing-the-work",
   "description": "Punxsutawney Phil must be an admin because Spring ’20 is right around the corner and that means there’s no time for shadows, superstitions, or extended Winters! ",
-  "tags": ["spring 20", "salesforce", "task", "queue", "sharing"],
+  "tags": ["spring-20", "queue", "sharing"],
   "author":
     {
       "name": "Chris Stegall",

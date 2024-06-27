@@ -8,14 +8,7 @@
   "title": "Q & A with Matt K! Solving a Scoring Formula Fail",
   "Slug": "q-a-with-matt-k-solving-a-scoring-formula-fail",
   "description": "We’re back with another installment of our series: “Q &amp; A with Matt K!”..",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-help",
-      "salesforce-formula",
-      "q-and-a-with-matt-k",
-      "salesforce-admin",
-    ],
+  "tags": ["formulas", "q-and-a", "administrator"],
   "author":
     {
       "name": Chris Stegall,

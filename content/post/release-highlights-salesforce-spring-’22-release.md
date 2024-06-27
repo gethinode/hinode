@@ -8,13 +8,7 @@
   "title": "Release Highlights: Salesforce Spring ’22 Release",
   "Slug": "release-highlights:-salesforce-spring-’22-release",
   "description": "The Salesforce Spring ’22 Release is live and the release notes are… long. Join MK Partners’ own Chris and Jesus for a quick video summary…",
-  "tags":
-    [
-      "spring-22",
-      "release-highlights",
-      "trailblazercommunity",
-      "salesforce-release",
-    ],
+  "tags": ["spring-22", "release", "trailblazer", "communities"],
   "author":
     {
       "name": "Chris Stegall",

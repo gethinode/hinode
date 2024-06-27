@@ -13,15 +13,12 @@
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/holiday_cards.png" },
 }
 ---
-
-{{< image src="/img/holiday_cards.png">}}
 
 We’re right in the middle of the holiday stretch and it’s about that time where marketing, sales, success, and support teams start sending out “thank you”s and “best wishes” to their clients and users that made the year special.
 

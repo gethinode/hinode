@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: W",
   "Slug": "salesforce-how-to-abcs-w",
   "description": "How to Whitelist (Allowlist) an IP address.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-setup",
-      "salesforce-how-to",
-      "salesforce-admin",
-      "salesforce-how-to-abcs",
-    ],
+  "tags": ["setup", "how-to", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

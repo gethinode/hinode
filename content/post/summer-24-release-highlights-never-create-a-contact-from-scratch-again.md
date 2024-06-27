@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: The C-Suite’s Favorite New Feature",
   "Slug": "summer-24-release-highlights-never-create-a-contact-from-scratch-again",
   "description": "Never Create a Contact From Scratch Again!.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-release",
-      "summer-24-release",
-      "release-highlights",
-      "salesforce-summer-24",
-    ],
+  "tags": ["release", "release-highlights", "summer-24"],
   "author":
     {
       "name": Chris Stegall,

@@ -8,14 +8,7 @@
   "title": "Salesforce Integrations: Named Credentials and External Credentials",
   "Slug": "salesforce-integrations-named-credentials-and-external-credentials",
   "description": "In the latest installment of our weekly informal-Salesforce-chat video series, Matt and Chris sit down to chat Salesforce Integrations, Named &amp; External Credentials, and some of the best practices surrounding communication between your Salesforce org and other platforms..",
-  "tags":
-    [
-      "salesforce-developer",
-      "salesforce-dev",
-      "salesforce-integration",
-      "salesforce-admin",
-      "salesforce",
-    ],
+  "tags": ["developer", "integration", "administrator"],
   "author":
     {
       "name": Chris Stegall,

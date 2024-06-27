@@ -8,14 +8,7 @@
   "title": "Salesforce “How To” ABCs: O",
   "Slug": "salesforce-how-to-abcs-o",
   "description": "How to open the developer console window.",
-  "tags":
-    [
-      "salesforce-developer",
-      "salesforce-how-to-abcs",
-      "salesforce-how-to",
-      "salesforce-setup",
-      "salesforce",
-    ],
+  "tags": ["developer", "how-to", "setup"],
   "author":
     {
       "name": "Jessie Penaloza",

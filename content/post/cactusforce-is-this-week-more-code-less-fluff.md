@@ -8,14 +8,7 @@
   "title": "Cactusforce is this Week!—More Code, Less Fluff",
   "Slug": "cactusforce-is-this-week-more-code-less-fluff",
   "description": "This year Arizona’s 6th annual community conference for Salesforce developers and architects will be taking place at the ASU SkySong Innovation Center. A change from previous years&#39; locations, this venue will be a first over at Scottsdale, AZ. The official start date will be Friday, Jan 26th but sponsors, speakers, and MVPs will be arriving a earlier to enjoy a VIP dinner (4–6 pm) on Thursday, Jan 25th. (An add-on at Registration may be required if you wish to attend)..",
-  "tags":
-    [
-      "salesforce-event",
-      "salesforce-communities",
-      "salesforce",
-      "salesforce-developer",
-      "cactusforce",
-    ],
+  "tags": ["events", "communities", "developer", "dreamin"],
   "author":
     {
       "name": "Jessie Penaloza",

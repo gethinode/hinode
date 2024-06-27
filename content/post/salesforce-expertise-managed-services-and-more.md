@@ -8,14 +8,7 @@
   "title": "Salesforce Expertise: Managed Services (and More!)",
   "Slug": "salesforce-expertise-managed-services-and-more",
   "description": "A few months ago we talked about a subtle change to the AppExchange that’s making it a lot easier for organizations to find best-fit partners for Salesforce implementation and celebrated our recognition as Experts in the Public Sector space. And today we’re proud to announce another round of updates and a few more areas of expertise worth celebrating!.",
-  "tags":
-    [
-      "appexchange",
-      "managed-services",
-      "manufacturing",
-      "salesforce-partners",
-      "salesforce",
-    ],
+  "tags": ["appexchange", "managed-services", "manufacturing", "partners"],
   "author":
     {
       "name": "Chris Stegall",

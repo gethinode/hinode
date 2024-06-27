@@ -5,7 +5,7 @@
   "title": "Reducing Screen Clutter and Improving UX with Conditional Components in Salesforce",
   "Slug": "quickly-easily-and-securely-create-word-documents-in-salesforce-introducing-mambo-merge",
   "description": "User experience is one of the biggest contributors to adoption, understanding, and platform success.",
-  "tags": ["ux", "salesforce", "tutorial", "page layout"],
+  "tags": ["ux", "tutorial", "page layout"],
   "author":
     {
       "name": "Chris Stegall",

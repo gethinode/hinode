@@ -6,13 +6,12 @@
   "title": "Cast Your Vote!",
   "Slug": "cast-your-vote",
   "description": "And help craft the Salesforce feature roadmap of your dreams.",
-  "tags": ["releases", "ideaexchange", "roadmap", "spring 20"],
+  "tags": ["release", "ideaexchange", "roadmap", "spring-20"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/two-girls-on-one-laptop.jpg" },

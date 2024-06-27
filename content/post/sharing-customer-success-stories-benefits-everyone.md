@@ -8,14 +8,7 @@
   "title": "Sharing Customer Success Stories Benefits Everyone",
   "Slug": "sharing-customer-success-stories-benefits-everyone",
   "description": "Learning from others in ways we never imagined.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-admin",
-      "trailblazercommunity",
-      "salesforce-ecosystem",
-      "salesforce-partners",
-    ],
+  "tags": ["administrator", "trailblazers", "ecosystem", "partners"],
   "author":
     {
       "name": "Jessie Penaloza",

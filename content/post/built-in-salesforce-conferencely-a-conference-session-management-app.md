@@ -8,14 +8,7 @@
   "title": "Built in Salesforce: Conferencely, a Conference Session Management App!",
   "Slug": "built-in-salesforce-conferencely-a-conference-session-management-app",
   "description": "One of the most rewarding parts of “Thinking in Salesforce” is how everyday obstacles become opportunities to build something fun and useful!.",
-  "tags":
-    [
-      "salesforce-admin",
-      "salesforce-dev",
-      "salesforce",
-      "salesforce-app",
-      "built-in-salesforce",
-    ],
+  "tags": ["administrator", "developer", "app"],
   "author":
     {
       "name": "Chris Stegall",

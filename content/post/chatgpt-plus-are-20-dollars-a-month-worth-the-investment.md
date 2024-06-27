@@ -8,8 +8,7 @@
   "title": "ChatGPT Plus? Are $20 Dollars A Month Worth The Investment?",
   "Slug": "chatgpt-plus-are-20-dollars-a-month-worth-the-investment",
   "description": "It was only a matter of time before a subscription model was put into motion..",
-  "tags":
-    ["chatgpt", "ai", "artificial-intelligence", "ai-tools", "ai-business"],
+  "tags": ["chatgpt", "artificial-intelligence"],
   "author":
     {
       "name": "Jessie Penaloza",

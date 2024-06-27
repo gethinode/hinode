@@ -8,7 +8,7 @@
   "title": "Summer ’23 Release Highlights: Clone Lightning Apps",
   "Slug": "summer-23-release-highlights-clone-lightning-apps",
   "description": "IN-BLOG EXTRA: A Feature to Avoid",
-  "tags": [],
+  "tags": ["summer-23", "release"],
   "author":
     {
       "name": "Chris Stegall",

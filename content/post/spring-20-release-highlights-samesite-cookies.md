@@ -6,30 +6,17 @@
   "Slug": "spring-20-release-highlights-samesite-cookies-integrations-and-preparing-for-google-chrome-80",
   "description": "The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere. From sweater-free lunch-strolls...",
   "tags":
-    [
-      "spring 20",
-      "salesforce",
-      "release",
-      "samesite",
-      "cookies",
-      "integrations",
-      "chrome",
-      "google",
-      "http",
-    ],
+    ["spring-20", "release", "cookies", "integration", "chrome", "google"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/laptop-wood-flowers.jpg" },
 }
 ---
-
-{{< image src="/img/laptop-wood-flowers.jpg" title="Laptop on a wood table with flowers" >}}
 
 The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere. From sweater-free lunch-strolls, to slightly more sunlit evening commutes, the coming season is already sneaking its way into our lives and that can only mean one thing — the [Spring ’20 Salesforce release](https://www.salesforce.com/blog/2020/01/spring-20-release-preview.html) is right around the corner!
 

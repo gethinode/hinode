@@ -8,20 +8,17 @@
   "title": "Dreamforce to You: Day 3",
   "Slug": "dreamforce-to-you-day-3",
   "description": "Day 3 of Dreamforce to You is upon us, and it’s my favorite day of the event: Customer Success! With a ton of sessions to choose from…",
-  "tags": [],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/dream-tx.jpg" },
 }
 ---
-
-{{< image src="/img/dream-tx.jpg" >}}
 
 Day 3 of [Dreamforce to You](https://www.salesforce.com/dreamforce/) is upon us, and it's my favorite day of the event: Customer Success! With a ton of sessions to choose from, there's something for every org, role, and use case and we'll hear straight from users how Salesforce has helped transform their businesses, processes, and helped drive innovation!
 

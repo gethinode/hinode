@@ -8,14 +8,7 @@
   "title": "Salesforce News Roundup: AI",
   "Slug": "salesforce-news-roundup-ai",
   "description": "From Salesforce AI to ChatGPT, Artificial Intelligence has been shaking up the tech world! While AI has been a part of our lives for quite some time now, the past year has heralded an unprecedented surge in momentum and public interest..",
-  "tags":
-    [
-      "artificial-intelligence",
-      "salesforce-news-roundup",
-      "ai",
-      "salesforce",
-      "salesforce-ai",
-    ],
+  "tags": ["news-roundup", "artificial-intelligence"],
   "author":
     {
       "name": "Jessie Penaloza",

@@ -8,14 +8,7 @@
   "title": "Top 10 Salesforce Features That Can Transform Your Business",
   "Slug": "top-10-salesforce-features-that-can-transform-your-business",
   "description": "When you think of Salesforce, you probably think of your own experience using the platform in the roles you’ve explored throughout your career. If you’re in sales, you likely spend a lot of time with Leads and Opportunities, if you’re in Service: Cases and Accounts, etc… But every once in a while you’ll land in a role or at an org that’s using features of the platform you didn’t even know existed! Or maybe you knew/had heard about, but didn’t realize how potentially valuable they were!.",
-  "tags":
-    [
-      "salesforce-roi",
-      "admin",
-      "c-suite",
-      "salesforce-feature",
-      "salesforce-productivity",
-    ],
+  "tags": ["roi", "administrator", "c-suite", "productivity"],
   "author":
     {
       "name": Chris Stegall,

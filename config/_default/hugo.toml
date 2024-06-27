@@ -87,6 +87,7 @@ home = ["HTML", "RSS", "REDIR"]
     name = "xml"
 
 [minify]
+  disableJS = false
   [minify.tdewolff.js]
     keepVarNames = true
     precision = 0

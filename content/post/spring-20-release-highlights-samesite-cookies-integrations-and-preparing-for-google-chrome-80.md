@@ -8,14 +8,7 @@
   "title": "Spring ’20 Release Highlights: SameSite Cookies, Integrations, and Preparing for Google Chrome 80",
   "Slug": "spring-20-release-highlights-samesite-cookies-integrations-and-preparing-for-google-chrome-80",
   "description": "The calendar may claim that Winter’s only just begun, but the telltale signs of Spring are starting to pop up everywhere.",
-  "tags":
-    [
-      "chrome",
-      "salesforce",
-      "spring-20-release",
-      "salesforce-integration",
-      "release-highlights",
-    ],
+  "tags": ["chrome", "spring-20", "integration", "release-highlights"],
   "author":
     {
       "name": "Chris Stegall",

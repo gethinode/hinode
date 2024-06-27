@@ -7,15 +7,8 @@
   "date": "2023-10-25T23:31:29.000Z",
   "title": "Salesforce MVP Nominations Are Open!",
   "Slug": "salesforce-mvp-nominations-are-open",
-  "description": "The Salesforce “Golden Hoodie” is the most-coveted article of clothing in the Salesforce ecosystem and, potentially, the broader world of tech. If you’ve ever attended a Salesforce Community Event, Dreamforce, TDX, etc… you’ve seen the way they sparkle and shine and, if you’ve ever met a Salesforce MVP, it doesn’t take long to tell exactly why they deserve such eye-catching garb!.",
-  "tags":
-    [
-      "salesforce-communities",
-      "salesforce-golden-hoodie",
-      "salesforce",
-      "salesforce-mvp",
-      "salesforce-ecosystem",
-    ],
+  "description": "The Salesforce “Golden Hoodie” is the most-coveted article of clothing in the Salesforce ecosystem and, potentially, the broader world of tech.",
+  "tags": ["communities", "golden-hoodie", "mvp", "ecosystem"],
   "author":
     {
       "name": "Chris Stegall",

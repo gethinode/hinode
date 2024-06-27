@@ -8,19 +8,12 @@
   "title": "Winter ’24 Release Highlights: IdeaExchange Admin Winners",
   "Slug": "winter-24-release-highlights-ideaexchange-admin-winners",
   "description": "While Hurriquake’s don’t usually signal the end of Summer (and there’s still technically a whole ‘nother season before the chilliest chunk of the calendar), we’re technically less than a week away from the first orgs receiving the Salesforce Winter ’24 Release!.",
-  "tags":
-    [
-      "winter-24-release",
-      "salesforce-release",
-      "salesforce-winter-24",
-      "salesforce",
-      "release-highlights",
-    ],
+  "tags": ["winter-24", "release"],
   "author":
     {
       "name": Chris Stegall,
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_hyJP6_U5uI6qQswC3OVokQ.png" },

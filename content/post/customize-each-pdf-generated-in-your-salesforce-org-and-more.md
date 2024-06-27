@@ -8,14 +8,7 @@
   "title": "Customize (Each) PDF Generated in Your Salesforce Org (and More!)",
   "Slug": "customize-each-pdf-generated-in-your-salesforce-org-and-more",
   "description": "We’ve got an exciting how-to session set up for next week’s Mambo Merge Office Hours!.",
-  "tags":
-    [
-      "document-generation",
-      "salesforce-docgen",
-      "salesforce-document",
-      "mambo-merge",
-      "salesforce-app",
-    ],
+  "tags": ["document-generation", "app"],
   "author":
     {
       "name": "Jessie Penaloza",

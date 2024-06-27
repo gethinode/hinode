@@ -8,14 +8,7 @@
   "title": "My Flow-vember Journey — To Be Continued",
   "Slug": "my-flow-vember-journey-to-be-continued",
   "description": "Hooray! As Flow-vember draws to a close, I’ve completed our Flow-vember Trailmix and learned a ton about Salesforce’s awesome automation tool (and hopefully you have too)! So what’s next? How can you continue to build on that knowledge, and make sure you still have it long after the holidays have passed?.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-flow",
-      "salesforce-automation",
-      "salesforce-admin",
-      "flow-vember",
-    ],
+  "tags": ["flow", "automation", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

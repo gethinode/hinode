@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events May 18, 2020 — May 22, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-may-18-2020-may-22-2020",
   "description": "Man, do I have events for you this week! You might want to consider getting a bigger planner for all of these virtual opportunities Salesforce has in store for you. This week there are a lot of events happening on Wednesday, May 20th so clear up your schedule, sit back, open up your calendar and let’s get planning!.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-communities",
-      "salesforce-event",
-      "wfh",
-      "remote",
-    ],
+  "tags": ["communities", "events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_5dbFwMJdRgG9gYqnVEjisg.jpg" },

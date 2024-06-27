@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: Dates You Don’t Want to Miss!",
   "Slug": "summer-24-release-highlights-dates-you-don-t-want-to-miss",
   "description": "Depending on where you are, the weather may not be showing it, but we’re well on the way to the Salesforce Summer ’24 Release!.",
-  "tags":
-    [
-      "summer-24-release",
-      "release-highlights",
-      "salesforce-release",
-      "salesforce-summer-24",
-      "salesforce",
-    ],
+  "tags": ["release-highlights", "release", "summer-24"],
   "author":
     {
       "name": Chris Stegall,

@@ -8,14 +8,7 @@
   "title": "A New Look for the Trailblazer Community",
   "Slug": "a-new-look-for-the-trailblazer-community",
   "description": "This Trailblazer Community update is so fresh, I swear I saw the site go down briefly while they made the update. Just in time for TDX...",
-  "tags":
-    [
-      "salesforce-trailblazer",
-      "tdx",
-      "trailblazercommunity",
-      "salesforce",
-      "salesforce-admin",
-    ],
+  "tags": ["trailblazer", "tdx", "communities", "administrator"],
   "author":
     {
       "name": "Chris Stegall",

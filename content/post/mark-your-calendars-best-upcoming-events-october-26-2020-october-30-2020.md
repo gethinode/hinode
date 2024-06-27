@@ -8,14 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events October 26, 2020 — October 30, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-october-26-2020-october-30-2020",
   "description": "You know, this is where one would usually introduce a Halloween related joke, but Halloween isn’t my thing. Salesforce is my thing, okay. However, even though Halloween isn’t my thing I do have some Halloween themed events for you this week, as well as the normal ones. Also, all but one event is on Thursday, October 29th so sit back, open up your calendar, clear it out and let’s get planning!.",
-  "tags":
-    [
-      "salesforce-event",
-      "salesforce-admin",
-      "salesforce",
-      "events",
-      "virtual-events",
-    ],
+  "tags": ["administrator", "events"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_eiQ_y0ErfqhGM6y_4IsXeQ.jpg" },

@@ -7,15 +7,8 @@
   "date": "2021-03-05T00:46:16.000Z",
   "title": "Review: Partnerforce FY22 Kickoff!",
   "Slug": "review-partnerforce-fy22-kickoff",
-  "description": "Salesforce’s new fiscal year is underway and last week played host to the annual Partner Kickoff where consultants, implementers, and software vendors find out what to expect from the next 12 months in the ecosystem. Caylin and I tuned in live for the keynotes, special guests, seminars, and more and we reviewed and recapped it all on video!.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-partners",
-      "appexchange",
-      "partnerforce",
-      "salesforce-admin",
-    ],
+  "description": "Salesforce’s new fiscal year is underway and last week played host to the annual Partner Kickoff where consultants, implementers, and software vendors find out what to expect from the next 12 months in the ecosystem. Caylin and I tuned in live for the keynotes, special guests, seminars, and more and we reviewed and recapped it all on video!",
+  "tags": ["partners", "appexchange", "administrator"],
   "author":
     {
       "name": "Chris Stegall",

@@ -8,14 +8,7 @@
   "title": "Passing My First Salesforce Certification Exam",
   "Slug": "passing-my-first-salesforce-certification-exam",
   "description": "The journey that lead me to become a certified professional..",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-communities",
-      "salesforce-admin",
-      "trailblazercommunity",
-      "salesforce-certification",
-    ],
+  "tags": ["communities", "administrator", "trailblazer", "certification"],
   "author":
     {
       "name": "Jessie Penaloza",

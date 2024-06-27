@@ -8,14 +8,7 @@
   "title": "What We Love about Salesforce",
   "Slug": "what-we-love-about-salesforce",
   "description": "Chocolates and flowers have been flying off the shelves, Cupid’s arrows are whizzing above our heads, and last minute reservations are being frantically booked at romantic restaurants everywhere — it’s officially Valentine’s Day!",
-  "tags":
-    [
-      "salesforce-development",
-      "salesforce-communities",
-      "trailblazercommunity",
-      "salesforce",
-      "salesforce-admin",
-    ],
+  "tags": ["developer", "communities", "trailblazer", "administrator"],
   "author":
     {
       "name": Chris Stegall,

@@ -5,7 +5,7 @@
   "title": "Quickly, Easily, and Securely Create Word Documents in Salesforce — Introducing Mambo Merge!",
   "Slug": "quickly-easily-and-securely-create-word-documents-in-salesforce-introducing-mambo-merge",
   "description": "Whether it’s Billing creating invoices, Sales creating quotes...",
-  "tags": ["admin", "word", "document", "mail", "merge", "mambo"],
+  "tags": ["administrator", "document", "mail-merge", "mambo"],
   "author":
     {
       "name": "Chris Stegall",

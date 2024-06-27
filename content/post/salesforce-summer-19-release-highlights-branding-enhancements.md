@@ -5,8 +5,7 @@
   "title": "Salesforce Summer ’19 Release Highlights: Branding Enhancements",
   "Slug": "salesforce-summer-19-release-highlights-branding-enhancements",
   "description": "April’s showers are behind us, May’s flowers are bursting into bloom, and the world is spinning its way back to the hottest part of our orbit...",
-  "tags":
-    ["summer 19", "release", "salesforce", "branding", "admin", "custom color"],
+  "tags": ["summer-19", "release", "branding", "administrator", "custom-color"],
   "author":
     {
       "name": "Chris Stegall",

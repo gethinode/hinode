@@ -8,14 +8,7 @@
   "title": "3 Must-Watch Salesforce+ Original Series",
   "Slug": "3-must-watch-salesforce-original-series",
   "description": "In 2021, which was somehow 3 years ago, Salesforce launched Salesforce+, their streaming source for high-quality, Hollywood-style-productions designed to center content that can help Trailblazers grow their careers and clients grow their companies, on their own time..",
-  "tags":
-    [
-      "salesforce-dev",
-      "salesforce-plus",
-      "trailblazer",
-      "salesforce",
-      "salesforce-admin",
-    ],
+  "tags": ["salesforce-plus", "trailblazer", "administrator"],
   "author":
     {
       "name": "Chris Stegall",

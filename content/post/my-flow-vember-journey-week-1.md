@@ -8,14 +8,7 @@
   "title": "My Flow-vember Journey — Week 1",
   "Slug": "my-flow-vember-journey-week-1",
   "description": "The ability to use technology to perform tasks with little to no human interaction is what automation is all about. More and more, each day, tasks that impact various aspects of our daily lives are being automated. From filtering those unwanted emails to using voice assistants to get us from point A to B. The ability to perform tasks “in the background” frees up time and resources to do more every day..",
-  "tags":
-    [
-      "salesforce",
-      "automation",
-      "flow-vember",
-      "salesforce-flow",
-      "salesforce-admin",
-    ],
+  "tags": ["automation", "flow", "administrator"],
   "author":
     {
       "name": "Jessie Penaloza",

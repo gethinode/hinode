@@ -8,20 +8,17 @@
   "title": "Dreamforce to You: Day 2",
   "Slug": "dreamforce-to-you-day-2",
   "description": "It’s Day 2 of Dreamforce 2020 (a.k.a. Dreamforce to You, a.k.a. DreamTX) and we’re full speed ahead on Salesforce news, updates, and…",
-  "tags": [],
+  "tags": ["dreamforce"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/thanks-for-joining-us.jpg" },
 }
 ---
-
-{{< image src="/img/thanks-for-joining-us.jpg" >}}
 
 It's Day 2 of [Dreamforce 2020](https://www.salesforce.com/dreamforce/at-a-glance/) (a.k.a. Dreamforce to You, a.k.a. DreamTX) and we're full speed ahead on Salesforce news, updates, and customer stories!
 

@@ -5,13 +5,12 @@
   "title": "New Release Test Drive — Spring ’20 Sandbox Preview!",
   "Slug": "new-release-test-drive-spring-20-sandbox-preview",
   "description": "The hearths have just started to warm, the halls are barely even decked, and the holidays aren’t even in full swing yet, but the Salesforce Spring ’20 Release is coming up fast...",
-  "tags": ["spring 20", "release", "sandbox", "guide", "tutorial", "preview"],
+  "tags": ["spring-20", "release", "sandbox", "guide", "tutorial", "preview"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/butterfly.jpg" },

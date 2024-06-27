@@ -8,7 +8,7 @@
   "title": "TDX Meet-the-Speakers: Marianna Torres",
   "Slug": "tdx-meet-the-speakers-marianna-torres",
   "description": "TDX is less than a week away and we’re back with another round of “Meet-the-Speakers” to help you get your TDX Agenda locked in!.",
-  "tags": ["trailheaddx", "tdx24", "salesforce-event", "tdx", "salesforce-tdx"],
+  "tags": ["trailhead", "events", "tdx"],
   "author":
     {
       "name": Chris Stegall,

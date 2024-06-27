@@ -8,14 +8,7 @@
   "title": "Last Chance to Win: Take Your Next Salesforce Certification Exam for Free!",
   "Slug": "last-chance-to-win-take-your-next-salesforce-certification-exam-for-free",
   "description": "With TrailblazerDX in the rearview and the Summer ’23 Release just over the horizon, our feeds are full of new features, product news, and the inspiring Trailblazer stories that get us fired up to continue improving our Salesforce skill set!.",
-  "tags":
-    [
-      "giveaway",
-      "salesforce",
-      "salesforce-certification",
-      "tdx",
-      "salesforce-summer-23",
-    ],
+  "tags": ["giveaway", "certification", "tdx", "summer-23"],
   "author":
     {
       "name": "Chris Stegall",

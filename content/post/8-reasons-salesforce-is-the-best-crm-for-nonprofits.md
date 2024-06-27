@@ -8,14 +8,7 @@
   "title": "8 Reasons Salesforce is the Best CRM for Nonprofits",
   "Slug": "8-reasons-salesforce-is-the-best-crm-for-nonprofits",
   "description": "The foundation of every nonprofit is people. The founders who saw an opportunity and envisioned an organization that could help, the employees and volunteers who keep operations running smoothly, the donors and patrons who fund the efforts and spread the word, and the beneficiaries whose lives are improved..",
-  "tags":
-    [
-      "salesforce-npsp",
-      "salesforce",
-      "pledge-1",
-      "npsp",
-      "salesforce-non-profit",
-    ],
+  "tags": ["npsp", "pledge-1", "nonprofit"],
   "author":
     {
       "name": "Chris Stegall",

@@ -8,14 +8,7 @@
   "title": "Summer ’24 Release Highlights: Release Resources",
   "Slug": "summer-24-release-highlights-release-resources",
   "description": "Free Tools to Get You (and Your Org) Ready!.",
-  "tags":
-    [
-      "summer-24-release",
-      "salesforce-release",
-      "salesforce-admin",
-      "salesforce",
-      "salesforce-summer-24",
-    ],
+  "tags": ["release", "administrator", "summer-24"],
   "author":
     {
       "name": "Jessie Penaloza",

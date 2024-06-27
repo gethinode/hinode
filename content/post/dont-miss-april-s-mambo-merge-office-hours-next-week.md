@@ -8,14 +8,7 @@
   "title": "Don’t Miss April’s Mambo Merge Office Hours Next Week!",
   "Slug": "dont-miss-april-s-mambo-merge-office-hours-next-week",
   "description": "As Spring continues its tumble towards Summer ’23 (and another Salesforce Release) it’s also time for April’s installment of Mambo Merge Office Hours!",
-  "tags":
-    [
-      "appexchange",
-      "salesforce",
-      "mambo-merge",
-      "salesforce-app",
-      "salesforce-appexchange",
-    ],
+  "tags": ["appexchange", "app"],
   "author":
     {
       "name": "Chris Stegall",

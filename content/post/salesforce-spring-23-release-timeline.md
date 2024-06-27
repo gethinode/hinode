@@ -7,13 +7,12 @@
   "date": "2023-01-04T08:00:00-07:00",
   "title": "Salesforce Spring ’23 Release Timeline",
   "Slug": "salesforce-spring-23-release-timeline",
-  "description": "The new year is in full swing, the confetti’s been cleaned up, and we’re (mostly) used to writing “/23” on dates by now, and that all…",
-  "tags": [],
+  "description": "The new year is in full swing, the confetti’s been cleaned up, and we’re (mostly) used to writing 2023 on dates by now, and that all…",
+  "tags": ["spring-23", "release"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Marketing Director",
-      "webp": "/img/chris-stegall_128-128.webp",
       "jpeg": "/img/chris-stegall_128-128.jpg",
     },
   "layout": "single",

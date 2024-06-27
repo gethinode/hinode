@@ -8,13 +8,12 @@
   "title": "Mark Your Calendars: Best Salesforce Events July 5, 2021 — July 9, 2021",
   "Slug": "generate-pdfs-and-more-directly-from-salesforce",
   "description": "Generating documents straight from Salesforce is one of the most powerful ways to transform your data into time-savings for your team —...",
-  "tags": ["mambo merge"],
+  "tags": ["pdf"],
   "author":
     {
       "name": "Chris Stegall",
       "title": "Digital Marketing Coordinator",
-      "webp": "/img/chris-stegall_128-128.webp",
-      "jpeg": "/img/chris-stegall_128-128.jpg",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/mambo-merge-pdf-desktop.jpg" },

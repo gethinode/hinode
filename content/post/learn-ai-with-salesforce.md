@@ -5,7 +5,7 @@
   "title": "Learn AI With Salesforce!",
   "Slug": "learn-ai-with-salesforce",
   "description": "Artificial Intelligence has grown from sci-fi catch-all to business necessity in the course of a few short years.",
-  "tags": ["ai", "einstein"],
+  "tags": ["artificial-intelligence", "einstein"],
   "author":
     {
       "name": "Chris Stegall",

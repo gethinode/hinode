@@ -8,14 +8,7 @@
   "title": "Reporting Year-to-Date vs Last Year",
   "Slug": "reporting-year-to-date-vs-last-year",
   "description": "A Tale of Troubleshooting, Testing, Refactoring, and Redemption.",
-  "tags":
-    [
-      "salesforce-formula",
-      "salesforce",
-      "formula-fields",
-      "qa-with-matt-k",
-      "salesforce-reports",
-    ],
+  "tags": ["formulas", "q-and-a", "reports"],
   "author":
     {
       "name": Chris Stegall,

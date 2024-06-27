@@ -5,7 +5,7 @@
   "title": "The Best Time to Backup",
   "Slug": "the-best-time-to-backup",
   "description": "Since the Library of Alexandria, we’ve known the importance of data backups.",
-  "tags": ["admin", "undo", "button", "salesforce", "app", "exchange"],
+  "tags": ["administrator", "app", "appexchange"],
   "author":
     {
       "name": "Chris Stegall",

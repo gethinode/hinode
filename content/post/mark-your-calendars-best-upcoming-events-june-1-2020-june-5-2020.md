@@ -8,8 +8,7 @@
   "title": "Mark Your Calendars: Best Upcoming Events June 1, 2020 — June 5, 2020",
   "Slug": "mark-your-calendars-best-upcoming-events-june-1-2020-june-5-2020",
   "description": "Most of this week’s events have the underlying theme about inspiration, getting through these challenging times and aligning your goals. Businesses may be slowly reopening around the world, but we still have a lot of adjusting and learning to do. So sit back, open up your calendars and let’s get planning!.",
-  "tags":
-    ["salesforce-event", "saleforce-community", "remote", "wfh", "salesforce"],
+  "tags": ["events", "communities"],
   "author": { "name": Caylin Schmenk, "title": undefined, "jpeg": undefined },
   "layout": "single",
   "thumbnail": { "url": "/img/1_6m8r9oQbRoR6a3vATo3hYA.jpg" },

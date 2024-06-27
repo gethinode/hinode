@@ -5,7 +5,7 @@
   "title": "Remote Work Tools: Free Phone Calls in Gmail",
   "Slug": "remote-work-tools-free-phone-calls-in-gmail",
   "description": "With more and more workplaces making a rapid transition to remote operations, some snags and obstacles are inevitable. And, while it’s…",
-  "tags": ["calls", "remote", "google", "g suite", "pardot"],
+  "tags": ["google", "pardot"],
   "author":
     {
       "name": "Chris Stegall",

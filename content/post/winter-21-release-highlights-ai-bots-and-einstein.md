@@ -8,7 +8,7 @@
   "title": "Winter ‘21 Release Highlights: AI, Bots, and Einstein!",
   "Slug": "winter-21-release-highlights-ai-bots-and-einstein",
   "description": "It feels like Fall is just getting underway, but the Salesforce Winter ’21 Release is already on the horizon, and that means we’re back…",
-  "tags": [],
+  "tags": ["winter-21", "release"],
   "author":
     {
       "name": "Chris Stegall",

@@ -8,8 +8,7 @@
   "title": "Choosing the Right Automation Tool in Pardot",
   "Slug": "choosing-the-right-automation-tool-in-pardot",
   "description": "Choosing the right tool for the task is the first step of any successful endeavor.",
-  "tags":
-    ["pardot-admin", "pardot-automation", "pardot", "marketing", "salesforce"],
+  "tags": ["administrator", "automation", "pardot", "marketing"],
   "author":
     {
       "name": "Jessie Penaloza",

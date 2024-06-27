@@ -8,12 +8,12 @@
   "title": "TrailblazerDX is On Sale! Save $600",
   "Slug": "trailblazerdx-is-on-sale-save-600",
   "description": "TrailblazerDX is the annual Salesforce developer conference and attendance just got more affordable!.",
-  "tags": ["trailblazerdx", "tdx24", "salesforce-event", "tdx", "salesforce"],
+  "tags": ["trailblazer", "events", "tdx"],
   "author":
     {
       "name": Chris Stegall,
       "title": "Marketing Director",
-      "webp": "/img/contributors/chris-stegall_128-128.webp",
+      "jpeg": "/img/contributors/chris-stegall_352x352.jpg",
     },
   "layout": "single",
   "thumbnail": { "url": "/img/1_wKzIPa0msMwZXrPiYsJ5oQ.png" },

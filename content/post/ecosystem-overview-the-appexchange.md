@@ -8,14 +8,7 @@
   "title": "Ecosystem Overview: The AppExchange",
   "Slug": "ecosystem-overview-the-appexchange",
   "description": "The Salesforce Ecosystem is huge(!), and growing by the day, thanks to an ever-expanding array of products, features, services, apps, community groups, and more! Whether you’re brand new to the world of Salesforce or a triple Ranger there’s always something new to discover because. That’s why we’re starting this Ecosystem Overview video series — to help users, admins, devs, and Trailblazers get up to speed and stay up to date on the latest an d greatest in the world of Salesforce!.",
-  "tags":
-    [
-      "ecosystem-overview",
-      "salesforce",
-      "salesforce-admin",
-      "salesforce-appexchange",
-      "appexchange",
-    ],
+  "tags": ["ecosystem", "administrator", "appexchange"],
   "author":
     {
       "name": Chris Stegall,

@@ -8,14 +8,7 @@
   "title": "Salesforce Winter ’22 Release Timeline",
   "Slug": "salesforce-winter-22-release-timeline",
   "description": "The hot Summer weather might not show it, but the Salesforce Winter ’22 release is already on the horizon! As always, we’ll be peppering the lead-up to launch with another round of Release Highlights posts to show-off our picks for the most-anticipated updates, upgrades, and new features, and today we’ll be talking through the timeline so you can be sure to not miss a thing in this release cycle.",
-  "tags":
-    [
-      "winter-22",
-      "salesforce-winter-22",
-      "winter-22-release",
-      "release-highlights",
-      "salesforce-release",
-    ],
+  "tags": ["winter-22", "release-highlights", "release"],
   "author":
     {
       "name": "Chris Stegall",

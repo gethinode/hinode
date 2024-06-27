@@ -8,14 +8,7 @@
   "title": "Road To Dreamforce: Find Your Next Session",
   "Slug": "road-to-dreamforce-find-your-next-session",
   "description": "With less than a week before showtime, it’s time to start sorting out our Dreamforce schedules!.",
-  "tags":
-    [
-      "salesforce",
-      "salesforce-admin",
-      "dreamforce",
-      "salesforce-event",
-      "salesforce-ai",
-    ],
+  "tags": ["administrator", "dreamforce", "events", "artificial intelligence"],
   "author":
     {
       "name": "Jessie Penaloza",

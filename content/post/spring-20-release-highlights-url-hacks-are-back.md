@@ -6,7 +6,7 @@
   "title": "Spring '20 Release Highlights: URL Hacks are Back!",
   "Slug": "spring-20-release-highlights-url-hacks-are-back",
   "description": "Spring is the season of rebirth. The barren wastes of Winter begin to be punctuated by stalks of new growth, the monochrome horizon broken by flashes of color and life as the world warms",
-  "tags": ["spring 20", "salesforce", "url", "hack", "classic", "custom"],
+  "tags": ["spring-20", "hack", "classic"],
   "author":
     {
       "name": "Chris Stegall",
