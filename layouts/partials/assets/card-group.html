@@ -140,7 +140,7 @@
                 "buttonType" $buttonType
                 "iconRounded" $iconRounded
             ) -}}
-            {{- $params = merge $params $element }}
+            {{- $params = merge $element $params }}
 
             <div class="col">
                 {{- partial $hook $params -}}
@@ -151,7 +151,7 @@
                 </div>
             {{- end -}}
         {{- end -}}
-        {{if $cards }}{{- print $cards | safeHTML }}{{ end }}
+        {{ if $cards }}{{- print $cards | safeHTML }}{{ end }}
     </div>
 
     {{ if $paginator }}
