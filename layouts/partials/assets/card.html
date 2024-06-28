@@ -147,8 +147,8 @@
     {{ else if $icon }}
         {{ if eq $orientation "horizontal-sm" }}
             {{ $stack = "fa-1x" }}
-            {{ $col1 = "col-2" }}
-            {{ $col2 = "col-10" }}
+            {{ $col1 = "col-2 col-sm-3 col-md-4 col-xl-2" }}
+            {{ $col2 = "col-10 col-sm-9 col-md-8 col-xl-10" }}
         {{ else }}
             {{ $col1 = "col-4" }}
             {{ $col2 = "col-8" }}
@@ -164,8 +164,8 @@
                     {{- partial $hook (dict "url" $thumbnail "ratio" (or $ratio "1x1") "sizes" $sizes "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100 card-img-bg" "title" $title "loading" $loading) -}}
                 </div>
             {{- else if $icon -}}
-                <div class="{{ $col1 }}">
-                    <div class="card-icon {{ if $iconRounded }}fa-stack {{ $stack }} mx-auto{{ else }}fa-wrapper h-100 {{ end }} p-{{ $padding }} d-flex align-items-{{ $align}} justify-content-center {{ $iconStyle }}">
+                <div class="{{ $col1 }} p-{{ $padding }}">
+                    <div class="card-icon {{ if $iconRounded }}fa-stack {{ $stack }} mx-auto{{ else }}fa-wrapper h-100 {{ end }} d-flex align-items-{{ $align}} justify-content-center {{ $iconStyle }}">
                         {{ if $iconRounded }}
                             {{- partial "assets/icon.html" (dict "icon" "fas circle fa-stack-2x") -}}
                             {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $icon)) -}}
