@@ -1,0 +1,38 @@
+.masonry {
+    --masonry-padding: 4px;
+}
+
+.m-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 var(--masonry-padding);
+}
+
+.m-col {
+    flex: 100%;
+    max-width: 100%;
+    padding: 0 var(--masonry-padding);
+}
+
+.m-col div {
+    margin-top: calc(2 * var(--masonry-padding));
+    border-radius: 5px;
+}
+
+$utilities: map-merge(
+    $utilities,
+    (
+        "m-col": (
+            property: max-width,
+            responsive: true,
+            class: m-col,
+            values: (
+                1: 100%,
+                2: 50%,
+                3: 33.3%,
+                4: 25%,
+                5: 20%,
+            )
+        )
+    )
+);
