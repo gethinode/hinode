@@ -16,6 +16,7 @@
 {{- $page := .page -}}
 {{- $menu := .menu -}}
 {{- $parent := .parent -}}
+{{- $plain := .plain | default false -}}
 {{- $class := .class -}}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
@@ -56,7 +57,7 @@
     {{- $mainNav = urlize (lower $parent.Name) -}}
     {{- $childNav = urlize (lower $menu.Name) -}}
     {{- $anchorClass = "dropdown-item" -}}
-{{- else if $menu.HasChildren -}}
+{{- else if and (not $plain) $menu.HasChildren -}}
     {{- $anchorClass = "nav-link dropdown-toggle" -}}
     {{- $button = " role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" -}}
 {{- else -}}
@@ -78,7 +79,7 @@
             "size" "sm"
         )}}
     {{ else }}
-        <a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{. }}{{ end }}" 
+        <a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{ . }}{{ end }}" 
             {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
             data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
             href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
@@ -90,7 +91,7 @@
                     {{ partial "assets/icon.html" (dict "icon" (string .) )}}
                 {{ end }}
             {{ end -}}
-            <span {{ if $isActive }} class="active"{{ end }}>{{ if not $isIcon }}{{ $menu.Name }}{{ end }}</span>
+            <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $plain }}{{ $menu.Name }}{{ end }}</span>
             {{- with $menu.Post }}{{ . }}{{ end -}}
             {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
         </a>
