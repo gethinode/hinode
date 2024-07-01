@@ -32,3 +32,8 @@ arguments:
     comment: >-
       Flag to indicate if an external link should open in a new tab, defaults
       to setting `main.externalLinks.tab` in the site's parameters.
+  plain:
+    type: bool
+    optional: true
+    comment: >-
+      Renders the navigation item as plain item, ignoring any children.
