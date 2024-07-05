@@ -9,6 +9,7 @@
     footerBelowFold = false
     loading = "lazy"
     breakpoint = "md"
+    enableLanguageSelectionStorage = true 
     [main.externalLinks]
         cue = false
         tab = false
