@@ -4,7 +4,7 @@
   'use strict'
 
   const defaultContentLanguage = '{{- site.Language.Lang -}}';
-
+  
   // Function to set the selected language in localStorage
   function setLanguage(language) {
     localStorage.setItem("selectedLanguage", language)
@@ -16,10 +16,10 @@
   }
 
   // Function to apply the selected language to the website
-  function applyLanguage(language) {
+  function applyLanguage(language, href ) {
     if (document.documentElement.lang != language) {
       document.documentElement.lang = language
-      window.location.href = window.location.origin + '/' + language + '/'
+      window.location.href = href
     }
   }
 
@@ -34,9 +34,8 @@
       const storedLanguage = getLanguage()
       if (storedLanguage) {
         languageItems.forEach(item => {
-          if (
-            item.getAttribute("href") === `/${storedLanguage}/` ||
-            (storedLanguage === defaultContentLanguage && item.getAttribute("href") === "/")
+          if (item.getAttribute("hreflang") === `/${storedLanguage}/` ||
+            (storedLanguage === defaultContentLanguage && item.getAttribute("hreflang") === "/")
           ) {
             item.classList.add("active")
             applyLanguage(storedLanguage)
@@ -52,13 +51,11 @@
         item.addEventListener("click", event => {
           event.preventDefault()
           const selectedLanguage =
-            item.getAttribute("href") === "/"
-              ? defaultContentLanguage
-              :  item.getAttribute("href").split("/")[1]
+              item.getAttribute("hreflang") 
 
           if (selectedLanguage) {
             setLanguage(selectedLanguage)
-            applyLanguage(selectedLanguage)
+            applyLanguage(selectedLanguage, item.getAttribute("href"))
             languageItems.forEach(i => i.classList.remove("active"))
             item.classList.add("active")
           }
