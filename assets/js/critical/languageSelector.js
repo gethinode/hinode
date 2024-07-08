@@ -19,7 +19,11 @@
   function applyLanguage(language, href ) {
     if (document.documentElement.lang != language) {
       document.documentElement.lang = language
-      window.location.href = href
+      if(window.location.pathname != href) {
+        window.location.href = window.location.origin + '/' + language + '/'
+      } else {
+        window.location.href = window.Location.origin + href
+      }
     }
   }
 
@@ -34,11 +38,9 @@
       const storedLanguage = getLanguage()
       if (storedLanguage) {
         languageItems.forEach(item => {
-          if (item.getAttribute("hreflang") === `/${storedLanguage}/` ||
-            (storedLanguage === defaultContentLanguage && item.getAttribute("hreflang") === "/")
-          ) {
+          if (item.getAttribute("hreflang") == storedLanguage) {
             item.classList.add("active")
-            applyLanguage(storedLanguage)
+            applyLanguage(storedLanguage, item.getAttribute("href"))
           }
           else {
             item.classList.remove("active")
@@ -55,7 +57,7 @@
 
           if (selectedLanguage) {
             setLanguage(selectedLanguage)
-            applyLanguage(selectedLanguage, item.getAttribute("href"))
+            window.location.href = window.location.origin + item.getAttribute("href")
             languageItems.forEach(i => i.classList.remove("active"))
             item.classList.add("active")
           }
