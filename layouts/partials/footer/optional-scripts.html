@@ -4,6 +4,7 @@
 {{ else }}
     {{ $page_modules = $page_modules | append .Params.modules }}
 {{ end }}
+{{ with .Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
 
 {{ $config := page.Scratch.Get "modules" }}
 {{ if not $config }}
