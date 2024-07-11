@@ -1,0 +1,9 @@
+{{ with .module }}
+	{{- $dependencies := page.Scratch.Get "dependencies" -}}
+	{{- if reflect.IsSlice $dependencies -}}
+		{{- $dependencies = complement $dependencies . -}}
+	{{ else }}
+		{{- $dependencies = slice . -}}
+	{{ end }}
+	{{- page.Scratch.Set "dependencies" $dependencies -}}
+{{ end }}

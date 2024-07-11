@@ -14,6 +14,7 @@
     {{ end }}
         
     {{ $page_modules := slice | append .Page.Params.modules }}
+    {{ with .Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
     {{- $modules := $config.optional | intersect $page_modules -}}
     {{- range $index, $mod := $modules -}}
         {{- $source := printf "scss/%s.scss" $mod -}}
