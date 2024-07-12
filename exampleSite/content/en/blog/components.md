@@ -90,6 +90,3 @@ As an example, the following shortcode displays an interactive map of the city o
 {{</* map lat=52.377 long=4.90 zoom=13 popup="Amsterdam Central Station" popup-lat=52.378062 popup-long=4.900562 */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
-
-
-{{< args "args" >}}
