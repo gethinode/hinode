@@ -21,5 +21,13 @@
             --bs-table-hover-bg: var(--bs-tertiary-bg);
             --bs-table-striped-color: var(--bs-body-color);
         }
+
+        .datatable-pagination-list-item {
+            &:hover,
+            &:focus,
+            &.datatable-active {
+                color: var(--bs-body-bg) !important;
+            }
+        } 
     }
 }
