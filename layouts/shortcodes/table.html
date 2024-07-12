@@ -15,22 +15,35 @@
 <!-- Initialize arguments -->
 {{ $breakpoint := "" }}
 {{ $class := "" }}
+{{ $sortable := false }}
+{{ $paging := false }}
+{{ $searchable := false }}
+
 {{- if .IsNamedParams -}}
     {{ $breakpoint = .Get "breakpoint" }}
     {{ $class = .Get "class" | default "" }}
+    {{ $sortable = partial "utilities/CastBool.html" (.Get "sortable") | default false }}
+    {{ $paging = partial "utilities/CastBool.html" (.Get "paging") | default false }}
+    {{ $searchable = partial "utilities/CastBool.html" (.Get "searchable") | default false }}
 {{ else }}
     {{ $breakpoint = .Get 0 }}
 {{ end }}
 
 <!-- Main code -->
+ {{ if or $sortable $paging $searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
 {{- $input := .Inner | .Page.RenderString }}
 {{- $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" -}}
 {{- $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" -}}
 {{- $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" -}}
-{{- $old := "<table>" -}}
-{{- $new := printf "<table class=\"table %s\">" $class -}}
-{{ $input := replace $input $old $new -}}
 
+{{ $attributes := "" }}
+{{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
+{{ if $paging }}{{ $attributes = printf "%s data-table-paging=true" $attributes }}{{ end }}
+{{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
+
+{{- $old := "<table>" -}}
+{{- $new := printf "<table class=\"table %s\" %s>" $class (trim $attributes " ") -}}
+{{ $input := replace $input $old $new -}}
 {{ if not $error }}
     {{ if eq $breakpoint "none" }}
         {{ $input | safeHTML }}

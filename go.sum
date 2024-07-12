@@ -184,6 +184,10 @@ github.com/gethinode/mod-lottie v1.5.4 h1:+xbamSsjcnP2tyzGl0CA1enma7gkAp67wenmuP
 github.com/gethinode/mod-lottie v1.5.4/go.mod h1:gALqz48aYpoDLxJOI3LzIpdy0Eq/lOBNtlcOxABa9tg=
 github.com/gethinode/mod-lottie v1.5.5 h1:uEJKsz+ovsZtbGkMhPONcIhtG6M3RjYiK+iVoScLOVo=
 github.com/gethinode/mod-lottie v1.5.5/go.mod h1:VTvBxD8VokICwnEqM0VUZFZHBYxLf4/grDFQyEh1DL0=
+github.com/gethinode/mod-simple-datatables v1.0.0 h1:Dj4WGw12OkaimwkCpLn5Jhmd49dvNJW9O2P/W9F+HlQ=
+github.com/gethinode/mod-simple-datatables v1.0.0/go.mod h1:K8T7fIdb8pMOB+OSW4A5lz5IW99+HyzcTgx764fvOGw=
+github.com/gethinode/mod-simple-datatables v1.0.2 h1:zhqxHet3iLQWYCBbGROALpOY9zQlptMycFkz1Tto5bA=
+github.com/gethinode/mod-simple-datatables v1.0.2/go.mod h1:mmrcvAJU2i3SMU56VmQ5PW43uDXBcsJKcZwCHrvl3Kc=
 github.com/gethinode/mod-utils v1.0.0 h1:cqHm2xS5uDiJzRm1KfHaNbq6uMVDKLhQa8/BuTZ1nhY=
 github.com/gethinode/mod-utils v1.0.0/go.mod h1:ONJm3pHCq7nvaPNjusLZNCeCbhOhSBH4HVKHwK1FdYE=
 github.com/gethinode/mod-utils v1.0.1 h1:jhZGlGFHHL1f5HXbBMXfiZ2gCz4TVafAzjnRPTIBSEE=

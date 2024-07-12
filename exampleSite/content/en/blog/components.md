@@ -10,7 +10,7 @@ thumbnail:
   authorURL: https://unsplash.com/@ryoji__iwata
   origin: Unsplash
   originURL: https://unsplash.com/photos/5siQcvSxCP8
-modules: ["katex", "leaflet", "lottie"]
+modules: ["katex", "leaflet", "lottie", "simple-datatables"]
 ---
 
 Hinode provides several shortcodes on top of the common [Bootstrap elements]({{< relref "bootstrap-elements" >}}). Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
@@ -22,6 +22,49 @@ As an example, the following shortcode shows an animation that plays on hover.
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* animation data="gatin.json" auto=false hover=true class="col-6 mx-auto" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+## Data tables
+
+As an example, the following shortcode displays a responsive table that uses advanced controls.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="markdown" >}}
+{{</* table sortable="true" paging="true" searchable="true" */>}}
+|  #  | Heading |
+|-----|---------|
+|  1. | Item 1  |
+|  2. | Item 2  |
+|  3. | Item 3  |
+|  4. | Item 4  |
+|  5. | Item 5  |
+|  6. | Item 6  |
+|  7. | Item 7  |
+|  8. | Item 8  |
+|  9. | Item 9  |
+| 10. | Item 10  |
+| 11. | Item 11  |
+| 12. | Item 12  |
+| 13. | Item 13  |
+| 14. | Item 14  |
+| 15. | Item 15  |
+| 16. | Item 16  |
+| 17. | Item 17  |
+| 18. | Item 18  |
+| 19. | Item 19  |
+| 20. | Item 20  |
+| 21. | Item 21  |
+| 22. | Item 22  |
+| 23. | Item 23  |
+| 24. | Item 24  |
+| 25. | Item 25  |
+| 26. | Item 26  |
+| 27. | Item 27  |
+| 28. | Item 28  |
+| 29. | Item 29  |
+| 30. | Item 30  |
+{{</* /table */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
