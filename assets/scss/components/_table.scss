@@ -1,3 +1,15 @@
+.datatable-container {
+    border-bottom: none if($enable-important-utilities, !important, null);
+}
+
+.datatable-bottom {
+    padding-top: 0 if($enable-important-utilities, !important, null);
+}
+
+.datatable-sorter {
+    padding-right: 1rem;
+}
+
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .table-striped, .table-striped-columns {

@@ -1,6 +1,7 @@
 comment: >-
   Makes a markdown table responsive. Responsive tables scroll horizontally to
-  improve their layout on smaller screens.
+  improve their layout on smaller screens. To features `sortable`, `paging`,
+  and `searchable` require the module `simple-datatables`.
 arguments:
   breakpoint:
     type: select
@@ -24,6 +25,21 @@ arguments:
     type: string
     optional: true
     comment: Class attribute of the table element, e.g. `table-striped-columns w-auto`.
+  sortable:
+    type: bool
+    optional: true
+    comment: Toggle the ability to sort the columns.
+    release: v0.24.13
+  paging:
+    type: bool
+    optional: true
+    comment: Whether paging is enabled for the table.
+    release: v0.24.13
+  searchable:
+    type: bool
+    optional: true
+    comment: Toggle the ability to search the dataset.
+    release: v0.24.13
 body:
   type: string
   optional: false
