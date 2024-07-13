@@ -22,9 +22,9 @@
 {{- if .IsNamedParams -}}
     {{ $breakpoint = .Get "breakpoint" }}
     {{ $class = .Get "class" | default "" }}
-    {{ $sortable = partial "utilities/CastBool.html" (.Get "sortable") | default false }}
-    {{ $paging = partial "utilities/CastBool.html" (.Get "paging") | default false }}
-    {{ $searchable = partial "utilities/CastBool.html" (.Get "searchable") | default false }}
+    {{ with (.Get "sortable")}} {{ $sortable = partial "utilities/CastBool.html" . }}{{ end }}
+    {{ with (.Get "paging")}} {{ $paging = partial "utilities/CastBool.html" . }}{{ end }}
+    {{ with (.Get "searchable")}} {{ $searchable = partial "utilities/CastBool.html" . }}{{ end }}
 {{ else }}
     {{ $breakpoint = .Get 0 }}
 {{ end }}
