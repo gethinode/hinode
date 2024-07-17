@@ -2,6 +2,7 @@
 {{- $page := .page -}}
 {{- $url := .url -}}
 {{- $ratio := .ratio -}}
+{{- $portrait := .portrait -}}
 {{- $height := .height -}}
 {{- $width := .width -}}
 {{- $plain := .plain | default false }}
@@ -84,10 +85,27 @@
 
 <!-- Derive image width and height -->
 {{ if not $plain }}
-    {{ with $dims }}
-        {{ range $dim := (. | last 1) }}
-            {{ $width = (int (index (split $dim "x") 0)) }}
-            {{ $height = (int (index (split $dim "x") 1)) }}
+    {{ if $portrait }}
+        {{ with $dims }}
+            {{ $newDims := slice }}
+            {{ range $dim := . }}
+                {{ $width = (int (index (split $dim "x") 1)) }}
+                {{ $height = (int (index (split $dim "x") 0)) }}
+                {{- $newDims = $newDims | append (printf "%dx%d" (int $width) $height ) -}}
+            {{ end }}
+            {{ $dims = $newDims }}
+        {{ end }}
+
+        {{ $newWidth := $height }}
+        {{ $newHeight := $width }}
+        {{ $width = $newWidth }}
+        {{ $height = $newHeight }}
+    {{ else  }}
+        {{ with $dims }}
+            {{ range $dim := (. | last 1) }}
+                {{ $width = (int (index (split $dim "x") 0)) }}
+                {{ $height = (int (index (split $dim "x") 1)) }}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}

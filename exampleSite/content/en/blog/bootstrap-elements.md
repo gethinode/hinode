@@ -255,11 +255,12 @@ As an example, the following shortcodes show a square check, a brand logo, a cir
 
 ## Image
 
-As an example, the following shortcode displays an image with rounded corners and a 21x9 aspect ratio.
+As an example, the following shortcode displays an image with rounded corners and a 4x3 aspect ratio in portrait mode.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* image src="img/flowers.jpg" ratio="21x9" caption="Figure caption" class="rounded" */>}}
+{{</* image src="img/flowers.jpg" ratio="4x3" caption="Figure caption" class="rounded col-md-6"
+  portrait=true wrapper="text-center" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
