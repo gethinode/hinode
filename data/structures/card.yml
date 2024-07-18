@@ -90,6 +90,18 @@ arguments:
         - publication
         - tags
         - none
+  body:
+    type: select
+    optional: true
+    default: full
+    parent: cascade
+    release: v0.24.16
+    comment: >-
+      Body of the card. 
+    options:
+      values:
+        - full
+        - none
   footer:
     type: select
     optional: true
@@ -146,6 +158,16 @@ arguments:
         - 16x9
         - 21x9
     group: partial
+  portrait:
+    type: bool
+    parent: cascade
+    optional: true
+    default: false
+    release: v0.24.16
+    comment: >-
+      Flag to adjust the ratio from landscape to portrait. The image itself is
+      not rotated, only the crop area is adjusted. Not applicable to vector
+      graphics.
   alt:
     type: string
     optional: true

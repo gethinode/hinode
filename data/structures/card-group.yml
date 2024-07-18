@@ -122,6 +122,13 @@ arguments:
       Enables horizontal scrolling of the cards. By default, the card group
       wraps any cards beyond the amount of defined columns to a new line. When
       `scroll` is set to true, a horizontal scroll bar is added instead.
+  spacer:
+    type: bool
+    optional: true
+    comment: >-
+      Inserts a spacer before the card.
+    release: v0.24.16
+    group: partial
   hook:
     type: string
     optional: true
