@@ -23,9 +23,11 @@
 {{- $color := .color -}}
 {{- $padding := .padding -}}
 {{- $header := .header -}}
+{{- $body := .body -}}
 {{- $footer := .footer -}}
 {{- $orientation := .orientation -}}
 {{- $ratio := .ratio -}}
+{{- $portrait := .portrait | default false -}}
 {{- $wrapper := .wrapper | default "p-0" -}}
 {{- $style := .style -}}
 {{- $align := .align -}}
@@ -36,7 +38,9 @@
 {{- $buttonType := .buttonType -}}
 {{- $iconRounded := .iconRounded }}
 {{- $scroll := .scroll | default false }}
+{{- $spacer := .spacer | default false }}
 {{- $hook := .hook | default "assets/card.html" }}
+{{- $cols := string .cols | default "3" -}}
 
 <!-- Override arguments -->
 {{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
@@ -49,6 +53,13 @@
     {{ end }}
     {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
 {{ end }}
+
+{{ $cardWrapper := "" }}
+{{ if $scroll }}
+    {{ $cardWrapper = printf "card-block card-block-%d" (int $cols) }}
+{{ end }}
+
+{{ if not $spacer }}{{ $class = printf "%s h-100" $class }}{{ end }}
 
 {{ $list := slice }}
 {{ if $isPages }}
@@ -79,13 +90,10 @@
 {{- $max := $count -}}
 {{- $max = math.Min (.max | default $count) $count -}}
 {{- $responsive := .responsive | default true -}}
-{{- $cols := string .cols | default "3" -}}
 
 {{- $sizes := "100vw" }}
 {{- $colGrid := "" -}}
-{{ if $scroll }}
-    {{- $colGrid = (printf "card-block-%d" $cols) -}}
-{{ else }}
+{{ if not $scroll }}
     {{ $colGrid = printf "row-cols-%s" $cols }}
     {{- if eq $cols "1" }}
         {{ $colGrid = "row-cols-1" -}}
@@ -120,18 +128,20 @@
 
 <!-- Main code -->
 <div class="container {{ $wrapper }} {{ if $scroll }}card-container-wrapper{{ end }}">
-    <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100{{ else }}{{ $colGrid }}{{ end }}">
+    <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end  }} {{ $colGrid }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
-                "class" (printf "h-100 %s" $class)
+                "class" (printf " %s" $class)
                 "color" $color
                 "footer" $footer
+                "body" $body
                 "header" $header
                 "loading" $loading
                 "sizes" $sizes
                 "orientation" $orientation
                 "padding" $padding
                 "ratio" $ratio
+                "portrait" $portrait
                 "subtle" $subtle
                 "style" $style
                 "align" $align
@@ -142,7 +152,8 @@
             ) -}}
             {{- $params = merge $element $params }}
 
-            <div class="col">
+            <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}">
+                {{ if $spacer }}<div class="spacer"></div>{{ end }}
                 {{- partial $hook $params -}}
             </div>
             {{- if and (lt $index (sub $max 1)) $separator -}}
