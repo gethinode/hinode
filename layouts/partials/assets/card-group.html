@@ -37,6 +37,7 @@
 {{- $iconRounded := .iconRounded }}
 {{- $scroll := .scroll | default false }}
 {{- $hook := .hook | default "assets/card.html" }}
+{{- $cols := string .cols | default "3" -}}
 
 <!-- Override arguments -->
 {{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
@@ -48,6 +49,11 @@
         {{ $paginator = $page.Paginate $pages }}
     {{ end }}
     {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
+{{ end }}
+
+{{ $cardWrapper := "" }}
+{{ if $scroll }}
+    {{ $cardWrapper = printf "card-block card-block-%d" (int $cols) }}
 {{ end }}
 
 {{ $list := slice }}
@@ -83,9 +89,7 @@
 
 {{- $sizes := "100vw" }}
 {{- $colGrid := "" -}}
-{{ if $scroll }}
-    {{- $colGrid = (printf "card-block-%d" $cols) -}}
-{{ else }}
+{{ if not $scroll }}
     {{ $colGrid = printf "row-cols-%s" $cols }}
     {{- if eq $cols "1" }}
         {{ $colGrid = "row-cols-1" -}}
@@ -120,7 +124,7 @@
 
 <!-- Main code -->
 <div class="container {{ $wrapper }} {{ if $scroll }}card-container-wrapper{{ end }}">
-    <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100{{ else }}{{ $colGrid }}{{ end }}">
+    <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end  }} {{ $colGrid }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
                 "class" (printf "h-100 %s" $class)
@@ -142,7 +146,7 @@
             ) -}}
             {{- $params = merge $element $params }}
 
-            <div class="col">
+            <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}">
                 {{- partial $hook $params -}}
             </div>
             {{- if and (lt $index (sub $max 1)) $separator -}}
