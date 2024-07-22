@@ -50,24 +50,26 @@
 <!-- Generate image definition -->
 {{- if $caption -}}
     <figure {{ with $wrapper }}class="{{ . }}"{{ end }}>
+{{ else }}
+    {{ with $wrapper }}<div class="{{ . }}">{{ end }}
 {{ end }}
-<div class="{{ if not $caption }}{{ $wrapper }}{{ end }}">        
-    {{- if not $anchor -}}
-        <img class="img-fluid {{ $class }}"
-            src="{{ $fallbackURL }}"
-            {{ if $lazy }}loading="lazy"{{ end }}
-            {{ with $priority }}fetchpriority="{{ . }}"{{ end }}
-            {{ with $imgset -}}srcset="{{ . }}" sizes="{{ $sizes }}"{{- end }}
-            {{ with $height }}height="{{ . }}"{{ end }}
-            {{ with $width }}width="{{ . }}"{{ end }}
-            {{ with (or $title $caption) }}alt="{{ . }}"{{ end }}>
-    {{- else }}
-        <svg class="{{ $class }}">
-            <use href="{{ $fallbackURL }}#{{ $anchor }}"></use>
-        </svg>
-    {{ end }}
-</div>
+{{- if not $anchor -}}
+    <img class="img-fluid {{ $class }}"
+        src="{{ $fallbackURL }}"
+        {{ if $lazy }}loading="lazy"{{ end }}
+        {{ with $priority }}fetchpriority="{{ . }}"{{ end }}
+        {{ with $imgset -}}srcset="{{ . }}" sizes="{{ $sizes }}"{{- end }}
+        {{ with $height }}height="{{ . }}"{{ end }}
+        {{ with $width }}width="{{ . }}"{{ end }}
+        {{ with (or $title $caption) }}alt="{{ . }}"{{ end }}>
+{{- else }}
+    <svg class="{{ $class }}">
+        <use href="{{ $fallbackURL }}#{{ $anchor }}"></use>
+    </svg>
+{{ end }}
 {{- if $caption -}}
         <figcaption class="figure-caption{{ with $figclass }} {{ . }}{{ end }}">{{ $caption | safeHTML }}</figcaption>
     </figure>
+{{ else if $wrapper }}
+    </div>
 {{- end -}}
