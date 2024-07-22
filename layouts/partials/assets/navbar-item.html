@@ -50,7 +50,7 @@
 {{ else }}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url.Path "page" $page) }}
     {{- if not $ref -}}
-        {{- warnf "partial [assets/navbar-item.html] - Cannot find page of menu item '%s': %s" $menu $url -}}
+        {{- warnf "partial [assets/navbar-item.html] - Cannot find page of menu item '%s': %s" $menu.Name $url -}}
     {{ end }}
 {{ end -}}
 
