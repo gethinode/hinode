@@ -156,11 +156,13 @@ $utilities: map-merge(
     }    
 }
 
-@media (height >= 1400px) { 
+/* stylelint-disable media-feature-range-notation */
+@media (min-height: 1400px) { 
     .main-cover {
         height: calc(min(100vh, 1000px));
     }
 }
+/* stylelint-enable media-feature-range-notation */
 
 $utilities: map-merge(
     $utilities,
