@@ -1,4 +1,4 @@
-/_vendor
+_vendor/
 public/
 resources/
 node_modules/

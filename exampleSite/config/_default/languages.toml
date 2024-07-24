@@ -41,7 +41,7 @@ reference = "Meer projecten"
 languageName = "Français"
 contentDir = "content/fr"
 weight = 2
-[nl.params.opengraph]
+[fr.params.opengraph]
 locale = "fr_FR"
 [fr.params.head]
 tagline = "Un thème Hugo"
