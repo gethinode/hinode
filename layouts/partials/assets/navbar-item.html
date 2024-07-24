@@ -24,7 +24,7 @@
 {{- $menuURL := "" -}}
 {{ if or (strings.HasPrefix $menu.PageRef "http") (strings.HasPrefix $menu.URL "http") }}
     {{ $menuURL = or $menu.PageRef $menu.URL }}
-{{ else }}
+{{ else if (or $menu.PageRef $menu.URL) }}
     {{- $menuURL = urls.JoinPath $baseURL ((or $menu.PageRef $menu.URL) | relLangURL) -}}
 {{ end }}
 {{- $pageURL := $page.RelPermalink -}}
@@ -47,7 +47,7 @@
     {{- if $cue -}}
         {{ $suffix = partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
     {{- end -}}
-{{ else }}
+{{ else if $menuURL }}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url.Path "page" $page) }}
     {{- if not $ref -}}
         {{- warnf "partial [assets/navbar-item.html] - Cannot find page of menu item '%s': %s" $menu.Name $url -}}
@@ -87,7 +87,7 @@
         <a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{ . }}{{ end }}" 
             {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
             data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
-            href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }} {{ $button | safeHTMLAttr }}>
+            {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }}{{ end }} {{ $button | safeHTMLAttr }}>
             
             {{- with $menu.Pre }}
                 {{ if hasPrefix . "<i" }}
