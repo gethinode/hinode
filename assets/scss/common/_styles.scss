@@ -147,19 +147,19 @@ $utilities: map-merge(
 }
 
 .main-cover {
-    height: 100vh;
+    min-height: 100vh;
 }    
 
 @include media-breakpoint-up(xxl) {
     .main-cover {
-        height: calc(min(100vh, 1000px));
+        min-height: calc(min(100vh, 1000px));
     }    
 }
 
 /* stylelint-disable media-feature-range-notation */
 @media (min-height: 1400px) { 
     .main-cover {
-        height: calc(min(100vh, 1000px));
+        min-height: calc(min(100vh, 1000px));
     }
 }
 /* stylelint-enable media-feature-range-notation */
