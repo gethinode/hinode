@@ -59,7 +59,7 @@
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
     {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
     {{- if not $description }}{{ $description = partial "utilities/GetDescription.html" (dict "page" .) }}{{ end -}}
-    {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
+    {{- if and (not $thumbnail) (not $icon) }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
     {{ if not $ratio }}
         {{- if and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.ratio }}{{ $ratio = .Params.Thumbnail.ratio }}{{ end -}}
     {{ end }}
