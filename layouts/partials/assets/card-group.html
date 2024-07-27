@@ -127,7 +127,7 @@
 {{- if and (eq $cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
 <!-- Main code -->
-<div class="container {{ $wrapper }} {{ if $scroll }}card-container-wrapper{{ end }}">
+<div class="container-fluid {{ $wrapper }} {{ if $scroll }}card-container-wrapper{{ end }}">
     <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end  }} {{ $colGrid }}">
         {{ range $index, $element := $list }}
             {{- $params := (dict
