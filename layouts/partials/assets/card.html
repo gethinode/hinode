@@ -86,7 +86,7 @@
     
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
-                <p class="card-title fs-5 fw-bold">{{ $title }}</p>
+                <p class="card-title fs-lg-5 fs-6 fw-bold">{{ $title }}</p>
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -95,7 +95,7 @@
         </a>
     {{- else -}}
         <div>
-            {{ with $title }}<p class="card-title fs-5 fw-bold">{{ . }}</p>{{ end -}}
+            {{ with $title }}<p class="card-title fs-lg-5 fs-6 fw-bold">{{ . }}</p>{{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
