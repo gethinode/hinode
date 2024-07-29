@@ -9,6 +9,7 @@
 {{- $targetURL := "" -}}
 {{- $set := "" -}}
 {{- $imageset := .imageset | default false }}
+{{- $anchor := .anchor | default "" -}}
 
 <!-- Split url into base and anchor when applicable (only relevant for vector images) -->
 {{- $segments := split $url "#" -}}
@@ -118,13 +119,21 @@
         "url" $url
         "img" $img
         "dims" ($dims | last 1)
+        "anchor" $anchor
         "transform" $transform
         "hook" $hook
-        "format" "jpg"
+        "format" "png"
         "includeWidth" false
     )}}
     {{ if $imageset }}
-        {{- $set = partial "assets/helpers/image-set.html" (dict "url" $url "img" $img "dims" $dims "transform" $transform "hook" $hook) -}}
+        {{- $set = partial "assets/helpers/image-set.html" (dict 
+            "url" $url
+            "img" $img
+            "dims" $dims
+            "anchor" $anchor
+            "transform" $transform
+            "hook" $hook
+        ) -}}
     {{ end }}
 {{ end }}
 

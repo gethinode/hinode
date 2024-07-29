@@ -6,6 +6,19 @@
 
 {{ $error := false }}
 
+{{ $anchorMap := dict
+    "TopLeft" "north_west"
+    "Top" "north"
+    "TopRight" "north_east"
+    "Left" "west"
+    "Center" "center"
+    "Right" "east"
+    "BottomLeft" "south_west"
+    "Bottom" "south"
+    "BottomRight" "south_east"
+    "Smart" "auto"
+}}
+
 <!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
     {{ errorf "partial [assets/adapter/cloudinary.html] - Invalid arguments" -}}
@@ -20,6 +33,8 @@
 {{ $transform := .transform }}
 {{ $height := .height }}
 {{ $width := .width }}
+{{ $anchor := "" }}
+{{ with .anchor }}{{ $anchor = index $anchorMap . }}{{ end }}
 {{ if eq $transform "fill" }}{{ $transform = "c_fill" }}{{ else }}{{ $transform = "c_fit" }}{{ end }}
 {{ $element := "" }}
 
@@ -36,6 +51,9 @@
         {{ $file = printf "%s.%s" (strings.TrimSuffix (path.Ext $file) $file) $format }}
     {{ else }}
         {{ $operation = printf "f_auto,%s,h_%d,w_%d" $transform $height $width }}
+    {{ end }}
+    {{ with $anchor }}
+        {{ $operation = printf "%s,g_%s" $operation . }}
     {{ end }}
     {{- $element = urls.JoinPath (slice "https://" $host $dir $operation $file) -}}
 {{ end }}

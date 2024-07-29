@@ -15,15 +15,16 @@
 {{- $mode := .mode -}}
 {{- $modes := .modes -}}
 {{- $plain := .plain | default false }}
+{{- $anchor := .anchor }}
 
 <!-- Split url into base and anchor when applicable (only relevant for vector images) -->
-{{- $anchor := "" -}}
+{{- $fileAnchor := "" -}}
 {{- $segments := split $url "#" -}}
 {{- if gt (len $segments) 2 -}}
     {{- errorf "Invalid path or url: %q" $url -}}
 {{- else if eq (len $segments) 2 }}
     {{- $url = index $segments 0 -}}
-    {{- $anchor = index $segments 1 -}}
+    {{- $fileAnchor = index $segments 1 -}}
 {{- end -}}
 
 <!-- Obtain fallback URL and imageset definition -->
@@ -34,6 +35,7 @@
     "portrait" $portrait
     "plain" $plain 
     "imageset" true
+    "anchor" $anchor
 ) }}
 {{ $fallbackURL := index $target "target" }}
 {{ $imgset := index $target "set" }}
@@ -53,7 +55,7 @@
 {{ else }}
     {{ with $wrapper }}<div class="{{ . }}">{{ end }}
 {{ end }}
-{{- if not $anchor -}}
+{{- if not $fileAnchor -}}
     <img class="img-fluid {{ $class }}"
         src="{{ $fallbackURL }}"
         {{ if $lazy }}loading="lazy"{{ end }}
@@ -64,7 +66,7 @@
         {{ with (or $title $caption) }}alt="{{ . }}"{{ end }}>
 {{- else }}
     <svg class="{{ $class }}">
-        <use href="{{ $fallbackURL }}#{{ $anchor }}"></use>
+        <use href="{{ $fallbackURL }}#{{ $fileAnchor }}"></use>
     </svg>
 {{ end }}
 {{- if $caption -}}

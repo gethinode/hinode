@@ -25,6 +25,7 @@
 {{- $loading := "" -}}
 {{- $error := false -}}
 {{- $plain := false -}}
+{{- $anchor := "" -}}
 
 {{- if .IsNamedParams -}}
     {{ $url = .Get "src" | default "" -}}
@@ -39,6 +40,7 @@
     {{ with .Get "mode" }}{{ $mode = partial "utilities/CastBool.html" . }}{{ end -}}
     {{ with .Get "portrait" }}{{ $portrait = partial "utilities/CastBool.html" . }}{{ end -}}
     {{ with .Get "plain" }}{{ $plain = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{ $anchor = .Get "anchor" | default "" -}}
 {{ else -}}
     {{ $url = .Get 0 }}
 {{ end -}}
@@ -61,6 +63,7 @@
         "mode" $mode
         "portrait" $portrait
         "plain" $plain
+        "anchor" $anchor
         "loading" $loading
         "page" .Page)
     -}} 
