@@ -138,3 +138,22 @@ arguments:
       Flag to indicate if the image should render a plain image instead of an
       image set. When set, no transformations are applied to the image.
     release: v0.24.0
+  anchor:
+    type: select
+    optional: true
+    comment: 
+      Anchor of the crop box, defaults to anchor value set in `imaging` section
+      of the site configuration (usually `Smart`).
+    options:
+      values:
+        - TopLeft
+        - Top
+        - TopRight
+        - Left
+        - Center
+        - Right
+        - BottomLeft
+        - Bottom
+        - BottomRight
+        - Smart
+    release: v0.24.22

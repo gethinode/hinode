@@ -26,7 +26,7 @@ As an example, the following shortcode displays an image with rounded corners an
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* image src="https://ik.imagekit.io/demo/default-image.jpg"
-    ratio="21x9" caption="ImageKit.io image" class="rounded" */>}}
+    ratio="21x9" caption="ImageKit.io image" class="rounded" anchor="Center" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -37,6 +37,6 @@ As an example, the following shortcode displays an image with rounded corners an
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* image src="https://assets.imgix.net/examples/bluehat.jpg"
-    ratio="21x9" caption="imgix image" class="rounded" */>}}
+    ratio="21x9" caption="imgix image" class="rounded" anchor="Top" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

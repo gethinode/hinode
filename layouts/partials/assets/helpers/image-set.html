@@ -7,6 +7,7 @@
 {{ $transform := .transform }}
 {{ $format := .format }}
 {{ $includeWidth := .includeWidth | default true }}
+{{ $anchor := .anchor | default "" }}
 
 {{ $host := (urls.Parse $url).Hostname }}
 {{ $dir := (urls.Parse $url).Path }}
@@ -35,6 +36,7 @@
         "width" $width
         "height" $height
         "format" $format
+        "anchor" $anchor
     )}}
     {{ if $includeWidth }}
         {{ $imgset = $imgset | append (printf "%s %dw" $element $width) }}
