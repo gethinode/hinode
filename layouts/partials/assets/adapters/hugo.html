@@ -53,7 +53,14 @@
     {{ end }}
 
     {{- $clean := path.Ext $img.RelPermalink -}}
-    {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean (printf "-%dx%d.%s" $width $height $format)) -}}
+    {{ $destination := "" }}
+    {{ if $anchor }}
+        {{ $destination = printf "-%dx%d-%s.%s" $width $height (lower $anchor) $format }}
+    {{ else }}
+        {{ $destination = printf "-%dx%d.%s" $width $height $format }}
+    {{ end }}
+
+    {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean $destination) -}}
     {{- if $absoluteURL -}}
         {{- $element = $scaled.Permalink -}}
     {{- else -}}
