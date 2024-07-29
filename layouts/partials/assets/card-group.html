@@ -71,11 +71,13 @@
         <!-- headless page -->
         {{- else -}}
             {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
+            {{- $anchor := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.anchor) "") -}}
             {{- $params = merge $params (dict
                 "title" $element.Title
                 "href" $element.RelPermalink
                 "description" (partial "utilities/GetDescription.html" (dict "page" $element "raw" true))
                 "thumbnail" $thumbnail
+                "anchor" $anchor
                 "icon" $element.Params.icon
             ) -}}
         {{- end -}}

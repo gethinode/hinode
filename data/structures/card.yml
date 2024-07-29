@@ -271,6 +271,25 @@ arguments:
       One or more strings separated by commas, indicating the source sizes of an
       image set.
     group: partial
+  anchor:
+    type: select
+    optional: true
+    comment: 
+      Anchor of the thumbnail's crop box, defaults to anchor value set in
+      `imaging` section of the site configuration (usually `Smart`).
+    options:
+      values:
+        - TopLeft
+        - Top
+        - TopRight
+        - Left
+        - Center
+        - Right
+        - BottomLeft
+        - Bottom
+        - BottomRight
+        - Smart
+    release: v0.24.23
 body:
   optional: true
   comment: >-
