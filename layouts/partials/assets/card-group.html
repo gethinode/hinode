@@ -120,6 +120,10 @@
         {{ end -}}
         {{ $sizes = printf "(min-width: %s) 20vw, (min-width: %s) 33.3vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
     {{ end -}}
+{{ else }}
+    {{ if in (slice "2" "3" "4" "5") $cols }}
+        {{ $sizes = replace (printf "%.1fvw" (div 100.0 (int $cols))) ".0" "" }}
+    {{ end }}
 {{ end }}
 
 {{- if not $paginate -}}
