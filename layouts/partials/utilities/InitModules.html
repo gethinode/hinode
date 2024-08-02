@@ -4,6 +4,7 @@
 {{ $optional := slice }}
 {{ $excludeSCSS := slice }}
 {{ $disableTemplate := slice }}
+{{ $localize := slice }}
 {{ $modules := dict }}
 
 {{ range $key, $mod := $page.Site.Params.modules }}
@@ -37,13 +38,24 @@
             {{ $disableTemplate = $disableTemplate | append $key }}
         {{ end }}
 
+        {{ if eq (index $mod "localize") true }}
+            {{ $localize = $localize | append $key }}
+        {{ end }}
+
         {{ $modules = merge $modules (dict $key $mod) }}
     {{ else }}
         {{ warnf "Unsupported module parameter: %s" $key }}
     {{ end }}
 {{ end }}
 
-{{ $modules := dict "modules" $modules "core" $core "optional" $optional "excludeSCSS" $excludeSCSS "disableTemplate" $disableTemplate }}
+{{ $modules := dict 
+    "modules" $modules
+    "core" $core
+    "optional" $optional
+    "excludeSCSS" $excludeSCSS
+    "disableTemplate" $disableTemplate
+    "localize" $localize
+}}
 
 {{- if and $page.IsPage (not (in $core "bootstrap")) -}}
     {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
