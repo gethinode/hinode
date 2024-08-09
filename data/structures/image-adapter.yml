@@ -60,3 +60,20 @@ arguments:
     type: int
     optional: false
     comment: Width of the image in pixels.
+  anchor:
+    type: select
+    optional: true
+    comment: Anchor of the crop box.
+    options:
+      values:
+        - TopLeft
+        - Top
+        - TopRight
+        - Left
+        - Center
+        - Right
+        - BottomLeft
+        - Bottom
+        - BottomRight
+        - Smart
+

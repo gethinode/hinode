@@ -146,6 +146,24 @@ $utilities: map-merge(
     }    
 }
 
+.main-cover {
+    min-height: 100vh;
+}    
+
+@include media-breakpoint-up(xxl) {
+    .main-cover {
+        min-height: calc(min(100vh, 1000px));
+    }    
+}
+
+/* stylelint-disable media-feature-range-notation */
+@media (min-height: 1400px) { 
+    .main-cover {
+        min-height: calc(min(100vh, 1000px));
+    }
+}
+/* stylelint-enable media-feature-range-notation */
+
 $utilities: map-merge(
     $utilities,
     (

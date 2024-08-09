@@ -1,0 +1,69 @@
+comment: >-
+  Bundles a JavaScript file for client-side processing. Scripts can be included
+  as critical, core, or optional file.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Context of the current page.
+  core:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Trigger to include all core files in the script bundle. Core bundles are
+      loaded asynchronously in each page of the site.
+  filename:
+    type: string
+    default: js/main.bundle.js
+    optional: true
+    comment: >-
+      Path of the target bundle file, relative to the site root.
+  match:
+    type: string
+    default: {js/*.js,js/vendor/**.js}
+    optional: true
+    comment: >-
+      Regular expression that defines the pattern of source files to be included
+      in the bundle. The pattern is relative to the project's `asset` folder.
+  header:
+    type: bool
+    default: false
+    comment: >-
+      Trigger to consider the script as loaded in the page header. When enabled,
+      it includes a script to load Google Analytics adjacent to any bundle
+      input.
+  localize:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Triggers the creation of a language-specific bundle file. The language
+      code is appended as suffix to the base name. For example, the English
+      version of `js/main.bundle.js` becomes `js/main.bundle.en.js`.
+  skipTemplate:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Script source input can contain Go Template magic. As such, Hinode
+      processes all input files with `resources.ExecuteAsTemplate`. However,
+      certain input files may be incompatible. Set `skipTemplate` to true to
+      skip template processing.
+  state:
+    type: select
+    optional: true
+    default: async
+    comment: >-
+      Defines the loading behavior of the script bundle. By default, scripts are
+      processed in the background and loaded when ready (`async`). Set the state
+      to `immediate` to load the script immediately (such as critical scripts).
+      Use 'defer' to load the script in relative order when the DOM is fully
+      built.
+    options:
+      values:
+        - async
+        - defer
+        - immediate

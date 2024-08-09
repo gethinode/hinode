@@ -28,7 +28,7 @@
 - id: shareLink
   translation: "Diese Seite teilen per {{ . }}"
 - id: shareSystem
-  translation: "Betriebssystem"
+  translation: "System"
 - id: copyToClipboard
   translation: "In die Zwischenablage kopieren"
 - id: copiedToClipboard
@@ -52,7 +52,7 @@
 
 # Navigation
 - id: colorMode
-  translation: "Thema umschalten"
+  translation: "Modus umschalten"
 - id: colorLight
   translation: "Light"
 - id: colorDark
@@ -76,7 +76,7 @@
 
 # Sidebar
 - id: toggleSidebar
-  translation: "Menünavigation anzuzeigen oder auszublenden"
+  translation: "Menünavigation anzeigen oder ausblenden"
 
 # Feature
 - id: addedFeature

@@ -27,5 +27,20 @@
         {{- with index . "state" }}{{ $state = . }}{{ end -}}
     {{- end -}}
 
-    {{- partial "footer/scripts.html" (dict "filename" $filename "match" $match "header" false "skipTemplate" $skipTemplate "state" $state "page" .) }}
+    {{ $localize := false }}
+    {{- if reflect.IsSlice $config.localize -}}
+        {{- if in $config.localize $mod}}
+            {{- $localize = true -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- partial "footer/scripts.html" (dict 
+        "filename" $filename
+        "match" $match
+        "header" false
+        "skipTemplate" $skipTemplate
+        "state" $state
+        "localize" $localize
+        "page" page
+    ) }}
 {{- end -}}

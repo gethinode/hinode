@@ -15,6 +15,7 @@
 {{- $class := .class -}}
 {{- $color := .color -}}
 {{- $description := .description -}}
+{{- $body := .body | default "full" -}}
 {{- $footer := .footer | default "none" -}}
 {{- $gutter := .gutter | default "0" -}}
 {{- $header := .header | default "full" -}}
@@ -29,7 +30,9 @@
 {{- $orientation := .orientation | default "stacked" -}}
 {{- $padding := (string .padding) | default "auto" -}}
 {{- $ratio := .ratio -}}
+{{- $portrait := .portrait | default false -}}
 {{- $thumbnail := .thumbnail -}}
+{{- $anchor := .anchor | default "" -}}
 {{- $title := .title -}}
 {{- $subtle := .subtle -}}
 {{- $button := .button -}}
@@ -57,8 +60,12 @@
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
     {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
     {{- if not $description }}{{ $description = partial "utilities/GetDescription.html" (dict "page" .) }}{{ end -}}
-    {{- if not $thumbnail }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
+    {{- if and (not $thumbnail) (not $icon) }}{{ $thumbnail = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) }}{{ end -}}
+    {{ if not $ratio }}
+        {{- if and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.ratio }}{{ $ratio = .Params.Thumbnail.ratio }}{{ end -}}
+    {{ end }}
     {{- if not $icon }}{{ $icon = .Params.icon }}{{ end -}}
+    {{- if not $anchor }}{{ $anchor = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.anchor) "") }}{{ end -}}
 {{- end -}}
 
 {{ if (hasPrefix $orientation "horizontal") }}
@@ -69,6 +76,7 @@
 {{ end }}
 
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
+{{- if eq $body "none" }}{{ $description = "" }}{{ end -}}
 
 <!-- Inline partial to render the card's body -->
 {{- define "partials/card-body.html" -}}
@@ -80,7 +88,7 @@
     
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
-                <p class="card-title fs-5 fw-bold">{{ $title }}</p>
+                <p class="card-title fs-lg-5 fs-6 fw-bold">{{ $title }}</p>
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -89,7 +97,7 @@
         </a>
     {{- else -}}
         <div>
-            {{ with $title }}<p class="card-title fs-5 fw-bold">{{ . }}</p>{{ end -}}
+            {{ with $title }}<p class="card-title fs-lg-5 fs-6 fw-bold">{{ . }}</p>{{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
@@ -161,7 +169,7 @@
         <div class="row g-0 row-cols-2 h-100{{ if $button }} pb-5{{ end }}">
             {{- if $thumbnail -}}
                 <div class="{{ $col1 }}">
-                    {{- partial $hook (dict "url" $thumbnail "ratio" (or $ratio "1x1") "sizes" $sizes "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100 card-img-bg" "title" $title "loading" $loading) -}}
+                    {{- partial $hook (dict "url" $thumbnail "ratio" (or $ratio "1x1") "portrait" $portrait "sizes" $sizes "anchor" $anchor "wrapper" "h-100 card-img-wrap" "class" "rounded-start card-img-h100 card-img-bg" "title" $title "loading" $loading) -}}
                 </div>
             {{- else if $icon -}}
                 <div class="{{ $col1 }} p-{{ $padding }}">
@@ -206,7 +214,7 @@
     <!-- Render stacked / default card -->
     <div class="card {{ $colorStyle }} {{ $class }} text-{{ $align }}">
         {{- if $thumbnail -}}
-            {{- partial $hook (dict "url" $thumbnail "ratio" (or $ratio "16x9") "sizes" $sizes "wrapper" "card-img-wrap" "class" "card-img-top card-img-bg" "title" (or $alt $title) "loading" $loading) -}}
+            {{- partial $hook (dict "url" $thumbnail "ratio" (or $ratio "16x9") "portrait" $portrait "anchor" $anchor "sizes" $sizes "wrapper" "card-img-wrap" "class" "card-img-top card-img-bg" "title" (or $alt $title) "loading" $loading) -}}
         {{- else if $icon -}}
             <div class="card-icon p-{{ $padding }} {{ $iconStyle }} text-{{ $align }} {{ if $iconRounded }}fa-stack {{ $stack }}{{ end }} w-100">
                 {{ if $iconRounded }}

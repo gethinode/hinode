@@ -32,6 +32,7 @@
 {{- $page := .Page -}}
 {{- $path := .Get "path" -}}
 {{- $thumbnail := .Get "thumbnail" -}}
+{{- $anchor := .Get "anchor" -}}
 {{- $title := .Get "title" -}}
 {{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") | default false -}}
 {{- $buttonType := partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType") | default "" -}}
@@ -81,6 +82,7 @@
         "wrapper" $wrapper
         "thumbnail" $thumbnail
         "loading" $loading
+        "anchor" $anchor
         "alt" $alt
         "button" $button
         "buttonType" $buttonType
