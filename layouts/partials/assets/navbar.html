@@ -272,14 +272,14 @@
                             <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
                                 {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end ">
+                            <ul class="dropdown-menu dropdown-menu-end " id="language-selector">
                                 {{- if $page.IsTranslated -}}
                                     {{- range $page.AllTranslations -}}
-                                        <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" href="{{ .RelPermalink }}">{{ .Language.LanguageName  }}</a></li>
+                                        <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" hreflang="{{.Language.Lang}}" href="{{ .RelPermalink }}">{{ .Language.LanguageName  }}</a></li>
                                     {{- end -}}
                                 {{- else -}}
                                     {{- range site.Languages -}}
-                                        <li><a class="dropdown-item" href="{{ urls.JoinPath $baseURL .Lang }}">{{ default .Lang .LanguageName }}</a></li>
+                                        <li><a class="dropdown-item" href="{{ urls.JoinPath $baseURL .Lang }}" hreflang="{{.Lang}}">{{ default .Lang .LanguageName }}</a></li>
                                     {{- end -}}
                                 {{- end -}}
                             </ul>
