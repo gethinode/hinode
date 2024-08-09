@@ -24,8 +24,6 @@ the selected language is stored in the browser *localStorage* in the "**selected
 The script can be found here:
 **assets\js\critical\languageSelector.js**
 
-{{< file show=false path="./assets/js/critical\languageSelector.js" id="file-collapse-1" >}}
-
 If the key is to be removed, the shortcode
 **remove-selected-language**
 can be used on the respective page.
@@ -38,6 +36,5 @@ can be used on the respective page.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-{{< file path="./layouts/shortcodes/remove-selected-language.html" id="file-collapse-2" >}}
 
 {{< remove-selected-language >}}
