@@ -24,17 +24,16 @@ the selected language is stored in the browser *localStorage* in the "**selected
 The script can be found here:
 **assets\js\critical\languageSelector.js**
 
+## Remove selected language
+
 If the key is to be removed, the shortcode
 **remove-selected-language**
 can be used on the respective page.
-
-## Remove selected language
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* remove-selected-language */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
-
 
 {{< remove-selected-language >}}
