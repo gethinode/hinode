@@ -18,7 +18,7 @@ Via the adjustable configuration
 
 `enableLanguageSelectionStorage = true`
 
- in **params.toml** (\exampleSite\config\_default\params.toml) 
+ in **params.toml** (\exampleSite\config\_default\params.toml)
 the selected language is stored in the browser *localStorage* in the "**selectedLanguage**" key.
 
 The script can be found here:
@@ -26,9 +26,9 @@ The script can be found here:
 
 {{< file show=false path="./assets/js/critical\languageSelector.js" id="file-collapse-1" >}}
 
-If the key is to be removed, the shortcode 
+If the key is to be removed, the shortcode
 **remove-selected-language**
-can be used on the respective page. 
+can be used on the respective page.
 
 ## Remove selected language
 
@@ -39,6 +39,5 @@ can be used on the respective page.
 <!-- markdownlint-enable MD037 -->
 
 {{< file path="./layouts/shortcodes/remove-selected-language.html" id="file-collapse-2" >}}
-
 
 {{< remove-selected-language >}}
