@@ -30,5 +30,6 @@ arguments:
     type: bool
     optional: true
     default: false
+    release: v0.25.2
     comment: >-
       Trigger to retrieve the title from the video metadata.
