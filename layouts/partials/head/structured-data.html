@@ -17,6 +17,8 @@
   {{ end -}}
 {{ end -}}
 
+{{ $alt := slice .Site.Params.schema.twitter .Site.Params.schema.linkedin .Site.Params.schema.github }}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,17 +33,7 @@
       {{ end -}}
       "name": "{{ .Site.Params.schema.name }}",
       "url": {{ print $baseURL }},
-      "sameAs": [
-        {{ with .Site.Params.schema.twitter -}}
-        {{ . }}
-        {{ end -}}
-        {{ with .Site.Params.schema.linkedin -}}
-        , {{ . }}
-        {{ end -}}
-        {{ with .Site.Params.schema.github -}}
-        , {{ . }}
-        {{ end -}}
-      ],
+      "sameAs": {{ $alt | uniq | complement (slice "") }},
       {{ if eq .Site.Params.schemaType "Organization" -}}
         "logo": {
           "@type": "ImageObject",
@@ -103,8 +95,8 @@
           "@id": {{ print $baseURL "#/schema/person/1" }}
         },
       {{ end -}}
-      "datePublished": "{{ .Date.Format "2006-01-02T15:04:05CET" }}",
-      "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05CET" }}",
+      {{ with .Date }}"datePublished": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
+      {{ with .Lastmod }}"dateModified": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
       "breadcrumb": {
         "@id": {{ print .Permalink "#/schema/breadcrumb/1" }}
       },
@@ -151,8 +143,8 @@
           "mainEntityOfPage": {
             "@id": {{ .Permalink }}
           },
-          "datePublished": "{{ .Date.Format "2006-01-02T15:04:05CET" }}",
-          "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05CET" }}",
+          {{ with .Date }}"datePublished": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
+          {{ with .Lastmod }}"dateModified": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
           "author": {
             "@id": {{ print $baseURL "#/schema/person/2" }}
           },

@@ -14,14 +14,16 @@
 
 {{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
 {{ if ne $metadata "none" }}
-    {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
-    {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
     <small class="text-body-secondary text-uppercase">
-        {{ $datestr | i18n "postedOnDate" -}}
-        {{ if eq $metadata "full" }}
-            {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }}
+        {{ if .Date }}
+            {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+            {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
+            {{ $datestr | i18n "postedOnDate" -}}
+            {{ if eq $metadata "full" }}
+                {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }}
+            {{ end }}
+            &bull;
         {{ end }}
-        &bull;
         {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} &bull;
         {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
     </small>
