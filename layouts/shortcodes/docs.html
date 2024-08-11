@@ -49,8 +49,10 @@
     {{- errorf "File format not supported (line %s): %s" .Position $file -}}
 {{- end -}}
 
-{{ $show := .Get "show" | default true -}}
-{{ $full := .Get "full" | default true -}}
+{{- $show := true -}}
+{{ if isset .Params "show" }}{{ $show = partial "utilities/CastBool.html" (.Get "show") }}{{ end -}}
+{{- $full := true -}}
+{{ if isset .Params "full" }}{{ $full = partial "utilities/CastBool.html" (.Get "full") }}{{ end -}}
 {{- $class := .Get "class" | default "" -}}
 
 <!-- Main code -->
