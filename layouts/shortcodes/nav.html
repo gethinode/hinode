@@ -19,9 +19,9 @@
 {{ $supportedNavTypes := slice "tabs" "pills" "underline" "callout" -}}
 
 {{ $vertical := false -}}
-{{ with .Get "vertical" }}{{ $vertical = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "vertical" }}{{ $vertical = partial "utilities/CastBool.html" (.Get "vertical") }}{{ end -}}
 {{ $wrap := false -}}
-{{ with .Get "wrap" }}{{ $wrap = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "wrap" }}{{ $wrap = partial "utilities/CastBool.html" (.Get "wrap") }}{{ end -}}
 
 {{- if and (eq $type "tabs") $vertical -}}
     {{- errorf "Tabs do not support vertical layout" -}}

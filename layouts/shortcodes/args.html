@@ -28,7 +28,9 @@
 {{ end }}
 
 {{ $parent := false -}}
-{{ with .Get "parent" }}{{ $parent = partial "utilities/CastBool.html" . }}{{ end -}}
+{{- if .IsNamedParams }}
+    {{ if isset .Params "parent" }}{{ $parent = partial "utilities/CastBool.html" (.Get "parent") }}{{ end -}}
+{{ end }}
 
 <!-- Main code -->
 {{ if not $error }}    

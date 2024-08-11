@@ -16,9 +16,9 @@
 {{- $version := .Get "version" | default "" -}}
 {{- $state := .Get "state" | default "new" -}}
 {{- $short := false -}}
-{{ with .Get "short" }}{{ $short = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "short" }}{{ $short = partial "utilities/CastBool.html" (.Get "short") }}{{ end -}}
 {{- $inline := false -}}
-{{ with .Get "inline" }}{{ $inline = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "inline" }}{{ $inline = partial "utilities/CastBool.html" (.Get "inline") }}{{ end -}}
 {{- $title := $version -}}
 {{- $color := "primary" -}}
 {{- if eq $state "deprecated" -}}
