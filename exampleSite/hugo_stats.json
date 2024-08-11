@@ -20,6 +20,7 @@
       "hr",
       "html",
       "i",
+      "iframe",
       "img",
       "input",
       "label",
@@ -468,7 +469,8 @@
       "visually-hidden",
       "vr",
       "w-100",
-      "w-50"
+      "w-50",
+      "youtube-embedded"
     ],
     "ids": [
       "TableOfContents",
@@ -569,7 +571,8 @@
       "toast-example-2",
       "toast-message-email-4",
       "toc-collapse",
-      "tooltip"
+      "tooltip",
+      "youtube"
     ]
   }
 }

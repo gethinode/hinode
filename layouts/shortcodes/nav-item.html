@@ -24,9 +24,9 @@
     {{- end -}}
 
     {{- $fade := false -}}
-    {{ with .Get "fade" }}{{ $fade = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{ if isset .Params "fade" }}{{ $fade = partial "utilities/CastBool.html" (.Get "fade") }}{{ end -}}
     {{- $parentFade := false }}
-    {{ with .Parent.Get "fade" }}{{ $parentFade = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{ if isset .Parent.Params "fade" }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
     {{ $fade = or $fade $parentFade }}
     {{- $header := .Get "header" | default "" -}}
     {{- $class := .Get "class" | default "" -}}
