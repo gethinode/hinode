@@ -466,3 +466,13 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 {{</* tooltip color="primary" title="Tooltip caption" href="#!" */>}}Tooltip{{</* /tooltip */>}} demonstration
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
+
+## Youtube
+
+As an example, the following shortcode displays a Hugo quickstart guide.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* youtube id="w7Ft2ymGmfc" autoplay=true autotitle=true */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
