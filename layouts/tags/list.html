@@ -39,9 +39,13 @@
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
                         <div class="row mt-2">
                             <div class="d-none d-{{ $breakpoint.prev }}-block col-{{ $breakpoint.prev }}-3 mt-auto text-right">
-                                <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
-                                    {{ (partial "utilities/date.html" (dict "date" .Date "format" "medium")) }}
-                                </time>
+                                {{ with .Date }}
+                                    <time class="post-date" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
+                                        {{ (partial "utilities/date.html" (dict "date" . "format" "medium")) }}
+                                    </time>
+                                {{ else }}
+                                -
+                                {{ end }}
                             </div>
                             <div class="col">
                                 {{ if ne $year $lastYear }}
