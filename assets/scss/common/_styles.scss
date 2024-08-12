@@ -1,5 +1,5 @@
 @if $enable-dark-mode {
-    body { 
+    [data-bs-theme-animate="true"] body { 
         transition: background-color 0.5s, color 0.5s; 
     }
 }

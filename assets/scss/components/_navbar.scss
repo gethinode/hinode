@@ -1,11 +1,17 @@
 // stylelint-disable annotation-no-unknown
 
 // Source: https://jsfiddle.net/njhgr40m/
+
+@if $enable-dark-mode {
+    [data-bs-theme-animate="true"] .navbar {
+        transition: 0.5s ease-in-out;
+    }
+}
+
 .navbar {
     --bs-navbar-expanded-color: var(--bs-body-bg);
     --bs-navbar-toggler-color: var(--bs-navbar-hover-color);
 
-    transition: 0.5s ease-in-out;
     background-color: transparent;
 
     @each $state, $val in $theme-colors {
