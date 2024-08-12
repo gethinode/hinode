@@ -61,7 +61,6 @@
   })
 
   window.addEventListener('DOMContentLoaded', () => {
-    setTheme(getTheme())
     const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
 
     document.querySelectorAll('.ball').forEach(ball => {
@@ -71,6 +70,7 @@
     document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
       chk.checked = light
       chk.addEventListener('change', function () {
+        document.documentElement.setAttribute('data-bs-theme-animate', 'true')
         toggleTheme()
       })
     })
@@ -87,6 +87,9 @@
       chk.checked = light
     })
   });  
+
+  // initialize theme directly when script is invoked
+  setTheme(getTheme())
 })()
 
 {{- end -}}
