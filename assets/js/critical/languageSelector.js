@@ -29,12 +29,11 @@
 
   // Event listener for language selection
   document.addEventListener('DOMContentLoaded', () => {
+    const storedLanguage = getLanguage()
     const languageItems = document.querySelectorAll(
       '#language-selector .dropdown-item')
 
     if (languageItems.length > 0) {
-      const storedLanguage = getLanguage()
-
       // Redirect if the stored language differs from the active language
       if ((storedLanguage) && (document.documentElement.lang !== storedLanguage)) {
         languageItems.forEach(item => {
@@ -56,7 +55,10 @@
       })
     }
     else{
-      removeSelectedLanguage(); // Remove stored language if no language selection is available in the dropdown menu.
+      // Redirect to the localized homepage
+      const defaultLang = '{{ site.LanguageCode | default site.Language.Lang }}'
+      let language = storedLanguage ? storedLanguage : defaultLang
+      window.location.href = '/' + language + '/'
     }
   })
 })()
