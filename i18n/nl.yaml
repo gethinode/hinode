@@ -148,3 +148,15 @@
   translation: "Toelichting"
 - id: supportedValues
   translation: "Toegestane waarden"
+
+# Alerts
+- id: caution
+  translation: Voorzichtig
+- id: important
+  translation: Belangrijk
+- id: note
+  translation: Opmerking
+- id: tip
+  translation: Tip
+- id: warning
+  translation: Waarschuwing

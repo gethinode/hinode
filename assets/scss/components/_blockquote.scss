@@ -4,6 +4,39 @@
     padding: 1rem 1.5rem;
 }
 
-blockquote {
-    @extend .blockquote;
+.blockquote-alert {
+    --bs-blockquote-alert-color: $secondary;
+
+    border-left: 0.3rem solid;
+    border-color: var(--bs-blockquote-alert-color);
+    padding: .5rem 1.5rem;
+}
+
+.blockquote-alert > p:nth-of-type(2) {
+    margin-bottom: 0;
+}
+
+.blockquote-alert-heading {
+    font-weight: bold;
+    color: var(--bs-blockquote-alert-color);
+}
+
+.blockquote-alert-caution {
+    --bs-blockquote-alert-color: var(--#{$prefix}danger);
+}
+
+.blockquote-alert-important {
+    --bs-blockquote-alert-color: var(--#{$prefix}primary);
+}
+
+.blockquote-alert-note {
+    --bs-blockquote-alert-color: var(--#{$prefix}info);
+}
+
+.blockquote-alert-tip {
+    --bs-blockquote-alert-color: var(--#{$prefix}success);
+}
+
+.blockquote-alert-warning {
+    --bs-blockquote-alert-color: var(--#{$prefix}warning);
 }
