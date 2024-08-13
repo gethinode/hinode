@@ -30,8 +30,7 @@
   // Event listener for language selection
   document.addEventListener('DOMContentLoaded', () => {
     const storedLanguage = getLanguage()
-    const languageItems = document.querySelectorAll(
-      '#language-selector .dropdown-item')
+    const languageItems = document.querySelectorAll('#language-selector .dropdown-item')
 
     if (languageItems.length > 0) {
       // Redirect if the stored language differs from the active language
@@ -54,7 +53,7 @@
         })
       })
     }
-    else{
+    else {
       // Redirect to the localized homepage
       const defaultLang = '{{ site.LanguageCode | default site.Language.Lang }}'
       let language = storedLanguage ? storedLanguage : defaultLang
@@ -63,3 +62,4 @@
   })
 })()
 {{- end -}} 
+/* eslint-enable */
