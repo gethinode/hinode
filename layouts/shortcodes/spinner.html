@@ -15,7 +15,7 @@
 <!-- Initialize arguments -->
 {{ $color := .Get "color" | default "primary" -}}
 {{ $grow := false -}}
-{{ with .Get "grow" }}{{ $grow = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "grow" }}{{ $grow = partial "utilities/CastBool.html" (.Get "grow") }}{{ end -}}
 {{ $class := .Get "class" | default "" -}}
 
 <!-- Main code -->

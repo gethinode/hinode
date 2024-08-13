@@ -49,7 +49,7 @@
 <!-- Main code -->
 {{ $show := false -}}
 {{ if not $error }}
-    {{ with .Get "show" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{ if isset .Params "show" }}{{ $show = partial "utilities/CastBool.html" (.Get "show") }}{{ end -}}
 
     <div class="accordion-item">
         {{- with $header -}}

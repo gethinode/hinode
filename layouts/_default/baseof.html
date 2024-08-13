@@ -36,11 +36,11 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
+        {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" .) -}}
         {{ block "head" . }}{{ end -}}
     </head>
 
     <body>
-        {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" .) -}}
         <div class="d-flex flex-column min-vh-100">
             <div class="d-flex flex-column {{ if $fullCover }} fullscreen{{ end }}{{ if .IsHome }} {{ .Site.Params.home.style }}{{ end }}">
                 {{- partial "assets/navbar.html" (dict

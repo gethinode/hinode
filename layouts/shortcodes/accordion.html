@@ -12,19 +12,25 @@
     {{ $error = true }}
 {{ end }}
 
+<!-- Initialize arguments and default values -->
+{{- $id := printf "accordion-%d" .Ordinal -}}
+{{- $class := "" -}}
+{{- $open := false -}}
+{{- $body := .Inner -}}
+
+{{ if .IsNamedParams }}
+    {{ with .Get "id" }}{{ $id = . }}{{ end }}
+    {{ with .Get "class" }}{{ $class = . }}{{ end }}
+    {{ if isset .Params "always-open" }}{{ $open = partial "utilities/CastBool.html" (.Get "always-open") }}{{ end -}}
+{{ end }}
+
+{{- if $open -}}
+    {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
+    {{- $body = (replace .Inner $pattern "") }}
+{{- end -}}
+
 <!-- Main code -->
 {{ if not $error }}
-    {{- $id := printf "accordion-%d" .Ordinal -}}
-    {{ with .Get "id" }}{{ $id = . }}{{ end }}
-    {{- $class := .Get "class" | default "" -}}
-    {{- $open := false -}}
-    {{ with .Get "always-open" }}{{ $open = partial "utilities/CastBool.html" . }}{{ end -}}
-    {{- $body := .Inner -}}
-    {{- if $open -}}
-        {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
-        {{- $body = (replace .Inner $pattern "") }}
-    {{- end -}}
-
     <div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
         {{- $body | safeHTML -}}
     </div>

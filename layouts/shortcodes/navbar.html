@@ -29,9 +29,9 @@
 {{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
 {{ $color := .Get "color" | default "" -}}
 {{ $searchParam := true -}}
-{{ with .Get "search" }}{{ $searchParam = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "search" }}{{ $searchParam = partial "utilities/CastBool.html" (.Get "search") }}{{ end -}}
 {{ $modeParam := true -}}
-{{ with .Get "mode" }}{{ $modeParam = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "mode" }}{{ $modeParam = partial "utilities/CastBool.html" (.Get "mode") }}{{ end -}}
 {{ $logo := .Get "logo" | default "" -}}
 {{ $title := .Get "title" | default "" -}}
 {{- $class := .Get "class" | default "" -}}

@@ -64,11 +64,11 @@
     {{- with index . "layout" }}{{ $layout = . }}{{ end -}}
     {{- with index . "pane" }}{{ $pane = . }}{{ end -}}
     {{- with index . "type" }}{{ $type = . }}{{ end -}}
-    {{- with index . "vertical" }}{{ $vertical = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{- if (isset . "vertical") }}{{ $vertical = partial "utilities/CastBool.html" (index . "vertical") }}{{ end -}}
     {{- with index . "width" }}{{ $width = . }}{{ end -}}
     {{- with index . "kind" }}{{ $kind = . }}{{ end -}}
     {{- with index . "ratio" }}{{ $ratio = . }}{{ end -}}
-    {{- with index . "wrap" }}{{ $wrap = partial "utilities/CastBool.html" . }}{{ end -}}
+    {{- if (isset . "wrap") }}{{ $wrap = partial "utilities/CastBool.html" (index . "wrap") }}{{ end -}}
 {{- end -}}
 
 {{ if isset $page.Params "nested" }}

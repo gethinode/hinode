@@ -23,4 +23,13 @@ arguments:
     type: bool
     optional: true
     default: false
-    comment: Flag indicating the video should start playing immediately when loaded.
+    comment: >-
+      Flag indicating the video should start playing immediately when loaded, if
+      supported by the browser. The audio will be muted.
+  autotitle:
+    type: bool
+    optional: true
+    default: false
+    release: v0.25.2
+    comment: >-
+      Trigger to retrieve the title from the video metadata.

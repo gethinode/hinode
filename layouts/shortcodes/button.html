@@ -26,7 +26,7 @@
 {{ $size := .Get "size" | default "md" -}}
 {{ $color := .Get "color" | default "primary" -}}
 {{ $outline := false -}}
-{{ with .Get "outline" }}{{ $outline = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "outline" }}{{ $outline = partial "utilities/CastBool.html" (.Get "outline") }}{{ end -}}
 {{ $badge := .Get "badge" | default "" -}}
 {{ $label := or (.Get "label") (.Get "aria-label") | default "" -}}
 {{ $tooltip := .Get "tooltip" | default "" -}}
@@ -43,11 +43,11 @@
 {{- $order := .Get "order" | default "last" -}}
 {{- $justify := .Get "justify" | default "center" -}}
 {{- $cue := site.Params.main.externalLinks.cue -}}
-{{ with .Get "cue" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "cue" }}{{ $cue = partial "utilities/CastBool.html" (.Get "cue") }}{{ end -}}
 {{- $tab := default site.Params.main.externalLinks.tab -}}
-{{ with .Get "tab" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "tab" }}{{ $tab = partial "utilities/CastBool.html" (.Get "tab") }}{{ end -}}
 {{- $spacing := default (not .Parent) -}}
-{{ with .Get "spacing" }}{{ $show = partial "utilities/CastBool.html" . }}{{ end -}}
+{{ if isset .Params "spacing" }}{{ $spacing = partial "utilities/CastBool.html" (.Get "spacing") }}{{ end -}}
 
 <!-- Main code -->
 {{ if not $error }}

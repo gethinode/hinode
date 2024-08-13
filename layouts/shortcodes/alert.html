@@ -27,7 +27,9 @@
     {{ $icon = partial "assets/icon.html" (dict "icon" (printf "%s fa-2x fa-fw" .)) }}
 {{ end }}
 {{ $dismissible := false -}}
-{{ with .Get "dismissible" }}{{ $dismissible = partial "utilities/CastBool.html" . }}{{ end -}}
+{{- if and .IsNamedParams (isset .Params "dismissible") }}
+    {{ $dismissible = partial "utilities/CastBool.html" (.Get "dismissible") }}
+{{ end }}
 {{- $class := .Get "class" | default "" -}}
 
 {{ $body := trim .Inner " \r\n" -}}
