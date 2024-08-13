@@ -1,6 +1,8 @@
 name: Update Hugo dependencies
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *' # run daily at 03:00 AM
 
 permissions:
   contents: write
