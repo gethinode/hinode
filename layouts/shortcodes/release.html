@@ -26,6 +26,7 @@
 {{- end -}}
 {{- $size := .Get "size" | default "md" -}}
 {{- $class := .Get "class" | default "" -}}
+{{- $type := .Get "type" | default "button" -}}
 
 {{- $icon := "" -}}
 {{- $tooltip := "" -}}
@@ -55,19 +56,24 @@
 
 <!-- Main code -->
 {{- if not $error -}}
-    {{- if not $inline }}<div class="pb-3">{{ end -}}
-    {{- partial "assets/button.html" (dict 
-        "title" $title
-        "href" (partial "partials/utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $version))
-        "size" "sm"
-        "color" $color
-        "outline" "true"
-        "size" $size
-        "icon" $icon
-        "tooltip" $tooltip
-        "order" "first"
-        "class" (trim (printf "rounded-2 fw-semibold %s" $class) " ")
-        "spacing" $inline)
-    -}} 
-    {{- if not $inline }}</div>{{ end -}}
+    {{ $href := partial "partials/utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $version) }}
+    {{ if eq $type "link" }}
+        {{ partial "assets/link.html" (dict "destination" $href "text" $title "page" .Page) }}
+    {{ else }}
+        {{- if not $inline }}<div class="pb-3">{{ end -}}
+        {{- partial "assets/button.html" (dict 
+            "title" $title
+            "href" $href
+            "size" "sm"
+            "color" $color
+            "outline" "true"
+            "size" $size
+            "icon" $icon
+            "tooltip" $tooltip
+            "order" "first"
+            "class" (trim (printf "rounded-2 fw-semibold %s" $class) " ")
+            "spacing" $inline)
+        -}} 
+        {{- if not $inline }}</div>{{ end -}}
+    {{ end }}
 {{- end -}}

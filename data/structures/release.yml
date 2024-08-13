@@ -38,3 +38,12 @@ arguments:
     optional: true
     default: false
     comment: Flag to render the release button inline.
+  type:
+    type: select
+    optional: true
+    default: button
+    comment: Type of the element.
+    options:
+      values:
+        - link
+        - button
