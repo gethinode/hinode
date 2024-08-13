@@ -11,7 +11,10 @@ function updateNavbar () {
   } else {
     navbar.classList.remove('nav-active')
     const defaultTheme = navbar.getAttribute('data-bs-overlay')
-    navbar.setAttribute('data-bs-theme', defaultTheme)
+
+    if (defaultTheme) {
+      navbar.setAttribute('data-bs-theme', defaultTheme)
+    }
   }
 }
 
