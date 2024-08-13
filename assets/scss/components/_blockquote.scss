@@ -40,3 +40,15 @@
 .blockquote-alert-warning {
     --bs-blockquote-alert-color: var(--#{$prefix}warning);
 }
+
+.blockquote-alert a.btn-link {
+    --bs-link-color: var(--bs-blockquote-alert-color);
+    --bs-link-hover-color: color-mix(in srgb, var(--bs-link-color), black 20%);
+
+    color: var(--bs-link-color) !important;
+
+    &:hover,
+    &:focus {
+        color: var(--bs-link-hover-color) !important;
+    }
+}

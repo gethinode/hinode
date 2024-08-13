@@ -44,4 +44,7 @@ a.btn {
 
 .btn-link {
     --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+
+    margin: 0 !important;
 }
