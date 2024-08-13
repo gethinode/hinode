@@ -95,10 +95,10 @@
         {{- end -}}
         role="button"
         >
-        <div class="d-flex justify-content-{{ $justify }}">
-            <div class="my-auto">{{ $title | safeHTML }}</div>
-            {{- with $icon }}<div class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon "spacing" false) }}</div>{{ end }}
-        </div>
+        <span class="d-flex justify-content-{{ $justify }}">
+            <span class="my-auto">{{ $title | safeHTML }}</span>
+            {{- with $icon }}<span class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon "spacing" false) }}</span>{{ end }}
+        </span>
 
         {{- with $badge }}
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
