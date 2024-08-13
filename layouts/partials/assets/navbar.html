@@ -154,11 +154,6 @@
 
 {{- $pre := .Pre -}}
 {{- $post := .Post -}}
-
-{{- $theme := "light" -}}
-{{- if in (slice "primary" "secondary" "success" "danger" "black") $color }}{{ $theme = "dark" }}{{ end -}}
-{{- if in (slice "body" "body-tertiary") $color }}{{ $theme = "" }}{{ end -}}
-{{- if not $color }}{{ $theme = "" }}{{ end -}}
 {{- $class := .class -}}
 
 {{- $contrast := false -}}
@@ -179,7 +174,7 @@
         {{ if $overlay }}
         data-bs-theme="{{ $overlayMode }}"
         data-bs-overlay="{{ $overlayMode }}"
-        {{ else }}{{ with $theme }}data-bs-theme="{{ . }}"{{ end }}{{ end }}
+        {{ end }}
         {{ if $overlay }}data-navbar-color="{{ $color }}"{{ end }}
         >
         <div class="container-xxl p-0">
@@ -218,9 +213,9 @@
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $id }}-collapse"
                         aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">
-                        <span class="toggler-icon top-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
-                        <span class="toggler-icon middle-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
-                        <span class="toggler-icon bottom-bar emphasis{{ with $theme }}-{{ . }}{{ end }}"></span>
+                        <span class="toggler-icon top-bar emphasis"></span>
+                        <span class="toggler-icon middle-bar emphasis"></span>
+                        <span class="toggler-icon bottom-bar emphasis"></span>
                     </button>
                 </div>
             </div>

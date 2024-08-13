@@ -28,6 +28,15 @@
     margin: 0 .15rem;
 }
 
+.navbar-title {
+    display: inline-block;
+    white-space: normal;
+    text-align: center !important;
+    vertical-align: middle;
+    padding: 0 $spacer;
+    width: 100% !important;
+}
+
 .navbar-contrast .nav-link.active, .navbar-contrast .nav-link.show, .navbar-contrast .nav-link:hover {
     border-bottom: solid 1px var(--bs-navbar-hover-color);
     margin-bottom: -1px;
@@ -39,6 +48,10 @@
     --bs-navbar-disabled-color: white !important;
     --bs-navbar-active-color: white !important;
     --bs-navbar-toggler-color: white;
+
+    .navbar-title {
+        color: white !important;
+    }
 }
 
 .navbar-expanded {
@@ -118,7 +131,7 @@
     background-color: var(--bs-navbar-toggler-color);
 }
 
-.emphasis, .emphasis-dark, .emphasis-light {
+.emphasis {
     background-color: var(--bs-navbar-toggler-color);
 }
 
@@ -137,15 +150,6 @@
 :root {
     --dropdown-horizontal-bg: var(--#{$prefix}light);
     --navbar-offset: #{$navbar-offset-xs};
-}
-
-.navbar-title {
-    display: inline-block;
-    white-space: normal;
-    text-align: center !important;
-    vertical-align: middle;
-    padding: 0 $spacer;
-    width: 100% !important;
 }
 
 .navbar-container {
