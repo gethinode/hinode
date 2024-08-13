@@ -1,4 +1,5 @@
-/_vendor
+_vendor/
+exampleSite/public/
 public/
 resources/
 

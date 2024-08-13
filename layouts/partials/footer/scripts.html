@@ -25,13 +25,13 @@
 {{- $state := .state | default "async" -}}
 {{- if or $header (eq $state "immediate") }}{{ $state = "" }}{{ end -}}
 
-{{ $config := $page.Scratch.Get "modules" }}
-{{ if not $config }}
-    {{ errorf "partial [footer/scripts.html] - Cannot initialize module configuration" }}
-{{ end }}
-
 {{- $modules := "" -}}
 {{ if $core }}
+    {{ $config := $page.Scratch.Get "modules" }}
+    {{ if not $config }}
+        {{ errorf "partial [footer/scripts.html] - Cannot initialize module configuration" }}
+    {{ end }}
+
     {{- $modules = $config.core -}}
     {{- if reflect.IsSlice $config.localize -}}
         {{- range $index, $mod := $modules -}}            

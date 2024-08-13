@@ -7,6 +7,10 @@
     <meta name="robots" content="noindex">
     <meta charset="utf-8">
     <noscript><meta http-equiv="refresh" content="0; url={{ .Permalink }}"></noscript>
-    <script src='{{ partial "utilities/GetStaticURL" (dict "url" "js/alias.js") }}'></script>
+    {{ if site.Params.main.enableLanguageSelectionStorage }} 
+      {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" page) -}}
+    {{ else }}
+      <script src='{{ partial "utilities/GetStaticURL" (dict "url" "js/alias.js") }}'></script>
+    {{ end }}
   </head>
 </html>

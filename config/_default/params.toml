@@ -3,6 +3,7 @@
     separator = "-"
     description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
     enableDarkMode = true
+    enableLanguageSelectionStorage = false
     modes = ["light", "dark"]
     canonifyAssetsURLs = false
     endorse = true
