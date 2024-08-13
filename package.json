@@ -69,8 +69,8 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "autoprefixer": "^10.4.20",
-    "cssnano": "^7.0.4",
-    "cssnano-preset-advanced": "^7.0.4",
+    "cssnano": "^7.0.5",
+    "cssnano-preset-advanced": "^7.0.5",
     "hugo-bin": "0.128.0",
     "purgecss-whitelister": "^2.4.0"
   },
