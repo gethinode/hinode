@@ -49,8 +49,14 @@
     --bs-navbar-active-color: white !important;
     --bs-navbar-toggler-color: white;
 
-    .navbar-title {
+    .navbar-title, .mode-switch {
+        --#{$prefix}border-color: white;
+
         color: white !important;
+    }
+
+    .mode-switch .fa-moon {
+        color: $white;
     }
 }
 
@@ -279,7 +285,7 @@
 }
 
 .mode-switch .label .ball {
-    background-color: var(--#{$prefix}secondary-bg);
+    background-color: var(--#{$prefix}border-color);
 	border-radius: 50%;
 	position: absolute;
 	top: 2px;
