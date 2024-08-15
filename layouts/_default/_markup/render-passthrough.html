@@ -1,0 +1,13 @@
+{{ $opts := dict }}
+
+{{ if eq .Type "block" }}
+    {{ $opts = dict "displayMode" true }}
+{{ end }}
+
+{{ with transform.ToMath .Inner $opts }}
+    {{ with .Err }}
+        {{ errorf "Failed to render KaTeX: %q. See %s" . $.Position }}
+    {{ else }}
+        {{ . }}
+    {{ end }}
+{{ end }}
