@@ -29,6 +29,6 @@ Overige functies:
 * Herbruikbare Bootstrap componenten via shortcodes en partials
 * Versiebeheer van documentatiepagina's, inclusief secundaire navigatie en selectie van versies
 * Optimalisering van foto's voor meerdere schermafmetingen en resoluties
-* Optimale zoekresultaten, met 100 punten voor SEO volgens [PageSpeed Insights]({{< param "links.pagespeed" >}})
-* Veilige communicatie, met een score van A+ volgens [Mozilla Observatory]({{< param "links.observatory" >}})
+* Optimale zoekresultaten, met 100 punten voor SEO volgens [PageSpeed Insights]({{% param "links.pagespeed" %}})
+* Veilige communicatie, met een score van A+ volgens [Mozilla Observatory]({{% param "links.observatory" %}})
 {.tickmark}

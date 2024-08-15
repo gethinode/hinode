@@ -25,6 +25,7 @@
 {{- $page := .page -}}
 {{- $anchor := "" -}}
 {{- $text := .text -}}
+{{- $title := .title -}}
 {{- $class := .class -}}
 
 <!-- Main code -->
@@ -72,5 +73,13 @@
 {{- end -}}
 
 {{ if not $error -}}
-    <a {{ with $class }}class="{{ . }}" {{ end }}href="{{ $destination | safeURL }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ $text }}</a>
+    <a 
+        {{- with $destination }} href="{{ . | safeURL }}"{{ end -}}
+        {{- with $class }}class="{{ . }}" {{ end -}}
+        {{- with $target }} target="{{ . }}"{{ end -}}
+        {{- with $rel }} rel="{{ . }}"{{ end -}}
+        {{- with $title }} title="{{ . }}"{{ end -}}
+    >
+        {{- $text -}}
+    </a>
 {{- end }}

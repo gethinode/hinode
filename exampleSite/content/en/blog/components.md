@@ -13,7 +13,7 @@ thumbnail:
 modules: ["leaflet", "lottie", "simple-datatables"]
 ---
 
-Hinode provides several shortcodes on top of the common [Bootstrap elements]({{< relref "bootstrap-elements" >}}). Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
+Hinode provides several shortcodes on top of the common [Bootstrap elements]({{% relref "bootstrap-elements" %}}). Refer to the [official documentation]({{% param "links.hinode_docs" %}}) for more details.
 
 ## Animation
 
