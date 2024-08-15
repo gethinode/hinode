@@ -10,7 +10,7 @@ thumbnail:
   authorURL: https://unsplash.com/@ryoji__iwata
   origin: Unsplash
   originURL: https://unsplash.com/photos/5siQcvSxCP8
-modules: ["katex", "leaflet", "lottie", "simple-datatables"]
+modules: ["leaflet", "lottie", "simple-datatables"]
 ---
 
 Hinode provides several shortcodes on top of the common [Bootstrap elements]({{< relref "bootstrap-elements" >}}). Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
@@ -70,7 +70,7 @@ As an example, the following shortcode displays a responsive table that uses adv
 
 ## Formula (KaTeX)
 
-As an example, the following markdown renders two formulas using the KaTeX typesetting library.
+As an example, the following markdown renders two formulas using server-side math rendering using KaTeX.
 
 {{< example lang="markdown" >}}
 This is an inline $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formula
