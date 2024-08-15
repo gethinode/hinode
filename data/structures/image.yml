@@ -36,6 +36,7 @@ arguments:
   page:
     type:
       - '*hugolib.pageState'
+      - '*hugolib.pageForRenderHooks'
       - '*hugolib.pageForShortcode'
     optional: true
     comment: Page context, used to match page resources.
@@ -109,7 +110,9 @@ arguments:
       image set.
     group: partial
   title:
-    type: string
+    type:
+      - string
+      - 'hstring.RenderedString'
     optional: true
     comment: Alternate text of the image.
   caption:

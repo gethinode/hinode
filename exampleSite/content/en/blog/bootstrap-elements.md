@@ -264,6 +264,13 @@ As an example, the following shortcode displays an image with rounded corners an
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+The same image, but then using Markdown syntax:
+
+{{< example lang="hugo" >}}
+![Flowers](/img/flowers.jpg "Figure caption")
+{class="rounded col-md-6" ratio="4x3" portrait=true wrapper="text-center"}
+{{< /example >}}
+
 As an example, the following shortcode displays a regular vector image.
 
 <!-- markdownlint-disable MD037 -->
