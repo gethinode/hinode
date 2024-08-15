@@ -10,6 +10,7 @@ arguments:
   page:
     type:
       - '*hugolib.pageState'
+      - '*hugolib.pageForRenderHooks'
       - '*hugolib.pageForShortcode'
     optional: false
     group: partial
@@ -70,11 +71,17 @@ arguments:
     type:
       - string
       - template.HTML
+      - hstring.RenderedString
     optional: true
     group: partial
+    comment: Link description.
+  title:
+    type: string
+    optional: true
     comment: Link title.
+    release: v0.26.0
 body:
   type: string
   optional: true
   group: shortcode
-  comment: Link title.
+  comment: Link description.

@@ -1,0 +1,13 @@
+{{ if gt (findRE `^HAHAHUGO` .Destination 1) 0 }}
+    {{ errorf "Invalid markdown link destination, use '%s' syntax when using shortcodes as input. See '%s'" 
+        ("&#123;&#123;% %&#125;&#125;" | htmlUnescape)
+        .Page.File.Filename
+    }}
+{{ else }}
+    {{ partial "assets/link.html" (dict 
+        "destination" .Destination
+        "page" .Page
+        "text" .Text 
+        "title" .Title
+    ) }}
+{{ end }}

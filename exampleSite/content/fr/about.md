@@ -28,6 +28,6 @@ Les fonctionnalités supplémentaires incluent:
 - Composants bootstrap réutilisables à travers des codes et partiels configurables
 - Documentation versionnée, incluant une navigation latérale et un sélecteur de version.
 - Gestion d'images adaptatives pour plusieurs tailles d'écran et résolutions.
-- Résultats de recherche optimisés, obtenant un score de 100 points pour le référencement (SEO) sur [PageSpeed Insights]({{< param "links.pagespeed" >}}).
-- Sécurisé par défaut, obtenant un score A+ au test [Mozilla Observatory]({{< param "links.observatory" >}})
+- Résultats de recherche optimisés, obtenant un score de 100 points pour le référencement (SEO) sur [PageSpeed Insights]({{% param "links.pagespeed" %}}).
+- Sécurisé par défaut, obtenant un score A+ au test [Mozilla Observatory]({{% param "links.observatory" %}})
 {.tickmark}
