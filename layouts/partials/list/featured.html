@@ -40,7 +40,7 @@
             {{- $actions = sort $actions "weight" "asc" -}}
             <div class="hstack{{ if gt (len $actions) 1 }} gap-1{{ end }} justify-content-{{ $align}} pt-5 pt-md-3">
                 {{ range $actions }}
-                    {{ partial "assets/button.html" (dict "href" .url "icon" .icon "title" .title "outline" .outline "order" "last" "justify" "start") }}
+                    {{ partial "assets/button.html" (dict "href" .url "icon" .icon "label" .label "title" .title "outline" .outline "order" "last" "justify" "start") }}
                 {{ end }}
             </div>
         {{ end }}
