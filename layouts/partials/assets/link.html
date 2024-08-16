@@ -22,6 +22,7 @@
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 {{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
+{{- $isLocal := hasPrefix $destination "#" -}}
 {{- $page := .page -}}
 {{- $anchor := "" -}}
 {{- $text := .text -}}
@@ -54,32 +55,37 @@
         {{ end }}
     {{ end }}
 
-    {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
-    {{- if not $ref -}}
-        {{- errorf "partial [assets/link.html] - Cannot find page: %s" $destination -}}
-        {{- $error = true -}}
-    {{- else -}}
-        {{- $destination = $ref.RelPermalink -}}
-        {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+    {{ if not $isLocal }}
+        {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
+        {{- if not $ref -}}
+            {{- errorf "partial [assets/link.html] - Cannot find page: %s" $destination -}}
+            {{- $error = true -}}
+        {{- else -}}
+            {{- $destination = $ref.RelPermalink -}}
+            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+        {{- end -}}
+
         {{- if not $text -}}
-            {{- if $anchor -}}
-                {{- $text = $anchor -}}
-            {{- else -}}
-                {{- $text = $ref.LinkTitle -}}
-            {{- end -}}
+            {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
         {{ end -}}
-        {{- if not $case }}{{ $text = lower $text }}{{ end -}}
-    {{- end -}}
+    {{ else }}
+        {{ with $anchor }}
+            {{ $destination = printf "#%s" . }}
+            {{ if not $text }}{{ $text = . }}{{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{- if not $case }}{{ $text = lower $text }}{{ end -}}
 {{- end -}}
 
 {{ if not $error -}}
     <a 
         {{- with $destination }} href="{{ . | safeURL }}"{{ end -}}
-        {{- with $class }}class="{{ . }}" {{ end -}}
-        {{- with $target }} target="{{ . }}"{{ end -}}
-        {{- with $rel }} rel="{{ . }}"{{ end -}}
-        {{- with $title }} title="{{ . }}"{{ end -}}
+        {{ with $class }} class="{{ . }}" {{ end -}}
+        {{ with $target }} target="{{ . }}"{{ end -}}
+        {{ with $rel }} rel="{{ . }}"{{ end -}}
+        {{ with $title }} title="{{ . }}"{{ end -}}
     >
-        {{- $text -}}
+        {{- $text | safeHTML -}}
     </a>
-{{- end }}
+{{- end -}}
