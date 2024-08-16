@@ -80,8 +80,14 @@
 {{- if not $isExternal -}}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url "page" .Page) }}
     {{- if not $ref -}}
-        {{- errorf "Cannot find page: '%s' at %s" $url .Position -}}
-        {{- $error = true -}}
+        {{ $pageContext := "" }}
+        {{ with .Page.File }}{{ $pageContext = path.Join "/content" .Dir }}{{ end }}
+        {{ $isPageRes := fileExists (path.Join $pageContext $url) }}
+        {{ $isStatic := fileExists (path.Join "/static" $url) }}
+        {{ if and (not $isPageRes) (not $isStatic) }}
+            {{- errorf "Cannot find page or asset: '%s' at %s" $url .Position -}}
+            {{- $error = true -}}
+        {{ end }}
     {{- end -}}
 {{- end -}}
 
