@@ -51,9 +51,13 @@
 <!-- Override arguments -->
 {{- $page := "" }}
 {{- if .path }}
-    {{- $page = site.GetPage .path }}
+    {{ $page = partial "utilities/GetPage.html" (dict "url" .path "page" page) }}
     {{- if not $page }}
-        {{- errorf "partial [assets/card.html] - Cannot find page: %s" .path -}}
+        {{ if page.File }}
+            {{- errorf "partial [assets/card.html] - Cannot find target page '%s', see '%s'" .path page.File.Path -}}
+        {{ else }}
+            {{- errorf "partial [assets/card.html] - Cannot find target page '%s'" .path -}}
+        {{ end }}
     {{- end }}
 {{- end }}
 {{- with $page -}}
