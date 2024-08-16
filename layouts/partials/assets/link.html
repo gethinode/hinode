@@ -14,6 +14,7 @@
 
 <!-- Initialize arguments -->
 {{ $destination := strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination }}
+{{ if not $destination }}{{ $destination = "/" }}{{ end }}
 
 {{- $target := "" -}}
 {{- $rel := "" -}}
