@@ -59,9 +59,22 @@
     {{ if not $isLocal }}
         {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
         {{- if not $ref -}}
-            {{- errorf "partial [assets/link.html] - Cannot find page: %s" $destination -}}
-            {{- $error = true -}}
-        {{- else -}}
+            {{ $pageContext := "" }}
+            {{ with $page.File }}{{ $pageContext = path.Join "/content" .Dir }}{{ end }}
+            {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
+            {{ $isStatic := fileExists (path.Join "static" $destination) }}
+            {{ if and (not $isPageRes) (not $isStatic) }}
+                {{- errorf "partial [assets/link.html] - Cannot find page or asset: '%s' at '%s'" $destination $page.File.Path -}}
+                {{- $error = true -}}
+            {{ else if $isPageRes }}
+                {{ $destination = urls.JoinPath "/" (strings.TrimPrefix "/content" $pageContext) $destination }}
+            {{ else if $isStatic }}
+                {{ $destination = urls.JoinPath "/" $destination }}
+            {{ end }}
+            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+        {{ end }}
+        
+        {{- if and $ref (not $error) -}}
             {{- $destination = $ref.RelPermalink -}}
             {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
         {{- end -}}
