@@ -74,7 +74,7 @@
             {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
         {{ end }}
         
-        {{- if and $ref not $error -}}
+        {{- if and $ref (not $error) -}}
             {{- $destination = $ref.RelPermalink -}}
             {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
         {{- end -}}
