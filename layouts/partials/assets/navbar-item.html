@@ -29,6 +29,7 @@
 {{ end }}
 {{- $pageURL := $page.RelPermalink -}}
 {{- $isActive := or (and (hasPrefix $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
+{{ if not $menu.PageRef }}{{ $isActive = false }}{{ end }}
 {{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := $menu.Params.icon -}}
 
