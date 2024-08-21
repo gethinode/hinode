@@ -1,7 +1,5 @@
 {{- $menu := .Scratch.Get "sidebar" -}}
 {{- $version := .Scratch.Get "version" -}}
-{{ $sidebar := "" }}
-{{- $hasSidebar := .Site.Params.navigation.sidebar | default true -}}
-{{ if and $menu $hasSidebar  }}
+{{ if $menu  }}
     {{ partial "assets/sidebar.html" (dict "page" . "menu" $menu "version" $version) }}
-{{ end }}
+{{ end -}}
