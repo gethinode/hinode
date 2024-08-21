@@ -1,3 +1,4 @@
+const fixed = {{ site.Params.navigation.fixed }}
 const navbar = document.querySelector('.navbar')
 const togglers = document.querySelectorAll('.main-nav-toggler')
 const modeSelectors = document.querySelectorAll('.switch-mode-collapsed')
@@ -20,7 +21,7 @@ function updateNavbar () {
 
 if ((navbar !== null) && (window.performance.getEntriesByType)) {
   if (window.performance.getEntriesByType('navigation')[0].type === 'reload') {
-    updateNavbar()
+    fixed && updateNavbar()
   }
 }
 
@@ -32,7 +33,7 @@ if (navbar !== null && togglers !== null) {
     attributeFilter: ['data-bs-theme']
   }
   const Observer = new MutationObserver((mutationrecords) => {
-    updateNavbar()
+    fixed && updateNavbar()
   })
   Observer.observe(html, config)
 
@@ -43,7 +44,7 @@ if (navbar !== null && togglers !== null) {
 
   // set the navbar background color to opaque when scrolling past a breakpoint
   window.onscroll = () => {
-    updateNavbar()
+    fixed && updateNavbar()
   }
 
   // set the navbar background color to opaque when expanded
