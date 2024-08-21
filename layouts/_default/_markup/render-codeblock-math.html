@@ -1,0 +1,11 @@
+{{ with transform.ToMath .Inner (dict "displayMode" true) }}
+    {{ with .Err }}
+        {{ errorf "Failed to render KaTeX: %q. See %s" . $.Position }}
+    {{ else }}
+        {{ if $.Attributes.class }}
+            <div class="{{ $.Attributes.class }}">{{ . }}</div>
+        {{ else }}
+            {{ . }}
+        {{ end }}
+    {{ end }}
+{{ end }}

@@ -47,6 +47,7 @@
 {{ $dims := slice }}
 {{- $res := "" -}}
 {{- $img := "" -}}
+{{- $data := "" -}}
 {{ $transform := "" }}
 {{- if hasSuffix $url "svg" -}}
     {{- $res = partial "utilities/GetResource.html" (dict "url" $url "page" $page) -}}
@@ -61,6 +62,10 @@
                 {{ $dims = $dims | append "500" }}
             {{ end }}
         {{ end }}
+    {{ else if eq (string $res.MediaType) "image/svg+xml" }}
+        {{ $data = $res.Content }}
+    {{ else }}
+        {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $url -}}
     {{ end }}
 {{ else if $ratio }}
     {{ $transform = "fill" }}
@@ -137,4 +142,4 @@
     {{ end }}
 {{ end }}
 
-{{ return (dict "target" $targetURL "set" $set "height" $height "width" $width) }}
+{{ return (dict "target" $targetURL "set" $set "height" $height "width" $width "data" $data) }}

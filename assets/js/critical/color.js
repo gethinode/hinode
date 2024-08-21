@@ -61,32 +61,13 @@
   })
 
   window.addEventListener('DOMContentLoaded', () => {
-    const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
-
-    document.querySelectorAll('.ball').forEach(ball => {
-      ball.classList.add('notransition');
-    })
-    
     document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
-      chk.checked = light
       chk.addEventListener('change', function () {
         document.documentElement.setAttribute('data-bs-theme-animate', 'true')
         toggleTheme()
       })
     })
-
-    document.querySelectorAll('.ball').forEach(ball => {
-      ball.offsetHeight; // flush css changes
-      ball.classList.remove('notransition');
-    })
   })
-
-  window.addEventListener('load', () => {
-    const light = (document.documentElement.getAttribute('data-bs-theme') === 'light')
-    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
-      chk.checked = light
-    })
-  });  
 
   // initialize theme directly when script is invoked
   setTheme(getTheme())

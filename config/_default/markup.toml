@@ -24,9 +24,15 @@ defaultMarkdownHandler = "goldmark"
         table = true
         taskList = true
         typographer = true
+    [goldmark.extensions.passthrough]
+        enable = true
+    [goldmark.extensions.passthrough.delimiters]
+        block = [['\[', '\]'], ['$$', '$$']]
+        inline = [['\(', '\)'], ['$', '$']]
     [goldmark.parser]
         autoHeadingID = true
         autoHeadingIDType = 'github'
+        wrapStandAloneImageWithinParagraph = false
     [goldmark.parser.attribute]
         block = true
     [goldmark.renderer]

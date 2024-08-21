@@ -13,7 +13,7 @@ thumbnail:
   originURL: https://unsplash.com/photos/QLPWQvHvmII
 ---
 
-Hinode propose plusieurs shortcodes qui enveloppent des composants Bootstrap courants. Consultez la [documentation officielle]({{< param "links.hinode_docs" >}}) pour plus de détails.
+Hinode propose plusieurs shortcodes qui enveloppent des composants Bootstrap courants. Consultez la [documentation officielle]({{% param "links.hinode_docs" %}}) pour plus de détails.
 
 ## Abbr
 
@@ -121,7 +121,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 ## Carte
 
-À titre d'exemple, le shortcode suivant affiche une carte empilée qui renvoie à la page [à propos]({{< ref "about" >}}). Elle inclut un en-tête personnalisé.
+À titre d'exemple, le shortcode suivant affiche une carte empilée qui renvoie à la page [à propos]({{% ref "about" %}}). Elle inclut un en-tête personnalisé.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

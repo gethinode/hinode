@@ -27,6 +27,6 @@ Additional features include:
 * Reusable Bootstrap components through configurable shortcodes and partials
 * Versioned documentation, including sidebar navigation and version switcher
 * Responsive image handling for multiple screen sizes and resolutions
-* Optimized search results, scoring 100 points for SEO on [PageSpeed Insights]({{< param "links.pagespeed" >}})
-* Secure by default, scoring A+ on [Mozilla Observatory test]({{< param "links.observatory" >}})
+* Optimized search results, scoring 100 points for SEO on [PageSpeed Insights]({{% param "links.pagespeed" %}})
+* Secure by default, scoring A+ on [Mozilla Observatory test]({{% param "links.observatory" %}})
 {.tickmark}

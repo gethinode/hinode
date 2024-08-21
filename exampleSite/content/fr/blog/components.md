@@ -14,7 +14,7 @@ thumbnail:
 modules: ["katex", "leaflet", "lottie"]
 ---
 
-Hinode propose plusieurs shortcodes en plus des [éléments Bootstrap]({{< relref "bootstrap-elements" >}}) courants. Consultez la [documentation officielle]({{< param "links.hinode_docs" >}}) pour plus de détails.
+Hinode propose plusieurs shortcodes en plus des [éléments Bootstrap]({{% relref "bootstrap-elements" %}}) courants. Consultez la [documentation officielle]({{% param "links.hinode_docs" %}}) pour plus de détails.
 
 ## Animation
 

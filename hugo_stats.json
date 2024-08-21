@@ -24,8 +24,10 @@
       "span",
       "strong",
       "svg",
+      "symbol",
       "title",
-      "ul"
+      "ul",
+      "use"
     ],
     "classes": [
       "active",
@@ -64,7 +66,6 @@
       "display-1",
       "display-4",
       "emphasis",
-      "emphasis-dark",
       "end-0",
       "fa",
       "fa-10x",
@@ -120,7 +121,6 @@
       "navbar-brand",
       "navbar-collapse",
       "navbar-container",
-      "navbar-contrast",
       "navbar-expand-md",
       "navbar-fixed-top",
       "navbar-mode-selector",
@@ -171,6 +171,14 @@
       "top-bar"
     ],
     "ids": [
+      "fa-face-frown",
+      "fab-github",
+      "fab-linkedin",
+      "fab-medium",
+      "fas-book-open",
+      "fas-ellipsis",
+      "fas-moon",
+      "fas-sun",
       "navbar-0-collapse",
       "navbar-mode",
       "navbar-mode-checkbox",

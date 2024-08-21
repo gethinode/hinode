@@ -14,6 +14,7 @@
 
 <!-- Initialize arguments -->
 {{ $destination := strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination }}
+{{ if not $destination }}{{ $destination = "/" }}{{ end }}
 
 {{- $target := "" -}}
 {{- $rel := "" -}}
@@ -22,9 +23,11 @@
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 {{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
+{{- $isLocal := hasPrefix $destination "#" -}}
 {{- $page := .page -}}
 {{- $anchor := "" -}}
 {{- $text := .text -}}
+{{- $title := .title -}}
 {{- $class := .class -}}
 
 <!-- Main code -->
@@ -53,24 +56,50 @@
         {{ end }}
     {{ end }}
 
-    {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
-    {{- if not $ref -}}
-        {{- errorf "partial [assets/link.html] - Cannot find page: %s" $destination -}}
-        {{- $error = true -}}
-    {{- else -}}
-        {{- $destination = $ref.RelPermalink -}}
-        {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+    {{ if not $isLocal }}
+        {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
+        {{- if not $ref -}}
+            {{ $pageContext := "" }}
+            {{ with $page.File }}{{ $pageContext = path.Join "/content" .Dir }}{{ end }}
+            {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
+            {{ $isStatic := fileExists (path.Join "static" $destination) }}
+            {{ if and (not $isPageRes) (not $isStatic) }}
+                {{- errorf "partial [assets/link.html] - Cannot find page or asset: '%s' at '%s'" $destination $page.File.Path -}}
+                {{- $error = true -}}
+            {{ else if $isPageRes }}
+                {{ $destination = urls.JoinPath "/" (strings.TrimPrefix "/content" $pageContext) $destination }}
+            {{ else if $isStatic }}
+                {{ $destination = urls.JoinPath "/" $destination }}
+            {{ end }}
+            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+        {{ end }}
+        
+        {{- if and $ref (not $error) -}}
+            {{- $destination = $ref.RelPermalink -}}
+            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+        {{- end -}}
+
         {{- if not $text -}}
-            {{- if $anchor -}}
-                {{- $text = $anchor -}}
-            {{- else -}}
-                {{- $text = $ref.LinkTitle -}}
-            {{- end -}}
+            {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
         {{ end -}}
-        {{- if not $case }}{{ $text = lower $text }}{{ end -}}
-    {{- end -}}
+    {{ else }}
+        {{ with $anchor }}
+            {{ $destination = printf "#%s" . }}
+            {{ if not $text }}{{ $text = . }}{{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{- if not $case }}{{ $text = lower $text }}{{ end -}}
 {{- end -}}
 
 {{ if not $error -}}
-    <a {{ with $class }}class="{{ . }}" {{ end }}href="{{ $destination | safeURL }}"{{ with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }}>{{ $text }}</a>
-{{- end }}
+    <a 
+        {{- with $destination }} href="{{ . | safeURL }}"{{ end -}}
+        {{ with $class }} class="{{ . }}" {{ end -}}
+        {{ with $target }} target="{{ . }}"{{ end -}}
+        {{ with $rel }} rel="{{ . }}"{{ end -}}
+        {{ with $title }} title="{{ . }}"{{ end -}}
+    >
+        {{- $text | safeHTML -}}
+    </a>
+{{- end -}}

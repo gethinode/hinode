@@ -32,6 +32,7 @@
     showJS = false
     showSCSS = false
     purgeHTMLComments = false
+    includeSVGOrigin = true
 # toml-docs-end debugging
 
 # toml-docs-start docs

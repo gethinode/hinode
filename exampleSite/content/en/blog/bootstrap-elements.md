@@ -12,7 +12,7 @@ thumbnail:
   originURL: https://unsplash.com/photos/QLPWQvHvmII
 ---
 
-Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{< param "links.hinode_docs" >}}) for more details.
+Hinode provides several shortcodes that wrap common Bootstrap components. Refer to the [official documentation]({{% param "links.hinode_docs" %}}) for more details.
 
 ## Abbr
 
@@ -121,7 +121,7 @@ As an example, the following shortcode displays a group of three buttons.
 
 ## Card
 
-As an example, the following shortcode displays a stacked card that links to the [about]({{< ref "about" >}}) page. It includes a custom header.
+As an example, the following shortcode displays a stacked card that links to the [about]({{% ref "about" %}}) page. It includes a custom header.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
@@ -263,6 +263,13 @@ As an example, the following shortcode displays an image with rounded corners an
   portrait=true wrapper="text-center" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
+
+The same image, but then using Markdown syntax:
+
+{{< example lang="hugo" >}}
+![Flowers](/img/flowers.jpg "Figure caption")
+{class="rounded col-md-6" ratio="4x3" portrait=true wrapper="text-center"}
+{{< /example >}}
 
 As an example, the following shortcode displays a regular vector image.
 

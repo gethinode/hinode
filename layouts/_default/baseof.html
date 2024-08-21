@@ -73,6 +73,7 @@
         {{ end }}
 
         {{- partial "footer/toast-container.html" . -}}
+        {{- partial "assets/symbols.html" . -}}
         {{- partialCached "footer/scripts.html" (dict "header" false "page" . "core" true) }}
         {{- partial "footer/optional-scripts.html" . -}}
     </body>
