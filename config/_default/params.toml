@@ -172,16 +172,16 @@
     # linkedIn = ""
     github = "https://github.com/gethinode/hinode"
     section = "blog"
-    [author]
+    [schema.author]
         name = "Mark Dumay"
         # twitter = "https://twitter.com/markdumay"
         linkedin = "https://www.linkedin.com/in/markdumay/"
         github = "https://github.com/markdumay"
-    [logo]
+    [schema.logo]
         url = "img/logo512x512.png"
         width = 512
         height = 512
-    [image]
+    [schema.image]
         url = "img/logo1280x640.png"
         width = 1280
         height = 640
