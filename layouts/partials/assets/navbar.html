@@ -165,7 +165,7 @@
 {{ end }}
 
 <!-- Main code -->
-<div class="container-fluid {{ if $fixed }}fixed-top{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
+<div class="container-fluid {{ if $fixed }}fixed-top{{ else if $overlay }}navbar-overlay{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
     <nav class="navbar p-4
         {{- if not $overlay }}{{ with $color }} bg-{{ . }}{{ end }}{{ end -}}
@@ -173,9 +173,9 @@
         {{ if $contrast }} navbar-contrast{{ end }}"
         {{ if $overlay }}
         data-bs-theme="{{ $overlayMode }}"
-        data-bs-overlay="{{ $overlayMode }}"
-        {{ end }}
-        {{ if $overlay }}data-navbar-color="{{ $color }}"{{ end }}
+        {{ if $fixed }}data-bs-overlay="{{ $overlayMode }}"{{ end }}
+        {{ if $color }}data-navbar-color="{{ $color }}"{{ end }}
+        {{ end }}        
         >
         <div class="container-xxl p-0">
             <div class="d-flex navbar-container justify-content-center">
