@@ -1,6 +1,8 @@
 {{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{ $sidebar := .Render "single/sidebar" }}
+    {{- $hasSidebar := .Site.Params.navigation.sidebar | default true -}}
+    {{ $sidebar := "" }}
+    {{ if $hasSidebar }}{{ $sidebar = .Render "single/sidebar" }}{{ end }}
     {{ $toc := .Render "single/panel-toc" }}
 
     {{ with $sidebar }}
@@ -16,7 +18,7 @@
     {{ end }}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
-        {{ if $sidebar -}}
+        {{ if $hasSidebar -}}
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
                 <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
                     {{ $sidebar | safeHTML }}
