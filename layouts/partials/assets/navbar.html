@@ -222,7 +222,9 @@
     
             <div class="navbar-collapse collapse" id="{{ $id }}-collapse">
                 <!-- Insert search input -->
-                {{- if and $search (not $searchModal)  }}{{ partial "assets/search-input.html" }}{{ end -}}
+                {{- if and $search (not $searchModal) }}
+                    {{ partial "assets/search-input.html" (dict "class" (printf "mt-4 mt-%s-0" $size)) }}
+                {{ end -}}
                 
                 <!-- Render top-menu items (maximum depth of 2) -->
                 <ul class="navbar-nav {{ if $flex }}d-flex w-100{{ else }}ms-auto{{ end }}">
