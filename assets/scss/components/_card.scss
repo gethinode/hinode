@@ -5,9 +5,19 @@
     background-color: var(--#{$prefix}secondary-bg);
 }
 
-.card-img-wrap {
+.card .card-img-wrap {
     overflow: hidden;
     position: relative;
+}
+
+.card .card-img-wrap:has(.card-img-top) {
+  border-top-left-radius: var(--#{$prefix}card-inner-border-radius);
+  border-top-right-radius: var(--#{$prefix}card-inner-border-radius);
+}
+
+.card .card-img-wrap:has(.card-img-bottom) {
+  border-bottom-right-radius: var(--#{$prefix}card-inner-border-radius);
+  border-bottom-left-radius: var(--#{$prefix}card-inner-border-radius);
 }
 
 .card-zoom {
