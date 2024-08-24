@@ -1,11 +1,11 @@
-.youtube-embedded {
+.video-embedded {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
 }
 
-.youtube-embedded > iframe {
+.video-embedded > iframe {
     position: absolute;
     top: 0;
     left: 0;

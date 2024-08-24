@@ -473,11 +473,11 @@
       "top-bar",
       "translate-middle",
       "translate-middle-y",
+      "video-embedded",
       "visually-hidden",
       "vr",
       "w-100",
-      "w-50",
-      "youtube-embedded"
+      "w-50"
     ],
     "ids": [
       "TableOfContents",
@@ -609,6 +609,7 @@
       "toast-message-email-4",
       "toc-collapse",
       "tooltip",
+      "vimeo",
       "youtube"
     ]
   }
