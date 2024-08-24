@@ -474,6 +474,16 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Vimeo
+
+As an example, the following shortcode displays a Vimeo video.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* vimeo id="55073825" autoplay=true autotitle=true */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Youtube
 
 As an example, the following shortcode displays a Hugo quickstart guide.

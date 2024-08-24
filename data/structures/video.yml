@@ -1,8 +1,29 @@
 comment: >-
-  Embeds a responsive video player for YouTube videos. Only the ID of the video
-  is required. In privacy-enhanced mode, YouTube will not store information
-  about visitors on your website unless the user plays the embedded video.
+  Embeds a responsive video player for for supported video providers.
 arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    group: partial
+    release: v0.26.5
+    comment: Context of the current page.
+  position:
+    type:
+      - 'text.Position'
+    optional: true
+    group: partial
+    release: v0.26.5
+    comment: Filename and position from which the shortcode was called.
+  host:
+    type: string
+    optional: true
+    default: youtube
+    release: v0.26.5
+    comment: >-
+      Host name of the video provider. It should match one of the registered
+      providers in the site's parameters under `videos`.
   title:
     type: string
     optional: true

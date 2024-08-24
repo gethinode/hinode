@@ -21,6 +21,7 @@
 {{- $autotitle := false }}
 
 {{- if .IsNamedParams }}
+    {{ with .Get "host" }}{{ $host = . }}{{ end }}
     {{ with .Get "id" }}{{ $id = . }}{{ end }}
     {{ with .Get "class" }}{{ $class = . }}{{ end }}
     {{ with .Get "title" }}{{ $title = . }}{{ end }}

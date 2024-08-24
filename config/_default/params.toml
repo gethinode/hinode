@@ -27,6 +27,15 @@
         host = "imgix"
 # toml-docs-end images
 
+# toml-docs-start videos
+[videos]
+    [videos.vimeo]
+        host = "vimeo"
+    [videos.youtube]
+        host = "youtube"
+# toml-docs-end images
+
+
 # toml-docs-start debugging
 [debugging]
     showJS = false

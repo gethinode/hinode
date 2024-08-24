@@ -1,0 +1,107 @@
+<!-- 
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+    This source code adapts the original embedded shortcode as maintained by the Hugo repository. It introduces the
+    following modifications:
+     - Isolated the styles to comply with the Content Security Policy
+     - Added validation of shortcode arguments
+     - Added support to retrieve the title from the video metadata
+     - Adjusted autoplay configuration
+     - Modified the layout
+    
+    The original source code is available on:
+    https://github.com/gohugoio/hugo/tpl/tplimpl/embedded/templates/shortcodes/youtube.html
+    https://github.com/gohugoio/hugo/tpl/tplimpl/embedded/templates/shortcodes/vimeo.html
+    Copyright 2022 The Hugo Authors. Licensed under the Apache License, Version 2.0.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "video" "args" . "group" "partial") }}
+    {{- errorf "partial [assets/video.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page -}}
+{{- $position := .position -}}
+{{- $host := .host -}}
+{{- $title := .title -}}
+{{- $class := .class -}}
+{{- $id := .id -}}
+{{- $autoplay := .autoplay -}}
+{{- $autotitle := .autotitle -}}
+{{- $pc := "" -}}
+{{- if eq $host "youtube" }}
+    {{- $pc = $page.Site.Config.Privacy.YouTube -}}
+{{- else if eq $host "vimeo" }}
+    {{- $pc = $page.Site.Config.Privacy.Vimeo -}}
+{{- end -}}
+
+{{ if and (eq $host "youtube") ($pc.Disable) }}
+    {{- errorf "partial [assets/video.html] - YouTube video disabled in site's privacy settings" -}}
+    {{ $error = true }}
+{{ else if and (eq $host "vimeo") ($pc.Disable) }}
+    {{- errorf "partial [assets/video.html] - Vimeo video disabled in site's privacy settings" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Main code -->
+{{ if not $error -}}
+    {{ if eq $host "youtube" }}
+        {{- $host := cond $pc.PrivacyEnhanced  "www.youtube-nocookie.com" "www.youtube.com" -}}
+        {{ $url := printf "https://%s/embed/%s?origin=%s" $host $id $page.Site.BaseURL }}
+        {{ $api := printf "https://www.youtube.com/oembed?format=json&url=%s" (printf "https://www.youtube.com/watch?v=%s" $id) }}
+
+        {{ if $autotitle }}
+            {{ with resources.GetRemote $api }}
+                {{ with .Err }}
+                    {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $position . }}
+                {{ else }}
+                    {{ $data := . | transform.Unmarshal }}
+                    {{ with $data.title }}{{ $title = . }}{{ end }}
+                {{ end }}
+            {{ else }}
+                {{ errorf "Unable to get video metadata '%q': %s" $api $position }}
+            {{ end }}
+        {{ end }}
+
+        <div class="video-embedded {{ $class }}">
+            <iframe src="{{ $url }}{{ if $autoplay }}&autoplay=1&mute=1{{ end }}"
+                allowfullscreen title="{{ $title }}" {{ if $autoplay }}allow="autoplay"{{ end }}>
+            </iframe>
+        </div>
+    {{ else if eq $host "vimeo" }}
+        {{ $url := printf "https://player.vimeo.com/video/%s" $id }}
+        {{ $params := "" }}
+        {{ if $autoplay }}{{ $params = print $params "&autoplay=1&muted=1" }}{{ end }}
+        {{ if $pc.EnableDNT }}{{ $params = print $params "&dnt=1" }}{{ end }}
+        {{ $params = strings.TrimPrefix "&" $params }}
+        {{ with $params }}{{ $url = printf "%s?%s" $url . }}{{ end }}
+
+        {{ if $autotitle }}
+            {{- $dnt := cond $pc.EnableDNT 1 0 -}}
+            {{- $source := urls.JoinPath "https://vimeo.com" $id -}}
+            {{- $query := querify "url" $url "dnt" $dnt -}}
+            {{- $api := printf "https://vimeo.com/api/oembed.json?%s" $query -}}
+            {{- with resources.GetRemote $api -}}
+                {{ with .Err }}
+                    {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $position . }}
+                {{ else }}
+                    {{ $data := . | transform.Unmarshal }}
+                    {{ with $data.title }}{{ $title = . }}{{ end }}
+                {{ end }}
+            {{- end -}}
+        {{- end -}}
+
+        <div class="video-embedded {{ $class }}">
+            <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            </iframe>
+        </div>
+    {{ else }}
+        {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $host }}
+    {{ end }}
+{{ end -}}
