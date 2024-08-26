@@ -14,14 +14,16 @@
 
 <!-- Initialize arguments -->
 {{- $host := "youtube" -}}
+{{- $account := "" -}}
 {{- $id := "" -}}
 {{- $class := "" -}}
-{{- $title := "YouTube Video" }}
+{{- $title := "" }}
 {{- $autoplay := false }}
 {{- $autotitle := false }}
 
 {{- if .IsNamedParams }}
     {{ with .Get "host" }}{{ $host = . }}{{ end }}
+    {{ with .Get "account" }}{{ $account = . }}{{ end }}
     {{ with .Get "id" }}{{ $id = . }}{{ end }}
     {{ with .Get "class" }}{{ $class = . }}{{ end }}
     {{ with .Get "title" }}{{ $title = . }}{{ end }}
@@ -37,6 +39,7 @@
     {{ partial "assets/video.html" (dict 
         "page" .Page
         "position" .Position
+        "account" $account
         "host" $host 
         "id" $id 
         "class" $class 
