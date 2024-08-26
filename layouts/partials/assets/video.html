@@ -31,9 +31,11 @@
 {{- $host := .host -}}
 {{- $title := .title -}}
 {{- $class := .class -}}
+{{- $account := .account -}}
 {{- $id := .id -}}
 {{- $autoplay := .autoplay -}}
 {{- $autotitle := .autotitle -}}
+{{- $ratio := .ratio -}}
 {{- $pc := "" -}}
 {{- if eq $host "youtube" }}
     {{- $pc = $page.Site.Config.Privacy.YouTube -}}
@@ -47,6 +49,12 @@
 {{ else if and (eq $host "vimeo") ($pc.Disable) }}
     {{- errorf "partial [assets/video.html] - Vimeo video disabled in site's privacy settings" -}}
     {{ $error = true }}
+{{ end }}
+
+{{ if not $account }}
+    {{ with index $page.Site.Params.videos $host }}
+        {{ with index . "account" }}{{ $account = . }}{{ end }}
+    {{ end }}
 {{ end }}
 
 <!-- Main code -->
@@ -101,6 +109,37 @@
             <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
             </iframe>
         </div>
+    {{ else if eq $host "cloudinary" }}
+        {{ if not $account }}
+            {{ errorf "Missing account name for Cloudinary video '%s': %s" $id $position }}
+        {{ end }}
+
+        {{ $url := printf "https://player.cloudinary.com/embed/?cloud_name=%s&public_id=%s" $account $id }}
+        {{ $params := "&controls=true" }}
+        {{ if $autoplay }}{{ $params = print $params "&autoplay=true&muted=true" }}{{ end }}
+        {{ with $params }}{{ $url = print $url . }}{{ end }}
+        {{ $padding := "56.25%" }}
+
+        {{ $thumbnail := urls.JoinPath (path.Dir $id) (printf "%s.jpg" (path.BaseName $id)) }}
+        {{ $metadata := partial "assets/helpers/image-dimension.html" (dict 
+            "page" $page
+            "url" (printf "https://res.cloudinary.com/%s/video/upload/%s" $account $thumbnail)
+            "ratio" $ratio
+            "imageset" false
+        ) }}
+        {{ $height := index $metadata "height" }}
+        {{ $width := index $metadata "width" }}
+        {{ if and $height $width }}
+            {{ $padding := printf "%.2f%%" (mul (div (float $height) $width) 100) }}
+            {{ if not $title }}{{ $title = printf "Cloudinary video '%s'" (path.BaseName $id) }}{{ end }}
+
+            <div class="video-embedded {{ $class }}" data-video-padding="{{ $padding }}">
+                <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                </iframe>
+            </div>
+        {{ else }}
+            {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $id $account $position }}
+        {{ end }}
     {{ else }}
         {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $host }}
     {{ end }}

@@ -1,5 +1,6 @@
 comment: >-
-  Embeds a responsive video player for for supported video providers.
+  Embeds a responsive video player for supported video providers. The video is
+  embedded in a responsive frame.
 arguments:
   page:
     type:
@@ -39,7 +40,20 @@ arguments:
     type: string
     optional: false
     position: 0
-    comment: Identifier of the video to be embedded.
+    comment: Public identifier of the video to be embedded.
+  account:
+    type: string
+    optional: true
+    comment: >-
+      Account name of the video asset, required by some digital asset managers.
+      You can also set the default account name in the site's parameters. For
+      example, the following configuration sets the default account name for
+      videos hosted by Cloudinary:
+      ```toml
+      [videos.cloudinary]
+      account = "demo"
+      ```
+    release: v0.26.5
   autoplay:
     type: bool
     optional: true
@@ -53,4 +67,29 @@ arguments:
     default: false
     release: v0.25.2
     comment: >-
-      Trigger to retrieve the title from the video metadata.
+      Trigger to retrieve the title from the video metadata, if supported by the
+      provider.
+  ratio:
+    type: select
+    optional: true
+    comment: >-
+      Ratio of the video. If set, determines the padding of the embedded video
+      frame. When not specified, the video dimensions used to calculate the
+      padding are retrieved programmatically.
+    options:
+      values:
+        - 1x1
+        - 3x2
+        - 4x3
+        - 16x9
+        - 21x9
+    release: v0.26.5
+  portrait:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to adjust the ratio from landscape to portrait. The image itself is
+      not rotated, only the crop area is adjusted. Not applicable to vector
+      graphics.
+    release: v0.26.5

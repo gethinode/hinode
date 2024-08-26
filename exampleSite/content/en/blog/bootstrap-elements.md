@@ -474,6 +474,16 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Video
+
+As an example, the following shortcode displays an Elephants video hosted by Cloudinary.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Vimeo
 
 As an example, the following shortcode displays a Vimeo video.

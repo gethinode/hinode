@@ -29,11 +29,14 @@
 
 # toml-docs-start videos
 [videos]
+    [videos.cloudinary]
+        host = "cloudinary"
+        account = "demo"
     [videos.vimeo]
         host = "vimeo"
     [videos.youtube]
         host = "youtube"
-# toml-docs-end images
+# toml-docs-end videos
 
 
 # toml-docs-start debugging
