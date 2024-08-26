@@ -129,13 +129,17 @@
         ) }}
         {{ $height := index $metadata "height" }}
         {{ $width := index $metadata "width" }}
-        {{ $padding := printf "%.2f%%" (mul (div (float $height) $width) 100) }}
-        {{ if not $title }}{{ $title = printf "Cloudinary video '%s'" (path.BaseName $id) }}{{ end }}
+        {{ if and $height $width }}
+            {{ $padding := printf "%.2f%%" (mul (div (float $height) $width) 100) }}
+            {{ if not $title }}{{ $title = printf "Cloudinary video '%s'" (path.BaseName $id) }}{{ end }}
 
-        <div class="video-embedded {{ $class }}" data-video-padding="{{ $padding }}">
-            <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-            </iframe>
-        </div>
+            <div class="video-embedded {{ $class }}" data-video-padding="{{ $padding }}">
+                <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                </iframe>
+            </div>
+        {{ else }}
+            {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $id $account $position }}
+        {{ end }}
     {{ else }}
         {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $host }}
     {{ end }}
