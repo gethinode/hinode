@@ -194,7 +194,7 @@
                         {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description "button" $button) -}}
                     </div>
                     {{ if $page }}<div>{{ partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) }}</div>{{ end }}
-                    {{ if $button }}
+                    {{ if and $href $button }}
                         {{ $label := (or $buttonLabel $title) | default (T "readMore") }}
                         {{ $buttonClass := "card-button mb-n4" }}
                         {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link mb-n4" }}{{ end }}
