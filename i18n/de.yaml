@@ -126,6 +126,32 @@
 
 # Comments
 - id: show
-  translation: "Zeige"
+  translation: "Anzeigen"
 - id: comments
   translation: "Kommentare"
+
+# Arguments
+- id: name
+  translation: "Name"
+- id: type
+  translation: "Typ"
+- id: required
+  translation: "Erforderlich"
+- id: default
+  translation: "Standard"
+- id: comment
+  translation: "Kommentar"
+- id: supportedValues
+  translation: "Unterstützte Werte"
+
+# Alerts
+- id: caution
+  translation: Vorsicht
+- id: important
+  translation: Wichtig
+- id: note
+  translation: Hinweis
+- id: tip
+  translation: Tipp
+- id: warning
+  translation: Warnung
