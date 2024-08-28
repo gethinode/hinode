@@ -57,6 +57,9 @@
     {{ end }}
 {{ end }}
 
+{{ $origin := $position }}
+{{ if not $origin }}{{ with $page.File }}{{ $origin = .Path}}{{ end }}{{ end }}
+
 <!-- Main code -->
 {{ if not $error -}}
     {{ if eq $host "youtube" }}
@@ -67,14 +70,14 @@
 
         {{ with resources.GetRemote $api }}
             {{ with .Err }}
-                {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $position . }}
+                {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $origin . }}
             {{ else }}
                 {{ $data := . | transform.Unmarshal }}
                 {{ if $autotitle }}{{ with $data.title }}{{ $title = . }}{{ end }}{{ end }}
                 {{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}
             {{ end }}
         {{ else }}
-            {{ errorf "Unable to get video metadata '%q': %s" $api $position }}
+            {{ errorf "Unable to get video metadata '%q': %s" $api $origin }}
         {{ end }}
 
         <div class="video-embedded {{ $class }}" data-video-padding="{{ $padding }}">
@@ -97,7 +100,7 @@
         {{- $api := printf "https://vimeo.com/api/oembed.json?%s" $query -}}
         {{- with resources.GetRemote $api -}}
             {{ with .Err }}
-                {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $position . }}
+                {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $origin . }}
             {{ else }}
                 {{ $data := . | transform.Unmarshal }}
                 {{ if $autotitle }}{{ with $data.title }}{{ $title = . }}{{ end }}{{ end }}
@@ -111,7 +114,7 @@
         </div>
     {{ else if eq $host "cloudinary" }}
         {{ if not $account }}
-            {{ errorf "Missing account name for Cloudinary video '%s': %s" $id $position }}
+            {{ errorf "Missing account name for Cloudinary video '%s': %s" $id $origin }}
         {{ end }}
 
         {{ $url := printf "https://player.cloudinary.com/embed/?cloud_name=%s&public_id=%s" $account $id }}
@@ -138,7 +141,7 @@
                 </iframe>
             </div>
         {{ else }}
-            {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $id $account $position }}
+            {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $id $account $origin }}
         {{ end }}
     {{ else }}
         {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $host }}
