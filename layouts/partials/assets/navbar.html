@@ -107,7 +107,7 @@
     {{- $enableVersions = gt (len $list ) 1 -}}
 {{ end }}
 
-{{- $enableLanguage := or $page.IsTranslated site.IsMultiLingual -}}
+{{- $enableLanguage := or $page.IsTranslated hugo.IsMultilingual -}}
 {{- $horizontal := default false site.Params.navigation.horizontal -}}
 
 {{- $logo := .logo | default site.Params.navigation.logo -}}
