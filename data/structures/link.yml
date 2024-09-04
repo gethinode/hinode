@@ -72,6 +72,7 @@ arguments:
       - string
       - template.HTML
       - hstring.RenderedString
+      - hstring.HTML
     optional: true
     group: partial
     comment: Link description.
