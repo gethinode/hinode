@@ -112,7 +112,8 @@ arguments:
   title:
     type:
       - string
-      - 'hstring.RenderedString'
+      - hstring.RenderedString
+      - hstring.HTML
     optional: true
     comment: Alternate text of the image.
   caption:
