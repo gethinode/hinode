@@ -80,7 +80,8 @@
 {{ end }}
 
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
-{{- if eq $body "none" }}{{ $description = "" }}{{ end -}}
+{{- if eq $body "title" }}{{ $description = "" }}{{ end -}}
+{{- if eq $body "none" }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 
 <!-- Inline partial to render the card's body -->
 {{- define "partials/card-body.html" -}}
@@ -216,6 +217,7 @@
     </div>
 {{- else -}}
     <!-- Render stacked / default card -->
+    {{ $overlay := eq $orientation "overlay" }}
     <div class="card {{ $colorStyle }} {{ $class }} text-{{ $align }}">
         {{- if $thumbnail -}}
             {{- partial $hook (dict "url" $thumbnail "ratio" (or $ratio "16x9") "portrait" $portrait "anchor" $anchor "sizes" $sizes "wrapper" "card-img-wrap" "class" "card-img-top card-img-bg" "title" (or $alt $title) "loading" $loading) -}}
@@ -229,7 +231,8 @@
                 {{ end }}
             </div>
         {{- end -}}
-        <div class="card-body d-flex flex-column p-{{ $padding }}">
+        <div class="card-body d-flex flex-column p-{{ $padding }} {{ if $overlay }}card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
+            {{ if $overlay }}<div class="flex-grow-1"></div>{{ end }}
             {{ if $page }}{{- partial "card-caption.html" (dict "page" $page "keywords" $header "color" $color) -}}{{ end }}
             {{- partial "card-body.html" (dict "title" $title "href" $href "color" $color "description" $description) -}}
             {{ if $page }}{{- partial "card-caption.html" (dict "page" $page "keywords" $footer "color" $color) -}}{{ end }}

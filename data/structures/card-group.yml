@@ -96,12 +96,14 @@ arguments:
       screens.
   wrapper:
     type: string
+    default: p-0
     optional: true
     comment: >-
       Class attributes of the wrapper element, e.g. `p-4 px-xxl-0`.
   responsive:
     type: bool
     optional: true
+    default: true
     comment: >-
       Flag indicating if the number of columns should be responsive, defaults to
       `true`.
@@ -132,5 +134,33 @@ arguments:
   hook:
     type: string
     optional: true
+    default: assets/card.html
     comment: Render hook for the card partial.
     group: partial
+  bento:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Trigger to use a bento-style layout instead of default grid layout.
+    release: v0.27.0
+  valign:
+    type: select
+    optional: true
+    comment: >-
+      Defines the vertical card alignment, only applicable in bento layout.
+    release: v0.27.0
+    options:
+      values:
+        - start
+        - center
+        - end
+  styles:
+    type:
+      - '[]map[string]interface {}'
+    optional: true
+    comment: >-
+      Styles to apply to the individual cards. Supported elements are `ratio`,
+      `orientation`, `portrait`, and `width`. The styles are rotated when the
+      amount of cards exceeds the available amount of styles.
+    release: v0.27.0

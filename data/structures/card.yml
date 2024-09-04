@@ -101,6 +101,7 @@ arguments:
     options:
       values:
         - full
+        - title
         - none
   footer:
     type: select
@@ -227,6 +228,7 @@ arguments:
         - stacked
         - horizontal
         - horizontal-sm
+        - overlay
         - none
   subtle:
     type: bool

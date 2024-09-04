@@ -4,66 +4,67 @@
     Visit gethinode.com/license for more details.
 -->
 
-<!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "card-group" "child" "card" "args" .) }}
-    {{- errorf "partial [assets/card-group.html] - Invalid arguments" -}}
-{{ end }}
-
-<!-- Initialize arguments and default values -->
-{{- $page := .page -}}
-{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
-{{ $pages := .list }}
-{{ $cards := .cards }}
-{{- $paginate := .paginate | default false -}}
-{{- $moreURL := .href -}}
-{{- $moreTitle := .hrefTitle -}}
-{{- $gutter := .gutter | default 4 -}}
-{{- $separator := .separator | default false -}}
-{{- $class := .class -}}
-{{- $color := .color -}}
-{{- $padding := .padding -}}
-{{- $header := .header -}}
-{{- $body := .body -}}
-{{- $footer := .footer -}}
-{{- $orientation := .orientation -}}
-{{- $ratio := .ratio -}}
-{{- $portrait := .portrait | default false -}}
-{{- $wrapper := .wrapper | default "p-0" -}}
-{{- $style := .style -}}
-{{- $align := .align -}}
-{{- $subtle := .subtle }}
-{{- $loading := .loading -}}
-{{- $button := .button -}}
-{{- $buttonLabel := .buttonLabel -}}
-{{- $buttonType := .buttonType -}}
-{{- $iconRounded := .iconRounded }}
-{{- $scroll := .scroll | default false }}
-{{- $spacer := .spacer | default false }}
-{{- $hook := .hook | default "assets/card.html" }}
-{{- $cols := string .cols | default "3" -}}
-
-<!-- Override arguments -->
-{{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $pages) }}
-{{ $paginator := "" }}
-{{ if and $isPages $paginate }}
-    {{ with .pagination }}
-        {{ $paginator = $page.Paginate $pages . }}
-    {{ else }}
-        {{ $paginator = $page.Paginate $pages }}
+<!-- Define inline partials -->
+{{ define "partials/assets/style.html" }}
+	{{ $style := "" }}
+    {{ if gt (len .styles) 0 }}
+        {{ $def := index .styles (mod .index (len .styles)) }}
+        {{ $style = index $def .key }}
     {{ end }}
-    {{ $pages = first $paginator.PagerSize (after (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) $pages) }}
+    {{ return ($style | default .default ) }}
 {{ end }}
 
+<!-- Initialize arguments -->
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "card-group" "child" "card" "args" .) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "assets/card-group.html" 
+        "msg" "Invalid arguments"
+        "details" $args.errmsg
+        "file" page.File
+    )}}
+{{ end }}
+
+<!-- Initialize local variables -->
+{{ $list := $args.list }}
+{{- $class := $args.class -}}
+{{- $orientation := $args.orientation -}}
 {{ $cardWrapper := "" }}
-{{ if $scroll }}
-    {{ $cardWrapper = printf "card-block card-block-%d" (int $cols) }}
+
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{ $colsMap := dict
+    "auto" ""
+    "1" "row-cols-1"
+    "2" (printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current)
+    "3" (printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current)
+    "4" (printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current)
+    "5" (printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current)
+}}
+{{ $sizesMap := dict
+    "auto" "100vw"
+    "1" "100vw"
+    "2" (printf "(min-width: %s) 50vw, 100vw" $breakpoint.currentSize)
+    "3" (printf "(min-width: %s) 33.3vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize)
+    "4" (printf "(min-width: %s) 25vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize)
+    "5" (printf "(min-width: %s) 20vw, (min-width: %s) 33.3vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize)
+}}
+
+<!-- Apply optional pagination -->
+{{ $isPages := in (slice "page.Pages" "resource.Resources") (printf "%T" $list) }}
+{{ $paginator := "" }}
+{{ if and $isPages $args.paginate }}
+    {{ with $args.pagination }}
+        {{ $paginator = $args.page.Paginate $list . }}
+    {{ else }}
+        {{ $paginator = $args.page.Paginate $list }}
+    {{ end }}
+    {{ $list = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
 {{ end }}
 
-{{ if not $spacer }}{{ $class = printf "%s h-100" $class }}{{ end }}
-
-{{ $list := slice }}
+<!-- Initialize list elements -->
+{{ $elements := slice }}
 {{ if $isPages }}
-    {{ range $index, $element := $pages }}
+    {{ range $index, $element := $list }}
         {{ $params := dict }}
         <!-- regular page -->
         {{- if and $element.RelPermalink $element.File -}}
@@ -82,102 +83,95 @@
             ) -}}
         {{- end -}}
 
-        {{- $list = $list | append $params }}
+        {{- $elements = $elements | append $params }}
     {{ end }}
-{{ else if $pages }}
-    {{ $list = $list | append $pages }}
+{{ else if $list }}
+    {{ $elements = $elements | append $list }}
 {{ end }}
 
-{{- $count := len $list -}}
+<!-- Limit list to max elements -->
+{{- $count := len $elements -}}
 {{- $max := $count -}}
-{{- $max = math.Min (.max | default $count) $count -}}
-{{- $responsive := .responsive | default true -}}
-
-{{- $sizes := "100vw" }}
-{{- $colGrid := "" -}}
-{{ if not $scroll }}
-    {{ $colGrid = printf "row-cols-%s" $cols }}
-    {{- if eq $cols "1" }}
-        {{ $colGrid = "row-cols-1" -}}
-    {{- else if eq $cols "2" }}
-        {{ if $responsive }}
-            {{ $colGrid = printf "row-cols-1 row-cols-%s-1 row-cols-%s-2" $breakpoint.prev $breakpoint.current }}
-        {{ end -}}
-        {{ $sizes = printf "(min-width: %s) 50vw, 100vw" $breakpoint.currentSize }}
-    {{- else if eq $cols "3" }}
-        {{ if $responsive }}
-            {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-3" $breakpoint.prev $breakpoint.current }}
-        {{ end -}}
-        {{ $sizes = printf "(min-width: %s) 33.3vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
-    {{- else if eq $cols "4" }}
-        {{ if $responsive }}
-            {{ $colGrid = printf "row-cols-1 row-cols-%s-2 row-cols-%s-4" $breakpoint.prev $breakpoint.current }}
-        {{ end -}}
-        {{ $sizes = printf "(min-width: %s) 25vw, (min-width: %s) 50vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
-    {{- else if eq $cols "5" }}
-        {{ if $responsive }}
-            {{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}
-        {{ end -}}
-        {{ $sizes = printf "(min-width: %s) 20vw, (min-width: %s) 33.3vw, 100vw" $breakpoint.currentSize $breakpoint.prevSize }}
-    {{ end -}}
-{{ else }}
-    {{ if in (slice "2" "3" "4" "5") $cols }}
-        {{ $sizes = replace (printf "%.1fvw" (div 100.0 (int $cols))) ".0" "" }}
-    {{ end }}
-{{ end }}
-
-{{- if not $paginate -}}
-    {{- $list = first $max $list -}}
+{{- $max = math.Min ($args.max | default $count) $count -}}
+{{- if not $args.paginate -}}
+    {{- $elements = first $max $elements -}}
 {{- end -}}
 
-{{- if and (eq $cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
+{{/* Initialize grid and layout */}}
+{{- $sizes := "100vw" }}
+{{- $colGrid := "" -}}
+{{ if not $args.scroll }}
+    {{ $colGrid = index $colsMap $args.cols }}
+    {{ if $args.responsive }}{{ $sizes = index $sizesMap $args.cols }}{{ end }}
+{{ else }}
+    {{ if in (slice "2" "3" "4" "5") $args.cols }}
+        {{ $sizes = replace (printf "%.1fvw" (div 100.0 (int $args.cols))) ".0" "" }}
+    {{ end }}
+{{ end }}
+
+{{- if and (eq $args.cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
+
+{{ if not $args.spacer }}
+    {{ $class = printf "%s h-100" $class }}
+{{ end }}
 
 <!-- Main code -->
-<div class="container-fluid {{ $wrapper }} {{ if $scroll }}card-container-wrapper{{ end }}">
-    <div class="row g-{{ $gutter }} {{ if $scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end  }} {{ $colGrid }}">
-        {{ range $index, $element := $list }}
-            {{- $params := (dict
-                "class" (printf " %s" $class)
-                "color" $color
-                "footer" $footer
-                "body" $body
-                "header" $header
-                "loading" $loading
-                "sizes" $sizes
-                "orientation" $orientation
-                "padding" $padding
-                "ratio" $ratio
-                "portrait" $portrait
-                "subtle" $subtle
-                "style" $style
-                "align" $align
-                "button" $button
-                "buttonLabel" $buttonLabel
-                "buttonType" $buttonType
-                "iconRounded" $iconRounded
-            ) -}}
-            {{- $params = merge $element $params }}
+<div class="{{ $args.wrapper }}">
+    <div class="container-fluid {{ if $args.scroll }}card-container-wrapper{{ end }} p-0">
+        <div class="row g-{{ $args.gutter }} {{ if $args.scroll }}d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end }}
+        {{ if $args.bento }}{{ with $args.valign }}align-items-{{ . }}{{ end }}{{ else }}{{ $colGrid }}{{ end }}">
+            {{ range $index, $element := $elements }}
+                {{- $params := (dict
+                    "class" (printf " %s" $class)
+                    "color" $args.color
+                    "footer" $args.footer
+                    "body" $args.body
+                    "header" $args.header
+                    "loading" $args.loading
+                    "sizes" $sizes
+                    "orientation" (partial "assets/style.html" (dict "styles" $args.styles "index" $index "key" "orientation" "default" $orientation))
+                    "padding" $args.padding
+                    "ratio" (partial "assets/style.html" (dict "styles" $args.styles "index" $index "key" "ratio" "default" $args.ratio))
+                    "portrait" (partial "assets/style.html" (dict "styles" $args.styles "index" $index "key" "portrait" "default" $args.portrait))
+                    "subtle" $args.subtle
+                    "style" $args.style
+                    "align" $args.align
+                    "button" $args.button
+                    "buttonLabel" $args.buttonLabel
+                    "buttonType" $args.buttonType
+                    "iconRounded" $args.iconRounded
+                ) -}}
+                {{- $params = merge $element $params }}
 
-            <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}">
-                {{ if $spacer }}<div class="spacer"></div>{{ end }}
-                {{- partial $hook $params -}}
-            </div>
-            {{- if and (lt $index (sub $max 1)) $separator -}}
-                <div class="col d-block d-sm-none">
-                    <hr>
+                {{ if $args.scroll }}
+                    {{ $width := (partial "assets/style.html" (dict "styles" $args.styles "index" $index "key" "width" "default" "3")) }}
+                    {{ $size := $args.cols }}
+                    {{ if and (gt $args.cols 1) (eq $width "6") }}{{ $size = sub (int $args.cols) 1 }}{{ end }}
+                    {{ $cardWrapper = printf "card-block card-block-%d" (int $size) }}
+                {{ end }}
+
+                <!--add col-$width -->
+                <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}">
+                    {{ if $args.spacer }}<div class="spacer"></div>{{ end }}
+                    {{- partial $args.hook $params -}}
                 </div>
+                {{- if and (lt $index (sub $max 1)) $args.separator -}}
+                    <div class="col d-block d-sm-none">
+                        <hr>
+                    </div>
+                {{- end -}}
             {{- end -}}
-        {{- end -}}
-        {{ if $cards }}{{- print $cards | safeHTML }}{{ end }}
+            {{ if $args.cards }}{{- print $args.cards | safeHTML }}{{ end }}
+        </div>
     </div>
 
     {{ if $paginator }}
         {{- if gt $paginator.TotalPages 1 -}}
-            <div class="pt-3">{{ partial "assets/pagination.html" (dict "page" $page "format" "terse") }}</div>
+            <div class="pt-3">{{ partial "assets/pagination.html" (dict "page" $args.page "format" "terse") }}</div>
         {{- end -}} 
     {{ else }}
-        {{ if and (gt $count $max) $moreTitle }}
-            <a class="btn btn-outline-primary mt-4" href="{{ $moreURL| safeURL }}" role="button">{{ $moreTitle }}</a>
+        {{ if and (gt $count $max) $args.hrefTitle }}
+            <a class="btn btn-outline-primary mt-4" href="{{ $args.href| safeURL }}" role="button">{{ $args.hrefTitle }}</a>
         {{ end }}
     {{ end }}
 </div>
