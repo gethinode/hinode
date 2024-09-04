@@ -73,7 +73,7 @@
     {{ end }}
     {{- if site.Params.style.purge -}}
         {{- $post_options := dict "config" "config" "noMap" hugo.IsProduction -}}
-        {{- $css = $css | resources.PostCSS $post_options -}}
+        {{- $css = $css | css.PostCSS $post_options -}}
     {{- end -}}
 
     {{- if not hugo.IsProduction -}}
