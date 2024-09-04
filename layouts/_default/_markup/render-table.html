@@ -1,0 +1,40 @@
+{{/* Adapted from https://gohugo.io/render-hooks/tables/ */}}
+
+<!-- Ensure presence of `.table` class attribute to trigger Bootstrap styling -->
+{{ $attr := .Attributes }}
+{{ $class := split $attr.class " " }}
+{{ if not (in $class "table") }}
+    {{ $attr = merge $attr (dict "class" (trim (delimit ($class | append "table") " ") " ")) }}
+{{ end }}
+
+{{ $align := dict "left" "start" "center" "center" "right" "end" }}
+
+<table
+  {{- range $k, $v := $attr }}
+    {{- if $v }}
+      {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+    {{- end }}
+  {{- end }}>
+  <thead>
+    {{- range .THead }}
+      <tr>
+        {{- range . }}
+          <th {{ with .Alignment }}class="text-{{ index $align . }}"{{ end }}>
+            {{- .Text -}}
+          </th>
+        {{- end }}
+      </tr>
+    {{- end }}
+  </thead>
+  <tbody>
+    {{- range .TBody }}
+      <tr>
+        {{- range . }}
+          <td {{ with .Alignment }}class="text-{{ index $align . }}"{{ end }}>
+            {{- .Text -}}
+          </td>
+        {{- end }}
+      </tr>
+    {{- end }}
+  </tbody>
+</table>
