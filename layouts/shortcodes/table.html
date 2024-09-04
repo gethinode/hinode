@@ -30,20 +30,21 @@
 {{ end }}
 
 <!-- Main code -->
- {{ if or $sortable $paging $searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if or $sortable $paging $searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+
 {{- $input := .Inner | .Page.RenderString }}
-{{- $input = replace $input "style=\"text-align:left\"" "class=\"text-start\"" -}}
-{{- $input = replace $input "style=\"text-align:center\"" "class=\"text-center\"" -}}
-{{- $input = replace $input "style=\"text-align:right\"" "class=\"text-end\"" -}}
+{{ $regex := `<table\s*class="(.+?)"` }}
+{{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
+{{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
 
 {{ $attributes := "" }}
 {{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
 {{ if $paging }}{{ $attributes = printf "%s data-table-paging=true" $attributes }}{{ end }}
 {{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
 
-{{- $old := "<table>" -}}
-{{- $new := printf "<table class=\"table %s\" %s>" $class (trim $attributes " ") -}}
-{{ $input := replace $input $old $new -}}
+{{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
+{{ $input := replaceRE $regex $new $input 1 -}}
+
 {{ if not $error }}
     {{ if eq $breakpoint "none" }}
         {{ $input | safeHTML }}
