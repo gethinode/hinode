@@ -101,6 +101,7 @@ arguments:
     options:
       values:
         - full
+        - title
         - none
   footer:
     type: select

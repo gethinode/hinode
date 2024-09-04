@@ -80,7 +80,8 @@
 {{ end }}
 
 {{- if eq $orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
-{{- if eq $body "none" }}{{ $description = "" }}{{ end -}}
+{{- if eq $body "title" }}{{ $description = "" }}{{ end -}}
+{{- if eq $body "none" }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 
 <!-- Inline partial to render the card's body -->
 {{- define "partials/card-body.html" -}}
