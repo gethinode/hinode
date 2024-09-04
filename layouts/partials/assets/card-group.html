@@ -51,7 +51,7 @@
     {{ else }}
         {{ $paginator = $page.Paginate $pages }}
     {{ end }}
-    {{ $pages = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $pages) }}
+    {{ $pages = first $paginator.PagerSize (after (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) $pages) }}
 {{ end }}
 
 {{ $cardWrapper := "" }}
