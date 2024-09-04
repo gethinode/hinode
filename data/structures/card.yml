@@ -227,6 +227,7 @@ arguments:
         - stacked
         - horizontal
         - horizontal-sm
+        - overlay
         - none
   subtle:
     type: bool
