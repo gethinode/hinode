@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const alert = document.getElementById('page-alert')
 const closeBtn = document.getElementById('page-alert-btn-close')
 if (alert !== null && closeBtn !== null) {
