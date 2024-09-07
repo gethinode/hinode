@@ -29,7 +29,7 @@ As an example, the following shortcode shows an animation that plays on hover.
 
 As an example, the following shortcode displays a responsive table that uses advanced controls.
 
-<!-- markdownlint-disable MD037 -->
+<!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
 {{</* table sortable="true" paging="true" searchable="true" */>}}
 |  #  | Heading |
