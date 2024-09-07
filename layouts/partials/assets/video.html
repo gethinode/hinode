@@ -95,7 +95,7 @@
         {{ $padding := "56.25%" }}
 
         {{- $dnt := cond $pc.EnableDNT 1 0 -}}
-        {{- $source := urls.JoinPath "https://vimeo.com" $id -}}
+        {{- $source := partial "utilities/URLJoin.html" (dict "base" "https://vimeo.com" "path" $id) -}}
         {{- $query := querify "url" $url "dnt" $dnt -}}
         {{- $api := printf "https://vimeo.com/api/oembed.json?%s" $query -}}
         {{- with resources.GetRemote $api -}}
@@ -123,7 +123,7 @@
         {{ with $params }}{{ $url = print $url . }}{{ end }}
         {{ $padding := "56.25%" }}
 
-        {{ $thumbnail := urls.JoinPath (path.Dir $id) (printf "%s.jpg" (path.BaseName $id)) }}
+        {{ $thumbnail := partial "utilities/URLJoin.html" (dict "base" (path.Dir $id) "path" (printf "%s.jpg" (path.BaseName $id))) }}
         {{ $metadata := partial "assets/helpers/image-dimension.html" (dict 
             "page" $page
             "url" (printf "https://res.cloudinary.com/%s/video/upload/%s" $account $thumbnail)
