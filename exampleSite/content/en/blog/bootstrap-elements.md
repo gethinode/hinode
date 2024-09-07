@@ -418,7 +418,7 @@ As an example, the following shortcode displays superscript text.
 
 As an example, the following shortcode displays a responsive table.
 
-<!-- markdownlint-disable MD037 -->
+<!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
 {{</* table */>}}
 | #  | Heading | Heading | Heading | Heading | Heading | Heading | Heading | Heading | Heading |
@@ -428,7 +428,7 @@ As an example, the following shortcode displays a responsive table.
 | 3. | cell    | cel     | cel     | cel     | cel     | cel     | cel     | cel     | cel     |
 {{</* /table */>}}
 {{< /example >}}
-<!-- markdownlint-enable MD037 -->
+<!-- markdownlint-enable MD037 MD058 -->
 
 ## Timeline
 
