@@ -39,8 +39,8 @@
 {{ $element := "" }}
 
 <!-- Split path between upload dir and sub dir -->
-{{ $newdir := urls.JoinPath (index (split $dir "upload") 0) "upload" }}
-{{ $file = urls.JoinPath (index (split $dir "upload") 1) $file }}
+{{ $newdir := partial "utilities/URLJoin.html" (dict "base" (index (split $dir "upload") 0) "path" "upload") }}
+{{ $file = partial "utilities/URLJoin.html" (dict "base" (index (split $dir "upload") 1) "path" $file) }}
 {{ $dir = $newdir }}
 
 <!-- Generate image URL -->
@@ -55,7 +55,7 @@
     {{ with $anchor }}
         {{ $operation = printf "%s,g_%s" $operation . }}
     {{ end }}
-    {{- $element = urls.JoinPath (slice "https://" $host $dir $operation $file) -}}
+    {{- $element = partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $dir $operation $file)) -}}
 {{ end }}
 
 {{ return $element }}

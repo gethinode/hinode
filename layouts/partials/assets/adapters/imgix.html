@@ -55,7 +55,7 @@
     {{ with $anchor }}
         {{ $operation = printf "%s&crop=%s" $operation . }}
     {{ end }}
-    {{- $element = printf "%s?%s" (urls.JoinPath (slice "https://" $host $dir $file)) $operation -}}
+    {{- $element = printf "%s?%s" (partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $dir $file))) $operation -}}
 {{ end }}
 
 {{ return $element }}
