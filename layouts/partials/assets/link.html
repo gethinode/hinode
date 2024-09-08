@@ -67,9 +67,9 @@
                 {{- errorf "partial [assets/link.html] - Cannot find page or asset: '%s' at '%s'" $destination $page.File.Path -}}
                 {{- $error = true -}}
             {{ else if $isPageRes }}
-                {{ $destination = urls.JoinPath "/" (strings.TrimPrefix "/content" $pageContext) $destination }}
+                {{ $destination = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix "/content" $pageContext) $destination)) }}
             {{ else if $isStatic }}
-                {{ $destination = urls.JoinPath "/" $destination }}
+                {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
             {{ end }}
             {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
         {{ end }}

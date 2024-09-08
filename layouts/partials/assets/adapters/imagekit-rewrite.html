@@ -22,9 +22,9 @@
 {{ with $container }}{{ $dir = strings.TrimPrefix (printf "/%s" .) $dir }}{{ end }}
 
 {{ if ne $host "ik.imagekit.io" }}
-    {{ $element = urls.JoinPath (slice "https://ik.imagekit.io" $account $dir $file) }}
+    {{ $element = partial "utilities/URLJoin.html" (dict "elements" (slice "https://ik.imagekit.io" $account $dir $file)) }}
 {{ else }}
-    {{ $element = urls.JoinPath (slice "https://" $host $dir $file) }}
+    {{ $element = partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $dir $file)) }}
 {{ end }}
 
 {{ return $element }}

@@ -46,7 +46,7 @@
 
 <!-- Split path between end point and image path -->
 {{ $newdir := printf "/%s" (index (split $dir "/") 1) }}
-{{ $file = urls.JoinPath (strings.TrimPrefix $newdir $dir) $file }}
+{{ $file = partial "utilities/URLJoin.html" (dict "elements" (slice (strings.TrimPrefix $newdir $dir) $file)) }}
 {{ $dir = $newdir }}
 
 <!-- Generate image URL -->
@@ -60,7 +60,7 @@
     {{ with $anchor }}
         {{ $operation = printf "%s,fo-%s" $operation . }}
     {{ end }}
-    {{- $element = urls.JoinPath (slice "https://" $host $dir $operation $file) -}}
+    {{- $element = partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $dir $operation $file)) -}}
 {{ end }}
 
 {{ return $element }}

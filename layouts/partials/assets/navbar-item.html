@@ -25,7 +25,7 @@
 {{ if or (strings.HasPrefix $menu.PageRef "http") (strings.HasPrefix $menu.URL "http") }}
     {{ $menuURL = or $menu.PageRef $menu.URL }}
 {{ else if (or $menu.PageRef $menu.URL) }}
-    {{- $menuURL = urls.JoinPath $baseURL ((or $menu.PageRef $menu.URL) | relLangURL) -}}
+    {{- $menuURL = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ((or $menu.PageRef $menu.URL) | relLangURL)) -}}
 {{ end }}
 {{- $pageURL := $page.RelPermalink -}}
 {{- $isActive := or (and (hasPrefix $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
