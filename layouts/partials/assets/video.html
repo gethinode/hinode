@@ -58,7 +58,7 @@
 {{ end }}
 
 {{ $origin := $position }}
-{{ if not $origin }}{{ with $page.File }}{{ $origin = .Path}}{{ end }}{{ end }}
+{{ if not $origin }}{{ with $page.File }}{{ $origin = .Path }}{{ end }}{{ end }}
 
 <!-- Main code -->
 {{ if not $error -}}
