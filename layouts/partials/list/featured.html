@@ -61,7 +61,8 @@
             {{ partial "assets/icon.html" (dict "icon" "mode" $mode $icon "wrapper" "col-6 mx-auto text-center")}}
         {{ end }}
     {{ else }}
-        {{- $thumbnail := (or (and (reflect.IsMap $page.Params.Thumbnail) $page.Params.Thumbnail.url) $page.Params.Thumbnail) -}}
+        {{- $thumbnail := "" -}}
+        {{ if reflect.IsMap $page.Params.Thumbnail }}{{ $thumbnail = $page.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $page.Params.Thumbnail }}{{ end }}
         {{- if $thumbnail }}
             {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "sizes" $sizes "wrapper" $style "class" "rounded" "title" $page.Site.Title "priority" "high") }}
         {{ end }}

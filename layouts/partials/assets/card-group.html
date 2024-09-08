@@ -71,7 +71,8 @@
             {{- $params = merge $params (dict "path" $element.File.Path) -}}
         <!-- headless page -->
         {{- else -}}
-            {{- $thumbnail := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.url) $element.Params.Thumbnail) -}}
+            {{- $thumbnail := "" -}}
+            {{ if reflect.IsMap $element.Params.Thumbnail }}{{ $thumbnail = $element.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $element.Params.Thumbnail }}{{ end }}
             {{- $anchor := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.anchor) "") -}}
             {{- $params = merge $params (dict
                 "title" $element.Title
