@@ -58,7 +58,7 @@
     {{ else }}
         {{ $paginator = $args.page.Paginate $list }}
     {{ end }}
-    {{ $list = first $paginator.PageSize (after (mul (sub $paginator.PageNumber 1) $paginator.PageSize) $list) }}
+    {{ $list = first $paginator.PagerSize (after (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) $list) }}
 {{ end }}
 
 <!-- Initialize list elements -->
