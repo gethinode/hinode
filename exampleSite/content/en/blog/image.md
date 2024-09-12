@@ -14,7 +14,7 @@ As an example, the following shortcode displays an image with rounded corners an
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* image src="https://res.cloudinary.com/demo/image/upload/dog.webp"
+{{</* image src="https://res.cloudinary.com/demo/dog.webp"
     ratio="21x9" caption="Cloudinary image" class="rounded" plain=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
