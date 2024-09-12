@@ -14,7 +14,7 @@
 {{- end -}}
 
 {{- /* Initialize module configuration */ -}}
-{{- $modules := partial "utilities/InitModules.html" (dict "page" .) -}}
+{{- $modules := partialCached "utilities/InitModules.html" . -}}
 {{- $.Scratch.Set "modules" $modules -}}
 
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
@@ -27,7 +27,7 @@
 {{- $.Scratch.Set "sections" $sections -}}
 
 {{- /* Define main breakpoint */ -}}
-{{- $.Scratch.Set "breakpoint" (partial "utilities/GetBreakpoint.html") }}
+{{- $.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
 
 {{- /* Define base URL */ -}}
 {{ $lang := site.LanguageCode | default site.Language.Lang }}

@@ -1,5 +1,3 @@
-{{ $page := .page }}
-
 {{ $core := slice }}
 {{ $optional := slice }}
 {{ $excludeSCSS := slice }}
@@ -7,7 +5,7 @@
 {{ $localize := slice }}
 {{ $modules := dict }}
 
-{{ range $key, $mod := $page.Site.Params.modules }}
+{{ range $key, $mod := .Site.Params.modules }}
     {{ if eq $key "core" }}
         {{ warnf "DEPRECATED: module parameter `core` has been deprecated in release v0.24.0" }}
         {{ $core = $core | append $mod }}
@@ -57,7 +55,7 @@
     "localize" $localize
 }}
 
-{{- if and $page.IsPage (not (in $core "bootstrap")) -}}
+{{- if and .IsPage (not (in $core "bootstrap")) -}}
     {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
 {{- end -}}
 
