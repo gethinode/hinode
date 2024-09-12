@@ -10,7 +10,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
   },
   dynamicAttributes: ['data-bs-theme'],
-  safelist: [
+  safelist: ['was-validated',
     ...whitelister([
       './_vendor/github.com/gethinode/hinode/assets/scss/components/_clipboard.scss',
       './_vendor/github.com/gethinode/hinode/assets/scss/components/_command.scss',
