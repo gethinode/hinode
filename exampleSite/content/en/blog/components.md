@@ -11,9 +11,6 @@ thumbnail:
   origin: Unsplash
   originURL: https://unsplash.com/photos/5siQcvSxCP8
 modules: ["leaflet", "lottie", "simple-datatables"]
-meta:
-  description: Meta desc
-  title: Meta title
 ---
 
 Hinode provides several shortcodes on top of the common [Bootstrap elements]({{% relref "bootstrap-elements" %}}). Refer to the [official documentation]({{% param "links.hinode_docs" %}}) for more details.
