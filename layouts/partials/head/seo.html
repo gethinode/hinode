@@ -1,13 +1,17 @@
 <!-- TODO: replace scratch with dict -->
 
 <!-- Adapted from doks -->
-{{ with .Title -}}
+{{ with .Params.meta.title }}
     {{ $.Scratch.Set "title" . -}}
-{{ else -}}
-    {{ $.Scratch.Set "title" .Site.Title -}}
-{{ end -}}
+{{ else }}
+    {{ with .Title -}}
+        {{ $.Scratch.Set "title" . -}}
+    {{ else -}}
+        {{ $.Scratch.Set "title" .Site.Title -}}
+    {{ end -}}
+{{ end }}
 
-{{ $description := or (partial "utilities/GetDescription.html" (dict "page" .)) .Site.Params.main.description }}
+{{ $description := or (partial "utilities/GetDescription.html" (dict "page" . "meta" true)) .Site.Params.main.description }}
 {{ if gt (strings.RuneCount $description) 150 }}
     {{ $description = print (substr $description 0 150) "..." }}
 {{ end }}
