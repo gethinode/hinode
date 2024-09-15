@@ -123,7 +123,7 @@ Hinode is inspired by the following themes:
 ## Donate
 
 <!-- markdownlint-disable MD033 -->
-<a href="https://www.buymeacoffee.com/markdumay" target="_blank" rel="noopener noreferrer"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;"></a>
+<a href="https://www.buymeacoffee.com/markdumay" target="_blank" rel="noopener noreferrer nofollow"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;"></a>
 <!-- markdownlint-enable MD033 -->
 
 ## License
