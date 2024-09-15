@@ -45,7 +45,7 @@
 {{- $rel := "" -}}
 {{- if and $isExternal $tab -}}
     {{- $target = "_blank" -}}
-    {{- $rel = "noopener noreferrer" -}}
+    {{- $rel = "noopener noreferrer nofollow" -}}
 {{- end -}}
 
 <!-- Inline partial to render the card's body -->

@@ -11,7 +11,7 @@ tagline = "A Hugo Theme"
 title = "Follow me"
 caption = "I work on everything coding and tweet developer memes"
 [en.params.footer]
-# license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+# license = "Licensed under Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer nofollow'>CC BY-NC-SA 4.0</a>)."
 # toml-docs-end lang-param
 [en.params.sections.blog]
 reference = "More Posts"
@@ -30,7 +30,7 @@ tagline = "Een Hugo Thema"
 title = "Volg mij"
 caption = "Ik doe aan programmeren en tweet memes"
 [nl.params.footer]
-# license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+# license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer nofollow'>CC BY-NC-SA 4.0</a>)."
 [nl.params.sections.blog]
 reference = "Meer artikelen"
 [nl.params.sections.projects]
@@ -49,7 +49,7 @@ tagline = "Un thème Hugo"
 title = "Suivez-moi"
 caption = "Je code et je tweet des mèmes de développeurs."
 [fr.params.footer]
-# license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer'>CC BY-NC-SA 4.0</a>)."
+# license = "Gelicenseerd onder Creative Commons (<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' class='link-secondary' target='_blank' rel='noopener noreferrer nofollow'>CC BY-NC-SA 4.0</a>)."
 [fr.params.sections.blog]
 reference = "Plus d'articles"
 [fr.params.sections.projects]
