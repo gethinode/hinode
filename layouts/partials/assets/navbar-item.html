@@ -42,7 +42,7 @@
 
 {{- if $isExternal }}
     {{- if $tab -}}
-        {{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer\"" }}
+        {{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer nofollow\"" }}
     {{- end -}}
 
     {{- if $cue -}}
