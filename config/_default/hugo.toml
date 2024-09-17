@@ -131,6 +131,8 @@ home = ["HTML", "RSS", "REDIR"]
   [[module.imports]]
     path = "github.com/gethinode/mod-fontawesome"
   [[module.imports]]
+    path = "github.com/gethinode/mod-google-analytics"
+  [[module.imports]]
     path = "github.com/gethinode/mod-katex"
   [[module.imports]]
     path = "github.com/gethinode/mod-leaflet"
