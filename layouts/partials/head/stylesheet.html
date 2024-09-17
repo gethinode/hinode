@@ -63,7 +63,7 @@
 -}}
 
 {{- $options := (dict "transpiler" $transpiler "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
-{{- $bundle := partial "utilities/bundle" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
+{{- $bundle := partial "utilities/bundle.html" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
 
 {{- if gt ($bundle.Content | len) 0 }}
     {{- $css := $bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
