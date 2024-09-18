@@ -17,7 +17,7 @@ arguments:
     comment: >-
       Defines the loading behavior of the script bundle. By default, scripts are
       loaded immediately. Use `async` to process the script in the background.
-      Use 'defer' to load the script in relative order when the DOM is fully
+      Use `defer` to load the script in relative order when the DOM is fully
       built.
     options:
       values:
@@ -30,26 +30,7 @@ arguments:
     default: other
     comment: >-
       Assigns the script to a category that can be used for cookie consent
-      management. The following categories are available:
-      - Necessary cookies are linked to the site's essential features, which include
-        secure log-in and customizable consent settings. There is no personally
-        identifying information stored by these cookies.
-      - Functional cookies facilitate the performance of specific tasks, such as
-        gathering user comments, disseminating the website's content on social
-        media, and enabling additional third-party capabilities. Hinode uses
-        functional cookies to store the user's language and theme preferences.
-      - Cookies with analytical functions are employed to comprehend how users
-        engage with the website. These cookies aid in the provision of data on
-        metrics like number of visitors, bounce rate, source of traffic, etc.
-      - In order to provide users with a better user experience, performance
-        cookies are employed to comprehend and evaluate the website's important
-        performance indicators.
-      - Advertisement cookies are used to track the success of ad campaigns and
-        show users personalized advertisements depending on the pages they have
-        previously viewed.
-      - Unassigned cookies are categorized as 'other' by default. These cookies
-        should be reviewed and assigned to a specific category by the site
-        administrator.
+      management.
     options:
       values:
         - necessary

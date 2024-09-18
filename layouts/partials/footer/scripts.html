@@ -148,7 +148,7 @@
             {{ end }}
         {{ end }}
     {{ else }}
-    <!-- Bundle the core scripts by module name and category -->
+    <!-- Bundle the optional scripts by module name and category -->
     {{ range $cat, $val := $categories }}
             {{ range $val }}
                 {{ $modconfig := index $config.modules . }}
