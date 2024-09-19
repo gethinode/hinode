@@ -4,14 +4,14 @@
 (() => {
   'use strict'
 
-  // Function to get the selected language from localStorage
+  // Function to get the selected language from local storage
   function getLanguage () {
-    return localStorage.getItem('selectedLanguage')
+    return getLocalStorage('selectedLanguage', document.documentElement.lang, 'functional')
   }
 
-  // Function to set the selected language in localStorage
+  // Function to set the selected language in local storage
   function setLanguage (language) {
-    localStorage.setItem('selectedLanguage', language)
+    setLocalStorage('selectedLanguage', language, 'functional')
   }
   
   // Function to apply the selected language to the website
