@@ -2,8 +2,8 @@
 
 module.exports = require('neostandard')({
   ignores: [
-    'assets/js/critical/languageSelector.js',
-    'assets/js/critical/color.js',
+    'assets/js/functional/languageSelector.js',
+    'assets/js/functional/color.js',
     'assets/js/analytics.js',
     'assets/js/flexsearch.js',
     'assets/js/navbar.js',
