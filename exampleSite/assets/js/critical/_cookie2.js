@@ -8,7 +8,9 @@ class CookieYesManager {
   #consent
 
   updateConsent () {
-    this.#consent = getCkyConsent()
+    if (window.getCkyConsent) {
+      this.#consent = getCkyConsent()
+    }
   }
 
   constructor () {
@@ -28,6 +30,7 @@ class CookieYesManager {
 }
 
 _manager = new CookieYesManager()
+document.addEventListener("cookieyes_consent_update", function () { _manager.updateConsent() })
 
     {{ else }}
         {{ warnf "Cannot find CookieYes ID, check 'params.modules.cookieyes.id'" }}
