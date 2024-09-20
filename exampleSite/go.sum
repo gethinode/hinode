@@ -2,6 +2,8 @@ github.com/gethinode/hinode v0.22.5 h1:zpjSDgWQVbq4BjPduxwexQB18gawFeinzPkaRRTs2
 github.com/gethinode/hinode v0.22.5/go.mod h1:hsskrlBRnTbpCjrDtGbK8C1VYGML7ezHtCDGDiYL2mQ=
 github.com/gethinode/mod-bootstrap v1.2.2 h1:Q8E04OKWr9owk7nhQ/NBukUgSFhsECxZsOLEaf5oeiQ=
 github.com/gethinode/mod-bootstrap v1.2.2/go.mod h1:DcpPc2cNaXUPGEvhD7npuEEPA7573NvakTlrwFbyjr8=
+github.com/gethinode/mod-cookieyes v1.0.0 h1:KTkK67uugji9pzYJJalvNhdECHgG1DzPtyeaYL0Xm/0=
+github.com/gethinode/mod-cookieyes v1.0.0/go.mod h1:VrBUKm5apop6KIb+R8eRqvlf3AAPnv5aMajL0RorIjY=
 github.com/gethinode/mod-flexsearch v1.9.0 h1:AE+w7QeZTxh36JNTG+CASDLxaqlCZKn+EUD6ulnPGak=
 github.com/gethinode/mod-flexsearch v1.9.0/go.mod h1:L8hrnpupx27cez2ObMX8gWnhbW6qss4HGH1Ea4UaBRQ=
 github.com/gethinode/mod-fontawesome v1.8.1 h1:iyvULrpaGizQoI5Vl9WjFYcMGWefdyG90NGK2UKax+k=
