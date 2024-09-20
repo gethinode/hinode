@@ -77,6 +77,7 @@
 <!-- Initialize local arguments -->
 {{ $patterns := dict 
     "critical" "js/critical/**.js"
+    "functional" "js/functional/**.js"
     "core" "{js/*.js,js/vendor/**.js}"
 }}
 
@@ -84,7 +85,7 @@
 {{ $state := "immediate" }}
 
 {{ $config := dict }}
-    {{ if ne $args.type "critical" }}
+    {{ if not (in (slice "critical" "functional") $args.type) }}
     {{ $config = $args.page.Scratch.Get "modules" }}
     {{ if not $config }}
         {{ errorf "partial [footer/scripts.html] - Cannot initialize module configuration" }}
@@ -120,12 +121,13 @@
 
 <!-- Main code -->
 {{ if not $error }}
-    <!-- Bundle the critical scripts as single file -->
-    {{ if eq $args.type "critical" }}
+    <!-- Bundle the critical and functional scripts as single file -->
+    {{ if in (slice "critical" "functional") $args.type }}
         {{ partial "partials/bundle-script.html" (dict 
             "page" $args.page
             "match" (index $patterns $args.type)
-            "destination" (printf "js/%s.bundle.js" $args.type)
+            "destination" (printf "js/%s.bundle.js" "critical")
+            "cat" (cond (eq $args.type "functional") $args.type "")
             "localize" $localize
             "skipTemplate" $skipTemplate
             "absoluteURL" $absoluteURL
