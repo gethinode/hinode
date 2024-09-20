@@ -2,9 +2,10 @@
 
 let _manager
 
-function loadScriptSync (src) {
+function loadScriptSync (src, id) {
   const s = document.createElement('script')
   s.src = src
+  s.id = id
   s.type = 'text/javascript'
   s.async = false
   document.getElementsByTagName('head')[0].appendChild(s)

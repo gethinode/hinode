@@ -14,7 +14,7 @@ class CookieYesManager {
   }
 
   constructor () {
-    loadScriptSync('https://cdn-cookieyes.com/client_data/{{ (. | urlize) }}/script.js')
+    loadScriptSync('https://cdn-cookieyes.com/client_data/{{ (. | urlize) }}/script.js', 'cookieyes')
     this.updateConsent()
   }
 
