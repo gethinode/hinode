@@ -191,3 +191,9 @@
     observatory = "https://observatory.mozilla.org/analyze/demo.gethinode.com"
     pagespeed = "https://pagespeed.web.dev/report?url=https%3A%2F%2Fdemo.gethinode.com%2F"
     hinode = "https://gethinode.com"
+
+[modules.cookieyes]
+    state = "immediate"
+    category = "necessary"
+    id = "a54b5553f349dd13bd225f8e"
+    force = true
