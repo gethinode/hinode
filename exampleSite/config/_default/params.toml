@@ -193,7 +193,5 @@
     hinode = "https://gethinode.com"
 
 [modules.cookieyes]
-    state = "immediate"
-    category = "necessary"
     id = "a54b5553f349dd13bd225f8e"
-    force = true
+    force = false
