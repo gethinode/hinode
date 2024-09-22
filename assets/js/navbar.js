@@ -7,7 +7,10 @@ const colorsBG = ['body', 'secondary', 'tertiary']
 function updateNavbar () {
   if (window.scrollY > 75) {
     navbar.classList.add('nav-active')
-    const storedTheme = getLocalStorage('theme', null, 'functional')
+    let storedTheme
+    if (typeof getLocalStorage === "function") {
+      storedTheme = getLocalStorage('theme', null, 'functional')
+    }
     if (storedTheme) {
       navbar.setAttribute('data-bs-theme', storedTheme)
     }

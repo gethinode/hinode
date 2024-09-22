@@ -88,11 +88,11 @@ home = ["HTML", "RSS", "REDIR"]
   # Build and serve using local hinode clone declared in the named Hugo workspace:
   workspace = "hinode.work"
   [[module.imports]]
+    path = "github.com/gethinode/mod-cookieyes"
+  [[module.imports]]
     path = "github.com/gethinode/hinode"
   [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap"
-  [[module.imports]]
-    path = "github.com/gethinode/mod-cookieyes"
   [[module.imports]]
     path = "github.com/gethinode/mod-flexsearch/v2"
   [[module.imports]]
