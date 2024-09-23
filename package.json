@@ -76,7 +76,7 @@
   },
   "devDependencies": {
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
-    "eslint": "^9.10.0",
+    "eslint": "^9.11.0",
     "markdownlint-cli2": "^0.14.0",
     "neostandard": "^0.11.5",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
