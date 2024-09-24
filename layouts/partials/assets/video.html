@@ -63,7 +63,7 @@
 <!-- Main code -->
 {{ if not $error -}}
     {{ if eq $host "youtube" }}
-        {{- $host := cond $pc.PrivacyEnhanced  "www.youtube-nocookie.com" "www.youtube.com" -}}
+        {{- $host := cond $pc.PrivacyEnhanced "www.youtube-nocookie.com" "www.youtube.com" -}}
         {{ $url := printf "https://%s/embed/%s?origin=%s" $host $id $page.Site.BaseURL }}
         {{ $api := printf "https://www.youtube.com/oembed?format=json&url=%s" (printf "https://www.youtube.com/watch?v=%s" $id) }}
         {{ $padding := "56.25%" }}

@@ -2,4 +2,6 @@ module github.com/gethinode/hinode/exampleSite
 
 go 1.19
 
-require github.com/gethinode/mod-cookieyes v1.0.2 // indirect
+require (
+	github.com/gethinode/mod-cookieyes/v2 v2.0.3 // indirect
+)

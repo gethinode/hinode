@@ -36,9 +36,7 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
-        {{/*- partial "footer/scripts.html" (dict "page" . "type" "critical") -*/}}
-        <script src="https://cdn-cookieyes.com/client_data/a54b5553f349dd13bd225f8e/script.js" id="cookieyes" type="text/javascript"></script>
-        {{- partial "footer/scripts.html" (dict "page" . "type" "functional") -}}
+        {{- partial "footer/scripts.html" (dict "page" . "type" "critical") -}}
         {{ block "head" . }}{{ end -}}
     </head>
 

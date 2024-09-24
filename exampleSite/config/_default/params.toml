@@ -15,7 +15,7 @@
         transpiler = "dartsass"
 
 [debugging]
-    showJS = true
+    showJS = false
     showSCSS = false
     purgeHTMLComments = true # prevents a Goldmark warning when processing HTML comments (as used by markdownlint)
     includeSVGOrigin = true
@@ -193,5 +193,5 @@
     hinode = "https://gethinode.com"
 
 [modules.cookieyes]
-    id = "a54b5553f349dd13bd225f8e"
-    force = false
+    # local = true
+    url = "https://cdn-cookieyes.com/client_data/a54b5553f349dd13bd225f8e/script.js"

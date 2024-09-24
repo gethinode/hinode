@@ -1,2 +1,5 @@
 github.com/gethinode/mod-cookieyes v1.0.0 h1:KTkK67uugji9pzYJJalvNhdECHgG1DzPtyeaYL0Xm/0=
 github.com/gethinode/mod-cookieyes v1.0.0/go.mod h1:VrBUKm5apop6KIb+R8eRqvlf3AAPnv5aMajL0RorIjY=
+github.com/gethinode/mod-cookieyes v1.0.2 h1:WL9sjpYKjkV+jRKIrm6H82UpthQjFksvKGptW6HD/QU=
+github.com/gethinode/mod-cookieyes v1.0.2/go.mod h1:VrBUKm5apop6KIb+R8eRqvlf3AAPnv5aMajL0RorIjY=
+github.com/gethinode/mod-cookieyes/v2 v2.0.3/go.mod h1:tULb7D7CoTycGUyL7ryqHJKaX11XuL2SN+XwP7/DI0Y=
