@@ -62,7 +62,6 @@
     {{ end -}}
 {{ end }}
 
-
 <!-- Initialize arguments -->
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "scripts" "args" .) }}
 {{ if $args.err }}
@@ -76,22 +75,17 @@
 
 <!-- Initialize local arguments -->
 {{ $patterns := dict 
-    "critical" "js/critical/**.js"
-    "functional" "js/functional/**.js"
+    "other" "js/critical/*.js"
+    "functional" "js/critical/functional/**.js"
+    "analytics" "js/critical/analytics/**.js"
+    "performance" "js/critical/performance/**.js"
+    "advertisement" "js/critical/advertisement/**.js"
     "core" "{js/*.js,js/vendor/**.js}"
 }}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{ $state := "immediate" }}
-
-{{ $config := dict }}
-    {{ if not (in (slice "critical" "functional") $args.type) }}
-    {{ $config = $args.page.Scratch.Get "modules" }}
-    {{ if not $config }}
-        {{ errorf "partial [footer/scripts.html] - Cannot initialize module configuration" }}
-        {{ $error = true }}
-    {{ end }}
-{{ end }}
+{{ $config := $args.page.Scratch.Get "modules" }}
 
 {{ $page_modules := slice }}
 {{ if reflect.IsMap $args.page.Params.modules }}
@@ -101,11 +95,20 @@
 {{ end }}
 {{ with $args.page.Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
 
+{{- $categories := dict "other" slice -}}
+
 {{ $modules := slice }}
-{{ if eq $args.type "core" }}
+{{ if eq $args.type "critical" }}
+    {{- $modules = $config.critical -}}
+    {{ $categories = merge $categories (dict "functional" slice "analytics" slice "performance" slice "advertisement" slice) }}
+{{ else if eq $args.type "core" }}
     {{- $modules = $config.core -}}
 {{ else if eq $args.type "optional" }}
     {{- $modules = $config.optional | intersect $page_modules  -}}
+{{ end }}
+
+{{ range $cat, $val := $config.categories }}
+    {{ $categories = merge $categories (dict $cat (intersect $val $modules)) }}
 {{ end }}
 
 {{ $localize := false }}
@@ -114,44 +117,46 @@
 {{ $skipTemplate := false }}
 {{ if gt (intersect (or $config.skipTemplate slice) $modules | len) 0 }}{{ $skipTemplate = true }}{{ end }}
 
-{{- $categories := dict "other" slice -}}
-{{ range $cat, $val := $config.categories }}
-    {{ $categories = merge $categories (dict $cat (intersect $val $modules)) }}
-{{ end }}
-
 <!-- Main code -->
 {{ if not $error }}
-    <!-- Bundle the critical and functional scripts as single file -->
-    {{ if in (slice "critical" "functional") $args.type }}
-        {{ partial "partials/bundle-script.html" (dict 
-            "page" $args.page
-            "match" (index $patterns $args.type)
-            "destination" (printf "js/%s.bundle.js" "critical")
-            "cat" (cond (eq $args.type "functional") $args.type "")
-            "localize" $localize
-            "skipTemplate" $skipTemplate
-            "absoluteURL" $absoluteURL
-        )}} 
-    <!-- Bundle the core scripts by category -->
-    {{ else if eq $args.type "core" }}
+    <!-- include external scripts first -->
+    {{ range $mod, $cfg := $config.modules }}
+        {{ if eq (index $cfg "integration") $args.type }}
+            {{ if or (index $cfg "local") (not hugo.IsServer) }}
+                {{ with index $cfg "url" }}
+                    {{ partial "templates/script.html" (dict "link" . "category" (index $cfg "category") "state" (index $cfg "state")) }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+    <!-- Bundle the critical and core scripts by category -->
+    {{ if ne $args.type "optional" }}
         {{ range $cat, $val := $categories }}
-            {{ if gt ($val | len) 0 }}
+            {{ if or (gt ($val | len) 0) (eq $args.type "critical") }}
+                {{ $match := "" }}
+                {{ if eq $args.type "critical" }}
+                    {{ $match = index $patterns $cat }}
+                {{ else if eq $cat "other" }}
+                    {{ $match = index $patterns $args.type }}
+                {{ end }}
+
                 {{ partial "partials/bundle-script.html" (dict 
                     "page" $args.page
-                    "match" (cond (eq $cat "other") (index $patterns $args.type) "")
+                    "match" $match
                     "destination" (printf "js/%s.bundle.js" $args.type)
                     "cat" $cat
                     "modules" $val
                     "localize" $localize
                     "skipTemplate" $skipTemplate
                     "absoluteURL" $absoluteURL
-                    "state" "async"
+                    "state" (cond (eq $args.type "critical") "immediate" "async")
                 )}} 
             {{ end }}
         {{ end }}
     {{ else }}
-    <!-- Bundle the optional scripts by module name and category -->
-    {{ range $cat, $val := $categories }}
+        <!-- Bundle the optional scripts by module name and category -->
+        {{ range $cat, $val := $categories }}
             {{ range $val }}
                 {{ $modconfig := index $config.modules . }}
                 {{ partial "partials/bundle-script.html" (dict 

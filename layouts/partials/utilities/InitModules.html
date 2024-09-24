@@ -1,3 +1,4 @@
+{{ $critical := slice }}
 {{ $core := slice }}
 {{ $optional := slice }}
 {{ $excludeSCSS := slice }}
@@ -9,7 +10,9 @@
 {{ range $key, $mod := .Site.Params.modules }}
     {{ if reflect.IsMap $mod }}
         {{ $integration := index $mod "integration" }}
-        {{ if eq $integration "core" }}
+        {{ if eq $integration "critical" }}
+            {{ $critical = $critical | append $key }}
+        {{ else if eq $integration "core" }}
             {{ $core = $core | append $key }}
         {{ else if eq $integration "optional" }}
             {{ $optional = $optional | append $key }}
@@ -43,6 +46,7 @@
 
 {{ $modules := dict 
     "modules" $modules
+    "critical" $critical
     "core" $core
     "optional" $optional
     "excludeSCSS" $excludeSCSS
