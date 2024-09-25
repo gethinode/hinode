@@ -1,0 +1,29 @@
+// cky-audit-table-style
+.cky-cookie-audit-table {
+    --#{$prefix}table-bg: #{$table-bg};
+    --#{$prefix}table-striped-color: #{$table-striped-color};
+    --#{$prefix}table-striped-bg: #{$table-striped-bg};    
+}
+
+.cky-cookie-audit-table th {
+    background: var(--#{$prefix}table-bg);
+    border: inherit;
+}
+
+.cky-cookie-audit-table td {
+    border: inherit;
+}
+
+.cky-cookie-audit-table th,
+.cky-cookie-audit-table td {
+    color: inherit;
+}
+
+.cky-cookie-audit-table tr:nth-child(2n + 1) td {
+    background: var(--#{$prefix}table-striped-bg);
+    color: var(--#{$prefix}table-striped-color);
+}
+
+.cky-cookie-audit-table tr:nth-child(2n) td {
+    background: var(--#{$prefix}table-bg);
+}
