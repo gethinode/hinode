@@ -6,24 +6,24 @@
 }
 
 .cky-cookie-audit-table th {
-    background: var(--#{$prefix}table-bg);
-    border: inherit;
+    background: var(--#{$prefix}table-bg) !important;
+    border: inherit !important;
 }
 
 .cky-cookie-audit-table td {
-    border: inherit;
+    border: inherit !important;
 }
 
 .cky-cookie-audit-table th,
 .cky-cookie-audit-table td {
-    color: inherit;
+    color: inherit !important;
 }
 
 .cky-cookie-audit-table tr:nth-child(2n + 1) td {
-    background: var(--#{$prefix}table-striped-bg);
-    color: var(--#{$prefix}table-striped-color);
+    background: var(--#{$prefix}table-striped-bg) !important;
+    color: var(--#{$prefix}table-striped-color) !important;
 }
 
 .cky-cookie-audit-table tr:nth-child(2n) td {
-    background: var(--#{$prefix}table-bg);
+    background: var(--#{$prefix}table-bg) !important;
 }
