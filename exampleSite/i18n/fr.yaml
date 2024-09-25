@@ -1,0 +1,7 @@
+# Privacy & Cookie settings
+- id: privacy
+  translation: "Confidentialité"
+- id: cookies
+  translation: "Cookies"
+- id: cookieSettings
+  translation: "Paramètres des cookies"
