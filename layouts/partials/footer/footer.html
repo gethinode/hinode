@@ -4,7 +4,6 @@
             {{- $copyright := printf "%s © %s %s %s." (T "copyright") (dateFormat "2006" now) .Site.Title (T "rights") }}
             {{ cond (gt (len .Site.Copyright) 0) .Site.Copyright $copyright }}
             {{ .Site.Params.footer.license | safeHTML }} |
-            <a class="cky-banner-element link-bg-footer">{{ T "cookieSettings" }}</a> |
             {{ if .Site.Params.main.endorse }}
                 {{ $link := partial "assets/link.html" (dict "destination" (index site.Params.links "hinode") "text" "Hinode" "class" "link-bg-footer" "page" .Page) }}
                 {{ T "poweredBy" $link | safeHTML }}
