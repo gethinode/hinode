@@ -21,9 +21,9 @@
 
 {{ if $core }}
     {{- if reflect.IsSlice $config.excludeSCSS -}}
-        {{- $modules = complement $config.excludeSCSS (or $config.core slice) -}}
+        {{- $modules = complement $config.excludeSCSS (append $config.core $config.critical) -}}
     {{ else }}
-        {{- $modules = $config.core -}}
+        {{- $modules = append $config.core $config.critical -}}
     {{ end }}
 {{- end -}}
 
