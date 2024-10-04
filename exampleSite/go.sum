@@ -1,14 +1,1 @@
-github.com/gethinode/hinode v0.22.5 h1:zpjSDgWQVbq4BjPduxwexQB18gawFeinzPkaRRTs2Tg=
-github.com/gethinode/hinode v0.22.5/go.mod h1:hsskrlBRnTbpCjrDtGbK8C1VYGML7ezHtCDGDiYL2mQ=
-github.com/gethinode/mod-bootstrap v1.2.2 h1:Q8E04OKWr9owk7nhQ/NBukUgSFhsECxZsOLEaf5oeiQ=
-github.com/gethinode/mod-bootstrap v1.2.2/go.mod h1:DcpPc2cNaXUPGEvhD7npuEEPA7573NvakTlrwFbyjr8=
-github.com/gethinode/mod-flexsearch v1.9.0 h1:AE+w7QeZTxh36JNTG+CASDLxaqlCZKn+EUD6ulnPGak=
-github.com/gethinode/mod-flexsearch v1.9.0/go.mod h1:L8hrnpupx27cez2ObMX8gWnhbW6qss4HGH1Ea4UaBRQ=
-github.com/gethinode/mod-fontawesome v1.8.1 h1:iyvULrpaGizQoI5Vl9WjFYcMGWefdyG90NGK2UKax+k=
-github.com/gethinode/mod-fontawesome v1.8.1/go.mod h1:xBKsZH3WJtMOItZVlp9SbO51uaBy6IbvUZSKpNu3b6Y=
-github.com/gethinode/mod-katex v1.0.5 h1:AVhcTINYory0ygChQERf8PcyJkbT1oqhmLRF6ESnWOY=
-github.com/gethinode/mod-katex v1.0.5/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
-github.com/gethinode/mod-leaflet v1.0.0 h1:HdnWafOGkkK1hYGfqLYF3pp9dAFS/caxlzML9sO1rCc=
-github.com/gethinode/mod-leaflet v1.0.0/go.mod h1:Ei0x9WiL7Dbi4JeG6yI1CE63bT1QJ8sKi67Jea1wFSE=
-github.com/gethinode/mod-lottie v1.4.3 h1:IKZO8a4yQyPKUwZ6POsZRIH/B++yEzXDe5HxrFF79KA=
-github.com/gethinode/mod-lottie v1.4.3/go.mod h1:nt4wLnDFIhjBGRMuQJJ2bH80VREpbcsBUsdO6uWXjLs=
+github.com/gethinode/mod-cookieyes/v2 v2.0.3/go.mod h1:tULb7D7CoTycGUyL7ryqHJKaX11XuL2SN+XwP7/DI0Y=

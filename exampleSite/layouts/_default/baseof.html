@@ -37,7 +37,6 @@
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
     <head>
         {{- partial "footer/scripts.html" (dict "page" . "type" "critical") -}}
-        {{- partial "footer/scripts.html" (dict "page" . "type" "functional") -}}
         {{ block "head" . }}{{ end -}}
     </head>
 

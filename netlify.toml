@@ -4,12 +4,12 @@
     command = "npm run build:example"
 
 [build.environment]
-    DART_SASS_VERSION = "1.77.5"
-    HUGO_VERSION = "0.131.0"
+    DART_SASS_VERSION = "1.78.0"
+    HUGO_VERSION = "0.134.1"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
-    NODE_VERSION = "20.16.0"
-    NPM_VERSION = "10.8.1"
+    NODE_VERSION = "20.17.0"
+    NPM_VERSION = "10.8.2"
 # toml-docs-end netlify
 
 [[headers]]
@@ -21,19 +21,19 @@
         Content-Security-Policy = """\
             default-src 'self'; \
             child-src 'self' app.netlify.com; \
-            script-src 'self' \
+            script-src 'self' cdn-cookieyes.com \
                 https://*.netlify.app app.netlify.com netlify-cdp-loader.netlify.app \
                 https://*.google-analytics.com https://*.googletagmanager.com; \
-            style-src 'self' \
+            style-src 'self' 'unsafe-inline' \
                 https://*.netlify.app https://fonts.googleapis.com https://www.youtube.com; \
             object-src 'none'; \
             base-uri 'self'; \
-            connect-src 'self'
+            connect-src 'self' *.cookieyes.com cdn-cookieyes.com \
                 https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; \
             font-src 'self' https://*.netlify.app https://fonts.gstatic.com; \
             frame-src 'self' https://player.cloudinary.com https://player.vimeo.com https://www.youtube-nocookie.com https://www.youtube.com \
                 app.netlify.com; \
-            img-src 'self' data: https://*.imgix.net https://*.imagekit.io https://*.cloudinary.com https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
+            img-src 'self' data: cdn-cookieyes.com https://*.imgix.net https://*.imagekit.io https://*.cloudinary.com https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
             manifest-src 'self'; \
             media-src 'self' \
             """

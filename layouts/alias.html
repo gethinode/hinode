@@ -8,7 +8,8 @@
     <meta charset="utf-8">
     <noscript><meta http-equiv="refresh" content="0; url={{ .Permalink }}"></noscript>
     {{ if site.Params.main.enableLanguageSelectionStorage }} 
-      {{- partial "footer/scripts.html" (dict "filename" "js/critical.bundle.js" "match" "js/critical/**.js" "header" true "page" page) -}}
+      {{- partial "footer/scripts.html" (dict "page" page "type" "critical") -}}
+      {{- partial "footer/scripts.html" (dict "page" page "type" "functional") -}}
     {{ else }}
       <script src='{{ partial "utilities/GetStaticURL" (dict "url" "js/alias.js") }}'></script>
     {{ end }}

@@ -21,9 +21,9 @@
 
 {{ if $core }}
     {{- if reflect.IsSlice $config.excludeSCSS -}}
-        {{- $modules = complement $config.excludeSCSS (or $config.core slice) -}}
+        {{- $modules = complement $config.excludeSCSS (append $config.core $config.critical) -}}
     {{ else }}
-        {{- $modules = $config.core -}}
+        {{- $modules = append $config.core $config.critical -}}
     {{ end }}
 {{- end -}}
 
@@ -63,7 +63,7 @@
 -}}
 
 {{- $options := (dict "transpiler" $transpiler "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
-{{- $bundle := partial "utilities/bundle" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
+{{- $bundle := partial "utilities/bundle.html" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
 
 {{- if gt ($bundle.Content | len) 0 }}
     {{- $css := $bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}

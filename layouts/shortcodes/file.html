@@ -39,6 +39,11 @@
 {{ if isset .Params "full" }}{{ $full = partial "utilities/CastBool.html" (.Get "full") }}{{ end -}}
 {{- $class := .Get "class" | default "" -}}
 
+{{ if not (fileExists $file) }}
+    {{ warnf "Cannot find file: '%q'. See %s" $file $.Position }}
+    {{ $error = true }}
+{{ end }}
+
 <!-- Main code -->
 {{- if not $error -}}
     {{- /* Force-check if the file exists */ -}}

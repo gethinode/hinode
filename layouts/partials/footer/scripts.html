@@ -6,72 +6,170 @@
 
 {{ $error := false }}
 
-<!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "scripts" "args" . "group" "partial") }}
-    {{- errorf "partial [footer/scripts.html] - Invalid arguments" -}}
-    {{ $error = true }}
+<!-- Define inline partials -->
+{{ define "partials/match.html" }}
+    {{ $result := "" }}
+    {{ $matches := slice }}
+    {{ if gt (len .modules) 0 }}
+        {{ range .modules }}
+            {{ $matches = $matches | append (printf "js/modules/%s/**.js" .) }}
+        {{ end }}
+        {{ $result = printf "{%s}" (delimit $matches ",") }}
+    {{ end }}
+
+    {{ return $result }}
+{{ end }}
+
+{{ define "partials/bundle-script.html" }}
+    {{ $page := .page }}
+    {{ $match := .match }}
+    {{ $destination := .destination }}
+    {{ $cat := .cat }}
+    {{ $localize := .localize }}
+    {{ $modules := .modules }}
+    {{ $skipTemplate := .skipTemplate }}
+    {{ $absoluteURL := .absoluteURL }}
+    {{ $state := cond (ne .state "immediate") .state "" }}
+
+    {{ if and $cat (ne $cat "other") }}
+        {{ $destination = path.Join (path.Dir $destination) (printf "%s-%s%s" (path.BaseName $destination) $cat (path.Ext $destination)) }}
+    {{ end }}
+
+    {{ if $localize }}
+        {{ $destination = path.Join (path.Dir $destination) (printf "%s.%s%s" (path.BaseName $destination) $page.Language.Lang (path.Ext $destination)) }}
+    {{ end }}
+
+    {{- $bundle := partial "utilities/bundle.html" (dict
+        "match" $match
+        "filename" $destination
+        "modules" $modules
+        "basepath" "js/modules"
+        "all" true
+        "debugging" site.Params.debugging.showJS
+    ) -}}
+    {{- $js := $bundle -}}
+    {{- if not $skipTemplate -}}
+        {{- $js = $bundle | resources.ExecuteAsTemplate $destination $page -}}
+    {{- end -}}
+
+    {{- if gt (len $js.Content) 0 -}}
+        {{ $integrity := "" }}
+        {{- if hugo.IsProduction -}}
+            {{ $js = $js | minify | fingerprint -}}
+            {{ $integrity = $js.Data.Integrity }}
+        {{ end -}}
+        {{ partial "templates/script.html" (dict "link" (cond $absoluteURL $js.Permalink $js.RelPermalink) "category" $cat "state" $state "integrity" $integrity) }}
+    {{ end -}}
 {{ end }}
 
 <!-- Initialize arguments -->
-{{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
-{{- $filename := .filename | default "js/main.bundle.js" -}}
-{{- $match := .match | default "{js/*.js,js/vendor/**.js}" -}}
-{{- $page := .page -}}
-{{- $header := .header -}}
-{{- $core := .core | default false -}}
-{{- $skipTemplate := .skipTemplate | default false -}}
-{{- $localize := .localize | default false }}
-
-{{- $state := .state | default "async" -}}
-{{- if or $header (eq $state "immediate") }}{{ $state = "" }}{{ end -}}
-
-{{- $modules := "" -}}
-{{ if $core }}
-    {{ $config := $page.Scratch.Get "modules" }}
-    {{ if not $config }}
-        {{ errorf "partial [footer/scripts.html] - Cannot initialize module configuration" }}
-    {{ end }}
-
-    {{- $modules = $config.core -}}
-    {{- if reflect.IsSlice $config.localize -}}
-        {{- range $index, $mod := $modules -}}            
-            {{- if in $config.localize $mod}}
-                {{- $localize = true -}}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- end -}}
-
-{{ if $localize }}
-    {{ $filename = path.Join (path.Dir $filename) (printf "%s.%s%s" (path.BaseName $filename) $page.Language.Lang (path.Ext $filename)) }}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "scripts" "args" .) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "footer/scripts.html" 
+        "msg" "Invalid arguments"
+        "details" $args.errmsg
+        "file" page.File
+    )}}
 {{ end }}
 
+<!-- Initialize local arguments -->
+{{ $patterns := dict 
+    "other" "js/critical/*.js"
+    "functional" "js/critical/functional/**.js"
+    "analytics" "js/critical/analytics/**.js"
+    "performance" "js/critical/performance/**.js"
+    "advertisement" "js/critical/advertisement/**.js"
+    "core" "{js/*.js,js/vendor/**.js}"
+}}
+
+{{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
+{{ $state := "immediate" }}
+{{ $config := $args.page.Scratch.Get "modules" }}
+
+{{ $page_modules := slice }}
+{{ if reflect.IsMap $args.page.Params.modules }}
+    {{ $page_modules = $args.page.Params.modules }}
+{{ else }}
+    {{ $page_modules = $page_modules | append $args.page.Params.modules }}
+{{ end }}
+{{ with $args.page.Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
+
+{{- $categories := dict "other" slice -}}
+
+{{ $modules := slice }}
+{{ if eq $args.type "critical" }}
+    {{- $modules = $config.critical -}}
+    {{ $categories = merge $categories (dict "functional" slice "analytics" slice "performance" slice "advertisement" slice) }}
+{{ else if eq $args.type "core" }}
+    {{- $modules = $config.core -}}
+{{ else if eq $args.type "optional" }}
+    {{- $modules = $config.optional | intersect $page_modules  -}}
+{{ end }}
+
+{{ range $cat, $val := $config.categories }}
+    {{ $categories = merge $categories (dict $cat (intersect $val $modules)) }}
+{{ end }}
+
+{{ $localize := false }}
+{{ if gt (intersect (or $config.localize slice) $modules | len) 0 }}{{ $localize = true }}{{ end }}
+
+{{ $skipTemplate := false }}
+{{ if gt (intersect (or $config.skipTemplate slice) $modules | len) 0 }}{{ $skipTemplate = true }}{{ end }}
+
 <!-- Main code -->
-{{- $bundle := partial "utilities/bundle" (dict
-    "match" $match
-    "filename" $filename
-    "modules" $modules
-    "basepath" "js/modules"
-    "all" true
-    "debugging" site.Params.debugging.showJS
-) -}}
-{{- $js := $bundle -}}
-{{- if not $skipTemplate -}}
-    {{- $js = $bundle | resources.ExecuteAsTemplate $filename $page -}}
-{{- end -}}
+{{ if not $error }}
+    <!-- include external scripts first -->
+    {{ range $mod, $cfg := $config.modules }}
+        {{ if eq (index $cfg "integration") $args.type }}
+            {{ if or (index $cfg "local") (not hugo.IsServer) }}
+                {{ with index $cfg "url" }}
+                    {{ partial "templates/script.html" (dict "link" . "category" (index $cfg "category") "state" (index $cfg "state")) }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
 
-{{- if and (not hugo.IsServer) $header -}}
-    {{- $pc := site.Config.Privacy.GoogleAnalytics -}}
-    {{- if and (not $pc.Disable) (hasPrefix site.Config.Services.GoogleAnalytics.ID "G-") }}
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.Config.Services.GoogleAnalytics.ID }}"></script>
-    {{- end }}
-{{- end -}}
+    <!-- Bundle the critical and core scripts by category -->
+    {{ if ne $args.type "optional" }}
+        {{ range $cat, $val := $categories }}
+            {{ if or (gt ($val | len) 0) (eq $args.type "critical") }}
+                {{ $match := "" }}
+                {{ if eq $args.type "critical" }}
+                    {{ $match = index $patterns $cat }}
+                {{ else if eq $cat "other" }}
+                    {{ $match = index $patterns $args.type }}
+                {{ end }}
 
-{{- if gt (len $js.Content) 0 -}}
-    {{- if not hugo.IsProduction -}}
-        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}"{{ with $state }} {{ . | safeHTMLAttr }}{{ end }}></script>
-    {{ else -}}
-        {{ $js = $js | minify | fingerprint -}}
-        <script src="{{ if $absoluteURL }}{{ $js.Permalink }}{{ else }}{{ $js.RelPermalink }}{{ end }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"{{ with $state}} {{ . | safeHTMLAttr }}{{ end }}></script>
-    {{ end -}}
-{{ end -}}
+                {{ partial "partials/bundle-script.html" (dict 
+                    "page" $args.page
+                    "match" $match
+                    "destination" (printf "js/%s.bundle.js" $args.type)
+                    "cat" $cat
+                    "modules" $val
+                    "localize" $localize
+                    "skipTemplate" $skipTemplate
+                    "absoluteURL" $absoluteURL
+                    "state" (cond (eq $args.type "critical") "immediate" "async")
+                )}} 
+            {{ end }}
+        {{ end }}
+    {{ else }}
+        <!-- Bundle the optional scripts by module name and category -->
+        {{ range $cat, $val := $categories }}
+            {{ range $val }}
+                {{ $modconfig := index $config.modules . }}
+                {{ partial "partials/bundle-script.html" (dict 
+                    "page" $args.page
+                    "destination" (printf "js/%s.js" .)
+                    "cat" $cat
+                    "modules" (slice .)
+                    "localize" $modconfig.localize
+                    "skipTemplate" $modconfig.disabletemplate
+                    "absoluteURL" $absoluteURL
+                    "state" $modconfig.state
+                )}} 
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}

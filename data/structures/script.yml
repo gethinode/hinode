@@ -1,0 +1,46 @@
+comment: >-
+  Includes a reference to a local or external JavaScript file. Hinode uses the
+  template defined in `layouts/partials/templates/script.html` to generate the
+  link to a (bundled) JavaScript file. It includes context such as the state,
+  category, and integrity. For example, you can adapt this template to implement
+  cookie consent management.
+arguments:
+  link:
+    type: string
+    optional: false
+    comment: >-
+      Location of the script source, either an URL for an external script or a
+      (relative) path for a local script.
+  state:
+    type: select
+    optional: true
+    comment: >-
+      Defines the loading behavior of the script bundle. By default, scripts are
+      loaded immediately. Use `async` to process the script in the background.
+      Use `defer` to load the script in relative order when the DOM is fully
+      built.
+    options:
+      values:
+        - async
+        - defer
+        - immediate
+  category:
+    type: select
+    optional: true
+    default: other
+    comment: >-
+      Assigns the script to a category that can be used for cookie consent
+      management.
+    options:
+      values:
+        - necessary
+        - functional
+        - analytics
+        - performance
+        - advertisement
+        - other
+  integrity:
+    type: string
+    optional: true
+    comment: >-
+      Cryptographic hash of the script to enable Subresource Integrity (SRI).

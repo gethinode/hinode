@@ -1,28 +1,18 @@
-{{ $page := .page }}
-
+{{ $critical := slice }}
 {{ $core := slice }}
 {{ $optional := slice }}
 {{ $excludeSCSS := slice }}
 {{ $disableTemplate := slice }}
 {{ $localize := slice }}
+{{ $category := dict }}
 {{ $modules := dict }}
 
-{{ range $key, $mod := $page.Site.Params.modules }}
-    {{ if eq $key "core" }}
-        {{ warnf "DEPRECATED: module parameter `core` has been deprecated in release v0.24.0" }}
-        {{ $core = $core | append $mod }}
-    {{ else if eq $key "optional" }}
-        {{ warnf "DEPRECATED: module parameter `optional` has been deprecated in release v0.24.0" }}
-        {{ $optional = $optional | append $mod }}
-    {{ else if eq $key "excludescss" }}
-        {{ warnf "DEPRECATED: module parameter `excludeSCSS` has been deprecated in release v0.24.0" }}
-        {{ $excludeSCSS = $excludeSCSS | append $mod }}
-    {{ else if eq $key "disabletemplate" }}
-        {{ warnf "DEPRECATED: module parameter `disableTemplate` has been deprecated in release v0.24.0" }}
-        {{ $disableTemplate = $disableTemplate | append $mod }}
-    {{ else if reflect.IsMap $mod }}
+{{ range $key, $mod := .Site.Params.modules }}
+    {{ if reflect.IsMap $mod }}
         {{ $integration := index $mod "integration" }}
-        {{ if eq $integration "core" }}
+        {{ if eq $integration "critical" }}
+            {{ $critical = $critical | append $key }}
+        {{ else if eq $integration "core" }}
             {{ $core = $core | append $key }}
         {{ else if eq $integration "optional" }}
             {{ $optional = $optional | append $key }}
@@ -42,6 +32,12 @@
             {{ $localize = $localize | append $key }}
         {{ end }}
 
+        {{ $categoryKey := "other" }}
+        {{ with (index $mod "category") }}{{ $categoryKey = . }}{{ end }}
+        {{ $cat := index $category $categoryKey | default slice }}
+        {{ $cat = $cat | append $key}}
+        {{ $category = merge $category (dict $categoryKey $cat) }}
+
         {{ $modules = merge $modules (dict $key $mod) }}
     {{ else }}
         {{ warnf "Unsupported module parameter: %s" $key }}
@@ -50,14 +46,16 @@
 
 {{ $modules := dict 
     "modules" $modules
+    "critical" $critical
     "core" $core
     "optional" $optional
     "excludeSCSS" $excludeSCSS
     "disableTemplate" $disableTemplate
     "localize" $localize
+    "categories" $category
 }}
 
-{{- if and $page.IsPage (not (in $core "bootstrap")) -}}
+{{- if and .IsPage (not (in $core "bootstrap")) -}}
     {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
 {{- end -}}
 
