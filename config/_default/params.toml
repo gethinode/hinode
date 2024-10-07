@@ -204,3 +204,25 @@
 
 [links]
     hinode = "https://gethinode.com"
+
+[headers]
+  [headers.netlify]
+    source = "netlify.toml"
+
+[modules.hinode.csp]
+    style-src = ["www.youtube.com"]
+    font-src = ["fonts.gstatic.com"]
+    frame-src = [
+        "player.cloudinary.com",
+        "player.vimeo.com",
+        "www.youtube-nocookie.com",
+        "www.youtube.com"
+    ]
+    img-src = [
+        "data:",
+        "*.imgix.net",
+        "*.imagekit.io",
+        "*.cloudinary.com",
+        "i.vimeocdn.com",
+        "i.ytimg.com"
+    ]

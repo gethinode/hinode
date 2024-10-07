@@ -1,88 +1,61 @@
-# toml-docs-start netlify
+# Auto-generated file - do not modify
 [build]
-    publish = "exampleSite/public"
-    command = "npm run build:example"
+  command = 'npm run build:example'
+  publish = 'exampleSite/public'
 
-[build.environment]
-    DART_SASS_VERSION = "1.78.0"
-    HUGO_VERSION = "0.134.1"
-    HUGO_ENV = "production"
-    HUGO_ENABLEGITINFO = "true"
-    NODE_VERSION = "20.17.0"
-    NPM_VERSION = "10.8.2"
-# toml-docs-end netlify
+  [build.environment]
+    DART_SASS_VERSION = '1.78.0'
+    HUGO_ENABLEGITINFO = 'true'
+    HUGO_ENV = 'production'
+    HUGO_VERSION = '0.134.1'
+    NODE_VERSION = '20.17.0'
+    NPM_VERSION = '10.8.2'
 
-[[headers]]
-    for = "/*"
-    [headers.values]
-        Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-        X-Content-Type-Options = "nosniff"
-        X-XSS-Protection = "1; mode=block"
-        Content-Security-Policy = """\
-            default-src 'self'; \
-            child-src 'self' app.netlify.com; \
-            script-src 'self' cdn-cookieyes.com \
-                https://*.netlify.app app.netlify.com netlify-cdp-loader.netlify.app \
-                https://*.google-analytics.com https://*.googletagmanager.com; \
-            style-src 'self' 'unsafe-inline' \
-                https://*.netlify.app https://fonts.googleapis.com https://www.youtube.com; \
-            object-src 'none'; \
-            base-uri 'self'; \
-            connect-src 'self' *.cookieyes.com cdn-cookieyes.com \
-                https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; \
-            font-src 'self' https://*.netlify.app https://fonts.gstatic.com; \
-            frame-src 'self' https://player.cloudinary.com https://player.vimeo.com https://www.youtube-nocookie.com https://www.youtube.com \
-                app.netlify.com; \
-            img-src 'self' data: cdn-cookieyes.com https://*.imgix.net https://*.imagekit.io https://*.cloudinary.com https://*.netlify.app https://i.vimeocdn.com https://i.ytimg.com https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org; \
-            manifest-src 'self'; \
-            media-src 'self' \
-            """
-        X-Frame-Options = "SAMEORIGIN"
-        Referrer-Policy = "strict-origin"
-        Permissions-Policy = """\
-            geolocation=(), \
-            midi=(), \
-            sync-xhr=(), \
-            microphone=(), \
-            camera=(), \
-            magnetometer=(), \
-            gyroscope=(), \
-            payment=() \
-            """
-        cache-control = """\
-            max-age=0, \
-            no-cache, \
-            no-store, \
-            must-revalidate \
-            """
-        Access-Control-Allow-Origin = "*"
+[context]
+  [context.branch-deploy]
+    command = 'npm run build:example -- -b $DEPLOY_PRIME_URL'
 
-[context.deploy-preview]
-    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
-
-[context.branch-deploy]
-    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+  [context.deploy-preview]
+    command = 'npm run build:example -- -b $DEPLOY_PRIME_URL'
 
 [dev]
-    framework = "#custom"
-    command = "npm run start:example"
-    targetPort = 1313
-    port = 8888
-    publish = "public"
-    autoLaunch = false
-
-# toml-docs-start plugins
-[[plugins]]
-    package = "@gethinode/netlify-plugin-dartsass"
+  autoLaunch = false
+  command = 'npm run start:example'
+  framework = '#custom'
+  port = 8888
+  publish = 'public'
+  targetPort = 1313
 
 [[plugins]]
-    package = "netlify-plugin-hugo-cache-resources"
-	[plugins.inputs]
-	# Redirected in exampleSite/config/_default/hugo.toml
-	# srcdir = ""
+  package = '@gethinode/netlify-plugin-dartsass'
 
-# [[plugins]]
-    # package = "@netlify/plugin-lighthouse"
-    # [plugins.inputs]
-    # output_path = "reports/lighthouse.html"
-# toml-docs-end plugins
+[[plugins]]
+  package = 'netlify-plugin-hugo-cache-resources'
+
+[[headers]]
+  for = '/**'
+
+  [headers.values]
+    Access-Control-Allow-Origin = '*'
+    Content-Security-Policy = """
+        base-uri 'self'; \
+        connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com; \
+        default-src 'none'; \
+        font-src 'self' fonts.gstatic.com; \
+        form-action 'self'; \
+        frame-src player.cloudinary.com player.vimeo.com www.youtube-nocookie.com www.youtube.com; \
+        img-src 'self' *.google-analytics.com *.googletagmanager.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.vimeocdn.com i.ytimg.com tile.openstreetmap.org; \
+        manifest-src 'self'; \
+        media-src 'self'; \
+        object-src 'none'; \
+        script-src 'self' *.google-analytics.com *.googletagmanager.com; \
+        style-src 'self' www.youtube.com; \
+        """
+    Permissions-Policy = 'geolocation=(), midi=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), fullscreen=(), payment=() '
+    Referrer-Policy = 'strict-origin'
+    Strict-Transport-Security = 'max-age=31536000; includeSubDomains; preload'
+    X-Content-Type-Options = 'nosniff'
+    X-Frame-Options = 'SAMEORIGIN'
+    X-XSS-Protection = '1; mode=block'
+    cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
+

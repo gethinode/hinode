@@ -1,4 +1,5 @@
 _vendor/
+prebuild/
 public/
 resources/
 node_modules/

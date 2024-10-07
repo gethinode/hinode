@@ -24,6 +24,12 @@ github.com/gethinode/mod-bootstrap v1.3.0 h1:UxNmXgXo7gA8C8z1ar47+tSccmKYpaYBBN+
 github.com/gethinode/mod-bootstrap v1.3.0/go.mod h1:CL9IDot6nbXIWJYE/KxfsTdYYEJIGL17BXbAYPn+wVQ=
 github.com/gethinode/mod-bootstrap v1.3.1 h1:ZUX72St0WZ5tyXpEPBJlayX/dmCH3cGErzsozkUKCok=
 github.com/gethinode/mod-bootstrap v1.3.1/go.mod h1:CL9IDot6nbXIWJYE/KxfsTdYYEJIGL17BXbAYPn+wVQ=
+github.com/gethinode/mod-csp v1.0.0 h1:Obp0MVMBjIPZbKDh6Ejl5pImDG7yERMLf2or9UVnwPA=
+github.com/gethinode/mod-csp v1.0.0/go.mod h1:Nb22QMicoUHgZQUKP5TCgVrSI8K3KU7jLuLBShmotjg=
+github.com/gethinode/mod-csp v1.0.1 h1:IUUwPc41UNw7DAFuJ75nNPzhkPExenxXU7susdLaxdQ=
+github.com/gethinode/mod-csp v1.0.1/go.mod h1:Nb22QMicoUHgZQUKP5TCgVrSI8K3KU7jLuLBShmotjg=
+github.com/gethinode/mod-csp v1.0.2 h1:KX8EeoCGbHhGSo5r0YIa9BmPZ6S6v7L9CChTejREkK4=
+github.com/gethinode/mod-csp v1.0.2/go.mod h1:Nb22QMicoUHgZQUKP5TCgVrSI8K3KU7jLuLBShmotjg=
 github.com/gethinode/mod-flexsearch v1.0.1 h1:FJkRsUzSnQTXl3MWCigT4E6vfff870UWTnkGqaDGIhA=
 github.com/gethinode/mod-flexsearch v1.0.1/go.mod h1:TXbGbWsvmhBdsTzRt887mcpFfr4ORpzG3+h/l4W3YM4=
 github.com/gethinode/mod-flexsearch v1.1.0 h1:7BCMyQDlYlskNXuazt8Jg/jg9WREexu2xVkYqThkAX4=
@@ -126,6 +132,8 @@ github.com/gethinode/mod-google-analytics v1.0.2 h1:ljrAYdAPqiQg6rdnL6Je8zLK6mhl
 github.com/gethinode/mod-google-analytics v1.0.2/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-google-analytics v1.0.3 h1:QUm4AeBR6D9cLx26F6Cy5qQvQe/19c2wTJAqxmCfAq4=
 github.com/gethinode/mod-google-analytics v1.0.3/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
+github.com/gethinode/mod-google-analytics v1.1.1 h1:XzMXd6nBDl5Lj1Q5pd8MWtE87FI/vRCsUAkAvfuXDxE=
+github.com/gethinode/mod-google-analytics v1.1.1/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-google-analytics v1.1.2 h1:mcoqaRRorut+PxYxJnOEMfKIlVIIOd6vxKhuEYTwFzw=
 github.com/gethinode/mod-google-analytics v1.1.2/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
