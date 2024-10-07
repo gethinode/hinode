@@ -126,6 +126,8 @@ github.com/gethinode/mod-google-analytics v1.0.2 h1:ljrAYdAPqiQg6rdnL6Je8zLK6mhl
 github.com/gethinode/mod-google-analytics v1.0.2/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-google-analytics v1.0.3 h1:QUm4AeBR6D9cLx26F6Cy5qQvQe/19c2wTJAqxmCfAq4=
 github.com/gethinode/mod-google-analytics v1.0.3/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
+github.com/gethinode/mod-google-analytics v1.1.2 h1:mcoqaRRorut+PxYxJnOEMfKIlVIIOd6vxKhuEYTwFzw=
+github.com/gethinode/mod-google-analytics v1.1.2/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
@@ -170,6 +172,8 @@ github.com/gethinode/mod-leaflet v1.1.0 h1:FXzPCic5XmUluxQ6e7LYUhhLnxuQOBwry8qjG
 github.com/gethinode/mod-leaflet v1.1.0/go.mod h1:Ei0x9WiL7Dbi4JeG6yI1CE63bT1QJ8sKi67Jea1wFSE=
 github.com/gethinode/mod-leaflet v1.1.1 h1:AIHR4k8SjmeoZxtjLgSS6/N3jKeZNZGdZTgu/7MwP4c=
 github.com/gethinode/mod-leaflet v1.1.1/go.mod h1:Ei0x9WiL7Dbi4JeG6yI1CE63bT1QJ8sKi67Jea1wFSE=
+github.com/gethinode/mod-leaflet v1.2.0 h1:5q5LHmGNi9N4cdRDCsl/6oI8vY3oQ2ogNUjP3NCnk4Y=
+github.com/gethinode/mod-leaflet v1.2.0/go.mod h1:Ei0x9WiL7Dbi4JeG6yI1CE63bT1QJ8sKi67Jea1wFSE=
 github.com/gethinode/mod-lottie v1.0.0 h1:1CUZMcgN5FAyjjyuP3qkaOQ6M5sv6HUAbosW4sIT5VE=
 github.com/gethinode/mod-lottie v1.0.0/go.mod h1:erRCgSL2FCfKHI0jQbSpM+g0jXl7SjKVJrh7kWGteKs=
 github.com/gethinode/mod-lottie v1.0.1 h1:+IE7xtnSVQpJS56oBJq9RWKZeFEfxrOZAqE3BSrS/u0=
