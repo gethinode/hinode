@@ -20,17 +20,39 @@ languageCode = "en-us"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 
-[outputFormats.REDIR]
-mediaType = "text/netlify"
-baseName = "_redirects"
-isPlainText = true
-notAlternative = true
+[outputFormats]
+  [outputFormats.netlify]
+    mediaType = "application/toml"
+    baseName = "netlify"
+    isPlainText = true
+    notAlternative = true
+    permalinkable = true
+    root = true
+  [outputFormats.server]
+    mediaType = "application/toml"
+    baseName = "server"
+    isPlainText = true
+    notAlternative = true
+    permalinkable = true
+    root = true
+  [outputFormats.XML]
+    isPlainText = false
+    mediaType = "application/xml"
+    isHtml = false
+    noUgly = true
+    permalinkable = false
+    name = "xml"
+  [outputFormats.REDIR]
+    mediaType = "text/netlify"
+    baseName = "_redirects"
+    isPlainText = true
+    notAlternative = true
 
 [mediaTypes."text/netlify"]
 delimiter = ""
 
 [outputs]
-home = ["HTML", "RSS", "REDIR"]
+home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 
 [build]
   writeStats = true
@@ -67,15 +89,6 @@ home = ["HTML", "RSS", "REDIR"]
   [services.googleAnalytics]
     ID = "G-T85PPZ36GN"
 
-[outputFormats]
-  [outputFormats.XML]
-    isPlainText = false
-    mediaType = "application/xml"
-    isHtml = false
-    noUgly = true
-    permalinkable = false
-    name = "xml"
-
 [minify]
   [minify.tdewolff.js]
     keepVarNames = true
@@ -83,6 +96,12 @@ home = ["HTML", "RSS", "REDIR"]
     version = 2022
   [minify.tdewolff.html]
     keepWhitespace = true
+
+[segments]
+  [segments.headers]
+    [[segments.headers.includes]]
+       kind = '{home}'
+       output = '{netlify,server}'
 
 [module]
   # Build and serve using local hinode clone declared in the named Hugo workspace:
@@ -93,6 +112,8 @@ home = ["HTML", "RSS", "REDIR"]
     path = "github.com/gethinode/hinode"
   [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap"
+  [[module.imports]]
+    path = "github.com/gethinode/mod-csp"
   [[module.imports]]
     path = "github.com/gethinode/mod-flexsearch/v2"
   [[module.imports]]
