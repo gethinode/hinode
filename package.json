@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "0.27.0-beta2",
+  "version": "0.27.0-beta3",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -20,7 +20,7 @@
     "prestart": "npm run -s mod:vendor",
     "start": "hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings",
     "start:example": "npm run -s prestart && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings -s exampleSite",
-    "start:prod": "npm run -s prestart  && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings --minify -e production",
+    "start:prod": "npm run -s prestart && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings --minify -e production",
     "start:example:prod": "npm run -s prestart  && hugo server --bind=0.0.0.0 --disableFastRender --printI18nWarnings --minify -e production -s exampleSite",
     "prebuild": "npm run clean:public && npm run -s mod:vendor",
     "build": "hugo --gc --minify",
@@ -28,6 +28,8 @@
     "build:example": "npm run -s prebuild && hugo --gc --minify -s exampleSite",
     "build:example:ci": "npm run -s prebuild && hugo --gc --minify -s exampleSite -e ci",
     "build:debug": "hugo -e debug --debug",
+    "build:headers": "hugo --renderSegments headers -d prebuild && cpy prebuild/server.toml config/_default/ --flat",
+    "build:example:headers": "hugo -s exampleSite --renderSegments headers -d prebuild && cpy exampleSite/prebuild/netlify.toml ./ --flat && cpy exampleSite/prebuild/server.toml exampleSite/config/_default/ --flat",
     "build:preview": "npm run build -D -F",
     "clean:public": "rimraf public exampleSite/public",
     "clean:install": "rimraf package-lock.json node_modules",
@@ -76,6 +78,7 @@
   },
   "devDependencies": {
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
+    "cpy-cli": "^5.0.0",
     "eslint": "^9.11.1",
     "markdownlint-cli2": "^0.14.0",
     "neostandard": "^0.11.6",

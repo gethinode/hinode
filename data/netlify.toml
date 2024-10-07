@@ -1,0 +1,35 @@
+# toml-docs-start netlify
+[build]
+    publish = "exampleSite/public"
+    command = "npm run build:example"
+
+[build.environment]
+    DART_SASS_VERSION = "1.78.0"
+    HUGO_VERSION = "0.134.1"
+    HUGO_ENV = "production"
+    HUGO_ENABLEGITINFO = "true"
+    NODE_VERSION = "20.17.0"
+    NPM_VERSION = "10.8.2"
+# toml-docs-end netlify
+
+[context.deploy-preview]
+    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+
+[dev]
+    framework = "#custom"
+    command = "npm run start:example"
+    targetPort = 1313
+    port = 8888
+    publish = "public"
+    autoLaunch = false
+
+# toml-docs-start plugins
+[[plugins]]
+    package = "@gethinode/netlify-plugin-dartsass"
+
+[[plugins]]
+    package = "netlify-plugin-hugo-cache-resources"
+# toml-docs-end plugins
