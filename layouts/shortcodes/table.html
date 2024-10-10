@@ -41,6 +41,9 @@
 {{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
 {{ if $paging }}{{ $attributes = printf "%s data-table-paging=true" $attributes }}{{ end }}
 {{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
+{{ $attributes = printf "%s data-table-locale='$site.Language.Lang'" $attributes }}
+{{ $labels := dict "placeholder" (T "tablePlaceholder") "searchTitle" (T "tablesSearchTitle") "perPage" (T "tablesPerPage") "noRows" (T "tablesNoRows") "noResults" (T "tablesNoResults") "info" (T "tablesInfo") }}
+{{ $attributes = printf "%s data-table-labels='%s'" $attributes ($labels | jsonify) }}
 
 {{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
 {{ $input := replaceRE $regex $new $input 1 -}}
