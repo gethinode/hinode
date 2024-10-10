@@ -74,6 +74,7 @@
                             "title" $item.Title
                             "class" $class
                             "color" $color
+                            "href" $item.Params.href
                             "content" (partial "utilities/GetDescription.html" (dict "page" $item))
                             "thumbnail" $thumbnail
                         ) -}}
