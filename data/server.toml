@@ -1,0 +1,41 @@
+# toml-docs-start server-config
+[[headers]]
+    for = "/**"
+    [headers.values]
+        Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options = "nosniff"
+        X-XSS-Protection = "1; mode=block"
+        X-Frame-Options = "SAMEORIGIN"
+        Referrer-Policy = "strict-origin"
+        Permissions-Policy = """\
+            geolocation=(), \
+            midi=(), \
+            sync-xhr=(), \
+            microphone=(), \
+            camera=(), \
+            magnetometer=(), \
+            gyroscope=(), \
+            fullscreen=(), \
+            payment=() \
+            """
+        cache-control = """\
+            max-age=0, \
+            no-cache, \
+            no-store, \
+            must-revalidate \
+            """
+        Access-Control-Allow-Origin = "*"
+        Content-Security-Policy = """\
+            default-src 'none'; \
+            script-src 'self'; \
+            font-src 'self'; \
+            connect-src 'self'; \
+            img-src 'self'; \
+            style-src 'self'; \
+            base-uri 'self'; \
+            object-src 'none'; \
+            form-action 'self'; \
+            manifest-src 'self'; \
+            media-src 'self' \
+            """
+# toml-docs-end server-config
