@@ -1,3 +1,4 @@
+# toml-docs-start server-config
 [[headers]]
     for = "/**"
     [headers.values]
@@ -37,3 +38,4 @@
             manifest-src 'self'; \
             media-src 'self' \
             """
+# toml-docs-end server-config
