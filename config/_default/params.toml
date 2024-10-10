@@ -205,10 +205,13 @@
 [links]
     hinode = "https://gethinode.com"
 
+# toml-docs-start headers
 [headers]
   [headers.netlify]
     source = "netlify.toml"
+# toml-docs-end headers
 
+# toml-docs-start csp
 [modules.hinode.csp]
     style-src = ["www.youtube.com"]
     font-src = ["fonts.gstatic.com"]
@@ -226,3 +229,4 @@
         "i.vimeocdn.com",
         "i.ytimg.com"
     ]
+# toml-docs-end csp
