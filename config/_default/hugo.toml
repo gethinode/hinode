@@ -28,16 +28,16 @@ defaultContentLanguageInSubdir = false
 
 # toml-docs-start headers
 [outputFormats]
-  [outputFormats.netlify]
+  [outputFormats.server]
     mediaType = "application/toml"
-    baseName = "netlify"
+    baseName = "server"
     isPlainText = true
     notAlternative = true
     permalinkable = true
     root = true
-  [outputFormats.server]
+  [outputFormats.netlify]
     mediaType = "application/toml"
-    baseName = "server"
+    baseName = "netlify"
     isPlainText = true
     notAlternative = true
     permalinkable = true
