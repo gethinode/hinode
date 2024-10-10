@@ -26,4 +26,29 @@
     X-Frame-Options = 'SAMEORIGIN'
     X-XSS-Protection = '1; mode=block'
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
+# toml-docs-end server-config
+
+# 404 redirects
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = true
+
+[[redirects]]
+	from = '/nl/**'
+	to = '/nl/404.html'
+	status = 404
+
+[[redirects]]
+	from = '/fr/**'
+	to = '/fr/404.html'
+	status = 404
+
+[[redirects]]
+	from = '/en/**'
+	to = '/en/404.html'
+	status = 404
+
+[[redirects]]  # Default language should be last.
+	from = '/**'
+	to = '/en/404.html'
+	status = 404
 
