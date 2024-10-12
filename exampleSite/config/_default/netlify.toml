@@ -1,0 +1,19 @@
+[[redirects]]
+	from = '/fr/**'
+	to = '/fr/404.html'
+	status = 404
+
+[[redirects]]
+	from = '/nl/**'
+	to = '/nl/404.html'
+	status = 404
+
+[[redirects]]
+	from = '/en/**'
+	to = '/en/404.html'
+	status = 404
+
+[[redirects]]  # Default language should be last.
+	from = '/**'
+	to = '/en/404.html'
+	status = 404
