@@ -27,25 +27,23 @@
     X-XSS-Protection = '1; mode=block'
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
 
-
-defaultContentLanguage = 'en'
-defaultContentLanguageInSubdir = true
 [[redirects]]
-	from = '/fr/**'
-	to = '/fr/404.html'
-	status = 404
+  from = '/fr/**'
+  status = 404
+  to = '/fr/404.html'
 
 [[redirects]]
-	from = '/nl/**'
-	to = '/nl/404.html'
-	status = 404
+  from = '/nl/**'
+  status = 404
+  to = '/nl/404.html'
 
 [[redirects]]
-	from = '/en/**'
-	to = '/en/404.html'
-	status = 404
+  from = '/en/**'
+  status = 404
+  to = '/en/404.html'
 
-[[redirects]]  # Default language should be last.
-	from = '/**'
-	to = '/en/404.html'
-	status = 404
+[[redirects]]
+  from = '/**'
+  status = 404
+  to = '/en/404.html'
+
