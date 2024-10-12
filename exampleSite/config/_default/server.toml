@@ -7,17 +7,17 @@
     Access-Control-Allow-Origin = '*'
     Content-Security-Policy = """
         base-uri 'self'; \
-        connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com; \
+        connect-src 'self' *.cookieyes.com cdn-cookieyes.com *.google-analytics.com *.analytics.google.com *.googletagmanager.com; \
         default-src 'none'; \
         font-src 'self' fonts.gstatic.com; \
         form-action 'self'; \
         frame-src player.cloudinary.com player.vimeo.com www.youtube-nocookie.com www.youtube.com; \
-        img-src 'self' *.google-analytics.com *.googletagmanager.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.vimeocdn.com i.ytimg.com tile.openstreetmap.org; \
+        img-src 'self' cdn-cookieyes.com *.google-analytics.com *.googletagmanager.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.vimeocdn.com i.ytimg.com tile.openstreetmap.org; \
         manifest-src 'self'; \
         media-src 'self'; \
         object-src 'none'; \
-        script-src 'self' *.google-analytics.com *.googletagmanager.com; \
-        style-src 'self' www.youtube.com; \
+        script-src 'self' cdn-cookieyes.com *.google-analytics.com *.googletagmanager.com; \
+        style-src 'self' 'unsafe-inline' www.youtube.com; \
         """
     Permissions-Policy = 'geolocation=(), midi=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), fullscreen=(), payment=() '
     Referrer-Policy = 'strict-origin'
@@ -28,22 +28,22 @@
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
 
 [[redirects]]
-  from = '/fr/**'
+  from = '/fr/*'
   status = 404
   to = '/fr/404.html'
 
 [[redirects]]
-  from = '/nl/**'
+  from = '/nl/*'
   status = 404
   to = '/nl/404.html'
 
 [[redirects]]
-  from = '/en/**'
+  from = '/en/*'
   status = 404
   to = '/en/404.html'
 
 [[redirects]]
-  from = '/**'
+  from = '/*'
   status = 404
   to = '/en/404.html'
 
