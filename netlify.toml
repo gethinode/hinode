@@ -59,3 +59,23 @@
     X-XSS-Protection = '1; mode=block'
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
 
+[[redirects]]
+  from = '/fr/**'
+  status = 404
+  to = '/fr/404.html'
+
+[[redirects]]
+  from = '/nl/**'
+  status = 404
+  to = '/nl/404.html'
+
+[[redirects]]
+  from = '/en/**'
+  status = 404
+  to = '/en/404.html'
+
+[[redirects]]
+  from = '/**'
+  status = 404
+  to = '/en/404.html'
+
