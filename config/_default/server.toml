@@ -8,7 +8,7 @@
     Content-Security-Policy = """
         base-uri 'self'; \
         connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com; \
-        default-src 'none' 'self'; \
+        default-src 'none'; \
         font-src 'self' fonts.gstatic.com; \
         form-action 'self'; \
         frame-src player.cloudinary.com player.vimeo.com www.youtube-nocookie.com www.youtube.com; \
