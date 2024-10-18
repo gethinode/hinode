@@ -52,11 +52,12 @@
 {{- $page := "" }}
 {{- if .path }}
     {{ $page = partial "utilities/GetPage.html" (dict "url" .path "page" page) }}
-    {{- if not $page }}
+    {{ $validate := site.Params.main.internalLinks.validate | default true }}
+    {{- if and $validate (not $page) }}
         {{ if page.File }}
-            {{- errorf "partial [assets/card.html] - Cannot find target page '%s', see '%s'" .path page.File.Path -}}
+            {{- warnf "partial [assets/card.html] - Cannot find target page '%s', see '%s'" .path page.File.Path -}}
         {{ else }}
-            {{- errorf "partial [assets/card.html] - Cannot find target page '%s'" .path -}}
+            {{- warnf "partial [assets/card.html] - Cannot find target page '%s'" .path -}}
         {{ end }}
     {{- end }}
 {{- end }}

@@ -8,6 +8,8 @@
     footerBelowFold = false
     loading = "lazy"
     breakpoint = "md"
+    [main.internalLinks]
+        validate = true
     [main.externalLinks]
         cue = true
         tab = true
