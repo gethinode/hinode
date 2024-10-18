@@ -52,11 +52,12 @@
 {{- $page := "" }}
 {{- if .path }}
     {{ $page = partial "utilities/GetPage.html" (dict "url" .path "page" page) }}
-    {{- if not $page }}
+    {{ $validate := site.Params.main.internalLinks.validate | default true }}
+    {{- if and $validate (not $page) }}
         {{ if page.File }}
-            {{- errorf "partial [assets/card.html] - Cannot find target page '%s', see '%s'" .path page.File.Path -}}
+            {{- warnf "partial [assets/card.html] - Cannot find target page '%s', see '%s'" .path page.File.Path -}}
         {{ else }}
-            {{- errorf "partial [assets/card.html] - Cannot find target page '%s'" .path -}}
+            {{- warnf "partial [assets/card.html] - Cannot find target page '%s'" .path -}}
         {{ end }}
     {{- end }}
 {{- end }}
@@ -95,7 +96,7 @@
     
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
-                <p class="card-title fs-lg-5 fs-6 fw-bold">{{ $title }}</p>
+                <p class="card-title fs-lg-5 fs-6">{{ $title }}</p>
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -104,7 +105,7 @@
         </a>
     {{- else -}}
         <div>
-            {{ with $title }}<p class="card-title fs-lg-5 fs-6 fw-bold">{{ . }}</p>{{ end -}}
+            {{ with $title }}<p class="card-title fs-lg-5 fs-6">{{ . }}</p>{{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
