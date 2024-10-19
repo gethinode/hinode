@@ -46,7 +46,7 @@
 {{ if eq .Kind "404" -}}
     <meta name="robots" content="noindex, follow">
 {{ else }}
-  {{ with .Params.robots -}}
+  {{ with or .Params.robots .Params.meta.robots -}}
     <meta name="robots" content="{{ . }}">
   {{ else -}}
     <meta name="robots" content="index, follow">
