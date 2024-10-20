@@ -58,7 +58,7 @@
                 {{ partial "assets/button.html" (dict "toast" $target "clipboard" $clipboard "href" $url "icon" (printf "%s fa-fw" $item.icon) "class" "btn-social p-0" "label" (T "shareLink" $item.name) "spacing" false) }}
             {{- end -}}
             {{ if $page.Site.Params.sharing.webshare }}
-                {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
+                {{ $attr := dict "data-sharing-title" $page.Title "data-sharing-description" $page.Description "data-sharing-url" $page.Permalink }}
                 {{ partial "assets/button.html" (dict "href" "#!" "icon" "fas share-nodes fa-fw" "id" "btn-webshare" "class" "btn-social p-0" "attributes" $attr "label" (T "shareLink" (T "shareSystem")) "spacing" false) }}
             {{- end -}}
             {{ with $download }}
