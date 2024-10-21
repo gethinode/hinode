@@ -1,7 +1,7 @@
 {{ with .module }}
 	{{- $dependencies := page.Scratch.Get "dependencies" -}}
 	{{- if reflect.IsSlice $dependencies -}}
-		{{- $dependencies = complement $dependencies . -}}
+		{{- $dependencies = complement $dependencies (slice .) -}}
 	{{ else }}
 		{{- $dependencies = slice . -}}
 	{{ end }}
