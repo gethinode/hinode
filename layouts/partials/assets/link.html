@@ -13,7 +13,15 @@
 {{ end }}
 
 <!-- Initialize arguments -->
-{{ $destination := path.Clean (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination) }}
+{{ $destination := .destination }}
+{{ $u := urls.Parse $destination }}
+{{ if not $u.Scheme }}
+    {{ $b := urls.Parse site.BaseURL }}
+    {{ $destination = strings.TrimPrefix $b.Path $destination }}
+{{ else }}
+    {{ $destination = (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $destination) }}
+{{ end }}
+{{ $destination = path.Clean $destination }}
 {{ if not $destination }}{{ $destination = "/" }}{{ end }}
 
 {{- $target := "" -}}
