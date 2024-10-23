@@ -13,7 +13,7 @@
 {{ end }}
 
 <!-- Initialize arguments -->
-{{ $destination := strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination }}
+{{ $destination := path.Clean (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination) }}
 {{ if not $destination }}{{ $destination = "/" }}{{ end }}
 
 {{- $target := "" -}}
@@ -60,7 +60,9 @@
         {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
         {{- if not $ref -}}
             {{ $pageContext := "" }}
-            {{ with $page.File }}{{ $pageContext = path.Join "/content" .Dir }}{{ end }}
+            {{ with $page.File }}
+                {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
+            {{ end }}
             {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
             {{ $isStatic := fileExists (path.Join "static" $destination) }}
             {{ if and (not $isPageRes) (not $isStatic) }}
