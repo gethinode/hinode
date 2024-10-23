@@ -14,23 +14,22 @@ function webShareAPI (title, description, link) {
     .catch((error) => console.log('Error sharing', error))
 }
 
-const shareBtn = document.getElementById('btn-webshare')
-
-if (shareBtn !== null) {
+const shareButtons = document.querySelectorAll('[data-sharing-url]')
+shareButtons.forEach(btn => {
   if (navigator.share) {
-    const title = shareBtn.getAttribute('data-sharing-title')
-    const description = shareBtn.getAttribute('data-sharing-description')
-    const url = shareBtn.getAttribute('data-sharing-url')
+    const title = btn.getAttribute('data-sharing-title')
+    const description = btn.getAttribute('data-sharing-description')
+    const url = btn.getAttribute('data-sharing-url')
 
     // show button if it supports webShareAPI
-    shareBtn.style.display = 'block'
-    shareBtn.addEventListener('click', () =>
+    btn.style.display = 'block'
+    btn.addEventListener('click', () =>
       webShareAPI(title, description, url)
     )
   } else {
     // hide button if host does not support Web Share API
-    shareBtn.style.display = 'none'
+    btn.style.display = 'none'
   }
-}
+})
 
 {{- end -}}
