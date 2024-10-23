@@ -81,7 +81,9 @@
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url "page" .Page) }}
     {{- if not $ref -}}
         {{ $pageContext := "" }}
-        {{ with .Page.File }}{{ $pageContext = path.Join "/content" .Dir }}{{ end }}
+        {{ with .Page.File }}
+            {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
+        {{ end }}
         {{ $isPageRes := fileExists (path.Join $pageContext $url) }}
         {{ $isStatic := fileExists (path.Join "/static" $url) }}
         {{ if and (not $isPageRes) (not $isStatic) }}
