@@ -1,8 +1,11 @@
 /* eslint-disable */
-{{- if site.Params.main.enableLanguageSelectionStorage -}} 
+{{- if site.Params.main.enableLanguageSelectionStorage -}}
+{{- $folder := (urls.Parse site.BaseURL).Path | default "/" -}}
 
 (() => {
   'use strict'
+
+  const folder = '{{ $folder }}'
 
   // Function to get the selected language from local storage
   function getLanguage () {
@@ -22,7 +25,7 @@
           window.location.href = href
         }
       } else {
-        window.location.href = '/' + language + '/'
+        window.location.href = folder + language + '/'
       }
     }
   }
@@ -57,7 +60,7 @@
       // Redirect to the localized homepage
       const defaultLang = '{{ site.LanguageCode | default site.Language.Lang }}'
       let language = storedLanguage ? storedLanguage : defaultLang
-      window.location.href = '/' + language + '/'
+      window.location.href = folder + language + '/'
     }
   })
 })()
