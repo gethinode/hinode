@@ -18,14 +18,14 @@
 {{- define "partials/navbar-mode.html" -}}
     {{- $id := .id | default "navbar-mode" -}}
 
-    <div class="d-flex mode-switch align-items-center" id="{{ $id }}">
-        <input type="checkbox" class="checkbox navbar-mode-selector" id="{{ $id }}-checkbox" />
+    <li class="d-flex mode-switch align-items-center" id="{{ $id }}">
+        <input type="checkbox" class="checkbox navbar-mode-selector" id="{{ $id }}-checkbox" aria-label="{{ T "colorMode" }}" />
         <label class="label" for="{{ $id }}-checkbox">
             {{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false) }}
             {{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw" "spacing" false) }}
             <div class="ball"></div>
         </label>
-    </div>
+    </li>
 {{- end -}}
 
 <!-- Inline partial to render the version switcher -->
