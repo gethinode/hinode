@@ -85,10 +85,10 @@
             "size" "sm"
         )}}
     {{ else }}
-        <a class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{ . }}{{ end }}" 
+        {{ cond $menuURL "<a" "<div" | safeHTML }} class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{ . }}{{ end }}" 
             {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
             data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
-            {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTMLAttr }}"{{ with $externalHref }} {{ . | safeHTMLAttr }}{{ end }}{{ end }} {{ $button | safeHTMLAttr }}>
+            {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTML }}"{{ with $externalHref }} {{ . | safeHTML }}{{ end }}{{ end }} {{ $button | safeHTML }}>
             
             {{- with $menu.Pre }}
                 {{ if hasPrefix . "<i" }}
@@ -100,6 +100,6 @@
             <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $plain }}{{ $menu.Name }}{{ end }}</span>
             {{- with $menu.Post }}{{ . }}{{ end -}}
             {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
-        </a>
+        {{ cond $menuURL "</a>" "</div>" | safeHTML }}
     {{ end }}
 {{ end }}
