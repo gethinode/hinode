@@ -82,6 +82,7 @@
             {{- $params = merge $params (dict
                 "title" $element.Title
                 "href" $element.RelPermalink
+                "buttonLabel" $element.buttonLabel
                 "description" (partial "utilities/GetDescription.html" (dict "page" $element "raw" true))
                 "thumbnail" $thumbnail
                 "anchor" $anchor
@@ -143,7 +144,7 @@
                     "style" $args.style
                     "align" $args.align
                     "button" $args.button
-                    "buttonLabel" $args.buttonLabel
+                    "buttonLabel" $element.buttonLabel
                     "buttonType" $args.buttonType
                     "iconRounded" $args.iconRounded
                 ) -}}
