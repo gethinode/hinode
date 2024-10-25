@@ -121,7 +121,7 @@
 {{ if not $error }}
     <!-- include external scripts first -->
     {{ range $mod, $cfg := $config.modules }}
-        {{ if eq (index $cfg "integration") $args.type }}
+        {{ if in $modules $mod }}
             {{ if or (index $cfg "local") (not hugo.IsServer) }}
                 {{ with index $cfg "url" }}
                     {{ partial "templates/script.html" (dict "link" . "category" (index $cfg "category") "state" (index $cfg "state")) }}
