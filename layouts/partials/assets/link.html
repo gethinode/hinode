@@ -18,10 +18,10 @@
 {{ if not $u.Scheme }}
     {{ $b := urls.Parse site.BaseURL }}
     {{ $destination = strings.TrimPrefix $b.Path $destination }}
+    {{ $destination = path.Clean $destination }}
 {{ else }}
     {{ $destination = (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $destination) }}
 {{ end }}
-{{ $destination = path.Clean $destination }}
 {{ if not $destination }}{{ $destination = "/" }}{{ end }}
 
 {{- $target := "" -}}
