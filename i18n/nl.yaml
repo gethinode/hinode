@@ -160,3 +160,7 @@
   translation: Tip
 - id: warning
   translation: Waarschuwing
+
+# Image
+- id: image
+  translation: Bild

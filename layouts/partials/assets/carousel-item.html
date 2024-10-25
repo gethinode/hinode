@@ -20,10 +20,11 @@
 {{- $ratio := .ratio -}}
 {{- $portrait := .portrait -}}
 {{- $loading := .loading | default "eager" -}}
+{{- $title := .caption | default (T "image") -}}
 
 <!-- Main code -->
 <div class="carousel-item{{ if $active }} active{{ end }}" {{ if not $active }} fetchpriority="low"{{ end }}>
-    {{ partial "assets/image.html" (dict "url" $src "ratio" $ratio "page" $page "class" "d-block w-100" "portrait" $portrait "loading" $loading) }}
+    {{ partial "assets/image.html" (dict "url" $src "ratio" $ratio "page" $page "class" "d-block w-100" "portrait" $portrait "loading" $loading "title" $title) }}
     <div class="carousel-caption gradient"></div>
     {{ with $caption }}
         <div class="carousel-caption d-none d-md-block">

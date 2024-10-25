@@ -155,3 +155,7 @@
   translation: Tipp
 - id: warning
   translation: Warnung
+
+# Image
+- id: image
+  translation: Bild

@@ -149,3 +149,7 @@
   translation: "Commentaire"
 - id: supportedValues
   translation: "Valeurs supportées"
+
+# Image
+- id: image
+  translation: image
