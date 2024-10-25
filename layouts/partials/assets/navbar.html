@@ -295,12 +295,16 @@
                         </li>
                         <li><hr class="dropdown-divider-bg"></li>
     
-                        <a class="nav-link d-{{ $size }}-none" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
+                        <li class="d-{{ $size }}-none">
+                            <a class="nav-link" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
                             {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}&nbsp;{{ T "ui_search" }}
-                        </a>
-                        <a class="nav-link d-none d-{{ $size }}-block" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
+                            </a>
+                        </li>
+                        <li class="d-none d-{{ $size }}-block">
+                            <a class="nav-link" href="#!" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
                             {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}
-                        </a>
+                            </a>
+                        </li>
                     {{ end -}}
                 </ul>
             </div>
