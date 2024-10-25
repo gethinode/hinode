@@ -195,5 +195,4 @@
     hinode = "https://gethinode.com"
 
 [modules.cookieyes]
-    # local = true
     url = "https://cdn-cookieyes.com/client_data/a54b5553f349dd13bd225f8e/script.js"

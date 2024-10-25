@@ -11,12 +11,12 @@
         default-src 'none'; \
         font-src 'self' fonts.gstatic.com; \
         form-action 'self'; \
-        frame-src player.cloudinary.com player.vimeo.com www.youtube-nocookie.com www.youtube.com; \
-        img-src 'self' *.google-analytics.com *.googletagmanager.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.vimeocdn.com i.ytimg.com tile.openstreetmap.org; \
+        frame-src player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
+        img-src 'self' *.google-analytics.com *.googletagmanager.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.ytimg.com tile.openstreetmap.org i.vimeocdn.com; \
         manifest-src 'self'; \
         media-src 'self'; \
         object-src 'none'; \
-        script-src 'self' *.google-analytics.com *.googletagmanager.com; \
+        script-src 'self' *.google-analytics.com *.googletagmanager.com player.vimeo.com; \
         style-src 'self' www.youtube.com; \
         """
     Permissions-Policy = 'geolocation=(), midi=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), fullscreen=(), payment=() '

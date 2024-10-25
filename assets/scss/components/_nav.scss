@@ -1,4 +1,8 @@
-.nav-tabs > .nav-link.active {
+.nav-tabs .nav-tabs {
+    border: none;
+}
+
+.nav-tabs .nav-link.active {
     border-bottom-color: var(--bs-body-bg) !important;
     border-bottom-style: solid !important;
     z-index: 1;
@@ -12,13 +16,13 @@
     column-gap: var(--#{$prefix}nav-callout-gap) !important;
 }
 
-.nav-callout > .tab-content {
+.nav-callout + .tab-content {
     background-color: var(--#{$prefix}nav-callout-bg);
     padding: 2 * $spacer;
     margin-top: 0 !important;
 }
 
-.nav-callout > .nav-link {
+.nav-callout .nav-link {
     display: flex;
     text-align: start;
     vertical-align: text-top;
@@ -27,7 +31,7 @@
     border-bottom: none;
 }
 
-.nav-callout > .nav-link.active {
+.nav-callout .nav-link.active {
     background-image: linear-gradient(to top right, var(--#{$prefix}nav-callout-bg) 50%, transparent 0);
     background-size: 50% (3 * $spacer);
     background-repeat: no-repeat;
@@ -53,7 +57,7 @@
     }
 }
 
-.nav-callout > .accordion-item {
+.nav-callout .accordion-item {
     margin-top: 2 * $spacer;
     margin-bottom: 2 * $spacer;
     border: none;

@@ -52,46 +52,48 @@
         <div class="d-none d-lg-block">
     {{ end }}
 
-    <div class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
+    <ul class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
         {{- range $index, $item := $list -}}
             {{ $show := eq $index 0}}
-            <button class="nav-link {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
-                    type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
-                {{ $item.Title }}
-            </button>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
+                        type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
+                    {{ $item.Title }}
+                </button>
+            </li>
         {{ end -}}
+    </ul>
 
-        <div class="tab-content {{ if eq $type "tabs" }}border border-bottom-0  p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-            {{ range $index, $item := $list }}
-                {{ $header := $item.Title }}
-                {{ $body := $item.Content }}
-                {{ $show := eq $index 0}}
-                {{- $thumbnail := "" -}}
-                {{ if reflect.IsMap $item.Params.Thumbnail }}{{ $thumbnail = $item.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $item.Params.Thumbnail }}{{ end }}
-                <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
-                    {{- if eq $pane "persona" -}}
-                        {{- partial "assets/persona.html" (dict  
-                            "title" $item.Title
-                            "class" $class
-                            "color" $color
-                            "href" $item.Params.href
-                            "content" (partial "utilities/GetDescription.html" (dict "page" $item))
-                            "thumbnail" $thumbnail
-                        ) -}}
-                    {{- else -}}
-                        {{ $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) }}
-                        {{ if $illustration }}
-                            <div class="row">
-                                <div class="col-12 col-lg-10 order-1 order-lg-0">{{- (or $item.Description $item.Content) -}}</div>
-                                <div class="col-12 col-lg-2 order-0 order-lg-1">{{ $illustration | safeHTML }}</div>
-                            </div>
-                        {{ else }}
-                            {{- (or $item.Description $item.Content) -}}
-                        {{ end }}
-                    {{- end -}}
-                </div>    
-            {{ end }}
-        </div>
+    <div class="tab-content {{ if eq $type "tabs" }}border border-bottom-0  p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
+        {{ range $index, $item := $list }}
+            {{ $header := $item.Title }}
+            {{ $body := $item.Content }}
+            {{ $show := eq $index 0}}
+            {{- $thumbnail := "" -}}
+            {{ if reflect.IsMap $item.Params.Thumbnail }}{{ $thumbnail = $item.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $item.Params.Thumbnail }}{{ end }}
+            <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
+                {{- if eq $pane "persona" -}}
+                    {{- partial "assets/persona.html" (dict  
+                        "title" $item.Title
+                        "class" $class
+                        "color" $color
+                        "href" $item.Params.href
+                        "content" (partial "utilities/GetDescription.html" (dict "page" $item))
+                        "thumbnail" $thumbnail
+                    ) -}}
+                {{- else -}}
+                    {{ $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) }}
+                    {{ if $illustration }}
+                        <div class="row">
+                            <div class="col-12 col-lg-10 order-1 order-lg-0">{{- (or $item.Description $item.Content) -}}</div>
+                            <div class="col-12 col-lg-2 order-0 order-lg-1">{{ $illustration | safeHTML }}</div>
+                        </div>
+                    {{ else }}
+                        {{- (or $item.Description $item.Content) -}}
+                    {{ end }}
+                {{- end -}}
+            </div>    
+        {{ end }}
     </div>
 
     {{ if eq $type "callout" }}</div>{{ end }}

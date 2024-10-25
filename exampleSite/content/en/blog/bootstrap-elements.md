@@ -483,23 +483,3 @@ As an example, the following shortcode displays an Elephants video hosted by Clo
 {{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
-
-## Vimeo
-
-As an example, the following shortcode displays a Vimeo video.
-
-<!-- markdownlint-disable MD037 -->
-{{< example lang="hugo" >}}
-{{</* vimeo id="55073825" autoplay=true autotitle=true */>}}
-{{< /example >}}
-<!-- markdownlint-enable MD037 -->
-
-## Youtube
-
-As an example, the following shortcode displays a Hugo quickstart guide.
-
-<!-- markdownlint-disable MD037 -->
-{{< example lang="hugo" >}}
-{{</* youtube id="w7Ft2ymGmfc" autoplay=true autotitle=true */>}}
-{{< /example >}}
-<!-- markdownlint-enable MD037 -->

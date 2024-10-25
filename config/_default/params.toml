@@ -219,7 +219,6 @@
     font-src = ["fonts.gstatic.com"]
     frame-src = [
         "player.cloudinary.com",
-        "player.vimeo.com",
         "www.youtube-nocookie.com",
         "www.youtube.com"
     ]
@@ -228,7 +227,17 @@
         "*.imgix.net",
         "*.imagekit.io",
         "*.cloudinary.com",
-        "i.vimeocdn.com",
         "i.ytimg.com"
     ]
 # toml-docs-end csp
+
+[modules.vimeo]
+    local = true
+    integration = "optional"
+    state = "async"
+    url = "https://player.vimeo.com/api/player.js"
+
+[modules.vimeo.csp]
+    frame-src = ["player.vimeo.com"]
+    img-src = ["i.vimeocdn.com"]
+    script-src = ["player.vimeo.com"]
