@@ -82,7 +82,6 @@
             {{- $params = merge $params (dict
                 "title" $element.Title
                 "href" $element.RelPermalink
-                "buttonLabel" $element.buttonLabel
                 "description" (partial "utilities/GetDescription.html" (dict "page" $element "raw" true))
                 "thumbnail" $thumbnail
                 "anchor" $anchor
