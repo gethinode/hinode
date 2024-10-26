@@ -41,4 +41,5 @@ arguments:
   options:
     type: string
     optional: true
-    comment: Hugo highlighting options.  
+    comment: Hugo highlighting options.
+    release: v0.27.6
