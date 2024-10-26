@@ -25,6 +25,8 @@ strong {
 $black:                       #000 !default;
 $btn-toggle-color:              $black !default;
 
+$card-color:                    var(--bs-body-color);
+
 $carousel-dark-indicator-active-bg:  #fff !default;
 $carousel-dark-caption-color:        #fff !default;
 $carousel-dark-control-icon-filter:  invert(0) grayscale(100) !default;
