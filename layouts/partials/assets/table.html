@@ -10,7 +10,8 @@
 {{ $sortable := .sortable | default false }}
 {{ $paging := .paging | default false }}
 {{ $searchable := .searchable | default false }}
-
+{{ $pagingOptionPerPage := .pagingOptionPerPage }}
+{{ $pagingOptionPerPageSelect := .pagingOptionPerPageSelect }}
 {{- $responsiveVals := slice "table-responsive" "table-responsive-none" "table-responsive-sm" "table-responsive-md" "table-responsive-lg" "table-responsive-xl" "table-responsive-xxl" -}}
 {{- $responsive := intersect $args $responsiveVals -}}
 {{- $main := complement $responsive $args -}}
@@ -30,7 +31,11 @@
 
 {{ $attributes := "" }}
 {{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
-{{ if $paging }}{{ $attributes = printf "%s data-table-paging=true" $attributes }}{{ end }}
+{{ if $paging }}
+    {{ $attributes = printf "%s data-table-paging=true" $attributes }}
+    {{ $attributes := printf "%s data-table-paging-option-perPage=%s" $attributes $pagingOptionPerPage }}
+    {{ if (ne $pagingOptionPerPageSelect "") }}{{ $attributes := printf "%s data-table-paging-option-perPageSelect=%d" $attributes $pagingOptionPerPageSelect }}{{ end }}
+{{ end }}
 {{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
 
 {{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}

@@ -18,6 +18,8 @@
 {{ $sortable := false }}
 {{ $paging := false }}
 {{ $searchable := false }}
+{{ $pagingOptionPerPage := 10 }}
+{{ $pagingOptionPerPageSelect := "" }}
 
 {{- if .IsNamedParams -}}
     {{ $breakpoint = .Get "breakpoint" }}
@@ -25,6 +27,8 @@
     {{ if isset .Params "sortable" }}{{ $sortable = partial "utilities/CastBool.html" (.Get "sortable") }}{{ end }}
     {{ if isset .Params "paging" }}{{ $paging = partial "utilities/CastBool.html" (.Get "paging") }}{{ end }}
     {{ if isset .Params "searchable" }}{{ $searchable = partial "utilities/CastBool.html" (.Get "searchable") }}{{ end }}
+    {{ if isset .Params "pagingOptionPerPage" }}{{ $pagingOptionPerPage = (.Get "pagingOptionPerPage") }}{{ end }}
+    {{ if isset .Params "pagingOptionPerPageSelect" }}{{ $pagingOptionPerPageSelect = (.Get "OptionPerPageSelect") }}{{ end }}
 {{ else }}
     {{ $breakpoint = .Get 0 }}
 {{ end }}
@@ -39,8 +43,15 @@
 
 {{ $attributes := "" }}
 {{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
-{{ if $paging }}{{ $attributes = printf "%s data-table-paging=true" $attributes }}{{ end }}
+{{ if $paging }}
+    {{ $attributes = printf "%s data-table-paging=true" $attributes }}
+    {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $pagingOptionPerPage }}
+    {{ if (ne $pagingOptionPerPageSelect "") }}
+        {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes $pagingOptionPerPageSelect }}
+    {{ end }}
+{{ end }}
 {{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
+
 
 {{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
 {{ $input := replaceRE $regex $new $input 1 -}}

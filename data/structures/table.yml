@@ -35,6 +35,21 @@ arguments:
     optional: true
     comment: Whether paging is enabled for the table.
     release: v0.24.13
+  pagingOptionPerPage:
+    type: int
+    optional: true
+    comment: >-
+      Sets the maximum number of rows to display on each page. Requires
+      `paging = true`.
+    release: v0.27.8 
+  pagingOptionPageSelect:
+    type: string
+    optional: true
+    comment: >-
+      Sets the per page options in the dropdown. Must be an array of integers or
+      arrays in the format [label (string), value (int)]. Requires
+      `paging = true`. 
+    release: v0.27.8 
   searchable:
     type: bool
     optional: true

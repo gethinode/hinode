@@ -1,8 +1,8 @@
 ---
 author: Mark Dumay
-title: Components
+title: Componenten
 date: 2023-09-23
-description: Use shortcodes to add predefined components powered by external libraries.
+description: Gebruik shortcodes om diverse componenten vanuit een externe softwarebibliotheek toe te voegen.
 tags: ["bootstrap", "shortcode"]
 thumbnail:
   url: img/puzzle.jpg
@@ -13,11 +13,11 @@ thumbnail:
 modules: ["leaflet", "lottie", "simple-datatables"]
 ---
 
-Hinode provides several shortcodes on top of the common [Bootstrap elements]({{% relref "bootstrap-elements" %}}). Refer to the [official documentation]({{% param "links.hinode_docs" %}}) for more details.
+Hinode bevat meerdere shortcodes naast de generieke Bootstrap elementen. Zie de [officiële documentatie]({{% param "links.hinode_docs" %}}) voor meer informatie.
 
-## Animation
+## Animatie
 
-As an example, the following shortcode shows an animation that plays on hover.
+Het volgende voorbeeld gebruikt een shortcode om een animatie te tonen, die afspeelt zodra je er met de muis overheen beweegt.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
@@ -25,14 +25,14 @@ As an example, the following shortcode shows an animation that plays on hover.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-## Data tables
+## Gegevenstabellen
 
-As an example, the following shortcode displays a responsive table that uses advanced controls.
+Het volgende voorbeeld gebruikt een shortcode om een responsieve tabel met geavanceerde mogelijkheden te tonen.
 
 <!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
 {{</* table sortable="true" paging="true" searchable="true" pagingOptionPerPage=5 */>}}
-|  #  | Heading |
+|  #  | Kop     |
 |-----|---------|
 |  1. | Item 1  |
 |  2. | Item 2  |
@@ -68,22 +68,22 @@ As an example, the following shortcode displays a responsive table that uses adv
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-## Formula (KaTeX)
+## Formule (KaTeX)
 
-As an example, the following markdown renders two formulas using server-side math rendering using KaTeX.
+Het volgende voorbeeld gebruikt Markdown om twee formules met behulp van KaTeX op de server te genereren.
 
 {{< example lang="markdown" >}}
-This is an inline $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formula
+Dit is een inline $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formule
 
-This is not an inline formula:
+Dit is geen inline formule:
 
 $$x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}$$  
 $$\forall x \in X, \quad \exists y \leq \epsilon$$
 {{< /example >}}
 
-## Map
+## Kaart
 
-As an example, the following shortcode displays an interactive map of the city of Amsterdam.
+Het volgende voorbeeld gebruikt een shortcode om een interactieve kaart van Amsterdam te tonen.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
