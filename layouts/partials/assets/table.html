@@ -12,8 +12,6 @@
 {{ $searchable := .searchable | default false }}
 {{ $pagingOptionPerPage := .pagingOptionPerPage }}
 {{ $pagingOptionPerPageSelect := .pagingOptionPerPageSelect }}
-
-
 {{- $responsiveVals := slice "table-responsive" "table-responsive-none" "table-responsive-sm" "table-responsive-md" "table-responsive-lg" "table-responsive-xl" "table-responsive-xxl" -}}
 {{- $responsive := intersect $args $responsiveVals -}}
 {{- $main := complement $responsive $args -}}
