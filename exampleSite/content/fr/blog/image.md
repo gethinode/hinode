@@ -2,7 +2,7 @@
 author: Mark Dumay
 title: Images locales et distantes
 date: 2024-05-19
-description: Inclure des images réactives provenant de sources locales et de certains fournisseurs de CDN d'images.
+description: Inclure des images responsives provenant de sources locales et de certains fournisseurs de CDN d'images.
 tags: ["blog"]
 thumbnail:
   url: https://assets.imgix.net/examples/bluehat.jpg
