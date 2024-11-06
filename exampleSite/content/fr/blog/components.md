@@ -73,14 +73,13 @@ Hinode propose plusieurs shortcodes en plus des [éléments Bootstrap]({{% relre
 
 À titre d’exemple, le markdown suivant affiche deux formules en utilisant la bibliothèque de composition typographique KaTeX.
 
-{{< example lang="markdown" >}}
-Voici une formule en ligne: $-b \pm \sqrt{b^2 - 4ac} \over 2a$ formula
+{{{< example lang="markdown" >}}
+Voici une formule $-b \pm \sqrt{b^2 - 4ac} \over 2a$ en ligne
 
 Il s'agit d'une formule non en ligne:
 
 $$x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}$$  
 $$\forall x \in X, \quad \exists y \leq \epsilon$$
-{{< /example >}}\quad \exists y \leq \epsilon$$
 {{< /example >}}
 
 ## Map
