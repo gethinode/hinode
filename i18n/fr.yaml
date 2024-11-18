@@ -150,6 +150,18 @@
 - id: supportedValues
   translation: "Valeurs supportées"
 
+  # Alerts
+- id: caution
+  translation: Prudence
+- id: important
+  translation: Important
+- id: note
+  translation: Remarque
+- id: tip
+  translation: Astuce
+- id: warning
+  translation: Attention
+
 # Image
 - id: image
   translation: image

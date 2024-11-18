@@ -431,3 +431,13 @@ H{{</* sub 2 */>}}O est un liquide.
 {{</* tooltip color="primary" title="Légende de l'infobulle" href="#!" */>}}Démonstration{{</* /tooltip */>}} d'une infobulle
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
+
+## Vidéo
+
+À titre d'exemple, le shortcode suivant affiche une vidéo d'éléphant hébergée par Cloudinary.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
