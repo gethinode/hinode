@@ -3,7 +3,7 @@
 {{- with .wrapper }}{{ $wrapper = printf "img-wrap %s" . }}{{ end -}}
 {{ $class := "rounded" }}
 {{ with .class }}{{ $class = . }}{{ end }}
-{{- $ratio := .ratio | default "21x9" -}}
+{{- $ratio := .ratio | default (site.Params.thumbnails.ratio | default "21x9") -}}
 {{- $thumbnail := "" -}}
 {{- $anchor := "" -}}
 {{- $credits := "" -}}
