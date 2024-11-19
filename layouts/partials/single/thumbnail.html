@@ -5,11 +5,13 @@
 {{ with .class }}{{ $class = . }}{{ end }}
 {{- $ratio := .ratio | default (site.Params.thumbnails.ratio | default "21x9") -}}
 {{- $thumbnail := "" -}}
+{{- $anchor := "" -}}
 {{- $credits := "" -}}
 {{ $figclass := .figclass }}
 
 {{- if reflect.IsMap $page.Params.Thumbnail -}}
     {{- $thumbnail = $page.Params.Thumbnail.url -}}
+    {{- $anchor = $page.Params.Thumbnail.anchor }}
     {{- $author := "" -}}
     {{- if and $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author }}
         {{- $author = partial "assets/link.html" (dict "destination" $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author "page" $page) -}}
@@ -38,5 +40,15 @@
 {{- end -}}
 
 {{ if $thumbnail -}}
-    {{- partial "assets/image.html" (dict "url" $thumbnail "ratio" $ratio "wrapper" $wrapper "class" $class "title" $page.Params.title "caption" $credits "figclass" $figclass "priority" "high") -}}
+    {{- partial "assets/image.html" (dict 
+        "url" $thumbnail
+        "anchor" $anchor
+        "ratio" $ratio
+        "wrapper" $wrapper
+        "class" $class
+        "title" $page.Params.title
+        "caption" $credits
+        "figclass" $figclass
+        "priority" "high"
+    ) -}}
 {{ end -}}
