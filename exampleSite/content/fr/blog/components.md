@@ -11,7 +11,7 @@ thumbnail:
   authorURL: https://unsplash.com/@ryoji__iwata
   origin: Unsplash
   originURL: https://unsplash.com/photos/5siQcvSxCP8
-modules: ["katex", "leaflet", "lottie"]
+modules: ["leaflet", "lottie", "simple-datatables"]
 ---
 
 Hinode propose plusieurs shortcodes en plus des [éléments Bootstrap]({{% relref "bootstrap-elements" %}}) courants. Consultez la [documentation officielle]({{% param "links.hinode_docs" %}}) pour plus de détails.
