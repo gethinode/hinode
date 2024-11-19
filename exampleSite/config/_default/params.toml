@@ -15,6 +15,7 @@
         tab = true
     [main.build]
         transpiler = "dartsass"
+        silenceDeprecations = true
 
 [debugging]
     showJS = false
