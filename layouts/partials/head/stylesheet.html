@@ -1,7 +1,11 @@
 {{- $transpiler := site.Params.main.build.transpiler | default "libsass" -}}
+{{- $silence := slice -}}
 {{- $supportedTranspilers := slice "libsass" "dartsass" -}}
 {{- if not (in $supportedTranspilers $transpiler) -}}
     {{- errorf "partial [head/stylesheet.html] - Invalid value for param 'transpiler': %s" $transpiler -}}
+{{- end -}}
+{{- if site.Params.main.build.silenceDeprecations -}}
+    {{- $silence = (slice "import" "mixed-decls" "color-functions" "global-builtin") -}}
 {{- end -}}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -62,7 +66,7 @@
     "dark-mode-tint"          (default "0%" site.Params.style.darkModeTint)
 -}}
 
-{{- $options := (dict "transpiler" $transpiler "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
+{{- $options := (dict "transpiler" $transpiler "silenceDeprecations" $silence "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
 {{- $bundle := partial "utilities/bundle.html" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
 
 {{- if gt ($bundle.Content | len) 0 }}
