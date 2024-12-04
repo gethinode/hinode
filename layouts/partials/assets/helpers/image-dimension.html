@@ -52,10 +52,11 @@
 {{- if hasSuffix $url "svg" -}}
     {{- $res = partial "utilities/GetResource.html" (dict "url" $url "page" $page) -}}
     {{ if not $res }}
-        {{- if not (fileExists (path.Join "/static" $url)) -}}
+        {{- $targetURL := partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $url)) -}}
+        {{- if not (fileExists (path.Join "/static" $targetURL)) -}}
             {{ warnf "Cannot find vector image resource: %q" $url -}}
         {{ else }}
-            {{ $width := string (partial "utilities/GetWidth.html" (dict "path" $url "height" 500)) }}
+            {{ $width := string (partial "utilities/GetWidth.html" (dict "path" $targetURL "height" 500)) }}
             {{ if $width }}
                 {{ $dims = $dims | append (printf "%sx500" $width) }}
             {{ else }}
@@ -118,7 +119,7 @@
 
 <!-- Generate image url -->
 {{ if or (hasSuffix $url "svg") $plain }}
-    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" $url) -}}
+    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $url)) -}}
 {{ else }}
     {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
         "url" $url
