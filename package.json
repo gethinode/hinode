@@ -80,7 +80,7 @@
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "cpy-cli": "^5.0.0",
     "eslint": "^9.16.0",
-    "markdownlint-cli2": "^0.15.0",
+    "markdownlint-cli2": "^0.16.0",
     "neostandard": "^0.11.9",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
