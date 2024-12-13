@@ -287,6 +287,16 @@ As an example, the following shortcode displays a vector image with a symbol ref
 {{< /example >}}
 {{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
 
+## Ins
+
+As an example, the following shortcode displays underlined text.
+
+{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+{{< example >}}
+This is an {{</* ins */>}}underlined text{{</* /ins */>}}.
+{{< /example >}}
+{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+
 ## Link
 
 As an example, the following shortcodes render links in different formats.
