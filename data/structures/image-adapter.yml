@@ -52,6 +52,7 @@ arguments:
       values:
         - fill
         - fit
+        - resize
   height:
     type: int
     optional: false
@@ -76,4 +77,3 @@ arguments:
         - Bottom
         - BottomRight
         - Smart
-

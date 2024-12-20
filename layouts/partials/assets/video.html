@@ -128,6 +128,7 @@
             "url" (printf "https://res.cloudinary.com/%s/video/upload/%s" $account (path.Clean $thumbnail))
             "ratio" $ratio
             "imageset" false
+            "height" 500
         ) }}
         {{ $height := index $metadata "height" }}
         {{ $width := index $metadata "width" }}

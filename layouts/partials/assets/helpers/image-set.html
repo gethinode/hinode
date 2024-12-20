@@ -24,7 +24,10 @@
 {{ $imgset := slice }}
 {{- range $index, $dim := $dims -}}
     {{ $width := (int (index (split $dim "x") 0)) }}
-    {{ $height := (int (index (split $dim "x") 1)) }}
+    {{ $height := "" }}
+    {{ if $height }}
+        {{ $height = (int (index (split $dim "x") 1)) }}        
+    {{ end }}        
 
     {{- $element := partial $adapter (dict 
         "host" $host

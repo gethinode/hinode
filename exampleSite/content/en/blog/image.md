@@ -40,3 +40,12 @@ As an example, the following shortcode displays an image with rounded corners an
     ratio="21x9" caption="imgix image" class="rounded" anchor="Top" */>}}
 {{< /example >}}
 {{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+
+## Local image
+
+{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+{{< example lang="hugo" >}}
+{{</* image src="img/phone.jpg"
+    ratio="auto" caption="local image" class="rounded" anchor="Top" dataAttributes="data-location='unknown' data-image-option='test'" */>}}
+{{< /example >}}
+{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}

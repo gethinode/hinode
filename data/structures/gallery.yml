@@ -1,0 +1,21 @@
+comment: >-
+  Displays the publication date and title as gallery.  
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Required context of the current page.
+    group: partial
+  list:
+    type:
+      - 'page.Pages'
+      - 'resource.Resources'
+    optional: false
+    comment: Required array of pages.
+    group: partial
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the list element, e.g. “w-50”.
