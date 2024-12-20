@@ -71,8 +71,6 @@
     {{ if .Paginator.HasNext -}}
         <link rel="next" href="{{ .Paginator.Next.URL | absURL }}">
     {{ end -}}
-{{ else -}}
-    <link rel="canonical" href="{{ .Permalink }}">
 {{ end -}}
 
 {{ partial "head/opengraph.html" . }}
