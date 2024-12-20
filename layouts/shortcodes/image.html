@@ -26,6 +26,7 @@
 {{- $error := false -}}
 {{- $plain := false -}}
 {{- $anchor := "" -}}
+{{- $dataAttributes := "" -}}
 
 {{- if .IsNamedParams -}}
     {{ $url = .Get "src" | default "" -}}
@@ -37,6 +38,7 @@
     {{ $title = .Get "title" | default "" -}}
     {{ $caption = .Get "caption" | default "" -}}
     {{ $figclass = .Get "figclass" | default "" -}}
+    {{ $dataAttributes =  .Get "dataAttributes" | default "" -}}
     {{ if isset .Params "mode" }}{{ $mode = partial "utilities/CastBool.html" (.Get "mode") }}{{ end -}}
     {{ if isset .Params "portrait" }}{{ $portrait = partial "utilities/CastBool.html" (.Get "portrait") }}{{ end -}}
     {{ if isset .Params "plain" }}{{ $plain = partial "utilities/CastBool.html" (.Get "plain") }}{{ end -}}
@@ -65,6 +67,7 @@
         "plain" $plain
         "anchor" $anchor
         "loading" $loading
+        "dataAttributes" $dataAttributes
         "page" .Page)
     -}} 
 {{- end -}}
