@@ -21,7 +21,7 @@
 <!-- Main code -->
 {{- if and (not $error) $pageAlertMsg -}}
     <div id="page-alert" class="alert alert-primary alert-no-decoration fade show d-flex align-items-center small m-0 py-1" data-page-alert-version="{{ $version }}">
-        <a href="{{ with $pageAlertURL }}{{ . }}{{ else }}#!{{ end }}" class="text-decoration-none flex-grow-1 text-center">{{ $pageAlertMsg }}</a>
+        <a {{ with $pageAlertURL }}href="{{ . }}"{{ end }} class="text-decoration-none flex-grow-1 text-center">{{ $pageAlertMsg }}</a>
         <button id="page-alert-btn-close" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ T "close" }}"></button>
     </div>
 {{- end -}}
