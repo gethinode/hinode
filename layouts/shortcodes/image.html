@@ -47,6 +47,8 @@
     {{ $url = .Get 0 }}
 {{ end -}}
 
+{{ warnf $dataAttributes }}
+
 {{ if not $url }}
     {{ errorf "Missing value for param 'src': %s" .Position -}}
     {{- $error = true -}}
