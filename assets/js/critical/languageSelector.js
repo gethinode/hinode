@@ -35,7 +35,15 @@
     const storedLanguage = getLanguage()
     const languageItems = document.querySelectorAll('#language-selector .dropdown-item')
 
-    if (languageItems.length > 0) {
+    const link = document.querySelector("link[rel='canonical']")
+    let alias = ''
+    if (link !== null) {
+      alias = link.getAttribute('href')
+    }
+    
+    if (alias !== '') {
+      window.location.href = alias
+    } else if (languageItems.length > 0) {
       // Redirect if the stored language differs from the active language
       if ((storedLanguage) && (document.documentElement.lang !== storedLanguage)) {
         languageItems.forEach(item => {
