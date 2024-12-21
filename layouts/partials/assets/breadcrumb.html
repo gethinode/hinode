@@ -23,10 +23,12 @@
                 {{- $title := .LinkTitle -}}
                 {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
                 {{- $address := or .RelPermalink .Params.Redirect -}}
-                {{ if $address }}
-                    <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
-                {{ else }}
-                    <li class="breadcrumb-item">{{ $title }}</li>
+                {{ if $title }}
+                    {{ if $address }}
+                        <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
+                    {{ else }}
+                        <li class="breadcrumb-item">{{ $title }}</li>
+                    {{ end }}
                 {{ end }}
             {{- end -}}
             <li class="breadcrumb-item active" aria-current="page">{{ $page.LinkTitle }}</li>
