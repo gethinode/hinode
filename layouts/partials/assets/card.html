@@ -178,7 +178,8 @@
             {{- if $thumbnail -}}
                 <div class="{{ $col1 }}">
                     {{ $fullHeight := "card-img-h100" }}
-                    {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ end }}
+                    {{ $rounding := "rounded-start" }}
+                    {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
                     {{- partial $hook (dict 
                         "url" $thumbnail
                         "ratio" (or $ratio "1x1")
@@ -186,7 +187,7 @@
                         "sizes" $sizes
                         "anchor" $anchor
                         "wrapper" "h-100 card-img-wrap d-flex align-items-center"
-                        "class" (printf "rounded-start card-img-bg %s" $fullHeight)
+                        "class" (printf "card-img-bg %s %s" $rounding $fullHeight)
                         "title" $title
                         "loading" $loading
                     ) -}}
