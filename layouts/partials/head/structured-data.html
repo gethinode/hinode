@@ -34,7 +34,7 @@
       "name": "{{ .Site.Params.schema.name }}",
       "url": {{ print $baseURL }},
       "sameAs": {{ $alt | uniq | complement (slice "") }},
-      {{ if eq .Site.Params.schemaType "Organization" -}}
+      {{ if eq .Site.Params.schema.type "Organization" -}}
         "logo": {
           "@type": "ImageObject",
           "@id": {{ print $baseURL "#/schema/image/1"}},
