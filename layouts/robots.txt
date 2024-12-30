@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: {{ urls.JoinPath .Site.BaseURL "sitemap.xml" }}
