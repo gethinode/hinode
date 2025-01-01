@@ -32,6 +32,15 @@
 
   // Event listener for language selection
   document.addEventListener('DOMContentLoaded', () => {
+    // override stored language when query string contains force is true
+    let params = new URLSearchParams(document.location.search)
+    let force = params.get('force')
+    if (force !== null && force.toLowerCase() == 'true') {
+      setLanguage(document.documentElement.lang)
+      return
+    }
+
+    // continue with regular code
     const storedLanguage = getLanguage()
     const languageItems = document.querySelectorAll('#language-selector .dropdown-item')
 
