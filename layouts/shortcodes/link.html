@@ -19,6 +19,7 @@
 {{ $class := "" }}
 {{ $case := true }}
 {{ $external := false }}
+{{ $force := false }}
 {{ $cue := site.Params.main.externalLinks.cue }}
 {{ $tab := site.Params.main.externalLinks.tab }}
 {{ $text := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
@@ -33,6 +34,7 @@
     {{- $case = .Get "case" | default true -}}
     {{- $external = .Get "external" | default false -}}
     {{- $class = .Get "class" | default "" -}}
+    {{- $force = .Get "force" | default false -}}
 {{ else }}
     {{ $href = .Get 0 }}
 {{ end }}
@@ -99,5 +101,5 @@
 
 <!-- Main code -->
 {{- if not $error -}}
-    {{ partial "assets/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "external" $external "class" $class "page" .Page) }}
+    {{ partial "assets/link.html" (dict "destination" $url "text" $text "cue" $cue "tab" $tab "case" $case "external" $external "force" $force "class" $class "page" .Page) }}
 {{- end -}}

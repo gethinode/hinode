@@ -63,6 +63,15 @@ arguments:
     default: false
     comment: >-
       Flag to indicate if a link that contains baseURL host should be forced as external.
+  force:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to indicate a link should bypass any language redirection. Only applicable when
+      the site param `enableLanguageSelectionStorage` is set to true. When `force` is true,
+      the link to a local page is kept as is.
+    release: v0.27.20
   class:
     type: string
     optional: true
