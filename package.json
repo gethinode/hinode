@@ -73,14 +73,14 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "cssnano-preset-advanced": "^7.0.6",
-    "hugo-bin": "0.137.1",
+    "hugo-bin": "0.137.2",
     "purgecss-whitelister": "^2.4.0"
   },
   "devDependencies": {
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "cpy-cli": "^5.0.0",
     "eslint": "^9.17.0",
-    "markdownlint-cli2": "^0.17.0",
+    "markdownlint-cli2": "^0.17.1",
     "neostandard": "^0.12.0",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
