@@ -12,6 +12,7 @@
     breakpoint = "md"
     [main.internalLinks]
         validate = true
+        pretty = false
     [main.externalLinks]
         cue = false
         tab = false
