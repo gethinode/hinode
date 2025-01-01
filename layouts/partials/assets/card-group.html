@@ -25,6 +25,9 @@
     )}}
 {{ end }}
 
+<!-- Initialize global variables -->
+{{- $pretty := site.Params.main.internalLinks.pretty | default false }}
+
 <!-- Initialize local variables -->
 {{ $list := $args.list }}
 {{- $class := $args.class -}}
@@ -177,7 +180,11 @@
         {{- end -}} 
     {{ else }}
         {{ if and (gt $count $max) $args.hrefTitle }}
-            <a class="btn btn-outline-primary mt-4" href="{{ $args.href| safeURL }}" role="button">{{ $args.hrefTitle }}</a>
+            {{ $href := $args.href }}
+            {{ if and $pretty (not (hasSuffix $href "/" )) (not (strings.Contains $href "#")) }}
+                {{ $href = printf "%s/" $href }}
+            {{ end }}
+            <a class="btn btn-outline-primary mt-4" href="{{ $href | safeURL }}" role="button">{{ $args.hrefTitle }}</a>
         {{ end }}
     {{ end }}
 </div>

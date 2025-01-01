@@ -30,6 +30,7 @@
 {{- $external := .external | default false }}
 {{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{- $pretty := site.Params.main.internalLinks.pretty | default false }}
 {{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
 {{- $isLocal := hasPrefix $destination "#" -}}
 {{- $page := .page -}}
@@ -100,6 +101,9 @@
     {{ end }}
 
     {{- if not $case }}{{ $text = lower $text }}{{ end -}}
+    {{ if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) }}
+        {{ $destination = printf "%s/" $destination }}
+    {{ end }}
 {{- end -}}
 
 {{ if not $error -}}
