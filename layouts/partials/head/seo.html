@@ -63,13 +63,15 @@
 
     <meta name="description" content="{{ $.Scratch.Get "description" }}">
 
-{{ if $.Scratch.Get "paginator" }}
-    <link rel="canonical" href="{{ .Paginator.URL | absURL }}">
-    {{ if .Paginator.HasPrev -}}
-        <link rel="prev" href="{{ .Paginator.Prev.URL | absURL }}">
+
+{{ $paginator := $.Store.Get "paginator" }}
+{{ if $paginator }}
+    <link rel="canonical" href="{{ $paginator.URL | absURL }}">
+    {{ if $paginator.HasPrev -}}
+        <link rel="prev" href="{{ $paginator.Prev.URL | absURL }}">
     {{ end -}}
-    {{ if .Paginator.HasNext -}}
-        <link rel="next" href="{{ .Paginator.Next.URL | absURL }}">
+    {{ if $paginator.HasNext -}}
+        <link rel="next" href="{{ $paginator.Next.URL | absURL }}">
     {{ end -}}
 {{ end -}}
 
