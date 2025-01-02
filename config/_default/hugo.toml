@@ -139,6 +139,11 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.mounts]]
     source = "static"
     target = "static"
+  # ensures main package.json is always available, even when using workspaces
+  # in workspaces, the package.json is pointing to the first imported module
+  [[module.mounts]]
+    source = "package.json"
+    target = "assets/data/package-hinode.json"
   [[module.mounts]]
     source = "netlify.toml"
     target = "assets/config/netlify.toml"
