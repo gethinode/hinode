@@ -3,9 +3,9 @@
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:title" content="{{ $.Scratch.Get "title" }}">
 <meta property="og:description" content="{{ $.Scratch.Get "description" }}">
-{{ if $.Scratch.Get "paginator" -}}
-    {{ $paginator := .Paginate (where .Site.RegularPages.ByDate.Reverse "Section" "blog" ) -}}
-    <meta property="og:url" content="{{ .Paginator.URL | absURL }}">
+{{ $paginator := $.Store.Get "paginator" }}
+{{ if $paginator }}
+    <meta property="og:url" content="{{ $paginator.URL | absURL }}">
 {{ else -}}
     <meta property="og:url" content="{{ .Permalink }}">
 {{ end -}}

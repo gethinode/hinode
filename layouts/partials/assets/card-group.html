@@ -67,6 +67,8 @@
         {{ $paginator = $args.page.Paginate $list }}
     {{ end }}
     {{ $list = first $paginator.PagerSize (after (mul (sub $paginator.PageNumber 1) $paginator.PagerSize) $list) }}
+
+    {{ page.Store.Set "paginator" $paginator }}
 {{ end }}
 
 <!-- Initialize list elements -->
