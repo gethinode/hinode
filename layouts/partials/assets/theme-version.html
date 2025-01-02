@@ -1,0 +1,41 @@
+<!-- 
+    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+<!-- TODO: merge with version.html -->
+
+{{- define "partials/assets/version/mod.html" -}}
+    {{- $file := "go.mod" -}}
+    {{- $regex := printf `github.com/gethinode/hinode v.*(\r\n|\r|\n)` -}}
+    {{- $match := findRE $regex (readFile $file) -}}
+
+    {{- $result := "" -}}
+    {{- if gt (len $match) 0 -}}
+        {{- $result = (index (split (index $match 0) " ") 1) -}}
+        {{- $result = strings.TrimPrefix "v" $result -}}
+    {{- end -}}
+
+    {{- return $result -}}
+{{- end -}}
+
+{{- define "partials/assets/version/package.html" -}}
+    {{- $file := "data/package-hinode.json" -}}
+    {{ $data := dict }}
+    {{ $version := "" }}
+    {{ with resources.Get $file }}
+        {{ with . | transform.Unmarshal }}
+            {{ $data = . }}
+            {{ $version = index $data "version" }}
+        {{ end }}
+    {{ end }}
+
+    {{ return $version }}
+{{- end -}}
+
+{{- $version := partial "assets/version/mod.html" . -}}
+{{ if not $version }}
+    {{- $version = partial "assets/version/package.html" . -}}
+{{ end }}
+{{- print $version -}}
