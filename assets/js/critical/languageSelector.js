@@ -25,7 +25,10 @@
           window.location.href = href
         }
       } else {
-        window.location.href = folder + language + '/'
+        let target = folder + language + '/'
+        if (window.location.href !== target) {
+          window.location.href = target
+        }
       }
     }
   }
@@ -50,7 +53,7 @@
       alias = link.getAttribute('href')
     }
     
-    if (alias !== '') {
+    if ((alias !== '') && (window.location.href !== alias)) {
       window.location.href = alias
     } else if (languageItems.length > 0) {
       // Redirect if the stored language differs from the active language
@@ -77,7 +80,10 @@
       // Redirect to the localized homepage
       const defaultLang = '{{ site.LanguageCode | default site.Language.Lang }}'
       let language = storedLanguage ? storedLanguage : defaultLang
-      window.location.href = folder + language + '/'
+      let target = folder + language + '/'
+      if (window.location.href !== target) {
+        window.location.href = target
+      }
     }
   })
 })()
