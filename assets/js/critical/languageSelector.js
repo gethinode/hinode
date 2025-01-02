@@ -45,7 +45,7 @@
 
     // continue with regular code
     const storedLanguage = getLanguage()
-    const languageItems = document.querySelectorAll('#language-selector .dropdown-item')
+    const languageItems = document.querySelectorAll('#language-selector[data-translated=true] .dropdown-item')
 
     const link = document.querySelector("link[rel='canonical']")
     let alias = ''
@@ -77,13 +77,8 @@
       })
     }
     else {
-      // Redirect to the localized homepage
-      const defaultLang = '{{ site.LanguageCode | default site.Language.Lang }}'
-      let language = storedLanguage ? storedLanguage : defaultLang
-      let target = folder + language + '/'
-      if (window.location.href !== target) {
-        window.location.href = target
-      }
+      // overrule the current stored language when no translation is available
+      setLanguage(document.documentElement.lang)
     }
   })
 })()
