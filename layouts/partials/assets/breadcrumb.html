@@ -6,6 +6,16 @@
 
 {{ $error := false }}
 
+<!-- Limits a title to a maximum of 33 runes, adds a "..." suffix otherwise -->
+{{ define "partials/short-title.html" }}
+    {{- $title := . -}}
+    {{ if gt (strings.RuneCount $title) 33 }}
+        {{ $title = print (substr $title 0 30) "..." }}
+    {{ end }}
+
+    {{ return $title }}
+{{ end }}
+
 <!-- Validate arguments -->
 {{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "breadcrumb" "args" . "group" "partial") }}
     {{- errorf "partial [assets/breadcrumb.html] - Invalid arguments" -}}
@@ -13,23 +23,41 @@
 {{ end }}
 
 <!-- Initialize arguments -->
-{{ $page := .page }}
+{{- $page := .page -}}
+{{- $breakpoint := $page.Scratch.Get "breakpoint" -}}
+
+<!-- Include breadcrumb items that have both a title and address -->
+{{ $items := slice }}
+{{- range $index, $item := $page.Ancestors.Reverse -}}
+    {{- $title := .LinkTitle -}}
+    {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
+    {{- $address := or .RelPermalink .Params.Redirect -}}
+    {{ if and $title $address}}
+        {{ $items = $items | append (dict "title" $title "address" $address) }}
+    {{ end }}
+{{ end }}
 
 <!-- Main code -->
 {{ if not $error }}
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" class="d-{{ $breakpoint.prev }}-none">
         <ol class="breadcrumb">
-            {{- range $index, $item := $page.Ancestors.Reverse -}}
-                {{- $title := .LinkTitle -}}
-                {{- if .IsHome }}{{ $title = T "home" }}{{ end -}} 
-                {{- $address := or .RelPermalink .Params.Redirect -}}
-                {{ if $title }}
-                    {{ if $address }}
-                        <li class="breadcrumb-item"><a href="{{ $address }}">{{ $title }}</a></li>
-                    {{ else }}
-                        <li class="breadcrumb-item">{{ $title }}</li>
-                    {{ end }}
-                {{ end }}
+            {{- $length := len $items -}}
+            {{- if gt $length 0 -}}
+                {{ $item := index $items (sub $length 1) }}
+                <li class="breadcrumb-item">
+                    <a href="{{ $item.address }}">
+                        {{ partial "assets/icon.html" (dict "icon" "fas angle-left") }}&nbsp;{{ partial "short-title" $item.title }}
+                    </a>
+                </li>
+            {{- end -}}
+        </ol>
+    </nav>
+
+    <nav aria-label="breadcrumb" class="d-none d-{{ $breakpoint.prev }}-block">
+        <ol class="breadcrumb">
+            {{- $length := len $items }}
+            {{- range $index, $item := $items -}}
+                <li class="breadcrumb-item"><a href="{{ $item.address }}">{{ $item.title }}</a></li>
             {{- end -}}
             <li class="breadcrumb-item active" aria-current="page">{{ $page.LinkTitle }}</li>
         </ol>
