@@ -33,6 +33,7 @@
 {{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
 {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
 {{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
+{{- $isSpecial := and $u.Scheme (not (in (slice "http" "https") $u.Scheme)) }}
 {{- $isLocal := hasPrefix $destination "#" -}}
 {{- $page := .page -}}
 {{- $anchor := "" -}}
@@ -41,7 +42,11 @@
 {{- $class := .class -}}
 
 <!-- Main code -->
-{{- if $isExternal -}}
+{{- if $isSpecial -}}
+    {{- if not $text -}}
+        {{- $text = (urls.Parse (absURL $destination)).Host -}}
+    {{- end -}}
+{{- else if $isExternal -}}
     {{- if not $text -}}
         {{- $text = (urls.Parse (absURL $destination)).Host -}}
     {{- end -}}
