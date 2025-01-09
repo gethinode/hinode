@@ -164,6 +164,8 @@ github.com/gethinode/mod-google-analytics v1.1.6 h1:0eNIM4NTzXnnRHMM04IVnYPPGwbM
 github.com/gethinode/mod-google-analytics v1.1.6/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-google-analytics v1.1.9 h1:ld3bRGiJiUCfe/deH+4vOP3oZNhG6mPssT254EcK0Ro=
 github.com/gethinode/mod-google-analytics v1.1.9/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
+github.com/gethinode/mod-google-analytics v1.3.0 h1:R9oRB6nbFDwLsNmIhxlcmUVH4JE1kvcmbOloKSHhiIQ=
+github.com/gethinode/mod-google-analytics v1.3.0/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
