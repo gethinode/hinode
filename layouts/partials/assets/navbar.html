@@ -77,6 +77,7 @@
 
 <!-- Initialize arguments -->
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
+{{- $pretty := site.Params.main.internalLinks.pretty | default false }}
 {{- $id := .id | default (printf "navbar-%d" 0) -}}
 {{- $page := .page -}}
 {{- $baseURL := $page.Scratch.Get "baseURL" -}}
@@ -272,11 +273,15 @@
                             <ul class="dropdown-menu dropdown-menu-end " id="language-selector" data-translated="{{ $page.IsTranslated }}">
                                 {{- if $page.IsTranslated -}}
                                     {{- range $page.AllTranslations -}}
-                                        <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" hreflang="{{.Language.Lang}}" href="{{ .RelPermalink }}">{{ .Language.LanguageName  }}</a></li>
+                                        <li><a class="dropdown-item {{ if eq .Language.Lang $currentLang }}active{{ end }}" hreflang="{{ .Language.Lang }}" href="{{ .RelPermalink }}">{{ .Language.LanguageName }}</a></li>
                                     {{- end -}}
                                 {{- else -}}
                                     {{- range site.Languages -}}
-                                        <li><a class="dropdown-item" href="{{ partial "utilities/URLJoin.html" (dict "base" $baseURL "path" .Lang) }}" hreflang="{{.Lang}}">{{ default .Lang .LanguageName }}</a></li>
+                                        {{ $dest := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" .Lang) }}
+                                        {{ if and $pretty (not (hasSuffix $dest "/")) }}
+                                            {{ $dest = printf "%s/" $dest }}
+                                        {{ end }}
+                                        <li><a class="dropdown-item" href="{{ $dest }}" hreflang="{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
                                     {{- end -}}
                                 {{- end -}}
                             </ul>
