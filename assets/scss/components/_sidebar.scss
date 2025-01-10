@@ -75,13 +75,17 @@
     @include color-mode(dark) {
         .sidebar-item {
             color: var(--bs-body-color);
-        
-            &.active,
+
+            &.active {
+                color: $primary-text-emphasis-dark !important;
+            }
+
             &:hover,
             &:focus {
-                color: white !important;
+                color: $primary-text-emphasis-dark !important;
                 background-color: transparent;
-            }
+                box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
+    }
         }
 
         .sidebar-item-group {
@@ -95,7 +99,7 @@
             &:focus {
                 color: white !important;
                 background-color: transparent;
-                box-shadow: inset 0px 0px 0px 1px $primary-bg-subtle-dark;
+                box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
             }
         }
 
@@ -115,18 +119,7 @@
         .btn-toggle-group[aria-expanded="true"] {
             color: var(--bs-secondary-color);
         }
-                
-        .sidebar-item {
-            &.active {
-                color: $primary-text-emphasis-dark !important;
-            }
-
-            &:hover,
-            &:focus {
-                box-shadow: inset 0px 0px 0px 1px $primary-bg-subtle-dark;
-            }
-        }
-    }
+                    }
 }
 
 // scss-docs-end sidebar
