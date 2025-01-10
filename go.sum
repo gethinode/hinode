@@ -166,6 +166,8 @@ github.com/gethinode/mod-google-analytics v1.1.9 h1:ld3bRGiJiUCfe/deH+4vOP3oZNhG
 github.com/gethinode/mod-google-analytics v1.1.9/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-google-analytics v1.3.0 h1:R9oRB6nbFDwLsNmIhxlcmUVH4JE1kvcmbOloKSHhiIQ=
 github.com/gethinode/mod-google-analytics v1.3.0/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
+github.com/gethinode/mod-google-analytics v1.3.1 h1:WPXrsO6Kpp0k8PYY9a1JyiZgYGMlkBfHY8eEg6CfcL0=
+github.com/gethinode/mod-google-analytics v1.3.1/go.mod h1:dl628cFozpCvoIMCiV7ujzQipjxcm3eatXrSfLPWNII=
 github.com/gethinode/mod-katex v1.0.0 h1:me/3dIIZBkfk1mRIFt8QiAGYwYDoSG5bc2hHRtIutFc=
 github.com/gethinode/mod-katex v1.0.0/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-katex v1.0.1 h1:809QUztxmKgMNchU+v03iMO7Ma+ISc3ZzhXYauc21rs=
@@ -374,6 +376,8 @@ github.com/gethinode/mod-utils/v2 v2.8.4 h1:ZBkIxFezFz2IrbTt0Y3Nq5ac7klU5N8TY19Q
 github.com/gethinode/mod-utils/v2 v2.8.4/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
 github.com/gethinode/mod-utils/v2 v2.8.5 h1:e71ncO2NYpum7JTdNTwb0lw8aDe8Zc64Ehjavy8x9xM=
 github.com/gethinode/mod-utils/v2 v2.8.5/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
+github.com/gethinode/mod-utils/v2 v2.8.6 h1:gtTtL37YPq1n/POIzbj40aYOg1VaZq8IjqwSf2V5yo0=
+github.com/gethinode/mod-utils/v2 v2.8.6/go.mod h1:GTYeknoLujNjfDxI+V9Dcug26CYJSTJ0B/U2dagw9oY=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3 h1:H/qVR5O4BXjRjD+5PZB+r4ug2BSJ2Of4RtwOntd+OKo=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/nextapps-de/flexsearch v0.0.0-20240108021025-afd75f742f22 h1:re7L8FxbXQpnX8BgzkdUnDpsUmloGNyLmiy2ZCln8pg=
