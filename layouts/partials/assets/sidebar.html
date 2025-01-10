@@ -28,12 +28,34 @@
 
     {{- $doc_slug := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($group.title | urlize)) -}}
     {{- $href := or $group.link $doc_slug -}}
+    {{ $ref := partial "utilities/GetPage.html" (dict "url" $href "page" $page) }}
+    {{ if eq $group.link "#" }}{{ $href = $doc_slug }}{{ end }}
     {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
+    {{ if not (hasSuffix $href "/") }}{{ $href = printf "%s/" $href }}{{ end }}
+    {{- $current := eq $href $page.RelPermalink }}
 
     <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}" aria-expanded="{{ if $collapsed }}true{{ else }}false{{ end }}">
-            <div class="text-start flex-fill">{{ $group.title }}</div>
-        </button>
+        <div class="d-flex w-100 p-0 sidebar-item-group">
+            <div class="text-start flex-grow-1 {{ if $current }}fw-bold{{ end }}">
+                {{ $dest := $href }}
+                {{ $target := "" }}
+                {{ if or $current (not $ref) }}
+                    {{ $dest = "" }}
+                {{ end }}
+                <a {{ with $dest }} href="{{ . }}"{{ else }}
+                data-bs-toggle="collapse" 
+                data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
+                {{ end }}>{{ $group.title }}</a>
+            </div>
+            
+            <button 
+                class="btn btn-toggle-group d-inline-flex align-items-center rounded border-0 collapsed" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
+                aria-expanded="{{ if $collapsed }}true{{ else }}false{{ end }}"
+            >
+            </button>
+        </div>
         <div class="collapse {{ if $collapsed }}show{{ end }}" id="sidebar-collapse-{{ $index }}-{{ $level }}">
             <ul class="btn-toggle-nav list-unstyled fw-normal {{ if eq $level 0}} pb-1 {{ end }}ps-3">
                 {{- range $item := $group.pages -}}
@@ -79,9 +101,11 @@
             {{ $href = . }}
         {{ else }}
             {{- $href = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" .) -}}
+            {{ if not (hasSuffix $href "/") }}{{ $href = printf "%s/" $href }}{{ end }}
         {{ end }}
     {{ else }}
         {{- $href = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($title | urlize)) -}}
+        {{ if not (hasSuffix $href "/") }}{{ $href = printf "%s/" $href }}{{ end }}
     {{ end }}
     {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
 
@@ -91,7 +115,7 @@
         <li>
             <ul class="btn-toggle-nav list-unstyled fw-bold pb-1">
                 <li>
-                    {{ $class := "sidebar-item text-decoration-none rounded" }}
+                    {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
                     {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
                     {{ if $link }}
@@ -104,7 +128,7 @@
         </li>
     {{ else }}
         <li>
-            {{ $class := "sidebar-item text-decoration-none rounded small" }}
+            {{ $class := "sidebar-item text-decoration-none rounded small w-100" }}
             {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
             {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
             {{ if $link }}

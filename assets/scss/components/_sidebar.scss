@@ -7,22 +7,45 @@
     top: var(--navbar-offset);
     max-height: 90vh;
     overflow-y: auto;
+    scrollbar-gutter: stable;
 }
 
 .sidebar-item {
     color: rgba(0, 0, 0, 0.65);
     margin-left: 0 !important;
-    padding-left: 0.85rem !important;
     display: inline-block;
+    padding: 0.1875rem 0.5rem !important;
 
-    &.active,
+    &.active {
+        color: $primary;
+    }
+
     &:hover,
     &:focus {
-        color: black;
+        color: $primary;
+        background-color: tint-color($primary, 90%);
     }
 }
 
-.btn-toggle {
+.sidebar-item-group {
+    &:hover,
+    &:focus {
+        color: $primary;
+        background-color: tint-color($primary, 90%);
+    }
+    
+    > div > a {
+        color: var(--bs-body-color) !important;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.sidebar-item-group > div {
+    padding: 0.1875rem 0.5rem !important;
+}
+
+.btn-toggle-group {
     padding: 0.25rem 0.5rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.65);
@@ -30,8 +53,7 @@
 
     &:hover,
     &:focus {
-        color: black;
-        background-color: tint-color($primary, 90%);
+        background-color: transparent;
     }
 
     &::before {
@@ -43,26 +65,9 @@
     }
 }
 
-.btn-toggle[aria-expanded="true"] {
-    color: black;
-
+.btn-toggle-group[aria-expanded="true"] {
     &::before {
         transform: rotate(90deg);
-    }
-}
-
-.btn-toggle-nav a {
-    padding: 0.1875rem 0.5rem;
-    margin-top: 0.125rem;
-    margin-left: 1.25rem;
-
-    &:hover,
-    &:focus {
-        background-color: tint-color($primary, 90%);
-    }
-
-    &.active {
-        font-weight: bold;
     }
 }
 
@@ -70,8 +75,6 @@
     @include color-mode(dark) {
         .sidebar-item {
             color: var(--bs-body-color);
-            margin-left: 0 !important;
-            padding-left: 0.85rem !important;
         
             &.active,
             &:hover,
@@ -81,12 +84,26 @@
             }
         }
 
-        .btn-toggle {
+        .sidebar-item-group {
+            color: var(--bs-body-color) !important;
+
+            &.active {
+                color: $primary-text-emphasis-dark !important;
+            }
+
+            &:hover,
+            &:focus {
+                color: white !important;
+                background-color: transparent;
+                box-shadow: inset 0px 0px 0px 1px $primary-bg-subtle-dark;
+            }
+        }
+
+        .btn-toggle-group {
             color: var(--bs-body-color);
         
             &:hover,
             &:focus {
-                color: white !important;
                 background-color: transparent;
             }
         
@@ -95,23 +112,18 @@
             }
         }
 
-        .btn-toggle[aria-expanded="true"] {
+        .btn-toggle-group[aria-expanded="true"] {
             color: var(--bs-secondary-color);
         }
-
-        .btn-toggle-nav a {
-            padding: 0.1875rem 0.5rem;
-            margin-top: 0.125rem;
-            margin-left: 1.25rem;
+                
+        .sidebar-item {
+            &.active {
+                color: $primary-text-emphasis-dark !important;
+            }
 
             &:hover,
             &:focus {
-                color: white !important;
-                background-color: transparent;
-            }
-
-            &.active {
-                font-weight: bold;
+                box-shadow: inset 0px 0px 0px 1px $primary-bg-subtle-dark;
             }
         }
     }
