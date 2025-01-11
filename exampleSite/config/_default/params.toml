@@ -158,7 +158,7 @@
     # themeFontPath = "https://fonts.googleapis.com/css2?family=Inter:wght@200;300;600&display=swap" # external path
     themeFontPath = "/fonts" # local path
     themeFontPreload = "/fonts/inter-v12-latin-regular.woff2"
-    purge = false # TODO: fix purge setting of example site
+    purge = true
 # toml-docs-end theme-colors
 
 [schema]
