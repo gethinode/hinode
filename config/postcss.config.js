@@ -9,7 +9,7 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     const els = JSON.parse(content).htmlElements
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
   },
-  dynamicAttributes: ['data-bs-theme'],
+  dynamicAttributes: ['data-bs-theme', 'data-bs-theme-animate'],
   safelist: ['was-validated',
     ...whitelister([
       './assets/scss/components/_clipboard.scss',
