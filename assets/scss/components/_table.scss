@@ -11,6 +11,10 @@
     padding-right: 1rem;
 }
 
+.table-border-bottom-wrap {
+    border-bottom-style: none !important
+}
+
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .table-striped, .table-striped-columns {

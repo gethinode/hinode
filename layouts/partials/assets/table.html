@@ -4,42 +4,86 @@
     Visit gethinode.com/license for more details.
 -->
 
-{{ $page := .page }}
-{{ $input := .input }}
-{{ $args := .args }}
-{{ $sortable := .sortable | default false }}
-{{ $paging := .paging | default false }}
-{{ $searchable := .searchable | default false }}
-{{ $pagingOptionPerPage := .pagingOptionPerPage }}
-{{ $pagingOptionPerPageSelect := .pagingOptionPerPageSelect }}
-{{- $responsiveVals := slice "table-responsive" "table-responsive-none" "table-responsive-sm" "table-responsive-md" "table-responsive-lg" "table-responsive-xl" "table-responsive-xxl" -}}
-{{- $responsive := intersect $args $responsiveVals -}}
-{{- $main := complement $responsive $args -}}
+{{ define "partials/inline-table.html" }}
+    {{ $page := .page }}
+    {{ $input := .input }}
+    {{ $attributes := .attributes }}
+    {{ $class := .class }}
+    {{ $wrap := .wrap }}
 
-{{- if in $responsive "table-responsive-none" -}}
-    {{- $responsive = "" -}}
-{{- else if not $responsive -}}
-    {{ $responsive = (slice "table-responsive") -}}
-{{- end -}}
+    {{ if $wrap }}{{ $input = printf "%s\n{.table-wrap}" (chomp $input) }}{{ end }}    
+    {{- $input = $input | $page.RenderString }}
+    {{ $regex := `<table\s*class="(.+?)"` }}
+    {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
+    {{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
 
-{{- $class := delimit $main " " -}}
-{{ if or $sortable $paging $searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
-{{- $input := $input | $page.RenderString }}
-{{ $regex := `<table\s*class="(.+?)"` }}
-{{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
-{{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
+    {{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
+    {{ $input := replaceRE $regex $new $input 1 -}}
+
+    {{ return $input }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{ $error := false }}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "table" "args" .) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "assets/table.html" 
+        "msg" "Invalid arguments"
+        "details" $args.errmsg
+        "file" page.File
+    )}}
+{{ end }}
+
+<!-- Initialize local variables -->
+{{ $class := $args.class }}
+{{ if or $args.sortable $args.paging $args.searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
-{{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
-{{ if $paging }}
+{{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
+{{ if $args.paging }}
     {{ $attributes = printf "%s data-table-paging=true" $attributes }}
-    {{ $attributes := printf "%s data-table-paging-option-perPage=%s" $attributes $pagingOptionPerPage }}
-    {{ if (ne $pagingOptionPerPageSelect "") }}{{ $attributes := printf "%s data-table-paging-option-perPageSelect=%d" $attributes $pagingOptionPerPageSelect }}{{ end }}
+    {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $args.pagingOptionPerPage }}
+    {{ if (ne $args.pagingOptionPerPageSelect "") }}
+        {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes $args.pagingOptionPerPageSelect }}
+    {{ end }}
 {{ end }}
-{{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
+{{ if $args.searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
 
-{{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
-{{ $input := replaceRE $regex $new $input 1 -}}
-{{- with $responsive }}<div class="{{ delimit . " " }}">{{ end -}}
-{{ $input | safeHTML }}
-{{- with $responsive }}</div>{{ end -}}
+<!-- Main code -->
+{{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
+{{ $regular := partial "partials/inline-table.html" (dict 
+    "page" $args.page
+    "input" $args.input
+    "attributes" $attributes
+    "class" $class
+    "wrap" false
+) }}
+
+{{ $wrapped := "" }}
+{{ if $args.wrap }}
+    {{ $wrapped = partial "partials/inline-table.html" (dict 
+        "page" $args.page
+        "input" $args.input
+        "attributes" $attributes
+        "class" $class
+        "wrap" true
+    ) }}
+{{ end }}
+
+{{ if not $error }}
+    {{ if eq $args.breakpoint "none" }}
+        {{ $regular | safeHTML }}
+        {{ with $wrapped }}{{ . | safeHTML }}{{ end }}
+    {{ else }}
+        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ if $wrapped }}d-none d-{{ $breakpoint.current }}-block{{ end }}">
+        {{ $regular | safeHTML }}
+        </div>
+
+        {{ with $wrapped }}
+            <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} d-{{ $breakpoint.current }}-none">
+            {{ . | safeHTML }}
+            </div>
+        {{ end }}
+    {{ end }}
+{{ end }}

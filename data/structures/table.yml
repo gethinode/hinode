@@ -3,6 +3,20 @@ comment: >-
   improve their layout on smaller screens. To features `sortable`, `paging`,
   and `searchable` require the module `simple-datatables`.
 arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Page to display the breadcrumb for.
+    group: partial
+  input:
+    type:
+      - string
+      - template.HTML
+    optional: false
+    comment: Table input in markdown format.
+    group: partial
   breakpoint:
     type: select
     optional: true
@@ -55,6 +69,13 @@ arguments:
     optional: true
     comment: Toggle the ability to search the dataset.
     release: v0.24.13
+  wrap:
+    type: bool
+    optional: true
+    comment: >-
+      Toggle the last column to wrap to a new row on smaller devices. This
+      setting is not compatible with data tables.
+    release: v0.28.0
 body:
   type: string
   optional: false
