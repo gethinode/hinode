@@ -1,5 +1,5 @@
 <!-- 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2024 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 -->
@@ -14,10 +14,8 @@
 
 <!-- Initialize arguments -->
 {{- $page := .page -}}
-{{ $items := len (findRE "<li.*?>(.|\n)*?</li>" $page.TableOfContents) -}}
 
 <!-- Main code -->
-{{ if and (not $error) (gt $items 1) -}}
-    <strong class="d-block h6 my-2 pb-2">{{ T "toc" }}:</strong>
-    {{ $page.TableOfContents }}
+{{ if not $error -}}
+    {{ partial "assets/toc-parse-content.html" $page }}
 {{ end -}}

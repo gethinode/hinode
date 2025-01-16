@@ -53,7 +53,7 @@
     {{- $title := .title -}}
     {{- $content := .content -}}
     
-    <h3>{{ $title }}</h3>
+    <div class="fs-3 mt-4">{{ $title }}</div>
     {{ with $content }}<p>{{ . }}</p>{{ end -}}
 {{- end -}}
 
