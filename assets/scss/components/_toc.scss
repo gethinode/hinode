@@ -80,7 +80,7 @@ a.toc-item {
 }
 
 a.toc-level-1 {
-    margin-left: 0em;
+    margin-left: 0;
 }
 
 a.toc-level-2 {
@@ -103,9 +103,6 @@ a.toc-level-6 {
     margin-left: 5em;
 }
 
-.toc nav {
-    margin-bottom: 0;
-}
 
 @if $enable-dark-mode {
     [data-bs-theme="dark"] {
