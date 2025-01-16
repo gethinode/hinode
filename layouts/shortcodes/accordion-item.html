@@ -53,11 +53,11 @@
 
     <div class="accordion-item">
         {{- with $header -}}
-        <h2 class="accordion-header m-0" id="{{ $parent }}-heading-{{ $id }}">
+        <div class="accordion-header m-0 fs-2" id="{{ $parent }}-heading-{{ $id }}">
             <button class="accordion-button{{ if not $show }} collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $parent }}-item-{{ $id }}" aria-expanded="false" aria-controls="{{ $parent }}-item-{{ $id }}">
             {{ . }}
             </button>
-        </h2>
+        </div>
         {{- end -}}
         <div id="{{ $parent }}-item-{{ $id }}" class="accordion-collapse collapse{{ if $show }} show{{ end }}{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $parent }}-heading-{{ $id }}" data-bs-parent="#{{ $parent }}">
             <div class="accordion-body">{{ $body | .Page.RenderString | safeHTML }}</div>

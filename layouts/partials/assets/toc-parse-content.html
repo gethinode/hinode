@@ -1,0 +1,107 @@
+{{- /*
+  Copyright 2023 Veriphor, LLC
+  
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy of
+  the License at
+  
+  https://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  License for the specific language governing permissions and limitations under
+  the License.
+  */}}
+  
+  {{- /*
+  Renders a table of contents by parsing rendered content.
+  
+  In site configuration, set the default start level, end level, and the minimum
+  number of headings required to show the table of contents:
+  
+      [params.toc]
+      startLevel = 2      # default is 2
+      endLevel = 3        # default is 3
+      minNumHeadings = 2  # default is 2
+  
+  To display the table of contents on a page:
+  
+      +++
+      title = 'Post 1'
+      toc = true
+      +++
+  
+  To display the table of contents on a page, and override one or more of the
+  default settings:
+  
+      +++
+      title = 'Post 1'
+      [toc]
+      startLevel = 2      # default is 2
+      endLevel = 3        # default is 3
+      minNumHeadings = 2  # default is 2
+      +++
+  
+  Change or localize the title with a "toc_title" key in your i18n file(s).
+  
+  Start with these basic CSS rules to style the table of contents:
+  
+      a.toc-item {
+        display: block;
+      }
+      a.toc-level-1 {
+        margin-left: 0em;
+      }
+      a.toc-level-2 {
+        margin-left: 1em;
+      }
+      a.toc-level-3 {
+        margin-left: 2em;
+      }
+      a.toc-level-4 {
+        margin-left: 3em;
+      }
+      a.toc-level-5 {
+        margin-left: 4em;
+      }
+      a.toc-level-6 {
+        margin-left: 5em;
+      }
+  
+  @context {page} .
+  
+  @returns {template.HTML}
+  
+  @example {{ partial "toc-parse-content.html" . }}
+  */}}
+  
+  {{- /* Get configuration. */}}
+  {{- $startLevel := or (.Site.Params.navigation.startLevel | int) 2 }}
+  {{- $endLevel := or (.Site.Params.navigation.endLevel | int) 3 }}
+  {{- $minNumHeadings := or (.Site.Params.navigation.minNumHeadings | int) 2 }}
+  
+  {{- /* Initialize. */}}
+  {{ $headings := partial "assets/toc-headings.html" . }}
+  
+  {{- /* Render */}}
+  {{- if .Site.Params.navigation.toc }}
+    {{- with $headings }}
+      {{- if ge (len .) $minNumHeadings }}
+        <strong class="d-block h6 my-2 pt-4">{{ T "toc" }}:</strong>
+        <nav class="toc">
+          {{- range . }}
+            {{- $attrs := dict "class" (printf "toc-item toc-level-%d" (add 1 (sub .level $startLevel))) }}
+            {{- with .id }}
+              {{- $attrs = merge $attrs (dict "href" (printf "%s#%s" $.RelPermalink .)) }}
+            {{- end }}
+            <a
+            {{- range $k, $v := $attrs }}
+              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+            {{- end -}}
+            >{{ .text }}</a>
+          {{- end }}
+        </nav>
+      {{- end }}
+    {{- end }}
+  {{- end }}
