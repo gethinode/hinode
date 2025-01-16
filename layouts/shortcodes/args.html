@@ -81,5 +81,5 @@
         {{ end }}
     {{ end }}
 
-    {{ partial "assets/table.html" (dict "page" .Page "input" $table "args" slice) }}
+    {{ partial "assets/table.html" (dict "page" .Page "input" $table "wrap" true) }}
 {{ end }}

@@ -65,6 +65,7 @@
       "use"
     ],
     "classes": [
+      "%!s(<nil>)",
       "accordion",
       "accordion-body",
       "accordion-button",

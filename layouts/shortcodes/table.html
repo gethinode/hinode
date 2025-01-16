@@ -5,63 +5,34 @@
 -->
 
 {{ $error := false }}
-
-<!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "table" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
+{{ $args := dict }}
+{{ $breakpoint := "" }}
 
 <!-- Initialize arguments -->
-{{ $breakpoint := "" }}
-{{ $class := "" }}
-{{ $sortable := false }}
-{{ $paging := false }}
-{{ $searchable := false }}
-{{ $pagingOptionPerPage := 10 }}
-{{ $pagingOptionPerPageSelect := "" }}
-
 {{- if .IsNamedParams -}}
-    {{ $breakpoint = .Get "breakpoint" }}
-    {{ $class = .Get "class" | default "" }}
-    {{ if isset .Params "sortable" }}{{ $sortable = partial "utilities/CastBool.html" (.Get "sortable") }}{{ end }}
-    {{ if isset .Params "paging" }}{{ $paging = partial "utilities/CastBool.html" (.Get "paging") }}{{ end }}
-    {{ if isset .Params "searchable" }}{{ $searchable = partial "utilities/CastBool.html" (.Get "searchable") }}{{ end }}
-    {{ if isset .Params "pagingOptionPerPage" }}{{ $pagingOptionPerPage = (.Get "pagingOptionPerPage") }}{{ end }}
-    {{ if isset .Params "pagingOptionPerPageSelect" }}{{ $pagingOptionPerPageSelect = (.Get "OptionPerPageSelect") }}{{ end }}
+    {{ $args = partial "utilities/InitArgs.html" (dict "structure" "table" "args" .Params "group" "shortcode") }}
+    {{ if $args.err }}
+        {{ partial "utilities/LogErr.html" (dict 
+            "partial" "shortcodes/table.html" 
+            "msg" "Invalid arguments"
+            "details" $args.errmsg
+            "file" page.File
+        )}}
+    {{ end }}
 {{ else }}
     {{ $breakpoint = .Get 0 }}
 {{ end }}
 
 <!-- Main code -->
-{{ if or $sortable $paging $searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
-
-{{- $input := .Inner | .Page.RenderString }}
-{{ $regex := `<table\s*class="(.+?)"` }}
-{{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
-{{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
-
-{{ $attributes := "" }}
-{{ if $sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
-{{ if $paging }}
-    {{ $attributes = printf "%s data-table-paging=true" $attributes }}
-    {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $pagingOptionPerPage }}
-    {{ if (ne $pagingOptionPerPageSelect "") }}
-        {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes $pagingOptionPerPageSelect }}
-    {{ end }}
-{{ end }}
-{{ if $searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
-
-
-{{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
-{{ $input := replaceRE $regex $new $input 1 -}}
-
-{{ if not $error }}
-    {{ if eq $breakpoint "none" }}
-        {{ $input | safeHTML }}
-    {{ else }}
-        <div class="table-responsive{{- with $breakpoint }}-{{ . }}{{ end -}}">
-        {{ $input | safeHTML }}
-        </div>
-    {{ end }}
-{{ end }}
+{{ partial "assets/table.html" (dict 
+    "page" .Page
+    "input" .Inner
+    "breakpoint" (or $breakpoint $args.breakpoint)
+    "class" $args.class
+    "sortable" $args.sortable
+    "paging" $args.paging
+    "pagingOptionPerPage" $args.pagingOptionPerPage
+    "pagingOptionPageSelect" $args.pagingOptionPageSelect
+    "searchable" $args.searchable
+    "wrap" $args.wrap
+) }}
