@@ -68,11 +68,11 @@
         {{ $api := printf "https://www.youtube.com/oembed?format=json&url=%s" (printf "https://www.youtube.com/watch?v=%s" $id) }}
         {{ $padding := "56.25%" }}
 
-        {{ with resources.GetRemote $api }}
+        {{ with try (resources.GetRemote $api) }}
             {{ with .Err }}
                 {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $origin . }}
             {{ else }}
-                {{ $data := . | transform.Unmarshal }}
+                {{ $data := .Value | transform.Unmarshal }}
                 {{ if $autotitle }}{{ with $data.title }}{{ $title = . }}{{ end }}{{ end }}
                 {{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}
             {{ end }}
@@ -97,11 +97,11 @@
         {{- $dnt := cond $pc.EnableDNT 1 0 -}}
         {{- $query := querify "url" $url "dnt" $dnt -}}
         {{- $api := printf "https://vimeo.com/api/oembed.json?%s" $query -}}
-        {{- with resources.GetRemote $api -}}
+        {{- with try (resources.GetRemote $api) -}}
             {{ with .Err }}
                 {{ errorf "Unable to parse video metadata '%q': %s\n  %s" $api $origin . }}
             {{ else }}
-                {{ $data := . | transform.Unmarshal }}
+                {{ $data := .Value | transform.Unmarshal }}
                 {{ if $autotitle }}{{ with $data.title }}{{ $title = . }}{{ end }}{{ end }}
                 {{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}
             {{ end }}
