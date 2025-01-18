@@ -79,12 +79,10 @@ arguments:
         - 16x9
         - 21x9
     release: v0.26.5
-  portrait:
-    type: bool
+  options:
+    type: string
     optional: true
-    default: false
+    release: v0.28.2
     comment: >-
-      Flag to adjust the ratio from landscape to portrait. The image itself is
-      not rotated, only the crop area is adjusted. Not applicable to vector
-      graphics.
-    release: v0.26.5
+      Optional query parameters to append to video asset's url. The query string
+      is prepended with a `?` symbol. Only applicable to Cloudinary.

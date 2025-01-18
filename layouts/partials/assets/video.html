@@ -119,7 +119,9 @@
         {{ $url := printf "https://player.cloudinary.com/embed/?cloud_name=%s&public_id=%s" $account $id }}
         {{ $params := "&controls=true" }}
         {{ if $autoplay }}{{ $params = print $params "&autoplay=true&muted=true" }}{{ end }}
-        {{ with $params }}{{ $url = print $url . }}{{ end }}
+        {{ with .options }}{{ $params = print "&" . }}{{ end }}
+        {{ $params = strings.TrimLeft "?&" $params }}
+        {{ with $params }}{{ $url = print $url "&" . }}{{ end }}
         {{ $padding := "56.25%" }}
 
         {{ $thumbnail := partial "utilities/URLJoin.html" (dict "base" (path.Dir $id) "path" (printf "%s.jpg" (path.BaseName $id))) }}
