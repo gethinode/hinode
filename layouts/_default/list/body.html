@@ -2,11 +2,13 @@
 {{- $fullCover := $.Scratch.Get "fullCover" -}}
 {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
 {{- $layout := .Params.layout -}}
+{{- $title := .Title }}
+{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
 
 <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
     <div class="col-12 col-{{ $breakpoint.current }}-9">
         {{ if not .IsHome }}
-            {{ with .Title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
+            {{ with $title }}<p id="{{ anchorize . }}" class="display-4 mt-5{{ if and $.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
         {{ end }}
         {{ if (.Params.menu) }}
             {{- partial "assets/section-menu.html" (dict "page" .) -}}

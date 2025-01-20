@@ -10,6 +10,7 @@
     footerBelowFold = false
     loading = "lazy"
     breakpoint = "md"
+    titleCase = false
     [main.internalLinks]
         validate = true
         pretty = false

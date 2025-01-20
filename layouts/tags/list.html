@@ -3,6 +3,8 @@
     {{- $layout := $page.Params.layout -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
     {{- $hasSidebar := site.Params.navigation.sidebar | default true -}}
+    {{- $pageTitle := .Page.Title }}
+    {{ if site.Params.main.titleCase }}{{ $pageTitle = title $pageTitle }}{{ end }}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
         <div class="row row-cols-1 row-cols-{{ $breakpoint.prev }}-{{ if $hasSidebar }}3{{ else }}2{{ end }}">
@@ -14,17 +16,20 @@
                     {{ end -}}
                 {{- end -}}
 
-                <p class="display-4 mt-5">{{ .Page.Title }}</p>
+                <p class="display-4 mt-5">{{ $pageTitle }}</p>
 
                 {{ if eq .Kind "taxonomy" }}
                     <div class="row mt-5"></div>
                     {{ range $.Site.Taxonomies.tags.ByCount }}
+                        {{- $title := .Page.Title }}
+                        {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+
                         <div class="row mt-2">
                             <div class="col-3 mt-auto text-right">
                                 {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
                             </div>
                             <div class="col-9">
-                                <a href="{{ .Page.RelPermalink }}">{{ .Page.Title | .Page.RenderString }}</a>
+                                <a href="{{ .Page.RelPermalink }}">{{ $title | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}
@@ -37,6 +42,8 @@
                     {{ range .Pages }}
                         {{ $year := .Date.Year }}
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
+                        {{- $title := .Title }}
+                        {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
                         <div class="row mt-2">
                             <div class="d-none d-{{ $breakpoint.prev }}-block col-{{ $breakpoint.prev }}-3 mt-auto text-right">
                                 {{ with .Date }}
@@ -52,7 +59,7 @@
                                     <p class="text-body-secondary mt-5">{{ $year }}</p>
                                     {{ $.Scratch.Set "lastYear" $year }}
                                 {{ end }}
-                                <a href="{{ .Page.RelPermalink }}">{{ if .Draft }}{{ T "draft" | upper }}: {{ end }}{{ .Title | .Page.RenderString }}</a>
+                                <a href="{{ .Page.RelPermalink }}">{{ if .Draft }}{{ T "draft" | upper }}: {{ end }}{{ $title | .Page.RenderString }}</a>
                             </div>
                         </div>
                     {{ end }}

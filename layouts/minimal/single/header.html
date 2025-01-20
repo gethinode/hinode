@@ -1,3 +1,6 @@
-{{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+{{ $title := .Title }}
+{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+
+{{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
 {{ partial "assets/sharing.html" (dict "page" .) }}
 <p class="lead mb-5">{{ .Description }}</p>

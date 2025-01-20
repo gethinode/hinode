@@ -1,5 +1,9 @@
 {{ $text := chomp .Text }}
-{{ if site.Params.main.titleCase }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
+{{ if site.Params.main.titleCase }}{{ $text = title $text }}{{ end }}
+
+{{ if eq page.RelPermalink "/en/privacy/" }}
+    {{ warnf "title: %s" (.Text | safeHTML) }}
+{{ end }}
 
 {{ if and site.Params.navigation.anchor $text }}
 <h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">
