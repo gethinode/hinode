@@ -33,7 +33,10 @@
     {{- $align := .align | default "center" -}}
 
     <div class="text-{{ $align }}">
-        {{ with $page.Title }}<p class="display-4">{{ . }}</p>{{ end }}
+        {{ $title := $page.Title }}
+        {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+
+        {{ with $title }}<p class="display-4">{{ . }}</p>{{ end }}
         <span class="fs-5 text-muted">{{ $page.Description }}</span>
 
         {{ if $actions }}

@@ -16,6 +16,7 @@
 {{- $title := .title -}}
 {{- $description := .description -}}
 {{- $content := .content -}}
+{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
 
 <!-- Main code -->
 {{ with $title }}<p id="{{ anchorize . }}" class="display-4 py-5{{ if and page.IsHome site.Params.home.centerHeadline }} text-center{{ end }}">{{ . }}</p>{{ end }}
