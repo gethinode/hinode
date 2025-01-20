@@ -37,6 +37,9 @@
     <li class="mb-1">
         <div class="d-flex w-100 p-0 sidebar-item-group">
             <div class="text-start flex-grow-1 {{ if $current }}fw-bold{{ end }}">
+                {{- $groupTitle := $group.title -}}
+                {{ if site.Params.main.titleCase }}{{ $groupTitle = title $groupTitle }}{{ end }}
+                
                 {{ $dest := $href }}
                 {{ $target := "" }}
                 {{ if or $current (not $ref) }}
@@ -45,7 +48,7 @@
                 <a {{ with $dest }} href="{{ . }}"{{ else }}
                 data-bs-toggle="collapse" 
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
-                {{ end }}>{{ $group.title }}</a>
+                {{ end }}>{{ $groupTitle }}</a>
             </div>
             
             <button 
