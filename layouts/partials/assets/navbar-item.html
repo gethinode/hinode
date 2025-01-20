@@ -77,16 +77,19 @@
 
 <!-- Main code -->
 {{ if not $error }}
+    {{ $title := $menu.Name }}
+    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+
     {{ if $menu.Params.button }}
         {{ partial "assets/button.html" (dict 
-            "title" $menu.Name
+            "title" $title
             "icon" $menu.Pre
             "href" $menuURL
             "size" "sm"
         )}}
     {{ else }}
         {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{ . }}{{ end }}" 
-            {{ if $isIcon }}aria-label="{{ $menu.Name }}"{{ end }}
+            {{ if $isIcon }}aria-label="{{ $title }}"{{ end }}
             data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
             {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTML }}"{{ with $externalHref }} {{ . | safeHTML }}{{ end }}{{ end }} {{ $button | safeHTML }}>
             
@@ -97,7 +100,7 @@
                     {{ partial "assets/icon.html" (dict "icon" (string .) )}}
                 {{ end }}
             {{ end -}}
-            <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $plain }}{{ $menu.Name }}{{ end }}</span>
+            <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $plain }}{{ $title }}{{ end }}</span>
             {{- with $menu.Post }}{{ . }}{{ end -}}
             {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
         {{ cond (ne $menuURL "") "</a>" "</div>" | safeHTML }}

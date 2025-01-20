@@ -106,7 +106,12 @@
         {{ end }}
     {{ end }}
 
-    {{- if not $case }}{{ $text = lower $text }}{{ end -}}
+    {{- if not $case }}
+        {{ $text = lower $text }}
+    {{ else if site.Params.main.titleCase }}
+        {{ $text = title $text }}
+    {{ end -}}
+
     {{ if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) }}
         {{ $destination = printf "%s/" $destination }}
     {{ end }}

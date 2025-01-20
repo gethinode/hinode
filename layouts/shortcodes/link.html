@@ -22,7 +22,10 @@
 {{ $force := false }}
 {{ $cue := site.Params.main.externalLinks.cue }}
 {{ $tab := site.Params.main.externalLinks.tab }}
-{{ $text := trim .Inner " \r\n" | .Page.RenderString | safeHTML }}
+{{ $text := chomp .Inner }}
+{{ if site.Params.main.titleCase }}{{ $text = title $text }}{{ end }}
+{{ $text := $text | .Page.RenderString | safeHTML }}
+
 {{- $anchor := "" -}}
 
 {{ if .IsNamedParams }}

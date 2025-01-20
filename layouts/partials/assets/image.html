@@ -33,6 +33,9 @@
 {{- $url := .url -}}
 {{- $mode := .mode -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
+{{ if and site.Params.main.titleCase (eq $caption (plainify $caption)) }}
+    {{ $caption = title $caption }}
+{{ end }}
 
 <!-- Main code -->
 {{ $params := dict }}

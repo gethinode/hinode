@@ -2,13 +2,13 @@
 
 <!-- Adapted from doks -->
 {{ with .Params.meta.title }}
-    {{ $.Scratch.Set "title" . -}}
+    {{ $title := . }}
+    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ $.Scratch.Set "title" $title -}}
 {{ else }}
-    {{ with .Title -}}
-        {{ $.Scratch.Set "title" . -}}
-    {{ else -}}
-        {{ $.Scratch.Set "title" .Site.Title -}}
-    {{ end -}}
+    {{ $title := .Title | default .Site.Title }}
+    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ $.Scratch.Set "title" $title -}}
 {{ end }}
 
 {{ $description := or (partial "utilities/GetDescription.html" (dict "page" . "meta" true)) .Site.Params.main.description }}
