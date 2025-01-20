@@ -12,7 +12,10 @@
     {{- errorf "layout [_default/single/header.html] - Invalid value for param 'metadata': %s" $metadata -}}
 {{- end -}}
 
-{{ with .Title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+{{ $title := .Title }}
+{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+
+{{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
 {{ if ne $metadata "none" }}
     <small class="text-body-secondary text-uppercase">
         {{ if .Date }}

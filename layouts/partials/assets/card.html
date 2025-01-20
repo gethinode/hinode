@@ -86,6 +86,8 @@
 {{- if eq $body "title" }}{{ $description = "" }}{{ end -}}
 {{- if eq $body "none" }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 
+{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+
 <!-- Inline partial to render the card's body -->
 {{- define "partials/card-body.html" -}}
     {{- $title := .title -}}
