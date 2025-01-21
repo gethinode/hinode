@@ -3,7 +3,7 @@
         {{ errorf "Failed to render KaTeX: %q. See %s" . $.Position }}
     {{ else }}
         {{ if $.Attributes.class }}
-            <div class="{{ $.Attributes.class }}">{{ . }}</div>
+            <div class="{{ $.Attributes.class | safeHTMLAttr }}">{{ .Value }}</div>
         {{ else }}
             {{ .Value }}
         {{ end }}
