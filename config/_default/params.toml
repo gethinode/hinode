@@ -42,6 +42,12 @@
         host = "youtube"
 # toml-docs-end videos
 
+[dam]
+    videoCodecs = [
+        "webm/vp9",
+        "mp4/h265",
+        "mp4"
+    ]
 
 # toml-docs-start debugging
 [debugging]

@@ -117,9 +117,19 @@
         {{ end }}
 
         {{ $url := printf "https://player.cloudinary.com/embed/?cloud_name=%s&public_id=%s" $account $id }}
-        {{ $params := "&controls=true" }}
-        {{ if $autoplay }}{{ $params = print $params "&autoplay=true&muted=true" }}{{ end }}
-        {{ with .options }}{{ $params = print "&" . }}{{ end }}
+        {{ $params := "" }}
+        {{ if $autoplay }}{{ $params = print $params "&player[autoplay]=true&player[muted]=true" }}{{ end }}
+
+        {{ $codecs := slice }}
+        {{ with index site.Params "dam" }}{{ with index . "videoCodecs" }}{{ $codecs = . }}{{ end }}{{ end }}
+        {{ range $k, $v := $codecs }}
+            {{ $params = printf "%s&source[source_types][%d]=%s" $params $k (urlquery $v) }}
+        {{ end }}
+        {{ if gt (len $codecs) 0 }}
+            {{ $params = print $params "&source[transformation][1][quality]=auto" }}
+        {{ end }}
+
+        {{ with .options }}{{ $params = print $params "&" . }}{{ end }}
         {{ $params = strings.TrimLeft "?&" $params }}
         {{ with $params }}{{ $url = print $url "&" . }}{{ end }}
         {{ $padding := "56.25%" }}
@@ -138,7 +148,7 @@
             {{ if not $title }}{{ $title = printf "Cloudinary video '%s'" (path.BaseName $id) }}{{ end }}
 
             <div class="video-embedded {{ $class }}" data-video-padding="{{ $padding }}">
-                <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                <iframe src="{{ $url | safeURL }}" title="{{ $title }}" allow="autoplay; fullscreen; encrypted-media" frameborder="0">
                 </iframe>
             </div>
         {{ else }}
