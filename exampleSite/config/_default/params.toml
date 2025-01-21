@@ -64,6 +64,11 @@
 
 [dam]
     dimensions = "dimensions.yml"
+    videoCodecs = [
+        "webm/vp9",
+        "mp4/h265",
+        "mp4"
+    ]
 
 [[dam.providers]]
     name = "Cloudinary"
