@@ -79,12 +79,16 @@
                 {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
             {{ end }}
             {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
+            {{ $res := "" }}
+            {{ if $isPageRes }}
+                {{- $res = partial "utilities/GetResource.html" (dict "url" .destination "page" $page) -}}
+            {{ end }}
             {{ $isStatic := fileExists (path.Join "static" $destination) }}
-            {{ if and (not $isPageRes) (not $isStatic) }}
+            {{ if and (not $res) (not $isStatic) }}
                 {{- errorf "partial [assets/link.html] - Cannot find page or asset: '%s' at '%s'" $destination $page.File.Path -}}
                 {{- $error = true -}}
-            {{ else if $isPageRes }}
-                {{ $destination = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix "/content" $pageContext) $destination)) }}
+            {{ else if $res }}
+                {{ $destination = $res.RelPermalink }}
             {{ else if $isStatic }}
                 {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
             {{ end }}
