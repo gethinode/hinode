@@ -18,17 +18,17 @@ Hinode provides several shortcodes that wrap common Bootstrap components. Refer 
 
 As an example, the following shortcode displays the full text of an abbreviation on hover.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* abbr "CI/CD" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Accordion
 
 As an example, the following shortcode displays an accordion with three elements, of which the first element is expanded.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
   {{</* accordion-item header="Accordion Item #1" show="true" */>}}
@@ -43,25 +43,25 @@ As an example, the following shortcode displays an accordion with three elements
   {{</* /accordion-item */>}}
 {{</* /accordion */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Alert
 
 As an example, the following shortcode displays a simple alert.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* alert color="danger" dismissible="true" */>}}
     A simple danger alert—check it out!
 {{</* /alert */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Badge
 
 Use the badge shortcode to display a badge for a heading.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example >}}
 Heading 1 {{</* badge title="New" */>}}
 {.h1}
@@ -81,35 +81,35 @@ Heading 5 {{</* badge title="New" */>}}
 Heading 6 {{</* badge title="New" */>}}
 {.h6}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Breadcrumb
 
 As an example, the following shortcode displays a breadcrumb for the blog page.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* breadcrumb path="blog" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Button
 
 As an example, the following shortcode displays a tooltip for a dark button with a badge.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button color="secondary" tooltip="Click on the inbox to view your unread messages" href="#!" badge="99+" */>}}
     Inbox
 {{</* /button */>}}
 {{< /example>}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Button group
 
 As an example, the following shortcode displays a group of three buttons.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button-group aria-label="Basic example" */>}}
   {{</* button color="primary" href="#!" */>}}Left{{</* /button */>}}
@@ -117,24 +117,24 @@ As an example, the following shortcode displays a group of three buttons.
   {{</* button color="primary" href="#!" */>}}Right{{</* /button */>}}
 {{</* /button-group */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Card
 
 As an example, the following shortcode displays a stacked card that links to the [about]({{% ref "about" %}}) page. It includes a custom header.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
   header="publication" footer="none" button=true /*/>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Card group
 
 As an example, the following shortcode displays a card group of three elements.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card-group padding="3" gutter="3" button=true buttonType="link" cols=2 scroll=true */>}}
     {{</* card title="Bootstrap framework" icon="fab bootstrap" */>}}
@@ -149,13 +149,13 @@ As an example, the following shortcode displays a card group of three elements.
     {{</* /card */>}}
 {{</* /card-group */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Carousel
 
 As an example, the following shortcode displays a centered carousel with three slides, 16x9 aspect ratio, and a relative width of 67% on large screens.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* carousel ratio="16x9" class="col-sm-12 col-lg-8 mx-auto" */>}}
   {{</* img src="img/coffee.jpg" caption="slide 1" */>}}
@@ -163,13 +163,13 @@ As an example, the following shortcode displays a centered carousel with three s
   {{</* img src="img/dunes.jpg" caption="slide 3" */>}}
 {{</* /carousel */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Collapse
 
 As an example, the following shortcode displays a button that, when clicked, triggers a panel to appear or disappear.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button collapse="collapse-1" */>}}
     Trigger panel
@@ -180,23 +180,23 @@ As an example, the following shortcode displays a button that, when clicked, tri
     revealed when the user activates the relevant trigger.
 {{</* /collapse */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Command prompt
 
 Use the `command` shortcode to generate a block with a default bash command prompt.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command */>}}
 export MY_VAR=123
 {{</* /command */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 Specify `user` and `host` to add the user context to the prompt. In addition, use `(out)` to specify an output line and use `\` to denote a line continuation.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command user="user" host="localhost" */>}}
 export MY_VAR=123
@@ -210,7 +210,7 @@ echo "goodbye"
 (out)goodbye
 {{</* /command */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Docs
 
@@ -222,47 +222,47 @@ Use the `docs` shortcode to display the content of a `js`, `scss` or `toml` file
 
 Use the `example` shortcode to display a code example and to render a preview of the same input.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* command */>}}
 export MY_VAR=123
 {{</* /command */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## File
 
 Use the `file` shortcode to print and highlight the full content of a given input file.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Icon
 
 As an example, the following shortcodes show a square check, a brand logo, a circle check, and a custom icon.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* fa square-check */>}}
 {{</* fab linkedin */>}}
 {{</* fas circle-check */>}}
 {{</* icon custom activity */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Image
 
 As an example, the following shortcode displays an image with rounded corners and a 4x3 aspect ratio in portrait mode.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* image src="img/flowers.jpg" ratio="4x3" caption="Figure caption" class="rounded col-md-6"
   portrait=true wrapper="text-center" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 The same image, but then using Markdown syntax:
 
@@ -273,35 +273,35 @@ The same image, but then using Markdown syntax:
 
 As an example, the following shortcode displays a regular vector image.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* image src="/img/logo_icon.svg" class="col-sm-6 col-lg-4" wrapper="text-center" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 As an example, the following shortcode displays a vector image with a symbol reference.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* image src="/img/logo_var.svg#logo" class="col-sm-6 col-lg-4" wrapper="text-center" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Ins
 
 As an example, the following shortcode displays underlined text.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example >}}
 This is an {{</* ins */>}}underlined text{{</* /ins */>}}.
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Link
 
 As an example, the following shortcodes render links in different formats.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 
 - {{</* link hinode >}}Named link with default settings{{< /link */>}}
@@ -321,23 +321,23 @@ As an example, the following shortcodes render links in different formats.
 - {{</* link "components/#map" /*/>}}
 
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Mark
 
 Use the `mark` shortcode to highlight text. The inner content is used as input.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 Use the mark shortcode to {{</* mark >}}highlight{{< /mark */>}} specific text.
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Nav
 
 As an example, the following shortcode displays a tab group with vertically aligned pills.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
   {{</* nav type="pills" vertical="true" */>}}
     {{</* nav-item header="Nav Item #1" show="true" */>}}
@@ -352,23 +352,23 @@ As an example, the following shortcode displays a tab group with vertically alig
     {{</* /nav-item */>}}
   {{</* /nav */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Navbar
 
 As an example, the following shortcode displays a light navigation header.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* navbar id="navbar-sample" path="blog" color="primary" size="md" search="false" menus="sample" title="Brand" mode="false" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Persona
 
 As an example, the following shortcode displays a persona card with a primary color.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* persona thumbnail="/img/creator-1x1.jpg" title="Creators" color="primary" */>}}
   As a content creator you value your independence. You like to take control of your
@@ -380,55 +380,55 @@ As an example, the following shortcode displays a persona card with a primary co
   Hinode.
 {{</* /persona */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Release
 
 As an example, the following shortcode displays a default release button.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* release version="v0.14.1" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Spinner
 
 As an example, the following shortcode displays a centered spinner.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* spinner color="info" class="text-center" */>}}
 Loading...
 {{</* /spinner */>}}
 {{< /example>}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Sub
 
 As an example, the following shortcode displays subscript text.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example >}}
 H{{</* sub 2 */>}}O is a liquid.
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Sup
 
 As an example, the following shortcode displays superscript text.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example >}}
 2{{</* sup 10 */>}} is 1024.
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Table
 
 As an example, the following shortcode displays a responsive table.
 
-{{% comment %}}<!-- markdownlint-disable MD037 MD058 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
 {{</* table */>}}
 | #  | Heading | Heading | Heading | Heading | Heading | Heading | Heading | Heading | Heading |
@@ -438,23 +438,23 @@ As an example, the following shortcode displays a responsive table.
 | 3. | cell    | cel     | cel     | cel     | cel     | cel     | cel     | cel     | cel     |
 {{</* /table */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 MD058 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 MD058 -->
 
 ## Timeline
 
 As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* timeline data="timeline" background="dark" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Toast
 
 As an example, the following shortcode displays a button that, when clicked, triggers the toast message.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* button toast="toast-example-1" */>}}
     Show toast 1
@@ -472,24 +472,24 @@ As an example, the following shortcode displays a button that, when clicked, tri
     This is the second toast message. It supports `markdown.`
 {{</* /toast */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Tooltip
 
 As an example, the following shortcode displays a tooltip for a colored hyperlink.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* tooltip color="primary" title="Tooltip caption" href="#!" */>}}Tooltip{{</* /tooltip */>}} demonstration
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Video
 
 As an example, the following shortcode displays an Elephants video hosted by Cloudinary.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->

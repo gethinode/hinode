@@ -4,7 +4,7 @@ description: Politique de cookies de gethinode.com
 date: 2024-09-19
 layout: docs
 ---
-{{% comment %}}<!-- markdownlint-disable MD036 -->{{% /comment %}}
+<!-- markdownlint-disable MD036 -->
 *Date d'entrée en vigueur : 19-Sep-2024*
 
 ## Que sont les cookies ?
