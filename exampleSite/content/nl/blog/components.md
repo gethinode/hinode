@@ -19,17 +19,17 @@ Hinode bevat meerdere shortcodes naast de generieke Bootstrap elementen. Zie de 
 
 Het volgende voorbeeld gebruikt een shortcode om een animatie te tonen, die afspeelt zodra je er met de muis overheen beweegt.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* animation data="gatin.json" auto=false hover=true class="col-6 mx-auto" */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
 
 ## Gegevenstabellen
 
 Het volgende voorbeeld gebruikt een shortcode om een responsieve tabel met geavanceerde mogelijkheden te tonen.
 
-{{% comment %}}<!-- markdownlint-disable MD037 MD058 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
 {{</* table sortable="true" paging="true" searchable="true" pagingOptionPerPage=5 */>}}
 |  #  | Kop     |
@@ -66,7 +66,7 @@ Het volgende voorbeeld gebruikt een shortcode om een responsieve tabel met geava
 | 30. | Item 30  |
 {{</* /table */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 MD058 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 MD058 -->
 
 ## Formule (KaTeX)
 
@@ -85,8 +85,8 @@ $$\forall x \in X, \quad \exists y \leq \epsilon$$
 
 Het volgende voorbeeld gebruikt een shortcode om een interactieve kaart van Amsterdam te tonen.
 
-{{% comment %}}<!-- markdownlint-disable MD037 -->{{% /comment %}}
+<!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* map lat=52.377 long=4.90 zoom=13 popup="Amsterdam Central Station" popup-lat=52.378062 popup-long=4.900562 */>}}
 {{< /example >}}
-{{% comment %}}<!-- markdownlint-enable MD037 -->{{% /comment %}}
+<!-- markdownlint-enable MD037 -->
