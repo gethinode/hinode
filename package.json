@@ -79,7 +79,7 @@
   "devDependencies": {
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "cpy-cli": "^5.0.0",
-    "eslint": "^9.20.1",
+    "eslint": "^9.21.0",
     "markdownlint-cli2": "^0.17.2",
     "neostandard": "^0.12.1",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
