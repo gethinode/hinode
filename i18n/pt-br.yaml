@@ -1,0 +1,169 @@
+# Single pages
+- id: postedOnDate
+  translation: "Publicado em {{ . }}"
+- id: lastModified
+  translation: "Última modificação em {{ . }}"
+- id: read
+  translation: "ler"
+- id: minutesShort
+  translation: "min"
+- id: words
+  translation: "palavras"
+- id: photoFull
+  translation: "Foto de %s em %s"
+- id: photoShort
+  translation: "Foto de {{ . }}"
+- id: photoOn
+  translation: "em"
+- id: draft
+  translation: "Rascunho"
+
+# List pages
+- id: article
+  translation: "Artigo"
+- id: articles
+  translation: "Artigos"
+- id: more
+  translation: "Mais {{ . }}"
+- id: emptyList
+  translation: "Nenhum artigo encontrado"
+- id: emptyTags
+  translation: "Nenhuma tag encontrada"
+- id: readMore
+  translation: "Ler mais"
+
+# Languages
+- id: lang_de
+  translation: "Alemão"
+- id: lang_en
+  translation: "Inglês"
+- id: lang_nl
+  translation: "Holandês"
+- id: lang_fr
+  translation: "Francês"
+- id: lang_pt
+  translation: "Português"
+
+# Sharing
+- id: shareLink
+  translation: "Compartilhe via {{ . }}"
+- id: shareSystem
+  translation: "sistema"
+- id: copyToClipboard
+  translation: "copiar para área de transferência"
+- id: copiedToClipboard
+  translation: "copiado para área de transferência"
+- id: link
+  translation: "Link"
+- id: code
+  translation: "Código"
+- id: download
+  translation: "Baixar artigo"
+
+# Pagination
+- id: paginationNav
+  translation: "Navegação da página"
+- id: paginationPrevious
+  translation: "Página anterior"
+- id: paginationNext
+  translation: "Página seguinte"
+- id: paginationFirst
+  translation: "Primeira página"
+- id: paginationLast
+  translation: "Última página"
+
+# Navigation
+- id: colorMode
+  translation: "Mudar tema"
+- id: colorLight
+  translation: "Claro"
+- id: colorDark
+  translation: "Escuro"
+- id: colorAuto
+  translation: "Auto"
+- id: toggleMainNav
+  translation: "Mostrar/Ocultar menu principal"
+- id: home
+  translation: "Início"
+- id: languageSwitcherLabel
+  translation: "Idioma"
+- id: close
+  translation: "Fechar"
+
+# Table of contents
+- id: toc
+  translation: "Nesta página"
+- id: seeAlso
+  translation: "Veja também"
+- id: sectionMenu
+  translation: "Selecionar um tópico"
+
+# Sidebar
+- id: toggleSidebar
+  translation: "Mostrar/Ocultar barra lateral"
+
+# Feature
+- id: addedFeature
+  translation: "Adicionado em {{ . }}"
+- id: deprecatedFeature
+  translation: "Descontinuado em {{ . }}"
+
+# Versioning
+- id: latest
+  translation: "Mais recente"
+- id: allVersions
+  translation: "Todas as versões"
+- id: newerVersionAlert
+  translation: "Existe uma versão mais recente de {{ . }}!"
+
+# 404 page
+- id: pageNotFound
+  translation: "A página que você está procurando não existe ou ocorreu algum outro erro. Tente voltar para a {{ . }}."
+- id: pageNotFoundTitle
+  translation: "Página não encontrada"
+- id: pageNotFoundHome
+  translation: "página inicial"
+
+# Footer
+- id: copyright
+  translation: "Copyright"
+- id: rights
+  translation: "Todos os direitos reservados"
+- id: poweredBy
+  translation: "Com tecnologia {{ . }}."
+
+# Comments
+- id: show
+  translation: "Mostrar"
+- id: comments
+  translation: "Comentários"
+
+# Arguments
+- id: name
+  translation: "Nome"
+- id: type
+  translation: "Tipo"
+- id: required 
+  translation: "Obrigatório"
+- id: default
+  translation: "Padrão"
+- id: comment
+  translation: "Comentário"
+- id: supportedValues
+  translation: "Valores suportados"
+
+  # Alerts
+- id: caution
+  translation: Atenção
+- id: important
+  translation: Importante
+- id: note
+  translation: Observação
+- id: tip
+  translation: Dica
+- id: warning
+  translation: Aviso
+
+# Image
+- id: image
+  translation: imagem
