@@ -31,17 +31,6 @@
     release = "https://github.com/gethinode/hinode/releases/tag/"
     checkVersion = false
 
-[home]
-    sections = ["blog", "projects"]
-    fullCover = false
-    centerHeadline = false
-    style = ""
-    [home.feature]
-        orientation = "horizontal"
-        color = "primary"
-        width = 4
-        align = "start"
-
 [navigation]
     anchor = true
     logo = "/img/logo_icon.svg"
@@ -111,37 +100,6 @@
     icon = "fas link"
     weight = 50
     clipboard = true
-
-[sections]
-    [sections.blog]
-        title = "Blog"
-        sort = "date"
-        reverse = true
-        cols = 3
-        color = ""
-        padding = "0"
-        header = "full"
-        footer = "none"
-        orientation = "stacked"
-        style = "border-0 card-zoom card-body-margin"
-        homepage = 3
-        separator = true
-    [sections.projects]
-        title = "Projects"
-        layout = "card"
-        sort = "title"
-        reverse = false
-        nested = true
-        cols = 1
-        background = "body-tertiary"
-        color = "body"
-        padding = "3"
-        header = "none"
-        footer = "tags"
-        orientation = "horizontal"
-        style = "border-1 card-emphasize"
-        homepage = 3
-        separator = false
 
 [favicon]
     logo = "img/favicon.png"
