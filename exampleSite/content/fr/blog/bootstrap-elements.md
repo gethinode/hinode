@@ -126,7 +126,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
-  header="publication" footer="none" button=true /*/>}}
+  header-style="publication" footer-style="none" button=true /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -136,7 +136,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card-group padding="3" gutter="3" button=true buttonType="link" cols=2 scroll=true */>}}
+{{</* card-group padding="3" gutter="3" button=true link-type="link" cols=2 scroll=true */>}}
     {{</* card title="Framework Bootstrap" icon="fab bootstrap" */>}}
         Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site
         avec les fichiers source Sass.

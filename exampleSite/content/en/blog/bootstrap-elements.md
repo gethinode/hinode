@@ -20,7 +20,7 @@ As an example, the following shortcode displays the full text of an abbreviation
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* abbr "CI/CD" */>}}
+{{</* abbr key="CI/CD" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -126,7 +126,7 @@ As an example, the following shortcode displays a stacked card that links to the
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
-  header="publication" footer="none" button=true /*/>}}
+  header-style="publication" footer-style="none" button=true /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -136,7 +136,7 @@ As an example, the following shortcode displays a card group of three elements.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card-group padding="3" gutter="3" button=true buttonType="link" cols=2 scroll=true */>}}
+{{</* card-group padding="3" gutter="3" button=true link-type="link" cols=2 scroll=true */>}}
     {{</* card title="Bootstrap framework" icon="fab bootstrap" */>}}
         Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source
         Sass files.
