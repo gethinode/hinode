@@ -20,14 +20,12 @@
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
 {{- $.Scratch.Set "fullCover" $fullCover -}}
 
-{{- /* Define section headings */ -}}
-{{- $loading := "" -}}
-{{- if $fullCover }}{{ $loading = .Site.Params.main.loading }}{{ end -}}
-{{ $sections := partial "utilities/GetSections.html" (dict "page" . "loading" $loading) }}
-{{- $.Scratch.Set "sections" $sections -}}
-
 {{- /* Define main breakpoint */ -}}
 {{- $.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
+
+{{- /* Render blocks and establish overlay mode */ -}}
+{{ $blocks := partial "utilities/RenderContentBlocks.html" (dict "page" . "blocks" .Params.content_blocks) }}
+{{ $overlayMode := $.Scratch.Get "overlayMode" }}
 
 {{- /* Define base URL */ -}}
 {{ $lang := site.LanguageCode | default site.Language.Lang }}
@@ -42,22 +40,22 @@
     </head>
 
     <body>
-        <div class="d-flex flex-column min-vh-100">
-            <div class="d-flex flex-column {{ if $fullCover }} fullscreen{{ end }}{{ if .IsHome }} {{ .Site.Params.home.style }}{{ end }}">
-                {{- partial "assets/navbar.html" (dict
-                    "page" .
-                    "fixed" site.Params.navigation.fixed
-                    "overlay" site.Params.navigation.overlay
-                    "overlayMode" site.Params.navigation.overlayMode
-                    "color" site.Params.navigation.color
-                    "style" (default "light" site.Params.navigation.style)
-                    "size" (default "md" site.Params.navigation.size))
-                -}}
-            {{ block "header" . }}{{ end -}}
-            {{ block "body" . }}{{ end -}}
-            </div>
+        {{- partial "assets/navbar.html" (dict
+            "page" .
+            "fixed" site.Params.navigation.fixed
+            "overlay" site.Params.navigation.overlay
+            "overlayMode" site.Params.navigation.overlayMode
+            "color" site.Params.navigation.color
+            "style" (default "light" site.Params.navigation.style)
+            "size" (default "md" site.Params.navigation.size))
+        -}}
+
+        <div id="container" class="main-content fullscreen">
+            {{ $blocks }}
+            {{ block "main" . }}{{ end -}}
         </div>
 
+        {{- partial "footer/social.html" . -}}
         {{- partial "footer/footer.html" . -}}
         {{- partial "footer/toast-container.html" . -}}
         {{- partial "assets/symbols.html" . -}}

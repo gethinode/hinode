@@ -1,9 +1,7 @@
-{{ define "body" -}}
+{{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{- $hasSidebar := .Site.Params.navigation.sidebar | default true -}}
-    {{ $sidebar := "" }}
-    {{ if $hasSidebar }}{{ $sidebar = partial "body/single/sidebar" . }}{{ end }}
-    {{ $toc := partial "body/single/panel-toc" . }}
+    {{- $sidebar := partial "body/sidebar" . -}}
+    {{- $toc := partial "body/panel-toc" . -}}
 
     {{ with $sidebar }}
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-labelledby="offcanvas-label">
@@ -18,27 +16,20 @@
     {{ end }}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
-        {{ if $hasSidebar -}}
-            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
-                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
-                    {{ $sidebar | safeHTML }}
-                </div>
-                <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 p-4">
-                    {{ partial "body/single/main" . }}
-                </div>
-                <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block pt-5">
-                    {{ $toc | safeHTML }}
-                </div>
+        <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
+            <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
+                {{ $sidebar | safeHTML }}
             </div>
-        {{ else }}
-            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
-                <div class="col col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.current }}-9">
-                    {{ partial "body/single/main" . }}
-                </div>
-                <div class="col col-{{ $breakpoint.current }}-3 d-none d-{{ $breakpoint.current }}-block">
-                    {{ $toc | safeHTML }}
-                </div>
-            </div>    
-        {{ end -}}
+            <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 p-4">
+                {{ .Render "header" }}
+
+                {{ .Render "body" }}
+                
+                {{ .Render "footer" }}
+            </div>
+            <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block pt-5">
+                {{ $toc | safeHTML }}
+            </div>
+        </div>
     </div>
 {{ end -}}
