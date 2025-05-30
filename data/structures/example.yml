@@ -12,7 +12,8 @@ arguments:
     default: markdown
     comment: >-
       Language used to display the code. Use `hugo` to process Hugo (escaped)
-      shortcodes.
+      shortcodes and `bookshop` to render a Bookshop component using inline
+      YAML data.
   show_markup:
     type: bool
     optional: true
@@ -27,6 +28,10 @@ arguments:
     type: string
     optional: true
     comment: Class attributes of the element's container.
+  data:
+    type: string
+    optional: true
+    comment: Bookshop data in YAML format.
 body:
   type: string
   optional: false
