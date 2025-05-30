@@ -58,6 +58,12 @@
 - id: download
   translation: "Download article"
 
+# Hero
+- id: backgroundImage
+  translation: "Background image"
+- id: heroImage
+  translation: "Hero image"
+
 # Pagination
 - id: paginationNav
   translation: "Page navigation"
@@ -105,6 +111,8 @@
   translation: "Added in {{ . }}"
 - id: deprecatedFeature
   translation: "Deprecated in {{ . }}"
+- id: alternativeFeature
+  translation: "Use `{{ . }}` instead"
 
 # Versioning
 - id: latest
