@@ -1,0 +1,40 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: Hero
+  description: Main page Hero block
+  icon: title
+  tags: []
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  breadcrumb:
+  heading:
+    preheading:
+    title:
+    content:
+    align:
+    placement:
+    width:
+    size:
+  background:
+    backdrop:
+    color:
+    subtle:
+  illustration:
+    image:
+    icon:
+    ratio:
+    class:
+    anchor:
+    mode:
+    width:
+  link-type:
+  links:
+  align:
+  order:
+  overlay-mode:
+  cover:
+  orientation:
+  width:

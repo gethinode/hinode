@@ -1,0 +1,45 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: Articles
+  description: Articles section
+  icon: post
+  tags: []
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  heading:
+    preheading:
+    heading:
+    content:
+    align:
+    width:
+  hide-empty:
+  input:
+    section:
+    nested:
+    keywords:
+    categories:
+    tags:
+    reverse:
+    sort:
+  more:
+    title:
+    link:
+  cols:
+  padding:
+  max:
+  pagination:
+  paginate:
+  background:
+    backdrop:
+    color:
+    subtle:
+  scroll:
+  bento:
+  cover:
+  header-style:
+  footer-style:
+  orientation:
+  class:

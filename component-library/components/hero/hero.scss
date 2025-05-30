@@ -1,0 +1,18 @@
+.background-img-fluid {
+    position: absolute;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.background-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: rgba($dark, 0.8);
+}
+
+.hero-content {
+    z-index: 1;
+}

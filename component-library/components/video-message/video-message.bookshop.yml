@@ -1,0 +1,51 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: Video
+  description: Video section
+  icon: build
+  tags: []
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  heading:
+    preheading:
+    title:
+    content:
+    align:
+    placement:
+    width:
+    size:
+  background:
+    backdrop:
+    color:
+    subtle:
+  link-type:
+  orientation:
+  icon-rounded:
+  video:
+    host:
+    account:
+    id:
+    autoplay:
+    options:
+  cols:
+  messages:
+    - title:
+      icon:
+      content:
+      link:
+      label:
+  border:
+  width:
+
+_structures:
+  messages:
+    values:
+      value:
+        title:
+        icon:
+        content:
+        link:
+        label:
