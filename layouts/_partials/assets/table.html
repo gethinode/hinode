@@ -4,7 +4,7 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ define "partials/inline/table.html" }}
+{{ define "_partials/inline/table.html" }}
     {{ $page := .page }}
     {{ $input := .input }}
     {{ $attributes := .attributes }}
@@ -44,7 +44,7 @@
 {{ if $args.paging }}
     {{ $attributes = printf "%s data-table-paging=true" $attributes }}
     {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $args.pagingOptionPerPage }}
-    {{ if (ne $args.pagingOptionPerPageSelect "") }}
+    {{ if $args.pagingOptionPerPageSelect }}
         {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes $args.pagingOptionPerPageSelect }}
     {{ end }}
 {{ end }}

@@ -26,7 +26,7 @@
 {{- $class := .Get "class" | default "" -}}
 
 {{/* Inline partial to render icon */}}
-{{- define "partials/inline/timeline-icon.html" -}}
+{{- define "_partials/inline/timeline-icon.html" -}}
     {{- $col := default 6 .col -}}
     {{- $icon := .icon -}}
     {{- $direction := .direction -}}
@@ -41,7 +41,7 @@
 {{- end -}}
 
 {{/* Inline partial to render icon */}}
-{{- define "partials/inline/timeline-panel.html" -}}
+{{- define "_partials/inline/timeline-panel.html" -}}
     {{- $col := default 6 .col -}}
     {{- $page := .page -}}
     {{- $content := .content -}}

@@ -7,7 +7,7 @@
 {{ $error := false }}
 
 {{/* Define inline partials */}}
-{{ define "partials/inline/match.html" }}
+{{ define "_partials/inline/match.html" }}
     {{ $result := "" }}
     {{ $matches := slice }}
     {{ if gt (len .modules) 0 }}
@@ -20,7 +20,7 @@
     {{ return $result }}
 {{ end }}
 
-{{ define "partials/inline/bundle-script.html" }}
+{{ define "_partials/inline/bundle-script.html" }}
     {{ $page := .page }}
     {{ $match := .match }}
     {{ $destination := .destination }}
@@ -71,7 +71,10 @@
         "details" $args.errmsg
         "file" page.File
     )}}
+    {{ $error = true }}
 {{ end }}
+
+{{ $page := $args.page | default page }}
 
 {{/* Initialize local arguments */}}
 {{ $patterns := dict 
@@ -85,15 +88,15 @@
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{ $state := "immediate" }}
-{{ $config := $args.page.Scratch.Get "modules" }}
+{{ $config := $page.Scratch.Get "modules" }}
 
 {{ $page_modules := slice }}
-{{ if reflect.IsMap $args.page.Params.modules }}
-    {{ $page_modules = $args.page.Params.modules }}
+{{ if reflect.IsMap $page.Params.modules }}
+    {{ $page_modules = $page.Params.modules }}
 {{ else }}
-    {{ $page_modules = $page_modules | append $args.page.Params.modules }}
+    {{ $page_modules = $page_modules | append $page.Params.modules }}
 {{ end }}
-{{ with $args.page.Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
+{{ with $page.Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
 
 {{- $categories := dict "other" slice -}}
 
@@ -142,7 +145,7 @@
                 {{ end }}
 
                 {{ partial "inline/bundle-script.html" (dict 
-                    "page" $args.page
+                    "page" $page
                     "match" $match
                     "destination" (printf "js/%s.bundle.js" $args.type)
                     "cat" $cat
@@ -160,7 +163,7 @@
             {{ range $val }}
                 {{ $modconfig := index $config.modules . }}
                 {{ partial "inline/bundle-script.html" (dict 
-                    "page" $args.page
+                    "page" $page
                     "destination" (printf "js/%s.js" .)
                     "cat" $cat
                     "modules" (slice .)

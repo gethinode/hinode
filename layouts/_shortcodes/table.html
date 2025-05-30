@@ -5,29 +5,24 @@
 */}}
 
 {{ $error := false }}
-{{ $args := dict }}
-{{ $breakpoint := "" }}
 
 {{/* Initialize arguments */}}
-{{- if .IsNamedParams -}}
-    {{ $args = partial "utilities/InitArgs.html" (dict "structure" "table" "args" .Params "group" "shortcode") }}
-    {{ if $args.err }}
-        {{ partial "utilities/LogErr.html" (dict 
-            "partial" "shortcodes/table.html" 
-            "msg" "Invalid arguments"
-            "details" $args.errmsg
-            "file" page.File
-        )}}
-    {{ end }}
-{{ else }}
-    {{ $breakpoint = .Get 0 }}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "table" "args" .Params "group" "shortcode") }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "shortcodes/table.html" 
+        "msg" "Invalid arguments"
+        "details" $args.errmsg
+        "file" page.File
+        "position" .Position
+    )}}
 {{ end }}
 
 {{/* Main code */}}
 {{ partial "assets/table.html" (dict 
     "page" .Page
     "input" .Inner
-    "breakpoint" (or $breakpoint $args.breakpoint)
+    "breakpoint" $args.breakpoint
     "class" $args.class
     "sortable" $args.sortable
     "paging" $args.paging

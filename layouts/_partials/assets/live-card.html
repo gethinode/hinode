@@ -1,0 +1,7 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+<!-- Render card with live image support -->
+{{ $params := merge (dict "hook" "assets/live-image.html") . }}
+{{ partial "assets/card.html" $params }}

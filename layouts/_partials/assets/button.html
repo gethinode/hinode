@@ -6,60 +6,51 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "button" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/button.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "button" "args" . "group" "partial")}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/button.html" 
+        "msg" "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file" page.File
+    )}}
+    {{ $error = $args.err }}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $title := trim .title " \r\n" -}}
-{{- $icon := .icon }}
-{{- if not (or $title $icon) -}}
+{{/* Initialize local arguments */}}
+{{- $title := trim $args.title " \r\n" -}}
+{{- if not (or $title $args.icon) -}}
     {{- warnf "partial [assets/button.html] - Missing element title or icon" -}}
     {{ $title = T "linkPlaceholder" }}
 {{- end -}}
-
-{{- $id := .id }}
-{{- $state := .state  | default "enabled" -}}
-{{- $size := .size | default "md" -}}
-{{- $color := .color | default "primary" -}}
-{{- $outline := .outline | default false -}}
-{{- $badge := .badge | default "" -}}
-{{- $label := .label | default $title -}}
+{{- $label := $args.label | default $title -}}
 
 {{- $tooltip := "" -}}
-{{- if not (strings.HasSuffix $state "active") -}}
-    {{- with .tooltip }}{{ $tooltip = . }}{{ end -}}
+{{- if not (strings.HasSuffix $args.state "active") -}}
+    {{- with $args.tooltip }}{{ $tooltip = . }}{{ end -}}
 {{- end -}}
 
 {{- $href := .href -}}
 {{- $collapse := "" -}}
-{{- if not (strings.HasSuffix $state "active") -}}
-    {{- with .collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
+{{- if not (strings.HasSuffix $args.state "active") -}}
+    {{- with $args.collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
 {{- end -}}
 
 {{- if and $tooltip $collapse -}}
     {{- errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
     {{ $error = true }}
 {{- end -}}
-{{- $type := .type | default "button" -}}
-{{- $placement := .placement | default "top" -}}
-{{- $class := .class | default "" }}
-{{ with $badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
-{{- $order := .order | default "last" -}}
-{{- $justify := .justify | default "center" -}}
-{{- $toast := .toast -}}
-{{- $clipboard := .clipboard -}}
-{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
-{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{- $class := $args.class | default "" }}
+{{ with $args.badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
+{{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
 {{- $isExternal := false }}
 {{ if in (slice "http" "https") ((urls.Parse (absURL $href)).Scheme) }}
     {{ $isExternal = ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
 {{ end }}
 {{- $target := "" -}}
 {{- $rel := "" -}}
-{{- $spacing := .spacing | default true -}}
 
 {{- if $isExternal -}}
     {{- if $tab -}}
@@ -73,38 +64,36 @@
     {{- end -}}
 {{- end -}}
 
-{{- $attributes := .attributes -}}
-
 {{/* Main code */}}
 {{ if not $error }}
     <a aria-label="{{ (or $label $title) | safeHTML }}"
-        {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
-        {{- with $id }} id="{{ . }}"{{ end -}}
+        {{ if ne $args.state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+        {{- with $args.id }} id="{{ . }}"{{ end -}}
         {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
-        {{- with $toast }} data-toast-target="{{ $toast }}"{{ end -}}
-        {{- with $clipboard }} data-clipboard="{{ $clipboard }}"{{ end -}}
-        {{- if eq $type "button" }} class="btn btn-{{ if $outline }}outline-{{ end }}{{ $color }} {{ if ne $size "md"}}btn-{{ $size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $state }}{{ $state }}{{ end }} {{ $class -}}"
-        {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
-        {{- else }} class="btn btn-link link-{{ $color }} position-relative {{ $class }}"{{ end -}}
-        {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $placement }}"{{ end -}}
+        {{- with $args.toast }} data-toast-target="{{ . }}"{{ end -}}
+        {{- with $args.clipboard }} data-clipboard="{{ . }}"{{ end -}}
+        {{- if eq $args.type "button" }} class="btn btn-{{ if $args.outline }}outline-{{ end }}{{ $args.color }} {{ if ne $args.size "md" }}btn-{{ $args.size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $args.state }}{{ $args.state }}{{ end }} {{ $class -}}"
+        {{ if eq $args.state "disabled" }}aria-disabled="true"{{ end -}}
+        {{- else }} class="btn btn-link link-{{ $args.color }} position-relative {{ $class }}"{{ end -}}
+        {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $args.placement }}"{{ end -}}
         {{- with $collapse }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
-        {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
-        {{- if eq $state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
-        {{- range $key, $val := $attributes -}}
+        {{- if eq $args.state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
+        {{- if eq $args.state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
+        {{- range $key, $val := $args.attributes -}}
             {{ printf " %s=\"%s\"" $key $val | safeHTMLAttr }}
         {{- end -}}
         role="button"
         >
-        <span class="d-flex justify-content-{{ $justify }}">
+        <span class="d-flex justify-content-{{ $args.justify }}">
             <span class="my-auto">{{ $title | safeHTML }}</span>
-            {{- with $icon }}<span class="align-self-center{{ if $title }}{{ if eq $order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $icon "spacing" false) }}</span>{{ end }}
+            {{- with $args.icon }}<span class="align-self-center{{ if $title }}{{ if eq $args.order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $args.icon "spacing" false) }}</span>{{ end }}
         </span>
 
-        {{- with $badge }}
+        {{- with $args.badge }}
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ . }}
                 {{ with $label }}<span class="visually-hidden">{{ . }}</span>{{ end }}
             </span>
         {{- end -}}  
-    </a>{{ if $spacing }}&nbsp;{{- end }}
+    </a>{{ if $args.spacing }}&nbsp;{{- end }}
 {{ end }}

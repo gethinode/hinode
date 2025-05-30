@@ -1,0 +1,60 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+{{/* Ingest bookshop bindings when applicable */}}
+{{ if eq hugo.Environment "cloudcannon" }}
+    {{ partial "bookshop_bindings" `.Params.content_blocks` }}
+{{ end }}
+
+{{/* Initialize arguments */}}
+{{ $page := .page }}
+{{ $blocks := slice }}
+{{ $default := false }}
+{{ if and $page.IsHome (in $page.Site.Params.modules.bookshop.hero.default "home") }}{{ $default = true }}{{ end }}
+{{ if and $page.IsPage (in $page.Site.Params.modules.bookshop.hero.default "page") }}{{ $default = true }}{{ end }}
+{{ if and $page.IsSection (in $page.Site.Params.modules.bookshop.hero.default "section") }}{{ $default = true }}{{ end }}
+
+{{/* Insert a default hero and article block (for list pages) when no content blocks are available */}}
+{{ if and .blocks (gt (len .blocks) 0 )}}
+    {{ $blocks = .blocks }}
+{{ else if $default }}
+    {{ $err := (hasPrefix $page.LinkTitle "404") }}    
+    {{ $pageTitle := $page.LinkTitle }}
+    {{ $breadcrumb := $page.Site.Params.navigation.breadcrumb }}
+
+    {{ if in (slice "term" "page") $page.Kind }}
+        {{ $sectionPage := (index $page.Ancestors.Reverse 1) }}
+        {{ with $sectionPage }}{{ $pageTitle = .LinkTitle }}{{ end }}
+    {{ end }}
+
+    {{ if $err }}
+        {{ $pageTitle = "" }}
+        {{ $breadcrumb = false }}
+    {{ end }}
+
+    {{ $blocks = $blocks | append (dict 
+        "_bookshop_name" "hero"
+        "heading" (dict "title" $pageTitle "align" $page.Site.Params.modules.bookshop.hero.align)
+        "breadcrumb" $breadcrumb
+        "background" (dict "backdrop" $page.Site.Params.modules.bookshop.hero.backdrop)
+        "overlay-mode" $page.Site.Params.modules.bookshop.hero.overlayMode
+    )}}
+
+    {{ if eq $page.Kind "section" }}
+        {{ $blocks = $blocks | append (dict 
+            "_bookshop_name" "articles"
+            "hide-empty" false
+            "input" (dict "section" $page.Section "reverse" true "sort" "date" "nested" true)
+            "cols" 3
+            "padding" "0"
+            "paginate" true
+            "scroll" false
+        )}}
+    {{ end }}
+
+    {{ $page.Scratch.Set "overlayMode" $page.Site.Params.modules.bookshop.hero.overlayMode }}
+{{ end }}
+
+{{/* Render content blocks */}}
+{{ partial "bookshop_partial" (slice "page" $blocks) }}

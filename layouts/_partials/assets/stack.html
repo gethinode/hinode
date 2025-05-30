@@ -1,0 +1,67 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+<!-- Initialize arguments -->
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "stack" "child" "card" "args" .) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "assets/stack.html" 
+        "msg" "Invalid arguments"
+        "details" $args.errmsg
+        "file" page.File
+    )}}
+{{ end }}
+
+<!-- Main code -->
+{{ if and (eq (len $args.list) 0) (not $args.hideEmpty) }}
+	<p class="pt-4">{{- T "emptyList" }}.</p>
+{{ else }}
+	{{- partial "assets/card-group.html" (dict 
+		"page" $args.page
+		"list" $args.list
+		"max" $args.max
+		"class" "border-0 card-zoom"
+		"wrapper" "card-stack p-0 my-3 d-none d-md-block"
+		"cols" $args.cols
+		"gutter" $args.gutter
+		"padding" 3
+		"header-style" "none"
+		"body-style" "title"
+		"footer-style" "none"
+		"orientation" "stacked"
+		"scroll" true
+		"bento" true
+		"spacer" $args.animated
+		"portrait" true
+		"valign" (cond $args.animated "" "end")
+		"styles" $args.styles
+		"href" $args.href
+		"href-title" $args.hrefTitle
+		"link-type" (or $args.linkType $args.buttonType)
+	) -}}
+
+	{{- partial "assets/card-group.html" (dict 
+		"page" $args.page
+		"list" $args.list
+		"max" $args.max
+		"class" "border-0 card-zoom"
+		"wrapper" "card-stack p-0 d-md-none"
+		"cols" (cond (eq $args.orientation "stacked") 2 1)
+		"responsive" false
+		"padding" $args.padding
+		"header-style" "none"
+		"body-style" "title"
+		"footer-style" "none"
+		"ratio" $args.ratio
+		"orientation" $args.orientation
+		"scroll" false
+		"spacer" false
+		"portrait" false
+		"href" $args.href
+		"href-title" $args.hrefTitle
+		"link-type" (or $args.linkType $args.buttonType)
+	) -}}
+{{ end }}

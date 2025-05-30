@@ -1,0 +1,90 @@
+comment: >-
+  Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered
+  using a provided list of pages. Cards on the same row are aligned to each
+  other. The grid renders pages up to a provided maximum amount. The remaining
+  items are accessible via either a paginator or button to a list page (default
+  behavior). Be aware a page can only contain one paginator at a time.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: true
+    comment: Context of the current page.
+    group: partial
+  gutter:
+    type: int
+    optional: true
+    default: 4
+    comment: Gutter between columns in a group.
+    options:
+      min: 0
+      max: 5
+    release: v0.19.0
+  list:
+    type:
+      - 'page.Pages'
+      - 'resource.Resources'
+      - '[]map[string]interface {}'
+    optional: true
+    comment: Array of pages or structured content to be rendered as cards.
+    group: partial
+  max:
+    type: int
+    optional: true
+    comment: Maximum number of cards to display.
+    group: partial
+    options:
+      min: 1
+  cols:
+    type: select
+    optional: true
+    default: "3"
+    comment: Number of grid columns.
+    options:
+      values:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "auto"
+    release: v0.19.0
+  href:
+    type: string
+    optional: true
+    comment: >-
+      Address for the button or hyperlink. If set, a button is added if the
+      list exceeds the maximum number of cards to display.
+    group: partial
+  hrefTitle:
+    type: string
+    optional: true
+    comment: >-
+      Title of the button or hyperlink as companion to href.
+    group: partial
+  buttonType:
+    type: select
+    optional: true
+    default: button
+    release: v0.23.18
+    comment: Type of the button elements.
+    options:
+      values:
+        - link
+        - button
+  animated:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Enables card animations.
+    release: v0.27.0
+  styles:
+    type:
+      - '[]map[string]interface {}'
+    optional: true
+    comment: >-
+      Styles to apply to the individual cards. Supported elements are `ratio`,
+      `orientation`, `portrait`, and `width`.
+

@@ -1,0 +1,68 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image" "args" . "group" "partial") }}
+    {{ errorf "partial [assets/live-image.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $page := .page -}}
+{{- $wrapper := .wrapper -}}
+{{- $class := .class -}}
+{{- $ratio := .ratio -}}
+{{- $anchor := .anchor -}}
+{{- $portrait := .portrait -}}
+{{- $sizes := .sizes -}}
+{{- $url := .url -}}
+{{- $title := .title -}}
+{{- $caption := .caption -}}
+{{ $mode := .mode | default false }}
+{{- $external := hasPrefix $url "http" -}}
+
+<!-- Initiate the regular or color-mode image -->
+{{ $class = printf "%s img-fluid" (or $class "") }}
+{{- $placeholder := partial "assets/image.html" (dict 
+    "page" $page
+    "wrapper" $wrapper
+    "class" $class
+    "ratio" $ratio
+    "portrait" $portrait
+    "anchor" $anchor
+    "sizes" $sizes
+    "url" $url
+    "title" $title
+    "caption" $caption
+    "plain" site.Params.env_bookshop_live
+    "mode" $mode
+) }}
+
+{{ if site.Params.env_bookshop_live }}
+    {{ $backup := findRE "src=\"(.+?)\"" $placeholder 1 }}
+    {{- if gt (len $backup) 0 -}}
+        {{- $backup = partial "utilities/GetVal.html" (index $backup 0) -}}
+    {{ else }}
+        {{ $backup = $url }}
+    {{- end -}}
+
+    {{ $absURL := partial "utilities/GetTargetPath.html" (dict "page" $page "path" $backup) | absURL }}
+    {{- if $caption -}}
+        <figure {{ with $wrapper }}class="{{ . }}"{{ end }}>
+    {{ else if $wrapper }}<div class="{{ $wrapper }}">
+    {{ end }}
+
+    <img src="{{ $absURL | safeHTMLAttr }}" class="{{ $class }}{{ with $ratio }} ratio ratio-{{ . }}{{ end }}"
+        {{ with $title }}alt="{{ . }}"{{ end }}
+        onerror="this.src='/img/placeholder.svg';this.onerror='';">
+    {{- if $caption -}}
+            <figcaption class="figure-caption">{{ $caption }}</figcaption>
+        </figure>
+    {{ else if $wrapper }}</div>
+    {{ end }}
+{{ else }}
+    {{- $placeholder | safeHTML -}}
+{{ end }}

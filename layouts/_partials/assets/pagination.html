@@ -14,7 +14,7 @@
     Copyright 2022 The Hugo Authors. Licensed under the Apache License, Version 2.0.
   */}}
 
-{{- define "partials/inline/pagination/default" }}
+{{- define "_partials/inline/pagination/default" }}
   {{- with .Paginator }}
     {{- $currentPageNumber := .PageNumber }}
 
@@ -99,7 +99,7 @@
   {{- end }}
 {{- end -}}
 
-{{- define "partials/inline/pagination/terse" }}
+{{- define "_partials/inline/pagination/terse" }}
   {{- with .Paginator }}
     {{- $currentPageNumber := .PageNumber }}
 

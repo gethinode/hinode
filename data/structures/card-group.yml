@@ -6,161 +6,152 @@ comment: >-
   behavior). Be aware a page can only contain one paginator at a time.
 arguments:
   page:
-    type:
-      - '*hugolib.pageState'
-      - '*hugolib.pageForShortcode'
     optional: true
-    comment: Context of the current page.
-    group: partial
   title:
-    type: string
     optional: true
-    comment: Title of the card group.
+  class:
+  color:
+  padding:
   gutter:
-    type: int
-    optional: true
-    default: 4
-    comment: Gutter between columns in a group.
-    options:
-      min: 0
-      max: 5
     release: v0.19.0
+  header-style:
+    release: 1.0.0
+  body-style:
+    release: 1.0.0
+  footer-style:
+    release: 1.0.0
   list:
-    type:
-      - 'page.Pages'
-      - 'resource.Resources'
-      - '[]map[string]interface {}'
-    optional: true
-    comment: Array of pages or structured content to be rendered as cards.
-    group: partial
   cards:
-    type: string
-    optional: true
-    comment: String of rendered cards.
-    group: partial
   max:
-    type: int
-    optional: true
-    comment: Maximum number of cards to display.
-    group: partial
-    options:
-      min: 1
   cols:
-    type: select
-    optional: true
-    default: "3"
-    comment: Number of grid columns.
-    options:
-      values:
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
-        - "auto"
     release: v0.19.0
   paginate:
-    type: bool
-    optional: true
-    comment: >-
-      Flag indicating if pagination should be added to the card group, if the
-      list exceeds the maximum number of cards to display. 
-    group: partial
   pagination:
-    type: int
-    optional: true
-    comment: >-
-      Number of elements per page in pagination, overrides site settings.
-    group: partial
-    options:
-      min: 1
     release: v0.23.12
   href:
+    group: partial
+  href-title:
+    release: v1.0.0
+  separator:
+  loading:
+  ratio:
+  portrait:
+  icon-rounded:
+    release: v1.0.0
+  align:
+  wrapper:
+    default: p-0
+  responsive:
+  link-type:
+    release: v1.0.0
+  scroll:
+  icon-style:
+    release: v1.0.0
+  orientation:
+  subtle:
+  button:
+  spacer:
+    release: v0.24.16
+  hook:
+    default: assets/card.html
+    group: partial
+  bento:
+    release: v0.27.0
+  valign:
+    release: v0.27.0
+  styles:
+    release: v0.27.0
+  button-label:
+    release: v1.0.0
+
+  # deprecated arguments
+  header:
+    type: select
+    optional: true
+    default: full
+    parent: cascade
+    comment: >-
+      Header components of the card, displayed in small caps. 
+    options:
+      values:
+        - full
+        - publication
+        - tags
+        - none
+    deprecated: 1.0.0
+    alternative: header-style
+  body:
+    type: select
+    optional: true
+    default: full
+    parent: cascade
+    release: v0.24.16
+    comment: >-
+      Body components of the element. 
+    options:
+      values:
+        - full
+        - title
+        - none
+    deprecated: 1.0.0
+    alternative: body-style
+  footer:
+    type: select
+    optional: true
+    default: none
+    parent: cascade
+    comment: >-
+      Footer components of the element, displayed in small caps.
+    options:
+      values:
+        - full
+        - publication
+        - tags
+        - none
+    deprecated: v1.0.0
+    alternative: footer-style
+  iconRounded:
+    type: bool
+    parent: cascade
+    optional: true
+    release: v0.24.8
+    deprecated: v1.0.0
+    alternative: icon-rounded
+    comment: Stack the icon in a round container.
+  buttonType:
+    type: select
+    parent: cascade
+    optional: true
+    default: button
+    comment: Type of the button element.
+    release: v0.23.18
+    deprecated: v1.0.0
+    alternative: link-type
+    options:
+      values:
+        - link
+        - button
+  style:
+    type: string
+    parent: cascade
+    optional: true
+    release: v0.23.0
+    comment: Icon style.
+    deprecated: v1.0.0
+    alternative: icon-style
+  buttonLabel:
     type: string
     optional: true
+    release: v0.23.2
     comment: >-
-      Address for the button or hyperlink. If set, a button is added if the
-      list exceeds the maximum number of cards to display.
-    group: partial
+      Label of the link button, defaults to the card title.
+    deprecated: v1.0.0
+    alternative: button-label
   hrefTitle:
     type: string
     optional: true
     comment: >-
       Title of the button or hyperlink as companion to href.
     group: partial
-  separator:
-    type: bool
-    optional: true
-    comment: >-
-      Flag to indicate a horizontal line should be added between items on small
-      screens.
-  wrapper:
-    type: string
-    default: p-0
-    optional: true
-    comment: >-
-      Class attributes of the wrapper element, e.g. `p-4 px-xxl-0`.
-  responsive:
-    type: bool
-    optional: true
-    default: true
-    comment: >-
-      Flag indicating if the number of columns should be responsive, defaults to
-      `true`.
-  buttonType:
-    type: select
-    optional: true
-    default: button
-    release: v0.23.18
-    comment: Type of the button elements.
-    options:
-      values:
-        - link
-        - button
-  scroll:
-    type: bool
-    optional: true
-    comment: >-
-      Enables horizontal scrolling of the cards. By default, the card group
-      wraps any cards beyond the amount of defined columns to a new line. When
-      `scroll` is set to true, a horizontal scroll bar is added instead.
-  spacer:
-    type: bool
-    optional: true
-    comment: >-
-      Inserts a spacer before the card.
-    release: v0.24.16
-    group: partial
-  hook:
-    type: string
-    optional: true
-    default: assets/card.html
-    comment: Render hook for the card partial.
-    group: partial
-  bento:
-    type: bool
-    optional: true
-    default: false
-    comment: >-
-      Trigger to use a bento-style layout instead of default grid layout.
-    release: v0.27.0
-  valign:
-    type: select
-    optional: true
-    comment: >-
-      Defines the vertical card alignment, only applicable in bento layout.
-    release: v0.27.0
-    options:
-      values:
-        - start
-        - center
-        - end
-  styles:
-    type:
-      - '[]map[string]interface {}'
-    optional: true
-    comment: >-
-      Styles to apply to the individual cards. Supported elements are `ratio`,
-      `orientation`, `portrait`, and `width`. The styles are rotated when the
-      amount of cards exceeds the available amount of styles.
-    release: v0.27.0
+    deprecated: v1.0.0
+    alternative: href-title

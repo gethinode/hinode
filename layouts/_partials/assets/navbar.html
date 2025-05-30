@@ -15,7 +15,7 @@
 {{ end }}
 
 {{/* Inline partial to render the color mode switcher */}}
-{{- define "partials/inline/navbar-mode.html" -}}
+{{- define "_partials/inline/navbar-mode.html" -}}
     {{- $id := .id | default "navbar-mode" -}}
 
     <li class="d-flex mode-switch align-items-center" id="{{ $id }}">
@@ -29,7 +29,7 @@
 {{- end -}}
 
 {{/* Inline partial to render the version switcher */}}
-{{- define "partials/inline/navbar-versions.html" -}}
+{{- define "_partials/inline/navbar-versions.html" -}}
     {{- $size := .size -}}
     {{- $collapsed := .collapsed -}}
     {{- $page := .page -}}

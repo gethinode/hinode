@@ -4,8 +4,10 @@
     Visit gethinode.com/license for more details.
 */}}
 
+{{ $error := false }}
+
 {{/* Define inline partials */}}
-{{ define "partials/inline/style.html" }}
+{{ define "_partials/inline/style.html" }}
 	{{ $style := "" }}
     {{ if gt (len .styles) 0 }}
         {{ $def := index .styles (mod .index (len .styles)) }}
@@ -16,13 +18,14 @@
 
 {{/* Initialize arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "card-group" "child" "card" "args" .) }}
-{{ if $args.err }}
-    {{ partial "utilities/LogErr.html" (dict 
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/card-group.html" 
         "msg" "Invalid arguments"
-        "details" $args.errmsg
+        "details" ($args.errmsg | append $args.warnmsg)
         "file" page.File
     )}}
+    {{ $error = $args.err }}
 {{ end }}
 
 {{/* Initialize global variables */}}
@@ -112,8 +115,8 @@
 {{- $sizes := "100vw" }}
 {{- $colGrid := "" -}}
 {{ if not $args.scroll }}
-    {{ $colGrid = index $colsMap $args.cols }}
-    {{ $sizes = index $sizesMap $args.cols }}
+    {{ $colGrid = index $colsMap (string $args.cols) }}
+    {{ $sizes = index $sizesMap (string $args.cols) }}
 {{ else }}
     {{ if in (slice "2" "3" "4" "5") $args.cols }}
         {{ $sizes = replace (printf "%.1fvw" (div 100.0 (int $args.cols))) ".0" "" }}
@@ -123,7 +126,7 @@
 {{- if and (eq $args.cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
 {{ if not $args.spacer }}
-    {{ $class = printf "%s h-100" $class }}
+    {{ $class = trim (printf "%s h-100" (or $class "")) " " }}
 {{ end }}
 
 {{/* Main code */}}
@@ -133,11 +136,11 @@
         {{ if $args.bento }}{{ with $args.valign }}align-items-{{ . }}{{ end }}{{ else }}{{ $colGrid }}{{ end }}">
             {{ range $index, $element := $elements }}
                 {{- $params := (dict
-                    "class" (printf " %s" $class)
+                    "class" $class
                     "color" $args.color
-                    "footer" $args.footer
-                    "body" $args.body
-                    "header" $args.header
+                    "header-style" (or $args.headerStyle $args.header)
+                    "body-style" (or $args.bodyStyle $args.body)
+                    "footer-style" (or $args.footerStyle $args.footer)
                     "loading" $args.loading
                     "sizes" $sizes
                     "orientation" (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "orientation" "default" $orientation))
@@ -145,15 +148,14 @@
                     "ratio" (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "ratio" "default" $args.ratio))
                     "portrait" (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "portrait" "default" $args.portrait))
                     "subtle" $args.subtle
-                    "style" $args.style
+                    "icon-style" (or (index $element "$icon-style") $element.style)
                     "align" $args.align
                     "button" $args.button
-                    "buttonLabel" $element.buttonLabel
-                    "buttonType" $args.buttonType
-                    "iconRounded" $args.iconRounded
+                    "button-label" (or (index $element "button-label") $element.buttonLabel)
+                    "link-type" (or $args.linkType $args.buttonType)
+                    "icon-rounded" $args.iconRounded
                 ) -}}
                 {{- $params = merge $element $params }}
-
                 {{ if $args.scroll }}
                     {{ $width := (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "width" "default" "3")) }}
                     {{ $size := $args.cols }}

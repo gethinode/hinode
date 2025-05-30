@@ -1,0 +1,50 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false -}}
+{{ $msg := "" -}}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "link" "args" . "group" "partial") }}
+    {{ errorf "partial [utilities/GetLink.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments -->
+{{- $destination := strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) .destination -}}
+{{- $external := .external | default false }}
+{{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
+{{- $page := .page -}}
+{{- $anchor := "" -}}
+
+<!-- Main code -->
+{{- if not $isExternal -}}
+    {{- if strings.Contains $destination "#" }}
+        {{ $segments := split $destination "#" }}
+        {{- if ne (len $segments) 2 }}
+            {{ $msg = printf "Malformed path, expected one anchor '#' only: %s" $destination}}
+            {{ $error = true }}
+        {{ else }}
+            {{- $destination = index $segments 0 -}}
+            {{- $anchor = index $segments 1 -}}
+        {{ end }}
+    {{ end }}
+
+    {{ if $destination }}
+        {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
+        {{- if not $ref -}}
+            {{- $msg = printf "Cannot find page: %s" $destination -}}
+            {{- $error = true -}}
+        {{- else -}}
+            {{- $destination = $ref.RelPermalink -}}
+            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+        {{- end -}}
+    {{ else }}
+        {{ $destination = printf "#%s" $anchor }}
+    {{ end }}
+{{- end -}}
+
+{{ return (dict "destination" $destination "error" $error "msg" $msg) }}

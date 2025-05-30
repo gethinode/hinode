@@ -1,0 +1,41 @@
+{{ $icon := partial "utilities/GetTargetPath.html" (dict "path" .icon "page" page) }}
+{{ $image := partial "utilities/GetTargetPath.html" (dict "path" .image "page" page) }}
+{{ $mode := .mode }}
+{{ $title := .title }}
+{{ $ratio := .ratio }}
+{{ $sizes := .sizes }}
+{{- $wrapper := .wrapper -}}
+{{ if $image }}{{ $wrapper = print "img-wrap " (or $wrapper "mx-auto") }}{{ end -}}
+{{- $class := .class | default "" -}}
+{{- $anchor := .anchor | default "" -}}
+
+{{ if $icon }}
+    {{ if eq (lower (path.Ext $icon)) ".json" }}
+        {{ if site.Params.env_bookshop_live }}
+            <i>Animation preview not supported</i>
+        {{ else }}
+            {{ partial "assets/animation.html" (dict
+                "data" $icon
+                "mode" $mode
+                "loop" false
+                "hover" true
+                "class" "col-6 mx-auto text-center"
+            ) }}
+        {{ end }}
+    {{ else }}
+        {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $wrapper) }}
+    {{ end }}
+{{ else if $image }}
+    {{ if not (hasSuffix $image "svg") }}{{ $class = printf "%s rounded" $class }}{{ end }}
+    {{ partial "assets/live-image.html" (dict
+        "url" $image
+        "anchor" $anchor
+        "ratio" $ratio
+        "wrapper" $wrapper
+        "class" $class
+        "title" $title
+        "sizes" $sizes
+        "priority" "high"
+        "mode" $mode
+    ) }}
+{{ end }}

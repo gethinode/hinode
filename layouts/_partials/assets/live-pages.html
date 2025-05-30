@@ -1,0 +1,90 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+{{ $error := false }}
+
+<!-- Validate arguments -->
+{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "live-pages" "args" .) }}
+    {{- errorf "partial [assets/live-pages.html] - Invalid arguments" -}}
+    {{ $error = true }}
+{{ end }}
+
+<!-- Initialize arguments and default values -->
+{{ $page := .page }}
+{{ $kind := .kind }}
+{{ $section := .section }}
+{{ $nested := .nested }}
+{{ $sort := .sort | default "date" }}
+{{ $reverse := .reverse }}
+
+{{ $pages := slice }}
+{{ $tags := slice }}
+{{ $categories := slice }}
+{{ $keywords := slice }}
+{{ if reflect.IsSlice .tags }}{{ $tags = .tags }}{{ else if .tags }}{{ $tags = $tags | append .tags }}{{ end }}
+{{ if reflect.IsSlice .keywords }}{{ $keywords = .keywords }}{{ else if .keywords }}{{ $keywords = $keywords | append .keywords }}{{ end }}
+{{ if reflect.IsSlice .categories }}{{ $categories = .categories }}{{ else if .categories }}{{ $categories = $categories | append .categories }}{{ end }}
+
+<!-- Main code -->
+{{ if not $error }}
+    {{ if site.Params.env_bookshop_live }}
+        {{/* Define some dummy content as we cannot retrieve pages in live mode */}}
+        {{ range $index := seq (.max | default 3) }}
+            {{ $pages = $pages | append (dict 
+                "title" (printf "Dummy %d" $index)
+                "description" (printf "content %d" $index)
+                "thumbnail" "/img/placeholder.svg"
+            )}}
+        {{ end }}
+        {{- if .reverse }}{{- $pages = sort $pages "title" "desc" -}}{{ end -}}
+    {{ else }}
+        {{/* Retrieve the relevant context page, either current page or page identified by section */}}
+        {{ $sectionPage := .page | default page }}
+        {{ if $section }}
+            {{ $sectionPage = site.GetPage "section" .section }}
+            {{ if not $sectionPage }}
+                {{ warnf "Cannot find section: %s" .section }}
+            {{ end }}
+        {{ end }}
+        
+        {{ if $sectionPage }}
+            {{ if eq $kind "taxonomy" }}
+                {{ $filter := $sectionPage.Params.filter }}
+                {{ with $filter }}
+                    {{ with index site.Taxonomies $section $filter }}
+                        {{ $pages = .Pages }}
+                    {{ end }}
+                {{ else }}
+                    {{ $pages = where site.Pages (printf ".Params.%s" $section) "!=" nil }}
+                {{ end }}
+            {{ else if eq $kind "related" }}
+                {{ if $sectionPage.Keywords}}
+                    {{ $keywords := keyVals "tags" $sectionPage.Keywords }}
+                    {{ $opts := dict "namedSlices" (slice $keywords) }}
+                    {{ $pages = site.RegularPages.Related $opts }}
+                {{ end }}
+            {{ else }}
+                {{/* Retrieve the immediate or all related pages (recursively), optionally filtering by tag or keyword */}}
+                {{ if $nested }}{{ $pages = $sectionPage.RegularPagesRecursive }}{{ else }}{{ $pages = $sectionPage.Pages }}{{ end }}
+
+                {{ if gt (len $tags) 0 }}
+                    {{ $pages = where $pages "Params.tags" "intersect" $tags }}
+                {{ end }}
+                {{ if gt (len $keywords) 0 }}
+                    {{ $pages = where $pages "Params.keywords" "intersect" $keywords }}
+                {{ end }}
+                {{ if gt (len $categories) 0 }}
+                    {{ $pages = where $pages "Params.categories" "intersect" $categories }}
+                {{ end }}
+            {{ end }}
+        
+            {{/* Sort the pages as specified */}}	
+            {{- $order := "asc" -}}
+            {{- if $reverse }}{{ $order = "desc" }}{{ end -}}
+            {{- $pages = sort $pages (printf "Params.%s" $sort) $order -}}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return $pages }}

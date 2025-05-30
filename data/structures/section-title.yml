@@ -1,0 +1,136 @@
+comment: Renders the header of a page section.
+arguments:
+  heading:
+  links:
+  color:
+    type: select
+    comment: Text color of the section.
+    default: body
+    optional: true
+    options:
+      values:
+        - body
+        - primary
+        - secondary
+        - black
+        - white
+  class:
+    type: string
+    optional: true
+    comment: Class attribute of the section title.
+  size: 
+    type: int
+    optional: true
+    comment: Display size of the title.
+    options:
+      min: 1
+      max: 6
+  use-title:
+    type: bool
+    optional: true
+    default: false
+    comment: Sets the title to an HTML header instead of a div.
+  justify:
+    type: select
+    comment: Justification of the link titles and icons.
+    optional: true
+    default: center
+    options:
+      values:
+        - start
+        - end
+        - center
+        - between
+        - around
+        - evenly
+  type:
+    type: select
+    optional: true
+    default: button
+    comment: Link type
+    options:
+      values:
+        - button
+        - link
+  section: 
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Trigger to use the current section as preheading, applies to single pages
+      only. Any preheading values takes precedence.
+  preheadingPlacement:
+    type: select
+    optional: true
+    default: above
+    options:
+      values:
+        - above
+        - first
+    comment: >-
+      Placement of the preheading, either left or above the header. On smaller
+      screens, the preheading is always placed on top.
+  headingStyle:
+    type: select
+    optional: true
+    default: display
+    options:
+      values:
+        - display
+        - fs
+    comment: >-
+      Style of the heading, either display or fs (regular).
+  bodyStyle:
+    type: string
+    optional: true
+    default: lead text-muted
+    comment: >-
+      Style of the body text, if any..
+  # class:
+  #   type: string
+  #   optional: true
+  #   comment: Class attribute of the illustration, e.g. "col-6".
+  # image:
+  #   type: string
+  #   optional: true
+  #   comment: Image displayed on top of or adjacent to the headline.
+  # imageOverlay:
+  #   type: bool
+  #   optional: true
+  #   default: false
+  #   comment: Trigger to include an image overlay placeholder.
+  # ratio:
+  #   type: select
+  #   optional: true
+  #   default: 16x9
+  #   comment: >-
+  #     Ratio of the illustration, uses original aspect ratio by default.
+  #   options:
+  #     values:
+  #       - 1x1
+  #       - 3x2
+  #       - 4x3
+  #       - 16x9
+  #       - 21x9
+  # anchor:
+  #   type: select
+  #   optional: true
+  #   comment: 
+  #     Anchor of the thumbnail's crop box, defaults to anchor value set in
+  #     `imaging` section of the site configuration (usually `Smart`).
+  #   options:
+  #     values:
+  #       - TopLeft
+  #       - Top
+  #       - TopRight
+  #       - Left
+  #       - Center
+  #       - Right
+  #       - BottomLeft
+  #       - Bottom
+  #       - BottomRight
+  #       - Smart
+  # icon:
+  #   type: string
+  #   optional: true
+  #   comment: Icon or animation displayed on top of or adjacent to the headline.

@@ -1,0 +1,5 @@
+{{- $menu := .Scratch.Get "sidebar" -}}
+{{- $version := .Scratch.Get "version" -}}
+{{ if $menu  }}
+    {{ partial "assets/sidebar.html" (dict "page" . "menu" $menu "version" $version) }}
+{{ end -}}

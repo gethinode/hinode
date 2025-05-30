@@ -18,7 +18,7 @@
 {{- $version := .version -}}
 {{- $section := $page.Section }}
 
-{{- define "partials/inline/sidebar/group.html" -}}
+{{- define "_partials/inline/sidebar/group.html" -}}
     {{- $page := .page -}}
     {{- $index := .index -}}
     {{- $level := .level -}}
@@ -90,7 +90,7 @@
     </li>
 {{ end -}}
 
-{{- define "partials/inline/sidebar/item.html" -}}
+{{- define "_partials/inline/sidebar/item.html" -}}
     {{- $page := .page -}}
     {{- $sectionBreak := .sectionBreak -}}
     {{- $level := .level -}}

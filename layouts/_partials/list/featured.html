@@ -20,12 +20,12 @@
 {{- end -}}
 {{- $breadcrumb := and (not $page.IsHome) site.Params.navigation.breadcrumb -}}
 
-{{- define "partials/inline/featured-sizes.html" }}
+{{- define "_partials/inline/featured-sizes.html" }}
     {{ $sizes := printf "(min-width: 768px) %dvw, 50vw" (int (math.Round (div (mul .width 100) 12))) }}
     {{ return $sizes }}
 {{ end }}
 
-{{- define "partials/inline/featured-body.html" }}
+{{- define "_partials/inline/featured-body.html" }}
     {{- $page := .page -}}
     {{- $headings := .headings -}}
     {{- $orientation := .orientation | default "stacked" -}}
@@ -50,7 +50,7 @@
     </div>
 {{- end -}}
 
-{{- define "partials/inline/featured-illustration.html" }}
+{{- define "_partials/inline/featured-illustration.html" }}
     {{- $page := .page -}}
     {{- $style := printf "img-wrap mx-auto mx-md-0 %s" .style -}}
     {{ $sizes := .sizes }}

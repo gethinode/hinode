@@ -1,0 +1,36 @@
+{{- $download := .Params.download -}}
+
+{{- $includeToc := false -}}
+{{- if .Site.Params.navigation.toc -}}
+    {{ $includeToc = true }}
+    {{ if isset .Params "includeToc" }}
+        {{ $includeToc = .Params.includeToc }}
+    {{ else }}
+        {{- with (index site.Params.pages .Type) -}}
+            {{ if isset . "includetoc" }}
+                {{ $includeToc = index . "includetoc" }}
+                {{ if ne (printf "%T" $includeToc) "bool" }}
+                    {{ errorf "Expected bool value in site parameters: pages.%s.includeToc" $.Type }}
+                {{ end }}
+            {{ end }}
+    {{- end -}}
+    {{ end }}
+{{ end }}
+
+<div class="toc toc-sidebar mb-5 my-md-0 mb-lg-5 p-3 text-body-secondary sticky-top">
+    {{ if $download }}
+        <div class="mb-5 p-0">
+            {{ partial "assets/download.html" (dict 
+                "download" $download
+                "outline" true
+                "size" "sm"
+                "order" "last"
+            ) }}
+        </div>
+    {{ end }}
+
+    {{ if $includeToc }}
+        {{ $index := partial "assets/toc.html" (dict "page" .) }}
+        {{ $index | safeHTML }}
+    {{ end -}}
+</div>

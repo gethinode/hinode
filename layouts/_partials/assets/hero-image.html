@@ -1,0 +1,26 @@
+{{ $class := .class }}
+{{ $icon := .icon }}
+{{ $image := .image }}
+{{ $anchor := .anchor }}
+{{ $mode := .mode }}
+{{ $ratio := .ratio }}
+{{ $sizes := .sizes }}
+{{ $title := .title }}
+{{ $wrapper := .wrapper }}
+{{ $iconWrapper := .iconWrapper }}
+{{ $imageOverlay := .imageOverlay }}
+
+<div class="hero-image-container">
+    {{ partial "assets/featured-illustration.html" (dict 
+        "icon" $icon
+        "image" $image
+        "anchor" $anchor
+        "mode" $mode
+        "ratio" $ratio
+        "sizes" $sizes
+        "title" $title
+        "wrapper" $wrapper
+        "class" $class
+    ) }}
+    {{ if $imageOverlay }}<div class="hero-image-overlay"></div>{{ end }}
+</div>

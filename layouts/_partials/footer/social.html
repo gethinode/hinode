@@ -1,10 +1,3 @@
-{{ if .Site.Params.footer.socialTitle }}
-    {{ warnf "DEPRECATED: parameter `Params.home.socialTitle` has been deprecated in release v0.18"}}
-{{ end }}
-{{ if .Site.Params.footer.socialCaption }}
-    {{ warnf "DEPRECATED: parameter `Params.home.socialCaption` has been deprecated in release v0.18"}}
-{{ end }}
-
 {{ if gt .Site.Menus.social 0 }}
     {{- $tab := site.Params.main.externalLinks.tab -}}
     <div class="container-fluid bg-primary bg-opacity-{{ .Site.Params.style.themeOpacity | default "25" | safeHTML }}">

@@ -1,0 +1,88 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+{{ $links := .links }}
+{{ $align := .align }}
+{{ $justify := .justify }}
+{{ $type := .type }}
+{{- $breakpoint := page.Scratch.Get "breakpoint" -}}
+
+{{- define "_partials/links-content.html" -}}
+    {{ $links := .links }}    
+    {{ $justify := .justify }}
+    {{ $type := .type }}
+    {{ $li := .li }}
+    {{ $order := "last" }}
+    {{ if and (eq $li true) (eq $type "link") }}{{ $order = "first" }}{{ $justify = "start" }}{{ end }}
+
+    {{ range $links }}
+        {{ $force := .force | default false }}
+        {{ $title := .title }}
+        {{ if and site.Params.env_bookshop_live (not $title) }}
+            {{ $title = "-" }}
+        {{ end }}
+
+        {{ $url := "" }}
+        {{ with .url }}
+            {{ $link := partial "utilities/GetLink.html" (dict "page" page "destination" .) }}
+            {{ if not $link.error }}
+                {{ $url = $link.destination }}
+            {{ else }}
+                {{ with page.File }}
+                    {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $link.msg }}
+                {{ else }}
+                    {{ warnf "Error processing link: %s" $link.msg }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ if (eq $li true) }}<div>{{ end }}
+
+        {{ if .download }}
+            {{ partial "assets/download.html" (dict 
+                "download" .download
+                "title" $title
+                "icon" .icon
+                "outline" .outline
+                "size" "md"
+                "order" $order
+                "justify" $justify
+            ) }}
+        {{ else }}
+            {{ if $force }}
+                {{ $u := urls.Parse $url }}
+                {{ if and (gt (len $u.Query) 0) $u.Fragment }}
+                    {{ $fragments := split $url "#" }}
+                    {{ $url = printf "%s&force=true#%s" (index $fragments 0) (index $fragments 1) }}
+                {{ else if $u.Fragment }}
+                    {{ $fragments := split $url "#" }}
+                    {{ $url = printf "%s?force=true#%s" (index $fragments 0) (index $fragments 1) }}
+                {{ else if (gt (len $u.Query) 0) }}
+                    {{ $url = printf "%s&force=true" $url }}
+                {{ else }}
+                    {{ $url = printf "%s?force=true" $url }}
+                {{ end }}
+            {{ end }}
+
+            {{ partial "assets/button.html" (dict 
+                "href" $url
+                "title" $title
+                "icon" .icon
+                "outline" .outline
+                "order" $order
+                "justify" $justify
+                "type" $type
+            ) }}
+        {{ end }}
+
+        {{ if (eq $li true) }}</div>{{ end }}
+    {{ end }}
+{{ end }}
+
+<div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $links) 1 }} gap-5{{ end }} justify-content-{{ $align }} pt-5 pt-md-3">
+    {{ partial "links-content.html" (dict "links" $links "justify" $justify "type" $type "li" false) }}
+</div>
+
+<div class="d-{{ $breakpoint.current }}-none">
+    {{ partial "links-content.html" (dict "links" $links "justify" $justify "type" $type "li" true) }}
+</div>

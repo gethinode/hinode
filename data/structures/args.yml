@@ -9,7 +9,8 @@ arguments:
     comment: >-
       Name of the data file that contains argument definitions. Supported data
       formats include JSON, TOML, YAML, and XML. You can omit the file
-      extension. The file should reside in the `data/structures` folder.
+      extension. The file should reside in the `data/structures` folder. For
+      bookshop components, add the `bookshop-` prefix to the structure name.
   group:
     type: string
     position: 1

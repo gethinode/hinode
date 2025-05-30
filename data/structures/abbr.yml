@@ -19,7 +19,7 @@ arguments:
       the first (and only) matched argument. Non-alphanumeric keys must be quoted.
   data:
     type: string
-    default: abbr.yaml
+    default: abbr
     optional: true
     comment: >-
       Filename of the abbrevation input. You can omit the file extension. The
