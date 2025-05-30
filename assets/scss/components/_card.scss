@@ -5,6 +5,10 @@
     background-color: var(--#{$prefix}secondary-bg);
 }
 
+.card {
+    --bs-card-bg: transparent;
+}
+
 .card .card-img-wrap {
     overflow: hidden;
     position: relative;
