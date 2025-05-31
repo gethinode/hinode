@@ -3,86 +3,22 @@ comment: >-
   embedded in a responsive frame.
 arguments:
   page:
-    type:
-      - '*hugolib.pageState'
-      - '*hugolib.pageForShortcode'
-    optional: false
-    group: partial
     release: v0.26.5
-    comment: Context of the current page.
   position:
-    type:
-      - 'text.Position'
-    optional: true
-    group: partial
     release: v0.26.5
-    comment: Filename and position from which the shortcode was called.
   host:
-    type: string
-    optional: true
-    default: youtube
     release: v0.26.5
-    comment: >-
-      Host name of the video provider. It should match one of the registered
-      providers in the site's parameters under `videos`.
   title:
-    type: string
-    optional: true
-    comment: >-
-      Title of the video. You can also set `autotitle` to retrieve the title
-      programmatically at build time, if supported by the provider.
   class:
-    type: string
-    optional: true
     position: 1
-    comment: >-
-      Class attribute of the video wrapper element.
   id:
-    type: string
-    optional: false
     position: 0
-    comment: Public ID of the video to be embedded.
   account:
-    type: string
-    optional: true
-    comment: >-
-      Account name of the video asset, required by some digital asset managers.
-      You can also set the default account name in the site's parameters.
     release: v0.26.5
   autoplay:
-    type: bool
-    optional: true
-    default: false
-    comment: >-
-      Flag indicating the video should start playing immediately when loaded, if
-      supported by the browser. The audio will be muted.
   autotitle:
-    type: bool
-    optional: true
-    default: false
     release: v0.25.2
-    comment: >-
-      Trigger to retrieve the title from the video metadata, if supported by the
-      provider.
   ratio:
-    type: select
-    optional: true
-    comment: >-
-      Ratio of the video. If set, determines the padding of the embedded video
-      frame. When not specified, the video dimensions used to calculate the
-      padding are retrieved programmatically.
-    options:
-      values:
-        - 1x1
-        - 3x2
-        - 4x3
-        - 16x9
-        - 21x9
     release: v0.26.5
   options:
-    type: string
-    optional: true
     release: v0.28.2
-    comment: >-
-      Optional query parameters to append to video asset's url. The query string
-      is prepended with a `?` symbol. Only applicable to Cloudinary.

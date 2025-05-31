@@ -92,14 +92,13 @@ arguments:
     comment: >-
       Flag indicating the video should start playing immediately when loaded, if
       supported by the browser. The audio will be muted.
-  # autotitle:
-  #   type: bool
-  #   optional: true
-  #   default: false
-  #   release: v0.25.2
-  #   comment: >-
-  #     Trigger to retrieve the title from the video metadata, if supported by the
-  #     provider.
+  autotitle:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Trigger to retrieve the title from the video metadata, if supported by the
+      provider.
 
   # b
   backdrop:
@@ -585,7 +584,6 @@ arguments:
   id:
     type: string
     optional: false
-    position: 0
     comment: Public ID of the video to be embedded.
   # id:
   #   type: string
@@ -1049,13 +1047,12 @@ arguments:
       Flag to adjust the image ratio from landscape to portrait. The image
       itself is not rotated, only the crop area is adjusted. Not applicable to
       vector graphics.
-  # position:
-  #   type:
-  #     - 'text.Position'
-  #   optional: true
-  #   group: partial
-  #   release: v0.26.5
-  #   comment: Filename and position from which the shortcode was called.
+  position:
+    type:
+      - 'text.Position'
+    optional: true
+    group: partial
+    comment: Filename and position from which the shortcode was called.
   preheading:
     type: string
     optional: true
@@ -1378,7 +1375,7 @@ arguments:
       - string
       - hstring.RenderedString
       - hstring.HTML
-    # optional: false
+    optional: true
     comment: >-
       Title of the element. If the element references a (local) page, the title
       overrides the referenced page's title.
