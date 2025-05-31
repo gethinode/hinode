@@ -6,17 +6,23 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "breadcrumb" "args" .Params "group" "shortcode") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
+{{/* Validate and initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "breadcrumb" "args" .Params "named" .IsNamedParams "group" "shortcode") }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial"  "shortcodes/breadcrumb.html" 
+        "msg"      "Invalid arguments"
+        "details"  $args.errmsg
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{- $error = true -}}
 {{ end }}
 
-{{/* Initialize arguments */}}
+{{/* Initialize arguments and default values */}}
 {{- $page := . -}}
-{{- $path := .Get "path" }}
-{{- if $path -}}
-    {{- $page = .Site.GetPage $path -}}
+{{- if $args.path -}}
+    {{- $page = .Site.GetPage $args.path -}}
     {{- if not $page -}}
         {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
         {{- $error = true -}}
