@@ -41,13 +41,13 @@
 
     <body>
         {{- partial "assets/navbar.html" (dict
-            "page" .
-            "fixed" site.Params.navigation.fixed
-            "overlay" site.Params.navigation.overlay
+            "page"        .
+            "fixed"       site.Params.navigation.fixed
+            "overlay"     site.Params.navigation.overlay
             "overlayMode" site.Params.navigation.overlayMode
-            "color" site.Params.navigation.color
-            "style" (default "light" site.Params.navigation.style)
-            "size" (default "md" site.Params.navigation.size))
+            "color"       site.Params.navigation.color
+            "style"       (default "light" site.Params.navigation.style)
+            "breakpoint"  (default "md" site.Params.navigation.size))
         -}}
 
         <div id="container" class="main-content fullscreen">

@@ -5,7 +5,7 @@
 */}}
 
 {{/* Initialize arguments */}}
- {{ $args := partial "utilities/InitArgs.html" (dict "structure" "persona" "args" . "group" "partial") }}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "persona" "args" . "group" "partial") }}
 {{ if or $args.err $args.warnmsg }}
     {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/persona.html" 
