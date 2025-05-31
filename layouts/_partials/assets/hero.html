@@ -17,8 +17,8 @@
 {{ end }}
 
 {{/* Initialize global variables */}}
-{{ $preheadingPlacement := site.Params.modules.bookshop.title.preheadingPlacement }}
-{{ if eq $args.order "first" }}{{ $preheadingPlacement = "above" }}{{ end }}
+{{ $arrangement := site.Params.modules.bookshop.title.arrangement }}
+{{ if eq $args.order "first" }}{{ $arrangement = "above" }}{{ end }}
 
 {{/* Initialize local variables */}}
 {{ $align := $args.align }}
@@ -95,7 +95,7 @@
         "links"               $args.links
         "type"                (or $args.linkType $args.type)
         "class"               (printf "hero-title %s" $sectionClass)
-        "preheadingPlacement" $preheadingPlacement
+        "arrangement"         $arrangement
     ) }}
 
     {{ if eq $args.orientation "stacked" }}

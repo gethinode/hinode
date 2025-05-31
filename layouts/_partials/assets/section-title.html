@@ -15,7 +15,7 @@
 
 {{/* Initialize local arguments */}}
 {{- $size := (or .size site.Params.modules.bookshop.title.size) | default 4 -}}
-{{- $placement := (or .preheadingPlacement site.Params.modules.bookshop.title.preheadingPlacement) | default "above" -}}
+{{- $arrangement := (or .arrangement site.Params.modules.bookshop.title.arrangement) | default "above" -}}
 {{- $headingStyle := (or .headingStyle site.Params.modules.bookshop.title.headingStyle) | default "display" -}}
 {{- $bodyStyle := (or .bodyStyle site.Params.modules.bookshop.title.bodyStyle) | default "lead text-muted" -}}
 {{- $preheading := $args.heading.preheading }}
@@ -46,7 +46,7 @@
 
 <!-- Main code -->
 <div class="text-{{ $args.heading.align }}{{ with $args.class }} {{ . }}{{ end }} col col-12 col-md-{{ $args.heading.width }}">
-    {{ if and $preheading (eq $placement "first") }}
+    {{ if and $preheading (eq $arrangement "first") }}
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.next }}-2 p-0">

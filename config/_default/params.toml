@@ -265,7 +265,7 @@
 
 [modules.bookshop.title]
   size = 4
-  preheadingPlacement = "above"
+  arrangement = "above"
   headingStyle = "display"
   bodyStyle = "lead text-muted"
 

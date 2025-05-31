@@ -59,17 +59,7 @@ arguments:
     comment: >-
       Trigger to use the current section as preheading, applies to single pages
       only. Any preheading values takes precedence.
-  preheadingPlacement:
-    type: select
-    optional: true
-    default: above
-    options:
-      values:
-        - above
-        - first
-    comment: >-
-      Placement of the preheading, either left or above the header. On smaller
-      screens, the preheading is always placed on top.
+  arrangement:
   headingStyle:
     type: select
     optional: true
