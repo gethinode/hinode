@@ -4,64 +4,61 @@
     Visit gethinode.com/license for more details.
 -->
 
-<!-- Initialize arguments -->
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "stack" "child" "card" "args" .) }}
-{{ if $args.err }}
-    {{ partial "utilities/LogErr.html" (dict 
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "stack" "child" "card" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/stack.html" 
-        "msg" "Invalid arguments"
-        "details" $args.errmsg
-        "file" page.File
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
     )}}
 {{ end }}
 
-<!-- Main code -->
-{{ if and (eq (len $args.list) 0) (not $args.hideEmpty) }}
-	<p class="pt-4">{{- T "emptyList" }}.</p>
-{{ else }}
-	{{- partial "assets/card-group.html" (dict 
-		"page" $args.page
-		"list" $args.list
-		"max" $args.max
-		"class" "border-0 card-zoom"
-		"wrapper" "card-stack p-0 my-3 d-none d-md-block"
-		"cols" $args.cols
-		"gutter" $args.gutter
-		"padding" 3
-		"header-style" "none"
-		"body-style" "title"
-		"footer-style" "none"
-		"orientation" "stacked"
-		"scroll" true
-		"bento" true
-		"spacer" $args.animated
-		"portrait" true
-		"valign" (cond $args.animated "" "end")
-		"styles" $args.styles
-		"href" $args.href
-		"href-title" $args.hrefTitle
-		"link-type" (or $args.linkType $args.buttonType)
-	) -}}
+{{/* Main code */}}
+{{ if not $args.err }}
+	{{ if and (eq (len $args.list) 0) (not $args.hideEmpty) }}
+		<p class="pt-4">{{- T "emptyList" }}.</p>
+	{{ else }}
+		{{ $params := dict
+			"page"         $args.page
+			"list"         $args.list
+			"max"          $args.max
+			"class"        "border-0 card-zoom"
+			"header-style" "none"
+			"body-style"   "title"
+			"footer-style" "none"
+			"href" $args.href
+			"href-title" $args.hrefTitle
+			"link-type" (or $args.linkType $args.buttonType)
+		}}
 
-	{{- partial "assets/card-group.html" (dict 
-		"page" $args.page
-		"list" $args.list
-		"max" $args.max
-		"class" "border-0 card-zoom"
-		"wrapper" "card-stack p-0 d-md-none"
-		"cols" (cond (eq $args.orientation "stacked") 2 1)
-		"responsive" false
-		"padding" $args.padding
-		"header-style" "none"
-		"body-style" "title"
-		"footer-style" "none"
-		"ratio" $args.ratio
-		"orientation" $args.orientation
-		"scroll" false
-		"spacer" false
-		"portrait" false
-		"href" $args.href
-		"href-title" $args.hrefTitle
-		"link-type" (or $args.linkType $args.buttonType)
-	) -}}
+		{{- partial "assets/card-group.html" (merge $params
+			(dict 
+			"cols"        $args.cols
+			"gutter"      $args.gutter
+			"padding"     3
+			"orientation" "stacked"
+			"scroll"      true
+			"bento"       true
+			"spacer"      $args.animated
+			"portrait"    true
+			"valign"      (cond $args.animated "" "end")
+			"styles"      $args.styles
+			"wrapper"     "card-stack p-0 my-3 d-none d-md-block"
+		)) -}}
+
+		{{- partial "assets/card-group.html" (merge $params
+			(dict 
+			"cols"        (cond (eq $args.orientation "stacked") 2 1)
+			"responsive"  false
+			"padding"     $args.padding
+			"orientation" $args.orientation
+			"ratio"       $args.ratio
+			"scroll"      false
+			"spacer"      false
+			"portrait"    false
+			"wrapper"     "card-stack p-0 d-md-none"
+		)) -}}
+	{{ end }}
 {{ end }}

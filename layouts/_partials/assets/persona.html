@@ -4,41 +4,43 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "persona" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/persona.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+ {{ $args := partial "utilities/InitArgs.html" (dict "structure" "persona" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/persona.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-{{/* Initialize arguments */}}
+{{/* Initialize local arguments */}}
 {{- $page := "" }}
-{{- if .path }}
-    {{- $page = site.GetPage .path }}
+{{- if $args.path }}
+    {{- $page = site.GetPage $args.path }}
     {{- if not $page }}
-        {{- errorf "partial [assets/persona.html] - Cannot find page: %s" .path -}}
+        {{- errorf "partial [assets/persona.html] - Cannot find page: %s" $args.path -}}
     {{- end }}
 {{- end }}
 
-{{- $title := .title -}}
-{{- $href := .href -}}
-{{- $content := .content -}}
-{{- $thumbnail := .thumbnail -}}
-
-{{- $color := .color | default "primary" -}}
-
+{{- $title := $args.title -}}
+{{- $href := $args.href -}}
+{{- $content := $args.content -}}
+{{- $thumbnail := $args.thumbnail -}}
 {{- with $page -}}
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
     {{- if not $href }}{{ $href = .RelPermalink  }}{{ end -}}
     {{- if not $content }}{{ $content = .Content }}{{ end -}}
     {{- if not $thumbnail }}
-        {{ if reflect.IsMap .Params.Thumbnail }}{{ $thumbnail = .Params.Thumbnail.url }}{{ else }}{{ $thumbnail = .Params.Thumbnail }}{{ end }}
+        {{ if reflect.IsMap .Params.Thumbnail }}
+            {{ $thumbnail = .Params.Thumbnail.url }}
+        {{ else }}
+            {{ $thumbnail = .Params.Thumbnail }}
+        {{ end }}
     {{ end -}}
 {{- end -}}
 
-{{- $class := .class -}}
-{{- $loading := .loading -}}
 {{- $tab := site.Params.main.externalLinks.tab -}}
 {{- $isExternal := ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
 {{- $target := "" -}}
@@ -58,23 +60,33 @@
 {{- end -}}
 
 {{/* Main code */}}
-{{- if not $error -}}
+{{- if not $args.err -}}
     {{ with $href }}
         <a href="{{ . }}" aria-label="{{ $title | safeHTML }}"
             {{- with $target }} target="{{ . }}"{{ end }}
             {{ with $rel }} rel="{{ . }}"{{ end -}}
         >
     {{ end }}
+
+    {{ $illustration := "" }}
+    {{- if $thumbnail -}}
+        {{- $illustration = partial "assets/image.html" (dict
+            "url"     $thumbnail
+            "title"   $title
+            "ratio"   "1x1"
+            "class"   "rounded-5"
+            "loading" $args.loading
+        ) -}}
+    {{ end }}
+
     <div class="d-none d-md-block">
         <div class="persona position-relative row mt-5 align-middle p-3">
             <div class="col-2">
                 <div class="position-absolute top-50 start-0 translate-middle-y col-4 ps-3">
-                    {{- if $thumbnail -}}
-                        {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "ratio" "1x1" "class" "rounded-5" "loading" $loading) -}}
-                    {{ end }}
+                    {{ $illustration }}
                 </div>
             </div>
-            <div class="col-10 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 fs-md-5 fs-6 pe-5 pb-3">
+            <div class="col-10 {{ with $args.color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 fs-md-5 fs-6 pe-5 pb-3">
                 <div class="row">
                     <div class="col-3"></div>
                     <div class="col-9">
@@ -89,12 +101,10 @@
         <div class="persona position-relative row mt-5 align-middle p-3 ptw-5">
             <div class="col-12">
                 <div class="position-absolute top-25 start-50 translate-middle col-6">
-                    {{- if $thumbnail -}}
-                        {{- partial "assets/image.html" (dict "url" $thumbnail "title" $title "ratio" "1x1" "class" "rounded-5" "loading" $loading) -}}
-                    {{ end }}
+                    {{ $illustration }}
                 </div>
             </div>
-            <div class="col-12 {{ with $color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 ptw-lg-5 ptw-3 ptw-sm-4 fs-md-5 fs-6 pb-3">
+            <div class="col-12 {{ with $args.color }}bg-{{ . }} text-bg-{{ . }}{{ end }} rounded-5 ptw-lg-5 ptw-3 ptw-sm-4 fs-md-5 fs-6 pb-3">
                 <div class="p-3">
                     {{- partial "inline/persona-body.html" (dict "title" $title "content" $content) -}}
                 </div>
