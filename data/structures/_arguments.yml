@@ -82,10 +82,10 @@ arguments:
   #   comment: >-
   #     Enables card animations.
   #   release: v0.27.0
-  # aria-label:
-  #   type: string
-  #   optional: true
-  #   comment: Alias for label.
+  aria-label:
+    type: string
+    optional: true
+    comment: Alias for label.
   # attributes:
   #   type: map[string]interface {}
   #   optional: true
@@ -707,9 +707,7 @@ arguments:
     type: string
     optional: true
     comment: >-         
-      Assistive label for the element. The label is applied
-      to the badge instead of the button when a badge has been defined.
-      The default value of the element assistive label is its title.
+      Assistive label of the element.
   # lang:
   #   type: string
   #   optional: true
