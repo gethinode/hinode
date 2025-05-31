@@ -6,18 +6,20 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "badge" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
+{{/* Validate and initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "badge" "args" .Params "named" .IsNamedParams) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial"  "shortcodes/badge.html" 
+        "msg"      "Invalid arguments"
+        "details"  $args.errmsg
+        "file"     page.File
+        "position" .Position
+    )}}
     {{ $error = true }}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $title := .Get "title" | default "" -}}
-{{- $class := .Get "class" | default "" -}}
-{{- $color := .Get "color" | default "secondary" -}}
-
 {{/* Main code */}}
 {{- if not $error }}
-    <span class="badge text-bg-{{ $color }}{{ with $class }} {{ . }}{{ end }}">{{ $title | plainify }}</span>
+    <span class="badge text-bg-{{ $args.color }}{{ with $args.class }} {{ . }}{{ end }}">{{ $args.title | plainify }}</span>
 {{ end -}}
