@@ -171,20 +171,18 @@ arguments:
   #       - lg
   #       - xl
   #       - xxl
-  # # TODO: rename size to breakpoint
-  # size:
-  #   type: select
-  #   optional: true
-  #   comment: Breakpoint of the navbar toggler.
-  #   default: md
-  #   options:
-  #     values:
-  #       - xs
-  #       - sm
-  #       - md
-  #       - lg
-  #       - xl
-
+  breakpoint:
+    type: select
+    optional: true
+    comment: Breakpoint of the element.
+    default: md
+    options:
+      values:
+        - xs
+        - sm
+        - md
+        - lg
+        - xl
   button:
     type: bool
     optional: true
@@ -580,16 +578,12 @@ arguments:
       Host name of the video provider. It should match one of the registered
       providers in the site's parameters under `videos`.
 
-  # # i
+  # i
   id:
     type: string
-    optional: false
-    comment: Public ID of the video to be embedded.
-  # id:
-  #   type: string
-  #   optional: true
-  #   comment: >-
-  #     Unique identifier of the current element.
+    optional: true
+    comment: >-
+      Unique identifier of the current element.
   icon:
     type: string
     optional: true
@@ -778,6 +772,11 @@ arguments:
     group: partial
     options:
       min: 1
+  media-id:
+    type: string
+    optional: true
+    comment: ID of the asset to be embedded.
+
   # # TODO: merge menu
   # menu:
   #   type: '*navigation.MenuEntry'

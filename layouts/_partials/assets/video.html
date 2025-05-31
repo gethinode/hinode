@@ -44,6 +44,11 @@
 {{- else if eq $args.host "vimeo" }}
     {{- $pc = $args.page.Site.Config.Privacy.Vimeo -}}
 {{- end -}}
+{{- $id := or $args.mediaId $args.id -}}
+{{ if not $id }}
+    {{- errorf "partial [assets/video.html] - Missing media ID" -}}
+    {{ $error = true }}
+{{ end }}
 
 {{ if and (eq $args.host "youtube") ($pc.Disable) }}
     {{- errorf "partial [assets/video.html] - YouTube video disabled in site's privacy settings" -}}
@@ -61,8 +66,8 @@
 {{ if not $error -}}
     {{ if eq $args.host "youtube" }}
         {{- $host := cond $pc.PrivacyEnhanced "www.youtube-nocookie.com" "www.youtube.com" -}}
-        {{ $url := printf "https://%s/embed/%s?origin=%s" $args.host $args.id $args.page.Site.BaseURL }}
-        {{ $api := printf "https://www.youtube.com/oembed?format=json&url=%s" (printf "https://www.youtube.com/watch?v=%s" $args.id) }}
+        {{ $url := printf "https://%s/embed/%s?origin=%s" $args.host $id $args.page.Site.BaseURL }}
+        {{ $api := printf "https://www.youtube.com/oembed?format=json&url=%s" (printf "https://www.youtube.com/watch?v=%s" $id) }}
         {{ $padding := "56.25%" }}
 
         {{ with try (resources.GetRemote $api) }}
@@ -83,7 +88,7 @@
             </iframe>
         </div>
     {{ else if eq $args.host "vimeo" }}
-        {{ $url := printf "https://player.vimeo.com/video/%s" $args.id }}
+        {{ $url := printf "https://player.vimeo.com/video/%s" $id }}
         {{ $params := "" }}
         {{ if $args.autoplay }}{{ $params = print $params "&autoplay=1&muted=1" }}{{ end }}
         {{ if $pc.EnableDNT }}{{ $params = print $params "&dnt=1" }}{{ end }}
@@ -110,10 +115,10 @@
         </div>
     {{ else if eq $args.host "cloudinary" }}
         {{ if not $account }}
-            {{ errorf "Missing account name for Cloudinary video '%s': %s" $args.id $origin }}
+            {{ errorf "Missing account name for Cloudinary video '%s': %s" $id $origin }}
         {{ end }}
 
-        {{ $url := printf "https://player.cloudinary.com/embed/?cloud_name=%s&public_id=%s" $account $args.id }}
+        {{ $url := printf "https://player.cloudinary.com/embed/?cloud_name=%s&public_id=%s" $account $id }}
         {{ $params := "" }}
         {{ if $args.autoplay }}{{ $params = print $params "&player[autoplay]=true&player[muted]=true" }}{{ end }}
 
@@ -131,7 +136,7 @@
         {{ with $params }}{{ $url = print $url "&" . }}{{ end }}
         {{ $padding := "56.25%" }}
 
-        {{ $thumbnail := partial "utilities/URLJoin.html" (dict "base" (path.Dir $args.id) "path" (printf "%s.jpg" (path.BaseName $args.id))) }}
+        {{ $thumbnail := partial "utilities/URLJoin.html" (dict "base" (path.Dir $id) "path" (printf "%s.jpg" (path.BaseName $id))) }}
         {{ $metadata := partial "assets/helpers/image-dimension.html" (dict 
             "page"     $args.page
             "url"      (printf "https://res.cloudinary.com/%s/video/upload/%s" $account (path.Clean $thumbnail))
@@ -143,14 +148,14 @@
         {{ if and $height $width }}
             {{ $padding := printf "%.2f%%" (mul (div (float $height) $width) 100) }}
             {{ $title := $args.title }}
-            {{ if not $title }}{{ $title = printf "Cloudinary video '%s'" (path.BaseName $args.id) }}{{ end }}
+            {{ if not $title }}{{ $title = printf "Cloudinary video '%s'" (path.BaseName $id) }}{{ end }}
 
             <div class="video-embedded {{ $args.class }}" data-video-padding="{{ $padding }}">
                 <iframe src="{{ $url | safeURL }}" title="{{ $title }}" allow="autoplay; fullscreen; encrypted-media" frameborder="0">
                 </iframe>
             </div>
         {{ else }}
-            {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $args.id $account $origin }}
+            {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $id $account $origin }}
         {{ end }}
     {{ else }}
         {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $host }}

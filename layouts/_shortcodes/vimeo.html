@@ -22,7 +22,7 @@
         "page"      .Page
         "position"  .Position
         "host"      $args.host 
-        "id"        $args.id 
+        "media-id"  (or $args.mediaId $args.id)
         "class"     $args.class 
         "title"     (or $args.title "Vimeo Video")
         "autoplay"  $args.autoplay

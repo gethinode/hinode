@@ -342,7 +342,7 @@ Utilisez le shortcode `mark` pour {{</* mark >}}mettre en évidence{{< /mark */>
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar id="navbar-sample" path="blog" color="primary" size="md" search="false" menus="sample" title="Marque" mode="false" */>}}
+{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menus="sample" title="Marque" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -438,6 +438,6 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
+{{</* video host="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

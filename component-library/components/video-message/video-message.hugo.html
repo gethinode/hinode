@@ -20,7 +20,7 @@
 {{- define "_partials/inline/video.html" -}}
 	{{ $host := .host }}
 	{{ $account := .account }}
-	{{ $id := .id }}
+	{{ $mediaID := (index . "media-id") }}
 	{{ $autoplay := .autoplay }}
 	{{ $options := .options }}
 	{{ $border := .border }}
@@ -31,12 +31,12 @@
 	{{ else }}
         <div class="video-container{{ if $border }} video-container-border{{ end}}">
 			{{ partial "assets/video.html" (dict
-				"page" page
-				"host" $host
-				"account" $account
-				"id" $id
+				"page"     page
+				"host"     $host
+				"account"  $account
+				"media-id" $mediaID
 				"autoplay" $autoplay
-				"options" $options
+				"options"  $options
 			) -}}
 			{{ if $border }}
 				<div class="video-overlay video-overlay-start"></div>
@@ -55,19 +55,19 @@
 	{{ $iconRounded := .iconRounded }}
 
 	{{- partial "assets/card-group.html" (dict 
-		"page" page
-		"list" $list
-		"class" "border-0 card-icon card-icon-secondary"
-		"cols" $cols
-		"gutter" ""
-		"padding" "0"
+		"page"         page
+		"list"         $list
+		"class"        "border-0 card-icon card-icon-secondary"
+		"cols"         $cols
+		"gutter"       ""
+		"padding"      "0"
 		"header-style" "none"
 		"footer-style" "none"
-		"icon-style" "fa-fluid fa-fw"
-		"align" "start"
-		"orientation" "horizontal-sm"
-		"button" true
-		"link-type" $type
+		"icon-style"   "fa-fluid fa-fw"
+		"align"        "start"
+		"orientation"  "horizontal-sm"
+		"button"       true
+		"link-type"    $type
 		"icon-rounded" $iconRounded
 	) -}}
 {{ end }}
@@ -81,30 +81,30 @@
 		{{ with .link }}{{ if hasPrefix . "http" }}{{ $href = . }}{{ else }}{{ $path = . }}{{ end }}{{ end }}
 
 		{{ $list = $list | append (dict 
-			"title" .title
-			"description" (.content | page.RenderString) 
-			"icon" .icon
-			"href" $href
-			"path" $path
+			"title"        .title
+			"description"  (.content | page.RenderString) 
+			"icon"         .icon
+			"href"         $href
+			"path"         $path
 			"button-label" .label
 		) }}
 	{{ end}}
 
 	{{- partial "assets/section-title.html" (dict 
 		"heading" $args.heading
-		"class" "py-5"
+		"class"   "py-5"
 	) -}}
 
 	{{ if eq $args.orientation "stacked" }}
 		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
 		{{ with $args.video }}
 			{{- partial "inline/video.html" (dict
-				"host" .host
-				"account" .account
-				"id" .id
+				"host"     .host
+				"account"  .account
+				"media-id" (index . "media-id")
 				"autoplay" .autoplay
-				"options" .options
-				"border" $.border
+				"options"  .options
+				"border"   $.border
 			) -}}
 		{{ end }}
 		</div>
@@ -117,12 +117,12 @@
 				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
 					{{ with $args.video }}
 						{{- partial "inline/video.html" (dict
-							"host" .host
-							"account" .account
-							"id" .id
+							"host"     .host
+							"account"  .account
+							"media-id" (index . "media-id")
 							"autoplay" .autoplay
-							"options" .options
-							"border" $.border
+							"options"  .options
+							"border"   $.border
 						) -}}
 					{{ end }}
 				</div>

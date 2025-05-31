@@ -27,7 +27,7 @@ blueprint:
   video:
     host:
     account:
-    id:
+    media-id:
     autoplay:
     options:
   cols:

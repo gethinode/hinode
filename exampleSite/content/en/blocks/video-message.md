@@ -25,7 +25,7 @@ The `video` content block renders a horizontal line to separate sections. The se
   orientation: horizontal
   video:
     host: vimeo
-    id: "55073825"
+    media-id: "55073825"
     autoplay: true
   messages:
     - title: First Message

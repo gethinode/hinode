@@ -23,7 +23,7 @@
         "position"  .Position
         "account"   $args.account
         "host"      $args.host 
-        "id"        $args.id 
+        "media-id"  (or $args.mediaId $args.id)
         "class"     $args.class 
         "title"     $args.title 
         "autoplay"  $args.autoplay

@@ -11,8 +11,9 @@ arguments:
   title:
   class:
     position: 1
-  id:
+  media-id:
     position: 0
+    release: v1.0.0
   account:
     release: v0.26.5
   autoplay:
@@ -22,3 +23,11 @@ arguments:
     release: v0.26.5
   options:
     release: v0.28.2
+  # deprecated arguments
+  id:
+    type: string
+    optional: true
+    comment: ID of the video to be embedded.
+    deprecated: v1.0.0
+    alternative: media-id
+
