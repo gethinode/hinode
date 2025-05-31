@@ -464,11 +464,11 @@ As an example, the following shortcode displays a button that, when clicked, tri
     Show toast 2
 {{</* /button */>}}
 
-{{</* toast id="toast-example-1" header="First title" */>}}
+{{</* toast id="toast-example-1" title="First title" */>}}
     This is the first toast message. It supports `markdown.`
 {{</* /toast */>}}
 
-{{</* toast id="toast-example-2" header="Second title" */>}}
+{{</* toast id="toast-example-2" title="Second title" */>}}
     This is the second toast message. It supports `markdown.`
 {{</* /toast */>}}
 {{< /example >}}

@@ -813,13 +813,13 @@ arguments:
     optional: true
     comment: >-
       Messages to include in the element. Each element is rendered as a card.
-  # message:
-  #   type:
-  #     - string
-  #     - template.HTML
-  #   optional: false
-  #   comment: Toast message.
-  #   group: partial
+  message:
+    type:
+      - string
+      - template.HTML
+    optional: false
+    comment: Message to display.
+    group: partial
   mode:
     type: bool
     default: false

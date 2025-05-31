@@ -412,11 +412,11 @@ H{{</* sub 2 */>}}O est un liquide.
     Affiche la notification #1
 {{</* /button */>}}
 
-{{</* toast id="toast-example-1" header="Premier titre" */>}}
+{{</* toast id="toast-example-1" title="Premier titre" */>}}
     Ceci est le premier message de notification. Il prend en charge le `markdown`.
 {{</* /toast */>}}
 
-{{</* toast id="toast-example-2" header="Deuxième titre" */>}}
+{{</* toast id="toast-example-2" title="Deuxième titre" */>}}
     Ceci est le deuxième message de notification. Il prend en charge le `markdown`.
 {{</* /toast */>}}
 {{< /example >}}
