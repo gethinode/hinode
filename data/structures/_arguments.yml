@@ -29,6 +29,14 @@ arguments:
   #   comment: >-
   #     Sets the current item as active (only one item at a time). By
   #     default, the first item is made active.
+  alert-type:
+    type: select
+    optional: true
+    comment: Type of the alert, generates an alert with related color and icon.
+    options:
+      values:
+        - danger
+        - info
   align:
     type: select
     optional: true
@@ -369,11 +377,11 @@ arguments:
   #   type: bool
   #   optional: true
   #   comment: Flag to indicate the item should be in a disabled state.
-  # dismissible:
-  #   type: bool
-  #   optional: true
-  #   default: false
-  #   comment: Flag to indicate the alert is dismissible.
+  dismissible:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to indicate the alert is dismissible.
 
   # # e
   # external:
@@ -1404,15 +1412,6 @@ arguments:
       values:
         - button
         - link
-  # # TODO: rename to alert-type
-  # type:
-  #   type: select
-  #   optional: true
-  #   comment: Type of the alert, generates an alert with related color and icon.
-  #   options:
-  #     values:
-  #       - danger
-  #       - info
   # # TODO: rename to tab-type
   # type:
   #   type: select

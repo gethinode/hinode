@@ -2,36 +2,13 @@ comment: >-
   Use the alert shortcode to display a contextual feedback message. The inner
   content is used as alert text.
 arguments:
+  alert-type:
   class:
-    type: string
-    optional: true
-    comment: Class attribute of the alert element.
   color:
-    type: select
-    optional: true
     default: danger
-    comment: Theme color of the alert.
-    options:
-      values:
-        - primary
-        - secondary
-        - success
-        - danger
-        - warning
-        - info
-        - light
-        - dark
-        - white
-        - black
   dismissible:
-    type: bool
-    optional: true
-    default: false
-    comment: Flag to indicate the alert is dismissible.
   icon:
-    type: string
-    optional: true
-    comment: Font Awesome icon to include.
+  # deprecated arguments
   type:
     type: select
     optional: true
@@ -40,6 +17,8 @@ arguments:
       values:
         - danger
         - info
+    deprecated: v1.0.0
+    alternative: alert-type
 body:
   optional: false
   comment: Alert text.
