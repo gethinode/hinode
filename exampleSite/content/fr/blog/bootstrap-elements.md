@@ -428,7 +428,8 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Légende de l'infobulle" href="#!" */>}}Démonstration{{</* /tooltip */>}} d'une infobulle
+{{</* tooltip color="primary" title="Légende de l'infobulle" href="#!" */>}}Démonstration{{</* /tooltip */>}}
+d'une infobulle
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

@@ -93,6 +93,17 @@ arguments:
   #     Dictionary of key-value pairs added as custom attributes to the button
   #     element ('<a>').
   #   group: partial
+  arrangement:
+    type: select
+    optional: true
+    default: above
+    options:
+      values:
+        - above
+        - first
+    comment: >-
+      Arrangement of the preheading, either left or above the header. On smaller
+      screens, the preheading is always placed on top.
   autoplay:
     type: bool
     optional: true
@@ -1009,26 +1020,14 @@ arguments:
   placement:
     type: select
     optional: true
-    default: above
+    default: top
+    comment: Position of the tooltip.
     options:
       values:
-        - above
-        - first
-    comment: >-
-      Placement of the preheading, either left or above the header. On smaller
-      screens, the preheading is always placed on top.
-  # TODO: rename placement
-  # placement:
-  #   type: select
-  #   optional: true
-  #   default: top
-  #   comment: Position of the tooltip.
-  #   options:
-  #     values:
-  #       - top
-  #       - bottom
-  #       - left
-  #       - right
+        - top
+        - bottom
+        - left
+        - right
   # plain:
   #   type: bool
   #   default: false
@@ -1257,12 +1256,12 @@ arguments:
     comment: >-
       Inserts a spacer before the card.
     group: partial
-  # spacing:
-  #   type: bool
-  #   optional: true
-  #   default: true
-  #   comment: >-
-  #     Flag to add spacing to the inline element.
+  spacing:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag to add spacing to the inline element.
   # src:
   #   type: string
   #   optional: false
