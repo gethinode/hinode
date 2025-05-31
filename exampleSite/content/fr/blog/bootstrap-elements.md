@@ -32,13 +32,13 @@ Hinode propose plusieurs shortcodes qui enveloppent des composants Bootstrap cou
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
-  {{</* accordion-item header="Élément d'accordéon #1" show="true" */>}}
+  {{</* accordion-item title="Élément d'accordéon #1" show="true" */>}}
     Il s'agit du contenu du corps du premier élément de l'accordéon. Il prend en charge le contenu HTML, s'il est activé dans le moteur de rendu goldmark. L'élément est affiché en ajoutant la valeur `show` à l'argument `class`.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Élément d'accordéon #2" */>}}
+  {{</* accordion-item title="Élément d'accordéon #2" */>}}
     Il s'agit du contenu du corps du deuxième élément de l'accordéon.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Élément d'accordéon #3" */>}}
+  {{</* accordion-item title="Élément d'accordéon #3" */>}}
     Il s'agit du contenu du corps du troisième élément de l'accordéon.
   {{</* /accordion-item */>}}
 {{</* /accordion */>}}

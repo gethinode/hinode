@@ -31,14 +31,14 @@ As an example, the following shortcode displays an accordion with three elements
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
-  {{</* accordion-item header="Accordion Item #1" show="true" */>}}
+  {{</* accordion-item title="Accordion Item #1" show="true" */>}}
     This is the first item's accordion body. It supports HTML content, if enabled in the goldmark
     renderer. The item is shown by adding the value `show` to the `class` argument.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Accordion Item #2" */>}}
+  {{</* accordion-item title="Accordion Item #2" */>}}
     This is the second item's accordion body.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Accordion Item #3" */>}}
+  {{</* accordion-item title="Accordion Item #3" */>}}
     This is the third item's accordion body.
   {{</* /accordion-item */>}}
 {{</* /accordion */>}}

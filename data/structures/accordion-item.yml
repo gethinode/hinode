@@ -8,7 +8,7 @@ arguments:
   # deprecated arguments
   header:
     type: string
-    optional: false
+    optional: true
     comment: Header of the accordion item.
     deprecated: v1.0.0
     alternative: title
