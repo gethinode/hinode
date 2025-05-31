@@ -10,10 +10,10 @@
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "abbr" "args" .Params "named" .IsNamedParams) }}
 {{ if $args.err }}
     {{ partial "utilities/LogErr.html" (dict 
-        "partial" "shortcodes/abbr.html" 
-        "msg" "Invalid arguments"
-        "details" $args.errmsg
-        "file" page.File
+        "partial"  "shortcodes/abbr.html" 
+        "msg"      "Invalid arguments"
+        "details"  $args.errmsg
+        "file"     page.File
         "position" .Position
     )}}
     {{ $error = true }}
