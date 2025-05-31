@@ -4,34 +4,30 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "accordion" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
+{{/* Validate and initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "accordion" "args" .Params "named" .IsNamedParams) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial"  "shortcodes/accordion.html" 
+        "msg"      "Invalid arguments"
+        "details"  $args.errmsg
+        "file"     page.File
+        "position" .Position
+    )}}
 {{ end }}
 
 {{/* Initialize arguments and default values */}}
-{{- $id := printf "accordion-%d" .Ordinal -}}
-{{- $class := "" -}}
-{{- $open := false -}}
-{{- $body := .Inner -}}
+{{- $id := $args.id | default (printf "accordion-%d" .Ordinal) -}}
+{{- $body := chomp .Inner -}}
 
-{{ if .IsNamedParams }}
-    {{ with .Get "id" }}{{ $id = . }}{{ end }}
-    {{ with .Get "class" }}{{ $class = . }}{{ end }}
-    {{ if isset .Params "always-open" }}{{ $open = partial "utilities/CastBool.html" (.Get "always-open") }}{{ end -}}
-{{ end }}
-
-{{- if $open -}}
+{{- if $args.alwaysOpen -}}
     {{- $pattern := printf "data-bs-parent=\"#%s\"" $id -}}
     {{- $body = (replace .Inner $pattern "") }}
 {{- end -}}
 
 {{/* Main code */}}
-{{ if not $error }}
-    <div id="{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }}">
+{{ if not $args.error }}
+    <div id="{{ $id }}" class="accordion mb-3{{ with $args.class }} {{ . }}{{ end }}">
         {{- $body | safeHTML -}}
     </div>
 {{ end }}

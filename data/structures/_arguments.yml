@@ -44,11 +44,11 @@ arguments:
     optional: true
     comment: >-
       Alternate text for the thumbnail, uses `title` by default.
-  # always-open:
-  #   type: bool
-  #   optional: true
-  #   comment: >-
-  #     Flag to make accordion items stay open when another item is opened.
+  always-open:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to make accordion items stay open when another item is opened.
   anchor:
     type: select
     optional: true
@@ -497,7 +497,6 @@ arguments:
   #   type: string
   #   optional: false
   #   comment: Header of the item.
-  # # TODO: rename to header-style
   header-style:
     type: select
     optional: true
@@ -1182,12 +1181,12 @@ arguments:
   #   type: bool
   #   optional: true
   #   comment: Flag to indicate the release button should use short notation.
-  # show:
-  #   type: bool
-  #   optional: true
-  #   comment: >-
-  #     Flag to indicate an item should be shown. Only one item can beshown at a
-  #     time.
+  show:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate an item should be shown. Only one item can beshown at a
+      time.
   # # TODO: rename to show-markup
   # show_markup:
   #   type: bool

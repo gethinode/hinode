@@ -6,13 +6,16 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "accordion-item" "args" .Params) }}
-    {{ if .Parent }}
-        {{ errorf "Invalid arguments: %s" .Parent.Position -}}
-    {{ else }}
-        {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ end }}
+{{/* Validate and initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "accordion-item" "args" .Params "named" .IsNamedParams) }}
+{{ if $args.err }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial"  "shortcodes/accordion-item.html" 
+        "msg"      "Invalid arguments"
+        "details"  $args.errmsg
+        "file"     page.File
+        "position" .Position
+    )}}
     {{ $error = true }}
 {{ end }}
 
@@ -22,7 +25,6 @@
 {{ end }}
 
 {{/* Initialize arguments and default values */}}
-
 {{- $id := .Ordinal -}}
 {{ $parent := "" }}
 {{ if not $error }}
@@ -31,10 +33,6 @@
         {{- $parent = . -}}
     {{- end -}}
 {{- end -}}
-
-{{- $id := .Ordinal -}}
-{{ $header := .Get "header"  -}}
-{{ $class := .Get "class" | default "" -}}
 
 {{ $body := trim .Inner " \r\n" -}}
 {{ if not $body -}}
@@ -49,17 +47,25 @@
 {{/* Main code */}}
 {{ $show := false -}}
 {{ if not $error }}
-    {{ if isset .Params "show" }}{{ $show = partial "utilities/CastBool.html" (.Get "show") }}{{ end -}}
-
     <div class="accordion-item">
-        {{- with $header -}}
-        <div class="accordion-header m-0 fs-2" id="{{ $parent }}-heading-{{ $id }}">
-            <button class="accordion-button{{ if not $show }} collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $parent }}-item-{{ $id }}" aria-expanded="false" aria-controls="{{ $parent }}-item-{{ $id }}">
+        {{- with (or $args.title $args.header) -}}
+        <div id="{{ $parent }}-heading-{{ $id }}" class="accordion-header m-0 fs-2">
+            <button class="accordion-button{{ if not $args.show }} collapsed{{ end }}"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#{{ $parent }}-item-{{ $id }}"
+                aria-expanded="false"
+                aria-controls="{{ $parent }}-item-{{ $id }}"
+            >
             {{ . }}
             </button>
         </div>
         {{- end -}}
-        <div id="{{ $parent }}-item-{{ $id }}" class="accordion-collapse collapse{{ if $show }} show{{ end }}{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $parent }}-heading-{{ $id }}" data-bs-parent="#{{ $parent }}">
+        <div id="{{ $parent }}-item-{{ $id }}" 
+            class="accordion-collapse collapse{{ if $args.show }} show{{ end }}{{ with $args.class }} {{ . }}{{ end }}"
+            aria-labelledby="{{ $parent }}-heading-{{ $id }}"
+            data-bs-parent="#{{ $parent }}"
+        >
             <div class="accordion-body">{{ $body | .Page.RenderString | safeHTML }}</div>
         </div>
     </div>
