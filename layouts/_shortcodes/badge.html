@@ -4,22 +4,19 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
 {{/* Validate and initialize arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "badge" "args" .Params "named" .IsNamedParams) }}
-{{ if $args.err }}
-    {{ partial "utilities/LogErr.html" (dict 
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial"  "shortcodes/badge.html" 
         "msg"      "Invalid arguments"
-        "details"  $args.errmsg
+        "details"  ($args.errmsg | append $args.warnmsg)
         "file"     page.File
         "position" .Position
     )}}
-    {{ $error = true }}
 {{ end }}
 
 {{/* Main code */}}
-{{- if not $error }}
+{{- if not $args.err }}
     <span class="badge text-bg-{{ $args.color }}{{ with $args.class }} {{ . }}{{ end }}">{{ $args.title | plainify }}</span>
 {{ end -}}
