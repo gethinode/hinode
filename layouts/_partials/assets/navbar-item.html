@@ -6,20 +6,23 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "navbar-item" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/navbar-item.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "navbar-item" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/navbar-item.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error true }}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $page := .page -}}
-{{- $menu := .menu -}}
-{{- $parent := .parent -}}
-{{- $plain := .plain | default false -}}
-{{- $class := .class -}}
-{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
-{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{/* Initialize local arguments */}}
+{{- $page := $args.page -}}
+{{- $menu := $args.menu -}}
+{{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
 {{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
 {{- $menuURL := "" -}}
 {{ if or (strings.HasPrefix $menu.PageRef "http") (strings.HasPrefix $menu.URL "http") }}
@@ -59,11 +62,11 @@
 {{- $childNav := "" -}}
 
 {{- $button := "" -}}
-{{- if $parent -}}
-    {{- $mainNav = urlize (lower $parent.Name) -}}
+{{- if $args.parent -}}
+    {{- $mainNav = urlize (lower $args.parent.Name) -}}
     {{- $childNav = urlize (lower $menu.Name) -}}
     {{- $anchorClass = "dropdown-item" -}}
-{{- else if and (not $plain) $menu.HasChildren -}}
+{{- else if and (not $args.plain) $menu.HasChildren -}}
     {{- $anchorClass = "nav-link dropdown-toggle" -}}
     {{- $button = " role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" -}}
 {{- else -}}
@@ -83,12 +86,12 @@
     {{ if $menu.Params.button }}
         {{ partial "assets/button.html" (dict 
             "title" $title
-            "icon" $menu.Pre
-            "href" $menuURL
-            "size" "sm"
+            "icon"  $menu.Pre
+            "href"  $menuURL
+            "size"  "sm"
         )}}
     {{ else }}
-        {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $class }} {{ . }}{{ end }}" 
+        {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $args.class }} {{ . }}{{ end }}" 
             {{ if $isIcon }}aria-label="{{ $title }}"{{ end }}
             data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
             {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTML }}"{{ with $externalHref }} {{ . | safeHTML }}{{ end }}{{ end }} {{ $button | safeHTML }}>
@@ -100,7 +103,7 @@
                     {{ partial "assets/icon.html" (dict "icon" (string .) )}}
                 {{ end }}
             {{ end -}}
-            <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $plain }}{{ $title }}{{ end }}</span>
+            <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $args.plain }}{{ $title }}{{ end }}</span>
             {{- with $menu.Post }}{{ . }}{{ end -}}
             {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
         {{ cond (ne $menuURL "") "</a>" "</div>" | safeHTML }}

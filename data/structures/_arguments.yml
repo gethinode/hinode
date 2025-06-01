@@ -138,14 +138,12 @@ arguments:
     default: false
     comment: >-
       Trigger to use a bento-style layout instead of default grid layout.
-  # body:
-  #   type:
-  #     - string
-  #     - template.HTML
-  #   optional: true
-  #   comment: The body content of the item, supports Markdown and HTML (if enabled).
-  #   group: partial
-  # # TODO: rename to body-style
+  body:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: The body content of the item, supports Markdown and HTML (if enabled).
   body-style:
     type: select
     optional: true
@@ -384,10 +382,10 @@ arguments:
   #   comment: >-
   #     All but the last element of an URL extension. For example, the dir of the
   #     URL 'https://example.com/first/second/third.webp' equals '/first/second/'.
-  # disabled:
-  #   type: bool
-  #   optional: true
-  #   comment: Flag to indicate the item should be in a disabled state.
+  disabled:
+    type: bool
+    optional: true
+    comment: Flag to indicate the item should be in a disabled state.
   dismissible:
     type: bool
     optional: true
@@ -403,11 +401,11 @@ arguments:
   #     Flag to indicate if a link that contains baseURL host should be forced as external.
 
   # f
-  # fade:
-  #   type: bool
-  #   optional: true
-  #   comment: Flag to make the tab pane fade in.
-  #   parent: cascade
+  fade:
+    type: bool
+    optional: true
+    comment: Flag to make the tab pane fade in.
+    parent: cascade
   # figclass:
   #   type: string
   #   optional: true
@@ -654,16 +652,6 @@ arguments:
   #   optional: true
   #   comment: >-
   #     Cryptographic hash of the script to enable Subresource Integrity (SRI).
-  # # TODO: rename to item-type
-  # item_type:
-  #   type: select
-  #   optional: true
-  #   comment: Type of the item to render.
-  #   options:
-  #     values:
-  #       - accordion
-  #       - tab-pane
-  #   group: partial
   items:
     type: items
     optional: false
@@ -748,6 +736,15 @@ arguments:
     optional: true
     comment: >-
       Local page reference or external hyperlink address.
+  link-type:
+    type: select
+    optional: true
+    default: button
+    comment: Style of the link.
+    options:
+      values:
+        - button
+        - link
   links:
     type: links
     optional: true
@@ -850,6 +847,27 @@ arguments:
   #   comment: >-
   #     Name of the code snippet, used to identify the relevant section of the
   #     input file.
+  navitem-type:
+    type: select
+    optional: true
+    comment: Type of the item to render.
+    options:
+      values:
+        - accordion
+        - tab-pane
+    group: partial
+  nav-items:
+    type: string
+    optional: true
+    comment: Preprocessed nav items, typically passed by a shortcode to a partial.
+    group: partial
+  nav-titles:
+    type:
+      - slice
+      - "[]string"
+    optional: true
+    comment: Titles of the nav items, used when passing preprocessed nav items.
+    group: partial
   nested:
     type: bool
     optional: true
@@ -971,16 +989,16 @@ arguments:
   #     arrays in the format [label (string), value (int)]. Requires
   #     `paging = true`. 
   #   release: v0.27.8 
-  # pane:
-  #   type: select
-  #   optional: true
-  #   default: none
-  #   comment: Style of the panes.
-  #   options:
-  #     values:
-  #       - none
-  #       - persona
-  #   group: partial
+  pane:
+    type: select
+    optional: true
+    default: none
+    comment: Style of the panes.
+    options:
+      values:
+        - none
+        - persona
+    group: partial
   # parent:
   #   type: bool
   #   position: 2
@@ -993,11 +1011,11 @@ arguments:
   #   type: '*navigation.MenuEntry'
   #   optional: true
   #   comment: Parent of the current navbar item.
-  # parentID:
-  #   type: string
-  #   optional: false
-  #   comment: Identification of the parent (e.g. nav control).
-  #   group: partial
+  parent-id:
+    type: string
+    optional: false
+    comment: Identification of the parent (e.g. nav control).
+    group: partial
   path:
     type: path
     optional: true
@@ -1337,6 +1355,16 @@ arguments:
     comment: Apply subtle theme colors.
 
   # # t
+  tab-type:
+    type: select
+    optional: true
+    comment: Type of the tab group.
+    options:
+      values:
+        - tabs
+        - pills
+        - underline
+        - callout
   # tab:
   #   type: bool
   #   optional: true
@@ -1400,15 +1428,6 @@ arguments:
   #     values:
   #       - fill
   #       - fit
-  link-type:
-    type: select
-    optional: true
-    default: button
-    comment: Style of the link.
-    options:
-      values:
-        - button
-        - link
   # # TODO: rename to tab-type
   # type:
   #   type: select
@@ -1474,22 +1493,22 @@ arguments:
   #   comment: >-
   #     Version of the sidebar navigation, used to define the base URL of
   #     generated links, together with the page's section.
-  # vertical:
-  #   type: bool
-  #   default: false
-  #   optional: true
-  #   comment: Flag to show vertical tabs instead of horizontal tabs.
+  vertical:
+    type: bool
+    default: false
+    optional: true
+    comment: Flag to show vertical tabs instead of horizontal tabs.
   video:
     type: video
     optional: false
     comment: The video to embed.
+
   # # w
-  # # TODO: rename to word-wrap
-  # wrap:
-  #   type: bool
-  #   default: false
-  #   optional: true
-  #   comment: Flag to enable word wrapping of tab titles.
+  word-wrap:
+    type: bool
+    default: false
+    optional: true
+    comment: Flag to enable word wrapping of tab titles.
   # wrap:
   #   type: bool
   #   optional: true

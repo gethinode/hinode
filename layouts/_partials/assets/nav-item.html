@@ -5,52 +5,87 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false -}}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav-item" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/nav-item.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "nav-item" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/nav-item.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $id := .id -}}
-{{- $parentID := .parentID -}}
-{{- $class := .class -}}
-{{- $fade := .fade -}}
-{{- $header := .header -}}
-{{- $class := .class -}}
-{{- $body := .body -}}
-{{- $show := .show -}}
-{{- $disabled := .disabled -}}
-{{- $type := .item_type -}}
-{{- $illustration := .illustration -}}
+{{/* Initialize local arguments */}}
+{{- $parentID := or $args.parentId $args.parentID -}}
+{{- $title := or $args.title $args.header -}}
+{{- $type := or $args.navitemType $args.item_type -}}
+{{- $illustration := "" -}}
+{{- if reflect.IsMap $args.illustration }}
+    {{ $illustration = partial $args.hook (dict
+        "image"        $args.illustration.image
+        "icon"         $args.illustration.icon
+        "anchor"       $args.illustration.anchor
+        "mode"         $args.illustration.mode
+        "ratio"        $args.illustration.ratio
+        "sizes"        "25vw"
+        "title"        (T "heroImage")
+        "wrapper"      "mx-auto mx-md-0"
+        "class"        "hero-image"
+        "image-overlay" $args.imageOverlay
+    ) }}
+{{ else }}
+    {{ $illustration = partial $args.hook (dict "image" $args.illustration) }}
+{{ end }}
 
 {{/* Main code */}}
-{{ if eq $type "accordion" }}
-    <div class="accordion-item{{ if $show }} show{{ end }}{{ with $class }} {{ . }}{{ end }}">
-        {{- with $header -}}
-            <h2 class="accordion-header m-0" id="accordion-{{ $parentID }}-heading-{{ $id }}">
-                <button class="accordion-button collapsed {{ if $disabled }} text-secondary{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-{{ $parentID }}-item-{{ $id }}" aria-expanded="false" aria-controls="accordion-{{ $parentID }}-item-{{ $id }}"{{ if $disabled }} disabled{{ end }}>
-                    {{ if $illustration }}
-                        <div class="row">
-                            <div class="col-3 col-sm-2 my-auto">{{ $illustration | safeHTML }}</div>
-                            <div class="col-9 col-sm-10 fs-6 fs-sm-5 my-auto">{{ . }}</div>
-                        </div>
-                    {{ else }}
-                        {{ . }}
-                    {{ end }}
-                </button>
-            </h2>
-        {{- end -}}
-        <div id="accordion-{{ $parentID }}-item-{{ $id }}" class="accordion-collapse collapse{{ with $class }} {{ . }}{{ end }}" aria-labelledby="{{ $parentID }}-heading-{{ $id }}" data-bs-parent="#accordion-{{ $parentID }}">
-            <div class="accordion-body">{{- $body | safeHTML -}}</div>
+{{ if not $args.err }}
+    {{ if eq $type "accordion" }}
+        <div class="accordion-item{{ if $args.show }} show{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
+            {{- with $title -}}
+                <h2 id="accordion-{{ $parentID }}-heading-{{ $args.id }}" class="accordion-header m-0" >
+                    <button
+                        class="accordion-button collapsed {{ if $args.disabled }} text-secondary{{ end }}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#accordion-{{ $parentID }}-item-{{ $args.id }}"
+                        aria-expanded="false"
+                        aria-controls="accordion-{{ $parentID }}-item-{{ $args.id }}"
+                        {{ if $args.disabled }} disabled{{ end }}
+                    >
+                        {{ if $illustration }}
+                            <div class="row">
+                                <div class="col-3 col-sm-2 my-auto">{{ $illustration | safeHTML }}</div>
+                                <div class="col-9 col-sm-10 fs-6 fs-sm-5 my-auto">{{ . }}</div>
+                            </div>
+                        {{ else }}
+                            {{ . }}
+                        {{ end }}
+                    </button>
+                </h2>
+            {{- end -}}
+            <div
+                id="accordion-{{ $parentID }}-item-{{ $args.id }}"
+                class="accordion-collapse collapse{{ with $args.class }} {{ . }}{{ end }}"
+                aria-labelledby="{{ $parentID }}-heading-{{ $args.id }}"
+                data-bs-parent="#accordion-{{ $parentID }}"
+            >
+                <div class="accordion-body">{{- $args.body | safeHTML -}}</div>
+            </div>
         </div>
-    </div>
-{{ else }}
-    <div class="tab-pane{{ if $show }} active {{ if $fade }}show{{ end }}{{ end }} {{ if $fade}}fade{{ end }}{{ with $class }} {{ . }}{{ end }}" id="{{ $parentID }}-{{ $id }}" 
-        role="tabpanel" aria-labelledby="{{ $parentID }}-btn-{{ $id }}" tabindex="0" data-header="{{ $header }}" {{ if $show }}data-show-id="{{ $id }}"{{ end }} 
-        data-has-content="{{ gt (len $body) 0 }}" {{ if $disabled }} data-disabled-id="{{ $id }}"{{ end }}>
-        {{ $body }}
-    </div>
+    {{ else }}
+        <div
+            id="{{ $parentID }}-{{ $args.id }}" 
+            class="tab-pane{{ if $args.show }} active {{ if $args.fade }}show{{ end }}{{ end }} {{ if $args.fade }}fade{{ end }}{{ with $args.class }} {{ . }}{{ end }}"
+            role="tabpanel"
+            aria-labelledby="{{ $parentID }}-btn-{{ $args.id }}"
+            tabindex="0"
+            data-header="{{ $title }}"
+            {{ if $args.show }}data-show-id="{{ $args.id }}"{{ end }} 
+            data-has-content="{{ gt (len $args.body) 0 }}"
+            {{ if $args.disabled }} data-disabled-id="{{ $args.id }}"{{ end }}
+        >
+            {{ $args.body }}
+        </div>
+    {{ end }}
 {{ end }}
