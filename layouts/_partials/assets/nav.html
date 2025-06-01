@@ -25,8 +25,6 @@
 {{- $wrap := or $args.wordWrap $args.wrap -}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
 
-{{ warnf "type: %s" $type }}
-
 {{/* Main code */}}
 <div class="col col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
     {{ if $args.vertical }}<div class="d-flex align-items-start">{{ end }}
