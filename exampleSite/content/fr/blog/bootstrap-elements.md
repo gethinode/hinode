@@ -321,15 +321,15 @@ Utilisez le shortcode `mark` pour {{</* mark >}}mettre en évidence{{< /mark */>
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-  {{</* nav type="pills" vertical="true" */>}}
-    {{</* nav-item header="Élément de navigation #1" show="true" */>}}
+  {{</* nav tab-type="pills" vertical="true" */>}}
+    {{</* nav-item title="Élément de navigation #1" show="true" */>}}
       Voici le contenu de navigation du premier élément. Il prend en charge le contenu HTML, s'il est
       activé dans le moteur de rendu Goldmark. L'élément est affiché en ajoutant la valeur `show` à l'argument `class`.
     {{</* /nav-item */>}}
-    {{</* nav-item header="Élément de navigation #2" */>}}
+    {{</* nav-item title="Élément de navigation #2" */>}}
       Voici le contenu de navigation du deuxième élément.
     {{</* /nav-item */>}}
-    {{</* nav-item header="Élément de navigation #3" */>}}
+    {{</* nav-item title="Élément de navigation #3" */>}}
       Voici le contenu de navigation du troisième élément.
     {{</* /nav-item */>}}
   {{</* /nav */>}}
