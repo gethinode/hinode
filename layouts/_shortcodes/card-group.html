@@ -40,21 +40,11 @@
 {{- $button := .Get "button" | default false -}}
 {{- $buttonType := .Get "link-type" | default "" -}}
 {{- $iconRounded := .Get "icon-rounded" | default false -}}
-{{- with .Get "header" }}
-    {{- $header = . -}}
-{{- end -}}
-{{- with .Get "footer" }}
-    {{- $footer = . -}}
-{{- end -}}
-{{- with .Get "style" }}
-    {{- $style = . -}}
-{{- end -}}
-{{- with .Get "buttonType" }}
-    {{- $buttonType = . -}}
-{{- end -}}
-{{- with .Get "iconRounded" }}
-    {{- $iconRounded = . -}}
-{{- end -}}
+{{- with .Get "header" }}{{- $header = . -}}{{- end -}}
+{{- with .Get "footer" }}{{- $footer = . -}}{{- end -}}
+{{- with .Get "style" }}{{- $style = . -}}{{- end -}}
+{{- with .Get "buttonType" }}{{- $buttonType = . -}}{{- end -}}
+{{- with .Get "iconRounded" }}{{- $iconRounded = . -}}{{- end -}}
 {{- $scroll := .Get "scroll" | default false -}}
 
 {{ $inner := .Scratch.Get "inner" }}
@@ -66,26 +56,26 @@
 
 {{/* Main code */}}
 {{- partial "assets/card-group.html" (dict 
-    "page" .Page
-    "cards" $inner
-    "cols" $cols
-    "gutter" $gutter
-    "title" $title
-    "separator" $separator
-    "wrapper" $wrapper
-    "responsive" $responsive
-    "class" $class
-    "color" $color
-    "padding" $padding
+    "page"         .Page
+    "cards"        $inner
+    "cols"         $cols
+    "gutter"       $gutter
+    "title"        $title
+    "separator"    $separator
+    "wrapper"      $wrapper
+    "responsive"   $responsive
+    "class"        $class
+    "color"        $color
+    "padding"      $padding
     "header-style" $header
     "footer-style" $footer
-    "orientation" $orientation
-    "align" $align
-    "icon-style" $style
-    "subtle" $subtle
-    "button" $button
-    "link-type" $buttonType
+    "orientation"  $orientation
+    "align"        $align
+    "icon-style"   $style
+    "subtle"       $subtle
+    "button"       $button
+    "link-type"    $buttonType
     "icon-rounded" $iconRounded
-    "scroll" $scroll
+    "scroll"       $scroll
     ) 
 -}}
