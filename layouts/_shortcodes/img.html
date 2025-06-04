@@ -16,7 +16,7 @@
     )}}
 {{- end -}}
 
-{{/* Initialize arguments */}}
+{{/* Initialize local arguments */}}
 {{ if not .Parent }}
     {{ errorf "The img shortcode should be contained within a carousel shortcode: %s" .Position }}
 {{ else if not $args.err }}
