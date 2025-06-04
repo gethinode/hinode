@@ -3,6 +3,7 @@ comment: >-
   content is used as alert text.
 arguments:
   alert-type:
+    release: v1.0.0
   class:
   color:
     default: danger

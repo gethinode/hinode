@@ -213,6 +213,16 @@ arguments:
     optional: true
     comment: >-
       Label of the link button, defaults to the card title.
+  button-size:
+    type: select
+    optional: true
+    default: md
+    comment: Size of the button.
+    options:
+      values:
+        - sm
+        - md
+        - lg
   # # TODO: rename to link-type
   # buttonType:
   #   type: select
@@ -502,11 +512,11 @@ arguments:
   #     Name of the group filter. This is typically used when a shortcode and
   #     partial have common arguments. The group filter binds a specific argument
   #     to a particular group. By default, an argument belongs to all groups.
-  # grow:
-  #   type: bool
-  #   optional: true
-  #   default: false
-  #   comment: Flag to indicate the spinner is growing instead of rotating.
+  grow:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to indicate the spinner is growing instead of rotating.
   gutter:
     type: int
     optional: true
@@ -637,11 +647,11 @@ arguments:
   #   optional: true
   #   comment: >-
   #     Image resource to process. Must be set when handling local images.
-  # inline:
-  #   type: bool
-  #   optional: true
-  #   default: false
-  #   comment: Flag to render the release button inline.
+  inline:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to render the element inline with the text.
   input:
     type: input
     optional: false
@@ -1122,6 +1132,15 @@ arguments:
         - 4x3
         - 16x9
         - 21x9
+  release-state:
+    type: select
+    optional: true
+    default: new
+    comment: State of the feature.
+    options:
+      values:
+        - new
+        - deprecated
   # relref:
   #   type: string
   #   optional: true
@@ -1208,10 +1227,10 @@ arguments:
   #       - bash
   #       - powershell
   #       - sql
-  # short:
-  #   type: bool
-  #   optional: true
-  #   comment: Flag to indicate the release button should use short notation.
+  short:
+    type: bool
+    optional: true
+    comment: Flag to indicate the release button should use short notation.
   show:
     type: bool
     optional: true
@@ -1230,17 +1249,6 @@ arguments:
   #   optional: true
   #   default: true
   #   comment: Indicates if the preview should be output in the HTML.
-  # # TODO: rename to button-size?
-  # size:
-  #   type: select
-  #   optional: true
-  #   default: md
-  #   comment: Size of the button.
-  #   options:
-  #     values:
-  #       - sm
-  #       - md
-  #       - lg
   size: 
     type: int
     optional: true
@@ -1318,15 +1326,6 @@ arguments:
   #       - async
   #       - defer
   #       - immediate
-  # state:
-  #   type: select
-  #   optional: true
-  #   default: new
-  #   comment: State of the feature.
-  #   options:
-  #     values:
-  #       - new
-  #       - deprecated
   # structure:
   #   type: string
   #   position: 0
@@ -1387,6 +1386,10 @@ arguments:
     comment: >-
       Tags to be used as filter. When set, only pages that match at least one of
       the provided tags are retrieved.
+  text:
+    type: string
+    optional: false
+    comment: Text to render by the element.
   # text:
   #   type:
   #     - string
@@ -1495,6 +1498,10 @@ arguments:
         - start
         - center
         - end
+  version:
+    type: string
+    optional: false
+    comment: Version string, expects semver notation with a `v` prefix.
   # version:
   #   type: string
   #   optional: true
