@@ -238,7 +238,7 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{</* file file="./config/_default/languages.toml" id="file-collapse-1" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

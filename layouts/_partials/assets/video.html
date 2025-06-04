@@ -58,7 +58,7 @@
     {{ $error = true }}
 {{ end }}
 
-
+{{ $queryArgs := or $args.queryArgs $args.options }}
 {{ $origin := $args.position }}
 {{ if not $origin }}{{ with $args.page.File }}{{ $origin = $args.Path }}{{ end }}{{ end }}
 
@@ -131,7 +131,7 @@
             {{ $params = print $params "&source[transformation][1][quality]=auto" }}
         {{ end }}
 
-        {{ with $args.options }}{{ $params = print $params "&" . }}{{ end }}
+        {{ with $queryArgs }}{{ $params = print $params "&" . }}{{ end }}
         {{ $params = strings.TrimLeft "?&" $params }}
         {{ with $params }}{{ $url = print $url "&" . }}{{ end }}
         {{ $padding := "56.25%" }}

@@ -22,7 +22,7 @@
 	{{ $account := .account }}
 	{{ $mediaID := (index . "media-id") }}
 	{{ $autoplay := .autoplay }}
-	{{ $options := .options }}
+	{{ $queryArgs := .queryArgs }}
 	{{ $border := .border }}
 
 	{{ if site.Params.env_bookshop_live }}
@@ -31,12 +31,12 @@
 	{{ else }}
         <div class="video-container{{ if $border }} video-container-border{{ end}}">
 			{{ partial "assets/video.html" (dict
-				"page"     page
-				"host"     $host
-				"account"  $account
-				"media-id" $mediaID
-				"autoplay" $autoplay
-				"options"  $options
+				"page"       page
+				"host"       $host
+				"account"    $account
+				"media-id"   $mediaID
+				"autoplay"   $autoplay
+				"query-args" $queryArgs
 			) -}}
 			{{ if $border }}
 				<div class="video-overlay video-overlay-start"></div>
@@ -99,12 +99,12 @@
 		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
 		{{ with $args.video }}
 			{{- partial "inline/video.html" (dict
-				"host"     .host
-				"account"  .account
-				"media-id" (index . "media-id")
-				"autoplay" .autoplay
-				"options"  .options
-				"border"   $.border
+				"host"       .host
+				"account"    .account
+				"media-id"   (index . "media-id")
+				"autoplay"   .autoplay
+				"query-args" .queryArgs
+				"border"     $.border
 			) -}}
 		{{ end }}
 		</div>
@@ -117,12 +117,12 @@
 				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
 					{{ with $args.video }}
 						{{- partial "inline/video.html" (dict
-							"host"     .host
-							"account"  .account
-							"media-id" (index . "media-id")
-							"autoplay" .autoplay
-							"options"  .options
-							"border"   $.border
+							"host"       .host
+							"account"    .account
+							"media-id"   (index . "media-id")
+							"autoplay"   .autoplay
+							"query-args" .queryArgs
+							"border"     $.border
 						) -}}
 					{{ end }}
 				</div>

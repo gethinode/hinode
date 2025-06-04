@@ -236,7 +236,7 @@ Use the `file` shortcode to print and highlight the full content of a given inpu
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{</* file file="./config/_default/languages.toml" id="file-collapse-1" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

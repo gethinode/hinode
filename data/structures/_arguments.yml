@@ -429,13 +429,13 @@ arguments:
   #   optional: true
   #   comment: Class attribute of the figure caption, e.g. `px-4`.
   #   release: v0.23.0
-  # file:
-  #   type: string
-  #   optional: false
-  #   comment: >-
-  #     Path of the input file. The path is relative to the `basePath` defined in
-  #     the `docs` section of the site's parameters. If the file starts with `./`,
-  #     the path of the repository is used as base path instead.
+  file:
+    type: string
+    optional: false
+    comment: >-
+      Path of the input file. The path is relative to the `basePath` defined in
+      the `docs` section of the site's parameters. If the file starts with `./`,
+      the path of the repository is used as base path instead.
   # # TODO: merge file
   # file:
   #   type: string
@@ -495,13 +495,13 @@ arguments:
       the site param `enableLanguageSelectionStorage` is set to true. When `force` is true,
       the link to a local page is kept as is.
     release: v0.27.20
-  # full:
-  #   type: bool
-  #   optional: true
-  #   default: true
-  #   comment: >-
-  #     If unset, shows the filename only. By default, the entire path (relative
-  #     to the base path) is shown.
+  full:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      If unset, shows the filename only. By default, the entire path (relative
+      to the base path) is shown.
 
   # # g
   # group:
@@ -734,12 +734,12 @@ arguments:
   #     shortcodes and `bookshop` to render a Bookshop component using inline
   #     YAML data.
   # # TODO: merge lang
-  # lang:
-  #   type: string
-  #   optional: true
-  #   comment: >-
-  #     Language to be used by the syntax highlighter. If not set, the
-  #     language is derived from the file extension.
+  lang:
+    type: string
+    optional: true
+    comment: >-
+      Language to be used by the syntax highlighter. If not set, the
+      language is derived from the file extension.
   # link:
   #   type: string
   #   optional: false
@@ -894,18 +894,11 @@ arguments:
       By default, only first-order childs are retrieved.
 
   # # o
-  # options:
-  #   type: string
-  #   optional: true
-  #   comment: Hugo highlighting options.
-  #   release: v0.27.6
-  # # TODO: rename to query-args
   options:
     type: string
     optional: true
     comment: >-
-      Optional query parameters to append to video asset's url. The query string
-      is prepended with a `?` symbol. Only applicable to Cloudinary.
+        Hugo highlighting options, see https://gohugo.io/shortcodes/highlight/#options-1.
   order:
     type: select
     optional: true
@@ -1116,8 +1109,16 @@ arguments:
   #   optional: true
   #   comment: Prompt override, e.g. `PS C:\Users\User>`.
 
-  # # r
-  # # TODO: check default behavior; add "auto" option
+  # q
+  query-args:
+    type: string
+    optional: true
+    comment: >-
+      Optional query parameters to append to video asset's url. The query string
+      is prepended with a `?` symbol. Only applicable to Cloudinary.
+
+  # r
+  # TODO: check default behavior; add "auto" option
   ratio:
     type: select
     optional: true
@@ -1235,7 +1236,7 @@ arguments:
     type: bool
     optional: true
     comment: >-
-      Flag to indicate an item should be shown. Only one item can beshown at a
+      Flag to indicate an item should be shown. Only one item can be shown at a
       time.
   # # TODO: rename to show-markup
   # show_markup:

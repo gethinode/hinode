@@ -15,43 +15,48 @@
 
 {{ $error := false -}}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "file" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
+{{/* Initialize arguments */}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "file" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/file.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+{{- end -}}
 
 {{/* Initialize arguments */}}
 {{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file := .Get "path" | default "" -}}
-{{- if hasPrefix $file "./" -}}
-    {{- $file = path.Clean $file -}}
-{{- else -}}
-    {{- $file = path.Join $basePath (path.Clean $file) -}}
-{{- end -}}
+{{- $file := or $args.file $args.path -}}
+{{ if $file }}
+    {{- if hasPrefix $file "./" -}}
+        {{- $file = path.Clean $file -}}
+    {{- else -}}
+        {{- $file = path.Join $basePath (path.Clean $file) -}}
+    {{- end -}}
 
-{{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
-{{- $lang := .Get "lang" | default $extension -}}
-{{- $id := .Get "id" | default (printf "file-collapse-%d" .Ordinal) -}}
-{{- $show := true -}}
-{{ if isset .Params "show" }}{{ $show = partial "utilities/CastBool.html" (.Get "show") }}{{ end -}}
-{{- $full := true -}}
-{{ if isset .Params "full" }}{{ $full = partial "utilities/CastBool.html" (.Get "full") }}{{ end -}}
-{{- $class := .Get "class" | default "" -}}
-{{- $options := .Get "options" -}}
-
-{{ if not (fileExists $file) }}
-    {{ warnf "Cannot find file: '%q'. See %s" $file $.Position }}
+    {{ if not (fileExists $file) }}
+        {{ warnf "Cannot find file: '%q'. See %s" $file $.Position }}
+        {{ $error = true }}
+    {{ end }}
+{{ else }}
+    {{ errorf "Expected file or path argument. See %s" $.Position }}
     {{ $error = true }}
 {{ end }}
+
+{{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
+{{- $lang := $args.lang | default $extension -}}
+{{- $id := $args.id | default (printf "file-collapse-%d" .Ordinal) -}}
 
 {{/* Main code */}}
 {{- if not $error -}}
     {{- /* Force-check if the file exists */ -}}
-    {{ $tmp := os.Stat $file }}
+    {{- $tmp := os.Stat $file -}}
     {{- $content := readFile $file -}}
 
-    <ul class="nav nav-tabs{{ with $class }} {{ . }}{{ end }}">
+    <ul class="nav nav-tabs{{ with $args.class }} {{ . }}{{ end }}">
         <li class="nav-item">
             <a class="nav-link active font-monospace" 
                 href="#body-{{ $id }}" 
@@ -60,14 +65,24 @@
                 data-bs-target=".multi-{{ $id }}" 
                 aria-expanded="false" 
                 aria-controls="body-{{ $id }} footer-{{ $id }}">
-                <small>{{ if $full }}{{ strings.TrimPrefix $basePath $file }}{{ else }}{{ path.Base $file }}{{ end }}</small>
+                <small>{{ if $args.full }}{{ strings.TrimPrefix $basePath $file }}{{ else }}{{ path.Base $file }}{{ end }}</small>
             </a>
         </li>
     </ul>
     <div class="border-start border-end border-bottom mb-3">
-        <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
-            {{- highlight (trim $content "\r\n") $lang $options -}}
+        <div class="collapse multi-{{ $id }}{{ if $args.show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
+            {{- highlight (trim $content "\r\n") $lang $args.options -}}
         </div>
-        <div class="collapse multi-{{ $id }}{{ if not $show }} show{{ end }} p-3" id="footer-{{ $id }}"><i>...</i></div>
+        <div class="collapse multi-{{ $id }}{{ if not $args.show }} show{{ end }} p-3" id="footer-{{ $id }}">
+            <a class="nav-link active" 
+                href="#body-{{ $id }}" 
+                aria-current="page" 
+                data-bs-toggle="collapse" 
+                data-bs-target=".multi-{{ $id }}" 
+                aria-expanded="false" 
+                aria-controls="body-{{ $id }} footer-{{ $id }}">
+                <small><i>{{ T "clickToExpand" }}</i></small>
+            </a>
+        </div>
     </div>
 {{- end -}}

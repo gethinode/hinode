@@ -29,7 +29,7 @@ blueprint:
     account:
     media-id:
     autoplay:
-    options:
+    query-args:
   cols:
   messages:
     - title:

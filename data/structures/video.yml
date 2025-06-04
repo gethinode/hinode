@@ -21,8 +21,8 @@ arguments:
     release: v0.25.2
   ratio:
     release: v0.26.5
-  options:
-    release: v0.28.2
+  query-args:
+    release: v1.0.0
   # deprecated arguments
   id:
     type: string
@@ -30,4 +30,7 @@ arguments:
     comment: ID of the video to be embedded.
     deprecated: v1.0.0
     alternative: media-id
-
+  options:
+    release: v0.28.2
+    deprecated: v1.0.0
+    alternative: query-args

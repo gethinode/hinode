@@ -56,4 +56,4 @@ types:
     account:
     id:
     autoplay:
-    options:
+    query-args:

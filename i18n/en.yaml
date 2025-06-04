@@ -173,3 +173,7 @@
 # Image
 - id: image
   translation: image
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "Click to expand"
