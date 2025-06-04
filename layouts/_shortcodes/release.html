@@ -4,8 +4,6 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
 {{/* Initialize arguments */}}
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "release" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
 {{- if or $args.err $args.warnmsg -}}
@@ -51,7 +49,7 @@
 {{- end -}}
 
 {{/* Main code */}}
-{{- if not $error -}}
+{{- if not $args.error -}}
     {{ $href := partial "utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $args.version) }}
     {{ if eq $linkType "link" }}
         {{ partial "assets/link.html" (dict "destination" $href "text" $title "page" .Page) }}
