@@ -23,12 +23,12 @@ arguments:
   #   type: string
   #   optional: true
   #   comment: Account name of the origin server.
-  # active:
-  #   type: bool
-  #   optional: true
-  #   comment: >-
-  #     Sets the current item as active (only one item at a time). By
-  #     default, the first item is made active.
+  active:
+    type: bool
+    optional: true
+    comment: >-
+      Sets the current item as active (only one item at a time). By
+      default, the first item is made active.
   alert-type:
     type: select
     optional: true
@@ -236,10 +236,10 @@ arguments:
   #       - button
 
   # # c
-  # caption:
-  #   type: string
-  #   optional: true
-  #   comment: Slide or figure caption.
+  caption:
+    type: string
+    optional: true
+    comment: Slide or illustration caption.
   cards:
     type: string
     optional: true
@@ -1296,10 +1296,10 @@ arguments:
     default: true
     comment: >-
       Flag to add spacing to the inline element.
-  # src:
-  #   type: string
-  #   optional: false
-  #   comment: Path or url of the image, e.g. `img/example.jpg`.
+  src:
+    type: string
+    optional: false
+    comment: Path or url of the image, e.g. `img/example.jpg`.
   # # TODO: rename to button-state
   # state:
   #   type: select

@@ -4,31 +4,34 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "carousel-item" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/carousel-item.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "carousel-item" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/carousel-item.html" 
+        "msg" "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file" page.File
+    )}}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $page := .page -}}
-{{- $active := .active -}}
-{{- $src := .src -}}
-{{- $caption := .caption -}}
-{{- $ratio := .ratio -}}
-{{- $portrait := .portrait -}}
-{{- $loading := .loading | default "eager" -}}
-{{- $title := .caption | default (T "image") -}}
-
 {{/* Main code */}}
-<div class="carousel-item{{ if $active }} active{{ end }}" {{ if not $active }} fetchpriority="low"{{ end }}>
-    {{ partial "assets/image.html" (dict "url" $src "ratio" $ratio "page" $page "class" "d-block w-100" "portrait" $portrait "loading" $loading "title" $title) }}
-    <div class="carousel-caption gradient"></div>
-    {{ with $caption }}
-        <div class="carousel-caption d-none d-md-block">
-            <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>
-        </div>
-    {{ end }}
-</div>
+{{ if not $args.err }}
+    <div class="carousel-item{{ if $args.active }} active{{ end }}" {{ if not $args.active }} fetchpriority="low"{{ end }}>
+        {{ partial "assets/image.html" (dict 
+            "url"      $args.src
+            "ratio"    $args.ratio
+            "page"     $args.page
+            "class"    "d-block w-100"
+            "portrait" $args.portrait
+            "loading"  $args.loading
+            "title"    (or $args.title (T "image"))
+        ) }}
+        <div class="carousel-caption gradient"></div>
+        {{ with $args.caption }}
+            <div class="carousel-caption d-none d-md-block">
+                <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>
+            </div>
+        {{ end }}
+    </div>
+{{ end }}
