@@ -738,8 +738,11 @@ arguments:
     type: string
     optional: true
     comment: >-
-      Language to be used by the syntax highlighter. If not set, the
-      language is derived from the file extension.
+      Language to be used by the syntax highlighter. For files, the language is
+      derived from the file extension when no language is specified. When
+      rendering code examples with the `example` shortcode, use `hugo` to process
+      Hugo (escaped) shortcodes and `bookshop` to render a Bookshop component
+      using inline YAML data.
   # link:
   #   type: string
   #   optional: false
@@ -1238,18 +1241,16 @@ arguments:
     comment: >-
       Flag to indicate an item should be shown. Only one item can be shown at a
       time.
-  # # TODO: rename to show-markup
-  # show_markup:
-  #   type: bool
-  #   optional: true
-  #   default: true
-  #   comment: Indicates if the markup should be output in the HTML.
-  # # TODO: rename to show-preview
-  # show_preview:
-  #   type: bool
-  #   optional: true
-  #   default: true
-  #   comment: Indicates if the preview should be output in the HTML.
+  show-markup:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the markup should be output in the HTML.
+  show-preview:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the preview should be output in the HTML.
   size: 
     type: int
     optional: true

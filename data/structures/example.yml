@@ -3,35 +3,28 @@ comment: >-
   accepts the languages supported by Hugo's highlight function.
 arguments:
   id:
-    type: string
-    optional: true
-    comment: Identifier of the element’s container.
   lang:
-    type: string
-    optional: true
     default: markdown
-    comment: >-
-      Language used to display the code. Use `hugo` to process Hugo (escaped)
-      shortcodes and `bookshop` to render a Bookshop component using inline
-      YAML data.
+  class:
+  show-markup:
+    release: v1.0.0
+  show-preview:
+    release: v1.0.0
+  # deprecated arguments
   show_markup:
     type: bool
     optional: true
     default: true
     comment: Indicates if the markup should be output in the HTML.
+    deprecated: v1.0.0
+    alternative: show-markup
   show_preview:
     type: bool
     optional: true
     default: true
     comment: Indicates if the preview should be output in the HTML.
-  class:
-    type: string
-    optional: true
-    comment: Class attributes of the element's container.
-  data:
-    type: string
-    optional: true
-    comment: Bookshop data in YAML format.
+    deprecated: v1.0.0
+    alternative: show-preview
 body:
   type: string
   optional: false
