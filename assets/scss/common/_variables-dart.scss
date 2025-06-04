@@ -35,8 +35,10 @@ $warning:                       h.$warning;
 $danger:                        h.$danger;
 $light:                         h.$light;
 $dark:                          h.$dark;
-
+$white:                       #fff !default;
 $black:                       #000 !default;
+$body-bg:                     #fff !default;
+$gray-100:                    #f8f9fa !default;
 $btn-toggle-color:              $black !default;
 
 $carousel-dark-indicator-active-bg:  #fff !default;
@@ -52,3 +54,18 @@ $primary-border-subtle-dark:        mix(black, h.$primary, calc(h.$dark-mode-sha
 $dropdown-transition: opacity .15s ease-in-out !default;
 $dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);
 $dropdown-horizontal-padding-y: calc(1rem + 2px);
+
+$theme-colors: (
+  "primary":       $primary,
+  "secondary":     $secondary,
+  "success":       $success,
+  "info":          $info,
+  "warning":       $warning,
+  "danger":        $danger,
+  "light":         $light,
+  "dark":          $dark,
+  "white":         $white,
+  "black":         $black,
+  "body":          $body-bg,
+  "body-tertiary": $gray-100,
+);

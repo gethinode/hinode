@@ -12,7 +12,15 @@ $semi-circle-border: 0.2rem;
 
 @each $state in map-keys($theme-colors) {
     .timeline-#{$state} {
-      --timeline-highlight: var(--#{$prefix}#{$state});
+        --timeline-highlight: var(--#{$prefix}#{$state});
+    }
+
+    .timeline-bg-#{$state} {
+        --timeline-connector-bg: var(--#{$prefix}#{$state});
+    }
+
+    .timeline-bg-#{$state}-subtle {
+        --timeline-connector-bg: var(--#{$prefix}#{$state}-bg-subtle);
     }
 }
 

@@ -394,7 +394,7 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline-fr" background="dark" */>}}
+{{</* timeline data="timeline-fr" background="body-tertiary" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

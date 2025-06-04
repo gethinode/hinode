@@ -446,7 +446,7 @@ As an example, the following shortcode displays a timeline with the file `data/t
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline" background="dark" */>}}
+{{</* timeline data="timeline" background="body-tertiary" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

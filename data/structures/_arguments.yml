@@ -125,7 +125,9 @@ arguments:
     optional: true
     comment: Background image with a mask to improve contrast.
   background:
-    type: background
+    type:
+      - background
+      - string
     optional: true
     comment: Background style of the section.
   # badge:
@@ -348,6 +350,12 @@ arguments:
   #     to the setting `main.externalLinks.cue` in the site's parameters.
 
   # # d
+  data:
+    type: string
+    comment: >-
+      Path of the input data relative to the site's data folder. Supported data
+      formats include `JSON`, `TOML`, `YAML`, and `XML`. You can omit the file
+      extension.
   # data:
   #   type: string
   #   # default: abbr.yaml

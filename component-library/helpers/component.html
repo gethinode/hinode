@@ -36,7 +36,9 @@
     {{ with $background }}
         {{/* warnf "bg: '%s'" . */}}
         {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $style) }}
-        {{ with $background.backdrop }}{{ $wrapper = "" }}{{ $backdrop = . }}{{ end }}
+        {{ if reflect.IsMap $background }}
+            {{ with $background.backdrop }}{{ $wrapper = "" }}{{ $backdrop = . }}{{ end }}
+        {{ end }}
     {{ end }}
     {{/* warnf "wrapper: '%s'" $wrapper */}}
     {{- $theme := index $component_props "theme" -}}
