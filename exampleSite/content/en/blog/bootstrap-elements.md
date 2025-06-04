@@ -297,6 +297,16 @@ This is an {{</* ins */>}}underlined text{{</* /ins */>}}.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Kbd
+
+As an example, the following shortcodes shows a simple CTRL-C command.
+
+<!-- markdownlint-disable MD037 -->
+{{< example >}}
+{{</* kbd "CTRL-C" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Link
 
 As an example, the following shortcodes render links in different formats.
