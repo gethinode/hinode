@@ -17,7 +17,7 @@
 {{ end }}
 
 {{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "breadcrumb" "args" . "group" "partial")}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "breadcrumb" "args" . "group" "partial") }}
 {{ if or $args.err $args.warnmsg }}
     {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/breadcrumb.html" 
