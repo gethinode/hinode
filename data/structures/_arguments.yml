@@ -862,12 +862,12 @@ arguments:
       maximum number of cards to display.
 
   # # n
-  # name:
-  #   type: string
-  #   optional: false
-  #   comment: >-
-  #     Name of the code snippet, used to identify the relevant section of the
-  #     input file.
+  name:
+    type: string
+    optional: false
+    comment: >-
+      Name of the code snippet, used to identify the relevant section of the
+      input file.
   navitem-type:
     type: select
     optional: true
@@ -1239,8 +1239,8 @@ arguments:
     type: bool
     optional: true
     comment: >-
-      Flag to indicate an item should be shown. Only one item can be shown at a
-      time.
+      Flag to indicate an item should be shown. For elements with multiple
+      items, only one item can be shown at a time.
   show-markup:
     type: bool
     optional: true
