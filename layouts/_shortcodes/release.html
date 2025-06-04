@@ -6,74 +6,69 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "release" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
-
 {{/* Initialize arguments */}}
-{{- $version := .Get "version" | default "" -}}
-{{- $state := .Get "state" | default "new" -}}
-{{- $short := false -}}
-{{ if isset .Params "short" }}{{ $short = partial "utilities/CastBool.html" (.Get "short") }}{{ end -}}
-{{- $inline := false -}}
-{{ if isset .Params "inline" }}{{ $inline = partial "utilities/CastBool.html" (.Get "inline") }}{{ end -}}
-{{- $title := $version -}}
-{{- $color := "primary" -}}
-{{- if eq $state "deprecated" -}}
-    {{- $color = "secondary" -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "release" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/release.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
 {{- end -}}
-{{- $size := .Get "size" | default "md" -}}
-{{- $class := .Get "class" | default "" -}}
-{{- $type := .Get "type" | default "button" -}}
+
+{{/* Initialize local arguments */}}
+{{- $title := $args.version -}}
+{{- $state := or $args.releaseState $args.state -}}
+{{- $color := cond (eq $state "deprecated") "secondary" "primary" -}}
+{{- $linkType := or $args.linkType $args.type -}}
 
 {{- $icon := "" -}}
 {{- $tooltip := "" -}}
 {{- if eq $state "deprecated" -}}
-    {{- if $short -}}
+    {{- if $args.short -}}
         {{- $icon = "fas trash-can" -}}
-        {{- $tooltip = T "deprecatedFeature" $version -}}
+        {{- $tooltip = T "deprecatedFeature" $args.version -}}
     {{ else }}
-        {{- $title = T "deprecatedFeature" $version -}}
+        {{- $title = T "deprecatedFeature" $args.version -}}
     {{- end -}}
 {{- else -}}
-    {{- if $short -}}
+    {{- if $args.short -}}
         {{- $icon = "fas rocket" -}}
-        {{- $tooltip = T "addedFeature" $version -}}
+        {{- $tooltip = T "addedFeature" $args.version -}}
     {{ else }}
-        {{- $title = T "addedFeature" $version -}}
+        {{- $title = T "addedFeature" $args.version -}}
     {{- end -}}
 {{- end -}}
 
-{{- if not $short -}}
+{{- if not $args.short -}}
     {{- if eq $state "deprecated" -}}
-        {{- $title = T "deprecatedFeature" $version -}}
+        {{- $title = T "deprecatedFeature" $args.version -}}
     {{- else -}}
-        {{- $title = T "addedFeature" $version -}}
+        {{- $title = T "addedFeature" $args.version -}}
     {{- end -}}
 {{- end -}}
 
 {{/* Main code */}}
 {{- if not $error -}}
-    {{ $href := partial "utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $version) }}
-    {{ if eq $type "link" }}
+    {{ $href := partial "utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $args.version) }}
+    {{ if eq $linkType "link" }}
         {{ partial "assets/link.html" (dict "destination" $href "text" $title "page" .Page) }}
     {{ else }}
-        {{- if not $inline }}<div class="pb-3">{{ end -}}
+        {{- if not $args.inline }}<div class="pb-3">{{ end -}}
         {{- partial "assets/button.html" (dict 
-            "title" $title
-            "href" $href
-            "size" "sm"
-            "color" $color
+            "title"   $title
+            "href"    $href
+            "color"   $color
             "outline" "true"
-            "size" $size
-            "icon" $icon
+            "size"    (or $args.buttonSize $args.size)
+            "icon"    $icon
             "tooltip" $tooltip
-            "order" "first"
-            "class" (trim (printf "rounded-2 fw-semibold %s" $class) " ")
-            "spacing" $inline)
-        -}} 
-        {{- if not $inline }}</div>{{ end -}}
+            "order"   "first"
+            "class"   (trim (printf "rounded-2 fw-semibold %s" $args.class) " ")
+            "spacing" $args.inline
+        ) -}} 
+        {{- if not $args.inline }}</div>{{ end -}}
     {{ end }}
 {{- end -}}

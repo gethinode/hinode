@@ -45,7 +45,7 @@
 
             {{ $comment := $val.comment }}
             {{ if $val.deprecated }}
-                {{ $btn := printf `{{< release version="%s" short="true" size="sm" inline="true" state="deprecated" >}}` $val.deprecated }}
+                {{ $btn := printf `{{< release version="%s" short="true" button-size="sm" inline="true" release-state="deprecated" >}}` $val.deprecated }}
                 {{ with $val.alternative }}
                     {{ $comment = printf "%s **%s**. %s" $btn (T "alternativeFeature" .) $comment }}
                 {{ else }}
@@ -53,7 +53,7 @@
                 {{ end }}
             {{ end }}
             {{ if $val.release }}
-                {{ $comment = printf `{{< release version="%s" short="true" size="sm" inline="true" >}} %s` $val.release $comment }}
+                {{ $comment = printf `{{< release version="%s" short="true" button-size="sm" inline="true" >}} %s` $val.release $comment }}
             {{ end }}
 
             {{ $min := "" }}
