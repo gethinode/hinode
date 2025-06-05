@@ -56,6 +56,12 @@
 - id: download
   translation: "Download artikel"
 
+# Hero
+- id: backgroundImage
+  translation: "Afbeelding op de achtergrond"
+- id: heroImage
+  translation: "Hero afbeelding"
+
 # Pagination
 - id: paginationNav
   translation: "Pagina navigatie"
