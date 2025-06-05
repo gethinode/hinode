@@ -164,3 +164,7 @@
 # Image
 - id: image
   translation: Bild
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "Klik om open te klappen"

@@ -165,3 +165,7 @@
 # Image
 - id: image
   translation: image
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "Cliquez pour afficher le contenu"
