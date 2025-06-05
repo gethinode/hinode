@@ -18,7 +18,7 @@
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
 
 {{- define "_partials/inline/video.html" -}}
-	{{ $host := .host }}
+	{{ $provider := .provider }}
 	{{ $account := .account }}
 	{{ $mediaID := (index . "media-id") }}
 	{{ $autoplay := .autoplay }}
@@ -32,7 +32,7 @@
         <div class="video-container{{ if $border }} video-container-border{{ end}}">
 			{{ partial "assets/video.html" (dict
 				"page"       page
-				"host"       $host
+				"provider"   $provider
 				"account"    $account
 				"media-id"   $mediaID
 				"autoplay"   $autoplay
@@ -99,7 +99,7 @@
 		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
 		{{ with $args.video }}
 			{{- partial "inline/video.html" (dict
-				"host"       .host
+				"provider"   .provider
 				"account"    .account
 				"media-id"   (index . "media-id")
 				"autoplay"   .autoplay
@@ -117,7 +117,7 @@
 				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
 					{{ with $args.video }}
 						{{- partial "inline/video.html" (dict
-							"host"       .host
+							"provider"   .provider
 							"account"    .account
 							"media-id"   (index . "media-id")
 							"autoplay"   .autoplay

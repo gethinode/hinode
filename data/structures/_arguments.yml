@@ -593,10 +593,10 @@ arguments:
     type: string
     optional: true
     comment: Render hook for the element's partial.
-  # host:
-  #   type: string
-  #   optional: true
-  #   comment: Host to add to the prompt, e.g. `localhost`.
+  host:
+    type: string
+    optional: true
+    comment: Host to add to the prompt, e.g. `localhost`.
   # # TODO: merge host
   # host:
   #   type: string
@@ -604,13 +604,6 @@ arguments:
   #   comment: >-
   #     Host of an URL. For example, the host of the URL
   #     'https://example.com/first/second/third.webp' equals 'example.com'.
-  host:
-    type: string
-    optional: true
-    default: youtube
-    comment: >-
-      Host name of the video provider. It should match one of the registered
-      providers in the site's parameters under `videos`.
 
   # i
   id:
@@ -1107,10 +1100,17 @@ arguments:
   #       - low
   #       - auto
   #   group: partial
-  # prompt:
-  #   type: string
-  #   optional: true
-  #   comment: Prompt override, e.g. `PS C:\Users\User>`.
+  prompt:
+    type: string
+    optional: true
+    comment: Prompt override, e.g. `PS C:\Users\User>`.
+  provider:
+    type: string
+    optional: true
+    default: youtube
+    comment: >-
+      Name of the video provider. It should match one of the registered
+      providers in the site's parameters under `videos`.
 
   # q
   query-args:
@@ -1221,16 +1221,16 @@ arguments:
     comment: >-
       Flag to indicate a horizontal line should be added between items on small
       screens.
-  # shell:
-  #   type: select
-  #   optional: true
-  #   default: bash
-  #   comment: Type of shell.
-  #   options:
-  #     values:
-  #       - bash
-  #       - powershell
-  #       - sql
+  shell:
+    type: select
+    optional: true
+    default: bash
+    comment: Type of shell.
+    options:
+      values:
+        - bash
+        - powershell
+        - sql
   short:
     type: bool
     optional: true
@@ -1479,10 +1479,10 @@ arguments:
       address. Include the `scheme` when referencing an external address, such
       as `https://google.com`. Local references may include an optional anchor
       link such as `blog/bootstrap-elements/#docs`.
-  # user:
-  #   type: string
-  #   optional: true
-  #   comment: User to add to the prompt, e.g. `user`.
+  user:
+    type: string
+    optional: true
+    comment: User to add to the prompt, e.g. `user`.
   use-title:
     type: bool
     optional: true

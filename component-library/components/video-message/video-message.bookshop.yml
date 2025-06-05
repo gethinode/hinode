@@ -25,7 +25,7 @@ blueprint:
   orientation:
   icon-rounded:
   video:
-    host:
+    provider:
     account:
     media-id:
     autoplay:

@@ -6,8 +6,8 @@ arguments:
     release: v0.26.5
   position:
     release: v0.26.5
-  host:
-    release: v0.26.5
+  provider:
+    release: v1.0.0
   title:
   class:
     position: 1
@@ -34,3 +34,12 @@ arguments:
     release: v0.28.2
     deprecated: v1.0.0
     alternative: query-args
+  host:
+    type: string
+    optional: true
+    comment: >-
+      Host name of the video provider. It should match one of the registered
+      providers in the site's parameters under `videos`.
+    release: v0.26.5
+    deprecated: v1.0.0
+    alternative: provider

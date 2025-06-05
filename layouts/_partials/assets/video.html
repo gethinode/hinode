@@ -32,16 +32,17 @@
 {{ end }}
 
 {{/* Initialize local arguments */}}
+{{- $provider := or $args.provider $args.host }}
 {{- $account := $args.account }}
 {{ if not $account }}
-    {{ with index $args.page.Site.Params.videos $args.host }}
+    {{ with index $args.page.Site.Params.videos $provider }}
         {{ with index . "account" }}{{ $account = . }}{{ end }}
     {{ end }}
 {{ end }}
 {{- $pc := "" -}}
-{{- if eq $args.host "youtube" }}
+{{- if eq $provider "youtube" }}
     {{- $pc = $args.page.Site.Config.Privacy.YouTube -}}
-{{- else if eq $args.host "vimeo" }}
+{{- else if eq $provider "vimeo" }}
     {{- $pc = $args.page.Site.Config.Privacy.Vimeo -}}
 {{- end -}}
 {{- $id := or $args.mediaId $args.id -}}
@@ -50,10 +51,10 @@
     {{ $error = true }}
 {{ end }}
 
-{{ if and (eq $args.host "youtube") ($pc.Disable) }}
+{{ if and (eq $provider "youtube") ($pc.Disable) }}
     {{- errorf "partial [assets/video.html] - YouTube video disabled in site's privacy settings" -}}
     {{ $error = true }}
-{{ else if and (eq $args.host "vimeo") ($pc.Disable) }}
+{{ else if and (eq $provider "vimeo") ($pc.Disable) }}
     {{- errorf "partial [assets/video.html] - Vimeo video disabled in site's privacy settings" -}}
     {{ $error = true }}
 {{ end }}
@@ -64,9 +65,9 @@
 
 {{/* Main code */}}
 {{ if not $error -}}
-    {{ if eq $args.host "youtube" }}
+    {{ if eq $provider "youtube" }}
         {{- $host := cond $pc.PrivacyEnhanced "www.youtube-nocookie.com" "www.youtube.com" -}}
-        {{ $url := printf "https://%s/embed/%s?origin=%s" $args.host $id $args.page.Site.BaseURL }}
+        {{ $url := printf "https://%s/embed/%s?origin=%s" $host $id $args.page.Site.BaseURL }}
         {{ $api := printf "https://www.youtube.com/oembed?format=json&url=%s" (printf "https://www.youtube.com/watch?v=%s" $id) }}
         {{ $padding := "56.25%" }}
 
@@ -87,7 +88,7 @@
                 allowfullscreen title="{{ $args.title }}" {{ if $args.autoplay }}allow="autoplay"{{ end }}>
             </iframe>
         </div>
-    {{ else if eq $args.host "vimeo" }}
+    {{ else if eq $provider "vimeo" }}
         {{ $url := printf "https://player.vimeo.com/video/%s" $id }}
         {{ $params := "" }}
         {{ if $args.autoplay }}{{ $params = print $params "&autoplay=1&muted=1" }}{{ end }}
@@ -113,7 +114,7 @@
             <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $args.title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
             </iframe>
         </div>
-    {{ else if eq $args.host "cloudinary" }}
+    {{ else if eq $provider "cloudinary" }}
         {{ if not $account }}
             {{ errorf "Missing account name for Cloudinary video '%s': %s" $id $origin }}
         {{ end }}
@@ -158,6 +159,6 @@
             {{ errorf "Cannot retrieve metadata of Cloudinary video '%s' with account '%s': %s" $id $account $origin }}
         {{ end }}
     {{ else }}
-        {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $host }}
+        {{ warnf "partial [assets/video.html] - Unsupported video provider: %s" $provider }}
     {{ end }}
 {{ end -}}

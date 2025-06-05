@@ -52,7 +52,7 @@ types:
       portrait:
       width:
   video:
-    host:
+    provider:
     account:
     id:
     autoplay:

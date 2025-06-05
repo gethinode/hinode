@@ -21,7 +21,7 @@
     {{ partial "assets/video.html" (dict 
         "page"      .Page
         "position"  .Position
-        "host"      $args.host 
+        "provider"  (or $args.host $args.provider)
         "media-id"  (or $args.mediaId $args.id)
         "class"     $args.class 
         "title"     (or $args.title "Vimeo Video")

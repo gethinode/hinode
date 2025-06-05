@@ -501,6 +501,6 @@ As an example, the following shortcode displays an Elephants video hosted by Clo
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* video host="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
+{{</* video provider="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

@@ -439,6 +439,6 @@ d'une infobulle
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* video host="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
+{{</* video provider="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
