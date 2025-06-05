@@ -2,32 +2,25 @@
     Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
 -->
 
-{{ $error := false }}
-
-<!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "live-pages" "args" .) }}
-    {{- errorf "partial [assets/live-pages.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "live-pages" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/live-pages.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-<!-- Initialize arguments and default values -->
-{{ $page := .page }}
-{{ $kind := .kind }}
-{{ $section := .section }}
-{{ $nested := .nested }}
-{{ $sort := .sort | default "date" }}
-{{ $reverse := .reverse }}
-
+{{/* Initialize local arguments */}}
 {{ $pages := slice }}
-{{ $tags := slice }}
-{{ $categories := slice }}
-{{ $keywords := slice }}
-{{ if reflect.IsSlice .tags }}{{ $tags = .tags }}{{ else if .tags }}{{ $tags = $tags | append .tags }}{{ end }}
-{{ if reflect.IsSlice .keywords }}{{ $keywords = .keywords }}{{ else if .keywords }}{{ $keywords = $keywords | append .keywords }}{{ end }}
-{{ if reflect.IsSlice .categories }}{{ $categories = .categories }}{{ else if .categories }}{{ $categories = $categories | append .categories }}{{ end }}
+{{ $tags := slice | append $args.tags }}
+{{ $categories := slice | append $args.categories }}
+{{ $keywords := slice | append $args.keywords }}
 
-<!-- Main code -->
-{{ if not $error }}
+{{/* Main code */}}
+{{ if not $args.err }}
     {{ if site.Params.env_bookshop_live }}
         {{/* Define some dummy content as we cannot retrieve pages in live mode */}}
         {{ range $index := seq (.max | default 3) }}
@@ -40,8 +33,8 @@
         {{- if .reverse }}{{- $pages = sort $pages "title" "desc" -}}{{ end -}}
     {{ else }}
         {{/* Retrieve the relevant context page, either current page or page identified by section */}}
-        {{ $sectionPage := .page | default page }}
-        {{ if $section }}
+        {{ $sectionPage := $args.page | default page }}
+        {{ if $args.section }}
             {{ $sectionPage = site.GetPage "section" .section }}
             {{ if not $sectionPage }}
                 {{ warnf "Cannot find section: %s" .section }}
@@ -49,16 +42,16 @@
         {{ end }}
         
         {{ if $sectionPage }}
-            {{ if eq $kind "taxonomy" }}
+            {{ if eq $args.kind "taxonomy" }}
                 {{ $filter := $sectionPage.Params.filter }}
                 {{ with $filter }}
-                    {{ with index site.Taxonomies $section $filter }}
+                    {{ with index site.Taxonomies $args.section $filter }}
                         {{ $pages = .Pages }}
                     {{ end }}
                 {{ else }}
-                    {{ $pages = where site.Pages (printf ".Params.%s" $section) "!=" nil }}
+                    {{ $pages = where site.Pages (printf ".Params.%s" $args.section) "!=" nil }}
                 {{ end }}
-            {{ else if eq $kind "related" }}
+            {{ else if eq $args.kind "related" }}
                 {{ if $sectionPage.Keywords}}
                     {{ $keywords := keyVals "tags" $sectionPage.Keywords }}
                     {{ $opts := dict "namedSlices" (slice $keywords) }}
@@ -66,7 +59,7 @@
                 {{ end }}
             {{ else }}
                 {{/* Retrieve the immediate or all related pages (recursively), optionally filtering by tag or keyword */}}
-                {{ if $nested }}{{ $pages = $sectionPage.RegularPagesRecursive }}{{ else }}{{ $pages = $sectionPage.Pages }}{{ end }}
+                {{ if $args.nested }}{{ $pages = $sectionPage.RegularPagesRecursive }}{{ else }}{{ $pages = $sectionPage.Pages }}{{ end }}
 
                 {{ if gt (len $tags) 0 }}
                     {{ $pages = where $pages "Params.tags" "intersect" $tags }}
@@ -81,8 +74,8 @@
         
             {{/* Sort the pages as specified */}}	
             {{- $order := "asc" -}}
-            {{- if $reverse }}{{ $order = "desc" }}{{ end -}}
-            {{- $pages = sort $pages (printf "Params.%s" $sort) $order -}}
+            {{- if $args.reverse }}{{ $order = "desc" }}{{ end -}}
+            {{- $pages = sort $pages (printf "Params.%s" $args.sort) $order -}}
         {{ end }}
     {{ end }}
 {{ end }}

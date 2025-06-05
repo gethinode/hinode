@@ -4,65 +4,60 @@
 
 {{ $error := false }}
 
-<!-- Validate arguments -->
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/live-image.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "image" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/live-image.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-<!-- Initialize arguments -->
-{{- $page := .page -}}
-{{- $wrapper := .wrapper -}}
-{{- $class := .class -}}
-{{- $ratio := .ratio -}}
-{{- $anchor := .anchor -}}
-{{- $portrait := .portrait -}}
-{{- $sizes := .sizes -}}
-{{- $url := .url -}}
-{{- $title := .title -}}
-{{- $caption := .caption -}}
-{{ $mode := .mode | default false }}
-{{- $external := hasPrefix $url "http" -}}
+{{/* Initialize local arguments */}}
+{{- $class := printf "%s img-fluid" (or $args.class "") -}}
 
-<!-- Initiate the regular or color-mode image -->
-{{ $class = printf "%s img-fluid" (or $class "") }}
-{{- $placeholder := partial "assets/image.html" (dict 
-    "page" $page
-    "wrapper" $wrapper
-    "class" $class
-    "ratio" $ratio
-    "portrait" $portrait
-    "anchor" $anchor
-    "sizes" $sizes
-    "url" $url
-    "title" $title
-    "caption" $caption
-    "plain" site.Params.env_bookshop_live
-    "mode" $mode
-) }}
+{{/* Main code */}}
+{{ if not $args.err }}
+    {{- $placeholder := partial "assets/image.html" (dict 
+        "page"     $args.page
+        "wrapper"  $args.wrapper
+        "class"    $class
+        "ratio"    $args.ratio
+        "portrait" $args.portrait
+        "anchor"   $args.anchor
+        "sizes"    $args.sizes
+        "url"      $args.url
+        "title"    $args.title
+        "caption"  $args.caption
+        "plain"    site.Params.env_bookshop_live
+        "mode"     $args.mode
+    ) }}
 
-{{ if site.Params.env_bookshop_live }}
-    {{ $backup := findRE "src=\"(.+?)\"" $placeholder 1 }}
-    {{- if gt (len $backup) 0 -}}
-        {{- $backup = partial "utilities/GetVal.html" (index $backup 0) -}}
+    {{ if site.Params.env_bookshop_live }}
+        {{ $backup := findRE "src=\"(.+?)\"" $placeholder 1 }}
+        {{- if gt (len $backup) 0 -}}
+            {{- $backup = partial "utilities/GetVal.html" (index $backup 0) -}}
+        {{ else }}
+            {{ $backup = $args.url }}
+        {{- end -}}
+
+        {{ $absURL := partial "utilities/GetTargetPath.html" (dict "page" $args.page "path" $backup) | absURL }}
+        {{- if $args.caption -}}
+            <figure {{ with $args.wrapper }}class="{{ . }}"{{ end }}>
+        {{ else if $args.wrapper }}<div class="{{ $args.wrapper }}">
+        {{ end }}
+
+        <img src="{{ $absURL | safeHTMLAttr }}" class="{{ $class }}{{ with $args.ratio }} ratio ratio-{{ . }}{{ end }}"
+            {{ with $args.title }}alt="{{ . }}"{{ end }}
+            onerror="this.src='/img/placeholder.svg';this.onerror='';">
+        {{- if $args.caption -}}
+                <figcaption class="figure-caption">{{ $args.caption }}</figcaption>
+            </figure>
+        {{ else if $args.wrapper }}</div>
+        {{ end }}
     {{ else }}
-        {{ $backup = $url }}
-    {{- end -}}
-
-    {{ $absURL := partial "utilities/GetTargetPath.html" (dict "page" $page "path" $backup) | absURL }}
-    {{- if $caption -}}
-        <figure {{ with $wrapper }}class="{{ . }}"{{ end }}>
-    {{ else if $wrapper }}<div class="{{ $wrapper }}">
+        {{- $placeholder | safeHTML -}}
     {{ end }}
-
-    <img src="{{ $absURL | safeHTMLAttr }}" class="{{ $class }}{{ with $ratio }} ratio ratio-{{ . }}{{ end }}"
-        {{ with $title }}alt="{{ . }}"{{ end }}
-        onerror="this.src='/img/placeholder.svg';this.onerror='';">
-    {{- if $caption -}}
-            <figcaption class="figure-caption">{{ $caption }}</figcaption>
-        </figure>
-    {{ else if $wrapper }}</div>
-    {{ end }}
-{{ else }}
-    {{- $placeholder | safeHTML -}}
 {{ end }}
