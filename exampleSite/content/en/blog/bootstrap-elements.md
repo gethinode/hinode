@@ -315,15 +315,15 @@ As an example, the following shortcodes render links in different formats.
 {{< example lang="hugo" >}}
 
 - {{</* link hinode >}}Named link with default settings{{< /link */>}}
-- {{</* link name=hinode cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
-- {{</* link name=hinode cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
+- {{</* link href=hinode cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
+- {{</* link href=hinode cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
 - {{</* link hinode /*/>}}
 - {{</* link href="https://developer.mozilla.org" >}}External link{{< /link */>}}
 - {{</* link href="https://demo.gethinode.com/en/about/" >}}Surrogate external link{{< /link */>}}
 - {{</* link "./projects/another-project" >}}Internal link with title{{< /link */>}}
-- {{</* link url="projects/another-project" /*/>}}
-- {{</* link url="/projects/another-project" /*/>}}
-- {{</* link url="../projects/another-project" case=false /*/>}}
+- {{</* link href="projects/another-project" /*/>}}
+- {{</* link href="/projects/another-project" /*/>}}
+- {{</* link href="../projects/another-project" case=false /*/>}}
 - {{</* link "about" /*/>}}
 - {{</* link "/fr/a-propos/" /*/>}}
 - {{</* link href="/fr/a-propos" force=true >}}About (French){{< /link */>}}

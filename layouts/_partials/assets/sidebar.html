@@ -120,7 +120,7 @@
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-                    {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+                    {{ $link := partial "assets/link.html" (dict "href" $href "text" $title "class" $class "page" $page) }}
                     {{ if $link }}
                         {{ print $link | safeHTML }}
                     {{ else }}
@@ -133,7 +133,7 @@
         <li>
             {{ $class := "sidebar-item text-decoration-none rounded small w-100" }}
             {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-            {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+            {{ $link := partial "assets/link.html" (dict "href" $href "text" $title "class" $class "page" $page) }}
             {{ if $link }}
                 {{ print $link | safeHTML }}
             {{ else }}

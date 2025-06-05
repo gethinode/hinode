@@ -52,7 +52,7 @@
 {{- if not $args.error -}}
     {{ $href := partial "utilities/URLJoin.html" (dict "base" site.Params.docs.release "path" $args.version) }}
     {{ if eq $linkType "link" }}
-        {{ partial "assets/link.html" (dict "destination" $href "text" $title "page" .Page) }}
+        {{ partial "assets/link.html" (dict "href" $href "text" $title "page" .Page) }}
     {{ else }}
         {{- if not $args.inline }}<div class="pb-3">{{ end -}}
         {{- partial "assets/button.html" (dict 

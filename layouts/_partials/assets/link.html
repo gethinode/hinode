@@ -5,20 +5,33 @@
 */}}
 
 {{ $error := false -}}
+{{ $errmsg := slice -}}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "link" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/link.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "link" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/link.html" 
+        "msg" "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file" page.File
+    )}}
+    {{ $error = $args.err }}
 {{ end }}
 
 {{/* Initialize arguments */}}
-{{ $destination := .destination }}
+{{ $destination := or $args.href $args.destination }}
 {{ $u := urls.Parse $destination }}
 {{ if not $u.Scheme }}
-    {{ $b := urls.Parse site.BaseURL }}
-    {{ $destination = strings.TrimPrefix $b.Path $destination }}
-    {{ $destination = path.Clean $destination }}
+    {{- if not (strings.Contains $destination "/") -}}
+        {{ with index site.Params.links $destination }}
+            {{ $destination = . }}
+        {{ end }}
+    {{ else }}
+        {{ $b := urls.Parse site.BaseURL }}
+        {{ $destination = strings.TrimPrefix $b.Path $destination }}
+        {{ $destination = path.Clean $destination }}
+    {{ end }}
 {{ else }}
     {{ $destination = (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $destination) }}
 {{ end }}
@@ -26,116 +39,121 @@
 
 {{- $target := "" -}}
 {{- $rel := "" -}}
-{{- $case := .case | default true }}
-{{- $external := .external | default false }}
-{{- $force := .force | default false }}
-{{- $cue := .cue | default site.Params.main.externalLinks.cue -}}
-{{- $tab := .tab | default site.Params.main.externalLinks.tab -}}
+{{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
+{{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
 {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
-{{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $external -}}
+{{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $args.external -}}
 {{- $isSpecial := and $u.Scheme (not (in (slice "http" "https") $u.Scheme)) }}
 {{- $isLocal := hasPrefix $destination "#" -}}
-{{- $page := .page -}}
 {{- $anchor := "" -}}
-{{- $text := .text -}}
-{{- $title := .title -}}
-{{- $class := .class -}}
+{{- $text := $args.text -}}
 
 {{/* Main code */}}
-{{- if $isSpecial -}}
-    {{- if not $text -}}
-        {{- $text = (urls.Parse (absURL $destination)).Host -}}
-    {{- end -}}
-{{- else if $isExternal -}}
-    {{- if not $text -}}
-        {{- $text = (urls.Parse (absURL $destination)).Host -}}
-    {{- end -}}
-
-    {{- if $tab -}}
-        {{- $target = "_blank" -}}
-        {{- $rel = "noopener noreferrer nofollow" -}}
-    {{- end -}}
-
-    {{- if $cue -}}
-        {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs" "spacing" false) }}
-        {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
-    {{- end -}}
-{{- else -}}
-    {{- if strings.Contains $destination "#" }}
-        {{ $segments := split $destination "#" }}
-        {{- if ne (len $segments) 2 }}
-            {{- errorf "partial [assets/link.html] - Malformed path, expected one anchor '#' only: %s" $destination -}}
-        {{ else }}
-            {{- $destination = index $segments 0 -}}
-            {{- $anchor = index $segments 1 -}}
-        {{ end }}
-    {{ end }}
-
-    {{ if not $isLocal }}
-        {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $page) }}
-        {{- if not $ref -}}
-            {{ $pageContext := "" }}
-            {{ with $page.File }}
-                {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
-            {{ end }}
-            {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
-            {{ $res := "" }}
-            {{ if $isPageRes }}
-                {{- $res = partial "utilities/GetResource.html" (dict "url" .destination "page" $page) -}}
-            {{ end }}
-            {{ $isStatic := fileExists (path.Join "static" $destination) }}
-            {{ if and (not $res) (not $isStatic) }}
-                {{- errorf "partial [assets/link.html] - Cannot find page or asset: '%s' at '%s'" $destination $page.File.Path -}}
-                {{- $error = true -}}
-            {{ else if $res }}
-                {{ $destination = $res.RelPermalink }}
-            {{ else if $isStatic }}
-                {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
-            {{ end }}
-            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
-        {{ end }}
-        
-        {{- if and $ref (not $error) -}}
-            {{- $destination = $ref.RelPermalink -}}
-            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+{{- if not $error -}}
+    {{- if $isSpecial -}}
+        {{- if not $text -}}
+            {{- $text = (urls.Parse (absURL $destination)).Host -}}
+        {{- end -}}
+    {{- else if $isExternal -}}
+        {{- if not $text -}}
+            {{- $text = (urls.Parse (absURL $destination)).Host -}}
         {{- end -}}
 
-        {{- if not $text -}}
-            {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
-        {{ end -}}
-    {{ else }}
-        {{ with $anchor }}
-            {{ $destination = printf "#%s" . }}
-            {{ if not $text }}{{ $text = . }}{{ end }}
+        {{- if $tab -}}
+            {{- $target = "_blank" -}}
+            {{- $rel = "noopener noreferrer nofollow" -}}
+        {{- end -}}
+
+        {{- if $cue -}}
+            {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs" "spacing" false) }}
+            {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
+        {{- end -}}
+    {{- else -}}
+        {{- if strings.Contains $destination "#" }}
+            {{ $segments := split $destination "#" }}
+            {{- if ne (len $segments) 2 }}
+                {{ $errmsg = $errmsg | append (printf "Malformed path, expected one anchor '#' only: %s" $destination )}}
+                {{- $error = true -}}
+            {{ else }}
+                {{- $destination = index $segments 0 -}}
+                {{- $anchor = index $segments 1 -}}
+            {{ end }}
         {{ end }}
-    {{ end }}
 
-    {{- if not $case }}
-        {{ $text = lower $text }}
-    {{ else if site.Params.main.titleCase }}
-        {{ $text = title $text }}
-    {{ end -}}
+        {{ if not $isLocal }}
+            {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $args.page) }}
+            {{- if not $ref -}}
+                {{ $pageContext := "" }}
+                {{ with $args.page.File }}
+                    {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
+                {{ end }}
+                {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
+                {{ $res := "" }}
+                {{ if $isPageRes }}
+                    {{- $res = partial "utilities/GetResource.html" (dict "url" $args.destination "page" $args.page) -}}
+                {{ end }}
+                {{ $isStatic := fileExists (path.Join "static" $destination) }}
+                {{ if and (not $res) (not $isStatic) }}
+                    {{ $errmsg = $errmsg | append (printf "Cannot find page or asset: '%s'" $destination )}}
+                    {{- $error = true -}}
+                {{ else if $res }}
+                    {{ $destination = $res.RelPermalink }}
+                {{ else if $isStatic }}
+                    {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
+                {{ end }}
+                {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+            {{ end }}
+            
+            {{- if and $ref (not $error) -}}
+                {{- $destination = $ref.RelPermalink -}}
+                {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+            {{- end -}}
 
-    {{ if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) }}
-        {{ $destination = printf "%s/" $destination }}
-    {{ end }}
-
-    {{ if $force }}
-        {{ if strings.Contains $destination "?" }}
-            {{ $destination = printf "%s&force=true" $destination }}
+            {{- if not $text -}}
+                {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
+            {{ end -}}
         {{ else }}
-            {{ $destination = printf "%s?force=true" $destination }}
+            {{ with $anchor }}
+                {{ $destination = printf "#%s" . }}
+                {{ if not $text }}{{ $text = . }}{{ end }}
+            {{ end }}
         {{ end }}
-    {{ end }}
-{{- end -}}
 
-{{ if not $error -}}
+        {{- if not $args.case }}
+            {{ $text = lower $text }}
+        {{ else if site.Params.main.titleCase }}
+            {{ $text = title $text }}
+        {{ end -}}
+
+        {{ if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) }}
+            {{ $destination = printf "%s/" $destination }}
+        {{ end }}
+
+        {{ if $args.force }}
+            {{ if strings.Contains $destination "?" }}
+                {{ $destination = printf "%s&force=true" $destination }}
+            {{ else }}
+                {{ $destination = printf "%s?force=true" $destination }}
+            {{ end }}
+        {{ end }}
+    {{- end -}}
+{{- end -}} 
+
+{{ if $error -}}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial"  "assets/link.html" 
+        "msg"      "Invalid arguments"
+        "details"  $errmsg
+        "file"     $args.page.File
+        "position" $args.position
+    )}}
+{{ else }}
     <a 
         {{- with $destination }} href="{{ . | safeURL }}"{{ end -}}
-        {{ with $class }} class="{{ . }}" {{ end -}}
+        {{ with $args.class }} class="{{ . }}" {{ end -}}
         {{ with $target }} target="{{ . }}"{{ end -}}
         {{ with $rel }} rel="{{ . }}"{{ end -}}
-        {{ with $title }} title="{{ . }}"{{ end -}}
+        {{ with $args.title }} title="{{ . }}"{{ end -}}
     >
         {{- $text | safeHTML -}}
     </a>

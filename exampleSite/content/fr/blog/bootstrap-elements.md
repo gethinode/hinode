@@ -288,17 +288,17 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 {{< example lang="hugo" >}}
 
 - {{</* link hinode >}}Lien nommé avec les paramètres par défaut{{< /link */>}}
-- {{</* link name=hinode cue=false tab=false >}}Lien nommé s'ouvrant dans l'onglet actuel sans icône{{< /link */>}}
-- {{</* link name=hinode cue=true tab=true >}}Lien nommé s'ouvrant dans un nouvel onglet avec icône{{< /link */>}}
+- {{</* link href=hinode cue=false tab=false >}}Lien nommé s'ouvrant dans l'onglet actuel sans icône{{< /link */>}}
+- {{</* link href=hinode cue=true tab=true >}}Lien nommé s'ouvrant dans un nouvel onglet avec icône{{< /link */>}}
 - {{</* link hinode /*/>}}
 - {{</* link href="https://developer.mozilla.org" >}}Lien externe{{< /link */>}}
 - {{</* link "./projects/another-project" >}}Lien interne avec titre{{< /link */>}}
-- {{</* link url="projects/another-project" /*/>}}
-- {{</* link url="/projects/another-project" /*/>}}
-- {{</* link url="../projects/another-project" case=false /*/>}}
+- {{</* link href="projects/another-project" /*/>}}
+- {{</* link href="/projects/another-project" /*/>}}
+- {{</* link href="../projects/another-project" case=false /*/>}}
 - {{</* link "about" /*/>}}
 - {{</* link "/en/about/" /*/>}}
-- {{</* link url="/en/about/" force=true >}}About (Anglais){{< /link */>}}
+- {{</* link href="/en/about/" force=true >}}About (Anglais){{< /link */>}}
 - {{</* link "#image" /*/>}}
 - {{</* link "components/#map" /*/>}}
 

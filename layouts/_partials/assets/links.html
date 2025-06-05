@@ -25,9 +25,9 @@
 
         {{ $url := "" }}
         {{ with .url }}
-            {{ $link := partial "utilities/GetLink.html" (dict "page" page "destination" .) }}
+            {{ $link := partial "utilities/GetLink.html" (dict "page" page "href" .) }}
             {{ if not $link.error }}
-                {{ $url = $link.destination }}
+                {{ $url = $link.href }}
             {{ else }}
                 {{ with page.File }}
                     {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $link.msg }}
@@ -41,12 +41,12 @@
         {{ if .download }}
             {{ partial "assets/download.html" (dict 
                 "download" .download
-                "title" $title
-                "icon" .icon
-                "outline" .outline
-                "size" "md"
-                "order" $order
-                "justify" $justify
+                "title"    $title
+                "icon"     .icon
+                "outline"  .outline
+                "size"     "md"
+                "order"    $order
+                "justify"  $justify
             ) }}
         {{ else }}
             {{ if $force }}
@@ -65,13 +65,13 @@
             {{ end }}
 
             {{ partial "assets/button.html" (dict 
-                "href" $url
-                "title" $title
-                "icon" .icon
+                "href"    $url
+                "title"   $title
+                "icon"    .icon
                 "outline" .outline
-                "order" $order
+                "order"   $order
                 "justify" $justify
-                "type" $type
+                "type"    $type
             ) }}
         {{ end }}
 

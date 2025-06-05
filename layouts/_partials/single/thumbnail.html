@@ -14,14 +14,14 @@
     {{- $anchor = $page.Params.Thumbnail.anchor }}
     {{- $author := "" -}}
     {{- if and $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author }}
-        {{- $author = partial "assets/link.html" (dict "destination" $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author "page" $page) -}}
+        {{- $author = partial "assets/link.html" (dict "href" $page.Params.Thumbnail.authorURL "text" $page.Params.Thumbnail.author "page" $page) -}}
     {{- else if $page.Params.Thumbnail.author }}
         {{- $author = $page.Params.Thumbnail.author -}}
     {{- end -}}
 
     {{- $origin := "" -}}
     {{- if and $page.Params.Thumbnail.originURL "text" $page.Params.Thumbnail.origin }}
-        {{- $origin = partial "assets/link.html" (dict "destination" $page.Params.Thumbnail.originURL "text" $page.Params.Thumbnail.origin "page" $page) -}}
+        {{- $origin = partial "assets/link.html" (dict "href" $page.Params.Thumbnail.originURL "text" $page.Params.Thumbnail.origin "page" $page) -}}
     {{- else if $page.Params.Thumbnail.origin }}
         {{- $origin = $page.Params.Thumbnail.origin -}}
     {{- end }}
