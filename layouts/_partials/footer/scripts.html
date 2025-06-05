@@ -67,9 +67,9 @@
 {{ if $args.err }}
     {{ partial "utilities/LogErr.html" (dict 
         "partial" "footer/scripts.html" 
-        "msg" "Invalid arguments"
+        "msg"     "Invalid arguments"
         "details" $args.errmsg
-        "file" page.File
+        "file"    page.File
     )}}
     {{ $error = true }}
 {{ end }}
