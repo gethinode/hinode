@@ -173,7 +173,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button collapse="collapse-1" */>}}
+{{</* button collapse-id="collapse-1" */>}}
     Déclencher le panneau
 {{</* /button */>}}
 
@@ -404,11 +404,11 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button toast="toast-example-1" */>}}
+{{</* button toast-id="toast-example-1" */>}}
     Affiche la notification #1
 {{</* /button */>}}
 
-{{</* button toast="toast-example-2" */>}}
+{{</* button toast-id="toast-example-2" */>}}
     Affiche la notification #1
 {{</* /button */>}}
 

@@ -45,7 +45,7 @@
             <div class="hstack gap-1">
                 {{ range (.GetTerms "tags") -}}
                     {{- $url := .Page.RelPermalink -}}
-                    {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "light" "size" "sm") }}
+                    {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "light" "button-size" "sm") }}
                 {{ end -}}
             </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="hstack gap-1">
                 {{ range (.GetTerms "tags") -}}
                     {{- $url := .Page.RelPermalink -}}
-                    {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "primary" "size" "sm" "outline" "true") }}
+                    {{ partial "assets/button.html" (dict "href" $url "title" .LinkTitle "color" "primary" "button-size" "sm" "outline" "true") }}
                 {{ end -}}
             </div>
         </div>

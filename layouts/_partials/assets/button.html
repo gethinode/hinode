@@ -27,17 +27,24 @@
 {{- $label := $args.label | default $title -}}
 
 {{- $tooltip := "" -}}
-{{- if not (strings.HasSuffix $args.state "active") -}}
+{{ $state := or $args.buttonState $args.state }}
+{{- if not (strings.HasSuffix $state "active") -}}
     {{- with $args.tooltip }}{{ $tooltip = . }}{{ end -}}
 {{- end -}}
 
 {{- $href := .href -}}
-{{- $collapse := "" -}}
-{{- if not (strings.HasSuffix $args.state "active") -}}
-    {{- with $args.collapse }}{{ $collapse = . }}{{ $href = printf "#%s" . }}{{ end -}}
+
+{{ $linkType := or $args.linkType $args.type }}
+{{ $buttonSize := or $args.buttonSize $args.size }}
+{{ $toastID := or $args.toastId $args.toast }}
+{{ $collapseID := or $args.collapseId $args.collapse }}
+{{- if not (strings.HasSuffix $state "active") -}}
+    {{- with $collapseID }}{{ $href = printf "#%s" . }}{{ end -}}
+{{ else }}
+    {{- $collapseID = "" -}}
 {{- end -}}
 
-{{- if and $tooltip $collapse -}}
+{{- if and $tooltip $collapseID -}}
     {{- errorf "partial [assets/button.html] - Cannot use tooltip and collapse at the same time" -}}
     {{ $error = true }}
 {{- end -}}
@@ -67,18 +74,18 @@
 {{/* Main code */}}
 {{ if not $error }}
     <a aria-label="{{ (or $label $title) | safeHTML }}"
-        {{ if ne $args.state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
+        {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
         {{- with $args.id }} id="{{ . }}"{{ end -}}
         {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
-        {{- with $args.toast }} data-toast-target="{{ . }}"{{ end -}}
+        {{- with $toastID }} data-toast-target="{{ . }}"{{ end -}}
         {{- with $args.clipboard }} data-clipboard="{{ . }}"{{ end -}}
-        {{- if eq $args.type "button" }} class="btn btn-{{ if $args.outline }}outline-{{ end }}{{ $args.color }} {{ if ne $args.size "md" }}btn-{{ $args.size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $args.state }}{{ $args.state }}{{ end }} {{ $class -}}"
-        {{ if eq $args.state "disabled" }}aria-disabled="true"{{ end -}}
+        {{- if eq $linkType "button" }} class="btn btn-{{ if $args.outline }}outline-{{ end }}{{ $args.color }} {{ if ne $buttonSize "md" }}btn-{{ $args.size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $args.state }}{{ $args.state }}{{ end }} {{ $class -}}"
+        {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
         {{- else }} class="btn btn-link link-{{ $args.color }} position-relative {{ $class }}"{{ end -}}
         {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $args.placement }}"{{ end -}}
-        {{- with $collapse }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
-        {{- if eq $args.state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
-        {{- if eq $args.state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
+        {{- with $collapseID }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
+        {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
+        {{- if eq $state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
         {{- range $key, $val := $args.attributes -}}
             {{ printf " %s=\"%s\"" $key $val | safeHTMLAttr }}
         {{- end -}}
@@ -86,7 +93,11 @@
         >
         <span class="d-flex justify-content-{{ $args.justify }}">
             <span class="my-auto">{{ $title | safeHTML }}</span>
-            {{- with $args.icon }}<span class="align-self-center{{ if $title }}{{ if eq $args.order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">{{ partial "assets/icon.html" (dict "icon" $args.icon "spacing" false) }}</span>{{ end }}
+            {{- with $args.icon }}
+                <span class="align-self-center{{ if $title }}{{ if eq $args.order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">
+                    {{ partial "assets/icon.html" (dict "icon" $args.icon "spacing" false) }}
+                </span>
+            {{ end }}
         </span>
 
         {{- with $args.badge }}

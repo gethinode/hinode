@@ -99,7 +99,7 @@ As an example, the following shortcode displays a tooltip for a dark button with
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button color="secondary" tooltip="Click on the inbox to view your unread messages" href="#!" badge="99+" */>}}
+{{</* button color="secondary" tooltip="Click to view your unread messages" href="#!" badge="99+" */>}}
     Inbox
 {{</* /button */>}}
 {{< /example>}}
@@ -171,7 +171,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button collapse="collapse-1" */>}}
+{{</* button collapse-id="collapse-1" */>}}
     Trigger panel
 {{</* /button */>}}
 
@@ -466,11 +466,11 @@ As an example, the following shortcode displays a button that, when clicked, tri
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button toast="toast-example-1" */>}}
+{{</* button toast-id="toast-example-1" */>}}
     Show toast 1
 {{</* /button */>}}
 
-{{</* button toast="toast-example-2" */>}}
+{{</* button toast-id="toast-example-2" */>}}
     Show toast 2
 {{</* /button */>}}
 

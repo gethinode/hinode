@@ -85,10 +85,10 @@
 
     {{ if $menu.Params.button }}
         {{ partial "assets/button.html" (dict 
-            "title" $title
-            "icon"  $menu.Pre
-            "href"  $menuURL
-            "size"  "sm"
+            "title"       $title
+            "icon"        $menu.Pre
+            "href"        $menuURL
+            "button-size" "sm"
         )}}
     {{ else }}
         {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $args.class }} {{ . }}{{ end }}" 

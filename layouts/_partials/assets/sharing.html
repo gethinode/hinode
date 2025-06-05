@@ -59,7 +59,7 @@
                     {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link") (T "copiedToClipboard"))) -}}
                 {{- end -}}
                 {{ partial "assets/button.html" (dict 
-                    "toast"     $target
+                    "toast-id"  $target
                     "clipboard" $clipboard
                     "href"      $url
                     "icon"      (printf "%s fa-fw" $item.icon)

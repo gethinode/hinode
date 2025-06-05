@@ -56,16 +56,16 @@
     {{ else }}
         {{- if not $args.inline }}<div class="pb-3">{{ end -}}
         {{- partial "assets/button.html" (dict 
-            "title"   $title
-            "href"    $href
-            "color"   $color
-            "outline" "true"
-            "size"    (or $args.buttonSize $args.size)
-            "icon"    $icon
-            "tooltip" $tooltip
-            "order"   "first"
-            "class"   (trim (printf "rounded-2 fw-semibold %s" $args.class) " ")
-            "spacing" $args.inline
+            "title"       $title
+            "href"        $href
+            "color"       $color
+            "outline"     "true"
+            "button-size" (or $args.buttonSize $args.size)
+            "icon"        $icon
+            "tooltip"     $tooltip
+            "order"       "first"
+            "class"       (trim (printf "rounded-2 fw-semibold %s" $args.class) " ")
+            "spacing"     $args.inline
         ) -}} 
         {{- if not $args.inline }}</div>{{ end -}}
     {{ end }}

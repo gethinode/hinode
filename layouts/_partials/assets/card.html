@@ -211,13 +211,13 @@
                         {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link mb-n4" }}{{ end }}
                         <div class="d-flex align-items-end">
                             {{ partial "assets/button.html" (dict 
-                                "title" $label
-                                "icon" "fas chevron-right"
-                                "href" $href
-                                "outline" true
-                                "size" "sm"
-                                "class" $buttonClass
-                                "type" $buttonType
+                                "title"       $label
+                                "icon"        "fas chevron-right"
+                                "href"        $href
+                                "outline"     true
+                                "button-size" "sm"
+                                "class"       $buttonClass
+                                "link-type"   $buttonType
                             )}}
                         </div>
                     {{ end }}
@@ -259,10 +259,10 @@
                         "title" $label
                         "href" $href
                         "outline" true
-                        "size" "sm"
+                        "button-size" "sm"
                         "class" "card-button"
                         "class" $buttonClass
-                        "type" $args.buttonType
+                        "link-type" $args.buttonType
                     )}}
                 </div>
             </div>
