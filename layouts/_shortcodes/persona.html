@@ -4,6 +4,8 @@
     Visit gethinode.com/license for more details.
 */}}
 
+{{- $error := false }}
+
 {{/* Initialize arguments */}}
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "persona" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
 {{- if or $args.err $args.warnmsg -}}
@@ -14,6 +16,7 @@
         "file"     page.File
         "position" .Position
     )}}
+    {{ $error = $args.err }}
 {{- end -}}
 
 {{/* Initialize local arguments */}}
@@ -26,7 +29,7 @@
 {{- $content := trim .Inner " \r\n" | .Page.RenderString -}}
 
 {{/* Main code */}}
-{{- if not $args.error -}}
+{{- if not $error -}}
     {{- partial "assets/persona.html" (dict 
         "path"      $args.path 
         "class"     $args.class 

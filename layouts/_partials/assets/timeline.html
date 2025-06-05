@@ -86,62 +86,64 @@
 {{- end -}}
 
 {{/* Main code */}}
-{{ $title := "" }}
-{{ if $args.heading }}
-    {{ $title = partial "assets/section-title.html" (dict
-        "heading"     $args.heading
-        "use-title"   $args.useTitle
-        "size"        $args.size
-        "links"       $args.links
-        "type"        (or $args.linkType $args.type)
-        "class"       "pb-4"
-        "arrangement" $arrangement
-    ) }}
+{{ if not $error }}
+    {{ $title := "" }}
+    {{ if $args.heading }}
+        {{ $title = partial "assets/section-title.html" (dict
+            "heading"     $args.heading
+            "use-title"   $args.useTitle
+            "size"        $args.size
+            "links"       $args.links
+            "type"        (or $args.linkType $args.type)
+            "class"       "pb-4"
+            "arrangement" $arrangement
+        ) }}
+    {{ end }}
+
+    {{/* Render default timeline */}}
+    <div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
+        {{ $title | safeHTML }}
+        {{ range $index, $item := $data }}
+            <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
+                {{- $params := dict 
+                    "page"    $args.page
+                    "content" $item.content
+                    "color"   $item.color
+                    "title"   $item.title
+                    "badge"   $item.badge
+                    "date"    $item.date
+                    "url"     $item.url
+                }}
+                {{ if eq (mod $index 2) 1 }}
+                    {{ partial "inline/timeline-panel.html" (merge $params (dict "direction" "start")) }}
+                    {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "start") }}
+                {{ else }}
+                    {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "end") }}
+                    {{ partial "inline/timeline-panel.html" (merge $params (dict "direction" "end")) }}
+                {{ end }}
+            </div>
+            <div class="row timeline g-0 p-3"> </div>
+        {{ end }}
+    </div>
+
+    {{/* Render timeline for smaller devices */}}
+    <div class="container p-0 d-block d-md-none small{{ with $background }} timeline-bg-{{ . }} bg-{{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
+        {{ range $index, $item := $data }}
+            <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
+                {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}
+                {{ partial "inline/timeline-panel.html" (dict
+                    "page"      $args.page
+                    "content"   $item.content
+                    "color"     $item.color
+                    "title"     $item.title
+                    "badge"     $item.badge
+                    "date"      $item.date
+                    "url"       $item.url
+                    "direction" "end"
+                    "col"       9
+                ) }}
+            </div>
+            <div class="row timeline-sm g-0 p-3"> </div>
+        {{ end }}
+    </div>
 {{ end }}
-
-{{/* Render default timeline */}}
-<div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
-    {{ $title | safeHTML }}
-    {{ range $index, $item := $data }}
-        <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
-            {{- $params := dict 
-                "page"    $args.page
-                "content" $item.content
-                "color"   $item.color
-                "title"   $item.title
-                "badge"   $item.badge
-                "date"    $item.date
-                "url"     $item.url
-            }}
-            {{ if eq (mod $index 2) 1 }}
-                {{ partial "inline/timeline-panel.html" (merge $params (dict "direction" "start")) }}
-                {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "start") }}
-            {{ else }}
-                {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "end") }}
-                {{ partial "inline/timeline-panel.html" (merge $params (dict "direction" "end")) }}
-            {{ end }}
-        </div>
-        <div class="row timeline g-0 p-3"> </div>
-    {{ end }}
-</div>
-
-{{/* Render timeline for smaller devices */}}
-<div class="container p-0 d-block d-md-none small{{ with $background }} timeline-bg-{{ . }} bg-{{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
-    {{ range $index, $item := $data }}
-        <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
-            {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}
-            {{ partial "inline/timeline-panel.html" (dict
-                "page"      $args.page
-                "content"   $item.content
-                "color"     $item.color
-                "title"     $item.title
-                "badge"     $item.badge
-                "date"      $item.date
-                "url"       $item.url
-                "direction" "end"
-                "col"       9
-            ) }}
-        </div>
-        <div class="row timeline-sm g-0 p-3"> </div>
-    {{ end }}
-</div>
