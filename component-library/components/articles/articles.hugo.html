@@ -11,23 +11,23 @@
 {{ if or $args.err $args.warnmsg }}
     {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "component-library/components/articles/articles.hugo.html" 
-        "msg" "Invalid arguments"
+        "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
-        "file" page.File
+        "file"    page.File
     )}}
     {{ $error = $args.err }}
 {{ end }}
 
 {{ $pages := slice }}
 {{ $pages = partial "assets/live-pages.html" (dict 
-	"page" $args.page
-	"section" $args.input.section
-	"nested" $args.input.nested
-	"keywords" $args.input.keywords
+	"page"       $args.page
+	"section"    $args.input.section
+	"nested"     $args.input.nested
+	"keywords"   $args.input.keywords
 	"categories" $args.input.categories
-	"tags" $args.input.tags
-	"sort" $args.input.sort
-	"reverse" $args.input.reverse
+	"tags"       $args.input.tags
+	"sort"       $args.input.sort
+	"reverse"    $args.input.reverse
 )}}
 
 <!-- Add style definitions -->
@@ -41,8 +41,8 @@
 
 <!-- Define more button -->
 {{ $moreButton := site.Params.modules.bookshop.articles.moreButton | default false }}
-{{ $moreTitle := T "more" (pluralize .section) }}
-{{ $moreLink := .section }}
+{{ $moreTitle := T "more" (pluralize $args.input.section) }}
+{{ $moreLink := $args.input.section }}
 {{ with $args.more }}
 	{{ if .title }}{{ $moreTitle = .title }}{{ end }}
 	{{ if .link }}{{ $moreLink = .link }}{{ end }}
@@ -52,8 +52,8 @@
 {{ if and $paginate page.IsPage }}
     {{ partial "utilities/LogWarn.html" (dict 
         "partial" "component-library/components/articles/articles.hugo.html"
-        "msg" "Pagination not supported"
-        "file" page.File
+        "msg"     "Pagination not supported"
+        "file"    page.File
     )}}
 	{{ $paginate = false }}
 {{ end }}
@@ -61,47 +61,44 @@
 <!-- Main code -->
 {{ if not $error }}
 	<div class="container-xxl p-4 px-xxl-0">
-		{{- partial "assets/section-title.html" (dict 
-			"heading" $args.heading
-			"class" "py-5"
-		) -}}
+		{{- partial "assets/section-title.html" (dict "heading" $args.heading "class" "py-5") -}}
 
 		{{ $partial := "assets/card-group.html" }}
 		{{ $params := dict }}
 		{{- $params = merge $params (dict
-			"page" page
-			"list" $pages
-			"max" $args.max
-			"cols" $args.cols
+			"page"         page
+			"list"         $pages
+			"max"          $args.max
+			"cols"         $args.cols
 			"icon-rounded" $args.iconRounded
-			"href" (cond $moreButton $moreLink "")
-			"href-title" (cond $moreButton $moreTitle "")
+			"href"         (cond $moreButton $moreLink "")
+			"href-title"   (cond $moreButton $moreTitle "")
 		)}}
 
 		{{ if $args.scroll }}
 			{{ $partial := "assets/stack.html" }}
 			{{ $params = merge $params (dict 
 				"header-style" "none"
-				"body-style" "title"
+				"body-style"   "title"
 				"footer-style" "none"
-				"gutter" 1
-				"padding" 3
-				"ratio" "1x1"
-				"orientation" "horizontal-sm"
-				"styles" (cond $args.bento $styles "")
+				"gutter"       1
+				"padding"      3
+				"ratio"        "1x1"
+				"orientation"  "horizontal-sm"
+				"styles"       (cond $args.bento $styles "")
 			) -}}
 		{{ else }}
 			{{ $params = merge $params (dict 
 				"header-style" $args.headerStyle
 				"footer-style" $args.footerStyle
-				"padding" $args.padding
-				"class" (or $args.class "border-0")
-				"icon-style" "fa-2x"
-				"align" "start"
-				"orientation" $args.orientation
-				"hook" "assets/live-card.html"
-				"pagination" $args.pagination
-				"paginate" $paginate
+				"padding"      $args.padding
+				"class"        (or $args.class "border-0")
+				"icon-style"   "fa-2x"
+				"align"        "start"
+				"orientation"  $args.orientation
+				"hook"         "assets/live-card.html"
+				"pagination"   $args.pagination
+				"paginate"     $paginate
 			) -}}
 		{{ end }}
 		{{ partial $partial $params }}
