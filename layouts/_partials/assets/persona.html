@@ -71,7 +71,7 @@
     {{ $illustration := "" }}
     {{- if $thumbnail -}}
         {{- $illustration = partial "assets/image.html" (dict
-            "url"     $thumbnail
+            "src"     $thumbnail
             "title"   $title
             "ratio"   "1x1"
             "class"   "rounded-5"

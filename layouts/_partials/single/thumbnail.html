@@ -41,13 +41,13 @@
 
 {{ if $thumbnail -}}
     {{- partial "assets/image.html" (dict 
-        "url" $thumbnail
-        "anchor" $anchor
-        "ratio" $ratio
-        "wrapper" $wrapper
-        "class" $class
-        "title" $page.Params.title
-        "caption" $credits
+        "src"      $thumbnail
+        "anchor"   $anchor
+        "ratio"    $ratio
+        "wrapper"  $wrapper
+        "class"    $class
+        "title"    $page.Params.title
+        "caption"  $credits
         "figclass" $figclass
         "priority" "high"
     ) -}}

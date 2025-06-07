@@ -18,6 +18,33 @@ comment: >-
   graphics support an optional anchor `#` in their url to denote a symbol
   reference.
 arguments:
+  src:
+    type: string
+    optional: true
+    position: 0
+  page:
+    optional: true
+  mode:
+  ratio:
+  portrait:
+    release: v0.18.3
+  loading:
+    release: v0.21.0
+  priority:
+  sizes:
+    group: partial
+  title:
+  caption:
+  wrapper:
+    release: v0.18.3
+  class:
+  figclass:
+    release: v0.23.0
+  plain:
+    release: v0.24.0
+  anchor:
+    release: v0.24.22
+  # deprecated arguments
   url:
     type:
       - string
@@ -27,137 +54,5 @@ arguments:
       Path or url of the image, e.g. `img/example.jpg`. Images with multiple
       color modes are expected to have a basename that ends with either `-dark`
       or `-light`.
-  src:
-    type: string
-    optional: true
-    position: 0
-    comment: Alias for url.
-    group: shortcode
-  page:
-    type:
-      - '*hugolib.pageState'
-      - '*hugolib.pageForRenderHooks'
-      - '*hugolib.pageForShortcode'
-    optional: true
-    comment: Page context, used to match page resources.
-    group: partial
-  mode:
-    type: bool
-    default: false
-    optional: true
-    comment: >-
-      Flag indicating if the image should support color modes. If set, the
-      shortcode searches for images that having a matching color-mode suffix
-      such as `-light` or `-dark`.
-  ratio:
-    type: select
-    optional: true
-    comment: >-
-      Ratio of the image. If set, the image is resized and cropped to match the
-      ratio. Else the original aspect ratio of the image is kept. Not applicable
-      to vector graphics.
-    options:
-      values:
-        - 1x1
-        - 3x2
-        - 4x3
-        - 16x9
-        - 21x9
-  portrait:
-    type: bool
-    optional: true
-    default: false
-    comment: >-
-      Flag to adjust the ratio from landscape to portrait. The image itself is
-      not rotated, only the crop area is adjusted. Not applicable to vector
-      graphics.
-    release: v0.18.3
-  loading:
-    type: select
-    default: eager
-    optional: true
-    comment: >-
-      Loading behavior of the image. The loading of lazily loaded images is
-      deferred until the image is within scrolling range of the viewport. This
-      should reduce the initial loading time of the website. It is recommended
-      to lazily load only those images that are below the pagefold.
-    options:
-      values:
-        - eager
-        - lazy
-    release: v0.21.0
-  priority:
-    type: select
-    default: auto
-    optional: true
-    comment: >-
-      Fetch priority of the image. The priority provides a hint to the browser
-      on how it should prioritize the fetching of the image relative to other
-      images. The implementation is experimental and currently only supported by
-      Chrome, Edge, and Opera.
-    options:
-      values:
-        - high
-        - low
-        - auto
-    group: partial
-  sizes:
-    type: string
-    default: 100vw
-    optional: true
-    comment: >-
-      One or more strings separated by commas, indicating the source sizes of an
-      image set.
-    group: partial
-  title:
-    type:
-      - string
-      - hstring.RenderedString
-      - hstring.HTML
-    optional: true
-    comment: Alternate text of the image.
-  caption:
-    type: string
-    optional: true
-    comment: Figure caption.
-  wrapper:
-    type: string
-    optional: true
-    comment: Class attributes of the wrapper element, e.g. `mx-auto`.
-    release: v0.18.3
-  class:
-    type: string
-    optional: true
-    comment: Class attribute of the inner img element, e.g. `rounded`.
-  figclass:
-    type: string
-    optional: true
-    comment: Class attribute of the figure caption, e.g. `px-4`.
-    release: v0.23.0
-  plain:
-    type: bool
-    default: false
-    optional: true
-    comment:
-      Flag to indicate if the image should render a plain image instead of an
-      image set. When set, no transformations are applied to the image.
-    release: v0.24.0
-  anchor:
-    type: select
-    optional: true
-    comment: 
-      Anchor of the crop box, defaults to anchor value set in `imaging` section
-      of the site configuration (usually `Smart`).
-    options:
-      values:
-        - TopLeft
-        - Top
-        - TopRight
-        - Left
-        - Center
-        - Right
-        - BottomLeft
-        - Bottom
-        - BottomRight
-        - Smart
-    release: v0.24.22
+    deprecated: v1.0.0
+    alternative: src

@@ -1,6 +1,6 @@
-{{- $url := .url -}}
+{{- $src := or .src .url -}}
 {{ $img := .img }}
-{{ $absoluteURL := .absoluteURL }}
+{{ $absoluteURL := or .absoluteUrl .absoluteURL }}
 {{ $dims := .dims }}
 {{- $ratio := .ratio -}}
 {{ $hook := .hook }}
@@ -9,8 +9,8 @@
 {{ $includeWidth := .includeWidth | default true }}
 {{ $anchor := .anchor | default "" }}
 
-{{ $host := (urls.Parse $url).Hostname }}
-{{ $dir := (urls.Parse $url).Path }}
+{{ $host := (urls.Parse $src).Hostname }}
+{{ $dir := (urls.Parse $src).Path }}
 {{ $file := index ((split $dir "/") | collections.Reverse) 0 }}
 {{ $dir = strings.TrimSuffix $file $dir }}
 
@@ -27,16 +27,16 @@
     {{ $height := (int (index (split $dim "x") 1)) }}
 
     {{- $element := partial $adapter (dict 
-        "host" $host
-        "dir" $dir
-        "file" $file
-        "img" $img
-        "absoluteURL" $absoluteURL
-        "transform" $transform
-        "width" $width
-        "height" $height
-        "format" $format
-        "anchor" $anchor
+        "url-host"     $host
+        "url-dir"      $dir
+        "url-file"     $file
+        "img"          $img
+        "absolute-url" $absoluteURL
+        "transform"    $transform
+        "image-width"  $width
+        "image-height" $height
+        "format"       $format
+        "anchor"       $anchor
     )}}
     {{ if $includeWidth }}
         {{ $imgset = $imgset | append (printf "%s %dw" $element $width) }}

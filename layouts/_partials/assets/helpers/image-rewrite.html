@@ -1,10 +1,10 @@
-{{- $url := .url -}}
+{{- $src := or .src .url -}}
 {{- $account := .account -}}
 {{- $container := .container -}}
 {{ $hook := .hook }}
 
-{{ $host := (urls.Parse $url).Hostname }}
-{{ $dir := (urls.Parse $url).Path }}
+{{ $host := (urls.Parse $src).Hostname }}
+{{ $dir := (urls.Parse $src).Path }}
 {{ $file := index ((split $dir "/") | collections.Reverse) 0 }}
 {{ $dir = strings.TrimSuffix $file $dir }}
 {{ $error := false }}
@@ -15,7 +15,7 @@
     {{ $error = true }}
 {{ end }}
 
-{{ $result := $url }}
+{{ $result := $src }}
 {{ if not $error }}
     {{ $result = partial $adapter (dict 
         "account" $account

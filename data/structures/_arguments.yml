@@ -6,12 +6,12 @@ arguments:
     group: partial
 
   # # a
-  # absoluteURL:
-  #   type: string
-  #   optional: true
-  #   default: false
-  #   comment: >-
-  #     Defines if a local image should use absolute instead of relative paths.
+  absolute-url:
+    type: string
+    optional: true
+    default: false
+    comment: >-
+      Defines if a local image should use absolute instead of relative paths.
   account:
     type: string
     optional: true
@@ -245,11 +245,11 @@ arguments:
   #       - link
   #       - button
 
-  # # c
+  # c
   caption:
     type: string
     optional: true
-    comment: Slide or illustration caption.
+    comment: Caption of the carousel slide or illustration.
   cards:
     type: string
     optional: true
@@ -434,11 +434,10 @@ arguments:
     optional: true
     comment: Flag to make the tab pane fade in.
     parent: cascade
-  # figclass:
-  #   type: string
-  #   optional: true
-  #   comment: Class attribute of the figure caption, e.g. `px-4`.
-  #   release: v0.23.0
+  figclass:
+    type: string
+    optional: true
+    comment: Class attribute of the figure caption, e.g. `px-4`.
   file:
     type: string
     optional: false
@@ -459,20 +458,21 @@ arguments:
   #   default: false
   #   comment: Flag to indicate the navbar should stick to the top.
   #   group: partial
-  # format:
-  #   type: select
-  #   optional: true
-  #   comment: >-
-  #     Image format; leave empty for an auto format (if supported) or default
-  #     format (usually jpg).
-  #   options:
-  #     values:
-  #       - png
-  #       - jpg
-  #       - gif
-  #       - tiff
-  #       - bmp
-  #       - webp
+  format:
+    type: select
+    optional: true
+    default: webp
+    comment: >-
+      Image format; leave empty for an auto format (if supported) or default
+      format (usually webp).
+    options:
+      values:
+        - png
+        - jpg
+        - gif
+        - tiff
+        - bmp
+        - webp
   # # TODO: rename format
   # format:
   #   type: select
@@ -639,16 +639,24 @@ arguments:
     type: string
     optional: true
     comment: Image to include in the the content block or section heading.
+  image-height:
+    type: int
+    optional: true
+    comment: Height of the image in pixels.
   image-overlay:
     type: bool
     optional: true
     default: false
     comment: Trigger to include an image overlay placeholder.
-  # img:
-  #   type: "*resources.resourceAdapter"
-  #   optional: true
-  #   comment: >-
-  #     Image resource to process. Must be set when handling local images.
+  image-width:
+    type: int
+    optional: true
+    comment: Width of the image in pixels.
+  img:
+    type: "*resources.resourceAdapter"
+    optional: true
+    comment: >-
+      Image resource to process. Must be set when handling local images.
   inline:
     type: bool
     optional: true
@@ -1064,14 +1072,13 @@ arguments:
         - bottom
         - left
         - right
-  # plain:
-  #   type: bool
-  #   default: false
-  #   optional: true
-  #   comment:
-  #     Flag to indicate if the image should render a plain image instead of an
-  #     image set. When set, no transformations are applied to the image.
-  #   release: v0.24.0
+  plain:
+    type: bool
+    default: false
+    optional: true
+    comment:
+      Flag to indicate if the image should render a plain image instead of an
+      image set. When set, no transformations are applied to the image.
   # # TODO: rename plain
   # plain:
   #   type: bool
@@ -1096,21 +1103,21 @@ arguments:
     type: string
     optional: true
     comment: Preheading of the section heading.
-  # priority:
-  #   type: select
-  #   default: auto
-  #   optional: true
-  #   comment: >-
-  #     Fetch priority of the image. The priority provides a hint to the browser
-  #     on how it should prioritize the fetching of the image relative to other
-  #     images. The implementation is experimental and currently only supported by
-  #     Chrome, Edge, and Opera.
-  #   options:
-  #     values:
-  #       - high
-  #       - low
-  #       - auto
-  #   group: partial
+  priority:
+    type: select
+    default: auto
+    optional: true
+    comment: >-
+      Fetch priority of the image. The priority provides a hint to the browser
+      on how it should prioritize the fetching of the image relative to other
+      images. The implementation is experimental and currently only supported by
+      Chrome, Edge, and Opera.
+    options:
+      values:
+        - high
+        - low
+        - auto
+    group: partial
   prompt:
     type: string
     optional: true
@@ -1309,9 +1316,14 @@ arguments:
     comment: >-
       Flag to add spacing to the inline element.
   src:
-    type: string
+    type:
+      - string
+      - template.URL
     optional: false
-    comment: Path or url of the image, e.g. `img/example.jpg`.
+    comment: >-
+      Path or url of the image, e.g. `img/example.jpg`. Images with multiple
+      color modes are expected to have a basename that ends with either `-dark`
+      or `-light`.
   # # TODO: rename to loading-state
   # state:
   #   type: select
@@ -1436,14 +1448,14 @@ arguments:
     comment: >-
       Text to display in a tooltip. Cannot be used together with 
       collapse-id. Ignored for active/inactive buttons.
-  # transform:
-  #   type: select
-  #   optional: false
-  #   comment: Image transformation.
-  #   options:
-  #     values:
-  #       - fill
-  #       - fit
+  transform:
+    type: select
+    optional: false
+    comment: Image transformation.
+    options:
+      values:
+        - fill
+        - fit
   # # TODO: rename to tab-type
   # type:
   #   type: select
@@ -1482,6 +1494,24 @@ arguments:
       address. Include the `scheme` when referencing an external address, such
       as `https://google.com`. Local references may include an optional anchor
       link such as `blog/bootstrap-elements/#docs`.
+  url-host:
+    type: string
+    optional: true
+    comment: >-
+      Host of an URL. For example, the host of the URL
+      'https://example.com/first/second/third.webp' equals 'example.com'.
+  url-dir:
+    type: string
+    optional: true
+    comment: >-
+      All but the last element of an URL extension. For example, the dir of the
+      URL 'https://example.com/first/second/third.webp' equals '/first/second/'.
+  url-file:
+    type: string
+    optional: true
+    comment: >-
+      The last element of an URL extension. For example, the file of the
+      URL 'https://example.com/first/second/third.webp' equals 'third.webp'.
   user:
     type: string
     optional: true

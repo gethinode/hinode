@@ -20,39 +20,8 @@
 {{- end -}}
 
 {{/* Initialize arguments */}}
-{{- $url := "" -}}
-{{- $ratio := "" -}}
-{{- $wrapper := "" -}}
-{{- $class := "" -}}
-{{- $title := "" -}}
-{{- $caption := "" -}}
-{{- $figclass := "" -}}
-{{- $mode := false -}}
-{{- $portrait := false -}}
-{{- $loading := "" -}}
-{{- $error := false -}}
-{{- $plain := false -}}
-{{- $anchor := "" -}}
-
-{{- if .IsNamedParams -}}
-    {{ $url = .Get "src" | default "" -}}
-    {{ $url = .Get "url" | default $url -}}
-    {{ $ratio = .Get "ratio" | default "" -}}    
-    {{- $class = .Get "class" | default "" -}}
-    {{- $wrapper = .Get "wrapper" | default "" -}}
-    {{- $loading = .Get "loading" | default "" -}}
-    {{ $title = .Get "title" | default "" -}}
-    {{ $caption = .Get "caption" | default "" -}}
-    {{ $figclass = .Get "figclass" | default "" -}}
-    {{ if isset .Params "mode" }}{{ $mode = partial "utilities/CastBool.html" (.Get "mode") }}{{ end -}}
-    {{ if isset .Params "portrait" }}{{ $portrait = partial "utilities/CastBool.html" (.Get "portrait") }}{{ end -}}
-    {{ if isset .Params "plain" }}{{ $plain = partial "utilities/CastBool.html" (.Get "plain") }}{{ end -}}
-    {{ $anchor = .Get "anchor" | default "" -}}
-{{ else -}}
-    {{ $url = .Get 0 }}
-{{ end -}}
-
-{{ if not $url }}
+{{- $src := or $args.src $args.url -}}
+{{ if not $src }}
     {{ errorf "Missing value for param 'src': %s" .Position -}}
     {{- $error = true -}}
 {{ end }}
@@ -60,18 +29,18 @@
 {{/* Main code */}}
 {{- if not $error -}}
     {{- partial "assets/image.html" (dict 
-        "url" $url
-        "ratio" $ratio
-        "wrapper" $wrapper
-        "class" $class
-        "title" $title
-        "caption" $caption
-        "figclass" $figclass
-        "mode" $mode
-        "portrait" $portrait
-        "plain" $plain
-        "anchor" $anchor
-        "loading" $loading
-        "page" .Page)
-    -}} 
+        "src"      $src
+        "ratio"    $args.ratio
+        "wrapper"  $args.wrapper
+        "class"    $args.class
+        "title"    $args.title
+        "caption"  $args.caption
+        "figclass" $args.figclass
+        "mode"     $args.mode
+        "portrait" $args.portrait
+        "plain"    $args.plain
+        "anchor"   $args.anchor
+        "loading"  $args.loading
+        "page"     .Page
+    ) -}} 
 {{- end -}}

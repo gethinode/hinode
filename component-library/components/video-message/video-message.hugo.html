@@ -27,7 +27,7 @@
 
 	{{ if site.Params.env_bookshop_live }}
 		{{/* Define dummy content as we cannot retrieve video data in live mode */}}
-		{{- partial "assets/live-image.html" (dict "url" "/img/placeholder-video.svg" "ratio" "21x9" "wrapper" "text-center mb-4") -}}
+		{{- partial "assets/live-image.html" (dict "src" "/img/placeholder-video.svg" "ratio" "21x9" "wrapper" "text-center mb-4") -}}
 	{{ else }}
         <div class="video-container{{ if $border }} video-container-border{{ end}}">
 			{{ partial "assets/video.html" (dict

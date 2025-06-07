@@ -174,15 +174,15 @@
                     {{ $rounding := "rounded-start" }}
                     {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
                     {{- partial $args.hook (dict 
-                        "url" $thumbnail
-                        "ratio" (or $ratio "1x1")
+                        "src"      $thumbnail
+                        "ratio"    (or $ratio "1x1")
                         "portrait" $args.portrait
-                        "sizes" $args.sizes
-                        "anchor" $anchor
-                        "wrapper" "h-100 card-img-wrap d-flex align-items-center"
-                        "class" (printf "card-img-bg %s %s" $rounding $fullHeight)
-                        "title" $title
-                        "loading" $args.loading
+                        "sizes"    $args.sizes
+                        "anchor"   $anchor
+                        "wrapper"  "h-100 card-img-wrap d-flex align-items-center"
+                        "class"    (printf "card-img-bg %s %s" $rounding $fullHeight)
+                        "title"    $title
+                        "loading"  $args.loading
                     ) -}}
                 </div>
             {{- else if $icon -}}
@@ -230,7 +230,17 @@
     {{ $overlay := eq $args.orientation "overlay" }}
     <div class="card {{ $colorStyle }} {{ $args.class }} text-{{ $args.align }}">
         {{- if $thumbnail -}}
-            {{- partial $args.hook (dict "url" $thumbnail "ratio" (or $ratio "16x9") "portrait" $args.portrait "anchor" $anchor "sizes" $args.sizes "wrapper" "card-img-wrap" "class" "card-img-top card-img-bg" "title" (or $args.alt $title) "loading" $args.loading) -}}
+            {{- partial $args.hook (dict
+                "src"      $thumbnail
+                "ratio"    (or $ratio "16x9")
+                "portrait" $args.portrait
+                "anchor"   $anchor
+                "sizes"    $args.sizes
+                "wrapper"  "card-img-wrap"
+                "class"    "card-img-top card-img-bg"
+                "title"    (or $args.alt $title)
+                "loading"  $args.loading
+            ) -}}
         {{- else if $icon -}}
             <div class="card-icon p-{{ $args.padding }} {{ $iconStyle }} text-{{ $args.align }} {{ if $args.iconRounded }}fa-stack {{ $args.stack }}{{ end }} w-100">
                 {{ if $args.iconRounded }}
@@ -256,13 +266,13 @@
                     {{ $buttonType := (or $args.linkType $args.buttonType) }}
                     {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
                     {{ partial "assets/button.html" (dict 
-                        "title" $label
-                        "href" $href
-                        "outline" true
+                        "title"       $label
+                        "href"        $href
+                        "outline"     true
                         "button-size" "sm"
-                        "class" "card-button"
-                        "class" $buttonClass
-                        "link-type" $args.buttonType
+                        "class"       "card-button"
+                        "class"       $buttonClass
+                        "link-type"   $args.buttonType
                     )}}
                 </div>
             </div>

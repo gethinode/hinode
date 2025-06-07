@@ -19,7 +19,7 @@
 {{ if not $args.err }}
     <div class="carousel-item{{ if $args.active }} active{{ end }}" {{ if not $args.active }} fetchpriority="low"{{ end }}>
         {{ partial "assets/image.html" (dict 
-            "url"      $args.src
+            "src"      $args.src
             "ratio"    $args.ratio
             "page"     $args.page
             "class"    "d-block w-100"

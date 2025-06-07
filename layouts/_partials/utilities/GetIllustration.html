@@ -15,7 +15,13 @@
     {{- $thumbnail := "" -}}
     {{ if reflect.IsMap $item.Params.Thumbnail }}{{ $thumbnail = $item.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $item.Params.Thumbnail }}{{ end }}
     {{- if $thumbnail }}
-        {{ $illustration = partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "wrapper" $style "inner" "rounded" "title" $item.Site.Title) }}
+        {{ $illustration = partial "assets/image.html" (dict
+            "src"     $thumbnail
+            "ratio"   "16x9"
+            "wrapper" $style
+            "inner"   "rounded"
+            "title"    $item.Site.Title
+        ) }}
     {{ end }}
 {{ end }}
 

@@ -140,7 +140,7 @@
         {{ $thumbnail := partial "utilities/URLJoin.html" (dict "base" (path.Dir $id) "path" (printf "%s.jpg" (path.BaseName $id))) }}
         {{ $metadata := partial "assets/helpers/image-dimension.html" (dict 
             "page"     $args.page
-            "url"      (printf "https://res.cloudinary.com/%s/video/upload/%s" $account (path.Clean $thumbnail))
+            "src"      (printf "https://res.cloudinary.com/%s/video/upload/%s" $account (path.Clean $thumbnail))
             "ratio"    $args.ratio
             "imageset" false
         ) }}

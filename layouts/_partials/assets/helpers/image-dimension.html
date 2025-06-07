@@ -1,6 +1,6 @@
 {{/* Initialize arguments */}}
 {{- $page := .page -}}
-{{- $url := .url -}}
+{{- $src := or .src .url -}}
 {{- $ratio := .ratio -}}
 {{- $portrait := .portrait -}}
 {{- $height := .height -}}
@@ -12,11 +12,11 @@
 {{- $anchor := .anchor | default "" -}}
 
 {{/* Split url into base and anchor when applicable (only relevant for vector images) */}}
-{{- $segments := split $url "#" -}}
+{{- $segments := split $src "#" -}}
 {{- if gt (len $segments) 2 -}}
-    {{- errorf "Invalid path or url: %q" $url -}}
+    {{- errorf "Invalid path or url: %q" $src -}}
 {{- else if eq (len $segments) 2 }}
-    {{- $url = index $segments 0 -}}
+    {{- $src = index $segments 0 -}}
 {{- end -}}
 
 {{/* Identify image provider */}}
@@ -27,7 +27,7 @@
 {{ range $provider, $val := site.Params.images }}
     {{ if not $hook }}    
         {{ with index $val "host" }}
-            {{ if (findRE . (urls.Parse $url).Hostname) }}
+            {{ if (findRE . (urls.Parse $src).Hostname) }}
                 {{ $hook = $provider }}
                 {{ with index $val "account" }}{{ $account = . }}{{ end }}
                 {{ with index $val "rewrite" }}{{ $rewrite = . }}{{ end }}
@@ -40,7 +40,7 @@
 
 {{/* Rewrite the origin URL if applicable */}}
 {{ if $rewrite }}
-    {{ $url = partial "assets/helpers/image-rewrite.html" (dict "url" $url "account" $account "container" $container "hook" $hook) }}
+    {{ $src = partial "assets/helpers/image-rewrite.html" (dict "src" $src "account" $account "container" $container "hook" $hook) }}
 {{ end }}
 
 {{/* Define image dimensions */}}
@@ -49,12 +49,12 @@
 {{- $img := "" -}}
 {{- $data := "" -}}
 {{ $transform := "" }}
-{{- if hasSuffix $url "svg" -}}
-    {{- $res = partial "utilities/GetResource.html" (dict "url" $url "page" $page) -}}
+{{- if hasSuffix $src "svg" -}}
+    {{- $res = partial "utilities/GetResource.html" (dict "url" $src "page" $page) -}}
     {{ if not $res }}
-        {{- $targetURL := partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $url)) -}}
+        {{- $targetURL := partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
         {{- if not (fileExists (path.Join "/static" $targetURL)) -}}
-            {{ warnf "Cannot find vector image resource: %q" $url -}}
+            {{ warnf "Cannot find vector image resource: %q" $src -}}
         {{ else }}
             {{ $width := string (partial "utilities/GetWidth.html" (dict "path" $targetURL "height" 500)) }}
             {{ if $width }}
@@ -66,7 +66,7 @@
     {{ else if eq (string $res.MediaType) "image/svg+xml" }}
         {{ $data = $res.Content }}
     {{ else }}
-        {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $url -}}
+        {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $src -}}
     {{ end }}
 {{ else if $ratio }}
     {{ $transform = "fill" }}
@@ -77,7 +77,7 @@
     {{ $dims = slice (printf "%dx%d" $width $height) }}
 {{ else if not $plain }}
     {{ $transform = "fit" }}
-    {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
+    {{- $res := partial "utilities/GetImage.html" (dict "url" $src "page" $page) -}}
     {{ if and $res $res.resource }}
         {{ $img = $res.resource }}
         {{ if $res.mirror }}{{ $class = printf "%s mirrorred" $class }}{{ end }}
@@ -118,27 +118,27 @@
 {{ end }}
 
 {{/* Generate image url */}}
-{{ if or (hasSuffix $url "svg") $plain }}
-    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $url)) -}}
+{{ if or (hasSuffix $src "svg") $plain }}
+    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
 {{ else }}
     {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
-        "url" $url
-        "img" $img
-        "dims" ($dims | last 1)
-        "anchor" $anchor
-        "transform" $transform
-        "hook" $hook
-        "format" "png"
+        "src"          $src
+        "img"          $img
+        "dims"         ($dims | last 1)
+        "anchor"       $anchor
+        "transform"    $transform
+        "hook"         $hook
+        "format"       "png"
         "includeWidth" false
     )}}
     {{ if $imageset }}
         {{- $set = partial "assets/helpers/image-set.html" (dict 
-            "url" $url
-            "img" $img
-            "dims" $dims
-            "anchor" $anchor
+            "src"       $src
+            "img"       $img
+            "dims"      $dims
+            "anchor"    $anchor
             "transform" $transform
-            "hook" $hook
+            "hook"      $hook
         ) -}}
     {{ end }}
 {{ end }}

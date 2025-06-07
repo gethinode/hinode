@@ -10,8 +10,8 @@
 {{- $lazy := .lazy -}}
 {{- $priority := .priority -}}
 {{- $sizes := .sizes -}}
-{{- $absoluteURL := .absoluteURL -}}
-{{- $url := .url -}}
+{{- $absoluteURL := or .absoluteUrl .absoluteURL -}}
+{{- $src := or .src .url -}}
 {{- $mode := .mode -}}
 {{- $modes := .modes -}}
 {{- $plain := .plain | default false }}
@@ -20,23 +20,23 @@
 
 {{/* Split url into base and anchor when applicable (only relevant for vector images) */}}
 {{- $fileAnchor := "" -}}
-{{- $segments := split $url "#" -}}
+{{- $segments := split $src "#" -}}
 {{- if gt (len $segments) 2 -}}
-    {{- errorf "Invalid path or url: %q" $url -}}
+    {{- errorf "Invalid path or url: %q" $src -}}
 {{- else if eq (len $segments) 2 }}
-    {{- $url = index $segments 0 -}}
+    {{- $src = index $segments 0 -}}
     {{- $fileAnchor = index $segments 1 -}}
 {{- end -}}
 
 {{/* Obtain fallback URL and imageset definition */}}
 {{ $target := partial "assets/helpers/image-dimension.html" (dict 
-    "page" $page
-    "url" .url
-    "ratio" $ratio
+    "page"     $page
+    "src"      (or .src .url)
+    "ratio"    $ratio
     "portrait" $portrait
-    "plain" $plain 
+    "plain"    $plain 
     "imageset" true
-    "anchor" $anchor
+    "anchor"   $anchor
 ) }}
 {{ $fallbackURL := index $target "target" }}
 {{ $imgset := index $target "set" }}

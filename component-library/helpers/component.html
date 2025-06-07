@@ -58,7 +58,7 @@
         {{- end -}}
         >
         {{- if $backdrop -}}
-            {{ partial "assets/live-image.html" (dict "url" $backdrop "class" (printf "background-img-fluid %s" $bgclass) "title" (T "backgroundImage")) }}
+            {{ partial "assets/live-image.html" (dict "src" $backdrop "class" (printf "background-img-fluid %s" $bgclass) "title" (T "backgroundImage")) }}
         {{- end -}}
         {{ partial $resolved_component $component_props }}
     </section>

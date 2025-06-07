@@ -28,14 +28,14 @@
 {{ else if $image }}
     {{ if not (hasSuffix $image "svg") }}{{ $class = printf "%s rounded" $class }}{{ end }}
     {{ partial "assets/live-image.html" (dict
-        "url" $image
-        "anchor" $anchor
-        "ratio" $ratio
-        "wrapper" $wrapper
-        "class" $class
-        "title" $title
-        "sizes" $sizes
+        "src"      $image
+        "anchor"   $anchor
+        "ratio"    $ratio
+        "wrapper"  $wrapper
+        "class"    $class
+        "title"    $title
+        "sizes"    $sizes
         "priority" "high"
-        "mode" $mode
+        "mode"     $mode
     ) }}
 {{ end }}

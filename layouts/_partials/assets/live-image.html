@@ -28,7 +28,7 @@
         "portrait" $args.portrait
         "anchor"   $args.anchor
         "sizes"    $args.sizes
-        "url"      $args.url
+        "src"      (or $args.src $args.url)
         "title"    $args.title
         "caption"  $args.caption
         "plain"    site.Params.env_bookshop_live
