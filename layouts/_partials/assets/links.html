@@ -40,13 +40,13 @@
 
         {{ if .download }}
             {{ partial "assets/download.html" (dict 
-                "download" .download
-                "title"    $title
-                "icon"     .icon
-                "outline"  .outline
-                "size"     "md"
-                "order"    $order
-                "justify"  $justify
+                "download"    .download
+                "title"       $title
+                "icon"        .icon
+                "outline"     .outline
+                "button-size" "md"
+                "order"       $order
+                "justify"     $justify
             ) }}
         {{ else }}
             {{ if $force }}
