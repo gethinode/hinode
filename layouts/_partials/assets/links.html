@@ -1,11 +1,24 @@
-<!-- 
+{{/* 
     Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
--->
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
 
-{{ $links := .links }}
-{{ $align := .align }}
-{{ $justify := .justify }}
-{{ $type := .type }}
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "links" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/links.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global arguments */}}
 {{- $breakpoint := page.Scratch.Get "breakpoint" -}}
 
 {{- define "_partials/links-content.html" -}}
@@ -79,10 +92,10 @@
     {{ end }}
 {{ end }}
 
-<div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $links) 1 }} gap-5{{ end }} justify-content-{{ $align }} pt-5 pt-md-3">
-    {{ partial "links-content.html" (dict "links" $links "justify" $justify "type" $type "li" false) }}
+<div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $args.links) 1 }} gap-5{{ end }} justify-content-{{ $args.align }} pt-5 pt-md-3">
+    {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
 </div>
 
 <div class="d-{{ $breakpoint.current }}-none">
-    {{ partial "links-content.html" (dict "links" $links "justify" $justify "type" $type "li" true) }}
+    {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" true) }}
 </div>

@@ -55,7 +55,7 @@
                 <div class="col-12 col-{{ $breakpoint.prev }}-8 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 p-0">
                     {{ with $title }}{{ partial "assets/section-title-header.html" (dict "use-title" $args.useTitle "title" . "headingStyle" $headingStyle "color" $args.color "size" $size) }}{{ end }}
                     {{ with $args.heading.content }}<div class="{{ $bodyStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
-                    {{ if .links }}{{ partial "assets/links.html" (dict "links" $args.links "align" $args.heading.align "justify" $args.justify "type" $args.type) }}{{ end }}
+                    {{ if .links }}{{ partial "assets/links.html" (dict "page" $args.page "links" $args.links "align" $args.heading.align "justify" $args.justify "link-type" $args.type) }}{{ end }}
                 </div>
                 <div class="col-12 col-{{ $breakpoint.prev }}-4 col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 p-0 ps-{{ $breakpoint.prev }}-4">
                     {{ partial "assets/featured-illustration.html" (dict 
@@ -81,7 +81,7 @@
                     {{ with $preheading }}<p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">{{ . | page.RenderString | safeHTML }}</p>{{ end }}
                     {{ with $title }}{{ partial "assets/section-title-header.html" (dict "use-title" $args.useTitle "title" . "headingStyle" $headingStyle "color" $args.color "size" $size) }}{{ end }}
                     {{ with $args.heading.content }}<div class="{{ $bodyStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
-                    {{ if .links }}{{ partial "assets/links.html" (dict "links" $args.links "align" $args.heading.align "justify" $args.justify "type" $args.type) }}{{ end }}
+                    {{ if .links }}{{ partial "assets/links.html" (dict "page" $args.page "links" $args.links "align" $args.heading.align "justify" $args.justify "link-type" $args.type) }}{{ end }}
                 </div>
                 <div class="col-12 col-{{ $breakpoint.current }}-2 p-0 pt-2 text-center">
                     {{ partial "assets/featured-illustration.html" (dict 
@@ -103,6 +103,6 @@
         {{ with $preheading }}<p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">{{ . | page.RenderString | safeHTML }}</p>{{ end }}
         {{ with $title }}{{ partial "assets/section-title-header.html" (dict "use-title" $args.useTitle "title" . "headingStyle" $headingStyle "color" $args.color "size" $size) }}{{ end }}
         {{ with $args.heading.content }}<div class="{{ $bodyStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
-        {{ if $args.links }}{{ partial "assets/links.html" (dict "links" $args.links "align" $args.heading.align "justify" $args.justify "type" $args.type) }}{{ end }}
+        {{ if $args.links }}{{ partial "assets/links.html" (dict "page" $args.page "links" $args.links "align" $args.heading.align "justify" $args.justify "link-type" $args.type) }}{{ end }}
     {{ end }}
 </div>
