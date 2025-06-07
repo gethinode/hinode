@@ -63,13 +63,16 @@
                 {{ $total = len $pages }}
 
                 {{ if and $args.tags (gt (len $args.tags) 0) }}
-                    {{ $pages = where $pages "Params.tags" "intersect" $args.tags }}
+                    {{ $tags := slice | append $args.tags }}
+                    {{ $pages = where $pages "Params.tags" "intersect" $tags }}
                 {{ end }}
                 {{ if and $args.keywords (gt (len $args.keywords) 0) }}
-                    {{ $pages = where $pages "Params.keywords" "intersect" $args.keywords }}
+                    {{ $keywords := slice | append $args.keywords }}
+                    {{ $pages = where $pages "Params.keywords" "intersect" $keywords }}
                 {{ end }}
                 {{ if and $args.categories (gt (len $args.categories) 0) }}
-                    {{ $pages = where $pages "Params.categories" "intersect" $args.categories }}
+                    {{ $categories := slice | append $args.categories }}
+                    {{ $pages = where $pages "Params.categories" "intersect" $categories }}
                 {{ end }}
             {{ end }}
         
