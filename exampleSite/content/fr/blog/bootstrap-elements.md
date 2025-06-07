@@ -32,13 +32,13 @@ Hinode propose plusieurs shortcodes qui enveloppent des composants Bootstrap cou
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
-  {{</* accordion-item header="Élément d'accordéon #1" show="true" */>}}
+  {{</* accordion-item title="Élément d'accordéon #1" show="true" */>}}
     Il s'agit du contenu du corps du premier élément de l'accordéon. Il prend en charge le contenu HTML, s'il est activé dans le moteur de rendu goldmark. L'élément est affiché en ajoutant la valeur `show` à l'argument `class`.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Élément d'accordéon #2" */>}}
+  {{</* accordion-item title="Élément d'accordéon #2" */>}}
     Il s'agit du contenu du corps du deuxième élément de l'accordéon.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Élément d'accordéon #3" */>}}
+  {{</* accordion-item title="Élément d'accordéon #3" */>}}
     Il s'agit du contenu du corps du troisième élément de l'accordéon.
   {{</* /accordion-item */>}}
 {{</* /accordion */>}}
@@ -126,7 +126,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
-  header="publication" footer="none" button=true /*/>}}
+  header-style="publication" footer-style="none" button=true /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -136,7 +136,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card-group padding="3" gutter="3" button=true buttonType="link" cols=2 scroll=true */>}}
+{{</* card-group padding="3" gutter="3" button=true link-type="link" cols=2 scroll=true */>}}
     {{</* card title="Framework Bootstrap" icon="fab bootstrap" */>}}
         Créez des sites rapides et réactifs avec Bootstrap 5. Personnalisez facilement votre site
         avec les fichiers source Sass.
@@ -173,7 +173,7 @@ En-tête 6 {{</* badge title="Nouveau" */>}}
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button collapse="collapse-1" */>}}
+{{</* button collapse-id="collapse-1" */>}}
     Déclencher le panneau
 {{</* /button */>}}
 
@@ -238,7 +238,7 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{</* file file="./config/_default/languages.toml" id="file-collapse-1" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -288,17 +288,17 @@ Utilisez le shortcode `file` pour afficher et mettre en évidence le contenu com
 {{< example lang="hugo" >}}
 
 - {{</* link hinode >}}Lien nommé avec les paramètres par défaut{{< /link */>}}
-- {{</* link name=hinode cue=false tab=false >}}Lien nommé s'ouvrant dans l'onglet actuel sans icône{{< /link */>}}
-- {{</* link name=hinode cue=true tab=true >}}Lien nommé s'ouvrant dans un nouvel onglet avec icône{{< /link */>}}
+- {{</* link href=hinode cue=false tab=false >}}Lien nommé s'ouvrant dans l'onglet actuel sans icône{{< /link */>}}
+- {{</* link href=hinode cue=true tab=true >}}Lien nommé s'ouvrant dans un nouvel onglet avec icône{{< /link */>}}
 - {{</* link hinode /*/>}}
 - {{</* link href="https://developer.mozilla.org" >}}Lien externe{{< /link */>}}
 - {{</* link "./projects/another-project" >}}Lien interne avec titre{{< /link */>}}
-- {{</* link url="projects/another-project" /*/>}}
-- {{</* link url="/projects/another-project" /*/>}}
-- {{</* link url="../projects/another-project" case=false /*/>}}
+- {{</* link href="projects/another-project" /*/>}}
+- {{</* link href="/projects/another-project" /*/>}}
+- {{</* link href="../projects/another-project" case=false /*/>}}
 - {{</* link "about" /*/>}}
 - {{</* link "/en/about/" /*/>}}
-- {{</* link url="/en/about/" force=true >}}About (Anglais){{< /link */>}}
+- {{</* link href="/en/about/" force=true >}}About (Anglais){{< /link */>}}
 - {{</* link "#image" /*/>}}
 - {{</* link "components/#map" /*/>}}
 
@@ -321,15 +321,15 @@ Utilisez le shortcode `mark` pour {{</* mark >}}mettre en évidence{{< /mark */>
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-  {{</* nav type="pills" vertical="true" */>}}
-    {{</* nav-item header="Élément de navigation #1" show="true" */>}}
+  {{</* nav tab-type="pills" vertical="true" */>}}
+    {{</* nav-item title="Élément de navigation #1" show="true" */>}}
       Voici le contenu de navigation du premier élément. Il prend en charge le contenu HTML, s'il est
       activé dans le moteur de rendu Goldmark. L'élément est affiché en ajoutant la valeur `show` à l'argument `class`.
     {{</* /nav-item */>}}
-    {{</* nav-item header="Élément de navigation #2" */>}}
+    {{</* nav-item title="Élément de navigation #2" */>}}
       Voici le contenu de navigation du deuxième élément.
     {{</* /nav-item */>}}
-    {{</* nav-item header="Élément de navigation #3" */>}}
+    {{</* nav-item title="Élément de navigation #3" */>}}
       Voici le contenu de navigation du troisième élément.
     {{</* /nav-item */>}}
   {{</* /nav */>}}
@@ -342,7 +342,7 @@ Utilisez le shortcode `mark` pour {{</* mark >}}mettre en évidence{{< /mark */>
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar id="navbar-sample" path="blog" color="primary" size="md" search="false" menus="sample" title="Marque" mode="false" */>}}
+{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menus="sample" title="Marque" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -394,7 +394,7 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline-fr" background="dark" */>}}
+{{</* timeline data="timeline-fr" background="body-tertiary" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -404,19 +404,19 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button toast="toast-example-1" */>}}
+{{</* button toast-id="toast-example-1" */>}}
     Affiche la notification #1
 {{</* /button */>}}
 
-{{</* button toast="toast-example-2" */>}}
+{{</* button toast-id="toast-example-2" */>}}
     Affiche la notification #1
 {{</* /button */>}}
 
-{{</* toast id="toast-example-1" header="Premier titre" */>}}
+{{</* toast id="toast-example-1" title="Premier titre" */>}}
     Ceci est le premier message de notification. Il prend en charge le `markdown`.
 {{</* /toast */>}}
 
-{{</* toast id="toast-example-2" header="Deuxième titre" */>}}
+{{</* toast id="toast-example-2" title="Deuxième titre" */>}}
     Ceci est le deuxième message de notification. Il prend en charge le `markdown`.
 {{</* /toast */>}}
 {{< /example >}}
@@ -428,7 +428,8 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Légende de l'infobulle" href="#!" */>}}Démonstration{{</* /tooltip */>}} d'une infobulle
+{{</* tooltip color="primary" title="Légende de l'infobulle" href="#!" */>}}Démonstration{{</* /tooltip */>}}
+d'une infobulle
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -438,6 +439,6 @@ H{{</* sub 2 */>}}O est un liquide.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
+{{</* video provider="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

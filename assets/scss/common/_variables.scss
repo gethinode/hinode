@@ -17,12 +17,17 @@ $font-weight-normal:            300 !default;
 $font-weight-bold:              600 !default;
 $font-weight-bolder:            bolder !default;
 
+$theme-border-radius:           1rem;
+
 strong {
     font-weight:                600 if($enable-important-utilities, !important, null);
 }
 // scss-docs-end font
 
+$white:                       #fff !default;
 $black:                       #000 !default;
+$body-bg:                     #fff !default;
+$gray-100:                    #f8f9fa !default;
 $btn-toggle-color:              $black !default;
 
 $card-color:                    var(--bs-body-color);
@@ -44,3 +49,18 @@ $dropdown-transition: opacity .15s ease-in-out !default;
 $dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);
 $dropdown-horizontal-padding-y: calc(1rem + 2px);
 // scss-docs-end horizontal-nav
+
+$theme-colors: (
+  "primary":       $primary,
+  "secondary":     $secondary,
+  "success":       $success,
+  "info":          $info,
+  "warning":       $warning,
+  "danger":        $danger,
+  "light":         $light,
+  "dark":          $dark,
+  "white":         $white,
+  "black":         $black,
+  "body":          $body-bg,
+  "body-tertiary": $gray-100,
+);

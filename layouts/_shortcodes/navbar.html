@@ -6,50 +6,42 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "navbar" "args" .Params "group" "shortcode") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "navbar" "args" .Params "group" "shortcode" "named" .IsNamedParams) }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/navbar.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{ $error := $args.err }}
+{{- end -}}
 
 {{/* Initialize arguments */}}
-{{- $id := .Get "id" | default (printf "navbar-collapse-%d" (add .Ordinal 1)) -}}
-{{ $path := .Get "path" }}
+{{- $id := $args.id | default (printf "navbar-collapse-%d" (add .Ordinal 1)) -}}
 {{ $page := "" }}
-{{ if $path }}{{ $page = .Site.GetPage $path }}{{ end }}
-{{ if and $path (not $page) }}
-    {{ errorf "Cannot find page '%s': %s" $path .Position -}}
+{{ if $args.path }}{{ $page = .Site.GetPage $args.path }}{{ end }}
+{{ if and $args.path (not $page) }}
+    {{ errorf "Cannot find page '%s': %s" $args.path .Position -}}
     {{ $error = true -}}
 {{ end }}
-
-{{ $menus := .Get "menus" | default "main" -}}
-{{ $size := .Get "size" | default "md" -}}
-{{ $style := .Get "style" | default "light" -}}
-{{ $inverseStyle := "light" -}}
-{{ if eq $style "light" }}{{ $inverseStyle = "dark" }}{{ end -}}
-{{ $color := .Get "color" | default "" -}}
-{{ $searchParam := true -}}
-{{ if isset .Params "search" }}{{ $searchParam = partial "utilities/CastBool.html" (.Get "search") }}{{ end -}}
-{{ $modeParam := true -}}
-{{ if isset .Params "mode" }}{{ $modeParam = partial "utilities/CastBool.html" (.Get "mode") }}{{ end -}}
-{{ $logo := .Get "logo" | default "" -}}
-{{ $title := .Get "title" | default "" -}}
-{{- $class := .Get "class" | default "" -}}
 
 {{/* Main code */}}
 {{ if not $error -}}
     {{- partial "assets/navbar.html" (dict 
-        "id" $id 
-        "page" $page
-        "size" $size
-        "style" $style
-        "color" $color
-        "search" $searchParam
-        "mode" $modeParam
-        "menus" $menus
-        "logo" $logo
-        "title" $title
-        "class" $class
+        "id"         $id 
+        "page"       $page
+        "breakpoint" (or $args.breakpoint $args.size)
+        "style"      $args.style
+        "color"      $args.color
+        "search"     $args.search
+        "mode"       $args.mode
+        "menus"      $args.menus
+        "logo"       $args.logo
+        "title"      $args.title
+        "class"      $args.class
         )
     -}}
 {{ end -}}

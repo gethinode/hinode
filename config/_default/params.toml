@@ -249,3 +249,25 @@
     frame-src = ["player.vimeo.com"]
     img-src = ["i.vimeocdn.com"]
     script-src = ["player.vimeo.com"]
+
+# define module integration
+[modules.bookshop]
+  integration = "core"
+
+# provide default hero settings
+[modules.bookshop.hero]
+  align = "start"
+#   backdrop = "/assets/img/nat-9l98kFByiao-unsplash.jpg"
+  overlayMode = "dark"
+  section = true
+  default = ["section"]
+#   default = ["page", "home", "section"]
+
+[modules.bookshop.title]
+  size = 4
+  arrangement = "above"
+  headingStyle = "display"
+  bodyStyle = "lead text-muted"
+
+[modules.bookshop.articles]
+  moreButton = true

@@ -21,7 +21,7 @@
 {{ if reflect.IsMap .Params.Thumbnail }}{{ $thumbnail = .Params.Thumbnail.url }}{{ else }}{{ $thumbnail = .Params.Thumbnail }}{{ end }}
 
 {{ if $thumbnail -}}
-    {{ $imgURL := index (partial "assets/helpers/image-dimension.html" (dict "url" $thumbnail "width" 1280 "height" 640 "page" .)) "target" }}
+    {{ $imgURL := index (partial "assets/helpers/image-dimension.html" (dict "src" $thumbnail "image-width" 1280 "image-height" 640 "page" .)) "target" }}
     {{ $.Scratch.Set "thumbnail" ($imgURL | absURL) -}}
 {{ else -}}
     {{ with .Site.Params.schema.image.url -}}    

@@ -4,73 +4,74 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $current := "" }}
-{{ $error := false -}}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav-item" "args" .Params "group" "shortcode") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
+{{/* Initialize arguments */}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "nav-item" "args" .Params "group" "shortcode" "named" .IsNamedParams) -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/nav-item.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    ) -}}
+{{- end -}}
 
 {{/* Initialize arguments */}}
-{{ if not .Parent }}
-    {{ errorf "The nav-item shortcode should be contained within a nav shortcode: %s" .Position }}
-{{ else }}
+{{- if not .Parent -}}
+    {{- errorf "The nav-item shortcode should be contained within a nav shortcode: %s" .Position -}}
+{{- else if not $args.err -}}
     {{- $id := .Ordinal -}}
     {{- $parent := printf "nav-%d" .Parent.Ordinal -}}
-    {{- with (.Parent.Get "id") -}}
-        {{- $parent = . -}}
-    {{- end -}}
+    {{- with (.Parent.Get "id") }}{{ $parent = . }}{{ end -}}
 
-    {{- $fade := false -}}
-    {{ if isset .Params "fade" }}{{ $fade = partial "utilities/CastBool.html" (.Get "fade") }}{{ end -}}
+    {{- $fade := $args.fade -}}
     {{- $parentFade := false }}
-    {{ if isset .Parent.Params "fade" }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
-    {{ $fade = or $fade $parentFade }}
-    {{- $header := .Get "header" | default "" -}}
-    {{- $class := .Get "class" | default "" -}}
+    {{- if isset .Parent.Params "fade" }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
+    {{- $fade = or $fade $parentFade -}}
+    {{- $title := or $args.title $args.header -}}
     {{- $body := trim .Inner " \r\n" | .Page.RenderString -}}
-    {{- $show := .Get "show" | default false -}}
-    {{- $disabled := .Get "disabled" | default false -}}
+    {{- $current := "" -}}
 
     {{/* Main code */}}
-    {{ $output := partial "assets/nav-item.html" (dict 
-        "id" $id
-        "parentID" $parent
-        "fade" $fade
-        "header" $header
-        "class" $class
-        "body" $body
-        "show" $show
-        "disabled" $disabled
+    {{- $output := partial "assets/nav-item.html" (dict 
+        "id"        $id
+        "parent-id" $parent
+        "fade"      $fade
+        "title"     $title
+        "class"     $args.class
+        "body"      $body
+        "show"      $args.show
+        "disabled"  $args.disabled
         )
-    }}
+    -}}
 
-    {{ $current := .Parent.Scratch.Get "inner" }}
-    {{ if $current }}
-        {{ .Parent.Scratch.Set "inner" (print $current $output) }}
-    {{ else }}
-        {{ .Parent.Scratch.Set "inner" $output }}
-    {{ end }}
+    {{- $current := .Parent.Scratch.Get "inner" -}}
+    {{- $titles := .Parent.Scratch.Get "inner-title" -}}
+    {{- if $current -}}
+        {{- .Parent.Scratch.Set "inner" (print $current $output) -}}
+        {{- .Parent.Scratch.Set "inner-title" ($titles | append $title) -}}
+    {{- else -}}
+        {{- .Parent.Scratch.Set "inner" $output -}}
+        {{- .Parent.Scratch.Set "inner-title" (slice $title) -}}
+    {{- end }}
 
-    {{ $alternative := partial "assets/nav-item" (dict 
-        "id" $id
-        "parentID" $parent
-        "fade" $fade
-        "header" $header
-        "class" $class
-        "body" $body
-        "show" $show
-        "disabled" $disabled
-        "item_type" "accordion"
+    {{- $alternative := partial "assets/nav-item" (dict 
+        "id"           $id
+        "parent-id"    $parent
+        "fade"         $fade
+        "title"        $title
+        "class"        $args.class
+        "body"         $body
+        "show"         $args.show
+        "disabled"     $args.disabled
+        "navitem-type" "accordion"
         )
-    }}
+    -}}
 
-    {{ $current := .Parent.Scratch.Get "alternative" }}
-    {{ if $current }}
-        {{ .Parent.Scratch.Set "alternative" (print $current $alternative) }}
-    {{ else }}
-        {{ .Parent.Scratch.Set "alternative" $alternative }}
+    {{- $current := .Parent.Scratch.Get "alternative" -}}
+    {{- if $current -}}
+        {{- .Parent.Scratch.Set "alternative" (print $current $alternative) -}}
+    {{- else -}}
+        {{- .Parent.Scratch.Set "alternative" $alternative -}}
     {{ end }}
 {{ end }}

@@ -1,0 +1,135 @@
+{{/* 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "hero" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/hero.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global variables */}}
+{{ $arrangement := site.Params.modules.bookshop.title.arrangement }}
+{{ if eq $args.order "first" }}{{ $arrangement = "above" }}{{ end }}
+
+{{/* Initialize local variables */}}
+{{ $align := $args.align }}
+{{ if and (not $align) (eq $args.orientation "stacked") }}{{ $align = "center" }}{{ end }}
+{{ $class := $args.class }}
+{{ $scale := $args.illustration.width }}
+
+{{ if $scale }}
+    {{ $class = trim (printf "%s col-%d " $class $scale) " " }}
+{{ else }}
+    {{ $class = trim (printf "%s col-8 col-md-12" $class) " " }}
+    {{ $scale = 12 }}
+{{ end }}
+
+{{ $iconWrapper := "col-6" }}
+{{ if $args.center }}{{ $iconWrapper = "col-6 mx-auto text-center" }}{{ end }}
+
+{{ $sizes := "100vw" }}
+{{ if or (lt $args.width 12) (lt $scale 12) }}
+    {{ $container := "" }}
+    {{ if and $args.width (lt $args.width 12) }}
+        {{ if (eq $args.orientation "stacked") }}
+            {{ $container = mul (div (int $args.width) 12.0) 100 }}
+        {{ else }}
+            {{ $container = mul (div (int (sub 12 $args.width)) 12.0) 100 }}
+        {{ end }}
+    {{ else }}
+        {{ $container = 100 }}
+    {{ end }}
+    {{ if and $scale (lt $scale 12) }}
+        {{ $container = mul (div (int $scale) 12.0) $container }}
+    {{ end }}
+    {{ $sizes = replace (printf "(min-width: 768px) %.1fvw, 100vw" $container) ".0" "" }}
+{{ end }}
+
+{{ if not $error }}
+    <div class="container-xxl {{ $args.padding }} d-flex flex-column">
+        {{ if and $args.breadcrumb (not page.IsHome) }}
+            <div class="d-flex flex-column align-items-{{ $align}} mb-4 pe-3">
+                {{ if site.Params.env_bookshop_live }}
+                    <i class="text-white">Breadcrumb preview not supported</i>
+                {{ else }}
+                    {{ partial "assets/breadcrumb.html" (dict "page" page) }}
+                {{ end }}            
+            </div>
+        {{ end }}
+
+        {{ $imageWrapper := printf "mx-auto mx-md-0 %s" $class }}
+        {{ if eq $args.orientation "stacked" }}
+            {{ $imageWrapper = printf "pt-5 %s" $class }}
+            {{ if $args.center }}{{ $imageWrapper = printf "%s mx-auto" $imageWrapper }}{{ end }}
+            {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
+        {{ end }}
+
+        {{ $sectionClass := cond (eq $args.orientation "stacked") "pt-5" "py-md-5" }}
+        {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
+
+        {{ $illustration := partial $args.hook (dict
+            "page"         $args.page
+            "image"        $args.illustration.image
+            "icon"         $args.illustration.icon
+            "anchor"       $args.illustration.anchor
+            "mode"         $args.illustration.mode
+            "ratio"        $args.illustration.ratio
+            "sizes"        $sizes
+            "title"        (T "heroImage")
+            "wrapper"      $imageWrapper
+            "class"        "hero-image"
+            "image-overlay" $args.imageOverlay
+        ) }}
+
+        {{ $title := partial "assets/section-title.html" (dict
+            "heading"             $args.heading
+            "use-title"           $args.useTitle
+            "size"                $args.size
+            "links"               $args.links
+            "type"                (or $args.linkType $args.type)
+            "class"               (printf "hero-title %s" $sectionClass)
+            "arrangement"         $arrangement
+        ) }}
+
+        {{ if eq $args.orientation "stacked" }}
+            {{/* Render stacked component */}}
+            <div class="row flex-fill">
+                <div class="col col-12 col-md-{{ $args.width }}{{ if $args.center }} m-auto{{ end }}">
+                    {{ $illustration | safeHTML }}
+                    {{ $title | safeHTML }}
+                </div>
+            </div>
+        {{ else }}
+            {{/* Render horizontal component */}}
+            <div class="row row-cols-1 row-cols-md-2 flex-fill">
+                {{ $order1 := "order-1 order-md-0 " }}
+                {{ $order2 := "order-0 order-md-1" }}
+                {{ if eq $args.order "first" }}
+                    {{ $order1 = "order-1" }}
+                    {{ $order2 = "order-0" }}
+                {{ end }}
+
+                <div class="col col-12 col-md-{{ $args.width }} {{ $order1 }} my-md-auto pt-5 pt-md-0 hero-content">
+                    {{ $title | safeHTML }}
+                </div>
+                <div class="col col-10 col-md-{{ sub 12 $args.width }}
+                    {{ $order2 }}{{ if $args.center }} text-center{{ end }} my-md-auto align-self-end">
+                    <div>
+                        {{ $illustration | safeHTML }}
+                    </div>
+                </div>
+            </div>
+        {{ end }}
+    </div>
+{{ end }}

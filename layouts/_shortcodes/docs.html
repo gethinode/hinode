@@ -15,63 +15,62 @@
 
 {{ $error := false -}}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "docs" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
-
 {{/* Initialize arguments */}}
-{{- $name := .Get "name" | default "" -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "docs" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/docs.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{ $error = $args.err }}
+{{- end -}}
+
+{{/* Initialize local arguments */}}
+{{- $id := $args.id | default (printf "docs-collapse-%d" .Ordinal) -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file := .Get "file" | default "" -}}
+{{- $file := $args.file -}}
 {{- if hasPrefix $file "./" -}}
     {{- $file = path.Clean $file -}}
 {{- else -}}
     {{- $file = path.Join $basePath (path.Clean $file) -}}
 {{- end -}}
 {{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
-{{- $capture_start := "" -}}
-{{- $capture_end := "" -}}
-
-{{- $id := .Get "id" | default (printf "docs-collapse-%d" .Ordinal) -}}
+{{- $captureStart := "" -}}
+{{- $captureEnd := "" -}}
 
 {{- $supportedExtensions := slice "js" "scss" "toml" -}}
 {{- if in $supportedExtensions $extension -}}
     {{- if eq $extension "toml" }}
-        {{- $capture_start = printf "# toml-docs-start %s" $name -}}
-        {{- $capture_end = printf "# toml-docs-end %s" $name -}}
+        {{- $captureStart = printf "# toml-docs-start %s" $args.name -}}
+        {{- $captureEnd = printf "# toml-docs-end %s" $args.name -}}
     {{- else -}}
-        {{- $capture_start = printf "// %s-docs-start %s" $extension $name -}}
-        {{- $capture_end = printf "// %s-docs-end %s" $extension $name -}}
+        {{- $captureStart = printf "// %s-docs-start %s" $extension $args.name -}}
+        {{- $captureEnd = printf "// %s-docs-end %s" $extension $args.name -}}
     {{- end -}}
 {{- else -}}
     {{- errorf "File format not supported (line %s): %s" .Position $file -}}
 {{- end -}}
-
-{{- $show := true -}}
-{{ if isset .Params "show" }}{{ $show = partial "utilities/CastBool.html" (.Get "show") }}{{ end -}}
-{{- $full := true -}}
-{{ if isset .Params "full" }}{{ $full = partial "utilities/CastBool.html" (.Get "full") }}{{ end -}}
-{{- $class := .Get "class" | default "" -}}
 
 {{/* Main code */}}
 {{- if not $error -}}
     {{- /* Force-check if the file exists */ -}}
     {{ $tmp := os.Stat $file }}
 
-    {{- $regex := printf `%s((?:.|\n)*)%s` $capture_start $capture_end -}}
+    {{- $regex := printf `%s((?:.|\n)*)%s` $captureStart $captureEnd -}}
     {{- $match := findRE $regex (readFile $file) -}}
     {{- $match = index $match 0 -}}
 
     {{- if not $match -}}
-        {{- errorf "%s: %q: Got no matches for name=%q in file=%q!" .Position .Name $name $file -}}
+        {{- errorf "%s: %q: Got no matches for name=%q in file=%q!" .Position .Name $args.name $file -}}
     {{- end -}}
 
-    {{- $match = replace $match $capture_start "" -}}
-    {{- $match = replace $match $capture_end "" -}}
+    {{- $match = replace $match $captureStart "" -}}
+    {{- $match = replace $match $captureEnd "" -}}
 
-    <ul class="nav nav-tabs{{ with $class }} {{ . }}{{ end }}">
+    <ul class="nav nav-tabs{{ with $args.class }} {{ . }}{{ end }}">
         <li class="nav-item">
             <a class="nav-link active font-monospace" 
                 href="#body-{{ $id }}" 
@@ -80,14 +79,24 @@
                 data-bs-target=".multi-{{ $id }}" 
                 aria-expanded="false" 
                 aria-controls="body-{{ $id }} footer-{{ $id }}">
-                <small>{{ if $full }}{{ strings.TrimPrefix "/" (strings.TrimPrefix $basePath $file) }}{{ else }}{{ path.Base $file }}{{ end }}</small>
+                <small>{{ if $args.full }}{{ strings.TrimPrefix "/" (strings.TrimPrefix $basePath $file) }}{{ else }}{{ path.Base $file }}{{ end }}</small>
             </a>
         </li>
     </ul>
     <div class="border-start border-end border-bottom mb-3">
-        <div class="collapse multi-{{ $id }}{{ if $show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
+        <div class="collapse multi-{{ $id }}{{ if $args.show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
             {{- highlight (trim $match "\r\n") $extension "" -}}
         </div>
-        <div class="collapse multi-{{ $id }}{{ if not $show }} show{{ end }} p-3" id="footer-{{ $id }}"><i>...</i></div>
+        <div class="collapse multi-{{ $id }}{{ if not $args.show }} show{{ end }} p-3" id="footer-{{ $id }}">
+            <a class="nav-link active" 
+                href="#body-{{ $id }}" 
+                aria-current="page" 
+                data-bs-toggle="collapse" 
+                data-bs-target=".multi-{{ $id }}" 
+                aria-expanded="false" 
+                aria-controls="body-{{ $id }} footer-{{ $id }}">
+                <small><i>{{ T "clickToExpand" }}</i></small>
+            </a>
+        </div>
     </div>
 {{- end -}}

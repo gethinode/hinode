@@ -4,38 +4,39 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "persona" "args" .Params "group" "shortcode") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
+{{- $error := false }}
 
 {{/* Initialize arguments */}}
-{{- $path := .Get "path" -}}
-{{ if $path }}
-    {{- if not .Site.GetPage $path -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "persona" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/persona.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{ $error = $args.err }}
+{{- end -}}
+
+{{/* Initialize local arguments */}}
+{{ if $args.path }}
+    {{- if not .Site.GetPage $args.path -}}
         {{- errorf "Invalid or missing value for param 'path': %s" .Position -}}
         {{- $error = true -}}
     {{- end -}}
 {{ end }}
-{{- $class := .Get "class" | default "" -}}
-{{- $color := .Get "color" | default "" -}}
-{{- $title := .Get "title" -}}
-{{- $href := .Get "href" -}}
 {{- $content := trim .Inner " \r\n" | .Page.RenderString -}}
-{{- $thumbnail := .Get "thumbnail" -}}
 
 {{/* Main code */}}
 {{- if not $error -}}
     {{- partial "assets/persona.html" (dict 
-        "path" $path 
-        "class" $class 
-        "color" $color
-        "title" $title
-        "href" $href
-        "content" $content
-        "thumbnail" $thumbnail
+        "path"      $args.path 
+        "class"     $args.class 
+        "color"     $args.color
+        "title"     $args.title
+        "href"      $args.href
+        "content"   $content
+        "thumbnail" $args.thumbnail
     ) -}}
 {{- end -}}

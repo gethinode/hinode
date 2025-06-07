@@ -4,7 +4,7 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ define "partials/inline/table.html" }}
+{{ define "_partials/inline/table.html" }}
     {{ $page := .page }}
     {{ $input := .input }}
     {{ $attributes := .attributes }}
@@ -24,14 +24,13 @@
 {{ end }}
 
 {{/* Initialize arguments */}}
-{{ $error := false }}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "table" "args" .) }}
-{{ if $args.err }}
-    {{ partial "utilities/LogErr.html" (dict 
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "table" "args" . "group" "partial")}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/table.html" 
-        "msg" "Invalid arguments"
-        "details" $args.errmsg
-        "file" page.File
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
     )}}
 {{ end }}
 
@@ -44,34 +43,20 @@
 {{ if $args.paging }}
     {{ $attributes = printf "%s data-table-paging=true" $attributes }}
     {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $args.pagingOptionPerPage }}
-    {{ if (ne $args.pagingOptionPerPageSelect "") }}
+    {{ if $args.pagingOptionPerPageSelect }}
         {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes $args.pagingOptionPerPageSelect }}
     {{ end }}
 {{ end }}
 {{ if $args.searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
 
 {{/* Main code */}}
-{{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
-{{ $regular := partial "inline/table.html" (dict 
-    "page" $args.page
-    "input" $args.input
-    "attributes" $attributes
-    "class" $class
-    "wrap" false
-) }}
+{{ if not $args.err }}
+    {{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
+    {{ $params := dict "page" $args.page "input" $args.input "attributes" $attributes "class" $class }}
+    {{ $regular := partial "inline/table.html" (merge $params (dict "wrap" false)) }}
+    {{ $wrapped := "" }}
+    {{ if $args.wrap }}{{ $wrapped = partial "inline/table.html" (merge $params (dict "wrap" true)) }}{{ end }}
 
-{{ $wrapped := "" }}
-{{ if $args.wrap }}
-    {{ $wrapped = partial "inline/table.html" (dict 
-        "page" $args.page
-        "input" $args.input
-        "attributes" $attributes
-        "class" $class
-        "wrap" true
-    ) }}
-{{ end }}
-
-{{ if not $error }}
     {{ if eq $args.breakpoint "none" }}
         {{ $regular | safeHTML }}
         {{ with $wrapped }}{{ . | safeHTML }}{{ end }}

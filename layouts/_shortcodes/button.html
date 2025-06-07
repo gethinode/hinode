@@ -6,76 +6,59 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "button" "args" .Params "group" "shortcode") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
+{{/* Validate and initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "button" "args" .Params "named" .IsNamedParams "group" "shortcode") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/button.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{ $error = $args.err }}
 {{ end }}
 
 {{/* Initialize arguments */}}
-{{ $type := "button" -}}
-
-{{- $icon := .Get "icon" | default "" }}
+{{ $label := or $args.label $args.ariaLabel -}}
 {{ $title := trim .Inner " \r\n" | .Page.RenderString -}}
-{{ if not (or $title $icon) -}}
+{{ if not (or $title $args.icon) -}}
     {{ errorf "Missing icon or inner element text: %s" .Position -}}
     {{ $error = true }}
 {{ end -}}
-
-{{ $state := .Get "state" | default "enabled" -}}
-{{ $size := .Get "size" | default "md" -}}
-{{ $color := .Get "color" | default "primary" -}}
-{{ $outline := false -}}
-{{ if isset .Params "outline" }}{{ $outline = partial "utilities/CastBool.html" (.Get "outline") }}{{ end -}}
-{{ $badge := .Get "badge" | default "" -}}
-{{ $label := or (.Get "label") (.Get "aria-label") | default "" -}}
-{{ $tooltip := .Get "tooltip" | default "" -}}
-{{ $collapse := .Get "collapse" | default "" -}}
-{{ $href := .Get "href" | default "" -}}
-{{ $relref := .Get "relref" | default "" -}}
-{{ $id := .Get "id" | default "" -}}
-{{ if $relref }}
-    {{ $href = relref . $relref }}
+{{ $href := $args.href -}}
+{{ if $args.relref }}
+    {{ $href = relref . $args.relref }}
 {{ end }}
-{{ $class := .Get "class" | default "" -}}
-{{ $placement := .Get "placement" | default "top" -}}
-{{- $toast := .Get "toast" | default "" -}}
-{{- $order := .Get "order" | default "last" -}}
-{{- $justify := .Get "justify" | default "center" -}}
-{{- $cue := site.Params.main.externalLinks.cue -}}
-{{ if isset .Params "cue" }}{{ $cue = partial "utilities/CastBool.html" (.Get "cue") }}{{ end -}}
-{{- $tab := default site.Params.main.externalLinks.tab -}}
-{{ if isset .Params "tab" }}{{ $tab = partial "utilities/CastBool.html" (.Get "tab") }}{{ end -}}
-{{- $spacing := default (not .Parent) -}}
-{{ if isset .Params "spacing" }}{{ $spacing = partial "utilities/CastBool.html" (.Get "spacing") }}{{ end -}}
+{{ $spacing := cond .Parent false $args.spacing }}
 
 {{/* Main code */}}
 {{ if not $error }}
     {{- $output := partial "assets/button.html" (dict 
-        "type" $type
-        "title" $title
-        "size" $size
-        "color" $color
-        "outline" $outline
-        "badge" $badge
-        "label" $label
-        "tooltip" $tooltip
-        "collapse" $collapse
-        "href" $href
-        "id" $id
-        "state" $state
-        "class" $class
-        "placement" $placement
-        "icon" $icon
-        "order" $order
-        "justify" $justify
-        "cue" $cue
-        "tab" $tab
-        "toast" $toast
-        "spacing" $spacing)
-    -}}
+        "link-type" (or $args.linkType $args.type)
+        "title"        $title
+        "button-size"  (or $args.buttonSize $args.size)
+        "color"        $args.color
+        "outline"      $args.outline
+        "badge"        $args.badge
+        "label"        $label
+        "tooltip"      $args.tooltip
+        "collapse-id"  (or $args.collapseId $args.collapse)
+        "href"         $args.href
+        "id"           $args.id
+        "button-state" (or $args.buttonState $args.state)
+        "class"        $args.class
+        "placement"    $args.placement
+        "icon"         $args.icon
+        "order"        $args.order
+        "justify"      $args.justify
+        "cue"          $args.cue
+        "tab"          $args.tab
+        "toast-id"     (or $args.toastId $args.toast)
+        "spacing"      $spacing
+    ) -}}
 
-    {{ with .Get "wrapper" }}
+    {{ with $args.wrapper }}
         {{ $output = printf `<div class="%s">%s</div>` . $output }}
     {{ end }}
 

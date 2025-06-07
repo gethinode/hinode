@@ -6,31 +6,42 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/adapter/hugo.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/adapter/hugo.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
 {{ end }}
 
 {{/* Initialize arguments */}}
-{{ $host := .host }}
-{{ $dir := .dir }}
-{{ $file := .file }}
-{{ $img := .img }}
-{{ $transform := .transform }}
-{{ $height := .height }}
-{{ $width := .width }}
-{{ $anchor := .anchor | default "" }}
+{{ $img := $args.img }}
 {{ $element := "" }}
-{{ $absoluteURL := .absoluteURL }}
+{{ $file := or $args.urlFile $args.file }}
+{{ if not $file }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "assets/adapter/hugo.html" 
+        "msg"     "Invalid arguments"
+        "details" slice "argument 'url-file': expected value"
+        "file"    page.File
+    )}}
+    {{ $error = true }}
+{{ end }}
+{{ $dir := or $args.urlDir $args.dir }}
+{{ $host := or $args.urlHost $args.host }}
 {{ $url := partial "utilities/URLJoin.html" (dict "elements" (slice $dir $file)) }}
 {{ if $host }}
     {{ $url = partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $url)) }}
 {{ end }}
+{{ $height := or $args.imageHeight $args.height -}}
+{{ $width := or $args.imageWidth $args.width -}}
 
 {{/* Initialize image if needed, do not raise additional warnings */}}
-{{ $format := .format | default "webp" }}
-{{ if and (not $img) (ne $format "svg") }}
+{{ if and (not $img) (ne $args.format "svg") }}
     {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" page) -}}
     {{ if $res }}
         {{ $img = $res.resource }}
@@ -46,22 +57,22 @@
 {{/* Process image and generate image URL */}}
 {{ if not $error }}
     {{ $scaled := "" }}
-    {{ if eq $transform "fill" }}
-        {{- $scaled = $img.Fill (printf "%dx%d %s %s" $width $height $anchor $format) -}}
+    {{ if eq $args.transform "fill" }}
+        {{- $scaled = $img.Fill (printf "%dx%d %s %s" $width $height $args.anchor $args.format) -}}
     {{ else }}
-        {{- $scaled = $img.Fit (printf "%dx%d %s" $width $height $format) -}}
+        {{- $scaled = $img.Fit (printf "%dx%d %s" $width $height $args.format) -}}
     {{ end }}
 
     {{- $clean := path.Ext $img.RelPermalink -}}
     {{ $destination := "" }}
-    {{ if $anchor }}
-        {{ $destination = printf "-%dx%d-%s.%s" $width $height (lower $anchor) $format }}
+    {{ if $args.anchor }}
+        {{ $destination = printf "-%dx%d-%s.%s" $width $height (lower $args.anchor) $args.format }}
     {{ else }}
-        {{ $destination = printf "-%dx%d.%s" $width $height $format }}
+        {{ $destination = printf "-%dx%d.%s" $width $height $args.format }}
     {{ end }}
 
     {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink $clean $destination) -}}
-    {{- if $absoluteURL -}}
+    {{- if or $args.absoluteUrl $args.absoluteURL -}}
         {{- $element = $scaled.Permalink -}}
     {{- else -}}
         {{- $element = $scaled.RelPermalink -}}

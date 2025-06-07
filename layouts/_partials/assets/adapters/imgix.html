@@ -4,39 +4,51 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
 {{ $anchorMap := dict
-    "TopLeft" "top,left"
-    "Top" "top"
-    "TopRight" "top,right"
-    "Left" "left"
-    "Center" "center"
-    "Right" "right"
-    "BottomLeft" "bottom,left"
-    "Bottom" "bottom"
+    "TopLeft"     "top,left"
+    "Top"         "top"
+    "TopRight"    "top,right"
+    "Left"        "left"
+    "Center"      "center"
+    "Right"       "right"
+    "BottomLeft"  "bottom,left"
+    "Bottom"      "bottom"
     "BottomRight" "bottom,right"
-    "Smart" "faces,edges,center"
+    "Smart"       "faces,edges,center"
 }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/adapter/imgix.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "image-adapter" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/adapter/imgix.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{ $host := .host }}
-{{ $dir := .dir }}
-{{ $file := .file }}
-{{ $format := .format }}
-{{ $transform := .transform }}
-{{ $height := .height }}
-{{ $width := .width }}
+{{/* Initialize local arguments */}}
+{{ $file := or $args.urlFile $args.file }}
+{{ if not $file }}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "assets/adapter/imgix.html" 
+        "msg"     "Invalid arguments"
+        "details" slice "argument 'url-file': expected value"
+        "file"    page.File
+    )}}
+    {{ $error = true }}
+{{ end }}
+{{ $dir := or $args.urlDir $args.dir }}
+{{ $host := or $args.urlHost $args.host }}
+{{ $format := $args.format }}
+{{ $transform := $args.transform }}
 {{ $anchor := "" }}
-{{ with .anchor }}{{ $anchor = index $anchorMap . }}{{ end }}
+{{ with $args.anchor }}{{ $anchor = index $anchorMap . }}{{ end }}
 {{ if eq $transform "fill" }}{{ $transform = "crop" }}{{ else }}{{ $transform = "max" }}{{ end }}
 {{ $element := "" }}
+{{ $height := or $args.imageHeight $args.height -}}
+{{ $width := or $args.imageWidth $args.width -}}
 
 {{/* Validate image format is supported */}}
 {{ if and $format (not (in (slice "avif" "gif" "jp2" "jpg" "json" "jxr" "pjpg" "mp4" "png" "png8" "png32" "webm" "webp" "blurhash") $format)) }}
@@ -45,7 +57,7 @@
 {{ end }}
 
 {{/* Generate image URL */}}
-{{ if not $error }}
+{{ if not $args.err }}
     {{ $operation := "" }}
     {{ if $format }}
         {{ $operation = printf "fm=%s&fit=%s&h=%d&w=%d" $format $transform $height $width }}
@@ -55,7 +67,8 @@
     {{ with $anchor }}
         {{ $operation = printf "%s&crop=%s" $operation . }}
     {{ end }}
-    {{- $element = printf "%s?%s" (partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $dir $file))) $operation -}}
+    {{- $url := partial "utilities/URLJoin.html" (dict "elements" (slice "https://" $host $dir $file)) }}
+    {{- $element = printf "%s?%s" $url $operation -}}
 {{ end }}
 
 {{ return $element }}

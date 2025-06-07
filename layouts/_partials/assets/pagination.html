@@ -14,7 +14,7 @@
     Copyright 2022 The Hugo Authors. Licensed under the Apache License, Version 2.0.
   */}}
 
-{{- define "partials/inline/pagination/default" }}
+{{- define "_partials/inline/pagination/default" }}
   {{- with .Paginator }}
     {{- $currentPageNumber := .PageNumber }}
 
@@ -99,7 +99,7 @@
   {{- end }}
 {{- end -}}
 
-{{- define "partials/inline/pagination/terse" }}
+{{- define "_partials/inline/pagination/terse" }}
   {{- with .Paginator }}
     {{- $currentPageNumber := .PageNumber }}
 
@@ -160,23 +160,22 @@
   {{- end }}
 {{- end -}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "pagination" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/pagination.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "pagination" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/pagination.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $page := .page }}
-{{- $format := .format | default "default" }}
-
 {{/* Main code */}}
-{{- if and (not $error) (gt $page.Paginator.TotalPages 1) }}
+{{- if and (not $args.err) (gt $args.page.Paginator.TotalPages 1) }}
   <nav aria-label="{{ T "paginationNav" }}">
-    <ul class="pagination pagination-{{ $format }} justify-content-center">
-      {{- partial (printf "inline/pagination/%s" $format) $page }}
+    <ul class="pagination pagination-{{ $args.format }} justify-content-center">
+      {{- partial (printf "inline/pagination/%s" $args.format) $args.page }}
     </ul>
   </nav>
 {{- end }}

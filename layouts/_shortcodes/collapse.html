@@ -6,23 +6,29 @@
 
 {{ $error := false -}}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "collapse" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
-
 {{/* Initialize arguments */}}
-{{ $id := .Get "id"  -}}
-{{ $class := .Get "class" | default "" }}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "collapse" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/collapse.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{ $error = $args.err -}}
+{{- end -}}
+
+{{/* Initialize local arguments */}}
 {{- $body := trim .Inner " \r\n" -}}
 {{ if not $body -}}
     {{ errorf "Missing inner element text: %s" .Position -}}
+    {{ $error = true }}
 {{ end -}}
 
 {{/* Main code */}}
 {{ if not $error }}
-    <div class="collapse my-4" id="{{ $id }}">
-        <div{{ with $class }} class="{{ . }}"{{ end }}>{{ $body | .Page.RenderString }}</div>
+    <div class="collapse my-4" id="{{ $args.id }}">
+        <div{{ with $args.class }} class="{{ . }}"{{ end }}>{{ $body | .Page.RenderString }}</div>
     </div>
 {{ end }}

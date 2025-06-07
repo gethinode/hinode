@@ -1,0 +1,11 @@
+arguments:
+  src:
+  img:
+  absolute-url:
+    release: v1.0.0
+  dims:
+  hook:
+  transform:
+  format:
+  anchor:
+  include-width:

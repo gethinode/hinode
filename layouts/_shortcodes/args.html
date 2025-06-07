@@ -6,41 +6,26 @@
 
 {{ $error := false }}
 
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "args" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
-
-{{/* Initialize arguments */}}
-{{ $structure := "" }}
-{{- if .IsNamedParams }}{{ $structure = .Get "structure" }}{{ else }}{{ $structure = .Get 0 }}{{ end }}
-{{ $group := "" }}
-{{- if .IsNamedParams }}{{ $group = .Get "group" | default "" }}{{ else }}{{ $group = .Get 1 | default "" }}{{ end }}
-{{ $definitions := "" }}
-
-{{ if not $error }}    
-    {{ $definitions = (index site.Data.structures $structure).arguments }}
-    {{ if not $definitions }}
-        {{- errorf "Cannot find data structure '%s': %s" $structure .Position -}}
-        {{ $error =  true }}
-    {{ end }}
-{{ end }}
-
-{{ $parent := false -}}
-{{- if .IsNamedParams }}
-    {{ if isset .Params "parent" }}{{ $parent = partial "utilities/CastBool.html" (.Get "parent") }}{{ end -}}
-{{ end }}
-
-{{/* Main code */}}
-{{ if not $error }}    
+{{ define "_partials/inline/args-table.html"}}
+    {{ $args := .args }}
+    {{ $types := .types }}
+    {{ $page := .page }}
+    {{ $group := .group | default "" }}
+    {{ $parent := .parent }}
+    {{ $reflect := "" }}
+    
     {{ $table := printf "| %s | %s | %s | %s | %s |\n| --- | --- | --- | --- | --- |" 
         (T "name") (T "type") (T "required") (T "default") (T "comment") 
     }}
 
-    {{ range $key, $val := $definitions }}
+    {{ range $key, $val := $args }}
+        {{ if eq $key "_reflect" }}
+            {{ $reflect = $val }}
+            {{ continue }}
+        {{ end }}
         {{ $skip := false }}
-        {{ $groups := slice | append $val.group }}
+        {{ $groups := slice }}
+        {{ if $val }} {{ $groups = $groups | append $val.group }}{{ end }}
         {{ if and $group $val.group }}
             {{ $skip = not (in $groups $group )}}
         {{ end }}
@@ -48,38 +33,95 @@
     
         {{ if not $skip }}
             {{ $type := $val.type }}
+            {{ $udt := false }}
+            {{ $slice := false }}
             {{ if reflect.IsSlice $val.type }}{{ $type = delimit $val.type ", " }}{{ end }}
-
+            {{ with index $types $val.type }}
+                {{ $udt = true }}
+                {{ $slice = eq ._reflect "[]interface {}" }}
+            {{ end }}
             {{ $required := "" }}
             {{ if not $val.optional }}{{ $required = "yes" }}{{ end }}
 
             {{ $comment := $val.comment }}
             {{ if $val.deprecated }}
-                {{ $comment = printf `{{< release version="%s" short="true" size="sm" inline="true" state="deprecated" >}} %s` $val.deprecated $comment }}
+                {{ $btn := printf `{{< release version="%s" short="true" button-size="sm" inline="true" release-state="deprecated" >}}` $val.deprecated }}
+                {{ with $val.alternative }}
+                    {{ $comment = printf "%s **%s**. %s" $btn (T "alternativeFeature" .) $comment }}
+                {{ else }}
+                    {{ $comment = printf "%s %s" $btn $comment }}
+                {{ end }}
             {{ end }}
             {{ if $val.release }}
-                {{ $comment = printf `{{< release version="%s" short="true" size="sm" inline="true" >}} %s` $val.release $comment }}
+                {{ $comment = printf `{{< release version="%s" short="true" button-size="sm" inline="true" >}} %s` $val.release $comment }}
             {{ end }}
 
             {{ $min := "" }}
             {{ $max := "" }}
             {{ if and $val.options.values (eq $type "select") }}
-                {{ $comment = printf "%s %s: [%s]." $comment (T "supportedValues") (delimit $val.options.values ", ") }}
+                {{ $comment = printf "%s %s: [`%s`]." $comment (T "supportedValues") (delimit $val.options.values "`, `") }}
             {{ else if in (slice "int" "float" "float64") $type }}
                 {{ if eq (printf "%T" $val.options.min) "int" }}{{ $min = int $val.options.min }}{{ end }}
                 {{ if eq (printf "%T" $val.options.max) "int" }}{{ $max = int $val.options.max }}{{ end }}
             {{ end }}
             {{ if and (eq (printf "%T" $min) "int") (eq (printf "%T" $max) "int") }}
-                {{ $comment = printf "%s %s: [%d - %d]." $comment (T "supportedValues") $min $max }}
+                {{ $comment = printf "%s %s: [`%d - %d`]." $comment (T "supportedValues") $min $max }}
             {{ else if (eq (printf "%T" $min) "int") }}
-                {{ $comment = printf "%s %s: >=%d." $comment (T "supportedValues") $min }}
+                {{ $comment = printf "%s %s: `>=%d`." $comment (T "supportedValues") $min }}
             {{ else if (eq (printf "%T" $max) "int") }}
-                {{ $comment = printf "%s %s: <=%d." $comment (T "supportedValues") $max }}
+                {{ $comment = printf "%s %s: `<=%d`." $comment (T "supportedValues") $max }}
             {{ end }}
 
-            {{ $table = printf "%s\n| %s | %s | %s | %s | %s |" $table $key $type $required (or (string $val.default) "") $comment }}
+            {{ $default := "" }}
+            {{ with $val.default }}{{ $default = printf "`%v`" . }}{{ end }}
+            {{ if $udt }}{{ $type = printf "[%s](#%s)" $type (anchorize (printf "%s %s" $type (T "type"))) }}{{ end }}
+            {{ if $slice }}{{ $type = printf "[]%s" $type }}{{ end }}
+            {{ $table = printf "%s\n| %s | %s | %s | %s | %s |" $table $key $type $required $default $comment }}
         {{ end }}
     {{ end }}
 
-    {{ partial "assets/table.html" (dict "page" .Page "input" $table "wrap" true) }}
+    {{ return partial "assets/table.html" (dict "page" $page "input" $table "wrap" true) }}
+{{ end }}
+
+{{/* Validate and initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "args" "args" .Params "named" .IsNamedParams "group" "shortcode") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/args.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize type structure */}}
+{{ $structure := $args.structure }}
+{{ $bookshop := "" }}
+{{ if hasPrefix $structure "bookshop-" }}{{ $bookshop = strings.TrimPrefix "bookshop-" $structure }}{{ $structure = "" }}{{ end }}
+{{ $types := dict }}
+{{ if not $error }}
+    {{ $types = partial "utilities/InitTypes.html" (dict "structure" $structure "bookshop" $bookshop) }}
+    {{ if or $types.err $types.warnmsg }}
+        {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+            "partial"  "shortcodes/args.html" 
+            "msg"      "Invalid arguments"
+            "details"  ($types.errmsg | append $types.warnmsg)
+            "file"     page.File
+            "position" .Position
+        )}}
+        {{ $error = $args.err }}
+    {{ end }}
+{{ end }}
+
+{{/* Main code */}}
+{{ if not $error }}
+    {{ $params := dict "types" $types.udt "page" .Page "group" $args.group "parent" $args.parent }}
+    {{ partial "inline/args-table.html" (merge $params (dict "args" $types.types)) }}
+
+    {{ range $k, $v := $types.udt }}
+        {{ printf "## %s %s" $k (T "type") | $.Page.RenderString }}
+        {{ partial "inline/args-table.html" (merge $params (dict "args" $v)) }}
+    {{ end }}
 {{ end }}

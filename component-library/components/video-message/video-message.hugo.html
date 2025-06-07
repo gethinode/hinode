@@ -1,0 +1,135 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "video-message" "args" .) }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/video-message/video-message.hugo.html" 
+        "msg" "   Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+
+{{- define "_partials/inline/video.html" -}}
+	{{ $provider := .provider }}
+	{{ $account := .account }}
+	{{ $mediaID := (index . "media-id") }}
+	{{ $autoplay := .autoplay }}
+	{{ $queryArgs := .queryArgs }}
+	{{ $border := .border }}
+
+	{{ if site.Params.env_bookshop_live }}
+		{{/* Define dummy content as we cannot retrieve video data in live mode */}}
+		{{- partial "assets/live-image.html" (dict "src" "/img/placeholder-video.svg" "ratio" "21x9" "wrapper" "text-center mb-4") -}}
+	{{ else }}
+        <div class="video-container{{ if $border }} video-container-border{{ end}}">
+			{{ partial "assets/video.html" (dict
+				"page"       page
+				"provider"   $provider
+				"account"    $account
+				"media-id"   $mediaID
+				"autoplay"   $autoplay
+				"query-args" $queryArgs
+			) -}}
+			{{ if $border }}
+				<div class="video-overlay video-overlay-start"></div>
+				<div class="video-overlay video-overlay-top"></div>
+				<div class="video-overlay video-overlay-end"></div>
+				<div class="video-overlay video-overlay-bottom"></div>
+			{{ end }}
+        </div>
+	{{ end }}
+{{ end }}
+
+{{- define "_partials/inline/messages.html" -}}
+	{{ $list := .list }}
+	{{ $cols := .cols }}
+	{{ $type := .type }}
+	{{ $iconRounded := .iconRounded }}
+
+	{{- partial "assets/card-group.html" (dict 
+		"page"         page
+		"list"         $list
+		"class"        "border-0 card-icon card-icon-secondary"
+		"cols"         $cols
+		"gutter"       ""
+		"padding"      "0"
+		"header-style" "none"
+		"footer-style" "none"
+		"icon-style"   "fa-fluid fa-fw"
+		"align"        "start"
+		"orientation"  "horizontal-sm"
+		"button"       true
+		"link-type"    $type
+		"icon-rounded" $iconRounded
+	) -}}
+{{ end }}
+
+<div class="container-xxl p-4 px-xxl-0">
+	{{ $list := slice }}
+
+	{{ range $args.messages }}
+		{{ $path := "" }}
+		{{ $href := "" }}
+		{{ with .link }}{{ if hasPrefix . "http" }}{{ $href = . }}{{ else }}{{ $path = . }}{{ end }}{{ end }}
+
+		{{ $list = $list | append (dict 
+			"title"        .title
+			"description"  (.content | page.RenderString) 
+			"icon"         .icon
+			"href"         $href
+			"path"         $path
+			"button-label" .label
+		) }}
+	{{ end}}
+
+	{{- partial "assets/section-title.html" (dict 
+		"heading" $args.heading
+		"class"   "py-5"
+	) -}}
+
+	{{ if eq $args.orientation "stacked" }}
+		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
+		{{ with $args.video }}
+			{{- partial "inline/video.html" (dict
+				"provider"   .provider
+				"account"    .account
+				"media-id"   (index . "media-id")
+				"autoplay"   .autoplay
+				"query-args" .queryArgs
+				"border"     $.border
+			) -}}
+		{{ end }}
+		</div>
+		<div class="mt-4">
+			{{- partial "inline/messages.html" (dict "list" $list "cols" $args.cols "type" $args.type "iconRounded" $args.iconRounded) -}}
+		</div>
+	{{ else }}
+		<div class="container grid gap-4">
+			<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
+				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
+					{{ with $args.video }}
+						{{- partial "inline/video.html" (dict
+							"provider"   .provider
+							"account"    .account
+							"media-id"   (index . "media-id")
+							"autoplay"   .autoplay
+							"query-args" .queryArgs
+							"border"     $.border
+						) -}}
+					{{ end }}
+				</div>
+				<div class="col col-{{ $breakpoint.current }}-{{ sub 12 $args.width }} mt-4 mt-{{ $breakpoint.current }}-0">
+					{{- partial "inline/messages.html" (dict "list" $list "cols" 1 "type" $args.type "iconRounded" $args.iconRounded) -}}
+				</div>
+			</div>
+		</div>
+	{{ end }}
+</div>

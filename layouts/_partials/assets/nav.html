@@ -4,98 +4,124 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/nav.html] - Invalid arguments" -}}
-    {{ $error = true }}
-{{ end }}
+{{- $error := false -}}
 
 {{/* Initialize arguments */}}
-{{- $page := .page -}}
-{{- $id := .id | default "0" -}}
-{{ $list := .list }}
-{{ $pane := .pane | default "none" }}
-{{ $width := .width | default 100 }}
-{{- $title := .title -}}
-{{- $class := .class -}}
-{{- $color := .color -}}
-{{- $wrap := .wrap | default false -}}
-{{ $vertical := .vertical | default false }}
-{{ $type := .type | default "pills" }}
-{{- $loading := .loading | default "eager" -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "nav" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/nav.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    ) -}}
+    {{- $error = $args.err -}}
+{{- end -}}
+
+{{/* Initialize local arguments */}}
+{{- $page := $args.page -}}
+{{- $id := $args.id | default "0" -}}
+{{- $type := or $args.tabType $args.type -}}
+{{- $wrap := or $args.wordWrap $args.wrap -}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
 
 {{/* Main code */}}
-<div class="{{ if eq $width 50 }}col-sm-12 col-md-10 col-lg-8 col-xl-6{{ else }}col-12{{ end }} mx-auto">
-    {{ if $vertical }}<div class="d-flex align-items-start">{{ end }}
+<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
+    {{ if $args.vertical }}<div class="d-flex align-items-start">{{ end }}
     {{ if eq $type "callout" }}
         <div class="d-lg-none">
-            <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }} nav-callout">
-                {{- range $index, $item := $list -}}
+            <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $args.class }} {{ . }}{{ end }} nav-callout">
+                {{- range $index, $item := $args.list -}}
                     {{ partial "assets/nav-item.html" (dict 
-                        "id" $index
-                        "parentID" $id
-                        "fade" false
-                        "header" $item.Title
-                        "class" $class
-                        "body" (or $item.Description $item.Content)
-                        "show" false
-                        "disabled" false
-                        "item_type" "accordion"
+                        "id"           $index
+                        "parentID"     $id
+                        "fade"         false
+                        "header"       $item.Title
+                        "class"        $args.class
+                        "body"         (or $item.Description $item.Content)
+                        "show"         false
+                        "disabled"     false
+                        "item_type"    "accordion"
                         "illustration" (partial "utilities/GetIllustration.html" (dict "item" $item "size" "col-12"))
                         )
                     }}
                 {{ end -}}
+                {{- $args.navItems | safeHTML -}}
             </div>
         </div>
         <div class="d-none d-lg-block">
     {{ end }}
 
-    <ul class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
-        {{- range $index, $item := $list -}}
+    <ul
+        class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ if $args.vertical }} flex-column{{ end }}" 
+        id="nav-{{ $id }}" 
+        role="tablist"{{ if $args.vertical }}
+        aria-orientation="vertical"{{ end }}
+    >
+        {{- $titles := slice -}}
+        {{- range $args.list }}{{ $titles = $titles | append .Title }} {{ end -}}
+        {{- if reflect.IsSlice $args.navTitles }}{{ $titles = $titles | append $args.navTitles }}{{ end -}}
+        {{- range $index, $item := $titles -}}
             {{ $show := eq $index 0}}
             <li class="nav-item" role="presentation">
-                <button class="nav-link {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}" id="nav-{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#nav-{{ $id }}-{{ $index }}" 
-                        type="button" role="tab" aria-controls="nav-{{ $id }}-{{ $index }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
-                    {{ $item.Title }}
+                <button
+                    class="nav-link {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}"
+                    id="nav-{{ $id }}-btn-{{ $index }}"
+                    data-bs-toggle="pill"
+                    data-bs-target="#{{ $id }}-{{ $index }}" 
+                    type="button"
+                    role="tab"
+                    aria-controls="{{ $id }}-{{ $index }}"
+                    aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+                >
+                    {{ $item }}
                 </button>
             </li>
         {{ end -}}
     </ul>
 
-    <div class="tab-content {{ if eq $type "tabs" }}border border-bottom-0  p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-        {{ range $index, $item := $list }}
-            {{ $header := $item.Title }}
-            {{ $body := $item.Content }}
-            {{ $show := eq $index 0}}
+    <div class="tab-content {{ if eq $type "tabs" }}border border-bottom-0  p-3{{ else if $args.vertical }}ms-3{{ else }}mt-3{{ end }}">
+        {{- range $index, $item := $args.list -}}
+            {{- $header := $item.Title -}}
+            {-{ $body := $item.Content -}}
+            {{- $show := eq $index 0 -}}
             {{- $thumbnail := "" -}}
-            {{ if reflect.IsMap $item.Params.Thumbnail }}{{ $thumbnail = $item.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $item.Params.Thumbnail }}{{ end }}
-            <div class="tab-pane{{ if $show }} active{{ end }}" id="nav-{{ $id }}-{{ $index }}" role="tabpanel" aria-labelledby="{{ $id }}-btn-{{ $index }}" tabindex="0">
-                {{- if eq $pane "persona" -}}
+            {{- if reflect.IsMap $item.Params.Thumbnail -}}
+                {{- $thumbnail = $item.Params.Thumbnail.url -}}
+            {{- else -}}
+                {{- $thumbnail = $item.Params.Thumbnail -}}
+            {{- end -}}
+            <div
+                class="tab-pane{{ if $show }} active{{ end }}"
+                id="nav-{{ $id }}-{{ $index }}"
+                role="tabpanel"
+                aria-labelledby="{{ $id }}-btn-{{ $index }}"
+                tabindex="0"
+            >
+                {{- if eq $args.pane "persona" -}}
                     {{- partial "assets/persona.html" (dict  
-                        "title" $item.Title
-                        "class" $class
-                        "color" $color
-                        "href" $item.Params.href
-                        "content" (partial "utilities/GetDescription.html" (dict "page" $item))
+                        "title"     $item.Title
+                        "class"     $args.class
+                        "color"     $args.color
+                        "href"      $item.Params.href
+                        "content"   (partial "utilities/GetDescription.html" (dict "page" $item))
                         "thumbnail" $thumbnail
                     ) -}}
                 {{- else -}}
-                    {{ $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) }}
-                    {{ if $illustration }}
+                    {{- $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) -}}
+                    {{- if $illustration -}}
                         <div class="row">
                             <div class="col-12 col-lg-10 order-1 order-lg-0">{{- (or $item.Description $item.Content) -}}</div>
                             <div class="col-12 col-lg-2 order-0 order-lg-1">{{ $illustration | safeHTML }}</div>
                         </div>
-                    {{ else }}
+                    {{- else -}}
                         {{- (or $item.Description $item.Content) -}}
                     {{ end }}
                 {{- end -}}
             </div>    
         {{ end }}
+        {{- $args.navItems | safeHTML -}}
     </div>
-
-    {{ if eq $type "callout" }}</div>{{ end }}
-    {{ if $vertical }}</div>{{ end }}
+    {{- if eq $type "callout" }}</div>{{ end -}}
+    {{- if $args.vertical }}</div>{{ end -}}
 </div>

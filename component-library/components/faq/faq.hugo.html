@@ -1,0 +1,58 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "faq" "args" .)}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/faq/faq.hugo.html" 
+        "msg" "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file" page.File
+    )}}
+{{ end }}
+
+{{ if not $args.err }}
+	<div class="container-xxl p-4 px-xxl-0">
+		{{ $color := "" }}
+		{{ if $args.contrast }}{{ $color = "white" }}{{ end }}
+		{{- partial "assets/section-title.html" (dict 
+			"heading" $args.heading
+			"color" $color
+			"class" "py-5"
+		) -}}
+
+		{{ $class := "" }}
+		{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}
+
+		<div id="{{ $id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end }}accordion-flush mb-3{{ with $class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
+			{{ range $index, $item := $args.items }}
+				<div class="accordion-item">
+					{{- with $item.title -}}
+						<div class="accordion-header m-0" id="{{ $id }}-heading-{{ $id }}">
+							<button class="accordion-button collapsed" 
+								type="button" 
+								data-bs-toggle="collapse"
+								data-bs-target="#{{ $id }}-item-{{ $index }}"
+								aria-expanded="false"
+								aria-controls="{{ $id }}-item-{{ $index }}"
+							>
+							{{ if $args.color }}<div class="text-{{ $args.color }}">{{ . }}</div>{{ else }}{{ . }}{{ end }}
+							</button>
+						</div>
+					{{- end -}}
+					<div id="{{ $id }}-item-{{ $index }}" 
+						class="accordion-collapse collapse"
+						aria-labelledby="{{ $id }}-heading-{{ $index }}"
+						data-bs-parent="#{{ $id }}"
+					>
+						<div class="accordion-body">{{ $item.description | page.RenderString | safeHTML }}</div>
+					</div>
+				</div>
+			{{ end }}
+		</div>
+	</div>
+{{ end }}

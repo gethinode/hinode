@@ -20,12 +20,12 @@
 {{- end -}}
 {{- $breadcrumb := and (not $page.IsHome) site.Params.navigation.breadcrumb -}}
 
-{{- define "partials/inline/featured-sizes.html" }}
+{{- define "_partials/inline/featured-sizes.html" }}
     {{ $sizes := printf "(min-width: 768px) %dvw, 50vw" (int (math.Round (div (mul .width 100) 12))) }}
     {{ return $sizes }}
 {{ end }}
 
-{{- define "partials/inline/featured-body.html" }}
+{{- define "_partials/inline/featured-body.html" }}
     {{- $page := .page -}}
     {{- $headings := .headings -}}
     {{- $orientation := .orientation | default "stacked" -}}
@@ -43,14 +43,22 @@
             {{- $actions = sort $actions "weight" "asc" -}}
             <div class="hstack{{ if gt (len $actions) 1 }} gap-1{{ end }} justify-content-{{ $align}} pt-5 pt-md-3">
                 {{ range $actions }}
-                    {{ partial "assets/button.html" (dict "href" .url "icon" .icon "label" .label "title" .title "outline" .outline "order" "last" "justify" "start") }}
+                    {{ partial "assets/button.html" (dict 
+                        "href"    .url
+                        "icon"    .icon
+                        "label"   .label
+                        "title"   .title
+                        "outline" .outline
+                        "order"   "last"
+                        "justify" "start"
+                    ) }}
                 {{ end }}
             </div>
         {{ end }}
     </div>
 {{- end -}}
 
-{{- define "partials/inline/featured-illustration.html" }}
+{{- define "_partials/inline/featured-illustration.html" }}
     {{- $page := .page -}}
     {{- $style := printf "img-wrap mx-auto mx-md-0 %s" .style -}}
     {{ $sizes := .sizes }}
@@ -67,7 +75,15 @@
         {{- $thumbnail := "" -}}
         {{ if reflect.IsMap $page.Params.Thumbnail }}{{ $thumbnail = $page.Params.Thumbnail.url }}{{ else }}{{ $thumbnail = $page.Params.Thumbnail }}{{ end }}
         {{- if $thumbnail }}
-            {{ partial "assets/image.html" (dict "url" $thumbnail "ratio" "16x9" "sizes" $sizes "wrapper" $style "class" "rounded" "title" $page.Site.Title "priority" "high") }}
+            {{ partial "assets/image.html" (dict 
+                "src"      $thumbnail
+                "ratio"    "16x9"
+                "sizes"    $sizes
+                "wrapper"  $style
+                "class"    "rounded"
+                "title"    $page.Site.Title
+                "priority" "high"
+            ) }}
         {{ end }}
     {{ end }}
 {{- end -}}

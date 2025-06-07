@@ -1,0 +1,54 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{ $error := false -}}
+{{ $msg := "" -}}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "link" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "utilities/GetLink.html" 
+        "msg" "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file" page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+<!-- Initialize local arguments -->
+{{- $destination := strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $args.href -}}
+{{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $args.external -}}
+{{- $anchor := "" -}}
+
+<!-- Main code -->
+{{- if not $isExternal -}}
+    {{- if strings.Contains $destination "#" }}
+        {{ $segments := split $destination "#" }}
+        {{- if ne (len $segments) 2 }}
+            {{ $msg = printf "Malformed path, expected one anchor '#' only: %s" $destination}}
+            {{ $error = true }}
+        {{ else }}
+            {{- $destination = index $segments 0 -}}
+            {{- $anchor = index $segments 1 -}}
+        {{ end }}
+    {{ end }}
+
+    {{ if $destination }}
+        {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $args.page) }}
+        {{- if not $ref -}}
+            {{- $msg = printf "Cannot find page: %s" $destination -}}
+            {{- $error = true -}}
+        {{- else -}}
+            {{- $destination = $ref.RelPermalink -}}
+            {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+        {{- end -}}
+    {{ else }}
+        {{ $destination = printf "#%s" $anchor }}
+    {{ end }}
+{{- end -}}
+
+{{ return (dict "href" $destination "error" $error "msg" $msg) }}

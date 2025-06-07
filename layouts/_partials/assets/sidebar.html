@@ -4,21 +4,21 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "sidebar" "args" . "group" "partial") }}
-    {{- errorf "partial [assets/sidebar.html] - Invalid arguments" -}}
-    {{ $error = true }}
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "sidebar" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/sidebar.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
 {{ end }}
 
-{{/* Initialize arguments */}}
-{{- $page := .page }}
-{{- $data := .menu -}}
-{{- $version := .version -}}
-{{- $section := $page.Section }}
+{{/* Initialize local arguments */}}
+{{- $section := $args.page.Section }}
 
-{{- define "partials/inline/sidebar/group.html" -}}
+{{- define "_partials/inline/sidebar/group.html" -}}
     {{- $page := .page -}}
     {{- $index := .index -}}
     {{- $level := .level -}}
@@ -64,23 +64,23 @@
                 {{- range $item := $group.pages -}}
                     {{- if $item.pages -}}
                         {{ partial "inline/sidebar/group.html" (dict 
-                            "page" $page
-                            "index" $index
-                            "level" (add $level 1)
+                            "page"    $page
+                            "index"   $index
+                            "level"   (add $level 1)
                             "baseURL" $href
-                            "group" $item
-                            "menu" $data
+                            "group"   $item
+                            "menu"    $data
                             )
                         }}
                     {{- else -}}
                         {{ partial "inline/sidebar/item.html" (dict 
-                            "page" $page
+                            "page"         $page
                             "sectionBreak" false
-                            "level" $level
-                            "baseURL" $href
-                            "title" $item.title
-                            "href" $item.link
-                            "menu" $data
+                            "level"        $level
+                            "baseURL"      $href
+                            "title"        $item.title
+                            "href"         $item.link
+                            "menu"         $data
                             )
                         }}
                     {{ end -}}
@@ -90,7 +90,7 @@
     </li>
 {{ end -}}
 
-{{- define "partials/inline/sidebar/item.html" -}}
+{{- define "_partials/inline/sidebar/item.html" -}}
     {{- $page := .page -}}
     {{- $sectionBreak := .sectionBreak -}}
     {{- $level := .level -}}
@@ -120,7 +120,7 @@
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-                    {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+                    {{ $link := partial "assets/link.html" (dict "href" $href "text" $title "class" $class "page" $page) }}
                     {{ if $link }}
                         {{ print $link | safeHTML }}
                     {{ else }}
@@ -133,7 +133,7 @@
         <li>
             {{ $class := "sidebar-item text-decoration-none rounded small w-100" }}
             {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-            {{ $link := partial "assets/link.html" (dict "destination" $href "text" $title "class" $class "page" $page) }}
+            {{ $link := partial "assets/link.html" (dict "href" $href "text" $title "class" $class "page" $page) }}
             {{ if $link }}
                 {{ print $link | safeHTML }}
             {{ else }}
@@ -144,35 +144,35 @@
 {{ end -}}
 
 {{/* Main code */}}
-{{ if and (not $error) $data }}
+{{ if and (not $args.error) $args.menu }}
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
-        {{ $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
-        {{ $baseURL = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $version | relLangURL)))) }}
+        {{ $baseURL := $args.page.Scratch.Get "baseURL" | default "/" -}}
+        {{ $baseURL = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $args.version | relLangURL)))) }}
 
         <ul class="list-unstyled ps-0">
-        {{- range $index, $item := $data -}}
+        {{- range $index, $item := $args.menu -}}
             {{- if $item.pages }}
                 {{- $sectionBreak = true }}
                 {{ partial "inline/sidebar/group.html" (dict 
-                    "page" $page
-                    "index" $index
-                    "level" (add $level 1)
+                    "page"    $args.page
+                    "index"   $index
+                    "level"   (add $level 1)
                     "baseURL" $baseURL
-                    "group" $item
-                    "menu" $data
+                    "group"   $item
+                    "menu"    $args.menu
                     )
                 }}
             {{- else }}
                 {{ partial "inline/sidebar/item.html" (dict 
-                    "page" $page
+                    "page"         $args.page
                     "sectionBreak" $sectionBreak
-                    "level" $level
-                    "baseURL" $baseURL
-                    "title" $item.title
-                    "href" $item.link
-                    "menu" $data
+                    "level"        $level
+                    "baseURL"      $baseURL
+                    "title"        $item.title
+                    "href"         $item.link
+                    "menu"         $args.menu
                     )
                 }}
             {{- end }}

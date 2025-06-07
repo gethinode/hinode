@@ -1,30 +1,16 @@
 comment: Adds a keyboard input element.
 arguments:
-  title:
-    type: string
-    optional: false
+  text:
     position: 0
+    release: v1.0.0
+  class:
+  color:
+  # deprecated arguments
+  title:
+    type: select
+    optional: true
     comment: >-
       Title of the keyboard input. In shorthand notation, this is the first (and
       only) matched argument.
-  class:
-    type: string
-    optional: true
-    comment: Class attribute of the keyboard input element.
-  color:
-    type: select
-    default: secondary
-    optional: true
-    comment: Theme color of the element.
-    options:
-      values:
-        - primary
-        - secondary
-        - success
-        - danger
-        - warning
-        - info
-        - light
-        - dark
-        - white
-        - black
+    deprecated: v1.0.0
+    alternative: text

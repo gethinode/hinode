@@ -4,78 +4,68 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "image" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/image.html] - Invalid arguments" -}}
-    {{ $error = true }}
-{{ end }}
+{{- $error := false -}}
 
 {{/* Initialize arguments */}}
-{{- $page := .page -}}
-{{- $ratio := .ratio -}}
-{{- $portrait := .portrait -}}
-{{- $wrapper := .wrapper -}}
-{{- $class := .class -}}
-{{- $title := .title -}}
-{{- $caption := .caption -}}
-{{- $figclass := .figclass -}}
-{{- $loading := .loading -}}
-{{- $lazy := eq $loading "lazy" -}}
-{{- $priority := .priority -}}
-{{- if eq $priority "auto" }}{{ $priority = "" }}{{ end -}}
-{{- $sizes := .sizes | default "100vw" -}}
-{{- $plain := .plain | default false -}}
-{{- $anchor := .anchor | default "" -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "image" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/image.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    ) -}}
+    {{- $error = $args.err -}}
+{{- end -}}
 
+{{/* Initialize global arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
-{{- $url := .url -}}
-{{- $mode := .mode -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
-{{ if and site.Params.main.titleCase (eq $caption (plainify $caption)) }}
-    {{ $caption = title $caption }}
-{{ end }}
+
+{{/* Initialize local arguments */}}
+{{- $caption := $args.caption -}}
+{{- if and site.Params.main.titleCase (eq $caption (plainify $caption)) -}}
+    {{- $caption = title $caption -}}
+{{- end -}}
+{{- $priority := $args.priority -}}
+{{- if eq $priority "auto" }}{{ $priority = "" }}{{ end -}}
+{{- $src := or $args.src $args.url -}}
 
 {{/* Main code */}}
-{{ $params := dict }}
+{{- $params := dict -}}
 {{- $params = merge $params (dict
-    "page" $page
-    "ratio" $ratio
-    "portrait" $portrait
-    "wrapper" $wrapper
-    "class" $class
-    "title" $title
-    "caption" $caption
-    "figclass" $figclass
-    "lazy" $lazy
-    "priority" $priority
-    "sizes" $sizes
-    "absoluteURL" $absoluteURL
-    "plain" $plain
-    "anchor" $anchor
+    "page"         $args.page
+    "ratio"        $args.ratio
+    "portrait"     $args.portrait
+    "wrapper"      $args.wrapper
+    "class"        $args.class
+    "title"        $args.title
+    "caption"      $caption
+    "figclass"     $args.figclass
+    "loading"      $args.loading
+    "priority"     $priority
+    "sizes"        $args.sizes
+    "absolute-url" $absoluteURL
+    "plain"        $args.plain
+    "anchor"       $args.anchor
     )
 -}}
 
-{{ if not $error }}
-    {{- if $mode -}}
-        {{- $ext := path.Ext $url -}}
-        {{- $base := strings.TrimSuffix $ext $url -}}
+{{- if not $error -}}
+    {{- if $args.mode -}}
+        {{- $ext := path.Ext $src -}}
+        {{- $base := strings.TrimSuffix $ext $src -}}
         {{- range $suffix := $modes -}}
             {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
         {{- end -}}
 
         {{- range $suffix := $modes -}}
             {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
-            {{- $params = merge $params (dict
-                "url" $image
-                "mode" $suffix
-                "modes" $modes)
-            -}}
+            {{- $params = merge $params (dict "src" $image "color-mode" $suffix "modes" $modes) -}}
             {{- partial "assets/helpers/image-definition.html" $params -}}
         {{- end -}}
     {{ else }}
-        {{- $params = merge $params (dict "url" $url) -}}
+        {{- $params = merge $params (dict "src" $src) -}}
         {{- partial "assets/helpers/image-definition.html" $params -}}
     {{- end -}}
-{{ end }}
+{{- end -}}

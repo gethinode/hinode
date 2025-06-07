@@ -1,0 +1,76 @@
+comment: >-
+  Retrieves a page collection relative to a provided page or optional section.
+  Provide tags to ensure the pages have at least one matching tag. You can sort
+  the collection by parameter in ascending or descending order.
+
+  As CloudCannon does not support the retrieval of page collection when live
+  editing, the partial returns a dummy collection instead.
+arguments:
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    comment: Page context, used to retrieve page collections.
+    group: partial
+  section:
+    type: string
+    optional: true
+    comment: >-
+      Name of site section to use for the page collection. When omitted, the
+      current page is used as context instead. Use "/" to retrieve the home
+      page.
+  kind:
+    type: select
+    optional: true
+    default: regular
+    comment: >-
+      Kind of page collection to use.
+    options:
+      values:
+        - regular
+        - related
+        - taxonomy
+  nested:
+    type: bool
+    optional: true
+    comment: >-
+      If set, retrieves all pages below the section or current page recursively.
+      By default, only first-order childs are retrieved.
+  tags:
+    type:
+      - string
+      - "[]interface {}"
+    optional: true
+    comment: >-
+      Tags to be used as filter. When set, only pages that match at least one of
+      the provided tags are retrieved.
+  keywords:
+    type:
+      - string
+      - "[]interface {}"
+    optional: true
+    comment: >-
+      Keywords to be used as filter. When set, only pages that match at least
+      one of the provided keywords are retrieved.
+  categories:
+    type:
+      - string
+      - "[]interface {}"
+    optional: true
+    comment: >-
+      Categories to be used as filter. When set, only pages that belong to at
+      least one of the provided categories are retrieved.
+  sort:
+    type: string
+    optional: true
+    default: date
+    comment: >-
+      Page parameter to sort the page collection by. Both default and custom
+      parameters can be used.
+  reverse:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      If set, returns the page collection in descending order.

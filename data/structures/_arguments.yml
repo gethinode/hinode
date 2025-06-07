@@ -1,0 +1,1626 @@
+arguments:
+  _bookshop_name:
+    type: string
+    optional: true
+    comment: Unique name of the bookshop component.
+    group: partial
+
+  # a
+  absolute-url:
+    type: string
+    optional: true
+    default: false
+    comment: >-
+      Defines if a local image should use absolute instead of relative paths.
+  account:
+    type: string
+    optional: true
+    comment: >-
+      Account name of the video asset, required by some digital asset managers.
+      You can also set the default account name in the site's parameters.
+  active:
+    type: bool
+    optional: true
+    comment: >-
+      Sets the current item as active (only one item at a time). By
+      default, the first item is made active.
+  alert-type:
+    type: select
+    optional: true
+    comment: Type of the alert, generates an alert with related color and icon.
+    options:
+      values:
+        - danger
+        - info
+  align:
+    type: select
+    optional: true
+    default: start
+    comment: Alignment of the headline, content, or icon.
+    options:
+      values:
+        - start
+        - center
+        - end
+  alt:
+    type: string
+    optional: true
+    comment: >-
+      Alternate text for the thumbnail, uses `title` by default.
+  always-open:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to make accordion items stay open when another item is opened.
+  anchor:
+    type: select
+    optional: true
+    comment: 
+      Anchor of the image's crop box, defaults to anchor value set in
+      `imaging` section of the site configuration (usually `Smart`).
+    options:
+      values:
+        - TopLeft
+        - Top
+        - TopRight
+        - Left
+        - Center
+        - Right
+        - BottomLeft
+        - Bottom
+        - BottomRight
+        - Smart
+  # animated:
+  #   type: bool
+  #   optional: true
+  #   default: false
+  #   comment: >-
+  #     Enables card animations.
+  #   release: v0.27.0
+  aria-label:
+    type: string
+    optional: true
+    comment: Alias for label.
+  attributes:
+    type: map[string]interface {}
+    optional: true
+    comment: >-
+      Dictionary of key-value pairs added as custom attributes to the element.
+    group: partial
+  arrangement:
+    type: select
+    optional: true
+    default: above
+    options:
+      values:
+        - above
+        - first
+    comment: >-
+      Arrangement of the preheading, either left or above the header. On smaller
+      screens, the preheading is always placed on top.
+  autoplay:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag indicating the video should start playing immediately when loaded, if
+      supported by the browser. The audio will be muted.
+  autotitle:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Trigger to retrieve the title from the video metadata, if supported by the
+      provider.
+
+  # b
+  backdrop:
+    type: string
+    optional: true
+    comment: Background image with a mask to improve contrast.
+  background:
+    type:
+      - background
+      - string
+    optional: true
+    comment: Background style of the section.
+  badge:
+    type: string
+    optional: true
+    comment: Positioned badge to display on top of the button.
+  bento:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Trigger to use a bento-style layout instead of default grid layout.
+  body:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: The body content of the item, supports Markdown and HTML (if enabled).
+  body-style:
+    type: select
+    optional: true
+    default: full
+    comment: >-
+      Body components of the element. 
+    options:
+      values:
+        - full
+        - title
+        - none
+  # # TODO: rename bodyStyle
+  # bodyStyle:
+  #   type: string
+  #   optional: true
+  #   default: lead text-muted
+  #   comment: >-
+  #     Style of the body text, if any..
+  border:
+    type: bool
+    optional: true
+    comment: Flag add a border to the element.
+  breadcrumb:
+    type: bool
+    optional: true
+    comment: Flag to include a breadcrumb in the element.
+  # breakpoint:
+  #   type: select
+  #   optional: true
+  #   position: 0
+  #   comment: >-
+  #     By default, the table shortcode is responsive for all viewports. When a
+  #     breakpoint is set, the table will behave normally and not scroll
+  #     horizontally from the provided breakpoint and up. Use `none` to disable
+  #     this behavior. You can specify multiple breakpoints when using positional
+  #     arguments.
+  #   options:
+  #     values:
+  #       - none
+  #       - sm
+  #       - md
+  #       - lg
+  #       - xl
+  #       - xxl
+  breakpoint:
+    type: select
+    optional: true
+    comment: Breakpoint of the element.
+    default: md
+    options:
+      values:
+        - xs
+        - sm
+        - md
+        - lg
+        - xl
+  button:
+    type: bool
+    optional: true
+    comment: >-
+      Flag indicating the elements should include a button that links to the
+      provided address.
+  button-label:
+    type: string
+    optional: true
+    comment: >-
+      Label of the link button, defaults to the card title.
+  button-size:
+    type: select
+    optional: true
+    default: md
+    comment: Size of the button.
+    options:
+      values:
+        - sm
+        - md
+        - lg
+  button-state:
+    type: select
+    optional: true
+    default: enabled
+    comment: State of the button. 
+    options:
+      values:
+        - enabled
+        - disabled
+        - active
+        - inactive
+  # TODO: rename to link-type
+  # buttonType:
+  #   type: select
+  #   optional: true
+  #   default: button
+  #   release: v0.23.18
+  #   comment: Type of the button elements.
+  #   options:
+  #     values:
+  #       - link
+  #       - button
+
+  # c
+  caption:
+    type: string
+    optional: true
+    comment: Caption of the carousel slide or illustration.
+  cards:
+    type: string
+    optional: true
+    comment: String of rendered cards.
+    group: partial
+  case:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag to indicate if the retrieved title (e.g. no inner text is provided)
+      of an internal link should use its original case. If false, the title is
+      set to lower case.
+  # category:
+  #   type: select
+  #   optional: true
+  #   default: other
+  #   comment: >-
+  #     Assigns the script to a category that can be used for cookie consent
+  #     management.
+  #   options:
+  #     values:
+  #       - necessary
+  #       - functional
+  #       - analytics
+  #       - performance
+  #       - advertisement
+  #       - other
+  categories:
+    type:
+      - string
+      - slice
+    optional: true
+    comment: >-
+      Categories to be used as filter. When set, only pages that belong to at
+      least one of the provided categories are retrieved.
+  # center:
+  #   type: bool
+  #   optional: true
+  #   default: true
+  #   comment: >-
+  #     Centers images and icons when using stacked mode.
+  class:
+    type: string
+    optional: true
+    comment: >-
+      Class attributes of the element. It supports Bootstrap attributes to
+      modify the styling of the element.
+  clipboard:
+    type:
+      - string
+      - template.URL
+    optional: true
+    comment: Text to be copied to the clipboard when the button is clicked.
+  collapse-id:
+    type: string
+    optional: true
+    comment: >-
+      ID of the panel to collapse. Cannot be used together with tooltip. Ignored
+      for active/inactive buttons.
+  color:
+    type: select
+    optional: true
+    comment: Theme color of the element.
+    options:
+      values:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+        - white
+        - black
+        - body
+        - body-tertiary
+  color-mode:
+    type: select
+    optional: true
+    comment: >-
+      Color mode to apply to the illustration.
+    options:
+      values:
+        - light
+        - dark
+  cols:
+    type: int
+    optional: true
+    default: 3
+    comment: Number of grid columns.
+    options:
+      min: 1
+      max: 5
+  container:
+    type: string
+    optional: true
+    comment: Container name of the origin server.
+  # content: 
+  #   type: string
+  #   optional: true
+  #   comment: A short paragraph or a sub-headline that provides extra info.
+  # # TODO: merge content
+  content:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: Section content displayed below the title.
+  contrast:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Flag indicating if the element text should be rendered with high contrast.
+  cover:
+    type: bool
+    default: true
+    optional: true
+    comment: Flag indicating if the element should be rendered fullscreen.
+  cue:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should show a visual cue, defaults
+      to the setting `main.externalLinks.cue` in the site's parameters.
+
+  # # d
+  data:
+    type: string
+    comment: >-
+      Path of the input data relative to the site's data folder. Supported data
+      formats include `JSON`, `TOML`, `YAML`, and `XML`. You can omit the file
+      extension.
+  # data:
+  #   type: string
+  #   # default: abbr.yaml
+  #   optional: true
+  #   comment: >-
+  #     Filename of the data input. You can omit the file extension. The
+  #     file should reside in the `data` folder. The data supports language
+  #     extensions. For example, `abbr.en.yaml` refers to the English translation
+  #     of the abbrevation data. The filename `abbr.yaml` is used when no suitable
+  #     translation is found.
+  description:
+    type:
+      - string
+      - template.HTML
+    optional: true
+    comment: >-
+      Description of the element.
+  # # TODO: merge description
+  # description:
+  #   type: string
+  #   optional: true
+  #   comment: Section description.
+  # destination: 
+  #   type: string
+  #   optional: false
+  #   group: partial
+  #   comment: >-
+  #      Target destination.
+  dims:
+    type:
+      - slice
+      - '[]string'
+    optional: false
+    comment: >-
+      Image dimensions to use, specified as `width` `x` `height` in pixels.
+  disabled:
+    type: bool
+    optional: true
+    comment: Flag to indicate the item should be in a disabled state.
+  dismissible:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to indicate the alert is dismissible.
+  download:
+    type: string
+    optional: false
+    comment: Path to the download file, relative to the site's static folder.
+
+  # e
+  external:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to indicate if a link that contains a baseURL host should be forced as external.
+
+  # f
+  fade:
+    type: bool
+    optional: true
+    comment: Flag to make the tab pane fade in.
+    parent: cascade
+  figclass:
+    type: string
+    optional: true
+    comment: Class attribute of the figure caption, e.g. `px-4`.
+  file:
+    type: string
+    optional: false
+    comment: >-
+      Path of the input file. The path is relative to the `basePath` defined in
+      the `docs` section of the site's parameters. If the file starts with `./`,
+      the path of the repository is used as base path instead.
+  # # TODO: merge file
+  # file:
+  #   type: string
+  #   optional: false
+  #   comment: >-
+  #     The last element of an URL extension. For example, the file of the
+  #     URL 'https://example.com/first/second/third.webp' equals 'third.webp'.
+  # fixed:
+  #   type: bool
+  #   optional: true
+  #   default: false
+  #   comment: Flag to indicate the navbar should stick to the top.
+  #   group: partial
+  format:
+    type: select
+    optional: true
+    default: webp
+    comment: >-
+      Image format; leave empty for an auto format (if supported) or default
+      format (usually webp).
+    options:
+      values:
+        - png
+        - jpg
+        - gif
+        - tiff
+        - bmp
+        - webp
+  # # TODO: rename format
+  # format:
+  #   type: select
+  #   optional: true
+  #   default: default
+  #   comment:
+  #   options:
+  #     values:
+  #       - default
+  #       - terse
+
+  footer-style:
+    type: select
+    optional: true
+    default: none
+    comment: >-
+      Footer components of the element, displayed in small caps.
+    options:
+      values:
+        - full
+        - publication
+        - tags
+        - none
+  force:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to indicate a link should bypass any language redirection. Only applicable when
+      the site param `enableLanguageSelectionStorage` is set to true. When `force` is true,
+      the link to a local page is kept as is.
+  full:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      If unset, shows the filename only. By default, the entire path (relative
+      to the base path) is shown.
+
+  # # g
+  # group:
+  #   type: string
+  #   position: 1
+  #   optional: true
+  #   comment: >-
+  #     Name of the group filter. This is typically used when a shortcode and
+  #     partial have common arguments. The group filter binds a specific argument
+  #     to a particular group. By default, an argument belongs to all groups.
+  grow:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to indicate the spinner is growing instead of rotating.
+  gutter:
+    type: int
+    optional: true
+    default: 4
+    comment: Gutter between columns in a group.
+    options:
+      min: 0
+      max: 5
+
+
+  # # h
+  # header:
+  #   type: string
+  #   optional: false
+  #   comment: Header of the item.
+  header-style:
+    type: select
+    optional: true
+    default: full
+    comment: >-
+      Header components of the element, displayed in small caps. 
+    options:
+      values:
+        - full
+        - publication
+        - tags
+        - none
+  heading:
+    type: heading
+    optional: true
+    comment: >-
+      Heading of the content block, including a preheading and content element.
+  # # TODO: rename headingStyle
+  # headingStyle:
+  #   type: select
+  #   optional: true
+  #   default: display
+  #   options:
+  #     values:
+  #       - display
+  #       - fs
+  #   comment: >-
+  #     Style of the heading, either display or fs (regular).
+  # headline: 
+  #   type: string
+  #   optional: true
+  #   comment: Headline of the section.
+  # height:
+  #   type: int
+  #   optional: false
+  #   comment: Height of the image in pixels.
+  hide-empty:
+    type: bool
+    comment: Hides the entire section when no pages are available.
+  # TODO: replace with link
+  href:
+    type:
+      - string
+      - template.URL
+      - url
+    optional: true
+    comment: >-
+      Address for the button or hyperlink. When set for a card group, a button
+      is added if the list exceeds the maximum number of cards to display.
+    # group: partial
+  href-force:
+    type: bool
+    optional: true
+    comment: Forces the more button, ignoring page count.
+  # TODO: use title instead
+  href-title:
+    type: string
+    optional: true
+    comment: >-
+      Title of the button or hyperlink as companion to href.
+    group: partial
+  hook:
+    type: string
+    optional: true
+    comment: Render hook for the element's partial.
+  host:
+    type: string
+    optional: true
+    comment: Host to add to the prompt, e.g. `localhost`.
+  # # TODO: merge host
+  # host:
+  #   type: string
+  #   optional: true
+  #   comment: >-
+  #     Host of an URL. For example, the host of the URL
+  #     'https://example.com/first/second/third.webp' equals 'example.com'.
+
+  # i
+  id:
+    type: string
+    optional: true
+    comment: >-
+      Unique identifier of the current element.
+  icon:
+    type: string
+    optional: true
+    comment: >-
+      Icon to include. You can use shorthand notation such as `fas sort` to
+      include a Font Awesome icon. The argument also supports files with an
+      `.svg` or `.json` extension.
+  icon-rounded:
+    type: bool
+    optional: true
+    comment: Stack the icon in a round container.
+  illustration:
+    type: illustration
+    optional: true
+    comment: Featured illustration of the element.
+  image:
+    type: string
+    optional: true
+    comment: Image to include in the the content block or section heading.
+  image-height:
+    type: int
+    optional: true
+    comment: Height of the image in pixels.
+  image-overlay:
+    type: bool
+    optional: true
+    default: false
+    comment: Trigger to include an image overlay placeholder.
+  image-width:
+    type: int
+    optional: true
+    comment: Width of the image in pixels.
+  imageset:
+    type: bool
+    optional: true
+    comment: Flag to indicate the image should be rendered as image set.
+  img:
+    type: "*resources.resourceAdapter"
+    optional: true
+    comment: >-
+      Image resource to process. Must be set when handling local images.
+  include-width:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if the image set should render the image widths.
+  inline:
+    type: bool
+    optional: true
+    default: false
+    comment: Flag to render the element inline with the text.
+  input:
+    type: input
+    optional: false
+    comment: >-
+      List input of the element. Uses the name of the section to retrieve known
+      pages. 
+  # input:
+  #   type:
+  #     - string
+  #     - template.HTML
+  #   optional: false
+  #   comment: Table input in markdown format.
+  #   group: partial
+  # integrity:
+  #   type: string
+  #   optional: true
+  #   comment: >-
+  #     Cryptographic hash of the script to enable Subresource Integrity (SRI).
+  items:
+    type: items
+    optional: false
+    comment: >-
+      Items to include in the FAQ.
+
+  # j
+  justify:
+    type: select
+    optional: true
+    default: center
+    comment: Justification of the link title and icon.
+    options:
+      values:
+        - start
+        - end
+        - center
+        - between
+        - around
+        - evenly
+
+  # k
+  # key:
+  #   type: string
+  #   position: 0
+  #   optional: false
+  #   comment: >-
+  #     Case-insensitive key of the abbreviation. In shorthand notation, this is
+  #     the first (and only) matched argument. Non-alphanumeric keys must be quoted.
+  keywords:
+    type:
+      - string
+      - slice
+    optional: true
+    comment: >-
+      Keywords to be used as filter. When set, only pages that match at least
+      one of the provided keywords are retrieved.
+  # kind:
+  #   type: select
+  #   optional: true
+  #   default: regular
+  #   comment: >-
+  #     Kind of page collection to use.
+  #   options:
+  #     values:
+  #       - regular
+  #       - related
+  #       - taxonomy
+
+  # # l
+  label:
+    type: string
+    optional: true
+    comment: >-         
+      Assistive label of the element.
+  # lang:
+  #   type: string
+  #   optional: true
+  #   default: markdown
+  #   comment: >-
+  #     Language used to display the code. Use `hugo` to process Hugo (escaped)
+  #     shortcodes and `bookshop` to render a Bookshop component using inline
+  #     YAML data.
+  # # TODO: merge lang
+  lang:
+    type: string
+    optional: true
+    comment: >-
+      Language to be used by the syntax highlighter. For files, the language is
+      derived from the file extension when no language is specified. When
+      rendering code examples with the `example` shortcode, use `hugo` to process
+      Hugo (escaped) shortcodes and `bookshop` to render a Bookshop component
+      using inline YAML data.
+  # link:
+  #   type: string
+  #   optional: false
+  #   comment: >-
+  #     Location of the script source, either an URL for an external script or a
+  #     (relative) path for a local script.
+  link:
+    type:
+      - string
+      - template.URL
+      - url
+    optional: true
+    comment: >-
+      Local page reference or external hyperlink address.
+  link-type:
+    type: select
+    optional: true
+    default: button
+    comment: Style of the link.
+    options:
+      values:
+        - button
+        - link
+  links:
+    type: links
+    optional: true
+    comment: Links to add as buttons. 
+  list:
+    type:
+      - 'page.Pages'
+      - 'resource.Resources'
+      - dict
+    optional: true
+    comment: Array of pages or structured content to be rendered.
+    group: partial
+  loading:
+    type: select
+    optional: true
+    default: eager
+    comment: >-
+      Image loading behavior. The loading of lazily loaded images is deferred
+      until the image is within scrolling range of the viewport. This should
+      reduce the initial loading time of the website. It is recommended to
+      lazily load only those images that are below the page fold.
+    options:
+      values:
+        - lazy
+        - eager
+  # logo:
+  #   type: path
+  #   optional: true
+  #   comment: >-
+  #     Address of the logo image, defaults to the parameter `logo` set in the
+  #     `main` section of the site's parameter configuration.
+
+  # # m
+  max:
+    type: int
+    optional: true
+    comment: Maximum number of elements to display.
+    group: partial
+    options:
+      min: 1
+  media-id:
+    type: string
+    optional: true
+    comment: ID of the asset to be embedded.
+  minimal:
+    type: bool
+    optional: true
+    comment: Renders the element with without a title.
+
+  # # TODO: merge menu
+  # menu:
+  #   type: '*navigation.MenuEntry'
+  #   optional: false
+  #   comment: Menu data to use for the navbar item.
+  # menu:
+  #   type: slice
+  #   optional: true
+  #   comment: Path of the sidebar navigation menu.
+  # # TODO: rename menus
+  # menus:
+  #   type: string
+  #   optional: true
+  #   default: main
+  #   comment: Name of the menu configuration.
+  messages:
+    type: messages
+    optional: true
+    comment: >-
+      Messages to include in the element. Each element is rendered as a card.
+  message:
+    type:
+      - string
+      - template.HTML
+    optional: false
+    comment: Message to display.
+    group: partial
+  mode:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Flag indicating if the image should support color modes. If set, the
+      elements searches for images having a matching color-mode suffix
+      such as `-light` or `-dark`.
+  # # TODO: merge with mode
+  # mode:
+  #   type: bool
+  #   optional: true
+  #   default: true
+  #   comment: >-
+  #     Flag to include a color mode switcher, defaults to `true` when dark mode
+  #     is enabled.
+  more:
+    type: more
+    optional: true
+    comment: >-
+      When set for a card group, a button is added if the list exceeds the
+      maximum number of cards to display.
+
+  # # n
+  name:
+    type: string
+    optional: false
+    comment: >-
+      Name of the code snippet, used to identify the relevant section of the
+      input file.
+  navitem-type:
+    type: select
+    optional: true
+    comment: Type of the item to render.
+    options:
+      values:
+        - accordion
+        - tab-pane
+    group: partial
+  nav-items:
+    type: string
+    optional: true
+    comment: Preprocessed nav items, typically passed by a shortcode to a partial.
+    group: partial
+  nav-titles:
+    type:
+      - slice
+      - '[]string'
+    optional: true
+    comment: Titles of the nav items, used when passing preprocessed nav items.
+    group: partial
+  nested:
+    type: bool
+    optional: true
+    comment: >-
+      If set, retrieves all pages below the section or current page recursively.
+      By default, only first-order childs are retrieved.
+
+  # # o
+  options:
+    type: string
+    optional: true
+    comment: >-
+        Hugo highlighting options, see https://gohugo.io/shortcodes/highlight/#options-1.
+  order:
+    type: select
+    optional: true
+    default: last
+    comment: Order of the illustration.
+    options:
+      values:
+        - first
+        - last
+  # # TODO: remove horizontal-sm & overlay
+  orientation:
+    type: select
+    optional: true
+    default: stacked
+    comment: Placement of the thumbnail or icon.
+    options:
+      values:
+        - stacked
+        - horizontal
+        - horizontal-sm
+        - overlay
+        - none
+  outline:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag indicating the element should use an outline color instead of a fill
+      color.
+  # overlay:
+  #   type: bool
+  #   optional: true
+  #   default: false
+  #   comment: >-
+  #     Flag to indicate if the navbar should render as an overlay on the current
+  #     page.
+  #   group: partial
+  #   release: v0.22.6
+  overlay-mode:
+    type: select
+    optional: true
+    comment: >-
+      Overlay mode of the element, overrides the site's general configuration.
+    options:
+      values:
+        - light
+        - dark
+        - none
+
+  # p
+  padding:
+    type: int
+    optional: true
+    default: 3
+    # parent: cascade
+    comment: >-
+      Padding of the content.
+    options:
+      min: 0
+      max: 5
+  page:
+    type:
+      - '*hugolib.pageState'
+      - '*hugolib.pageForRenderHooks'
+      - '*hugolib.pageForShortcode'
+    optional: false
+    group: partial
+    comment: Context of the current page.
+  paginate:
+    type: bool
+    optional: true
+    comment: >-
+      Flag indicating if pagination should be added to the element, if the
+      list exceeds the maximum number of containing elements to display. 
+    group: partial
+  pagination:
+    type: int
+    optional: true
+    comment: >-
+      Number of elements per page in pagination, overrides site settings.
+    group: partial
+    options:
+      min: 1
+  # paging:
+  #   type: bool
+  #   optional: true
+  #   comment: Whether paging is enabled for the table.
+  #   release: v0.24.13
+  # pagingOptionPerPage:
+  #   type: int
+  #   optional: true
+  #   comment: >-
+  #     Sets the maximum number of rows to display on each page. Requires
+  #     `paging = true`.
+  #   release: v0.27.8 
+  # pagingOptionPageSelect:
+  #   type: string
+  #   optional: true
+  #   comment: >-
+  #     Sets the per page options in the dropdown. Must be an array of integers or
+  #     arrays in the format [label (string), value (int)]. Requires
+  #     `paging = true`. 
+  #   release: v0.27.8 
+  pane:
+    type: select
+    optional: true
+    default: none
+    comment: Style of the panes.
+    options:
+      values:
+        - none
+        - persona
+    group: partial
+  # parent:
+  #   type: bool
+  #   position: 2
+  #   optional: true
+  #   comment: >-
+  #     Flag to filter only arguments that have a parent attribute (either
+  #     `cascade` or `merge`).
+  # # TODO: rename parent
+  # parent:
+  #   type: '*navigation.MenuEntry'
+  #   optional: true
+  #   comment: Parent of the current navbar item.
+  parent-id:
+    type: string
+    optional: false
+    comment: Identification of the parent (e.g. nav control).
+    group: partial
+  path:
+    type: path
+    optional: true
+    comment: >-
+      Path of the page that the element references.
+  # # TODO: merge with path
+  # path:
+  #   type: string
+  #   optional: false
+  #   comment: >-
+  #     Path of the input file. The path is relative to the `basePath` defined in
+  #     the `docs` section of the site's parameters. If the file starts with `./`,
+  #     the path of the repository is used as base path instead.
+  # # TODO: merge with path
+  # path:
+  #   type: path
+  #   optional: false
+  #   comment: Path of the active page.
+  #   group: shortcode
+  placement:
+    type: select
+    optional: true
+    default: top
+    comment: Position of the tooltip.
+    options:
+      values:
+        - top
+        - bottom
+        - left
+        - right
+  plain:
+    type: bool
+    default: false
+    optional: true
+    comment:
+      Flag to indicate if the image should render a plain image instead of an
+      image set. When set, no transformations are applied to the image.
+  # # TODO: rename plain
+  # plain:
+  #   type: bool
+  #   optional: true
+  #   comment: >-
+  #     Renders the navigation item as plain item, ignoring any children.
+  portrait:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to adjust the image ratio from landscape to portrait. The image
+      itself is not rotated, only the crop area is adjusted. Not applicable to
+      vector graphics.
+  position:
+    type:
+      - 'text.Position'
+    optional: true
+    group: partial
+    comment: Filename and position from which the shortcode was called.
+  preheading:
+    type: string
+    optional: true
+    comment: Preheading of the section heading.
+  priority:
+    type: select
+    default: auto
+    optional: true
+    comment: >-
+      Fetch priority of the image. The priority provides a hint to the browser
+      on how it should prioritize the fetching of the image relative to other
+      images. The implementation is experimental and currently only supported by
+      Chrome, Edge, and Opera.
+    options:
+      values:
+        - high
+        - low
+        - auto
+    group: partial
+  prompt:
+    type: string
+    optional: true
+    comment: Prompt override, e.g. `PS C:\Users\User>`.
+  provider:
+    type: string
+    optional: true
+    default: youtube
+    comment: >-
+      Name of the video provider. It should match one of the registered
+      providers in the site's parameters under `videos`.
+
+  # q
+  query-args:
+    type: string
+    optional: true
+    comment: >-
+      Optional query parameters to append to video asset's url. The query string
+      is prepended with a `?` symbol. Only applicable to Cloudinary.
+
+  # r
+  # TODO: check default behavior; add "auto" option
+  ratio:
+    type: select
+    optional: true
+    comment: >-
+      Ratio of the media asset. When the asset is an image, it is resized and
+      cropped (not applicable to vector graphics). For video assets, the padding
+      of the embedded frame is adjusted.
+    options:
+      values:
+        - 1x1
+        - 3x2
+        - 4x3
+        - 16x9
+        - 21x9
+  release-state:
+    type: select
+    optional: true
+    default: new
+    comment: State of the feature.
+    options:
+      values:
+        - new
+        - deprecated
+  relref:
+    type: string
+    optional: true
+    comment: >-
+      Name of the page to link to. Replaces `href` with a relative link if set.
+  responsive:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag indicating if the number of columns should be responsive, defaults to
+      `true`.
+  # reverse:
+  #   type: bool
+  #   optional: true
+  #   default: true
+  #   comment: >-
+  #     If set, returns the page collection in descending order.
+  reverse:
+    type: bool
+    optional: true
+    default: true
+    comment: Sets the sort order to descending.
+
+  # s
+  # scale:
+  #   type: int
+  #   optional: true
+  #   default: 12
+  #   comment: Column width of the illustration, relative to the column width.
+  #   options:
+  #     min: 1
+  #     max: 12
+  scroll:
+    type: bool
+    optional: true
+    comment: >-
+      Enables horizontal scrolling of the cards. By default, the card group
+      wraps any cards beyond the amount of defined columns to a new line. When
+      `scroll` is set to true, a horizontal scroll bar is added instead.
+  # search:
+  #   type: bool
+  #   optional: true
+  #   default: true
+  #   comment: Flag to include a search input.
+  # searchable:
+  #   type: bool
+  #   optional: true
+  #   comment: Toggle the ability to search the dataset.
+  #   release: v0.24.13
+  use-section: 
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Trigger to use the current section as preheading, applies to single pages
+      only. Any preheading values takes precedence.
+  # # TODO: merge section
+  # section:
+  #   type: string
+  #   optional: true
+  #   comment: >-
+  #     Name of site section to use for the page collection. When omitted, the
+  #     current page is used as context instead. Use "/" to retrieve the home
+  #     page.
+  section:
+    type: string
+    optional: true    
+    comment: Name of the content section.
+  separator:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate a horizontal line should be added between items on small
+      screens.
+  shell:
+    type: select
+    optional: true
+    default: bash
+    comment: Type of shell.
+    options:
+      values:
+        - bash
+        - powershell
+        - sql
+  short:
+    type: bool
+    optional: true
+    comment: Flag to indicate the release button should use short notation.
+  show:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate an item should be shown. For elements with multiple
+      items, only one item can be shown at a time.
+  show-markup:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the markup should be output in the HTML.
+  show-preview:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the preview should be output in the HTML.
+  size: 
+    type: int
+    optional: true
+    default: 4
+    comment: Display size of the headline.
+    options:
+      min: 1
+      max: 6
+  sizes:
+    type: string
+    default: 100vw
+    optional: true
+    comment: >-
+      One or more strings separated by commas, indicating the source sizes of an
+      image set.
+  # sort:
+  #   type: string
+  #   optional: true
+  #   default: date
+  #   comment: >-
+  #     Page parameter to sort the page collection by. Both default and custom
+  #     parameters can be used.
+  # sortable:
+  #   type: bool
+  #   optional: true
+  #   comment: Toggle the ability to sort the columns.
+  #   release: v0.24.13
+  sort:
+    type: select
+    comment: Key to sort by.
+    options:
+      values:
+        - date
+        - title
+        - weight
+  spacer:
+    type: bool
+    optional: true
+    comment: >-
+      Inserts a spacer before the card.
+    group: partial
+  spacing:
+    type: bool
+    optional: true
+    default: true
+    comment: >-
+      Flag to add spacing to the inline element.
+  src:
+    type:
+      - string
+      - template.URL
+    optional: false
+    comment: >-
+      Path or url of the image, e.g. `img/example.jpg`. Images with multiple
+      color modes are expected to have a basename that ends with either `-dark`
+      or `-light`.
+  # # TODO: rename to loading-state
+  # state:
+  #   type: select
+  #   optional: true
+  #   comment: >-
+  #     Defines the loading behavior of the script bundle. By default, scripts are
+  #     loaded immediately. Use `async` to process the script in the background.
+  #     Use `defer` to load the script in relative order when the DOM is fully
+  #     built.
+  #   options:
+  #     values:
+  #       - async
+  #       - defer
+  #       - immediate
+  # structure:
+  #   type: string
+  #   position: 0
+  #   optional: false
+  #   comment: >-
+  #     Name of the data file that contains argument definitions. Supported data
+  #     formats include JSON, TOML, YAML, and XML. You can omit the file
+  #     extension. The file should reside in the `data/structures` folder.
+  icon-style:
+    type: string
+    optional: true
+    comment: Icon style.
+  # # TODO: rename to mode
+  # style:
+  #   type: select
+  #   optional: true
+  #   default: light
+  #   comment: Style of the navbar.
+  #   options:
+  #     values:
+  #       - light
+  #       - dark
+  #   group: partial
+  styles:
+    type: styles
+    optional: true
+    comment: >-
+      Styles to apply to the individual cards. Supported elements are `ratio`,
+      `orientation`, `portrait`, and `width`. The styles are rotated when the
+      amount of cards exceeds the available amount of styles.
+  subtle:
+    type: bool
+    optional: true
+    comment: Apply subtle theme colors.
+
+  # t
+  tab:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if an external link should open in a new tab, defaults
+      to setting `main.externalLinks.tab` in the site's parameters.
+  tab-type:
+    type: select
+    optional: true
+    comment: Type of the tab group.
+    options:
+      values:
+        - tabs
+        - pills
+        - underline
+        - callout
+  tags:
+    type:
+      - string
+      - slice
+    optional: true
+    comment: >-
+      Tags to be used as filter. When set, only pages that match at least one of
+      the provided tags are retrieved.
+  text:
+    type:
+      - string
+      - template.HTML
+      - hstring.RenderedString
+      - hstring.HTML
+    optional: false
+    comment: Text to render by the element.
+  # text:
+  #   type:
+  #     - string
+  #     - template.HTML
+  #     - hstring.RenderedString
+  #     - hstring.HTML
+  #   optional: true
+  #   group: partial
+  #   comment: Link description.
+  theme:
+    type: select
+    optional: true
+    comment: Color theme to apply to the element.
+    options:
+      values:
+        - light
+        - dark
+  thumbnail:
+    type: path
+    optional: true
+    comment: >-
+      Thumbnail image url, displayed on top or the left of the element.
+  title:
+    type:
+      - string
+      - hstring.RenderedString
+      - hstring.HTML
+      - template.HTML
+    optional: true
+    comment: >-
+      Title of the element. If the element references a (local) page, the title
+      overrides the referenced page's title.
+  toast-id:
+    type: string
+    optional: true
+    comment: Identifier (`id`) of the toast to display when the button is clicked.
+  tooltip:
+    type: string
+    optional: true
+    comment: >-
+      Text to display in a tooltip. Cannot be used together with 
+      collapse-id. Ignored for active/inactive buttons.
+  transform:
+    type: select
+    optional: false
+    comment: Image transformation.
+    options:
+      values:
+        - fill
+        - fit
+  # # TODO: rename to tab-type
+  # type:
+  #   type: select
+  #   optional: true
+  #   comment: Type of the tab group.
+  #   options:
+  #     values:
+  #       - tabs
+  #       - pills
+  #       - underline
+  #       - callout
+  # # TODO: rename to script-type
+  # type:
+  #   type: select
+  #   default: core
+  #   optional: true
+  #   comment: >-
+  #     Type of script bundle. Critical scripts are included in the page header
+  #     and are loaded immediately. Core scripts are bundled by category and are
+  #     loaded asynchronously. Optional scripts are loaded individually on the
+  #     pages that require them. They use the synchronization method as defined
+  #     in their containing module.
+  #   values:
+  #     - critical
+  #     - core
+  #     - optional
+
+  # u
+  url:
+    type:
+      - string
+      - template.URL
+    optional: true
+    comment: >-
+      Address of the link destination, either a local reference or an external
+      address. Include the `scheme` when referencing an external address, such
+      as `https://google.com`. Local references may include an optional anchor
+      link such as `blog/bootstrap-elements/#docs`.
+  url-host:
+    type: string
+    optional: true
+    comment: >-
+      Host of an URL. For example, the host of the URL
+      'https://example.com/first/second/third.webp' equals 'example.com'.
+  url-dir:
+    type: string
+    optional: true
+    comment: >-
+      All but the last element of an URL extension. For example, the dir of the
+      URL 'https://example.com/first/second/third.webp' equals '/first/second/'.
+  url-file:
+    type: string
+    optional: true
+    comment: >-
+      The last element of an URL extension. For example, the file of the
+      URL 'https://example.com/first/second/third.webp' equals 'third.webp'.
+  user:
+    type: string
+    optional: true
+    comment: User to add to the prompt, e.g. `user`.
+  use-title:
+    type: bool
+    optional: true
+    default: false
+    comment: Sets the title to an HTML header instead of a div.
+
+  # v
+  valign:
+    type: select
+    optional: true
+    comment: >-
+      Defines the vertical card alignment, only applicable in bento layout.
+    options:
+      values:
+        - start
+        - center
+        - end
+  version:
+    type: string
+    optional: false
+    comment: Version string, expects semver notation with a `v` prefix.
+  # version:
+  #   type: string
+  #   optional: true
+  #   comment: >-
+  #     Version of the sidebar navigation, used to define the base URL of
+  #     generated links, together with the page's section.
+  vertical:
+    type: bool
+    default: false
+    optional: true
+    comment: Flag to show vertical tabs instead of horizontal tabs.
+  video:
+    type: video
+    optional: false
+    comment: The video to embed.
+
+  # # w
+  word-wrap:
+    type: bool
+    default: false
+    optional: true
+    comment: Flag to enable word wrapping of tab titles.
+  # wrap:
+  #   type: bool
+  #   optional: true
+  #   comment: >-
+  #     Toggle the last column to wrap to a new row on smaller devices. This
+  #     setting is not compatible with data tables.
+  #   release: v0.28.0
+  wrapper:
+    type: string
+    optional: true
+    comment:
+      Class attribute of the element's wrapper. It supports Bootstrap attributes
+      to modify the styling of the element.
+  width:
+    type: int
+    optional: true
+    default: 8
+    comment: >-
+      Column width of the element. For embedded elements, the width is relative
+      to the parent's container.
+    options:
+      min: 1
+      max: 12
+  # # TODO: rename or merge width
+  # width:
+  #   type: int
+  #   optional: false
+  #   comment: Width of the image in pixels.
+  # # TODO: rename or merge width
+  # width:
+  #   type: select
+  #   optional: true
+  #   default: "100"
+  #   comment: Responsive width of the tab group.
+  #   options:
+  #     values:
+  #       - 50
+  #       - 100
+  #   group: partial

@@ -4,6 +4,7 @@ title: Bootstrap elements
 date: 2023-08-12
 description: Use shortcodes to add common Bootstrap elements with ease.
 tags: ["bootstrap", "shortcode"]
+keywords: featured
 thumbnail:
   url: img/boots.jpg
   author: Nathan Dumlao
@@ -20,7 +21,7 @@ As an example, the following shortcode displays the full text of an abbreviation
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* abbr "CI/CD" */>}}
+{{</* abbr key="CI/CD" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -31,14 +32,14 @@ As an example, the following shortcode displays an accordion with three elements
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
-  {{</* accordion-item header="Accordion Item #1" show="true" */>}}
+  {{</* accordion-item title="Accordion Item #1" show="true" */>}}
     This is the first item's accordion body. It supports HTML content, if enabled in the goldmark
     renderer. The item is shown by adding the value `show` to the `class` argument.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Accordion Item #2" */>}}
+  {{</* accordion-item title="Accordion Item #2" */>}}
     This is the second item's accordion body.
   {{</* /accordion-item */>}}
-  {{</* accordion-item header="Accordion Item #3" */>}}
+  {{</* accordion-item title="Accordion Item #3" */>}}
     This is the third item's accordion body.
   {{</* /accordion-item */>}}
 {{</* /accordion */>}}
@@ -99,7 +100,7 @@ As an example, the following shortcode displays a tooltip for a dark button with
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button color="secondary" tooltip="Click on the inbox to view your unread messages" href="#!" badge="99+" */>}}
+{{</* button color="secondary" tooltip="Click to view your unread messages" href="#!" badge="99+" */>}}
     Inbox
 {{</* /button */>}}
 {{< /example>}}
@@ -126,7 +127,7 @@ As an example, the following shortcode displays a stacked card that links to the
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card path="about" padding="3" class="col-6 mx-auto" color="body-tertiary"
-  header="publication" footer="none" button=true /*/>}}
+  header-style="publication" footer-style="none" button=true /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -136,7 +137,7 @@ As an example, the following shortcode displays a card group of three elements.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card-group padding="3" gutter="3" button=true buttonType="link" cols=2 scroll=true */>}}
+{{</* card-group padding="3" gutter="3" button=true link-type="link" cols=2 scroll=true */>}}
     {{</* card title="Bootstrap framework" icon="fab bootstrap" */>}}
         Build fast, responsive sites with Bootstrap 5. Easily customize your site with the source
         Sass files.
@@ -171,7 +172,7 @@ As an example, the following shortcode displays a button that, when clicked, tri
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button collapse="collapse-1" */>}}
+{{</* button collapse-id="collapse-1" */>}}
     Trigger panel
 {{</* /button */>}}
 
@@ -236,7 +237,7 @@ Use the `file` shortcode to print and highlight the full content of a given inpu
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file path="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{</* file file="./config/_default/languages.toml" id="file-collapse-1" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -297,6 +298,16 @@ This is an {{</* ins */>}}underlined text{{</* /ins */>}}.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Kbd
+
+As an example, the following shortcodes shows a simple CTRL-C command.
+
+<!-- markdownlint-disable MD037 -->
+{{< example >}}
+{{</* kbd "CTRL-C" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Link
 
 As an example, the following shortcodes render links in different formats.
@@ -305,15 +316,15 @@ As an example, the following shortcodes render links in different formats.
 {{< example lang="hugo" >}}
 
 - {{</* link hinode >}}Named link with default settings{{< /link */>}}
-- {{</* link name=hinode cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
-- {{</* link name=hinode cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
+- {{</* link href=hinode cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
+- {{</* link href=hinode cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
 - {{</* link hinode /*/>}}
 - {{</* link href="https://developer.mozilla.org" >}}External link{{< /link */>}}
 - {{</* link href="https://demo.gethinode.com/en/about/" >}}Surrogate external link{{< /link */>}}
 - {{</* link "./projects/another-project" >}}Internal link with title{{< /link */>}}
-- {{</* link url="projects/another-project" /*/>}}
-- {{</* link url="/projects/another-project" /*/>}}
-- {{</* link url="../projects/another-project" case=false /*/>}}
+- {{</* link href="projects/another-project" /*/>}}
+- {{</* link href="/projects/another-project" /*/>}}
+- {{</* link href="../projects/another-project" case=false /*/>}}
 - {{</* link "about" /*/>}}
 - {{</* link "/fr/a-propos/" /*/>}}
 - {{</* link href="/fr/a-propos" force=true >}}About (French){{< /link */>}}
@@ -339,15 +350,15 @@ As an example, the following shortcode displays a tab group with vertically alig
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-  {{</* nav type="pills" vertical="true" */>}}
-    {{</* nav-item header="Nav Item #1" show="true" */>}}
+  {{</* nav tab-type="pills" vertical="true" */>}}
+    {{</* nav-item title="Nav Item #1" show="true" */>}}
       This is the first item's nav body. It supports HTML content, if enabled in the goldmark
       renderer. The item is shown by adding the value `show` to the `class` argument.
     {{</* /nav-item */>}}
-    {{</* nav-item header="Nav Item #2" */>}}
+    {{</* nav-item title="Nav Item #2" */>}}
       This is the second item's nav body.
     {{</* /nav-item */>}}
-    {{</* nav-item header="Nav Item #3" */>}}
+    {{</* nav-item title="Nav Item #3" */>}}
       This is the third item's nav body.
     {{</* /nav-item */>}}
   {{</* /nav */>}}
@@ -360,7 +371,7 @@ As an example, the following shortcode displays a light navigation header.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar id="navbar-sample" path="blog" color="primary" size="md" search="false" menus="sample" title="Brand" mode="false" */>}}
+{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menus="sample" title="Brand" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -446,7 +457,7 @@ As an example, the following shortcode displays a timeline with the file `data/t
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline" background="dark" */>}}
+{{</* timeline data="timeline" background="body-tertiary" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -456,19 +467,19 @@ As an example, the following shortcode displays a button that, when clicked, tri
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* button toast="toast-example-1" */>}}
+{{</* button toast-id="toast-example-1" */>}}
     Show toast 1
 {{</* /button */>}}
 
-{{</* button toast="toast-example-2" */>}}
+{{</* button toast-id="toast-example-2" */>}}
     Show toast 2
 {{</* /button */>}}
 
-{{</* toast id="toast-example-1" header="First title" */>}}
+{{</* toast id="toast-example-1" title="First title" */>}}
     This is the first toast message. It supports `markdown.`
 {{</* /toast */>}}
 
-{{</* toast id="toast-example-2" header="Second title" */>}}
+{{</* toast id="toast-example-2" title="Second title" */>}}
     This is the second toast message. It supports `markdown.`
 {{</* /toast */>}}
 {{< /example >}}
@@ -480,7 +491,8 @@ As an example, the following shortcode displays a tooltip for a colored hyperlin
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Tooltip caption" href="#!" */>}}Tooltip{{</* /tooltip */>}} demonstration
+{{</* tooltip color="primary" title="Tooltip caption" href="#!" */>}}Tooltip{{</* /tooltip */>}}
+demonstration
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -490,6 +502,6 @@ As an example, the following shortcode displays an Elephants video hosted by Clo
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* video host="cloudinary" account="demo" id="elephants" autoplay=true */>}}
+{{</* video provider="cloudinary" account="demo" media-id="elephants" autoplay=true */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

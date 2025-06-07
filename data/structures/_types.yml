@@ -1,0 +1,59 @@
+types:
+  background:
+    backdrop:
+    color:
+    subtle:
+  heading:
+    preheading:
+    title:
+    content:
+    align:
+    arrangement:
+    width:
+    size:
+  illustration:
+    image:
+    icon:
+    ratio:
+    class:
+    anchor:
+    mode:
+    width:
+    image-overlay:
+    hook:
+  input:
+    section:
+    nested:
+    keywords:
+    categories:
+    tags:
+    reverse:
+    sort:
+  items:
+    - title:
+      description:
+  links:
+    - title:
+      url:
+      icon:
+      force:
+  messages:
+    - title:
+      icon:
+      content:
+      link:
+      label:
+  more:
+    title:
+    link:
+  styles:
+    - ratio:
+      orientation:
+      portrait:
+      width:
+  video:
+    provider:
+    account:
+    id:
+    autoplay:
+    query-args:

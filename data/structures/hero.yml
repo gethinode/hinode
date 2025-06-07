@@ -1,0 +1,27 @@
+comment: >-
+  Displays a hero banner, typically placed at the top of the page. The hero
+  supports a heading, featured illustration, and navigation links. You can
+  can also add a background image with an overlay to improve contrast.
+arguments:
+  breadcrumb:
+  heading:
+  background:
+  illustration:
+  link-type:
+  links:
+  align:
+  order:
+  overlay-mode:
+  cover:
+  orientation:
+  width:
+  use-section:
+  use-title:
+  class:
+  padding:
+    default: px-4 px-xxl-0 py-4
+  width:
+    default: 8
+  theme:
+  hook:
+    default: assets/hero-image.html

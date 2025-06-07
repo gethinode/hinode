@@ -4,79 +4,73 @@ comment: >-
   arguments override any page attributes.
 arguments:
   title:
-    type: string
     optional: true
-    comment: >-
-      Title of the card, replaces the title of the referenced page (if any).
   path:
-    type: path
-    optional: true
-    comment: >-
-      Path of the page that the card reference to. If omitted, specify the
-      title, icon, thumbnail, and description (inner content) as needed.
   href:
-    type: url
-    optional: true
-    comment: >-
-      Address for the button or hyperlink.
     group: partial
   class:
-    type: string
-    optional: true
     parent: merge
-    comment: >-
-      Class attribute of the card element, e.g. “w-50”.
   color:
-    type: select
     optional: true
     parent: cascade
-    comment: >-
-      Theme color of the card. By default, no color is specified.
-    options:
-      values:
-        - primary
-        - secondary
-        - success
-        - danger
-        - warning
-        - info
-        - light
-        - dark
-        - white
-        - black
-        - body
-        - body-tertiary
   padding:
-    type: select
-    optional: true
-    default: auto
     parent: cascade
-    comment: >-
-      Padding of the content.
-    options:
-      values:
-        - "0"
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
-        - "auto"
   gutter:
-    type: select
-    optional: true
-    default: "0"
+    default: 0
     parent: cascade
-    comment: >-
-      Gutter between columns in a group.
-    options:
-      values:
-        - "0"
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
+  header-style:
+    parent: cascade
+    release: 1.0.0
+  body-style:
+    parent: cascade
+    release: 1.0.0
+  footer-style:
+    parent: cascade
+    release: 1.0.0
+  description:
+    group: partial
+  loading:
+    parent: cascade
+    group: partial
+  thumbnail:
+  ratio:
+    parent: cascade
+    group: partial
+  portrait:
+    parent: cascade
+    release: v0.24.16
+  alt:
+    release: v0.19.0
+  icon:
+  icon-rounded:
+    release: v1.0.0
+  align:
+    parent: cascade
+    release: v0.23.0
+  scroll:
+    parent: cascade
+    group: partial
+  wrapper:
+  icon-style:
+    release: v1.0.0
+  orientation:
+    parent: cascade
+  subtle:
+    parent: cascade
+    release: v0.23.0
+  button:
+    parent: cascade
+    release: v0.23.0
+  button-label:
+    release: v1.0.0
+  link-type:
+  hook:
+    group: partial
+  sizes:
+    group: partial
+  anchor:
+    release: v0.24.23
+  # deprecated arguments
   header:
     type: select
     optional: true
@@ -90,6 +84,8 @@ arguments:
         - publication
         - tags
         - none
+    deprecated: 1.0.0
+    alternative: header-style
   body:
     type: select
     optional: true
@@ -97,158 +93,37 @@ arguments:
     parent: cascade
     release: v0.24.16
     comment: >-
-      Body of the card. 
+      Body components of the element. 
     options:
       values:
         - full
         - title
         - none
+    deprecated: 1.0.0
+    alternative: body-style
   footer:
     type: select
     optional: true
     default: none
     parent: cascade
     comment: >-
-      Footer components of the card, displayed in small caps.
+      Footer components of the element, displayed in small caps.
     options:
       values:
         - full
         - publication
         - tags
         - none
-  description:
-    type:
-      - string
-      - template.HTML
-    optional: true
-    comment: >-
-      Description of the card.
-    group: partial
-  loading:
-    type: select
-    optional: true
-    parent: cascade
-    default: eager
-    comment: >-
-      Loading behavior of the image. The loading of lazily loaded images is
-      deferred until the image is within scrolling range of the viewport. This
-      should reduce the initial loading time of the website. It is recommended
-      to lazily load only those images that are below the page fold.
-    options:
-      values:
-        - lazy
-        - eager
-    group: partial
-  thumbnail:
-    type: path
-    optional: true
-    comment: >-
-      Thumbnail image url, displayed on top or the left of the card.
-  ratio:
-    type: select
-    optional: true
-    parent: cascade
-    comment: >-
-      Ratio of the thumbnail image, defaults to `16x9` (stacked orientation)
-      or `1x1` (horizontal orientation).
-    options:
-      values:
-        - 1x1
-        - 3x2
-        - 4x3
-        - 16x9
-        - 21x9
-    group: partial
-  portrait:
-    type: bool
-    parent: cascade
-    optional: true
-    default: false
-    release: v0.24.16
-    comment: >-
-      Flag to adjust the ratio from landscape to portrait. The image itself is
-      not rotated, only the crop area is adjusted. Not applicable to vector
-      graphics.
-  alt:
-    type: string
-    optional: true
-    release: v0.19.0
-    comment: >-
-      Alternate text for the thumbnail, uses `title` by default.
-  icon:
-    type: string
-    optional: true
-    comment: >-
-      Font Awesome icon, displayed on top or the left of the card.
+    deprecated: v1.0.0
+    alternative: footer-style
   iconRounded:
     type: bool
     parent: cascade
     optional: true
     release: v0.24.8
+    deprecated: v1.0.0
+    alternative: icon-rounded
     comment: Stack the icon in a round container.
-  align:
-    type: select
-    parent: cascade
-    optional: true
-    default: start
-    release: v0.23.0
-    comment: Icon alignment.
-    options:
-      values:
-        - start
-        - end
-        - center
-  scroll:
-    type: bool
-    parent: cascade
-    optional: true
-    group: partial
-    comment: >-
-      Enables horizontal scrolling of the cards. By default, the card group
-      wraps any cards beyond the amount of defined columns to a new line. When
-      `scroll` is set to true, a horizontal scroll bar is added instead.
-  wrapper:
-    type: string
-    optional: true
-    comment: Element class of the card wrapper.
-  style:
-    type: string
-    parent: cascade
-    optional: true
-    release: v0.23.0
-    comment: Icon style.
-  orientation:
-    type: select
-    optional: true
-    default: stacked
-    parent: cascade
-    comment: Placement of the thumbnail or icon.
-    options:
-      values:
-        - stacked
-        - horizontal
-        - horizontal-sm
-        - overlay
-        - none
-  subtle:
-    type: bool
-    parent: cascade
-    optional: true
-    release: v0.23.0
-    comment: Apply subtle background colors.
-  button:
-    type: bool
-    parent: cascade
-    optional: true
-    release: v0.23.0
-    comment: >-
-      Flag indicating the cards should include a button that links to the provided address.
-  buttonLabel:
-    type: string
-    optional: true
-    release: v0.23.2
-    comment: >-
-      Label of the link button, defaults to the card title.
   buttonType:
     type: select
     parent: cascade
@@ -256,42 +131,28 @@ arguments:
     default: button
     comment: Type of the button element.
     release: v0.23.18
+    deprecated: v1.0.0
+    alternative: link-type
     options:
       values:
         - link
         - button
-  hook:
+  style:
+    type: string
+    parent: cascade
+    optional: true
+    release: v0.23.0
+    comment: Icon style.
+    deprecated: v1.0.0
+    alternative: icon-style
+  buttonLabel:
     type: string
     optional: true
-    comment: Render hook for the image partial.
-    group: partial
-  sizes:
-    type: string
-    default: 100vw
-    optional: true
+    release: v0.23.2
     comment: >-
-      One or more strings separated by commas, indicating the source sizes of an
-      image set.
-    group: partial
-  anchor:
-    type: select
-    optional: true
-    comment: 
-      Anchor of the thumbnail's crop box, defaults to anchor value set in
-      `imaging` section of the site configuration (usually `Smart`).
-    options:
-      values:
-        - TopLeft
-        - Top
-        - TopRight
-        - Left
-        - Center
-        - Right
-        - BottomLeft
-        - Bottom
-        - BottomRight
-        - Smart
-    release: v0.24.23
+      Label of the link button, defaults to the card title.
+    deprecated: v1.0.0
+    alternative: button-label
 body:
   optional: true
   comment: >-

@@ -3,31 +3,10 @@ comment: >-
   languages. 
 arguments:
   user:
-    type: string
-    optional: true
-    comment: User to add to the prompt, e.g. `user`.
   host:
-    type: string
-    optional: true
-    comment: Host to add to the prompt, e.g. `localhost`.
   prompt:
-    type: string
-    optional: true
-    comment: Prompt override, e.g. `PS C:\Users\User>`.
   shell:
-    type: select
-    optional: true
-    default: bash
-    comment: Type of shell.
-    options:
-      values:
-        - bash
-        - powershell
-        - sql
   class:
-    type: string
-    optional: true
-    comment: Class attribute of the command element.
 body:
   type: string
   optional: false

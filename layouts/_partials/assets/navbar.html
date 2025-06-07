@@ -6,16 +6,8 @@
 
 {{/* TODO: consider to drop style arg */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "navbar" "args" . "group" "partial") }}
-    {{ errorf "partial [assets/navbar.html] - Invalid arguments" -}}
-    {{ $error = true }}
-{{ end }}
-
 {{/* Inline partial to render the color mode switcher */}}
-{{- define "partials/inline/navbar-mode.html" -}}
+{{- define "_partials/inline/navbar-mode.html" -}}
     {{- $id := .id | default "navbar-mode" -}}
 
     <li class="d-flex mode-switch align-items-center" id="{{ $id }}">
@@ -29,8 +21,8 @@
 {{- end -}}
 
 {{/* Inline partial to render the version switcher */}}
-{{- define "partials/inline/navbar-versions.html" -}}
-    {{- $size := .size -}}
+{{- define "_partials/inline/navbar-versions.html" -}}
+    {{- $breakpoint := .breakpoint -}}
     {{- $collapsed := .collapsed -}}
     {{- $page := .page -}}
     {{- $baseURL := .baseURL -}}
@@ -38,7 +30,7 @@
     {{- $id := .id -}}
     {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
 
-    <li class="nav-item dropdown {{ if $collapsed }}d-{{ $size }}-none{{ else }}d-none d-{{ $size }}-block{{ end }}">
+    <li class="nav-item dropdown {{ if $collapsed }}d-{{ $breakpoint }}-none{{ else }}d-none d-{{ $breakpoint }}-block{{ end }}">
         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
             {{ if $collapsed }}{{ site.Title }} {{ end }}{{ $version }}
         </a>
@@ -76,14 +68,26 @@
 {{- end -}}
 
 {{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "navbar" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/navbar.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{/* Initialize local arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
-{{- $id := .id | default (printf "navbar-%d" 0) -}}
-{{- $page := .page -}}
+{{- $id := $args.id | default (printf "navbar-%d" 0) -}}
+{{- $page := $args.page -}}
 {{- $baseURL := $page.Scratch.Get "baseURL" -}}
+{{- $breakpoint := or $args.breakpoint $args.size }}
 
 {{- $defaultMenu := "main" -}}
-{{- $menuName := .menus | default $defaultMenu }}
+{{- $menuName := $args.menus | default $defaultMenu }}
 {{- $menus := index site.Menus $menuName -}}
 {{- if or (ne (printf "%T" $menus) "navigation.Menu") (ne (index $menus 0).Menu $menuName) -}}
     {{- if ne $menuName $defaultMenu }}
@@ -91,13 +95,11 @@
     {{- end -}}
 {{- end -}}
 
-{{- $size := .size | default "md" -}}
-{{- $fixed := .fixed | default false -}}
-{{- $overlay := .overlay | default false -}}
-{{- $overlayMode := .overlayMode | default "dark" -}}
+{{- $overlay := $args.overlay | default false -}}
+{{- $overlayMode := $args.overlayMode | default "dark" -}}
 {{- if eq $overlayMode "none" }}{{ $overlayMode = "" }}{{ end }}
-{{- $color := .color | default "" -}}
-{{- $search := .search | default site.Params.navigation.search -}}
+{{- $color := $args.color | default "" -}}
+{{- $search := $args.search | default site.Params.navigation.search -}}
 {{- $searchModal := and $search site.Params.navigation.searchModal -}}
 {{- $enableDarkMode := .mode | default site.Params.main.enableDarkMode -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
@@ -111,7 +113,7 @@
 {{- $enableLanguage := or $page.IsTranslated hugo.IsMultilingual -}}
 {{- $horizontal := default false site.Params.navigation.horizontal -}}
 
-{{- $logo := .logo | default site.Params.navigation.logo -}}
+{{- $logo := $args.logo | default site.Params.navigation.logo -}}
 {{- $logoLight := "" -}}
 {{- $logoDark := "" -}}
 {{- if $enableDarkMode -}}
@@ -148,14 +150,14 @@
 {{ if $logoDark }}{{ $logoDark = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $logoDark) }}{{ end }}
 
 {{- $title := site.Title -}}
-{{- if .title -}}
-    {{- $title = .title -}}
-    {{- if not .logo }}{{ $logo = "" }}{{ end -}}
+{{- if $args.title -}}
+    {{- $title = $args.title -}}
+    {{- if not $args.logo }}{{ $logo = "" }}{{ end -}}
 {{- end -}}
 
-{{- $pre := .Pre -}}
-{{- $post := .Post -}}
-{{- $class := .class -}}
+{{- $pre := $args.pre -}}
+{{- $post := $args.post -}}
+{{- $class := $args.class -}}
 
 {{- $contrast := false -}}
 {{- if in (slice "primary" "secondary" "success" "danger") $color }}{{ $contrast = true }}{{ end -}}
@@ -166,15 +168,15 @@
 {{ end }}
 
 {{/* Main code */}}
-<div class="container-fluid {{ if $fixed }}fixed-top{{ else if $overlay }}navbar-overlay{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
+<div class="container-fluid {{ if $args.fixed }}fixed-top{{ else if $overlay }}navbar-overlay{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
     <nav class="navbar p-4
         {{- if not $overlay }}{{ with $color }} bg-{{ . }}{{ end }}{{ end -}}
-        {{ if $fixed }} navbar-fixed-top{{ end }} navbar-expand-{{ $size -}}
+        {{ if $args.fixed }} navbar-fixed-top{{ end }} navbar-expand-{{ $args.breakpoint -}}
         {{ if $contrast }} navbar-contrast{{ end }}"
         {{ if $overlay }}
         data-bs-theme="{{ $overlayMode }}"
-        {{ if $fixed }}data-bs-overlay="{{ $overlayMode }}"{{ end }}
+        {{ if $args.fixed }}data-bs-overlay="{{ $overlayMode }}"{{ end }}
         {{ if $color }}data-navbar-color="{{ $color }}"{{ end }}
         {{ end }}        
         >
@@ -195,7 +197,7 @@
                 </div>
         
                 {{/* Insert the brand logo or name */}}
-                <div class="{{ if (or $logoLight $logo) }}mx-auto{{ else }}flex-grow-1 flex-{{ $size }}-grow-0{{ end }}">
+                <div class="{{ if (or $logoLight $logo) }}mx-auto{{ else }}flex-grow-1 flex-{{ $args.breakpoint }}-grow-0{{ end }}">
                     <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
                         {{- if (and $logoLight $logoDark) -}}
                             {{ $width := partial "utilities/GetWidth.html" (dict "path" $logoLight "height" 30) }}
@@ -224,7 +226,7 @@
             <div class="navbar-collapse collapse" id="{{ $id }}-collapse">
                 {{/* Insert search input */}}
                 {{- if and $search (not $searchModal) }}
-                    {{ partial "assets/search-input.html" (dict "class" (printf "mt-4 mt-%s-0" $size)) }}
+                    {{ partial "assets/search-input.html" (dict "class" (printf "mt-4 mt-%s-0" $args.breakpoint)) }}
                 {{ end -}}
                 
                 {{/* Render top-menu items (maximum depth of 2) */}}
@@ -233,7 +235,7 @@
                         {{ if $menu.Params.spacing }}
                             <li class="nav-item flex-grow-1"></li>
                         {{ else }}
-                            <li class="nav-item {{ if .HasChildren }} dropdown{{ if $horizontal }} dropdown-horizontal-{{ $size }}{{ end }}{{ end }}">
+                            <li class="nav-item {{ if .HasChildren }} dropdown{{ if $horizontal }} dropdown-horizontal-{{ $args.breakpoint }}{{ end }}{{ end }}">
                                 {{- partial "assets/navbar-item.html" (dict "menu" $menu "page" $page) -}}
                                 {{- if .HasChildren -}}
                                     <ul class="dropdown-menu">
@@ -248,7 +250,7 @@
     
                     {{/* Insert divider if applicable */}}
                     {{- if and $menus (or $enableLanguage $enableVersions) -}}
-                        <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block me-auto">
+                        <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $args.breakpoint }}-block me-auto">
                             <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
                         </li>
                         <li><hr class="dropdown-divider-bg"></li>
@@ -256,18 +258,18 @@
     
                     {{/* Insert version switcher */}}
                     {{- if $enableVersions -}}
-                        {{- partial "inline/navbar-versions.html" (dict "page" $page "size" $size "collapsed" true "id" .id "baseURL" $baseURL) -}}
-                        {{- partial "inline/navbar-versions.html" (dict "page" $page "size" $size "collapsed" false "id" .id "baseURL" $baseURL) -}}
+                        {{- partial "inline/navbar-versions.html" (dict "page" $page "breakpoint" $args.breakpoint "collapsed" true "id" .id "baseURL" $baseURL) -}}
+                        {{- partial "inline/navbar-versions.html" (dict "page" $page "breakpoint" $args.breakpoint "collapsed" false "id" .id "baseURL" $baseURL) -}}
                     {{- end -}}
 
                     {{/* Insert language switcher if applicable */}}
                     {{- if $enableLanguage -}}
                         {{- $currentLang := $page.Language.Lang -}}
                         <li class="nav-item dropdown me-auto">
-                            <a class="nav-link dropdown-toggle d-{{ $size }}-none" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle d-{{ $args.breakpoint }}-none" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
                                 {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}&nbsp;{{ T "languageSwitcherLabel" }}
                             </a>
-                            <a class="nav-link dropdown-toggle d-none d-{{ $size }}-block" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle d-none d-{{ $args.breakpoint }}-block" role="button" data-bs-toggle="dropdown" aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
                                 {{- partial "assets/icon.html" (dict "icon" "fas globe fa-fw" "spacing" false) }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end " id="language-selector" data-translated="{{ $page.IsTranslated }}">
@@ -290,22 +292,22 @@
                                     
                     {{/* Insert color mode switcher */}}
                     {{- if $enableDarkMode -}}
-                        {{- partial "inline/navbar-mode.html" (dict "size" $size "collapsed" true "id" .id) -}}
+                        {{- partial "inline/navbar-mode.html" (dict "size" $args.breakpoint "collapsed" true "id" .id) -}}
                     {{- end -}}
 
                     {{/* Insert modal search button */}}
                     {{- if $searchModal }}
-                        <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $size }}-block me-auto">
+                        <li class="nav-item py-2 py-md-1 col-12 col-md-auto d-none d-{{ $args.breakpoint }}-block me-auto">
                             <div class="vr d-none d-md-flex h-100 mx-md-2"></div>
                         </li>
                         <li><hr class="dropdown-divider-bg"></li>
     
-                        <li class="d-{{ $size }}-none">
+                        <li class="d-{{ $args.breakpoint }}-none">
                             <a class="nav-link" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
                             {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}&nbsp;{{ T "ui_search" }}
                             </a>
                         </li>
-                        <li class="d-none d-{{ $size }}-block">
+                        <li class="d-none d-{{ $args.breakpoint }}-block">
                             <a class="nav-link" role="button" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="{{ T "ui_search" }}" aria-expanded="false">
                             {{ partial "assets/icon.html" (dict "icon" "fas magnifying-glass fa-fw") }}
                             </a>

@@ -7,9 +7,9 @@
     {{ errorf "Missing markdown link destination,  see '%s'" .Page.File.Path }}
 {{ else }}
     {{ partial "assets/link.html" (dict 
-        "destination" .Destination
-        "page" .Page
-        "text" .Text 
+        "href"  .Destination
+        "page"  .Page
+        "text"  .Text 
         "title" .Title
     ) }}
 {{- end }}

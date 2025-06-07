@@ -84,7 +84,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     disabled = false
     simple = true
 
-  [privacy.twitter]
+  [privacy.x]
     disabled = false
     enableDNT = true
     simple = true
@@ -100,7 +100,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 [services]
   [services.instagram]
     disableInlineCSS = true
-  [services.twitter]
+  [services.x]
     disableInlineCSS = true
   [services.googleAnalytics]
     # ID = "G-xxxxxxxxxx"
@@ -138,6 +138,28 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.mounts]]
     source = "static"
     target = "static"
+  [[module.mounts]]
+    source = 'component-library'
+    target = 'layouts/partials/bookshop'
+    includeFiles = ['**/*.hugo.html']
+  [[module.mounts]]
+    source = 'component-library'
+    target = 'data/structures'
+    includeFiles = ['**/*.bookshop.yml']
+  [[module.mounts]]
+    source = 'component-library'
+    target = 'assets/bookshop'
+  [[module.mounts]]
+    source = 'component-library'
+    target = 'assets/scss/modules/bookshop'
+    includeFiles = ['**/*.scss']
+    excludeFiles = ['bookshop.scss']
+  [[module.mounts]]
+    source = 'component-library/bookshop.scss'
+    target = 'assets/scss/bookshop.scss'
+  [[module.mounts]]
+    source = 'component-library/helpers'
+    target = 'layouts/partials/_bookshop/helpers'
   # ensures main package.json is always available, even when using workspaces
   # in workspaces, the package.json is pointing to the first imported module
   [[module.mounts]]
@@ -148,13 +170,15 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     target = "assets/config/netlify.toml"
 # toml-docs-start modules
   [[module.imports]]
+    path = "github.com/cloudcannon/bookshop/hugo/v3"
+  [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap"
   [[module.imports]]
     path = "github.com/gethinode/mod-csp"
   [[module.imports]]
     path = "github.com/gethinode/mod-flexsearch/v2"
   [[module.imports]]
-    path = "github.com/gethinode/mod-fontawesome"
+    path = "github.com/gethinode/mod-fontawesome/v2"
   [[module.imports]]
     path = "github.com/gethinode/mod-google-analytics"
   [[module.imports]]
@@ -164,9 +188,11 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.imports]]
     path = "github.com/gethinode/mod-lottie"
   [[module.imports]]
+    path = "github.com/gethinode/mod-mermaid"
+  [[module.imports]]
     path = "github.com/gethinode/mod-simple-datatables"
   [[module.imports]]
-    path = "github.com/gethinode/mod-utils/v2"
+    path = "github.com/gethinode/mod-utils/v3"
 # toml-docs-end modules
 
 # toml-docs-start segments

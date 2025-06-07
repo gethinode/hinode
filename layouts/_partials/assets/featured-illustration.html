@@ -1,0 +1,58 @@
+{{/* 
+    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "featured-illustration" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/featured-illustration.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize local arguments */}}
+
+{{ $icon := partial "utilities/GetTargetPath.html" (dict "path" $args.icon "page" $args.page) }}
+{{ $image := partial "utilities/GetTargetPath.html" (dict "path" $args.image "page" $args.page) }}
+{{- $wrapper := $args.wrapper -}}
+{{ if $image }}{{ $wrapper = print "img-wrap " (or $wrapper "mx-auto") }}{{ end -}}
+{{- $class := $args.class -}}
+
+{{ if $icon }}
+    {{ if eq (lower (path.Ext $icon)) ".json" }}
+        {{ if site.Params.env_bookshop_live }}
+            <i>Animation preview not supported</i>
+        {{ else }}
+            {{ partial "assets/animation.html" (dict
+                "data" $icon
+                "mode" $args.mode
+                "loop" false
+                "hover" true
+                "class" "col-6 mx-auto text-center"
+            ) }}
+        {{ end }}
+    {{ else }}
+        {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $wrapper) }}
+    {{ end }}
+{{ else if $image }}
+    {{ if not (hasSuffix $image "svg") }}{{ $class = printf "%s rounded" $class }}{{ end }}
+    {{ partial "assets/live-image.html" (dict
+        "src"      $image
+        "anchor"   $args.anchor
+        "ratio"    $args.ratio
+        "wrapper"  $wrapper
+        "class"    $class
+        "title"    $args.title
+        "sizes"    $args.sizes
+        "priority" "high"
+        "mode"     $args.mode
+    ) }}
+{{ end }}

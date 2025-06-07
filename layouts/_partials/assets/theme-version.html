@@ -6,7 +6,7 @@
 
 {{/* TODO: merge with version.html */}}
 
-{{- define "partials/inline/mod.html" -}}
+{{- define "_partials/inline/mod.html" -}}
     {{- $file := "go.mod" -}}
     {{- $regex := printf `github.com/gethinode/hinode v.*(\r\n|\r|\n)` -}}
     {{- $match := findRE $regex (readFile $file) -}}
@@ -20,7 +20,7 @@
     {{- return $result -}}
 {{- end -}}
 
-{{- define "partials/inline/package.html" -}}
+{{- define "_partials/inline/package.html" -}}
     {{- $file := "data/package-hinode.json" -}}
     {{ $data := dict }}
     {{ $version := "" }}

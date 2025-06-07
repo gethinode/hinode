@@ -4,43 +4,36 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false -}}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "command" "args" .Params) }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
+{{ $symbols := dict 
+    "bash"       (dict "prompt" "$"    "contPrompt" ">"  "contString" "\\")
+    "powershell" (dict "prompt" "PS>"  "contPrompt" ">>" "contString" "`")
+    "sql"        (dict "prompt" "sql>" "contPrompt" "->" "contString" "(con)")
+}}
 
 {{/* Initialize arguments */}}
-{{- $host := .Get "host" | default "" -}}
-{{- $user := .Get "user" | default "" -}}
-{{- $prompt := .Get "prompt" | default "" -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "command" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/command.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+{{- end -}}
+
+{{/* Initialize local arguments */}}
+{{- $prompt := $args.prompt | default (index (index $symbols $args.shell) "prompt") -}}
+{{- $contPrompt := index (index $symbols $args.shell) "contPrompt" -}}
+{{- $contString := index (index $symbols $args.shell) "contString" -}}
 {{- $filter := "(out)" -}}
 {{- $input := trim .Inner " \t\r\n" -}}
-{{- $class := .Get "class" | default "" -}}
-
-{{- $shell := lower (.Get "shell") | default "bash" -}}
-{{- $continuationPrompt := ">" -}}
-{{- $continuationStr := "\\" -}}
-{{- if eq $shell "powershell" -}}
-    {{- if not $prompt }}{{ $prompt = "PS>" }}{{ end -}}
-    {{- $continuationPrompt = ">>" -}}
-    {{- $continuationStr = "`" -}}
-{{- else if eq $shell "sql" -}}
-    {{- if not $prompt }}{{ $prompt = "sql>" }}{{ end -}}
-    {{- $continuationPrompt = "->" -}}
-    {{- $continuationStr = "(con)" -}}
-{{- else -}}
-    {{- $shell = "bash" -}}
-    {{- if not $prompt }}{{ $prompt = "$" }}{{ end -}}
-    {{- if (and ($host) ($user)) -}}
-        {{- $prompt = printf "[%s@%s] %s" $user $host $prompt -}}
-    {{- end -}}
+{{- if (and (eq $args.shell "bash") $args.host $args.user) -}}
+    {{- $prompt = printf "[%s@%s] %s" $args.user $args.host $prompt -}}
 {{- end -}}
 
 {{/* Main code */}}
-{{ if not $error }}
+{{ if not $args.err }}
     {{- $lines := split $input "\n" -}}
     {{- $prefix := "" -}}
     {{- $prevLine := "" -}}
@@ -49,36 +42,36 @@
         {{- $line = trim $line " \t\r\n" -}}
         {{- if hasPrefix $line $filter -}}
             {{- $prefix = printf "%s<span></span>" $prefix -}}
-            {{- if eq $shell "sql" -}}
+            {{- if eq $args.shell "sql" -}}
                 {{- $line = printf "--%s" (strings.TrimPrefix $filter $line) -}}
             {{- else -}}
                 {{- $line = printf "#%s" (strings.TrimPrefix $filter $line) -}}
             {{- end -}}
-        {{- else if (strings.HasSuffix $prevLine $continuationStr) -}}
-            {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $continuationPrompt -}}
+        {{- else if (strings.HasSuffix $prevLine $contString) -}}
+            {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $contPrompt -}}
         {{- else -}}
             {{- $prefix = printf "%s<span data-prompt=\"%s\"></span>" $prefix $prompt -}}
         {{- end -}}
         {{- $prevLine = $line -}}
-        {{- if (and (eq $shell "sql") (strings.HasSuffix $line $continuationStr)) -}}
-            {{- $line = strings.TrimSuffix $continuationStr $line -}}
+        {{- if (and (eq $args.shell "sql") (strings.HasSuffix $line $contString)) -}}
+            {{- $line = strings.TrimSuffix $contString $line -}}
         {{- end -}}
         {{- $refined = printf "%s\n%s" $refined $line -}}
     {{- end -}}
 
     {{- $refined := trim $refined "\r\n" -}}
-    {{- $output := (transform.Highlight $refined $shell | safeHTML) -}}
+    {{- $output := (transform.Highlight $refined $args.shell | safeHTML) -}}
     {{- $insert := printf "<span class=\"command-line-prompt\">%s</span><span class=\"line\">" $prefix -}}
     {{- $output := (replace $output ("<span class=\"line\">" | safeHTML) $insert 1 | safeHTML) -}}
 
-    {{- if eq $shell "sql" -}}
+    {{- if eq $args.shell "sql" -}}
         {{- $output = (replace $output "<span class=\"c1\">--" "<span class=\"c1\">" | safeHTML) -}}
     {{- else -}}
         {{- $output = (replace $output "<span class=\"c1\">#" "<span class=\"c1\">" | safeHTML) -}}
         {{- $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) -}}
     {{- end -}}
 
-    <div class="mb-3 syntax-highlight{{ with $class }} {{ . }}{{ end }}">
+    <div class="mb-3 syntax-highlight{{ with $args.class }} {{ . }}{{ end }}">
         {{- $output -}}
     </div>
 {{ end }}

@@ -3,9 +3,16 @@ comment: >-
  indicate if it is a new or deprecated feature.
 arguments:
   version:
-    type: string
-    optional: false
-    comment: Version string, expects semver notation with a `v` prefix.
+  release-state:
+    release: v1.0.0
+  short:
+  button-size:
+    release: v1.0.0
+  class:
+  inline:
+  link-type:
+    release: v1.0.0
+  # deprecated arguments
   state:
     type: select
     optional: true
@@ -15,10 +22,8 @@ arguments:
       values:
         - new
         - deprecated
-  short:
-    type: bool
-    optional: true
-    comment: Flag to indicate the release button should use short notation.
+    deprecated: v1.0.0
+    alternative: release-state
   size:
     type: select
     optional: true
@@ -29,15 +34,8 @@ arguments:
         - sm
         - md
         - lg
-  class:
-    type: string
-    optional: true
-    comment: Class attribute of the button element.
-  inline:
-    type: bool
-    optional: true
-    default: false
-    comment: Flag to render the release button inline.
+    deprecated: v1.0.0
+    alternative: button-size
   type:
     type: select
     optional: true
@@ -47,3 +45,5 @@ arguments:
       values:
         - link
         - button
+    deprecated: v1.0.0
+    alternative: link-type

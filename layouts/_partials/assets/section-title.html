@@ -1,0 +1,108 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+{{/* Initialize arguments */}}
+ {{ $args := partial "utilities/InitArgs.html" (dict "structure" "section-title" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/section-title.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{/* Initialize local arguments */}}
+{{- $size := (or .size site.Params.modules.bookshop.title.size) | default 4 -}}
+{{- $arrangement := (or .arrangement site.Params.modules.bookshop.title.arrangement) | default "above" -}}
+{{- $headingStyle := (or .headingStyle site.Params.modules.bookshop.title.headingStyle) | default "display" -}}
+{{- $bodyStyle := (or .bodyStyle site.Params.modules.bookshop.title.bodyStyle) | default "lead text-muted" -}}
+{{- $preheading := $args.heading.preheading }}
+{{- $title := $args.heading.title }}
+
+{{ if and (not $preheading) $args.section }}
+    {{ $preheading = page.CurrentSection.Name }}
+{{ end }}
+
+{{ if site.Params.main.titleCase }}
+    {{ $preheading = title $preheading }}
+    {{ $title = title $title }}
+{{ end }}
+
+{{- $breakpoint := page.Scratch.Get "breakpoint" -}}
+
+{{ define "_partials/assets/section-title-header.html" }}
+    {{ $headingStyle := .headingStyle }}
+    {{ if (index . "use-title") }}
+        {{ $title := .title | page.RenderString }}
+        {{ $label := trim (replaceRE "\r\n?|\n" " " ($title | plainify)) " " }}
+        <h1 id="{{ anchorize .title }}" {{ if ne $title $label }}aria-label="{{ $label }}"{{ end -}}        
+            class="{{ $headingStyle }}-{{ .size }}{{ with .color }} text-{{ . }}{{ end }} pt-1">{{ .title | page.RenderString | safeHTML }}</h1>
+    {{ else }}
+        <div id="{{ anchorize .title }}" class="{{ $headingStyle }}-{{ .size }}{{ with .color }} text-{{ . }}{{ end }} pt-1">{{ .title | page.RenderString | safeHTML }}</div>
+    {{ end }}
+{{ end }}
+
+<!-- Main code -->
+<div class="text-{{ $args.heading.align }}{{ with $args.class }} {{ . }}{{ end }} col col-12 col-md-{{ $args.heading.width }}">
+    {{ if and $preheading (eq $arrangement "first") }}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.next }}-2 p-0">
+                    {{ with $preheading }}<p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">{{ . | page.RenderString | safeHTML }}</p>{{ end }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.prev }}-8 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 p-0">
+                    {{ with $title }}{{ partial "assets/section-title-header.html" (dict "use-title" $args.useTitle "title" . "headingStyle" $headingStyle "color" $args.color "size" $size) }}{{ end }}
+                    {{ with $args.heading.content }}<div class="{{ $bodyStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
+                    {{ if .links }}{{ partial "assets/links.html" (dict "page" $args.page "links" $args.links "align" $args.heading.align "justify" $args.justify "link-type" $args.type) }}{{ end }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.prev }}-4 col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 p-0 ps-{{ $breakpoint.prev }}-4">
+                    {{ partial "assets/featured-illustration.html" (dict 
+                        "page"    page
+                        "icon"    $args.icon
+                        "image"   $args.image
+                        "anchor"  $args.anchor
+                        "mode"    true
+                        "sizes"   "20vw"
+                        "wrapper" (printf "col-4 col-%s-12 mx-auto pt-4 pt-%s-0" $breakpoint.prev $breakpoint.prev)
+                        "title"   (T "heroImage")
+                        "mode"    $args.mode
+                    ) }}
+                </div>
+            </div>
+        </div>
+
+    {{/* Place above */}}
+    {{ else if or $args.icon $args.image }}
+        <div class="container-fluid">
+            <div class="row p-0">
+                <div class="col-12 col-{{ $breakpoint.current }}-10 p-0">
+                    {{ with $preheading }}<p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">{{ . | page.RenderString | safeHTML }}</p>{{ end }}
+                    {{ with $title }}{{ partial "assets/section-title-header.html" (dict "use-title" $args.useTitle "title" . "headingStyle" $headingStyle "color" $args.color "size" $size) }}{{ end }}
+                    {{ with $args.heading.content }}<div class="{{ $bodyStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
+                    {{ if .links }}{{ partial "assets/links.html" (dict "page" $args.page "links" $args.links "align" $args.heading.align "justify" $args.justify "link-type" $args.type) }}{{ end }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-2 p-0 pt-2 text-center">
+                    {{ partial "assets/featured-illustration.html" (dict 
+                        "page"    page
+                        "icon"    $args.icon
+                        "image"   $args.image
+                        "anchor"  $args.anchor
+                        "mode"    true
+                        "ratio"   $args.ratio
+                        "sizes"   "20vw"
+                        "wrapper" "mx-auto"
+                        "title"   (T "heroImage")
+                        "mode"    $args.mode
+                    ) }}
+                </div>
+            </div>
+        </div>
+    {{ else }}
+        {{ with $preheading }}<p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">{{ . | page.RenderString | safeHTML }}</p>{{ end }}
+        {{ with $title }}{{ partial "assets/section-title-header.html" (dict "use-title" $args.useTitle "title" . "headingStyle" $headingStyle "color" $args.color "size" $size) }}{{ end }}
+        {{ with $args.heading.content }}<div class="{{ $bodyStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
+        {{ if $args.links }}{{ partial "assets/links.html" (dict "page" $args.page "links" $args.links "align" $args.heading.align "justify" $args.justify "link-type" $args.type) }}{{ end }}
+    {{ end }}
+</div>

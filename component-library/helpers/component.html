@@ -1,0 +1,69 @@
+{{/* Adapted from https://github.com/CloudCannon/bookshop/blob/main/hugo/v3/core/helpers/component.html */}}
+
+{{/*
+    Renders a single Bookshop component, 
+    wrapping in in a live editing context tag.
+
+    Expects a slice:
+    [
+        <string>, # Component name
+        <_>       # Component props
+    ]
+*/}}
+
+{{- $component_name := index . 0 -}}
+{{- $component_props := index . 1 -}}
+{{- $class := index . 2 | default "p-0" -}}
+{{- $bgclass := index . 3 | default "" -}}
+
+{{- $component_path := partial "_bookshop/helpers/component_key" $component_name -}}
+{{- $flat_component_path := partial "_bookshop/helpers/flat_component_key" $component_name -}}
+
+{{- $resolved_component := false -}}
+{{- if templates.Exists ( printf "_partials/%s" $component_path ) -}}
+    {{- $resolved_component = $component_path -}}
+{{- else if templates.Exists ( printf "_partials/%s" $flat_component_path ) -}}
+    {{- $resolved_component = $flat_component_path -}}
+{{- end -}}
+
+{{- if $resolved_component -}}
+    {{- $id := index $component_props "id" -}}
+    {{- $cover := index $component_props "cover" -}}
+    {{- $background := index $component_props "background" -}}
+    {{- $backdrop := "" -}}
+    {{- $style := index $component_props "wrapper" -}}
+    {{- $wrapper := $style }}
+    {{ with $background }}
+        {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $style) }}
+        {{ if reflect.IsMap $background }}
+            {{ with $background.backdrop }}{{ $wrapper = "" }}{{ $backdrop = . }}{{ end }}
+        {{ end }}
+    {{ end }}
+    {{/* warnf "wrapper: '%s'" $wrapper */}}
+    {{- $theme := index $component_props "theme" -}}
+    {{- $overlayMode := (or (index $component_props "overlay-mode") page.Params.overlayMode) | default "dark" -}}
+    {{ if not $backdrop }}{{ $overlayMode = page.Params.overlayMode }}{{ end }}
+    {{ if eq $overlayMode "none" }}{{ $overlayMode = "" }}{{ end }}
+    
+    {{ (printf "<!--bookshop-live name(%s)-->" $component_name) | safeHTML }}
+    <section {{ with $id }}id="{{ . }}" {{ end }}class="{{ $component_name }} container-fluid {{ $class }} {{ with $wrapper }}{{ . }}{{ end -}}
+        {{- if and $backdrop $overlayMode }} background-container{{ end -}}
+        {{- if $cover }} section-cover d-flex align-items-center{{ end }}" 
+        {{ with $overlayMode -}}
+            data-bs-theme="{{ . }}"
+            data-bs-overlay="{{ . }}"
+        {{- else -}}
+        {{- with $theme }}data-bs-theme="{{ . }}"{{ end -}}
+        {{- end -}}
+        >
+        {{- if $backdrop -}}
+            {{ partial "assets/live-image.html" (dict "src" $backdrop "class" (printf "background-img-fluid %s" $bgclass) "title" (T "backgroundImage")) }}
+        {{- end -}}
+        {{ partial $resolved_component $component_props }}
+    </section>
+    {{ "<!--bookshop-live end-->" | safeHTML }}
+{{- else -}}
+    {{- $file_loc := slicestr $component_path 9 -}}
+    {{- $flat_file_loc := slicestr $flat_component_path 9 -}}
+    {{- partial "_bookshop/errors/err" (printf "Component \"%s\" does not exist.\n     Create this component by placing a file in your bookshop at %s or %s" $component_name $file_loc $flat_file_loc) -}}
+{{- end -}}

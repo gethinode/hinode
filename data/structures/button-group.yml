@@ -2,13 +2,7 @@ comment: >-
   Displays a group of buttons. Add inner <button> elements for each button.
 arguments:
   label:
-    type: string
-    optional: true
-    comment: Assistive label for the button group.
   aria-label:
-    type: string
-    optional: true
-    comment: Alias for label.
 body:
   type: string
   optional: false

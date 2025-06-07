@@ -1,22 +1,36 @@
+{{/* 
+    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
 {{/* Initialize arguments */}}
-{{- $page := .page -}}
-{{- $url := .url -}}
-{{- $ratio := .ratio -}}
-{{- $portrait := .portrait -}}
-{{- $height := .height -}}
-{{- $width := .width -}}
-{{- $plain := .plain | default false }}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "image-dimension" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/helpers/image-dimension.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize local arguments */}}
+{{- $src := $args.src -}}
+{{- $height := or $args.imageHeight $args.height -}}
+{{- $width := or $args.imageWidth $args.width -}}
 {{- $targetURL := "" -}}
 {{- $set := "" -}}
-{{- $imageset := .imageset | default false }}
-{{- $anchor := .anchor | default "" -}}
 
 {{/* Split url into base and anchor when applicable (only relevant for vector images) */}}
-{{- $segments := split $url "#" -}}
+{{- $segments := split $src "#" -}}
 {{- if gt (len $segments) 2 -}}
-    {{- errorf "Invalid path or url: %q" $url -}}
+    {{- errorf "Invalid path or url: %q" $src -}}
 {{- else if eq (len $segments) 2 }}
-    {{- $url = index $segments 0 -}}
+    {{- $src = index $segments 0 -}}
 {{- end -}}
 
 {{/* Identify image provider */}}
@@ -27,7 +41,7 @@
 {{ range $provider, $val := site.Params.images }}
     {{ if not $hook }}    
         {{ with index $val "host" }}
-            {{ if (findRE . (urls.Parse $url).Hostname) }}
+            {{ if (findRE . (urls.Parse $src).Hostname) }}
                 {{ $hook = $provider }}
                 {{ with index $val "account" }}{{ $account = . }}{{ end }}
                 {{ with index $val "rewrite" }}{{ $rewrite = . }}{{ end }}
@@ -40,7 +54,7 @@
 
 {{/* Rewrite the origin URL if applicable */}}
 {{ if $rewrite }}
-    {{ $url = partial "assets/helpers/image-rewrite.html" (dict "url" $url "account" $account "container" $container "hook" $hook) }}
+    {{ $src = partial "assets/helpers/image-rewrite.html" (dict "src" $src "account" $account "container" $container "hook" $hook) }}
 {{ end }}
 
 {{/* Define image dimensions */}}
@@ -49,12 +63,12 @@
 {{- $img := "" -}}
 {{- $data := "" -}}
 {{ $transform := "" }}
-{{- if hasSuffix $url "svg" -}}
-    {{- $res = partial "utilities/GetResource.html" (dict "url" $url "page" $page) -}}
+{{- if hasSuffix $src "svg" -}}
+    {{- $res = partial "utilities/GetResource.html" (dict "url" $src "page" $args.page) -}}
     {{ if not $res }}
-        {{- $targetURL := partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $url)) -}}
+        {{- $targetURL := partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
         {{- if not (fileExists (path.Join "/static" $targetURL)) -}}
-            {{ warnf "Cannot find vector image resource: %q" $url -}}
+            {{ warnf "Cannot find vector image resource: %q" $src -}}
         {{ else }}
             {{ $width := string (partial "utilities/GetWidth.html" (dict "path" $targetURL "height" 500)) }}
             {{ if $width }}
@@ -66,18 +80,18 @@
     {{ else if eq (string $res.MediaType) "image/svg+xml" }}
         {{ $data = $res.Content }}
     {{ else }}
-        {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $url -}}
+        {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $src -}}
     {{ end }}
-{{ else if $ratio }}
+{{ else if $args.ratio }}
     {{ $transform = "fill" }}
-    {{ $dims = partial "assets/helpers/GetDimension.html" (dict "ratio" $ratio) }}
-    {{ if not $dims }}{{ errorf "partial [assets/image.html] - Cannot find dimension data: %s" $ratio }}{{ end }}
+    {{ $dims = partial "assets/helpers/GetDimension.html" (dict "ratio" $args.ratio) }}
+    {{ if not $dims }}{{ errorf "partial [assets/image.html] - Cannot find dimension data: %s" $args.ratio }}{{ end }}
 {{ else if (and $height $width) }}
     {{ $transform = "fill" }}
     {{ $dims = slice (printf "%dx%d" $width $height) }}
-{{ else if not $plain }}
+{{ else if not $args.plain }}
     {{ $transform = "fit" }}
-    {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
+    {{- $res := partial "utilities/GetImage.html" (dict "url" $src "page" $args.page) -}}
     {{ if and $res $res.resource }}
         {{ $img = $res.resource }}
         {{ if $res.mirror }}{{ $class = printf "%s mirrorred" $class }}{{ end }}
@@ -91,8 +105,8 @@
 {{ end }}
 
 {{/* Derive image width and height */}}
-{{ if not $plain }}
-    {{ if $portrait }}
+{{ if not $args.plain }}
+    {{ if $args.portrait }}
         {{ with $dims }}
             {{ $newDims := slice }}
             {{ range $dim := . }}
@@ -118,27 +132,27 @@
 {{ end }}
 
 {{/* Generate image url */}}
-{{ if or (hasSuffix $url "svg") $plain }}
-    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $url)) -}}
+{{ if or (hasSuffix $src "svg") $args.plain }}
+    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
 {{ else }}
     {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
-        "url" $url
-        "img" $img
-        "dims" ($dims | last 1)
-        "anchor" $anchor
-        "transform" $transform
-        "hook" $hook
-        "format" "png"
-        "includeWidth" false
+        "src"           $src
+        "img"           $img
+        "dims"          ($dims | last 1)
+        "anchor"        $args.anchor
+        "transform"     $transform
+        "hook"          $hook
+        "format"        "png"
+        "include-width" false
     )}}
-    {{ if $imageset }}
+    {{ if $args.imageset }}
         {{- $set = partial "assets/helpers/image-set.html" (dict 
-            "url" $url
-            "img" $img
-            "dims" $dims
-            "anchor" $anchor
+            "src"       $src
+            "img"       $img
+            "dims"      $dims
+            "anchor"    $args.anchor
             "transform" $transform
-            "hook" $hook
+            "hook"      $hook
         ) -}}
     {{ end }}
 {{ end }}

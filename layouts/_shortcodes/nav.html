@@ -4,83 +4,40 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
-
-{{/* Validate arguments */}}
-{{ if partial "utilities/IsInvalidArgs.html" (dict "structure" "nav" "child" "nav-item" "args" .Params "group" "shortcode") }}
-    {{ errorf "Invalid arguments: %s" .Position -}}
-    {{ $error = true }}
-{{ end }}
-
 {{/* Initialize arguments */}}
-{{- $id := .Get "id" | default (printf "nav-%d" .Ordinal) -}}
-{{- $class := .Get "class" | default "" -}}
-{{ $type := .Get "type" | default "" -}}
-{{ $supportedNavTypes := slice "tabs" "pills" "underline" "callout" -}}
-
-{{ $vertical := false -}}
-{{ if isset .Params "vertical" }}{{ $vertical = partial "utilities/CastBool.html" (.Get "vertical") }}{{ end -}}
-{{ $wrap := false -}}
-{{ if isset .Params "wrap" }}{{ $wrap = partial "utilities/CastBool.html" (.Get "wrap") }}{{ end -}}
-
-{{- if and (eq $type "tabs") $vertical -}}
-    {{- errorf "Tabs do not support vertical layout" -}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "nav" "args" .Params "group" "shortcode" "named" .IsNamedParams) -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial"  "shortcodes/nav.html" 
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    ) -}}
 {{- end -}}
 
-{{ $inner := .Scratch.Get "inner" }}
-{{ $input := trim .Inner " \r\n" }}
-{{ if $input }}
-    {{ $input = replace $input "\n" "\n  " }}
-    {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input }}
-{{ end }}
-
-{{- $items := findRE "data-header=\"(.+?)\"" $inner -}}
-{{- $showVal := findRE "data-show-id=\"(.+?)\"" $inner -}}
-{{- $showID := -1 -}}
-{{- if gt (len $showVal) 0 -}}
-    {{- $showID = int (partial "utilities/GetVal.html" (index $showVal 0)) -}}
-{{- end -}}
-
-{{ $disabled := slice -}}
-{{- $disabledVal := findRE "data-disabled-id=\"(.+?)\"" $inner -}}
-{{- range $item := $disabledVal -}}
-    {{- $disabled = $disabled | append (int (partial "utilities/GetVal.html" $item)) -}}
-{{- end -}}
-
-{{- $hasContent := gt (len (findRE "data-has-content=\"true\"" $inner)) 0 -}}
-
-{{ $alternative := .Scratch.Get "alternative" }}
-{{ if and (eq $type "callout") $alternative }}
-    <div class="d-lg-none">
-        <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $class }} {{ . }}{{ end }} nav-callout">
-            {{- $alternative | safeHTML -}}
-        </div>
-    </div>
-    <div class="d-none d-lg-block">
+{{- $inner := .Scratch.Get "inner" -}}
+{{- $innerTitles := .Scratch.Get "inner-title" -}}
+{{- $input := trim .Inner " \r\n" -}}
+{{- if $input -}}
+    {{ $input = replace $input "\n" "\n  " -}}
+    {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input -}}
 {{ end }}
 
 {{/* Main code */}}
-<div class="{{ with $type }} nav-{{ . }}{{ end }}">
-    {{ if $vertical }}<div class="row"><div class="col-auto">{{ end }}
-    <ul class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $class }} {{ . }}{{ end }}{{ if $vertical }} flex-column{{ end }}" id="nav-{{ $id }}" role="tablist"{{ if $vertical }} aria-orientation="vertical"{{ end }}>
-    {{- range $index, $item := $items -}}
-        {{- $header := partial "utilities/GetVal.html" $item -}}
-        {{- $itemDisabled := in $disabled $index -}}
-        <li class="nav-item" role="presentation">
-            <button class="nav-link{{ if not $wrap }} text-nowrap{{ end }}{{ if eq $index $showID }} active{{ end }}{{ if $itemDisabled}} disabled {{end }}" id="{{ $id }}-btn-{{ $index }}" data-bs-toggle="pill" data-bs-target="#{{ $id }}-{{ $index }}" 
-                    type="button" role="tab" {{ if $hasContent }}aria-controls="{{ $id }}-{{ $index }}"{{ end }} aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}">
-                {{ $header }}
-            </button>
-        </li>
-    {{ end -}}
-    </ul>
-    {{ if $vertical }}</div><div class="col">{{ end }}
-        {{- if $hasContent -}}
-        <div class="tab-content w-100 {{ if eq $type "tabs" }}border p-3{{ else if $vertical }}ms-3{{ else }}mt-3{{ end }}">
-            {{- $inner | safeHTML -}}
-        </div>
-    {{- end -}}
-    {{ if $vertical }}</div></div>{{ end }}
-    </div>
-
-{{ if and (eq $type "callout") $alternative }}</div>{{ end }}
+{{- if not $args.err -}}
+    {{- partial "assets/nav.html" (dict 
+        "id"         (or $args.id (printf "nav-%d" .Ordinal))
+        "page"       .Page
+        "list"       $args.list
+        "nav-items"  $inner
+        "nav-titles" $innerTitles
+        "tab-type"   (or $args.tabType $args.type)
+        "vertical"   $args.vertical
+        "word-wrap"  $args.wordWrap
+        "class"      $args.class
+        "pane"       $args.pane
+        "width"      $args.width
+        ) 
+    -}}
+{{ end }}

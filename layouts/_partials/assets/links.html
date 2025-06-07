@@ -1,0 +1,101 @@
+{{/* 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "links" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/links.html" 
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global arguments */}}
+{{- $breakpoint := page.Scratch.Get "breakpoint" -}}
+
+{{- define "_partials/links-content.html" -}}
+    {{ $links := .links }}    
+    {{ $justify := .justify }}
+    {{ $type := .type }}
+    {{ $li := .li }}
+    {{ $order := "last" }}
+    {{ if and (eq $li true) (eq $type "link") }}{{ $order = "first" }}{{ $justify = "start" }}{{ end }}
+
+    {{ range $links }}
+        {{ $force := .force | default false }}
+        {{ $title := .title }}
+        {{ if and site.Params.env_bookshop_live (not $title) }}
+            {{ $title = "-" }}
+        {{ end }}
+
+        {{ $url := "" }}
+        {{ with .url }}
+            {{ $link := partial "utilities/GetLink.html" (dict "page" page "href" .) }}
+            {{ if not $link.error }}
+                {{ $url = $link.href }}
+            {{ else }}
+                {{ with page.File }}
+                    {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $link.msg }}
+                {{ else }}
+                    {{ warnf "Error processing link: %s" $link.msg }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ if (eq $li true) }}<div>{{ end }}
+
+        {{ if .download }}
+            {{ partial "assets/download.html" (dict 
+                "download"    .download
+                "title"       $title
+                "icon"        .icon
+                "outline"     .outline
+                "button-size" "md"
+                "order"       $order
+                "justify"     $justify
+            ) }}
+        {{ else }}
+            {{ if $force }}
+                {{ $u := urls.Parse $url }}
+                {{ if and (gt (len $u.Query) 0) $u.Fragment }}
+                    {{ $fragments := split $url "#" }}
+                    {{ $url = printf "%s&force=true#%s" (index $fragments 0) (index $fragments 1) }}
+                {{ else if $u.Fragment }}
+                    {{ $fragments := split $url "#" }}
+                    {{ $url = printf "%s?force=true#%s" (index $fragments 0) (index $fragments 1) }}
+                {{ else if (gt (len $u.Query) 0) }}
+                    {{ $url = printf "%s&force=true" $url }}
+                {{ else }}
+                    {{ $url = printf "%s?force=true" $url }}
+                {{ end }}
+            {{ end }}
+
+            {{ partial "assets/button.html" (dict 
+                "href"      $url
+                "title"     $title
+                "icon"      .icon
+                "outline"   .outline
+                "order"     $order
+                "justify"   $justify
+                "link-type" $type
+            ) }}
+        {{ end }}
+
+        {{ if (eq $li true) }}</div>{{ end }}
+    {{ end }}
+{{ end }}
+
+<div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $args.links) 1 }} gap-5{{ end }} justify-content-{{ $args.align }} pt-5 pt-md-3">
+    {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
+</div>
+
+<div class="d-{{ $breakpoint.current }}-none">
+    {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" true) }}
+</div>

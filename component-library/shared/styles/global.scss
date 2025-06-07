@@ -1,0 +1,23 @@
+// Files in shared/styles will be used as global stylesheets on your site,
+// as well as in the component browser and screenshots.
+
+.display-1 > strong {
+    color: var(--bs-primary);
+    font-weight: normal !important;
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .preheading.text-primary {
+            color: #{$primary-text-emphasis-dark} !important;
+        }
+    }
+}
+
+h1[class*="display-"] {
+    margin-top: 0;
+}
+
+.navbar-offset {
+    padding-top: var(--navbar-offset);
+}
