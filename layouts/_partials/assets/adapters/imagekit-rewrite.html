@@ -18,7 +18,7 @@
     {{ $error = $args.err }}
 {{ end }}
 
-{{/* Initialize arguments */}}
+{{/* Initialize local arguments */}}
 {{ $container := trim $args.container "/" }}
 {{ $file := or $args.urlFile $args.file }}
 {{ if not $file }}

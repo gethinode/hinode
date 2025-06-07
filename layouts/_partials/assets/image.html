@@ -4,19 +4,19 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false }}
+{{- $error := false -}}
 
 {{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "image" "args" . "group" "partial") }}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "image" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/image.html" 
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
         "file"    page.File
-    )}}
-    {{ $error = $args.err }}
-{{ end }}
+    ) -}}
+    {{- $error = $args.err -}}
+{{- end -}}
 
 {{/* Initialize global arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -24,17 +24,15 @@
 
 {{/* Initialize local arguments */}}
 {{- $caption := $args.caption -}}
-{{ if and site.Params.main.titleCase (eq $caption (plainify $caption)) }}
-    {{ $caption = title $caption }}
-{{ end }}
-{{- $figclass := .figclass -}}
-{{- $lazy := eq $args.loading "lazy" -}}
+{{- if and site.Params.main.titleCase (eq $caption (plainify $caption)) -}}
+    {{- $caption = title $caption -}}
+{{- end -}}
 {{- $priority := $args.priority -}}
 {{- if eq $priority "auto" }}{{ $priority = "" }}{{ end -}}
-{{- $src := or $args.src $args.url }}
+{{- $src := or $args.src $args.url -}}
 
 {{/* Main code */}}
-{{ $params := dict }}
+{{- $params := dict -}}
 {{- $params = merge $params (dict
     "page"         $args.page
     "ratio"        $args.ratio
@@ -44,7 +42,7 @@
     "title"        $args.title
     "caption"      $caption
     "figclass"     $args.figclass
-    "lazy"         $lazy
+    "loading"      $args.loading
     "priority"     $priority
     "sizes"        $args.sizes
     "absolute-url" $absoluteURL
@@ -53,7 +51,7 @@
     )
 -}}
 
-{{ if not $error }}
+{{- if not $error -}}
     {{- if $args.mode -}}
         {{- $ext := path.Ext $src -}}
         {{- $base := strings.TrimSuffix $ext $src -}}
@@ -63,11 +61,11 @@
 
         {{- range $suffix := $modes -}}
             {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
-            {{- $params = merge $params (dict "src" $image "mode" $suffix "modes" $modes) -}}
+            {{- $params = merge $params (dict "src" $image "color-mode" $suffix "modes" $modes) -}}
             {{- partial "assets/helpers/image-definition.html" $params -}}
         {{- end -}}
     {{ else }}
         {{- $params = merge $params (dict "src" $src) -}}
         {{- partial "assets/helpers/image-definition.html" $params -}}
     {{- end -}}
-{{ end }}
+{{- end -}}
