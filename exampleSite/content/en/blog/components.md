@@ -4,6 +4,7 @@ title: Components
 date: 2023-09-23
 description: Use shortcodes to add predefined components powered by external libraries.
 tags: ["bootstrap", "shortcode"]
+keywords: ["featured"]
 thumbnail:
   url: img/puzzle.jpg
   author: Ryoji Iwata

@@ -189,7 +189,7 @@
             <div class="pt-3">{{- partial "assets/pagination.html" (dict "page" $args.page "format" "terse") -}}</div>
         {{- end -}} 
     {{- else -}}
-        {{- if and (gt $count $max) $args.hrefTitle -}}
+        {{- if or (and (gt $count $max) $args.hrefTitle) (and $args.hrefForce  $args.hrefTitle) -}}
             {{- $href := $args.href -}}
             {{- if and $pretty (not (hasSuffix $href "/" )) (not (strings.Contains $href "#")) -}}
                 {{- $href = printf "%s/" $href -}}

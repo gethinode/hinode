@@ -31,6 +31,7 @@ content_blocks:
       section: blog
       reverse: true
       sort: date
+      keywords: featured
     hide-empty: false
     more:
       title: More Posts

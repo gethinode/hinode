@@ -19,7 +19,7 @@
 {{ end }}
 
 {{ $pages := slice }}
-{{ $pages = partial "assets/live-pages.html" (dict 
+{{ $result := partial "assets/live-pages.html" (dict 
 	"page"       $args.page
 	"section"    $args.input.section
 	"nested"     $args.input.nested
@@ -29,6 +29,7 @@
 	"sort"       $args.input.sort
 	"reverse"    $args.input.reverse
 )}}
+{{ $pages = $result.pages }}
 
 <!-- Add style definitions -->
 {{ $styles := slice 
@@ -73,6 +74,7 @@
 			"icon-rounded" $args.iconRounded
 			"href"         (cond $moreButton $moreLink "")
 			"href-title"   (cond $moreButton $moreTitle "")
+			"href-force"   (gt $result.total (len $result.pages))
 		)}}
 
 		{{ if $args.scroll }}

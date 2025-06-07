@@ -32,6 +32,9 @@ arguments:
     group: partial
   href-title:
     release: v1.0.0
+  href-force:
+    release: v1.0.0
+    group: partial
   separator:
   loading:
   ratio:

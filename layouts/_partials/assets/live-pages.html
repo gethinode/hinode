@@ -15,6 +15,7 @@
 
 {{/* Initialize local arguments */}}
 {{ $pages := slice }}
+{{ $total := 0 }}
 
 {{/* Main code */}}
 {{ if not $args.err }}
@@ -48,15 +49,18 @@
                 {{ else }}
                     {{ $pages = where site.Pages (printf ".Params.%s" $args.section) "!=" nil }}
                 {{ end }}
+                {{ $total = len $pages }}
             {{ else if eq $args.kind "related" }}
-                {{ if $sectionPage.Keywords}}
+                {{ if $sectionPage.Keywords }}
                     {{ $keywords := keyVals "tags" $sectionPage.Keywords }}
                     {{ $opts := dict "namedSlices" (slice $keywords) }}
                     {{ $pages = site.RegularPages.Related $opts }}
+                    {{ $total = len $pages }}
                 {{ end }}
             {{ else }}
                 {{/* Retrieve the immediate or all related pages (recursively), optionally filtering by tag or keyword */}}
                 {{ if $args.nested }}{{ $pages = $sectionPage.RegularPagesRecursive }}{{ else }}{{ $pages = $sectionPage.Pages }}{{ end }}
+                {{ $total = len $pages }}
 
                 {{ if and $args.tags (gt (len $args.tags) 0) }}
                     {{ $pages = where $pages "Params.tags" "intersect" $args.tags }}
@@ -77,4 +81,4 @@
     {{ end }}
 {{ end }}
 
-{{ return $pages }}
+{{ return (dict "pages" $pages "total" $total) }}
