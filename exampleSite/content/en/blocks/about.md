@@ -11,6 +11,7 @@ The `about` content block renders a short message next to an illustration. You c
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
+
 ```yml
 - _bookshop_name: about
   heading:
@@ -37,6 +38,7 @@ The `about` content block renders a short message next to an illustration. You c
       url: 'https://google.com'
   order: first
 ```
+
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 

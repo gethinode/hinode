@@ -14,6 +14,7 @@ The `hero` content block renders a page hero, typically at the top of the page. 
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
+
 ```yml
 - _bookshop_name: hero
   heading:
@@ -25,6 +26,7 @@ The `hero` content block renders a page hero, typically at the top of the page. 
     backdrop: /assets/img/nat-9l98kFByiao-unsplash.jpg
   breadcrumb: true
 ```
+
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 

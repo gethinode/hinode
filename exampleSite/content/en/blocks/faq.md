@@ -13,6 +13,7 @@ The `FAQ` content block renders an accordion of frequently asked questions. Clic
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
+
 ```yml
 - _bookshop_name: faq
   heading:
@@ -37,6 +38,7 @@ The `FAQ` content block renders an accordion of frequently asked questions. Clic
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a quam
         lobortis, sodales dolor eu, posuere elit.
 ```
+
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 

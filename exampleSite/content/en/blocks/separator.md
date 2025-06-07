@@ -14,9 +14,11 @@ The `separator` content block renders a horizontal line to separate sections. Th
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
+
 ```yml
 - _bookshop_name: separator
 ```
+
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 

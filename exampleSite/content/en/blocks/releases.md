@@ -11,6 +11,7 @@ The `releases` content block displays a timeline with release information.
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
+
 ```yml
 - _bookshop_name: releases
   heading:
@@ -24,6 +25,7 @@ The `releases` content block displays a timeline with release information.
     subtle: true
   data: timeline
 ```
+
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 

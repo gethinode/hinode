@@ -11,6 +11,7 @@
     "selector-id-pattern": null,
     "selector-class-pattern": null,
     "scss/no-global-function-names": null,
+    "color-function-alias-notation": null,
     "number-max-precision": null,
     "hue-degree-notation": null,
     "value-no-vendor-prefix": null,

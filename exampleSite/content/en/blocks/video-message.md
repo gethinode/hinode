@@ -12,6 +12,7 @@ The `video` content block renders a horizontal line to separate sections. The se
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
+
 ```yml
 - _bookshop_name: video-message
   heading:
@@ -35,6 +36,7 @@ The `video` content block renders a horizontal line to separate sections. The se
     - title: Third Message
       icon: fas 3
 ```
+
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 
