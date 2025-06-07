@@ -59,15 +59,15 @@
                 </div>
                 <div class="col-12 col-{{ $breakpoint.prev }}-4 col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 p-0 ps-{{ $breakpoint.prev }}-4">
                     {{ partial "assets/featured-illustration.html" (dict 
-                        "icon" $args.icon
-                        "image" $args.image
-                        "anchor" $args.anchor
-                        "mode" true
-                        "ratio" ""
-                        "sizes" "20vw"
+                        "page"    page
+                        "icon"    $args.icon
+                        "image"   $args.image
+                        "anchor"  $args.anchor
+                        "mode"    true
+                        "sizes"   "20vw"
                         "wrapper" (printf "col-4 col-%s-12 mx-auto pt-4 pt-%s-0" $breakpoint.prev $breakpoint.prev)
-                        "title" (T "heroImage")
-                        "mode" $args.mode
+                        "title"   (T "heroImage")
+                        "mode"    $args.mode
                     ) }}
                 </div>
             </div>
@@ -85,15 +85,16 @@
                 </div>
                 <div class="col-12 col-{{ $breakpoint.current }}-2 p-0 pt-2 text-center">
                     {{ partial "assets/featured-illustration.html" (dict 
-                        "icon" $args.icon
-                        "image" $args.image
-                        "anchor" $args.anchor
-                        "mode" true
-                        "ratio" $args.ratio
-                        "sizes" "20vw"
+                        "page"    page
+                        "icon"    $args.icon
+                        "image"   $args.image
+                        "anchor"  $args.anchor
+                        "mode"    true
+                        "ratio"   $args.ratio
+                        "sizes"   "20vw"
                         "wrapper" "mx-auto"
-                        "title" (T "heroImage")
-                        "mode" $args.mode
+                        "title"   (T "heroImage")
+                        "mode"    $args.mode
                     ) }}
                 </div>
             </div>
