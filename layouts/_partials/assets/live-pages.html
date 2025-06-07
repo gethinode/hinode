@@ -15,9 +15,6 @@
 
 {{/* Initialize local arguments */}}
 {{ $pages := slice }}
-{{ $tags := slice | append $args.tags }}
-{{ $categories := slice | append $args.categories }}
-{{ $keywords := slice | append $args.keywords }}
 
 {{/* Main code */}}
 {{ if not $args.err }}
@@ -25,9 +22,9 @@
         {{/* Define some dummy content as we cannot retrieve pages in live mode */}}
         {{ range $index := seq (.max | default 3) }}
             {{ $pages = $pages | append (dict 
-                "title" (printf "Dummy %d" $index)
+                "title"       (printf "Dummy %d" $index)
                 "description" (printf "content %d" $index)
-                "thumbnail" "/img/placeholder.svg"
+                "thumbnail"   "/img/placeholder.svg"
             )}}
         {{ end }}
         {{- if .reverse }}{{- $pages = sort $pages "title" "desc" -}}{{ end -}}
@@ -35,9 +32,9 @@
         {{/* Retrieve the relevant context page, either current page or page identified by section */}}
         {{ $sectionPage := $args.page | default page }}
         {{ if $args.section }}
-            {{ $sectionPage = site.GetPage "section" .section }}
+            {{ $sectionPage = site.GetPage "section" $args.section }}
             {{ if not $sectionPage }}
-                {{ warnf "Cannot find section: %s" .section }}
+                {{ warnf "Cannot find section: %s" $args.section }}
             {{ end }}
         {{ end }}
         
@@ -61,14 +58,14 @@
                 {{/* Retrieve the immediate or all related pages (recursively), optionally filtering by tag or keyword */}}
                 {{ if $args.nested }}{{ $pages = $sectionPage.RegularPagesRecursive }}{{ else }}{{ $pages = $sectionPage.Pages }}{{ end }}
 
-                {{ if gt (len $tags) 0 }}
-                    {{ $pages = where $pages "Params.tags" "intersect" $tags }}
+                {{ if and $args.tags (gt (len $args.tags) 0) }}
+                    {{ $pages = where $pages "Params.tags" "intersect" $args.tags }}
                 {{ end }}
-                {{ if gt (len $keywords) 0 }}
-                    {{ $pages = where $pages "Params.keywords" "intersect" $keywords }}
+                {{ if and $args.keywords (gt (len $args.keywords) 0) }}
+                    {{ $pages = where $pages "Params.keywords" "intersect" $args.keywords }}
                 {{ end }}
-                {{ if gt (len $categories) 0 }}
-                    {{ $pages = where $pages "Params.categories" "intersect" $categories }}
+                {{ if and $args.categories (gt (len $args.categories) 0) }}
+                    {{ $pages = where $pages "Params.categories" "intersect" $args.categories }}
                 {{ end }}
             {{ end }}
         
