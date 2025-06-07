@@ -43,10 +43,10 @@
 {{- if eq $lang "bookshop" }}
     {{ $type = "bookshop" }}
     {{ $frontmatter := slice "yml" "yaml" "toml" "json" }}
-    {{ $inputRE := findRESubmatch `\x60\x60\x60(?:yml|yaml|json|toml)\n([\s\S]*?)\x60\x60\x60` $content 1 }}
-    {{ if eq (len (index $inputRE 0)) 2 }}
+    {{ $inputRE := findRESubmatch `\x60\x60\x60(?:yml|yaml|json|toml)(\r\n|\r|\n)([\s\S]*?)\x60\x60\x60` $content 1}}
+    {{ if and $inputRE (eq (len (index $inputRE 0)) 3) }}
         {{ $lang = trim (index (split $content "\n") 1) "\x60" }}
-        {{ $content = index (index $inputRE 0) 1 }}
+        {{ $content = index (index $inputRE 0) 2 }}
         {{ $data = index (unmarshal $content) 0 }}
         {{ $component_name := (index $data "_bookshop_name") }}
         {{ if not $component_name }}
