@@ -1,6 +1,8 @@
-<!-- 
+{{/* 
     Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
--->
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
 
 {{ $error := false }}
 
@@ -77,6 +79,7 @@
         {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
 
         {{ $illustration := partial $args.hook (dict
+            "page"         $args.page
             "image"        $args.illustration.image
             "icon"         $args.illustration.icon
             "anchor"       $args.illustration.anchor

@@ -23,6 +23,7 @@
 {{- $illustration := "" -}}
 {{- if reflect.IsMap $args.illustration }}
     {{ $illustration = partial $args.hook (dict
+        "page"         $args.page
         "image"        $args.illustration.image
         "icon"         $args.illustration.icon
         "anchor"       $args.illustration.anchor
@@ -35,7 +36,7 @@
         "image-overlay" $args.imageOverlay
     ) }}
 {{ else }}
-    {{ $illustration = partial $args.hook (dict "image" $args.illustration) }}
+    {{ $illustration = partial $args.hook (dict "page" $args.page "image" $args.illustration) }}
 {{ end }}
 
 {{/* Main code */}}
