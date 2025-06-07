@@ -1,0 +1,15 @@
+comment: Generate a download button.
+arguments:
+  download:
+  title:
+  class:
+  color:
+    default: primary
+  outline:
+    default: true
+  icon:
+    default: fas download
+  button-size:
+    default: sm
+  justify:
+  minimal:

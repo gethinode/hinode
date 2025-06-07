@@ -5,7 +5,7 @@ arguments:
     comment: Unique name of the bookshop component.
     group: partial
 
-  # # a
+  # a
   absolute-url:
     type: string
     optional: true
@@ -18,11 +18,6 @@ arguments:
     comment: >-
       Account name of the video asset, required by some digital asset managers.
       You can also set the default account name in the site's parameters.
-  # # TODO: merge account
-  # account:
-  #   type: string
-  #   optional: true
-  #   comment: Account name of the origin server.
   active:
     type: bool
     optional: true
@@ -328,6 +323,15 @@ arguments:
         - black
         - body
         - body-tertiary
+  color-mode:
+    type: select
+    optional: true
+    comment: >-
+      Color mode to apply to the illustration.
+    options:
+      values:
+        - light
+        - dark
   cols:
     type: int
     optional: true
@@ -336,10 +340,10 @@ arguments:
     options:
       min: 1
       max: 5
-  # container:
-  #   type: string
-  #   optional: true
-  #   comment: Container name of the origin server.
+  container:
+    type: string
+    optional: true
+    comment: Container name of the origin server.
   # content: 
   #   type: string
   #   optional: true
@@ -404,12 +408,13 @@ arguments:
   #   group: partial
   #   comment: >-
   #      Target destination.
-  # dir:
-  #   type: string
-  #   optional: true
-  #   comment: >-
-  #     All but the last element of an URL extension. For example, the dir of the
-  #     URL 'https://example.com/first/second/third.webp' equals '/first/second/'.
+  dims:
+    type:
+      - slice
+      - '[]string'
+    optional: false
+    comment: >-
+      Image dimensions to use, specified as `width` `x` `height` in pixels.
   disabled:
     type: bool
     optional: true
@@ -419,6 +424,10 @@ arguments:
     optional: true
     default: false
     comment: Flag to indicate the alert is dismissible.
+  download:
+    type: string
+    optional: false
+    comment: Path to the download file, relative to the site's static folder.
 
   # e
   external:
@@ -591,6 +600,10 @@ arguments:
       Address for the button or hyperlink. When set for a card group, a button
       is added if the list exceeds the maximum number of cards to display.
     # group: partial
+  href-force:
+    type: bool
+    optional: true
+    comment: Forces the more button, ignoring page count.
   # TODO: use title instead
   href-title:
     type: string
@@ -652,11 +665,20 @@ arguments:
     type: int
     optional: true
     comment: Width of the image in pixels.
+  imageset:
+    type: bool
+    optional: true
+    comment: Flag to indicate the image should be rendered as image set.
   img:
     type: "*resources.resourceAdapter"
     optional: true
     comment: >-
       Image resource to process. Must be set when handling local images.
+  include-width:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate if the image set should render the image widths.
   inline:
     type: bool
     optional: true
@@ -820,6 +842,10 @@ arguments:
     type: string
     optional: true
     comment: ID of the asset to be embedded.
+  minimal:
+    type: bool
+    optional: true
+    comment: Renders the element with without a title.
 
   # # TODO: merge menu
   # menu:
@@ -895,7 +921,7 @@ arguments:
   nav-titles:
     type:
       - slice
-      - "[]string"
+      - '[]string'
     optional: true
     comment: Titles of the nav items, used when passing preprocessed nav items.
     group: partial
@@ -1595,6 +1621,6 @@ arguments:
   #   comment: Responsive width of the tab group.
   #   options:
   #     values:
-  #       - "50"
-  #       - "100"
+  #       - 50
+  #       - 100
   #   group: partial
