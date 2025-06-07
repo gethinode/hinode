@@ -432,6 +432,8 @@ github.com/nextapps-de/flexsearch v0.0.0-20250521173815-f12b83ec5c58 h1:3Xm0vw0j
 github.com/nextapps-de/flexsearch v0.0.0-20250521173815-f12b83ec5c58/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/nextapps-de/flexsearch v0.0.0-20250523180618-1f75f5f9d9b6 h1:vUlZHDX+6HzN/GpHAqbvpVu4NWdhKz7ihK0XGHGD3ec=
 github.com/nextapps-de/flexsearch v0.0.0-20250523180618-1f75f5f9d9b6/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
+github.com/nextapps-de/flexsearch v0.0.0-20250606060143-c28f52c09b7a h1:CF/f62ufhBzNvAgoC6JhuqQxtqz0yDj3IIXYKl+A650=
+github.com/nextapps-de/flexsearch v0.0.0-20250606060143-c28f52c09b7a/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/twbs/bootstrap v5.3.2+incompatible h1:tuiO5acc6xnZUR77Sbi5aKWXxjYxbmsSbJwYrhAKoQQ=
 github.com/twbs/bootstrap v5.3.2+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
 github.com/twbs/bootstrap v5.3.3+incompatible h1:goFoqinzdHfkeegpFP7pvhbd0g+A3O2hbU3XCjuNrEQ=
