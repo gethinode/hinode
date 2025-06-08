@@ -65,6 +65,7 @@ arguments:
     release: v1.0.0
   link-type:
   hook:
+    default: assets/image.html
     group: partial
   sizes:
     group: partial
