@@ -1,6 +1,7 @@
 comment: Adds a keyboard input element.
 arguments:
   text:
+    optional: true
     position: 0
     release: v1.0.0
   class:

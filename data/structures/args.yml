@@ -2,6 +2,9 @@ comment: >-
   Generates a markdown table of structured arguments. The argument definitions are
   expected to be defined in a data file identified by a provided structure name.
 arguments:
+  page:
+    optional: false
+    group: partial
   structure:
     type: string
     position: 0
@@ -26,3 +29,28 @@ arguments:
     comment: >-
       Flag to filter only arguments that have a parent attribute (either
       `cascade` or `merge`).
+  render-type:
+    type: select
+    position: 3
+    default: both
+    optional: true
+    comment: >-
+      Option whether to render arguments, user-defined types, or both. Please
+      note that the arguments will render a link to a user-defined type in any
+      case.
+    options:
+      values:
+        - arguments
+        - types
+        - both
+    release: v1.0.0
+  header-level:
+    type: int
+    default: 3
+    optional: true
+    options:
+      min: 1
+      max: 6
+    comment: >-
+      The header level to use for the user-defined type headers.
+    release: v1.0.0

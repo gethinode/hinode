@@ -4,6 +4,8 @@
     Visit gethinode.com/license for more details.
 */}}
 
+{{- $error := false -}}
+
 {{/* Initialize arguments */}}
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "kbd" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
 {{- if or $args.err $args.warnmsg -}}
@@ -13,12 +15,26 @@
         "details"  ($args.errmsg | append $args.warnmsg)
         "file"     page.File
         "position" .Position
-    )}}
+    ) -}}
+    {{- $error = $args.err -}}
+{{- end -}}
+
+{{/* Initialize local arguments */}}
+{{- $text := or $args.text $args.title }}
+{{- if not $text -}}
+    {{- partial "utilities/LogErr.html" (dict 
+        "partial"  "shortcodes/kbd.html" 
+        "msg"      "Invalid arguments"
+        "details"  (slice "argument 'text': expected value")
+        "file"     page.File
+        "position" .Position
+    ) -}}
+    {{- $error = true -}}
 {{- end -}}
 
 {{/* Main code */}}
-{{- if not $args.error }}
+{{- if not $error }}
     <kbd {{ if or $args.color $args.class }}class="{{ with $args.color }}text-bg-{{ . }} {{ end }}{{ $args.class }}"{{ end }}>
-        {{ or $args.text $args.title | plainify }}
+        {{ $text | plainify }}
     </kbd>
 {{ end -}}
