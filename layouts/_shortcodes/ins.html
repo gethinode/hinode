@@ -9,10 +9,11 @@
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "ins" "args" .Params) }}
 {{ if $args.err }}
     {{ partial "utilities/LogErr.html" (dict 
-        "partial" "shortcodes/ins.html" 
-        "msg" "Invalid arguments"
-        "details" $args.errmsg
-        "file" page.File
+        "partial"  "shortcodes/ins.html" 
+        "warnid"   "warn-invalid-arguments"
+        "msg"      "Invalid arguments"
+        "details"  $args.errmsg
+        "file"     page.File
     )}}
 {{ end }}
 
