@@ -33,8 +33,9 @@ As an example, the following shortcode displays an accordion with three elements
 {{< example lang="hugo" >}}
 {{</* accordion */>}}
   {{</* accordion-item title="Accordion Item #1" show="true" */>}}
-    This is the first item's accordion body. It supports HTML content, if enabled in the goldmark
-    renderer. The item is shown by adding the value `show` to the `class` argument.
+    This is the first item's accordion body.
+    It supports Markdown content. The item
+    is shown by adding the value `show` to the `class` argument.
   {{</* /accordion-item */>}}
   {{</* accordion-item title="Accordion Item #2" */>}}
     This is the second item's accordion body.
@@ -352,8 +353,8 @@ As an example, the following shortcode displays a tab group with vertically alig
 {{< example lang="hugo" >}}
   {{</* nav tab-type="pills" vertical="true" */>}}
     {{</* nav-item title="Nav Item #1" show="true" */>}}
-      This is the first item's nav body. It supports HTML content, if enabled in the goldmark
-      renderer. The item is shown by adding the value `show` to the `class` argument.
+      This is the first item's nav body. It supports Markdown content.
+      The item is shown by adding the value `show` to the `class` argument.
     {{</* /nav-item */>}}
     {{</* nav-item title="Nav Item #2" */>}}
       This is the second item's nav body.

@@ -1,6 +1,8 @@
 comment: >-
   Defines an individual item.
 arguments:
+  page:
+    group: partial
   id:
     group: partial
   parent-id:

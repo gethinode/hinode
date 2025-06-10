@@ -33,7 +33,8 @@
         <div class="d-lg-none">
             <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $args.class }} {{ . }}{{ end }} nav-callout">
                 {{- range $index, $item := $args.list -}}
-                    {{ partial "assets/nav-item.html" (dict 
+                    {{ partial "assets/nav-item.html" (dict
+                        "page"         $args.page
                         "id"           $index
                         "parentID"     $id
                         "fade"         false
