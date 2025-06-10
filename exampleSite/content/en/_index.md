@@ -33,6 +33,7 @@ content_blocks:
       sort: date
       keywords: featured
     hide-empty: false
+    header-style: none
     more:
       title: More Posts
     padding: 0

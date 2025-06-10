@@ -5,22 +5,26 @@
 */}}
 
 {{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "script" "args" .) }}
-{{ if $args.err }}
-    {{ partial "utilities/LogErr.html" (dict 
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "script" "args" .) -}}
+{{ if or $args.err $args.warnmsg }}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "templates/script.html" 
-        "msg" "Invalid arguments"
-        "details" $args.errmsg
-        "file" page.File
-    )}}
-{{ end }}
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    ) -}}
+{{- end -}}
+
 
 {{/* Initialize local arguments */}}
-{{ $category := cond (ne $args.category "other") $args.category "" }}
+{{- $category := cond (ne $args.category "other") $args.category "" -}}
 
 {{/* Main code */}}
-<script src="{{ $args.link }}"
-    {{- with $category }} data-category="{{ . }}"{{ end -}}
-    {{- with $args.integrity }}integrity="{{ . }}" crossorigin="anonymous"{{ end }}
-    {{- with $args.state }} {{ . | safeHTMLAttr }}{{ end -}}>
-</script>
+{{- if not $args.err -}}
+    <script src="{{ $args.link }}"
+        {{- with $category }} data-category="{{ . }}"{{ end -}}
+        {{- with $args.integrity }}integrity="{{ . }}" crossorigin="anonymous"{{ end }}
+        {{- with $args.state }} {{ . | safeHTMLAttr }}{{ end -}}>
+    </script>
+{{- end -}}
