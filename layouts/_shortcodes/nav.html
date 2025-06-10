@@ -21,9 +21,9 @@
 {{- $innerTitles := .Scratch.Get "inner-title" -}}
 {{- $input := trim .Inner " \r\n" -}}
 {{- if $input -}}
-    {{ $input = replace $input "\n" "\n  " -}}
-    {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input -}}
-{{ end }}
+    {{- $input = replace $input "\n" "\n  " -}}
+    {{- warnf "Unexpected inner content: %s\r\n      %s" .Position $input -}}
+{{- end -}}
 
 {{/* Main code */}}
 {{- if not $args.err -}}
@@ -41,4 +41,4 @@
         "width"      $args.width
         ) 
     -}}
-{{ end }}
+{{- end -}}

@@ -72,7 +72,7 @@
                 aria-labelledby="{{ $parentID }}-heading-{{ $args.id }}"
                 data-bs-parent="#accordion-{{ $parentID }}"
             >
-                <div class="accordion-body">{{- $args.body | safeHTML -}}</div>
+                <div class="accordion-body">{{ $args.body | $args.page.RenderString | safeHTML }}</div>
             </div>
         </div>
     {{ else }}
@@ -87,7 +87,7 @@
             data-has-content="{{ gt (len $args.body) 0 }}"
             {{ if $args.disabled }} data-disabled-id="{{ $args.id }}"{{ end }}
         >
-            {{ $args.body }}
+            {{ $args.body | $args.page.RenderString | safeHTML }}
         </div>
     {{ end }}
 {{ end }}

@@ -30,11 +30,12 @@
     {{- if isset .Parent.Params "fade" }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
     {{- $fade = or $fade $parentFade -}}
     {{- $title := or $args.title $args.header -}}
-    {{- $body := trim .Inner " \r\n" | .Page.RenderString -}}
+    {{- $body := trim .Inner " \r\n" -}}
     {{- $current := "" -}}
 
     {{/* Main code */}}
     {{- $output := partial "assets/nav-item.html" (dict 
+        "page"      .Page
         "id"        $id
         "parent-id" $parent
         "fade"      $fade
@@ -57,6 +58,7 @@
     {{- end }}
 
     {{- $alternative := partial "assets/nav-item" (dict 
+        "page"         .Page
         "id"           $id
         "parent-id"    $parent
         "fade"         $fade
