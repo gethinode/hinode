@@ -1,0 +1,71 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "cards" "args" .)}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/cards/cards.hugo.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize local variables */}}
+{{ $list := slice }}
+{{ range $args.elements }}
+	<!-- TODO: check mode -->
+	{{ $list = $list | append (dict 
+		"title"       .title
+		"description" (.content | page.RenderString)
+		"icon"        .icon
+		"thumbnail"   .image
+	) }}
+{{ end}}
+
+{{ if not $error }}
+	<div class="container-xxl p-4 px-xxl-0">
+		{{- partial "assets/section-title.html" (dict "heading" $args.heading "class" "py-5") -}}
+
+		{{- partial "assets/card-group.html" (dict 
+			"page"         page
+			"list"         $list
+			"class"        (printf "border-0 card-icon-primary d-sm-none %s" $args.class)
+			"cols"         $args.cols
+			"gutter"       "4"
+			"padding"      $args.padding
+			"header-style" "none"
+			"footer-style" "none"
+			"icon-rounded" $args.iconRounded
+			"icon-style"   "fa-2x"
+			"align"        "start"
+			"orientation"  ($args.orientation | default "horizontal-sm")
+			"hook"         "assets/live-card.html"
+		) -}}
+
+		{{- partial "assets/card-group.html" (dict 
+			"page"         page
+			"list"         $list
+			"class"        (printf "border-0 card-icon-primary d-none d-sm-block %s" $args.class)
+			"cols"         $args.cols
+			"gutter"       "4"
+			"padding"      $args.padding
+			"header-style" "none"
+			"footer-style" "none"
+			"icon-rounded" $args.iconRounded
+			"icon-style"   "fa-2x"
+			"align"        "start"
+			"orientation"  ($args.orientation | default "stacked")
+			"hook"         "assets/live-card.html"
+		) -}}
+	</div>
+{{ end }}
+
