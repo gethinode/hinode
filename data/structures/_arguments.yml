@@ -430,6 +430,11 @@ arguments:
     comment: Path to the download file, relative to the site's static folder.
 
   # e
+  elements:
+    type: elements
+    optional: false
+    comment: >-
+      Elements to include in the card group. Each element is rendered as a card.
   external:
     type: bool
     optional: true

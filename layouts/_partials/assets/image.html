@@ -62,7 +62,10 @@
 
         {{- range $suffix := $modes -}}
             {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
-            {{- $params = merge $params (dict "src" $image) -}}
+            {{- $params = merge $params (dict
+                    "src"   $image
+                    "class" (printf "%s d-none-%s" $args.class (cond (eq $suffix "dark") "light" "dark"))
+            ) -}}
             {{- partial "assets/helpers/image-definition.html" $params -}}
         {{- end -}}
     {{ else }}

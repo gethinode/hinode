@@ -13,7 +13,6 @@
 {{ if or $args.err $args.warnmsg }}
     {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/timeline.html" 
-        "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
         "file"    page.File
@@ -28,7 +27,12 @@
 {{- $page := $args.page -}}
 {{- $data := partial "utilities/GetI18nData.html" (dict "page" $page "data" $args.data) }}
 {{ if not $data -}}
-    {{ errorf "Invalid timeline data '%s': %s" $page.File -}}
+    {{ partial "utilities/LogErr.html" (dict 
+        "partial" "assets/timeline.html" 
+        "msg"     "Invalid arguments"
+        "details" (slice (printf "Invalid timeline data '%s'" $args.data))
+        "file"    page.File
+    )}}
     {{ $error = true }}
 {{ end -}}
 {{ $background := partial "utilities/GetBackgroundStyle.html" (dict "background" $args.background) }}
@@ -80,7 +84,10 @@
                     {{ $datestr := (partial "utilities/date.html" (dict "date" $date "format" "long")) -}}
                     <p class="mb-0"><small class="text-body-secondary text-uppercase">{{ $datestr -}}</small></p>
                 {{ end }}
-                <p class="mt-3 mb-0">{{ $content | $page.RenderString }}</p>
+                <p class="mt-3 mb-0">
+                    <!-- TODO: $page.RenderString causes an out of bounds error -->
+                    {{ $content | markdownify }}
+                </p>
             </div>
         </div>
     </div>    
