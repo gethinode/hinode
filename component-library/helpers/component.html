@@ -34,7 +34,7 @@
     {{- $style := index $component_props "wrapper" -}}
     {{- $width := index $component_props "width" -}}
     {{- $justify := index $component_props "justify" | default "start" -}}
-    {{- $padding := "px-4 px-xxl-0 py-4" -}}
+    {{- $padding := cond (ne $component_name "separator") "px-4 px-xxl-0 py-4" "" -}}
     {{- $wrapper := $style }}
     {{ with $background }}
         {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $style) }}
