@@ -62,7 +62,10 @@
     </small></p>
 {{- end -}}
 
-{{/* Initialize arguments */}}
+{{/* Initialize global variables */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Initialize local arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "card" "args" . "group" "partial") }}
 {{ if or $args.err $args.warnmsg }}
     {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
@@ -168,7 +171,7 @@
 
     {{/* Render horizontal card */}}
     <div class="card {{ $colorStyle }}{{ $args.class }}">
-        <div class="row g-0 row-cols-2 h-100{{ if $args.button }} pb-5{{ end }}">
+        <div class="row g-0 row-cols-2 h-100{{ if $args.button }} pb-{{ $padding.y }}{{ end }}">
             {{- if $thumbnail -}}
                 <div class="{{ $col1 }}">
                     {{ $fullHeight := "card-img-h100" }}

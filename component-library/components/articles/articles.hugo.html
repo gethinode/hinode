@@ -62,7 +62,7 @@
 
 <!-- Main code -->
 {{ if not $error }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "class" "py-5") -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading) -}}
 
 	{{ $partial := "assets/card-group.html" }}
 	{{ $params := dict }}

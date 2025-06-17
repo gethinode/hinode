@@ -1,0 +1,20 @@
+{{- /* Define main padding size */ -}}
+{{- $defaultY := 5 -}}
+{{- $defaultX := 5 -}}
+{{- $permitted := slice 0 1 2 3 4 5 }}
+{{- $paddingX := $defaultX -}}
+{{- if isset site.Params.main.padding "x" }}{{ $paddingX = site.Params.main.padding.x }}{{ end -}}
+{{- $paddingY := $defaultY -}}
+{{- if isset site.Params.main.padding "y" }}{{ $paddingY = site.Params.main.padding.y }}{{ end -}}
+
+{{- if not (in $permitted $paddingX) -}}
+    {{- warnf "layout [_default/baseof.html] - Invalid value for param 'padding.x': %d" $paddingX -}}
+    {{- $paddingX = $defaultX -}}
+{{- end -}}
+
+{{- if not (in $permitted $paddingY) -}}
+    {{- warnf "layout [_default/baseof.html] - Invalid value for param 'padding.y': %d" $paddingY -}}
+    {{- $paddingY = $defaultY -}}
+{{- end -}}
+
+{{- return (dict "x" $paddingX "y" $paddingY) -}}

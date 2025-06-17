@@ -21,6 +21,7 @@
 
 {{/* Initialize global arguments */}}
 {{- $breakpoint := page.Scratch.Get "breakpoint" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{- define "_partials/links-content.html" -}}
     {{ $links := .links }}    
@@ -93,7 +94,7 @@
     {{ end }}
 {{ end }}
 
-<div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $args.links) 1 }} gap-5{{ end }} justify-content-{{ $args.align }} pt-5 pt-md-3">
+<div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $args.links) 1 }} gap-5{{ end }} justify-content-{{ $args.align }} pt-{{ $padding.y }}">
     {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
 </div>
 

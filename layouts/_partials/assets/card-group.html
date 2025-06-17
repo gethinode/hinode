@@ -30,6 +30,8 @@
 {{- end -}}
 
 {{/* Initialize global variables */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $pretty := site.Params.main.internalLinks.pretty | default false -}}
 
 {{/* Initialize local variables */}}
@@ -186,7 +188,7 @@
 
     {{- if $paginator -}}
         {{- if gt $paginator.TotalPages 1 -}}
-            <div class="pt-3">{{- partial "assets/pagination.html" (dict "page" $args.page "format" "terse") -}}</div>
+            <div class="pt-{{ $padding.y }}">{{- partial "assets/pagination.html" (dict "page" $args.page "format" "terse") -}}</div>
         {{- end -}} 
     {{- else -}}
         {{- if or (and (gt $count $max) $args.hrefTitle) (and $args.hrefForce  $args.hrefTitle) -}}
@@ -194,7 +196,11 @@
             {{- if and $pretty (not (hasSuffix $href "/" )) (not (strings.Contains $href "#")) -}}
                 {{- $href = printf "%s/" $href -}}
             {{- end -}}
-            <a class="btn btn-outline-primary mt-4" href="{{ $href | safeURL }}" role="button">{{ $args.hrefTitle }}</a>
+            <div class="mt-{{ $padding.y }} w-100">
+                <a class="btn btn-outline-primary" href="{{ $href | safeURL }}" role="button">
+                    {{ $args.hrefTitle }}
+                </a>
+            </div>
         {{- end -}}
     {{- end -}}
 {{- end -}}

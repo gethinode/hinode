@@ -79,6 +79,9 @@
     )}}
 {{ end }}
 
+{{/* Initialize global variables */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
 {{/* Initialize local arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
@@ -171,7 +174,7 @@
 {{/* Main code */}}
 <div class="container-fluid {{ if $args.fixed }}fixed-top{{ else if $overlay }}navbar-overlay{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
-    <nav class="navbar p-4
+    <nav class="navbar px-{{ $padding.x }} py-{{ $padding.y }}
         {{- if not $overlay }}{{ with $color }} bg-{{ . }}{{ end }}{{ end -}}
         {{ if $args.fixed }} navbar-fixed-top{{ end }} navbar-expand-{{ $args.breakpoint -}}
         {{ if $contrast }} navbar-contrast{{ end }}"
