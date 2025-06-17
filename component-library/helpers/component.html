@@ -15,7 +15,7 @@
 {{- $component_props := index . 1 -}}
 {{- $class := index . 2 | default "p-0" -}}
 {{- $bgclass := index . 3 | default "" -}}
-
+{{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $component_path := partial "_bookshop/helpers/component_key" $component_name -}}
 {{- $flat_component_path := partial "_bookshop/helpers/flat_component_key" $component_name -}}
 
@@ -34,7 +34,7 @@
     {{- $style := index $component_props "wrapper" -}}
     {{- $width := index $component_props "width" -}}
     {{- $justify := index $component_props "justify" | default "start" -}}
-    {{- $padding := cond (ne $component_name "separator") "px-4 px-xxl-0 py-4" "" -}}
+    {{- $padding := cond (ne $component_name "separator") (printf "px-%d px-xxl-0 py-%d" $padding.x $padding.y) "" -}}
     {{- $wrapper := $style }}
     {{ with $background }}
         {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $style) }}

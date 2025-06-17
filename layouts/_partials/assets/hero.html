@@ -22,6 +22,7 @@
 {{/* Initialize global variables */}}
 {{ $arrangement := site.Params.modules.bookshop.title.arrangement }}
 {{ if eq $args.order "first" }}{{ $arrangement = "above" }}{{ end }}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local variables */}}
 {{ $align := $args.align }}
@@ -57,7 +58,7 @@
 
 {{ if not $error }}
     {{ if and $args.breadcrumb (not page.IsHome) }}
-        <div class="d-flex flex-column align-items-{{ $align}} mb-4 pe-3">
+        <div class="d-flex flex-column align-items-{{ $align}} mb-{{ $padding.y }} pe-3">
             {{ if site.Params.env_bookshop_live }}
                 <i class="text-white">Breadcrumb preview not supported</i>
             {{ else }}
@@ -69,13 +70,12 @@
     {{ $imageWrapper := printf "mx-md-0 text-%s %s" $align $class }}
     {{ $imageJustify := "" }}
     {{ if eq $args.orientation "stacked" }}
-        {{ $imageWrapper = printf "pt-5 text-center %s" $class }}
+        {{ $imageWrapper = printf "pt-%d text-center %s" $padding.y $class }}
         {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
     {{ else }}
         {{ $imageJustify = $align }}
     {{ end }}
 
-    {{ $sectionClass := cond (eq $args.orientation "stacked") "pt-5" "py-md-5" }}
     {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
 
     {{ $illustration := partial $args.hook (dict
@@ -99,7 +99,7 @@
         "size"        $args.size
         "links"       $args.links
         "link-type"   (or $args.linkType $args.type)
-        "class"       (printf "hero-title %s" $sectionClass)
+        "class"       "hero-title"
         "arrangement" $arrangement
     ) }}
 
@@ -121,7 +121,7 @@
             {{ $imgWidth := sub 12 (or $args.heading.width 12) }}
             {{ if lt $imgWidth 1 }}{{ $imgWidth = 1 }}{{ end }}
 
-            <div class="col col-12 col-md-{{sub 12 $imgWidth }} {{ $order1 }} my-md-auto pt-5 pt-md-0 hero-content">
+            <div class="col col-12 col-md-{{sub 12 $imgWidth }} {{ $order1 }} my-md-auto pt-{{ $padding.y }} pt-md-0 hero-content">
                 {{ $title | safeHTML }}
             </div>
             <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto my-md-auto align-self-end">

@@ -19,6 +19,9 @@
     {{ $error = $args.err }}
 {{ end }}
 
+{{/* Initialize global arguments */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+
 {{/* Initialize local variables */}}
 {{ $list := slice }}
 {{ range $args.elements }}
@@ -32,12 +35,12 @@
 {{ end}}
 
 {{ if not $error }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "class" "py-5") -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading) -}}
 
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
 		"list"         $list
-		"class"        (printf "border-0 card-icon-primary d-sm-none %s" $args.class)
+		"class"        (printf "border-0 card-icon-primary d-%s-none %s" $breakpoint.prev $args.class)
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding
@@ -53,7 +56,7 @@
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
 		"list"         $list
-		"class"        (printf "border-0 card-icon-primary d-none d-sm-block %s" $args.class)
+		"class"        (printf "border-0 card-icon-primary d-none d-%s-block %s" $breakpoint.prev $args.class)
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding

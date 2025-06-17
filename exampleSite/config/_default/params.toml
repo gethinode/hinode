@@ -8,6 +8,9 @@
     footerBelowFold = false
     loading = "lazy"
     breakpoint = "md"
+    [main.padding]
+        x = 4
+        y = 4
     titleCase = true
     [main.internalLinks]
         validate = true

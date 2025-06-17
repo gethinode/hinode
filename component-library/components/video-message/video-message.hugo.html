@@ -17,6 +17,7 @@
 {{ end }}
 
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{- define "_partials/inline/video.html" -}}
 	{{ $provider := .provider }}
@@ -25,10 +26,14 @@
 	{{ $autoplay := .autoplay }}
 	{{ $queryArgs := .queryArgs }}
 	{{ $border := .border }}
+	{{ $padding := .padding }}
 
 	{{ if site.Params.env_bookshop_live }}
 		{{/* Define dummy content as we cannot retrieve video data in live mode */}}
-		{{- partial "assets/live-image.html" (dict "src" "/img/placeholder-video.svg" "ratio" "21x9" "wrapper" "text-center mb-4") -}}
+		{{- partial "assets/live-image.html" (dict
+			"src" "/img/placeholder-video.svg"
+			"ratio" "21x9"
+			"wrapper" (printf "text-center mb-%d" $padding.y)) -}}
 	{{ else }}
         <div class="video-container{{ if $border }} video-container-border{{ end}}">
 			{{ partial "assets/video.html" (dict
@@ -91,13 +96,10 @@
 		) }}
 	{{ end}}
 
-	{{- partial "assets/section-title.html" (dict 
-		"heading" $args.heading
-		"class"   "py-5"
-	) -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading) -}}
 
 	{{ if eq $args.orientation "stacked" }}
-		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
+		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto pb-{{ $padding.y }}">
 		{{ with $args.video }}
 			{{- partial "inline/video.html" (dict
 				"provider"   .provider
@@ -106,14 +108,15 @@
 				"autoplay"   .autoplay
 				"query-args" .queryArgs
 				"border"     $.border
+				"padding"    $padding
 			) -}}
 		{{ end }}
 		</div>
-		<div class="mt-4">
+		<div class="mt-{{ $padding.y }} pb-{{ $padding.y }}">
 			{{- partial "inline/messages.html" (dict "list" $list "cols" $args.cols "type" $args.type "iconRounded" $args.iconRounded) -}}
 		</div>
 	{{ else }}
-		<div class="container grid gap-4">
+		<div class="container grid gap-4 pb-{{ $padding.y }}">
 			<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
 				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
 					{{ with $args.video }}
@@ -124,10 +127,11 @@
 							"autoplay"   .autoplay
 							"query-args" .queryArgs
 							"border"     $.border
+							"padding"    $padding
 						) -}}
 					{{ end }}
 				</div>
-				<div class="col col-{{ $breakpoint.current }}-{{ sub 12 $args.width }} mt-4 mt-{{ $breakpoint.current }}-0">
+				<div class="col col-{{ $breakpoint.current }}-{{ sub 12 $args.width }} mt-{{ $padding.y }} mt-{{ $breakpoint.current }}-0">
 					{{- partial "inline/messages.html" (dict "list" $list "cols" 1 "type" $args.type "iconRounded" $args.iconRounded) -}}
 				</div>
 			</div>

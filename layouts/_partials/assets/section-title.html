@@ -14,6 +14,10 @@
     )}}
 {{ end }}
 
+{{/* Initialize global arguments */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
 {{/* Initialize local arguments */}}
 {{- $size := (or $args.size site.Params.modules.bookshop.title.size) | default 4 -}}
 {{- $arrangement := (or $args.arrangement site.Params.modules.bookshop.title.arrangement) | default "above" -}}
@@ -29,8 +33,6 @@
     {{ $preheading = title $preheading }}
     {{ $title = title $title }}
 {{ end }}
-
-{{- $breakpoint := page.Scratch.Get "breakpoint" -}}
 
 {{ define "_partials/assets/section-title-header.html" }}
     {{ $headingStyle := .headingStyle }}
@@ -83,7 +85,7 @@
 }}
 
 <!-- Main code -->
-<div class="text-{{ $args.heading.align }}{{ with $args.class }} {{ . }}{{ end }}{{ if lt $width 12 }} col-12 col-md-{{ $width }}{{ end }}">
+<div class="text-{{ $args.heading.align }}{{ with $args.class }} {{ . }}{{ end }}{{ if lt $width 12 }} col-12 col-{{ $breakpoint.current }}-{{ $width }}{{ end }} py-{{ $padding.y }}">
     {{ if and $preheading (eq $arrangement "first") }}
         <div class="container-fluid">
             <div class="row">
@@ -97,12 +99,12 @@
                 <div class="col-12 col-{{ $breakpoint.prev }}-8 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 p-0">
                     {{ $header }}
                     {{ with $args.heading.content }}
-                        <div class="{{ $contentStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>
+                        <div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>
                     {{ end }}
                     {{ $links }}
                 </div>
                 <div class="col-12 col-{{ $breakpoint.prev }}-4 col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 p-0 ps-{{ $breakpoint.prev }}-4">
-                    {{ $wrapper := (printf "col-4 col-%s-12 mx-auto pt-4 pt-%s-0" $breakpoint.prev $breakpoint.prev) }}
+                    {{ $wrapper := (printf "col-4 col-%s-12 mx-auto pt-%d pt-%s-0" $breakpoint.prev $padding.y $breakpoint.prev) }}
                     {{ partial "assets/featured-illustration.html" (merge $imgArgs (dict "wrapper" $wrapper)) }}
                 </div>
             </div>
@@ -119,11 +121,11 @@
                         </p>
                     {{ end }}
                     {{ $header }}
-                    {{ with $args.heading.content }}<div class="{{ $contentStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
+                    {{ with $args.heading.content }}<div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
                     {{ $links }}
                 </div>
                 <div class="col-12 col-{{ $breakpoint.current }}-2 p-0 pt-2 text-center">
-                    {{ $wrapper := (printf "col-4 col-%s-12 mx-auto pt-4 pt-%s-0" $breakpoint.prev $breakpoint.prev) }}
+                    {{ $wrapper := (printf "col-4 col-%s-12 mx-auto pt-%d pt-%s-0" $breakpoint.prev $padding.y $breakpoint.prev) }}
                     {{ partial "assets/featured-illustration.html" (merge $imgArgs (dict "ratio" $args.ratio "wrapper" "mx-auto")) }}
                 </div>
             </div>
@@ -135,7 +137,7 @@
             </p>
         {{ end }}
         {{ $header }}
-        {{ with $args.heading.content }}<div class="{{ $contentStyle }} pt-4">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
+        {{ with $args.heading.content }}<div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
         {{ $links }}
     {{ end }}
 </div>

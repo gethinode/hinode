@@ -27,7 +27,11 @@ The `articles` content block renders a group of article cards.
     title: More Blogs
   padding: 0
   max: 3
+  background:
+    color: primary
+    subtle: true
   class: border-0 card-zoom card-body-margin
+  justify: center
 ```
 
 {{< /example-bookshop >}}
