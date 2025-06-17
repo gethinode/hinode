@@ -15,6 +15,7 @@ arguments:
   cover:
   orientation:
   width:
+  justify:
   use-section:
   use-title:
   class:

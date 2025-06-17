@@ -151,13 +151,6 @@ arguments:
         - full
         - title
         - none
-  # # TODO: rename bodyStyle
-  # bodyStyle:
-  #   type: string
-  #   optional: true
-  #   default: lead text-muted
-  #   comment: >-
-  #     Style of the body text, if any..
   border:
     type: bool
     optional: true
@@ -355,6 +348,12 @@ arguments:
       - template.HTML
     optional: true
     comment: Section content displayed below the title.
+  content-style:
+    type: string
+    optional: true
+    default: lead text-muted
+    comment: >-
+      Style of the section content, if any.
   contrast:
     type: bool
     default: false
@@ -572,17 +571,16 @@ arguments:
     optional: true
     comment: >-
       Heading of the content block, including a preheading and content element.
-  # # TODO: rename headingStyle
-  # headingStyle:
-  #   type: select
-  #   optional: true
-  #   default: display
-  #   options:
-  #     values:
-  #       - display
-  #       - fs
-  #   comment: >-
-  #     Style of the heading, either display or fs (regular).
+  heading-style:
+    type: select
+    optional: true
+    default: display
+    options:
+      values:
+        - display
+        - fs
+    comment: >-
+      Style of the heading, either display style or regular style (fs).
   # headline: 
   #   type: string
   #   optional: true
@@ -718,7 +716,7 @@ arguments:
     type: select
     optional: true
     default: center
-    comment: Justification of the link title and icon.
+    comment: Justification of the child elements.
     options:
       values:
         - start

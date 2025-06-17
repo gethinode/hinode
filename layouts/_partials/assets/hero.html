@@ -25,19 +25,17 @@
 
 {{/* Initialize local variables */}}
 {{ $align := $args.align }}
-{{ if and (not $align) (eq $args.orientation "stacked") }}{{ $align = "center" }}{{ end }}
-{{ $class := $args.class }}
+{{ $class := $args.class | default "" }}
 {{ $scale := $args.illustration.width }}
 
 {{ if $scale }}
-    {{ $class = trim (printf "%s col-%d " $class $scale) " " }}
+    {{ $class = trim (printf "%s col-%d text-center text-md-%s" $class $scale $align) " " }}
 {{ else }}
-    {{ $class = trim (printf "%s col-8 col-md-12" $class) " " }}
     {{ $scale = 12 }}
 {{ end }}
 
 {{ $iconWrapper := "col-6" }}
-{{ if $args.center }}{{ $iconWrapper = "col-6 mx-auto text-center" }}{{ end }}
+{{ $heading := cond (eq $args.orientation "horizontal") (merge $args.heading (dict "width" 12)) $args.heading }}
 
 {{ $sizes := "100vw" }}
 {{ if or (lt $args.width 12) (lt $scale 12) }}
@@ -58,79 +56,77 @@
 {{ end }}
 
 {{ if not $error }}
-    <div class="container-xxl {{ $args.padding }} d-flex flex-column">
-        {{ if and $args.breadcrumb (not page.IsHome) }}
-            <div class="d-flex flex-column align-items-{{ $align}} mb-4 pe-3">
-                {{ if site.Params.env_bookshop_live }}
-                    <i class="text-white">Breadcrumb preview not supported</i>
-                {{ else }}
-                    {{ partial "assets/breadcrumb.html" (dict "page" page) }}
-                {{ end }}            
-            </div>
-        {{ end }}
+    {{ if and $args.breadcrumb (not page.IsHome) }}
+        <div class="d-flex flex-column align-items-{{ $align}} mb-4 pe-3">
+            {{ if site.Params.env_bookshop_live }}
+                <i class="text-white">Breadcrumb preview not supported</i>
+            {{ else }}
+                {{ partial "assets/breadcrumb.html" (dict "page" page) }}
+            {{ end }}            
+        </div>
+    {{ end }}
 
-        {{ $imageWrapper := printf "mx-auto mx-md-0 %s" $class }}
-        {{ if eq $args.orientation "stacked" }}
-            {{ $imageWrapper = printf "pt-5 %s" $class }}
-            {{ if $args.center }}{{ $imageWrapper = printf "%s mx-auto" $imageWrapper }}{{ end }}
-            {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
-        {{ end }}
-
-        {{ $sectionClass := cond (eq $args.orientation "stacked") "pt-5" "py-md-5" }}
+    {{ $imageWrapper := printf "mx-md-0 text-%s %s" $align $class }}
+    {{ $imageJustify := "" }}
+    {{ if eq $args.orientation "stacked" }}
+        {{ $imageWrapper = printf "pt-5 text-center %s" $class }}
         {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
+    {{ else }}
+        {{ $imageJustify = $align }}
+    {{ end }}
 
-        {{ $illustration := partial $args.hook (dict
-            "page"         $args.page
-            "image"        $args.illustration.image
-            "icon"         $args.illustration.icon
-            "anchor"       $args.illustration.anchor
-            "mode"         $args.illustration.mode
-            "ratio"        $args.illustration.ratio
-            "sizes"        $sizes
-            "title"        (T "heroImage")
-            "wrapper"      $imageWrapper
-            "class"        "hero-image"
-            "image-overlay" $args.imageOverlay
-        ) }}
+    {{ $sectionClass := cond (eq $args.orientation "stacked") "pt-5" "py-md-5" }}
+    {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
 
-        {{ $title := partial "assets/section-title.html" (dict
-            "heading"             $args.heading
-            "use-title"           $args.useTitle
-            "size"                $args.size
-            "links"               $args.links
-            "type"                (or $args.linkType $args.type)
-            "class"               (printf "hero-title %s" $sectionClass)
-            "arrangement"         $arrangement
-        ) }}
+    {{ $illustration := partial $args.hook (dict
+        "page"          $args.page
+        "image"         $args.illustration.image
+        "icon"          $args.illustration.icon
+        "anchor"        $args.illustration.anchor
+        "mode"          $args.illustration.mode
+        "ratio"         $args.illustration.ratio
+        "sizes"         $sizes
+        "title"         (T "heroImage")
+        "wrapper"       $imageWrapper
+        "class"         "hero-image"
+        "image-overlay" $args.imageOverlay
+        "justify"       $imageJustify
+    ) }}
 
-        {{ if eq $args.orientation "stacked" }}
-            {{/* Render stacked component */}}
-            <div class="row flex-fill">
-                <div class="col col-12 col-md-{{ $args.width }}{{ if $args.center }} m-auto{{ end }}">
-                    {{ $illustration | safeHTML }}
-                    {{ $title | safeHTML }}
-                </div>
+    {{ $title := partial "assets/section-title.html" (dict
+        "heading"     $heading
+        "use-title"   $args.useTitle
+        "size"        $args.size
+        "links"       $args.links
+        "link-type"   (or $args.linkType $args.type)
+        "class"       (printf "hero-title %s" $sectionClass)
+        "arrangement" $arrangement
+    ) }}
+
+    {{ if eq $args.orientation "stacked" }}
+        {{/* Render stacked component */}}
+
+        {{ $illustration | safeHTML }}
+        {{ $title | safeHTML }}
+    {{ else }}
+        {{/* Render horizontal component */}}
+        <div class="row row-cols-1 {{ if eq $args.orientation "stacked" }}row-cols-md-2 {{ end }} w-100">
+            {{ $order1 := "order-1 order-md-0" }}
+            {{ $order2 := "order-0 order-md-1" }}
+            {{ if eq $args.order "first" }}
+                {{ $order1 = "order-1" }}
+                {{ $order2 = "order-0" }}
+            {{ end }}
+
+            {{ $imgWidth := sub 12 (or $args.heading.width 12) }}
+            {{ if lt $imgWidth 1 }}{{ $imgWidth = 1 }}{{ end }}
+
+            <div class="col col-12 col-md-{{sub 12 $imgWidth }} {{ $order1 }} my-md-auto pt-5 pt-md-0 hero-content">
+                {{ $title | safeHTML }}
             </div>
-        {{ else }}
-            {{/* Render horizontal component */}}
-            <div class="row row-cols-1 row-cols-md-2 flex-fill">
-                {{ $order1 := "order-1 order-md-0 " }}
-                {{ $order2 := "order-0 order-md-1" }}
-                {{ if eq $args.order "first" }}
-                    {{ $order1 = "order-1" }}
-                    {{ $order2 = "order-0" }}
-                {{ end }}
-
-                <div class="col col-12 col-md-{{ $args.width }} {{ $order1 }} my-md-auto pt-5 pt-md-0 hero-content">
-                    {{ $title | safeHTML }}
-                </div>
-                <div class="col col-10 col-md-{{ sub 12 $args.width }}
-                    {{ $order2 }}{{ if $args.center }} text-center{{ end }} my-md-auto align-self-end">
-                    <div>
-                        {{ $illustration | safeHTML }}
-                    </div>
-                </div>
+            <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto my-md-auto align-self-end">
+                {{ $illustration | safeHTML }}
             </div>
-        {{ end }}
-    </div>
+        </div>
+    {{ end }}
 {{ end }}

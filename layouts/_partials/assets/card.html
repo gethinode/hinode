@@ -148,19 +148,19 @@
     {{ if $thumbnail }}
         {{ if eq $args.orientation "horizontal-sm" }}
             {{ $stack = "fa-1x" }}
-            {{ $col1 = "col-4 col-md-2" }}
+            {{ $col1 = "col-4 col-md-2 pe-0" }}
             {{ $col2 = "col-8 col-md-10" }}
         {{ else }}
-            {{ $col1 = "col-4" }}
+            {{ $col1 = "col-4 pe-0" }}
             {{ $col2 = "col-8" }}
         {{ end }}
     {{ else if $icon }}
         {{ if eq $args.orientation "horizontal-sm" }}
             {{ $stack = "fa-1x" }}
-            {{ $col1 = "col-2 col-sm-3 col-md-4 col-xl-2" }}
-            {{ $col2 = "col-10 col-sm-9 col-md-8 col-xl-10" }}
+            {{ $col1 = "col-4 col-md-2 pe-0" }}
+            {{ $col2 = "col-8 col-md-10" }}
         {{ else }}
-            {{ $col1 = "col-4" }}
+            {{ $col1 = "col-4 pe-0" }}
             {{ $col2 = "col-8" }}
         {{ end }}
 

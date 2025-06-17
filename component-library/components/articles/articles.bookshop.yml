@@ -43,3 +43,5 @@ blueprint:
   footer-style:
   orientation:
   class:
+  width:
+  justify:
