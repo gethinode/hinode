@@ -39,6 +39,7 @@ blueprint:
       label:
   border:
   width:
+  justify:
 
 _structures:
   messages:

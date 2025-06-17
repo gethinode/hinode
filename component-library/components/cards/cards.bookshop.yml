@@ -30,3 +30,5 @@ blueprint:
       content:
   orientation:
   class:
+  width:
+  justify:

@@ -17,43 +17,41 @@
 {{ end }}
 
 {{ if not $args.err }}
-	<div class="container-xxl p-4 px-xxl-0">
-		{{ $color := "" }}
-		{{ if $args.contrast }}{{ $color = "white" }}{{ end }}
-		{{- partial "assets/section-title.html" (dict 
-			"heading" $args.heading
-			"color" $color
-			"class" "py-5"
-		) -}}
+	{{ $color := "" }}
+	{{ if $args.contrast }}{{ $color = "white" }}{{ end }}
+	{{- partial "assets/section-title.html" (dict 
+		"heading" $args.heading
+		"color" $color
+		"class" "py-5"
+	) -}}
 
-		{{ $class := "" }}
-		{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}
+	{{ $class := "" }}
+	{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}
 
-		<div id="{{ $id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end }}accordion-flush mb-3{{ with $class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
-			{{ range $index, $item := $args.items }}
-				<div class="accordion-item">
-					{{- with $item.title -}}
-						<div class="accordion-header m-0" id="{{ $id }}-heading-{{ $id }}">
-							<button class="accordion-button collapsed" 
-								type="button" 
-								data-bs-toggle="collapse"
-								data-bs-target="#{{ $id }}-item-{{ $index }}"
-								aria-expanded="false"
-								aria-controls="{{ $id }}-item-{{ $index }}"
-							>
-							{{ if $args.color }}<div class="text-{{ $args.color }}">{{ . }}</div>{{ else }}{{ . }}{{ end }}
-							</button>
-						</div>
-					{{- end -}}
-					<div id="{{ $id }}-item-{{ $index }}" 
-						class="accordion-collapse collapse"
-						aria-labelledby="{{ $id }}-heading-{{ $index }}"
-						data-bs-parent="#{{ $id }}"
-					>
-						<div class="accordion-body">{{ $item.description | page.RenderString | safeHTML }}</div>
+	<div id="{{ $id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end }}accordion-flush mb-3{{ with $class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
+		{{ range $index, $item := $args.items }}
+			<div class="accordion-item">
+				{{- with $item.title -}}
+					<div class="accordion-header m-0" id="{{ $id }}-heading-{{ $id }}">
+						<button class="accordion-button collapsed" 
+							type="button" 
+							data-bs-toggle="collapse"
+							data-bs-target="#{{ $id }}-item-{{ $index }}"
+							aria-expanded="false"
+							aria-controls="{{ $id }}-item-{{ $index }}"
+						>
+						{{ if $args.color }}<div class="text-{{ $args.color }}">{{ . }}</div>{{ else }}{{ . }}{{ end }}
+						</button>
 					</div>
+				{{- end -}}
+				<div id="{{ $id }}-item-{{ $index }}" 
+					class="accordion-collapse collapse"
+					aria-labelledby="{{ $id }}-heading-{{ $index }}"
+					data-bs-parent="#{{ $id }}"
+				>
+					<div class="accordion-body">{{ $item.description | page.RenderString | safeHTML }}</div>
 				</div>
-			{{ end }}
-		</div>
+			</div>
+		{{ end }}
 	</div>
 {{ end }}

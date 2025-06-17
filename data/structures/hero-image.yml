@@ -11,3 +11,4 @@ arguments:
   wrapper:
   class:
   image-overlay:
+  justify:

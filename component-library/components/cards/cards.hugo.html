@@ -32,40 +32,38 @@
 {{ end}}
 
 {{ if not $error }}
-	<div class="container-xxl p-4 px-xxl-0">
-		{{- partial "assets/section-title.html" (dict "heading" $args.heading "class" "py-5") -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading "class" "py-5") -}}
 
-		{{- partial "assets/card-group.html" (dict 
-			"page"         page
-			"list"         $list
-			"class"        (printf "border-0 card-icon-primary d-sm-none %s" $args.class)
-			"cols"         $args.cols
-			"gutter"       "4"
-			"padding"      $args.padding
-			"header-style" "none"
-			"footer-style" "none"
-			"icon-rounded" $args.iconRounded
-			"icon-style"   "fa-2x"
-			"align"        "start"
-			"orientation"  ($args.orientation | default "horizontal-sm")
-			"hook"         "assets/live-card.html"
-		) -}}
+	{{- partial "assets/card-group.html" (dict 
+		"page"         page
+		"list"         $list
+		"class"        (printf "border-0 card-icon-primary d-sm-none %s" $args.class)
+		"cols"         $args.cols
+		"gutter"       "4"
+		"padding"      $args.padding
+		"header-style" "none"
+		"footer-style" "none"
+		"icon-rounded" $args.iconRounded
+		"icon-style"   "fa-2x"
+		"align"        "start"
+		"orientation"  ($args.orientation | default "horizontal-sm")
+		"hook"         "assets/live-card.html"
+	) -}}
 
-		{{- partial "assets/card-group.html" (dict 
-			"page"         page
-			"list"         $list
-			"class"        (printf "border-0 card-icon-primary d-none d-sm-block %s" $args.class)
-			"cols"         $args.cols
-			"gutter"       "4"
-			"padding"      $args.padding
-			"header-style" "none"
-			"footer-style" "none"
-			"icon-rounded" $args.iconRounded
-			"icon-style"   "fa-2x"
-			"align"        "start"
-			"orientation"  ($args.orientation | default "stacked")
-			"hook"         "assets/live-card.html"
-		) -}}
-	</div>
+	{{- partial "assets/card-group.html" (dict 
+		"page"         page
+		"list"         $list
+		"class"        (printf "border-0 card-icon-primary d-none d-sm-block %s" $args.class)
+		"cols"         $args.cols
+		"gutter"       "4"
+		"padding"      $args.padding
+		"header-style" "none"
+		"footer-style" "none"
+		"icon-rounded" $args.iconRounded
+		"icon-style"   "fa-2x"
+		"align"        "start"
+		"orientation"  ($args.orientation | default "stacked")
+		"hook"         "assets/live-card.html"
+	) -}}
 {{ end }}
 

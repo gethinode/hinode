@@ -17,6 +17,8 @@ blueprint:
     width:
     size:
   contrast:
+  width:
+  justify:
   background:
     backdrop:
     color:

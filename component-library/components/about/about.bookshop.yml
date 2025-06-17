@@ -30,6 +30,7 @@ blueprint:
     mode:
   order:
   width:
+  justify:
   link-type:
   links:
     -

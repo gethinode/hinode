@@ -32,6 +32,9 @@
     {{- $background := index $component_props "background" -}}
     {{- $backdrop := "" -}}
     {{- $style := index $component_props "wrapper" -}}
+    {{- $width := index $component_props "width" -}}
+    {{- $justify := index $component_props "justify" | default "start" -}}
+    {{- $padding := "px-4 px-xxl-0 py-4" -}}
     {{- $wrapper := $style }}
     {{ with $background }}
         {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $style) }}
@@ -59,7 +62,16 @@
         {{- if $backdrop -}}
             {{ partial "assets/live-image.html" (dict "src" $backdrop "class" (printf "background-img-fluid %s" $bgclass) "title" (T "backgroundImage")) }}
         {{- end -}}
-        {{ partial $resolved_component $component_props }}
+
+        {{ $col := cond (and $width (lt $width 12)) (printf "col-12 col-md-%d" $width) "" }}
+
+        <div class="container-xxl {{ $padding }} d-flex flex-column align-items-{{ $justify }}">
+            {{ with $col }}
+                <div class="{{ . }}">{{ partial $resolved_component $component_props }}</div>
+            {{ else }}
+                {{ partial $resolved_component $component_props }}
+            {{ end}}
+        </div>
     </section>
     {{ "<!--bookshop-live end-->" | safeHTML }}
 {{- else -}}

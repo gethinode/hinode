@@ -73,7 +73,7 @@
 	) -}}
 {{ end }}
 
-<div class="container-xxl p-4 px-xxl-0">
+{{ if not $args.err }}
 	{{ $list := slice }}
 
 	{{ range $args.messages }}
@@ -133,4 +133,4 @@
 			</div>
 		</div>
 	{{ end }}
-</div>
+{{ end }}

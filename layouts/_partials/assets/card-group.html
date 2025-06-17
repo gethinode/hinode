@@ -136,8 +136,7 @@
 
 {{/* Main code */}}
 {{- if and (not $error) (or (gt (len $elements) 0) $args.cards) -}}
-<div class="{{- $args.wrapper -}}">
-    <div class="container-fluid {{ if $args.scroll }}card-container-wrapper{{ end }} p-0">
+    <div class="container-fluid {{ if $args.scroll }}card-container-wrapper{{ end }} p-0 {{ $args.wrapper }}">
         <div class="row g-{{ $args.gutter -}}
         {{- if $args.scroll }} d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end -}}
         {{- if $args.bento }}{{ with $args.valign }} align-items-{{ . }}{{ end }}{{ else }} {{ $colGrid }}{{ end }}">
@@ -198,5 +197,4 @@
             <a class="btn btn-outline-primary mt-4" href="{{ $href | safeURL }}" role="button">{{ $args.hrefTitle }}</a>
         {{- end -}}
     {{- end -}}
-</div>
 {{- end -}}
