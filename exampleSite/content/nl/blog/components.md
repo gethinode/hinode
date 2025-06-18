@@ -21,7 +21,7 @@ Het volgende voorbeeld gebruikt een shortcode om een animatie te tonen, die afsp
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* animation data="gatin.json" auto=false hover=true class="col-6 mx-auto" */>}}
+{{</* animation animation-data="gatin.json" autoplay=false hover=true class="col-6 mx-auto" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

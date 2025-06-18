@@ -18,23 +18,13 @@ a:active {
 // Ensure main page is rendered to full viewport height
 //
 .main {
-    min-height: 100vh;
-}
-
-.fullcover {
     --navbar-height: #{$navbar-height};
-
-    min-height: calc(100vh - var(--navbar-height));
-}
-
-.fullscreen {
     --overlay-offset: #{$overlay-offset};
+    --section-height: 88vh;
+    --max-section-height: 1024px;
 
-    min-height: calc(100vh - var(--overlay-offset));
-}
-
-.main-content {
-    margin-top: var(--navbar-offset);
+    min-height: 100vh;
+    margin-top: var(--overlay-offset);
 }
 
 $utilities: map-merge(
@@ -100,66 +90,24 @@ $utilities: map-merge(
     )
 );
 
-@media screen and (orientation: portrait) {
-    .min-vh-custom {
-        min-height: 25vh !important
-    }
-}
-
-@media screen and (orientation: landscape) {
-    .min-vh-custom {
-        min-height: 50vh !important
-    }
-}
-
 :root {
     --nav-height: 90px;
 }
 
-@include media-breakpoint-up(sm) {
-    .ratio-section {
-        min-height: calc(min(100vh, 576px) - var(--nav-height));
-    }    
-}
-
-@include media-breakpoint-up(md) {
-    .ratio-section {
-        min-height: calc(min(100vh, 768px) - var(--nav-height));
-    }    
-}
-
-@include media-breakpoint-up(lg) {
-    .ratio-section {
-        min-height: calc(min(100vh, 992px) - var(--nav-height));
-    }    
-}
-
-@include media-breakpoint-up(xl) {
-    .ratio-section {
-        min-height: calc(min(100vh, 1200px) - var(--nav-height));
-    }    
-}
-
-@include media-breakpoint-up(xxl) {
-    .ratio-section {
-        min-height: calc(min(100vh, 1400px) - var(--nav-height));
-    }    
-}
-
 .section-cover {
-    min-height: 100vh;
+    min-height: calc(var(--section-height) - var(--overlay-offset));
 }    
 
 @include media-breakpoint-up(xxl) {
     .section-cover {
-        min-height: calc(min(100vh, 1000px));
+        min-height: calc(min(calc(var(--section-height) - var(--overlay-offset)), var(--max-section-height)));
     }    
 }
 
 /* stylelint-disable media-feature-range-notation */
 @media (min-height: 1400px) { 
     .section-cover {
-        min-height: calc(min(100vh, 1000px));
+        min-height: calc(min(calc(var(--section-height) - var(--overlay-offset)), var(--max-section-height)));
     }
 }
 /* stylelint-enable media-feature-range-notation */
