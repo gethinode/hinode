@@ -4,6 +4,8 @@ arguments:
   mode:
   ratio:
   portrait:
+  image-height:
+  image-width:
   loading:
   priority:
   sizes:

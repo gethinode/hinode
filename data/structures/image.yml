@@ -44,6 +44,10 @@ arguments:
     release: v0.24.0
   anchor:
     release: v0.24.22
+  image-height:
+    release: v1.0.0
+  image-width:
+    release: v1.0.0
   # deprecated arguments
   url:
     type:
