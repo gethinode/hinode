@@ -110,7 +110,7 @@
         {{ $title | safeHTML }}
     {{ else }}
         {{/* Render horizontal component */}}
-        <div class="row row-cols-1 {{ if eq $args.orientation "stacked" }}row-cols-md-2 {{ end }} w-100">
+        <div class="row row-cols-1 {{ if eq $args.orientation "stacked" }}row-cols-md-2 {{ end }} flex-grow-1">
             {{ $order1 := "order-1 order-md-0" }}
             {{ $order2 := "order-0 order-md-1" }}
             {{ if eq $args.order "first" }}
