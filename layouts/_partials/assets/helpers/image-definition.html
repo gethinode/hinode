@@ -51,6 +51,17 @@
 {{- $width := index $target "width" -}}
 {{- $data := index $target "data" -}}
 
+{{ if and $args.imageWidth $args.imageHeight }}
+    {{ $height = $args.imageHeight }}
+    {{ $width = $args.imageWidth }}
+{{ else if and $args.imageWidth $height $width }}
+    {{ $height = int (math.Round (mul (div (float $args.imageWidth) $width) $height)) }}
+    {{ $width = $args.imageWidth }}
+{{ else if and $args.imageHeight $height $width }}
+    {{ $width = int (math.Round (mul (div (float $args.imageHeight) $height) $width)) }}
+    {{ $height = $args.imageHeight }}
+{{ end }}
+
 {{/* Add color modes */}}
 {{- range $none := $modes -}}
     {{- if ne $none $args.colorMode -}}
@@ -81,7 +92,12 @@
             {{ with $width }} width="{{ . }}"{{ end -}}
             {{ with $alt }} alt="{{ . }}"{{ end }}>
     {{- else -}}
-        <svg class="{{ $args.class }}">
+        <svg class="{{ $args.class }}"
+        {{ if or $args.imageHeight $args.imageWidth }}
+            {{ with $width }} width="{{ . }}"{{ end }}
+            {{ with $height }} height="{{ . }}"{{ end }}
+        {{ end }}
+        >
             <use href="{{ $fallbackURL }}#{{ $fileAnchor }}"></use>
         </svg>
     {{- end -}}

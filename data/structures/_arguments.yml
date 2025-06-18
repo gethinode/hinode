@@ -585,10 +585,6 @@ arguments:
   #   type: string
   #   optional: true
   #   comment: Headline of the section.
-  # height:
-  #   type: int
-  #   optional: false
-  #   comment: Height of the image in pixels.
   hide-empty:
     type: bool
     comment: Hides the entire section when no pages are available.
@@ -1611,11 +1607,6 @@ arguments:
     options:
       min: 1
       max: 12
-  # # TODO: rename or merge width
-  # width:
-  #   type: int
-  #   optional: false
-  #   comment: Width of the image in pixels.
   # # TODO: rename or merge width
   # width:
   #   type: select
