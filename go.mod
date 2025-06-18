@@ -17,5 +17,5 @@ require (
 	github.com/gethinode/mod-simple-datatables v1.1.7 // indirect
 	github.com/gethinode/mod-utils/v3 v3.3.1 // indirect
 	github.com/nextapps-de/flexsearch v0.0.0-20250606060143-c28f52c09b7a // indirect
-	github.com/twbs/bootstrap v5.3.6+incompatible // indirect
+	github.com/twbs/bootstrap v5.3.7+incompatible // indirect
 )
