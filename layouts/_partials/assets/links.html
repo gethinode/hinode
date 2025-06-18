@@ -98,6 +98,6 @@
     {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
 </div>
 
-<div class="d-{{ $breakpoint.current }}-none">
+<div class="d-{{ $breakpoint.current }}-none pt-{{ $padding.y }}">
     {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" true) }}
 </div>
