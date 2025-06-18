@@ -117,47 +117,15 @@
 {{- $enableLanguage := or $page.IsTranslated hugo.IsMultilingual -}}
 {{- $horizontal := default false site.Params.navigation.horizontal -}}
 
-{{- $logo := $args.logo | default site.Params.navigation.logo -}}
-{{- $logoLight := "" -}}
-{{- $logoDark := "" -}}
-{{- if $enableDarkMode -}}
-    {{ $ext := path.Ext $logo -}}
-    {{- $ext := path.Ext $logo -}}
-    {{- $base := strings.TrimSuffix $ext $logo -}}
-    {{- range $suffix := $modes -}}
-        {{- $base = strings.TrimSuffix (printf "-%s" $suffix) $base -}}
-    {{- end -}}
-
-    {{- $logoLight = printf "%s-light%s" $base $ext -}}
-    {{- $logoDark = printf "%s-dark%s" $base $ext -}}
-    
-    {{- $light := fileExists (path.Join "/static" $logoLight) -}}
-    {{- $dark := fileExists (path.Join "/static" $logoDark) -}}
-    {{- if and $light (not $dark) -}}
-        {{- warnf "partial [assets/navbar.html] - Missing file: %s" $logoDark -}}
-        {{- $logoLight = "" -}}
-        {{- $logoDark = "" -}}
-    {{- end -}}
-    {{- if and (not $light) $dark -}}
-        {{- warnf "partial [assets/navbar.html] - Missing file: %s" $logoLight -}}
-        {{- $logoLight = "" -}}
-        {{- $logoDark = "" -}}
-    {{- end -}}
-    {{- if not (or $light $dark) -}}
-        {{- $logoLight = "" -}}
-        {{- $logoDark = "" -}}
-    {{- end -}}
-{{- end -}}
-
-{{ if $logo }}{{ $logo = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $logo) }}{{ end }}
-{{ if $logoLight }}{{ $logoLight = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $logoLight) }}{{ end }}
-{{ if $logoDark }}{{ $logoDark = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $logoDark) }}{{ end }}
-
 {{- $title := site.Title -}}
 {{- if $args.title -}}
     {{- $title = $args.title -}}
-    {{- if not $args.logo }}{{ $logo = "" }}{{ end -}}
 {{- end -}}
+
+{{ $logo := "" }}
+{{ with $args.logo | default site.Params.navigation.logo }}
+    {{ $logo = partial "assets/image.html" (dict "src" . "loading" "eager" "title" $title "image-height" 30) }}
+{{ end }}
 
 {{- $pre := $args.pre -}}
 {{- $post := $args.post -}}
@@ -201,18 +169,9 @@
                 </div>
         
                 {{/* Insert the brand logo or name */}}
-                <div class="{{ if (or $logoLight $logo) }}mx-auto{{ else }}flex-grow-1 flex-{{ $args.breakpoint }}-grow-0{{ end }}">
+                <div class="{{ if $logo }}mx-auto{{ else }}flex-grow-1 flex-{{ $args.breakpoint }}-grow-0{{ end }}">
                     <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
-                        {{- if (and $logoLight $logoDark) -}}
-                            {{ $width := partial "utilities/GetWidth.html" (dict "path" $logoLight "height" 30) }}
-                            <img src="{{if $absoluteURL }}{{ absURL $logoLight }}{{ else }}{{ $logoLight }}{{ end }}" class="d-none-inline-dark" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                            <img src="{{if $absoluteURL }}{{ absURL $logoDark }}{{ else }}{{ $logoDark }}{{ end }}" class="d-none-inline-light" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                        {{- else if $logo -}}
-                            {{ $width := partial "utilities/GetWidth.html" (dict "path" $logo "height" 30) }}
-                            <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
-                        {{- else -}}
-                            <div class="navbar-title fw-bold h-100">{{ $title }}</div>
-                        {{- end -}}
+                        {{- with $logo -}}{{ . }}{{- else -}}<div class="navbar-title fw-bold h-100">{{ $title }}</div>{{- end -}}
                     </a>
                 </div>
         
