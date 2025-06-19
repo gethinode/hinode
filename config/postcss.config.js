@@ -30,7 +30,7 @@ const purgecss = purgeCSSPlugin({
       './_vendor/github.com/gethinode/mod-flexsearch/v2/assets/scss/modules/flexsearch/flexsearch.scss',
       './_vendor/github.com/gethinode/mod-katex/dist/katex.scss',
       './_vendor/github.com/gethinode/mod-leaflet/dist/leaflet.scss',
-      './_vendor/github.com/gethinode/mod-simple-datatables/dist/simple-datatables.scss',
+      './_vendor/github.com/gethinode/mod-simple-datatables/v2/dist/simple-datatables.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_carousel.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_dropdown.scss',
       './_vendor/github.com/twbs/bootstrap/scss/_modal.scss',
