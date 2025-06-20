@@ -1,7 +1,7 @@
 {{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{- $sidebar := partial "body/sidebar" . -}}
-    {{- $toc := partial "body/panel-toc" . -}}
+    {{- $sidebar := partial "page/sidebar" . -}}
+    {{- $toc := partial "page/panel-toc" . -}}
 
     {{ with $sidebar }}
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvass-sidebar" aria-labelledby="offcanvas-label">
