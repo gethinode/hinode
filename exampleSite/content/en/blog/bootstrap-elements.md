@@ -59,6 +59,16 @@ As an example, the following shortcode displays a simple alert.
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+## Args
+
+Use the args shortcode to generates a table of structured arguments. The argument definitions are expected to be defined in a data file identified by a provided structure name.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* args "args" */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Badge
 
 Use the badge shortcode to display a badge for a heading.
@@ -106,6 +116,10 @@ As an example, the following shortcode displays a tooltip for a dark button with
 {{</* /button */>}}
 {{< /example>}}
 <!-- markdownlint-enable MD037 -->
+
+{{< button color="primary" href="#!" button-size="sm" >}}sm{{< /button >}}
+{{< button color="primary" href="#!" button-size="md" >}}md{{< /button >}}
+{{< button color="primary" href="#!" button-size="lg" >}}lg{{< /button >}}
 
 ## Button group
 
@@ -238,9 +252,11 @@ Use the `file` shortcode to print and highlight the full content of a given inpu
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file file="./config/_default/languages.toml" id="file-collapse-1" */>}}
+{{</* file file="./config/_default/languages.toml" id="file-collapse-1" full=false */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
+
+{{< file full="false" file="./config/_default/languages.toml" id="file-collapse-5" >}}
 
 ## Icon
 
