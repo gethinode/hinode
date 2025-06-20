@@ -117,10 +117,6 @@ As an example, the following shortcode displays a tooltip for a dark button with
 {{< /example>}}
 <!-- markdownlint-enable MD037 -->
 
-{{< button color="primary" href="#!" button-size="sm" >}}sm{{< /button >}}
-{{< button color="primary" href="#!" button-size="md" >}}md{{< /button >}}
-{{< button color="primary" href="#!" button-size="lg" >}}lg{{< /button >}}
-
 ## Button group
 
 As an example, the following shortcode displays a group of three buttons.
