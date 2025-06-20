@@ -2,3 +2,17 @@ comment: >-
   Initializes images dimensions (widht x height for supported image ratios.
 arguments:
   ratio:
+    type: select
+    optional: true
+    comment: >-
+      Ratio of the media asset. When the asset is an image, it is resized and
+      cropped (not applicable to vector graphics). For video assets, the padding
+      of the embedded frame is adjusted.
+    options:
+      values:
+        - 1x1
+        - 3x2
+        - 4x3
+        - 16x9
+        - 21x9
+        - auto

@@ -20,21 +20,23 @@
 {{ end }}
 
 {{/* Initialize local arguments */}}
-{{ $dim := "" }}
+{{ $dim := slice }}
 {{ $default := dict "4x3" "1400x1050" "3x2" "1400x933" "1x1" "1400x1400" "16x9" "1400x788" "21x9" "1400x600" "auto" "1400" }}
 
-{{/* Initialize dimensions data - stripping unsupported file extension */}}
-{{ $config := "dimensions" }}
-{{ with index site.Params "dam" }}{{ with index . "dimensions" }}{{ $config = . }}{{ end }}{{ end }}
-{{ $config = path.Join (path.Dir $config) (path.BaseName $config) }}
+{{ if not $args.err }}
+    {{/* Initialize dimensions data - stripping unsupported file extension */}}
+    {{ $config := "dimensions" }}
+    {{ with index site.Params "dam" }}{{ with index . "dimensions" }}{{ $config = . }}{{ end }}{{ end }}
+    {{ $config = path.Join (path.Dir $config) (path.BaseName $config) }}
 
-{{ with index site.Data $config }}
-    {{ $matches := first 1 (where . "ratio" $args.ratio) }}
-    {{ if eq ($matches | len) 1 }}
-        {{ $dim = (index $matches 0).dimensions }}
+    {{ with index site.Data $config }}
+        {{ $matches := first 1 (where . "ratio" $args.ratio) }}
+        {{ if eq ($matches | len) 1 }}
+            {{ $dim = (index $matches 0).dimensions }}
+        {{ end }}
     {{ end }}
-{{ end }}
 
-{{ if not $dim }}{{ $dim = slice (index $default $args.ratio) }}{{ end }}
+    {{ if not $dim }}{{ $dim = slice (index $default $args.ratio) }}{{ end }}
+{{ end }}
 
 {{ return $dim }}
