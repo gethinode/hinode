@@ -69,3 +69,8 @@ $theme-colors: (
   "body":          $body-bg,
   "body-tertiary": $gray-100,
 );
+
+$btn-padding-y-xs:            .08rem !default;
+$btn-padding-x-xs:            0.3rem !default;
+$btn-font-size-xs:            $font-size-base * .6 !default;
+$btn-border-radius-xs:        .2rem !default;

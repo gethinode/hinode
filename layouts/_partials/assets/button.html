@@ -33,8 +33,7 @@
     {{- with $args.tooltip }}{{ $tooltip = . }}{{ end -}}
 {{- end -}}
 
-{{- $href := .href -}}
-
+{{- $href := $args.href -}}
 {{ $linkType := or $args.linkType $args.type }}
 {{ $buttonSize := or $args.buttonSize $args.size }}
 {{ $toastID := or $args.toastId $args.toast }}
@@ -74,13 +73,21 @@
 
 {{/* Main code */}}
 {{ if not $error }}
+    {{- $btnClass := "" -}}
+    {{- if eq $linkType "button" }}
+        {{- $btnClass = printf "btn btn-%s%s" (cond $args.outline "outline-" "") $args.color -}}
+        {{- if ne $buttonSize "md" }}{{ $btnClass = printf "%s btn-%s" $btnClass $buttonSize }}{{ end -}}
+        {{- if in (slice "disabled" "active") $state }}{{ $btnClass = printf "%s %s" $btnClass $state }}{{ end -}}
+        {{- $btnClass = printf "%s position-relative %s" $btnClass $class }}
+    {{- end -}}        
+
     <a aria-label="{{ (or $label $title) | safeHTML }}"
         {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
         {{- with $args.id }} id="{{ . }}"{{ end -}}
         {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}
         {{- with $toastID }} data-toast-target="{{ . }}"{{ end -}}
         {{- with $args.clipboard }} data-clipboard="{{ . }}"{{ end -}}
-        {{- if eq $linkType "button" }} class="btn btn-{{ if $args.outline }}outline-{{ end }}{{ $args.color }} {{ if ne $buttonSize "md" }}btn-{{ $args.size }}{{ end }} position-relative {{ if in (slice "disabled" "active") $args.state }}{{ $args.state }}{{ end }} {{ $class -}}"
+        {{- with $btnClass }} class="{{ . }}"
         {{ if eq $state "disabled" }}aria-disabled="true"{{ end -}}
         {{- else }} class="btn btn-link link-{{ $args.color }} position-relative {{ $class }}"{{ end -}}
         {{- with $tooltip }} data-bs-toggle="tooltip" data-bs-title="{{ . }}" data-bs-placement="{{ $args.placement }}"{{ end -}}
