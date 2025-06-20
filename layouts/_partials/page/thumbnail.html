@@ -33,10 +33,6 @@
     {{ end }}
 {{ else }}
     {{- $thumbnail = $page.Params.Thumbnail -}}
-    {{ if or $page.Params.photoCredits $page.Params.photoSource }}
-        {{ warnf "DEPRECATED: frontmatter variables `photoCredits` and `photoSource` have been deprecated in release v0.18: %s" $page.RelPermalink }}
-    {{ end }}
-    {{- if and $page.Params.photoCredits $page.Params.PhotoSource }}{{ $credits = printf (T "photoFull") $page.Params.photoCredits $page.Params.PhotoSource }}{{ end -}}
 {{- end -}}
 
 {{ if $thumbnail -}}
