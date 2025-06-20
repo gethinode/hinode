@@ -203,9 +203,22 @@
             {{- end -}}
             <div class="{{ $col2 }}">
                 <div class="card-body d-flex p-{{ $args.padding }} flex-column h-100 flex-fill">
-                    {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) }}</div>{{ end }}
+                    {{ if $page }}
+                        <div>{{ partial "inline/card-caption.html" (dict
+                            "page"     $page
+                            "keywords" $args.headerStyle
+                            "color"    $args.color
+                            ) }}
+                        </div>
+                    {{ end }}
                     <div class="flex-fill">
-                        {{- partial "inline/card-body.html" (dict "title" $title "href" $href "color" $args.color "description" $description "button" $args.button) -}}
+                        {{- partial "inline/card-body.html" (dict
+                            "title"       $title
+                            "href"        $href
+                            "color"       $args.color
+                            "description" $description
+                            "button"      $args.button
+                        ) -}}
                     </div>
                     {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}</div>{{ end }}
                     {{ if and $href $args.button }}

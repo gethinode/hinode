@@ -26,27 +26,27 @@
 {{- $class := partial "utilities/GetArgParent" (dict "page" . "arg" "class" "merge" true) -}}
 {{- $color := partial "utilities/GetArgParent" (dict "page" . "arg" "color") -}}
 {{- $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML -}}
-{{- $footer := partial "utilities/GetArgParent" (dict "page" . "arg" "footer-style") | partial "utilities/GetArgParent" (dict "page" . "arg" "footer") | default "none" -}}
-{{- $gutter := partial "utilities/GetArgParent" (dict "page" . "arg" "gutter") | default "0" -}}
-{{- $header := partial "utilities/GetArgParent" (dict "page" . "arg" "header-style") | partial "utilities/GetArgParent" (dict "page" . "arg" "header") | default "full" -}}
+{{- $footer := or (partial "utilities/GetArgParent" (dict "page" . "arg" "footer-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "footer")) -}}
+{{- $gutter := partial "utilities/GetArgParent" (dict "page" . "arg" "gutter") -}}
+{{- $header := or (partial "utilities/GetArgParent" (dict "page" . "arg" "header-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "header"))  -}}
 {{- $icon := .Get "icon" -}}
-{{- $iconRounded := partial "utilities/GetArgParent" (dict "page" . "arg" "icon-rounded") | partial "utilities/GetArgParent" (dict "page" . "arg" "iconRounded") | default false -}}
-{{- $align := partial "utilities/GetArgParent" (dict "page" . "arg" "align") | default "start" -}}
-{{- $style := partial "utilities/GetArgParent" (dict "page" . "arg" "icon-style") | partial "utilities/GetArgParent" (dict "page" . "arg" "style") | default "" -}}
-{{- $subtle := partial "utilities/GetArgParent" (dict "page" . "arg" "subtle") | default false -}}
+{{- $iconRounded := or (partial "utilities/GetArgParent" (dict "page" . "arg" "icon-rounded")) (partial "utilities/GetArgParent" (dict "page" . "arg" "iconRounded")) -}}
+{{- $align := partial "utilities/GetArgParent" (dict "page" . "arg" "align") -}}
+{{- $style := or (partial "utilities/GetArgParent" (dict "page" . "arg" "icon-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "style")) -}}
+{{- $subtle := partial "utilities/GetArgParent" (dict "page" . "arg" "subtle") -}}
 {{- $loading := .Get "loading" -}}
-{{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") | default "stacked" -}}
-{{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") | default 3 -}}
-{{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") | default "" -}}
+{{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") -}}
+{{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") -}}
+{{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
 {{- $page := .Page -}}
 {{- $path := .Get "path" -}}
 {{- $thumbnail := .Get "thumbnail" -}}
 {{- $anchor := .Get "anchor" -}}
 {{- $title := .Get "title" -}}
-{{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") | default false -}}
-{{- $linkType := partial "utilities/GetArgParent" (dict "page" . "arg" "link-type") | partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType") | default "" -}}
-{{- $cols := partial "utilities/GetArgParent" (dict "page" . "arg" "cols") | default 3 -}}
-{{- $scroll := partial "utilities/GetArgParent" (dict "page" . "arg" "scroll") | default false -}}
+{{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") -}}
+{{- $linkType := or (partial "utilities/GetArgParent" (dict "page" . "arg" "link-type")) (partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType")) -}}
+{{- $cols := partial "utilities/GetArgParent" (dict "page" . "arg" "cols") -}}
+{{- $scroll := partial "utilities/GetArgParent" (dict "page" . "arg" "scroll") -}}
 {{- $wrapper := "" -}}
 
 {{/* Override arguments */}}
@@ -65,7 +65,6 @@
 {{ if $scroll }}
     {{ $wrapper = printf "card-block-%d p-0" $cols }}
 {{ end }}
-
 
 {{/* Main code */}}
 {{ if not $error -}}
