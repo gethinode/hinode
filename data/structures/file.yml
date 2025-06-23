@@ -11,8 +11,8 @@ arguments:
   full:
   id: 
   class:
-  options:
-    release: v0.27.6
+  highlight-options:
+    release: v1.0.0
   # deprecated arguments
   path:
     type: string
@@ -22,3 +22,11 @@ arguments:
       the path of the repository is used as base path instead.
     deprecated: v1.0.0
     alternative: file
+  options:
+    type: string
+    optional: true
+    comment: >-
+        Hugo highlighting options, see https://gohugo.io/shortcodes/highlight/#options-1.
+    release: v0.27.6
+    deprecated: v1.0.0
+    alternative: highlight-options

@@ -73,7 +73,7 @@
     </ul>
     <div class="border-start border-end border-bottom mb-3">
         <div class="collapse multi-{{ $id }}{{ if $args.show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
-            {{- highlight (trim $content "\r\n") $lang $args.options -}}
+            {{- highlight (trim $content "\r\n") $lang (or $args.highlightOptions $args.options) -}}
         </div>
         <div class="collapse multi-{{ $id }}{{ if not $args.show }} show{{ end }} p-3" id="footer-{{ $id }}">
             <a class="nav-link active" 
