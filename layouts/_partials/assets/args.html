@@ -125,7 +125,9 @@
     {{ if in (slice "types" "both") $args.renderType }}
         {{ $prefix := strings.Repeat $args.headerLevel "#" }}
         {{ range $k, $v := $types.udt }}
-            {{ printf "%s %s %s" $prefix $k (T "type") | $args.page.RenderString }}
+            {{ $title := $k }}
+            {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+            {{ printf "%s %s %s" $prefix $title (T "type") | $args.page.RenderString }}
             {{ partial "inline/args-table.html" (merge $params (dict "args" $v)) }}
         {{ end }}
     {{ end }}
