@@ -22,7 +22,8 @@ arguments:
     release: 1.0.0
   list:
   cards:
-  max:
+  limit:
+    release: v1.0.0
   cols:
     release: v0.19.0
   paginate:
@@ -158,3 +159,12 @@ arguments:
     group: partial
     deprecated: v1.0.0
     alternative: href-title
+  max:
+    type: int
+    optional: true
+    comment: Maximum number of elements to display.
+    group: partial
+    options:
+      min: 1
+    deprecated: v1.0.0
+    alternative: limit

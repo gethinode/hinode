@@ -37,7 +37,7 @@ content_blocks:
     more:
       title: More Posts
     padding: 0
-    max: 3
+    limit: 3
     class: border-0 card-zoom card-body-margin
 
   - _bookshop_name: articles
@@ -55,7 +55,7 @@ content_blocks:
       title: More articles
     cols: 1
     padding: 4
-    max: 2
+    limit: 2
     header-style: none
     footer-style: tags
     orientation: horizontal-sm

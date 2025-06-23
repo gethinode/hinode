@@ -113,7 +113,7 @@
 {{/* Limit list to max elements */}}
 {{- $count := len $elements -}}
 {{- $max := $count -}}
-{{- $max = math.Min ($args.max | default $count) $count -}}
+{{- $max = math.Min ((or $args.limit $args.max) | default $count) $count -}}
 {{- if not $args.paginate -}}
     {{- $elements = first $max $elements -}}
 {{- end -}}

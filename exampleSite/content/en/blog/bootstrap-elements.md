@@ -252,8 +252,6 @@ Use the `file` shortcode to print and highlight the full content of a given inpu
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-{{< file full="false" file="./config/_default/languages.toml" id="file-collapse-5" >}}
-
 ## Icon
 
 As an example, the following shortcodes show a square check, a brand logo, a circle check, and a custom icon.

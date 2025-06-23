@@ -27,9 +27,10 @@
         {{ if .Date }}
             {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
             {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
-            {{ $datestr | i18n "postedOnDate" -}}
-            {{ if eq $metadata "full" }}
-                {{ if ne $datestr $lastmodstr -}}&nbsp;({{ $lastmodstr | i18n "lastModified" }}){{ end }}
+            {{ if gt .Lastmod .Date }}
+                {{ $lastmodstr | i18n "lastModified" }}
+            {{ else }}
+                {{ $datestr | i18n "postedOnDate" -}}
             {{ end }}
             &bull;
         {{ end }}
