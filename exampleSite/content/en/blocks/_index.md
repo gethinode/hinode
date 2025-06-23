@@ -27,7 +27,7 @@ content_blocks:
       title: More Posts
     cols: 3
     padding: 0
-    max: 9
+    limit: 9
     paginate: true
     cover: false
     header-style: none
