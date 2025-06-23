@@ -29,7 +29,7 @@ blueprint:
     link:
   cols:
   padding:
-  max:
+  limit:
   pagination:
   paginate:
   background:

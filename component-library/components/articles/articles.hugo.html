@@ -69,7 +69,7 @@
 	{{- $params = merge $params (dict
 		"page"         page
 		"list"         $pages
-		"max"          $args.max
+		"limit"        $args.limit
 		"cols"         $args.cols
 		"icon-rounded" $args.iconRounded
 		"href"         (cond $moreButton $moreLink "")
