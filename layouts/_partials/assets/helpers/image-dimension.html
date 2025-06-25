@@ -148,12 +148,13 @@
     )}}
     {{ if $args.imageset }}
         {{- $set = partial "assets/helpers/image-set.html" (dict 
-            "src"       $src
-            "img"       $img
-            "dims"      $dims
-            "anchor"    $args.anchor
-            "transform" $transform
-            "hook"      $hook
+            "src"           $src
+            "img"           $img
+            "dims"          $dims
+            "anchor"        $args.anchor
+            "transform"     $transform
+            "hook"          $hook
+            "include-width" true
         ) -}}
     {{ end }}
 {{ end }}
