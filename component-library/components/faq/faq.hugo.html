@@ -19,7 +19,7 @@
 {{ if not $args.err }}
 	{{ $color := "" }}
 	{{ if $args.contrast }}{{ $color = "white" }}{{ end }}
-	{{- partial "assets/section-title.html" (dict  "heading" $args.heading "color" $color) -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading "color" $color "justify" $args.justify) -}}
 
 	{{ $class := "" }}
 	{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}

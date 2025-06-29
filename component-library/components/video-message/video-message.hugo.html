@@ -96,7 +96,7 @@
 		) }}
 	{{ end}}
 
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading) -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
 
 	{{ if eq $args.orientation "stacked" }}
 		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto pb-{{ $padding.y }}">

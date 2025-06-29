@@ -35,7 +35,7 @@
 {{ end}}
 
 {{ if not $error }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading) -}}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
 
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page

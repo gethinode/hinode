@@ -35,21 +35,23 @@
 
     {{ $blocks = $blocks | append (dict 
         "_bookshop_name" "hero"
-        "heading" (dict "title" $pageTitle "align" $page.Site.Params.modules.bookshop.hero.align)
-        "breadcrumb" $breadcrumb
-        "background" (dict "backdrop" $page.Site.Params.modules.bookshop.hero.backdrop)
-        "overlay-mode" $page.Site.Params.modules.bookshop.hero.overlayMode
+        "heading"        (dict "title" $pageTitle "align" $page.Site.Params.modules.bookshop.hero.align)
+        "breadcrumb"     $breadcrumb
+        "background"     (dict "backdrop" $page.Site.Params.modules.bookshop.hero.backdrop)
+        "overlay-mode"   $page.Site.Params.modules.bookshop.hero.overlayMode
+        "justify"        "start"
     )}}
 
     {{ if eq $page.Kind "section" }}
         {{ $blocks = $blocks | append (dict 
             "_bookshop_name" "articles"
-            "hide-empty" false
-            "input" (dict "section" $page.Section "reverse" true "sort" "date" "nested" true)
-            "cols" 3
-            "padding" "0"
-            "paginate" true
-            "scroll" false
+            "hide-empty"     false
+            "input"          (dict "section" $page.Section "reverse" true "sort" "date" "nested" true)
+            "cols"           3
+            "padding"        "0"
+            "paginate"       true
+            "scroll"         false
+            "justify"        "start"
         )}}
     {{ end }}
 

@@ -9,3 +9,4 @@ arguments:
     optional: false
   background:
   class:
+  justify:
