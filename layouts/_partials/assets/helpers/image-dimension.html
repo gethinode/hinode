@@ -83,7 +83,7 @@
     {{ else }}
         {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $src -}}
     {{ end }}
-{{ else if $args.ratio }}
+{{ else if and $args.ratio (ne $args.ratio "auto") }}
     {{ $transform = "fill" }}
     {{ $dims = partial "assets/helpers/GetDimension.html" (dict "ratio" $args.ratio) }}
     {{ if not $dims }}{{ errorf "partial [assets/image.html] - Cannot find dimension data: %s" $args.ratio }}{{ end }}
