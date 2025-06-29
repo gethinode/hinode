@@ -6,18 +6,17 @@ content_blocks:
   - _bookshop_name: hero
     heading:
       title: Content blocks
-      align: start
-    breadcrumb: true
-
-  - _bookshop_name: articles
-    heading:
       content: >-
         Hinode uses [Bookshop](https://github.com/CloudCannon/bookshop) to
         support so-called content blocks. Content blocks are reusable page
         elements, such as a hero, about panel, or an FAQ. Hinode includes
         several ready-to-use blocks. Click on a card for more details about
         a content block, including its frontmatter configuration.
+      align: start
       width: 8
+    breadcrumb: true
+
+  - _bookshop_name: articles
     hide-empty: false
     input:
       section: blocks
