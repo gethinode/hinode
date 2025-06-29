@@ -25,6 +25,7 @@ The `about` content block renders a short message next to an illustration. You c
     subtle: true
   illustration:
     image: /assets/img/nat-9l98kFByiao-unsplash.jpg
+    ratio: 1x1
   link-type: link
   links:
     - title: First link

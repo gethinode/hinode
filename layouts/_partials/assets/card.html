@@ -179,7 +179,7 @@
                     {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
                     {{- partial $args.hook (dict 
                         "src"      $thumbnail
-                        "ratio"    (or $ratio "1x1")
+                        "ratio"    (or $ratio "auto")
                         "portrait" $args.portrait
                         "sizes"    $args.sizes
                         "anchor"   $anchor

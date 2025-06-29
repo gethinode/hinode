@@ -21,7 +21,7 @@
     {{ partial "assets/hero.html"  (dict 
         "heading"      $args.heading
         "background"   $args.background
-        "illustration" (merge (dict "ratio" "1x1") $args.illustration)
+        "illustration" (merge (dict "ratio" "auto") $args.illustration)
         "order"        $args.order
         "link-type"    $args.linkType
         "links"        $args.links
