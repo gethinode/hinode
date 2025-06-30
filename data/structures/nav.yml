@@ -7,7 +7,11 @@ arguments:
     group: partial
   list:
     group: partial
+  nav-disabled:
+    release: v1.0.0
   nav-items:
+    release: v1.0.0
+  nav-show:
     release: v1.0.0
   nav-titles:
     release: v1.0.0

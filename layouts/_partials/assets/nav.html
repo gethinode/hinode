@@ -42,7 +42,7 @@
                         "class"        $args.class
                         "body"         (or $item.Description $item.Content)
                         "show"         false
-                        "disabled"     false
+                        "disabled"     $item.disabled
                         "item_type"    "accordion"
                         "illustration" (partial "utilities/GetIllustration.html" (dict "item" $item "size" "col-12"))
                         )
@@ -64,11 +64,14 @@
         {{- range $args.list }}{{ $titles = $titles | append .Title }} {{ end -}}
         {{- if reflect.IsSlice $args.navTitles }}{{ $titles = $titles | append $args.navTitles }}{{ end -}}
         {{- range $index, $item := $titles -}}
-            {{ $show := eq $index 0}}
+            {{ $itemID := printf "%s-btn-%d" $args.id $index -}}
+            {{- $show := eq $index 0 -}}
+            {{- if $args.navShow }}{{ $show = eq $args.navShow $itemID }}{{ end -}}
+            {{- $disabled := in $args.navDisabled $itemID -}}
             <li class="nav-item" role="presentation">
                 <button
-                    class="nav-link {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}"
-                    id="nav-{{ $id }}-btn-{{ $index }}"
+                    class="nav-link{{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}{{ if $disabled }} disabled{{ end }}"
+                    id="{{ $itemID }}"
                     data-bs-toggle="pill"
                     data-bs-target="#{{ $id }}-{{ $index }}" 
                     type="button"
@@ -82,7 +85,7 @@
         {{ end -}}
     </ul>
 
-    <div class="tab-content {{ if eq $type "tabs" }}border border-bottom-0  p-3{{ else if $args.vertical }}ms-3{{ else }}mt-3{{ end }}">
+    <div class="tab-content {{ if eq $type "tabs" }}border p-3{{ else if $args.vertical }}ms-3{{ else }}mt-3{{ end }}">
         {{- range $index, $item := $args.list -}}
             {{- $header := $item.Title -}}
             {-{ $body := $item.Content -}}

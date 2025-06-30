@@ -1,14 +1,8 @@
-.nav-tabs .nav-tabs {
-    border: none;
+.nav-tabs {
+    border: none !important;
 }
 
-.nav-tabs .nav-link.active {
-    border-bottom-color: var(--bs-body-bg) !important;
-    border-bottom-style: solid !important;
-    z-index: 1;
-}
-
-.nav-callout {
+.nav-callout, .tab-content {
     --#{$prefix}nav-callout-bg: var(--#{$prefix}light);
     --#{$prefix}nav-callout-active-bg: var(--bs-primary-bg-subtle);
     --#{$prefix}nav-callout-gap: #{$nav-underline-gap};
@@ -92,7 +86,7 @@
 
 @if $enable-dark-mode {
     @include color-mode(dark) {
-        .nav-callout {
+        .nav-callout, .tab-content {
             --#{$prefix}nav-callout-bg: var(--#{$prefix}tertiary-bg);
         }
 

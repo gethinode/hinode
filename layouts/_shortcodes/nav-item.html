@@ -30,6 +30,8 @@
     {{- if isset .Parent.Params "fade" }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
     {{- $fade = or $fade $parentFade -}}
     {{- $title := or $args.title $args.header -}}
+    {{- $itemID := printf "%s-btn-%d" $parent $id }}
+    {{- $disabledID := cond $args.disabled $itemID "" }}
     {{- $body := trim .Inner " \r\n" -}}
     {{- $current := "" -}}
 
@@ -49,15 +51,19 @@
 
     {{- $current := .Parent.Scratch.Get "inner" -}}
     {{- $titles := .Parent.Scratch.Get "inner-title" -}}
+    {{- $disabled := .Parent.Scratch.Get "inner-disabled" -}}
+    {{- if $args.show }}{{ .Parent.Scratch.Set "inner-show" $itemID }}{{ end -}}
     {{- if $current -}}
         {{- .Parent.Scratch.Set "inner" (print $current $output) -}}
         {{- .Parent.Scratch.Set "inner-title" ($titles | append $title) -}}
+        {{- .Parent.Scratch.Set "inner-disabled" ($disabled | append $disabledID) -}}
     {{- else -}}
         {{- .Parent.Scratch.Set "inner" $output -}}
         {{- .Parent.Scratch.Set "inner-title" (slice $title) -}}
+        {{- .Parent.Scratch.Set "inner-disabled" (slice $disabledID) -}}
     {{- end }}
 
-    {{- $alternative := partial "assets/nav-item" (dict 
+    {{- $alternative := partial "assets/nav-item.html" (dict 
         "page"         .Page
         "id"           $id
         "parent-id"    $parent

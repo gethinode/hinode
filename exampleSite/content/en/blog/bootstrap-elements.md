@@ -362,14 +362,14 @@ As an example, the following shortcode displays a tab group with vertically alig
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
   {{</* nav tab-type="pills" vertical="true" */>}}
-    {{</* nav-item title="Nav Item #1" show="true" */>}}
+    {{</* nav-item title="Nav Item #1" */>}}
       This is the first item's nav body. It supports Markdown content.
       The item is shown by adding the value `show` to the `class` argument.
     {{</* /nav-item */>}}
-    {{</* nav-item title="Nav Item #2" */>}}
+    {{</* nav-item title="Nav Item #2" show="true" */>}}
       This is the second item's nav body.
     {{</* /nav-item */>}}
-    {{</* nav-item title="Nav Item #3" */>}}
+    {{</* nav-item title="Nav Item #3" disabled="true" */>}}
       This is the third item's nav body.
     {{</* /nav-item */>}}
   {{</* /nav */>}}

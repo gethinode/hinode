@@ -6,16 +6,16 @@
 */}}
 
 {{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "nav-item" "args" . "group" "partial") }}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "nav-item" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/nav-item.html" 
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
         "file"    page.File
-    )}}
-{{ end }}
+    ) -}}
+{{- end -}}
 
 {{/* Initialize local arguments */}}
 {{- $parentID := or $args.parentId $args.parentID -}}
@@ -36,16 +36,16 @@
         "class"        "hero-image"
         "image-overlay" $args.imageOverlay
     ) }}
-{{ else }}
-    {{ $illustration = partial $args.hook (dict "page" $args.page "image" $args.illustration) }}
-{{ end }}
+{{- else -}}
+    {{- $illustration = partial $args.hook (dict "page" $args.page "image" $args.illustration) -}}
+{{- end -}}
 
 {{/* Main code */}}
-{{ if not $args.err }}
-    {{ if eq $type "accordion" }}
+{{- if not $args.err -}}
+    {{- if eq $type "accordion" -}}
         <div class="accordion-item{{ if $args.show }} show{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
             {{- with $title -}}
-                <h2 id="accordion-{{ $parentID }}-heading-{{ $args.id }}" class="accordion-header m-0" >
+                <h2 id="accordion-{{ $parentID }}-heading-{{ $args.id }}" class="accordion-header m-0">
                     <button
                         class="accordion-button collapsed {{ if $args.disabled }} text-secondary{{ end }}"
                         type="button"
@@ -55,14 +55,14 @@
                         aria-controls="accordion-{{ $parentID }}-item-{{ $args.id }}"
                         {{ if $args.disabled }} disabled{{ end }}
                     >
-                        {{ if $illustration }}
+                        {{- if $illustration -}}
                             <div class="row">
                                 <div class="col-3 col-sm-2 my-auto">{{ $illustration | safeHTML }}</div>
                                 <div class="col-9 col-sm-10 fs-6 fs-sm-5 my-auto">{{ . }}</div>
                             </div>
-                        {{ else }}
+                        {{- else }}
                             {{ . }}
-                        {{ end }}
+                        {{ end -}}
                     </button>
                 </h2>
             {{- end -}}
@@ -75,19 +75,16 @@
                 <div class="accordion-body">{{ $args.body | $args.page.RenderString | safeHTML }}</div>
             </div>
         </div>
-    {{ else }}
+    {{- else -}}
         <div
             id="{{ $parentID }}-{{ $args.id }}" 
-            class="tab-pane{{ if $args.show }} active {{ if $args.fade }}show{{ end }}{{ end }} {{ if $args.fade }}fade{{ end }}{{ with $args.class }} {{ . }}{{ end }}"
+            class="tab-pane{{ if $args.show }} active{{ if $args.fade }} show{{ end }}{{ end }}{{ if $args.fade }} fade{{ end }}{{ with $args.class }} {{ . }}{{ end }}"
             role="tabpanel"
             aria-labelledby="{{ $parentID }}-btn-{{ $args.id }}"
             tabindex="0"
-            data-header="{{ $title }}"
-            {{ if $args.show }}data-show-id="{{ $args.id }}"{{ end }} 
             data-has-content="{{ gt (len $args.body) 0 }}"
-            {{ if $args.disabled }} data-disabled-id="{{ $args.id }}"{{ end }}
         >
             {{ $args.body | $args.page.RenderString | safeHTML }}
         </div>
-    {{ end }}
-{{ end }}
+    {{- end -}}
+{{- end -}}

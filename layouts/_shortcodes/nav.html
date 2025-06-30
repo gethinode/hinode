@@ -19,6 +19,8 @@
 
 {{- $inner := .Scratch.Get "inner" -}}
 {{- $innerTitles := .Scratch.Get "inner-title" -}}
+{{- $innerDisabled := .Scratch.Get "inner-disabled" -}}
+{{- $innerShow := .Scratch.Get "inner-show" -}}
 {{- $input := trim .Inner " \r\n" -}}
 {{- if $input -}}
     {{- $input = replace $input "\n" "\n  " -}}
@@ -28,17 +30,19 @@
 {{/* Main code */}}
 {{- if not $args.err -}}
     {{- partial "assets/nav.html" (dict 
-        "id"         (or $args.id (printf "nav-%d" .Ordinal))
-        "page"       .Page
-        "list"       $args.list
-        "nav-items"  $inner
-        "nav-titles" $innerTitles
-        "tab-type"   (or $args.tabType $args.type)
-        "vertical"   $args.vertical
-        "word-wrap"  $args.wordWrap
-        "class"      $args.class
-        "pane"       $args.pane
-        "width"      $args.width
+        "id"           (or $args.id (printf "nav-%d" .Ordinal))
+        "page"         .Page
+        "list"         $args.list
+        "nav-items"    $inner
+        "nav-titles"   $innerTitles
+        "nav-disabled" $innerDisabled
+        "nav-show"     $innerShow
+        "tab-type"     (or $args.tabType $args.type)
+        "vertical"     $args.vertical
+        "word-wrap"    $args.wordWrap
+        "class"        $args.class
+        "pane"         $args.pane
+        "width"        $args.width
         ) 
     -}}
 {{- end -}}
