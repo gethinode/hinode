@@ -21,7 +21,7 @@
 {{- end -}}
 
 {{/* Initialize local arguments */}}
-{{- $text := or $args.text $args.title }}
+{{- $text := trim (or $args.text $args.title) " \n\r" }}
 {{- if not $text -}}
     {{- partial "utilities/LogErr.html" (dict 
         "partial"  "shortcodes/kbd.html" 
@@ -36,6 +36,6 @@
 {{/* Main code */}}
 {{- if not $error }}
     <kbd {{ if or $args.color $args.class }}class="{{ with $args.color }}text-bg-{{ . }} {{ end }}{{ $args.class }}"{{ end }}>
-        {{ $text | plainify }}
+        {{- $text -}}
     </kbd>
 {{ end -}}
