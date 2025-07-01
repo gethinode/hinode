@@ -28,7 +28,7 @@
     "build:example": "npm run -s prebuild && hugo --gc --minify -s exampleSite",
     "build:example:ci": "npm run -s prebuild && hugo --gc --minify -s exampleSite -e ci",
     "build:debug": "hugo -e debug --debug",
-    "build:headers": "hugo --renderSegments headers -d prebuild && cpy prebuild/server.toml config/_default/ --flat",
+    "build:headers": "hugo --renderSegments headers -d prebuild-headers -e headers && cpy prebuild-headers/netlify.toml ./ --flat && cpy prebuild-headers/server.toml config/_default/ --flat",
     "build:example:headers": "hugo -s exampleSite --renderSegments headers -d prebuild && cpy exampleSite/prebuild/netlify.toml ./ --flat && cpy exampleSite/prebuild/server.toml exampleSite/config/_default/ --flat",
     "build:preview": "npm run build -D -F",
     "clean:public": "rimraf public exampleSite/public",
