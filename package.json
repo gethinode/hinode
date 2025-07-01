@@ -1,6 +1,6 @@
 {
   "name": "@gethinode/hinode",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
   "keywords": [
     "hugo",
@@ -12,6 +12,7 @@
     "documentation"
   ],
   "main": "index.js",
+  "private": true,
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -44,6 +45,7 @@
     "test": "npm run -s lint",
     "env": "hugo env",
     "precheck": "npm version",
+    "prepare": "node .husky/install.mjs",
     "check": "hugo version",
     "create:syntax": "npm-run-all update:syntax:**",
     "update:syntax:light1": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
@@ -77,9 +79,16 @@
     "purgecss-whitelister": "^2.4.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "commitizen": "^4.3.1",
     "cpy-cli": "^5.0.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.30.0",
+    "husky": "^9.1.7",
     "markdownlint-cli2": "^0.18.1",
     "neostandard": "^0.12.1",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
@@ -87,6 +96,7 @@
     "postcss-cli": "^11.0.1",
     "replace-in-files-cli": "^3.0.0",
     "rimraf": "^6.0.1",
+    "semantic-release": "^24.2.6",
     "shx": "^0.4.0",
     "stylelint": "^16.21.0",
     "stylelint-config-standard-scss": "^15.0.1"
@@ -98,5 +108,35 @@
   },
   "hugo-bin": {
     "buildTags": "extended"
+  },
+  "release": {
+    "branches": "main",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github",
+      [
+        "@semantic-release/exec",
+        {
+          "prepare": "npm install"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "dist",
+            "package.json",
+            "package-lock.json"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
