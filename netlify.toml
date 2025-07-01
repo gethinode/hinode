@@ -4,12 +4,12 @@
   publish = 'exampleSite/public'
 
   [build.environment]
-    DART_SASS_VERSION = '1.78.0'
+    DART_SASS_VERSION = '1.89.2'
     HUGO_ENABLEGITINFO = 'true'
     HUGO_ENV = 'production'
-    HUGO_VERSION = '0.134.1'
-    NODE_VERSION = '20.17.0'
-    NPM_VERSION = '10.8.2'
+    HUGO_VERSION = '0.147.9'
+    NODE_VERSION = '22.13.0'
+    NPM_VERSION = '10.9.2'
 
 [context]
   [context.branch-deploy]
@@ -39,17 +39,17 @@
     Access-Control-Allow-Origin = '*'
     Content-Security-Policy = """
         base-uri 'self'; \
-        connect-src 'self' *.cookieyes.com cdn-cookieyes.com *.google-analytics.com *.analytics.google.com *.googletagmanager.com; \
+        connect-src 'self' *.analytics.google.com *.google.com *.google-analytics.com *.googletagmanager.com; \
         default-src 'none'; \
-        font-src 'self' fonts.gstatic.com; \
+        font-src 'self' fonts.gstatic.com data:; \
         form-action 'self'; \
-        frame-src player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
-        img-src 'self' cdn-cookieyes.com *.google-analytics.com *.googletagmanager.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.ytimg.com tile.openstreetmap.org i.vimeocdn.com; \
+        frame-src *.googletagmanager.com player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
+        img-src 'self' *.google-analytics.com *.googletagmanager.com googletagmanager.com ssl.gstatic.com www.gstatic.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.ytimg.com tile.openstreetmap.org i.vimeocdn.com; \
         manifest-src 'self'; \
         media-src 'self'; \
         object-src 'none'; \
-        script-src 'self' cdn-cookieyes.com *.google-analytics.com *.googletagmanager.com player.vimeo.com; \
-        style-src 'self' 'unsafe-inline' www.youtube.com; \
+        script-src 'self' *.google-analytics.com *.googletagmanager.com *.analytics.google.com googletagmanager.com tagmanager.google.com player.vimeo.com; \
+        style-src 'self' googletagmanager.com tagmanager.google.com fonts.googleapis.com www.youtube.com; \
         """
     Permissions-Policy = 'geolocation=(), midi=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), fullscreen=(), payment=() '
     Referrer-Policy = 'strict-origin'
@@ -58,24 +58,4 @@
     X-Frame-Options = 'SAMEORIGIN'
     X-XSS-Protection = '1; mode=block'
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
-
-[[redirects]]
-  from = '/fr/*'
-  status = 404
-  to = '/fr/404.html'
-
-[[redirects]]
-  from = '/nl/*'
-  status = 404
-  to = '/nl/404.html'
-
-[[redirects]]
-  from = '/en/*'
-  status = 404
-  to = '/en/404.html'
-
-[[redirects]]
-  from = '/*'
-  status = 404
-  to = '/en/404.html'
 
