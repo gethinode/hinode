@@ -177,3 +177,11 @@
 # Nav & Tab
 - id: clickToExpand
   translation: "Click to expand"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "Interested in this topic?"
+- id: contactBody
+  translation: "Please leave your contact details so we can get in touch."
+- id: contactAction
+  translation: "Get in touch"

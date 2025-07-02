@@ -1,0 +1,66 @@
+{{/* 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "contact" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/contact.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{/* Main code */}}
+{{ if not $args.err }}
+    {{ $contact := partial "utilities/GetContact" (dict
+        "contact"      $args.contact
+        "data"         $args.data
+        "language-tag" site.Language.Lang
+    ) }}
+
+    {{ $illustration := dict }}
+    {{ if and $contact $contact.image }}
+        {{ $illustration = dict
+            "image"       $contact.image
+            "ratio"       "1x1"
+            "class"       $args.class
+            "caption"     $contact.name 
+            "caption-url" $args.captionUrl
+        }}
+    {{ else if $args.illustration }}
+        {{ $illustration = $args.illustration }}
+    {{ end }}
+
+    {{ $heading := "" }}
+    {{ if and (not $args.heading.title) (not $args.heading.content) }}
+        {{ $heading = dict
+            "title"     (T "contactHeaderTopic")
+            "content"   (T "contactBody")
+            "align"     "start"
+            "width"     (cond $illustration.image 10 12)
+        }}
+    {{ else }}
+        {{ $heading = $args.heading }}
+    {{ end }}
+
+    {{ partial "assets/hero.html"  (dict
+        "page"         $args.page
+        "heading"      $heading
+        "background"   $args.background
+        "illustration" $illustration 
+        "order"        $args.order
+        "link-type"    $args.linkType
+        "links"        $args.links
+        "orientation"  $args.orientation
+        "width"        (or $args.width 12)
+        "use-title"    true
+        "size"         6
+        )
+    }}
+{{ end }}

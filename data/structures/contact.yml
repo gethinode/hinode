@@ -1,0 +1,36 @@
+comment: >-
+  Displays a contact banner, typically placed at the bottom or right-hand side of the page.
+arguments:
+  page:
+  data:
+  heading:
+  contact:
+    type: string
+    optional: false
+    comment: >-
+      The full name of the contact to retrieve.
+  caption-url:
+    type:
+      - string
+      - template.URL
+    optional: true
+    comment: >-
+      Address of the contact's page, either a local reference or an external
+      address. Include the `scheme` when referencing an external address, such
+      as `https://google.com`. Local references may include an optional anchor
+      link such as `blog/bootstrap-elements/#docs`.
+  illustration:
+  background:
+  link-type:
+  links:
+  align:
+  order:
+    default: first
+  orientation:
+  width:
+  justify:
+  class:
+  width:
+    default: 12
+  hook:
+    default: assets/hero-image.html

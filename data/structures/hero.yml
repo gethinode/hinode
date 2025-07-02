@@ -3,6 +3,7 @@ comment: >-
   supports a heading, featured illustration, and navigation links. You can
   can also add a background image with an overlay to improve contrast.
 arguments:
+  page:
   breadcrumb:
   heading:
   background:
@@ -18,6 +19,7 @@ arguments:
   justify:
   use-section:
   use-title:
+  size:
   class:
   padding:
     default: px-4 px-xxl-0 py-4

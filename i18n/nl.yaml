@@ -174,3 +174,11 @@
 # Nav & Tab
 - id: clickToExpand
   translation: "Klik om open te klappen"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "Wil je meer weten over dit onderwerp?"
+- id: contactBody
+  translation: "Laat je gegevens achter en dan neem ik contact met je op."
+- id: contactAction
+  translation: "Neem contact op"

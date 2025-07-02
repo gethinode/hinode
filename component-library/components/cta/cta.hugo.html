@@ -1,0 +1,43 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "cta" "args" .) }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/cta/cta.hugo.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{- end -}}
+
+{{/* Main code */}}
+{{ if not $args.error }}
+	{{ $links := slice }}
+	{{ if and (reflect.IsSlice .links) (gt (len .links) 0) }}
+		{{ $links = .links }}
+	{{ else }}
+		{{ with site.Params.modules.bookshop.cta.defaultURL }}
+			{{ $links = $links | append (dict "title" (T "contactAction") "url" . "icon" "fas chevron-right") }}
+		{{ end }}
+	{{ end }}
+
+	{{ partial "assets/contact.html" (dict 
+		"page"         page
+		"orientation"  "horizontal"
+		"heading"      $args.heading
+		"contact"      $args.contact
+		"caption-url"  $args.captionUrl
+		"illustration" $args.illustration
+		"class"        "contact-img"
+		"links"        $links
+		"align"        $args.align
+		"order"        $args.order
+		"data"         site.Params.modules.bookshop.cta.section 
+	) }}
+{{ end }}
