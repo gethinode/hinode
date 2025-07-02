@@ -14,6 +14,10 @@ env:
   CACHE_PATH_WIN: '~\AppData\Local\hugo_cache'
   CACHE_PATH_MAC: '/Users/runner/Library/Caches/hugo_cache'
 
+permissions:
+  pull-requests: read
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
