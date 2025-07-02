@@ -78,20 +78,38 @@
 
     {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
 
-    {{ $illustration := partial $args.hook (dict
-        "page"          $args.page
-        "image"         $args.illustration.image
-        "icon"          $args.illustration.icon
-        "anchor"        $args.illustration.anchor
-        "mode"          $args.illustration.mode
-        "ratio"         $args.illustration.ratio
-        "sizes"         $sizes
-        "title"         (T "heroImage")
-        "wrapper"       $imageWrapper
-        "class"         "hero-image"
-        "image-overlay" $args.imageOverlay
-        "justify"       $imageJustify
-    ) }}
+    {{ $caption := "" }}
+    {{ if $args.illustration.caption }}
+        {{ if index $args.illustration "caption-url" }}
+            {{ $caption = partial "assets/link.html" (dict
+                "href"  (index $args.illustration "caption-url")
+                "text"  $args.illustration.caption
+                "page"  $args.page
+                "class" "text-center"
+            ) }}
+        {{ else }}
+            {{ $caption = $args.illustration.caption }}
+        {{ end }}
+        {{ $caption = printf `<div class="text-center">%s</div>` $caption }}
+    {{ end }}
+
+    {{ $illustration := "" }}
+    {{ if or $args.illustration.image  $args.illustration.icon }}
+        {{ $illustration = partial $args.hook (dict
+            "page"          $args.page
+            "image"         $args.illustration.image
+            "icon"          $args.illustration.icon
+            "anchor"        $args.illustration.anchor
+            "mode"          $args.illustration.mode
+            "ratio"         $args.illustration.ratio
+            "sizes"         $sizes
+            "title"         (T "heroImage")
+            "wrapper"       $imageWrapper
+            "class"         (printf "hero-image %s" $args.illustration.class)
+            "image-overlay" $args.imageOverlay
+            "justify"       $imageJustify
+        ) }}
+    {{ end }}
 
     {{ $title := partial "assets/section-title.html" (dict
         "heading"     $heading
@@ -108,6 +126,7 @@
         {{/* Render stacked component */}}
 
         {{ $illustration | safeHTML }}
+        {{ $caption | safeHTML }}
         {{ $title | safeHTML }}
     {{ else }}
         {{/* Render horizontal component */}}
@@ -122,12 +141,15 @@
             {{ $imgWidth := sub 12 (or $args.heading.width 12) }}
             {{ if lt $imgWidth 1 }}{{ $imgWidth = 1 }}{{ end }}
 
-            <div class="col col-12 col-md-{{sub 12 $imgWidth }} {{ $order1 }} my-md-auto pt-{{ $padding.y }} pt-md-0 hero-content">
+            <div class="col col-12 {{ if $illustration }} col-md-{{sub 12 $imgWidth }}{{ end }} {{ $order1 }} my-md-auto pt-{{ $padding.y }} pt-md-0 hero-content">
                 {{ $title | safeHTML }}
             </div>
+            {{ if $illustration }}
             <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto my-md-auto align-self-end">
                 {{ $illustration | safeHTML }}
+                {{ $caption | safeHTML }}
             </div>
+            {{ end }}
         </div>
     {{ end }}
 {{ end }}

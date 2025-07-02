@@ -1,0 +1,8 @@
+.cta {
+    background-color: var(--#{$prefix}primary-bg-subtle);
+}
+
+.cta .contact-img {
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: var(--bs-border-radius);
+}

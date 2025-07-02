@@ -1,0 +1,45 @@
+- name: Alex Smith
+  preferred: Alex
+  image: /assets/img/joseph-gonzalez-iFgRcqHznqg-unsplash.png
+  function: Digital Strategy Lead
+  linkedin: https://www.linkedin.com
+  keywords:
+    - transformation
+  biography: >-
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut accumsan
+    venenatis dapibus. Proin placerat mauris ac interdum gravida. Proin
+    consequat feugiat sagittis. Sed vel augue nec est auctor semper. Curabitur
+    mauris ante, euismod eu sem in, sagittis porttitor urna. Mauris sodales at
+    quam condimentum malesuada. Vivamus erat augue, euismod nec ligula quis,
+    molestie lobortis ante. Proin venenatis non diam ac interdum.
+
+- name: Betty White
+  preferred: Betty
+  image: /assets/img/jake-nackos-IF9TK5Uy-KI-unsplash.png
+  function: UX Expert
+  linkedin: https://www.linkedin.com
+  keywords:
+    - experience
+  biography: >-
+    Duis rutrum, justo eleifend sagittis facilisis, leo orci hendrerit elit, ac
+    tristique nisl justo non neque. Mauris semper egestas massa, nec dapibus ex
+    tincidunt nec. Quisque lectus quam, finibus sed hendrerit id, accumsan eget
+    sapien. Nam facilisis diam eu felis tempus euismod. Nullam id neque
+    fringilla purus vestibulum mattis elementum vitae lectus. Fusce vel libero
+    consectetur urna egestas molestie eget sit amet elit.
+
+- name: Charles Green
+  preferred: Charles
+  image: /assets/img/foto-sushi-6anudmpILw4-unsplash-1x1.png
+  function: UX Expert
+  linkedin: https://www.linkedin.com
+  keywords:
+    - technology
+    - transformation
+    - experience
+  biography: >-
+    Suspendisse potenti. Aenean elit nisl, viverra eu volutpat at, sodales a sem.
+    Aliquam blandit nunc non mi posuere, quis laoreet ex congue. Donec fringilla
+    porttitor lacus accumsan porttitor. Integer vel sagittis diam. Nullam vehicula
+    fermentum risus nec facilisis. Fusce eleifend gravida orci, in efficitur enim
+    fermentum nec. Sed quis malesuada lorem. Ut vitae sodales sapien.

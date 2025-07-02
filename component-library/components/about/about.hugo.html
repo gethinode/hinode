@@ -19,6 +19,7 @@
 {{/* Main code */}}
 {{ if not $args.error }}
     {{ partial "assets/hero.html"  (dict 
+        "page"         page
         "heading"      $args.heading
         "background"   $args.background
         "illustration" (merge (dict "ratio" "auto") $args.illustration)

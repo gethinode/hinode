@@ -27,8 +27,8 @@
 {{- $title := $args.heading.title }}
 {{- $width := $args.heading.width | default 12 -}}
 {{- $width = cond (lt $width 12) (printf "col-12 col-%s-%d" $breakpoint.current $width) "" }}
-{{ if and (not $preheading) $args.useSection }}{{ $preheading = page.CurrentSection.Name }}{{ end }}
-{{ $justify := cond (eq $args.justify "start") "" (cond (eq $args.justify "end") "me-0" "mx-auto") }}
+{{- if and (not $preheading) $args.useSection }}{{ $preheading = page.CurrentSection.Name }}{{ end -}}
+{{- $justify := cond (eq $args.justify "start") "" (cond (eq $args.justify "end") "me-0" "mx-auto") -}}
 
 {{ if site.Params.main.titleCase }}
     {{ $preheading = title $preheading }}

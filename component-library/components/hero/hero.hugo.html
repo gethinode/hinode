@@ -18,6 +18,7 @@
 
 {{ if not $args.err }}
 	{{ partial "assets/hero.html"  (dict 
+        "page"         page
 		"breadcrumb"   $args.breadcrumb
 		"heading"      $args.heading
 		"background"   $args.background

@@ -16,8 +16,8 @@ content_blocks:
       ratio: 16x9
     width: 8
     links:
-      - title: About
-        url: about
+      - title: Getting started
+        url: https://gethinode.com/docs
         icon: fas chevron-right
     orientation: horizontal
     justify: center
