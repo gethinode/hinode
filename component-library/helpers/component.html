@@ -36,6 +36,7 @@
     {{- $style := index $component_props "wrapper" -}}
     {{- $width := index $component_props "width" -}}
     {{- $justify := index $component_props "justify" | default "start" -}}
+    {{- $paddingOuter := cond (ne $component_name "separator") (printf "px-xxl-0 px-%d py-0" $padding.x) "" -}}
     {{- $padding := cond (ne $component_name "separator") (printf "px-%d %spy-%d" $padding.x (cond $fluid "px-xxl-0 " "") $padding.y) "" -}}
     {{- $wrapper := $style }}
     {{ with $background }}
@@ -44,14 +45,16 @@
             {{ with $background.backdrop }}{{ $wrapper = "" }}{{ $backdrop = . }}{{ end }}
         {{ end }}
     {{ end }}
-    {{/* warnf "wrapper: '%s'" $wrapper */}}
     {{- $theme := index $component_props "theme" -}}
     {{- $overlayMode := (or (index $component_props "overlay-mode") page.Params.overlayMode) | default "dark" -}}
     {{ if not $backdrop }}{{ $overlayMode = page.Params.overlayMode }}{{ end }}
     {{ if eq $overlayMode "none" }}{{ $overlayMode = "" }}{{ end }}
     
     {{ (printf "<!--bookshop-live name(%s)-->" $component_name) | safeHTML }}
-    <section {{ with $id }}id="{{ . }}" {{ end }}class="{{ $component_name }} container-{{ cond $fluid "fluid" "xxl" }} {{ $class }} {{ with $wrapper }}{{ . }}{{ end -}}
+    {{ if not $fluid }}<div class="container-xxl {{ $paddingOuter }}">{{ end }}
+    <section {{ with $id }}id="{{ . }}" {{ end }}class="{{ $component_name }}
+        container-fluid {{ $class }}
+        {{ with $wrapper }}{{ . }}{{ end -}}
         {{- if and $backdrop $overlayMode }} background-container{{ end -}}
         {{- if $cover }} section-cover d-flex align-items-center{{ end }}" 
         {{ with $overlayMode -}}
@@ -62,12 +65,16 @@
         {{- end -}}
         >
         {{- if $backdrop -}}
-            {{ partial "assets/live-image.html" (dict "src" $backdrop "class" (printf "background-img-fluid %s" $bgclass) "title" (T "backgroundImage")) }}
+            {{ partial "assets/live-image.html" (dict
+                "src" $backdrop
+                "class" (printf "background-img-fluid %s" $bgclass)
+                "title" (T "backgroundImage"))
+            }}
         {{- end -}}
 
         {{ $col := cond (and $width (lt $width 12)) (printf "col-12 col-md-%d" $width) "" }}
 
-        <div class="container-xxl {{ $padding }} d-flex flex-column align-items-{{ $justify }}">
+        <div class="container-{{ cond $fluid "xxl" "fluid" }} {{ $padding }} d-flex flex-column align-items-{{ $justify }}">
             {{ with $col }}
                 <div class="{{ . }}">{{ partial $resolved_component $component_props }}</div>
             {{ else }}
@@ -75,6 +82,7 @@
             {{ end}}
         </div>
     </section>
+    {{ if not $fluid }}</div>{{ end }}
     {{ "<!--bookshop-live end-->" | safeHTML }}
 {{- else -}}
     {{- $file_loc := slicestr $component_path 9 -}}
