@@ -77,10 +77,10 @@
         {{- with $wrapper }}<div class="{{ . }}">{{ end }}
     {{- end -}}
     {{- if $data -}}
-        {{- if site.Params.debugging.includeSVGOrigin -}}
+        {{- if and site.Params.debugging.includeSVGOrigin $.url -}}
             {{- printf "{{/* <svg src=\"%s\"> */}}" $.url | safeHTML -}}
         {{- end -}}
-        {{- $data = replace $data "<svg" (printf "<svg class=\"%s\"" $args.class) -}}
+        {{- with $args.class }}{{ $data = replace $data "<svg" (printf "<svg class=\"%s\"" .) }}{{ end -}}
         {{- $data | safeHTML -}}
     {{- else if not $fileAnchor -}}
         <img class="img-fluid {{ $args.class }}"

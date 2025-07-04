@@ -67,7 +67,9 @@
 {{- if hasSuffix $src "svg" -}}
     {{- $res = partial "utilities/GetResource.html" (dict "url" $src "page" $args.page) -}}
     {{ if not $res }}
-        {{- $targetURL := partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
+        {{- $targetURL := strings.TrimPrefix "/static" $src -}}
+        {{- $u := urls.Parse site.BaseURL }}
+        {{- $targetURL = strings.TrimPrefix $u.Path $src -}}
         {{- if not (fileExists (path.Join "/static" $targetURL)) -}}
             {{ warnf "Cannot find vector image resource: %q" $src -}}
         {{ else }}
