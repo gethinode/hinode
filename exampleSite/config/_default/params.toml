@@ -37,6 +37,7 @@
 [navigation]
     anchor = true
     logo = "/img/logo_icon.svg"
+    logo-height = 30
     color = "body"
     fixed = true
     overlay = false
@@ -50,6 +51,9 @@
     toc = true
     sidebar = true
     size = "md"
+    [navigation.padding]
+        x = 4
+        y = 4
 
 [messages]
     placement = "bottom-right"

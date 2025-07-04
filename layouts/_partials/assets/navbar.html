@@ -80,7 +80,7 @@
 {{ end }}
 
 {{/* Initialize global variables */}}
-{{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" (dict "section" "navigation") -}}
 
 {{/* Initialize local arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -124,7 +124,8 @@
 
 {{ $logo := "" }}
 {{ with $args.logo | default site.Params.navigation.logo }}
-    {{ $logo = partial "assets/image.html" (dict "src" . "loading" "eager" "title" $title "image-height" 30) }}
+    {{ $height := index site.Params.navigation "logo-height" | default 30 }}
+    {{ $logo = partial "assets/image.html" (dict "src" . "loading" "eager" "title" $title "image-height" $height) }}
 {{ end }}
 
 {{- $pre := $args.pre -}}
