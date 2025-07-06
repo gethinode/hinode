@@ -6,3 +6,5 @@ spec:
   description: Inserts a horizontal page section separator
   icon: horizontal_rule
   tags: []
+
+blueprint:
