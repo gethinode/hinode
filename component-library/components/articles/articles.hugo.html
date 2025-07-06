@@ -62,46 +62,53 @@
 
 <!-- Main code -->
 {{ if not $error }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
+	{{ if or (gt (len $pages) 0) (not $args.hideEmpty) }}
+		{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
 
-	{{ $partial := "assets/card-group.html" }}
-	{{ $params := dict }}
-	{{- $params = merge $params (dict
-		"page"         page
-		"list"         $pages
-		"limit"        $args.limit
-		"cols"         $args.cols
-		"icon-rounded" $args.iconRounded
-		"href"         (cond $moreButton $moreLink "")
-		"href-title"   (cond $moreButton $moreTitle "")
-		"href-force"   (gt $result.total (len $result.pages))
-	)}}
+		{{ $partial := "assets/card-group.html" }}
+		{{ $params := dict }}
+		{{- $params = merge $params (dict
+			"page"         page
+			"list"         $pages
+			"limit"        $args.limit
+			"cols"         $args.cols
+			"icon-rounded" $args.iconRounded
+			"href"         (cond $moreButton $moreLink "")
+			"href-title"   (cond $moreButton $moreTitle "")
+			"href-force"   (gt $result.total (len $result.pages))
+		)}}
 
-	{{ if $args.scroll }}
-		{{ $partial := "assets/stack.html" }}
-		{{ $params = merge $params (dict 
-			"header-style" "none"
-			"body-style"   "title"
-			"footer-style" "none"
-			"gutter"       1
-			"padding"      3
-			"ratio"        "1x1"
-			"orientation"  "horizontal-sm"
-			"styles"       (cond $args.bento $styles "")
-		) -}}
-	{{ else }}
-		{{ $params = merge $params (dict 
-			"header-style" $args.headerStyle
-			"footer-style" $args.footerStyle
-			"padding"      $args.padding
-			"class"        (or $args.class "border-0")
-			"icon-style"   "fa-2x"
-			"align"        "start"
-			"orientation"  $args.orientation
-			"hook"         "assets/live-card.html"
-			"pagination"   $args.pagination
-			"paginate"     $paginate
-		) -}}
+		{{ if $args.scroll }}
+			{{ $partial := "assets/stack.html" }}
+			{{ $params = merge $params (dict 
+				"header-style" "none"
+				"body-style"   "title"
+				"footer-style" "none"
+				"gutter"       1
+				"padding"      3
+				"ratio"        "1x1"
+				"orientation"  "horizontal-sm"
+				"styles"       (cond $args.bento $styles "")
+			) -}}
+		{{ else }}
+			{{ $params = merge $params (dict 
+				"header-style" $args.headerStyle
+				"footer-style" $args.footerStyle
+				"padding"      $args.padding
+				"class"        (or $args.class "border-0")
+				"icon-style"   "fa-2x"
+				"align"        "start"
+				"orientation"  $args.orientation
+				"hook"         "assets/live-card.html"
+				"pagination"   $args.pagination
+				"paginate"     $paginate
+			) -}}
+		{{ end }}
+		{{ if gt (len $pages) 0 }}
+			{{ partial $partial $params }}
+		{{ else }}
+			{{- $padding := partial "utilities/GetPadding.html" -}}
+			<p class="pt-{{ $padding.y }}">{{- T "emptyList" }}.</p>
+		{{ end }}
 	{{ end }}
-	{{ partial $partial $params }}
 {{ end }}

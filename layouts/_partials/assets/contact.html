@@ -51,7 +51,7 @@
 
     {{ partial "assets/hero.html"  (dict
         "page"         $args.page
-        "heading"      $heading
+        "heading"      (merge $heading (dict "size" 6))
         "background"   $args.background
         "illustration" $illustration 
         "order"        $args.order
