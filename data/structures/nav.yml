@@ -22,6 +22,8 @@ arguments:
     release: v1.0.0
   class:
   pane:
+  responsive:
+    release: v1.4.0
   width:
     default: 12
     group: partial

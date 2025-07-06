@@ -72,7 +72,7 @@
                 aria-labelledby="{{ $parentID }}-heading-{{ $args.id }}"
                 data-bs-parent="#accordion-{{ $parentID }}"
             >
-                <div class="accordion-body">{{ $args.body | $args.page.RenderString | safeHTML }}</div>
+                <div class="accordion-body">{{ or $args.raw ($args.body | $args.page.RenderString) | safeHTML }}</div>
             </div>
         </div>
     {{- else -}}
@@ -82,9 +82,9 @@
             role="tabpanel"
             aria-labelledby="{{ $parentID }}-btn-{{ $args.id }}"
             tabindex="0"
-            data-has-content="{{ gt (len $args.body) 0 }}"
+            data-has-content="{{ or (gt (len (or $args.raw "")) 0) (gt (len $args.body) 0 ) }}"
         >
-            {{ $args.body | $args.page.RenderString | safeHTML }}
+            {{ or $args.raw ($args.body | $args.page.RenderString) | safeHTML }}
         </div>
     {{- end -}}
 {{- end -}}
