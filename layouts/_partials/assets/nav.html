@@ -6,6 +6,29 @@
 
 {{- $error := false -}}
 
+{{- define "_partials/inline/nav-dropdown.html" -}}
+    {{ $id := .id }}
+    {{ $class := .class }}
+    {{ $titles := .titles }}
+    {{ $wrap := .wrap }}
+
+    <div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
+    <a class="link-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ cond (gt (len $titles) 0) (index $titles 0) (T "sectionMenu") }}
+    </a>
+        <ul class="dropdown-menu">
+            {{- range $index, $item := $titles -}}
+                {{ $itemID := printf "%s-btn-%d" $id $index -}}
+                {{- $show := eq $index 0 -}}
+                <li>
+                    <a class="dropdown-item {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}"
+                    data-link="#{{ $id }}-btn-{{ $index }}" type="button">{{ $item }}</a>
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+{{- end -}}
+
 {{/* Initialize arguments */}}
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "nav" "args" . "group" "partial") -}}
 {{- if or $args.err $args.warnmsg -}}
@@ -19,46 +42,38 @@
     {{- $error = $args.err -}}
 {{- end -}}
 
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+
 {{/* Initialize local arguments */}}
 {{- $page := $args.page -}}
 {{- $id := $args.id | default "0" -}}
 {{- $type := or $args.tabType $args.type -}}
 {{- $wrap := or $args.wordWrap $args.wrap -}}
-{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $titles := slice -}}
+{{- range $args.list }}{{ $titles = $titles | append .Title }} {{ end -}}
+{{- if reflect.IsSlice $args.navTitles }}{{ $titles = $titles | append $args.navTitles }}{{ end -}}
 
 {{/* Main code */}}
 <div class="col col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
     {{ if $args.vertical }}<div class="d-flex align-items-start">{{ end }}
-    {{ if eq $type "callout" }}
-        <div class="d-lg-none">
-            <div id="accordion-{{ $id }}" class="accordion mb-3{{ with $args.class }} {{ . }}{{ end }} nav-callout">
-                {{- range $index, $item := $args.list -}}
-                    {{ partial "assets/nav-item.html" (dict
-                        "page"         $args.page
-                        "id"           $index
-                        "parentID"     $id
-                        "fade"         false
-                        "header"       $item.Title
-                        "class"        $args.class
-                        "body"         (or $item.Description $item.Content)
-                        "show"         false
-                        "disabled"     $item.disabled
-                        "item_type"    "accordion"
-                        "illustration" (partial "utilities/GetIllustration.html" (dict "item" $item "size" "col-12"))
-                        )
-                    }}
-                {{ end -}}
-                {{- $args.navItems | safeHTML -}}
-            </div>
-        </div>
-        <div class="d-none d-lg-block">
+    {{ if $args.responsive }}
+        {{ partial "inline/nav-dropdown.html" (dict
+            "id"     $id
+            "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
+            "titles" $titles
+            "wrap"   $wrap
+        ) }}
     {{ end }}
-
+    
+    <div class="{{ if $args.responsive }}d-none d-{{ $breakpoint.current }}-block{{ end }}">
     <ul
-        class="nav{{ with $type }} nav-{{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ if $args.vertical }} flex-column{{ end }}" 
+        class="nav nav-panel{{ with $type }} nav-{{ . }}{{ end -}}{{ with $args.class }} {{ . }}{{ end }}{{ if $args.vertical }} flex-column{{ end }} tabs-dropdown" 
         id="nav-{{ $id }}" 
-        role="tablist"{{ if $args.vertical }}
-        aria-orientation="vertical"{{ end }}
+        role="tablist"
+        {{ if $args.vertical }}aria-orientation="vertical"{{ end }}
+        data-companion="dropdown-{{ $id }}"
     >
         {{- $titles := slice -}}
         {{- range $args.list }}{{ $titles = $titles | append .Title }} {{ end -}}
@@ -73,7 +88,7 @@
                     class="nav-link{{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}{{ if $disabled }} disabled{{ end }}"
                     id="{{ $itemID }}"
                     data-bs-toggle="pill"
-                    data-bs-target="#{{ $id }}-{{ $index }}" 
+                    data-bs-target="#{{ $id }}-{{ $index }}"
                     type="button"
                     role="tab"
                     aria-controls="{{ $id }}-{{ $index }}"
@@ -84,49 +99,9 @@
             </li>
         {{ end -}}
     </ul>
-
-    <div class="tab-content {{ if eq $type "tabs" }}border p-3{{ else if $args.vertical }}ms-3{{ else }}mt-3{{ end }}">
-        {{- range $index, $item := $args.list -}}
-            {{- $header := $item.Title -}}
-            {-{ $body := $item.Content -}}
-            {{- $show := eq $index 0 -}}
-            {{- $thumbnail := "" -}}
-            {{- if reflect.IsMap $item.Params.Thumbnail -}}
-                {{- $thumbnail = $item.Params.Thumbnail.url -}}
-            {{- else -}}
-                {{- $thumbnail = $item.Params.Thumbnail -}}
-            {{- end -}}
-            <div
-                class="tab-pane{{ if $show }} active{{ end }}"
-                id="nav-{{ $id }}-{{ $index }}"
-                role="tabpanel"
-                aria-labelledby="{{ $id }}-btn-{{ $index }}"
-                tabindex="0"
-            >
-                {{- if eq $args.pane "persona" -}}
-                    {{- partial "assets/persona.html" (dict  
-                        "title"     $item.Title
-                        "class"     $args.class
-                        "color"     $args.color
-                        "href"      $item.Params.href
-                        "content"   (partial "utilities/GetDescription.html" (dict "page" $item))
-                        "thumbnail" $thumbnail
-                    ) -}}
-                {{- else -}}
-                    {{- $illustration := (partial "utilities/GetIllustration.html" (dict "item" $item)) -}}
-                    {{- if $illustration -}}
-                        <div class="row">
-                            <div class="col-12 col-lg-10 order-1 order-lg-0">{{- (or $item.Description $item.Content) -}}</div>
-                            <div class="col-12 col-lg-2 order-0 order-lg-1">{{ $illustration | safeHTML }}</div>
-                        </div>
-                    {{- else -}}
-                        {{- (or $item.Description $item.Content) -}}
-                    {{ end }}
-                {{- end -}}
-            </div>    
-        {{ end }}
+    </div>
+    <div class="tab-content {{ if in (slice "tabs" "callout") $type }}border p-3 bg-body {{ else if $args.vertical }}ms-3{{ else }}mt-3{{ end }}">
         {{- $args.navItems | safeHTML -}}
     </div>
-    {{- if eq $type "callout" }}</div>{{ end -}}
     {{- if $args.vertical }}</div>{{ end -}}
 </div>

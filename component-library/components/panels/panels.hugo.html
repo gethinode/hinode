@@ -1,0 +1,81 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "panels" "args" .)}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/panels/panels.hugo.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global arguments */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+
+{{/* Initialize local variables */}}
+{{ $list := slice }}
+{{ $titles := slice }}
+{{ $toc := slice }}
+{{ $parentID := printf "panel-%v" (cond (isset . "_ordinal") (index . "_ordinal") (md5 (delimit (slice . now) "-"))) }}
+{{ $inner := "" }}
+{{ range $i, $element := $args.elements }}
+	{{ $toc = $toc | append (dict "href" "panel-0-1" "level" 2 "title" $element.title) }}
+
+    {{ $hero := partial "assets/hero.html"  (dict 
+        "page"         page
+        "heading"      (dict "title" $element.title "content" $element.content "width" 8 "size" 6)
+        "background"   $args.background
+        "illustration" (dict "ratio" $args.ratio "icon" $element.icon "image" $element.image "mode" $element.mode)
+		"order"        $args.order
+        "link-type"    $args.linkType
+        "links"        $args.links
+        "orientation"  "horizontal"
+		"align"        "start"
+		"width"        12
+        )
+    }}
+
+	{{- $output := partial "assets/nav-item.html" (dict 
+        "page"      page
+        "id"        $i
+        "parent-id" $parentID
+        "fade"      false
+        "title"     $element.title
+		"show"      (eq $i 0)
+        "raw"       $hero
+        )
+    -}}
+
+	{{ $inner = printf "%s\n%s" $inner $output }}
+	{{ $titles = $titles | append $element.title }}
+{{ end}}
+
+{{ if not $error }}
+	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
+
+	{{- partial "assets/nav.html" (dict 
+        "id"           (or $args.id $parentID)
+        "page"         page
+		"nav-items"    $inner
+        "nav-titles"   $titles
+        "tab-type"     $args.tabType
+        "vertical"     $args.vertical
+        "word-wrap"    $args.wordWrap
+        "class"        $args.class
+        "pane"         $args.pane
+        "width"        $args.width
+		"responsive"   $args.responsive
+        ) 
+    -}}
+{{ end }}
+

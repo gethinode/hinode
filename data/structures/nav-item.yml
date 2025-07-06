@@ -15,6 +15,9 @@ arguments:
   class:
   body:
     group: partial
+  raw:
+    group: partial
+    release: v1.3.0
   navitem-type:
     release: v1.0.0
   illustration:
