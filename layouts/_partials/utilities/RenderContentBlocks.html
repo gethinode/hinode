@@ -17,7 +17,9 @@
 
 {{/* Insert a default hero and article block (for list pages) when no content blocks are available */}}
 {{ if and .blocks (gt (len .blocks) 0 )}}
-    {{ $blocks = .blocks }}
+    {{ range $i, $b := .blocks }}
+        {{ $blocks = $blocks | append (merge (dict "_ordinal" $i) $b) }}
+    {{ end }}
 {{ else if $default }}
     {{ $err := (hasPrefix $page.LinkTitle "404") }}    
     {{ $pageTitle := $page.LinkTitle }}
