@@ -7,7 +7,7 @@
 {{ $error := false }}
 
 {{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "toc" "args" . "group" "partial")}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "toc" "args" . "group" "partial") }}
 {{ if or $args.err $args.warnmsg }}
     {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/toc.html" 
@@ -31,8 +31,8 @@
         {{- if and (not $error) (ge (len .) $minNumHeadings) }}
         <div class="d-grid gap-2 mx-auto">
             {{ partial "assets/button.html" (dict 
-                "title" (T "toc") 
-                "color"        "secondary" 
+                "title"       (T "toc") 
+                "color"       "secondary" 
                 "outline"     "true" 
                 "class"       "toc-button" 
                 "icon"        "fas sort"
