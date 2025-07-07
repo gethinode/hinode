@@ -73,6 +73,7 @@
 			"limit"        $args.limit
 			"cols"         $args.cols
 			"icon-rounded" $args.iconRounded
+			"icon-style"   $args.iconStyle
 			"href"         (cond $moreButton $moreLink "")
 			"href-title"   (cond $moreButton $moreTitle "")
 			"href-force"   (gt $result.total (len $result.pages))
@@ -96,7 +97,6 @@
 				"footer-style" $args.footerStyle
 				"padding"      $args.padding
 				"class"        (or $args.class "border-0")
-				"icon-style"   "fa-2x"
 				"align"        "start"
 				"orientation"  $args.orientation
 				"hook"         "assets/live-card.html"
