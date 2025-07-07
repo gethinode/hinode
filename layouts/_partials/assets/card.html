@@ -71,12 +71,12 @@
     {{ $stack := .stack }}
     {{ $class := .class }}
 
-    <div class="card-icon{{ with $padding }} p-{{ . }}{{ end }}{{ if $rounded }} fa-stack {{ $style }} {{ $stack }}{{ end }} {{ $class }}">
+    <div class="card-icon{{ with $padding }} p-{{ . }}{{ end }}{{ if $rounded }} fa-stack {{ $style }} fa-fw {{ $stack }}{{ end }} {{ $class }}">
         {{ if $rounded }}
             {{- partial "assets/icon.html" (dict "icon" (printf "fas circle fa-stack-2x") "spacing" false) -}}
             {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $icon) "spacing" false) -}}
         {{ else }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s" $icon $style) "spacing" false) -}}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s fa-fw" $icon $style) "spacing" false) -}}
         {{ end }}
     </div>
 {{- end -}}
