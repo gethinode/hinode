@@ -12,6 +12,7 @@ arguments:
   class:
   color:
   padding:
+    default: 3
   gutter:
     release: v0.19.0
   header-style:
@@ -43,6 +44,7 @@ arguments:
   icon-rounded:
     release: v1.0.0
   align:
+    default: start
   wrapper:
     default: p-0
   responsive:

@@ -62,6 +62,26 @@
     </small></p>
 {{- end -}}
 
+{{/* Inline partial to render the card's icon */}}
+{{- define "_partials/inline/card-icon.html" -}}
+    {{ $padding := .padding }}
+    {{ $icon := .icon}}
+    {{ $rounded := .rounded }}
+    {{ $style := .style}}
+    {{ $stack := .stack }}
+    {{ $class := .class }}
+
+    <div class="card-icon{{ with $padding }} p-{{ . }}{{ end }}{{ if $rounded }} fa-stack {{ $style }} {{ $stack }}{{ end }} {{ $class }}">
+        {{ if $rounded }}
+            {{- partial "assets/icon.html" (dict "icon" (printf "fas circle fa-stack-2x") "spacing" false) -}}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $icon) "spacing" false) -}}
+        {{ else }}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s" $icon $style) "spacing" false) -}}
+        {{ end }}
+    </div>
+{{- end -}}
+
+
 {{/* Initialize global variables */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
@@ -110,7 +130,6 @@
 {{- $icon := $args.icon -}}
 {{- $iconStyle := "" -}}
 {{- $anchor := $args.anchor }}
-{{- $style := $args.style }}
 
 {{- with $page -}}
     {{- if not $args.title }}{{ $title = .Title }}{{ end -}}
@@ -126,10 +145,11 @@
     {{- if not $args.anchor }}{{ $anchor = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.anchor) "") }}{{ end -}}
 {{- end -}}
 
+{{- $style := $args.iconStyle }}
 {{ if (hasPrefix $args.orientation "horizontal") }}
-    {{ if not $args.style }}{{ $style = "fa-fluid fa-fw" }}{{ end }}
+    {{ if not $args.iconStyle }}{{ $style = "fa-fluid fa-fw" }}{{ end }}
 {{ else }}
-    {{ if not $args.style }}{{ $style = "fa-4x" }}{{ end }}
+    {{ if not $args.iconStyle }}{{ $style = "fa-4x" }}{{ end }}
     {{- $iconStyle = "pb-3" -}}
 {{ end }}
 
@@ -138,11 +158,19 @@
 {{- if eq $args.body "none" }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
 
+{{- $thumbnailArgs := dict
+    "src"      $thumbnail
+    "portrait" $args.portrait
+    "anchor"   $anchor
+    "sizes"    $args.sizes
+    "title"    (or $args.alt $title)
+    "loading"  $args.loading
+-}}
 
 {{/* Main code */}}
-{{ if or (ne $args.gutter "0") ($args.wrapper) }}<div class="g-{{ $args.gutter }} {{ $args.wrapper }}">{{ end }}
+{{ if or (ne $args.gutter "0") ($args.wrapper) }}<div class="g-{{ $args.gutter }} {{ $args.wrapper }} h-100">{{ end }}
 
-{{ $stack := "fa-2x" }}
+{{ $stack := "" }}
 
 {{- if hasPrefix $args.orientation "horizontal" -}}
     {{ $col1 := "" }}
@@ -157,61 +185,44 @@
             {{ $col1 = "col-4 pe-0" }}
             {{ $col2 = "col-8" }}
         {{ end }}
-    {{ else if $icon }}
-        {{ if eq $args.orientation "horizontal-sm" }}
-            {{ $stack = "fa-1x" }}
-            {{ $col1 = "col-4 col-md-2 pe-0" }}
-            {{ $col2 = "col-8 col-md-10" }}
-        {{ else }}
-            {{ $col1 = "col-4 pe-0" }}
-            {{ $col2 = "col-8" }}
-        {{ end }}
-
     {{ end }}
 
     {{/* Render horizontal card */}}
     <div class="card {{ $colorStyle }}{{ $args.class }}">
-        <div class="row g-0 row-cols-2 h-100{{ if $args.button }} pb-{{ $padding.y }}{{ end }}">
+        <div class="{{ if $thumbnail }}row-cols-2 row {{ end }} g-0 h-100{{ if $args.button }} pb-{{ $padding.y }}{{ end }}">
             {{- if $thumbnail -}}
                 <div class="{{ $col1 }}">
                     {{ $fullHeight := "card-img-h100" }}
                     {{ $rounding := "rounded-start" }}
                     {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
-                    {{- partial $args.hook (dict 
-                        "src"      $thumbnail
-                        "ratio"    (or $ratio "auto")
-                        "portrait" $args.portrait
-                        "sizes"    $args.sizes
-                        "anchor"   $anchor
-                        "wrapper"  "h-100 card-img-wrap d-flex align-items-center"
+                    {{- partial $args.hook (merge $thumbnailArgs (dict 
+                        "wrapper"  "card-img-wrap h-100 d-flex align-items-center"
                         "class"    (printf "card-img-bg %s %s" $rounding $fullHeight)
-                        "title"    $title
-                        "loading"  $args.loading
-                    ) -}}
-                </div>
-            {{- else if $icon -}}
-                <div class="{{ $col1 }} p-{{ $args.padding }}">
-                    <div class="card-icon {{ if $args.iconRounded }}fa-stack {{ $args.stack }} mx-auto{{ else }}fa-wrapper h-100 {{ end }} d-flex align-items-{{ $args.align}} justify-content-center {{ $iconStyle }}">
-                        {{ if $args.iconRounded }}
-                            {{- partial "assets/icon.html" (dict "icon" "fas circle fa-stack-2x") -}}
-                            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $icon)) -}}
-                        {{ else }}
-                            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s" $icon $style)) -}}
-                        {{ end }}
-                    </div>
+                        "ratio"    (or $ratio "auto")
+                    )) -}}
                 </div>
             {{- end -}}
             <div class="{{ $col2 }}">
-                <div class="card-body d-flex p-{{ $args.padding }} flex-column h-100 flex-fill">
-                    {{ if $page }}
-                        <div>{{ partial "inline/card-caption.html" (dict
-                            "page"     $page
-                            "keywords" $args.headerStyle
-                            "color"    $args.color
-                            ) }}
-                        </div>
+                <div class="card-body p-{{ $args.padding }} h-100 hstack">
+                    {{ if $icon }}
+                        {{- partial "inline/card-icon.html" (dict
+                            "icon"     $icon
+                            "padding"  $args.padding
+                            "rounded"  $args.iconRounded
+                            "style"    $style
+                            "stack"    $args.stack
+                            "class"    (printf "align-self-%s me-1 mt-1 col-auto" $args.align)
+                        )}}
                     {{ end }}
-                    <div class="flex-fill">
+                    <div>
+                        {{ if $page }}
+                            <div>{{ partial "inline/card-caption.html" (dict
+                                "page"     $page
+                                "keywords" $args.headerStyle
+                                "color"    $args.color
+                                ) }}
+                            </div>
+                        {{ end }}
                         {{- partial "inline/card-body.html" (dict
                             "title"       $title
                             "href"        $href
@@ -219,25 +230,25 @@
                             "description" $description
                             "button"      $args.button
                         ) -}}
+                        {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}</div>{{ end }}
+                        {{ if and $href $args.button }}
+                            {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
+                            {{ $buttonClass := "card-button mb-n4" }}
+                            {{ $buttonType := (or $args.linkType $args.buttonType) }}
+                            {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link mb-n4" }}{{ end }}
+                            <div class="d-flex align-items-end">
+                                {{ partial "assets/button.html" (dict 
+                                    "title"       $label
+                                    "icon"        "fas chevron-right"
+                                    "href"        $href
+                                    "outline"     true
+                                    "button-size" "sm"
+                                    "class"       $buttonClass
+                                    "link-type"   $buttonType
+                                )}}
+                            </div>
+                        {{ end }}
                     </div>
-                    {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}</div>{{ end }}
-                    {{ if and $href $args.button }}
-                        {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
-                        {{ $buttonClass := "card-button mb-n4" }}
-                        {{ $buttonType := (or $args.linkType $args.buttonType) }}
-                        {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link mb-n4" }}{{ end }}
-                        <div class="d-flex align-items-end">
-                            {{ partial "assets/button.html" (dict 
-                                "title"       $label
-                                "icon"        "fas chevron-right"
-                                "href"        $href
-                                "outline"     true
-                                "button-size" "sm"
-                                "class"       $buttonClass
-                                "link-type"   $buttonType
-                            )}}
-                        </div>
-                    {{ end }}
                 </div>
             </div>
         </div>
@@ -245,30 +256,23 @@
 {{- else -}}
     {{/* Render stacked / default card */}}
     {{ $overlay := eq $args.orientation "overlay" }}
-    <div class="card {{ $colorStyle }} {{ $args.class }} text-{{ $args.align }}">
+    <div class="card {{ $colorStyle }} {{ $args.class }} text-{{ $args.align }}{{ if not $thumbnail }} p-{{ $args.padding }}{{ end }}">
         {{- if $thumbnail -}}
-            {{- partial $args.hook (dict
-                "src"      $thumbnail
-                "ratio"    (or $ratio "16x9")
-                "portrait" $args.portrait
-                "anchor"   $anchor
-                "sizes"    $args.sizes
+            {{- partial $args.hook (merge $thumbnailArgs (dict
                 "wrapper"  "card-img-wrap"
                 "class"    "card-img-top card-img-bg"
-                "title"    (or $args.alt $title)
-                "loading"  $args.loading
-            ) -}}
+                "ratio"    (or $ratio "16x9")
+            )) -}}
         {{- else if $icon -}}
-            <div class="card-icon p-{{ $args.padding }} {{ $iconStyle }} text-{{ $args.align }} {{ if $args.iconRounded }}fa-stack {{ $args.stack }}{{ end }} w-100">
-                {{ if $args.iconRounded }}
-                    {{- partial "assets/icon.html" (dict "icon" (printf "fas circle fa-stack-2x %s")) -}}
-                    {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $icon)) -}}
-                {{ else }}
-                    {{- partial "assets/icon.html" (dict "icon" (printf "%s %s" $icon $style)) -}}
-                {{ end }}
-            </div>
+            {{- partial "inline/card-icon.html" (dict
+                "icon"     $icon
+                "rounded"  $args.iconRounded
+                "style"    $style
+                "stack"    $args.stack
+                "class"    (printf "mb-1 m-0 text-%s" $args.align)
+            )}}
         {{- end -}}
-        <div class="card-body d-flex flex-column p-{{ $args.padding }} {{ if $overlay }}card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
+        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }}card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
             {{ if $args.overlay }}<div class="flex-grow-1"></div>{{ end }}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict "title" $title "href" $href "color" $args.color "description" $description) -}}
@@ -276,7 +280,7 @@
         </div>
         {{ if $args.button }}
             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
-            <div class="row p-{{ $args.padding }}" >
+            <div class="row" >
                 <div class="{{ if eq $args.orientation "horizontal-sm" }}col-4 col-md-2{{ else if eq $args.orientation "horizontal" }}col-4{{ end }}"></div>
                 <div class="col d-flex align-items-end {{ if eq $args.orientation "horizontal-sm" }}px-2{{ else if eq $args.orientation "horizontal"}}px-1 {{ else }}px-2 pt-1{{ end }}">
                     {{ $buttonClass := "card-button" }}
@@ -289,7 +293,7 @@
                         "button-size" "sm"
                         "class"       "card-button"
                         "class"       $buttonClass
-                        "link-type"   $args.buttonType
+                        "link-type"   $buttonType
                     )}}
                 </div>
             </div>
