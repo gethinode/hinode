@@ -31,12 +31,12 @@
 {{- $header := or (partial "utilities/GetArgParent" (dict "page" . "arg" "header-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "header"))  -}}
 {{- $icon := .Get "icon" -}}
 {{- $iconRounded := or (partial "utilities/GetArgParent" (dict "page" . "arg" "icon-rounded")) (partial "utilities/GetArgParent" (dict "page" . "arg" "iconRounded")) -}}
-{{- $align := partial "utilities/GetArgParent" (dict "page" . "arg" "align") -}}
+{{- $align := partial "utilities/GetArgParent" (dict "page" . "arg" "align") | default "start" -}}
 {{- $style := or (partial "utilities/GetArgParent" (dict "page" . "arg" "icon-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "style")) -}}
 {{- $subtle := partial "utilities/GetArgParent" (dict "page" . "arg" "subtle") -}}
 {{- $loading := .Get "loading" -}}
 {{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") -}}
-{{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") -}}
+{{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") | default 3 -}}
 {{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
 {{- $page := .Page -}}
 {{- $path := .Get "path" -}}
