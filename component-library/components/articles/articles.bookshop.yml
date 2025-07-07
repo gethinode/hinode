@@ -27,6 +27,8 @@ blueprint:
   more:
     title:
     link:
+  icon-rounded:
+  icon-style:
   cols:
   padding:
   limit:

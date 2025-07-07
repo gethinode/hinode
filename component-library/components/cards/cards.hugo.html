@@ -40,15 +40,15 @@
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
 		"list"         $list
-		"class"        (printf "border-0 card-icon-primary d-%s-none %s" $breakpoint.prev $args.class)
+		"class"        (printf "border-0 card-icon-primary d-%s-none %s" $breakpoint.prev (or $args.class ""))
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding
 		"header-style" "none"
 		"footer-style" "none"
 		"icon-rounded" $args.iconRounded
-		"icon-style"   "fa-2x"
-		"align"        "start"
+		"icon-style"   (or $args.iconStyle "fa-2x")
+		"align"        $args.align
 		"orientation"  ($args.orientation | default "horizontal-sm")
 		"hook"         "assets/live-card.html"
 	) -}}
@@ -56,15 +56,15 @@
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
 		"list"         $list
-		"class"        (printf "border-0 card-icon-primary d-none d-%s-block %s" $breakpoint.prev $args.class)
+		"class"        (printf "border-0 card-icon-primary d-none d-%s-block %s" $breakpoint.prev (or $args.class ""))
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding
 		"header-style" "none"
 		"footer-style" "none"
 		"icon-rounded" $args.iconRounded
-		"icon-style"   "fa-2x"
-		"align"        "start"
+		"icon-style"   (or $args.iconStyle "fa-2x")
+		"align"        $args.align
 		"orientation"  ($args.orientation | default "stacked")
 		"hook"         "assets/live-card.html"
 	) -}}

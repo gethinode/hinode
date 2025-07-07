@@ -25,9 +25,10 @@ content_blocks:
     more:
       title: More Posts
     cols: 3
-    padding: 0
+    padding: 3
     limit: 9
     paginate: true
     cover: false
     header-style: none
+    class: border-1
 ---

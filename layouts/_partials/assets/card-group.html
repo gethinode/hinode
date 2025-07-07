@@ -156,7 +156,7 @@
                     "ratio"         (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "ratio" "default" $args.ratio))
                     "portrait"      (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "portrait" "default" $args.portrait))
                     "subtle"        $args.subtle
-                    "icon-style"    (or (index $element "$icon-style") $element.style)
+                    "icon-style"    (or (index $element "icon-style") $element.style $args.iconStyle)
                     "align"         $args.align
                     "button"        $args.button
                     "button-label"  (or (index $element "button-label") $element.buttonLabel)

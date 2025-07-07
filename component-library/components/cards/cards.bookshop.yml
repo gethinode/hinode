@@ -17,6 +17,7 @@ blueprint:
     width:
   cols:
   icon-rounded:
+  icon-style:
   padding:
   background:
     backdrop:
@@ -32,3 +33,4 @@ blueprint:
   class:
   width:
   justify:
+  align:

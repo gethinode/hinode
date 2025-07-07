@@ -15,6 +15,7 @@ arguments:
     parent: cascade
   padding:
     parent: cascade
+    default: 3
   gutter:
     default: 0
     parent: cascade
@@ -45,6 +46,7 @@ arguments:
   icon-rounded:
     release: v1.0.0
   align:
+    default: start
     parent: cascade
     release: v0.23.0
   scroll:
