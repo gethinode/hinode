@@ -56,6 +56,7 @@ content_blocks:
     cols: 1
     padding: 4
     limit: 2
+    icon-style: fa-5x
     header-style: none
     footer-style: tags
     orientation: horizontal-sm
