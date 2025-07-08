@@ -21,6 +21,7 @@
 
 {{/* Initialize global arguments */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local variables */}}
 {{ $list := slice }}
@@ -34,13 +35,20 @@
 	) }}
 {{ end}}
 
+{{/* Main code */}}
 {{ if not $error }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
+	{{- partial "assets/section-title.html" (dict
+		"heading" $args.heading
+		"justify" $args.justify
+		"class" (printf "pb-%d" $padding.y))
+	-}}
 
+	{{/* Layout for small screens */}}
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
 		"list"         $list
-		"class"        (printf "border-0 card-icon-primary d-%s-none %s" $breakpoint.prev (or $args.class ""))
+		"class"        (printf "border-0 card-icon-primary %s" (or $args.class ""))
+		"wrapper"      (printf "d-%s-none" $breakpoint.prev)
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding
@@ -53,10 +61,12 @@
 		"hook"         "assets/live-card.html"
 	) -}}
 
+	{{/* Layout for regular screens */}}
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
 		"list"         $list
-		"class"        (printf "border-0 card-icon-primary d-none d-%s-block %s" $breakpoint.prev (or $args.class ""))
+		"class"        (printf "border-0 card-icon-primary %s" (or $args.class ""))
+		"wrapper"      (printf "d-none d-%s-block" $breakpoint.prev)
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding

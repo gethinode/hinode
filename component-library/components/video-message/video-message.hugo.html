@@ -16,6 +16,7 @@
     )}}
 {{ end }}
 
+{{/* Initialize global variables */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
@@ -80,6 +81,7 @@
 	) -}}
 {{ end }}
 
+{{/* Main code */}}
 {{ if not $args.err }}
 	{{ $list := slice }}
 
@@ -98,7 +100,11 @@
 		) }}
 	{{ end}}
 
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
+	{{- partial "assets/section-title.html" (dict
+		"heading" $args.heading
+		"justify" $args.justify
+		"class" (printf "pb-%d" $padding.y))
+	-}}
 
 	{{ if eq $args.orientation "stacked" }}
 		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">

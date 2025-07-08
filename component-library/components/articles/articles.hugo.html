@@ -19,6 +19,10 @@
     {{ $error = $args.err }}
 {{ end }}
 
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Initialize local variables */}}
 {{ $pages := slice }}
 {{ $result := partial "assets/live-pages.html" (dict 
 	"page"       $args.page
@@ -60,10 +64,14 @@
 	{{ $paginate = false }}
 {{ end }}
 
-<!-- Main code -->
+{{/* Main code */}}
 {{ if not $error }}
 	{{ if or (gt (len $pages) 0) (not $args.hideEmpty) }}
-		{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
+		{{- partial "assets/section-title.html" (dict
+			"heading" $args.heading
+			"justify" $args.justify
+			"class" (printf "pb-%d" $padding.y))
+		-}}
 
 		{{ $partial := "assets/card-group.html" }}
 		{{ $params := dict }}
@@ -107,7 +115,6 @@
 		{{ if gt (len $pages) 0 }}
 			{{ partial $partial $params }}
 		{{ else }}
-			{{- $padding := partial "utilities/GetPadding.html" -}}
 			<p class="pt-{{ $padding.y }}">{{- T "emptyList" }}.</p>
 		{{ end }}
 	{{ end }}
