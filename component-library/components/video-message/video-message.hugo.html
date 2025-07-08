@@ -59,6 +59,7 @@
 	{{ $cols := .cols }}
 	{{ $type := .type }}
 	{{ $iconRounded := .iconRounded }}
+	{{ $iconStyle := .iconStyle }}
 
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
@@ -75,6 +76,7 @@
 		"button"       true
 		"link-type"    $type
 		"icon-rounded" $iconRounded
+		"icon-style"   $iconStyle
 	) -}}
 {{ end }}
 
@@ -99,7 +101,7 @@
 	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
 
 	{{ if eq $args.orientation "stacked" }}
-		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto pb-{{ $padding.y }}">
+		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
 		{{ with $args.video }}
 			{{- partial "inline/video.html" (dict
 				"provider"   .provider
@@ -112,11 +114,17 @@
 			) -}}
 		{{ end }}
 		</div>
-		<div class="mt-{{ $padding.y }} pb-{{ $padding.y }}">
-			{{- partial "inline/messages.html" (dict "list" $list "cols" $args.cols "type" $args.type "iconRounded" $args.iconRounded) -}}
+		<div class="mt-{{ $padding.y }}">
+			{{- partial "inline/messages.html" (dict
+				"list"        $list
+				"cols"        $args.cols
+				"type"        $args.type
+				"iconRounded" $args.iconRounded
+				"iconStyle"   $args.iconStyle
+			) -}}
 		</div>
 	{{ else }}
-		<div class="container grid gap-4 pb-{{ $padding.y }}">
+		<div class="container grid gap-{{ $padding.x }}">
 			<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
 				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
 					{{ with $args.video }}
@@ -132,7 +140,13 @@
 					{{ end }}
 				</div>
 				<div class="col col-{{ $breakpoint.current }}-{{ sub 12 $args.width }} mt-{{ $padding.y }} mt-{{ $breakpoint.current }}-0">
-					{{- partial "inline/messages.html" (dict "list" $list "cols" 1 "type" $args.type "iconRounded" $args.iconRounded) -}}
+					{{- partial "inline/messages.html" (dict
+						"list"        $list
+						"cols"        1
+						"type"        $args.type
+						"iconRounded" $args.iconRounded
+						"iconStyle"   $args.iconStyle
+					) -}}
 				</div>
 			</div>
 		</div>

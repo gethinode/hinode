@@ -86,7 +86,7 @@
 }}
 
 <!-- Main code -->
-<div class="text-{{ $args.heading.align }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }} py-{{ $padding.y }}">
+<div class="text-{{ $args.heading.align }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }} pb-{{ $padding.y }}">
     {{ if and $preheading (eq $arrangement "first") }}
         <div class="container-fluid">
             <div class="row">

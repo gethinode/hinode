@@ -24,6 +24,7 @@ The `video` content block renders a horizontal line to separate sections. The se
     color: primary
     subtle: true
   orientation: horizontal
+  icon-style: fa-lg
   video:
     provider: vimeo
     media-id: "55073825"
