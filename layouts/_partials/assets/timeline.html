@@ -109,7 +109,7 @@
     {{ end }}
 
     {{/* Render default timeline */}}
-    <div class="container p-0 d-none d-md-block mb-5 {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
+    <div class="container p-0 d-none d-md-block {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
         {{ $title | safeHTML }}
         {{ range $index, $item := $data }}
             <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">

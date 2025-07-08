@@ -54,7 +54,13 @@
             {{ errorf "Expected '_bookshop_name': %s" .Position -}}
             {{ $error = true }}
         {{ else }}
-            {{ $partial = partial "_bookshop/helpers/component.html" (slice $component_name $data "p-1 p-md-4" "m-n1 m-md-n4") }}
+            {{- $padding := partial "utilities/GetPadding.html" -}}
+            {{ $partial = partial "_bookshop/helpers/component.html" (slice
+                $component_name
+                $data
+                (printf "p-1 px-md-%d py-md-%d" $padding.x $padding.y)
+                (printf "m-n1 mx-md-n%d my-md-n%d" $padding.x $padding.y)
+            ) }}
         {{ end }}
     {{ else }}
         {{ errorf "Expected frontmatter codeblock as input: %s" .Position -}}

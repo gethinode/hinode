@@ -101,7 +101,7 @@
 	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
 
 	{{ if eq $args.orientation "stacked" }}
-		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto pb-{{ $padding.y }}">
+		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
 		{{ with $args.video }}
 			{{- partial "inline/video.html" (dict
 				"provider"   .provider
@@ -114,6 +114,7 @@
 			) -}}
 		{{ end }}
 		</div>
+		<div class="mt-{{ $padding.y }}">
 			{{- partial "inline/messages.html" (dict
 				"list"        $list
 				"cols"        $args.cols
@@ -123,7 +124,7 @@
 			) -}}
 		</div>
 	{{ else }}
-		<div class="container grid gap-4 pb-{{ $padding.y }}">
+		<div class="container grid gap-{{ $padding.x }}">
 			<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
 				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
 					{{ with $args.video }}

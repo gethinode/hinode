@@ -24,7 +24,8 @@
 	{{ $class := "" }}
 	{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}
 
-	<div id="{{ $id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end }}accordion-flush mb-3{{ with $class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
+	<div id="{{ $id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end -}}
+		accordion-flush{{ with $class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
 		{{ range $index, $item := $args.items }}
 			<div class="accordion-item">
 				{{- with $item.title -}}
