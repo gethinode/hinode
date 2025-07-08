@@ -24,6 +24,7 @@ blueprint:
   link-type:
   orientation:
   icon-rounded:
+  icon-style:
   video:
     provider:
     account:
