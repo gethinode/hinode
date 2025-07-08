@@ -4,15 +4,11 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{- $file := "package.json" -}}
-{{- $basePath := .Site.Params.docs.basePath -}}
-{{- $file = path.Join $basePath (path.Clean $file) -}}
-
-{{- $regex := printf `"version":.*(\r\n|\r|\n)` -}}
-
+{{- $file := "go.mod" -}}
+{{- $regex := printf `github.com\/gethinode\/hinode v.*(\r\n|\r|\n)` -}}
 {{- $match := findRE $regex (readFile $file) -}}
 {{- $match = index $match 0 -}}
 
 {{- if $match -}}
-    {{- printf "v%s" (trim (index (split $match ":") 1) " \r\n,\"") -}}
+    {{- printf "%s" (trim (index (split $match " ") 1) " \r\n,\"") -}}
 {{- end -}}
