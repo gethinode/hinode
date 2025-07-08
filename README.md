@@ -15,9 +15,6 @@
     <a href="https://gethinode.com">
         <img src="https://img.shields.io/badge/theme-hinode-blue" alt="Hinode theme">
     </a>
-    <a href="https://www.npmjs.com/package/%40gethinode/hinode">
-        <img src="https://img.shields.io/npm/v/%40gethinode/hinode" alt="npm package">
-    </a>
     <a href="https://app.netlify.com/sites/gethinode-demo/deploys">
         <img src="https://img.shields.io/netlify/0ad42e3e-fdfa-4d37-8e26-58badd429a67"  alt="Netlify Status">
     </a>

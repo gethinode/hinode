@@ -16,7 +16,6 @@ blueprint:
     align:
     width:
   cols:
-  icon-rounded:
   padding:
   background:
     backdrop:
@@ -30,6 +29,7 @@ blueprint:
       content:
   tab-type:
   ratio:
+  responsive:
   class:
   width:
   justify:
