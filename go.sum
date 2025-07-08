@@ -6,6 +6,8 @@ github.com/cloudcannon/bookshop/hugo/v3 v3.16.0 h1:Fb76ABHqTyPl9Z2QqYJCwiMBKPySh
 github.com/cloudcannon/bookshop/hugo/v3 v3.16.0/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
 github.com/cloudcannon/bookshop/hugo/v3 v3.16.1 h1:WByz6rqg28h94VLVLscu77/CHhi2peig/LqrnVomX0Y=
 github.com/cloudcannon/bookshop/hugo/v3 v3.16.1/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
+github.com/cloudcannon/bookshop/hugo/v3 v3.16.3 h1:/Z66xKILl1SNGQePHZCnxo6vFgED7AGI600OSPotXj4=
+github.com/cloudcannon/bookshop/hugo/v3 v3.16.3/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
 github.com/gethinode/mod-bootstrap v1.0.1 h1:NDZar+UEL42YHCvzzO+jVgqkZU5INA12BpjX3y6U4I4=
 github.com/gethinode/mod-bootstrap v1.0.1/go.mod h1:DcpPc2cNaXUPGEvhD7npuEEPA7573NvakTlrwFbyjr8=
 github.com/gethinode/mod-bootstrap v1.1.0 h1:BbalsW8kmFhv+J+dcc41TGcjIlM/p69AB0h0oGhAXIU=
