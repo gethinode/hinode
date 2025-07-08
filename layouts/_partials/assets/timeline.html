@@ -22,6 +22,7 @@
 
 {{/* Initialize global variables */}}
 {{ $arrangement := site.Params.modules.bookshop.title.arrangement }}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local arguments */}}
 {{- $page := $args.page -}}
@@ -105,6 +106,7 @@
             "link-type"   (or $args.linkType $args.type)
             "arrangement" $arrangement
             "justify"     $args.justify
+		    "class"       (printf "pb-%d" $padding.y)
         ) }}
     {{ end }}
 

@@ -85,8 +85,8 @@
     "mode"    $args.mode
 }}
 
-<!-- Main code -->
-<div class="text-{{ $args.heading.align }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }} pb-{{ $padding.y }}">
+{{/* Main code */}}
+<div class="text-{{ $args.heading.align }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }}">
     {{ if and $preheading (eq $arrangement "first") }}
         <div class="container-fluid">
             <div class="row">

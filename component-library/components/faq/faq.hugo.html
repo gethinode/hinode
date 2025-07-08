@@ -16,10 +16,18 @@
     )}}
 {{ end }}
 
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Main code */}}
 {{ if not $args.err }}
 	{{ $color := "" }}
 	{{ if $args.contrast }}{{ $color = "white" }}{{ end }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "color" $color "justify" $args.justify) -}}
+	{{- partial "assets/section-title.html" (dict
+		"heading" $args.heading
+		"justify" $args.justify
+		"class" (printf "pb-%d" $padding.y))
+	-}}
 
 	{{ $class := "" }}
 	{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}

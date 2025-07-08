@@ -21,6 +21,7 @@
 
 {{/* Initialize global arguments */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local variables */}}
 {{ $list := slice }}
@@ -34,8 +35,13 @@
 	) }}
 {{ end}}
 
+{{/* Main code */}}
 {{ if not $error }}
-	{{- partial "assets/section-title.html" (dict "heading" $args.heading "justify" $args.justify) -}}
+	{{- partial "assets/section-title.html" (dict
+		"heading" $args.heading
+		"justify" $args.justify
+		"class" (printf "pb-%d" $padding.y))
+	-}}
 
 	{{- partial "assets/card-group.html" (dict 
 		"page"         page
