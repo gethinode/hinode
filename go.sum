@@ -116,6 +116,8 @@ github.com/gethinode/mod-flexsearch/v2 v2.1.1 h1:Vcr0aAkqPdavK183L8nr0dF7ngfY9EU
 github.com/gethinode/mod-flexsearch/v2 v2.1.1/go.mod h1:0IJGZQRv9X+th/gFmFRusEUSv0oJSr3aw5t1w3lfvYg=
 github.com/gethinode/mod-flexsearch/v2 v2.1.2 h1:B/onreHG/qzIqMo9YYiRk4WWM+GgFj1FSGHSgUpCvJ0=
 github.com/gethinode/mod-flexsearch/v2 v2.1.2/go.mod h1:0IJGZQRv9X+th/gFmFRusEUSv0oJSr3aw5t1w3lfvYg=
+github.com/gethinode/mod-flexsearch/v2 v2.1.3 h1:m5I9B7cA1SU99f90yO4OpOcKNPZ5zMF18pEhusLxa80=
+github.com/gethinode/mod-flexsearch/v2 v2.1.3/go.mod h1:0IJGZQRv9X+th/gFmFRusEUSv0oJSr3aw5t1w3lfvYg=
 github.com/gethinode/mod-fontawesome v1.0.2 h1:ZSK6D20/w4y5GnfYfTBB58uHD0ChIfkpKfRGwioS9rg=
 github.com/gethinode/mod-fontawesome v1.0.2/go.mod h1:Ki1qkWEOiF0hQpCgWeZRw+HkpL6nd1DxKFptU0O2feI=
 github.com/gethinode/mod-fontawesome v1.1.0 h1:rsDzUI+3ZlS/do2ff3ne8/z3KwHeysmuA+WsXlumXXk=
@@ -322,6 +324,8 @@ github.com/gethinode/mod-mermaid/v2 v2.0.1 h1:QcahIFCgmYAGsukQ0d+/L4IJtDwgXgv0Wz
 github.com/gethinode/mod-mermaid/v2 v2.0.1/go.mod h1:kp3oUFAjKxuwzFbwxGWPEx5VQOu2ZHzcrwcNhDv08BI=
 github.com/gethinode/mod-mermaid/v2 v2.0.2 h1:uRHS3RyrMBK/hhDbEX39HnYkypSvSeci0kSyQaSdsKU=
 github.com/gethinode/mod-mermaid/v2 v2.0.2/go.mod h1:kp3oUFAjKxuwzFbwxGWPEx5VQOu2ZHzcrwcNhDv08BI=
+github.com/gethinode/mod-mermaid/v2 v2.0.3 h1:vWiAE640GAzkQCj0NFyn1VtnpFwiJ5Bljm2YgoQ3qG4=
+github.com/gethinode/mod-mermaid/v2 v2.0.3/go.mod h1:kp3oUFAjKxuwzFbwxGWPEx5VQOu2ZHzcrwcNhDv08BI=
 github.com/gethinode/mod-simple-datatables v1.0.0 h1:Dj4WGw12OkaimwkCpLn5Jhmd49dvNJW9O2P/W9F+HlQ=
 github.com/gethinode/mod-simple-datatables v1.0.0/go.mod h1:K8T7fIdb8pMOB+OSW4A5lz5IW99+HyzcTgx764fvOGw=
 github.com/gethinode/mod-simple-datatables v1.0.2 h1:zhqxHet3iLQWYCBbGROALpOY9zQlptMycFkz1Tto5bA=
