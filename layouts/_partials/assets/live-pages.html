@@ -34,7 +34,7 @@
         {{/* Retrieve the relevant context page, either current page or page identified by section */}}
         {{ $sectionPage := $args.page | default page }}
         {{ if $args.section }}
-            {{ $sectionPage = site.GetPage "section" $args.section }}
+            {{ $sectionPage = site.GetPage $args.section }}
             {{ if not $sectionPage }}
                 {{ warnf "Cannot find section: %s" $args.section }}
             {{ end }}

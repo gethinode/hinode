@@ -84,7 +84,7 @@
         {{- $params := dict -}}
         {{/* regular page */}}
         {{- if and $element.RelPermalink $element.File -}}
-            {{- $params = merge $params (dict "path" $element.File.Path) -}}
+            {{- $params = merge $params (dict "path" $element.Path) -}}
         {{/* headless page */}}
         {{- else -}}
             {{- $thumbnail := "" -}}
