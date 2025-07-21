@@ -40,11 +40,11 @@
     {{ end }}
 
     {{- $bundle := partial "utilities/bundle.html" (dict
-        "match" $match
-        "filename" $destination
-        "modules" $modules
-        "basepath" "js/modules"
-        "all" true
+        "match"     $match
+        "filename"  $destination
+        "modules"   $modules
+        "basepath"  "js/modules"
+        "all"       true
         "debugging" site.Params.debugging.showJS
     ) -}}
     {{- $js := $bundle -}}
@@ -58,7 +58,12 @@
             {{ $js = $js | minify | fingerprint -}}
             {{ $integrity = $js.Data.Integrity }}
         {{ end -}}
-        {{ partial "templates/script.html" (dict "link" (cond $absoluteURL $js.Permalink $js.RelPermalink) "category" $cat "state" $state "integrity" $integrity) }}
+        {{ partial "templates/script.html" (dict
+            "link"      (cond $absoluteURL $js.Permalink $js.RelPermalink)
+            "category"  $cat 
+            "state"     $state
+            "integrity" $integrity
+        ) }}
     {{ end -}}
 {{ end }}
 
@@ -78,12 +83,12 @@
 
 {{/* Initialize local arguments */}}
 {{ $patterns := dict 
-    "other" "js/critical/*.js"
-    "functional" "js/critical/functional/**.js"
-    "analytics" "js/critical/analytics/**.js"
-    "performance" "js/critical/performance/**.js"
+    "other"         "js/critical/*.js"
+    "functional"    "js/critical/functional/**.js"
+    "analytics"     "js/critical/analytics/**.js"
+    "performance"   "js/critical/performance/**.js"
     "advertisement" "js/critical/advertisement/**.js"
-    "core" "{js/*.js,js/vendor/**.js}"
+    "core"          "{js/*.js,js/vendor/**.js}"
 }}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -127,7 +132,11 @@
         {{ if in $modules $mod }}
             {{ if or (index $cfg "local") (not hugo.IsServer) }}
                 {{ with index $cfg "url" }}
-                    {{ partial "templates/script.html" (dict "link" . "category" (index $cfg "category") "state" (index $cfg "state")) }}
+                    {{ partial "templates/script.html" (dict
+                        "link"     .
+                        "category" (index $cfg "category")
+                        "state"    (index $cfg "state")) 
+                    }}
                 {{ end }}
             {{ end }}
         {{ end }}
@@ -145,15 +154,15 @@
                 {{ end }}
 
                 {{ partial "inline/bundle-script.html" (dict 
-                    "page" $page
-                    "match" $match
-                    "destination" (printf "js/%s.bundle.js" $args.type)
-                    "cat" $cat
-                    "modules" $val
-                    "localize" $localize
+                    "page"         $page
+                    "match"        $match
+                    "destination"  (printf "js/%s.bundle.js" $args.type)
+                    "cat"          $cat
+                    "modules"      $val
+                    "localize"     $localize
                     "skipTemplate" $skipTemplate
-                    "absoluteURL" $absoluteURL
-                    "state" (cond (eq $args.type "critical") "immediate" "async")
+                    "absoluteURL"  $absoluteURL
+                    "state"        (cond (eq $args.type "critical") "immediate" "async")
                 )}} 
             {{ end }}
         {{ end }}
@@ -163,14 +172,14 @@
             {{ range $val }}
                 {{ $modconfig := index $config.modules . }}
                 {{ partial "inline/bundle-script.html" (dict 
-                    "page" $page
-                    "destination" (printf "js/%s.js" .)
-                    "cat" $cat
-                    "modules" (slice .)
-                    "localize" $modconfig.localize
+                    "page"         $page
+                    "destination"  (printf "js/%s.js" .)
+                    "cat"          $cat
+                    "modules"      (slice .)
+                    "localize"     $modconfig.localize
                     "skipTemplate" $modconfig.disabletemplate
-                    "absoluteURL" $absoluteURL
-                    "state" $modconfig.state
+                    "absoluteURL"  $absoluteURL
+                    "state"        $modconfig.state
                 )}} 
             {{ end }}
         {{ end }}
