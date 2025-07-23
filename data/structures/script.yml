@@ -1,6 +1,6 @@
 comment: >-
   Includes a reference to a local or external JavaScript file. Hinode uses the
-  template defined in `layouts/partials/templates/script.html` to generate the
+  template defined in `layouts/_partials/templates/script.html` to generate the
   link to a (bundled) JavaScript file. It includes context such as the state,
   category, and integrity. For example, you can adapt this template to implement
   cookie consent management.
@@ -44,3 +44,10 @@ arguments:
     optional: true
     comment: >-
       Cryptographic hash of the script to enable Subresource Integrity (SRI).
+  script-type:
+    type: string
+    optional: true
+    release: v1.7.0
+    comment: >-
+      Type of the attribute of the script. Set the value to `module` to import
+      the script as a JavaScript module.

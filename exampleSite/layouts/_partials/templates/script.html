@@ -4,6 +4,8 @@
     Visit gethinode.com/license for more details.
 */}}
 
+<!-- TODO: this partial is not properly mounted for the exampleSite, possibly a bug with Hugo -->
+
 {{/* Initialize arguments */}}
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "script" "args" .) -}}
 {{- if or $args.err $args.warnmsg -}}
@@ -22,7 +24,6 @@
 {{/* Main code */}}
 {{- if not $args.err -}}
     <script src="{{ $args.link }}"
-        {{/* with $args.scriptType generates an error when using type="{{ . }}", possibly a Hugo bug */}}
         {{- with $args.scriptType }}{{ printf ` type="%s"` . | safeHTMLAttr }}{{ end -}}
         {{- with $category }} data-category="{{ . }}"{{ end -}}
         {{- with $args.integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}

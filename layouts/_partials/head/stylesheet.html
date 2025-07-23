@@ -66,11 +66,24 @@
     "dark-mode-tint"          (default "0%" site.Params.style.darkModeTint)
 -}}
 
-{{- $options := (dict "transpiler" $transpiler "silenceDeprecations" $silence "targetPath" $target "enableSourceMap" (not hugo.IsProduction) "vars" $vars) -}}
-{{- $bundle := partial "utilities/bundle.html" (dict "match" $source "filename" (printf "scss/bundle-%d.scss" now.UnixNano) "modules" $modules "basepath" "scss" "debugging" site.Params.debugging.showSCSS) -}}
+{{- $options := (dict
+    "transpiler"          $transpiler
+    "silenceDeprecations" $silence
+    "targetPath"          $target
+    "enableSourceMap"     (not hugo.IsProduction)
+    "vars"                $vars
+) -}}
+{{- $bundle := partial "utilities/bundlev2.html" (dict
+    "page"      page
+    "match"     $source
+    "filename"  (printf "scss/bundle-%d.scss" now.UnixNano)
+    "modules"   $modules
+    "basepath"  "scss"
+    "debugging" site.Params.debugging.showSCSS
+) -}}
 
-{{- if gt ($bundle.Content | len) 0 }}
-    {{- $css := $bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
+{{- if gt ($bundle.bundle.Content | len) 0 }}
+    {{- $css := $bundle.bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
 
     {{ if $core }}
         {{- partial "head/icons.html" (dict "css" $css) -}}
