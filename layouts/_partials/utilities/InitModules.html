@@ -45,14 +45,14 @@
 {{ end }}
 
 {{ $modules := dict 
-    "modules" $modules
-    "critical" $critical
-    "core" $core
-    "optional" $optional
-    "excludeSCSS" $excludeSCSS
+    "modules"         $modules
+    "critical"        $critical
+    "core"            $core
+    "optional"        $optional
+    "excludeSCSS"     $excludeSCSS
     "disableTemplate" $disableTemplate
-    "localize" $localize
-    "categories" $category
+    "localize"        $localize
+    "categories"      $category
 }}
 
 {{- if and .IsPage (not (in $core "bootstrap")) -}}
