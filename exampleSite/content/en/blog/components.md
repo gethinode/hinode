@@ -94,6 +94,22 @@ As an example, the following shortcode displays an interactive map of the city o
 
 ## Mermaid Diagrams
 
+### Shortcode (with controls and frontmatter)
+
+<!-- markdownlint-disable MD003 MD022 -->
+{{< mermaid controls=true >}}
+---
+config:
+  layout: elk.stress
+  look: handDrawn
+  theme: forest
+---
+flowchart TD
+  A --> B
+  A --> C
+{{< /mermaid >}}
+<!-- markdownlint-enable MD003 MD022 -->
+
 ### Flowchart
 
 ```mermaid

@@ -326,6 +326,10 @@ github.com/gethinode/mod-mermaid/v2 v2.0.2 h1:uRHS3RyrMBK/hhDbEX39HnYkypSvSeci0k
 github.com/gethinode/mod-mermaid/v2 v2.0.2/go.mod h1:kp3oUFAjKxuwzFbwxGWPEx5VQOu2ZHzcrwcNhDv08BI=
 github.com/gethinode/mod-mermaid/v2 v2.0.3 h1:vWiAE640GAzkQCj0NFyn1VtnpFwiJ5Bljm2YgoQ3qG4=
 github.com/gethinode/mod-mermaid/v2 v2.0.3/go.mod h1:kp3oUFAjKxuwzFbwxGWPEx5VQOu2ZHzcrwcNhDv08BI=
+github.com/gethinode/mod-mermaid/v3 v3.0.0 h1:pFF2soB3ZQcY4KuMzDprcSv2zdC3yTKywNId4yhcPOA=
+github.com/gethinode/mod-mermaid/v3 v3.0.0/go.mod h1:+8p5KbFjIkB/I77Gpd8LTQgmNrRBfJpmKGnjclzwJFo=
+github.com/gethinode/mod-mermaid/v3 v3.0.1 h1:h4v3QvGpSln9PDbWccSktULq9FbRZ57JN4Lp+gVjvVI=
+github.com/gethinode/mod-mermaid/v3 v3.0.1/go.mod h1:rbI8IKFfKVGqTY/eJnuNJwzB5kSjaEUNX0NRHc4rBfA=
 github.com/gethinode/mod-simple-datatables v1.0.0 h1:Dj4WGw12OkaimwkCpLn5Jhmd49dvNJW9O2P/W9F+HlQ=
 github.com/gethinode/mod-simple-datatables v1.0.0/go.mod h1:K8T7fIdb8pMOB+OSW4A5lz5IW99+HyzcTgx764fvOGw=
 github.com/gethinode/mod-simple-datatables v1.0.2 h1:zhqxHet3iLQWYCBbGROALpOY9zQlptMycFkz1Tto5bA=
@@ -490,6 +494,10 @@ github.com/gethinode/mod-utils/v4 v4.11.0 h1:24RObT99j/jiQnCyHvXahJHIA8e8uQuBb1p
 github.com/gethinode/mod-utils/v4 v4.11.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/gethinode/mod-utils/v4 v4.11.1 h1:12CzZjyLOb/FSXbX8mDAWqs8y4OCXOEavKww7T4V9jU=
 github.com/gethinode/mod-utils/v4 v4.11.1/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/gethinode/mod-utils/v4 v4.12.0 h1:5sSfYIxZCeQbXLoZdS//rl6thwLwtXuvM0ujaWKyPmc=
+github.com/gethinode/mod-utils/v4 v4.12.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/gethinode/mod-utils/v4 v4.13.0 h1:VKAA+wKy4saayXfgJuVBRfhNVWQWmxOjO8LSpQCvLfw=
+github.com/gethinode/mod-utils/v4 v4.13.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3 h1:H/qVR5O4BXjRjD+5PZB+r4ug2BSJ2Of4RtwOntd+OKo=
 github.com/nextapps-de/flexsearch v0.0.0-20230711092928-1243fd883ec3/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/nextapps-de/flexsearch v0.0.0-20240108021025-afd75f742f22 h1:re7L8FxbXQpnX8BgzkdUnDpsUmloGNyLmiy2ZCln8pg=
