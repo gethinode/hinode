@@ -1,4 +1,5 @@
 {{ define "main" -}}
+    {{- $blocks := $.Scratch.Get "blocks" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
     {{- $sidebar := partial "page/sidebar" . -}}
     {{- $toc := partial "page/panel-toc" . -}}
@@ -14,6 +15,8 @@
             </div>
         </div>
     {{ end }}
+
+    {{ $blocks | safeHTML }}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
         <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">

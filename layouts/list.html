@@ -1,5 +1,8 @@
 {{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+    {{- $blocks := $.Scratch.Get "blocks" -}}
+
+    {{ $blocks | safeHTML }}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
         {{ .Render "body" }}
