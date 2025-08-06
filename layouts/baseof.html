@@ -23,8 +23,9 @@
 {{- /* Define main breakpoint */ -}}
 {{- $.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
 
-{{- /* Render blocks and establish overlay mode */ -}}
+{{- /* Prepare content blocks and establish overlay mode */ -}}
 {{ $blocks := partial "utilities/RenderContentBlocks.html" (dict "page" . "blocks" .Params.content_blocks) }}
+{{ $.Scratch.Set "blocks" $blocks }}
 {{ $overlayMode := $.Scratch.Get "overlayMode" }}
 
 {{- /* Define base URL */ -}}
@@ -51,7 +52,6 @@
         -}}
 
         <div id="container" class="main">
-            {{ $blocks }}
             {{ block "main" . }}{{ end -}}
         </div>
 
