@@ -1,0 +1,8 @@
+paths:
+  - 'assets/js'
+paths-ignore:
+  - '**/vendor'
+  - '**/critical/languageSelector.js'
+  - '**/critical/color.js'
+  - '**/navbar.js'
+  - '**/sharing.js'
