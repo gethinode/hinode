@@ -168,7 +168,7 @@
 -}}
 
 {{/* Main code */}}
-{{ if or (ne $args.gutter "0") ($args.wrapper) }}<div class="g-{{ $args.gutter }} {{ $args.wrapper }} h-100">{{ end }}
+{{ if or (gt $args.gutter "0") ($args.wrapper) }}<div class="{{ with $args.gutter }}g-{{ . }}{{ end }} {{ $args.wrapper }}">{{ end }}
 
 {{ $stack := "" }}
 
@@ -301,4 +301,4 @@
     </div>
 {{- end -}}
 
-{{ if or (ne $args.gutter "0") ($args.wrapper) }}</div>{{ end }}
+{{ if or (gt $args.gutter "0") ($args.wrapper) }}</div>{{ end }}
