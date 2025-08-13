@@ -85,7 +85,7 @@
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
     "commitizen": "^4.3.1",
-    "cpy-cli": "^5.0.0",
+    "cpy-cli": "^6.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.33.0",
     "husky": "^9.1.7",
