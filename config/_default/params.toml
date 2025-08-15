@@ -97,6 +97,9 @@
     toc = true
     sidebar = true
     size = "md"
+    startLevel = 2
+    endLevel = 3
+    maxNumHeadings = 9
     [navigation.padding]
         x = 4
         y = 4

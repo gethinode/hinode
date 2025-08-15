@@ -101,6 +101,10 @@
   translation: "See also"
 - id: sectionMenu
   translation: "Select a topic"
+- id: tocShowMore
+  translation: "Show {{ . }} more"
+- id: tocShowLess
+  translation: "Show less"
 
 # Sidebar
 - id: toggleSidebar
