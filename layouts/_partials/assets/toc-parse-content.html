@@ -1,107 +1,88 @@
-{{- /*
-  Copyright 2023 Veriphor, LLC
-  
-  Licensed under the Apache License, Version 2.0 (the "License"); you may not
-  use this file except in compliance with the License. You may obtain a copy of
-  the License at
-  
-  https://www.apache.org/licenses/LICENSE-2.0
-  
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-  License for the specific language governing permissions and limitations under
-  the License.
-  */}}
-  
-  {{- /*
-  Renders a table of contents by parsing rendered content.
-  
-  In site configuration, set the default start level, end level, and the minimum
-  number of headings required to show the table of contents:
-  
-      [params.toc]
-      startLevel = 2      # default is 2
-      endLevel = 3        # default is 3
-      minNumHeadings = 2  # default is 2
-  
-  To display the table of contents on a page:
-  
-      +++
-      title = 'Post 1'
-      toc = true
-      +++
-  
-  To display the table of contents on a page, and override one or more of the
-  default settings:
-  
-      +++
-      title = 'Post 1'
-      [toc]
-      startLevel = 2      # default is 2
-      endLevel = 3        # default is 3
-      minNumHeadings = 2  # default is 2
-      +++
-  
-  Change or localize the title with a "toc_title" key in your i18n file(s).
-  
-  Start with these basic CSS rules to style the table of contents:
-  
-      a.toc-item {
-        display: block;
-      }
-      a.toc-level-1 {
-        margin-left: 0em;
-      }
-      a.toc-level-2 {
-        margin-left: 1em;
-      }
-      a.toc-level-3 {
-        margin-left: 2em;
-      }
-      a.toc-level-4 {
-        margin-left: 3em;
-      }
-      a.toc-level-5 {
-        margin-left: 4em;
-      }
-      a.toc-level-6 {
-        margin-left: 5em;
-      }
-  
-  @context {page} .
-  
-  @returns {template.HTML}
-  
-  @example {{ partial "toc-parse-content.html" . }}
-  */}}
-  
-  {{- /* Get configuration. */}}
-  {{- $startLevel := or (.Site.Params.navigation.startLevel | int) 2 }}
-  {{- $endLevel := or (.Site.Params.navigation.endLevel | int) 3 }}
-  {{- $minNumHeadings := or (.Site.Params.navigation.minNumHeadings | int) 2 }}
-  
-  {{- /* Initialize. */}}
-  {{ $headings := partial "assets/toc-headings.html" . }}
-  
-  {{- /* Render */}}
-  {{- if .Site.Params.navigation.toc }}
-    {{- with $headings }}
-      {{- if ge (len .) $minNumHeadings }}
-        <strong class="d-block h6 my-2 pt-4">{{ T "toc" }}:</strong>
-        <nav class="toc">
-          {{- range . }}
-            {{- $attrs := dict "class" (printf "toc-item toc-level-%d" (add 1 (sub .level $startLevel))) }}
-            {{- with .id }}
-              {{- $attrs = merge $attrs (dict "href" (printf "%s#%s" $.RelPermalink .)) }}
-            {{- end }}
-            <a
-            {{- range $k, $v := $attrs }}
-              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-            {{- end -}}
-            >{{ .text }}</a>
-          {{- end }}
-        </nav>
-      {{- end }}
-    {{- end }}
-  {{- end }}
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ define "_partials/inline/toc-item.html" }}
+    {{ $base := .base }}
+    {{ $startLevel := .startLevel }}
+    {{ $endLevel := .endLevel }}
+    {{ $item := .item }}
+    {{ $maxNumHeadings := .maxNumHeadings }}
+    {{ $result := .result | default slice }}
+
+    {{ if and (ge $item.Level $startLevel) (le $item.Level $endLevel) }}
+        {{- $attrs := dict "class" (printf "toc-item toc-level-%d" (add 1 (sub $item.Level $startLevel))) }}
+        {{- with $item.ID }}
+            {{- $attrs = merge $attrs (dict "href" (printf "%s#%s" $base .)) }}
+        {{- end }}
+
+        {{ $htmlAttr := "" }}
+        {{ range $k, $v := $attrs }}{{ $htmlAttr = printf "%s %s=%q" $htmlAttr $k $v | safeHTMLAttr }}{{ end }}
+        {{ $rendered := printf "<a %s>%s</a>" $htmlAttr $item.Title }}
+        {{ $result = $result | append $rendered }}
+    {{ end }}
+
+    {{ range $item.Headings }}
+        {{ $result = $result | append (partial "inline/toc-item.html" (dict
+            "base"           $base
+            "item"           .
+            "startLevel"     $startLevel
+            "endLevel"       $endLevel
+            "maxNumHeadings" $maxNumHeadings
+        )) }}
+    {{ end }}
+
+    {{ return $result }}
+{{ end }}
+
+{{- /* Get configuration. */}}
+{{- $startLevel := or (.Site.Params.navigation.startLevel | int) 2 }}
+{{- $endLevel := or (.Site.Params.navigation.endLevel | int) 3 }}
+{{- $minNumHeadings := or (.Site.Params.navigation.minNumHeadings | int) 2 }}
+{{- $maxNumHeadings := or (.Site.Params.navigation.maxNumHeadings | int) 9 }}
+
+{{- /* Render */}}
+{{- if and .Site.Params.navigation.toc (ge (len .Fragments.HeadingsMap) $minNumHeadings) }}
+    <strong class="d-block h6 my-2 pt-4">{{ T "toc" }}:</strong>
+    <nav class="toc">
+        {{ $result := slice }}
+        {{ range .Fragments.Headings }}
+            {{ $result = $result | append (partial "inline/toc-item.html" (dict
+                "base"           $.RelPermalink
+                "item"           .
+                "startLevel"     $startLevel
+                "endLevel"       $endLevel
+                "maxNumHeadings" $maxNumHeadings
+            )) }} 
+        {{ end }}
+
+        {{ range $i, $v := $result }}
+            {{ if eq $i $maxNumHeadings }}
+                {{ partial "assets/button.html" (dict
+                    "id"          "btnTOCShowMore"
+                    "collapse-id" "toc-collapse-items"
+                    "link-type"   "link"
+                    "class"       "toc-item"
+                    "title"       (T "tocShowMore" (sub (len $result) $i))
+                    "spacing"     false
+                ) }}
+                <div class="collapse" id="toc-collapse-items">
+                {{ end }}
+            {{ print $v | safeHTML }}
+        {{ end }}
+
+        {{ if gt (len $result) $maxNumHeadings }}
+            &nbsp;
+            {{ partial "assets/button.html" (dict
+                "id"          "btnTOCShowLess"
+                "collapse-id" "toc-collapse-items"
+                "link-type"   "link"
+                "class"       "toc-item"
+                "title"       (T "tocShowLess")
+                "spacing"     false
+            ) }}
+        </div>{{ end }}
+    </nav>
+{{ end }}

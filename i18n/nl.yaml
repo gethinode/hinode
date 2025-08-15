@@ -99,6 +99,10 @@
   translation: "Zie ook"
 - id: sectionMenu
   translation: "Selecteer een onderwerp"
+- id: tocShowMore
+  translation: "Toon {{ . }} meer"
+- id: tocShowLess
+  translation: "Toon minder"
 
 # Sidebar
 - id: toggleSidebar
