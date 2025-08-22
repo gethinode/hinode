@@ -319,3 +319,7 @@
     position: absolute;
     z-index: $zindex-fixed;
 }
+
+.form-control.is-search {
+    border: 1px solid var(--bs-border-color) !important;
+}
