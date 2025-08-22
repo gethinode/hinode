@@ -31,6 +31,7 @@ blueprint:
     media-id:
     autoplay:
     query-args:
+    color:
   cols:
   messages:
     - title:

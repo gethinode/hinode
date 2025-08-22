@@ -111,7 +111,7 @@
     {{ end }}
 
     {{/* Render default timeline */}}
-    <div class="container p-0 d-none d-md-block {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
+    <div class="timeline-container container p-0 d-none d-md-block {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
         {{ $title | safeHTML }}
         {{ range $index, $item := $data }}
             <div class="row timeline timeline-{{ $item.color }} timeline-dot g-0 ">
@@ -137,7 +137,7 @@
     </div>
 
     {{/* Render timeline for smaller devices */}}
-    <div class="container p-0 d-block d-md-none small{{ with $background }} timeline-bg-{{ . }} bg-{{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
+    <div class="timeline-container container p-0 d-block d-md-none small{{ with $background }} timeline-bg-{{ . }} bg-{{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
         {{ range $index, $item := $data }}
             <div class="row timeline-sm timeline-{{ $item.color }} timeline-dot g-0">
                 {{ partial "inline/timeline-icon.html" (dict "icon" $item.icon "direction" "end" "col" 3) }}

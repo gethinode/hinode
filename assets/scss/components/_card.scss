@@ -6,6 +6,9 @@
 }
 
 .card {
+    --bs-card-border-radius: #{$theme-border-radius};
+    --bs-card-inner-border-radius: #{$theme-border-radius};
+    --bs-border-radius: #{$theme-border-radius};
     --bs-card-bg: transparent;
 }
 
@@ -26,6 +29,13 @@
 
 .card-zoom {
     cursor: pointer;
+}
+
+.card-img-top {
+    --bs-border-radius: #{$theme-border-radius};
+
+    border-top-left-radius: var(--bs-border-radius) !important;
+    border-top-right-radius: var(--bs-border-radius) !important;
 }
 
 .card-img-wrap img {

@@ -16,11 +16,11 @@ $font-weight-normal:            300 !default;
 $font-weight-bold:              600 !default;
 $font-weight-bolder:            bolder !default;
 
-$theme-border-radius:           1rem;
-
 strong {
     font-weight:                600 if($enable-important-utilities, !important, null);
 }
+
+$theme-border-radius:           0.375rem;
 
 $navbar-height:                 h.$navbar-height;
 $navbar-offset:                 h.$navbar-offset;

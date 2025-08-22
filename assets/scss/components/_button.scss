@@ -52,3 +52,7 @@ a.btn {
 .btn-xs {
   @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $btn-font-size-xs, $btn-border-radius-xs);
 }
+
+.btn {
+    --bs-border-radius: #{$theme-border-radius};
+}
