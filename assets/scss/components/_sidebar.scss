@@ -11,6 +11,12 @@
 }
 
 .sidebar-item {
+    --bs-border-radius: #{$theme-border-radius};
+    --bs-border-radius-sm: #{$theme-border-radius};
+    --bs-border-radius-lg: #{$theme-border-radius};
+    --bs-border-radius-xl: #{$theme-border-radius};
+    --bs-border-radius-xxl: #{$theme-border-radius};
+
     color: rgba(0, 0, 0, 0.65);
     margin-left: 0 !important;
     display: inline-block;
@@ -28,6 +34,8 @@
 }
 
 .sidebar-item-group {
+    border-radius: #{$theme-border-radius};
+
     &:hover,
     &:focus {
         color: $primary;
