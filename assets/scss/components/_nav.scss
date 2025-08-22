@@ -84,6 +84,14 @@
     border-color: var(--#{$prefix}border-color);
 }
 
+.nav-callout, .pagination {
+    --bs-border-radius: #{$theme-border-radius};
+}
+
+.nav-callout .tab-content {
+    border-radius: #{$theme-border-radius};
+}
+
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .nav-callout, .tab-content {

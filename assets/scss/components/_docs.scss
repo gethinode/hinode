@@ -1,0 +1,22 @@
+.docs-controls .nav-link,
+.file-controls .nav-link {
+    border-top-left-radius: #{$theme-border-radius};
+    border-top-right-radius: #{$theme-border-radius};
+    margin-left: #{$theme-border-radius};
+
+    &:hover,
+    &:focus {
+        border-bottom: 0;
+    }
+}
+
+.docs-panel,
+.file-panel {
+    border: 1px solid var(--#{$prefix}border-color);
+    overflow: hidden;
+}
+
+.docs-panel, .docs-panel .collapse,
+.file-panel, .file-panel .collapse {
+    border-radius: #{$theme-border-radius};
+}

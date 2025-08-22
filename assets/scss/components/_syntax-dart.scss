@@ -16,6 +16,10 @@
     flex: 1;
 }
 
+.codeblock.syntax-highlight, .command.syntax-highlight {
+    border-radius: #{$theme-border-radius};
+}
+
 .syntax-highlight {
     background-color: var(--bs-light) if($enable-important-utilities, !important, null);
     overflow-x: auto;

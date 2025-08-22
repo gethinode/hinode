@@ -28,6 +28,7 @@
 	{{ $queryArgs := .queryArgs }}
 	{{ $border := .border }}
 	{{ $padding := .padding }}
+	{{ $color := .color }}
 
 	{{ if site.Params.env_bookshop_live }}
 		{{/* Define dummy content as we cannot retrieve video data in live mode */}}
@@ -36,7 +37,7 @@
 			"ratio" "21x9"
 			"wrapper" (printf "text-center mb-%d" $padding.y)) -}}
 	{{ else }}
-        <div class="video-container{{ if $border }} video-container-border{{ end}}">
+        <div class="video-container{{ if $border }} video-container-border{{ end}} {{ with $color }}bg-{{ . }}{{ end }}">
 			{{ partial "assets/video.html" (dict
 				"page"       page
 				"provider"   $provider
@@ -117,6 +118,7 @@
 				"query-args" .queryArgs
 				"border"     $.border
 				"padding"    $padding
+				"color"      .color
 			) -}}
 		{{ end }}
 		</div>
@@ -142,6 +144,7 @@
 							"query-args" .queryArgs
 							"border"     $.border
 							"padding"    $padding
+							"color"      .color
 						) -}}
 					{{ end }}
 				</div>
