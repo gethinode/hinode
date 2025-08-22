@@ -14,6 +14,10 @@ a:active {
     text-decoration: none;
 }
 
+div.rounded, img.rounded {
+    --bs-border-radius: #{$theme-border-radius};
+}
+
 //
 // Ensure main page is rendered to full viewport height
 //

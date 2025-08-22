@@ -58,33 +58,35 @@
     {{- $tmp := os.Stat $file -}}
     {{- $content := readFile $file -}}
 
-    <ul class="nav nav-tabs{{ with $args.class }} {{ . }}{{ end }}">
-        <li class="nav-item">
-            <a class="nav-link active font-monospace" 
-                href="#body-{{ $id }}" 
-                aria-current="page" 
-                data-bs-toggle="collapse" 
-                data-bs-target=".multi-{{ $id }}" 
-                aria-expanded="false" 
-                aria-controls="body-{{ $id }} footer-{{ $id }}">
-                <small>{{ if $args.full }}{{ strings.TrimPrefix $basePath $file }}{{ else }}{{ path.Base $file }}{{ end }}</small>
-            </a>
-        </li>
-    </ul>
-    <div class="border-start border-end border-bottom mb-3">
-        <div class="collapse multi-{{ $id }}{{ if $args.show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
-            {{- highlight (trim $content "\r\n") $lang (or $args.highlightOptions $args.options) -}}
-        </div>
-        <div class="collapse multi-{{ $id }}{{ if not $args.show }} show{{ end }} p-3" id="footer-{{ $id }}">
-            <a class="nav-link active" 
-                href="#body-{{ $id }}" 
-                aria-current="page" 
-                data-bs-toggle="collapse" 
-                data-bs-target=".multi-{{ $id }}" 
-                aria-expanded="false" 
-                aria-controls="body-{{ $id }} footer-{{ $id }}">
-                <small><i>{{ T "clickToExpand" }}</i></small>
-            </a>
+    <div class="file">
+        <ul class="file-controls nav nav-tabs{{ with $args.class }} {{ . }}{{ end }}">
+            <li class="nav-item">
+                <a class="nav-link active font-monospace" 
+                    href="#body-{{ $id }}" 
+                    aria-current="page" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target=".multi-{{ $id }}" 
+                    aria-expanded="false" 
+                    aria-controls="body-{{ $id }} footer-{{ $id }}">
+                    <small>{{ if $args.full }}{{ strings.TrimPrefix $basePath $file }}{{ else }}{{ path.Base $file }}{{ end }}</small>
+                </a>
+            </li>
+        </ul>
+        <div class="file-panel mb-3">
+            <div class="collapse multi-{{ $id }}{{ if $args.show }} show{{ end }} syntax-highlight" id="body-{{ $id }}">
+                {{- highlight (trim $content "\r\n") $lang (or $args.highlightOptions $args.options) -}}
+            </div>
+            <div class="collapse multi-{{ $id }}{{ if not $args.show }} show{{ end }} p-3" id="footer-{{ $id }}">
+                <a class="nav-link active" 
+                    href="#body-{{ $id }}" 
+                    aria-current="page" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target=".multi-{{ $id }}" 
+                    aria-expanded="false" 
+                    aria-controls="body-{{ $id }} footer-{{ $id }}">
+                    <small><i>{{ T "clickToExpand" }}</i></small>
+                </a>
+            </div>
         </div>
     </div>
 {{- end -}}

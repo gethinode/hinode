@@ -29,6 +29,7 @@ The `video` content block renders a horizontal line to separate sections. The se
     provider: vimeo
     media-id: "55073825"
     autoplay: true
+    color: black
   messages:
     - title: First Message
       icon: fas 1
