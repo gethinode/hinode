@@ -72,7 +72,7 @@
         {{- $output = (replace $output "<span class=\"c\">#" "<span class=\"c\">" | safeHTML) -}}
     {{- end -}}
 
-    <div class="mb-3 syntax-highlight{{ with $args.class }} {{ . }}{{ end }}">
+    <div class="command syntax-highlight mb-3{{ with $args.class }} {{ . }}{{ end }}">
         {{- $output -}}
     </div>
 {{ end }}

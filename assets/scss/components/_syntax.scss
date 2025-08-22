@@ -16,7 +16,7 @@
     flex: 1;
 }
 
-.codeblock.syntax-highlight {
+.codeblock.syntax-highlight, .command.syntax-highlight {
     border-radius: #{$theme-border-radius};
 }
 

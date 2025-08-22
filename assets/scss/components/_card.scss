@@ -34,7 +34,8 @@
 .card-img-top {
     --bs-border-radius: #{$theme-border-radius};
 
-    border-radius: var(--bs-border-radius) !important;
+    border-top-left-radius: var(--bs-border-radius) !important;
+    border-top-right-radius: var(--bs-border-radius) !important;
 }
 
 .card-img-wrap img {

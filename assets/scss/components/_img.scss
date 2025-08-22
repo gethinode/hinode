@@ -27,3 +27,7 @@
     width: 100vw;
     object-fit: cover;
 }
+
+.figure-caption {
+    margin-left: #{$theme-border-radius};
+}

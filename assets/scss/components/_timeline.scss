@@ -26,6 +26,10 @@ $semi-circle-border: 0.2rem;
 
 // scss-docs-end timeline
 
+.timeline-container {
+    border-radius: #{$theme-border-radius}; 
+}
+
 .timeline, .timeline-sm {
     position: relative;
 }
