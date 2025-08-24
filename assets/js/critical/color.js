@@ -43,15 +43,19 @@
       document.documentElement.setAttribute('data-bs-theme', theme)
     }
 
-    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
-      chk.checked = (document.documentElement.getAttribute('data-bs-theme') === 'light')
-    })
+    updateSelectors()
   }
 
   // alternates the currently active theme
   function toggleTheme() {
     const target = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
     setTheme(target)
+  }
+
+  function updateSelectors() {
+    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
+      chk.checked = (document.documentElement.getAttribute('data-bs-theme') === 'light')
+    })
   }
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -69,7 +73,12 @@
     })
   })
 
-  // initialize theme directly when script is invoked
+  window.addEventListener('load', () => {
+    // update the selectors when all elements are ready
+    updateSelectors()
+  })
+
+  // initialize theme as soon as possible to reduce screen flickering
   setTheme(getTheme())
 })()
 
