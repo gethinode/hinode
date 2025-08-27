@@ -1,4 +1,4 @@
-{{- if site.Params.main.enableDarkMode -}}
+{{- if (or site.Params.main.enableDarkMode site.Params.main.colorMode.enabled) -}}
 
 /*!
  * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)

@@ -1,0 +1,38 @@
+{{- $page := .page -}}
+{{- $baseURL := .baseURL -}}
+{{- $breakpoint := .breakpoint -}}
+{{- $pretty := .pretty -}}
+{{- $icon := .icon | default "fas globe" -}}
+{{- $fs := .fs | default 6 -}}
+
+{{- $lang := $page.Language.Lang -}}
+<li class="nav-item dropdown me-auto">
+    <a class="nav-link dropdown-toggle d-{{ $breakpoint }}-none" role="button" data-bs-toggle="dropdown" 
+        aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
+        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $icon) "spacing" true) }}{{ T "languageSwitcherLabel" }}
+    </a>
+    <a class="nav-link dropdown-toggle d-none d-{{ $breakpoint }}-block" role="button" data-bs-toggle="dropdown" 
+        aria-label="{{ T "languageSwitcherLabel" }}" aria-expanded="false">
+        {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $icon) "spacing" false) }}
+    </a>
+    <ul id="language-selector" class="dropdown-menu dropdown-menu-end navbar-fs-{{ $fs }} navbar-{{ $breakpoint }}-fs" data-translated="{{ $page.IsTranslated }}">
+        {{- if $page.IsTranslated -}}
+            {{- range $page.AllTranslations -}}
+                <li>
+                    {{- $state := cond (eq .Language.Lang $lang) "active" "" }}
+                    <a class="dropdown-item {{ $state }}" hreflang="{{ .Language.Lang }}" href="{{ .RelPermalink }}">
+                        {{- .Language.LanguageName -}}
+                    </a>
+                </li>
+            {{- end -}}
+        {{- else -}}
+            {{- range site.Languages -}}
+                {{ $dest := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" .Lang) }}
+                {{ if and $pretty (not (hasSuffix $dest "/")) }}
+                    {{ $dest = printf "%s/" $dest }}
+                {{ end }}
+                <li><a class="dropdown-item" href="{{ $dest }}" hreflang="{{ .Lang }}">{{ default .Lang .LanguageName }}</a></li>
+            {{- end -}}
+        {{- end -}}
+    </ul>
+</li>
