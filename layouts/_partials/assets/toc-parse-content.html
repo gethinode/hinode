@@ -24,14 +24,16 @@
         {{ $result = $result | append $rendered }}
     {{ end }}
 
-    {{ range $item.Headings }}
-        {{ $result = $result | append (partial "inline/toc-item.html" (dict
-            "base"           $base
-            "item"           .
-            "startLevel"     $startLevel
-            "endLevel"       $endLevel
-            "maxNumHeadings" $maxNumHeadings
-        )) }}
+    {{ if lt $item.Level $endLevel }}
+        {{ range $item.Headings }}
+            {{ $result = $result | append (partial "inline/toc-item.html" (dict
+                "base"           $base
+                "item"           .
+                "startLevel"     $startLevel
+                "endLevel"       $endLevel
+                "maxNumHeadings" $maxNumHeadings
+            )) }}
+        {{ end }}
     {{ end }}
 
     {{ return $result }}
