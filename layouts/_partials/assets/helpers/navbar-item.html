@@ -63,6 +63,9 @@
 {{- $childNav := "" -}}
 
 {{- $button := "" -}}
+{{- if $args.modal -}}
+    {{- $button = printf " role=%q data-bs-toggle=%q data-bs-target=%q" "button" "modal" $args.modal -}}
+{{- end -}}
 {{- if $args.parent -}}
     {{- $mainNav = urlize (lower $args.parent.Name) -}}
     {{- $childNav = urlize (lower $menu.Name) -}}
@@ -92,21 +95,32 @@
             "button-size" "sm"
         )}}
     {{ else }}
-        {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $args.class }} {{ . }}{{ end }}" 
+        {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} 
+            class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $args.class }} {{ . }}{{ end }}" 
             {{ if $isIcon }}aria-label="{{ $title }}"{{ end }}
             data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
-            {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTML }}"{{ with $externalHref }} {{ . | safeHTML }}{{ end }}{{ end }} {{ $button | safeHTML }}>
+            {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTML }}"{{ with $externalHref }} {{ . | safeHTML }}{{ end }}{{ end }}
+            {{ $button | safeHTML }}
+            {{ with $args.id }}id="{{ . }}"{{ end }}
+            >
             
             {{- with $menu.Pre }}
                 {{ if hasPrefix . "<i" }}
                     {{ . | safeHTML }}
                 {{ else }}
-                    {{ partial "assets/icon.html" (dict "icon" (string .) )}}
+                    {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" .) "spacing" false )}}
                 {{ end }}
             {{ end -}}
-            <span {{ if $isActive }} class="active"{{ end }}>{{ if or (not $isIcon) $args.plain }}{{ $title }}{{ end }}</span>
+            <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-{{ . }}-none {{ end }}">
+                {{ $title }}
+            </span>
+            {{ if not $isIcon }}
+            <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-none d-{{ . }}-block{{ end }}">
+                {{ $title }}
+            </span>
+            {{ end }}
             {{- with $menu.Post }}{{ . }}{{ end -}}
-            {{- if not $isIcon }}&nbsp;{{ $suffix }}{{ end -}}
+            {{- with $suffix }}&nbsp;{{ . }}{{ end -}}
         {{ cond (ne $menuURL "") "</a>" "</div>" | safeHTML }}
     {{ end }}
 {{ end }}

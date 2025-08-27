@@ -1,0 +1,43 @@
+{{- $breakpoint := .breakpoint -}}
+{{- $collapsed := .collapsed -}}
+{{- $page := .page -}}
+{{- $baseURL := .baseURL -}}
+{{- $list := site.Params.docs.releases -}}
+{{- $id := .id -}}
+{{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
+
+<li class="nav-item dropdown {{ if $collapsed }}d-{{ $breakpoint }}-none{{ else }}d-none d-{{ $breakpoint }}-block{{ end }}">
+    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
+        {{ if $collapsed }}{{ site.Title }} {{ end }}{{ $version }}
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-version-switch">
+        {{- range $index, $item := $list -}}
+            {{- $active := eq $item.label $version -}}
+            {{- $disabled := false -}}
+            {{- if hugo.IsServer }}
+                {{- $disabled = and $item.redirect (gt (len $item.redirect) 0) -}}
+            {{- end -}}
+            {{ if $item.url }}
+                <li>
+                    {{- $url := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $item.url) | relLangURL -}}
+                    <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
+                        {{ if $item.latest }}&nbsp;({{ T "latest" }}){{ end }}
+                        {{ if $active }}
+                            <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check fa-fw") }}</span>
+                        {{ end }}
+                    </a>
+                </li>
+            {{ else }}
+                {{ if gt $index 0}}<li><hr class="dropdown-divider"></li>{{ end }}
+                <li><span class="dropdown-header fs-6">{{ $item.label }}</span></li>
+            {{ end }}
+        {{- end -}}
+        {{- if site.Params.docs.overview -}}
+            {{ if gt (len $list) 0 }}<li><hr class="dropdown-divider"></li>{{ end }}
+            <li>
+                {{- $url := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" site.Params.docs.overview) | relLangURL -}}
+                <a class="dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}" href="{{ $url }}">{{ T "allVersions" }}</a>
+            </li>
+        {{- end -}}
+    </ul>
+</li>

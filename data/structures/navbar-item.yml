@@ -9,7 +9,9 @@ arguments:
     comment: Context of the current page.
     group: partial
   menu:
-    type: '*navigation.MenuEntry'
+    type:
+      - '*navigation.MenuEntry'
+      - 'map[string]interface {}'
     optional: false
     comment: Menu data to use for the navbar item.
   parent:
@@ -37,3 +39,24 @@ arguments:
     optional: true
     comment: >-
       Renders the navigation item as plain item, ignoring any children.
+  breakpoint:
+    release: v1.2.0
+  modal:
+    type: string
+    optional: true
+    release: v1.2.0
+    comment: >-
+      If set, toggles a modal control for the provided target.
+  id:
+    type: string
+    optional: true
+    release: v1.2.0
+    comment: >-
+      If set, adds an id attribute to the menu item.
+  fs:
+    type: int
+    optional: true
+    default: 6
+    release: v1.2.0
+    comment: >-
+      Sets the font size of the navigation items when the navbar is collapsed.

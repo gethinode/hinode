@@ -5,6 +5,7 @@ slug: elements-bootstrap
 date: 2023-08-12
 description: Utilisez des shortcodes pour ajouter facilement des éléments Bootstrap courants.
 tags: ["bootstrap", "shortcode"]
+keywords: featured
 thumbnail:
   url: img/boots.jpg
   author: Nathan Dumlao

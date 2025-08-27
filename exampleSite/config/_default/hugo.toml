@@ -115,7 +115,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.imports]]
     path = "github.com/gethinode/mod-csp"
   [[module.imports]]
-    path = "github.com/gethinode/mod-flexsearch/v2"
+    path = "github.com/gethinode/mod-flexsearch/v3"
   [[module.imports]]
     path = "github.com/gethinode/mod-fontawesome/v2"
   [[module.imports]]

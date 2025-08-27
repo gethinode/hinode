@@ -7,7 +7,7 @@ require (
 	github.com/cloudcannon/bookshop/hugo/v3 v3.16.4 // indirect
 	github.com/gethinode/mod-bootstrap v1.3.4 // indirect
 	github.com/gethinode/mod-csp v1.0.8 // indirect
-	github.com/gethinode/mod-flexsearch/v2 v2.1.3 // indirect
+	github.com/gethinode/mod-flexsearch/v3 v3.0.0 // indirect
 	github.com/gethinode/mod-fontawesome/v2 v2.1.2 // indirect
 	github.com/gethinode/mod-google-analytics v1.3.3 // indirect
 	github.com/gethinode/mod-katex v1.1.4 // indirect

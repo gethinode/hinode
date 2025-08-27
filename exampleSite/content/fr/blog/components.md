@@ -5,6 +5,7 @@ slug: composents
 date: 2023-07-21
 description: Utilisez des shortcodes pour ajouter des composants prédéfinis alimentés par des bibliothèques externes.
 tags: ["bootstrap", "shortcode"]
+keywords: featured
 thumbnail:
   url: img/puzzle.jpg
   author: Ryoji Iwata
