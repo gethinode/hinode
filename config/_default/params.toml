@@ -2,9 +2,7 @@
 [main]
     separator = "-"
     description = "Hinode is a clean documentation and blog theme for your Hugo site based on Bootstrap 5."
-    enableDarkMode = true
     enableLanguageSelectionStorage = false
-    modes = ["light", "dark"]
     canonifyAssetsURLs = false
     endorse = true
     footerBelowFold = false
@@ -22,6 +20,12 @@
         tab = false
     [main.build]
         transpiler = "libsass"
+    [main.colorMode]
+        enabled = true
+        modes = ["light", "dark"]
+        toggle = false
+        iconLight = "fas sun"
+        iconDark = "fas moon"
 # toml-docs-end main
 
 # toml-docs-start images
@@ -91,8 +95,6 @@
     overlayMode = "dark"
     horizontal = false
     offset = "5.5rem"
-    search = true
-    searchModal = false
     breadcrumb = true
     toc = true
     sidebar = true
@@ -103,6 +105,12 @@
     [navigation.padding]
         x = 4
         y = 4
+    [navigation.language]
+        icon = "fas globe"
+    [navigation.search]
+        enabled = true
+        modal = true
+        icon = "fas magnifying-glass"
 # toml-docs-end navigation
 
 # toml-docs-start messages
