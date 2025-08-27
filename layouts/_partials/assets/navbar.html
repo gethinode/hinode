@@ -53,7 +53,6 @@
 {{- $overlayMode := $args.overlayMode | default "dark" -}}
 {{- if eq $overlayMode "none" }}{{ $overlayMode = "" }}{{ end }}
 {{- $color := $args.color | default "" -}}
-{{- $profileModal := true -}}
 {{- $enableDarkMode := .mode | default (or site.Params.main.enableDarkMode site.Params.main.colorMode.enabled) -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 {{ if isset site.Params.main "enabledarkmode" }}
@@ -199,7 +198,8 @@
                     {{- end -}}
 
                     {{/* Insert divider if applicable */}}
-                    {{ if and (or $menus $enableLanguage $enableVersions) (or $enableDarkMode $search.modal $profileModal) }}
+                    {{ $hasControls := gt (len (where $menus "Params.control" true)) 0 }}
+                    {{ if and (or $menus $enableLanguage $enableVersions) (or $enableDarkMode $search.modal $hasControls) }}
                         {{ partial "inline/divider.html" (dict "breakpoint" $args.breakpoint) }}
                     {{ end }}
                                     
