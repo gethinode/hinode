@@ -7,7 +7,7 @@
 }
 
 .mode-switch {
-    --#{$prefix}mode-switch-width: 50px;
+    --#{$prefix}mode-switch-width: 3em;
 }
 
 .mode-switch .label {
@@ -62,6 +62,18 @@
 .mode-switch .fa-sun {
 	color: var(--#{$prefix}bs-body-color);
     transform: scale(0.8);
+}
+
+.mode-toggle > input {
+	z-index: 1;
+	cursor: pointer;
+    height: 25px;
+    width: 25px;
+}
+
+.mode-toggle > label {
+	z-index: 0;
+	cursor: pointer;
 }
 
 // Source: https://jsfiddle.net/njhgr40m/
@@ -126,6 +138,36 @@
 
 .navbar-expanded {
     box-shadow: $box-shadow-sm;
+    min-height: 100vh;
+    align-items: start;
+}
+
+.navbar-expanded .navbar-collapse {
+    margin-top: 2rem;
+}
+
+@each $h, $size in $font-sizes {
+    .navbar-fs-#{$h} {
+        font-size: #{$size};
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    @if $infix != '' {
+        @include media-breakpoint-up($next) {
+            .navbar#{$infix}-fs { 
+                font-size: inherit;
+            } 
+        }
+    }
+}
+
+.navbar-icon {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
 }
 
 .nav-item .vr {

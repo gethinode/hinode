@@ -1,0 +1,26 @@
+{{- $id := .id | default "navbar-mode" -}}
+{{- $toggle := .toggle | default false -}}
+{{- $breakpoint := .breakpoint -}}
+{{- $iconLight := site.Params.main.colorMode.iconLight | default "fas sun" -}}
+{{- $iconDark := site.Params.main.colorMode.iconDark | default "fas moon" -}}
+{{- $fs := .fs | default 6 -}}
+
+<li class="nav-link navbar-fs-{{ $fs }} navbar-{{ $breakpoint }}-fs d-flex mode-{{ cond $toggle "toggle" "switch" }} align-items-center" id="{{ $id }}">
+    <input type="checkbox" class="checkbox navbar-mode-selector" id="{{ $id }}-checkbox" aria-label="{{ T "colorMode" }}" />
+    <label class="label" for="{{ $id }}-checkbox">
+        {{ if $toggle }}
+            <div class="mode-item d-none-dark">
+                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconLight) "spacing" false) }}
+                <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
+            </div>
+            <div class="mode-item d-none-light">
+                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconDark) "spacing" false) }}
+                <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
+            </div>
+        {{ else }}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconLight) "spacing" false) }}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconDark) "spacing" false) }}
+            <div class="ball"></div>
+        {{ end }}
+    </label>
+</li>

@@ -60,7 +60,7 @@
     "navbar-offset-xs"        $navbarOffsetXS
     "navbar-size"             (site.Params.navigation.size | default "md")
     "overlay-offset"          $overlayOffset
-    "enable-dark-mode"        (printf "%t" ((default true site.Params.main.enableDarkMode)))
+    "enable-dark-mode"        (printf "%t" ((default true (or site.Params.main.enableDarkMode site.Params.main.colorMode.enabled))))
     "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))
     "dark-mode-shade"         (default "0%" site.Params.style.darkModeShade)
     "dark-mode-tint"          (default "0%" site.Params.style.darkModeTint)
