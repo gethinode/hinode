@@ -3,11 +3,11 @@
 //
 // scss-docs-start toc
 .toc-sidebar {
-    grid-area: toc;
     right: 0;
     z-index: 2;
     overflow-y: auto;
     top: 5rem;
+    max-height: calc(100vh - var(--navbar-offset));
 }
 
 // scss-docs-end toc
