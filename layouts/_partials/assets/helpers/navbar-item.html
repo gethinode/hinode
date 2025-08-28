@@ -35,7 +35,7 @@
 {{- $isActive := or (and (eq $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
 {{ if not $menu.PageRef }}{{ $isActive = false }}{{ end }}
 {{- $isAlias := $menu.Params.alias -}}
-{{- $isIcon := $menu.Params.icon -}}
+{{- $isIcon := or $menu.Params.icon $menu.Pre -}}
 
 {{- $url := urls.Parse $menuURL -}}
 {{- $baseURL := urls.Parse $.Site.Params.Baseurl -}}
@@ -112,13 +112,13 @@
                 {{ end }}
             {{ end -}}
             <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-{{ . }}-none {{ end }}">
-                {{ $title }}
+                {{- if $isIcon }}&nbsp;{{ end }}{{ $title }}
                 {{- with $menu.Post }}{{ . }}{{ end -}}
                 {{- with $suffix }}&nbsp;{{ . }}{{ end -}}
             </span>
             {{ if not $isIcon }}
             <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-none d-{{ . }}-block{{ end }}">
-                {{ $title }}
+                {{- if $isIcon }}&nbsp;{{ end }}{{ $title }}
                 {{- with $menu.Post }}{{ . }}{{ end -}}
                 {{- with $suffix }}&nbsp;{{ . }}{{ end -}}
             </span>
