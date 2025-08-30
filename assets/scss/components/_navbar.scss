@@ -174,10 +174,18 @@
     color: var(--bs-navbar-color);
 }
 
-.nav-item > div, .nav-item > a {
+.navbar .nav-item {
     display: flex;
     align-items: center;
-    height: 100%;
+}
+
+.navbar-collapse .dropdown {
+    display: inline;
+    align-items: normal;
+}
+
+.navbar-expanded .search-input {
+    margin-bottom: 1rem;
 }
 
 /* Remove border from toggler */
