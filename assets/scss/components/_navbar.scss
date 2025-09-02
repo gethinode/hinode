@@ -188,6 +188,10 @@
     font-size: 1em;
 }
 
+.navbar .btn {
+    border-radius: #{$theme-border-radius};    
+}
+
 .navbar-expanded .search-input {
     margin-bottom: 1rem;
 }
