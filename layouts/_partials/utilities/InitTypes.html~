@@ -1,0 +1,144 @@
+<!-- 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+-->
+
+{{/* Inline partial to retrieve the type definition of the provided key (without recursion) */}}
+{{ define "_partials/inline/type-definition.html" }}
+    {{ $key := .key }}
+    {{ $val := .val }}
+    {{ $arguments := .arguments }}
+    {{ $types := .types }}
+    
+    {{ $def := index $arguments $key }}
+    {{ $udt := "" }}
+    {{ $reflect := "" }}
+    {{ $reserved := slice "bool" "int" "int64" "float" "float64" "string" "dict" "slice" }}
+    {{ $errorMsg := slice }}
+
+    {{ if and $def $def.type }}
+        {{ $aliases := slice | append $def.type }}
+        {{ range $alias := $aliases }}
+            {{ with index $types $alias }}
+                <!-- Reduce child elements to slice of argument names -->
+                {{ $args := slice }}
+                {{ $reflect = printf "%T" . }}
+                {{ if reflect.IsMap . }}
+                    {{ range $k, $_ := . }}
+                        {{ $args = $args | append $k }}
+                    {{ end }}
+                {{ else if reflect.IsSlice . }}
+                    {{ with index . 0 }}
+                        {{ range $k, $_ := . }}
+                            {{ $args = $args | append $k }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                
+                <!-- Retrieve type definition for each argument -->
+                {{ $definitions := dict }}
+                {{ $definitions := merge $definitions (dict "_reflect" $reflect) }}
+                {{ range $args }}
+                    {{ $type := partial "inline/type-definition.html" (dict "key" . "arguments" $arguments "types" $types) }}
+                    {{ if and $type $type.definition }}
+                        {{ $definitions = merge $definitions (dict . $type.definition) }}
+                    {{ else }}
+                        {{- $errorMsg = $errorMsg | append (printf "partial [utilities/InitTypes.html] - Missing type for '%s.%s'" $key . ) -}}
+                    {{ end }}
+                {{ end }}
+
+                {{ $udt = dict $alias $definitions }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{ $merged := or $def dict }}
+    {{ if reflect.IsMap $val }}{{ $merged = merge $merged $val }}{{ end }}
+    {{ if not $merged.type }}
+        {{- $errorMsg = $errorMsg | append (printf "partial [utilities/InitTypes.html] - Missing type for '%s'" $key  ) -}}
+    {{ end }}
+
+    {{ return (dict "definition" $merged "udt" $udt "errmsg" $errorMsg) }}
+{{ end }}
+
+{{/* Initalize arguments and local variables */}}
+{{ $error := false }}
+{{ $errmsg := slice }}
+{{ $warnmsg := slice }}
+{{ $params := dict }}
+{{ $definitions := dict }}
+{{ $udt := dict }}
+
+{{ $structure := .structure }}
+{{ $bookshop := .bookshop }}
+{{ $group := .group }}
+{{ $child := .child }}
+
+{{ $level := .level | default 0 }}
+
+{{ if gt $level 5 }}
+    {{ errorf "recursion detected: %s / %s" $structure $bookshop }}
+    {{ return }}
+{{ end }}
+
+{{ if and (not $structure) (not $bookshop) }}
+    {{- $errmsg = $errmsg | append (printf "partial [utilities/InitTypes.html] - Missing value for param 'structure' or 'bookshop'") -}}
+    {{ $error = true }}
+{{ end }}
+
+{{/* Initalize the type structure */}}
+{{ if not $error }}
+    {{ $args := dict }}
+    {{ $arguments := index (index site.Data.structures "_arguments") "arguments" }}
+    {{ $types := index (index site.Data.structures "_types") "types" }}
+
+    {{/* Initalize the regular or bookshop argument structure */}}
+    {{ if $structure }}
+        {{ if index site.Data.structures $structure}}
+            {{ $args = (index site.Data.structures $structure).arguments | default dict }}
+        {{ else }}
+            {{ $args = (index $types $structure) | default dict }}
+        {{ end }}
+    {{ else }}
+        {{ $args = index (index (index site.Data.structures.components $bookshop) (printf "%s.bookshop" $bookshop)) "blueprint" | default dict }}
+        {{ $args = merge $args (dict "_bookshop_name" nil "_ordinal" nil "id" nil) }}
+    {{ end }}
+
+    {{/* Merge any child arguments */}}
+    {{ if $child }}
+        {{ $extra_def := (index site.Data.structures $child).arguments }}
+        {{ if not $extra_def }}
+            {{- $errmsg = $errmsg | append (printf "partial [utilities/InitTypes.html] - Missing definitions: %s" $child) -}}
+            {{ $error =  true }}
+        {{ else }}
+            {{ range $key, $val := $extra_def }}
+                {{ if and $val $val.parent }}
+                    {{ $newval := dict }}
+                    {{ range $k, $v := $val }}
+                        {{ if ne $k "default" }}{{ $newval = merge $newval (dict $k $v) }}{{ end }}
+                    {{ end}}
+                    {{ $args = merge $args (dict $key $newval) }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{/* Initialize the arguments and their type definitions recursively */}}
+    {{ range $key, $v := $args }}
+        {{ $type := partial "inline/type-definition.html" (dict "key" $key "val" $v "args" $args "arguments" $arguments "types" $types "structure" $structure) }}
+        {{ $errmsg = $errmsg | append $type.errmsg }}
+        {{ if and $type $type.definition $type.definition.type }}
+            {{ $definitions = merge $definitions (dict $key $type.definition) }}
+            {{ with $type.udt }}
+                {{ $udt = merge $udt . }}
+            {{ end }}
+        {{ else }}
+            {{- $errmsg = $errmsg | append (printf "partial [utilities/InitTypes.html] - Missing type for '%s' in '%s'" $key (or $structure $bookshop) ) -}}
+            {{ $error =  true }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $params = merge $params (dict "types" $definitions "udt" $udt "err" $error "errmsg" $errmsg "warnmsg" $warnmsg) }}
+{{ return $params }}
