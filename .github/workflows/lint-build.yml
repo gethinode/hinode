@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v5
 
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: lts/*
         cache: 'npm'
@@ -56,12 +56,12 @@ jobs:
       uses: actions/checkout@v5
 
     - name: Install Go
-      uses: actions/setup-go@v5
+      uses: actions/setup-go@v6
       with:
         go-version: ">1.0.0"
       
     - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
