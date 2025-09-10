@@ -27,20 +27,35 @@
     {{- $resolved_component = $flat_component_path -}}
 {{- end -}}
 
+<!-- TODO: use initialized component args instead of component_props -->
+{{ $error := false }}
+{{ $args := dict }}
 {{- if $resolved_component -}}
+    {{ $args = partial "utilities/InitArgs.html" (dict "bookshop" $component_name "args" $component_props) }}
+    {{ if or $args.err $args.warnmsg }}
+        {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+            "partial" $resolved_component
+            "warnid"  "warn-invalid-arguments"
+            "msg"     "Invalid arguments"
+            "details" ($args.errmsg | append $args.warnmsg)
+            "file"    page.File
+        )}}
+    {{ end }}
+{{ end }}
+
+{{ if and $resolved_component (not $args.err) }}
     {{- $id := index $component_props "id" -}}
     {{- $cover := index $component_props "cover" -}}
     {{- $background := index $component_props "background" -}}
     {{- $backdrop := "" -}}
     {{- $fluid := index $component_props "fluid" | default true -}}
-    {{- $style := index $component_props "wrapper" -}}
+    {{- $wrapper := index $component_props "wrapper" -}}
     {{- $width := index $component_props "width" -}}
     {{- $justify := index $component_props "justify" | default "start" -}}
     {{- $paddingOuter := cond (ne $component_name "separator") (printf "px-xxl-0 px-%d py-0" $padding.x) "" -}}
     {{- $padding := cond (ne $component_name "separator") (printf "px-%d %spy-%d" $padding.x (cond $fluid "px-xxl-0 " "") $padding.y) "" -}}
-    {{- $wrapper := $style }}
     {{ with $background }}
-        {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $style) }}
+        {{ $wrapper = partial "utilities/GetBackgroundStyle.html" (dict "background" . "class" $wrapper) }}
         {{ if reflect.IsMap $background }}
             {{ with $background.backdrop }}{{ $wrapper = "" }}{{ $backdrop = . }}{{ end }}
         {{ end }}
@@ -73,18 +88,21 @@
         {{- end -}}
 
         {{ $col := cond (and $width (lt $width 12)) (printf "col-12 col-md-%d" $width) "" }}
-
-        <div class="container-{{ cond $fluid "xxl" "fluid" }} {{ $padding }} d-flex flex-column align-items-{{ $justify }}">
-            {{ with $col }}
-                <div class="{{ . }}">{{ partial $resolved_component $component_props }}</div>
-            {{ else }}
-                {{ partial $resolved_component $component_props }}
-            {{ end}}
-        </div>
+        {{ if $args.passthrough }}
+            {{ partial $resolved_component $component_props }}
+        {{ else }}
+            <div class="container-{{ cond $fluid "xxl" "fluid" }} {{ $padding }} d-flex flex-column align-items-{{ $justify }}">
+                {{ with $col }}
+                    <div class="{{ . }}">{{ partial $resolved_component $component_props }}</div>
+                {{ else }}
+                    {{ partial $resolved_component $component_props }}
+                {{ end}}
+            </div>
+        {{ end }}
     </section>
     {{ if not $fluid }}</div>{{ end }}
     {{ "<!--bookshop-live end-->" | safeHTML }}
-{{- else -}}
+{{- else if (not $args.err) -}}
     {{- $file_loc := slicestr $component_path 9 -}}
     {{- $flat_file_loc := slicestr $flat_component_path 9 -}}
     {{- partial "_bookshop/errors/err" (printf "Component \"%s\" does not exist.\n     Create this component by placing a file in your bookshop at %s or %s" $component_name $file_loc $flat_file_loc) -}}
