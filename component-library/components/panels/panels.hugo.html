@@ -33,16 +33,17 @@
 	{{ $toc = $toc | append (dict "href" "panel-0-1" "level" 2 "title" $element.title) }}
 
     {{ $hero := partial "assets/hero.html"  (dict 
-        "page"         page
-        "heading"      (dict "title" $element.title "content" $element.content "width" 8 "size" 6)
-        "background"   $args.background
-        "illustration" (dict "ratio" $args.ratio "icon" $element.icon "image" $element.image "mode" $element.mode)
-		"order"        $args.order
-        "link-type"    $args.linkType
-        "links"        $args.links
-        "orientation"  "horizontal"
-		"align"        "start"
-		"width"        12
+        "page"          page
+        "heading"       (dict "content" $element.content "width" 8)
+        "background"    $args.background
+        "illustration"  (dict "ratio" $args.ratio "icon" $element.icon "image" $element.image "mode" $element.mode)
+		"order"         $args.order
+        "link-type"     $args.linkType
+        "links"         $args.links
+        "orientation"   "horizontal"
+		"align"         "start"
+		"width"         12
+        "content-style" "fs-6"
         )
     }}
 
