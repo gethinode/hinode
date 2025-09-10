@@ -26,3 +26,5 @@ blueprint:
   items:
     - title:
       description:
+  theme:
+  cover:
