@@ -32,6 +32,8 @@ blueprint:
   width:
   justify:
   link-type:
+  theme:
+  cover:
   links:
     -
       title:

@@ -28,3 +28,5 @@ arguments:
   theme:
   hook:
     default: assets/hero-image.html
+  heading-style:
+  content-style:

@@ -47,3 +47,5 @@ blueprint:
   class:
   width:
   justify:
+  theme:
+  cover:

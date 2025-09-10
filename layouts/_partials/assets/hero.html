@@ -112,13 +112,16 @@
     {{ end }}
 
     {{ $title := partial "assets/section-title.html" (dict
-        "heading"     $heading
-        "use-title"   $args.useTitle
-        "links"       $args.links
-        "link-type"   (or $args.linkType $args.type)
-        "class"       "hero-title"
-        "arrangement" $arrangement
-        "justify"     $args.justify
+        "heading"       $heading
+        "use-title"     $args.useTitle
+        "links"         $args.links
+        "link-type"     (or $args.linkType $args.type)
+        "class"         "hero-title"
+        "arrangement"   $arrangement
+        "justify"       $args.justify
+        "heading-style" $args.headingStyle
+        "content-style" $args.contentStyle
+
     ) }}
 
     {{ if eq $args.orientation "stacked" }}

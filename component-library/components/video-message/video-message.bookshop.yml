@@ -42,6 +42,8 @@ blueprint:
   border:
   width:
   justify:
+  theme:
+  cover:
 
 _structures:
   messages:
