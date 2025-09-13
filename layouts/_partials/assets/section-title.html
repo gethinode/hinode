@@ -19,10 +19,10 @@
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local arguments */}}
-{{- $size := (or $args.heading.size site.Params.modules.bookshop.title.size) | default 4 -}}
-{{- $arrangement := (or $args.arrangement site.Params.modules.bookshop.title.arrangement) | default "above" -}}
-{{- $headingStyle := (or $args.headingStyle site.Params.modules.bookshop.title.headingStyle) | default "display" -}}
-{{- $contentStyle := (or $args.contentStyle site.Params.modules.bookshop.title.contentStyle) | default "lead text-muted" -}}
+{{- $size := (or $args.heading.size site.Params.style.title.size) | default 4 -}}
+{{- $arrangement := (or $args.arrangement site.Params.style.title.arrangement) | default "above" -}}
+{{- $headingStyle := (or $args.headingStyle site.Params.style.title.headingStyle) | default "display" -}}
+{{- $contentStyle := (or $args.contentStyle site.Params.style.title.contentStyle) | default "lead text-muted" -}}
 {{- $preheading := $args.heading.preheading }}
 {{- $title := $args.heading.title }}
 {{- $width := $args.heading.width | default 12 -}}
