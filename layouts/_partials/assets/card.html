@@ -6,17 +6,38 @@
 
 {{ $error := false }}
 
+{{- define "_partials/inline/card-icons.html" -}}
+    {{ $links := .links }}
+    
+    <span class="text-body-secondary">
+        {{- range $index, $item := $links -}}
+            {{ partial "assets/button.html" (dict 
+                "href"      $item.url
+                "icon"      (printf "%s fa-fw" $item.icon)
+                "class"     "btn-social p-0"
+                "label"     $item.title
+                "spacing"   false
+            ) }}
+        {{- end -}}
+    </span>
+{{- end -}}
+
 {{/* Inline partial to render the card's body */}}
 {{- define "_partials/inline/card-body.html" -}}
     {{- $title := .title -}}
     {{- $href := .href -}}
     {{- $color := .color -}}
     {{- $description := .description -}}
-    {{- $button := .button -}}
+    {{- $links := .links -}}
     
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
-                <p class="card-title fs-lg-5 fs-6">{{ $title }}</p>
+            {{ if or $title $links }}
+                <p class="card-title fs-lg-5 fs-6">
+                    {{- with $title }}{{ . }}{{ end }}
+                    {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
+                </p>
+            {{ end -}}
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -25,7 +46,12 @@
         </a>
     {{- else -}}
         <div>
-            {{ with $title }}<p class="card-title fs-lg-5 fs-6">{{ . }}</p>{{ end -}}
+            {{ if or $title $links }}
+                <p class="card-title fs-lg-5 fs-6">
+                    {{- with $title }}{{ . }}{{ end }}
+                    {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
+                </p>
+            {{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
@@ -228,7 +254,7 @@
                             "href"        $href
                             "color"       $args.color
                             "description" $description
-                            "button"      $args.button
+                            "links"       $args.links
                         ) -}}
                         {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}</div>{{ end }}
                         {{ if and $href $args.button }}
@@ -275,7 +301,13 @@
         <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }}card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
             {{ if $args.overlay }}<div class="flex-grow-1"></div>{{ end }}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
-            {{- partial "inline/card-body.html" (dict "title" $title "href" $href "color" $args.color "description" $description) -}}
+            {{- partial "inline/card-body.html" (dict
+                "title"       $title
+                "href"        $href
+                "color"       $args.color
+                "description" $description
+                "links"       $args.links
+            ) -}}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
         {{ if $args.button }}

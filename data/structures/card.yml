@@ -73,6 +73,8 @@ arguments:
     group: partial
   anchor:
     release: v0.24.23
+  links:
+    release: v1.14.0
   # deprecated arguments
   header:
     type: select
