@@ -50,17 +50,18 @@
     {{ end }}
 
     {{ partial "assets/hero.html"  (dict
-        "page"         $args.page
-        "heading"      (merge $heading (dict "size" 6))
-        "background"   $args.background
-        "illustration" $illustration 
-        "order"        $args.order
-        "link-type"    $args.linkType
-        "links"        $args.links
-        "orientation"  $args.orientation
-        "width"        (or $args.width 12)
-        "use-title"    true
-        "size"         6
+        "page"          $args.page
+        "heading"       (merge $heading (dict "size" 6))
+        "background"    $args.background
+        "illustration"  $illustration 
+        "order"         $args.order
+        "link-type"     $args.linkType
+        "links"         $args.links
+        "orientation"   $args.orientation
+        "width"         (or $args.width 12)
+        "use-title"     true
+        "size"          6
+        "content-style" "text-muted fs-5"
         )
     }}
 {{ end }}
