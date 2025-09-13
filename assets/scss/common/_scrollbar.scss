@@ -21,6 +21,7 @@
 
 	// Standard version (Firefox, only appears on scroll)
 	@supports (-moz-appearance:none) {
+		/* stylelint-disable-next-line no-invalid-position-declaration */
 		scrollbar-color: $foreground-color $background-color;
 	}
 }
