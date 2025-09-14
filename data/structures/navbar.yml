@@ -79,6 +79,25 @@ arguments:
     comment: >-
       Address of the logo image, defaults to the parameter `logo` set in the
       `main` section of the site's parameter configuration.
+  logo-align:
+    type: select
+    optional: true
+    default: center
+    comment: Alignment of the logo when the navbar is in collapsed mode.
+    options:
+      values:
+        - start
+        - center
+    release: v1.15.0
+  logo-mode:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Flag indicating if the logo should support color modes. If set, the
+      navbar searches for images having a matching color-mode suffix
+      such as `-light` or `-dark`.
+    release: v1.15.0
   # deprecated arguments
   size:
     type: select
