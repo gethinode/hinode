@@ -33,8 +33,9 @@
 {{ if not $error -}}
     {{ partial "assets/toast.html" (dict
         "id" $id
-        "title" (or $args.title $args.header)
-        "message" $message
-        "class" $args.class
+        "title"    (or $args.title $args.header)
+        "message"  $message
+        "class"    $args.class
+        "_default" $args.default
     ) }}
 {{ end -}}
