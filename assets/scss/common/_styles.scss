@@ -151,3 +151,17 @@ $utilities: map-merge(
         )
     )
 );
+
+.width-100 {
+    width: 100%;
+}
+
+$utilities: (
+  "width": (
+    property: width,
+    responsive: true,
+    values: (
+      auto: auto
+    )
+  )
+);

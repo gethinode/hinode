@@ -78,9 +78,29 @@
 {{- end -}}
 
 {{ $logo := "" }}
-{{ with $args.logo | default site.Params.navigation.logo }}
-    {{ $height := index site.Params.navigation "logo-height" | default 30 }}
-    {{ $logo = partial "assets/image.html" (dict "src" . "loading" "eager" "title" $title "image-height" $height) }}
+{{ $mode := index site.Params.navigation "logo-mode" | default false }}
+{{ if (not (in $args.default "logo-mode")) }}
+    {{ $mode = $args.logoMode }}
+{{ end }}
+
+{{ $align := index site.Params.navigation "logo-align" | default "center" }}
+{{ if (not (in $args.default "logo-align")) }}
+    {{ $align = $args.logoAlign }}
+{{ end }}
+
+{{ if not $args.title }}
+    {{ with $args.logo | default site.Params.navigation.logo }}
+        {{ $height := index site.Params.navigation "logo-height" | default 30 }}
+        {{ $class := cond (eq $align "start") "my-auto" "m-auto" }}
+        {{ $logo = partial "assets/image.html" (dict 
+            "src"          .
+            "loading"      "eager"
+            "title"        $title
+            "image-height" $height
+            "mode"         $mode
+            "class"        (printf "h-100 %s" $class)
+        ) }}
+    {{ end }}
 {{ end }}
 
 {{- $class := $args.class -}}
@@ -107,26 +127,29 @@
         {{ end }}        
         >
         <div class="container-xxl p-0">
-            <div class="d-flex navbar-container justify-content-center">
-                {{/* Insert sidebar toggler when applicable */}}
-                <div class="d-flex align-items-center">
-                    {{- if $page.Scratch.Get "sidebar" -}}
-                        <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                            {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
-                        </button>
-                    {{- else -}}
-                        {{/* Insert invisible sidebar toggler to center logo correctly on smaller screens */}}
-                        <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
-                            {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
-                        </button>
-                    {{- end -}}
-                </div>
+            <div class="d-flex navbar-container">
+                {{/* Insert sidebar toggler or placeholder when applicable */}}
+                {{ $sidebar := $page.Scratch.Get "sidebar" }}
+                {{- if or $sidebar (eq $align "center") -}}
+                    <div class="d-flex align-items-center">
+                        {{- if $sidebar -}}
+                            <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvass-sidebar" aria-controls="offcanvass-sidebar" aria-label="{{ T "toggleSidebar" }}">
+                                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+                            </button>
+                        {{- else if eq $align "center" -}}
+                            {{/* Insert invisible sidebar toggler to center logo correctly on smaller screens */}}
+                            <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
+                                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+                            </button>
+                        {{- end -}}
+                    </div>
+                {{ end }}
         
                 {{/* Insert the brand logo or name */}}
-                <div class="{{ if $logo }}mx-auto{{ else }}flex-grow-1 flex-{{ $args.breakpoint }}-grow-0{{ end }}">
+                <div class="width-100 width-{{ $args.breakpoint }}-auto my-auto {{ if eq $align "center" }}text-center{{ end }}">
                     <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
-                        {{- with $logo -}}{{ . }}{{- else -}}<div class="navbar-title fw-bold h-100">{{ $title }}</div>{{- end -}}
+                        {{- with $logo -}}{{ . }}{{- else -}}<div class="p-0 navbar-title-{{ $align }} fw-bold h-100">{{ $title }}</div>{{- end -}}
                     </a>
                 </div>
         

@@ -88,6 +88,8 @@
 [navigation]
     anchor = true
     logo = "/img/logo_icon.svg"
+    logo-mode = false
+    logo-align = "center"
     logo-height = 30
     color = "body"
     fixed = true
