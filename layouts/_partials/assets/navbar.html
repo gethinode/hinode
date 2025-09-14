@@ -147,7 +147,7 @@
                 {{ end }}
         
                 {{/* Insert the brand logo or name */}}
-                <div class="width-100 width-{{ $args.breakpoint }}-auto my-auto {{ if eq $align "center" }}text-center{{ end }}">
+                <div class="width-100 width-{{ $args.breakpoint }}-auto {{ if not $logo }}my-auto {{ end  }} {{ if eq $align "center" }}text-center{{ end }}">
                     <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
                         {{- with $logo -}}{{ . }}{{- else -}}<div class="p-0 navbar-title-{{ $align }} fw-bold h-100">{{ $title }}</div>{{- end -}}
                     </a>
