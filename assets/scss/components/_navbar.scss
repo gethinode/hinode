@@ -177,6 +177,7 @@
 .navbar .nav-item {
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 .navbar-collapse .dropdown {
