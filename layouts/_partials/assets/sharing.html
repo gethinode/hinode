@@ -71,9 +71,10 @@
             {{- end -}}
             {{ if $page.Site.Params.sharing.webshare }}
                 {{ $attr := dict "data-sharing-title" $page.Title "data-sharing-description" $page.Description "data-sharing-url" $page.Permalink }}
+                {{ $icon := index $page.Site.Params.sharing "webshare-icon" | default "fas share-nodes"}}
                 {{ partial "assets/button.html" (dict
                     "href"       ""
-                    "icon"       "fas share-nodes fa-fw"
+                    "icon"       (printf "%s fa-fw" $icon)
                     "class"      "btn-social p-0"
                     "attributes" $attr
                     "label"      (T "shareLink" (T "shareSystem"))
