@@ -7,3 +7,9 @@ arguments:
     optional: false
     comment: Context of the current page.
     group: partial
+  show-label:
+    type: bool
+    optional: true
+    default: true
+    comment: Indicates if the element should include a label.
+    release: v1.15.3

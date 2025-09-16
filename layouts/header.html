@@ -1,3 +1,9 @@
+{{/* Initialize global variables */}}
+{{- $size := site.Params.style.title.size | default 4 -}}
+{{- $headingStyle := site.Params.style.title.headingStyle | default "display" -}}
+{{- $contentStyle := site.Params.style.title.contentStyle | default "lead text-muted" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
 {{/* Initialize local variables */}}
 {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
 {{- $metadata := "full" -}}
@@ -21,7 +27,8 @@
 {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
                
 {{/* Display title and metadata */}}
-{{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+{{ with $title }}<h1 id="{{ anchorize . }}" class="{{ $headingStyle }}-{{ $size }} pt-1">{{ . }}</h1>{{ end }}
+
 {{ if ne $metadata "none" }}
     <small class="text-body-secondary text-uppercase">
         {{ if .Date }}
@@ -64,7 +71,9 @@
 {{ partial "assets/sharing.html" (dict "page" .) }}
 
 {{/* Display description */}}
-<p class="lead mb-5 mt-3">{{ .Description }}</p>
+{{ with .Description }}
+    <div class="{{ $contentStyle }} py-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>
+{{ end }}
 
 {{/* Display TOC dropdown on smaller screens */}}
 {{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
