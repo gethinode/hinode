@@ -171,7 +171,7 @@
                     {{- $cardWrapper = printf "card-block card-block-%d" (int $size) -}}
                 {{- end -}}
 
-                {{/*add col-$width */}}
+                {{/* add col-$width */}}
                 <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}">
                     {{- if $args.spacer -}}<div class="spacer"></div>{{ end -}}
                     {{- partial $args.hook $params -}}
@@ -197,9 +197,14 @@
                 {{- $href = printf "%s/" $href -}}
             {{- end -}}
             <div class="mt-{{ $padding.y }} w-100">
-                <a class="btn btn-outline-primary" href="{{ $href | safeURL }}" role="button">
-                    {{ $args.hrefTitle }}
-                </a>
+                {{ partial "assets/button.html" (dict 
+                    "href"      $href
+                    "title"     $args.hrefTitle
+                    "color"     "primary"
+                    "outline"   true
+                    "link-type" $args.moreLinkType
+                    "icon"      $args.moreLinkIcon
+                ) }}
             </div>
         {{- end -}}
     {{- end -}}

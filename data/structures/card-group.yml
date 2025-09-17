@@ -69,6 +69,24 @@ arguments:
     release: v0.27.0
   button-label:
     release: v1.0.0
+  more-link-type:
+    type: select
+    optional: true
+    default: button
+    comment: Style of the more button or link.
+    options:
+      values:
+        - button
+        - link
+    release: v1.16.0
+  more-link-icon:
+    type: string
+    optional: true
+    comment: >-
+      Icon to include. You can use shorthand notation such as `fas sort` to
+      include a Font Awesome icon. The argument also supports files with an
+      `.svg` or `.json` extension.
+    release: v1.16.0
 
   # deprecated arguments
   header:
