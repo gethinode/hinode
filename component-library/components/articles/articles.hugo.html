@@ -49,9 +49,13 @@
 {{ $moreButton := site.Params.modules.bookshop.articles.moreButton | default false }}
 {{ $moreTitle := T "more" (pluralize $args.input.section) }}
 {{ $moreLink := $args.input.section }}
+{{ $moreType := "button" }}
+{{ $moreIcon := "" }}
 {{ with $args.more }}
 	{{ if .title }}{{ $moreTitle = .title }}{{ end }}
 	{{ if .link }}{{ $moreLink = .link }}{{ end }}
+	{{ if index . "link-type" }}{{ $moreType = index . "link-type" }}{{ end }}
+	{{ if .icon }}{{ $moreIcon = .icon }}{{ end }}
 {{ end }}
 
 {{ $paginate := $args.paginate }}
@@ -76,15 +80,17 @@
 		{{ $partial := "assets/card-group.html" }}
 		{{ $params := dict }}
 		{{- $params = merge $params (dict
-			"page"         page
-			"list"         $pages
-			"limit"        $args.limit
-			"cols"         $args.cols
-			"icon-rounded" $args.iconRounded
-			"icon-style"   $args.iconStyle
-			"href"         (cond $moreButton $moreLink "")
-			"href-title"   (cond $moreButton $moreTitle "")
-			"href-force"   (gt $result.total (len $result.pages))
+			"page"           page
+			"list"           $pages
+			"limit"          $args.limit
+			"cols"           $args.cols
+			"icon-rounded"   $args.iconRounded
+			"icon-style"     $args.iconStyle
+			"href"           (cond $moreButton $moreLink "")
+			"href-title"     (cond $moreButton $moreTitle "")
+			"href-force"     (gt $result.total (len $result.pages))
+			"more-link-type" $moreType
+			"more-link-icon" $moreIcon
 		)}}
 
 		{{ if $args.scroll }}
