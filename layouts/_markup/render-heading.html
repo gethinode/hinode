@@ -1,13 +1,14 @@
+{{ $class := .Attributes.class }}
 {{ $text := chomp .Text }}
 {{ if site.Params.main.titleCase }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
 
 {{ if and site.Params.navigation.anchor $text }}
-<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading">
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading {{ with $class }}{{.}}{{end}}">
     {{- $text | safeHTML -}}
     <a href="#{{ .Anchor | safeURL }}" aria-labelledby="{{ .Anchor | safeURL }}">
         {{- partial "assets/icon.html" (dict "icon" "fas link anchor") }}
     </a>
 </h{{ .Level }}>
 {{ else }}
-<h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ $text | safeHTML }}</h{{ .Level }}>
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" {{ with $class }} class="{{.}}"{{end }}>{{ $text | safeHTML }}</h{{ .Level }}>
 {{ end }}
