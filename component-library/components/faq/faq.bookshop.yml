@@ -26,5 +26,6 @@ blueprint:
   items:
     - title:
       description:
+  fluid:
   theme:
   cover:

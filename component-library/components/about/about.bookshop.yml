@@ -32,6 +32,7 @@ blueprint:
   width:
   justify:
   link-type:
+  fluid:
   theme:
   cover:
   links:

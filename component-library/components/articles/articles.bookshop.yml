@@ -49,5 +49,6 @@ blueprint:
   class:
   width:
   justify:
+  fluid:
   theme:
   cover:

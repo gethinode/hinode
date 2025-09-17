@@ -34,5 +34,6 @@ blueprint:
   width:
   justify:
   align:
+  fluid:
   theme:
   cover:

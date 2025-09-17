@@ -24,5 +24,6 @@ blueprint:
   width:
   justify:
   data:
+  fluid:
   theme:
   cover:
