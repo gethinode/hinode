@@ -37,9 +37,9 @@ blueprint:
       icon:
       force:
   align:
-  fluid:
   padding:
   order:
   width:
+  fluid:
   theme:
   cover:

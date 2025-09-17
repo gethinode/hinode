@@ -25,6 +25,7 @@ arguments:
     default: px-4 px-xxl-0 py-4
   width:
     default: 8
+  fluid:
   theme:
   hook:
     default: assets/hero-image.html
