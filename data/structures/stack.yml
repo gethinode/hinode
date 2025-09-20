@@ -57,6 +57,9 @@ arguments:
       Address for the button or hyperlink. If set, a button is added if the
       list exceeds the maximum number of cards to display.
     group: partial
+  href-force:
+    release: v1.16.2
+    group: partial
   hrefTitle:
     type: string
     optional: true
