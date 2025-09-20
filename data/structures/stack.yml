@@ -29,13 +29,16 @@ arguments:
     optional: true
     comment: Array of pages or structured content to be rendered as cards.
     group: partial
+  limit:
   max:
     type: int
     optional: true
-    comment: Maximum number of cards to display.
+    comment: Maximum number of elements to display.
     group: partial
     options:
       min: 1
+    deprecated: v1.16.2
+    alternative: limit
   cols:
     type: select
     optional: true
@@ -90,4 +93,5 @@ arguments:
     comment: >-
       Styles to apply to the individual cards. Supported elements are `ratio`,
       `orientation`, `portrait`, and `width`.
-
+  padding:
+    release: v1.16.2

@@ -24,26 +24,27 @@
 		{{ $params := dict
 			"page"         $args.page
 			"list"         $args.list
-			"max"          $args.max
+			"limit"        (or $args.limit $args.max)
 			"class"        "border-0 card-zoom"
 			"header-style" "none"
 			"body-style"   "title"
 			"footer-style" "none"
-			"href" $args.href
-			"href-title" $args.hrefTitle
-			"link-type" (or $args.linkType $args.buttonType)
+			"href"         $args.href
+			"href-force"   $args.hrefForce
+			"href-title"   $args.hrefTitle
+			"link-type"    (or $args.linkType $args.buttonType)
 		}}
 
 		{{- partial "assets/card-group.html" (merge $params
 			(dict 
 			"cols"        $args.cols
 			"gutter"      $args.gutter
-			"padding"     3
+			"padding"     $args.padding
 			"orientation" "stacked"
 			"scroll"      true
 			"bento"       true
 			"spacer"      $args.animated
-			"portrait"    true
+			"portrait"    false
 			"valign"      (cond $args.animated "" "end")
 			"styles"      $args.styles
 			"wrapper"     "card-stack p-0 my-3 d-none d-md-block"
