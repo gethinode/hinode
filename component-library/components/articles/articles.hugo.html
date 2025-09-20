@@ -82,15 +82,11 @@
 		{{- $params = merge $params (dict
 			"page"           page
 			"list"           $pages
-			"limit"          $args.limit
 			"cols"           $args.cols
-			"icon-rounded"   $args.iconRounded
-			"icon-style"     $args.iconStyle
+			"limit"          $args.limit
+			"padding"        $args.padding
 			"href"           (cond $moreButton $moreLink "")
-			"href-title"     (cond $moreButton $moreTitle "")
 			"href-force"     (gt $result.total (len $result.pages))
-			"more-link-type" $moreType
-			"more-link-icon" $moreIcon
 		)}}
 
 		{{ if $args.scroll }}
@@ -100,22 +96,26 @@
 				"body-style"   "title"
 				"footer-style" "none"
 				"gutter"       1
-				"padding"      3
 				"ratio"        "1x1"
 				"orientation"  "horizontal-sm"
 				"styles"       (cond $args.bento $styles "")
 			) -}}
 		{{ else }}
 			{{ $params = merge $params (dict 
-				"header-style" $args.headerStyle
-				"footer-style" $args.footerStyle
-				"padding"      $args.padding
-				"class"        (or $args.class "border-0")
-				"align"        "start"
-				"orientation"  $args.orientation
-				"hook"         "assets/live-card.html"
-				"pagination"   $args.pagination
-				"paginate"     $paginate
+				"header-style"   $args.headerStyle
+				"body-style"     $args.bodyStyle
+				"footer-style"   $args.footerStyle
+				"class"          (or $args.class "border-0")
+				"align"          "start"
+				"orientation"    $args.orientation
+				"href-title"     (cond $moreButton $moreTitle "")
+				"icon-rounded"   $args.iconRounded
+				"icon-style"     $args.iconStyle
+				"hook"           "assets/live-card.html"
+				"more-link-type" $moreType
+				"more-link-icon" $moreIcon
+				"pagination"     $args.pagination
+				"paginate"       $paginate
 			) -}}
 		{{ end }}
 		{{ if gt (len $pages) 0 }}

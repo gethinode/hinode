@@ -4,5 +4,6 @@ paths-ignore:
   - '**/vendor'
   - '**/critical/languageSelector.js'
   - '**/critical/color.js'
+  - '**/clipboard.js'
   - '**/navbar.js'
   - '**/sharing.js'
