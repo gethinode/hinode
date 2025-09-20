@@ -180,8 +180,8 @@
 {{ end }}
 
 {{- if eq $args.orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
-{{- if eq $args.body "title" }}{{ $description = "" }}{{ end -}}
-{{- if eq $args.body "none" }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
+{{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
+{{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
 
 {{- $thumbnailArgs := dict
