@@ -44,6 +44,7 @@ blueprint:
   bento:
   cover:
   header-style:
+  body-style:
   footer-style:
   orientation:
   class:
