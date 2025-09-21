@@ -75,6 +75,7 @@
     {{ else }}
         {{ $imageJustify = $align }}
     {{ end }}
+    {{ with $args.illustration.justify }}{{ $imageJustify = . }}{{ end }}
 
     {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
 
