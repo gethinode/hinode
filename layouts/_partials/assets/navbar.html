@@ -98,7 +98,7 @@
             "title"        $title
             "image-height" $height
             "mode"         $mode
-            "class"        (printf "h-100 %s" $class)
+            "class"        $class
         ) }}
     {{ end }}
 {{ end }}
@@ -147,8 +147,8 @@
                 {{ end }}
         
                 {{/* Insert the brand logo or name */}}
-                <div class="width-100 width-{{ $args.breakpoint }}-auto {{ if not $logo }}my-auto {{ end  }} {{ if eq $align "center" }}text-center{{ end }}">
-                    <a class="navbar-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
+                <div class="width-100 d-flex align-items-center width-{{ $args.breakpoint }}-auto">
+                    <a class="navbar-brand{{ if eq $align "center" }} mx-auto{{ end }}" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
                         {{- with $logo -}}{{ . }}{{- else -}}<div class="p-0 navbar-title-{{ $align }} fw-bold h-100">{{ $title }}</div>{{- end -}}
                     </a>
                 </div>
