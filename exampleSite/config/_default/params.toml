@@ -33,7 +33,7 @@
     includeSVGOrigin = true
 
 [docs]
-    basePath = "/" # TODO: replace
+    basePath = "/"
     github = "https://github.com/gethinode/hinode"
     release = "https://github.com/gethinode/hinode/releases/tag/"
     checkVersion = false
