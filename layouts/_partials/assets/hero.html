@@ -28,9 +28,10 @@
 {{ $align := $args.align }}
 {{ $class := $args.class | default "" }}
 {{ $scale := $args.illustration.width }}
+{{ $justify := $args.illustration.justify }}
 
-{{ if $scale }}
-    {{ $class = trim (printf "%s col-%d text-center text-md-%s" $class $scale $align) " " }}
+{{ if and $args.illustration.image $scale }}
+    {{ $class = trim (printf "%s col-%d text-center text-md-%s" $class $scale $justify) " " }}
 {{ else }}
     {{ $scale = 12 }}
 {{ end }}
@@ -67,13 +68,13 @@
         </div>
     {{ end }}
 
-    {{ $imageWrapper := printf "mx-md-0 text-%s %s" $align $class }}
+    {{ $imageWrapper := printf "mx-md-0 text-center text-md-%s %s" $justify $class }}
     {{ $imageJustify := "" }}
     {{ if eq $args.orientation "stacked" }}
         {{ $imageWrapper = printf "pt-%d text-center %s" $padding.y $class }}
         {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
     {{ else }}
-        {{ $imageJustify = $align }}
+        {{ $imageJustify = $justify }}
     {{ end }}
     {{ with $args.illustration.justify }}{{ $imageJustify = . }}{{ end }}
 

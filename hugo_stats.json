@@ -195,10 +195,10 @@
       "text-body",
       "text-center",
       "text-decoration-none",
+      "text-md-%!s(<nil>)",
       "text-muted",
       "text-secondary",
       "text-sm-start",
-      "text-start",
       "toast",
       "toast-body",
       "toast-container",
@@ -206,7 +206,9 @@
       "toggler-icon",
       "top-bar",
       "vr",
-      "w-100"
+      "w-100",
+      "width-100",
+      "width-md-auto"
     ],
     "ids": [
       "container",
