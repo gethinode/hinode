@@ -44,7 +44,7 @@
         {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $wrapper) -}}
     {{- end -}}
 {{- else if $image -}}
-    {{- if not (hasSuffix $image "svg") }}{{ $class = printf "%s rounded" $class }}{{ end -}}
+    {{- if not (hasSuffix $image "svg") }}{{ $class = strings.TrimSpace (printf "%s rounded" (or $class "")) }}{{ end -}}
     {{- partial "assets/live-image.html" (dict
         "src"      $image
         "anchor"   $args.anchor

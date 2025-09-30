@@ -17,7 +17,7 @@
 {{ end }}
 
 {{ if and (not $args.err) (or $args.image $args.icon) }}
-    <div class="hero-image-container {{ if $args.image }}{{ with $args.justify }}d-flex justify-content-center justify-content-md-{{ . }}{{ end }}{{ end }}">
+    <div class="hero-image-container {{ if $args.image }}d-flex justify-content-center {{ with $args.justify }} justify-content-md-{{ . }}{{ end }}{{ end }}">
         {{ partial "assets/featured-illustration.html" (dict 
             "page"    $args.page
             "icon"    $args.icon
