@@ -34,7 +34,7 @@
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
             {{ if or $title $links }}
                 <p class="card-title fs-lg-5 fs-6">
-                    {{- with $title }}{{ . }}{{ end }}
+                    {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
             {{ end -}}
@@ -48,7 +48,7 @@
         <div>
             {{ if or $title $links }}
                 <p class="card-title fs-lg-5 fs-6">
-                    {{- with $title }}{{ . }}{{ end }}
+                    {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
             {{ end -}}
