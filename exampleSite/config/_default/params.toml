@@ -61,6 +61,7 @@
     maxNumHeadings = 9
     [navigation.language]
         icon = "fas globe"
+        inline = false
     [navigation.padding]
         x = 4
         y = 4
