@@ -75,7 +75,7 @@
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
     "cssnano-preset-advanced": "^7.0.9",
-    "hugo-bin": "0.147.1",
+    "hugo-bin": "0.148.0",
     "purgecss-whitelister": "^2.4.0"
   },
   "devDependencies": {
@@ -98,7 +98,7 @@
     "rimraf": "^6.0.1",
     "semantic-release": "^24.2.9",
     "shx": "^0.4.0",
-    "stylelint": "^16.24.0",
+    "stylelint": "^16.25.0",
     "stylelint-config-standard-scss": "^16.0.0"
   },
   "optionalDependencies": {
