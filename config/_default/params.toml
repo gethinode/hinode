@@ -96,7 +96,7 @@
     overlay = false
     overlayMode = "dark"
     horizontal = false
-    offset = "5.5rem"
+    offset = "5.7rem"
     breadcrumb = true
     toc = true
     sidebar = true

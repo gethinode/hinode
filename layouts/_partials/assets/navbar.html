@@ -124,7 +124,8 @@
         data-bs-theme="{{ $overlayMode }}"
         {{ if $args.fixed }}data-bs-overlay="{{ $overlayMode }}"{{ end }}
         {{ if $color }}data-navbar-color="{{ $color }}"{{ end }}
-        {{ end }}        
+        {{ end }}
+        {{ with $args.transparent }}data-transparent="{{ . }}"{{ end }}
         >
         <div class="container-xxl p-0">
             <div class="d-flex navbar-container">

@@ -23,7 +23,6 @@ arguments:
     comment: Name of the menu configuration.
   breakpoint:
     release: v1.0.0
-
   style:
     type: select
     optional: true
@@ -98,6 +97,17 @@ arguments:
       navbar searches for images having a matching color-mode suffix
       such as `-light` or `-dark`.
     release: v1.15.0
+  transparent:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Flag indicating the navbar should be transparent. When set, the navbar
+      uses the current section's background color and applies a semi-
+      transparent blur filter. The site's body color is used as fallback. If
+      set, the color mode of the current section is used too. When no mode is
+      set, the navbar applies a mode with the best contrast.
+    release: v1.19.0
   # deprecated arguments
   size:
     type: select

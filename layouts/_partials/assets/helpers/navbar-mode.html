@@ -9,11 +9,11 @@
     <input type="checkbox" class="checkbox navbar-mode-selector" id="{{ $id }}-checkbox" aria-label="{{ T "colorMode" }}" />
     <label class="label" for="{{ $id }}-checkbox">
         {{ if $toggle }}
-            <div class="mode-item d-none-dark">
+            <div class="mode-item d-none-main-dark">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconLight) "spacing" false) }}
                 <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
             </div>
-            <div class="mode-item d-none-light">
+            <div class="mode-item d-none-main-light">
                 {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconDark) "spacing" false) }}
                 <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
             </div>

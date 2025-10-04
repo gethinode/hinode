@@ -46,14 +46,15 @@
             "fixed"       site.Params.navigation.fixed
             "overlay"     site.Params.navigation.overlay
             "overlayMode" site.Params.navigation.overlayMode
+            "transparent" site.Params.navigation.transparent
             "color"       site.Params.navigation.color
             "style"       (default "light" site.Params.navigation.style)
             "breakpoint"  (default "md" site.Params.navigation.size))
         -}}
 
-        <div id="container" class="main">
+        <main id="container" class="main">
             {{ block "main" . }}{{ end -}}
-        </div>
+        </main>
 
         {{- partial "footer/social.html" . -}}
         {{- partial "footer/footer.html" . -}}
