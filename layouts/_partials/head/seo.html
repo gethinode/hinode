@@ -58,7 +58,7 @@
     {{ if .IsHome -}}
         <title>{{ .Site.Title }} {{ if .Site.Params.head.tagline }} {{ .Site.Params.main.separator }} {{ .Site.Params.head.tagline }}{{ end }}</title>
     {{ else -}}
-        <title>{{ .Site.Title }} {{ .Site.Params.main.separator }} {{ .Title }}</title>
+        <title>{{ .Title }} {{ .Site.Params.main.separator }} {{ .Site.Title }} </title>
     {{ end -}}
 
     <meta name="description" content="{{ $.Scratch.Get "description" }}">
