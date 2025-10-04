@@ -38,10 +38,11 @@
     setLocalStorage('theme', theme, 'functional')
 
     if (theme === 'auto') {
-      document.documentElement.setAttribute('data-bs-theme', (getPreferredTheme()))
-    } else {
-      document.documentElement.setAttribute('data-bs-theme', theme)
+      theme = getPreferredTheme()
     }
+    document.documentElement.setAttribute('data-bs-theme', theme)
+    // store main theme separately, to avoid the navbar mode icon uses a local variable
+    document.documentElement.setAttribute('data-bs-main-theme', theme)
 
     updateSelectors()
   }
