@@ -4,6 +4,8 @@ const togglers = document.querySelectorAll('.main-nav-toggler')
 const modeSelectors = document.querySelectorAll('.switch-mode-collapsed')
 const colorsBG = ['body', 'secondary', 'tertiary']
 
+let scrollPosition = 0
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -174,6 +176,20 @@ if (navbar !== null && togglers !== null) {
   document.addEventListener('DOMContentLoaded', () => { fixed && updateNavbar() })
   document.addEventListener('resize', () => fixed && updateNavbar())
   document.addEventListener('scroll', () => fixed && updateNavbar())
+
+  // hook up collapse events
+  document.querySelectorAll('.navbar-collapse').forEach((collapse) => {
+    collapse.addEventListener('show.bs.collapse', function () {
+      scrollPosition = window.pageYOffset
+      document.body.style.top = `-${scrollPosition}px`
+      document.body.classList.add('navbar-open')
+    })
+    collapse.addEventListener('hide.bs.collapse', function () {
+      document.body.classList.remove('navbar-open')
+      document.body.style.top = ''
+      window.scrollTo({ top: scrollPosition, behavior: 'instant' })
+    })
+  })
 
   // observe state changes to the site's color mode
   const html = document.querySelector('html')
