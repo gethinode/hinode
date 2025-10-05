@@ -56,8 +56,8 @@
 {{- if reflect.IsSlice $args.navTitles }}{{ $titles = $titles | append $args.navTitles }}{{ end -}}
 
 {{/* Main code */}}
-<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
-    {{ if $args.vertical }}<div class="d-flex align-items-start">{{ end }}
+<div class="col col-12 col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
+    {{ if $args.vertical }}<div class="d-{{ if $args.responsive }}{{ $breakpoint.current }}{{ end }}-flex align-items-start">{{ end }}
     {{ if $args.responsive }}
         {{ partial "inline/nav-dropdown.html" (dict
             "id"     $id
@@ -100,7 +100,7 @@
         {{ end -}}
     </ul>
     </div>
-    <div class="tab-content {{ if in (slice "tabs" "callout") $type }}border p-3 bg-body {{ else if $args.vertical }}ms-3{{ else }}mt-3{{ end }}">
+    <div class="tab-content {{ if in (slice "tabs" "callout") $type }}border p-3 bg-body {{ else if $args.vertical }}ms-{{ $breakpoint.current }}-3{{ else }}mt-3{{ end }}">
         {{- $args.navItems | safeHTML -}}
     </div>
     {{- if $args.vertical }}</div>{{ end -}}
