@@ -435,3 +435,9 @@
 ul.inline-menu {
   padding: 0;
 }
+
+body.navbar-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
