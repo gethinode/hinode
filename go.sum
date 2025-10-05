@@ -8,6 +8,8 @@ github.com/gethinode/mod-csp v1.0.8 h1:36bWS7oW5KoPp0ywJXKmfMdM33c/7EPBLjzut0njT
 github.com/gethinode/mod-csp v1.0.8/go.mod h1:Nb22QMicoUHgZQUKP5TCgVrSI8K3KU7jLuLBShmotjg=
 github.com/gethinode/mod-flexsearch/v3 v3.0.0 h1:xFeo5ovZMIcUttvpOamPAMML5+5Au/hewZz/18C2H6Q=
 github.com/gethinode/mod-flexsearch/v3 v3.0.0/go.mod h1:iYvaBF6Y62pjnCepYAqLxoX1ZdEBoD+9caj4cBC+MxY=
+github.com/gethinode/mod-flexsearch/v3 v3.0.1 h1:dHaSImDDp1xtzpW0vc4zychCGOxOCQb764l/XRp0hZc=
+github.com/gethinode/mod-flexsearch/v3 v3.0.1/go.mod h1:iYvaBF6Y62pjnCepYAqLxoX1ZdEBoD+9caj4cBC+MxY=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2 h1:v1aHhbLLwe/05zRHnx9qGqh6b3toDzcLzuv61rWAoGU=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2/go.mod h1:zukv88wXqquEvTJJ9mWWk8Ia+9INnA41wYqusf2RcHA=
 github.com/gethinode/mod-google-analytics v1.3.3 h1:iX2FtXajykfHWJf7MXCQmpezqXgQUADNTeglU81QKpw=
