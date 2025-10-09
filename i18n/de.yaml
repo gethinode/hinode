@@ -13,6 +13,8 @@
   translation: "Foto von %s auf %s"
 - id: photoShort
   translation: "Foto von {{ . }}"
+- id: photoOn
+  translation: "auf"
 - id: draft
   translation: "Entwurf"
 
@@ -53,6 +55,14 @@
   translation: "Link zur Webseite"
 - id: code
   translation: "Code"
+- id: download
+  translation: "Artikel herunterladen"
+
+# Hero
+- id: backgroundImage
+  translation: "Hintergrundbild"
+- id: heroImage
+  translation: "Hero-Bild"
 
 # Pagination
 - id: paginationNav
@@ -89,6 +99,12 @@
   translation: "Auf dieser Seite"
 - id: seeAlso
   translation: "Siehe auch"
+- id: sectionMenu
+  translation: "Thema auswählen"
+- id: tocShowMore
+  translation: "{{ . }} weitere anzeigen"
+- id: tocShowLess
+  translation: "Weniger anzeigen"
 
 # Sidebar
 - id: toggleSidebar
@@ -99,6 +115,8 @@
   translation: "Eingefügt seit {{ . }}"
 - id: deprecatedFeature
   translation: "Veraltet seit {{ . }}"
+- id: alternativeFeature
+  translation: "Verwende stattdessen `{{ . }}`"
 
 # Versioning
 - id: latest
@@ -128,14 +146,14 @@
 - id: show
   translation: "Anzeigen"
 - id: comments
-  translation: "Kommentare"
+  translation: "Kommentare" 
 
 # Arguments
 - id: name
   translation: "Name"
 - id: type
   translation: "Typ"
-- id: required
+- id: required 
   translation: "Erforderlich"
 - id: default
   translation: "Standard"
@@ -159,3 +177,15 @@
 # Image
 - id: image
   translation: Bild
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "Zum Erweitern klicken"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "Interessiert an diesem Thema?"
+- id: contactBody
+  translation: "Bitte hinterlassen Sie Ihre Kontaktdaten, damit wir uns mit Ihnen in Verbindung setzen können."
+- id: contactAction
+  translation: "Kontakt aufnehmen"
