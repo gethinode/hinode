@@ -27,7 +27,6 @@ arguments:
   order:
     default: first
   orientation:
-  width:
   justify:
   class:
   width:
