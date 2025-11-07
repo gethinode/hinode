@@ -26,6 +26,13 @@ arguments:
     group: partial
     optional: true
     release: v1.0.0
+  exact:
+    type: bool
+    comment: >-
+      Renders the provided link description as-is, without adjusting the case.
+      Overrides the case setting.
+    optional: true
+    release: v1.20.0
   # deprecated arguments  
   destination: 
     type: string
