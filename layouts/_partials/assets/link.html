@@ -120,10 +120,12 @@
             {{ end }}
         {{ end }}
 
-        {{- if not $args.case }}
-            {{ $text = lower $text }}
-        {{ else if site.Params.main.titleCase }}
-            {{ $text = title $text }}
+        {{- if not $args.exact }}
+            {{- if not $args.case }}
+                {{ $text = lower $text }}
+            {{ else if site.Params.main.titleCase }}
+                {{ $text = title $text }}
+            {{ end -}}
         {{ end -}}
 
         {{ if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) }}
