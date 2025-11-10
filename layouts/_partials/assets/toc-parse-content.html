@@ -46,45 +46,59 @@
 {{- $maxNumHeadings := or (.Site.Params.navigation.maxNumHeadings | int) 9 }}
 
 {{- /* Render */}}
-{{- if and .Site.Params.navigation.toc (ge (len .Fragments.HeadingsMap) $minNumHeadings) }}
-    <strong class="d-block h6 my-2 pt-4">{{ T "toc" }}:</strong>
-    <nav class="toc">
-        {{ $result := slice }}
-        {{ range .Fragments.Headings }}
-            {{ $result = $result | append (partial "inline/toc-item.html" (dict
-                "base"           $.RelPermalink
-                "item"           .
-                "startLevel"     $startLevel
-                "endLevel"       $endLevel
-                "maxNumHeadings" $maxNumHeadings
-            )) }} 
-        {{ end }}
+{{- if .Site.Params.navigation.toc }}
+    {{- /* Check for custom headings in Page.Store or Page.Params, otherwise use Page.Fragments */}}
+    {{- $customHeadings := .Page.Store.Get "Headings" }}
+    {{- $customHeadingsMap := .Page.Store.Get "HeadingsMap" }}
+    {{- if not $customHeadings }}
+        {{- $customHeadings = .Page.Params.Headings }}
+        {{- $customHeadingsMap = .Page.Params.HeadingsMap }}
+    {{- end }}
 
-        {{ range $i, $v := $result }}
-            {{ if eq $i $maxNumHeadings }}
-                {{ partial "assets/button.html" (dict
-                    "id"          "btnTOCShowMore"
-                    "collapse-id" "toc-collapse-items"
-                    "link-type"   "link"
-                    "class"       "toc-item"
-                    "title"       (T "tocShowMore" (sub (len $result) $i))
-                    "spacing"     false
-                ) }}
-                <div class="collapse" id="toc-collapse-items">
+    {{- $fragments := cond $customHeadings (dict "Headings" $customHeadings "HeadingsMap" $customHeadingsMap) .Page.Fragments }}
+
+    {{- with $fragments }}
+        {{- if (ge (len .HeadingsMap) $minNumHeadings) }}
+            <strong class="d-block h6 my-2 pt-4">{{ T "toc" }}:</strong>
+            <nav class="toc">
+                {{ $result := slice }}
+                {{ range .Headings }}
+                    {{ $result = $result | append (partial "inline/toc-item.html" (dict
+                        "base"           $.RelPermalink
+                        "item"           .
+                        "startLevel"     $startLevel
+                        "endLevel"       $endLevel
+                        "maxNumHeadings" $maxNumHeadings
+                    )) }}
                 {{ end }}
-            {{ print $v | safeHTML }}
-        {{ end }}
 
-        {{ if gt (len $result) $maxNumHeadings }}
-            &nbsp;
-            {{ partial "assets/button.html" (dict
-                "id"          "btnTOCShowLess"
-                "collapse-id" "toc-collapse-items"
-                "link-type"   "link"
-                "class"       "toc-item"
-                "title"       (T "tocShowLess")
-                "spacing"     false
-            ) }}
-        </div>{{ end }}
-    </nav>
+                {{ range $i, $v := $result }}
+                    {{ if eq $i $maxNumHeadings }}
+                        {{ partial "assets/button.html" (dict
+                            "id"          "btnTOCShowMore"
+                            "collapse-id" "toc-collapse-items"
+                            "link-type"   "link"
+                            "class"       "toc-item"
+                            "title"       (T "tocShowMore" (sub (len $result) $i))
+                            "spacing"     false
+                        ) }}
+                        <div class="collapse" id="toc-collapse-items">
+                        {{ end }}
+                    {{ print $v | safeHTML }}
+                {{ end }}
+
+                {{ if gt (len $result) $maxNumHeadings }}
+                    &nbsp;
+                    {{ partial "assets/button.html" (dict
+                        "id"          "btnTOCShowLess"
+                        "collapse-id" "toc-collapse-items"
+                        "link-type"   "link"
+                        "class"       "toc-item"
+                        "title"       (T "tocShowLess")
+                        "spacing"     false
+                    ) }}
+                </div>{{ end }}
+            </nav>
+        {{ end }}
+    {{ end }}
 {{ end }}
