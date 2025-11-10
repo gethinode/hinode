@@ -96,7 +96,7 @@
     "postcss-cli": "^11.0.1",
     "replace-in-files-cli": "^4.0.0",
     "rimraf": "^6.1.0",
-    "semantic-release": "^25.0.1",
+    "semantic-release": "^25.0.2",
     "shx": "^0.4.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard-scss": "^16.0.0"
