@@ -3,11 +3,11 @@
 {{/* Adapted from doks */}}
 {{ with .Params.meta.title }}
     {{ $title := . }}
-    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ if and site.Params.main.titleCase (not $.Params.exact) }}{{ $title = title $title }}{{ end }}
     {{ $.Scratch.Set "title" $title -}}
 {{ else }}
     {{ $title := .Title | default .Site.Title }}
-    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ if and site.Params.main.titleCase (not $.Params.exact) }}{{ $title = title $title }}{{ end }}
     {{ $.Scratch.Set "title" $title -}}
 {{ end }}
 

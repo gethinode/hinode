@@ -4,7 +4,7 @@
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
     {{- $hasSidebar := site.Params.navigation.sidebar | default true -}}
     {{- $pageTitle := .Page.Title }}
-    {{ if site.Params.main.titleCase }}{{ $pageTitle = title $pageTitle }}{{ end }}
+    {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $pageTitle = title $pageTitle }}{{ end }}
 
     <div class="container-xxl flex-fill p-4 px-xxl-0">
         <div class="row row-cols-1 row-cols-{{ $breakpoint.prev }}-{{ if $hasSidebar }}3{{ else }}2{{ end }}">
@@ -22,7 +22,7 @@
                     <div class="row mt-5"></div>
                     {{ range $.Site.Taxonomies.tags.ByCount }}
                         {{- $title := .Page.Title }}
-                        {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+                        {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
 
                         <div class="row mt-2">
                             <div class="col-3 mt-auto text-right">
@@ -43,7 +43,7 @@
                         {{ $year := .Date.Year }}
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
                         {{- $title := .Title }}
-                        {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+                        {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
                         <div class="row mt-2">
                             <div class="d-none d-{{ $breakpoint.prev }}-block col-{{ $breakpoint.prev }}-3 mt-auto text-right">
                                 {{ with .Date }}

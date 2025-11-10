@@ -30,7 +30,7 @@
 {{- if and (not $preheading) $args.useSection }}{{ $preheading = page.CurrentSection.Name }}{{ end -}}
 {{- $justify := cond (eq $args.justify "start") "" (cond (eq $args.justify "end") "me-0" "mx-auto") -}}
 
-{{ if site.Params.main.titleCase }}
+{{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}
     {{ $preheading = title $preheading }}
     {{ $title = title $title }}
 {{ end }}

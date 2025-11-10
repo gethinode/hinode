@@ -126,7 +126,7 @@
         {{ $prefix := strings.Repeat $args.headerLevel "#" }}
         {{ range $k, $v := $types.udt }}
             {{ $title := $k }}
-            {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+            {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
             {{ printf "%s %s %s" $prefix $title (T "type") | $args.page.RenderString }}
             {{ partial "inline/args-table.html" (merge $params (dict "args" $v)) }}
         {{ end }}

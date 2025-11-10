@@ -21,7 +21,7 @@
 {{- end -}}
 
 {{ $title := .Title }}
-{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
 
 {{/* Render breadcrumb */}}
 {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}

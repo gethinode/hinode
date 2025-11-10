@@ -85,7 +85,7 @@
 {{/* Main code */}}
 {{ if not $error }}
     {{ $title := $menu.Name }}
-    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
 
     {{ if $menu.Params.button }}
         {{ partial "assets/button.html" (dict 

@@ -7,7 +7,7 @@
                     <div class="row justify-content-end p-0">
                         <div class="col-12 col-md-8 p-0">
                             {{- $title := or .Site.Params.footer.socialTitle .Site.Params.social.title }}
-                            {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+                            {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
                             <div class="fs-3 fw-bold">{{ $title }}</div>
                             <p>{{ or .Site.Params.footer.socialCaption .Site.Params.social.caption }}</p>
                         </div>

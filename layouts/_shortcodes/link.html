@@ -20,7 +20,7 @@
 {{/* Initialize arguments */}}
 {{- $destination := or $args.href $args.name $args.url -}}
 {{- $text := chomp .Inner -}}
-{{- if site.Params.main.titleCase }}{{ $text = title $text }}{{ end -}}
+{{- if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $text = title $text }}{{ end -}}
 {{- $text = $text | .Page.RenderString | safeHTML -}}
 
 {{/* Main code */}}

@@ -1,5 +1,5 @@
 {{ $title := .Title }}
-{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
 
 {{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
 {{ partial "assets/sharing.html" (dict "page" .) }}

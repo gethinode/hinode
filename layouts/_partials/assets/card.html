@@ -182,7 +182,7 @@
 {{- if eq $args.orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
-{{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+{{ if and site.Params.main.titleCase (not $args.exact) }}{{ $title = title $title }}{{ end }}
 
 {{- $thumbnailArgs := dict
     "src"      $thumbnail

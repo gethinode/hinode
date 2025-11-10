@@ -1,9 +1,10 @@
 ---
 author: Mark Dumay
-title: Third post
+title: third post (exact case)
 date: 2022-12-01
 description: This is my third blog post.
 tags: ["blog"]
+exact: true
 thumbnail:
   url: https://picsum.photos/id/184/4288/2848.jpg
   author: Tim de Groot
