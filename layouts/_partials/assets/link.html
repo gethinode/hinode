@@ -123,7 +123,7 @@
         {{- if not $args.exact }}
             {{- if not $args.case }}
                 {{ $text = lower $text }}
-            {{ else if site.Params.main.titleCase }}
+            {{ else if and site.Params.main.titleCase (not $args.page.Params.exact) }}
                 {{ $text = title $text }}
             {{ end -}}
         {{ end -}}

@@ -1,6 +1,6 @@
 {{ $class := .Attributes.class }}
 {{ $text := chomp .Text }}
-{{ if site.Params.main.titleCase }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
+{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
 
 {{ if and site.Params.navigation.anchor $text }}
 <h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading {{ with $class }}{{ . }}{{ end }}">

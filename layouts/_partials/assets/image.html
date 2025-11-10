@@ -25,7 +25,7 @@
 
 {{/* Initialize local arguments */}}
 {{- $caption := $args.caption -}}
-{{- if and site.Params.main.titleCase (eq $caption (plainify $caption)) -}}
+{{- if and site.Params.main.titleCase (not page.Params.exact) (eq $caption (plainify $caption)) -}}
     {{- $caption = title $caption -}}
 {{- end -}}
 {{- $priority := $args.priority -}}
