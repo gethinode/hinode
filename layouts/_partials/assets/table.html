@@ -37,15 +37,17 @@
 
 {{/* Initialize local variables */}}
 {{ $class := $args.class }}
-{{ if or $args.sortable $args.paging $args.searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if or $args.sortable $args.paginate $args.paging $args.searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
 {{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
-{{ if $args.paging }}
+{{ if or $args.paginate $args.paging }}
+    {{ $pagination := or $args.pagination $args.pagingOptionPerPage | default 10 }}
+    {{ $select := or $args.paginationSelect $args.pagingOptionPageSelect }}
     {{ $attributes = printf "%s data-table-paging=true" $attributes }}
-    {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $args.pagingOptionPerPage }}
-    {{ if $args.pagingOptionPerPageSelect }}
-        {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes $args.pagingOptionPerPageSelect }}
+    {{ $attributes = printf "%s data-table-paging-option-perPage=%d" $attributes $pagination }}
+    {{ with $select }}
+        {{ $attributes = printf "%s data-table-paging-option-perPageSelect=%s" $attributes . }}
     {{ end }}
 {{ end }}
 {{ if $args.searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}

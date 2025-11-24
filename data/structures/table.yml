@@ -4,11 +4,6 @@ comment: >-
   and `searchable` require the module `simple-datatables`.
 arguments:
   page:
-    type:
-      - '*hugolib.pageState'
-      - '*hugolib.pageForShortcode'
-    optional: false
-    comment: Page to display the breadcrumb for.
     group: partial
   input:
     type:
@@ -18,37 +13,27 @@ arguments:
     comment: Table input in markdown format.
     group: partial
   breakpoint:
-    type: select
-    optional: true
     position: 0
-    comment: >-
-      By default, the table shortcode is responsive for all viewports. When a
-      breakpoint is set, the table will behave normally and not scroll
-      horizontally from the provided breakpoint and up. Use `none` to disable
-      this behavior. You can specify multiple breakpoints when using positional
-      arguments.
-    options:
-      values:
-        - none
-        - sm
-        - md
-        - lg
-        - xl
-        - xxl
   class:
-    type: string
-    optional: true
-    comment: Class attribute of the table element, e.g. `table-striped-columns w-auto`.
   sortable:
-    type: bool
-    optional: true
-    comment: Toggle the ability to sort the columns.
     release: v0.24.13
+  paginate:
+    release: v1.23.0
+  pagination:
+    release: v1.23.0
+  pagination-select:
+    release: v1.23.0
+  searchable:
+    release: v0.24.13
+  wrap:
+  # deprecated arguments
   paging:
     type: bool
     optional: true
     comment: Whether paging is enabled for the table.
     release: v0.24.13
+    deprecated: v1.23.0
+    alternative: paginate
   pagingOptionPerPage:
     type: int
     optional: true
@@ -56,26 +41,18 @@ arguments:
       Sets the maximum number of rows to display on each page. Requires
       `paging = true`.
     release: v0.27.8 
+    deprecated: v1.23.0
+    alternative: pagination
   pagingOptionPageSelect:
     type: string
     optional: true
     comment: >-
       Sets the per page options in the dropdown. Must be an array of integers or
       arrays in the format [label (string), value (int)]. Requires
-      `paging = true`. 
+      `paginate = true`. 
     release: v0.27.8 
-  searchable:
-    type: bool
-    optional: true
-    comment: Toggle the ability to search the dataset.
-    release: v0.24.13
-  wrap:
-    type: bool
-    optional: true
-    comment: >-
-      Toggle the last column to wrap to a new row on smaller devices. This
-      setting is not compatible with data tables.
-    release: v0.28.0
+    deprecated: v1.23.0
+    alternative: pagination-select
 body:
   type: string
   optional: false

@@ -25,9 +25,9 @@
         "breakpoint"             $args.breakpoint
         "class"                  $args.class
         "sortable"               $args.sortable
-        "paging"                 $args.paging
-        "pagingOptionPerPage"    $args.pagingOptionPerPage
-        "pagingOptionPageSelect" $args.pagingOptionPageSelect
+        "paginate"               (or $args.paginate $args.paging)
+        "pagination"             (or $args.pagination $args.pagingOptionPerPage)
+        "pagination-select"      (or $args.paginationSelect $args.pagingOptionPageSelect)
         "searchable"             $args.searchable
         "wrap"                   $args.wrap
         "_default"               $args.default

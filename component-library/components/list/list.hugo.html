@@ -1,0 +1,103 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "list" "args" .)}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/list/list.hugo.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Ensure to include the simple-datatables module */}}
+{{/* TODO: fix add module handling, requires propagating scratch variables to correct page */}}
+{{ partial "utilities/AddModule.html" (dict "page" $args._page "module" "simple-datatables" ) }}
+
+{{/* Initialize local variables */}}
+{{ $pages := slice }}
+{{ $result := partial "assets/live-pages.html" (dict 
+	"page"       $args._page
+	"section"    $args.input.section
+	"nested"     $args.input.nested
+	"keywords"   $args.input.keywords
+	"categories" $args.input.categories
+	"tags"       $args.input.tags
+	"sort"       $args.input.sort
+	"reverse"    $args.input.reverse
+)}}
+{{ $pages = $result.pages }}
+
+{{ if and $args.limit $args.paginate }}
+    {{ partial "utilities/LogWarn.html" (dict 
+        "partial" "component-library/components/list/list.hugo.html"
+        "msg"     "Limit is ignored when paginate is set"
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{/* Limit list to max elements */}}
+{{- $count := len $pages -}}
+{{- $max := $count -}}
+{{- $max = math.Min ($args.limit | default $count) $count -}}
+{{- if not $args.paginate -}}
+    {{- $pages = first $max $pages -}}
+{{- end -}}
+
+{{/* Main code */}}
+{{ if not $error }}
+	{{ if or (gt (len $pages) 0) (not $args.hideEmpty) }}
+		{{- partial "assets/section-title.html" (dict
+			"heading" $args.heading
+			"justify" $args.justify
+			"class"   (printf "pb-%d" $padding.y))
+		-}}
+		{{ if gt (len $pages) 0 }}
+			{{ $content := "" }}
+			{{ if $args.hook }}
+				{{ $content = partial $args.hook (dict "pages" $pages) }}
+			{{ else }}
+				{{ $content = "| Title | Description |\n|-|-|\n" }}
+				{{ range $pages }}
+					{{ $content = printf "%s[%s](#%s) | %s |\n" $content .LinkTitle .RelPermalink .Description }}
+				{{ end }}
+			{{ end }}
+
+			{{- /* Define main breakpoint */ -}}
+			{{- $args.page.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
+
+			{{ $pagination := $args.pagination | default 10 }}
+			{{ $paginate := and $args.paginate (gt (len $pages) $pagination) }}
+			{{ $sortable := and $args.sortable (gt (len $pages) 1) }}
+			{{ $searchable := and $args.searchable (gt (len $pages) 1) }}
+
+            {{ partial "assets/table.html" (dict 
+                "page"                   (or $args.page page)
+                "input"                  $content
+                "breakpoint"             $args.breakpoint
+                "class"                  $args.class
+                "sortable"               $sortable
+                "paginate"               $paginate
+                "pagination"             (cond $paginate $pagination "")
+                "pagination-select"      (cond $paginate $args.paginationSelect "")
+                "searchable"             $searchable
+                "wrap"                   $args.wrap
+                "_default"               $args.default
+            ) }}
+		{{ else }}
+			<p class="pt-{{ $padding.y }}">{{- T "emptyList" }}.</p>
+		{{ end }}
+	{{ end }}
+{{ end }}
