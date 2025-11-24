@@ -1,0 +1,29 @@
+section.list {
+    .table {
+        --bs-table-bg: transparent;
+        --bs-table-border-color: var(--bs-table-color);
+
+        th:first-child, td:first-child { 
+            padding-left: 0; 
+        }
+
+        th:last-child, .td:last-child { 
+            padding-right: 0; 
+        }
+
+        th {
+            border-bottom-color: var(--bs-table-border-color) !important;
+        }
+    }
+
+
+    [class^="table-responsive-"] {
+        width: 100%;
+    }
+
+    .datatable-top, .datatable-bottom {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 2rem;
+    }
+}

@@ -31,7 +31,7 @@ Het volgende voorbeeld gebruikt een shortcode om een responsieve tabel met geava
 
 <!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
-{{</* table sortable="true" paging="true" searchable="true" pagingOptionPerPage=5 */>}}
+{{</* table sortable="true" paginate="true" searchable="true" pagination=5 */>}}
 |  #  | Kop     |
 |-----|---------|
 |  1. | Item 1  |

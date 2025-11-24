@@ -33,7 +33,7 @@ Hinode propose plusieurs shortcodes en plus des [éléments Bootstrap]({{% relre
 
 <!-- markdownlint-disable MD037 MD058 -->
 {{< example lang="markdown" >}}
-{{</* table sortable="true" paging="true" searchable="true" pagingOptionPerPage=5 */>}}
+{{</* table sortable="true" paginate="true" searchable="true" pagination=5 */>}}
 |  #  | Heading |
 |-----|---------|
 |  1. | Item 1  |

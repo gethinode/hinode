@@ -28,6 +28,8 @@ github.com/gethinode/mod-leaflet v1.3.1 h1:nG6lQ7LZ2E/TGok/VGo5FCX+OVoHvxrYszi2F
 github.com/gethinode/mod-leaflet v1.3.1/go.mod h1:F/XR1lYKENw91u+IC4NXQT6dbCyJlSJUPClMVpBK8Tw=
 github.com/gethinode/mod-lottie v1.6.1 h1:0wkQ7yMiwFvkhzsBoO/RhfKJ7ru2EzoQfYrwnC6qoxg=
 github.com/gethinode/mod-lottie v1.6.1/go.mod h1:Buaa3A4fBIE4mkyQhnjMlassQQ5j8gRxQ4QnN7I1oGc=
+github.com/gethinode/mod-lottie v1.6.3 h1:oc6ts13A3F8mo0WcW7QlelwhVkOLD/GGybOjsyyLPOM=
+github.com/gethinode/mod-lottie v1.6.3/go.mod h1:63uyMY7jhFXDjqIePAnJZPR2QN9+3eb3E9fku3CJVng=
 github.com/gethinode/mod-mermaid/v3 v3.0.1 h1:h4v3QvGpSln9PDbWccSktULq9FbRZ57JN4Lp+gVjvVI=
 github.com/gethinode/mod-mermaid/v3 v3.0.1/go.mod h1:rbI8IKFfKVGqTY/eJnuNJwzB5kSjaEUNX0NRHc4rBfA=
 github.com/gethinode/mod-simple-datatables/v2 v2.0.2 h1:6HkJkHg754HG2P5FTXiRePEnx/p65yfuqizB+gixV6k=
@@ -38,6 +40,10 @@ github.com/gethinode/mod-utils/v4 v4.19.0 h1:zTKbfhcFDrEsrQI09zyI7JKQTmAQuuB9OGy
 github.com/gethinode/mod-utils/v4 v4.19.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/gethinode/mod-utils/v4 v4.20.0 h1:hGhx0qOzrIvOYrn8ozgo1X9tO/I2F8S2+6yyXK4Oj4c=
 github.com/gethinode/mod-utils/v4 v4.20.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/gethinode/mod-utils/v4 v4.21.0 h1:V/RWQz3KxXDAs3jpjlPPiN/4HPHdSmRC/7VUmdsn390=
+github.com/gethinode/mod-utils/v4 v4.21.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/gethinode/mod-utils/v4 v4.21.1 h1:+YAAwD3yiVBO2ozajKgbxh4IKYhBJUHhKyIfBMz7x5A=
+github.com/gethinode/mod-utils/v4 v4.21.1/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0 h1:55phPhe6fDjfjG0jX4+br3nLORKgjgx8abZUdI0YJRA=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
