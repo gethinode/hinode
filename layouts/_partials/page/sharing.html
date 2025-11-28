@@ -4,40 +4,27 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "sharing" "args" . "group" "partial") }}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "page/sharing.html" 
-        "warnid"  "warn-invalid-arguments"
-        "msg"     "Invalid arguments"
-        "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
-    )}}
-{{ end }}
-
 {{/* Initialize global arguments */}}
 {{- $sharing := $.Scratch.Get "sharing" -}}
 
 {{/* Main code */}}
-{{- if and (not $args.error) $sharing -}}
+{{- if $sharing -}}
     {{- $order := "asc" -}}
-    {{- $list := $args.page.Site.Params.sharing.providers -}}
-    {{- if $args.page.Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
-    {{- $sort := $args.page.Site.Params.sharing.sort | default "weight" -}}
+    {{- $list := .Site.Params.sharing.providers -}}
+    {{- if .Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
+    {{- $sort := .Site.Params.sharing.sort | default "weight" -}}
     {{- $list = sort $list $sort $order -}}
 
-    {{- $download := partial "utilities/GetTargetPath.html" (dict "path" $args.page.Params.download  "page" $args.page) -}}
+    {{- $download := partial "utilities/GetTargetPath.html" (dict "path" .Params.download  "page" .) -}}
     {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-        {{- errorf "Cannot find download file for page '%s': %s" $args.page.File.Path $download -}}
+        {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
     {{- end -}}
     
-    <div class="{{ $args.class }} hstack gap-1">
-        {{ if $args.showLabel }}{{ T "shareLink" " " }}{{ end }}
+    <span class="hstack gap-1 text-body-secondary">
         {{- range $index, $item := $list -}}
             {{- $url := $item.url -}}
-            {{- $url = replace $url "{url}" $args.page.Permalink -}}
-            {{- $url = replace $url "{title}" (urlquery $args.page.Title) -}}
+            {{- $url = replace $url "{url}" $.Permalink -}}
+            {{- $url = replace $url "{title}" (urlquery $.Title) -}}
             {{- $url = $url | safeURL -}}
             {{- $target := "" -}}
             {{- $clipboard := "" -}}
@@ -57,9 +44,9 @@
                 "spacing"   false
             ) }}
         {{- end -}}
-        {{ if $args.page.Site.Params.sharing.webshare }}
-            {{ $attr := dict "data-sharing-title" $args.page.Title "data-sharing-description" $args.page.Description "data-sharing-url" $args.page.Permalink }}
-            {{ $icon := index $args.page.Site.Params.sharing "webshare-icon" | default "fas share-nodes"}}
+        {{ if .Site.Params.sharing.webshare }}
+            {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
+            {{ $icon := index .Site.Params.sharing "webshare-icon" | default "fas share-nodes"}}
             {{ partial "assets/button.html" (dict
                 "href"       ""
                 "icon"       (printf "%s fa-fw" $icon)
@@ -89,5 +76,5 @@
                 "spacing"    false
             ) }}
         {{- end -}}
-    </div>
+    </span>
 {{- end -}}

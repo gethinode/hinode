@@ -1,6 +1,11 @@
+{{/* Initialize global variables */}}
+{{- $sharing := $.Scratch.Get "sharing" -}}
+
 {{ $title := .Title }}
 {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
 
 {{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
-{{ partial "page/sharing.html" (dict "page" .) }}
+{{- if $sharing }}
+    <div class="py-3 d-flex align-items-center"><span class="me-1">{{ T "shareLink" " " }}</span>{{ partial "page/sharing.html" . }}</div>
+{{ end -}}
 <p class="lead mb-5">{{ .Description }}</p>
