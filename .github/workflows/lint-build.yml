@@ -4,9 +4,9 @@ on:
   push:
     tags:
       - v*
-    branches: [ main ]
+    branches: [ main, beta ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, beta ]
 
 env:
   CACHE_KEY: 'hugo-hinode'

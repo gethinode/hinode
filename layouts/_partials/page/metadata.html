@@ -1,0 +1,17 @@
+{{- $metadata := partial "utilities/GetMetadata.html" . -}}
+{{ if ne $metadata "none" }}
+    <small class="text-body-secondary text-uppercase">
+        {{ if .Date }}
+            {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+            {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
+            {{ if gt .Lastmod .Date }}
+                {{ $lastmodstr | i18n "lastModified" }}
+            {{ else }}
+                {{ $datestr | i18n "postedOnDate" -}}
+            {{ end }}
+            &bull;
+        {{ end }}
+        {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }} &bull;
+        {{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}
+    </small>
+{{ end }}

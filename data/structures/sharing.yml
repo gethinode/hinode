@@ -13,3 +13,6 @@ arguments:
     default: true
     comment: Indicates if the element should include a label.
     release: v1.15.3
+  class:
+    default: py-3 text-body-secondary
+    release: v2.0.0
