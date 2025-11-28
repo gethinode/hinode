@@ -1,4 +1,4 @@
-{{- $metadata := partial "utilities/GetMetadata.html" . -}}
+{{- $metadata := .Scratch.Get "metadata" -}}
 {{ if ne $metadata "none" }}
     <small class="text-body-secondary text-uppercase">
         {{ if .Date }}
