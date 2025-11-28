@@ -16,91 +16,78 @@
     )}}
 {{ end }}
 
-{{/* Initialize local arguments */}}
-{{ $page := $args.page }}
+{{/* Initialize global arguments */}}
+{{- $sharing := $.Scratch.Get "sharing" -}}
 
 {{/* Main code */}}
-{{- if and (not $args.error) $page.Site.Params.sharing.enabled -}}
-    {{- $sharing := true -}}
-    {{ if isset $page.Params "sharing" }}
-        {{ $sharing = $page.Params.sharing }}
-    {{ else }}
-        {{- with (index $page.Site.Params.pages .Type ) -}}
-            {{ if isset . "sharing" }}
-                {{ $sharing = (index . "sharing") }}
-            {{ end }}
-        {{- end -}}
-    {{ end }}
+{{- if and (not $args.error) $sharing -}}
+    {{- $order := "asc" -}}
+    {{- $list := $args.page.Site.Params.sharing.providers -}}
+    {{- if $args.page.Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
+    {{- $sort := $args.page.Site.Params.sharing.sort | default "weight" -}}
+    {{- $list = sort $list $sort $order -}}
 
-    {{- if $sharing -}}
-        {{- $order := "asc" -}}
-        {{- $list := $page.Site.Params.sharing.providers -}}
-        {{- if $page.Site.Params.sharing.reverse }}{{ $order = "desc" }}{{ else }}{{ $order = "asc" }}{{ end -}}
-        {{- $sort := $page.Site.Params.sharing.sort | default "weight" -}}
-        {{- $list = sort $list $sort $order -}}
-
-        {{- $download := partial "utilities/GetTargetPath.html" (dict "path" $page.Params.download  "page" $page) -}}
-        {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-            {{- errorf "Cannot find download file for page '%s': %s" $page.File.Path $download -}}
+    {{- $download := partial "utilities/GetTargetPath.html" (dict "path" $args.page.Params.download  "page" $args.page) -}}
+    {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
+        {{- errorf "Cannot find download file for page '%s': %s" $args.page.File.Path $download -}}
+    {{- end -}}
+    
+    <div class="{{ $args.class }} hstack gap-1">
+        {{ if $args.showLabel }}{{ T "shareLink" " " }}{{ end }}
+        {{- range $index, $item := $list -}}
+            {{- $url := $item.url -}}
+            {{- $url = replace $url "{url}" $args.page.Permalink -}}
+            {{- $url = replace $url "{title}" (urlquery $args.page.Title) -}}
+            {{- $url = $url | safeURL -}}
+            {{- $target := "" -}}
+            {{- $clipboard := "" -}}
+            {{- if .clipboard -}}
+                {{- $target = (printf "toast-message-%s-%d" (anchorize $item.name) $index ) -}}
+                {{- $clipboard = $url -}}
+                {{- $url = "" -}}
+                {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link") (T "copiedToClipboard"))) -}}
+            {{- end -}}
+            {{ partial "assets/button.html" (dict 
+                "toast-id"  $target
+                "clipboard" $clipboard
+                "href"      $url
+                "icon"      (printf "%s fa-fw" $item.icon)
+                "class"     "btn-social p-0"
+                "label"     (T "shareLink" $item.name)
+                "spacing"   false
+            ) }}
         {{- end -}}
-        
-        <div class="{{ $args.class }} hstack gap-1">
-            {{ if $args.showLabel }}{{ T "shareLink" " " }}{{ end }}
-            {{- range $index, $item := $list -}}
-                {{- $url := $item.url -}}
-                {{- $url = replace $url "{url}" $page.Permalink -}}
-                {{- $url = replace $url "{title}" (urlquery $page.Title) -}}
-                {{- $url = $url | safeURL -}}
-                {{- $target := "" -}}
-                {{- $clipboard := "" -}}
-                {{- if .clipboard -}}
-                    {{- $target = (printf "toast-message-%s-%d" (anchorize $item.name) $index ) -}}
-                    {{- $clipboard = $url -}}
-                    {{- $url = "" -}}
-                    {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link") (T "copiedToClipboard"))) -}}
-                {{- end -}}
-                {{ partial "assets/button.html" (dict 
-                    "toast-id"  $target
-                    "clipboard" $clipboard
-                    "href"      $url
-                    "icon"      (printf "%s fa-fw" $item.icon)
-                    "class"     "btn-social p-0"
-                    "label"     (T "shareLink" $item.name)
-                    "spacing"   false
-                ) }}
-            {{- end -}}
-            {{ if $page.Site.Params.sharing.webshare }}
-                {{ $attr := dict "data-sharing-title" $page.Title "data-sharing-description" $page.Description "data-sharing-url" $page.Permalink }}
-                {{ $icon := index $page.Site.Params.sharing "webshare-icon" | default "fas share-nodes"}}
-                {{ partial "assets/button.html" (dict
-                    "href"       ""
-                    "icon"       (printf "%s fa-fw" $icon)
-                    "class"      "btn-social p-0"
-                    "attributes" $attr
-                    "label"      (T "shareLink" (T "shareSystem"))
-                    "spacing"    false
-                ) }}
-            {{- end -}}
-            {{ with $download }}
-                {{ $label := (T "download" ) }}
-                {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
-                {{ if and $lang (ne (string site.LanguageCode) $lang) }}
-                    {{ range site.Languages }}
-                        {{ if eq .LanguageCode $lang }}
-                            {{ $label = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
-                        {{ end }}
+        {{ if $args.page.Site.Params.sharing.webshare }}
+            {{ $attr := dict "data-sharing-title" $args.page.Title "data-sharing-description" $args.page.Description "data-sharing-url" $args.page.Permalink }}
+            {{ $icon := index $args.page.Site.Params.sharing "webshare-icon" | default "fas share-nodes"}}
+            {{ partial "assets/button.html" (dict
+                "href"       ""
+                "icon"       (printf "%s fa-fw" $icon)
+                "class"      "btn-social p-0"
+                "attributes" $attr
+                "label"      (T "shareLink" (T "shareSystem"))
+                "spacing"    false
+            ) }}
+        {{- end -}}
+        {{ with $download }}
+            {{ $label := (T "download" ) }}
+            {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
+            {{ if and $lang (ne (string site.LanguageCode) $lang) }}
+                {{ range site.Languages }}
+                    {{ if eq .LanguageCode $lang }}
+                        {{ $label = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
                     {{ end }}
                 {{ end }}
-                {{ $attr := dict "download" (path.Base .) }}
-                {{ partial "assets/button.html" (dict 
-                    "href"       .
-                    "icon"       "fas download fa-fw"
-                    "label"      $label
-                    "class"      "btn-social p-0"
-                    "attributes" $attr
-                    "spacing"    false
-                ) }}
-            {{- end -}}
-        </div>
-    {{- end -}}
+            {{ end }}
+            {{ $attr := dict "download" (path.Base .) }}
+            {{ partial "assets/button.html" (dict 
+                "href"       .
+                "icon"       "fas download fa-fw"
+                "label"      $label
+                "class"      "btn-social p-0"
+                "attributes" $attr
+                "spacing"    false
+            ) }}
+        {{- end -}}
+    </div>
 {{- end -}}

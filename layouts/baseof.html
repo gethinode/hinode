@@ -23,6 +23,12 @@
 {{- /* Define main breakpoint */ -}}
 {{- $.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
 
+{{- /* Define page metadata */ -}}
+{{- $.Scratch.Set "metadata" (partial "utilities/GetMetadata.html" .) }}
+
+{{- /* Define page sharing */ -}}
+{{- $.Scratch.Set "sharing" (partial "utilities/GetSharing.html" .) }}
+
 {{- /* Prepare content blocks and establish overlay mode */ -}}
 {{ $blocks := partial "utilities/RenderContentBlocks.html" (dict "page" . "blocks" .Params.content_blocks) }}
 {{ $.Scratch.Set "blocks" $blocks }}
