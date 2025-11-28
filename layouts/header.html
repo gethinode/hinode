@@ -1,13 +1,14 @@
 {{/* Initialize global variables */}}
-{{- $size := site.Params.style.title.size | default 4 -}}
-{{- $headingStyle := site.Params.style.title.headingStyle | default "display" -}}
-{{- $contentStyle := site.Params.style.title.contentStyle | default "lead text-muted" -}}
+{{- $size := .Site.Params.style.title.size | default 4 -}}
+{{- $headingStyle := .Site.Params.style.title.headingStyle | default "display" -}}
+{{- $contentStyle := .Site.Params.style.title.contentStyle | default "lead text-muted" -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $sharing := .Scratch.Get "sharing" -}}
 
 {{/* Initialize local variables */}}
-{{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+{{- $breakpoint := .Scratch.Get "breakpoint" -}}
 {{ $title := .Title }}
-{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
+{{ if and .Site.Params.main.titleCase (not .Params.exact) }}{{ $title = title $title }}{{ end }}
 
 {{/* Render breadcrumb */}}
 {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
@@ -22,11 +23,13 @@
 {{- partial "page/tags.html" . -}}
 
 {{/* Display social sharing buttons */}}
-{{ partial "page/sharing.html" (dict "page" .) }}
+{{- if $sharing }}
+    <div class="py-3 d-flex align-items-center"><span class="me-1">{{ T "shareLink" " " }}</span>{{ partial "page/sharing.html" . }}</div>
+{{ end -}}
 
 {{/* Display description */}}
 {{ with .Description }}
-    <div class="{{ $contentStyle }} py-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>
+    <div class="{{ $contentStyle }} py-{{ $padding.y }}">{{ . | $.RenderString | safeHTML }}</div>
 {{ end }}
 
 {{/* Display TOC dropdown on smaller screens */}}
