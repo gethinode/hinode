@@ -158,7 +158,8 @@
                     "subtle"        $args.subtle
                     "icon-style"    (or (index $element "icon-style") $element.style $args.iconStyle)
                     "align"         $args.align
-                    "button"        $args.button
+                    "href"          $element.href
+                    "button"        (or $args.button $element.button)
                     "button-label"  (or (index $element "button-label") $element.buttonLabel)
                     "link-type"     (or $args.linkType $args.buttonType)
                     "icon-rounded"  $args.iconRounded

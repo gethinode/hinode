@@ -18,6 +18,7 @@ blueprint:
   cols:
   icon-rounded:
   icon-style:
+  link-type:
   padding:
   background:
     backdrop:
@@ -29,6 +30,7 @@ blueprint:
       image:
       mode:
       content:
+      link:
   orientation:
   class:
   width:

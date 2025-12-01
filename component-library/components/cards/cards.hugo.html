@@ -28,10 +28,13 @@
 {{ range $args.elements }}
 	<!-- TODO: check mode -->
 	{{ $list = $list | append (dict 
-		"title"       .title
-		"description" (.content | page.RenderString)
-		"icon"        .icon
-		"thumbnail"   .image
+		"title"        .title
+		"description"  (.content | page.RenderString)
+		"icon"         .icon
+		"thumbnail"    .image
+		"href"         .link
+		"button"       (isset . "link")
+		"button-label" .label
 	) }}
 {{ end}}
 
@@ -43,12 +46,11 @@
 		"class" (printf "pb-%d" $padding.y))
 	-}}
 
-	{{/* Layout for small screens */}}
-	{{- partial "assets/card-group.html" (dict 
+	{{/* Init base arguments for card group */}}
+	{{ $params := dict 
 		"page"         page
 		"list"         $list
 		"class"        (printf "border-0 card-icon-primary %s" (or $args.class ""))
-		"wrapper"      (printf "d-%s-none" $breakpoint.prev)
 		"cols"         $args.cols
 		"gutter"       "4"
 		"padding"      $args.padding
@@ -56,27 +58,21 @@
 		"footer-style" "none"
 		"icon-rounded" $args.iconRounded
 		"icon-style"   (or $args.iconStyle "fa-2x")
+		"link-type"    $args.linkType
 		"align"        $args.align
-		"orientation"  ($args.orientation | default "horizontal-sm")
 		"hook"         "assets/live-card.html"
-	) -}}
+	}}
+
+	{{/* Layout for small screens */}}
+	{{- partial "assets/card-group.html" (merge $params (dict 
+		"orientation"  ($args.orientation | default "horizontal-sm")
+		"wrapper"      (printf "d-%s-none" $breakpoint.prev)
+	)) -}}
 
 	{{/* Layout for regular screens */}}
-	{{- partial "assets/card-group.html" (dict 
-		"page"         page
-		"list"         $list
-		"class"        (printf "border-0 card-icon-primary %s" (or $args.class ""))
-		"wrapper"      (printf "d-none d-%s-block" $breakpoint.prev)
-		"cols"         $args.cols
-		"gutter"       "4"
-		"padding"      $args.padding
-		"header-style" "none"
-		"footer-style" "none"
-		"icon-rounded" $args.iconRounded
-		"icon-style"   (or $args.iconStyle "fa-2x")
-		"align"        $args.align
+	{{- partial "assets/card-group.html" (merge $params (dict 
 		"orientation"  ($args.orientation | default "stacked")
-		"hook"         "assets/live-card.html"
-	) -}}
+		"wrapper"      (printf "d-none d-%s-block" $breakpoint.prev)
+	)) -}}
 {{ end }}
 
