@@ -17,21 +17,23 @@
 
     {{ $blocks | safeHTML }}
 
-    <div class="container-xxl flex-fill p-4 px-xxl-0">
-        <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
-            <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
-                {{ $sidebar | safeHTML }}
-            </div>
-            <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 py-4">
-                {{ .Render "header" }}
+    {{ if or (not $blocks) (gt (len .RawContent) 0) }}
+        <div class="container-xxl flex-fill p-4 px-xxl-0">
+            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
+                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
+                    {{ $sidebar | safeHTML }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 py-4">
+                    {{ .Render "header" }}
 
-                {{ .Render "body" }}
-                
-                {{ .Render "footer" }}
-            </div>
-            <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block pt-5">
-                {{ .Render "toc" }}
+                    {{ .Render "body" }}
+                    
+                    {{ .Render "footer" }}
+                </div>
+                <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block pt-5">
+                    {{ .Render "toc" }}
+                </div>
             </div>
         </div>
-    </div>
+    {{ end }}
 {{ end -}}
