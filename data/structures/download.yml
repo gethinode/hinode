@@ -1,4 +1,4 @@
-comment: Generate a download button.
+comment: Generate a download button or link.
 arguments:
   download:
   title:
@@ -9,7 +9,11 @@ arguments:
     default: true
   icon:
     default: fas download
+  order:
+    default: last
   button-size:
     default: sm
+  link-type:
+    default: button
   justify:
   minimal:
