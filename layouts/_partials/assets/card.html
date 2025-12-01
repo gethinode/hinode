@@ -13,7 +13,7 @@
         {{- range $index, $item := $links -}}
             {{ partial "assets/button.html" (dict 
                 "href"      $item.url
-                "icon"      (printf "%s fa-fw" $item.icon)
+                "icon"      (cond $item.icon (printf "%s fa-fw" $item.icon) "")
                 "class"     "btn-social p-0"
                 "label"     $item.title
                 "spacing"   false
@@ -334,3 +334,7 @@
 {{- end -}}
 
 {{ if or (gt $args.gutter "0") ($args.wrapper) }}</div>{{ end }}
+
+{{ if eq $args.buttonLabel "AI agents" }}
+	{{ warnf "card: %v" ($args | jsonify) }}
+{{ end }}
