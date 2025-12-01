@@ -2,6 +2,8 @@ github.com/airbnb/lottie-web v5.13.0+incompatible h1:plBV5Uq/F1kK0EC61Hr0cBGReI9
 github.com/airbnb/lottie-web v5.13.0+incompatible/go.mod h1:nTss557UK9FGnp8QYlCMO29tjUHwbdAHG/DprbGfHGE=
 github.com/cloudcannon/bookshop/hugo/v3 v3.16.5 h1:RmqeSUQMPyi31YC6SaFNE2ubfFy13qVj5/lo+MCT+u8=
 github.com/cloudcannon/bookshop/hugo/v3 v3.16.5/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
+github.com/cloudcannon/bookshop/hugo/v3 v3.17.1 h1:weTVWBamjQHMIp/oYTFsPwRzzhWrZA6JO43QnxI1kxw=
+github.com/cloudcannon/bookshop/hugo/v3 v3.17.1/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
 github.com/gethinode/mod-bootstrap v1.3.4 h1:rBfyUmdslxL+RX76/5hyJYPacfrt6OYrciNgk/T0NWk=
 github.com/gethinode/mod-bootstrap v1.3.4/go.mod h1:MkvQgiA3N2NFiW57TTU60Rn4N6oZjvlBIVgrJE9M0WI=
 github.com/gethinode/mod-csp v1.0.8 h1:36bWS7oW5KoPp0ywJXKmfMdM33c/7EPBLjzut0njTgE=
@@ -44,6 +46,10 @@ github.com/gethinode/mod-utils/v4 v4.21.0 h1:V/RWQz3KxXDAs3jpjlPPiN/4HPHdSmRC/7V
 github.com/gethinode/mod-utils/v4 v4.21.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/gethinode/mod-utils/v4 v4.21.1 h1:+YAAwD3yiVBO2ozajKgbxh4IKYhBJUHhKyIfBMz7x5A=
 github.com/gethinode/mod-utils/v4 v4.21.1/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/gethinode/mod-utils/v4 v4.21.2 h1:Mnr6iApn6oDC5ic33RxszI0XH7X1ZefFepINWD97uuQ=
+github.com/gethinode/mod-utils/v4 v4.21.2/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/gethinode/mod-utils/v4 v4.21.3 h1:F6pyHbgGzL1FGEV66j8T4hDg3a80cJ/PgPsU8UZq+AY=
+github.com/gethinode/mod-utils/v4 v4.21.3/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0 h1:55phPhe6fDjfjG0jX4+br3nLORKgjgx8abZUdI0YJRA=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
