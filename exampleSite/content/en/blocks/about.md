@@ -19,7 +19,6 @@ The `about` content block renders a short message next to an illustration. You c
     title: Heading
     content: Content
     align: start
-    width: 8
   background:
     color: primary
     subtle: true

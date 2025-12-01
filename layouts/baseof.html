@@ -29,6 +29,9 @@
 {{- /* Define page sharing */ -}}
 {{- $.Scratch.Set "sharing" (partial "utilities/GetSharing.html" .) }}
 
+{{- /* Define TOC inclusion */ -}}
+{{- $.Scratch.Set "includeToc" (partial "utilities/GetIncludeToc.html" .) }}
+
 {{- /* Prepare content blocks and establish overlay mode */ -}}
 {{ $blocks := partial "utilities/RenderContentBlocks.html" (dict "page" . "blocks" .Params.content_blocks) }}
 {{ $.Scratch.Set "blocks" $blocks }}

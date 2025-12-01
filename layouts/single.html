@@ -22,7 +22,7 @@
             <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
                 {{ $sidebar | safeHTML }}
             </div>
-            <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 p-4">
+            <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 py-4">
                 {{ .Render "header" }}
 
                 {{ .Render "body" }}
