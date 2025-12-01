@@ -1,0 +1,18 @@
+{{- $includeToc := false -}}
+{{- if .Site.Params.navigation.toc -}}
+    {{- $includeToc = true -}}
+    {{- if isset .Params "includeToc" -}}
+        {{- $includeToc = .Params.includeToc -}}
+    {{- else -}}
+        {{- with (index site.Params.pages .Type) -}}
+            {{- if isset . "includetoc" -}}
+                {{- $includeToc = index . "includetoc" -}}
+                {{- if ne (printf "%T" $includeToc) "bool" -}}
+                    {{- errorf "Expected bool value in site parameters: pages.%s.includeToc" $.Type -}}
+                {{- end -}}
+            {{- end -}}
+    {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $includeToc -}}
