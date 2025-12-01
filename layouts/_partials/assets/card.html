@@ -334,7 +334,3 @@
 {{- end -}}
 
 {{ if or (gt $args.gutter "0") ($args.wrapper) }}</div>{{ end }}
-
-{{ if eq $args.buttonLabel "AI agents" }}
-	{{ warnf "card: %v" ($args | jsonify) }}
-{{ end }}
