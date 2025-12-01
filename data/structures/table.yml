@@ -14,15 +14,6 @@ arguments:
     group: partial
   breakpoint:
     position: 0
-    options:
-      values:
-        - none
-        - xs
-        - sm
-        - md
-        - lg
-        - xl
-        - xxl
   class:
   sortable:
     release: v0.24.13
