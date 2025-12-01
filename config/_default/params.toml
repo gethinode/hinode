@@ -205,6 +205,11 @@
 # toml-docs-start build
     purge = false
 # toml-docs-end build
+  [style.title]
+    size = 4
+    arrangement = "above"
+    headingStyle = "display"
+    bodyStyle = "lead text-muted"
 
 [schema]
     type = "Organization"
@@ -282,12 +287,6 @@
   section = true
   default = ["section"]
 #   default = ["page", "home", "section"]
-
-[modules.bookshop.title]
-  size = 4
-  arrangement = "above"
-  headingStyle = "display"
-  bodyStyle = "lead text-muted"
 
 [modules.bookshop.articles]
   moreButton = true
