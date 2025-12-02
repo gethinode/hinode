@@ -16,11 +16,8 @@ arguments:
       Identification of the navbar, defaults to `navbar-0`. The id is used by
       several child elements, including a color mode switcher, version switcher,
       and collapse panel.
-  menus:
-    type: string
-    optional: true
-    default: main
-    comment: Name of the menu configuration.
+  menu:
+    release: v2.0.0
   breakpoint:
     release: v1.0.0
   style:
@@ -123,3 +120,10 @@ arguments:
         - xl
     deprecated: v1.0.0
     alternative: breakpoint
+  menus:
+    type: string
+    optional: true
+    default: main
+    comment: Name of the menu configuration.
+    deprecated: v2.0.0
+    alternative: menu
