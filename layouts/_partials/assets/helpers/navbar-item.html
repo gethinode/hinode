@@ -34,8 +34,9 @@
 {{- $pageURL := $page.RelPermalink -}}
 {{- $isActive := or (and (eq $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
 {{ if not $menu.PageRef }}{{ $isActive = false }}{{ end }}
-{{- $isAlias := $menu.Params.alias -}}
 {{- $isIcon := or $menu.Params.icon $menu.Pre -}}
+{{- $isAlias := $menu.Params.alias -}}
+{{- $isControl := $menu.Params.control -}}
 
 {{- $url := urls.Parse $menuURL -}}
 {{- $baseURL := urls.Parse $.Site.Params.Baseurl -}}
@@ -116,7 +117,7 @@
                 {{- with $menu.Post }}{{ . }}{{ end -}}
                 {{- with $suffix }}&nbsp;{{ . }}{{ end -}}
             </span>
-            {{ if not $isIcon }}
+            {{ if or (not $isIcon) (not $isControl) }}
             <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-none d-{{ . }}-block{{ end }}">
                 {{- if $isIcon }}&nbsp;{{ end }}{{ $title }}
                 {{- with $menu.Post }}{{ . }}{{ end -}}
