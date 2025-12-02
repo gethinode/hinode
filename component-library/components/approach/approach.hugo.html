@@ -1,0 +1,95 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* 
+	This component is derived from the cards component. It inserts a featured illustration in between
+	the section title and the card group.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "approach" "args" .)}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/approach/approach.hugo.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global arguments */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Initialize local variables */}}
+{{ $list := slice }}
+{{ range $args.elements }}
+	<!-- TODO: check mode -->
+	{{ $list = $list | append (dict 
+		"title"        .title
+		"description"  (.content | page.RenderString)
+		"icon"         .icon
+		"thumbnail"    .image
+		"href"         .link
+		"button"       (isset . "link")
+		"button-label" .label
+	) }}
+{{ end}}
+
+{{/* Main code */}}
+{{ if not $error }}
+	{{- partial "assets/section-title.html" (dict
+		"heading" $args.heading
+		"justify" $args.justify
+		"class" (printf "pb-%d" $padding.y))
+	-}}
+
+	{{/* Add featured illustration */}}
+	{{ with .illustration }}
+		{{ partial "assets/featured-illustration.html" (dict 
+			"page"    page
+			"image"   .image
+			"ratio"   (or .ratio "21x9")
+			"anchor"  .anchor
+			"title"   page.Title
+			"wrapper" "mb-5 col-12 col-md-8 mx-auto"
+			"mode"    .mode
+		) }}
+	{{ end }}
+
+	{{/* Init base arguments for card group */}}
+	{{ $params := dict 
+		"page"         page
+		"list"         $list
+		"class"        (printf "border-0 card-icon-primary %s" (or $args.class ""))
+		"cols"         $args.cols
+		"gutter"       "4"
+		"padding"      $args.padding
+		"header-style" "none"
+		"footer-style" "none"
+		"icon-rounded" $args.iconRounded
+		"icon-style"   (or $args.iconStyle "fa-2x")
+		"link-type"    $args.linkType
+		"align"        $args.align
+		"hook"         "assets/live-card.html"
+	}}
+
+	{{/* Layout for small screens */}}
+	{{- partial "assets/card-group.html" (merge $params (dict 
+		"orientation"  ($args.orientation | default "horizontal-sm")
+		"wrapper"      (printf "d-%s-none" $breakpoint.prev)
+	)) -}}
+
+	{{/* Layout for regular screens */}}
+	{{- partial "assets/card-group.html" (merge $params (dict 
+		"orientation"  ($args.orientation | default "stacked")
+		"wrapper"      (printf "d-none d-%s-block" $breakpoint.prev)
+	)) -}}
+{{ end }}
