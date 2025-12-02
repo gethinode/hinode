@@ -1,0 +1,22 @@
+comment: Display a menu section.
+arguments:
+  page:
+  menu:
+    type: string
+    optional: true
+    default: main
+    comment: Name of the site menu.
+  menu-style:
+    type: select
+    optional: true
+    default: masonry
+    comment: Style of the menu layout.
+    options:
+      values:
+        - grid
+        - masonry
+  cols: 
+    default: 3
+  icon-rounded:
+  icon-style:
+  padding:
