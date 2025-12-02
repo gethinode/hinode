@@ -10,7 +10,7 @@ arguments:
     type:
       - '*hugolib.pageState'
       - '*hugolib.pageForShortcode'
-    optional: false
+    optional: true
     comment: Page context, used to retrieve page collections.
     group: partial
   section:

@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex">
     <meta charset="utf-8">
     <noscript><meta http-equiv="refresh" content="0; url={{ .Permalink }}"></noscript>
-    {{ if site.Params.main.enableLanguageSelectionStorage }} 
+    {{ if and page site.Params.main.enableLanguageSelectionStorage }} 
       {{- partial "footer/scripts.html" (dict "page" page "type" "critical") -}}
       {{- partial "footer/scripts.html" (dict "page" page "type" "functional") -}}
     {{ else }}

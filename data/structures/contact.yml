@@ -3,6 +3,7 @@ comment: >-
 arguments:
   page:
   data:
+    optional: true
   heading:
   contact:
     type: string

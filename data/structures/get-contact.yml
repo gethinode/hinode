@@ -1,0 +1,13 @@
+# TODO: sync with mod-utils/v5
+comment: >-
+  Retrieves contact details by name from a data asset.
+arguments:
+  contact:
+    type: string
+    optional: false
+    comment: >-
+      The full name of the contact to retrieve.
+  data:
+    default: contacts
+    optional: true
+  language-tag:
