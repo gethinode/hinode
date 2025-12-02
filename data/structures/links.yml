@@ -1,5 +1,6 @@
 arguments:
   page:
+    optional: true
   links:
   align:
   justify:

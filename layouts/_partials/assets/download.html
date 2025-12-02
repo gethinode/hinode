@@ -19,15 +19,15 @@
     {{ $error = $args.err }}
 {{ end }}
 
-{{/* Initialize local arguments */}}
-{{- $title := $args.title -}}
-{{- $download := partial "utilities/GetTargetPath.html" (dict "path" $args.download "page" page) -}}
-{{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-    {{- errorf "Cannot find download file for page '%s': %s" page.File.Path $download -}}
-    {{- $error = true }}
-{{- end -}}
-
 {{ if not $error }}
+    {{/* Initialize local arguments */}}
+    {{- $title := $args.title -}}
+    {{- $download := partial "utilities/GetTargetPath.html" (dict "path" $args.download "page" page) -}}
+    {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
+        {{- errorf "Cannot find download file for page '%s': %s" page.File.Path $download -}}
+        {{- $error = true }}
+    {{- end -}}
+
     {{ if not $title }}
         {{ if not $args.minimal }}{{ $title = (T "download" ) }}{{ end }}
         {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName $download)) }}
@@ -39,7 +39,7 @@
             {{ end }}
         {{ end }}
     {{ end }}
-    {{ $attr := dict "download" (path.Base $args.page) }}
+    {{ $attr := dict "download" (path.Base $download) }}
     {{ partial "assets/button.html" (dict 
         "href"        $download
         "title"       $title

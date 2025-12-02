@@ -1,0 +1,50 @@
+# TODO: sync with mod-utils/v5
+comment: >-
+  Bundles a selection of files into a single file.
+arguments:
+  page:
+  match:
+    type: string
+    optional: true
+    comment: Filename or glob pattern of the source file(s) to bundle.
+  filename:
+    type: string
+    optional: false
+    comment: Filename of the target bundle.
+  modules:
+    type: "[]string"
+    optional: true
+    comment: >-
+      Names of the modules to bundle. When `all` is set, a glob pattern
+      consisting of the `basepath`, module name, and default extension is added.
+      Else, a single file is matched.
+  all:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate the module should include a glob pattern to match all
+      nested files.
+  skip-template:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to indicate the matched files should not be processed using
+      `resources.ExecuteAsTemplate`. Set this to true when encountering
+      processing issues due to syntax conflicts.
+  enable-template:
+    type: string
+    optional: true
+    comment: >-
+      Glob pattern to define which source files should be processed as Hugo
+      template. The pattern takes precedence over `skip-template`.
+  basepath:
+    type: string
+    optional: true
+    comment: >-
+      Base path to use when defining a module glob pattern. See `modules` for
+      more details.
+  debugging:
+    type: bool
+    optional: true
+    comment: >-
+      Flag to display which source files are matched for bundling.

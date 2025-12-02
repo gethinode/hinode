@@ -1,6 +1,7 @@
 arguments:
   src:
   page:
+    optional: true
   mode:
   ratio:
   portrait:
