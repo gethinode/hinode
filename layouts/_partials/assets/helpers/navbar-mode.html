@@ -3,7 +3,7 @@
 {{- $breakpoint := .breakpoint -}}
 {{- $iconLight := site.Params.main.colorMode.iconLight | default "fas sun" -}}
 {{- $iconDark := site.Params.main.colorMode.iconDark | default "fas moon" -}}
-{{- $fs := .fs | default 6 -}}
+{{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
 
 <li class="nav-link navbar-fs-{{ $fs }} navbar-{{ $breakpoint }}-fs d-flex mode-{{ cond $toggle "toggle" "switch" }} align-items-center" id="{{ $id }}">
     <input type="checkbox" class="checkbox navbar-mode-selector" id="{{ $id }}-checkbox" aria-label="{{ T "colorMode" }}" />

@@ -382,7 +382,7 @@ As an example, the following shortcode displays a light navigation header.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menus="sample" title="Brand" mode="false" */>}}
+{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menu="sample" title="Brand" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

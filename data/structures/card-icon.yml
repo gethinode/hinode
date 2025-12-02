@@ -1,0 +1,8 @@
+comment: >-
+  Renders a card icon including optional rounding.
+arguments:
+  icon:
+  padding:
+  icon-rounded:
+  icon-style:
+  class:

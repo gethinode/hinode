@@ -1,0 +1,52 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "menu-item" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/menu-item.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    ) -}}
+    {{- $error = $args.err -}}
+{{- end -}}
+
+<div class="menu-item d-flex {{ with $args.padding }}p-{{ . }}{{ end }} justify-content-between {{ $args.class }}">
+    <div class="w-100 {{ if $args.menuEntry.Params.icon }}pe-2{{ end }}">
+        {{ partial "assets/helpers/navbar-item.html" (dict 
+            "page"       $args.page
+            "menu-entry" $args.menuEntry
+            "class"      "stretched-link menu-link-header fs-md-5 fs-6 fw-bold"
+            "plain"      true
+        )}}
+        {{- range $args.menuEntry.Children -}}
+            <div class="p-0">
+                {{- partial "assets/helpers/navbar-item.html" (dict
+                    "page"       $args.page
+                    "menu-entry" .
+                    "class"      "menu-link py-1"
+                ) -}}
+            </div>
+        {{- end -}}
+    </div>
+    
+    {{ with $args.menuEntry.Params.icon }}
+        <div class="flex-shrink-1">
+            {{- partial "assets/card-icon.html" (dict
+                "icon"         .
+                "padding"      0
+                "icon-rounded" $args.iconRounded
+                "icon-style"   $args.iconStyle
+                "class"        (printf "align-self-end me-1 mt-1 col-auto")
+            )}}
+        </div>
+    {{ end }}
+</div>

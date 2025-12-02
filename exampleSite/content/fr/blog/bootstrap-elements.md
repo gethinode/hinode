@@ -343,7 +343,7 @@ Utilisez le shortcode `mark` pour {{</* mark >}}mettre en évidence{{< /mark */>
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menus="sample" title="Marque" mode="false" */>}}
+{{</* navbar id="navbar-sample" path="blog" color="primary" breakpoint="md" search="false" menu="sample" title="Marque" mode="false" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

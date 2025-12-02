@@ -1,29 +1,29 @@
 {{- $page := .page -}}
-{{- $menus := .menus -}}
+{{- $menu := .menu -}}
 {{- $collapsed := .collapsed -}}
 {{- $control := .control | default false -}}
 {{- $horizontal := .horizontal | default false -}}
 {{- $breakpoint := .breakpoint -}}
-{{- $fs := .fs | default 6 -}}
+{{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
 
-{{- range $menu := $menus -}}
-    {{ if (eq $control ($menu.Params.control | default false)) }}
-        {{ if $menu.Params.spacing }}
+{{- range $entry := $menu -}}
+    {{ if (eq $control ($entry.Params.control | default false)) }}
+        {{ if $entry.Params.spacing }}
             <li class="nav-item flex-grow-1"></li>
         {{ else }}
             <li class="nav-item {{ if .HasChildren }} dropdown me-auto{{ if $horizontal }} dropdown-horizontal-{{ $breakpoint }}{{ end }}{{ end }}">
-                {{- partial "assets/helpers/navbar-item.html" (dict "menu" $menu "page" $page) -}}
+                {{- partial "assets/helpers/navbar-item.html" (dict "menu-entry" $entry "page" $page) -}}
                 {{- if .HasChildren -}}
                     <ul class="dropdown-menu{{ if $control }} dropdown-menu-end{{ end }}">
                         {{- range .Children -}}
                             <li>{{- partial "assets/helpers/navbar-item.html" (dict
-                                    "menu"       .
-                                    "parent"     $menu
-                                    "page"       $page
-                                    "breakpoint" $breakpoint
-                                    "modal"      .Params.modal
-                                    "id"         .Params.id
-                                    "class"      (printf "navbar-fs-%d navbar-%s-fs" $fs $breakpoint)
+                                    "menu-entry"  .
+                                    "menu-parent" $entry
+                                    "page"        $page
+                                    "breakpoint"  $breakpoint
+                                    "modal"       .Params.modal
+                                    "id"          .Params.id
+                                    "class"       (printf "navbar-fs-%d navbar-%s-fs" $fs $breakpoint)
                                 ) -}}
                             </li>
                         {{- end -}}

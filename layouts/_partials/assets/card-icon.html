@@ -1,0 +1,35 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize local arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "card-icon" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/card-icon.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{ if (not $args.error) }}
+    <div class="card-icon
+    {{ with $args.padding }} p-{{ . }}{{ end }}
+    {{ if $args.iconRounded }} fa-stack {{ $args.iconStyle }} fa-fw{{ end }}
+    {{ $args.class }}"
+    >
+        {{ if $args.iconRounded }}
+            {{- partial "assets/icon.html" (dict "icon" (printf "fas circle fa-stack-2x") "spacing" false) -}}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $args.icon) "spacing" false) -}}
+        {{ else }}
+            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s fa-fw" $args.icon $args.iconStyle) "spacing" false) -}}
+        {{ end }}
+    </div>
+{{ end }}

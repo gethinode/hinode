@@ -5,6 +5,7 @@
 {{- $list := site.Params.docs.releases -}}
 {{- $id := .id -}}
 {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
+{{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
 
 <li class="nav-item dropdown {{ if $collapsed }}d-{{ $breakpoint }}-none{{ else }}d-none d-{{ $breakpoint }}-block{{ end }}">
     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
@@ -29,7 +30,7 @@
                 </li>
             {{ else }}
                 {{ if gt $index 0}}<li><hr class="dropdown-divider"></li>{{ end }}
-                <li><span class="dropdown-header fs-6">{{ $item.label }}</span></li>
+                <li><span class="dropdown-header fs-{{ $fs }}">{{ $item.label }}</span></li>
             {{ end }}
         {{- end -}}
         {{- if site.Params.docs.overview -}}

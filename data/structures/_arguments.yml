@@ -792,6 +792,31 @@ arguments:
     type: string
     optional: true
     comment: ID of the asset to be embedded.
+  menu:
+    type: string
+    optional: true
+    default: main
+    comment: Name of the site menu.
+  menu-entry:
+    type:
+      - '*navigation.MenuEntry'
+      - 'map[string]interface {}'
+    comment: Current menu item.
+  menu-parent:
+    type:
+      - '*navigation.MenuEntry'
+      - 'map[string]interface {}'
+    optional: true
+    comment: Parent of the current menu item.
+  menu-style:
+    type: select
+    optional: true
+    default: masonry
+    comment: Style of the menu layout.
+    options:
+      values:
+        - grid
+        - masonry
   min:
     type: int
     optional: true
@@ -812,6 +837,11 @@ arguments:
     optional: false
     comment: Message to display.
     group: partial
+  modal:
+    type: string
+    optional: true
+    comment: >-
+      If set, toggles a modal control for the provided target.
   mode:
     type: bool
     default: false
@@ -999,8 +1029,9 @@ arguments:
     default: false
     optional: true
     comment:
-      Flag to indicate if the image should render a plain image instead of an
-      image set. When set, no transformations are applied to the image.
+      Flag to indicate if the current element should be rendered as plain. For
+      image, this implies no transformations are applied. For navbar items,
+      this ignores any children.
   popup:	
     type: string
     optional: true
@@ -1189,7 +1220,7 @@ arguments:
     optional: true
     default: true
     comment: Indicates if the preview should be output in the HTML.
-  size: 
+  size:
     type: int
     optional: true
     config: style.title.size

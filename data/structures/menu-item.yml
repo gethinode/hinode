@@ -1,0 +1,19 @@
+comment: Renders a menu item.
+arguments:
+  page:
+  menu-entry:
+  menu-style:
+    type: select
+    optional: true
+    default: masonry
+    comment: Style of the menu layout.
+    options:
+      values:
+        - grid
+        - masonry
+  cols: 
+    default: 3
+  icon-rounded:
+  icon-style:
+  padding:
+  class:

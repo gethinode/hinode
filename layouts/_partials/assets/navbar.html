@@ -41,9 +41,9 @@
 {{- $breakpoint := or $args.breakpoint $args.size }}
 
 {{- $defaultMenu := "main" -}}
-{{- $menuName := $args.menus | default $defaultMenu }}
-{{- $menus := index site.Menus $menuName -}}
-{{- if or (ne (printf "%T" $menus) "navigation.Menu") (ne (index $menus 0).Menu $menuName) -}}
+{{- $menuName := (or $args.menu $args.menus) | default $defaultMenu }}
+{{- $menu := index site.Menus $menuName -}}
+{{- if or (ne (printf "%T" $menu) "navigation.Menu") (ne (index $menu 0).Menu $menuName) -}}
     {{- if ne $menuName $defaultMenu }}
         {{- errorf "partial [assets/navbar.html] - Invalid value for param 'menus': %s" $menuName -}}
     {{- end -}}
@@ -109,7 +109,7 @@
 {{- if in (slice "primary" "secondary" "success" "danger") $color }}{{ $contrast = true }}{{ end -}}
 
 {{- $flex := false }}
-{{ if gt (where $menus "Params.spacing" true | len) 0 }}
+{{ if gt (where $menu "Params.spacing" true | len) 0 }}
     {{ $flex = true }}
 {{ end }}
 
@@ -176,16 +176,15 @@
                     {{/* Render top-menu items (maximum depth of 2) */}}
                     {{- partial "assets/helpers/navbar-render-menu.html" (dict
                         "page"       $page
-                        "menus"      $menus
+                        "menu"       $menu
                         "collapsed"  $args.collapsed
                         "horizontal" $horizontal
                         "breakpoint" $args.breakpoint
                         "control"    false
-                        "fs"         $fs
                     ) }}
     
                     {{/* Insert divider if applicable */}}
-                    {{- if and $menus (or $enableLanguage $enableVersions) -}}
+                    {{- if and $menu (or $enableLanguage $enableVersions) -}}
                         {{ partial "inline/divider.html" (dict "breakpoint" $args.breakpoint) }}
                     {{- end -}}
     
@@ -205,7 +204,6 @@
                             "collapsed"  false
                             "id"         .id
                             "baseURL"    $baseURL
-                            "fs"         $fs
                     ) -}}
                     {{- end -}}
 
@@ -216,14 +214,13 @@
                             "baseURL"    $baseURL
                             "breakpoint" $breakpoint
                             "pretty"     $pretty                        
-                            "fs"         $fs
                             "icon"       $langIcon
                         )}}
                     {{- end -}}
 
                     {{/* Insert divider if applicable */}}
-                    {{ $hasControls := gt (len (where $menus "Params.control" true)) 0 }}
-                    {{ if and (or $menus $enableLanguage $enableVersions) (or $enableDarkMode $search.modal $hasControls) }}
+                    {{ $hasControls := gt (len (where $menu "Params.control" true)) 0 }}
+                    {{ if and (or $menu $enableLanguage $enableVersions) (or $enableDarkMode $search.modal $hasControls) }}
                         {{ partial "inline/divider.html" (dict "breakpoint" $args.breakpoint) }}
                     {{ end }}
                                     
@@ -234,25 +231,27 @@
                             "collapsed"  true
                             "id"         .id
                             "toggle"     (site.Params.main.colorMode.toggle)
-                            "fs"         $fs
                         ) -}}
                     {{- end -}}
 
                     {{/* Insert modal search button */}}
                     {{- if $search.modal }}
                         {{ $searchItem := dict "Name" (T "ui_search") "Menu" "Main" "Pre" $search.icon "Params" (dict "icon" true) }}
-                        {{- partial "assets/helpers/navbar-item.html" (dict "menu" $searchItem "page" $page "modal" "#search-modal" "fs" $fs) -}}
+                        {{- partial "assets/helpers/navbar-item.html" (dict
+                            "menu-entry" $searchItem
+                            "page"       $page
+                            "modal"      "#search-modal"
+                        ) -}}
                     {{ end -}}
 
                     {{/* Render custom controls */}}
                     {{- partial "assets/helpers/navbar-render-menu.html" (dict
                         "page"       $page
-                        "menus"      $menus
+                        "menu"       $menu
                         "collapsed"  $args.collapsed
                         "horizontal" $horizontal
                         "breakpoint" $args.breakpoint
                         "control"    true
-                        "fs"         $fs
                     ) }}
                 </ul>
             </div>
