@@ -31,18 +31,6 @@ div.rounded, img.rounded {
     margin-top: var(--overlay-offset);
 }
 
-$utilities: map-merge(
-  $utilities,
-  (
-    "cursor": (
-      property: margin-left margin-right,
-      class: mx,
-      responsive: true,
-      values: auto 0,
-    )
-  )
-);
-
 .tickmark li::marker {
     content: "✓ ";
 }
@@ -52,47 +40,11 @@ $utilities: map-merge(
     color: transparent;
 }
 
-.heading:hover .anchor 
+.heading:hover .anchor
 {
     transition: 0.25s ease-in-out;
     color: $primary;
 }
-
-$utilities: map-merge(
-    $utilities,
-    (
-        "padding-start-wide": (
-            property: padding-left,
-            responsive: true,
-            class: psw,
-            values: (
-                0: 0,
-                1: 1.5 * $spacer,
-                2: 3 * $spacer,
-                3: 6 * $spacer,
-                4: 9 * $spacer,
-                5: 12 * $spacer,
-            )
-        ),
-        "padding-top-wide": (
-            property: padding-top,
-            responsive: true,
-            class: ptw,
-            values: (
-                0: 0,
-                1: 1.5 * $spacer,
-                2: 3 * $spacer,
-                3: 6 * $spacer,
-                4: 9 * $spacer,
-                5: 12 * $spacer,
-            )
-        ),
-        "font-size": map-merge(
-            map-get($utilities, "font-size"),
-            ( responsive: true ),
-        ),
-    )
-);
 
 :root {
     --nav-height: 90px;
@@ -116,52 +68,6 @@ $utilities: map-merge(
 }
 /* stylelint-enable media-feature-range-notation */
 
-$utilities: map-merge(
-    $utilities,
-    (
-        "padding-start-wide": (
-            property: padding-left,
-            responsive: true,
-            class: psw,
-            values: (
-                0: 0,
-                1: 1.5 * $spacer,
-                2: 3 * $spacer,
-                3: 6 * $spacer,
-                4: 9 * $spacer,
-                5: 12 * $spacer,
-            )
-        ),
-        "padding-top-wide": (
-            property: padding-top,
-            responsive: true,
-            class: ptw,
-            values: (
-                0: 0,
-                1: 1.5 * $spacer,
-                2: 3 * $spacer,
-                3: 6 * $spacer,
-                4: 9 * $spacer,
-                5: 12 * $spacer,
-            )
-        ),
-        "font-size": map-merge(
-            map-get($utilities, "font-size"),
-            ( responsive: true ),
-        )
-    )
-);
-
 .width-100 {
     width: 100%;
 }
-
-$utilities: (
-  "width": (
-    property: width,
-    responsive: true,
-    values: (
-      auto: auto
-    )
-  )
-);

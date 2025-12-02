@@ -8,6 +8,9 @@
 @import "theme/variables.scss";
 @import "common/icons.scss";
 
+// Import custom utilities (must be before Bootstrap)
+@import "common/utilities-custom.scss";
+
 // Import Bootstrap configuration (mounted by core Bootstrap module)
 @import "bootstrap-dart.scss"; // note: modified for dart-sass
 
