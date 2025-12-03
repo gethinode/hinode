@@ -74,6 +74,10 @@
 [messages]
     placement = "bottom-right"
 
+[pages]
+    readingTime = true
+    wordCount = true
+
 [dam]
     dimensions = "dimensions.yml"
     videoCodecs = [
