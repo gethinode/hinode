@@ -57,7 +57,7 @@
 
 {{- if $isExternal }}
     {{- if $tab }}{{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer nofollow\"" }}{{ end -}}
-    {{- if $cue }}{{ $suffix = partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}{{ end -}}
+    {{- if $cue }}{{ $suffix = partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs my-auto") }}{{ end -}}
 {{ else if $menuURL }}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url.Path "page" $page) }}
     {{- if not $ref -}}
@@ -115,7 +115,7 @@
                 {{ if hasPrefix . "<i" }}
                     {{ . | safeHTML }}
                 {{ else }}
-                    {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" .) "spacing" false )}}
+                    {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fw my-auto" .) "spacing" false )}}
                 {{ end }}
             {{ end -}}
             <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-{{ . }}-none {{ end }}">
