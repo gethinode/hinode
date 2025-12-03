@@ -172,7 +172,7 @@
                     {{ partial "assets/search-input.html" (dict "class" (printf "mt-4 mt-%s-0 me-%s-3" $args.breakpoint $args.breakpoint)) }}
                 {{ end -}}
                 
-                <ul class="navbar-nav navbar-nav-scroll {{ if $flex }}d-flex w-100{{ else }}ms-auto{{ end }}">
+                <ul class="navbar-nav navbar-nav-scroll {{ if $flex }}d-flex flex-grow-1{{ else }}ms-auto{{ end }}">
                     {{/* Render top-menu items (maximum depth of 2) */}}
                     {{- partial "assets/helpers/navbar-render-menu.html" (dict
                         "page"       $page
