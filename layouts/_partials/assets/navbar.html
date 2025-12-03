@@ -236,7 +236,7 @@
 
                     {{/* Insert modal search button */}}
                     {{- if $search.modal }}
-                        {{ $searchItem := dict "Name" (T "ui_search") "Menu" "Main" "Pre" $search.icon "Params" (dict "icon" true) }}
+                        {{ $searchItem := dict "Name" (T "ui_search") "Menu" "Main" "Pre" $search.icon "Params" (dict "icon" true "control" true) }}
                         {{- partial "assets/helpers/navbar-item.html" (dict
                             "menu-entry" $searchItem
                             "page"       $page
