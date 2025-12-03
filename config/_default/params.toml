@@ -120,6 +120,10 @@
     placement = "bottom-right"
 # toml-docs-end messages
 
+[pages]
+    readingTime = true
+    wordCount = true
+
 # toml-docs-start sharing
 [sharing]
     enabled = true
