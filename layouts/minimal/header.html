@@ -1,11 +1,18 @@
 {{/* Initialize global variables */}}
-{{- $sharing := $.Scratch.Get "sharing" -}}
+{{- $size := .Site.Params.style.title.size | default 4 -}}
+{{- $headingStyle := .Site.Params.style.title.headingStyle | default "display" -}}
+{{- $contentStyle := .Site.Params.style.title.contentStyle | default "lead text-muted" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
+{{/* Initialize local variables */}}
+{{- $breakpoint := .Scratch.Get "breakpoint" -}}
 {{ $title := .Title }}
-{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
+{{ if and .Site.Params.main.titleCase (not .Params.exact) }}{{ $title = title $title }}{{ end }}
 
-{{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
-{{- if $sharing }}
-    <div class="py-3 d-flex align-items-center"><span class="me-1">{{ T "shareLink" " " }}</span>{{ partial "page/sharing.html" . }}</div>
-{{ end -}}
-<p class="lead mb-5">{{ .Description }}</p>
+{{/* Display title */}}
+{{ with $title }}<h1 id="{{ anchorize . }}" class="{{ $headingStyle }}-{{ $size }} pt-1">{{ . }}</h1>{{ end }}
+
+{{/* Display description */}}
+{{ with .Description }}
+    <div class="{{ $contentStyle }} py-{{ $padding.y }}">{{ . | $.RenderString | safeHTML }}</div>
+{{ end }}
