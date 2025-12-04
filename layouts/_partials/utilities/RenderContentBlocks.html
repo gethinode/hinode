@@ -61,4 +61,4 @@
 {{ end }}
 
 {{/* Render content blocks */}}
-{{ partial "bookshop_partial" (slice "page" $blocks) }}
+{{ return trim (partial "bookshop_partial" (slice "page" $blocks)) "\n\r " }}
