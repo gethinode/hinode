@@ -1,0 +1,106 @@
+{{/* 
+    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "team" "args" .)}}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "component-library/components/team/team.hugo.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Initialize local variables */}}
+{{ $pages := slice }}
+{{ $result := partial "assets/live-pages.html" (dict 
+	"page"       $args.page
+	"section"    $args.input.section
+	"nested"     $args.input.nested
+	"keywords"   $args.input.keywords
+	"categories" $args.input.categories
+	"tags"       $args.input.tags
+	"sort"       $args.input.sort
+	"reverse"    $args.input.reverse
+)}}
+{{ $pages = $result.pages }}
+
+<!-- Define more button -->
+{{ $moreButton := site.Params.modules.bookshop.team.moreButton | default false }}
+{{ $moreTitle := T "more" (pluralize $args.input.section) }}
+{{ $moreLink := $args.input.section }}
+{{ $moreType := "button" }}
+{{ $moreIcon := "" }}
+{{ with $args.more }}
+	{{ if .title }}{{ $moreTitle = .title }}{{ end }}
+	{{ if .link }}{{ $moreLink = .link }}{{ end }}
+	{{ if index . "link-type" }}{{ $moreType = index . "link-type" }}{{ end }}
+	{{ if .icon }}{{ $moreIcon = .icon }}{{ end }}
+{{ end }}
+
+{{ $paginate := $args.paginate }}
+{{ if and $paginate page.IsPage }}
+    {{ partial "utilities/LogWarn.html" (dict 
+        "partial" "component-library/components/team/team.hugo.html"
+        "msg"     "Pagination not supported"
+        "file"    page.File
+    )}}
+	{{ $paginate = false }}
+{{ end }}
+
+{{/* Main code */}}
+{{ if not $error }}
+	{{ if or (gt (len $pages) 0) (not $args.hideEmpty) }}
+		{{- partial "assets/section-title.html" (dict
+			"heading" $args.heading
+			"justify" $args.justify
+			"class" (printf "pb-%d" $padding.y))
+		-}}
+
+		{{ $partial := "assets/card-group.html" }}
+		{{ $params := dict }}
+		{{- $params = merge $params (dict
+			"page"           page
+			"list"           $pages
+			"cols"           $args.cols
+			"limit"          $args.limit
+			"padding"        $args.padding
+			"href"           (cond $moreButton $moreLink "")
+			"href-force"     (gt $result.total (len $result.pages))
+		)}}
+
+		{{ $params = merge $params (dict 
+			"ratio"          "1x1"
+			"header-style"   $args.headerStyle
+			"body-style"     $args.bodyStyle
+			"footer-style"   $args.footerStyle
+			"class"          (or $args.class "border-0")
+			"align"          "center"
+			"orientation"    $args.orientation
+			"href-title"     (cond $moreButton $moreTitle "")
+			"icon-rounded"   $args.iconRounded
+			"icon-style"     $args.iconStyle
+			"hook"           "assets/live-card.html"
+			"more-link-type" $moreType
+			"more-link-icon" $moreIcon
+			"pagination"     $args.pagination
+			"paginate"       $paginate
+		) -}}
+		{{ if gt (len $pages) 0 }}
+			{{ partial $partial $params }}
+		{{ else }}
+			<p class="pt-{{ $padding.y }}">{{- T "emptyList" }}.</p>
+		{{ end }}
+	{{ end }}
+{{ end }}
