@@ -19,16 +19,17 @@
 {{ if and (not $args.err) (or $args.image $args.icon) }}
     <div class="hero-image-container {{ if $args.image }}d-flex justify-content-center {{ with $args.justify }} justify-content-md-{{ . }}{{ end }}{{ end }}">
         {{ partial "assets/featured-illustration.html" (dict 
-            "page"    $args.page
-            "icon"    $args.icon
-            "image"   $args.image
-            "anchor"  $args.anchor
-            "mode"    $args.mode
-            "ratio"   $args.ratio
-            "sizes"   $args.sizes
-            "title"   $args.title
-            "wrapper" $args.wrapper
-            "class"   $args.class
+            "page"     $args.page
+            "icon"     $args.icon
+            "image"    $args.image
+            "anchor"   $args.anchor
+            "mode"     $args.mode
+            "ratio"    $args.ratio
+            "portrait" $args.portrait
+            "sizes"    $args.sizes
+            "title"    $args.title
+            "wrapper"  $args.wrapper
+            "class"    $args.class
         ) }}
         {{ if $args.imageOverlay }}<div class="hero-image-overlay"></div>{{ end }}
     </div>
