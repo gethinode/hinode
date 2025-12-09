@@ -47,7 +47,8 @@
 
 <!-- Define more button -->
 {{ $moreButton := site.Params.modules.bookshop.articles.moreButton | default false }}
-{{ $moreTitle := T "more" (pluralize $args.input.section) }}
+{{ $title := or $args.input.section $args.input.categories (T "article") }}
+{{ $moreTitle := T "more" (pluralize $title) }}
 {{ $moreLink := $args.input.section }}
 {{ $moreType := "button" }}
 {{ $moreIcon := "" }}
