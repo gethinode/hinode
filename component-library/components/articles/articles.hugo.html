@@ -45,6 +45,10 @@
 	(dict "ratio" "1x1"  "orientation" "stacked" "portrait" false "width" "3")
 }}
 
+{{ if gt (len $args.styles) 0 }}
+	{{ $styles = $args.styles }}
+{{ end }}
+
 <!-- Define more button -->
 {{ $moreButton := site.Params.modules.bookshop.articles.moreButton | default false }}
 {{ $title := or $args.input.section $args.input.categories (T "article") }}
@@ -99,6 +103,7 @@
 				"gutter"       1
 				"ratio"        "1x1"
 				"orientation"  "horizontal-sm"
+				"animated"     $args.animated
 				"styles"       (cond $args.bento $styles "")
 			) -}}
 		{{ else }}
