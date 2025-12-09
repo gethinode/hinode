@@ -69,20 +69,3 @@ $btn-padding-y-xs:            .08rem !default;
 $btn-padding-x-xs:            0.3rem !default;
 $btn-font-size-xs:            $font-size-base * .6 !default;
 $btn-border-radius-xs:        .2rem !default;
-
-// Initialize utilities map if not already defined
-$utilities: () !default;
-
-// Make the font-size class responsive
-$utilities: map-merge(
-  $utilities,
-  (
-    "font-size": (
-      responsive: true,
-      rfs: true,
-      property: font-size,
-      class: fs,
-      values: $font-sizes
-    ),
-  )
-);

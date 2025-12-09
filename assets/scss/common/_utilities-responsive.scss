@@ -1,0 +1,16 @@
+// Responsive utilities that require Bootstrap variables to be defined
+// Must be imported AFTER bootstrap.scss
+
+// Make the font-size class responsive (requires $font-sizes from Bootstrap)
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-size": (
+      responsive: true,
+      rfs: true,
+      property: font-size,
+      class: fs,
+      values: $font-sizes
+    ),
+  )
+);
