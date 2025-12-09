@@ -75,18 +75,3 @@ $utilities: map-merge(
         )
     )
 );
-
-
-// Make the font-size class responsive
-$utilities: map-merge(
-  $utilities,
-  (
-    "font-size": (
-      responsive: true,
-      rfs: true,
-      property: font-size,
-      class: fs,
-      values: $font-sizes
-    ),
-  )
-);
