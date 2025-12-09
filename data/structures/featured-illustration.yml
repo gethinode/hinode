@@ -5,6 +5,7 @@ arguments:
   image:
   mode:
   ratio:
+  portrait:
   sizes:
   title:
   wrapper:

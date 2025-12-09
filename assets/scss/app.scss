@@ -12,6 +12,9 @@
 // Import Bootstrap configuration (mounted by core Bootstrap module)
 @import "bootstrap.scss";
 
+// Import responsive utilities (requires Bootstrap variables to be defined)
+@import "common/utilities-responsive.scss";
+
 // Include dark mode overrides
 @import "common/variables-dark.scss";
 

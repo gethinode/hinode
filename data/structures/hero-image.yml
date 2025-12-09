@@ -6,6 +6,7 @@ arguments:
   anchor:
   mode:
   ratio:
+  portrait:
   sizes:
   title:
   wrapper:
