@@ -66,7 +66,7 @@ arguments:
   styles:
     release: v0.27.0
     optional: true
-    type: dict
+    type: styles
   button-label:
     release: v1.0.0
   more-link-icon:

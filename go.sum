@@ -68,6 +68,8 @@ github.com/gethinode/mod-utils/v4 v4.21.6 h1:txvb0yHA9aIhP4IEHmxzAt3hpeuAJZZDIfC
 github.com/gethinode/mod-utils/v4 v4.21.6/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
 github.com/gethinode/mod-utils/v5 v5.0.0 h1:iF8FtgzQu9BW7R94sJ77gltSZO2QkAv60EMNvtTSpIA=
 github.com/gethinode/mod-utils/v5 v5.0.0/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
+github.com/gethinode/mod-utils/v5 v5.1.0 h1:wHc/lb8n1x51FtMPief99KTrdIOadoJ+bbXBvsvqOKs=
+github.com/gethinode/mod-utils/v5 v5.1.0/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0 h1:55phPhe6fDjfjG0jX4+br3nLORKgjgx8abZUdI0YJRA=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
