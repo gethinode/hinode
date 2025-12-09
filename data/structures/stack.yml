@@ -87,8 +87,7 @@ arguments:
       Enables card animations.
     release: v0.27.0
   styles:
-    type:
-      - '[]map[string]interface {}'
+    type: styles
     optional: true
     comment: >-
       Styles to apply to the individual cards. Supported elements are `ratio`,

@@ -42,6 +42,13 @@ blueprint:
     subtle:
   scroll:
   bento:
+  animated:
+  styles:
+    - ratio:
+      orientation:
+      stacked:
+      portrait:
+      width:
   cover:
   header-style:
   body-style:
