@@ -5,7 +5,7 @@
     {{- errorf "partial [head/stylesheet.html] - Invalid value for param 'transpiler': %s" $transpiler -}}
 {{- end -}}
 {{- if site.Params.main.build.silenceDeprecations -}}
-    {{- $silence = (slice "import" "mixed-decls" "color-functions" "global-builtin") -}}
+    {{- $silence = (slice "import" "color-functions" "global-builtin") -}}
 {{- end -}}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
