@@ -193,6 +193,11 @@
     white-space: nowrap;
 }
 
+.navbar .nav-item:first-of-type {
+    // double padding between brand logo / search bar and first nav item
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+}
+
 .navbar-collapse .dropdown {
     display: inline;
     align-items: normal;

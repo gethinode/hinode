@@ -74,63 +74,29 @@
     ) }}
 {{ end }}
 
-{{ $imgArgs := dict
-    "page"    page
-    "icon"    $args.icon
-    "image"   $args.image
-    "anchor"  $args.anchor
-    "mode"    true
-    "sizes"   "20vw"
-    "title"   (T "heroImage")
-    "mode"    $args.mode
-}}
-
 {{/* Main code */}}
-<div class="text-{{ $args.heading.align }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }}">
+<div class="section-title text-{{ $args.heading.align }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }}">
     {{ if and $preheading (eq $arrangement "first") }}
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.next }}-2 p-0">
+                <div class="col-12 col-{{ $breakpoint.current }}-2 p-0">
                     {{ with $preheading }}
                         <p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">
                             {{ . | page.RenderString | safeHTML }}
                         </p>
                     {{ end }}
                 </div>
-                <div class="col-12 col-{{ $breakpoint.prev }}-8 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 p-0">
+                <div class="col-12 col-{{ $breakpoint.current }}-8 p-0">
                     {{ $header }}
                     {{ with $args.heading.content }}
                         <div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>
                     {{ end }}
                     {{ $links }}
                 </div>
-                <div class="col-12 col-{{ $breakpoint.prev }}-4 col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 p-0 ps-{{ $breakpoint.prev }}-4">
-                    {{ $wrapper := (printf "col-4 col-%s-12 mx-auto pt-%d pt-%s-0" $breakpoint.prev $padding.y $breakpoint.prev) }}
-                    {{ partial "assets/featured-illustration.html" (merge $imgArgs (dict "wrapper" $wrapper)) }}
-                </div>
             </div>
         </div>
 
     {{/* Place above */}}
-    {{ else if or $args.icon $args.image }}
-        <div class="container-fluid">
-            <div class="row p-0">
-                <div class="col-12 col-{{ $breakpoint.current }}-10 p-0">
-                    {{ with $preheading }}
-                        <p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">
-                            {{ . | page.RenderString | safeHTML }}
-                        </p>
-                    {{ end }}
-                    {{ $header }}
-                    {{ with $args.heading.content }}<div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | page.RenderString | safeHTML }}</div>{{ end }}
-                    {{ $links }}
-                </div>
-                <div class="col-12 col-{{ $breakpoint.current }}-2 p-0 pt-2 text-center">
-                    {{ $wrapper := (printf "col-4 col-%s-12 mx-auto pt-%d pt-%s-0" $breakpoint.prev $padding.y $breakpoint.prev) }}
-                    {{ partial "assets/featured-illustration.html" (merge $imgArgs (dict "ratio" $args.ratio "wrapper" "mx-auto")) }}
-                </div>
-            </div>
-        </div>
     {{ else }}
         {{ with $preheading }}
             <p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">

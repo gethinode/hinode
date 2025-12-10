@@ -119,7 +119,7 @@
         "links"         $args.links
         "link-type"     (or $args.linkType $args.type)
         "class"         "hero-title"
-        "arrangement"   $arrangement
+        "arrangement"   (cond (and $illustration (ne $args.orientation "stacked")) "above" $arrangement)
         "justify"       $args.justify
         "heading-style" $args.headingStyle
         "content-style" $args.contentStyle
