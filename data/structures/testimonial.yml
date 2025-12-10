@@ -1,0 +1,23 @@
+comment: Displays a single testimonial card.
+arguments:
+  page:
+  content: 
+    type: string
+    optional: false
+    comment: Quote to include in the testimonial.
+  icon:
+  logo:
+  contact:
+  role:
+  image:
+  url:
+  padding:
+  show-controls:
+    type: bool
+    optional: true
+    default: false
+    comment: ->
+      Trigger to add margins for carousel controls. If set,
+      the card includes a quote icon on the right-hand side too.
+  class:
+  link:

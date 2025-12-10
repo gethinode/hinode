@@ -186,3 +186,11 @@
   translation: "Laat je gegevens achter en dan neem ik contact met je op."
 - id: contactAction
   translation: "Neem contact op"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Vorige klantaanbeveling"
+- id: testimonialNext
+  translation: "Volgende klantaanbeveling"
+- id: testimonialCase
+  translation: "Bekijk klantervaring"

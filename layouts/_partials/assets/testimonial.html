@@ -1,0 +1,122 @@
+<!-- 
+    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+<!-- Inline partial -->
+{{ define "_partials/inline/testimonial-inner.html" }}
+    <div class="d-flex flex-column {{ .class }} {{ .padding }} h-100">
+        <div class="col-6 col-md-3 p-0">
+            {{ $class := "" }}
+            {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
+            {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
+
+            {{ partial "assets/featured-illustration.html" (dict
+                "page"    .page
+                "image"   .logo
+                "icon"    .icon
+                "class"   $class
+                "title"   $title
+                "sizes"   "(min-width: 768px) 33.3vw, 100vw"
+                "wrapper" "col-9 py-4 py-md-0"
+            ) }}			
+        </div>
+        <div class="fs-md-5 pt-3 h-100">
+            {{ .content | .page.RenderString }}
+        </div>
+        <div class="container pt-3 p-0">
+            <div class="d-flex p-0">
+                {{ if and .image .contact }}
+                    <div class="p-0">
+                        {{- partial "assets/live-image.html" (dict 
+                            "src"   .image
+                            "ratio" "1x1"
+                            "class" "rounded-circle testimonial-img"
+                            "title" .contact
+                            "mode"  false
+                            "page"  .page
+                        ) }}
+                    </div>
+                    <div class="flex-grow-1 p-0 align-self-center ps-2">
+                        <div><b>
+                            {{ if .url }}
+                                {{ partial "assets/link.html" (dict "href" .url "text" .contact "page" .page) }}
+                            {{ else }}
+                                {{ .contact }}
+                            {{ end }}
+                        </b></div>
+                        {{ with .role }}<div>{{ . }}</div>{{ end }}
+                    </div>
+                {{ else if .link }}
+                    {{ partial "assets/button.html" (dict 
+                        "href"    .link
+                        "title"   (T "testimonialCase")
+                        "class"   "btn-testimonial"
+                        "icon"    "fas chevron-right"
+                        "outline" true
+                    ) }}
+                {{ end }}
+            </div>
+        </div>
+    </div>
+{{ end }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "testimonial" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/testimonial.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{ end }}
+
+<!-- Initialize arguments and default values -->
+{{- $url := "" -}}
+{{ with $args.link }}
+    {{ $link := partial "utilities/GetLink.html" (dict "page" page "href" .) }}
+    {{ if not $link.error }}
+        {{ $url = $link.destination }}
+    {{ else }}
+        {{ with $args.page.File }}
+            {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $link.msg }}
+        {{ else }}
+            {{ warnf "Error processing link: %s" $link.msg }}
+        {{ end }}
+    {{ end }}
+{{ else }}
+    {{ $url = $args.url }}
+{{ end }}
+
+{{/* Main code */}}
+{{ if not $args.err }}
+    <div class="h-100 rounded container-fluid {{ $args.class }} p-{{ $args.padding }}">
+        {{ $params := dict 
+            "page"        $args.page
+            "content"     $args.content
+            "icon"        $args.icon
+            "logo"        $args.logo
+            "contact"     $args.contact
+            "role"        $args.role
+            "image"       $args.image
+            "padding"     $args.padding
+            "url"         $url
+            "link"        $url    
+        }}
+
+        {{ if $args.showControls }}
+            <div class="row">
+                <div class="col-2"></div>
+
+                {{ partial "inline/testimonial-inner.html" (merge $params (dict "class" "col-8 px-0 mb-5")) }}
+
+                <div class="testimonial-icon col-2 ps-0 p-{{ $args.padding }} text-end">
+                    {{ partial "assets/icon.html" (dict "icon" "fas quote-right fa-2x" "spacing" false) }}
+                </div>
+            </div>
+        {{ else }}
+            {{ partial "inline/testimonial-inner.html" $params }}
+        {{ end }}
+    </div>
+{{ end }}
