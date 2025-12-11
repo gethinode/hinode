@@ -16,7 +16,6 @@
 {{- $class := index . 2 | default "p-0" -}}
 {{- $bgclass := index . 3 | default "" -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
-{{- with index $component_props "padding" }}{{ $padding = dict "x" . "y" . }}{{ end -}}
 {{- $component_path := partial "_bookshop/helpers/component_key" $component_name -}}
 {{- $flat_component_path := partial "_bookshop/helpers/flat_component_key" $component_name -}}
 
