@@ -52,7 +52,11 @@ div.rounded, img.rounded {
 
 .section-cover {
     min-height: calc(var(--section-height) - var(--overlay-offset));
-}    
+}
+
+.section-title {
+    width: 100%;
+}
 
 @include media-breakpoint-up(xxl) {
     .section-cover {
