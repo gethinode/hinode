@@ -73,20 +73,18 @@
 {{ end }}
 
 <!-- Initialize arguments and default values -->
-{{- $url := "" -}}
+{{- $link := "" -}}
 {{ with $args.link }}
-    {{ $link := partial "utilities/GetLink.html" (dict "page" page "href" .) }}
-    {{ if not $link.error }}
-        {{ $url = $link.destination }}
+    {{ $href := partial "utilities/GetLink.html" (dict "page" $args.page "href" .) }}
+    {{ if not $href.error }}
+        {{ $link = $href.href }}
     {{ else }}
         {{ with $args.page.File }}
-            {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $link.msg }}
+            {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $href.msg }}
         {{ else }}
-            {{ warnf "Error processing link: %s" $link.msg }}
+            {{ warnf "Error processing link: %s" $href.msg }}
         {{ end }}
     {{ end }}
-{{ else }}
-    {{ $url = $args.url }}
 {{ end }}
 
 {{/* Main code */}}
@@ -101,8 +99,8 @@
             "role"        $args.role
             "image"       $args.image
             "padding"     $args.padding
-            "url"         $url
-            "link"        $url    
+            "url"         $args.url
+            "link"        $link  
         }}
 
         {{ if $args.showControls }}
