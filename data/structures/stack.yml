@@ -6,30 +6,35 @@ comment: >-
   behavior). Be aware a page can only contain one paginator at a time.
 arguments:
   page:
-    type:
-      - '*hugolib.pageState'
-      - '*hugolib.pageForShortcode'
-    optional: true
-    comment: Context of the current page.
-    group: partial
   gutter:
-    type: int
-    optional: true
-    default: 4
-    comment: Gutter between columns in a group.
-    options:
-      min: 0
-      max: 5
     release: v0.19.0
   list:
-    type:
-      - 'page.Pages'
-      - 'resource.Resources'
-      - '[]map[string]interface {}'
-    optional: true
-    comment: Array of pages or structured content to be rendered as cards.
     group: partial
   limit:
+  cols:
+    release: v0.19.0
+  href:
+    group: partial
+  href-force:
+    release: v1.16.2
+    group: partial
+  href-title:
+    release: v2.0.0
+  link-type:
+    release: v0.23.18
+  animated:
+    release: v0.27.0
+  styles:
+    type:
+      - styles
+      - '[]map[string]interface {}'
+    optional: true
+    comment: >-
+      Styles to apply to the individual cards. Supported elements are `ratio`,
+      `orientation`, `portrait`, and `width`.
+  padding:
+    release: v1.16.2
+  # deprecated arguments
   max:
     type: int
     optional: true
@@ -39,36 +44,14 @@ arguments:
       min: 1
     deprecated: v1.16.2
     alternative: limit
-  cols:
-    type: select
-    optional: true
-    default: "3"
-    comment: Number of grid columns.
-    options:
-      values:
-        - "1"
-        - "2"
-        - "3"
-        - "4"
-        - "5"
-        - "auto"
-    release: v0.19.0
-  href:
-    type: string
-    optional: true
-    comment: >-
-      Address for the button or hyperlink. If set, a button is added if the
-      list exceeds the maximum number of cards to display.
-    group: partial
-  href-force:
-    release: v1.16.2
-    group: partial
   hrefTitle:
     type: string
     optional: true
     comment: >-
       Title of the button or hyperlink as companion to href.
     group: partial
+    deprecated: v2.0.0
+    alternative: href-title
   buttonType:
     type: select
     optional: true
@@ -79,18 +62,5 @@ arguments:
       values:
         - link
         - button
-  animated:
-    type: bool
-    optional: true
-    default: false
-    comment: >-
-      Enables card animations.
-    release: v0.27.0
-  styles:
-    type: styles
-    optional: true
-    comment: >-
-      Styles to apply to the individual cards. Supported elements are `ratio`,
-      `orientation`, `portrait`, and `width`.
-  padding:
-    release: v1.16.2
+    deprecated: v2.0.0
+    alternative: link-type
