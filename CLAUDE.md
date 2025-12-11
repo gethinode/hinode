@@ -183,5 +183,75 @@ Test with both main site and exampleSite:
 - Main branch: `main` (production releases)
 - Development branch: `develop`
 - Uses semantic-release for automated versioning
-- Commits follow conventional commits (enforced by commitlint)
-- Husky pre-commit hooks run linters
+- Commits follow Angular Conventional Commits (enforced by commitlint)
+- Husky pre-commit hooks run linters automatically
+
+### Commit Message Format
+
+Follow Angular Conventional Commits format:
+
+```text
+<type>(<scope>): <subject>
+
+<body>
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
+```
+
+**Common types:**
+
+- `feat` - New feature
+- `fix` - Bug fix
+- `refactor` - Code refactoring
+- `style` - Styling changes (CSS/SCSS only, no logic changes)
+- `docs` - Documentation changes
+- `test` - Adding or updating tests
+- `chore` - Build process, dependencies, tooling
+
+**Common scopes:**
+
+- `i18n` - Internationalization/translations
+- `components` - Component changes
+- `docs` - Documentation
+- `theme` - Theme styling
+- `build` - Build process
+
+**Example commits:**
+
+- `feat(i18n): add missing translations for testimonials`
+- `fix(components): correct variable reference in testimonials`
+- `style: add width constraint to section-title class`
+- `refactor(components): improve testimonials component layout`
+
+### Linting & Code Quality
+
+Run linters before committing (pre-commit hooks will enforce this):
+
+```bash
+npm test              # Run all linters (recommended before commits)
+npm run lint:scripts  # Check JavaScript
+npm run lint:styles   # Check SCSS
+npm run lint:markdown # Check Markdown documentation
+```
+
+**Linting tools:**
+
+- **ESLint** (`.eslintrc.yml`) - JavaScript linting with ES6 and browser environment
+- **Stylelint** (`.stylelintrc.json`) - SCSS linting with standard-scss rules
+- **Markdownlint** (`.markdownlint-cli2.jsonc`) - Markdown file linting
+
+**Markdown linting rules** (`.markdownlint-cli2.jsonc`):
+
+- Enforced: MD040 (fenced code blocks must have language specified), MD032 (lists must be surrounded by blank lines), and others
+- Disabled rules: MD013 (line length), MD024 (duplicate headers), MD026 (trailing punctuation), MD034 (bare URLs), MD051 (link fragments), MD053 (link reference definitions), MD055 (table pipe escaping), MD056 (table header/body cell count)
+- Ignored: `node_modules/`, `CHANGELOG.md`
+
+**Important notes:**
+
+- Pre-commit hooks run automatically when committing
+- If hooks modify files (e.g., formatting), the commit will fail and you should commit again
+- Always test changes with the example site: `npm run build:example`
+- Check for i18n warnings when modifying translations or components using testimonials
+- Ensure all language variants build without warnings
