@@ -2,6 +2,7 @@
     {{- $blocks := $.Scratch.Get "blocks" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
     {{- $sidebar := partial "page/sidebar" . -}}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
 
     {{ with $sidebar }}
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-sidebar" aria-labelledby="offcanvas-label">
@@ -18,12 +19,12 @@
     {{ $blocks | safeHTML }}
 
     {{ if (gt (len .RawContent) 0) }}
-        <div class="container-xxl flex-fill p-4 px-xxl-0">
+        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
                 <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
                     {{ $sidebar | safeHTML }}
                 </div>
-                <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 py-4">
+                <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
                     {{ .Render "header" }}
 
                     {{ .Render "body" }}
