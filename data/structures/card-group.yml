@@ -64,9 +64,11 @@ arguments:
   valign:
     release: v0.27.0
   styles:
+    type:
+      - styles
+      - '[]map[string]interface {}'
     release: v0.27.0
     optional: true
-    type: styles
   button-label:
     release: v1.0.0
   more-link-icon:
