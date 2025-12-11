@@ -28,6 +28,10 @@ div.rounded, img.rounded {
     --max-section-height: 1024px;
 
     min-height: 100vh;
+    margin-top: var(--navbar-height);
+}
+
+main:has(> * > section:first-of-type.section-cover) {
     margin-top: var(--overlay-offset);
 }
 
