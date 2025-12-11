@@ -189,3 +189,11 @@
   translation: "Bitte hinterlassen Sie Ihre Kontaktdaten, damit wir uns mit Ihnen in Verbindung setzen können."
 - id: contactAction
   translation: "Kontakt aufnehmen"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Vorheriges Testimonial"
+- id: testimonialNext
+  translation: "Nächstes Testimonial"
+- id: testimonialCase
+  translation: "Kundenfallstudie anzeigen"
