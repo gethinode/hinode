@@ -79,9 +79,9 @@
 		</button>
 	</div>
 {{ else }}
-	<div class="container p-0">
+	<div class="testimonial-grid container p-0">
 		<div class="row {{ $colGrid }} g-3">
-			{{ range .testimonials }}
+			{{ range $args.testimonials }}
 				<div class="col">
 					{{ partial "assets/testimonial.html" (dict 
 						"page"        page

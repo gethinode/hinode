@@ -60,6 +60,12 @@
 - id: download
   translation: "Baixar artigo"
 
+# Hero
+- id: backgroundImage
+  translation: "Imagem de fundo"
+- id: heroImage
+  translation: "Imagem principal"
+
 # Pagination
 - id: paginationNav
   translation: "Navegação da página"
@@ -97,6 +103,10 @@
   translation: "Veja também"
 - id: sectionMenu
   translation: "Selecionar um tópico"
+- id: tocShowMore
+  translation: "Mostrar {{ . }} mais"
+- id: tocShowLess
+  translation: "Mostrar menos"
 
 # Sidebar
 - id: toggleSidebar
@@ -167,3 +177,23 @@
 # Image
 - id: image
   translation: imagem
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "Clique para expandir"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "Interessado neste tópico?"
+- id: contactBody
+  translation: "Por favor, deixe seus detalhes de contato para que possamos entrar em contato com você."
+- id: contactAction
+  translation: "Entre em contato"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Depoimento anterior"
+- id: testimonialNext
+  translation: "Próximo depoimento"
+- id: testimonialCase
+  translation: "Ver estudo de caso do cliente"
