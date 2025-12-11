@@ -275,7 +275,7 @@
                 "class"        (printf "mb-1 m-0 text-%s" $args.align)
             )}}
         {{- end -}}
-        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }}card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
+        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }} card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
             {{ if $args.overlay }}<div class="flex-grow-1"></div>{{ end }}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict
