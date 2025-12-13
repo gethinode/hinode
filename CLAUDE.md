@@ -248,6 +248,26 @@ npm run lint:markdown # Check Markdown documentation
 - Disabled rules: MD013 (line length), MD024 (duplicate headers), MD026 (trailing punctuation), MD034 (bare URLs), MD051 (link fragments), MD053 (link reference definitions), MD055 (table pipe escaping), MD056 (table header/body cell count)
 - Ignored: `node_modules/`, `CHANGELOG.md`
 
+**Commit message linting** (enforced by commitlint via pre-commit hooks):
+
+- Body lines must not exceed 100 characters (enforced by `body-max-line-length`)
+- When formatting multi-line bullet points, break long lines at 100 characters
+- Use indentation (2 spaces) for continuation lines to maintain readability
+
+Example of correctly formatted commit message:
+
+```text
+refactor: consolidate version detection into modular partials
+
+- Replace theme-version.html with improved version.html partial
+- Extract version detection logic into reusable modular partials
+  (mod-version and env-version)
+- Update version regex to support both major version (v2) and
+  non-versioned module paths
+- Add fallback to HUGO_HINODE_VERSION environment variable for
+  CI/CD builds
+```
+
 **Important notes:**
 
 - Pre-commit hooks run automatically when committing
