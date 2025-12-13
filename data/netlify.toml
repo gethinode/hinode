@@ -1,7 +1,7 @@
 # toml-docs-start netlify
 [build]
     publish = "exampleSite/public"
-    command = "npm run build:example"
+    command = "HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example"
 
 [build.environment]
     DART_SASS_VERSION = "1.89.2"
@@ -13,14 +13,14 @@
 # toml-docs-end netlify
 
 [context.deploy-preview]
-    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+    command = "HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example -- -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
-    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+    command = "HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example -- -b $DEPLOY_PRIME_URL"
 
 [dev]
     framework = "#custom"
-    command = "npm run start:example"
+    command = "HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run start:example"
     targetPort = 1313
     port = 8888
     publish = "public"

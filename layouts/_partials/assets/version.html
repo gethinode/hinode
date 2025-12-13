@@ -4,11 +4,33 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{- $file := "go.mod" -}}
-{{- $regex := printf `github.com\/gethinode\/hinode v.*(\r\n|\r|\n)` -}}
-{{- $match := findRE $regex (readFile $file) -}}
-{{- $match = index $match 0 -}}
+{{/* Retrieves the Hinode theme version from the site's go.mod file (when initialized as module.) */}}
+{{- define "_partials/inline/mod-version.html" -}}
+    {{- $file := "go.mod" -}}
+    {{- $regex := printf `github.com/gethinode/hinode(\/v[0-9]+)? v.*(\r\n|\r|\n)` -}}
+    {{- $match := findRE $regex (readFile $file) -}}
 
-{{- if $match -}}
-    {{- printf "%s" (trim (index (split $match " ") 1) " \r\n,\"") -}}
+    {{- $result := "" -}}
+    {{- if gt (len $match) 0 -}}
+        {{- $result = (index (split (index $match 0) " ") 1) -}}
+        {{- $result = strings.TrimPrefix "v" $result -}}
+    {{- end -}}
+
+    {{- return $result -}}
 {{- end -}}
+
+{{/* 
+    Fallback to initialize the Hinode version from an environment variable. This applies to the main
+    Hinode repository including the example site (which is published to demo.gethinode.com). The following
+    command initializes the HUGO_HINODE_VERSION using the relevant git tag on macOS/Linux:
+    HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example
+*/}}
+{{- define "_partials/inline/env-version.html" -}}
+    {{ return getenv "HUGO_HINODE_VERSION"  }}
+{{- end -}}
+
+{{- $version := partial "inline/mod-version.html" . -}}
+{{ if not $version }}
+    {{- $version = partial "inline/env-version.html" . | default "unknown-revision" -}}
+{{ end }}
+{{- print $version -}}
