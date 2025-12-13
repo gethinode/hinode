@@ -193,9 +193,15 @@
     white-space: nowrap;
 }
 
-.navbar .nav-item:first-of-type {
+.navbar-collapse:not(.show, .collapsing) .nav-item:first-of-type {
     // double padding between brand logo / search bar and first nav item
+    // only apply when navbar is fully expanded (not toggled to show)
     padding-left: var(--bs-navbar-nav-link-padding-x);
+}
+
+// Remove padding when navbar is toggled open on small devices
+.navbar-collapse.show .nav-item:first-of-type {
+    padding-left: 0;
 }
 
 .navbar-collapse .dropdown {
