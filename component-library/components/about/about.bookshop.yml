@@ -28,6 +28,7 @@ blueprint:
     class:
     anchor:
     mode:
+    width:
   order:
   width:
   justify:
