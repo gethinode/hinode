@@ -29,9 +29,10 @@
     {{- $color := .color -}}
     {{- $description := .description -}}
     {{- $links := .links -}}
+    {{- $class := .class }}
     
     {{- if $href -}}
-        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
+        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link {{ $class }}">
             {{ if or $title $links }}
                 <p class="card-title fs-lg-5 fs-6">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
@@ -45,7 +46,7 @@
             {{ end -}}
         </a>
     {{- else -}}
-        <div>
+        <div{{ with $class }} class="{{ . }}"{{ end }}>
             {{ if or $title $links }}
                 <p class="card-title fs-lg-5 fs-6">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
@@ -284,6 +285,7 @@
                 "color"       $args.color
                 "description" $description
                 "links"       $args.links
+                "class"       (cond (and $thumbnail (eq $args.headerStyle "none")) "pt-3" "")
             ) -}}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
