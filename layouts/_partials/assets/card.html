@@ -209,7 +209,8 @@
                 </div>
             {{- end -}}
             <div class="{{ $col2 }}">
-                <div class="card-body p-{{ $args.padding }} h-100 hstack">
+                {{ $padding := printf "p-%d%s" $args.padding (cond (and (eq $args.padding 0) (or $icon $thumbnail)) " ps-3" "") }}
+                <div class="card-body {{ $padding }} h-100 hstack">
                     {{ if $icon }}
                         {{- partial "assets/card-icon.html" (dict
                             "icon"         $icon
