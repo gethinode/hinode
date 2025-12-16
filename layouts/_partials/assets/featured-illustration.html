@@ -41,7 +41,7 @@
             ) -}}
         {{- end -}}
     {{- else }}
-        {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $wrapper) -}}
+        {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $class "spacing" false) -}}
     {{- end -}}
 {{- else if $image -}}
     {{- if not (hasSuffix $image "svg") }}{{ $class = strings.TrimSpace (printf "%s rounded" (or $class "")) }}{{ end -}}

@@ -29,9 +29,10 @@
     {{- $color := .color -}}
     {{- $description := .description -}}
     {{- $links := .links -}}
+    {{- $class := .class }}
     
     {{- if $href -}}
-        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
+        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link {{ $class }}">
             {{ if or $title $links }}
                 <p class="card-title fs-lg-5 fs-6">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
@@ -45,7 +46,7 @@
             {{ end -}}
         </a>
     {{- else -}}
-        <div>
+        <div{{ with $class }} class="{{ . }}"{{ end }}>
             {{ if or $title $links }}
                 <p class="card-title fs-lg-5 fs-6">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
@@ -208,7 +209,8 @@
                 </div>
             {{- end -}}
             <div class="{{ $col2 }}">
-                <div class="card-body p-{{ $args.padding }} h-100 hstack">
+                {{ $padding := printf "p-%d%s" $args.padding (cond (and (eq $args.padding 0) (or $icon $thumbnail)) " ps-3" "") }}
+                <div class="card-body {{ $padding }} h-100 hstack">
                     {{ if $icon }}
                         {{- partial "assets/card-icon.html" (dict
                             "icon"         $icon
@@ -219,7 +221,7 @@
                         )}}
                     {{ end }}
                     <div>
-                        {{ if $page }}
+                        {{ if and $page (ne $args.headerStyle "none") }}
                             <div>{{ partial "inline/card-caption.html" (dict
                                 "page"     $page
                                 "keywords" $args.headerStyle
@@ -234,7 +236,14 @@
                             "description" $description
                             "links"       $args.links
                         ) -}}
-                        {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}</div>{{ end }}
+                        {{ if and $page (ne $args.footerStyle "none") }}
+                            <div>{{ partial "inline/card-caption.html" (dict
+                                "page"     $page
+                                "keywords" $args.footerStyle
+                                "color"    $args.color)
+                            }}
+                            </div>
+                        {{ end }}
                         {{ if and $href $args.button }}
                             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
                             {{ $buttonClass := "card-button mb-n4" }}
@@ -284,6 +293,7 @@
                 "color"       $args.color
                 "description" $description
                 "links"       $args.links
+                "class"       (cond (and $thumbnail (eq $args.headerStyle "none")) "pt-3" "")
             ) -}}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
