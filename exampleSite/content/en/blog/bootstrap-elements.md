@@ -462,6 +462,19 @@ As an example, the following shortcode displays a responsive table.
 {{< /example >}}
 <!-- markdownlint-enable MD037 MD058 -->
 
+## Testimonial
+
+<!-- markdownlint-disable MD037 MD058 -->
+{{< example lang="markdown" >}}
+{{</* testimonial color="light" contact="Betty White" role="CTO" logo="/img/logo.svg"
+  orientation="horizontal" url="https://www.linkedin.com/"
+  image="/assets/img/jake-nackos-IF9TK5Uy-KI-unsplash.png" */>}}
+Duis rutrum, justo eleifend sagittis facilisis, leo orci hendrerit elit, ac tristique nisl
+justo non neque.
+{{</* /testimonial */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 MD058 -->
+
 ## Timeline
 
 As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.

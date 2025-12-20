@@ -2,50 +2,70 @@
     Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
 -->
 
-<!-- Inline partial -->
+<!-- Inline partials -->
+{{ define "_partials/inline/testimonial-contact.html" }}
+    <div class="p-0">
+        {{- partial "assets/live-image.html" (dict 
+            "src"   .image
+            "ratio" "1x1"
+            "class" .class
+            "title" .contact
+            "mode"  false
+            "page"  .page
+        ) }}
+    </div>
+    <div class="flex-grow-1 p-0 align-self-center ps-2">
+        <div class="text-{{ .align }}">
+            {{ if .url }}
+                {{ partial "assets/link.html" (dict
+                    "href" .url
+                    "text" .contact
+                    "page" .page
+                    "class" (cond .color (printf "fw-bold link-bg-%s" .color) "fw-bold")
+                ) }}
+            {{ else }}
+                {{ .contact }}
+            {{ end }}
+        </div>
+        {{ with .role }}<div class="text-{{ $.align }}">{{ . }}</div>{{ end }}
+    </div>
+{{ end }}
+
 {{ define "_partials/inline/testimonial-inner.html" }}
     <div class="d-flex flex-column {{ .class }} {{ .padding }} h-100">
-        <div class="col-6 col-md-3 p-0">
-            {{ $class := "" }}
-            {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
-            {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
+        {{ if or .logo .icon }}
+            <div class="col-6 col-md-3 p-0">
+                {{ $class := "" }}
+                {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
+                {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
 
-            {{ partial "assets/featured-illustration.html" (dict
-                "page"    .page
-                "image"   .logo
-                "icon"    .icon
-                "class"   $class
-                "title"   $title
-                "sizes"   "(min-width: 768px) 33.3vw, 100vw"
-                "wrapper" "col-9 py-4 py-md-0"
-            ) }}			
-        </div>
+                {{ partial "assets/featured-illustration.html" (dict
+                    "page"    .page
+                    "image"   .logo
+                    "icon"    .icon
+                    "class"   $class
+                    "title"   $title
+                    "sizes"   "(min-width: 768px) 33.3vw, 100vw"
+                    "wrapper" "col-9 py-4 py-md-0"
+                ) }}			
+            </div>
+        {{ end }}
         <div class="fs-md-5 pt-3 h-100">
             {{ .content | .page.RenderString }}
         </div>
         <div class="container pt-3 p-0">
             <div class="d-flex p-0">
-                {{ if and .image .contact }}
-                    <div class="p-0">
-                        {{- partial "assets/live-image.html" (dict 
-                            "src"   .image
-                            "ratio" "1x1"
-                            "class" "rounded-circle testimonial-img"
-                            "title" .contact
-                            "mode"  false
-                            "page"  .page
-                        ) }}
-                    </div>
-                    <div class="flex-grow-1 p-0 align-self-center ps-2">
-                        <div><b>
-                            {{ if .url }}
-                                {{ partial "assets/link.html" (dict "href" .url "text" .contact "page" .page) }}
-                            {{ else }}
-                                {{ .contact }}
-                            {{ end }}
-                        </b></div>
-                        {{ with .role }}<div>{{ . }}</div>{{ end }}
-                    </div>
+                {{ if and .image .contact (not (eq .orientation "horizontal")) }}
+                    {{ partial "inline/testimonial-contact.html" (dict 
+                        "page"    .page
+                        "image"   .image
+                        "contact" .contact
+                        "role"    .role
+                        "url"     .url
+                        "color"   .color
+                        "align"   "start"
+                        "class"   "rounded-circle testimonial-img"
+                    )}}
                 {{ else if .link }}
                     {{ partial "assets/button.html" (dict 
                         "href"    .link
@@ -58,6 +78,33 @@
             </div>
         </div>
     </div>
+{{ end }}
+
+{{ define "_partials/inline/testimonial-card.html" }}
+    {{ if and .image .contact (eq .orientation "horizontal") }}
+        {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-{{ $breakpoint.current }}-3 mx-auto">
+                    {{ partial "inline/testimonial-contact.html" (dict 
+                        "page"    .page
+                        "image"   .image
+                        "contact" .contact
+                        "role"    .role
+                        "url"     .url
+                        "color"   .color
+                        "align"   "center"
+                        "class"   "rounded-circle text-center"
+                    )}}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-9">
+                    {{ partial "inline/testimonial-inner.html" . }}
+                </div>
+            </div>
+        </div>
+    {{ else }}
+        {{ partial "inline/testimonial-inner.html" . }}
+    {{ end }}
 {{ end }}
 
 {{/* Initialize arguments */}}
@@ -99,22 +146,24 @@
             "role"        $args.role
             "image"       $args.image
             "padding"     $args.padding
+            "orientation" $args.orientation
             "url"         $args.url
-            "link"        $link  
+            "link"        $link
+            "color"       $args.color
         }}
 
         {{ if $args.showControls }}
             <div class="row">
                 <div class="col-2"></div>
 
-                {{ partial "inline/testimonial-inner.html" (merge $params (dict "class" "col-8 px-0 mb-5")) }}
+                {{ partial "inline/testimonial-card.html" (merge $params (dict "class" "col-8 px-0 mb-5")) }}
 
                 <div class="testimonial-icon col-2 ps-0 p-{{ $args.padding }} text-end">
                     {{ partial "assets/icon.html" (dict "icon" "fas quote-right fa-2x" "spacing" false) }}
                 </div>
             </div>
         {{ else }}
-            {{ partial "inline/testimonial-inner.html" $params }}
+            {{ partial "inline/testimonial-card.html" $params }}
         {{ end }}
     </div>
 {{ end }}
