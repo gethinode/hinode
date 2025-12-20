@@ -7,7 +7,7 @@ arguments:
   heading:
   contact:
     type: string
-    optional: false
+    optional: true
     comment: >-
       The full name of the contact to retrieve.
   caption-url:

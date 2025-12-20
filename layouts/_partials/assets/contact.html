@@ -18,11 +18,14 @@
 
 {{/* Main code */}}
 {{ if not $args.err }}
-    {{ $contact := partial "utilities/GetContact" (dict
-        "contact"      $args.contact
-        "data"         $args.data
-        "language-tag" site.Language.Lang
-    ) }}
+    {{ $contact := "" }}
+    {{ if $args.contact }}
+        {{ $contact = partial "utilities/GetContact" (dict
+            "contact"      $args.contact
+            "data"         $args.data
+            "language-tag" site.Language.Lang
+        ) }}
+    {{ end }}
 
     {{ $illustration := dict }}
     {{ if and $contact $contact.image }}
