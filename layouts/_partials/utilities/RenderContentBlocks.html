@@ -11,6 +11,7 @@
 {{ $page := .page }}
 {{ $blocks := slice }}
 {{ $default := false }}
+{{ $spacer := false }}
 {{ if and $page.IsHome (in $page.Site.Params.modules.bookshop.hero.default "home") }}{{ $default = true }}{{ end }}
 {{ if and $page.IsPage (in $page.Site.Params.modules.bookshop.hero.default "page") }}{{ $default = true }}{{ end }}
 {{ if and $page.IsSection (in $page.Site.Params.modules.bookshop.hero.default "section") }}{{ $default = true }}{{ end }}
@@ -19,6 +20,10 @@
 {{ if and .blocks (gt (len .blocks) 0 )}}
     {{ range $i, $b := .blocks }}
         {{ $blocks = $blocks | append (merge (dict "_ordinal" $i) $b) }}
+        {{/* enable a spacer when the last block has an explicit background color */}}
+        {{ if eq $i (sub (len $.blocks) 1) }}
+            {{ if (index (index $b "background") "color") }}{{ $spacer = true }}{{ end }}
+        {{ end }}
     {{ end }}
 {{ else if $default }}
     {{ $err := (hasPrefix $page.LinkTitle "404") }}    
@@ -60,5 +65,10 @@
     {{ $page.Scratch.Set "overlayMode" $page.Site.Params.modules.bookshop.hero.overlayMode }}
 {{ end }}
 
-{{/* Render content blocks */}}
-{{ return trim (partial "bookshop_partial" (slice "page" $blocks)) "\n\r " }}
+{{/* Render content blocks and optional spacer */}}
+{{ $result := trim (partial "bookshop_partial" (slice "page" $blocks)) "\n\r " }}
+{{ if $spacer }}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
+    {{ $result = printf `%s<div class="pb-%d"></div>` $result $padding.y }}
+{{ end }}
+{{ return $result  }}

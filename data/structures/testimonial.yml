@@ -2,16 +2,21 @@ comment: Displays a single testimonial card.
 arguments:
   page:
   content: 
-    type: string
-    optional: false
+    type:
+      - string
+      - template.HTML
+    optional: true
     comment: Quote to include in the testimonial.
-  icon:
-  logo:
+    group: partial
+  color:
   contact:
   role:
-  image:
   url:
+  image:
+  icon:
+  logo:
   padding:
+  orientation:
   show-controls:
     type: bool
     optional: true
@@ -21,3 +26,7 @@ arguments:
       the card includes a quote icon on the right-hand side too.
   class:
   link:
+body:
+  optional: false
+  comment: Quote to include in the testimonial.
+  group: shortcode
