@@ -58,7 +58,7 @@ main:has(> * > section:first-of-type.section-cover) {
     min-height: calc(var(--section-height) - var(--overlay-offset));
 }
 
-.section-title {
+.hero-title {
     width: 100%;
 }
 
