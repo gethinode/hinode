@@ -1,24 +1,3 @@
-.testimonial-img {
-    height: 10vw;
-    width: 10vw;
-    background-color: var(--#{$prefix}body-bg);
-}
-
-.testimonial-logo {
-    width: 20vw;
-}
-
-@include media-breakpoint-up(md) {
-    .testimonial-img {
-        height: 5vw;
-        width: 5vw;
-    }
-
-    .testimonial-logo {
-        width: 10vw;
-    }
-}
-
 section.testimonials {
     .carousel, .testimonial-grid {
         width: 100%;
