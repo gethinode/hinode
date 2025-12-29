@@ -16,6 +16,10 @@
             background-color: var(--bg-primary-subtle);
         }
 
+        .dropdown-item {
+          --bs-dropdown-link-hover-bg: var(--bs-tertiary-bg);
+        }
+
         .form-check-input:checked {
           background-color: var(--bs-primary);
           border-color: var(--bs-primary); }
