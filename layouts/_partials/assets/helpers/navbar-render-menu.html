@@ -11,7 +11,7 @@
         {{ if $entry.Params.spacing }}
             <li class="nav-item flex-grow-1"></li>
         {{ else }}
-            <li class="nav-item {{ if .HasChildren }} dropdown me-auto{{ if $horizontal }} dropdown-horizontal-{{ $breakpoint }}{{ end }}{{ end }}">
+            <li class="nav-item {{ if .HasChildren }} dropdown me-auto my-auto{{ if $horizontal }} dropdown-horizontal-{{ $breakpoint }}{{ end }}{{ end }}">
                 {{- partial "assets/helpers/navbar-item.html" (dict "menu-entry" $entry "page" $page) -}}
                 {{- if .HasChildren -}}
                     <ul class="dropdown-menu{{ if $control }} dropdown-menu-end{{ end }}">
