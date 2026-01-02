@@ -9,7 +9,7 @@
     {{ partial "assets/link.html" (dict 
         "href"  .Destination
         "page"  .Page
-        "text"  .Text 
-        "title" .Title
+        "text"  (.Text | htmlUnescape)
+        "title" (.Title | htmlUnescape)
     ) }}
 {{- end }}
