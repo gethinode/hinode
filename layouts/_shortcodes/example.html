@@ -38,7 +38,11 @@
     <div class="rounded border mb-3">
         {{- if $showPreview -}}
             <div {{ with $args.id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $args.class }} {{ . }}{{ end }}">
-                {{- $content | .Page.RenderString | safeHTML -}}
+                {{- if eq $lang "html" -}}
+                    {{- $content | safeHTML -}}
+                {{- else -}}
+                    {{- $content | .Page.RenderString | safeHTML -}}
+                {{- end -}}
             </div>
         {{- end -}}
         {{- if $showMarkup -}}
