@@ -164,7 +164,12 @@
 
                 {{/* Build menu structure from sorted pages and hierarchy */}}
                 {{- range $rootPages -}}
-                    {{- $menuEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped) -}}
+                    {{- $menuEntry := partial "assets/helpers/sidebar-menu-entry" (dict
+                        "page"      .
+                        "grouped"   $grouped
+                        "sortField" $sortField
+                        "order"     $order
+                    ) -}}
                     {{- $menu = $menu | append $menuEntry -}}
                 {{- end -}}
             {{ else }}

@@ -4,12 +4,16 @@
     Parameters:
     - page: The page object
     - grouped: Dictionary mapping parent paths to children slices
+    - sortField: Field to sort children by (e.g., "Params.weight")
+    - order: Sort order ("asc" or "desc")
 
     Returns: Menu entry dict with title and pages (optional array of nested entries)
 */}}
 
 {{- $page := .page -}}
 {{- $grouped := .grouped -}}
+{{- $sortField := .sortField | default "Params.weight" -}}
+{{- $order := .order | default "asc" -}}
 
 {{- /* Create menu entry with title and absolute link */ -}}
 {{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
@@ -18,10 +22,12 @@
 {{- /* Get children from grouped hierarchy */ -}}
 {{- $children := index $grouped $page.RelPermalink | default slice -}}
 {{- if $children -}}
+    {{- /* Sort children using the provided sort parameters */ -}}
+    {{- $children = sort $children $sortField $order -}}
     {{- /* Recursively build nested menu entries */ -}}
     {{- $pages := slice -}}
     {{- range $children -}}
-        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped) -}}
+        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "order" $order) -}}
         {{- $pages = $pages | append $childEntry -}}
     {{- end -}}
     {{- $entry = merge $entry (dict "pages" $pages) -}}
