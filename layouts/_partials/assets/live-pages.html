@@ -1,4 +1,4 @@
-<!-- 
+<!--
     Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
 -->
 
@@ -17,6 +17,7 @@
 {{/* Initialize local arguments */}}
 {{ $pages := slice }}
 {{ $total := 0 }}
+{{ $menu := slice }}
 
 {{/* Main code */}}
 {{ if not $args.err }}
@@ -76,13 +77,104 @@
                     {{ $pages = where $pages "Params.categories" "intersect" $categories }}
                 {{ end }}
             {{ end }}
-        
-            {{/* Sort the pages as specified */}}	
+
+            {{/* Include the list pages if requested */}}	
+            {{- $lists := slice -}}
+            {{ if or $args.includeList (eq $args.groupBy "section") }}
+                {{ range $pages }}
+                    {{ $lists = $lists | append .Parent | uniq }}
+                {{ end }}
+                {{ $pages = $pages | append $lists }}
+            {{ end }}
+
+            {{/* Sort the pages as specified */}}
+            {{- $sortField := printf "Params.%s" $args.sort -}}
             {{- $order := "asc" -}}
             {{- if $args.reverse }}{{ $order = "desc" }}{{ end -}}
-            {{- $pages = sort $pages (printf "Params.%s" $args.sort) $order -}}
+
+            {{ if eq $args.groupBy "section" }}
+                {{- /* Build a hierarchical map: parent path -> slice of children */ -}}
+                {{- $grouped := dict -}}
+                {{- $rootPages := slice -}}
+
+                {{- range $page := $pages -}}
+                    {{- if $page.Parent -}}
+                        {{- $parentPath := $page.Parent.RelPermalink -}}
+                        {{- $childrenSlice := index $grouped $parentPath | default slice -}}
+                        {{- $grouped = merge $grouped (dict $parentPath ($childrenSlice | append $page)) -}}
+                    {{- else -}}
+                        {{- $rootPages = $rootPages | append $page -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- /* If a section was specified, use that section page as the root */ -}}
+                {{- if $args.section -}}
+                    {{- $sectionPage := site.GetPage $args.section -}}
+                    {{- if $sectionPage -}}
+                        {{- $rootPages = slice | append $sectionPage -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- /* Sort root pages first */ -}}
+                {{- $rootPages = sort $rootPages $sortField $order -}}
+
+                {{- /* Process depth-first (pre-order): use a stack to traverse */ -}}
+                {{- $result := slice -}}
+                {{- $stack := slice -}}
+
+                {{- /* Initialize stack with root pages: always push in reverse for LIFO to pop in correct order */ -}}
+                {{- if $rootPages -}}
+                    {{- range $i := seq (len $rootPages) -}}
+                        {{- $idx := sub (len $rootPages) $i -}}
+                        {{- $page := index $rootPages $idx -}}
+                        {{- $stack = $stack | append $page -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- range $iteration := seq 1 1000 -}}
+                    {{- /* Exit if stack is empty */ -}}
+                    {{- if not $stack -}}
+                        {{- break -}}
+                    {{- end -}}
+
+                    {{- /* Pop from stack */ -}}
+                    {{- $stackSize := len $stack -}}
+                    {{- $lastIdx := sub $stackSize 1 -}}
+                    {{- $current := index $stack $lastIdx -}}
+                    {{- $stack = $stack | first $lastIdx -}}
+
+                    {{- /* Add current page to result */ -}}
+                    {{- $result = $result | append $current -}}
+
+                    {{- /* Get and sort children */ -}}
+                    {{- $pageKey := $current.RelPermalink -}}
+                    {{- $children := index $grouped $pageKey | default slice -}}
+                    {{- if $children -}}
+                        {{- $children = sort $children $sortField $order -}}
+                        {{- /* Push children to stack in reverse so LIFO pops in correct order */ -}}
+                        {{- range $i := seq (len $children) -}}
+                            {{- $idx := sub (len $children) $i -}}
+                            {{- $child := index $children $idx -}}
+                            {{- $stack = $stack | append $child -}}
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- $pages = $result -}}
+
+                {{/* Build menu structure from sorted pages and hierarchy */}}
+                {{- range $rootPages -}}
+                    {{- $menuEntry := partial "assets/helpers/buildMenuEntry" (dict "page" . "grouped" $grouped) -}}
+                    {{- $menu = $menu | append $menuEntry -}}
+                {{- end -}}
+            {{ else }}
+                {{- /* Use regular sort */ -}}
+                {{- $pages = sort $pages $sortField $order -}}
+                {{- /* For non-grouped sorts, use pages directly as menu */ -}}
+                {{- $menu = $pages | default slice -}}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}
 
-{{ return (dict "pages" $pages "total" $total) }}
+{{ return (dict "pages" $pages "menu" $menu "total" $total) }}
