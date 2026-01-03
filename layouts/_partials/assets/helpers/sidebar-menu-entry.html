@@ -1,0 +1,30 @@
+{{/*
+    Build a hierarchical menu entry from a page and its children.
+
+    Parameters:
+    - page: The page object
+    - grouped: Dictionary mapping parent paths to children slices
+
+    Returns: Menu entry dict with title and pages (optional array of nested entries)
+*/}}
+
+{{- $page := .page -}}
+{{- $grouped := .grouped -}}
+
+{{- /* Create menu entry with title and absolute link */ -}}
+{{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
+{{- $entry := dict "title" $page.LinkTitle "link" $page.RelPermalink -}}
+
+{{- /* Get children from grouped hierarchy */ -}}
+{{- $children := index $grouped $page.RelPermalink | default slice -}}
+{{- if $children -}}
+    {{- /* Recursively build nested menu entries */ -}}
+    {{- $pages := slice -}}
+    {{- range $children -}}
+        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped) -}}
+        {{- $pages = $pages | append $childEntry -}}
+    {{- end -}}
+    {{- $entry = merge $entry (dict "pages" $pages) -}}
+{{- end -}}
+
+{{- return $entry -}}
