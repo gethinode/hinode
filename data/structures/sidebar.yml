@@ -22,3 +22,22 @@ arguments:
     comment: >-
       Version of the sidebar navigation, used to define the base URL of
       generated links, together with the page's section.
+  auto-generate:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Flag to auto-generate the content of the sidebar. When set, the sidebar
+      lists all pages of the current section. Use `nested`, `reverse`, and
+      `sort` arguments to refine the behavior.
+    release: v2.0.0
+  nested:
+    default: true
+    release: v2.0.0
+  reverse:
+    default: false
+    release: v2.0.0
+  sort:
+    optional: true
+    default: weight
+    release: v2.0.0
