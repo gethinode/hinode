@@ -74,3 +74,18 @@ arguments:
     default: true
     comment: >-
       If set, returns the page collection in descending order.
+  group-by:
+    type: select
+    optional: true
+    comment:
+      If set, groups the results by the specified field. Currently only supports
+      grouping by section.
+    values:
+      - section
+    release: v2.0.0
+  include-list:
+    type: bool
+    optional: true
+    comment:
+      If set, includes list pages in the results.
+    release: v2.0.0

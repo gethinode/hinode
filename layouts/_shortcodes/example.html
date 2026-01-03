@@ -35,10 +35,14 @@
 
 {{/* Main code */}}
 {{ if not $args.err }}
-    <div class="rounded border mb-3">
+    <div class="border {{ if and $showPreview $showMarkup }}rounded mb-3{{ else if $showPreview }}rounded-top border-bottom-0{{ else }}rounded-bottom{{ end }}">
         {{- if $showPreview -}}
-            <div {{ with $args.id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $args.class }} {{ . }}{{ end }}">
-                {{- $content | .Page.RenderString | safeHTML -}}
+            <div {{ with $args.id }}id="{{ . }}"{{ end }} class="p-3 {{ if $showMarkup }}rounded-top{{ end }} {{ with $args.class }} {{ . }}{{ end }}">
+                {{- if eq $lang "html" -}}
+                    {{- $content | safeHTML -}}
+                {{- else -}}
+                    {{- $content | .Page.RenderString | safeHTML -}}
+                {{- end -}}
             </div>
         {{- end -}}
         {{- if $showMarkup -}}

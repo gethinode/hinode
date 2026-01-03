@@ -1,4 +1,4 @@
-{{/* 
+{{/*
     Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
@@ -7,8 +7,8 @@
 {{/* Initialize arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "sidebar" "args" . "group" "partial") }}
 {{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "assets/sidebar.html" 
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict
+        "partial" "assets/sidebar.html"
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
@@ -18,6 +18,26 @@
 
 {{/* Initialize local arguments */}}
 {{- $section := $args.page.Section }}
+
+{{/* Auto-generate hierarchical menu if enabled and no menu provided */}}
+{{- if and $args.autoGenerate (not $args.menu) -}}
+    {{- $result := partial "assets/live-pages.html" (dict
+        "page"         $args.page
+        "section"      $section
+        "nested"       $args.nested
+        "sort"         "weight"
+        "reverse"      "false"
+        "group-by"     "section"
+        "include-list" true
+    ) -}}
+    {{- /* Skip root section page and only show its children in sidebar */ -}}
+    {{- $menu := $result.menu -}}
+    {{- if and (gt (len $menu) 0) (index $menu 0).pages -}}
+        {{- /* Root item has children - use only children, skipping the root */ -}}
+        {{- $menu = (index $menu 0).pages -}}
+    {{- end -}}
+    {{- $args = merge $args (dict "menu" $menu) -}}
+{{- end -}}
 
 {{- define "_partials/inline/sidebar/group.html" -}}
     {{- $page := .page -}}
@@ -29,6 +49,13 @@
 
     {{- $doc_slug := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($group.title | urlize)) -}}
     {{- $href := or $group.link $doc_slug -}}
+    {{- /* Handle absolute paths from hierarchical menu (starting with /) */ -}}
+    {{- if and $group.link (hasPrefix $group.link "/") -}}
+        {{- $href = $group.link -}}
+    {{- else if $group.link -}}
+        {{- /* Non-absolute link provided - use URLJoin */ -}}
+        {{- $href = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $group.link) -}}
+    {{- end -}}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $href "page" $page) }}
     {{ if eq $group.link "#" }}{{ $href = $doc_slug }}{{ end }}
     {{- $collapsed := strings.HasPrefix $page.RelPermalink $href -}}
@@ -37,24 +64,24 @@
 
     <li class="mb-1">
         <div class="d-flex w-100 p-0 sidebar-item-group">
-            <div class="text-start flex-grow-1 {{ if $current }}fw-bold{{ end }}">
+            <div class="text-start flex-grow-1">
                 {{- $groupTitle := $group.title -}}
                 {{ if and site.Params.main.titleCase (not $page.Params.exact) }}{{ $groupTitle = title $groupTitle }}{{ end }}
-                
+
                 {{ $dest := $href }}
                 {{ $target := "" }}
                 {{ if or $current (not $ref) }}
                     {{ $dest = "" }}
                 {{ end }}
                 <a {{ with $dest }} href="{{ . }}"{{ else }}
-                data-bs-toggle="collapse" 
+                data-bs-toggle="collapse"
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
                 {{ end }}>{{ $groupTitle }}</a>
             </div>
-            
-            <button 
-                class="btn btn-toggle-group d-inline-flex align-items-center rounded border-0 collapsed" 
-                data-bs-toggle="collapse" 
+
+            <button
+                class="btn btn-toggle-group d-inline-flex align-items-center rounded border-0 collapsed"
+                data-bs-toggle="collapse"
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
                 aria-expanded="{{ if $collapsed }}true{{ else }}false{{ end }}"
             >
@@ -64,7 +91,7 @@
             <ul class="btn-toggle-nav list-unstyled fw-normal {{ if eq $level 0}} pb-1 {{ end }}ps-3">
                 {{- range $item := $group.pages -}}
                     {{- if $item.pages -}}
-                        {{ partial "inline/sidebar/group.html" (dict 
+                        {{ partial "inline/sidebar/group.html" (dict
                             "page"    $page
                             "index"   $index
                             "level"   (add $level 1)
@@ -74,9 +101,8 @@
                             )
                         }}
                     {{- else -}}
-                        {{ partial "inline/sidebar/item.html" (dict 
+                        {{ partial "inline/sidebar/item.html" (dict
                             "page"         $page
-                            "sectionBreak" false
                             "level"        $level
                             "baseURL"      $href
                             "title"        $item.title
@@ -93,7 +119,6 @@
 
 {{- define "_partials/inline/sidebar/item.html" -}}
     {{- $page := .page -}}
-    {{- $sectionBreak := .sectionBreak -}}
     {{- $level := .level -}}
     {{- $baseURL := .baseURL -}}
     {{- $title := .title -}}
@@ -103,7 +128,11 @@
     {{ with .href }}
         {{ if hasPrefix . "http" }}
             {{ $href = . }}
+        {{ else if hasPrefix . "/" }}
+            {{- /* Absolute path (from hierarchical menu) - use directly */ -}}
+            {{ $href = . }}
         {{ else }}
+            {{- /* Relative path - join with baseURL */ -}}
             {{- $href = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" .) -}}
             {{ if not (hasSuffix $href "/") }}{{ $href = printf "%s/" $href }}{{ end }}
         {{ end }}
@@ -114,10 +143,9 @@
     {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
 
     {{ if eq $level 0}}
-        <li class="mt-1 mb-1 {{ if $sectionBreak }}border-top{{ end }}"></li>
-        {{- $sectionBreak = false }}
+        <li class="mt-1 mb-1"></li>
         <li>
-            <ul class="btn-toggle-nav list-unstyled fw-bold pb-1">
+            <ul class="btn-toggle-nav list-unstyled pb-1">
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
@@ -147,7 +175,6 @@
 {{/* Main code */}}
 {{ if and (not $args.error) $args.menu }}
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
-        {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
         {{ $baseURL := $args.page.Scratch.Get "baseURL" | default "/" -}}
         {{ $baseURL = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $args.version | relLangURL)))) }}
@@ -155,8 +182,7 @@
         <ul class="list-unstyled ps-0">
         {{- range $index, $item := $args.menu -}}
             {{- if $item.pages }}
-                {{- $sectionBreak = true }}
-                {{ partial "inline/sidebar/group.html" (dict 
+                {{ partial "inline/sidebar/group.html" (dict
                     "page"    $args.page
                     "index"   $index
                     "level"   (add $level 1)
@@ -166,9 +192,8 @@
                     )
                 }}
             {{- else }}
-                {{ partial "inline/sidebar/item.html" (dict 
+                {{ partial "inline/sidebar/item.html" (dict
                     "page"         $args.page
-                    "sectionBreak" $sectionBreak
                     "level"        $level
                     "baseURL"      $baseURL
                     "title"        $item.title
