@@ -37,7 +37,7 @@
 
     <li class="mb-1">
         <div class="d-flex w-100 p-0 sidebar-item-group">
-            <div class="text-start flex-grow-1 {{ if $current }}fw-bold{{ end }}">
+            <div class="text-start flex-grow-1">
                 {{- $groupTitle := $group.title -}}
                 {{ if and site.Params.main.titleCase (not $page.Params.exact) }}{{ $groupTitle = title $groupTitle }}{{ end }}
                 
@@ -76,7 +76,6 @@
                     {{- else -}}
                         {{ partial "inline/sidebar/item.html" (dict 
                             "page"         $page
-                            "sectionBreak" false
                             "level"        $level
                             "baseURL"      $href
                             "title"        $item.title
@@ -93,7 +92,6 @@
 
 {{- define "_partials/inline/sidebar/item.html" -}}
     {{- $page := .page -}}
-    {{- $sectionBreak := .sectionBreak -}}
     {{- $level := .level -}}
     {{- $baseURL := .baseURL -}}
     {{- $title := .title -}}
@@ -114,10 +112,9 @@
     {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
 
     {{ if eq $level 0}}
-        <li class="mt-1 mb-1 {{ if $sectionBreak }}border-top{{ end }}"></li>
-        {{- $sectionBreak = false }}
+        <li class="mt-1 mb-1"></li>
         <li>
-            <ul class="btn-toggle-nav list-unstyled fw-bold pb-1">
+            <ul class="btn-toggle-nav list-unstyled pb-1">
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
@@ -147,7 +144,6 @@
 {{/* Main code */}}
 {{ if and (not $args.error) $args.menu }}
     <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
-        {{- $sectionBreak := false -}}
         {{- $level := 0 -}}
         {{ $baseURL := $args.page.Scratch.Get "baseURL" | default "/" -}}
         {{ $baseURL = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $args.version | relLangURL)))) }}
@@ -155,7 +151,6 @@
         <ul class="list-unstyled ps-0">
         {{- range $index, $item := $args.menu -}}
             {{- if $item.pages }}
-                {{- $sectionBreak = true }}
                 {{ partial "inline/sidebar/group.html" (dict 
                     "page"    $args.page
                     "index"   $index
@@ -168,7 +163,6 @@
             {{- else }}
                 {{ partial "inline/sidebar/item.html" (dict 
                     "page"         $args.page
-                    "sectionBreak" $sectionBreak
                     "level"        $level
                     "baseURL"      $baseURL
                     "title"        $item.title
