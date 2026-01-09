@@ -37,7 +37,7 @@
 {{ if not $args.err }}
     <div class="border {{ if and $showPreview $showMarkup }}rounded mb-3{{ else if $showPreview }}rounded-top border-bottom-0{{ else }}rounded-bottom{{ end }}">
         {{- if $showPreview -}}
-            <div {{ with $args.id }}id="{{ . }}"{{ end }} class="p-3 {{ if $showMarkup }}rounded-top{{ end }} {{ with $args.class }} {{ . }}{{ end }}">
+            <div {{ with $args.id }}id="{{ . }}"{{ end }} class="p-5 {{ if $showMarkup }}rounded-top{{ end }} {{ with $args.class }} {{ . }}{{ end }}">
                 {{- if eq $lang "html" -}}
                     {{- $content | safeHTML -}}
                 {{- else -}}
