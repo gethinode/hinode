@@ -80,7 +80,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.1",
-    "@commitlint/config-conventional": "^20.3.0",
+    "@commitlint/config-conventional": "^20.3.1",
     "@gethinode/netlify-plugin-dartsass": "^0.3.0",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
