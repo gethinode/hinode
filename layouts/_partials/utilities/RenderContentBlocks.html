@@ -20,9 +20,12 @@
 {{ if and .blocks (gt (len .blocks) 0 )}}
     {{ range $i, $b := .blocks }}
         {{ $blocks = $blocks | append (merge (dict "_ordinal" $i) $b) }}
-        {{/* enable a spacer when the last block has an explicit background color */}}
+        {{/* enable a spacer when the last block has an explicit background color and is not fluid */}}
         {{ if eq $i (sub (len $.blocks) 1) }}
-            {{ if (index (index $b "background") "color") }}{{ $spacer = true }}{{ end }}
+            {{ if (index (index $b "background") "color") }}
+            {{ $fluid := index $b "fluid" | default true }}
+            {{ $spacer = not $fluid }}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ else if $default }}

@@ -279,9 +279,10 @@
         {{- else if $icon -}}
             {{- partial "assets/card-icon.html" (dict
                 "icon"         $icon
+                "padding"      0
                 "icon-rounded" $args.iconRounded
                 "icon-style"   $style
-                "class"        (printf "mb-1 m-0 text-%s" $args.align)
+                "class"        (printf "mb-3 m-0 text-%s" $args.align)
             )}}
         {{- end -}}
         <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }} card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
