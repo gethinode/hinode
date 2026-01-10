@@ -34,6 +34,8 @@
 }
 
 .sidebar-item-group {
+    --#{$prefix}link-opacity: 0.65;
+
     border-radius: #{$theme-border-radius};
 
     &:hover,
@@ -43,9 +45,14 @@
     }
     
     > div > a {
-        color: var(--bs-body-color) !important;
+        color: rgba(var(--#{$prefix}body-color-rgb), var(--#{$prefix}link-opacity, 1));
         text-decoration: none;
         cursor: pointer;
+        
+        &:hover,
+        &:focus {
+            color: $primary;
+        }
     }
 }
 
@@ -82,7 +89,9 @@
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .sidebar-item {
-            color: var(--bs-body-color);
+            --#{$prefix}link-opacity: 0.65;
+
+            color: rgba(var(--#{$prefix}body-color-rgb), var(--#{$prefix}link-opacity, 1));
 
             &.active {
                 color: $primary-text-emphasis-dark !important;
@@ -105,9 +114,16 @@
 
             &:hover,
             &:focus {
-                color: white !important;
+                color: $primary-text-emphasis-dark !important;
                 background-color: transparent;
                 box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
+            }
+
+            > div > a {
+                &:hover,
+                &:focus {
+                    color: $primary-text-emphasis-dark !important;
+                }
             }
         }
 
