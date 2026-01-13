@@ -2,8 +2,8 @@
 @import "hugo:vars";
 
 // Include default variable overrides
-@import "theme/variables.scss";
 @import "common/variables.scss";
+@import "theme/variables.scss";
 @import "common/icons.scss";
 
 // Import custom utilities (must be before Bootstrap)
