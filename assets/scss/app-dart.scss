@@ -4,8 +4,8 @@
 @use "hugo:vars" as h; // note: modified for dart-sass
 
 // Include default variable overrides
-@import "theme/variables.scss";
 @import "common/variables-dart.scss"; // note: modified for dart-sass
+@import "theme/variables.scss";
 @import "common/icons.scss";
 
 // Import custom utilities (must be before Bootstrap)
