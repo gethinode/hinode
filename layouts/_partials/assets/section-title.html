@@ -76,7 +76,7 @@
 
 {{/* Main code */}}
 {{ if or $args.heading.title $args.heading.content }}
-    <div class="section-title text-{{ $args.heading.align | default "start" }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}{{ with $width }} {{ . }}{{ end }}">
+    <div class="section-title text-{{ $args.heading.align | default "start" }}{{ with $justify }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }} {{ with $width }}{{ . }}{{ else }}width-100{{ end }}">
         {{ if and $preheading (eq $arrangement "first") }}
             <div class="container-fluid">
                 <div class="row">

@@ -28,16 +28,14 @@
 {{ $align := $args.align }}
 {{ $class := $args.class | default "" }}
 {{ $scale := $args.illustration.width }}
-{{ $justify := $args.illustration.justify }}
+{{ $icon := $args.illustration.icon }}
+{{ $heading := cond (eq $args.orientation "horizontal") (merge $args.heading (dict "width" 12)) $args.heading }}
 
-{{ if and $args.illustration.image $scale }}
-    {{ $class = trim (printf "%s col-%d text-center text-md-%s" $class $scale (or $justify "center")) " " }}
+{{ if $scale }}
+    {{ $class = trim (printf "%s col-%d" $class $scale) " " }}
 {{ else }}
     {{ $scale = 12 }}
 {{ end }}
-
-{{ $iconWrapper := "col-6" }}
-{{ $heading := cond (eq $args.orientation "horizontal") (merge $args.heading (dict "width" 12)) $args.heading }}
 
 {{ $sizes := "100vw" }}
 {{ if or (lt $args.width 12) (lt $scale 12) }}
@@ -68,17 +66,12 @@
         </div>
     {{ end }}
 
-    {{ $imageWrapper := printf "mx-md-0 text-center text-md-%s %s" (or $justify "center") $class }}
+    {{ $imageWrapper := printf "%s text-%s mx-auto" $class $args.illustration.align }}
     {{ $imageJustify := "" }}
     {{ if eq $args.orientation "stacked" }}
-        {{ $imageWrapper = printf "pt-%d text-center %s" $padding.y $class }}
-        {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
-    {{ else }}
-        {{ $imageJustify = $justify }}
+        {{ $imageWrapper = printf "%s pb-%d" $imageWrapper $padding.y }}
+        {{ $imageJustify = $align }}
     {{ end }}
-    {{ with $args.illustration.justify }}{{ $imageJustify = . }}{{ end }}
-
-    {{ if $args.icon }}{{ $imageWrapper = $iconWrapper }}{{ end }}
 
     {{ $caption := "" }}
     {{ if $args.illustration.caption }}
@@ -100,30 +93,27 @@
         {{ $illustration = partial $args.hook (dict
             "page"          $args.page
             "image"         $args.illustration.image
-            "icon"          $args.illustration.icon
+            "icon"          $icon
             "anchor"        $args.illustration.anchor
             "mode"          $args.illustration.mode
             "ratio"         $args.illustration.ratio
             "sizes"         $sizes
             "title"         (T "heroImage")
             "wrapper"       $imageWrapper
-            "class"         (strings.TrimSpace (printf "hero-image %s" (or $args.illustration.class "")))
+            "class"         (printf "hero-image %s" $args.illustration.class)
             "image-overlay" $args.imageOverlay
             "justify"       $imageJustify
         ) }}
     {{ end }}
 
     {{ $title := partial "assets/section-title.html" (dict
-        "heading"       $heading
-        "use-title"     $args.useTitle
-        "links"         $args.links
-        "link-type"     (or $args.linkType $args.type)
-        "class"         "hero-title"
-        "arrangement"   (cond (and $illustration (ne $args.orientation "stacked")) "above" $arrangement)
-        "justify"       $args.justify
-        "heading-style" $args.headingStyle
-        "content-style" $args.contentStyle
-
+        "heading"     $heading
+        "use-title"   $args.useTitle
+        "links"       $args.links
+        "link-type"   (or $args.linkType $args.type)
+        "class"       "hero-title"
+        "arrangement" $arrangement
+        "justify"     $args.justify
     ) }}
 
     {{ if eq $args.orientation "stacked" }}
