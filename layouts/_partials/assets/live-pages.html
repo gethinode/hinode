@@ -40,7 +40,7 @@
                 {{ warnf "Cannot find section: %s" $args.section }}
             {{ end }}
         {{ end }}
-        
+
         {{ if $sectionPage }}
             {{ if eq $args.kind "taxonomy" }}
                 {{ $filter := $sectionPage.Params.filter }}
@@ -76,13 +76,21 @@
                     {{ $categories := slice | append $args.categories }}
                     {{ $pages = where $pages "Params.categories" "intersect" $categories }}
                 {{ end }}
+                {{/* Filter out pages with excludeFromSidebar param if exclude-filtered is true */}}
+                {{ if $args.excludeFiltered }}
+                    {{ $pages = where $pages "Params.excludeFromSidebar" "!=" true }}
+                {{ end }}
             {{ end }}
 
-            {{/* Include the list pages if requested */}}	
+            {{/* Include the list pages if requested */}}
             {{- $lists := slice -}}
             {{ if or $args.includeList (eq $args.groupBy "section") }}
                 {{ range $pages }}
                     {{ $lists = $lists | append .Parent | uniq }}
+                {{ end }}
+                {{/* Filter list pages if exclude-filtered is set */}}
+                {{ if $args.excludeFiltered }}
+                    {{ $lists = where $lists "Params.excludeFromSidebar" "!=" true }}
                 {{ end }}
                 {{ $pages = $pages | append $lists }}
             {{ end }}

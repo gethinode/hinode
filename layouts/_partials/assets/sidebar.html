@@ -22,13 +22,14 @@
 {{/* Auto-generate hierarchical menu if enabled and no menu provided */}}
 {{- if and $args.autoGenerate (not $args.menu) -}}
     {{- $result := partial "assets/live-pages.html" (dict
-        "page"         $args.page
-        "section"      $section
-        "nested"       $args.nested
-        "sort"         "weight"
-        "reverse"      "false"
-        "group-by"     "section"
-        "include-list" true
+        "page"             $args.page
+        "section"          $section
+        "nested"           $args.nested
+        "sort"             "weight"
+        "reverse"          "false"
+        "group-by"         "section"
+        "include-list"     true
+        "exclude-filtered" true
     ) -}}
     {{- /* Skip root section page and only show its children in sidebar */ -}}
     {{- $menu := $result.menu -}}

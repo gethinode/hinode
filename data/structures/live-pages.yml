@@ -89,3 +89,11 @@ arguments:
     comment:
       If set, includes list pages in the results.
     release: v2.0.0
+  exclude-filtered:
+    type: bool
+    optional: true
+    comment: >-
+      If set, excludes pages that have the excludeFromSidebar parameter set to true.
+      Useful for filtering out non-latest versions or other pages that should not
+      appear in navigation.
+    release: v2.0.0
