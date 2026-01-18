@@ -8,7 +8,7 @@ comment: >-
   containing a `#`).
 arguments:
   page:
-  href: 
+  href:
     position: 0
   cue:
   tab:
@@ -28,6 +28,12 @@ arguments:
     release: v1.0.0
   exact:
     release: v1.20.0
+  skip-validation:
+    type: bool
+    optional: true
+    group: partial
+    comment: Skip internal link validation (use for dynamic content).
+    release: v2.0.0
   # deprecated arguments  
   destination: 
     type: string
