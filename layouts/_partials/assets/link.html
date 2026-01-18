@@ -82,37 +82,45 @@
         {{ end }}
 
         {{ if not $isLocal }}
-            {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $args.page) }}
-            {{- if not $ref -}}
-                {{ $pageContext := "" }}
-                {{ with $args.page.File }}
-                    {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
+            {{- if not (index $args "skip-validation") -}}
+                {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $args.page) }}
+                {{- if not $ref -}}
+                    {{ $pageContext := "" }}
+                    {{ with $args.page.File }}
+                        {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
+                    {{ end }}
+                    {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
+                    {{ $res := "" }}
+                    {{ if $isPageRes }}
+                        {{- $res = partial "utilities/GetResource.html" (dict "url" $args.destination "page" $args.page) -}}
+                    {{ end }}
+                    {{ $isStatic := fileExists (path.Join "static" $destination) }}
+                    {{ if and (not $res) (not $isStatic) }}
+                        {{ $errmsg = $errmsg | append (printf "Cannot find page or asset: '%s'" $destination )}}
+                        {{- $error = true -}}
+                    {{ else if $res }}
+                        {{ $destination = $res.RelPermalink }}
+                    {{ else if $isStatic }}
+                        {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
+                    {{ end }}
+                    {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
                 {{ end }}
-                {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
-                {{ $res := "" }}
-                {{ if $isPageRes }}
-                    {{- $res = partial "utilities/GetResource.html" (dict "url" $args.destination "page" $args.page) -}}
-                {{ end }}
-                {{ $isStatic := fileExists (path.Join "static" $destination) }}
-                {{ if and (not $res) (not $isStatic) }}
-                    {{ $errmsg = $errmsg | append (printf "Cannot find page or asset: '%s'" $destination )}}
-                    {{- $error = true -}}
-                {{ else if $res }}
-                    {{ $destination = $res.RelPermalink }}
-                {{ else if $isStatic }}
-                    {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
-                {{ end }}
-                {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
-            {{ end }}
-            
-            {{- if and $ref (not $error) -}}
-                {{- $destination = $ref.RelPermalink -}}
-                {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
-            {{- end -}}
 
-            {{- if not $text -}}
-                {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
-            {{ end -}}
+                {{- if and $ref (not $error) -}}
+                    {{- $destination = $ref.RelPermalink -}}
+                    {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+                {{- end -}}
+
+                {{- if not $text -}}
+                    {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
+                {{ end -}}
+            {{- else -}}
+                {{/* Skip validation - just use destination as-is and derive text if needed */}}
+                {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+                {{- if not $text -}}
+                    {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $destination }}{{ end }}
+                {{ end -}}
+            {{- end -}}
         {{ else }}
             {{ with $anchor }}
                 {{ $destination = printf "#%s" . }}
