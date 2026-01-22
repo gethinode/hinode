@@ -2,7 +2,7 @@
 spec:
   structures:
     - content_blocks
-  label: Liar
+  label: List
   description: List section
   icon: post
   tags: []
