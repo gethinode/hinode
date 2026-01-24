@@ -136,7 +136,7 @@
 - id: rights
   translation: "Alle rechten voorbehouden"
 - id: poweredBy
-  translation: "Mede mogelijk gemaakt door {{ . }}."
+  translation: "Mede mogelijk gemaakt door {{ . }}"
 
 # Comments
 - id: show

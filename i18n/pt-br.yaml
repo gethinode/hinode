@@ -140,7 +140,7 @@
 - id: rights
   translation: "Todos os direitos reservados"
 - id: poweredBy
-  translation: "Com tecnologia {{ . }}."
+  translation: "Com tecnologia {{ . }}"
 
 # Comments
 - id: show

@@ -126,7 +126,7 @@
 - id: rights
   translation: "Wszelkie prawa zastrzeżone"
 - id: poweredBy
-  translation: "Strona oparta o {{ . }}."
+  translation: "Strona oparta o {{ . }}"
 
 # Comments
 - id: show
