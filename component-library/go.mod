@@ -1,3 +1,3 @@
-module local/component-library
+module github.com/gethinode/hinode/component-library
 
-go 1.16
+go 1.19
