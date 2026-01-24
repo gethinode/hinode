@@ -27,8 +27,12 @@
 {{/* Initialize local variables */}}
 {{ $align := $args.align }}
 {{ $class := $args.class | default "" }}
-{{ $scale := $args.illustration.width }}
-{{ $icon := $args.illustration.icon }}
+{{ $scale := "" }}
+{{ $icon := "" }}
+{{ with $args.illustration }}
+    {{ $scale = .scale }}
+    {{ $icon = .icon }}
+{{ end }}
 {{ $heading := cond (eq $args.orientation "horizontal") (merge $args.heading (dict "width" 12)) $args.heading }}
 
 {{ if $scale }}
@@ -66,7 +70,7 @@
         </div>
     {{ end }}
 
-    {{ $imageWrapper := printf "%s text-%s mx-auto" $class $args.illustration.align }}
+    {{ $imageWrapper := printf "%s text-%s mx-auto" $class (or $args.illustration.align "start") }}
     {{ $imageJustify := "" }}
     {{ if eq $args.orientation "stacked" }}
         {{ $imageWrapper = printf "%s pb-%d" $imageWrapper $padding.y }}
@@ -100,20 +104,22 @@
             "sizes"         $sizes
             "title"         (T "heroImage")
             "wrapper"       $imageWrapper
-            "class"         (printf "hero-image %s" $args.illustration.class)
+            "class"         (printf "hero-image %s" (or $args.illustration.class ""))
             "image-overlay" $args.imageOverlay
             "justify"       $imageJustify
         ) }}
     {{ end }}
 
     {{ $title := partial "assets/section-title.html" (dict
-        "heading"     $heading
-        "use-title"   $args.useTitle
-        "links"       $args.links
-        "link-type"   (or $args.linkType $args.type)
-        "class"       "hero-title"
-        "arrangement" $arrangement
-        "justify"     $args.justify
+        "heading"       $heading
+        "use-title"     $args.useTitle
+        "links"         $args.links
+        "link-type"     (or $args.linkType $args.link_type $args.type)
+        "class"         "hero-title"
+        "arrangement"   $arrangement
+        "justify"       $args.justify
+        "heading-style" $args.headingStyle
+        "content-style" $args.contentStyle
     ) }}
 
     {{ if eq $args.orientation "stacked" }}

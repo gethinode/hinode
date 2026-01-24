@@ -32,7 +32,7 @@ blueprint:
   order:
   width:
   justify:
-  link-type:
+  link_type:
   fluid:
   theme:
   cover:

@@ -1,40 +1,27 @@
 {{/* 
-    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
-*/}}
 
-{{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "faq" "args" .)}}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "component-library/components/faq/faq.hugo.html" 
-        "warnid"  "warn-invalid-arguments"
-        "msg"     "Invalid arguments"
-        "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
-    )}}
-{{ end }}
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
+*/}}
 
 {{/* Initialize global arguments */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
-{{/* Main code */}}
-{{ if not $args.err }}
-	{{ $color := "" }}
-	{{ if $args.contrast }}{{ $color = "white" }}{{ end }}
-	{{- partial "assets/section-title.html" (dict
-		"heading" $args.heading
-		"justify" $args.justify
-		"class"   (printf "pb-%d" $padding.y))
-	-}}
-
-	{{ $class := "" }}
-	{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}
-
-	<div id="{{ $id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end -}}
+{{ define "_partials/inline/accordion-faq.html" }}
+	{{ $id := .id }}
+	{{ $contrast := .contrast }}
+	{{ $class := .class }}
+	{{ $color := .color }}
+	{{ $items := .items }}
+	
+	<div id="{{ $id }}" class="accordion accordion-faq {{ if $contrast }}accordion-faq-contrast text-white {{ end -}}
 		accordion-flush{{ with $class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
-		{{ range $index, $item := $args.items }}
+		{{ range $index, $item := $items }}
 			<div class="accordion-item">
 				{{- with $item.title -}}
 					<div class="accordion-header m-0" id="{{ $id }}-heading-{{ $id }}">
@@ -45,7 +32,7 @@
 							aria-expanded="false"
 							aria-controls="{{ $id }}-item-{{ $index }}"
 						>
-						{{ if $args.color }}<div class="text-{{ $args.color }}">{{ . }}</div>{{ else }}{{ . }}{{ end }}
+						{{ if $color }}<div class="text-{{ $color }}">{{ . }}</div>{{ else }}{{ . }}{{ end }}
 						</button>
 					</div>
 				{{- end -}}
@@ -59,4 +46,42 @@
 			</div>
 		{{ end }}
 	</div>
+{{ end }}
+
+{{/* Main code */}}
+{{ $color := "" }}
+{{ if .contrast }}{{ $color = "white" }}{{ end }}
+{{- $raw := partial "assets/section-title.html" (dict
+	"heading" .heading
+	"justify" .justify
+	"class"   (printf "pb-%d" $padding.y))
+-}}
+
+{{ $class := "" }}
+{{ $id := printf "faq-%s" (md5 (delimit (slice . now) "-")) }}
+
+{{ $raw = printf "%s%s" $raw (partial "inline/accordion-faq.html" (dict
+	"id"       $id
+	"contrast" .contrast
+	"class"    .class
+	"color"    .color
+	"items"    .items
+)) }}
+
+{{ if $raw }}
+	{{ partial "utilities/section.html" (dict 
+		"component-name" "faw"
+		"id"             .id
+		"raw"            $raw
+		"background"     .background
+		"width"          .width
+		"justify"        .justify
+		"wrapper"        .wrapper
+		"fluid"          .fluid
+		"theme"          .theme
+		"cover"          .cover
+		"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+		"section-class"  (or .section_class (index . "section-class"))
+		"bg-class"       (or .bg_class (index . "bg-class"))
+	)}}
 {{ end }}

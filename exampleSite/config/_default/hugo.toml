@@ -1,6 +1,6 @@
 resourcedir = '../resources/'
 title = "Hinode"
-copyright = "Copyright © 2022 - 2025 Mark Dumay."
+copyright = "Copyright © 2026 Hinode Team"
 enableGitInfo = true
 
 # additional settings
@@ -104,6 +104,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
        output = '{netlify,server}'
 
 [module]
+  replacements = "local/component-library -> ../../component-library"
   # Build and serve using local hinode clone declared in the named Hugo workspace:
   workspace = "hinode.work"
   [[module.imports]]

@@ -15,7 +15,7 @@ blueprint:
     content:
     align:
     width:
-  hide-empty:
+  hide_empty:
   input:
     section:
     nested:
@@ -38,6 +38,6 @@ blueprint:
   sortable:
   paginate:
   pagination:
-  pagination-select:
+  pagination_select:
   searchable:
   wrap:

@@ -209,12 +209,12 @@
                 </div>
             {{- end -}}
             <div class="{{ $col2 }}">
-                {{ $padding := printf "p-%d%s" $args.padding (cond (and (eq $args.padding 0) (or $icon $thumbnail)) " ps-3" "") }}
+                {{ $padding := printf "p-%d" $args.padding }}
                 <div class="card-body {{ $padding }} h-100 hstack">
                     {{ if $icon }}
                         {{- partial "assets/card-icon.html" (dict
                             "icon"         $icon
-                            "padding"      $args.padding
+                            "padding"      0
                             "icon-rounded" $args.iconRounded
                             "icon-style"   $style
                             "class"        (printf "align-self-%s me-1 mt-1 col-auto" $args.align)

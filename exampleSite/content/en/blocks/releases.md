@@ -21,8 +21,8 @@ The `releases` content block displays a timeline with release information.
     align: start
     width: 8
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   data: timeline
 ```
 

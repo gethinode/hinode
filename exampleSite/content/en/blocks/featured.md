@@ -20,8 +20,8 @@ The `featured` content block renders a featured article or downloadable asset.
     content: Content
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   illustration:
     image: /assets/img/nat-9l98kFByiao-unsplash.jpg
     ratio: 1x1

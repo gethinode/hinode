@@ -1,0 +1,28 @@
+comment: >-
+  Renders a bookshop component as section, using common styling options such as
+  background, width, and justification.
+arguments:
+  id:
+  component-name:
+    type: string
+    optional: false
+    comment: >-
+      Name of the bookshop component, excluding its path relative to the
+      bookshop folder.
+  raw:
+  background:
+  width:
+    default: 12
+  justify:
+  wrapper:
+  fluid:
+  theme:
+  cover:
+    default: false
+  overlay-mode:
+  section-class:
+    type: string
+    optional: true
+  bg-class:
+    type: string
+    optional: true

@@ -21,16 +21,16 @@ blueprint:
     backdrop:
     color:
     subtle:
-  link-type:
+  link_type:
   orientation:
-  icon-rounded:
-  icon-style:
+  icon_rounded:
+  icon_style:
   video:
     provider:
     account:
-    media-id:
+    media_id:
     autoplay:
-    query-args:
+    query_args:
     color:
   cols:
   messages:

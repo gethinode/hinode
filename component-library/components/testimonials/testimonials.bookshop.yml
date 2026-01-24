@@ -15,6 +15,7 @@ blueprint:
   card:
     color:
     subtle:
+  icon_style:
   testimonials:
     - logo:
       content:

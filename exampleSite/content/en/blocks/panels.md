@@ -20,8 +20,8 @@ The `panels` content block displays multiple panels that are toggled by a tab co
     content: Panels content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   width: 12
   tab-type: underline
   ratio: 1x1
@@ -63,8 +63,8 @@ Set `tab-type` to `tabs` to adjust the panel controls.
     content: Panels content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   width: 12
   tab-type: tabs
   ratio: 1x1
@@ -98,8 +98,8 @@ Set `tab-type` to `pills` to adjust the panel controls.
     content: Panels content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   width: 12
   tab-type: pills
   ratio: 1x1
@@ -133,8 +133,8 @@ Set `tab-type` to `underline` to adjust the panel controls.
     content: Panels content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   width: 12
   tab-type: underline
   ratio: 1x1
@@ -168,8 +168,8 @@ Set `tab-type` to `callout` to adjust the panel controls.
     content: Panels content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   width: 12
   tab-type: callout
   ratio: 1x1

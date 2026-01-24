@@ -1,40 +1,38 @@
 {{/* 
-    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
+
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
 */}}
-
-{{ $error := false }}
-
-{{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "articles" "args" .)}}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "component-library/components/articles/articles.hugo.html" 
-        "warnid"  "warn-invalid-arguments"
-        "msg"     "Invalid arguments"
-        "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
-    )}}
-    {{ $error = $args.err }}
-{{ end }}
 
 {{/* Initialize global arguments */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local variables */}}
+{{ $raw := "" }}
 {{ $pages := slice }}
-{{ $result := partial "assets/live-pages.html" (dict 
-	"page"       $args.page
-	"section"    $args.input.section
-	"nested"     $args.input.nested
-	"keywords"   $args.input.keywords
-	"categories" $args.input.categories
-	"tags"       $args.input.tags
-	"sort"       $args.input.sort
-	"reverse"    $args.input.reverse
-)}}
-{{ $pages = $result.pages }}
+{{ $section := "" }}
+{{ $categories := "" }}
+{{ $result := dict "total" 0 }}
+{{ with .input }}
+	{{ $section = .section }}
+	{{ $categories = .categories }}
+	{{ $result = partial "assets/live-pages.html" (dict 
+		"page"       $.page
+		"section"    .section
+		"nested"     .nested
+		"keywords"   .keywords
+		"categories" .categories
+		"tags"       .tags
+		"sort"       .sort
+		"reverse"    .reverse
+	)}}
+	{{ $pages = $result.pages }}
+{{ end }}
 
 <!-- Add style definitions -->
 {{ $styles := slice 
@@ -45,25 +43,25 @@
 	(dict "ratio" "1x1"  "orientation" "stacked" "portrait" false "width" "3")
 }}
 
-{{ if gt (len $args.styles) 0 }}
-	{{ $styles = $args.styles }}
+{{ if gt (len (or .styles slice)) 0 }}
+	{{ $styles = .styles }}
 {{ end }}
 
 <!-- Define more button -->
 {{ $moreButton := site.Params.modules.bookshop.articles.moreButton | default false }}
-{{ $title := or $args.input.section $args.input.categories (T "article") }}
+{{ $title := or $section $categories (T "article") }}
+{{ $moreLink := $section }}
 {{ $moreTitle := T "more" (pluralize $title) }}
-{{ $moreLink := $args.input.section }}
 {{ $moreType := "button" }}
 {{ $moreIcon := "" }}
-{{ with $args.more }}
+{{ with .more }}
 	{{ if .title }}{{ $moreTitle = .title }}{{ end }}
 	{{ if .link }}{{ $moreLink = .link }}{{ end }}
-	{{ if index . "link-type" }}{{ $moreType = index . "link-type" }}{{ end }}
+	{{ if or (.link_type) (index . "link-type") }}{{ $moreType = (.link_type) (index . "link-type") }}{{ end }}
 	{{ if .icon }}{{ $moreIcon = .icon }}{{ end }}
 {{ end }}
 
-{{ $paginate := $args.paginate }}
+{{ $paginate := .paginate }}
 {{ if and $paginate page.IsPage }}
     {{ partial "utilities/LogWarn.html" (dict 
         "partial" "component-library/components/articles/articles.hugo.html"
@@ -74,60 +72,76 @@
 {{ end }}
 
 {{/* Main code */}}
-{{ if not $error }}
-	{{ if or (gt (len $pages) 0) (not $args.hideEmpty) }}
-		{{- partial "assets/section-title.html" (dict
-			"heading" $args.heading
-			"justify" $args.justify
-			"class"   (printf "pb-%d" $padding.y))
-		-}}
+{{ if or (gt (len $pages) 0) (not .hide_empty) }}
+	{{- $raw = printf "%s%s" $raw (partial "assets/section-title.html" (dict
+		"heading" .heading
+		"justify" .justify
+		"class"   (printf "pb-%d" $padding.y)))
+	-}}
 
-		{{ $partial := "assets/card-group.html" }}
-		{{ $params := dict }}
-		{{- $params = merge $params (dict
-			"page"           page
-			"list"           $pages
-			"cols"           $args.cols
-			"limit"          $args.limit
-			"padding"        $args.padding
-			"href"           (cond $moreButton $moreLink "")
-			"href-force"     (gt $result.total (len $result.pages))
+	{{ $partial := "assets/card-group.html" }}
+	{{ $params := dict }}
+	{{- $params = merge $params (dict
+		"page"           page
+		"list"           $pages
+		"cols"           .cols
+		"limit"          .limit
+		"padding"        .padding
+		"href"           (cond $moreButton $moreLink "")
+		"href-force"     (gt $result.total (len $result.pages))
+	)}}
+
+	{{ if .scroll }}
+		{{ $partial = "assets/stack.html" }}
+		{{ $params = merge $params (dict 
+			"header-style" "none"
+			"body-style"   "title"
+			"footer-style" "none"
+			"gutter"       1
+			"ratio"        "1x1"
+			"orientation"  "horizontal-sm"
+			"animated"     .animated
+			"styles"       (cond .bento $styles "")
+		) -}}
+	{{ else }}
+		{{ $params = merge $params (dict 
+			"header-style"   (or .header_style (index . "header-style"))
+			"body-style"     (or .body_style (index . "body-style"))
+			"footer-style"   (or .footer_style (index . "footer-style"))
+			"class"          (or .class "border-0")
+			"align"          "start"
+			"orientation"    .orientation
+			"href-title"     (cond $moreButton $moreTitle "")
+			"icon-rounded"   .icon_rounded
+			"icon-style"     .icon_style
+			"hook"           "assets/live-card.html"
+			"more-link-type" $moreType
+			"more-link-icon" $moreIcon
+			"pagination"     .pagination
+			"paginate"       $paginate
+		) -}}
+	{{ end }}
+	{{ if gt (len $pages) 0 }}
+		{{ $raw = printf "%s%s" $raw (partial $partial $params) }}
+	{{ else }}
+		{{ $raw = printf "%s%s" $raw (printf `<p class="pt-%d">%s.</p>` $padding.y (T "emptyList")) }}
+	{{ end }}
+
+	{{ if $raw }}
+		{{ partial "utilities/section.html" (dict 
+			"component-name" "articles"
+			"id"             .id
+			"raw"            $raw
+			"background"     .background
+			"width"          .width
+			"justify"        .justify
+			"wrapper"        .wrapper
+			"fluid"          .fluid
+			"theme"          .theme
+			"cover"          .cover
+			"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+			"section-class"  (or .section_class (index . "section-class"))
+			"bg-class"       (or .bg_class (index . "bg-class"))
 		)}}
-
-		{{ if $args.scroll }}
-			{{ $partial = "assets/stack.html" }}
-			{{ $params = merge $params (dict 
-				"header-style" "none"
-				"body-style"   "title"
-				"footer-style" "none"
-				"gutter"       1
-				"ratio"        "1x1"
-				"orientation"  "horizontal-sm"
-				"animated"     $args.animated
-				"styles"       (cond $args.bento $styles "")
-			) -}}
-		{{ else }}
-			{{ $params = merge $params (dict 
-				"header-style"   $args.headerStyle
-				"body-style"     $args.bodyStyle
-				"footer-style"   $args.footerStyle
-				"class"          (or $args.class "border-0")
-				"align"          "start"
-				"orientation"    $args.orientation
-				"href-title"     (cond $moreButton $moreTitle "")
-				"icon-rounded"   $args.iconRounded
-				"icon-style"     $args.iconStyle
-				"hook"           "assets/live-card.html"
-				"more-link-type" $moreType
-				"more-link-icon" $moreIcon
-				"pagination"     $args.pagination
-				"paginate"       $paginate
-			) -}}
-		{{ end }}
-		{{ if gt (len $pages) 0 }}
-			{{ partial $partial $params }}
-		{{ else }}
-			<p class="pt-{{ $padding.y }}">{{- T "emptyList" }}.</p>
-		{{ end }}
 	{{ end }}
 {{ end }}

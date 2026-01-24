@@ -14,6 +14,9 @@ arguments:
   url:
   image:
   icon:
+  icon-style:
+    default: fa-5x
+    release: v2.0.0
   logo:
   padding:
   orientation:
@@ -21,7 +24,7 @@ arguments:
     type: bool
     optional: true
     default: false
-    comment: ->
+    comment: >-
       Trigger to add margins for carousel controls. If set,
       the card includes a quote icon on the right-hand side too.
   class:
