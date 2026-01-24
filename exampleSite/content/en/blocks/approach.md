@@ -20,8 +20,8 @@ The `approach` content block renders a featured image with one or more steps.
     content: Approach content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   illustration:
     image: /assets/img/nat-9l98kFByiao-unsplash.jpg
   orientation: stacked

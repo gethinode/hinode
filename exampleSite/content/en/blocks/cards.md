@@ -20,8 +20,8 @@ The `cards` content block renders a group of content cards.
     content: Cards content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   orientation: stacked
   icon-rounded: true
   icon-style: fa-xs
@@ -65,8 +65,8 @@ Set the `image` attribute of each `element` to an image asset to render illustra
     content: Cards content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   orientation: stacked
   class: bg-body
   align: center
@@ -97,8 +97,8 @@ Set the `orientation` attribute to `horizontal` to render horizontally oriented 
     content: Cards content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   orientation: horizontal
   class: bg-body
   align: center
@@ -132,8 +132,8 @@ Set the `icon` attribute of each `element` to an icon to render illustrated card
     content: Cards content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   orientation: stacked
   icon-style: fa-xs text-primary
   align: start
@@ -168,8 +168,8 @@ Set the `icon` attribute of each `element` to an icon to render illustrated card
     content: Cards content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   orientation: horizontal
   icon-rounded: true
   icon-style: fa-2xs text-primary

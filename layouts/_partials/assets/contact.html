@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2024 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -54,7 +54,7 @@
 
     {{ partial "assets/hero.html"  (dict
         "page"          $args.page
-        "heading"       (merge $heading (dict "size" 6))
+        "heading"       (merge $heading (dict "size" 4))
         "background"    $args.background
         "illustration"  $illustration 
         "order"         $args.order
@@ -64,7 +64,8 @@
         "width"         (or $args.width 12)
         "use-title"     false
         "size"          6
-        "content-style" "text-muted fs-5"
+        "heading-style" "fs"
+        "content-style" "text-muted fs-6"
         )
     }}
 {{ end }}

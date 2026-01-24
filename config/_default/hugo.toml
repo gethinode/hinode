@@ -1,6 +1,6 @@
 # toml-docs-start main
 title = "Hinode"
-copyright = "Copyright © 2022 - 2025 Mark Dumay."
+copyright = "Copyright © 2026 Hinode Team"
 enableGitInfo = true
 # toml-docs-end main
 
@@ -114,6 +114,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     keepWhitespace = true
 
 [module]
+  replacements = "local/component-library -> ../component-library"
   [module.hugoVersion]
     extended = true
     min = "0.146.0"
@@ -139,36 +140,11 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     source = "static"
     target = "static"
   [[module.mounts]]
-    source = 'component-library'
-    target = 'layouts/partials/bookshop'
-    includeFiles = ['**/*.hugo.html']
-  [[module.mounts]]
-    source = 'component-library'
-    target = 'data/structures'
-    includeFiles = ['**/*.bookshop.yml']
-  [[module.mounts]]
-    source = 'component-library'
-    target = 'assets/bookshop'
-  [[module.mounts]]
-    source = 'component-library'
-    target = 'assets/scss/modules/bookshop'
-    includeFiles = ['**/*.scss']
-    excludeFiles = ['bookshop.scss']
-  [[module.mounts]]
-    source = 'component-library/bookshop.scss'
-    target = 'assets/scss/bookshop.scss'
-  [[module.mounts]]
-    source = 'component-library/helpers'
-    target = 'layouts/partials/_bookshop/helpers'
-  # ensures main package.json is always available, even when using workspaces
-  # in workspaces, the package.json is pointing to the first imported module
-  [[module.mounts]]
-    source = "package.json"
-    target = "assets/data/package-hinode.json"
-  [[module.mounts]]
     source = "netlify.toml"
     target = "assets/config/netlify.toml"
 # toml-docs-start modules
+  [[module.imports]]
+    path = "local/component-library"
   [[module.imports]]
     path = "github.com/cloudcannon/bookshop/hugo/v3"
   [[module.imports]]

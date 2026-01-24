@@ -1,31 +1,22 @@
 {{/* 
-    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
+
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
 */}}
-
-{{ $error := false }}
-
-{{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "cards" "args" .)}}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "component-library/components/cards/cards.hugo.html" 
-        "warnid"  "warn-invalid-arguments"
-        "msg"     "Invalid arguments"
-        "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
-    )}}
-    {{ $error = $args.err }}
-{{ end }}
 
 {{/* Initialize global arguments */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local variables */}}
+{{ $raw := "" }}
 {{ $list := slice }}
-{{ range $args.elements }}
+{{ range .elements }}
 	<!-- TODO: check mode -->
 	{{ $list = $list | append (dict 
 		"title"        .title
@@ -39,40 +30,55 @@
 {{ end}}
 
 {{/* Main code */}}
-{{ if not $error }}
-	{{- partial "assets/section-title.html" (dict
-		"heading" $args.heading
-		"justify" $args.justify
-		"class"   (printf "pb-%d" $padding.y))
-	-}}
+{{- $raw = printf "%s%s" $raw (partial "assets/section-title.html" (dict
+	"heading" .heading
+	"justify" .justify
+	"class"   (printf "pb-%d" $padding.y)))
+-}}
 
-	{{/* Init base arguments for card group */}}
-	{{ $params := dict 
-		"page"         page
-		"list"         $list
-		"class"        (printf "border-0 card-icon-primary %s" (or $args.class ""))
-		"cols"         $args.cols
-		"gutter"       "4"
-		"padding"      $args.padding
-		"header-style" "none"
-		"footer-style" "none"
-		"icon-rounded" $args.iconRounded
-		"icon-style"   (or $args.iconStyle "fa-2x")
-		"link-type"    $args.linkType
-		"align"        $args.align
-		"hook"         "assets/live-card.html"
-	}}
+{{/* Init base arguments for card group */}}
+{{ $params := dict 
+	"page"         page
+	"list"         $list
+	"class"        (printf "border-0 card-icon-primary %s" (or .class ""))
+	"cols"         .cols
+	"gutter"       "4"
+	"padding"      .padding
+	"header-style" "none"
+	"footer-style" "none"
+	"icon-rounded" (or .icon_rounded (index . "icon-rounded"))
+	"icon-style"   (or .icon_style (index . "icon-style") "fa-2x")
+	"link-type"    (or .link_type (index . "link-type"))
+	"align"        .align
+	"hook"         "assets/live-card.html"
+}}
 
-	{{/* Layout for small screens */}}
-	{{- partial "assets/card-group.html" (merge $params (dict 
-		"orientation"  ($args.orientation | default "horizontal-sm")
-		"wrapper"      (printf "d-%s-none" $breakpoint.prev)
-	)) -}}
+{{/* Layout for small screens */}}
+{{- $raw = printf "%s%s" $raw (partial "assets/card-group.html" (merge $params (dict 
+	"orientation"  (.orientation | default "horizontal-sm")
+	"wrapper"      (printf "d-%s-none" $breakpoint.prev)
+))) -}}
 
-	{{/* Layout for regular screens */}}
-	{{- partial "assets/card-group.html" (merge $params (dict 
-		"orientation"  ($args.orientation | default "stacked")
-		"wrapper"      (printf "d-none d-%s-block" $breakpoint.prev)
-	)) -}}
+{{/* Layout for regular screens */}}
+{{- $raw = printf "%s%s" $raw (partial "assets/card-group.html" (merge $params (dict 
+	"orientation"  (.orientation | default "stacked")
+	"wrapper"      (printf "d-none d-%s-block" $breakpoint.prev)
+))) -}}
+
+{{ if $raw }}
+	{{ partial "utilities/section.html" (dict 
+		"component-name" "cards"
+		"id"             .id
+		"raw"            $raw
+		"background"     .background
+		"width"          .width
+		"justify"        .justify
+		"wrapper"        .wrapper
+		"fluid"          .fluid
+		"theme"          .theme
+		"cover"          .cover
+		"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+		"section-class"  (or .section_class (index . "section-class"))
+		"bg-class"       (or .bg_class (index . "bg-class"))
+	)}}
 {{ end }}
-

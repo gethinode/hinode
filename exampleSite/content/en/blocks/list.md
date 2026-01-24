@@ -30,8 +30,8 @@ modules: ["simple-datatables"]
     sort: title
   hide-empty: false
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   justify: start
   sortable: true
   paginate: true

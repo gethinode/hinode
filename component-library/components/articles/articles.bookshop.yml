@@ -15,7 +15,7 @@ blueprint:
     content:
     align:
     width:
-  hide-empty:
+  hide_empty:
   input:
     section:
     nested:
@@ -27,10 +27,10 @@ blueprint:
   more:
     title:
     link:
-    link-type:
+    link_type:
     icon:
-  icon-rounded:
-  icon-style:
+  icon_rounded:
+  icon_style:
   cols:
   padding:
   limit:
@@ -50,9 +50,9 @@ blueprint:
       portrait:
       width:
   cover:
-  header-style:
-  body-style:
-  footer-style:
+  header_style:
+  body_style:
+  footer_style:
   orientation:
   class:
   width:

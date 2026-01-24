@@ -28,8 +28,8 @@ The `articles` content block renders a group of article cards.
   padding: 0
   limit: 3
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   class: border-0 card-zoom card-body-margin
   justify: start
 ```

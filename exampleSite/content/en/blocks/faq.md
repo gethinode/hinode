@@ -22,8 +22,8 @@ The `FAQ` content block renders an accordion of frequently asked questions. Clic
     content: >-
       Section content. It supports multiple lines.
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   items:
     - title: First item
       description: |-

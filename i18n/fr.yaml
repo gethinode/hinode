@@ -138,7 +138,7 @@
 - id: rights
   translation: "Tous droits réservés"
 - id: poweredBy
-  translation: "Propulsé par {{ . }}."
+  translation: "Propulsé par {{ . }}"
 
 # Comments
 - id: show

@@ -1,20 +1,13 @@
 {{/* 
-    Copyright © 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
-*/}}
 
-{{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "bookshop" "video-message" "args" .) }}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "component-library/components/video-message/video-message.hugo.html" 
-        "warnid"  "warn-invalid-arguments"
-        "msg"     "Invalid arguments"
-        "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
-    )}}
-{{ end }}
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
+*/}}
 
 {{/* Initialize global variables */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
@@ -59,7 +52,7 @@
 {{- define "_partials/inline/messages.html" -}}
 	{{ $list := .list }}
 	{{ $cols := .cols }}
-	{{ $type := .type }}
+	{{ $linkType := .linkType }}
 	{{ $iconRounded := .iconRounded }}
 	{{ $iconStyle := .iconStyle }}
 
@@ -76,88 +69,117 @@
 		"align"        "start"
 		"orientation"  "horizontal-sm"
 		"button"       true
-		"link-type"    $type
+		"link-type"    $linkType
 		"icon-rounded" $iconRounded
 		"icon-style"   $iconStyle
 	) -}}
 {{ end }}
 
-{{/* Main code */}}
-{{ if not $args.err }}
-	{{ $list := slice }}
+{{- define "_partials/inline/video-stacked.html" -}}
+	{{ $breakpoint := .breakpoint }}
+	{{ $padding := .padding }}
+	{{ $width := .width }}
+	{{ $video := .video }}
+	{{ $messages := .messages }}
 
-	{{ range $args.messages }}
-		{{ $path := "" }}
-		{{ $href := "" }}
-		{{ with .link }}{{ if hasPrefix . "http" }}{{ $href = . }}{{ else }}{{ $path = . }}{{ end }}{{ end }}
+	<div class="col-{{ $breakpoint.current }}-{{ $width }} mx-auto">
+		{{ $video | safeHTML }}
+	</div>
+	<div class="mt-{{ $padding.y }} w-100">
+		{{ $messages | safeHTML }}
+	</div>
+{{ end }}
 
-		{{ $list = $list | append (dict 
-			"title"        .title
-			"description"  (.content | page.RenderString) 
-			"icon"         .icon
-			"href"         $href
-			"path"         $path
-			"button-label" .label
-		) }}
-	{{ end}}
+{{- define "_partials/inline/video-horizontal.html" -}}
+	{{ $breakpoint := .breakpoint }}
+	{{ $padding := .padding }}
+	{{ $width := .width | default 12 }}
+	{{ $video := .video }}
+	{{ $messages := .messages }}
 
-	{{- partial "assets/section-title.html" (dict
-		"heading" $args.heading
-		"justify" $args.justify
-		"class"   (printf "pb-%d" $padding.y))
-	-}}
-
-	{{ if eq $args.orientation "stacked" }}
-		<div class="col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
-		{{ with $args.video }}
-			{{- partial "inline/video.html" (dict
-				"provider"   .provider
-				"account"    .account
-				"media-id"   (index . "media-id")
-				"autoplay"   .autoplay
-				"query-args" .queryArgs
-				"border"     $.border
-				"padding"    $padding
-				"color"      .color
-			) -}}
-		{{ end }}
-		</div>
-		<div class="mt-{{ $padding.y }} w-100">
-			{{- partial "inline/messages.html" (dict
-				"list"        $list
-				"cols"        $args.cols
-				"type"        $args.type
-				"iconRounded" $args.iconRounded
-				"iconStyle"   $args.iconStyle
-			) -}}
-		</div>
-	{{ else }}
-		<div class="container grid gap-{{ $padding.x }}">
-			<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
-				<div class="col col-{{ $breakpoint.current }}-{{ $args.width }} p-0">
-					{{ with $args.video }}
-						{{- partial "inline/video.html" (dict
-							"provider"   .provider
-							"account"    .account
-							"media-id"   (index . "media-id")
-							"autoplay"   .autoplay
-							"query-args" .queryArgs
-							"border"     $.border
-							"padding"    $padding
-							"color"      .color
-						) -}}
-					{{ end }}
-				</div>
-				<div class="col col-{{ $breakpoint.current }}-{{ sub 12 $args.width }} mt-{{ $padding.y }} mt-{{ $breakpoint.current }}-0">
-					{{- partial "inline/messages.html" (dict
-						"list"        $list
-						"cols"        1
-						"type"        $args.type
-						"iconRounded" $args.iconRounded
-						"iconStyle"   $args.iconStyle
-					) -}}
-				</div>
+	<div class="container grid gap-{{ $padding.x }}">
+		<div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
+			<div class="col col-{{ $breakpoint.current }}-{{ $width }} p-0">
+				{{ $video | safeHTML }}
+			</div>
+			<div class="col col-{{ $breakpoint.current }}-{{ sub 12 $width }} mt-{{ $padding.y }} mt-{{ $breakpoint.current }}-0">
+				{{ $messages | safeHTML }}
 			</div>
 		</div>
-	{{ end }}
+	</div>
+{{ end }}
+
+{{/* Main code */}}
+{{ $list := slice }}
+
+{{ range .messages }}
+	{{ $path := "" }}
+	{{ $href := "" }}
+	{{ with .link }}{{ if hasPrefix . "http" }}{{ $href = . }}{{ else }}{{ $path = . }}{{ end }}{{ end }}
+
+	{{ $list = $list | append (dict 
+		"title"        .title
+		"description"  (.content | page.RenderString) 
+		"icon"         .icon
+		"href"         $href
+		"path"         $path
+		"button-label" .label
+	) }}
+{{ end}}
+
+{{- $raw := partial "assets/section-title.html" (dict
+	"heading" .heading
+	"justify" .justify
+	"class"   (printf "pb-%d" $padding.y))
+-}}
+
+{{ $video := "" }}
+{{ with .video }}
+	{{ $video = partial "inline/video.html" (dict
+		"provider"   .provider
+		"account"    .account
+		"media-id"   (or .media_id (index . "media-id"))
+		"autoplay"   .autoplay
+		"query-args" (or .query_args (index . "query-args"))
+		"border"     $.border
+		"padding"    $padding
+		"color"      .color
+	) -}}
+{{ end }}
+
+{{- $messages := partial "inline/messages.html" (dict
+	"list"        $list
+	"cols"        (cond (eq .orientation "stacked") .cols 1)
+	"type"        .type
+	"linkType"    (or .link_type (index . "link-type"))
+	"iconRounded" (or .icon_rounded (index . "icon-rounded"))
+	"iconStyle"   (or .icon_style (index . "icon-style"))
+) -}}
+
+{{ $partial := cond (eq .orientation "stacked") "inline/video-stacked.html" "inline/video-horizontal.html" }}
+
+{{- $raw = printf "%s%s" $raw (partial $partial (dict 
+	"breakpoint" $breakpoint
+	"padding"    $padding
+	"width"      .width
+	"video"      $video
+	"messages"   $messages 
+)) }}
+
+{{ if $raw }}
+	{{ partial "utilities/section.html" (dict 
+		"component-name" "video-message"
+		"id"             .id
+		"raw"            $raw
+		"background"     .background
+		"width"          .width
+		"justify"        .justify
+		"wrapper"        .wrapper
+		"fluid"          .fluid
+		"theme"          .theme
+		"cover"          .cover
+		"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+		"section-class"  (or .section_class (index . "section-class"))
+		"bg-class"       (or .bg_class (index . "bg-class"))
+	)}}
 {{ end }}

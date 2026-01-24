@@ -16,9 +16,9 @@ blueprint:
     align:
     width:
   cols:
-  icon-rounded:
-  icon-style:
-  link-type:
+  icon_rounded:
+  icon_style:
+  link_type:
   padding:
   background:
     backdrop:

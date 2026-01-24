@@ -26,8 +26,8 @@ The `team` content block renders a group of team members.
   header-style: none
   padding: 0
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   class: border-0 card-zoom card-body-margin
   justify: start
 ```

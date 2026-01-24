@@ -21,8 +21,8 @@ The `video` content block renders a horizontal line to separate sections. The se
     content: Video content. It supports multiple lines.
     align: start
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   orientation: horizontal
   icon-style: fa-lg
   video:

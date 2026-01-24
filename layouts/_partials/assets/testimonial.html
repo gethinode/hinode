@@ -1,5 +1,5 @@
 <!-- 
-    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2024 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
 -->
 
 <!-- Inline partials -->
@@ -32,9 +32,9 @@
 {{ end }}
 
 {{ define "_partials/inline/testimonial-inner.html" }}
-    <div class="d-flex flex-column {{ .class }} {{ .padding }} h-100">
+    <div class="d-flex flex-column {{ .class }} h-100 p-{{ .padding }}">
         {{ if or .logo .icon }}
-            <div class="col-6 col-md-3 p-0">
+            <div class="p-0">
                 {{ $class := "" }}
                 {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
                 {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
@@ -42,12 +42,12 @@
                 {{ partial "assets/featured-illustration.html" (dict
                     "page"    .page
                     "image"   .logo
-                    "icon"    .icon
+                    "icon"    (trim (cond .icon (printf "%s %s" .icon (index . "icon-style")) "") " ")
                     "class"   $class
                     "title"   $title
                     "sizes"   "(min-width: 768px) 33.3vw, 100vw"
-                    "wrapper" "col-9 py-4 py-md-0"
-                ) }}			
+                    "wrapper" (cond .logo "col-9 py-4 py-md-0" "")
+                ) }}
             </div>
         {{ end }}
         <div class="fs-md-5 pt-3 h-100">
@@ -141,6 +141,7 @@
             "page"        $args.page
             "content"     $args.content
             "icon"        $args.icon
+            "icon-style"  $args.iconStyle
             "logo"        $args.logo
             "contact"     $args.contact
             "role"        $args.role

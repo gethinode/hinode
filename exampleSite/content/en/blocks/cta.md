@@ -17,8 +17,8 @@ The `cta` content block renders a call to action link or button. You can include
   contact: Betty White
   caption-url: /en/blocks/cta/
   background:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   order: first
   links:
     - title: Get in touch

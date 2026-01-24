@@ -15,8 +15,8 @@ The `testimonials` content block renders one or more client testimonials. You ca
 ```yml
 - _bookshop_name: testimonials
   card:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   cols: 1
   carousel: true
   testimonials:
@@ -53,8 +53,8 @@ Set `carousel` to `true` to render a carousel of multiple testimonials.
 ```yml
 - _bookshop_name: testimonials
   card:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   cols: 1
   carousel: true
   testimonials:
@@ -82,9 +82,10 @@ Set `cols` to `3` to render three testimonials as columns.
 ```yml
 - _bookshop_name: testimonials
   card:
-    color: primary
-    subtle: true
+    color: body-tertiary
+    subtle: false
   cols: 3
+  icon_style: fa-2x
   carousel: false
   testimonials:
     - icon: fab linkedin
