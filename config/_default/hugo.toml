@@ -114,7 +114,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     keepWhitespace = true
 
 [module]
-  workspace = "hinode.work"
+  # Workspace is only configured in exampleSite and downstream projects
   replacements = "github.com/gethinode/hinode/component-library -> ../component-library"
   [module.hugoVersion]
     extended = true
