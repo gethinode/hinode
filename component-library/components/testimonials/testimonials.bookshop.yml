@@ -18,6 +18,8 @@ blueprint:
   icon_style:
   testimonials:
     - logo:
+      icon:
+      scale:
       content:
       client:
         name:

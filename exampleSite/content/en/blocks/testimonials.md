@@ -18,9 +18,11 @@ The `testimonials` content block renders one or more client testimonials. You ca
     color: body-tertiary
     subtle: false
   cols: 1
+  icon_style: fa-2x
   carousel: true
   testimonials:
     - icon: fab linkedin
+      scale: 1.6
       content: >-
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
         doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
@@ -56,15 +58,19 @@ Set `carousel` to `true` to render a carousel of multiple testimonials.
     color: body-tertiary
     subtle: false
   cols: 1
+  icon_style: fa-4x
   carousel: true
   testimonials:
     - icon: fab linkedin
+      scale: 1.6
       content: First testimonial.
       link: /en/about/
     - icon: fab google
+      scale: 1.6
       content: Second testimonial.
       link: /en/about/
     - icon: fab github
+      scale: 1.6
       content: Third testimonial.
       link: /en/about/
 ```
@@ -89,10 +95,13 @@ Set `cols` to `3` to render three testimonials as columns.
   carousel: false
   testimonials:
     - icon: fab linkedin
+      scale: 1.6
       content: First testimonial.
     - icon: fab google
+      scale: 1.6
       content: Second testimonial.
     - icon: fab github
+      scale: 1.6
       content: Third testimonial.
 ```
 

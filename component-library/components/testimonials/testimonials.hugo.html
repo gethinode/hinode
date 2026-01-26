@@ -39,8 +39,10 @@
 						{{ partial "assets/testimonial.html" (dict 
 							"page"          page
 							"content"       $item.content
-							"icon"          $item.icon
 							"logo"          $item.logo
+							"icon"          $item.icon
+							"icon-style"    $iconStyle
+							"scale"         $item.scale
 							"contact"       (cond ($item.client | not | not) $item.client.contact "")
 							"role"          (cond ($item.client | not | not) $item.client.role "")
 							"image"         (cond ($item.client | not | not) $item.client.image "")
@@ -70,9 +72,10 @@
 						{{ partial "assets/testimonial.html" (dict 
 							"page"        page
 							"content"     .content
+							"logo"        .logo
 							"icon"        .icon
 							"icon-style"  $iconStyle
-							"logo"        .logo
+							"scale"       .scale
 							"contact"     (cond (.client | not | not) .client.contact "")
 							"role"        (cond (.client | not | not) .client.role "")
 							"image"       (cond (.client | not | not) .client.image "")
@@ -112,7 +115,7 @@
 	"testimonials" .testimonials
 	"card"         .card
 	"padding"      .padding
-	"colGrid"      .colGrid
+	"colGrid"      $colGrid
 	"icon-style"   (or .icon_style (index . "icon-style"))
 ) }}
 

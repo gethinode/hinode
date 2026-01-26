@@ -104,7 +104,6 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
        output = '{netlify,server}'
 
 [module]
-  replacements = "local/component-library -> ../../component-library"
   # Build and serve using local hinode clone declared in the named Hugo workspace:
   workspace = "hinode.work"
   [[module.imports]]
