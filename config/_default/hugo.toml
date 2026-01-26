@@ -114,8 +114,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     keepWhitespace = true
 
 [module]
-  # Workspace is only configured in exampleSite and downstream projects
-  replacements = "github.com/gethinode/hinode/component-library -> ../component-library"
+  # Component-library is now integrated in layouts/component-library
   [module.hugoVersion]
     extended = true
     min = "0.146.0"
@@ -137,6 +136,23 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.mounts]]
     source = "layouts"
     target = "layouts"
+  # Bookshop component mounts (from integrated component-library)
+  [[module.mounts]]
+    source = "layouts/component-library"
+    target = "layouts/partials/bookshop"
+    includeFiles = ["**/*.hugo.html"]
+  [[module.mounts]]
+    source = "layouts/component-library"
+    target = "data/structures"
+    includeFiles = ["**/*.bookshop.yml"]
+  [[module.mounts]]
+    source = "layouts/component-library/bookshop.scss"
+    target = "assets/scss/bookshop.scss"
+  [[module.mounts]]
+    source = "layouts/component-library"
+    target = "assets/scss/modules/bookshop"
+    includeFiles = ["**/*.scss"]
+    excludeFiles = ["bookshop.scss"]
   [[module.mounts]]
     source = "static"
     target = "static"
@@ -144,8 +160,6 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     source = "netlify.toml"
     target = "assets/config/netlify.toml"
 # toml-docs-start modules
-  [[module.imports]]
-    path = "github.com/gethinode/hinode/component-library"
   [[module.imports]]
     path = "github.com/cloudcannon/bookshop/hugo/v3"
   [[module.imports]]
