@@ -1,0 +1,41 @@
+{{/* 
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
+*/}}
+
+{{ $raw := partial "assets/hero.html"  (dict 
+	"page"         page
+	"heading"      (merge (dict "width" 8) .heading)
+	"illustration" (merge (dict "ratio" "auto") .illustration)
+	"order"        .order
+	"link-type"    (or .link_type (index . "link-type"))
+	"links"        .links
+	"orientation"  "horizontal"
+    "width"        (.width | default 8)
+	)
+}}
+
+<!-- TODO: adjust width behavior -->
+{{ if $raw }}
+	{{ partial "utilities/section.html" (dict 
+		"component-name" "about"
+		"id"             .id
+		"raw"            $raw
+		"background"     .background
+		"width"          12 
+		"justify"        .justify
+		"wrapper"        .wrapper
+		"fluid"          .fluid
+		"theme"          .theme
+		"cover"          .cover
+		"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+		"section-class"  (or .section_class (index . "section-class"))
+		"bg-class"       (or .bg_class (index . "bg-class"))
+	)}}
+{{ end }}

@@ -1,0 +1,18 @@
+section.testimonials {
+    .carousel, .testimonial-grid {
+        width: 100%;
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        color: var(--bs-primary-text-emphasis);
+
+        &:hover,
+        &:focus {
+            color: var(--bs-primary);
+        }
+    }
+
+    .carousel-indicators button {
+        background-color: $primary !important;
+    }
+}

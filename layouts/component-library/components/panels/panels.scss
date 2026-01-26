@@ -1,0 +1,13 @@
+.panels .dropdown-toggle {
+    text-decoration: none !important;
+}
+
+.panels .nav-tabs {
+    border-top-left-radius: #{$theme-border-radius};
+    border-top-right-radius: #{$theme-border-radius};
+    margin-left: #{$theme-border-radius};
+}
+
+.panels .tab-content {
+    border-radius: #{$theme-border-radius};
+}

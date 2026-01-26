@@ -1,0 +1,44 @@
+$accordion-button-icon-white:                         url("/icons/accordion-button-icon-white.svg") !default;
+$accordion-button-active-icon-white:                  url("/icons/accordion-button-active-icon-white.svg") !default;
+
+
+.accordion-faq {
+    --#{$prefix}accordion-btn-padding-x: 0;
+    --#{$prefix}accordion-btn-focus-border-color: none;
+    --#{$prefix}accordion-btn-focus-box-shadow: none;
+    --#{$prefix}accordion-body-padding-x: 0;
+    --#{$prefix}accordion-active-color: var(--#{$prefix}primary);
+    --#{$prefix}accordion-active-bg: none;
+    --#{$prefix}accordion-border-color: var(--#{$prefix}body-color);
+    --#{$prefix}accordion-bg: none;
+}
+
+.accordion-faq .accordion-button {
+    font-size: $h5-font-size;
+}
+
+// note: explicitly suppresses border in Safari
+.accordion-faq [aria-expanded="true"] {
+    --#{$prefix}accordion-border-color: none;
+}
+
+.accordion-faq-contrast {
+    --#{$prefix}accordion-active-color: var(--#{$prefix}white);
+    --#{$prefix}accordion-border-color: white;
+}
+
+.accordion-faq-contrast .accordion-button, .accordion-faq-contrast .accordion-body {
+    --#{$prefix}accordion-btn-icon: #{$accordion-button-icon-white};
+    --#{$prefix}accordion-btn-active-icon: #{$accordion-button-active-icon-white};
+    --#{$prefix}accordion-border-color: white;
+
+    color: white;
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .accordion-faq .accordion-button {
+            background-color: transparent;
+        }
+    }
+}

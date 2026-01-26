@@ -1,0 +1,93 @@
+{{/* 
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
+*/}}
+
+{{/* Initialize global arguments */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Initialize local variables */}}
+{{ $list := slice }}
+{{ $titles := slice }}
+{{ $toc := slice }}
+{{ $parentID := printf "panel-%v" (md5 (delimit (slice . now) "-")) }}
+{{ $inner := "" }}
+{{ range $i, $element := .elements }}
+	{{ $toc = $toc | append (dict "href" "panel-0-1" "level" 2 "title" .title) }}
+
+    {{ $hero := partial "assets/hero.html"  (dict 
+        "page"          page
+        "heading"       (dict "content" .content "width" 8)
+        "background"    .background
+        "illustration"  (dict "ratio" (or .ratio "1x1") "icon" .icon "image" .image "mode" .mode "justify" "end")
+		"order"         .order
+        "link-type"     (or .link_type (index . "link-type"))
+        "links"         .links
+        "orientation"   "horizontal"
+		"align"         "start"
+		"width"         12
+        "content-style" "fs-6"
+        )
+    }}
+
+	{{- $output := partial "assets/nav-item.html" (dict 
+        "page"      page
+        "id"        $i
+        "parent-id" $parentID
+        "fade"      false
+        "title"     .title
+		"show"      (eq $i 0)
+        "raw"       $hero
+        )
+    -}}
+
+	{{ $inner = printf "%s\n%s" $inner $output }}
+	{{ $titles = $titles | append .title }}
+{{ end}}
+
+{{/* Main code */}}
+{{- $raw := partial "assets/section-title.html" (dict
+    "heading" .heading
+    "justify" .justify
+    "class"   (printf "pb-%d" $padding.y))
+-}}
+
+{{- $raw = printf "%s%s" $raw (partial "assets/nav.html" (dict 
+    "id"           (or .id $parentID)
+    "page"         page
+    "nav-items"    $inner
+    "nav-titles"   $titles
+    "tab-type"     (or .tab_type (index . "tab-type"))
+    "vertical"     .vertical
+    "word-wrap"    (or .word_wrap (index . "word-wrap"))
+    "class"        .class
+    "pane"         .pane
+    "width"        .width
+    "responsive"   .responsive
+    ))
+-}}
+
+{{ if $raw }}
+	{{ partial "utilities/section.html" (dict 
+		"component-name" "panels"
+		"id"             .id
+		"raw"            $raw
+		"background"     .background
+		"width"          .width
+		"justify"        .justify
+		"wrapper"        .wrapper
+		"fluid"          .fluid
+		"theme"          .theme
+		"cover"          .cover
+		"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+		"section-class"  (or .section_class (index . "section-class"))
+		"bg-class"       (or .bg_class (index . "bg-class"))
+	)}}
+{{ end }}

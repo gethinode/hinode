@@ -1,0 +1,29 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: Releases
+  description: Release timeline
+  icon: fingerprint
+  tags: []
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  heading:
+    preheading:
+    title:
+    content:
+    align:
+    arrangement:
+    width:
+    size:
+  background:
+    backdrop:
+    color:
+    subtle:
+  width:
+  justify:
+  data:
+  fluid:
+  theme:
+  cover:

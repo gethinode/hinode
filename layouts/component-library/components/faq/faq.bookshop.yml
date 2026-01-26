@@ -1,0 +1,31 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: FAQ
+  description: Accordion of frequently asked questions
+  icon: expand_more
+  tags: []
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  heading:
+    preheading:
+    title:
+    content:
+    align:
+    width:
+    size:
+  contrast:
+  width:
+  justify:
+  background:
+    backdrop:
+    color:
+    subtle:
+  items:
+    - title:
+      description:
+  fluid:
+  theme:
+  cover:

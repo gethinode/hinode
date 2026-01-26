@@ -1,0 +1,12 @@
+.cta {
+    background-color: var(--#{$prefix}primary-bg-subtle);
+}
+
+.cta, .background-img-fluid  {
+    border-radius: #{$theme-border-radius} if($enable-important-utilities, !important, null);
+}
+
+.cta .contact-img {
+    background-color: var(--#{$prefix}body-bg);
+    border-radius: var(--bs-border-radius);
+}

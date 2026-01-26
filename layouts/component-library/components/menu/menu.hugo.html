@@ -1,0 +1,48 @@
+{{/* 
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
+*/}}
+
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Main code */}}
+{{- $raw := partial "assets/section-title.html" (dict
+	"heading" .heading
+	"justify" .justify
+	"class"   (printf "pb-%d" $padding.y))
+-}}
+
+{{- $raw = printf "%s%s" $raw (partial "assets/menu.html" (dict 
+	"page"         page
+	"menu"         .menu
+	"menu-style"   .menuStyle
+	"cols"         .cols
+	"icon-rounded" .iconRounded
+	"icon-style"   .iconStyle
+)) -}}
+
+
+{{ if $raw }}
+	{{ partial "utilities/section.html" (dict 
+		"component-name" "menu"
+		"id"             .id
+		"raw"            $raw
+		"background"     .background
+		"width"          .width
+		"justify"        .justify
+		"wrapper"        .wrapper
+		"fluid"          .fluid
+		"theme"          .theme
+		"cover"          .cover
+		"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+		"section-class"  (or .section_class (index . "section-class"))
+		"bg-class"       (or .bg_class (index . "bg-class"))
+	)}}
+{{ end }}

@@ -1,0 +1,114 @@
+{{/* 
+    Copyright © 2025 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+	Note: To support live editing, bookshop components should use a clear path to the provided arguments.
+	Therefore, we cannot use the InitArgs partial at this point, and we need to access each argument
+	directly. See the docs for more background:
+	https://github.com/CloudCannon/bookshop/blob/main/guides/hugo.adoc#passing-data-to-bookshop-components
+*/}}
+
+
+{{/* Initialize global arguments */}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+
+{{/* Ensure to include the simple-datatables module */}}
+{{/* TODO: fix add module handling, requires propagating scratch variables to correct page */}}
+{{ partial "utilities/AddModule.html" (dict "page" ._page "module" "simple-datatables" ) }}
+
+{{/* Initialize local variables */}}
+{{ $pages := slice }}
+{{ $result := dict "total" 0 }}
+{{ with .input }}
+	{{ $result = partial "assets/live-pages.html" (dict 
+		"page"       $._page
+		"section"    .section
+		"nested"     .nested
+		"keywords"   .keywords
+		"categories" .categories
+		"tags"       .tags
+		"sort"       .sort
+		"reverse"    .reverse
+	)}}
+	{{ $pages = $result.pages }}
+{{ end }}
+
+{{ if and .limit .paginate }}
+    {{ partial "utilities/LogWarn.html" (dict 
+        "partial" "component-library/components/list/list.hugo.html"
+        "msg"     "Limit is ignored when paginate is set"
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{/* Limit list to max elements */}}
+{{- $count := len $pages -}}
+{{- $max := $count -}}
+{{- $max = math.Min (.limit | default $count) $count -}}
+{{- if not .paginate -}}
+    {{- $pages = first $max $pages -}}
+{{- end -}}
+
+{{/* Main code */}}
+{{ $hideEmpty := or .hide_empty (index . "hide-empty") }}
+{{ if or (gt (len $pages) 0) (not $hideEmpty) }}
+	{{- $raw := partial "assets/section-title.html" (dict
+		"heading" .heading
+		"justify" .justify
+		"class"   (printf "pb-%d" $padding.y))
+	-}}
+	{{ if gt (len $pages) 0 }}
+		{{ $content := "" }}
+		{{ if .hook }}
+			{{ $content = partial .hook (dict "pages" $pages) }}
+		{{ else }}
+			{{ $content = "| Title | Description |\n|-|-|\n" }}
+			{{ range $pages }}
+				{{ $content = printf "%s[%s](#%s) | %s |\n" $content .LinkTitle .RelPermalink .Description }}
+			{{ end }}
+		{{ end }}
+
+		{{- /* Define main breakpoint */ -}}
+		{{- .page.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
+
+		{{ $pagination := .pagination | default 10 }}
+		{{ $paginate := and .paginate (gt (len $pages) $pagination) }}
+		{{ $sortable := and .sortable (gt (len $pages) 1) }}
+		{{ $searchable := and .searchable (gt (len $pages) 1) }}
+
+		{{ $raw = printf "%s%s" $raw (partial "assets/table.html" (dict 
+			"page"                   (or .page page)
+			"input"                  $content
+			"breakpoint"             .breakpoint
+			"class"                  .class
+			"sortable"               $sortable
+			"paginate"               $paginate
+			"pagination"             (cond $paginate $pagination "")
+			"pagination-select"      (cond $paginate (or .pagination_select (index . "pagination-select")) "")
+			"searchable"             $searchable
+			"wrap"                   .wrap
+			"_default"               .default
+		)) }}
+	{{ else }}
+		{{ $raw = printf `%s<p class="pt-%d">%s.</p>` $raw $padding.y (T "emptyList") }}
+	{{ end }}
+
+	{{ if $raw }}
+		{{ partial "utilities/section.html" (dict 
+			"component-name" "list"
+			"id"             .id
+			"raw"            $raw
+			"background"     .background
+			"width"          .width
+			"justify"        .justify
+			"wrapper"        .wrapper
+			"fluid"          .fluid
+			"theme"          .theme
+			"cover"          .cover
+			"overlay-mode"   (or .overlay_mode (index . "overlay-mode"))
+			"section-class"  (or .section_class (index . "section-class"))
+			"bg-class"       (or .bg_class (index . "bg-class"))
+		)}}
+	{{ end }}
+{{ end }}
