@@ -98,7 +98,7 @@
     "rimraf": "^6.1.2",
     "semantic-release": "^25.0.2",
     "shx": "^0.4.0",
-    "stylelint": "^16.26.1",
+    "stylelint": "^17.0.0",
     "stylelint-config-standard-scss": "^16.0.0"
   },
   "optionalDependencies": {
