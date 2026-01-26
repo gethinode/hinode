@@ -78,14 +78,14 @@
 {{- define "_partials/inline/video-stacked.html" -}}
 	{{ $breakpoint := .breakpoint }}
 	{{ $padding := .padding }}
-	{{ $width := .width }}
+	{{ $width := .width | default 8 }}
 	{{ $video := .video }}
 	{{ $messages := .messages }}
 
-	<div class="col-{{ $breakpoint.current }}-{{ $width }} mx-auto">
+	<div class="col-12 col-{{ $breakpoint.current }}-{{ $width }} mx-auto">
 		{{ $video | safeHTML }}
 	</div>
-	<div class="mt-{{ $padding.y }} w-100">
+	<div class="mt-{{ $padding.y }} width-100">
 		{{ $messages | safeHTML }}
 	</div>
 {{ end }}
@@ -93,7 +93,7 @@
 {{- define "_partials/inline/video-horizontal.html" -}}
 	{{ $breakpoint := .breakpoint }}
 	{{ $padding := .padding }}
-	{{ $width := .width | default 12 }}
+	{{ $width := .width | default 9 }}
 	{{ $video := .video }}
 	{{ $messages := .messages }}
 
