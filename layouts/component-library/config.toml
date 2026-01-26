@@ -1,6 +1,6 @@
 [module]
   hugoVersion.extended = true
-  hugoVersion.min = '0.147.6'
+  hugoVersion.min = '0.146.0'
   # expose bookshop partials to Hugo
   [[module.mounts]]
     source = '.'

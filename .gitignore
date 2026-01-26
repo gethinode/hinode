@@ -7,3 +7,10 @@ node_modules/
 
 .DS_store
 .hugo_build.lock
+
+# Go workspace files (local development)
+go.work
+go.work.sum
+**/hinode.work
+**/hinode.work.sum
+**/go.work.sum
