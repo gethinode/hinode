@@ -20,7 +20,6 @@
 {{- end -}}
 
 {{/* Initialize local arguments */}}
-
 {{- $icon := partial "utilities/GetTargetPath.html" (dict "path" $args.icon "page" $args.page) -}}
 {{- $image := partial "utilities/GetTargetPath.html" (dict "path" $args.image "page" $args.page) -}}
 {{- $wrapper := $args.wrapper -}}
@@ -33,15 +32,15 @@
             <i>Animation preview not supported</i>
         {{- else }}
             {{- partial "assets/animation.html" (dict
-                "data" $icon
-                "mode" $args.mode
-                "loop" false
+                "data"  $icon
+                "mode"  $args.mode
+                "loop"  false
                 "hover" true
                 "class" "col-6 mx-auto text-center"
             ) -}}
         {{- end -}}
     {{- else }}
-        {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $class "spacing" false) -}}
+        {{ partial "assets/icon.html" (dict "icon" $icon "scale" $args.scale "wrapper" $class "spacing" false) -}}
     {{- end -}}
 {{- else if $image -}}
     {{- if not (hasSuffix $image "svg") }}{{ $class = strings.TrimSpace (printf "%s rounded" (or $class "")) }}{{ end -}}

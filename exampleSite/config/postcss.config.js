@@ -23,6 +23,7 @@ const purgecss = purgeCSSPlugin({
       './assets/scss/components/_syntax-dark.scss',
       './assets/scss/components/_syntax-light.scss',
       './assets/scss/components/_table.scss',
+      './assets/scss/components/_testimonial.scss',
       './assets/scss/components/_video.scss',
       './assets/scss/theme/fonts.scss',
       './assets/scss/theme/theme.scss',

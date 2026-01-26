@@ -13,11 +13,13 @@ arguments:
   role:
   url:
   image:
+  logo:
   icon:
   icon-style:
     default: fa-5x
     release: v2.0.0
-  logo:
+  scale:
+    release: v2.0.0
   padding:
   orientation:
   show-controls:

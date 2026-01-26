@@ -11,6 +11,7 @@
             "class" .class
             "title" .contact
             "mode"  false
+            "sizes" "(min-width: 768px) 5vw, 10vw"
             "page"  .page
         ) }}
     </div>
@@ -43,9 +44,9 @@
                     "page"    .page
                     "image"   .logo
                     "icon"    (trim (cond .icon (printf "%s %s" .icon (index . "icon-style")) "") " ")
+                    "scale"   .scale
                     "class"   $class
                     "title"   $title
-                    "sizes"   "(min-width: 768px) 33.3vw, 100vw"
                     "wrapper" (cond .logo "col-9 py-4 py-md-0" "")
                 ) }}
             </div>
@@ -142,6 +143,7 @@
             "content"     $args.content
             "icon"        $args.icon
             "icon-style"  $args.iconStyle
+            "scale"       $args.scale
             "logo"        $args.logo
             "contact"     $args.contact
             "role"        $args.role

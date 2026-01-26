@@ -2,6 +2,7 @@
 arguments:
   page:
   icon:
+  scale:
   image:
   mode:
   ratio:
