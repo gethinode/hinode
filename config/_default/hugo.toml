@@ -143,6 +143,9 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     includeFiles = ["**/*.hugo.html"]
   [[module.mounts]]
     source = "layouts/component-library"
+    target = "assets/bookshop"
+  [[module.mounts]]
+    source = "layouts/component-library"
     target = "data/structures"
     includeFiles = ["**/*.bookshop.yml"]
   [[module.mounts]]
