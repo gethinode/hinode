@@ -95,7 +95,7 @@
 {{ else if not $args.plain }}
     {{ $transform = "fit" }}
     {{- $res := partial "utilities/GetImage.html" (dict "url" $src "page" $args.page) -}}
-    {{ if and $res $res.resource }}
+    {{ if and $res (not (eq $res.resource nil)) }}
         {{ $img = $res.resource }}
         {{ if $res.mirror }}{{ $class = printf "%s mirrorred" $class }}{{ end }}
 
@@ -137,7 +137,7 @@
 {{/* Generate image url */}}
 {{ if or (hasSuffix $src "svg") $args.plain }}
     {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
-{{ else }}
+{{ else if (gt (len $dims) 0) }}
     {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
         "src"           $src
         "img"           $img
