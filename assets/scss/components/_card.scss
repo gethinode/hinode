@@ -94,6 +94,11 @@
 
 .card-img-overlay .card-body-link {
     margin-top: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .card-zoom .card-body-link {
