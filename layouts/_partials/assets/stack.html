@@ -54,7 +54,7 @@
 			(dict 
 			"cols"        (cond (eq $args.orientation "stacked") 2 1)
 			"responsive"  false
-			"padding"     $args.padding
+			"padding"     (cond (gt $args.padding 0) $args.padding 3)
 			"orientation" $args.orientation
 			"ratio"       $args.ratio
 			"scroll"      false
