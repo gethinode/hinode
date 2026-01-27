@@ -33,12 +33,15 @@
 {{ end }}
 
 {{ define "_partials/inline/testimonial-inner.html" }}
+    {{ $breakpoint := .breakpoint }}
+
     <div class="d-flex flex-column {{ .class }} h-100 p-{{ .padding }}">
         {{ if or .logo .icon }}
             <div class="p-0">
                 {{ $class := "" }}
                 {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
                 {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
+                {{ $wrapper := cond .logo (printf "py-4 py-md-0 col-4 col-%s-2" $breakpoint.current) "" }}
 
                 {{ partial "assets/featured-illustration.html" (dict
                     "page"    .page
@@ -47,7 +50,7 @@
                     "scale"   .scale
                     "class"   $class
                     "title"   $title
-                    "wrapper" (cond .logo "col-2 py-4 py-md-0" "")
+                    "wrapper" $wrapper
                 ) }}
             </div>
         {{ end }}
@@ -82,8 +85,9 @@
 {{ end }}
 
 {{ define "_partials/inline/testimonial-card.html" }}
+    {{ $breakpoint := .breakpoint }}
+
     {{ if and .image .contact (eq .orientation "horizontal") }}
-        {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
         <div class="container">
             <div class="row">
                 <div class="col-6 col-{{ $breakpoint.current }}-3 mx-auto">
@@ -120,7 +124,10 @@
     )}}
 {{ end }}
 
-<!-- Initialize arguments and default values -->
+{{/* Initialize global variables */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+
+{{/* Initialize local variables */}}
 {{- $link := "" -}}
 {{ with $args.link }}
     {{ $href := partial "utilities/GetLink.html" (dict "page" $args.page "href" .) }}
@@ -153,6 +160,7 @@
             "url"         $args.url
             "link"        $link
             "color"       $args.color
+            "breakpoint"  $breakpoint
         }}
 
         {{ if $args.showControls }}
