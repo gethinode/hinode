@@ -164,8 +164,8 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     source = "netlify.toml"
     target = "assets/config/netlify.toml"
 # toml-docs-start modules
-  # [[module.imports]]
-  #   path = "github.com/gethinode/hinode/blocks"
+  [[module.imports]]
+    path = "github.com/gethinode/mod-blocks"
   [[module.imports]]
     path = "github.com/cloudcannon/bookshop/hugo/v3"
   [[module.imports]]

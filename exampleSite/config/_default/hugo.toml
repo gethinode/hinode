@@ -112,8 +112,6 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.imports]]
     path = "github.com/gethinode/hinode/v2"
   [[module.imports]]
-    path = "github.com/gethinode/mod-blocks"
-  [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap"
   [[module.imports]]
     path = "github.com/gethinode/mod-csp"
