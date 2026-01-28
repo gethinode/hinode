@@ -76,7 +76,9 @@
     "cssnano": "^7.1.2",
     "cssnano-preset-advanced": "^7.0.10",
     "hugo-bin": "0.149.2",
-    "purgecss-whitelister": "^2.4.0"
+    "postcss-cli": "^11.0.1",
+    "purgecss-whitelister": "^2.4.0",
+    "rimraf": "^6.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
@@ -93,9 +95,7 @@
     "neostandard": "^0.12.2",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^11.0.1",
     "replace-in-files-cli": "^4.0.0",
-    "rimraf": "^6.1.2",
     "semantic-release": "^25.0.2",
     "shx": "^0.4.0",
     "stylelint": "^16.26.0",
