@@ -5,7 +5,7 @@
 }
 
 .blockquote-alert {
-    --bs-blockquote-alert-color: $secondary;
+    --bs-blockquote-alert-color: #{$secondary};
 
     border-left: 0.3rem solid;
     border-color: var(--bs-blockquote-alert-color);
