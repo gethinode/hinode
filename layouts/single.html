@@ -1,5 +1,4 @@
 {{ define "main" -}}
-    {{- $blocks := $.Scratch.Get "blocks" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
     {{- $sidebar := partial "page/sidebar" . -}}
     {{- $padding := partial "utilities/GetPadding.html" -}}
@@ -16,7 +15,10 @@
         </div>
     {{ end }}
 
-    {{ $blocks | safeHTML }}
+    {{ with .Params.content_blocks }}
+        {{ partial "bookshop_bindings" `.Params.content_blocks` | safeHTML }}
+        {{ partial "bookshop_partial" (slice "page" .) | safeHTML }}
+    {{ end }}
 
     {{ if (gt (len .RawContent) 0) }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
@@ -36,7 +38,7 @@
                 </div>
             </div>
         </div>
-    {{ else if and (not $blocks) (eq (len .RawContent) 0)}}
+    {{ else if and (eq (len .Params.content_blocks) 0) (eq (len .RawContent) 0)}}
         {{ warnf "Page %q has no content" .RelPermalink }}
     {{ end }}
 {{ end -}}
