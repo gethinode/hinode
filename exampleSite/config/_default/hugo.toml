@@ -104,6 +104,8 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
        output = '{netlify,server}'
 
 [module]
+  workspace = "hinode.work"
+  # replacements = 'github.com/gethinode/mod-blocks -> /Users/mark/Development/GitHub/gethinode/mod-blocks'
   # Component-library is now integrated in main Hinode module
   [[module.imports]]
     path = "github.com/gethinode/mod-cookieyes/v2"
