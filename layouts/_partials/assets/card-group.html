@@ -190,7 +190,7 @@
     {{- if $paginator -}}
         {{- if gt $paginator.TotalPages 1 -}}
             <div class="pt-{{ $padding.y }}">{{- partial "assets/pagination.html" (dict "page" $args.page "format" "terse") -}}</div>
-        {{- end -}} 
+        {{- end -}}
     {{- else -}}
         {{- if or (and (gt $count $max) $args.hrefTitle) (and $args.hrefForce $args.hrefTitle) -}}
             {{- $href := $args.href -}}
