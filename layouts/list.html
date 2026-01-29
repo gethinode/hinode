@@ -6,9 +6,9 @@
     {{ with .Params.content_blocks }}
         {{ partial "bookshop_bindings" `.Params.content_blocks` | safeHTML }}
         {{ partial "bookshop_partial" (slice "page" .) | safeHTML }}
+    {{ else }}
+        {{ partial "page/articles.html" . }}
     {{ end }}
-
-    <!-- TODO: add default article list -->
 
     {{ with $content }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">

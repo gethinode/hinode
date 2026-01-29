@@ -1,0 +1,20 @@
+{{/* Add default hero and articles for list pages */}}
+{{ partial "bookshop" (slice "hero" (dict 
+    "heading"        (dict "title" .Title "align" .Site.Params.modules.bookshop.hero.align)
+    "breadcrumb"     .Site.Params.navigation.breadcrumb
+    "background"     (dict "backdrop" .Site.Params.modules.bookshop.hero.backdrop)
+    "overlay-mode"   .Site.Params.modules.bookshop.hero.overlayMode
+    "justify"        "start"
+)) }}
+
+{{ partial "bookshop" (slice "articles" (dict 
+    "_bookshop_name" "articles"
+    "hide-empty"     false
+    "input"          (dict "section" .Section "reverse" true "sort" "date" "nested" true)
+    "cols"           3
+    "padding"        "0"
+    "paginate"       true
+    "scroll"         false
+    "justify"        "start"
+    "class"          "border-0 card-zoom card-body-margin"
+)) }}

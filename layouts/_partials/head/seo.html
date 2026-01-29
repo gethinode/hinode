@@ -62,19 +62,6 @@
     {{ end -}}
 
     <meta name="description" content="{{ $.Scratch.Get "description" }}">
-
-
-{{ $paginator := $.Store.Get "paginator" }}
-{{ if $paginator }}
-    <link rel="canonical" href="{{ $paginator.URL | absURL }}">
-    {{ if $paginator.HasPrev -}}
-        <link rel="prev" href="{{ $paginator.Prev.URL | absURL }}">
-    {{ end -}}
-    {{ if $paginator.HasNext -}}
-        <link rel="next" href="{{ $paginator.Next.URL | absURL }}">
-    {{ end -}}
-{{ end -}}
-
 {{ partial "head/opengraph.html" . }}
 {{ partial "head/twitter_cards.html" . }}
 

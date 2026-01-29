@@ -18,6 +18,7 @@ const purgecss = purgeCSSPlugin({
       './assets/scss/components/_command.scss',
       './assets/scss/components/_nav.scss',
       './assets/scss/components/_navbar.scss',
+      './assets/scss/components/_pagination.scss',
       './assets/scss/components/_search.scss',
       './assets/scss/components/_syntax.scss',
       './assets/scss/components/_syntax-dark.scss',
