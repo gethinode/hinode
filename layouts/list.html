@@ -8,6 +8,8 @@
         {{ partial "bookshop_partial" (slice "page" .) | safeHTML }}
     {{ end }}
 
+    <!-- TODO: add default article list -->
+
     {{ with $content }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
             {{ . }}

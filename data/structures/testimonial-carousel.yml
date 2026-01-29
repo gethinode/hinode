@@ -1,0 +1,18 @@
+comment: >-
+  Renders one or more client testimonials as a carousel or as columns.
+arguments:
+  card:
+  icon-style:
+  testimonials:
+    - logo:
+      icon:
+      scale:
+      content:
+      client:
+        name:
+        url:
+        image:
+        mode:
+      link:
+  carousel:
+  cols:

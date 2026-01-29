@@ -1,0 +1,50 @@
+{{/* 
+    Copyright © 2024 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{ $error := false }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "faq" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/faq.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+    {{ $error = $args.err }}
+{{ end }}
+
+{{ if not $error }}
+    <div id="{{ $args.id }}" class="accordion accordion-faq {{ if $args.contrast }}accordion-faq-contrast text-white {{ end -}}
+        accordion-flush{{ with $args.class }} {{ . }}{{ end }} col-12 col-md-6 mx-auto">
+        {{ range $index, $item := $args.items }}
+            <div class="accordion-item">
+                {{- with $item.title -}}
+                    <div class="accordion-header m-0" id="{{ $args.id }}-heading-{{ $args.id }}">
+                        <button class="accordion-button collapsed" 
+                            type="button" 
+                            data-bs-toggle="collapse"
+                            data-bs-target="#{{ $args.id }}-item-{{ $index }}"
+                            aria-expanded="false"
+                            aria-controls="{{ $args.id }}-item-{{ $index }}"
+                        >
+                        {{ if $args.color }}<div class="text-{{ $args.color }}">{{ . }}</div>{{ else }}{{ . }}{{ end }}
+                        </button>
+                    </div>
+                {{- end -}}
+                <div id="{{ $args.id }}-item-{{ $index }}" 
+                    class="accordion-collapse collapse"
+                    aria-labelledby="{{ $args.id }}-heading-{{ $index }}"
+                    data-bs-parent="#{{ $args.id }}"
+                >
+                    <div class="accordion-body">{{ $item.description | page.RenderString | safeHTML }}</div>
+                </div>
+            </div>
+        {{ end }}
+    </div>
+{{ end }}
