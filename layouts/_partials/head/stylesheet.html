@@ -76,7 +76,7 @@
 {{- $bundle := partial "utilities/bundlev2.html" (dict
     "page"      page
     "match"     $source
-    "filename"  (printf "scss/bundle-%d.scss" now.UnixNano)
+    "filename"  (printf "scss/bundle-%s.scss" (hash.XxHash (delimit $modules ", ")))
     "modules"   $modules
     "basepath"  "scss"
     "debugging" site.Params.debugging.showSCSS
