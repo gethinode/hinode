@@ -77,7 +77,6 @@
     "cssnano-preset-advanced": "^7.0.10",
     "hugo-bin": "0.149.2",
     "postcss-cli": "^11.0.1",
-    "purgecss-whitelister": "^2.4.0",
     "rimraf": "^6.1.2"
   },
   "devDependencies": {

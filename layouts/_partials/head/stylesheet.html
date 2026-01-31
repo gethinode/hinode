@@ -1,8 +1,10 @@
+{{- $error := false -}}
 {{- $transpiler := site.Params.main.build.transpiler | default "libsass" -}}
 {{- $silence := slice -}}
 {{- $supportedTranspilers := slice "libsass" "dartsass" -}}
 {{- if not (in $supportedTranspilers $transpiler) -}}
     {{- errorf "partial [head/stylesheet.html] - Invalid value for param 'transpiler': %s" $transpiler -}}
+    {{ $error = true }}
 {{- end -}}
 {{- if site.Params.main.build.silenceDeprecations -}}
     {{- $silence = (slice "import" "color-functions" "global-builtin") -}}
@@ -17,10 +19,16 @@
 {{- $page := .page -}}
 {{- $core := .core | default true -}}
 
+{{ if and (ne $transpiler "dartsass") (not site.Params.modules.fontawesome.inline) }}
+    {{ errorf `Font Awesome webfonts v7 are not compatible with %q, please set transpiler to "dartsass" or inline to "true"` $transpiler  }}
+    {{ $error = true }}
+{{ end }}
+
 {{- $modules := "" -}}
 {{ $config := page.Scratch.Get "modules" }}
 {{ if not $config }}
     {{ errorf "partial [head/stylesheet.html] - Cannot initialize module configuration" }}
+    {{ $error = true }}
 {{ end }}
 
 {{ if $core }}
@@ -33,6 +41,7 @@
 
 {{ if and site.Params.style.darkModeTint (not (findRE `\d+%` site.Params.style.darkModeTint)) }}
     {{- errorf "partial [head/stylesheet.html] - Invalid value for site param 'style.darkModeTint': %s" site.Params.style.darkModeTint -}}
+    {{ $error = true }}
 {{ end}}
 
 {{- $navbarOffset := "0rem" -}}
@@ -76,13 +85,13 @@
 {{- $bundle := partial "utilities/bundlev2.html" (dict
     "page"      page
     "match"     $source
-    "filename"  (printf "scss/bundle-%s.scss" (hash.XxHash (delimit $modules ", ")))
+    "filename"  (printf "scss/bundle-%s.scss" (hash.XxHash $source))
     "modules"   $modules
     "basepath"  "scss"
     "debugging" site.Params.debugging.showSCSS
 ) -}}
 
-{{- if gt ($bundle.bundle.Content | len) 0 }}
+{{- if and (gt ($bundle.bundle.Content | len) 0) (not $error) }}
     {{- $css := $bundle.bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
 
     {{ if $core }}
