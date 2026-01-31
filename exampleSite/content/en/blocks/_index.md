@@ -32,5 +32,3 @@ content_blocks:
     header-style: none
     class: border-1
 ---
-
-<!-- TODO: fix pagination -->
