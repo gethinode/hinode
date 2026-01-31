@@ -1,8 +1,11 @@
 const autoprefixer = require('autoprefixer')({})
 const cssnano = require('cssnano')({
-  preset: 'advanced'
+  preset: ['advanced', {
+    discardUnused: {
+      fontFace: false  // Preserve all @font-face declarations
+    }
+  }]
 })
-const whitelister = require('purgecss-whitelister')
 const purgeImport = require('@fullhuman/postcss-purgecss')
 const purgeCSSPlugin = purgeImport.purgeCSSPlugin || purgeImport.default || purgeImport
 const purgecss = purgeCSSPlugin({
@@ -12,38 +15,66 @@ const purgecss = purgeCSSPlugin({
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
   },
   dynamicAttributes: ['data-bs-theme', 'data-bs-theme-animate'],
-  safelist: ['was-validated',
-    ...whitelister([
-      './assets/scss/components/_clipboard.scss',
-      './assets/scss/components/_command.scss',
-      './assets/scss/components/_nav.scss',
-      './assets/scss/components/_navbar.scss',
-      './assets/scss/components/_pagination.scss',
-      './assets/scss/components/_search.scss',
-      './assets/scss/components/_syntax.scss',
-      './assets/scss/components/_syntax-dark.scss',
-      './assets/scss/components/_syntax-light.scss',
-      './assets/scss/components/_table.scss',
-      './assets/scss/components/_testimonial.scss',
-      './assets/scss/components/_video.scss',
-      './assets/scss/theme/fonts.scss',
-      './assets/scss/theme/theme.scss',
-      './component-library/components/list/list.scss',
-      './_vendor/github.com/gethinode/mod-cookieyes/v2/assets/scss/cookieyes.scss',
-      './_vendor/github.com/gethinode/mod-flexsearch/v3/assets/scss/modules/flexsearch/flexsearch.scss',
-      './_vendor/github.com/gethinode/mod-katex/dist/katex.scss',
-      './_vendor/github.com/gethinode/mod-leaflet/v2/dist/leaflet.scss',
-      './_vendor/github.com/gethinode/mod-mermaid/v3/assets/scss/mermaid.scss',
-      './_vendor/github.com/gethinode/mod-simple-datatables/v3/dist/simple-datatables.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_carousel.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_dropdown.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_modal.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_reboot.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_tooltip.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_transitions.scss',
-      './_vendor/github.com/twbs/bootstrap/scss/_utilities.scss'
-    ])
-  ]
+  fontFace: false,
+  safelist: {
+    standard: [
+      // Bootstrap form validation
+      'was-validated',
+      // Bootstrap dynamic states
+      'show',
+      'showing',
+      'hiding',
+      'active',
+      'disabled',
+      'collapsed',
+      'collapsing'
+    ],
+    // Classes with these patterns will be preserved along with their children
+    deep: [
+      // Bootstrap components that get dynamically modified
+      /modal/,
+      /dropdown/,
+      /carousel/,
+      /tooltip/,
+      /popover/,
+      /collapse/,
+      /offcanvas/
+    ],
+    // Preserve any selector containing these patterns
+    greedy: [
+      // Third-party library prefixes (well-namespaced, safe to use greedy)
+      /^fa-/,              // FontAwesome
+      /^leaflet-/,         // Leaflet maps
+      /^katex-/,           // KaTeX math (note: using katex- not just katex)
+      /^mermaid/,          // Mermaid diagrams
+      /^datatable/i,       // SimpleDatatables
+      /^cky-/,             // CookieYes
+
+      // Component-specific prefixes
+      /clipboard-/,        // Clipboard component
+      /command-/,          // Command component
+      /search-/,           // Search functionality
+      /suggestion__/,      // Search suggestions (FlexSearch)
+      /testimonial-/,      // Testimonial component
+
+      // Syntax highlighting (multiple possible engines)
+      /^hljs-/,            // highlight.js
+      /^language-/,        // Prism/generic
+      /^chroma-/,          // Chroma (Hugo's highlighter)
+      /^highlight/,        // Generic highlighting classes
+
+      // Pagination and navigation
+      /page-item/,
+      /page-link/,
+      /nav-item/,
+      /nav-link/,
+      /navbar-/,
+
+      // Bootstrap transitions and utilities that get added via JS
+      /fade/,
+      /^translate/         // Bootstrap utilities
+    ]
+  }
 })
 
 module.exports = {

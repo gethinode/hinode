@@ -30,7 +30,5 @@ content_blocks:
     paginate: true
     cover: false
     header-style: none
-    class: border-1
+    class: border-1 card-emphasize
 ---
-
-<!-- TODO: fix pagination -->
