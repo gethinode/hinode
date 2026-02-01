@@ -13,10 +13,10 @@
 
 [context]
   [context.branch-deploy]
-    command = 'npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'npm install && npm run build:example -- -b $DEPLOY_PRIME_URL'
 
   [context.deploy-preview]
-    command = 'npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'npm install && npm run build:example -- -b $DEPLOY_PRIME_URL'
 
 [dev]
   autoLaunch = false
@@ -49,7 +49,7 @@
         media-src 'self'; \
         object-src 'none'; \
         script-src 'self' *.google-analytics.com *.googletagmanager.com *.analytics.google.com googletagmanager.com tagmanager.google.com player.vimeo.com; \
-        style-src 'self' googletagmanager.com tagmanager.google.com fonts.googleapis.com www.youtube.com; \
+        style-src 'self' googletagmanager.com tagmanager.google.com fonts.googleapis.com www.youtube.com 'unsafe-inline'; \
         """
     Permissions-Policy = 'geolocation=(), midi=(), sync-xhr=(), microphone=(), camera=(), magnetometer=(), gyroscope=(), fullscreen=(), payment=() '
     Referrer-Policy = 'strict-origin'
