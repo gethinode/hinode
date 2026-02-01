@@ -7,3 +7,5 @@ node_modules/
 
 .DS_store
 .hugo_build.lock
+# Local Netlify folder
+.netlify
