@@ -71,8 +71,8 @@
   },
   "homepage": "https://gethinode.com",
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^7.0.2",
-    "autoprefixer": "^10.4.22",
+    "@fullhuman/postcss-purgecss": "^8.0.0",
+    "autoprefixer": "^10.4.23",
     "cssnano": "^7.1.2",
     "cssnano-preset-advanced": "^7.0.10",
     "hugo-bin": "0.149.2",
@@ -80,30 +80,27 @@
     "rimraf": "^6.1.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@gethinode/netlify-plugin-dartsass": "^0.3.0",
+    "@commitlint/cli": "^20.4.0",
+    "@commitlint/config-conventional": "^20.4.0",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
     "commitizen": "^4.3.1",
     "cpy-cli": "^6.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
-    "markdownlint-cli2": "^0.19.1",
+    "markdownlint-cli2": "^0.20.0",
     "neostandard": "^0.12.2",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
     "replace-in-files-cli": "^4.0.0",
     "semantic-release": "^25.0.2",
     "shx": "^0.4.0",
-    "stylelint": "^16.26.0",
+    "stylelint": "^16.26.1",
     "stylelint-config-standard-scss": "^16.0.0"
   },
   "optionalDependencies": {
-    "@gethinode/netlify-plugin-dartsass": "^0.3.0",
-    "fsevents": "*",
-    "netlify-plugin-hugo-cache-resources": "^0.2.1"
+    "fsevents": "*"
   },
   "hugo-bin": {
     "buildTags": "extended"
