@@ -7,3 +7,6 @@ node_modules/
 
 .DS_store
 .hugo_build.lock
+# Local Netlify folder and build files
+.netlify
+dart-sass/
