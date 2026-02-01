@@ -1,6 +1,6 @@
 # Auto-generated file - do not modify
 [build]
-  command = 'npm i && curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && export PATH="${HOME}/.local/dart-sass:${PATH}" && git config core.quotepath false && npm run build:example'
+  command = 'npm i && npm run build:example'
   publish = 'exampleSite/public'
 
   [build.environment]
@@ -13,10 +13,10 @@
 
 [context]
   [context.branch-deploy]
-    command = 'npm i && curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && export PATH="${HOME}/.local/dart-sass:${PATH}" && git config core.quotepath false && npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'npm i && npm run build:example -- -b $DEPLOY_PRIME_URL'
 
   [context.deploy-preview]
-    command = 'npm i && curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && export PATH="${HOME}/.local/dart-sass:${PATH}" && git config core.quotepath false && npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'npm i && npm run build:example -- -b $DEPLOY_PRIME_URL'
 
 [dev]
   autoLaunch = false
@@ -25,6 +25,9 @@
   port = 8888
   publish = 'public'
   targetPort = 1313
+
+[[plugins]]
+  package = '@gethinode/netlify-plugin-dartsass'
 
 [[plugins]]
   package = 'netlify-plugin-hugo-cache-resources'
