@@ -1,7 +1,7 @@
 # toml-docs-start netlify
 [build]
     publish = "exampleSite/public"
-    command = "npm install -D @gethinode/netlify-plugin-dartsass && npm i && npm run build:example"
+    command = "yarn install && npm run build:example"
 
 [build.environment]
     DART_SASS_VERSION = "1.89.2"
@@ -13,10 +13,10 @@
 # toml-docs-end netlify
 
 [context.deploy-preview]
-    command = "npm install -D @gethinode/netlify-plugin-dartsass && npm i && npm run build:example -- -b $DEPLOY_PRIME_URL"
+    command = "yarn install && npm run build:example -- -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
-    command = "npm install -D @gethinode/netlify-plugin-dartsass && npm i && npm run build:example -- -b $DEPLOY_PRIME_URL"
+    command = "yarn install && npm run build:example -- -b $DEPLOY_PRIME_URL"
 
 [dev]
     framework = "#custom"
