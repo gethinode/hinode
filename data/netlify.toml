@@ -1,7 +1,13 @@
 # toml-docs-start netlify
 [build]
     publish = "exampleSite/public"
-    command = "npm run build:example"
+    command = """\
+        curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        export PATH="${HOME}/.local/dart-sass:${PATH}" && \
+        git config core.quotepath false && \
+        npm run build:example"""
 
 [build.environment]
     DART_SASS_VERSION = "1.89.2"
@@ -13,10 +19,22 @@
 # toml-docs-end netlify
 
 [context.deploy-preview]
-    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+    command = """\
+        curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        export PATH="${HOME}/.local/dart-sass:${PATH}" && \
+        git config core.quotepath false && \
+        npm run build:example -- -b $DEPLOY_PRIME_URL"""
 
 [context.branch-deploy]
-    command = "npm run build:example -- -b $DEPLOY_PRIME_URL"
+    command = """\
+        curl -sLJO "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        tar -C "${HOME}/.local" -xf "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        rm "dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" && \
+        export PATH="${HOME}/.local/dart-sass:${PATH}" && \
+        git config core.quotepath false && \
+        npm run build:example -- -b $DEPLOY_PRIME_URL"""
 
 [dev]
     framework = "#custom"
@@ -27,9 +45,6 @@
     autoLaunch = false
 
 # toml-docs-start plugins
-[[plugins]]
-    package = "@gethinode/netlify-plugin-dartsass"
-
 [[plugins]]
     package = "netlify-plugin-hugo-cache-resources"
 # toml-docs-end plugins
