@@ -7,7 +7,7 @@
     {{ $error = true }}
 {{- end -}}
 {{- if site.Params.main.build.silenceDeprecations -}}
-    {{- $silence = (slice "import" "color-functions" "global-builtin") -}}
+    {{- $silence = (slice "import" "color-functions" "global-builtin" "if-function" "legacy-js-api") -}}
 {{- end -}}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
