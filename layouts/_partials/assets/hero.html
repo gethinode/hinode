@@ -20,11 +20,10 @@
 {{ end }}
 
 {{/* Initialize global variables */}}
-{{ $arrangement := site.Params.modules.bookshop.title.arrangement }}
-{{ if eq $args.order "first" }}{{ $arrangement = "above" }}{{ end }}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local variables */}}
+{{ $arrangement := or $args.heading.arrangement .Params.modules.bookshop.title.arrangement "above" }}
 {{ $align := $args.align }}
 {{ $class := $args.class | default "" }}
 {{ $scale := "" }}
