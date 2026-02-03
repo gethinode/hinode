@@ -8,6 +8,8 @@ github.com/gethinode/mod-blocks v1.0.0 h1:W82VuwHYDqXl5Ak/ngWCr6lovpRTxndBXQiQ64
 github.com/gethinode/mod-blocks v1.0.0/go.mod h1:sX0NrKg6X1u/03PWkzXXTIwh+H3ibdqoVzm+hR0CJBg=
 github.com/gethinode/mod-blocks v1.0.1 h1:u6LRmoWKUea3/lXJ8JXlDh9Z/EfIOUx1F1iPQke1hDk=
 github.com/gethinode/mod-blocks v1.0.1/go.mod h1:sX0NrKg6X1u/03PWkzXXTIwh+H3ibdqoVzm+hR0CJBg=
+github.com/gethinode/mod-blocks v1.0.2 h1:iSu8saAKoClkA1MpB/8b/kps70osiHzodZTglDfCtHI=
+github.com/gethinode/mod-blocks v1.0.2/go.mod h1:sX0NrKg6X1u/03PWkzXXTIwh+H3ibdqoVzm+hR0CJBg=
 github.com/gethinode/mod-bootstrap v1.3.5 h1:bewgYpQex+dBABK0u5PUvW6IoUXLHhi1Yv9hcPzwGVc=
 github.com/gethinode/mod-bootstrap v1.3.5/go.mod h1:CxrYCFzKtBMz3YWG5i/d5jHKCgvUo60NFcCmz2mxCjQ=
 github.com/gethinode/mod-csp v1.0.8 h1:36bWS7oW5KoPp0ywJXKmfMdM33c/7EPBLjzut0njTgE=
