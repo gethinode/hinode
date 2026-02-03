@@ -79,7 +79,7 @@
     "purgecss-whitelister": "^2.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.0",
+    "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
