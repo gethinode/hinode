@@ -10,17 +10,19 @@
     {{- $result := partial "utilities/GetContact" (dict "contact" . "data" $section "language-tag" site.Language.Lang) -}}
     {{- with $result -}}
         {{- with .RelPermalink }}{{ $link = . }}{{ end -}}
-    {{- end -}}
 
-    {{- partial "assets/contact.html" (dict 
-        "page"        $page
-        "heading"     (dict "title" $title "content" (T "contactBody" $contact) "size" 5 "align" $align)
-        "background"  (dict "color" "light")
-        "order"       "first"
-        "orientation" $orientation
-        "class"       "contact-img"
-        "contact"     .
-        "links"       (slice (dict "title" (T "contactAction") "url" $link "icon" "fas chevron-right"))
-        "data"        site.Params.modules.bookshop.cta.section
-    ) }}
+        {{- partial "assets/contact.html" (dict 
+            "page"        $page
+            "heading"     (dict "title" $title "content" (T "contactBody" $contact) "size" 5 "align" $align)
+            "background"  (dict "color" "light")
+            "order"       "first"
+            "orientation" $orientation
+            "class"       "contact-img"
+            "contact"     $contact
+            "links"       (slice (dict "title" (T "contactAction") "url" $link "icon" "fas chevron-right"))
+            "data"        site.Params.modules.bookshop.cta.section
+        ) }}
+    {{ else }}
+        {{ warnf "Cannot find contact %q on page %q" $contact $page.RelPermalink }}
+    {{- end -}}
 {{ end -}}
