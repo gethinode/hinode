@@ -145,7 +145,7 @@
                     {{ $title | safeHTML }}
                 </div>
                 {{ if $illustration }}
-                <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto my-md-auto align-self-end">
+                <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto {{ if not $args.cover }}my-md-auto align-self-end{{ else }}hero-image-full-height{{ end }}">
                     {{ $illustration | safeHTML }}
                     {{ $caption | safeHTML }}
                 </div>
