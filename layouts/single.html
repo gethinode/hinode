@@ -39,6 +39,12 @@
             </div>
         </div>
     {{ else if and (eq (len .Params.content_blocks) 0) (eq (len .RawContent) 0)}}
-        {{ warnf "Page %q has no content" .RelPermalink }}
+        {{- partial "utilities/LogWarn.html" (dict
+            "partial" "layouts/single.html" 
+            "warnid"  "warn-empty-page"
+            "msg"     "No content"
+            "details" "Page has no content or blocks defined"
+            "file"    .File
+        ) -}}
     {{ end }}
 {{ end -}}

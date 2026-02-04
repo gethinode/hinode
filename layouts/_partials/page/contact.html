@@ -23,6 +23,12 @@
             "data"        site.Params.modules.bookshop.cta.section
         ) }}
     {{ else }}
-        {{ warnf "Cannot find contact %q on page %q" $contact $page.RelPermalink }}
+        {{- partial "utilities/LogWarn.html" (dict 
+            "partial" "page/contact.html" 
+            "warnid"  "warn-missing-contact"
+            "msg"     "Missing contact"
+            "details" (printf "Cannot find contact %q" $contact)
+            "file"    $page.File
+        ) -}}
     {{- end -}}
 {{ end -}}

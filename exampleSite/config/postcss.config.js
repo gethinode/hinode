@@ -69,6 +69,7 @@ const purgecss = purgeCSSPlugin({
       /nav-item/,
       /nav-link/,
       /navbar-/,
+      /^nav-/,             // Nav variant classes (nav-callout, nav-panel, nav-pills, nav-tabs, nav-underline)
 
       // Bootstrap transitions and utilities that get added via JS
       /fade/,

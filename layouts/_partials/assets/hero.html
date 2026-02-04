@@ -129,26 +129,28 @@
         {{ $title | safeHTML }}
     {{ else }}
         {{/* Render horizontal component */}}
-        <div class="row row-cols-1 {{ if eq $args.orientation "stacked" }}row-cols-md-2 {{ end }} flex-grow-1">
-            {{ $order1 := "order-1 order-md-0" }}
-            {{ $order2 := "order-0 order-md-1" }}
-            {{ if eq $args.order "first" }}
-                {{ $order1 = "order-1" }}
-                {{ $order2 = "order-0" }}
-            {{ end }}
+        <div class="container">
+            <div class="row row-cols-1 {{ if eq $args.orientation "stacked" }}row-cols-md-2 {{ end }} flex-grow-1">
+                {{ $order1 := "order-1 order-md-0" }}
+                {{ $order2 := "order-0 order-md-1" }}
+                {{ if eq $args.order "first" }}
+                    {{ $order1 = "order-1" }}
+                    {{ $order2 = "order-0" }}
+                {{ end }}
 
-            {{ $imgWidth := sub 12 (or $args.heading.width 12) }}
-            {{ if lt $imgWidth 1 }}{{ $imgWidth = 1 }}{{ end }}
+                {{ $imgWidth := sub 12 (or $args.heading.width 12) }}
+                {{ if lt $imgWidth 1 }}{{ $imgWidth = 1 }}{{ end }}
 
-            <div class="col col-12 {{ if $illustration }} col-md-{{sub 12 $imgWidth }}{{ end }} {{ $order1 }} my-md-auto pt-{{ $padding.y }} pt-md-0 hero-content">
-                {{ $title | safeHTML }}
+                <div class="col col-12 {{ if $illustration }} col-md-{{sub 12 $imgWidth }}{{ end }} {{ $order1 }} my-md-auto pt-{{ $padding.y }} pt-md-0 hero-content">
+                    {{ $title | safeHTML }}
+                </div>
+                {{ if $illustration }}
+                <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto {{ if not $args.cover }}my-md-auto align-self-end{{ else }}hero-image-full-height{{ end }}">
+                    {{ $illustration | safeHTML }}
+                    {{ $caption | safeHTML }}
+                </div>
+                {{ end }}
             </div>
-            {{ if $illustration }}
-            <div class="col col-8 col-md-{{ $imgWidth }} {{ $order2 }} m-auto my-md-auto align-self-end">
-                {{ $illustration | safeHTML }}
-                {{ $caption | safeHTML }}
-            </div>
-            {{ end }}
         </div>
     {{ end }}
 {{ end }}
