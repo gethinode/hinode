@@ -4,39 +4,39 @@
     Visit gethinode.com/license for more details.
 */}}
 
-{{ $error := false -}}
-{{ $errmsg := slice -}}
+{{- $error := false -}}
+{{- $errmsg := slice -}}
 
 {{/* Initialize arguments */}}
-{{ $args := partial "utilities/InitArgs.html" (dict "structure" "link" "args" . "group" "partial") }}
-{{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "link" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
         "partial" "assets/link.html" 
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
         "file"    page.File
-    )}}
-    {{ $error = $args.err }}
-{{ end }}
+    ) -}}
+    {{- $error = $args.err -}}
+{{- end -}}
 
 {{/* Initialize arguments */}}
-{{ $destination := or $args.href $args.destination }}
-{{ $u := urls.Parse $destination }}
-{{ if not $u.Scheme }}
+{{- $destination := or $args.href $args.destination -}}
+{{- $u := urls.Parse $destination -}}
+{{- if not $u.Scheme -}}
     {{- if not (strings.Contains $destination "/") -}}
-        {{ with index site.Params.links $destination }}
-            {{ $destination = . }}
-        {{ end }}
-    {{ else }}
-        {{ $b := urls.Parse site.BaseURL }}
-        {{ $destination = strings.TrimPrefix $b.Path $destination }}
-        {{ $destination = path.Clean $destination }}
-    {{ end }}
-{{ else }}
-    {{ $destination = (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $destination) }}
-{{ end }}
-{{ if not $destination }}{{ $destination = "/" }}{{ end }}
+        {{- with index site.Params.links $destination -}}
+            {{- $destination = . -}}
+        {{- end -}}
+    {{- else -}}
+        {{- $b := urls.Parse site.BaseURL -}}
+        {{- $destination = strings.TrimPrefix $b.Path $destination -}}
+        {{- $destination = path.Clean $destination -}}
+    {{- end -}}
+{{- else -}}
+    {{- $destination = (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $destination) -}}
+{{- end -}}
+{{- if not $destination }}{{ $destination = "/" }}{{ end -}}
 
 {{- $target := "" -}}
 {{- $rel := "" -}}
@@ -66,45 +66,45 @@
         {{- end -}}
 
         {{- if $cue -}}
-            {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs" "spacing" false) }}
+            {{- $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs" "spacing" false) -}}
             {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
         {{- end -}}
     {{- else -}}
-        {{- if strings.Contains $destination "#" }}
-            {{ $segments := split $destination "#" }}
+        {{- if strings.Contains $destination "#" -}}
+            {{- $segments := split $destination "#" -}}
             {{- if ne (len $segments) 2 }}
                 {{ $errmsg = $errmsg | append (printf "Malformed path, expected one anchor '#' only: %s" $destination )}}
                 {{- $error = true -}}
-            {{ else }}
+            {{- else -}}
                 {{- $destination = index $segments 0 -}}
                 {{- $anchor = index $segments 1 -}}
-            {{ end }}
-        {{ end }}
+            {{- end -}}
+        {{- end -}}
 
-        {{ if not $isLocal }}
+        {{- if not $isLocal -}}
             {{- if not (index $args "skip-validation") -}}
-                {{ $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $args.page) }}
+                {{- $ref := partial "utilities/GetPage.html" (dict "url" $destination "page" $args.page) -}}
                 {{- if not $ref -}}
-                    {{ $pageContext := "" }}
-                    {{ with $args.page.File }}
-                        {{ $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) }}
-                    {{ end }}
-                    {{ $isPageRes := fileExists (path.Join $pageContext $destination) }}
-                    {{ $res := "" }}
-                    {{ if $isPageRes }}
+                    {{- $pageContext := "" -}}
+                    {{- with $args.page.File -}}
+                        {{- $pageContext = path.Dir (strings.TrimPrefix hugo.WorkingDir .Filename) -}}
+                    {{- end -}}
+                    {{- $isPageRes := fileExists (path.Join $pageContext $destination) -}}
+                    {{- $res := "" -}}
+                    {{- if $isPageRes -}}
                         {{- $res = partial "utilities/GetResource.html" (dict "url" $args.destination "page" $args.page) -}}
-                    {{ end }}
-                    {{ $isStatic := fileExists (path.Join "static" $destination) }}
-                    {{ if and (not $res) (not $isStatic) }}
-                        {{ $errmsg = $errmsg | append (printf "Cannot find page or asset: '%s'" $destination )}}
+                    {{- end -}}
+                    {{- $isStatic := fileExists (path.Join "static" $destination) -}}
+                    {{- if and (not $res) (not $isStatic) -}}
+                        {{- $errmsg = $errmsg | append (printf "Cannot find page or asset: '%s'" $destination ) -}}
                         {{- $error = true -}}
-                    {{ else if $res }}
-                        {{ $destination = $res.RelPermalink }}
-                    {{ else if $isStatic }}
-                        {{ $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) }}
-                    {{ end }}
+                    {{- else if $res -}}
+                        {{- $destination = $res.RelPermalink -}}
+                    {{- else if $isStatic -}}
+                        {{- $destination = partial "utilities/URLJoin.html" (dict "base" "/" "path" $destination) -}}
+                    {{- end -}}
                     {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
-                {{ end }}
+                {{- end -}}
 
                 {{- if and $ref (not $error) -}}
                     {{- $destination = $ref.RelPermalink -}}
@@ -112,53 +112,53 @@
                 {{- end -}}
 
                 {{- if not $text -}}
-                    {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end }}
-                {{ end -}}
+                    {{- if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $ref.LinkTitle }}{{ end -}}
+                {{- end -}}
             {{- else -}}
                 {{/* Skip validation - just use destination as-is and derive text if needed */}}
-                {{- with $anchor }}{{ $destination = printf "%s#%s" (strings.TrimSuffix "/" $destination) . -}}{{ end -}}
+                {{- with $anchor }}{{ $destination = printf "%s%s#%s" (strings.TrimSuffix "/" $destination) (cond $pretty "/" "") . -}}{{ end -}}
                 {{- if not $text -}}
-                    {{ if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $destination }}{{ end }}
-                {{ end -}}
+                    {{- if $anchor }}{{ $text = $anchor }}{{ else }}{{ $text = $destination }}{{ end -}}
+                {{- end -}}
             {{- end -}}
-        {{ else }}
-            {{ with $anchor }}
-                {{ $destination = printf "#%s" . }}
-                {{ if not $text }}{{ $text = . }}{{ end }}
-            {{ end }}
-        {{ end }}
+        {{- else -}}
+            {{- with $anchor -}}
+                {{- $destination = printf "#%s" . -}}
+                {{- if not $text }}{{ $text = . }}{{ end -}}
+            {{- end -}}
+        {{- end -}}
 
         {{- if not $args.exact }}
             {{- if not $args.case }}
-                {{ $text = lower $text }}
-            {{ else if and site.Params.main.titleCase (not $args.page.Params.exact) }}
-                {{ $text = title $text }}
-            {{ end -}}
-        {{ end -}}
+                {{- $text = lower $text }}
+            {{- else if and site.Params.main.titleCase (not $args.page.Params.exact) }}
+                {{- $text = title $text }}
+            {{- end -}}
+        {{- end -}}
 
-        {{ if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) }}
-            {{ $destination = printf "%s/" $destination }}
-        {{ end }}
+        {{- if and $pretty (not (hasSuffix $destination "/" )) (not (strings.Contains $destination "#")) -}}
+            {{- $destination = printf "%s/" $destination -}}
+        {{- end -}}
 
-        {{ if $args.force }}
-            {{ if strings.Contains $destination "?" }}
-                {{ $destination = printf "%s&force=true" $destination }}
-            {{ else }}
-                {{ $destination = printf "%s?force=true" $destination }}
-            {{ end }}
-        {{ end }}
+        {{- if $args.force -}}
+            {{- if strings.Contains $destination "?" -}}
+                {{- $destination = printf "%s&force=true" $destination -}}
+            {{- else -}}
+                {{- $destination = printf "%s?force=true" $destination -}}
+            {{- end -}}
+        {{- end -}}
     {{- end -}}
 {{- end -}} 
 
-{{ if $error -}}
-    {{ partial "utilities/LogErr.html" (dict 
+{{- if $error -}}
+    {{- partial "utilities/LogErr.html" (dict 
         "partial"  "assets/link.html" 
         "msg"      "Invalid arguments"
         "details"  $errmsg
         "file"     $args.page.File
         "position" $args.position
-    )}}
-{{ else }}
+    ) -}}
+{{- else -}}
     <a 
         {{- with $destination }} href="{{ . | safeURL }}"{{ end -}}
         {{ with $args.class }} class="{{ . }}" {{ end -}}
