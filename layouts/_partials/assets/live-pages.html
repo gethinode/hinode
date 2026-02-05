@@ -70,7 +70,7 @@
                 {{ end }}
                 {{ if and $args.keywords (gt (len $args.keywords) 0) }}
                     {{ $keywords := slice | append $args.keywords }}
-                    {{ $pages = where $pages "Params.keywords" "intersect" $keywords }}
+                    {{ $pages = where $pages "Keywords" "intersect" $keywords }}
                 {{ end }}
                 {{ if and $args.categories (gt (len $args.categories) 0) }}
                     {{ $categories := slice | append $args.categories }}
