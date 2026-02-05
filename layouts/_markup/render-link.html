@@ -1,15 +1,15 @@
-{{ if gt (findRE `^HAHAHUGO` .Destination 1) 0 }}
-    {{ errorf "Invalid markdown link destination, use '%s' syntax when using shortcodes as input. See '%s'" 
+{{- if gt (findRE `^HAHAHUGO` .Destination 1) 0 -}}
+    {{- errorf "Invalid markdown link destination, use '%s' syntax when using shortcodes as input. See '%s'" 
         ("&#123;&#123;% %&#125;&#125;" | htmlUnescape)
         .Page.File.Path
-    }}
-{{ else if not .Destination }}
-    {{ errorf "Missing markdown link destination,  see '%s'" .Page.File.Path }}
-{{ else }}
-    {{ partial "assets/link.html" (dict 
+    -}}
+{{- else if not .Destination -}}
+    {{- errorf "Missing markdown link destination,  see '%s'" .Page.File.Path -}}
+{{- else -}}
+    {{- partial "assets/link.html" (dict 
         "href"  .Destination
         "page"  .Page
         "text"  (.Text | htmlUnescape)
         "title" (.Title | htmlUnescape)
-    ) }}
-{{- end }}
+    ) -}}
+{{- end -}}
