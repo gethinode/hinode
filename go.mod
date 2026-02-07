@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/airbnb/lottie-web v5.13.0+incompatible // indirect
 	github.com/gethinode/mod-bootstrap v1.3.5 // indirect
-	github.com/gethinode/mod-csp v1.0.8 // indirect
+	github.com/gethinode/mod-csp v1.0.9 // indirect
 	github.com/gethinode/mod-flexsearch/v3 v3.2.0 // indirect
 	github.com/gethinode/mod-fontawesome/v3 v3.1.3 // indirect
 	github.com/gethinode/mod-google-analytics/v2 v2.0.0 // indirect
