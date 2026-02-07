@@ -118,6 +118,35 @@ Components are mounted to multiple locations via `hugo.toml`:
 - `data/structures/` - Schemas
 - `assets/scss/modules/bookshop/` - Styles
 
+### Version 2 Architecture Philosophy
+
+**Design Goal:** Hinode v2 is a minimal core theme that works standalone for documentation and blog sites. Optional features are provided through separate modules.
+
+**What's in Hinode v2 core:**
+
+- Hugo templates for pages, lists, and singles
+- Shortcode library (accordion, alert, card, carousel, etc.)
+- Shared partials (section-title, card-group, video, table, timeline)
+- Bootstrap 5 styling via mod-bootstrap
+- Search via mod-flexsearch
+- Icons via mod-fontawesome
+- Core utilities via mod-utils
+
+**What's optional (via modules):**
+
+- **mod-blocks** - Pre-built Bookshop components for visual page building
+- **mod-katex** - LaTeX math rendering
+- **mod-mermaid** - Diagram rendering
+- **mod-leaflet** - Interactive maps
+- **mod-lottie** - Lottie animations
+
+**Key architectural decisions:**
+
+1. **No circular dependencies** - Hinode doesn't import mod-blocks; mod-blocks imports Hinode
+2. **Clear ownership** - Block-specific partials (hero, contact, faq) live in mod-blocks; shared utilities (section-title, card-group) live in Hinode
+3. **Module inheritance** - mod-blocks inherits Hinode's shared partials automatically
+4. **Backwards compatibility** - Sites can still use mod-blocks by explicitly importing it
+
 ### Directory Structure
 
 - `layouts/` - Theme templates and shortcodes
@@ -167,6 +196,24 @@ CSP headers are auto-generated via Hugo's segments feature. The theme includes `
 
 Multi-language support with translations in `i18n/`. Default language is English (`en-us`). Language configuration in `config/_default/hugo.toml`.
 
+### Page Templates (v2)
+
+**List pages** (`layouts/list.html`):
+
+- If page has `content_blocks` frontmatter → renders via `page/blocks.html` (requires mod-blocks)
+- Otherwise → renders via `page/articles.html` (core Hinode, uses section-title.html for header)
+
+**Single pages** (`layouts/single.html`):
+
+- Renders content via `utilities/ProcessContent` partial
+- If page has `content_blocks` → also renders via `page/blocks.html`
+
+**Key partials:**
+
+- `page/articles.html` - Default list page rendering with section-title header and card grid
+- `page/blocks.html` - Renders Bookshop content blocks (requires mod-blocks)
+- `assets/section-title.html` - Shared heading utility with preheading, subtitle, links support
+
 ## Key Configuration Files
 
 - `hugo.toml` - Main Hugo config with modules, mounts, build settings
@@ -180,11 +227,15 @@ Multi-language support with translations in `i18n/`. Default language is English
 
 ## Important Development Notes
 
-### When Modifying Components
+### When Working with mod-blocks (Optional)
 
-1. Components in `component-library/` need three files: `.hugo.html`, `.scss`, `.bookshop.yml`
-2. Update PurgeCSS safelist in `config/postcss.config.js` if adding dynamic classes
-3. Component styles are automatically mounted via `hugo.toml` module mounts
+**Note:** Hinode v2 does NOT include mod-blocks by default. If you need Bookshop components:
+
+1. Add mod-blocks to `hugo.toml`: `path = "github.com/gethinode/mod-blocks"`
+2. Run `npm run mod:vendor` to vendor the module
+3. Components live in mod-blocks repository at `component-library/components/`
+4. Each component has three files: `.hugo.html`, `.scss`, `.bookshop.yml`
+5. Update PurgeCSS safelist in `config/postcss.config.js` if components add dynamic classes
 
 ### When Adding Hugo Modules
 
@@ -309,5 +360,6 @@ refactor: consolidate version detection into modular partials
 - Pre-commit hooks run automatically when committing
 - If hooks modify files (e.g., formatting), the commit will fail and you should commit again
 - Always test changes with the example site: `npm run build:example`
-- Check for i18n warnings when modifying translations or components using testimonials
+- Check for i18n warnings when modifying translations
 - Ensure all language variants build without warnings
+- If using mod-blocks, test that components still work after Hinode changes
