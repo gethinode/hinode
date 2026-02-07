@@ -15,10 +15,7 @@
         </div>
     {{ end }}
 
-    {{ with .Params.content_blocks }}
-        {{ partial "bookshop_bindings" `.Params.content_blocks` | safeHTML }}
-        {{ partial "bookshop_partial" (slice "page" .) | safeHTML }}
-    {{ end }}
+    {{- partial "page/blocks.html" . -}}
 
     {{ if (gt (len .RawContent) 0) }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">

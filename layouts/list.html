@@ -3,9 +3,8 @@
     {{- $content := partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}
     {{- $padding := partial "utilities/GetPadding.html" -}}
 
-    {{ with .Params.content_blocks }}
-        {{ partial "bookshop_bindings" `.Params.content_blocks` | safeHTML }}
-        {{ partial "bookshop_partial" (slice "page" .) | safeHTML }}
+    {{ if .Params.content_blocks }}
+        {{- partial "page/blocks.html" . -}}
     {{ else }}
         {{ partial "page/articles.html" . }}
     {{ end }}

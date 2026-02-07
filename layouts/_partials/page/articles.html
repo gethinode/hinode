@@ -1,20 +1,35 @@
 {{/* Add default hero and articles for list pages */}}
-{{ partial "bookshop" (slice "hero" (dict 
-    "heading"        (dict "title" .Title "align" .Site.Params.modules.bookshop.hero.align)
-    "breadcrumb"     .Site.Params.navigation.breadcrumb
-    "background"     (dict "backdrop" .Site.Params.modules.bookshop.hero.backdrop)
-    "overlay-mode"   .Site.Params.modules.bookshop.hero.overlayMode
-    "justify"        "start"
-)) }}
+{{- $padding := partial "utilities/GetPadding.html" -}}
 
-{{ partial "bookshop" (slice "articles" (dict 
-    "_bookshop_name" "articles"
-    "hide-empty"     false
-    "input"          (dict "section" .Section "reverse" true "sort" "date" "nested" true)
-    "cols"           3
-    "padding"        "0"
-    "paginate"       true
-    "scroll"         false
-    "justify"        "start"
-    "class"          "border-0 card-zoom card-body-margin"
-)) }}
+{{/* Render basic header for list page */}}
+<div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+    {{ if .Site.Params.navigation.breadcrumb }}
+        {{ partial "assets/breadcrumb.html" (dict "page" .) }}
+    {{ end }}
+    {{ partial "assets/section-title.html" (dict
+        "heading" (dict
+            "title" .Title
+            "align" "start"
+        )
+        "use-title" true
+    ) }}
+</div>
+
+{{/* Render paginated list of articles */}}
+{{ $pages := where .Site.RegularPages "Section" .Section }}
+{{ if gt (len $pages) 0 }}
+    <div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {{ range (.Paginate $pages).Pages }}
+                <div class="col">
+                    {{ partial "assets/card.html" (dict
+                        "path"    .RelPermalink
+                        "class"   "border-0 card-zoom h-100"
+                        "padding" 0
+                    ) }}
+                </div>
+            {{ end }}
+        </div>
+        {{ partial "assets/pagination.html" (dict "page" .) }}
+    </div>
+{{ end }}

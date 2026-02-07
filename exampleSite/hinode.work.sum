@@ -1,3 +1,5 @@
+github.com/gethinode/hinode/component-library v0.0.0-20260126151252-24679a2c2a61 h1:ZotbWXLzG4pArTCFaVAme9EW7/it0f2AdYBO2omYiCQ=
+github.com/gethinode/hinode/component-library v0.0.0-20260126151252-24679a2c2a61/go.mod h1:Y/gFEO2qzmZzvOxa+t5R3mKInVQ0tKHezByPLXiv5sA=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2 h1:v1aHhbLLwe/05zRHnx9qGqh6b3toDzcLzuv61rWAoGU=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2/go.mod h1:zukv88wXqquEvTJJ9mWWk8Ia+9INnA41wYqusf2RcHA=
 github.com/gethinode/mod-utils/v4 v4.12.0 h1:5sSfYIxZCeQbXLoZdS//rl6thwLwtXuvM0ujaWKyPmc=

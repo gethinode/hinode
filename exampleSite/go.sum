@@ -1,2 +1,6 @@
+github.com/cloudcannon/bookshop/hugo/v3 v3.17.1 h1:weTVWBamjQHMIp/oYTFsPwRzzhWrZA6JO43QnxI1kxw=
+github.com/cloudcannon/bookshop/hugo/v3 v3.17.1/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
+github.com/gethinode/mod-blocks v1.0.5 h1:IYWyz04kfCst8NXADivjvwRho3EOJRji74/kR+M4mAY=
+github.com/gethinode/mod-blocks v1.0.5/go.mod h1:H3Slh4BaxmYLX61YXyO/yqMZHlCwSlvX3VekDpnWCSM=
 github.com/gethinode/mod-cookieyes/v2 v2.2.6 h1:/DQm8OYpms0On8wuosQER47TplVu/3z7MZHwbBKXCAg=
 github.com/gethinode/mod-cookieyes/v2 v2.2.6/go.mod h1:tULb7D7CoTycGUyL7ryqHJKaX11XuL2SN+XwP7/DI0Y=
