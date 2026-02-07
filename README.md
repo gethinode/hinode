@@ -102,6 +102,20 @@ Start a new Hinode project in three steps:
     hugo server
     ```
 
+## Optional Extensions
+
+Hinode v2 is a minimal core theme. Optional extensions are available to add features:
+
+- **[mod-blocks][mod-blocks]** - Pre-built Bookshop blocks for quickly building page layouts (hero, cards, FAQ, testimonials, etc.)
+- Other modules - See the [official modules list][modules]
+
+To add mod-blocks to your site:
+
+```toml
+[[module.imports]]
+  path = "github.com/gethinode/mod-blocks"
+```
+
 ## Configuration
 
 See the [official documentation][getstarted] on how to configure your site.
@@ -147,6 +161,8 @@ The `hinode`, `docs`, and `template` codebase is released under the [MIT license
 [contribute]: https://gethinode.com/contribute
 [getstarted]: https://gethinode.com/docs
 [golang_download]: https://go.dev/dl/
+[mod-blocks]: https://github.com/gethinode/mod-blocks
+[modules]: https://gethinode.com/docs/getting-started/modules/
 [demo]: https://demo.gethinode.com/
 [license]: https://github.com/gethinode/hinode/blob/main/LICENSE
 [repository]: https://github.com/gethinode/hinode.git

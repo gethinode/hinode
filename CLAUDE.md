@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Hinode is a Hugo theme for documentation and blog sites built on Bootstrap 5. It uses Hugo's module system to manage dependencies and includes Bookshop for component-based development. The theme is designed for performance, security (with CSP headers), and SEO.
+Hinode is a Hugo theme for documentation and blog sites built on Bootstrap 5. It uses Hugo's module system to manage dependencies. The theme is designed for performance, security (with CSP headers), and SEO.
+
+**Version 2 (templatev2 branch)** is a minimal core theme. Optional extensions like mod-blocks add features like pre-built Bookshop components for page building.
 
 ## Common Development Commands
 
@@ -59,18 +61,52 @@ npm run upgrade             # Update npm and Hugo module dependencies
 
 The theme uses Hugo's module system extensively. All modules are vendored to `_vendor/` for reproducible builds. Key modules include:
 
+**Core modules (always loaded):**
+
 - `mod-bootstrap` - Bootstrap 5 framework
+- `mod-utils` - Utility functions and helpers (GetPadding, GetBreakpoint, LogWarn, InitArgs, etc.)
 - `mod-flexsearch` - Full-text search functionality
 - `mod-fontawesome` - Icon support
-- `mod-utils` - Utility functions and helpers
-- `mod-katex`, `mod-mermaid`, `mod-leaflet`, `mod-lottie` - Optional feature modules
-- `cloudcannon/bookshop` - Component library system
+
+**Optional modules:**
+
+- `mod-blocks` - Pre-built Bookshop blocks for page building (NOT loaded by default in v2)
+- `mod-katex`, `mod-mermaid`, `mod-leaflet`, `mod-lottie` - Feature modules
 
 Module configuration is in `config/_default/hugo.toml` under `[module.imports]`. Always run `npm run mod:vendor` after module changes.
 
-### Component Library (Bookshop)
+### Partial Ownership (v2 Architecture)
 
-Components live in `component-library/components/`. Each component has:
+**Hinode owns (core partials):**
+
+- `assets/card-group.html`, `assets/nav.html`, `assets/video.html`, `assets/table.html`, `assets/timeline.html` - Used by Hinode shortcodes
+- `assets/live-image.html`, `assets/live-pages.html` - Used by Hinode templates
+- `assets/section-title.html` - Section heading utility (used by Hinode pages and mod-blocks components)
+- All `mod-utils` utilities (GetPadding, GetBreakpoint, LogWarn, InitArgs, etc.)
+
+**mod-blocks owns (block-specific partials - moved in v2):**
+
+- `assets/hero.html`, `assets/contact.html`, `assets/faq.html`, `assets/testimonial-carousel.html`, `assets/menu.html`
+- `utilities/section.html` - Wraps all block components
+- `page/contact.html` - Contact page template
+
+**Dependency flow:**
+
+```text
+Hinode v2 (core theme)
+  ├── mod-utils (GetPadding, LogWarn, etc.)
+  ├── Shared partials (card-group, video, table, section-title, etc.)
+  └── Does NOT import mod-blocks by default
+
+mod-blocks v1.1+ (optional extension)
+  ├── 16 Bookshop components
+  ├── Block-specific partials (7 files)
+  └── Depends on Hinode v2 (inherits section-title from Hinode)
+```
+
+### Component Library (Bookshop) - Optional via mod-blocks
+
+Bookshop components are provided by the optional **mod-blocks** module. When installed, components live in `component-library/components/`. Each component has:
 
 - `*.hugo.html` - Hugo template
 - `*.scss` - Component styles
@@ -81,6 +117,35 @@ Components are mounted to multiple locations via `hugo.toml`:
 - `layouts/partials/bookshop/` - Templates
 - `data/structures/` - Schemas
 - `assets/scss/modules/bookshop/` - Styles
+
+### Version 2 Architecture Philosophy
+
+**Design Goal:** Hinode v2 is a minimal core theme that works standalone for documentation and blog sites. Optional features are provided through separate modules.
+
+**What's in Hinode v2 core:**
+
+- Hugo templates for pages, lists, and singles
+- Shortcode library (accordion, alert, card, carousel, etc.)
+- Shared partials (section-title, card-group, video, table, timeline)
+- Bootstrap 5 styling via mod-bootstrap
+- Search via mod-flexsearch
+- Icons via mod-fontawesome
+- Core utilities via mod-utils
+
+**What's optional (via modules):**
+
+- **mod-blocks** - Pre-built Bookshop components for visual page building
+- **mod-katex** - LaTeX math rendering
+- **mod-mermaid** - Diagram rendering
+- **mod-leaflet** - Interactive maps
+- **mod-lottie** - Lottie animations
+
+**Key architectural decisions:**
+
+1. **No circular dependencies** - Hinode doesn't import mod-blocks; mod-blocks imports Hinode
+2. **Clear ownership** - Block-specific partials (hero, contact, faq) live in mod-blocks; shared utilities (section-title, card-group) live in Hinode
+3. **Module inheritance** - mod-blocks inherits Hinode's shared partials automatically
+4. **Backwards compatibility** - Sites can still use mod-blocks by explicitly importing it
 
 ### Directory Structure
 
@@ -131,6 +196,24 @@ CSP headers are auto-generated via Hugo's segments feature. The theme includes `
 
 Multi-language support with translations in `i18n/`. Default language is English (`en-us`). Language configuration in `config/_default/hugo.toml`.
 
+### Page Templates (v2)
+
+**List pages** (`layouts/list.html`):
+
+- If page has `content_blocks` frontmatter → renders via `page/blocks.html` (requires mod-blocks)
+- Otherwise → renders via `page/articles.html` (core Hinode, uses section-title.html for header)
+
+**Single pages** (`layouts/single.html`):
+
+- Renders content via `utilities/ProcessContent` partial
+- If page has `content_blocks` → also renders via `page/blocks.html`
+
+**Key partials:**
+
+- `page/articles.html` - Default list page rendering with section-title header and card grid
+- `page/blocks.html` - Renders Bookshop content blocks (requires mod-blocks)
+- `assets/section-title.html` - Shared heading utility with preheading, subtitle, links support
+
 ## Key Configuration Files
 
 - `hugo.toml` - Main Hugo config with modules, mounts, build settings
@@ -144,11 +227,15 @@ Multi-language support with translations in `i18n/`. Default language is English
 
 ## Important Development Notes
 
-### When Modifying Components
+### When Working with mod-blocks (Optional)
 
-1. Components in `component-library/` need three files: `.hugo.html`, `.scss`, `.bookshop.yml`
-2. Update PurgeCSS safelist in `config/postcss.config.js` if adding dynamic classes
-3. Component styles are automatically mounted via `hugo.toml` module mounts
+**Note:** Hinode v2 does NOT include mod-blocks by default. If you need Bookshop components:
+
+1. Add mod-blocks to `hugo.toml`: `path = "github.com/gethinode/mod-blocks"`
+2. Run `npm run mod:vendor` to vendor the module
+3. Components live in mod-blocks repository at `component-library/components/`
+4. Each component has three files: `.hugo.html`, `.scss`, `.bookshop.yml`
+5. Update PurgeCSS safelist in `config/postcss.config.js` if components add dynamic classes
 
 ### When Adding Hugo Modules
 
@@ -273,5 +360,6 @@ refactor: consolidate version detection into modular partials
 - Pre-commit hooks run automatically when committing
 - If hooks modify files (e.g., formatting), the commit will fail and you should commit again
 - Always test changes with the example site: `npm run build:example`
-- Check for i18n warnings when modifying translations or components using testimonials
+- Check for i18n warnings when modifying translations
 - Ensure all language variants build without warnings
+- If using mod-blocks, test that components still work after Hinode changes
