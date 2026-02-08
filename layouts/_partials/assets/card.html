@@ -30,11 +30,12 @@
     {{- $description := .description -}}
     {{- $links := .links -}}
     {{- $class := .class }}
+    {{- $fs := .fs | default "fs-lg-5 fs-6" }}
     
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link {{ $class }}">
             {{ if or $title $links }}
-                <p class="card-title fs-lg-5 fs-6">
+                <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
@@ -48,7 +49,7 @@
     {{- else -}}
         <div{{ with $class }} class="{{ . }}"{{ end }}>
             {{ if or $title $links }}
-                <p class="card-title fs-lg-5 fs-6">
+                <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
@@ -162,8 +163,10 @@
     {{- $iconStyle = "pb-3" -}}
 {{ end }}
 
+{{ $minimal := or (eq $args.bodyStyle "minimal") (eq $args.body "minimal") }}
 {{- if eq $args.orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
+{{- if $minimal }}{{ $description = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 {{ if and site.Params.main.titleCase (not $args.exact) }}{{ $title = title $title }}{{ end }}
 
@@ -230,10 +233,10 @@
                             </div>
                         {{ end }}
                         {{- partial "inline/card-body.html" (dict
-                            "title"       $title
+                            "title"       (cond $minimal "" $title)
                             "href"        $href
                             "color"       $args.color
-                            "description" $description
+                            "description" (cond $minimal $title $description)
                             "links"       $args.links
                         ) -}}
                         {{ if and $page (ne $args.footerStyle "none") }}
@@ -289,10 +292,10 @@
             {{ if $args.overlay }}<div class="flex-grow-1"></div>{{ end }}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict
-                "title"       $title
+                "title"       (cond $minimal "" $title)
                 "href"        $href
                 "color"       $args.color
-                "description" $description
+                "description" (cond $minimal $title $description)
                 "links"       $args.links
                 "class"       (cond (and $thumbnail (eq $args.headerStyle "none")) "pt-3" "")
             ) -}}
