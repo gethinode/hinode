@@ -29,6 +29,12 @@ The `releases` content block displays a timeline with release information.
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
 
+## Data
+
+The releases block supports structured release data as input. The following file provides a language-specific example. Place this file in your site's data folder.
+
+{{< file file="./exampleSite/data/timeline.en.yml" full=false >}}
+
 ## Arguments
 
 The content block supports the following arguments:

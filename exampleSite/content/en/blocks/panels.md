@@ -9,45 +9,6 @@ icon: fa folder
 
 The `panels` content block displays multiple panels that are toggled by a tab control.
 
-<!-- markdownlint-disable MD037 -->
-{{< example-bookshop lang="bookshop" >}}
-
-```yml
-- _bookshop_name: panels
-  heading:
-    preheading: Preheading
-    title: Heading
-    content: Panels content. It supports multiple lines.
-    align: start
-  background:
-    color: body-tertiary
-    subtle: false
-  width: 12
-  tab-type: underline
-  ratio: 1x1
-  elements:
-    - title: First Panel
-      image: /img/sunrise.jpg
-      content: content 1
-    - title: Second Panel
-      image: /img/nat-9l98kFByiao-unsplash.jpg
-      content: content 2
-    - title: Third Panel
-      image: /img/pj-accetturo-XpD6Dkui-yg-unsplash.jpg
-      content: content 3
-```
-
-{{< /example-bookshop >}}
-<!-- markdownlint-enable MD037 -->
-
-## Arguments
-
-The content block supports the following arguments:
-
-{{< args bookshop-panels >}}
-
-## Examples
-
 ### Tabs
 
 Set `tab-type` to `tabs` to adjust the panel controls.
@@ -70,14 +31,14 @@ Set `tab-type` to `tabs` to adjust the panel controls.
   ratio: 1x1
   elements:
     - title: First Panel
-      image: /img/sunrise.jpg
-      content: content 1
+      image: /img/placeholder.png
+      content: Content of the first panel.
     - title: Second Panel
-      image: /img/nat-9l98kFByiao-unsplash.jpg
-      content: content 2
+      image: /img/placeholder.png
+      content: Content of the second panel.
     - title: Third Panel
-      image: /img/pj-accetturo-XpD6Dkui-yg-unsplash.jpg
-      content: content 3
+      image: /img/placeholder.png
+      content: Content of the third panel.
 ```
 
 {{< /example-bookshop >}}
@@ -105,14 +66,14 @@ Set `tab-type` to `pills` to adjust the panel controls.
   ratio: 1x1
   elements:
     - title: First Panel
-      image: /img/sunrise.jpg
-      content: content 1
+      image: /img/placeholder.png
+      content: Content of the first panel.
     - title: Second Panel
-      image: /img/nat-9l98kFByiao-unsplash.jpg
-      content: content 2
+      image: /img/placeholder.png
+      content: Content of the second panel.
     - title: Third Panel
-      image: /img/pj-accetturo-XpD6Dkui-yg-unsplash.jpg
-      content: content 3
+      image: /img/placeholder.png
+      content: Content of the third panel.
 ```
 
 {{< /example-bookshop >}}
@@ -140,14 +101,14 @@ Set `tab-type` to `underline` to adjust the panel controls.
   ratio: 1x1
   elements:
     - title: First Panel
-      image: /img/sunrise.jpg
-      content: content 1
+      image: /img/placeholder.png
+      content: Content of the first panel.
     - title: Second Panel
-      image: /img/nat-9l98kFByiao-unsplash.jpg
-      content: content 2
+      image: /img/placeholder.png
+      content: Content of the second panel.
     - title: Third Panel
-      image: /img/pj-accetturo-XpD6Dkui-yg-unsplash.jpg
-      content: content 3
+      image: /img/placeholder.png
+      content: Content of the third panel.
 ```
 
 {{< /example-bookshop >}}
@@ -175,15 +136,21 @@ Set `tab-type` to `callout` to adjust the panel controls.
   ratio: 1x1
   elements:
     - title: First Panel
-      image: /img/sunrise.jpg
-      content: content 1
+      image: /img/placeholder.png
+      content: Content of the first panel.
     - title: Second Panel
-      image: /img/nat-9l98kFByiao-unsplash.jpg
-      content: content 2
+      image: /img/placeholder.png
+      content: Content of the second panel.
     - title: Third Panel
-      image: /img/pj-accetturo-XpD6Dkui-yg-unsplash.jpg
-      content: content 3
+      image: /img/placeholder.png
+      content: Content of the third panel.
 ```
 
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
+
+## Arguments
+
+The content block supports the following arguments:
+
+{{< args bookshop-panels >}}

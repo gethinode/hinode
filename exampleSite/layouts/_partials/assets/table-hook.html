@@ -1,0 +1,10 @@
+{{ $pages := .pages | default dict }}
+
+{{ $content := printf "| %s | %s |\n|-|-|\n" (T "article") (T "published") }}
+{{ range $pages }}
+    {{ $content = printf "%s[%s](%s) | %s |\n" $content .LinkTitle .RelPermalink 
+        (.PublishDate | time.Format "2006-01-02") 
+    }}
+{{ end }}
+
+{{ return $content }}

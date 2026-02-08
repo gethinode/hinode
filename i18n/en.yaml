@@ -17,6 +17,8 @@
   translation: "on"
 - id: draft
   translation: "Draft"
+- id: published
+  translation: "Published"
 
 # List pages
 - id: article

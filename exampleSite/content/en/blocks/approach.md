@@ -1,13 +1,13 @@
 ---
 _schema: default
 title: Approach
-description: Use the approach content block to show a featured image with one or more steps.
+description: Use the approach block to show a featured image with one or more steps.
 icon: fas stairs
 ---
 
 ## Overview
 
-The `approach` content block renders a featured image with one or more steps.
+The `approach` block renders a featured image with one or more steps.
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
@@ -23,7 +23,7 @@ The `approach` content block renders a featured image with one or more steps.
     color: body-tertiary
     subtle: false
   illustration:
-    image: /assets/img/nat-9l98kFByiao-unsplash.jpg
+    image: /img/placeholder.png
   orientation: stacked
   icon-rounded: false
   icon-style: fa-xs

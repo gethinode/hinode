@@ -9,42 +9,6 @@ icon: fa thumbs-up
 
 The `testimonials` content block renders one or more client testimonials. You can render them as a carousel or as columns.
 
-<!-- markdownlint-disable MD037 -->
-{{< example-bookshop lang="bookshop" >}}
-
-```yml
-- _bookshop_name: testimonials
-  card:
-    color: body-tertiary
-    subtle: false
-  cols: 1
-  icon_style: fa-2x
-  carousel: true
-  testimonials:
-    - icon: fab linkedin
-      scale: 1.6
-      content: >-
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-        veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-      client:
-        contact: First Last
-        role: CTO
-        url: https://linkedin.com/
-        image: /img/jake-nackos-IF9TK5Uy-KI-unsplash.png
-```
-
-{{< /example-bookshop >}}
-<!-- markdownlint-enable MD037 -->
-
-## Arguments
-
-The content block supports the following arguments:
-
-{{< args bookshop-testimonials >}}
-
-## Examples
-
 ### Carousel
 
 Set `carousel` to `true` to render a carousel of multiple testimonials.
@@ -107,3 +71,9 @@ Set `cols` to `3` to render three testimonials as columns.
 
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
+
+## Arguments
+
+The content block supports the following arguments:
+
+{{< args bookshop-testimonials >}}

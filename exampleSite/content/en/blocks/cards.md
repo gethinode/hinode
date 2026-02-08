@@ -1,54 +1,13 @@
 ---
 _schema: default
 title: Cards
-description: Use the cards content block to show a card group of messages.
+description: Use the cards block to show a group of content cards.
 icon: fa address-card
 ---
 
 ## Overview
 
-The `cards` content block renders a group of content cards.
-
-<!-- markdownlint-disable MD037 -->
-{{< example-bookshop lang="bookshop" >}}
-
-```yml
-- _bookshop_name: cards
-  heading:
-    preheading: Preheading
-    title: Heading
-    content: Cards content. It supports multiple lines.
-    align: start
-  background:
-    color: body-tertiary
-    subtle: false
-  orientation: stacked
-  icon-rounded: true
-  icon-style: fa-xs
-  padding: 0
-  align: start
-  elements:
-    - title: First Card
-      icon: fas 1
-      content: Content of the first card
-    - title: Second Card
-      icon: fas 2
-      content: Content of the second card
-    - title: Third Card
-      icon: fas 3
-      content: Content of the third card
-```
-
-{{< /example-bookshop >}}
-<!-- markdownlint-enable MD037 -->
-
-## Arguments
-
-The content block supports the following arguments:
-
-{{< args bookshop-cards >}}
-
-## Examples
+The `cards` content block renders a group of content cards. You can define the card's content, including an illustration, using frontmatter inputs.
 
 ### Stacked cards with an image
 
@@ -72,11 +31,11 @@ Set the `image` attribute of each `element` to an image asset to render illustra
   align: center
   elements:
     - title: First Card
-      image: /img/nat-9l98kFByiao-unsplash.jpg
+      image: /img/placeholder.png
     - title: Second Card
-      image: /img/nat-9l98kFByiao-unsplash.jpg
+      image: /img/placeholder.png
     - title: Third Card
-      image: /img/nat-9l98kFByiao-unsplash.jpg
+      image: /img/placeholder.png
 ```
 
 {{< /example-bookshop >}}
@@ -104,13 +63,13 @@ Set the `orientation` attribute to `horizontal` to render horizontally oriented 
   align: center
   elements:
     - title: First Card
-      image: /img/nat-9l98kFByiao-unsplash.jpg
+      image: /img/placeholder.png
       content: Content of the first card
     - title: Second Card
-      image: /img/nat-9l98kFByiao-unsplash.jpg
+      image: /img/placeholder.png
       content: Content of the second card
     - title: Third Card
-      image: /img/nat-9l98kFByiao-unsplash.jpg
+      image: /img/placeholder.png
       content: Content of the third card
 ```
 
@@ -189,3 +148,9 @@ Set the `icon` attribute of each `element` to an icon to render illustrated card
 
 {{< /example-bookshop >}}
 <!-- markdownlint-enable MD037 -->
+
+## Arguments
+
+The content block supports the following arguments:
+
+{{< args bookshop-cards >}}
