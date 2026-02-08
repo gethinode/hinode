@@ -63,7 +63,11 @@ const purgecss = purgeCSSPlugin({
       // Bootstrap button groups (used by SimpleDatatables search)
       /btn-group/,
       // Bootstrap responsive tables (used by list component)
-      /table-responsive/
+      /table-responsive/,
+      // Syntax highlighting - preserve Chroma classes and descendants
+      /chroma/,
+      /syntax-highlight/,
+      /codeblock/
     ],
     // Preserve any selector containing these patterns
     greedy: [
@@ -82,11 +86,9 @@ const purgecss = purgeCSSPlugin({
       /suggestion__/,      // Search suggestions (FlexSearch)
       /testimonial-/,      // Testimonial component
 
-      // Syntax highlighting (multiple possible engines)
+      // Syntax highlighting - third-party engines (Chroma handled in deep)
       /^hljs-/,            // highlight.js
       /^language-/,        // Prism/generic
-      /^chroma-/,          // Chroma (Hugo's highlighter)
-      /^highlight/,        // Generic highlighting classes
 
       // Pagination and navigation
       /page-item/,
