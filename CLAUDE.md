@@ -188,6 +188,110 @@ Extensive shortcode library in `layouts/_shortcodes/` provides Bootstrap compone
 - Content: image, video, table, timeline
 - Typography: abbr, kbd, mark, sub, sup
 
+### Argument and Type Initialization System
+
+Hinode uses `mod-utils` to provide a robust argument validation and initialization system
+for shortcodes, partials, and Bookshop components.
+
+**Key components:**
+
+- `utilities/InitArgs.html` - Validates and initializes arguments with type checking and
+  defaults
+- `utilities/InitTypes.html` - Loads type definitions and merges structure-specific with
+  global definitions
+- `data/structures/_arguments.yml` - Global argument definitions (type, default, options,
+  etc.)
+- `data/structures/<name>.yml` - Structure-specific argument definitions for each shortcode
+  or component
+
+**How it works:**
+
+1. **Structure definition inheritance:** Each shortcode/component has a structure file
+   (e.g., `example.yml`) that defines its arguments. These definitions automatically
+   inherit from the global `_arguments.yml` file.
+
+2. **Automatic camelCase conversion:** Hyphenated argument names (e.g., `show-preview`)
+   are automatically converted to camelCase (e.g., `showPreview`) for easier access in
+   templates. Both versions are available: `$args.show-preview` and `$args.showPreview`.
+
+3. **Default value application:** Arguments with `default` or `config` fields in their
+   definition are automatically initialized with those values if not provided by the user.
+
+4. **Type validation:** Arguments are validated against their declared types. The system
+   automatically casts between compatible types (e.g., string `"true"` to boolean `true`).
+
+5. **Deprecation warnings:** Deprecated arguments (marked with `deprecated` field) trigger
+   warnings when used, guiding users to the preferred alternative.
+
+**Structure definition format:**
+
+```yaml
+arguments:
+  my-argument:
+    type: bool
+    optional: true
+    default: true
+    comment: Description of what this argument does.
+    release: v1.0.0
+  deprecated-arg:
+    type: string
+    optional: true
+    deprecated: v1.0.0
+    alternative: my-argument
+```
+
+**Common pitfall - Boolean argument handling:**
+
+When accessing boolean arguments that could be explicitly set to `false`, **DO NOT use the
+`or` operator** for fallback logic:
+
+```hugo
+{{/* WRONG - or operator treats false as falsy and skips it */}}
+{{- $showPreview := or $args.showPreview $args.show_preview }}
+
+{{/* CORRECT - directly access the camelCase version */}}
+{{- $showPreview := $args.showPreview }}
+```
+
+The `or` operator returns the first truthy value, so `or false <fallback>` will skip
+`false` and return the fallback instead of honoring the explicit `false` value.
+
+**Best practices:**
+
+- Always use `InitArgs` at the start of shortcodes and partials to validate arguments
+- Define structure files in `data/structures/` for all shortcodes and components
+- Use hyphenated names for new arguments (e.g., `show-preview` not `show_preview`)
+- Access arguments via their camelCase versions (e.g., `$args.showPreview`)
+- Set appropriate `type`, `optional`, `default`, and `comment` fields for all arguments
+- Mark deprecated arguments with `deprecated` field and provide `alternative`
+
+**Example usage in a shortcode:**
+
+```hugo
+{{/* Initialize and validate arguments */}}
+{{- $args := partial "utilities/InitArgs.html" (dict
+    "structure" "example"
+    "args" .Params
+    "named" .IsNamedParams
+    "group" "shortcode"
+) -}}
+
+{{/* Check for errors/warnings */}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict
+        "partial"  "shortcodes/example.html"
+        "msg"      "Invalid arguments"
+        "details"  ($args.errmsg | append $args.warnmsg)
+        "file"     page.File
+        "position" .Position
+    )}}
+{{- end -}}
+
+{{/* Access arguments using camelCase */}}
+{{- $showPreview := $args.showPreview }}
+{{- $showMarkup := $args.showMarkup }}
+```
+
 ### Content Security Policy
 
 CSP headers are auto-generated via Hugo's segments feature. The theme includes `mod-csp` for Content Security Policy management. Headers are defined in `netlify.toml` and generated via `npm run build:headers`.
