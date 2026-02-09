@@ -21,7 +21,7 @@
 {{ end }}
 
 {{/* Initialize arguments and default values */}}
-{{- $page := . -}}
+{{- $page := .Page -}}
 {{- if $args.path -}}
     {{- $page = .Site.GetPage $args.path -}}
     {{- if not $page -}}
