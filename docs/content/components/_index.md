@@ -8,7 +8,7 @@ aliases:
 content_blocks:
   - _bookshop_name: hero
     heading:
-      title: Blocks
+      title: Components
       content: >-
         Hinode uses [Hugo shortcodes](https://gohugo.io/shortcodes/) to quickly
         add interactive elements to your site. Hinodes supports more than 30
