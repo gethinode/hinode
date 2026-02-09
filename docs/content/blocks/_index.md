@@ -20,8 +20,8 @@ content_blocks:
     hide-empty: false
     input:
       section: blocks
-      reverse: true
-      sort: date
+      reverse: false
+      sort: title
     more:
       title: More Blocks
     cols: 5

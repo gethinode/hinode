@@ -391,11 +391,11 @@ H{{</* sub 2 */>}}O est un liquide.
 
 ## Chronologie
 
-À titre d'exemple, le shortcode suivant affiche une chronologie avec le fichier `data/timeline-fr.yml` en tant que données.
+À titre d'exemple, le shortcode suivant affiche une chronologie avec le fichier `data/sample/timeline.fr.yml` en tant que données.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline-fr" background="body-tertiary" */>}}
+{{</* timeline data="sample/timeline" background="body-tertiary" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

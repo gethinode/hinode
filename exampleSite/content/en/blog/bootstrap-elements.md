@@ -477,11 +477,11 @@ justo non neque.
 
 ## Timeline
 
-As an example, the following shortcode displays a timeline with the file `data/timeline.en.yml` as data.
+As an example, the following shortcode displays a timeline with the file `data/sample/timeline.en.yml` as data.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* timeline data="timeline" background="body-tertiary" */>}}
+{{</* timeline data="sample/timeline" background="body-tertiary" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

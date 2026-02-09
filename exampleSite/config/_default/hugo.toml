@@ -112,3 +112,5 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     path = "github.com/gethinode/mod-cookieyes/v2"
   [[module.imports]]
     path = "github.com/gethinode/hinode/v2"
+  [[module.imports]]
+    path = "github.com/gethinode/hinode/docs"
