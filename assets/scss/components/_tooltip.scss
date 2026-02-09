@@ -1,0 +1,8 @@
+.btn-tooltip a {
+    text-decoration: none;
+}
+
+.btn-tooltip a[href] {
+    color: var(--bs-link-color) !important;
+    text-decoration-color: var(--bs-link-color) !important;
+}
