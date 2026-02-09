@@ -14,3 +14,6 @@
   [[module.mounts]]
     source = "static"
     target = "static"
+
+[params.links]
+    hugo_docs = "https://gohugo.io/documentation/"

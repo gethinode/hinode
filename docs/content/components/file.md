@@ -20,7 +20,7 @@ Use the `file` argument to print the content of a specific file. By default, the
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file file="./data/sample/style.toml" id="file-collapse-2" */>}}
+{{</* file file="./data/style.toml" id="file-collapse-2" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -30,7 +30,7 @@ Set `show` to `false` to hide the file content on page load. The content is reve
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file show="false" file="./data/sample/style.toml" id="file-collapse-4" */>}}
+{{</* file show="false" file="./data/style.toml" id="file-collapse-4" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -40,7 +40,7 @@ Set `full` to `false` to show the filename only.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file full=false file="./data/sample/style.toml" id="file-collapse-5" */>}}
+{{</* file full=false file="./data/style.toml" id="file-collapse-5" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -52,7 +52,7 @@ Use the [Hugo syntax highlighting options](https://gohugo.io/content-management/
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* file full=false file="./data/sample/style.toml" id="file-collapse-5"
+{{</* file full=false file="./data/style.toml" id="file-collapse-5"
     highlight-options="linenos=table,hl_lines=3-4 6,linenostart=10" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

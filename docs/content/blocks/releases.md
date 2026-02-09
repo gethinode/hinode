@@ -23,7 +23,7 @@ The `releases` content block displays a timeline with release information.
   background:
     color: body-tertiary
     subtle: false
-  data: sample/timeline
+  data: timeline
 ```
 
 {{< /example-bookshop >}}
@@ -33,7 +33,7 @@ The `releases` content block displays a timeline with release information.
 
 The releases block supports structured release data as input. The following file provides a language-specific example. Place this file in your site's data folder.
 
-{{< file file="/data/sample/timeline.en.yml" show=false >}}
+{{< file file="/data/timeline.en.yml" show=false >}}
 
 ## Arguments
 

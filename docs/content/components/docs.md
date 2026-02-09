@@ -20,7 +20,7 @@ Use the `name` and `file` arguments to refer to a code snippet of a file. By def
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* docs name="theme-colors" file="./data/sample/style.toml" id="docs-default" */>}}
+{{</* docs name="theme-colors" file="./data/style.toml" id="docs-default" */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -56,7 +56,7 @@ Click on one the tabs to see a full input file example.
 <!-- markdownlint-disable MD031 MD037 -->
 {{< nav tab-type="tabs" id="tabs-1" >}}
   {{< nav-item title="toml" show="true" >}}
-    {{</* file file="./data/sample/style.toml" */>}}
+    {{</* file file="./data/style.toml" */>}}
   {{< /nav-item >}}
   {{< nav-item title="scss" >}}
     {{</* file file="./assets/scss/components/_breadcrumb.scss" */>}}
