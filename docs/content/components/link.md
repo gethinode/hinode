@@ -66,18 +66,18 @@ Provide a link that starts with `http` to reference an external page. When you o
 
 ### Named link
 
-You can configure so-called named links in your site parameters. The following example defines `hinode_demo`.
+You can configure so-called named links in your site parameters. The following example defines `hugo_docs`.
 
 ```toml
 [links]
-    hinode_demo = "https://demo.gethinode.com"
+    hugo_docs = "https://gohugo.io/documentation/"
 ```
 
 Reference the named link using a positional argument.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* link hinode_demo /*/>}}
+{{</* link hugo_docs /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -88,8 +88,8 @@ Use the `cue` and `tab` arguments to override the default behavior of displaying
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 
-- {{</* link href=hinode_demo cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
-- {{</* link href=hinode_demo cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
+- {{</* link href=hugo_docs cue=false tab=false >}}Named link opening in current tab w/o icon{{< /link */>}}
+- {{</* link href=hugo_docs cue=true tab=true >}}Named link opening in new tab with icon{{< /link */>}}
 - {{</* link href="components" case=false >}}Internal link with lower case{{< /link */>}}
 
 {{< /example >}}
