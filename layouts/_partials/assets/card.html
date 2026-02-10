@@ -121,7 +121,7 @@
 {{/* Override arguments */}}
 {{- $page := "" }}
 {{- if $args.path }}
-    {{ $page = partial "utilities/GetPage.html" (dict "url" $args.path "page" page) }}
+    {{ $page = partial "utilities/GetPage.html" (dict "url" $args.path "page" (or $args.page page)) }}
     {{ $validate := site.Params.main.internalLinks.validate | default true }}
     {{- if and $validate (not $page) }}
         {{ if page.File }}
