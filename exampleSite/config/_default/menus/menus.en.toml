@@ -1,36 +1,25 @@
 # Merge the menu configuration from the docs module
 # See https://gohugo.io/configuration/introduction/#merge-configuration-settings
 _merge = "deep"
+
 [[main]]
-  name = "About"
-  pageRef = "/about/"
+  name = "Blocks"
+  pageRef = "/blocks/"
   weight = 10
+
+[[main]]
+  name = "Components"
+  pageRef = "/components/"
+  weight = 20
 
 [[main]]
   name = "Blog"
   pageRef = "/blog/"
-  weight = 20
-
-[[main]]
-  name = "Projects"
-  pageRef = "/projects/"
   weight = 30
 
 [[main]]
-  name = "Sample project"
-  pageRef = "/projects/sample-project/"
-  parent = "Projects"
-  weight = 1
-
-[[main]]
-  name = "Another project"
-  pageRef = "/projects/another-project/"
-  parent = "Projects"
-  weight = 2
-
-[[main]]
-  name = "Tags"
-  pageRef = "/tags/"
+  name = "Docs"
+  pageRef = "https://gethinode.com/docs/"
   weight = 40
 
 [[social]]
