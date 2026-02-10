@@ -88,7 +88,7 @@ Set `link-type` to `link` to add links below the content.
       icon: fas chevron-right
       force: true
     - title: Second link
-      url: 'blog/bootstrap-elements/#docs'
+      url: 'components/image/#args/'
       icon: fas chevron-right
     - title: Third link
       url: 'https://google.com'
