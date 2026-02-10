@@ -2,7 +2,7 @@
 author: Mark Dumay
 title: Second post
 date: 2022-11-01
-description: This is my second blog post.
+description: This is the second blog post.
 tags: ["blog"]
 thumbnail:
   url: img/phone.jpg
