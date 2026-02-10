@@ -1,8 +1,8 @@
-comment: Defines a hidden panel that can be reveiled by a trigger.
+comment: Defines a hidden panel that can be revealed by a trigger.
 arguments:
   id:
   class:
 body:
   type: string
   optional: false
-  comment: Inner <img> elements that define the individual image slides.
+  comment: Inner content to be revealed when the collapse is triggered.

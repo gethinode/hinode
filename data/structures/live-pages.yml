@@ -36,7 +36,7 @@ arguments:
     optional: true
     comment: >-
       If set, retrieves all pages below the section or current page recursively.
-      By default, only first-order childs are retrieved.
+      By default, only first-order children are retrieved.
   tags:
     type:
       - string

@@ -1,5 +1,5 @@
 comment: >-
-  Initializes images dimensions (widht x height for supported image ratios.
+  Initializes images dimensions (width x height) for supported image ratios.
 arguments:
   ratio:
     type: select

@@ -1,10 +1,10 @@
 comment: >-
-  Creates an HTML element that shows the long form of an abbrevitation. The
+  Creates an HTML element that shows the long form of an abbreviation. The
   abbreviation data is centrally stored in a data file. By default, the
   shortcode uses `abbr.yaml` with translation support.
   
   The data file is expected to store key-value pairs, where `id` is the
-  lower-case abbrevation and `long` its long form. The following example
+  lower-case abbreviation and `long` its long form. The following example
   illustrates this using YML:
 
   - id: css
@@ -22,10 +22,10 @@ arguments:
     default: abbr
     optional: true
     comment: >-
-      Filename of the abbrevation input. You can omit the file extension. The
+      Filename of the abbreviation input. You can omit the file extension. The
       file should reside in the `data` folder. The data supports language
       extensions. For example, `abbr.en.yaml` refers to the English translation
-      of the abbrevation data. The filename `abbr.yaml` is used when no suitable
+      of the abbreviation data. The filename `abbr.yaml` is used when no suitable
       translation is found.
   class:
     type: string

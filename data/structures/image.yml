@@ -12,8 +12,8 @@ comment: >-
   are stored in the final '/img' folder. 
   
   The partial supports the following bitmap image formats: `png`, `jpeg`, `gif`,
-  `tiff`, `bmp`, and  `webp`. Vector graphics of type `svg` are supported too,
-  although these images do no support additional processing. This means the
+  `tiff`, `bmp`, and `webp`. Vector graphics of type `svg` are supported too,
+  although these images do not support additional processing. This means the
   arguments `ratio` and `portrait` have no effect for vector images. Vector
   graphics support an optional anchor `#` in their url to denote a symbol
   reference.

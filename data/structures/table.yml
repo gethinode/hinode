@@ -1,6 +1,6 @@
 comment: >-
   Makes a markdown table responsive. Responsive tables scroll horizontally to
-  improve their layout on smaller screens. To features `sortable`, `paging`,
+  improve their layout on smaller screens. The features `sortable`, `paging`,
   and `searchable` require the module `simple-datatables`.
 arguments:
   page:
