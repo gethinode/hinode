@@ -1,7 +1,7 @@
 ---
 author: Mark Dumay
 title: Components
-description: Use shortcodes to add embedded components with ease.
+description: Discover Hinode's more than 30 ready-to-use components.
 tags: components
 aliases:
   - "/components/"
@@ -10,12 +10,11 @@ content_blocks:
     heading:
       title: Components
       content: >-
-        Hinode uses [Hugo shortcodes](https://gohugo.io/shortcodes/) to quickly
-        add interactive elements to your site. Hinodes supports more than 30
-        components, powered by [Bootstrap](https://getbootstrap.com),
-        [Lottie](http://airbnb.io/lottie/), [Leaflet](https://leafletjs.com/),
-        and other popular libraries. Click on a card for more details about
-        a component, including available arguments.
+        Hinode provides more than 30 components out of the box, powered by
+        [Bootstrap](https://getbootstrap.com) and other libraries. Simply embed
+        these components in your content pages using 
+        [Hugo shortcodes](https://gohugo.io/shortcodes/). Click on an item for
+        more details about a component.
       align: start
       width: 8
     breadcrumb: true

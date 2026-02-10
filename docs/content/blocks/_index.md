@@ -7,11 +7,11 @@ content_blocks:
     heading:
       title: Blocks
       content: >-
-        Hinode uses [Bookshop](https://github.com/CloudCannon/bookshop) to
-        support so-called content blocks, or blocks in short. Blocks are
-        reusable page elements, such as a hero, about panel, or an FAQ.
-        Hinode includes several ready-to-use blocks. Click on a card for
-        more details about a block, including its frontmatter configuration.
+        Hinode provides more than 15 ready-to-use content blocks. These blocks
+        allow you to quickly assemble your content pages using visual elements.
+        Powered by [Bookshop](https://github.com/CloudCannon/bookshop), these
+        blocks are ready for visual editing using [CloudCannon](https://cloudcannon.com/).
+        Click on an item for more details about a block.
       align: start
       width: 8
     breadcrumb: true

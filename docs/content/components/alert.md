@@ -35,7 +35,7 @@ Set `color` to one of the available theme colors to adjust the appearance of the
 {{</* /alert */>}}
 
 {{</* alert color="warning" */>}}
-    A simple warning alert-check it out!
+    A simple warning alert—check it out!
 {{</* /alert */>}}
 
 {{</* alert color="info" */>}}

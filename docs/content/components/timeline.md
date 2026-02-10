@@ -2,7 +2,7 @@
 author: Mark Dumay
 title: Timeline
 date: 2024-04-18
-description: Use the timeline shortcode to show items ordered on a vertical timelime.
+description: Use the timeline shortcode to show items ordered on a vertical timeline.
 layout: docs
 icon: fas timeline fa-rotate-90
 tags: component
@@ -12,7 +12,7 @@ tags: component
 
 {{< release version="v0.15.3" >}}
 
-Use the timeline shortcode to show items ordered on a vertical timelime.
+Use the timeline shortcode to show items ordered on a vertical timeline.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

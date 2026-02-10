@@ -50,7 +50,7 @@ You can include an `illustration` next to the hero heading. Specify `orientation
   order: last
   illustration:
     image: /img/placeholder.png
-    ratio: 1x1  
+    ratio: 1x1
 ```
 
 {{< /example-bookshop >}}

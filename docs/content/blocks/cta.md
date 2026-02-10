@@ -54,7 +54,7 @@ Set the `heading` attribute to override the default message title and content.
 
 ### Contact CTA
 
-Provide a `contact` person to include the name and thubmbnail of a contact person associated with the call to action. Set `caption-url` to provide a specific link when clicking on the person.
+Provide a `contact` person to include the name and thumbnail of a contact person associated with the call to action. Set `caption-url` to provide a specific link when clicking on the person.
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}
@@ -92,7 +92,7 @@ The CTA block supports structured contact data as input. Provide this data in `d
     Biography content.
 ```
 
-For multi-language sites, you can add an language indicator to the filename such as `data/contacts.en.yml`. This data is merged with `data/contacts.yml`, where the former file takes precedence.
+For multi-language sites, you can add a language indicator to the filename such as `data/contacts.en.yml`. This data is merged with `data/contacts.yml`, where the former file takes precedence.
 
 ```yml
 - name: Betty White

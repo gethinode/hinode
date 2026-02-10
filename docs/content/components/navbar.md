@@ -14,7 +14,7 @@ Use the `navbar` shortcode to display a navigation header with a toggler. The me
 
 ### Brand logo
 
-Set the argument `logo` to an image to add a brand logo to the left of the navbar. The logo moves to the center on smaller screens, pending on the `size` setting.
+Set the argument `logo` to an image to add a brand logo to the left of the navbar. The logo moves to the center on smaller screens, depending on the `size` setting.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

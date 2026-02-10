@@ -12,7 +12,7 @@ tags: component
 
 {{< release version="v0.22.0" >}}
 
-Use the args shortcode to generates a table of structured arguments. The argument definitions are expected to be defined in a data file identified by a provided structure name.
+Use the args shortcode to generate a table of structured arguments. The argument definitions are expected to be defined in a data file identified by a provided structure name.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

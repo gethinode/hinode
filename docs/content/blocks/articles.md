@@ -78,7 +78,7 @@ Set `orientation` to `horizontal` to render the article's illustration before th
 
 ### Rich cards
 
-Adjust the  `header-style`, `body-style`, and `footer-style` to refine the card elements being displayed.
+Adjust the `header-style`, `body-style`, and `footer-style` to refine the card elements being displayed.
 
 <!-- markdownlint-disable MD037 -->
 {{< example-bookshop lang="bookshop" >}}

@@ -36,4 +36,4 @@ The file `assets/scss/components/_persona.scss` defines the Hinode-specific styl
 
 The shortcode supports the following arguments:
 
-{{< args structure="persona" >}}
+{{< args structure="persona" group="shortcode" >}}

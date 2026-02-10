@@ -22,7 +22,7 @@ Use the `spinner` shortcode to indicate the loading state of a component or page
 {{</* spinner class="text-center" */>}}
 Loading...
 {{</* /spinner */>}}
-{{< /example>}}
+{{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
 ### Colored spinner
@@ -41,7 +41,7 @@ Set the `color` argument to apply a theme color to the spinner. The following sh
 {{</* spinner color="dark" */>}}Loading...{{</* /spinner */>}}
 {{</* spinner color="white" */>}}Loading...{{</* /spinner */>}}
 {{</* spinner color="black" */>}}Loading...{{</* /spinner */>}}
-{{< /example>}}
+{{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
 ### Growing spinner
@@ -53,7 +53,7 @@ Set `grow` to `true` to show a growing spinner.
 {{</* spinner grow="true" color="info" class="text-center" */>}}
 Loading...
 {{</* /spinner */>}}
-{{< /example>}}
+{{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
 ## Styling

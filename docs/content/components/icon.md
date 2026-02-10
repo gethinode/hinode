@@ -16,7 +16,7 @@ Hinode includes support for [Font Awesome](https://fontawesome.com/) by default.
 
 ### Relative sizing
 
-Font Awesome includes a range of t-shirt based sizes that are relative to the browser's default font size of 16px. The icons align to the inline text. The following example illustrative the available relative sizes.
+Font Awesome includes a range of t-shirt based sizes that are relative to the browser's default font size of 16px. The icons align to the inline text. The following example illustrates the available relative sizes.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
@@ -54,7 +54,7 @@ The table below illustrates the relative sizing classes and their equivalent rel
 
 ### Absolute sizing
 
-Font Awesome also supports absolute sizing on a scale of 1x to 10x. The icons do not necessarily align to their surrounding text. The following example illustrative the various absolute sizes.
+Font Awesome also supports absolute sizing on a scale of 1x to 10x. The icons do not necessarily align to their surrounding text. The following example illustrates the various absolute sizes.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
@@ -289,7 +289,7 @@ You can reference a custom family and icon stored in the local `assets` folder. 
 > [!IMPORTANT]
 > Webfonts (`inline = false`) require [Dart Sass](https://sass-lang.com/dart-sass/) to function correctly. See the [Hugo documentation](https://gohugo.io/functions/css/sass/#dart-sass) for installation instructions.
 
-The [Font Aweseome module](https://github.com/gethinode/mod-fontawesome) supports the following site parameters (using `params.modules` in `config.toml` or `hugo.toml`):
+The [Font Awesome module](https://github.com/gethinode/mod-fontawesome) supports the following site parameters (using `params.modules` in `config.toml` or `hugo.toml`):
 
 <!-- markdownlint-disable MD060 -->
 | Setting                   | Default | Description |

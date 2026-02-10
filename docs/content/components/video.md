@@ -79,4 +79,4 @@ The file `assets/scss/components/_video.scss` defines the Hinode-specific stylin
 
 The shortcode supports the following arguments:
 
-{{< args "video" >}}
+{{< args structure="video" group="shortcode" >}}

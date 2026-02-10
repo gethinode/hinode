@@ -13,7 +13,7 @@ modules: ["mermaid"]
 
 {{< release version="v1.0.0" >}}
 
-Use the `mermaid` shortcode to add diagrams and charts powered by [Mermaid](https://mermaid.js.org). Mermaid is a JavaScript-based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically. Instead of using the shortcode syntax, you can also also use a fenced codeblock with the language `mermaid` to achieve the same effect.
+Use the `mermaid` shortcode to add diagrams and charts powered by [Mermaid](https://mermaid.js.org). Mermaid is a JavaScript-based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically. Instead of using the shortcode syntax, you can also use a fenced codeblock with the language `mermaid` to achieve the same effect.
 
 Add the following configuration to your page's frontmatter to enable Mermaid:
 

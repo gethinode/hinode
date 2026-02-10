@@ -27,7 +27,7 @@ Define a file in the `data` folder that contains the abbreviation data. The form
 
 | Attribute | Required | Description                                                                               |
 |-----------|----------|-------------------------------------------------------------------------------------------|
-| id        | Yes      | Required key of the abbeviation. Store the key in lower case to ensure it can be matched. |
+| id        | Yes      | Required key of the abbreviation. Store the key in lower case to ensure it can be matched. |
 | long      | Yes      | Required long form of the abbreviation.                                                   |
 
 The following snippet defines three entries in `yml` format.

@@ -25,7 +25,7 @@ modules: ["leaflet"]
 
 ### Center coordinates
 
-Specify the map center by providing `lat` and `long` values. Add a marker to the map by specifying a `popup` text and `popup-lat` and `popup-long` coordinates. The following example display the city center of Amsterdam and adds a marker for the central train station.
+Specify the map center by providing `lat` and `long` values. Add a marker to the map by specifying a `popup` text and `popup-lat` and `popup-long` coordinates. The following example displays the city center of Amsterdam and adds a marker for the central train station.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
@@ -45,7 +45,7 @@ Set the `zoom` to a value of `1` to display a world map. The map is centered on 
 
 ### Identification
 
-Assign a specific identified to the map by setting the `id` argument. The following example displays a map for the city of London with a unique id.
+Assign a specific identifier to the map by setting the `id` argument. The following example displays a map for the city of London with a unique id.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

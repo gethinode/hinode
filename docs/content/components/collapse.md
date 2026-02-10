@@ -10,7 +10,7 @@ tags: component
 
 ## Overview
 
-Use the `collapse` shortcode to reveal or hide a panel. The panel can contain both HTML code and plain text. Link a button to the panel by assigning it's ID to the `collapse` attribute. As an example, the following shortcode displays a button that, when clicked, triggers a panel to appear or disappear.
+Use the `collapse` shortcode to reveal or hide a panel. The panel can contain both HTML code and plain text. Link a button to the panel by assigning its ID to the `collapse` attribute. As an example, the following shortcode displays a button that, when clicked, triggers a panel to appear or disappear.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}

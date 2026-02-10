@@ -92,7 +92,7 @@ order by last_name;
 (out)1 row in set (0.00 sec)
 {{</* /command */>}}
 {{< /example >}}
-<!-- markdownlint-ensable MD037 -->
+<!-- markdownlint-enable MD037 -->
 
 ## Styling
 

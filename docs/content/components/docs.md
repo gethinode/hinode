@@ -14,7 +14,7 @@ tags: component
 
 The `docs` shortcode captures a code snippet from a `toml` or `scss` input file. It scans for named markers in a local file. The snippet between the two markers is then rendered using syntax highlighting.
 
-### Default code snipppet
+### Default code snippet
 
 Use the `name` and `file` arguments to refer to a code snippet of a file. By default, the shortcode uses the site's `basePath`. Provide a path that starts with `./` to use the path of the repository as base path instead.
 
@@ -24,7 +24,7 @@ Use the `name` and `file` arguments to refer to a code snippet of a file. By def
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-### Collapsed code snipppet
+### Collapsed code snippet
 
 Set `show` to `false` to hide the code snippet on page load. The code is revealed when clicking the tab control.
 
@@ -34,7 +34,7 @@ Set `show` to `false` to hide the code snippet on page load. The code is reveale
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
-### Code snipppet with filename only
+### Code snippet with filename only
 
 Set `full` to `false` to show the filename only.
 
@@ -51,7 +51,7 @@ The `docs` shortcode supports `.toml` and `.scss` file formats. Use a marker to 
 - For `.toml` files, use `# toml-docs-start` and `# toml-docs-end` followed by the snippet name
 - For `.scss` files, use `// scss-docs-start` and `// scss-docs-end` followed by the snippet name
 
-Click on one the tabs to see a full input file example.
+Click on one of the tabs to see a full input file example.
 
 <!-- markdownlint-disable MD031 MD037 -->
 {{< nav tab-type="tabs" id="tabs-1" >}}
