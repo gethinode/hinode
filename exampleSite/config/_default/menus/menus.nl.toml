@@ -47,27 +47,3 @@
   pre = "fab medium"
   url = "https://medium.com/"
   weight = 30
-
-# toml-docs-start sample-navigation
-[[sample]]
-  name = "Blog"
-  pageRef = "/blog/"
-  weight = 10
-
-[[sample]]
-  name = "Projecten"
-  pageRef = "/projecten/"
-  weight = 20
-
-[[sample]]
-  name = "Voorbeeldproject"
-  pageRef = "/projecten/voorbeeldproject/"
-  parent = "Projecten"
-  weight = 1
-
-[[sample]]
-  name = "Ander project"
-  pageRef = "/projecten/ander-project/"
-  parent = "Projecten"
-  weight = 2
-# toml-docs-end sample-navigation
