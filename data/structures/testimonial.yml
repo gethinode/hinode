@@ -1,7 +1,7 @@
 comment: Displays a single testimonial card.
 arguments:
   page:
-  content: 
+  content:
     type:
       - string
       - template.HTML

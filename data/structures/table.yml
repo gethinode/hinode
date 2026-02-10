@@ -40,7 +40,7 @@ arguments:
     comment: >-
       Sets the maximum number of rows to display on each page. Requires
       `paging = true`.
-    release: v0.27.8 
+    release: v0.27.8
     deprecated: v1.23.0
     alternative: pagination
   pagingOptionPageSelect:
@@ -49,8 +49,8 @@ arguments:
     comment: >-
       Sets the per page options in the dropdown. Must be an array of integers or
       arrays in the format [label (string), value (int)]. Requires
-      `paginate = true`. 
-    release: v0.27.8 
+      `paginate = true`.
+    release: v0.27.8
     deprecated: v1.23.0
     alternative: pagination-select
 body:

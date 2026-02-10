@@ -1,6 +1,6 @@
 comment: >-
   Displays a tab group of multiple items. Add nav-item inner elements for each
-  tab pane. 
+  tab pane.
 arguments:
   id:
   page:

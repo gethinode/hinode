@@ -34,8 +34,8 @@ arguments:
     group: partial
     comment: Skip internal link validation (use for dynamic content).
     release: v2.0.0
-  # deprecated arguments  
-  destination: 
+  # deprecated arguments
+  destination:
     type: string
     optional: true
     group: partial

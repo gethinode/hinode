@@ -85,7 +85,7 @@ arguments:
     default: full
     parent: cascade
     comment: >-
-      Header components of the card, displayed in small caps. 
+      Header components of the card, displayed in small caps.
     options:
       values:
         - full
@@ -101,7 +101,7 @@ arguments:
     parent: cascade
     release: v0.24.16
     comment: >-
-      Body components of the element. 
+      Body components of the element.
     options:
       values:
         - full

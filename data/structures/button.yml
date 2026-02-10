@@ -35,7 +35,7 @@ arguments:
   spacing:
   wrapper:
     group: shortcode
-  # deprecated arguments  
+  # deprecated arguments
   type:
     type: select
     optional: true
@@ -51,7 +51,7 @@ arguments:
     type: select
     optional: true
     default: enabled
-    comment: State of the button. 
+    comment: State of the button.
     options:
       values:
         - enabled
