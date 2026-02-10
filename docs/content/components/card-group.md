@@ -36,8 +36,8 @@ Use the `card-group` shortcode to display a group of cards. Add inner `<card>` e
 
 The shortcode supports the following arguments:
 
-{{</* args structure="card-group" group="shortcode" */>}}
+{{< args structure="card-group" group="shortcode" >}}
 
 In addition, the following arguments are passed to the individual cards.
 
-{{</* args structure="card" group="shortcode" parent="true" */>}}
+{{< args structure="card" group="shortcode" parent="true" >}}
