@@ -38,26 +38,4 @@ content_blocks:
     padding: 0
     limit: 3
     class: border-0 card-zoom card-body-margin
-
-  - _bookshop_name: articles
-    heading:
-      title: Projects
-      align: start
-    background:
-      background: body-tertiary
-    hide-empty: false
-    input:
-      section: projects
-      reverse: false
-      sort: date
-    more:
-      title: More articles
-    cols: 1
-    padding: 4
-    limit: 2
-    icon-style: fa-5x
-    header-style: none
-    footer-style: tags
-    orientation: horizontal-sm
-    class: border-1 card-emphasize
 ---
