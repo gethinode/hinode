@@ -28,6 +28,8 @@ github.com/gethinode/mod-leaflet/v2 v2.0.0 h1:94sQHzzrgB15LuePziHahss/SgJ21a2kDs
 github.com/gethinode/mod-leaflet/v2 v2.0.0/go.mod h1:Z9VrlYTqFRHTI0E/lTG/H7X2nT/JuhoLFaS+jbov7/s=
 github.com/gethinode/mod-lottie/v2 v2.0.0 h1:XlLwWHphlza8NUqV+Z6oJA+m2CFPtQgraQiDKTrBjyU=
 github.com/gethinode/mod-lottie/v2 v2.0.0/go.mod h1:pc1muituaN0a4/g41iL2vurrVvg49YKO8f/0MjTqhio=
+github.com/gethinode/mod-lottie/v2 v2.0.1 h1:jIY5oGHtkXXvJoxNAE2AueoqxqNNlTYHF4+igQmkIAU=
+github.com/gethinode/mod-lottie/v2 v2.0.1/go.mod h1:/YzhRcG9H8MyODt8qaOQP0nqoux7EFHW2S7ugiiFf0o=
 github.com/gethinode/mod-mermaid/v3 v3.0.1 h1:h4v3QvGpSln9PDbWccSktULq9FbRZ57JN4Lp+gVjvVI=
 github.com/gethinode/mod-mermaid/v3 v3.0.1/go.mod h1:rbI8IKFfKVGqTY/eJnuNJwzB5kSjaEUNX0NRHc4rBfA=
 github.com/gethinode/mod-simple-datatables/v3 v3.0.0 h1:E2owLogo5oY2jR0N5/7zLB+ZXGEOGtbCAUry1FNRV88=
