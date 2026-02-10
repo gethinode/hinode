@@ -99,6 +99,62 @@ The shortcode supports vector images of type `.svg` too. The shortcode supports 
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
+### DAM images
+
+Hinode supports [Cloudinary](https://cloudinary.com), [ImageKit.io](https://imagekit.io), and [Imgix](https://imgix.com) as Digital Asset Manager (DAM). You can configure these managers in your site parameters. Check out the [DAM configuration](https://gethinode.com/docs/configuration/digital-asset-managers/) for more details.
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* image src="https://res.cloudinary.com/demo/image/upload/dog.webp"
+    ratio="21x9" caption="Cloudinary image" wrapper="col-12 col-md-8 mx-auto" */>}}
+
+{{</* image src="https://ik.imagekit.io/demo/default-image.jpg"
+    ratio="21x9" caption="ImageKit.io image" wrapper="col-12 col-md-8 mx-auto" */>}}
+
+{{</* image src="https://assets.imgix.net/examples/bluehat.jpg"
+    ratio="21x9" caption="imgix image" wrapper="col-12 col-md-8 mx-auto" */>}}
+
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
+### Cropped images
+
+By default, images use `Smart` croppping. You can refine the image crop by setting the `anchor`. The following example shows this behavior as part of a [card group](card-group).
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* card-group padding="3" gutter="3" cols=3 ratio="16x9" */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" anchor="TopLeft" */>}}
+        `TopLeft` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" anchor="Top" */>}}
+        `Top` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" anchor="TopRight" */>}}
+        `TopRight` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" ratio="1x1" anchor="Left" */>}}
+        `Left` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" ratio="1x1" anchor="Center" */>}}
+        `Center` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" ratio="1x1" anchor="Right" */>}}
+        `Right` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" anchor="BottomLeft" */>}}
+        `BottomLeft` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" anchor="Bottom" */>}}
+        `Bottom` anchor
+    {{</* /card */>}}
+    {{</* card thumbnail="https://res.cloudinary.com/demo/image/upload/dog.webp" anchor="BottomRight" */>}}
+        `BottomRight` anchor
+    {{</* /card */>}}
+{{</* /card-group */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Styling
 
 The file `assets/scss/components/_img.scss` defines the Hinode-specific styling of the `img` shortcode.
