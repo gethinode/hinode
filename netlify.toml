@@ -40,7 +40,8 @@
         default-src 'none'; \
         font-src 'self' fonts.gstatic.com data:; \
         form-action 'self'; \
-        frame-src *.googletagmanager.com player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
+        frame-ancestors 'self'; \
+        frame-src *.googletagmanager.com https: player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
         img-src 'self' *.google-analytics.com *.googletagmanager.com googletagmanager.com ssl.gstatic.com www.gstatic.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.ytimg.com tile.openstreetmap.org i.vimeocdn.com; \
         manifest-src 'self'; \
         media-src 'self'; \
@@ -52,7 +53,6 @@
     Referrer-Policy = 'strict-origin'
     Strict-Transport-Security = 'max-age=31536000; includeSubDomains; preload'
     X-Content-Type-Options = 'nosniff'
-    X-Frame-Options = 'SAMEORIGIN'
     X-XSS-Protection = '1; mode=block'
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
 

@@ -1,0 +1,18 @@
+# Development-specific parameters for Hinode theme
+
+[modules.hinode.csp]
+    frame-ancestors = [
+        "'self'",
+        "http://localhost:1313",        # Allow self-embedding for testing
+        "http://localhost:1314",        # Allow embedding in other local sites
+        "https://gethinode.com"          # Production embedding
+    ]
+    frame-src = [
+        "http:",                         # Allow all HTTP sources for local development
+        "https:",
+        "*.googletagmanager.com",
+        "player.cloudinary.com",
+        "www.youtube-nocookie.com",
+        "www.youtube.com",
+        "player.vimeo.com"
+    ]
