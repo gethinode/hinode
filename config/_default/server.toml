@@ -11,8 +11,8 @@
         default-src 'none'; \
         font-src 'self' fonts.gstatic.com data:; \
         form-action 'self'; \
-        frame-ancestors 'self' http://localhost:1313 http://localhost:1314 https://gethinode.com; \
-        frame-src *.googletagmanager.com https: player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
+        frame-ancestors 'self' http://localhost:1313 gethinode.com; \
+        frame-src *.googletagmanager.com player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
         img-src 'self' *.google-analytics.com *.googletagmanager.com googletagmanager.com ssl.gstatic.com www.gstatic.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.ytimg.com tile.openstreetmap.org i.vimeocdn.com; \
         manifest-src 'self'; \
         media-src 'self'; \

@@ -118,6 +118,48 @@ Components are mounted to multiple locations via `hugo.toml`:
 - `data/structures/` - Schemas
 - `assets/scss/modules/bookshop/` - Styles
 
+#### Bookshop Component Architecture
+
+Bookshop components follow a two-layer architecture:
+
+**1. Component partial** (e.g., `layouts/partials/assets/preview.html`):
+
+- Contains the core component logic and rendering
+- Uses **component-specific arguments** (e.g., `url`, `device`, `heading` for preview)
+- These arguments should be defined in the component's structure file
+
+**2. Bookshop wrapper** (e.g., `component-library/components/preview/preview.hugo.html`):
+
+- Calls the component partial with component-specific arguments
+- Wraps output with `utilities/section.html` for section-level styling
+- Passes **section arguments** to the wrapper (e.g., `id`, `background`, `width`, `justify`, `wrapper`, `fluid`, `theme`, `cover`, `overlay-mode`, `section-class`, `bg-class`)
+
+**Important distinctions:**
+
+- **Section arguments are NOT part of the component partial** - they're handled by the section wrapper
+- **Structure files should only include component-specific arguments** - arguments actively used by the partial
+- **Section arguments are defined in Bookshop specs** (`.hugo.html` and `.bookshop.yml`) but not in the component's structure file
+- Example: `preview.yml` defines `url`, `device`, `heading` (used by `preview.html`), but NOT `background`, `width`, etc. (only used by section wrapper)
+
+**Example structure:**
+
+```hugo
+{{/* preview.hugo.html - Bookshop wrapper */}}
+{{ $raw := partial "assets/preview.html" (dict
+    "url"      .url       {{/* component-specific */}}
+    "device"   .device    {{/* component-specific */}}
+    "heading"  .heading   {{/* component-specific */}}
+) }}
+
+{{ partial "utilities/section.html" (dict
+    "raw"            $raw
+    "background"     .background     {{/* section argument */}}
+    "width"          .width           {{/* section argument */}}
+    "theme"          .theme           {{/* section argument */}}
+    {{/* ... other section arguments ... */}}
+)}}
+```
+
 ### Version 2 Architecture Philosophy
 
 **Design Goal:** Hinode v2 is a minimal core theme that works standalone for documentation and blog sites. Optional features are provided through separate modules.
@@ -225,20 +267,72 @@ for shortcodes, partials, and Bookshop components.
 
 **Structure definition format:**
 
+Structure files follow the DRY principle with clear separation of concerns:
+
+**Global definitions** (`mod-utils/data/structures/_arguments.yml`):
+
+- `type` - Argument data type
+- `default` - Default value (if applicable)
+- `options` - Valid values for select types
+- `comment` - Description of what the argument does
+
+**Component-specific definitions** (`data/structures/<name>.yml`):
+
+- `optional` - Whether argument is required or optional
+- `deprecated` - Version when argument was deprecated (component-specific)
+- `alternative` - Replacement argument when deprecated (component-specific)
+- `release` - Version when argument was introduced (component-specific)
+
 ```yaml
+# Component structure file (e.g., data/structures/preview.yml)
+comment: >-
+  Renders a live URL preview with switchable device views.
 arguments:
-  my-argument:
-    type: bool
-    optional: true
-    default: true
-    comment: Description of what this argument does.
+  url:
+    optional: false
     release: v1.0.0
-  deprecated-arg:
-    type: string
+  device:
     optional: true
-    deprecated: v1.0.0
-    alternative: my-argument
+    release: v1.0.0
+  heading:
+    optional: true
+    release: v1.0.0
+  old-param:
+    optional: true
+    deprecated: v1.1.0
+    alternative: device
 ```
+
+```yaml
+# Global argument definitions (mod-utils/data/structures/_arguments.yml)
+arguments:
+  url:
+    type: string
+    comment: >-
+      Address of the link destination, either a local reference or an external
+      address. Include the `scheme` when referencing an external address.
+  device:
+    type: select
+    default: desktop
+    comment: >-
+      Device view to display by default in preview component. Determines the
+      initial iframe dimensions and active tab.
+    options:
+      values:
+        - desktop
+        - tablet
+        - mobile
+  heading:
+    type: heading
+    comment: >-
+      Heading of the content block, including a preheading and content element.
+```
+
+**When to add to _arguments.yml:**
+
+- New argument used by multiple components - add full type definition to global file
+- Component-specific argument - can define inline in structure file (but prefer global for reusability)
+- Override default or add options - define inline in structure file (inherits base type from global)
 
 **Common pitfall - Boolean argument handling:**
 
@@ -260,10 +354,12 @@ The `or` operator returns the first truthy value, so `or false <fallback>` will 
 
 - Always use `InitArgs` at the start of shortcodes and partials to validate arguments
 - Define structure files in `data/structures/` for all shortcodes and components
+- **Structure files should only reference arguments by name** - type definitions go in `_arguments.yml`
+- **Only include arguments actively used by the component partial** - section arguments (like `id`, `background`, `width`, `justify`, `wrapper`, `fluid`, `theme`, `cover`, `overlay-mode`, `section-class`, `bg-class`) are handled by the Bookshop section wrapper and should NOT be in the component's structure file
+- Add new argument types to `mod-utils/data/structures/_arguments.yml` for reuse across components
+- Mark `deprecated`, `alternative`, and `release` in **component structure files** (component-specific metadata)
 - Use hyphenated names for new arguments (e.g., `show-preview` not `show_preview`)
 - Access arguments via their camelCase versions (e.g., `$args.showPreview`)
-- Set appropriate `type`, `optional`, `default`, and `comment` fields for all arguments
-- Mark deprecated arguments with `deprecated` field and provide `alternative`
 
 **Example usage in a shortcode:**
 

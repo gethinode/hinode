@@ -196,3 +196,9 @@
   translation: "Volgende klantaanbeveling"
 - id: testimonialCase
   translation: "Bekijk klantervaring"
+
+# Preview
+- id: previewError
+  translation: "Kan voorbeeld niet laden voor"
+- id: previewOpenTab
+  translation: "Open in nieuw tabblad"

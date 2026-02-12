@@ -197,3 +197,9 @@
   translation: "Nächstes Testimonial"
 - id: testimonialCase
   translation: "Kundenfallstudie anzeigen"
+
+# Preview
+- id: previewError
+  translation: "Vorschau konnte nicht geladen werden für"
+- id: previewOpenTab
+  translation: "In neuem Tab öffnen"

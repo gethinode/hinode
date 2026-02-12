@@ -85,6 +85,7 @@ const purgecss = purgeCSSPlugin({
       /search-/,           // Search functionality (includes search-input, search-data-table)
       /suggestion__/,      // Search suggestions (FlexSearch)
       /testimonial-/,      // Testimonial component
+      /preview-/,          // Preview component (mod-blocks)
 
       // Syntax highlighting - third-party engines (Chroma handled in deep)
       /^hljs-/,            // highlight.js

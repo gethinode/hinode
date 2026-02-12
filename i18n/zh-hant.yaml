@@ -133,3 +133,9 @@
   translation: "顯示"
 - id: comments
   translation: "評論"
+
+# Preview
+- id: previewError
+  translation: "無法載入預覽"
+- id: previewOpenTab
+  translation: "在新分頁中開啟"

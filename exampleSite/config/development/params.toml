@@ -2,8 +2,6 @@
 
 [modules.hinode.csp]
     frame-src = [
-        "http:",                         # Allow all HTTP sources for local development
-        "https:",
         "*.googletagmanager.com",
         "player.cloudinary.com",
         "www.youtube-nocookie.com",

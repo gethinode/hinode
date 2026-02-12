@@ -24,7 +24,7 @@ The `articles` block renders a group of cards for selected content. By default, 
   input:
     section: blog
     reverse: false
-    sort: title
+    sort: date
   hide-empty: false
   header-style: none
   orientation: stacked
@@ -57,7 +57,7 @@ Set `orientation` to `horizontal` to render the article's illustration before th
   input:
     section: blog
     reverse: false
-    sort: title
+    sort: date
   hide-empty: false
   header-style: none
   body-style: title
@@ -91,7 +91,7 @@ Adjust the `header-style`, `body-style`, and `footer-style` to refine the card e
   input:
     section: blog
     reverse: false
-    sort: title
+    sort: date
   hide-empty: false
   header-style: publication
   body-style: full
@@ -124,7 +124,7 @@ Set `body-style` to `minimal` to show the title of an article only. The predefin
   input:
     section: blog
     reverse: false
-    sort: title
+    sort: date
   more:
     title: More Blocks
   cols: 5
