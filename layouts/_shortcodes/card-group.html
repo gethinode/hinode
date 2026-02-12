@@ -33,6 +33,7 @@
 {{- $color := .Get "color" | default "" -}}
 {{- $padding := .Get "padding" | default 3 -}}
 {{- $header := .Get "header-style" | default "" -}}
+{{- $body := .Get "body-style" | default "" -}}
 {{- $footer := .Get "footer-style" | default "" -}}
 {{- $orientation := .Get "orientation" | default "" -}}
 {{- $align := .Get "align" | default "start" -}}
@@ -69,6 +70,7 @@
     "color"        $color
     "padding"      $padding
     "header-style" $header
+    "body-style"   $body
     "footer-style" $footer
     "orientation"  $orientation
     "align"        $align

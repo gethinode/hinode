@@ -4,16 +4,16 @@
     Parameters:
     - page: The page object
     - grouped: Dictionary mapping parent paths to children slices
-    - sortField: Field to sort children by (e.g., "Params.weight")
-    - order: Sort order ("asc" or "desc")
+    - sortField: Field to sort children by (e.g., "title", "date", "weight")
+    - reverse: Whether to reverse sort order (default: false)
 
     Returns: Menu entry dict with title and pages (optional array of nested entries)
 */}}
 
 {{- $page := .page -}}
 {{- $grouped := .grouped -}}
-{{- $sortField := .sortField | default "Params.weight" -}}
-{{- $order := .order | default "asc" -}}
+{{- $sortField := .sortField | default "title" -}}
+{{- $reverse := .reverse | default false -}}
 
 {{- /* Create menu entry with title and absolute link */ -}}
 {{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
@@ -22,12 +22,40 @@
 {{- /* Get children from grouped hierarchy */ -}}
 {{- $children := index $grouped $page.RelPermalink | default slice -}}
 {{- if $children -}}
-    {{- /* Sort children using the provided sort parameters */ -}}
-    {{- $children = sort $children $sortField $order -}}
+    {{- /* Sort children using Hugo's page collection methods */ -}}
+    {{- if eq $sortField "title" -}}
+        {{- $children = $children.ByTitle -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "date" -}}
+        {{- $children = $children.ByDate -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "weight" -}}
+        {{- $children = $children.ByWeight -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "linkTitle" -}}
+        {{- $children = $children.ByLinkTitle -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "publishDate" -}}
+        {{- $children = $children.ByPublishDate -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "lastmod" -}}
+        {{- $children = $children.ByLastmod -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "expiryDate" -}}
+        {{- $children = $children.ByExpiryDate -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else if eq $sortField "length" -}}
+        {{- $children = $children.ByLength -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- else -}}
+        {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+        {{- $children = $children.ByParam $sortField -}}
+        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- end -}}
     {{- /* Recursively build nested menu entries */ -}}
     {{- $pages := slice -}}
     {{- range $children -}}
-        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "order" $order) -}}
+        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "reverse" $reverse) -}}
         {{- $pages = $pages | append $childEntry -}}
     {{- end -}}
     {{- $entry = merge $entry (dict "pages" $pages) -}}

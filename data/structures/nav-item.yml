@@ -30,7 +30,7 @@ arguments:
     default: assets/hero-image.html
     group: partial
     release: v1.0.0
-  # deprecated arguments  
+  # deprecated arguments
   header:
     type: string
     optional: true

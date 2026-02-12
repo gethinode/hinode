@@ -17,6 +17,8 @@
   translation: "on"
 - id: draft
   translation: "Draft"
+- id: published
+  translation: "Published"
 
 # List pages
 - id: article
@@ -197,3 +199,9 @@
   translation: "Next testimonial"
 - id: testimonialCase
   translation: "View client case"
+
+# Preview
+- id: previewError
+  translation: "Unable to load preview for"
+- id: previewOpenTab
+  translation: "Open in new tab"

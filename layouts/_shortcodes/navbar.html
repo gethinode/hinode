@@ -22,7 +22,7 @@
 
 {{/* Initialize arguments */}}
 {{- $id := $args.id | default (printf "navbar-collapse-%d" (add .Ordinal 1)) -}}
-{{ $page := "" }}
+{{ $page := .Page }}
 {{ if $args.path }}{{ $page = .Site.GetPage $args.path }}{{ end }}
 {{ if and $args.path (not $page) }}
     {{ errorf "Cannot find page '%s': %s" $args.path .Position -}}

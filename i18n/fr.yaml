@@ -195,3 +195,9 @@
   translation: "Témoignage suivant"
 - id: testimonialCase
   translation: "Voir l'étude de cas client"
+
+# Preview
+- id: previewError
+  translation: "Impossible de charger l'aperçu pour"
+- id: previewOpenTab
+  translation: "Ouvrir dans un nouvel onglet"

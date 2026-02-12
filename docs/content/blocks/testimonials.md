@@ -1,0 +1,79 @@
+---
+_schema: default
+title: Testimonials
+description: Use the testimonials content block to display one or more client testimonials.
+icon: fa thumbs-up
+---
+
+## Overview
+
+The `testimonials` content block renders one or more client testimonials. You can render them as a carousel or as columns.
+
+### Carousel
+
+Set `carousel` to `true` to render a carousel of multiple testimonials.
+
+<!-- markdownlint-disable MD037 -->
+{{< example-bookshop lang="bookshop" >}}
+
+```yml
+- _bookshop_name: testimonials
+  card:
+    color: body-tertiary
+    subtle: false
+  cols: 1
+  icon_style: fa-4x
+  carousel: true
+  testimonials:
+    - icon: fab linkedin
+      scale: 1.6
+      content: First testimonial.
+      link: /en/about/
+    - icon: fab google
+      scale: 1.6
+      content: Second testimonial.
+      link: /en/about/
+    - icon: fab github
+      scale: 1.6
+      content: Third testimonial.
+      link: /en/about/
+```
+
+{{< /example-bookshop >}}
+<!-- markdownlint-enable MD037 -->
+
+### Columns
+
+Set `cols` to `3` to render three testimonials as columns.
+
+<!-- markdownlint-disable MD037 -->
+{{< example-bookshop lang="bookshop" >}}
+
+```yml
+- _bookshop_name: testimonials
+  card:
+    color: body-tertiary
+    subtle: false
+  cols: 3
+  icon_style: fa-2x
+  carousel: false
+  testimonials:
+    - icon: fab linkedin
+      scale: 1.6
+      content: First testimonial.
+    - icon: fab google
+      scale: 1.6
+      content: Second testimonial.
+    - icon: fab github
+      scale: 1.6
+      content: Third testimonial.
+```
+
+{{< /example-bookshop >}}
+<!-- markdownlint-enable MD037 -->
+
+## Arguments
+
+The content block supports the following arguments:
+
+{{< args bookshop-testimonials >}}

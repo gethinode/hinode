@@ -75,6 +75,16 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
+.card-minimal {
+    border: none;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+}
+
 // stylelint-disable annotation-no-unknown
 .card-body-link {
     color: $body-color if($enable-important-utilities, !important, null);

@@ -16,7 +16,8 @@
 </div>
 
 {{/* Render paginated list of articles */}}
-{{ $pages := where .Site.RegularPages "Section" .Section }}
+{{ $result := partial "assets/live-pages.html" (dict "section" .Section "sort" "date" "reverse" true) }}
+{{ $pages := $result.pages }}
 {{ if gt (len $pages) 0 }}
     <div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

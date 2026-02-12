@@ -19,13 +19,13 @@
 
 {{/* Main code */}}
 {{ if not $args.err }}
-    {{ partial "assets/table.html" (dict 
+    {{ partial "assets/table.html" (dict
         "page"                   .Page
         "input"                  .Inner
         "breakpoint"             $args.breakpoint
         "class"                  $args.class
         "sortable"               $args.sortable
-        "paginate"               (or $args.paginate $args.paging)
+        "paginate"               $args.paginate
         "pagination"             (or $args.pagination $args.pagingOptionPerPage)
         "pagination-select"      (or $args.paginationSelect $args.pagingOptionPageSelect)
         "searchable"             $args.searchable

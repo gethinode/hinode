@@ -197,3 +197,9 @@
   translation: "Próximo depoimento"
 - id: testimonialCase
   translation: "Ver estudo de caso do cliente"
+
+# Preview
+- id: previewError
+  translation: "Não foi possível carregar a visualização para"
+- id: previewOpenTab
+  translation: "Abrir em nova aba"

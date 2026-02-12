@@ -17,5 +17,5 @@ arguments:
 body:
   type: string
   optional: false
-  comment: Toast mesage.
+  comment: Toast message.
   group: shortcode

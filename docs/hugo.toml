@@ -1,0 +1,204 @@
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.146.0"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+[params.links]
+    hugo_docs = "https://gohugo.io/documentation/"
+
+[menus]
+[[menus.sample]]
+  name = "Blog"
+  pageRef = "/blog/"
+  weight = 10
+
+[[menus.sample]]
+  name = "Blocks"
+  pageRef = "/blocks/"
+  weight = 20
+
+[[menus.sample]]
+  name = "Approach"
+  pageRef = "/blocks/approach/"
+  parent = "Blocks"
+  weight = 1
+
+[[menus.sample]]
+  name = "Releases"
+  pageRef = "/blocks/releases/"
+  parent = "Blocks"
+  weight = 2
+
+[[menus.services]]
+  name = "Menu 1"
+  pageRef = "#!"
+  weight = 10
+  [[menus.services.params]]
+    icon = "fas 1"
+
+[[menus.services]]
+  name = "Item 1.1"
+  parent = "Menu 1"
+  pageRef = "#!"
+  weight = 10
+
+[[menus.services]]
+  name = "Item 1.2"
+  parent = "Menu 1"
+  pageRef = "#!"
+  weight = 20
+
+[[menus.services]]
+  name = "Item 1.3"
+  parent = "Menu 1"
+  pageRef = "#!"
+  weight = 30
+
+[[menus.services]]
+  name = "Item 1.4"
+  parent = "Menu 1"
+  pageRef = "#!"
+  weight = 40
+
+[[menus.services]]
+  name = "Item 1.5"
+  parent = "Menu 1"
+  pageRef = "#!"
+  weight = 50
+
+[[menus.services]]
+  name = "Menu 2"
+  pageRef = "#!"
+  weight = 20
+  [[menus.services.params]]
+    icon = "fas 2"
+
+[[menus.services]]
+  name = "Item 2.1"
+  parent = "Menu 2"
+  pageRef = "#!"
+  weight = 10
+
+[[menus.services]]
+  name = "Item 2.2"
+  parent = "Menu 2"
+  pageRef = "#!"
+  weight = 20
+
+[[menus.services]]
+  name = "Menu 3"
+  pageRef = "#!"
+  weight = 30
+  [[menus.services.params]]
+    icon = "fas 3"
+
+[[menus.services]]
+  name = "Item 3.1"
+  parent = "Menu 3"
+  pageRef = "#!"
+  weight = 10
+
+[[menus.services]]
+  name = "Item 3.2"
+  parent = "Menu 3"
+  pageRef = "#!"
+  weight = 20
+
+[[menus.services]]
+  name = "Item 3.3"
+  parent = "Menu 3"
+  pageRef = "#!"
+  weight = 30
+
+[[menus.services]]
+  name = "Item 3.4"
+  parent = "Menu 3"
+  pageRef = "#!"
+  weight = 40
+
+[[menus.services]]
+  name = "Menu 4"
+  pageRef = "#!"
+  weight = 40
+  [[menus.services.params]]
+    icon = "fas 4"
+
+[[menus.services]]
+  name = "Item 4.1"
+  parent = "Menu 4"
+  pageRef = "#!"
+  weight = 10
+
+[[menus.services]]
+  name = "Item 4.2"
+  parent = "Menu 4"
+  pageRef = "#!"
+  weight = 20
+
+[[menus.services]]
+  name = "Item 4.3"
+  parent = "Menu 4"
+  pageRef = "#!"
+  weight = 30
+
+[[menus.services]]
+  name = "Item 4.4"
+  parent = "Menu 4"
+  pageRef = "#!"
+  weight = 40
+
+[[menus.services]]
+  name = "Menu 5"
+  pageRef = "#!"
+  weight = 50
+  [[menus.services.params]]
+    icon = "fas 5"
+
+[[menus.services]]
+  name = "Item 5.1"
+  parent = "Menu 5"
+  pageRef = "#!"
+  weight = 10
+
+[[menus.services]]
+  name = "Item 5.2"
+  parent = "Menu 5"
+  pageRef = "#!"
+  weight = 20
+
+[[menus.services]]
+  name = "Menu 6"
+  pageRef = "#!"
+  weight = 60
+  [[menus.services.params]]
+    icon = "fas 6"
+
+[[menus.services]]
+  name = "Item 6.1"
+  parent = "Menu 6"
+  pageRef = "#!"
+  weight = 10
+
+[[menus.services]]
+  name = "Item 6.2"
+  parent = "Menu 6"
+  pageRef = "#!"
+  weight = 20
+
+[[menus.services]]
+  name = "Item 6.3"
+  parent = "Menu 6"
+  pageRef = "#!"
+  weight = 30

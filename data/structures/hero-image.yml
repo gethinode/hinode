@@ -1,4 +1,4 @@
-
+comment: Defines a hero image with optional overlay and positioning.
 arguments:
   page:
   icon:

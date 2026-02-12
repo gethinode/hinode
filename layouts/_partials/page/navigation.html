@@ -1,21 +1,42 @@
 {{/* Render previous / next navigation */}}
+{{/* Read the section's configuration to get the reverse setting */}}
+{{- $sectionPage := .CurrentSection -}}
+{{- $reverseParam := false -}}
+{{- with $sectionPage -}}
+    {{- range .Params.content_blocks -}}
+        {{- if eq ._bookshop_name "articles" -}}
+            {{- with .input.reverse -}}
+                {{- $reverseParam = . -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $result := partial "assets/live-pages.html" (dict "section" .CurrentSection.Section "sort" "title" "reverse" $reverseParam) -}}
+{{- $pages := $result.pages -}}
+
+{{/* Hugo's .Prev/.Next have inverted semantics - they always need to be swapped */}}
+{{/* Regardless of sort direction, .Next goes to earlier page, .Prev goes to later page */}}
+{{- $prevPage := $pages.Next . -}}
+{{- $nextPage := $pages.Prev . -}}
+
 <div class="row row-cols-2 mt-5 mb-3">
     <div class="col">
-        {{ with .NextInSection -}}
-            {{ if .OutputFormats.Get "html" -}}
+        {{- with $prevPage -}}
+            {{- if .OutputFormats.Get "html" -}}
                 <a class="next" href="{{ .RelPermalink }}">
                     {{- partial "assets/icon.html" (dict "icon" "fas arrow-left" "spacing" false) }}&nbsp;{{ .LinkTitle }}
                 </a>
             {{- end -}}
-        {{ end -}}
+        {{- end -}}
     </div>
     <div class="col text-end">
-        {{ with .PrevInSection -}}
-            {{ if .OutputFormats.Get "html" -}}
+        {{- with $nextPage -}}
+            {{- if .OutputFormats.Get "html" -}}
                 <a class="previous" href="{{ .RelPermalink }}">
                     {{ .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "icon" "fas arrow-right" "spacing" false) }}
                 </a>
             {{- end -}}
-        {{ end -}}
+        {{- end -}}
     </div>
 </div>

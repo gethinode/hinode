@@ -1,33 +1,25 @@
+# Merge the menu configuration from the docs module
+# See https://gohugo.io/configuration/introduction/#merge-configuration-settings
+_merge = "deep"
+
 [[main]]
-  name = "About"
-  pageRef = "/about/"
+  name = "Blocks"
+  pageRef = "/blocks/"
   weight = 10
+
+[[main]]
+  name = "Components"
+  pageRef = "/components/"
+  weight = 20
 
 [[main]]
   name = "Blog"
   pageRef = "/blog/"
-  weight = 20
-
-[[main]]
-  name = "Projects"
-  pageRef = "/projects/"
   weight = 30
 
 [[main]]
-  name = "Sample project"
-  pageRef = "/projects/sample-project/"
-  parent = "Projects"
-  weight = 1
-
-[[main]]
-  name = "Another project"
-  pageRef = "/projects/another-project/"
-  parent = "Projects"
-  weight = 2
-
-[[main]]
-  name = "Tags"
-  pageRef = "/tags/"
+  name = "Docs"
+  pageRef = "https://gethinode.com/docs/"
   weight = 40
 
 [[social]]
@@ -46,194 +38,4 @@
   name = "Medium"
   pre = "fab medium"
   url = "https://medium.com/"
-  weight = 30
-
-# toml-docs-start sample-navigation
-[[sample]]
-  name = "Blog"
-  pageRef = "/blog/"
-  weight = 10
-
-[[sample]]
-  name = "Projects"
-  pageRef = "/projects/"
-  weight = 20
-
-[[sample]]
-  name = "Sample project"
-  pageRef = "/projects/sample-project/"
-  parent = "Projects"
-  weight = 1
-
-[[sample]]
-  name = "Another project"
-  pageRef = "/projects/another-project/"
-  parent = "Projects"
-  weight = 2
-# toml-docs-end sample-navigation
-
-# toml-docs-start sample-menu
-[[services]]
-  name = "Menu 1"
-  pageRef = "#!"
-  weight = 10
-  [[services.params]]
-    icon = "fas 1"
-
-[[services]]
-  name = "Item 1.1"
-  parent = "Menu 1"
-  pageRef = "#!"
-  weight = 10
-
-[[services]]
-  name = "Item 1.2"
-  parent = "Menu 1"
-  pageRef = "#!"
-  weight = 20
-
-[[services]]
-  name = "Item 1.3"
-  parent = "Menu 1"
-  pageRef = "#!"
-  weight = 30
-
-# See source file for continued sample data
-# toml-docs-end sample-menu
-
-[[services]]
-  name = "Item 1.4"
-  parent = "Menu 1"
-  pageRef = "#!"
-  weight = 40
-
-[[services]]
-  name = "Item 1.5"
-  parent = "Menu 1"
-  pageRef = "#!"
-  weight = 50
-
-[[services]]
-  name = "Menu 2"
-  pageRef = "#!"
-  weight = 20
-  [[services.params]]
-    icon = "fas 2"
-
-[[services]]
-  name = "Item 2.1"
-  parent = "Menu 2"
-  pageRef = "#!"
-  weight = 10
-
-[[services]]
-  name = "Item 2.2"
-  parent = "Menu 2"
-  pageRef = "#!"
-  weight = 20
-
-[[services]]
-  name = "Menu 3"
-  pageRef = "#!"
-  weight = 30
-  [[services.params]]
-    icon = "fas 3"
-
-[[services]]
-  name = "Item 3.1"
-  parent = "Menu 3"
-  pageRef = "#!"
-  weight = 10
-
-[[services]]
-  name = "Item 3.2"
-  parent = "Menu 3"
-  pageRef = "#!"
-  weight = 20
-
-[[services]]
-  name = "Item 3.3"
-  parent = "Menu 3"
-  pageRef = "#!"
-  weight = 30
-
-[[services]]
-  name = "Item 3.4"
-  parent = "Menu 3"
-  pageRef = "#!"
-  weight = 40
-
-[[services]]
-  name = "Menu 4"
-  pageRef = "#!"
-  weight = 40
-  [[services.params]]
-    icon = "fas 4"
-
-[[services]]
-  name = "Item 4.1"
-  parent = "Menu 4"
-  pageRef = "#!"
-  weight = 10
-
-[[services]]
-  name = "Item 4.2"
-  parent = "Menu 4"
-  pageRef = "#!"
-  weight = 20
-
-[[services]]
-  name = "Item 4.3"
-  parent = "Menu 4"
-  pageRef = "#!"
-  weight = 30
-
-[[services]]
-  name = "Item 4.4"
-  parent = "Menu 4"
-  pageRef = "#!"
-  weight = 40
-
-[[services]]
-  name = "Menu 5"
-  pageRef = "#!"
-  weight = 50
-  [[services.params]]
-    icon = "fas 5"
-
-[[services]]
-  name = "Item 5.1"
-  parent = "Menu 5"
-  pageRef = "#!"
-  weight = 10
-
-[[services]]
-  name = "Item 5.2"
-  parent = "Menu 5"
-  pageRef = "#!"
-  weight = 20
-
-[[services]]
-  name = "Menu 6"
-  pageRef = "#!"
-  weight = 60
-  [[services.params]]
-    icon = "fas 6"
-
-[[services]]
-  name = "Item 6.1"
-  parent = "Menu 6"
-  pageRef = "#!"
-  weight = 10
-
-[[services]]
-  name = "Item 6.2"
-  parent = "Menu 6"
-  pageRef = "#!"
-  weight = 20
-
-[[services]]
-  name = "Item 6.3"
-  parent = "Menu 6"
-  pageRef = "#!"
   weight = 30

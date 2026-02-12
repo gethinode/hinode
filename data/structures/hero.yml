@@ -1,7 +1,7 @@
 comment: >-
   Displays a hero banner, typically placed at the top of the page. The hero
   supports a heading, featured illustration, and navigation links. You can
-  can also add a background image with an overlay to improve contrast.
+  also add a background image with an overlay to improve contrast.
 arguments:
   page:
   breadcrumb:

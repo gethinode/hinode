@@ -133,3 +133,9 @@
   translation: "显示"
 - id: comments
   translation: "评论"
+
+# Preview
+- id: previewError
+  translation: "无法加载预览"
+- id: previewOpenTab
+  translation: "在新标签页中打开"

@@ -37,11 +37,11 @@
 
 {{/* Initialize local variables */}}
 {{ $class := $args.class }}
-{{ if or $args.sortable $args.paginate $args.paging $args.searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if or $args.sortable $args.paginate $args.searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
 {{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
-{{ if or $args.paginate $args.paging }}
+{{ if $args.paginate }}
     {{ $pagination := or $args.pagination $args.pagingOptionPerPage | default 10 }}
     {{ $select := or $args.paginationSelect $args.pagingOptionPageSelect }}
     {{ $attributes = printf "%s data-table-paging=true" $attributes }}

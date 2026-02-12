@@ -18,7 +18,7 @@
 
 {{/* Initialize local arguments */}}
 {{- $src := $args.src -}}
-{{ $absoluteURL := or $args.absoluteUrl $args.absoluteURL }}
+{{ $absoluteURL := $args.absoluteUrl }}
 {{ $hook := $args.hook }}
 {{ $host := (urls.Parse $src).Hostname }}
 {{ $dir := (urls.Parse $src).Path }}

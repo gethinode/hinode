@@ -9,7 +9,7 @@ arguments:
   show:
     default: true
   full:
-  id: 
+  id:
   class:
   highlight-options:
     release: v1.0.0

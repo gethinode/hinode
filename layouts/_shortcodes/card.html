@@ -28,6 +28,7 @@
 {{- $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML -}}
 {{- $footer := or (partial "utilities/GetArgParent" (dict "page" . "arg" "footer-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "footer")) -}}
 {{- $gutter := partial "utilities/GetArgParent" (dict "page" . "arg" "gutter") -}}
+{{- $body := or (partial "utilities/GetArgParent" (dict "page" . "arg" "body-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "body"))  -}}
 {{- $header := or (partial "utilities/GetArgParent" (dict "page" . "arg" "header-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "header"))  -}}
 {{- $icon := .Get "icon" -}}
 {{- $iconRounded := or (partial "utilities/GetArgParent" (dict "page" . "arg" "icon-rounded")) (partial "utilities/GetArgParent" (dict "page" . "arg" "iconRounded")) -}}
@@ -77,6 +78,7 @@
         "color"        $color
         "padding"      $padding
         "header-style" $header
+        "body-style"   $body
         "footer-style" $footer
         "orientation"  $orientation
         "description"  $description

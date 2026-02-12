@@ -5,11 +5,11 @@ arguments:
   color:
     default: body
   class:
-  size: 
+  size:
   use-title:
   justify:
   link-type:
-  use-section: 
+  use-section:
   arrangement:
   heading-style:
   content-style:

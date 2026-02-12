@@ -28,8 +28,8 @@
 
 {{/* Initialize arguments */}}
 {{- $lang := $args.lang -}}
-{{- $showPreview := or $args.showPreview $args.show_preview }}
-{{- $showMarkup := or $args.showMarkup $args.show_markup }}
+{{- $showPreview := $args.showPreview }}
+{{- $showMarkup := $args.showMarkup }}
 {{- if eq $lang "hugo" }}{{ $lang = "markdown" }}{{ end -}}
 {{- $content := .InnerDeindent -}}
 

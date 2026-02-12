@@ -43,7 +43,7 @@
             {{ $required := "" }}
             {{ if not $val.optional }}{{ $required = "yes" }}{{ end }}
 
-            {{ $comment := $val.comment }}
+            {{ $comment := or $val.comment "" }}
             {{ if $val.deprecated }}
                 {{ $btn := printf `{{< release version="%s" short="true" button-size="xs" inline="true" release-state="deprecated" >}}` $val.deprecated }}
                 {{ with $val.alternative }}

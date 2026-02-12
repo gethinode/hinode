@@ -11,7 +11,7 @@ arguments:
       values:
         - grid
         - masonry
-  cols: 
+  cols:
     default: 3
   icon-rounded:
   icon-style:

@@ -147,3 +147,9 @@
   translation: Komentarz
 - id: supportedValues
   translation: "Obsługiwane wartości"
+
+# Preview
+- id: previewError
+  translation: "Nie można załadować podglądu dla"
+- id: previewOpenTab
+  translation: "Otwórz w nowej karcie"

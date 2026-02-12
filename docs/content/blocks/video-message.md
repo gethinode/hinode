@@ -1,0 +1,89 @@
+---
+_schema: default
+title: Video message
+description: >-
+  Features a video with optional messages.
+icon: fas circle-play
+---
+
+## Overview
+
+The `video-message` content block renders a video with optional messages displayed either horizontally or stacked below the video.
+
+### Horizontal layout
+
+Set `orientation` to `horizontal` to display the messages to the right of the video.
+
+<!-- markdownlint-disable MD037 -->
+{{< example-bookshop lang="bookshop" >}}
+
+```yml
+- _bookshop_name: video-message
+  heading:
+    preheading: Preheading
+    title: Heading
+    content: Video content. It supports multiple lines.
+    align: start
+  background:
+    color: body-tertiary
+    subtle: false
+  orientation: horizontal
+  icon-style: fa-lg
+  video:
+    provider: vimeo
+    media-id: "55073825"
+    autoplay: true
+    color: black
+  messages:
+    - title: First Message
+      icon: fas 1
+    - title: Second Message
+      icon: fas 2
+    - title: Third Message
+      icon: fas 3
+```
+
+{{< /example-bookshop >}}
+<!-- markdownlint-enable MD037 -->
+
+### Stacked layout
+
+Set `orientation` to `stacked` to display the messages below the video.
+
+<!-- markdownlint-disable MD037 -->
+{{< example-bookshop lang="bookshop" >}}
+
+```yml
+- _bookshop_name: video-message
+  heading:
+    preheading: Preheading
+    title: Heading
+    content: Video content. It supports multiple lines.
+    align: start
+  background:
+    color: body-tertiary
+    subtle: false
+  orientation: stacked
+  icon-style: fa-lg
+  video:
+    provider: vimeo
+    media-id: "55073825"
+    autoplay: true
+    color: black
+  messages:
+    - title: First Message
+      icon: fas 1
+    - title: Second Message
+      icon: fas 2
+    - title: Third Message
+      icon: fas 3
+```
+
+{{< /example-bookshop >}}
+<!-- markdownlint-enable MD037 -->
+
+## Arguments
+
+The content block supports the following arguments:
+
+{{< args bookshop-video-message >}}

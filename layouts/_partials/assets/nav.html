@@ -50,7 +50,7 @@
 {{- $page := $args.page -}}
 {{- $id := $args.id | default "0" -}}
 {{- $type := or $args.tabType $args.type -}}
-{{- $wrap := or $args.wordWrap $args.wrap -}}
+{{- $wrap := $args.wordWrap -}}
 {{- $titles := slice -}}
 {{- range $args.list }}{{ $titles = $titles | append .Title }} {{ end -}}
 {{- if reflect.IsSlice $args.navTitles }}{{ $titles = $titles | append $args.navTitles }}{{ end -}}

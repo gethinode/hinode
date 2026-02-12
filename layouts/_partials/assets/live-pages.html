@@ -18,6 +18,7 @@
 {{ $pages := slice }}
 {{ $total := 0 }}
 {{ $menu := slice }}
+{{ $reverse := $args.reverse | default false }}
 
 {{/* Main code */}}
 {{ if not $args.err }}
@@ -96,9 +97,7 @@
             {{ end }}
 
             {{/* Sort the pages as specified */}}
-            {{- $sortField := printf "Params.%s" $args.sort -}}
-            {{- $order := "asc" -}}
-            {{- if $args.reverse }}{{ $order = "desc" }}{{ end -}}
+            {{- $sortField := $args.sort | default "title" -}}
 
             {{ if eq $args.groupBy "section" }}
                 {{- /* Build a hierarchical map: parent path -> slice of children */ -}}
@@ -123,8 +122,36 @@
                     {{- end -}}
                 {{- end -}}
 
-                {{- /* Sort root pages first */ -}}
-                {{- $rootPages = sort $rootPages $sortField $order -}}
+                {{- /* Sort root pages first using Hugo's page collection methods */ -}}
+                {{- if eq $sortField "title" -}}
+                    {{- $rootPages = $rootPages.ByTitle -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "date" -}}
+                    {{- $rootPages = $rootPages.ByDate -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "weight" -}}
+                    {{- $rootPages = $rootPages.ByWeight -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "linkTitle" -}}
+                    {{- $rootPages = $rootPages.ByLinkTitle -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "publishDate" -}}
+                    {{- $rootPages = $rootPages.ByPublishDate -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "lastmod" -}}
+                    {{- $rootPages = $rootPages.ByLastmod -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "expiryDate" -}}
+                    {{- $rootPages = $rootPages.ByExpiryDate -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "length" -}}
+                    {{- $rootPages = $rootPages.ByLength -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- else -}}
+                    {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                    {{- $rootPages = $rootPages.ByParam $sortField -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{- end -}}
 
                 {{- /* Process depth-first (pre-order): use a stack to traverse */ -}}
                 {{- $result := slice -}}
@@ -154,11 +181,39 @@
                     {{- /* Add current page to result */ -}}
                     {{- $result = $result | append $current -}}
 
-                    {{- /* Get and sort children */ -}}
+                    {{- /* Get and sort children using Hugo's page collection methods */ -}}
                     {{- $pageKey := $current.RelPermalink -}}
                     {{- $children := index $grouped $pageKey | default slice -}}
                     {{- if $children -}}
-                        {{- $children = sort $children $sortField $order -}}
+                        {{- if eq $sortField "title" -}}
+                            {{- $children = $children.ByTitle -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "date" -}}
+                            {{- $children = $children.ByDate -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "weight" -}}
+                            {{- $children = $children.ByWeight -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "linkTitle" -}}
+                            {{- $children = $children.ByLinkTitle -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "publishDate" -}}
+                            {{- $children = $children.ByPublishDate -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "lastmod" -}}
+                            {{- $children = $children.ByLastmod -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "expiryDate" -}}
+                            {{- $children = $children.ByExpiryDate -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "length" -}}
+                            {{- $children = $children.ByLength -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else -}}
+                            {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                            {{- $children = $children.ByParam $sortField -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- end -}}
                         {{- /* Push children to stack in reverse so LIFO pops in correct order */ -}}
                         {{- range $i := seq (len $children) -}}
                             {{- $idx := sub (len $children) $i -}}
@@ -176,13 +231,41 @@
                         "page"      .
                         "grouped"   $grouped
                         "sortField" $sortField
-                        "order"     $order
+                        "reverse"   $reverse
                     ) -}}
                     {{- $menu = $menu | append $menuEntry -}}
                 {{- end -}}
             {{ else }}
-                {{- /* Use regular sort */ -}}
-                {{- $pages = sort $pages $sortField $order -}}
+                {{- /* Use Hugo's page collection methods for regular sorting */ -}}
+                {{- if eq $sortField "title" -}}
+                    {{- $pages = $pages.ByTitle -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "date" -}}
+                    {{- $pages = $pages.ByDate -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "weight" -}}
+                    {{- $pages = $pages.ByWeight -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "linkTitle" -}}
+                    {{- $pages = $pages.ByLinkTitle -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "publishDate" -}}
+                    {{- $pages = $pages.ByPublishDate -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "lastmod" -}}
+                    {{- $pages = $pages.ByLastmod -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "expiryDate" -}}
+                    {{- $pages = $pages.ByExpiryDate -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else if eq $sortField "length" -}}
+                    {{- $pages = $pages.ByLength -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- else -}}
+                    {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                    {{- $pages = $pages.ByParam $sortField -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{- end -}}
                 {{- /* For non-grouped sorts, use pages directly as menu */ -}}
                 {{- $menu = $pages | default slice -}}
             {{ end }}
@@ -190,4 +273,4 @@
     {{ end }}
 {{ end }}
 
-{{ return (dict "pages" $pages "menu" $menu "total" $total) }}
+{{ return (dict "pages" $pages "menu" $menu "total" $total "reverse" $reverse) }}
