@@ -84,10 +84,10 @@ Module configuration is in `config/_default/hugo.toml` under `[module.imports]`.
 - `assets/section-title.html` - Section heading utility (used by Hinode pages and mod-blocks components)
 - All `mod-utils` utilities (GetPadding, GetBreakpoint, LogWarn, InitArgs, etc.)
 
-**mod-blocks owns (block-specific partials - moved in v2):**
+**mod-blocks owns (block-specific partials):**
 
-- `assets/hero.html`, `assets/contact.html`, `assets/faq.html`, `assets/testimonial-carousel.html`, `assets/menu.html`
-- `utilities/section.html` - Wraps all block components
+- `assets/hero.html`, `assets/contact.html`, `assets/faq.html`, `assets/menu.html`, `assets/testimonial-carousel.html`, `assets/preview.html`
+- `utilities/section.html` - Component wrapper
 - `page/contact.html` - Contact page template
 
 **Dependency flow:**

@@ -1,9 +1,0 @@
-comment: >-
-  Renders a live URL preview with switchable device views (desktop, tablet, mobile).
-arguments:
-  url:
-    optional: false
-  device:
-    optional: true
-  heading:
-    optional: true

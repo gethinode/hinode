@@ -21,7 +21,7 @@
 {{ end }}
 
 {{/* Initialize global variables */}}
-{{ $arrangement := site.Params.modules.bookshop.title.arrangement }}
+{{ $arrangement := or (index site.Params "style" "title" "arrangement") "above" }}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Initialize local arguments */}}

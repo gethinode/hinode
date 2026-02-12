@@ -1,9 +1,0 @@
-comment: >-
-  Renders an accordion of frequently asked questions. Clicking on a question
-  reveals the answer interactively.
-arguments:
-  id:
-  contrast:
-  class:
-  color:
-  items:
