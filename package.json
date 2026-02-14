@@ -77,7 +77,7 @@
     "autoprefixer": "^10.4.24",
     "cssnano": "^7.1.2",
     "cssnano-preset-advanced": "^7.0.10",
-    "hugo-bin": "0.149.2",
+    "hugo-extended": "^0.155.3",
     "postcss-cli": "^11.0.1",
     "rimraf": "^6.1.2"
   },
@@ -103,9 +103,6 @@
   },
   "optionalDependencies": {
     "fsevents": "*"
-  },
-  "hugo-bin": {
-    "buildTags": "extended"
   },
   "release": {
     "branches": [
