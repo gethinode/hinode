@@ -26,7 +26,7 @@ Font Awesome includes a range of t-shirt based sizes that are relative to the br
 
 {{</* fas mug-saucer fa-sm */>}} When my six o’clock alarm buzzes, I require a pot of good java.
 
-{{</* fas mug-saucer fa */>}} When my six o’clock alarm buzzes, I require a pot of good java.
+{{</* fas mug-saucer fa-md */>}} When my six o’clock alarm buzzes, I require a pot of good java.
 
 {{</* fas mug-saucer fa-lg */>}} When my six o’clock alarm buzzes, I require a pot of good java.
 
@@ -45,7 +45,7 @@ The table below illustrates the relative sizing classes and their equivalent rel
 | `fa-2x`               |   0.625em |                 10px |
 | `fa-xs`               |    0.75em |                 12px |
 | `fa-sm`               |   0.875em |                 14px |
-| `fa`                  |       1em |                 16px |
+| `fa-md`               |       1em |                 16px |
 | `fa-lg`               |    1.25em |                 20px |
 | `fa-xl`               |     1.5em |                 24px |
 | `fa-2xl`              |       2em |                 32px |
