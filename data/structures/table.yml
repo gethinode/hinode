@@ -13,6 +13,7 @@ arguments:
     comment: Table input in markdown format.
     group: partial
   breakpoint:
+    default: ""
     position: 0
   class:
   sortable:

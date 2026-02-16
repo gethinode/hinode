@@ -25,8 +25,7 @@ The `approach` block renders a featured image with one or more steps.
   illustration:
     image: /img/placeholder.png
   orientation: stacked
-  icon-rounded: false
-  icon-style: fa-xs
+  icon_style: fa-xs text-primary
   padding: 0
   align: start
   elements:

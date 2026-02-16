@@ -2,7 +2,6 @@ comment: Defines a featured illustration with optional icon or image.
 arguments:
   page:
   icon:
-  scale:
   image:
   mode:
   ratio:

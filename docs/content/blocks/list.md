@@ -22,9 +22,9 @@ The `list` block renders a list of articles.
     align: start
   input:
     section: blog
-    reverse: false
-    sort: title
-  hide-empty: false
+    reverse: true
+    sort: date
+  hide_empty: false
   background:
     color: body-tertiary
     subtle: false
@@ -57,9 +57,9 @@ You can then use `sortable`, `paginate`, and `searchable` to enable inline sorti
   input:
     section: blog
     reverse: false
-    sort: title
+    sort: date
   pagination: 5
-  hide-empty: false
+  hide_empty: false
   background:
     color: body-tertiary
     subtle: false
@@ -87,8 +87,8 @@ Customize the list by providing a `hook` partial.
   input:
     section: blog
     reverse: false
-    sort: title
-  hide-empty: false
+    sort: date
+  hide_empty: false
   hook: assets/table-hook
   background:
     color: body-tertiary

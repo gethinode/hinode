@@ -19,6 +19,7 @@ arguments:
   menu:
     release: v2.0.0
   breakpoint:
+    default: md
     release: v1.0.0
   style:
     type: select

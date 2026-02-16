@@ -20,7 +20,7 @@
         {{- errorf "Cannot find download file for page '%s': %s" .File.Path $download -}}
     {{- end -}}
     
-    <span class="hstack gap-1 text-body-secondary">
+    <span class="hstack gap-2 text-body-secondary">
         {{- range $index, $item := $list -}}
             {{- $url := $item.url -}}
             {{- $url = replace $url "{url}" $.Permalink -}}

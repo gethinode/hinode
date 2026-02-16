@@ -42,16 +42,16 @@ Set `color` to adjust the color of the text element to which the tooltip is appl
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip color="primary" title="Tooltip" href="#!" */>}}Primary{{</* /tooltip */>}}&bull;
-{{</* tooltip color="secondary" title="Tooltip" class="d-none-dark" href="#!" */>}}Secondary{{</* /tooltip */>}}
-{{</* tooltip color="secondary" title="Tooltip" class="d-none-light bg-light" href="#!" */>}}Secondary{{</* /tooltip */>}}&bull;
-{{</* tooltip color="success" title="Tooltip" href="#!" */>}}Success{{</* /tooltip */>}}&bull;
-{{</* tooltip color="danger" title="Tooltip" href="#!" */>}}Danger{{</* /tooltip */>}}&bull;
-{{</* tooltip color="warning" title="Tooltip" href="#!" */>}}Warning{{</* /tooltip */>}}&bull;
-{{</* tooltip color="info" title="Tooltip" href="#!" */>}}Info{{</* /tooltip */>}}&bull;
-{{</* tooltip color="light" title="Tooltip" class="bg-dark" href="#!" */>}}Light{{</* /tooltip */>}}&bull;
-{{</* tooltip color="dark" title="Tooltip" class="d-none-dark" href="#!" */>}}Dark{{</* /tooltip */>}}
-{{</* tooltip color="dark" title="Tooltip" class="d-none-light bg-light" href="#!" */>}}Dark{{</* /tooltip */>}}
+{{</* tooltip color="primary" title="Tooltip" */>}}Primary{{</* /tooltip */>}}&bull;
+{{</* tooltip color="secondary" title="Tooltip" class="d-none-dark" */>}}Secondary{{</* /tooltip */>}}
+{{</* tooltip color="secondary" title="Tooltip" class="d-none-light bg-light" */>}}Secondary{{</* /tooltip */>}}&bull;
+{{</* tooltip color="success" title="Tooltip" */>}}Success{{</* /tooltip */>}}&bull;
+{{</* tooltip color="danger" title="Tooltip" */>}}Danger{{</* /tooltip */>}}&bull;
+{{</* tooltip color="warning" title="Tooltip" */>}}Warning{{</* /tooltip */>}}&bull;
+{{</* tooltip color="info" title="Tooltip" */>}}Info{{</* /tooltip */>}}&bull;
+{{</* tooltip color="light" title="Tooltip" class="bg-dark" */>}}Light{{</* /tooltip */>}}&bull;
+{{</* tooltip color="dark" title="Tooltip" class="d-none-dark" */>}}Dark{{</* /tooltip */>}}
+{{</* tooltip color="dark" title="Tooltip" class="d-none-light bg-light" */>}}Dark{{</* /tooltip */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -61,10 +61,10 @@ Set `placement` to adjust the placement of the tooltip.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* tooltip title="Tooltip" href="#!" placement="top" */>}}Top{{</* /tooltip */>}}&bull;
-{{</* tooltip title="Tooltip" href="#!" placement="bottom" */>}}Bottom{{</* /tooltip */>}}&bull;
-{{</* tooltip title="Tooltip" href="#!" placement="left" */>}}Left{{</* /tooltip */>}}&bull;
-{{</* tooltip title="Tooltip" href="#!" placement="right" */>}}Right{{</* /tooltip */>}}
+{{</* tooltip title="Tooltip" placement="top" */>}}Top{{</* /tooltip */>}}&bull;
+{{</* tooltip title="Tooltip" placement="bottom" */>}}Bottom{{</* /tooltip */>}}&bull;
+{{</* tooltip title="Tooltip" placement="left" */>}}Left{{</* /tooltip */>}}&bull;
+{{</* tooltip title="Tooltip" placement="right" */>}}Right{{</* /tooltip */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 

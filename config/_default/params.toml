@@ -278,18 +278,3 @@
     frame-src = ["player.vimeo.com"]
     img-src = ["i.vimeocdn.com"]
     script-src = ["player.vimeo.com"]
-
-# define module integration
-[modules.bookshop]
-  integration = "core"
-
-# provide default hero settings
-[modules.bookshop.hero]
-  align = "start"
-  overlayMode = "dark"
-  section = true
-  default = ["section"]
-#   default = ["page", "home", "section"]
-
-[modules.bookshop.articles]
-  moreButton = true

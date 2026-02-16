@@ -39,7 +39,7 @@ Set `path` to reference a content page within your site.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="button" class="col-sm-12 col-lg-8 mx-auto" /*/>}}
+{{</* card path="components/button" class="col-sm-12 col-lg-8 mx-auto" /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -50,18 +50,18 @@ Use the `color` argument to set the background color of the card. As an example,
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* card-group cols="4" gutter="3" header-style="none" orientation="none" */>}}
-    {{</* card color="primary" path="button" /*/>}}
-    {{</* card color="secondary" path="button" /*/>}}
-    {{</* card color="success" path="button" /*/>}}
-    {{</* card color="danger" path="button" /*/>}}
-    {{</* card color="warning" path="button" /*/>}}
-    {{</* card color="info" path="button" /*/>}}
-    {{</* card color="light" path="button" /*/>}}
-    {{</* card color="dark" path="button" /*/>}}
-    {{</* card color="white" path="button" /*/>}}
-    {{</* card color="black" path="button" /*/>}}
-    {{</* card color="body" path="button" /*/>}}
-    {{</* card color="body-tertiary" path="button" /*/>}}
+    {{</* card color="primary" path="components/button" /*/>}}
+    {{</* card color="secondary" path="components/button" /*/>}}
+    {{</* card color="success" path="components/button" /*/>}}
+    {{</* card color="danger" path="components/button" /*/>}}
+    {{</* card color="warning" path="components/button" /*/>}}
+    {{</* card color="info" path="components/button" /*/>}}
+    {{</* card color="light" path="components/button" /*/>}}
+    {{</* card color="dark" path="components/button" /*/>}}
+    {{</* card color="white" path="components/button" /*/>}}
+    {{</* card color="black" path="components/button" /*/>}}
+    {{</* card color="body" path="components/button" /*/>}}
+    {{</* card color="body-tertiary" path="components/button" /*/>}}
 {{</* /card-group */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
@@ -117,9 +117,9 @@ Use the `orientation` argument to customize the placement of the card's thumbnai
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* card path="button" header-style="none" footer-style="none" orientation="stacked"
+{{</* card path="components/button" header-style="none" footer-style="none" orientation="stacked"
     padding="3" class="col-sm-12 col-lg-6 mx-auto mb-3" /*/>}}
-{{</* card path="button" header-style="publication" footer-style="tags" orientation="horizontal"
+{{</* card path="components/button" header-style="publication" footer-style="tags" orientation="horizontal"
     padding="3" class="col-sm-12 col-lg-8 mx-auto" /*/>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
