@@ -6,6 +6,6 @@
 
 {{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
 {{- if $sharing }}
-    <div class="py-3 d-flex align-items-center"><span class="me-1">{{ T "shareLink" " " }}</span>{{ partial "page/sharing.html" . }}</div>
+    <div class="py-3 d-flex align-items-center">{{ partial "page/sharing.html" . }}</div>
 {{ end -}}
 <p class="lead mb-5">{{ .Description }}</p>
