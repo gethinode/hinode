@@ -24,7 +24,7 @@ The `list` block renders a list of articles.
     section: blog
     reverse: false
     sort: title
-  hide-empty: false
+  hide_empty: false
   background:
     color: body-tertiary
     subtle: false
@@ -59,7 +59,7 @@ You can then use `sortable`, `paginate`, and `searchable` to enable inline sorti
     reverse: false
     sort: title
   pagination: 5
-  hide-empty: false
+  hide_empty: false
   background:
     color: body-tertiary
     subtle: false
@@ -88,7 +88,7 @@ Customize the list by providing a `hook` partial.
     section: blog
     reverse: false
     sort: title
-  hide-empty: false
+  hide_empty: false
   hook: assets/table-hook
   background:
     color: body-tertiary
