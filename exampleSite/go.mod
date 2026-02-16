@@ -7,3 +7,5 @@ require (
 	github.com/gethinode/mod-blocks v1.2.0 // indirect
 	github.com/gethinode/mod-cookieyes/v2 v2.2.6 // indirect
 )
+
+replace github.com/gethinode/hinode/docs => ../docs
