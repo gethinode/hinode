@@ -17,6 +17,7 @@ arguments:
   tab:
   plain:
   breakpoint:
+    default: md
     release: v1.2.0
   modal:
     release: v1.2.0
