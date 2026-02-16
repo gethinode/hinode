@@ -58,16 +58,16 @@ Font Awesome also supports absolute sizing on a scale of 1x to 10x. The icons do
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* fas camera fa-1x */>}}
-{{</* fas camera fa-2x */>}}
-{{</* fas camera fa-3x */>}}
-{{</* fas camera fa-4x */>}}
-{{</* fas camera fa-5x */>}}
-{{</* fas camera fa-6x */>}}
-{{</* fas camera fa-7x */>}}
-{{</* fas camera fa-8x */>}}
-{{</* fas camera fa-9x */>}}
-{{</* fas camera fa-10x */>}}
+{{</* fas star fa-1x */>}}
+{{</* fas star fa-2x */>}}
+{{</* fas star fa-3x */>}}
+{{</* fas star fa-4x */>}}
+{{</* fas star fa-5x */>}}
+{{</* fas star fa-6x */>}}
+{{</* fas star fa-7x */>}}
+{{</* fas star fa-8x */>}}
+{{</* fas star fa-9x */>}}
+{{</* fas star fa-10x */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
@@ -92,16 +92,21 @@ The table below illustrates the absolute sizing classes and their equivalent fon
 
 ### Responsive sizing
 
-Hinode supports responsive sizing of icons using so-called containers. Assigning `wrapper` a value will wrap the icon in a HTML `div` element. Hinode assigns `.fa-wrapper` to the class attribute of the wrapper and `fa-fluid` to the icon itself. The icon is now dynamically resized.
+Hinode supports responsive sizing of icons using so-called containers. Add `fa-fluid` as attribute to the icon class and add `fa-wrapper` to the wrapper. The icon will scale to fill the available space.
 
 > [!NOTE]
-Container support is a relatively new CSS feature that is not supported by all browsers yet. See this [browser compatibility overview](https://caniuse.com/?search=%40container) to check the current browser support. Hinode uses a fixed-size icon with a `font-size` of `5rem` as fallback.
+> - [Font Awesome v7](https://docs.fontawesome.com/upgrade/whats-changed/) introduced several changes to the icons and stylesheets. You may experience some subtle differences regarding whitespace and positioning compared to older versions.
+> - Container support is a relatively new CSS feature that is not supported by all browsers yet. See this [browser compatibility overview](https://caniuse.com/?search=%40container) to check the current browser support. Hinode uses a fixed-size icon with a `font-size` of `5rem` as fallback.
+> 
 
-The following example demonstrates a centered, responsive icon. The icon keeps its original aspect ratio, so the wrapper may have some whitespace. Use `text-center` to center the icon within the container, and `mx-auto` to center the container itself.
+
+The following example demonstrates a centered, responsive icon. The icon keeps its original aspect ratio, so the wrapper may have some whitespace. Use `mx-auto` to center the container.
 
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
-{{</* fas icon="rocket bg-body-tertiary" wrapper="col-12 mx-auto text-center" */>}}
+
+{{</* fas icon="rocket bg-body-tertiary fa-fluid" wrapper="w-25 fa-wrapper mx-auto" */>}}
+
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
 
