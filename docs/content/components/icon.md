@@ -105,7 +105,7 @@ The following example demonstrates a centered, responsive icon. The icon keeps i
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 
-{{</* fas icon="rocket bg-body-tertiary fa-fluid" wrapper="w-25 fa-wrapper mx-auto" */>}}
+{{</* fas icon="rocket bg-body-tertiary fa-fluid" wrapper="col-3 fa-wrapper mx-auto" */>}}
 
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
