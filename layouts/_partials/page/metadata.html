@@ -16,7 +16,7 @@
         {{ end }}
 
         {{- if $readingTime }}
-            {{ .ReadingTime | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
+            {{ (math.Max .ReadingTime 1) | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
             {{ if $wordCount }}&bull;{{ end }}
         {{ end }}
         
