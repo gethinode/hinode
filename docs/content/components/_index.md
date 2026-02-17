@@ -16,7 +16,7 @@ content_blocks:
         [Hugo shortcodes](https://gohugo.io/shortcodes/). Click on an item for
         more details about a component.
       align: start
-      width: 8
+    width: 8
     breadcrumb: true
 
   - _bookshop_name: articles
