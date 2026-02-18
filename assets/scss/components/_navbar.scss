@@ -76,6 +76,11 @@
 	cursor: pointer;
 }
 
+.mode-toggle .label svg {
+    height: 1em;
+    width: 1.25em;
+}
+
 // Source: https://jsfiddle.net/njhgr40m/
 
 @if $enable-dark-mode {
