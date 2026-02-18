@@ -4,7 +4,7 @@ title: Alert
 date: 2023-12-29
 description: Use the alert shortcode to display a contextual feedback message.
 layout: docs
-icon: fas triangle-exclamation
+icon: triangle-exclamation
 tags: component
 ---
 

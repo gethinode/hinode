@@ -2,7 +2,7 @@
 _schema: default
 title: Approach
 description: Use the approach block to show a featured image with one or more steps.
-icon: fas stairs
+icon: stairs
 ---
 
 ## Overview
@@ -25,18 +25,18 @@ The `approach` block renders a featured image with one or more steps.
   illustration:
     image: /img/placeholder.png
   orientation: stacked
-  icon_style: fa-xs text-primary
+  icon_style: text-primary
   padding: 0
   align: start
   elements:
     - title: First Step
-      icon: fas 1
+      icon: 1-circle
       content: Content of the first card
     - title: Second Step
-      icon: fas 2
+      icon: 2-circle
       content: Content of the second card
     - title: Third Step
-      icon: fas 3
+      icon: 3-circle
       content: Content of the third card
 ```
 

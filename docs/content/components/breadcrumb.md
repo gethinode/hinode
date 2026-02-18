@@ -4,7 +4,7 @@ title: Breadcrumb
 date: 2023-12-29
 description: Use the breadcrumb shortcode to display the current page’s location within the site's navigational hierarchy.
 layout: docs
-icon: fas bread-slice
+icon: bread-slice
 tags: component
 ---
 

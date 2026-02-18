@@ -274,6 +274,41 @@ The following table describes the available classes.
 {{< /table >}}
 <!-- markdownlint-enable MD058 -->
 
+## Specifying an icon family
+
+{{< release version="v2.0.0" >}}
+
+Hinode provides support for multiple icon providers since release {{< release version="v2.0.0" short="true" link-type="link" >}}. All icons are compatible with [Font Awesome](https://fontawesome.com) styling. The following providers are available:
+
+- [Bootstrap Icons](https://icons.getbootstrap.com) - import [mod-bootstrap-icons](https://github.com/gethinode/mod-bootstrap-icons)
+- [Flat Icon](https://www.flaticon.com) - import [mod-flaticon](https://github.com/gethinode/mod-flaticon) (private module, license required)
+- [Font Awesome](https://fontawesome.com) - import [mod-fontawesome](https://github.com/gethinode/mod-fontawesome) (imported by default)
+
+Many providers offer multiple icon sets and styles. For example, Font Awesome supports the following styles:
+
+- `fa` and `far` - regular style
+- `fab` - brands
+- `fas` - solid
+
+You can configure a default style by setting `defaultFamily` in your site parameters:
+
+```toml
+[modules.fontawesome]
+  defaultFamily = "bi"
+```
+
+The `icon` shortcode uses the default value when no family is provided. The following shortcodes are all equivalent:
+
+<!-- markdownlint-disable MD037 -->
+{{< example lang="hugo" >}}
+{{</* icon heart */>}}
+
+{{</* icon bi heart */>}}
+
+{{</* bi heart */>}}
+{{< /example >}}
+<!-- markdownlint-enable MD037 -->
+
 ## Adding custom icons
 
 {{< release version="v0.20.5" >}}
@@ -299,10 +334,11 @@ The [Font Awesome module](https://github.com/gethinode/mod-fontawesome) supports
 <!-- markdownlint-disable MD060 -->
 | Setting                   | Default | Description |
 |---------------------------|---------|-------------|
-| `fontawesome.embed`       | true    | If set, generates a symbol map with embedded vector images. Only works in conjunction with `inline`. Include the symbol with the partial `assets/symbols.html` (requires the current page context).|
-| `fontawesome.inline`      | true    | If set, uses inline vector images instead of web fonts. Both methods support Font Awesome styling and animation. However, when using vector images you cannot use aliases. Instead, use the default name of the icon. |
+| `fontawesome.mode`       | 'symbols'    | {{< release version="v2.0.0" button-size="xs" short=true inline=true >}} Specifies the rendering mode of the icons, either [`webfonts`, `svg`, or `symbols`]. When using symbols, all icons on the same page a grouped in a symbol map and are referenced by name. |
 | `fontawesome.debug`       | true    | If set, prints the original code `<i class="[...]" style=[...]></i>` as comments next to the inline vector image. |
 | `fontawesome.skipMissing` | false   | If set, displays a warning when an icon cannot be found. The missing icon is replaced with a dummy. By default, Hinode exits with an error when an icon is missing. |
+| `fontawesome.embed`       | true    | {{< release version="v2.0.0" release-state="deprecated" button-size="xs" short=true inline=true >}} **Use `mode=symbols` instead**. |
+| `fontawesome.inline`      | true    | {{< release version="v2.0.0" release-state="deprecated" button-size="xs" short=true inline=true >}} **Use `mode=svg` instead**. |
 <!-- markdownlint-enable MD060 -->
 
 ## Arguments

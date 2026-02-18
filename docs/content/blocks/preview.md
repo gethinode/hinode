@@ -5,7 +5,7 @@ description: >-
   Display live URL previews with switchable device views (desktop, tablet,
   mobile). Shows websites or web applications in an iframe with device-specific
   dimensions and responsive controls.
-icon: fas devices
+icon: devices
 ---
 
 ## Overview

@@ -3,7 +3,7 @@ _schema: default
 title: Video message
 description: >-
   Features a video with optional messages.
-icon: fas circle-play
+icon: circle-play
 ---
 
 ## Overview
@@ -36,11 +36,11 @@ Set `orientation` to `horizontal` to display the messages to the right of the vi
     color: black
   messages:
     - title: First Message
-      icon: fas 1
+      icon: 1-circle
     - title: Second Message
-      icon: fas 2
+      icon: 2-circle
     - title: Third Message
-      icon: fas 3
+      icon: 3-circle
 ```
 
 {{< /example-bookshop >}}
@@ -72,11 +72,11 @@ Set `orientation` to `stacked` to display the messages below the video.
     color: black
   messages:
     - title: First Message
-      icon: fas 1
+      icon: 1-circle
     - title: Second Message
-      icon: fas 2
+      icon: 2-circle
     - title: Third Message
-      icon: fas 3
+      icon: 3-circle
 ```
 
 {{< /example-bookshop >}}

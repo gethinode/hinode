@@ -1,5 +1,5 @@
 - title: Productlancering
-  icon: fas rocket
+  icon: rocket
   color: primary
   date: 2023-07-01
   url: https://github.com/gethinode/hinode/releases/tag/v0.15.2
@@ -8,7 +8,7 @@
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate ducimus officiis quod! Aperiam eveniet nam nostrum odit quasi ullam voluptatum.
 
 - title: Internationalisering
-  icon: fas globe
+  icon: globe
   color: success
   date: 2023-05-06
   url: v0.14.0
@@ -16,7 +16,7 @@
     Lorem ipsum dolor sit amet.
 
 - title: Nieuwe functie
-  icon: fas house
+  icon: house
   color: warning
   date: 2023-02-04
   url: v0.8.1
@@ -24,7 +24,7 @@
     Cupiditate ducimus officiis quod!
 
 - title: Beta release
-  icon: fas heart
+  icon: heart
   color: info
   date: 2022-11-30
   # url: v0.1

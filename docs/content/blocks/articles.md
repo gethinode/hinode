@@ -2,7 +2,7 @@
 _schema: default
 title: Articles
 description: Use the articles block to show a group of article cards.
-icon: fas grip
+icon: grip
 ---
 
 ## Overview

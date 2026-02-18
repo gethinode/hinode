@@ -2,7 +2,7 @@
 _schema: default
 title: Featured
 description: Use the featured content block to feature a specific article or downloadable asset.
-icon: fas fire
+icon: fire
 ---
 
 ## Overview

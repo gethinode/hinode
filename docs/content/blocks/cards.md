@@ -94,18 +94,18 @@ Set the `icon` attribute of each `element` to an icon to render illustrated card
     color: body-tertiary
     subtle: false
   orientation: stacked
-  icon-style: fa-xs text-primary
+  icon-style: text-primary
   align: start
   padding: 0
   elements:
     - title: First Card
-      icon: fas 1
+      icon: 1-circle
       content: Content of the first card
     - title: Second Card
-      icon: fas 2
+      icon: 2-circle
       content: Content of the second card
     - title: Third Card
-      icon: fas 3
+      icon: 3-circle
       content: Content of the third card
 ```
 
@@ -130,19 +130,18 @@ Set the `icon` attribute of each `element` to an icon to render illustrated card
     color: body-tertiary
     subtle: false
   orientation: horizontal
-  icon-rounded: true
-  icon-style: fa-2xs text-primary
+  icon-style: text-primary
   align: start
   padding: 0
   elements:
     - title: First Card
-      icon: fas 1
+      icon: 1-circle-fill
       content: Content of the first card
     - title: Second Card
-      icon: fas 2
+      icon: 2-circle-fill
       content: Content of the second card
     - title: Third Card
-      icon: fas 3
+      icon: 3-circle-fill
       content: Content of the third card
 ```
 

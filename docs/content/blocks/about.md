@@ -2,7 +2,7 @@
 _schema: default
 title: About
 description: Use the about content block to display a lead text next to a featured illustration.
-icon: fas info
+icon: info-circle
 ---
 
 ## Overview
@@ -85,11 +85,11 @@ Set `link-type` to `link` to add links below the content.
   links:
     - title: First link
       url: 'about'
-      icon: fas chevron-right
+      icon: chevron-right
       force: true
     - title: Second link
       url: 'components/image/#args/'
-      icon: fas chevron-right
+      icon: chevron-right
     - title: Third link
       url: 'https://google.com'
 ```
@@ -121,7 +121,7 @@ Set `link-type` to `button` to add buttons below the content. You can adjust the
   links:
     - title: Primary button
       url: 'about'
-      icon: fas chevron-right
+      icon: chevron-right
       force: true
     - title: Outline button
       url: 'https://google.com'

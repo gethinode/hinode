@@ -4,7 +4,7 @@ title: Command
 date: 2023-12-29
 description: The command shortcode generates terminal output for either Bash, PowerShell, or SQL shell languages.
 layout: docs
-icon: fas terminal
+icon: terminal
 tags: component
 ---
 

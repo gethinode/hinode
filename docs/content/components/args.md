@@ -4,7 +4,7 @@ title: Args
 date: 2025-06-23
 description: Use the args shortcode to generates a table of structured arguments.
 layout: docs
-icon: fas sliders
+icon: sliders
 tags: component
 ---
 

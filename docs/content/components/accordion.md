@@ -4,7 +4,7 @@ title: Accordion
 date: 2023-12-29
 description: Use the accordion shortcode to show a group of vertically collapsing and expanding items.
 layout: docs
-icon: fas chevron-down
+icon: chevron-down
 tags: component
 ---
 

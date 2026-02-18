@@ -4,7 +4,7 @@ title: Timeline
 date: 2024-04-18
 description: Use the timeline shortcode to show items ordered on a vertical timeline.
 layout: docs
-icon: fas timeline fa-rotate-90
+icon: timeline fa-rotate-90
 tags: component
 ---
 
@@ -40,7 +40,7 @@ The following snippet defines a single timeline element in `yml` format.
 
 ```yml
 - title: Product launch
-  icon: fas rocket
+  icon: rocket
   color: primary
   date: 2023-07-03
   badge: v0.15.3
