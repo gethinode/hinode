@@ -19,7 +19,7 @@ content_blocks:
     links:
       - title: About
         url: about
-        icon: fas chevron-right
+        icon: chevron-right
     orientation: horizontal
     justify: center
 

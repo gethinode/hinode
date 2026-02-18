@@ -19,7 +19,7 @@ content_blocks:
     links:
       - title: "Over mij"
         url: "/nl/over-mij/"
-        icon: fas chevron-right
+        icon: chevron-right
     orientation: horizontal
     justify: center
 

@@ -1,5 +1,3 @@
-github.com/FortAwesome/Font-Awesome v0.0.0-20260210181720-337dd2045d56 h1:wZEHFCO5SVesIEn1oBuo3ltK7stDYViJsNT2aGRSXN4=
-github.com/FortAwesome/Font-Awesome v0.0.0-20260210181720-337dd2045d56/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/gethinode/hinode/component-library v0.0.0-20260126151252-24679a2c2a61 h1:ZotbWXLzG4pArTCFaVAme9EW7/it0f2AdYBO2omYiCQ=
 github.com/gethinode/hinode/component-library v0.0.0-20260126151252-24679a2c2a61/go.mod h1:Y/gFEO2qzmZzvOxa+t5R3mKInVQ0tKHezByPLXiv5sA=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2 h1:v1aHhbLLwe/05zRHnx9qGqh6b3toDzcLzuv61rWAoGU=
@@ -8,3 +6,5 @@ github.com/gethinode/mod-fontawesome/v3 v3.1.3 h1:xlwmdgulIV/IMj5I1/fH4tPM1/AU0O
 github.com/gethinode/mod-fontawesome/v3 v3.1.3/go.mod h1:+E6jSVNv7h6oXw4Wm1XRq8HBEB2WrvxCPkp6u4vY5xo=
 github.com/gethinode/mod-utils/v4 v4.12.0 h1:5sSfYIxZCeQbXLoZdS//rl6thwLwtXuvM0ujaWKyPmc=
 github.com/gethinode/mod-utils/v4 v4.12.0/go.mod h1:bYmvRdAo4ICy5MpSGafDvO4p5bTDpsDKFCPL3bH0mN4=
+github.com/twbs/icons v1.13.1 h1:6bmNXvoeIbvjFWjfbjXg5JGbelLD1haIsMaEIzE9UZI=
+github.com/twbs/icons v1.13.1/go.mod h1:GnRlymgVWp5iVJCMa0Me5b6tFyGpVc2bSxPMRGIJmyA=

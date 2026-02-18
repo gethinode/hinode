@@ -19,7 +19,7 @@ content_blocks:
     links:
       - title: À propos
         url: "/fr/a-propos/"
-        icon: fas chevron-right
+        icon: chevron-right
     orientation: horizontal
     justify: center
 
