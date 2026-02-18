@@ -96,27 +96,27 @@
     {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
 
     {{ if $entry.Params.button }}
-        {{ partial "assets/button.html" (dict 
+        {{ partial "assets/button.html" (dict
             "title"       $title
-            "icon"        $entry.Pre
+            "icon"        (string $entry.Pre)
             "href"        $menuURL
             "button-size" "sm"
         )}}
     {{ else }}
-        {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }} 
-            class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $args.class }} {{ . }}{{ end }}" 
+        {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }}
+            class="{{ $anchorClass }}{{ if $isActive }} active{{ end }}{{ with $args.class }} {{ . }}{{ end }}"
             {{ if $isIcon }}aria-label="{{ $title }}"{{ end }}
-            data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }} 
+            data-nav="main" data-nav-main="{{ $mainNav }}"{{ with $childNav }} data-nav-child="{{ . }}"{{ end }}
             {{ if $menuURL }} href="{{ $menuURL }}{{ $params | safeHTML }}"{{ with $externalHref }} {{ . | safeHTML }}{{ end }}{{ end }}
             {{ $button | safeHTML }}
             {{ with $args.id }}id="{{ . }}"{{ end }}
             >
-            
+
             {{- with $entry.Pre }}
                 {{ if hasPrefix . "<i" }}
                     {{ . | safeHTML }}
                 {{ else }}
-                    {{ partial "assets/icon.html" (dict "icon" . "class" "fa-fw my-auto" "spacing" false) }}
+                    {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw my-auto" "spacing" false) }}
                 {{ end }}
             {{ end -}}
             <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-{{ . }}-none {{ end }}">

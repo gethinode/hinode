@@ -123,35 +123,37 @@
                 {{- end -}}
 
                 {{- /* Sort root pages first using Hugo's page collection methods */ -}}
-                {{- if eq $sortField "title" -}}
-                    {{- $rootPages = $rootPages.ByTitle -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "date" -}}
-                    {{- $rootPages = $rootPages.ByDate -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "weight" -}}
-                    {{- $rootPages = $rootPages.ByWeight -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "linkTitle" -}}
-                    {{- $rootPages = $rootPages.ByLinkTitle -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "publishDate" -}}
-                    {{- $rootPages = $rootPages.ByPublishDate -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "lastmod" -}}
-                    {{- $rootPages = $rootPages.ByLastmod -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "expiryDate" -}}
-                    {{- $rootPages = $rootPages.ByExpiryDate -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "length" -}}
-                    {{- $rootPages = $rootPages.ByLength -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- else -}}
-                    {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
-                    {{- $rootPages = $rootPages.ByParam $sortField -}}
-                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
-                {{- end -}}
+                {{ if $rootPages }}
+                    {{- if eq $sortField "title" -}}
+                        {{- $rootPages = $rootPages.ByTitle -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "date" -}}
+                        {{- $rootPages = $rootPages.ByDate -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "weight" -}}
+                        {{- $rootPages = $rootPages.ByWeight -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "linkTitle" -}}
+                        {{- $rootPages = $rootPages.ByLinkTitle -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "publishDate" -}}
+                        {{- $rootPages = $rootPages.ByPublishDate -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "lastmod" -}}
+                        {{- $rootPages = $rootPages.ByLastmod -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "expiryDate" -}}
+                        {{- $rootPages = $rootPages.ByExpiryDate -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "length" -}}
+                        {{- $rootPages = $rootPages.ByLength -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- else -}}
+                        {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                        {{- $rootPages = $rootPages.ByParam $sortField -}}
+                        {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                    {{- end -}}
+                {{ end }}
 
                 {{- /* Process depth-first (pre-order): use a stack to traverse */ -}}
                 {{- $result := slice -}}
@@ -236,36 +238,38 @@
                     {{- $menu = $menu | append $menuEntry -}}
                 {{- end -}}
             {{ else }}
-                {{- /* Use Hugo's page collection methods for regular sorting */ -}}
-                {{- if eq $sortField "title" -}}
-                    {{- $pages = $pages.ByTitle -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "date" -}}
-                    {{- $pages = $pages.ByDate -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "weight" -}}
-                    {{- $pages = $pages.ByWeight -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "linkTitle" -}}
-                    {{- $pages = $pages.ByLinkTitle -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "publishDate" -}}
-                    {{- $pages = $pages.ByPublishDate -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "lastmod" -}}
-                    {{- $pages = $pages.ByLastmod -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "expiryDate" -}}
-                    {{- $pages = $pages.ByExpiryDate -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else if eq $sortField "length" -}}
-                    {{- $pages = $pages.ByLength -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- else -}}
-                    {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
-                    {{- $pages = $pages.ByParam $sortField -}}
-                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
-                {{- end -}}
+                {{ if $pages }}
+                    {{- /* Use Hugo's page collection methods for regular sorting */ -}}
+                    {{- if eq $sortField "title" -}}
+                        {{- $pages = $pages.ByTitle -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "date" -}}
+                        {{- $pages = $pages.ByDate -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "weight" -}}
+                        {{- $pages = $pages.ByWeight -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "linkTitle" -}}
+                        {{- $pages = $pages.ByLinkTitle -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "publishDate" -}}
+                        {{- $pages = $pages.ByPublishDate -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "lastmod" -}}
+                        {{- $pages = $pages.ByLastmod -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "expiryDate" -}}
+                        {{- $pages = $pages.ByExpiryDate -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else if eq $sortField "length" -}}
+                        {{- $pages = $pages.ByLength -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- else -}}
+                        {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                        {{- $pages = $pages.ByParam $sortField -}}
+                        {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                    {{- end -}}
+                {{ end }}
                 {{- /* For non-grouped sorts, use pages directly as menu */ -}}
                 {{- $menu = $pages | default slice -}}
             {{ end }}
