@@ -34,6 +34,7 @@
 {{ end }}
 {{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
+{{- $externalLink := site.Params.icons.externalLink | default "fas up-right-from-square" -}}
 {{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
 {{- $menuURL := "" -}}
 {{ if or (strings.HasPrefix $entry.PageRef "http") (strings.HasPrefix $entry.URL "http") }}
@@ -57,7 +58,7 @@
 
 {{- if $isExternal }}
     {{- if $tab }}{{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer nofollow\"" }}{{ end -}}
-    {{- if $cue }}{{ $suffix = partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs my-auto") }}{{ end -}}
+    {{- if $cue }}{{ $suffix = partial "assets/icon.html" (dict "icon" $externalLink "class" "fa-2xs my-auto") }}{{ end -}}
 {{ else if $menuURL }}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url.Path "page" $page) }}
     {{- if not $ref -}}
@@ -115,7 +116,7 @@
                 {{ if hasPrefix . "<i" }}
                     {{ . | safeHTML }}
                 {{ else }}
-                    {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fw my-auto" .) "spacing" false )}}
+                    {{ partial "assets/icon.html" (dict "icon" . "class" "fa-fw my-auto" "spacing" false) }}
                 {{ end }}
             {{ end -}}
             <span class="{{ if $isActive }}active{{ end }} {{ with $args.breakpoint }}d-{{ . }}-none {{ end }}">

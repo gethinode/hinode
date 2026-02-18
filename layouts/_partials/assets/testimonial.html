@@ -74,7 +74,7 @@
                         "href"    .link
                         "title"   (T "testimonialCase")
                         "class"   "btn-testimonial"
-                        "icon"    "fas chevron-right"
+                        "icon"    (site.Params.icons.testimonialNext | default "fas chevron-right")
                         "outline" true
                     ) }}
                 {{ end }}
@@ -125,6 +125,7 @@
 
 {{/* Initialize global variables */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $testimonialQuote := site.Params.icons.testimonialQuote | default "fas quote-right" -}}
 
 {{/* Initialize local variables */}}
 {{- $link := "" -}}
@@ -168,7 +169,7 @@
                 {{ partial "inline/testimonial-card.html" (merge $params (dict "class" "col-8 px-0 mb-5")) }}
 
                 <div class="testimonial-icon col-2 ps-0 p-{{ $args.padding }} text-end">
-                    {{ partial "assets/icon.html" (dict "icon" "fas quote-right fa-2x" "spacing" false) }}
+                    {{ partial "assets/icon.html" (dict "icon" $testimonialQuote "class" "fa-2x" "spacing" false) }}
                 </div>
             </div>
         {{ else }}

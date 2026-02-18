@@ -35,21 +35,31 @@
                 {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link") (T "copiedToClipboard"))) -}}
             {{- end -}}
             {{ partial "assets/button.html" (dict 
-                "toast-id"  $target
-                "clipboard" $clipboard
-                "href"      $url
-                "icon"      (printf "%s fa-fw" $item.icon)
-                "class"     "btn-social p-0"
-                "label"     (T "shareLink" $item.name)
-                "spacing"   false
+                "toast-id"   $target
+                "clipboard"  $clipboard
+                "href"       $url
+                "icon"       $item.icon
+                "icon-class" "fa-fw"
+                "class"      "btn-social p-0"
+                "label"      (T "shareLink" $item.name)
+                "spacing"    false
             ) }}
         {{- end -}}
         {{ if .Site.Params.sharing.webshare }}
             {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
-            {{ $icon := index .Site.Params.sharing "webshare-icon" | default "fas share-nodes"}}
+            {{- with index site.Params.sharing "webshare-icon" -}}
+                {{- partial "utilities/LogWarn.html" (dict
+                    "partial" "page/sharing.html"
+                    "warnid"  "warn-deprecated-icons"
+                    "msg"     "Deprecated icon params detected; migrate to the [icons] section in params.toml"
+                    "details" (slice "Replace 'sharing.webshare-icon' with 'icons.sharingWebshare'")
+                ) -}}
+            {{- end -}}
+            {{- $icon := or site.Params.icons.sharingWebshare (index site.Params.sharing "webshare-icon") | default "fas share-nodes" -}}
             {{ partial "assets/button.html" (dict
                 "href"       ""
-                "icon"       (printf "%s fa-fw" $icon)
+                "icon"       $icon
+                "icon-class" "fa-fw"
                 "class"      "btn-social p-0"
                 "attributes" $attr
                 "label"      (T "shareLink" (T "shareSystem"))
@@ -67,9 +77,11 @@
                 {{ end }}
             {{ end }}
             {{ $attr := dict "download" (path.Base .) }}
-            {{ partial "assets/button.html" (dict 
+            {{- $downloadIcon := site.Params.icons.sharingDownload | default "fas download" -}}
+            {{ partial "assets/button.html" (dict
                 "href"       .
-                "icon"       "fas download fa-fw"
+                "icon"       $downloadIcon
+                "icon-class" "fa-fw"
                 "label"      $label
                 "class"      "btn-social p-0"
                 "attributes" $attr

@@ -12,11 +12,12 @@
     <span class="text-body-secondary">
         {{- range $index, $item := $links -}}
             {{ partial "assets/button.html" (dict 
-                "href"      $item.url
-                "icon"      (cond $item.icon (printf "%s fa-fw" $item.icon) "")
-                "class"     "btn-social p-0"
-                "label"     $item.title
-                "spacing"   false
+                "href"       $item.url
+                "icon"       ($item.icon | default "")
+                "icon-class" "fa-fw"
+                "class"      "btn-social p-0"
+                "label"      $item.title
+                "spacing"    false
             ) }}
         {{- end -}}
     </span>
@@ -94,6 +95,7 @@
 
 {{/* Initialize global variables */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $cardReadMore := site.Params.icons.cardReadMore | default "fas chevron-right" -}}
 
 {{/* Initialize local arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "card" "args" . "group" "partial") }}
@@ -255,7 +257,7 @@
                             <div class="d-flex align-items-end">
                                 {{ partial "assets/button.html" (dict 
                                     "title"       $label
-                                    "icon"        "fas chevron-right"
+                                    "icon"        $cardReadMore
                                     "href"        $href
                                     "outline"     true
                                     "button-size" "sm"

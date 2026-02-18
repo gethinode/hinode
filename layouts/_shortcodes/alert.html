@@ -23,15 +23,16 @@
 {{/* Initialize arguments and default values */}}
 {{ $color := $args.color -}}
 {{ $icon := $args.icon }}
+{{- $admonition := site.Params.icons.admonition | default dict -}}
 {{ if eq $args.alertType "danger" }}
-    {{ $icon = "fas triangle-exclamation" }}
+    {{ $icon = ($admonition.warning | default "fas triangle-exclamation") }}
     {{ $color = "danger" }}
 {{ else if eq $args.alertType "info" }}
-    {{ $icon = "fa lightbulb" }}
+    {{ $icon = ($admonition.info | default "fas circle-info") }}
     {{ $color = "info" }}
 {{ end }}
 {{ with $icon }}
-    {{ $icon = partial "assets/icon.html" (dict "icon" (printf "%s fa-2x fa-fw" .)) }}
+    {{ $icon = partial "assets/icon.html" (dict "icon" . "class" "fa-2x fa-fw") }}
 {{ end }}
 
 {{ $body := trim .Inner " \r\n" -}}
