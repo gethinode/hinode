@@ -19,11 +19,6 @@
 {{- $page := .page -}}
 {{- $core := .core | default true -}}
 
-{{ if and (eq site.Params.modules.fontawesome.mode "webfonts") (ne $transpiler "dartsass") }}
-    {{ errorf `Font Awesome webfonts v7 are not compatible with %q, please set transpiler to "dartsass" or inline to "true"` $transpiler  }}
-    {{ $error = true }}
-{{ end }}
-
 {{- $modules := "" -}}
 {{ $config := page.Scratch.Get "modules" }}
 {{ if not $config }}

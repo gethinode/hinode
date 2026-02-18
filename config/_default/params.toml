@@ -19,7 +19,8 @@
         cue = false
         tab = false
     [main.build]
-        transpiler = "libsass"
+        transpiler = "dartsass"
+        silenceDeprecations = true
     [main.colorMode]
         enabled = true
         modes = ["light", "dark"]
