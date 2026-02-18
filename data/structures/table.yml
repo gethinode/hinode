@@ -27,6 +27,8 @@ arguments:
   searchable:
     release: v0.24.13
   wrap:
+  wrapper:
+    release: v2.0.0
   # deprecated arguments
   paging:
     type: bool

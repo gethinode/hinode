@@ -2,7 +2,7 @@
 _schema: default
 title: List
 description: Use the list content block to show a list of articles.
-icon: fas list
+icon: list
 modules: ["simple-datatables"]
 ---
 

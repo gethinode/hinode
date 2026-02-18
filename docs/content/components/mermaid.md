@@ -4,7 +4,7 @@ title: Mermaid
 date: 2025-06-15
 description: Use the mermaid shortcode to add diagrams and charts powered by Mermaid.
 layout: docs
-icon: fas diagram-project
+icon: diagram-project
 tags: component
 modules: ["mermaid"]
 ---

@@ -1,4 +1,6 @@
 {{/* Render previous / next navigation */}}
+{{- $pageNavPrev := site.Params.icons.pageNavPrev | default "fas arrow-left" -}}
+{{- $pageNavNext := site.Params.icons.pageNavNext | default "fas arrow-right" -}}
 {{/* Read the section's configuration to get the reverse setting */}}
 {{- $sectionPage := .CurrentSection -}}
 {{- $reverseParam := false -}}
@@ -25,7 +27,7 @@
         {{- with $prevPage -}}
             {{- if .OutputFormats.Get "html" -}}
                 <a class="next" href="{{ .RelPermalink }}">
-                    {{- partial "assets/icon.html" (dict "icon" "fas arrow-left" "spacing" false) }}&nbsp;{{ .LinkTitle }}
+                    {{- partial "assets/icon.html" (dict "icon" $pageNavPrev "spacing" false) }}&nbsp;{{ .LinkTitle }}
                 </a>
             {{- end -}}
         {{- end -}}
@@ -34,7 +36,7 @@
         {{- with $nextPage -}}
             {{- if .OutputFormats.Get "html" -}}
                 <a class="previous" href="{{ .RelPermalink }}">
-                    {{ .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "icon" "fas arrow-right" "spacing" false) }}
+                    {{ .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "icon" $pageNavNext "spacing" false) }}
                 </a>
             {{- end -}}
         {{- end -}}

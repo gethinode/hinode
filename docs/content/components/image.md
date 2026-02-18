@@ -4,7 +4,7 @@ title: Image
 date: 2024-08-17
 description: Use the image shortcode to display a responsive image with an optional aspect ratio.
 layout: docs
-icon: fas image
+icon: image
 tags: component
 ---
 

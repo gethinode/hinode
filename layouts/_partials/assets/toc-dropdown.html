@@ -24,6 +24,8 @@
 {{- $endLevel := or (.Site.Params.navigation.endLevel | int) 3 }}
 {{- $minNumHeadings := or (.Site.Params.navigation.minNumHeadings | int) 2 }}
 
+{{- $tocSort := site.Params.icons.tocSort | default "fas sort" -}}
+
 {{/* Main code */}}
 {{ if not $error }}
     {{ $headings := partial "assets/toc-headings.html" $args.page }}
@@ -35,7 +37,7 @@
                 "color"       "secondary" 
                 "outline"     "true" 
                 "class"       "toc-button" 
-                "icon"        "fas sort"
+                "icon"        $tocSort
                 "justify"     "between"
                 "collapse-id" "toc-collapse"
                 "order"       "last"

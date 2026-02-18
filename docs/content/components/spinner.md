@@ -4,7 +4,7 @@ title: Spinner
 date: 2023-08-14
 description: Use the spinner shortcode to indicate the loading state of a component or page.
 layout: docs
-icon: fas spinner
+icon: spinner
 tags: component
 ---
 

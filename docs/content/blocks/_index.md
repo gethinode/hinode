@@ -11,9 +11,9 @@ content_blocks:
         allow you to quickly assemble your content pages using visual elements.
         Powered by [Bookshop](https://github.com/CloudCannon/bookshop), these
         blocks are ready for visual editing using [CloudCannon](https://cloudcannon.com/).
-        Click on an item for more details about a block.
+        Click on an item for more details.
       align: start
-      width: 8
+    width: 8
     breadcrumb: true
 
   - _bookshop_name: articles

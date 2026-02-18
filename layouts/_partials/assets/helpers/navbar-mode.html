@@ -1,8 +1,24 @@
 {{- $id := .id | default "navbar-mode" -}}
 {{- $toggle := .toggle | default false -}}
 {{- $breakpoint := .breakpoint -}}
-{{- $iconLight := site.Params.main.colorMode.iconLight | default "fas sun" -}}
-{{- $iconDark := site.Params.main.colorMode.iconDark | default "fas moon" -}}
+{{- with site.Params.main.colorMode.iconLight -}}
+    {{- partial "utilities/LogWarn.html" (dict
+        "partial" "assets/helpers/navbar-mode.html"
+        "warnid"  "warn-deprecated-icons"
+        "msg"     "Deprecated icon params detected; migrate to the [icons] section in params.toml"
+        "details" (slice "Replace 'main.colorMode.iconLight' with 'icons.colorModeLight'")
+    ) -}}
+{{- end -}}
+{{- with site.Params.main.colorMode.iconDark -}}
+    {{- partial "utilities/LogWarn.html" (dict
+        "partial" "assets/helpers/navbar-mode.html"
+        "warnid"  "warn-deprecated-icons"
+        "msg"     "Deprecated icon params detected; migrate to the [icons] section in params.toml"
+        "details" (slice "Replace 'main.colorMode.iconDark' with 'icons.colorModeDark'")
+    ) -}}
+{{- end -}}
+{{- $iconLight := or site.Params.icons.colorModeLight site.Params.main.colorMode.iconLight | default "fas sun" -}}
+{{- $iconDark := or site.Params.icons.colorModeDark site.Params.main.colorMode.iconDark | default "fas moon" -}}
 {{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
 
 <li class="nav-link navbar-fs-{{ $fs }} navbar-{{ $breakpoint }}-fs d-flex mode-{{ cond $toggle "toggle" "switch" }} align-items-center" id="{{ $id }}">
@@ -10,16 +26,16 @@
     <label class="label" for="{{ $id }}-checkbox">
         {{ if $toggle }}
             <div class="mode-item d-none-main-dark">
-                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconLight) "spacing" false) }}
+                {{- partial "assets/icon.html" (dict "icon" $iconLight "class" "fa-fw" "spacing" false) }}
                 <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
             </div>
             <div class="mode-item d-none-main-light">
-                {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconDark) "spacing" false) }}
+                {{- partial "assets/icon.html" (dict "icon" $iconDark "class" "fa-fw" "spacing" false) }}
                 <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
             </div>
         {{ else }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconLight) "spacing" false) }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" $iconDark) "spacing" false) }}
+            {{- partial "assets/icon.html" (dict "icon" $iconLight "class" "fa-fw" "spacing" false) }}
+            {{- partial "assets/icon.html" (dict "icon" $iconDark "class" "fa-fw" "spacing" false) }}
             <div class="ball"></div>
         {{ end }}
     </label>

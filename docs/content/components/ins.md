@@ -4,7 +4,7 @@ title: Ins
 date: 2024-12-13
 description: Use the ins shortcode to underline text.
 layout: docs
-icon: fas underline
+icon: underline
 tags: component
 ---
 

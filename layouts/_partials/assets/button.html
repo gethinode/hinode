@@ -52,6 +52,7 @@
 {{ with $args.badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
 {{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
+{{- $externalLink := site.Params.icons.externalLink | default "fas up-right-from-square" -}}
 {{- $isExternal := false }}
 {{ if in (slice "http" "https") ((urls.Parse (absURL $href)).Scheme) }}
     {{ $isExternal = ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
@@ -66,7 +67,7 @@
     {{- end -}}
 
     {{- if and $title $cue -}}
-        {{ $suffix := partial "assets/icon.html" (dict "icon" "fas up-right-from-square fa-2xs") }}
+        {{ $suffix := partial "assets/icon.html" (dict "icon" $externalLink "class" "fa-2xs") }}
         {{- $title = printf "%s&nbsp;%s" $title $suffix | safeHTML -}}
     {{- end -}}
 {{- end -}}
@@ -103,7 +104,7 @@
             <span class="my-auto">{{ $title | safeHTML }}</span>
             {{- with $args.icon }}
                 <span class="align-self-center{{ if $title }}{{ if eq $args.order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">
-                    {{ partial "assets/icon.html" (dict "icon" $args.icon "spacing" false) }}
+                    {{ partial "assets/icon.html" (dict "icon" $args.icon "class" ($args.iconClass | default "") "spacing" false) }}
                 </span>
             {{ end }}
         </span>

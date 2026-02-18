@@ -30,7 +30,16 @@
 {{- $padding := partial "utilities/GetPadding.html" (dict "section" "navigation") -}}
 {{- $search := partial "utilities/GetSearchConfig.html" (dict "search" $args.search) -}}
 {{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
-{{- $langIcon := site.Params.navigation.language.icon | default "fas globe" -}}
+{{- $navbarOverflow := site.Params.icons.navbarOverflow | default "fas ellipsis" -}}
+{{- with site.Params.navigation.language.icon -}}
+    {{- partial "utilities/LogWarn.html" (dict
+        "partial" "assets/navbar.html"
+        "warnid"  "warn-deprecated-icons"
+        "msg"     "Deprecated icon params detected; migrate to the [icons] section in params.toml"
+        "details" (slice "Replace 'navigation.language.icon' with 'icons.navbarLanguage'")
+    ) -}}
+{{- end -}}
+{{- $langIcon := or site.Params.icons.navbarLanguage site.Params.navigation.language.icon | default "fas globe" -}}
 
 {{/* Initialize local arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -136,12 +145,12 @@
                         {{- if $sidebar -}}
                             <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvas-sidebar" aria-controls="offcanvas-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+                                {{- partial "assets/icon.html" (dict "icon" $navbarOverflow "class" "fa-fw" "spacing" false) -}}
                             </button>
                         {{- else if eq $align "center" -}}
                             {{/* Insert invisible sidebar toggler to center logo correctly on smaller screens */}}
                             <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
-                                {{- partial "assets/icon.html" (dict "icon" "fas ellipsis fa-fw" "spacing" false) -}}
+                                {{- partial "assets/icon.html" (dict "icon" $navbarOverflow "class" "fa-fw" "spacing" false) -}}
                             </button>
                         {{- end -}}
                     </div>

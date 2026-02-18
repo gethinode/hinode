@@ -8,7 +8,7 @@ arguments:
   outline:
     default: true
   icon:
-    default: fas download
+    default: download
   order:
     default: last
   button-size:

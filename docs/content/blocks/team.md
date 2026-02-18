@@ -2,7 +2,7 @@
 _schema: default
 title: Team
 description: Use the team content block to show a group of team members.
-icon: fas grip
+icon: grip
 ---
 
 ## Overview

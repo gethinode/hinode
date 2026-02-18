@@ -26,10 +26,10 @@
     {{ $args.class }}"
     >
         {{ if $args.iconRounded }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "fas circle fa-stack-2x") "spacing" false) -}}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $args.icon) "spacing" false) -}}
+            {{- partial "assets/icon.html" (dict "icon" "fas circle" "class" "fa-stack-2x" "spacing" false) -}}
+            {{- partial "assets/icon.html" (dict "icon" $args.icon "class" "fa-stack-1x fa-inverse" "spacing" false) -}}
         {{ else }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s fa-fw" $args.icon $args.iconStyle) "spacing" false) -}}
+            {{- partial "assets/icon.html" (dict "icon" $args.icon "class" (trim (printf "%s fa-fw" $args.iconStyle) " ") "spacing" false) -}}
         {{ end }}
     </div>
 {{ end }}

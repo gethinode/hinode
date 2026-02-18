@@ -19,14 +19,53 @@
         cue = false
         tab = false
     [main.build]
-        transpiler = "libsass"
+        transpiler = "dartsass"
+        silenceDeprecations = true
     [main.colorMode]
         enabled = true
         modes = ["light", "dark"]
         toggle = false
-        iconLight = "fas sun"
-        iconDark = "fas moon"
 # toml-docs-end main
+
+# toml-docs-start icons
+[icons]
+    # Color mode toggle
+    colorModeLight       = "fas sun"
+    colorModeDark        = "fas moon"
+    # Navbar
+    navbarLanguage       = "fas globe"
+    navbarOverflow       = "fas ellipsis"
+    navbarVersionCheck   = "fas check"
+    # Pagination
+    paginationFirst      = "fas angles-left"
+    paginationPrev       = "fas angle-left"
+    paginationNext       = "fas angle-right"
+    paginationLast       = "fas angles-right"
+    # Other navigation
+    breadcrumbBack       = "fas angle-left"
+    pageNavPrev          = "fas arrow-left"
+    pageNavNext          = "fas arrow-right"
+    # Content
+    tocSort              = "fas sort"
+    cardReadMore         = "fas chevron-right"
+    externalLink         = "fas up-right-from-square"
+    testimonialNext      = "fas chevron-right"
+    testimonialQuote     = "fas quote-right"
+    headingAnchor        = "fas link"
+    notFoundPage         = "fas link-slash"
+    sharingWebshare      = "fas share-nodes"
+    sharingDownload      = "fas download"
+    [icons.admonition]
+        note       = "fas circle-info"
+        info       = "fas circle-info"
+        tip        = "fa lightbulb"
+        important  = "fas exclamation"
+        warning    = "fas triangle-exclamation"
+        caution    = "fa hand"
+    [icons.release]
+        deprecated = "fas trash-can"
+        feature    = "fas rocket"
+# toml-docs-end icons
 
 # toml-docs-start images
 [images]
@@ -107,12 +146,9 @@
     [navigation.padding]
         x = 4
         y = 4
-    [navigation.language]
-        icon = "fas globe"
     [navigation.search]
         enabled = true
         modal = true
-        icon = "fas magnifying-glass"
 # toml-docs-end navigation
 
 # toml-docs-start messages

@@ -2,7 +2,7 @@
 _schema: default
 title: CTA
 description: Use the CTA content block to display an action link with an optional contact.
-icon: fas address-card
+icon: address-card
 ---
 
 ## Overview
@@ -22,7 +22,7 @@ The `cta` content block renders a call to action message with a button. By defau
   links:
     - title: Get in touch
       url: '#!'
-      icon: fas chevron-right
+      icon: chevron-right
 ```
 
 {{< /example-bookshop >}}
@@ -46,7 +46,7 @@ Set the `heading` attribute to override the default message title and content.
   links:
     - title: Get in touch
       url: '#!'
-      icon: fas chevron-right
+      icon: chevron-right
 ```
 
 {{< /example-bookshop >}}
@@ -70,7 +70,7 @@ Provide a `contact` person to include the name and thumbnail of a contact person
   links:
     - title: Get in touch
       url: '#!'
-      icon: fas chevron-right
+      icon: chevron-right
 ```
 
 {{< /example-bookshop >}}

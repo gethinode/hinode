@@ -4,7 +4,7 @@ title: Button Group
 date: 2023-12-29
 description: Use the button-group shortcode to display a group of buttons.
 layout: docs
-icon: fas ellipsis
+icon: ellipsis
 tags: component
 ---
 

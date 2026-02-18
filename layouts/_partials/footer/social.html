@@ -20,7 +20,7 @@
                             {{ if hasPrefix .Pre "<i" }}
                                 {{ .Pre | safeHTML }}
                             {{ else }}
-                                {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-2x" .Pre) )}}
+                                {{ partial "assets/icon.html" (dict "icon" (string .Pre) "class" "fa-2x") }}
                             {{ end }}
                         </a>
                     {{ end -}}

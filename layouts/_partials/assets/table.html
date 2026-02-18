@@ -59,17 +59,20 @@
     {{ $regular := partial "inline/table.html" (merge $params (dict "wrap" false)) }}
     {{ $wrapped := "" }}
     {{ if $args.wrap }}{{ $wrapped = partial "inline/table.html" (merge $params (dict "wrap" true)) }}{{ end }}
+    {{ $wrapper := $args.wrapper | default "" }}
 
     {{ if eq $args.breakpoint "none" }}
         {{ $regular | safeHTML }}
-        {{ with $wrapped }}{{ . | safeHTML }}{{ end }}
+        {{ with $wrapped }}
+            {{ if $wrapper }}<div class="{{ $wrapper }}">{{ . | safeHTML }}</div>{{ else }}{{ . | safeHTML }}{{ end }}
+        {{ end }}
     {{ else }}
-        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ if $wrapped }}d-none d-{{ $breakpoint.current }}-block{{ end }}">
+        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ if $wrapped }}d-none d-{{ $breakpoint.current }}-block{{ end }} {{ $wrapper }}">
         {{ $regular | safeHTML }}
         </div>
 
         {{ with $wrapped }}
-            <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} d-{{ $breakpoint.current }}-none">
+            <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} d-{{ $breakpoint.current }}-none {{ $wrapper }}">
             {{ . | safeHTML }}
             </div>
         {{ end }}

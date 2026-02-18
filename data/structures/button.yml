@@ -24,6 +24,8 @@ arguments:
     release: v1.0.0
   placement:
   icon:
+  icon-class:
+    release: v2.0.0
   order:
   justify:
   toast-id:

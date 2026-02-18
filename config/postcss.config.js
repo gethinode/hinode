@@ -14,7 +14,7 @@ const purgecss = purgeCSSPlugin({
     const els = JSON.parse(content).htmlElements
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
   },
-  dynamicAttributes: ['data-bs-theme', 'data-bs-theme-animate'],
+  dynamicAttributes: ['data-bs-theme', 'data-bs-main-theme', 'data-bs-theme-animate', 'role'],
   fontFace: false,
   safelist: {
     standard: [
@@ -102,6 +102,9 @@ const purgecss = purgeCSSPlugin({
 
       // Bootstrap responsive tables
       /table-responsive/,  // All table-responsive-* variants and attribute selectors
+
+      // Color mode toggle - d-none-main-* classes plus [data-bs-main-theme="dark"] compound selectors
+      /d-none-main/,
 
       // Bootstrap transitions and utilities that get added via JS
       /fade/,
