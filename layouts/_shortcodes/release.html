@@ -22,7 +22,7 @@
 {{- $state := or $args.releaseState $args.state -}}
 {{- $color := cond (eq $state "deprecated") "secondary" "primary" -}}
 {{- $linkType := or $args.linkType $args.type -}}
-{{- $release := site.Params.icons.release | default dict -}}
+{{- $release := partial "utilities/GetThemeIcon.html" (dict "id" "release" "default" dict) -}}
 
 {{- $icon := "" -}}
 {{- $tooltip := "" -}}

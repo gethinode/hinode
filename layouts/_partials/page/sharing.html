@@ -55,7 +55,7 @@
                     "details" (slice "Replace 'sharing.webshare-icon' with 'icons.sharingWebshare'")
                 ) -}}
             {{- end -}}
-            {{- $icon := or site.Params.icons.sharingWebshare (index site.Params.sharing "webshare-icon") | default "fas share-nodes" -}}
+            {{- $icon := partial "utilities/GetThemeIcon.html" (dict "id" "sharingWebshare" "alias" (index site.Params.sharing "webshare-icon") "default" "fas share-nodes") -}}
             {{ partial "assets/button.html" (dict
                 "href"       ""
                 "icon"       $icon
@@ -77,7 +77,7 @@
                 {{ end }}
             {{ end }}
             {{ $attr := dict "download" (path.Base .) }}
-            {{- $downloadIcon := site.Params.icons.sharingDownload | default "fas download" -}}
+            {{- $downloadIcon := partial "utilities/GetThemeIcon.html" (dict "id" "downloadIcon" "default" "fas download") -}}
             {{ partial "assets/button.html" (dict
                 "href"       .
                 "icon"       $downloadIcon

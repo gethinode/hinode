@@ -31,7 +31,7 @@
 
 {{/* Initialize local arguments */}}
 {{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
-{{- $breadcrumbBack := site.Params.icons.breadcrumbBack | default "fas angle-left" -}}
+{{- $breadcrumbBack := partial "utilities/GetThemeIcon.html" (dict "id" "breadcrumbBack" "default" "fas angle-left") -}}
 
 {{/* Include breadcrumb items that have both a title and address */}}
 {{ $items := slice }}

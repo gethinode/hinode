@@ -30,7 +30,10 @@
 {{- $padding := partial "utilities/GetPadding.html" (dict "section" "navigation") -}}
 {{- $search := partial "utilities/GetSearchConfig.html" (dict "search" $args.search) -}}
 {{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
-{{- $navbarOverflow := site.Params.icons.navbarOverflow | default "fas ellipsis" -}}
+{{- $navbarOverflow := "fas ellipsis" -}}
+{{- $langIcon := "fas globe" -}}
+{{- $navbarOverflow := partial "utilities/GetThemeIcon.html" (dict "id" "navbarOverflow" "default" "fas ellipsis") -}}
+{{- $navbarLanguage := partial "utilities/GetThemeIcon.html" (dict "id" "navbarLanguage" "default" "fas globe") -}}
 {{- with site.Params.navigation.language.icon -}}
     {{- partial "utilities/LogWarn.html" (dict
         "partial" "assets/navbar.html"
@@ -39,7 +42,6 @@
         "details" (slice "Replace 'navigation.language.icon' with 'icons.navbarLanguage'")
     ) -}}
 {{- end -}}
-{{- $langIcon := or site.Params.icons.navbarLanguage site.Params.navigation.language.icon | default "fas globe" -}}
 
 {{/* Initialize local arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}

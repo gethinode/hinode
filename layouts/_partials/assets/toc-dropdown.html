@@ -23,8 +23,7 @@
 {{- $startLevel := or (.Site.Params.navigation.startLevel | int) 2 }}
 {{- $endLevel := or (.Site.Params.navigation.endLevel | int) 3 }}
 {{- $minNumHeadings := or (.Site.Params.navigation.minNumHeadings | int) 2 }}
-
-{{- $tocSort := site.Params.icons.tocSort | default "fas sort" -}}
+{{- $tocSort := partial "utilities/GetThemeIcon.html" (dict "id" "tocSort" "default" "fas sort") -}}
 
 {{/* Main code */}}
 {{ if not $error }}
