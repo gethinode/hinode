@@ -23,7 +23,7 @@
 {{- $icon := partial "utilities/GetTargetPath.html" (dict "path" $args.icon "page" $args.page) -}}
 {{- $image := partial "utilities/GetTargetPath.html" (dict "path" $args.image "page" $args.page) -}}
 {{- $wrapper := $args.wrapper -}}
-{{- if $image }}{{ $wrapper = printf "img-wrap %s" (or $wrapper "mx-auto") }}{{ end -}}
+{{- if $image }}{{ $wrapper = printf "%s" (or $wrapper "img-wrap mx-auto") }}{{ end -}}
 {{- $class := $args.class -}}
 
 {{- if $icon -}}
