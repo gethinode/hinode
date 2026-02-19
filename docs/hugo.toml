@@ -24,22 +24,22 @@
   pageRef = "/blog/"
   weight = 10
 
-[[menus.sample]]
-  name = "Blocks"
-  pageRef = "/blocks/"
-  weight = 20
+# [[menus.sample]]
+#   name = "Blocks"
+#   pageRef = "/blocks/"
+#   weight = 20
 
-[[menus.sample]]
-  name = "Approach"
-  pageRef = "/blocks/approach/"
-  parent = "Blocks"
-  weight = 1
+# [[menus.sample]]
+#   name = "Approach"
+#   pageRef = "/blocks/approach/"
+#   parent = "Blocks"
+#   weight = 1
 
-[[menus.sample]]
-  name = "Releases"
-  pageRef = "/blocks/releases/"
-  parent = "Blocks"
-  weight = 2
+# [[menus.sample]]
+#   name = "Releases"
+#   pageRef = "/blocks/releases/"
+#   parent = "Blocks"
+#   weight = 2
 
 [[menus.services]]
   name = "Menu 1"
