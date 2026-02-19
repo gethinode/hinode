@@ -23,7 +23,7 @@
 {{/* Initialize arguments and default values */}}
 {{ $color := $args.color -}}
 {{ $icon := $args.icon }}
-{{- $admonition := site.Params.icons.admonition | default dict -}}
+{{- $admonition := partial "utilities/GetThemeIcon.html" (dict "id" "admonition" "default" dict) -}}
 {{ if eq $args.alertType "danger" }}
     {{ $icon = ($admonition.warning | default "fas triangle-exclamation") }}
     {{ $color = "danger" }}

@@ -6,7 +6,7 @@
 {{- $id := .id -}}
 {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
 {{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
-{{- $navbarVersionCheck := site.Params.icons.navbarVersionCheck | default "fas check" -}}
+{{- $navbarVersionCheck := partial "utilities/GetThemeIcon.html" (dict "id" "navbarVersionCheck" "default" "fas check") -}}
 
 <li class="nav-item dropdown {{ if $collapsed }}d-{{ $breakpoint }}-none{{ else }}d-none d-{{ $breakpoint }}-block{{ end }}">
     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">

@@ -1,7 +1,7 @@
 {{ $class := .Attributes.class }}
 {{ $text := chomp .Text }}
 {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
-{{- $headingAnchor := site.Params.icons.headingAnchor | default "fas link" -}}
+{{- $headingAnchor := partial "utilities/GetThemeIcon.html" (dict "id" "headingAnchor" "default" "fas link") -}}
 
 {{ if and site.Params.navigation.anchor $text }}
 <h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading {{ with $class }}{{ . }}{{ end }}">

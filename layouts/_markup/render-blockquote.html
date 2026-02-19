@@ -1,6 +1,6 @@
 {{/* Adapted from https://gohugo.io/render-hooks/blockquotes/#alerts */}}
 
-{{- $admonition := site.Params.icons.admonition | default dict -}}
+{{- $admonition := partial "utilities/GetThemeIcon.html" (dict "id" "admonition" "default" dict) -}}
 {{ $icons := dict
     "note"      ($admonition.note      | default "fas circle-info")
     "info"      ($admonition.info      | default "fas circle-info")

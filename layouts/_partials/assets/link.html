@@ -42,7 +42,7 @@
 {{- $rel := "" -}}
 {{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
-{{- $externalLink := site.Params.icons.externalLink | default "fas up-right-from-square" -}}
+{{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
 {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
 {{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $args.external -}}
 {{- $isSpecial := and $u.Scheme (not (in (slice "http" "https") $u.Scheme)) }}

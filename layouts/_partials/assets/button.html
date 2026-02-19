@@ -52,7 +52,8 @@
 {{ with $args.badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
 {{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
-{{- $externalLink := site.Params.icons.externalLink | default "fas up-right-from-square" -}}
+{{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
+
 {{- $isExternal := false }}
 {{ if in (slice "http" "https") ((urls.Parse (absURL $href)).Scheme) }}
     {{ $isExternal = ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}

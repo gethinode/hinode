@@ -1,6 +1,7 @@
 {{/* Render previous / next navigation */}}
-{{- $pageNavPrev := site.Params.icons.pageNavPrev | default "fas arrow-left" -}}
-{{- $pageNavNext := site.Params.icons.pageNavNext | default "fas arrow-right" -}}
+{{- $pageNavPrev := partial "utilities/GetThemeIcon.html" (dict "id" "pageNavPrev" "default" "fas arrow-left") -}}
+{{- $pageNavNext := partial "utilities/GetThemeIcon.html" (dict "id" "pageNavNext" "default" "fas arrow-right") -}}
+
 {{/* Read the section's configuration to get the reverse setting */}}
 {{- $sectionPage := .CurrentSection -}}
 {{- $reverseParam := false -}}

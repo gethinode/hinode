@@ -197,7 +197,7 @@
             {{- if and $pretty (not (hasSuffix $href "/" )) (not (strings.Contains $href "#")) -}}
                 {{- $href = printf "%s/" $href -}}
             {{- end -}}
-            <div class="mt-{{ $padding.y }} w-100">
+            <div class="mt-{{ $padding.y }} w-100 align-self-start">
                 {{ partial "assets/button.html" (dict 
                     "href"      $href
                     "title"     $args.hrefTitle

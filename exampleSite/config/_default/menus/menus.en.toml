@@ -3,14 +3,14 @@
 _merge = "deep"
 
 [[main]]
-  name = "Blocks"
-  pageRef = "/blocks/"
-  weight = 10
+#   name = "Blocks"
+#   pageRef = "/blocks/"
+#   weight = 10
 
-[[main]]
-  name = "Components"
-  pageRef = "/components/"
-  weight = 20
+# [[main]]
+#   name = "Components"
+#   pageRef = "/components/"
+#   weight = 20
 
 [[main]]
   name = "Blog"

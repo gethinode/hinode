@@ -34,6 +34,7 @@
 
 {{ define "_partials/inline/testimonial-inner.html" }}
     {{ $breakpoint := .breakpoint }}
+    {{- $testimonialNext := partial "utilities/GetThemeIcon.html" (dict "id" "testimonialNext" "default" "fas chevron-right") -}}
 
     <div class="d-flex flex-column {{ .class }} h-100 p-{{ .padding }}">
         {{ if or .logo .icon }}
@@ -74,7 +75,7 @@
                         "href"    .link
                         "title"   (T "testimonialCase")
                         "class"   "btn-testimonial"
-                        "icon"    (site.Params.icons.testimonialNext | default "fas chevron-right")
+                        "icon"    $testimonialNext
                         "outline" true
                     ) }}
                 {{ end }}
@@ -125,7 +126,7 @@
 
 {{/* Initialize global variables */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
-{{- $testimonialQuote := site.Params.icons.testimonialQuote | default "fas quote-right" -}}
+{{- $testimonialQuote := partial "utilities/GetThemeIcon.html" (dict "id" "testimonialQuote" "default" "fas quote-right") -}}
 
 {{/* Initialize local variables */}}
 {{- $link := "" -}}

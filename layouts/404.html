@@ -1,6 +1,6 @@
 {{ define "main" }}
     {{ $base := partial "utilities/GetStaticURL" (dict "url" "/") }}
-    {{- $notFoundPage := site.Params.icons.notFoundPage | default "fas link-slash" -}}
+    {{- $notFoundPage := partial "utilities/GetThemeIcon.html" (dict "id" "notFoundPage" "default" "fas link-slash") -}}
     <section class="container-fluid p-0 section-cover d-flex align-items-center">
         <div class="container-xxl my-auto h-100">
             <div class="col-12 col-sm-8 col-md-6 text-center mx-auto">

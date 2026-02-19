@@ -34,7 +34,7 @@
 {{ end }}
 {{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
 {{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
-{{- $externalLink := site.Params.icons.externalLink | default "fas up-right-from-square" -}}
+{{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
 {{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
 {{- $menuURL := "" -}}
 {{ if or (strings.HasPrefix $entry.PageRef "http") (strings.HasPrefix $entry.URL "http") }}

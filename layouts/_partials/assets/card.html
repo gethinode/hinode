@@ -95,7 +95,7 @@
 
 {{/* Initialize global variables */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
-{{- $cardReadMore := site.Params.icons.cardReadMore | default "fas chevron-right" -}}
+{{- $cardReadMore := partial "utilities/GetThemeIcon.html" (dict "id" "cardReadMore" "default" "fas chevron-right") -}}
 
 {{/* Initialize local arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "card" "args" . "group" "partial") }}
