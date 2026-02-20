@@ -60,7 +60,7 @@
                 "icon"        .icon
                 "outline"     .outline
                 "button-size" "md"
-                "order"       $order
+                "order"       (or .order $order)
                 "justify"     $justify
                 "link-type"   $type
             ) }}
@@ -85,7 +85,7 @@
                 "title"     $title
                 "icon"      .icon
                 "outline"   .outline
-                "order"     $order
+                "order"     (or .order $order)
                 "justify"   $justify
                 "link-type" $type
             ) }}
