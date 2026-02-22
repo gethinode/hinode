@@ -86,7 +86,6 @@
     "@commitlint/config-conventional": "^20.4.1",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
-    "commitizen": "^4.3.1",
     "cpy-cli": "^6.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.2",
@@ -134,10 +133,5 @@
         }
       ]
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
