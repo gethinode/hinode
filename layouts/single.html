@@ -1,6 +1,5 @@
 {{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{- $sidebar := partial "page/sidebar" . -}}
     {{- $padding := partial "utilities/GetPadding.html" -}}
     {{- $sidebar := partial "page/sidebar" . -}}
 
@@ -8,6 +7,11 @@
     {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}
     {{- partial "page/blocks.html" . -}}
 
+    {{/* Render the single page content using responsive columns */}}
+    {{/*    Column 1: sidebar navigation, visible in medium viewports and above (uses offcanvas on small devices) */}}
+    {{/*    Column 2: main page content (header, body, footer), always visible */}}
+    {{/*    Column 3: sharing buttons and TOC navigation or specials (CTA), visible in large viewports */}}
+    {{/*              content is folded into main column (handled by page elements) */}}
     {{ if (gt (len .RawContent) 0) }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
