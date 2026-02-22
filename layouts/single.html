@@ -2,19 +2,10 @@
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
     {{- $sidebar := partial "page/sidebar" . -}}
     {{- $padding := partial "utilities/GetPadding.html" -}}
+    {{- $sidebar := partial "page/sidebar" . -}}
 
-    {{ with $sidebar }}
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-sidebar" aria-labelledby="offcanvas-label">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper $.Section }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ T "close" }}"></button>
-            </div>
-            <div class="offcanvas-body">
-                {{ . | safeHTML }}
-            </div>
-        </div>
-    {{ end }}
-
+    {{/* Render the offcanvas sidebar and content blocks */}}
+    {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}
     {{- partial "page/blocks.html" . -}}
 
     {{ if (gt (len .RawContent) 0) }}

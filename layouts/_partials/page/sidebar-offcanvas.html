@@ -1,0 +1,13 @@
+{{- $section := .section -}}
+{{- $raw := .raw -}}
+{{ with $raw }}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-sidebar" aria-labelledby="offcanvas-label">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper $section }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ T "close" }}"></button>
+        </div>
+        <div class="offcanvas-body">
+            {{ . | safeHTML }}
+        </div>
+    </div>
+{{ end }}
