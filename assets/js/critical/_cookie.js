@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-unused-vars */
+/* eslint-disable no-unused-vars */
 function hasConsent (category) {
   // TODO: placeholder function
   return true
