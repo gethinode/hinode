@@ -8,8 +8,9 @@
     {{ end }}
     {{ partial "assets/section-title.html" (dict
         "heading" (dict
-            "title" .Title
-            "align" "start"
+            "title"   .Title
+            "content" .Description
+            "align"   "start"
         )
         "use-title" true
     ) }}
