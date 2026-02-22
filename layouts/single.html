@@ -1,22 +1,17 @@
 {{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{- $sidebar := partial "page/sidebar" . -}}
     {{- $padding := partial "utilities/GetPadding.html" -}}
+    {{- $sidebar := partial "page/sidebar" . -}}
 
-    {{ with $sidebar }}
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-sidebar" aria-labelledby="offcanvas-label">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper $.Section }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ T "close" }}"></button>
-            </div>
-            <div class="offcanvas-body">
-                {{ . | safeHTML }}
-            </div>
-        </div>
-    {{ end }}
-
+    {{/* Render the offcanvas sidebar and content blocks */}}
+    {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}
     {{- partial "page/blocks.html" . -}}
 
+    {{/* Render the single page content using responsive columns */}}
+    {{/*    Column 1: sidebar navigation, visible in medium viewports and above (uses offcanvas on small devices) */}}
+    {{/*    Column 2: main page content (header, body, footer), always visible */}}
+    {{/*    Column 3: sharing buttons and TOC navigation or specials (CTA), visible in large viewports */}}
+    {{/*              content is folded into main column (handled by page elements) */}}
     {{ if (gt (len .RawContent) 0) }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
@@ -35,13 +30,5 @@
                 </div>
             </div>
         </div>
-    {{ else if and (eq (len .Params.content_blocks) 0) (eq (len .RawContent) 0)}}
-        {{- partial "utilities/LogWarn.html" (dict
-            "partial" "layouts/single.html" 
-            "warnid"  "warn-empty-page"
-            "msg"     "No content"
-            "details" "Page has no content or blocks defined"
-            "file"    .File
-        ) -}}
     {{ end }}
 {{ end -}}
