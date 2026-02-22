@@ -16,8 +16,27 @@
     ) }}
 </div>
 
+{{/* Init the card styling */}}
+{{ $articlesParams := $.Scratch.Get "articlesParams" }}
+{{ $sort := "date" }}
+{{ $reverse := true }}
+{{ $class := "border-0 h-100" }}
+{{ $cardPadding := 0 }}
+{{ $headerStyle := "full" }}
+{{ $bodyStyle := "full" }}
+{{ $footerStyle := "none" }}
+{{ if reflect.IsMap $articlesParams }}
+    {{ with index $articlesParams "sort" }}{{ $sort = . }}{{ end }}
+    {{ if isset $articlesParams "reverse" }}{{ $reverse = index $articlesParams "reverse" }}{{ end }}
+    {{ with index $articlesParams "class" }}{{ $class = . }}{{ end }}
+    {{ with index $articlesParams "padding" }}{{ $cardPadding = . }}{{ end }}
+    {{ with index $articlesParams "header-style" }}{{ $headerStyle = . }}{{ end }}
+    {{ with index $articlesParams "body-style" }}{{ $bodyStyle = . }}{{ end }}
+    {{ with index $articlesParams "footer-style" }}{{ $footerStyle = . }}{{ end }}
+{{ end }}
+
 {{/* Render paginated list of articles */}}
-{{ $result := partial "assets/live-pages.html" (dict "section" .Section "sort" "date" "reverse" true) }}
+{{ $result := partial "assets/live-pages.html" (dict "page" . "sort" $sort "reverse" $reverse) }}
 {{ $pages := $result.pages }}
 {{ if gt (len $pages) 0 }}
     <div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
@@ -25,9 +44,12 @@
             {{ range (.Paginate $pages).Pages }}
                 <div class="col">
                     {{ partial "assets/card.html" (dict
-                        "path"    .RelPermalink
-                        "class"   "border-0 card-zoom h-100"
-                        "padding" 0
+                        "path"         .RelPermalink
+                        "class"        $class
+                        "padding"      $cardPadding
+                        "header-style" $headerStyle
+                        "body-style"   $bodyStyle
+                        "footer-style" $footerStyle
                     ) }}
                 </div>
             {{ end }}
