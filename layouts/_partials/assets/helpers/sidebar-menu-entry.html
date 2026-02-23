@@ -25,33 +25,26 @@
     {{- /* Sort children using Hugo's page collection methods */ -}}
     {{- if eq $sortField "title" -}}
         {{- $children = $children.ByTitle -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+        
     {{- else if eq $sortField "date" -}}
         {{- $children = $children.ByDate -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else if eq $sortField "weight" -}}
         {{- $children = $children.ByWeight -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else if eq $sortField "linkTitle" -}}
         {{- $children = $children.ByLinkTitle -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else if eq $sortField "publishDate" -}}
         {{- $children = $children.ByPublishDate -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else if eq $sortField "lastmod" -}}
         {{- $children = $children.ByLastmod -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else if eq $sortField "expiryDate" -}}
         {{- $children = $children.ByExpiryDate -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else if eq $sortField "length" -}}
         {{- $children = $children.ByLength -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- else -}}
         {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
         {{- $children = $children.ByParam $sortField -}}
-        {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- end -}}
+    {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
     {{- /* Recursively build nested menu entries */ -}}
     {{- $pages := slice -}}
     {{- range $children -}}
