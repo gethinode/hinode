@@ -54,6 +54,7 @@
                 </div>
             {{ end }}
         </div>
-        {{ partial "assets/pagination.html" (dict "page" .) }}
+
+        <div class="pt-{{ $padding.y }}">{{ partial "assets/pagination.html" (dict "page" .) }}</div>
     </div>
 {{ end }}
