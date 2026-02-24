@@ -1,11 +1,36 @@
 {{/* Initialize global variables */}}
-{{- $sharing := $.Scratch.Get "sharing" -}}
+{{- $size := .Site.Params.style.title.size | default 4 -}}
+{{- $headingStyle := .Site.Params.style.title.headingStyle | default "display" -}}
+{{- $contentStyle := .Site.Params.style.title.contentStyle | default "lead text-muted" -}}
+{{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $sharing := .Scratch.Get "sharing" -}}
 
+{{/* Initialize local variables */}}
+{{- $breakpoint := .Scratch.Get "breakpoint" -}}
 {{ $title := .Title }}
-{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $title = title $title }}{{ end }}
+{{ if and .Site.Params.main.titleCase (not .Params.exact) }}{{ $title = title $title }}{{ end }}
 
-{{ with $title }}<p class="display-4 mt-5">{{ . }}</p>{{ end }}
+{{/* Render breadcrumb */}}
+{{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
+               
+{{/* Display title and metadata */}}
+{{ with $title }}<h1 id="{{ anchorize . }}" class="{{ $headingStyle }}-{{ $size }} pt-1">{{ . }}</h1>{{ end }}
+
+{{/* Ignore metadata */}}
+
+{{/* Ignore tags */}}
+
+{{/* Display social sharing buttons */}}
 {{- if $sharing }}
     <div class="py-3 d-flex align-items-center">{{ partial "page/sharing.html" . }}</div>
 {{ end -}}
-<p class="lead mb-5">{{ .Description }}</p>
+
+{{/* Display description */}}
+{{ with .Description }}
+    <div class="{{ $contentStyle }} py-{{ $padding.y }}">{{ . | $.RenderString | safeHTML }}</div>
+{{ end }}
+
+{{/* Display TOC dropdown on smaller screens */}}
+{{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+    <div class="d-{{ $breakpoint.current }}-none pb-5">{{ partial "assets/toc-dropdown.html" (dict "page" .) }}</div>
+{{- end -}}

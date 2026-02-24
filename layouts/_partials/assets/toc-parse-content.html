@@ -59,7 +59,7 @@
 
     {{- with $fragments }}
         {{- if (ge (len .HeadingsMap) $minNumHeadings) }}
-            <strong class="d-block h6 my-2 pt-4">{{ T "toc" }}:</strong>
+            <strong class="d-block mb-2">{{ T "toc" }}</strong>
             <nav class="toc">
                 {{ $result := slice }}
                 {{ range .Headings }}
