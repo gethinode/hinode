@@ -40,7 +40,7 @@
                 {{ else }}
                     {{ $dateFormat := default "Jan 2" (index .Site.Params "date_format") }}
                     {{ $.Scratch.Set "lastYear" ""}}
-                    {{ range .Pages }}
+                    {{ range .Pages.ByDate.Reverse }}
                         {{ $year := .Date.Year }}
                         {{ $lastYear := $.Scratch.Get "lastYear"}}
                         {{- $title := .Title }}
