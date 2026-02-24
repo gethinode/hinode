@@ -77,20 +77,20 @@
     "enableSourceMap"     (not hugo.IsProduction)
     "vars"                $vars
 ) -}}
-{{- $bundle := partial "utilities/bundlev2.html" (dict
+{{- $bundle := partialCached "utilities/bundlev2.html" (dict
     "page"      page
     "match"     $source
     "filename"  (printf "scss/bundle-%s.scss" (hash.XxHash $source))
     "modules"   $modules
     "basepath"  "scss"
     "debugging" site.Params.debugging.showSCSS
-) -}}
+) $source page.Language.Lang (delimit $modules ",") -}}
 
 {{- if and (gt ($bundle.bundle.Content | len) 0) (not $error) }}
     {{- $css := $bundle.bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
 
     {{ if $core }}
-        {{- partial "head/icons.html" (dict "css" $css) -}}
+        {{- partialCached "head/icons.html" (dict "css" $css) ($css.Content | md5) -}}
     {{ end }}
     {{- if site.Params.style.purge -}}
         {{- $post_options := dict "config" "config" "noMap" hugo.IsProduction -}}

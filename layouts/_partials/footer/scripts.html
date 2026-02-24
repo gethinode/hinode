@@ -40,7 +40,7 @@
         {{- $destination = path.Join (path.Dir $destination) (printf "%s.%s%s" (path.BaseName $destination) $page.Language.Lang (path.Ext $destination)) -}}
     {{- end -}}
 
-    {{- $bundle := partial "utilities/bundlev2.html" (dict
+    {{- $bundle := partialCached "utilities/bundlev2.html" (dict
         "page"            $page
         "match"           $match
         "filename"        $destination
@@ -50,7 +50,7 @@
         "skip-template"   $skipTemplate
         "enable-template" $enableTemplate
         "debugging"       site.Params.debugging.showJS
-    ) -}}
+    ) $destination (delimit $modules ",") -}}
     {{- $js := $bundle.bundle -}}
     {{- $jsmod := $bundle.module -}}
 
