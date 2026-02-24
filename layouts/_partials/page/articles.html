@@ -2,7 +2,7 @@
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Render basic header for list page */}}
-<div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+<div class="container-xxl px-{{ $padding.x }} px-xxl-0">
     {{ if .Site.Params.navigation.breadcrumb }}
         {{ partial "assets/breadcrumb.html" (dict "page" .) }}
     {{ end }}
