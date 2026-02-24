@@ -3,24 +3,19 @@
 _merge = "deep"
 
 [[main]]
-  name = "Blocks"
-  pageRef = "/blocks/"
+  name = "Blog"
+  pageRef = "/blog/"
   weight = 10
 
 [[main]]
-  name = "Components"
-  pageRef = "/components/"
+  name = "Docs"
+  pageRef = "/docs/"
   weight = 20
 
 [[main]]
-  name = "Blog"
-  pageRef = "/blog/"
+  name = "Tags"
+  pageRef = "/tags/"
   weight = 30
-
-[[main]]
-  name = "Docs"
-  pageRef = "https://gethinode.com/docs/"
-  weight = 40
 
 [[social]]
   name = "LinkedIn"
