@@ -175,7 +175,7 @@
 
 {{/* Main code */}}
 {{ if and (not $args.error) $args.menu }}
-    <nav class="sidebar flex-shrink-0 ps-1 pt-3" aria-label="{{ (strings.FirstUpper $section) }} navigation">
+    <nav class="sidebar flex-shrink-0 ps-1" aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $level := 0 -}}
         {{ $baseURL := $args.page.Scratch.Get "baseURL" | default "/" -}}
         {{ $baseURL = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $args.version | relLangURL)))) }}

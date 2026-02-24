@@ -4,8 +4,8 @@
 }
 
 .sidebar-overflow {
-    top: var(--navbar-offset);
-    max-height: 90vh;
+    top: calc(var(--navbar-offset) + 1rem);
+    max-height: calc(100vh - var(--navbar-offset));
     overflow-y: auto;
     scrollbar-gutter: stable;
 }
