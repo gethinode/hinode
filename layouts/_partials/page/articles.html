@@ -25,6 +25,7 @@
 {{ $headerStyle := "full" }}
 {{ $bodyStyle := "full" }}
 {{ $footerStyle := "none" }}
+{{ $iconStyle := "" }}
 {{ if reflect.IsMap $articlesParams }}
     {{ with index $articlesParams "sort" }}{{ $sort = . }}{{ end }}
     {{ if isset $articlesParams "reverse" }}{{ $reverse = index $articlesParams "reverse" }}{{ end }}
@@ -33,6 +34,7 @@
     {{ with index $articlesParams "header-style" }}{{ $headerStyle = . }}{{ end }}
     {{ with index $articlesParams "body-style" }}{{ $bodyStyle = . }}{{ end }}
     {{ with index $articlesParams "footer-style" }}{{ $footerStyle = . }}{{ end }}
+    {{ with index $articlesParams "icon-style" }}{{ $iconStyle = . }}{{ end }}
 {{ end }}
 
 {{/* Render paginated list of articles */}}
@@ -50,6 +52,7 @@
                         "header-style" $headerStyle
                         "body-style"   $bodyStyle
                         "footer-style" $footerStyle
+                        "icon-style"   $iconStyle
                     ) }}
                 </div>
             {{ end }}
