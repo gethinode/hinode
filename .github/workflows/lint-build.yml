@@ -99,6 +99,13 @@ jobs:
         fi
       shell: bash
 
+    # On Windows, HUGO_CACHEDIR is initialised from the matrix as '~\AppData\Local\hugo_cache'.
+    # Hugo requires an absolute path, so expand ~ to %LOCALAPPDATA% before using the cache.
+    - name: Expand Hugo cache directory on Windows
+      if: runner.os == 'Windows'
+      run: echo "HUGO_CACHEDIR=$env:LOCALAPPDATA\hugo_cache" >> $env:GITHUB_ENV
+      shell: pwsh
+
     # Cache Hugo cachedir and resourcedir (configured in config/ci/hugo.toml) for each OS.
     # Rolling key restores the previous snapshot as a warm start, then saves a fresh one after build.
     # No additional content-based invalidation is needed; Hugo uses checksums itself.
