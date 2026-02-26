@@ -10,9 +10,6 @@ on:
 
 env:
   CACHE_KEY: 'hugo-hinode'
-  CACHE_PATH_DEBIAN: '/tmp/hugo_cache_runner'
-  CACHE_PATH_WIN: '~\AppData\Local\hugo_cache'
-  CACHE_PATH_MAC: '/Users/runner/Library/Caches/hugo_cache'
 
 permissions:
   pull-requests: read
@@ -38,7 +35,7 @@ jobs:
       run: npm i
 
     - name: Lint the source files
-      run: npm run lint      
+      run: npm run lint
 
   build:
     needs: lint
@@ -48,8 +45,18 @@ jobs:
         os: [macos-latest, windows-latest, ubuntu-latest]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         node-version: [22.x, 24.x]
+        include:
+          - os: ubuntu-latest
+            hugo_cachedir: '/tmp/hugo_cache_runner'
+          - os: macos-latest
+            hugo_cachedir: '/Users/runner/Library/Caches/hugo_cache'
+          - os: windows-latest
+            hugo_cachedir: '~\AppData\Local\hugo_cache'
 
     runs-on: ${{ matrix.os }}
+
+    env:
+      HUGO_CACHEDIR: ${{ matrix.hugo_cachedir }}
 
     steps:
     - name: Check out repository
@@ -58,8 +65,8 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@v6
       with:
-        go-version: ">1.0.0"
-      
+        go-version: "stable"
+
     - name: Set up Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v6
       with:
@@ -68,9 +75,13 @@ jobs:
         cache-dependency-path: '**/package-lock.json'
 
     - name: Install Dart Sass
-      run:  |
+      env:
+        DART_SASS_VERSION: "1.97.3"
+      run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
-          sudo snap install dart-sass
+          curl -fsSL "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" \
+            | tar -xz -C "$HOME"
+          echo "$HOME/dart-sass" >> $GITHUB_PATH
         elif [ "$RUNNER_OS" == "macOS" ]; then
           brew install sass/sass/sass
         elif [ "$RUNNER_OS" == "Windows" ]; then
@@ -80,7 +91,7 @@ jobs:
 
     # [24/AUG/23] Adjusted from npm ci for non-macOS to prevent EBADPLATFORM error due to fsevents
     - name: Perform clean install of npm
-      run:  |
+      run: |
         if [ "$RUNNER_OS" == "macOS" ]; then
           npm ci
         else
@@ -88,15 +99,23 @@ jobs:
         fi
       shell: bash
 
-    # Cache Hugo cachedir and resourcedir (configured in config/ci/hugo.toml) for each OS
-    # No additional cache invalidation is needed, Hugo uses checksums itself
+    # On Windows, HUGO_CACHEDIR is initialised from the matrix as '~\AppData\Local\hugo_cache'.
+    # Hugo requires an absolute path, so expand ~ to %LOCALAPPDATA% before using the cache.
+    - name: Expand Hugo cache directory on Windows
+      if: runner.os == 'Windows'
+      run: echo "HUGO_CACHEDIR=$env:LOCALAPPDATA\hugo_cache" >> $env:GITHUB_ENV
+      shell: pwsh
+
+    # Cache Hugo cachedir and resourcedir (configured in config/ci/hugo.toml) for each OS.
+    # Rolling key restores the previous snapshot as a warm start, then saves a fresh one after build.
+    # No additional content-based invalidation is needed; Hugo uses checksums itself.
     - name: Use Hugo cache
       uses: actions/cache@v5
       with:
-        path: ${{ runner.os == 'Windows' && env.CACHE_PATH_WIN || runner.os == 'macOS' && env.CACHE_PATH_MAC || env.CACHE_PATH_DEBIAN }}
-        key: ${{ runner.os }}-${{ env.CACHE_KEY }}
+        path: ${{ env.HUGO_CACHEDIR }}
+        key: ${{ runner.os }}-${{ env.CACHE_KEY }}-${{ github.run_id }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.CACHE_KEY }}
+          ${{ runner.os }}-${{ env.CACHE_KEY }}-
 
     - name: Display environment
       run: npm run env

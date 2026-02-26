@@ -43,21 +43,41 @@
 {{ if gt (len $pages) 0 }}
     <div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            {{ range (.Paginate $pages).Pages }}
-                <div class="col">
-                    {{ partial "assets/card.html" (dict
-                        "path"         .RelPermalink
-                        "class"        $class
-                        "padding"      $cardPadding
-                        "header-style" $headerStyle
-                        "body-style"   $bodyStyle
-                        "footer-style" $footerStyle
-                        "icon-style"   $iconStyle
-                    ) }}
-                </div>
+            {{ if site.Params.env_bookshop_live }}
+                {{ range $pages }}
+                    <div class="col">
+                        {{ partial "assets/card.html" (dict
+                            "title"        .Title
+                            "thumbnail"    .Thumbnail
+                            "description"  .Description
+                            "class"        $class
+                            "padding"      $cardPadding
+                            "header-style" $headerStyle
+                            "body-style"   $bodyStyle
+                            "footer-style" $footerStyle
+                            "icon-style"   $iconStyle
+                        ) }}
+                    </div>
+                {{ end }}
+            {{ else }}
+                {{ range (.Paginate $pages).Pages }}
+                    <div class="col">
+                        {{ partial "assets/card.html" (dict
+                            "path"         .RelPermalink
+                            "class"        $class
+                            "padding"      $cardPadding
+                            "header-style" $headerStyle
+                            "body-style"   $bodyStyle
+                            "footer-style" $footerStyle
+                            "icon-style"   $iconStyle
+                        ) }}
+                    </div>
+                {{ end }}
             {{ end }}
         </div>
 
-        <div class="pt-{{ $padding.y }}">{{ partial "assets/pagination.html" (dict "page" .) }}</div>
+        {{ if not site.Params.env_bookshop_live }}
+            <div class="pt-{{ $padding.y }}">{{ partial "assets/pagination.html" (dict "page" .) }}</div>
+        {{ end }}
     </div>
 {{ end }}

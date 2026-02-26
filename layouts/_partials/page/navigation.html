@@ -20,8 +20,12 @@
 
 {{/* Hugo's .Prev/.Next have inverted semantics - they always need to be swapped */}}
 {{/* Regardless of sort direction, .Next goes to earlier page, .Prev goes to later page */}}
-{{- $prevPage := $pages.Next . -}}
-{{- $nextPage := $pages.Prev . -}}
+{{- $prevPage := "" -}}
+{{- $nextPage := "" -}}
+{{ if eq (printf "%T" $pages) "page.Pages" }}
+    {{- $prevPage = $pages.Next . -}}
+    {{- $nextPage = $pages.Prev . -}}
+{{ end }}
 
 <div class="row row-cols-2 mt-5 mb-3">
     <div class="col">

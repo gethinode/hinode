@@ -30,6 +30,8 @@ github.com/gethinode/mod-fontawesome/v5 v5.0.4 h1:eaGu7hGQfPReAIHF3RolOhXb+JT8y2
 github.com/gethinode/mod-fontawesome/v5 v5.0.4/go.mod h1:iLRUmdb788apYTXA4LmVyeBkTKPPyiMX41poFQbYiVU=
 github.com/gethinode/mod-fontawesome/v5 v5.0.5 h1:XRUZn3pHp7Bzz+Y7IQTRsdJYAhiClygrYOoOBkyBtT4=
 github.com/gethinode/mod-fontawesome/v5 v5.0.5/go.mod h1:iLRUmdb788apYTXA4LmVyeBkTKPPyiMX41poFQbYiVU=
+github.com/gethinode/mod-fontawesome/v5 v5.0.6 h1:x4R64RkVQbs7AYoOG3dMWo5NXPvSa8K6a0RCk+oC16A=
+github.com/gethinode/mod-fontawesome/v5 v5.0.6/go.mod h1:x0tyq3/ylTACO7maMAvbvjIhvShI81Ejpt88+RN7BiQ=
 github.com/gethinode/mod-google-analytics/v2 v2.0.0 h1:Vor4j56qtpjtKY9r5QLeN5CBxuf8YKP3+XvQKEkayrM=
 github.com/gethinode/mod-google-analytics/v2 v2.0.0/go.mod h1:y4ZlacA8FSXjmvn9P8cZshOrBB5Wc+3p0DKSehkk+8E=
 github.com/gethinode/mod-katex v1.1.4 h1:HWc45uHKX2JhI624UnA46LCZkLGhSbaq+zAHt9e57zw=
