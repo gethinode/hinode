@@ -183,8 +183,9 @@
 
 {{/* Main code */}}
 {{ if or (gt $args.gutter "0") ($args.wrapper) }}<div class="{{ with $args.gutter }}g-{{ . }}{{ end }} {{ $args.wrapper }}">{{ end }}
+{{ $imgOnly := and (eq $args.headerStyle "none") (eq $args.bodyStyle "none") (eq $args.footerStyle "none") }}
 
-{{- if hasPrefix $args.orientation "horizontal" -}}
+{{- if and (hasPrefix $args.orientation "horizontal") (not $imgOnly) -}}
     {{ $col1 := "" }}
     {{ $col2 := "" }}
 
@@ -249,6 +250,7 @@
                             }}
                             </div>
                         {{ end }}
+
                         {{ if and $href $args.button }}
                             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
                             {{ $buttonClass := "card-button mb-n4" }}
@@ -278,7 +280,7 @@
         {{- if $thumbnail -}}
             {{- partial $args.hook (merge $thumbnailArgs (dict
                 "wrapper"  "card-img-wrap"
-                "class"    "card-img-top card-img-bg"
+                "class"    (cond $imgOnly "card-img-bg" "card-img-top card-img-bg")
                 "ratio"    (or $ratio "16x9")
             )) -}}
         {{- else if $icon -}}
@@ -290,8 +292,9 @@
                 "class"        (printf "mb-3 m-0 text-%s" $args.align)
             )}}
         {{- end -}}
-        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }} card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
-            {{ if $args.overlay }}<div class="flex-grow-1"></div>{{ end }}
+        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}
+            {{- if $imgOnly }} card-img-overlay {{ else if $overlay }} card-img-overlay card-overlay-gradient p-4 {{ end }}"
+            {{- if $overlay }}data-bs-theme="dark"{{ end }}>
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict
                 "title"       (cond $minimal "" $title)
@@ -303,6 +306,7 @@
             ) -}}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
+
         {{ if $args.button }}
             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
             <div class="row" >
