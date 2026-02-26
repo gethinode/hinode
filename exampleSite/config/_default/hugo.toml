@@ -123,6 +123,9 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     source = "data"
     target = "data"
   [[module.imports.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.imports.mounts]]
     source = "static"
     target = "static"
   [[module.imports]]
