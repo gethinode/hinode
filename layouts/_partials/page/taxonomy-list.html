@@ -1,0 +1,19 @@
+<table class="mt-5 w-100">
+    <tbody>
+    {{ range $.Site.Taxonomies.tags.ByCount }}
+        {{- $title := .Page.Title }}
+        {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
+        <tr>
+            <td class="text-nowrap pe-3 align-bottom">
+                {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
+            </td>
+            <td class="w-100">
+                <a href="{{ .Page.RelPermalink }}">{{ $title | .Page.RenderString }}</a>
+            </td>
+        </tr>
+    {{ end }}
+    </tbody>
+</table>
+{{ if eq $.Site.Taxonomies.tags 0 }}
+    <p class="pt-4">{{- T "emptyTags" }}.</p>
+{{ end }}
