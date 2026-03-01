@@ -63,6 +63,11 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 [pagination]
   pagerSize = 9
 
+[security]
+  [security.http]
+    methods = ['(?i)GET|POST|HEAD']
+    urls = ['.*']
+
 [privacy]
   [privacy.vimeo]
     disabled = false
