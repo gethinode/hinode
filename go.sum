@@ -16,6 +16,8 @@ github.com/gethinode/mod-flexsearch/v3 v3.3.1 h1:2SRiWBjSs78Rw9ReMtJxynINXwiO+BE
 github.com/gethinode/mod-flexsearch/v3 v3.3.1/go.mod h1:iYvaBF6Y62pjnCepYAqLxoX1ZdEBoD+9caj4cBC+MxY=
 github.com/gethinode/mod-flexsearch/v3 v3.3.2 h1:QsDk4NWf5kyS547L7sR7+2VHv/7rtSLlqRZeRGmRbo4=
 github.com/gethinode/mod-flexsearch/v3 v3.3.2/go.mod h1:gDtNAClXoaLaK4L+GxL9qCRniZ/Be/io/Gyod6P8l7k=
+github.com/gethinode/mod-flexsearch/v4 v4.0.0 h1:gBDXTaV+N0tyAUfM4vaQXyzYim9DpS6ifdmvzUxirf0=
+github.com/gethinode/mod-flexsearch/v4 v4.0.0/go.mod h1:GEaf4tD8AOpI/6eZH/aPuG1hrWxwSEiDtDPF0Ow73YI=
 github.com/gethinode/mod-fontawesome/v4 v4.0.3 h1:ml+V7YPkxsK5sPJz0OlheBlGdEZrry4aH/7M/ytz3zk=
 github.com/gethinode/mod-fontawesome/v4 v4.0.3/go.mod h1:EqAF4dW3gyUr/CsNND5lEPJcNRlLJ+GfPIUaGTaVRic=
 github.com/gethinode/mod-fontawesome/v4 v4.1.1 h1:nC2tTBHTeUBwVqZCz6kEzDvuBrbMgWeOxcAXbCBwCOs=
@@ -58,6 +60,8 @@ github.com/gethinode/mod-utils/v5 v5.12.0 h1:XH6/MsvgPfYVD8Ci3t20vRH3Zz1JpaqqG6X
 github.com/gethinode/mod-utils/v5 v5.12.0/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
 github.com/gethinode/mod-utils/v5 v5.13.0 h1:ztkE1REey94x36UdlZ7yeitpIQid/BcZQh+wtxBTSQ8=
 github.com/gethinode/mod-utils/v5 v5.13.0/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
+github.com/gethinode/mod-utils/v5 v5.14.0 h1:Nntb2ei7yTRsUmGMUHo/fgCfacIk+GD/ZbSW64gu6HM=
+github.com/gethinode/mod-utils/v5 v5.14.0/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0 h1:55phPhe6fDjfjG0jX4+br3nLORKgjgx8abZUdI0YJRA=
 github.com/nextapps-de/flexsearch v0.0.0-20250907103239-defb38b083f0/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
