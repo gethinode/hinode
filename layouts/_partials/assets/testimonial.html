@@ -55,9 +55,9 @@
                 ) }}
             </div>
         {{ end }}
-        {{ with .content }}
+        {{ if .content }}
             <div class="fs-md-5 pt-3 h-100">
-                {{ . | .page.RenderString }}
+                {{ .content | .page.RenderString }}
             </div>
         {{ end }}
         {{ if or .contact .link }}
