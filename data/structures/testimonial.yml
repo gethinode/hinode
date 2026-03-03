@@ -29,6 +29,9 @@ arguments:
       the card includes a quote icon on the right-hand side too.
   class:
   link:
+  align:
+    default: start
+    release: v2.0.0
 body:
   optional: false
   comment: Quote to include in the testimonial.

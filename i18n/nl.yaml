@@ -13,6 +13,8 @@
   translation: "Foto van %s via %s"
 - id: photoShort
   translation: "Foto van {{ . }}"
+- id: photoOn
+  translation: "op"
 - id: draft
   translation: "Concept"
 - id: published
@@ -115,6 +117,8 @@
   translation: "Toegevoegd in {{ . }}"
 - id: deprecatedFeature
   translation: "Afgeschaft in {{ . }}"
+- id: alternativeFeature
+  translation: "Gebruik `{{ . }}` in plaats daarvan"
 
 # Versioning
 - id: latest
@@ -146,7 +150,6 @@
 - id: comments
   translation: "Reacties" 
 
-
 # Arguments
 - id: name
   translation: "Naam"
@@ -175,7 +178,7 @@
 
 # Image
 - id: image
-  translation: Bild
+  translation: afbeelding
 
 # Nav & Tab
 - id: clickToExpand
@@ -188,6 +191,16 @@
   translation: "Laat je gegevens achter en dan neem ik contact met je op."
 - id: contactAction
   translation: "Neem contact op"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Blijf op de hoogte"
+- id: newsletterName
+  translation: "Naam"
+- id: newsletterEmail
+  translation: "E-mail"
+- id: newsletterSubscribe
+  translation: "Schrijf je in"
 
 # Testimonial
 - id: testimonialPrevious

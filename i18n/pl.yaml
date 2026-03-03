@@ -17,6 +17,8 @@
   translation: "z"
 - id: draft
   translation: "Wersja robocza"
+- id: published
+  translation: "Opublikowano"
 
 # List pages
 - id: article
@@ -29,6 +31,8 @@
   translation: "Brak artykułów"
 - id: emptyTags
   translation: "Brak tagów"
+- id: readMore
+  translation: "Czytaj więcej"
 
 # Languages
 - id: lang_de
@@ -55,6 +59,12 @@
   translation: "Kod"
 - id: download
   translation: "Pobierz artykuł"
+
+# Hero
+- id: backgroundImage
+  translation: "Obraz tła"
+- id: heroImage
+  translation: "Obraz hero"
 
 # Pagination
 - id: paginationNav
@@ -93,6 +103,10 @@
   translation: "Zobacz również"
 - id: sectionMenu
   translation: "Wybierz temat"
+- id: tocShowMore
+  translation: "Pokaż {{ . }} więcej"
+- id: tocShowLess
+  translation: "Pokaż mniej"
 
 # Sidebar
 - id: toggleSidebar
@@ -103,6 +117,8 @@
   translation: "Dodano w {{ . }}"
 - id: deprecatedFeature
   translation: "Stała się przestarzała w {{ . }}"
+- id: alternativeFeature
+  translation: "Użyj `{{ . }}` zamiast tego"
 
 # Versioning
 - id: latest
@@ -147,6 +163,52 @@
   translation: Komentarz
 - id: supportedValues
   translation: "Obsługiwane wartości"
+
+# Alerts
+- id: caution
+  translation: Ostrożnie
+- id: important
+  translation: Ważne
+- id: note
+  translation: Uwaga
+- id: tip
+  translation: Wskazówka
+- id: warning
+  translation: Ostrzeżenie
+
+# Image
+- id: image
+  translation: obraz
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "Kliknij, aby rozwinąć"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "Zainteresowany tym tematem?"
+- id: contactBody
+  translation: "Prosimy o pozostawienie danych kontaktowych, abyśmy mogli się z Tobą skontaktować."
+- id: contactAction
+  translation: "Skontaktuj się"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Bądź na bieżąco"
+- id: newsletterName
+  translation: "Imię"
+- id: newsletterEmail
+  translation: "E-mail"
+- id: newsletterSubscribe
+  translation: "Subskrybuj"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Poprzednia opinia"
+- id: testimonialNext
+  translation: "Następna opinia"
+- id: testimonialCase
+  translation: "Zobacz przypadek klienta"
 
 # Preview
 - id: previewError

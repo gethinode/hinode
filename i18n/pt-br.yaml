@@ -17,6 +17,8 @@
   translation: "em"
 - id: draft
   translation: "Rascunho"
+- id: published
+  translation: "Publicado"
 
 # List pages
 - id: article
@@ -117,6 +119,8 @@
   translation: "Adicionado em {{ . }}"
 - id: deprecatedFeature
   translation: "Descontinuado em {{ . }}"
+- id: alternativeFeature
+  translation: "Use `{{ . }}` em vez disso"
 
 # Versioning
 - id: latest
@@ -189,6 +193,16 @@
   translation: "Por favor, deixe seus detalhes de contato para que possamos entrar em contato com você."
 - id: contactAction
   translation: "Entre em contato"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Fique informado"
+- id: newsletterName
+  translation: "Nome"
+- id: newsletterEmail
+  translation: "E-mail"
+- id: newsletterSubscribe
+  translation: "Inscrever-se"
 
 # Testimonial
 - id: testimonialPrevious

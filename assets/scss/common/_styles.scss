@@ -31,8 +31,12 @@ div.rounded, img.rounded {
     margin-top: var(--navbar-height);
 }
 
-main:has(section:first-of-type.section-cover) {
+main:has(section:first-of-type.section-cover), main:has(section:first-of-type.background-container) {
     margin-top: var(--overlay-offset);
+}
+
+.overlay-spacer {
+    padding-top: var(--navbar-height);
 }
 
 .tickmark li::marker {

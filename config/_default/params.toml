@@ -199,24 +199,6 @@
     clipboard = true
 # toml-docs-end sharing
 
-# toml-docs-start sections
-# [sections]
-#     [sections.posts]
-#         title = "Posts"
-#         sort = "date"
-#         reverse = true
-#         nested = true
-#         cols = 3
-#         color = ""
-#         padding = "0"
-#         header = "full"
-#         footer = "none"
-#         orientation = "stacked"
-#         style = "border-0 card-zoom card-body-margin"
-#         homepage = 3
-#         separator = true
-# toml-docs-end sections
-
 [favicon]
     logo = "img/favicon.png"
     sizes = [16, 32, 48]

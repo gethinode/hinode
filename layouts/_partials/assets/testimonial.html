@@ -35,10 +35,11 @@
 {{ define "_partials/inline/testimonial-inner.html" }}
     {{ $breakpoint := .breakpoint }}
     {{- $testimonialNext := partial "utilities/GetThemeIcon.html" (dict "id" "testimonialNext" "default" "fas chevron-right") -}}
+    {{ $align := .align | default "start" }}
 
     <div class="d-flex flex-column {{ .class }} h-100 p-{{ .padding }}">
         {{ if or .logo .icon }}
-            <div class="p-0">
+            <div class="p-0 text-{{ $align }}">
                 {{ $class := "" }}
                 {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
                 {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
@@ -54,33 +55,37 @@
                 ) }}
             </div>
         {{ end }}
-        <div class="fs-md-5 pt-3 h-100">
-            {{ .content | .page.RenderString }}
-        </div>
-        <div class="container pt-3 p-0">
-            <div class="d-flex p-0">
-                {{ if and .image .contact (not (eq .orientation "horizontal")) }}
-                    {{ partial "inline/testimonial-contact.html" (dict 
-                        "page"    .page
-                        "image"   .image
-                        "contact" .contact
-                        "role"    .role
-                        "url"     .url
-                        "color"   .color
-                        "align"   "start"
-                        "class"   "rounded-circle testimonial-img"
-                    )}}
-                {{ else if .link }}
-                    {{ partial "assets/button.html" (dict 
-                        "href"    .link
-                        "title"   (T "testimonialCase")
-                        "class"   "btn-testimonial"
-                        "icon"    $testimonialNext
-                        "outline" true
-                    ) }}
-                {{ end }}
+        {{ if .content }}
+            <div class="fs-md-5 pt-3 h-100">
+                {{ .content | .page.RenderString }}
             </div>
-        </div>
+        {{ end }}
+        {{ if or .contact .link }}
+            <div class="container pt-3 p-0">
+                <div class="d-flex p-0">
+                    {{ if and .image .contact (not (eq .orientation "horizontal")) }}
+                        {{ partial "inline/testimonial-contact.html" (dict 
+                            "page"    .page
+                            "image"   .image
+                            "contact" .contact
+                            "role"    .role
+                            "url"     .url
+                            "color"   .color
+                            "align"   "start"
+                            "class"   "rounded-circle testimonial-img"
+                        )}}
+                    {{ else if .link }}
+                        {{ partial "assets/button.html" (dict 
+                            "href"    .link
+                            "title"   (T "testimonialCase")
+                            "class"   "btn-testimonial"
+                            "icon"    $testimonialNext
+                            "outline" true
+                        ) }}
+                    {{ end }}
+                </div>
+            </div>
+        {{ end }}
     </div>
 {{ end }}
 
@@ -161,6 +166,7 @@
             "link"        $link
             "color"       $args.color
             "breakpoint"  $breakpoint
+            "align"       $args.align
         }}
 
         {{ if $args.showControls }}

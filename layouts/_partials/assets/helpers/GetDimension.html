@@ -21,7 +21,15 @@
 
 {{/* Initialize local arguments */}}
 {{ $dim := slice }}
-{{ $default := dict "4x3" "1400x1050" "3x2" "1400x933" "1x1" "1400x1400" "16x9" "1400x788" "21x9" "1400x600" "auto" "1400" }}
+{{ $default := dict
+    "4x3"  "1400x1050"
+    "3x1"  "1400x467"
+    "3x2"  "1400x933"
+    "1x1"  "1400x1400"
+    "16x9" "1400x788"
+    "21x9" "1400x600"
+    "auto" "1400" 
+}}
 
 {{ if not $args.err }}
     {{/* Initialize dimensions data - stripping unsupported file extension */}}

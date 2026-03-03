@@ -192,6 +192,16 @@
 - id: contactAction
   translation: "Get in touch"
 
+# Newsletter
+- id: newsletterHeader
+  translation: "Stay informed"
+- id: newsletterName
+  translation: "Name"
+- id: newsletterEmail
+  translation: "Email"
+- id: newsletterSubscribe
+  translation: "Subscribe"
+
 # Testimonial
 - id: testimonialPrevious
   translation: "Previous testimonial"

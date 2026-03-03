@@ -17,6 +17,8 @@
   translation: "sur"
 - id: draft
   translation: "Brouillon"
+- id: published
+  translation: "Publié"
 
 # List pages
 - id: article
@@ -115,6 +117,8 @@
   translation: "Ajouté dans {{ . }}"
 - id: deprecatedFeature
   translation: "Obsolète dans {{ . }}"
+- id: alternativeFeature
+  translation: "Utilisez `{{ . }}` à la place"
 
 # Versioning
 - id: latest
@@ -187,6 +191,16 @@
   translation: "Veuillez laisser vos coordonnées afin que nous puissions vous contacter."
 - id: contactAction
   translation: "Nous contacter"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Restez informé"
+- id: newsletterName
+  translation: "Nom"
+- id: newsletterEmail
+  translation: "E-mail"
+- id: newsletterSubscribe
+  translation: "S'abonner"
 
 # Testimonial
 - id: testimonialPrevious
