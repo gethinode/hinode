@@ -17,6 +17,8 @@
   translation: "於"
 - id: draft
   translation: "草稿"
+- id: published
+  translation: "已發布"
 
 # List pages
 - id: article
@@ -29,6 +31,8 @@
   translation: "沒有找到文章"
 - id: emptyTags
   translation: "沒有找到標籤"
+- id: readMore
+  translation: "閱讀更多"
 
 # Languages
 - id: lang_de
@@ -55,6 +59,12 @@
   translation: "程式碼"
 - id: download
   translation: "下載文章"
+
+# Hero
+- id: backgroundImage
+  translation: "背景圖片"
+- id: heroImage
+  translation: "主圖"
 
 # Pagination
 - id: paginationNav
@@ -93,6 +103,10 @@
   translation: "參見"
 - id: sectionMenu
   translation: "選擇一個主題"
+- id: tocShowMore
+  translation: "顯示 {{ . }} 更多"
+- id: tocShowLess
+  translation: "顯示更少"
 
 # Sidebar
 - id: toggleSidebar
@@ -103,6 +117,8 @@
   translation: "新增於 {{ . }}"
 - id: deprecatedFeature
   translation: "已棄用於 {{ . }}"
+- id: alternativeFeature
+  translation: "請改用 `{{ . }}`"
 
 # Versioning
 - id: latest
@@ -133,6 +149,66 @@
   translation: "顯示"
 - id: comments
   translation: "評論"
+
+# Arguments
+- id: name
+  translation: "名稱"
+- id: type
+  translation: "類型"
+- id: required
+  translation: "必填"
+- id: default
+  translation: "預設值"
+- id: comment
+  translation: "說明"
+- id: supportedValues
+  translation: "支援的值"
+
+# Alerts
+- id: caution
+  translation: 注意
+- id: important
+  translation: 重要
+- id: note
+  translation: 提示
+- id: tip
+  translation: 技巧
+- id: warning
+  translation: 警告
+
+# Image
+- id: image
+  translation: 圖片
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "點擊展開"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "對這個主題感興趣？"
+- id: contactBody
+  translation: "請留下您的聯絡方式，以便我們與您聯繫。"
+- id: contactAction
+  translation: "聯絡我們"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "保持關注"
+- id: newsletterName
+  translation: "姓名"
+- id: newsletterEmail
+  translation: "電子郵件"
+- id: newsletterSubscribe
+  translation: "訂閱"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "上一條評價"
+- id: testimonialNext
+  translation: "下一條評價"
+- id: testimonialCase
+  translation: "查看客戶案例"
 
 # Preview
 - id: previewError
