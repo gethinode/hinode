@@ -137,11 +137,12 @@
 {{- $title := $args.title -}}
 {{- $href := $args.href -}}
 {{- $description := $args.description -}}
-{{- $thumbnail := $args.thumbnail  -}}
+{{- $thumbnail := $args.thumbnail -}}
+{{- $mode := $args.mode -}}
+{{- $anchor := $args.anchor -}}
 {{- $ratio := $args.ratio -}}
 {{- $icon := $args.icon -}}
 {{- $iconStyle := "" -}}
-{{- $anchor := $args.anchor }}
 
 {{- with $page -}}
     {{- if not $args.title }}{{ $title = .Title }}{{ end -}}
@@ -155,6 +156,7 @@
     {{ end }}
     {{- if not $args.icon }}{{ $icon = .Params.icon }}{{ end -}}
     {{- if not $args.anchor }}{{ $anchor = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.anchor) "") }}{{ end -}}
+    {{- if not $args.mode }}{{ $mode = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.mode) false) }}{{ end -}}
 {{- end -}}
 
 {{- $style := $args.iconStyle }}
@@ -176,6 +178,7 @@
     "src"      $thumbnail
     "portrait" $args.portrait
     "anchor"   $anchor
+    "mode"     $mode
     "sizes"    $args.sizes
     "title"    (or $args.alt $title)
     "loading"  $args.loading
