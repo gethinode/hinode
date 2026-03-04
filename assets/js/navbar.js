@@ -141,7 +141,15 @@ function calculateLuminance (r, g, b) {
 
 function updateNavbar () {
   if (navbar.dataset.transparent) {
+    if (window.scrollY > 0) {
+      navbar.classList.add('navbar-scrolled')
+    } else {
+      navbar.classList.remove('navbar-scrolled')
+    }
     updateNavbarColor()
+    if (window.scrollY === 0) {
+      navbar.style.backgroundColor = ''
+    }
   } else {
     let storedTheme
     if (typeof getLocalStorage === "function") {
