@@ -101,8 +101,12 @@
 }
 
 .navbar[data-transparent="true"] {
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
     transition: all 0.3s ease;
+
+    &.navbar-scrolled {
+        backdrop-filter: blur(10px);
+    }
 }
 
 .nav-active, .navbar-expanded {
