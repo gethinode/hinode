@@ -32,6 +32,20 @@
     </div>
 {{ end }}
 
+{{ define "_partials/inline/testimonial-minimal.html" }}
+    {{ $class := "fa-2xl text-center" }}
+    {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
+    {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
+
+    {{ partial "assets/featured-illustration.html" (dict
+        "page"    .page
+        "image"   .logo
+        "icon"    .icon
+        "class"   $class
+        "title"   $title
+    ) }}
+{{ end }}
+
 {{ define "_partials/inline/testimonial-inner.html" }}
     {{ $breakpoint := .breakpoint }}
     {{- $testimonialNext := partial "utilities/GetThemeIcon.html" (dict "id" "testimonialNext" "default" "fas chevron-right") -}}
@@ -112,6 +126,8 @@
                 </div>
             </div>
         </div>
+    {{ else if and (or .logo .icon) (not .content) (not .contact) (not .link) }}
+        {{ partial "inline/testimonial-minimal.html" . }}
     {{ else }}
         {{ partial "inline/testimonial-inner.html" . }}
     {{ end }}
