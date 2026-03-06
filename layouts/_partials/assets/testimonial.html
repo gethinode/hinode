@@ -54,15 +54,19 @@
     <div class="d-flex flex-column {{ .class }} h-100 p-{{ .padding }}">
         {{ if or .logo .icon }}
             <div class="p-0 text-{{ $align }}">
+                {{ $wrapper := cond .logo (printf "py-4 py-md-0 col-4 col-%s-2" $breakpoint.current) "" }}
                 {{ $class := "" }}
+                {{ if .icon }}
+                    {{ $class = index . "icon-style" | default ""}}
+                    {{ with .align }}{{ $wrapper = printf "text-%s" . }}{{ end }}
+                {{ end }}
                 {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
                 {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
-                {{ $wrapper := cond .logo (printf "py-4 py-md-0 col-4 col-%s-2" $breakpoint.current) "" }}
 
                 {{ partial "assets/featured-illustration.html" (dict
                     "page"    .page
                     "image"   .logo
-                    "icon"    (trim (cond .icon (printf "%s %s" .icon (index . "icon-style")) "") " ")
+                    "icon"    .icon
                     "class"   $class
                     "title"   $title
                     "wrapper" $wrapper
