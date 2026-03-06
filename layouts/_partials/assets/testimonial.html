@@ -34,6 +34,7 @@
 
 {{ define "_partials/inline/testimonial-minimal.html" }}
     {{ $class := (index . "icon-style") | default "fa-2xl text-center" }}
+    {{ $wrapper := printf "text-%s" (.align | default "start") }}
     {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
     {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
 
@@ -42,6 +43,7 @@
         "image"   .logo
         "icon"    .icon
         "class"   $class
+        "wrapper" $wrapper
         "title"   $title
     ) }}
 {{ end }}
