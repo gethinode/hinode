@@ -231,7 +231,7 @@
     size = 4
     arrangement = "above"
     headingStyle = "display"
-    bodyStyle = "lead text-muted"
+    contentStyle = "lead text-muted"
 
 [schema]
     type = "Organization"
