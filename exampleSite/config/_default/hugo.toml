@@ -109,7 +109,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 
 [module]
   workspace = "hinode.work"
-  # replacements = 'github.com/gethinode/mod-utils/v5 -> /Users/mark/Development/GitHub/gethinode/mod-utils/'
+  # replacements = 'github.com/gethinode/mod-utils/v5 -> /Users/mark/Development/GitHub/gethinode/mod-utils/, github.com/gethinode/mod-blocks -> /Users/mark/Development/GitHub/gethinode/mod-blocks/'
   # replacements = 'github.com/gethinode/mod-fontawesome/v5 -> /Users/mark/Development/GitHub/gethinode/mod-fontawesome/, github.com/gethinode/mod-blocks -> /Users/mark/Development/GitHub/gethinode/mod-blocks/, github.com/gethinode/mod-utils/v5 -> /Users/mark/Development/GitHub/gethinode/mod-utils/, github.com/gethinode/mod-bootstrap-icons -> /Users/mark/Development/GitHub/gethinode/mod-bootstrap-icons/'
   [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap-icons"
