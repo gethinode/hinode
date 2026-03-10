@@ -32,8 +32,8 @@ content_blocks:
       reverse: true
       sort: date
       keywords: featured
-    hide-empty: false
-    header-style: none
+    hide_empty: false
+    header_style: none
     more:
       title: Plus d'articles
     padding: 0
