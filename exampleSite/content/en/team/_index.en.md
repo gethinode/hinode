@@ -12,7 +12,7 @@ content_blocks:
     input:
       section: team
     cols: 5
-    header-style: none
+    header_style: none
     padding: 0
     class: card-zoom border-0
 ---

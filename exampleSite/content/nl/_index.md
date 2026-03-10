@@ -31,8 +31,8 @@ content_blocks:
       section: blog
       reverse: true
       sort: date
-    hide-empty: false
-    header-style: none
+    hide_empty: false
+    header_style: none
     more:
       title: Meer artikelen
     padding: 0
