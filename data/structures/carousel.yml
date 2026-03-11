@@ -1,9 +1,11 @@
 comment: >-
-  Displays a carousel of several responsive images (see the image shortcode for
-  more details). Add inner `img` elements to define individual image slides.
+  Displays a carousel of several images. Add carousel-item inner elements to
+  define the individual image slides.
+icon: view_carousel
 arguments:
   id:
   ratio:
+    preview: true
   portrait:
     release: v0.18.3
   class:

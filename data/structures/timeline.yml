@@ -1,5 +1,6 @@
 comment: >-
-  Shows items ordered on a vertical timelime.
+  Shows items ordered on a vertical timeline.
+icon: timeline
 arguments:
   page:
     group: partial
@@ -7,6 +8,7 @@ arguments:
     group: partial
   data:
     optional: false
+    preview: true
   background:
   class:
   justify:

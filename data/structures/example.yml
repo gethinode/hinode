@@ -1,10 +1,12 @@
 comment: >-
-  Display a code example and render a preview of the same input. The shortcode
-  accepts the languages supported by Hugo's highlight function.
+  Displays a code example and renders a preview of the same input. The shortcode
+  accepts the languages supported by Hugo's built-in highlight function.
+icon: code
 arguments:
   id:
   lang:
     default: markdown
+    preview: true
   class:
   show-markup:
     release: v1.0.0

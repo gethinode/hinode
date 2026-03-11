@@ -1,4 +1,6 @@
-comment: Renders the header of a page section.
+comment: >-
+  Renders a styled page section title with optional heading, links, color, and
+  layout options.
 arguments:
   heading:
   links:

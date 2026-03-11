@@ -1,4 +1,6 @@
-comment: Renders the header of a page section.
+comment: >-
+  Renders a simple page section header with title, description, and content
+  fields.
 arguments:
   title:
     type: string

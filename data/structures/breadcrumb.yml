@@ -1,4 +1,8 @@
-comment: Displays a breadcrumb for a specific page.
+comment: >-
+  Displays the current page's location within the site's navigational
+  hierarchy.
+icon: segment
 arguments:
   page:
   path:
+    preview: true

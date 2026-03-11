@@ -1,12 +1,14 @@
 comment: >-
   Use the alert shortcode to display a contextual feedback message. The inner
   content is used as alert text.
+icon: add_alert
 arguments:
   alert-type:
     release: v1.0.0
   class:
   color:
     default: danger
+    preview: true
   dismissible:
   icon:
   # deprecated arguments

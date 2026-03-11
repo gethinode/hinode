@@ -1,3 +1,6 @@
+comment: >-
+  Defines the rewrite parameters used to process an image via a CDN adapter
+  hook, including transform, format, and anchor options.
 arguments:
   src:
   img:

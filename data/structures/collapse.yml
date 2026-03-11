@@ -1,6 +1,8 @@
 comment: Defines a hidden panel that can be revealed by a trigger.
+icon: collapse_content
 arguments:
   id:
+    preview: true
   class:
 body:
   type: string

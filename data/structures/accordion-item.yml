@@ -1,8 +1,10 @@
 comment: >-
   Defines an individual accordion item.
+icon: expand_circle_down
 arguments:
   title:
     release: v1.0.0
+    preview: true
   show:
   class:
   # deprecated arguments

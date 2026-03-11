@@ -1,15 +1,12 @@
 comment: >-
-  Generates a link for a given named link or url. The shortcode supports a
-  single unnamed parameter, or various named parameters. The unnamed parameter
-  is recognized as a url if it starts with `http`, else it is treated as either
-  a named link or internal reference (in that order). Any inner text is rendered
-  as the link title, otherwise it uses the host name (for external links), link
-  title (for internal links), or anchor name (for any local references
-  containing a `#`).
+  Generates a hyperlink for a named link, URL, or internal reference. Any inner
+  text is used as the link title.
+icon: link
 arguments:
   page:
   href:
     position: 0
+    preview: true
   cue:
   tab:
   case:

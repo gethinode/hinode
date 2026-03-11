@@ -1,5 +1,7 @@
 comment: >-
   Displays text in subscript.
+icon: subscript
 arguments:
   text:
     position: 0
+    preview: true

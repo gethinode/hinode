@@ -1,12 +1,13 @@
 comment: >-
   Displays a navigation header with a toggler. The menu items are derived from
-  the site's configuration. Nested items are supported at one-level depth. The
-  navigation bar includes a search area and a language switcher if applicable.
+  the site's configuration and support one level of nesting.
+icon: menu
 arguments:
   page:
   path:
     group: shortcode
   title:
+    preview: true
   class:
   color:
   id:

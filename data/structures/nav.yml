@@ -1,6 +1,7 @@
 comment: >-
   Displays a tab group of multiple items. Add nav-item inner elements for each
   tab pane.
+icon: view_list
 arguments:
   id:
   page:
@@ -17,6 +18,7 @@ arguments:
     release: v1.0.0
   tab-type:
     release: v1.0.0
+    preview: true
   vertical:
   word-wrap:
     release: v1.0.0
