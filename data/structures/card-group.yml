@@ -1,14 +1,13 @@
 comment: >-
-  Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered
-  using a provided list of pages. Cards on the same row are aligned to each
-  other. The grid renders pages up to a provided maximum amount. The remaining
-  items are accessible via either a paginator or button to a list page (default
-  behavior). Be aware a page can only contain one paginator at a time.
+  Displays a responsive grid of Bootstrap cards rendered from a list of pages,
+  with optional pagination or a link to a list page.
+icon: grid_view
 arguments:
   page:
     optional: true
   title:
     optional: true
+    preview: true
   class:
   color:
   padding:

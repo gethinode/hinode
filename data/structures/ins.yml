@@ -1,4 +1,6 @@
 comment: Underlines text.
+icon: format_underlined
 body:
   optional: false
+  preview: true
   comment: Text to be underlined.

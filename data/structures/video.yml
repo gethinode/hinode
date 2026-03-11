@@ -1,6 +1,7 @@
 comment: >-
-  Embeds a responsive video player for supported video providers. The video is
-  embedded in a responsive frame.
+  Embeds a responsive video player for supported video providers such as YouTube
+  and Cloudinary.
+icon: videocam
 arguments:
   page:
     release: v0.26.5
@@ -14,6 +15,7 @@ arguments:
   media-id:
     position: 0
     release: v1.0.0
+    preview: true
   account:
     release: v0.26.5
   autoplay:

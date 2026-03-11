@@ -1,9 +1,6 @@
 comment: >-
-  Renders the sidebar navigation of a single page. It is intended to be used as
-  companion to the main navigation and is typically used in content-heavy
-  sections, such as documentation pages. On smaller screens, the sidebar is
-  replaced with an offcanvas element. In this case, the main navigation receives
-  an additional toggler on the left of the screen.
+  Renders the sidebar navigation of a single page, typically used in
+  documentation sections. On smaller screens it is replaced with an offcanvas element.
 arguments:
   page:
     type:

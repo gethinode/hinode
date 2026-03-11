@@ -1,19 +1,13 @@
 comment: >-
-  Creates an HTML element that shows the long form of an abbreviation. The
-  abbreviation data is centrally stored in a data file. By default, the
-  shortcode uses `abbr.yaml` with translation support.
-
-  The data file is expected to store key-value pairs, where `id` is the
-  lower-case abbreviation and `long` its long form. The following example
-  illustrates this using YML:
-
-  - id: css
-    long: `Cascading Style Sheets`
+  Use the abbr shortcode to show the long form of an abbreviation. The
+  abbreviation data is centrally stored in a data file with translation support.
+icon: spellcheck
 arguments:
   key:
     type: string
     position: 0
     optional: false
+    preview: true
     comment: >-
       Case-insensitive key of the abbreviation. In shorthand notation, this is
       the first (and only) matched argument. Non-alphanumeric keys must be quoted.

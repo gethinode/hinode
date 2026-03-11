@@ -1,10 +1,6 @@
 comment: >-
-  Retrieves a page collection relative to a provided page or optional section.
-  Provide tags to ensure the pages have at least one matching tag. You can sort
-  the collection by parameter in ascending or descending order.
-
-  As CloudCannon does not support the retrieval of page collection when live
-  editing, the partial returns a dummy collection instead.
+  Retrieves a filtered and sorted page collection relative to a provided page
+  or section. Returns a dummy collection when live editing in CloudCannon.
 arguments:
   page:
     type:

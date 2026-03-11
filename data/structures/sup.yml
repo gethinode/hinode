@@ -1,5 +1,7 @@
 comment: >-
   Displays text in superscript.
+icon: superscript
 arguments:
   text:
     position: 0
+    preview: true

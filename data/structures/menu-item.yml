@@ -1,4 +1,6 @@
-comment: Renders a menu item.
+comment: >-
+  Renders an individual menu item with configurable icon style, layout, and
+  number of columns.
 arguments:
   page:
   menu-entry:

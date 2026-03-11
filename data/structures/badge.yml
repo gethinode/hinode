@@ -1,6 +1,8 @@
 comment: Use the badge shortcode to enrich headings.
+icon: badge
 arguments:
   title:
+    preview: true
   class:
   color:
     default: secondary

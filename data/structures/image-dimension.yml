@@ -1,3 +1,6 @@
+comment: >-
+  Defines the width and height dimensions of a processed image for a given
+  source and aspect ratio.
 arguments:
   src:
   page:

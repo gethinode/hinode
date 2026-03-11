@@ -1,7 +1,9 @@
 comment: Renders a carousel item with a responsive image.
+icon: photo
 arguments:
   page:
   src:
+    preview: true
   ratio:
     group: partial
   portrait:

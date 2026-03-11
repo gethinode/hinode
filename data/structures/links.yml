@@ -1,3 +1,5 @@
+comment: >-
+  Renders a group of links with optional alignment and link type styling.
 arguments:
   page:
     optional: true

@@ -1,4 +1,4 @@
-comment: Generate a download button or link.
+comment: Generates a download button or link.
 arguments:
   download:
   title:

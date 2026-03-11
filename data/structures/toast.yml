@@ -1,8 +1,11 @@
 comment: >-
-  Prepares a toast message. Use a trigger to display the message.
+  Prepares a dismissible toast notification message. Use a button trigger to
+  display the message on screen.
+icon: toast
 arguments:
   title:
     release: v1.0.0
+    preview: true
   id:
   class:
   message:

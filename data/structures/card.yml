@@ -1,10 +1,11 @@
 comment: >-
-  Displays a Bootstrap card. Either specify a valid path, or set the arguments
-  title, href, header, description, and thumbnail individually. The latter
-  arguments override any page attributes.
+  Displays a Bootstrap card that links to a content page. Individual arguments
+  such as title, href, and thumbnail override the corresponding page attributes.
+icon: article
 arguments:
   title:
     optional: true
+    preview: true
   path:
   href:
     group: partial

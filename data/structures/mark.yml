@@ -1,7 +1,9 @@
 comment: Highlights text by applying a background color.
+icon: highlight
 arguments:
   class:
   color:
+    preview: true
 body:
   optional: false
   comment: Text to be marked.

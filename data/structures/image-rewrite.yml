@@ -1,3 +1,6 @@
+comment: >-
+  Defines a set of image source parameters for CDN-based image processing,
+  including account, container, and adapter hook.
 arguments:
   src:
   account:

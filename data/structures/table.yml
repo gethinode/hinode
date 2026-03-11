@@ -1,7 +1,7 @@
 comment: >-
-  Makes a markdown table responsive. Responsive tables scroll horizontally to
-  improve their layout on smaller screens. The features `sortable`, `paging`,
-  and `searchable` require the module `simple-datatables`.
+  Makes a Markdown table responsive with horizontal scrolling on smaller screens.
+  Sorting, paging, and searching require the simple-datatables module.
+icon: table_chart
 arguments:
   page:
     group: partial
@@ -15,6 +15,7 @@ arguments:
   breakpoint:
     default: ""
     position: 0
+    preview: true
   class:
   sortable:
     release: v0.24.13

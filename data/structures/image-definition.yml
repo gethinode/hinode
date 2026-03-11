@@ -1,3 +1,6 @@
+comment: >-
+  Defines the source and rendering attributes of a processed image, including
+  dimensions, loading behavior, and optional caption.
 arguments:
   src:
   page:
