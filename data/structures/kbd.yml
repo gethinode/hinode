@@ -17,3 +17,5 @@ arguments:
       only) matched argument.
     deprecated: v1.0.0
     alternative: text
+example: |
+  {{< kbd "CTRL+C" >}}

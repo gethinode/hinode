@@ -161,6 +161,8 @@ arguments:
       Label of the link button, defaults to the card title.
     deprecated: v1.0.0
     alternative: button-label
+example: |
+  {{< card path="/blog/first-post" ratio="16x9" >}}
 body:
   optional: true
   comment: >-

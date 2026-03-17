@@ -61,3 +61,7 @@ body:
   optional: false
   comment: Content of the item.
   group: shortcode
+example: |
+  {{< nav-item title="Tab #1" show="true" >}}
+    Content of the first tab pane.
+  {{< /nav-item >}}

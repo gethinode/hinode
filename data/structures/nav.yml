@@ -2,6 +2,8 @@ comment: >-
   Displays a tab group of multiple items. Add nav-item inner elements for each
   tab pane.
 icon: view_list
+children:
+  - nav-item
 arguments:
   id:
   page:
@@ -49,3 +51,12 @@ arguments:
     comment: Flag to enable word wrapping of tab titles.
     deprecated: v1.0.0
     alternative: word-wrap
+example: |
+  {{< nav tab-type="tabs" id="tabs-example" >}}
+    {{< nav-item title="Tab #1" show="true" >}}
+      Content of the first tab pane.
+    {{< /nav-item >}}
+    {{< nav-item title="Tab #2" >}}
+      Content of the second tab pane.
+    {{< /nav-item >}}
+  {{< /nav >}}

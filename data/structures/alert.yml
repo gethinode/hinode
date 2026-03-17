@@ -22,6 +22,10 @@ arguments:
         - info
     deprecated: v1.0.0
     alternative: alert-type
+example: |
+  {{< alert color="warning" dismissible="true" >}}
+    This is a warning alert — check the settings before continuing.
+  {{< /alert >}}
 body:
   optional: false
   comment: Alert text.

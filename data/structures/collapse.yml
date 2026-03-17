@@ -8,3 +8,8 @@ body:
   type: string
   optional: false
   comment: Inner content to be revealed when the collapse is triggered.
+example: |
+  {{< button collapse-id="collapse-1" >}}Toggle panel{{< /button >}}
+  {{< collapse id="collapse-1" class="p-3 border rounded" >}}
+    Hidden content revealed when the user clicks the trigger.
+  {{< /collapse >}}

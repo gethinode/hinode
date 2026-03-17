@@ -22,3 +22,8 @@ body:
   optional: false
   comment: Toast message.
   group: shortcode
+example: |
+  {{< button toast-id="toast-1" >}}Show notification{{< /button >}}
+  {{< toast id="toast-1" title="Update available" >}}
+    A new version has been released.
+  {{< /toast >}}

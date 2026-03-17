@@ -129,3 +129,5 @@ arguments:
     comment: Name of the menu configuration.
     deprecated: v2.0.0
     alternative: menu
+example: |
+  {{< navbar id="navbar-1" title="Brand" menu="main" color="body-tertiary" >}}

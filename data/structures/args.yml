@@ -56,3 +56,5 @@ arguments:
     comment: >-
       The header level to use for the user-defined type headers.
     release: v1.0.0
+example: |
+  {{< args structure="alert" >}}

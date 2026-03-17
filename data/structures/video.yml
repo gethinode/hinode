@@ -50,3 +50,5 @@ arguments:
     release: v0.26.5
     deprecated: v1.0.0
     alternative: provider
+example: |
+  {{< video provider="youtube" media-id="dQw4w9WgXcQ" title="Example Video" >}}

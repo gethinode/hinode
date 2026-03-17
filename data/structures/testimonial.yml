@@ -1,4 +1,5 @@
 comment: Displays a single testimonial card.
+group: partial
 icon: format_quote
 arguments:
   page:

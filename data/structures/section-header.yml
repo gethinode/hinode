@@ -1,6 +1,7 @@
 comment: >-
   Renders a simple page section header with title, description, and content
   fields.
+group: partial
 arguments:
   title:
     type: string

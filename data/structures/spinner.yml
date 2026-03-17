@@ -12,3 +12,5 @@ body:
   optional: false
   comment: >-
     Alternative description.
+example: |
+  {{< spinner color="primary" >}}Loading...{{< /spinner >}}

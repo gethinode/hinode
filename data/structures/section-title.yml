@@ -1,6 +1,7 @@
 comment: >-
   Renders a styled page section title with optional heading, links, color, and
   layout options.
+group: partial
 arguments:
   heading:
   links:

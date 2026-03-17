@@ -7,3 +7,5 @@ arguments:
 body:
   optional: false
   comment: Text to be marked.
+example: |
+  {{< mark >}}highlight{{< /mark >}}

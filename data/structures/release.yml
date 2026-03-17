@@ -49,3 +49,5 @@ arguments:
         - button
     deprecated: v1.0.0
     alternative: link-type
+example: |
+  {{< release version="v1.0.0" >}}

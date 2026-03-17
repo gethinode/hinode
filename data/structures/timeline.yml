@@ -12,3 +12,5 @@ arguments:
   background:
   class:
   justify:
+example: |
+  {{< timeline data="events" >}}

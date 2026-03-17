@@ -6,3 +6,5 @@ arguments:
   page:
   path:
     preview: true
+example: |
+  {{< breadcrumb >}}

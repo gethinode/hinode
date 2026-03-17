@@ -1,4 +1,5 @@
 comment: Generates a download button or link.
+group: partial
 arguments:
   download:
   title:

@@ -1,6 +1,8 @@
 comment: >-
   Renders an individual menu item with configurable icon style, layout, and
   number of columns.
+icon: list
+group: partial
 arguments:
   page:
   menu-entry:

@@ -18,3 +18,9 @@ body:
      - bash: backslash symbol
      - PowerShell: backtick symbol
      - sql: `(con)` line suffix
+example: |
+  {{< command user="user" host="localhost" >}}
+  export MY_VAR=123
+  echo "hello"
+  (out)hello
+  {{< /command >}}

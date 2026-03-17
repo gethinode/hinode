@@ -27,3 +27,5 @@ arguments:
     comment: >-
       Class attribute of the abbr element. For example, specify `initialism` for
       a slightly smaller font size.
+example: |
+  {{< abbr HTML >}}

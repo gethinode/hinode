@@ -60,3 +60,7 @@ body:
   comment: >-
     Description of the card.
   group: shortcode
+example: |
+  {{< persona thumbnail="/img/placeholder.png" title="Jane Doe" color="primary" >}}
+    Frontend developer and open-source contributor.
+  {{< /persona >}}

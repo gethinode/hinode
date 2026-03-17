@@ -56,3 +56,5 @@ body:
   optional: true
   group: shortcode
   comment: Link description.
+example: |
+  {{< link href="https://gethinode.com" >}}Visit Hinode{{< /link >}}
