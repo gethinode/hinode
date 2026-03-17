@@ -2,6 +2,8 @@ comment: >-
   Displays a group of related buttons. Add button inner elements for each
   button.
 icon: buttons_alt
+children:
+  - button
 arguments:
   label:
     preview: true
@@ -10,3 +12,9 @@ body:
   type: string
   optional: false
   comment: Inner <button> elements for each button.
+example: |
+  {{< button-group aria-label="Basic example" >}}
+    {{< button color="primary" href="#!" >}}Left{{< /button >}}
+    {{< button color="primary" href="#!" >}}Middle{{< /button >}}
+    {{< button color="primary" href="#!" >}}Right{{< /button >}}
+  {{< /button-group >}}

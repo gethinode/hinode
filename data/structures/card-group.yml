@@ -2,6 +2,8 @@ comment: >-
   Displays a responsive grid of Bootstrap cards rendered from a list of pages,
   with optional pagination or a link to a list page.
 icon: grid_view
+children:
+  - card
 arguments:
   page:
     optional: true
@@ -177,3 +179,9 @@ arguments:
       min: 1
     deprecated: v1.0.0
     alternative: limit
+example: |
+  {{< card-group cols="3" >}}
+    {{< card path="/blog/post-1" >}}
+    {{< card path="/blog/post-2" >}}
+    {{< card path="/blog/post-3" >}}
+  {{< /card-group >}}

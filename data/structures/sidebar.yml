@@ -1,6 +1,7 @@
 comment: >-
   Renders the sidebar navigation of a single page, typically used in
   documentation sections. On smaller screens it is replaced with an offcanvas element.
+group: partial
 arguments:
   page:
     type:

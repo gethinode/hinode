@@ -11,3 +11,5 @@ arguments:
   full:
   id:
   class:
+example: |
+  {{< docs name="theme-colors" file="./data/style.toml" >}}

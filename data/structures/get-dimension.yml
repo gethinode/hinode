@@ -1,4 +1,5 @@
 comment: >-
   Initializes image dimensions (width x height) for supported image ratios.
+group: partial
 arguments:
   ratio:

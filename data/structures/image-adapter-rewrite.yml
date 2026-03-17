@@ -1,5 +1,6 @@
 comment: >-
   Rewrites an origin URL to a target URL as supported by a CDN image adapter.
+group: partial
 arguments:
   url-host:
     release: v1.0.0

@@ -46,3 +46,5 @@ arguments:
       or `-light`.
     deprecated: v1.0.0
     alternative: src
+example: |
+  {{< image src="img/example.jpg" ratio="16x9" caption="Example caption" >}}

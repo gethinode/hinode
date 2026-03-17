@@ -2,6 +2,8 @@ comment: >-
   Displays a carousel of several images. Add carousel-item inner elements to
   define the individual image slides.
 icon: view_carousel
+children:
+  - carousel-item
 arguments:
   id:
   ratio:
@@ -9,6 +11,11 @@ arguments:
   portrait:
     release: v0.18.3
   class:
+example: |
+  {{< carousel ratio="16x9" >}}
+    {{< carousel-item src="img/slide1.jpg" caption="First slide" active="true" >}}
+    {{< carousel-item src="img/slide2.jpg" caption="Second slide" >}}
+  {{< /carousel >}}
 body:
   type: string
   optional: false

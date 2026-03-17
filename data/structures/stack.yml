@@ -1,6 +1,7 @@
 comment: >-
   Displays a stacked layout of Bootstrap cards rendered from a provided list of
   pages, with optional column configuration and link styling.
+icon: view_agenda
 arguments:
   page:
   gutter:
@@ -61,3 +62,5 @@ arguments:
         - button
     deprecated: v2.0.0
     alternative: link-type
+example: |
+  {{< stack limit=6 cols=3 >}}

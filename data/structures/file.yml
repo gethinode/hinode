@@ -2,6 +2,8 @@ comment: >-
   Prints the full content of any given file with syntax highlighting, using the
   Chroma syntax highlighter.
 icon: file_open
+example: |
+  {{< file file="config/_default/hugo.toml" lang="toml" >}}
 arguments:
   file:
     optional: true

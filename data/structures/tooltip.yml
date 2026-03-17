@@ -15,3 +15,5 @@ arguments:
 body:
   optional: false
   comment: Hyperlink text.
+example: |
+  {{< tooltip title="Tooltip text" href="/docs/" >}}Hover over me{{< /tooltip >}}

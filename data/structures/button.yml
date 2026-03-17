@@ -90,3 +90,5 @@ arguments:
       for active/inactive buttons.
     deprecated: v1.0.0
     alternative: collapse-id
+example: |
+  {{< button color="primary" href="/docs/" button-size="sm" >}}Learn more{{< /button >}}

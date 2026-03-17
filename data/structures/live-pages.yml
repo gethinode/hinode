@@ -1,6 +1,7 @@
 comment: >-
   Retrieves a filtered and sorted page collection relative to a provided page
   or section. Returns a dummy collection when live editing in CloudCannon.
+group: partial
 arguments:
   page:
     type:
