@@ -37,7 +37,7 @@
     {{ if not $title }}
         {{ if not $args.minimal }}{{ $title = (T "download" ) }}{{ end }}
         {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName $download)) }}
-        {{ if and $lang (ne (string site.LanguageCode) $lang) }}
+        {{ if and $lang (ne site.Language.Lang $lang) }}
             {{ range site.Languages }}
                 {{ if eq .LanguageCode $lang }}
                     {{ $title = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
