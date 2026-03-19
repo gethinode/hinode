@@ -36,7 +36,7 @@
 {{ $overlayMode := $.Scratch.Get "overlayMode" }}
 
 {{- /* Define base URL */ -}}
-{{ $lang := site.LanguageCode | default site.Language.Lang }}
+{{ $lang := site.Language.Lang }}
 {{ $.Scratch.Set "baseURL" (strings.TrimSuffix (printf "%s/" $lang) site.Home.RelPermalink) }}
 
 <!doctype html>

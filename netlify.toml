@@ -4,7 +4,7 @@
   publish = 'exampleSite/public'
 
   [build.environment]
-    DART_SASS_VERSION = '1.97.3'
+    DART_SASS_VERSION = '1.98.0'
     HUGO_ENABLEGITINFO = 'true'
     HUGO_ENV = 'production'
     HUGO_VERSION = '0.153.1'

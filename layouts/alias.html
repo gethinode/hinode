@@ -1,4 +1,4 @@
-{{ $lang := site.LanguageCode | default site.Language.Lang }}
+{{ $lang := site.Language.Lang }}
 <!DOCTYPE html>
 <html {{ with $lang }}lang="{{ . }}"{{ end }}>
   <head>

@@ -4,7 +4,7 @@
     command = "HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example"
 
 [build.environment]
-    DART_SASS_VERSION = "1.97.3"
+    DART_SASS_VERSION = "1.98.0"
     HUGO_VERSION = "0.153.1"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
