@@ -43,7 +43,7 @@
     {{- $menuURL = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ((or $entry.PageRef $entry.URL) | relLangURL)) -}}
 {{ end }}
 {{- $pageURL := $page.RelPermalink -}}
-{{- $isActive := or (and (eq $pageURL $menuURL) (ne $menuURL ("/" | relLangURL))) (eq $pageURL $menuURL) -}}
+{{- $isActive := and (ne $menuURL "") (or (eq $pageURL $menuURL) (and (ne $menuURL ("/" | relLangURL)) (strings.HasPrefix $pageURL $menuURL))) -}}
 {{ if not $entry.PageRef }}{{ $isActive = false }}{{ end }}
 {{- $isIcon := or $entry.Params.icon $entry.Pre -}}
 {{- $isAlias := $entry.Params.alias -}}
