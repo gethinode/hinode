@@ -79,7 +79,7 @@
             {{ else }}
                 {{ $data := .Value | transform.Unmarshal }}
                 {{ if $args.autotitle }}{{ with $data.title }}{{ $title = . }}{{ end }}{{ end }}
-                {{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}
+                {{ if and $data.height $data.width }}{{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}{{ end }}
             {{ end }}
         {{ else }}
             {{ errorf "Unable to get video metadata '%q': %s" $api $origin }}
@@ -108,7 +108,7 @@
             {{ else }}
                 {{ $data := .Value | transform.Unmarshal }}
                 {{ if $args.autotitle }}{{ with $data.title }}{{ $title = . }}{{ end }}{{ end }}
-                {{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}
+                {{ if and $data.height $data.width }}{{ $padding = printf "%.2f%%" (mul (div $data.height $data.width) 100) }}{{ end }}
             {{ end }}
         {{- end -}}
 
