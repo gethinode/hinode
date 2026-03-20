@@ -9,6 +9,11 @@ arguments:
     preview: true
   always-open:
   class:
+body:
+  type: string
+  optional: false
+  group: shortcode
+  comment: Inner <accordion-item> elements for each panel.
 example: |
   {{< accordion id="accordion-example" always-open="true" >}}
     {{< accordion-item title="First item" show="true" >}}

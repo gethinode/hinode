@@ -51,6 +51,11 @@ arguments:
     comment: Flag to enable word wrapping of tab titles.
     deprecated: v1.0.0
     alternative: word-wrap
+body:
+  type: string
+  optional: false
+  group: shortcode
+  comment: Inner <nav-item> elements for each tab or pill.
 example: |
   {{< nav tab-type="tabs" id="tabs-example" >}}
     {{< nav-item title="Tab #1" show="true" >}}
