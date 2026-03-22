@@ -159,7 +159,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [[module.imports]]
     path = "github.com/gethinode/mod-lottie/v2"
   [[module.imports]]
-    path = "github.com/gethinode/mod-mermaid/v3"
+    path = "github.com/gethinode/mod-mermaid/v4"
   [[module.imports]]
     path = "github.com/gethinode/mod-simple-datatables/v3"
   [[module.imports]]
