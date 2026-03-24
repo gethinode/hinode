@@ -1,7 +1,7 @@
 {
   "name": "@gethinode/hinode",
   "version": "0.0.0-semantically-released",
-  "description": "Hinode is a clean documentation and blog theme for Hugo, an open-source static site generator",
+  "description": "Hinode is a production-ready Hugo theme built on Bootstrap 5. Open source, actively maintained, and built for developers.",
   "keywords": [
     "hugo",
     "theme",
