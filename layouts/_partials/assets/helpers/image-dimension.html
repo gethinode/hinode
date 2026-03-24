@@ -60,7 +60,8 @@
 
 {{/* Detect static assets — must be computed after any URL rewrite */}}
 {{- $staticPath := strings.TrimPrefix "/static" $src -}}
-{{- $isStatic := fileExists (path.Join "/static" $staticPath) -}}
+{{- $isURL := or (hasPrefix $src "http://") (hasPrefix $src "https://") -}}
+{{- $isStatic := and (not $isURL) (fileExists (path.Join "/static" $staticPath)) -}}
 
 {{/* Define image dimensions */}}
 {{ $dims := slice }}
