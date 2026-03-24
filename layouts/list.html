@@ -1,10 +1,19 @@
 {{ define "main" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{- $blocks := $.Scratch.Get "blocks" -}}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
+    {{- $content := partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}
 
-    {{ $blocks | safeHTML }}
+    <!-- Render the defined content blocks, using the default articles element as fallback -->
+    {{ if .Params.content_blocks }}
+        {{- partial "page/blocks.html" . -}}
+    {{ else }}
+        {{ partial "page/articles.html" . }}
+    {{ end }}
 
-    <div class="container-xxl flex-fill p-4 px-xxl-0">
-        {{ .Render "body" }}
-    </div>
+    <!-- Render the list page content as full width, if any -->
+    {{ with $content }}
+        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+            {{ . }}
+        </div>
+    {{ end }}
 {{ end -}}

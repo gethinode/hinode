@@ -1,0 +1,10 @@
+# Development-specific parameters for exampleSite
+
+[modules.hinode.csp]
+    frame-src = [
+        "*.googletagmanager.com",
+        "player.cloudinary.com",
+        "www.youtube-nocookie.com",
+        "www.youtube.com",
+        "player.vimeo.com"
+    ]

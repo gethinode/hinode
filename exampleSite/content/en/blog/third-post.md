@@ -1,8 +1,8 @@
 ---
 author: Mark Dumay
-title: third post (exact case)
+title: third post
 date: 2022-12-01
-description: This is my third blog post.
+description: This is the third blog post. It uses exact case for the title.
 tags: ["blog"]
 exact: true
 thumbnail:

@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -20,11 +20,10 @@
 {{- end -}}
 
 {{/* Initialize local arguments */}}
-
 {{- $icon := partial "utilities/GetTargetPath.html" (dict "path" $args.icon "page" $args.page) -}}
 {{- $image := partial "utilities/GetTargetPath.html" (dict "path" $args.image "page" $args.page) -}}
 {{- $wrapper := $args.wrapper -}}
-{{- if $image }}{{ $wrapper = printf "img-wrap %s" (or $wrapper "mx-auto") }}{{ end -}}
+{{- if $image }}{{ $wrapper = printf "%s" (or $wrapper "img-wrap mx-auto") }}{{ end -}}
 {{- $class := $args.class -}}
 
 {{- if $icon -}}
@@ -33,15 +32,15 @@
             <i>Animation preview not supported</i>
         {{- else }}
             {{- partial "assets/animation.html" (dict
-                "data" $icon
-                "mode" $args.mode
-                "loop" false
+                "data"  $icon
+                "mode"  $args.mode
+                "loop"  false
                 "hover" true
                 "class" "col-6 mx-auto text-center"
             ) -}}
         {{- end -}}
     {{- else }}
-        {{ partial "assets/icon.html" (dict "icon" $icon "wrapper" $wrapper) -}}
+        {{ partial "assets/icon.html" (dict "icon" $icon "class" $class "wrapper" $wrapper "spacing" false) -}}
     {{- end -}}
 {{- else if $image -}}
     {{- if not (hasSuffix $image "svg") }}{{ $class = strings.TrimSpace (printf "%s rounded" (or $class "")) }}{{ end -}}
@@ -49,6 +48,7 @@
         "src"      $image
         "anchor"   $args.anchor
         "ratio"    $args.ratio
+        "portrait" $args.portrait
         "wrapper"  $wrapper
         "class"    $class
         "title"    $args.title

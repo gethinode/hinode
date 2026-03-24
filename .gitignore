@@ -1,12 +1,15 @@
 _vendor/
 prebuild/
 prebuild-headers/
+prebuild-headers-dev/
+prebuild-headers-prod/
 public/
 resources/
 node_modules/
 
 .DS_store
 .hugo_build.lock
+
 # Local Netlify folder and build files
 .netlify
 dart-sass/

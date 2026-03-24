@@ -1,18 +1,18 @@
 comment: >-
-  Displays a grid of Bootstrap cards with 1 to 5 columns. The cards are rendered
-  using a provided list of pages. Cards on the same row are aligned to each
-  other. The grid renders pages up to a provided maximum amount. The remaining
-  items are accessible via either a paginator or button to a list page (default
-  behavior). Be aware a page can only contain one paginator at a time.
+  Displays a responsive grid of Bootstrap cards rendered from a list of pages,
+  with optional pagination or a link to a list page.
+icon: grid_view
+children:
+  - card
 arguments:
   page:
     optional: true
   title:
     optional: true
+    preview: true
   class:
   color:
   padding:
-    default: 3
   gutter:
     release: v0.19.0
   header-style:
@@ -44,7 +44,6 @@ arguments:
   icon-rounded:
     release: v1.0.0
   align:
-    default: start
   wrapper:
     default: p-0
   responsive:
@@ -66,27 +65,19 @@ arguments:
   valign:
     release: v0.27.0
   styles:
+    type:
+      - styles
+      - '[]map[string]interface {}'
     release: v0.27.0
+    optional: true
   button-label:
     release: v1.0.0
-  more-link-type:
-    type: select
-    optional: true
-    default: button
-    comment: Style of the more button or link.
-    options:
-      values:
-        - button
-        - link
-    release: v1.16.0
   more-link-icon:
     type: string
     optional: true
-    comment: >-
-      Icon to include. You can use shorthand notation such as `fas sort` to
-      include a Font Awesome icon. The argument also supports files with an
-      `.svg` or `.json` extension.
-    release: v1.16.0
+  more-link-type:
+    type: string
+    optional: true
 
   # deprecated arguments
   header:
@@ -95,7 +86,7 @@ arguments:
     default: full
     parent: cascade
     comment: >-
-      Header components of the card, displayed in small caps. 
+      Header components of the card, displayed in small caps.
     options:
       values:
         - full
@@ -111,7 +102,7 @@ arguments:
     parent: cascade
     release: v0.24.16
     comment: >-
-      Body components of the element. 
+      Body components of the element.
     options:
       values:
         - full
@@ -188,3 +179,14 @@ arguments:
       min: 1
     deprecated: v1.0.0
     alternative: limit
+body:
+  type: string
+  optional: false
+  group: shortcode
+  comment: Inner <card> elements for each card.
+example: |
+  {{< card-group cols="3" >}}
+    {{< card path="/blog/post-1" >}}
+    {{< card path="/blog/post-2" >}}
+    {{< card path="/blog/post-3" >}}
+  {{< /card-group >}}

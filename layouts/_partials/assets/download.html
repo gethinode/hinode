@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -19,19 +19,25 @@
     {{ $error = $args.err }}
 {{ end }}
 
-{{/* Initialize local arguments */}}
-{{- $title := $args.title -}}
-{{- $download := partial "utilities/GetTargetPath.html" (dict "path" $args.download "page" page) -}}
-{{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-    {{- errorf "Cannot find download file for page '%s': %s" page.File.Path $download -}}
-    {{- $error = true }}
+{{ $download := "" }}
+{{ if not $error }}
+    {{- $download = partial "utilities/GetTargetPath.html" (dict "path" $args.download "page" page) -}}
+    {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
+        {{ if page.File }}
+            {{- errorf "Cannot find download file for page '%s': %s" page.File.Path $download -}}
+        {{ else }}
+            {{- errorf "Cannot find download file: %s" $download -}}
+        {{ end }}
+        {{- $error = true }}
+    {{- end -}}
 {{- end -}}
 
 {{ if not $error }}
+    {{- $title := $args.title -}}
     {{ if not $title }}
         {{ if not $args.minimal }}{{ $title = (T "download" ) }}{{ end }}
         {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName $download)) }}
-        {{ if and $lang (ne (string site.LanguageCode) $lang) }}
+        {{ if and $lang (ne site.Language.Lang $lang) }}
             {{ range site.Languages }}
                 {{ if eq .LanguageCode $lang }}
                     {{ $title = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
@@ -39,13 +45,15 @@
             {{ end }}
         {{ end }}
     {{ end }}
-    {{ $attr := dict "download" (path.Base .) }}
+    {{ $attr := dict "download" (path.Base $download) }}
     {{ partial "assets/button.html" (dict 
         "href"        $download
         "title"       $title
         "color"       $args.color
         "outline"     $args.outline
+        "link-type"   $args.linkType
         "icon"        $args.icon
+        "order"       $args.order
         "button-size" $args.size
         "justify"     $args.justify
         "class"       $args.class

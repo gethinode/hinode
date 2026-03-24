@@ -1,8 +1,10 @@
 comment: >-
- Displays a release button that links to a specific release. Use the state to
- indicate if it is a new or deprecated feature.
+  Displays a release button that links to a specific release. Use the state to
+  indicate if it is a new or deprecated feature.
+icon: new_label
 arguments:
   version:
+    preview: true
   release-state:
     release: v1.0.0
   short:
@@ -47,3 +49,5 @@ arguments:
         - button
     deprecated: v1.0.0
     alternative: link-type
+example: |
+  {{< release version="v1.0.0" >}}

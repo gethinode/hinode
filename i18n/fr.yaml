@@ -17,6 +17,8 @@
   translation: "sur"
 - id: draft
   translation: "Brouillon"
+- id: published
+  translation: "Publié"
 
 # List pages
 - id: article
@@ -58,6 +60,12 @@
 - id: download
   translation: "Télécharger l'article"
 
+# Hero
+- id: backgroundImage
+  translation: "Image de fond"
+- id: heroImage
+  translation: "Image héro"
+
 # Pagination
 - id: paginationNav
   translation: "Navigation de la page"
@@ -95,6 +103,10 @@
   translation: "Voir également"
 - id: sectionMenu
   translation: "Selectionner un topic"
+- id: tocShowMore
+  translation: "Afficher {{ . }} plus"
+- id: tocShowLess
+  translation: "Afficher moins"
 
 # Sidebar
 - id: toggleSidebar
@@ -105,6 +117,8 @@
   translation: "Ajouté dans {{ . }}"
 - id: deprecatedFeature
   translation: "Obsolète dans {{ . }}"
+- id: alternativeFeature
+  translation: "Utilisez `{{ . }}` à la place"
 
 # Versioning
 - id: latest
@@ -128,7 +142,7 @@
 - id: rights
   translation: "Tous droits réservés"
 - id: poweredBy
-  translation: "Propulsé par {{ . }}."
+  translation: "Propulsé par {{ . }}"
 
 # Comments
 - id: show
@@ -169,3 +183,35 @@
 # Nav & Tab
 - id: clickToExpand
   translation: "Cliquez pour afficher le contenu"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "Intéressé par ce sujet?"
+- id: contactBody
+  translation: "Veuillez laisser vos coordonnées afin que nous puissions vous contacter."
+- id: contactAction
+  translation: "Nous contacter"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Restez informé"
+- id: newsletterName
+  translation: "Nom"
+- id: newsletterEmail
+  translation: "E-mail"
+- id: newsletterSubscribe
+  translation: "S'abonner"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Témoignage précédent"
+- id: testimonialNext
+  translation: "Témoignage suivant"
+- id: testimonialCase
+  translation: "Voir l'étude de cas client"
+
+# Preview
+- id: previewError
+  translation: "Impossible de charger l'aperçu pour"
+- id: previewOpenTab
+  translation: "Ouvrir dans un nouvel onglet"

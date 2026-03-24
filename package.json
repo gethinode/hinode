@@ -12,7 +12,7 @@
     "documentation"
   ],
   "main": "index.js",
-  "private": true,
+  "private": false,
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -29,7 +29,9 @@
     "build:example": "npm run -s prebuild && hugo --gc --minify -s exampleSite",
     "build:example:ci": "npm run -s prebuild && hugo --gc --minify -s exampleSite -e ci",
     "build:debug": "hugo -e debug --debug",
-    "build:headers": "hugo --renderSegments headers -d prebuild-headers -e headers && cpy prebuild-headers/netlify.toml ./ --flat && cpy prebuild-headers/server.toml config/_default/ --flat",
+    "build:headers": "npm run build:headers:dev && npm run build:headers:prod",
+    "build:headers:dev": "hugo --renderSegments headers -d prebuild-headers-dev -e development && cpy prebuild-headers-dev/server.toml config/_default/ --flat",
+    "build:headers:prod": "hugo --renderSegments headers -d prebuild-headers-prod -e production && cpy prebuild-headers-prod/netlify.toml ./ --flat",
     "build:example:headers": "hugo -s exampleSite --renderSegments headers -d prebuild && cpy exampleSite/prebuild/netlify.toml ./ --flat && cpy exampleSite/prebuild/server.toml exampleSite/config/_default/ --flat",
     "build:preview": "npm run build -D -F",
     "clean:public": "rimraf public exampleSite/public",
@@ -72,42 +74,45 @@
   "homepage": "https://gethinode.com",
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
-    "autoprefixer": "^10.4.27",
-    "cssnano": "^7.1.3",
-    "cssnano-preset-advanced": "^7.0.11",
-    "hugo-bin": "0.149.2",
-    "purgecss-whitelister": "^2.4.0"
+    "autoprefixer": "^10.4.24",
+    "cssnano": "^7.1.2",
+    "cssnano-preset-advanced": "^7.0.10",
+    "hugo-extended": "^0.156.0",
+    "postcss-cli": "^11.0.1",
+    "rimraf": "^6.1.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^20.5.0",
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
+    "@eslint/js": "^9.39.3",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
-    "commitizen": "^4.3.1",
+    "@stylistic/eslint-plugin": "^5.9.0",
     "cpy-cli": "^7.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.1",
+    "globals": "^17.3.0",
     "husky": "^9.1.7",
     "markdownlint-cli2": "^0.21.0",
-    "neostandard": "^0.13.0",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^11.0.1",
     "replace-in-files-cli": "^4.0.0",
-    "rimraf": "^6.1.3",
     "semantic-release": "^25.0.3",
     "shx": "^0.4.0",
-    "stylelint": "^16.26.1",
-    "stylelint-config-standard-scss": "^16.0.0"
+    "stylelint": "^17.3.0",
+    "stylelint-config-standard-scss": "^17.0.0"
   },
   "optionalDependencies": {
     "fsevents": "*"
   },
-  "hugo-bin": {
-    "buildTags": "extended"
-  },
   "release": {
-    "branches": "main",
+    "branches": [
+      "main",
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ],
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
@@ -130,10 +135,5 @@
         }
       ]
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }

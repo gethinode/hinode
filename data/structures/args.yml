@@ -1,6 +1,7 @@
 comment: >-
-  Generates a markdown table of structured arguments. The argument definitions are
-  expected to be defined in a data file identified by a provided structure name.
+  Generates a table of structured arguments defined in a data file identified
+  by a structure name.
+icon: table_chart
 arguments:
   page:
     optional: false
@@ -9,6 +10,7 @@ arguments:
     type: string
     position: 0
     optional: false
+    preview: true
     comment: >-
       Name of the data file that contains argument definitions. Supported data
       formats include JSON, TOML, YAML, and XML. You can omit the file
@@ -54,3 +56,5 @@ arguments:
     comment: >-
       The header level to use for the user-defined type headers.
     release: v1.0.0
+example: |
+  {{< args structure="alert" >}}

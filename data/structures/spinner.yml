@@ -1,12 +1,16 @@
 comment: >-
   Use the spinner shortcode to indicate the loading state of a component or
-  page. The inner content is used as alternative description. 
+  page. The inner content is used as alternative description.
+icon: hourglass_empty
 arguments:
   class:
   color:
     default: primary
+    preview: true
   grow:
 body:
   optional: false
   comment: >-
     Alternative description.
+example: |
+  {{< spinner color="primary" >}}Loading...{{< /spinner >}}

@@ -23,8 +23,56 @@
         enabled = true
         modes = ["light", "dark"]
         toggle = true
-        iconLight = "fas sun"
-        iconDark = "fas moon"
+
+[icons]
+    # Color mode toggle
+    colorModeLight       = "sun"
+    colorModeDark        = "moon-stars"
+    # Navbar
+    navbarLanguage       = "globe2"
+    navbarOverflow       = "three-dots"
+    navbarVersionCheck   = "check"
+    # Pagination
+    paginationFirst      = "chevron-double-left"
+    paginationPrev       = "chevron-left"
+    paginationNext       = "chevron-right"
+    paginationLast       = "chevron-double-right"
+    # Other navigation
+    breadcrumbBack       = "chevron-left"
+    pageNavPrev          = "arrow-left"
+    pageNavNext          = "arrow-right"
+    # Content
+    tocSort              = "sort-down"
+    cardReadMore         = "chevron-right"
+    externalLink         = "box-arrow-up-right"
+    testimonialNext      = "chevron-right"
+    testimonialQuote     = "quote"
+    headingAnchor        = "link"
+    notFoundPage         = "link-45deg"
+    sharingWebshare      = "share"
+    sharingDownload      = "download"
+    # Search (mod-flexsearch)
+    search          = "search"
+    # Testimonial carousel controls (mod-blocks)
+    carouselPrev    = "chevron-left"
+    carouselNext    = "chevron-right"
+    # CTA and contact action links (mod-blocks)
+    ctaAction       = "chevron-right"
+    # Preview component device tabs and error state (mod-blocks)
+    previewDesktop  = "display"
+    previewTablet   = "tablet"
+    previewMobile   = "phone"
+    previewError    = "exclamation-triangle"
+    [icons.admonition]
+        note       = "info-circle"
+        info       = "info-circle"
+        tip        = "lightbulb"
+        important  = "exclamation"
+        warning    = "exclamation-triangle"
+        caution    = "hand-index-thumb"
+    [icons.release]
+        deprecated = "trash"
+        feature    = "rocket-takeoff"
 
 [debugging]
     showJS = false
@@ -61,7 +109,6 @@
     endLevel = 3
     maxNumHeadings = 9
     [navigation.language]
-        icon = "fas globe"
         inline = false
     [navigation.padding]
         x = 4
@@ -69,10 +116,13 @@
     [navigation.search]
         enabled = true
         modal = false
-        icon = "fas magnifying-glass"
 
 [messages]
     placement = "bottom-right"
+
+[pages]
+    readingTime = true
+    wordCount = true
 
 [dam]
     dimensions = "dimensions.yml"
@@ -120,7 +170,7 @@
 [[sharing.providers]]
     name = "email"
     url = "{url}"
-    icon = "fas link"
+    icon = "link"
     weight = 50
     clipboard = true
 
@@ -188,3 +238,6 @@
 
 [modules.mermaid]
     elk = true
+
+[modules.fontawesome]
+  defaultFamily = "bi"

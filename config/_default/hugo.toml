@@ -1,6 +1,6 @@
 # toml-docs-start main
 title = "Hinode"
-copyright = "Copyright © 2022 - 2025 Mark Dumay."
+copyright = "Copyright © 2026 Hinode Team"
 enableGitInfo = true
 # toml-docs-end main
 
@@ -139,60 +139,31 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
     source = "static"
     target = "static"
   [[module.mounts]]
-    source = 'component-library'
-    target = 'layouts/partials/bookshop'
-    includeFiles = ['**/*.hugo.html']
-  [[module.mounts]]
-    source = 'component-library'
-    target = 'data/structures'
-    includeFiles = ['**/*.bookshop.yml']
-  [[module.mounts]]
-    source = 'component-library'
-    target = 'assets/bookshop'
-  [[module.mounts]]
-    source = 'component-library'
-    target = 'assets/scss/modules/bookshop'
-    includeFiles = ['**/*.scss']
-    excludeFiles = ['bookshop.scss']
-  [[module.mounts]]
-    source = 'component-library/bookshop.scss'
-    target = 'assets/scss/bookshop.scss'
-  [[module.mounts]]
-    source = 'component-library/helpers'
-    target = 'layouts/partials/_bookshop/helpers'
-  # ensures main package.json is always available, even when using workspaces
-  # in workspaces, the package.json is pointing to the first imported module
-  [[module.mounts]]
-    source = "package.json"
-    target = "assets/data/package-hinode.json"
-  [[module.mounts]]
     source = "netlify.toml"
     target = "assets/config/netlify.toml"
 # toml-docs-start modules
-  [[module.imports]]
-    path = "github.com/cloudcannon/bookshop/hugo/v3"
   [[module.imports]]
     path = "github.com/gethinode/mod-bootstrap"
   [[module.imports]]
     path = "github.com/gethinode/mod-csp"
   [[module.imports]]
-    path = "github.com/gethinode/mod-flexsearch/v3"
+    path = "github.com/gethinode/mod-flexsearch/v4"
   [[module.imports]]
-    path = "github.com/gethinode/mod-fontawesome/v2"
+    path = "github.com/gethinode/mod-fontawesome/v5"
   [[module.imports]]
-    path = "github.com/gethinode/mod-google-analytics"
+    path = "github.com/gethinode/mod-google-analytics/v2"
   [[module.imports]]
     path = "github.com/gethinode/mod-katex"
   [[module.imports]]
-    path = "github.com/gethinode/mod-leaflet"
+    path = "github.com/gethinode/mod-leaflet/v2"
   [[module.imports]]
-    path = "github.com/gethinode/mod-lottie"
+    path = "github.com/gethinode/mod-lottie/v2"
   [[module.imports]]
-    path = "github.com/gethinode/mod-mermaid/v3"
+    path = "github.com/gethinode/mod-mermaid/v4"
   [[module.imports]]
-    path = "github.com/gethinode/mod-simple-datatables/v2"
+    path = "github.com/gethinode/mod-simple-datatables/v3"
   [[module.imports]]
-    path = "github.com/gethinode/mod-utils/v4"
+    path = "github.com/gethinode/mod-utils/v5"
 # toml-docs-end modules
 
 # toml-docs-start segments

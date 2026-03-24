@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -40,7 +40,7 @@
         {{- $destination = path.Join (path.Dir $destination) (printf "%s.%s%s" (path.BaseName $destination) $page.Language.Lang (path.Ext $destination)) -}}
     {{- end -}}
 
-    {{- $bundle := partial "utilities/bundlev2.html" (dict
+    {{- $bundle := partialCached "utilities/bundlev2.html" (dict
         "page"            $page
         "match"           $match
         "filename"        $destination
@@ -50,7 +50,7 @@
         "skip-template"   $skipTemplate
         "enable-template" $enableTemplate
         "debugging"       site.Params.debugging.showJS
-    ) -}}
+    ) $destination (delimit $modules ",") -}}
     {{- $js := $bundle.bundle -}}
     {{- $jsmod := $bundle.module -}}
 
@@ -98,8 +98,6 @@
     {{- $error = true -}}
 {{- end -}}
 
-{{- $page := $args.page | default page -}}
-
 {{/* Initialize local arguments */}}
 {{- $patterns := dict 
     "other"         "js/critical/*.*js"
@@ -112,15 +110,15 @@
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $state := "immediate" -}}
-{{- $config := $page.Scratch.Get "modules" -}}
+{{- $config := $args.page.Scratch.Get "modules" -}}
 
 {{- $page_modules := slice -}}
-{{- if reflect.IsMap $page.Params.modules -}}
-    {{- $page_modules = $page.Params.modules -}}
+{{- if reflect.IsMap $args.page.Params.modules -}}
+    {{- $page_modules = $args.page.Params.modules -}}
 {{- else -}}
-    {{- $page_modules = $page_modules | append $page.Params.modules -}}
+    {{- $page_modules = $page_modules | append $args.page.Params.modules -}}
 {{- end -}}
-{{- with $page.Scratch.Get "dependencies" -}}{{- $page_modules = append $page_modules . | uniq -}}{{- end -}}
+{{- with $args.page.Scratch.Get "dependencies" -}}{{- $page_modules = append $page_modules . | uniq -}}{{- end -}}
 
 {{- $categories := dict "other" slice -}}
 
@@ -173,7 +171,7 @@
                 {{- end -}}
 
                 {{- partial "inline/bundle-script.html" (dict 
-                    "page"           $page
+                    "page"           $args.page
                     "match"          $match
                     "destination"    (printf "js/%s.bundle.js" $args.type)
                     "cat"            $cat
@@ -191,7 +189,7 @@
             {{- range $val -}}
                 {{- $modconfig := index $config.modules . -}}
                 {{- partial "inline/bundle-script.html" (dict 
-                    "page"           $page
+                    "page"           $args.page
                     "destination"    (printf "js/%s.js" .)
                     "cat"            $cat
                     "modules"        (slice .)

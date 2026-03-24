@@ -1,5 +1,9 @@
+comment: >-
+  Renders a group of links with optional alignment and link type styling.
+group: partial
 arguments:
   page:
+    optional: true
   links:
   align:
   justify:

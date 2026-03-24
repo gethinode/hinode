@@ -5,8 +5,12 @@
     --bs-pagination-hover-color: var(--bs-pagination-active-color);
     --bs-pagination-hover-bg: var(--bs-pagination-active-bg);
     --bs-pagination-hover-border-color: none;
-}
 
-.pagination .page-item {
-    margin: 0.4rem;
+    .page-item {
+        margin: 0.4rem;
+    }
+
+    .page-item:first-of-type {
+        margin-left: 0;
+    }
 }

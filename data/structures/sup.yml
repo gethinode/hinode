@@ -1,5 +1,9 @@
 comment: >-
   Displays text in superscript.
+icon: superscript
 arguments:
   text:
     position: 0
+    preview: true
+example: |
+  2{{< sup 10 >}} is 1024.

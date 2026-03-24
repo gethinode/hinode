@@ -13,8 +13,12 @@
   translation: "Foto van %s via %s"
 - id: photoShort
   translation: "Foto van {{ . }}"
+- id: photoOn
+  translation: "op"
 - id: draft
   translation: "Concept"
+- id: published
+  translation: "Publicatiedatum"
 
 # List pages
 - id: article
@@ -113,6 +117,8 @@
   translation: "Toegevoegd in {{ . }}"
 - id: deprecatedFeature
   translation: "Afgeschaft in {{ . }}"
+- id: alternativeFeature
+  translation: "Gebruik `{{ . }}` in plaats daarvan"
 
 # Versioning
 - id: latest
@@ -136,14 +142,13 @@
 - id: rights
   translation: "Alle rechten voorbehouden"
 - id: poweredBy
-  translation: "Mede mogelijk gemaakt door {{ . }}."
+  translation: "Mede mogelijk gemaakt door {{ . }}"
 
 # Comments
 - id: show
   translation: "Tonen"
 - id: comments
   translation: "Reacties" 
-
 
 # Arguments
 - id: name
@@ -173,7 +178,7 @@
 
 # Image
 - id: image
-  translation: Bild
+  translation: afbeelding
 
 # Nav & Tab
 - id: clickToExpand
@@ -186,3 +191,27 @@
   translation: "Laat je gegevens achter en dan neem ik contact met je op."
 - id: contactAction
   translation: "Neem contact op"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Blijf op de hoogte"
+- id: newsletterName
+  translation: "Naam"
+- id: newsletterEmail
+  translation: "E-mail"
+- id: newsletterSubscribe
+  translation: "Schrijf je in"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Vorige klantaanbeveling"
+- id: testimonialNext
+  translation: "Volgende klantaanbeveling"
+- id: testimonialCase
+  translation: "Bekijk klantervaring"
+
+# Preview
+- id: previewError
+  translation: "Kan voorbeeld niet laden voor"
+- id: previewOpenTab
+  translation: "Open in nieuw tabblad"

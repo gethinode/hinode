@@ -1,5 +1,6 @@
 comment: >-
-  Display a custom persona card.
+  Displays a custom persona card with thumbnail, title, and optional link.
+icon: account_circle
 arguments:
   path:
     type: path
@@ -12,6 +13,7 @@ arguments:
       - string
       - template.HTML
     optional: true
+    preview: true
     comment: Title of the card.
   class:
     type: string
@@ -58,3 +60,7 @@ body:
   comment: >-
     Description of the card.
   group: shortcode
+example: |
+  {{< persona thumbnail="/img/placeholder.png" title="Jane Doe" color="primary" >}}
+    Frontend developer and open-source contributor.
+  {{< /persona >}}

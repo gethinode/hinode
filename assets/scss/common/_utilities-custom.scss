@@ -1,0 +1,77 @@
+// Custom Bootstrap utilities extensions
+// This file must be imported BEFORE bootstrap.scss to ensure utilities are processed
+
+// Initialize utilities map if not already defined
+$utilities: () !default;
+
+// Add custom masonry column utilities
+$utilities: map-merge(
+    $utilities,
+    (
+        "m-col": (
+            property: max-width,
+            responsive: true,
+            class: m-col,
+            values: (
+                1: 100%,
+                2: 50%,
+                3: 33.3%,
+                4: 25%,
+                5: 20%,
+            )
+        )
+    )
+);
+
+// Add custom margin utilities (mx auto/0)
+$utilities: map-merge(
+    $utilities,
+    (
+        "cursor": (
+            property: margin-left margin-right,
+            class: mx,
+            responsive: true,
+            values: auto 0,
+        )
+    )
+);
+
+// Add wide padding utilities (using hardcoded rem values since $spacer not yet available)
+$utilities: map-merge(
+    $utilities,
+    (
+        "padding-start-wide": (
+            property: padding-left,
+            responsive: true,
+            class: psw,
+            values: (
+                0: 0,
+                1: 1.5rem,
+                2: 3rem,
+                3: 6rem,
+                4: 9rem,
+                5: 12rem,
+            )
+        ),
+        "padding-top-wide": (
+            property: padding-top,
+            responsive: true,
+            class: ptw,
+            values: (
+                0: 0,
+                1: 1.5rem,
+                2: 3rem,
+                3: 6rem,
+                4: 9rem,
+                5: 12rem,
+            )
+        ),
+        "width": (
+            property: width,
+            responsive: true,
+            values: (
+                auto: auto
+            )
+        )
+    )
+);

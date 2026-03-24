@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -88,17 +88,21 @@
         {{/* headless page */}}
         {{- else -}}
             {{- $thumbnail := "" -}}
+            {{- $mode := false -}}
+            {{- $anchor := "" -}}
             {{- if reflect.IsMap $element.Params.Thumbnail }}
-                {{ $thumbnail = $element.Params.Thumbnail.url }}
+                {{- $thumbnail = $element.Params.Thumbnail.url -}}
+                {{- $mode = $element.Params.Thumbnail.mode -}}
+                {{- $anchor = $element.Params.Thumbnail.anchor -}}
             {{ else }}
                 {{ $thumbnail = $element.Params.Thumbnail }}
             {{ end -}}
-            {{- $anchor := (or (and (reflect.IsMap $element.Params.Thumbnail) $element.Params.Thumbnail.anchor) "") -}}
             {{- $params = merge $params (dict
                 "title"       $element.Title
                 "href"        $element.RelPermalink
                 "description" (partial "utilities/GetDescription.html" (dict "page" $element "raw" true))
                 "thumbnail"   $thumbnail
+                "mode"        $mode
                 "anchor"      $anchor
                 "icon"        $element.Params.icon
             ) -}}
@@ -139,7 +143,7 @@
 {{/* Main code */}}
 {{- if and (not $error) (or (gt (len $elements) 0) $args.cards) -}}
     <div class="container-fluid {{ if $args.scroll }}card-container-wrapper{{ end }} p-0 {{ $args.wrapper }}">
-        <div class="row g-{{ $args.gutter -}}
+        <div class="row{{ with $args.gutter }} g-{{ . }}{{ end }}
         {{- if $args.scroll }} d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end -}}
         {{- if $args.bento }}{{ with $args.valign }} align-items-{{ . }}{{ end }}{{ else }} {{ $colGrid }}{{ end }}">
             {{- range $index, $element := $elements -}}
@@ -158,7 +162,8 @@
                     "subtle"        $args.subtle
                     "icon-style"    (or (index $element "icon-style") $element.style $args.iconStyle)
                     "align"         $args.align
-                    "button"        $args.button
+                    "href"          $element.href
+                    "button"        (cond (isset $args "button") $args.button $element.button)
                     "button-label"  (or (index $element "button-label") $element.buttonLabel)
                     "link-type"     (or $args.linkType $args.buttonType)
                     "icon-rounded"  $args.iconRounded
@@ -189,14 +194,14 @@
     {{- if $paginator -}}
         {{- if gt $paginator.TotalPages 1 -}}
             <div class="pt-{{ $padding.y }}">{{- partial "assets/pagination.html" (dict "page" $args.page "format" "terse") -}}</div>
-        {{- end -}} 
+        {{- end -}}
     {{- else -}}
         {{- if or (and (gt $count $max) $args.hrefTitle) (and $args.hrefForce $args.hrefTitle) -}}
             {{- $href := $args.href -}}
             {{- if and $pretty (not (hasSuffix $href "/" )) (not (strings.Contains $href "#")) -}}
                 {{- $href = printf "%s/" $href -}}
             {{- end -}}
-            <div class="mt-{{ $padding.y }} w-100">
+            <div class="mt-{{ $padding.y }} w-100 align-self-start">
                 {{ partial "assets/button.html" (dict 
                     "href"      $href
                     "title"     $args.hrefTitle

@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -50,7 +50,7 @@
 {{- $page := $args.page -}}
 {{- $id := $args.id | default "0" -}}
 {{- $type := or $args.tabType $args.type -}}
-{{- $wrap := or $args.wordWrap $args.wrap -}}
+{{- $wrap := $args.wordWrap -}}
 {{- $titles := slice -}}
 {{- range $args.list }}{{ $titles = $titles | append .Title }} {{ end -}}
 {{- if reflect.IsSlice $args.navTitles }}{{ $titles = $titles | append $args.navTitles }}{{ end -}}

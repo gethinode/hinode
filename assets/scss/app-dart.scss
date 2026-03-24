@@ -8,8 +8,14 @@
 @import "theme/variables.scss";
 @import "common/icons.scss";
 
+// Import custom utilities (must be before Bootstrap)
+@import "common/utilities-custom.scss";
+
 // Import Bootstrap configuration (mounted by core Bootstrap module)
 @import "bootstrap-dart.scss"; // note: modified for dart-sass
+
+// Import responsive utilities (requires Bootstrap variables to be defined)
+@import "common/utilities-responsive.scss";
 
 // Include dark mode overrides
 @import "common/variables-dark.scss";
@@ -18,7 +24,6 @@
 @import "components/abbr.scss";
 @import "components/alert.scss";
 @import "components/blockquote.scss";
-@import "components/breadcrumb.scss";
 @import "components/button.scss";
 @import "components/card.scss";
 @import "components/carousel.scss";
@@ -37,9 +42,11 @@
 @import "components/sidebar.scss";
 @import "components/syntax-dart.scss"; // note: modified for dart-sass
 @import "components/table.scss";
+@import "components/testimonial.scss";
 @import "components/toast.scss";
 @import "components/timeline.scss";
 @import "components/toc.scss";
+@import "components/tooltip.scss";
 @import "components/video.scss";
 @import "common/animation.scss";
 @import "common/masonry.scss";

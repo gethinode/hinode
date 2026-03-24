@@ -1,8 +1,15 @@
-comment: Defines a hidden panel that can be reveiled by a trigger.
+comment: Defines a hidden panel that can be revealed by a trigger.
+icon: collapse_content
 arguments:
   id:
+    preview: true
   class:
 body:
   type: string
   optional: false
-  comment: Inner <img> elements that define the individual image slides.
+  comment: Inner content to be revealed when the collapse is triggered.
+example: |
+  {{< button collapse-id="collapse-1" >}}Toggle panel{{< /button >}}
+  {{< collapse id="collapse-1" class="p-3 border rounded" >}}
+    Hidden content revealed when the user clicks the trigger.
+  {{< /collapse >}}

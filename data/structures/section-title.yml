@@ -1,15 +1,18 @@
-comment: Renders the header of a page section.
+comment: >-
+  Renders a styled page section title with optional heading, links, color, and
+  layout options.
+group: partial
 arguments:
   heading:
   links:
   color:
     default: body
   class:
-  size: 
+  size:
   use-title:
   justify:
   link-type:
-  use-section: 
+  use-section:
   arrangement:
   heading-style:
   content-style:

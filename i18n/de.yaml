@@ -17,6 +17,8 @@
   translation: "auf"
 - id: draft
   translation: "Entwurf"
+- id: published
+  translation: "Veröffentlicht"
 
 # List pages
 - id: article
@@ -140,7 +142,7 @@
 - id: rights
   translation: "Alle Rechte vorbehalten"
 - id: poweredBy
-  translation: "Ermöglicht durch {{ . }}."
+  translation: "Ermöglicht durch {{ . }}"
 
 # Comments
 - id: show
@@ -189,3 +191,27 @@
   translation: "Bitte hinterlassen Sie Ihre Kontaktdaten, damit wir uns mit Ihnen in Verbindung setzen können."
 - id: contactAction
   translation: "Kontakt aufnehmen"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "Bleib auf dem Laufenden"
+- id: newsletterName
+  translation: "Name"
+- id: newsletterEmail
+  translation: "E-Mail"
+- id: newsletterSubscribe
+  translation: "Abonnieren"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "Vorheriges Testimonial"
+- id: testimonialNext
+  translation: "Nächstes Testimonial"
+- id: testimonialCase
+  translation: "Kundenfallstudie anzeigen"
+
+# Preview
+- id: previewError
+  translation: "Vorschau konnte nicht geladen werden für"
+- id: previewOpenTab
+  translation: "In neuem Tab öffnen"

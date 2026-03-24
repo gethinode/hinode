@@ -1,10 +1,10 @@
 # Auto-generated file - do not modify
 [build]
-  command = 'npm i && npm run build:example'
+  command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example'
   publish = 'exampleSite/public'
 
   [build.environment]
-    DART_SASS_VERSION = '1.97.3'
+    DART_SASS_VERSION = '1.98.0'
     HUGO_ENABLEGITINFO = 'true'
     HUGO_ENV = 'production'
     HUGO_VERSION = '0.153.1'
@@ -13,14 +13,14 @@
 
 [context]
   [context.branch-deploy]
-    command = 'npm i && npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example -- -b $DEPLOY_PRIME_URL'
 
   [context.deploy-preview]
-    command = 'npm i && npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example -- -b $DEPLOY_PRIME_URL'
 
 [dev]
   autoLaunch = false
-  command = 'npm run start:example'
+  command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run start:example'
   framework = '#custom'
   port = 8888
   publish = 'public'
@@ -40,6 +40,7 @@
         default-src 'none'; \
         font-src 'self' fonts.gstatic.com data:; \
         form-action 'self'; \
+        frame-ancestors 'self'; \
         frame-src *.googletagmanager.com player.cloudinary.com www.youtube-nocookie.com www.youtube.com player.vimeo.com; \
         img-src 'self' *.google-analytics.com *.googletagmanager.com googletagmanager.com ssl.gstatic.com www.gstatic.com data: *.imgix.net *.imagekit.io *.cloudinary.com i.ytimg.com tile.openstreetmap.org i.vimeocdn.com; \
         manifest-src 'self'; \
@@ -52,7 +53,6 @@
     Referrer-Policy = 'strict-origin'
     Strict-Transport-Security = 'max-age=31536000; includeSubDomains; preload'
     X-Content-Type-Options = 'nosniff'
-    X-Frame-Options = 'SAMEORIGIN'
     X-XSS-Protection = '1; mode=block'
     cache-control = 'max-age=0, no-cache, no-store, must-revalidate '
 

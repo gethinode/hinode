@@ -1,11 +1,12 @@
 comment: >-
-  Generates terminal output for either `bash`, `powershell`, or `sql` shell
-  languages. 
+  Generates terminal output for bash, powershell, or sql shell languages.
+icon: terminal
 arguments:
   user:
   host:
   prompt:
   shell:
+    preview: true
   class:
 body:
   type: string
@@ -17,3 +18,9 @@ body:
      - bash: backslash symbol
      - PowerShell: backtick symbol
      - sql: `(con)` line suffix
+example: |
+  {{< command user="user" host="localhost" >}}
+  export MY_VAR=123
+  echo "hello"
+  (out)hello
+  {{< /command >}}

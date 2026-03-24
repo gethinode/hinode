@@ -1,9 +1,11 @@
-comment: Adds a keyboard input element.
+comment: Displays a keyboard input element.
+icon: keyboard
 arguments:
   text:
     optional: true
     position: 0
     release: v1.0.0
+    preview: true
   class:
   color:
   # deprecated arguments
@@ -15,3 +17,5 @@ arguments:
       only) matched argument.
     deprecated: v1.0.0
     alternative: text
+example: |
+  {{< kbd "CTRL+C" >}}

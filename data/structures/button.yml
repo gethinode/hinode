@@ -1,7 +1,9 @@
 comment: >-
   Display a button with a hyperlink.
+icon: touch_app
 arguments:
   title:
+    preview: true
   class:
   color:
     default: primary
@@ -24,6 +26,8 @@ arguments:
     release: v1.0.0
   placement:
   icon:
+  icon-class:
+    release: v2.0.0
   order:
   justify:
   toast-id:
@@ -35,7 +39,7 @@ arguments:
   spacing:
   wrapper:
     group: shortcode
-  # deprecated arguments  
+  # deprecated arguments
   type:
     type: select
     optional: true
@@ -51,7 +55,7 @@ arguments:
     type: select
     optional: true
     default: enabled
-    comment: State of the button. 
+    comment: State of the button.
     options:
       values:
         - enabled
@@ -86,3 +90,9 @@ arguments:
       for active/inactive buttons.
     deprecated: v1.0.0
     alternative: collapse-id
+body:
+  type: string
+  optional: false
+  comment: Label text of the button.
+example: |
+  {{< button color="primary" href="/docs/" button-size="sm" >}}Learn more{{< /button >}}

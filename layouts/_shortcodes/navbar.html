@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -22,7 +22,7 @@
 
 {{/* Initialize arguments */}}
 {{- $id := $args.id | default (printf "navbar-collapse-%d" (add .Ordinal 1)) -}}
-{{ $page := "" }}
+{{ $page := .Page }}
 {{ if $args.path }}{{ $page = .Site.GetPage $args.path }}{{ end }}
 {{ if and $args.path (not $page) }}
     {{ errorf "Cannot find page '%s': %s" $args.path .Position -}}
@@ -39,7 +39,7 @@
         "color"      $args.color
         "search"     $args.search
         "mode"       $args.mode
-        "menus"      $args.menus
+        "menu"       (or $args.menu $args.menus)
         "logo"       $args.logo
         "logo-mode"  $args.logoMode
         "title"      $args.title

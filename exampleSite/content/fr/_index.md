@@ -19,7 +19,7 @@ content_blocks:
     links:
       - title: À propos
         url: "/fr/a-propos/"
-        icon: fas chevron-right
+        icon: chevron-right
     orientation: horizontal
     justify: center
 
@@ -32,33 +32,11 @@ content_blocks:
       reverse: true
       sort: date
       keywords: featured
-    hide-empty: false
-    header-style: none
+    hide_empty: false
+    header_style: none
     more:
       title: Plus d'articles
     padding: 0
     limit: 3
     class: border-0 card-zoom card-body-margin
-
-  - _bookshop_name: articles
-    heading:
-      title: Projets
-      align: start
-    background:
-      background: body-tertiary
-    hide-empty: false
-    input:
-      section: projects
-      reverse: false
-      sort: date
-    more:
-      title: Plus d'articles
-    cols: 1
-    padding: 4
-    limit: 2
-    icon-style: fa-5x
-    header-style: none
-    footer-style: tags
-    orientation: horizontal-sm
-    class: border-1 card-emphasize
 ---

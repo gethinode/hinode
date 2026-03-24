@@ -1,11 +1,13 @@
+{{- $error := false -}}
 {{- $transpiler := site.Params.main.build.transpiler | default "libsass" -}}
 {{- $silence := slice -}}
 {{- $supportedTranspilers := slice "libsass" "dartsass" -}}
 {{- if not (in $supportedTranspilers $transpiler) -}}
     {{- errorf "partial [head/stylesheet.html] - Invalid value for param 'transpiler': %s" $transpiler -}}
+    {{ $error = true }}
 {{- end -}}
 {{- if site.Params.main.build.silenceDeprecations -}}
-    {{- $silence = (slice "import" "mixed-decls" "color-functions" "global-builtin") -}}
+    {{- $silence = (slice "import" "color-functions" "global-builtin" "if-function" "legacy-js-api") -}}
 {{- end -}}
 
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
@@ -21,6 +23,7 @@
 {{ $config := page.Scratch.Get "modules" }}
 {{ if not $config }}
     {{ errorf "partial [head/stylesheet.html] - Cannot initialize module configuration" }}
+    {{ $error = true }}
 {{ end }}
 
 {{ if $core }}
@@ -33,6 +36,7 @@
 
 {{ if and site.Params.style.darkModeTint (not (findRE `\d+%` site.Params.style.darkModeTint)) }}
     {{- errorf "partial [head/stylesheet.html] - Invalid value for site param 'style.darkModeTint': %s" site.Params.style.darkModeTint -}}
+    {{ $error = true }}
 {{ end}}
 
 {{- $navbarOffset := "0rem" -}}
@@ -73,20 +77,20 @@
     "enableSourceMap"     (not hugo.IsProduction)
     "vars"                $vars
 ) -}}
-{{- $bundle := partial "utilities/bundlev2.html" (dict
+{{- $bundle := partialCached "utilities/bundlev2.html" (dict
     "page"      page
     "match"     $source
-    "filename"  (printf "scss/bundle-%d.scss" now.UnixNano)
+    "filename"  (printf "scss/bundle-%s.scss" (hash.XxHash $source))
     "modules"   $modules
     "basepath"  "scss"
     "debugging" site.Params.debugging.showSCSS
-) -}}
+) $source page.Language.Lang (delimit $modules ",") -}}
 
-{{- if gt ($bundle.bundle.Content | len) 0 }}
+{{- if and (gt ($bundle.bundle.Content | len) 0) (not $error) }}
     {{- $css := $bundle.bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
 
     {{ if $core }}
-        {{- partial "head/icons.html" (dict "css" $css) -}}
+        {{- partialCached "head/icons.html" (dict "css" $css) ($css.Content | md5) -}}
     {{ end }}
     {{- if site.Params.style.purge -}}
         {{- $post_options := dict "config" "config" "noMap" hugo.IsProduction -}}

@@ -1,5 +1,5 @@
-<!-- 
-    Copyright © 2024 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+<!--
+    Copyright © 2024 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
 -->
 
 {{/* Initialize arguments */}}
@@ -17,6 +17,8 @@
 {{/* Initialize local arguments */}}
 {{ $pages := slice }}
 {{ $total := 0 }}
+{{ $menu := slice }}
+{{ $reverse := $args.reverse | default false }}
 
 {{/* Main code */}}
 {{ if not $args.err }}
@@ -39,7 +41,7 @@
                 {{ warnf "Cannot find section: %s" $args.section }}
             {{ end }}
         {{ end }}
-        
+
         {{ if $sectionPage }}
             {{ if eq $args.kind "taxonomy" }}
                 {{ $filter := $sectionPage.Params.filter }}
@@ -69,20 +71,194 @@
                 {{ end }}
                 {{ if and $args.keywords (gt (len $args.keywords) 0) }}
                     {{ $keywords := slice | append $args.keywords }}
-                    {{ $pages = where $pages "Params.keywords" "intersect" $keywords }}
+                    {{ $pages = where $pages "Keywords" "intersect" $keywords }}
                 {{ end }}
                 {{ if and $args.categories (gt (len $args.categories) 0) }}
                     {{ $categories := slice | append $args.categories }}
                     {{ $pages = where $pages "Params.categories" "intersect" $categories }}
                 {{ end }}
+                {{/* Filter out pages with excludeFromSidebar param if exclude-filtered is true */}}
+                {{ if $args.excludeFiltered }}
+                    {{ $pages = where $pages "Params.excludeFromSidebar" "!=" true }}
+                {{ end }}
             {{ end }}
-        
-            {{/* Sort the pages as specified */}}	
-            {{- $order := "asc" -}}
-            {{- if $args.reverse }}{{ $order = "desc" }}{{ end -}}
-            {{- $pages = sort $pages (printf "Params.%s" $args.sort) $order -}}
+
+            {{/* Include the list pages if requested */}}
+            {{- $lists := slice -}}
+            {{ if or $args.includeList (eq $args.groupBy "section") }}
+                {{ range $pages }}
+                    {{ $lists = $lists | append .Parent | uniq }}
+                {{ end }}
+                {{/* Filter list pages if exclude-filtered is set */}}
+                {{ if $args.excludeFiltered }}
+                    {{ $lists = where $lists "Params.excludeFromSidebar" "!=" true }}
+                {{ end }}
+                {{ $pages = $pages | append $lists }}
+            {{ end }}
+
+            {{/* Sort the pages as specified */}}
+            {{- $sortField := $args.sort | default "title" -}}
+
+            {{ if eq $args.groupBy "section" }}
+                {{- /* Build a hierarchical map: parent path -> slice of children */ -}}
+                {{- $grouped := dict -}}
+                {{- $rootPages := slice -}}
+
+                {{- range $page := $pages -}}
+                    {{- if $page.Parent -}}
+                        {{- $parentPath := $page.Parent.RelPermalink -}}
+                        {{- $childrenSlice := index $grouped $parentPath | default slice -}}
+                        {{- $grouped = merge $grouped (dict $parentPath ($childrenSlice | append $page)) -}}
+                    {{- else -}}
+                        {{- $rootPages = $rootPages | append $page -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- /* If a section was specified, use that section page as the root */ -}}
+                {{- if $args.section -}}
+                    {{- $sectionPage := site.GetPage $args.section -}}
+                    {{- if $sectionPage -}}
+                        {{- $rootPages = slice | append $sectionPage -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- /* Sort root pages first using Hugo's page collection methods */ -}}
+                {{ if $rootPages }}
+                    {{- if eq $sortField "title" -}}
+                        {{- $rootPages = $rootPages.ByTitle -}}                        
+                    {{- else if eq $sortField "date" -}}
+                        {{- $rootPages = $rootPages.ByDate -}}
+                    {{- else if eq $sortField "weight" -}}
+                        {{- $rootPages = $rootPages.ByWeight -}}
+                    {{- else if eq $sortField "linkTitle" -}}
+                        {{- $rootPages = $rootPages.ByLinkTitle -}}
+                    {{- else if eq $sortField "publishDate" -}}
+                        {{- $rootPages = $rootPages.ByPublishDate -}}
+                    {{- else if eq $sortField "lastmod" -}}
+                        {{- $rootPages = $rootPages.ByLastmod -}}
+                    {{- else if eq $sortField "expiryDate" -}}
+                        {{- $rootPages = $rootPages.ByExpiryDate -}}
+                    {{- else if eq $sortField "length" -}}
+                        {{- $rootPages = $rootPages.ByLength -}}
+                    {{- else -}}
+                        {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                        {{- $rootPages = $rootPages.ByParam $sortField -}}
+                    {{- end -}}
+                    {{- if $reverse }}{{ $rootPages = $rootPages.Reverse }}{{ end -}}
+                {{ end }}
+
+                {{- /* Process depth-first (pre-order): use a stack to traverse */ -}}
+                {{- $result := slice -}}
+                {{- $stack := slice -}}
+
+                {{- /* Initialize stack with root pages: always push in reverse for LIFO to pop in correct order */ -}}
+                {{- if $rootPages -}}
+                    {{- range $i := seq (len $rootPages) -}}
+                        {{- $idx := sub (len $rootPages) $i -}}
+                        {{- $page := index $rootPages $idx -}}
+                        {{- $stack = $stack | append $page -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- range $iteration := seq 1 1000 -}}
+                    {{- /* Exit if stack is empty */ -}}
+                    {{- if not $stack -}}
+                        {{- break -}}
+                    {{- end -}}
+
+                    {{- /* Pop from stack */ -}}
+                    {{- $stackSize := len $stack -}}
+                    {{- $lastIdx := sub $stackSize 1 -}}
+                    {{- $current := index $stack $lastIdx -}}
+                    {{- $stack = $stack | first $lastIdx -}}
+
+                    {{- /* Add current page to result */ -}}
+                    {{- $result = $result | append $current -}}
+
+                    {{- /* Get and sort children using Hugo's page collection methods */ -}}
+                    {{- $pageKey := $current.RelPermalink -}}
+                    {{- $children := index $grouped $pageKey | default slice -}}
+                    {{- if $children -}}
+                        {{- if eq $sortField "title" -}}
+                            {{- $children = $children.ByTitle -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "date" -}}
+                            {{- $children = $children.ByDate -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "weight" -}}
+                            {{- $children = $children.ByWeight -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "linkTitle" -}}
+                            {{- $children = $children.ByLinkTitle -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "publishDate" -}}
+                            {{- $children = $children.ByPublishDate -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "lastmod" -}}
+                            {{- $children = $children.ByLastmod -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "expiryDate" -}}
+                            {{- $children = $children.ByExpiryDate -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else if eq $sortField "length" -}}
+                            {{- $children = $children.ByLength -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- else -}}
+                            {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                            {{- $children = $children.ByParam $sortField -}}
+                            {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+                        {{- end -}}
+                        {{- /* Push children to stack in reverse so LIFO pops in correct order */ -}}
+                        {{- range $i := seq (len $children) -}}
+                            {{- $idx := sub (len $children) $i -}}
+                            {{- $child := index $children $idx -}}
+                            {{- $stack = $stack | append $child -}}
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- $pages = $result -}}
+
+                {{/* Build menu structure from sorted pages and hierarchy */}}
+                {{- range $rootPages -}}
+                    {{- $menuEntry := partial "assets/helpers/sidebar-menu-entry" (dict
+                        "page"      .
+                        "grouped"   $grouped
+                        "sortField" $sortField
+                        "reverse"   $reverse
+                    ) -}}
+                    {{- $menu = $menu | append $menuEntry -}}
+                {{- end -}}
+            {{ else }}
+                {{ if $pages }}
+                    {{- /* Use Hugo's page collection methods for regular sorting */ -}}
+                    {{- if eq $sortField "title" -}}
+                        {{- $pages = $pages.ByTitle -}}                        
+                    {{- else if eq $sortField "date" -}}
+                        {{- $pages = $pages.ByDate -}}
+                    {{- else if eq $sortField "weight" -}}
+                        {{- $pages = $pages.ByWeight -}}
+                    {{- else if eq $sortField "linkTitle" -}}
+                        {{- $pages = $pages.ByLinkTitle -}}
+                    {{- else if eq $sortField "publishDate" -}}
+                        {{- $pages = $pages.ByPublishDate -}}
+                    {{- else if eq $sortField "lastmod" -}}
+                        {{- $pages = $pages.ByLastmod -}}
+                    {{- else if eq $sortField "expiryDate" -}}
+                        {{- $pages = $pages.ByExpiryDate -}}
+                    {{- else if eq $sortField "length" -}}
+                        {{- $pages = $pages.ByLength -}}
+                    {{- else -}}
+                        {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+                        {{- $pages = $pages.ByParam $sortField -}}
+                    {{- end -}}
+                    {{- if $reverse }}{{ $pages = $pages.Reverse }}{{ end -}}
+                {{ end }}
+                {{- /* For non-grouped sorts, use pages directly as menu */ -}}
+                {{- $menu = $pages | default slice -}}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}
 
-{{ return (dict "pages" $pages "total" $total) }}
+{{ return (dict "pages" $pages "menu" $menu "total" $total "reverse" $reverse) }}

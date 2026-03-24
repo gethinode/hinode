@@ -1,0 +1,25 @@
+{{- $metadata := .Scratch.Get "metadata" -}}
+{{ if ne $metadata "none" }}
+    <small class="text-body-secondary text-uppercase">
+        {{- $readingTime := (index site.Params.pages "readingTime") | default true -}}
+        {{- $wordCount := (index site.Params.pages "wordCount") | default true -}}
+        
+        {{ if .Date }}
+            {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
+            {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
+            {{ if gt .Lastmod .Date }}
+                {{ $lastmodstr | i18n "lastModified" }}
+            {{ else }}
+                {{ $datestr | i18n "postedOnDate" -}}
+            {{ end }}
+            {{ if or $readingTime $wordCount }}&bull;{{ end }}
+        {{ end }}
+
+        {{- if $readingTime }}
+            {{ (math.Max .ReadingTime 1) | lang.FormatNumber 0 }}&nbsp;{{ i18n "minutesShort" }} {{ i18n "read" }}
+            {{ if $wordCount }}&bull;{{ end }}
+        {{ end }}
+        
+        {{- if $wordCount }}{{ .WordCount | lang.FormatNumber 0 }}&nbsp;{{ i18n "words" }}{{ end }}
+    </small>
+{{ end }}

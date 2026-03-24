@@ -2,70 +2,30 @@
     {{- $page := . -}}
     {{- $layout := $page.Params.layout -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
-    {{- $hasSidebar := site.Params.navigation.sidebar | default true -}}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
     {{- $pageTitle := .Page.Title }}
     {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $pageTitle = title $pageTitle }}{{ end }}
+        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
+                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block">
+                </div>
+                <div class="container col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
+                    {{- if ne $layout "featured" -}}
+                        {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
+                            <div>{{ partial "assets/breadcrumb.html" (dict "page" $page) }}</div>
+                        {{ end -}}
+                    {{- end -}}
 
-    <div class="container-xxl flex-fill p-4 px-xxl-0">
-        <div class="row row-cols-1 row-cols-{{ $breakpoint.prev }}-{{ if $hasSidebar }}3{{ else }}2{{ end }}">
-            {{ if $hasSidebar }}<div class="col col-{{ $breakpoint.current }}-2 d-none d-{{ $breakpoint.current }}-block"></div>{{ end }}
-            <div class="col col-{{ $breakpoint.prev }}-12 col-{{ $breakpoint.current }}-8">
-                {{- if ne $layout "featured" -}}
-                    {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
-                        <div>{{ partial "assets/breadcrumb.html" (dict "page" $page) }}</div>
-                    {{ end -}}
-                {{- end -}}
+                    <p class="display-4 mt-5">{{ $pageTitle }}</p>
 
-                <p class="display-4 mt-5">{{ $pageTitle }}</p>
-
-                {{ if eq .Kind "taxonomy" }}
-                    <div class="row mt-5"></div>
-                    {{ range $.Site.Taxonomies.tags.ByCount }}
-                        {{- $title := .Page.Title }}
-                        {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
-
-                        <div class="row mt-2">
-                            <div class="col-3 mt-auto text-right">
-                                {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
-                            </div>
-                            <div class="col-9">
-                                <a href="{{ .Page.RelPermalink }}">{{ $title | .Page.RenderString }}</a>
-                            </div>
-                        </div>
+                    {{ if eq .Kind "taxonomy" }}
+                        {{- partial "page/taxonomy-list.html" . -}}
+                    {{ else }}
+                        {{- partial "page/taxonomy-tag.html" . -}}
                     {{ end }}
-                    {{ if eq $.Site.Taxonomies.tags 0 }}
-                        <p class="pt-4">{{- T "emptyTags" }}.</p>
-                    {{ end }}
-                {{ else }}
-                    {{ $dateFormat := default "Jan 2" (index .Site.Params "date_format") }}
-                    {{ $.Scratch.Set "lastYear" ""}}
-                    {{ range .Pages }}
-                        {{ $year := .Date.Year }}
-                        {{ $lastYear := $.Scratch.Get "lastYear"}}
-                        {{- $title := .Title }}
-                        {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
-                        <div class="row mt-2">
-                            <div class="d-none d-{{ $breakpoint.prev }}-block col-{{ $breakpoint.prev }}-3 mt-auto text-right">
-                                {{ with .Date }}
-                                    <time class="post-date" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
-                                        {{ (partial "utilities/date.html" (dict "date" . "format" "medium")) }}
-                                    </time>
-                                {{ else }}
-                                -
-                                {{ end }}
-                            </div>
-                            <div class="col">
-                                {{ if ne $year $lastYear }}
-                                    <p class="text-body-secondary mt-5">{{ $year }}</p>
-                                    {{ $.Scratch.Set "lastYear" $year }}
-                                {{ end }}
-                                <a href="{{ .Page.RelPermalink }}">{{ if .Draft }}{{ T "draft" | upper }}: {{ end }}{{ $title | .Page.RenderString }}</a>
-                            </div>
-                        </div>
-                    {{ end }}
-                {{ end }}
+                </div>
+                <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block">
+                </div>
             </div>
-            <div class="col col-{{ $breakpoint.current }}-2 d-none d-{{ $breakpoint.current }}-block"></div>
         </div>
-    </div>
 {{ end }}

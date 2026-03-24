@@ -1,0 +1,15 @@
+{{- $metadata := "full" -}}
+{{ if isset .Params "metadata" }}
+    {{ $metadata = .Params.metadata }}
+{{ else }}
+    {{- with (index site.Params.pages .Type ) -}}
+        {{ if isset . "metadata" }}{{ $metadata = (index . "metadata") }}{{ end }}
+    {{- end -}}
+{{ end }}
+
+{{- $supportedStates := slice "full" "original" "none" -}}
+{{- if not (in $supportedStates $metadata) -}}
+    {{- errorf "layout [_default/page/header.html] - Invalid value for param 'metadata': %s" $metadata -}}
+{{- end -}}
+
+{{ return $metadata }}

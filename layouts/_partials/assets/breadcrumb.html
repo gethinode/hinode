@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -31,6 +31,7 @@
 
 {{/* Initialize local arguments */}}
 {{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
+{{- $breadcrumbBack := partial "utilities/GetThemeIcon.html" (dict "id" "breadcrumbBack" "default" "fas angle-left") -}}
 
 {{/* Include breadcrumb items that have both a title and address */}}
 {{ $items := slice }}
@@ -53,7 +54,7 @@
                 {{ $item := index $items (sub $length 1) }}
                 <li class="breadcrumb-item">
                     <a href="{{ $item.address }}">
-                        {{ partial "assets/icon.html" (dict "icon" "fas angle-left") }}&nbsp;{{ partial "inline/short-title" $item.title }}
+                        {{ partial "assets/icon.html" (dict "icon" $breadcrumbBack) }}&nbsp;{{ partial "inline/short-title" $item.title }}
                     </a>
                 </li>
             {{- end -}}

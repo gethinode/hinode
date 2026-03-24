@@ -1,9 +1,7 @@
 comment: >-
-  Includes a reference to a local or external JavaScript file. Hinode uses the
-  template defined in `layouts/_partials/templates/script.html` to generate the
-  link to a (bundled) JavaScript file. It includes context such as the state,
-  category, and integrity. For example, you can adapt this template to implement
-  cookie consent management.
+  Includes a reference to a local or external JavaScript file, with optional
+  loading behavior, category assignment, and SRI integrity hash.
+group: partial
 arguments:
   link:
     type: string

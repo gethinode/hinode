@@ -5,6 +5,8 @@
 {{- $list := site.Params.docs.releases -}}
 {{- $id := .id -}}
 {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
+{{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
+{{- $navbarVersionCheck := partial "utilities/GetThemeIcon.html" (dict "id" "navbarVersionCheck" "default" "fas check") -}}
 
 <li class="nav-item dropdown {{ if $collapsed }}d-{{ $breakpoint }}-none{{ else }}d-none d-{{ $breakpoint }}-block{{ end }}">
     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
@@ -23,13 +25,13 @@
                     <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
                         {{ if $item.latest }}&nbsp;({{ T "latest" }}){{ end }}
                         {{ if $active }}
-                            <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" "fas check fa-fw") }}</span>
+                            <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" $navbarVersionCheck "class" "fa-fw") }}</span>
                         {{ end }}
                     </a>
                 </li>
             {{ else }}
                 {{ if gt $index 0}}<li><hr class="dropdown-divider"></li>{{ end }}
-                <li><span class="dropdown-header fs-6">{{ $item.label }}</span></li>
+                <li><span class="dropdown-header fs-{{ $fs }}">{{ $item.label }}</span></li>
             {{ end }}
         {{- end -}}
         {{- if site.Params.docs.overview -}}

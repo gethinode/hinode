@@ -1,5 +1,9 @@
 comment: >-
   Displays text in subscript.
+icon: subscript
 arguments:
   text:
     position: 0
+    preview: true
+example: |
+  H{{< sub 2 >}}O is a liquid.

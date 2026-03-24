@@ -1,6 +1,7 @@
 comment: >-
   Bundles a JavaScript file for client-side processing. Scripts can be included
-  as critical, core, or optional file.
+  as critical, core, or optional files.
+group: partial
 arguments:
   page:
     type:

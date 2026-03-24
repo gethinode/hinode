@@ -1,37 +1,34 @@
 {{ define "main" -}}
-    {{- $blocks := $.Scratch.Get "blocks" -}}
     {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
     {{- $sidebar := partial "page/sidebar" . -}}
 
-    {{ with $sidebar }}
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-sidebar" aria-labelledby="offcanvas-label">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvas-label">{{ strings.FirstUpper $.Section }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ T "close" }}"></button>
-            </div>
-            <div class="offcanvas-body">
-                {{ . | safeHTML }}
+    {{/* Render the offcanvas sidebar and content blocks */}}
+    {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}
+    {{- partial "page/blocks.html" . -}}
+
+    {{/* Render the single page content using responsive columns */}}
+    {{/*    Column 1: sidebar navigation, visible in medium viewports and above (uses offcanvas on small devices) */}}
+    {{/*    Column 2: main page content (header, body, footer), always visible */}}
+    {{/*    Column 3: sharing buttons and TOC navigation or specials (CTA), visible in large viewports */}}
+    {{/*              content is folded into main column (handled by page elements) */}}
+    {{ if (gt (len .RawContent) 0) }}
+        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
+                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top">
+                    {{ $sidebar | safeHTML }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
+                    {{ .Render "header" }}
+
+                    {{ .Render "body" }}
+                    
+                    {{ .Render "footer" }}
+                </div>
+                <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block">
+                    {{ .Render "toc" }}
+                </div>
             </div>
         </div>
     {{ end }}
-
-    {{ $blocks | safeHTML }}
-
-    <div class="container-xxl flex-fill p-4 px-xxl-0">
-        <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
-            <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top pt-5">
-                {{ $sidebar | safeHTML }}
-            </div>
-            <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5 p-4">
-                {{ .Render "header" }}
-
-                {{ .Render "body" }}
-                
-                {{ .Render "footer" }}
-            </div>
-            <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block pt-5">
-                {{ .Render "toc" }}
-            </div>
-        </div>
-    </div>
 {{ end -}}

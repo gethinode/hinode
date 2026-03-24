@@ -1,8 +1,11 @@
 comment: >-
-  Prepares a toast message. Use a trigger to display the message.
+  Prepares a dismissible toast notification message. Use a button trigger to
+  display the message on screen.
+icon: toast
 arguments:
   title:
     release: v1.0.0
+    preview: true
   id:
   class:
   message:
@@ -17,5 +20,10 @@ arguments:
 body:
   type: string
   optional: false
-  comment: Toast mesage.
+  comment: Toast message.
   group: shortcode
+example: |
+  {{< button toast-id="toast-1" >}}Show notification{{< /button >}}
+  {{< toast id="toast-1" title="Update available" >}}
+    A new version has been released.
+  {{< /toast >}}

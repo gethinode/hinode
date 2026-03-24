@@ -1,7 +1,10 @@
 comment: >-
- Displays a tooltip for a link. The inner content is used as hyperlink text.
+  Displays a tooltip for a hyperlink. The inner content is used as the link
+  text.
+icon: tooltip
 arguments:
   title:
+    preview: true
   href:
   class:
   color:
@@ -12,3 +15,5 @@ arguments:
 body:
   optional: false
   comment: Hyperlink text.
+example: |
+  {{< tooltip title="Tooltip text" href="/docs/" >}}Hover over me{{< /tooltip >}}

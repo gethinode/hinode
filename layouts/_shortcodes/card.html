@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -28,6 +28,7 @@
 {{- $description := trim .Inner " \r\n" | .Page.RenderString | safeHTML -}}
 {{- $footer := or (partial "utilities/GetArgParent" (dict "page" . "arg" "footer-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "footer")) -}}
 {{- $gutter := partial "utilities/GetArgParent" (dict "page" . "arg" "gutter") -}}
+{{- $body := or (partial "utilities/GetArgParent" (dict "page" . "arg" "body-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "body"))  -}}
 {{- $header := or (partial "utilities/GetArgParent" (dict "page" . "arg" "header-style")) (partial "utilities/GetArgParent" (dict "page" . "arg" "header"))  -}}
 {{- $icon := .Get "icon" -}}
 {{- $iconRounded := or (partial "utilities/GetArgParent" (dict "page" . "arg" "icon-rounded")) (partial "utilities/GetArgParent" (dict "page" . "arg" "iconRounded")) -}}
@@ -50,13 +51,13 @@
 {{- $wrapper := "" -}}
 
 {{/* Override arguments */}}
-{{ if $path }}
-    {{ $page = $.Site.GetPage $path }}
-    {{ if not $page }}
-        {{ errorf "Invalid or missing value for param 'path': %s" .Position -}}
-        {{ $error = true }}
-    {{ end }}
-{{ end }}
+{{- if $path }}
+    {{ $page := partial "utilities/GetPage.html" (dict "url" $args.path "page" (or $args.page page)) }}
+    {{ $validate := site.Params.main.internalLinks.validate | default true }}
+    {{- if and $validate (not $page) }}
+        {{- warnf "Cannot find target page '%s': %s" $path .Position -}}
+    {{- end }}
+{{- end }}
 
 {{ if .Parent }}
     {{ $class = (printf "h-100 %s" $class) }}
@@ -77,6 +78,7 @@
         "color"        $color
         "padding"      $padding
         "header-style" $header
+        "body-style"   $body
         "footer-style" $footer
         "orientation"  $orientation
         "description"  $description

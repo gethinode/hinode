@@ -1,4 +1,5 @@
 comment: Renders the section menu of a single page.
+group: partial
 arguments:
   page:
     type:

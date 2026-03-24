@@ -1,14 +1,15 @@
 comment: >-
-    Capture a code snippet from a `toml` or `scss` input file. The shortcode scans for named markers in a local file:   
-    - For `.toml` files, use `# toml-docs-start` and `# toml-docs-end` followed by the snippet name
-    - For `.scss` files, use `// scss-docs-start` and `// scss-docs-end` followed by the snippet name
-    
-    The snippet between the two markers is then rendered using syntax highlighting.
+  Captures a code snippet from a supported input file using named section
+  markers. The captured snippet is rendered using syntax highlighting.
+icon: code_blocks
 arguments:
   name:
+    preview: true
   file:
   show:
     default: true
   full:
   id:
   class:
+example: |
+  {{< docs name="theme-colors" file="./data/style.toml" >}}

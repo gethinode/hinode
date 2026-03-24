@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -23,6 +23,7 @@
 {{- $startLevel := or (.Site.Params.navigation.startLevel | int) 2 }}
 {{- $endLevel := or (.Site.Params.navigation.endLevel | int) 3 }}
 {{- $minNumHeadings := or (.Site.Params.navigation.minNumHeadings | int) 2 }}
+{{- $tocSort := partial "utilities/GetThemeIcon.html" (dict "id" "tocSort" "default" "fas sort") -}}
 
 {{/* Main code */}}
 {{ if not $error }}
@@ -35,7 +36,7 @@
                 "color"       "secondary" 
                 "outline"     "true" 
                 "class"       "toc-button" 
-                "icon"        "fas sort"
+                "icon"        $tocSort
                 "justify"     "between"
                 "collapse-id" "toc-collapse"
                 "order"       "last"

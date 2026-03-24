@@ -1,7 +1,9 @@
 comment: Renders a carousel item with a responsive image.
+icon: photo
 arguments:
   page:
   src:
+    preview: true
   ratio:
     group: partial
   portrait:
@@ -9,3 +11,5 @@ arguments:
   loading:
   caption:
   active:
+example: |
+  {{< carousel-item src="img/slide1.jpg" caption="First slide" active="true" >}}

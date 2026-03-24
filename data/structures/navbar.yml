@@ -1,12 +1,13 @@
 comment: >-
   Displays a navigation header with a toggler. The menu items are derived from
-  the site's configuration. Nested items are supported at one-level depth. The
-  navigation bar includes a search area and a language switcher if applicable.
+  the site's configuration and support one level of nesting.
+icon: menu
 arguments:
   page:
   path:
     group: shortcode
   title:
+    preview: true
   class:
   color:
   id:
@@ -16,12 +17,10 @@ arguments:
       Identification of the navbar, defaults to `navbar-0`. The id is used by
       several child elements, including a color mode switcher, version switcher,
       and collapse panel.
-  menus:
-    type: string
-    optional: true
-    default: main
-    comment: Name of the menu configuration.
+  menu:
+    release: v2.0.0
   breakpoint:
+    default: md
     release: v1.0.0
   style:
     type: select
@@ -123,3 +122,12 @@ arguments:
         - xl
     deprecated: v1.0.0
     alternative: breakpoint
+  menus:
+    type: string
+    optional: true
+    default: main
+    comment: Name of the menu configuration.
+    deprecated: v2.0.0
+    alternative: menu
+example: |
+  {{< navbar id="navbar-1" title="Brand" menu="main" color="body-tertiary" >}}

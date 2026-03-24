@@ -1,0 +1,16 @@
+{{- $sharing := false -}}
+
+{{- if .Site.Params.sharing.enabled -}}
+    {{- $sharing = true -}}
+    {{ if isset .Params "sharing" }}
+        {{ $sharing = .Params.sharing }}
+    {{ else }}
+        {{- with (index .Site.Params.pages .Type ) -}}
+            {{ if isset . "sharing" }}
+                {{ $sharing = (index . "sharing") }}
+            {{ end }}
+        {{- end -}}
+    {{ end }}
+{{ end }}
+
+{{ return $sharing }}

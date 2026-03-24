@@ -17,6 +17,8 @@
   translation: "于"
 - id: draft
   translation: "草稿"
+- id: published
+  translation: "已发布"
 
 # List pages
 - id: article
@@ -29,6 +31,8 @@
   translation: "没有找到文章"
 - id: emptyTags
   translation: "没有找到标签"
+- id: readMore
+  translation: "阅读更多"
 
 # Languages
 - id: lang_de
@@ -55,6 +59,12 @@
   translation: "代码"
 - id: download
   translation: "下载文章"
+
+# Hero
+- id: backgroundImage
+  translation: "背景图片"
+- id: heroImage
+  translation: "主图"
 
 # Pagination
 - id: paginationNav
@@ -93,6 +103,10 @@
   translation: "参见"
 - id: sectionMenu
   translation: "选择一个主题"
+- id: tocShowMore
+  translation: "显示 {{ . }} 更多"
+- id: tocShowLess
+  translation: "显示更少"
 
 # Sidebar
 - id: toggleSidebar
@@ -103,6 +117,8 @@
   translation: "新增于 {{ . }}"
 - id: deprecatedFeature
   translation: "已弃用于 {{ . }}"
+- id: alternativeFeature
+  translation: "请改用 `{{ . }}`"
 
 # Versioning
 - id: latest
@@ -133,3 +149,69 @@
   translation: "显示"
 - id: comments
   translation: "评论"
+
+# Arguments
+- id: name
+  translation: "名称"
+- id: type
+  translation: "类型"
+- id: required
+  translation: "必填"
+- id: default
+  translation: "默认值"
+- id: comment
+  translation: "说明"
+- id: supportedValues
+  translation: "支持的值"
+
+# Alerts
+- id: caution
+  translation: 注意
+- id: important
+  translation: 重要
+- id: note
+  translation: 提示
+- id: tip
+  translation: 技巧
+- id: warning
+  translation: 警告
+
+# Image
+- id: image
+  translation: 图片
+
+# Nav & Tab
+- id: clickToExpand
+  translation: "点击展开"
+
+# Contact information
+- id: contactHeaderTopic
+  translation: "对这个主题感兴趣？"
+- id: contactBody
+  translation: "请留下您的联系方式，以便我们与您联系。"
+- id: contactAction
+  translation: "联系我们"
+
+# Newsletter
+- id: newsletterHeader
+  translation: "保持关注"
+- id: newsletterName
+  translation: "姓名"
+- id: newsletterEmail
+  translation: "电子邮件"
+- id: newsletterSubscribe
+  translation: "订阅"
+
+# Testimonial
+- id: testimonialPrevious
+  translation: "上一条评价"
+- id: testimonialNext
+  translation: "下一条评价"
+- id: testimonialCase
+  translation: "查看客户案例"
+
+# Preview
+- id: previewError
+  translation: "无法加载预览"
+- id: previewOpenTab
+  translation: "在新标签页中打开"

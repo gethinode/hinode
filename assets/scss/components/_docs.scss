@@ -3,11 +3,6 @@
     border-top-left-radius: #{$theme-border-radius};
     border-top-right-radius: #{$theme-border-radius};
     margin-left: #{$theme-border-radius};
-
-    &:hover,
-    &:focus {
-        border-bottom: 0;
-    }
 }
 
 .docs-panel,

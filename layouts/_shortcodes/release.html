@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -22,19 +22,20 @@
 {{- $state := or $args.releaseState $args.state -}}
 {{- $color := cond (eq $state "deprecated") "secondary" "primary" -}}
 {{- $linkType := or $args.linkType $args.type -}}
+{{- $release := partial "utilities/GetThemeIcon.html" (dict "id" "release" "default" dict) -}}
 
 {{- $icon := "" -}}
 {{- $tooltip := "" -}}
 {{- if eq $state "deprecated" -}}
     {{- if $args.short -}}
-        {{- $icon = "fas trash-can" -}}
+        {{- $icon = ($release.deprecated | default "fas trash-can") -}}
         {{- $tooltip = T "deprecatedFeature" $args.version -}}
     {{ else }}
         {{- $title = T "deprecatedFeature" $args.version -}}
     {{- end -}}
 {{- else -}}
     {{- if $args.short -}}
-        {{- $icon = "fas rocket" -}}
+        {{- $icon = ($release.feature | default "fas rocket") -}}
         {{- $tooltip = T "addedFeature" $args.version -}}
     {{ else }}
         {{- $title = T "addedFeature" $args.version -}}

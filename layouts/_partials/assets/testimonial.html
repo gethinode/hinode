@@ -1,0 +1,208 @@
+<!-- 
+    Copyright © 2024 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+-->
+
+<!-- Inline partials -->
+{{ define "_partials/inline/testimonial-contact.html" }}
+    <div class="p-0">
+        {{- partial "assets/live-image.html" (dict 
+            "src"   .image
+            "ratio" "1x1"
+            "class" .class
+            "title" .contact
+            "mode"  false
+            "sizes" "(min-width: 768px) 5vw, 10vw"
+            "page"  .page
+        ) }}
+    </div>
+    <div class="flex-grow-1 p-0 align-self-center ps-2">
+        <div class="text-{{ .align }}">
+            {{ if .url }}
+                {{ partial "assets/link.html" (dict
+                    "href" .url
+                    "text" .contact
+                    "page" .page
+                    "class" (cond .color (printf "fw-bold link-bg-%s" .color) "fw-bold")
+                ) }}
+            {{ else }}
+                {{ .contact }}
+            {{ end }}
+        </div>
+        {{ with .role }}<div class="text-{{ $.align }}">{{ . }}</div>{{ end }}
+    </div>
+{{ end }}
+
+{{ define "_partials/inline/testimonial-minimal.html" }}
+    {{ $class := (index . "icon-style") | default "fa-2xl text-center" }}
+    {{ $wrapper := printf "text-%s" (.align | default "start") }}
+    {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
+    {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
+
+    {{ partial "assets/featured-illustration.html" (dict
+        "page"    .page
+        "image"   .logo
+        "icon"    .icon
+        "class"   $class
+        "wrapper" $wrapper
+        "title"   $title
+    ) }}
+{{ end }}
+
+{{ define "_partials/inline/testimonial-inner.html" }}
+    {{ $breakpoint := .breakpoint }}
+    {{- $testimonialNext := partial "utilities/GetThemeIcon.html" (dict "id" "testimonialNext" "default" "fas chevron-right") -}}
+    {{ $align := .align | default "start" }}
+
+    <div class="d-flex flex-column {{ .class }} h-100 p-{{ .padding }}">
+        {{ if or .logo .icon }}
+            <div class="p-0 text-{{ $align }}">
+                {{ $wrapper := cond .logo (printf "py-4 py-md-0 col-4 col-%s-2" $breakpoint.current) "" }}
+                {{ $class := "" }}
+                {{ if .icon }}
+                    {{ $class = index . "icon-style" | default ""}}
+                    {{ with .align }}{{ $wrapper = printf "text-%s" . }}{{ end }}
+                {{ end }}
+                {{ if and (not .icon) .logo }}{{ $class = "testimonial-logo" }}{{ end }}
+                {{ $title := trim (printf "%s logo" (humanize (path.BaseName .logo))) " ." }}
+
+                {{ partial "assets/featured-illustration.html" (dict
+                    "page"    .page
+                    "image"   .logo
+                    "icon"    .icon
+                    "class"   $class
+                    "title"   $title
+                    "wrapper" $wrapper
+                ) }}
+            </div>
+        {{ end }}
+        {{ if .content }}
+            <div class="fs-md-5 pt-3 h-100">
+                {{ .content | .page.RenderString }}
+            </div>
+        {{ end }}
+        {{ if or .contact .link }}
+            <div class="container pt-3 p-0">
+                <div class="d-flex p-0">
+                    {{ if and .image .contact (not (eq .orientation "horizontal")) }}
+                        {{ partial "inline/testimonial-contact.html" (dict 
+                            "page"    .page
+                            "image"   .image
+                            "contact" .contact
+                            "role"    .role
+                            "url"     .url
+                            "color"   .color
+                            "align"   "start"
+                            "class"   "rounded-circle testimonial-img"
+                        )}}
+                    {{ else if .link }}
+                        {{ partial "assets/button.html" (dict 
+                            "href"    .link
+                            "title"   (T "testimonialCase")
+                            "class"   "btn-testimonial"
+                            "icon"    $testimonialNext
+                            "outline" true
+                        ) }}
+                    {{ end }}
+                </div>
+            </div>
+        {{ end }}
+    </div>
+{{ end }}
+
+{{ define "_partials/inline/testimonial-card.html" }}
+    {{ $breakpoint := .breakpoint }}
+
+    {{ if and .image .contact (eq .orientation "horizontal") }}
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-{{ $breakpoint.current }}-3 mx-auto">
+                    {{ partial "inline/testimonial-contact.html" (dict 
+                        "page"    .page
+                        "image"   .image
+                        "contact" .contact
+                        "role"    .role
+                        "url"     .url
+                        "color"   .color
+                        "align"   "center"
+                        "class"   "rounded-circle text-center"
+                    )}}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-9">
+                    {{ partial "inline/testimonial-inner.html" . }}
+                </div>
+            </div>
+        </div>
+    {{ else if and (or .logo .icon) (not .content) (not .contact) (not .link) }}
+        {{ partial "inline/testimonial-minimal.html" . }}
+    {{ else }}
+        {{ partial "inline/testimonial-inner.html" . }}
+    {{ end }}
+{{ end }}
+
+{{/* Initialize arguments */}}
+{{ $args := partial "utilities/InitArgs.html" (dict "structure" "testimonial" "args" . "group" "partial") }}
+{{ if or $args.err $args.warnmsg }}
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
+        "partial" "assets/testimonial.html" 
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{ end }}
+
+{{/* Initialize global variables */}}
+{{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
+{{- $testimonialQuote := partial "utilities/GetThemeIcon.html" (dict "id" "testimonialQuote" "default" "fas quote-right") -}}
+
+{{/* Initialize local variables */}}
+{{- $link := "" -}}
+{{ with $args.link }}
+    {{ $href := partial "utilities/GetLink.html" (dict "page" $args.page "href" .) }}
+    {{ if not $href.error }}
+        {{ $link = $href.href }}
+    {{ else }}
+        {{ with $args.page.File }}
+            {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $href.msg }}
+        {{ else }}
+            {{ warnf "Error processing link: %s" $href.msg }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{/* Main code */}}
+{{ if not $args.err }}
+    <div class="h-100 rounded container-fluid {{ $args.class }} p-{{ $args.padding }}">
+        {{ $params := dict 
+            "page"        $args.page
+            "content"     $args.content
+            "icon"        $args.icon
+            "icon-style"  $args.iconStyle
+            "logo"        $args.logo
+            "contact"     $args.contact
+            "role"        $args.role
+            "image"       $args.image
+            "padding"     $args.padding
+            "orientation" $args.orientation
+            "url"         $args.url
+            "link"        $link
+            "color"       $args.color
+            "breakpoint"  $breakpoint
+            "align"       $args.align
+        }}
+
+        {{ if $args.showControls }}
+            <div class="row">
+                <div class="col-2"></div>
+
+                {{ partial "inline/testimonial-card.html" (merge $params (dict "class" "col-8 px-0 mb-5")) }}
+
+                <div class="testimonial-icon col-2 ps-0 p-{{ $args.padding }} text-end">
+                    {{ partial "assets/icon.html" (dict "icon" $testimonialQuote "class" "fa-2x" "spacing" false) }}
+                </div>
+            </div>
+        {{ else }}
+            {{ partial "inline/testimonial-card.html" $params }}
+        {{ end }}
+    </div>
+{{ end }}

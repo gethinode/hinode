@@ -1,6 +1,11 @@
+comment: >-
+  Defines the source and rendering attributes of a processed image, including
+  dimensions, loading behavior, and optional caption.
+group: partial
 arguments:
   src:
   page:
+    optional: true
   mode:
   ratio:
   portrait:

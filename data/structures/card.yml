@@ -1,10 +1,11 @@
 comment: >-
-  Displays a Bootstrap card. Either specify a valid path, or set the arguments
-  title, href, header, description, and thumbnail individually. The latter
-  arguments override any page attributes.
+  Displays a Bootstrap card that links to a content page. Individual arguments
+  such as title, href, and thumbnail override the corresponding page attributes.
+icon: article
 arguments:
   title:
     optional: true
+    preview: true
   path:
   href:
     group: partial
@@ -84,7 +85,7 @@ arguments:
     default: full
     parent: cascade
     comment: >-
-      Header components of the card, displayed in small caps. 
+      Header components of the card, displayed in small caps.
     options:
       values:
         - full
@@ -100,7 +101,7 @@ arguments:
     parent: cascade
     release: v0.24.16
     comment: >-
-      Body components of the element. 
+      Body components of the element.
     options:
       values:
         - full
@@ -160,6 +161,8 @@ arguments:
       Label of the link button, defaults to the card title.
     deprecated: v1.0.0
     alternative: button-label
+example: |
+  {{< card path="/blog/first-post" ratio="16x9" >}}
 body:
   optional: true
   comment: >-

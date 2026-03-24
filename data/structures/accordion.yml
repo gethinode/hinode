@@ -1,7 +1,25 @@
 comment: >-
-  Use the accordion to show a group of vertically collapsing and expanding
-  items. Add accordion-item inner elements for each accordion item.
+  Use the accordion shortcode to show a group of vertically collapsing and
+  expanding items. Add accordion-item inner elements for each item.
+icon: expand_all
+children:
+  - accordion-item
 arguments:
   id:
+    preview: true
   always-open:
   class:
+body:
+  type: string
+  optional: false
+  group: shortcode
+  comment: Inner <accordion-item> elements for each panel.
+example: |
+  {{< accordion id="accordion-example" always-open="true" >}}
+    {{< accordion-item title="First item" show="true" >}}
+      Content of the first accordion item.
+    {{< /accordion-item >}}
+    {{< accordion-item title="Second item" >}}
+      Content of the second accordion item.
+    {{< /accordion-item >}}
+  {{< /accordion >}}

@@ -3,10 +3,10 @@
 }
 
 .nav-callout, .tab-content {
-    --#{$prefix}nav-callout-bg: var(--#{$prefix}light);
+    --#{$prefix}nav-callout-bg: var(--#{$prefix}body-bg);
     --#{$prefix}nav-callout-active-bg: var(--bs-primary-bg-subtle);
     --#{$prefix}nav-callout-gap: #{$nav-underline-gap};
-    
+
     column-gap: var(--#{$prefix}nav-callout-gap) !important;
 }
 
@@ -23,6 +23,7 @@
     border-radius: 0;
     padding: 0 0 (4 * $spacer);
     border-bottom: none;
+    position: relative;
 }
 
 .nav-callout .nav-link.active {
@@ -32,6 +33,36 @@
     background-position: 50% bottom;
     font-weight: 600;
     color: var(--bs-nav-underline-link-active-color);
+
+    // Diagonal border line
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+        width: 50%;
+        height: (3 * $spacer);
+        background: linear-gradient(
+            to top right,
+            transparent calc(50% - 0.5px),
+            var(--#{$prefix}border-color) calc(50% - 0.5px),
+            var(--#{$prefix}border-color) calc(50% + 0.5px),
+            transparent calc(50% + 0.5px)
+        );
+        pointer-events: none;
+    }
+
+    // Left border only
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+        width: 50%;
+        height: (3 * $spacer);
+        border-left: 1px solid var(--#{$prefix}border-color);
+        pointer-events: none;
+    }
 }
 
 .nav-callout .accordion-button {
@@ -94,10 +125,6 @@
 
 @if $enable-dark-mode {
     @include color-mode(dark) {
-        .nav-callout, .tab-content {
-            --#{$prefix}nav-callout-bg: var(--#{$prefix}tertiary-bg);
-        }
-
         .nav-callout .accordion-button[aria-expanded="true"] {
             background-image: linear-gradient(to top right, shade-color($primary, 70%) 50%, transparent 0);
         }

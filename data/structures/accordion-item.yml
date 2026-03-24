@@ -1,8 +1,10 @@
 comment: >-
   Defines an individual accordion item.
+icon: expand_circle_down
 arguments:
   title:
     release: v1.0.0
+    preview: true
   show:
   class:
   # deprecated arguments
@@ -16,3 +18,7 @@ body:
   optional: false
   comment: Content of the accordion item.
   group: shortcode
+example: |
+  {{< accordion-item title="First item" show="true" >}}
+    Content of the first accordion item.
+  {{< /accordion-item >}}

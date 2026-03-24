@@ -1,5 +1,6 @@
 comment: >-
-  Defines an individual item.
+  Defines an individual tab pane or accordion item for use within a nav group.
+icon: tab_new_right
 arguments:
   page:
     group: partial
@@ -9,6 +10,7 @@ arguments:
     release: v1.0.0
   title:
     release: v1.0.0
+    preview: true
   show:
   disabled:
   fade:
@@ -30,7 +32,7 @@ arguments:
     default: assets/hero-image.html
     group: partial
     release: v1.0.0
-  # deprecated arguments  
+  # deprecated arguments
   header:
     type: string
     optional: true
@@ -59,3 +61,7 @@ body:
   optional: false
   comment: Content of the item.
   group: shortcode
+example: |
+  {{< nav-item title="Tab #1" show="true" >}}
+    Content of the first tab pane.
+  {{< /nav-item >}}

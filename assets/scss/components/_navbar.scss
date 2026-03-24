@@ -76,6 +76,11 @@
 	cursor: pointer;
 }
 
+.mode-toggle .label svg {
+    height: 1em;
+    width: 1.25em;
+}
+
 // Source: https://jsfiddle.net/njhgr40m/
 
 @if $enable-dark-mode {
@@ -96,8 +101,12 @@
 }
 
 .navbar[data-transparent="true"] {
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
     transition: all 0.3s ease;
+
+    &.navbar-scrolled {
+        backdrop-filter: blur(10px);
+    }
 }
 
 .nav-active, .navbar-expanded {
@@ -107,6 +116,7 @@
 
 .nav-link {
     margin: 0 .15rem;
+    display: inline-flex;
 }
 
 .navbar-title, .navbar-title-center, .navbar-title-start {
@@ -190,6 +200,17 @@
     display: flex;
     align-items: center;
     white-space: nowrap;
+}
+
+.navbar-collapse:not(.show, .collapsing) .nav-item:first-of-type {
+    // double padding between brand logo / search bar and first nav item
+    // only apply when navbar is fully expanded (not toggled to show)
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+}
+
+// Remove padding when navbar is toggled open on small devices
+.navbar-collapse.show .nav-item:first-of-type {
+    padding-left: 0;
 }
 
 .navbar-collapse .dropdown {

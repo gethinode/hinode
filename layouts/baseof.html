@@ -23,13 +23,20 @@
 {{- /* Define main breakpoint */ -}}
 {{- $.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
 
+{{- /* Define page metadata */ -}}
+{{- $.Scratch.Set "metadata" (partial "utilities/GetMetadata.html" .) }}
+
+{{- /* Define page sharing */ -}}
+{{- $.Scratch.Set "sharing" (partial "utilities/GetSharing.html" .) }}
+
+{{- /* Define TOC inclusion */ -}}
+{{- $.Scratch.Set "includeToc" (partial "utilities/GetIncludeToc.html" .) }}
+
 {{- /* Prepare content blocks and establish overlay mode */ -}}
-{{ $blocks := partial "utilities/RenderContentBlocks.html" (dict "page" . "blocks" .Params.content_blocks) }}
-{{ $.Scratch.Set "blocks" $blocks }}
 {{ $overlayMode := $.Scratch.Get "overlayMode" }}
 
 {{- /* Define base URL */ -}}
-{{ $lang := site.LanguageCode | default site.Language.Lang }}
+{{ $lang := site.Language.Lang }}
 {{ $.Scratch.Set "baseURL" (strings.TrimSuffix (printf "%s/" $lang) site.Home.RelPermalink) }}
 
 <!doctype html>
@@ -55,6 +62,15 @@
         <main id="container" class="main">
             {{ block "main" . }}{{ end -}}
         </main>
+        {{ if and (eq .Kind "page") (eq (len (or .Params.content_blocks slice)) 0) (eq (len .RawContent) 0)}}
+            {{- partial "utilities/LogWarn.html" (dict
+                "partial" "layouts/baseof.html" 
+                "warnid"  "warn-empty-page"
+                "msg"     "No content"
+                "details" "Page has no content or blocks defined"
+                "file"    .File
+            ) -}}
+        {{ end }}
 
         {{- partial "footer/social.html" . -}}
         {{- partial "footer/footer.html" . -}}

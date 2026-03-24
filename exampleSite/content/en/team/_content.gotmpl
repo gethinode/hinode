@@ -1,0 +1,16 @@
+{{- $contacts := partial "utilities/GetI18nData.html" (dict "page" site "data" "contacts") }}
+
+{{ range $contacts  }}
+    {{ $content := dict "mediaType" "text/markdown" "value" .biography }}
+    {{ $page := dict
+        "content"     $content
+        "description" .function
+        "kind"        "page"
+        "type"        "contact"
+        "path"        (.name | anchorize)
+        "slug"        (.name | anchorize)
+        "title"       .name
+        "params"      (merge . (dict "thumbnail" .image))
+    }}
+    {{ $.AddPage $page }}
+{{ end }}

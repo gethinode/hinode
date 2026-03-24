@@ -16,23 +16,5 @@
 
 .m-col div {
     margin-top: calc(2 * var(--masonry-padding));
-    border-radius: 5px;
+    border-radius: #{$theme-border-radius} if($enable-important-utilities, !important, null);
 }
-
-$utilities: map-merge(
-    $utilities,
-    (
-        "m-col": (
-            property: max-width,
-            responsive: true,
-            class: m-col,
-            values: (
-                1: 100%,
-                2: 50%,
-                3: 33.3%,
-                4: 25%,
-                5: 20%,
-            )
-        )
-    )
-);

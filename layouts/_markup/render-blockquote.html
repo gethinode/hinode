@@ -1,11 +1,13 @@
 {{/* Adapted from https://gohugo.io/render-hooks/blockquotes/#alerts */}}
 
+{{- $admonition := partial "utilities/GetThemeIcon.html" (dict "id" "admonition" "default" dict) -}}
 {{ $icons := dict
-    "caution" "fa hand"
-    "important" "fas exclamation"
-    "note" "fas circle-info"
-    "tip" "fa lightbulb"
-    "warning" "fas triangle-exclamation"
+    "note"      ($admonition.note      | default "fas circle-info")
+    "info"      ($admonition.info      | default "fas circle-info")
+    "tip"       ($admonition.tip       | default "fa lightbulb")
+    "important" ($admonition.important | default "fas exclamation")
+    "warning"   ($admonition.warning   | default "fas triangle-exclamation")
+    "caution"   ($admonition.caution   | default "fa hand")
 }}
 
 {{ if eq .Type "alert" }}
@@ -15,7 +17,7 @@
     <blockquote class="blockquote-alert blockquote-alert-{{ $alert }}">
         <p class="blockquote-alert-heading">
             {{ with $icon }} 
-                {{ partial "assets/icon.html" (dict "icon" (printf "%s fa-fw" .)) }}
+                {{ partial "assets/icon.html" (dict "icon" . "class" "fa-fw") }}
                 {{ or (i18n $alert) (title $alert) }}
             {{ else }}
                 {{ title $alert }}

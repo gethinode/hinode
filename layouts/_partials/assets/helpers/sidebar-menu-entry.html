@@ -1,0 +1,57 @@
+{{/*
+    Build a hierarchical menu entry from a page and its children.
+
+    Parameters:
+    - page: The page object
+    - grouped: Dictionary mapping parent paths to children slices
+    - sortField: Field to sort children by (e.g., "title", "date", "weight")
+    - reverse: Whether to reverse sort order (default: false)
+
+    Returns: Menu entry dict with title and pages (optional array of nested entries)
+*/}}
+
+{{- $page := .page -}}
+{{- $grouped := .grouped -}}
+{{- $sortField := .sortField | default "title" -}}
+{{- $reverse := .reverse | default false -}}
+
+{{- /* Create menu entry with title and absolute link */ -}}
+{{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
+{{- $entry := dict "title" $page.LinkTitle "link" $page.RelPermalink -}}
+
+{{- /* Get children from grouped hierarchy */ -}}
+{{- $children := index $grouped $page.RelPermalink | default slice -}}
+{{- if $children -}}
+    {{- /* Sort children using Hugo's page collection methods */ -}}
+    {{- if eq $sortField "title" -}}
+        {{- $children = $children.ByTitle -}}
+        
+    {{- else if eq $sortField "date" -}}
+        {{- $children = $children.ByDate -}}
+    {{- else if eq $sortField "weight" -}}
+        {{- $children = $children.ByWeight -}}
+    {{- else if eq $sortField "linkTitle" -}}
+        {{- $children = $children.ByLinkTitle -}}
+    {{- else if eq $sortField "publishDate" -}}
+        {{- $children = $children.ByPublishDate -}}
+    {{- else if eq $sortField "lastmod" -}}
+        {{- $children = $children.ByLastmod -}}
+    {{- else if eq $sortField "expiryDate" -}}
+        {{- $children = $children.ByExpiryDate -}}
+    {{- else if eq $sortField "length" -}}
+        {{- $children = $children.ByLength -}}
+    {{- else -}}
+        {{/* Use .ByParam for custom parameters - also returns pages.Pages collection */}}
+        {{- $children = $children.ByParam $sortField -}}
+    {{- end -}}
+    {{- if $reverse }}{{ $children = $children.Reverse }}{{ end -}}
+    {{- /* Recursively build nested menu entries */ -}}
+    {{- $pages := slice -}}
+    {{- range $children -}}
+        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "reverse" $reverse) -}}
+        {{- $pages = $pages | append $childEntry -}}
+    {{- end -}}
+    {{- $entry = merge $entry (dict "pages" $pages) -}}
+{{- end -}}
+
+{{- return $entry -}}

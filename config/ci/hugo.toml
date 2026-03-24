@@ -1,23 +1,27 @@
 # cachedir default on POSIX: '/tmp/hugo_cache_runner'
 # cachedir default on Windows: '~\AppData\Local\hugo_cache'
 # cachedir default on macOS: '/Users/runner/Library/Caches/hugo_cache'
+#
+# All six Hugo cache types are configured here to:
+#   - redirect assets/images from :resourceDir to :cacheDir so GitHub Actions can cache them
+#   - set maxAge = -1 across the board so --gc never prunes entries between CI runs
 
 [caches]
   [caches.assets]
-    dir = ':cacheDir/resources/_gen' # map to cacheDir instead of resourceDir to utilize GitHub action/cache
-    maxAge = -1
-  [caches.getcsv]
-    dir = ':cacheDir/:project'
-    maxAge = -1
-  [caches.getjson]
-    dir = ':cacheDir/:project'
+    dir = ':cacheDir/resources/_gen' # redirect from :resourceDir to :cacheDir
     maxAge = -1
   [caches.getresource]
     dir = ':cacheDir/:project'
     maxAge = -1
   [caches.images]
-    dir = ':cacheDir/resources/_gen' # map to cacheDir instead of resourceDir to utilize GitHub action/cache
+    dir = ':cacheDir/resources/_gen' # redirect from :resourceDir to :cacheDir
     maxAge = -1
+  [caches.misc]
+    dir = ':cacheDir/:project'
+    maxAge = -1
+  [caches.modulequeries]
+    dir = ':cacheDir/modules'
+    maxAge = -1 # override default 24h so --gc does not prune module query results
   [caches.modules]
     dir = ':cacheDir/modules'
     maxAge = -1

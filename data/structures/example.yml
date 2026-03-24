@@ -1,10 +1,12 @@
 comment: >-
-  Display a code example and render a preview of the same input. The shortcode
-  accepts the languages supported by Hugo's highlight function.
+  Displays a code example and renders a preview of the same input. The shortcode
+  accepts the languages supported by Hugo's built-in highlight function.
+icon: code
 arguments:
   id:
   lang:
     default: markdown
+    preview: true
   class:
   show-markup:
     release: v1.0.0
@@ -14,14 +16,12 @@ arguments:
   show_markup:
     type: bool
     optional: true
-    default: true
     comment: Indicates if the markup should be output in the HTML.
     deprecated: v1.0.0
     alternative: show-markup
   show_preview:
     type: bool
     optional: true
-    default: true
     comment: Indicates if the preview should be output in the HTML.
     deprecated: v1.0.0
     alternative: show-preview
@@ -29,3 +29,7 @@ body:
   type: string
   optional: false
   comment: The example input.
+example: |
+  {{< example lang="hugo" >}}
+  {{</* kbd "CTRL+C" */>}}
+  {{< /example >}}

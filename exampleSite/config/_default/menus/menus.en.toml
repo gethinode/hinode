@@ -1,34 +1,21 @@
-[[main]]
-  name = "About"
-  pageRef = "/about/"
-  weight = 10
+# Merge the menu configuration from the docs module
+# See https://gohugo.io/configuration/introduction/#merge-configuration-settings
+_merge = "deep"
 
 [[main]]
   name = "Blog"
   pageRef = "/blog/"
+  weight = 10
+
+[[main]]
+  name = "Docs"
+  pageRef = "/docs/"
   weight = 20
-
-[[main]]
-  name = "Projects"
-  pageRef = "/projects/"
-  weight = 30
-
-[[main]]
-  name = "Sample project"
-  pageRef = "/projects/sample-project/"
-  parent = "Projects"
-  weight = 1
-
-[[main]]
-  name = "Another project"
-  pageRef = "/projects/another-project/"
-  parent = "Projects"
-  weight = 2
 
 [[main]]
   name = "Tags"
   pageRef = "/tags/"
-  weight = 40
+  weight = 30
 
 [[social]]
   name = "LinkedIn"
@@ -47,27 +34,3 @@
   pre = "fab medium"
   url = "https://medium.com/"
   weight = 30
-
-# toml-docs-start sample-navigation
-[[sample]]
-  name = "Blog"
-  pageRef = "/blog/"
-  weight = 10
-
-[[sample]]
-  name = "Projects"
-  pageRef = "/projects/"
-  weight = 20
-
-[[sample]]
-  name = "Sample project"
-  pageRef = "/projects/sample-project/"
-  parent = "Projects"
-  weight = 1
-
-[[sample]]
-  name = "Another project"
-  pageRef = "/projects/another-project/"
-  parent = "Projects"
-  weight = 2
-# toml-docs-end sample-navigation

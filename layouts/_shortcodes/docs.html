@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 
@@ -57,9 +57,14 @@
 
 {{/* Main code */}}
 {{- if not $error -}}
-    {{- /* Force-check if the file exists */ -}}
-    {{ $tmp := os.Stat $file }}
-
+    {{- /* Check if the file exists, skip gracefully if not (e.g. local module replacement without vendor) */ -}}
+    {{- $statResult := try (os.Stat $file) -}}
+    {{- if $statResult.Err -}}
+        {{- warnf "shortcodes/docs.html - Cannot find file: %q. Skipping." $file -}}
+        {{- $error = true -}}
+    {{- end -}}
+{{- end -}}
+{{- if not $error -}}
     {{- $regex := printf `%s((?:.|\n)*)%s` $captureStart $captureEnd -}}
     {{- $match := findRE $regex (readFile $file) -}}
     {{- $match = index $match 0 -}}

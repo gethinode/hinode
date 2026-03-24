@@ -1,15 +1,19 @@
 comment: >-
-  Print the full content of any given file supported by the Chroma syntax
-  highlighter.
+  Prints the full content of any given file with syntax highlighting, using the
+  Chroma syntax highlighter.
+icon: file_open
+example: |
+  {{< file file="config/_default/hugo.toml" lang="toml" >}}
 arguments:
   file:
     optional: true
     release: v1.0.0
+    preview: true
   lang:
   show:
     default: true
   full:
-  id: 
+  id:
   class:
   highlight-options:
     release: v1.0.0

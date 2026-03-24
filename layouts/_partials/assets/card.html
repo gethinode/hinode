@@ -1,5 +1,5 @@
 {{/* 
-    Copyright © 2022 - 2025 The Hinode Team / Mark Dumay. All rights reserved.
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
@@ -12,11 +12,12 @@
     <span class="text-body-secondary">
         {{- range $index, $item := $links -}}
             {{ partial "assets/button.html" (dict 
-                "href"      $item.url
-                "icon"      (printf "%s fa-fw" $item.icon)
-                "class"     "btn-social p-0"
-                "label"     $item.title
-                "spacing"   false
+                "href"       $item.url
+                "icon"       ($item.icon | default "")
+                "icon-class" "fa-fw"
+                "class"      "btn-social p-0"
+                "label"      $item.title
+                "spacing"    false
             ) }}
         {{- end -}}
     </span>
@@ -29,11 +30,13 @@
     {{- $color := .color -}}
     {{- $description := .description -}}
     {{- $links := .links -}}
+    {{- $class := .class }}
+    {{- $fs := .fs | default "fs-lg-5 fs-6" }}
     
     {{- if $href -}}
-        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link">
+        <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link {{ $class }}">
             {{ if or $title $links }}
-                <p class="card-title fs-lg-5 fs-6">
+                <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
@@ -45,9 +48,9 @@
             {{ end -}}
         </a>
     {{- else -}}
-        <div>
+        <div{{ with $class }} class="{{ . }}"{{ end }}>
             {{ if or $title $links }}
-                <p class="card-title fs-lg-5 fs-6">
+                <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
@@ -68,48 +71,31 @@
     {{- if eq $keywords "full" }}{{ $maxTags = 1 -}}
     {{- else if eq $keywords "tags" }}{{ $maxTags = 3 }}{{ end -}}
 
-    <p class="card-text"><small class="{{ if $color }}text-bg-{{ $color }}{{ else }}text-body-secondary{{ end }} text-uppercase">
-        {{- if in (slice "full" "publication") $keywords -}}
-            {{ with $page.Date }}{{ partial "utilities/date.html" (dict "date" . "format" "long") }}&nbsp;&bull;&nbsp;{{ end -}}
-            {{ $page.ReadingTime | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
-        {{- end -}}
+    {{ if ne $keywords "none" }}
+        <p class="card-text"><small class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} text-uppercase">
+            {{- if in (slice "full" "publication") $keywords -}}
+                {{ with $page.Date }}{{ partial "utilities/date.html" (dict "date" . "format" "long") }}&nbsp;&bull;&nbsp;{{ end -}}
+                {{ (math.Max $page.ReadingTime 1) | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
+            {{- end -}}
 
-        {{- if eq $keywords "full" -}}
-            {{ if gt (len ($page.GetTerms "tags")) 0 }}&nbsp;&bull;&nbsp;{{ end -}}
-        {{- end -}}
+            {{- if eq $keywords "full" -}}
+                {{ if gt (len ($page.GetTerms "tags")) 0 }}&nbsp;&bull;&nbsp;{{ end -}}
+            {{- end -}}
 
-        {{- $link := "text-decoration-none link-primary" -}}
-        {{- if $color }}{{ $link = printf "link-bg-%s" $color }}{{ end -}}
+            {{- $link := "text-decoration-none link-primary" -}}
+            {{- if $color }}{{ $link = printf "link-bg-%s" $color }}{{ end -}}
 
-        {{- range $index, $tag := first $maxTags ($page.GetTerms "tags") -}}
-            {{- if gt $index 0 }}&nbsp;&bull;&nbsp;{{ end -}}
-            <a href="{{ $tag.Page.RelPermalink }}" class="{{ $link }} tag-link" aria-label="tag: {{ $tag.LinkTitle }}">{{ $tag.LinkTitle }}</a>
-        {{- end -}}
-    </small></p>
+            {{- range $index, $tag := first $maxTags ($page.GetTerms "tags") -}}
+                {{- if gt $index 0 }}&nbsp;&bull;&nbsp;{{ end -}}
+                <a href="{{ $tag.Page.RelPermalink }}" class="{{ $link }} tag-link" aria-label="tag: {{ $tag.LinkTitle }}">{{ $tag.LinkTitle }}</a>
+            {{- end -}}
+        </small></p>
+    {{ end }}
 {{- end -}}
-
-{{/* Inline partial to render the card's icon */}}
-{{- define "_partials/inline/card-icon.html" -}}
-    {{ $padding := .padding }}
-    {{ $icon := .icon}}
-    {{ $rounded := .rounded }}
-    {{ $style := .style}}
-    {{ $stack := .stack }}
-    {{ $class := .class }}
-
-    <div class="card-icon{{ with $padding }} p-{{ . }}{{ end }}{{ if $rounded }} fa-stack {{ $style }} fa-fw {{ $stack }}{{ end }} {{ $class }}">
-        {{ if $rounded }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "fas circle fa-stack-2x") "spacing" false) -}}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s fa-stack-1x fa-inverse" $icon) "spacing" false) -}}
-        {{ else }}
-            {{- partial "assets/icon.html" (dict "icon" (printf "%s %s fa-fw" $icon $style) "spacing" false) -}}
-        {{ end }}
-    </div>
-{{- end -}}
-
 
 {{/* Initialize global variables */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $cardReadMore := partial "utilities/GetThemeIcon.html" (dict "id" "cardReadMore" "default" "fas chevron-right") -}}
 
 {{/* Initialize local arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "card" "args" . "group" "partial") }}
@@ -137,7 +123,7 @@
 {{/* Override arguments */}}
 {{- $page := "" }}
 {{- if $args.path }}
-    {{ $page = partial "utilities/GetPage.html" (dict "url" $args.path "page" page) }}
+    {{ $page = partial "utilities/GetPage.html" (dict "url" $args.path "page" (or $args.page page)) }}
     {{ $validate := site.Params.main.internalLinks.validate | default true }}
     {{- if and $validate (not $page) }}
         {{ if page.File }}
@@ -151,11 +137,12 @@
 {{- $title := $args.title -}}
 {{- $href := $args.href -}}
 {{- $description := $args.description -}}
-{{- $thumbnail := $args.thumbnail  -}}
+{{- $thumbnail := $args.thumbnail -}}
+{{- $mode := $args.mode -}}
+{{- $anchor := $args.anchor -}}
 {{- $ratio := $args.ratio -}}
 {{- $icon := $args.icon -}}
 {{- $iconStyle := "" -}}
-{{- $anchor := $args.anchor }}
 
 {{- with $page -}}
     {{- if not $args.title }}{{ $title = .Title }}{{ end -}}
@@ -169,6 +156,7 @@
     {{ end }}
     {{- if not $args.icon }}{{ $icon = .Params.icon }}{{ end -}}
     {{- if not $args.anchor }}{{ $anchor = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.anchor) "") }}{{ end -}}
+    {{- if not $args.mode }}{{ $mode = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.mode) false) }}{{ end -}}
 {{- end -}}
 
 {{- $style := $args.iconStyle }}
@@ -179,8 +167,10 @@
     {{- $iconStyle = "pb-3" -}}
 {{ end }}
 
+{{ $minimal := or (eq $args.bodyStyle "minimal") (eq $args.body "minimal") }}
 {{- if eq $args.orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
+{{- if $minimal }}{{ $description = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 {{ if and site.Params.main.titleCase (not $args.exact) }}{{ $title = title $title }}{{ end }}
 
@@ -188,6 +178,7 @@
     "src"      $thumbnail
     "portrait" $args.portrait
     "anchor"   $anchor
+    "mode"     $mode
     "sizes"    $args.sizes
     "title"    (or $args.alt $title)
     "loading"  $args.loading
@@ -195,16 +186,14 @@
 
 {{/* Main code */}}
 {{ if or (gt $args.gutter "0") ($args.wrapper) }}<div class="{{ with $args.gutter }}g-{{ . }}{{ end }} {{ $args.wrapper }}">{{ end }}
+{{ $imgOnly := and (eq $args.headerStyle "none") (eq $args.bodyStyle "none") (eq $args.footerStyle "none") }}
 
-{{ $stack := "" }}
-
-{{- if hasPrefix $args.orientation "horizontal" -}}
+{{- if and (hasPrefix $args.orientation "horizontal") (not $imgOnly) -}}
     {{ $col1 := "" }}
     {{ $col2 := "" }}
 
     {{ if $thumbnail }}
         {{ if eq $args.orientation "horizontal-sm" }}
-            {{ $stack = "fa-1x" }}
             {{ $col1 = "col-4 col-md-2 pe-0" }}
             {{ $col2 = "col-8 col-md-10" }}
         {{ else }}
@@ -229,19 +218,19 @@
                 </div>
             {{- end -}}
             <div class="{{ $col2 }}">
-                <div class="card-body p-{{ $args.padding }} h-100 hstack">
+                {{ $padding := printf "p-%d" $args.padding }}
+                <div class="card-body {{ $padding }} h-100 hstack">
                     {{ if $icon }}
-                        {{- partial "inline/card-icon.html" (dict
-                            "icon"     $icon
-                            "padding"  $args.padding
-                            "rounded"  $args.iconRounded
-                            "style"    $style
-                            "stack"    $args.stack
-                            "class"    (printf "align-self-%s me-1 mt-1 col-auto" $args.align)
+                        {{- partial "assets/card-icon.html" (dict
+                            "icon"         $icon
+                            "padding"      0
+                            "icon-rounded" $args.iconRounded
+                            "icon-style"   $style
+                            "class"        (printf "align-self-%s me-3 mt-1 col-auto" $args.align)
                         )}}
                     {{ end }}
                     <div>
-                        {{ if $page }}
+                        {{ if and $page (ne $args.headerStyle "none") }}
                             <div>{{ partial "inline/card-caption.html" (dict
                                 "page"     $page
                                 "keywords" $args.headerStyle
@@ -250,13 +239,21 @@
                             </div>
                         {{ end }}
                         {{- partial "inline/card-body.html" (dict
-                            "title"       $title
+                            "title"       (cond $minimal "" $title)
                             "href"        $href
                             "color"       $args.color
-                            "description" $description
+                            "description" (cond $minimal $title $description)
                             "links"       $args.links
                         ) -}}
-                        {{ if $page }}<div>{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}</div>{{ end }}
+                        {{ if and $page (ne $args.footerStyle "none") }}
+                            <div>{{ partial "inline/card-caption.html" (dict
+                                "page"     $page
+                                "keywords" $args.footerStyle
+                                "color"    $args.color)
+                            }}
+                            </div>
+                        {{ end }}
+
                         {{ if and $href $args.button }}
                             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
                             {{ $buttonClass := "card-button mb-n4" }}
@@ -265,7 +262,7 @@
                             <div class="d-flex align-items-end">
                                 {{ partial "assets/button.html" (dict 
                                     "title"       $label
-                                    "icon"        "fas chevron-right"
+                                    "icon"        $cardReadMore
                                     "href"        $href
                                     "outline"     true
                                     "button-size" "sm"
@@ -286,30 +283,33 @@
         {{- if $thumbnail -}}
             {{- partial $args.hook (merge $thumbnailArgs (dict
                 "wrapper"  "card-img-wrap"
-                "class"    "card-img-top card-img-bg"
+                "class"    (cond $imgOnly "card-img-bg" "card-img-top card-img-bg")
                 "ratio"    (or $ratio "16x9")
             )) -}}
         {{- else if $icon -}}
-            {{- partial "inline/card-icon.html" (dict
-                "icon"     $icon
-                "rounded"  $args.iconRounded
-                "style"    $style
-                "stack"    $args.stack
-                "class"    (printf "mb-1 m-0 text-%s" $args.align)
+            {{- partial "assets/card-icon.html" (dict
+                "icon"         $icon
+                "padding"      0
+                "icon-rounded" $args.iconRounded
+                "icon-style"   $style
+                "class"        (printf "mb-3 m-0 text-%s" $args.align)
             )}}
         {{- end -}}
-        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}{{ if $overlay }}card-img-overlay card-overlay-gradient p-4{{ end }}" {{ if $overlay }}data-bs-theme="dark"{{ end }}>
-            {{ if $args.overlay }}<div class="flex-grow-1"></div>{{ end }}
+        <div class="card-body p-0 d-flex flex-column{{ if $thumbnail }} p-{{ $args.padding }}{{ end }}
+            {{- if $imgOnly }} card-img-overlay {{ else if $overlay }} card-img-overlay card-overlay-gradient p-4 {{ end }}"
+            {{- if $overlay }}data-bs-theme="dark"{{ end }}>
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict
-                "title"       $title
+                "title"       (cond $minimal "" $title)
                 "href"        $href
                 "color"       $args.color
-                "description" $description
+                "description" (cond $minimal $title $description)
                 "links"       $args.links
+                "class"       (cond (and $thumbnail (eq $args.headerStyle "none")) "pt-3" "")
             ) -}}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
+
         {{ if $args.button }}
             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
             <div class="row" >

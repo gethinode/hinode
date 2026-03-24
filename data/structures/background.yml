@@ -1,5 +1,6 @@
 comment: >-
-  Applies styling to the background of a element.
+  Applies styling to the background of an element.
+group: partial
 arguments:
   background:
   class:
