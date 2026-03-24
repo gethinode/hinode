@@ -58,6 +58,10 @@
     {{ $src = partial "assets/helpers/image-rewrite.html" (dict "src" $src "account" $account "container" $container "hook" $hook) }}
 {{ end }}
 
+{{/* Detect static assets — must be computed after any URL rewrite */}}
+{{- $staticPath := strings.TrimPrefix "/static" $src -}}
+{{- $isStatic := fileExists (path.Join "/static" $staticPath) -}}
+
 {{/* Define image dimensions */}}
 {{ $dims := slice }}
 {{- $res := "" -}}
@@ -92,7 +96,7 @@
 {{ else if (and $height $width) }}
     {{ $transform = "fill" }}
     {{ $dims = slice (printf "%dx%d" $width $height) }}
-{{ else if not $args.plain }}
+{{ else if and (not $args.plain) (not $isStatic) }}
     {{ $transform = "fit" }}
     {{- $res := partial "utilities/GetImage.html" (dict "url" $src "page" $args.page) -}}
     {{ if and $res (not (eq $res.resource nil)) }}
@@ -135,8 +139,8 @@
 {{ end }}
 
 {{/* Generate image url */}}
-{{ if or (hasSuffix $src "svg") $args.plain }}
-    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" (strings.TrimPrefix "/static" $src)) -}}
+{{ if or (hasSuffix $src "svg") $isStatic $args.plain }}
+    {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" $staticPath) -}}
 {{ else if (gt (len $dims) 0) }}
     {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
         "src"           $src
