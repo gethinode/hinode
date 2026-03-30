@@ -31,7 +31,6 @@ content_blocks:
       section: blog
       reverse: true
       sort: date
-      keywords: featured
     hide_empty: false
     header_style: none
     more:

@@ -13,18 +13,6 @@ caption = "I work on everything coding and tweet developer memes"
 [en.params.footer]
 # toml-docs-end lang-param
 
-[nl]
-languageName = "Nederlands"
-contentDir = "content/nl"
-weight = 2
-[nl.params.opengraph]
-locale = "nl_NL"
-[nl.params.head]
-tagline = "Een Hugo Theme"
-[nl.params.social]
-title = "Volg mij"
-caption = "Ik doe aan programmeren en tweet memes"
-
 [fr]
 languageName = "Français"
 contentDir = "content/fr"
@@ -36,3 +24,15 @@ tagline = "Un thème Hugo"
 [fr.params.social]
 title = "Suivez-moi"
 caption = "Je code et je tweet des mèmes de développeurs."
+
+[nl]
+languageName = "Nederlands"
+contentDir = "content/nl"
+weight = 3
+[nl.params.opengraph]
+locale = "nl_NL"
+[nl.params.head]
+tagline = "Een Hugo Theme"
+[nl.params.social]
+title = "Volg mij"
+caption = "Ik doe aan programmeren en tweet memes"
