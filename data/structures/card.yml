@@ -8,7 +8,7 @@ arguments:
     preview: true
   path:
   href:
-    group: partial
+    release: 2.1.3
   class:
     parent: merge
   color:
@@ -76,6 +76,7 @@ arguments:
     release: v0.24.23
   links:
     release: v1.14.0
+    group: partial
   exact:
     release: v1.22.0
   # deprecated arguments

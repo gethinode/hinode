@@ -32,5 +32,12 @@
 
 {{/* Main code */}}
 {{ if not $error }}
-    {{ partial "assets/timeline.html" (dict "page" $page "data" $args.data "background" $args.background "_default" $args.default) }}
+    {{ partial "assets/timeline.html" (dict
+        "page"       $page
+        "data"       $args.data
+        "background" $args.background
+        "class"      $args.class
+        "justify"    $args.justify
+        "_default"   $args.default
+    ) }}
 {{ end }}

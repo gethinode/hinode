@@ -26,16 +26,18 @@
 {{/* Main code */}}
 {{- if not $args.err -}}
     {{ partial "assets/link.html" (dict
-        "href"        $destination
-        "text"        $text
-        "cue"         $args.cue
-        "tab"         $args.tab
-        "case"        $args.case
-        "external"    $args.external
-        "force"       $args.force
-        "class"       $args.class
-        "page"        .Page
-        "position"    .Position
-        "_default"    $args.default
+        "href"            $destination
+        "text"            $text
+        "cue"             $args.cue
+        "tab"             $args.tab
+        "case"            $args.case
+        "exact"           $args.exact
+        "title"           $args.title
+        "external"        $args.external
+        "force"           $args.force
+        "class"           $args.class
+        "page"            .Page
+        "position"        .Position
+        "_default"        $args.default
     ) }}
 {{- end -}}

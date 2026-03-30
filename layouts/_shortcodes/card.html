@@ -39,6 +39,7 @@
 {{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") -}}
 {{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") | default 3 -}}
 {{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
+{{- $portrait := partial "utilities/GetArgParent" (dict "page" . "arg" "portrait") -}}
 {{- $page := .Page -}}
 {{- $path := .Get "path" -}}
 {{- $thumbnail := .Get "thumbnail" -}}
@@ -72,7 +73,9 @@
     {{/* Render card */}}
     {{- $output := partial "assets/card.html" (dict 
         "path"         $path
+        "href"         $args.href
         "title"        $title
+        "exact"        $args.exact
         "class"        $class
         "gutter"       $gutter
         "color"        $color
@@ -83,6 +86,7 @@
         "orientation"  $orientation
         "description"  $description
         "ratio"        $ratio
+        "portrait"     $portrait
         "icon"         $icon
         "icon-rounded" $iconRounded
         "align"        $align
@@ -95,6 +99,7 @@
         "anchor"       $anchor
         "alt"          $alt
         "button"       $button
+        "button-label" $args.buttonLabel
         "link-type"    $linkType
         "_default"     $args.default
     ) -}}
