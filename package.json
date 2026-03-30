@@ -76,7 +76,7 @@
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "autoprefixer": "^10.4.27",
     "cssnano": "^7.1.3",
-    "cssnano-preset-advanced": "^7.0.11",
+    "cssnano-preset-advanced": "^7.0.12",
     "hugo-extended": "^0.158.0",
     "postcss-cli": "^11.0.1",
     "rimraf": "^6.1.3"
