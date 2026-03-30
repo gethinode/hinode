@@ -310,11 +310,11 @@
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
 
-        {{ if $args.button }}
+        {{ if or $args.buttonLabel $args.button }}
             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
             <div class="row" >
                 <div class="{{ if eq $args.orientation "horizontal-sm" }}col-4 col-md-2{{ else if eq $args.orientation "horizontal" }}col-4{{ end }}"></div>
-                <div class="col d-flex align-items-end {{ if eq $args.orientation "horizontal-sm" }}px-2{{ else if eq $args.orientation "horizontal"}}px-1 {{ else }}px-2 pt-1{{ end }}">
+                <div class="col d-flex align-items-end pt-{{ $args.padding }}">
                     {{ $buttonClass := "card-button" }}
                     {{ $buttonType := (or $args.linkType $args.buttonType) }}
                     {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}

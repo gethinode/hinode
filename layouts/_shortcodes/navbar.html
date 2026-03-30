@@ -32,19 +32,21 @@
 {{/* Main code */}}
 {{ if not $error -}}
     {{- partial "assets/navbar.html" (dict 
-        "id"         $id 
-        "page"       $page
-        "breakpoint" (or $args.breakpoint $args.size)
-        "style"      $args.style
-        "color"      $args.color
-        "search"     $args.search
-        "mode"       $args.mode
-        "menu"       (or $args.menu $args.menus)
-        "logo"       $args.logo
-        "logo-mode"  $args.logoMode
-        "title"      $args.title
-        "class"      $args.class
-        "_default"   $args.default
+        "id"          $id 
+        "page"        $page
+        "breakpoint"  (or $args.breakpoint $args.size)
+        "style"       $args.style
+        "color"       $args.color
+        "search"      $args.search
+        "mode"        $args.mode
+        "menu"        (or $args.menu $args.menus)
+        "logo"        $args.logo
+        "logo-align"  $args.logoAlign
+        "logo-mode"   $args.logoMode
+        "title"       $args.title
+        "transparent" $args.transparent
+        "class"       $args.class
+        "_default"    $args.default
         )
     -}}
 {{ end -}}
