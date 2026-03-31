@@ -32,8 +32,11 @@
     )}}
     {{ $error = true }}
 {{ end }}
-{{- $cue := $args.cue | default site.Params.main.externalLinks.cue -}}
-{{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
+{{- $cue := site.Params.main.externalLinks.cue -}}
+{{ $params := $entry.Params | default dict }}
+{{- if (isset $params "cue") }}{{ $cue = $params.cue }}{{ end -}}
+{{- $tab := site.Params.main.externalLinks.tab -}}
+{{- if (isset $params "tab") }}{{ $tab = $params.tab }}{{ end -}}
 {{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
 {{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
 {{- $menuURL := "" -}}
@@ -101,6 +104,9 @@
             "icon"        (string $entry.Pre)
             "href"        $menuURL
             "button-size" "sm"
+            "cue"         $cue
+            "tab"         $tab
+            "outline"     $entry.Params.outline 
         )}}
     {{ else }}
         {{ cond (ne $menuURL "") "<a" "<div" | safeHTML }}
