@@ -215,3 +215,17 @@
   translation: "Nie można załadować podglądu dla"
 - id: previewOpenTab
   translation: "Otwórz w nowej karcie"
+
+# Contact form fields
+- id: formName
+  translation: "Imię i nazwisko"
+- id: formCompany
+  translation: "Firma"
+- id: formEmail
+  translation: "E-mail"
+- id: formMessage
+  translation: "Wiadomość"
+- id: formSubmit
+  translation: "Wyślij"
+- id: formBotField
+  translation: "Nie wypełniaj tego pola, jeśli jesteś człowiekiem"

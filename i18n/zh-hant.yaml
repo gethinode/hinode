@@ -215,3 +215,17 @@
   translation: "無法載入預覽"
 - id: previewOpenTab
   translation: "在新分頁中開啟"
+
+# Contact form fields
+- id: formName
+  translation: "姓名"
+- id: formCompany
+  translation: "公司"
+- id: formEmail
+  translation: "電子郵件"
+- id: formMessage
+  translation: "訊息"
+- id: formSubmit
+  translation: "提交"
+- id: formBotField
+  translation: "如果您是人類，請不要填寫此欄"

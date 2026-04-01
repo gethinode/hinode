@@ -215,3 +215,17 @@
   translation: "Unable to load preview for"
 - id: previewOpenTab
   translation: "Open in new tab"
+
+# Contact form fields
+- id: formName
+  translation: "Name"
+- id: formCompany
+  translation: "Company"
+- id: formEmail
+  translation: "Email"
+- id: formMessage
+  translation: "Message"
+- id: formSubmit
+  translation: "Submit"
+- id: formBotField
+  translation: "Don't fill this out if you're human"  

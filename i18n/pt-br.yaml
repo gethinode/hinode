@@ -217,3 +217,17 @@
   translation: "Não foi possível carregar a visualização para"
 - id: previewOpenTab
   translation: "Abrir em nova aba"
+
+# Contact form fields
+- id: formName
+  translation: "Nome"
+- id: formCompany
+  translation: "Empresa"
+- id: formEmail
+  translation: "E-mail"
+- id: formMessage
+  translation: "Mensagem"
+- id: formSubmit
+  translation: "Enviar"
+- id: formBotField
+  translation: "Não preencha isto se você for humano"

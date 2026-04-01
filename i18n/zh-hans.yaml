@@ -215,3 +215,17 @@
   translation: "无法加载预览"
 - id: previewOpenTab
   translation: "在新标签页中打开"
+
+# Contact form fields
+- id: formName
+  translation: "姓名"
+- id: formCompany
+  translation: "公司"
+- id: formEmail
+  translation: "电子邮件"
+- id: formMessage
+  translation: "消息"
+- id: formSubmit
+  translation: "提交"
+- id: formBotField
+  translation: "如果您是人类，请不要填写此项"

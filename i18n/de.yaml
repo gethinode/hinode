@@ -215,3 +215,17 @@
   translation: "Vorschau konnte nicht geladen werden für"
 - id: previewOpenTab
   translation: "In neuem Tab öffnen"
+
+# Contact form fields
+- id: formName
+  translation: "Name"
+- id: formCompany
+  translation: "Unternehmen"
+- id: formEmail
+  translation: "E-Mail"
+- id: formMessage
+  translation: "Nachricht"
+- id: formSubmit
+  translation: "Absenden"
+- id: formBotField
+  translation: "Bitte nicht ausfüllen, wenn Sie ein Mensch sind"
