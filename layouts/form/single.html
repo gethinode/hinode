@@ -1,0 +1,20 @@
+{{ define "main" }}
+    {{- $padding := partial "utilities/GetPadding.html" -}}
+    {{- $formIcon := partial "utilities/GetThemeIcon.html" (dict "id" "formSubmittedIcon" "default" "fa envelope") -}}
+    <section class="container-fluid p-0 section-cover d-flex align-items-center">
+        <div class="container-xxl px-xxl-0 px-{{ $padding.x }} py-0 my-auto h-100">
+            <div class="text-center col-md-6 mx-auto">
+                <span class="text-body fw-bold">
+                    {{ partial "assets/icon.html" (dict "icon" $formIcon "class" "fa-10x") }}
+                    <p class="fs-3">{{ .Title }}</p>
+                </span>
+                <p>
+                    {{ $inner := trim .RawContent " \n\r" }}
+                    {{ if gt (len $inner) 0 }}
+                        {{ partial "utilities/ProcessContent" (dict "page" .Page "raw" $inner) }}
+                    {{ end }}                     
+                </p>
+            </div>
+        </div>
+    </section>
+{{ end }}

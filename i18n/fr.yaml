@@ -215,3 +215,17 @@
   translation: "Impossible de charger l'aperçu pour"
 - id: previewOpenTab
   translation: "Ouvrir dans un nouvel onglet"
+
+# Contact form fields
+- id: formName
+  translation: "Nom"
+- id: formCompany
+  translation: "Société"
+- id: formEmail
+  translation: "E-mail"
+- id: formMessage
+  translation: "Message"
+- id: formSubmit
+  translation: "Envoyer"
+- id: formBotField
+  translation: "Ne remplissez pas ce champ si vous êtes humain"

@@ -215,3 +215,17 @@
   translation: "Kan voorbeeld niet laden voor"
 - id: previewOpenTab
   translation: "Open in nieuw tabblad"
+
+# Contact form fields
+- id: formName
+  translation: "Naam"
+- id: formCompany
+  translation: "Bedrijf"
+- id: formEmail
+  translation: "E-mail"
+- id: formMessage
+  translation: "Bericht"
+- id: formSubmit
+  translation: "Verzenden"
+- id: formBotField
+  translation: "Vul dit niet in als je een mens bent"

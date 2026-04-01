@@ -1,0 +1,8 @@
+comment: >-
+  Renders a form with callback action. Assign a form-id when the form provider
+  requires a specific form definition.
+arguments:
+  action:
+    optional: false
+  form-id:
+    optional: true

@@ -55,6 +55,9 @@
     notFoundPage         = "fas link-slash"
     sharingWebshare      = "fas share-nodes"
     sharingDownload      = "fas download"
+    # Form
+    formSubmitButton     = "fa paper-plane"
+    formSubmittedIcon    = "fa envelope"
     [icons.admonition]
         note       = "fas circle-info"
         info       = "fas circle-info"
