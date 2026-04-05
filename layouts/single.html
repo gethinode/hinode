@@ -15,7 +15,7 @@
     {{ if (gt (len .RawContent) 0) }}
         <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
-                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top">
+                <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top p-0">
                     {{ $sidebar | safeHTML }}
                 </div>
                 <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
