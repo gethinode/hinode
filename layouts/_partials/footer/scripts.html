@@ -54,7 +54,11 @@
     {{- $js := $bundle.bundle -}}
     {{- $jsmod := $bundle.module -}}
 
-    {{- if gt (len $js.Content) 0 -}}
+    {{/* Strip js and Hugo comments then trim whitespace to detect whether the bundle contains actual code. A bundle
+        that renders to comments only would otherwise produce a fingerprint of empty content while hugo server serves
+         the unminified comment, causing an SRI/CSP integrity mismatch. */}}
+    {{- $jsCode := $js.Content | replaceRE `(?m)//[^\n]*` "" | replaceRE `(?s)/\*.*?\*/` "" | strings.TrimSpace -}}
+    {{- if gt (len $jsCode) 0 -}}
         {{- $integrity := "" -}}
         {{- if hugo.IsProduction -}}
             {{- $js = $js | minify | fingerprint -}}
@@ -63,13 +67,14 @@
 
         {{- partial "templates/script.html" (dict
             "link"        (cond $absoluteURL $js.Permalink $js.RelPermalink)
-            "category"    $cat 
+            "category"    $cat
             "state"       $state
             "integrity"   $integrity
         ) -}}
     {{- end -}}
 
-    {{- if gt (len $jsmod.Content) 0 -}}
+    {{- $jsmodCode := $jsmod.Content | replaceRE `(?m)//[^\n]*` "" | replaceRE `(?s)/\*.*?\*/` "" | strings.TrimSpace -}}
+    {{- if gt (len $jsmodCode) 0 -}}
         {{- $integrity := "" -}}
         {{- if hugo.IsProduction -}}
             {{- $jsmod = $jsmod | minify | fingerprint -}}
@@ -78,7 +83,7 @@
 
         {{- partial "templates/script.html" (dict
             "link"        (cond $absoluteURL $jsmod.Permalink $jsmod.RelPermalink)
-            "category"    $cat 
+            "category"    $cat
             "state"       $state
             "integrity"   $integrity
             "script-type" "module"

@@ -46,6 +46,8 @@ github.com/gethinode/mod-fontawesome/v5 v5.1.0 h1:u3ntQMe1fGntcrljxrbZXA9Q0z2WHl
 github.com/gethinode/mod-fontawesome/v5 v5.1.0/go.mod h1:b9nG1pel6LIWiNyb0kZAmyhLo2rrx4dvG2xyoD8tDlk=
 github.com/gethinode/mod-google-analytics/v2 v2.0.0 h1:Vor4j56qtpjtKY9r5QLeN5CBxuf8YKP3+XvQKEkayrM=
 github.com/gethinode/mod-google-analytics/v2 v2.0.0/go.mod h1:y4ZlacA8FSXjmvn9P8cZshOrBB5Wc+3p0DKSehkk+8E=
+github.com/gethinode/mod-google-analytics/v2 v2.0.1 h1:WNI8e06Bl1pLYrt1Adwuk4KtU9uVrJmO+KZxggIcI0M=
+github.com/gethinode/mod-google-analytics/v2 v2.0.1/go.mod h1:y4ZlacA8FSXjmvn9P8cZshOrBB5Wc+3p0DKSehkk+8E=
 github.com/gethinode/mod-katex v1.1.4 h1:HWc45uHKX2JhI624UnA46LCZkLGhSbaq+zAHt9e57zw=
 github.com/gethinode/mod-katex v1.1.4/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-leaflet/v2 v2.0.0 h1:94sQHzzrgB15LuePziHahss/SgJ21a2kDsOx4eE4e7A=
