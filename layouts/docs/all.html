@@ -23,6 +23,7 @@
             <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
                 {{/* Render the defined content blocks, using the default articles element as fallback for list pages */}}
                 {{ if .Params.content_blocks }}
+                    {{- $.Scratch.Set "blocks_embed" true -}}
                     {{- partial "page/blocks.html" . -}}
                 {{ else if eq .Kind "section" }}
                     {{ $.Scratch.Set "articlesParams" (dict
