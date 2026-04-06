@@ -14,7 +14,7 @@ const purgecss = purgeCSSPlugin({
     const els = JSON.parse(content).htmlElements
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
   },
-  dynamicAttributes: ['data-bs-theme', 'data-bs-main-theme', 'data-bs-theme-animate', 'data-transparent', 'role'],
+  dynamicAttributes: ['aria-expanded', 'data-bs-theme', 'data-bs-main-theme', 'data-bs-theme-animate', 'data-transparent', 'role'],
   fontFace: false,
   safelist: {
     standard: [
