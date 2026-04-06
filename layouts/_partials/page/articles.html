@@ -2,19 +2,17 @@
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{/* Render basic header for list page */}}
-<div class="container-xxl px-{{ $padding.x }} px-xxl-0">
-    {{ if .Site.Params.navigation.breadcrumb }}
-        {{ partial "assets/breadcrumb.html" (dict "page" .) }}
-    {{ end }}
-    {{ partial "assets/section-title.html" (dict
-        "heading" (dict
-            "title"   .Title
-            "content" .Description
-            "align"   "start"
-        )
-        "use-title" true
-    ) }}
-</div>
+{{ if .Site.Params.navigation.breadcrumb }}
+    {{ partial "assets/breadcrumb.html" (dict "page" .) }}
+{{ end }}
+{{ partial "assets/section-title.html" (dict
+    "heading" (dict
+        "title"   .Title
+        "content" .Description
+        "align"   "start"
+    )
+    "use-title" true
+) }}
 
 {{/* Init the card styling */}}
 {{ $articlesParams := $.Scratch.Get "articlesParams" }}
@@ -41,7 +39,7 @@
 {{ $result := partial "assets/live-pages.html" (dict "page" . "sort" $sort "reverse" $reverse) }}
 {{ $pages := $result.pages }}
 {{ if gt (len $pages) 0 }}
-    <div class="container-xxl py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+    <div class="container-fluid p-0 width-100">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {{ if site.Params.env_bookshop_live }}
                 {{ range $pages }}
