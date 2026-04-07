@@ -47,6 +47,7 @@
     {{- $baseURL := .baseURL -}}
     {{- $group := .group -}}
     {{- $data := .menu -}}
+    {{- $pre := $group.pre -}}
 
     {{- $doc_slug := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($group.title | urlize)) -}}
     {{- $href := or $group.link $doc_slug -}}
@@ -77,7 +78,16 @@
                 <a {{ with $dest }} href="{{ . }}"{{ else }}
                 data-bs-toggle="collapse"
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
-                {{ end }}>{{ $groupTitle }}</a>
+                {{ end }}>
+                    {{- with $pre -}}
+                        {{- if hasPrefix . "<i" -}}
+                            {{ . | safeHTML }}
+                        {{- else -}}
+                            {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) }}
+                        {{- end -}}
+                    {{- end -}}
+                    {{- $groupTitle -}}
+                </a>
             </div>
 
             <button
@@ -99,6 +109,7 @@
                             "baseURL" $href
                             "group"   $item
                             "menu"    $data
+                            "pre"     $item.pre
                             )
                         }}
                     {{- else -}}
@@ -109,6 +120,7 @@
                             "title"        $item.title
                             "href"         $item.link
                             "menu"         $data
+                            "pre"          $item.pre
                             )
                         }}
                     {{ end -}}
@@ -124,6 +136,12 @@
     {{- $baseURL := .baseURL -}}
     {{- $title := .title -}}
     {{- $data := .menu -}}
+    {{- $pre := .pre -}}
+    {{- $itemText := $title -}}
+    {{- with $pre -}}
+        {{- $iconHTML := partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
+        {{- $itemText = printf "%s%s" (string $iconHTML) $title -}}
+    {{- end -}}
     {{ $href := "" }}
 
     {{ with .href }}
@@ -150,7 +168,7 @@
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-                    {{ $link := partial "assets/link.html" (dict "href" $href "text" $title "class" $class "page" $page) }}
+                    {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" (ne $pre "")) }}
                     {{ if $link }}
                         {{ print $link | safeHTML }}
                     {{ else }}
@@ -163,7 +181,7 @@
         <li>
             {{ $class := "sidebar-item text-decoration-none rounded small w-100" }}
             {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
-            {{ $link := partial "assets/link.html" (dict "href" $href "text" $title "class" $class "page" $page) }}
+            {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" (ne $pre "")) }}
             {{ if $link }}
                 {{ print $link | safeHTML }}
             {{ else }}
@@ -200,6 +218,7 @@
                     "title"        $item.title
                     "href"         $item.link
                     "menu"         $args.menu
+                    "pre"          $item.pre
                     )
                 }}
             {{- end }}
