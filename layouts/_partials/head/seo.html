@@ -65,8 +65,8 @@
 {{ partial "head/opengraph.html" . }}
 {{ partial "head/twitter_cards.html" . }}
 
-{{ range .AlternativeOutputFormats -}}
-    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
-{{ end -}}
+{{ range .AlternativeOutputFormats }}
+    {{ printf "<link rel=%q type=%q href=%q>" .Rel .MediaType.Type .Permalink | safeHTML }}
+{{ end }}
 
 {{ partial "head/structured-data.html" . }}
