@@ -318,6 +318,7 @@
                     {{ $buttonClass := "card-button" }}
                     {{ $buttonType := (or $args.linkType $args.buttonType) }}
                     {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
+                    {{ if ne $args.align "start" }}{{ $buttonClass = printf "%s m%s-auto" $buttonClass (cond (eq $args.align "center") "x" "s") }}{{ end }}
                     {{ partial "assets/button.html" (dict 
                         "title"       $label
                         "href"        $href
