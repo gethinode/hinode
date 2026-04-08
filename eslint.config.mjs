@@ -28,6 +28,14 @@ export default [
     }
   },
   {
+    files: ['assets/js/sidebar-toggle.js'],
+    languageOptions: {
+      globals: {
+        bootstrap: 'readonly'
+      }
+    }
+  },
+  {
     ignores: [
       'assets/js/critical/languageSelector.js',
       'assets/js/critical/color.js',

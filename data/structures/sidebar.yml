@@ -53,3 +53,10 @@ arguments:
     comment: >-
       Maximum menu depth to render (1-based). Use 1 to render only
       top-level entries. 0 means no maximum filter.
+  collapsible:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      When true, renders a toggle button that collapses the sidebar to icon-only
+      view. Only effective in Mode A (level-max = 1). Default: false.

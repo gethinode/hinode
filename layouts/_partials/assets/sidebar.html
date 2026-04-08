@@ -41,11 +41,12 @@
 {{- end -}}
 
 {{- define "_partials/inline/sidebar/group-link.html" -}}
-    {{- $page    := .page -}}
-    {{- $group   := .group -}}
-    {{- $baseURL := .baseURL -}}
-    {{- $pre     := $group.pre -}}
-    {{- $href    := $group.link | default "" -}}
+    {{- $page        := .page -}}
+    {{- $group       := .group -}}
+    {{- $baseURL     := .baseURL -}}
+    {{- $pre         := $group.pre -}}
+    {{- $collapsible := .collapsible | default false -}}
+    {{- $href        := $group.link | default "" -}}
     {{- if and $href (not (hasPrefix $href "/")) -}}
         {{- $href = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $href) -}}
     {{- end -}}
@@ -57,6 +58,7 @@
     {{- end -}}
     <li class="mb-1">
         <a class="sidebar-item text-decoration-none rounded w-100{{ if $active }} active{{ end }}"
+           {{- if $collapsible }} data-sidebar-label="{{ $groupTitle }}"{{ end }}
            {{ with $href }}href="{{ . }}"{{ end }}>
             {{- with $pre -}}
                 {{- if hasPrefix . "<i" -}}
@@ -65,7 +67,11 @@
                     {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) }}
                 {{- end -}}
             {{- end -}}
-            {{- $groupTitle -}}
+            {{- if $collapsible -}}
+                <span class="sidebar-item-label ms-1">{{- $groupTitle -}}</span>
+            {{- else -}}
+                {{- $groupTitle -}}
+            {{- end -}}
         </a>
     </li>
 {{- end -}}
@@ -161,16 +167,21 @@
 {{ end -}}
 
 {{- define "_partials/inline/sidebar/item.html" -}}
-    {{- $page := .page -}}
-    {{- $level := .level -}}
-    {{- $baseURL := .baseURL -}}
-    {{- $title := .title -}}
-    {{- $data := .menu -}}
-    {{- $pre := .pre -}}
-    {{- $itemText := $title -}}
+    {{- $page        := .page -}}
+    {{- $level       := .level -}}
+    {{- $baseURL     := .baseURL -}}
+    {{- $title       := .title -}}
+    {{- $data        := .menu -}}
+    {{- $pre         := .pre -}}
+    {{- $collapsible := .collapsible | default false -}}
+    {{- $titleText   := $title -}}
+    {{- if $collapsible -}}
+        {{- $titleText = printf "<span class=\"sidebar-item-label ms-1\">%s</span>" $title -}}
+    {{- end -}}
+    {{- $itemText := $titleText -}}
     {{- with $pre -}}
         {{- $iconHTML := partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
-        {{- $itemText = printf "%s%s" (string $iconHTML) $title -}}
+        {{- $itemText = printf "%s%s" (string $iconHTML) $titleText -}}
     {{- end -}}
     {{ $href := "" }}
 
@@ -199,6 +210,9 @@
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
                     {{ if $active }}{{ $class = printf "%s active" $class }}{{ end }}
                     {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" (ne $pre "")) }}
+                    {{- if and $collapsible $title $link -}}
+                        {{- $link = $link | replaceRE `(<a)\s` (printf `${1} data-sidebar-label="%s" ` ($title | htmlEscape)) -}}
+                    {{- end -}}
                     {{ if $link }}
                         {{ print $link | safeHTML }}
                     {{ else }}
@@ -223,33 +237,46 @@
 
 {{/* Main code */}}
 {{ if and (not $args.error) $args.menu }}
-    {{- $levelMin := $args.levelMin | default 0 -}}
-    {{- $levelMax := $args.levelMax | default 0 -}}
-    {{- $page := $args.page -}}
-    <nav class="sidebar flex-shrink-0 ps-1{{ if ge $levelMin 2 }} sidebar-sub{{ end }}" aria-label="{{ (strings.FirstUpper $section) }} navigation">
+    {{- $levelMin    := $args.levelMin | default 0 -}}
+    {{- $levelMax    := $args.levelMax | default 0 -}}
+    {{- $collapsible := $args.collapsible | default false -}}
+    {{- $page        := $args.page -}}
+    {{- $iconCollapse := partial "utilities/GetThemeIcon.html" (dict "id" "sidebarCollapse" "default" "fas angles-left") -}}
+    <nav class="sidebar flex-shrink-0 ps-1{{ if ge $levelMin 2 }} sidebar-sub{{ end }}{{ if $collapsible }} sidebar-collapsible{{ end }}"
+         {{- if $collapsible }} data-storage-key="sidebar-collapsed"{{ end }}
+         aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $level := 0 -}}
         {{ $baseURL := $args.page.Scratch.Get "baseURL" | default "/" -}}
         {{ $baseURL = partial "utilities/URLJoin.html" (dict "elements" (slice "/" (strings.TrimPrefix $baseURL (urls.JoinPath $section $args.version | relLangURL)))) }}
 
         {{- if and (le $levelMin 1) (eq $levelMax 1) -}}
             {{/* Mode A: L1-only — render group headers as plain links, leaves normally */}}
+            {{- if $collapsible -}}
+            <div class="sidebar-toggle-container d-flex justify-content-end mb-2 pe-1">
+                <button class="btn btn-sm sidebar-toggle-btn p-1 border-0" aria-label="Toggle sidebar">
+                    {{- partial "assets/icon.html" (dict "icon" $iconCollapse "class" "sidebar-icon-toggle") -}}
+                </button>
+            </div>
+            {{- end -}}
             <ul class="list-unstyled ps-0">
             {{- range $index, $item := $args.menu -}}
                 {{- if $item.pages -}}
                     {{ partial "inline/sidebar/group-link.html" (dict
-                        "page"    $page
-                        "group"   $item
-                        "baseURL" $baseURL
+                        "page"        $page
+                        "group"       $item
+                        "baseURL"     $baseURL
+                        "collapsible" $collapsible
                     ) }}
                 {{- else -}}
                     {{ partial "inline/sidebar/item.html" (dict
-                        "page"    $page
-                        "level"   $level
-                        "baseURL" $baseURL
-                        "title"   $item.title
-                        "href"    $item.link
-                        "menu"    $args.menu
-                        "pre"     $item.pre
+                        "page"        $page
+                        "level"       $level
+                        "baseURL"     $baseURL
+                        "title"       $item.title
+                        "href"        $item.link
+                        "menu"        $args.menu
+                        "pre"         $item.pre
+                        "collapsible" $collapsible
                     ) }}
                 {{- end -}}
             {{- end -}}
