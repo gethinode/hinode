@@ -27,8 +27,11 @@ div.rounded, img.rounded {
     --section-height: 88vh;
     --max-section-height: 1024px;
 
-    min-height: 100vh;
-    margin-top: var(--navbar-height);
+    margin-top: var(--navbar-offset);
+}
+
+.footer-below-fold .main {
+    min-height: calc(100vh - var(--navbar-offset));
 }
 
 main:has(section:first-of-type.section-cover), main:has(section:first-of-type.background-container) {

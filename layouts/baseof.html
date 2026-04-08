@@ -47,7 +47,8 @@
         {{ block "head" . }}{{ end -}}
     </head>
 
-    <body>
+    {{- $belowFold := site.Params.main.footerBelowFold -}}
+    <body{{ if $belowFold }} class="footer-below-fold"{{ end }}>
         {{- partial "assets/navbar.html" (dict
             "page"        .
             "fixed"       site.Params.navigation.fixed

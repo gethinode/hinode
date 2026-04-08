@@ -1,4 +1,5 @@
 const fixed = {{ site.Params.navigation.fixed }}
+const belowFold = {{ site.Params.main.footerBelowFold }}
 const navbar = document.querySelector('.navbar')
 const togglers = document.querySelectorAll('.main-nav-toggler')
 const modeSelectors = document.querySelectorAll('.switch-mode-collapsed')
@@ -173,16 +174,48 @@ function updateNavbar () {
   }
 }
 
+function getSiblingsHeightAfterMain(main) {
+    let height = 0
+    let sibling = main.nextElementSibling
+    while (sibling) {
+        const style = window.getComputedStyle(sibling)
+        if (style.position !== 'fixed' && style.position !== 'absolute' && style.display !== 'none') {
+            height += sibling.offsetHeight
+        }
+        sibling = sibling.nextElementSibling
+    }
+    return height
+}
+
+function updateMainHeight() {
+    const main = document.querySelector('.main')
+    if (!main) return
+    const mainTop = main.getBoundingClientRect().top + window.scrollY
+    if (belowFold) {
+        main.style.minHeight = `calc(100vh - ${mainTop}px)`
+    } else {
+        const afterHeight = getSiblingsHeightAfterMain(main)
+        main.style.minHeight = `calc(100vh - ${mainTop}px - ${afterHeight}px)`
+    }
+}
+
 if ((navbar !== null) && (window.performance.getEntriesByType)) {
   if (window.performance.getEntriesByType('navigation')[0].type === 'reload') {
     fixed && updateNavbar()
   }
 }
 
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateMainHeight)
+} else {
+  updateMainHeight()
+}
+window.addEventListener('resize', updateMainHeight)
+
 if (navbar !== null && togglers !== null) {
   // initialize and update the navbar on load, on resize, and on scroll
   document.addEventListener('DOMContentLoaded', () => { fixed && updateNavbar() })
-  document.addEventListener('resize', () => fixed && updateNavbar())
+  document.addEventListener('resize', () => { fixed && updateNavbar() })
   document.addEventListener('scroll', () => fixed && updateNavbar())
 
   // hook up collapse events
