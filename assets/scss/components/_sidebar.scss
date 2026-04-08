@@ -19,7 +19,7 @@
 
     color: rgba(0, 0, 0, 0.65);
     margin-left: 0 !important;
-    display: inline-block;
+    display: block;
     padding: 0.1875rem 0.5rem !important;
 
     &.active {
@@ -45,10 +45,12 @@
     }
     
     > div > a {
+        display: block;
+        width: 100%;
         color: rgba(var(--#{$prefix}body-color-rgb), var(--#{$prefix}link-opacity, 1));
         text-decoration: none;
         cursor: pointer;
-        
+
         &:hover,
         &:focus {
             color: $primary;
@@ -57,7 +59,7 @@
 }
 
 .sidebar-item-group > div {
-    padding: 0.1875rem 0.5rem !important;
+    padding: 0.1875rem 0 0.1875rem 0.5rem !important;
 }
 
 .btn-toggle-group {

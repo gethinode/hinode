@@ -39,3 +39,17 @@ arguments:
     optional: true
     default: weight
     release: v2.0.0
+  level-min:
+    type: int
+    optional: true
+    default: 0
+    comment: >-
+      Minimum menu depth to render (1-based). Use with level-max to filter
+      rendered levels. 0 means no minimum filter.
+  level-max:
+    type: int
+    optional: true
+    default: 0
+    comment: >-
+      Maximum menu depth to render (1-based). Use 1 to render only
+      top-level entries. 0 means no maximum filter.
