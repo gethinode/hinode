@@ -241,8 +241,11 @@
     {{- $levelMax    := $args.levelMax | default 0 -}}
     {{- $collapsible := $args.collapsible | default false -}}
     {{- $page        := $args.page -}}
-    {{- $iconCollapse := partial "utilities/GetThemeIcon.html" (dict "id" "sidebarCollapse" "default" "fas angles-left") -}}
-    <nav class="sidebar flex-shrink-0 ps-1{{ if ge $levelMin 2 }} sidebar-sub{{ end }}{{ if $collapsible }} sidebar-collapsible{{ end }}"
+    {{- $iconCollapse  := partial "utilities/GetThemeIcon.html" (dict "id" "sidebarCollapse"  "default" "fas angles-left") -}}
+    {{- $iconSecondary := partial "utilities/GetThemeIcon.html" (dict "id" "sidebarSecondary" "default" "fas angle-up") -}}
+    {{- $hasSpacerItem := gt (len (where $args.menu "spacer" true)) 0 -}}
+    {{- $sidebarId     := $section | urlize | default "sidebar" -}}
+    <nav class="sidebar flex-shrink-0 ps-1{{ if ge $levelMin 2 }} sidebar-sub{{ end }}{{ if $collapsible }} sidebar-collapsible{{ end }}{{ if $hasSpacerItem }} sidebar-has-spacer{{ end }}"
          {{- if $collapsible }} data-storage-key="sidebar-collapsed"{{ end }}
          aria-label="{{ (strings.FirstUpper $section) }} navigation">
         {{- $level := 0 -}}
@@ -258,9 +261,19 @@
                 </button>
             </div>
             {{- end -}}
+            {{- $groupItems    := slice -}}
+            {{- $alwaysVisible := slice -}}
             <ul class="list-unstyled ps-0">
             {{- range $index, $item := $args.menu -}}
-                {{- if $item.pages -}}
+                {{- if $item.spacer -}}
+                    <li class="sidebar-spacer" aria-hidden="true"></li>
+                {{- else if $item.group -}}
+                    {{- if index $item "always-visible" -}}
+                        {{- $alwaysVisible = $alwaysVisible | append $item -}}
+                    {{- else -}}
+                        {{- $groupItems = $groupItems | append $item -}}
+                    {{- end -}}
+                {{- else if $item.pages -}}
                     {{ partial "inline/sidebar/group-link.html" (dict
                         "page"        $page
                         "group"       $item
@@ -279,6 +292,65 @@
                         "collapsible" $collapsible
                     ) }}
                 {{- end -}}
+            {{- end -}}
+            {{- if $groupItems -}}
+                <li>
+                    <div class="collapse" id="sidebar-secondary-{{ $sidebarId }}">
+                        <ul class="list-unstyled ps-0">
+                        {{- range $groupItems -}}
+                            {{ partial "inline/sidebar/item.html" (dict
+                                "page"        $page
+                                "level"       $level
+                                "baseURL"     $baseURL
+                                "title"       .title
+                                "href"        .link
+                                "menu"        $args.menu
+                                "pre"         .pre
+                                "collapsible" $collapsible
+                            ) }}
+                        {{- end -}}
+                        </ul>
+                    </div>
+                </li>
+            {{- end -}}
+            {{- range $alwaysVisible -}}
+                {{- $avHref := .link | default "" -}}
+                {{- if and $avHref (not (hasPrefix $avHref "/")) (not (hasPrefix $avHref "http")) -}}
+                    {{- $avHref = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" $avHref) -}}
+                {{- end -}}
+                {{- if and $avHref (not (hasSuffix $avHref "/")) -}}{{- $avHref = printf "%s/" $avHref -}}{{- end -}}
+                {{- $avActive := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $avHref) -}}
+                {{- $avTitle := .title -}}
+                {{- if and site.Params.main.titleCase (not $page.Params.exact) -}}{{- $avTitle = title $avTitle -}}{{- end -}}
+                <li class="mt-1 mb-1"></li>
+                <li>
+                    <ul class="btn-toggle-nav list-unstyled pb-1">
+                        <li class="d-flex align-items-center sidebar-secondary-row">
+                            <a class="sidebar-item text-decoration-none rounded flex-grow-1{{ if $avActive }} active{{ end }}"
+                               {{- if $collapsible }} data-sidebar-label="{{ $avTitle }}"{{ end }}
+                               href="{{ $avHref }}">
+                                {{- with .pre -}}
+                                    {{- partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
+                                {{- end -}}
+                                {{- if $collapsible -}}
+                                    <span class="sidebar-item-label ms-1">{{- $avTitle -}}</span>
+                                {{- else -}}
+                                    {{- $avTitle -}}
+                                {{- end -}}
+                            </a>
+                            {{- if $groupItems -}}
+                            <button class="sidebar-secondary-toggle btn border-0 p-1 flex-shrink-0"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#sidebar-secondary-{{ $sidebarId }}"
+                                    aria-expanded="false"
+                                    aria-controls="sidebar-secondary-{{ $sidebarId }}"
+                                    aria-label="{{ T "toggleSecondary" | default "Toggle more items" }}">
+                                {{- partial "assets/icon.html" (dict "icon" $iconSecondary "class" "sidebar-secondary-icon fa-fw" "spacing" false) -}}
+                            </button>
+                            {{- end -}}
+                        </li>
+                    </ul>
+                </li>
             {{- end -}}
             </ul>
         {{- else if ge $levelMin 2 -}}

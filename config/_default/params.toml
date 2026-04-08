@@ -57,6 +57,7 @@
     sharingDownload      = "fas download"
     # Sidebar
     sidebarCollapse      = "fas angles-left"
+    sidebarSecondary     = "fas angle-down"
     # Form
     formSubmitButton     = "fa paper-plane"
     formSubmittedIcon    = "fa envelope"
