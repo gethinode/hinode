@@ -8,7 +8,7 @@ require (
 	github.com/gethinode/mod-blocks v1.19.2 // indirect
 	github.com/gethinode/mod-bootstrap-icons v1.4.1 // indirect
 	github.com/gethinode/mod-cookieyes/v2 v2.2.6 // indirect
-	github.com/gethinode/mod-docs v1.11.1 // indirect
+	github.com/gethinode/mod-docs v1.11.2 // indirect
 	github.com/gethinode/mod-fontawesome/v5 v5.1.0 // indirect
 	github.com/gethinode/mod-utils/v5 v5.20.0 // indirect
 	github.com/twbs/icons v1.13.1 // indirect
