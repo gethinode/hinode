@@ -19,7 +19,7 @@
 
     color: rgba(0, 0, 0, 0.65);
     margin-left: 0 !important;
-    display: inline-block;
+    display: block;
     padding: 0.1875rem 0.5rem !important;
 
     &.active {
@@ -45,10 +45,12 @@
     }
     
     > div > a {
+        display: block;
+        width: 100%;
         color: rgba(var(--#{$prefix}body-color-rgb), var(--#{$prefix}link-opacity, 1));
         text-decoration: none;
         cursor: pointer;
-        
+
         &:hover,
         &:focus {
             color: $primary;
@@ -57,7 +59,7 @@
 }
 
 .sidebar-item-group > div {
-    padding: 0.1875rem 0.5rem !important;
+    padding: 0.1875rem 0 0.1875rem 0.5rem !important;
 }
 
 .btn-toggle-group {
@@ -102,7 +104,7 @@
                 color: $primary-text-emphasis-dark !important;
                 background-color: transparent;
                 box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
-    }
+            }
         }
 
         .sidebar-item-group {
@@ -144,6 +146,128 @@
             color: var(--bs-secondary-color);
         }
                     }
+}
+
+// Collapsible sidebar
+.sidebar-no-transition,
+.sidebar-no-transition * {
+    transition: none !important;
+}
+
+html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-item-label {
+    max-width: 0 !important;
+    opacity: 0 !important;
+    margin-inline-start: 0 !important;
+}
+
+.sidebar-toggle-btn {
+    color: rgba(0, 0, 0, 0.65);
+
+    &:hover {
+        color: $primary;
+    }
+
+    .sidebar-icon-toggle {
+        transition: transform 0.4s ease;
+    }
+}
+
+.sidebar-item-label {
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: middle;
+    transition: max-width 0.2s ease, opacity 0.15s ease, margin-inline-start 0.2s ease;
+}
+
+.sidebar-collapsed {
+    .sidebar-item-label {
+        max-width: 0;
+        opacity: 0;
+        margin-inline-start: 0 !important;
+    }
+
+    .sidebar-toggle-btn .sidebar-icon-toggle {
+        transform: rotate(180deg);
+    }
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .sidebar-toggle-btn {
+            color: var(--bs-body-color);
+
+            &:hover {
+                color: $primary-text-emphasis-dark;
+            }
+        }
+    }
+}
+
+// Secondary group row: stack vertically (button above link) when sidebar is icon-only
+.sidebar-collapsed .sidebar-secondary-row,
+html.sidebar-pre-collapsed .sidebar-secondary-row {
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+// Secondary group — icon rotates down (180°) when collapsed, up (0°) when expanded
+.sidebar-secondary-icon {
+    transition: transform 0.2s ease;
+    transform: rotate(180deg);
+}
+
+.sidebar-secondary-toggle[aria-expanded="true"] .sidebar-secondary-icon {
+    transform: rotate(0deg);
+}
+
+// Secondary group toggle button
+.sidebar-secondary-toggle {
+    color: rgba(0, 0, 0, 0.65);
+    padding: 0.1875rem 0.5rem;
+    border-radius: #{$theme-border-radius};
+
+    &:hover,
+    &:focus {
+        color: $primary;
+        background-color: tint-color($primary, 90%);
+    }
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .sidebar-secondary-toggle {
+            color: rgba(var(--#{$prefix}body-color-rgb), 0.65);
+
+            &:hover,
+            &:focus {
+                color: $primary-text-emphasis-dark;
+                background-color: transparent;
+                box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
+            }
+        }
+    }
+}
+
+// Flex column sidebar so .sidebar-spacer pushes the secondary group to the bottom
+@include media-breakpoint-up(md) {
+    .sidebar-has-spacer {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+
+        > ul.list-unstyled {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .sidebar-spacer {
+        flex: 1 1 0;
+        min-height: 1rem;
+    }
 }
 
 // scss-docs-end sidebar

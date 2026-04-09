@@ -19,6 +19,16 @@ div.rounded, img.rounded {
 }
 
 //
+// Sticky-footer: body fills at least the full viewport; .main grows to fill
+// remaining space, pushing the footer to the bottom without JS measurement.
+//
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+//
 // Ensure main page is rendered to full viewport height
 //
 .main {
@@ -27,8 +37,24 @@ div.rounded, img.rounded {
     --section-height: 88vh;
     --max-section-height: 1024px;
 
-    min-height: 100vh;
-    margin-top: var(--navbar-height);
+    flex: 1;
+}
+
+// Fixed navbar is out of flow: offset .main so content starts below the navbar
+.navbar-fixed .main {
+    margin-top: var(--navbar-offset);
+}
+
+// footerBelowFold: push footer just past the viewport edge.
+// Fixed (--navbar-offset = navbar height): margin-top = --navbar-offset, so subtract once.
+// Non-fixed (--navbar-offset = 0): navbar is in flow; subtract --navbar-height (actual height,
+//   always set from site.Params.navigation.offset regardless of the fixed setting).
+.navbar-fixed.footer-below-fold .main {
+    min-height: calc(100vh - var(--navbar-offset));
+}
+
+.footer-below-fold:not(.navbar-fixed) .main {
+    min-height: calc(100vh - var(--navbar-height));
 }
 
 main:has(section:first-of-type.section-cover), main:has(section:first-of-type.background-container) {
