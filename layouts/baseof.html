@@ -48,7 +48,11 @@
     </head>
 
     {{- $belowFold := site.Params.main.footerBelowFold -}}
-    <body{{ if $belowFold }} class="footer-below-fold"{{ end }}>
+    {{- $navFixed  := site.Params.navigation.fixed -}}
+    {{- $bodyClasses := slice -}}
+    {{- if $belowFold }}{{ $bodyClasses = $bodyClasses | append "footer-below-fold" }}{{ end -}}
+    {{- if $navFixed  }}{{ $bodyClasses = $bodyClasses | append "navbar-fixed"      }}{{ end -}}
+    <body{{ with $bodyClasses }} class="{{ delimit . " " }}"{{ end }}>
         {{- partial "assets/navbar.html" (dict
             "page"        .
             "fixed"       site.Params.navigation.fixed
