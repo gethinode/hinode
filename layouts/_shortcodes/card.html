@@ -46,6 +46,7 @@
 {{- $anchor := .Get "anchor" -}}
 {{- $title := .Get "title" -}}
 {{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") -}}
+{{- $linkIcon := partial "utilities/GetArgParent" (dict "page" . "arg" "link-icon") -}}
 {{- $linkType := or (partial "utilities/GetArgParent" (dict "page" . "arg" "link-type")) (partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType")) -}}
 {{- $cols := partial "utilities/GetArgParent" (dict "page" . "arg" "cols") -}}
 {{- $scroll := partial "utilities/GetArgParent" (dict "page" . "arg" "scroll") -}}
@@ -100,6 +101,7 @@
         "alt"          $alt
         "button"       $button
         "button-label" $args.buttonLabel
+        "link-icon"    $linkIcon
         "link-type"    $linkType
         "_default"     $args.default
     ) -}}

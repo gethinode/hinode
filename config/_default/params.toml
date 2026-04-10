@@ -25,6 +25,8 @@
         enabled = true
         modes = ["light", "dark"]
         toggle = false
+    [main.cards]
+        linkIcon = false
 # toml-docs-end main
 
 # toml-docs-start icons
@@ -48,6 +50,7 @@
     # Content
     tocSort              = "fas sort"
     cardReadMore         = "fas chevron-right"
+    cardLinkIcon         = "fas arrow-right"
     externalLink         = "fas up-right-from-square"
     testimonialNext      = "fas chevron-right"
     testimonialQuote     = "fas quote-right"

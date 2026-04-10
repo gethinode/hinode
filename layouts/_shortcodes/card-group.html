@@ -40,6 +40,7 @@
 {{- $style := .Get  "icon-style" | default "" -}}
 {{- $subtle := .Get "subtle" | default false -}}
 {{- $button := .Get "button" | default false -}}
+{{- $linkIcon := .Get "link-icon" | default false -}}
 {{- $buttonType := .Get "link-type" | default "" -}}
 {{- $iconRounded := .Get "icon-rounded" | default false -}}
 {{- with .Get "header" }}{{- $header = . -}}{{- end -}}
@@ -77,6 +78,7 @@
     "icon-style"   $style
     "subtle"       $subtle
     "button"       $button
+    "link-icon"    $linkIcon
     "link-type"    $buttonType
     "icon-rounded" $iconRounded
     "scroll"       $scroll

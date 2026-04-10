@@ -193,3 +193,21 @@ div.card-container-wrapper::after {
     width: 16%;
 	scroll-snap-align: center;
 }
+
+// Hover link icon: appears on card hover/focus to signal clickability
+.card-link-icon {
+    display: inline-flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    vertical-align: middle;
+    font-size: 0.75em;
+    margin-left: 0.25rem;
+}
+
+.card:hover .card-link-icon,
+.card:focus-within .card-link-icon {
+    opacity: 1;
+    transform: translateX(0);
+}

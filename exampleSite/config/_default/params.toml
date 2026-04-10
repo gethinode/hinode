@@ -23,6 +23,8 @@
         enabled = true
         modes = ["light", "dark"]
         toggle = true
+    [main.cards]
+        linkIcon = false
 
 [icons]
     # Color mode toggle

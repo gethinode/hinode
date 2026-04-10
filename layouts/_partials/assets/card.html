@@ -32,13 +32,15 @@
     {{- $links := .links -}}
     {{- $class := .class }}
     {{- $fs := .fs | default "fs-lg-5 fs-6" }}
-    
+    {{- $linkIcon := .linkIcon -}}
+
     {{- if $href -}}
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link {{ $class }}">
             {{ if or $title $links }}
                 <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
+                    {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "icon" . "spacing" false) -}}</span>{{- end -}}
                 </p>
             {{ end -}}
             {{ with $description }}
@@ -96,6 +98,7 @@
 {{/* Initialize global variables */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $cardReadMore := partial "utilities/GetThemeIcon.html" (dict "id" "cardReadMore" "default" "fas chevron-right") -}}
+{{- $cardLinkIcon := partial "utilities/GetThemeIcon.html" (dict "id" "cardLinkIcon" "default" "fas arrow-right") -}}
 
 {{/* Initialize local arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "card" "args" . "group" "partial") }}
@@ -174,6 +177,10 @@
 {{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
 {{ if and site.Params.main.titleCase (not $args.exact) }}{{ $title = title $title }}{{ end }}
 
+{{/* Show hover link icon when enabled (global setting or per-card/group override) and card is a bare link */}}
+{{- $linkIconEnabled := or (site.Params.main.cards.linkIcon | default false) $args.linkIcon -}}
+{{- $linkIcon := cond (and $linkIconEnabled $href (not $args.button) (not $args.buttonLabel)) $cardLinkIcon "" -}}
+
 {{- $thumbnailArgs := dict
     "src"      $thumbnail
     "portrait" $args.portrait
@@ -244,6 +251,7 @@
                             "color"       $args.color
                             "description" (cond $minimal $title $description)
                             "links"       $args.links
+                            "linkIcon"    $linkIcon
                         ) -}}
                         {{ if and $page (ne $args.footerStyle "none") }}
                             <div>{{ partial "inline/card-caption.html" (dict
@@ -306,6 +314,7 @@
                 "description" (cond $minimal $title $description)
                 "links"       $args.links
                 "class"       (cond (and $thumbnail (eq $args.headerStyle "none")) "pt-3" "")
+                "linkIcon"    $linkIcon
             ) -}}
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) -}}{{ end }}
         </div>
