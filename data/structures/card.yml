@@ -77,6 +77,9 @@ arguments:
   links:
     release: v1.14.0
     group: partial
+  link-icon:
+    parent: cascade
+    release: v2.4.0
   exact:
     release: v1.22.0
   # deprecated arguments
@@ -93,7 +96,7 @@ arguments:
         - publication
         - tags
         - none
-    deprecated: 1.0.0
+    deprecated: v1.0.0
     alternative: header-style
   body:
     type: select
@@ -108,7 +111,7 @@ arguments:
         - full
         - title
         - none
-    deprecated: 1.0.0
+    deprecated: v1.0.0
     alternative: body-style
   footer:
     type: select

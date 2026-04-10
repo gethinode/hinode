@@ -20,6 +20,8 @@ arguments:
     release: v2.0.0
   link-type:
     release: v0.23.18
+  link-icon:
+    release: v2.4.0
   animated:
     release: v0.27.0
   styles:

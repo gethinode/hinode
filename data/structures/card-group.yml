@@ -72,6 +72,8 @@ arguments:
     release: v0.27.0
     optional: true
     group: partial
+  link-icon:
+    release: v2.4.0
   more-link-icon:
     type: string
     optional: true
