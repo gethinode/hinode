@@ -113,6 +113,8 @@
 # Sidebar
 - id: toggleSidebar
   translation: "Menünavigation anzeigen oder ausblenden"
+- id: toggleSecondary
+  translation: "Weitere Elemente anzeigen oder ausblenden"
 
 # Feature
 - id: addedFeature

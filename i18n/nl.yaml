@@ -113,6 +113,8 @@
 # Sidebar
 - id: toggleSidebar
   translation: "Toon of verberg navigatie"
+- id: toggleSecondary
+  translation: "Toon of verberg meer items"
 
 # Feature
 - id: addedFeature

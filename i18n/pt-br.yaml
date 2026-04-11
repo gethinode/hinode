@@ -115,6 +115,8 @@
 # Sidebar
 - id: toggleSidebar
   translation: "Mostrar/Ocultar barra lateral"
+- id: toggleSecondary
+  translation: "Mostrar/Ocultar mais itens"
 
 # Feature
 - id: addedFeature

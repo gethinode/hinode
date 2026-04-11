@@ -113,6 +113,8 @@
 # Sidebar
 - id: toggleSidebar
   translation: "切換側邊欄導航"
+- id: toggleSecondary
+  translation: "切換更多項目"
 
 # Feature
 - id: addedFeature
