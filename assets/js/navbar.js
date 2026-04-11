@@ -182,7 +182,15 @@ if ((navbar !== null) && (window.performance.getEntriesByType)) {
 if (navbar !== null && togglers !== null) {
   // initialize and update the navbar on load, on resize, and on scroll
   document.addEventListener('DOMContentLoaded', () => { fixed && updateNavbar() })
-  document.addEventListener('resize', () => { fixed && updateNavbar() })
+  window.addEventListener('resize', () => {
+    fixed && updateNavbar()
+    for (let i = 0; i < togglers.length; ++i) {
+      const toggler = togglers[i]
+      if (toggler.getAttribute('aria-expanded') === 'true') {
+        toggler.click()
+      }
+    }
+  })
   document.addEventListener('scroll', () => fixed && updateNavbar())
 
   // hook up collapse events
