@@ -52,6 +52,15 @@
 {{ end }}
 {{ if $args.searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
 
+{{/* Filter */}}
+{{ $filter := $args.filter }}
+{{ $filterCol := $args.filterCol | default 1 }}
+{{ $filterId := "" }}
+{{ if $filter }}
+    {{ $filterId = printf "table-filter-%s" (md5 (delimit (slice . now) "-")) }}
+    {{ $attributes = printf "%s data-filter-col=%d data-filter-id=%s" $attributes $filterCol $filterId }}
+{{ end }}
+
 {{/* Main code */}}
 {{ if not $args.err }}
     {{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
@@ -61,18 +70,35 @@
     {{ if $args.wrap }}{{ $wrapped = partial "inline/table.html" (merge $params (dict "wrap" true)) }}{{ end }}
     {{ $wrapper := $args.wrapper | default "" }}
 
+    {{ if $filter }}
+    <div class="table-filter-controls d-flex justify-content-start mb-3">
+        <div class="btn-group" role="group" aria-label="{{ T "tableFilterLabel" | default "Filter" }}">
+            <button type="button"
+                    class="btn btn-outline-primary active"
+                    data-filter-table="{{ $filterId }}"
+                    data-filter-value="">{{ T "tableFilterAll" | default "All" }}</button>
+            {{ range $filter }}
+            <button type="button"
+                    class="btn btn-outline-primary"
+                    data-filter-table="{{ $filterId }}"
+                    data-filter-value="{{ . }}">{{ . | title }}</button>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+
     {{ if eq $args.breakpoint "none" }}
         {{ $regular | safeHTML }}
         {{ with $wrapped }}
             {{ if $wrapper }}<div class="{{ $wrapper }}">{{ . | safeHTML }}</div>{{ else }}{{ . | safeHTML }}{{ end }}
         {{ end }}
     {{ else }}
-        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ if $wrapped }}d-none d-{{ $breakpoint.current }}-block{{ end }} {{ $wrapper }}">
+        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ if $wrapped }}d-none d-{{ $breakpoint.current }}-block{{ end }} {{ $wrapper }}"{{ if $filter }} data-filter-container="{{ $filterId }}"{{ end }}>
         {{ $regular | safeHTML }}
         </div>
 
         {{ with $wrapped }}
-            <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} d-{{ $breakpoint.current }}-none {{ $wrapper }}">
+            <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} d-{{ $breakpoint.current }}-none {{ $wrapper }}"{{ if $filter }} data-filter-container="{{ $filterId }}"{{ end }}>
             {{ . | safeHTML }}
             </div>
         {{ end }}

@@ -23,6 +23,8 @@
 # List pages
 - id: article
   translation: "文章"
+- id: category
+  translation: "分類"
 - id: articles
   translation: "文章"
 - id: more

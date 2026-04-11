@@ -4,6 +4,7 @@ title: third post
 date: 2022-12-01
 description: This is the third blog post. It uses exact case for the title.
 tags: ["blog"]
+category: tutorial
 exact: true
 thumbnail:
   url: https://picsum.photos/id/184/4288/2848.jpg

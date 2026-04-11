@@ -4,6 +4,7 @@ title: First post
 date: 2022-10-01
 description: This is the first blog post.
 tags: ["blog"]
+category: featured
 thumbnail:
   url: img/notepad.jpg
   author: Frederick Medina
