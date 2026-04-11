@@ -113,6 +113,8 @@
 # Sidebar
 - id: toggleSidebar
   translation: "Toggle sidebar navigation"
+- id: toggleSecondary
+  translation: "Toggle more items"
 
 # Feature
 - id: addedFeature

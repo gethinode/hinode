@@ -113,6 +113,8 @@
 # Sidebar
 - id: toggleSidebar
   translation: "Przełącz nawigację na pasku bocznym"
+- id: toggleSecondary
+  translation: "Przełącz więcej elementów"
 
 # Feature
 - id: addedFeature
