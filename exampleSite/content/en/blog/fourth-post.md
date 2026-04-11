@@ -4,6 +4,7 @@ title: Fourth post
 date: 2023-01-01
 description: This is the fourth blog post. It is excluded from the search index.
 tags: ["blog"]
+category: tutorial
 searchExclude: true
 thumbnail:
   url: img/flowers.jpg

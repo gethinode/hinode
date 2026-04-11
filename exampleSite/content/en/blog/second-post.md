@@ -4,6 +4,7 @@ title: Second post
 date: 2022-11-01
 description: This is the second blog post.
 tags: ["blog"]
+category: featured
 thumbnail:
   url: img/phone.jpg
   author: Thom

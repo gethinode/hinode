@@ -23,6 +23,8 @@
 # List pages
 - id: article
   translation: "Article"
+- id: category
+  translation: "Category"
 - id: articles
   translation: "Articles"
 - id: more
