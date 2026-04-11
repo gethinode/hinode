@@ -174,6 +174,7 @@
     {{- $data        := .menu -}}
     {{- $pre         := .pre -}}
     {{- $collapsible := .collapsible | default false -}}
+    {{- $prefixMatch := .prefixMatch | default false -}}
     {{- $titleText   := $title -}}
     {{- if $collapsible -}}
         {{- $titleText = printf "<span class=\"sidebar-item-label ms-1\">%s</span>" $title -}}
@@ -200,7 +201,7 @@
         {{- $href = partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($title | urlize)) -}}
         {{ if not (hasSuffix $href "/") }}{{ $href = printf "%s/" $href }}{{ end }}
     {{ end }}
-    {{- $active := eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href) -}}
+    {{- $active := or (eq (strings.TrimSuffix "/" $page.RelPermalink) (strings.TrimSuffix "/" $href)) (and $prefixMatch $href (strings.HasPrefix $page.RelPermalink $href)) -}}
 
     {{ if eq $level 0}}
         <li class="mt-1 mb-1"></li>
@@ -307,6 +308,7 @@
                                 "menu"        $args.menu
                                 "pre"         .pre
                                 "collapsible" $collapsible
+                                "prefixMatch" true
                             ) }}
                         {{- end -}}
                         </ul>
