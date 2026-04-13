@@ -8,6 +8,10 @@ arguments:
   label:
     preview: true
   aria-label:
+  aria-role:
+    release: v2.7.0
+  attributes:
+    release: v2.7.0
 body:
   type: string
   optional: false

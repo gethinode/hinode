@@ -11,6 +11,13 @@ arguments:
   title:
     release: v1.0.0
     preview: true
+  icon:
+    release: v2.7.0
+    comment: >-
+      Icon to display in the tab button. When set without a title, renders an
+      icon-only button; title is then used as aria-label and tooltip.
+  attributes:
+    release: v2.7.0
   show:
   disabled:
   fade:

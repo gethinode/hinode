@@ -25,7 +25,7 @@
 {{/* Initialize local arguments */}}
 {{- $page := .Page -}}
 {{- $data := partial "utilities/GetI18nData.html" (dict "page" $page "data" $args.data) }}
-{{ if not $data -}}
+{{ if and (not $data) (not $args.section) -}}
     {{ errorf "Invalid timeline data '%s': %s" $args.data .Position -}}
     {{ $error = true }}
 {{ end -}}
@@ -35,6 +35,9 @@
     {{ partial "assets/timeline.html" (dict
         "page"       $page
         "data"       $args.data
+        "section"    $args.section
+        "limit"      $args.limit
+        "layout"     $args.layout
         "background" $args.background
         "class"      $args.class
         "justify"    $args.justify

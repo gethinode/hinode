@@ -7,10 +7,23 @@ arguments:
   heading:
     group: partial
   data:
-    optional: false
     preview: true
+  section:
+    release: v2.7.0
+    comment: >-
+      Hugo content section to source timeline items from (e.g. "changelog").
+      When set, takes precedence over data. Items are sorted by date descending.
+  limit:
+    release: v2.7.0
+  layout:
+    release: v2.7.0
+    options:
+      values:
+        - default
+        - start
   background:
   class:
   justify:
 example: |
   {{< timeline data="events" >}}
+  {{< timeline section="changelog" layout="start" >}}
