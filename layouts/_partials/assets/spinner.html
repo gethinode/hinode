@@ -1,0 +1,26 @@
+{{/*
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Initialize arguments */}}
+{{- $args := partial "utilities/InitArgs.html" (dict "structure" "spinner" "args" . "group" "partial") -}}
+{{- if or $args.err $args.warnmsg -}}
+    {{- partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict
+        "partial" "assets/spinner.html"
+        "warnid"  "warn-invalid-arguments"
+        "msg"     "Invalid arguments"
+        "details" ($args.errmsg | append $args.warnmsg)
+        "file"    page.File
+    )}}
+{{- end -}}
+
+{{/* Main code */}}
+{{- if not $args.err -}}
+    {{- with $args.class }}<div class="{{ . }}">{{ end -}}
+        <div class="spinner-{{ if $args.grow }}grow{{ else }}border{{ end }} text-{{ $args.color }}" role="status">
+            <span class="visually-hidden">{{ or $args.label (T "loading") }}</span>
+        </div>
+    {{- if $args.class }}</div>{{ end -}}
+{{- end -}}

@@ -53,15 +53,21 @@
     {{- $current := .Parent.Scratch.Get "inner" -}}
     {{- $titles := .Parent.Scratch.Get "inner-title" -}}
     {{- $disabled := .Parent.Scratch.Get "inner-disabled" -}}
+    {{- $icons := .Parent.Scratch.Get "inner-icon" -}}
+    {{- $itemAttrs := .Parent.Scratch.Get "inner-attrs" -}}
     {{- if $args.show }}{{ .Parent.Scratch.Set "inner-show" $itemID }}{{ end -}}
     {{- if $current -}}
         {{- .Parent.Scratch.Set "inner" (print $current $output) -}}
         {{- .Parent.Scratch.Set "inner-title" ($titles | append $title) -}}
         {{- .Parent.Scratch.Set "inner-disabled" ($disabled | append $disabledID) -}}
+        {{- .Parent.Scratch.Set "inner-icon" ($icons | append $args.icon) -}}
+        {{- .Parent.Scratch.Set "inner-attrs" ($itemAttrs | append $args.attributes) -}}
     {{- else -}}
         {{- .Parent.Scratch.Set "inner" $output -}}
         {{- .Parent.Scratch.Set "inner-title" (slice $title) -}}
         {{- .Parent.Scratch.Set "inner-disabled" (slice $disabledID) -}}
+        {{- .Parent.Scratch.Set "inner-icon" (slice $args.icon) -}}
+        {{- .Parent.Scratch.Set "inner-attrs" (slice $args.attributes) -}}
     {{- end }}
 
     {{- $alternative := partial "assets/nav-item.html" (dict 

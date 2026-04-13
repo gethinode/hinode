@@ -12,6 +12,12 @@ arguments:
     group: partial
   nav-disabled:
     release: v1.0.0
+  nav-icons:
+    release: v2.7.0
+    group: partial
+  nav-item-attrs:
+    release: v2.7.0
+    group: partial
   nav-items:
     release: v1.0.0
   nav-show:
@@ -21,6 +27,17 @@ arguments:
   tab-type:
     release: v1.0.0
     preview: true
+  align:
+    release: v2.7.0
+    comment: >-
+      Horizontal alignment of the nav controls. Ignored when vertical is set.
+  controls-placement:
+    release: v2.7.0
+    comment: >-
+      Position of the nav controls relative to the content panes ("top" or
+      "bottom"). Ignored when vertical is set.
+  attributes:
+    release: v2.7.0
   vertical:
   word-wrap:
     release: v1.0.0

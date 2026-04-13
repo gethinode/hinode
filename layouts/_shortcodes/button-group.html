@@ -19,6 +19,7 @@
 
 {{/* Initialize local arguments */}}
 {{ $label := or $args.label $args.ariaLabel }}
+{{ $role := or $args.ariaRole "group" }}
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
 {{ if $input }}
@@ -28,7 +29,10 @@
 
 {{/* Main code */}}
 {{ if not $args.err }}
-    <div class="btn-group" role="group" {{ with $label }}aria-label="{{ . }}"{{ end }}>
+    <div class="btn-group" role="{{ $role }}"
+        {{ with $label }}aria-label="{{ . }}"{{ end -}}
+        {{- range $key, $val := $args.attributes }} {{ printf "%s=%q" $key $val | safeHTMLAttr }}{{ end -}}
+    >
         {{ $inner | safeHTML }}
     </div>
 {{ end }}

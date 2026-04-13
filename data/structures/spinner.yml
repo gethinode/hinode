@@ -8,6 +8,8 @@ arguments:
     default: primary
     preview: true
   grow:
+  label:
+    release: v2.7.0
 body:
   optional: false
   comment: >-

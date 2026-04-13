@@ -27,15 +27,48 @@
 {{/* Initialize local arguments */}}
 {{- $page := $args.page -}}
 {{- $data := partial "utilities/GetI18nData.html" (dict "page" $page "data" $args.data) }}
-{{ if not $data -}}
-    {{ partial "utilities/LogErr.html" (dict 
-        "partial" "assets/timeline.html" 
+{{- if and (not $data) (not $args.section) -}}
+    {{ partial "utilities/LogErr.html" (dict
+        "partial" "assets/timeline.html"
         "msg"     "Invalid arguments"
         "details" (slice (printf "Invalid timeline data '%s'" $args.data))
         "file"    page.File
     )}}
     {{ $error = true }}
-{{ end -}}
+{{- end -}}
+
+{{/* Override data from a Hugo content section when section is provided */}}
+{{- if $args.section -}}
+    {{- $sectionPage := site.GetPage $args.section -}}
+    {{- if $sectionPage -}}
+        {{- $pages := $sectionPage.RegularPages.ByDate.Reverse -}}
+        {{- $sectionData := slice -}}
+        {{- range $pages -}}
+            {{- $sectionData = $sectionData | append (dict
+                "title"   .Title
+                "date"    .Date
+                "content" .Description
+                "url"     .RelPermalink
+                "color"   "primary"
+            ) -}}
+        {{- end -}}
+        {{- $data = $sectionData -}}
+    {{- else -}}
+        {{- partial "utilities/LogWarn.html" (dict
+            "partial" "assets/timeline.html"
+            "warnid"  "warn-invalid-section"
+            "msg"     "Invalid section"
+            "details" (slice (printf "Section '%s' not found" $args.section))
+            "file"    page.File
+        ) -}}
+    {{- end -}}
+{{- end -}}
+
+{{/* Apply limit */}}
+{{- if and $args.limit (gt (len $data) $args.limit) -}}
+    {{- $data = first $args.limit $data -}}
+{{- end -}}
+
 {{ $background := partial "utilities/GetBackgroundStyle.html" (dict "background" $args.background) }}
 
 {{/* Inline partial to render icon */}}
@@ -116,7 +149,30 @@
         ) }}
     {{ end }}
 
+    {{/* Render start (compact start-aligned) timeline */}}
+    {{ if eq $args.layout "start" }}
+        {{ $title | safeHTML }}
+        <ul class="timeline-start{{ with $args.class }} {{ . }}{{ end }}">
+            {{ range $data }}
+                <li>
+                    {{- $datestr := "" -}}
+                    {{- with .date -}}
+                        {{- $datestr = partial "utilities/date.html" (dict "date" . "format" "long") -}}
+                    {{- end -}}
+                    {{ if and .url $datestr }}
+                        <a href="{{ .url }}">{{ $datestr }}</a>
+                    {{ else if $datestr }}
+                        <span>{{ $datestr }}</span>
+                    {{ else if .url }}
+                        <a href="{{ .url }}">{{ .title }}</a>
+                    {{ end }}
+                    {{ with .content }}<p class="mb-0">{{ . | truncate 50 }}</p>{{ end }}
+                </li>
+            {{ end }}
+        </ul>
+
     {{/* Render default timeline */}}
+    {{ else }}
     <div class="timeline-container container p-0 d-none d-md-block {{ with $background }} timeline-{{ . }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }}">
         {{ $title | safeHTML }}
         {{ range $index, $item := $data }}
@@ -162,4 +218,5 @@
             <div class="row timeline-sm g-0 p-3"> </div>
         {{ end }}
     </div>
+    {{ end }}{{/* end layout branch */}}
 {{ end }}
