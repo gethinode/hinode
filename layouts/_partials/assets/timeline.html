@@ -26,7 +26,8 @@
 
 {{/* Initialize local arguments */}}
 {{- $page := $args.page -}}
-{{- $data := partial "utilities/GetI18nData.html" (dict "page" $page "data" $args.data) }}
+{{- $data := "" -}}
+{{- with $args.data -}}{{- $data = partial "utilities/GetI18nData.html" (dict "page" $page "data" .) -}}{{- end -}}
 {{- if and (not $data) (not $args.section) -}}
     {{ partial "utilities/LogErr.html" (dict
         "partial" "assets/timeline.html"
