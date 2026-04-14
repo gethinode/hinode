@@ -8,6 +8,7 @@ arguments:
     group: partial
   data:
     preview: true
+    optional: true
   section:
     release: v2.7.0
     comment: >-
