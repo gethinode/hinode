@@ -21,6 +21,8 @@
 {{- $innerTitles := .Scratch.Get "inner-title" -}}
 {{- $innerDisabled := .Scratch.Get "inner-disabled" -}}
 {{- $innerShow := .Scratch.Get "inner-show" -}}
+{{- $innerIcons := .Scratch.Get "inner-icon" -}}
+{{- $innerAttrs := .Scratch.Get "inner-attrs" -}}
 {{- $input := trim .Inner " \r\n" -}}
 {{- if $input -}}
     {{- $input = replace $input "\n" "\n  " -}}
@@ -29,22 +31,27 @@
 
 {{/* Main code */}}
 {{- if not $args.err -}}
-    {{- partial "assets/nav.html" (dict 
-        "id"           (or $args.id (printf "nav-%d" .Ordinal))
-        "page"         .Page
-        "list"         $args.list
-        "nav-items"    $inner
-        "nav-titles"   $innerTitles
-        "nav-disabled" $innerDisabled
-        "nav-show"     $innerShow
-        "tab-type"     (or $args.tabType $args.type)
-        "vertical"     $args.vertical
-        "word-wrap"    $args.wordWrap
-        "responsive"   $args.responsive
-        "class"        $args.class
-        "pane"         $args.pane
-        "width"        $args.width
-        "_default"     $args.default
-        ) 
+    {{- partial "assets/nav.html" (dict
+        "id"                (or $args.id (printf "nav-%d" .Ordinal))
+        "page"              .Page
+        "list"              $args.list
+        "nav-items"         $inner
+        "nav-titles"        $innerTitles
+        "nav-disabled"      $innerDisabled
+        "nav-show"          $innerShow
+        "nav-icons"         $innerIcons
+        "nav-item-attrs"    $innerAttrs
+        "tab-type"          (or $args.tabType $args.type)
+        "align"             $args.align
+        "controls-placement" $args.controlsPlacement
+        "attributes"        $args.attributes
+        "vertical"          $args.vertical
+        "word-wrap"         $args.wordWrap
+        "responsive"        $args.responsive
+        "class"             $args.class
+        "pane"              $args.pane
+        "width"             $args.width
+        "_default"          $args.default
+        )
     -}}
 {{- end -}}
