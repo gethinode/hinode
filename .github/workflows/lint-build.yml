@@ -83,7 +83,15 @@ jobs:
             | tar -xz -C "$HOME"
           echo "$HOME/dart-sass" >> $GITHUB_PATH
         elif [ "$RUNNER_OS" == "macOS" ]; then
-          brew install sass/sass/sass
+          ARCH=$(uname -m)
+          if [ "$ARCH" == "arm64" ]; then
+            SASS_ARCH="macos-arm64"
+          else
+            SASS_ARCH="macos-x64"
+          fi
+          curl -fsSL "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-${SASS_ARCH}.tar.gz" \
+            | tar -xz -C "$HOME"
+          echo "$HOME/dart-sass" >> $GITHUB_PATH
         elif [ "$RUNNER_OS" == "Windows" ]; then
           choco install sass
         fi

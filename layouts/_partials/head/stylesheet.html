@@ -68,6 +68,8 @@
     "import-fonts"            (printf "%t" (not (hasPrefix (lower site.Params.style.themeFontPath) "http")))
     "dark-mode-shade"         (default "0%" site.Params.style.darkModeShade)
     "dark-mode-tint"          (default "0%" site.Params.style.darkModeTint)
+    "padding-x"               (default 4 site.Params.main.padding.x)
+    "padding-y"               (default 4 site.Params.main.padding.y)
 -}}
 
 {{- $options := (dict
