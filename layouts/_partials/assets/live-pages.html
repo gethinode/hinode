@@ -89,6 +89,21 @@
                 {{ range $pages }}
                     {{ $lists = $lists | append .Parent | uniq }}
                 {{ end }}
+                {{/* Also include all descendant subsection pages (covers subsections with no regular children) */}}
+                {{- if $args.nested -}}
+                    {{- $walk := slice $sectionPage -}}
+                    {{- range seq 1 1000 -}}
+                        {{- if not $walk -}}{{- break -}}{{- end -}}
+                        {{- $lastIdx := sub (len $walk) 1 -}}
+                        {{- $current := index $walk $lastIdx -}}
+                        {{- $walk = $walk | first $lastIdx -}}
+                        {{- range $current.Sections -}}
+                            {{- $lists = $lists | append . -}}
+                            {{- $walk = $walk | append . -}}
+                        {{- end -}}
+                    {{- end -}}
+                    {{- $lists = $lists | uniq -}}
+                {{- end -}}
                 {{/* Filter list pages if exclude-filtered is set */}}
                 {{ if $args.excludeFiltered }}
                     {{ $lists = where $lists "Params.excludeFromSidebar" "!=" true }}
