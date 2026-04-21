@@ -4,6 +4,8 @@ github.com/airbnb/lottie-web v5.13.0+incompatible h1:plBV5Uq/F1kK0EC61Hr0cBGReI9
 github.com/airbnb/lottie-web v5.13.0+incompatible/go.mod h1:nTss557UK9FGnp8QYlCMO29tjUHwbdAHG/DprbGfHGE=
 github.com/gethinode/mod-bootstrap v1.3.5 h1:bewgYpQex+dBABK0u5PUvW6IoUXLHhi1Yv9hcPzwGVc=
 github.com/gethinode/mod-bootstrap v1.3.5/go.mod h1:CxrYCFzKtBMz3YWG5i/d5jHKCgvUo60NFcCmz2mxCjQ=
+github.com/gethinode/mod-bootstrap v1.3.6 h1:TMNifG5iV6PrrvHPfcIu1Urfdisae/bXmaY1RPhfIIU=
+github.com/gethinode/mod-bootstrap v1.3.6/go.mod h1:CxrYCFzKtBMz3YWG5i/d5jHKCgvUo60NFcCmz2mxCjQ=
 github.com/gethinode/mod-csp v1.0.9 h1:Bt4agpC/Wy56Gabt8Ox2LbNoj2yrSYXCzY2o69D3dPA=
 github.com/gethinode/mod-csp v1.0.9/go.mod h1:Nb22QMicoUHgZQUKP5TCgVrSI8K3KU7jLuLBShmotjg=
 github.com/gethinode/mod-flexsearch/v3 v3.2.0 h1:BNpwXheG1XYa7DZQnUX4ZEzL5gCd0HJthS2XNPfxNjo=
@@ -44,6 +46,8 @@ github.com/gethinode/mod-fontawesome/v5 v5.0.8 h1:BAlV+BMlk6FEuLwm8hRn3wT6wH8i64
 github.com/gethinode/mod-fontawesome/v5 v5.0.8/go.mod h1:6TtI+LriOd4PmUGsNF0IOnyAwysblLMonCIy3tcvAJ8=
 github.com/gethinode/mod-fontawesome/v5 v5.1.0 h1:u3ntQMe1fGntcrljxrbZXA9Q0z2WHlmbPT0sL+Uw1o8=
 github.com/gethinode/mod-fontawesome/v5 v5.1.0/go.mod h1:b9nG1pel6LIWiNyb0kZAmyhLo2rrx4dvG2xyoD8tDlk=
+github.com/gethinode/mod-fontawesome/v5 v5.1.1 h1:zYjqzFMj2JdYyvRrigIAs8+LIspQ0XSRmi9f1orQm0Q=
+github.com/gethinode/mod-fontawesome/v5 v5.1.1/go.mod h1:DZi1UIZLFO9Og2pkrsyTRad85PoFEEwSwiPd7kk28IA=
 github.com/gethinode/mod-google-analytics/v2 v2.0.0 h1:Vor4j56qtpjtKY9r5QLeN5CBxuf8YKP3+XvQKEkayrM=
 github.com/gethinode/mod-google-analytics/v2 v2.0.0/go.mod h1:y4ZlacA8FSXjmvn9P8cZshOrBB5Wc+3p0DKSehkk+8E=
 github.com/gethinode/mod-google-analytics/v2 v2.0.1 h1:WNI8e06Bl1pLYrt1Adwuk4KtU9uVrJmO+KZxggIcI0M=
