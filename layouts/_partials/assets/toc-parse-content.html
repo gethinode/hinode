@@ -15,12 +15,17 @@
     {{ if and (ge $item.Level $startLevel) (le $item.Level $endLevel) }}
         {{- $attrs := dict "class" (printf "toc-item toc-level-%d" (add 1 (sub $item.Level $startLevel))) }}
         {{- with $item.ID }}
-            {{- $attrs = merge $attrs (dict "href" (printf "%s#%s" $base .)) }}
+            {{/* Strip Hugo's HAHAHUGOSHORTCODE placeholder — see _markup/render-heading.html. */}}
+            {{- $cleanID := replaceRE `(?i)hahahugoshortcode\d+s\d+hbhb` "-" . -}}
+            {{- $cleanID = trim (replaceRE `-+` "-" $cleanID) "-" -}}
+            {{- $attrs = merge $attrs (dict "href" (printf "%s#%s" $base $cleanID)) }}
         {{- end }}
 
         {{ $htmlAttr := "" }}
         {{ range $k, $v := $attrs }}{{ $htmlAttr = printf "%s %s=%q" $htmlAttr $k $v | safeHTMLAttr }}{{ end }}
-        {{ $rendered := printf "<a %s>%s</a>" $htmlAttr $item.Title }}
+        {{- $cleanTitle := replaceRE `(?i)HAHAHUGOSHORTCODE\d+s\d+HBHB` " " $item.Title -}}
+        {{- $cleanTitle = trim (replaceRE `\s+` " " $cleanTitle) " " -}}
+        {{ $rendered := printf "<a %s>%s</a>" $htmlAttr $cleanTitle }}
         {{ $result = $result | append $rendered }}
     {{ end }}
 
