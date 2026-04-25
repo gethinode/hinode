@@ -3,13 +3,18 @@
 {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
 {{- $headingAnchor := partial "utilities/GetThemeIcon.html" (dict "id" "headingAnchor" "default" "fas link") -}}
 
+{{/* Strip Hugo's HAHAHUGOSHORTCODE placeholder from .Anchor — different render passes
+     assign different counters, so the raw anchor would not match the TOC link. */}}
+{{- $anchor := replaceRE `(?i)hahahugoshortcode\d+s\d+hbhb` "-" .Anchor -}}
+{{- $anchor = trim (replaceRE `-+` "-" $anchor) "-" -}}
+
 {{ if and site.Params.navigation.anchor $text }}
-<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading {{ with $class }}{{ . }}{{ end }}">
+<h{{ .Level }} id="{{ $anchor | safeURL }}" class="heading {{ with $class }}{{ . }}{{ end }}">
     {{- $text | safeHTML -}}
-    <a href="#{{ .Anchor | safeURL }}" aria-labelledby="{{ .Anchor | safeURL }}">
+    <a href="#{{ $anchor | safeURL }}" aria-labelledby="{{ $anchor | safeURL }}">
         {{- partial "assets/icon.html" (dict "icon" $headingAnchor "class" "anchor") }}
     </a>
 </h{{ .Level }}>
 {{ else }}
-<h{{ .Level }} id="{{ .Anchor | safeURL }}" {{ with $class }} class="{{ . }}"{{ end }}>{{ $text | safeHTML }}</h{{ .Level }}>
+<h{{ .Level }} id="{{ $anchor | safeURL }}" {{ with $class }} class="{{ . }}"{{ end }}>{{ $text | safeHTML }}</h{{ .Level }}>
 {{ end }}

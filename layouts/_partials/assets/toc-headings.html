@@ -42,7 +42,10 @@
     {{- $level := substr . 2 1 | int }}
     {{- if and (ge $level $startLevel) (le $level $endLevel) }}
       {{- $text := replaceRE `(?is)<h\d.*?>(.+?)</h\d>` "$1" . }}
-      {{- $text = trim $text " " | plainify | safeHTML }}
+      {{- $text = trim $text " " | plainify }}
+      {{/* Trim leading/trailing whitespace and &nbsp; entities — the icon partial
+           emits a trailing &nbsp; for spacing, which would otherwise indent the TOC label. */}}
+      {{- $text = replaceRE `^(?:\s|&nbsp;)+|(?:\s|&nbsp;)+$` "" $text | safeHTML }}
       {{- $id := "" }}
       {{- if findRE `\s+id=` . }}
         {{- $id = replaceRE `(?is).+?\s+id=(?:\x22|\x27)?(.*?)(?:\x22|\x27)?[\s>].+` "$1" . }}
