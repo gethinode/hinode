@@ -12,7 +12,7 @@ github.com/gethinode/mod-docs v1.13.2 h1:er3r4czvEu7hhkuN8KAojbYyjK8AmqhmcpbtMrb
 github.com/gethinode/mod-docs v1.13.2/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v5 v5.1.1 h1:zYjqzFMj2JdYyvRrigIAs8+LIspQ0XSRmi9f1orQm0Q=
 github.com/gethinode/mod-fontawesome/v5 v5.1.1/go.mod h1:DZi1UIZLFO9Og2pkrsyTRad85PoFEEwSwiPd7kk28IA=
-github.com/gethinode/mod-utils/v5 v5.23.0 h1:PW4ceewrDiO7k3zVjtiLeyrKnAR4UEAxaXH6ja8CNSs=
-github.com/gethinode/mod-utils/v5 v5.23.0/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
+github.com/gethinode/mod-utils/v5 v5.23.1 h1:Y6c+039rk8vA2m4t739osgDrXbQe3SHX9mF7K0mZSmI=
+github.com/gethinode/mod-utils/v5 v5.23.1/go.mod h1:PwQN4oOjA6k/vet11JueJ9asZMgL0DBa3jyS9tPkBWU=
 github.com/twbs/icons v1.13.1 h1:6bmNXvoeIbvjFWjfbjXg5JGbelLD1haIsMaEIzE9UZI=
 github.com/twbs/icons v1.13.1/go.mod h1:GnRlymgVWp5iVJCMa0Me5b6tFyGpVc2bSxPMRGIJmyA=
