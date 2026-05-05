@@ -9,7 +9,7 @@ const cssnano = require('cssnano')({
 const purgeImport = require('@fullhuman/postcss-purgecss')
 const purgeCSSPlugin = purgeImport.purgeCSSPlugin || purgeImport.default || purgeImport
 const purgecss = purgeCSSPlugin({
-  content: ['./exampleSite/hugo_stats.json'],
+  content: ['./hugo_stats.json'],
   defaultExtractor: (content) => {
     const els = JSON.parse(content).htmlElements
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
