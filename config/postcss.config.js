@@ -103,8 +103,9 @@ const purgecss = purgeCSSPlugin({
       // Bootstrap responsive tables
       /table-responsive/,  // All table-responsive-* variants and attribute selectors
 
-      // Color mode toggle - d-none-main-* classes plus [data-bs-main-theme="dark"] compound selectors
-      /d-none-main/,
+      // Color mode toggle - d-none-* and d-none-inline-* (logo modes, navbar mode switcher,
+      // [data-bs-main-theme="dark"] compound selectors)
+      /^d-none-/,
 
       // Bootstrap transitions and utilities that get added via JS
       /fade/,

@@ -64,9 +64,11 @@
 
         {{- range $suffix := $modes -}}
             {{- $image := printf "%s-%s%s" $base $suffix $ext -}}
+            {{- $hidden := printf "d-none-%s" (cond (eq $suffix "dark") "light" "dark") -}}
+            {{- $wrapper := cond (eq $args.wrapper nil) $hidden (printf "%s %s" $args.wrapper $hidden) -}}
             {{- $params = merge $params (dict
-                    "src"   $image
-                    "wrapper" (printf "%s d-none-%s" $args.wrapper (cond (eq $suffix "dark") "light" "dark"))
+                    "src"     $image
+                    "wrapper" $wrapper
             ) -}}
             {{- partial "assets/helpers/image-definition.html" $params -}}
         {{- end -}}
