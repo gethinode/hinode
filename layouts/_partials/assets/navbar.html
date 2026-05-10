@@ -92,14 +92,10 @@
 
 {{ $logo := "" }}
 {{ $mode := index site.Params.navigation "logo-mode" | default false }}
-{{ if (not (in $args.default "logo-mode")) }}
-    {{ $mode = $args.logoMode }}
-{{ end }}
+{{ with $args.logoMode }}{{ $mode = . }}{{ end }}
 
 {{ $align := index site.Params.navigation "logo-align" | default "center" }}
-{{ if (not (in $args.default "logo-align")) }}
-    {{ $align = $args.logoAlign }}
-{{ end }}
+{{ with $args.logoAlign }}{{ $align = . }}{{ end }}
 
 {{ if not $args.title }}
     {{ with $args.logo | default site.Params.navigation.logo }}
