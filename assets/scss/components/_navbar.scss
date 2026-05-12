@@ -462,3 +462,104 @@ body.navbar-open {
     position: fixed;
     width: 100%;
 }
+
+// scss-docs-start app-shell
+// Full-height L1 sidebar + navbar-on-the-right composition. Activated by
+// rendering `assets/shell.html` from baseof when `navigation.shell` is true.
+// Below the navbar breakpoint, the shell collapses to a single column: the
+// sidebar is hidden inline and accessed through Hinode's offcanvas, the navbar
+// reverts to spanning the viewport width.
+.app-shell {
+    display: flex;
+    align-items: stretch;
+    min-height: 100dvh;
+}
+
+.app-shell-sidebar {
+    flex: 0 0 auto;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    display: none;
+
+    // No `scrollbar-gutter: stable` — in a narrow icon-only collapsed sidebar
+    // the reserved gutter eats a significant fraction of the width and shifts
+    // the icon column off-centre.
+}
+
+.app-shell-main {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+
+    // No `overflow-x: hidden` — it would clip absolutely-positioned popups
+    // (dropdowns, tooltips, offcanvas) and the visible portion of any
+    // descendant scroll container (`.table-responsive`, code blocks) that
+    // extends past the column edge.
+}
+
+// Wide embeds shrink to fit the main column rather than triggering a
+// page-level horizontal scrollbar. Tables that need horizontal scroll opt in
+// via the `.table-responsive` wrapper (which has its own `overflow-x: auto`).
+.app-shell-content :where(svg, embed, iframe, video, canvas, picture > img, img) {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.app-shell-main > .container-fluid > .navbar {
+    position: sticky;
+    top: 0;
+    z-index: $zindex-sticky;
+}
+
+.app-shell-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+@include media-breakpoint-up(md) {
+    .app-shell-sidebar {
+        display: block;
+    }
+
+    // At md+ the sidebar is visible and the navbar is sticky inside its own
+    // column, so the body doesn't need the legacy `--navbar-offset` spacer.
+    .app-shell-active {
+        --navbar-offset: 0;
+    }
+}
+
+// Below the navbar breakpoint the sidebar is hidden and the navbar reverts
+// to `fixed-top` positioning so the expanded mobile collapse overlays content
+// rather than pushing it down — and `body.navbar-open` scroll-lock keeps
+// working. We override `--navbar-offset` to the mobile navbar's actual height
+// here because Hinode's stylesheet partial only computes a non-zero value
+// when `navigation.fixed = true` (which the shell intentionally avoids at
+// md+). The value drives both the body's `padding-top` and the
+// `.navbar-collapse.show { max-height: calc(100dvh - var(--navbar-offset)) }`
+// rule so the expanded mobile menu fits below the navbar header and scrolls
+// internally when content is tall.
+@include media-breakpoint-down(md) {
+    .app-shell-active {
+        --navbar-offset: 6rem;
+    }
+
+    .app-shell-main > .container-fluid > .navbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: $zindex-fixed;
+    }
+
+    .app-shell-content {
+        padding-top: var(--navbar-offset);
+    }
+}
+
+// scss-docs-end app-shell

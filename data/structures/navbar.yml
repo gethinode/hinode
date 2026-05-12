@@ -107,6 +107,16 @@ arguments:
       set, the color mode of the current section is used too. When no mode is
       set, the navbar applies a mode with the best contrast.
     release: v1.19.0
+  shell:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Flag indicating the navbar is being rendered inside the app shell (next
+      to a full-height L1 sidebar). When true, the brand logo and leading
+      offcanvas toggler are suppressed and the offcanvas toggler is re-emitted
+      on the trailing edge for sub-breakpoint viewports.
+    group: partial
   # deprecated arguments
   size:
     type: select

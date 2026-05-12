@@ -97,11 +97,16 @@
 {{ $align := index site.Params.navigation "logo-align" | default "center" }}
 {{ with $args.logoAlign }}{{ $align = . }}{{ end }}
 
-{{ if not $args.title }}
+{{/* Shell mode: the L1 sidebar owns the brand, so the navbar drops its logo
+     and re-emits the offcanvas toggler on the trailing edge instead of the
+     leading one. */}}
+{{- $shell := $args.shell | default false -}}
+
+{{ if and (not $shell) (not $args.title) }}
     {{ with $args.logo | default site.Params.navigation.logo }}
         {{ $height := index site.Params.navigation "logo-height" | default 30 }}
         {{ $class := cond (eq $align "start") "my-auto" "m-auto" }}
-        {{ $logo = partial "assets/image.html" (dict 
+        {{ $logo = partial "assets/image.html" (dict
             "src"          .
             "loading"      "eager"
             "title"        $title
@@ -138,9 +143,12 @@
         >
         <div class="container-xxl p-0">
             <div class="d-flex navbar-container">
-                {{/* Insert sidebar toggler or placeholder when applicable */}}
+                {{/* Insert sidebar toggler or placeholder when applicable.
+                     In shell mode, the L1 sidebar lives outside the navbar at
+                     ≥breakpoint and the offcanvas toggler is emitted at the
+                     trailing edge below instead. */}}
                 {{ $sidebar := $page.Scratch.Get "sidebar" }}
-                {{- if or $sidebar (eq $align "center") -}}
+                {{- if and (not $shell) (or $sidebar (eq $align "center")) -}}
                     <div class="d-flex align-items-center">
                         {{- if $sidebar -}}
                             <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas"
@@ -155,16 +163,18 @@
                         {{- end -}}
                     </div>
                 {{ end }}
-        
-                {{/* Insert the brand logo or name */}}
+
+                {{/* Insert the brand logo or name (suppressed in shell mode) */}}
+                {{- if not $shell -}}
                 <div class="width-100 d-flex align-items-center width-{{ $args.breakpoint }}-auto">
                     <a class="navbar-brand{{ if eq $align "center" }} mx-auto{{ end }}" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
                         {{- with $logo -}}{{ . }}{{- else -}}<div class="p-0 navbar-title-{{ $align }} fw-bold h-100">{{ $title }}</div>{{- end -}}
                     </a>
                 </div>
-        
+                {{- end -}}
+
                 {{/* Insert main navigation toggler */}}
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center{{ if $shell }} ms-auto{{ end }}">
                     <button class="navbar-toggler main-nav-toggler collapsed p-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#{{ $id }}-collapse"
                         aria-controls="{{ $id }}" aria-expanded="false" aria-label="{{ T "toggleMainNav" }}">

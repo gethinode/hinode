@@ -52,21 +52,56 @@
     {{- $bodyClasses := slice -}}
     {{- if $belowFold }}{{ $bodyClasses = $bodyClasses | append "footer-below-fold" }}{{ end -}}
     {{- if $navFixed  }}{{ $bodyClasses = $bodyClasses | append "navbar-fixed"      }}{{ end -}}
+    {{- $shellMode := site.Params.navigation.shell | default false -}}
+    {{- if $shellMode }}{{ $bodyClasses = $bodyClasses | append "app-shell-active" }}{{ end -}}
     <body{{ with $bodyClasses }} class="{{ delimit . " " }}"{{ end }}>
-        {{- partial "assets/navbar.html" (dict
-            "page"        .
-            "fixed"       site.Params.navigation.fixed
-            "overlay"     site.Params.navigation.overlay
-            "overlayMode" site.Params.navigation.overlayMode
-            "transparent" site.Params.navigation.transparent
-            "color"       site.Params.navigation.color
-            "style"       (default "light" site.Params.navigation.style)
-            "breakpoint"  (default "md" site.Params.navigation.size))
-        -}}
+        {{- if $shellMode -}}
+            {{/* App shell composition: full-height L1 sidebar on the left,
+                 navbar + main + footer in the right column. The `block "main"`
+                 must live directly in baseof so the layout's `define "main"`
+                 still wires up — keep this inline rather than extracting to a
+                 partial. */}}
+            <div class="app-shell">
+                <aside class="app-shell-sidebar" aria-label="{{ T "primaryNavigation" | default "Primary navigation" }}">
+                    {{- partial "page/shell-sidebar.html" (dict "page" .) -}}
+                </aside>
 
-        <main id="container" class="main">
-            {{ block "main" . }}{{ end -}}
-        </main>
+                <div class="app-shell-main">
+                    {{- partial "assets/navbar.html" (dict
+                        "page"        .
+                        "fixed"       false
+                        "shell"       true
+                        "overlay"     site.Params.navigation.overlay
+                        "overlayMode" site.Params.navigation.overlayMode
+                        "transparent" site.Params.navigation.transparent
+                        "color"       site.Params.navigation.color
+                        "style"       (default "light" site.Params.navigation.style)
+                        "breakpoint"  (default "md" site.Params.navigation.size))
+                    -}}
+
+                    <main id="container" class="main app-shell-content">
+                        {{ block "main" . }}{{ end -}}
+                    </main>
+
+                    {{- partial "footer/footer.html" . -}}
+                </div>
+            </div>
+        {{- else -}}
+            {{- partial "assets/navbar.html" (dict
+                "page"        .
+                "fixed"       site.Params.navigation.fixed
+                "overlay"     site.Params.navigation.overlay
+                "overlayMode" site.Params.navigation.overlayMode
+                "transparent" site.Params.navigation.transparent
+                "color"       site.Params.navigation.color
+                "style"       (default "light" site.Params.navigation.style)
+                "breakpoint"  (default "md" site.Params.navigation.size))
+            -}}
+
+            <main id="container" class="main">
+                {{ block "main" . }}{{ end -}}
+            </main>
+        {{- end -}}
         {{ if and (eq .Kind "page") (eq (len (or .Params.content_blocks slice)) 0) (eq (len .RawContent) 0)}}
             {{- partial "utilities/LogWarn.html" (dict
                 "partial" "layouts/baseof.html" 
@@ -78,7 +113,10 @@
         {{ end }}
 
         {{- partial "footer/social.html" . -}}
-        {{- partial "footer/footer.html" . -}}
+        {{- if not $shellMode -}}
+            {{- /* In shell mode the visible footer is rendered inside .app-shell-main so it sits to the right of the full-height L1 sidebar. */ -}}
+            {{- partial "footer/footer.html" . -}}
+        {{- end -}}
         {{- partial "footer/toast-container.html" . -}}
         {{- partial "assets/symbols.html" . -}}
         {{- partial "assets/modals.html" . -}}
