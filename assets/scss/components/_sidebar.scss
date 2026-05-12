@@ -3,6 +3,42 @@
     top: var(--navbar-offset);
 }
 
+// Brand block at the top of the sidebar (Mode A only). Two images are
+// rendered; visibility flips with the collapsed state so the label-style
+// transition stays consistent.
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem 0.5rem 0.75rem;
+    line-height: 1;
+
+    .sidebar-brand-full,
+    .sidebar-brand-mark {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .sidebar-brand-mark {
+        display: none;
+    }
+}
+
+.sidebar-collapsed .sidebar-brand,
+html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+
+    .sidebar-brand-full {
+        display: none;
+    }
+
+    .sidebar-brand-mark {
+        display: inline-block;
+    }
+}
+
 .sidebar-overflow {
     top: calc(var(--navbar-offset) + 1rem);
     max-height: calc(100vh - var(--navbar-offset));
@@ -193,6 +229,46 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-item-label {
     }
 }
 
+// Collapsed-mode refinements:
+//   * Items use white-space: nowrap so the (max-width: 0) label inline-block
+//     stays on the same line as the icon. Without this the label wraps to a
+//     second line at narrow widths and silently doubles each row's height.
+//   * Toggle container and menu items center horizontally so the icon column
+//     reads as a single vertical track.
+//   * The icon's `.me-1` trailing margin is zeroed so it truly centers (the
+//     utility otherwise pulls each icon 4px to the left).
+.sidebar-collapsed,
+html.sidebar-pre-collapsed .sidebar-collapsible {
+    // The base template emits a `.ps-1` (padding-left: 0.25rem) on the nav
+    // for the expanded layout's hanging indent. In icon-only mode that
+    // asymmetric padding shifts the icon column off-centre — zero it out.
+    &.sidebar {
+        padding-left: 0 !important;
+    }
+
+    .sidebar-toggle-container {
+        justify-content: center !important;
+        padding-right: 0 !important;
+    }
+
+    .sidebar-item {
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    // `text-align: center` doesn't apply to flex layouts. Items rendered with
+    // `.d-flex` (e.g. a sidebar entry with a trailing suffix icon) need their
+    // (now zero-width) flex children grouped via `justify-content: center`.
+    .sidebar-item.d-flex {
+        justify-content: center;
+    }
+
+    .sidebar-item .me-1 {
+        margin-right: 0 !important;
+    }
+}
+
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .sidebar-toggle-btn {
@@ -251,6 +327,7 @@ html.sidebar-pre-collapsed .sidebar-secondary-row {
 }
 
 // Flex column sidebar so .sidebar-spacer pushes the secondary group to the bottom
+// and .sidebar-footer (always-visible items) stays glued to the nav's bottom edge.
 @include media-breakpoint-up(md) {
     .sidebar-has-spacer {
         display: flex;
@@ -268,6 +345,41 @@ html.sidebar-pre-collapsed .sidebar-secondary-row {
         flex: 1 1 0;
         min-height: 1rem;
     }
+}
+
+// When the sidebar contains a .sidebar-footer the nav becomes a flex column so
+// the footer is always anchored to the bottom regardless of content height.
+.sidebar:has(> .sidebar-footer) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    > ul.list-unstyled {
+        flex: 1 1 auto;
+    }
+}
+
+.sidebar-footer {
+    margin-top: auto;
+}
+
+// Sidebar footer: bottom-align the row so the always-visible icon's vertical
+// position stays at the same offset from the footer's bottom in both expanded
+// (row layout, link beside the secondary toggle) and collapsed (column-reverse,
+// link below the toggle). Anchoring against the bottom rather than the row
+// center makes the icon line up cleanly with the page footer's copyright line
+// across both states.
+.sidebar-footer .sidebar-secondary-row {
+    align-items: flex-end !important;
+}
+
+// In collapsed (column) mode `align-items` controls the cross axis (horizontal),
+// so re-center the single icon column horizontally; the bottom-anchored Y
+// position is preserved by `column-reverse` (link as first DOM child sits at the
+// column's flex-start, which is the visual bottom of the reversed column).
+.sidebar-collapsed .sidebar-footer .sidebar-secondary-row,
+html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-footer .sidebar-secondary-row {
+    align-items: center !important;
 }
 
 // scss-docs-end sidebar
