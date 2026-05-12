@@ -1,7 +1,20 @@
 @if $enable-dark-mode {
-    [data-bs-theme-animate="true"] body { 
-        transition: background-color 0.5s, color 0.5s; 
+    [data-bs-theme-animate="true"] body {
+        transition: background-color 0.5s, color 0.5s;
     }
+}
+
+//
+// Always reserve scrollbar space at the document level so the viewport's
+// usable width stays consistent between short pages (no scrollbar) and long
+// pages (scrollbar visible). Prevents content from horizontally shifting as a
+// page's content grows past the viewport, and — for layouts with a
+// `position: fixed` navbar — keeps the fixed navbar's right edge aligned with
+// the body's content right edge regardless of scroll state, so trailing items
+// (logo, hamburger, user controls) don't drift over the scrollbar gutter.
+//
+html {
+    scrollbar-gutter: stable;
 }
 
 //
