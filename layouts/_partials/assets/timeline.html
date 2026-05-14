@@ -80,7 +80,7 @@
     {{- $direction := .direction -}}
     <div class="col-{{ $col }} d-flex justify-content-{{ $direction }} align-items-center">
         <div class="d-flex">
-            <div class="d-flex timeline-semi-circle-{{ $direction }} align-items-center justify-content-center">
+            <div class="d-flex timeline-semi-circle-{{ $direction }} align-items-center justify-content-center text-center">
                 {{ partial "assets/icon.html" (dict
                     "icon"       $icon
                     "class"      (cond $class $class "fa-fluid")
@@ -109,9 +109,9 @@
     {{- $direction := .direction -}}
 
     <div class="col-{{ $col }} d-flex align-items-center">
-        <div class="d-flex h-100 width-100">
+        <div class="d-flex h-100 w-100">
             <div class="timeline-panel-{{ $direction }}"></div>
-            <div class="timeline-description-text-{{ $direction }} p-3 width-100">
+            <div class="timeline-description-text-{{ $direction }} p-3 w-100">
                 <div>
                     {{ with $url }}
                         <a class="fs-5 fw-bold text-uppercase link-{{ $color }} text-break align-middle" href="{{ . }}">{{ $title }}</a>
