@@ -66,11 +66,19 @@ $utilities: map-merge(
                 5: 12rem,
             )
         ),
+        // Override Bootstrap's default `width` utility to make it responsive
+        // across breakpoints (so `.w-sm-100`, `.w-md-100`, etc. are generated)
+        // while preserving every default value (`25 / 50 / 75 / 100 / auto`).
         "width": (
             property: width,
+            class: w,
             responsive: true,
             values: (
-                auto: auto
+                25: 25%,
+                50: 50%,
+                75: 75%,
+                100: 100%,
+                auto: auto,
             )
         )
     )
