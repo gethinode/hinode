@@ -260,6 +260,7 @@
             {{/* Mode A: L1-only — render group headers as plain links, leaves normally */}}
             {{- $logo          := $args.logo -}}
             {{- $logoCollapsed := index $args "logo-collapsed" -}}
+            {{- $logoMode      := $args.logoMode | default false -}}
             {{- $logoHome      := $args.page.Site.Home.RelPermalink | default "/" -}}
             {{- if or $logo $logoCollapsed -}}
             <a class="sidebar-brand text-decoration-none" href="{{ $logoHome }}" aria-label="{{ T "home" }}">
@@ -268,6 +269,7 @@
                         "src"     .
                         "loading" "eager"
                         "title"   site.Title
+                        "mode"    $logoMode
                         "class"   "sidebar-brand-full"
                     ) }}
                 {{- end -}}
@@ -276,6 +278,7 @@
                         "src"     .
                         "loading" "eager"
                         "title"   site.Title
+                        "mode"    $logoMode
                         "class"   "sidebar-brand-mark"
                     ) }}
                 {{- end -}}
