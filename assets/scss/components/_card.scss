@@ -10,6 +10,7 @@
     --bs-card-inner-border-radius: #{$theme-border-radius};
     --bs-border-radius: #{$theme-border-radius};
     --bs-card-bg: transparent;
+    --bs-card-icon-color: var(--bs-secondary);
 }
 
 .card .card-img-wrap {
@@ -44,7 +45,7 @@
 }
 
 .card-icon {
-    color: $secondary;
+    color: var(--bs-card-icon-color, var(--bs-secondary));
 }
 
 .card-zoom::after .card-img-wrap img {
