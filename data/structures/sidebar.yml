@@ -73,3 +73,11 @@ arguments:
       Address of the brand logomark to render at the top of the sidebar (Mode A
       only). Visible when the sidebar is in icon-only collapsed mode. Falls
       back to `logo` if omitted.
+  logo-mode:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Flag indicating if the brand logo and logomark should support color
+      modes. If set, the sidebar searches for images having a matching
+      color-mode suffix such as `-light` or `-dark`.
