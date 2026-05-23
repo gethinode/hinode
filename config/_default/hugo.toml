@@ -70,7 +70,8 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 
 # toml-docs-start build
 [build]
-  writeStats = true
+  [build.buildStats]
+    enable = true
 # toml-docs-end build
   
 [taxonomies]
