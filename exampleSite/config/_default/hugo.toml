@@ -54,7 +54,8 @@ delimiter = ""
 home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 
 [build]
-  writeStats = true
+  [build.buildStats]
+    enable = true
   
 [taxonomies]
   tag = 'tags'
