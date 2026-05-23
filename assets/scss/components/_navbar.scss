@@ -511,12 +511,6 @@ body.navbar-open {
 }
 
 
-.app-shell-main > .container-fluid > .navbar {
-    position: sticky;
-    top: 0;
-    z-index: $zindex-sticky;
-}
-
 .app-shell-content {
     flex: 1 1 auto;
     min-width: 0;
@@ -531,6 +525,19 @@ body.navbar-open {
     // column, so the body doesn't need the legacy `--navbar-offset` spacer.
     .app-shell-active {
         --navbar-offset: 0;
+    }
+
+    // Stick the navbar to the top of its column. The sticky positioning
+    // sits on the `.container-fluid` wrapper rather than the inner `.navbar`,
+    // because a sticky element can't slide past its containing block — and
+    // the inner `.navbar`'s natural containing block (`.container-fluid`) is
+    // only the navbar's own height, so sticking it there would let it scroll
+    // away after a single navbar height. The wrapper's containing block is
+    // the full-height `.app-shell-main` flex column, which is what we want.
+    .app-shell-main > .container-fluid {
+        position: sticky;
+        top: 0;
+        z-index: $zindex-sticky;
     }
 }
 
