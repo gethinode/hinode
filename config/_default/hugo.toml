@@ -58,6 +58,12 @@ defaultContentLanguageInSubdir = false
     baseName = "_redirects"
     isPlainText = true
     notAlternative = true
+  [outputFormats.searchindex]
+    mediaType = "application/json"
+    baseName = "flexsearch-index"
+    isPlainText = true
+    notAlternative = true
+    permalinkable = true
 
 [mediaTypes."text/netlify"]
 delimiter = ""
