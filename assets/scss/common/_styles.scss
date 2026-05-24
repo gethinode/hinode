@@ -93,6 +93,17 @@ main:has(section:first-of-type.section-cover), main:has(section:first-of-type.ba
     color: $primary;
 }
 
+// Site-wide heading title-casing. Toggled per-page via the `title-case` class
+// added by `_markup/render-heading.html` when `site.Params.main.titleCase` is
+// true and the page has not set `exact: true`. Using `text-transform:
+// capitalize` (instead of Go's `title` filter on the rendered HTML) preserves
+// inline markup such as `<code>` from markdown backticks, and lets the browser
+// apply locale-aware capitalization based on the `lang` attribute.
+.title-case
+{
+    text-transform: capitalize;
+}
+
 :root {
     --nav-height: 90px;
 }

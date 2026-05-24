@@ -1,6 +1,6 @@
 {{ $class := .Attributes.class }}
 {{ $text := chomp .Text }}
-{{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $text = (title ($text | htmlUnescape)) | htmlEscape }}{{ end }}
+{{ $titleCase := and site.Params.main.titleCase (not .Page.Params.exact) }}
 {{- $headingAnchor := partial "utilities/GetThemeIcon.html" (dict "id" "headingAnchor" "default" "fas link") -}}
 
 {{/* Strip Hugo's HAHAHUGOSHORTCODE placeholder from .Anchor — different render passes
@@ -8,13 +8,30 @@
 {{- $anchor := replaceRE `(?i)hahahugoshortcode\d+s\d+hbhb` "-" .Anchor -}}
 {{- $anchor = trim (replaceRE `-+` "-" $anchor) "-" -}}
 
-{{ if and site.Params.navigation.anchor $text }}
-<h{{ .Level }} id="{{ $anchor | safeURL }}" class="heading {{ with $class }}{{ . }}{{ end }}">
+{{ $useAnchor := and site.Params.navigation.anchor $text }}
+
+{{/* Build the class list:
+     - "heading" is added only on the anchor variant — it hooks `.heading:hover .anchor`.
+     - "title-case" is added when site-wide title casing is enabled and the page has
+       not opted out via frontmatter `exact: true`. The capitalization itself is done
+       in CSS (`text-transform: capitalize`), not by the Go `title` filter, because the
+       heading text may contain inline HTML (e.g. <code> from a markdown backtick) that
+       a string-level transform would mangle. CSS also locale-aware-capitalizes based
+       on the `lang` attribute, which is the right behavior for multilingual sites.
+     - `.Attributes.class` preserves any IAL on the heading. */}}
+{{ $classList := slice }}
+{{ if $useAnchor }}{{ $classList = $classList | append "heading" }}{{ end }}
+{{ if $titleCase }}{{ $classList = $classList | append "title-case" }}{{ end }}
+{{ with $class }}{{ $classList = $classList | append . }}{{ end }}
+{{ $classAttr := delimit $classList " " }}
+
+{{ if $useAnchor }}
+<h{{ .Level }} id="{{ $anchor | safeURL }}" class="{{ $classAttr }}">
     {{- $text | safeHTML -}}
     <a href="#{{ $anchor | safeURL }}" aria-labelledby="{{ $anchor | safeURL }}">
         {{- partial "assets/icon.html" (dict "icon" $headingAnchor "class" "anchor") }}
     </a>
 </h{{ .Level }}>
 {{ else }}
-<h{{ .Level }} id="{{ $anchor | safeURL }}" {{ with $class }} class="{{ . }}"{{ end }}>{{ $text | safeHTML }}</h{{ .Level }}>
+<h{{ .Level }} id="{{ $anchor | safeURL }}"{{ with $classAttr }} class="{{ . }}"{{ end }}>{{ $text | safeHTML }}</h{{ .Level }}>
 {{ end }}
