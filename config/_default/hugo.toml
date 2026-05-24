@@ -65,7 +65,7 @@ delimiter = ""
 
 # toml-docs-start outputs
 [outputs]
-home = ["HTML", "RSS", "REDIR", "netlify", "server"]
+home = ["HTML", "RSS", "REDIR", "netlify", "server", "searchindex"]
 # toml-docs-end outputs
 
 # toml-docs-start build
