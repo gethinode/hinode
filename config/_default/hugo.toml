@@ -58,6 +58,12 @@ defaultContentLanguageInSubdir = false
     baseName = "_redirects"
     isPlainText = true
     notAlternative = true
+  [outputFormats.searchindex]
+    mediaType = "application/json"
+    baseName = "flexsearch-index"
+    isPlainText = true
+    notAlternative = true
+    permalinkable = true
 
 [mediaTypes."text/netlify"]
 delimiter = ""
@@ -65,7 +71,7 @@ delimiter = ""
 
 # toml-docs-start outputs
 [outputs]
-home = ["HTML", "RSS", "REDIR", "netlify", "server"]
+home = ["HTML", "RSS", "REDIR", "netlify", "server", "searchindex"]
 # toml-docs-end outputs
 
 # toml-docs-start build
