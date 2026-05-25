@@ -24,3 +24,7 @@ Nam enim nulla, egestas et nunc non, elementum aliquet justo. Mauris euismod mau
 ## {{< icon "fas globe" >}} Second paragraph
 
 In ac lobortis diam. Curabitur id dui ac nunc mattis rhoncus a sed lorem. Sed lobortis sem turpis, at posuere enim dignissim et. Vivamus fermentum justo quis volutpat volutpat. Proin eget vehicula neque, ut tempus urna. Duis ac ex vel leo pharetra lobortis et vitae lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam erat volutpat. Suspendisse ullamcorper ultrices elementum. Suspendisse mi elit, commodo at varius a, cursus a ligula. Sed et mattis elit, eu luctus arcu. Cras a porttitor libero. Vestibulum tincidunt sed magna at dapibus. Sed quis orci eu lacus aliquam tristique. Integer porttitor ultrices ipsum quis porttitor. Etiam a sodales ligula.
+
+## Third paragraph with `markdown` in title
+
+Nulla molestie mauris vel mi tristique porta eu et leo. Sed non metus rutrum, laoreet lacus consectetur, dignissim metus. Ut ut maximus nibh. Nullam lacinia, nibh eget vulputate condimentum, eros dolor porta nisl, ut consequat diam arcu sed sem. Nunc diam urna, lacinia mollis tempor quis, ultrices in lorem. Morbi ac dictum ex. Integer facilisis odio ac porta venenatis. Cras vehicula velit vel rhoncus semper. Suspendisse finibus blandit turpis, ac volutpat eros ultrices ac.
