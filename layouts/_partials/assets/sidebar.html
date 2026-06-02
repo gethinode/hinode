@@ -136,11 +136,14 @@
         </div>
         <div class="collapse {{ if $collapsed }}show{{ end }}" id="sidebar-collapse-{{ $index }}-{{ $level }}">
             <ul class="btn-toggle-nav list-unstyled fw-normal {{ if eq $level 0}} pb-1 {{ end }}ps-3">
-                {{- range $item := $group.pages -}}
+                {{- range $childIndex, $item := $group.pages -}}
                     {{- if $item.pages -}}
+                        {{/* Compose a unique index path through the recursion so
+                             nested collapse element IDs stay unique across
+                             sibling branches at the same depth. */}}
                         {{ partial "inline/sidebar/group.html" (dict
                             "page"    $page
-                            "index"   $index
+                            "index"   (printf "%v-%v" $index $childIndex)
                             "level"   (add $level 1)
                             "baseURL" $href
                             "group"   $item
