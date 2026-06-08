@@ -363,23 +363,37 @@ html.sidebar-pre-collapsed .sidebar-secondary-row {
     margin-top: auto;
 }
 
-// Sidebar footer: bottom-align the row so the always-visible icon's vertical
-// position stays at the same offset from the footer's bottom in both expanded
-// (row layout, link beside the secondary toggle) and collapsed (column-reverse,
-// link below the toggle). Anchoring against the bottom rather than the row
-// center makes the icon line up cleanly with the page footer's copyright line
-// across both states.
+// Sidebar footer line: keep the always-visible item (e.g. "Infusal Status")
+// vertically centred on the same baseline as the page footer's copyright line
+// in BOTH the expanded and collapsed states. The link is shorter than the
+// secondary toggle, so centring (rather than bottom-anchoring) is what lands its
+// icon on the footer baseline. `min-height` holds the row at the toggle's height
+// so that baseline is identical whether or not the toggle shares the line, and
+// `position: relative` is the positioning context the collapsed toggle is lifted
+// into (see below).
 .sidebar-footer .sidebar-secondary-row {
-    align-items: flex-end !important;
+    align-items: center !important;
+    position: relative;
+    min-height: 2rem;
 }
 
-// In collapsed (column) mode `align-items` controls the cross axis (horizontal),
-// so re-center the single icon column horizontally; the bottom-anchored Y
-// position is preserved by `column-reverse` (link as first DOM child sits at the
-// column's flex-start, which is the visual bottom of the reversed column).
+// Collapsed (icon-only) mode: the link is the single in-flow child and stays
+// centred on the footer line, while the secondary toggle is lifted out of flow
+// and stacked directly above it. This keeps the always-visible icon anchored to
+// the page-footer baseline and stops the two stacked icons from inflating the
+// footer band (the toggle overflows up into the empty space above the footer).
 .sidebar-collapsed .sidebar-footer .sidebar-secondary-row,
 html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-footer .sidebar-secondary-row {
+    flex-direction: row;
     align-items: center !important;
+}
+
+.sidebar-collapsed .sidebar-footer .sidebar-secondary-toggle,
+html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-footer .sidebar-secondary-toggle {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 // scss-docs-end sidebar
