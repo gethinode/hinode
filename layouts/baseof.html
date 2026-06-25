@@ -102,9 +102,14 @@
                 {{ block "main" . }}{{ end -}}
             </main>
         {{- end -}}
-        {{ if and (eq .Kind "page") (eq (len (or .Params.content_blocks slice)) 0) (eq (len .RawContent) 0)}}
+        {{- /* Warn about pages that render no content. Pages whose body is produced
+               entirely by a custom layout — e.g. content-adapter pages with a dedicated
+               `type` such as an OpenAPI or godoc reference page — have no RawContent and
+               no content_blocks by design, yet render substantial output. Set
+               `params.layout_content = true` on such pages to opt out of this check. */ -}}
+        {{ if and (eq .Kind "page") (not .Params.layout_content) (eq (len (or .Params.content_blocks slice)) 0) (eq (len .RawContent) 0)}}
             {{- partial "utilities/LogWarn.html" (dict
-                "partial" "layouts/baseof.html" 
+                "partial" "layouts/baseof.html"
                 "warnid"  "warn-empty-page"
                 "msg"     "No content"
                 "details" "Page has no content or blocks defined"
