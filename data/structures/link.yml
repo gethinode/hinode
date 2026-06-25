@@ -28,7 +28,6 @@ arguments:
   skip-validation:
     type: bool
     optional: true
-    group: partial
     comment: Skip internal link validation (use for dynamic content).
     release: v2.0.0
   # deprecated arguments
