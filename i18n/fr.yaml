@@ -30,9 +30,9 @@
 - id: more
   translation: "Plus {{ . }}"
 - id: emptyList
-  translation: "Aucun articles trouvé"
+  translation: "Aucun article trouvé"
 - id: emptyTags
-  translation: "Aucun tags trouvé"
+  translation: "Aucun tag trouvé"
 - id: readMore
   translation: "Lire plus"
 
@@ -94,7 +94,7 @@
 - id: home
   translation: "Accueil"
 - id: languageSwitcherLabel
-  translation: "Langage"
+  translation: "Langue"
 - id: close
   translation: "Fermer"
 
@@ -104,7 +104,7 @@
 - id: seeAlso
   translation: "Voir également"
 - id: sectionMenu
-  translation: "Selectionner un topic"
+  translation: "Sélectionner un sujet"
 - id: tocShowMore
   translation: "Afficher {{ . }} plus"
 - id: tocShowLess
@@ -159,10 +159,10 @@
   translation: "Nom"
 - id: type
   translation: "Type"
-- id: required 
+- id: required
   translation: "Requis"
 - id: default
-  translation: "Défaut"
+  translation: "Par défaut"
 - id: comment
   translation: "Commentaire"
 - id: supportedValues
