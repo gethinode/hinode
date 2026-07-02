@@ -264,25 +264,28 @@
             {{- $logo          := $args.logo -}}
             {{- $logoCollapsed := index $args "logo-collapsed" -}}
             {{- $logoMode      := $args.logoMode | default false -}}
+            {{- $logoHeight    := index $args "logo-height" -}}
             {{- $logoHome      := $args.page.Site.Home.RelPermalink | default "/" -}}
             {{- if or $logo $logoCollapsed -}}
             <a class="sidebar-brand text-decoration-none" href="{{ $logoHome }}" aria-label="{{ T "home" }}">
                 {{- with $logo -}}
                     {{ partial "assets/image.html" (dict
-                        "src"     .
-                        "loading" "eager"
-                        "title"   site.Title
-                        "mode"    $logoMode
-                        "class"   "sidebar-brand-full"
+                        "src"          .
+                        "loading"      "eager"
+                        "title"        site.Title
+                        "mode"         $logoMode
+                        "image-height" $logoHeight
+                        "class"        "sidebar-brand-full"
                     ) }}
                 {{- end -}}
                 {{- with $logoCollapsed -}}
                     {{ partial "assets/image.html" (dict
-                        "src"     .
-                        "loading" "eager"
-                        "title"   site.Title
-                        "mode"    $logoMode
-                        "class"   "sidebar-brand-mark"
+                        "src"          .
+                        "loading"      "eager"
+                        "title"        site.Title
+                        "mode"         $logoMode
+                        "image-height" $logoHeight
+                        "class"        "sidebar-brand-mark"
                     ) }}
                 {{- end -}}
             </a>
