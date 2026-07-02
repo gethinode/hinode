@@ -81,3 +81,11 @@ arguments:
       Flag indicating if the brand logo and logomark should support color
       modes. If set, the sidebar searches for images having a matching
       color-mode suffix such as `-light` or `-dark`.
+  logo-height:
+    type: int
+    optional: true
+    comment: >-
+      Height in pixels of the brand logo and logomark (Mode A only). The width
+      is derived automatically from the image's aspect ratio, mirroring the
+      navbar's `logo-height` behavior. When omitted, the images are sized via
+      CSS instead.
