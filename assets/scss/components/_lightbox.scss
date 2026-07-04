@@ -6,7 +6,7 @@ dialog.lightbox {
   max-height: 95vh;
   padding: 0;
   border: 0;
-  border-radius: var(--bs-border-radius, 0.375rem);
+  border-radius: #{$theme-border-radius};
   background: var(--bs-body-bg);
   color: var(--bs-body-color);
   overflow: hidden;
