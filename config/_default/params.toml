@@ -64,6 +64,9 @@
     # Form
     formSubmitButton     = "fa paper-plane"
     formSubmittedIcon    = "fa envelope"
+    # Lightbox
+    lightboxClose  = "fas xmark"
+    lightboxExpand = "fas expand"
     [icons.admonition]
         note       = "fas circle-info"
         info       = "fas circle-info"
@@ -305,3 +308,7 @@
     frame-src = ["player.vimeo.com"]
     img-src = ["i.vimeocdn.com"]
     script-src = ["player.vimeo.com"]
+
+[modules.lightbox]
+    integration = "optional"
+    state = "defer"

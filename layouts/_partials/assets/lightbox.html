@@ -1,0 +1,19 @@
+{{/*
+    Reusable lightbox <dialog> shell. Rendered once per page, only when the
+    `lightbox` module dependency is registered (via utilities/AddModule.html).
+    The lightbox JS module (assets/js/modules/lightbox/lightbox.mjs) clones a
+    trigger's source node into `.lightbox-content` and calls showModal().
+*/}}
+{{- $deps := page.Scratch.Get "dependencies" -}}
+{{- $enabled := false -}}
+{{- if and (reflect.IsSlice $deps) (in $deps "lightbox") -}}{{- $enabled = true -}}{{- end -}}
+{{- if and (reflect.IsSlice .Params.modules) (in .Params.modules "lightbox") -}}{{- $enabled = true -}}{{- end -}}
+{{- if $enabled -}}
+    {{- $close := partial "utilities/GetThemeIcon.html" (dict "id" "lightboxClose" "default" "fas xmark") -}}
+    <dialog class="lightbox" aria-label="{{ i18n "lightboxLabel" }}">
+        <button type="button" class="lightbox-close" aria-label="{{ i18n "lightboxClose" }}">
+            {{- partial "assets/icon.html" (dict "icon" $close "class" "fa-fw fa-xl" "spacing" false) -}}
+        </button>
+        <div class="lightbox-content"></div>
+    </dialog>
+{{- end -}}

@@ -1,0 +1,5 @@
+{{/* Demo/test fixture: content plus the generic lightbox trigger targeting it. */}}
+<div id="lightbox-demo-fixture" class="lightbox-demo" style="position:relative">
+    {{ partial "assets/lightbox-trigger.html" (dict "page" .Page "source" "#lightbox-demo-fixture") }}
+    <p id="lightbox-demo-body">Demo content to enlarge.</p>
+</div>
