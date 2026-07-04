@@ -232,4 +232,12 @@
 - id: formSubmit
   translation: "Submit"
 - id: formBotField
-  translation: "Don't fill this out if you're human"  
+  translation: "Don't fill this out if you're human"
+
+# Lightbox
+- id: lightboxClose
+  translation: "Close"
+- id: lightboxLabel
+  translation: "Enlarged view"
+- id: lightboxExpand
+  translation: "View fullscreen"

@@ -64,6 +64,9 @@
     # Form
     formSubmitButton     = "fa paper-plane"
     formSubmittedIcon    = "fa envelope"
+    # Lightbox
+    lightboxClose  = "fas xmark"
+    lightboxExpand = "fas expand"
     [icons.admonition]
         note       = "fas circle-info"
         info       = "fas circle-info"

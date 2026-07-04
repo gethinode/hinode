@@ -1,0 +1,14 @@
+{{/*
+    Convenience: render a lightbox trigger button for arbitrary content and
+    register the `lightbox` module dependency. Call with:
+      {{ partial "assets/lightbox-trigger.html" (dict "page" . "source" "#my-figure") }}
+    `source` is a CSS selector for the node to clone into the lightbox.
+*/}}
+{{- $page := .page | default page -}}
+{{- $source := .source -}}
+{{- $icon := partial "utilities/GetThemeIcon.html" (dict "id" "lightboxExpand" "default" "fas expand") -}}
+{{- partial "utilities/AddModule.html" (dict "page" $page "module" "lightbox") -}}
+<button type="button" class="control-btn-lightbox" data-lightbox-trigger data-lightbox-source="{{ $source }}"
+        aria-label="{{ i18n "lightboxExpand" }}">
+    {{- partial "assets/icon.html" (dict "icon" $icon "class" "fa-fw fa-xl" "spacing" false) -}}
+</button>
