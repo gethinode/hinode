@@ -26,6 +26,13 @@ dialog.lightbox {
     width: 100%;
     height: 100%;
   }
+
+  // Keep a cloned diagram's own top-right controls clear of the close button,
+  // and vertically aligned with it.
+  .diagram-controls {
+    top: 0.5rem;
+    right: 3.25rem;
+  }
 }
 
 .lightbox-close {
