@@ -3,6 +3,8 @@
     register the `lightbox` module dependency. Call with:
       {{ partial "assets/lightbox-trigger.html" (dict "page" . "source" "#my-figure") }}
     `source` is a CSS selector for the node to clone into the lightbox.
+    Keep it unique: an id selector must not collide with a Hugo heading
+    anchor (heading/page slug), or querySelector may match the wrong element.
 */}}
 {{- $page := .page | default page -}}
 {{- $source := .source -}}

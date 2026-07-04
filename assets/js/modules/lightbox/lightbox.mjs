@@ -22,6 +22,7 @@ function open (trigger) {
   const source = resolveSource(trigger)
   if (!dialog || !source) return
   const mount = dialog.querySelector('.lightbox-content')
+  if (!mount) return
   const clone = source.cloneNode(true)
   // Drop nested triggers so the fullscreen button doesn't recurse inside the dialog.
   clone
