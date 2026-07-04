@@ -123,9 +123,10 @@
             {{- partial "footer/footer.html" . -}}
         {{- end -}}
         {{- partial "footer/toast-container.html" . -}}
+        {{- /* Render the lightbox shell before symbols.html so its close icon is collected into the FontAwesome sprite. */ -}}
+        {{- partial "assets/lightbox.html" . -}}
         {{- partial "assets/symbols.html" . -}}
         {{- partial "assets/modals.html" . -}}
-        {{- partial "assets/lightbox.html" . -}}
         {{- partialCached "footer/scripts.html" (dict "page" .) -}}
         {{- partial "footer/scripts.html" (dict "page" . "type" "optional") -}}
     </body>
