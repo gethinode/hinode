@@ -308,3 +308,7 @@
     frame-src = ["player.vimeo.com"]
     img-src = ["i.vimeocdn.com"]
     script-src = ["player.vimeo.com"]
+
+[modules.lightbox]
+    integration = "optional"
+    state = "defer"
