@@ -43,8 +43,14 @@ dialog.lightbox {
   padding: 0.25rem 0.5rem;
   line-height: 1;
   color: var(--bs-body-color);
-  background: transparent;
+
+  // Frosted background matching the mermaid diagram controls, so the close
+  // button stays legible when it overlays diagram or image content.
+  background-color: rgba(var(--bs-body-bg-rgb), 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 0;
+  border-radius: #{$theme-border-radius};
   cursor: pointer;
   opacity: 0.7;
 
