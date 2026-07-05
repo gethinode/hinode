@@ -15,6 +15,12 @@
 //
 html {
     scrollbar-gutter: stable;
+
+    // Expose the theme border radius as a custom property so components in
+    // module stylesheets — which compile standalone, without theme SCSS
+    // variables in scope — can pick up the theme radius instead of falling
+    // back to Bootstrap's default.
+    --theme-border-radius: #{$theme-border-radius};
 }
 
 //
