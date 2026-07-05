@@ -1,19 +1,21 @@
 {{/*
-    Reusable lightbox <dialog> shell. Rendered once per page, only when the
-    `lightbox` module dependency is registered (via utilities/AddModule.html).
-    The lightbox JS module (assets/js/modules/lightbox/lightbox.mjs) clones a
-    trigger's source node into `.lightbox-content` and calls showModal().
+    Reusable lightbox <dialog> shell — core theme furniture, rendered once on
+    every page. The lightbox JS module (assets/js/modules/lightbox/lightbox.mjs,
+    bundled in core) clones a [data-lightbox-trigger] source node into
+    `.lightbox-content` and calls showModal(). The shell is inert until a
+    trigger on the page is clicked.
+
+    Rendered unconditionally on purpose: a shortcode that registers the
+    lightbox dependency (via utilities/AddModule.html) does so as a side effect
+    of content rendering, and per Hugo's own docs a value set that way is
+    "indeterminate until Hugo renders the page content"
+    (https://gohugo.io/methods/page/store/). A parent template that reads it —
+    like this shell — cannot rely on it. Always rendering removes that race.
 */}}
-{{- $deps := page.Scratch.Get "dependencies" -}}
-{{- $enabled := false -}}
-{{- if and (reflect.IsSlice $deps) (in $deps "lightbox") -}}{{- $enabled = true -}}{{- end -}}
-{{- if and (reflect.IsSlice .Params.modules) (in .Params.modules "lightbox") -}}{{- $enabled = true -}}{{- end -}}
-{{- if $enabled -}}
-    {{- $close := partial "utilities/GetThemeIcon.html" (dict "id" "lightboxClose" "default" "fas xmark") -}}
-    <dialog class="lightbox" aria-label="{{ i18n "lightboxLabel" }}">
-        <button type="button" class="lightbox-close" aria-label="{{ i18n "lightboxClose" }}">
-            {{- partial "assets/icon.html" (dict "icon" $close "class" "fa-fw fa-xl" "spacing" false) -}}
-        </button>
-        <div class="lightbox-content"></div>
-    </dialog>
-{{- end -}}
+{{- $close := partial "utilities/GetThemeIcon.html" (dict "id" "lightboxClose" "default" "fas xmark") -}}
+<dialog class="lightbox" aria-label="{{ i18n "lightboxLabel" }}">
+    <button type="button" class="lightbox-close" aria-label="{{ i18n "lightboxClose" }}">
+        {{- partial "assets/icon.html" (dict "icon" $close "class" "fa-fw fa-xl" "spacing" false) -}}
+    </button>
+    <div class="lightbox-content"></div>
+</dialog>

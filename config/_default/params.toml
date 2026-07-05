@@ -309,6 +309,11 @@
     img-src = ["i.vimeocdn.com"]
     script-src = ["player.vimeo.com"]
 
+# Core furniture: the lightbox <dialog> shell (assets/lightbox.html) and its JS
+# both load on every page so any [data-lightbox-trigger] works without per-page
+# module registration. Kept out of the optional set on purpose — a shortcode
+# registering it via AddModule is a render-order-dependent side effect that a
+# head/footer consumer cannot rely on (see assets/lightbox.html).
 [modules.lightbox]
-    integration = "optional"
+    integration = "core"
     state = "defer"
