@@ -13,7 +13,7 @@ require (
 	github.com/gethinode/mod-katex v1.1.4 // indirect
 	github.com/gethinode/mod-leaflet/v2 v2.1.0 // indirect
 	github.com/gethinode/mod-lottie/v2 v2.1.0 // indirect
-	github.com/gethinode/mod-mermaid/v4 v4.5.1 // indirect
+	github.com/gethinode/mod-mermaid/v4 v4.8.0 // indirect
 	github.com/gethinode/mod-simple-datatables/v3 v3.1.0 // indirect
 	github.com/gethinode/mod-utils/v5 v5.23.2 // indirect
 	github.com/nextapps-de/flexsearch v0.0.0-20260529083235-f7ed963096a0 // indirect
