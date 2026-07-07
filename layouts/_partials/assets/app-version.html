@@ -1,0 +1,28 @@
+{{/*
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Resolves the downstream application's own release version for the
+     <meta name="application"> tag. Precedence:
+       1. site.Params.application.version   (explicit config override)
+       2. HUGO_APPLICATION_VERSION env var   (CI / build injection)
+       3. hugo.CommitHash (short)            (local builds with enableGitInfo)
+     Returns an empty string when none resolve. A leading "v" is stripped. */}}
+{{- define "_partials/inline/env-app-version.html" -}}
+    {{- return getenv "HUGO_APPLICATION_VERSION" -}}
+{{- end -}}
+
+{{- $version := "" -}}
+{{- with site.Params.application -}}
+    {{- with .version -}}{{- $version = . -}}{{- end -}}
+{{- end -}}
+{{- if not $version -}}
+    {{- $version = partial "inline/env-app-version.html" . -}}
+{{- end -}}
+{{- if not $version -}}
+    {{- with hugo.CommitHash -}}{{- $version = printf "g%s" (substr . 0 7) -}}{{- end -}}
+{{- end -}}
+{{- $version = $version | default "" | strings.TrimPrefix "v" -}}
+{{- print $version -}}

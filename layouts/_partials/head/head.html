@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{ hugo.Generator }}
     <meta name="theme" content="{{ printf "Hinode %s" $version }}">
+    {{- if isset site.Params "application" -}}
+        {{- $appVersion := strings.TrimSpace (partialCached "assets/app-version.html" $ "app-version") -}}
+        {{- with $appVersion -}}
+            <meta name="application" content="{{ with site.Params.application.name }}{{ . }} {{ end }}{{ $appVersion }}">
+        {{- end -}}
+    {{- end -}}
     {{ partialCached "head/stylesheet-core.html" . -}}
 
     {{ $config := page.Scratch.Get "modules" }}
