@@ -120,6 +120,17 @@ To add mod-blocks to your site:
 
 See the [official documentation][getstarted] on how to configure your site.
 
+### Application version meta tag
+
+Set `[params.application]` to advertise your site's own release version in the document head, alongside the `generator` and `theme` tags:
+
+```toml
+[params.application]
+  name = "My App"
+```
+
+This renders `<meta name="application" content="My App <version>">`. The version resolves from `params.application.version`, else the `HUGO_APPLICATION_VERSION` environment variable (set this in your build / CI pipeline), else the short Git commit hash when `enableGitInfo` is on. Sites that omit `[params.application]` render no such tag.
+
 ## Contributing
 
 See the [official documentation][contribute] on how to contribute to the open-source development of Hinode.
