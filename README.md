@@ -129,7 +129,7 @@ Set `[params.application]` to advertise your site's own release version in the d
   name = "My App"
 ```
 
-This renders `<meta name="application" content="My App <version>">`. The version resolves from `params.application.version`, else the `HUGO_APPLICATION_VERSION` environment variable (set this in your build / CI pipeline), else the short Git commit hash when `enableGitInfo` is on. Sites that omit `[params.application]` render no such tag.
+This renders `<meta name="application" content="My App <version>">`. The version resolves from `params.application.version`, else the `HUGO_APPLICATION_VERSION` environment variable (set this in your build / CI pipeline). Sites that omit `[params.application]`, or that set neither a config value nor the environment variable, render no such tag.
 
 ## Contributing
 
