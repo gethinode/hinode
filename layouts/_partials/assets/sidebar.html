@@ -111,7 +111,7 @@
                 {{ if or $current (not $ref) }}
                     {{ $dest = "" }}
                 {{ end }}
-                <a {{ with $dest }} href="{{ . }}"{{ else }}
+                <a {{ if gt $level 1 }}class="small" {{ end }}{{ with $dest }} href="{{ . }}"{{ else }}
                 data-bs-toggle="collapse"
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
                 {{ end }}>
