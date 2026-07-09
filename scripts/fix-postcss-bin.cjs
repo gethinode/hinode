@@ -1,20 +1,20 @@
 const fs = require('fs');
 const path = require('path');
+const cmdShim = require('cmd-shim');
 
-// Under pnpm's isolated node_modules (Linux/macOS), Hugo cannot spawn the
-// postcss binary: pnpm's bin shim isn't a form Hugo's PostCSS integration
-// accepts ("binary postcss is not a Node.js script"). Replace it with a
-// direct Node script. On Windows CI a hoisted (npm-style) layout is used
-// instead (see the setup-hinode action), where the native bin works, so this
-// shim is a no-op there. No-op too when postcss-cli is absent (npm consumers).
-const cli = path.join('node_modules', 'postcss-cli');
-const bin = path.join('node_modules', '.bin');
+// Hugo runs postcss via an npx-style lookup that only accepts npm-format bin
+// shims. pnpm's own shims (isolated or hoisted) are rejected by Hugo with
+// "binary postcss is not a Node.js script" — worst on Windows. Regenerate an
+// npm-exact shim for postcss using cmd-shim (the tool npm itself uses), which
+// Hugo accepts on Linux, macOS, and Windows. No-op when postcss-cli is absent
+// (e.g. an npm consumer whose flat layout already works).
+const entry = path.join('node_modules', 'postcss-cli', 'index.js');
+const target = path.join('node_modules', '.bin', 'postcss');
 
-if (process.platform !== 'win32' && fs.existsSync(cli)) {
-  fs.mkdirSync(bin, { recursive: true });
-  fs.writeFileSync(
-    path.join(bin, 'postcss'),
-    '#!/usr/bin/env node\nrequire("../postcss-cli/index.js");\n',
-    { mode: 0o755 }
-  );
+if (fs.existsSync(entry)) {
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  cmdShim(entry, target).catch((err) => {
+    console.error('fix-postcss-bin: failed to shim postcss:', err.message);
+    process.exit(1);
+  });
 }
