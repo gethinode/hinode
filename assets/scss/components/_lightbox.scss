@@ -61,19 +61,48 @@ dialog.lightbox {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  dialog.lightbox[open] {
-    animation: lightbox-in 0.15s ease-out;
+  // Fade + subtle scale on both open and close. `@starting-style` supplies the
+  // pre-open value so the entry transition runs, and `allow-discrete` on
+  // `display`/`overlay` keeps the dialog in the top layer long enough to animate
+  // out before it is hidden. Browsers without these features simply skip the
+  // animation (the dialog appears/disappears instantly) — no worse than a cut.
+  dialog.lightbox {
+    opacity: 0;
+    transform: scale(0.98);
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.2s ease-out,
+      overlay 0.2s ease-out allow-discrete,
+      display 0.2s ease-out allow-discrete;
   }
 
-  @keyframes lightbox-in {
-    from {
+  dialog.lightbox[open] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @starting-style {
+    dialog.lightbox[open] {
       opacity: 0;
       transform: scale(0.98);
     }
+  }
 
-    to {
-      opacity: 1;
-      transform: scale(1);
+  dialog.lightbox::backdrop {
+    opacity: 0;
+    transition:
+      opacity 0.2s ease-out,
+      overlay 0.2s ease-out allow-discrete,
+      display 0.2s ease-out allow-discrete;
+  }
+
+  dialog.lightbox[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog.lightbox[open]::backdrop {
+      opacity: 0;
     }
   }
 }
