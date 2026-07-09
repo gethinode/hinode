@@ -44,6 +44,20 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
     max-height: calc(100vh - var(--navbar-offset));
     overflow-y: auto;
     scrollbar-gutter: stable;
+
+    // `scrollbar-gutter: stable` reserves the gutter only for classic
+    // scrollbars. On macOS, Chrome/Safari default to overlay scrollbars,
+    // which take no layout space — so the gutter collapses to 0 and the bar
+    // floats over the sidebar content (the group chevrons). Styling the
+    // scrollbar opts the element out of overlay mode, giving a non-overlay bar
+    // that reserves width and sits in the stable gutter, consistent across
+    // browsers. A muted thumb on a transparent track keeps it subtle and
+    // light/dark aware.
+    @include scrollbar(
+        $foreground-color: var(--bs-border-color),
+        $background-color: transparent,
+        $size: 8px
+    );
 }
 
 .sidebar-item {
