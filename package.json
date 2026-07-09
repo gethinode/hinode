@@ -49,7 +49,7 @@
     "env": "hugo env",
     "precheck": "npm version",
     "prepare": "node .husky/install.mjs",
-    "postinstall": "node -e \"var f=require('fs'),d='node_modules/.bin';if(f.existsSync('node_modules/postcss-cli')){f.mkdirSync(d,{recursive:true});['postcss.CMD','postcss.cmd','postcss.ps1'].forEach(function(x){try{f.unlinkSync(d+'/'+x)}catch(e){}});f.writeFileSync(d+'/postcss','#!/usr/bin/env node\\nrequire(\\\"../postcss-cli/index.js\\\");\\n',{mode:493})}\"",
+    "postinstall": "node scripts/fix-postcss-bin.cjs",
     "check": "hugo version",
     "create:syntax": "npm-run-all update:syntax:**",
     "update:syntax:light1": "hugo gen chromastyles --style=github > ./assets/scss/components/_syntax-light.scss",
