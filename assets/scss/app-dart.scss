@@ -20,6 +20,9 @@
 // Include dark mode overrides
 @import "common/variables-dark.scss";
 
+// Scrollbar mixin — imported before the components so they can @include it
+@import "common/scrollbar.scss";
+
 // Import Hinode theme styles
 @import "components/abbr.scss";
 @import "components/alert.scss";
@@ -51,7 +54,6 @@
 @import "components/lightbox.scss";
 @import "common/animation.scss";
 @import "common/masonry.scss";
-@import "common/scrollbar.scss";
 @import "common/styles.scss";
 @import "layouts/reboot.scss";
 @import "layouts/type.scss";
