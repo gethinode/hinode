@@ -1,0 +1,7 @@
+# pnpm reads this for repo-wide settings even without sub-packages.
+# allowBuilds is the v11 gate for which deps may run install scripts. Keep tight.
+allowBuilds:
+  hugo-extended: true # downloads the platform-specific Hugo binary
+  # add more only when a postinstall failure is investigated and trusted
+minimumReleaseAgeExclude:
+  - "@gethinode/*"
