@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   lint-build:
-    uses: gethinode/.github/.github/workflows/lint-build.yml@v1
+    uses: gethinode/.github/.github/workflows/lint-build.yml@test/no-hoisted
     with:
       package-manager: pnpm
       lint-script: lint
