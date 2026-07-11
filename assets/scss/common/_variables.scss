@@ -45,6 +45,11 @@ $primary-bg-subtle-dark:            mix(black, $primary, $dark-mode-shade) !defa
 $primary-border-subtle-dark:        mix(black, $primary, $dark-mode-shade / 2) !default;
 // scss-docs-end color-mode
 
+// scss-docs-start color-mode-transition
+// Shared by every element that repaints on a color mode switch, so they stay in sync.
+$theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out, border-color .5s ease-in-out !default;
+// scss-docs-end color-mode-transition
+
 // scss-docs-start horizontal-nav
 $dropdown-transition: opacity .15s ease-in-out !default;
 $dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);

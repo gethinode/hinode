@@ -85,7 +85,7 @@
 
 @if $enable-dark-mode {
     [data-bs-theme-animate="true"] .navbar {
-        transition: 0.5s ease-in-out;
+        transition: $theme-mode-transition;
     }
 }
 
@@ -102,7 +102,10 @@
 
 .navbar[data-transparent="true"] {
     backdrop-filter: none;
-    transition: all 0.3s ease;
+
+    // this rule would otherwise shadow the color mode transition, as it shares its
+    // specificity but comes later; keep the blur on its own, faster curve
+    transition: $theme-mode-transition, backdrop-filter 0.3s ease;
 
     &.navbar-scrolled {
         backdrop-filter: blur(10px);

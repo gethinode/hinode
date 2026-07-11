@@ -6,10 +6,6 @@ const colorsBG = ['body', 'secondary', 'tertiary']
 
 let scrollPosition = 0
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
 function getStyle(el, styleProp) {
     let y
     
@@ -65,7 +61,10 @@ function getBackgroundColor (section) {
 
   // use body background when section background is undefined or transparent
   if (color === 'rgba(0, 0, 0, 0)' || color === 'transparent') {
-    color = window.getComputedStyle(document.body).getPropertyValue('background-color')
+    const style = window.getComputedStyle(document.body)
+    // custom properties are not animated, so this yields the target color of a color mode
+    // switch rather than the intermediate color the body is currently fading through
+    color = style.getPropertyValue('--bs-body-bg').trim() || style.getPropertyValue('background-color')
   }
 
   return color
@@ -126,6 +125,18 @@ function parseRGB (color) {
       b: parseInt(match[3])
     }
   }
+
+  // custom properties such as --bs-body-bg resolve to a hex color
+  const hex = color.match(/^#([\da-f]{3}|[\da-f]{6})$/i)
+  if (hex) {
+    const digits = hex[1].length === 3 ? hex[1].replace(/./g, c => c + c) : hex[1]
+    return {
+      r: parseInt(digits.slice(0, 2), 16),
+      g: parseInt(digits.slice(2, 4), 16),
+      b: parseInt(digits.slice(4, 6), 16)
+    }
+  }
+
   return null
 }
 
@@ -167,7 +178,7 @@ function updateNavbar () {
 
       const targetTheme = defaultTheme ? defaultTheme : storedTheme
       if (targetTheme) {
-        navbar.setAttribute('data-bs-theme', defaultTheme)
+        navbar.setAttribute('data-bs-theme', targetTheme)
       }
     }
   }
@@ -214,12 +225,9 @@ if (navbar !== null && togglers !== null) {
     attributeFilter: ['data-bs-theme']
   }
   const Observer = new MutationObserver(() => {
-    if (fixed) {
-      // wait for the theme animation to finish
-      sleep(600).then(() => { 
-        updateNavbar() 
-      })
-    }
+    // switch along with the body rather than after it; the colors sampled by updateNavbar
+    // come from custom properties, which hold their target value from the outset
+    fixed && updateNavbar()
   })
   Observer.observe(html, config)
 
