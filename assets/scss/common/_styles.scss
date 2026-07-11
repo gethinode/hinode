@@ -1,3 +1,9 @@
+// Self-sufficient default: child themes commonly shadow common/_variables.scss
+// with their own fork, which silently drops variables added upstream. Declaring
+// the default at the point of use keeps the build working either way; a fork
+// that does define the variable still wins through !default.
+$theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out, border-color .5s ease-in-out !default;
+
 @if $enable-dark-mode {
     [data-bs-theme-animate="true"] body {
         transition: $theme-mode-transition;
