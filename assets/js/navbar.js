@@ -167,7 +167,7 @@ function updateNavbar () {
 
       const targetTheme = defaultTheme ? defaultTheme : storedTheme
       if (targetTheme) {
-        navbar.setAttribute('data-bs-theme', defaultTheme)
+        navbar.setAttribute('data-bs-theme', targetTheme)
       }
     }
   }
