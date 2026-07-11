@@ -38,7 +38,6 @@
 {{- $content := .InnerDeindent -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $sectionClass := printf "p-1 px-md-%d py-md-%d" $padding.x $padding.y -}}
-{{- $bgClass := printf "m-n1 mx-md-n%d my-md-n%d" $padding.x $padding.y -}}
 
 {{- $data := "" -}}
 {{- $partial := "" -}}
@@ -52,7 +51,7 @@
         {{ $lang = (trim (index (split $content "\n") 2) "\x60") | default "yml" }}
         {{ $content = index (index $inputRE 0) 2 }}
         {{ $data = index (unmarshal $content) 0 }}
-        {{ $data = merge $data (dict "section_class" $sectionClass "bg_class" $bgClass) }}
+        {{ $data = merge $data (dict "section_class" $sectionClass) }}
         {{ $component_name := (index $data "_bookshop_name") }}
         {{ if not $component_name }}
             {{ errorf "Expected '_bookshop_name': %s" .Position -}}
