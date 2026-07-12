@@ -8,13 +8,13 @@ warning-triage summary.
 | Wave | Module | Bump | State | Evidence |
 | --- | --- | --- | --- | --- |
 | 1 | mod-fontawesome | /v5 → /v6 | Verified | PILOT. PR gethinode/mod-fontawesome#329; v6.0.0 tag confirmed (go.mod /v6). 6 call sites migrated to Args (strict:false), 2 latent call-site bugs fixed. Release saga: first cut mis-versioned as v5.2.0 (commit-body hyphen-wrap line matched conventional-parser fieldPattern and swallowed the BREAKING CHANGE footer); poisoned tag deleted before proxy caching, corrective empty commit cut v6.0.0. Verified: hinode-level visual gate 42/42 clean on the v6.0.1 engine. |
-| 1 | mod-flexsearch | /v4 → /v5 | Pending | — |
+| 1 | mod-flexsearch | /v4 → /v5 | InProgress | batch A (driver fan-out) |
 | 1 | mod-hanko | /v2 → /v3 | Pending | — |
 | 1 | mod-hubspot | /v3 → /v4 | Pending | — |
-| 1 | mod-leaflet | /v2 → /v3 | Pending | — |
+| 1 | mod-leaflet | /v2 → /v3 | InProgress | batch A (driver fan-out) |
 | 1 | mod-llm | v1 → /v2 | Pending | — |
-| 1 | mod-lottie | /v2 → /v3 | Pending | — |
-| 1 | mod-simple-datatables | /v3 → /v4 | Pending | — |
+| 1 | mod-lottie | /v2 → /v3 | InProgress | batch A (driver fan-out) |
+| 1 | mod-simple-datatables | /v3 → /v4 | InProgress | batch A (driver fan-out) |
 | 2 | mod-bootstrap-icons | v1 → /v2 | Pending | — (gate: mod-fontawesome released) |
 | 2 | mod-flaticon | v1 → /v2 | Pending | — (gate: mod-fontawesome released) |
 | 2 | mod-mermaid | /v4 → /v5 | Pending | — (gate: mod-fontawesome released) |
