@@ -8,19 +8,19 @@ warning-triage summary.
 | Wave | Module | Bump | State | Evidence |
 | --- | --- | --- | --- | --- |
 | 1 | mod-fontawesome | /v5 → /v6 | Verified | PILOT. PR gethinode/mod-fontawesome#329; v6.0.0 tag confirmed (go.mod /v6). 6 call sites migrated to Args (strict:false), 2 latent call-site bugs fixed. Release saga: first cut mis-versioned as v5.2.0 (commit-body hyphen-wrap line matched conventional-parser fieldPattern and swallowed the BREAKING CHANGE footer); poisoned tag deleted before proxy caching, corrective empty commit cut v6.0.0. Verified: hinode-level visual gate 42/42 clean on the v6.0.1 engine. |
-| 1 | mod-flexsearch | /v4 → /v5 | Released | PR #298 merged; v5.0.0 confirmed (go.mod /v5). Pure path bump — zero InitArgs call sites (module reads site.Params directly). Own-site 10/10 clean; hinode gate 42/42 clean vs baseline-v5 (module config carries no engine flip for hinode). |
-| 1 | mod-hanko | /v2 → /v3 | Merged | PR #151; zero call sites (pure bump). Own-site 6/6 clean + byte-identical HTML across 11 pages. Not surfaced in hinode exampleSite. Release watch running. |
-| 1 | mod-hubspot | /v3 → /v4 | InProgress | batch B agent running |
-| 1 | mod-leaflet | /v2 → /v3 | Merged | PR #265; 1/1 call site migrated (map shortcode, strict:false). Own-site 3/3 clean; hinode gate (uniform v6 engine, dual replacement) 41/42 clean, 1 mermaid flake. Release watch running. |
-| 1 | mod-llm | v1 → /v2 | InProgress | batch B agent running |
-| 1 | mod-lottie | /v2 → /v3 | Merged | PR #349; 2/2 call sites migrated + real bug fixed (deprecated auto-fallback dead under v6 defaults; fixed via defaulted list). Own-site triaged clean; hinode gate 41/42 clean, 1 mermaid flake. Release watch running. |
-| 1 | mod-simple-datatables | /v3 → /v4 | Merged | PR #272; pure asset module (no layouts, zero call sites). Own-site 104/104 clean; hinode gate skipped with justification (no template surface). Release watch running. |
-| 2 | mod-bootstrap-icons | v1 → /v2 | InProgress | wave-2 agent running (fontawesome v6.0.0 gate satisfied) |
+| 1 | mod-flexsearch | /v4 → /v5 | Verified | PR #298 merged; v5.0.0 confirmed (go.mod /v5). Pure path bump — zero InitArgs call sites (module reads site.Params directly). Own-site 10/10 clean; hinode gate 42/42 clean vs baseline-v5 (module config carries no engine flip for hinode). |
+| 1 | mod-hanko | /v2 → /v3 | Verified | v3.0.0 confirmed (go.mod /v3).  PR #151; zero call sites (pure bump). Own-site 6/6 clean + byte-identical HTML across 11 pages. Not surfaced in hinode exampleSite. Release watch running. |
+| 1 | mod-hubspot | /v3 → /v4 | Verified | PR #214; v4.0.0 confirmed (go.mod /v4). 2/2 call sites migrated (form shortcode + partial, strict:false), byte-identical HTML verified. Own-site visual triaged clean. |
+| 1 | mod-leaflet | /v2 → /v3 | Verified | v3.0.0 confirmed (go.mod /v3).  PR #265; 1/1 call site migrated (map shortcode, strict:false). Own-site 3/3 clean; hinode gate (uniform v6 engine, dual replacement) 41/42 clean, 1 mermaid flake. Release watch running. |
+| 1 | mod-llm | v1 → /v2 | Verified | PR #105; v2.0.0 confirmed (go.mod /v2). Zero call sites; llms-components.json generator reads structure data directly — byte-identical across v5/v6 engines. Text outputs byte-parity. |
+| 1 | mod-lottie | /v2 → /v3 | Verified | v3.0.0 confirmed (go.mod /v3).  PR #349; 2/2 call sites migrated + real bug fixed (deprecated auto-fallback dead under v6 defaults; fixed via defaulted list). Own-site triaged clean; hinode gate 41/42 clean, 1 mermaid flake. Release watch running. |
+| 1 | mod-simple-datatables | /v3 → /v4 | Verified | v4.0.0 confirmed (go.mod /v4).  PR #272; pure asset module (no layouts, zero call sites). Own-site 104/104 clean; hinode gate skipped with justification (no template surface). Release watch running. |
+| 2 | mod-bootstrap-icons | v1 → /v2 | Verified | PR #79; v2.0.0 confirmed (go.mod /v2). 1/1 call site migrated; same two fontawesome-family call-site bugs found and fixed (excess positionals, spacing default-pipe). Visual triaged clean. |
 | 2 | mod-flaticon | v1 → /v2 | InProgress | wave-2 agent running (fontawesome v6.0.0 gate satisfied) |
-| 2 | mod-mermaid | /v4 → /v5 | Pending | — (gate: mod-fontawesome released) |
-| 3 | mod-blocks | v1 → /v2 | Pending | — (recipe addendum: seed exampleSite first) |
-| 3 | mod-docs | verify-only | Pending | — |
-| 3 | mod-template | verify-only | Pending | — |
+| 2 | mod-mermaid | /v4 → /v5 | Verified | PR #345; v5.0.0 confirmed (go.mod /v5). 2/2 call sites migrated incl. code-block render hook path; own-site 4/4 clean, HTML byte-identical. |
+| 3 | mod-blocks | v1 → /v2 | InProgress | wave-3 agent running (seeding exampleSite per addendum) |
+| 3 | mod-docs | verify-only | Resolved | One InitArgs call site (netlify-contact-form-hook partial); no go.mod dep on mod-utils — inherits the site engine; InitArgs API preserved by the v6 shim, and every hinode-gate run (which mounts mod-docs content) built clean. Call-site migration belongs to whichever generation Hinode v3 pins. |
+| 3 | mod-template | verify-only | Resolved | Zero mod-utils references in toml/mod/md/html (verified 2026-07-12). New-module scaffolding carries no engine coupling; nothing to update. |
 | 4 | hinode + sites | PARKED | AwaitingDecision | Hinode v3 decision package delivered at program end |
 
 ## Blockers
