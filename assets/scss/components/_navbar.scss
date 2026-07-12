@@ -1,5 +1,9 @@
 // stylelint-disable annotation-no-unknown
 
+// Self-sufficient default — see common/_styles.scss for the rationale
+// (child themes shadowing common/_variables.scss).
+$theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out, border-color .5s ease-in-out !default;
+
 // adapted from https://www.codeply.com/p/UsTEwDkzNp#
 .checkbox {
 	opacity: 0;
