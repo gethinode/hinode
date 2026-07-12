@@ -130,7 +130,7 @@
 {{/* Main code */}}
 <div class="container-fluid {{ if $args.fixed }}fixed-top{{ else if $overlay }}navbar-overlay{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
-    <nav class="navbar px-{{ $padding.x }} py-{{ $padding.y }} navbar-fs-{{ $fs }} navbar-{{ $args.breakpoint }}-fs
+    <nav class="navbar {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "x") }} {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }} navbar-fs-{{ $fs }} navbar-{{ $args.breakpoint }}-fs
         {{- if not $overlay }}{{ with $color }} bg-{{ . }}{{ end }}{{ end -}}
         {{ if $args.fixed }} navbar-fixed-top{{ end }} navbar-expand-{{ $args.breakpoint -}}
         {{ if $contrast }} navbar-contrast{{ end }}"

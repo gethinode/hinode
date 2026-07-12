@@ -8,7 +8,7 @@
         {{- partial "page/blocks.html" . -}}
     {{ else }}
         {{ with partial "page/articles.html" . }}
-            <div class="container-xxl py-{{ $padding.y }} px-xxl-0 px-{{ $padding.x }} py-0 my-auto h-100">
+            <div class="container-xxl {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }} px-xxl-0 {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "x") }} py-0 my-auto h-100">
                 {{ . | safeHTML }}
             </div>
         {{ end }}
@@ -16,7 +16,7 @@
 
     <!-- Render the list page content as full width, if any -->
     {{ with $content }}
-        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+        <div class="container-xxl flex-fill {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }} {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "x") }} px-xxl-0">
             {{ . }}
         </div>
     {{ end }}

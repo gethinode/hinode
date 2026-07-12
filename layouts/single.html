@@ -13,7 +13,7 @@
     {{/*    Column 3: sharing buttons and TOC navigation or specials (CTA), visible in large viewports */}}
     {{/*              content is folded into main column (handled by page elements) */}}
     {{ if (gt (len .RawContent) 0) }}
-        <div class="container-xxl flex-fill py-{{ $padding.y }} px-{{ $padding.x }} px-xxl-0">
+        <div class="container-xxl flex-fill {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }} {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "x") }} px-xxl-0">
             <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2 row-cols-{{ $breakpoint.next }}-3">
                 <div class="col col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.next }}-block sidebar-overflow sticky-top p-0">
                     {{ $sidebar | safeHTML }}
