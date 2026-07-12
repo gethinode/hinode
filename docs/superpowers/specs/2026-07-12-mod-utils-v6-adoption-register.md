@@ -1,5 +1,7 @@
 # Register: mod-utils v6 adoption wave
 
+**PROGRAM COMPLETE (waves 1-3), 2026-07-12.** 12/12 modules Released+Verified, verify-only rows Resolved, final full-generation visual run 41/42 clean (known mermaid flake). Wave 4 handed over via the decision package.
+
 Rows are REPLACED on state change, never appended. States:
 `Pending → InProgress → PR → Merged → Released → Verified` (bump rows);
 `Pending → Resolved` (verify-only rows). Evidence: PR link, release link, v6-only proof,
@@ -16,12 +18,12 @@ warning-triage summary.
 | 1 | mod-lottie | /v2 → /v3 | Verified | v3.0.0 confirmed (go.mod /v3).  PR #349; 2/2 call sites migrated + real bug fixed (deprecated auto-fallback dead under v6 defaults; fixed via defaulted list). Own-site triaged clean; hinode gate 41/42 clean, 1 mermaid flake. Release watch running. |
 | 1 | mod-simple-datatables | /v3 → /v4 | Verified | v4.0.0 confirmed (go.mod /v4).  PR #272; pure asset module (no layouts, zero call sites). Own-site 104/104 clean; hinode gate skipped with justification (no template surface). Release watch running. |
 | 2 | mod-bootstrap-icons | v1 → /v2 | Verified | PR #79; v2.0.0 confirmed (go.mod /v2). 1/1 call site migrated; same two fontawesome-family call-site bugs found and fixed (excess positionals, spacing default-pipe). Visual triaged clean. |
-| 2 | mod-flaticon | v1 → /v2 | InProgress | wave-2 agent running (fontawesome v6.0.0 gate satisfied) |
+| 2 | mod-flaticon | v1 → /v2 | Verified | PR #80; v2.0.0 confirmed (go.mod /v2). 9/9 call sites migrated; excess-positional + spacing default-pipe bugs fixed; visual triaged clean; CI green incl. Windows. |
 | 2 | mod-mermaid | /v4 → /v5 | Verified | PR #345; v5.0.0 confirmed (go.mod /v5). 2/2 call sites migrated incl. code-block render hook path; own-site 4/4 clean, HTML byte-identical. |
-| 3 | mod-blocks | v1 → /v2 | InProgress | wave-3 agent running (seeding exampleSite per addendum) |
+| 3 | mod-blocks | v1 → /v2 | Verified | PR #147; v2.0.0 confirmed (go.mod /v2). ExampleSite seeded with all 19 components (retires the coverage-hole follow-up); 26/26 call sites migrated; 5 dead fallbacks removed; faq typo fixed; 2 structure gaps escalated to the decision package; visual triaged clean (2 intended illustration.width flags). |
 | 3 | mod-docs | verify-only | Resolved | One InitArgs call site (netlify-contact-form-hook partial); no go.mod dep on mod-utils — inherits the site engine; InitArgs API preserved by the v6 shim, and every hinode-gate run (which mounts mod-docs content) built clean. Call-site migration belongs to whichever generation Hinode v3 pins. |
 | 3 | mod-template | verify-only | Resolved | Zero mod-utils references in toml/mod/md/html (verified 2026-07-12). New-module scaffolding carries no engine coupling; nothing to update. |
-| 4 | hinode + sites | PARKED | AwaitingDecision | Hinode v3 decision package delivered at program end |
+| 4 | hinode + sites | HANDED OVER | See [2026-07-12-hinode-v3-decision-package.md](2026-07-12-hinode-v3-decision-package.md) |
 
 ## Blockers
 
