@@ -18,7 +18,7 @@ import { PNG } from 'pngjs';
 const DEFAULT_INCLUDE = '^/([a-z]{2}(-[a-z]+)?/)?(docs/components/|$)';
 const DEFAULT_BASE = 'http://127.0.0.1:8947';
 const DEFAULT_THRESHOLD = 0.001;
-const MASK_SELECTORS = ['.carousel', 'video', 'iframe', '.leaflet-container', '[data-lottie]', '.lottie', 'canvas'];
+const MASK_SELECTORS = ['.carousel', 'video', 'iframe', '.leaflet-container', '[data-lottie]', '.lottie', 'canvas', '.mermaid', 'pre.mermaid'];
 const ANIMATION_DISABLE_CSS = '*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}';
 
 const CONTENT_TYPES = {
