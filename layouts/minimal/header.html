@@ -14,5 +14,5 @@
 
 {{/* Display description */}}
 {{ with .Description }}
-    <div class="{{ $contentStyle }} py-{{ $padding.y }}">{{ . | $.RenderString | safeHTML }}</div>
+    <div class="{{ $contentStyle }} {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }}">{{ . | $.RenderString | safeHTML }}</div>
 {{ end }}
