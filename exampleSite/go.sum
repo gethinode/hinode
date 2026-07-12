@@ -2,8 +2,6 @@ github.com/FortAwesome/Font-Awesome v0.0.0-20260210181720-337dd2045d56 h1:wZEHFC
 github.com/FortAwesome/Font-Awesome v0.0.0-20260210181720-337dd2045d56/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/cloudcannon/bookshop/hugo/v3 v3.18.5 h1:AKWzUQpWcBSbJgHQ/5cfPQtGX40bn8vbHBGk4rlHEGE=
 github.com/cloudcannon/bookshop/hugo/v3 v3.18.5/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
-github.com/gethinode/mod-blocks v1.23.5 h1:nDEZ3995WNzNig1dnUfTtXtYm36K1ktbt5gckJhuD3U=
-github.com/gethinode/mod-blocks v1.23.5/go.mod h1:zSbs/OyzCDt4Kvn/9e1Zi8K1tweJANfibHUr/jcOrt4=
 github.com/gethinode/mod-blocks v1.23.6 h1:Kg0RAlMhz2j1W60sERvHQyAa8H6UbNfMl9ZJajh/vKU=
 github.com/gethinode/mod-blocks v1.23.6/go.mod h1:zSbs/OyzCDt4Kvn/9e1Zi8K1tweJANfibHUr/jcOrt4=
 github.com/gethinode/mod-bootstrap-icons v1.4.4 h1:ts9JkWlWYJ8fiPkMO5Ue6ym/2WM5V9Rq1qpAgSGnbxQ=
