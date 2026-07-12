@@ -67,9 +67,9 @@ Repeat until every register row reads Released+Verified (or Resolved for verify-
    `~/Development/GitHub/gethinode/` — they are stale and dirty, and they are build inputs.
 3. One agent per repo, ever. Agents never touch another module's repo, the hinode repo, or
    mod-utils.
-4. The driver (you) reviews each agent's evidence (recipe step 7) before the merge step —
-   an agent may open the PR, but the driver confirms CI is green and the evidence is complete
-   before merging.
+4. The driver (you) reviews each agent's evidence (recipe step 8) before the merge step —
+   an agent may open the PR, but the driver confirms CI is green, the evidence is complete,
+   and the visual-diff triage has no unexplained entries before merging.
 5. After merge: CONFIRM the release tag actually cut and matches the new Go path major before
    marking Released, and before starting any wave that depends on it.
 6. Bookkeeping: replace the module's register row (never append), one line in memory when a
@@ -90,7 +90,27 @@ Repeat until every register row reads Released+Verified (or Resolved for verify-
    "<module>/vOLD\|mod-utils/v5" --include="*.toml" --include="*.mod" --include="*.md" .`,
    excluding `_vendor` and `node_modules`) and update every hit. README install instructions
    count.
-4. **Vendor + verify:** `npm ci` (or pnpm per the repo), `npm run mod:vendor` (or the repo's
+4. **Migrate the argument handling (fold-in, agreed 2026-07-12):** this generation is not just
+   a path bump — every `InitArgs.html`/`InitTypes.html` call site in the module migrates to the
+   clean API in the same PR:
+   a. `partial "utilities/InitArgs.html" …` → `partial "utilities/Args.html" …` with the
+      separated envelope (`$result.args.<camelKey>`, `$result.err`, `$result.errmsg`,
+      `$result.warnmsg`, `$result.defaulted`). Access values by camelCase key only.
+   b. **Strictness guardrail:** user-facing entry points — shortcodes and any partial that
+      validates site-authored content — call `Args.html` with an explicit `"strict" false`
+      (preserves the warnings-first rollout for site inputs; flipping these to strict is that
+      module's one-line part of the v7 wave). Internal partial-to-partial calls, where the
+      module controls its own inputs, use the strict default.
+   c. Remove now-dead workarounds: manual `or`-based default fallbacks (false/zero defaults
+      work now), falsy-guard hacks, dual kebab/camel key handling, `_default` plumbing the
+      clean envelope obviates. Do NOT touch structure files/YAML, and do NOT touch Bookshop
+      wrapper reads of blueprint props (`.show_more` etc. off the Bookshop context are not
+      InitArgs results).
+   d. **Exercise gate:** a migrated call site only counts if the module's exampleSite actually
+      renders it. Where the exampleSite is a placeholder, seed it with demo content exercising
+      every migrated shortcode/partial (this deliberately retires the module-test-coverage
+      hole as the program proceeds).
+5. **Vendor + verify:** `npm ci` (or pnpm per the repo), `npm run mod:vendor` (or the repo's
    equivalent), then run the repo's test script (usually an exampleSite build). Gates:
    a. `hugo mod graph` (in exampleSite context if applicable) shows `mod-utils/v6` and NO
       `mod-utils/v5`.
@@ -100,16 +120,24 @@ Repeat until every register row reads Released+Verified (or Resolved for verify-
       for unset values, undeclared nested attributes) is a call-site bug — FIX it in this PR
       (that is the intended cleanup this generation carries). A warning caused by exampleSite
       CONTENT is fixed in the content. Record every triage decision in the report.
-5. **Commit** (single commit preferred), Angular Conventional Commits, body ≤100 chars/line:
+   d. **Visual regression gate** (see VISUAL REGRESSION section): run the harness against the
+      module's exampleSite (baseline vs candidate) and, for modules surfaced through Hinode's
+      exampleSite, the driver runs the Hinode-level check at PR review time. Every flagged
+      diff is triaged: intended (e.g. a default now actually applying) → re-baseline with a
+      register note; unexplained → a bug in the migration, fix before merge.
+6. **Commit** (single commit preferred), Angular Conventional Commits, body ≤100 chars/line:
    `feat: adopt the mod-utils v6 validation engine` with trailer:
    `BREAKING CHANGE: requires github.com/gethinode/<module>/vNEW import path; adopts
-   mod-utils v6 (see gethinode/mod-utils v5-to-v6 migration notes).`
+   mod-utils v6 and migrates argument handling to the Args API (see gethinode/mod-utils
+   v5-to-v6 migration notes).`
    and `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`.
-6. **PR** against main titled `feat!: adopt mod-utils v6 (<module> vNEW)`, body linking
-   gethinode/mod-utils#334 and the migration notes, listing every call-site fix from step 4c.
-7. **Evidence** (returned to the driver, and into the register row on Verified): new path,
-   `hugo mod graph` line proving v6-only, build exit code, warning triage table, PR URL.
-8. Driver merges after CI is green → waits for semantic-release → confirms
+7. **PR** against main titled `feat!: adopt mod-utils v6 (<module> vNEW)`, body linking
+   gethinode/mod-utils#334 and the migration notes, listing every migrated call site and
+   every fix from step 5c.
+8. **Evidence** (returned to the driver, and into the register row on Verified): new path,
+   `hugo mod graph` line proving v6-only, build exit code, migrated-call-site list, warning
+   triage table, visual-diff triage summary, PR URL.
+9. Driver merges after CI is green → waits for semantic-release → confirms
    `gh release view vNEW.0.0 --repo gethinode/<module>` succeeds AND the tag's go.mod path
    matches → row becomes Released, then Verified once the register row carries the evidence.
 
@@ -134,15 +162,47 @@ component blueprint in CI. This makes the wave-3 PR bigger than the mechanical b
 it, and fix the argument warnings it surfaces (there will be several; the Task-8 smoke test saw
 testimonials/hero/links warnings from mod-blocks components).
 
+## VISUAL REGRESSION (agreed 2026-07-12)
+
+Rationale: Hinode's exampleSite mounts **mod-docs**, which documents every supported content
+block and shortcode with rendered examples. Screenshotting those pages before/after gives a
+pixel-level safety net the JSON goldens cannot: the argument-engine change can alter *rendered
+output* (defaults that now apply), and this gate makes every such delta explicit.
+
+- **Harness:** `tests/visual/` on this program branch — self-contained (own `package.json`;
+  Playwright + pixelmatch; zero changes to Hinode's root dependency tree). Two commands:
+  `shoot` (serve a built `public/` dir locally, screenshot every sitemap page matching an
+  include regex, full-page, fixed viewport, reduced motion, animations/transitions disabled,
+  **all non-localhost requests blocked** for determinism, known-dynamic elements masked) and
+  `compare` (pixelmatch two shoot dirs, emit an HTML report with side-by-side + diff images,
+  exit non-zero on any page above threshold).
+- **Baseline protocol:** the v5-generation baseline is captured ONCE from Hinode `main`
+  (commit recorded in the register) with its currently pinned module versions, BEFORE any
+  wave-1 merge. Baselines live in the driver's program workspace (not in git — they are
+  reproducible from the recorded Hinode commit as long as Hinode stays parked, which it is).
+- **Candidate runs:** at PR review time the driver rebuilds Hinode's exampleSite with
+  `HUGO_MODULE_REPLACEMENTS` pointing at the candidate module branch (plus
+  `--ignoreVendorPaths` for that module), shoots, and compares against baseline. Modules not
+  surfaced through Hinode's exampleSite rely on their OWN exampleSite shoot (recipe step 4d)
+  — same harness, their own baseline captured from their `main` before the bump.
+- **Triage discipline (mirrors the golden discipline):** every flagged page is classified —
+  *intended* (a default now actually applying, a call-site fix correcting a real defect) →
+  re-baseline that page with a one-line justification in the register evidence; *unexplained*
+  → a regression in the migration; fix before merge. An intended-diff justification must name
+  the mechanism (e.g. "heading.width default 8 now applies"), not just assert intent.
+- **Full-generation run:** after the last wave-3 merge, one complete baseline-vs-final
+  comparison across the whole exampleSite; its report is part of the DONE evidence.
+
 ## STOP AND ASK — only these
 
 - **Anything touching hinode, gethinode.com, template, theme-agency, version-demo,
   customization-demo, or mod-utils itself.** The Hinode v3 decision is the maintainer's; this
   program prepares the module generation Hinode v3 will pin, nothing more.
 - **A breaking change beyond the pre-authorized template.** Majors are pre-authorized ONLY for
-  the 12 inventory modules and ONLY as the recipe's mechanical v6 adoption plus call-site
-  warning fixes. A module that needs behavior surgery, YAML schema changes, or any piggybacked
-  breaking feature: stop, show the diff-beyond-recipe, ask.
+  the 12 inventory modules and ONLY as the recipe's v6 adoption: path bump, Args-API migration
+  with the strict-false guardrail, call-site warning fixes, and exampleSite seeding. A module
+  that needs behavior surgery, YAML schema changes, or any piggybacked breaking feature: stop,
+  show the diff-beyond-recipe, ask.
 - **A module whose exampleSite reveals genuine v6 incompatibility** — ERROR lines that a
   call-site fix does not resolve. That is a mod-utils defect or a real design gap; do not patch
   around it in the module. Stop with the reproduction.
@@ -182,8 +242,10 @@ one PR at a time.
 ## DONE means
 
 All 12 inventory rows read **Verified** (released majors whose exampleSites build clean on the
-v6 engine with triaged warnings), both verify-only rows read **Resolved** with evidence, the
-register carries PR + release links for every row, and a final report lists: releases cut,
-call-site fixes made, warnings triaged, and the exact module-generation table Hinode v3 should
-pin. Wave 4 (Hinode + sites) is then handed to the maintainer as a decision package — it is NOT
-part of this program's DONE.
+v6 engine, argument handling migrated to the Args API with the strict-false guardrail, every
+migrated call site exercised by demo content, warnings triaged, visual diffs triaged), both
+verify-only rows read **Resolved** with evidence, the full-generation visual comparison is run
+and its report archived, the register carries PR + release links for every row, and a final
+report lists: releases cut, call sites migrated, warnings and visual diffs triaged, and the
+exact module-generation table Hinode v3 should pin. Wave 4 (Hinode + sites) is then handed to
+the maintainer as a decision package — it is NOT part of this program's DONE.
