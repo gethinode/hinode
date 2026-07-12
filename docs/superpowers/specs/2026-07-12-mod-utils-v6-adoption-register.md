@@ -22,3 +22,10 @@ warning-triage summary.
 | 3 | mod-docs | verify-only | Pending | — |
 | 3 | mod-template | verify-only | Pending | — |
 | 4 | hinode + sites | PARKED | AwaitingDecision | Hinode v3 decision package delivered at program end |
+
+## Program infrastructure
+
+| Item | State | Evidence |
+| --- | --- | --- |
+| Visual harness (`tests/visual/`) | Ready | commit 85698b0; two-run determinism check 42/42 clean |
+| v5-generation baseline | Captured | 42 pages (39 en `docs/components/*` + 3 locale homes) from Hinode main-equivalent, see `tests/visual/BASELINE.md`; images in driver workspace `.superpowers/visual/baseline-v5` |
