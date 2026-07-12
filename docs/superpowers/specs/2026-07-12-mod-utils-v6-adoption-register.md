@@ -7,7 +7,7 @@ warning-triage summary.
 
 | Wave | Module | Bump | State | Evidence |
 | --- | --- | --- | --- | --- |
-| 1 | mod-fontawesome | /v5 → /v6 | Pending | — |
+| 1 | mod-fontawesome | /v5 → /v6 | InProgress | PILOT — test-drives the mechanism before parallelization |
 | 1 | mod-flexsearch | /v4 → /v5 | Pending | — |
 | 1 | mod-hanko | /v2 → /v3 | Pending | — |
 | 1 | mod-hubspot | /v3 → /v4 | Pending | — |
