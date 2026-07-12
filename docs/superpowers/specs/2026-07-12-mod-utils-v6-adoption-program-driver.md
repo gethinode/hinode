@@ -209,6 +209,40 @@ output* (defaults that now apply), and this gate makes every such delta explicit
 - **Three failed attempts on one module.** The recipe is wrong for that module, not the agent.
   Do not attempt a fourth.
 
+## PILOT REFINEMENTS (mod-fontawesome, 2026-07-12 — binding for all subsequent modules)
+
+1. **Baseline before ANY change** (recipe ordering): shoot the module's own visual baseline
+   from the pristine clone BEFORE recipe step 1. If edits already happened, `git stash`,
+   rebuild clean, shoot, `stash pop`.
+2. **Commit-body landmine:** the commit body must contain NO line that both starts with `-`
+   and ends with `-` (a hyphen-wrapped bullet did exactly this in the pilot; it matches the
+   conventional-parser fieldPattern `/^-(.*?)-$/` and silently swallows everything after it,
+   including the BREAKING CHANGE footer — the release cut as a poisoned v5.2.0). Check with:
+   `git show -s --format=%B HEAD | grep -E '^-.*-$'` — must return nothing.
+3. **Driver verifies the analyzer, not just the tag:** in the semantic-release log, confirm
+   "The release type for the commit is major" (or the released version) BEFORE trusting the
+   release. A wrong-major tag must be deleted before any module proxy caches it (check
+   `https://proxy.golang.org/<module-path>/@v/list` — absence means containment succeeded),
+   then re-cut via an empty commit carrying a clean BREAKING CHANGE footer.
+4. **`hugo mod graph` runs from the exampleSite context**, not the repo root. ExampleSites
+   come in (at least) two wirings: bare-path + `replacements`, and Hugo workspace file
+   (`<module>.work`) + versioned import — `hugo mod tidy` handles both; verify, don't assume.
+5. **Pixel diffs are not proof for whitespace/attribute fixes:** when a call-site fix concerns
+   spacing, class presence, or attributes near block boundaries, verify by HTML-source diff
+   as well — a `0 flagged` pixel result does not prove behavior parity there.
+6. **Standing migration checklist item:** grep every migrated call site for `| default` or
+   `or` applied to an `Args.html`-sourced value. Under v6, top-level defaults are applied
+   before the template runs, and Hugo's `default`/`or` treat explicit `false` as absent — use
+   the envelope's `defaulted` list instead. This exact pattern hid a real bug in the pilot.
+7. **Read compare output in full.** The driver must read the harness's complete flagged list
+   (the report file), never a tail of the console output — a truncated read caused a partial
+   triage in the pilot.
+8. **The Hinode-level candidate check is an engine-endstate check.** Hinode imports
+   mod-fontawesome before mod-utils, so any candidate module carrying mod-utils/v6 flips the
+   ENTIRE exampleSite onto the v6 engine (mount precedence). Triage diffs against v6
+   semantics; this is a feature (it previews Hinode v3) and a warning (mixing generations in
+   production flips a site's engine the same way — module release notes must say so).
+
 ## RELEASE MECHANICS
 
 - One PR per repo, base main, merge-commit merges (matches repo history). CI green before
