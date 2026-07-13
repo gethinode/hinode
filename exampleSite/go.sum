@@ -4,6 +4,8 @@ github.com/cloudcannon/bookshop/hugo/v3 v3.18.5 h1:AKWzUQpWcBSbJgHQ/5cfPQtGX40bn
 github.com/cloudcannon/bookshop/hugo/v3 v3.18.5/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
 github.com/gethinode/mod-blocks/v2 v2.0.1 h1:BoHDy2PqZfSQ5kolAjnem2gWOarxVCRzaJZ6owM0oCs=
 github.com/gethinode/mod-blocks/v2 v2.0.1/go.mod h1:yhZH/AHvPlr1IkYu9GRmhvsLBlyvwpO0T8DvnKUITDw=
+github.com/gethinode/mod-blocks/v2 v2.0.3 h1:9jsVov1cJsQhUALVz/E+spSezAf8YGyGnd873VsRM4w=
+github.com/gethinode/mod-blocks/v2 v2.0.3/go.mod h1:bqogsRCwVHZlsLN/XZmBC25UmralIvYwmRkAcj3601Q=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.0 h1:ryXa25d/9mXVcPXhOwMtxtAtFkR0M1EPSIuU0xRRDec=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.0/go.mod h1:0DKJp0goqI0vwOIVa8/yd3tAE0XdUypu1QRoz9K+094=
 github.com/gethinode/mod-cookieyes/v2 v2.2.6 h1:/DQm8OYpms0On8wuosQER47TplVu/3z7MZHwbBKXCAg=
