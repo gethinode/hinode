@@ -7,7 +7,7 @@
     
     {{/* Auto-generated sidebar for docs */}}
     {{- $menu := .Scratch.Get "sidebar" -}}
-    {{- if not (reflect.IsSlice $menu) }}{{ $menu = "" }}{{ end }}
+    {{- if not (reflect.IsSlice $menu) }}{{ $none := dict }}{{ $menu = $none.missing }}{{ end }}
     {{- $version := .Scratch.Get "version" -}}
     {{- $sidebar := partial "assets/sidebar.html" (dict "page" . "menu" $menu "version" $version "auto-generate" true) -}}
 

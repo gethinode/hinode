@@ -20,35 +20,21 @@
     {{ $error = $args.err }}
 {{ end }}
 
-{{/* Initialize arguments and default values */}}
-{{- $cols := .Get "cols" | default "3" -}}
-{{- $gutter := .Get "gutter" | default "4" -}}
-{{- $title := .Get "title" | default "" -}}
-{{- $separator := .Get "separator" | default "" -}}
-{{- $wrapper := .Get "wrapper" | default "" -}}
-{{- $responsive := .Get "responsive" | default true -}}
+{{/* Arguments passed to the group and to individual cards are already validated, defaulted, and
+     type-cast by InitArgs.html above ($args); read them directly instead of re-deriving raw,
+     unvalidated locals via .Get, which cannot represent "absent" and would forward an explicit
+     "" to the nested partial's own validation.
 
-{{/* Initialize arguments passed to individual cards */}}
-{{- $class := .Get "class" | default "" -}}
-{{- $color := .Get "color" | default "" -}}
-{{- $padding := .Get "padding" | default 3 -}}
-{{- $header := .Get "header-style" | default "" -}}
-{{- $body := .Get "body-style" | default "" -}}
-{{- $footer := .Get "footer-style" | default "" -}}
-{{- $orientation := .Get "orientation" | default "" -}}
-{{- $align := .Get "align" | default "start" -}}
-{{- $style := .Get  "icon-style" | default "" -}}
-{{- $subtle := .Get "subtle" | default false -}}
-{{- $button := .Get "button" | default false -}}
-{{- $linkIcon := .Get "link-icon" | default false -}}
-{{- $buttonType := .Get "link-type" | default "" -}}
-{{- $iconRounded := .Get "icon-rounded" | default false -}}
-{{- with .Get "header" }}{{- $header = . -}}{{- end -}}
-{{- with .Get "footer" }}{{- $footer = . -}}{{- end -}}
-{{- with .Get "style" }}{{- $style = . -}}{{- end -}}
-{{- with .Get "buttonType" }}{{- $buttonType = . -}}{{- end -}}
-{{- with .Get "iconRounded" }}{{- $iconRounded = . -}}{{- end -}}
-{{- $scroll := .Get "scroll" | default false -}}
+     A handful of deprecated arguments were renamed (not just re-cased) to their canonical
+     counterpart (e.g. "header" -> "header-style"), so they camelize to a DIFFERENT key and
+     InitArgs' same-key collision resolution does not apply between them; combine them here,
+     canonical value first. "icon-rounded"/"iconRounded" is a same-key (re-cased) twin, already
+     resolved by InitArgs, so $args.iconRounded is used directly below. */}}
+{{ $headerStyle := or $args.headerStyle $args.header }}
+{{ $bodyStyle := or $args.bodyStyle $args.body }}
+{{ $footerStyle := or $args.footerStyle $args.footer }}
+{{ $iconStyle := or $args.iconStyle $args.style }}
+{{ $linkType := or $args.linkType $args.buttonType }}
 
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
@@ -58,33 +44,33 @@
 {{ end }}
 
 {{/* Main code */}}
-{{- partial "assets/card-group.html" (dict 
+{{- partial "assets/card-group.html" (dict
     "page"         .Page
     "cards"        $inner
-    "cols"         $cols
-    "gutter"       $gutter
-    "title"        $title
-    "separator"    $separator
-    "wrapper"      $wrapper
-    "responsive"   $responsive
-    "class"        $class
-    "color"        $color
-    "padding"      $padding
-    "header-style" $header
-    "body-style"   $body
-    "footer-style" $footer
-    "orientation"  $orientation
-    "align"        $align
-    "icon-style"   $style
-    "subtle"       $subtle
-    "button"       $button
-    "link-icon"    $linkIcon
-    "link-type"    $buttonType
-    "icon-rounded" $iconRounded
-    "scroll"       $scroll
+    "cols"         $args.cols
+    "gutter"       $args.gutter
+    "title"        $args.title
+    "separator"    $args.separator
+    "wrapper"      $args.wrapper
+    "responsive"   $args.responsive
+    "class"        $args.class
+    "color"        $args.color
+    "padding"      $args.padding
+    "header-style" $headerStyle
+    "body-style"   $bodyStyle
+    "footer-style" $footerStyle
+    "orientation"  $args.orientation
+    "align"        $args.align
+    "icon-style"   $iconStyle
+    "subtle"       $args.subtle
+    "button"       $args.button
+    "link-icon"    $args.linkIcon
+    "link-type"    $linkType
+    "icon-rounded" $args.iconRounded
+    "scroll"       $args.scroll
     "bento"        $args.bento
     "valign"       $args.valign
     "loading"      $args.loading
     "_default"     $args.default
-    ) 
+    )
 -}}

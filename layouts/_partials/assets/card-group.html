@@ -103,7 +103,7 @@
                 "description" (partial "utilities/GetDescription.html" (dict "page" $element "raw" true))
                 "thumbnail"   $thumbnail
                 "mode"        $mode
-                "anchor"      $anchor
+                "anchor"      (partial "utilities/OmitEmpty.html" $anchor)
                 "icon"        $element.Params.icon
             ) -}}
         {{- end -}}

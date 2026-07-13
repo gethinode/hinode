@@ -86,7 +86,7 @@
         <img class="img-fluid {{ $args.class }}"
             src="{{ $fallbackURL }}"
             {{ if eq $args.loading "lazy" }} loading="lazy"{{ end -}}
-            {{ with $args.priority }} fetchpriority="{{ . }}"{{ end -}}
+            {{ if and $args.priority (ne $args.priority "auto") }} fetchpriority="{{ $args.priority }}"{{ end -}}
             {{ with $imgset }} srcset="{{ . }}" sizes="{{ $args.sizes }}"{{ end -}}
             {{ with $height }} height="{{ . }}"{{ end -}}
             {{ with $width }} width="{{ . }}"{{ end -}}

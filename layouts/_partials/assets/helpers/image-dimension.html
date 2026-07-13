@@ -145,7 +145,7 @@
 {{ else if (gt (len $dims) 0) }}
     {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
         "src"           $src
-        "img"           $img
+        "img"           (partial "utilities/OmitEmpty.html" $img)
         "dims"          ($dims | last 1)
         "anchor"        $args.anchor
         "transform"     $transform
@@ -156,7 +156,7 @@
     {{ if $args.imageset }}
         {{- $set = partial "assets/helpers/image-set.html" (dict 
             "src"           $src
-            "img"           $img
+            "img"           (partial "utilities/OmitEmpty.html" $img)
             "dims"          $dims
             "anchor"        $args.anchor
             "transform"     $transform

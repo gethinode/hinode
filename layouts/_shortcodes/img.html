@@ -30,8 +30,8 @@
         "active"   (or $args.active (eq .Ordinal 0))
         "src"      $args.src
         "caption"  $args.caption
-        "ratio"    $ratio
-        "portrait" $portrait   
+        "ratio"    (partial "utilities/OmitEmpty.html" $ratio)
+        "portrait" $portrait
         "loading"  $args.loading
     ) }}
 
