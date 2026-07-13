@@ -32,7 +32,7 @@
     "build:debug": "hugo -e debug --debug",
     "build:headers": "pnpm build:headers:dev && pnpm build:headers:prod",
     "build:headers:dev": "hugo --renderSegments headers -d prebuild-headers-dev -e development && cpy prebuild-headers-dev/server.toml config/_default/ --flat",
-    "build:headers:prod": "hugo --renderSegments headers -d prebuild-headers-prod -e production && cpy prebuild-headers-prod/netlify.toml ./ --flat",
+    "build:headers:prod": "hugo -s exampleSite --renderSegments headers -d prebuild-headers-prod -e production && cpy exampleSite/prebuild-headers-prod/netlify.toml ./ --flat",
     "build:example:headers": "hugo -s exampleSite --renderSegments headers -d prebuild && cpy exampleSite/prebuild/netlify.toml ./ --flat && cpy exampleSite/prebuild/server.toml exampleSite/config/_default/ --flat",
     "build:preview": "pnpm build -D -F",
     "clean:public": "rimraf public exampleSite/public",
