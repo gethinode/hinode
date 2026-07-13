@@ -36,9 +36,9 @@
 {{- end -}}
 
 {{ if $thumbnail -}}
-    {{- partial "assets/image.html" (dict 
+    {{- partial "assets/image.html" (dict
         "src"      $thumbnail
-        "anchor"   $anchor
+        "anchor"   (partial "utilities/OmitEmpty.html" $anchor)
         "ratio"    $ratio
         "wrapper"  $wrapper
         "class"    $class
