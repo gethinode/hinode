@@ -26,11 +26,11 @@
     {{- $destination := .destination -}}
     {{- $cat := .cat -}}
     {{- $localize := .localize -}}
-    {{- $modules := .modules -}}
+    {{- $modules := partial "utilities/ToStringSlice.html" .modules -}}
     {{- $skipTemplate := .skipTemplate -}}
     {{- $enableTemplate := .enableTemplate }}
     {{- $absoluteURL := .absoluteURL -}}
-    {{- $state := cond (ne .state "immediate") .state "" -}}
+    {{- $state := .state -}}
 
     {{- if and $cat (ne $cat "other") -}}
         {{- $destination = path.Join (path.Dir $destination) (printf "%s-%s%s" (path.BaseName $destination) $cat (path.Ext $destination)) -}}
@@ -50,7 +50,7 @@
         "skip-template"   $skipTemplate
         "enable-template" $enableTemplate
         "debugging"       site.Params.debugging.showJS
-    ) $destination (delimit $modules ",") -}}
+    ) $destination (delimit (or $modules slice) ",") -}}
     {{- $js := $bundle.bundle -}}
     {{- $jsmod := $bundle.module -}}
 

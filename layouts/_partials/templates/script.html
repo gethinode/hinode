@@ -26,5 +26,5 @@
         {{- with $args.scriptType }}{{ printf ` type="%s"` . | safeHTMLAttr }}{{ end -}}
         {{- with $category }} data-category="{{ . }}"{{ end -}}
         {{- with $args.integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}
-        {{- with $args.state }} {{ . | safeHTMLAttr }}{{ end -}}></script>
+        {{- if and $args.state (ne $args.state "immediate") }} {{ $args.state | safeHTMLAttr }}{{ end -}}></script>
 {{- end -}}

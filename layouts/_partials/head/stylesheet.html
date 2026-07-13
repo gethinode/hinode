@@ -83,7 +83,7 @@
     "page"      page
     "match"     $source
     "filename"  (printf "scss/bundle-%s.scss" (hash.XxHash $source))
-    "modules"   $modules
+    "modules"   (partial "utilities/ToStringSlice.html" $modules)
     "basepath"  "scss"
     "debugging" site.Params.debugging.showSCSS
 ) $source page.Language.Lang (delimit $modules ",") -}}
