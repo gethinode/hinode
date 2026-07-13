@@ -18,6 +18,8 @@ github.com/gethinode/mod-docs v1.15.0 h1:A/iJ2S2v8Le0u8gdOfpLoss8mDaaJI+gtMNXiws
 github.com/gethinode/mod-docs v1.15.0/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v6 v6.0.0 h1:PrfiMfVEAM5Lpnkp+sXOtOdRSOe3l56z+ngrPcACzlA=
 github.com/gethinode/mod-fontawesome/v6 v6.0.0/go.mod h1:ayMslv2xpC5cjxUVTkIlFBbOd1LM5ezIr0OSOr6q8Gk=
+github.com/gethinode/mod-leaflet/v3 v3.1.0 h1:zscIv/q2dg0TUjosjM9hB9DchlutuWkWqOafX00fsKI=
+github.com/gethinode/mod-leaflet/v3 v3.1.0/go.mod h1:FsoyVRb3DRZBb2jWPV4yJNqbmOKmCwaJgom2hbWZXnA=
 github.com/gethinode/mod-utils/v6 v6.4.0 h1:l49KrawKE/7c6XE00wXQ9T5/kuTfiETerBz6OWn3SJc=
 github.com/gethinode/mod-utils/v6 v6.4.0/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/twbs/icons v1.13.1 h1:6bmNXvoeIbvjFWjfbjXg5JGbelLD1haIsMaEIzE9UZI=
