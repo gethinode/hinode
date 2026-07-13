@@ -1,0 +1,25 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/*
+    Coerces the given slice into a genuine Go []string (round-tripping through delimit/split),
+    returning nil when the input is empty. Use when forwarding a Hugo-built list (e.g. from
+    append/complement/intersect, which yield []interface{} even when every element is a string)
+    into a nested partial's Args-validated dict that declares its argument with the raw reflect
+    type "[]string": the v6 engine matches that declaration against printf "%T" verbatim, so a
+    same-content-but-different-Go-type []interface{} value fails validation even though every
+    element is a valid string.
+*/}}
+
+{{ $value := . }}
+{{ $result := $value }}
+{{ if gt (len $value) 0 }}
+    {{ $result = split (delimit $value ",") "," }}
+{{ else }}
+    {{ $none := dict }}
+    {{ $result = $none.missing }}
+{{ end }}
+{{ return $result }}

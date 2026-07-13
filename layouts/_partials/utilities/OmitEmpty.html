@@ -1,0 +1,27 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/*
+    Returns the given value unchanged when truthy, or a literal nil when falsy (empty string,
+    zero, false, empty slice/map). Use when forwarding a raw, unvalidated value (e.g. from
+    utilities/GetArgParent.html or a shortcode's own .Get) into a nested partial's
+    InitArgs/Args-validated dict: an unset raw value is otherwise an explicit "" (or a
+    zero-value), which the v6 argument engine treats as a real provided value and rejects for
+    select/bool/int-typed arguments, instead of as "absent" (which lets the nested partial's own
+    schema default apply).
+
+    Do NOT apply this to a value already sourced from InitArgs.html/Args.html output ($args.*):
+    that envelope already distinguishes an explicit false/0/"" from a genuinely absent argument,
+    and wrapping it here would silently discard the explicit value (the exact bug class this
+    generation's migration removes elsewhere).
+*/}}
+
+{{ $value := . }}
+{{ if not $value }}
+    {{ $none := dict }}
+    {{ $value = $none.missing }}
+{{ end }}
+{{ return $value }}
