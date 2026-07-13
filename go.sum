@@ -88,6 +88,8 @@ github.com/gethinode/mod-leaflet/v2 v2.1.1 h1:8g0T9hN036LsCaXFkehDlzFbEpAlSYrzxS
 github.com/gethinode/mod-leaflet/v2 v2.1.1/go.mod h1:A9Inp9uwSDD6vW8uYVVGl6eXGMe+j3ESOxV4T53HOaM=
 github.com/gethinode/mod-leaflet/v3 v3.0.0 h1:rNjdruvS08bxqsLFEWNt9aU2KCbHiRlEKpKIutqWVOw=
 github.com/gethinode/mod-leaflet/v3 v3.0.0/go.mod h1:FsoyVRb3DRZBb2jWPV4yJNqbmOKmCwaJgom2hbWZXnA=
+github.com/gethinode/mod-leaflet/v3 v3.1.0 h1:zscIv/q2dg0TUjosjM9hB9DchlutuWkWqOafX00fsKI=
+github.com/gethinode/mod-leaflet/v3 v3.1.0/go.mod h1:FsoyVRb3DRZBb2jWPV4yJNqbmOKmCwaJgom2hbWZXnA=
 github.com/gethinode/mod-lottie/v2 v2.0.1 h1:jIY5oGHtkXXvJoxNAE2AueoqxqNNlTYHF4+igQmkIAU=
 github.com/gethinode/mod-lottie/v2 v2.0.1/go.mod h1:/YzhRcG9H8MyODt8qaOQP0nqoux7EFHW2S7ugiiFf0o=
 github.com/gethinode/mod-lottie/v2 v2.1.0 h1:d0ViSsZr8idst7/zWTjCHp93jdX9fPHeGaAHEhi7lO4=
