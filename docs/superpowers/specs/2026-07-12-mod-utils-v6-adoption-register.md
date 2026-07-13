@@ -28,8 +28,8 @@ warning-triage summary.
 | 4 | template | Merged | PR #613 merged; zero argument warnings (minimal starter) |
 | 4 | version-demo | InProgress | site agent running |
 | 4 | customization-demo | PR-Open (HOLD: maintainer decision) | PR #46 builds clean, zero argument warnings — but three demo overrides target hook points removed by v3's page-template rewrite (custom blog list silently falls back to default). Needs override redesign against v3 hooks; documented in the PR. Not an engine issue. |
-| 4 | theme-agency | Merging | PR #383: warnings 40 → 2 (residual = elements.link gap, fixed upstream as mod-utils v6.4.0, PR #339); merge in flight (+ mod-blocks/v2) |
-| 4 | gethinode.com | Pending | gate: hinode v3 released; CloudCannon expose globs + manual live-edit check (human step remains) |
+| 4 | theme-agency | Merged | PR #383 merged; warnings 40 → 2, residual cleared by mod-utils v6.4.0 (elements.link) which flows in via minor updates (+ mod-blocks/v2) |
+| 4 | gethinode.com | PR-Open (HOLD: maintainer merge) | PR #152 ready: zero argument warnings (navigation.color="" sentinel removed), CloudCannon globs/config/snippets/postbuild updated (~200 vendored paths; generator is private npm — bookshop.config.cjs hand-updated). Post-merge checklist: run `npm run config` to regenerate expose, then manual CloudCannon live-edit verification. Production deploy — maintainer merges. |
 
 ## Blockers
 
