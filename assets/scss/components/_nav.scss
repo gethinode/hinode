@@ -134,3 +134,10 @@
         }
     }
 }
+
+/* Clip dropdown items to the menu's rounded corners; sites may enlarge the
+   global border radius (--bs-border-radius), which dropdowns inherit, and
+   active items would otherwise overflow the curve. */
+.dropdown-menu {
+    overflow: hidden;
+}
