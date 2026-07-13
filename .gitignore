@@ -13,3 +13,6 @@ node_modules/
 # Local Netlify folder and build files
 .netlify
 dart-sass/
+
+.playwright-mcp/
+.superpowers/
