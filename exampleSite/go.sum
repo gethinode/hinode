@@ -16,6 +16,8 @@ github.com/gethinode/mod-docs v1.14.1 h1:+G8IjMi/krhAzvOlB5ODnfQCp6b5ixWyU3D7f/8
 github.com/gethinode/mod-docs v1.14.1/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-docs v1.15.0 h1:A/iJ2S2v8Le0u8gdOfpLoss8mDaaJI+gtMNXiws7SyE=
 github.com/gethinode/mod-docs v1.15.0/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
+github.com/gethinode/mod-docs v1.15.1 h1:WSmJWWhbiXeRkNqYRnZMBT5GkMDaJsijYC6YZzMcvkA=
+github.com/gethinode/mod-docs v1.15.1/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v6 v6.0.0 h1:PrfiMfVEAM5Lpnkp+sXOtOdRSOe3l56z+ngrPcACzlA=
 github.com/gethinode/mod-fontawesome/v6 v6.0.0/go.mod h1:ayMslv2xpC5cjxUVTkIlFBbOd1LM5ezIr0OSOr6q8Gk=
 github.com/gethinode/mod-leaflet/v3 v3.1.0 h1:zscIv/q2dg0TUjosjM9hB9DchlutuWkWqOafX00fsKI=
