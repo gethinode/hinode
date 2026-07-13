@@ -6,12 +6,16 @@ github.com/gethinode/mod-blocks/v2 v2.0.1 h1:BoHDy2PqZfSQ5kolAjnem2gWOarxVCRzaJZ
 github.com/gethinode/mod-blocks/v2 v2.0.1/go.mod h1:yhZH/AHvPlr1IkYu9GRmhvsLBlyvwpO0T8DvnKUITDw=
 github.com/gethinode/mod-blocks/v2 v2.0.3 h1:9jsVov1cJsQhUALVz/E+spSezAf8YGyGnd873VsRM4w=
 github.com/gethinode/mod-blocks/v2 v2.0.3/go.mod h1:bqogsRCwVHZlsLN/XZmBC25UmralIvYwmRkAcj3601Q=
+github.com/gethinode/mod-blocks/v2 v2.1.0 h1:bW+3p3XpOBk2RtJkWkHvHTo4ovUmQWm1h82VkJx3G90=
+github.com/gethinode/mod-blocks/v2 v2.1.0/go.mod h1:bqogsRCwVHZlsLN/XZmBC25UmralIvYwmRkAcj3601Q=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.0 h1:ryXa25d/9mXVcPXhOwMtxtAtFkR0M1EPSIuU0xRRDec=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.0/go.mod h1:0DKJp0goqI0vwOIVa8/yd3tAE0XdUypu1QRoz9K+094=
 github.com/gethinode/mod-cookieyes/v2 v2.2.6 h1:/DQm8OYpms0On8wuosQER47TplVu/3z7MZHwbBKXCAg=
 github.com/gethinode/mod-cookieyes/v2 v2.2.6/go.mod h1:tULb7D7CoTycGUyL7ryqHJKaX11XuL2SN+XwP7/DI0Y=
 github.com/gethinode/mod-docs v1.14.1 h1:+G8IjMi/krhAzvOlB5ODnfQCp6b5ixWyU3D7f/8vdRg=
 github.com/gethinode/mod-docs v1.14.1/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
+github.com/gethinode/mod-docs v1.15.0 h1:A/iJ2S2v8Le0u8gdOfpLoss8mDaaJI+gtMNXiws7SyE=
+github.com/gethinode/mod-docs v1.15.0/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v6 v6.0.0 h1:PrfiMfVEAM5Lpnkp+sXOtOdRSOe3l56z+ngrPcACzlA=
 github.com/gethinode/mod-fontawesome/v6 v6.0.0/go.mod h1:ayMslv2xpC5cjxUVTkIlFBbOd1LM5ezIr0OSOr6q8Gk=
 github.com/gethinode/mod-utils/v6 v6.4.0 h1:l49KrawKE/7c6XE00wXQ9T5/kuTfiETerBz6OWn3SJc=

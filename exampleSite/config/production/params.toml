@@ -8,13 +8,3 @@
         "'self'",
         "gethinode.com"
     ]
-
-[modules.docs.csp]
-    # The block reference from mod-docs demonstrates the preview block by embedding a
-    # Wikipedia article and an OpenStreetMap map, which the browser refuses without
-    # these sources. The page also previews google.com on purpose, to show a site that
-    # refuses to be framed; that one falls back to a screenshot and needs no source.
-    frame-src = [
-        "*.wikipedia.org",
-        "www.openstreetmap.org"
-    ]
