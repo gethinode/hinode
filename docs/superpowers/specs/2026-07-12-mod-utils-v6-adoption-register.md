@@ -1,6 +1,6 @@
 # Register: mod-utils v6 adoption wave
 
-**PROGRAM COMPLETE (waves 1-3), 2026-07-12.** 12/12 modules Released+Verified, verify-only rows Resolved, final full-generation visual run 41/42 clean (known mermaid flake). Wave 4 handed over via the decision package.
+**PROGRAM COMPLETE (waves 1-4), 2026-07-13.** Wave 4: hinode v3.0.0 released (/v3, warnings 504→0); mod-utils v6.1.0-v6.4.0 closed all five shared-type gaps; mod-blocks v2.0.1; template + theme-agency merged; three PRs held for maintainer (customization-demo #46 override redesign, version-demo #224 homepage curation, gethinode.com #152 production merge + CloudCannon human steps). Originally: 12/12 modules Released+Verified, verify-only rows Resolved, final full-generation visual run 41/42 clean (known mermaid flake). Wave 4 handed over via the decision package.
 
 Rows are REPLACED on state change, never appended. States:
 `Pending → InProgress → PR → Merged → Released → Verified` (bump rows);
@@ -26,7 +26,7 @@ warning-triage summary.
 | 4 | mod-utils type gaps | Verified | v6.1.0 (testimonials.icon, video media-id, PR #336), v6.2.0 (video.color, PR #337), v6.3.0 (links[].outline, PR #338) — all four shared-type gaps closed; goldens green throughout |
 | 4 | hinode v3 (/v2 → /v3) | Released+Verified | PR #2004 (H1 pin + H2 cleanup + H3 final): v3.0.0 released, analyzer-verified major, go.mod /v3. Argument warnings 504 → 0 (only 13 pre-existing Hugo-core deprecations remain); 46 call-site patterns fixed; visual 40/42 vs baseline-v6 (mermaid flake + intended args-docs growth). mod-blocks v2.0.1 patch shipped en route (empty-forwarding fixes, PR #148) |
 | 4 | template | Merged | PR #613 merged; zero argument warnings (minimal starter) |
-| 4 | version-demo | InProgress | site agent running |
+| 4 | version-demo | PR-Open (HOLD: maintainer decision) | PR #224 builds clean (hinode v0.22.5 → v3.0.0!); one documented behavioral delta: homepage falls back to listing all pages instead of the old curated [home] sections — content-curation decision, see PR body |
 | 4 | customization-demo | PR-Open (HOLD: maintainer decision) | PR #46 builds clean, zero argument warnings — but three demo overrides target hook points removed by v3's page-template rewrite (custom blog list silently falls back to default). Needs override redesign against v3 hooks; documented in the PR. Not an engine issue. |
 | 4 | theme-agency | Merged | PR #383 merged; warnings 40 → 2, residual cleared by mod-utils v6.4.0 (elements.link) which flows in via minor updates (+ mod-blocks/v2) |
 | 4 | gethinode.com | PR-Open (HOLD: maintainer merge) | PR #152 ready: zero argument warnings (navigation.color="" sentinel removed), CloudCannon globs/config/snippets/postbuild updated (~200 vendored paths; generator is private npm — bookshop.config.cjs hand-updated). Post-merge checklist: run `npm run config` to regenerate expose, then manual CloudCannon live-edit verification. Production deploy — maintainer merges. |
