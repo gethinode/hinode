@@ -1,0 +1,10 @@
+# Production-specific parameters for exampleSite
+
+[modules.hinode.csp]
+    # The exampleSite is deployed as demo.gethinode.com and is embedded as a live
+    # preview by the showcase pages on gethinode.com. Without this, the inherited
+    # theme default (frame-ancestors 'self') makes the browser refuse the iframe.
+    frame-ancestors = [
+        "'self'",
+        "gethinode.com"
+    ]
