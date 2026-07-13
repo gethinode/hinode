@@ -13,4 +13,7 @@ arguments:
   wrapper:
   class:
   image-overlay:
-  justify:
+  # no inherited default: the image centers by default and only applies md
+  # justification when the caller sets it explicitly (v5 semantics; callers
+  # historically passed an empty string that the legacy engine suppressed)
+  justify: { default: }
