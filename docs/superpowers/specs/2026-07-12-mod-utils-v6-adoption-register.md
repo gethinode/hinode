@@ -23,12 +23,12 @@ warning-triage summary.
 | 3 | mod-blocks | v1 → /v2 | Verified | PR #147; v2.0.0 confirmed (go.mod /v2). ExampleSite seeded with all 19 components (retires the coverage-hole follow-up); 26/26 call sites migrated; 5 dead fallbacks removed; faq typo fixed; 2 structure gaps escalated to the decision package; visual triaged clean (2 intended illustration.width flags). |
 | 3 | mod-docs | verify-only | Resolved | One InitArgs call site (netlify-contact-form-hook partial); no go.mod dep on mod-utils — inherits the site engine; InitArgs API preserved by the v6 shim, and every hinode-gate run (which mounts mod-docs content) built clean. Call-site migration belongs to whichever generation Hinode v3 pins. |
 | 3 | mod-template | verify-only | Resolved | Zero mod-utils references in toml/mod/md/html (verified 2026-07-12). New-module scaffolding carries no engine coupling; nothing to update. |
-| 4 | mod-utils type gaps | InProgress | maintainer approved wave 4 (2026-07-13); agent running (testimonials.icon, video media-id) |
-| 4 | hinode v3 (/v2 → /v3) | InProgress | stage H1 agent running: generation pin + warnings inventory |
-| 4 | template | Pending | gate: hinode v3 released |
-| 4 | version-demo | Pending | gate: hinode v3 released |
-| 4 | customization-demo | Pending | gate: hinode v3 released |
-| 4 | theme-agency | Pending | gate: hinode v3 released (+ mod-blocks/v2) |
+| 4 | mod-utils type gaps | Verified | v6.1.0 (testimonials.icon, video media-id, PR #336), v6.2.0 (video.color, PR #337), v6.3.0 (links[].outline, PR #338) — all four shared-type gaps closed; goldens green throughout |
+| 4 | hinode v3 (/v2 → /v3) | Released+Verified | PR #2004 (H1 pin + H2 cleanup + H3 final): v3.0.0 released, analyzer-verified major, go.mod /v3. Argument warnings 504 → 0 (only 13 pre-existing Hugo-core deprecations remain); 46 call-site patterns fixed; visual 40/42 vs baseline-v6 (mermaid flake + intended args-docs growth). mod-blocks v2.0.1 patch shipped en route (empty-forwarding fixes, PR #148) |
+| 4 | template | InProgress | site agent running |
+| 4 | version-demo | InProgress | site agent running |
+| 4 | customization-demo | InProgress | site agent running |
+| 4 | theme-agency | InProgress | site agent running (+ mod-blocks/v2) |
 | 4 | gethinode.com | Pending | gate: hinode v3 released; CloudCannon expose globs + manual live-edit check (human step remains) |
 
 ## Blockers
