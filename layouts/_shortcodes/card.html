@@ -72,37 +72,37 @@
 {{/* Main code */}}
 {{ if not $error -}}
     {{/* Render card */}}
-    {{- $output := partial "assets/card.html" (dict 
+    {{- $output := partial "assets/card.html" (dict
         "path"         $path
         "href"         $args.href
         "title"        $title
         "exact"        $args.exact
         "class"        $class
-        "gutter"       $gutter
-        "color"        $color
+        "gutter"       (partial "utilities/OmitEmpty.html" $gutter)
+        "color"        (partial "utilities/OmitEmpty.html" $color)
         "padding"      $padding
-        "header-style" $header
-        "body-style"   $body
-        "footer-style" $footer
-        "orientation"  $orientation
+        "header-style" (partial "utilities/OmitEmpty.html" $header)
+        "body-style"   (partial "utilities/OmitEmpty.html" $body)
+        "footer-style" (partial "utilities/OmitEmpty.html" $footer)
+        "orientation"  (partial "utilities/OmitEmpty.html" $orientation)
         "description"  $description
-        "ratio"        $ratio
-        "portrait"     $portrait
+        "ratio"        (partial "utilities/OmitEmpty.html" $ratio)
+        "portrait"     (partial "utilities/OmitEmpty.html" $portrait)
         "icon"         $icon
-        "icon-rounded" $iconRounded
+        "icon-rounded" (partial "utilities/OmitEmpty.html" $iconRounded)
         "align"        $align
         "icon-style"   $style
-        "subtle"       $subtle
-        "scroll"       $scroll
+        "subtle"       (partial "utilities/OmitEmpty.html" $subtle)
+        "scroll"       (partial "utilities/OmitEmpty.html" $scroll)
         "wrapper"      $wrapper
         "thumbnail"    $thumbnail
-        "loading"      $loading
-        "anchor"       $anchor
+        "loading"      (partial "utilities/OmitEmpty.html" $loading)
+        "anchor"       (partial "utilities/OmitEmpty.html" $anchor)
         "alt"          $alt
-        "button"       $button
+        "button"       (partial "utilities/OmitEmpty.html" $button)
         "button-label" $args.buttonLabel
-        "link-icon"    $linkIcon
-        "link-type"    $linkType
+        "link-icon"    (partial "utilities/OmitEmpty.html" $linkIcon)
+        "link-type"    (partial "utilities/OmitEmpty.html" $linkType)
         "_default"     $args.default
     ) -}}
 

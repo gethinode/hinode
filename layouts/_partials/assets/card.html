@@ -158,7 +158,7 @@
         {{- if and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.ratio }}{{ $ratio = .Params.Thumbnail.ratio }}{{ end -}}
     {{ end }}
     {{- if not $args.icon }}{{ $icon = .Params.icon }}{{ end -}}
-    {{- if not $args.anchor }}{{ $anchor = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.anchor) "") }}{{ end -}}
+    {{- if not $args.anchor }}{{ $anchor = partial "utilities/OmitEmpty.html" (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.anchor) }}{{ end -}}
     {{- if not $args.mode }}{{ $mode = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.mode) false) }}{{ end -}}
 {{- end -}}
 
