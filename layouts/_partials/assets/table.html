@@ -73,7 +73,10 @@
 {{ $filterCol := $args.filterCol | default 1 }}
 {{ $filterId := "" }}
 {{ if $filter }}
-    {{ $filterId = printf "table-filter-%s" (md5 (delimit (slice . now) "-")) }}
+    {{ $store := $args.page.Store }}
+    {{ $count := add (or ($store.Get "hinodeTableFilterCount") 0) 1 }}
+    {{ $store.Set "hinodeTableFilterCount" $count }}
+    {{ $filterId = printf "table-filter-%d" $count }}
     {{ $attributes = printf "%s data-filter-col=%d data-filter-id=%s" $attributes $filterCol $filterId }}
 {{ end }}
 
