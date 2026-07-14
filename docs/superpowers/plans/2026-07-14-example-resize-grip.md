@@ -52,41 +52,68 @@
 
 ## Task 0: Branch setup
 
-The two design-spec commits currently sit on `feat/table-wrap-datatables`, which is unrelated work. Move them onto a fresh branch.
+Three resize commits (`8bd06198` design, `23fd65f5` spec extension, `94a60c84` plan) were made on `feat/table-wrap-datatables`, which is unrelated work. They are **interleaved** with the table-wrap commits, not stacked on top:
+
+```text
+c7fc9ab0  table design
+2e5e3b15  table plan
+49f2b94c  table fixture
+ef9d0d97  table plan note
+8bd06198  ← resize design
+d046e057  table style
+23fd65f5  ← resize spec extension
+94a60c84  ← resize plan
+```
+
+A `git reset --hard HEAD~2` would therefore destroy a table-wrap commit and still leave the resize design behind. Do not do that.
 
 **Files:**
 
 - Modify: none (git only)
 
-- [ ] **Step 1: Note the two spec commits**
+- [ ] **Step 1: Confirm the interleaving still matches**
 
 ```bash
 cd /Users/mark/Development/GitHub/gethinode/hinode
-git log --oneline -2
+git log --oneline develop..feat/table-wrap-datatables
 ```
 
-Expected: `23fd65f5 docs: extend resize grip design…` and `8bd06198 docs: add design for optional resize grip…`
+Expected: the eight commits above. If the shape differs, stop and re-derive the commit list before touching anything.
 
-- [ ] **Step 2: Create the branch from develop and cherry-pick the specs**
+- [ ] **Step 2: Take a safety net**
+
+```bash
+git branch backup/table-wrap-datatables feat/table-wrap-datatables
+```
+
+Expected: a branch pointing at the current tip, so any mistake below is recoverable with `git reset --hard backup/table-wrap-datatables`.
+
+- [ ] **Step 3: Create the resize branch (additive — nothing is destroyed)**
 
 ```bash
 git checkout develop
 git pull --ff-only
 git checkout -b feat/example-resize-grip
-git cherry-pick 8bd06198 23fd65f5
+git cherry-pick 8bd06198 23fd65f5 94a60c84
+git log --oneline -4
 ```
 
-Expected: both commits apply cleanly.
+Expected: the three resize commits sit on top of `develop`, and no table-wrap commit came along.
 
-- [ ] **Step 3: Remove the spec commits from the unrelated branch**
+- [ ] **Step 4: Rebuild the table branch without the resize commits — ASK THE USER FIRST**
+
+This rewrites a branch the user owns, so **do not run it without explicit confirmation.** If the user declines, leave `feat/table-wrap-datatables` alone; the resize docs will simply appear as extra files in its diff, which is untidy but harmless.
+
+On confirmation, rebuild it from `develop` with only the five table commits, in order:
 
 ```bash
-git checkout feat/table-wrap-datatables
-git reset --hard HEAD~2
+git checkout -B feat/table-wrap-datatables develop
+git cherry-pick c7fc9ab0 2e5e3b15 49f2b94c ef9d0d97 d046e057
+git log --oneline develop..HEAD
 git checkout feat/example-resize-grip
 ```
 
-Expected: `feat/table-wrap-datatables` no longer carries the resize spec; `git log --oneline -3` on `feat/example-resize-grip` shows both spec commits on top of `develop`.
+Expected: five table-wrap commits, no resize commits. Verify the table-wrap working tree still builds before deleting `backup/table-wrap-datatables`.
 
 ---
 
