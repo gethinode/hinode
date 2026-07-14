@@ -226,13 +226,21 @@ merge plus a branch cut, and it is revertable by reverting the merge.
 client-side, a frozen snapshot keeps routing visitors to the live documentation even with no
 build pipeline behind it.
 
+## Prerequisites
+
+**Netlify DNS — satisfied.** gethinode.com is served by Netlify DNS, delegated from
+Cloudflare. Automatic deploy subdomains therefore work without further DNS work: Netlify
+provisions the wildcard records and the wildcard certificate itself, and no per-branch record
+needs creating. Because the zone is delegated at the nameserver level, Cloudflare's proxy is
+not in the request path for these subdomains — worth remembering if anyone later moves the
+zone back or enables Cloudflare proxying, either of which would break the automatic
+provisioning this design depends on.
+
 ## To verify before implementation
 
-- **Is gethinode.com on Netlify DNS?** Automatic deploy subdomains require it (a delegated
-  standalone subdomain also works). This is the one hard prerequisite for the recommended
-  topology; everything else has a fallback.
 - If a custom TLS certificate is ever adopted, it must list each deploy subdomain
-  explicitly — wildcard syntax does not cover them.
+  explicitly — wildcard syntax does not cover them. (Not a concern while Netlify manages the
+  certificate.)
 - Confirm Netlify branch-scoped environment variables apply to branch deploys as expected, so
   `SITE_BASEURL` resolves per line.
 
