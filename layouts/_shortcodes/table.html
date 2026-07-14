@@ -18,25 +18,28 @@
 {{- end -}}
 
 {{/* A data table needs both the simple-datatables module's JavaScript and its per-page stylesheet,
-     and Hinode loads an optional module's assets only for pages that list it in frontmatter. A
-     render-time dependency cannot be relied on to add them: a value registered while the content
-     renders is "indeterminate until Hugo renders the page content"
-     (https://gohugo.io/methods/page/store/), which holds only for a page without a `description` in
-     its frontmatter - see assets/lightbox.html. Warn rather than fail silently.
+     and Hinode loads an optional module's assets only for pages that list it in frontmatter.
+     Hinode could auto-declare the dependency here (via utilities/AddModule.html) instead of
+     warning, but that would make a shortcode's behavior depend on head/head.html's eager
+     evaluation of `.Page.Content` for its description fallback - an incidental implementation
+     detail elsewhere in the render pipeline, not a contract this shortcode can rely on. Warn
+     instead, so the author declares the module explicitly.
 
      The check lives in the shortcode rather than in assets/table.html because only here is `.Page`
      reliably the content page; a Bookshop block resolves it to the rendering template's page
      instead, which would warn about pages that hold no table at all. Skipped when the site
      configures the module as `core` or `critical`, since it then loads on every page anyway.
 
-     A filtered table is a data table too (see assets/table.html); a shortcode parameter is always a
-     string, so any non-empty `filter` counts.
+     A filtered table is a data table too (see assets/table.html), but only if `filter` actually
+     yields a category there: the partial splits on commas and drops blanks, so `filter=","`
+     normalizes to no filter at all. Test for a comma-and-whitespace-free character rather than
+     duplicating that split/trim/append loop here.
 
      Reported against the page rather than the shortcode's position: Hugo may render the same
      shortcode more than once (the summary and the content are separate renders, at different
      offsets), and a position would then turn one table into two distinct warnings. */}}
 {{ $page := .Page }}
-{{ $filtered := ne (trim (printf "%v" (or $args.filter "")) " ") "" }}
+{{ $filtered := gt (len (findRE `[^,\s]` (printf "%v" (or $args.filter "")) 1)) 0 }}
 {{ if or $args.sortable $args.paginate $args.searchable $filtered }}
     {{ with $page.Scratch.Get "modules" }}
         {{ if in (.optional | default slice) "simple-datatables" }}
