@@ -60,16 +60,24 @@ present payoff.
 
 ## Scope
 
-In scope:
+This work spans two repositories.
+
+**hinode** (the capability):
 
 - `layouts/_shortcodes/example.html`
 - `layouts/_shortcodes/example-bookshop.html` (shares the same structure file)
 - `data/structures/example.yml`
 - `assets/scss/components/_docs.scss`
-- an exercising example in `exampleSite`
-- documentation guidance (carried into gethinode.com separately; no code there)
 
-Out of scope: iframe previews, container-query adoption, keyboard-accessible resizing.
+**mod-docs** (the application):
+
+- `content/components/*.md` — enable `resize` on the eligible pages listed below
+
+The documentation pages live in mod-docs, which the Hinode exampleSite imports. That makes the
+exampleSite the integration surface where both halves can be verified together.
+
+Out of scope: iframe previews, container-query adoption, keyboard-accessible resizing, and the
+`content/blocks/*.md` pages (block-level layouts are section-driven and not the target here).
 
 ## Design
 
@@ -169,6 +177,56 @@ are skipped, since a `0` floor would sit below the base 200px.
 No PurgeCSS safelist entry is required. The classes are written literally in the template, so each
 site's `hugo_stats.json` captures the ones it actually renders.
 
+## Component eligibility (mod-docs)
+
+A component is eligible only if narrowing its container produces **real reflow** through `flex-wrap`
+or intrinsic sizing. It is rejected if it depends on viewport media queries, overflows without
+wrapping (and is therefore clipped by the required `overflow: hidden`), renders an overlay outside
+the preview box, or manages its own size in JavaScript.
+
+Verified against Bootstrap's SCSS in `_vendor/github.com/twbs/bootstrap/scss/`:
+
+| Component | Behavior when the container narrows | Verdict |
+| --- | --- | --- |
+| `.nav` (tabs, pills) | `display: flex; flex-wrap: wrap` — wraps onto new lines | eligible |
+| `.breadcrumb` | `display: flex; flex-wrap: wrap` — wraps | eligible |
+| `.table-responsive` | `overflow-x: auto` — grows a scrollbar | eligible |
+| `.btn-group` | `inline-flex`, no wrap — clipped | rejected |
+| `.pagination` | `display: flex`, no wrap — clipped | rejected |
+| `.navbar-expand-*` | `media-breakpoint-up` — viewport query, never collapses | rejected |
+| `card-group` (Hinode) | emits `row-cols-{bp}-N` — viewport query | rejected |
+| `timeline` (Hinode) | contains `media-breakpoint-up(sm)` | rejected |
+| `card` (Hinode) | no media queries — narrows, text rewraps | eligible |
+
+### Pages to enable
+
+1. `content/components/navs-and-tabs.md` — the flagship case; tabs visibly wrap
+2. `content/components/breadcrumb.md`
+3. `content/components/table.md`
+4. `content/components/image.md`
+5. `content/components/carousel.md`
+6. `content/components/card.md`
+
+`table` and `carousel` are **verify-in-browser**: both involve JavaScript that may cache layout
+(DataTables via mod-simple-datatables; the Bootstrap carousel). If either fails to redraw on
+container resize, drop it from the list rather than adding a JS resize observer — that would exceed
+the CSS-only remit of this design.
+
+Not every example on an enabled page gets the grip. Only the examples that demonstrate reflow do; the
+precise blocks are chosen during implementation and confirmed at the review gate.
+
+### Rejected
+
+`navbar` is rejected despite being Bootstrap's own showcase for the feature. On Bootstrap 5,
+`navbar-expand-*` is a viewport media query, so dragging the grip squeezes the navbar without ever
+collapsing it into the toggler — precisely the behavior a reader would expect and not get. This is
+the single most misleading place we could put a grip. Revisit if Hinode adopts container queries.
+
+Also rejected: `button-group`, `pagination` (clipped); `tooltip`, `popover`, `toast`, `modal`,
+`dropdown` (overlays clipped by `overflow: hidden`); `map` (Leaflet requires `invalidateSize()` on
+container resize and would render broken); and the inline atoms `badge`, `kbd`, `abbr`, `mark`,
+`sub`, `sup`, `ins`, `spinner`, `icon`, where there is nothing to see.
+
 ## Constraints
 
 **No inline styles.** Hinode templates must never emit `style="…"` attributes or inline `<style>`
@@ -192,23 +250,50 @@ These are documented, not fixed:
 RTL is not a concern: Hinode ships no right-to-left languages (`i18n/` holds en, nl, fr, de, pl,
 pt-br, zh-hans, zh-hant).
 
-## Testing
+## Verification
 
-- Add a resizable example to `exampleSite`. This is load-bearing beyond eyeballing: without a
-  rendered instance, `.example-resizable` never enters `hugo_stats.json` and PurgeCSS strips the rule
-  from the theme's own bundle.
-- Verify the grip in light and dark mode.
-- Verify `resize=true` with `show-preview=false` logs the warning and degrades to a normal preview.
-- Verify each `min-width` token produces the expected floor.
-- Run `npm run lint:styles` and build the exampleSite.
+### Cross-repo dev server
 
-## Editorial guidance (for gethinode.com)
+The Hinode exampleSite imports mod-docs, so it is where the theme change and the docs change render
+together. To wire the local mod-docs checkout into it:
 
-Enable `resize` where narrowing produces visible reflow: button groups, nav pills, breadcrumbs,
-responsive tables, card groups, fluid images. Skip inline atoms (badge, kbd, abbr, spinner), where
-there is nothing to see, and anything overlay-based (dropdown, tooltip, popover, modal), which
-limitation 2 would clip.
+- Add `use ../../mod-docs` to `exampleSite/hinode.work`. Workspace `use` directives take precedence
+  over config replacements. This is a **local edit — do not commit it**; revert `hinode.work` (and
+  `hugo_stats.json`) afterwards.
+- Serve with the project-pinned binary, `node_modules/.bin/hugo`. The system `hugo` is older and
+  fails with `"modulequeries" is not a valid cache name`.
+- Do **not** use `npm run start:example` / `build:example` for this: their prestart step re-vendors
+  modules from the remote and would wipe the local mod-docs changes.
+- Do **not** start a second `hugo server` alongside one already running — it poisons the shared CSS
+  cache in `resources/_gen`.
+
+PurgeCSS caveat: on a cold build, PurgeCSS can strip classes that appear on only one page. If
+`.example-resizable` goes missing from the built CSS, warm the build (or add a safelist entry) rather
+than assuming the SCSS is wrong.
+
+### Review gate
+
+The modified pages are presented on the local dev server for manual review **before anything is
+committed**. This is where the verify-in-browser items (`table`, `carousel`) are resolved, and where
+the per-example selection within each page is confirmed.
+
+### Checks
+
+- Each enabled page: grip appears, drags, and the component visibly reflows.
+- Grip renders correctly in light and dark mode.
+- `resize=true` with `show-preview=false` logs the warning and degrades to a normal preview.
+- Each `min-width` token produces the expected floor.
+- No overlay-bearing example is clipped (none should be enabled).
+- `npm run lint` in both repos.
 
 ## Delivery
 
-Branch fresh from `develop`; the current `feat/table-wrap-datatables` branch is unrelated work.
+Two coordinated changes:
+
+1. **hinode** — the capability. Branch fresh from `develop`; the current `feat/table-wrap-datatables`
+   branch is unrelated work.
+2. **mod-docs** — the application. Branch fresh from `main`. Depends on a Hinode release, so the
+   docs change merges only after the theme change ships and the module reference is bumped.
+
+Note: the local mod-docs checkout was 268 commits behind `origin/main` (a stale mod-template
+scaffold) and was fast-forwarded on 2026-07-14 before this work began.
