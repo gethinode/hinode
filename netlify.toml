@@ -1,6 +1,6 @@
 # Auto-generated file - do not modify
 [build]
-  command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example'
+  command = 'git fetch --tags --force > /dev/null 2>&1; HUGO_HINODE_VERSION=$(git describe --tags --abbrev=0 2> /dev/null) npm run build:example'
   publish = 'exampleSite/public'
 
   [build.environment]
@@ -13,14 +13,14 @@
 
 [context]
   [context.branch-deploy]
-    command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'git fetch --tags --force > /dev/null 2>&1; HUGO_HINODE_VERSION=$(git describe --tags --abbrev=0 2> /dev/null) npm run build:example -- -b $DEPLOY_PRIME_URL'
 
   [context.deploy-preview]
-    command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example -- -b $DEPLOY_PRIME_URL'
+    command = 'git fetch --tags --force > /dev/null 2>&1; HUGO_HINODE_VERSION=$(git describe --tags --abbrev=0 2> /dev/null) npm run build:example -- -b $DEPLOY_PRIME_URL'
 
 [dev]
   autoLaunch = false
-  command = 'HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run start:example'
+  command = 'git fetch --tags --force > /dev/null 2>&1; HUGO_HINODE_VERSION=$(git describe --tags --abbrev=0 2> /dev/null) npm run start:example'
   framework = '#custom'
   port = 8888
   publish = 'public'
