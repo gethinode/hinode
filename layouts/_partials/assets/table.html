@@ -18,7 +18,27 @@
 
 {{/* Initialize local variables */}}
 {{ $breakpoint := site.Params.main.breakpoint | default "md" }}
-{{ $dataTable := or $args.sortable $args.paginate $args.searchable }}
+
+{{/* `filter` accepts a slice or a comma-separated string. A shortcode named parameter is always a
+     string, and InitArgs validates an argument's kind without casting between kinds, so a string
+     arrives here unsplit - and `range` cannot iterate a string. Normalize to a slice of trimmed,
+     non-empty values, so `filter="widget, gadget"` behaves like `filter="widget,gadget"`. */}}
+{{ $filter := slice }}
+{{ with $args.filter }}
+    {{ $values := . }}
+    {{ if not (reflect.IsSlice $values) }}{{ $values = split (printf "%v" $values) "," }}{{ end }}
+    {{ range $values }}
+        {{ $value := trim (printf "%v" .) " " }}
+        {{ if $value }}{{ $filter = $filter | append $value }}{{ end }}
+    {{ end }}
+{{ end }}
+
+{{/* Filtering runs through simple-datatables' row model, so it composes with sorting, paging and
+     free-text search. A filtered table is therefore always a data table, even when all three are
+     off: the library still initializes, and `search()` still filters it - `searchable` gates only
+     the search input, not the method. This keeps `filter` self-sufficient, so an author never has
+     to switch on sorting they do not want just to get filtering. */}}
+{{ $dataTable := or $args.sortable $args.paginate $args.searchable (gt (len $filter) 0) }}
 {{ $wrap := and $args.wrap (ne $breakpoint "xs") }}
 
 {{/* `table-wrap` is an internal marker owned by the templates, not a class a caller may set: it
@@ -50,7 +70,6 @@
 {{ end }}
 
 {{/* Filter */}}
-{{ $filter := $args.filter }}
 {{ $filterCol := $args.filterCol | default 1 }}
 {{ $filterId := "" }}
 {{ if $filter }}
@@ -107,7 +126,7 @@
             {{ $input | safeHTML }}
         {{ end }}
     {{ else }}
-        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ $wrapper }}"{{ if $filter }} data-filter-container="{{ $filterId }}"{{ end }}>
+        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ $wrapper }}">
         {{ $input | safeHTML }}
         </div>
     {{ end }}
