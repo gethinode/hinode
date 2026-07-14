@@ -11,8 +11,33 @@
     padding-right: 1rem;
 }
 
-.table-border-bottom-wrap {
-    border-bottom-style: none !important
+// Bootstrap stripes every odd row. A wrapped table renders two rows per record - the data row
+// and the row holding the wrapped last column - so `odd` would stripe every record instead of
+// alternating. Recompute the stripes per record pair.
+.table-wrap.table-striped {
+    > tbody > tr:nth-of-type(n) > * {
+        --bs-table-color-type: initial;
+        --bs-table-bg-type: initial;
+    }
+
+    > tbody > tr:nth-of-type(4n + 1) > * {
+        --bs-table-color-type: var(--bs-table-striped-color);
+        --bs-table-bg-type: var(--bs-table-striped-bg);
+    }
+}
+
+@include media-breakpoint-down(#{$main-breakpoint}) {
+    // Below the breakpoint the data row and the row holding the wrapped column must read as a
+    // single record, so the data row drops its bottom border.
+    .table-border-bottom-wrap {
+        border-bottom-style: none !important;
+    }
+
+    // Here the second row of each pair is visible too, so it joins its record's stripe.
+    .table-wrap.table-striped > tbody > tr:nth-of-type(4n + 2) > * {
+        --bs-table-color-type: var(--bs-table-striped-color);
+        --bs-table-bg-type: var(--bs-table-striped-bg);
+    }
 }
 
 @if $enable-dark-mode {
