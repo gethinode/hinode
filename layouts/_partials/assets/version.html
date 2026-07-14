@@ -13,24 +13,25 @@
     {{- $result := "" -}}
     {{- if gt (len $match) 0 -}}
         {{- $result = (index (split (index $match 0) " ") 1) -}}
-        {{- $result = strings.TrimPrefix "v" $result -}}
     {{- end -}}
 
     {{- return $result -}}
 {{- end -}}
 
-{{/* 
+{{/*
     Fallback to initialize the Hinode version from an environment variable. This applies to the main
-    Hinode repository including the example site (which is published to demo.gethinode.com). The following
-    command initializes the HUGO_HINODE_VERSION using the relevant git tag on macOS/Linux:
-    HUGO_HINODE_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1)) npm run build:example
+    Hinode repository including the example site (which is published to demo.gethinode.com), as it
+    resolves Hinode as a local workspace module instead of a versioned dependency. The following command
+    initializes the HUGO_HINODE_VERSION using the latest tag of the built commit on macOS/Linux:
+    HUGO_HINODE_VERSION=$(git describe --tags --abbrev=0) npm run build:example
 */}}
 {{- define "_partials/inline/env-version.html" -}}
     {{ return getenv "HUGO_HINODE_VERSION"  }}
 {{- end -}}
 
 {{- $version := partial "inline/mod-version.html" . -}}
-{{ if not $version }}
-    {{- $version = partial "inline/env-version.html" . | default "unknown-revision" -}}
-{{ end }}
+{{- if not $version -}}
+    {{- $version = partial "inline/env-version.html" . -}}
+{{- end -}}
+{{- $version = $version | default "unknown-revision" | strings.TrimPrefix "v" -}}
 {{- print $version -}}
