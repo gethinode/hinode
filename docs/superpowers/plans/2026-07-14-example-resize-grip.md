@@ -17,17 +17,34 @@
 - **No JavaScript.** If a component needs a resize observer to work, drop that component instead of adding JS.
 - **Bootstrap 5 breakpoints will not fire on resize.** Never write docs copy claiming the grip demonstrates breakpoint or collapse behavior.
 - **Version string for new arguments:** `release: v3.1.0` (Hinode shipped v3.0.0; this is the next feature release).
-- **Hugo binary:** always `./node_modules/.bin/hugo` from the hinode repo root. The system `hugo` is older and fails with `"modulequeries" is not a valid cache name`.
+- **Workspace:** all hinode work happens in the isolated worktree at
+  `/Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip`,
+  on branch `worktree-example-resize-grip`, based on `origin/main`. The user's main checkout is on
+  unrelated work with uncommitted changes — do not touch it.
+- **Hugo invocation — this exact form, every time:**
+
+  ```bash
+  cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+  export PATH="$PWD/node_modules/.bin:$PATH"
+  hugo --logLevel warn -s exampleSite
+  ```
+
+  Both halves matter. The pinned binary is required (the system `hugo` is older and fails with
+  `"modulequeries" is not a valid cache name`), **and** `node_modules/.bin` must be on `PATH` or Hugo
+  panics with `POSTCSS: … binary with name "postcss" not found in PATH`. The npm scripts work only
+  because npm puts `node_modules/.bin` on `PATH` for you.
 - **Never run `npm run start:example` or `npm run build:example` during this work.** Their prestart step re-vendors modules from the remote and wipes local mod-docs changes.
 - **Never start a second `hugo server`** while one is already running — it poisons the shared CSS cache in `resources/_gen`.
-- **`exampleSite/hinode.work` must not be committed.** The `use ../../mod-docs` line is a local-only edit, reverted in Task 8.
+- **`exampleSite/hinode.work` must not be committed.** The `use …/mod-docs` line is a local-only edit, reverted in Task 8.
+- **Baseline (verified 2026-07-14):** `hugo -s exampleSite` exits 0, builds 96 pages, no errors. One
+  pre-existing `.Site.AllPages` deprecation warning is expected and is not ours. `npm test` passes.
 - **Commits:** Angular Conventional Commits. Body lines ≤ 100 chars (commitlint enforces this). Pre-commit hooks run linters; if a hook reformats files, re-commit.
 
 ---
 
 ## File Structure
 
-**hinode** (branch `feat/example-resize-grip`, from `develop`):
+**hinode** (worktree `.claude/worktrees/example-resize-grip`, branch `worktree-example-resize-grip`, from `origin/main`):
 
 | File | Responsibility |
 | --- | --- |
@@ -50,70 +67,21 @@
 
 ---
 
-## Task 0: Branch setup
+## Task 0: Workspace setup — ALREADY DONE (2026-07-14)
 
-Three resize commits (`8bd06198` design, `23fd65f5` spec extension, `94a60c84` plan) were made on `feat/table-wrap-datatables`, which is unrelated work. They are **interleaved** with the table-wrap commits, not stacked on top:
+No action required. Recorded here so the state is auditable.
 
-```text
-c7fc9ab0  table design
-2e5e3b15  table plan
-49f2b94c  table fixture
-ef9d0d97  table plan note
-8bd06198  ← resize design
-d046e057  table style
-23fd65f5  ← resize spec extension
-94a60c84  ← resize plan
-```
+The four design/plan commits were originally made on `feat/table-wrap-datatables` (unrelated work), **interleaved** with that branch's own commits rather than stacked on top — so any `git reset --hard HEAD~N` would have destroyed table-wrap work. They were instead cherry-picked, additively, into an isolated worktree:
 
-A `git reset --hard HEAD~2` would therefore destroy a table-wrap commit and still leave the resize design behind. Do not do that.
+- **Worktree:** `/Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip`
+- **Branch:** `worktree-example-resize-grip`, based on `origin/main` (`1d119630`)
+- **Carries:** `37b9a378` design, `74345550` spec extension, `97239e0f` plan, `751f3d0f` plan fix
+- **Dependencies installed** (`pnpm install`); baseline verified green.
 
-**Files:**
+Two loose ends, both harmless and both the user's call:
 
-- Modify: none (git only)
-
-- [ ] **Step 1: Confirm the interleaving still matches**
-
-```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
-git log --oneline develop..feat/table-wrap-datatables
-```
-
-Expected: the eight commits above. If the shape differs, stop and re-derive the commit list before touching anything.
-
-- [ ] **Step 2: Take a safety net**
-
-```bash
-git branch backup/table-wrap-datatables feat/table-wrap-datatables
-```
-
-Expected: a branch pointing at the current tip, so any mistake below is recoverable with `git reset --hard backup/table-wrap-datatables`.
-
-- [ ] **Step 3: Create the resize branch (additive — nothing is destroyed)**
-
-```bash
-git checkout develop
-git pull --ff-only
-git checkout -b feat/example-resize-grip
-git cherry-pick 8bd06198 23fd65f5 94a60c84
-git log --oneline -4
-```
-
-Expected: the three resize commits sit on top of `develop`, and no table-wrap commit came along.
-
-- [ ] **Step 4: Rebuild the table branch without the resize commits — ASK THE USER FIRST**
-
-This rewrites a branch the user owns, so **do not run it without explicit confirmation.** If the user declines, leave `feat/table-wrap-datatables` alone; the resize docs will simply appear as extra files in its diff, which is untidy but harmless.
-
-On confirmation, rebuild it from `develop` with only the five table commits, in order:
-
-```bash
-git checkout -B feat/table-wrap-datatables develop
-git cherry-pick c7fc9ab0 2e5e3b15 49f2b94c ef9d0d97 d046e057
-git log --oneline develop..HEAD
-git checkout feat/example-resize-grip
-```
-
-Expected: five table-wrap commits, no resize commits. Verify the table-wrap working tree still builds before deleting `backup/table-wrap-datatables`.
+1. The original four commits still exist on `feat/table-wrap-datatables`. They are docs-only, so they will show as extra files in that branch's diff. Cleaning them up means rewriting a branch the user owns — **ask before doing it**, and note `backup/table-wrap-datatables` already exists as a safety net.
+2. A local `feat/example-resize-grip` branch (off `develop`) was created before the switch to a worktree and is now redundant. Delete it once this work lands: `git branch -D feat/example-resize-grip`.
 
 ---
 
@@ -167,8 +135,9 @@ A resizable preview floored at the `md` breakpoint (768px).
 - [ ] **Step 2: Run the build to verify the arguments are rejected**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn 2>&1 | grep -i "resize\|invalid argument" | head
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite 2>&1 | grep -i "resize\|invalid argument" | head
 ```
 
 Expected: FAIL — warnings that `resize` / `min-width` are not valid arguments for structure `example`. This proves the argument system is the gate.
@@ -207,8 +176,9 @@ In `data/structures/example.yml`, insert both arguments into the `arguments:` ma
 - [ ] **Step 4: Run the build to verify the arguments are accepted**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn 2>&1 | grep -i "resize\|invalid argument" | head
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite 2>&1 | grep -i "resize\|invalid argument" | head
 ```
 
 Expected: PASS — no output. The arguments validate. (The grip is not rendered yet; that is Task 2.)
@@ -216,7 +186,7 @@ Expected: PASS — no output. The arguments validate. (The grip is not rendered 
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 git add data/structures/example.yml exampleSite/content/en/resize-demo.md
 git commit -m "feat(components): add resize and min-width arguments to example shortcode
 
@@ -240,8 +210,9 @@ grip markup and styling follow."
 - [ ] **Step 1: Write the failing test — assert the class reaches the rendered HTML**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn >/dev/null 2>&1
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite >/dev/null 2>&1
 grep -o 'example-resizable[a-z-]*' public/en/resize-demo/index.html | sort -u
 ```
 
@@ -306,8 +277,9 @@ with:
 - [ ] **Step 4: Run the test to verify the class renders**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn >/dev/null 2>&1
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite >/dev/null 2>&1
 grep -o 'example-resizable[a-z-]*' public/en/resize-demo/index.html | sort -u
 ```
 
@@ -331,8 +303,9 @@ Temporarily append to `exampleSite/content/en/resize-demo.md`:
 Then run:
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn 2>&1 | grep "resize" | head -2
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite 2>&1 | grep "resize" | head -2
 ```
 
 Expected: a warning containing `Argument 'resize' requires 'show-preview' to be enabled`.
@@ -342,7 +315,7 @@ Now **remove that temporary block** from `resize-demo.md` and rebuild to confirm
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 git add layouts/_shortcodes/example.html
 git commit -m "feat(components): render resize grip wrapper in example shortcode
 
@@ -420,8 +393,9 @@ with:
 - [ ] **Step 3: Verify the exampleSite still builds clean**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn 2>&1 | grep -iv "^$" | head
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite 2>&1 | grep -iv "^$" | head
 ```
 
 Expected: PASS — no warnings or errors.
@@ -429,7 +403,7 @@ Expected: PASS — no warnings or errors.
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 git add layouts/_shortcodes/example-bookshop.html
 git commit -m "feat(components): render resize grip wrapper in example-bookshop
 
@@ -453,8 +427,9 @@ The rules live in `_docs.scss` because it is already the documentation-UI bucket
 - [ ] **Step 1: Write the failing test — assert the CSS reaches the bundle**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn >/dev/null 2>&1
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite >/dev/null 2>&1
 grep -rho "resize:horizontal\|resize: horizontal" public/ --include=*.css | head
 ```
 
@@ -487,8 +462,9 @@ Append to `assets/scss/components/_docs.scss`:
 - [ ] **Step 3: Run the test to verify the CSS is in the bundle**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo --logLevel warn >/dev/null 2>&1
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo --logLevel warn -s exampleSite >/dev/null 2>&1
 grep -rho "\.example-resizable[a-z-]*" public/ --include=*.css | sort -u
 ```
 
@@ -506,7 +482,7 @@ If `.example-resizable` itself is missing, that is PurgeCSS stripping a class th
 - [ ] **Step 4: Lint**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 npm run lint:styles
 ```
 
@@ -532,16 +508,16 @@ Uses the browser-native resize grip. Breakpoint floors are generated from
 
 - [ ] **Step 1: Add the workspace directive**
 
-`exampleSite/hinode.work` currently reads:
+In the worktree, `exampleSite/hinode.work` is the committed version and reads:
 
 ```text
 go 1.19
 
 use .
 use ../
-use ../../mod-simple-datatables
-use ../../mod-utils
 ```
+
+(The user's main checkout has extra `use` lines for `mod-simple-datatables` and `mod-utils`, but those are uncommitted local edits belonging to their table-wrap work. They are not present here, and we do not need them.)
 
 Add one line so it reads:
 
@@ -550,18 +526,19 @@ go 1.19
 
 use .
 use ../
-use ../../mod-docs
-use ../../mod-simple-datatables
-use ../../mod-utils
+use ../../../../../mod-docs
 ```
+
+**The five `../` are not a typo.** The path is resolved relative to `exampleSite/`, which sits inside the worktree at `hinode/.claude/worktrees/example-resize-grip/`. Climbing out takes five levels: `exampleSite` → worktree root → `worktrees` → `.claude` → `hinode` → `gethinode`, where `mod-docs` is a sibling. In a normal (non-worktree) checkout the same directive would be `use ../../mod-docs`.
 
 Workspace `use` directives take precedence over config replacements.
 
 - [ ] **Step 2: Confirm the local mod-docs is resolved, not the cached module**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo config mounts 2>/dev/null | grep -i "mod-docs" | head -3
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo config mounts -s exampleSite 2>/dev/null | grep -i "mod-docs" | head -3
 ```
 
 Expected: paths under `/Users/mark/Development/GitHub/gethinode/mod-docs`, **not** under `Library/Caches/hugo_cache`.
@@ -569,7 +546,7 @@ Expected: paths under `/Users/mark/Development/GitHub/gethinode/mod-docs`, **not
 - [ ] **Step 3: Do not commit**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 git status --short exampleSite/hinode.work
 ```
 
@@ -749,8 +726,9 @@ This is a hard stop. Nothing in mod-docs gets committed until the user has looke
 - [ ] **Step 1: Start the dev server**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode/exampleSite
-../node_modules/.bin/hugo server --port 1313
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
+export PATH="$PWD/node_modules/.bin:$PATH"
+hugo server --port 1313 -s exampleSite
 ```
 
 Run this in the background. Do **not** use `npm run start:example` (it re-vendors and wipes the local mod-docs changes), and do **not** start it if a `hugo server` is already running (it poisons the shared CSS cache).
@@ -767,7 +745,7 @@ http://localhost:1313/en/docs/components/card/
 http://localhost:1313/en/resize-demo/
 ```
 
-(If the docs pages 404, check `hugo config mounts | grep mod-docs` from Task 5 Step 2 — the workspace directive is not resolving.)
+(If the docs pages 404, check `hugo config mounts -s exampleSite | grep mod-docs` from Task 5 Step 2 — the workspace directive is not resolving.)
 
 - [ ] **Step 3: Confirm each item, and report results honestly**
 
@@ -811,7 +789,7 @@ Requires the resize argument added in Hinode v3.1.0."
 - [ ] **Step 2: Revert the local workspace edit**
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
+cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 git checkout exampleSite/hinode.work
 git status --short
 ```
