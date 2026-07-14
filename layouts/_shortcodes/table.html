@@ -17,6 +17,43 @@
     )}}
 {{- end -}}
 
+{{/* A data table needs both the simple-datatables module's JavaScript and its per-page stylesheet,
+     and Hinode loads an optional module's assets only for pages that list it in frontmatter. A
+     render-time dependency cannot be relied on to add them: a value registered while the content
+     renders is "indeterminate until Hugo renders the page content"
+     (https://gohugo.io/methods/page/store/), which holds only for a page without a `description` in
+     its frontmatter - see assets/lightbox.html. Warn rather than fail silently.
+
+     The check lives in the shortcode rather than in assets/table.html because only here is `.Page`
+     reliably the content page; a Bookshop block resolves it to the rendering template's page
+     instead, which would warn about pages that hold no table at all. Skipped when the site
+     configures the module as `core` or `critical`, since it then loads on every page anyway.
+
+     A filtered table is a data table too (see assets/table.html); a shortcode parameter is always a
+     string, so any non-empty `filter` counts.
+
+     Reported against the page rather than the shortcode's position: Hugo may render the same
+     shortcode more than once (the summary and the content are separate renders, at different
+     offsets), and a position would then turn one table into two distinct warnings. */}}
+{{ $page := .Page }}
+{{ $filtered := ne (trim (printf "%v" (or $args.filter "")) " ") "" }}
+{{ if or $args.sortable $args.paginate $args.searchable $filtered }}
+    {{ with $page.Scratch.Get "modules" }}
+        {{ if in (.optional | default slice) "simple-datatables" }}
+            {{ $pageModules := slice | append $page.Params.modules }}
+            {{ if not (in $pageModules "simple-datatables") }}
+                {{ partial "utilities/LogWarn.html" (dict
+                    "partial"  "shortcodes/table.html"
+                    "warnid"   "warn-missing-module"
+                    "msg"      "A sortable, paginated, searchable or filtered table requires the simple-datatables module"
+                    "details"  (slice "Add `modules: [\"simple-datatables\"]` to the page frontmatter")
+                    "file"     $page.File
+                )}}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
 {{/* Main code */}}
 {{ if not $args.err }}
     {{ partial "assets/table.html" (dict

@@ -69,29 +69,11 @@
     {{ $attributes = printf "%s data-table-wrap=true data-table-wrap-breakpoint=%s" $attributes $breakpoint }}
 {{ end }}
 
-{{/* A data table needs both the module's JavaScript and its per-page stylesheet, and Hinode loads an
-     optional module's assets only for pages that list it in frontmatter. head.html emits the
-     stylesheet before the content is rendered, so a render-time dependency cannot add it - warn
-     rather than fail silently. Skipped when the site configures the module as `core` or `critical`,
-     since it then loads on every page anyway. */}}
-{{ if $dataTable }}
-    {{ with $args.page.Scratch.Get "modules" }}
-        {{ if in (.optional | default slice) "simple-datatables" }}
-            {{ $pageModules := slice | append $args.page.Params.modules }}
-            {{ if not (in $pageModules "simple-datatables") }}
-                {{ partial "utilities/LogWarn.html" (dict
-                    "partial" "assets/table.html"
-                    "warnid"  "warn-missing-module"
-                    "msg"     "A sortable, paginated, searchable or filtered table requires the simple-datatables module. Add `modules: [\"simple-datatables\"]` to the page frontmatter."
-                    "file"    $args.page.File
-                )}}
-            {{ end }}
-        {{ end }}
-    {{ end }}
-{{ end }}
-
 {{/* Filter */}}
-{{ $filterCol := $args.filterCol | default 1 }}
+{{/* `filter-col` carries a default of 1 in mod-utils, and InitArgs applies a default only when the
+     argument is nil - so an explicit `0` arrives here intact. Hugo's `default` treats `0` as empty,
+     so piping through it would silently rewrite column 0 to column 1. Read the argument as-is. */}}
+{{ $filterCol := $args.filterCol }}
 {{ $filterId := "" }}
 {{ if $filter }}
     {{ $store := $args.page.Store }}
