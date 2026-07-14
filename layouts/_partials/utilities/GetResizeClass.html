@@ -1,15 +1,22 @@
 {{/*
-    Returns the wrapper class for a resizable example preview, or an empty string when no grip
-    should be rendered. A grip is meaningless without a preview, so that combination warns and
-    degrades to no grip.
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
 
-    @param {bool} resize Whether a resize grip is requested.
-    @param {string} minWidth Breakpoint token for the lower bound, or "none".
-    @param {bool} showPreview Whether the calling shortcode renders a preview.
-    @param {string} caller Name of the calling shortcode, used in the warning message.
-    @param {page} file File of the calling page, used in the warning message.
-    @param {string} position Position of the shortcode, used in the warning message.
-    @returns {string}
+{{/*
+    Returns the wrapper class of a resizable example preview, or an empty string when no grip
+    should be rendered. Expects the arguments `resize` (bool), `minWidth` (breakpoint token, or
+    "none"), and `showPreview` (bool), alongside the `caller`, `file`, and `position` of the
+    calling shortcode used to report warnings.
+
+    The grip itself is the browser-native handle of the CSS `resize` property; the class merely
+    activates it. The width floor is expressed as a breakpoint token rather than a length, as the
+    theme targets a Content Security Policy without `unsafe-inline` for styles, and a length would
+    require an inline style attribute.
+
+    A grip is meaningless without a preview to resize, so that combination raises a warning and
+    degrades to no grip.
 */}}
 
 {{- $resize := .resize -}}
