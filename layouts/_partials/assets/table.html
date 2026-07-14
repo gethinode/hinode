@@ -1,33 +1,14 @@
-{{/* 
+{{/*
     Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 */}}
 
-{{ define "_partials/inline/table.html" }}
-    {{ $page := .page }}
-    {{ $input := .input }}
-    {{ $attributes := .attributes }}
-    {{ $class := .class }}
-    {{ $wrap := .wrap }}
-
-    {{ if $wrap }}{{ $input = printf "%s\n{.table-wrap}" (chomp $input) }}{{ end }}    
-    {{- $input = $input | $page.RenderString }}
-    {{ $regex := `<table\s*class="(.+?)"` }}
-    {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
-    {{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
-
-    {{- $new := printf `<table class="%s" %s` $target (trim $attributes " ") -}}
-    {{ $input := replaceRE $regex $new $input 1 -}}
-
-    {{ return $input }}
-{{ end }}
-
 {{/* Initialize arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "table" "args" . "group" "partial")}}
 {{ if or $args.err $args.warnmsg }}
-    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict 
-        "partial" "assets/table.html" 
+    {{ partial (cond $args.err "utilities/LogErr.html" "utilities/LogWarn.html") (dict
+        "partial" "assets/table.html"
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
@@ -36,8 +17,12 @@
 {{ end }}
 
 {{/* Initialize local variables */}}
+{{ $breakpoint := site.Params.main.breakpoint | default "md" }}
+{{ $dataTable := or $args.sortable $args.paginate $args.searchable }}
+{{ $wrap := and $args.wrap (ne $breakpoint "xs") }}
+
 {{ $class := or $args.class "" }}
-{{ if or $args.sortable $args.paginate $args.searchable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if $dataTable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
 {{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
@@ -52,6 +37,14 @@
 {{ end }}
 {{ if $args.searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
 
+{{/* A wrapped data table is rendered uniformly: simple-datatables builds its row model from this
+     DOM, and applies the wrapped layout below the breakpoint through its tableRender hook. A plain
+     wrapped table carries both layouts in a single table, switched with display utilities, so it
+     needs no JavaScript. */}}
+{{ if and $wrap $dataTable }}
+    {{ $attributes = printf "%s data-table-wrap=true data-table-wrap-breakpoint=%s" $attributes $breakpoint }}
+{{ end }}
+
 {{/* Filter */}}
 {{ $filter := $args.filter }}
 {{ $filterCol := $args.filterCol | default 1 }}
@@ -63,11 +56,16 @@
 
 {{/* Main code */}}
 {{ if not $args.err }}
-    {{- $breakpoint := $args.page.Scratch.Get "breakpoint" -}}
-    {{ $params := dict "page" $args.page "input" $args.input "attributes" $attributes "class" $class }}
-    {{ $regular := partial "inline/table.html" (merge $params (dict "wrap" false)) }}
-    {{ $wrapped := "" }}
-    {{ if $args.wrap }}{{ $wrapped = partial "inline/table.html" (merge $params (dict "wrap" true)) }}{{ end }}
+    {{ $input := $args.input }}
+    {{ if and $wrap (not $dataTable) }}{{ $input = printf "%s\n{.table-wrap}" (chomp $input) }}{{ end }}
+    {{ $input = $input | $args.page.RenderString }}
+
+    {{ $regex := `<table\s*class="(.+?)"` }}
+    {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
+    {{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
+    {{ $new := printf `<table class="%s" %s` $target (trim $attributes " ") }}
+    {{ $input = replaceRE $regex $new $input 1 }}
+
     {{ $wrapper := $args.wrapper | default "" }}
 
     {{ if $filter }}
@@ -88,19 +86,14 @@
     {{ end }}
 
     {{ if eq $args.breakpoint "none" }}
-        {{ $regular | safeHTML }}
-        {{ with $wrapped }}
-            {{ if $wrapper }}<div class="{{ $wrapper }}">{{ . | safeHTML }}</div>{{ else }}{{ . | safeHTML }}{{ end }}
+        {{ if $wrapper }}
+            <div class="{{ $wrapper }}">{{ $input | safeHTML }}</div>
+        {{ else }}
+            {{ $input | safeHTML }}
         {{ end }}
     {{ else }}
-        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ if $wrapped }}d-none d-{{ $breakpoint.current }}-block{{ end }} {{ $wrapper }}"{{ if $filter }} data-filter-container="{{ $filterId }}"{{ end }}>
-        {{ $regular | safeHTML }}
+        <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} {{ $wrapper }}"{{ if $filter }} data-filter-container="{{ $filterId }}"{{ end }}>
+        {{ $input | safeHTML }}
         </div>
-
-        {{ with $wrapped }}
-            <div class="table-responsive{{- with $args.breakpoint }}-{{ . }}{{ end }} d-{{ $breakpoint.current }}-none {{ $wrapper }}"{{ if $filter }} data-filter-container="{{ $filterId }}"{{ end }}>
-            {{ . | safeHTML }}
-            </div>
-        {{ end }}
     {{ end }}
 {{ end }}

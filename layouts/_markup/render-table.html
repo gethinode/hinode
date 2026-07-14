@@ -1,16 +1,30 @@
 {{/* Adapted from https://gohugo.io/render-hooks/tables/ */}}
 
-{{/* Ensure presence of `.table` class attribute to trigger Bootstrap styling */}}
-{{ $attr := .Attributes }}
-{{ $class := split $attr.class " " }}
-{{ if not (in $class "table") }}
-    {{ $attr = merge $attr (dict "class" (trim (delimit ($class | append "table") " ") " ")) }}
-{{ end }}
+{{/* Wrapping moves the last column onto a row of its own below the site's main breakpoint. It is a
+     no-op at `xs` (Bootstrap has no `xs` display-utility infix) and on a single-column table
+     (nothing to wrap). The marker class is dropped when it does not apply, so the wrap-specific
+     striping rules cannot misfire on a table that renders normally. */}}
+{{ $breakpoint := site.Params.main.breakpoint | default "md" }}
+{{ $cols := 0 }}
+{{ range .THead }}{{ $cols = len . }}{{ end }}
 
-{{ $wrap := in $class "table-wrap" }}
+{{ $attr := .Attributes }}
+{{ $given := split (or $attr.class "") " " }}
+{{ $wrap := and (in $given "table-wrap") (ne $breakpoint "xs") (gt $cols 1) }}
+
+{{/* Rebuild the class list: drop empties, drop `table-wrap` when it does not apply, and ensure
+     `table` is present so Bootstrap styles the element. */}}
+{{ $classes := slice }}
+{{ range $given }}
+    {{ if and (ne . "") (or $wrap (ne . "table-wrap")) }}
+        {{ $classes = $classes | append . }}
+    {{ end }}
+{{ end }}
+{{ if not (in $classes "table") }}{{ $classes = $classes | append "table" }}{{ end }}
+{{ $attr = merge $attr (dict "class" (delimit ($classes | uniq) " ")) }}
+
 {{ $align := dict "left" "start" "center" "center" "right" "end" }}
 
-{{ $header := "" }}
 <table
   {{- range $k, $v := $attr }}
     {{- if $v }}
@@ -19,56 +33,52 @@
   {{- end }}>
   <thead>
     {{- range .THead }}
-    {{ $length := len . }}
-      {{ if $wrap }}
-        <tr>
-          {{- range . | first (sub $length 1) }}
-            <th {{ with .Alignment }}class="text-{{ index $align . }}"{{ end }}>
-              {{- .Text -}}
-            </th>
-          {{- end }}
-          {{- range . | last 1 }}
-            {{ $header = .Text }}
-          {{ end }}
-        </tr>
-      {{ else }}
+      {{- $length := len . }}
       <tr>
-        {{- range . }}
-          <th {{ with .Alignment }}class="text-{{ index $align . }}"{{ end }}>
-            {{- .Text -}}
+        {{- range $i, $cell := . }}
+          {{- $cellClasses := slice }}
+          {{- with $cell.Alignment }}
+            {{- $cellClasses = $cellClasses | append (printf "text-%s" (index $align .)) }}
+          {{- end }}
+          {{- if and $wrap (eq $i (sub $length 1)) }}
+            {{- $cellClasses = $cellClasses | append "d-none" (printf "d-%s-table-cell" $breakpoint) }}
+          {{- end }}
+          <th{{ with $cellClasses }} class="{{ delimit . " " }}"{{ end }}>
+            {{- $cell.Text -}}
           </th>
         {{- end }}
       </tr>
-    {{ end }}
     {{- end }}
   </thead>
   <tbody>
     {{- range .TBody }}
-    {{ $length := len . }}
-      {{ if $wrap }}
+      {{- $length := len . }}
       <tr>
-        {{- range . | first (sub $length 1) }}
-          <td class="{{ with .Alignment }}text-{{ index $align . }}{{ end }} table-border-bottom-wrap">
-            {{- .Text -}}
+        {{- range $i, $cell := . }}
+          {{- $cellClasses := slice }}
+          {{- with $cell.Alignment }}
+            {{- $cellClasses = $cellClasses | append (printf "text-%s" (index $align .)) }}
+          {{- end }}
+          {{- if $wrap }}
+            {{- if eq $i (sub $length 1) }}
+              {{- $cellClasses = $cellClasses | append "d-none" (printf "d-%s-table-cell" $breakpoint) }}
+            {{- else }}
+              {{- $cellClasses = $cellClasses | append "table-border-bottom-wrap" }}
+            {{- end }}
+          {{- end }}
+          <td{{ with $cellClasses }} class="{{ delimit . " " }}"{{ end }}>
+            {{- $cell.Text -}}
           </td>
         {{- end }}
       </tr>
-      <tr>
-        {{- range . | last 1 }}
-          <td class="{{ with .Alignment }}text-{{ index $align . }}{{ end }}" colspan="{{ (sub $length 1) }}">
-            {{- .Text -}}
+      {{- if $wrap }}
+        {{- $last := index . (sub $length 1) }}
+        <tr class="d-{{ $breakpoint }}-none">
+          <td colspan="{{ sub $length 1 }}"{{ with $last.Alignment }} class="text-{{ index $align . }}"{{ end }}>
+            {{- $last.Text -}}
           </td>
-        {{ end }}
-      </tr>
-      {{ else }}
-        <tr>
-          {{- range . }}
-            <td {{ with .Alignment }}class="text-{{ index $align . }}"{{ end }}>
-              {{- .Text -}}
-            </td>
-          {{- end }}
         </tr>
-      {{ end }}
+      {{- end }}
     {{- end }}
   </tbody>
 </table>
