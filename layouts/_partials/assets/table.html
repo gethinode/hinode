@@ -21,7 +21,11 @@
 {{ $dataTable := or $args.sortable $args.paginate $args.searchable }}
 {{ $wrap := and $args.wrap (ne $breakpoint "xs") }}
 
-{{ $class := or $args.class "" }}
+{{/* `table-wrap` is an internal marker owned by the templates, not a class a caller may set: it
+     keys the wrap-specific striping rules, which recompute Bootstrap's `:nth-of-type(odd)` per pair
+     of rows. Injecting it by hand would stripe a uniform table by record pairs, so drop it from the
+     caller's class list. The template adds it back below when the wrap genuinely applies. */}}
+{{ $class := delimit (complement (slice "table-wrap") (split (or $args.class "") " ")) " " }}
 {{ if $dataTable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
@@ -58,7 +62,18 @@
 {{ if not $args.err }}
     {{ $input := $args.input }}
     {{ if and $wrap (not $dataTable) }}{{ $input = printf "%s\n{.table-wrap}" (chomp $input) }}{{ end }}
+
+    {{/* The table render hook cannot tell a data table from a plain one by looking at the Markdown
+         alone, yet it must never build the wrapped layout for one: simple-datatables derives its
+         row model from this DOM, and applies the wrap itself in the browser. Flag the table for the
+         hook while it renders, so an author-supplied `{.table-wrap}` attribute cannot split a data
+         table's rows server-side. RenderString is synchronous, so the flag is set only while this
+         table is being rendered; the previous value is restored to keep nesting safe. */}}
+    {{ $store := $args.page.Store }}
+    {{ $outer := $store.Get "hinodeTableIsDataTable" }}
+    {{ $store.Set "hinodeTableIsDataTable" $dataTable }}
     {{ $input = $input | $args.page.RenderString }}
+    {{ $store.Set "hinodeTableIsDataTable" $outer }}
 
     {{ $regex := `<table\s*class="(.+?)"` }}
     {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}

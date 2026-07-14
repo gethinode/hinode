@@ -1,16 +1,22 @@
 {{/* Adapted from https://gohugo.io/render-hooks/tables/ */}}
 
 {{/* Wrapping moves the last column onto a row of its own below the site's main breakpoint. It is a
-     no-op at `xs` (Bootstrap has no `xs` display-utility infix) and on a single-column table
-     (nothing to wrap). The marker class is dropped when it does not apply, so the wrap-specific
-     striping rules cannot misfire on a table that renders normally. */}}
+     no-op at `xs` (Bootstrap has no `xs` display-utility infix), on a single-column table (nothing
+     to wrap), and on a data table (simple-datatables builds its row model from this DOM and applies
+     the wrap in the browser instead, so the rows must stay uniform here). The marker class is
+     dropped when it does not apply, so the wrap-specific striping rules cannot misfire on a table
+     that renders normally. */}}
 {{ $breakpoint := site.Params.main.breakpoint | default "md" }}
 {{ $cols := 0 }}
 {{ range .THead }}{{ $cols = len . }}{{ end }}
 
+{{/* Set by assets/table.html around its RenderString call. `table-wrap` is an internal marker, so
+     an author-supplied `{.table-wrap}` attribute on a data table is ignored rather than honoured. */}}
+{{ $dataTable := .Page.Store.Get "hinodeTableIsDataTable" }}
+
 {{ $attr := .Attributes }}
 {{ $given := split (or $attr.class "") " " }}
-{{ $wrap := and (in $given "table-wrap") (ne $breakpoint "xs") (gt $cols 1) }}
+{{ $wrap := and (in $given "table-wrap") (not $dataTable) (ne $breakpoint "xs") (gt $cols 1) }}
 
 {{/* Rebuild the class list: drop empties, drop `table-wrap` when it does not apply, and ensure
      `table` is present so Bootstrap styles the element. */}}

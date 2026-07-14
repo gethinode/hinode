@@ -38,6 +38,24 @@ const purgecss = purgeCSSPlugin({
       'both',
       'desc',
       'asc',
+      // Hinode wrapped tables.
+      //
+      // On a data table `table-wrap` and `table-border-bottom-wrap` are applied in the browser by
+      // SimpleDatatables' tableRender hook, so on a site whose only wrapped tables are data tables
+      // they never reach hugo_stats.json at all and would otherwise be purged.
+      'table-wrap',
+      'table-border-bottom-wrap',
+      // `d-none` is also applied by that hook, but a dozen core layouts emit it as well, so it can
+      // never actually be purged. It is listed to record that the wrap depends on it.
+      'd-none',
+      // `d-{breakpoint}-table-cell` reveals the wrapped column above the breakpoint, and
+      // render-table.html is its only emitter in the whole theme. Unlike the classes above it does
+      // reach hugo_stats.json - but PurgeCSS is fed the *previous* build's stats whenever PostCSS
+      // is not deferred to Hugo's post-process phase (`hugo server`, or any non-production build
+      // with style.purge enabled). A site whose committed stats predate its first wrapped table
+      // would therefore lose the rule, leaving the wrapped column's cells on `d-none` alone and so
+      // hidden at every width.
+      /^d-(sm|md|lg|xl|xxl)-table-cell$/,
       // SimpleDatatables search component
       'search-data-table',
       'search-input',
