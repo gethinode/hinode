@@ -180,3 +180,15 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server", "searchindex"]
        kind = '{home}'
        output = '{netlify,server}'
 # toml-docs-end segments
+
+# toml-docs-start caches
+[caches]
+  # Hugo caches remote resources forever by default, and the Netlify cache plugin carries that
+  # cache across builds. The preview component reads a target's response headers to decide whether
+  # it can be embedded, so a stale entry pins the verdict to whatever the target sent the first
+  # time it was fetched: correcting a target's CSP then no longer takes effect on a rebuild.
+  # Builds are further apart than this, so headers are re-read on every build while still being
+  # fetched only once within one.
+  [caches.getresource]
+    maxAge = "5m"
+# toml-docs-end caches

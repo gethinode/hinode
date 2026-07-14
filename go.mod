@@ -11,7 +11,7 @@ require (
 	github.com/gethinode/mod-fontawesome/v6 v6.0.0 // indirect
 	github.com/gethinode/mod-google-analytics/v2 v2.0.3 // indirect
 	github.com/gethinode/mod-katex v1.1.5 // indirect
-	github.com/gethinode/mod-leaflet/v3 v3.0.0 // indirect
+	github.com/gethinode/mod-leaflet/v3 v3.1.0 // indirect
 	github.com/gethinode/mod-lottie/v3 v3.0.1 // indirect
 	github.com/gethinode/mod-mermaid/v5 v5.0.0 // indirect
 	github.com/gethinode/mod-simple-datatables/v4 v4.0.0 // indirect
