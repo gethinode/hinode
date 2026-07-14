@@ -1,5 +1,6 @@
 ---
 title: Table Demo
+modules: ["simple-datatables"]
 ---
 
 ## Plain wrapped table
