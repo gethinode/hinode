@@ -1,0 +1,36 @@
+{{/*
+    Returns the wrapper class for a resizable example preview, or an empty string when no grip
+    should be rendered. A grip is meaningless without a preview, so that combination warns and
+    degrades to no grip.
+
+    @param {bool} resize Whether a resize grip is requested.
+    @param {string} minWidth Breakpoint token for the lower bound, or "none".
+    @param {bool} showPreview Whether the calling shortcode renders a preview.
+    @param {string} caller Name of the calling shortcode, used in the warning message.
+    @param {page} file File of the calling page, used in the warning message.
+    @param {string} position Position of the shortcode, used in the warning message.
+    @returns {string}
+*/}}
+
+{{- $resize := .resize -}}
+{{- $class := "" -}}
+
+{{- if and $resize (not .showPreview) -}}
+    {{- partial "utilities/LogWarn.html" (dict
+        "partial"  .caller
+        "warnid"   "warn-resize-without-preview"
+        "msg"      "Argument 'resize' requires 'show-preview' to be enabled"
+        "file"     .file
+        "position" .position
+    )}}
+    {{- $resize = false -}}
+{{- end -}}
+
+{{- if $resize -}}
+    {{- $class = "example-resizable" -}}
+    {{- if and .minWidth (ne .minWidth "none") -}}
+        {{- $class = printf "%s example-resizable-%s" $class .minWidth -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $class -}}
