@@ -83,11 +83,11 @@ Out of scope: iframe previews, container-query adoption, keyboard-accessible res
 
 ### Arguments
 
-Both new arguments are defined inline in `data/structures/example.yml`, alongside the existing
-deprecated `show_markup` / `show_preview` definitions. They are deliberately **not** added to
-mod-utils' global `_arguments.yml`: that would require a cross-repo PR, a mod-utils release and a
-`go.mod` bump before Hinode could build, for two arguments only this structure uses. Both shortcodes
-share `example.yml`, so both inherit the definitions automatically.
+The shortcode gains exactly **one** new argument, defined inline in `data/structures/example.yml`
+alongside the existing deprecated `show_markup` / `show_preview` definitions. It is deliberately
+**not** added to mod-utils' global `_arguments.yml`: that would require a cross-repo PR, a mod-utils
+release and a `go.mod` bump before Hinode could build, for one argument only this structure uses.
+Both shortcodes share `example.yml`, so both inherit the definition automatically.
 
 ```yaml
   resize:
@@ -97,26 +97,35 @@ share `example.yml`, so both inherit the definitions automatically.
     comment: >-
       Adds a grip to the lower-right corner of the preview, allowing the reader to
       resize it horizontally. Requires `show-preview` to be enabled.
-  min-width:
-    type: select
-    optional: true
-    default: none
-    comment: >-
-      Lower bound of a resizable preview, expressed as a breakpoint. Defaults to a
-      200px floor. Ignored unless `resize` is enabled.
-    options:
-      values: [none, sm, md, lg, xl, xxl]
+    release: v3.1.0
 ```
-
-`release` fields are set to the actual release version at merge time.
 
 Horizontal is the only supported axis. Vertical resizing has no payoff: a preview's height is
 intrinsic, so dragging taller adds dead space and dragging shorter clips content.
 
-`min-width` is a breakpoint token rather than a free-form CSS length **because Hinode templates may
-not emit inline `style` attributes** (Content Security Policy — see Constraints). The floor must come
-from a bounded set of classes. Breakpoint tokens reuse the vocabulary mod-utils already defines
-globally. The trade-off, accepted: authors can floor a preview at 768px but not at 340px.
+The floor is a fixed 200px, set in SCSS. It is not configurable.
+
+### Rejected: a configurable `min-width` (removed before merge)
+
+An earlier revision of this design shipped a second argument, `min-width`, taking a Bootstrap
+breakpoint token (`sm`…`xxl`) that emitted a modifier class such as
+`.example-resizable-md { min-width: 768px }`. It was implemented, then **removed at the final review**
+after browser testing proved it broken. Recorded here so it is not reinvented:
+
+1. **It burst the page.** In CSS, `min-width` beats `max-width: 100%`, so the box could not shrink to
+   fit its parent. At a 390px viewport, `min-width="md"` rendered a 768px preview inside a 325px
+   column — spilling 491px and giving the whole page a horizontal scrollbar. The theme deliberately
+   declines a page-level `overflow-x: hidden` (see `_navbar.scss`), so nothing caught it.
+2. **The vocabulary was wrong for the job.** Breakpoint tokens are *viewport* widths, but the thing
+   being floored is the *preview container* — roughly 650px in the docs layout and 774px on a
+   full-width page. So `md` (768px) already exceeded the docs column on desktop, and `lg`–`xxl`
+   (992–1400px) could never fit anywhere. Wrapping the floors in a media query would have hidden the
+   phone symptom while leaving the vocabulary mismatched.
+
+The lesson generalises: a bounded class set is the right answer to the no-inline-styles constraint,
+but the tokens must be scaled to the element being sized, not borrowed from an unrelated axis.
+
+Dropping the argument cost nothing — none of the six enabled docs pages used it.
 
 ### Validation
 
@@ -134,8 +143,8 @@ semantics.
 
 ```html
 <div class="border rounded mb-3">
-  <div id="…" class="p-5 rounded-top …">                     <!-- unchanged -->
-    <div class="example-resizable example-resizable-md">     <!-- new, only when resize=true -->
+  <div id="…" class="p-5 rounded-top …">      <!-- unchanged -->
+    <div class="example-resizable">           <!-- new, only when resize=true -->
       …preview content…
     </div>
   </div>
@@ -143,7 +152,10 @@ semantics.
 </div>
 ```
 
-The modifier class is emitted only when `min-width` is not `none`.
+The resize logic lives in a single partial, `layouts/_partials/utilities/GetResizeClass.html`, which
+returns the wrapper class or an empty string. Both `example.html` and `example-bookshop.html` call
+it, differing only in the `caller` they pass for warning messages. An empty return emits neither the
+opening nor the closing tag, so the tags cannot fall out of balance.
 
 The grip renders at the inner container's lower-right corner, already inset by the existing `p-5`
 padding. Bootstrap's extra `.375rem` outer padding is therefore unnecessary here.
@@ -162,20 +174,14 @@ into **both** `app.scss` and `app-dart.scss`.
     overflow: hidden;   // required — `resize` is inert on overflow: visible
     min-width: 200px;   // base floor, matches Bootstrap
 }
-
-@each $breakpoint, $width in $grid-breakpoints {
-    @if $width > 0 {
-        .example-resizable-#{$breakpoint} { min-width: $width; }
-    }
-}
 ```
 
-`$grid-breakpoints` is in scope: Bootstrap is imported before the components in both entry points,
-and `components/_navbar.scss` already loops over the same map. Breakpoints whose width is `0` (`xs`)
-are skipped, since a `0` floor would sit below the base 200px.
+That is the whole of it: five declarations and no modifiers. The 200px floor is safe at every
+viewport — verified in a browser down to 390px, where the box sits at 229px inside a 325px column
+with no page overflow.
 
-No PurgeCSS safelist entry is required. The classes are written literally in the template, so each
-site's `hugo_stats.json` captures the ones it actually renders.
+No PurgeCSS safelist entry is required. The class is written literally in the template, so each
+site's `hugo_stats.json` captures it.
 
 ## Component eligibility (mod-docs)
 
@@ -231,9 +237,13 @@ container resize and would render broken); and the inline atoms `badge`, `kbd`, 
 
 **No inline styles.** Hinode templates must never emit `style="…"` attributes or inline `<style>`
 blocks; the theme is designed so that sites can serve a CSP without `unsafe-inline` in `style-src`.
-`layouts/` currently contains zero inline style attributes, and this design preserves that. (The
-default `netlify.toml` policy still lists `'unsafe-inline'`, but that is legacy, not permission.)
-This constraint is the sole reason `min-width` is a token select rather than a CSS length.
+`layouts/` currently contains zero inline style attributes, and this design preserves that — verified
+repo-wide at the final review. (The default `netlify.toml` policy still lists `'unsafe-inline'`, but
+that is legacy, not permission.)
+
+This constraint is why the preview carries a class rather than a computed width, and it is what ruled
+out a free-form CSS length for the width floor — which in turn led to the breakpoint-token detour
+recorded above.
 
 ## Known limitations
 
@@ -282,9 +292,20 @@ the per-example selection within each page is confirmed.
 - Each enabled page: grip appears, drags, and the component visibly reflows.
 - Grip renders correctly in light and dark mode.
 - `resize=true` with `show-preview=false` logs the warning and degrades to a normal preview.
-- Each `min-width` token produces the expected floor.
+- The preview never overflows its column, **at any viewport** — this is the check that caught the
+  `min-width` defect. Assert `document.scrollWidth <= document.clientWidth` at a phone width, not just
+  that the preview looks right on a desktop.
 - No overlay-bearing example is clipped (none should be enabled).
 - `npm run lint` in both repos.
+
+### Outcome (2026-07-14)
+
+All six enabled pages verified in a browser. Measured reflow: tabs wrap 1→3 rows; breadcrumb wraps
+2→4 rows; the responsive table's scroller tracks the container; image and carousel scale with ratio
+preserved; the card rewraps. None clipped.
+
+Both verify-in-browser risks **passed**: neither the DataTables integration nor the Bootstrap
+carousel caches its layout, so no JavaScript redraw is needed and the CSS-only remit holds.
 
 ## Delivery
 
