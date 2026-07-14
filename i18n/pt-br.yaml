@@ -235,3 +235,7 @@
   translation: "Enviar"
 - id: formBotField
   translation: "Não preencha isto se você for humano"
+- id: tableFilterLabel
+  translation: "Filtro"
+- id: tableFilterAll
+  translation: "Todos"
