@@ -38,6 +38,10 @@ const purgecss = purgeCSSPlugin({
       'both',
       'desc',
       'asc',
+      // Hinode wrapped tables. On a data table both classes are added by SimpleDatatables'
+      // tableRender hook, so they never reach hugo_stats.json and would otherwise be purged.
+      'table-wrap',
+      'table-border-bottom-wrap',
       // SimpleDatatables search component
       'search-data-table',
       'search-input',
