@@ -76,10 +76,7 @@
 {{ $filterCol := $args.filterCol }}
 {{ $filterId := "" }}
 {{ if $filter }}
-    {{ $store := $args.page.Store }}
-    {{ $count := add (or ($store.Get "hinodeTableFilterCount") 0) 1 }}
-    {{ $store.Set "hinodeTableFilterCount" $count }}
-    {{ $filterId = printf "table-filter-%d" $count }}
+    {{ $filterId = partial "utilities/UniqueID.html" (dict "prefix" "table-filter" "page" $args.page) }}
     {{ $attributes = printf "%s data-filter-col=%d data-filter-id=%s" $attributes $filterCol $filterId }}
 {{ end }}
 
