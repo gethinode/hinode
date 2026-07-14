@@ -277,9 +277,25 @@ together. To wire the local mod-docs checkout into it:
 - Do **not** start a second `hugo server` alongside one already running — it poisons the shared CSS
   cache in `resources/_gen`.
 
-PurgeCSS caveat: on a cold build, PurgeCSS can strip classes that appear on only one page. If
-`.example-resizable` goes missing from the built CSS, warm the build (or add a safelist entry) rather
-than assuming the SCSS is wrong.
+### No exampleSite demo page
+
+An earlier revision added `exampleSite/content/en/resize-demo.md` to exercise the feature in-repo. It
+was **removed before merge** — the grip is documented and exercised in mod-docs, and a second demo
+only pollutes the exampleSite.
+
+The consequence is intended, and worth stating so it is not mistaken for a bug: with nothing in the
+exampleSite rendering `example-resizable`, the class never enters that site's `hugo_stats.json`, so
+**PurgeCSS strips `.example-resizable` from the exampleSite's CSS bundle.** That is correct — no page
+there needs it.
+
+It does not affect consuming sites. PurgeCSS runs per site against that site's own
+`hugo_stats.json`, and a site rendering the mod-docs pages emits the class, so the rule survives
+there. Do **not** "fix" the purge by adding a safelist entry to `config/postcss.config.js`; that
+would ship dead CSS to every site.
+
+Note that `.example-resizable` still appears as *text* in the built exampleSite, on the `docs` and
+`file` component pages, which render `_docs.scss` as a syntax-highlighted listing. That is page
+content, not an applied class attribute, and Hugo's stats collector correctly ignores it.
 
 ### Review gate
 
