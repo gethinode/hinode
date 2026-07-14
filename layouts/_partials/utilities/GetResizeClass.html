@@ -6,14 +6,11 @@
 
 {{/*
     Returns the wrapper class of a resizable example preview, or an empty string when no grip
-    should be rendered. Expects the arguments `resize` (bool), `minWidth` (breakpoint token, or
-    "none"), and `showPreview` (bool), alongside the `caller`, `file`, and `position` of the
-    calling shortcode used to report warnings.
+    should be rendered. Expects the arguments `resize` (bool) and `showPreview` (bool), alongside
+    the `caller`, `file`, and `position` of the calling shortcode used to report warnings.
 
     The grip itself is the browser-native handle of the CSS `resize` property; the class merely
-    activates it. The width floor is expressed as a breakpoint token rather than a length, as the
-    theme targets a Content Security Policy without `unsafe-inline` for styles, and a length would
-    require an inline style attribute.
+    activates it.
 
     A grip is meaningless without a preview to resize, so that combination raises a warning and
     degrades to no grip.
@@ -35,9 +32,6 @@
 
 {{- if $resize -}}
     {{- $class = "example-resizable" -}}
-    {{- if and .minWidth (ne .minWidth "none") -}}
-        {{- $class = printf "%s example-resizable-%s" $class .minWidth -}}
-    {{- end -}}
 {{- end -}}
 
 {{- return $class -}}

@@ -38,14 +38,16 @@
 {{- $content := .InnerDeindent -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $sectionClass := printf "p-1 px-md-%d py-md-%d" $padding.x $padding.y -}}
-{{- $resizeClass := partial "utilities/GetResizeClass.html" (dict
-    "resize"      $args.resize
-    "minWidth"    $args.minWidth
-    "showPreview" $showPreview
-    "caller"      "shortcodes/example-bookshop.html"
-    "file"        page.File
-    "position"    .Position
-) -}}
+{{- $resizeClass := "" -}}
+{{- if not $args.err -}}
+    {{- $resizeClass = partial "utilities/GetResizeClass.html" (dict
+        "resize"      $args.resize
+        "showPreview" $showPreview
+        "caller"      "shortcodes/example-bookshop.html"
+        "file"        page.File
+        "position"    .Position
+    ) -}}
+{{- end -}}
 
 {{- $data := "" -}}
 {{- $partial := "" -}}

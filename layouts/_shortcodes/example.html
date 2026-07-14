@@ -32,17 +32,17 @@
 {{- $showMarkup := $args.showMarkup }}
 {{- if eq $lang "hugo" }}{{ $lang = "markdown" }}{{ end -}}
 {{- $content := .InnerDeindent -}}
-{{- $resizeClass := partial "utilities/GetResizeClass.html" (dict
-    "resize"      $args.resize
-    "minWidth"    $args.minWidth
-    "showPreview" $showPreview
-    "caller"      "shortcodes/example.html"
-    "file"        page.File
-    "position"    .Position
-) -}}
+{{- $resizeClass := "" -}}
 
 {{/* Main code */}}
 {{ if not $args.err }}
+    {{- $resizeClass = partial "utilities/GetResizeClass.html" (dict
+        "resize"      $args.resize
+        "showPreview" $showPreview
+        "caller"      "shortcodes/example.html"
+        "file"        page.File
+        "position"    .Position
+    ) -}}
     <div class="border {{ if and $showPreview $showMarkup }}rounded mb-3{{ else if $showPreview }}rounded-top border-bottom-0{{ else }}rounded-bottom{{ end }}">
         {{- if $showPreview -}}
             <div {{ with $args.id }}id="{{ . }}"{{ end }} class="p-5 {{ if $showMarkup }}rounded-top{{ end }} {{ with $args.class }} {{ . }}{{ end }}">

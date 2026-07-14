@@ -18,10 +18,10 @@ A resizable preview with the default 200px floor. Drag the lower-right corner.
 {{< /example >}}
 <!-- markdownlint-enable MD033 -->
 
-A resizable preview floored at the `md` breakpoint (768px).
+A resizable preview with a breadcrumb.
 
 <!-- markdownlint-disable MD033 -->
-{{< example lang="html" resize="true" min-width="md" >}}
+{{< example lang="html" resize="true" >}}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Home</a></li>

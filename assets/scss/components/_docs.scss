@@ -23,11 +23,3 @@
     resize: horizontal;
     overflow: hidden; // required — `resize` is inert on overflow: visible
 }
-
-@each $breakpoint, $width in $grid-breakpoints {
-    @if $width > 0 {
-        .example-resizable-#{$breakpoint} {
-            min-width: $width;
-        }
-    }
-}
