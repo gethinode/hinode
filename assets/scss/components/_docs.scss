@@ -15,3 +15,11 @@
 .file-panel, .file-panel .collapse {
     border-radius: #{$theme-border-radius};
 }
+
+.example-resizable {
+    width: 100%;
+    max-width: 100%;
+    min-width: 200px; // base floor, matches Bootstrap
+    resize: horizontal;
+    overflow: hidden; // required — `resize` is inert on overflow: visible
+}

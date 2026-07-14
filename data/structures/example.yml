@@ -12,6 +12,14 @@ arguments:
     release: v1.0.0
   show-preview:
     release: v1.0.0
+  resize:
+    type: bool
+    optional: true
+    default: false
+    comment: >-
+      Adds a grip to the lower-right corner of the preview, allowing the reader to
+      resize the preview horizontally. Requires `show-preview` to be enabled.
+    release: v3.1.0
   # deprecated arguments
   show_markup:
     type: bool

@@ -38,6 +38,16 @@
 {{- $content := .InnerDeindent -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $sectionClass := printf "p-1 px-md-%d py-md-%d" $padding.x $padding.y -}}
+{{- $resizeClass := "" -}}
+{{- if not $args.err -}}
+    {{- $resizeClass = partial "utilities/GetResizeClass.html" (dict
+        "resize"      $args.resize
+        "showPreview" $showPreview
+        "caller"      "shortcodes/example-bookshop.html"
+        "file"        page.File
+        "position"    .Position
+    ) -}}
+{{- end -}}
 
 {{- $data := "" -}}
 {{- $partial := "" -}}
@@ -70,11 +80,13 @@
     <div class="example-bookshop rounded border mb-3">
         {{- if eq $showPreview true -}}
             <div {{ with $args.id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $args.class }} {{ . }}{{ end }}">
+                {{- with $resizeClass -}}<div class="{{ . }}">{{- end -}}
                 {{ if eq $type "bookshop" }}
                     {{ $partial | safeHTML }}
                 {{ else }}
                     {{- $content | .Page.RenderString | safeHTML -}}
                 {{ end }}
+                {{- with $resizeClass -}}</div>{{- end -}}
             </div>
         {{- end -}}
         {{- if eq $showMarkup true -}}

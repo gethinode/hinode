@@ -1,0 +1,37 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/*
+    Returns the wrapper class of a resizable example preview, or an empty string when no grip
+    should be rendered. Expects the arguments `resize` (bool) and `showPreview` (bool), alongside
+    the `caller`, `file`, and `position` of the calling shortcode used to report warnings.
+
+    The grip itself is the browser-native handle of the CSS `resize` property; the class merely
+    activates it.
+
+    A grip is meaningless without a preview to resize, so that combination raises a warning and
+    degrades to no grip.
+*/}}
+
+{{- $resize := .resize -}}
+{{- $class := "" -}}
+
+{{- if and $resize (not .showPreview) -}}
+    {{- partial "utilities/LogWarn.html" (dict
+        "partial"  .caller
+        "warnid"   "warn-resize-without-preview"
+        "msg"      "Argument 'resize' requires 'show-preview' to be enabled"
+        "file"     .file
+        "position" .position
+    )}}
+    {{- $resize = false -}}
+{{- end -}}
+
+{{- if $resize -}}
+    {{- $class = "example-resizable" -}}
+{{- end -}}
+
+{{- return $class -}}
