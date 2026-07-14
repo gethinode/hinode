@@ -1021,12 +1021,17 @@ change, so a marker would misdate it. Deliberately omitted — raise it with the
 
 - [ ] **Step 2: Revert the workspace overrides**
 
+Task 1 found that a workspace `use` directive alone does **not** override `mod-simple-datatables` —
+Hugo keeps resolving it from the committed `_vendor/` copy. It therefore also added a local
+`replacements` line to `exampleSite/config/_default/hugo.toml` (following the pattern already
+commented out in that file). **Both** files are local-only and must be reverted:
+
 ```bash
-git checkout exampleSite/hinode.work
-git diff --stat exampleSite/hinode.work
+git checkout exampleSite/hinode.work exampleSite/config/_default/hugo.toml
+git diff --stat exampleSite/hinode.work exampleSite/config/_default/hugo.toml
 ```
 
-Expected: no output — the file is clean and back to `use .` / `use ../`.
+Expected: no output — both files are clean.
 
 - [ ] **Step 3: Rebuild against the vendored modules**
 
