@@ -148,15 +148,28 @@ Bump the mod-utils dependency to the release carrying the helper.
 
 ### 5. Release ordering
 
+Strictly sequential, mod-blocks **before** Hinode:
+
 1. **mod-utils** ships `UniqueID.html` and the moved `AddModule.html`, and releases.
-2. **Hinode** and **mod-blocks** then bump mod-utils and land their changes — **in parallel**;
-   neither depends on the other.
+2. **mod-blocks** bumps mod-utils, converts its four call sites, merges and releases.
+3. **Hinode** bumps mod-utils *and* mod-blocks, deletes its own `AddModule.html`, and migrates the
+   table's counter to the helper.
 
-Hinode's `AddModule.html` must not be deleted before the mod-utils release exists, or the partial
-disappears from the merged layout tree and every caller fails.
+mod-blocks goes first so that Hinode's exampleSite picks up the fixed ids when it deploys —
+`exampleSite/go.mod` pins mod-blocks, so a Hinode merge that preceded the mod-blocks release would
+deploy a demo site still emitting `dropdown-panel-<md5>`.
 
-Hinode PR #2024 (the table category filter, already open) is **amended** with its part.
-mod-blocks gets a new PR.
+Two ordering constraints are load-bearing:
+
+- Hinode's `AddModule.html` must not be deleted before the mod-utils release exists, or the partial
+  disappears from the merged layout tree and every caller — including mod-blocks' `list` component —
+  fails at build time.
+- Between steps 1 and 3, `utilities/AddModule.html` exists in **both** mod-utils and Hinode. Hugo
+  resolves the project's own layouts ahead of an imported module's, so Hinode's copy shadows
+  mod-utils'. The two are identical, so this interval is harmless; step 3 removes the duplicate.
+
+Hinode PR #2024 (the table category filter, already open) is **amended** with its part, and merges
+last. mod-utils and mod-blocks each get a new PR.
 
 ## Verification
 
