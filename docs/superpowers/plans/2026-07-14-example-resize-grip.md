@@ -49,8 +49,9 @@
 | File | Responsibility |
 | --- | --- |
 | `data/structures/example.yml` | Declares the `resize` and `min-width` arguments. Shared by both shortcodes. |
-| `layouts/_shortcodes/example.html` | Emits the wrapper div and the resize/show-preview validation warning. |
-| `layouts/_shortcodes/example-bookshop.html` | Same wrapper, for bookshop previews. |
+| `layouts/_partials/utilities/GetResizeClass.html` | **New.** Single source of the resize logic: returns the wrapper class (or `""`) and emits the show-preview warning. Called by both shortcodes. |
+| `layouts/_shortcodes/example.html` | Calls the partial; wraps the preview when it returns a class. |
+| `layouts/_shortcodes/example-bookshop.html` | Same, for bookshop previews. |
 | `assets/scss/components/_docs.scss` | The `.example-resizable` rules and breakpoint modifiers. |
 | `exampleSite/content/en/resize-demo.md` | Exercises the feature so `.example-resizable` enters `hugo_stats.json` (otherwise PurgeCSS strips the rule). |
 
@@ -196,16 +197,19 @@ grip markup and styling follow."
 
 ---
 
-## Task 2: Emit the wrapper in the `example` shortcode
+## Task 2: Shared resize partial + wire into the `example` shortcode
+
+Both shortcodes need identical resize logic. Rather than paste it twice (Task 3 would be a verbatim copy — a code-review defect), it lives in **one partial** that returns the wrapper class, or an empty string when no grip should render.
 
 **Files:**
 
+- Create: `layouts/_partials/utilities/GetResizeClass.html`
 - Modify: `layouts/_shortcodes/example.html`
 
 **Interfaces:**
 
 - Consumes: `$args.resize`, `$args.minWidth` from Task 1.
-- Produces: a `<div class="example-resizable[ example-resizable-{bp}]">` wrapping the preview content, emitted only when `resize` is true and a preview is shown.
+- Produces: `partial "utilities/GetResizeClass.html" (dict "resize" <bool> "minWidth" <string> "showPreview" <bool> "caller" <string> "file" <page file> "position" <position>)` → returns a `string`: `""`, `"example-resizable"`, or `"example-resizable example-resizable-{bp}"`. It emits the `show-preview` warning itself. **Task 3 consumes this exact signature.**
 
 - [ ] **Step 1: Write the failing test — assert the class reaches the rendered HTML**
 
@@ -213,42 +217,72 @@ grip markup and styling follow."
 cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 export PATH="$PWD/node_modules/.bin:$PATH"
 hugo --logLevel warn -s exampleSite >/dev/null 2>&1
-grep -o 'example-resizable[a-z-]*' public/en/resize-demo/index.html | sort -u
+grep -o 'example-resizable[a-z-]*' exampleSite/public/en/resize-demo/index.html | sort -u
 ```
 
 Expected: FAIL — no output. The arguments validate but nothing renders them.
 
-- [ ] **Step 2: Add the resize logic**
+- [ ] **Step 2: Create the shared partial**
 
-In `layouts/_shortcodes/example.html`, in the "Initialize arguments" block, after the line `{{- $content := .InnerDeindent -}}`, append:
+Create `layouts/_partials/utilities/GetResizeClass.html`:
 
 ```hugo
-{{- $resize := $args.resize -}}
-{{- $minWidth := $args.minWidth -}}
+{{/*
+    Returns the wrapper class for a resizable example preview, or an empty string when no grip
+    should be rendered. A grip is meaningless without a preview, so that combination warns and
+    degrades to no grip.
 
-{{/* A grip is meaningless without a preview to resize */}}
-{{- if and $resize (not $showPreview) -}}
+    @param {bool} resize Whether a resize grip is requested.
+    @param {string} minWidth Breakpoint token for the lower bound, or "none".
+    @param {bool} showPreview Whether the calling shortcode renders a preview.
+    @param {string} caller Name of the calling shortcode, used in the warning message.
+    @param {page} file File of the calling page, used in the warning message.
+    @param {string} position Position of the shortcode, used in the warning message.
+    @returns {string}
+*/}}
+
+{{- $resize := .resize -}}
+{{- $class := "" -}}
+
+{{- if and $resize (not .showPreview) -}}
     {{- partial "utilities/LogWarn.html" (dict
-        "partial"  "shortcodes/example.html"
+        "partial"  .caller
         "warnid"   "warn-resize-without-preview"
         "msg"      "Argument 'resize' requires 'show-preview' to be enabled"
-        "file"     page.File
-        "position" .Position
+        "file"     .file
+        "position" .position
     )}}
     {{- $resize = false -}}
 {{- end -}}
 
-{{- $resizeClass := "example-resizable" -}}
-{{- if and $minWidth (ne $minWidth "none") -}}
-    {{- $resizeClass = printf "%s example-resizable-%s" $resizeClass $minWidth -}}
+{{- if $resize -}}
+    {{- $class = "example-resizable" -}}
+    {{- if and .minWidth (ne .minWidth "none") -}}
+        {{- $class = printf "%s example-resizable-%s" $class .minWidth -}}
+    {{- end -}}
 {{- end -}}
+
+{{- return $class -}}
 ```
 
-Note: read `$args.resize` directly. Do **not** write `or $args.resize <fallback>` — `or` returns the first truthy value and would silently discard an explicit `false`.
+Note: the partial reads `.resize` directly. Do **not** write `or .resize <fallback>` anywhere — `or` returns the first truthy value and would silently discard an explicit `false`.
 
-- [ ] **Step 3: Wrap the preview content**
+- [ ] **Step 3: Call the partial from `example.html`**
 
-In the same file, replace the preview block:
+In `layouts/_shortcodes/example.html`, in the "Initialize arguments" block, after the line `{{- $content := .InnerDeindent -}}`, append:
+
+```hugo
+{{- $resizeClass := partial "utilities/GetResizeClass.html" (dict
+    "resize"      $args.resize
+    "minWidth"    $args.minWidth
+    "showPreview" $showPreview
+    "caller"      "shortcodes/example.html"
+    "file"        page.File
+    "position"    .Position
+) -}}
+```
+
+Then replace the preview block:
 
 ```hugo
             <div {{ with $args.id }}id="{{ . }}"{{ end }} class="p-5 {{ if $showMarkup }}rounded-top{{ end }} {{ with $args.class }} {{ . }}{{ end }}">
@@ -264,15 +298,17 @@ with:
 
 ```hugo
             <div {{ with $args.id }}id="{{ . }}"{{ end }} class="p-5 {{ if $showMarkup }}rounded-top{{ end }} {{ with $args.class }} {{ . }}{{ end }}">
-                {{- if $resize -}}<div class="{{ $resizeClass }}">{{- end -}}
+                {{- with $resizeClass -}}<div class="{{ . }}">{{- end -}}
                 {{- if eq $lang "html" -}}
                     {{- $content | safeHTML -}}
                 {{- else -}}
                     {{- $content | .Page.RenderString | safeHTML -}}
                 {{- end -}}
-                {{- if $resize -}}</div>{{- end -}}
+                {{- with $resizeClass -}}</div>{{- end -}}
             </div>
 ```
+
+An empty `$resizeClass` is falsy, so `with` emits neither the opening nor the closing tag.
 
 - [ ] **Step 4: Run the test to verify the class renders**
 
@@ -280,7 +316,7 @@ with:
 cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 export PATH="$PWD/node_modules/.bin:$PATH"
 hugo --logLevel warn -s exampleSite >/dev/null 2>&1
-grep -o 'example-resizable[a-z-]*' public/en/resize-demo/index.html | sort -u
+grep -o 'example-resizable[a-z-]*' exampleSite/public/en/resize-demo/index.html | sort -u
 ```
 
 Expected: PASS — exactly two lines:
@@ -326,7 +362,7 @@ set without a preview to resize."
 
 ---
 
-## Task 3: Emit the wrapper in the `example-bookshop` shortcode
+## Task 3: Wire the shared partial into `example-bookshop`
 
 **Files:**
 
@@ -338,29 +374,22 @@ set without a preview to resize."
 
 - [ ] **Step 1: Add the resize logic**
 
+Call the **same partial created in Task 2** — do not re-implement the logic here.
+
 In `layouts/_shortcodes/example-bookshop.html`, in the "Initialize local arguments" block, after `{{- $sectionClass := printf "p-1 px-md-%d py-md-%d" $padding.x $padding.y -}}`, append:
 
 ```hugo
-{{- $resize := $args.resize -}}
-{{- $minWidth := $args.minWidth -}}
-
-{{/* A grip is meaningless without a preview to resize */}}
-{{- if and $resize (not $showPreview) -}}
-    {{- partial "utilities/LogWarn.html" (dict
-        "partial"  "shortcodes/example-bookshop.html"
-        "warnid"   "warn-resize-without-preview"
-        "msg"      "Argument 'resize' requires 'show-preview' to be enabled"
-        "file"     page.File
-        "position" .Position
-    )}}
-    {{- $resize = false -}}
-{{- end -}}
-
-{{- $resizeClass := "example-resizable" -}}
-{{- if and $minWidth (ne $minWidth "none") -}}
-    {{- $resizeClass = printf "%s example-resizable-%s" $resizeClass $minWidth -}}
-{{- end -}}
+{{- $resizeClass := partial "utilities/GetResizeClass.html" (dict
+    "resize"      $args.resize
+    "minWidth"    $args.minWidth
+    "showPreview" $showPreview
+    "caller"      "shortcodes/example-bookshop.html"
+    "file"        page.File
+    "position"    .Position
+) -}}
 ```
+
+Only the `caller` value differs from the `example.html` call site.
 
 - [ ] **Step 2: Wrap the preview content**
 
@@ -380,15 +409,17 @@ with:
 
 ```hugo
             <div {{ with $args.id }}id="{{ . }}"{{ end }} class="rounded-top p-3 {{ with $args.class }} {{ . }}{{ end }}">
-                {{- if $resize -}}<div class="{{ $resizeClass }}">{{- end -}}
+                {{- with $resizeClass -}}<div class="{{ . }}">{{- end -}}
                 {{ if eq $type "bookshop" }}
                     {{ $partial | safeHTML }}
                 {{ else }}
                     {{- $content | .Page.RenderString | safeHTML -}}
                 {{ end }}
-                {{- if $resize -}}</div>{{- end -}}
+                {{- with $resizeClass -}}</div>{{- end -}}
             </div>
 ```
+
+Careful: this file already uses `$partial` as a variable name (the rendered bookshop component). Do not shadow it.
 
 - [ ] **Step 3: Verify the exampleSite still builds clean**
 
@@ -430,7 +461,7 @@ The rules live in `_docs.scss` because it is already the documentation-UI bucket
 cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 export PATH="$PWD/node_modules/.bin:$PATH"
 hugo --logLevel warn -s exampleSite >/dev/null 2>&1
-grep -rho "resize:horizontal\|resize: horizontal" public/ --include=*.css | head
+grep -rho "resize:horizontal\|resize: horizontal" exampleSite/public/ --include=*.css | head
 ```
 
 Expected: FAIL — no output. The class renders but nothing styles it.
@@ -465,7 +496,7 @@ Append to `assets/scss/components/_docs.scss`:
 cd /Users/mark/Development/GitHub/gethinode/hinode/.claude/worktrees/example-resize-grip
 export PATH="$PWD/node_modules/.bin:$PATH"
 hugo --logLevel warn -s exampleSite >/dev/null 2>&1
-grep -rho "\.example-resizable[a-z-]*" public/ --include=*.css | sort -u
+grep -rho "\.example-resizable[a-z-]*" exampleSite/public/ --include=*.css | sort -u
 ```
 
 Expected: PASS — exactly these two:
