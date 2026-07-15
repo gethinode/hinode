@@ -18,7 +18,7 @@
 {{- end -}}
 
 {{/* Initialize local arguments */}}
-{{- $id := $args.id | default (printf "carousel-%d" .Ordinal) -}}
+{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "carousel")) -}}
 {{ $inner := .Scratch.Get "inner" }}
 {{ $input := trim .Inner " \r\n" }}
 {{ if $input }}

@@ -30,7 +30,7 @@
 {{- end -}}
 
 {{/* Initialize local arguments */}}
-{{- $id := $args.id | default (printf "docs-collapse-%d" .Ordinal) -}}
+{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "docs-collapse")) -}}
 {{- $basePath := .Site.Params.docs.basePath -}}
 {{- $file := $args.file -}}
 {{- if hasPrefix $file "./" -}}

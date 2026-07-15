@@ -21,7 +21,7 @@
 {{- end -}}
 
 {{/* Initialize arguments */}}
-{{- $id := $args.id | default (printf "navbar-collapse-%d" (add .Ordinal 1)) -}}
+{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "navbar-collapse")) -}}
 {{ $page := .Page }}
 {{ if $args.path }}{{ $page = .Site.GetPage $args.path }}{{ end }}
 {{ if and $args.path (not $page) }}
