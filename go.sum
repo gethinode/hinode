@@ -102,6 +102,8 @@ github.com/gethinode/mod-leaflet/v3 v3.0.0 h1:rNjdruvS08bxqsLFEWNt9aU2KCbHiRlEKp
 github.com/gethinode/mod-leaflet/v3 v3.0.0/go.mod h1:FsoyVRb3DRZBb2jWPV4yJNqbmOKmCwaJgom2hbWZXnA=
 github.com/gethinode/mod-leaflet/v3 v3.1.0 h1:zscIv/q2dg0TUjosjM9hB9DchlutuWkWqOafX00fsKI=
 github.com/gethinode/mod-leaflet/v3 v3.1.0/go.mod h1:FsoyVRb3DRZBb2jWPV4yJNqbmOKmCwaJgom2hbWZXnA=
+github.com/gethinode/mod-leaflet/v3 v3.1.1 h1:Iz8Q+e8s1caHvAb4KN7EnN4ZBnxyCQeUJB62uDmGRVc=
+github.com/gethinode/mod-leaflet/v3 v3.1.1/go.mod h1:eiNhr24pY4+MrMCuJF2MAa+c5mPrD90UM4GZxJproic=
 github.com/gethinode/mod-lottie/v2 v2.0.1 h1:jIY5oGHtkXXvJoxNAE2AueoqxqNNlTYHF4+igQmkIAU=
 github.com/gethinode/mod-lottie/v2 v2.0.1/go.mod h1:/YzhRcG9H8MyODt8qaOQP0nqoux7EFHW2S7ugiiFf0o=
 github.com/gethinode/mod-lottie/v2 v2.1.0 h1:d0ViSsZr8idst7/zWTjCHp93jdX9fPHeGaAHEhi7lO4=
@@ -114,6 +116,8 @@ github.com/gethinode/mod-lottie/v3 v3.0.0 h1:gTSuMNmaN72YWeeGYkIVukZDmJnu2ROF+yY
 github.com/gethinode/mod-lottie/v3 v3.0.0/go.mod h1:t1aH0lLklNCchd398reXJtI0kAHkf3SXjo3tqi355wg=
 github.com/gethinode/mod-lottie/v3 v3.0.1 h1:pb/lVgWL1umrFIWcmwkg3Y8eNTaAjMRIDOyP30u/55I=
 github.com/gethinode/mod-lottie/v3 v3.0.1/go.mod h1:7viFyA21NdXSHO2XfYN3e7PGKAThl8faL58F9sxHt20=
+github.com/gethinode/mod-lottie/v3 v3.0.2 h1:PJ9BB5s+oli2D5i9apcWu8AowtfyNVb7VAcZfptobT8=
+github.com/gethinode/mod-lottie/v3 v3.0.2/go.mod h1:QnNRtZPSwl6x7acJbR4jHNhNNRxbwVv0XsnD1hFcsro=
 github.com/gethinode/mod-mermaid/v3 v3.0.1 h1:h4v3QvGpSln9PDbWccSktULq9FbRZ57JN4Lp+gVjvVI=
 github.com/gethinode/mod-mermaid/v3 v3.0.1/go.mod h1:rbI8IKFfKVGqTY/eJnuNJwzB5kSjaEUNX0NRHc4rBfA=
 github.com/gethinode/mod-mermaid/v4 v4.3.0 h1:R3J0wvWaEw6WSdhBRIUjdQj3FMBGrchOmH7MPbcr1tM=
