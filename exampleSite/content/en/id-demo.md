@@ -26,7 +26,8 @@ title: Id Demo
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* carousel ratio="21x9" class="col-12" */>}}
-  {{</* img src="img/coffee.jpg" caption="First carousel" */>}}
+  {{</* img src="img/coffee.jpg" caption="First carousel, first slide" */>}}
+  {{</* img src="img/coffee.jpg" caption="First carousel, second slide" */>}}
 {{</* /carousel */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
@@ -34,7 +35,8 @@ title: Id Demo
 <!-- markdownlint-disable MD037 -->
 {{< example lang="hugo" >}}
 {{</* carousel ratio="21x9" class="col-12" */>}}
-  {{</* img src="img/coffee.jpg" caption="Second carousel" */>}}
+  {{</* img src="img/coffee.jpg" caption="Second carousel, first slide" */>}}
+  {{</* img src="img/coffee.jpg" caption="Second carousel, second slide" */>}}
 {{</* /carousel */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->

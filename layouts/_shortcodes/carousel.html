@@ -32,7 +32,7 @@
     <div id="{{ $id }}" class="carousel slide mb-3{{ with $args.class }} {{ . }}{{ end }}" data-bs-ride="true">
         <div class="carousel-indicators">
             {{ range $index := (seq $items) -}}
-                <button type="button" data-bs-target="#carousel-{{ $id }}" data-bs-slide-to="{{ sub $index 1 }}" {{ if eq $index 1 }}class="active"{{ end }} aria-current="true" aria-label="Slide {{ $index }}"></button>
+                <button type="button" data-bs-target="#{{ $id }}" data-bs-slide-to="{{ sub $index 1 }}" {{ if eq $index 1 }}class="active"{{ end }} aria-current="true" aria-label="Slide {{ $index }}"></button>
             {{ end -}}
         </div>
         <div class="carousel-inner">
