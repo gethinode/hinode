@@ -33,7 +33,7 @@
 
     {{- $fade := $args.fade -}}
     {{- $parentFade := false }}
-    {{- if isset .Parent.Params "fade" }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
+    {{- if and .Parent.IsNamedParams (isset .Parent.Params "fade") }}{{ $parentFade = partial "utilities/CastBool.html" (.Parent.Get "fade") }}{{ end -}}
     {{- $fade = or $fade $parentFade -}}
     {{- $title := or $args.title $args.header -}}
     {{- $itemID := printf "%s-btn-%d" $parent $id }}
@@ -69,7 +69,7 @@
         {{- .Parent.Scratch.Set "inner-icon" ($icons | append $args.icon) -}}
         {{- .Parent.Scratch.Set "inner-attrs" ($itemAttrs | append $args.attributes) -}}
     {{- else -}}
-        {{- .Parent.Scratch.Set "inner" $output -}}
+        {{- .Parent.Scratch.Set "inner" (print $output) -}}
         {{- .Parent.Scratch.Set "inner-title" (slice $title) -}}
         {{- .Parent.Scratch.Set "inner-disabled" (slice $disabledID) -}}
         {{- .Parent.Scratch.Set "inner-icon" (slice $args.icon) -}}

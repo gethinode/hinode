@@ -74,3 +74,12 @@ title: Id Demo
 {{</* toast */>}}Second toast.{{</* /toast */>}}
 {{< /example >}}
 <!-- markdownlint-enable MD037 -->
+
+## Minimal nav (no parent args, single item)
+
+Rendered directly (not via the example shortcode): a single-item nav whose parent
+has no arguments. This is the most natural nav usage and it used to crash the build.
+
+{{< nav >}}
+{{< nav-item title="Only tab" show="true" >}}A single-item nav whose parent has no arguments.{{< /nav-item >}}
+{{< /nav >}}
