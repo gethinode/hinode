@@ -8,7 +8,7 @@ require (
 	github.com/gethinode/mod-bootstrap v1.3.7 // indirect
 	github.com/gethinode/mod-csp v1.0.12 // indirect
 	github.com/gethinode/mod-flexsearch/v5 v5.0.2 // indirect
-	github.com/gethinode/mod-fontawesome/v6 v6.0.1 // indirect
+	github.com/gethinode/mod-fontawesome/v6 v6.0.2 // indirect
 	github.com/gethinode/mod-google-analytics/v2 v2.0.4 // indirect
 	github.com/gethinode/mod-katex v1.1.6 // indirect
 	github.com/gethinode/mod-leaflet/v3 v3.1.1 // indirect
