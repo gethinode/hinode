@@ -233,3 +233,7 @@
   translation: "提交"
 - id: formBotField
   translation: "如果您是人类，请不要填写此项"
+- id: tableFilterLabel
+  translation: "筛选"
+- id: tableFilterAll
+  translation: "全部"

@@ -233,3 +233,7 @@
   translation: "Verzenden"
 - id: formBotField
   translation: "Vul dit niet in als je een mens bent"
+- id: tableFilterLabel
+  translation: "Filter"
+- id: tableFilterAll
+  translation: "Alle"

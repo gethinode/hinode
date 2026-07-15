@@ -1,6 +1,6 @@
 comment: >-
   Makes a Markdown table responsive with horizontal scrolling on smaller screens.
-  Sorting, paging, and searching require the simple-datatables module.
+  Sorting, paging, searching, and filtering require the simple-datatables module.
 icon: table_chart
 arguments:
   page:
