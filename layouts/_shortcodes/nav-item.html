@@ -22,8 +22,14 @@
     {{- errorf "The nav-item shortcode should be contained within a nav shortcode: %s" .Position -}}
 {{- else if not $args.err -}}
     {{- $id := .Ordinal -}}
-    {{- $parent := printf "nav-%d" .Parent.Ordinal -}}
-    {{- with (.Parent.Get "id") }}{{ $parent = . }}{{ end -}}
+    {{- $parent := .Parent.Get "id" -}}
+    {{- if not $parent -}}
+        {{- $parent = .Parent.Scratch.Get "resolved-id" -}}
+        {{- if not $parent -}}
+            {{- $parent = partial "utilities/UniqueID.html" (dict "prefix" "nav") -}}
+            {{- .Parent.Scratch.Set "resolved-id" $parent -}}
+        {{- end -}}
+    {{- end -}}
 
     {{- $fade := $args.fade -}}
     {{- $parentFade := false }}

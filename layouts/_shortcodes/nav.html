@@ -31,8 +31,16 @@
 
 {{/* Main code */}}
 {{- if not $args.err -}}
+    {{- $navID := $args.id -}}
+    {{- if not $navID -}}
+        {{- $navID = .Scratch.Get "resolved-id" -}}
+        {{- if not $navID -}}
+            {{- $navID = partial "utilities/UniqueID.html" (dict "prefix" "nav") -}}
+            {{- .Scratch.Set "resolved-id" $navID -}}
+        {{- end -}}
+    {{- end -}}
     {{- partial "assets/nav.html" (dict
-        "id"                (or $args.id (printf "nav-%d" .Ordinal))
+        "id"                $navID
         "page"              .Page
         "list"              $args.list
         "nav-items"         $inner
