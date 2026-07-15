@@ -43,7 +43,6 @@ arguments:
     optional: true
     comment: >-
       Whether the caption renders above the table (Bootstrap `caption-top`).
-      Defaults to `false`, placing the caption below the table.
     release: v3.3.0
   # deprecated arguments
   paging:
