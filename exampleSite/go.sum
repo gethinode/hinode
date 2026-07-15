@@ -12,6 +12,8 @@ github.com/gethinode/mod-cookieyes/v2 v2.2.6 h1:/DQm8OYpms0On8wuosQER47TplVu/3z7
 github.com/gethinode/mod-cookieyes/v2 v2.2.6/go.mod h1:tULb7D7CoTycGUyL7ryqHJKaX11XuL2SN+XwP7/DI0Y=
 github.com/gethinode/mod-docs v1.15.1 h1:WSmJWWhbiXeRkNqYRnZMBT5GkMDaJsijYC6YZzMcvkA=
 github.com/gethinode/mod-docs v1.15.1/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
+github.com/gethinode/mod-docs v1.15.2 h1:ZuOO/M5KyuUNGEoId+rManHG/L3WBboXG9L/ikSPNrY=
+github.com/gethinode/mod-docs v1.15.2/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v6 v6.0.1 h1:Wq51kwbtlZYjLQdSbLjn1Qjf4ZkmGIbYrwxlO2vt9Q8=
 github.com/gethinode/mod-fontawesome/v6 v6.0.1/go.mod h1:Pz24mpGcg4FvGHhwPiuEZzOzISeOcoaQROhI6xLW2bU=
 github.com/gethinode/mod-utils/v6 v6.4.1 h1:jHiJEwSjLp6tqIXayxUQTxILwnM7hWMgYyTYhxFE3ZA=
