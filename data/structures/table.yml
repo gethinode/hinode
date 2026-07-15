@@ -32,6 +32,19 @@ arguments:
   wrap:
   wrapper:
     release: v2.0.0
+  caption:
+    comment: >-
+      Caption rendered as the table's `<caption>` element, describing the
+      table's contents.
+    release: v3.3.0
+  caption-top:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Whether the caption renders above the table (Bootstrap `caption-top`).
+      Defaults to `false`, placing the caption below the table.
+    release: v3.3.0
   # deprecated arguments
   paging:
     type: bool

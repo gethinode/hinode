@@ -56,6 +56,10 @@ const purgecss = purgeCSSPlugin({
       // would therefore lose the rule, leaving the wrapped column's cells on `d-none` alone and so
       // hidden at every width.
       /^d-(sm|md|lg|xl|xxl)-table-cell$/,
+      // Bootstrap `caption-top` moves a table caption above the table. assets/table.html adds it
+      // only when a caption is set with `caption-top=true`, so a site without such a table never
+      // records it in hugo_stats.json and PurgeCSS would drop the rule, leaving the opt-in inert.
+      'caption-top',
       // SimpleDatatables search component
       'search-data-table',
       'search-input',

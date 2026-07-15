@@ -47,6 +47,7 @@
      caller's class list. The template adds it back below when the wrap genuinely applies. */}}
 {{ $class := delimit (complement (slice "table-wrap") (split (or $args.class "") " ")) " " }}
 {{ if $dataTable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if and $args.caption $args.captionTop }}{{ $class = trim (printf "%s caption-top" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
 {{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
@@ -102,6 +103,15 @@
     {{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
     {{ $new := printf `<table class="%s" %s` $target (trim $attributes " ") }}
     {{ $input = replaceRE $regex $new $input 1 }}
+
+    {{/* Insert the caption just before `</table>`, matching where simple-datatables re-appends
+         it so a plain and a data table share the same DOM. `caption-top` (CSS `caption-side`)
+         controls top vs. bottom independently of DOM order. `replace` treats the caption as a
+         literal, avoiding replaceRE backreference handling of a `$` in the text. */}}
+    {{ with $args.caption }}
+        {{ $rendered := . | $args.page.RenderString }}
+        {{ $input = replace $input "</table>" (printf "<caption>%s</caption>\n</table>" $rendered) 1 }}
+    {{ end }}
 
     {{ $wrapper := $args.wrapper | default "" }}
 
