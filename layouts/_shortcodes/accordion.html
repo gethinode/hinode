@@ -18,7 +18,14 @@
 {{ end }}
 
 {{/* Initialize arguments and default values */}}
-{{- $id := $args.id | default (printf "accordion-%d" .Ordinal) -}}
+{{- $id := $args.id -}}
+{{- if not $id -}}
+    {{- $id = .Scratch.Get "resolved-id" -}}
+    {{- if not $id -}}
+        {{- $id = partial "utilities/UniqueID.html" (dict "prefix" "accordion") -}}
+        {{- .Scratch.Set "resolved-id" $id -}}
+    {{- end -}}
+{{- end -}}
 {{- $body := chomp .Inner -}}
 
 {{- if $args.alwaysOpen -}}
