@@ -64,7 +64,7 @@
                 {{- if hasPrefix . "<i" -}}
                     {{ . | safeHTML }}
                 {{- else -}}
-                    {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) }}
+                    {{ partial "assets/icon.html" (dict "page" $page "icon" (string .) "class" "fa-fw me-1" "spacing" false) }}
                 {{- end -}}
             {{- end -}}
             {{- if $collapsible -}}
@@ -119,7 +119,7 @@
                         {{- if hasPrefix . "<i" -}}
                             {{ . | safeHTML }}
                         {{- else -}}
-                            {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) }}
+                            {{ partial "assets/icon.html" (dict "page" $page "icon" (string .) "class" "fa-fw me-1" "spacing" false) }}
                         {{- end -}}
                     {{- end -}}
                     {{- $groupTitle -}}
@@ -187,7 +187,7 @@
     {{- end -}}
     {{- $itemText := $titleText -}}
     {{- with $pre -}}
-        {{- $iconHTML := partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
+        {{- $iconHTML := partial "assets/icon.html" (dict "page" $page "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
         {{- $itemText = printf "%s%s" (string $iconHTML) $titleText -}}
     {{- end -}}
     {{ $href := "" }}
@@ -295,7 +295,7 @@
             {{- if $collapsible -}}
             <div class="sidebar-toggle-container d-flex justify-content-end mb-2 pe-1">
                 <button class="btn btn-sm sidebar-toggle-btn p-1 border-0" aria-label="Toggle sidebar">
-                    {{- partial "assets/icon.html" (dict "icon" $iconCollapse "class" "sidebar-icon-toggle") -}}
+                    {{- partial "assets/icon.html" (dict "page" $page "icon" $iconCollapse "class" "sidebar-icon-toggle") -}}
                 </button>
             </div>
             {{- end -}}
@@ -370,7 +370,7 @@
                            {{- if $collapsible }} data-sidebar-label="{{ $avTitle }}"{{ end }}
                            href="{{ $avHref }}">
                             {{- with .pre -}}
-                                {{- partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
+                                {{- partial "assets/icon.html" (dict "page" $page "icon" (string .) "class" "fa-fw me-1" "spacing" false) -}}
                             {{- end -}}
                             {{- if $collapsible -}}
                                 <span class="sidebar-item-label ms-1">{{- $avTitle -}}</span>
@@ -385,7 +385,7 @@
                                 aria-expanded="false"
                                 aria-controls="sidebar-secondary-{{ $sidebarId }}"
                                 aria-label="{{ T "toggleSecondary" | default "Toggle more items" }}">
-                            {{- partial "assets/icon.html" (dict "icon" $iconSecondary "class" "sidebar-secondary-icon fa-fw" "spacing" false) -}}
+                            {{- partial "assets/icon.html" (dict "page" $page "icon" $iconSecondary "class" "sidebar-secondary-icon fa-fw" "spacing" false) -}}
                         </button>
                         {{- end -}}
                     </li>

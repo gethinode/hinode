@@ -57,7 +57,8 @@
         {{ partial "assets/link.html" (dict "href" $href "text" $title "page" .Page) }}
     {{ else }}
         {{- if not $args.inline }}<div class="pb-3">{{ end -}}
-        {{- partial "assets/button.html" (dict 
+        {{- partial "assets/button.html" (dict
+            "page"        .Page
             "title"       $title
             "href"        $href
             "color"       $color

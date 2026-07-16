@@ -123,7 +123,7 @@
                     {{- range $key, $val := $itemAttrMap }} {{ printf "%s=%q" $key $val | safeHTMLAttr }}{{ end -}}
                 >
                     {{- if $itemIcon -}}
-                        {{- partial "assets/icon.html" (dict "icon" $itemIcon "spacing" false) -}}
+                        {{- partial "assets/icon.html" (dict "page" $page "icon" $itemIcon "spacing" false) -}}
                     {{- else -}}
                         {{ $item }}
                     {{- end -}}

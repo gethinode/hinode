@@ -32,7 +32,7 @@
     {{ $color = "info" }}
 {{ end }}
 {{ with $icon }}
-    {{ $icon = partial "assets/icon.html" (dict "icon" . "class" "fa-2x fa-fw") }}
+    {{ $icon = partial "assets/icon.html" (dict "page" $.Page "icon" . "class" "fa-2x fa-fw") }}
 {{ end }}
 
 {{ $body := trim .Inner " \r\n" -}}

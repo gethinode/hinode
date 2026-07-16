@@ -25,7 +25,7 @@
                     <a class="pe-5 dropdown-item{{ if $collapsed }} switch-mode-collapsed{{ end }}{{ if $active }} active{{ end }}{{ if $disabled }} disabled{{ end }}" href="{{ $url }}">{{ $item.label }}
                         {{ if $item.latest }}&nbsp;({{ T "latest" }}){{ end }}
                         {{ if $active }}
-                            <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "icon" $navbarVersionCheck "class" "fa-fw") }}</span>
+                            <span class="position-absolute end-0 me-3">{{- partial "assets/icon.html" (dict "page" $page "icon" $navbarVersionCheck "class" "fa-fw") }}</span>
                         {{ end }}
                     </a>
                 </li>

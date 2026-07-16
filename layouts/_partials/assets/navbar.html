@@ -156,12 +156,12 @@
                         {{- if $sidebar -}}
                             <button class="navbar-toggler collapsed p-0 mx-auto fw-30" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#offcanvas-sidebar" aria-controls="offcanvas-sidebar" aria-label="{{ T "toggleSidebar" }}">
-                                {{- partial "assets/icon.html" (dict "icon" $navbarOverflow "class" "fa-fw" "spacing" false) -}}
+                                {{- partial "assets/icon.html" (dict "page" $page "icon" $navbarOverflow "class" "fa-fw" "spacing" false) -}}
                             </button>
                         {{- else if eq $align "center" -}}
                             {{/* Insert invisible sidebar toggler to center logo correctly on smaller screens */}}
                             <button class="navbar-toggler collapsed p-0 mx-auto invisible fw-30" type="button">
-                                {{- partial "assets/icon.html" (dict "icon" $navbarOverflow "class" "fa-fw" "spacing" false) -}}
+                                {{- partial "assets/icon.html" (dict "page" $page "icon" $navbarOverflow "class" "fa-fw" "spacing" false) -}}
                             </button>
                         {{- end -}}
                     </div>
@@ -251,6 +251,7 @@
                     {{/* Insert color mode switcher */}}
                     {{- if $enableDarkMode -}}
                         {{- partial "assets/helpers/navbar-mode.html" (dict
+                            "page"       $page
                             "breakpoint" $args.breakpoint
                             "collapsed"  true
                             "id"         .id

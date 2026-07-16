@@ -35,7 +35,8 @@
 
 {{/* Main code */}}
 {{ if not $error }}
-    {{- $output := partial "assets/button.html" (dict 
+    {{- $output := partial "assets/button.html" (dict
+        "page"      .Page
         "link-type" (or $args.linkType $args.type)
         "title"        $title
         "button-size"  (or $args.buttonSize $args.size)

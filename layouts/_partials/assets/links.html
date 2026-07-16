@@ -95,7 +95,8 @@
                 {{ end }}
             {{ end }}
 
-            {{ partial "assets/button.html" (dict 
+            {{ partial "assets/button.html" (dict
+                "page"      $page
                 "href"      $url
                 "title"     $title
                 "icon"      .icon

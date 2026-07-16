@@ -32,7 +32,7 @@
         {{- with $prevPage -}}
             {{- if .OutputFormats.Get "html" -}}
                 <a class="next" href="{{ .RelPermalink }}">
-                    {{- partial "assets/icon.html" (dict "icon" $pageNavPrev "spacing" false) }}&nbsp;{{ .LinkTitle }}
+                    {{- partial "assets/icon.html" (dict "page" $ "icon" $pageNavPrev "spacing" false) }}&nbsp;{{ .LinkTitle }}
                 </a>
             {{- end -}}
         {{- end -}}
@@ -41,7 +41,7 @@
         {{- with $nextPage -}}
             {{- if .OutputFormats.Get "html" -}}
                 <a class="previous" href="{{ .RelPermalink }}">
-                    {{ .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "icon" $pageNavNext "spacing" false) }}
+                    {{ .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "page" $ "icon" $pageNavNext "spacing" false) }}
                 </a>
             {{- end -}}
         {{- end -}}

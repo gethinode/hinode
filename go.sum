@@ -1,5 +1,7 @@
 github.com/FortAwesome/Font-Awesome v0.0.0-20260625220317-70fb2dd154b6 h1:slcJCZg0UQMHqw5JCoVmE8/IJfoNUprTmP2T3lDG9VY=
 github.com/FortAwesome/Font-Awesome v0.0.0-20260625220317-70fb2dd154b6/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
+github.com/FortAwesome/Font-Awesome v0.0.0-20260715180930-14c65a3747d0 h1:4+bB2ojsMTsQroHtQr1FWy2gxFzpBn5hISldeRfxF+o=
+github.com/FortAwesome/Font-Awesome v0.0.0-20260715180930-14c65a3747d0/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/airbnb/lottie-web v5.13.0+incompatible h1:plBV5Uq/F1kK0EC61Hr0cBGReI9OgUfd/pp0baoDX8o=
 github.com/airbnb/lottie-web v5.13.0+incompatible/go.mod h1:nTss557UK9FGnp8QYlCMO29tjUHwbdAHG/DprbGfHGE=
 github.com/gethinode/mod-blocks/v2 v2.2.0 h1:sIRH7R7MYvqVECByJEuopVgzUCOa+iOEYOFCIouo5A0=
@@ -12,6 +14,8 @@ github.com/gethinode/mod-flexsearch/v5 v5.0.2 h1:VAHzYLJECrVBvzn5xvM+FoHSP2VwDDP
 github.com/gethinode/mod-flexsearch/v5 v5.0.2/go.mod h1:0kRR1xaAhSYVyVICV5+x5bF8OSpfre1DwLdrK3a5uAA=
 github.com/gethinode/mod-fontawesome/v6 v6.0.2 h1:MxaHU7MZIh4pgxtoR6C/F0qiB5eSiySmRpTw9DGIOVs=
 github.com/gethinode/mod-fontawesome/v6 v6.0.2/go.mod h1:Zy+hjVhFDU52nkTIn9btbZ1PWy2n203zKHiPG9RVSL0=
+github.com/gethinode/mod-fontawesome/v6 v6.1.1 h1:k5Jy7nA+YfLZ9YqXH8hyaiw9wjAeOxNEUcnu6fynnJo=
+github.com/gethinode/mod-fontawesome/v6 v6.1.1/go.mod h1:875OBk5te+KBJmr0PdSkFcduYnsKCuHWfcaqChh9NGo=
 github.com/gethinode/mod-google-analytics/v2 v2.0.4 h1:ONEUjhfVR6p+Y/XyU3BUGXZy4+HAkJvGo+mr24ugklY=
 github.com/gethinode/mod-google-analytics/v2 v2.0.4/go.mod h1:y4ZlacA8FSXjmvn9P8cZshOrBB5Wc+3p0DKSehkk+8E=
 github.com/gethinode/mod-katex v1.1.6 h1:mow61stEySb5mH5tUp1l69l2FrLWl+jh46JVT5lMOSA=

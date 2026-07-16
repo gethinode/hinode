@@ -41,6 +41,7 @@
     {{ with $args.menuEntry.Params.icon }}
         <div class="flex-shrink-1">
             {{- partial "assets/card-icon.html" (dict
+                "page"         $args.page
                 "icon"         .
                 "padding"      0
                 "icon-rounded" $args.iconRounded

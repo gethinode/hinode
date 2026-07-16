@@ -8,10 +8,12 @@
 
 {{- define "_partials/inline/card-icons.html" -}}
     {{ $links := .links }}
-    
+    {{ $page := .page }}
+
     <span class="text-body-secondary">
         {{- range $index, $item := $links -}}
-            {{ partial "assets/button.html" (dict 
+            {{ partial "assets/button.html" (dict
+                "page"       $page
                 "href"       $item.url
                 "icon"       ($item.icon | default "")
                 "icon-class" "fa-fw"
@@ -26,6 +28,7 @@
 {{/* Inline partial to render the card's body */}}
 {{- define "_partials/inline/card-body.html" -}}
     {{- $page := .page -}}
+    {{- $owner := .owner -}}
     {{- $title := .title -}}
     {{- $href := .href -}}
     {{- $color := .color -}}
@@ -40,8 +43,8 @@
             {{ if or $title $links }}
                 <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | $page.RenderString }}{{ end }}
-                    {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
-                    {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "icon" . "spacing" false) -}}</span>{{- end -}}
+                    {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $owner) }}{{ end -}}
+                    {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "page" $owner "icon" . "spacing" false) -}}</span>{{- end -}}
                 </p>
             {{ end -}}
             {{ with $description }}
@@ -55,7 +58,7 @@
             {{ if or $title $links }}
                 <p class="card-title {{ $fs }}">
                     {{- with $title }}{{ . | $page.RenderString }}{{ end }}
-                    {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
+                    {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $owner) }}{{ end -}}
                 </p>
             {{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
@@ -245,6 +248,7 @@
                 <div class="card-body {{ $padding }} h-100 hstack">
                     {{ if $icon }}
                         {{- partial "assets/card-icon.html" (dict
+                            "page"         $args.page
                             "icon"         $icon
                             "padding"      0
                             "icon-rounded" $args.iconRounded
@@ -263,6 +267,7 @@
                         {{ end }}
                         {{- partial "inline/card-body.html" (dict
                             "page"        $renderPage
+                            "owner"       $args.page
                             "title"       (cond $minimal "" $title)
                             "href"        $href
                             "color"       $args.color
@@ -285,7 +290,8 @@
                             {{ $buttonType := (or $args.linkType $args.buttonType) }}
                             {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link mb-n4" }}{{ end }}
                             <div class="d-flex align-items-end">
-                                {{ partial "assets/button.html" (dict 
+                                {{ partial "assets/button.html" (dict
+                                    "page"        $args.page
                                     "title"       $label
                                     "icon"        $cardReadMore
                                     "href"        $href
@@ -313,6 +319,7 @@
             )) -}}
         {{- else if $icon -}}
             {{- partial "assets/card-icon.html" (dict
+                "page"         $args.page
                 "icon"         $icon
                 "padding"      0
                 "icon-rounded" $args.iconRounded
@@ -326,6 +333,7 @@
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict
                 "page"        $renderPage
+                "owner"       $args.page
                 "title"       (cond $minimal "" $title)
                 "href"        $href
                 "color"       $args.color
@@ -346,7 +354,8 @@
                     {{ $buttonType := (or $args.linkType $args.buttonType) }}
                     {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
                     {{ if ne $args.align "start" }}{{ $buttonClass = printf "%s m%s-auto" $buttonClass (cond (eq $args.align "center") "x" "s") }}{{ end }}
-                    {{ partial "assets/button.html" (dict 
+                    {{ partial "assets/button.html" (dict
+                        "page"        $args.page
                         "title"       $label
                         "href"        $href
                         "outline"     true

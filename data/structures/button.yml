@@ -2,6 +2,8 @@ comment: >-
   Display a button with a hyperlink.
 icon: touch_app
 arguments:
+  page:
+    optional: true
   title:
     preview: true
   class:

@@ -11,5 +11,5 @@
 {{- $icon := partial "utilities/GetThemeIcon.html" (dict "id" "lightboxExpand" "default" "fas expand") -}}
 <button type="button" class="control-btn-lightbox" data-lightbox-trigger data-lightbox-source="{{ $source }}"
         aria-label="{{ i18n "lightboxExpand" }}">
-    {{- partial "assets/icon.html" (dict "icon" $icon "class" "fa-fw fa-xl" "spacing" false) -}}
+    {{- partial "assets/icon.html" (dict "page" .page "icon" $icon "class" "fa-fw fa-xl" "spacing" false) -}}
 </button>

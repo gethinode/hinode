@@ -79,7 +79,7 @@
             {{- end -}}
 
             {{- if $cue -}}
-                {{- $suffix := partial "assets/icon.html" (dict "icon" $externalLink "class" "fa-2xs" "spacing" false) -}}
+                {{- $suffix := partial "assets/icon.html" (dict "page" $args.page "icon" $externalLink "class" "fa-2xs" "spacing" false) -}}
                 {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
             {{- end -}}
         {{- else -}}

@@ -1,4 +1,5 @@
 {{- $id := .id | default "navbar-mode" -}}
+{{- $page := .page -}}
 {{- $toggle := .toggle | default false -}}
 {{- $breakpoint := .breakpoint -}}
 {{- with site.Params.main.colorMode.iconLight -}}
@@ -26,16 +27,16 @@
     <label class="label" for="{{ $id }}-checkbox">
         {{ if $toggle }}
             <div class="mode-item d-none-main-dark">
-                {{- partial "assets/icon.html" (dict "icon" $iconLight "class" "fa-fw" "spacing" false) }}
+                {{- partial "assets/icon.html" (dict "page" $page "icon" $iconLight "class" "fa-fw" "spacing" false) }}
                 <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
             </div>
             <div class="mode-item d-none-main-light">
-                {{- partial "assets/icon.html" (dict "icon" $iconDark "class" "fa-fw" "spacing" false) }}
+                {{- partial "assets/icon.html" (dict "page" $page "icon" $iconDark "class" "fa-fw" "spacing" false) }}
                 <span class="d-{{ $breakpoint }}-none">{{ T "colorMode" }}</span>
             </div>
         {{ else }}
-            {{- partial "assets/icon.html" (dict "icon" $iconLight "class" "fa-fw" "spacing" false) }}
-            {{- partial "assets/icon.html" (dict "icon" $iconDark "class" "fa-fw" "spacing" false) }}
+            {{- partial "assets/icon.html" (dict "page" $page "icon" $iconLight "class" "fa-fw" "spacing" false) }}
+            {{- partial "assets/icon.html" (dict "page" $page "icon" $iconDark "class" "fa-fw" "spacing" false) }}
             <div class="ball"></div>
         {{ end }}
     </label>
