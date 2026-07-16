@@ -50,7 +50,7 @@
 {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
 {{- $id := $args.id | default (printf "navbar-%d" 0) -}}
 {{- $page := $args.page -}}
-{{- $baseURL := $page.Scratch.Get "baseURL" -}}
+{{- $baseURL := partialCached "utilities/GetBaseURL.html" site -}}
 {{- $breakpoint := or $args.breakpoint $args.size }}
 
 {{- $defaultMenu := "main" -}}
@@ -107,6 +107,7 @@
         {{ $height := index site.Params.navigation "logo-height" | default 30 }}
         {{ $class := cond (eq $align "start") "my-auto" "m-auto" }}
         {{ $logo = partial "assets/image.html" (dict
+            "page"         $page
             "src"          .
             "loading"      "eager"
             "title"        $title
@@ -147,7 +148,9 @@
                      In shell mode, the L1 sidebar lives outside the navbar at
                      ≥breakpoint and the offcanvas toggler is emitted at the
                      trailing edge below instead. */}}
-                {{ $sidebar := $page.Scratch.Get "sidebar" }}
+                {{ $version := partial "utilities/GetVersion.html" (dict "page" $page "base" true) }}
+                {{ $disable := eq (index $page.Params "sidebar-menu") false }}
+                {{ $sidebar := (partialCached "utilities/GetVersionedMenu.html" (dict "page" $page "version" $version) $page.Section $version $page.Kind $disable).menu }}
                 {{- if and (not $shell) (or $sidebar (eq $align "center")) -}}
                     <div class="d-flex align-items-center">
                         {{- if $sidebar -}}

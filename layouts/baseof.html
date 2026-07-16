@@ -1,16 +1,15 @@
-{{- /* Set version-aware sidebar menu */ -}}
-{{- $version := partial "utilities/GetVersion.html" (dict "page" . "base" true) -}}
+{{- /* Set version-aware sidebar menu. The helper is called uncached on purpose: GetMenu
+       records the "sidebarFilename" diagnostic on the page's scratch, which should land on
+       every page. The scratch seeds below remain for downstream readers. */ -}}
+{{- $vstate := partial "utilities/GetVersionedMenu.html" (dict "page" .) -}}
+{{- $version := $vstate.version -}}
 {{- $.Scratch.Set "version" $version -}}
-{{ with partial "utilities/GetMenu" (dict "page" . "version" $version) }}{{ $.Scratch.Set "sidebar" . }}{{ end }}
+{{ with $vstate.menu }}{{ $.Scratch.Set "sidebar" . }}{{ end }}
 
 {{- /* Validate if current version is latest */ -}}
-{{- if and site.Params.docs.checkVersion $version -}}
-    {{- if ne $version "latest" -}}
-        {{- if partial "utilities/IsOlder" (dict "current" $version) -}}
-            {{- $.Scratch.Set "pageAlertMsg" (T "newerVersionAlert" site.Title) -}}
-            {{- $.Scratch.Set "pageAlertURL" (or site.Params.docs.latestURL site.baseURL) -}}
-        {{- end -}}
-    {{- end -}}
+{{- if $vstate.isOlder -}}
+    {{- $.Scratch.Set "pageAlertMsg" (T "newerVersionAlert" site.Title) -}}
+    {{- $.Scratch.Set "pageAlertURL" (or site.Params.docs.latestURL site.baseURL) -}}
 {{- end -}}
 
 {{- /* Initialize module configuration */ -}}

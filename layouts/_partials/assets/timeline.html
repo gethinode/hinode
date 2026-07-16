@@ -139,6 +139,7 @@
     {{ $title := "" }}
     {{ if $args.heading }}
         {{ $title = partial "assets/section-title.html" (dict
+            "page"        $page
             "heading"     $args.heading
             "use-title"   $args.useTitle
             "size"        $args.size

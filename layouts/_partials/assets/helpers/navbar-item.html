@@ -38,7 +38,7 @@
 {{- $tab := site.Params.main.externalLinks.tab -}}
 {{- if (isset $params "tab") }}{{ $tab = $params.tab }}{{ end -}}
 {{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
-{{- $baseURL := $page.Scratch.Get "baseURL" | default "/" -}}
+{{- $baseURL := partialCached "utilities/GetBaseURL.html" site | default "/" -}}
 {{- $menuURL := "" -}}
 {{ if or (strings.HasPrefix $entry.PageRef "http") (strings.HasPrefix $entry.URL "http") }}
     {{ $menuURL = or $entry.PageRef $entry.URL }}

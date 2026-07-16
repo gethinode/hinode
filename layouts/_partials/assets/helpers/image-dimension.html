@@ -143,7 +143,8 @@
 {{ if or (hasSuffix $src "svg") $isStatic $args.plain }}
     {{- $targetURL = partial "utilities/GetStaticURL" (dict "url" $staticPath) -}}
 {{ else if (gt (len $dims) 0) }}
-    {{- $targetURL = partial "assets/helpers/image-set.html" (dict 
+    {{- $targetURL = partial "assets/helpers/image-set.html" (dict
+        "page"          $args.page
         "src"           $src
         "img"           (partial "utilities/OmitEmpty.html" $img)
         "dims"          ($dims | last 1)
@@ -154,7 +155,8 @@
         "include-width" false
     )}}
     {{ if $args.imageset }}
-        {{- $set = partial "assets/helpers/image-set.html" (dict 
+        {{- $set = partial "assets/helpers/image-set.html" (dict
+            "page"          $args.page
             "src"           $src
             "img"           (partial "utilities/OmitEmpty.html" $img)
             "dims"          $dims

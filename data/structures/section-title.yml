@@ -3,6 +3,8 @@ comment: >-
   layout options.
 group: partial
 arguments:
+  page:
+    optional: true
   heading:
   links:
   color:

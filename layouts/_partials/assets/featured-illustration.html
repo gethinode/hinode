@@ -45,6 +45,7 @@
 {{- else if $image -}}
     {{- if not (hasSuffix $image "svg") }}{{ $class = strings.TrimSpace (printf "%s rounded" (or $class "")) }}{{ end -}}
     {{- partial "assets/live-image.html" (dict
+        "page"     $args.page
         "src"      $image
         "anchor"   $args.anchor
         "ratio"    $args.ratio

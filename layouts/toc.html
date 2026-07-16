@@ -5,7 +5,8 @@
     <div class="toc toc-sidebar mb-5 my-md-0 mb-lg-5 pb-3 text-body-secondary sticky-top">
         {{ if $download }}
             <div class="mb-5 p-0">
-                {{ partial "assets/download.html" (dict 
+                {{ partial "assets/download.html" (dict
+                    "page"        .
                     "download"    $download
                     "outline"     true
                     "button-size" "sm"

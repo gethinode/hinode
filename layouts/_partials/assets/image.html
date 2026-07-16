@@ -19,13 +19,26 @@
     {{- $error = $args.err -}}
 {{- end -}}
 
+{{/* Resolve the intrinsic page; fall back to the global page for one release */}}
+{{- $page := $args.page -}}
+{{- if not $page -}}
+    {{- $noop := partial "utilities/LogWarn.html" (dict
+        "partial" "assets/image.html"
+        "warnid"  "warn-missing-page-argument"
+        "msg"     "Missing argument 'page', falling back to the global page context"
+        "details" (slice "Pass the rendering page explicitly; this fallback will be removed in a future release")
+        "file"    page.File
+    ) -}}
+    {{- $page = page -}}
+{{- end -}}
+
 {{/* Initialize global arguments */}}
 {{- $absoluteURL := site.Params.main.canonifyAssetsURLs | default false -}}
 {{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
 
 {{/* Initialize local arguments */}}
 {{- $caption := $args.caption -}}
-{{- if and site.Params.main.titleCase (not page.Params.exact) (eq $caption (plainify $caption)) -}}
+{{- if and site.Params.main.titleCase (not $page.Params.exact) (eq $caption (plainify $caption)) -}}
     {{- $caption = title $caption -}}
 {{- end -}}
 {{- $src := or $args.src $args.url -}}
@@ -33,7 +46,7 @@
 {{/* Main code */}}
 {{- $params := dict -}}
 {{- $params = merge $params (dict
-    "page"         $args.page
+    "page"         $page
     "ratio"        $args.ratio
     "portrait"     $args.portrait
     "image-width"  $args.imageWidth

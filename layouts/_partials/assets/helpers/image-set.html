@@ -38,7 +38,8 @@
         {{ $width := (int (index (split $dim "x") 0)) }}
         {{ $height := (int (index (split $dim "x") 1)) }}
 
-        {{- $element := partial $adapter (dict 
+        {{- $element := partial $adapter (dict
+            "page"         $args.page
             "url-host"     $host
             "url-dir"      $dir
             "url-file"     $file

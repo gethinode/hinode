@@ -3,6 +3,8 @@ comment: >-
   such as title, href, and thumbnail override the corresponding page attributes.
 icon: article
 arguments:
+  page:
+    optional: true
   title:
     optional: true
     preview: true

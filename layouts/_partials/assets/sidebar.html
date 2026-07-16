@@ -270,6 +270,7 @@
             <a class="sidebar-brand text-decoration-none" href="{{ $logoHome }}" aria-label="{{ T "home" }}">
                 {{- with $logo -}}
                     {{ partial "assets/image.html" (dict
+                        "page"         $args.page
                         "src"          .
                         "loading"      "eager"
                         "title"        site.Title
@@ -280,6 +281,7 @@
                 {{- end -}}
                 {{- with $logoCollapsed -}}
                     {{ partial "assets/image.html" (dict
+                        "page"         $args.page
                         "src"          .
                         "loading"      "eager"
                         "title"        site.Title

@@ -25,6 +25,7 @@
 
 {{/* Inline partial to render the card's body */}}
 {{- define "_partials/inline/card-body.html" -}}
+    {{- $page := .page -}}
     {{- $title := .title -}}
     {{- $href := .href -}}
     {{- $color := .color -}}
@@ -38,7 +39,7 @@
         <a href="{{ $href }}" class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} stretched-link {{ $class }}">
             {{ if or $title $links }}
                 <p class="card-title {{ $fs }}">
-                    {{- with $title }}{{ . | page.RenderString }}{{ end }}
+                    {{- with $title }}{{ . | $page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                     {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "icon" . "spacing" false) -}}</span>{{- end -}}
                 </p>
@@ -53,7 +54,7 @@
         <div{{ with $class }} class="{{ . }}"{{ end }}>
             {{ if or $title $links }}
                 <p class="card-title {{ $fs }}">
-                    {{- with $title }}{{ . | page.RenderString }}{{ end }}
+                    {{- with $title }}{{ . | $page.RenderString }}{{ end }}
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" .) }}{{ end -}}
                 </p>
             {{ end -}}
@@ -162,6 +163,20 @@
     {{- if not $args.mode }}{{ $mode = (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.mode) false) }}{{ end -}}
 {{- end -}}
 
+{{/* Resolve the page used for inline markdown rendering; prefer the card's target page and
+     fall back to the global page for one release */}}
+{{- $renderPage := or $page $args.page -}}
+{{- if not $renderPage -}}
+    {{- $noop := partial "utilities/LogWarn.html" (dict
+        "partial" "assets/card.html"
+        "warnid"  "warn-missing-page-argument"
+        "msg"     "Missing argument 'page', falling back to the global page context"
+        "details" (slice "Pass the rendering page explicitly; this fallback will be removed in a future release")
+        "file"    page.File
+    ) -}}
+    {{- $renderPage = page -}}
+{{- end -}}
+
 {{- $style := $args.iconStyle }}
 {{ if (hasPrefix $args.orientation "horizontal") }}
     {{ if not $args.iconStyle }}{{ $style = "fa-fluid fa-fw" }}{{ end }}
@@ -182,6 +197,7 @@
 {{- $linkIcon := cond (and $linkIconEnabled $href (not $args.button) (not $args.buttonLabel)) $cardLinkIcon "" -}}
 
 {{- $thumbnailArgs := dict
+    "page"     $renderPage
     "src"      $thumbnail
     "portrait" $args.portrait
     "anchor"   $anchor
@@ -246,6 +262,7 @@
                             </div>
                         {{ end }}
                         {{- partial "inline/card-body.html" (dict
+                            "page"        $renderPage
                             "title"       (cond $minimal "" $title)
                             "href"        $href
                             "color"       $args.color
@@ -308,6 +325,7 @@
             {{- if $overlay }}data-bs-theme="dark"{{ end }}>
             {{ if $page }}{{- partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) -}}{{ end }}
             {{- partial "inline/card-body.html" (dict
+                "page"        $renderPage
                 "title"       (cond $minimal "" $title)
                 "href"        $href
                 "color"       $args.color
