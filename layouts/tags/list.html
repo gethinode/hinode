@@ -1,7 +1,7 @@
 {{ define "main" }}
     {{- $page := . -}}
     {{- $layout := $page.Params.layout -}}
-    {{- $breakpoint := $.Scratch.Get "breakpoint" -}}
+    {{- $breakpoint := partialCached "utilities/GetBreakpoint.html" site -}}
     {{- $padding := partial "utilities/GetPadding.html" -}}
     {{- $pageTitle := .Page.Title }}
     {{ if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $pageTitle = title $pageTitle }}{{ end }}
