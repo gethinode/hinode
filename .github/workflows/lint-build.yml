@@ -18,7 +18,12 @@ jobs:
     with:
       package-manager: pnpm
       lint-script: lint
-      build-command: pnpm run build:cache && pnpm run build:example:ci
+      # GOGC=400 relaxes Go garbage collection during Hugo builds (Go default is GOGC=100).
+      # Measured locally on the exampleSite build, GOGC=800 saved 6-7 CPU-seconds; 400 is the
+      # conservative pick as CI runners have less RAM. The variable is prepended to the build
+      # command because an `env:` block at this caller does not propagate into the reusable
+      # workflow. The reusable workflow runs the command with `shell: bash` on every OS.
+      build-command: GOGC=400 pnpm run build:cache && GOGC=400 pnpm run build:example:ci
       cache-key: hugo-hinode
       dart-sass-version: "1.98.0"
     secrets: inherit

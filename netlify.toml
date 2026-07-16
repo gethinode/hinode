@@ -5,6 +5,7 @@
 
   [build.environment]
     DART_SASS_VERSION = '1.98.0'
+    GOGC = '400'
     HUGO_ENABLEGITINFO = 'true'
     HUGO_ENV = 'production'
     HUGO_VERSION = '0.153.1'
