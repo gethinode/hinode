@@ -6,6 +6,8 @@ github.com/airbnb/lottie-web v5.13.0+incompatible h1:plBV5Uq/F1kK0EC61Hr0cBGReI9
 github.com/airbnb/lottie-web v5.13.0+incompatible/go.mod h1:nTss557UK9FGnp8QYlCMO29tjUHwbdAHG/DprbGfHGE=
 github.com/gethinode/mod-blocks/v2 v2.2.0 h1:sIRH7R7MYvqVECByJEuopVgzUCOa+iOEYOFCIouo5A0=
 github.com/gethinode/mod-blocks/v2 v2.2.0/go.mod h1:z+0Rg+I0naJf7VOy9dDuo8FX1dB5bPuMmbWT1QmBFhg=
+github.com/gethinode/mod-blocks/v2 v2.2.2 h1:8CZkdenBGUQ2O6zMdlD+UHG5cjCOVxIG0UfBagSFWog=
+github.com/gethinode/mod-blocks/v2 v2.2.2/go.mod h1:Kt8QjKpgozmxGj0dX20f0i8ZdBVaO1jw+tbZwJUl7yE=
 github.com/gethinode/mod-bootstrap v1.3.7 h1:rbjOg//q7dbsM+TkDQLsyk9LKv93D1RUjtcSkvV55UU=
 github.com/gethinode/mod-bootstrap v1.3.7/go.mod h1:CxrYCFzKtBMz3YWG5i/d5jHKCgvUo60NFcCmz2mxCjQ=
 github.com/gethinode/mod-csp v1.0.12 h1:6CaIH3IBn92lcwMFdYPmmWsPKq+VZ6n9Po8FI26jLJc=
@@ -26,6 +28,8 @@ github.com/gethinode/mod-lottie/v3 v3.0.2 h1:PJ9BB5s+oli2D5i9apcWu8AowtfyNVb7VAc
 github.com/gethinode/mod-lottie/v3 v3.0.2/go.mod h1:QnNRtZPSwl6x7acJbR4jHNhNNRxbwVv0XsnD1hFcsro=
 github.com/gethinode/mod-mermaid/v5 v5.0.1 h1:heGJ9i3rDXAh+qU8N0jSEPhVGOsQwxLpNmB+h1FhTg8=
 github.com/gethinode/mod-mermaid/v5 v5.0.1/go.mod h1:3M0XrI6Ginj5EIbXy1xOymv3KsfPuBhD07FEPz1SikI=
+github.com/gethinode/mod-mermaid/v5 v5.0.2 h1:OmpgjPcSlm7lXpcRDKkZbzklG/3a9QurrqsdkGMDdGQ=
+github.com/gethinode/mod-mermaid/v5 v5.0.2/go.mod h1:rrCnPe+gLH83GpMm5uA/SeapZcNBj65jcJVLyXtsXPU=
 github.com/gethinode/mod-simple-datatables/v4 v4.1.0 h1:AtEtLH9RoAEIpElg0k6UkVlHmiBc4Df3NCCUfBtmktU=
 github.com/gethinode/mod-simple-datatables/v4 v4.1.0/go.mod h1:jRHoX20bUiaVg7UtKzMjfHQjd5M6WZ8hAeVqA3TKwTA=
 github.com/gethinode/mod-utils/v6 v6.6.0 h1:b+xpvPUqDKcQr1LUU4YKqtr7zIpzZ7zxCrlpLtlyr5Y=
