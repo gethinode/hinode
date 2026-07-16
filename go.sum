@@ -2,6 +2,8 @@ github.com/FortAwesome/Font-Awesome v0.0.0-20260625220317-70fb2dd154b6 h1:slcJCZ
 github.com/FortAwesome/Font-Awesome v0.0.0-20260625220317-70fb2dd154b6/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/airbnb/lottie-web v5.13.0+incompatible h1:plBV5Uq/F1kK0EC61Hr0cBGReI9OgUfd/pp0baoDX8o=
 github.com/airbnb/lottie-web v5.13.0+incompatible/go.mod h1:nTss557UK9FGnp8QYlCMO29tjUHwbdAHG/DprbGfHGE=
+github.com/gethinode/mod-blocks/v2 v2.2.0 h1:sIRH7R7MYvqVECByJEuopVgzUCOa+iOEYOFCIouo5A0=
+github.com/gethinode/mod-blocks/v2 v2.2.0/go.mod h1:z+0Rg+I0naJf7VOy9dDuo8FX1dB5bPuMmbWT1QmBFhg=
 github.com/gethinode/mod-bootstrap v1.3.7 h1:rbjOg//q7dbsM+TkDQLsyk9LKv93D1RUjtcSkvV55UU=
 github.com/gethinode/mod-bootstrap v1.3.7/go.mod h1:CxrYCFzKtBMz3YWG5i/d5jHKCgvUo60NFcCmz2mxCjQ=
 github.com/gethinode/mod-csp v1.0.12 h1:6CaIH3IBn92lcwMFdYPmmWsPKq+VZ6n9Po8FI26jLJc=

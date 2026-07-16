@@ -33,7 +33,7 @@
 {{- end -}}
 
 {{/* Initialize global arguments */}}
-{{- $breakpoint := page.Scratch.Get "breakpoint" -}}
+{{- $breakpoint := partialCached "utilities/GetBreakpoint.html" site -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{- define "_partials/links-content.html" -}}
