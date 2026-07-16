@@ -23,8 +23,9 @@
             <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
                 {{/* Render the defined content blocks, using the default articles element as fallback for list pages */}}
                 {{ if .Params.content_blocks }}
+                    {{/* The scratch value below is deprecated, kept for module version skew */}}
                     {{- $.Scratch.Set "blocks_embed" true -}}
-                    {{- partial "page/blocks.html" . -}}
+                    {{- partial "page/blocks.html" (dict "page" . "embed" true) -}}
                 {{ else if eq .Kind "section" }}
                     {{ $.Scratch.Set "articlesParams" (dict
                         "sort"         "weight"

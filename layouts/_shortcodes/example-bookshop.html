@@ -61,7 +61,7 @@
         {{ $lang = (trim (index (split $content "\n") 2) "\x60") | default "yml" }}
         {{ $content = index (index $inputRE 0) 2 }}
         {{ $data = index (unmarshal $content) 0 }}
-        {{ $data = merge $data (dict "section_class" $sectionClass) }}
+        {{ $data = merge $data (dict "section_class" $sectionClass "_page" .Page) }}
         {{ $component_name := (index $data "_bookshop_name") }}
         {{ if not $component_name }}
             {{ errorf "Expected '_bookshop_name': %s" .Position -}}
