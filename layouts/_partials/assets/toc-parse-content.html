@@ -52,13 +52,9 @@
 
 {{- /* Render */}}
 {{- if .Site.Params.navigation.toc }}
-    {{- /* Check for custom headings in Page.Store or Page.Params, otherwise use Page.Fragments */}}
-    {{- $customHeadings := .Page.Store.Get "Headings" }}
-    {{- $customHeadingsMap := .Page.Store.Get "HeadingsMap" }}
-    {{- if not $customHeadings }}
-        {{- $customHeadings = .Page.Params.Headings }}
-        {{- $customHeadingsMap = .Page.Params.HeadingsMap }}
-    {{- end }}
+    {{- /* Check for custom headings in Page.Params, otherwise use Page.Fragments */}}
+    {{- $customHeadings := .Page.Params.Headings }}
+    {{- $customHeadingsMap := .Page.Params.HeadingsMap }}
 
     {{- $fragments := cond $customHeadings (dict "Headings" $customHeadings "HeadingsMap" $customHeadingsMap) .Page.Fragments }}
 

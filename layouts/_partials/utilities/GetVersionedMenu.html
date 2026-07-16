@@ -1,0 +1,42 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+    Computes the version-aware sidebar state of a page: the docs version (base label), the
+    matching sidebar menu, and whether that version is older than the site's latest release.
+    This is the same logic baseof.html uses to seed the "version", "sidebar", "pageAlertMsg",
+    and "pageAlertURL" scratch values, extracted so layout and shortcode paths can share it
+    without reading the page's scratch (which is unreliable outside the page's own render).
+
+    The result is a pure function of the page's section, docs version, kind, and "sidebar-menu"
+    page parameter. Callers on a hot path should invoke it as:
+
+        partialCached "utilities/GetVersionedMenu.html" (dict "page" $page "version" $version)
+            $page.Section $version $page.Kind $disable
+
+    with $version obtained from "utilities/GetVersion.html" (cheap) and $disable reflecting the
+    page's "sidebar-menu" parameter. baseof.html deliberately calls it uncached so the
+    "sidebarFilename" diagnostic that GetMenu records on the page's scratch keeps landing on
+    every page.
+
+    Arguments:
+    - page:    context of the intrinsic page (required)
+    - version: precomputed base version of the page (optional)
+
+    Returns a dict with the keys "version" (string), "menu" (menu data or ""), and "isOlder"
+    (bool).
+*/}}
+
+{{- $page := .page -}}
+{{- $version := or .version (partial "utilities/GetVersion.html" (dict "page" $page "base" true)) -}}
+{{- $menu := partial "utilities/GetMenu" (dict "page" $page "version" $version) -}}
+
+{{- $isOlder := false -}}
+{{- if and site.Params.docs.checkVersion $version -}}
+    {{- if ne $version "latest" -}}
+        {{- $isOlder = partial "utilities/IsOlder" (dict "current" $version) -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return (dict "version" $version "menu" $menu "isOlder" $isOlder) -}}

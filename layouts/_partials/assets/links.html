@@ -19,11 +19,25 @@
     {{ $error = $args.err }}
 {{ end }}
 
+{{/* Resolve the intrinsic page; fall back to the global page for one release */}}
+{{- $page := $args.page -}}
+{{- if not $page -}}
+    {{- $noop := partial "utilities/LogWarn.html" (dict
+        "partial" "assets/links.html"
+        "warnid"  "warn-missing-page-argument"
+        "msg"     "Missing argument 'page', falling back to the global page context"
+        "details" (slice "Pass the rendering page explicitly; this fallback will be removed in a future release")
+        "file"    page.File
+    ) -}}
+    {{- $page = page -}}
+{{- end -}}
+
 {{/* Initialize global arguments */}}
 {{- $breakpoint := partialCached "utilities/GetBreakpoint.html" site -}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
 {{- define "_partials/links-content.html" -}}
+    {{- $page := .page -}}
     {{ $links := .links }}    
     {{ $justify := .justify }}
     {{ $type := .type }}
@@ -40,7 +54,7 @@
 
         {{ $url := "" }}
         {{ with .url }}
-            {{ $link := partial "utilities/GetLink.html" (dict "page" page "href" .) }}
+            {{ $link := partial "utilities/GetLink.html" (dict "page" $page "href" .) }}
             {{ if not $link.error }}
                 {{ $url = $link.href }}
             {{ else }}
@@ -54,7 +68,8 @@
         {{ if (eq $li true) }}<div>{{ end }}
 
         {{ if .download }}
-            {{ partial "assets/download.html" (dict 
+            {{ partial "assets/download.html" (dict
+                "page"        $page
                 "download"    .download
                 "title"       $title
                 "icon"        .icon
@@ -96,9 +111,9 @@
 {{ end }}
 
 <div class="hstack d-none d-{{ $breakpoint.current }}-block {{ if gt (len $args.links) 1 }} gap-5{{ end }} justify-content-{{ $args.align }} pt-{{ $padding.y }}">
-    {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
+    {{ partial "links-content.html" (dict "page" $page "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
 </div>
 
 <div class="d-{{ $breakpoint.current }}-none pt-{{ $padding.y }}">
-    {{ partial "links-content.html" (dict "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
+    {{ partial "links-content.html" (dict "page" $page "links" $args.links "justify" $args.justify "type" $args.linkType "li" false) }}
 </div>

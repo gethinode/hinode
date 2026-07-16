@@ -2,6 +2,8 @@ comment: >-
   Defines the interface to be implemented by a CDN image adapter.
 group: partial
 arguments:
+  page:
+    optional: true
   url-host:
     release: v1.0.0
   url-dir:

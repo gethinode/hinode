@@ -12,7 +12,10 @@ enableInlineShortcodes = true
 
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
-ignoreErrors = ["error-remote-getjson", "warn-preview-restricted"]
+# the transitional 'warn-missing-page-argument' entry suppresses the fallback warning raised by
+# mod-blocks <= v2.1.4, which calls the section-title / image partials without a page argument;
+# remove it once the exampleSite picks up the mod-blocks release that threads the page explicitly.
+ignoreErrors = ["error-remote-getjson", "warn-preview-restricted", "warn-missing-page-argument"]
 timeout = "180s"
 
 languageCode = "en-us"

@@ -41,7 +41,10 @@
 {{ $page := .Page }}
 {{ $filtered := gt (len (findRE `[^,\s]` (printf "%v" (or $args.filter "")) 1)) 0 }}
 {{ if or $args.sortable $args.paginate $args.searchable $filtered }}
-    {{ with $page.Scratch.Get "modules" }}
+    {{- /* Mirror the cache shape of baseof.html: page context, no variant key, so both share a
+         single cached entry per language. InitModules needs a page context (it calls .IsPage
+         and .Site), which rules out `site` here. */}}
+    {{ with partialCached "utilities/InitModules.html" $page }}
         {{ if in (.optional | default slice) "simple-datatables" }}
             {{ $pageModules := slice | append $page.Params.modules }}
             {{ if not (in $pageModules "simple-datatables") }}

@@ -9,6 +9,5 @@ require (
 	github.com/gethinode/mod-cookieyes/v2 v2.2.6 // indirect
 	github.com/gethinode/mod-docs v1.15.2 // indirect
 	github.com/gethinode/mod-fontawesome/v6 v6.0.2 // indirect
-	github.com/gethinode/mod-utils/v6 v6.5.1 // indirect
 	github.com/twbs/icons v1.13.1 // indirect
 )

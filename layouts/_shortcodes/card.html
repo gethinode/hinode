@@ -73,6 +73,7 @@
 {{ if not $error -}}
     {{/* Render card */}}
     {{- $output := partial "assets/card.html" (dict
+        "page"         $page
         "path"         $path
         "href"         $args.href
         "title"        $title

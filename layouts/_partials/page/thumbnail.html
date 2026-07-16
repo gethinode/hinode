@@ -37,6 +37,7 @@
 
 {{ if $thumbnail -}}
     {{- partial "assets/image.html" (dict
+        "page"     $page
         "src"      $thumbnail
         "anchor"   (partial "utilities/OmitEmpty.html" $anchor)
         "ratio"    $ratio

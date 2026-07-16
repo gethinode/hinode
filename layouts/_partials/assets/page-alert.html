@@ -17,9 +17,17 @@
 {{ end }}
 
 {{/* Initialize local arguments */}}
-{{- $pageAlertMsg := $args.page.Scratch.Get "pageAlertMsg" -}}
-{{- $pageAlertURL := $args.page.Scratch.Get "pageAlertURL" -}}
-{{- $version := $args.page.Scratch.Get "version" -}}
+{{- $page := $args.page -}}
+{{- $version := partial "utilities/GetVersion.html" (dict "page" $page "base" true) -}}
+{{- $disable := eq (index $page.Params "sidebar-menu") false -}}
+{{- $vstate := partialCached "utilities/GetVersionedMenu.html" (dict "page" $page "version" $version) $page.Section $version $page.Kind $disable -}}
+
+{{- $pageAlertMsg := "" -}}
+{{- $pageAlertURL := "" -}}
+{{- if $vstate.isOlder -}}
+    {{- $pageAlertMsg = T "newerVersionAlert" site.Title -}}
+    {{- $pageAlertURL = or site.Params.docs.latestURL site.baseURL -}}
+{{- end -}}
 
 {{/* Main code */}}
 {{- if and (not $args.err) $pageAlertMsg -}}

@@ -3,6 +3,8 @@ comment: >-
   hook, including transform, format, and anchor options.
 group: partial
 arguments:
+  page:
+    optional: true
   src:
   img:
   absolute-url:

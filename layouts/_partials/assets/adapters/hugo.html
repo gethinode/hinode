@@ -41,9 +41,22 @@
 {{ $height := or $args.imageHeight $args.height -}}
 {{ $width := or $args.imageWidth $args.width -}}
 
+{{/* Resolve the intrinsic page; fall back to the global page for one release */}}
+{{- $page := $args.page -}}
+{{- if not $page -}}
+    {{- $noop := partial "utilities/LogWarn.html" (dict
+        "partial" "assets/adapters/hugo.html"
+        "warnid"  "warn-missing-page-argument"
+        "msg"     "Missing argument 'page', falling back to the global page context"
+        "details" (slice "Pass the rendering page explicitly; this fallback will be removed in a future release")
+        "file"    page.File
+    ) -}}
+    {{- $page = page -}}
+{{- end -}}
+
 {{/* Initialize image if needed, do not raise additional warnings */}}
 {{ if and (not $img) (ne $args.format "svg") }}
-    {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" page) -}}
+    {{- $res := partial "utilities/GetImage.html" (dict "url" $url "page" $page) -}}
     {{ if $res }}
         {{ $img = $res.resource }}
         {{/* TODO: $res.mirror  */}}
