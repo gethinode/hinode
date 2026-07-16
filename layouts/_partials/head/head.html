@@ -19,7 +19,14 @@
     {{ end }}
         
     {{ $page_modules := slice | append .Page.Params.modules }}
+    {{/* Module dependencies are registered in the page's Scratch and Store as a side effect of
+        content rendering (utilities/AddModule.html). The head renders before the body, so
+        materialize the content explicitly to make the read below contract-based rather than
+        an ordering accident. .Content is cached, so this is cheap: under render-once it is
+        the page's only body render. */}}
+    {{ $_ := .Page.Content }}
     {{ with .Scratch.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
+    {{ with .Page.Store.Get "dependencies" }}{{ $page_modules = append $page_modules . | uniq }}{{ end }}
     {{- $modules := $config.optional | intersect $page_modules -}}
     {{- range $index, $mod := $modules -}}
         {{- $source := printf "scss/%s.scss" $mod -}}

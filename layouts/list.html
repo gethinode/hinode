@@ -1,7 +1,7 @@
 {{ define "main" -}}
     {{- $breakpoint := partialCached "utilities/GetBreakpoint.html" site -}}
     {{- $padding := partial "utilities/GetPadding.html" -}}
-    {{- $content := partial "utilities/ProcessContent" (dict "page" .Page "raw" .RawContent) }}
+    {{- $content := .Content }}
 
     <!-- Render the defined content blocks, using the default articles element as fallback -->
     {{ if .Params.content_blocks }}

@@ -14,14 +14,10 @@
 #      masquerade as a fast one, so page counts are checked explicitly.
 #   3. Compares both output trees with `diff -rq`.
 #
-# Tolerated diffs (allowlist): a pre-existing intermittent `.Content` race in
-# RSS-embedded HTML (accepted by the maintainer on 2026-07-15) may cause the
-# following files to differ between otherwise identical builds:
-#   - en/index.xml
-#   - en/docs/blocks/index.xml
-#   - en/tags/block/index.xml
-# Any other diff — or a missing/extra file, an ERROR line, or an unexpected
-# page count — makes the script exit non-zero.
+# Any diff — or a missing/extra file, an ERROR line, or an unexpected page
+# count — makes the script exit non-zero. Since the render-once flip, page
+# bodies, RSS feeds, and the search index all derive from the same single
+# content render, so two builds must be fully byte-identical (no allowlist).
 #
 # Usage (from the repository root, after `pnpm install` and `pnpm mod:vendor`):
 #   scripts/check-build-determinism.sh
@@ -36,11 +32,6 @@ cd "$ROOT"
 export PATH="$ROOT/node_modules/.bin:$PATH"
 
 EXPECTED_PAGES="98 26 24" # EN FR NL
-ALLOWLIST=(
-  "en/index.xml"
-  "en/docs/blocks/index.xml"
-  "en/tags/block/index.xml"
-)
 
 WORKDIR="$(mktemp -d)"
 trap 'rm -rf "$WORKDIR"' EXIT
@@ -96,29 +87,12 @@ fi
 unexpected=0
 while IFS= read -r line; do
   [ -z "$line" ] && continue
-  allowed=""
-  case "$line" in
-    Files\ *\ differ)
-      for entry in "${ALLOWLIST[@]}"; do
-        case "$line" in
-          "Files $WORKDIR/snapshot-1/$entry and $WORKDIR/snapshot-2/$entry differ")
-            allowed="yes"
-            break
-            ;;
-        esac
-      done
-      ;;
-  esac
-  if [ -n "$allowed" ]; then
-    echo "    tolerated (RSS .Content race allowlist): $line"
-  else
-    echo "    UNEXPECTED: $line"
-    unexpected=1
-  fi
+  echo "    UNEXPECTED: $line"
+  unexpected=1
 done <"$WORKDIR/diff.txt"
 
 if [ "$unexpected" -ne 0 ]; then
-  echo "FAIL: builds are not byte-identical outside the allowlist"
+  echo "FAIL: builds are not byte-identical"
   fail=1
 fi
 
@@ -127,4 +101,4 @@ if [ "$fail" -ne 0 ]; then
   exit 1
 fi
 
-echo "RESULT: PASS — two consecutive builds are byte-identical (allowlist excepted)"
+echo "RESULT: PASS — two consecutive builds are byte-identical"

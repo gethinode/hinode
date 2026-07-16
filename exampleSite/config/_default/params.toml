@@ -79,7 +79,6 @@
 [debugging]
     showJS = false
     showSCSS = false
-    purgeHTMLComments = true # prevents a Goldmark warning when processing HTML comments (as used by markdownlint)
     includeSVGOrigin = true
 
 [docs]
