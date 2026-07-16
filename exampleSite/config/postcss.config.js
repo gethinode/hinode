@@ -56,6 +56,8 @@ const purgecss = purgeCSSPlugin({
       // would therefore lose the rule, leaving the wrapped column's cells on `d-none` alone and so
       // hidden at every width.
       /^d-(sm|md|lg|xl|xxl)-table-cell$/,
+      // Applied by assets/table.html only when caption-top=true
+      'caption-top',
       // SimpleDatatables search component
       'search-data-table',
       'search-input',

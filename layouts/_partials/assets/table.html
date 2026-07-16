@@ -47,6 +47,7 @@
      caller's class list. The template adds it back below when the wrap genuinely applies. */}}
 {{ $class := delimit (complement (slice "table-wrap") (split (or $args.class "") " ")) " " }}
 {{ if $dataTable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if and $args.caption $args.captionTop }}{{ $class = trim (printf "%s caption-top" $class) " " }}{{ end }}
 
 {{ $attributes := "" }}
 {{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
@@ -102,6 +103,13 @@
     {{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
     {{ $new := printf `<table class="%s" %s` $target (trim $attributes " ") }}
     {{ $input = replaceRE $regex $new $input 1 }}
+
+    {{/* Insert as the table's last child, matching simple-datatables; `replace` keeps a `$` in
+         the caption literal. */}}
+    {{ with $args.caption }}
+        {{ $rendered := . | $args.page.RenderString }}
+        {{ $input = replace $input "</table>" (printf "<caption>%s</caption>\n</table>" $rendered) 1 }}
+    {{ end }}
 
     {{ $wrapper := $args.wrapper | default "" }}
 
