@@ -2,6 +2,13 @@ comment: >-
   Renders a form with callback action. Assign a form-id when the form provider
   requires a specific form definition.
 arguments:
+  page:
+    optional: true
+    comment: >-
+      Page that owns the form. Hook implementations should pass it to nested
+      partials with render-context side effects (such as icon sprite
+      registration), so those land on the owning page instead of the page
+      that triggered the current rendering context.
   action:
     optional: false
   form-id:
