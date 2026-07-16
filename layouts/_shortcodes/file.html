@@ -50,7 +50,7 @@
 
 {{- $extension := strings.TrimLeft "." (path.Ext $file)  }}
 {{- $lang := $args.lang | default $extension -}}
-{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "file-collapse")) -}}
+{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "file-collapse" "page" .Page)) -}}
 
 {{/* Main code */}}
 {{- if not $error -}}

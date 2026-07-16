@@ -35,7 +35,7 @@
     {{- if not $navID -}}
         {{- $navID = .Scratch.Get "resolved-id" -}}
         {{- if not $navID -}}
-            {{- $navID = partial "utilities/UniqueID.html" (dict "prefix" "nav") -}}
+            {{- $navID = partial "utilities/UniqueID.html" (dict "prefix" "nav" "page" $.Page) -}}
             {{- .Scratch.Set "resolved-id" $navID -}}
         {{- end -}}
     {{- end -}}

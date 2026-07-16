@@ -26,7 +26,7 @@
     {{- if not $parent -}}
         {{- $parent = .Parent.Scratch.Get "resolved-id" -}}
         {{- if not $parent -}}
-            {{- $parent = partial "utilities/UniqueID.html" (dict "prefix" "nav") -}}
+            {{- $parent = partial "utilities/UniqueID.html" (dict "prefix" "nav" "page" $.Page) -}}
             {{- .Parent.Scratch.Set "resolved-id" $parent -}}
         {{- end -}}
     {{- end -}}
