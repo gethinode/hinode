@@ -79,7 +79,9 @@
             {{- end -}}
 
             {{- if $cue -}}
-                {{- $suffix := partial "assets/icon.html" (dict "page" $args.page "icon" $externalLink "class" "fa-2xs" "spacing" false) -}}
+                {{- $iconArgs := dict "page" $args.page "icon" $externalLink "class" "fa-2xs" "spacing" false -}}
+                {{- with $args.iconMode }}{{ $iconArgs = merge $iconArgs (dict "mode" .) }}{{ end -}}
+                {{- $suffix := partial "assets/icon.html" $iconArgs -}}
                 {{- $text = printf "%s&nbsp;%s" $text $suffix | safeHTML -}}
             {{- end -}}
         {{- else -}}

@@ -28,7 +28,7 @@ export default [
     }
   },
   {
-    files: ['assets/js/sidebar-toggle.js'],
+    files: ['assets/js/sidebar-toggle.js', 'assets/js/critical/sidebar-active.js'],
     languageOptions: {
       globals: {
         bootstrap: 'readonly'

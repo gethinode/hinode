@@ -198,6 +198,14 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
                     }
 }
 
+// No-JS fallback: the collapse trail and active highlight are applied client-side by
+// sidebar-active.js, and Bootstrap's collapse toggles require JavaScript. Without JavaScript
+// (the `no-js` class set in baseof.html is swapped for `js` by critical/js-detect.js) render
+// every sidebar group expanded instead.
+.no-js .sidebar .collapse {
+    display: block;
+}
+
 // Collapsible sidebar
 .sidebar-no-transition,
 .sidebar-no-transition * {
