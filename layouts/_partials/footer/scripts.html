@@ -123,7 +123,16 @@
 {{- else -}}
     {{- $page_modules = $page_modules | append $args.page.Params.modules -}}
 {{- end -}}
+{{/* Module dependencies are registered in the page's Scratch and Store as a side effect of
+    content rendering (utilities/AddModule.html). Only the "optional" bundle consumes them,
+    and it renders after the body — but materialize the content explicitly so the read is
+    contract-based rather than an ordering accident. .Content is cached, so this is cheap.
+    The critical/functional calls render in the head and must not touch .Content. */}}
+{{- if eq $args.type "optional" -}}
+    {{- $_ := $args.page.Content -}}
+{{- end -}}
 {{- with $args.page.Scratch.Get "dependencies" -}}{{- $page_modules = append $page_modules . | uniq -}}{{- end -}}
+{{- with $args.page.Store.Get "dependencies" -}}{{- $page_modules = append $page_modules . | uniq -}}{{- end -}}
 
 {{- $categories := dict "other" slice -}}
 
