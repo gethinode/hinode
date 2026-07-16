@@ -20,6 +20,24 @@ arguments:
     comment: >-
       Version of the sidebar navigation, used to define the base URL of
       generated links, together with the page's section.
+  baseURL:
+    type: string
+    optional: true
+    group: partial
+    release: v3.3.0
+    comment: >-
+      Base URL of the site for the current language, used to resolve relative
+      menu links. Pass it explicitly (see `page/sidebar-cached.html`) so the
+      renderer performs no per-page Scratch reads; defaults to `/`.
+  filename:
+    type: string
+    optional: true
+    group: partial
+    release: v3.3.0
+    comment: >-
+      Path of the data file that defines the sidebar menu, used in error
+      messages only. Passed explicitly by `page/sidebar-cached.html` so the
+      renderer performs no per-page Scratch reads.
   auto-generate:
     type: bool
     optional: true

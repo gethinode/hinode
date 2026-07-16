@@ -30,6 +30,16 @@ arguments:
     optional: true
     comment: Skip internal link validation (use for dynamic content).
     release: v2.0.0
+  icon-mode:
+    type: string
+    optional: true
+    group: partial
+    release: v3.3.0
+    comment: >-
+      Per-call rendering mode of the external-link cue icon (one of `symbols`,
+      `svg`, or `webfonts`), passed through to the icon partial. Cached
+      contexts such as the sidebar pass `svg` to avoid per-page sprite
+      registration; defaults to the globally configured icon mode.
   # deprecated arguments
   destination:
     type: string

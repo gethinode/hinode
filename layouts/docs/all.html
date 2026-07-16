@@ -9,7 +9,7 @@
     {{- $menu := .Scratch.Get "sidebar" -}}
     {{- if not (reflect.IsSlice $menu) }}{{ $none := dict }}{{ $menu = $none.missing }}{{ end }}
     {{- $version := .Scratch.Get "version" -}}
-    {{- $sidebar := partial "assets/sidebar.html" (dict "page" . "menu" $menu "version" $version "auto-generate" true) -}}
+    {{- $sidebar := partial "page/sidebar-cached.html" (dict "page" . "menu" $menu "version" $version "auto-generate" true) -}}
 
     {{/* Render the offcanvas sidebar */}}
     {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}

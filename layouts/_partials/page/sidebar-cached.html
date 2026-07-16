@@ -1,0 +1,51 @@
+{{/*
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/*
+    Uncached wrapper around the sidebar renderer that renders the sidebar tree once per
+    (section, version, language, variant) using partialCached. The rendered sidebar markup is
+    page-independent by contract: active-item highlighting and the expanded group trail are
+    applied client-side by assets/js/critical/sidebar-active.js. The wrapper:
+
+    1. computes the cache key tuple from the real page context,
+    2. canonicalizes the page context to the section root (the versioned section root when
+       applicable), so the cached output does not depend on which page happens to render first,
+    3. passes the base URL and the sidebar data filename as explicit arguments, so the cached
+       subtree performs no per-page Scratch reads,
+    4. keeps Mode B (level-min >= 2) uncached: that mode selects a subtree by the current
+       page's URL and is structurally page-dependent.
+
+    The raw renderer (assets/sidebar.html) stays cache-free and remains directly callable by
+    site overrides.
+*/}}
+
+{{- $args := . -}}
+{{- $page := $args.page -}}
+{{- $section := $page.Section -}}
+{{- $version := $args.version | default "" -}}
+{{- $lang := site.Language.Lang -}}
+{{- $levelMin := index $args "level-min" | default 0 -}}
+{{- $levelMax := index $args "level-max" | default 0 -}}
+{{- $collapsible := $args.collapsible | default false -}}
+{{- $autoGenerate := index $args "auto-generate" | default false -}}
+
+{{/* The base URL depends on site state only; the filename is set per menu by GetMenu */}}
+{{- $baseURL := partialCached "utilities/GetBaseURL.html" site -}}
+{{- $filename := $page.Scratch.Get "sidebarFilename" | default "" -}}
+
+{{- if ge $levelMin 2 -}}
+    {{/* Mode B renders a page-dependent subtree; call the renderer uncached */}}
+    {{- partial "assets/sidebar.html" (merge $args (dict "baseURL" $baseURL "filename" $filename)) -}}
+{{- else -}}
+    {{/* Canonicalize the page context to the (versioned) section root */}}
+    {{- $root := $page.FirstSection | default $page -}}
+    {{- with $version -}}
+        {{- with site.GetPage (path.Join $section .) }}{{ $root = . }}{{ end -}}
+    {{- end -}}
+    {{- $ctx := merge $args (dict "page" $root "baseURL" $baseURL "filename" $filename) -}}
+    {{- $variant := printf "%v-%v-%v-%v" $levelMin $levelMax $collapsible $autoGenerate -}}
+    {{- partialCached "assets/sidebar.html" $ctx $section $version $lang $variant -}}
+{{- end -}}
