@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/FortAwesome/Font-Awesome v0.0.0-20260625220317-70fb2dd154b6 // indirect
 	github.com/airbnb/lottie-web v5.13.0+incompatible // indirect
+	github.com/gethinode/mod-blocks/v2 v2.2.0 // indirect
 	github.com/gethinode/mod-bootstrap v1.3.7 // indirect
 	github.com/gethinode/mod-csp v1.0.12 // indirect
 	github.com/gethinode/mod-flexsearch/v5 v5.0.2 // indirect
