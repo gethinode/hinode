@@ -5,6 +5,10 @@
 
 [build.environment]
     DART_SASS_VERSION = "1.98.0"
+    # Relax Go garbage collection during CI builds (Go default is GOGC=100). Measured locally on
+    # the exampleSite build, GOGC=800 saved 6-7 CPU-seconds; 400 is the conservative pick as CI
+    # runners have less RAM. Local defaults are intentionally unchanged.
+    GOGC = "400"
     HUGO_VERSION = "0.153.1"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"

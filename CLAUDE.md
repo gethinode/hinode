@@ -41,7 +41,8 @@ npm run lint:markdown       # Markdownlint for Markdown files
 ### Module Management
 
 ```bash
-npm run mod:vendor          # Vendor Hugo modules to _vendor/
+npm run mod:vendor          # Vendor Hugo modules to _vendor/ (skips when _vendor is up to date)
+npm run mod:vendor:force    # Re-vendor Hugo modules unconditionally
 npm run mod:update          # Update all Hugo modules
 npm run mod:tidy            # Clean up unused module dependencies
 npm run mod:clean           # Remove module cache
@@ -452,10 +453,31 @@ Multi-language support with translations in `i18n/`. Default language is English
 
 ### Build Process
 
-1. `hugo mod vendor` - Vendors modules to `_vendor/`
+1. `hugo mod vendor` - Vendors modules to `_vendor/` (skipped when `_vendor/modules.txt` is newer
+   than `go.mod`/`go.sum`; use `npm run mod:vendor:force` to re-vendor unconditionally)
 2. Hugo build generates `hugo_stats.json` with used classes/tags/ids
 3. PostCSS processes SCSS, using `hugo_stats.json` to purge unused CSS
 4. Final output in `public/` or `exampleSite/public/`
+
+### Build Performance and CI Caching
+
+Measured characteristics of the build (exampleSite, 2026-07):
+
+- Caching `resources/_gen` across CI runs is worth about 4x on cold runners: a cold exampleSite
+  build took 68.7 s versus ~17 s with a warm resources cache. This is why Netlify uses
+  `netlify-plugin-hugo-cache-resources` and GitHub Actions caches `HUGO_CACHEDIR` — do not remove
+  either without accounting for the cost.
+- The shared root `resources/` directory serves both the theme build and the exampleSite build
+  (the exampleSite sets `resourcedir = '../resources/'`), so a theme build warms the cache for a
+  subsequent exampleSite build and vice versa.
+- The `getresource` cache has a 5-minute TTL (`[caches.getresource]` in
+  `config/_default/hugo.toml`), so isolated or infrequent runs re-fetch remote resources and add
+  network noise to build-time measurements.
+- CI builds run with `GOGC=400` (see `.github/workflows/lint-build.yml` and `data/netlify.toml`);
+  local defaults are unchanged.
+- Performance PRs must prove they do not change the generated site: run
+  `scripts/check-build-determinism.sh` (double build + byte-diff with a small RSS allowlist) and
+  cite the result.
 
 ### Testing Changes
 
