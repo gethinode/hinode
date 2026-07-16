@@ -34,7 +34,8 @@
                 {{- $url = "" -}}
                 {{- partial "assets/toast.html" (dict "id" $target "message" (printf "%s %s" (T "link") (T "copiedToClipboard"))) -}}
             {{- end -}}
-            {{ partial "assets/button.html" (dict 
+            {{ partial "assets/button.html" (dict
+                "page"       $
                 "toast-id"   $target
                 "clipboard"  $clipboard
                 "href"       $url
@@ -57,6 +58,7 @@
             {{- end -}}
             {{- $icon := partial "utilities/GetThemeIcon.html" (dict "id" "sharingWebshare" "alias" (index site.Params.sharing "webshare-icon") "default" "fas share-nodes") -}}
             {{ partial "assets/button.html" (dict
+                "page"       $
                 "href"       ""
                 "icon"       $icon
                 "icon-class" "fa-fw"
@@ -79,6 +81,7 @@
             {{ $attr := dict "download" (path.Base .) }}
             {{- $downloadIcon := partial "utilities/GetThemeIcon.html" (dict "id" "downloadIcon" "default" "fas download") -}}
             {{ partial "assets/button.html" (dict
+                "page"       $
                 "href"       .
                 "icon"       $downloadIcon
                 "icon-class" "fa-fw"

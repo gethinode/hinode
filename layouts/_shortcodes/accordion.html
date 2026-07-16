@@ -22,7 +22,7 @@
 {{- if not $id -}}
     {{- $id = .Scratch.Get "resolved-id" -}}
     {{- if not $id -}}
-        {{- $id = partial "utilities/UniqueID.html" (dict "prefix" "accordion") -}}
+        {{- $id = partial "utilities/UniqueID.html" (dict "prefix" "accordion" "page" $.Page) -}}
         {{- .Scratch.Set "resolved-id" $id -}}
     {{- end -}}
 {{- end -}}

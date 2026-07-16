@@ -2,6 +2,8 @@ comment: >-
   Renders a card icon including optional rounding.
 group: partial
 arguments:
+  page:
+    optional: true
   icon:
   padding:
   icon-rounded:

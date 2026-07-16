@@ -59,7 +59,8 @@
         {{ end }}
     {{ end }}
     {{ $attr := dict "download" (path.Base $download) }}
-    {{ partial "assets/button.html" (dict 
+    {{ partial "assets/button.html" (dict
+        "page"        $args.page
         "href"        $download
         "title"       $title
         "color"       $args.color

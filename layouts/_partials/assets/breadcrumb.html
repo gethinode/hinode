@@ -54,7 +54,7 @@
                 {{ $item := index $items (sub $length 1) }}
                 <li class="breadcrumb-item">
                     <a href="{{ $item.address }}">
-                        {{ partial "assets/icon.html" (dict "icon" $breadcrumbBack) }}&nbsp;{{ partial "inline/short-title" $item.title }}
+                        {{ partial "assets/icon.html" (dict "page" $args.page "icon" $breadcrumbBack) }}&nbsp;{{ partial "inline/short-title" $item.title }}
                     </a>
                 </li>
             {{- end -}}

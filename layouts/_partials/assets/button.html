@@ -68,7 +68,7 @@
     {{- end -}}
 
     {{- if and $title $cue -}}
-        {{ $suffix := partial "assets/icon.html" (dict "icon" $externalLink "class" "fa-2xs") }}
+        {{ $suffix := partial "assets/icon.html" (dict "page" $args.page "icon" $externalLink "class" "fa-2xs") }}
         {{- $title = printf "%s&nbsp;%s" $title $suffix | safeHTML -}}
     {{- end -}}
 {{- end -}}
@@ -105,7 +105,7 @@
             <span class="my-auto">{{ $title | safeHTML }}</span>
             {{- with $args.icon }}
                 <span class="align-self-center{{ if $title }}{{ if eq $args.order "first" }} order-first pe-1{{ else }} ps-1{{ end }}{{ end }}">
-                    {{ partial "assets/icon.html" (dict "icon" $args.icon "class" ($args.iconClass | default "") "spacing" false) }}
+                    {{ partial "assets/icon.html" (dict "page" $args.page "icon" $args.icon "class" ($args.iconClass | default "") "spacing" false) }}
                 </span>
             {{ end }}
         </span>

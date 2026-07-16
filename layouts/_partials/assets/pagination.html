@@ -26,13 +26,13 @@
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationFirst "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationFirst "spacing" false) }}</span>
         </a>
       </li>
       {{- else }}
       <li class="page-item disabled">
         <a aria-disabled="true" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button" tabindex="-1">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationFirst "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationFirst "spacing" false) }}</span>
         </a>
       </li>
       {{- end }}
@@ -41,13 +41,13 @@
     {{- with .Prev }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationPrev "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationPrev "spacing" false) }}</span>
         </a>
       </li>
     {{- else }}
       <li class="page-item disabled">
         <a aria-disabled="true" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button" tabindex="-1">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationPrev "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationPrev "spacing" false) }}</span>
         </a>
       </li>
     {{- end }}
@@ -74,13 +74,13 @@
     {{- with .Next }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationNext "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationNext "spacing" false) }}</span>
         </a>
       </li>
     {{- else }}
       <li class="page-item disabled">
         <a aria-disabled="true" aria-label="{{ T "paginationNext" }}" class="page-link" role="button" tabindex="-1">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationNext "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationNext "spacing" false) }}</span>
         </a>
       </li>
     {{- end }}
@@ -89,13 +89,13 @@
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationLast" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationLast "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationLast "spacing" false) }}</span>
         </a>
       </li>
       {{- else }}
       <li class="page-item disabled">
         <a aria-disabled="true" aria-label="{{ T "paginationLast" }}" class="page-link" role="button" tabindex="-1">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationLast "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationLast "spacing" false) }}</span>
         </a>
       </li>
       {{- end }}
@@ -116,7 +116,7 @@
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationFirst" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationFirst "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationFirst "spacing" false) }}</span>
         </a>
       </li>
       {{- end }}
@@ -125,7 +125,7 @@
     {{- with .Prev }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationPrevious" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationPrev "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationPrev "spacing" false) }}</span>
         </a>
       </li>
     {{- end }}
@@ -152,7 +152,7 @@
     {{- with .Next }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationNext" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationNext "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationNext "spacing" false) }}</span>
         </a>
       </li>
     {{- end }}
@@ -161,7 +161,7 @@
       {{- if ne $currentPageNumber .PageNumber }}
       <li class="page-item">
         <a href="{{ .URL }}" aria-label="{{ T "paginationLast" }}" class="page-link" role="button">
-          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "icon" $paginationLast "spacing" false) }}</span>
+          <span aria-hidden="true">{{ partial "assets/icon.html" (dict "page" $ "icon" $paginationLast "spacing" false) }}</span>
         </a>
       </li>
       {{- end }}

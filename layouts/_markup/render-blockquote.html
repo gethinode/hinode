@@ -17,7 +17,7 @@
     <blockquote class="blockquote-alert blockquote-alert-{{ $alert }}">
         <p class="blockquote-alert-heading">
             {{ with $icon }} 
-                {{ partial "assets/icon.html" (dict "icon" . "class" "fa-fw") }}
+                {{ partial "assets/icon.html" (dict "page" $.Page "icon" . "class" "fa-fw") }}
                 {{ or (i18n $alert) (title $alert) }}
             {{ else }}
                 {{ title $alert }}

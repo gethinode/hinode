@@ -21,7 +21,7 @@
 {{ end }}
 
 {{/* Initialize local arguments */}}
-{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "toast-message")) -}}
+{{- $id := $args.id | default (partial "utilities/UniqueID.html" (dict "prefix" "toast-message" "page" .Page)) -}}
 {{ $message := trim .Inner " \r\n" | .Page.RenderString -}}
 
 {{ if not $message -}}

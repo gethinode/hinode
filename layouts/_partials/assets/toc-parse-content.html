@@ -76,6 +76,7 @@
                 {{ range $i, $v := $result }}
                     {{ if eq $i $maxNumHeadings }}
                         {{ partial "assets/button.html" (dict
+                            "page"        $.Page
                             "id"          "btnTOCShowMore"
                             "collapse-id" "toc-collapse-items"
                             "link-type"   "link"
@@ -91,6 +92,7 @@
                 {{ if gt (len $result) $maxNumHeadings }}
                     &nbsp;
                     {{ partial "assets/button.html" (dict
+                        "page"        $.Page
                         "id"          "btnTOCShowLess"
                         "collapse-id" "toc-collapse-items"
                         "link-type"   "link"

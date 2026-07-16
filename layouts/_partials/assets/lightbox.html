@@ -15,7 +15,7 @@
 {{- $close := partial "utilities/GetThemeIcon.html" (dict "id" "lightboxClose" "default" "fas xmark") -}}
 <dialog class="lightbox" aria-label="{{ i18n "lightboxLabel" }}">
     <button type="button" class="lightbox-close" aria-label="{{ i18n "lightboxClose" }}">
-        {{- partial "assets/icon.html" (dict "icon" $close "class" "fa-fw fa-xl" "spacing" false) -}}
+        {{- partial "assets/icon.html" (dict "page" . "icon" $close "class" "fa-fw fa-xl" "spacing" false) -}}
     </button>
     <div class="lightbox-content"></div>
 </dialog>

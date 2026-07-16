@@ -5,7 +5,7 @@
         <div class="container-xxl px-xxl-0 {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "x") }} py-0 my-auto h-100">
             <div class="text-center col-md-6 mx-auto">
                 <span class="text-body fw-bold">
-                    {{ partial "assets/icon.html" (dict "icon" $formIcon "class" "fa-10x") }}
+                    {{ partial "assets/icon.html" (dict "page" .Page "icon" $formIcon "class" "fa-10x") }}
                     <p class="fs-3">{{ .Title }}</p>
                 </span>
                 <p>

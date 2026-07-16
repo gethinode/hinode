@@ -31,8 +31,9 @@
     {{- with $headings }}
         {{- if and (not $error) (ge (len .) $minNumHeadings) }}
         <div class="d-grid gap-2 mx-auto">
-            {{ partial "assets/button.html" (dict 
-                "title"       (T "toc") 
+            {{ partial "assets/button.html" (dict
+                "page"        $args.page
+                "title"       (T "toc")
                 "color"       "secondary" 
                 "outline"     "true" 
                 "class"       "toc-button" 

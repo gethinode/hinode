@@ -29,7 +29,7 @@
 <h{{ .Level }} id="{{ $anchor | safeURL }}" class="{{ $classAttr }}">
     {{- $text | safeHTML -}}
     <a href="#{{ $anchor | safeURL }}" aria-labelledby="{{ $anchor | safeURL }}">
-        {{- partial "assets/icon.html" (dict "icon" $headingAnchor "class" "anchor") }}
+        {{- partial "assets/icon.html" (dict "page" .Page "icon" $headingAnchor "class" "anchor") }}
     </a>
 </h{{ .Level }}>
 {{ else }}

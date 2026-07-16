@@ -203,7 +203,8 @@
                 {{- $href = printf "%s/" $href -}}
             {{- end -}}
             <div class="mt-{{ $padding.y }} w-100 align-self-start">
-                {{ partial "assets/button.html" (dict 
+                {{ partial "assets/button.html" (dict
+                    "page"      $args.page
                     "href"      $href
                     "title"     $args.hrefTitle
                     "color"     "primary"

@@ -30,7 +30,8 @@
 {{/* Main code */}}
 {{ if not $error }}
     <div class="btn-tooltip d-inline-flex">
-        {{- partial "assets/button.html" (dict 
+        {{- partial "assets/button.html" (dict
+            "page"      .Page
             "link-type" "link"
             "title"     $title
             "color"     $args.color

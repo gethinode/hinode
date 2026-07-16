@@ -95,7 +95,8 @@
                             "class"   "rounded-circle testimonial-img"
                         )}}
                     {{ else if .link }}
-                        {{ partial "assets/button.html" (dict 
+                        {{ partial "assets/button.html" (dict
+                            "page"    .page
                             "href"    .link
                             "title"   (T "testimonialCase")
                             "class"   "btn-testimonial"
@@ -198,7 +199,7 @@
                 {{ partial "inline/testimonial-card.html" (merge $params (dict "class" "col-8 px-0 mb-5")) }}
 
                 <div class="testimonial-icon col-2 ps-0 p-{{ $args.padding }} text-end">
-                    {{ partial "assets/icon.html" (dict "icon" $testimonialQuote "class" "fa-2x" "spacing" false) }}
+                    {{ partial "assets/icon.html" (dict "page" $args.page "icon" $testimonialQuote "class" "fa-2x" "spacing" false) }}
                 </div>
             </div>
         {{ else }}
