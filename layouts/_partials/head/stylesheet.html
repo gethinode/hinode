@@ -97,9 +97,28 @@
     {{ if $core }}
         {{- partialCached "head/icons.html" (dict "css" $css) ($css.Content | md5) -}}
     {{ end }}
-    {{- if site.Params.style.purge -}}
-        {{- $post_options := dict "config" "config" "noMap" hugo.IsProduction -}}
-        {{- $css = $css | css.PostCSS $post_options -}}
+    {{/* Purge only in production. resources.PostProcess (below) runs css.PostCSS after every page
+         has rendered, so hugo_stats.json is complete when PurgeCSS reads it — Hugo's documented
+         purge pattern. Under `hugo server` PostProcess does not run and the stats are incomplete,
+         so development serves the unpurged CSS (every class present) rather than purge against
+         partial stats.
+
+         Guard: skip purge with a warning when the site has no PostCSS config (the common
+         misconfiguration on a fresh purge-enabled site). A config that IS present but fails at
+         runtime (missing npm deps, syntax error) cannot be caught here: css.PostCSS is lazy and
+         only executes inside resources.PostProcess, after all pages render, so its error
+         surfaces at post-process time — outside any `try` scope. That failure is loud but
+         actionable (Hugo prints the PostCSS/PurgeCSS error). */}}
+    {{- if and hugo.IsProduction site.Params.style.purge -}}
+        {{- if os.FileExists "config/postcss.config.js" -}}
+            {{- $css = $css | css.PostCSS (dict "config" "config" "noMap" true) -}}
+        {{- else -}}
+            {{- partial "utilities/LogWarn.html" (dict
+                "partial" "head/stylesheet.html"
+                "warnid"  "warn-purge-postcss"
+                "msg"     "style.purge is enabled but config/postcss.config.js is missing; serving unpurged CSS. Add a PostCSS config or set style.purge to false."
+            ) -}}
+        {{- end -}}
     {{- end -}}
 
     {{- if not hugo.IsProduction -}}
