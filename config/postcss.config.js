@@ -1,11 +1,3 @@
-const autoprefixer = require('autoprefixer')({})
-const cssnano = require('cssnano')({
-  preset: ['advanced', {
-    discardUnused: {
-      fontFace: false  // Preserve all @font-face declarations
-    }
-  }]
-})
 const purgeImport = require('@fullhuman/postcss-purgecss')
 const purgeCSSPlugin = purgeImport.purgeCSSPlugin || purgeImport.default || purgeImport
 const purgecss = purgeCSSPlugin({
@@ -17,10 +9,17 @@ const purgecss = purgeCSSPlugin({
   dynamicAttributes: ['aria-expanded', 'data-bs-theme', 'data-bs-main-theme', 'data-bs-theme-animate', 'data-transparent', 'role'],
   fontFace: false,
   safelist: {
+    // Every entry below is a class PurgeCSS cannot see in hugo_stats.json because it is
+    // added by JavaScript at runtime (or by a third-party library). Classes that Hugo DOES
+    // emit into the markup — and therefore into hugo_stats.json — are intentionally NOT
+    // listed: purge now always runs against complete, current stats (production
+    // post-process; dev does not purge), so they survive on their own. In particular the
+    // former `/^d-(sm|md|lg|xl|xxl)-table-cell$/` entry is gone — render-table.html emits
+    // the configured breakpoint's class into the markup, so it reaches the stats naturally.
     standard: [
-      // Bootstrap form validation
+      // Bootstrap form validation — added by JS on submit, never in the source markup
       'was-validated',
-      // Bootstrap dynamic states
+      // Bootstrap component state classes toggled by JS (modal/dropdown/collapse/etc.)
       'show',
       'showing',
       'hiding',
@@ -28,7 +27,7 @@ const purgecss = purgeCSSPlugin({
       'disabled',
       'collapsed',
       'collapsing',
-      // SimpleDatatables modifier classes
+      // SimpleDatatables modifier classes (set by the datatables JS)
       'no-header',
       'no-footer',
       // SimpleDatatables table rendering classes (added by JS)
@@ -38,24 +37,15 @@ const purgecss = purgeCSSPlugin({
       'both',
       'desc',
       'asc',
-      // Hinode wrapped tables.
-      //
-      // On a data table `table-wrap` and `table-border-bottom-wrap` are applied in the browser by
-      // SimpleDatatables' tableRender hook, so on a site whose only wrapped tables are data tables
-      // they never reach hugo_stats.json at all and would otherwise be purged.
+      // Hinode wrapped tables: on a DATA table, `table-wrap` / `table-border-bottom-wrap`
+      // are applied in the browser by SimpleDatatables' tableRender hook, so on a site whose
+      // only wrapped tables are data tables they never reach hugo_stats.json and would
+      // otherwise be purged.
       'table-wrap',
       'table-border-bottom-wrap',
-      // `d-none` is also applied by that hook, but a dozen core layouts emit it as well, so it can
-      // never actually be purged. It is listed to record that the wrap depends on it.
+      // `d-none` is also applied by that hook; kept to record the wrap's dependency on it
+      // (a dozen core layouts emit it too, so in practice it is always in the stats).
       'd-none',
-      // `d-{breakpoint}-table-cell` reveals the wrapped column above the breakpoint, and
-      // render-table.html is its only emitter in the whole theme. Unlike the classes above it does
-      // reach hugo_stats.json - but PurgeCSS is fed the *previous* build's stats whenever PostCSS
-      // is not deferred to Hugo's post-process phase (`hugo server`, or any non-production build
-      // with style.purge enabled). A site whose committed stats predate its first wrapped table
-      // would therefore lose the rule, leaving the wrapped column's cells on `d-none` alone and so
-      // hidden at every width.
-      /^d-(sm|md|lg|xl|xxl)-table-cell$/,
       // SimpleDatatables search component
       'search-data-table',
       'search-input',
@@ -131,11 +121,20 @@ const purgecss = purgeCSSPlugin({
     ]
   }
 })
+const autoprefixer = require('autoprefixer')({})
+const cssnano = require('cssnano')({
+  // Default preset: structural minification (rule/declaration merging) that Hugo's own
+  // minify does not do. The `advanced` preset was measured to add < 0.2% over `default`,
+  // so it — and the cssnano-preset-advanced dependency — was dropped.
+  preset: 'default'
+})
 
 module.exports = {
+  // Order matters: purge first (drop unused rules) so autoprefixer and cssnano only work
+  // on what ships; cssnano last so it minifies the already-prefixed output.
   plugins: [
+    purgecss,
     autoprefixer,
-    cssnano,
-    purgecss
+    cssnano
   ]
 }
