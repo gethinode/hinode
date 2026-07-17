@@ -14,7 +14,7 @@
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
+        "file"    (or $args.page page).File
     )}}
     {{ $error = $args.err }}
 {{ end }}
@@ -58,7 +58,7 @@
             {{ if not $link.error }}
                 {{ $url = $link.href }}
             {{ else }}
-                {{ with page.File }}
+                {{ with $page.File }}
                     {{ warnf "Error processing link on page '%s': %s" (path.Join "/content" .Path) $link.msg }}
                 {{ else }}
                     {{ warnf "Error processing link: %s" $link.msg }}

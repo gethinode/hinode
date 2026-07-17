@@ -25,7 +25,7 @@
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
+        "file"    (or $args.page page).File
     )}}
 {{ end }}
 
@@ -36,7 +36,7 @@
         "partial" "assets/adapter/imgix.html" 
         "msg"     "Invalid arguments"
         "details" slice "argument 'url-file': expected value"
-        "file"    page.File
+        "file"    (or $args.page page).File
     )}}
     {{ $error = true }}
 {{ end }}

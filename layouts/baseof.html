@@ -19,9 +19,6 @@
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
 {{- $.Scratch.Set "fullCover" $fullCover -}}
 
-{{- /* Define main breakpoint */ -}}
-{{- $.Scratch.Set "breakpoint" (partialCached "utilities/GetBreakpoint.html" .) }}
-
 {{- /* Define page metadata */ -}}
 {{- $.Scratch.Set "metadata" (partial "utilities/GetMetadata.html" .) }}
 
@@ -33,10 +30,6 @@
 
 {{- /* Prepare content blocks and establish overlay mode */ -}}
 {{ $overlayMode := $.Scratch.Get "overlayMode" }}
-
-{{- /* Define base URL */ -}}
-{{ $lang := site.Language.Lang }}
-{{ $.Scratch.Set "baseURL" (strings.TrimSuffix (printf "%s/" $lang) site.Home.RelPermalink) }}
 
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">

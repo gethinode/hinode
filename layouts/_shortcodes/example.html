@@ -21,7 +21,7 @@
         "warnid"   "warn-invalid-arguments"
         "msg"      "Invalid arguments"
         "details"  ($args.errmsg | append $args.warnmsg)
-        "file"     page.File
+        "file"     .Page.File
         "position" .Position
     )}}
 {{- end -}}
@@ -40,7 +40,7 @@
         "resize"      $args.resize
         "showPreview" $showPreview
         "caller"      "shortcodes/example.html"
-        "file"        page.File
+        "file"        .Page.File
         "position"    .Position
     ) -}}
     <div class="border {{ if and $showPreview $showMarkup }}rounded mb-3{{ else if $showPreview }}rounded-top border-bottom-0{{ else }}rounded-bottom{{ end }}">
