@@ -90,7 +90,9 @@
 ) $source page.Language.Lang (delimit $modules ",") -}}
 
 {{- if and (gt ($bundle.bundle.Content | len) 0) (not $error) }}
-    {{- $css := $bundle.bundle | resources.ExecuteAsTemplate $target . | toCSS $options -}}
+    {{/* bundlev2 already runs resources.ExecuteAsTemplate per source file, so the concatenated
+         bundle carries no unresolved templates — a second whole-bundle pass here was redundant. */}}
+    {{- $css := $bundle.bundle | toCSS $options -}}
 
     {{ if $core }}
         {{- partialCached "head/icons.html" (dict "css" $css) ($css.Content | md5) -}}

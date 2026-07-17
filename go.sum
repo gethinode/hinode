@@ -22,10 +22,16 @@ github.com/gethinode/mod-katex v1.1.6 h1:mow61stEySb5mH5tUp1l69l2FrLWl+jh46JVT5l
 github.com/gethinode/mod-katex v1.1.6/go.mod h1:byAfpI3wuqNJIooTGVEGc1cjBhhCy4+CcK1H6495MYg=
 github.com/gethinode/mod-leaflet/v3 v3.1.1 h1:Iz8Q+e8s1caHvAb4KN7EnN4ZBnxyCQeUJB62uDmGRVc=
 github.com/gethinode/mod-leaflet/v3 v3.1.1/go.mod h1:eiNhr24pY4+MrMCuJF2MAa+c5mPrD90UM4GZxJproic=
+github.com/gethinode/mod-leaflet/v3 v3.1.2 h1:mnZGSTy7Xo99y459lZ6ogQxdellX2Sigy3JdLqLQpeE=
+github.com/gethinode/mod-leaflet/v3 v3.1.2/go.mod h1:eiNhr24pY4+MrMCuJF2MAa+c5mPrD90UM4GZxJproic=
 github.com/gethinode/mod-lottie/v3 v3.0.2 h1:PJ9BB5s+oli2D5i9apcWu8AowtfyNVb7VAcZfptobT8=
 github.com/gethinode/mod-lottie/v3 v3.0.2/go.mod h1:QnNRtZPSwl6x7acJbR4jHNhNNRxbwVv0XsnD1hFcsro=
+github.com/gethinode/mod-lottie/v3 v3.0.3 h1:45JsMsCiTfdFIUzqA0TAJngV0jCMrAKt6nusgBTcjXU=
+github.com/gethinode/mod-lottie/v3 v3.0.3/go.mod h1:xLcfuqo+fqpUdQSyRL0gUnkcZxoEXmH6pFt6lJl03qY=
 github.com/gethinode/mod-mermaid/v5 v5.0.2 h1:OmpgjPcSlm7lXpcRDKkZbzklG/3a9QurrqsdkGMDdGQ=
 github.com/gethinode/mod-mermaid/v5 v5.0.2/go.mod h1:rrCnPe+gLH83GpMm5uA/SeapZcNBj65jcJVLyXtsXPU=
+github.com/gethinode/mod-mermaid/v5 v5.0.3 h1:AXcTZHJnvO34bRA8oelegPogNLSIDDwFc3U9p7B8LJU=
+github.com/gethinode/mod-mermaid/v5 v5.0.3/go.mod h1:rrCnPe+gLH83GpMm5uA/SeapZcNBj65jcJVLyXtsXPU=
 github.com/gethinode/mod-simple-datatables/v4 v4.1.0 h1:AtEtLH9RoAEIpElg0k6UkVlHmiBc4Df3NCCUfBtmktU=
 github.com/gethinode/mod-simple-datatables/v4 v4.1.0/go.mod h1:jRHoX20bUiaVg7UtKzMjfHQjd5M6WZ8hAeVqA3TKwTA=
 github.com/gethinode/mod-utils/v6 v6.6.2 h1:hSk1SR1MLkgZMh6cdZWwwUpGxf2vt0HQFVcbc0QQjdw=
