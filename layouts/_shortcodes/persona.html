@@ -31,8 +31,9 @@
 
 {{/* Main code */}}
 {{- if not $error -}}
-    {{- partial "assets/persona.html" (dict 
-        "path"      $args.path 
+    {{- partial "assets/persona.html" (dict
+        "page"      .Page
+        "path"      $args.path
         "class"     $args.class 
         "color"     $args.color
         "title"     $args.title
