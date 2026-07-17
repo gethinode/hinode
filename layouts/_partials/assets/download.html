@@ -14,7 +14,7 @@
         "warnid"  "warn-invalid-arguments"
         "msg"     "Invalid arguments"
         "details" ($args.errmsg | append $args.warnmsg)
-        "file"    page.File
+        "file"    (or $args.page page).File
     )}}
     {{ $error = $args.err }}
 {{ end }}
@@ -36,8 +36,8 @@
 {{ if not $error }}
     {{- $download = partial "utilities/GetTargetPath.html" (dict "path" $args.download "page" $page) -}}
     {{- if and $download (not (fileExists (path.Join "static" $download))) -}}
-        {{ if page.File }}
-            {{- errorf "Cannot find download file for page '%s': %s" page.File.Path $download -}}
+        {{ if $page.File }}
+            {{- errorf "Cannot find download file for page '%s': %s" $page.File.Path $download -}}
         {{ else }}
             {{- errorf "Cannot find download file: %s" $download -}}
         {{ end }}
