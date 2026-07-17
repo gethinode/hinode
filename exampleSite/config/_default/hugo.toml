@@ -71,6 +71,12 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
   [security.http]
     methods = ['(?i)GET|POST|HEAD']
     urls = ['.*']
+  [security.node]
+    [security.node.permissions]
+      # exampleSite/config/postcss.config.js re-exports the theme root config one level up;
+      # Hugo runs PostCSS's Node process with fs reads limited to the site dir by default, so
+      # widen it to the parent config dir. A normal site keeps a self-contained config.
+      allowread = ['.', '../config']
 
 [privacy]
   [privacy.vimeo]
