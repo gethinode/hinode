@@ -48,7 +48,7 @@
 {{- $overlayOffset := $navbarOffset -}}
 {{- if site.Params.navigation.overlay }}{{ $overlayOffset = "0rem" }}{{ end }}
 {{- $vars := dict 
-    "base-url"                (page.Scratch.Get "baseURL" | default "/")
+    "base-url"                (partialCached "utilities/GetBaseURL.html" site | default "/")
     "theme-font"              (default "Inter" site.Params.style.themeFont)
     "font-size-base"          (default "1rem" site.Params.style.fontSizeBase)
     "primary"                 (default "#007bff" site.Params.style.primary)
