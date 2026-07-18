@@ -119,6 +119,11 @@
                 {{- $grouped := dict -}}
                 {{- $rootPages := slice -}}
 
+                {{- /* Exclude unpublished pages (e.g. cascaded `build.render` "never"): their
+                    RelPermalink is empty, so they cannot be linked and all of them collapse into a
+                    single "" key that turns the hierarchy into a cyclic graph */ -}}
+                {{- $pages = where $pages "RelPermalink" "!=" "" -}}
+
                 {{- range $page := $pages -}}
                     {{- if $page.Parent -}}
                         {{- $parentPath := $page.Parent.RelPermalink -}}
