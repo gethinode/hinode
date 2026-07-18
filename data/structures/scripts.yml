@@ -19,7 +19,8 @@ arguments:
       loaded asynchronously. Optional scripts are loaded individually on the
       pages that require them. They use the synchronization method as defined
       in their containing module.
-    values:
-      - critical
-      - core
-      - optional
+    options:
+      values:
+        - critical
+        - core
+        - optional

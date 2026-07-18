@@ -77,8 +77,9 @@ arguments:
     comment:
       If set, groups the results by the specified field. Currently only supports
       grouping by section.
-    values:
-      - section
+    options:
+      values:
+        - section
     release: v2.0.0
   include-list:
     type: bool
