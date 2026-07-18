@@ -17,7 +17,7 @@
         {{ else if eq $integration "optional" }}
             {{ $optional = $optional | append $key }}
         {{ else if $integration }}
-            {{ warnf "Unrecognized module integration setting: %s" $integration }}
+            {{ errorf "Module '%s' has an unrecognized integration value '%v'; use one of: critical, core, optional" $key $integration }}
         {{ end }}
         
         {{ if eq (index $mod "excludeSCSS") true }}
