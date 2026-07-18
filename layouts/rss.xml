@@ -50,7 +50,7 @@
 		<link>{{ .Permalink }}</link>
 		<description>Recent content {{ if ne .Title .Site.Title }}{{ with .Title }}in {{ . }} {{ end }}{{ end }}on {{ .Site.Title }}</description>
 		<generator>Hugo</generator>
-		<language>{{ site.Language.Locale }}</language>
+		<language>{{ if le (hugo.Version.Compare "0.158.0") 0 }}{{ site.Language.Locale }}{{ else }}{{ site.Language.LanguageCode }}{{ end }}</language>
 		{{ with $authorEmail }}
 			<managingEditor>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</managingEditor>
 		{{ end }}
