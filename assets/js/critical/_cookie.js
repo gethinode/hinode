@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
-function hasConsent (category) {
+function hasConsent (_category) {
   // TODO: placeholder function
   return true
 }
 
-function getLocalStorage (key, def, category) {
+export function getLocalStorage (key, def, category) {
   if (hasConsent(category)) {
     return localStorage.getItem(key)
   } else {
@@ -12,13 +11,13 @@ function getLocalStorage (key, def, category) {
   }
 }
 
-function setLocalStorage (key, val, category) {
+export function setLocalStorage (key, val, category) {
   if (hasConsent(category)) {
     localStorage.setItem(key, val)
   }
 }
 
-function getSessionStorage (key, def, category) {
+export function getSessionStorage (key, def, category) {
   if (hasConsent(category)) {
     return sessionStorage.getItem(key)
   } else {
@@ -26,8 +25,16 @@ function getSessionStorage (key, def, category) {
   }
 }
 
-function setSessionStorage (key, val, category) {
+export function setSessionStorage (key, val, category) {
   if (hasConsent(category)) {
     sessionStorage.setItem(key, val)
   }
 }
+
+// Backward compatibility: the storage helpers are part of the documented global surface;
+// user-site scripts outside the theme bundles may call them via `window`. Keep these
+// assignments even though the theme's own scripts import the helpers as ES modules.
+window.getLocalStorage = getLocalStorage
+window.setLocalStorage = setLocalStorage
+window.getSessionStorage = getSessionStorage
+window.setSessionStorage = setSessionStorage

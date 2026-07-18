@@ -1,3 +1,8 @@
+// Import Bootstrap directly instead of relying on the window global: the init below runs
+// at import time (deferred scripts execute with readyState "interactive"), which is before
+// the bundle entry assigns window.bootstrap (esbuild deduplicates the module).
+import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
+
 (function () {
   'use strict'
 

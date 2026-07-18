@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+import { getSessionStorage, setSessionStorage } from './critical/_cookie.js'
+
 const alert = document.getElementById('page-alert')
 const closeBtn = document.getElementById('page-alert-btn-close')
 if (alert !== null && closeBtn !== null) {

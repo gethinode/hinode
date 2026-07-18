@@ -2,6 +2,10 @@
 // toast messages are stacked properly. The script targets all elements specified by a 'data-toast-target' and ensures
 // the click event of the origin is linked as well.
 
+// Import Bootstrap directly instead of relying on the window global, so the script does
+// not depend on script-ordering within the bundle (esbuild deduplicates the module).
+import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
+
 const container = document.getElementById('toast-container')
 if (container !== null) {
   // process all data-toast-target elements
@@ -11,7 +15,6 @@ if (container !== null) {
       // move the element to the toast containr
       container.appendChild(target)
 
-      // eslint-disable-next-line no-undef
       const toast = bootstrap.Toast.getOrCreateInstance(target)
       if (toast !== null) {
         // associate the click event of the origin with the toast element
