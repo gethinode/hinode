@@ -2,7 +2,7 @@
 title: Cookie Policy
 description: Cookie policy of gethinode.com
 date: 2024-09-19
-layout: docs
+type: docs
 ---
 <!-- markdownlint-disable MD036 -->
 *Effective Date 19-Sep-2024*
