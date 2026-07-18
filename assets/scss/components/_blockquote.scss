@@ -6,6 +6,7 @@
 
 .blockquote-alert {
     --bs-blockquote-alert-color: #{$secondary};
+    --bs-blockquote-alert-heading-color: var(--#{$prefix}secondary-color);
 
     border-left: 0.3rem solid;
     border-color: var(--bs-blockquote-alert-color);
@@ -18,27 +19,36 @@
 
 .blockquote-alert-heading {
     font-weight: bold;
-    color: var(--bs-blockquote-alert-color);
+
+    // Keep the vivid accent on the border, but render the heading text with the
+    // accessible '-text-emphasis' tint so it meets WCAG contrast on the body background
+    // (raw theme accents such as warning/info/success fail 4.5:1 as foreground text).
+    color: var(--bs-blockquote-alert-heading-color);
 }
 
 .blockquote-alert-caution {
     --bs-blockquote-alert-color: var(--#{$prefix}danger);
+    --bs-blockquote-alert-heading-color: var(--#{$prefix}danger-text-emphasis);
 }
 
 .blockquote-alert-important {
     --bs-blockquote-alert-color: var(--#{$prefix}primary);
+    --bs-blockquote-alert-heading-color: var(--#{$prefix}primary-text-emphasis);
 }
 
 .blockquote-alert-note {
     --bs-blockquote-alert-color: var(--#{$prefix}info);
+    --bs-blockquote-alert-heading-color: var(--#{$prefix}info-text-emphasis);
 }
 
 .blockquote-alert-tip {
     --bs-blockquote-alert-color: var(--#{$prefix}success);
+    --bs-blockquote-alert-heading-color: var(--#{$prefix}success-text-emphasis);
 }
 
 .blockquote-alert-warning {
     --bs-blockquote-alert-color: var(--#{$prefix}warning);
+    --bs-blockquote-alert-heading-color: var(--#{$prefix}warning-text-emphasis);
 }
 
 .blockquote-alert a.btn-link {
