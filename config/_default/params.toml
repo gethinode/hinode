@@ -320,3 +320,17 @@
     # lightbox.mjs is a plain ES module without template constructs; keep it on the
     # import lane of the js.Build bundle instead of the inline (templated) lane
     disableTemplate = true
+
+# UMD distributions do not register their window global when bundled by esbuild;
+# expose the documented global through the bundle entry (see footer/scripts.html).
+[modules.bootstrap]
+    [modules.bootstrap.globals]
+        "js/modules/bootstrap/bootstrap.bundle.js" = "bootstrap"
+
+# The flexsearch UMD distribution does not register its window global when bundled
+# by esbuild and its Node-guarded require (worker_threads) never executes in
+# browsers; declare both so footer/scripts.html can wire them up generically.
+[modules.flexsearch]
+    externals = ["worker_threads"]
+    [modules.flexsearch.globals]
+        "js/modules/flexsearch/flexsearch.bundle.min.js" = "FlexSearch"

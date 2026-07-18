@@ -235,9 +235,12 @@
                 {{- with $templated }}{{ $enableTemplate = printf "{%s}" (delimit . ",") }}{{ end -}}
 
                 {{/* UMD distributions do not register their window global when bundled by
-                    esbuild; expose the documented globals through the bundle entry. The
-                    flexsearch distribution requires a worker_threads external (its
-                    Node-guarded require never executes in browsers). */}}
+                    esbuild; a module exposes its documented global(s) through the bundle
+                    entry by declaring 'globals' in its own module config. A module whose
+                    UMD distribution guards a require behind a Node-only code path (never
+                    executed in browsers) declares that path via 'externals' so esbuild
+                    does not try to resolve it. Both are read generically from each active
+                    module's config rather than hardcoded per module here. */}}
                 {{- $globals := dict -}}
                 {{- $externals := slice -}}
                 {{- $params := dict -}}
@@ -253,12 +256,10 @@
                         "copyToClipboard" (i18n "copyToClipboard")
                         "webshare"        (site.Params.sharing.webshare | default false)
                     -}}
-                    {{- if in $val "bootstrap" -}}
-                        {{- $globals = merge $globals (dict "js/modules/bootstrap/bootstrap.bundle.js" "bootstrap") -}}
-                    {{- end -}}
-                    {{- if in $val "flexsearch" -}}
-                        {{- $globals = merge $globals (dict "js/modules/flexsearch/flexsearch.bundle.min.js" "FlexSearch") -}}
-                        {{- $externals = $externals | append "worker_threads" -}}
+                    {{- range $val -}}
+                        {{- $modconfig := index $config.modules . -}}
+                        {{- with $modconfig.globals -}}{{ $globals = merge $globals . }}{{- end -}}
+                        {{- range ($modconfig.externals | default slice) -}}{{ $externals = $externals | append . }}{{- end -}}
                     {{- end -}}
                 {{- end -}}
 
