@@ -17,10 +17,14 @@
             fullscreen=(), \
             payment=() \
             """
+        # 'no-store' is intentionally omitted: it blocks the browser back/forward cache and forces a
+        # full re-download of every response. 'must-revalidate' keeps content fresh (the browser
+        # revalidates and gets a cheap 304), which is safe in dev and correct in production since
+        # Netlify invalidates cached responses on each deploy. See Netlify caching guidance:
+        # https://docs.netlify.com/build/caching/caching-overview/
         cache-control = """\
+            public, \
             max-age=0, \
-            no-cache, \
-            no-store, \
             must-revalidate \
             """
         Access-Control-Allow-Origin = "*"
