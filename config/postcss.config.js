@@ -6,7 +6,20 @@ const purgecss = purgeCSSPlugin({
     const els = JSON.parse(content).htmlElements
     return [...(els.tags || []), ...(els.classes || []), ...(els.ids || [])]
   },
-  dynamicAttributes: ['aria-expanded', 'data-bs-theme', 'data-bs-main-theme', 'data-bs-theme-animate', 'data-transparent', 'role'],
+  dynamicAttributes: [
+    'aria-expanded',
+    'data-bs-theme',
+    'data-bs-main-theme',
+    'data-bs-theme-animate',
+    'data-transparent',
+    'role',
+    // Command component (components/_command.scss): prompt text rendered via
+    // `content: attr(data-prompt)` / `attr(data-continuation-prompt)` — the
+    // attributes only ever appear as CSS attribute selectors, never as
+    // classes/ids/tags, so hugo_stats.json cannot record them.
+    'data-prompt',
+    'data-continuation-prompt'
+  ],
   fontFace: false,
   safelist: {
     // Every entry below is a class PurgeCSS cannot see in hugo_stats.json because it is
