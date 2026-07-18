@@ -1,11 +1,12 @@
-/* eslint-disable */
-{{- if site.Params.main.enableLanguageSelectionStorage -}}
-{{- $folder := (urls.Parse site.BaseURL).Path | default "/" -}}
+import * as params from '@params'
+import { getLocalStorage, setLocalStorage } from './_cookie.js'
 
-(() => {
-  'use strict'
-
-  const folder = '{{ $folder }}'
+// The language selector ships in the critical bundle unconditionally; the site-level
+// enablement (main.enableLanguageSelectionStorage) and the base folder (derived from the
+// site's baseURL) are evaluated at runtime through build params instead of build-time
+// template constructs.
+if (params.languageSelector) {
+  const folder = params.languageFolder || '/'
 
   // Function to get the selected language from local storage
   function getLanguage () {
@@ -16,7 +17,7 @@
   function setLanguage (language) {
     setLocalStorage('selectedLanguage', language, 'functional')
   }
-  
+
   // Function to apply the selected language to the website
   function applyLanguage (language, href) {
     if (document.documentElement.lang !== language) {
@@ -25,7 +26,7 @@
           window.location.href = href
         }
       } else {
-        let target = folder + language + '/'
+        const target = folder + language + '/'
         if (window.location.href !== target) {
           window.location.href = target
         }
@@ -36,9 +37,9 @@
   // Event listener for language selection
   document.addEventListener('DOMContentLoaded', () => {
     // override stored language when query string contains force is true
-    let params = new URLSearchParams(document.location.search)
-    let force = params.get('force')
-    if (force !== null && force.toLowerCase() == 'true') {
+    const urlParams = new URLSearchParams(document.location.search)
+    const force = urlParams.get('force')
+    if (force !== null && force.toLowerCase() === 'true') {
       setLanguage(document.documentElement.lang)
       return
     }
@@ -47,12 +48,12 @@
     const storedLanguage = getLanguage()
     const languageItems = document.querySelectorAll('#language-selector[data-translated=true] .dropdown-item')
 
-    const link = document.querySelector("link[rel='canonical']")
+    const link = document.querySelector('link[rel=\'canonical\']')
     let alias = ''
     if (link !== null) {
       alias = link.getAttribute('href')
     }
-    
+
     if ((alias !== '') && (window.location.href !== alias)) {
       window.location.href = alias
     } else if (languageItems.length > 0) {
@@ -75,12 +76,9 @@
           }
         })
       })
-    }
-    else {
+    } else {
       // overrule the current stored language when no translation is available
       setLanguage(document.documentElement.lang)
     }
   })
-})()
-{{- end -}} 
-/* eslint-enable */
+}

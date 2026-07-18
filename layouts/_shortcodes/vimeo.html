@@ -19,7 +19,8 @@
 
 {{/* Main code */}}
 {{ if not $args.err }}
-    {{ partial "assets/video.html" (dict 
+    {{ partial "utilities/AddModule.html" (dict "page" .Page "module" "vimeo") }}
+    {{ partial "assets/video.html" (dict
         "page"      .Page
         "position"  .Position
         "provider"  "vimeo"

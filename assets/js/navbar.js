@@ -1,4 +1,8 @@
-const fixed = {{ site.Params.navigation.fixed }}
+import * as params from '@params'
+import { getLocalStorage } from './critical/_cookie.js'
+
+// site.Params.navigation.fixed, resolved at build time through build params
+const fixed = params.navbarFixed
 const navbar = document.querySelector('.navbar')
 const togglers = document.querySelectorAll('.main-nav-toggler')
 const modeSelectors = document.querySelectorAll('.switch-mode-collapsed')
@@ -6,16 +10,16 @@ const colorsBG = ['body', 'secondary', 'tertiary']
 
 let scrollPosition = 0
 
-function getStyle(el, styleProp) {
-    let y
-    
-    if (window.getComputedStyle) {
-      y = document.defaultView.getComputedStyle(el).getPropertyValue(styleProp)
-    } else if (el.currentStyle) {
-      y = el.currentStyle[styleProp]
-    }
+function getStyle (el, styleProp) {
+  let y
 
-    return y
+  if (window.getComputedStyle) {
+    y = document.defaultView.getComputedStyle(el).getPropertyValue(styleProp)
+  } else if (el.currentStyle) {
+    y = el.currentStyle[styleProp]
+  }
+
+  return y
 }
 
 function updateNavbarColor () {
@@ -78,7 +82,6 @@ function adaptToSection (section) {
   const isLightBackground = isLightColor(section, color)
 
   // set appropriate mode class
-  const nav = document.querySelector('.navbar')
   if (isLightBackground) {
     if (navbar.dataset.bsTheme !== 'light') {
       navbar.dataset.bsTheme = 'light'
@@ -162,10 +165,7 @@ function updateNavbar () {
       navbar.style.backgroundColor = ''
     }
   } else {
-    let storedTheme
-    if (typeof getLocalStorage === "function") {
-      storedTheme = getLocalStorage('theme', null, 'functional')
-    }
+    const storedTheme = getLocalStorage('theme', null, 'functional')
 
     if (window.scrollY > 75) {
       navbar.classList.add('nav-active')
@@ -205,7 +205,7 @@ if (navbar !== null && togglers !== null) {
   document.addEventListener('scroll', () => fixed && updateNavbar())
 
   // hook up collapse events
-  document.querySelectorAll('.navbar-collapse').forEach((collapse) => {
+  document.querySelectorAll('.navbar-collapse').forEach(collapse => {
     collapse.addEventListener('show.bs.collapse', function () {
       scrollPosition = window.pageYOffset
       document.body.style.top = `-${scrollPosition}px`

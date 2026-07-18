@@ -31,6 +31,10 @@
     {{- $enableTemplate := .enableTemplate }}
     {{- $absoluteURL := .absoluteURL -}}
     {{- $state := .state -}}
+    {{- $engine := .engine | default "bundlev2" -}}
+    {{- $globals := .globals | default dict -}}
+    {{- $externals := partial "utilities/ToStringSlice.html" (.externals | default slice) -}}
+    {{- $params := .params | default dict -}}
 
     {{- if and $cat (ne $cat "other") -}}
         {{- $destination = path.Join (path.Dir $destination) (printf "%s-%s%s" (path.BaseName $destination) $cat (path.Ext $destination)) -}}
@@ -40,17 +44,37 @@
         {{- $destination = path.Join (path.Dir $destination) (printf "%s.%s%s" (path.BaseName $destination) $page.Language.Lang (path.Ext $destination)) -}}
     {{- end -}}
 
-    {{- $bundle := partialCached "utilities/bundlev2.html" (dict
-        "page"            $page
-        "match"           $match
-        "filename"        $destination
-        "modules"         $modules
-        "basepath"        "js/modules"
-        "all"             true
-        "skip-template"   $skipTemplate
-        "enable-template" $enableTemplate
-        "debugging"       site.Params.debugging.showJS
-    ) $destination (delimit (or $modules slice) ",") -}}
+    {{- $bundle := "" -}}
+    {{- if eq $engine "bundlev3" -}}
+        {{- $bundle = partialCached "utilities/bundlev3.html" (dict
+            "page"            $page
+            "match"           $match
+            "filename"        $destination
+            "modules"         $modules
+            "basepath"        "js/modules"
+            "all"             true
+            "skip-template"   $skipTemplate
+            "enable-template" $enableTemplate
+            "globals"         $globals
+            "externals"       $externals
+            "params"          $params
+            "target"          "es2022"
+            "sourcemap"       (not hugo.IsProduction)
+            "debugging"       site.Params.debugging.showJS
+        ) $destination (delimit (or $modules slice) ",") -}}
+    {{- else -}}
+        {{- $bundle = partialCached "utilities/bundlev2.html" (dict
+            "page"            $page
+            "match"           $match
+            "filename"        $destination
+            "modules"         $modules
+            "basepath"        "js/modules"
+            "all"             true
+            "skip-template"   $skipTemplate
+            "enable-template" $enableTemplate
+            "debugging"       site.Params.debugging.showJS
+        ) $destination (delimit (or $modules slice) ",") -}}
+    {{- end -}}
     {{- $js := $bundle.bundle -}}
     {{- $jsmod := $bundle.module -}}
 
@@ -61,7 +85,9 @@
     {{- if gt (len $jsCode) 0 -}}
         {{- $integrity := "" -}}
         {{- if hugo.IsProduction -}}
-            {{- $js = $js | minify | fingerprint -}}
+            {{/* bundlev3 output is already minified by esbuild; only fingerprint it */}}
+            {{- if ne $engine "bundlev3" }}{{ $js = $js | minify }}{{ end -}}
+            {{- $js = $js | fingerprint -}}
             {{- $integrity = $js.Data.Integrity -}}
         {{- end -}}
 
@@ -77,7 +103,8 @@
     {{- if gt (len $jsmodCode) 0 -}}
         {{- $integrity := "" -}}
         {{- if hugo.IsProduction -}}
-            {{- $jsmod = $jsmod | minify | fingerprint -}}
+            {{- if ne $engine "bundlev3" }}{{ $jsmod = $jsmod | minify }}{{ end -}}
+            {{- $jsmod = $jsmod | fingerprint -}}
             {{- $integrity = $jsmod.Data.Integrity -}}
         {{- end -}}
 
@@ -153,9 +180,6 @@
 {{- $localize := false -}}
 {{- if gt (intersect (or $config.localize slice) $modules | len) 0 }}{{ $localize = true }}{{ end -}}
 
-{{- $skipTemplate := false -}}
-{{- if gt (intersect (or $config.skipTemplate slice) $modules | len) 0 }}{{ $skipTemplate = true }}{{ end -}}
-
 {{/* Main code */}}
 {{- if not $error -}}
     {{/* include external scripts first */}}
@@ -173,7 +197,11 @@
         {{- end -}}
     {{- end -}}
 
-    {{/* Bundle the critical and core scripts by category */}}
+    {{/* Bundle the critical and core scripts by category. These lanes use the js.Build
+        engine (bundlev3): the theme's own scripts are template-free ES modules imported
+        from the assets filesystem (skip-template), whereas modules with templated glue
+        (no `disableTemplate` in their module config) keep the inline ExecuteAsTemplate
+        lane via enable-template. */}}
     {{- if ne $args.type "optional" -}}
         {{- range $cat, $val := $categories -}}
             {{- if or (gt ($val | len) 0) (eq $args.type "critical") -}}
@@ -184,17 +212,60 @@
                     {{- $match = index $patterns $args.type -}}
                 {{- end -}}
 
-                {{- partial "inline/bundle-script.html" (dict 
+                {{- $templated := slice -}}
+                {{- range $val -}}
+                    {{- $modconfig := index $config.modules . -}}
+                    {{- if not $modconfig.disabletemplate -}}
+                        {{- $templated = $templated | append (printf "js/modules/%s/**.*js" .) -}}
+                    {{- end -}}
+                {{- end -}}
+                {{- $enableTemplate := "" -}}
+                {{- with $templated }}{{ $enableTemplate = printf "{%s}" (delimit . ",") }}{{ end -}}
+
+                {{/* UMD distributions do not register their window global when bundled by
+                    esbuild; expose the documented globals through the bundle entry. The
+                    flexsearch distribution requires a worker_threads external (its
+                    Node-guarded require never executes in browsers). */}}
+                {{- $globals := dict -}}
+                {{- $externals := slice -}}
+                {{- $params := dict -}}
+                {{- if eq $args.type "critical" -}}
+                    {{- $params = dict
+                        "darkMode"         (or site.Params.main.enableDarkMode site.Params.main.colorMode.enabled | default false)
+                        "languageSelector" (site.Params.main.enableLanguageSelectionStorage | default false)
+                        "languageFolder"   ((urls.Parse site.BaseURL).Path | default "/")
+                    -}}
+                {{- else -}}
+                    {{- $params = dict
+                        "navbarFixed"     (site.Params.navigation.fixed | default false)
+                        "copyToClipboard" (i18n "copyToClipboard")
+                        "webshare"        (site.Params.sharing.webshare | default false)
+                    -}}
+                    {{- if in $val "bootstrap" -}}
+                        {{- $globals = merge $globals (dict "js/modules/bootstrap/bootstrap.bundle.js" "bootstrap") -}}
+                    {{- end -}}
+                    {{- if in $val "flexsearch" -}}
+                        {{- $globals = merge $globals (dict "js/modules/flexsearch/flexsearch.bundle.min.js" "FlexSearch") -}}
+                        {{- $externals = $externals | append "worker_threads" -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- partial "inline/bundle-script.html" (dict
                     "page"           $args.page
                     "match"          $match
                     "destination"    (printf "js/%s.bundle.js" $args.type)
                     "cat"            $cat
                     "modules"        $val
                     "localize"       $localize
-                    "skipTemplate"   $skipTemplate
+                    "skipTemplate"   true
+                    "enableTemplate" $enableTemplate
                     "absoluteURL"    $absoluteURL
                     "state"          (cond (eq $args.type "critical") "immediate" "defer")
-                )}} 
+                    "engine"         "bundlev3"
+                    "globals"        $globals
+                    "externals"      $externals
+                    "params"         $params
+                )}}
             {{- end -}}
         {{- end -}}
     {{- else -}}

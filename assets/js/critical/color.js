@@ -1,26 +1,28 @@
-{{- if (or site.Params.main.enableDarkMode site.Params.main.colorMode.enabled) -}}
-
 /*!
  * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
  * Licensed under the Creative Commons Attribution 3.0 Unported License.
  */
 
-(() => {
-  'use strict'
+import * as params from '@params'
+import { getLocalStorage, setLocalStorage } from './_cookie.js'
 
-  const supportedThemes = ['auto', 'dark', 'light'];
+// The color-mode toggler ships in the critical bundle unconditionally; the site-level
+// enablement (main.enableDarkMode / main.colorMode.enabled) is evaluated at runtime
+// through build params instead of a build-time template conditional.
+if (params.darkMode) {
+  const supportedThemes = ['auto', 'dark', 'light']
 
   // retrieves the currently stored theme from local storage
   const storedTheme = getLocalStorage('theme', 'auto', 'functional')
 
   // retrieves the theme preferred by the client, defaults to light
-  function getPreferredTheme() {
+  function getPreferredTheme () {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
   // retrieves the current theme, either from local storage or client's preferences
-  function getTheme() {
+  function getTheme () {
     if (storedTheme) {
       return storedTheme
     } else {
@@ -31,7 +33,7 @@
   }
 
   // applies and stores requested theme
-  function setTheme(theme) {
+  function setTheme (theme) {
     if (!supportedThemes.includes(theme)) {
       theme = 'auto'
     }
@@ -48,12 +50,12 @@
   }
 
   // alternates the currently active theme
-  function toggleTheme() {
+  function toggleTheme () {
     const target = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
     setTheme(target)
   }
 
-  function updateSelectors() {
+  function updateSelectors () {
     document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
       chk.checked = (document.documentElement.getAttribute('data-bs-theme') === 'light')
     })
@@ -81,6 +83,4 @@
 
   // initialize theme as soon as possible to reduce screen flickering
   setTheme(getTheme())
-})()
-
-{{- end -}}
+}

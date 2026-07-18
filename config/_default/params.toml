@@ -317,3 +317,6 @@
 [modules.lightbox]
     integration = "core"
     state = "defer"
+    # lightbox.mjs is a plain ES module without template constructs; keep it on the
+    # import lane of the js.Build bundle instead of the inline (templated) lane
+    disableTemplate = true

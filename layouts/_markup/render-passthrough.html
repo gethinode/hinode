@@ -1,3 +1,5 @@
+{{/* Server-side math still needs the katex stylesheet; register the module dependency */}}
+{{- partial "utilities/AddModule.html" (dict "page" .Page "module" "katex") -}}
 {{ $opts := dict }}
 
 {{ if eq .Type "block" }}
