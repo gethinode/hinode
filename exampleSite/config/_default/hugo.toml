@@ -106,7 +106,6 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server"]
 
 [minify]
   [minify.tdewolff.js]
-    keepVarNames = true
     precision = 0
     version = 2022
   [minify.tdewolff.html]
