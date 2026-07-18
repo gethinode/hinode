@@ -6,6 +6,7 @@
     - grouped: Dictionary mapping parent paths to children slices
     - sortField: Field to sort children by (e.g., "title", "date", "weight")
     - reverse: Whether to reverse sort order (default: false)
+    - seen: Slice of ancestor permalinks in the current walk, used as cycle guard (internal)
 
     Returns: Menu entry dict with title and pages (optional array of nested entries)
 */}}
@@ -14,6 +15,7 @@
 {{- $grouped := .grouped -}}
 {{- $sortField := .sortField | default "title" -}}
 {{- $reverse := .reverse | default false -}}
+{{- $seen := .seen | default slice -}}
 
 {{- /* Create menu entry with title and absolute link */ -}}
 {{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
@@ -21,6 +23,13 @@
 
 {{- /* Get children from grouped hierarchy */ -}}
 {{- $children := index $grouped $page.RelPermalink | default slice -}}
+{{- /* Guard against cycles: the grouped map keys pages by permalink, so any permalink collision
+    (or malformed hierarchy) could make a page its own ancestor and recurse forever */ -}}
+{{- if in $seen $page.RelPermalink -}}
+    {{- warnf "Sidebar hierarchy contains a cycle at %q; skipping its children" $page.RelPermalink -}}
+    {{- $children = slice -}}
+{{- end -}}
+{{- $seen = $seen | append $page.RelPermalink -}}
 {{- if $children -}}
     {{- /* Sort children using Hugo's page collection methods */ -}}
     {{- if eq $sortField "title" -}}
@@ -48,7 +57,7 @@
     {{- /* Recursively build nested menu entries */ -}}
     {{- $pages := slice -}}
     {{- range $children -}}
-        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "reverse" $reverse) -}}
+        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "reverse" $reverse "seen" $seen) -}}
         {{- $pages = $pages | append $childEntry -}}
     {{- end -}}
     {{- $entry = merge $entry (dict "pages" $pages) -}}
