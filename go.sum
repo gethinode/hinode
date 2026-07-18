@@ -14,6 +14,8 @@ github.com/gethinode/mod-flexsearch/v5 v5.0.2 h1:VAHzYLJECrVBvzn5xvM+FoHSP2VwDDP
 github.com/gethinode/mod-flexsearch/v5 v5.0.2/go.mod h1:0kRR1xaAhSYVyVICV5+x5bF8OSpfre1DwLdrK3a5uAA=
 github.com/gethinode/mod-flexsearch/v5 v5.1.0 h1:sNi3UJkRupYRzPIdG7oAkHZ+bm/rMuBfjNBHECBsyWg=
 github.com/gethinode/mod-flexsearch/v5 v5.1.0/go.mod h1:zNdWGmjNg+WtEZbmqzPZm/W5gb0bl43qrm0wKp09V6M=
+github.com/gethinode/mod-flexsearch/v5 v5.1.1 h1:x1dnOMV1fLBzpWqPQYPnn8zDXN0bcdD16qAcIzsWD/s=
+github.com/gethinode/mod-flexsearch/v5 v5.1.1/go.mod h1:bo51LbCcYROomghgAWpH3w6EYSe8ZtdqrPSB6C/DZaA=
 github.com/gethinode/mod-fontawesome/v6 v6.1.1 h1:k5Jy7nA+YfLZ9YqXH8hyaiw9wjAeOxNEUcnu6fynnJo=
 github.com/gethinode/mod-fontawesome/v6 v6.1.1/go.mod h1:875OBk5te+KBJmr0PdSkFcduYnsKCuHWfcaqChh9NGo=
 github.com/gethinode/mod-google-analytics/v2 v2.0.4 h1:ONEUjhfVR6p+Y/XyU3BUGXZy4+HAkJvGo+mr24ugklY=
