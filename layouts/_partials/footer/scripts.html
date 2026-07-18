@@ -193,7 +193,7 @@
                     "localize"       $localize
                     "skipTemplate"   $skipTemplate
                     "absoluteURL"    $absoluteURL
-                    "state"          (cond (eq $args.type "critical") "immediate" "async")
+                    "state"          (cond (eq $args.type "critical") "immediate" "defer")
                 )}} 
             {{- end -}}
         {{- end -}}
