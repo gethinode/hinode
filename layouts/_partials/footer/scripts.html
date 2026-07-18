@@ -187,10 +187,22 @@
         {{- if in $modules $mod -}}
             {{- if or (index $cfg "local") (not hugo.IsServer) -}}
                 {{- with index $cfg "url" -}}
+                    {{/* Preconnect to the external script host so the DNS + TLS handshake overlaps
+                        earlier work on the critical path. Hosts are declared per-module via the
+                        'preconnect' parameter and only emitted for the critical (head) lane. No
+                        'crossorigin' — a plain <script src> reuses the anonymous-credentialled
+                        connection this hint opens. */}}
+                    {{- if eq $args.type "critical" -}}
+                        {{- with (index $cfg "preconnect") -}}
+                            {{- range $pc := (partial "utilities/ToStringSlice.html" .) -}}
+                                <link rel="preconnect" href="{{ $pc }}">
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
                     {{- partial "templates/script.html" (dict
                         "link"     .
                         "category" (index $cfg "category")
-                        "state"    (index $cfg "state")) 
+                        "state"    (index $cfg "state"))
                     -}}
                 {{- end -}}
             {{- end -}}
