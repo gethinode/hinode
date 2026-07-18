@@ -8,8 +8,15 @@
 }
 
 .btn-social {
+    // Keep the interactive area at least 24x24 CSS px to satisfy WCAG 2.5.8 (Target Size Minimum),
+    // even though these icon buttons are rendered with 'p-0'. The icon stays centered and unchanged.
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    min-height: 1.5rem;
     background-color: transparent;
-    
+
     --bs-btn-bg: transparent;
     --bs-btn-border-width: none;
     --bs-btn-color: var(--bs-secondary);
