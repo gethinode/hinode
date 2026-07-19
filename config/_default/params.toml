@@ -321,16 +321,6 @@
     # import lane of the js.Build bundle instead of the inline (templated) lane
     disableTemplate = true
 
-# UMD distributions do not register their window global when bundled by esbuild;
-# expose the documented global through the bundle entry (see footer/scripts.html).
-[modules.bootstrap]
-    [modules.bootstrap.globals]
-        "js/modules/bootstrap/bootstrap.bundle.js" = "bootstrap"
-
-# The flexsearch UMD distribution does not register its window global when bundled
-# by esbuild and its Node-guarded require (worker_threads) never executes in
-# browsers; declare both so footer/scripts.html can wire them up generically.
-[modules.flexsearch]
-    externals = ["worker_threads"]
-    [modules.flexsearch.globals]
-        "js/modules/flexsearch/flexsearch.bundle.min.js" = "FlexSearch"
+# mod-bootstrap (>= v1.4.0) and mod-flexsearch (>= v5.2.0) declare their own
+# script globals/externals via the module-config convention (see
+# footer/scripts.html); hinode no longer needs to duplicate them here.
