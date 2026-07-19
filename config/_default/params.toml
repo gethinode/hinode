@@ -320,3 +320,7 @@
     # lightbox.mjs is a plain ES module without template constructs; keep it on the
     # import lane of the js.Build bundle instead of the inline (templated) lane
     disableTemplate = true
+
+# mod-bootstrap (>= v1.4.0) and mod-flexsearch (>= v5.2.0) declare their own
+# script globals/externals via the module-config convention (see
+# footer/scripts.html); hinode no longer needs to duplicate them here.
