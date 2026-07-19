@@ -1,5 +1,3 @@
-github.com/FortAwesome/Font-Awesome v0.0.0-20260715180930-14c65a3747d0 h1:4+bB2ojsMTsQroHtQr1FWy2gxFzpBn5hISldeRfxF+o=
-github.com/FortAwesome/Font-Awesome v0.0.0-20260715180930-14c65a3747d0/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/cloudcannon/bookshop/hugo/v3 v3.17.1 h1:weTVWBamjQHMIp/oYTFsPwRzzhWrZA6JO43QnxI1kxw=
 github.com/cloudcannon/bookshop/hugo/v3 v3.17.1/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
 github.com/cloudcannon/bookshop/hugo/v3 v3.18.2 h1:j3XUvvuCv/7SfGKzd7gzb3WEgs1DurqTRDe7gdMAAvU=
@@ -10,8 +8,12 @@ github.com/gethinode/mod-blocks/v2 v2.0.0 h1:J8XLZOSVdondbLpDsQA9AoyLy3pu9wsdZcg
 github.com/gethinode/mod-blocks/v2 v2.0.0/go.mod h1:yhZH/AHvPlr1IkYu9GRmhvsLBlyvwpO0T8DvnKUITDw=
 github.com/gethinode/mod-blocks/v2 v2.0.1 h1:BoHDy2PqZfSQ5kolAjnem2gWOarxVCRzaJZ6owM0oCs=
 github.com/gethinode/mod-blocks/v2 v2.0.1/go.mod h1:yhZH/AHvPlr1IkYu9GRmhvsLBlyvwpO0T8DvnKUITDw=
+github.com/gethinode/mod-blocks/v2 v2.2.6 h1:gTrTTyUcFLjcjuqvr5Ex923F2E777vOzkbFJDzNaSz0=
+github.com/gethinode/mod-blocks/v2 v2.2.6/go.mod h1:fhhxQXNTGAgT4b9e50c8+VTT1OMod2eafgeDE/YZadE=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.0 h1:ryXa25d/9mXVcPXhOwMtxtAtFkR0M1EPSIuU0xRRDec=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.0/go.mod h1:0DKJp0goqI0vwOIVa8/yd3tAE0XdUypu1QRoz9K+094=
+github.com/gethinode/mod-docs v1.15.5 h1:B8tawWKYSbH5Y44K7s+r8AADhpdtWvRVNrJJFFbsN74=
+github.com/gethinode/mod-docs v1.15.5/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2 h1:v1aHhbLLwe/05zRHnx9qGqh6b3toDzcLzuv61rWAoGU=
 github.com/gethinode/mod-fontawesome/v2 v2.1.2/go.mod h1:zukv88wXqquEvTJJ9mWWk8Ia+9INnA41wYqusf2RcHA=
 github.com/gethinode/mod-fontawesome/v3 v3.1.3 h1:xlwmdgulIV/IMj5I1/fH4tPM1/AU0OYZ4vepQiJbOYA=
