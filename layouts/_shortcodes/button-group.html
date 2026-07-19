@@ -27,6 +27,10 @@
     {{ warnf "Unexpected inner content: %s\r\n      %s" .Position $input }}
 {{ end }}
 
+{{/* A "tablist" role requires its buttons to expose role="tab" (WCAG / aria-required-children);
+     the inner button shortcodes don't carry it, so inject it when the group is a tablist. */}}
+{{ if eq $role "tablist" }}{{ $inner = replaceRE `<(a|button)([ >])` `<${1} role="tab"${2}` $inner }}{{ end }}
+
 {{/* Main code */}}
 {{ if not $args.err }}
     <div class="btn-group" role="{{ $role }}"
