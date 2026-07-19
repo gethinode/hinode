@@ -83,7 +83,7 @@
         {{- $btnClass = printf "%s position-relative %s" $btnClass $class }}
     {{- end -}}        
 
-    <a aria-label="{{ (or $label $title) | safeHTML }}"
+    <a{{ if not $title }}{{ with $label }} aria-label="{{ . | safeHTML }}"{{ end }}{{ end }}
         {{ if ne $state "disabled" }}{{ with $href }}href="{{ . }}"{{ end }}{{ end -}}
         {{- with $args.id }} id="{{ . }}"{{ end -}}
         {{- with $target }} target="{{ . }}"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end -}}

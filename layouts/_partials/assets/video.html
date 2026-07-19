@@ -87,7 +87,7 @@
 
         <div class="video-embedded {{ $args.class }}" data-video-padding="{{ $padding }}">
             <iframe src="{{ $url }}{{ if $args.autoplay }}&autoplay=1&mute=1{{ end }}"
-                allowfullscreen title="{{ $args.title }}" {{ if $args.autoplay }}allow="autoplay"{{ end }}>
+                allowfullscreen title="{{ or $title (printf "%s video" (strings.FirstUpper $provider)) }}" {{ if $args.autoplay }}allow="autoplay"{{ end }}>
             </iframe>
         </div>
     {{ else if eq $provider "vimeo" }}
@@ -113,7 +113,7 @@
         {{- end -}}
 
         <div class="video-embedded {{ $args.class }}" data-video-padding="{{ $padding }}">
-            <iframe src="{{ $url | safeHTMLAttr }}" title="{{ $args.title }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            <iframe src="{{ $url | safeHTMLAttr }}" title="{{ or $title (printf "%s video" (strings.FirstUpper $provider)) }}" webkitallowfullscreen mozallowfullscreen allowfullscreen>
             </iframe>
         </div>
     {{ else if eq $provider "cloudinary" }}

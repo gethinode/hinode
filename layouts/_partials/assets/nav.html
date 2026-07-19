@@ -13,7 +13,7 @@
     {{ $wrap := .wrap }}
 
     <div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
-    <button type="button" class="link-secondary dropdown-toggle border-0 bg-transparent p-0" data-bs-toggle="dropdown" aria-expanded="false">
+    <button type="button" class="link-body-emphasis dropdown-toggle border-0 bg-transparent p-0" data-bs-toggle="dropdown" aria-expanded="false">
         {{ cond (gt (len $titles) 0) (index $titles 0) (T "sectionMenu") }}
     </button>
         <ul class="dropdown-menu">
