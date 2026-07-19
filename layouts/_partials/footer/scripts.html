@@ -241,7 +241,7 @@
                     executed in browsers) declares that path via 'externals' so esbuild
                     does not try to resolve it. Both are read generically from each active
                     module's config rather than hardcoded per module here. */}}
-                {{- $globals := dict -}}
+                {{- $globals := slice -}}
                 {{- $externals := slice -}}
                 {{- $params := dict -}}
                 {{- if eq $args.type "critical" -}}
@@ -258,7 +258,15 @@
                     -}}
                     {{- range $val -}}
                         {{- $modconfig := index $config.modules . -}}
-                        {{- with $modconfig.globals -}}{{ $globals = merge $globals . }}{{- end -}}
+                        {{/* globals is an array of {path, name} tables; a legacy path-keyed
+                            map is still accepted (older modules) and normalized to the same shape */}}
+                        {{- with $modconfig.globals -}}
+                            {{- if reflect.IsMap . -}}
+                                {{- range $path, $name := . -}}{{- $globals = $globals | append (dict "path" $path "name" $name) -}}{{- end -}}
+                            {{- else -}}
+                                {{- range . -}}{{- $globals = $globals | append . -}}{{- end -}}
+                            {{- end -}}
+                        {{- end -}}
                         {{- range ($modconfig.externals | default slice) -}}{{ $externals = $externals | append . }}{{- end -}}
                     {{- end -}}
                 {{- end -}}
