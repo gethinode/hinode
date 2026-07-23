@@ -5,3 +5,15 @@ allowBuilds:
   # add more only when a postinstall failure is investigated and trusted
 minimumReleaseAgeExclude:
   - "@gethinode/*"
+
+# Force-patch transitive deps flagged by `pnpm audit --prod --audit-level=high`.
+# adm-zip: hugo-extended pins ^0.5.17 (crafted-ZIP ~4GB alloc DoS,
+#   GHSA-xcpc-8h2w-3j85 / CVE-2026-39244); force the patched 0.6.x.
+# tar: hugo-extended's tar 7.5.16 carries node-tar DoS advisories; force >=7.5.19.
+# svgo: cssnano > postcss-svgo pulls svgo 4.0.1 (removeScripts high advisory);
+#   force the patched >=4.0.2.
+# Drop each override once the upstream range ships the patched version.
+overrides:
+  adm-zip: ">=0.6.0"
+  svgo: ">=4.0.2"
+  tar: ">=7.5.19"
