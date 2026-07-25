@@ -12,8 +12,26 @@ minimumReleaseAgeExclude:
 # tar: hugo-extended's tar 7.5.16 carries node-tar DoS advisories; force >=7.5.19.
 # svgo: cssnano > postcss-svgo pulls svgo 4.0.1 (removeScripts high advisory);
 #   force the patched >=4.0.2.
+# brace-expansion: reached through several chains (rimraf > glob > minimatch,
+#   npm-run-all > minimatch, netlify-plugin-hugo-cache-resources > glob >
+#   minimatch), which pinned 1.1.13 and 5.0.7 — both carrying the
+#   unbounded-expansion DoS (GHSA-mh99-v99m-4gvg). Overridden unscoped: a
+#   per-major key left minimatch@3 on 5.0.7 anyway, so scoping bought nothing and
+#   only obscured what was happening. The package exports a single expand()
+#   function whose signature is unchanged across these majors, and lint + build
+#   pass on the forced version.
+# js-yaml: markdownlint-cli2 pins 5.2.1. Keyed to 5 because 4.3.0 is also in the
+#   tree via another path and is not affected.
+# shell-quote: npm-run-all pins 1.8.4; force the patched >=1.8.5. Only one line
+#   is present, so no key scoping is needed.
+# All four are transitive: every direct dependency involved (rimraf, npm-run-all,
+# markdownlint-cli2, netlify-plugin-hugo-cache-resources) is already at its
+# latest published version, so there is no upgrade that resolves them.
 # Drop each override once the upstream range ships the patched version.
 overrides:
   adm-zip: ">=0.6.0"
+  brace-expansion: ">=5.0.8"
+  js-yaml@5: ">=5.2.2"
+  shell-quote: ">=1.8.5"
   svgo: ">=4.0.2"
   tar: ">=7.5.19"
