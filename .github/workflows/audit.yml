@@ -1,0 +1,27 @@
+name: Audit
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+      - beta
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Audit dependencies for known vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Hinode toolchain
+        uses: gethinode/.github/actions/setup-hinode@v1
+        with:
+          package-manager: pnpm
+
+      - name: Audit dependencies for known vulnerabilities
+        run: pnpm audit --prod --audit-level=high
