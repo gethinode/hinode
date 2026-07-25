@@ -78,6 +78,16 @@
     ) }}
 {{ end }}
 
+{{/* Optional action slot: pre-rendered HTML (typically a button) placed on the
+     title's own row, pushed to the trailing edge. A section landing page's
+     primary action belongs beside its title rather than buried in the body, and
+     the heading is rendered here, so this is the only place that can put it
+     there. Wrapping happens only when both a header and an action exist, so the
+     markup is byte-identical to before for every existing caller. */}}
+{{ if and $header $args.action }}
+    {{ $header = printf `<div class="d-flex align-items-center gap-3 section-title-row">%s<div class="section-title-action ms-auto flex-shrink-0">%s</div></div>` $header $args.action | safeHTML }}
+{{ end }}
+
 {{ $links := "" }}
 {{ if $args.links }}
     {{ $links = partial "assets/links.html" (dict
