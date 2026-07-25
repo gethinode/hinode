@@ -1,6 +1,18 @@
 {{/* Add default hero and articles for list pages */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
+{{/* Read the caller's params before rendering the header: the header now
+     accepts an optional action, so it can no longer be emitted before the
+     params that may carry one have been read. */}}
+{{ $articlesParams := $.Scratch.Get "articlesParams" }}
+{{/* Cast to string: callers pass rendered markup, which arrives as template.HTML,
+     and the argument validator type-checks against string. section-title marks it
+     safe again when it composes the header row. */}}
+{{ $sectionAction := "" }}
+{{ if reflect.IsMap $articlesParams }}
+    {{ with index $articlesParams "action" }}{{ $sectionAction = printf "%s" . }}{{ end }}
+{{ end }}
+
 {{/* Render basic header for list page */}}
 {{ if .Site.Params.navigation.breadcrumb }}
     {{ partial "assets/breadcrumb.html" (dict "page" .) }}
@@ -13,10 +25,10 @@
         "align"   "start"
     )
     "use-title" true
+    "action"    $sectionAction
 ) }}
 
 {{/* Init the card styling */}}
-{{ $articlesParams := $.Scratch.Get "articlesParams" }}
 {{ $sort := "date" }}
 {{ $reverse := true }}
 {{ $class := "border-0 h-100" }}

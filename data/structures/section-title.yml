@@ -18,3 +18,5 @@ arguments:
   arrangement:
   heading-style:
   content-style:
+  action:
+    optional: true
