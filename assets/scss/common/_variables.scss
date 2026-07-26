@@ -61,6 +61,19 @@ $sidebar-collapse-transition-duration: 0.2s !default;
 $sidebar-collapse-transition-easing: ease !default;
 // scss-docs-end sidebar-collapse-transition
 
+// scss-docs-start sidebar-collapse-refinement-transition
+// Sequencing for the collapsed-mode centring refinements on a sidebar item. These
+// are discrete properties, so they land on the tick the collapsed class flips —
+// before the column and the labels have finished collapsing. A zero-duration
+// transition defers the change without animating it; the `-delayed` variant holds
+// it until the collapse geometry has settled. Exposed because `transition` is a
+// shorthand: a downstream theme declaring its own on `.sidebar-item` replaces
+// these slots rather than extending them, and has to restate them. Only valid
+// inside `@supports (transition-behavior: allow-discrete)`.
+$sidebar-collapse-refinement-transition: text-align 0s allow-discrete, justify-content 0s allow-discrete !default;
+$sidebar-collapse-refinement-transition-delayed: text-align 0s $sidebar-collapse-transition-duration allow-discrete, justify-content 0s $sidebar-collapse-transition-duration allow-discrete !default;
+// scss-docs-end sidebar-collapse-refinement-transition
+
 // scss-docs-start horizontal-nav
 $dropdown-transition: opacity .15s ease-in-out !default;
 $dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);
