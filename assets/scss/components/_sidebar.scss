@@ -4,6 +4,8 @@
 // column and the labels inside it retime together instead of drifting apart.
 $sidebar-collapse-transition-duration: 0.2s !default;
 $sidebar-collapse-transition-easing: ease !default;
+$sidebar-collapse-refinement-transition: text-align 0s allow-discrete, justify-content 0s allow-discrete !default;
+$sidebar-collapse-refinement-transition-delayed: text-align 0s $sidebar-collapse-transition-duration allow-discrete, justify-content 0s $sidebar-collapse-transition-duration allow-discrete !default;
 
 // scss-docs-start sidebar
 .sidebar {
@@ -301,6 +303,66 @@ html.sidebar-pre-collapsed .sidebar-collapsible {
 
     .sidebar-item .me-1 {
         margin-right: 0 !important;
+    }
+}
+
+// Sequence the centring refinements above behind the geometry they belong to.
+//
+// They are position changes, not animations: `text-align` and `justify-content`
+// are discrete, and the paddings flip in one step. So they all land on the tick
+// the collapsed class flips, while the labels (and, in a downstream theme, the
+// column width) are still mid-collapse. Centring an icon+label pair inside a
+// still-full-width column throws the icon far to the right for one frame — ~50px
+// in a 16rem column — after which it sweeps back past its resting place as the
+// column narrows, because the icon sits at `(columnWidth - contentWidth) / 2` and
+// those two shrink on different curves. Three direction changes for a gesture
+// that should read as one motion.
+//
+// A zero-duration transition with a delay defers a value change without animating
+// it, and `transition-behavior: allow-discrete` lets the keyword properties take
+// part at all. The delay is the shared collapse duration, so the refinements land
+// exactly as the labels and the column finish: the icon holds still throughout and
+// steps once into its centred position. The gesture is not lengthened.
+//
+// Only the collapsed state carries the delay. A transition takes its timing from
+// the after-change style, so collapsing defers and expanding does not — which is
+// what expand needs: the refinements have to be gone before the column widens, or
+// the now icon-only rows would re-centre in an ever-wider track and sweep right.
+//
+// `white-space` and `overflow` are deliberately excluded and still land at once;
+// they are what stops the collapsing label wrapping to a second line.
+//
+// Progressive enhancement: without `transition-behavior` the refinements land
+// immediately, exactly as they did before this block existed.
+@supports (transition-behavior: allow-discrete) {
+    .sidebar-collapsible {
+        &.sidebar {
+            transition: padding-left 0s;
+        }
+
+        .sidebar-toggle-container {
+            transition: justify-content 0s allow-discrete, padding-right 0s;
+        }
+
+        .sidebar-item {
+            transition: $sidebar-collapse-refinement-transition;
+        }
+
+        .sidebar-item .me-1 {
+            transition: margin-right 0s;
+        }
+    }
+
+    .sidebar-collapsed {
+        &.sidebar,
+        .sidebar-toggle-container,
+        .sidebar-item .me-1 {
+            transition-delay: $sidebar-collapse-transition-duration;
+        }
+
+        .sidebar-item {
+            transition: $sidebar-collapse-refinement-transition-delayed;
+        }
     }
 }
 
