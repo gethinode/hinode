@@ -1,3 +1,10 @@
+// Self-sufficient defaults — see common/_styles.scss for the rationale
+// (child themes shadowing common/_variables.scss). Downstream themes that
+// animate their own part of the collapse gesture reference these, so the
+// column and the labels inside it retime together instead of drifting apart.
+$sidebar-collapse-transition-duration: 0.2s !default;
+$sidebar-collapse-transition-easing: ease !default;
+
 // scss-docs-start sidebar
 .sidebar {
     top: var(--navbar-offset);
@@ -236,7 +243,13 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-item-label {
     overflow: hidden;
     white-space: nowrap;
     vertical-align: middle;
-    transition: max-width 0.2s ease, opacity 0.15s ease, margin-inline-start 0.2s ease;
+
+    // Geometry rides the shared collapse timing; the fade is deliberately
+    // shorter so the label is gone before the track finishes narrowing.
+    transition:
+        max-width $sidebar-collapse-transition-duration $sidebar-collapse-transition-easing,
+        opacity 0.15s ease,
+        margin-inline-start $sidebar-collapse-transition-duration $sidebar-collapse-transition-easing;
 }
 
 .sidebar-collapsed {
