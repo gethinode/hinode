@@ -55,6 +55,15 @@ $primary-border-subtle-dark:        mix(black, h.$primary, calc(h.$dark-mode-sha
 // Shared by every element that repaints on a color mode switch, so they stay in sync.
 $theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out, border-color .5s ease-in-out !default;
 
+// Timing of the sidebar collapse/expand gesture. Several properties animate at
+// once and on more than one element — the label's max-width and inline-start
+// margin here, the column's width in a downstream theme — so they share a
+// duration and easing rather than each carrying its own literal. Exposed as a
+// duration/easing pair, not a `transition` shorthand, because the property
+// lists differ per element. Changing either value retimes the whole gesture.
+$sidebar-collapse-transition-duration: 0.2s !default;
+$sidebar-collapse-transition-easing: ease !default;
+
 $dropdown-transition: opacity .15s ease-in-out !default;
 $dropdown-horizontal-margin-top: calc((-1.5 * 1rem) - 2px);
 $dropdown-horizontal-padding-y: calc(1rem + 2px);
