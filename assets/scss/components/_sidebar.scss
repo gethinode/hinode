@@ -6,6 +6,8 @@ $sidebar-collapse-transition-duration: 0.2s !default;
 $sidebar-collapse-transition-easing: ease !default;
 $sidebar-collapse-refinement-transition: text-align 0s allow-discrete, justify-content 0s allow-discrete !default;
 $sidebar-collapse-refinement-transition-delayed: text-align 0s $sidebar-collapse-transition-duration allow-discrete, justify-content 0s $sidebar-collapse-transition-duration allow-discrete !default;
+$sidebar-collapse-clipping-transition: white-space 0s allow-discrete, overflow 0s allow-discrete !default;
+$sidebar-collapse-clipping-transition-delayed: white-space 0s $sidebar-collapse-transition-duration allow-discrete, overflow 0s $sidebar-collapse-transition-duration allow-discrete !default;
 
 // scss-docs-start sidebar
 .sidebar {
@@ -329,11 +331,26 @@ html.sidebar-pre-collapsed .sidebar-collapsible {
 // what expand needs: the refinements have to be gone before the column widens, or
 // the now icon-only rows would re-centre in an ever-wider track and sweep right.
 //
-// `white-space` and `overflow` are deliberately excluded and still land at once;
-// they are what stops the collapsing label wrapping to a second line.
+// `white-space` and `overflow` carry the mirror image of that delay, because the
+// direction that needs them held is the opposite one. They are the clipping pair:
+// `nowrap` keeps the (max-width: 0) label on the icon's line and `hidden` stops it
+// spilling out of a column narrower than its text.
 //
-// Progressive enhancement: without `transition-behavior` the refinements land
-// immediately, exactly as they did before this block existed.
+// Collapsing, they must land at once — the label is still full width on the tick
+// the class flips, so anything later lets it wrap. Expanding, landing at once is
+// exactly the bug: `nowrap` is *removed* on that tick while the column is still
+// widening, so for a few frames the label sits in a track too narrow to hold it,
+// wraps to a second line, and doubles every row's height until the width catches
+// up. Measured at 1440x900: rows peak at 54.77px against a settled 30.77px, with
+// the column only 140px wide and the label already 82px.
+//
+// So the delay goes on the expanded state, not the collapsed one — the inverse of
+// the centring refinements above. Same mechanism, opposite assignment: the
+// after-change style supplies the timing, so the clipping pair defers on expand
+// and lands immediately on collapse, and both directions hold their row height.
+//
+// Progressive enhancement: without `transition-behavior` every property here lands
+// immediately, exactly as it did before this block existed.
 @supports (transition-behavior: allow-discrete) {
     .sidebar-collapsible {
         &.sidebar {
@@ -345,7 +362,7 @@ html.sidebar-pre-collapsed .sidebar-collapsible {
         }
 
         .sidebar-item {
-            transition: $sidebar-collapse-refinement-transition;
+            transition: $sidebar-collapse-refinement-transition, $sidebar-collapse-clipping-transition-delayed;
         }
 
         .sidebar-item .me-1 {
@@ -361,7 +378,7 @@ html.sidebar-pre-collapsed .sidebar-collapsible {
         }
 
         .sidebar-item {
-            transition: $sidebar-collapse-refinement-transition-delayed;
+            transition: $sidebar-collapse-refinement-transition-delayed, $sidebar-collapse-clipping-transition;
         }
     }
 }
