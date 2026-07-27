@@ -30,8 +30,13 @@ $sidebar-collapse-clipping-transition-delayed: white-space 0s $sidebar-collapse-
         height: auto;
     }
 
+    .sidebar-brand-full {
+        opacity: 1;
+    }
+
     .sidebar-brand-mark {
         display: none;
+        opacity: 0;
     }
 }
 
@@ -43,10 +48,12 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
 
     .sidebar-brand-full {
         display: none;
+        opacity: 0;
     }
 
     .sidebar-brand-mark {
         display: inline-block;
+        opacity: 1;
     }
 }
 
@@ -380,6 +387,73 @@ html.sidebar-pre-collapsed .sidebar-collapsible {
         .sidebar-item {
             transition: $sidebar-collapse-refinement-transition-delayed, $sidebar-collapse-clipping-transition;
         }
+    }
+}
+
+// Crossfade the two brand marks rather than cutting between them.
+//
+// The brand swap is a `display` change, so it is discrete by nature: the full
+// logo vanishes and the mark appears on the same tick the collapsed class
+// flips, while the column is still 16rem and narrowing. Deferring the swap to
+// the end of the gesture does not fix that — a later hard cut is still a hard
+// cut. Overlapping the two with opacity is what makes it read as one motion.
+//
+// Three pieces are needed:
+//
+//   * The brand becomes a single-cell grid so both marks share one origin.
+//     While both are rendered a flex row would place them side by side and the
+//     brand would visibly double in width mid-gesture.
+//   * `display` joins the transition with `transition-behavior: allow-discrete`,
+//     which keeps the outgoing mark rendered for the whole fade instead of
+//     dropping it on the tick, and `@starting-style` gives the incoming mark a
+//     value to fade up from.
+//   * The brand's own centring is deferred behind the collapse, exactly as the
+//     item rows' is above. Without it `justify-content: center` lands on the
+//     click tick and the fade happens at the centre of a column that is still
+//     full width — the mark appears ~100px to the right of the logo it is
+//     replacing and then slides back as the column narrows. Deferred, the two
+//     marks sit at the same x for the whole fade.
+//
+// Rest states are unchanged: exactly one mark is rendered at rest, so the grid
+// track is sized by it alone and the layout matches the `display` swap this
+// replaces. Both directions are covered — a transition takes its timing from
+// the after-change style, and the fade is symmetric, so only the deferral of
+// the centring is one-directional (collapse defers, expand does not, for the
+// same reason the item rows' does).
+//
+// Progressive enhancement: without `transition-behavior` the whole block is
+// skipped, the brand stays a flex row and the marks cut over exactly as before.
+@supports (transition-behavior: allow-discrete) {
+    .sidebar-collapsible .sidebar-brand {
+        display: grid;
+        transition: justify-content 0s allow-discrete, padding-left 0s, padding-right 0s;
+
+        // Stack every child in the one cell. The brand renders each mark
+        // through `assets/image.html`, which wraps it when light and dark
+        // variants are supplied — so match the children, not the marks.
+        > * {
+            grid-area: 1 / 1;
+        }
+
+        // `@starting-style` competes on specificity like any other rule, so the
+        // starting value has to be declared at least as specifically as the
+        // `opacity: 1` it fades up from. Scoped one class shorter, this loses to
+        // the collapsed-state rule and the incoming mark appears at full opacity
+        // on collapse while only the outgoing one fades.
+        .sidebar-brand-full,
+        .sidebar-brand-mark {
+            transition:
+                opacity $sidebar-collapse-transition-duration $sidebar-collapse-transition-easing,
+                display $sidebar-collapse-transition-duration allow-discrete;
+
+            @starting-style {
+                opacity: 0;
+            }
+        }
+    }
+
+    .sidebar-collapsed .sidebar-brand {
+        transition-delay: $sidebar-collapse-transition-duration;
     }
 }
 
