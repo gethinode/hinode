@@ -4,6 +4,45 @@
     Visit gethinode.com/license for more details.
 */}}
 
+{{/*
+    Why every icon in this file is rendered with mode "svg" (or icon-mode "svg")
+    ---------------------------------------------------------------------------
+    Inlining the SVG duplicates each icon's path data into every rendered page
+    instead of referencing one <symbol> in the page sprite, which looks like a
+    page-weight bug worth "fixing" by dropping the argument. It is not: symbols
+    mode cannot work from inside this partial.
+
+    This renderer is invoked through page/sidebar-cached.html, which wraps it in
+    partialCached keyed on (section, version, language, variant) and canonicalizes
+    the page context to the section root, so the same markup is reused by every
+    page in the section.
+
+    Symbols mode is not a pure transformation. mod-fontawesome's assets/icon.html
+    emits <use href="#id"> and *registers* the matching <symbol> as a side effect
+    on the page it was handed, via $page.Scratch.Add "icons" and
+    $page.Store.Add "hinode-icons". assets/symbols.html later reads that store off
+    the page being rendered to emit the sprite. A partialCached body runs once per
+    cache key, so the registration happens once - and against the canonicalized
+    section-root page, not the page being rendered. Every other page in the section
+    receives the cached <use href="#id"> with no <symbol> behind it, and the icon
+    renders blank.
+
+    Measured on a consuming build (474 pages, sidebar routed through
+    page/sidebar-cached.html, icons left in the site's default symbols mode):
+    459 of 469 pages carried dangling sidebar <use> references. The 10 that
+    resolved were the section roots - the pages the cache key canonicalizes to.
+    The failure is also partly self-masking: an icon the sidebar shares with the
+    navbar or the page body still resolves, because that uncached caller registers
+    it. Only the sidebar's exclusive icons vanish (the collapse toggle and the
+    group chevron in that build), so the breakage looks intermittent and depends on
+    what else happens to be on the page.
+
+    So keep "svg" here. If the duplication ever needs to be reclaimed, the fix is
+    to register the symbols outside the cached subtree, not to change the mode at
+    these call sites. The reminders below sit on the same line as the call on
+    purpose: this partial's output whitespace is load-bearing around the icons, and
+    a comment on its own line changes it.
+*/ -}}
 {{/* Initialize arguments */}}
 {{ $args := partial "utilities/InitArgs.html" (dict "structure" "sidebar" "args" . "group" "partial") }}
 {{ if or $args.err $args.warnmsg }}
@@ -63,7 +102,7 @@
                 {{- if hasPrefix . "<i" -}}
                     {{ . | safeHTML }}
                 {{- else -}}
-                    {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") }}
+                    {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") }}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */}}
                 {{- end -}}
             {{- end -}}
             {{- if $collapsible -}}
@@ -117,7 +156,7 @@
                         {{- if hasPrefix . "<i" -}}
                             {{ . | safeHTML }}
                         {{- else -}}
-                            {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") }}
+                            {{ partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") }}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */}}
                         {{- end -}}
                     {{- end -}}
                     {{- $groupTitle -}}
@@ -188,7 +227,7 @@
     {{- end -}}
     {{- $itemText := $titleText -}}
     {{- with $pre -}}
-        {{- $iconHTML := partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") -}}
+        {{- $iconHTML := partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") -}}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */ -}}
         {{- $itemText = printf "%s%s" (string $iconHTML) $titleText -}}
     {{- end -}}
     {{ $href := "" }}
@@ -214,7 +253,7 @@
             <ul class="btn-toggle-nav list-unstyled pb-1">
                 <li>
                     {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
-                    {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" true "icon-mode" "svg") }}
+                    {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" true "icon-mode" "svg") }}{{/* icon-mode "svg": same reason as the icon call sites - see the header comment. */}}
                     {{- if and $collapsible $title $link -}}
                         {{- $link = $link | replaceRE `(<a)\s` (printf `${1} data-sidebar-label="%s" ` ($title | htmlEscape)) -}}
                     {{- end -}}
@@ -232,7 +271,7 @@
     {{ else }}
         <li>
             {{ $class := "sidebar-item text-decoration-none rounded small w-100" }}
-            {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" true "icon-mode" "svg") }}
+            {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" true "icon-mode" "svg") }}{{/* icon-mode "svg": same reason as the icon call sites - see the header comment. */}}
             {{- if and $prefixMatch $link -}}
                 {{- $link = $link | replaceRE `(<a)\s` `${1} data-sidebar-match="prefix" ` -}}
             {{- end -}}
@@ -299,7 +338,7 @@
             {{- if $collapsible -}}
             <div class="sidebar-toggle-container d-flex justify-content-end mb-2 pe-1">
                 <button class="btn btn-sm sidebar-toggle-btn p-1 border-0" aria-label="Toggle sidebar">
-                    {{- partial "assets/icon.html" (dict "icon" $iconCollapse "class" "sidebar-icon-toggle" "mode" "svg") -}}
+                    {{- partial "assets/icon.html" (dict "icon" $iconCollapse "class" "sidebar-icon-toggle" "mode" "svg") -}}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */ -}}
                 </button>
             </div>
             {{- end -}}
@@ -375,7 +414,7 @@
                            {{- if $collapsible }} data-sidebar-label="{{ $avTitle }}"{{ end }}
                            href="{{ $avHref }}">
                             {{- with .pre -}}
-                                {{- partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") -}}
+                                {{- partial "assets/icon.html" (dict "icon" (string .) "class" "fa-fw me-1" "spacing" false "mode" "svg") -}}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */ -}}
                             {{- end -}}
                             {{- if $collapsible -}}
                                 <span class="sidebar-item-label ms-1">{{- $avTitle -}}</span>
@@ -390,7 +429,7 @@
                                 aria-expanded="false"
                                 aria-controls="sidebar-secondary-{{ $sidebarId }}"
                                 aria-label="{{ T "toggleSecondary" | default "Toggle more items" }}">
-                            {{- partial "assets/icon.html" (dict "icon" $iconSecondary "class" "sidebar-secondary-icon fa-fw" "spacing" false "mode" "svg") -}}
+                            {{- partial "assets/icon.html" (dict "icon" $iconSecondary "class" "sidebar-secondary-icon fa-fw" "spacing" false "mode" "svg") -}}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */ -}}
                         </button>
                         {{- end -}}
                     </li>
