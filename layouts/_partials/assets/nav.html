@@ -154,7 +154,7 @@
                         type="button"
                         role="tab"
                         aria-controls="{{ $id }}-{{ $index }}"
-                        aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+                        aria-selected="{{ if $show }}true{{ else }}false{{ end }}"
                     >
                         {{ $item }}
                     </button>
