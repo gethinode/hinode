@@ -11,8 +11,10 @@
 {{ range .THead }}{{ $cols = len . }}{{ end }}
 
 {{/* Set by assets/table.html around its RenderString call. `table-wrap` is an internal marker, so
-     an author-supplied `{.table-wrap}` attribute on a data table is ignored rather than honoured. */}}
+     an author-supplied `{.table-wrap}` attribute on a data table is ignored rather than honoured.
+     The caption arrives pre-rendered from Markdown. */}}
 {{ $dataTable := .Page.Store.Get "hinodeTableIsDataTable" }}
+{{ $caption := .Page.Store.Get "hinodeTableCaption" }}
 
 {{ $attr := .Attributes }}
 {{ $given := split (or $attr.class "") " " }}
@@ -37,6 +39,9 @@
       {{- printf " %s=%q" $k $v | safeHTMLAttr }}
     {{- end }}
   {{- end }}>
+  {{- with $caption }}
+  <caption>{{ . | safeHTML }}</caption>
+  {{- end }}
   <thead>
     {{- range .THead }}
       {{- $length := len . }}
