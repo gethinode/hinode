@@ -50,12 +50,13 @@
 {{- end -}}
 {{- $class := $args.class | default "" }}
 {{ with $args.badge }}{{ $class = printf "%s me-3" $class }}{{ end }}
-{{/* cue carries no schema default, so an absent value is nil and an explicit
-     false is a real choice. "default" treats false as empty and would silently
-     restore the site setting, so test for nil instead. */}}
+{{/* cue and tab carry no schema default, so an absent value is nil and an
+     explicit false is a real choice. "default" treats false as empty and would
+     silently restore the site setting, so test for nil instead. */}}
 {{- $cue := site.Params.main.externalLinks.cue -}}
 {{- if ne $args.cue nil }}{{ $cue = $args.cue }}{{ end -}}
-{{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
+{{- $tab := site.Params.main.externalLinks.tab -}}
+{{- if ne $args.tab nil }}{{ $tab = $args.tab }}{{ end -}}
 {{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
 
 {{- $isExternal := false }}

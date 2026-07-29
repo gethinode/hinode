@@ -53,12 +53,13 @@
     {{- end -}}
     {{- if not $destination }}{{ $destination = "/" }}{{ end -}}
 
-    {{/* cue carries no schema default, so an absent value is nil and an explicit
-         false is a real choice. "default" treats false as empty and would silently
-         restore the site setting, so test for nil instead. */}}
+    {{/* cue and tab carry no schema default, so an absent value is nil and an
+         explicit false is a real choice. "default" treats false as empty and would
+         silently restore the site setting, so test for nil instead. */}}
     {{- $cue := site.Params.main.externalLinks.cue -}}
     {{- if ne $args.cue nil }}{{ $cue = $args.cue }}{{ end -}}
-    {{- $tab := $args.tab | default site.Params.main.externalLinks.tab -}}
+    {{- $tab := site.Params.main.externalLinks.tab -}}
+    {{- if ne $args.tab nil }}{{ $tab = $args.tab }}{{ end -}}
     {{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
     {{- $pretty := site.Params.main.internalLinks.pretty | default false }}
     {{- $isExternal := or (ne (urls.Parse (absURL $destination)).Host (urls.Parse site.BaseURL).Host) $args.external -}}
