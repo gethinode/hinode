@@ -6,8 +6,10 @@
             <div class="col-12 col-sm-8 col-md-6 text-center mx-auto">
                 <div class="text-secondary fw-bold">
                     {{ partial "assets/icon.html" (dict "page" . "icon" $notFoundPage "class" "fa-10x") }}
-                    <h1 class="display-1 mt-3 mb-3 fw-bold">404</h1>
-                    <p class="fs-3">{{ T "pageNotFoundTitle" }}</p>
+                    <h1 class="mt-3 mb-3 fw-bold">
+                        <span class="display-1 fw-bold d-block mb-3">404</span>
+                        <span class="fs-3 lh-base d-block">{{ T "pageNotFoundTitle" }}</span>
+                    </h1>
                 </div>
                 {{- $home := printf `<a href="%s">%s</a>` $base (T "pageNotFoundHome") -}}
                 <p>{{ T "pageNotFound" $home | safeHTML }}</p>
