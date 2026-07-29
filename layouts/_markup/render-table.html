@@ -12,9 +12,11 @@
 
 {{/* Set by assets/table.html around its RenderString call. `table-wrap` is an internal marker, so
      an author-supplied `{.table-wrap}` attribute on a data table is ignored rather than honoured.
-     The caption arrives pre-rendered from Markdown. */}}
+     The caption arrives pre-rendered from Markdown and is consumed on read, so a block holding more
+     than one table captions the first only - matching the class rewrite in assets/table.html. */}}
 {{ $dataTable := .Page.Store.Get "hinodeTableIsDataTable" }}
 {{ $caption := .Page.Store.Get "hinodeTableCaption" }}
+{{ .Page.Store.Set "hinodeTableCaption" "" }}
 
 {{ $attr := .Attributes }}
 {{ $given := split (or $attr.class "") " " }}
