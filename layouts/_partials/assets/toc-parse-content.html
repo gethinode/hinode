@@ -60,8 +60,8 @@
 
     {{- with $fragments }}
         {{- if (ge (len .HeadingsMap) $minNumHeadings) }}
-            <strong class="d-block mb-2">{{ T "toc" }}</strong>
-            <nav class="toc">
+            <h6 class="fw-bold lh-base mt-0 mb-2" id="toc-heading">{{ T "toc" }}</h6>
+            <nav class="toc" aria-labelledby="toc-heading">
                 {{ $result := slice }}
                 {{ range .Headings }}
                     {{ $result = $result | append (partial "inline/toc-item.html" (dict
