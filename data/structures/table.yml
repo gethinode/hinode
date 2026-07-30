@@ -32,6 +32,19 @@ arguments:
   wrap:
   wrapper:
     release: v2.0.0
+  caption:
+    comment: >-
+      Caption rendered as the table's `<caption>` element, describing the
+      table's contents. Supports inline Markdown.
+    release: v3.12.0
+  caption-top:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Whether the caption renders above the table (Bootstrap `caption-top`).
+      Requires `caption`.
+    release: v3.12.0
   # deprecated arguments
   paging:
     type: bool
