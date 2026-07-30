@@ -233,6 +233,14 @@
   translation: "Envoyer"
 - id: formBotField
   translation: "Ne remplissez pas ce champ si vous êtes humain"
+
+# Lightbox
+- id: lightboxClose
+  translation: "Fermer"
+- id: lightboxLabel
+  translation: "Vue agrandie"
+- id: lightboxExpand
+  translation: "Afficher en plein écran"
 - id: tableFilterLabel
   translation: "Filtre"
 - id: tableFilterAll
