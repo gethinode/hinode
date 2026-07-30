@@ -20,6 +20,8 @@ github.com/gethinode/mod-fontawesome/v6 v6.1.1 h1:k5Jy7nA+YfLZ9YqXH8hyaiw9wjAeOx
 github.com/gethinode/mod-fontawesome/v6 v6.1.1/go.mod h1:875OBk5te+KBJmr0PdSkFcduYnsKCuHWfcaqChh9NGo=
 github.com/gethinode/mod-fontawesome/v6 v6.1.2 h1:zlxmKqYGpZeCxMMMfpZywKjuPj/XI4m8Ocea+YHoF74=
 github.com/gethinode/mod-fontawesome/v6 v6.1.2/go.mod h1:sq92QfINvTV8dd3PSmbspGXHqmxOSkv96OvbZST9Gjc=
+github.com/gethinode/mod-fontawesome/v6 v6.1.3 h1:eDFqkLPiUdqq6YcVd5gEyR8qkcb7dClIwpGj+3ce9io=
+github.com/gethinode/mod-fontawesome/v6 v6.1.3/go.mod h1:SBNsfYUpNRkr88asrk3r9wtPAjWnLchMH4QSV/gUG0k=
 github.com/gethinode/mod-google-analytics/v2 v2.0.4 h1:ONEUjhfVR6p+Y/XyU3BUGXZy4+HAkJvGo+mr24ugklY=
 github.com/gethinode/mod-google-analytics/v2 v2.0.4/go.mod h1:y4ZlacA8FSXjmvn9P8cZshOrBB5Wc+3p0DKSehkk+8E=
 github.com/gethinode/mod-katex v1.1.7 h1:L2kNwzaerFRESS7nEZsvaMArpisc3iowBwKoaGQ1UII=
