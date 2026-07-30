@@ -132,7 +132,10 @@
 <div class="container-fluid {{ if $args.fixed }}fixed-top{{ else if $overlay }}navbar-overlay{{ end }} p-0{{ with $class }} {{ . }}{{ end }}">
     {{- partial "assets/page-alert.html" (dict "page" $page) -}}
     <nav class="navbar {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "x") }} {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }} navbar-fs-{{ $fs }} navbar-{{ $args.breakpoint }}-fs
-        {{- if not $overlay }}{{ with $color }} bg-{{ . }}{{ end }}{{ end -}}
+        {{/* An overlay or transparent navbar paints no solid background: the theme's own
+             `.navbar { background-color: transparent }` provides that, and a bg-* utility
+             would defeat it through Bootstrap's !important. */}}
+        {{- if and (not $overlay) (not $args.transparent) }}{{ with $color }} bg-{{ . }}{{ end }}{{ end -}}
         {{ if $args.fixed }} navbar-fixed-top{{ end }} navbar-expand-{{ $args.breakpoint -}}
         {{ if $contrast }} navbar-contrast{{ end }}"
         {{ if $overlay }}
