@@ -233,6 +233,14 @@
   translation: "Verzenden"
 - id: formBotField
   translation: "Vul dit niet in als je een mens bent"
+
+# Lightbox
+- id: lightboxClose
+  translation: "Sluiten"
+- id: lightboxLabel
+  translation: "Vergrote weergave"
+- id: lightboxExpand
+  translation: "Volledig scherm weergeven"
 - id: tableFilterLabel
   translation: "Filter"
 - id: tableFilterAll
