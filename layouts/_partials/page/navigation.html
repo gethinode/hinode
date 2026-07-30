@@ -27,11 +27,13 @@
     {{- $nextPage = $pages.Prev . -}}
 {{ end }}
 
+{{/* The trailing &nbsp; in each visually hidden prefix separates it from the link title in the accessible name */}}
 <div class="row row-cols-2 mt-5 mb-3">
     <div class="col">
         {{- with $prevPage -}}
             {{- if .OutputFormats.Get "html" -}}
-                <a class="next" href="{{ .RelPermalink }}">
+                <a class="page-nav-prev" href="{{ .RelPermalink }}">
+                    <span class="visually-hidden">{{ T "paginationPrevious" }}:&nbsp;</span>
                     {{- partial "assets/icon.html" (dict "page" $ "icon" $pageNavPrev "spacing" false) }}&nbsp;{{ .LinkTitle }}
                 </a>
             {{- end -}}
@@ -40,8 +42,9 @@
     <div class="col text-end">
         {{- with $nextPage -}}
             {{- if .OutputFormats.Get "html" -}}
-                <a class="previous" href="{{ .RelPermalink }}">
-                    {{ .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "page" $ "icon" $pageNavNext "spacing" false) }}
+                <a class="page-nav-next" href="{{ .RelPermalink }}">
+                    <span class="visually-hidden">{{ T "paginationNext" }}:&nbsp;</span>
+                    {{- .LinkTitle }}&nbsp;{{- partial "assets/icon.html" (dict "page" $ "icon" $pageNavNext "spacing" false) }}
                 </a>
             {{- end -}}
         {{- end -}}

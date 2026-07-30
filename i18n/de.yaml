@@ -70,15 +70,15 @@
 
 # Pagination
 - id: paginationNav
-  translation: "Navigation auf der Seite"
+  translation: "Seitennavigation"
 - id: paginationPrevious
-  translation: "Vorherige"
+  translation: "Vorherige Seite"
 - id: paginationNext
-  translation: "Nächste"
+  translation: "Nächste Seite"
 - id: paginationFirst
-  translation: "Erste"
+  translation: "Erste Seite"
 - id: paginationLast
-  translation: "Letzte"
+  translation: "Letzte Seite"
 
 # Navigation
 - id: colorMode
@@ -233,6 +233,14 @@
   translation: "Absenden"
 - id: formBotField
   translation: "Bitte nicht ausfüllen, wenn Sie ein Mensch sind"
+
+# Lightbox
+- id: lightboxClose
+  translation: "Schließen"
+- id: lightboxLabel
+  translation: "Vergrößerte Ansicht"
+- id: lightboxExpand
+  translation: "Vollbild anzeigen"
 - id: tableFilterLabel
   translation: "Filter"
 - id: tableFilterAll
