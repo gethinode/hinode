@@ -70,15 +70,15 @@
 
 # Pagination
 - id: paginationNav
-  translation: "Navigation auf der Seite"
+  translation: "Seitennavigation"
 - id: paginationPrevious
-  translation: "Vorherige"
+  translation: "Vorherige Seite"
 - id: paginationNext
-  translation: "Nächste"
+  translation: "Nächste Seite"
 - id: paginationFirst
-  translation: "Erste"
+  translation: "Erste Seite"
 - id: paginationLast
-  translation: "Letzte"
+  translation: "Letzte Seite"
 
 # Navigation
 - id: colorMode
