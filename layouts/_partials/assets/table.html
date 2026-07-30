@@ -47,6 +47,18 @@
      caller's class list. The template adds it back below when the wrap genuinely applies. */}}
 {{ $class := delimit (complement (slice "table-wrap") (split (or $args.class "") " ")) " " }}
 {{ if $dataTable }}{{ $class = trim (printf "%s data-table" $class) " " }}{{ end }}
+{{ if $args.captionTop }}
+    {{ if $args.caption }}
+        {{ $class = trim (printf "%s caption-top" $class) " " }}
+    {{ else }}
+        {{ partial "utilities/LogWarn.html" (dict
+            "partial" "assets/table.html"
+            "warnid"  "warn-caption-top-without-caption"
+            "msg"     "Argument 'caption-top' requires 'caption' to be set"
+            "file"    (or $args.page page).File
+        )}}
+    {{ end }}
+{{ end }}
 
 {{ $attributes := "" }}
 {{ if $args.sortable }}{{ $attributes = printf "%s data-table-sortable=true" $attributes }}{{ end }}
@@ -91,11 +103,20 @@
          hook while it renders, so an author-supplied `{.table-wrap}` attribute cannot split a data
          table's rows server-side. RenderString is synchronous, so the flag is set only while this
          table is being rendered; the previous value is restored to keep nesting safe. */}}
+    {{/* The caption reaches the hook the same way, which emits it as the table's first child - the
+         position the HTML content model requires. Rendered before the flag is set, so its own
+         Markdown cannot reach the hook while the table is flagged. */}}
+    {{ $caption := "" }}
+    {{ with $args.caption }}{{ $caption = . | $args.page.RenderString }}{{ end }}
+
     {{ $store := $args.page.Store }}
     {{ $outer := $store.Get "hinodeTableIsDataTable" }}
+    {{ $outerCaption := $store.Get "hinodeTableCaption" }}
     {{ $store.Set "hinodeTableIsDataTable" $dataTable }}
+    {{ $store.Set "hinodeTableCaption" $caption }}
     {{ $input = $input | $args.page.RenderString }}
     {{ $store.Set "hinodeTableIsDataTable" $outer }}
+    {{ $store.Set "hinodeTableCaption" $outerCaption }}
 
     {{ $regex := `<table\s*class="(.+?)"` }}
     {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}

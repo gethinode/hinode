@@ -60,3 +60,23 @@ modules: ["simple-datatables"]
 | charlie | widget | The third record. Short.                                           |
 | delta   | gadget | The fourth record, whose description runs on for a little while.   |
 {{< /table >}}
+
+## Table with caption
+
+{{< table caption="Overview of records" class="fixture-caption" >}}
+
+| Name  | Type   | Description        |
+|-------|--------|--------------------|
+| alpha | widget | The first record.  |
+| bravo | gadget | The second record. |
+{{< /table >}}
+
+## Table with caption on top
+
+{{< table caption="Overview of *records*" caption-top="true" class="fixture-caption-top" >}}
+
+| Name  | Type   | Description        |
+|-------|--------|--------------------|
+| alpha | widget | The first record.  |
+| bravo | gadget | The second record. |
+{{< /table >}}
