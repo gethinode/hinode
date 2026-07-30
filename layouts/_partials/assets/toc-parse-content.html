@@ -60,7 +60,7 @@
 
     {{- with $fragments }}
         {{- if (ge (len .HeadingsMap) $minNumHeadings) }}
-            <h6 class="fw-bold lh-base mt-0 mb-2" id="toc-heading">{{ T "toc" }}</h6>
+            <h2 class="h6 fw-bold lh-base mt-0 mb-2" id="toc-heading">{{ T "toc" }}</h2>
             <nav class="toc" aria-labelledby="toc-heading">
                 {{ $result := slice }}
                 {{ range .Headings }}
