@@ -9,7 +9,7 @@ require (
 	github.com/gethinode/mod-bootstrap-icons/v2 v2.0.2 // indirect
 	github.com/gethinode/mod-cookieyes/v3 v3.1.0 // indirect
 	github.com/gethinode/mod-docs v1.15.6 // indirect
-	github.com/gethinode/mod-fontawesome/v6 v6.1.2 // indirect
-	github.com/gethinode/mod-utils/v6 v6.8.3 // indirect
+	github.com/gethinode/mod-fontawesome/v6 v6.1.3 // indirect
+	github.com/gethinode/mod-utils/v6 v6.8.4 // indirect
 	github.com/twbs/icons v1.13.1 // indirect
 )
