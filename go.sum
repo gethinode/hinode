@@ -34,6 +34,8 @@ github.com/gethinode/mod-mermaid/v5 v5.0.4 h1:cw8FE+IDvbMmY0/+pcYfBbg/9gVF/sLvtD
 github.com/gethinode/mod-mermaid/v5 v5.0.4/go.mod h1:/9uNj5hKghuBKRd3qi18J7XwMRxrLKJymn9MCO6vP3I=
 github.com/gethinode/mod-simple-datatables/v4 v4.1.0 h1:AtEtLH9RoAEIpElg0k6UkVlHmiBc4Df3NCCUfBtmktU=
 github.com/gethinode/mod-simple-datatables/v4 v4.1.0/go.mod h1:jRHoX20bUiaVg7UtKzMjfHQjd5M6WZ8hAeVqA3TKwTA=
+github.com/gethinode/mod-simple-datatables/v4 v4.1.1 h1:Bidf8FA9SxBBb163D0yteTyad/sNiVK31IdqbcF/tZs=
+github.com/gethinode/mod-simple-datatables/v4 v4.1.1/go.mod h1:irmXKx2jeppfpGRsCC91vN8dA4U2nQfy2eW8bajUeJo=
 github.com/gethinode/mod-utils/v6 v6.7.0 h1:DxqKUb13/6ydcntGIrUj1YD892VwarB8zGj+77CeUwM=
 github.com/gethinode/mod-utils/v6 v6.7.0/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/gethinode/mod-utils/v6 v6.8.0 h1:Rz/6DlPKVW0791jSsobxx4I4pKQ38H4JOEeOV+GeRzU=
