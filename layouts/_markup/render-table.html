@@ -35,6 +35,15 @@
 
 {{ $align := dict "left" "start" "center" "center" "right" "end" }}
 
+{{/* Wrap in a horizontal-scroll container. A markdown table has no width budget
+     of its own, so a wide one pushes the page itself sideways at narrow widths
+     rather than scrolling within the column. `assets/table.html` already wraps
+     the `{{< table >}}` path this way; this brings markdown tables in line.
+
+     Additive: `overflow-x: auto` has no visual effect while the table fits, and
+     it composes with `table-wrap` above, which reduces the width rather than
+     scrolling it. */}}
+<div class="table-responsive">
 <table
   {{- range $k, $v := $attr }}
     {{- if $v }}
@@ -95,3 +104,4 @@
     {{- end }}
   </tbody>
 </table>
+</div>
