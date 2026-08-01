@@ -41,9 +41,34 @@
 | `layouts/_partials/page/metadata.html` | consumes it; also implements `metadata = "original"` |
 | `layouts/header.html`, `layouts/docs/header.html` | mobile TOC dropdown reads the resolved scratch |
 
-**Test harness — `$SCRATCH/harness`, outside both repos**
+**Test harness — `tests/templates/`, committed (scope ruling, 2026-08-01)**
 
-A standalone Hugo site whose `layouts/_partials/utilities/` files are **symlinks into the worktree**, so editing the real partial is what gets tested. Nothing is added to the hinode repo; hinode has no template test framework and this plan does not introduce one.
+hinode has no template test framework. This plan introduces a minimal one, because both
+new partials are pure functions over strings — the cheapest thing in the codebase to test,
+and the easiest to silently break later.
+
+| File | Responsibility |
+| --- | --- |
+| `tests/templates/hugo.toml` | mounts the partials under test |
+| `tests/templates/layouts/index.html` | the assertion table |
+| `tests/templates/content/blog/*.md` | fixtures for the PR 2 cascade cases |
+| `package.json` | new `test:templates` script; `test` runs it after `lint` |
+| `.github/workflows/lint-build.yml` | appends `test:templates` to `build-command` |
+
+Three mechanics, each verified before being written into this plan:
+
+- **Mounting.** A `[[module.mounts]]` entry with a **relative** `source` reaching above the
+  site root works: `source = '../../layouts/_partials/utilities/TitleCase.html'`. Verified.
+  Do **not** use symlinks — Hugo does not follow them when walking the `layouts` mount, which
+  is what defeated this plan's original harness design.
+- **Failing.** A failed assertion calls `errorf`, which exits Hugo non-zero. Verified: exit 1
+  on failure, exit 0 on pass. No assertion runner, no test dependency, no new tooling.
+- **CI.** The workflow delegates to the shared reusable workflow
+  `gethinode/.github/.github/workflows/lint-build.yml@v1`, whose only Hugo-aware hook is
+  `build-command`. Append the script there, not to `lint-script` — the lint job has no Hugo.
+
+Defining any custom mount disables Hugo's implicit default mounts, so the harness config must
+restate the defaults it still needs alongside the file-level mounts.
 
 Throughout this plan:
 

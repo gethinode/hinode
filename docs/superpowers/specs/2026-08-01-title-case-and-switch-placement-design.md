@@ -129,11 +129,12 @@ Algorithm:
 3. **Fast path.** `text` contains neither `<` nor `&` → `return title text`. This covers
    effectively every frontmatter title, nav label, breadcrumb, and card title, so
    tokenizer cost falls only on headings carrying inline markup.
-4. **Slow path.** Tokenize with `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]`. Classify a token
-   as opaque when it is a tag (`<`…`>`) or an entity (`&`…`;`). Concatenate the
-   non-opaque tokens into a plain string, apply `title` to it **once**, then walk the
-   token list emitting opaque tokens verbatim and slicing the cased result positionally
-   for the rest.
+4. **Slow path.** Tokenize with `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]`, giving three
+   token classes: tags, character entities, and text runs. Build a plain string in which
+   tags contribute nothing, **each entity contributes a single space**, and text runs
+   contribute themselves. Apply `title` to that string **once**, then walk the tokens
+   again — emitting tags and entities verbatim, and slicing the cased string positionally
+   for text runs. Tags do not advance the position; entities advance it by one.
 5. **Safety net.** If the cased string's rune count differs from the plain string's,
    return `text` unchanged rather than emit corrupted markup.
 
@@ -143,8 +144,13 @@ Three decisions in that algorithm are non-obvious and each is a bug found in pro
   whitespace around a stripped element: `an image <img alt="the alt of it"> in a heading`
   plainifies to a single space where the source has two, which shifts every subsequent
   position and drops a space from the output.
-- **Entities are opaque.** `title` capitalizes the `amp` inside `&amp;`, producing
-  `&Amp;`. Excluding entities from the plain string also keeps `caf&eacute;` intact.
+- **Entities are emitted verbatim but stand in as a space.** Two separate hazards. Casing
+  an entity's own text corrupts it — `title` capitalizes the `amp` inside `&amp;`,
+  producing `&Amp;` — so the original is always re-emitted. But *omitting* entities from
+  the plain string joins the words on either side, and the word after one then never
+  starts a word: `the&nbsp;cat sat` cased to `The&nbsp;cat Sat`. Substituting one space
+  per entity fixes the boundary while the verbatim re-emission preserves the entity, and
+  the one-rune width keeps the positional mapping exact. Found in review of Task 1.
 - **`title` is applied once, to the whole string.** Applying it per text run would break
   stopword logic at run boundaries — a run starting with `and` would be treated as a
   first word and capitalized.
@@ -154,6 +160,8 @@ Verified prototype output:
 ```text
 set up a project and environments
   → Set Up a Project and Environments
+the&nbsp;cat sat
+  → The&nbsp;Cat Sat
 state-of-the-art <code>npm</code> tooling for the win
   → State-of-the-Art <code>Npm</code> Tooling for the Win
 a link to <a href="/x">the docs</a> of hinode
@@ -229,8 +237,15 @@ noted in the release.
 
 ## Verification
 
-hinode has no template test harness. `pnpm test` runs lint only; `tests/visual/` contains
-nothing but stray `node_modules`. Verification is therefore build-and-assert.
+hinode had no template test harness — `pnpm test` ran lint only, and `tests/visual/`
+contained nothing but stray `node_modules`. This work introduces a minimal one at
+`tests/templates/`: a Hugo site that mounts the partials under test via relative
+`[[module.mounts]]` entries and calls `errorf` on a failed assertion, which exits Hugo
+non-zero. No test runner or new dependency is involved. It is wired into CI through the
+workflow's `build-command`, the only hook in the shared reusable workflow that runs with
+Hugo available.
+
+Beyond those unit assertions, verification is build-and-assert against the exampleSite.
 
 **Per PR:**
 
