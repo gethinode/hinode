@@ -1308,36 +1308,126 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ---
 
-### Task 8: Make the mobile TOC dropdown honor the per-type cascade
+### Task 8: Fix the `includeToc` cascade, then make the mobile dropdown use it
+
+**Revised 2026-08-01.** The original task said only "switch the headers to the scratch,
+`GetIncludeToc.html` already folds in the per-page parameter, so nothing is lost." That claim
+is false, and acting on it would have caused a regression.
+
+**The real defect.** `GetIncludeTOC.html:4` tests `isset .Params "includeToc"` in mixed case.
+Hugo lowercases front-matter keys to `includetoc`, and `isset` is **case-sensitive** — unlike
+`index` and field access, which go through `maps.Params.Get` and are not. So that branch is
+never taken and the per-page tier is dead code. Verified:
+
+```text
+page: front matter includeToc: true, per-type pages.blog.includetoc = false
+(per-page must win, so the correct answer is true)
+
+today, inline in header.html   : true    <- correct
+GetIncludeTOC.html as written  : false   <- wrong
+same, with the key lowercased  : true    <- correct
+```
+
+So the two paths are each broken in the opposite direction, and neither honors both tiers:
+
+| | per-page | per-type |
+| --- | --- | --- |
+| Sidebar TOC (`GetIncludeToc` → scratch → `toc.html`) | **ignored** | honored |
+| Mobile dropdown (inline in the headers) | honored | **ignored** |
+
+Switching the dropdown to the scratch without fixing the resolver would fix the documented
+half and silently regress the other half — and every verification step in the original task
+would still have passed, because they only ever set per-type config.
 
 **Files:**
 
+- Modify: `$WT2/layouts/_partials/utilities/GetIncludeTOC.html:4`
 - Modify: `$WT2/layouts/header.html:36`
 - Modify: `$WT2/layouts/docs/header.html:34`
+- Modify: `$WT2/tests/templates/hugo.toml`, `$WT2/tests/templates/layouts/index.html`
+- Create: `$WT2/tests/templates/content/blog/toc-override.md`
 
 **Interfaces:**
 
-- Consumes: the `includeToc` scratch that `baseof.html:29` already sets from `GetIncludeToc.html`. Both templates are rendered via `{{ .Render "header" }}`, so `.` is the Page and `.Scratch` is available.
-- Produces: nothing new.
+- Consumes: the `includeToc` scratch that `baseof.html:29` sets from `GetIncludeToc.html`.
+  Both header templates are rendered via `{{ .Render "header" }}`, so `.` is the Page and
+  `.Scratch` is available.
+- Produces: nothing new. `GetIncludeToc.html` keeps its existing signature — it takes the
+  page as its context, not a dict, so the harness calls it as
+  `partial "utilities/GetIncludeToc.html" $page`.
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Add harness coverage for the resolver**
 
-```bash
-cd "$WT2"
-cat >> exampleSite/config/_default/params.toml <<'EOF'
+Append to `tests/templates/hugo.toml` under `[params]`:
 
-[pages.blog]
-    includeToc = false
-EOF
-pnpm build:example
-grep -c "toc-dropdown\|TableOfContents" exampleSite/public/en/blog/*/index.html | grep -v ":0" | head
+```toml
+  [params.navigation]
+    toc = true
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+and under `[params.pages.blog]`, beside the existing `readingTime`:
 
-Expected: blog posts still contain the mobile TOC dropdown markup, because both headers re-derive `includeToc` inline and never consult `site.Params.pages.<Type>.includeToc`.
+```toml
+      includetoc = false
+```
 
-- [ ] **Step 3: Implement**
+Add the mount beside the existing ones:
+
+```toml
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetIncludeTOC.html'
+  target = 'layouts/_partials/utilities/GetIncludeTOC.html'
+```
+
+Create `tests/templates/content/blog/toc-override.md`:
+
+```markdown
+---
+title: Toc Override
+includeToc: true
+---
+
+Fixture page whose front matter re-enables `includeToc`, exercising the per-page tier of
+`utilities/GetIncludeToc.html` over the per-type value set for the `blog` type.
+```
+
+Add two assertions in the established style, with their own counter:
+
+| Page | Expected | Tier proven |
+| --- | --- | --- |
+| `/blog/toc-override` | `true` | per-page beats per-type |
+| `/blog/without-exact` | `false` | per-type applies when front matter is silent |
+
+- [ ] **Step 2: Run to verify the first assertion fails**
+
+```bash
+cd "$WT2" && pnpm run test:templates
+```
+
+Expected: non-zero exit. `/blog/toc-override` resolves `false` instead of `true` — the dead
+per-page branch. The `/blog/without-exact` assertion already passes, which is what shows the
+pair discriminates rather than failing indiscriminately.
+
+- [ ] **Step 3: Fix the resolver**
+
+In `layouts/_partials/utilities/GetIncludeTOC.html:4`, change the key to lowercase:
+
+```go-html-template
+{{- if isset .Params "includetoc" -}}
+```
+
+Leave line 5 (`$includeToc = .Params.includeToc`) alone — field access is case-insensitive
+and already works.
+
+- [ ] **Step 4: Run to verify both pass**
+
+```bash
+cd "$WT2" && pnpm run test:templates
+```
+
+Expected: exit 0, all 35 assertions passing — the 33 existing plus these two.
+
+- [ ] **Step 5: Point the mobile dropdown at the resolver**
 
 In both `layouts/header.html:36` and `layouts/docs/header.html:34`, replace:
 
@@ -1351,31 +1441,46 @@ with:
 {{- if .Scratch.Get "includeToc" -}}
 ```
 
-`GetIncludeToc.html` already folds in the `navigation.toc` global and the per-page parameter, so nothing is lost.
+With Step 3 applied, the resolver now genuinely folds in the `navigation.toc` global, the
+per-page parameter, and the per-type parameter — so this is the first point at which the
+original task's claim is actually true.
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [ ] **Step 6: Verify both tiers against the exampleSite**
 
 ```bash
-cd "$WT2" && pnpm build:example
+cd "$WT2"
+cat >> exampleSite/config/_default/params.toml <<'EOF'
+
+[pages.blog]
+    includeToc = false
+EOF
+pnpm build:example
 grep -c "toc-dropdown" exampleSite/public/en/blog/*/index.html | grep -v ":0" | head
 git checkout exampleSite/config/_default/params.toml
 pnpm build:example
 grep -lc "toc-dropdown" exampleSite/public/en/docs/*/index.html | head
 ```
 
-Expected: with the per-type flag set, no dropdown on blog posts. After reverting, docs pages still render their dropdown — the default path is intact.
+Expected: with the per-type flag set, no dropdown on blog posts. After reverting, docs pages
+still render their dropdown. The scaffolding is reverted; the exampleSite ships unchanged.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 cd "$WT2"
-git add layouts/header.html layouts/docs/header.html
-git commit -m "fix: apply the includeToc cascade to the mobile TOC dropdown
+git add layouts/_partials/utilities/GetIncludeTOC.html layouts/header.html layouts/docs/header.html tests/templates/
+git commit -m "fix: honor per-page includeToc and apply the cascade to the mobile dropdown
 
-baseof.html resolves includeToc through GetIncludeToc.html, which honors
-the per-type site parameter, but both header templates re-derived it
-inline. Setting pages.<Type>.includeToc = false hid the sidebar table of
-contents while leaving the mobile dropdown visible.
+GetIncludeTOC.html tested `isset .Params \"includeToc\"` in mixed case.
+Hugo lowercases front-matter keys and isset is case-sensitive, so the
+per-page branch was never taken and front-matter includeToc was silently
+ignored by the sidebar table of contents.
+
+The mobile dropdown had the mirror-image defect: it read the page
+parameter directly and never consulted the per-type value. Setting
+pages.<Type>.includeToc = false hid the sidebar TOC while leaving the
+dropdown visible. Both paths now resolve through GetIncludeToc.html, which
+honors the global toggle, the per-page parameter, and the per-type value.
 
 Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 ```
