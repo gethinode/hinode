@@ -1,0 +1,62 @@
+{{- /*
+    Applies title case to a string, honoring Hugo's `titleCaseStyle` setting.
+
+    Accepts rendered HTML: tags and character entities pass through untouched, so inline
+    markup such as `<code>` from a markdown backtick survives intact. The casing is applied
+    once to the concatenated text content and then mapped back onto the original by rune
+    position, which keeps stopword handling correct across tag boundaries.
+
+    @param {string} text  Plain string or rendered HTML.
+    @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
+    @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
+
+    @returns {string} The title-cased text, or the input unchanged when title casing is
+                      disabled, opted out of, or cannot be applied safely.
+*/ -}}
+
+{{- $text := .text -}}
+{{- $result := $text -}}
+
+{{- $exact := false -}}
+{{- if isset . "exact" -}}
+    {{- $exact = .exact -}}
+{{- else -}}
+    {{- with .page -}}{{- $exact = .Params.exact -}}{{- end -}}
+{{- end -}}
+
+{{- if and site.Params.main.titleCase (not $exact) $text -}}
+    {{- if not (or (strings.Contains $text "<") (strings.Contains $text "&")) -}}
+        {{/* Fast path: no markup and no entities, so the filter can be applied directly. */}}
+        {{- $result = title $text -}}
+    {{- else -}}
+        {{/* Split into tags, character entities, and text runs. Only the text runs are cased. */}}
+        {{- $tokens := findRE `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]` $text -}}
+        {{- $plain := slice -}}
+        {{- range $tokens -}}
+            {{- if not (or (and (hasPrefix . "<") (hasSuffix . ">")) (and (hasPrefix . "&") (hasSuffix . ";"))) -}}
+                {{- $plain = $plain | append . -}}
+            {{- end -}}
+        {{- end -}}
+        {{- $plain = delimit $plain "" -}}
+        {{- $runes := split (title $plain) "" -}}
+
+        {{/* The filter only changes case, so lengths must match. If they ever do not, the
+             positional mapping would corrupt the markup — return the input untouched. */}}
+        {{- if eq (len $runes) (len (split $plain "")) -}}
+            {{- $out := slice -}}
+            {{- $pos := 0 -}}
+            {{- range $tokens -}}
+                {{- if or (and (hasPrefix . "<") (hasSuffix . ">")) (and (hasPrefix . "&") (hasSuffix . ";")) -}}
+                    {{- $out = $out | append . -}}
+                {{- else -}}
+                    {{- $n := len (split . "") -}}
+                    {{- $out = $out | append (delimit (first $n (after $pos $runes)) "") -}}
+                    {{- $pos = add $pos $n -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $result = delimit $out "" -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $result -}}
