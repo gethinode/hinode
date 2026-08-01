@@ -14,6 +14,14 @@
     sees a space stand-in for it — and because a space cases to a space, the one-rune width
     keeps the positional mapping back onto the original tokens exact.
 
+    Words listed in `site.Params.main.titleCaseExceptions` keep their exact spelling —
+    for lowercase-authored acronyms such as `npm`, which `title` would otherwise
+    capitalize to `Npm`. Each entry is matched as a whole word against its own
+    title-cased form (`\btitle($entry)\b`), so only that exact casing is restored; a
+    deliberately shouted spelling such as `NPM` does not match `\bNpm\b` and is left
+    alone. Entries must be plain words: Go's regexp has no `\Q…\E` escaping, so an entry
+    containing regex metacharacters would misbehave.
+
     @param {string} text  Plain string or rendered HTML.
     @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
     @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
@@ -24,6 +32,7 @@
 
 {{- $text := .text -}}
 {{- $result := $text -}}
+{{- $exceptions := site.Params.main.titleCaseExceptions | default slice -}}
 
 {{- $exact := false -}}
 {{- if isset . "exact" -}}
@@ -36,6 +45,9 @@
     {{- if not (or (strings.Contains $text "<") (strings.Contains $text "&")) -}}
         {{/* Fast path: no markup and no entities, so the filter can be applied directly. */}}
         {{- $result = title $text -}}
+        {{- range $exceptions -}}
+            {{- $result = replaceRE (printf `\b%s\b` (title .)) . $result -}}
+        {{- end -}}
     {{- else -}}
         {{/* Split into tags, character entities, and text runs. Only the text runs are cased. */}}
         {{- $tokens := findRE `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]` $text -}}
@@ -49,7 +61,11 @@
             {{- end -}}
         {{- end -}}
         {{- $plain = delimit $plain "" -}}
-        {{- $runes := split (title $plain) "" -}}
+        {{- $cased := title $plain -}}
+        {{- range $exceptions -}}
+            {{- $cased = replaceRE (printf `\b%s\b` (title .)) . $cased -}}
+        {{- end -}}
+        {{- $runes := split $cased "" -}}
 
         {{/* The filter only changes case, so lengths must match. If they ever do not, the
              positional mapping would corrupt the markup — return the input untouched. */}}

@@ -9,6 +9,7 @@
     loading = "lazy"
     breakpoint = "md"
     titleCase = false
+    titleCaseExceptions = []
     [main.padding]
         x = 4
         y = 4
