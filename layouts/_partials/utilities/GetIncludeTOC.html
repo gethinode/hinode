@@ -3,6 +3,9 @@
     {{- $includeToc = true -}}
     {{- if isset .Params "includetoc" -}}
         {{- $includeToc = .Params.includeToc -}}
+        {{- if ne (printf "%T" $includeToc) "bool" -}}
+            {{- errorf "Expected bool value in page parameters: includeToc (%s)" .RelPermalink -}}
+        {{- end -}}
     {{- else -}}
         {{- with (index site.Params.pages .Type) -}}
             {{- if isset . "includetoc" -}}

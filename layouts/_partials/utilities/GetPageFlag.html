@@ -15,19 +15,27 @@
 {{- $page := .page -}}
 {{- $name := lower .name -}}
 {{- $value := .default -}}
+{{- $source := printf "page parameters: %s (%s)" .name $page.RelPermalink -}}
 
 {{- with site.Params.pages -}}
-    {{- if isset . $name -}}{{- $value = index . $name -}}{{- end -}}
+    {{- if isset . $name -}}
+        {{- $value = index . $name -}}
+        {{- $source = printf "site parameters: pages.%s" $.name -}}
+    {{- end -}}
 {{- end -}}
 {{- with (index site.Params.pages $page.Type) -}}
-    {{- if isset . $name -}}{{- $value = index . $name -}}{{- end -}}
+    {{- if isset . $name -}}
+        {{- $value = index . $name -}}
+        {{- $source = printf "site parameters: pages.%s.%s" $page.Type $.name -}}
+    {{- end -}}
 {{- end -}}
 {{- if isset $page.Params $name -}}
     {{- $value = index $page.Params $name -}}
+    {{- $source = printf "page parameters: %s (%s)" $.name $page.RelPermalink -}}
 {{- end -}}
 
 {{- if ne (printf "%T" $value) "bool" -}}
-    {{- errorf "Expected bool value for page parameter '%s' (page: %s)" $name $page.RelPermalink -}}
+    {{- errorf "Expected bool value in %s" $source -}}
 {{- end -}}
 
 {{- return $value -}}

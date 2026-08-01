@@ -12,7 +12,7 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
     wordCount = true
     [params.pages.blog]
       readingTime = false
-      includetoc = false
+      includeToc = false
 
 # Defining any custom [[module.mounts]] disables Hugo's implicit default mounts, so the
 # ones this harness needs are restated explicitly. `content` provides the page fixtures
