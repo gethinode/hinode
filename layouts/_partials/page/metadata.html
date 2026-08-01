@@ -7,7 +7,7 @@
         {{ if .Date }}
             {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}
             {{ $datestr := (partial "utilities/date.html" (dict "date" .Date "format" "long")) -}}
-            {{ if gt .Lastmod .Date }}
+            {{ if and (gt .Lastmod .Date) (ne $metadata "original") }}
                 {{ $lastmodstr | i18n "lastModified" }}
             {{ else }}
                 {{ $datestr | i18n "postedOnDate" -}}
