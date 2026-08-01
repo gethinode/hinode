@@ -1,0 +1,23 @@
+baseURL = 'https://example.org/'
+title = 'template tests'
+disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
+[params]
+  [params.main]
+    titleCase = true
+
+# Defining any custom [[module.mounts]] disables Hugo's implicit default mounts, so the
+# ones this harness needs are restated explicitly. `content` provides the page fixtures
+# used to exercise the `(dict "page" PAGE "text" STRING)` contract; `layouts` provides this
+# site's own templates (the assertion table plus minimal default layouts for the fixture
+# pages). The last mount reaches above the site root with a relative path to mount the real
+# partial under test directly from its location in the theme — not a copy. Symlinks do not
+# work here: Hugo does not follow them when walking the `layouts` mount.
+[[module.mounts]]
+  source = 'content'
+  target = 'content'
+[[module.mounts]]
+  source = 'layouts'
+  target = 'layouts'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/TitleCase.html'
+  target = 'layouts/_partials/utilities/TitleCase.html'

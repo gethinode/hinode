@@ -1,0 +1,73 @@
+{{- /*
+    Assertions for utilities/TitleCase.html.
+
+    Hugo has no template test framework; this site is one. `errorf` is the failure
+    signal — it logs an ERROR and makes `hugo` exit non-zero, which is what CI acts on
+    (see package.json's `test:templates` and the workflow's `build-command`). The
+    PASS/FAIL table is kept alongside it for a human reading the build log directly.
+*/ -}}
+
+{{- $cases := slice
+  (slice "set up a project and environments" "Set Up a Project and Environments")
+  (slice "types of cookies we use" "Types of Cookies We Use")
+  (slice "third paragraph with <code>markdown</code> in title" "Third Paragraph With <code>Markdown</code> in Title")
+  (slice "state-of-the-art <code>npm</code> tooling for the win" "State-of-the-Art <code>Npm</code> Tooling for the Win")
+  (slice "a link to <a href=\"/x\">the docs</a> of hinode" "A Link to <a href=\"/x\">the Docs</a> of Hinode")
+  (slice "third party links &amp; use of your information" "Third Party Links &amp; Use of Your Information")
+  (slice "an image <img src=\"/a.png\" alt=\"the alt of it\"> in a heading" "An Image <img src=\"/a.png\" alt=\"the alt of it\"> in a Heading")
+  (slice "quotes &#39;the thing&#39; and the rest" "Quotes &#39;the Thing&#39; and the Rest")
+  (slice "caf&eacute; of the north" "Caf&eacute; of the North")
+  (slice "AT&amp;T and the rest" "AT&amp;T and the Rest")
+  (slice "emoji 🎉 party of the year" "Emoji 🎉 Party of the Year")
+  (slice "über den wolken und <strong>der</strong> stadt" "Über Den Wolken Und <strong>Der</strong> Stadt")
+  (slice "double  space  of  doom" "Double  Space  of  Doom")
+  (slice "math <span class=\"katex\">x &lt; y</span> and more" "Math <span class=\"katex\">X &lt; Y</span> and More")
+  (slice "the CLI and an <code>agent</code>" "The CLI and an <code>Agent</code>")
+  (slice "x < y and the rest" "X < Y and the Rest")
+  (slice "cats & dogs of the world" "Cats & Dogs of the World")
+  (slice "" "")
+-}}
+{{- $fail := 0 -}}
+{{- range $cases -}}
+{{- $got := partial "utilities/TitleCase.html" (dict "exact" false "text" (index . 0)) -}}
+{{- if eq $got (index . 1) }}
+PASS {{ index . 0 }}
+{{- else }}
+FAIL in={{ index . 0 }}
+     want={{ index . 1 }}
+     got ={{ $got }}
+{{- $fail = add $fail 1 -}}
+{{- errorf "TitleCase mismatch: in=%q want=%q got=%q" (index . 0) (index . 1) $got -}}
+{{- end -}}
+{{- end }}
+
+{{- $gotExactKey := partial "utilities/TitleCase.html" (dict "exact" true "text" "set up a project") -}}
+{{- if eq $gotExactKey "set up a project" }}
+PASS exact=true key: "{{ $gotExactKey }}"
+{{- else -}}
+{{- $fail = add $fail 1 -}}
+{{- errorf "TitleCase exact=true key mismatch: want=%q got=%q" "set up a project" $gotExactKey -}}
+FAIL exact=true key: want="set up a project" got="{{ $gotExactKey }}"
+{{- end }}
+
+{{- $pageNoExact := site.GetPage "/blog/without-exact" -}}
+{{- $gotPageNoExact := partial "utilities/TitleCase.html" (dict "page" $pageNoExact "text" "set up a project") -}}
+{{- if eq $gotPageNoExact "Set Up a Project" }}
+PASS page-form, no exact in front matter: "{{ $gotPageNoExact }}"
+{{- else -}}
+{{- $fail = add $fail 1 -}}
+{{- errorf "TitleCase page-form (no exact) mismatch: want=%q got=%q" "Set Up a Project" $gotPageNoExact -}}
+FAIL page-form, no exact in front matter: want="Set Up a Project" got="{{ $gotPageNoExact }}"
+{{- end }}
+
+{{- $pageExact := site.GetPage "/blog/with-exact" -}}
+{{- $gotPageExact := partial "utilities/TitleCase.html" (dict "page" $pageExact "text" "set up a project") -}}
+{{- if eq $gotPageExact "set up a project" }}
+PASS page-form, exact: true in front matter: "{{ $gotPageExact }}"
+{{- else -}}
+{{- $fail = add $fail 1 -}}
+{{- errorf "TitleCase page-form (exact=true) mismatch: want=%q got=%q" "set up a project" $gotPageExact -}}
+FAIL page-form, exact: true in front matter: want="set up a project" got="{{ $gotPageExact }}"
+{{- end }}
+
+TITLECASE FAILURES: {{ $fail }}
