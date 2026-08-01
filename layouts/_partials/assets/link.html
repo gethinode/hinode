@@ -151,8 +151,8 @@
             {{- if not $args.exact }}
                 {{- if not $args.case }}
                     {{- $text = lower $text }}
-                {{- else if and site.Params.main.titleCase (not $args.page.Params.exact) }}
-                    {{- $text = title $text }}
+                {{- else }}
+                    {{- $text = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $text) }}
                 {{- end -}}
             {{- end -}}
 

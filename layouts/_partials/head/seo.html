@@ -3,11 +3,11 @@
 {{/* Adapted from doks */}}
 {{ with .Params.meta.title }}
     {{ $title := . }}
-    {{ if and site.Params.main.titleCase (not $.Params.exact) }}{{ $title = title $title }}{{ end }}
+    {{ $title = partial "utilities/TitleCase.html" (dict "page" $ "text" $title) }}
     {{ $.Scratch.Set "title" $title -}}
 {{ else }}
     {{ $title := .Title | default .Site.Title }}
-    {{ if and site.Params.main.titleCase (not $.Params.exact) }}{{ $title = title $title }}{{ end }}
+    {{ $title = partial "utilities/TitleCase.html" (dict "page" $ "text" $title) }}
     {{ $.Scratch.Set "title" $title -}}
 {{ end }}
 

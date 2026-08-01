@@ -2,7 +2,7 @@
     <tbody>
     {{ range $.Site.Taxonomies.tags.ByCount }}
         {{- $title := .Page.Title }}
-        {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
+        {{ $title = partial "utilities/TitleCase.html" (dict "page" $.Page "text" $title) }}
         <tr>
             <td class="text-nowrap pe-3 align-bottom">
                 {{ .Count }} {{ if gt .Count 1 }} {{ T "articles" }} {{ else }} {{ T "article" }} {{ end }}
