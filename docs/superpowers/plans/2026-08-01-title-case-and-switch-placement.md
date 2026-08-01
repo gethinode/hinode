@@ -21,6 +21,13 @@
 - **A Hugo partial may contain only one `return` statement.** Multiple returns fail at execution with `wrong number of args for return`. Assign to a result variable and return once at the end.
 - **`{{ else with }}` is not valid** in Hugo's template parser. Use `{{ else }}{{ with }}...{{ end }}{{ end }}`.
 - **`return` takes exactly one argument.** `{{ return title $x }}` is a parse error; write `{{ return (title $x) }}`.
+- **The exampleSite is multilingual.** Output lands under `exampleSite/public/en/`, `/fr/`
+  and `/nl/`. Assert against `/en/` — `exampleSite/config/_default/params.fr.toml:2` and
+  `params.nl.toml:2` both set `titleCase = false`, so the other two locales are unaffected
+  by any title-casing change and would silently pass a wrong assertion.
+- **Existing English blog fixtures:** `first-post`, `second-post`, `third-post`,
+  `fourth-post`. Three of them already render a "Last modified" line, so Task 7 needs no
+  added `lastmod` frontmatter.
 
 ## File Structure
 
@@ -287,7 +294,7 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ```bash
 cd "$WT" && pnpm build:example
-grep -rc "Types of Cookies We Use" exampleSite/public/cookies/index.html
+grep -rc "Types of Cookies We Use" exampleSite/public/en/cookies/index.html
 grep -rc 'class="title-case' exampleSite/public/ | grep -v ":0" | head
 ```
 
@@ -342,10 +349,10 @@ In `assets/scss/common/_styles.scss`, delete lines 107-116 — the comment block
 
 ```bash
 cd "$WT" && pnpm build:example
-grep -c "Types of Cookies We Use" exampleSite/public/cookies/index.html
-grep -c "Use of Your" exampleSite/public/privacy/index.html
+grep -c "Types of Cookies We Use" exampleSite/public/en/cookies/index.html
+grep -c "Use of Your" exampleSite/public/en/privacy/index.html
 grep -rl 'class="title-case' exampleSite/public/ | head
-grep -o "<h[0-9][^>]*>[^<]*<code>[^<]*</code>[^<]*</h[0-9]>" exampleSite/public/blog/first-post/index.html
+grep -o "<h[0-9][^>]*>[^<]*<code>[^<]*</code>[^<]*</h[0-9]>" exampleSite/public/en/blog/first-post/index.html
 ```
 
 Expected: first two greps return `1` or more; the third returns nothing; the fourth still shows an intact `<code>` element inside the heading.
@@ -709,7 +716,7 @@ Expected: clean. Stylelint in particular must not complain about the removed rul
 
 ```bash
 cd "$WT" && HUGO_TITLECASESTYLE=go pnpm build:example
-grep -c "Types Of Cookies We Use" exampleSite/public/cookies/index.html
+grep -c "Types Of Cookies We Use" exampleSite/public/en/cookies/index.html
 ```
 
 Expected: `1` or more — `titleCaseStyle = "go"` reproduces the old capitalize-everything output, which is what the release note will tell users to set.
@@ -947,8 +954,8 @@ cat >> exampleSite/config/_default/params.toml <<'EOF'
     readingTime = false
 EOF
 pnpm build:example
-grep -o "min read" exampleSite/public/blog/*/index.html | head
-grep -o "words" exampleSite/public/blog/*/index.html | head
+grep -o "min read" exampleSite/public/en/blog/*/index.html | head
+grep -o "words" exampleSite/public/en/blog/*/index.html | head
 git checkout exampleSite/config/_default/params.toml
 ```
 
@@ -994,12 +1001,12 @@ cat >> exampleSite/config/_default/params.toml <<'EOF'
     metadata = "original"
 EOF
 pnpm build:example
-grep -o "Last modified" exampleSite/public/blog/*/index.html | head
+grep -o "Last modified" exampleSite/public/en/blog/*/index.html | head
 ```
 
 - [ ] **Step 2: Run it to verify it fails**
 
-Expected: `Last modified` still appears on blog posts whose `Lastmod` is later than `Date`, proving `original` is inert. If no post has a later `Lastmod`, add `lastmod` to one post's frontmatter first so the branch is reachable.
+Expected: `Last modified` still appears on the three blog posts whose `Lastmod` is later than `Date`, proving `original` is inert.
 
 - [ ] **Step 3: Implement**
 
@@ -1019,8 +1026,8 @@ to:
 
 ```bash
 cd "$WT2" && pnpm build:example
-grep -o "Last modified" exampleSite/public/blog/*/index.html | head
-grep -o "Posted on" exampleSite/public/blog/*/index.html | head
+grep -o "Last modified" exampleSite/public/en/blog/*/index.html | head
+grep -o "Posted on" exampleSite/public/en/blog/*/index.html | head
 git checkout exampleSite/config/_default/params.toml
 ```
 
@@ -1064,7 +1071,7 @@ cat >> exampleSite/config/_default/params.toml <<'EOF'
     includeToc = false
 EOF
 pnpm build:example
-grep -c "toc-dropdown\|TableOfContents" exampleSite/public/blog/*/index.html | grep -v ":0" | head
+grep -c "toc-dropdown\|TableOfContents" exampleSite/public/en/blog/*/index.html | grep -v ":0" | head
 ```
 
 - [ ] **Step 2: Run it to verify it fails**
@@ -1091,10 +1098,10 @@ with:
 
 ```bash
 cd "$WT2" && pnpm build:example
-grep -c "toc-dropdown" exampleSite/public/blog/*/index.html | grep -v ":0" | head
+grep -c "toc-dropdown" exampleSite/public/en/blog/*/index.html | grep -v ":0" | head
 git checkout exampleSite/config/_default/params.toml
 pnpm build:example
-grep -lc "toc-dropdown" exampleSite/public/docs/*/index.html | head
+grep -lc "toc-dropdown" exampleSite/public/en/docs/*/index.html | head
 ```
 
 Expected: with the per-type flag set, no dropdown on blog posts. After reverting, docs pages still render their dropdown — the default path is intact.
