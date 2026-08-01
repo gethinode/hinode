@@ -6,7 +6,7 @@
     {{ $year := .Date.Year }}
     {{ $lastYear := $.Scratch.Get "lastYear"}}
     {{- $title := .Title }}
-    {{ if and site.Params.main.titleCase (not $.Page.Params.exact) }}{{ $title = title $title }}{{ end }}
+    {{ $title = partial "utilities/TitleCase.html" (dict "page" $.Page "text" $title) }}
     <div class="row mt-2">
         <div class="d-none d-{{ $breakpoint.prev }}-block col-{{ $breakpoint.prev }}-3 mt-auto text-right">
             {{ with .Date }}
