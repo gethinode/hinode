@@ -587,18 +587,18 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-footer .sidebar-seconda
 // Align a group's children with its label rather than its icon.
 //
 // A leading icon pushes the parent's own label right by the icon's width plus
-// its `me-1` gutter. The nested list only carries `ps-3`, which is narrower
-// than that, so without this the children sit slightly to the *left* of the
-// label they belong to and the hierarchy reads as broken.
+// its `me-1` gutter. `ps-3` is narrower than that, so a child list using it
+// sits slightly to the *left* of the label it belongs to and the hierarchy
+// reads as broken. Groups with an icon get this class from the template in
+// place of `ps-3`; groups without one are untouched.
 //
-// Scoped with `:has()` so a sidebar without icons keeps the plain `ps-3`
-// indent, and so it holds however the icon arrived — a `pre` field on a
-// data-file menu or a page's `icon` param via `navigation.sidebarIcons`.
-// Only the first nested list needs shifting: everything deeper is indented
-// relative to it and follows.
-li:has(> .sidebar-item-group svg.svg-inline--fa) > .collapse > .btn-toggle-nav {
+// The template sets it rather than CSS deriving it with `:has()`. The collapse
+// trail is expanded client side, and a selector that must be re-resolved as a
+// subtree goes from display:none to visible can paint the old indent first and
+// correct it a frame later, which reads as the sidebar shifting on load.
+.sidebar-nav-icon-indent {
     // Matches `fa-fw` (--fa-width: 1.25em) plus the icon's `me-1` gutter.
-    padding-left: calc(1.25rem + 0.25rem) !important;
+    padding-left: calc(1.25rem + 0.25rem);
 }
 
 // scss-docs-end sidebar
