@@ -1053,72 +1053,87 @@ Do not merge. Report the PR URL and wait.
 - Consumes: nothing from PR 1. This branch is cut fresh from `origin/main`.
 - Produces: `partial "utilities/GetPageFlag.html" (dict "page" PAGE "name" STRING "default" BOOL)` → `bool`. Precedence, highest first: page frontmatter, `site.Params.pages.<Type>.<name>`, `site.Params.pages.<name>`, then the caller's `default`. Raises `errorf` when the resolved value is not a bool.
 
-- [ ] **Step 1: Create the worktree**
+**Harness note (revised 2026-08-01).** The original plan built a second scratch site at
+`$SCRATCH/harness2` with symlinks. Both premises are now obsolete: symlinks do not work
+(Hugo does not follow them on the `layouts` mount), and the ruling to commit the harness
+means `tests/templates/` already exists. Extend it instead. Its `content/blog/` fixtures are
+type `blog`, so they serve the per-type cascade directly.
+
+- [ ] **Step 1: Set up the worktree**
+
+The worktree at `$WT2` is branched from PR 1's head rather than `origin/main`, because this
+task needs `tests/templates/` and `GetPageFlag`'s assertions belong beside `TitleCase`'s.
+**Rebase onto `main` before opening PR 2** — do not open a PR against PR 1's branch: this
+repo's workflows filter on base `main`/`beta`, so a PR based on another branch runs no CI,
+and retargeting fires only `edited`, which does not revive Actions without a push.
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
-git fetch origin
-git worktree add -b fix/switch-placement "$WT2" origin/main
+cd "$WT2" && pnpm install && pnpm run test:templates
 ```
 
-- [ ] **Step 2: Create the harness**
+Expected: install succeeds; the existing 30 assertions pass (exit 0).
 
-```bash
-mkdir -p "$SCRATCH/harness2/layouts/_partials/utilities" "$SCRATCH/harness2/content/blog"
-cat > "$SCRATCH/harness2/hugo.toml" <<'EOF'
-baseURL = 'https://example.org/'
-title = 'harness2'
-disableKinds = ['taxonomy','term','RSS','sitemap','robotsTXT','404']
-[params]
+- [ ] **Step 2: Add the fixture and config**
+
+Append to `tests/templates/hugo.toml` under `[params]`:
+
+```toml
   [params.pages]
     readingTime = true
     wordCount = true
     [params.pages.blog]
       readingTime = false
-EOF
-printf -- '---\ntitle: a post\n---\nbody\n' > "$SCRATCH/harness2/content/blog/post.md"
-printf -- '---\ntitle: an override\nreadingTime: true\n---\nbody\n' > "$SCRATCH/harness2/content/blog/override.md"
-ln -sf "$WT2/layouts/_partials/utilities/GetPageFlag.html" \
-       "$SCRATCH/harness2/layouts/_partials/utilities/GetPageFlag.html"
 ```
 
-- [ ] **Step 3: Write the failing test**
+Add the file-level mount beside the existing one:
 
-Create `$SCRATCH/harness2/layouts/index.html`:
-
-```go-html-template
-{{- $fail := 0 -}}
-{{- $want := dict "post" (slice false true) "override" (slice true true) -}}
-{{- range (where site.RegularPages "Type" "blog") -}}
-    {{- $name := .File.BaseFileName -}}
-    {{- $rt := partial "utilities/GetPageFlag.html" (dict "page" . "name" "readingTime" "default" true) -}}
-    {{- $wc := partial "utilities/GetPageFlag.html" (dict "page" . "name" "wordCount" "default" true) -}}
-    {{- $exp := index $want $name -}}
-    {{- if and (eq $rt (index $exp 0)) (eq $wc (index $exp 1)) }}
-PASS {{ $name }} readingTime={{ $rt }} wordCount={{ $wc }}
-    {{- else }}
-FAIL {{ $name }} want readingTime={{ index $exp 0 }} wordCount={{ index $exp 1 }}, got readingTime={{ $rt }} wordCount={{ $wc }}
-    {{- $fail = add $fail 1 -}}
-    {{- end -}}
-{{- end }}
-FLAG FAILURES: {{ $fail }}
+```toml
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetPageFlag.html'
+  target = 'layouts/_partials/utilities/GetPageFlag.html'
 ```
 
-`post` asserts the per-type override beats the global; `override` asserts page frontmatter beats the per-type value; both assert `wordCount` falls through to the global.
+Create `tests/templates/content/blog/reading-time-override.md`:
 
-Create the stub, `$WT2/layouts/_partials/utilities/GetPageFlag.html`:
+```markdown
+---
+title: Reading Time Override
+readingTime: true
+---
+
+Fixture page whose front matter re-enables `readingTime`, exercising the per-page tier of
+`utilities/GetPageFlag.html` over the per-type value set for the `blog` type.
+```
+
+- [ ] **Step 3: Write the failing assertions**
+
+Add to `tests/templates/layouts/index.html`, matching the existing style — a `PASS` line, or
+`errorf` plus a `FAIL` line and a failure-counter increment. Three assertions, each pinning
+one tier of the cascade:
+
+| Page | Flag | Expected | Tier proven |
+| --- | --- | --- | --- |
+| `/blog/without-exact` | `readingTime` | `false` | per-type beats global |
+| `/blog/without-exact` | `wordCount` | `true` | global applies when no per-type value |
+| `/blog/reading-time-override` | `readingTime` | `true` | per-page beats per-type |
+
+Use a distinct counter and final line from the TitleCase block, e.g. `FLAG FAILURES: {{ $flagFail }}`, so a failure names the right subsystem.
+
+- [ ] **Step 4: Create the stub and run to verify failure**
+
+Create `layouts/_partials/utilities/GetPageFlag.html` containing only:
 
 ```go-html-template
 {{- return .default -}}
 ```
 
-- [ ] **Step 4: Run the test to verify it fails**
-
 ```bash
-cd "$SCRATCH/harness2" && hugo --quiet --destination out --logLevel error && cat out/index.html
+cd "$WT2" && pnpm run test:templates
 ```
 
-Expected: `FLAG FAILURES: 1` — `post` fails with `got readingTime=true`, because the stub ignores the per-type override.
+Expected: non-zero exit. The two `readingTime` assertions fail (the stub returns the caller's
+default, `true`, ignoring both the per-type and per-page values); `wordCount` already passes.
+That split is what proves the assertions discriminate rather than failing indiscriminately.
 
 - [ ] **Step 5: Write the implementation**
 
@@ -1126,7 +1141,7 @@ Replace `$WT2/layouts/_partials/utilities/GetPageFlag.html`:
 
 ```go-html-template
 {{- /*
-    Resolves a boolean page parameter, checking the page's frontmatter, then the per-type
+    Resolves a boolean page parameter, checking the page's front matter, then the per-type
     site parameter, then the global site parameter, then the caller's default.
 
     Mirrors GetIncludeToc.html, which resolves `includeToc` the same way. Site parameter
@@ -1160,13 +1175,13 @@ Replace `$WT2/layouts/_partials/utilities/GetPageFlag.html`:
 {{- return $value -}}
 ```
 
-- [ ] **Step 6: Run the test to verify it passes**
+- [ ] **Step 6: Run to verify they pass**
 
 ```bash
-cd "$SCRATCH/harness2" && hugo --quiet --destination out --logLevel error && cat out/index.html
+cd "$WT2" && pnpm run test:templates
 ```
 
-Expected: `FLAG FAILURES: 0`, with `post readingTime=false wordCount=true` and `override readingTime=true wordCount=true`.
+Expected: exit 0, all 33 assertions passing — the 30 existing plus these three.
 
 - [ ] **Step 7: Wire it into `metadata.html`**
 
@@ -1185,6 +1200,10 @@ with:
 ```
 
 - [ ] **Step 8: Verify against the exampleSite**
+
+This is the integration check — the harness proves the resolver in isolation, this proves
+`metadata.html` actually consumes it.
+
 
 ```bash
 cd "$WT2"
