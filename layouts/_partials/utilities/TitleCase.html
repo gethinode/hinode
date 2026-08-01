@@ -29,6 +29,19 @@
     than being ranged over — which would otherwise fail later with an opaque
     "range can't iterate over ..." template execution error.
 
+    Casing may only ever add capitals, never remove them: after `title` and the exception
+    restoration run, every rune the author wrote in uppercase is restored over whatever the
+    filter produced there. AP style lowercases stopwords ("and", "in", "on", "to", …)
+    regardless of how they were written, so an all-caps heading such as `AN INTRODUCTION TO
+    THE THING` would otherwise come back with its stopwords lowercased, and an authored
+    acronym or keyword like `<code>AND</code>` would lose its case too. `titleCaseExceptions`
+    cannot fix this: it matches a word against its *title-cased* form, but by the time it
+    runs the stopword is already lowercased and no longer matches. This restoration is a
+    single pass over the whole cased string — not per text token in the mapping loop — run
+    immediately after the exception restoration, on `$result` in the fast path and on
+    `$cased` in the slow path (before the rune split, since the length guard below compares
+    `$cased` against `$plain`).
+
     @param {string} text  Plain string or rendered HTML.
     @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
     @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
@@ -59,6 +72,18 @@
         {{- range $exceptions -}}
             {{- $result = replaceRE (printf `\b%s\b` (title .)) . $result -}}
         {{- end -}}
+        {{/* Never lowercase an authored capital (see doc block above). */}}
+        {{- if ne $text (lower $text) -}}
+            {{- $pr := split $text "" -}}
+            {{- $cr := split $result "" -}}
+            {{- if eq (len $pr) (len $cr) -}}
+                {{- $m := slice -}}
+                {{- range $i, $r := $pr -}}
+                    {{- $m = $m | append (cond (eq $r (upper $r)) $r (index $cr $i)) -}}
+                {{- end -}}
+                {{- $result = delimit $m "" -}}
+            {{- end -}}
+        {{- end -}}
     {{- else -}}
         {{/* Split into tags, character entities, and text runs. Only the text runs are cased. */}}
         {{- $tokens := findRE `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]` $text -}}
@@ -75,6 +100,19 @@
         {{- $cased := title $plain -}}
         {{- range $exceptions -}}
             {{- $cased = replaceRE (printf `\b%s\b` (title .)) . $cased -}}
+        {{- end -}}
+        {{/* Never lowercase an authored capital (see doc block above). Must run before the
+             rune split, since the length guard below compares $cased against $plain. */}}
+        {{- if ne $plain (lower $plain) -}}
+            {{- $pr := split $plain "" -}}
+            {{- $cr := split $cased "" -}}
+            {{- if eq (len $pr) (len $cr) -}}
+                {{- $m := slice -}}
+                {{- range $i, $r := $pr -}}
+                    {{- $m = $m | append (cond (eq $r (upper $r)) $r (index $cr $i)) -}}
+                {{- end -}}
+                {{- $cased = delimit $m "" -}}
+            {{- end -}}
         {{- end -}}
         {{- $runes := split $cased "" -}}
 
