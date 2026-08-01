@@ -1,8 +1,8 @@
 {{- $metadata := .Scratch.Get "metadata" -}}
 {{ if ne $metadata "none" }}
     <small class="text-body-secondary text-uppercase">
-        {{- $readingTime := (index site.Params.pages "readingTime") | default true -}}
-        {{- $wordCount := (index site.Params.pages "wordCount") | default true -}}
+        {{- $readingTime := partial "utilities/GetPageFlag.html" (dict "page" . "name" "readingTime" "default" true) -}}
+        {{- $wordCount := partial "utilities/GetPageFlag.html" (dict "page" . "name" "wordCount" "default" true) -}}
         
         {{ if .Date }}
             {{ $lastmodstr := (partial "utilities/date.html" (dict "date" .Lastmod "format" "long")) -}}

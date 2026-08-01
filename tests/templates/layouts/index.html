@@ -80,3 +80,37 @@ FAIL page-form, exact: true in front matter: want="set up a project" got="{{ $go
 {{- end }}
 
 TITLECASE FAILURES: {{ $fail }}
+
+{{- /*
+    The "default" column is deliberately not the same on every row. A stub that just
+    returns the caller's default would trivially satisfy any row where want == default,
+    which is why the reading-time-override row uses default=false against a want=true:
+    only a resolver that actually consults page front matter can pass it. The other two
+    rows use default=true (the value production always passes), matching what the task
+    brief documents as the RED-step split: both readingTime rows fail against the stub,
+    wordCount already passes.
+*/ -}}
+{{- $flagFail := 0 -}}
+{{- $flagCases := slice
+  (slice "/blog/without-exact" "readingTime" true false)
+  (slice "/blog/without-exact" "wordCount" true true)
+  (slice "/blog/reading-time-override" "readingTime" false true)
+-}}
+{{- range $flagCases -}}
+{{- $flagPage := site.GetPage (index . 0) -}}
+{{- $flagName := index . 1 -}}
+{{- $flagDefault := index . 2 -}}
+{{- $flagWant := index . 3 -}}
+{{- $flagGot := partial "utilities/GetPageFlag.html" (dict "page" $flagPage "name" $flagName "default" $flagDefault) -}}
+{{- if eq $flagGot $flagWant }}
+PASS {{ index . 0 }} {{ $flagName }}={{ $flagGot }}
+{{- else }}
+FAIL in={{ index . 0 }} name={{ $flagName }}
+     want={{ $flagWant }}
+     got ={{ $flagGot }}
+{{- $flagFail = add $flagFail 1 -}}
+{{- errorf "GetPageFlag mismatch: page=%q name=%q want=%v got=%v" (index . 0) $flagName $flagWant $flagGot -}}
+{{- end -}}
+{{- end }}
+
+FLAG FAILURES: {{ $flagFail }}

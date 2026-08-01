@@ -1,0 +1,33 @@
+{{- /*
+    Resolves a boolean page parameter, checking the page's front matter, then the per-type
+    site parameter, then the global site parameter, then the caller's default.
+
+    Mirrors GetIncludeTOC.html, which resolves `includeToc` the same way. Site parameter
+    keys are lowercased by Hugo, so the name is lowercased before every lookup.
+
+    @param {page} page      Page to resolve for.
+    @param {string} name    Parameter name, e.g. "readingTime".
+    @param {bool} default   Value to use when nothing else sets it.
+
+    @returns {bool}
+*/ -}}
+
+{{- $page := .page -}}
+{{- $name := lower .name -}}
+{{- $value := .default -}}
+
+{{- with site.Params.pages -}}
+    {{- if isset . $name -}}{{- $value = index . $name -}}{{- end -}}
+{{- end -}}
+{{- with (index site.Params.pages $page.Type) -}}
+    {{- if isset . $name -}}{{- $value = index . $name -}}{{- end -}}
+{{- end -}}
+{{- if isset $page.Params $name -}}
+    {{- $value = index $page.Params $name -}}
+{{- end -}}
+
+{{- if ne (printf "%T" $value) "bool" -}}
+    {{- errorf "Expected bool value for page parameter '%s' (page: %s)" $name $page.RelPermalink -}}
+{{- end -}}
+
+{{- return $value -}}
