@@ -1,0 +1,55 @@
+{{- /*
+    Resolve how deep the page-hierarchy sidebar should render entry icons.
+
+    Returns the deepest 1-based level that may show an icon, or 0 for none.
+    Callers compare an entry's level against it, so "off" needs no separate
+    boolean at the call site.
+
+    Resolution mirrors utilities/GetIncludeTOC.html: a site-wide switch, then a
+    per-page override, then a per-type default. Both the switch and the level
+    cascade, so a section can enable icons without restating the depth, or
+    change the depth without restating the switch.
+
+        navigation.sidebarIcons          bool, site-wide (default false)
+        navigation.sidebarIconLevel      int, deepest level (default 1)
+        <page>.Params.sidebarIcons       bool, per page
+        <page>.Params.sidebarIconLevel   int, per page
+        pages.<Type>.sidebaricons        bool, per content type
+        pages.<Type>.sidebariconlevel    int, per content type
+
+    Defaults to off. A page's `icon` param is authored for its card, so
+    enabling this by default would put icons in the sidebars of existing sites
+    that never asked for them - and only on the pages that happen to set one,
+    which looks like a bug rather than a feature.
+
+    Hugo lowercases the keys of the `pages.<Type>` maps, hence `sidebaricons`
+    and `sidebariconlevel` there but camelCase everywhere else.
+*/ -}}
+
+{{- $enabled := site.Params.navigation.sidebarIcons | default false -}}
+{{- $level := site.Params.navigation.sidebarIconLevel | default 1 -}}
+
+{{- $typeDefaults := index site.Params.pages .Type -}}
+{{- with $typeDefaults -}}
+    {{- if isset . "sidebaricons" -}}
+        {{- $enabled = index . "sidebaricons" -}}
+        {{- if ne (printf "%T" $enabled) "bool" -}}
+            {{- errorf "Expected bool value in site parameters: pages.%s.sidebarIcons" $.Type -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if isset . "sidebariconlevel" -}}
+        {{- $level = index . "sidebariconlevel" -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if isset .Params "sidebaricons" -}}
+    {{- $enabled = .Params.sidebaricons -}}
+    {{- if ne (printf "%T" $enabled) "bool" -}}
+        {{- errorf "Expected bool value in page parameters: sidebarIcons (%s)" .RelPermalink -}}
+    {{- end -}}
+{{- end -}}
+{{- if isset .Params "sidebariconlevel" -}}
+    {{- $level = .Params.sidebariconlevel -}}
+{{- end -}}
+
+{{- return cond $enabled (int $level) 0 -}}

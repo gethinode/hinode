@@ -240,12 +240,17 @@
                 {{- $pages = $result -}}
 
                 {{/* Build menu structure from sorted pages and hierarchy */}}
+                {{- /* Resolve the icon depth once against the page being rendered,
+                    not against each entry: the cascade is keyed on the current
+                    page's type, while the entries are the pages being listed. */ -}}
+                {{- $iconLevel := partial "utilities/GetSidebarIcons.html" (or $args.page page) -}}
                 {{- range $rootPages -}}
                     {{- $menuEntry := partial "assets/helpers/sidebar-menu-entry" (dict
                         "page"      .
                         "grouped"   $grouped
                         "sortField" $sortField
                         "reverse"   $reverse
+                        "iconLevel" $iconLevel
                     ) -}}
                     {{- $menu = $menu | append $menuEntry -}}
                 {{- end -}}

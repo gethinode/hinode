@@ -151,6 +151,8 @@
     breadcrumb = true
     toc = true
     sidebar = true
+    sidebarIcons = false
+    sidebarIconLevel = 1
     size = "md"
     startLevel = 2
     endLevel = 3
