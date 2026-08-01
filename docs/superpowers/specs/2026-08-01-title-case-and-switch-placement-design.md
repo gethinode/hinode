@@ -94,9 +94,14 @@ therefore the Go path can never be eliminated. Two options were rejected:
 Two claims in the source handover did not survive checking, and both were load-bearing
 against the Go approach:
 
-- *"The Go filter destroys acronym casing."* Half true, and the half that is true was
-  initially underweighted here. Existing uppercase is preserved — `title "the CLI and an
-  AGENT"` returns `The CLI and an AGENT`. Only lowercase-authored acronyms are affected
+- *"The Go filter destroys acronym casing."* Partly true, and this entry was wrong twice
+  before the final review corrected it. Uppercase is preserved for ordinary words — `title
+  "the CLI and an AGENT"` returns `The CLI and an AGENT` — but **not for stopwords**, which
+  AP lowercases regardless of how they were authored: `AN INTRODUCTION TO THE THING` becomes
+  `AN INTRODUCTION to the THING`, and `<code>AND</code>` becomes `<code>and</code>`. The
+  original check here used `AGENT`, which is not a stopword, and so missed this entirely.
+  CSS `capitalize` never lowercases anything, so this was a real regression rather than
+  parity. Addressed by the uppercase-protection rule below. Only lowercase-authored acronyms are affected
   (`npm` → `Npm`), and `text-transform: capitalize` mangles those identically, so the two
   paths do look the same on screen. **But they are not equivalent:** under CSS the DOM
   still holds `npm`, so copy-paste, screen readers, and search indexing see the correct
@@ -122,6 +127,13 @@ sites again.
 | `text` | yes | plain string or rendered HTML |
 | `page` | yes, unless `exact` given | source of `.Params.exact` |
 | `exact` | no | explicit override, for callers with no page in scope (`assets/card.html:203`) |
+
+**Authored uppercase is never lowercased.** When the cased text is mapped back, any
+character the author capitalized is taken from the original. This is the general form of the
+principle behind `titleCaseExceptions`: the filter may add capitals, never remove them. It
+protects uppercase stopwords (`AND`, `OF`, `TO`) and acronyms in `<code>` spans without
+configuration, and cannot be expressed as an exception entry — by the time the text is cased,
+`AND` has already become `and` and no longer matches `\bAND\b`.
 
 `site.Params.main.titleCaseExceptions` (list of strings, default empty) names words that
 must keep their exact spelling — `["npm", "pnpm"]`. Restoration replaces the entry's
@@ -280,8 +292,12 @@ Beyond those unit assertions, verification is build-and-assert against the examp
 
 ## Migration
 
-Sites preferring today's heading behavior set `titleCaseStyle = "go"` in Hugo config.
-Verified equivalent: `Set Up A Project And Environments`, `State-Of-The-Art Tooling`. No
+Sites preferring today's heading behavior set `titleCaseStyle = "go"` in Hugo config. It
+is an **approximation, not a reproduction**: `Set Up A Project And Environments` and
+`State-Of-The-Art Tooling` match, but Go's style capitalizes after any non-letter, so
+apostrophes break — `what's new` becomes `What'S New` where CSS gave `What's New`. Browsers
+treat the apostrophe as a word-internal character (UAX #29 MidNumLet); Go does not. An
+earlier draft of this spec called the two equivalent, which was wrong. No
 new theme parameter is needed, and `exact: true` remains the per-page escape.
 
 The `.title-case` class stops being emitted. It is not in the PurgeCSS safelist and has no

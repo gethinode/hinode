@@ -826,6 +826,106 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ---
 
+### Task 4c: never lowercase authored uppercase
+
+Added 2026-08-01 after the whole-branch review. Not in the original plan.
+
+**Why:** AP style lowercases stopwords regardless of how they were authored, so
+`AN INTRODUCTION TO THE THING` rendered `AN INTRODUCTION to the THING` and
+`<code>AND</code>` rendered `<code>and</code>`. CSS `capitalize` never lowercased anything,
+making this a real regression rather than the parity the spec claimed. It is the same
+DOM-corruption class as the `npm` finding, and `titleCaseExceptions` cannot reach it: once
+the text is cased, `AND` is already `and` and no longer matches `\bAND\b`.
+
+**Files:**
+
+- Modify: `layouts/_partials/utilities/TitleCase.html`
+- Modify: `tests/templates/layouts/index.html` (assertions)
+
+**Interfaces:** no new inputs. Behavior only.
+
+**The rule:** when mapping the cased text back, take the original character wherever it is
+already uppercase. Verified against the full existing corpus — every current assertion is
+unaffected, because the rule only ever prevents a lowercasing that AP would have done to an
+authored capital.
+
+**Placement:** apply it to the cased string, in the same place the exception restoration
+runs — the fast path's `$result` and the slow path's `$cased`, before the rune split. Do not
+apply it per text token in the mapping loop; one pass over the whole string is both cheaper
+and simpler.
+
+**Shape**, verified working:
+
+```go-html-template
+{{- if ne $plain (lower $plain) -}}
+    {{- $pr := split $plain "" -}}
+    {{- $cr := split $cased "" -}}
+    {{- if eq (len $pr) (len $cr) -}}
+        {{- $m := slice -}}
+        {{- range $i, $r := $pr -}}
+            {{- $m = $m | append (cond (eq $r (upper $r)) $r (index $cr $i)) -}}
+        {{- end -}}
+        {{- $cased = delimit $m "" -}}
+    {{- end -}}
+{{- end -}}
+```
+
+The `ne $plain (lower $plain)` guard skips the whole pass for entirely-lowercase input,
+which is the common case. `eq $r (upper $r)` is also true for spaces, digits and
+punctuation — harmless, because `title` never alters those, so original and cased agree.
+
+- [ ] **Step 1: Write the failing assertions**
+
+Add to `tests/templates/layouts/index.html`, in the existing style:
+
+| Input | Expected |
+| --- | --- |
+| `AN INTRODUCTION TO THE THING` | `AN INTRODUCTION TO THE THING` |
+| `compare IT and IN and ON and TO` | `Compare IT and IN and ON and TO` |
+| `use the <code>AND</code> operator of doom` | `Use the <code>AND</code> Operator of Doom` |
+
+- [ ] **Step 2: Run to verify they fail**
+
+```bash
+cd "$WT" && pnpm run test:templates
+```
+
+Expected: non-zero exit, three failures showing `to the`, `in`/`on`, and `<code>and</code>`.
+
+- [ ] **Step 3: Implement on both paths**
+
+Fast path: `$plain` is `$text`. Slow path: `$plain` is the built plain string. Apply after
+the exception restoration in both.
+
+- [ ] **Step 4: Run to verify they pass**
+
+```bash
+cd "$WT" && pnpm run test:templates && pnpm build:example
+```
+
+Expected: exit 0 on both, all 30 assertions passing — the 27 existing plus these three.
+
+- [ ] **Step 5: Commit**
+
+```bash
+cd "$WT"
+git add layouts/_partials/utilities/TitleCase.html tests/templates/
+git commit -m "fix: never lowercase uppercase authored in the source text
+
+AP style lowercases stopwords regardless of how they were written, so a
+heading naming an operator or keyword lost its casing: AN INTRODUCTION TO
+THE THING became AN INTRODUCTION to the THING, and <code>AND</code> became
+<code>and</code>. The previous CSS mechanism never lowercased anything.
+
+Title casing may now add capitals but never remove them. This is the
+general form of titleCaseExceptions, which cannot fix these because the
+stopword is already lowercased by the time the list is applied.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
+```
+
+---
+
 ### Task 5: Full verification and open PR 1
 
 **Files:** none modified.
