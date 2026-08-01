@@ -507,7 +507,10 @@ New:
 cd "$WT" && grep -rn "site.Params.main.titleCase\|Site.Params.main.titleCase" --include="*.html" layouts/
 ```
 
-Expected: 7 lines, in `image.html`, `link.html`, `section-title.html`, and `sidebar.html` (×4). Anything else in the list means a replacement was missed.
+Expected: 8 lines — 7 call sites in `image.html`, `link.html`, `section-title.html`, and
+`sidebar.html` (×4), plus `_partials/utilities/TitleCase.html` itself, which contains the
+guard internally and always matches this grep. Anything else in the list means a
+replacement was missed.
 
 - [ ] **Step 3: Run the build to verify nothing broke**
 
@@ -666,7 +669,9 @@ New:
 cd "$WT" && grep -rn "site.Params.main.titleCase\|Site.Params.main.titleCase" --include="*.html" layouts/
 ```
 
-Expected: no output at all.
+Expected: exactly one line — `_partials/utilities/TitleCase.html`, which owns the guard
+internally. Every call site is now converted. Any other file in the output means a
+replacement was missed.
 
 - [ ] **Step 6: Run the build**
 
