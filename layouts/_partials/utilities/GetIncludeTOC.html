@@ -1,7 +1,7 @@
 {{- $includeToc := false -}}
 {{- if .Site.Params.navigation.toc -}}
     {{- $includeToc = true -}}
-    {{- if isset .Params "includeToc" -}}
+    {{- if isset .Params "includetoc" -}}
         {{- $includeToc = .Params.includeToc -}}
     {{- else -}}
         {{- with (index site.Params.pages .Type) -}}

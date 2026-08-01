@@ -120,3 +120,39 @@ FAIL in={{ index . 0 }} name={{ $flagName }}
 {{- end }}
 
 FLAG FAILURES: {{ $flagFail }}
+
+{{- /*
+    Assertions for utilities/GetIncludeToc.html.
+
+    The harness config sets params.navigation.toc = true (global on) and
+    params.pages.blog.includetoc = false (per-type off). The two pages below
+    diverge only in front matter, isolating the per-page tier from the
+    per-type tier:
+      - toc-override sets includeToc: true in front matter, so it must win
+        over the blog type's includetoc = false.
+      - without-exact has no includeToc front matter, so the blog type's
+        includetoc = false must apply.
+    GetIncludeToc.html takes the page as its context directly (not a dict),
+    matching how baseof.html:29 calls it.
+*/ -}}
+{{- $tocFail := 0 -}}
+{{- $tocCases := slice
+  (slice "/blog/toc-override" true)
+  (slice "/blog/without-exact" false)
+-}}
+{{- range $tocCases -}}
+{{- $tocPage := site.GetPage (index . 0) -}}
+{{- $tocWant := index . 1 -}}
+{{- $tocGot := partial "utilities/GetIncludeToc.html" $tocPage -}}
+{{- if eq $tocGot $tocWant }}
+PASS {{ index . 0 }} includeToc={{ $tocGot }}
+{{- else }}
+FAIL in={{ index . 0 }}
+     want={{ $tocWant }}
+     got ={{ $tocGot }}
+{{- $tocFail = add $tocFail 1 -}}
+{{- errorf "GetIncludeToc mismatch: page=%q want=%v got=%v" (index . 0) $tocWant $tocGot -}}
+{{- end -}}
+{{- end }}
+
+TOC FAILURES: {{ $tocFail }}
