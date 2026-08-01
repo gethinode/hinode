@@ -6,6 +6,14 @@
     once to the concatenated text content and then mapped back onto the original by rune
     position, which keeps stopword handling correct across tag boundaries.
 
+    Character entities contribute a single space to the plain string used for casing,
+    rather than nothing. Omitting them entirely would join the words on either side of the
+    entity, so the word right after it would never be treated as starting a word (e.g.
+    `the&nbsp;cat sat` would case to `The&nbsp;cat Sat` instead of `The&nbsp;Cat Sat`). The
+    entity itself is still always re-emitted verbatim in the output — only the *casing pass*
+    sees a space stand-in for it — and because a space cases to a space, the one-rune width
+    keeps the positional mapping back onto the original tokens exact.
+
     @param {string} text  Plain string or rendered HTML.
     @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
     @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
@@ -33,7 +41,10 @@
         {{- $tokens := findRE `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]` $text -}}
         {{- $plain := slice -}}
         {{- range $tokens -}}
-            {{- if not (or (and (hasPrefix . "<") (hasSuffix . ">")) (and (hasPrefix . "&") (hasSuffix . ";"))) -}}
+            {{- if and (hasPrefix . "<") (hasSuffix . ">") -}}
+            {{- else if and (hasPrefix . "&") (hasSuffix . ";") -}}
+                {{- $plain = $plain | append " " -}}
+            {{- else -}}
                 {{- $plain = $plain | append . -}}
             {{- end -}}
         {{- end -}}
@@ -46,8 +57,11 @@
             {{- $out := slice -}}
             {{- $pos := 0 -}}
             {{- range $tokens -}}
-                {{- if or (and (hasPrefix . "<") (hasSuffix . ">")) (and (hasPrefix . "&") (hasSuffix . ";")) -}}
+                {{- if and (hasPrefix . "<") (hasSuffix . ">") -}}
                     {{- $out = $out | append . -}}
+                {{- else if and (hasPrefix . "&") (hasSuffix . ";") -}}
+                    {{- $out = $out | append . -}}
+                    {{- $pos = add $pos 1 -}}
                 {{- else -}}
                     {{- $n := len (split . "") -}}
                     {{- $out = $out | append (delimit (first $n (after $pos $runes)) "") -}}
