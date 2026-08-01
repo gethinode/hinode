@@ -697,6 +697,135 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ---
 
+### Task 4b: `titleCaseExceptions` for lowercase-authored acronyms
+
+Added 2026-08-01 after the Task 5 dogfood build. Not in the original plan.
+
+**Why:** the dogfood found `npm` rendering as `Npm` on six gethinode.com headings. The
+design dismissed lowercase acronyms as a non-differentiator because `text-transform:
+capitalize` mangles them identically — but that reasoning was incomplete. Under CSS the DOM
+still holds `npm`, so copy-paste, screen readers, and search indexing see the correct
+string. Moving to the Go filter bakes the mangled form into the text itself. Same pixels,
+worse substance.
+
+**Files:**
+
+- Modify: `layouts/_partials/utilities/TitleCase.html`
+- Modify: `config/_default/params.toml` (declare the new param, empty)
+- Modify: `tests/templates/layouts/index.html` (assertions)
+- Modify: `tests/templates/hugo.toml` (exception list for the fixture site)
+
+**Interfaces:**
+
+- Consumes: nothing new.
+- Produces: `site.Params.main.titleCaseExceptions`, a list of strings, default empty. Any
+  word whose title-cased form matches an entry is restored to the entry's exact spelling.
+
+**Mechanism**, verified before being written here: `title` only ever uppercases a word's
+first letter, so the cased form of an entry is `title $entry`. Replacing that form with the
+entry restores it, and because only case differs the rune length is unchanged — so the
+existing length guard still holds. Other spellings are left alone: `NPM` does not match
+`\bNpm\b`, so a deliberately shouted acronym survives.
+
+Apply the restoration to the **plain cased string**, not to the final result. On the slow
+path the final result contains tags, and a match inside an attribute value would corrupt
+markup. The plain string contains no tags by construction.
+
+- [ ] **Step 1: Write the failing assertions**
+
+Add to `tests/templates/hugo.toml` under `[params.main]`:
+
+```toml
+titleCaseExceptions = ["npm", "pnpm"]
+```
+
+Add to `tests/templates/layouts/index.html`, in the same style as the existing cases:
+
+| Input | Expected |
+| --- | --- |
+| `npm packages` | `npm Packages` |
+| `updating the npm toolchain` | `Updating the npm Toolchain` |
+| `NPM shouting stays` | `NPM Shouting Stays` |
+| `use <code>npm</code> and the pnpm lockfile` | `Use <code>npm</code> and the pnpm Lockfile` |
+
+- [ ] **Step 2: Run to verify they fail**
+
+```bash
+cd "$WT" && pnpm run test:templates
+```
+
+Expected: non-zero exit, with the first three cases reporting `Npm`/`Pnpm` where the
+expectation says `npm`/`pnpm`. The `NPM shouting stays` case should already pass.
+
+- [ ] **Step 3: Implement**
+
+Read the list once, near the top of the partial:
+
+```go-html-template
+{{- $exceptions := site.Params.main.titleCaseExceptions | default slice -}}
+```
+
+On the **fast path**, after `{{- $result = title $text -}}`:
+
+```go-html-template
+{{- range $exceptions -}}
+    {{- $result = replaceRE (printf `\b%s\b` (title .)) . $result -}}
+{{- end -}}
+```
+
+On the **slow path**, apply the same restoration to the cased plain string before it is
+split into runes — so replace the existing `{{- $runes := split (title $plain) "" -}}` with:
+
+```go-html-template
+{{- $cased := title $plain -}}
+{{- range $exceptions -}}
+    {{- $cased = replaceRE (printf `\b%s\b` (title .)) . $cased -}}
+{{- end -}}
+{{- $runes := split $cased "" -}}
+```
+
+Document in the partial's comment that entries are matched as whole words against the
+title-cased form, and that they must be plain words — Go's regexp has no `\Q…\E`, so an
+entry containing regex metacharacters would misbehave.
+
+- [ ] **Step 4: Declare the param**
+
+In `config/_default/params.toml`, beside `titleCase`, add the empty default so the setting
+is discoverable:
+
+```toml
+titleCaseExceptions = []
+```
+
+- [ ] **Step 5: Run to verify they pass**
+
+```bash
+cd "$WT" && pnpm run test:templates && pnpm build:example
+```
+
+Expected: exit 0 on both; all assertions pass, including the previous 23.
+
+- [ ] **Step 6: Commit**
+
+```bash
+cd "$WT"
+git add layouts/_partials/utilities/TitleCase.html config/_default/params.toml tests/templates/
+git commit -m "feat: add titleCaseExceptions for lowercase-authored acronyms
+
+Title casing capitalizes the first letter of every word, so an acronym
+authored lowercase renders as Npm rather than npm. Under the previous CSS
+mechanism that was a visual artifact only; applying the filter to the text
+puts the mangled spelling into the DOM, where copy-paste, screen readers,
+and search indexing pick it up.
+
+Words listed in main.titleCaseExceptions keep their exact spelling. Other
+spellings are untouched, so a deliberate NPM still renders as NPM.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
+```
+
+---
+
 ### Task 5: Full verification and open PR 1
 
 **Files:** none modified.

@@ -94,10 +94,14 @@ therefore the Go path can never be eliminated. Two options were rejected:
 Two claims in the source handover did not survive checking, and both were load-bearing
 against the Go approach:
 
-- *"The Go filter destroys acronym casing."* It does not. `title "the CLI and an AGENT"`
-  returns `The CLI and an AGENT` — existing uppercase is preserved. It only affects
-  lowercase-authored acronyms (`cli` → `Cli`), which `text-transform: capitalize` mangles
-  identically. Acronyms do not distinguish the two paths.
+- *"The Go filter destroys acronym casing."* Half true, and the half that is true was
+  initially underweighted here. Existing uppercase is preserved — `title "the CLI and an
+  AGENT"` returns `The CLI and an AGENT`. Only lowercase-authored acronyms are affected
+  (`npm` → `Npm`), and `text-transform: capitalize` mangles those identically, so the two
+  paths do look the same on screen. **But they are not equivalent:** under CSS the DOM
+  still holds `npm`, so copy-paste, screen readers, and search indexing see the correct
+  string; the Go filter puts the mangled spelling into the text itself. The gethinode.com
+  dogfood build found six such headings. Addressed by `titleCaseExceptions` below.
 - *"The Go filter mangles inline markup."* True of a naive `title` over rendered HTML,
   but solvable. See below; a working prototype is verified against 14 adversarial inputs.
 
@@ -118,6 +122,12 @@ sites again.
 | `text` | yes | plain string or rendered HTML |
 | `page` | yes, unless `exact` given | source of `.Params.exact` |
 | `exact` | no | explicit override, for callers with no page in scope (`assets/card.html:203`) |
+
+`site.Params.main.titleCaseExceptions` (list of strings, default empty) names words that
+must keep their exact spelling — `["npm", "pnpm"]`. Restoration replaces the entry's
+title-cased form with the entry, so only that spelling is affected and a deliberate `NPM`
+survives. It is applied to the plain cased string, never to the final result, because the
+result contains tags and a match inside an attribute value would corrupt markup.
 
 Returns a plain string. Callers apply `safeHTML` exactly where they do today.
 
