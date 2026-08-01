@@ -8,7 +8,9 @@
     - reverse: Whether to reverse sort order (default: false)
     - seen: Slice of ancestor permalinks in the current walk, used as cycle guard (internal)
 
-    Returns: Menu entry dict with title and pages (optional array of nested entries)
+    Returns: Menu entry dict with title, link, an optional pre (leading icon,
+    taken from the page's `icon` param), and optional pages (array of nested
+    entries)
 */}}
 
 {{- $page := .page -}}
@@ -20,6 +22,15 @@
 {{- /* Create menu entry with title and absolute link */ -}}
 {{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
 {{- $entry := dict "title" $page.LinkTitle "link" $page.RelPermalink -}}
+
+{{- /* Carry the page's icon as "pre", the field the sidebar renderer already
+    reads for a leading icon on menu-defined entries. Without this a page-derived
+    sidebar can never show one, however the page is authored. Omitted when unset
+    so the renderer's `with` guards stay false rather than seeing an empty
+    string. */ -}}
+{{- with $page.Params.icon -}}
+    {{- $entry = merge $entry (dict "pre" .) -}}
+{{- end -}}
 
 {{- /* Get children from grouped hierarchy */ -}}
 {{- $children := index $grouped $page.RelPermalink | default slice -}}
