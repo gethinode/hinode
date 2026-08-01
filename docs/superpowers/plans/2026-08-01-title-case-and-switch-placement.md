@@ -953,7 +953,11 @@ cd "$WT" && HUGO_TITLECASESTYLE=go pnpm build:example
 grep -c "Types Of Cookies We Use" exampleSite/public/en/cookies/index.html
 ```
 
-Expected: `1` or more — `titleCaseStyle = "go"` reproduces the old capitalize-everything output, which is what the release note will tell users to set.
+Expected: `1` or more — `titleCaseStyle = "go"` approximates the old capitalize-everything
+output, which is what the release note will point users to. It is not an exact reproduction:
+Go's style capitalizes after any non-letter, so `what's new` becomes `What'S New` where the
+browser gave `What's New`. Confirm that caveat is in the PR body rather than asserting
+equivalence here.
 
 - [ ] **Step 4: Dogfood against gethinode.com**
 
@@ -1014,8 +1018,10 @@ into four different spellings of the `exact` lookup.
 ## Upgrade notes
 
 - **Heading casing changes** on sites with `titleCase = true`. To keep the previous output,
-  set `titleCaseStyle = "go"` in your Hugo configuration — it reproduces
-  `Set Up A Project And Environments` and `State-Of-The-Art`.
+  set `titleCaseStyle = "go"` in your Hugo configuration. It is close, not exact:
+  `Set Up A Project And Environments` and `State-Of-The-Art` match, but Go's style
+  capitalizes after any non-letter, so apostrophes break — `what's new` renders
+  `What'S New` where the browser gave `What's New`.
 - **`.title-case` is no longer emitted.** Sites or modules styling that hook lose it.
 - **Image captions containing inline markup are now title-cased.** They were previously
   skipped, because a string-level filter could not handle them.

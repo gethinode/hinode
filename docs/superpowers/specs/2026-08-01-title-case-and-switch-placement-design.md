@@ -284,8 +284,8 @@ Beyond those unit assertions, verification is build-and-assert against the examp
    already collected (tags, entities, `<img>` with `alt`, emoji, multibyte, double spaces,
    hyphens, `AT&T`, bare `<` and `&`).
 3. `pnpm lint`.
-4. A `titleCaseStyle = "go"` build, confirming the migration escape reproduces today's
-   heading output.
+4. A `titleCaseStyle = "go"` build, confirming the migration escape approximates today's
+   heading output — see Migration for where it does not.
 5. Build gethinode.com against the branch. It sets `titleCase = true`
    (`config/_default/params.toml:8`), so its headings shift; this is the dogfood check
    before release.
