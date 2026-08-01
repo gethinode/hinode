@@ -200,7 +200,7 @@
 {{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
 {{- if $minimal }}{{ $description = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
-{{ if and site.Params.main.titleCase (not $args.exact) }}{{ $title = title $title }}{{ end }}
+{{ $title = partial "utilities/TitleCase.html" (dict "exact" $args.exact "text" $title) }}
 
 {{/* Show hover link icon when enabled (global setting or per-card/group override) and card is a bare link */}}
 {{- $linkIconEnabled := or (site.Params.main.cards.linkIcon | default false) $args.linkIcon -}}

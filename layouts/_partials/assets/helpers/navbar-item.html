@@ -96,7 +96,7 @@
 {{/* Main code */}}
 {{ if not $error }}
     {{ $title := $entry.Name }}
-    {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+    {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title) }}
 
     {{ if $entry.Params.button }}
         {{ partial "assets/button.html" (dict

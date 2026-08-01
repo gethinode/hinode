@@ -1,6 +1,6 @@
 {{ $class := .Attributes.class }}
 {{ $text := chomp .Text }}
-{{ $titleCase := and site.Params.main.titleCase (not .Page.Params.exact) }}
+{{ $text = partial "utilities/TitleCase.html" (dict "page" .Page "text" $text) }}
 {{- $headingAnchor := partial "utilities/GetThemeIcon.html" (dict "id" "headingAnchor" "default" "fas link") -}}
 
 {{/* Strip Hugo's HAHAHUGOSHORTCODE placeholder from .Anchor — different render passes
@@ -12,16 +12,13 @@
 
 {{/* Build the class list:
      - "heading" is added only on the anchor variant — it hooks `.heading:hover .anchor`.
-     - "title-case" is added when site-wide title casing is enabled and the page has
-       not opted out via frontmatter `exact: true`. The capitalization itself is done
-       in CSS (`text-transform: capitalize`), not by the Go `title` filter, because the
-       heading text may contain inline HTML (e.g. <code> from a markdown backtick) that
-       a string-level transform would mangle. CSS also locale-aware-capitalizes based
-       on the `lang` attribute, which is the right behavior for multilingual sites.
-     - `.Attributes.class` preserves any IAL on the heading. */}}
+     - `.Attributes.class` preserves any IAL on the heading.
+
+     Title casing is applied to $text above rather than via CSS, so that headings obey
+     Hugo's `titleCaseStyle` exactly as page titles and navigation do. `text-transform:
+     capitalize` could not: it has no stopword awareness and ignores the setting. */}}
 {{ $classList := slice }}
 {{ if $useAnchor }}{{ $classList = $classList | append "heading" }}{{ end }}
-{{ if $titleCase }}{{ $classList = $classList | append "title-case" }}{{ end }}
 {{ with $class }}{{ $classList = $classList | append . }}{{ end }}
 {{ $classAttr := delimit $classList " " }}
 
