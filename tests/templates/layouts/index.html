@@ -82,18 +82,24 @@ FAIL page-form, exact: true in front matter: want="set up a project" got="{{ $go
 TITLECASE FAILURES: {{ $fail }}
 
 {{- /*
-    The "default" column is deliberately not the same on every row. A stub that just
-    returns the caller's default would trivially satisfy any row where want == default,
-    which is why the reading-time-override row uses default=false against a want=true:
-    only a resolver that actually consults page front matter can pass it. The other two
-    rows use default=true (the value production always passes), matching what the task
-    brief documents as the RED-step split: both readingTime rows fail against the stub,
-    wordCount already passes.
+    The "default" column is deliberately not the same as "want" on every row. A resolver
+    that just returned the caller's default would trivially satisfy any row where
+    want == default, without ever consulting the tier the row claims to prove. Each row's
+    default is chosen to differ from its want, so a pass is only possible if the resolver
+    actually reads the tier under test:
+      - row 1 (per-type beats global): default=true, want=false — only the blog-type
+        override (false) can produce a pass.
+      - row 2 (global applies when no per-type value): default=false, want=true — only
+        reading the global site.Params.pages.wordCount (true) can produce a pass; the
+        earlier version of this row used default=true here, which coincided with the
+        configured global value and passed even with the global-tier lookup deleted.
+      - row 3 (per-page beats per-type): default=false, want=true — only the page
+        frontmatter override (true) can produce a pass.
 */ -}}
 {{- $flagFail := 0 -}}
 {{- $flagCases := slice
   (slice "/blog/without-exact" "readingTime" true false)
-  (slice "/blog/without-exact" "wordCount" true true)
+  (slice "/blog/without-exact" "wordCount" false true)
   (slice "/blog/reading-time-override" "readingTime" false true)
 -}}
 {{- range $flagCases -}}
