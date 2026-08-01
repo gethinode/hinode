@@ -22,6 +22,13 @@
     alone. Entries must be plain words: Go's regexp has no `\Q…\E` escaping, so an entry
     containing regex metacharacters would misbehave.
 
+    `titleCaseExceptions` must be a list. A scalar (e.g. a bare string, which is what a
+    TOML author typing `"npm"` instead of `["npm"]` produces, and what Hugo hands through
+    when the param is set via an `HUGO_PARAMS_MAIN_TITLECASEEXCEPTIONS` environment
+    variable) is rejected with `errorf` naming the param and the value received, rather
+    than being ranged over — which would otherwise fail later with an opaque
+    "range can't iterate over ..." template execution error.
+
     @param {string} text  Plain string or rendered HTML.
     @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
     @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
@@ -33,6 +40,10 @@
 {{- $text := .text -}}
 {{- $result := $text -}}
 {{- $exceptions := site.Params.main.titleCaseExceptions | default slice -}}
+{{- if not (hasPrefix (printf "%T" $exceptions) "[]") -}}
+    {{- errorf "Expected list value in site parameters: main.titleCaseExceptions (got %T: %v)" $exceptions $exceptions -}}
+    {{- $exceptions = slice -}}
+{{- end -}}
 
 {{- $exact := false -}}
 {{- if isset . "exact" -}}
