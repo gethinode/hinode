@@ -80,3 +80,79 @@ FAIL page-form, exact: true in front matter: want="set up a project" got="{{ $go
 {{- end }}
 
 TITLECASE FAILURES: {{ $fail }}
+
+{{- /*
+    The "default" column is deliberately not the same as "want" on every row. A resolver
+    that just returned the caller's default would trivially satisfy any row where
+    want == default, without ever consulting the tier the row claims to prove. Each row's
+    default is chosen to differ from its want, so a pass is only possible if the resolver
+    actually reads the tier under test:
+      - row 1 (per-type beats global): default=true, want=false — only the blog-type
+        override (false) can produce a pass.
+      - row 2 (global applies when no per-type value): default=false, want=true — only
+        reading the global site.Params.pages.wordCount (true) can produce a pass; the
+        earlier version of this row used default=true here, which coincided with the
+        configured global value and passed even with the global-tier lookup deleted.
+      - row 3 (per-page beats per-type): default=false, want=true — only the page
+        frontmatter override (true) can produce a pass.
+*/ -}}
+{{- $flagFail := 0 -}}
+{{- $flagCases := slice
+  (slice "/blog/without-exact" "readingTime" true false)
+  (slice "/blog/without-exact" "wordCount" false true)
+  (slice "/blog/reading-time-override" "readingTime" false true)
+-}}
+{{- range $flagCases -}}
+{{- $flagPage := site.GetPage (index . 0) -}}
+{{- $flagName := index . 1 -}}
+{{- $flagDefault := index . 2 -}}
+{{- $flagWant := index . 3 -}}
+{{- $flagGot := partial "utilities/GetPageFlag.html" (dict "page" $flagPage "name" $flagName "default" $flagDefault) -}}
+{{- if eq $flagGot $flagWant }}
+PASS {{ index . 0 }} {{ $flagName }}={{ $flagGot }}
+{{- else }}
+FAIL in={{ index . 0 }} name={{ $flagName }}
+     want={{ $flagWant }}
+     got ={{ $flagGot }}
+{{- $flagFail = add $flagFail 1 -}}
+{{- errorf "GetPageFlag mismatch: page=%q name=%q want=%v got=%v" (index . 0) $flagName $flagWant $flagGot -}}
+{{- end -}}
+{{- end }}
+
+FLAG FAILURES: {{ $flagFail }}
+
+{{- /*
+    Assertions for utilities/GetIncludeToc.html.
+
+    The harness config sets params.navigation.toc = true (global on) and
+    params.pages.blog.includetoc = false (per-type off). The two pages below
+    diverge only in front matter, isolating the per-page tier from the
+    per-type tier:
+      - toc-override sets includeToc: true in front matter, so it must win
+        over the blog type's includetoc = false.
+      - without-exact has no includeToc front matter, so the blog type's
+        includetoc = false must apply.
+    GetIncludeToc.html takes the page as its context directly (not a dict),
+    matching how baseof.html:29 calls it.
+*/ -}}
+{{- $tocFail := 0 -}}
+{{- $tocCases := slice
+  (slice "/blog/toc-override" true)
+  (slice "/blog/without-exact" false)
+-}}
+{{- range $tocCases -}}
+{{- $tocPage := site.GetPage (index . 0) -}}
+{{- $tocWant := index . 1 -}}
+{{- $tocGot := partial "utilities/GetIncludeToc.html" $tocPage -}}
+{{- if eq $tocGot $tocWant }}
+PASS {{ index . 0 }} includeToc={{ $tocGot }}
+{{- else }}
+FAIL in={{ index . 0 }}
+     want={{ $tocWant }}
+     got ={{ $tocGot }}
+{{- $tocFail = add $tocFail 1 -}}
+{{- errorf "GetIncludeToc mismatch: page=%q want=%v got=%v" (index . 0) $tocWant $tocGot -}}
+{{- end -}}
+{{- end }}
+
+TOC FAILURES: {{ $tocFail }}

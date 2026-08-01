@@ -1053,72 +1053,87 @@ Do not merge. Report the PR URL and wait.
 - Consumes: nothing from PR 1. This branch is cut fresh from `origin/main`.
 - Produces: `partial "utilities/GetPageFlag.html" (dict "page" PAGE "name" STRING "default" BOOL)` → `bool`. Precedence, highest first: page frontmatter, `site.Params.pages.<Type>.<name>`, `site.Params.pages.<name>`, then the caller's `default`. Raises `errorf` when the resolved value is not a bool.
 
-- [ ] **Step 1: Create the worktree**
+**Harness note (revised 2026-08-01).** The original plan built a second scratch site at
+`$SCRATCH/harness2` with symlinks. Both premises are now obsolete: symlinks do not work
+(Hugo does not follow them on the `layouts` mount), and the ruling to commit the harness
+means `tests/templates/` already exists. Extend it instead. Its `content/blog/` fixtures are
+type `blog`, so they serve the per-type cascade directly.
+
+- [ ] **Step 1: Set up the worktree**
+
+The worktree at `$WT2` is branched from PR 1's head rather than `origin/main`, because this
+task needs `tests/templates/` and `GetPageFlag`'s assertions belong beside `TitleCase`'s.
+**Rebase onto `main` before opening PR 2** — do not open a PR against PR 1's branch: this
+repo's workflows filter on base `main`/`beta`, so a PR based on another branch runs no CI,
+and retargeting fires only `edited`, which does not revive Actions without a push.
 
 ```bash
-cd /Users/mark/Development/GitHub/gethinode/hinode
-git fetch origin
-git worktree add -b fix/switch-placement "$WT2" origin/main
+cd "$WT2" && pnpm install && pnpm run test:templates
 ```
 
-- [ ] **Step 2: Create the harness**
+Expected: install succeeds; the existing 30 assertions pass (exit 0).
 
-```bash
-mkdir -p "$SCRATCH/harness2/layouts/_partials/utilities" "$SCRATCH/harness2/content/blog"
-cat > "$SCRATCH/harness2/hugo.toml" <<'EOF'
-baseURL = 'https://example.org/'
-title = 'harness2'
-disableKinds = ['taxonomy','term','RSS','sitemap','robotsTXT','404']
-[params]
+- [ ] **Step 2: Add the fixture and config**
+
+Append to `tests/templates/hugo.toml` under `[params]`:
+
+```toml
   [params.pages]
     readingTime = true
     wordCount = true
     [params.pages.blog]
       readingTime = false
-EOF
-printf -- '---\ntitle: a post\n---\nbody\n' > "$SCRATCH/harness2/content/blog/post.md"
-printf -- '---\ntitle: an override\nreadingTime: true\n---\nbody\n' > "$SCRATCH/harness2/content/blog/override.md"
-ln -sf "$WT2/layouts/_partials/utilities/GetPageFlag.html" \
-       "$SCRATCH/harness2/layouts/_partials/utilities/GetPageFlag.html"
 ```
 
-- [ ] **Step 3: Write the failing test**
+Add the file-level mount beside the existing one:
 
-Create `$SCRATCH/harness2/layouts/index.html`:
-
-```go-html-template
-{{- $fail := 0 -}}
-{{- $want := dict "post" (slice false true) "override" (slice true true) -}}
-{{- range (where site.RegularPages "Type" "blog") -}}
-    {{- $name := .File.BaseFileName -}}
-    {{- $rt := partial "utilities/GetPageFlag.html" (dict "page" . "name" "readingTime" "default" true) -}}
-    {{- $wc := partial "utilities/GetPageFlag.html" (dict "page" . "name" "wordCount" "default" true) -}}
-    {{- $exp := index $want $name -}}
-    {{- if and (eq $rt (index $exp 0)) (eq $wc (index $exp 1)) }}
-PASS {{ $name }} readingTime={{ $rt }} wordCount={{ $wc }}
-    {{- else }}
-FAIL {{ $name }} want readingTime={{ index $exp 0 }} wordCount={{ index $exp 1 }}, got readingTime={{ $rt }} wordCount={{ $wc }}
-    {{- $fail = add $fail 1 -}}
-    {{- end -}}
-{{- end }}
-FLAG FAILURES: {{ $fail }}
+```toml
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetPageFlag.html'
+  target = 'layouts/_partials/utilities/GetPageFlag.html'
 ```
 
-`post` asserts the per-type override beats the global; `override` asserts page frontmatter beats the per-type value; both assert `wordCount` falls through to the global.
+Create `tests/templates/content/blog/reading-time-override.md`:
 
-Create the stub, `$WT2/layouts/_partials/utilities/GetPageFlag.html`:
+```markdown
+---
+title: Reading Time Override
+readingTime: true
+---
+
+Fixture page whose front matter re-enables `readingTime`, exercising the per-page tier of
+`utilities/GetPageFlag.html` over the per-type value set for the `blog` type.
+```
+
+- [ ] **Step 3: Write the failing assertions**
+
+Add to `tests/templates/layouts/index.html`, matching the existing style — a `PASS` line, or
+`errorf` plus a `FAIL` line and a failure-counter increment. Three assertions, each pinning
+one tier of the cascade:
+
+| Page | Flag | Expected | Tier proven |
+| --- | --- | --- | --- |
+| `/blog/without-exact` | `readingTime` | `false` | per-type beats global |
+| `/blog/without-exact` | `wordCount` | `true` | global applies when no per-type value |
+| `/blog/reading-time-override` | `readingTime` | `true` | per-page beats per-type |
+
+Use a distinct counter and final line from the TitleCase block, e.g. `FLAG FAILURES: {{ $flagFail }}`, so a failure names the right subsystem.
+
+- [ ] **Step 4: Create the stub and run to verify failure**
+
+Create `layouts/_partials/utilities/GetPageFlag.html` containing only:
 
 ```go-html-template
 {{- return .default -}}
 ```
 
-- [ ] **Step 4: Run the test to verify it fails**
-
 ```bash
-cd "$SCRATCH/harness2" && hugo --quiet --destination out --logLevel error && cat out/index.html
+cd "$WT2" && pnpm run test:templates
 ```
 
-Expected: `FLAG FAILURES: 1` — `post` fails with `got readingTime=true`, because the stub ignores the per-type override.
+Expected: non-zero exit. The two `readingTime` assertions fail (the stub returns the caller's
+default, `true`, ignoring both the per-type and per-page values); `wordCount` already passes.
+That split is what proves the assertions discriminate rather than failing indiscriminately.
 
 - [ ] **Step 5: Write the implementation**
 
@@ -1126,7 +1141,7 @@ Replace `$WT2/layouts/_partials/utilities/GetPageFlag.html`:
 
 ```go-html-template
 {{- /*
-    Resolves a boolean page parameter, checking the page's frontmatter, then the per-type
+    Resolves a boolean page parameter, checking the page's front matter, then the per-type
     site parameter, then the global site parameter, then the caller's default.
 
     Mirrors GetIncludeToc.html, which resolves `includeToc` the same way. Site parameter
@@ -1160,13 +1175,13 @@ Replace `$WT2/layouts/_partials/utilities/GetPageFlag.html`:
 {{- return $value -}}
 ```
 
-- [ ] **Step 6: Run the test to verify it passes**
+- [ ] **Step 6: Run to verify they pass**
 
 ```bash
-cd "$SCRATCH/harness2" && hugo --quiet --destination out --logLevel error && cat out/index.html
+cd "$WT2" && pnpm run test:templates
 ```
 
-Expected: `FLAG FAILURES: 0`, with `post readingTime=false wordCount=true` and `override readingTime=true wordCount=true`.
+Expected: exit 0, all 33 assertions passing — the 30 existing plus these three.
 
 - [ ] **Step 7: Wire it into `metadata.html`**
 
@@ -1185,6 +1200,10 @@ with:
 ```
 
 - [ ] **Step 8: Verify against the exampleSite**
+
+This is the integration check — the harness proves the resolver in isolation, this proves
+`metadata.html` actually consumes it.
+
 
 ```bash
 cd "$WT2"
@@ -1289,36 +1308,126 @@ Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 
 ---
 
-### Task 8: Make the mobile TOC dropdown honor the per-type cascade
+### Task 8: Fix the `includeToc` cascade, then make the mobile dropdown use it
+
+**Revised 2026-08-01.** The original task said only "switch the headers to the scratch,
+`GetIncludeToc.html` already folds in the per-page parameter, so nothing is lost." That claim
+is false, and acting on it would have caused a regression.
+
+**The real defect.** `GetIncludeTOC.html:4` tests `isset .Params "includeToc"` in mixed case.
+Hugo lowercases front-matter keys to `includetoc`, and `isset` is **case-sensitive** — unlike
+`index` and field access, which go through `maps.Params.Get` and are not. So that branch is
+never taken and the per-page tier is dead code. Verified:
+
+```text
+page: front matter includeToc: true, per-type pages.blog.includetoc = false
+(per-page must win, so the correct answer is true)
+
+today, inline in header.html   : true    <- correct
+GetIncludeTOC.html as written  : false   <- wrong
+same, with the key lowercased  : true    <- correct
+```
+
+So the two paths are each broken in the opposite direction, and neither honors both tiers:
+
+| | per-page | per-type |
+| --- | --- | --- |
+| Sidebar TOC (`GetIncludeToc` → scratch → `toc.html`) | **ignored** | honored |
+| Mobile dropdown (inline in the headers) | honored | **ignored** |
+
+Switching the dropdown to the scratch without fixing the resolver would fix the documented
+half and silently regress the other half — and every verification step in the original task
+would still have passed, because they only ever set per-type config.
 
 **Files:**
 
+- Modify: `$WT2/layouts/_partials/utilities/GetIncludeTOC.html:4`
 - Modify: `$WT2/layouts/header.html:36`
 - Modify: `$WT2/layouts/docs/header.html:34`
+- Modify: `$WT2/tests/templates/hugo.toml`, `$WT2/tests/templates/layouts/index.html`
+- Create: `$WT2/tests/templates/content/blog/toc-override.md`
 
 **Interfaces:**
 
-- Consumes: the `includeToc` scratch that `baseof.html:29` already sets from `GetIncludeToc.html`. Both templates are rendered via `{{ .Render "header" }}`, so `.` is the Page and `.Scratch` is available.
-- Produces: nothing new.
+- Consumes: the `includeToc` scratch that `baseof.html:29` sets from `GetIncludeToc.html`.
+  Both header templates are rendered via `{{ .Render "header" }}`, so `.` is the Page and
+  `.Scratch` is available.
+- Produces: nothing new. `GetIncludeToc.html` keeps its existing signature — it takes the
+  page as its context, not a dict, so the harness calls it as
+  `partial "utilities/GetIncludeToc.html" $page`.
 
-- [ ] **Step 1: Write the failing test**
+- [ ] **Step 1: Add harness coverage for the resolver**
 
-```bash
-cd "$WT2"
-cat >> exampleSite/config/_default/params.toml <<'EOF'
+Append to `tests/templates/hugo.toml` under `[params]`:
 
-[pages.blog]
-    includeToc = false
-EOF
-pnpm build:example
-grep -c "toc-dropdown\|TableOfContents" exampleSite/public/en/blog/*/index.html | grep -v ":0" | head
+```toml
+  [params.navigation]
+    toc = true
 ```
 
-- [ ] **Step 2: Run it to verify it fails**
+and under `[params.pages.blog]`, beside the existing `readingTime`:
 
-Expected: blog posts still contain the mobile TOC dropdown markup, because both headers re-derive `includeToc` inline and never consult `site.Params.pages.<Type>.includeToc`.
+```toml
+      includetoc = false
+```
 
-- [ ] **Step 3: Implement**
+Add the mount beside the existing ones:
+
+```toml
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetIncludeTOC.html'
+  target = 'layouts/_partials/utilities/GetIncludeTOC.html'
+```
+
+Create `tests/templates/content/blog/toc-override.md`:
+
+```markdown
+---
+title: Toc Override
+includeToc: true
+---
+
+Fixture page whose front matter re-enables `includeToc`, exercising the per-page tier of
+`utilities/GetIncludeToc.html` over the per-type value set for the `blog` type.
+```
+
+Add two assertions in the established style, with their own counter:
+
+| Page | Expected | Tier proven |
+| --- | --- | --- |
+| `/blog/toc-override` | `true` | per-page beats per-type |
+| `/blog/without-exact` | `false` | per-type applies when front matter is silent |
+
+- [ ] **Step 2: Run to verify the first assertion fails**
+
+```bash
+cd "$WT2" && pnpm run test:templates
+```
+
+Expected: non-zero exit. `/blog/toc-override` resolves `false` instead of `true` — the dead
+per-page branch. The `/blog/without-exact` assertion already passes, which is what shows the
+pair discriminates rather than failing indiscriminately.
+
+- [ ] **Step 3: Fix the resolver**
+
+In `layouts/_partials/utilities/GetIncludeTOC.html:4`, change the key to lowercase:
+
+```go-html-template
+{{- if isset .Params "includetoc" -}}
+```
+
+Leave line 5 (`$includeToc = .Params.includeToc`) alone — field access is case-insensitive
+and already works.
+
+- [ ] **Step 4: Run to verify both pass**
+
+```bash
+cd "$WT2" && pnpm run test:templates
+```
+
+Expected: exit 0, all 35 assertions passing — the 33 existing plus these two.
+
+- [ ] **Step 5: Point the mobile dropdown at the resolver**
 
 In both `layouts/header.html:36` and `layouts/docs/header.html:34`, replace:
 
@@ -1332,31 +1441,46 @@ with:
 {{- if .Scratch.Get "includeToc" -}}
 ```
 
-`GetIncludeToc.html` already folds in the `navigation.toc` global and the per-page parameter, so nothing is lost.
+With Step 3 applied, the resolver now genuinely folds in the `navigation.toc` global, the
+per-page parameter, and the per-type parameter — so this is the first point at which the
+original task's claim is actually true.
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [ ] **Step 6: Verify both tiers against the exampleSite**
 
 ```bash
-cd "$WT2" && pnpm build:example
+cd "$WT2"
+cat >> exampleSite/config/_default/params.toml <<'EOF'
+
+[pages.blog]
+    includeToc = false
+EOF
+pnpm build:example
 grep -c "toc-dropdown" exampleSite/public/en/blog/*/index.html | grep -v ":0" | head
 git checkout exampleSite/config/_default/params.toml
 pnpm build:example
 grep -lc "toc-dropdown" exampleSite/public/en/docs/*/index.html | head
 ```
 
-Expected: with the per-type flag set, no dropdown on blog posts. After reverting, docs pages still render their dropdown — the default path is intact.
+Expected: with the per-type flag set, no dropdown on blog posts. After reverting, docs pages
+still render their dropdown. The scaffolding is reverted; the exampleSite ships unchanged.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 cd "$WT2"
-git add layouts/header.html layouts/docs/header.html
-git commit -m "fix: apply the includeToc cascade to the mobile TOC dropdown
+git add layouts/_partials/utilities/GetIncludeTOC.html layouts/header.html layouts/docs/header.html tests/templates/
+git commit -m "fix: honor per-page includeToc and apply the cascade to the mobile dropdown
 
-baseof.html resolves includeToc through GetIncludeToc.html, which honors
-the per-type site parameter, but both header templates re-derived it
-inline. Setting pages.<Type>.includeToc = false hid the sidebar table of
-contents while leaving the mobile dropdown visible.
+GetIncludeTOC.html tested `isset .Params \"includeToc\"` in mixed case.
+Hugo lowercases front-matter keys and isset is case-sensitive, so the
+per-page branch was never taken and front-matter includeToc was silently
+ignored by the sidebar table of contents.
+
+The mobile dropdown had the mirror-image defect: it read the page
+parameter directly and never consulted the per-type value. Setting
+pages.<Type>.includeToc = false hid the sidebar TOC while leaving the
+dropdown visible. Both paths now resolve through GetIncludeToc.html, which
+honors the global toggle, the per-page parameter, and the per-type value.
 
 Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>"
 ```

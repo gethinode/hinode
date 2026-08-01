@@ -5,6 +5,14 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
   [params.main]
     titleCase = true
     titleCaseExceptions = ["npm", "pnpm"]
+  [params.navigation]
+    toc = true
+  [params.pages]
+    readingTime = true
+    wordCount = true
+    [params.pages.blog]
+      readingTime = false
+      includeToc = false
 
 # Defining any custom [[module.mounts]] disables Hugo's implicit default mounts, so the
 # ones this harness needs are restated explicitly. `content` provides the page fixtures
@@ -22,3 +30,9 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/TitleCase.html'
   target = 'layouts/_partials/utilities/TitleCase.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetPageFlag.html'
+  target = 'layouts/_partials/utilities/GetPageFlag.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetIncludeTOC.html'
+  target = 'layouts/_partials/utilities/GetIncludeTOC.html'
