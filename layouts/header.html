@@ -8,7 +8,7 @@
 {{/* Initialize local variables */}}
 {{- $breakpoint := partialCached "utilities/GetBreakpoint.html" site -}}
 {{ $title := .Title }}
-{{ if and .Site.Params.main.titleCase (not .Params.exact) }}{{ $title = title $title }}{{ end }}
+{{ $title = partial "utilities/TitleCase.html" (dict "page" . "text" $title) }}
 
 <header>
 {{/* Render breadcrumb */}}
@@ -35,6 +35,6 @@
 </header>
 
 {{/* Display TOC dropdown on smaller screens */}}
-{{- if and .Site.Params.navigation.toc .Params.includeToc | default true -}}
+{{- if .Scratch.Get "includeToc" -}}
     <div class="d-{{ $breakpoint.current }}-none pb-5">{{ partial "assets/toc-dropdown.html" (dict "page" .) }}</div>
 {{- end -}}

@@ -7,8 +7,12 @@
     - sortField: Field to sort children by (e.g., "title", "date", "weight")
     - reverse: Whether to reverse sort order (default: false)
     - seen: Slice of ancestor permalinks in the current walk, used as cycle guard (internal)
+    - iconLevel: Deepest 1-based level that may show an icon; 0 disables them
+      (resolved once by the caller via utilities/GetSidebarIcons.html)
 
-    Returns: Menu entry dict with title and pages (optional array of nested entries)
+    Returns: Menu entry dict with title, link, an optional pre (leading icon,
+    taken from the page's `icon` param), and optional pages (array of nested
+    entries)
 */}}
 
 {{- $page := .page -}}
@@ -16,10 +20,34 @@
 {{- $sortField := .sortField | default "title" -}}
 {{- $reverse := .reverse | default false -}}
 {{- $seen := .seen | default slice -}}
+{{- $iconLevel := .iconLevel | default 0 -}}
 
 {{- /* Create menu entry with title and absolute link */ -}}
 {{- /* Include the full RelPermalink; sidebar will recognize leading "/" as absolute */ -}}
 {{- $entry := dict "title" $page.LinkTitle "link" $page.RelPermalink -}}
+
+{{- /* Carry the page's icon as "pre", the field the sidebar renderer already
+    reads for a leading icon on menu-defined entries. Without this a page-derived
+    sidebar can never show one, however the page is authored.
+
+    Gated on depth, and off unless the site opts in: `icon` is authored for a
+    page's card, so rendering it here unconditionally would put icons into the
+    sidebars of existing sites that never asked for them - and only on the pages
+    that happen to set one, which reads as a bug rather than a feature. Icons on
+    the top level alone is the common case, hence a level rather than a bool.
+
+    Levels are counted as the sidebar renders them, not as this partial recurses.
+    assets/sidebar.html drops the walk's root entry and promotes its children to
+    the top of the list, so the root is never a visible row; `len $seen` is
+    therefore already the rendered 1-based level, and level 1 is the first row a
+    reader sees. Omitted when unset or out of range so the renderer's `with`
+    guards stay false rather than seeing an empty string. */ -}}
+{{- $level := len $seen -}}
+{{- if le $level $iconLevel -}}
+    {{- with $page.Params.icon -}}
+        {{- $entry = merge $entry (dict "pre" .) -}}
+    {{- end -}}
+{{- end -}}
 
 {{- /* Get children from grouped hierarchy */ -}}
 {{- $children := index $grouped $page.RelPermalink | default slice -}}
@@ -57,7 +85,7 @@
     {{- /* Recursively build nested menu entries */ -}}
     {{- $pages := slice -}}
     {{- range $children -}}
-        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "reverse" $reverse "seen" $seen) -}}
+        {{- $childEntry := partial "assets/helpers/sidebar-menu-entry" (dict "page" . "grouped" $grouped "sortField" $sortField "reverse" $reverse "seen" $seen "iconLevel" $iconLevel) -}}
         {{- $pages = $pages | append $childEntry -}}
     {{- end -}}
     {{- $entry = merge $entry (dict "pages" $pages) -}}

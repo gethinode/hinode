@@ -91,9 +91,7 @@
     {{- end -}}
     {{- if and $href (not (hasSuffix $href "/")) -}}{{- $href = printf "%s/" $href -}}{{- end -}}
     {{- $groupTitle := $group.title -}}
-    {{- if and site.Params.main.titleCase (not $page.Params.exact) -}}
-        {{- $groupTitle = title $groupTitle -}}
-    {{- end -}}
+    {{- $groupTitle = partial "utilities/TitleCase.html" (dict "page" $page "text" $groupTitle) -}}
     <li class="mb-1">
         <a class="sidebar-item text-decoration-none rounded w-100"
            {{- if $collapsible }} data-sidebar-label="{{ $groupTitle }}"{{ end }}
@@ -141,7 +139,7 @@
         <div class="d-flex w-100 p-0 sidebar-item-group">
             <div class="text-start flex-grow-1">
                 {{- $groupTitle := $group.title -}}
-                {{ if and site.Params.main.titleCase (not $page.Params.exact) }}{{ $groupTitle = title $groupTitle }}{{ end }}
+                {{ $groupTitle = partial "utilities/TitleCase.html" (dict "page" $page "text" $groupTitle) }}
 
                 {{ $dest := $href }}
                 {{ $target := "" }}
@@ -172,7 +170,13 @@
             </button>
         </div>
         <div class="collapse" id="sidebar-collapse-{{ $index }}-{{ $level }}">
-            <ul class="btn-toggle-nav list-unstyled fw-normal {{ if eq $level 0}} pb-1 {{ end }}ps-3">
+            {{/* When this group has a leading icon its own label sits an icon-width
+                 further right, so the child list is indented to match. Emitted here
+                 rather than derived in CSS: the collapse trail is expanded client
+                 side, and a selector that has to be re-resolved as the subtree goes
+                 from display:none to visible can land its first paint on the wrong
+                 value. A class in the cached markup is correct from the start. */}}
+            <ul class="btn-toggle-nav list-unstyled fw-normal {{ if eq $level 0}} pb-1 {{ end }}{{ if $pre }}sidebar-nav-icon-indent{{ else }}ps-3{{ end }}">
                 {{- range $childIndex, $item := $group.pages -}}
                     {{- if $item.pages -}}
                         {{/* Compose a unique index path through the recursion so
@@ -218,9 +222,7 @@
     {{- $collapsible := .collapsible | default false -}}
     {{- $prefixMatch := .prefixMatch | default false -}}
     {{- $filename    := .filename -}}
-    {{- if and site.Params.main.titleCase (not $page.Params.exact) -}}
-        {{- $title = title $title -}}
-    {{- end -}}
+    {{- $title = partial "utilities/TitleCase.html" (dict "page" $page "text" $title) -}}
     {{- $titleText   := $title -}}
     {{- if $collapsible -}}
         {{- $titleText = printf "<span class=\"sidebar-item-label ms-1\">%s</span>" $title -}}
@@ -408,7 +410,7 @@
                     {{- end -}}
                     {{- if and $avHref (not (hasSuffix $avHref "/")) -}}{{- $avHref = printf "%s/" $avHref -}}{{- end -}}
                     {{- $avTitle := .title -}}
-                    {{- if and site.Params.main.titleCase (not $page.Params.exact) -}}{{- $avTitle = title $avTitle -}}{{- end -}}
+                    {{- $avTitle = partial "utilities/TitleCase.html" (dict "page" $page "text" $avTitle) -}}
                     <li class="d-flex align-items-center sidebar-secondary-row">
                         <a class="sidebar-item text-decoration-none rounded flex-grow-1"
                            {{- if $collapsible }} data-sidebar-label="{{ $avTitle }}"{{ end }}

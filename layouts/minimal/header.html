@@ -7,7 +7,7 @@
 {{/* Initialize local variables */}}
 {{- $breakpoint := partialCached "utilities/GetBreakpoint.html" site -}}
 {{ $title := .Title }}
-{{ if and .Site.Params.main.titleCase (not .Params.exact) }}{{ $title = title $title }}{{ end }}
+{{ $title = partial "utilities/TitleCase.html" (dict "page" . "text" $title) }}
 
 <header>
 {{/* Display title */}}

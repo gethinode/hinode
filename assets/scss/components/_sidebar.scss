@@ -584,6 +584,23 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-footer .sidebar-seconda
     transform: translateX(-50%);
 }
 
+// Align a group's children with its label rather than its icon.
+//
+// A leading icon pushes the parent's own label right by the icon's width plus
+// its `me-1` gutter. `ps-3` is narrower than that, so a child list using it
+// sits slightly to the *left* of the label it belongs to and the hierarchy
+// reads as broken. Groups with an icon get this class from the template in
+// place of `ps-3`; groups without one are untouched.
+//
+// The template sets it rather than CSS deriving it with `:has()`. The collapse
+// trail is expanded client side, and a selector that must be re-resolved as a
+// subtree goes from display:none to visible can paint the old indent first and
+// correct it a frame later, which reads as the sidebar shifting on load.
+.sidebar-nav-icon-indent {
+    // Matches `fa-fw` (--fa-width: 1.25em) plus the icon's `me-1` gutter.
+    padding-left: calc(1.25rem + 0.25rem);
+}
+
 // scss-docs-end sidebar
 
 .dropdown-toggle {

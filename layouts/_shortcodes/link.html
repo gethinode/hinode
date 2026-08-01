@@ -20,7 +20,7 @@
 {{/* Initialize arguments */}}
 {{- $destination := or $args.href $args.name $args.url -}}
 {{- $text := chomp .Inner -}}
-{{- if and site.Params.main.titleCase (not .Page.Params.exact) }}{{ $text = title $text }}{{ end -}}
+{{- $text = partial "utilities/TitleCase.html" (dict "page" .Page "text" $text) -}}
 {{- $text = $text | .Page.RenderString | safeHTML -}}
 
 {{/* Main code */}}

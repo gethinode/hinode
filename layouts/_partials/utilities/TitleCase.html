@@ -1,0 +1,141 @@
+{{- /*
+    Applies title case to a string, honoring Hugo's `titleCaseStyle` setting.
+
+    Accepts rendered HTML: tags and character entities pass through untouched, so inline
+    markup such as `<code>` from a markdown backtick survives intact. The casing is applied
+    once to the concatenated text content and then mapped back onto the original by rune
+    position, which keeps stopword handling correct across tag boundaries.
+
+    Character entities contribute a single space to the plain string used for casing,
+    rather than nothing. Omitting them entirely would join the words on either side of the
+    entity, so the word right after it would never be treated as starting a word (e.g.
+    `the&nbsp;cat sat` would case to `The&nbsp;cat Sat` instead of `The&nbsp;Cat Sat`). The
+    entity itself is still always re-emitted verbatim in the output — only the *casing pass*
+    sees a space stand-in for it — and because a space cases to a space, the one-rune width
+    keeps the positional mapping back onto the original tokens exact.
+
+    Words listed in `site.Params.main.titleCaseExceptions` keep their exact spelling —
+    for lowercase-authored acronyms such as `npm`, which `title` would otherwise
+    capitalize to `Npm`. Each entry is matched as a whole word against its own
+    title-cased form (`\btitle($entry)\b`), so only that exact casing is restored; a
+    deliberately shouted spelling such as `NPM` does not match `\bNpm\b` and is left
+    alone. Entries must be plain words: Go's regexp has no `\Q…\E` escaping, so an entry
+    containing regex metacharacters would misbehave.
+
+    `titleCaseExceptions` must be a list. A scalar (e.g. a bare string, which is what a
+    TOML author typing `"npm"` instead of `["npm"]` produces, and what Hugo hands through
+    when the param is set via an `HUGO_PARAMS_MAIN_TITLECASEEXCEPTIONS` environment
+    variable) is rejected with `errorf` naming the param and the value received, rather
+    than being ranged over — which would otherwise fail later with an opaque
+    "range can't iterate over ..." template execution error.
+
+    Casing may only ever add capitals, never remove them: after `title` and the exception
+    restoration run, every rune the author wrote in uppercase is restored over whatever the
+    filter produced there. AP style lowercases stopwords ("and", "in", "on", "to", …)
+    regardless of how they were written, so an all-caps heading such as `AN INTRODUCTION TO
+    THE THING` would otherwise come back with its stopwords lowercased, and an authored
+    acronym or keyword like `<code>AND</code>` would lose its case too. `titleCaseExceptions`
+    cannot fix this: it matches a word against its *title-cased* form, but by the time it
+    runs the stopword is already lowercased and no longer matches. This restoration is a
+    single pass over the whole cased string — not per text token in the mapping loop — run
+    immediately after the exception restoration, on `$result` in the fast path and on
+    `$cased` in the slow path (before the rune split, since the length guard below compares
+    `$cased` against `$plain`).
+
+    @param {string} text  Plain string or rendered HTML.
+    @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
+    @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
+
+    @returns {string} The title-cased text, or the input unchanged when title casing is
+                      disabled, opted out of, or cannot be applied safely.
+*/ -}}
+
+{{- $text := .text -}}
+{{- $result := $text -}}
+{{- $exceptions := site.Params.main.titleCaseExceptions | default slice -}}
+{{- if not (hasPrefix (printf "%T" $exceptions) "[]") -}}
+    {{- errorf "Expected list value in site parameters: main.titleCaseExceptions (got %T: %v)" $exceptions $exceptions -}}
+    {{- $exceptions = slice -}}
+{{- end -}}
+
+{{- $exact := false -}}
+{{- if isset . "exact" -}}
+    {{- $exact = .exact -}}
+{{- else -}}
+    {{- with .page -}}{{- $exact = .Params.exact -}}{{- end -}}
+{{- end -}}
+
+{{- if and site.Params.main.titleCase (not $exact) $text -}}
+    {{- if not (or (strings.Contains $text "<") (strings.Contains $text "&")) -}}
+        {{/* Fast path: no markup and no entities, so the filter can be applied directly. */}}
+        {{- $result = title $text -}}
+        {{- range $exceptions -}}
+            {{- $result = replaceRE (printf `\b%s\b` (title .)) . $result -}}
+        {{- end -}}
+        {{/* Never lowercase an authored capital (see doc block above). */}}
+        {{- if ne $text (lower $text) -}}
+            {{- $pr := split $text "" -}}
+            {{- $cr := split $result "" -}}
+            {{- if eq (len $pr) (len $cr) -}}
+                {{- $m := slice -}}
+                {{- range $i, $r := $pr -}}
+                    {{- $m = $m | append (cond (eq $r (upper $r)) $r (index $cr $i)) -}}
+                {{- end -}}
+                {{- $result = delimit $m "" -}}
+            {{- end -}}
+        {{- end -}}
+    {{- else -}}
+        {{/* Split into tags, character entities, and text runs. Only the text runs are cased. */}}
+        {{- $tokens := findRE `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]` $text -}}
+        {{- $plain := slice -}}
+        {{- range $tokens -}}
+            {{- if and (hasPrefix . "<") (hasSuffix . ">") -}}
+            {{- else if and (hasPrefix . "&") (hasSuffix . ";") -}}
+                {{- $plain = $plain | append " " -}}
+            {{- else -}}
+                {{- $plain = $plain | append . -}}
+            {{- end -}}
+        {{- end -}}
+        {{- $plain = delimit $plain "" -}}
+        {{- $cased := title $plain -}}
+        {{- range $exceptions -}}
+            {{- $cased = replaceRE (printf `\b%s\b` (title .)) . $cased -}}
+        {{- end -}}
+        {{/* Never lowercase an authored capital (see doc block above). Must run before the
+             rune split, since the length guard below compares $cased against $plain. */}}
+        {{- if ne $plain (lower $plain) -}}
+            {{- $pr := split $plain "" -}}
+            {{- $cr := split $cased "" -}}
+            {{- if eq (len $pr) (len $cr) -}}
+                {{- $m := slice -}}
+                {{- range $i, $r := $pr -}}
+                    {{- $m = $m | append (cond (eq $r (upper $r)) $r (index $cr $i)) -}}
+                {{- end -}}
+                {{- $cased = delimit $m "" -}}
+            {{- end -}}
+        {{- end -}}
+        {{- $runes := split $cased "" -}}
+
+        {{/* The filter only changes case, so lengths must match. If they ever do not, the
+             positional mapping would corrupt the markup — return the input untouched. */}}
+        {{- if eq (len $runes) (len (split $plain "")) -}}
+            {{- $out := slice -}}
+            {{- $pos := 0 -}}
+            {{- range $tokens -}}
+                {{- if and (hasPrefix . "<") (hasSuffix . ">") -}}
+                    {{- $out = $out | append . -}}
+                {{- else if and (hasPrefix . "&") (hasSuffix . ";") -}}
+                    {{- $out = $out | append . -}}
+                    {{- $pos = add $pos 1 -}}
+                {{- else -}}
+                    {{- $n := len (split . "") -}}
+                    {{- $out = $out | append (delimit (first $n (after $pos $runes)) "") -}}
+                    {{- $pos = add $pos $n -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $result = delimit $out "" -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

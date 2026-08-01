@@ -38,7 +38,7 @@
 {{- range $index, $item := $args.page.Ancestors.Reverse -}}
     {{- $title := .LinkTitle -}}
     {{- if .IsHome }}{{ $title = T "home" }}{{ end -}}
-    {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+    {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title) }}
     {{- $address := or .RelPermalink .Params.Redirect -}}
     {{ if and $title $address}}
         {{ $items = $items | append (dict "title" $title "address" $address) }}
@@ -66,12 +66,12 @@
             {{- $length := len $items }}
             {{- range $index, $item := $items -}}
                 {{ $title := $item.title }}
-                {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+                {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title) }}
                 <li class="breadcrumb-item"><a href="{{ $item.address }}">{{ $title }}</a></li>
             {{- end -}}
             <li class="breadcrumb-item active" aria-current="page">
                 {{ $title := $args.page.LinkTitle }}
-                {{ if and site.Params.main.titleCase (not $args.page.Params.exact) }}{{ $title = title $title }}{{ end }}
+                {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title) }}
                 {{ $title }}
             </li>
         </ol>

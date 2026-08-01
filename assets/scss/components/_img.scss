@@ -9,6 +9,20 @@
     object-fit: cover;
 }
 
+// `assets/image.html` inlines SVG sources, so an SVG thumbnail is never an
+// `<img>` and the rule above never reaches it. It falls back to its intrinsic
+// `width` attribute and sits flush left in a wider column -- a 640px asset
+// leaves 208px of dead space in an 848px column, narrower than the body text
+// it sits between.
+//
+// Fill the wrapper like a raster thumbnail. `height` follows the viewBox rather
+// than being forced to 100%: an SVG has no useful `object-fit` equivalent here,
+// and the aspect ratio is already carried by the viewBox.
+.img-wrap > svg {
+    width: 100%;
+    height: auto;
+}
+
 .card-img-h100 {
     width: auto;
     height: 100%;
