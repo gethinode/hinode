@@ -3,13 +3,16 @@
     publish = "exampleSite/public"
     command = "git fetch --tags --force > /dev/null 2>&1; HUGO_HINODE_VERSION=$(git describe --tags --abbrev=0 2> /dev/null) npm run build:example"
 
+# HUGO_VERSION is deliberately absent. The build invokes `hugo` from an npm script, which
+# resolves to node_modules/.bin/hugo provided by the hugo-extended dependency, so the
+# binary Netlify installs would be downloaded and then never used. The pin lives in
+# package.json, which is the single source of truth for the Hugo version.
 [build.environment]
     DART_SASS_VERSION = "1.98.0"
     # Relax Go garbage collection during CI builds (Go default is GOGC=100). Measured locally on
     # the exampleSite build, GOGC=800 saved 6-7 CPU-seconds; 400 is the conservative pick as CI
     # runners have less RAM. Local defaults are intentionally unchanged.
     GOGC = "400"
-    HUGO_VERSION = "0.153.1"
     HUGO_ENV = "production"
     HUGO_ENABLEGITINFO = "true"
     NODE_VERSION = "24.12.0"
