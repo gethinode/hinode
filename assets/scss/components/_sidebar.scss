@@ -9,6 +9,12 @@ $sidebar-collapse-refinement-transition-delayed: text-align 0s $sidebar-collapse
 $sidebar-collapse-clipping-transition: white-space 0s allow-discrete, overflow 0s allow-discrete !default;
 $sidebar-collapse-clipping-transition-delayed: white-space 0s $sidebar-collapse-transition-duration allow-discrete, overflow 0s $sidebar-collapse-transition-duration allow-discrete !default;
 
+// The widest a sidebar label may get, and the open end of its collapse
+// transition - `max-width` cannot animate from `none`, so this has to be a
+// definite length. Only an upper bound: a label with less room than this is
+// capped by the room instead (see `.sidebar-item-label`).
+$sidebar-label-max-width: 200px !default;
+
 // scss-docs-start sidebar
 .sidebar {
     top: var(--navbar-offset);
@@ -130,6 +136,51 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
     padding: 0.1875rem 0 0.1875rem 0.5rem !important;
 }
 
+// Hanging indent for rows that lead with an icon.
+//
+// A sidebar row is a single block-level anchor holding an inline icon followed by
+// the label text, so a label long enough to wrap starts its second line at the
+// anchor's content edge - underneath the icon - instead of under the first line's
+// text. The icon occupies a fixed column (the template renders it `.fa-fw`, which
+// is 1.25em) and `.me-1` supplies the gap to the label, so the two can be
+// reclaimed as a hanging indent: pad the block out by that width and pull the
+// first line back by the same amount. Single-line rows are unaffected - the
+// padding and the outdent cancel - and only continuation lines move.
+//
+// The width is repeated here rather than shared through a variable because it
+// mirrors the utility classes the template emits, not a design knob: retuning it
+// without changing `assets/sidebar.html` would only break the alignment.
+$sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
+
+// Scoped three ways:
+//
+//   * `:has()` on a leading icon, because a row without one must keep its text
+//     flush with the padding edge - a blanket rule would outdent its first line.
+//   * Not `.d-flex`, the shape a downstream row with a trailing suffix icon uses
+//     (see the collapsed-mode block below). `text-indent` does not apply to a
+//     flex container, so the padding would shift such a row without the outdent
+//     to cancel it - and a flex row already aligns its wrapped text correctly.
+//   * Not a collapsible sidebar. There the label is a `.sidebar-item-label` span
+//     that is `white-space: nowrap` by design, so it never wraps; its gap to the
+//     icon is `.me-1` plus the span's own `.ms-1`, so this width would be wrong;
+//     and its geometry is sequenced by the collapse choreography below, which a
+//     padding change lands outside of.
+.sidebar:not(.sidebar-collapsible) {
+    // `padding-left` needs `!important` only because the base `.sidebar-item`
+    // padding above carries one.
+    .sidebar-item:not(.d-flex):has(> svg:first-child, > i:first-child) {
+        padding-left: calc(0.5rem + #{$sidebar-item-icon-column}) !important;
+        text-indent: calc(-1 * #{$sidebar-item-icon-column});
+    }
+
+    // Group headers carry no padding of their own - it sits on the wrapping
+    // `.sidebar-item-group > div` - so the indent is the icon column alone.
+    .sidebar-item-group > div > a:has(> svg:first-child, > i:first-child) {
+        padding-left: $sidebar-item-icon-column;
+        text-indent: calc(-1 * #{$sidebar-item-icon-column});
+    }
+}
+
 .btn-toggle-group {
     padding: 0.25rem 0.5rem;
     font-weight: 600;
@@ -248,9 +299,39 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-item-label {
     }
 }
 
+// Cap the label at the room actually left beside the icon.
+//
+// `$sidebar-label-max-width` is a fixed length because the collapse transition
+// needs one, which leaves it blind to the track it sits in. The label is an
+// inline-block that neither shrinks to fit nor is clipped by its row, so once
+// the icon and a full-width label no longer fit side by side, the whole label
+// box drops onto a second line underneath the icon - doubling the row height -
+// and in a narrower track it then spills out past the sidebar's edge. Hinode
+// does not set the sidebar's width (a downstream theme does, see
+// `.app-shell-sidebar`), so the fixed cap and the real track are free to
+// disagree; measured against a 6-row menu, rows start dropping at a 240px track
+// and start spilling at 208px.
+//
+// `min()` keeps the fixed cap wherever it still fits and yields to the
+// remaining room where it does not, so a track of 256px or wider renders
+// exactly as before. The row publishes its own budget as a custom property so
+// the label keeps one low-specificity `max-width` declaration and the collapsed
+// states below still override it on the cascade. The subtrahends are the
+// label's own `.ms-1` and, for a row that leads with an icon, the icon column.
+.sidebar-item {
+    --sidebar-label-max: min(#{$sidebar-label-max-width}, calc(100% - #{$spacer * 0.25}));
+
+    &:has(> svg:first-child, > i:first-child) {
+        --sidebar-label-max: min(
+            #{$sidebar-label-max-width},
+            calc(100% - #{$sidebar-item-icon-column} - #{$spacer * 0.25})
+        );
+    }
+}
+
 .sidebar-item-label {
     display: inline-block;
-    max-width: 200px;
+    max-width: var(--sidebar-label-max, #{$sidebar-label-max-width});
     overflow: hidden;
     white-space: nowrap;
     vertical-align: middle;
