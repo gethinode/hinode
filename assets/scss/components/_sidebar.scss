@@ -9,6 +9,12 @@ $sidebar-collapse-refinement-transition-delayed: text-align 0s $sidebar-collapse
 $sidebar-collapse-clipping-transition: white-space 0s allow-discrete, overflow 0s allow-discrete !default;
 $sidebar-collapse-clipping-transition-delayed: white-space 0s $sidebar-collapse-transition-duration allow-discrete, overflow 0s $sidebar-collapse-transition-duration allow-discrete !default;
 
+// The widest a sidebar label may get, and the open end of its collapse
+// transition - `max-width` cannot animate from `none`, so this has to be a
+// definite length. Only an upper bound: a label with less room than this is
+// capped by the room instead (see `.sidebar-item-label`).
+$sidebar-label-max-width: 200px !default;
+
 // scss-docs-start sidebar
 .sidebar {
     top: var(--navbar-offset);
@@ -293,9 +299,39 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-item-label {
     }
 }
 
+// Cap the label at the room actually left beside the icon.
+//
+// `$sidebar-label-max-width` is a fixed length because the collapse transition
+// needs one, which leaves it blind to the track it sits in. The label is an
+// inline-block that neither shrinks to fit nor is clipped by its row, so once
+// the icon and a full-width label no longer fit side by side, the whole label
+// box drops onto a second line underneath the icon - doubling the row height -
+// and in a narrower track it then spills out past the sidebar's edge. Hinode
+// does not set the sidebar's width (a downstream theme does, see
+// `.app-shell-sidebar`), so the fixed cap and the real track are free to
+// disagree; measured against a 6-row menu, rows start dropping at a 240px track
+// and start spilling at 208px.
+//
+// `min()` keeps the fixed cap wherever it still fits and yields to the
+// remaining room where it does not, so a track of 256px or wider renders
+// exactly as before. The row publishes its own budget as a custom property so
+// the label keeps one low-specificity `max-width` declaration and the collapsed
+// states below still override it on the cascade. The subtrahends are the
+// label's own `.ms-1` and, for a row that leads with an icon, the icon column.
+.sidebar-item {
+    --sidebar-label-max: min(#{$sidebar-label-max-width}, calc(100% - #{$spacer * 0.25}));
+
+    &:has(> svg:first-child, > i:first-child) {
+        --sidebar-label-max: min(
+            #{$sidebar-label-max-width},
+            calc(100% - #{$sidebar-item-icon-column} - #{$spacer * 0.25})
+        );
+    }
+}
+
 .sidebar-item-label {
     display: inline-block;
-    max-width: 200px;
+    max-width: var(--sidebar-label-max, #{$sidebar-label-max-width});
     overflow: hidden;
     white-space: nowrap;
     vertical-align: middle;
