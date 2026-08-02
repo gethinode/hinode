@@ -8,6 +8,8 @@
     footerBelowFold = false
     loading = "lazy"
     breakpoint = "md"
+    sectionHeight = "88vh"
+    maxSectionHeight = "1024px"
     titleCase = false
     titleCaseExceptions = []
     [main.padding]
