@@ -59,8 +59,16 @@ body {
 .main {
     --navbar-height: #{$navbar-height};
     --overlay-offset: #{$overlay-offset};
-    --section-height: 88vh;
-    --max-section-height: 1024px;
+
+    // Height of a cover section (`cover: true`), set from `main.sectionHeight`.
+    // The default 88vh deliberately falls short of the viewport so the next
+    // section peeks above the fold and invites scrolling; set it to 100vh for a
+    // true full-screen hero. `--max-section-height` (`main.maxSectionHeight`)
+    // caps it on xxl and tall viewports — raise that too, or a 100vh section
+    // still stops at 1024px there. Both are plain custom properties, so a
+    // downstream theme can also override them per page or per section.
+    --section-height: #{$section-height};
+    --max-section-height: #{$max-section-height};
 
     flex: 1;
 }
