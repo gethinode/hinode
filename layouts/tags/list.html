@@ -16,7 +16,7 @@
                         {{ end -}}
                     {{- end -}}
 
-                    <p class="display-4 mt-5">{{ $pageTitle }}</p>
+                    <h1 class="display-4 mt-5 mb-3">{{ $pageTitle }}</h1>
 
                     {{ if eq .Kind "taxonomy" }}
                         {{- partial "page/taxonomy-list.html" . -}}

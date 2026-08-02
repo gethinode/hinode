@@ -83,3 +83,14 @@ has no arguments. This is the most natural nav usage and it used to crash the bu
 {{< nav >}}
 {{< nav-item title="Only tab" show="true" >}}A single-item nav whose parent has no arguments.{{< /nav-item >}}
 {{< /nav >}}
+
+## Nav with a shown tab that is not the first
+
+Rendered directly: `show="true"` sits on the third item, so the shown tab and the
+tab at index 0 are different elements.
+
+{{< nav id="nav-show-fixture" >}}
+{{< nav-item title="Tab 1" >}}First tab pane, not shown.{{< /nav-item >}}
+{{< nav-item title="Tab 2" >}}Second tab pane, not shown.{{< /nav-item >}}
+{{< nav-item title="Tab 3" show="true" >}}Third tab pane, shown on load.{{< /nav-item >}}
+{{< /nav >}}

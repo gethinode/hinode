@@ -10,9 +10,10 @@
 {{ $title := .Title }}
 {{ $title = partial "utilities/TitleCase.html" (dict "page" . "text" $title) }}
 
+<header>
 {{/* Render breadcrumb */}}
 {{ if .Site.Params.navigation.breadcrumb }}{{ partial "assets/breadcrumb.html" (dict "page" .) }}{{ end -}}
-               
+
 {{/* Display title and metadata */}}
 {{ with $title }}<h1 id="{{ anchorize . }}" class="{{ $headingStyle }}-{{ $size }} pt-1">{{ . }}</h1>{{ end }}
 
@@ -31,6 +32,7 @@
 {{ with .Description }}
     <div class="{{ $contentStyle }} {{ partial "utilities/PaddingClasses.html" (dict "padding" $padding "axis" "y") }}">{{ . | $.RenderString | safeHTML }}</div>
 {{ end }}
+</header>
 
 {{/* Display TOC dropdown on smaller screens */}}
 {{- if .Scratch.Get "includeToc" -}}
