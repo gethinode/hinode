@@ -130,6 +130,51 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
     padding: 0.1875rem 0 0.1875rem 0.5rem !important;
 }
 
+// Hanging indent for rows that lead with an icon.
+//
+// A sidebar row is a single block-level anchor holding an inline icon followed by
+// the label text, so a label long enough to wrap starts its second line at the
+// anchor's content edge - underneath the icon - instead of under the first line's
+// text. The icon occupies a fixed column (the template renders it `.fa-fw`, which
+// is 1.25em) and `.me-1` supplies the gap to the label, so the two can be
+// reclaimed as a hanging indent: pad the block out by that width and pull the
+// first line back by the same amount. Single-line rows are unaffected - the
+// padding and the outdent cancel - and only continuation lines move.
+//
+// The width is repeated here rather than shared through a variable because it
+// mirrors the utility classes the template emits, not a design knob: retuning it
+// without changing `assets/sidebar.html` would only break the alignment.
+$sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
+
+// Scoped three ways:
+//
+//   * `:has()` on a leading icon, because a row without one must keep its text
+//     flush with the padding edge - a blanket rule would outdent its first line.
+//   * Not `.d-flex`, the shape a downstream row with a trailing suffix icon uses
+//     (see the collapsed-mode block below). `text-indent` does not apply to a
+//     flex container, so the padding would shift such a row without the outdent
+//     to cancel it - and a flex row already aligns its wrapped text correctly.
+//   * Not a collapsible sidebar. There the label is a `.sidebar-item-label` span
+//     that is `white-space: nowrap` by design, so it never wraps; its gap to the
+//     icon is `.me-1` plus the span's own `.ms-1`, so this width would be wrong;
+//     and its geometry is sequenced by the collapse choreography below, which a
+//     padding change lands outside of.
+.sidebar:not(.sidebar-collapsible) {
+    // `padding-left` needs `!important` only because the base `.sidebar-item`
+    // padding above carries one.
+    .sidebar-item:not(.d-flex):has(> svg:first-child, > i:first-child) {
+        padding-left: calc(0.5rem + #{$sidebar-item-icon-column}) !important;
+        text-indent: calc(-1 * #{$sidebar-item-icon-column});
+    }
+
+    // Group headers carry no padding of their own - it sits on the wrapping
+    // `.sidebar-item-group > div` - so the indent is the icon column alone.
+    .sidebar-item-group > div > a:has(> svg:first-child, > i:first-child) {
+        padding-left: $sidebar-item-icon-column;
+        text-indent: calc(-1 * #{$sidebar-item-icon-column});
+    }
+}
+
 .btn-toggle-group {
     padding: 0.25rem 0.5rem;
     font-weight: 600;
