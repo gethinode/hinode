@@ -34,3 +34,10 @@ h6 {
 .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
     scroll-margin-top: var(--navbar-offset);
 }
+
+// Section titles reset their element margins so a heading occupies the same box as the div it
+// replaces. A list page's own title opts back in to the spacing the h1 rule above provides.
+.section-title-lead {
+    margin-top: $spacer * 2.5;
+    margin-bottom: $spacer * 0.5;
+}

@@ -12,6 +12,22 @@ arguments:
   class:
   size:
   use-title:
+  heading-level:
+    type: int
+    optional: true
+    release: v3.19.0
+    comment: >-
+      Heading level of the title, from 1 (h1) to 6 (h6). Defaults to 0, which
+      renders a div instead of a heading. Content blocks receive a level from
+      the page that renders them, so the first titled block of a page without a
+      page header becomes its h1.
+  heading-class:
+    type: string
+    optional: true
+    release: v3.19.0
+    comment: >-
+      Classes for the heading element. Replaces the margin reset that otherwise
+      keeps a heading aligned with the div it succeeds.
   justify:
   link-type:
   use-section:
