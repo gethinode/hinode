@@ -29,6 +29,12 @@ arguments:
     release: v0.24.13
   filter:
   filter-col:
+  justify:
+    comment: >-
+      Horizontal alignment of the filter controls. Requires `filter`, which is
+      the only element this argument positions — the table itself always spans
+      the full width of its container.
+    release: v3.18.0
   wrap:
   wrapper:
     release: v2.0.0

@@ -49,6 +49,18 @@ modules: ["simple-datatables"]
 | delta   | gadget | The fourth record, whose description runs on for a little while.   |
 {{< /table >}}
 
+## Centered filter controls
+
+{{< table filter="widget, gadget" filter-col="1" justify="center" class="fixture-filter-center" >}}
+
+| Name    | Type   | Description                                                        |
+|---------|--------|--------------------------------------------------------------------|
+| alpha   | widget | The first record, with a description long enough to need wrapping. |
+| bravo   | gadget | The second record, also with a fairly long trailing description.   |
+| charlie | widget | The third record. Short.                                           |
+| delta   | gadget | The fourth record, whose description runs on for a little while.   |
+{{< /table >}}
+
 ## Filtered, sortable, wrapped data table
 
 {{< table filter="widget,gadget" filter-col="1" sortable="true" paginate="true" pagination="2" wrap="true" class="fixture-filter-wrap" >}}
