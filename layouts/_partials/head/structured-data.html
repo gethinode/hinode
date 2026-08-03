@@ -1,21 +1,22 @@
 {{/* Copied from doks */}}
 {{ $baseURL := "/" | absURL -}}
 
-{{ $dot := . -}}
-{{ $dot.Scratch.Set "path" "" -}}
-{{ $dot.Scratch.Set "breadcrumb" slice -}}
-
-{{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" -}}
-{{ $.Scratch.Add "path" .Site.BaseURL -}}
-
-{{ $.Scratch.Add "breadcrumb" (slice (dict "url" .Site.BaseURL "name" "home" "position" 1 )) -}}
-  {{ range $index, $element := split $url "/" -}}
-    {{ $dot.Scratch.Add "path" $element -}}
-    {{ $.Scratch.Add "path" "/" -}}
-    {{ if ne $element "" -}}
-    {{ $.Scratch.Add "breadcrumb" (slice (dict "url" ($.Scratch.Get "path") "name" . "position" (add $index 2))) -}}
-  {{ end -}}
+{{/* Build the breadcrumb trail from the page ancestry. Reconstructing it by trimming
+     baseURL off .Permalink and splitting the remainder breaks on a relative baseURL:
+     `replace` is global, so a baseURL of "/" strips every separator in the path and the
+     trail collapses to a single mangled entry. .Ancestors is independent of how baseURL
+     is configured, and carries each page's LinkTitle rather than a URL segment. */ -}}
+{{ $breadcrumb := slice -}}
+{{ range .Ancestors.Reverse -}}
+  {{ $breadcrumb = $breadcrumb | append (dict
+      "url" .Permalink
+      "name" (cond .IsHome (T "home") .LinkTitle)
+      "position" (add (len $breadcrumb) 1)) -}}
 {{ end -}}
+{{ $breadcrumb = $breadcrumb | append (dict
+    "url" .Permalink
+    "name" (cond .IsHome (T "home") .LinkTitle)
+    "position" (add (len $breadcrumb) 1)) -}}
 
 {{ $alt := slice .Site.Params.schema.twitter .Site.Params.schema.linkedin .Site.Params.schema.github }}
 
@@ -112,18 +113,14 @@
       "@type": "BreadcrumbList",
       "@id": {{ print .Permalink "#/schema/breadcrumb/1" }},
       "name": "Breadcrumbs",
-      "itemListElement": [{{ $list := $.Scratch.Get "breadcrumb" }}{{ $len := (len $list) }}{{ range $index, $element := $list }}{{ if ne .position 1 }},{{ end }}{
+      "itemListElement": [{{ range $index, $element := $breadcrumb }}{{ if $index }},{{ end }}{
         "@type": "ListItem",
         "position": {{ .position }},
         "item": {
-          {{ if ne (add $index 1) $len -}}
           "@type": "WebPage",
           "@id": {{ .url }},
           "url": {{ .url }},
-          "name": "{{ .name | humanize | title }}"
-          {{ else -}}
-          "@id": {{ .url }}
-          {{ end -}}
+          "name": {{ .name }}
         }
         }{{ end }}]
     },
