@@ -126,8 +126,11 @@
 
     {{ $wrapper := $args.wrapper | default "" }}
 
+    {{/* The controls sit in their own flex row, so they align independently of the table below —
+         which always spans the full width of its container. `justify` carries a default of
+         `start` in mod-utils, preserving the original alignment for every existing caller. */}}
     {{ if $filter }}
-    <div class="table-filter-controls d-flex justify-content-start mb-3">
+    <div class="table-filter-controls d-flex justify-content-{{ $args.justify }} mb-3">
         <div class="btn-group" role="group" aria-label="{{ T "tableFilterLabel" | default "Filter" }}">
             <button type="button"
                     class="btn btn-outline-primary active"
