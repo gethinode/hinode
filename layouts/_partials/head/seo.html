@@ -62,6 +62,25 @@
     {{ end -}}
 
     <meta name="description" content="{{ $.Scratch.Get "description" }}">
+
+{{/* Self-referencing canonical URL.
+
+     Emitted for regular pages only. On a list page .Permalink is pager-invariant —
+     while rendering /blog/page/2/ it still reports /blog/ — so emitting it there would
+     canonicalize every pager onto page 1, which Google's pagination guidance advises
+     against. The URL of the current pager is reachable only through .Paginator, and
+     touching that here is not an option: it builds the paginator with the site's default
+     page size before a layout can call .Paginate with its own, after which Hugo silently
+     ignores the layout's size rather than raising an error.
+
+     Set `canonical` in front matter to emit one anyway — on a section landing page that
+     is known not to paginate, for example, or to point a duplicate at its original. */ -}}
+{{ $canonical := or .Params.canonical .Params.meta.canonical -}}
+{{ if and (not $canonical) (eq .Kind "page") }}{{ $canonical = .Permalink }}{{ end -}}
+{{ with $canonical -}}
+    <link rel="canonical" href="{{ . | absURL }}">
+{{ end -}}
+
 {{ partial "head/opengraph.html" . }}
 {{ partial "head/twitter_cards.html" . }}
 
