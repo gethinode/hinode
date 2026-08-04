@@ -156,3 +156,74 @@ FAIL in={{ index . 0 }}
 {{- end }}
 
 TOC FAILURES: {{ $tocFail }}
+
+{{- /*
+    Assertions for assets/section-title.html.
+
+    Each case renders the partial and compares the opening tag of the title element —
+    matched by its id attribute, which the surrounding wrapper div lacks. The harness
+    leaves site.Params.style unset, so every case builds on the partial's own defaults:
+    heading style "display", size 4, color "body".
+
+    The cases pin the level resolution (nil keeps the div, use-title maps onto level 1,
+    an explicit heading-level beats use-title, out-of-range falls back to the div), the
+    tag composition per level, and the class handling: a heading-level title receives the
+    margin reset — plus the weight and line-height reset under the "fs" heading style —
+    while a use-title title keeps the classes the h1 has always had, and a caller-supplied
+    heading-class always wins, including the empty string.
+*/ -}}
+{{- $stFail := 0 -}}
+{{- $stPage := site.GetPage "/blog/without-exact" -}}
+{{- $stCases := slice
+  (dict "case" "nil level keeps the div"
+        "args" (dict "heading" (dict "title" "Probe Nil"))
+        "want" `<div id="probe-nil" class="display-4 text-body pt-1">`)
+  (dict "case" "use-title maps onto level 1 with unchanged classes"
+        "args" (dict "heading" (dict "title" "Probe Legacy") "use-title" true)
+        "want" `<h1 id="probe-legacy" class="display-4 text-body pt-1">`)
+  (dict "case" "use-title with fs style keeps its weight and line height"
+        "args" (dict "heading" (dict "title" "Probe Legacy Fs") "use-title" true "heading-style" "fs")
+        "want" `<h1 id="probe-legacy-fs" class="fs-4 text-body pt-1">`)
+  (dict "case" "heading-level renders its tag with the margin reset"
+        "args" (dict "heading" (dict "title" "Probe Level Two") "heading-level" 2)
+        "want" `<h2 id="probe-level-two" class="display-4 text-body pt-1 mt-0 mb-0">`)
+  (dict "case" "heading-level six is the last valid level"
+        "args" (dict "heading" (dict "title" "Probe Level Six") "heading-level" 6)
+        "want" `<h6 id="probe-level-six" class="display-4 text-body pt-1 mt-0 mb-0">`)
+  (dict "case" "heading-level with fs style also resets weight and line height"
+        "args" (dict "heading" (dict "title" "Probe Level Fs") "heading-level" 2 "heading-style" "fs")
+        "want" `<h2 id="probe-level-fs" class="fs-4 text-body pt-1 mt-0 mb-0 fw-normal lh-base">`)
+  (dict "case" "explicit heading-level beats use-title"
+        "args" (dict "heading" (dict "title" "Probe Both") "heading-level" 3 "use-title" true)
+        "want" `<h3 id="probe-both" class="display-4 text-body pt-1 mt-0 mb-0">`)
+  (dict "case" "explicit level zero keeps the div"
+        "args" (dict "heading" (dict "title" "Probe Zero") "heading-level" 0)
+        "want" `<div id="probe-zero" class="display-4 text-body pt-1">`)
+  (dict "case" "level above six warns and falls back to the div"
+        "args" (dict "heading" (dict "title" "Probe Nine") "heading-level" 9)
+        "want" `<div id="probe-nine" class="display-4 text-body pt-1">`)
+  (dict "case" "negative level warns and falls back to the div"
+        "args" (dict "heading" (dict "title" "Probe Minus") "heading-level" -1)
+        "want" `<div id="probe-minus" class="display-4 text-body pt-1">`)
+  (dict "case" "empty heading-class leaves the element on its own styling"
+        "args" (dict "heading" (dict "title" "Probe Bare") "heading-level" 2 "heading-class" "")
+        "want" `<h2 id="probe-bare" class="display-4 text-body pt-1">`)
+  (dict "case" "heading-class replaces the reset"
+        "args" (dict "heading" (dict "title" "Probe Classy") "heading-level" 2 "heading-class" "my-4")
+        "want" `<h2 id="probe-classy" class="display-4 text-body pt-1 my-4">`)
+-}}
+{{- range $stCases -}}
+{{- $stGot := partial "assets/section-title.html" (merge (dict "page" $stPage) .args) -}}
+{{- $stEl := index (findRE `<(?:h[1-6]|div) id="[^>]*>` $stGot 1) 0 -}}
+{{- if eq $stEl .want }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ .want }}
+     got ={{ $stEl }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "section-title mismatch: case=%q want=%q got=%q" .case .want $stEl -}}
+{{- end -}}
+{{- end }}
+
+SECTION TITLE FAILURES: {{ $stFail }}

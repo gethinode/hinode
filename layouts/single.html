@@ -7,7 +7,9 @@
     {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}
 
     {{/* The header below renders only for a page that carries content, and it owns the h1 when it
-         does. Tell the blocks which level to start at so the page has exactly one. */}}
+         does, so blocks start at 2 there and at 1 otherwise. Blocks render ahead of that header,
+         so a page carrying both leads with its block titles at level 2 and reaches its h1 below
+         them. */}}
     {{- partial "page/blocks.html" (dict
         "page"          .
         "heading-level" (cond (gt (len .RawContent) 0) 2 1)

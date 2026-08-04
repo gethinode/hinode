@@ -46,7 +46,8 @@
 {{/* Read the heading level. An explicit heading-level wins, the legacy use-title boolean maps onto
      level 1, and a caller that asks for neither keeps the div this partial has always rendered. */}}
 {{- $level := $args.headingLevel -}}
-{{- if eq $level nil }}{{ $level = cond $args.useTitle 1 0 }}{{ end -}}
+{{- $levelled := ne $level nil -}}
+{{- if not $levelled }}{{ $level = cond $args.useTitle 1 0 }}{{ end -}}
 {{- if or (lt $level 0) (gt $level 6) -}}
     {{- partial "utilities/LogWarn.html" (dict
         "partial" "assets/section-title.html"
@@ -58,12 +59,18 @@
     {{- $level = 0 -}}
 {{- end -}}
 
-{{/* A heading carries margins that the div it replaces does not, and with the "fs" heading style
-     it also picks up Bootstrap's heading weight and line height. Reset those so the element
-     occupies the same box at every level, unless the caller supplies its own classes. */}}
-{{- $reset := "mt-0 mb-0" -}}
-{{- if eq $headingStyle "fs" }}{{ $reset = printf "%s fw-normal lh-base" $reset }}{{ end -}}
-{{- $headingClass := $args.headingClass | default $reset -}}
+{{/* Classes for the heading element. A caller-supplied heading-class always wins, including an
+     empty string, which leaves the element on its own styling. Without one, a heading-level title
+     resets the margins that a heading carries and the div it replaces does not, plus the weight
+     and line height that the "fs" heading style leaves to Bootstrap; a use-title title keeps the
+     styling the h1 has always had. */}}
+{{- $headingClass := "" -}}
+{{- if isset $args "headingClass" -}}
+    {{- $headingClass = $args.headingClass -}}
+{{- else if $levelled -}}
+    {{- $headingClass = "mt-0 mb-0" -}}
+    {{- if eq $headingStyle "fs" }}{{ $headingClass = printf "%s fw-normal lh-base" $headingClass }}{{ end -}}
+{{- end -}}
 
 {{ $preheading = partial "utilities/TitleCase.html" (dict "page" $page "text" $preheading) }}
 {{ $title = partial "utilities/TitleCase.html" (dict "page" $page "text" $title) }}
