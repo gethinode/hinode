@@ -43,32 +43,67 @@
 {{- if and (not $preheading) $args.useSection }}{{ $preheading = $page.CurrentSection.Name }}{{ end -}}
 {{- $justify := cond (eq $args.justify "start") "" (cond (eq $args.justify "end") "me-0" "mx-auto") -}}
 
+{{/* Read the heading level. An explicit heading-level wins, the legacy use-title boolean maps onto
+     level 1, and a caller that asks for neither keeps the div this partial has always rendered. */}}
+{{- $level := $args.headingLevel -}}
+{{- $levelled := ne $level nil -}}
+{{- if not $levelled }}{{ $level = cond $args.useTitle 1 0 }}{{ end -}}
+{{- if or (lt $level 0) (gt $level 6) -}}
+    {{- partial "utilities/LogWarn.html" (dict
+        "partial" "assets/section-title.html"
+        "warnid"  "warn-invalid-heading-level"
+        "msg"     (printf "Heading level %d is out of range, falling back to a div" $level)
+        "details" (slice "Use a level between 1 and 6, or 0 to render a div")
+        "file"    $page.File
+    ) -}}
+    {{- $level = 0 -}}
+{{- end -}}
+
+{{/* Classes for the heading element. A caller-supplied heading-class always wins, including an
+     empty string, which leaves the element on its own styling. Without one, a heading-level title
+     resets the margins that a heading carries and the div it replaces does not, plus the weight
+     and line height that the "fs" heading style leaves to Bootstrap; a use-title title keeps the
+     styling the h1 has always had. */}}
+{{- $headingClass := "" -}}
+{{- if isset $args "headingClass" -}}
+    {{- $headingClass = $args.headingClass -}}
+{{- else if $levelled -}}
+    {{- $headingClass = "mt-0 mb-0" -}}
+    {{- if eq $headingStyle "fs" }}{{ $headingClass = printf "%s fw-normal lh-base" $headingClass }}{{ end -}}
+{{- end -}}
+
 {{ $preheading = partial "utilities/TitleCase.html" (dict "page" $page "text" $preheading) }}
 {{ $title = partial "utilities/TitleCase.html" (dict "page" $page "text" $title) }}
 
+{{/* Composes the title element. The tag varies with the heading level, and Go's template engine
+     rejects a dynamic element name, so the markup is assembled as a string and marked safe. */}}
 {{ define "_partials/assets/section-title-header.html" }}
-    {{- $page := .page }}
-    {{ $headingStyle := .headingStyle }}
+    {{- $page := .page -}}
+    {{- $level := .level -}}
+    {{- $tag := cond (eq $level 0) "div" (printf "h%d" $level) -}}
 
-    {{ if (index . "use-title") }}
-        {{ $title := .title | $page.RenderString }}
-        {{ $label := trim (replaceRE "\r\n?|\n" " " ($title | plainify)) " " }}
-        <h1 id="{{ anchorize .title }}" {{ if ne $title $label }}aria-label="{{ $label }}"{{ end -}}
-            class="{{ $headingStyle }}-{{ .size }}{{ with .color }} text-{{ . }}{{ end }} pt-1">
-                {{ .title | $page.RenderString | safeHTML }}
-        </h1>
-    {{ else }}
-        <div id="{{ anchorize .title }}" class="{{ $headingStyle }}-{{ .size }}{{ with .color }} text-{{ . }}{{ end }} pt-1">
-            {{ .title | $page.RenderString | safeHTML }}
-        </div>
-    {{ end }}
+    {{- $title := .title | $page.RenderString -}}
+    {{- $label := trim (replaceRE "\r\n?|\n" " " ($title | plainify)) " " -}}
+
+    {{- $class := printf "%s-%v" .headingStyle .size -}}
+    {{- with .color }}{{ $class = printf "%s text-%s" $class . }}{{ end -}}
+    {{- $class = printf "%s pt-1" $class -}}
+    {{- if ne $level 0 }}{{ with .headingClass }}{{ $class = printf "%s %s" $class . }}{{ end }}{{ end -}}
+
+    {{- $attrs := printf `id="%s" class="%s"` (anchorize .title) $class -}}
+    {{- if and (ne $level 0) (ne $title $label) -}}
+        {{- $attrs = printf `id="%s" aria-label="%s" class="%s"` (anchorize .title) (htmlEscape $label) $class -}}
+    {{- end -}}
+
+    {{- printf "<%s %s>\n%s\n</%s>" $tag $attrs $title $tag | safeHTML -}}
 {{ end }}
 
 {{ $header := "" }}
 {{ if $title }}
     {{ $header = partial "assets/section-title-header.html" (dict
         "page"         $page
-        "use-title"    $args.useTitle
+        "level"        $level
+        "headingClass" $headingClass
         "title"        $title
         "headingStyle" $headingStyle
         "color"        $args.color

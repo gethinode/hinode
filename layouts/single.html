@@ -5,7 +5,15 @@
 
     {{/* Render the offcanvas sidebar and content blocks */}}
     {{- partial "page/sidebar-offcanvas.html" (dict "section" $.Section "raw" $sidebar) -}}
-    {{- partial "page/blocks.html" . -}}
+
+    {{/* The header below renders only for a page that carries content, and it owns the h1 when it
+         does, so blocks start at 2 there and at 1 otherwise. Blocks render ahead of that header,
+         so a page carrying both leads with its block titles at level 2 and reaches its h1 below
+         them. */}}
+    {{- partial "page/blocks.html" (dict
+        "page"          .
+        "heading-level" (cond (gt (len .RawContent) 0) 2 1)
+    ) -}}
 
     {{/* Render the single page content using responsive columns */}}
     {{/*    Column 1: sidebar navigation, visible in medium viewports and above (uses offcanvas on small devices) */}}

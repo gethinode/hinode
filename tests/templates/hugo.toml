@@ -36,3 +36,21 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/GetIncludeTOC.html'
   target = 'layouts/_partials/utilities/GetIncludeTOC.html'
+
+# assets/section-title.html initializes its arguments through mod-utils (InitArgs and the
+# structure data it reads), so those come from the vendored module — `mod:vendor` populates
+# `_vendor` and CI runs it before `test:templates`. The two `data/structures` mounts merge:
+# the theme file provides the section-title structure, the module directory provides the
+# global argument and type definitions it inherits from.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/section-title.html'
+  target = 'layouts/_partials/assets/section-title.html'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/layouts/_partials/utilities'
+  target = 'layouts/_partials/utilities'
+[[module.mounts]]
+  source = '../../data/structures/section-title.yml'
+  target = 'data/structures/section-title.yml'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/data/structures'
+  target = 'data/structures'

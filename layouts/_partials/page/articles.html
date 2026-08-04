@@ -17,6 +17,8 @@
 {{ if .Site.Params.navigation.breadcrumb }}
     {{ partial "assets/breadcrumb.html" (dict "page" .) }}
 {{ end }}
+{{/* The empty heading-class keeps this title on the h1 element's own spacing, rather than the
+     reset that aligns a promoted block title with the div it replaces. */}}
 {{ partial "assets/section-title.html" (dict
     "page"    .
     "heading" (dict
@@ -24,8 +26,9 @@
         "content" .Description
         "align"   "start"
     )
-    "use-title" true
-    "action"    $sectionAction
+    "heading-level" 1
+    "heading-class" ""
+    "action"        $sectionAction
 ) }}
 
 {{/* Init the card styling */}}
