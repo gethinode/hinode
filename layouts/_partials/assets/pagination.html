@@ -14,7 +14,7 @@
     Copyright 2022 The Hugo Authors. Licensed under the Apache License, Version 2.0.
   */}}
 
-{{- define "_partials/inline/pagination/default" }}
+{{- define "_partials/inline/paginator/default" }}
   {{- $paginationFirst := partial "utilities/GetThemeIcon.html" (dict "id" "paginationFirst" "default" "fas angles-left") -}}
   {{- $paginationPrev := partial "utilities/GetThemeIcon.html" (dict "id" "paginationPrev" "default" "fas angle-left") -}}
   {{- $paginationNext := partial "utilities/GetThemeIcon.html" (dict "id" "paginationNext" "default" "fas angle-right") -}}
@@ -103,7 +103,7 @@
   {{- end }}
 {{- end -}}
 
-{{- define "_partials/inline/pagination/terse" }}
+{{- define "_partials/inline/paginator/terse" }}
   {{- $paginationFirst := partial "utilities/GetThemeIcon.html" (dict "id" "paginationFirst" "default" "fas angles-left") -}}
   {{- $paginationPrev := partial "utilities/GetThemeIcon.html" (dict "id" "paginationPrev" "default" "fas angle-left") -}}
   {{- $paginationNext := partial "utilities/GetThemeIcon.html" (dict "id" "paginationNext" "default" "fas angle-right") -}}
@@ -185,7 +185,7 @@
 {{- if and (not $args.err) (gt $args.page.Paginator.TotalPages 1) }}
   <nav aria-label="{{ T "paginationNav" }}">
     <ul class="pagination pagination-{{ $args.format }} justify-content-center">
-      {{- partial (printf "inline/pagination/%s" $args.format) $args.page }}
+      {{- partial (printf "inline/paginator/%s" $args.format) $args.page }}
     </ul>
   </nav>
 {{- end }}
