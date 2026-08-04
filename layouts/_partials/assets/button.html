@@ -101,9 +101,7 @@
         {{- with $collapseID }} data-bs-toggle="collapse" aria-expanded="false" aria-controls="{{ . }}"{{ end -}}
         {{- if eq $state "active" }} data-bs-toggle="button" aria-pressed="true"{{ end -}}
         {{- if eq $state "inactive" }} data-bs-toggle="button" aria-pressed="false"{{ end -}}
-        {{- range $key, $val := $args.attributes -}}
-            {{ printf " %s=\"%s\"" $key $val | safeHTMLAttr }}
-        {{- end -}}
+        {{- range $key, $val := $args.attributes }} {{ printf "%s=%q" $key $val | safeHTMLAttr }}{{ end }}
         role="button"
         >
         <span class="d-flex justify-content-{{ $args.justify }}">
