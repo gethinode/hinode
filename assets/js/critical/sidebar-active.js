@@ -11,7 +11,8 @@
 // is absent from the page collections the menu is built from, so it has no entry of its own.
 // Without the fallback nothing matched at all and the sidebar rendered with no active item
 // and every group collapsed. Ancestor matching compares against `path + "/"`, so
-// `/docs/guides` never claims `/docs/guides-advanced/`.
+// `/docs/guides` never claims `/docs/guides-advanced/`, and it skips links to the site root,
+// which would otherwise claim every page on the site.
 //
 // Ancestor matching is a property of the link's href, so it needs no opt-in marker in the
 // markup: every link in the nav is a candidate. Do not reintroduce one.
@@ -44,8 +45,11 @@
           bestLength = path.length
           bestExact = true
         }
-      } else if (!bestExact) {
-        var prefix = path === '/' ? '/' : path + '/'
+      } else if (!bestExact && path !== '/') {
+        // A link to the site root is an ancestor of every page, so it carries no locality:
+        // honouring it would light up a "Home"/"Overview" entry on pages that sit outside
+        // the menu entirely. Such a link still wins when it matches the path exactly.
+        var prefix = path + '/'
         if (pathname.indexOf(prefix) === 0 && path.length > bestLength) {
           best = link
           bestLength = path.length
