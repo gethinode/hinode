@@ -106,7 +106,7 @@
     "cmd-shim": "^9.0.2",
     "cpy-cli": "^7.0.0",
     "eslint": "^10.8.0",
-    "globals": "^17.8.0",
+    "globals": "^17.9.0",
     "husky": "^9.1.7",
     "markdownlint-cli2": "^0.23.2",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
