@@ -4,6 +4,8 @@ github.com/cloudcannon/bookshop/hugo/v3 v3.19.0 h1:khb65FKbLXMWvm34OULEpKReCwNzE
 github.com/cloudcannon/bookshop/hugo/v3 v3.19.0/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
 github.com/gethinode/mod-blocks/v2 v2.3.6 h1:xWvoWBfMXKTjsFuVh3sGZK80uQF1gl6gGt8w4GsZHiE=
 github.com/gethinode/mod-blocks/v2 v2.3.6/go.mod h1:/IfHiD5PCitH3IrpeMF/Pse/N+AbxkP8AYyIja8oJzk=
+github.com/gethinode/mod-blocks/v2 v2.4.0 h1:LjgEpU314lUPMpq63B/rWTUBzWTKTHDk1QSpPpADGJc=
+github.com/gethinode/mod-blocks/v2 v2.4.0/go.mod h1:bgbPL/PJzDFyvLcx7bd5uVJkkBDqFd0wZvA4DqqIdXs=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.2 h1:KTQBwRB/1zRO3aS61bH2NNl/uTzelDLFxDjWbrqVKFc=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.2/go.mod h1:oWYYQyAQgOFwrWwBZ8V+ztMCE7XmNTFbcmh28GWO2IA=
 github.com/gethinode/mod-cookieyes/v3 v3.1.0 h1:wan8yGs1bmwrgdySWSCqDbkiAsbTn8nWogwI+qKH6Is=
@@ -14,5 +16,7 @@ github.com/gethinode/mod-fontawesome/v6 v6.1.4 h1:6ppascnfF0Fy9csHLp2iVZVYhaguOO
 github.com/gethinode/mod-fontawesome/v6 v6.1.4/go.mod h1:VOzKLFEqI4O13IFZrKXOXFFHs26o8PgQtdv9fYUaxqA=
 github.com/gethinode/mod-utils/v6 v6.8.5 h1:hzJgNjw6NIORMvxeJ3Q6+qPaPzLc4CQtNTWRXFVjFPM=
 github.com/gethinode/mod-utils/v6 v6.8.5/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
+github.com/gethinode/mod-utils/v6 v6.9.0 h1:+7RsNAfYCaM3rAzwrkTC6Ui3vcpGYWj1Ek1CmUVcaq0=
+github.com/gethinode/mod-utils/v6 v6.9.0/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/twbs/icons v1.13.1 h1:6bmNXvoeIbvjFWjfbjXg5JGbelLD1haIsMaEIzE9UZI=
 github.com/twbs/icons v1.13.1/go.mod h1:GnRlymgVWp5iVJCMa0Me5b6tFyGpVc2bSxPMRGIJmyA=
