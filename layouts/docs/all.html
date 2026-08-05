@@ -23,7 +23,8 @@
             <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
                 {{/* Render the defined content blocks, using the default articles element as fallback for list pages */}}
                 {{ if .Params.content_blocks }}
-                    {{- partial "page/blocks.html" (dict "page" . "embed" true) -}}
+                    {{/* Blocks replace the page header here, so they own the h1 */}}
+                    {{- partial "page/blocks.html" (dict "page" . "embed" true "heading-level" 1) -}}
                 {{ else if eq .Kind "section" }}
                     {{ $.Scratch.Set "articlesParams" (dict
                         "sort"         "weight"
