@@ -13,8 +13,8 @@
 // and every group collapsed. Ancestor matching compares against `path + "/"`, so
 // `/docs/guides` never claims `/docs/guides-advanced/`.
 //
-// The `data-sidebar-match="prefix"` attribute that assets/sidebar.html still emits on group
-// links predates this and is now redundant: every link is an ancestor candidate.
+// Ancestor matching is a property of the link's href, so it needs no opt-in marker in the
+// markup: every link in the nav is a candidate. Do not reintroduce one.
 (function () {
   'use strict'
 
