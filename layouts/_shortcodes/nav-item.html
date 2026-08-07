@@ -39,6 +39,15 @@
     {{- $itemID := printf "%s-btn-%d" $parent $id }}
     {{- $disabledID := cond $args.disabled $itemID "" }}
     {{- $body := trim .Inner " \r\n" -}}
+    {{/*
+        assets/nav-item.html resolves a pane body with `$args.body | $args.page.RenderString`,
+        which is right for prose but destroys a body that is already HTML — a nested shortcode's
+        output reaches RenderString indistinguishable from raw HTML typed into markdown, and a
+        site running goldmark with renderer.unsafe = false then escapes or drops it. The partial
+        already accepts a `raw` field that bypasses RenderString; raw-body wires it from the
+        shortcode. Empty when unset, so `or $args.raw (...)` keeps the original path.
+    */}}
+    {{- $raw := cond $args.rawBody $body "" -}}
     {{- $current := "" -}}
 
     {{/* Main code */}}
@@ -50,6 +59,7 @@
         "title"     $title
         "class"     $args.class
         "body"      $body
+        "raw"       $raw
         "show"      $args.show
         "disabled"  $args.disabled
         "_default"  $args.default
@@ -84,6 +94,7 @@
         "title"        $title
         "class"        $args.class
         "body"         $body
+        "raw"          $raw
         "show"         $args.show
         "disabled"     $args.disabled
         "navitem-type" "accordion"

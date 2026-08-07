@@ -27,6 +27,18 @@ arguments:
   raw:
     group: partial
     release: v1.3.0
+  raw-body:
+    type: bool
+    default: false
+    optional: true
+    group: shortcode
+    release: v3.21.0
+    comment: >-
+      Flag to pass the item's body through as already-rendered HTML instead of
+      running it through the page's markdown renderer. Set this when the body
+      is a nested shortcode that emits HTML of its own: on a site configured
+      with `markup.goldmark.renderer.unsafe = false`, that markup is otherwise
+      treated as raw HTML typed into markdown and is escaped or dropped.
   navitem-type:
     release: v1.0.0
   illustration:
