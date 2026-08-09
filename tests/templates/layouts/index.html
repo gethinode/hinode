@@ -227,3 +227,56 @@ FAIL {{ .case }}
 {{- end }}
 
 SECTION TITLE FAILURES: {{ $stFail }}
+
+{{- /*
+    Assertions for assets/link.html.
+
+    Every case renders the partial from a page that is not the site home and compares the
+    emitted href, because the destination is normalized against both the site's base URL
+    and the calling page - and those two are what a link to the site root falls between.
+
+    The root case is the one with teeth. Normalization strips the base URL's path from the
+    destination, so on a site rooted at "/" the string "/" is left empty, and `path.Clean`
+    turns an empty path into ".". A "." is a valid relative page reference meaning *this
+    page*, so the lookup that follows resolves it to whichever page is rendering and the
+    link silently points at the caller instead of the home page. The sidebar makes that
+    visible: its markup is cached per section against the section root, so a menu entry
+    linking to "/" renders as a link to the section root, matches the current page in the
+    active-item pass, and steals the highlight from the entry that should own it.
+
+    The remaining cases hold the paths either side of it: a normal absolute link, a link
+    to a section, and an anchored one all still resolve to their own targets. The anchored
+    case keeps no trailing slash because the harness leaves main.internalLinks.pretty
+    unset, which is the partial's documented behaviour rather than an artefact.
+*/ -}}
+{{- $linkFail := 0 -}}
+{{- $linkPage := site.GetPage "/blog/without-exact" -}}
+{{- $linkCases := slice
+  (dict "case" "site root resolves to the site root, not the calling page"
+        "args" (dict "href" "/" "text" "Home")
+        "want" `href="/"`)
+  (dict "case" "absolute link to another page is left alone"
+        "args" (dict "href" "/blog/toc-override/" "text" "Toc")
+        "want" `href="/blog/toc-override/"`)
+  (dict "case" "absolute link to a section is left alone"
+        "args" (dict "href" "/blog/" "text" "Blog")
+        "want" `href="/blog/"`)
+  (dict "case" "anchor on an absolute link is preserved"
+        "args" (dict "href" "/blog/toc-override/#intro" "text" "Intro")
+        "want" `href="/blog/toc-override#intro"`)
+-}}
+{{- range $linkCases -}}
+{{- $linkGot := partial "assets/link.html" (merge (dict "page" $linkPage "exact" true) .args) -}}
+{{- $linkHref := index (findRE `href="[^"]*"` $linkGot 1) 0 -}}
+{{- if eq $linkHref .want }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ .want }}
+     got ={{ $linkHref }}
+{{- $linkFail = add $linkFail 1 -}}
+{{- errorf "link mismatch: case=%q want=%q got=%q" .case .want $linkHref -}}
+{{- end -}}
+{{- end }}
+
+LINK FAILURES: {{ $linkFail }}

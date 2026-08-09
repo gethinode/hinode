@@ -51,7 +51,20 @@
     {{- else -}}
         {{- $destination = (strings.TrimPrefix (strings.TrimSuffix "/" site.BaseURL) $destination) -}}
     {{- end -}}
-    {{- if not $destination }}{{ $destination = "/" }}{{ end -}}
+    {{/* A destination that normalizes away is the site root.
+
+        Stripping the base URL's path leaves nothing behind for a link to the site's own
+        home - "/" on a site rooted at "/", "/docs/" on one rooted at "/docs/" - and
+        `path.Clean` renders that empty string as ".". Both mean the same place, but only
+        the empty one is caught by an emptiness test: "." survives as a *relative* page
+        reference meaning "the page being rendered", so the lookup below resolves it to
+        the caller and the link quietly points at whatever page happened to render it.
+
+        The sidebar is where that surfaces: its markup is cached per section against the
+        section root, so a menu entry linking to "/" comes out as a link to the section
+        root, then matches the current page in the client-side active pass and takes the
+        highlight from the entry that owns it. */}}
+    {{- if or (not $destination) (eq $destination ".") }}{{ $destination = "/" }}{{ end -}}
 
     {{/* cue and tab carry no schema default, so an absent value is nil and an
          explicit false is a real choice. "default" treats false as empty and would
