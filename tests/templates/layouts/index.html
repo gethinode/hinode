@@ -280,3 +280,111 @@ FAIL {{ .case }}
 {{- end }}
 
 LINK FAILURES: {{ $linkFail }}
+
+{{- /*
+    Assertions for the icon column in assets/sidebar.html.
+
+    A menu may mix rows that carry a leading icon with rows that do not, and the ones that do
+    not then start their label at the padding edge while their neighbours start an icon-width
+    further right. The renderer marks those rows with `sidebar-item-icon-indent`, which the
+    stylesheet turns into a reservation of the same column; these cases pin *which* rows get
+    marked, since nothing else in the build would notice if the answer changed.
+
+    The scope under test is the sibling list, not the sidebar: a row is marked only when
+    another row in its own list has an icon. That is what keeps a nested list of icon-less
+    entries - the common shape of a menu that puts icons on its top level only - sitting
+    under the label it belongs to instead of being pushed out by a column no row in it uses.
+
+    Each case renders the real partial and reduces the markup to one row per anchor, so a
+    case reads as the menu it describes: the title, whether that row carries an icon, and
+    whether it reserved the column. The menus are written as YAML because that is both the
+    shape a site authors them in and the only literal form that reaches the partial as the
+    `[]interface{}` its argument validator requires - Hugo's `slice` of dicts is typed
+    `[]map[string]interface{}` and is rejected before rendering starts.
+*/ -}}
+{{- $sbFail := 0 -}}
+{{- $sbPage := site.GetPage "/blog/without-exact" -}}
+{{- $sbCases := slice
+  (dict "case" "mixed list marks only the rows without an icon"
+        "menu" `
+- title: Home
+  link: /
+- title: With Exact
+  link: /blog/with-exact/
+  pre: fas house
+- title: Toc Override
+  link: /blog/toc-override/
+  pre: fas house`
+        "want" (slice "Home:noicon:indent" "With Exact:icon:plain" "Toc Override:icon:plain"))
+  (dict "case" "a list without icons is left alone"
+        "menu" `
+- title: Home
+  link: /
+- title: With Exact
+  link: /blog/with-exact/`
+        "want" (slice "Home:noicon:plain" "With Exact:noicon:plain"))
+  (dict "case" "a list where every row has an icon is left alone"
+        "menu" `
+- title: With Exact
+  link: /blog/with-exact/
+  pre: fas house
+- title: Toc Override
+  link: /blog/toc-override/
+  pre: fas house`
+        "want" (slice "With Exact:icon:plain" "Toc Override:icon:plain"))
+  (dict "case" "children are judged by their own list, not their parent's"
+        "menu" `
+- title: Home
+  link: /
+- title: Blog
+  link: /blog/
+  pre: fas house
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/
+    - title: Toc Override
+      link: /blog/toc-override/`
+        "want" (slice "Home:noicon:indent" "Blog:icon:plain" "With Exact:noicon:plain" "Toc Override:noicon:plain"))
+  (dict "case" "a child list that mixes icons marks its own icon-less rows"
+        "menu" `
+- title: Blog
+  link: /blog/
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/
+      pre: fas house
+    - title: Toc Override
+      link: /blog/toc-override/`
+        "want" (slice "Blog:noicon:plain" "With Exact:icon:plain" "Toc Override:noicon:indent"))
+-}}
+{{- range $sbCases -}}
+{{- $menu := .menu | transform.Unmarshal -}}
+{{- $html := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $menu) -}}
+{{- $got := slice -}}
+{{- /* Go's regexp has no lookahead, so anchors are split off by hand: collapse the
+       markup's whitespace, cut it on the opening tag, and keep each piece up to its
+       closing tag. What is left of a piece before its first ">" is the tag's own
+       attributes, and what follows is the row's body. */ -}}
+{{- range (split (replaceRE `\s+` " " $html) "<a ") -}}
+    {{- if strings.Contains . "</a>" -}}
+        {{- $row := index (split . "</a>") 0 -}}
+        {{- $tag := index (split $row ">") 0 -}}
+        {{- $body := strings.TrimPrefix (printf "%s>" $tag) $row -}}
+        {{- $label := trim (replaceRE `&nbsp;` "" (replaceRE `<[^>]*>` "" $body)) " " -}}
+        {{- $icon := cond (strings.Contains $body "<svg") "icon" "noicon" -}}
+        {{- $indent := cond (strings.Contains $tag "sidebar-item-icon-indent") "indent" "plain" -}}
+        {{- $got = $got | append (printf "%s:%s:%s" $label $icon $indent) -}}
+    {{- end -}}
+{{- end -}}
+{{- if eq (delimit $got "|") (delimit .want "|") }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ delimit .want "|" }}
+     got ={{ delimit $got "|" }}
+{{- $sbFail = add $sbFail 1 -}}
+{{- errorf "sidebar icon column mismatch: case=%q want=%q got=%q" .case (delimit .want "|") (delimit $got "|") -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR ICON COLUMN FAILURES: {{ $sbFail }}

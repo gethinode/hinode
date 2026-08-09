@@ -181,6 +181,38 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
     }
 }
 
+// Hold the icon column open on rows that have no icon.
+//
+// A menu is free to mix the two - a "Home" entry among icon-bearing sections is
+// the common case - and the row without an icon then starts its label at the
+// padding edge while every neighbour starts one icon-width further right. The
+// labels no longer form a column, and the odd row reads as misplaced rather
+// than as merely unadorned.
+//
+// So such a row reserves the same column instead. `assets/sidebar.html` sets
+// the class on a row that has no icon in a list where something else does, so
+// the reservation follows the list it has to line up with: a list that uses no
+// icons at all is untouched, and neither is a nested list of its own.
+//
+// This is the width alone - no `text-indent` to go with it, unlike the hanging
+// indent above. There is no icon to pull the first line back past, and the
+// wrapped lines of a row whose text starts at the padding edge already line up
+// underneath it. Applies in both the collapsible and the plain sidebar, since
+// what it corrects is the resting layout the two share; in icon-only mode the
+// row has nothing left to show and the reserved column costs nothing.
+//
+// `!important` for the same reason the block above needs it: the base
+// `.sidebar-item` padding carries one.
+.sidebar-item.sidebar-item-icon-indent {
+    padding-left: calc(0.5rem + #{$sidebar-item-icon-column}) !important;
+}
+
+// Group headers again sit on the wrapper's padding, so they reserve the column
+// alone. They are not `.sidebar-item`, so this needs its own selector.
+.sidebar-item-group > div > a.sidebar-item-icon-indent {
+    padding-left: $sidebar-item-icon-column;
+}
+
 .btn-toggle-group {
     padding: 0.25rem 0.5rem;
     font-weight: 600;

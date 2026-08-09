@@ -79,11 +79,34 @@
     {{- $args = merge $args (dict "menu" $menu) -}}
 {{- end -}}
 
+{{/*
+    Does any entry in this list carry a leading icon?
+
+    Icons are per entry, but alignment is a property of the list: as soon as one row leads
+    with one, every other row's label in that list starts an icon-width further left and the
+    column of labels breaks. The rows that need to reserve that column are therefore the ones
+    without an icon in a list that has them, which only the list knows - hence a single
+    lookup per sibling list, passed down to the rows as `iconColumn`.
+
+    Scoped to the list rather than the whole sidebar on purpose: a nested list whose entries
+    are all icon-less is aligned already, and reserving a column there would indent it away
+    from the label it hangs under, changing every existing site that renders icons only on
+    its top level.
+*/ -}}
+{{- define "_partials/inline/sidebar/has-icons.html" -}}
+    {{- $found := false -}}
+    {{- range . -}}
+        {{- if .pre }}{{ $found = true }}{{ end -}}
+    {{- end -}}
+    {{- return $found -}}
+{{- end -}}
+
 {{- define "_partials/inline/sidebar/group-link.html" -}}
     {{- $page        := .page -}}
     {{- $group       := .group -}}
     {{- $baseURL     := .baseURL -}}
     {{- $pre         := $group.pre -}}
+    {{- $iconColumn  := .iconColumn | default false -}}
     {{- $collapsible := .collapsible | default false -}}
     {{- $href        := $group.link | default "" -}}
     {{- if and $href (not (hasPrefix $href "/")) -}}
@@ -92,8 +115,10 @@
     {{- if and $href (not (hasSuffix $href "/")) -}}{{- $href = printf "%s/" $href -}}{{- end -}}
     {{- $groupTitle := $group.title -}}
     {{- $groupTitle = partial "utilities/TitleCase.html" (dict "page" $page "text" $groupTitle) -}}
+    {{- $class := "sidebar-item text-decoration-none rounded w-100" -}}
+    {{- if and $iconColumn (not $pre) -}}{{- $class = printf "%s sidebar-item-icon-indent" $class -}}{{- end -}}
     <li class="mb-1">
-        <a class="sidebar-item text-decoration-none rounded w-100"
+        <a class="{{ $class }}"
            {{- if $collapsible }} data-sidebar-label="{{ $groupTitle }}"{{ end }}
            {{ with $href }}href="{{ . }}"{{ end }}>
             {{- with $pre -}}
@@ -120,7 +145,11 @@
     {{- $group := .group -}}
     {{- $data := .menu -}}
     {{- $pre := $group.pre -}}
+    {{- $iconColumn := .iconColumn | default false -}}
     {{- $filename := .filename -}}
+
+    {{- /* Resolved for this group's own children, who are a list of their own */ -}}
+    {{- $childIconColumn := partial "inline/sidebar/has-icons.html" $group.pages -}}
 
     {{- $doc_slug := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($group.title | urlize)) -}}
     {{- $href := or $group.link $doc_slug -}}
@@ -146,7 +175,12 @@
                 {{ if not $ref }}
                     {{ $dest = "" }}
                 {{ end }}
-                <a {{ if gt $level 1 }}class="small" {{ end }}{{ with $dest }} href="{{ . }}"{{ else }}
+                {{- $headClass := "" -}}
+                {{- if gt $level 1 }}{{ $headClass = "small" }}{{ end -}}
+                {{- if and $iconColumn (not $pre) -}}
+                    {{- $headClass = trim (printf "%s sidebar-item-icon-indent" $headClass) " " -}}
+                {{- end -}}
+                <a {{ with $headClass }}class="{{ . }}" {{ end }}{{ with $dest }} href="{{ . }}"{{ else }}
                 data-bs-toggle="collapse"
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
                 {{ end }}>
@@ -183,14 +217,15 @@
                              nested collapse element IDs stay unique across
                              sibling branches at the same depth. */}}
                         {{ partial "inline/sidebar/group.html" (dict
-                            "page"     $page
-                            "index"    (printf "%v-%v" $index $childIndex)
-                            "level"    (add $level 1)
-                            "baseURL"  $href
-                            "group"    $item
-                            "menu"     $data
-                            "pre"      $item.pre
-                            "filename" $filename
+                            "page"       $page
+                            "index"      (printf "%v-%v" $index $childIndex)
+                            "level"      (add $level 1)
+                            "baseURL"    $href
+                            "group"      $item
+                            "menu"       $data
+                            "pre"        $item.pre
+                            "iconColumn" $childIconColumn
+                            "filename"   $filename
                             )
                         }}
                     {{- else -}}
@@ -202,6 +237,7 @@
                             "href"         $item.link
                             "menu"         $data
                             "pre"          $item.pre
+                            "iconColumn"   $childIconColumn
                             "filename"     $filename
                             )
                         }}
@@ -219,8 +255,10 @@
     {{- $title       := .title -}}
     {{- $data        := .menu -}}
     {{- $pre         := .pre -}}
+    {{- $iconColumn  := .iconColumn | default false -}}
     {{- $collapsible := .collapsible | default false -}}
     {{- $filename    := .filename -}}
+    {{- $iconIndent  := cond (and $iconColumn (not $pre)) " sidebar-item-icon-indent" "" -}}
     {{- $title = partial "utilities/TitleCase.html" (dict "page" $page "text" $title) -}}
     {{- $titleText   := $title -}}
     {{- if $collapsible -}}
@@ -253,7 +291,7 @@
         <li>
             <ul class="btn-toggle-nav list-unstyled pb-1">
                 <li>
-                    {{ $class := "sidebar-item text-decoration-none rounded w-100" }}
+                    {{ $class := printf "sidebar-item text-decoration-none rounded w-100%s" $iconIndent }}
                     {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" true "icon-mode" "svg") }}{{/* icon-mode "svg": same reason as the icon call sites - see the header comment. */}}
                     {{- if and $collapsible $title $link -}}
                         {{- $link = $link | replaceRE `(<a)\s` (printf `${1} data-sidebar-label="%s" ` ($title | htmlEscape)) -}}
@@ -268,7 +306,7 @@
         </li>
     {{ else }}
         <li>
-            {{ $class := "sidebar-item text-decoration-none rounded small w-100" }}
+            {{ $class := printf "sidebar-item text-decoration-none rounded small w-100%s" $iconIndent }}
             {{ $link := partial "assets/link.html" (dict "href" $href "text" $itemText "class" $class "page" $page "exact" true "icon-mode" "svg") }}{{/* icon-mode "svg": same reason as the icon call sites - see the header comment. */}}
             {{ if $link }}
                 {{ print $link | safeHTML }}
@@ -289,6 +327,7 @@
     {{- $iconSecondary := partial "utilities/GetThemeIcon.html" (dict "id" "sidebarSecondary" "default" "fas angle-up") -}}
     {{- $hasSpacerItem := gt (len (where $args.menu "spacer" true)) 0 -}}
     {{- $sidebarId     := $section | urlize | default "sidebar" -}}
+    {{- $iconColumn    := partial "inline/sidebar/has-icons.html" $args.menu -}}
     <nav class="sidebar flex-shrink-0 ps-1{{ if ge $levelMin 2 }} sidebar-sub{{ end }}{{ if $collapsible }} sidebar-collapsible{{ end }}{{ if $hasSpacerItem }} sidebar-has-spacer{{ end }}"
          data-sidebar-nav
          {{- if $collapsible }} data-storage-key="sidebar-collapsed"{{ end }}
@@ -354,6 +393,7 @@
                         "page"        $page
                         "group"       $item
                         "baseURL"     $baseURL
+                        "iconColumn"  $iconColumn
                         "collapsible" $collapsible
                     ) }}
                 {{- else -}}
@@ -365,6 +405,7 @@
                         "href"        $item.link
                         "menu"        $args.menu
                         "pre"         $item.pre
+                        "iconColumn"  $iconColumn
                         "collapsible" $collapsible
                         "filename"    $args.filename
                     ) }}
@@ -383,6 +424,7 @@
                                 "href"        .link
                                 "menu"        $args.menu
                                 "pre"         .pre
+                                "iconColumn"  $iconColumn
                                 "collapsible" $collapsible
                                 "filename"    $args.filename
                             ) }}
@@ -403,8 +445,10 @@
                     {{- if and $avHref (not (hasSuffix $avHref "/")) -}}{{- $avHref = printf "%s/" $avHref -}}{{- end -}}
                     {{- $avTitle := .title -}}
                     {{- $avTitle = partial "utilities/TitleCase.html" (dict "page" $page "text" $avTitle) -}}
+                    {{- $avClass := "sidebar-item text-decoration-none rounded flex-grow-1" -}}
+                    {{- if and $iconColumn (not .pre) -}}{{- $avClass = printf "%s sidebar-item-icon-indent" $avClass -}}{{- end -}}
                     <li class="d-flex align-items-center sidebar-secondary-row">
-                        <a class="sidebar-item text-decoration-none rounded flex-grow-1"
+                        <a class="{{ $avClass }}"
                            {{- if $collapsible }} data-sidebar-label="{{ $avTitle }}"{{ end }}
                            href="{{ $avHref }}">
                             {{- with .pre -}}
@@ -444,28 +488,33 @@
                 {{- end -}}
             {{- end -}}
             {{- with $activeGroup.pages -}}
+                {{- /* This mode renders the active group's children, not the L1 menu, so the
+                       icon column is resolved against that list */ -}}
+                {{- $subIconColumn := partial "inline/sidebar/has-icons.html" . -}}
                 <ul class="list-unstyled ps-0">
                 {{- range $index, $item := . -}}
                     {{- if $item.pages -}}
                         {{ partial "inline/sidebar/group.html" (dict
-                            "page"     $page
-                            "index"    $index
-                            "level"    1
-                            "baseURL"  $baseURL
-                            "group"    $item
-                            "menu"     $activeGroup.pages
-                            "filename" $args.filename
+                            "page"       $page
+                            "index"      $index
+                            "level"      1
+                            "baseURL"    $baseURL
+                            "group"      $item
+                            "menu"       $activeGroup.pages
+                            "iconColumn" $subIconColumn
+                            "filename"   $args.filename
                         ) }}
                     {{- else -}}
                         {{ partial "inline/sidebar/item.html" (dict
-                            "page"     $page
-                            "level"    $level
-                            "baseURL"  $baseURL
-                            "title"    $item.title
-                            "href"     $item.link
-                            "menu"     $activeGroup.pages
-                            "pre"      $item.pre
-                            "filename" $args.filename
+                            "page"       $page
+                            "level"      $level
+                            "baseURL"    $baseURL
+                            "title"      $item.title
+                            "href"       $item.link
+                            "menu"       $activeGroup.pages
+                            "pre"        $item.pre
+                            "iconColumn" $subIconColumn
+                            "filename"   $args.filename
                         ) }}
                     {{- end -}}
                 {{- end -}}
@@ -477,25 +526,27 @@
             {{- range $index, $item := $args.menu -}}
                 {{- if $item.pages }}
                     {{ partial "inline/sidebar/group.html" (dict
-                        "page"     $page
-                        "index"    $index
-                        "level"    (add $level 1)
-                        "baseURL"  $baseURL
-                        "group"    $item
-                        "menu"     $args.menu
-                        "filename" $args.filename
+                        "page"       $page
+                        "index"      $index
+                        "level"      (add $level 1)
+                        "baseURL"    $baseURL
+                        "group"      $item
+                        "menu"       $args.menu
+                        "iconColumn" $iconColumn
+                        "filename"   $args.filename
                         )
                     }}
                 {{- else }}
                     {{ partial "inline/sidebar/item.html" (dict
-                        "page"     $page
-                        "level"    $level
-                        "baseURL"  $baseURL
-                        "title"    $item.title
-                        "href"     $item.link
-                        "menu"     $args.menu
-                        "pre"      $item.pre
-                        "filename" $args.filename
+                        "page"       $page
+                        "level"      $level
+                        "baseURL"    $baseURL
+                        "title"      $item.title
+                        "href"       $item.link
+                        "menu"       $args.menu
+                        "pre"        $item.pre
+                        "iconColumn" $iconColumn
+                        "filename"   $args.filename
                         )
                     }}
                 {{- end }}
