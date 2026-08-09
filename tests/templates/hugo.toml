@@ -54,3 +54,37 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../_vendor/github.com/gethinode/mod-utils/v6/data/structures'
   target = 'data/structures'
+
+# assets/link.html resolves its destination against the site and the calling page, so the
+# assertions need the real partial and its argument structure. Its icon call site is only
+# reached for external links with a cue, which none of the cases exercise, so no icon
+# partial is mounted.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/link.html'
+  target = 'layouts/_partials/assets/link.html'
+[[module.mounts]]
+  source = '../../data/structures/link.yml'
+  target = 'data/structures/link.yml'
+
+# assets/sidebar.html renders real rows through assets/link.html and real icons through
+# mod-fontawesome, and both are what the assertions read, so neither is stubbed. The icon
+# module brings its own data (the structure it validates against plus the icon table), which
+# merges with the `data/structures` mounts above.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/sidebar.html'
+  target = 'layouts/_partials/assets/sidebar.html'
+[[module.mounts]]
+  source = '../../data/structures/sidebar.yml'
+  target = 'data/structures/sidebar.yml'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-fontawesome/v6/layouts/_partials/assets/icon.html'
+  target = 'layouts/_partials/assets/icon.html'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-fontawesome/v6/data'
+  target = 'data'
+# Where mod-fontawesome's own config mounts the icon set it resolves by name; without it
+# every icon renders as an error and the assertions could no longer tell an icon-bearing row
+# from an icon-less one.
+[[module.mounts]]
+  source = '../../_vendor/github.com/FortAwesome/Font-Awesome/svgs'
+  target = 'assets/svgs/fa'
