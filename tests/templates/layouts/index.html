@@ -388,3 +388,94 @@ FAIL {{ .case }}
 {{- end }}
 
 SIDEBAR ICON COLUMN FAILURES: {{ $sbFail }}
+
+{{- /*
+    Assertions for the nesting indent in assets/sidebar.html.
+
+    A nested row's indent used to sit on the list that holds it, which also moved the row's
+    box - so its hover and active surface started at the indent while its right edge stayed
+    at the sidebar's, and the highlight of a child read as narrower than its parent's. The
+    indent now travels as a step count on the child list and is spent as padding on the rows
+    themselves, which leaves every row box full width whatever its depth.
+
+    The count is what these cases pin, since it is the only place the depth arithmetic lives:
+    a group adds two steps for its children, or three when it carries a leading icon and its
+    own label therefore starts an icon-width further right. Nesting accumulates, so a case's
+    `want` reads as the sequence of lists the renderer opens, outermost first.
+
+    It has to be a class, and these cases hold that too by matching one. PurgeCSS runs against
+    `hugo_stats.json`, where Hugo records only tags, classes and ids - so the same count on a
+    data attribute is invisible to it, the step table is dropped from the production
+    stylesheet, and every row silently falls back to no indent at all. Only a minified build
+    shows it, which is why the shape is pinned here rather than left to the eye.
+*/ -}}
+{{- $inFail := 0 -}}
+{{- $inPage := site.GetPage "/blog/without-exact" -}}
+{{- $inCases := slice
+  (dict "case" "a flat menu opens no nested list and needs no indent"
+        "menu" `
+- title: Home
+  link: /
+- title: With Exact
+  link: /blog/with-exact/`
+        "want" slice)
+  (dict "case" "a group indents its children by two steps"
+        "menu" `
+- title: Blog
+  link: /blog/
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/`
+        "want" (slice "2"))
+  (dict "case" "a group with an icon indents its children past the icon column"
+        "menu" `
+- title: Blog
+  link: /blog/
+  pre: fas house
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/`
+        "want" (slice "3"))
+  (dict "case" "nesting accumulates the indent"
+        "menu" `
+- title: Blog
+  link: /blog/
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/
+      pages:
+        - title: Toc Override
+          link: /blog/toc-override/`
+        "want" (slice "2" "4"))
+  (dict "case" "an icon group nested under a plain one adds its own column"
+        "menu" `
+- title: Blog
+  link: /blog/
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/
+      pre: fas house
+      pages:
+        - title: Toc Override
+          link: /blog/toc-override/`
+        "want" (slice "2" "5"))
+-}}
+{{- range $inCases -}}
+{{- $menu := .menu | transform.Unmarshal -}}
+{{- $html := partial "assets/sidebar.html" (dict "page" $inPage "menu" $menu) -}}
+{{- $got := slice -}}
+{{- range (findRE `class="[^"]*\bsidebar-nav-indent-[0-9]+\b[^"]*"` $html) -}}
+    {{- $got = $got | append (index (findRE `sidebar-nav-indent-([0-9]+)` . 1) 0 | strings.TrimPrefix "sidebar-nav-indent-") -}}
+{{- end -}}
+{{- if eq (delimit $got "|") (delimit .want "|") }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ delimit .want "|" }}
+     got ={{ delimit $got "|" }}
+{{- $inFail = add $inFail 1 -}}
+{{- errorf "sidebar indent mismatch: case=%q want=%q got=%q" .case (delimit .want "|") (delimit $got "|") -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR INDENT FAILURES: {{ $inFail }}

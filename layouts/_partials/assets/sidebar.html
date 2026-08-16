@@ -147,9 +147,23 @@
     {{- $pre := $group.pre -}}
     {{- $iconColumn := .iconColumn | default false -}}
     {{- $filename := .filename -}}
+    {{- $indent := .indent | default 0 -}}
 
     {{- /* Resolved for this group's own children, who are a list of their own */ -}}
     {{- $childIconColumn := partial "inline/sidebar/has-icons.html" $group.pages -}}
+
+    {{- /* How far this group's children hang under its label, counted in indent steps of
+           `$sidebar-nav-indent-step` (see components/_sidebar.scss). Two steps is the plain
+           nesting indent; three is that plus the column a leading icon opens, because the
+           group's own label starts an icon-width further right and its children line up with
+           the label rather than the icon.
+
+           Accumulated here rather than left to the lists to nest, because the indent is spent
+           on the rows and not on the list around them: a row that carries its own indent as
+           padding keeps its box the full width of the sidebar at every depth, so a child's
+           hover and active surface is as wide as its parent's. Nested list padding moved the
+           box instead, and the highlight narrowed one step per level. */ -}}
+    {{- $childIndent := add $indent (cond $pre 3 2) -}}
 
     {{- $doc_slug := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($group.title | urlize)) -}}
     {{- $href := or $group.link $doc_slug -}}
@@ -204,13 +218,14 @@
             </button>
         </div>
         <div class="collapse" id="sidebar-collapse-{{ $index }}-{{ $level }}">
-            {{/* When this group has a leading icon its own label sits an icon-width
-                 further right, so the child list is indented to match. Emitted here
-                 rather than derived in CSS: the collapse trail is expanded client
-                 side, and a selector that has to be re-resolved as the subtree goes
-                 from display:none to visible can land its first paint on the wrong
-                 value. A class in the cached markup is correct from the start. */}}
-            <ul class="btn-toggle-nav list-unstyled fw-normal {{ if eq $level 0}} pb-1 {{ end }}{{ if $pre }}sidebar-nav-icon-indent{{ else }}ps-3{{ end }}">
+            {{/* The list publishes the indent its rows are to spend; the rows read it as a
+                 custom property and pad themselves by it. Emitted here rather than derived
+                 in CSS: the collapse trail is expanded client side, and a selector that has
+                 to be re-resolved as the subtree goes from display:none to visible can land
+                 its first paint on the wrong value. A class in the cached markup is correct
+                 from the start - and is a class rather than a data attribute so PurgeCSS can
+                 see it, see `$sidebar-nav-indent-step`. */}}
+            <ul class="btn-toggle-nav list-unstyled fw-normal{{ if eq $level 0}} pb-1{{ end }} sidebar-nav-indent-{{ $childIndent }}">
                 {{- range $childIndex, $item := $group.pages -}}
                     {{- if $item.pages -}}
                         {{/* Compose a unique index path through the recursion so
@@ -226,6 +241,7 @@
                             "pre"        $item.pre
                             "iconColumn" $childIconColumn
                             "filename"   $filename
+                            "indent"     $childIndent
                             )
                         }}
                     {{- else -}}
