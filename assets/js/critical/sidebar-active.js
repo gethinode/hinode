@@ -16,6 +16,11 @@
 //
 // Ancestor matching is a property of the link's href, so it needs no opt-in marker in the
 // markup: every link in the nav is a candidate. Do not reintroduce one.
+//
+// Exactly one entry is marked, whether it is a leaf or a group title. The groups above it
+// are expanded but not highlighted: they are the trail to the current page, not the current
+// page, and marking them would leave a reader unable to tell which of the four rows lit up
+// is the one they are on.
 (function () {
   'use strict'
 
@@ -64,14 +69,21 @@
     var link = match.link
     if (!link) return
 
+    // A group title is not the row it heads: the row is the `.sidebar-item-group` around it,
+    // which also spans the collapse chevron beside the title. Marking only the anchor leaves
+    // nothing for the stylesheet to give an active group the treatment an active leaf gets,
+    // because a leaf *is* its own row. So the class goes on both - the anchor for the text,
+    // the row for its surface - while `aria-current` stays on the link it describes.
+    var group = link.closest('.sidebar-item-group')
+
     nav.classList.add('sidebar-no-transition')
     link.classList.add('active')
+    if (group) group.classList.add('active')
     link.setAttribute('aria-current', match.exact ? 'page' : 'true')
 
     // Expand the collapse trail: the matched group's own collapse (when the link is a group
     // title) plus every collapse ancestor within this nav instance.
     var own = null
-    var group = link.closest('.sidebar-item-group')
     if (group && group.parentElement) {
       own = group.parentElement.querySelector(':scope > .collapse')
     }

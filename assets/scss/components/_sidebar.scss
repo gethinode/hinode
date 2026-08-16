@@ -15,6 +15,41 @@ $sidebar-collapse-clipping-transition-delayed: white-space 0s $sidebar-collapse-
 // capped by the room instead (see `.sidebar-item-label`).
 $sidebar-label-max-width: 200px !default;
 
+// The unit a nested sidebar row is indented by.
+//
+// The indent used to sit on the list that held the row - `ps-3`, or a wider class when the
+// parent group led with an icon - which moved the row's box along with its text. A row's
+// hover and active surface is its box, so a child's highlight started one indent to the
+// right of its parent's while both ended at the sidebar's edge, and the deeper the row the
+// narrower its highlight. The indent is now spent as padding on the row itself: the text
+// lands exactly where it did, and every box stays the full width of the sidebar.
+//
+// That trades a nesting list for arithmetic, because padding on a row does not accumulate
+// the way padding on nested lists does - so `assets/sidebar.html` sums the depth as it
+// recurses and publishes the total on each child list as a step count, which the table at
+// the foot of this file turns back into a length.
+//
+// A step count rather than the length itself because the markup is rendered through
+// `partialCached` and a Content-Security-Policy site cannot carry an inline `style`. And the
+// count rides a *class* rather than a data attribute, which the enumeration below exists to
+// decode: PurgeCSS runs against `hugo_stats.json`, and Hugo records only tags, classes and
+// ids there - an attribute selector is invisible to it and the whole table is dropped from
+// the production stylesheet, leaving every row at the `0rem` fallback and the nesting flat.
+// A consuming site can list an attribute under PurgeCSS's `dynamicAttributes`, but a theme
+// cannot require every consumer to have done so, and the `ps-3` this replaces was a class
+// for the same reason.
+//
+// Two steps is the plain nesting indent, the width of the `ps-3` it replaces. Three is what
+// a group with a leading icon gives its children so they line up with its label rather than
+// its icon: `fa-fw` (1.25rem) plus the icon's `me-1` gutter (0.25rem). Retuning the step
+// therefore rescales the plain indent and the icon column together, and only the plain one
+// is free to move - the other has to match the icon it hangs under.
+$sidebar-nav-indent-step: 0.5rem !default;
+
+// How deep the step table goes. Each level costs one selector, and a menu deeper than this
+// stops indenting further rather than losing the alignment it has.
+$sidebar-nav-indent-max: 16 !default;
+
 // scss-docs-start sidebar
 .sidebar {
     top: var(--navbar-offset);
@@ -96,6 +131,11 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
     display: block;
     padding: 0.1875rem 0.5rem !important;
 
+    // The nesting indent, paid by the row so its box stays full width - see
+    // `$sidebar-nav-indent-step`. Restated after the shorthand above, which would
+    // otherwise reset it; `!important` only because that shorthand carries one.
+    padding-left: calc(0.5rem + var(--sidebar-indent, 0rem)) !important;
+
     &.active {
         color: $primary;
     }
@@ -112,12 +152,26 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
 
     border-radius: #{$theme-border-radius};
 
+    // A group is the current page whenever its own title is what the reader navigated to,
+    // and `critical/sidebar-active.js` marks it here rather than only on the title anchor:
+    // the row's surface is this element - it spans the chevron too, which the anchor does
+    // not - so an active group otherwise could not be given the same treatment as an active
+    // leaf. The anchor is restated because `> div > a` below sets a colour of its own, which
+    // an inherited one would lose to.
+    &.active {
+        color: $primary;
+
+        > div > a {
+            color: $primary;
+        }
+    }
+
     &:hover,
     &:focus {
         color: $primary;
         background-color: tint-color($primary, 90%);
     }
-    
+
     > div > a {
         display: block;
         width: 100%;
@@ -132,8 +186,11 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
     }
 }
 
+// A group header sits on the wrapper's padding rather than its own, so the nesting indent
+// lands here - which is what keeps `.sidebar-item-group` itself, the row's hover and active
+// surface, at the full width of the sidebar.
 .sidebar-item-group > div {
-    padding: 0.1875rem 0 0.1875rem 0.5rem !important;
+    padding: 0.1875rem 0 0.1875rem calc(0.5rem + var(--sidebar-indent, 0rem)) !important;
 }
 
 // Hanging indent for rows that lead with an icon.
@@ -169,7 +226,7 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
     // `padding-left` needs `!important` only because the base `.sidebar-item`
     // padding above carries one.
     .sidebar-item:not(.d-flex):has(> svg:first-child, > i:first-child) {
-        padding-left: calc(0.5rem + #{$sidebar-item-icon-column}) !important;
+        padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$sidebar-item-icon-column}) !important;
         text-indent: calc(-1 * #{$sidebar-item-icon-column});
     }
 
@@ -204,7 +261,7 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
 // `!important` for the same reason the block above needs it: the base
 // `.sidebar-item` padding carries one.
 .sidebar-item.sidebar-item-icon-indent {
-    padding-left: calc(0.5rem + #{$sidebar-item-icon-column}) !important;
+    padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$sidebar-item-icon-column}) !important;
 }
 
 // Group headers again sit on the wrapper's padding, so they reserve the column
@@ -263,6 +320,10 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
 
             &.active {
                 color: $primary-text-emphasis-dark !important;
+
+                > div > a {
+                    color: $primary-text-emphasis-dark !important;
+                }
             }
 
             &:hover,
@@ -697,21 +758,20 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-footer .sidebar-seconda
     transform: translateX(-50%);
 }
 
-// Align a group's children with its label rather than its icon.
+// The step table: turn the depth `assets/sidebar.html` counted back into a length.
 //
-// A leading icon pushes the parent's own label right by the icon's width plus
-// its `me-1` gutter. `ps-3` is narrower than that, so a child list using it
-// sits slightly to the *left* of the label it belongs to and the hierarchy
-// reads as broken. Groups with an icon get this class from the template in
-// place of `ps-3`; groups without one are untouched.
+// A list publishes the indent its rows are to spend, and the rows read it through this
+// custom property (see `$sidebar-nav-indent-step` for why the renderer counts steps rather
+// than emitting the length itself). The property inherits, so a row picks up the value of
+// the nearest list above it and a deeper list simply overrides it - a group header, which
+// belongs to the list its *parent* opened, is indented by that list rather than by its own.
 //
-// The template sets it rather than CSS deriving it with `:has()`. The collapse
-// trail is expanded client side, and a selector that must be re-resolved as a
-// subtree goes from display:none to visible can paint the old indent first and
-// correct it a frame later, which reads as the sidebar shifting on load.
-.sidebar-nav-icon-indent {
-    // Matches `fa-fw` (--fa-width: 1.25em) plus the icon's `me-1` gutter.
-    padding-left: calc(1.25rem + 0.25rem);
+// Scoped under `.sidebar` so the class means nothing outside a sidebar, and setting only a
+// custom property so it cannot compete with the rules that spend it.
+@for $level from 1 through $sidebar-nav-indent-max {
+    .sidebar .sidebar-nav-indent-#{$level} {
+        --sidebar-indent: #{$level * $sidebar-nav-indent-step};
+    }
 }
 
 // scss-docs-end sidebar
