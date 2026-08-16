@@ -112,12 +112,26 @@ html.sidebar-pre-collapsed .sidebar-collapsible .sidebar-brand {
 
     border-radius: #{$theme-border-radius};
 
+    // A group is the current page whenever its own title is what the reader navigated to,
+    // and `critical/sidebar-active.js` marks it here rather than only on the title anchor:
+    // the row's surface is this element - it spans the chevron too, which the anchor does
+    // not - so an active group otherwise could not be given the same treatment as an active
+    // leaf. The anchor is restated because `> div > a` below sets a colour of its own, which
+    // an inherited one would lose to.
+    &.active {
+        color: $primary;
+
+        > div > a {
+            color: $primary;
+        }
+    }
+
     &:hover,
     &:focus {
         color: $primary;
         background-color: tint-color($primary, 90%);
     }
-    
+
     > div > a {
         display: block;
         width: 100%;
@@ -263,6 +277,10 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
 
             &.active {
                 color: $primary-text-emphasis-dark !important;
+
+                > div > a {
+                    color: $primary-text-emphasis-dark !important;
+                }
             }
 
             &:hover,
