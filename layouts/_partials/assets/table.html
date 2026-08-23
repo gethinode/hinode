@@ -79,6 +79,15 @@
      needs no JavaScript. */}}
 {{ if and $wrap $dataTable }}
     {{ $attributes = printf "%s data-table-wrap=true data-table-wrap-breakpoint=%s" $attributes $breakpoint }}
+    {{/* `wrap-cols` splits the record across more than two rows: a comma-separated column count per
+         rendered row, summing to the table's column count. Only the first group keeps one cell per
+         column, so it alone drives the column grid; later groups collapse into a single spanning
+         cell. Passed through verbatim - the column count lives in the rendered header, which only
+         the browser has, so the group list is validated there and an invalid one falls back to the
+         default two-row split. */}}
+    {{ with $args.wrapCols }}
+        {{ $attributes = printf "%s data-table-wrap-cols=%s" $attributes . }}
+    {{ end }}
 {{ end }}
 
 {{/* Filter */}}
@@ -109,14 +118,20 @@
     {{ $caption := "" }}
     {{ with $args.caption }}{{ $caption = . | $args.page.RenderString }}{{ end }}
 
+    {{/* `wrap-cols` reaches the render hook the same way, since a plain table folds server-side and
+         only the hook sees the parsed rows. A data table ignores it here and folds in the browser
+         instead, so the value is passed either way and the hook decides. */}}
     {{ $store := $args.page.Store }}
     {{ $outer := $store.Get "hinodeTableIsDataTable" }}
     {{ $outerCaption := $store.Get "hinodeTableCaption" }}
+    {{ $outerWrapCols := $store.Get "hinodeTableWrapCols" }}
     {{ $store.Set "hinodeTableIsDataTable" $dataTable }}
     {{ $store.Set "hinodeTableCaption" $caption }}
+    {{ $store.Set "hinodeTableWrapCols" ($args.wrapCols | default "") }}
     {{ $input = $input | $args.page.RenderString }}
     {{ $store.Set "hinodeTableIsDataTable" $outer }}
     {{ $store.Set "hinodeTableCaption" $outerCaption }}
+    {{ $store.Set "hinodeTableWrapCols" $outerWrapCols }}
 
     {{ $regex := `<table\s*class="(.+?)"` }}
     {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}

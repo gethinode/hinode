@@ -46,6 +46,16 @@ arguments:
       the full width of its container.
     release: v3.18.0
   wrap:
+  wrap-cols:
+    type: string
+    optional: true
+    comment: >-
+      Comma-separated column count per rendered row when wrapping, summing to the
+      table's column count. Splits a record across more than two rows on small
+      devices, for example "2,4,1". Only the first group keeps one cell per
+      column; later groups collapse into a single spanning cell. Requires `wrap`;
+      an invalid list falls back to wrapping the last column only.
+    release: v3.23.0
   wrapper:
     release: v2.0.0
   caption:

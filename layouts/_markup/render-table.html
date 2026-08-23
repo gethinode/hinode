@@ -22,6 +22,28 @@
 {{ $given := split (or $attr.class "") " " }}
 {{ $wrap := and (in $given "table-wrap") (not $dataTable) (ne $breakpoint "xs") (gt $cols 1) }}
 
+{{/* `wrap-cols` splits a record across more than two rows: a column count per rendered row, summing
+     to the column count. Refused unless every entry is a positive integer and the total matches, so
+     a stale list left behind after a column was added or removed folds on the old boundaries rather
+     than dropping or duplicating a column - it falls back to the default split instead.
+     `int` yields 0 for anything non-numeric, which the positive test then rejects. */}}
+{{ $groups := slice (sub $cols 1) 1 }}
+{{ with and $wrap (.Page.Store.Get "hinodeTableWrapCols") }}
+    {{ $parsed := slice }}
+    {{ $valid := true }}
+    {{ range split . "," }}
+        {{ $n := int (trim . " ") }}
+        {{ if lt $n 1 }}{{ $valid = false }}{{ end }}
+        {{ $parsed = $parsed | append $n }}
+    {{ end }}
+    {{ $sum := 0 }}
+    {{ range $parsed }}{{ $sum = add $sum . }}{{ end }}
+    {{ if and $valid (eq $sum $cols) (gt (len $parsed) 1) }}
+        {{ $groups = $parsed }}
+    {{ end }}
+{{ end }}
+{{ $lead := index $groups 0 }}
+
 {{/* Rebuild the class list: drop empties, drop `table-wrap` when it does not apply, and ensure
      `table` is present so Bootstrap styles the element. */}}
 {{ $classes := slice }}
@@ -29,6 +51,12 @@
     {{ if and (ne . "") (or $wrap (ne . "table-wrap")) }}
         {{ $classes = $classes | append . }}
     {{ end }}
+{{ end }}
+{{/* The rows-per-record keys the striping rules, which recompute Bootstrap's alternation over a
+     record rather than a row. Only emitted past the default two, which the plain `table-wrap`
+     selector already covers. */}}
+{{ if and $wrap (gt (len $groups) 2) }}
+    {{ $classes = $classes | append (printf "table-wrap-%d" (len $groups)) }}
 {{ end }}
 {{ if not (in $classes "table") }}{{ $classes = $classes | append "table" }}{{ end }}
 {{ $attr = merge $attr (dict "class" (delimit ($classes | uniq) " ")) }}
@@ -62,7 +90,7 @@
           {{- with $cell.Alignment }}
             {{- $cellClasses = $cellClasses | append (printf "text-%s" (index $align .)) }}
           {{- end }}
-          {{- if and $wrap (eq $i (sub $length 1)) }}
+          {{- if and $wrap (ge $i $lead) }}
             {{- $cellClasses = $cellClasses | append "d-none" (printf "d-%s-table-cell" $breakpoint) }}
           {{- end }}
           <th{{ with $cellClasses }} class="{{ delimit . " " }}"{{ end }}>
@@ -75,6 +103,9 @@
   <tbody>
     {{- range .TBody }}
       {{- $length := len . }}
+      {{- /* The folded rows below read cells by position from inside a nested range, where neither
+             `.` nor `$` is this row any more - `$` is the render hook's own context. Hold the row. */}}
+      {{- $row := . }}
       <tr>
         {{- range $i, $cell := . }}
           {{- $cellClasses := slice }}
@@ -82,7 +113,7 @@
             {{- $cellClasses = $cellClasses | append (printf "text-%s" (index $align .)) }}
           {{- end }}
           {{- if $wrap }}
-            {{- if eq $i (sub $length 1) }}
+            {{- if ge $i $lead }}
               {{- $cellClasses = $cellClasses | append "d-none" (printf "d-%s-table-cell" $breakpoint) }}
             {{- else }}
               {{- $cellClasses = $cellClasses | append "table-border-bottom-wrap" }}
@@ -94,12 +125,27 @@
         {{- end }}
       </tr>
       {{- if $wrap }}
-        {{- $last := index . (sub $length 1) }}
-        <tr class="d-{{ $breakpoint }}-none">
-          <td colspan="{{ sub $length 1 }}"{{ with $last.Alignment }} class="text-{{ index $align . }}"{{ end }}>
-            {{- $last.Text -}}
-          </td>
-        </tr>
+        {{- /* One row per folded group, each spanning the columns the lead row leaves visible. The
+               row is hidden above the breakpoint, where the record renders as a single row instead.
+               `colspan` counts the lead group rather than every column: the folded headings are
+               display:none there and contribute no column, so spanning the full count would reach
+               past the grid and cut the row's stripe and border off part way across. */}}
+        {{- $offset := $lead }}
+        {{- range $g, $size := (after 1 $groups) }}
+          <tr class="d-{{ $breakpoint }}-none">
+            <td colspan="{{ $lead }}"{{ if lt (add $g 2) (len $groups) }} class="table-border-bottom-wrap"{{ end }}>
+              <div class="table-wrap-group">
+                {{- range $j := (seq $size) }}
+                  {{- $cell := index $row (add $offset (sub $j 1)) }}
+                  <span class="table-wrap-value{{ with $cell.Alignment }} text-{{ index $align . }}{{ end }}">
+                    {{- $cell.Text -}}
+                  </span>
+                {{- end }}
+              </div>
+            </td>
+          </tr>
+          {{- $offset = add $offset $size }}
+        {{- end }}
       {{- end }}
     {{- end }}
   </tbody>
