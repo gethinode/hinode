@@ -39,6 +39,17 @@
 {{- $icons := $args.navIcons -}}
 {{- $itemAttrs := $args.navItemAttrs -}}
 
+{{/* The companion dropdown mirrors the nav, so it has to start on the same entry. `nav-show` names
+     that entry by item id rather than position, so resolve it to an index here - built from the same
+     `{args.id}-btn-{index}` expression the nav's own buttons use below, so the two cannot disagree.
+     Falls back to the first entry when `nav-show` is unset or names an item that does not exist. */}}
+{{- $active := 0 -}}
+{{- if $args.navShow -}}
+    {{- range $index, $item := $titles -}}
+        {{- if eq $args.navShow (printf "%s-btn-%d" $args.id $index) -}}{{- $active = $index -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
+
 {{/* Tab-content class — spacing depends on type and controls-placement.
      tabs/callout: border acts as the visual separator, no margin needed.
      vertical:     left margin to offset from the vertical nav rail.
@@ -63,6 +74,7 @@
             "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
             "titles" $titles
             "wrap"   $wrap
+            "active" $active
         ) }}
     {{- end -}}
 
@@ -155,6 +167,7 @@
             "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
             "titles" $titles
             "wrap"   $wrap
+            "active" $active
         ) }}
     {{- end -}}
 
