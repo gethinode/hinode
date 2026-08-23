@@ -73,6 +73,23 @@ modules: ["simple-datatables"]
 | delta   | gadget | The fourth record, whose description runs on for a little while.   |
 {{< /table >}}
 
+## Responsive filter controls
+
+Below the main breakpoint the button group is replaced by a dropdown; at wider
+widths the group renders as usual. Enough categories to outgrow a narrow
+viewport, which is the case the argument exists for.
+
+{{< table filter="widget,gadget,doohickey,thingamajig,whatsit" filter-col="1" filter-responsive="true" sortable="true" class="fixture-filter-responsive" >}}
+
+| Name    | Type        | Description                                                        |
+|---------|-------------|--------------------------------------------------------------------|
+| alpha   | widget      | The first record, with a description long enough to need wrapping. |
+| bravo   | gadget      | The second record, also with a fairly long trailing description.   |
+| charlie | doohickey   | The third record. Short.                                           |
+| delta   | thingamajig | The fourth record, whose description runs on for a little while.   |
+| echo    | whatsit     | The fifth record, added to give every category a row.              |
+{{< /table >}}
+
 ## Table with caption
 
 {{< table caption="Overview of records" class="fixture-caption" >}}

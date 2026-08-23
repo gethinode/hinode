@@ -130,17 +130,42 @@
          which always spans the full width of its container. `justify` carries a default of
          `start` in mod-utils, preserving the original alignment for every existing caller. */}}
     {{ if $filter }}
+    {{/* `filter-responsive` swaps the button group for a dropdown below the main breakpoint, where a
+         group of more than a few buttons outgrows the viewport. Off by default, so an existing table
+         keeps its button group at every width. A no-op at `xs`, which has no Bootstrap display-utility
+         infix to hide the group with - the same guard `wrap` applies above.
+
+         The dropdown holds no behavior of its own: each item names a button through `data-link`, and
+         assets/js/nav.js replays the click on it, so filtering runs through the one handler either
+         way. That requires the buttons to carry ids of the form `{filterId}-btn-{index}` matching the
+         order of `$titles` below - "All" first, then the filter values. */}}
+    {{ $responsive := and $args.filterResponsive (ne $breakpoint "xs") }}
+    {{ $titles := slice (T "tableFilterAll" | default "All") }}
+    {{ range $filter }}{{ $titles = $titles | append (. | title) }}{{ end }}
     <div class="table-filter-controls d-flex justify-content-{{ $args.justify }} mb-3">
-        <div class="btn-group" role="group" aria-label="{{ T "tableFilterLabel" | default "Filter" }}">
+        {{ if $responsive }}
+        {{ partial "assets/panel-dropdown.html" (dict
+            "id"     $filterId
+            "class"  (printf "d-%s-none" $breakpoint)
+            "titles" $titles
+            "label"  (T "tableFilterLabel" | default "Filter")
+        ) }}
+        {{ end }}
+        <div class="btn-group{{ if $responsive }} d-none d-{{ $breakpoint }}-inline-flex{{ end }}"
+             role="group"
+             aria-label="{{ T "tableFilterLabel" | default "Filter" }}"
+             {{ if $responsive }}data-companion="dropdown-{{ $filterId }}"{{ end }}>
             <button type="button"
                     class="btn btn-outline-primary active"
+                    id="{{ $filterId }}-btn-0"
                     data-filter-table="{{ $filterId }}"
                     data-filter-value="">{{ T "tableFilterAll" | default "All" }}</button>
-            {{ range $filter }}
+            {{ range $index, $value := $filter }}
             <button type="button"
                     class="btn btn-outline-primary"
+                    id="{{ $filterId }}-btn-{{ add $index 1 }}"
                     data-filter-table="{{ $filterId }}"
-                    data-filter-value="{{ . }}">{{ . | title }}</button>
+                    data-filter-value="{{ $value }}">{{ $value | title }}</button>
             {{ end }}
         </div>
     </div>
