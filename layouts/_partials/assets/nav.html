@@ -6,29 +6,6 @@
 
 {{- $error := false -}}
 
-{{- define "_partials/inline/nav-dropdown.html" -}}
-    {{ $id := .id }}
-    {{ $class := .class }}
-    {{ $titles := .titles }}
-    {{ $wrap := .wrap }}
-
-    <div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
-    <button type="button" class="link-body-emphasis dropdown-toggle border-0 bg-transparent p-0" data-bs-toggle="dropdown" aria-expanded="false">
-        {{ cond (gt (len $titles) 0) (index $titles 0) (T "sectionMenu") }}
-    </button>
-        <ul class="dropdown-menu">
-            {{- range $index, $item := $titles -}}
-                {{ $itemID := printf "%s-btn-%d" $id $index -}}
-                {{- $show := eq $index 0 -}}
-                <li>
-                    <button class="dropdown-item {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}"
-                    data-link="#{{ $id }}-btn-{{ $index }}" type="button">{{ $item }}</button>
-                </li>
-            {{ end }}
-        </ul>
-    </div>
-{{- end -}}
-
 {{/* Initialize arguments */}}
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "nav" "args" . "group" "partial") -}}
 {{- if or $args.err $args.warnmsg -}}
@@ -62,6 +39,17 @@
 {{- $icons := $args.navIcons -}}
 {{- $itemAttrs := $args.navItemAttrs -}}
 
+{{/* The companion dropdown mirrors the nav, so it has to start on the same entry. `nav-show` names
+     that entry by item id rather than position, so resolve it to an index here - built from the same
+     `{args.id}-btn-{index}` expression the nav's own buttons use below, so the two cannot disagree.
+     Falls back to the first entry when `nav-show` is unset or names an item that does not exist. */}}
+{{- $active := 0 -}}
+{{- if $args.navShow -}}
+    {{- range $index, $item := $titles -}}
+        {{- if eq $args.navShow (printf "%s-btn-%d" $args.id $index) -}}{{- $active = $index -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
+
 {{/* Tab-content class — spacing depends on type and controls-placement.
      tabs/callout: border acts as the visual separator, no margin needed.
      vertical:     left margin to offset from the vertical nav rail.
@@ -81,11 +69,12 @@
 
     {{/* Responsive dropdown (standard nav types only, controls-top position) */}}
     {{- if and $args.responsive (not $isBtnGroup) (ne $controlsPlacement "bottom") -}}
-        {{ partial "inline/nav-dropdown.html" (dict
+        {{ partial "assets/panel-dropdown.html" (dict
             "id"     $id
             "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
             "titles" $titles
             "wrap"   $wrap
+            "active" $active
         ) }}
     {{- end -}}
 
@@ -173,11 +162,12 @@
 
     {{/* Responsive dropdown (standard nav types only, controls-below position) */}}
     {{- if and $args.responsive (not $isBtnGroup) (eq $controlsPlacement "bottom") -}}
-        {{ partial "inline/nav-dropdown.html" (dict
+        {{ partial "assets/panel-dropdown.html" (dict
             "id"     $id
             "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
             "titles" $titles
             "wrap"   $wrap
+            "active" $active
         ) }}
     {{- end -}}
 

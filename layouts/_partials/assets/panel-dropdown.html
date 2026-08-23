@@ -1,0 +1,46 @@
+{{/*
+    Copyright © 2022 - 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Renders a Bootstrap dropdown standing in for a group of buttons that is too wide to show at
+     narrow widths. Each item carries a `data-link` naming the button it represents; assets/js/nav.js
+     replays a click on that button, so the group keeps every behavior and this partial adds none of
+     its own. That is what lets one dropdown serve both a nav and a table filter.
+
+     The caller renders the real buttons with ids of the form `{id}-btn-{index}` in the same order as
+     `titles`, and hides them below its breakpoint while showing this dropdown there. The first entry
+     is treated as the initially active one and labels the toggle.
+
+     Extracted from assets/nav.html, where it was an inline partial. Every tag, class and attribute
+     is carried over unchanged - including the double space in `dropdown-item  text-nowrap`, kept so
+     the extraction reads as a move rather than a rewrite. Only the leading indentation of the
+     emitted HTML differs, because the markup no longer sits nested inside nav.html. */}}
+{{ $id := .id }}
+{{ $class := .class | default "" }}
+{{ $titles := .titles | default slice }}
+{{ $wrap := .wrap }}
+{{ $label := .label | default (T "sectionMenu") }}
+
+{{/* Index of the entry the group starts on. A caller whose group does not start on its first entry
+     must say so, or the toggle would advertise an entry that is not the active one - which is what
+     `nav-show` used to produce before this argument existed. Both a missing argument and an explicit
+     `0` resolve to 0, so `default` is safe here; it is out of range only if a caller passes an index
+     its own `titles` does not hold. */}}
+{{ $active := .active | default 0 }}
+
+<div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
+<button type="button" class="link-body-emphasis dropdown-toggle border-0 bg-transparent p-0" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ cond (gt (len $titles) 0) (index $titles $active) $label }}
+</button>
+    <ul class="dropdown-menu">
+        {{- range $index, $item := $titles -}}
+            {{- $show := eq $index $active -}}
+            <li>
+                <button class="dropdown-item {{ if not $wrap }} text-nowrap{{ end }}{{ if $show }} active{{ end }}"
+                data-link="#{{ $id }}-btn-{{ $index }}" type="button">{{ $item }}</button>
+            </li>
+        {{ end }}
+    </ul>
+</div>

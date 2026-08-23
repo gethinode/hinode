@@ -29,6 +29,16 @@ arguments:
     release: v0.24.13
   filter:
   filter-col:
+  filter-responsive:
+    type: bool
+    default: false
+    optional: true
+    comment: >-
+      Whether the filter button group collapses into a dropdown below the site's
+      main breakpoint, for groups too wide to fit a narrow viewport. Defaults to
+      false, so the button group renders at every width. Requires `filter`, and
+      has no effect when the main breakpoint is `xs`.
+    release: v3.22.0
   justify:
     comment: >-
       Horizontal alignment of the filter controls. Requires `filter`, which is

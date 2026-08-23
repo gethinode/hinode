@@ -35,11 +35,19 @@ document.querySelectorAll('.panel-dropdown').forEach(trigger => {
   })
 })
 
-document.querySelectorAll('.nav-panel .nav-link').forEach(trigger => {
-  trigger.addEventListener('click', event => {
-    const companion = event.srcElement.parentElement.parentElement.getAttribute('data-companion')
-    if (companion != null) {
-      updateDropdown(companion, trigger.getAttribute('id'), trigger.textContent.trim())
+// Keeps a companion dropdown in step with the control group it stands for, so the two never
+// disagree about which entry is active - which shows up when the viewport crosses the breakpoint
+// and the previously hidden control becomes the visible one.
+//
+// Delegated from the group itself and resolved with `closest`, so the depth of the control inside
+// the group does not matter: a nav nests its button in `button > li > ul`, a button group renders
+// `button > div`. Both carry `data-companion`, and both reach it the same way.
+document.querySelectorAll('[data-companion]').forEach(group => {
+  group.addEventListener('click', event => {
+    const trigger = event.target.closest('button[id]')
+    if (trigger == null || !group.contains(trigger)) {
+      return
     }
+    updateDropdown(group.getAttribute('data-companion'), trigger.getAttribute('id'), trigger.textContent.trim())
   })
 })
