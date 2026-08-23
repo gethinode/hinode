@@ -159,11 +159,15 @@
     {{ range $filter }}{{ $titles = $titles | append (. | title) }}{{ end }}
     <div class="table-filter-controls d-flex justify-content-{{ $args.justify }} mb-3">
         {{ if $responsive }}
+        {{/* Styled as a button, matching the group it stands in for. The nav's borderless default
+             suits a toggle sitting among prose, but here it would render the active filter as a
+             bare word where a row of buttons used to be - nothing about it reads as a control. */}}
         {{ partial "assets/panel-dropdown.html" (dict
-            "id"     $filterId
-            "class"  (printf "d-%s-none" $breakpoint)
-            "titles" $titles
-            "label"  (T "tableFilterLabel" | default "Filter")
+            "id"          $filterId
+            "class"       (printf "d-%s-none" $breakpoint)
+            "titles"      $titles
+            "label"       (T "tableFilterLabel" | default "Filter")
+            "toggleClass" "btn btn-outline-primary"
         ) }}
         {{ end }}
         <div class="btn-group{{ if $responsive }} d-none d-{{ $breakpoint }}-inline-flex{{ end }}"
