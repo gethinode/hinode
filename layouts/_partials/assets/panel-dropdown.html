@@ -30,8 +30,18 @@
      its own `titles` does not hold. */}}
 {{ $active := .active | default 0 }}
 
+{{/* Appearance of the toggle. `dropdown-toggle` is always emitted rather than left to the
+     caller: it draws the caret and Bootstrap keys its dropdown JavaScript off it, so a caller
+     that forgot it would get a control that neither indicates nor opens.
+
+     Defaults to the borderless text treatment a nav's section menu uses, where the toggle sits
+     among prose. A caller standing in for a group of buttons should pass the button classes
+     instead - an unstyled word reads as body copy, not as a control, and gives no hint that it
+     can be opened. */}}
+{{ $toggleClass := .toggleClass | default "link-body-emphasis border-0 bg-transparent p-0" }}
+
 <div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
-<button type="button" class="link-body-emphasis dropdown-toggle border-0 bg-transparent p-0" data-bs-toggle="dropdown" aria-expanded="false">
+<button type="button" class="dropdown-toggle {{ $toggleClass }}" data-bs-toggle="dropdown" aria-expanded="false">
     {{ cond (gt (len $titles) 0) (index $titles $active) $label }}
 </button>
     <ul class="dropdown-menu">
