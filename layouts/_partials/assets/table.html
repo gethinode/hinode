@@ -79,6 +79,15 @@
      needs no JavaScript. */}}
 {{ if and $wrap $dataTable }}
     {{ $attributes = printf "%s data-table-wrap=true data-table-wrap-breakpoint=%s" $attributes $breakpoint }}
+    {{/* `wrap-cols` splits the record across more than two rows: a comma-separated column count per
+         rendered row, summing to the table's column count. Only the first group keeps one cell per
+         column, so it alone drives the column grid; later groups collapse into a single spanning
+         cell. Passed through verbatim - the column count lives in the rendered header, which only
+         the browser has, so the group list is validated there and an invalid one falls back to the
+         default two-row split. */}}
+    {{ with $args.wrapCols }}
+        {{ $attributes = printf "%s data-table-wrap-cols=%s" $attributes . }}
+    {{ end }}
 {{ end }}
 
 {{/* Filter */}}
@@ -109,14 +118,20 @@
     {{ $caption := "" }}
     {{ with $args.caption }}{{ $caption = . | $args.page.RenderString }}{{ end }}
 
+    {{/* `wrap-cols` reaches the render hook the same way, since a plain table folds server-side and
+         only the hook sees the parsed rows. A data table ignores it here and folds in the browser
+         instead, so the value is passed either way and the hook decides. */}}
     {{ $store := $args.page.Store }}
     {{ $outer := $store.Get "hinodeTableIsDataTable" }}
     {{ $outerCaption := $store.Get "hinodeTableCaption" }}
+    {{ $outerWrapCols := $store.Get "hinodeTableWrapCols" }}
     {{ $store.Set "hinodeTableIsDataTable" $dataTable }}
     {{ $store.Set "hinodeTableCaption" $caption }}
+    {{ $store.Set "hinodeTableWrapCols" ($args.wrapCols | default "") }}
     {{ $input = $input | $args.page.RenderString }}
     {{ $store.Set "hinodeTableIsDataTable" $outer }}
     {{ $store.Set "hinodeTableCaption" $outerCaption }}
+    {{ $store.Set "hinodeTableWrapCols" $outerWrapCols }}
 
     {{ $regex := `<table\s*class="(.+?)"` }}
     {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
@@ -130,17 +145,46 @@
          which always spans the full width of its container. `justify` carries a default of
          `start` in mod-utils, preserving the original alignment for every existing caller. */}}
     {{ if $filter }}
+    {{/* `filter-responsive` swaps the button group for a dropdown below the main breakpoint, where a
+         group of more than a few buttons outgrows the viewport. Off by default, so an existing table
+         keeps its button group at every width. A no-op at `xs`, which has no Bootstrap display-utility
+         infix to hide the group with - the same guard `wrap` applies above.
+
+         The dropdown holds no behavior of its own: each item names a button through `data-link`, and
+         assets/js/nav.js replays the click on it, so filtering runs through the one handler either
+         way. That requires the buttons to carry ids of the form `{filterId}-btn-{index}` matching the
+         order of `$titles` below - "All" first, then the filter values. */}}
+    {{ $responsive := and $args.filterResponsive (ne $breakpoint "xs") }}
+    {{ $titles := slice (T "tableFilterAll" | default "All") }}
+    {{ range $filter }}{{ $titles = $titles | append (. | title) }}{{ end }}
     <div class="table-filter-controls d-flex justify-content-{{ $args.justify }} mb-3">
-        <div class="btn-group" role="group" aria-label="{{ T "tableFilterLabel" | default "Filter" }}">
+        {{ if $responsive }}
+        {{/* Styled as a button, matching the group it stands in for. The nav's borderless default
+             suits a toggle sitting among prose, but here it would render the active filter as a
+             bare word where a row of buttons used to be - nothing about it reads as a control. */}}
+        {{ partial "assets/panel-dropdown.html" (dict
+            "id"          $filterId
+            "class"       (printf "d-%s-none" $breakpoint)
+            "titles"      $titles
+            "label"       (T "tableFilterLabel" | default "Filter")
+            "toggleClass" "btn btn-outline-primary"
+        ) }}
+        {{ end }}
+        <div class="btn-group{{ if $responsive }} d-none d-{{ $breakpoint }}-inline-flex{{ end }}"
+             role="group"
+             aria-label="{{ T "tableFilterLabel" | default "Filter" }}"
+             {{ if $responsive }}data-companion="dropdown-{{ $filterId }}"{{ end }}>
             <button type="button"
                     class="btn btn-outline-primary active"
+                    id="{{ $filterId }}-btn-0"
                     data-filter-table="{{ $filterId }}"
                     data-filter-value="">{{ T "tableFilterAll" | default "All" }}</button>
-            {{ range $filter }}
+            {{ range $index, $value := $filter }}
             <button type="button"
                     class="btn btn-outline-primary"
+                    id="{{ $filterId }}-btn-{{ add $index 1 }}"
                     data-filter-table="{{ $filterId }}"
-                    data-filter-value="{{ . }}">{{ . | title }}</button>
+                    data-filter-value="{{ $value }}">{{ $value | title }}</button>
             {{ end }}
         </div>
     </div>

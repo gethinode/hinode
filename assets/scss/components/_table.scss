@@ -26,6 +26,44 @@
     }
 }
 
+// A folded group holds the values of several columns in one cell, with their headings hidden. They
+// are laid out rather than concatenated: the cells are merged verbatim, so without this the values
+// would run together into one string ("DatabaselaunchShipped").
+//
+// Equal, left-aligned columns, so values line up down the table instead of drifting with their own
+// widths - the alignment the hidden headings would otherwise have provided.
+//
+// The column count adapts rather than matching the folded column count. Four equal tracks across a
+// 390px viewport are ~74px each, which is narrower than a label like "Warehouse" - and a rendered
+// badge is wider than its bare text - so a fixed count breaks values mid-word. `auto-fit` keeps the
+// tracks equal and drops to as many as fit, laying four values out 2x2 on a phone and 4-across when
+// there is room. `min(100%, 7rem)` keeps a single-value group (a description) full width instead of
+// forcing a 7rem minimum on a viewport narrower than that.
+//
+// This sits on a wrapper inside the cell, never on the cell itself: a `display` of grid or flex
+// takes a `td` out of the table formatting context and `colspan` stops applying with it, leaving
+// the folded row's stripe and border cut off part way across the table.
+.table-wrap-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+
+    // Values fill their track rather than being sized to content, so the column's own alignment
+    // still decides where the value sits. Left is simply what `text-align` already resolves to, so
+    // an unaligned table reads left-aligned without that being hard-coded here - and a column the
+    // author centred or right-aligned keeps that after folding.
+    place-items: center stretch;
+    gap: 0.25rem 0.5rem;
+}
+
+// A value wider than its track would otherwise spill into the next one and collide with it
+// ("Warehouseplateau-1"). `min-width: 0` lets the track shrink below its content so the value wraps
+// inside its own column instead; `anywhere` because these are single words often enough that
+// `break-word` alone would leave the overflow in place.
+.table-wrap-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
 @include media-breakpoint-down(#{$main-breakpoint}) {
     // Below the breakpoint the data row and the row holding the wrapped column must read as a
     // single record, so the data row drops its bottom border.
@@ -37,6 +75,30 @@
     .table-wrap.table-striped > tbody > tr:nth-of-type(4n + 2) > * {
         --bs-table-color-type: var(--bs-table-striped-color);
         --bs-table-bg-type: var(--bs-table-striped-bg);
+    }
+
+    // `wrap-cols` renders a record across more than two rows, which moves the stripe. The pattern
+    // alternates per record, so a record of $rows rows has a period of 2 * $rows and the striped
+    // record occupies the first $rows of it. `nth-of-type` accepts no custom property, so the rule
+    // is emitted per row count rather than parameterised. These rules live inside the query because
+    // wrapping only applies below the breakpoint - above it the record is one row and Bootstrap's
+    // own striping is correct. Two rows keeps the pair of rules above; the loop starts at three.
+    @each $rows in (3, 4, 5, 6) {
+        $period: $rows * 2;
+
+        @for $i from 1 through $rows {
+            .table-wrap-#{$rows}.table-striped > tbody > tr:nth-of-type(#{$period}n + #{$i}) > * {
+                --bs-table-color-type: var(--bs-table-striped-color);
+                --bs-table-bg-type: var(--bs-table-striped-bg);
+            }
+        }
+
+        @for $i from ($rows + 1) through $period {
+            .table-wrap-#{$rows}.table-striped > tbody > tr:nth-of-type(#{$period}n + #{$i}) > * {
+                --bs-table-color-type: initial;
+                --bs-table-bg-type: initial;
+            }
+        }
     }
 }
 
