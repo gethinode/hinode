@@ -29,8 +29,6 @@ caption = "Je code et je tweet des mèmes de développeurs."
 languageName = "Nederlands"
 contentDir = "content/nl"
 weight = 3
-[nl.params.opengraph]
-locale = "nl_NL"
 [nl.params.head]
 tagline = "Een Hugo Theme"
 [nl.params.social]

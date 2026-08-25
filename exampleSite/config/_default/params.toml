@@ -202,7 +202,7 @@
 [schema]
     type = "Organization"
     name = "Hinode"
-    locale = "en-US"
+    # locale = "en-US" # defaults to the locale of the current site language
     # twitter = "https://twitter.com/gethinode"
     # linkedIn = ""
     github = "https://github.com/gethinode/hinode"
@@ -223,7 +223,7 @@
 
 [opengraph]
     images = ["logo.png"]
-    locale = "en_US"
+    # locale = "en_US" # defaults to the locale of the current site language
 
 [links]
     bs_badge_heading = "https://getbootstrap.com/docs/5.3/components/badge/#headings"
