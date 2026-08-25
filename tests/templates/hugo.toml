@@ -2,8 +2,11 @@ baseURL = 'https://example.org/'
 title = 'template tests'
 # Deliberately not 'en-us': utilities/GetLocale.html has to refine a matching language with
 # this setting and ignore it for every other one, and only a value differing from the region
-# it would otherwise guess for English tells those two branches apart.
-locale = 'en-gb'
+# it would otherwise guess for English tells those two branches apart. Set through the
+# deprecated `languageCode` rather than its v0.158.0 replacement `locale`, so the assertions
+# still run at the advertised v0.146.0 floor — v0.164 maps the old key onto the new one, so
+# both ends of the supported range agree. Swap it when #2049 moves the floor.
+languageCode = 'en-gb'
 disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [params]
   [params.main]
