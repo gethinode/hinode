@@ -1,5 +1,9 @@
 baseURL = 'https://example.org/'
 title = 'template tests'
+# Deliberately not 'en-us': utilities/GetLocale.html has to refine a matching language with
+# this setting and ignore it for every other one, and only a value differing from the region
+# it would otherwise guess for English tells those two branches apart.
+locale = 'en-gb'
 disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [params]
   [params.main]
@@ -36,6 +40,9 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/GetIncludeTOC.html'
   target = 'layouts/_partials/utilities/GetIncludeTOC.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetLocale.html'
+  target = 'layouts/_partials/utilities/GetLocale.html'
 
 # assets/section-title.html initializes its arguments through mod-utils (InitArgs and the
 # structure data it reads), so those come from the vendored module — `mod:vendor` populates

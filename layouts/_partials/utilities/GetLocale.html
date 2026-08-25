@@ -1,0 +1,75 @@
+{{- /*
+    Resolves the locale of the current site language as a BCP 47 language tag,
+    e.g. "nl-NL". Callers that need the Open Graph form replace the hyphen with
+    an underscore; both notations are accepted as input, so doing so is safe
+    regardless of how the locale was obtained.
+
+    Explicit configuration always wins: pass the relevant site parameter as
+    `locale` and it is returned unchanged. Without it the tag is derived from
+    the site's language, so a multilingual site reports the correct locale per
+    language instead of repeating a single site-wide value.
+
+    Derivation uppercases an existing region subtag ("pt-br" -> "pt-BR"). A
+    language that carries no region ("nl", "zh-Hans") falls back to its most
+    common region, either from the table below or, as a last resort, from the
+    language subtag itself ("nl" -> "nl-NL"). Configure the locale explicitly
+    where that guess is wrong.
+
+    @param {string} locale  Configured locale, returned as-is when set.
+    @param {string} lang    Language tag to derive from. Defaults to the current
+                            site language; pass another to resolve a translation.
+
+    @returns {string}
+*/ -}}
+
+{{- $regions := dict
+    "af" "ZA" "ar" "AR" "be" "BY" "bn" "BD" "bs" "BA" "ca" "ES" "cs" "CZ"
+    "cy" "GB" "da" "DK" "el" "GR" "en" "US" "et" "EE" "eu" "ES" "fa" "IR"
+    "ga" "IE" "gl" "ES" "he" "IL" "hi" "IN" "hy" "AM" "ja" "JP" "ka" "GE"
+    "kk" "KZ" "ko" "KR" "ms" "MY" "nb" "NO" "nn" "NO" "sq" "AL" "sr" "RS"
+    "sv" "SE" "sw" "KE" "uk" "UA" "ur" "PK" "vi" "VN" "zh" "CN"
+    "zh-hans" "CN" "zh-hant" "TW"
+-}}
+
+{{- $locale := .locale -}}
+
+{{- if not $locale -}}
+    {{- $tag := lower (or .lang site.Language.Lang) -}}
+
+    {{- /* Hugo renamed `languageCode` to `locale` in v0.158.0; mirror rss.xml and read
+           whichever one the running version supports. */ -}}
+    {{- $code := "" -}}
+    {{- if le (hugo.Version.Compare "0.158.0") 0 -}}
+        {{- $code = site.Language.Locale -}}
+    {{- else -}}
+        {{- $code = site.Language.LanguageCode -}}
+    {{- end -}}
+    {{- $code = lower (replace (or $code "") "_" "-") -}}
+
+    {{- /* That setting is site-wide unless a language overrides it, so "en-us" surfaces
+           on the Dutch site too. Only honour it when it refines the language it is read
+           for, otherwise every language reports the default one. */ -}}
+    {{- if and $code (eq (index (split $code "-") 0) (index (split $tag "-") 0)) -}}
+        {{- $tag = $code -}}
+    {{- end -}}
+
+    {{- $parts := split $tag "-" -}}
+    {{- $language := index $parts 0 -}}
+    {{- $region := "" -}}
+
+    {{- if gt (len $parts) 1 -}}
+        {{- range after 1 $parts -}}
+            {{- if and (not $region) (eq (len .) 2) -}}
+                {{- $region = upper . -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- if not $region -}}
+        {{- $region = or (index $regions $tag) (index $regions $language) (upper $language) -}}
+    {{- end -}}
+
+    {{- $locale = printf "%s-%s" $language $region -}}
+{{- end -}}
+
+{{- return $locale -}}

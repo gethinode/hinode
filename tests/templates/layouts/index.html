@@ -479,3 +479,39 @@ FAIL {{ .case }}
 {{- end }}
 
 SIDEBAR INDENT FAILURES: {{ $inFail }}
+
+{{- /*
+    Assertions for utilities/GetLocale.html.
+
+    The `lang` argument stands in for the language of the site being rendered, so a
+    single-language harness can still cover what a multilingual build does. This site
+    sets `locale = 'en-gb'`, which every case below is resolved against.
+*/ -}}
+
+{{- $localeCases := slice
+  (dict "case" "site locale refines the language it belongs to" "args" (dict "lang" "en") "want" "en-GB")
+  (dict "case" "site locale is ignored for another language" "args" (dict "lang" "nl") "want" "nl-NL")
+  (dict "case" "language without region falls back to its own subtag" "args" (dict "lang" "fr") "want" "fr-FR")
+  (dict "case" "language without region falls back to the table" "args" (dict "lang" "ja") "want" "ja-JP")
+  (dict "case" "existing region subtag is uppercased" "args" (dict "lang" "pt-br") "want" "pt-BR")
+  (dict "case" "script subtag resolves through the table" "args" (dict "lang" "zh-hans") "want" "zh-CN")
+  (dict "case" "input case is normalised" "args" (dict "lang" "NL") "want" "nl-NL")
+  (dict "case" "unknown language guesses its own subtag" "args" (dict "lang" "eo") "want" "eo-EO")
+  (dict "case" "configured locale wins over the language" "args" (dict "locale" "de_AT" "lang" "nl") "want" "de_AT")
+  (dict "case" "configured locale wins over the site locale" "args" (dict "locale" "en_US" "lang" "en") "want" "en_US")
+-}}
+{{- $localeFail := 0 -}}
+{{- range $localeCases -}}
+{{- $got := partial "utilities/GetLocale.html" .args -}}
+{{- if eq $got .want }}
+PASS {{ .case }}: {{ $got }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $localeFail = add $localeFail 1 -}}
+{{- errorf "GetLocale mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+GETLOCALE FAILURES: {{ $localeFail }}

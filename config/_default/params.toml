@@ -253,7 +253,7 @@
 [schema]
     type = "Organization"
     name = "Hinode"
-    locale = "en-US"
+    # locale = "en-US" # defaults to the locale of the current site language
     # twitter = "https://twitter.com/gethinode"
     # linkedIn = ""
     github = "https://github.com/gethinode/hinode"
@@ -274,7 +274,7 @@
 
 [opengraph]
     images = ["logo.png"]
-    locale = "en_US"
+    # locale = "en_US" # defaults to the locale of the current site language
 
 [links]
     hinode = "https://gethinode.com"

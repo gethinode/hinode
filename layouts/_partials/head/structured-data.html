@@ -20,6 +20,10 @@
 
 {{ $alt := slice .Site.Params.schema.twitter .Site.Params.schema.linkedin .Site.Params.schema.github }}
 
+{{ $locale := "" -}}
+{{ with .Site.Params.schema }}{{ $locale = .locale }}{{ end -}}
+{{ $locale = replace (partial "utilities/GetLocale.html" (dict "locale" $locale)) "_" "-" -}}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -104,7 +108,7 @@
       "primaryImageOfPage": {
         "@id": {{ print .Permalink "#/schema/image/2" }}
       },
-      "inLanguage": "{{ .Site.Params.schema.locale }}",
+      "inLanguage": "{{ $locale }}",
       "potentialAction": [{
         "@type": "ReadAction", "target": [{{ .Permalink }}]
       }]
