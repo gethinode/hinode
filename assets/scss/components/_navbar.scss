@@ -317,9 +317,28 @@ $theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out,
     color: var(--#{$prefix}navbar-color);
 }
 
+// Coerce a unitless zero (numeric `0` or the string `"0"`) into a typed
+// `0rem`. `$navbar-offset`/`$navbar-offset-xs` normally arrive as typed
+// lengths (e.g. `6rem`) from `navigation.offset`/`offsetXS` in the site
+// config, but a config that supplies a bare `0` would otherwise interpolate
+// as a bare zero below — invalid wherever the resulting custom property is
+// later substituted into a length calc() (see `.toc-sidebar`'s
+// `calc(var(--navbar-offset) + 1rem)` and the `.app-shell-active` override
+// further down this file).
+@function navbar-offset-typed($value) {
+    @if $value == 0 or $value == "0" {
+        // stylelint-disable-next-line length-zero-no-unit -- the unit is the
+        // point: this return value feeds a custom property substituted into
+        // length calc()s, where a bare zero is invalid at computed-value time.
+        @return 0rem;
+    }
+
+    @return $value;
+}
+
 :root {
     --dropdown-horizontal-bg: var(--#{$prefix}light);
-    --navbar-offset: #{$navbar-offset-xs};
+    --navbar-offset: #{navbar-offset-typed($navbar-offset-xs)};
 }
 
 .navbar-container {
@@ -329,7 +348,7 @@ $theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out,
 
 @include media-breakpoint-up(#{$navbar-size}) {
     :root {
-        --navbar-offset: #{$navbar-offset};
+        --navbar-offset: #{navbar-offset-typed($navbar-offset)};
     }
 
     .navbar-container {
@@ -525,8 +544,11 @@ body.navbar-open {
 
     // At md+ the sidebar is visible and the navbar is sticky inside its own
     // column, so the body doesn't need the legacy `--navbar-offset` spacer.
+    // The zero must carry a unit: consumers substitute this custom property
+    // into length calc()s (e.g. `.toc-sidebar`'s `calc(var(--navbar-offset) + 1rem)`),
+    // and a bare `0` makes those declarations invalid at computed-value time.
     .app-shell-active {
-        --navbar-offset: 0;
+        --navbar-offset: 0rem;
     }
 
     // Stick the navbar to the top of its column. The sticky positioning
