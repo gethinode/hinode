@@ -13,9 +13,6 @@ import { getLocalStorage, setLocalStorage } from './_cookie.js'
 if (params.darkMode) {
   const supportedThemes = ['auto', 'dark', 'light']
 
-  // retrieves the currently stored theme from local storage
-  const storedTheme = getLocalStorage('theme', 'auto', 'functional')
-
   // retrieves the theme preferred by the client, defaults to light
   function getPreferredTheme () {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -23,6 +20,11 @@ if (params.darkMode) {
 
   // retrieves the current theme, either from local storage or client's preferences
   function getTheme () {
+    // Read on every call rather than once when the script runs. Storage is shared
+    // across the origin, so a theme chosen in another document leaves a value read
+    // at load time stale — and a document served from the back/forward cache runs
+    // no script again, so a stale capture is all it would ever have to work from.
+    const storedTheme = getLocalStorage('theme', 'auto', 'functional')
     if (storedTheme) {
       return storedTheme
     } else {
@@ -96,6 +98,17 @@ if (params.darkMode) {
   window.addEventListener('load', () => {
     // update the selectors when all elements are ready
     updateSelectors()
+  })
+
+  // A page served from the back/forward cache is shown again without re-parsing:
+  // no script re-runs and neither DOMContentLoaded nor load fires, so the theme
+  // applied when it was cached is still on the document however long it sat there.
+  // This is the only notification that it is back on screen, and therefore the only
+  // chance to pick up a theme chosen elsewhere in the meantime.
+  window.addEventListener('pageshow', event => {
+    if (event.persisted) {
+      setTheme(getTheme())
+    }
   })
 
   // initialize theme as soon as possible to reduce screen flickering
