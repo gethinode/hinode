@@ -56,8 +56,14 @@ if (params.darkMode) {
   }
 
   function updateSelectors () {
+    const light = document.documentElement.getAttribute('data-bs-theme') === 'light'
     document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
-      chk.checked = (document.documentElement.getAttribute('data-bs-theme') === 'light')
+      chk.checked = light
+      // Mirrored onto the attribute as well: `checked` held only as a property is
+      // invisible to innerHTML serialization, so anything that snapshots the page
+      // and restores it later reinstates the switch in whatever position the raw
+      // markup declares, irrespective of the theme actually in effect.
+      chk.toggleAttribute('checked', light)
     })
   }
 
@@ -67,13 +73,19 @@ if (params.darkMode) {
     }
   })
 
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.navbar-mode-selector').forEach(chk => {
-      chk.addEventListener('change', function () {
-        document.documentElement.setAttribute('data-bs-theme-animate', 'true')
-        toggleTheme()
-      })
-    })
+  // Delegated to the document rather than bound to each selector, because the
+  // document survives what the selectors do not. Any wholesale replacement of the
+  // page's contents — a client-side router restoring a cached body, for instance —
+  // substitutes fresh inputs carrying no listeners, and this script cannot rebind
+  // them: it ships in the critical bundle, a <head> script, so it is absent from
+  // the replaced markup and never runs a second time. A listener bound per element
+  // on DOMContentLoaded therefore dies with the elements it was bound to, leaving a
+  // toggle that looks intact and does nothing until the page is reloaded.
+  document.addEventListener('change', event => {
+    const selector = event.target.closest?.('.navbar-mode-selector')
+    if (!selector) return
+    document.documentElement.setAttribute('data-bs-theme-animate', 'true')
+    toggleTheme()
   })
 
   window.addEventListener('load', () => {
