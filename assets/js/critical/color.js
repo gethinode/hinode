@@ -68,7 +68,12 @@ if (params.darkMode) {
   }
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if (storedTheme !== 'light' || storedTheme !== 'dark') {
+    // Only an unset or 'auto' preference follows the system. The condition here
+    // used to test the stored value against 'light' and 'dark' with ||, which no
+    // single value can fail on both sides, so it was always true: switching the
+    // system appearance overrode an explicit choice and overwrote it in storage.
+    const stored = getLocalStorage('theme', 'auto', 'functional')
+    if (!stored || stored === 'auto') {
       setTheme(getPreferredTheme())
     }
   })
