@@ -59,6 +59,7 @@
     "mod:vendor": "node scripts/mod-vendor.cjs",
     "mod:vendor:force": "rimraf _vendor && hugo mod vendor",
     "test": "npm-run-all lint test:templates",
+    "pretest:templates": "pnpm mod:vendor",
     "test:templates": "hugo -s tests/templates --logLevel error",
     "env": "hugo env",
     "precheck": "npm version",
