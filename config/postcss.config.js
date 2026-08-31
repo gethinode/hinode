@@ -64,7 +64,14 @@ const purgecss = purgeCSSPlugin({
       'search-input',
       // Bootstrap utilities used by SimpleDatatables
       'float-right',
-      'float-left'
+      'float-left',
+      // mod-simple-datatables hides the search input's label, which would otherwise repeat
+      // the input's own placeholder, by passing a `visually-hidden` span as the label text.
+      // That class therefore only ever appears inside the module's JavaScript, never in a
+      // layout, so hugo_stats.json cannot record it. Core layouts happen to emit it too, but
+      // only on pages that render a button, spinner or carousel - a site with none of those
+      // would purge the class and put the duplicated label back on screen.
+      'visually-hidden'
     ],
     // Classes with these patterns will be preserved along with their children
     deep: [
