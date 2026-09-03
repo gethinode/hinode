@@ -19,6 +19,17 @@
     {{ $error = $args.err }}
 {{ end }}
 
+{{/* An unresolvable image is reported through LogMsg rather than a bare warnf,
+     so the message carries the page that caused it and a warning id. Without
+     the page there is nothing to act on: a site of any size reports a missing
+     file with no way to find the reference to it. Sites that would rather not
+     publish a dead <img> at all set params.debugging.failOnMissingImage, which
+     turns the warning into a build failure. It defaults to false, because
+     referencing an image supplied outside the build — a CDN path, an asset
+     added at deploy time — is legitimate and must keep working. */}}
+{{- $strict := site.Params.debugging.failOnMissingImage | default false -}}
+{{- $logFile := (or $args.page page).File -}}
+
 {{/* Initialize local arguments */}}
 {{- $src := $args.src -}}
 {{- $height := or $args.imageHeight $args.height -}}
@@ -76,7 +87,13 @@
         {{- $targetURL := strings.TrimPrefix $u.Path $src -}}
         {{- $targetURL = strings.TrimPrefix "/static" $src -}}
         {{- if not (fileExists (path.Join "/static" $targetURL)) -}}
-            {{ warnf "Cannot find vector image resource: %q" $src -}}
+            {{ partial (cond $strict "utilities/LogErr.html" "utilities/LogWarn.html") (dict
+                "partial" "assets/helpers/image-dimension.html"
+                "warnid"  "warn-missing-image"
+                "msg"     "Cannot find vector image resource"
+                "details" (slice (printf "src: %q" $src) "searched: assets and static")
+                "file"    $logFile
+            )}}
         {{ else }}
             {{ $width := string (partial "utilities/GetWidth.html" (dict "path" $targetURL "height" 500)) }}
             {{ if $width }}
@@ -88,7 +105,17 @@
     {{ else if eq (string $res.MediaType) "image/svg+xml" }}
         {{ $data = $res.Content }}
     {{ else }}
-        {{ warnf "Unsupported media type '%s': %q" (string $res.MediaType) $src -}}
+        {{/* The file resolves, so this is a content error rather than a missing
+             asset — reported, but never escalated by failOnMissingImage. Shares
+             the warning id GetImage already uses for the same condition, so one
+             ignoreLogs entry covers both. */}}
+        {{ partial "utilities/LogWarn.html" (dict
+            "partial" "assets/helpers/image-dimension.html"
+            "warnid"  "warn-unsupported-image"
+            "msg"     (printf "Unsupported media type %q" (string $res.MediaType))
+            "details" (slice (printf "src: %q" $src))
+            "file"    $logFile
+        )}}
     {{ end }}
 {{ else if and $args.ratio (ne $args.ratio "auto") }}
     {{ $transform = "fill" }}
