@@ -137,3 +137,23 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_shortcodes/card.html'
   target = 'layouts/_shortcodes/card.html'
+
+# The padding cascade cannot be reached through a bare card: it is the card-group
+# shortcode that a nested card reads its parent value from, so the group and the
+# partial behind it are mounted too. The group renders a "more" link through
+# assets/button.html (already mounted) and, when paginated, assets/pagination.html.
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/card-group.html'
+  target = 'layouts/_shortcodes/card-group.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/card-group.html'
+  target = 'layouts/_partials/assets/card-group.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/pagination.html'
+  target = 'layouts/_partials/assets/pagination.html'
+[[module.mounts]]
+  source = '../../data/structures/card-group.yml'
+  target = 'data/structures/card-group.yml'
+[[module.mounts]]
+  source = '../../data/structures/pagination.yml'
+  target = 'data/structures/pagination.yml'

@@ -625,3 +625,49 @@ PASS shortcode wrapper reaches the partial: "{{ $wrapperGot }}"
 FAIL shortcode wrapper reaches the partial: want="probe-wrapper" got="{{ $wrapperGot }}"
 {{- errorf "card shortcode wrapper mismatch: want=%q got=%q" "probe-wrapper" $wrapperGot -}}
 {{- end }}
+
+{{- /*
+    Assertions for the card shortcode's `padding` argument.
+
+    The argument is an integer whose zero is a real value - "no padding" - but the
+    shortcode resolved it through two layers that each treat falsy as absent, so an
+    author writing `padding=0` silently got the default instead. `utilities/GetArgParent`
+    reads the value under `with`, which skips zero and returns the empty string; the
+    shortcode then applied `| default 3`, which skips zero again. Nothing warned: the
+    card simply rendered at padding 3.
+
+    That was invisible until the button spacing started reading the argument, because
+    the value's only other job is the card body's own `p-N`. It is `pt-N` on the button
+    column that these cases read, since that is now what an author changes `padding` to
+    control.
+
+    The cases pin all four resolutions the argument has. Zero is the regression. Five
+    proves the argument is read at all rather than the default coincidentally matching.
+    Absent proves the structure default still applies. The last two run inside a
+    card-group, where `padding` cascades: a card that sets nothing must take the
+    group's value, and a card that sets an explicit zero must still beat it - the same
+    falsy-is-absent trap, one level up.
+*/ -}}
+{{- $padFail := 0 -}}
+{{- $padHtml := replaceRE `\s+` " " (site.GetPage "/blog/card-padding").Content -}}
+{{- $padGot := slice -}}
+{{- range findRE `class="[^"]*align-items-end[^"]*"` $padHtml -}}
+    {{- $padGot = $padGot | append (index (findRE `pt-\d+` . 1) 0 | default "(none)") -}}
+{{- end -}}
+{{- $padWant := slice "pt-0" "pt-5" "pt-3" "pt-5" "pt-0" -}}
+{{- $padCases := slice "explicit zero" "explicit five" "absent takes the default" "inherits the group" "zero beats the group" -}}
+{{- range $i, $case := $padCases -}}
+{{- $got := index $padGot $i | default "(missing)" -}}
+{{- $want := index $padWant $i -}}
+{{- if eq $got $want }}
+PASS card padding: {{ $case }} -> {{ $got }}
+{{- else }}
+FAIL card padding: {{ $case }}
+     want={{ $want }}
+     got ={{ $got }}
+{{- $padFail = add $padFail 1 -}}
+{{- errorf "card padding mismatch: case=%q want=%q got=%q" $case $want $got -}}
+{{- end -}}
+{{- end }}
+
+CARD PADDING FAILURES: {{ $padFail }}
