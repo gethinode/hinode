@@ -116,6 +116,7 @@
     showSCSS = false
     purgeHTMLComments = false
     includeSVGOrigin = true
+    failOnMissingImage = false
 # toml-docs-end debugging
 
 # toml-docs-start docs
