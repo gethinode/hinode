@@ -236,7 +236,7 @@
     {{ end }}
 
     {{/* Render horizontal card */}}
-    <div class="card {{ $colorStyle }}{{ $args.class }}">
+    <div class="card {{ $colorStyle }} {{ $args.class }}">
         <div class="{{ if $thumbnail }}row-cols-2 row {{ end }} g-0 h-100{{ if $args.button }} pb-{{ $padding.y }}{{ end }}">
             {{- if $thumbnail -}}
                 <div class="{{ $col1 }}">
@@ -369,7 +369,6 @@
                         "href"        $href
                         "outline"     true
                         "button-size" "sm"
-                        "class"       "card-button"
                         "class"       $buttonClass
                         "link-type"   $buttonType
                     )}}
