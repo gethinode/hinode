@@ -104,7 +104,6 @@
 {{- end -}}
 
 {{/* Initialize global variables */}}
-{{- $padding := partial "utilities/GetPadding.html" -}}
 {{- $cardReadMore := partial "utilities/GetThemeIcon.html" (dict "id" "cardReadMore" "default" "fas chevron-right") -}}
 {{- $cardLinkIcon := partial "utilities/GetThemeIcon.html" (dict "id" "cardLinkIcon" "default" "fas arrow-right") -}}
 
@@ -237,7 +236,7 @@
 
     {{/* Render horizontal card */}}
     <div class="card {{ $colorStyle }} {{ $args.class }}">
-        <div class="{{ if $thumbnail }}row-cols-2 row {{ end }} g-0 h-100{{ if $args.button }} pb-{{ $padding.y }}{{ end }}">
+        <div class="{{ if $thumbnail }}row-cols-2 row {{ end }} g-0 h-100">
             {{- if $thumbnail -}}
                 <div class="{{ $col1 }}">
                     {{ $fullHeight := "card-img-h100" }}
@@ -294,10 +293,10 @@
 
                         {{ if and $href $args.button }}
                             {{ $label := (or $args.buttonLabel $title) | default (T "readMore") }}
-                            {{ $buttonClass := "card-button mb-n4" }}
+                            {{ $buttonClass := "card-button" }}
                             {{ $buttonType := (or $args.linkType $args.buttonType) }}
-                            {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link mb-n4" }}{{ end }}
-                            <div class="d-flex align-items-end">
+                            {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
+                            <div class="d-flex align-items-end pt-{{ $args.padding }}">
                                 {{ partial "assets/button.html" (dict
                                     "page"        $args.page
                                     "title"       $label
