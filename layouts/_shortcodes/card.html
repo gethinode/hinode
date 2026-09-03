@@ -37,7 +37,18 @@
 {{- $subtle := partial "utilities/GetArgParent" (dict "page" . "arg" "subtle") -}}
 {{- $loading := .Get "loading" -}}
 {{- $orientation := partial "utilities/GetArgParent" (dict "page" . "arg" "orientation") -}}
-{{- $padding := partial "utilities/GetArgParent" (dict "page" . "arg" "padding") | default 3 -}}
+{{- /* Not GetArgParent: padding is an int whose 0 is a real value, and both that helper
+       (which reads the argument under `with`) and a trailing `| default` treat falsy as
+       absent, so `padding=0` silently resolved to the default. InitArgs already tells an
+       explicit 0 apart from an unset argument and applies the structure default, so
+       own-value-or-default comes from there; only the parent cascade is left to apply by
+       hand, and only when this card sets nothing itself. */ -}}
+{{- $padding := $args.padding -}}
+{{- if not (and .IsNamedParams (isset .Params "padding")) -}}
+    {{- with .Parent -}}
+        {{- if and .IsNamedParams (isset .Params "padding") }}{{ $padding = .Get "padding" }}{{ end -}}
+    {{- end -}}
+{{- end -}}
 {{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
 {{- $portrait := partial "utilities/GetArgParent" (dict "page" . "arg" "portrait") -}}
 {{- $page := .Page -}}
