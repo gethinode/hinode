@@ -515,3 +515,159 @@ FAIL {{ .case }}
 {{- end }}
 
 GETLOCALE FAILURES: {{ $localeFail }}
+
+{{- /*
+    Assertions for the button spacing in assets/card.html.
+
+    A card with a button used to reserve the space under it with `pb-{main.padding.y}` on the
+    row wrapper and then pull the button down into that reserve with a hardcoded `mb-n4`.
+    `main.padding.y` is the rhythm *between sections of a page*, so the geometry inside a
+    single card was a function of a setting that has nothing to do with cards: raising the
+    site's section spacing inflated every card that carried a button, and lowering it below 4
+    made the subtraction negative and hung the button out of the card. The card's own
+    `padding` argument, which is what the stacked branch has always used for this, had no say.
+
+    The harness sets `main.padding.y = 5` precisely so that a regression is legible. If the
+    coupling came back, the row wrapper would carry `pb-5` and the `spacer` column of every
+    horizontal case below would still read `pt-{padding}` — so the wrapper is asserted in full
+    rather than by absence, and the last column pins the negative margin that paired with it.
+
+    Each case renders the real partial and reduces it to four probes: the class list of the
+    `.card` element, of the row wrapper, of the column that spaces the button, and whether
+    `mb-n4` survives anywhere in the markup. A probe that matches nothing reads as "-", which
+    is how the stacked cases record that they have no row wrapper and the button-less case
+    records that it opens no spacing column at all.
+
+    The padding values are deliberately spread across the range. `pt-3` is the argument's
+    default and would also be produced by a card that ignored the argument and hardcoded the
+    old middle value, so on its own it proves nothing; 0 and 5 are the two ends that only a
+    card actually reading `padding` can reach, and 0 is the one the coupling made unreachable.
+*/ -}}
+{{- $cardFail := 0 -}}
+{{- $cardPage := site.GetPage "/blog/without-exact" -}}
+{{- $cardBase := dict
+      "page"         $cardPage
+      "title"        "Probe"
+      "href"         "/blog/toc-override/"
+      "button"       true
+      "button-label" "Go"
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- $cardProbes := slice `class="card[^"]*"` `class="[^"]*g-0 h-100[^"]*"` `class="[^"]*align-items-end[^"]*"` -}}
+{{- $cardCases := slice
+  (dict "case" "horizontal card spaces its button by the default padding"
+        "args" (dict "orientation" "horizontal")
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-3" "-"))
+  (dict "case" "padding zero leaves no gap under the button"
+        "args" (dict "orientation" "horizontal" "padding" 0)
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-0" "-"))
+  (dict "case" "padding five spaces the button by five"
+        "args" (dict "orientation" "horizontal" "padding" 5)
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-5" "-"))
+  (dict "case" "horizontal-sm follows the same argument"
+        "args" (dict "orientation" "horizontal-sm" "padding" 2)
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-2" "-"))
+  (dict "case" "colour and caller class stay separate tokens"
+        "args" (dict "orientation" "horizontal" "color" "light" "class" "pb-0")
+        "want" (slice "card bg-light text-bg-light pb-0" "g-0 h-100" "d-flex align-items-end pt-3" "-"))
+  (dict "case" "a horizontal card without a button opens no spacing column"
+        "args" (dict "orientation" "horizontal" "button" false)
+        "want" (slice "card" "g-0 h-100" "-" "-"))
+  (dict "case" "the stacked branch is unchanged"
+        "args" (dict "padding" 3)
+        "want" (slice "card text-start p-3" "-" "col d-flex align-items-end pt-3" "-"))
+-}}
+{{- range $cardCases -}}
+{{- $html := replaceRE `\s+` " " (partial "assets/card.html" (merge $cardBase .args)) -}}
+{{- $got := slice -}}
+{{- range $probe := $cardProbes -}}
+    {{- $match := findRE $probe $html 1 -}}
+    {{- if $match -}}
+        {{- $value := strings.TrimSuffix `"` (strings.TrimPrefix `class="` (index $match 0)) -}}
+        {{- $got = $got | append (trim $value " ") -}}
+    {{- else -}}
+        {{- $got = $got | append "-" -}}
+    {{- end -}}
+{{- end -}}
+{{- $got = $got | append (cond (strings.Contains $html "mb-n4") "mb-n4" "-") -}}
+{{- if eq (delimit $got "|") (delimit .want "|") }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ delimit .want "|" }}
+     got ={{ delimit $got "|" }}
+{{- $cardFail = add $cardFail 1 -}}
+{{- errorf "card spacing mismatch: case=%q want=%q got=%q" .case (delimit .want "|") (delimit $got "|") -}}
+{{- end -}}
+{{- end }}
+
+CARD SPACING FAILURES: {{ $cardFail }}
+
+{{- /*
+    Assertion for the `wrapper` argument of the card shortcode.
+
+    `wrapper` is declared in the card structure, so it reaches authors and the CMS snippet
+    generator, but the shortcode initialised its own `$wrapper` to the empty string and only
+    ever assigned to it for scrolling cards - the author's value was dropped before the
+    partial saw it, while the card-group shortcode passed its identically-named argument
+    straight through. It has to be exercised through a rendered page, because the argument
+    handling under test belongs to the shortcode and a direct partial call bypasses it.
+*/ -}}
+{{- $wrapperGot := "-" -}}
+{{- $wrapperHtml := replaceRE `\s+` " " (site.GetPage "/blog/card-wrapper").Content -}}
+{{- with findRE `class="[^"]*probe-wrapper[^"]*"` $wrapperHtml 1 -}}
+    {{- $wrapperGot = trim (strings.TrimSuffix `"` (strings.TrimPrefix `class="` (index . 0))) " " -}}
+{{- end -}}
+{{- if eq $wrapperGot "probe-wrapper" }}
+PASS shortcode wrapper reaches the partial: "{{ $wrapperGot }}"
+{{- else }}
+FAIL shortcode wrapper reaches the partial: want="probe-wrapper" got="{{ $wrapperGot }}"
+{{- errorf "card shortcode wrapper mismatch: want=%q got=%q" "probe-wrapper" $wrapperGot -}}
+{{- end }}
+
+{{- /*
+    Assertions for the card shortcode's `padding` argument.
+
+    The argument is an integer whose zero is a real value - "no padding" - but the
+    shortcode resolved it through two layers that each treat falsy as absent, so an
+    author writing `padding=0` silently got the default instead. `utilities/GetArgParent`
+    reads the value under `with`, which skips zero and returns the empty string; the
+    shortcode then applied `| default 3`, which skips zero again. Nothing warned: the
+    card simply rendered at padding 3.
+
+    That was invisible until the button spacing started reading the argument, because
+    the value's only other job is the card body's own `p-N`. It is `pt-N` on the button
+    column that these cases read, since that is now what an author changes `padding` to
+    control.
+
+    The cases pin all four resolutions the argument has. Zero is the regression. Five
+    proves the argument is read at all rather than the default coincidentally matching.
+    Absent proves the structure default still applies. The last two run inside a
+    card-group, where `padding` cascades: a card that sets nothing must take the
+    group's value, and a card that sets an explicit zero must still beat it - the same
+    falsy-is-absent trap, one level up.
+*/ -}}
+{{- $padFail := 0 -}}
+{{- $padHtml := replaceRE `\s+` " " (site.GetPage "/blog/card-padding").Content -}}
+{{- $padGot := slice -}}
+{{- range findRE `class="[^"]*align-items-end[^"]*"` $padHtml -}}
+    {{- $padGot = $padGot | append (index (findRE `pt-\d+` . 1) 0 | default "(none)") -}}
+{{- end -}}
+{{- $padWant := slice "pt-0" "pt-5" "pt-3" "pt-5" "pt-0" -}}
+{{- $padCases := slice "explicit zero" "explicit five" "absent takes the default" "inherits the group" "zero beats the group" -}}
+{{- range $i, $case := $padCases -}}
+{{- $got := index $padGot $i | default "(missing)" -}}
+{{- $want := index $padWant $i -}}
+{{- if eq $got $want }}
+PASS card padding: {{ $case }} -> {{ $got }}
+{{- else }}
+FAIL card padding: {{ $case }}
+     want={{ $want }}
+     got ={{ $got }}
+{{- $padFail = add $padFail 1 -}}
+{{- errorf "card padding mismatch: case=%q want=%q got=%q" $case $want $got -}}
+{{- end -}}
+{{- end }}
+
+CARD PADDING FAILURES: {{ $padFail }}

@@ -12,6 +12,12 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
   [params.main]
     titleCase = true
     titleCaseExceptions = ["npm", "pnpm"]
+    # Deliberately not the theme's own default of 4. The card assertions have to show that a
+    # card's internal spacing is no longer a function of the site's section rhythm, and only a
+    # value the card would otherwise have emitted - and that nothing else in the card's markup
+    # produces by coincidence - makes a reintroduction of the coupling visible as a `pb-5`.
+    [params.main.padding]
+      y = 5
   [params.navigation]
     toc = true
   [params.pages]
@@ -98,3 +104,56 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../_vendor/github.com/FortAwesome/Font-Awesome/svgs'
   target = 'assets/svgs/fa'
+
+# assets/card.html is the element under test for the card assertions. It renders its own
+# button through assets/button.html and its icon column through assets/card-icon.html, and
+# the classes on both are what the assertions read, so neither is stubbed. No case sets a
+# thumbnail, so the image render hook is never reached and no image pipeline is mounted.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/card.html'
+  target = 'layouts/_partials/assets/card.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/button.html'
+  target = 'layouts/_partials/assets/button.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/card-icon.html'
+  target = 'layouts/_partials/assets/card-icon.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/OmitEmpty.html'
+  target = 'layouts/_partials/utilities/OmitEmpty.html'
+[[module.mounts]]
+  source = '../../data/structures/card.yml'
+  target = 'data/structures/card.yml'
+[[module.mounts]]
+  source = '../../data/structures/card-icon.yml'
+  target = 'data/structures/card-icon.yml'
+[[module.mounts]]
+  source = '../../data/structures/button.yml'
+  target = 'data/structures/button.yml'
+
+# The card shortcode is mounted as well, because the argument passthrough it owns cannot be
+# reached through the partial: the assertions for it render a fixture page whose body calls
+# the shortcode, which is the only path on which the shortcode's own argument handling runs.
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/card.html'
+  target = 'layouts/_shortcodes/card.html'
+
+# The padding cascade cannot be reached through a bare card: it is the card-group
+# shortcode that a nested card reads its parent value from, so the group and the
+# partial behind it are mounted too. The group renders a "more" link through
+# assets/button.html (already mounted) and, when paginated, assets/pagination.html.
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/card-group.html'
+  target = 'layouts/_shortcodes/card-group.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/card-group.html'
+  target = 'layouts/_partials/assets/card-group.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/pagination.html'
+  target = 'layouts/_partials/assets/pagination.html'
+[[module.mounts]]
+  source = '../../data/structures/card-group.yml'
+  target = 'data/structures/card-group.yml'
+[[module.mounts]]
+  source = '../../data/structures/pagination.yml'
+  target = 'data/structures/pagination.yml'
