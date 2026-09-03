@@ -18,17 +18,25 @@ if (params.languageSelector) {
     setLocalStorage('selectedLanguage', language, 'functional')
   }
 
+  // The query string and hash are payload, not identity: they never take part in
+  // deciding whether to redirect, and they ride along when one happens. Dropping
+  // them silently discards campaign parameters (utm_*, gclid, fbclid, ...) before
+  // an analytics tag can read them, and breaks anchor deep links.
+  function keepParams () {
+    return window.location.search + window.location.hash
+  }
+
   // Function to apply the selected language to the website
   function applyLanguage (language, href) {
     if (document.documentElement.lang !== language) {
       if (href) {
         if (window.location.pathname !== href) {
-          window.location.href = href
+          window.location.href = href + keepParams()
         }
       } else {
         const target = folder + language + '/'
-        if (window.location.href !== target) {
-          window.location.href = target
+        if (window.location.pathname !== target) {
+          window.location.href = target + keepParams()
         }
       }
     }
@@ -54,8 +62,19 @@ if (params.languageSelector) {
       alias = link.getAttribute('href')
     }
 
-    if ((alias !== '') && (window.location.href !== alias)) {
-      window.location.href = alias
+    // Only the location itself decides whether this page is already canonical;
+    // comparing the full href made any query string or hash look like a mismatch
+    // and bounced the visitor to the bare canonical URL. Cf. static/js/alias.js,
+    // which this script replaces when the language selector is enabled.
+    let onCanonical = true
+    if (alias !== '') {
+      const canonical = new URL(alias, window.location.href)
+      onCanonical = canonical.origin === window.location.origin &&
+        canonical.pathname === window.location.pathname
+    }
+
+    if (!onCanonical) {
+      window.location.href = alias + keepParams()
     } else if (languageItems.length > 0) {
       // Redirect if the stored language differs from the active language
       if ((storedLanguage) && (document.documentElement.lang !== storedLanguage)) {
