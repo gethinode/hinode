@@ -1,0 +1,8 @@
+{{- /* Stub for the illustration hook of assets/nav-item.html.
+
+       The partial calls its `hook` whether or not the item carries an illustration, so the real
+       hero image partial is on the path of every nav pane - and it pulls the featured-illustration
+       partial and the image pipeline behind it. None of that bears on what the nav assertions read,
+       which is the identifier a pane is addressed by. Stubbing it keeps the mount list to the
+       templates actually under test; a nav case that needs a rendered illustration would have to
+       mount the real one instead. */ -}}

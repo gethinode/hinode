@@ -157,3 +157,34 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/pagination.yml'
   target = 'data/structures/pagination.yml'
+
+# assets/nav.html is the element under test for the nav assertions. Its companion dropdown is
+# rendered by assets/panel-dropdown.html and the identifiers and classes on both are what the
+# assertions read, so neither is stubbed. No case sets `nav-icons`, so the icon call site inside
+# the button group is never reached and the vendored icon partial above is not exercised here.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/nav.html'
+  target = 'layouts/_partials/assets/nav.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/panel-dropdown.html'
+  target = 'layouts/_partials/assets/panel-dropdown.html'
+[[module.mounts]]
+  source = '../../data/structures/nav.yml'
+  target = 'data/structures/nav.yml'
+
+# The nav shortcodes are mounted for the one thing a direct partial call cannot show: that the
+# identifier a page writes reaches every element that derives one from it. The shortcode resolves
+# the id and assembles the panes, assets/nav-item.html renders them, and the chain the companion
+# dropdown depends on - wrapper, control, pane, data-link - only exists once all four run.
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/nav.html'
+  target = 'layouts/_shortcodes/nav.html'
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/nav-item.html'
+  target = 'layouts/_shortcodes/nav-item.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/nav-item.html'
+  target = 'layouts/_partials/assets/nav-item.html'
+[[module.mounts]]
+  source = '../../data/structures/nav-item.yml'
+  target = 'data/structures/nav-item.yml'

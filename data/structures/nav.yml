@@ -45,6 +45,9 @@ arguments:
   pane:
   responsive:
     release: v1.4.0
+    comment: >-
+      Flag to collapse the nav controls into a dropdown below the configured
+      breakpoint. Applies to every tab type, "buttons" included.
   width:
     default: 12
     group: partial
