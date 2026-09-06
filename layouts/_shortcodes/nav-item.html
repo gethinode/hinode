@@ -51,7 +51,15 @@
     {{- $current := "" -}}
 
     {{/* Main code */}}
-    {{- $output := partial "assets/nav-item.html" (dict 
+    {{/*
+        The pane is described here and rendered by the nav shortcode rather than emitted here.
+        Its `active` class is the one property an item cannot settle on its own: when no item
+        carries `show` the group falls back to its first entry, and an item rendered in document
+        order cannot know whether a later sibling will claim that. Handing the parent a
+        description instead of markup is what lets the fallback reach the pane as well as the
+        control - it is the only place that sees the whole set before anything is emitted.
+    */}}
+    {{- $itemArgs := dict
         "page"      .Page
         "id"        $id
         "parent-id" $parent
@@ -63,29 +71,31 @@
         "show"      $args.show
         "disabled"  $args.disabled
         "_default"  $args.default
-        )
     -}}
 
-    {{- $current := .Parent.Scratch.Get "inner" -}}
+    {{- $current := .Parent.Scratch.Get "inner-args" -}}
     {{- $titles := .Parent.Scratch.Get "inner-title" -}}
     {{- $disabled := .Parent.Scratch.Get "inner-disabled" -}}
     {{- $icons := .Parent.Scratch.Get "inner-icon" -}}
     {{- $itemAttrs := .Parent.Scratch.Get "inner-attrs" -}}
     {{- if $args.show }}{{ .Parent.Scratch.Set "inner-show" $itemID }}{{ end -}}
     {{- if $current -}}
-        {{- .Parent.Scratch.Set "inner" (print $current $output) -}}
+        {{- .Parent.Scratch.Set "inner-args" ($current | append $itemArgs) -}}
         {{- .Parent.Scratch.Set "inner-title" ($titles | append $title) -}}
         {{- .Parent.Scratch.Set "inner-disabled" ($disabled | append $disabledID) -}}
         {{- .Parent.Scratch.Set "inner-icon" ($icons | append $args.icon) -}}
         {{- .Parent.Scratch.Set "inner-attrs" ($itemAttrs | append $args.attributes) -}}
     {{- else -}}
-        {{- .Parent.Scratch.Set "inner" (print $output) -}}
+        {{- .Parent.Scratch.Set "inner-args" (slice $itemArgs) -}}
         {{- .Parent.Scratch.Set "inner-title" (slice $title) -}}
         {{- .Parent.Scratch.Set "inner-disabled" (slice $disabledID) -}}
         {{- .Parent.Scratch.Set "inner-icon" (slice $args.icon) -}}
         {{- .Parent.Scratch.Set "inner-attrs" (slice $args.attributes) -}}
     {{- end }}
 
+    {{/* The accordion rendering is kept eager. Nothing in this theme reads `alternative`, but it
+         reaches an override of the nav shortcode the same way `inner` used to, so it stays as it
+         was rather than changing a contract this fix has no reason to touch. */}}
     {{- $alternative := partial "assets/nav-item.html" (dict 
         "page"         .Page
         "id"           $id

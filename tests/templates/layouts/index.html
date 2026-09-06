@@ -671,3 +671,259 @@ FAIL card padding: {{ $case }}
 {{- end }}
 
 CARD PADDING FAILURES: {{ $padFail }}
+
+{{- /*
+    Assertions for the companion dropdown and the identifiers in assets/nav.html.
+
+    `responsive` hides the control group below the breakpoint and puts a dropdown in its place.
+    The hide applied to every nav type; the dropdown was rendered for every type except a button
+    group. A responsive `tab-type="buttons"` therefore had no controls at all at narrow widths -
+    the panes still rendered, with no way to reach any but the active one - and since `responsive`
+    defaults to true, that was what a button group did unless its author opted out. The dropdown
+    now follows the hide, so the two gates agree; the toggle takes the button treatment there,
+    because a control standing in for buttons has to read as one.
+
+    The identifiers are pinned alongside it because the dropdown addresses the group through them.
+    `id` is documented as the "unique identifier of the current element" but named no element: the
+    list took `nav-{id}` and a button group took nothing, so `#{id}` resolved to nothing at all.
+    And the two branches spelled the same expression differently - the button group built
+    `{id}-btn-{index}` from the argument's fallback, the list and the `nav-show` lookup from the
+    raw argument - so a nav rendered without an id emitted buttons under one name and pointed its
+    panes and its companion at another.
+
+    Cases carrying `(none)` as their want are the guards, not the fix: they hold the behavior a
+    naive repair would break - an opted-out nav that gains a dropdown it did not ask for, or an
+    id-less nav that stamps the shared fallback on its wrapper and repeats one id down the page.
+*/ -}}
+{{- $navFail := 0 -}}
+{{- $navPage := site.GetPage "/blog/without-exact" -}}
+{{- $navBase := dict "page" $navPage "nav-titles" (slice "First" "Second") "nav-items" "<div></div>" -}}
+{{- $navCases := slice
+  (dict "case" "a responsive button group collapses into a companion dropdown"
+        "args" (dict "tab-type" "buttons" "id" "btn-nav" "responsive" true)
+        "find" `id="dropdown-[^"]*"`
+        "want" `id="dropdown-btn-nav"`)
+  (dict "case" "a responsive button group announces its companion"
+        "args" (dict "tab-type" "buttons" "id" "btn-nav" "responsive" true)
+        "find" `data-companion="[^"]*"`
+        "want" `data-companion="dropdown-btn-nav"`)
+  (dict "case" "the companion of a button group reads as a button"
+        "args" (dict "tab-type" "buttons" "id" "btn-nav" "responsive" true)
+        "find" `class="dropdown-toggle [^"]*"`
+        "want" `class="dropdown-toggle btn btn-outline-primary"`)
+  (dict "case" "the companion of a standard nav stays borderless"
+        "args" (dict "tab-type" "pills" "id" "pill-nav" "responsive" true)
+        "find" `class="dropdown-toggle [^"]*"`
+        "want" `class="dropdown-toggle link-body-emphasis border-0 bg-transparent p-0"`)
+  (dict "case" "responsive defaults to true, so a button group collapses unasked"
+        "args" (dict "tab-type" "buttons" "id" "default-nav")
+        "find" `id="dropdown-[^"]*"`
+        "want" `id="dropdown-default-nav"`)
+  (dict "case" "an opted-out button group renders no companion"
+        "args" (dict "tab-type" "buttons" "id" "static-nav" "responsive" false)
+        "find" `id="dropdown-[^"]*"`
+        "want" "(none)")
+  (dict "case" "an opted-out button group is not hidden below the breakpoint"
+        "args" (dict "tab-type" "buttons" "id" "static-nav" "responsive" false)
+        "find" `d-none`
+        "want" "(none)")
+  (dict "case" "the wrapper carries the caller's id verbatim"
+        "args" (dict "tab-type" "pills" "id" "wrapper-nav" "responsive" false)
+        "find" `<div id="[^"]*"`
+        "want" `<div id="wrapper-nav"`)
+  (dict "case" "a nav without an id stamps none on its wrapper"
+        "args" (dict "tab-type" "pills" "responsive" false)
+        "find" `<div id="[^"]*"`
+        "want" "(none)")
+  (dict "case" "an id-less nav names its buttons the way it addresses them"
+        "args" (dict "tab-type" "pills" "responsive" false)
+        "find" `id="[^"]*-btn-0"`
+        "want" `id="0-btn-0"`)
+  (dict "case" "nav-show marks the item it names on an id-less nav"
+        "args" (dict "tab-type" "pills" "responsive" true "nav-show" "0-btn-1")
+        "find" `class="nav-link text-nowrap active" id="[^"]*"`
+        "want" `class="nav-link text-nowrap active" id="0-btn-1"`)
+  (dict "case" "the companion starts on the entry nav-show names"
+        "args" (dict "tab-type" "pills" "responsive" true "nav-show" "0-btn-1")
+        "find" `class="dropdown-item text-nowrap active" data-link="[^"]*"`
+        "want" `class="dropdown-item text-nowrap active" data-link="#0-btn-1"`)
+-}}
+{{- range $navCases -}}
+{{- $navHtml := replaceRE `\s+` " " (partial "assets/nav.html" (merge $navBase .args)) -}}
+{{- $got := index (findRE .find $navHtml 1) 0 | default "(none)" -}}
+{{- if eq $got .want }}
+PASS nav: {{ .case }}
+{{- else }}
+FAIL nav: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $navFail = add $navFail 1 -}}
+{{- errorf "nav mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+NAV FAILURES: {{ $navFail }}
+
+{{- /*
+    Assertions for the identifier chain of the nav shortcodes.
+
+    The partial cases above pin each identifier on its own. This one pins that they agree, which
+    is the property the companion dropdown rests on: it carries no behavior of its own and works
+    only by replaying a click on the control its `data-link` names, so an identifier that drifts
+    anywhere along the chain leaves a dropdown that opens, closes, and changes nothing.
+
+    It has to run through the shortcodes. They are what resolve the id - the page's own value, or
+    a generated one shared between the group and its panes - and what assemble the panes, so the
+    full chain from `id="probe-nav"` in the page to `#probe-nav-btn-1` in the dropdown exists on
+    no other path. The fixture marks its second item with `show`, so the active entry is not the
+    one a renderer that ignored `nav-show` would land on either.
+*/ -}}
+{{- $chainFail := 0 -}}
+{{- $chainHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-shortcode").Content -}}
+{{- $chainCases := slice
+  (dict "case" "the wrapper takes the id the page wrote"
+        "find" `<div id="[^"]*"` "want" `<div id="probe-nav"`)
+  (dict "case" "the companion is named after it"
+        "find" `id="dropdown-[^"]*"` "want" `id="dropdown-probe-nav"`)
+  (dict "case" "the button group points at that companion"
+        "find" `data-companion="[^"]*"` "want" `data-companion="dropdown-probe-nav"`)
+  (dict "case" "the shown control is the one the page marked"
+        "find" `id="probe-nav-btn-[0-9]" [^>]*aria-selected="true"`
+        "want" `id="probe-nav-btn-1" data-bs-toggle="tab" data-bs-target="#probe-nav-1" role="tab" aria-controls="probe-nav-1" aria-selected="true"`)
+  (dict "case" "the shown pane is the one that control targets"
+        "find" `id="probe-nav-[0-9]" class="tab-pane[^"]*active[^"]*" role="tabpanel" aria-labelledby="[^"]*"`
+        "want" `id="probe-nav-1" class="tab-pane active" role="tabpanel" aria-labelledby="probe-nav-btn-1"`)
+  (dict "case" "the companion replays a click on a control that exists"
+        "find" `class="dropdown-item text-nowrap active" data-link="[^"]*"`
+        "want" `class="dropdown-item text-nowrap active" data-link="#probe-nav-btn-1"`)
+-}}
+{{- range $chainCases -}}
+{{- $got := index (findRE .find $chainHtml 1) 0 | default "(none)" -}}
+{{- if eq $got .want }}
+PASS nav chain: {{ .case }}
+{{- else }}
+FAIL nav chain: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $chainFail = add $chainFail 1 -}}
+{{- errorf "nav chain mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+NAV CHAIN FAILURES: {{ $chainFail }}
+
+{{- /*
+    Assertions for the entry a nav starts on when no item claims one.
+
+    assets/nav.html has always marked the first control active when `nav-show` is unset, but the
+    pane's `active` class came from the item's own `show` and from nothing else. An author who
+    marked no item - which the shortcode never required and never warned about - got a nav with a
+    highlighted tab above an empty content area, since `.tab-pane` is display:none until something
+    activates it.
+
+    An item cannot settle this alone: it renders in document order and cannot know whether a later
+    sibling will claim `show`. The nav shortcode now resolves the entry once, before any pane is
+    rendered, and hands the same decision to the control, the pane and the companion dropdown.
+
+    Two fixtures, because the fallback has to reach the pane without overriding an author who did
+    mark one: /blog/nav-unmarked marks nothing and must start on its first entry, /blog/nav-shortcode
+    marks its second and must still start there. Both count their active panes, since a fallback
+    that stacked on top of an explicit mark would light two at once and read as correct from either
+    one alone.
+*/ -}}
+{{- $startFail := 0 -}}
+{{- $unmarkedHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-unmarked").Content -}}
+{{- $markedHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-shortcode").Content -}}
+{{- $startCases := slice
+  (dict "case" "an unmarked nav activates its first pane"
+        "html" $unmarkedHtml
+        "find" `id="unmarked-[0-9]" class="tab-pane[^"]*active[^"]*"`
+        "want" `id="unmarked-0" class="tab-pane active"`)
+  (dict "case" "an unmarked nav activates exactly one pane"
+        "html" $unmarkedHtml
+        "find" `class="tab-pane[^"]*active[^"]*"`
+        "count" 1)
+  (dict "case" "an unmarked nav marks the control that pane belongs to"
+        "html" $unmarkedHtml
+        "find" `id="unmarked-btn-[0-9]"[^>]*aria-selected="true"`
+        "want" `id="unmarked-btn-0" data-bs-toggle="pill" data-bs-target="#unmarked-0" type="button" role="tab" aria-controls="unmarked-0" aria-selected="true"`)
+  (dict "case" "an unmarked nav starts its companion on the same entry"
+        "html" $unmarkedHtml
+        "find" `class="dropdown-item text-nowrap active" data-link="[^"]*"`
+        "want" `class="dropdown-item text-nowrap active" data-link="#unmarked-btn-0"`)
+  (dict "case" "the fallback does not override an item that claims show"
+        "html" $markedHtml
+        "find" `id="probe-nav-[0-9]" class="tab-pane[^"]*active[^"]*"`
+        "want" `id="probe-nav-1" class="tab-pane active"`)
+  (dict "case" "a marked nav still activates exactly one pane"
+        "html" $markedHtml
+        "find" `class="tab-pane[^"]*active[^"]*"`
+        "count" 1)
+-}}
+{{- range $startCases -}}
+{{- $matches := findRE .find .html -}}
+{{- $got := "" -}}
+{{- $want := "" -}}
+{{- if isset . "count" -}}
+    {{- $got = printf "%d active pane(s)" (len $matches) -}}
+    {{- $want = printf "%d active pane(s)" .count -}}
+{{- else -}}
+    {{- $got = index $matches 0 | default "(none)" -}}
+    {{- $want = .want -}}
+{{- end -}}
+{{- if eq $got $want }}
+PASS nav start: {{ .case }}
+{{- else }}
+FAIL nav start: {{ .case }}
+     want={{ $want }}
+     got ={{ $got }}
+{{- $startFail = add $startFail 1 -}}
+{{- errorf "nav start mismatch: case=%q want=%q got=%q" .case $want $got -}}
+{{- end -}}
+{{- end }}
+
+NAV START FAILURES: {{ $startFail }}
+
+{{- /*
+    Assertions for the `fade` cascade of the nav shortcode.
+
+    The nav-item shortcode reads `fade` off its parent and falls back to it when the item sets
+    none, but the nav structure never declared the argument. Writing it on the group did not
+    cascade, it aborted: InitArgs rejected it as unsupported, `$args.err` was set, and
+    assets/nav.html rendered nothing at all - so the page lost its whole nav rather than its
+    animation. Declaring it makes the cascade the item shortcode already implements reachable.
+
+    Both panes are read, because `fade` alone is not enough to see one. A faded pane is
+    transparent until `show` joins `active`, so an active pane that took `fade` without `show`
+    would occupy the layout and display nothing - the failure the earlier empty-content-area bug
+    produced by another route. The cascade is an `or`: a group that sets `fade` fades every pane
+    and an item cannot opt out, which is the item shortcode's existing semantics and is pinned
+    here only so a change to it is deliberate.
+*/ -}}
+{{- $fadeFail := 0 -}}
+{{- $fadeHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-fade").Content -}}
+{{- $fadeCases := slice
+  (dict "case" "the group's fade reaches an item that sets none"
+        "find" `id="faded-0" class="[^"]*"`
+        "want" `id="faded-0" class="tab-pane fade"`)
+  (dict "case" "the shown pane fades in visible rather than transparent"
+        "find" `id="faded-1" class="[^"]*"`
+        "want" `id="faded-1" class="tab-pane active show fade"`)
+  (dict "case" "the group still renders its controls"
+        "find" `id="faded-btn-1"[^>]*aria-selected="true"`
+        "want" `id="faded-btn-1" data-bs-toggle="pill" data-bs-target="#faded-1" type="button" role="tab" aria-controls="faded-1" aria-selected="true"`)
+-}}
+{{- range $fadeCases -}}
+{{- $got := index (findRE .find $fadeHtml 1) 0 | default "(none)" -}}
+{{- if eq $got .want }}
+PASS nav fade: {{ .case }}
+{{- else }}
+FAIL nav fade: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $fadeFail = add $fadeFail 1 -}}
+{{- errorf "nav fade mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+NAV FADE FAILURES: {{ $fadeFail }}

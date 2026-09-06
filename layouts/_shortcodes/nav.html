@@ -17,7 +17,7 @@
     ) -}}
 {{- end -}}
 
-{{- $inner := .Scratch.Get "inner" -}}
+{{- $innerArgs := .Scratch.Get "inner-args" -}}
 {{- $innerTitles := .Scratch.Get "inner-title" -}}
 {{- $innerDisabled := .Scratch.Get "inner-disabled" -}}
 {{- $innerShow := .Scratch.Get "inner-show" -}}
@@ -39,6 +39,25 @@
             {{- .Scratch.Set "resolved-id" $navID -}}
         {{- end -}}
     {{- end -}}
+    {{/*
+        Resolve the entry the group starts on before any pane is rendered, so a control and its
+        pane cannot disagree about which one it is. An item reports an explicit `show` through
+        `inner-show`; with none, the group falls back to its first entry - which assets/nav.html
+        has always done for the control and no pane ever did, so a nav whose items were all left
+        unmarked rendered an active tab above an empty content area. Passing the resolved value
+        on as `nav-show` keeps that fallback in one place: the control, the pane and the
+        companion dropdown all read the same decision rather than each defaulting on its own.
+    */}}
+    {{- $show := $innerShow -}}
+    {{- if and (not $show) $innerArgs -}}
+        {{- $show = printf "%s-btn-0" $navID -}}
+    {{- end -}}
+    {{- $inner := "" -}}
+    {{- range $itemArgs := $innerArgs -}}
+        {{- $inner = print $inner (partial "assets/nav-item.html" (merge $itemArgs (dict
+            "show" (eq $show (printf "%s-btn-%v" $navID $itemArgs.id))
+        ))) -}}
+    {{- end -}}
     {{- partial "assets/nav.html" (dict
         "id"                $navID
         "page"              .Page
@@ -46,7 +65,7 @@
         "nav-items"         $inner
         "nav-titles"        $innerTitles
         "nav-disabled"      $innerDisabled
-        "nav-show"          $innerShow
+        "nav-show"          $show
         "nav-icons"         $innerIcons
         "nav-item-attrs"    $innerAttrs
         "tab-type"          (or $args.tabType $args.type)

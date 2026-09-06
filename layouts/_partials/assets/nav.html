@@ -41,13 +41,37 @@
 
 {{/* The companion dropdown mirrors the nav, so it has to start on the same entry. `nav-show` names
      that entry by item id rather than position, so resolve it to an index here - built from the same
-     `{args.id}-btn-{index}` expression the nav's own buttons use below, so the two cannot disagree.
-     Falls back to the first entry when `nav-show` is unset or names an item that does not exist. */}}
+     `{id}-btn-{index}` expression the nav's own controls use below, so the two cannot disagree.
+     Falls back to the first entry when `nav-show` is unset or names an item that does not exist.
+
+     It is `$id` rather than `$args.id`, because `$id` carries the fallback a caller that omits the
+     argument gets. Every `-btn-` expression in this file has to spell the identifier the same way or
+     a nav rendered without an id addresses buttons that were emitted under another name. */}}
 {{- $active := 0 -}}
 {{- if $args.navShow -}}
     {{- range $index, $item := $titles -}}
-        {{- if eq $args.navShow (printf "%s-btn-%d" $args.id $index) -}}{{- $active = $index -}}{{- end -}}
+        {{- if eq $args.navShow (printf "%s-btn-%d" $id $index) -}}{{- $active = $index -}}{{- end -}}
     {{- end -}}
+{{- end -}}
+
+{{/* Arguments of the companion dropdown that stands in for the control group below the breakpoint.
+     Every nav type gets one. `responsive` promises the controls collapse rather than disappear, and
+     the group is hidden below the breakpoint whatever its type - so a type left without a dropdown
+     loses its controls outright at narrow widths, with the panes still rendered and no way to reach
+     any but the active one.
+
+     The toggle takes the button treatment for a button group and the borderless text treatment for a
+     standard nav, which is the split assets/table.html already makes for its filter group: a control
+     standing in for buttons has to read as a button rather than as body copy. */}}
+{{- $dropdownArgs := dict
+    "id"     $id
+    "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
+    "titles" $titles
+    "wrap"   $wrap
+    "active" $active
+-}}
+{{- if $isBtnGroup -}}
+    {{- $dropdownArgs = merge $dropdownArgs (dict "toggleClass" "btn btn-outline-primary") -}}
 {{- end -}}
 
 {{/* Tab-content class — spacing depends on type and controls-placement.
@@ -64,18 +88,18 @@
 
 {{/* Main code */}}
 {{- if not $error -}}
-<div class="col col-12 col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
+{{- /* The wrapper carries the caller's `id` verbatim, which is the only element that does: every
+     other identifier here is derived from it (`nav-{id}` on the list, `dropdown-{id}` on the
+     companion, `{id}-btn-{index}` on the controls), so without this the argument documented as the
+     "unique identifier of the current element" named no element at all and `#{id}` resolved to
+     nothing. Emitted only when the caller supplied one - `$id` falls back to a constant, and
+     stamping that on the wrapper would repeat one id across every nav on the page. */ -}}
+<div {{ with $args.id }}id="{{ . }}" {{ end }}class="col col-12 col-{{ $breakpoint.current }}-{{ $args.width }} mx-auto">
     {{- if $isVertical }}<div class="d-{{ if $args.responsive }}{{ $breakpoint.current }}{{ end }}-flex align-items-start">{{ end -}}
 
-    {{/* Responsive dropdown (standard nav types only, controls-top position) */}}
-    {{- if and $args.responsive (not $isBtnGroup) (ne $controlsPlacement "bottom") -}}
-        {{ partial "assets/panel-dropdown.html" (dict
-            "id"     $id
-            "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
-            "titles" $titles
-            "wrap"   $wrap
-            "active" $active
-        ) }}
+    {{/* Responsive dropdown, controls-top position */}}
+    {{- if and $args.responsive (ne $controlsPlacement "bottom") -}}
+        {{ partial "assets/panel-dropdown.html" $dropdownArgs }}
     {{- end -}}
 
     {{/* Tab content — rendered first when controls-placement=below */}}
@@ -90,7 +114,8 @@
     {{- if $isBtnGroup -}}
         {{/* buttons tab-type */}}
         <div class="btn-group{{ $alignClass }}" role="tablist"
-            {{- range $key, $val := $args.attributes }} {{ printf "%s=%q" $key $val | safeHTMLAttr }}{{ end -}}
+            {{- range $key, $val := $args.attributes }} {{ printf "%s=%q" $key $val | safeHTMLAttr }}{{ end }}
+            data-companion="dropdown-{{ $id }}"
         >
             {{- range $index, $item := $titles -}}
                 {{- $itemID := printf "%s-btn-%d" $id $index -}}
@@ -130,7 +155,7 @@
             data-companion="dropdown-{{ $id }}"
         >
             {{- range $index, $item := $titles -}}
-                {{ $itemID := printf "%s-btn-%d" $args.id $index -}}
+                {{ $itemID := printf "%s-btn-%d" $id $index -}}
                 {{- $show := eq $index 0 -}}
                 {{- if $args.navShow }}{{ $show = eq $args.navShow $itemID }}{{ end -}}
                 {{- $disabled := in $args.navDisabled $itemID -}}
@@ -160,15 +185,9 @@
     </div>
     {{- end -}}
 
-    {{/* Responsive dropdown (standard nav types only, controls-below position) */}}
-    {{- if and $args.responsive (not $isBtnGroup) (eq $controlsPlacement "bottom") -}}
-        {{ partial "assets/panel-dropdown.html" (dict
-            "id"     $id
-            "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
-            "titles" $titles
-            "wrap"   $wrap
-            "active" $active
-        ) }}
+    {{/* Responsive dropdown, controls-below position */}}
+    {{- if and $args.responsive (eq $controlsPlacement "bottom") -}}
+        {{ partial "assets/panel-dropdown.html" $dropdownArgs }}
     {{- end -}}
 
     {{- if $isVertical }}</div>{{ end -}}
