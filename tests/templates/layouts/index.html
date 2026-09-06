@@ -811,3 +811,75 @@ FAIL nav chain: {{ .case }}
 {{- end }}
 
 NAV CHAIN FAILURES: {{ $chainFail }}
+
+{{- /*
+    Assertions for the entry a nav starts on when no item claims one.
+
+    assets/nav.html has always marked the first control active when `nav-show` is unset, but the
+    pane's `active` class came from the item's own `show` and from nothing else. An author who
+    marked no item - which the shortcode never required and never warned about - got a nav with a
+    highlighted tab above an empty content area, since `.tab-pane` is display:none until something
+    activates it.
+
+    An item cannot settle this alone: it renders in document order and cannot know whether a later
+    sibling will claim `show`. The nav shortcode now resolves the entry once, before any pane is
+    rendered, and hands the same decision to the control, the pane and the companion dropdown.
+
+    Two fixtures, because the fallback has to reach the pane without overriding an author who did
+    mark one: /blog/nav-unmarked marks nothing and must start on its first entry, /blog/nav-shortcode
+    marks its second and must still start there. Both count their active panes, since a fallback
+    that stacked on top of an explicit mark would light two at once and read as correct from either
+    one alone.
+*/ -}}
+{{- $startFail := 0 -}}
+{{- $unmarkedHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-unmarked").Content -}}
+{{- $markedHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-shortcode").Content -}}
+{{- $startCases := slice
+  (dict "case" "an unmarked nav activates its first pane"
+        "html" $unmarkedHtml
+        "find" `id="unmarked-[0-9]" class="tab-pane[^"]*active[^"]*"`
+        "want" `id="unmarked-0" class="tab-pane active"`)
+  (dict "case" "an unmarked nav activates exactly one pane"
+        "html" $unmarkedHtml
+        "find" `class="tab-pane[^"]*active[^"]*"`
+        "count" 1)
+  (dict "case" "an unmarked nav marks the control that pane belongs to"
+        "html" $unmarkedHtml
+        "find" `id="unmarked-btn-[0-9]"[^>]*aria-selected="true"`
+        "want" `id="unmarked-btn-0" data-bs-toggle="pill" data-bs-target="#unmarked-0" type="button" role="tab" aria-controls="unmarked-0" aria-selected="true"`)
+  (dict "case" "an unmarked nav starts its companion on the same entry"
+        "html" $unmarkedHtml
+        "find" `class="dropdown-item text-nowrap active" data-link="[^"]*"`
+        "want" `class="dropdown-item text-nowrap active" data-link="#unmarked-btn-0"`)
+  (dict "case" "the fallback does not override an item that claims show"
+        "html" $markedHtml
+        "find" `id="probe-nav-[0-9]" class="tab-pane[^"]*active[^"]*"`
+        "want" `id="probe-nav-1" class="tab-pane active"`)
+  (dict "case" "a marked nav still activates exactly one pane"
+        "html" $markedHtml
+        "find" `class="tab-pane[^"]*active[^"]*"`
+        "count" 1)
+-}}
+{{- range $startCases -}}
+{{- $matches := findRE .find .html -}}
+{{- $got := "" -}}
+{{- $want := "" -}}
+{{- if isset . "count" -}}
+    {{- $got = printf "%d active pane(s)" (len $matches) -}}
+    {{- $want = printf "%d active pane(s)" .count -}}
+{{- else -}}
+    {{- $got = index $matches 0 | default "(none)" -}}
+    {{- $want = .want -}}
+{{- end -}}
+{{- if eq $got $want }}
+PASS nav start: {{ .case }}
+{{- else }}
+FAIL nav start: {{ .case }}
+     want={{ $want }}
+     got ={{ $got }}
+{{- $startFail = add $startFail 1 -}}
+{{- errorf "nav start mismatch: case=%q want=%q got=%q" .case $want $got -}}
+{{- end -}}
+{{- end }}
+
+NAV START FAILURES: {{ $startFail }}
