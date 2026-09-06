@@ -41,6 +41,13 @@ arguments:
   vertical:
   word-wrap:
     release: v1.0.0
+  fade:
+    group: shortcode
+    release: v3.24.0
+    comment: >-
+      Flag to make the tab panes fade in. Cascades to every nav-item that does
+      not set it, which is the only way to reach a pane rendered by this
+      shortcode.
   class:
   pane:
   responsive:

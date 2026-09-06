@@ -883,3 +883,47 @@ FAIL nav start: {{ .case }}
 {{- end }}
 
 NAV START FAILURES: {{ $startFail }}
+
+{{- /*
+    Assertions for the `fade` cascade of the nav shortcode.
+
+    The nav-item shortcode reads `fade` off its parent and falls back to it when the item sets
+    none, but the nav structure never declared the argument. Writing it on the group did not
+    cascade, it aborted: InitArgs rejected it as unsupported, `$args.err` was set, and
+    assets/nav.html rendered nothing at all - so the page lost its whole nav rather than its
+    animation. Declaring it makes the cascade the item shortcode already implements reachable.
+
+    Both panes are read, because `fade` alone is not enough to see one. A faded pane is
+    transparent until `show` joins `active`, so an active pane that took `fade` without `show`
+    would occupy the layout and display nothing - the failure the earlier empty-content-area bug
+    produced by another route. The cascade is an `or`: a group that sets `fade` fades every pane
+    and an item cannot opt out, which is the item shortcode's existing semantics and is pinned
+    here only so a change to it is deliberate.
+*/ -}}
+{{- $fadeFail := 0 -}}
+{{- $fadeHtml := replaceRE `\s+` " " (site.GetPage "/blog/nav-fade").Content -}}
+{{- $fadeCases := slice
+  (dict "case" "the group's fade reaches an item that sets none"
+        "find" `id="faded-0" class="[^"]*"`
+        "want" `id="faded-0" class="tab-pane fade"`)
+  (dict "case" "the shown pane fades in visible rather than transparent"
+        "find" `id="faded-1" class="[^"]*"`
+        "want" `id="faded-1" class="tab-pane active show fade"`)
+  (dict "case" "the group still renders its controls"
+        "find" `id="faded-btn-1"[^>]*aria-selected="true"`
+        "want" `id="faded-btn-1" data-bs-toggle="pill" data-bs-target="#faded-1" type="button" role="tab" aria-controls="faded-1" aria-selected="true"`)
+-}}
+{{- range $fadeCases -}}
+{{- $got := index (findRE .find $fadeHtml 1) 0 | default "(none)" -}}
+{{- if eq $got .want }}
+PASS nav fade: {{ .case }}
+{{- else }}
+FAIL nav fade: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $fadeFail = add $fadeFail 1 -}}
+{{- errorf "nav fade mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+NAV FADE FAILURES: {{ $fadeFail }}
