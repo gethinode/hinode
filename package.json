@@ -91,7 +91,7 @@
   "homepage": "https://gethinode.com",
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
-    "autoprefixer": "^10.5.4",
+    "autoprefixer": "^10.5.5",
     "cssnano": "^9.0.3",
     "hugo-extended": "^0.165.0",
     "postcss-cli": "^12.0.0",
