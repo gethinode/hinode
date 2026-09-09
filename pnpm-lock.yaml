@@ -26,8 +26,8 @@ importers:
         specifier: ^9.0.3
         version: 9.0.3(postcss@8.5.28)
       hugo-extended:
-        specifier: ^0.164.0
-        version: 0.164.0
+        specifier: ^0.165.0
+        version: 0.165.0
       postcss-cli:
         specifier: ^11.0.1
         version: 11.0.1(jiti@2.6.1)(postcss@8.5.28)
@@ -1470,8 +1470,8 @@ packages:
     resolution: {integrity: sha512-ag87y7cJJ9/3+GxFr8Oy4O5faDsGRGnBGsJj/YjOSsSx/5eadKLYTMPlzuR6obgoCDDm0abAAZitXXQkMOPSpA==}
     engines: {node: '>= 20'}
 
-  hugo-extended@0.164.0:
-    resolution: {integrity: sha512-XhUZ9cI5XkC+Jtg6GMS679dVSAY7j/Fyo2BYDzsuqTKiMzDwr+Ylqd9Ndgvm2sUW+6BKzJCGQWdPI8QnKhVMSQ==}
+  hugo-extended@0.165.0:
+    resolution: {integrity: sha512-+5NMCukM+/ITfWWGBtycRrR5L3MRmAaxl1O2StS+jPapoqJJu1L3ux0LidcxfN7Rp2DAKTX+EZaUhw+paj/uiw==}
     engines: {node: '>=18.17'}
     hasBin: true
 
@@ -3013,8 +3013,8 @@ packages:
     resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
     engines: {node: '>=20'}
 
-  tar@7.5.21:
-    resolution: {integrity: sha512-XdhtCvlMywwxpCW8YEq3lOXBJpUPTR2OHHcwLPO3HwsJqOHa2Ok/oJ7ruGzp+JrKoRPVCzJwAdEjqLW/vNRPHA==}
+  tar@7.5.22:
+    resolution: {integrity: sha512-MFO/QzvtAOmJbkhOaCTvbGcFN9L9b+JunIsDwaKljSOdcLMea3NJ1k9Usz/rjdfSXTq4dfzfeS7W4p4YOAAHeA==}
     engines: {node: '>=18'}
 
   temp-dir@3.0.0:
@@ -4896,10 +4896,10 @@ snapshots:
       - kerberos
       - supports-color
 
-  hugo-extended@0.164.0:
+  hugo-extended@0.165.0:
     dependencies:
       adm-zip: 0.6.0
-      tar: 7.5.21
+      tar: 7.5.22
 
   human-signals@5.0.0: {}
 
@@ -6510,7 +6510,7 @@ snapshots:
 
   tagged-tag@1.0.0: {}
 
-  tar@7.5.21:
+  tar@7.5.22:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0

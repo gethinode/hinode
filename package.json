@@ -93,7 +93,7 @@
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "autoprefixer": "^10.5.4",
     "cssnano": "^9.0.3",
-    "hugo-extended": "^0.164.0",
+    "hugo-extended": "^0.165.0",
     "postcss-cli": "^11.0.1",
     "rimraf": "^6.1.3"
   },
