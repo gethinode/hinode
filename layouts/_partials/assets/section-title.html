@@ -90,9 +90,12 @@
     {{- $class = printf "%s pt-1" $class -}}
     {{- if ne $level 0 }}{{ with .headingClass }}{{ $class = printf "%s %s" $class . }}{{ end }}{{ end -}}
 
-    {{- $attrs := printf `id="%s" class="%s"` (anchorize .title) $class -}}
+    {{- $attrs := printf `class="%s"` $class -}}
+    {{- with .headingId -}}
+        {{- $attrs = printf `id="%s" %s` (htmlEscape .) $attrs -}}
+    {{- end -}}
     {{- if and (ne $level 0) (ne $title $label) -}}
-        {{- $attrs = printf `id="%s" aria-label="%s" class="%s"` (anchorize .title) (htmlEscape $label) $class -}}
+        {{- $attrs = printf `aria-label="%s" %s` (htmlEscape $label) $attrs -}}
     {{- end -}}
 
     {{- printf "<%s %s>\n%s\n</%s>" $tag $attrs $title $tag | safeHTML -}}
@@ -104,6 +107,7 @@
         "page"         $page
         "level"        $level
         "headingClass" $headingClass
+        "headingId"    $args.headingId
         "title"        $title
         "headingStyle" $headingStyle
         "color"        $args.color
@@ -115,10 +119,13 @@
      title's own row, pushed to the trailing edge. A section landing page's
      primary action belongs beside its title rather than buried in the body, and
      the heading is rendered here, so this is the only place that can put it
-     there. Wrapping happens only when both a header and an action exist, so the
-     markup is byte-identical to before for every existing caller. */}}
-{{ if and $header $args.action }}
-    {{ $header = printf `<div class="d-flex align-items-center gap-3 section-title-row">%s<div class="section-title-action ms-auto flex-shrink-0">%s</div></div>` $header $args.action | safeHTML }}
+     there. Existing callers keep centered alignment and render the wrapper only
+     when an action exists; callers can opt into a persistent, identified slot. */}}
+{{ if and $header (or $args.action $args.alwaysRenderAction) }}
+    {{- $actionAttrs := `class="section-title-action ms-auto flex-shrink-0"` -}}
+    {{- with $args.actionId }}{{ $actionAttrs = printf `id="%s" %s` (htmlEscape .) $actionAttrs }}{{ end -}}
+    {{- $action := $args.action | default "" -}}
+    {{ $header = printf `<div class="d-flex align-items-%s gap-3 section-title-row">%s<div %s>%s</div></div>` ($args.actionAlign | default "center") $header $actionAttrs $action | safeHTML }}
 {{ end }}
 
 {{ $links := "" }}
@@ -148,7 +155,7 @@
                     <div class="col-12 col-{{ $breakpoint.current }}-8 p-0">
                         {{ $header }}
                         {{ with $args.heading.content }}
-                            <div class="{{ $contentStyle }}{{ with $padding.y }} pt-{{ . }}{{ end }}">{{ . | $page.RenderString | safeHTML }}</div>
+                            <div{{ with $args.contentId }} id="{{ . }}"{{ end }} class="{{ $contentStyle }}{{ with $padding.y }} pt-{{ . }}{{ end }}">{{ . | $page.RenderString | safeHTML }}</div>
                         {{ end }}
                         {{ $links }}
                     </div>
@@ -163,7 +170,7 @@
                 </p>
             {{ end }}
             {{ $header }}
-            {{ with $args.heading.content }}<div class="{{ $contentStyle }}{{ with $padding.y }} pt-{{ . }}{{ end }}">{{ . | $page.RenderString | safeHTML }}</div>{{ end }}
+            {{ with $args.heading.content }}<div{{ with $args.contentId }} id="{{ . }}"{{ end }} class="{{ $contentStyle }}{{ with $padding.y }} pt-{{ . }}{{ end }}">{{ . | $page.RenderString | safeHTML }}</div>{{ end }}
             {{ $links }}
         {{ end }}
     </div>

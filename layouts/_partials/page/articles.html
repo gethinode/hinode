@@ -1,16 +1,26 @@
 {{/* Add default hero and articles for list pages */}}
 {{- $padding := partial "utilities/GetPadding.html" -}}
 
-{{/* Read the caller's params before rendering the header: the header now
-     accepts an optional action, so it can no longer be emitted before the
-     params that may carry one have been read. */}}
+{{/* Read the caller's params before rendering the header: the section title
+     accepts an optional action and caller-specific DOM slot settings, so it can no
+     longer be emitted before the params that may carry them have been read. */}}
 {{ $articlesParams := $.Scratch.Get "articlesParams" }}
 {{/* Cast to string: callers pass rendered markup, which arrives as template.HTML,
      and the argument validator type-checks against string. section-title marks it
      safe again when it composes the header row. */}}
 {{ $sectionAction := "" }}
+{{ $sectionHeadingID := "" }}
+{{ $sectionContentID := "" }}
+{{ $sectionActionID := "" }}
+{{ $sectionAlwaysRenderAction := false }}
+{{ $sectionActionAlign := "center" }}
 {{ if reflect.IsMap $articlesParams }}
     {{ with index $articlesParams "action" }}{{ $sectionAction = printf "%s" . }}{{ end }}
+    {{ with index $articlesParams "heading-id" }}{{ $sectionHeadingID = . }}{{ end }}
+    {{ with index $articlesParams "content-id" }}{{ $sectionContentID = . }}{{ end }}
+    {{ with index $articlesParams "action-id" }}{{ $sectionActionID = . }}{{ end }}
+    {{ if isset $articlesParams "always-render-action" }}{{ $sectionAlwaysRenderAction = index $articlesParams "always-render-action" }}{{ end }}
+    {{ with index $articlesParams "action-align" }}{{ $sectionActionAlign = . }}{{ end }}
 {{ end }}
 
 {{/* Render basic header for list page */}}
@@ -26,9 +36,14 @@
         "content" .Description
         "align"   "start"
     )
-    "heading-level" 1
-    "heading-class" ""
-    "action"        $sectionAction
+    "heading-level"        1
+    "heading-class"        ""
+    "heading-id"           $sectionHeadingID
+    "content-id"           $sectionContentID
+    "action"               $sectionAction
+    "action-id"            $sectionActionID
+    "always-render-action" $sectionAlwaysRenderAction
+    "action-align"         $sectionActionAlign
 ) }}
 
 {{/* Init the card styling */}}
