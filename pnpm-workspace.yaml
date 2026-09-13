@@ -7,8 +7,9 @@ minimumReleaseAgeExclude:
   - "@gethinode/*"
 
 # Force-patch transitive deps flagged by `pnpm audit --prod --audit-level=high`.
-# adm-zip: hugo-extended pins ^0.5.17 (crafted-ZIP ~4GB alloc DoS,
-#   GHSA-xcpc-8h2w-3j85 / CVE-2026-39244); force the patched 0.6.x.
+# adm-zip: hugo-extended pins ^0.5.17; force >=0.6.1 to cover both the
+#   crafted-ZIP allocation DoS (GHSA-xcpc-8h2w-3j85 / CVE-2026-39244) and
+#   destination-symlink overwrite (GHSA-vwc7-r8mq-g2x9).
 # tar: hugo-extended's tar 7.5.16 carries node-tar DoS advisories; force >=7.5.19.
 # svgo: cssnano > postcss-svgo pulls svgo 4.0.1 (removeScripts high advisory);
 #   force the patched >=4.0.2.
@@ -20,18 +21,20 @@ minimumReleaseAgeExclude:
 #   only obscured what was happening. The package exports a single expand()
 #   function whose signature is unchanged across these majors, and lint + build
 #   pass on the forced version.
-# js-yaml: markdownlint-cli2 pins 5.2.1. Keyed to 5 because 4.3.0 is also in the
-#   tree via another path and is not affected.
+# js-yaml: cosmiconfig allows the vulnerable 4.3.1. Keep its v4 override
+#   separate from the existing v5 constraint to avoid crossing API boundaries.
+# smol-toml: markdownlint-cli2 pins vulnerable 1.7.0; force patched >=1.7.1.
 # shell-quote: npm-run-all pins 1.8.4; force the patched >=1.8.5. Only one line
 #   is present, so no key scoping is needed.
-# All four are transitive: every direct dependency involved (rimraf, npm-run-all,
-# markdownlint-cli2, netlify-plugin-hugo-cache-resources) is already at its
-# latest published version, so there is no upgrade that resolves them.
+# These are transitive: the relevant direct dependencies do not currently
+# resolve all of them, so there is no direct upgrade that clears the audit.
 # Drop each override once the upstream range ships the patched version.
 overrides:
-  adm-zip: ">=0.6.0"
+  adm-zip: ">=0.6.1"
   brace-expansion: ">=5.0.8"
+  js-yaml@4: "^4.3.2"
   js-yaml@5: ">=5.2.2"
   shell-quote: ">=1.8.5"
+  smol-toml: ">=1.7.1"
   svgo: ">=4.0.2"
   tar: ">=7.5.19"
