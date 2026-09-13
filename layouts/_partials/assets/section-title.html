@@ -29,7 +29,7 @@
 
 {{/* Initialize global arguments */}}
 {{- $breakpoint := partial "utilities/GetBreakpoint.html" -}}
-{{- $padding := partial "utilities/GetPadding.html" -}}
+{{- $padding := partial "utilities/GetPadding.html" (dict "section" "heading") -}}
 
 {{/* Initialize local arguments */}}
 {{- $size := (or $args.heading.size site.Params.style.title.size) | default 4 -}}
@@ -148,7 +148,7 @@
                     <div class="col-12 col-{{ $breakpoint.current }}-8 p-0">
                         {{ $header }}
                         {{ with $args.heading.content }}
-                            <div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | $page.RenderString | safeHTML }}</div>
+                            <div class="{{ $contentStyle }}{{ with $padding.y }} pt-{{ . }}{{ end }}">{{ . | $page.RenderString | safeHTML }}</div>
                         {{ end }}
                         {{ $links }}
                     </div>
@@ -163,7 +163,7 @@
                 </p>
             {{ end }}
             {{ $header }}
-            {{ with $args.heading.content }}<div class="{{ $contentStyle }} pt-{{ $padding.y }}">{{ . | $page.RenderString | safeHTML }}</div>{{ end }}
+            {{ with $args.heading.content }}<div class="{{ $contentStyle }}{{ with $padding.y }} pt-{{ . }}{{ end }}">{{ . | $page.RenderString | safeHTML }}</div>{{ end }}
             {{ $links }}
         {{ end }}
     </div>

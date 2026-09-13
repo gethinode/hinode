@@ -6,6 +6,7 @@ prebuild-headers-prod/
 public/
 resources/
 node_modules/
+/.pnpm-store/
 
 .DS_store
 .hugo_build.lock
