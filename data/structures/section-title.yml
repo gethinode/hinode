@@ -16,6 +16,10 @@ arguments:
     release: v3.19.0
   heading-class:
     release: v3.19.0
+  heading-id:
+    release: v3.26.0
+  content-id:
+    release: v3.26.0
   justify:
   link-type:
   use-section:
@@ -24,3 +28,9 @@ arguments:
   content-style:
   action:
     optional: true
+  action-id:
+    release: v3.26.0
+  always-render-action:
+    release: v3.26.0
+  action-align:
+    release: v3.26.0
