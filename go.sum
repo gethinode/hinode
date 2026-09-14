@@ -18,6 +18,8 @@ github.com/gethinode/mod-flexsearch/v5 v5.3.0 h1:sXrzPRRPLHwI9dXcTTpFOnwqXvCa+5M
 github.com/gethinode/mod-flexsearch/v5 v5.3.0/go.mod h1:bo51LbCcYROomghgAWpH3w6EYSe8ZtdqrPSB6C/DZaA=
 github.com/gethinode/mod-flexsearch/v5 v5.3.2 h1:GiWAgVEFHzaLwlmeVIx6oXr8JyVqg54NT0b3AnA4WF8=
 github.com/gethinode/mod-flexsearch/v5 v5.3.2/go.mod h1:LDnuQhxaX9DzGFCHhAI4N7SjbdtVQWUwXAx2KZPxfhM=
+github.com/gethinode/mod-flexsearch/v5 v5.3.3 h1:Djop82QiNhtuyGT7N2FTSVy8OUTfnIbtRVaX+3aY/5w=
+github.com/gethinode/mod-flexsearch/v5 v5.3.3/go.mod h1:1w4yOLqp74fyta/HZttmrhp2apaHtdPil/Otjd2PFNY=
 github.com/gethinode/mod-fontawesome/v6 v6.1.1 h1:k5Jy7nA+YfLZ9YqXH8hyaiw9wjAeOxNEUcnu6fynnJo=
 github.com/gethinode/mod-fontawesome/v6 v6.1.1/go.mod h1:875OBk5te+KBJmr0PdSkFcduYnsKCuHWfcaqChh9NGo=
 github.com/gethinode/mod-fontawesome/v6 v6.1.2 h1:zlxmKqYGpZeCxMMMfpZywKjuPj/XI4m8Ocea+YHoF74=
@@ -64,6 +66,8 @@ github.com/gethinode/mod-utils/v6 v6.12.1 h1:oj02+wlFvGFR98tqiB2rphxs5usEU300AYc
 github.com/gethinode/mod-utils/v6 v6.12.1/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/gethinode/mod-utils/v6 v6.13.0 h1:6RV9YPpRYzXB6nc2CqUqZxZlkTV3MIDjW3/hCDL8Dmo=
 github.com/gethinode/mod-utils/v6 v6.13.0/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
+github.com/gethinode/mod-utils/v6 v6.13.1 h1:OxmN0zPtzmtSe3vliN5NC4Rgv+t3sFLJlfHPwmYfiTs=
+github.com/gethinode/mod-utils/v6 v6.13.1/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/nextapps-de/flexsearch v0.0.0-20260529083235-f7ed963096a0 h1:QDKcU3q39lFGzdVwM6kgCGnW3ibbMfYIi0Rwl62iJpo=
 github.com/nextapps-de/flexsearch v0.0.0-20260529083235-f7ed963096a0/go.mod h1:5GdMfPAXzbA2gXBqTjC6l27kioSYzHlqDMh0+wyx7sU=
 github.com/twbs/bootstrap v5.3.8+incompatible h1:eK1fsXP7R/FWFt+sSNmmvUH9usPocf240nWVw7Dh02o=
