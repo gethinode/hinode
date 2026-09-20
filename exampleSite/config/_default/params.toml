@@ -34,6 +34,7 @@
     navbarLanguage       = "globe2"
     navbarOverflow       = "three-dots"
     navbarVersionCheck   = "check"
+    navbarDropdown       = "chevron-down"
     # Pagination
     paginationFirst      = "chevron-double-left"
     paginationPrev       = "chevron-left"

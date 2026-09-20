@@ -38,6 +38,7 @@
 {{- $tab := site.Params.main.externalLinks.tab -}}
 {{- if (isset $params "tab") }}{{ $tab = $params.tab }}{{ end -}}
 {{- $externalLink := partial "utilities/GetThemeIcon.html" (dict "id" "externalLink" "default" "fas up-right-from-square") -}}
+{{- $dropdownIcon := partial "utilities/GetThemeIcon.html" (dict "id" "navbarDropdown") -}}
 {{- $baseURL := partialCached "utilities/GetBaseURL.html" site | default "/" -}}
 {{- $menuURL := "" -}}
 {{ if or (strings.HasPrefix $entry.PageRef "http") (strings.HasPrefix $entry.URL "http") }}
@@ -58,6 +59,7 @@
 {{- $externalHref := "" }}
 {{- $suffix := "" }}
 {{- $anchorClass := "" -}}
+{{- $isDropdown := false -}}
 
 {{- if $isExternal }}
     {{- if $tab }}{{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer nofollow\"" }}{{ end -}}
@@ -83,6 +85,10 @@
     {{- $anchorClass = "dropdown-item" -}}
 {{- else if and (not $args.plain) $entry.HasChildren -}}
     {{- $anchorClass = "nav-link dropdown-toggle" -}}
+    {{- if $dropdownIcon }}
+        {{- $anchorClass = printf "%s dropdown-toggle-icon" $anchorClass -}}
+        {{- $isDropdown = true -}}
+    {{- end -}}
     {{- $button = " role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" -}}
 {{- else -}}
     {{- $anchorClass = "nav-link" -}}
@@ -138,6 +144,7 @@
                 {{- with $suffix }}&nbsp;{{ . }}{{ end -}}
             </span>
             {{ end }}
+            {{- if $isDropdown }}&nbsp;{{ partial "assets/icon.html" (dict "page" $page "icon" $dropdownIcon "class" "fa-fw my-auto" "spacing" false) }}{{ end -}}
         {{ cond (ne $menuURL "") "</a>" "</div>" | safeHTML }}
     {{ end }}
 {{ end }}
