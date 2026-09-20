@@ -32,8 +32,6 @@
 {{- $search := partial "utilities/GetSearchConfig.html" $searchArgs -}}
 
 {{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
-{{- $navbarOverflow := "fas ellipsis" -}}
-{{- $langIcon := "fas globe" -}}
 {{- $navbarOverflow := partial "utilities/GetThemeIcon.html" (dict "id" "navbarOverflow" "default" "fas ellipsis") -}}
 {{- $navbarLanguage := partial "utilities/GetThemeIcon.html" (dict "id" "navbarLanguage" "default" "fas globe") -}}
 {{- with site.Params.navigation.language.icon -}}
@@ -241,7 +239,7 @@
                             "baseURL"    $baseURL
                             "breakpoint" $breakpoint
                             "pretty"     $pretty                        
-                            "icon"       $langIcon
+                            "icon"       $navbarLanguage
                         )}}
                     {{- end -}}
 
