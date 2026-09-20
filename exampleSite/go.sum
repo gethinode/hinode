@@ -8,11 +8,11 @@ github.com/gethinode/mod-bootstrap-icons/v2 v2.0.2 h1:KTQBwRB/1zRO3aS61bH2NNl/uT
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.2/go.mod h1:oWYYQyAQgOFwrWwBZ8V+ztMCE7XmNTFbcmh28GWO2IA=
 github.com/gethinode/mod-cookieyes/v3 v3.1.0 h1:wan8yGs1bmwrgdySWSCqDbkiAsbTn8nWogwI+qKH6Is=
 github.com/gethinode/mod-cookieyes/v3 v3.1.0/go.mod h1:nhLWDG1BCHAPXFdGYYbCrgFbm4XrSOyxbGlZZAeWJsM=
-github.com/gethinode/mod-docs v1.15.9 h1:9+oeQ6xvsFETjrGG1SlMTChmbwpr8Y8T386GNPE0b/k=
-github.com/gethinode/mod-docs v1.15.9/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
+github.com/gethinode/mod-docs v1.16.0 h1:k2tP00TXzsSeioGb2Zk4RXS+ltwXsp2FfytYGjSNnUc=
+github.com/gethinode/mod-docs v1.16.0/go.mod h1:ru1w0fHqFocjDIMV0dm40OwhBw5k4UncCS8iO/1S5kI=
 github.com/gethinode/mod-fontawesome/v6 v6.1.4 h1:6ppascnfF0Fy9csHLp2iVZVYhaguOOWjd5Wbjbc+bJk=
 github.com/gethinode/mod-fontawesome/v6 v6.1.4/go.mod h1:VOzKLFEqI4O13IFZrKXOXFFHs26o8PgQtdv9fYUaxqA=
-github.com/gethinode/mod-utils/v6 v6.14.0 h1:DXHoXJztEGb0PtOpW2fE4qvT7jOGkS9w6rNBvf1OuDk=
-github.com/gethinode/mod-utils/v6 v6.14.0/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
+github.com/gethinode/mod-utils/v6 v6.14.1 h1:wQil4BBR4urcRIGPc4vnX5AsPCOUwlH7eXh4xbC6Ih0=
+github.com/gethinode/mod-utils/v6 v6.14.1/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/twbs/icons v1.13.1 h1:6bmNXvoeIbvjFWjfbjXg5JGbelLD1haIsMaEIzE9UZI=
 github.com/twbs/icons v1.13.1/go.mod h1:GnRlymgVWp5iVJCMa0Me5b6tFyGpVc2bSxPMRGIJmyA=
