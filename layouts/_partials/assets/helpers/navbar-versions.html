@@ -7,10 +7,13 @@
 {{- $version := partial "utilities/GetVersion.html" (dict "page" $page) -}}
 {{- $fs := site.Params.navigation.fontsizeCollapsed | default 6 -}}
 {{- $navbarVersionCheck := partial "utilities/GetThemeIcon.html" (dict "id" "navbarVersionCheck" "default" "fas check") -}}
+{{- $dropdownIcon := partial "utilities/GetThemeIcon.html" (dict "id" "navbarDropdown") -}}
+{{- $toggleClass := cond $dropdownIcon "nav-link dropdown-toggle dropdown-toggle-icon" "nav-link dropdown-toggle" -}}
 
 <li class="nav-item dropdown {{ if $collapsed }}d-{{ $breakpoint }}-none{{ else }}d-none d-{{ $breakpoint }}-block{{ end }}">
-    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
+    <a class="{{ $toggleClass }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="{{ $id }}-version-switch">
         {{ if $collapsed }}{{ site.Title }} {{ end }}{{ $version }}
+        {{- with $dropdownIcon }}&nbsp;{{ partial "assets/icon.html" (dict "page" $page "icon" . "class" "fa-fw my-auto" "spacing" false) }}{{ end -}}
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="{{ $id }}-version-switch">
         {{- range $index, $item := $list -}}

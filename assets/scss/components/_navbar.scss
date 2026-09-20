@@ -220,6 +220,11 @@ $theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out,
     align-items: normal;
 }
 
+// Hide Bootstrap's caret when a custom dropdown icon is used
+.dropdown-toggle-icon::after {
+    display: none;
+}
+
 .navbar-expanded .btn {
     font-size: 1em;
 }
