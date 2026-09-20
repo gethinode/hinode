@@ -4,6 +4,10 @@
 // (child themes shadowing common/_variables.scss).
 $theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out, border-color .5s ease-in-out !default;
 
+// horizontal gap between navbar items; applies to the item's border box, so a
+// button-styled item is spaced from its border rather than from its label
+$navbar-item-margin-x: .15rem !default;
+
 // adapted from https://www.codeply.com/p/UsTEwDkzNp#
 .checkbox {
 	opacity: 0;
@@ -117,8 +121,15 @@ $theme-mode-transition: background-color .5s ease-in-out, color .5s ease-in-out,
 }
 
 .nav-link {
-    margin: 0 .15rem;
+    margin: 0 $navbar-item-margin-x;
     display: inline-flex;
+}
+
+// nav items rendered as buttons: their padding and border sit inside the visible
+// edge, so the margin must also absorb the nav-link padding for the button's
+// border — not its label — to keep pace with the other navbar items
+.navbar-nav .btn {
+    margin: 0 calc(var(--bs-navbar-nav-link-padding-x) + #{$navbar-item-margin-x});
 }
 
 .navbar-title, .navbar-title-center, .navbar-title-start {
