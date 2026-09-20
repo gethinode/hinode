@@ -83,9 +83,14 @@
 
     {{ if ne $keywords "none" }}
         <p class="card-text"><small class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} text-uppercase">
-            {{- if in (slice "full" "publication") $keywords -}}
-                {{ with $page.Date }}{{ partial "utilities/date.html" (dict "date" . "format" "long") }}&nbsp;&bull;&nbsp;{{ end -}}
-                {{ (math.Max $page.ReadingTime 1) | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
+            {{- if in (slice "full" "date" "publication") $keywords -}}
+                {{ with $page.Date }}
+                    {{ partial "utilities/date.html" (dict "date" . "format" "long") }}
+                    {{ if ne $keywords "date" }}&nbsp;&bull;&nbsp;{{ end }}
+                {{ end -}}
+                {{ if ne $keywords "date" }}
+                    {{ (math.Max $page.ReadingTime 1) | lang.FormatNumber 0 }} {{ i18n "minutesShort" }} {{ i18n "read" -}}
+                {{ end }}
             {{- end -}}
 
             {{- if eq $keywords "full" -}}
