@@ -92,7 +92,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "autoprefixer": "^10.6.1",
-    "cssnano": "^9.0.4",
+    "cssnano": "^9.0.5",
     "hugo-extended": "^0.166.0",
     "postcss-cli": "^12.0.0",
     "rimraf": "^6.1.3"
