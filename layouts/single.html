@@ -27,11 +27,13 @@
                     {{ $sidebar | safeHTML }}
                 </div>
                 <div class="col-12 col-{{ $breakpoint.current }}-9 col-{{ $breakpoint.next }}-8 mb-5">
-                    {{ .Render "header" }}
+                    <article {{ with .Section }}class="{{ . }}"{{ end }}>
+                        {{ .Render "header" }}
 
-                    {{ .Render "body" }}
-                    
-                    {{ .Render "footer" }}
+                        {{ .Render "body" }}
+                        
+                        {{ .Render "footer" }}
+                    </article>
                 </div>
                 <div class="col col-{{ $breakpoint.current }}-3 col-{{ $breakpoint.next }}-2 d-none d-{{ $breakpoint.current }}-block">
                     {{ .Render "toc" }}
