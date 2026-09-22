@@ -69,8 +69,11 @@ if (params.languageSelector) {
     let onCanonical = true
     if (alias !== '') {
       const canonical = new URL(alias, window.location.href)
+      // The pathname check is case-insensitive: hosts that normalize URL casing
+      // (e.g. Netlify redirects to lowercase) would otherwise bounce between the
+      // canonical href and the served URL in an endless reload loop.
       onCanonical = canonical.origin === window.location.origin &&
-        canonical.pathname === window.location.pathname
+        canonical.pathname.toLowerCase() === window.location.pathname.toLowerCase()
     }
 
     if (!onCanonical) {
