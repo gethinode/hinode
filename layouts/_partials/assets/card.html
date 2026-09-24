@@ -83,6 +83,21 @@
 
     {{ if ne $keywords "none" }}
         <p class="card-text"><small class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} text-uppercase">
+            {{- if eq $keywords "category" -}}
+                {{/* The category is the first entry of the page's categories parameter, rendered as plain text */}}
+                {{- $category := "" -}}
+                {{- with $page.Params.categories -}}
+                    {{- if reflect.IsSlice . }}{{ $category = index . 0 }}{{ else }}{{ $category = . }}{{ end -}}
+                {{- end -}}
+                {{- with $category -}}
+                    <span{{ if not $color }} class="text-body-emphasis"{{ end }}>{{ . | humanize }}</span>
+                    {{- if $page.Date }}&nbsp;&bull;&nbsp;{{ end -}}
+                {{- end -}}
+                {{- with $page.Date -}}
+                    <span{{ if not $color }} class="text-body-secondary"{{ end }}>{{ partial "utilities/date.html" (dict "date" . "format" "long") }}</span>
+                {{- end -}}
+            {{- end -}}
+
             {{- if in (slice "full" "date" "publication") $keywords -}}
                 {{ with $page.Date }}
                     {{ partial "utilities/date.html" (dict "date" . "format" "long") }}
