@@ -163,6 +163,8 @@
     startLevel = 2
     endLevel = 3
     maxNumHeadings = 9
+    tocShortenLength = 24
+    tocSkipParams = true
     [navigation.padding]
         x = 4
         y = 4
