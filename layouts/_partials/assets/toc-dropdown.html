@@ -57,7 +57,7 @@
                         {{- range $k, $v := $attrs }}
                             {{- printf " %s=%q" $k $v | safeHTMLAttr }}
                         {{- end -}}
-                        >{{ .text }}</a>
+                        >{{ partial "utilities/ShortenTocTitle.html" (dict "page" $args.page "title" (string .text)) | safeHTML }}</a>
                     {{- end }}
                 </div>
             </small>

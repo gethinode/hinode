@@ -5,7 +5,7 @@
 .toc-sidebar {
     top: calc(var(--navbar-offset) + 1rem);
     max-height: calc(100vh - var(--navbar-offset));
-    overflow-y: auto;
+    overflow: hidden auto;
     right: 0;
     z-index: 2;
 }
@@ -84,6 +84,8 @@
 
 a.toc-item {
     display: block;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 a.toc-level-1 {
