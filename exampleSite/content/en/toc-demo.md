@@ -3,11 +3,11 @@ title: TOC Demo
 description: Demonstrates how long path-like headings are shortened in the table of contents.
 ---
 
-## GET /web/projects/:projectId/environments/:env/version-control
+## GET /api/organizations/:orgId/projects/:projectId/members
 
 Long route, trailing segment is a plain name.
 
-## POST /web/projects/:projectId/environments/:env/version-control/commit
+## POST /api/organizations/:orgId/projects/:projectId/members/invite
 
 Long route with a nested action.
 
@@ -15,7 +15,7 @@ Long route with a nested action.
 
 Short route, left untouched.
 
-## GET /web/projects/:projectId/environments/:env/version-control/:file
+## GET /api/organizations/:orgId/projects/:projectId/members/:userId
 
 Trailing parameter is skipped.
 
