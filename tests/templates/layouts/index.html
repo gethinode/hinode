@@ -271,6 +271,45 @@ PASS empty action slot is opt-in and configurable
 {{- errorf "section-title persistent action mismatch: want row=%q slot=%q got=%q" $stPersistentActionRowWant $stPersistentActionSlotWant $stPersistentActionGot -}}
 {{- end }}
 
+{{- /* The heading's own arrangement is honored, because blocks such as mod-blocks' heading pass
+       only the heading map. The split columns follow the site breakpoint, which the harness
+       leaves at the default md. */ -}}
+{{- $stSplitGot := partial "assets/section-title.html" (dict
+  "page" $stPage
+  "heading" (dict "preheading" "Probe" "title" "Probe Split" "content" "Description" "arrangement" "split")
+) -}}
+{{- $stSplitTitleWant := `<div class="col-12 col-md-4 pe-md-5">` -}}
+{{- $stSplitContentWant := `<div class="col-12 col-md-8">` -}}
+{{- if and (in $stSplitGot $stSplitTitleWant) (in $stSplitGot $stSplitContentWant) }}
+PASS heading arrangement split places the title beside the content
+{{- else }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "section-title split mismatch: want title=%q content=%q got=%q" $stSplitTitleWant $stSplitContentWant $stSplitGot -}}
+{{- end }}
+
+{{- $stExplicitGot := partial "assets/section-title.html" (dict
+  "page" $stPage
+  "heading" (dict "title" "Probe Explicit" "content" "Description" "arrangement" "split")
+  "arrangement" "above"
+) -}}
+{{- if not (in $stExplicitGot `<div class="row g-0">`) }}
+PASS explicit arrangement beats the heading arrangement
+{{- else }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "section-title explicit arrangement mismatch: want no split row, got=%q" $stExplicitGot -}}
+{{- end }}
+
+{{- $stAboveGot := partial "assets/section-title.html" (dict
+  "page" $stPage
+  "heading" (dict "title" "Probe Above" "content" "Description")
+) -}}
+{{- if not (in $stAboveGot `class="row`) }}
+PASS arrangement defaults to above
+{{- else }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "section-title default arrangement mismatch: want no row, got=%q" $stAboveGot -}}
+{{- end }}
+
 SECTION TITLE FAILURES: {{ $stFail }}
 
 {{- /*
