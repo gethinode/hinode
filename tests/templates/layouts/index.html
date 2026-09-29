@@ -650,6 +650,52 @@ FAIL {{ .case }}
 CARD SPACING FAILURES: {{ $cardFail }}
 
 {{- /*
+    Assertions for the thumbnail of a horizontal assets/card.html.
+
+    A horizontal card fills its image column to the height of the card body, which suits a
+    list of articles but discards any ratio: a profile with a long biography turned its square
+    portrait into a tall sliver. A ratio the caller passes now wins over the fill, while a card
+    without one keeps it, so existing horizontal lists render as before. The probe hook echoes
+    the wrapper, class and ratio the card hands to its thumbnail.
+*/ -}}
+{{- $thumbFail := 0 -}}
+{{- $thumbBase := dict
+      "page"         $cardPage
+      "title"        "Probe"
+      "thumbnail"    "/img/probe.jpg"
+      "hook"         "tests/thumbnail-probe.html"
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- $thumbCases := slice
+  (dict "case" "horizontal card honors an explicit ratio"
+        "args" (dict "orientation" "horizontal" "ratio" "1x1")
+        "want" `data-wrapper="card-img-wrap" data-class="card-img-bg rounded-start " data-ratio="1x1"`)
+  (dict "case" "horizontal card without a ratio fills the card height"
+        "args" (dict "orientation" "horizontal")
+        "want" `data-wrapper="card-img-wrap h-100 d-flex align-items-center" data-class="card-img-bg rounded-start card-img-h100" data-ratio="auto"`)
+  (dict "case" "stacked card is unchanged"
+        "args" (dict "ratio" "1x1")
+        "want" `data-wrapper="card-img-wrap" data-class="card-img-top card-img-bg" data-ratio="1x1"`)
+-}}
+{{- range $thumbCases -}}
+{{- $html := replaceRE `\s+` " " (partial "assets/card.html" (merge $thumbBase .args)) -}}
+{{- $match := findRE `data-wrapper="[^"]*" data-class="[^"]*" data-ratio="[^"]*"` $html 1 -}}
+{{- $got := cond (gt (len $match) 0) (index $match 0) "-" -}}
+{{- if eq $got .want }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $thumbFail = add $thumbFail 1 -}}
+{{- errorf "card thumbnail mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+CARD THUMBNAIL FAILURES: {{ $thumbFail }}
+
+{{- /*
     Assertion for the `wrapper` argument of the card shortcode.
 
     `wrapper` is declared in the card structure, so it reaches authors and the CMS snippet
