@@ -261,9 +261,17 @@
                 <div class="{{ $col1 }}">
                     {{ $fullHeight := "card-img-h100" }}
                     {{ $rounding := "rounded-start" }}
+                    {{ $wrapper := "card-img-wrap h-100 d-flex align-items-center" }}
                     {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
-                    {{- partial $args.hook (merge $thumbnailArgs (dict 
-                        "wrapper"  "card-img-wrap h-100 d-flex align-items-center"
+                    {{/* A ratio the caller asks for wins over filling the card's height, which would
+                         otherwise stretch the image to the body text and crop it to whatever shape that
+                         leaves. A ratio read from the page's own thumbnail keeps the full-height fill. */}}
+                    {{ if $args.ratio }}
+                        {{ $fullHeight = "" }}
+                        {{ $wrapper = "card-img-wrap" }}
+                    {{ end }}
+                    {{- partial $args.hook (merge $thumbnailArgs (dict
+                        "wrapper"  $wrapper
                         "class"    (printf "card-img-bg %s %s" $rounding $fullHeight)
                         "ratio"    (or $ratio "auto")
                     )) -}}
