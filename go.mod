@@ -7,7 +7,7 @@ require (
 	github.com/airbnb/lottie-web v5.13.0+incompatible // indirect
 	github.com/gethinode/mod-bootstrap v1.5.0 // indirect
 	github.com/gethinode/mod-csp v1.0.14 // indirect
-	github.com/gethinode/mod-flexsearch/v5 v5.3.3 // indirect
+	github.com/gethinode/mod-flexsearch/v5 v5.4.0 // indirect
 	github.com/gethinode/mod-fontawesome/v6 v6.1.4 // indirect
 	github.com/gethinode/mod-google-analytics/v2 v2.0.4 // indirect
 	github.com/gethinode/mod-katex v1.1.7 // indirect
