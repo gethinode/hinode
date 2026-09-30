@@ -20,6 +20,8 @@ github.com/gethinode/mod-flexsearch/v5 v5.3.2 h1:GiWAgVEFHzaLwlmeVIx6oXr8JyVqg54
 github.com/gethinode/mod-flexsearch/v5 v5.3.2/go.mod h1:LDnuQhxaX9DzGFCHhAI4N7SjbdtVQWUwXAx2KZPxfhM=
 github.com/gethinode/mod-flexsearch/v5 v5.3.3 h1:Djop82QiNhtuyGT7N2FTSVy8OUTfnIbtRVaX+3aY/5w=
 github.com/gethinode/mod-flexsearch/v5 v5.3.3/go.mod h1:1w4yOLqp74fyta/HZttmrhp2apaHtdPil/Otjd2PFNY=
+github.com/gethinode/mod-flexsearch/v5 v5.4.0 h1:/dlubpFVZoHF+6YOJ4HOkZhMwjA7Nxgwy56G9m1Lu1s=
+github.com/gethinode/mod-flexsearch/v5 v5.4.0/go.mod h1:LDuYZ4iJLguI42/TtGky3CUdTbMiH3QiSjueYyxKIb4=
 github.com/gethinode/mod-fontawesome/v6 v6.1.1 h1:k5Jy7nA+YfLZ9YqXH8hyaiw9wjAeOxNEUcnu6fynnJo=
 github.com/gethinode/mod-fontawesome/v6 v6.1.1/go.mod h1:875OBk5te+KBJmr0PdSkFcduYnsKCuHWfcaqChh9NGo=
 github.com/gethinode/mod-fontawesome/v6 v6.1.2 h1:zlxmKqYGpZeCxMMMfpZywKjuPj/XI4m8Ocea+YHoF74=
