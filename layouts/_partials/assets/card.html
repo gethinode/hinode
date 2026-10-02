@@ -225,6 +225,11 @@
 {{- $linkIconEnabled := or (site.Params.main.cards.linkIcon | default false) $args.linkIcon -}}
 {{- $linkIcon := cond (and $linkIconEnabled $href (not $args.button) (not $args.buttonLabel)) $cardLinkIcon "" -}}
 
+{{/* Show the read-more icon on a stacked card's button when enabled (opt-in: global setting, overridden
+     per card or group). Horizontal cards always show it. */}}
+{{- $buttonIconEnabled := site.Params.main.cards.buttonIcon | default false -}}
+{{- if isset $args "buttonIcon" }}{{ $buttonIconEnabled = $args.buttonIcon }}{{ end -}}
+
 {{- $thumbnailArgs := dict
     "page"     $renderPage
     "src"      $thumbnail
@@ -390,7 +395,7 @@
                     {{ $buttonType := (or $args.linkType $args.buttonType) }}
                     {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
                     {{ if ne $args.align "start" }}{{ $buttonClass = printf "%s m%s-auto" $buttonClass (cond (eq $args.align "center") "x" "s") }}{{ end }}
-                    {{ partial "assets/button.html" (dict
+                    {{ $buttonArgs := dict
                         "page"        $args.page
                         "title"       $label
                         "href"        $href
@@ -398,7 +403,9 @@
                         "button-size" "sm"
                         "class"       $buttonClass
                         "link-type"   $buttonType
-                    )}}
+                    }}
+                    {{ if $buttonIconEnabled }}{{ $buttonArgs = merge $buttonArgs (dict "icon" $cardReadMore) }}{{ end }}
+                    {{ partial "assets/button.html" $buttonArgs }}
                 </div>
             </div>
         {{ end }}

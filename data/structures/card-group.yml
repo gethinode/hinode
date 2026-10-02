@@ -74,6 +74,13 @@ arguments:
     group: partial
   link-icon:
     release: v2.4.0
+  button-icon:
+    type: bool
+    optional: true
+    release: v3.33.0
+    comment: >-
+      Show the cardReadMore theme icon on the button of stacked cards. Overrides
+      the global main.cards.buttonIcon site setting.
   more-link-icon:
     type: string
     optional: true

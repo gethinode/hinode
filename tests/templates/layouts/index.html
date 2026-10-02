@@ -803,6 +803,61 @@ FAIL card padding: {{ $case }}
 CARD PADDING FAILURES: {{ $padFail }}
 
 {{- /*
+    Assertions for the opt-in `button-icon` of a stacked assets/card.html.
+
+    A horizontal card has always put the `cardReadMore` theme icon on its button, while a
+    stacked card's button carried none. Sites that wanted the icon on stacked cards had to
+    hand-write the button into the card body instead, where it followed the text and lost its
+    alignment across a row of cards. The icon is now available to stacked cards, but only on
+    request - `main.cards.buttonIcon` for the site, `button-icon` for a card or group - so an
+    existing site renders exactly as before. The harness leaves the site setting unset, which
+    makes "absent" the regression guard for every site that never opts in.
+
+    Each case reduces the card to whether the theme icon (the `fas chevron-right` default)
+    appears in its markup. The horizontal case pins that the existing icon is not tied to
+    the new switch. The shortcode cases also cover the group cascade, where a card's explicit
+    false has to beat the group's opt-in - the value GetArgParent would have dropped.
+*/ -}}
+{{- $biFail := 0 -}}
+{{- $biCases := slice
+  (dict "case" "stacked card leaves its button bare by default" "args" (dict) "want" false)
+  (dict "case" "stacked card shows the icon when it opts in" "args" (dict "button-icon" true) "want" true)
+  (dict "case" "stacked card stays bare on an explicit false" "args" (dict "button-icon" false) "want" false)
+  (dict "case" "horizontal card keeps its icon regardless" "args" (dict "orientation" "horizontal" "button-icon" false) "want" true)
+-}}
+{{- range $biCases -}}
+{{- $html := partial "assets/card.html" (merge $cardBase .args) -}}
+{{- $got := strings.Contains $html "chevron-right" -}}
+{{- if eq $got .want }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}: want={{ .want }} got={{ $got }}
+{{- $biFail = add $biFail 1 -}}
+{{- errorf "card button icon mismatch: case=%q want=%v got=%v" .case .want $got -}}
+{{- end -}}
+{{- end -}}
+{{- $biHtml := replaceRE `\s+` " " (site.GetPage "/blog/card-button-icon").Content -}}
+{{- $biGot := slice -}}
+{{- range findRE `<a[^>]*card-button.*?</a>` $biHtml -}}
+    {{- $biGot = $biGot | append (strings.Contains . "chevron-right") -}}
+{{- end -}}
+{{- $biWant := slice false true true false -}}
+{{- $biShortcodeCases := slice "absent defers to the site setting" "explicit opt-in" "inherits the group" "false beats the group" -}}
+{{- range $i, $case := $biShortcodeCases -}}
+{{- $got := cond (lt $i (len $biGot)) (index $biGot $i) "(missing)" -}}
+{{- $want := index $biWant $i -}}
+{{- if eq $got $want }}
+PASS card button icon: {{ $case }} -> {{ $got }}
+{{- else }}
+FAIL card button icon: {{ $case }}: want={{ $want }} got={{ $got }}
+{{- $biFail = add $biFail 1 -}}
+{{- errorf "card button icon mismatch: case=%q want=%v got=%v" $case $want $got -}}
+{{- end -}}
+{{- end }}
+
+CARD BUTTON ICON FAILURES: {{ $biFail }}
+
+{{- /*
     Assertions for the companion dropdown and the identifiers in assets/nav.html.
 
     `responsive` hides the control group below the breakpoint and puts a dropdown in its place.

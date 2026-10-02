@@ -25,6 +25,7 @@
         toggle = true
     [main.cards]
         linkIcon = false
+        buttonIcon = false
 
 [icons]
     # Color mode toggle
