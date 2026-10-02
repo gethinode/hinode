@@ -30,6 +30,7 @@
         toggle = false
     [main.cards]
         linkIcon = false
+        buttonIcon = false
 # toml-docs-end main
 
 # toml-docs-start icons
