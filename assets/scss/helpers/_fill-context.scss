@@ -1,0 +1,175 @@
+// Fill contexts.
+//
+// utilities/GetBackgroundStyle.html adds `fill-{color}` (solid) or
+// `fill-{color}-subtle` next to a section's background class when the caller
+// passes `fill-context`. Inside it, Bootstrap's own custom properties are
+// re-declared so text, links and buttons resolve against the fill rather than
+// the page: `text-body`, `text-muted`, headings and links read the re-declared
+// ink, and buttons keep a visible edge. Inks come from color-contrast(), once
+// per color mode, so they follow the theme's palette.
+
+// scss-docs-start fill-dark-values
+// Theme colors whose `--bs-{color}-rgb` is redeclared on the dark root (see
+// common/_variables-dark.scss), mapped to the value a solid `.bg-{color}`
+// therefore paints in dark mode. Every other color keeps its light value.
+$fill-dark-values: (
+    "primary": $primary-text-emphasis-dark,
+    "secondary": $secondary-text-emphasis-dark
+) !default;
+
+// scss-docs-end fill-dark-values
+
+// The value a `.bg-{color}-subtle` paints in dark mode, as a solid color.
+// Primary is translucent in Hinode (see common/_variables-dark.scss), so it is
+// approximated by mixing over the dark body background.
+$fill-subtle-dark-values: () !default;
+
+@each $name, $value in $theme-colors {
+    @if not map-has-key($fill-subtle-dark-values, $name) {
+        $subtle: shade-color($value, 80%);
+
+        @if $name == "primary" {
+            $subtle: mix($primary-text-emphasis-dark, $body-bg-dark, 10%);
+        } @else if $theme-colors-bg-subtle-dark and map-has-key($theme-colors-bg-subtle-dark, $name) {
+            $subtle: map-get($theme-colors-bg-subtle-dark, $name);
+        }
+        $fill-subtle-dark-values: map-merge($fill-subtle-dark-values, ($name: $subtle));
+    }
+}
+
+$fill-outline-buttons: ();
+
+@each $name, $value in $theme-colors {
+    $fill-outline-buttons: append($fill-outline-buttons, ".btn-outline-#{$name}", comma);
+}
+
+// The ink at 75% where that still clears the minimum contrast ratio against the
+// fill, the full ink where it does not.
+@function fill-muted($ink, $fill) {
+    @if contrast-ratio($fill, mix($ink, $fill, 75%)) >= $min-contrast-ratio {
+        @return rgba($ink, .75);
+    }
+
+    @return $ink;
+}
+
+@mixin fill-ink($ink, $fill) {
+    $muted: fill-muted($ink, $fill);
+
+    --#{$prefix}body-color: #{$ink};
+    --#{$prefix}body-color-rgb: #{to-rgb($ink)};
+    --#{$prefix}secondary-color: #{$muted};
+    --#{$prefix}secondary-color-rgb: #{to-rgb($ink)};
+    --#{$prefix}emphasis-color: #{$ink};
+    --#{$prefix}emphasis-color-rgb: #{to-rgb($ink)};
+    --#{$prefix}heading-color: #{$ink};
+    --#{$prefix}link-color: #{$ink};
+    --#{$prefix}link-color-rgb: #{to-rgb($ink)};
+    --#{$prefix}link-hover-color: #{$ink};
+    --#{$prefix}link-hover-color-rgb: #{to-rgb($ink)};
+    --#{$prefix}border-color: #{rgba($ink, .5)};
+}
+
+@mixin fill-buttons($name, $fill, $ink) {
+    #{$fill-outline-buttons} {
+        --#{$prefix}btn-color: #{$ink};
+        --#{$prefix}btn-border-color: #{$ink};
+        --#{$prefix}btn-hover-color: #{$fill};
+        --#{$prefix}btn-hover-bg: #{$ink};
+        --#{$prefix}btn-hover-border-color: #{$ink};
+        --#{$prefix}btn-active-color: #{$fill};
+        --#{$prefix}btn-active-bg: #{$ink};
+        --#{$prefix}btn-active-border-color: #{$ink};
+
+        // components/_button.scss forces a white hover label on outline buttons;
+        // on a solid fill the hover background is the ink, which may be white too.
+        &:hover,
+        &:active,
+        &.active {
+            color: var(--#{$prefix}btn-hover-color) if($enable-important-utilities, !important, null);
+        }
+    }
+
+    .btn-#{$name} {
+        --#{$prefix}btn-border-color: #{$ink};
+        --#{$prefix}btn-hover-border-color: #{$ink};
+        --#{$prefix}btn-active-border-color: #{$ink};
+    }
+}
+
+// `$color` is the color's own dark-mode value, used as the edge when it clears
+// 3:1 against the dark subtle fill; otherwise the edge takes the body ink.
+@mixin fill-subtle-dark-buttons($name, $color) {
+    $subtle: map-get($fill-subtle-dark-values, $name);
+    $edge: if(contrast-ratio($color, $subtle) >= 3, var(--#{$prefix}#{$name}), var(--#{$prefix}body-color));
+
+    .btn-#{$name} {
+        --#{$prefix}btn-border-color: #{$edge};
+    }
+
+    .btn-outline-#{$name} {
+        --#{$prefix}btn-color: var(--#{$prefix}body-color);
+        --#{$prefix}btn-border-color: #{$edge};
+    }
+}
+
+// Light mode
+@each $name, $value in $theme-colors {
+    $ink: color-contrast($value);
+
+    .fill-#{$name} {
+        @include fill-ink($ink, $value);
+        @include fill-buttons($name, $value, $ink);
+    }
+}
+
+@if $enable-dark-mode {
+    @each $name, $value in $theme-colors {
+        $dark-fill: if(map-has-key($fill-dark-values, $name), map-get($fill-dark-values, $name), $value);
+        $dark-ink: color-contrast($dark-fill);
+
+        @include color-mode(dark) {
+            // Bootstrap computes `.text-bg-*` once, against the light fill.
+            @if map-has-key($fill-dark-values, $name) {
+                .text-bg-#{$name} {
+                    color: $dark-ink if($enable-important-utilities, !important, null);
+                }
+            }
+
+            .fill-#{$name} {
+                @include fill-ink($dark-ink, $dark-fill);
+                @include fill-buttons($name, $dark-fill, $dark-ink);
+            }
+
+            .fill-#{$name}-subtle {
+                @include fill-subtle-dark-buttons($name, $dark-fill);
+            }
+        }
+
+        // A section that carries its own `data-bs-theme` (the `theme` or
+        // `overlay-mode` argument) resolves for its own mode, whatever its page's.
+        .fill-#{$name}[data-bs-theme="dark"] {
+            @include fill-ink($dark-ink, $dark-fill);
+            @include fill-buttons($name, $dark-fill, $dark-ink);
+        }
+
+        .fill-#{$name}-subtle[data-bs-theme="dark"] {
+            @include fill-subtle-dark-buttons($name, $dark-fill);
+        }
+
+        // `text-bg-*` shares an element with `fill-*`, so a section that carries its
+        // own mode needs its own ink, whatever the page's mode.
+        .text-bg-#{$name}[data-bs-theme="dark"] {
+            color: $dark-ink if($enable-important-utilities, !important, null);
+        }
+
+        .text-bg-#{$name}[data-bs-theme="light"] {
+            color: color-contrast($value) if($enable-important-utilities, !important, null);
+        }
+
+        .fill-#{$name}[data-bs-theme="light"] {
+            @include fill-ink(color-contrast($value), $value);
+            @include fill-buttons($name, $value, color-contrast($value));
+        }
+    }
+}

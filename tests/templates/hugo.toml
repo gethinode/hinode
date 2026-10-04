@@ -188,3 +188,14 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/nav-item.yml'
   target = 'data/structures/nav-item.yml'
+
+# utilities/GetBackgroundStyle.html returns the class string a section, timeline or
+# testimonial paints its background with. The assertions call it directly; its
+# argument structure comes from the theme, and InitArgs plus the global argument
+# definitions from the vendored mod-utils mounted above.
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetBackgroundStyle.html'
+  target = 'layouts/_partials/utilities/GetBackgroundStyle.html'
+[[module.mounts]]
+  source = '../../data/structures/background.yml'
+  target = 'data/structures/background.yml'

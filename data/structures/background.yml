@@ -4,3 +4,14 @@ group: partial
 arguments:
   background:
   class:
+  fill-context:
+    type: bool
+    optional: true
+    default: false
+    release: v3.34.0
+    comment: >-
+      Adds a fill context next to the background class: `text-bg-{color}
+      fill-{color}` for a solid color, `fill-{color}-subtle` for a subtle one,
+      nothing for a body color. Inside a fill context, text, links and buttons
+      resolve against the fill instead of the page. Off by default, because some
+      callers build further class names from the returned string.
