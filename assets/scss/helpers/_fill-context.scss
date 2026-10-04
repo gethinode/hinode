@@ -19,6 +19,24 @@ $fill-dark-values: (
 
 // scss-docs-end fill-dark-values
 
+// The value a `.bg-{color}-subtle` paints in dark mode, as a solid color.
+// Primary is translucent in Hinode (see common/_variables-dark.scss), so it is
+// approximated by mixing over the dark body background.
+$fill-subtle-dark-values: () !default;
+
+@each $name, $value in $theme-colors {
+    @if not map-has-key($fill-subtle-dark-values, $name) {
+        $subtle: shade-color($value, 80%);
+
+        @if $name == "primary" {
+            $subtle: mix($primary-text-emphasis-dark, $body-bg-dark, 10%);
+        } @else if $theme-colors-bg-subtle-dark and map-has-key($theme-colors-bg-subtle-dark, $name) {
+            $subtle: map-get($theme-colors-bg-subtle-dark, $name);
+        }
+        $fill-subtle-dark-values: map-merge($fill-subtle-dark-values, ($name: $subtle));
+    }
+}
+
 $fill-outline-buttons: ();
 
 @each $name, $value in $theme-colors {
@@ -66,7 +84,6 @@ $fill-outline-buttons: ();
         // components/_button.scss forces a white hover label on outline buttons;
         // on a solid fill the hover background is the ink, which may be white too.
         &:hover,
-        &:focus,
         &:active,
         &.active {
             color: var(--#{$prefix}btn-hover-color) if($enable-important-utilities, !important, null);
@@ -80,10 +97,11 @@ $fill-outline-buttons: ();
     }
 }
 
-@mixin fill-subtle-dark-buttons($name) {
-    // The `dark` color is near-black in both modes, so its own edge would vanish
-    // on its dark subtle fill; it takes the body ink there instead.
-    $edge: if($name == "dark", var(--#{$prefix}body-color), var(--#{$prefix}#{$name}));
+// `$color` is the color's own dark-mode value, used as the edge when it clears
+// 3:1 against the dark subtle fill; otherwise the edge takes the body ink.
+@mixin fill-subtle-dark-buttons($name, $color) {
+    $subtle: map-get($fill-subtle-dark-values, $name);
+    $edge: if(contrast-ratio($color, $subtle) >= 3, var(--#{$prefix}#{$name}), var(--#{$prefix}body-color));
 
     .btn-#{$name} {
         --#{$prefix}btn-border-color: #{$edge};
@@ -124,7 +142,7 @@ $fill-outline-buttons: ();
             }
 
             .fill-#{$name}-subtle {
-                @include fill-subtle-dark-buttons($name);
+                @include fill-subtle-dark-buttons($name, $dark-fill);
             }
         }
 
@@ -136,7 +154,17 @@ $fill-outline-buttons: ();
         }
 
         .fill-#{$name}-subtle[data-bs-theme="dark"] {
-            @include fill-subtle-dark-buttons($name);
+            @include fill-subtle-dark-buttons($name, $dark-fill);
+        }
+
+        // `text-bg-*` shares an element with `fill-*`, so a section that carries its
+        // own mode needs its own ink, whatever the page's mode.
+        .text-bg-#{$name}[data-bs-theme="dark"] {
+            color: $dark-ink if($enable-important-utilities, !important, null);
+        }
+
+        .text-bg-#{$name}[data-bs-theme="light"] {
+            color: color-contrast($value) if($enable-important-utilities, !important, null);
         }
 
         .fill-#{$name}[data-bs-theme="light"] {
