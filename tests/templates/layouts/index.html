@@ -972,3 +972,62 @@ FAIL nav fade: {{ .case }}
 {{- end }}
 
 NAV FADE FAILURES: {{ $fadeFail }}
+
+{{- /*
+    Assertions for utilities/GetBackgroundStyle.html.
+
+    Without `fill-context` the partial must return exactly what it always has:
+    assets/timeline.html concatenates the result into class names. With it, a solid
+    color adds its contrasting ink and context (`text-bg-X fill-X`), a subtle color
+    adds its subtle context (`fill-X-subtle`), and a body color adds nothing.
+*/ -}}
+{{- $bgFail := 0 -}}
+{{- $bgCases := slice
+  (dict "case" "solid without context is unchanged"
+        "args" (dict "background" (dict "color" "primary"))
+        "want" "bg-primary")
+  (dict "case" "subtle without context is unchanged"
+        "args" (dict "background" (dict "color" "primary" "subtle" true))
+        "want" "bg-primary-subtle")
+  (dict "case" "string without context is unchanged"
+        "args" (dict "background" "primary")
+        "want" "bg-primary")
+  (dict "case" "explicit false behaves like omitted"
+        "args" (dict "background" (dict "color" "primary") "fill-context" false)
+        "want" "bg-primary")
+  (dict "case" "solid with context pairs ink and context"
+        "args" (dict "background" (dict "color" "primary") "fill-context" true)
+        "want" "bg-primary text-bg-primary fill-primary")
+  (dict "case" "subtle with context adds the subtle context"
+        "args" (dict "background" (dict "color" "warning" "subtle" true) "fill-context" true)
+        "want" "bg-warning-subtle fill-warning-subtle")
+  (dict "case" "string with context pairs ink and context"
+        "args" (dict "background" "danger" "fill-context" true)
+        "want" "bg-danger text-bg-danger fill-danger")
+  (dict "case" "body with context adds nothing"
+        "args" (dict "background" (dict "color" "body") "fill-context" true)
+        "want" "bg-body")
+  (dict "case" "body-tertiary subtle with context adds nothing"
+        "args" (dict "background" (dict "color" "body-tertiary" "subtle" true) "fill-context" true)
+        "want" "bg-body-tertiary")
+  (dict "case" "caller class stays first"
+        "args" (dict "background" (dict "color" "primary") "class" "x" "fill-context" true)
+        "want" "x bg-primary text-bg-primary fill-primary")
+  (dict "case" "backdrop-only map with context adds nothing"
+        "args" (dict "background" (dict "backdrop" "/img/x.jpg") "fill-context" true)
+        "want" "")
+-}}
+{{- range $bgCases -}}
+{{- $got := partial "utilities/GetBackgroundStyle.html" .args -}}
+{{- if eq $got .want }}
+PASS background: {{ .case }}
+{{- else }}
+FAIL background: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $bgFail = add $bgFail 1 -}}
+{{- errorf "GetBackgroundStyle mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+BACKGROUND FAILURES: {{ $bgFail }}

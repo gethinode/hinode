@@ -25,10 +25,13 @@
         {{ $background = $args.background }}
     {{ end }}
 
-    {{ if and $subtle (not (hasPrefix $background "body")) }}
+    {{ $body := hasPrefix $background "body" }}
+    {{ if and $subtle (not $body) }}
         {{- $style = printf "%s bg-%s-subtle" (or $style "") $background -}}
+        {{- if $args.fillContext }}{{ $style = printf "%s fill-%s-subtle" $style $background }}{{ end -}}
     {{ else if $background }}
         {{- $style = printf "%s bg-%s" (or $style "") $background -}}
+        {{- if and $args.fillContext (not $body) }}{{ $style = printf "%s text-bg-%s fill-%s" $style $background $background }}{{ end -}}
     {{ end }}
 {{ end }}
 
