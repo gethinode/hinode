@@ -1,0 +1,6 @@
+{{- /*
+    Stand-in for assets/image.html in the card assertions. The harness mounts no image
+    pipeline, and what the card decides about its thumbnail is fully visible in the arguments
+    it hands to its hook, so this echoes them instead of rendering an image.
+*/ -}}
+<span class="thumbnail-probe" data-wrapper="{{ .wrapper }}" data-class="{{ .class }}" data-ratio="{{ .ratio }}"></span>

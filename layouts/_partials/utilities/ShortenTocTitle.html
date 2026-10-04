@@ -1,0 +1,39 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+
+    Shortens long path-like tokens (e.g. API routes) in a table of contents label to their last
+    meaningful segment: "GET /api/organizations/:orgId/projects/:projectId/members" becomes
+    "GET members". Tokens are whitespace-delimited and may sit inside inline markup such as
+    <code>. Configured with the navigation parameters below:
+
+    - tocShortenLength: minimum token length to shorten (default 24, 0 disables shortening)
+    - tocSkipParams: ignore trailing parameter segments such as ":id", "{id}" or "*path" (default true)
+
+    Arguments:
+    - page:  page context, used to read the site parameters
+    - title: label to shorten
+*/}}
+
+{{- $nav := .page.Site.Params.navigation -}}
+{{- $maxLen := cond (isset $nav "tocshortenlength") ($nav.tocShortenLength | int) 24 -}}
+{{- $skipParams := cond (isset $nav "tocskipparams") $nav.tocSkipParams true -}}
+{{- $title := .title -}}
+
+{{- if gt $maxLen 0 -}}
+    {{- range $token := findRE `[^\s<>]*/[^\s<>]*` $title -}}
+        {{- if gt (len $token) $maxLen -}}
+            {{- $segments := slice -}}
+            {{- range split $token "/" }}{{ with . }}{{ $segments = $segments | append . }}{{ end }}{{ end -}}
+            {{- if $skipParams -}}
+                {{- $keep := slice -}}
+                {{- range $segments }}{{ if not (findRE `^[:{*]` .) }}{{ $keep = $keep | append . }}{{ end }}{{ end -}}
+                {{- if $keep }}{{ $segments = $keep }}{{ end -}}
+            {{- end -}}
+            {{- with $segments }}{{ $title = replace $title $token (index . (sub (len .) 1)) 1 }}{{ end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $title -}}

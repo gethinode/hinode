@@ -25,6 +25,7 @@
         toggle = true
     [main.cards]
         linkIcon = false
+        buttonIcon = false
 
 [icons]
     # Color mode toggle
@@ -110,6 +111,8 @@
     startLevel = 2
     endLevel = 3
     maxNumHeadings = 9
+    tocShortenLength = 24
+    tocSkipParams = true
     [navigation.language]
         inline = false
     [navigation.padding]

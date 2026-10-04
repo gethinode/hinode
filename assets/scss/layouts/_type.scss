@@ -1,34 +1,42 @@
 //
 // Headings
 //
+// `overflow-wrap: anywhere` covers headings with a long unbreakable token (e.g. an API
+// route), which otherwise overflow the content column instead of wrapping.
 h1 {
     margin-top: $spacer * 2.5;
     scroll-margin-top: var(--navbar-offset);
+    overflow-wrap: anywhere;
 }
 
 h2 {
     margin-top: $spacer * 2;
     scroll-margin-top: var(--navbar-offset);
+    overflow-wrap: anywhere;
 }
 
 h3 {
     margin-top: $spacer * 1.75;
     scroll-margin-top: var(--navbar-offset);
+    overflow-wrap: anywhere;
 }
 
 h4 {
     margin-top: $spacer * 1.5;
     scroll-margin-top: var(--navbar-offset);
+    overflow-wrap: anywhere;
 }
 
 h5 {
     margin-top: $spacer * 1.25;
     scroll-margin-top: var(--navbar-offset);
+    overflow-wrap: anywhere;
 }
 
 h6 {
     margin-top: $spacer;
     scroll-margin-top: var(--navbar-offset);
+    overflow-wrap: anywhere;
 }
 
 .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {

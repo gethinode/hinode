@@ -82,6 +82,15 @@ arguments:
   link-icon:
     parent: cascade
     release: v2.4.0
+  button-icon:
+    type: bool
+    optional: true
+    parent: cascade
+    release: v3.33.0
+    comment: >-
+      Show the cardReadMore theme icon on the button of a stacked card. Overrides
+      the global main.cards.buttonIcon site setting. Horizontal cards always show
+      the icon. Cascades to all child cards.
   exact:
     release: v1.22.0
   # deprecated arguments

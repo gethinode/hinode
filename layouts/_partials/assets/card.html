@@ -83,6 +83,21 @@
 
     {{ if ne $keywords "none" }}
         <p class="card-text"><small class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} text-uppercase">
+            {{- if eq $keywords "category" -}}
+                {{/* The category is the first entry of the page's categories parameter, rendered as plain text */}}
+                {{- $category := "" -}}
+                {{- with $page.Params.categories -}}
+                    {{- if reflect.IsSlice . }}{{ $category = index . 0 }}{{ else }}{{ $category = . }}{{ end -}}
+                {{- end -}}
+                {{- with $category -}}
+                    <span{{ if not $color }} class="text-body-emphasis"{{ end }}>{{ . | humanize }}</span>
+                    {{- if $page.Date }}&nbsp;&bull;&nbsp;{{ end -}}
+                {{- end -}}
+                {{- with $page.Date -}}
+                    <span{{ if not $color }} class="text-body-secondary"{{ end }}>{{ partial "utilities/date.html" (dict "date" . "format" "long") }}</span>
+                {{- end -}}
+            {{- end -}}
+
             {{- if in (slice "full" "date" "publication") $keywords -}}
                 {{ with $page.Date }}
                     {{ partial "utilities/date.html" (dict "date" . "format" "long") }}
@@ -210,6 +225,11 @@
 {{- $linkIconEnabled := or (site.Params.main.cards.linkIcon | default false) $args.linkIcon -}}
 {{- $linkIcon := cond (and $linkIconEnabled $href (not $args.button) (not $args.buttonLabel)) $cardLinkIcon "" -}}
 
+{{/* Show the read-more icon on a stacked card's button when enabled (opt-in: global setting, overridden
+     per card or group). Horizontal cards always show it. */}}
+{{- $buttonIconEnabled := site.Params.main.cards.buttonIcon | default false -}}
+{{- if isset $args "buttonIcon" }}{{ $buttonIconEnabled = $args.buttonIcon }}{{ end -}}
+
 {{- $thumbnailArgs := dict
     "page"     $renderPage
     "src"      $thumbnail
@@ -246,9 +266,17 @@
                 <div class="{{ $col1 }}">
                     {{ $fullHeight := "card-img-h100" }}
                     {{ $rounding := "rounded-start" }}
+                    {{ $wrapper := "card-img-wrap h-100 d-flex align-items-center" }}
                     {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
-                    {{- partial $args.hook (merge $thumbnailArgs (dict 
-                        "wrapper"  "card-img-wrap h-100 d-flex align-items-center"
+                    {{/* A ratio the caller asks for wins over filling the card's height, which would
+                         otherwise stretch the image to the body text and crop it to whatever shape that
+                         leaves. A ratio read from the page's own thumbnail keeps the full-height fill. */}}
+                    {{ if $args.ratio }}
+                        {{ $fullHeight = "" }}
+                        {{ $wrapper = "card-img-wrap" }}
+                    {{ end }}
+                    {{- partial $args.hook (merge $thumbnailArgs (dict
+                        "wrapper"  $wrapper
                         "class"    (printf "card-img-bg %s %s" $rounding $fullHeight)
                         "ratio"    (or $ratio "auto")
                     )) -}}
@@ -367,7 +395,7 @@
                     {{ $buttonType := (or $args.linkType $args.buttonType) }}
                     {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
                     {{ if ne $args.align "start" }}{{ $buttonClass = printf "%s m%s-auto" $buttonClass (cond (eq $args.align "center") "x" "s") }}{{ end }}
-                    {{ partial "assets/button.html" (dict
+                    {{ $buttonArgs := dict
                         "page"        $args.page
                         "title"       $label
                         "href"        $href
@@ -375,7 +403,9 @@
                         "button-size" "sm"
                         "class"       $buttonClass
                         "link-type"   $buttonType
-                    )}}
+                    }}
+                    {{ if $buttonIconEnabled }}{{ $buttonArgs = merge $buttonArgs (dict "icon" $cardReadMore) }}{{ end }}
+                    {{ partial "assets/button.html" $buttonArgs }}
                 </div>
             </div>
         {{ end }}

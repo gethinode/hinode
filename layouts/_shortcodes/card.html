@@ -58,6 +58,17 @@
 {{- $title := .Get "title" -}}
 {{- $button := partial "utilities/GetArgParent" (dict "page" . "arg" "button") -}}
 {{- $linkIcon := partial "utilities/GetArgParent" (dict "page" . "arg" "link-icon") -}}
+{{- /* Not GetArgParent: button-icon is an opt-in bool whose explicit false must still beat a
+       group or site value, and that helper drops false. It is forwarded only when this card
+       or its parent sets it, so an unset card keeps deferring to main.cards.buttonIcon. */ -}}
+{{- $buttonIcon := dict -}}
+{{- if and .IsNamedParams (isset .Params "button-icon") -}}
+    {{- $buttonIcon = dict "button-icon" $args.buttonIcon -}}
+{{- else -}}
+    {{- with .Parent -}}
+        {{- if and .IsNamedParams (isset .Params "button-icon") }}{{ $buttonIcon = dict "button-icon" (.Get "button-icon") }}{{ end -}}
+    {{- end -}}
+{{- end -}}
 {{- $linkType := or (partial "utilities/GetArgParent" (dict "page" . "arg" "link-type")) (partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType")) -}}
 {{- $cols := partial "utilities/GetArgParent" (dict "page" . "arg" "cols") -}}
 {{- $scroll := partial "utilities/GetArgParent" (dict "page" . "arg" "scroll") -}}
@@ -83,7 +94,7 @@
 {{/* Main code */}}
 {{ if not $error -}}
     {{/* Render card */}}
-    {{- $output := partial "assets/card.html" (dict
+    {{- $output := partial "assets/card.html" (merge $buttonIcon (dict
         "page"         $page
         "path"         $path
         "href"         $args.href
@@ -116,7 +127,7 @@
         "link-icon"    (partial "utilities/OmitEmpty.html" $linkIcon)
         "link-type"    (partial "utilities/OmitEmpty.html" $linkType)
         "_default"     $args.default
-    ) -}}
+    )) -}}
 
     {{/* Pass output to parent or current stream */}}
     {{ with .Parent }}

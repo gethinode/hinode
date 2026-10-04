@@ -167,6 +167,7 @@
                     "link-type"     (or $args.linkType $args.buttonType)
                     "icon-rounded"  $args.iconRounded
                 ) -}}
+                {{- if isset $args "buttonIcon" }}{{ $params = merge $params (dict "button-icon" $args.buttonIcon) }}{{ end -}}
                 {{- $params = merge $element $params -}}
                 {{- if $args.scroll -}}
                     {{- $width := (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "width" "default" "3")) -}}

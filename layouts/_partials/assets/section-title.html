@@ -33,7 +33,10 @@
 
 {{/* Initialize local arguments */}}
 {{- $size := (or $args.heading.size site.Params.style.title.size) | default 4 -}}
-{{- $arrangement := (or $args.arrangement site.Params.style.title.arrangement) | default "above" -}}
+{{/* An explicit arrangement argument wins, then the heading's own arrangement. InitArgs always fills
+     $args.arrangement from the site config or its default, so the raw arguments tell whether the
+     caller set one. */}}
+{{- $arrangement := (or (index . "arrangement") $args.heading.arrangement $args.arrangement site.Params.style.title.arrangement) | default "above" -}}
 {{- $headingStyle := (or $args.headingStyle site.Params.style.title.headingStyle) | default "display" -}}
 {{- $contentStyle := (or $args.contentStyle site.Params.style.title.contentStyle) | default "lead text-muted" -}}
 {{- $preheading := $args.heading.preheading }}
@@ -159,6 +162,27 @@
                         {{ end }}
                         {{ $links }}
                     </div>
+                </div>
+            </div>
+
+        {{/* Place the preheading and title in a narrow column to the left of the content. The row drops
+             its gutter so it cannot overflow the section, and the title column pads its trailing edge
+             instead. */}}
+        {{ else if eq $arrangement "split" }}
+            <div class="row g-0">
+                <div class="col-12 col-{{ $breakpoint.current }}-4 pe-{{ $breakpoint.current }}-5">
+                    {{ with $preheading }}
+                        <p class="preheading {{ if ne $args.color "body" }}text-{{ $args.color }}{{ else }}text-primary{{ end }}">
+                            {{ . | $page.RenderString | safeHTML }}
+                        </p>
+                    {{ end }}
+                    {{ $header }}
+                </div>
+                <div class="col-12 col-{{ $breakpoint.current }}-8">
+                    {{ with $args.heading.content }}
+                        <div{{ with $args.contentId }} id="{{ . }}"{{ end }} class="{{ $contentStyle }} pt-{{ with $padding.y }}{{ . }}{{ else }}0{{ end }} pt-{{ $breakpoint.current }}-1">{{ . | $page.RenderString | safeHTML }}</div>
+                    {{ end }}
+                    {{ $links }}
                 </div>
             </div>
 
