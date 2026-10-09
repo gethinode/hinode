@@ -11,5 +11,5 @@ require (
 	github.com/gethinode/mod-docs v1.16.1 // indirect
 	github.com/gethinode/mod-fontawesome/v6 v6.1.4 // indirect
 	github.com/gethinode/mod-utils/v6 v6.16.0 // indirect
-	github.com/twbs/icons v1.13.1 // indirect
+	github.com/twbs/icons v1.13.2 // indirect
 )
