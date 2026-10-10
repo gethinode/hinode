@@ -117,6 +117,8 @@
   translation: "切换更多项目"
 - id: toggleGroup
   translation: "切换{{ .Title }}"
+- id: sidebarGroupExpandHint
+  translation: "点击展开"
 
 # Feature
 - id: addedFeature

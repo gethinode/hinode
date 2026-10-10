@@ -137,6 +137,21 @@
     </li>
 {{- end -}}
 
+{{- /* The glyph inside a group chevron, or "" when the site names none.
+
+       A site that sets the optional `sidebarGroup` theme icon gets it in every group
+       chevron - the full tree's and the rail's - in place of the stylesheet's `::before`
+       chevron, which the caller retires with `btn-toggle-group-icon`; components/_sidebar.scss
+       turns the glyph, a down-pointing one, to the right while its group is closed. With no
+       icon set nothing changes, the pattern the navbar's `navbarDropdown` follows. */ -}}
+{{- define "_partials/inline/sidebar/chevron-icon.html" -}}
+    {{- $html := "" -}}
+    {{- with partial "utilities/GetThemeIcon.html" (dict "id" "sidebarGroup") -}}
+        {{- $html = partial "assets/icon.html" (dict "icon" . "class" "fa-fw btn-toggle-group-glyph" "spacing" false "mode" "svg") -}}{{/* "svg" is required: symbols mode registers its <symbol> as a per-page side effect, and this partial is rendered through partialCached - see the header comment. */ -}}
+    {{- end -}}
+    {{- return $html -}}
+{{- end -}}
+
 {{- /* The destination of a sidebar entry before link.html resolves it: absolute and
        external links pass through, a relative one joins the base URL, and a missing one
        is derived from the title. item.html and the rail group's flyout both call this and
@@ -192,11 +207,19 @@
     {{- $class       := "sidebar-item text-decoration-none rounded w-100" -}}
     {{- if and $iconColumn (not $pre) -}}{{- $class = printf "%s sidebar-item-icon-indent" $class -}}{{- end -}}
     {{- $childIconColumn := partial "inline/sidebar/has-icons.html" $group.pages -}}
-    {{- $childIndent := cond (not (not $pre)) 3 2 -}}
+    {{- /* The children's text starts where the row's label does, so the indent follows the
+           label: one icon column (three steps, as in the full tree) wherever the row has one -
+           its own icon or the column its list reserves - and none otherwise. The label span's
+           `ms-1` in a collapsible rail is not a whole step; components/_sidebar.scss pays it. */ -}}
+    {{- $childIndent := cond (or (not (not $pre)) $iconColumn) 3 0 -}}
+    {{- /* Shown with the label in the icon-only rail's tooltip (sidebar-toggle.js). Emitted on
+           the anchor because a CSP site cannot hand a translated string to a script inline. */ -}}
+    {{- $hint        := T "sidebarGroupExpandHint" | default "Click to expand" -}}
+    {{- $chevronIcon := partial "inline/sidebar/chevron-icon.html" (dict) -}}
     <li class="mb-1 sidebar-group">
         <div class="sidebar-group-row dropend">
             <a class="{{ $class }}"
-               {{- if $collapsible }} data-sidebar-label="{{ $title }}"{{ end }}
+               {{- if $collapsible }} data-sidebar-label="{{ $title }}" data-sidebar-hint="{{ $hint }}"{{ end }}
                data-sidebar-group-toggle
                data-bs-popper-config='{"strategy":"fixed"}'
                {{ with $href }}href="{{ . }}"{{ end }}>
@@ -213,13 +236,13 @@
                     {{- $title -}}
                 {{- end -}}
             </a>
-            <button class="btn btn-toggle-group sidebar-group-chevron d-inline-flex align-items-center rounded border-0 collapsed"
+            <button class="btn btn-toggle-group sidebar-group-chevron d-inline-flex align-items-center rounded border-0 collapsed{{ if $chevronIcon }} btn-toggle-group-icon{{ end }}"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#{{ $id }}"
                     aria-controls="{{ $id }}"
                     aria-expanded="false"
-                    aria-label="{{ $toggleLabel }}"></button>
+                    aria-label="{{ $toggleLabel }}">{{ with $chevronIcon }}{{ . }}{{ end }}</button>
             <ul class="dropdown-menu sidebar-group-flyout">
                 <li><a class="dropdown-item sidebar-group-flyout-header" href="{{ $href }}">{{ $title }}</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -235,7 +258,7 @@
                 {{- end -}}
             </ul>
         </div>
-        <ul class="collapse btn-toggle-nav list-unstyled fw-normal pb-1 sidebar-nav-indent-{{ $childIndent }}" id="{{ $id }}">
+        <ul class="collapse btn-toggle-nav list-unstyled fw-normal pb-1{{ with $childIndent }} sidebar-nav-indent-{{ . }}{{ end }}" id="{{ $id }}">
             {{- range $group.pages -}}
                 {{ partial "inline/sidebar/item.html" (dict
                     "page"       $page
@@ -280,6 +303,7 @@
            hover and active surface is as wide as its parent's. Nested list padding moved the
            box instead, and the highlight narrowed one step per level. */ -}}
     {{- $childIndent := add $indent (cond $pre 3 2) -}}
+    {{- $chevronIcon := partial "inline/sidebar/chevron-icon.html" (dict) -}}
 
     {{- $doc_slug := partial "utilities/URLJoin.html" (dict "base" $baseURL "path" ($group.title | urlize)) -}}
     {{- $href := or $group.link $doc_slug -}}
@@ -326,12 +350,12 @@
             </div>
 
             <button
-                class="btn btn-toggle-group d-inline-flex align-items-center rounded border-0 collapsed"
+                class="btn btn-toggle-group d-inline-flex align-items-center rounded border-0 collapsed{{ if $chevronIcon }} btn-toggle-group-icon{{ end }}"
                 data-bs-toggle="collapse"
                 data-bs-target="#sidebar-collapse-{{ $index }}-{{ $level }}"
                 aria-expanded="false"
                 aria-label="{{ T "toggleGroup" (dict "Title" $groupTitle) | default (printf "Toggle %s" $groupTitle) }}"
-            >
+            >{{ with $chevronIcon }}{{ . }}{{ end }}
             </button>
         </div>
         <div class="collapse" id="sidebar-collapse-{{ $index }}-{{ $level }}">

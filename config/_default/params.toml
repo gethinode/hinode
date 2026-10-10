@@ -67,6 +67,8 @@
     # Sidebar
     sidebarCollapse      = "fas angles-left"
     sidebarSecondary     = "fas angle-down"
+    # Custom group chevron (a down-pointing glyph; replaces the CSS chevron when set)
+    # sidebarGroup      = "fas angle-down"
     # Form
     formSubmitButton     = "fa paper-plane"
     formSubmittedIcon    = "fa envelope"

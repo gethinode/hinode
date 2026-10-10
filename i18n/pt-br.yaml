@@ -119,6 +119,8 @@
   translation: "Mostrar/Ocultar mais itens"
 - id: toggleGroup
   translation: "Mostrar/Ocultar {{ .Title }}"
+- id: sidebarGroupExpandHint
+  translation: "Clique para expandir"
 
 # Feature
 - id: addedFeature

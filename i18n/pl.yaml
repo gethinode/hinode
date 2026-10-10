@@ -117,6 +117,8 @@
   translation: "Przełącz więcej elementów"
 - id: toggleGroup
   translation: "Przełącz {{ .Title }}"
+- id: sidebarGroupExpandHint
+  translation: "Kliknij, aby rozwinąć"
 
 # Feature
 - id: addedFeature

@@ -6,6 +6,21 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
 (function () {
   'use strict'
 
+  // A rail group's tooltip would sit on top of the flyout its icon just opened, so it is
+  // put away while the flyout is open and allowed back once it has closed.
+  function onFlyoutShow (event) {
+    var tt = bootstrap.Tooltip.getInstance(event.currentTarget)
+    if (tt) {
+      tt.hide()
+      tt.disable()
+    }
+  }
+
+  function onFlyoutHidden (event) {
+    var tt = bootstrap.Tooltip.getInstance(event.currentTarget)
+    if (tt) tt.enable()
+  }
+
   function setCollapsed (nav, collapsed) {
     var storageKey = nav.getAttribute('data-storage-key') || 'sidebar-collapsed'
     nav.classList.toggle('sidebar-collapsed', collapsed)
@@ -37,17 +52,37 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
     // Rail groups: in the icon-only rail a group's anchor opens its flyout instead of
     // navigating; expanded, it is a plain link again. An open flyout is closed and its
     // instance dropped first, so expanding never leaves a menu floating beside the rail.
+    //
+    // The anchor's tooltip is the label plus the hint the template emits as
+    // `data-sidebar-hint` - translated there, since a CSP site cannot pass it inline. It
+    // is built here rather than in the loop above because `data-bs-toggle` on this anchor
+    // has to name the dropdown, so the tooltip is configured directly instead.
     nav.querySelectorAll('[data-sidebar-group-toggle]').forEach(function (el) {
+      var hasBootstrap = typeof bootstrap !== 'undefined'
       if (collapsed) {
         el.setAttribute('data-bs-toggle', 'dropdown')
         el.setAttribute('aria-expanded', 'false')
+        var label = el.getAttribute('data-sidebar-label')
+        if (hasBootstrap && label && !bootstrap.Tooltip.getInstance(el)) {
+          var hint = el.getAttribute('data-sidebar-hint')
+          new bootstrap.Tooltip(el, {
+            placement: 'right',
+            title: hint ? label + ' (' + hint + ')' : label
+          })
+          el.addEventListener('show.bs.dropdown', onFlyoutShow)
+          el.addEventListener('hidden.bs.dropdown', onFlyoutHidden)
+        }
       } else {
-        if (typeof bootstrap !== 'undefined') {
+        if (hasBootstrap) {
           var dropdown = bootstrap.Dropdown.getInstance(el)
           if (dropdown) {
             dropdown.hide()
             dropdown.dispose()
           }
+          var tooltip = bootstrap.Tooltip.getInstance(el)
+          if (tooltip) tooltip.dispose()
+          el.removeEventListener('show.bs.dropdown', onFlyoutShow)
+          el.removeEventListener('hidden.bs.dropdown', onFlyoutHidden)
         }
         el.removeAttribute('data-bs-toggle')
         el.removeAttribute('aria-expanded')

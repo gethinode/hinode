@@ -117,6 +117,8 @@
   translation: "Toon of verberg meer items"
 - id: toggleGroup
   translation: "{{ .Title }} in- of uitklappen"
+- id: sidebarGroupExpandHint
+  translation: "Klik om uit te klappen"
 
 # Feature
 - id: addedFeature

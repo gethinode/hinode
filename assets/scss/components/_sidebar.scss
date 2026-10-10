@@ -270,6 +270,10 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
     padding-left: $sidebar-item-icon-column;
 }
 
+// How a group chevron turns between its closed and open direction - shared by the
+// stylesheet's `::before` chevron and a theme icon in its place, so the two move alike.
+$sidebar-group-chevron-transition: transform 0.35s ease !default;
+
 .btn-toggle-group {
     padding: 0.25rem 0.5rem;
     font-weight: 600;
@@ -285,7 +289,7 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
         width: 1.25em;
         line-height: 0;
         content: $btn-toggle;
-        transition: transform 0.35s ease;
+        transition: $sidebar-group-chevron-transition;
         transform-origin: 0.5em 50%;
     }
 }
@@ -293,6 +297,34 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
 .btn-toggle-group[aria-expanded="true"] {
     &::before {
         transform: rotate(90deg);
+    }
+}
+
+// A theme icon in place of the `::before` chevron.
+//
+// A site that names the optional `sidebarGroup` theme icon gets it rendered inside every group
+// chevron, which then carries `.btn-toggle-group-icon` (see `assets/sidebar.html`). That retires
+// the stylesheet's chevron - by `display` rather than `content`, which the dark-mode rule below
+// sets again at a higher specificity. The glyph is a down-pointing one, the shape a navbar
+// dropdown icon has, so it is turned a quarter to the right while its group is closed - the
+// direction the `::before` chevron rests in - and back down once the group is open.
+.btn-toggle-group-icon {
+    &::before {
+        display: none;
+    }
+
+    .btn-toggle-group-glyph {
+        transform: rotate(-90deg);
+    }
+
+    &[aria-expanded="true"] .btn-toggle-group-glyph {
+        transform: rotate(0deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .btn-toggle-group-icon .btn-toggle-group-glyph {
+        transition: $sidebar-group-chevron-transition;
     }
 }
 
@@ -319,6 +351,25 @@ $sidebar-group-chevron-width: 2rem !default;
         width: $sidebar-group-chevron-width;
         justify-content: center;
         padding: 0;
+    }
+}
+
+// A group's inline children start their text where the group's label starts.
+//
+// The template indents them by the icon column wherever the label sits behind one (see
+// `assets/sidebar.html`), which is the whole of it in a plain rail. A collapsible rail's label
+// is a `.sidebar-item-label` span with an `.ms-1` of its own on top, and the children - plain
+// rows, no span - pay that gap here, since it is not a whole indent step. Without it their text
+// starts that gap left of the label. Only the expanded rail shows the list, and the full tree
+// renders no `.sidebar-group`, so neither the icon-only rail nor a docs sidebar is touched.
+//
+// `!important` only because the base `.sidebar-item` padding carries one; the second rule keeps
+// the icon column an icon-less child reserves in a list where a sibling has an icon.
+.sidebar-collapsible .sidebar-group > .collapse .sidebar-item {
+    padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$spacer * 0.25}) !important;
+
+    &.sidebar-item-icon-indent {
+        padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$sidebar-item-icon-column} + #{$spacer * 0.25}) !important;
     }
 }
 

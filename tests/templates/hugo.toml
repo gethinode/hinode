@@ -199,3 +199,10 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/background.yml'
   target = 'data/structures/background.yml'
+
+# The theme's translations, so a string a partial emits is the one a site would get rather
+# than the partial's English fallback - the sidebar's group expand hint is asserted through
+# both the key and the attribute it lands on.
+[[module.mounts]]
+  source = '../../i18n'
+  target = 'i18n'
