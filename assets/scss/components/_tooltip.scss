@@ -6,3 +6,8 @@
     color: var(--bs-link-color) !important;
     text-decoration-color: var(--bs-link-color) !important;
 }
+
+// A hidden or fading tooltip is invisible but sits at z-index 1080, so it must never catch the pointer (#2219).
+.tooltip:not(.show) {
+    pointer-events: none;
+}

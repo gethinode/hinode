@@ -6,20 +6,45 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
 (function () {
   'use strict'
 
+  // The tooltip of a rail group: its label plus the hint the template emits as
+  // `data-sidebar-hint`, on the group's row (see setCollapsed for why the row).
+  function addGroupTooltip (row, el) {
+    var label = el.getAttribute('data-sidebar-label')
+    if (!label || bootstrap.Tooltip.getInstance(row)) return
+    var hint = el.getAttribute('data-sidebar-hint')
+    new bootstrap.Tooltip(row, {
+      placement: 'right',
+      title: hint ? label + ' (' + hint + ')' : label
+    })
+  }
+
   // A rail group's tooltip would sit on top of the flyout its icon just opened, so it is
-  // put away while the flyout is open and allowed back once it has closed. Bound on the
+  // dropped while the flyout is open and created again once it has closed. Bound on the
   // group's row, which hosts the tooltip (see setCollapsed), so `currentTarget` is the row.
+  //
+  // Disposed, not hidden and disabled: Dropdown.show() focuses the toggle after
+  // `show.bs.dropdown`. Safari does not focus a link on click, so in Safari that is the
+  // toggle's first focus, and its focusin reaches the Tooltip's handler, which arms the
+  // focus trigger even on a disabled tooltip. The fade-out of hide() then sees an active
+  // trigger and keeps the tip: an invisible `.tooltip` (z-index 1080) stays over the
+  // flyout header (1000) and swallows the pointer there (gethinode/hinode#2219). Dispose
+  // removes the tip and the Tooltip's listeners at once, so that late focusin finds none.
+  // It leaves the row's `aria-describedby` pointing at the removed tip, so that goes too.
   function onFlyoutShow (event) {
-    var tt = bootstrap.Tooltip.getInstance(event.currentTarget)
+    var row = event.currentTarget
+    var tt = bootstrap.Tooltip.getInstance(row)
     if (tt) {
-      tt.hide()
-      tt.disable()
+      tt.dispose()
+      row.removeAttribute('aria-describedby')
     }
   }
 
+  // Recreated only while the rail is still collapsed: expanding closes an open flyout
+  // after the rail has dropped `sidebar-collapsed`, and the expanded rail has no tooltip.
   function onFlyoutHidden (event) {
-    var tt = bootstrap.Tooltip.getInstance(event.currentTarget)
-    if (tt) tt.enable()
+    var row = event.currentTarget
+    var el = row.querySelector('[data-sidebar-group-toggle]')
+    if (el && row.closest('.sidebar-collapsed')) addGroupTooltip(row, el)
   }
 
   function setCollapsed (nav, collapsed) {
@@ -68,13 +93,10 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
       if (collapsed) {
         el.setAttribute('data-bs-toggle', 'dropdown')
         el.setAttribute('aria-expanded', 'false')
-        var label = el.getAttribute('data-sidebar-label')
-        if (hasBootstrap && row && label && !bootstrap.Tooltip.getInstance(row)) {
-          var hint = el.getAttribute('data-sidebar-hint')
-          new bootstrap.Tooltip(row, {
-            placement: 'right',
-            title: hint ? label + ' (' + hint + ')' : label
-          })
+        if (hasBootstrap && row && el.getAttribute('data-sidebar-label') && !bootstrap.Tooltip.getInstance(row)) {
+          addGroupTooltip(row, el)
+          // addEventListener ignores a listener that is already bound, so collapsing again
+          // never stacks a second pair.
           row.addEventListener('show.bs.dropdown', onFlyoutShow)
           row.addEventListener('hidden.bs.dropdown', onFlyoutHidden)
         }
