@@ -565,6 +565,252 @@ FAIL {{ .case }}
 SIDEBAR INDENT FAILURES: {{ $inFail }}
 
 {{- /*
+    Assertions for rail-mode leaves in assets/sidebar.html.
+
+    In the rail (mode A, `level-max: 1`) a plain leaf used to render through the level-0
+    form of item.html, which opens with an empty spacer row and wraps the link in a nested
+    list - so a leaf sat visibly lower than a group-link row beside it. Rail leaves now
+    render as one `mb-1` row each. The full tree keeps its own shape; the last case pins
+    that this fix stayed inside the rail.
+*/ -}}
+{{- $railFail := 0 -}}
+{{- $railMenu := `
+- title: Home
+  link: /
+- title: With Exact
+  link: /blog/with-exact/
+  pre: fas house` | transform.Unmarshal -}}
+{{- $railA := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $railMenu "level-max" 1 "collapsible" true) -}}
+{{- $railC := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $railMenu) -}}
+{{- $spacer := `<li class="mt-1 mb-1"></li>` -}}
+{{- $railCases := slice
+  (dict "case" "rail leaves emit no spacer row" "ok" (not (strings.Contains $railA $spacer)))
+  (dict "case" "rail leaves are one mb-1 row each" "ok" (eq (len (findRE `<li class="mb-1">` $railA)) 2))
+  (dict "case" "full-tree leaves keep their spacer row" "ok" (strings.Contains $railC $spacer))
+-}}
+{{- range $railCases -}}
+{{- if .ok }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+{{- $railFail = add $railFail 1 -}}
+{{- errorf "sidebar rail leaf mismatch: case=%q" .case -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR RAIL LEAF FAILURES: {{ $railFail }}
+
+{{- /*
+    Assertions for rail groups (`groups: true`) in assets/sidebar.html.
+
+    A rail entry with pages renders as its usual L1 anchor plus two copies of its
+    children: a collapse for the expanded rail and a dropdown flyout for the icon-only
+    rail. Bootstrap finds a dropdown's menu among the toggle's following siblings and reads
+    `dropend` off the toggle's parent, so the anchor, the chevron and the flyout must share
+    one `.dropend` row - the shape case pins that, since a wrong nesting fails silently in
+    the browser. Grandchildren are never rendered: the rail stops at L2.
+*/ -}}
+{{- $grpFail := 0 -}}
+{{- $grpMenu := `
+- title: Home
+  link: /
+- title: Blog
+  link: /blog/
+  pre: fas house
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/
+    - title: Toc Override
+      link: toc-override
+      pages:
+        - title: Deep
+          link: /blog/nav-fade/
+- title: Cards
+  link: /blog/
+  pages:
+    - title: Card Padding
+      link: card-padding
+    - title: Card Wrapper
+      link: /blog/card-wrapper/` | transform.Unmarshal -}}
+{{- $grpOff := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "level-max" 1 "collapsible" true) -}}
+{{- $grpOn := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "level-max" 1 "collapsible" true "groups" true) -}}
+{{- $grpTree := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "groups" true) -}}
+{{- $flat := replaceRE `\s+` " " $grpOn -}}
+{{- $flatTree := replaceRE `\s+` " " $grpTree -}}
+{{- $shape := `<li class="mb-1 sidebar-group"> <div class="sidebar-group-row dropend"> <a [^>]*data-sidebar-group-toggle[^>]*>.*?</a> <button [^>]*sidebar-group-chevron[^>]*>(?: ?<svg[^>]*>.*?</svg> ?)?</button> <ul class="dropdown-menu sidebar-group-flyout">.*?</ul> </div> <ul class="collapse[^"]*" id="sidebar-group-blog-1">` -}}
+{{- /* Each group's inline and flyout copies of its children, in order. The flyout copy
+       renders through the same link.html call as the inline one, so a child's two hrefs
+       must agree - they drift otherwise wherever RelPermalink is not the raw path. */ -}}
+{{- $hrefPairs := slice -}}
+{{- range findRE `<li class="mb-1 sidebar-group">.*?id="sidebar-group-[^"]+">.*?</ul>` $flat -}}
+  {{- $flyout := findRE `href="[^"]*" class="dropdown-item"` (index (split . `id="sidebar-group-`) 0) -}}
+  {{- $flyout = apply $flyout "replaceRE" ` class="dropdown-item"$` "" "." -}}
+  {{- $inline := findRE `href="[^"]*"` (replaceRE `^.*id="sidebar-group-[^"]+">` "" .) -}}
+  {{- $hrefPairs = $hrefPairs | append (dict "flyout" (delimit $flyout "|") "inline" (delimit $inline "|") "n" (len $inline)) -}}
+{{- end -}}
+{{- $hrefsAgree := eq (len $hrefPairs) 2 -}}
+{{- range $hrefPairs -}}
+  {{- if or (ne .flyout .inline) (ne .n 2) }}{{ $hrefsAgree = false }}{{ end -}}
+{{- end -}}
+{{- $groupIds := findRE `id="sidebar-group-[^"]+"` $grpOn -}}
+{{- $grpCases := slice
+  (dict "case" "groups off renders no group markup"
+        "ok" (not (findRE `sidebar-group|dropend|With Exact` $grpOff)))
+  (dict "case" "groups on renders the row, chevron, flyout and inline list in Bootstrap's shape"
+        "ok" (findRE $shape $flat))
+  (dict "case" "the inline list carries a stable sidebar-group-list class that survives Bootstrap's collapsing swap"
+        "ok" (findRE `<ul class="collapse sidebar-group-list [^"]*" id="sidebar-group-blog-1">` $flat))
+  (dict "case" "the toggle positions its flyout with a fixed strategy"
+        "ok" (strings.Contains $grpOn `data-bs-popper-config='{"strategy":"fixed"}'`))
+  (dict "case" "the chevron targets and labels the inline list"
+        "ok" (and (strings.Contains $grpOn `data-bs-target="#sidebar-group-blog-1"`) (strings.Contains $grpOn `aria-controls="sidebar-group-blog-1"`) (strings.Contains $grpOn `aria-label="Toggle Blog"`)))
+  (dict "case" "collapse ids are namespaced by the nav and differ per group"
+        "ok" (and (eq (len $groupIds) 2) (ne (index $groupIds 0) (index $groupIds 1)) (strings.Contains $grpOn `id="sidebar-group-blog-2"`) (strings.Contains $grpOn `data-bs-target="#sidebar-group-blog-2"`) (strings.Contains $grpOn `aria-controls="sidebar-group-blog-2"`)))
+  (dict "case" "the flyout header links to the group"
+        "ok" (findRE `<a class="dropdown-item sidebar-group-flyout-header" href="/blog/">Blog</a>` $flat))
+  (dict "case" "flyout children resolve absolute and relative links"
+        "ok" (and (strings.Contains $grpOn `href="/blog/with-exact/" class="dropdown-item"`) (strings.Contains $grpOn `href="/blog/toc-override/" class="dropdown-item"`)))
+  (dict "case" "inline children resolve the same links"
+        "ok" (and (findRE `id="sidebar-group-blog-1">.*href="/blog/with-exact/"` $flat) (findRE `id="sidebar-group-blog-1">.*href="/blog/toc-override/"` $flat)))
+  (dict "case" "every child's inline and flyout hrefs are equal"
+        "ok" $hrefsAgree)
+  (dict "case" "grandchildren are never rendered"
+        "ok" (not (strings.Contains $grpOn "/blog/nav-fade/")))
+  (dict "case" "a rail leaf beside a group keeps its single row"
+        "ok" (not (strings.Contains $grpOn `<li class="mt-1 mb-1"></li>`)))
+  (dict "case" "the full tree ignores groups"
+        "ok" (and (strings.Contains $grpTree "sidebar-item-group") (not (strings.Contains $grpTree "sidebar-group-row"))))
+  (dict "case" "the full tree's group chevron is labelled"
+        "ok" (findRE `<button class="btn btn-toggle-group d-inline-flex[^"]*"[^>]*aria-label="Toggle Blog"` $flatTree))
+-}}
+{{- range $grpCases -}}
+{{- if .ok }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+{{- $grpFail = add $grpFail 1 -}}
+{{- errorf "sidebar rail group mismatch: case=%q" .case -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR RAIL GROUP FAILURES: {{ $grpFail }}
+
+{{- /*
+    Assertions for the group chevron's theme icon (`sidebarGroup`) in assets/sidebar.html.
+
+    A site that names a `sidebarGroup` icon under `[params.icons]` gets that glyph inside
+    every group chevron - the full tree's and the rail's - plus a modifier class that
+    retires the stylesheet's `::before` chevron; a site that does not gets the markup it
+    always had. Theme icons are site-wide, so one build can only show one side of that:
+    `test:templates` builds this harness twice, the second time with `--environment
+    theme-icons`, whose config overlay (config/theme-icons/) sets the icon. The first case
+    pins that the overlay reached the build at all, so neither run can pass vacuously.
+
+    The rail's chevron is hidden in the icon-only rail, where a group's icon opens the
+    flyout instead and carries a tooltip naming the group with an expand hint. The hint is
+    translated, and a CSP site cannot hand it to sidebar-toggle.js through an inline
+    script, so the template emits it on the anchor - only in a collapsible rail, the one
+    sidebar that ever collapses to icons.
+*/ -}}
+{{- $chvFail := 0 -}}
+{{- $chvSet := eq hugo.Environment "theme-icons" -}}
+{{- $chvIcon := partial "utilities/GetThemeIcon.html" (dict "id" "sidebarGroup") -}}
+{{- $chvRail := replaceRE `\s+` " " $grpOn -}}
+{{- $chvTree := replaceRE `\s+` " " $grpTree -}}
+{{- $chvRailPlain := replaceRE `\s+` " " (partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "level-max" 1 "groups" true)) -}}
+{{- $railChevrons := findRE `<button [^>]*\bsidebar-group-chevron\b[^>]*>.*?</button>` $chvRail -}}
+{{- $treeChevrons := findRE `<button [^>]*\bbtn-toggle-group\b[^>]*>.*?</button>` $chvTree -}}
+{{- $chvAll := $railChevrons | append $treeChevrons -}}
+{{- $chvWithSvg := 0 -}}
+{{- $chvWithClass := 0 -}}
+{{- range $chvAll -}}
+  {{- if findRE `^<button [^>]*>\s*<svg[^>]*>.*</svg>\s*</button>$` . }}{{ $chvWithSvg = add $chvWithSvg 1 }}{{ end -}}
+  {{- if findRE `^<button class="[^"]*\bbtn-toggle-group-icon\b` . }}{{ $chvWithClass = add $chvWithClass 1 }}{{ end -}}
+{{- end -}}
+{{- $chvWant := cond $chvSet (len $chvAll) 0 -}}
+{{- $chvHinted := 0 -}}
+{{- range findRE `<a [^>]*\bdata-sidebar-group-toggle\b[^>]*>` $chvRail -}}
+  {{- if strings.Contains . `data-sidebar-hint="Click to expand"` }}{{ $chvHinted = add $chvHinted 1 }}{{ end -}}
+{{- end -}}
+{{- $chvCases := slice
+  (dict "case" "the theme-icons overlay sets sidebarGroup, the default build leaves it unset"
+        "ok" (eq (not (not $chvIcon)) $chvSet))
+  (dict "case" "both sidebars render their group chevrons - the tree's nested group included"
+        "ok" (and (eq (len $railChevrons) 2) (eq (len $treeChevrons) 3)))
+  (dict "case" (cond $chvSet "every chevron carries the theme icon as an inline svg" "no chevron carries an icon")
+        "ok" (eq $chvWithSvg $chvWant))
+  (dict "case" (cond $chvSet "every chevron carries the icon modifier class" "no chevron carries the icon modifier class")
+        "ok" (eq $chvWithClass $chvWant))
+  (dict "case" "the expand hint is translated, not the partial's fallback"
+        "ok" (eq (T "sidebarGroupExpandHint") "Click to expand"))
+  (dict "case" "the collapsible rail's group anchor carries the expand hint"
+        "ok" (eq $chvHinted 2))
+  (dict "case" "the hint rides only the group anchors"
+        "ok" (eq (len (findRE `data-sidebar-hint=` $chvRail)) 2))
+  (dict "case" "a rail that cannot collapse emits no hint"
+        "ok" (and (strings.Contains $chvRailPlain "data-sidebar-group-toggle") (not (strings.Contains $chvRailPlain "data-sidebar-hint"))))
+  (dict "case" "the full tree emits no hint"
+        "ok" (and (strings.Contains $chvTree "btn-toggle-group") (not (strings.Contains $chvTree "data-sidebar-hint"))))
+-}}
+{{- range $chvCases -}}
+{{- if .ok }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+{{- $chvFail = add $chvFail 1 -}}
+{{- errorf "sidebar group chevron mismatch: env=%q case=%q" hugo.Environment .case -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR GROUP CHEVRON FAILURES: {{ $chvFail }}
+
+{{- /*
+    Assertions for the inline list of a rail group (`groups: true`).
+
+    In the expanded rail a group's children hang under its label, and their text has to
+    start where that label's does. The full tree aligns them with the step table alone (two
+    steps of plain nesting, three past an icon), but a rail row's label sits one icon column
+    in whenever its list reserves one - an icon of its own, or `sidebar-item-icon-indent` -
+    and nowhere else, so the rail picks its children's indent from that, not from the
+    group's own icon. The label span's `ms-1` the collapsible rail adds on top is not a
+    whole step and is paid in components/_sidebar.scss. The full tree's indents are pinned
+    by the nesting-indent cases above and must not move.
+*/ -}}
+{{- $rinFail := 0 -}}
+{{- $rinCases := slice
+  (dict "case" "an icon group and an icon-less group in an icon list both indent past the icon column"
+        "menu" $grpMenu
+        "want" (slice "3" "3"))
+  (dict "case" "a rail without icons does not indent its children"
+        "menu" (`
+- title: Blog
+  link: /blog/
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/` | transform.Unmarshal)
+        "want" (slice "0"))
+-}}
+{{- range $rinCases -}}
+{{- $html := partial "assets/sidebar.html" (dict "page" $sbPage "menu" .menu "level-max" 1 "collapsible" true "groups" true) -}}
+{{- $got := slice -}}
+{{- range (findRE `<ul class="collapse[^"]*" id="sidebar-group-` $html) -}}
+    {{- $n := index (findRE `sidebar-nav-indent-([0-9]+)` .) 0 | default "sidebar-nav-indent-0" -}}
+    {{- $got = $got | append (strings.TrimPrefix "sidebar-nav-indent-" $n) -}}
+{{- end -}}
+{{- if eq (delimit $got "|") (delimit .want "|") }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+     want={{ delimit .want "|" }}
+     got ={{ delimit $got "|" }}
+{{- $rinFail = add $rinFail 1 -}}
+{{- errorf "sidebar rail indent mismatch: case=%q want=%q got=%q" .case (delimit .want "|") (delimit $got "|") -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR RAIL INDENT FAILURES: {{ $rinFail }}
+
+{{- /*
     Assertions for utilities/GetLocale.html.
 
     The `lang` argument stands in for the language of the site being rendered, so a

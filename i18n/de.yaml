@@ -115,6 +115,10 @@
   translation: "Menünavigation anzeigen oder ausblenden"
 - id: toggleSecondary
   translation: "Weitere Elemente anzeigen oder ausblenden"
+- id: toggleGroup
+  translation: "{{ .Title }} anzeigen oder ausblenden"
+- id: sidebarGroupExpandHint
+  translation: "Zum Aufklappen klicken"
 
 # Feature
 - id: addedFeature

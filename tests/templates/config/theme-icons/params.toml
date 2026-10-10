@@ -1,0 +1,5 @@
+# Overlay for the second `test:templates` build (`--environment theme-icons`). Theme icons
+# are site-wide, so the markup a site gets when it names an optional icon can only be shown
+# by a build that names it; the default build leaves every optional icon unset.
+[icons]
+  sidebarGroup = "fas angle-down"

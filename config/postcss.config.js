@@ -40,6 +40,9 @@ const purgecss = purgeCSSPlugin({
       'disabled',
       'collapsed',
       'collapsing',
+      // critical/sidebar-active.js marks a rail group whose subpage is the current page;
+      // no layout emits it, so hugo_stats.json cannot record it.
+      'sidebar-group-trail',
       // SimpleDatatables modifier classes (set by the datatables JS)
       'no-header',
       'no-footer',

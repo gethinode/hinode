@@ -60,7 +60,7 @@
     "mod:vendor:force": "rimraf _vendor && hugo mod vendor",
     "test": "npm-run-all lint test:templates",
     "pretest:templates": "pnpm mod:vendor",
-    "test:templates": "hugo -s tests/templates --logLevel error",
+    "test:templates": "hugo -s tests/templates --logLevel error && hugo -s tests/templates --logLevel error --environment theme-icons",
     "env": "hugo env",
     "precheck": "npm version",
     "prepare": "node .husky/install.mjs",

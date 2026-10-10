@@ -270,6 +270,10 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
     padding-left: $sidebar-item-icon-column;
 }
 
+// How a group chevron turns between its closed and open direction - shared by the
+// stylesheet's `::before` chevron and a theme icon in its place, so the two move alike.
+$sidebar-group-chevron-transition: transform 0.35s ease !default;
+
 .btn-toggle-group {
     padding: 0.25rem 0.5rem;
     font-weight: 600;
@@ -285,7 +289,7 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
         width: 1.25em;
         line-height: 0;
         content: $btn-toggle;
-        transition: transform 0.35s ease;
+        transition: $sidebar-group-chevron-transition;
         transform-origin: 0.5em 50%;
     }
 }
@@ -293,6 +297,122 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
 .btn-toggle-group[aria-expanded="true"] {
     &::before {
         transform: rotate(90deg);
+    }
+}
+
+// A theme icon in place of the `::before` chevron.
+//
+// A site that names the optional `sidebarGroup` theme icon gets it rendered inside every group
+// chevron, which then carries `.btn-toggle-group-icon` (see `assets/sidebar.html`). That retires
+// the stylesheet's chevron - by `display` rather than `content`, which the dark-mode rule below
+// sets again at a higher specificity. The glyph is a down-pointing one, the shape a navbar
+// dropdown icon has, so it is turned a quarter to the right while its group is closed - the
+// direction the `::before` chevron rests in - and back down once the group is open.
+.btn-toggle-group-icon {
+    &::before {
+        display: none;
+    }
+
+    .btn-toggle-group-glyph {
+        transform: rotate(-90deg);
+    }
+
+    &[aria-expanded="true"] .btn-toggle-group-glyph {
+        transform: rotate(0deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .btn-toggle-group-icon .btn-toggle-group-glyph {
+        transition: $sidebar-group-chevron-transition;
+    }
+}
+
+// Rail groups — `groups: true` on a rail-mode (`level-max: 1`) sidebar.
+//
+// The row is the L1 anchor every rail entry renders, with the chevron laid over its
+// trailing edge, so the anchor keeps the full row width and with it the active surface
+// and the collapse choreography of every other L1 row. The row is also the `.dropend`
+// Bootstrap reads the flyout's direction from (see `assets/sidebar.html`).
+$sidebar-group-chevron-width: 2rem !default;
+
+.sidebar-group-row {
+    position: relative;
+
+    > .sidebar-item {
+        // `!important` only because the base `.sidebar-item` padding carries one.
+        padding-right: $sidebar-group-chevron-width !important;
+    }
+
+    > .sidebar-group-chevron {
+        position: absolute;
+        inset-block: 0;
+        right: 0;
+        width: $sidebar-group-chevron-width;
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+// A group's inline children start their text where the group's label starts.
+//
+// The template indents them by the icon column wherever the label sits behind one (see
+// `assets/sidebar.html`), which is the whole of it in a plain rail. A collapsible rail's label
+// is a `.sidebar-item-label` span with an `.ms-1` of its own on top, and the children - plain
+// rows, no span - pay that gap here, since it is not a whole indent step. Without it their text
+// starts that gap left of the label. Only the expanded rail shows the list, and the full tree
+// renders no `.sidebar-group`, so neither the icon-only rail nor a docs sidebar is touched.
+//
+// Keyed on the stable `.sidebar-group-list`, not `.collapse`: Bootstrap swaps `.collapse` for
+// `.collapsing` while the list animates, which would drop the offset for the transition.
+//
+// `!important` only because the base `.sidebar-item` padding carries one; the second rule keeps
+// the icon column an icon-less child reserves in a list where a sibling has an icon.
+.sidebar-collapsible .sidebar-group > .sidebar-group-list .sidebar-item {
+    padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$spacer * 0.25}) !important;
+
+    &.sidebar-item-icon-indent {
+        padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$sidebar-item-icon-column} + #{$spacer * 0.25}) !important;
+    }
+}
+
+// Icon-only rail: the chevron and the inline list give way to the flyout, which a click on
+// the icon opens (sidebar-toggle.js turns the anchor into its toggle). Both selectors,
+// because `html.sidebar-pre-collapsed` paints the collapsed state before that script runs.
+.sidebar-collapsed,
+html.sidebar-pre-collapsed .sidebar-collapsible {
+    .sidebar-group-chevron,
+    .sidebar-group > .sidebar-group-list {
+        display: none !important;
+    }
+
+    .sidebar-group-row > .sidebar-item {
+        padding-right: 0.5rem !important;
+    }
+
+    // The current page's own row is hidden in this state, so its group's icon carries the
+    // highlight instead (critical/sidebar-active.js sets the class).
+    .sidebar-group-trail > .sidebar-group-row > .sidebar-item {
+        color: $primary;
+        background-color: tint-color($primary, 90%);
+    }
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .sidebar-collapsed .sidebar-group-trail > .sidebar-group-row > .sidebar-item {
+            color: $primary-text-emphasis-dark;
+            background-color: transparent;
+            box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
+        }
+    }
+
+    // Pre-collapsed dark mode: `data-bs-theme` is on <html> with `sidebar-pre-collapsed`,
+    // so they need the compound selector rather than the `@include color-mode(dark)` mixin.
+    html.sidebar-pre-collapsed[data-bs-theme="dark"] .sidebar-collapsible .sidebar-group-trail > .sidebar-group-row > .sidebar-item {
+        color: $primary-text-emphasis-dark;
+        background-color: transparent;
+        box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
     }
 }
 

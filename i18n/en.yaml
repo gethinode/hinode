@@ -115,6 +115,10 @@
   translation: "Toggle sidebar navigation"
 - id: toggleSecondary
   translation: "Toggle more items"
+- id: toggleGroup
+  translation: "Toggle {{ .Title }}"
+- id: sidebarGroupExpandHint
+  translation: "Click to expand"
 
 # Feature
 - id: addedFeature

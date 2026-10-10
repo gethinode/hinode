@@ -78,6 +78,17 @@ arguments:
     comment: >-
       When true, renders a toggle button that collapses the sidebar to icon-only
       view. Only effective in Mode A (level-max = 1). Default: false.
+  groups:
+    type: bool
+    optional: true
+    default: false
+    release: v3.35.0
+    comment: >-
+      Mode A only (level-max = 1). When true, an entry with `pages` renders as an
+      expandable group: an inline list of its children while the sidebar is expanded,
+      and a dropdown flyout to its right while it is collapsed to icons. The group's
+      first flyout row links to the entry itself. Children's own `pages` are not
+      rendered. Default: false.
   logo:
     type: path
     optional: true
