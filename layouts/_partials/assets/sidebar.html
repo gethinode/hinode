@@ -258,7 +258,7 @@
                 {{- end -}}
             </ul>
         </div>
-        <ul class="collapse btn-toggle-nav list-unstyled fw-normal pb-1{{ with $childIndent }} sidebar-nav-indent-{{ . }}{{ end }}" id="{{ $id }}">
+        <ul class="collapse sidebar-group-list btn-toggle-nav list-unstyled fw-normal pb-1{{ with $childIndent }} sidebar-nav-indent-{{ . }}{{ end }}" id="{{ $id }}">
             {{- range $group.pages -}}
                 {{ partial "inline/sidebar/item.html" (dict
                     "page"       $page

@@ -363,9 +363,12 @@ $sidebar-group-chevron-width: 2rem !default;
 // starts that gap left of the label. Only the expanded rail shows the list, and the full tree
 // renders no `.sidebar-group`, so neither the icon-only rail nor a docs sidebar is touched.
 //
+// Keyed on the stable `.sidebar-group-list`, not `.collapse`: Bootstrap swaps `.collapse` for
+// `.collapsing` while the list animates, which would drop the offset for the transition.
+//
 // `!important` only because the base `.sidebar-item` padding carries one; the second rule keeps
 // the icon column an icon-less child reserves in a list where a sibling has an icon.
-.sidebar-collapsible .sidebar-group > .collapse .sidebar-item {
+.sidebar-collapsible .sidebar-group > .sidebar-group-list .sidebar-item {
     padding-left: calc(0.5rem + var(--sidebar-indent, 0rem) + #{$spacer * 0.25}) !important;
 
     &.sidebar-item-icon-indent {
@@ -379,7 +382,7 @@ $sidebar-group-chevron-width: 2rem !default;
 .sidebar-collapsed,
 html.sidebar-pre-collapsed .sidebar-collapsible {
     .sidebar-group-chevron,
-    .sidebar-group > .collapse {
+    .sidebar-group > .sidebar-group-list {
         display: none !important;
     }
 

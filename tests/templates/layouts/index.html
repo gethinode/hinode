@@ -658,6 +658,8 @@ SIDEBAR RAIL LEAF FAILURES: {{ $railFail }}
         "ok" (not (findRE `sidebar-group|dropend|With Exact` $grpOff)))
   (dict "case" "groups on renders the row, chevron, flyout and inline list in Bootstrap's shape"
         "ok" (findRE $shape $flat))
+  (dict "case" "the inline list carries a stable sidebar-group-list class that survives Bootstrap's collapsing swap"
+        "ok" (findRE `<ul class="collapse sidebar-group-list [^"]*" id="sidebar-group-blog-1">` $flat))
   (dict "case" "the toggle positions its flyout with a fixed strategy"
         "ok" (strings.Contains $grpOn `data-bs-popper-config='{"strategy":"fixed"}'`))
   (dict "case" "the chevron targets and labels the inline list"
