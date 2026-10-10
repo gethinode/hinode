@@ -13,7 +13,7 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
     if (btn) btn.setAttribute('aria-expanded', String(!collapsed))
 
     if (typeof bootstrap !== 'undefined') {
-      var items = nav.querySelectorAll('[data-sidebar-label]')
+      var items = nav.querySelectorAll('[data-sidebar-label]:not([data-sidebar-group-toggle])')
       if (collapsed) {
         items.forEach(function (el) {
           el.setAttribute('data-bs-toggle', 'tooltip')
@@ -33,6 +33,26 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
         })
       }
     }
+
+    // Rail groups: in the icon-only rail a group's anchor opens its flyout instead of
+    // navigating; expanded, it is a plain link again. An open flyout is closed and its
+    // instance dropped first, so expanding never leaves a menu floating beside the rail.
+    nav.querySelectorAll('[data-sidebar-group-toggle]').forEach(function (el) {
+      if (collapsed) {
+        el.setAttribute('data-bs-toggle', 'dropdown')
+        el.setAttribute('aria-expanded', 'false')
+      } else {
+        if (typeof bootstrap !== 'undefined') {
+          var dropdown = bootstrap.Dropdown.getInstance(el)
+          if (dropdown) {
+            dropdown.hide()
+            dropdown.dispose()
+          }
+        }
+        el.removeAttribute('data-bs-toggle')
+        el.removeAttribute('aria-expanded')
+      }
+    })
 
     try { localStorage.setItem(storageKey, collapsed ? '1' : '0') } catch { /* ignore localStorage errors */ }
 

@@ -17,10 +17,17 @@
 // Ancestor matching is a property of the link's href, so it needs no opt-in marker in the
 // markup: every link in the nav is a candidate. Do not reintroduce one.
 //
-// Exactly one entry is marked, whether it is a leaf or a group title. The groups above it
+// Exactly one destination is marked, whether it is a leaf or a group title; a rail group
+// renders its children twice (inline and in its flyout), so a destination can be marked in
+// two places, of which only one is ever visible. Flyout links are copies and are never chosen as the match,
+// so the trail is always resolved on the inline copy. The groups above it
 // are expanded but not highlighted: they are the trail to the current page, not the current
 // page, and marking them would leave a reader unable to tell which of the four rows lit up
 // is the one they are on.
+//
+// A rail group's subpage also marks the group itself with `sidebar-group-trail`: in the
+// icon-only rail the subpage's own row is hidden, and that class is how the group's icon
+// carries the highlight instead.
 (function () {
   'use strict'
 
@@ -28,6 +35,17 @@
     try { path = decodeURI(path) } catch { /* keep the raw path */ }
     if (path.length > 1) path = path.replace(/\/+$/, '')
     return path || '/'
+  }
+
+  // The normalized same-origin path a sidebar link points at, or null for a link that
+  // cannot match (empty, a fragment, or another origin).
+  function linkPath (link) {
+    var href = link.getAttribute('href')
+    if (!href || href.charAt(0) === '#') return null
+    var url
+    try { url = new URL(href, window.location.origin) } catch { return null }
+    if (url.origin !== window.location.origin) return null
+    return normalize(url.pathname)
   }
 
   function findBestMatch (nav, pathname) {
@@ -38,12 +56,11 @@
     // home, so as an ancestor candidate it would match every page under it and light up
     // the logo whenever nothing better was found.
     nav.querySelectorAll('a[href]:not(.sidebar-brand)').forEach(function (link) {
-      var href = link.getAttribute('href')
-      if (!href || href.charAt(0) === '#') return
-      var url
-      try { url = new URL(href, window.location.origin) } catch { return }
-      if (url.origin !== window.location.origin) return
-      var path = normalize(url.pathname)
+      // Flyout links are copies of the inline ones and sit earlier in the DOM; choosing one
+      // would leave the match outside its group's collapse, so the trail would not open.
+      if (link.closest('.sidebar-group-flyout')) return
+      var path = linkPath(link)
+      if (path === null) return
       if (path === pathname) {
         if (!bestExact) {
           best = link
@@ -61,7 +78,7 @@
         }
       }
     })
-    return { link: best, exact: bestExact }
+    return { link: best, exact: bestExact, path: best ? linkPath(best) : null }
   }
 
   function initNav (nav, pathname) {
@@ -77,15 +94,31 @@
     var group = link.closest('.sidebar-item-group')
 
     nav.classList.add('sidebar-no-transition')
-    link.classList.add('active')
+    // A rail group renders its children twice - inline and in its flyout - so the
+    // destination is marked in both copies; only one is ever visible. Extra copies are
+    // marked only inside a rail group, so a sidebar without `groups` still marks just the
+    // matched link, as it did before rail groups existed.
+    nav.querySelectorAll('a[href]:not(.sidebar-brand)').forEach(function (el) {
+      if (linkPath(el) !== match.path) return
+      if (el !== link && !el.closest('.sidebar-group')) return
+      el.classList.add('active')
+      el.setAttribute('aria-current', match.exact ? 'page' : 'true')
+    })
     if (group) group.classList.add('active')
-    link.setAttribute('aria-current', match.exact ? 'page' : 'true')
+
+    // In the icon-only rail a subpage's row is hidden, so its group's icon carries the
+    // highlight (components/_sidebar.scss styles the class only in that state).
+    var railGroup = link.closest('.sidebar-group')
+    var isRailTitle = link.hasAttribute('data-sidebar-group-toggle')
+    if (railGroup && !isRailTitle) railGroup.classList.add('sidebar-group-trail')
 
     // Expand the collapse trail: the matched group's own collapse (when the link is a group
     // title) plus every collapse ancestor within this nav instance.
     var own = null
     if (group && group.parentElement) {
       own = group.parentElement.querySelector(':scope > .collapse')
+    } else if (railGroup && isRailTitle) {
+      own = railGroup.querySelector(':scope > .collapse')
     }
     var trail = own ? [own] : []
     var ancestor = link.closest('.collapse')
@@ -107,6 +140,7 @@
     // Clicking the current group's title toggles its collapse instead of re-navigating.
     if (own && match.exact) {
       link.addEventListener('click', function (event) {
+        if (nav.classList.contains('sidebar-collapsed')) return
         if (typeof bootstrap === 'undefined' || !bootstrap.Collapse) return
         event.preventDefault()
         bootstrap.Collapse.getOrCreateInstance(own).toggle()
