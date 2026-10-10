@@ -7,7 +7,8 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
   'use strict'
 
   // A rail group's tooltip would sit on top of the flyout its icon just opened, so it is
-  // put away while the flyout is open and allowed back once it has closed.
+  // put away while the flyout is open and allowed back once it has closed. Bound on the
+  // group's row, which hosts the tooltip (see setCollapsed), so `currentTarget` is the row.
   function onFlyoutShow (event) {
     var tt = bootstrap.Tooltip.getInstance(event.currentTarget)
     if (tt) {
@@ -53,24 +54,29 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
     // navigating; expanded, it is a plain link again. An open flyout is closed and its
     // instance dropped first, so expanding never leaves a menu floating beside the rail.
     //
-    // The anchor's tooltip is the label plus the hint the template emits as
+    // The group's tooltip is the label plus the hint the template emits as
     // `data-sidebar-hint` - translated there, since a CSP site cannot pass it inline. It
-    // is built here rather than in the loop above because `data-bs-toggle` on this anchor
-    // has to name the dropdown, so the tooltip is configured directly instead.
+    // sits on the anchor's `.sidebar-group-row`, not on the anchor: Bootstrap keeps one
+    // component instance per element and refuses a second, and the anchor is already the
+    // Dropdown's toggle - a Tooltip there leaves the Dropdown unregistered, so its flyout
+    // never closes on an outside click or on expand. The row still catches the anchor's
+    // hover (it covers it) and its focus (Tooltip listens for `focusin`, which bubbles),
+    // and the flyout's show/hidden events bubble up to it from the toggle.
     nav.querySelectorAll('[data-sidebar-group-toggle]').forEach(function (el) {
       var hasBootstrap = typeof bootstrap !== 'undefined'
+      var row = el.closest('.sidebar-group-row')
       if (collapsed) {
         el.setAttribute('data-bs-toggle', 'dropdown')
         el.setAttribute('aria-expanded', 'false')
         var label = el.getAttribute('data-sidebar-label')
-        if (hasBootstrap && label && !bootstrap.Tooltip.getInstance(el)) {
+        if (hasBootstrap && row && label && !bootstrap.Tooltip.getInstance(row)) {
           var hint = el.getAttribute('data-sidebar-hint')
-          new bootstrap.Tooltip(el, {
+          new bootstrap.Tooltip(row, {
             placement: 'right',
             title: hint ? label + ' (' + hint + ')' : label
           })
-          el.addEventListener('show.bs.dropdown', onFlyoutShow)
-          el.addEventListener('hidden.bs.dropdown', onFlyoutHidden)
+          row.addEventListener('show.bs.dropdown', onFlyoutShow)
+          row.addEventListener('hidden.bs.dropdown', onFlyoutHidden)
         }
       } else {
         if (hasBootstrap) {
@@ -79,10 +85,12 @@ import bootstrap from './modules/bootstrap/bootstrap.bundle.js'
             dropdown.hide()
             dropdown.dispose()
           }
-          var tooltip = bootstrap.Tooltip.getInstance(el)
-          if (tooltip) tooltip.dispose()
-          el.removeEventListener('show.bs.dropdown', onFlyoutShow)
-          el.removeEventListener('hidden.bs.dropdown', onFlyoutHidden)
+          if (row) {
+            var tooltip = bootstrap.Tooltip.getInstance(row)
+            if (tooltip) tooltip.dispose()
+            row.removeEventListener('show.bs.dropdown', onFlyoutShow)
+            row.removeEventListener('hidden.bs.dropdown', onFlyoutHidden)
+          }
         }
         el.removeAttribute('data-bs-toggle')
         el.removeAttribute('aria-expanded')
