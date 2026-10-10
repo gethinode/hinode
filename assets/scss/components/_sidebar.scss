@@ -296,6 +296,72 @@ $sidebar-item-icon-column: calc(1.25em + #{$spacer * 0.25});
     }
 }
 
+// Rail groups — `groups: true` on a rail-mode (`level-max: 1`) sidebar.
+//
+// The row is the L1 anchor every rail entry renders, with the chevron laid over its
+// trailing edge, so the anchor keeps the full row width and with it the active surface
+// and the collapse choreography of every other L1 row. The row is also the `.dropend`
+// Bootstrap reads the flyout's direction from (see `assets/sidebar.html`).
+$sidebar-group-chevron-width: 2rem !default;
+
+.sidebar-group-row {
+    position: relative;
+
+    > .sidebar-item {
+        // `!important` only because the base `.sidebar-item` padding carries one.
+        padding-right: $sidebar-group-chevron-width !important;
+    }
+
+    > .sidebar-group-chevron {
+        position: absolute;
+        inset-block: 0;
+        right: 0;
+        width: $sidebar-group-chevron-width;
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+// Icon-only rail: the chevron and the inline list give way to the flyout, which a click on
+// the icon opens (sidebar-toggle.js turns the anchor into its toggle). Both selectors,
+// because `html.sidebar-pre-collapsed` paints the collapsed state before that script runs.
+.sidebar-collapsed,
+html.sidebar-pre-collapsed .sidebar-collapsible {
+    .sidebar-group-chevron,
+    .sidebar-group > .collapse {
+        display: none !important;
+    }
+
+    .sidebar-group-row > .sidebar-item {
+        padding-right: 0.5rem !important;
+    }
+
+    // The current page's own row is hidden in this state, so its group's icon carries the
+    // highlight instead (critical/sidebar-active.js sets the class).
+    .sidebar-group-trail > .sidebar-group-row > .sidebar-item {
+        color: $primary;
+        background-color: tint-color($primary, 90%);
+    }
+}
+
+@if $enable-dark-mode {
+    @include color-mode(dark) {
+        .sidebar-collapsed .sidebar-group-trail > .sidebar-group-row > .sidebar-item {
+            color: $primary-text-emphasis-dark;
+            background-color: transparent;
+            box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
+        }
+    }
+
+    // Pre-collapsed dark mode: `data-bs-theme` is on <html> with `sidebar-pre-collapsed`,
+    // so they need the compound selector rather than the `@include color-mode(dark)` mixin.
+    html.sidebar-pre-collapsed[data-bs-theme="dark"] .sidebar-collapsible .sidebar-group-trail > .sidebar-group-row > .sidebar-item {
+        color: $primary-text-emphasis-dark;
+        background-color: transparent;
+        box-shadow: inset 0 0 0 1px $primary-bg-subtle-dark;
+    }
+}
+
 @if $enable-dark-mode {
     @include color-mode(dark) {
         .sidebar-item {
