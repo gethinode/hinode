@@ -565,6 +565,42 @@ FAIL {{ .case }}
 SIDEBAR INDENT FAILURES: {{ $inFail }}
 
 {{- /*
+    Assertions for rail-mode leaves in assets/sidebar.html.
+
+    In the rail (mode A, `level-max: 1`) a plain leaf used to render through the level-0
+    form of item.html, which opens with an empty spacer row and wraps the link in a nested
+    list - so a leaf sat visibly lower than a group-link row beside it. Rail leaves now
+    render as one `mb-1` row each. The full tree keeps its own shape; the last case pins
+    that this fix stayed inside the rail.
+*/ -}}
+{{- $railFail := 0 -}}
+{{- $railMenu := `
+- title: Home
+  link: /
+- title: With Exact
+  link: /blog/with-exact/
+  pre: fas house` | transform.Unmarshal -}}
+{{- $railA := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $railMenu "level-max" 1 "collapsible" true) -}}
+{{- $railC := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $railMenu) -}}
+{{- $spacer := `<li class="mt-1 mb-1"></li>` -}}
+{{- $railCases := slice
+  (dict "case" "rail leaves emit no spacer row" "ok" (not (strings.Contains $railA $spacer)))
+  (dict "case" "rail leaves are one mb-1 row each" "ok" (eq (len (findRE `<li class="mb-1">` $railA)) 2))
+  (dict "case" "full-tree leaves keep their spacer row" "ok" (strings.Contains $railC $spacer))
+-}}
+{{- range $railCases -}}
+{{- if .ok }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+{{- $railFail = add $railFail 1 -}}
+{{- errorf "sidebar rail leaf mismatch: case=%q" .case -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR RAIL LEAF FAILURES: {{ $railFail }}
+
+{{- /*
     Assertions for utilities/GetLocale.html.
 
     The `lang` argument stands in for the language of the site being rendered, so a
