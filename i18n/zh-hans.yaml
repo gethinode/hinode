@@ -115,6 +115,8 @@
   translation: "切换侧边栏导航"
 - id: toggleSecondary
   translation: "切换更多项目"
+- id: toggleGroup
+  translation: "切换{{ .Title }}"
 
 # Feature
 - id: addedFeature

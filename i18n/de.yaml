@@ -115,6 +115,8 @@
   translation: "Menünavigation anzeigen oder ausblenden"
 - id: toggleSecondary
   translation: "Weitere Elemente anzeigen oder ausblenden"
+- id: toggleGroup
+  translation: "{{ .Title }} anzeigen oder ausblenden"
 
 # Feature
 - id: addedFeature

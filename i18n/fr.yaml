@@ -115,6 +115,8 @@
   translation: "Afficher/Masquer la barre latérale"
 - id: toggleSecondary
   translation: "Afficher/Masquer plus d'éléments"
+- id: toggleGroup
+  translation: "Afficher/Masquer {{ .Title }}"
 
 # Feature
 - id: addedFeature

@@ -115,6 +115,8 @@
   translation: "Przełącz nawigację na pasku bocznym"
 - id: toggleSecondary
   translation: "Przełącz więcej elementów"
+- id: toggleGroup
+  translation: "Przełącz {{ .Title }}"
 
 # Feature
 - id: addedFeature

@@ -115,6 +115,8 @@
   translation: "Toon of verberg navigatie"
 - id: toggleSecondary
   translation: "Toon of verberg meer items"
+- id: toggleGroup
+  translation: "{{ .Title }} in- of uitklappen"
 
 # Feature
 - id: addedFeature

@@ -31,6 +31,7 @@
 {{- $levelMax := index $args "level-max" | default 0 -}}
 {{- $collapsible := $args.collapsible | default false -}}
 {{- $autoGenerate := index $args "auto-generate" | default false -}}
+{{- $groups := $args.groups | default false -}}
 
 {{/* The base URL depends on site state only; the filename is set per menu by GetMenu */}}
 {{- $baseURL := partialCached "utilities/GetBaseURL.html" site -}}
@@ -46,6 +47,6 @@
         {{- with site.GetPage (path.Join $section .) }}{{ $root = . }}{{ end -}}
     {{- end -}}
     {{- $ctx := merge $args (dict "page" $root "baseURL" $baseURL "filename" $filename) -}}
-    {{- $variant := printf "%v-%v-%v-%v" $levelMin $levelMax $collapsible $autoGenerate -}}
+    {{- $variant := printf "%v-%v-%v-%v-%v" $levelMin $levelMax $collapsible $autoGenerate $groups -}}
     {{- partialCached "assets/sidebar.html" $ctx $section $version $lang $variant -}}
 {{- end -}}

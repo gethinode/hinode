@@ -601,6 +601,99 @@ FAIL {{ .case }}
 SIDEBAR RAIL LEAF FAILURES: {{ $railFail }}
 
 {{- /*
+    Assertions for rail groups (`groups: true`) in assets/sidebar.html.
+
+    A rail entry with pages renders as its usual L1 anchor plus two copies of its
+    children: a collapse for the expanded rail and a dropdown flyout for the icon-only
+    rail. Bootstrap finds a dropdown's menu among the toggle's following siblings and reads
+    `dropend` off the toggle's parent, so the anchor, the chevron and the flyout must share
+    one `.dropend` row - the shape case pins that, since a wrong nesting fails silently in
+    the browser. Grandchildren are never rendered: the rail stops at L2.
+*/ -}}
+{{- $grpFail := 0 -}}
+{{- $grpMenu := `
+- title: Home
+  link: /
+- title: Blog
+  link: /blog/
+  pre: fas house
+  pages:
+    - title: With Exact
+      link: /blog/with-exact/
+    - title: Toc Override
+      link: toc-override
+      pages:
+        - title: Deep
+          link: /blog/nav-fade/
+- title: Cards
+  link: /blog/
+  pages:
+    - title: Card Padding
+      link: card-padding
+    - title: Card Wrapper
+      link: /blog/card-wrapper/` | transform.Unmarshal -}}
+{{- $grpOff := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "level-max" 1 "collapsible" true) -}}
+{{- $grpOn := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "level-max" 1 "collapsible" true "groups" true) -}}
+{{- $grpTree := partial "assets/sidebar.html" (dict "page" $sbPage "menu" $grpMenu "groups" true) -}}
+{{- $flat := replaceRE `\s+` " " $grpOn -}}
+{{- $flatTree := replaceRE `\s+` " " $grpTree -}}
+{{- $shape := `<li class="mb-1 sidebar-group"> <div class="sidebar-group-row dropend"> <a [^>]*data-sidebar-group-toggle[^>]*>.*?</a> <button [^>]*sidebar-group-chevron[^>]*></button> <ul class="dropdown-menu sidebar-group-flyout">.*?</ul> </div> <ul class="collapse[^"]*" id="sidebar-group-blog-1">` -}}
+{{- /* Each group's inline and flyout copies of its children, in order. The flyout copy
+       renders through the same link.html call as the inline one, so a child's two hrefs
+       must agree - they drift otherwise wherever RelPermalink is not the raw path. */ -}}
+{{- $hrefPairs := slice -}}
+{{- range findRE `<li class="mb-1 sidebar-group">.*?id="sidebar-group-[^"]+">.*?</ul>` $flat -}}
+  {{- $flyout := findRE `href="[^"]*" class="dropdown-item"` (index (split . `id="sidebar-group-`) 0) -}}
+  {{- $flyout = apply $flyout "replaceRE" ` class="dropdown-item"$` "" "." -}}
+  {{- $inline := findRE `href="[^"]*"` (replaceRE `^.*id="sidebar-group-[^"]+">` "" .) -}}
+  {{- $hrefPairs = $hrefPairs | append (dict "flyout" (delimit $flyout "|") "inline" (delimit $inline "|") "n" (len $inline)) -}}
+{{- end -}}
+{{- $hrefsAgree := eq (len $hrefPairs) 2 -}}
+{{- range $hrefPairs -}}
+  {{- if or (ne .flyout .inline) (ne .n 2) }}{{ $hrefsAgree = false }}{{ end -}}
+{{- end -}}
+{{- $groupIds := findRE `id="sidebar-group-[^"]+"` $grpOn -}}
+{{- $grpCases := slice
+  (dict "case" "groups off renders no group markup"
+        "ok" (not (findRE `sidebar-group|dropend|With Exact` $grpOff)))
+  (dict "case" "groups on renders the row, chevron, flyout and inline list in Bootstrap's shape"
+        "ok" (findRE $shape $flat))
+  (dict "case" "the toggle positions its flyout with a fixed strategy"
+        "ok" (strings.Contains $grpOn `data-bs-popper-config='{"strategy":"fixed"}'`))
+  (dict "case" "the chevron targets and labels the inline list"
+        "ok" (and (strings.Contains $grpOn `data-bs-target="#sidebar-group-blog-1"`) (strings.Contains $grpOn `aria-controls="sidebar-group-blog-1"`) (strings.Contains $grpOn `aria-label="Toggle Blog"`)))
+  (dict "case" "collapse ids are namespaced by the nav and differ per group"
+        "ok" (and (eq (len $groupIds) 2) (ne (index $groupIds 0) (index $groupIds 1)) (strings.Contains $grpOn `id="sidebar-group-blog-2"`) (strings.Contains $grpOn `data-bs-target="#sidebar-group-blog-2"`) (strings.Contains $grpOn `aria-controls="sidebar-group-blog-2"`)))
+  (dict "case" "the flyout header links to the group"
+        "ok" (findRE `<a class="dropdown-item sidebar-group-flyout-header" href="/blog/">Blog</a>` $flat))
+  (dict "case" "flyout children resolve absolute and relative links"
+        "ok" (and (strings.Contains $grpOn `href="/blog/with-exact/" class="dropdown-item"`) (strings.Contains $grpOn `href="/blog/toc-override/" class="dropdown-item"`)))
+  (dict "case" "inline children resolve the same links"
+        "ok" (and (findRE `id="sidebar-group-blog-1">.*href="/blog/with-exact/"` $flat) (findRE `id="sidebar-group-blog-1">.*href="/blog/toc-override/"` $flat)))
+  (dict "case" "every child's inline and flyout hrefs are equal"
+        "ok" $hrefsAgree)
+  (dict "case" "grandchildren are never rendered"
+        "ok" (not (strings.Contains $grpOn "/blog/nav-fade/")))
+  (dict "case" "a rail leaf beside a group keeps its single row"
+        "ok" (not (strings.Contains $grpOn `<li class="mt-1 mb-1"></li>`)))
+  (dict "case" "the full tree ignores groups"
+        "ok" (and (strings.Contains $grpTree "sidebar-item-group") (not (strings.Contains $grpTree "sidebar-group-row"))))
+  (dict "case" "the full tree's group chevron is labelled"
+        "ok" (findRE `<button class="btn btn-toggle-group d-inline-flex[^"]*"[^>]*aria-label="Toggle Blog"` $flatTree))
+-}}
+{{- range $grpCases -}}
+{{- if .ok }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}
+{{- $grpFail = add $grpFail 1 -}}
+{{- errorf "sidebar rail group mismatch: case=%q" .case -}}
+{{- end -}}
+{{- end }}
+
+SIDEBAR RAIL GROUP FAILURES: {{ $grpFail }}
+
+{{- /*
     Assertions for utilities/GetLocale.html.
 
     The `lang` argument stands in for the language of the site being rendered, so a
