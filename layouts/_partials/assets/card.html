@@ -207,7 +207,7 @@
 {{ if (hasPrefix $args.orientation "horizontal") }}
     {{ if not $args.iconStyle }}{{ $style = "fa-fluid fa-fw" }}{{ end }}
 {{ else }}
-    {{ if not $args.iconStyle }}{{ $style = "fa-4x" }}{{ end }}
+    {{ if not $args.iconStyle }}{{ $style = "fa-4x fa-fw" }}{{ end }}
     {{- $iconStyle = "pb-3" -}}
 {{ end }}
 
