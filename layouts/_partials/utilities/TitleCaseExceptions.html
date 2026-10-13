@@ -1,0 +1,33 @@
+{{- /*
+    Restores the canonical spelling of the words listed in `titleCaseExceptions`.
+
+    Called by utilities/TitleCase.html on the string it has already cased, as its very last
+    step. Each entry is the canonical spelling of a word (`AI`, `dbt`, `iOS`). Every
+    whole-word occurrence that matches an entry case-insensitively is rewritten to the
+    entry, except for deliberate shouting: a match written entirely in capitals (and longer
+    than one character) is left alone unless it already equals the entry, so `NPM` survives
+    an `npm` entry while `Npm` and `npm` become `npm`.
+
+    Running after the authored-capital restoration is what makes lowercase entries work for
+    sources that arrive capitalized, such as Hugo's own taxonomy term titles (`dbt` → `Dbt`).
+    Entries must be plain words: Go's regexp has no `\Q…\E` escaping, so an entry containing
+    regex metacharacters would misbehave.
+
+    @param {string} text        The cased string. Plain text only, never markup.
+    @param {[]string} entries   The canonical spellings.
+
+    @returns {string} The text with canonical spellings restored.
+*/ -}}
+
+{{- $text := .text -}}
+{{- range .entries -}}
+    {{- $entry := . -}}
+    {{- range uniq (findRE (printf `(?i)\b%s\b` $entry) $text) -}}
+        {{- $shout := and (eq . (upper .)) (gt (len (split . "")) 1) -}}
+        {{- if and (ne . $entry) (not $shout) -}}
+            {{- $text = replaceRE (printf `\b%s\b` .) $entry $text -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $text -}}
