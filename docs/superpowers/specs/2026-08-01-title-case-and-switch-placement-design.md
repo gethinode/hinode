@@ -135,11 +135,14 @@ protects uppercase stopwords (`AND`, `OF`, `TO`) and acronyms in `<code>` spans 
 configuration, and cannot be expressed as an exception entry — by the time the text is cased,
 `AND` has already become `and` and no longer matches `\bAND\b`.
 
-`site.Params.main.titleCaseExceptions` (list of strings, default empty) names words that
-must keep their exact spelling — `["npm", "pnpm"]`. Restoration replaces the entry's
-title-cased form with the entry, so only that spelling is affected and a deliberate `NPM`
-survives. It is applied to the plain cased string, never to the final result, because the
-result contains tags and a match inside an attribute value would corrupt markup.
+`site.Params.main.titleCaseExceptions` (list of strings, default empty) lists canonical
+spellings — `["AI", "dbt", "iOS", "npm"]`. Every whole-word occurrence that matches an entry
+case-insensitively is rewritten to the entry (`ai`, `Ai` → `AI`; `Dbt` → `dbt`), except a
+match written entirely in capitals, so a deliberate `NPM` survives an `npm` entry. The
+rewrite runs last, after the authored-capital restoration, which lets lowercase entries
+repair sources that arrive capitalized, such as Hugo's own taxonomy term titles. It is
+applied to the plain cased string, never to the final result, because the result contains
+tags and a match inside an attribute value would corrupt markup.
 
 Returns a plain string. Callers apply `safeHTML` exactly where they do today.
 
@@ -310,8 +313,9 @@ hook gone; the release note must say so.
   Go's AP casing does not. This matters for Turkish dotted-i. Accepted, because AP-style
   casing on Turkish content is already wrong, and hinode's exampleSite disables
   `titleCase` for its non-English variants.
-- **`<code>` contents still get cased.** `<code>npm</code>` → `<code>Npm</code>`. This
-  matches today's CSS behavior exactly; changing it is a separate question.
+- **`<code>` contents are no longer cased.** Originally `<code>npm</code>` became
+  `<code>Npm</code>`, matching the CSS behavior. `TitleCase.html` now emits the text inside
+  `<code>` verbatim, while still counting it as a word for the surrounding casing.
 - **The `GetIncludeToc.html` / `GetIncludeTOC.html` casing mismatch.** `baseof.html:29`
   calls `GetIncludeToc.html`; the file is `GetIncludeTOC.html`. It works via Hugo's
   lowercased partial lookup. Cosmetic; out of scope.

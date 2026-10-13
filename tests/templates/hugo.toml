@@ -11,7 +11,7 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [params]
   [params.main]
     titleCase = true
-    titleCaseExceptions = ["npm", "pnpm"]
+    titleCaseExceptions = ["npm", "pnpm", "AI", "dbt", "iOS"]
     # Deliberately not the theme's own default of 4. The card assertions have to show that a
     # card's internal spacing is no longer a function of the site's section rhythm, and only a
     # value the card would otherwise have emitted - and that nothing else in the card's markup
@@ -43,6 +43,9 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/TitleCase.html'
   target = 'layouts/_partials/utilities/TitleCase.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/TitleCaseExceptions.html'
+  target = 'layouts/_partials/utilities/TitleCaseExceptions.html'
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/GetPageFlag.html'
   target = 'layouts/_partials/utilities/GetPageFlag.html'

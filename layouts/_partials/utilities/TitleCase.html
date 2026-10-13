@@ -14,13 +14,22 @@
     sees a space stand-in for it — and because a space cases to a space, the one-rune width
     keeps the positional mapping back onto the original tokens exact.
 
-    Words listed in `site.Params.main.titleCaseExceptions` keep their exact spelling —
-    for lowercase-authored acronyms such as `npm`, which `title` would otherwise
-    capitalize to `Npm`. Each entry is matched as a whole word against its own
-    title-cased form (`\btitle($entry)\b`), so only that exact casing is restored; a
-    deliberately shouted spelling such as `NPM` does not match `\bNpm\b` and is left
-    alone. Entries must be plain words: Go's regexp has no `\Q…\E` escaping, so an entry
-    containing regex metacharacters would misbehave.
+    Inline code and keyboard input are never adjusted: the text inside a `<code>` or
+    `<kbd>` element is always emitted exactly as authored, so "Inline test `case`" renders
+    as "Inline Test `case`". Their contents still take part in the casing pass as ordinary
+    words, so the words around such a span keep correct stopword and first-word handling
+    (`the `foo` of it` stays `The `foo` of It`). Only the final text-run emission is
+    skipped for runes inside these elements.
+
+    Words listed in `site.Params.main.titleCaseExceptions` are canonical spellings, such as
+    `AI`, `dbt`, `iOS` or `npm`. Every whole-word occurrence matching an entry
+    case-insensitively is rewritten to the entry, so lowercase-authored acronyms that
+    `title` would capitalize (`npm` → `Npm`) keep their spelling, and entries can also
+    force capitals (`ai` → `AI`). A match written entirely in capitals, such as a
+    deliberately shouted `NPM`, is left alone. The rewrite is the final step (see
+    utilities/TitleCaseExceptions.html), after the authored-capital restoration below, so it
+    also corrects sources that arrive capitalized, such as Hugo's own taxonomy term titles
+    (`dbt` → `Dbt`). Entries must be plain words.
 
     `titleCaseExceptions` must be a list. A scalar (e.g. a bare string, which is what a
     TOML author typing `"npm"` instead of `["npm"]` produces, and what Hugo hands through
@@ -34,13 +43,10 @@
     filter produced there. AP style lowercases stopwords ("and", "in", "on", "to", …)
     regardless of how they were written, so an all-caps heading such as `AN INTRODUCTION TO
     THE THING` would otherwise come back with its stopwords lowercased, and an authored
-    acronym or keyword like `<code>AND</code>` would lose its case too. `titleCaseExceptions`
-    cannot fix this: it matches a word against its *title-cased* form, but by the time it
-    runs the stopword is already lowercased and no longer matches. This restoration is a
+    acronym or keyword like `<code>AND</code>` would lose its case too. This restoration is a
     single pass over the whole cased string — not per text token in the mapping loop — run
-    immediately after the exception restoration, on `$result` in the fast path and on
-    `$cased` in the slow path (before the rune split, since the length guard below compares
-    `$cased` against `$plain`).
+    on `$result` in the fast path and on `$cased` in the slow path (before the rune split,
+    since the length guard below compares `$cased` against `$plain`).
 
     @param {string} text  Plain string or rendered HTML.
     @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
@@ -69,10 +75,7 @@
     {{- if not (or (strings.Contains $text "<") (strings.Contains $text "&")) -}}
         {{/* Fast path: no markup and no entities, so the filter can be applied directly. */}}
         {{- $result = title $text -}}
-        {{- range $exceptions -}}
-            {{- $result = replaceRE (printf `\b%s\b` (title .)) . $result -}}
-        {{- end -}}
-        {{/* Never lowercase an authored capital (see doc block above). */}}
+        {{/* Never lowercase an authored capital, then restore canonical spellings (see above). */}}
         {{- if ne $text (lower $text) -}}
             {{- $pr := split $text "" -}}
             {{- $cr := split $result "" -}}
@@ -83,6 +86,9 @@
                 {{- end -}}
                 {{- $result = delimit $m "" -}}
             {{- end -}}
+        {{- end -}}
+        {{- with $exceptions -}}
+            {{- $result = partial "utilities/TitleCaseExceptions.html" (dict "text" $result "entries" .) -}}
         {{- end -}}
     {{- else -}}
         {{/* Split into tags, character entities, and text runs. Only the text runs are cased. */}}
@@ -98,9 +104,6 @@
         {{- end -}}
         {{- $plain = delimit $plain "" -}}
         {{- $cased := title $plain -}}
-        {{- range $exceptions -}}
-            {{- $cased = replaceRE (printf `\b%s\b` (title .)) . $cased -}}
-        {{- end -}}
         {{/* Never lowercase an authored capital (see doc block above). Must run before the
              rune split, since the length guard below compares $cased against $plain. */}}
         {{- if ne $plain (lower $plain) -}}
@@ -114,6 +117,9 @@
                 {{- $cased = delimit $m "" -}}
             {{- end -}}
         {{- end -}}
+        {{- with $exceptions -}}
+            {{- $cased = partial "utilities/TitleCaseExceptions.html" (dict "text" $cased "entries" .) -}}
+        {{- end -}}
         {{- $runes := split $cased "" -}}
 
         {{/* The filter only changes case, so lengths must match. If they ever do not, the
@@ -121,15 +127,25 @@
         {{- if eq (len $runes) (len (split $plain "")) -}}
             {{- $out := slice -}}
             {{- $pos := 0 -}}
+            {{- $code := 0 -}}
             {{- range $tokens -}}
                 {{- if and (hasPrefix . "<") (hasSuffix . ">") -}}
+                    {{- if findRE `(?i)^<(code|kbd)[\s>/]` . 1 -}}
+                        {{- $code = add $code 1 -}}
+                    {{- else if and (findRE `(?i)^</(code|kbd)\s*>$` . 1) (gt $code 0) -}}
+                        {{- $code = sub $code 1 -}}
+                    {{- end -}}
                     {{- $out = $out | append . -}}
                 {{- else if and (hasPrefix . "&") (hasSuffix . ";") -}}
                     {{- $out = $out | append . -}}
                     {{- $pos = add $pos 1 -}}
                 {{- else -}}
                     {{- $n := len (split . "") -}}
-                    {{- $out = $out | append (delimit (first $n (after $pos $runes)) "") -}}
+                    {{- if gt $code 0 -}}
+                        {{- $out = $out | append . -}}
+                    {{- else -}}
+                        {{- $out = $out | append (delimit (first $n (after $pos $runes)) "") -}}
+                    {{- end -}}
                     {{- $pos = add $pos $n -}}
                 {{- end -}}
             {{- end -}}
