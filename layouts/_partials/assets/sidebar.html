@@ -318,7 +318,10 @@
     {{ if eq $group.link "#" }}{{ $href = $doc_slug }}{{ end }}
     {{ if not (hasSuffix $href "/") }}{{ $href = printf "%s/" $href }}{{ end }}
 
-    <li class="mb-1">
+    {{- /* Only an L1 group (level 1) keeps the `mb-1` that separates the L1 rows. A nested
+           leaf carries no margin of its own, so a nested group with one sat 4px further from
+           its next sibling than every leaf does and the rows pitched unevenly. */ -}}
+    <li{{ if le $level 1 }} class="mb-1"{{ end }}>
         <div class="d-flex w-100 p-0 sidebar-item-group">
             <div class="text-start flex-grow-1">
                 {{- $groupTitle := $group.title -}}
