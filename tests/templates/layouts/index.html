@@ -99,6 +99,63 @@ FAIL page-form, exact: true in front matter: want="set up a project" got="{{ $go
 TITLECASE FAILURES: {{ $fail }}
 
 {{- /*
+    Assertions for the `menu` argument of utilities/TitleCase.html.
+
+    A navigation entry is cased by `main.titleCaseMenu`, which mirrors `main.titleCase`
+    when omitted. The setting is site-wide, so one build can only show one side of it:
+    `test:templates` builds this harness a third time with `--environment menu-case`, whose
+    overlay (config/menu-case/) sets `titleCaseMenu = false` while leaving `titleCase` on.
+    The first case pins that the overlay reached that build and only that build, so
+    neither run can pass vacuously. The sidebar case shows the argument reaches a real
+    caller, not only the utility.
+*/ -}}
+{{- $mcFail := 0 -}}
+{{- $mcOff := eq hugo.Environment "menu-case" -}}
+{{- $mcPage := site.GetPage "/blog/without-exact" -}}
+{{- $mcSidebar := replaceRE `\s+` " " (partial "assets/sidebar.html" (dict "page" $mcPage "menu" (`
+- title: usage and billing
+  link: /blog/
+` | transform.Unmarshal))) -}}
+{{- $mcCases := slice
+  (dict "case" "the menu-case overlay sets titleCaseMenu, every other build leaves it unset"
+        "got" (isset site.Params.main "titlecasemenu") "want" $mcOff)
+  (dict "case" "a menu entry follows titleCaseMenu, or titleCase when it is omitted"
+        "got" (partial "utilities/TitleCase.html" (dict "exact" false "menu" true "text" "set up a project"))
+        "want" (cond $mcOff "set up a project" "Set Up a Project"))
+  (dict "case" "text that is not a menu entry keeps following titleCase"
+        "got" (partial "utilities/TitleCase.html" (dict "exact" false "text" "set up a project"))
+        "want" "Set Up a Project")
+  (dict "case" "menu false is the same as no menu argument"
+        "got" (partial "utilities/TitleCase.html" (dict "exact" false "menu" false "text" "set up a project"))
+        "want" "Set Up a Project")
+  (dict "case" "a menu entry keeps its authored capitals"
+        "got" (partial "utilities/TitleCase.html" (dict "exact" false "menu" true "text" "Account settings"))
+        "want" (cond $mcOff "Account settings" "Account Settings"))
+  (dict "case" "exact still opts a menu entry out"
+        "got" (partial "utilities/TitleCase.html" (dict "exact" true "menu" true "text" "set up a project"))
+        "want" "set up a project")
+  (dict "case" "a sidebar row is cased as a menu entry"
+        "got" (strings.Contains $mcSidebar (cond $mcOff "usage and billing" "Usage and Billing"))
+        "want" true)
+  (dict "case" "a sidebar row carries no other casing of its title"
+        "got" (strings.Contains $mcSidebar (cond $mcOff "Usage and Billing" "usage and billing"))
+        "want" false)
+-}}
+{{- range $mcCases -}}
+{{- if eq .got .want }}
+PASS menu case: {{ .case }}
+{{- else }}
+FAIL menu case: {{ .case }}
+     want={{ .want }}
+     got ={{ .got }}
+{{- $mcFail = add $mcFail 1 -}}
+{{- errorf "TitleCase menu mismatch: env=%q case=%q want=%v got=%v" hugo.Environment .case .want .got -}}
+{{- end -}}
+{{- end }}
+
+TITLECASE MENU FAILURES: {{ $mcFail }}
+
+{{- /*
     The "default" column is deliberately not the same as "want" on every row. A resolver
     that just returned the caller's default would trivially satisfy any row where
     want == default, without ever consulting the tier the row claims to prove. Each row's
