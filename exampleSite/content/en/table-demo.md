@@ -3,6 +3,30 @@ title: Table Demo
 modules: ["simple-datatables"]
 ---
 
+## Formatted date columns
+
+Keep source dates in ISO format (`YYYY-MM-DD`) and select their zero-based columns
+with `date-cols`. The table render hook displays a semantic `time` element and adds
+a numeric `YYYYMMDD` sort key to each date cell, so sorting follows chronology.
+`date-format` accepts a Go time layout and defaults to `January 2, 2006`. Select
+multiple columns with a comma-separated list, for example `date-cols="0,2"`.
+
+{{< table sortable="true" class="fixture-dates" >}}
+
+| Published  | Title          |
+|------------|----------------|
+| 2025-12-31 | Year in review |
+| 2006-01-02 | First release  |
+| 2026-02-10 | Latest update  |
+{date-cols="0" date-format="January 2, 2006"}
+{{< /table >}}
+
+The attributes also work on ordinary Markdown tables without the `table`
+shortcode. Unselected columns keep their original content. Invalid nonempty date
+cells and invalid column selectors produce a warning; invalid cells remain
+unchanged. Empty cells stay empty. Use plain ISO text in date columns: links and
+other inline markup are preserved rather than converted.
+
 ## Plain wrapped table
 
 {{< table wrap="true" class="table-striped fixture-plain" >}}
