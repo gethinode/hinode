@@ -8,6 +8,8 @@ title = 'template tests'
 # both ends of the supported range agree. Swap it when #2049 moves the floor.
 languageCode = 'en-gb'
 disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
+[markup.goldmark.parser.attribute]
+  block = true
 [params]
   [params.main]
     titleCase = true
@@ -209,3 +211,8 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../i18n'
   target = 'i18n'
+
+# Exercise the real Markdown table hook, including its responsive folded cells.
+[[module.mounts]]
+  source = '../../layouts/_markup/render-table.html'
+  target = 'layouts/_markup/render-table.html'

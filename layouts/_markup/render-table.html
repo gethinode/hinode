@@ -19,6 +19,38 @@
 {{ .Page.Store.Set "hinodeTableCaption" "" }}
 
 {{ $attr := .Attributes }}
+{{/* These opt-in Markdown attributes belong to the renderer, not the HTML table. Column
+     indices are zero-based and comma-separated. Test key presence so an unquoted `0`
+     (parsed as a number) still selects the first column. */}}
+{{ $dateCols := slice }}
+{{ $dateFormat := index $attr "date-format" | default "January 2, 2006" }}
+{{ if isset $attr "date-cols" }}
+    {{ range split (printf "%v" (index $attr "date-cols")) "," }}
+        {{ $column := trim . " " }}
+        {{ if findRE `^[0-9]+$` $column }}
+            {{/* int infers octal from a leading zero. Normalize to decimal and catch
+                 overflow so malformed selectors warn rather than aborting the build. */}}
+            {{ $decimal := replaceRE `^0+` "" $column | default "0" }}
+            {{ with try (int $decimal) }}
+                {{ if .Err }}
+                    {{ warnf "Table date-cols: column %q is out of range. See %s" $column $.Position }}
+                {{ else if lt .Value $cols }}
+                    {{ $dateCols = $dateCols | append .Value }}
+                {{ else }}
+                    {{ warnf "Table date-cols: column %q is out of range. See %s" $column $.Position }}
+                {{ end }}
+            {{ end }}
+        {{ else }}
+            {{ warnf "Table date-cols: invalid column %q. See %s" $column $.Position }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ $attr = dict }}
+{{ range $key, $value := .Attributes }}
+    {{ if not (in (slice "date-cols" "date-format") $key) }}
+        {{ $attr = merge $attr (dict $key $value) }}
+    {{ end }}
+{{ end }}
 {{ $given := split (or $attr.class "") " " }}
 {{ $wrap := and (in $given "table-wrap") (not $dataTable) (ne $breakpoint "xs") (gt $cols 1) }}
 
@@ -105,9 +137,30 @@
       {{- $length := len . }}
       {{- /* The folded rows below read cells by position from inside a nested range, where neither
              `.` nor `$` is this row any more - `$` is the render hook's own context. Hold the row. */}}
-      {{- $row := . }}
+      {{- $row := slice }}
+      {{- range $i, $cell := . }}
+        {{- $text := $cell.Text }}
+        {{- $order := "" }}
+        {{- if in $dateCols $i }}
+          {{- $source := printf "%s" $text }}
+          {{- $valid := false }}
+          {{- if findRE `^[0-9]{4}-[0-9]{2}-[0-9]{2}$` $source }}
+            {{- with try (time.AsTime $source) }}
+              {{- if not .Err }}
+                {{- $valid = true }}
+                {{- $order = .Value.Format "20060102" }}
+                {{- $text = printf `<time datetime="%s">%s</time>` $source (time.Format $dateFormat .Value | htmlEscape) | safeHTML }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- if and (not $valid) $source }}
+            {{- warnf "Table date-cols: expected an ISO date (YYYY-MM-DD) in column %d, got %q; preserving cell. See %s" $i $source $.Position }}
+          {{- end }}
+        {{- end }}
+        {{- $row = $row | append (dict "Text" $text "Alignment" $cell.Alignment "Order" $order) }}
+      {{- end }}
       <tr>
-        {{- range $i, $cell := . }}
+        {{- range $i, $cell := $row }}
           {{- $cellClasses := slice }}
           {{- with $cell.Alignment }}
             {{- $cellClasses = $cellClasses | append (printf "text-%s" (index $align .)) }}
@@ -119,7 +172,7 @@
               {{- $cellClasses = $cellClasses | append "table-border-bottom-wrap" }}
             {{- end }}
           {{- end }}
-          <td{{ with $cellClasses }} class="{{ delimit . " " }}"{{ end }}>
+          <td{{ with $cellClasses }} class="{{ delimit . " " }}"{{ end }}{{ with $cell.Order }} data-order="{{ . }}"{{ end }}>
             {{- $cell.Text -}}
           </td>
         {{- end }}
