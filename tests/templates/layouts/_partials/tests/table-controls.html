@@ -13,3 +13,9 @@ PASS table controls: custom text preserves quotes and replacement metacharacters
   {{- errorf "table controls: per-instance settings leaked into a default table: %s" $got -}}
 {{- end }}
 PASS table controls: default tables retain translated compact controls
+
+{{- $got = partial "assets/table.html" (dict "page" . "input" "| Name | Category |\n|--|--|\n| Article | News |\n" "filter" (slice "News") "filter-responsive" true) -}}
+{{- if not (strings.Contains $got `data-bs-display="static"`) -}}
+  {{- errorf "table controls: responsive filters must use static dropdown positioning to avoid Popper inline styles" -}}
+{{- end }}
+PASS table controls: responsive filter dropdowns use CSS positioning

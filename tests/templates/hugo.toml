@@ -224,3 +224,8 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/table.yml'
   target = 'data/structures/table.yml'
+
+# Responsive table filters use CSS-positioned dropdowns under strict CSP.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/panel-dropdown.html'
+  target = 'layouts/_partials/assets/panel-dropdown.html'

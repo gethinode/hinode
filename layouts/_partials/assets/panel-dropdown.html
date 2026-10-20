@@ -17,6 +17,8 @@
      is carried over unchanged - including the double space in `dropdown-item  text-nowrap`, kept so
      the extraction reads as a move rather than a rewrite. Only the leading indentation of the
      emitted HTML differs, because the markup no longer sits nested inside nav.html. */}}
+{{/* Static positioning uses Bootstrap CSS rather than Popper's inline styles. Callers
+     that require a strict style-src policy can opt in without changing other dropdowns. */}}
 {{ $id := .id }}
 {{ $class := .class | default "" }}
 {{ $titles := .titles | default slice }}
@@ -41,7 +43,7 @@
 {{ $toggleClass := .toggleClass | default "link-body-emphasis border-0 bg-transparent p-0" }}
 
 <div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
-<button type="button" class="dropdown-toggle {{ $toggleClass }}" data-bs-toggle="dropdown" aria-expanded="false">
+<button type="button" class="dropdown-toggle {{ $toggleClass }}" data-bs-toggle="dropdown"{{ if .static }} data-bs-display="static"{{ end }} aria-expanded="false">
     {{ cond (gt (len $titles) 0) (index $titles $active) $label }}
 </button>
     <ul class="dropdown-menu">
