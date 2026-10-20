@@ -19,3 +19,30 @@ PASS table controls: default tables retain translated compact controls
   {{- errorf "table controls: responsive filters must use static dropdown positioning to avoid Popper inline styles" -}}
 {{- end }}
 PASS table controls: responsive filter dropdowns use CSS positioning
+
+{{/* A filter threshold is independent of table scrolling and row folding. */}}
+{{ $input := "| Name | Category |\n|--|--|\n| Article | News |\n" }}
+{{ range slice
+    (dict "name" "default" "args" (dict "filter-responsive" true) "want" `d-md-inline-flex` "dropdown" true)
+    (dict "name" "custom" "args" (dict "filter-responsive" true "filter-breakpoint" "xl" "breakpoint" "lg" "wrap" true) "want" `d-xl-inline-flex` "dropdown" true)
+    (dict "name" "xs" "args" (dict "filter-responsive" true "filter-breakpoint" "xs") "want" `class="btn-group"` "dropdown" false)
+    (dict "name" "disabled" "args" (dict "filter-responsive" false "filter-breakpoint" "xl") "want" `class="btn-group"` "dropdown" false)
+}}
+    {{ $args := merge (dict "page" $ "input" $input "filter" (slice "News")) .args }}
+    {{ $html := partial "assets/table.html" $args }}
+    {{ if not (strings.Contains $html .want) }}
+        {{ errorf "table filter %s: missing display class %q in %s" .name .want $html }}
+    {{ end }}
+    {{ if ne (strings.Contains $html `panel-dropdown`) .dropdown }}
+        {{ errorf "table filter %s: unexpected dropdown visibility" .name }}
+    {{ end }}
+    {{ if eq .name "custom" }}
+        {{ if or (not (strings.Contains $html `d-xl-none`)) (not (strings.Contains $html `table-responsive-lg`)) }}
+            {{ errorf "table filter: filter threshold must not change the scroll threshold: %s" $html }}
+        {{ end }}
+        {{ if not (strings.Contains $html `data-table-wrap-breakpoint=md`) }}
+            {{ errorf "table filter: filter threshold must not change row folding: %s" $html }}
+        {{ end }}
+    {{ end }}
+PASS table filter breakpoint: {{ .name }}
+{{ end }}
