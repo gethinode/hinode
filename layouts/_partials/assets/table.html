@@ -18,6 +18,7 @@
 
 {{/* Initialize local variables */}}
 {{ $breakpoint := site.Params.main.breakpoint | default "md" }}
+{{ $filterBreakpoint := $args.filterBreakpoint | default $breakpoint }}
 
 {{/* `filter` accepts a slice or a comma-separated string. A shortcode named parameter is always a
      string, and InitArgs validates an argument's kind without casting between kinds, so a string
@@ -155,7 +156,7 @@
          which always spans the full width of its container. `justify` carries a default of
          `start` in mod-utils, preserving the original alignment for every existing caller. */}}
     {{ if $filter }}
-    {{/* `filter-responsive` swaps the button group for a dropdown below the main breakpoint, where a
+    {{/* `filter-responsive` swaps the button group for a dropdown below the filter breakpoint, where a
          group of more than a few buttons outgrows the viewport. Off by default, so an existing table
          keeps its button group at every width. A no-op at `xs`, which has no Bootstrap display-utility
          infix to hide the group with - the same guard `wrap` applies above.
@@ -164,24 +165,25 @@
          assets/js/nav.js replays the click on it, so filtering runs through the one handler either
          way. That requires the buttons to carry ids of the form `{filterId}-btn-{index}` matching the
          order of `$titles` below - "All" first, then the filter values. */}}
-    {{ $responsive := and $args.filterResponsive (ne $breakpoint "xs") }}
+    {{ $responsive := and $args.filterResponsive (ne $filterBreakpoint "xs") }}
     {{ $titles := slice (T "tableFilterAll" | default "All") }}
     {{ range $filter }}{{ $titles = $titles | append (. | title) }}{{ end }}
-    <div class="table-filter-controls d-flex justify-content-{{ $args.justify }} mb-3">
+    <div class="table-filter-controls d-flex justify-content-{{ $args.justify }} mb-3{{ if $responsive }} align-self-stretch{{ end }}">
         {{ if $responsive }}
         {{/* Styled as a button, matching the group it stands in for. The nav's borderless default
              suits a toggle sitting among prose, but here it would render the active filter as a
-             bare word where a row of buttons used to be - nothing about it reads as a control. */}}
+             bare word where a row of buttons used to be - nothing about it reads as a control.
+             The dropdown stays at the start of the row; `justify` positions only the button group. */}}
         {{ partial "assets/panel-dropdown.html" (dict
             "id"          $filterId
-            "class"       (printf "d-%s-none" $breakpoint)
+            "class"       (printf "d-%s-none me-auto" $filterBreakpoint)
             "titles"      $titles
             "label"       (T "tableFilterLabel" | default "Filter")
             "toggleClass" "btn btn-outline-primary"
             "static"      true
         ) }}
         {{ end }}
-        <div class="btn-group{{ if $responsive }} d-none d-{{ $breakpoint }}-inline-flex{{ end }}"
+        <div class="btn-group{{ if $responsive }} d-none d-{{ $filterBreakpoint }}-inline-flex{{ end }}"
              role="group"
              aria-label="{{ T "tableFilterLabel" | default "Filter" }}"
              {{ if $responsive }}data-companion="dropdown-{{ $filterId }}"{{ end }}>
