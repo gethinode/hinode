@@ -27,6 +27,23 @@ arguments:
     release: v1.23.0
   searchable:
     release: v0.24.13
+  search-label:
+    type: string
+    optional: true
+    comment: Accessible search label for this table. Defaults to the translated search label.
+  search-placeholder:
+    type: string
+    optional: true
+    comment: Search input placeholder for this table. Defaults to the translated placeholder.
+  controls-layout:
+    type: select
+    optional: true
+    default: compact
+    options:
+      values: [compact, list]
+    comment: >-
+      Control arrangement. Compact keeps page size and search above the table.
+      List uses full-width search above and page size, count, and navigation below.
   filter:
   filter-col:
   filter-responsive:

@@ -72,6 +72,15 @@
     {{ end }}
 {{ end }}
 {{ if $args.searchable }}{{ $attributes = printf "%s data-table-searchable=true" $attributes }}{{ end }}
+{{ with $args.searchLabel }}
+    {{ $attributes = printf `%s data-table-search-label="%s"` $attributes (htmlEscape .) }}
+{{ end }}
+{{ with $args.searchPlaceholder }}
+    {{ $attributes = printf `%s data-table-search-placeholder="%s"` $attributes (htmlEscape .) }}
+{{ end }}
+{{ if eq $args.controlsLayout "list" }}
+    {{ $attributes = printf `%s data-table-controls-layout="list"` $attributes }}
+{{ end }}
 
 {{/* A wrapped data table is rendered uniformly: simple-datatables builds its row model from this
      DOM, and applies the wrapped layout below the breakpoint through its tableRender hook. A plain
@@ -137,7 +146,8 @@
     {{ $current := (index (index (findRESubmatch $regex $input) 0) 1) }}
     {{ $target := delimit (((split $current " ") | append "table" | append $class) | uniq) " " }}
     {{ $new := printf `<table class="%s" %s` $target (trim $attributes " ") }}
-    {{ $input = replaceRE $regex $new $input 1 }}
+    {{/* Replacement text must preserve author-supplied dollar signs literally. */}}
+    {{ $input = replaceRE $regex (replace $new "$" "$$") $input 1 }}
 
     {{ $wrapper := $args.wrapper | default "" }}
 
