@@ -14,6 +14,11 @@
     sees a space stand-in for it — and because a space cases to a space, the one-rune width
     keeps the positional mapping back onto the original tokens exact.
 
+    The one exception is an apostrophe entity between two letters (`don&rsquo;t`, which is
+    what Goldmark's typographer emits for `don't`). It stands in as an apostrophe, also one
+    rune wide, so the word is not split in two and its tail is not capitalized
+    (`Don&rsquo;t`, not `Don&rsquo;T`).
+
     Inline code and keyboard input are never adjusted: the text inside a `<code>` or
     `<kbd>` element is always emitted exactly as authored, so "Inline test `case`" renders
     as "Inline Test `case`". Their contents still take part in the casing pass as ordinary
@@ -111,10 +116,22 @@
         {{/* Split into tags, character entities, and text runs. Only the text runs are cased. */}}
         {{- $tokens := findRE `<[^>]+>|&#?[0-9a-zA-Z]+;|[^<&]+|[<&]` $text -}}
         {{- $plain := slice -}}
-        {{- range $tokens -}}
+        {{- range $i, $tok := $tokens -}}
             {{- if and (hasPrefix . "<") (hasSuffix . ">") -}}
             {{- else if and (hasPrefix . "&") (hasSuffix . ";") -}}
-                {{- $plain = $plain | append " " -}}
+                {{- /* An apostrophe entity between two letters (`don&rsquo;t`, which is what
+                       Goldmark's typographer emits for `don't`) stands in as the apostrophe
+                       itself, so the word is not split and its tail is not capitalized. */ -}}
+                {{- $stand := " " -}}
+                {{- if and $i (findRE `^&(rsquo|apos|#0*39|#0*8217|#x0*27|#x0*2019);$` . 1) -}}
+                    {{- $prev := index $tokens (sub $i 1) -}}
+                    {{- $next := "" -}}
+                    {{- if lt (add $i 1) (len $tokens) -}}{{- $next = index $tokens (add $i 1) -}}{{- end -}}
+                    {{- if and (findRE `\pL$` $prev 1) (findRE `^\pL` $next 1) -}}
+                        {{- $stand = "’" -}}
+                    {{- end -}}
+                {{- end -}}
+                {{- $plain = $plain | append $stand -}}
             {{- else -}}
                 {{- $plain = $plain | append . -}}
             {{- end -}}
