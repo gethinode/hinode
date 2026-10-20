@@ -102,7 +102,7 @@
 {{/* Main code */}}
 {{ if not $error }}
     {{ $title := $entry.Name }}
-    {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title) }}
+    {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title "menu" true) }}
 
     {{ if $entry.Params.button }}
         {{ partial "assets/button.html" (dict

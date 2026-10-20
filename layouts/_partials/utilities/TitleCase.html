@@ -53,9 +53,19 @@
     on `$result` in the fast path and on `$cased` in the slow path (before the rune split,
     since the length guard below compares `$cased` against `$plain`).
 
+    Menu entries can follow a casing preference of their own. Title case suits headings and
+    page titles in editorial style, while many interface conventions write controls such as
+    menu items in sentence case, so a site may want both at once. A caller rendering a
+    navigation entry - a navbar menu item or a sidebar row - passes `menu`, and the text is
+    then cased by `site.Params.main.titleCaseMenu` instead of `titleCase`. When
+    `titleCaseMenu` is omitted it mirrors `titleCase`, so a site that does not set it renders
+    exactly as before. `exact` still opts out either way.
+
     @param {string} text  Plain string or rendered HTML.
     @param {page} page    Page supplying `.Params.exact`. Optional when `exact` is passed.
     @param {bool} exact   Optional. Overrides `page.Params.exact` for callers holding no page.
+    @param {bool} menu    Optional. Marks the text as a navigation entry, cased by
+                          `main.titleCaseMenu` (which defaults to `main.titleCase`).
 
     @returns {string} The title-cased text, or the input unchanged when title casing is
                       disabled, opted out of, or cannot be applied safely.
@@ -76,7 +86,14 @@
     {{- with .page -}}{{- $exact = .Params.exact -}}{{- end -}}
 {{- end -}}
 
-{{- if and site.Params.main.titleCase (not $exact) $text -}}
+{{- $enabled := site.Params.main.titleCase -}}
+{{- if .menu -}}
+    {{- with site.Params.main -}}
+        {{- if isset . "titlecasemenu" -}}{{- $enabled = index . "titlecasemenu" -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- if and $enabled (not $exact) $text -}}
     {{- if not (or (strings.Contains $text "<") (strings.Contains $text "&")) -}}
         {{/* Fast path: no markup and no entities, so the filter can be applied directly. */}}
         {{- $result = title $text -}}

@@ -18,7 +18,16 @@
     "name" (cond .IsHome (T "home") .LinkTitle)
     "position" (add (len $breadcrumb) 1)) -}}
 
-{{ $alt := slice .Site.Params.schema.twitter .Site.Params.schema.linkedin .Site.Params.schema.github }}
+{{ $alt := slice }}
+{{ range slice .Site.Params.schema.twitter .Site.Params.schema.linkedin .Site.Params.schema.github }}
+  {{ with . }}{{ $alt = $alt | append . }}{{ end }}
+{{ end }}
+{{ $authorAlt := slice }}
+{{ with .Site.Params.schema.author }}
+  {{ range slice .twitter .linkedin .github }}
+    {{ with . }}{{ $authorAlt = $authorAlt | append . }}{{ end }}
+  {{ end }}
+{{ end }}
 
 {{ $locale := "" -}}
 {{ with .Site.Params.schema }}{{ $locale = .locale }}{{ end -}}
@@ -38,7 +47,7 @@
       {{ end -}}
       "name": "{{ .Site.Params.schema.name }}",
       "url": {{ print $baseURL }},
-      "sameAs": {{ $alt | uniq | complement (slice "") }},
+      "sameAs": {{ $alt | uniq }},
       {{ if eq .Site.Params.schema.type "Organization" -}}
         "logo": {
           "@type": "ImageObject",
@@ -100,8 +109,8 @@
           "@id": {{ print $baseURL "#/schema/person/1" }}
         },
       {{ end -}}
-      {{ with .Date }}"datePublished": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
-      {{ with .Lastmod }}"dateModified": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
+      {{ with .Date }}"datePublished": "{{ .Format "2006-01-02T15:04:05Z07:00" }}",{{ end -}}
+      {{ with .Lastmod }}"dateModified": "{{ .Format "2006-01-02T15:04:05Z07:00" }}",{{ end -}}
       "breadcrumb": {
         "@id": {{ print .Permalink "#/schema/breadcrumb/1" }}
       },
@@ -144,8 +153,8 @@
           "mainEntityOfPage": {
             "@id": {{ .Permalink }}
           },
-          {{ with .Date }}"datePublished": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
-          {{ with .Lastmod }}"dateModified": "{{ .Format "2006-01-02T15:04:05CET" }}",{{ end -}}
+          {{ with .Date }}"datePublished": "{{ .Format "2006-01-02T15:04:05Z07:00" }}",{{ end -}}
+          {{ with .Lastmod }}"dateModified": "{{ .Format "2006-01-02T15:04:05Z07:00" }}",{{ end -}}
           "author": {
             "@id": {{ print $baseURL "#/schema/person/2" }}
           },
@@ -171,17 +180,7 @@
           "@type": "Person",
           "@id": {{ print $baseURL "#/schema/person/2" }},
           "name": {{ .Site.Params.schema.author.name }},
-          "sameAs": [
-            {{ with .Site.Params.schema.author.twitter -}}
-            {{ . }}
-            {{ end -}}
-            {{ with .Site.Params.schema.author.linkedin -}}
-            , {{ . }}
-            {{ end -}}
-            {{ with .Site.Params.schema.author.github -}}
-            , {{ . }}
-            {{ end -}}
-          ]
+          "sameAs": {{ $authorAlt | uniq }}
         }
       ]
     },

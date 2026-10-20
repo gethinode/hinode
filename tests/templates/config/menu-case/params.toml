@@ -1,0 +1,6 @@
+# Overlay for the third `test:templates` build (`--environment menu-case`). The menu casing
+# preference is site-wide, so the markup a site gets when it turns title case off for menu
+# entries - while keeping it for headings - can only be shown by a build that sets it; the
+# other builds leave it unset, so menu entries mirror `titleCase`.
+[main]
+  titleCaseMenu = false

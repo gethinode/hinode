@@ -11,6 +11,7 @@
     sectionHeight = "88vh"
     maxSectionHeight = "1024px"
     titleCase = false
+    # titleCaseMenu = false # navbar and sidebar entries; mirrors titleCase when omitted
     titleCaseExceptions = []
     [main.padding]
         x = 4
