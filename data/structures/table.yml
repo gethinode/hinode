@@ -68,6 +68,7 @@ arguments:
       Viewport breakpoint below which responsive filters use a dropdown. Defaults
       to the site's main breakpoint. Requires `filter-responsive`; `xs` keeps the
       button group at every width. Independent of table scrolling and row wrapping.
+    release: v3.40.0
   justify:
     comment: >-
       Horizontal alignment of the filter button group. Requires `filter`.
