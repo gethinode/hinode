@@ -1,0 +1,21 @@
+{{- /* Labels pass through an HTML attribute and then a JavaScript-generated template.
+       Preserve literal text, including replacement metacharacters, at the first boundary. */ -}}
+{{- $text := `Search "$1" & <articles> 'today'` -}}
+{{- $got := partial "assets/table.html" (dict "page" . "input" "| Name |\n|--|\n| Article |\n" "searchable" true "controls-layout" "list" "search-label" $text "search-placeholder" $text) -}}
+{{- range slice (printf `data-table-search-label="%s"` (htmlEscape $text)) (printf `data-table-search-placeholder="%s"` (htmlEscape $text)) `data-table-controls-layout="list"` -}}
+  {{- if not (strings.Contains $got .) -}}
+    {{- errorf "table controls: literal label or layout lost: want %q in %s" . $got -}}
+  {{- end -}}
+{{- end }}
+PASS table controls: custom text preserves quotes and replacement metacharacters
+{{- $got = partial "assets/table.html" (dict "page" . "input" "| Name |\n|--|\n| Article |\n" "searchable" true) -}}
+{{- if or (strings.Contains $got `data-table-search-label=`) (strings.Contains $got `data-table-search-placeholder=`) (strings.Contains $got `data-table-controls-layout=`) -}}
+  {{- errorf "table controls: per-instance settings leaked into a default table: %s" $got -}}
+{{- end }}
+PASS table controls: default tables retain translated compact controls
+
+{{- $got = partial "assets/table.html" (dict "page" . "input" "| Name | Category |\n|--|--|\n| Article | News |\n" "filter" (slice "News") "filter-responsive" true) -}}
+{{- if not (strings.Contains $got `data-bs-display="static"`) -}}
+  {{- errorf "table controls: responsive filters must use static dropdown positioning to avoid Popper inline styles" -}}
+{{- end }}
+PASS table controls: responsive filter dropdowns use CSS positioning

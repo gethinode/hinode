@@ -216,3 +216,16 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_markup/render-table.html'
   target = 'layouts/_markup/render-table.html'
+
+# Table control options must preserve literal author text at the HTML boundary.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/table.html'
+  target = 'layouts/_partials/assets/table.html'
+[[module.mounts]]
+  source = '../../data/structures/table.yml'
+  target = 'data/structures/table.yml'
+
+# Responsive table filters use CSS-positioned dropdowns under strict CSP.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/panel-dropdown.html'
+  target = 'layouts/_partials/assets/panel-dropdown.html'
