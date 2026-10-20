@@ -1,0 +1,91 @@
+{{- /* Render and parse real JSON-LD, including optional author profiles. */ -}}
+{{- $fixture := site.GetPage "/blog/without-exact" -}}
+{{- $cases := slice
+  (dict "name" "unset profiles" "profiles" (dict) "author" (dict)
+        "want" (slice) "wantAuthor" (slice) "date" "2026-01-15T10:20:30Z")
+  (dict "name" "empty profiles" "profiles" (dict "twitter" "" "linkedin" "" "github" "")
+        "author" (dict "twitter" "" "linkedin" "" "github" "")
+        "want" (slice) "wantAuthor" (slice) "date" "2026-01-15T10:20:30Z")
+  (dict "name" "GitHub only" "profiles" (dict "github" "https://github.com/example")
+        "author" (dict "github" "https://github.com/example-author")
+        "want" (slice "https://github.com/example")
+        "wantAuthor" (slice "https://github.com/example-author") "date" "2026-07-15T10:20:30+05:30")
+  (dict "name" "LinkedIn only" "profiles" (dict "linkedin" "https://www.linkedin.com/company/example")
+        "author" (dict "linkedin" "https://www.linkedin.com/in/example-author")
+        "want" (slice "https://www.linkedin.com/company/example")
+        "wantAuthor" (slice "https://www.linkedin.com/in/example-author") "date" "2026-01-15T10:20:30-07:00")
+  (dict "name" "Twitter only" "profiles" (dict "twitter" "https://example.org/company")
+        "author" (dict "twitter" "https://example.org/author")
+        "want" (slice "https://example.org/company")
+        "wantAuthor" (slice "https://example.org/author") "date" "2026-07-15T10:20:30+02:00")
+  (dict "name" "duplicate profiles" "profiles" (dict "twitter" "https://example.org/company"
+        "linkedin" "https://example.org/company" "github" "https://github.com/example")
+        "author" (dict "twitter" "https://example.org/author" "linkedin" "https://example.org/author"
+        "github" "https://github.com/example-author")
+        "want" (slice "https://example.org/company" "https://github.com/example")
+        "wantAuthor" (slice "https://example.org/author" "https://github.com/example-author")
+        "date" "2026-07-15T10:20:30+02:00")
+  (dict "name" "person publisher" "publisher" "Person" "profiles" (dict "github" "https://github.com/example")
+        "author" (dict) "want" (slice "https://github.com/example") "wantAuthor" (slice)
+        "date" "2026-01-15T10:20:30+01:00")
+  (dict "name" "homepage without author settings" "home" true "omitAuthor" true
+        "profiles" (dict) "want" (slice) "date" "2026-01-15T10:20:30Z")
+-}}
+{{- range $cases -}}
+  {{- $case := . -}}
+  {{- $schema := merge (dict
+      "type" (.publisher | default "Organization") "name" "Example Publisher" "locale" "en-GB"
+      "logo" (dict "url" "logo.png" "width" 512 "height" 512)
+      "image" (dict "url" "image.png" "width" 1280 "height" 640)) .profiles -}}
+  {{- if not .omitAuthor -}}
+    {{- $schema = merge $schema (dict "author" (merge (dict "name" "Example Author") .author)) -}}
+  {{- end -}}
+  {{- $scratch := newScratch -}}
+  {{- $scratch.Set "thumbnail" "https://example.org/image.png" -}}
+  {{- $date := time.AsTime .date -}}
+  {{- $context := dict
+      "Site" (dict "Title" "Example Site" "Params" (dict "schema" $schema "main" (dict "description" "Example site description")))
+      "Ancestors" $fixture.Ancestors "IsHome" (.home | default false)
+      "Title" "Example page" "LinkTitle" "Example page" "Description" "Example page description"
+      "Permalink" $fixture.Permalink "Kind" (cond (.home | default false) "home" "page")
+      "Section" (cond (.home | default false) "" "blog") "Date" $date "Lastmod" $date "Scratch" $scratch -}}
+  {{- $html := partial "head/structured-data.html" $context -}}
+  {{- $json := replaceRE `(?s)^.*?<script[^>]*>(.*?)</script>.*$` "$1" $html -}}
+  {{- with try (transform.Unmarshal $json) -}}
+    {{- if .Err -}}
+      {{- errorf "structured data %q is not valid JSON: %s" $case.name .Err -}}
+    {{- else -}}
+      {{- $graph := index .Value "@graph" -}}
+      {{- $publisher := index $graph 0 -}}
+      {{- if ne (jsonify $publisher.sameAs) (jsonify $case.want) -}}
+        {{- errorf "structured data %q publisher profiles: want=%s got=%s" $case.name (jsonify $case.want) (jsonify $publisher.sameAs) -}}
+      {{- end -}}
+      {{- $author := dict -}}
+      {{- $dates := 0 -}}
+      {{- range $graph -}}
+        {{- $nodes := slice . -}}
+        {{- with index . "@graph" }}{{ $nodes = . }}{{ end -}}
+        {{- range $nodes -}}
+          {{- if strings.HasSuffix (index . "@id" | default "") "/schema/person/2" }}{{ $author = . }}{{ end -}}
+          {{- range slice .datePublished .dateModified -}}
+            {{- with . -}}
+              {{- $dates = add $dates 1 -}}
+              {{- if ne . $case.date -}}
+                {{- errorf "structured data %q date: want=%s got=%s" $case.name $case.date . -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if ne $dates (cond ($case.home | default false) 2 4) -}}
+        {{- errorf "structured data %q did not check every page/article date" $case.name -}}
+      {{- end -}}
+      {{- if not $case.home -}}
+        {{- if ne (jsonify $author.sameAs) (jsonify $case.wantAuthor) -}}
+          {{- errorf "structured data %q author profiles: want=%s got=%s" $case.name (jsonify $case.wantAuthor) (jsonify $author.sameAs) -}}
+        {{- end -}}
+      {{- end -}}
+PASS structured data: {{ $case.name }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

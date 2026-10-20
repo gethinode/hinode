@@ -229,3 +229,8 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/assets/panel-dropdown.html'
   target = 'layouts/_partials/assets/panel-dropdown.html'
+
+# Exercise the production JSON-LD template with profile and timezone variants.
+[[module.mounts]]
+  source = '../../layouts/_partials/head/structured-data.html'
+  target = 'layouts/_partials/head/structured-data.html'
