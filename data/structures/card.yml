@@ -8,6 +8,10 @@ arguments:
   title:
     optional: true
     preview: true
+  subtitle:
+    release: v3.41.0
+  highlight:
+    release: v3.41.0
   path:
   href:
     release: 2.1.3

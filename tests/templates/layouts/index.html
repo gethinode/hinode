@@ -1182,6 +1182,100 @@ FAIL card button icon: {{ $case }}: want={{ $want }} got={{ $got }}
 CARD BUTTON ICON FAILURES: {{ $biFail }}
 
 {{- /*
+    Assertions for the optional `subtitle` and `highlight` fields of a card.
+
+    A pricing-style card needs a short line under its title and an emphasised line (a price)
+    above its body. The fields render inline markdown into plain paragraphs,
+    `card-text-subtitle` and `card-text-highlight`, with no styles of their own; Bootstrap's
+    `.card-subtitle` is avoided on purpose because it zeroes the bottom margin.
+
+    The first three cases pin the rendered markup and its order inside the body - title,
+    subtitle, highlight, then `card-text` - for a stacked card, a linked card (where both
+    paragraphs must sit inside the stretched link so the whole card stays one link) and a
+    horizontal card, which renders its body through a separate branch. The fourth case is
+    the regression guard: a card that sets neither field emits neither class. The last case
+    goes through a rendered page, because the shortcode resolves its own arguments and a
+    direct partial call would bypass them.
+*/ -}}
+{{- /* Byte offset of `sub` in `s`, or -1 when absent; Hugo's strings namespace has no Index. */ -}}
+{{- define "_partials/inline/test-str-index.html" -}}
+    {{- $i := -1 -}}
+    {{- if strings.Contains .s .sub }}{{ $i = len (index (split .s .sub) 0) }}{{ end -}}
+    {{- return $i -}}
+{{- end -}}
+{{- $stFail := 0 -}}
+{{- $stBase := dict
+      "page"         $cardPage
+      "title"        "Free"
+      "subtitle"     "For *developers*."
+      "highlight"    "**€0** per month"
+      "description"  "<ul><li>x</li></ul>"
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- $stSub := `<p class="card-text-subtitle">For <em>developers</em>.</p>` -}}
+{{- $stHigh := `<p class="card-text-highlight"><strong>€0</strong> per month</p>` -}}
+{{- $stCases := slice
+  (dict "case" "card renders subtitle and highlight" "args" (dict) "check" "order")
+  (dict "case" "linked card renders subtitle inside the link" "args" (dict "href" "/blog/toc-override/") "check" "link")
+  (dict "case" "horizontal card renders subtitle and highlight" "args" (dict "orientation" "horizontal") "check" "present")
+  (dict "case" "card without the fields is unchanged" "args" (dict) "check" "absent")
+-}}
+{{- $stPlain := dict
+      "page"         $cardPage
+      "title"        "Free"
+      "description"  "<ul><li>x</li></ul>"
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- range $stCases -}}
+{{- $base := cond (eq .check "absent") $stPlain $stBase -}}
+{{- $html := replaceRE `>\s+<` "><" (replaceRE `\s+` " " (partial "assets/card.html" (merge $base .args))) -}}
+{{- $hasSub := strings.Contains $html $stSub -}}
+{{- $hasHigh := strings.Contains $html $stHigh -}}
+{{- $got := false -}}
+{{- $detail := printf "subtitle=%v highlight=%v" $hasSub $hasHigh -}}
+{{- if eq .check "order" -}}
+    {{- $iTitle := cond (strings.Contains $html "card-title") (len (index (split $html "card-title") 0)) -1 -}}
+    {{- $iSub := cond (strings.Contains $html "card-text-subtitle") (len (index (split $html "card-text-subtitle") 0)) -1 -}}
+    {{- $iHigh := cond (strings.Contains $html "card-text-highlight") (len (index (split $html "card-text-highlight") 0)) -1 -}}
+    {{- $iText := cond (strings.Contains $html `class="card-text"`) (len (index (split $html `class="card-text"`) 0)) -1 -}}
+    {{- $got = and $hasSub $hasHigh (ge $iTitle 0) (lt $iTitle $iSub) (lt $iSub $iHigh) (lt $iHigh $iText) -}}
+    {{- $detail = printf "%s order=title:%d subtitle:%d highlight:%d text:%d" $detail $iTitle $iSub $iHigh $iText -}}
+{{- else if eq .check "link" -}}
+    {{- $iOpen := cond (strings.Contains $html "<a ") (len (index (split $html "<a ") 0)) -1 -}}
+    {{- $iClose := cond (strings.Contains $html "</a>") (len (index (split $html "</a>") 0)) -1 -}}
+    {{- $iSub := cond (strings.Contains $html "card-text-subtitle") (len (index (split $html "card-text-subtitle") 0)) -1 -}}
+    {{- $iHigh := cond (strings.Contains $html "card-text-highlight") (len (index (split $html "card-text-highlight") 0)) -1 -}}
+    {{- $got = and $hasSub $hasHigh (ge $iOpen 0) (lt $iOpen $iSub) (lt $iSub $iClose) (lt $iOpen $iHigh) (lt $iHigh $iClose) -}}
+    {{- $detail = printf "%s link=open:%d subtitle:%d highlight:%d close:%d" $detail $iOpen $iSub $iHigh $iClose -}}
+{{- else if eq .check "present" -}}
+    {{- $got = and $hasSub $hasHigh -}}
+{{- else -}}
+    {{- /* The card must still render, so an empty result cannot pass as "absent". */ -}}
+    {{- $got = and (strings.Contains $html "card-title") (not (or (strings.Contains $html "card-text-subtitle") (strings.Contains $html "card-text-highlight"))) -}}
+{{- end -}}
+{{- if $got }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}: {{ $detail }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "card subtitle mismatch: case=%q %s" .case $detail -}}
+{{- end -}}
+{{- end -}}
+{{- $stHtml := replaceRE `\s+` " " (site.GetPage "/blog/card-subtitle").Content -}}
+{{- $stShortcode := and (strings.Contains $stHtml `card-text-subtitle">S<`) (strings.Contains $stHtml `card-text-highlight">H<`) -}}
+{{- if $stShortcode }}
+PASS shortcode passes subtitle and highlight
+{{- else }}
+FAIL shortcode passes subtitle and highlight: got={{ $stHtml }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "card subtitle mismatch: case=%q got=%q" "shortcode passes subtitle and highlight" $stHtml -}}
+{{- end }}
+
+CARD SUBTITLE FAILURES: {{ $stFail }}
+
+{{- /*
     Assertions for the companion dropdown and the identifiers in assets/nav.html.
 
     `responsive` hides the control group below the breakpoint and puts a dropdown in its place.

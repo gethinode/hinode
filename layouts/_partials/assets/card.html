@@ -30,6 +30,8 @@
     {{- $page := .page -}}
     {{- $owner := .owner -}}
     {{- $title := .title -}}
+    {{- $subtitle := .subtitle -}}
+    {{- $highlight := .highlight -}}
     {{- $href := .href -}}
     {{- $color := .color -}}
     {{- $description := .description -}}
@@ -51,6 +53,8 @@
                     {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "page" $owner "icon" . "spacing" false) -}}</span>{{- end -}}
                 </p>
             {{ end -}}
+            {{ with $subtitle }}<p class="card-text-subtitle">{{ . | $page.RenderString }}</p>{{ end -}}
+            {{ with $highlight }}<p class="card-text-highlight">{{ . | $page.RenderString }}</p>{{ end -}}
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -65,6 +69,8 @@
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $owner) }}{{ end -}}
                 </p>
             {{ end -}}
+            {{ with $subtitle }}<p class="card-text-subtitle">{{ . | $page.RenderString }}</p>{{ end -}}
+            {{ with $highlight }}<p class="card-text-highlight">{{ . | $page.RenderString }}</p>{{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
@@ -167,6 +173,8 @@
 {{- $title := $args.title -}}
 {{- $href := $args.href -}}
 {{- $description := $args.description -}}
+{{- $subtitle := $args.subtitle -}}
+{{- $highlight := $args.highlight -}}
 {{- $thumbnail := $args.thumbnail -}}
 {{- $mode := $args.mode -}}
 {{- $anchor := $args.anchor -}}
@@ -217,8 +225,8 @@
 {{ $minimal := or (eq $args.bodyStyle "minimal") (eq $args.body "minimal") }}
 {{- if eq $args.orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
-{{- if $minimal }}{{ $description = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
-{{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
+{{- if $minimal }}{{ $description = "" }}{{ $subtitle = "" }}{{ $highlight = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
+{{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $subtitle = "" }}{{ $highlight = "" }}{{ $description = "" }}{{ end -}}
 {{ $title = partial "utilities/TitleCase.html" (dict "exact" $args.exact "text" $title) }}
 
 {{/* Show hover link icon when enabled (global setting or per-card/group override) and card is a bare link */}}
@@ -309,6 +317,8 @@
                             "owner"       $args.page
                             "label"       $ariaLabel
                             "title"       (cond $minimal "" $title)
+                            "subtitle"    $subtitle
+                            "highlight"   $highlight
                             "href"        $href
                             "color"       $args.color
                             "description" (cond $minimal $title $description)
@@ -376,6 +386,8 @@
                 "owner"       $args.page
                 "label"       $ariaLabel
                 "title"       (cond $minimal "" $title)
+                "subtitle"    $subtitle
+                "highlight"   $highlight
                 "href"        $href
                 "color"       $args.color
                 "description" (cond $minimal $title $description)
