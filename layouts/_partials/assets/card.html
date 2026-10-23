@@ -369,7 +369,8 @@
          so its top padding shows. Subtitle and highlight sit outside the link, so they carry its
          colour class themselves, as the card text does. A card with a thumbnail carries no
          padding of its own, so the title, subtitle, highlight and body bands take it as utility
-         classes instead; the media band leaves the image full-bleed. */}}
+         classes instead, except in an image-only card (header, body and footer style all none),
+         which pads no band; the media band leaves the image full-bleed. */}}
     {{- $pad := "" -}}
     {{- $padTitle := "" -}}
     {{- $padBody := "" -}}

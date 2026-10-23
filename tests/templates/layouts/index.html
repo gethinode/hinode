@@ -1488,7 +1488,9 @@ CARD SUBTITLE FAILURES: {{ $stFail }}
 {{- end -}}
 
 {{- /* an aligned thumbnail card keeps the image full-bleed and pads the bands that the card
-       body pads in an unaligned card; the probe hook echoes what the card asks of its image */ -}}
+       body pads in an unaligned card; an image-only card (header, body and footer style all
+       none) pads no band and is not covered here. The probe hook echoes what the card asks of
+       its image */ -}}
 {{- $thList := slice
       (dict "title" "Linked" "href" "/blog/toc-override/" "thumbnail" "/img/probe.jpg" "hook" "tests/thumbnail-probe.html" "subtitle" "Sub *one*" "highlight" "High *one*" "description" "<ul><li>t</li></ul>")
       (dict "title" "Plain" "thumbnail" "/img/probe.jpg" "hook" "tests/thumbnail-probe.html" "subtitle" "Sub *two*" "highlight" "High *two*" "description" "<ul><li>u</li></ul>")
@@ -1525,6 +1527,15 @@ CARD SUBTITLE FAILURES: {{ $stFail }}
 {{- $gapOk := and (strings.Contains $thLinked `<a href="/blog/toc-override/" class="card-body-link stretched-link d-block pt-3">`) (strings.Contains $thPlain `<p class="card-title fs-lg-5 fs-6 pt-3">`) -}}
 {{- $arResults = $arResults | append (dict "case" "aligned thumbnail card keeps the space above its title"
       "ok" $gapOk "detail" (printf "linked=%s plain=%s" $thLinked $thPlain)) -}}
+
+{{- /* that extra pt-3 applies only when the header style is none, as in an unaligned card:
+       with a header style set, neither the link nor the title carries it */ -}}
+{{- $thHdr := after 1 (split (partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "list" $thList "align-rows" true "header-style" "full")))) `<div class="card card-align-rows`) -}}
+{{- $thHdrLinked := index $thHdr 0 | default "" -}}
+{{- $thHdrPlain := index $thHdr 1 | default "" -}}
+{{- $hdrOk := and (eq (len $thHdr) 2) (strings.Contains $thHdrLinked `<a href="/blog/toc-override/" class="card-body-link stretched-link d-block">`) (strings.Contains $thHdrPlain `<p class="card-title fs-lg-5 fs-6">`) -}}
+{{- $arResults = $arResults | append (dict "case" "aligned thumbnail card with a header adds no space above its title"
+      "ok" $hdrOk "detail" (printf "linked=%s plain=%s" $thHdrLinked $thHdrPlain)) -}}
 
 {{- /* subtitle and highlight sit outside the link in an aligned card, so a linked card gives
        them the link's colour class, as it does its card text; an unlinked card does not */ -}}
