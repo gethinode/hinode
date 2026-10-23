@@ -1018,7 +1018,8 @@ CARD SPACING FAILURES: {{ $cardFail }}
     A horizontal card fills its image column to the height of the card body, which suits a
     list of articles but discards any ratio: a profile with a long biography turned its square
     portrait into a tall sliver. A ratio the caller passes now wins over the fill, while a card
-    without one keeps it, so existing horizontal lists render as before. The probe hook echoes
+    without one keeps it, so existing horizontal lists render as before. The compact horizontal-sm
+    layout of scrolling card lists always fills, whatever its ratio. The probe hook echoes
     the wrapper, class and ratio the card hands to its thumbnail.
 */ -}}
 {{- $thumbFail := 0 -}}
@@ -1034,6 +1035,9 @@ CARD SPACING FAILURES: {{ $cardFail }}
   (dict "case" "horizontal card honors an explicit ratio"
         "args" (dict "orientation" "horizontal" "ratio" "1x1")
         "want" `data-wrapper="card-img-wrap" data-class="card-img-bg rounded-start " data-ratio="1x1"`)
+  (dict "case" "compact horizontal card fills the card height despite a ratio"
+        "args" (dict "orientation" "horizontal-sm" "ratio" "1x1")
+        "want" `data-wrapper="card-img-wrap h-100 d-flex align-items-center" data-class="card-img-bg rounded-start card-img-h100" data-ratio="1x1"`)
   (dict "case" "horizontal card without a ratio fills the card height"
         "args" (dict "orientation" "horizontal")
         "want" `data-wrapper="card-img-wrap h-100 d-flex align-items-center" data-class="card-img-bg rounded-start card-img-h100" data-ratio="auto"`)

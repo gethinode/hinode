@@ -282,8 +282,10 @@
                     {{ if eq (lower (path.Ext $thumbnail)) ".svg" }}{{ $fullHeight = "" }}{{ $rounding = "" }}{{ end }}
                     {{/* A ratio the caller asks for wins over filling the card's height, which would
                          otherwise stretch the image to the body text and crop it to whatever shape that
-                         leaves. A ratio read from the page's own thumbnail keeps the full-height fill. */}}
-                    {{ if $args.ratio }}
+                         leaves. A ratio read from the page's own thumbnail keeps the full-height fill. The
+                         compact horizontal-sm layout, used for scrolling card lists, always fills: its
+                         ratio only sets the image crop, as it did before ratios were honored here. */}}
+                    {{ if and $args.ratio (ne $args.orientation "horizontal-sm") }}
                         {{ $fullHeight = "" }}
                         {{ $wrapper = "card-img-wrap" }}
                     {{ end }}
