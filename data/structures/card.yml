@@ -9,9 +9,9 @@ arguments:
     optional: true
     preview: true
   subtitle:
-    release: v3.41.0
+    release: v3.42.0
   highlight:
-    release: v3.41.0
+    release: v3.42.0
   path:
   href:
     release: 2.1.3
@@ -88,7 +88,7 @@ arguments:
     release: v2.4.0
   align-rows:
     parent: cascade
-    release: v3.41.0
+    release: v3.42.0
   button-icon:
     type: bool
     optional: true

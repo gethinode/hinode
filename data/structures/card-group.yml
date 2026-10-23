@@ -77,7 +77,7 @@ arguments:
   link-icon:
     release: v2.4.0
   align-rows:
-    release: v3.41.0
+    release: v3.42.0
     comment: >-
       Aligns card parts across each visual row. Applies to stacked, non-scroll,
       non-bento groups only. Spacer and separator are not rendered when
