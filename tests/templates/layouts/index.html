@@ -1190,12 +1190,14 @@ CARD BUTTON ICON FAILURES: {{ $biFail }}
     `.card-subtitle` is avoided on purpose because it zeroes the bottom margin.
 
     The first three cases pin the rendered markup and its order inside the body - title,
-    subtitle, highlight, then `card-text` - for a stacked card, a linked card (where both
-    paragraphs must sit inside the stretched link so the whole card stays one link) and a
-    horizontal card, which renders its body through a separate branch. The fourth case is
-    the regression guard: a card that sets neither field emits neither class. The last case
-    goes through a rendered page, because the shortcode resolves its own arguments and a
-    direct partial call would bypass them.
+    subtitle, highlight, then `card-text` - for a stacked card, a linked card and a
+    horizontal card. Each of the three is checked separately because the body template has
+    a linked and a plain branch, and the horizontal card calls it from a separate place. The
+    linked card also requires both paragraphs to sit inside the stretched link, so the whole
+    card stays one link. The fourth case is the regression guard: a card that sets neither
+    field emits neither class. The fifth pins that `body-style: none` drops both fields with
+    the rest of the body. The last case goes through a rendered page, because the shortcode
+    resolves its own arguments and a direct partial call would bypass them.
 */ -}}
 {{- /* Byte offset of `sub` in `s`, or -1 when absent; Hugo's strings namespace has no Index. */ -}}
 {{- define "_partials/inline/test-str-index.html" -}}
@@ -1218,8 +1220,9 @@ CARD BUTTON ICON FAILURES: {{ $biFail }}
 {{- $stCases := slice
   (dict "case" "card renders subtitle and highlight" "args" (dict) "check" "order")
   (dict "case" "linked card renders subtitle inside the link" "args" (dict "href" "/blog/toc-override/") "check" "link")
-  (dict "case" "horizontal card renders subtitle and highlight" "args" (dict "orientation" "horizontal") "check" "present")
-  (dict "case" "card without the fields is unchanged" "args" (dict) "check" "absent")
+  (dict "case" "horizontal card renders subtitle and highlight" "args" (dict "orientation" "horizontal") "check" "order")
+  (dict "case" "card without the fields is unchanged" "args" (dict) "check" "absent" "plain" true)
+  (dict "case" "body-style none drops subtitle and highlight" "args" (dict "body-style" "none") "check" "absent")
 -}}
 {{- $stPlain := dict
       "page"         $cardPage
@@ -1229,31 +1232,28 @@ CARD BUTTON ICON FAILURES: {{ $biFail }}
       "footer-style" "none"
 -}}
 {{- range $stCases -}}
-{{- $base := cond (eq .check "absent") $stPlain $stBase -}}
+{{- $base := cond (.plain | default false) $stPlain $stBase -}}
 {{- $html := replaceRE `>\s+<` "><" (replaceRE `\s+` " " (partial "assets/card.html" (merge $base .args))) -}}
 {{- $hasSub := strings.Contains $html $stSub -}}
 {{- $hasHigh := strings.Contains $html $stHigh -}}
 {{- $got := false -}}
 {{- $detail := printf "subtitle=%v highlight=%v" $hasSub $hasHigh -}}
-{{- if eq .check "order" -}}
-    {{- $iTitle := cond (strings.Contains $html "card-title") (len (index (split $html "card-title") 0)) -1 -}}
-    {{- $iSub := cond (strings.Contains $html "card-text-subtitle") (len (index (split $html "card-text-subtitle") 0)) -1 -}}
-    {{- $iHigh := cond (strings.Contains $html "card-text-highlight") (len (index (split $html "card-text-highlight") 0)) -1 -}}
-    {{- $iText := cond (strings.Contains $html `class="card-text"`) (len (index (split $html `class="card-text"`) 0)) -1 -}}
+{{- if in (slice "order" "link") .check -}}
+    {{- $iTitle := partial "inline/test-str-index.html" (dict "s" $html "sub" "card-title") -}}
+    {{- $iSub := partial "inline/test-str-index.html" (dict "s" $html "sub" "card-text-subtitle") -}}
+    {{- $iHigh := partial "inline/test-str-index.html" (dict "s" $html "sub" "card-text-highlight") -}}
+    {{- $iText := partial "inline/test-str-index.html" (dict "s" $html "sub" `<div class="card-text`) -}}
     {{- $got = and $hasSub $hasHigh (ge $iTitle 0) (lt $iTitle $iSub) (lt $iSub $iHigh) (lt $iHigh $iText) -}}
     {{- $detail = printf "%s order=title:%d subtitle:%d highlight:%d text:%d" $detail $iTitle $iSub $iHigh $iText -}}
-{{- else if eq .check "link" -}}
-    {{- $iOpen := cond (strings.Contains $html "<a ") (len (index (split $html "<a ") 0)) -1 -}}
-    {{- $iClose := cond (strings.Contains $html "</a>") (len (index (split $html "</a>") 0)) -1 -}}
-    {{- $iSub := cond (strings.Contains $html "card-text-subtitle") (len (index (split $html "card-text-subtitle") 0)) -1 -}}
-    {{- $iHigh := cond (strings.Contains $html "card-text-highlight") (len (index (split $html "card-text-highlight") 0)) -1 -}}
-    {{- $got = and $hasSub $hasHigh (ge $iOpen 0) (lt $iOpen $iSub) (lt $iSub $iClose) (lt $iOpen $iHigh) (lt $iHigh $iClose) -}}
-    {{- $detail = printf "%s link=open:%d subtitle:%d highlight:%d close:%d" $detail $iOpen $iSub $iHigh $iClose -}}
-{{- else if eq .check "present" -}}
-    {{- $got = and $hasSub $hasHigh -}}
+    {{- if eq .check "link" -}}
+        {{- $iOpen := partial "inline/test-str-index.html" (dict "s" $html "sub" "<a ") -}}
+        {{- $iClose := partial "inline/test-str-index.html" (dict "s" $html "sub" "</a>") -}}
+        {{- $got = and $got (ge $iOpen 0) (lt $iOpen $iSub) (lt $iHigh $iClose) -}}
+        {{- $detail = printf "%s link=open:%d close:%d" $detail $iOpen $iClose -}}
+    {{- end -}}
 {{- else -}}
     {{- /* The card must still render, so an empty result cannot pass as "absent". */ -}}
-    {{- $got = and (strings.Contains $html "card-title") (not (or (strings.Contains $html "card-text-subtitle") (strings.Contains $html "card-text-highlight"))) -}}
+    {{- $got = and (strings.Contains $html `class="card `) (not (or (strings.Contains $html "card-text-subtitle") (strings.Contains $html "card-text-highlight"))) -}}
 {{- end -}}
 {{- if $got }}
 PASS {{ .case }}
