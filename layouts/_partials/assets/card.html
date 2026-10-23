@@ -365,8 +365,11 @@
     {{/* Render aligned card: always all six bands in a fixed order, empty ones included, so a card
          that lacks a part keeps its neighbours' parts on their shared lines. A linked card wraps
          only its title in the stretched link: the link still covers the card, and its accessible
-         name is the title. A card with a thumbnail carries no padding of its own, so the bands
-         other than the footer take it as utility classes instead. */}}
+         name is the title. The link is a block box, as the flex item it is in an unaligned card,
+         so its top padding shows. Subtitle and highlight sit outside the link, so they carry its
+         colour class themselves, as the card text does. A card with a thumbnail carries no
+         padding of its own, so the title, subtitle, highlight and body bands take it as utility
+         classes instead; the media band leaves the image full-bleed. */}}
     {{- $pad := "" -}}
     {{- $padTitle := "" -}}
     {{- $padBody := "" -}}
@@ -402,7 +405,7 @@
         <div class="card-band card-band-title{{ $pad }}{{ $padTitle }}">
             {{- if $page }}{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) }}{{ end -}}
             {{- if $href -}}
-                <a href="{{ $href }}" class="{{ $linkClass }} stretched-link{{ $titleClass }}"
+                <a href="{{ $href }}" class="{{ $linkClass }} stretched-link d-block{{ $titleClass }}"
                     {{- if and $ariaLabel (not (or $cardTitle $args.links)) }} aria-label="{{ $ariaLabel }}"{{ end }}>
                     {{- if or $cardTitle $args.links -}}
                         <p class="card-title fs-lg-5 fs-6">
@@ -420,10 +423,10 @@
             {{- end -}}
         </div>
         <div class="card-band card-band-subtitle{{ $pad }}">
-            {{- with $subtitle }}<p class="card-text-subtitle">{{ . | $renderPage.RenderString }}</p>{{ end -}}
+            {{- with $subtitle }}<p class="card-text-subtitle{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | $renderPage.RenderString }}</p>{{ end -}}
         </div>
         <div class="card-band card-band-highlight{{ $pad }}">
-            {{- with $highlight }}<p class="card-text-highlight">{{ . | $renderPage.RenderString }}</p>{{ end -}}
+            {{- with $highlight }}<p class="card-text-highlight{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | $renderPage.RenderString }}</p>{{ end -}}
         </div>
         <div class="card-band card-band-body{{ $pad }}{{ $padBody }}">
             {{- with $cardText }}<div class="card-text{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | safeHTML }}</div>{{ end -}}

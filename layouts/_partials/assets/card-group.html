@@ -174,7 +174,9 @@
                     "icon-rounded"  $args.iconRounded
                 ) -}}
                 {{- if isset $args "buttonIcon" }}{{ $params = merge $params (dict "button-icon" $args.buttonIcon) }}{{ end -}}
-                {{- if $alignRows }}{{ $params = merge $params (dict "align-rows" true) }}{{ end -}}
+                {{- /* The group decides: an element's own align-rows is overridden, and a card in an
+                       unaligned group without one gets no extra argument. */ -}}
+                {{- if or $alignRows (isset $element "align-rows") }}{{ $params = merge $params (dict "align-rows" $alignRows) }}{{ end -}}
                 {{- $params = merge $element $params -}}
                 {{- if $args.scroll -}}
                     {{- $width := (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "width" "default" "3")) -}}
