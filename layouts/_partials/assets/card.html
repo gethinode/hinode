@@ -365,8 +365,8 @@
     {{/* Render aligned card: always all six bands in a fixed order, empty ones included, so a card
          that lacks a part keeps its neighbours' parts on their shared lines. A linked card wraps
          only its title in the stretched link: the link still covers the card, and its accessible
-         name is the title. With a thumbnail the image bleeds to the card's edges and the bands
-         take the padding that the card body has in an unaligned card. */}}
+         name is the title. A card with a thumbnail carries no padding of its own, so the bands
+         other than the footer take it as utility classes instead. */}}
     {{- $pad := "" -}}
     {{- $padTitle := "" -}}
     {{- $padBody := "" -}}
