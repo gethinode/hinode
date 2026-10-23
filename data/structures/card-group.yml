@@ -38,6 +38,7 @@ arguments:
   href-force:
     release: v1.0.0
     group: partial
+  # Not rendered when align-rows is active.
   separator:
   loading:
   ratio:
@@ -56,6 +57,7 @@ arguments:
   orientation:
   subtle:
   button:
+  # Not rendered when align-rows is active.
   spacer:
     release: v0.24.16
   hook:
@@ -74,6 +76,12 @@ arguments:
     group: partial
   link-icon:
     release: v2.4.0
+  align-rows:
+    release: v3.41.0
+    comment: >-
+      Aligns card parts across each visual row. Applies to stacked, non-scroll,
+      non-bento groups only. Spacer and separator are not rendered when
+      alignment is active.
   button-icon:
     type: bool
     optional: true

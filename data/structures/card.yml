@@ -86,6 +86,9 @@ arguments:
   link-icon:
     parent: cascade
     release: v2.4.0
+  align-rows:
+    parent: cascade
+    release: v3.41.0
   button-icon:
     type: bool
     optional: true

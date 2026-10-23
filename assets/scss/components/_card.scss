@@ -212,3 +212,53 @@ div.card-container-wrapper::after {
     opacity: 1;
     transform: translateX(0);
 }
+
+// Aligned card groups (`align-rows`): the row becomes a grid and every card spans six row tracks,
+// one per band, through `subgrid`, so each band is as tall as its tallest entry in the visual row.
+// Browsers without subgrid skip this block and render the group as an ordinary row of cards.
+// There the card stays a flex column, and the growing body band keeps the button at the bottom,
+// as the card body does in an unaligned card.
+.card-align-rows > .card-band-body {
+    flex: 1 1 auto;
+}
+
+@supports (grid-template-rows: subgrid) {
+    .row.card-group-align-rows {
+        display: grid;
+        grid-auto-columns: minmax(0, 1fr);
+        grid-auto-flow: column;
+
+        // Bootstrap's gutter padding and margins on the children already reproduce `g-N` in a grid.
+        > * {
+            width: auto;
+        }
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+            @for $i from 1 through $grid-row-columns {
+                .row.card-group-align-rows.row-cols#{$infix}-#{$i} {
+                    grid-auto-flow: row;
+                    grid-template-columns: repeat($i, minmax(0, 1fr));
+                }
+            }
+        }
+    }
+
+    .card-align-rows-wrap,
+    .card.card-align-rows {
+        display: grid;
+        grid-row: span 6;
+        grid-template-rows: subgrid;
+        row-gap: 0;
+    }
+
+    .card-align-rows > .card-band {
+        align-self: start;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
