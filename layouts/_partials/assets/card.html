@@ -30,6 +30,8 @@
     {{- $page := .page -}}
     {{- $owner := .owner -}}
     {{- $title := .title -}}
+    {{- $subtitle := .subtitle -}}
+    {{- $highlight := .highlight -}}
     {{- $href := .href -}}
     {{- $color := .color -}}
     {{- $description := .description -}}
@@ -51,6 +53,8 @@
                     {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "page" $owner "icon" . "spacing" false) -}}</span>{{- end -}}
                 </p>
             {{ end -}}
+            {{ with $subtitle }}<p class="card-text-subtitle">{{ . | $page.RenderString }}</p>{{ end -}}
+            {{ with $highlight }}<p class="card-text-highlight">{{ . | $page.RenderString }}</p>{{ end -}}
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -65,6 +69,8 @@
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $owner) }}{{ end -}}
                 </p>
             {{ end -}}
+            {{ with $subtitle }}<p class="card-text-subtitle">{{ . | $page.RenderString }}</p>{{ end -}}
+            {{ with $highlight }}<p class="card-text-highlight">{{ . | $page.RenderString }}</p>{{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
@@ -167,6 +173,8 @@
 {{- $title := $args.title -}}
 {{- $href := $args.href -}}
 {{- $description := $args.description -}}
+{{- $subtitle := $args.subtitle -}}
+{{- $highlight := $args.highlight -}}
 {{- $thumbnail := $args.thumbnail -}}
 {{- $mode := $args.mode -}}
 {{- $anchor := $args.anchor -}}
@@ -217,8 +225,8 @@
 {{ $minimal := or (eq $args.bodyStyle "minimal") (eq $args.body "minimal") }}
 {{- if eq $args.orientation "none" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
 {{- if or (eq $args.bodyStyle "title") (eq $args.body "title") }}{{ $description = "" }}{{ end -}}
-{{- if $minimal }}{{ $description = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
-{{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $description = "" }}{{ end -}}
+{{- if $minimal }}{{ $description = "" }}{{ $subtitle = "" }}{{ $highlight = "" }}{{ $thumbnail = "" }}{{ $icon = "" }}{{ end -}}
+{{- if or (eq $args.bodyStyle "none") (eq $args.body "none") }}{{ $title = "" }}{{ $subtitle = "" }}{{ $highlight = "" }}{{ $description = "" }}{{ end -}}
 {{ $title = partial "utilities/TitleCase.html" (dict "exact" $args.exact "text" $title) }}
 
 {{/* Show hover link icon when enabled (global setting or per-card/group override) and card is a bare link */}}
@@ -241,8 +249,12 @@
     "loading"  $args.loading
 -}}
 
+{{/* A card in an aligned group renders its parts as six bands that the group's subgrid lines up
+     across each visual row. Only a stacked card outside a scroll group is eligible. */}}
+{{- $alignRows := and $args.alignRows (eq $args.orientation "stacked") (not $args.scroll) -}}
+
 {{/* Main code */}}
-{{ if or (gt $args.gutter "0") ($args.wrapper) }}<div class="{{ with $args.gutter }}g-{{ . }}{{ end }} {{ $args.wrapper }}">{{ end }}
+{{ if or (gt $args.gutter "0") ($args.wrapper) }}<div class="{{ with $args.gutter }}g-{{ . }}{{ end }} {{ $args.wrapper }}{{ if $alignRows }} card-align-rows-wrap{{ end }}">{{ end }}
 {{ $imgOnly := and (eq $args.headerStyle "none") (eq $args.bodyStyle "none") (eq $args.footerStyle "none") }}
 
 {{- if and (hasPrefix $args.orientation "horizontal") (not $imgOnly) -}}
@@ -309,6 +321,8 @@
                             "owner"       $args.page
                             "label"       $ariaLabel
                             "title"       (cond $minimal "" $title)
+                            "subtitle"    $subtitle
+                            "highlight"   $highlight
                             "href"        $href
                             "color"       $args.color
                             "description" (cond $minimal $title $description)
@@ -347,6 +361,103 @@
             </div>
         </div>
     </div>
+{{- else if $alignRows -}}
+    {{/* Render aligned card: always all six bands in a fixed order, empty ones included, so a card
+         that lacks a part keeps its neighbours' parts on their shared lines. A linked card wraps
+         only its title in the stretched link: the link still covers the card, and its accessible
+         name is the title. The link is a block box, as the flex item it is in an unaligned card,
+         so its top padding shows. Subtitle and highlight sit outside the link, so they carry its
+         colour class themselves, as the card text does. A card with a thumbnail carries no
+         padding of its own, so the title, subtitle, highlight and body bands take it as utility
+         classes instead, except in an image-only card (header, body and footer style all none),
+         which pads no band; the media band leaves the image full-bleed. */}}
+    {{- $pad := "" -}}
+    {{- $padTitle := "" -}}
+    {{- $padBody := "" -}}
+    {{- if and $thumbnail (not $imgOnly) -}}
+        {{- $pad = printf " px-%d" $args.padding -}}
+        {{- $padTitle = printf " pt-%d" $args.padding -}}
+        {{- $padBody = printf " pb-%d" $args.padding -}}
+    {{- end -}}
+    {{- $titleClass := cond (and $thumbnail (eq $args.headerStyle "none")) " pt-3" "" -}}
+    {{- $linkClass := "card-body-link" -}}
+    {{- with $args.color }}{{ $linkClass = printf "link-bg-%s" . }}{{ end -}}
+    {{- $cardTitle := cond $minimal "" $title -}}
+    {{- $cardText := cond $minimal $title $description -}}
+    <div class="card card-align-rows{{ with $colorStyle }} {{ . }}{{ end }}{{ with $args.class }} {{ . }}{{ end }} text-{{ $args.align }}{{ if not $thumbnail }} p-{{ $args.padding }}{{ end }}">
+        <div class="card-band card-band-media">
+            {{- if $thumbnail -}}
+                {{- partial $args.hook (merge $thumbnailArgs (dict
+                    "wrapper"  "card-img-wrap"
+                    "class"    (cond $imgOnly "card-img-bg" "card-img-top card-img-bg")
+                    "ratio"    (or $ratio "16x9")
+                )) -}}
+            {{- else if $icon -}}
+                {{- partial "assets/card-icon.html" (dict
+                    "page"         $args.page
+                    "icon"         $icon
+                    "padding"      0
+                    "icon-rounded" $args.iconRounded
+                    "icon-style"   $style
+                    "class"        (printf "mb-3 m-0 text-%s" $args.align)
+                )}}
+            {{- end -}}
+        </div>
+        <div class="card-band card-band-title{{ $pad }}{{ $padTitle }}">
+            {{- if $page }}{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) }}{{ end -}}
+            {{- if $href -}}
+                <a href="{{ $href }}" class="{{ $linkClass }} stretched-link d-block{{ $titleClass }}"
+                    {{- if and $ariaLabel (not (or $cardTitle $args.links)) }} aria-label="{{ $ariaLabel }}"{{ end }}>
+                    {{- if or $cardTitle $args.links -}}
+                        <p class="card-title fs-lg-5 fs-6">
+                            {{- with $cardTitle }}{{ . | $renderPage.RenderString }}{{ end }}
+                            {{ with $args.links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $args.page) }}{{ end -}}
+                            {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "page" $args.page "icon" . "spacing" false) -}}</span>{{- end -}}
+                        </p>
+                    {{- end -}}
+                </a>
+            {{- else if or $cardTitle $args.links -}}
+                <p class="card-title fs-lg-5 fs-6{{ $titleClass }}">
+                    {{- with $cardTitle }}{{ . | $renderPage.RenderString }}{{ end }}
+                    {{ with $args.links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $args.page) }}{{ end -}}
+                </p>
+            {{- end -}}
+        </div>
+        <div class="card-band card-band-subtitle{{ $pad }}">
+            {{- with $subtitle }}<p class="card-text-subtitle{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | $renderPage.RenderString }}</p>{{ end -}}
+        </div>
+        <div class="card-band card-band-highlight{{ $pad }}">
+            {{- with $highlight }}<p class="card-text-highlight{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | $renderPage.RenderString }}</p>{{ end -}}
+        </div>
+        <div class="card-band card-band-body{{ $pad }}{{ $padBody }}">
+            {{- with $cardText }}<div class="card-text{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | safeHTML }}</div>{{ end -}}
+            {{- if $page }}{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.footerStyle "color" $args.color) }}{{ end -}}
+        </div>
+        <div class="card-band card-band-footer">
+            {{- if or $args.buttonLabel $args.button -}}
+                {{- $label := (or $args.buttonLabel $title) | default (T "readMore") -}}
+                {{- $buttonClass := "card-button" -}}
+                {{- $buttonType := (or $args.linkType $args.buttonType) -}}
+                {{- if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end -}}
+                {{- if ne $args.align "start" }}{{ $buttonClass = printf "%s m%s-auto" $buttonClass (cond (eq $args.align "center") "x" "s") }}{{ end -}}
+                {{- $buttonArgs := dict
+                    "page"        $args.page
+                    "title"       $label
+                    "href"        $href
+                    "outline"     true
+                    "button-size" "sm"
+                    "class"       $buttonClass
+                    "link-type"   $buttonType
+                -}}
+                {{- if $buttonIconEnabled }}{{ $buttonArgs = merge $buttonArgs (dict "icon" $cardReadMore) }}{{ end -}}
+                <div class="row">
+                    <div class="col d-flex align-items-end pt-{{ $args.padding }}">
+                        {{- partial "assets/button.html" $buttonArgs -}}
+                    </div>
+                </div>
+            {{- end -}}
+        </div>
+    </div>
 {{- else -}}
     {{/* Render stacked / default card */}}
     {{ $overlay := eq $args.orientation "overlay" }}
@@ -376,6 +487,8 @@
                 "owner"       $args.page
                 "label"       $ariaLabel
                 "title"       (cond $minimal "" $title)
+                "subtitle"    $subtitle
+                "highlight"   $highlight
                 "href"        $href
                 "color"       $args.color
                 "description" (cond $minimal $title $description)

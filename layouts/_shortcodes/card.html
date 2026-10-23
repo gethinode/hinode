@@ -72,6 +72,13 @@
 {{- $linkType := or (partial "utilities/GetArgParent" (dict "page" . "arg" "link-type")) (partial "utilities/GetArgParent" (dict "page" . "arg" "buttonType")) -}}
 {{- $cols := partial "utilities/GetArgParent" (dict "page" . "arg" "cols") -}}
 {{- $scroll := partial "utilities/GetArgParent" (dict "page" . "arg" "scroll") -}}
+{{- /* A card inside an aligned group renders its parts as bands. The group's eligibility rule is
+       repeated here, because an inner card reads the group's raw arguments: alignment applies
+       to stacked cards only, and never to a scroll or bento group. The raw values are compared
+       as text, since a shortcode argument may arrive as a bool or as a string. */ -}}
+{{- $alignRows := eq (printf "%v" (partial "utilities/GetArgParent" (dict "page" . "arg" "align-rows"))) "true" -}}
+{{- $bento := eq (printf "%v" (partial "utilities/GetArgParent" (dict "page" . "arg" "bento"))) "true" -}}
+{{- $alignRows = and $alignRows (not (eq (printf "%v" $scroll) "true")) (not $bento) (eq (or $orientation "stacked") "stacked") -}}
 {{- $wrapper := .Get "wrapper" | default "" -}}
 
 {{/* Override arguments */}}
@@ -99,6 +106,8 @@
         "path"         $path
         "href"         $args.href
         "title"        $title
+        "subtitle"     $args.subtitle
+        "highlight"    $args.highlight
         "exact"        $args.exact
         "class"        $class
         "gutter"       (partial "utilities/OmitEmpty.html" $gutter)
@@ -117,6 +126,7 @@
         "icon-style"   $style
         "subtle"       (partial "utilities/OmitEmpty.html" $subtle)
         "scroll"       (partial "utilities/OmitEmpty.html" $scroll)
+        "align-rows"   (partial "utilities/OmitEmpty.html" $alignRows)
         "wrapper"      $wrapper
         "thumbnail"    $thumbnail
         "loading"      (partial "utilities/OmitEmpty.html" $loading)

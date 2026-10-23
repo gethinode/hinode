@@ -1182,6 +1182,391 @@ FAIL card button icon: {{ $case }}: want={{ $want }} got={{ $got }}
 CARD BUTTON ICON FAILURES: {{ $biFail }}
 
 {{- /*
+    Assertions for the optional `subtitle` and `highlight` fields of a card.
+
+    A pricing-style card needs a short line under its title and an emphasised line (a price)
+    above its body. The fields render inline markdown into plain paragraphs,
+    `card-text-subtitle` and `card-text-highlight`, with no styles of their own; Bootstrap's
+    `.card-subtitle` is avoided on purpose because it zeroes the bottom margin.
+
+    The first three cases pin the rendered markup and its order inside the body - title,
+    subtitle, highlight, then `card-text` - for a stacked card, a linked card and a
+    horizontal card. Each of the three is checked separately because the body template has
+    a linked and a plain branch, and the horizontal card calls it from a separate place. The
+    linked card also requires both paragraphs to sit inside the stretched link, so the whole
+    card stays one link. The fourth case is the regression guard: a card that sets neither
+    field emits neither class. The fifth pins that `body-style: none` drops both fields with
+    the rest of the body. The last case goes through a rendered page, because the shortcode
+    resolves its own arguments and a direct partial call would bypass them.
+*/ -}}
+{{- /* Byte offset of `sub` in `s`, or -1 when absent; Hugo's strings namespace has no Index. */ -}}
+{{- define "_partials/inline/test-str-index.html" -}}
+    {{- $i := -1 -}}
+    {{- if strings.Contains .s .sub }}{{ $i = len (index (split .s .sub) 0) }}{{ end -}}
+    {{- return $i -}}
+{{- end -}}
+{{- $stFail := 0 -}}
+{{- $stBase := dict
+      "page"         $cardPage
+      "title"        "Free"
+      "subtitle"     "For *developers*."
+      "highlight"    "**€0** per month"
+      "description"  "<ul><li>x</li></ul>"
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- $stSub := `<p class="card-text-subtitle">For <em>developers</em>.</p>` -}}
+{{- $stHigh := `<p class="card-text-highlight"><strong>€0</strong> per month</p>` -}}
+{{- $stCases := slice
+  (dict "case" "card renders subtitle and highlight" "args" (dict) "check" "order")
+  (dict "case" "linked card renders subtitle inside the link" "args" (dict "href" "/blog/toc-override/") "check" "link")
+  (dict "case" "horizontal card renders subtitle and highlight" "args" (dict "orientation" "horizontal") "check" "order")
+  (dict "case" "card without the fields is unchanged" "args" (dict) "check" "absent" "plain" true)
+  (dict "case" "body-style none drops subtitle and highlight" "args" (dict "body-style" "none") "check" "absent")
+  (dict "case" "body-style minimal drops subtitle and highlight" "args" (dict "body-style" "minimal") "check" "absent")
+-}}
+{{- $stPlain := dict
+      "page"         $cardPage
+      "title"        "Free"
+      "description"  "<ul><li>x</li></ul>"
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- range $stCases -}}
+{{- $base := cond (.plain | default false) $stPlain $stBase -}}
+{{- $html := replaceRE `>\s+<` "><" (replaceRE `\s+` " " (partial "assets/card.html" (merge $base .args))) -}}
+{{- $hasSub := strings.Contains $html $stSub -}}
+{{- $hasHigh := strings.Contains $html $stHigh -}}
+{{- $got := false -}}
+{{- $detail := printf "subtitle=%v highlight=%v" $hasSub $hasHigh -}}
+{{- if in (slice "order" "link") .check -}}
+    {{- $iTitle := partial "inline/test-str-index.html" (dict "s" $html "sub" "card-title") -}}
+    {{- $iSub := partial "inline/test-str-index.html" (dict "s" $html "sub" "card-text-subtitle") -}}
+    {{- $iHigh := partial "inline/test-str-index.html" (dict "s" $html "sub" "card-text-highlight") -}}
+    {{- $iText := partial "inline/test-str-index.html" (dict "s" $html "sub" `<div class="card-text`) -}}
+    {{- $got = and $hasSub $hasHigh (ge $iTitle 0) (lt $iTitle $iSub) (lt $iSub $iHigh) (lt $iHigh $iText) -}}
+    {{- $detail = printf "%s order=title:%d subtitle:%d highlight:%d text:%d" $detail $iTitle $iSub $iHigh $iText -}}
+    {{- if eq .check "link" -}}
+        {{- $iOpen := partial "inline/test-str-index.html" (dict "s" $html "sub" "<a ") -}}
+        {{- $iClose := partial "inline/test-str-index.html" (dict "s" $html "sub" "</a>") -}}
+        {{- $got = and $got (ge $iOpen 0) (lt $iOpen $iSub) (lt $iHigh $iClose) -}}
+        {{- $detail = printf "%s link=open:%d close:%d" $detail $iOpen $iClose -}}
+    {{- end -}}
+{{- else -}}
+    {{- /* The card must still render, so an empty result cannot pass as "absent". */ -}}
+    {{- $got = and (strings.Contains $html `class="card `) (not (or (strings.Contains $html "card-text-subtitle") (strings.Contains $html "card-text-highlight"))) -}}
+{{- end -}}
+{{- if $got }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}: {{ $detail }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "card subtitle mismatch: case=%q %s" .case $detail -}}
+{{- end -}}
+{{- end -}}
+{{- $stHtml := replaceRE `\s+` " " (site.GetPage "/blog/card-subtitle").Content -}}
+{{- $stShortcode := and (strings.Contains $stHtml `card-text-subtitle">S<`) (strings.Contains $stHtml `card-text-highlight">H<`) -}}
+{{- if $stShortcode }}
+PASS shortcode passes subtitle and highlight
+{{- else }}
+FAIL shortcode passes subtitle and highlight: got={{ $stHtml }}
+{{- $stFail = add $stFail 1 -}}
+{{- errorf "card subtitle mismatch: case=%q got=%q" "shortcode passes subtitle and highlight" $stHtml -}}
+{{- end }}
+
+CARD SUBTITLE FAILURES: {{ $stFail }}
+
+{{- /*
+    Assertions for card row alignment (`align-rows` on a card group).
+
+    An opted-in group lines up its cards' parts across each visual row with CSS subgrid. For
+    that to work, every element between the row and a card's parts has to be marked so the
+    stylesheet can pass the grid through, and every card has to render the same six bands in
+    the same order, empty ones included, so a card that lacks a field keeps its neighbours on
+    their lines. These cases pin that markup: the row class, the wrapper class on the `.col`
+    (list route) or the card's own gutter div (shortcode route), the card class, and the six
+    bands. A linked card wraps only its title in the stretched link, so the link still covers
+    the card and its accessible name is the title. Each band's content is pinned as well:
+    media holds the icon or thumbnail, title the header caption and title, then subtitle and
+    highlight, body the card text and footer caption, and footer the button row.
+
+    The regression guards pin the opt-in: a group that leaves `align-rows` unset renders the
+    same as one that sets it false, scroll, bento and horizontal groups ignore it, and an
+    element's own `align-rows` does not override its group. The shortcode cases go through
+    rendered pages, because the inner cards resolve the group's arguments themselves and
+    only a page runs that path: one has no gutter, so the cards sit directly in the row with
+    no wrapper, and one holds a bento, a scroll, a horizontal and an `align-rows="false"`
+    group. Each of those groups has two cards, because a group with one inner card fails
+    its `cards` type check.
+*/ -}}
+{{- define "_partials/inline/test-align-cards.html" -}}
+    {{- /* Checks every aligned card in .html; returns a list of problems (empty when fine). */ -}}
+    {{- $bands := slice "media" "title" "subtitle" "highlight" "body" "footer" -}}
+    {{- $errs := slice -}}
+    {{- $cards := after 1 (split .html `<div class="card card-align-rows`) -}}
+    {{- if ne (len $cards) .want -}}
+        {{- $errs = $errs | append (printf "cards=%d want=%d" (len $cards) .want) -}}
+    {{- end -}}
+    {{- range $i, $card := $cards -}}
+        {{- $prev := -1 -}}
+        {{- range $band := $bands -}}
+            {{- $needle := printf `class="card-band card-band-%s` $band -}}
+            {{- $n := sub (len (split $card $needle)) 1 -}}
+            {{- $at := partial "inline/test-str-index.html" (dict "s" $card "sub" $needle) -}}
+            {{- if ne $n 1 }}{{ $errs = $errs | append (printf "card %d: %s x%d" $i $band $n) }}{{ end -}}
+            {{- if le $at $prev }}{{ $errs = $errs | append (printf "card %d: %s out of order" $i $band) }}{{ end -}}
+            {{- $prev = $at -}}
+        {{- end -}}
+    {{- end -}}
+    {{- return $errs -}}
+{{- end -}}
+{{- define "_partials/inline/test-align-norm.html" -}}
+    {{- return replaceRE `>\s+<` "><" (replaceRE `\s+` " " .) -}}
+{{- end -}}
+{{- define "_partials/inline/test-align-bands.html" -}}
+    {{- /* Splits one aligned card into a dict from band name to that band's markup, from its
+           class list up to where the next band starts. */ -}}
+    {{- $out := dict -}}
+    {{- range after 1 (split . `<div class="card-band card-band-`) -}}
+        {{- $out = merge $out (dict (index (findRE `^[a-z]+` . 1) 0) (printf "card-band-%s" .)) -}}
+    {{- end -}}
+    {{- return $out -}}
+{{- end -}}
+{{- define "_partials/inline/test-align-contents.html" -}}
+    {{- /* Each .want entry (band, needle) has to sit in its own band of .card and in no other;
+           returns a list of problems (empty when fine). */ -}}
+    {{- $bands := partial "inline/test-align-bands.html" .card -}}
+    {{- $errs := slice -}}
+    {{- if ne (len $bands) 6 }}{{ $errs = $errs | append (printf "bands=%d" (len $bands)) }}{{ end -}}
+    {{- range $want := .want -}}
+        {{- range $name, $html := $bands -}}
+            {{- $has := strings.Contains $html $want.needle -}}
+            {{- if and (eq $name $want.band) (not $has) }}{{ $errs = $errs | append (printf "%s band lacks %s" $name $want.needle) }}{{ end -}}
+            {{- if and (ne $name $want.band) $has }}{{ $errs = $errs | append (printf "%s band has %s" $name $want.needle) }}{{ end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- return $errs -}}
+{{- end -}}
+{{- $arFail := 0 -}}
+{{- $arList := slice
+      (dict "title" "Free" "href" "/blog/toc-override/" "subtitle" "For *developers*." "highlight" "**€0** per month" "description" "<ul><li>x</li></ul>" "button" true "button-label" "Go")
+      (dict "title" "Team" "description" "<ul><li>y</li></ul>")
+-}}
+{{- $arBase := dict
+      "page"         $cardPage
+      "list"         $arList
+      "cols"         3
+      "header-style" "none"
+      "footer-style" "none"
+-}}
+{{- $arOn := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "align-rows" true))) -}}
+{{- $arUnset := partial "inline/test-align-norm.html" (partial "assets/card-group.html" $arBase) -}}
+{{- $arOff := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "align-rows" false))) -}}
+{{- $arResults := slice -}}
+
+{{- /* aligned group marks row, wrappers and cards */ -}}
+{{- $rowOk := gt (len (findRE `class="row[^"]*\bcard-group-align-rows\b[^"]*"` $arOn)) 0 -}}
+{{- $rowCols := findRE `class="row[^"]*\bcard-group-align-rows\b[^"]*"` $arOn -}}
+{{- $rowOk = and (eq (len $rowCols) 1) (strings.Contains (index $rowCols 0 | default "") "row-cols-") (eq (sub (len (split $arOn "card-group-align-rows")) 1) 1) -}}
+{{- $wraps := sub (len (split $arOn "card-align-rows-wrap")) 1 -}}
+{{- $cardsN := sub (len (split $arOn "card card-align-rows")) 1 -}}
+{{- $arResults = $arResults | append (dict "case" "aligned group marks row, wrappers and cards"
+      "ok" (and $rowOk (eq $wraps 2) (eq $cardsN 2))
+      "detail" (printf "row=%v wraps=%d cards=%d" $rowOk $wraps $cardsN)) -}}
+
+{{- /* aligned card has six bands in order (and keeps its empty ones: the second element has
+       no icon, subtitle, highlight or button) */ -}}
+{{- $bandErrs := partial "inline/test-align-cards.html" (dict "html" $arOn "want" 2) -}}
+{{- $arResults = $arResults | append (dict "case" "aligned card has six bands in order"
+      "ok" (eq (len $bandErrs) 0) "detail" (delimit $bandErrs "; ")) -}}
+{{- $second := index (after 1 (split $arOn `<div class="card card-align-rows`)) 1 | default "" -}}
+{{- $emptyErrs := partial "inline/test-align-cards.html" (dict "html" (printf `<div class="card card-align-rows%s` $second) "want" 1) -}}
+{{- $emptyOk := and (eq (len $emptyErrs) 0) (not (strings.Contains $second "card-text-subtitle")) (not (strings.Contains $second "card-button")) -}}
+{{- $arResults = $arResults | append (dict "case" "aligned card keeps empty bands"
+      "ok" $emptyOk "detail" (printf "%s second=%s" (delimit $emptyErrs "; ") $second)) -}}
+
+{{- /* aligned linked card: the stretched link wraps the title only */ -}}
+{{- $first := index (after 1 (split $arOn `<div class="card card-align-rows`)) 0 | default "" -}}
+{{- $iTitleBand := partial "inline/test-str-index.html" (dict "s" $first "sub" "card-band-title") -}}
+{{- $iStretch := partial "inline/test-str-index.html" (dict "s" $first "sub" "stretched-link") -}}
+{{- $iCardTitle := partial "inline/test-str-index.html" (dict "s" $first "sub" `class="card-title`) -}}
+{{- $iClose := partial "inline/test-str-index.html" (dict "s" $first "sub" "</a>") -}}
+{{- $iSubBand := partial "inline/test-str-index.html" (dict "s" $first "sub" "card-band-subtitle") -}}
+{{- $iBodyBand := partial "inline/test-str-index.html" (dict "s" $first "sub" "card-band-body") -}}
+{{- $linkOk := and (strings.Contains $first `<a href="/blog/toc-override/" class="card-body-link stretched-link d-block">`) (not (strings.Contains $first "%!")) (ge $iTitleBand 0) (lt $iTitleBand $iStretch) (lt $iStretch $iCardTitle) (lt $iCardTitle $iClose) (lt $iClose $iSubBand) (lt $iClose $iBodyBand) (eq (sub (len (split $first "stretched-link")) 1) 1) -}}
+{{- $arResults = $arResults | append (dict "case" "aligned linked card"
+      "ok" $linkOk "detail" (printf "titleband:%d stretched:%d title:%d close:%d subband:%d bodyband:%d" $iTitleBand $iStretch $iCardTitle $iClose $iSubBand $iBodyBand)) -}}
+
+{{- /* unaligned group is unchanged */ -}}
+{{- $offOk := and (eq $arUnset $arOff) (strings.Contains $arUnset `class="card `) (not (strings.Contains $arUnset "align-rows")) (not (strings.Contains $arUnset "card-band")) -}}
+{{- $arResults = $arResults | append (dict "case" "unaligned group is unchanged"
+      "ok" $offOk "detail" (printf "equal=%v unset=%s" (eq $arUnset $arOff) $arUnset)) -}}
+
+{{- /* ineligible groups ignore align-rows */ -}}
+{{- range $mode := slice (dict "scroll" true) (dict "bento" true) (dict "orientation" "horizontal") -}}
+    {{- $html := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase $mode (dict "align-rows" true))) -}}
+    {{- $ok := and (strings.Contains $html `class="card `) (not (strings.Contains $html "align-rows")) (not (strings.Contains $html "card-band")) -}}
+    {{- $arResults = $arResults | append (dict "case" (printf "ineligible groups ignore align-rows: %v" $mode)
+          "ok" $ok "detail" $html) -}}
+{{- end -}}
+
+{{- /* spacer and separator are not rendered in an aligned group, while they still are without it */ -}}
+{{- $spOn := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "align-rows" true "spacer" true "separator" true))) -}}
+{{- $spOff := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "spacer" true "separator" true))) -}}
+{{- $spOk := and (strings.Contains $spOn "card-group-align-rows") (not (strings.Contains $spOn `class="spacer"`)) (not (strings.Contains $spOn "<hr>")) (strings.Contains $spOff `class="spacer"`) (strings.Contains $spOff "<hr>") -}}
+{{- $arResults = $arResults | append (dict "case" "aligned group drops spacer and separator"
+      "ok" $spOk "detail" $spOn) -}}
+
+{{- /* shortcode group aligns */ -}}
+{{- $scHtml := partial "inline/test-align-norm.html" (site.GetPage "/blog/card-align-rows").Content -}}
+{{- $scRows := findRE `class="row[^"]*\bcard-group-align-rows\b[^"]*"` $scHtml -}}
+{{- $scRowOk := and (eq (len $scRows) 1) (strings.Contains (index $scRows 0 | default "") "row-cols-") (strings.Contains (index $scRows 0 | default "") "g-3") -}}
+{{- $scWraps := sub (len (split $scHtml "card-align-rows-wrap")) 1 -}}
+{{- $scErrs := partial "inline/test-align-cards.html" (dict "html" $scHtml "want" 2) -}}
+{{- $scSub := and (strings.Contains $scHtml `card-text-subtitle card-body-link">For <em>developers</em>.<`) (strings.Contains $scHtml `card-text-highlight"><strong>€9</strong> per month<`) -}}
+{{- $arResults = $arResults | append (dict "case" "shortcode group aligns"
+      "ok" (and $scRowOk (eq $scWraps 2) (eq (len $scErrs) 0) $scSub)
+      "detail" (printf "row=%v wraps=%d fields=%v bands=%s html=%s" $scRowOk $scWraps $scSub (delimit $scErrs "; ") $scHtml)) -}}
+
+{{- /* shortcode group without gutter aligns: cards are direct children of the row */ -}}
+{{- $ngHtml := partial "inline/test-align-norm.html" (site.GetPage "/blog/card-align-rows-nogutter").Content -}}
+{{- $ngFirst := gt (len (findRE `class="row[^"]*\bcard-group-align-rows\b[^"]*"><div class="card card-align-rows` $ngHtml)) 0 -}}
+{{- $ngNext := sub (len (split $ngHtml `<div class="card-band card-band-footer"></div></div><div class="card card-align-rows`)) 1 -}}
+{{- $ngWraps := sub (len (split $ngHtml "card-align-rows-wrap")) 1 -}}
+{{- $ngErrs := partial "inline/test-align-cards.html" (dict "html" $ngHtml "want" 2) -}}
+{{- $arResults = $arResults | append (dict "case" "shortcode group without gutter aligns"
+      "ok" (and $ngFirst (eq $ngNext 1) (eq $ngWraps 0) (eq (len $ngErrs) 0))
+      "detail" (printf "first=%v next=%d wraps=%d bands=%s html=%s" $ngFirst $ngNext $ngWraps (delimit $ngErrs "; ") $ngHtml)) -}}
+
+{{- /* shortcode groups that are not eligible ignore align-rows: the inner cards repeat the
+       group's eligibility rule, so each guard is exercised through a rendered page */ -}}
+{{- $ieGroups := after 1 (split (partial "inline/test-align-norm.html" (site.GetPage "/blog/card-align-rows-ineligible").Content) `<div class="container-fluid`) -}}
+{{- range $i, $label := slice "bento" "scroll" "horizontal" `align-rows="false"` -}}
+    {{- $html := index $ieGroups $i | default "" -}}
+    {{- $ok := and (strings.Contains $html `class="card `) (not (strings.Contains $html "align-rows")) (not (strings.Contains $html "card-band")) -}}
+    {{- $arResults = $arResults | append (dict "case" (printf "ineligible shortcode group ignores align-rows: %s" $label)
+          "ok" $ok "detail" (printf "groups=%d html=%s" (len $ieGroups) $html)) -}}
+{{- end -}}
+
+{{- /* the group decides: an element's own align-rows does not reach the card when the group
+       does not align */ -}}
+{{- $ownList := slice (dict "title" "Own" "subtitle" "For *developers*." "align-rows" true) -}}
+{{- range $mode := slice (dict) (dict "scroll" true) (dict "bento" true) (dict "orientation" "horizontal") -}}
+    {{- $html := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "list" $ownList) $mode)) -}}
+    {{- $ok := and (strings.Contains $html `class="card `) (not (strings.Contains $html "align-rows")) (not (strings.Contains $html "card-band")) -}}
+    {{- $arResults = $arResults | append (dict "case" (printf "unaligned group overrides an element's own align-rows: %v" $mode)
+          "ok" $ok "detail" $html) -}}
+{{- end -}}
+
+{{- /* each band holds its own part and no other: media = icon or thumbnail, title = header
+       caption + title, then subtitle, highlight, body = card text + footer caption, and
+       footer = the button row */ -}}
+{{- $bcList := slice (dict
+      "path"         "/blog/without-exact"
+      "title"        "Alpha"
+      "icon"         "fas star"
+      "subtitle"     "Sub *one*"
+      "highlight"    "High *one*"
+      "description"  "<ul><li>desc-one</li></ul>"
+      "button"       true
+      "button-label" "Go"
+) -}}
+{{- range $caption := slice (dict "header-style" "publication" "band" "title") (dict "footer-style" "publication" "band" "body") -}}
+    {{- $html := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "list" $bcList "align-rows" true) (dict "header-style" (index $caption "header-style" | default "none") "footer-style" (index $caption "footer-style" | default "none")))) -}}
+    {{- $card := index (after 1 (split $html `<div class="card card-align-rows`)) 0 | default "" -}}
+    {{- $errs := partial "inline/test-align-contents.html" (dict "card" $card "want" (slice
+          (dict "band" "media"     "needle" `class="card-icon`)
+          (dict "band" $caption.band "needle" "text-uppercase")
+          (dict "band" "title"     "needle" "Alpha")
+          (dict "band" "subtitle"  "needle" ">Sub <em>one</em></p>")
+          (dict "band" "highlight" "needle" ">High <em>one</em></p>")
+          (dict "band" "body"      "needle" "<li>desc-one</li>")
+          (dict "band" "footer"    "needle" "card-button")
+    )) -}}
+    {{- $arResults = $arResults | append (dict "case" (printf "aligned bands hold their own parts: caption in %s band" $caption.band)
+          "ok" (eq (len $errs) 0) "detail" (printf "%s card=%s" (delimit $errs "; ") $card)) -}}
+{{- end -}}
+
+{{- /* an aligned thumbnail card keeps the image full-bleed and pads the bands that the card
+       body pads in an unaligned card; an image-only card (header, body and footer style all
+       none) pads no band and is not covered here. The probe hook echoes what the card asks of
+       its image */ -}}
+{{- $thList := slice
+      (dict "title" "Linked" "href" "/blog/toc-override/" "thumbnail" "/img/probe.jpg" "hook" "tests/thumbnail-probe.html" "subtitle" "Sub *one*" "highlight" "High *one*" "description" "<ul><li>t</li></ul>")
+      (dict "title" "Plain" "thumbnail" "/img/probe.jpg" "hook" "tests/thumbnail-probe.html" "subtitle" "Sub *two*" "highlight" "High *two*" "description" "<ul><li>u</li></ul>")
+-}}
+{{- $thHtml := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "list" $thList "align-rows" true))) -}}
+{{- $thCards := after 1 (split $thHtml `<div class="card card-align-rows`) -}}
+{{- $thErrs := slice -}}
+{{- if ne (len $thCards) 2 }}{{ $thErrs = $thErrs | append (printf "cards=%d" (len $thCards)) }}{{ end -}}
+{{- range $i, $card := $thCards -}}
+    {{- if strings.Contains (index (split $card ">") 0) " p-" }}{{ $thErrs = $thErrs | append (printf "card %d pads itself" $i) }}{{ end -}}
+    {{- range partial "inline/test-align-contents.html" (dict "card" $card "want" (slice
+          (dict "band" "media"     "needle" `card-band-media">`)
+          (dict "band" "media"     "needle" `class="thumbnail-probe" data-wrapper="card-img-wrap" data-class="card-img-top card-img-bg" data-ratio="16x9"`)
+          (dict "band" "title"     "needle" `card-band-title px-3 pt-3">`)
+          (dict "band" "subtitle"  "needle" `card-band-subtitle px-3">`)
+          (dict "band" "highlight" "needle" `card-band-highlight px-3">`)
+          (dict "band" "body"      "needle" `card-band-body px-3 pb-3">`)
+          (dict "band" "footer"    "needle" `card-band-footer">`)
+    )) -}}
+        {{- $thErrs = $thErrs | append (printf "card %d: %s" $i .) -}}
+    {{- end -}}
+{{- end -}}
+{{- $thRatio := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "list" $thList "align-rows" true "ratio" "4x3"))) -}}
+{{- $thRatioN := sub (len (split $thRatio `data-ratio="4x3"`)) 1 -}}
+{{- $arResults = $arResults | append (dict "case" "aligned thumbnail card pads its bands"
+      "ok" (and (eq (len $thErrs) 0) (eq $thRatioN 2))
+      "detail" (printf "%s ratio4x3=%d html=%s" (delimit $thErrs "; ") $thRatioN $thHtml)) -}}
+
+{{- /* the space above a thumbnail card's title (pt-3 without a header) lands on a block box,
+       so it shows in a linked card too: the stretched link is display:block, as the flex
+       item it is in an unaligned card */ -}}
+{{- $thLinked := index $thCards 0 | default "" -}}
+{{- $thPlain := index $thCards 1 | default "" -}}
+{{- $gapOk := and (strings.Contains $thLinked `<a href="/blog/toc-override/" class="card-body-link stretched-link d-block pt-3">`) (strings.Contains $thPlain `<p class="card-title fs-lg-5 fs-6 pt-3">`) -}}
+{{- $arResults = $arResults | append (dict "case" "aligned thumbnail card keeps the space above its title"
+      "ok" $gapOk "detail" (printf "linked=%s plain=%s" $thLinked $thPlain)) -}}
+
+{{- /* that extra pt-3 applies only when the header style is none, as in an unaligned card:
+       with a header style set, neither the link nor the title carries it */ -}}
+{{- $thHdr := after 1 (split (partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "list" $thList "align-rows" true "header-style" "full")))) `<div class="card card-align-rows`) -}}
+{{- $thHdrLinked := index $thHdr 0 | default "" -}}
+{{- $thHdrPlain := index $thHdr 1 | default "" -}}
+{{- $hdrOk := and (eq (len $thHdr) 2) (strings.Contains $thHdrLinked `<a href="/blog/toc-override/" class="card-body-link stretched-link d-block">`) (strings.Contains $thHdrPlain `<p class="card-title fs-lg-5 fs-6">`) -}}
+{{- $arResults = $arResults | append (dict "case" "aligned thumbnail card with a header adds no space above its title"
+      "ok" $hdrOk "detail" (printf "linked=%s plain=%s" $thHdrLinked $thHdrPlain)) -}}
+
+{{- /* subtitle and highlight sit outside the link in an aligned card, so a linked card gives
+       them the link's colour class, as it does its card text; an unlinked card does not */ -}}
+{{- $clPrimary := partial "inline/test-align-norm.html" (partial "assets/card-group.html" (merge $arBase (dict "align-rows" true "color" "primary"))) -}}
+{{- $clFirst := index (after 1 (split $clPrimary `<div class="card card-align-rows`)) 0 | default "" -}}
+{{- $clOk := and
+      (strings.Contains $first `<p class="card-text-subtitle card-body-link">`)
+      (strings.Contains $first `<p class="card-text-highlight card-body-link">`)
+      (strings.Contains $clFirst `class="link-bg-primary stretched-link d-block">`)
+      (strings.Contains $clFirst `<p class="card-text-subtitle link-bg-primary">`)
+      (strings.Contains $clFirst `<p class="card-text-highlight link-bg-primary">`)
+      (strings.Contains $clFirst `<div class="card-text link-bg-primary">`)
+      (strings.Contains $thPlain `<p class="card-text-subtitle">`)
+      (strings.Contains $thPlain `<p class="card-text-highlight">`)
+-}}
+{{- $arResults = $arResults | append (dict "case" "aligned linked card colours subtitle and highlight as its link"
+      "ok" $clOk "detail" (printf "plain=%s primary=%s unlinked=%s" $first $clFirst $thPlain)) -}}
+
+{{- range $arResults -}}
+{{- if .ok }}
+PASS {{ .case }}
+{{- else }}
+FAIL {{ .case }}: {{ .detail }}
+{{- $arFail = add $arFail 1 -}}
+{{- errorf "card row alignment mismatch: case=%q %s" .case .detail -}}
+{{- end -}}
+{{- end }}
+
+CARD ROW ALIGNMENT FAILURES: {{ $arFail }}
+
+{{- /*
     Assertions for the companion dropdown and the identifiers in assets/nav.html.
 
     `responsive` hides the control group below the breakpoint and puts a dropdown in its place.

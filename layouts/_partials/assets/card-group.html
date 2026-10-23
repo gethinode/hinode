@@ -134,7 +134,12 @@
 
 {{- if and (eq $args.cols "1") (eq $orientation "horizontal") }}{{ $orientation = "horizontal-sm" }}{{ end -}}
 
-{{- if not $args.spacer -}}
+{{/* Align card parts across each visual row (opt-in). Only stacked groups in a regular grid are
+     eligible; for scroll, bento and other orientations the argument is a silent no-op. Spacer and
+     separator are not rendered when alignment is active. */}}
+{{- $alignRows := and $args.alignRows (eq $orientation "stacked") (not $args.scroll) (not $args.bento) -}}
+
+{{- if or (not $args.spacer) $alignRows -}}
     {{- $class = trim (printf "%s h-100" (or $class "")) " " -}}
 {{- end -}}
 
@@ -143,7 +148,8 @@
     <div class="container-fluid {{ if $args.scroll }}card-container-wrapper{{ end }} p-0 {{ $args.wrapper }}">
         <div class="row{{ with $args.gutter }} g-{{ . }}{{ end }}
         {{- if $args.scroll }} d-flex flex-row flex-nowrap card-container scrollbar-horizontal pb-4 w-100 {{ end -}}
-        {{- if $args.bento }}{{ with $args.valign }} align-items-{{ . }}{{ end }}{{ else }} {{ $colGrid }}{{ end }}">
+        {{- if $args.bento }}{{ with $args.valign }} align-items-{{ . }}{{ end }}{{ else }} {{ $colGrid }}{{ end }}
+        {{- if $alignRows }} card-group-align-rows{{ end }}">
             {{- range $index, $element := $elements -}}
                 {{- $params := (dict
                     "page"          $args.page
@@ -168,6 +174,9 @@
                     "icon-rounded"  $args.iconRounded
                 ) -}}
                 {{- if isset $args "buttonIcon" }}{{ $params = merge $params (dict "button-icon" $args.buttonIcon) }}{{ end -}}
+                {{- /* The group decides: an element's own align-rows is overridden, and a card in an
+                       unaligned group without one gets no extra argument. */ -}}
+                {{- if or $alignRows (isset $element "align-rows") }}{{ $params = merge $params (dict "align-rows" $alignRows) }}{{ end -}}
                 {{- $params = merge $element $params -}}
                 {{- if $args.scroll -}}
                     {{- $width := (partial "inline/style.html" (dict "styles" $args.styles "index" $index "key" "width" "default" "3")) -}}
@@ -177,11 +186,11 @@
                 {{- end -}}
 
                 {{/* add col-$width */}}
-                <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}">
-                    {{- if $args.spacer -}}<div class="spacer"></div>{{ end -}}
+                <div class="{{ with $cardWrapper }}{{ . }}{{ else }}col{{ end }}{{ if $alignRows }} card-align-rows-wrap{{ end }}">
+                    {{- if and $args.spacer (not $alignRows) -}}<div class="spacer"></div>{{ end -}}
                     {{- partial $args.hook $params -}}
                 </div>
-                {{- if and (lt $index (sub $max 1)) $args.separator -}}
+                {{- if and (lt $index (sub $max 1)) $args.separator (not $alignRows) -}}
                     <div class="col d-block d-sm-none">
                         <hr>
                     </div>
