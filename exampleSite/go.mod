@@ -10,6 +10,6 @@ require (
 	github.com/gethinode/mod-cookieyes/v3 v3.1.1 // indirect
 	github.com/gethinode/mod-docs v1.16.2 // indirect
 	github.com/gethinode/mod-fontawesome/v6 v6.1.5 // indirect
-	github.com/gethinode/mod-utils/v6 v6.17.0 // indirect
+	github.com/gethinode/mod-utils/v6 v6.18.0 // indirect
 	github.com/twbs/icons v1.13.2 // indirect
 )

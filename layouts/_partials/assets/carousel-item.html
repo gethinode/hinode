@@ -28,7 +28,9 @@
             "loading"  $args.loading
             "title"    (or $args.title (T "image"))
         ) }}
-        <div class="carousel-caption gradient"></div>
+        {{ if $args.overlay }}
+            <div class="carousel-caption gradient"></div>
+        {{ end }}
         {{ with $args.caption }}
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center align-items-end h-100 w-100 p-4">{{ . }}</div>

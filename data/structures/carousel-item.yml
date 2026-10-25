@@ -1,6 +1,9 @@
 comment: Renders a carousel item with a responsive image.
 icon: photo
 arguments:
+  overlay:
+    release: v3.44.0
+    group: partial
   page:
   src:
     preview: true
