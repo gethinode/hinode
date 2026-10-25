@@ -1,0 +1,64 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Swaps an SVG image for a raster file with the same base name, when
+     the site provides one, so that a link preview gets a raster image.
+     Hugo cannot process an SVG into a raster image, so the site has to
+     provide the raster file. This helper only finds it. The extension
+     test is case-insensitive. The siblings are tried in the order png,
+     jpg, jpeg, webp, each with a lowercase extension. When no sibling
+     exists, the input is returned unchanged.
+
+     Pass one of these two arguments, plus the page:
+     "src"       Path of the image. A sibling is looked up with
+                 utilities/GetResource.html, as a page resource and
+                 then as a global resource under assets/, and then as a
+                 file under static/. Returns the path of the sibling,
+                 or src. A remote URL is not looked up, and neither is
+                 an SVG with an #anchor (a sprite), whose extension is
+                 not .svg: both come back unchanged.
+     "resource"  A page resource. The sibling is looked up among the
+                 resources of the same page only. Returns the sibling
+                 resource, or the resource itself.
+     "page"      The page the image belongs to. */}}
+
+{{- $page := .page -}}
+{{- $exts := slice "png" "jpg" "jpeg" "webp" -}}
+{{- $result := "" -}}
+
+{{- with .resource -}}
+    {{- $result = . -}}
+    {{- $name := .Name -}}
+    {{- if eq (lower (path.Ext $name)) ".svg" -}}
+        {{- $base := strings.TrimSuffix (path.Ext $name) $name -}}
+        {{- range $exts -}}
+            {{- if eq $result.Name $name -}}
+                {{- with $page.Resources.Get (printf "%s.%s" $base .) -}}
+                    {{- $result = . -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
+    {{- $src := .src -}}
+    {{- $result = $src -}}
+    {{- $remote := or (hasPrefix (lower $src) "http") (hasPrefix $src "//") -}}
+    {{- if and (not $remote) (eq (lower (path.Ext $src)) ".svg") -}}
+        {{- $base := strings.TrimSuffix (path.Ext $src) $src -}}
+        {{- range $exts -}}
+            {{- if eq $result $src -}}
+                {{- $candidate := printf "%s.%s" $base . -}}
+                {{- $found := partial "utilities/GetResource.html" (dict "url" $candidate "page" $page) -}}
+                {{- if not $found -}}
+                    {{- $found = fileExists (path.Join "/static" (strings.TrimPrefix "/static" $candidate)) -}}
+                {{- end -}}
+                {{- if $found }}{{ $result = $candidate }}{{ end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

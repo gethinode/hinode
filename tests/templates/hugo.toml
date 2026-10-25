@@ -234,3 +234,46 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/head/structured-data.html'
   target = 'layouts/_partials/head/structured-data.html'
+
+# The raster fallback of an SVG thumbnail is asserted through the real
+# head partials, so the image pipeline they call is mounted rather than
+# stubbed: assets/helpers/image-dimension.html and the hugo image
+# adapter, which processes a raster sibling into the og:image URL. The
+# fixture images live in this site's own `assets` and `static`, restated
+# here for the same reason `content` and `layouts` are.
+[[module.mounts]]
+  source = 'assets'
+  target = 'assets'
+[[module.mounts]]
+  source = 'static'
+  target = 'static'
+[[module.mounts]]
+  source = '../../layouts/_partials/head/seo.html'
+  target = 'layouts/_partials/head/seo.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/head/opengraph.html'
+  target = 'layouts/_partials/head/opengraph.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/head/twitter_cards.html'
+  target = 'layouts/_partials/head/twitter_cards.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/helpers'
+  target = 'layouts/_partials/assets/helpers'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/adapters/hugo.html'
+  target = 'layouts/_partials/assets/adapters/hugo.html'
+[[module.mounts]]
+  source = '../../data/structures/image-dimension.yml'
+  target = 'data/structures/image-dimension.yml'
+[[module.mounts]]
+  source = '../../data/structures/image-set.yml'
+  target = 'data/structures/image-set.yml'
+[[module.mounts]]
+  source = '../../data/structures/image-adapter.yml'
+  target = 'data/structures/image-adapter.yml'
+[[module.mounts]]
+  source = '../../data/structures/get-dimension.yml'
+  target = 'data/structures/get-dimension.yml'
+[[module.mounts]]
+  source = '../../data/structures/image-rewrite.yml'
+  target = 'data/structures/image-rewrite.yml'

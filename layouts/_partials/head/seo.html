@@ -21,7 +21,34 @@
 {{ if reflect.IsMap .Params.Thumbnail }}{{ $thumbnail = .Params.Thumbnail.url }}{{ else }}{{ $thumbnail = .Params.Thumbnail }}{{ end }}
 
 {{ if $thumbnail -}}
-    {{ $imgURL := index (partial "assets/helpers/image-dimension.html" (dict "src" $thumbnail "image-width" 1280 "image-height" 640 "page" .)) "target" }}
+    {{/* An SVG thumbnail yields to a raster file with the same base
+         name when one exists, so that a link preview gets a raster
+         image. A sibling that resolves to a resource, in the page
+         bundle or under assets, goes to the image adapter as that
+         resource, which fills it to 1280x640 like any other raster
+         thumbnail. image-dimension.html would hand the adapter a
+         root-relative path instead, which for a page bundle's
+         "feature.png" is "/feature.png": that path does not resolve,
+         so it would log a missing image. A sibling under static is not
+         processed, like any other static image. */ -}}
+    {{ $raster := partial "assets/helpers/raster-sibling.html" (dict "src" $thumbnail "page" .) -}}
+    {{ $res := "" -}}
+    {{ if ne $raster $thumbnail }}{{ $res = partial "utilities/GetResource.html" (dict "url" $raster "page" .) }}{{ end -}}
+    {{ $imgURL := "" -}}
+    {{ with $res -}}
+        {{ $imgURL = partial "assets/adapters/hugo.html" (dict
+            "page"         $
+            "img"          .
+            "url-file"     (path.Base $raster)
+            "transform"    "fill"
+            "image-width"  1280
+            "image-height" 640
+            "format"       "png"
+            "absolute-url" true
+        ) -}}
+    {{ else -}}
+        {{ $imgURL = index (partial "assets/helpers/image-dimension.html" (dict "src" $raster "image-width" 1280 "image-height" 640 "page" .)) "target" -}}
+    {{ end }}
     {{ $.Scratch.Set "thumbnail" ($imgURL | absURL) -}}
 {{ else -}}
     {{ with .Site.Params.schema.image.url -}}    
@@ -33,6 +60,7 @@
             {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
         {{ end -}}
         {{ with $featured -}}
+            {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" $featured "page" $) -}}
             {{ $.Scratch.Set "thumbnail" $featured.Permalink -}}
         {{ else -}}
             {{ with $.Site.Params.opengraph.images -}}

@@ -1,0 +1,6 @@
+{{- /*
+    The thumbnail assertions render here rather than in
+    layouts/index.html, so the `strict-images` build can leave the home
+    page out and still run them. Every build renders this page.
+*/ -}}
+{{ partial "tests/raster-sibling.html" . }}

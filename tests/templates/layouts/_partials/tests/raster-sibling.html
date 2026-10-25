@@ -1,0 +1,180 @@
+{{- /*
+    Assertions for the raster fallback of an SVG thumbnail.
+
+    head/seo.html swaps an SVG thumbnail for a raster file with the
+    same base name, so that a link preview gets a raster image. The
+    first two tables call assets/helpers/raster-sibling.html directly,
+    for the lookup order and for the inputs it must leave alone. The
+    featured bundle pairs feature.svg with feature.webp: the featured
+    match is the first resource by name, so only a sibling that sorts
+    after the SVG shows that the swap happens.
+
+    A remote URL must come back unchanged, but offline a remote sibling
+    lookup fails anyway, so a remote URL the helper does not recognize
+    looks the same as one it skips. The two cases on a live host close
+    that gap. They run only in the `strict-images` build:
+    scripts/test-strict-images.cjs serves a PNG for every request from
+    a local server, and passes its origin in as
+    params.tests.remoteOrigin.
+
+    The last table renders the real head partials for the fixture pages
+    under content/thumbnails, and reads back the og:image, the
+    twitter:image and the JSON-LD image, which must agree. The only
+    fixtures processed into an image are assets/img/asset-sibling.png,
+    assets/img/jpg-sibling.jpg, content/thumbnails/bundle/feature.png
+    and, outside the `strict-images` build, assets/img/exif.jpg, so
+    the other raster fixtures only have to exist. The `strict-images`
+    build runs these assertions with failOnMissingImage set, and fails
+    on any warning other than a Hugo deprecation notice.
+*/ -}}
+{{- $rsFail := 0 -}}
+{{- $rsPage := site.GetPage "/thumbnails/none" -}}
+{{- $rsCases := slice
+  (dict "case" "global asset sibling" "src" "img/asset-sibling.svg" "want" "img/asset-sibling.png")
+  (dict "case" "static sibling" "src" "/img/static-sibling.svg" "want" "/img/static-sibling.png")
+  (dict "case" "static prefix kept" "src" "/static/img/static-sibling.svg" "want" "/static/img/static-sibling.png")
+  (dict "case" "no sibling" "src" "/img/none.svg" "want" "/img/none.svg")
+  (dict "case" "png before jpg" "src" "/img/order.svg" "want" "/img/order.png")
+  (dict "case" "jpg before jpeg and webp" "src" "/img/jpg-first.svg" "want" "/img/jpg-first.jpg")
+  (dict "case" "jpeg before webp" "src" "/img/jpeg-first.svg" "want" "/img/jpeg-first.jpeg")
+  (dict "case" "webp last" "src" "/img/webp-only.svg" "want" "/img/webp-only.webp")
+  (dict "case" "uppercase extension" "src" "/img/upper.SVG" "want" "/img/upper.png")
+  (dict "case" "raster input untouched" "src" "/img/order.jpg" "want" "/img/order.jpg")
+  (dict "case" "anchored sprite untouched" "src" "/img/static-sibling.svg#logo" "want" "/img/static-sibling.svg#logo")
+  (dict "case" "protocol-relative url untouched" "src" "//example.org/img/remote.svg" "want" "//example.org/img/remote.svg")
+  (dict "case" "remote url untouched" "src" "https://example.org/img/remote.svg" "want" "https://example.org/img/remote.svg")
+  (dict "case" "upper-case remote url untouched" "src" "HTTPS://example.org/img/remote.svg" "want" "HTTPS://example.org/img/remote.svg")
+  (dict "case" "page resource sibling of a src" "page" "/thumbnails/bundle" "src" "feature.svg" "want" "feature.png")
+  (dict "case" "page resource src without sibling" "page" "/thumbnails/bundle-only" "src" "feature.svg" "want" "feature.svg")
+-}}
+{{- with site.Params.tests.remoteOrigin -}}
+  {{- $live := printf "%s/img/remote.svg" . -}}
+  {{- $upper := replace $live "http://" "HTTP://" -}}
+  {{- $rsCases = $rsCases | append
+    (dict "case" "remote url on a live host untouched" "src" $live "want" $live)
+    (dict "case" "upper-case remote url on a live host untouched" "src" $upper "want" $upper)
+  -}}
+{{- end -}}
+{{- range $rsCases -}}
+{{- $p := $rsPage -}}
+{{- with .page }}{{ $p = site.GetPage . }}{{ end -}}
+{{- $got := partial "assets/helpers/raster-sibling.html" (dict "src" .src "page" $p) -}}
+{{- if eq $got .want }}
+PASS raster sibling: {{ .case }}
+{{- else }}
+FAIL raster sibling: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $rsFail = add $rsFail 1 -}}
+{{- errorf "raster sibling mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+{{- $resCases := slice
+  (dict "case" "page resource sibling" "page" "/thumbnails/featured" "res" "feature.svg" "want" "feature.webp")
+  (dict "case" "page resource without sibling" "page" "/thumbnails/featured-only" "res" "feature.svg" "want" "feature.svg")
+  (dict "case" "page resource png before jpg" "page" "/thumbnails/order-bundle" "res" "icon.svg" "want" "icon.png")
+  (dict "case" "page resource uppercase extension" "page" "/thumbnails/upper-bundle" "res" "Icon.SVG" "want" "Icon.png")
+  (dict "case" "page resource without a page argument" "page" "/thumbnails/featured" "res" "feature.svg" "want" "feature.svg"
+        "omit-page" true)
+  (dict "case" "raster page resource untouched" "page" "/thumbnails/featured-raster" "res" "feature.jpg" "want" "feature.jpg")
+-}}
+{{- range $resCases -}}
+{{- $p := site.GetPage .page -}}
+{{- $args := dict "resource" ($p.Resources.Get .res) -}}
+{{- if not (index . "omit-page") }}{{ $args = merge $args (dict "page" $p) }}{{ end -}}
+{{- $got := (partial "assets/helpers/raster-sibling.html" $args).Name -}}
+{{- if eq $got .want }}
+PASS raster sibling: {{ .case }}
+{{- else }}
+FAIL raster sibling: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $rsFail = add $rsFail 1 -}}
+{{- errorf "raster sibling mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+{{- $headCases := slice
+  (dict "case" "asset sibling is processed to 1280x640" "page" "/thumbnails/asset-sibling"
+        "want" "https://example.org/img/asset-sibling-1280x640.png")
+  (dict "case" "bundle sibling is processed to 1280x640" "page" "/thumbnails/bundle"
+        "want" "https://example.org/thumbnails/bundle/feature-1280x640.png")
+  (dict "case" "jpg sibling is processed to a 1280x640 png" "page" "/thumbnails/jpg-sibling"
+        "want" "https://example.org/img/jpg-sibling-1280x640.png")
+  (dict "case" "static sibling from a thumbnail map" "page" "/thumbnails/static-sibling"
+        "want" "https://example.org/img/static-sibling.png")
+  (dict "case" "svg without sibling is unchanged" "page" "/thumbnails/none"
+        "want" "https://example.org/img/none.svg")
+  (dict "case" "bundle svg without sibling is unchanged" "page" "/thumbnails/bundle-only"
+        "want" "https://example.org/feature.svg")
+  (dict "case" "raster thumbnail is unchanged" "page" "/thumbnails/raster"
+        "want" "https://example.org/img/order.jpg")
+  (dict "case" "featured page resource sibling" "page" "/thumbnails/featured"
+        "want" "https://example.org/thumbnails/featured/feature.webp")
+  (dict "case" "featured page resource without sibling" "page" "/thumbnails/featured-only"
+        "want" "https://example.org/thumbnails/featured-only/feature.svg")
+  (dict "case" "raster featured resource keeps its own image" "page" "/thumbnails/featured-raster"
+        "want" "https://example.org/thumbnails/featured-raster/feature.jpg")
+-}}
+{{- /*
+    A thumbnail that is not an SVG must render as it did before this
+    change, on both branches of head/seo.html. These cases pin that
+    output, so a change that sends other resource thumbnails down the
+    sibling path fails. On the featured branch, the bundle
+    featured-raster holds feature.jpg and feature.png and sets no
+    thumbnail: the featured match is feature.jpg, which must stay as it
+    is although a png with the same base name exists. That case runs
+    in every build, in the table above.
+
+    On the thumbnail branch, a JPEG asset with EXIF orientation 6 goes
+    through utilities/GetImage.html, which rotates it and so gives the
+    processed file a hashed name. The second case pins the bare base
+    URL that a raster page resource given by a relative path renders
+    today. That output is pre-existing behavior this change must not
+    alter, not desired behavior.
+
+    These two cases stay out of the `strict-images` build. The bundle
+    case logs a missing image, which failOnMissingImage turns into an
+    error, as it does without this change. The asset case reaches
+    assets/helpers/image-set.html, which logs "Cannot find adapter" in
+    this harness.
+*/ -}}
+{{- if ne hugo.Environment "strict-images" -}}
+  {{- $headCases = $headCases | append
+    (dict "case" "exif-oriented jpeg asset keeps the GetImage rotation" "page" "/thumbnails/exif-asset"
+          "match" `^https://example\.org/img/exif_hu_[0-9a-z]+-1280x640\.png$`)
+    (dict "case" "raster bundle thumbnail keeps its pre-existing bare base url" "page" "/thumbnails/raster-bundle"
+          "want" "https://example.org/")
+  -}}
+{{- end -}}
+{{- range $headCases -}}
+{{- $case := . -}}
+{{- $html := partial "head/seo.html" (site.GetPage .page) -}}
+{{- $got := slice -}}
+{{- range slice `property="og:image" content="([^"]*)"` `name="twitter:image" content="([^"]*)"` `"@type": "ImageObject",\s*"@id": "[^"]*image/2",\s*"url": "([^"]*)"` -}}
+  {{- $m := findRESubmatch . $html 1 -}}
+  {{- $got = $got | append (cond (gt (len $m) 0) (index (index $m 0) 1) "-") -}}
+{{- end -}}
+{{- $want := "" -}}
+{{- $ok := false -}}
+{{- with .match -}}
+  {{- $want = printf "match %s" . -}}
+  {{- $same := and (eq (index $got 0) (index $got 1)) (eq (index $got 0) (index $got 2)) -}}
+  {{- $ok = and $same (gt (len (findRE . (index $got 0))) 0) -}}
+{{- else -}}
+  {{- $want = delimit (slice $case.want $case.want $case.want) "|" -}}
+  {{- $ok = eq (delimit $got "|") $want -}}
+{{- end -}}
+{{- if $ok }}
+PASS raster thumbnail: {{ .case }}
+{{- else }}
+FAIL raster thumbnail: {{ .case }}
+     want={{ $want }}
+     got ={{ delimit $got "|" }}
+{{- $rsFail = add $rsFail 1 -}}
+{{- errorf "raster thumbnail mismatch: case=%q want=%q got=%q" .case $want (delimit $got "|") -}}
+{{- end -}}
+{{- end }}
+
+RASTER SIBLING FAILURES: {{ $rsFail }}
