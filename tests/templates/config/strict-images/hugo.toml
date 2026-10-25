@@ -1,0 +1,13 @@
+# The `strict-images` build fails on any warning other than a Hugo
+# deprecation notice (see scripts/test-strict-images.cjs). The home
+# page renders the other assertion tables, and several of them log a
+# warning on purpose, so this build leaves the home page out. The
+# thumbnail assertions render on the thumbnails section page instead
+# (layouts/thumbnails/list.html).
+disableKinds = ['home', 'taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
+
+# scripts/test-strict-images.cjs serves the live-host cases of the
+# thumbnail assertions from 127.0.0.1. Hugo's default policy refuses a
+# URL on an IP address, so this build allows that host, and no other.
+[security.http]
+  urls = ['(?i)^http://127\.0\.0\.1:\d+/']

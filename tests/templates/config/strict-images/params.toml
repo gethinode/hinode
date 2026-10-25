@@ -1,0 +1,8 @@
+# Overlay for the fourth `test:templates` build
+# (`--environment strict-images`). With `failOnMissingImage` set, an
+# image the pipeline cannot find is logged as an ERROR instead of a
+# WARN, and the build fails. The thumbnail assertions run in this build
+# to show that none of the raster siblings in the fixtures takes that
+# path.
+[debugging]
+  failOnMissingImage = true
