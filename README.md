@@ -142,6 +142,8 @@ Hinode is inspired by the following themes:
 - [Blist][blist] - a clean and fast blog theme for your Hugo site using Tailwind CSS.
 - [Doks][doks] - a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.
 
+Hinode's SEO, Open Graph, Twitter card, and structured-data head partials are adapted from Doks. See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) for the Doks copyright and license notice.
+
 ## Donate
 
 <!-- markdownlint-disable MD033 -->
