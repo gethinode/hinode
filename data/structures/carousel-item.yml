@@ -3,14 +3,7 @@ icon: photo
 arguments:
   overlay:
     release: v3.44.0
-    type: bool
-    optional: true
-    default: true
     group: partial
-    comment: >-
-      Darken the slide images to improve caption and navigation control contrast.
-      Set to false to display images without darkening. Captions and controls remain
-      enabled; check their contrast against the original images.
   page:
   src:
     preview: true
