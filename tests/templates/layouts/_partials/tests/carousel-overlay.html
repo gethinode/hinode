@@ -1,0 +1,44 @@
+{{- $page := site.GetPage "/blog/carousel-overlay" -}}
+{{- $html := $page.Content -}}
+{{- $carousels := split $html `<div id="overlay-` -}}
+{{- range $case := slice
+    (dict "index" 1 "name" "default" "slides" 2 "overlays" 2 "caption" "Default caption")
+    (dict "index" 2 "name" "enabled" "slides" 1 "overlays" 1 "caption" "")
+    (dict "index" 3 "name" "disabled" "slides" 2 "overlays" 0 "caption" "Unaltered caption")
+    (dict "index" 4 "name" "string disabled" "slides" 1 "overlays" 0 "caption" "")
+-}}
+    {{- $got := index $carousels .index -}}
+    {{- if ne (len (findRE `class="carousel-caption gradient"` $got)) .overlays -}}
+        {{- errorf "carousel overlay %s: expected %d overlays" .name .overlays -}}
+    {{- end -}}
+    {{- if ne (len (findRE `<img ` $got)) .slides -}}
+        {{- errorf "carousel overlay %s: expected %d images" .name .slides -}}
+    {{- end -}}
+    {{- range $needle := slice `class="carousel-control-prev"` `class="carousel-control-next"` `class="carousel-indicators"` `class="carousel-item active"` -}}
+        {{- if not (strings.Contains $got $needle) -}}
+            {{- errorf "carousel overlay %s: missing %s" $case.name $needle -}}
+        {{- end -}}
+    {{- end -}}
+    {{- with .caption -}}
+        {{- if not (strings.Contains $got .) -}}
+            {{- errorf "carousel overlay %s: missing caption" $case.name -}}
+        {{- end -}}
+    {{- end -}}
+PASS carousel overlay: {{ .name }}
+{{- end -}}
+
+{{- range $case := slice
+    (dict "name" "partial default" "args" (dict) "overlay" true)
+    (dict "name" "partial enabled" "args" (dict "overlay" true) "overlay" true)
+    (dict "name" "partial disabled" "args" (dict "overlay" false) "overlay" false)
+-}}
+    {{- $args := merge .args (dict "page" $page "src" "/img/order.png" "caption" "Partial caption") -}}
+    {{- $got := partial "assets/carousel-item.html" $args -}}
+    {{- if ne (strings.Contains $got `class="carousel-caption gradient"`) .overlay -}}
+        {{- errorf "carousel overlay %s: unexpected overlay state" .name -}}
+    {{- end -}}
+    {{- if not (strings.Contains $got "Partial caption") -}}
+        {{- errorf "carousel overlay %s: missing caption" .name -}}
+    {{- end -}}
+PASS carousel overlay: {{ .name }}
+{{- end -}}

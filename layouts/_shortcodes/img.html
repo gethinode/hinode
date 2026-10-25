@@ -24,6 +24,11 @@
     {{- $ratio := partial "utilities/GetArgParent" (dict "page" . "arg" "ratio") -}}
     {{- $portrait := partial "utilities/GetArgParent" (dict "page" . "arg" "portrait") | default false -}}
 
+    {{- $overlay := true -}}
+    {{- if isset .Parent.Params "overlay" -}}
+        {{- $overlay = .Parent.Get "overlay" -}}
+    {{- end -}}
+
     {{/* Main code */}}
     {{- $output := partial "assets/carousel-item.html" (dict
         "page"     .Page
@@ -33,6 +38,7 @@
         "ratio"    (partial "utilities/OmitEmpty.html" $ratio)
         "portrait" $portrait
         "loading"  $args.loading
+        "overlay"  $overlay
     ) }}
 
     {{ $current := .Parent.Scratch.Get "inner" }}

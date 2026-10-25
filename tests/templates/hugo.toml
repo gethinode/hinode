@@ -277,3 +277,29 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/image-rewrite.yml'
   target = 'data/structures/image-rewrite.yml'
+
+# Exercise carousel options through the real shortcodes and image pipeline.
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/carousel.html'
+  target = 'layouts/_shortcodes/carousel.html'
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/img.html'
+  target = 'layouts/_shortcodes/img.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/carousel-item.html'
+  target = 'layouts/_partials/assets/carousel-item.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/image.html'
+  target = 'layouts/_partials/assets/image.html'
+[[module.mounts]]
+  source = '../../data/structures/carousel.yml'
+  target = 'data/structures/carousel.yml'
+[[module.mounts]]
+  source = '../../data/structures/carousel-item.yml'
+  target = 'data/structures/carousel-item.yml'
+[[module.mounts]]
+  source = '../../data/structures/image.yml'
+  target = 'data/structures/image.yml'
+[[module.mounts]]
+  source = '../../data/structures/image-definition.yml'
+  target = 'data/structures/image-definition.yml'
