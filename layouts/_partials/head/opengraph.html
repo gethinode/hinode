@@ -1,4 +1,4 @@
-{{/* Copied from doks */}}
+{{/* Adapted from Doks (https://github.com/h-enk/doks), Copyright (c) 2018-present Gridsome, 2020-present Henk Verlinde, MIT License. See THIRD-PARTY-NOTICES.md. */}}
 {{- $locale := "" -}}
 {{- with .Site.Params.opengraph -}}{{- $locale = .locale -}}{{- end -}}
 {{- $locale = partial "utilities/GetLocale.html" (dict "locale" $locale) -}}
