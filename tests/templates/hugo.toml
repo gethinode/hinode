@@ -303,3 +303,17 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/image-definition.yml'
   target = 'data/structures/image-definition.yml'
+
+# Exercise the production link-group path used by hero CTAs, without a wrapper stub.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/links.html'
+  target = 'layouts/_partials/assets/links.html'
+[[module.mounts]]
+  source = '../../data/structures/links.yml'
+  target = 'data/structures/links.yml'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetLink.html'
+  target = 'layouts/_partials/utilities/GetLink.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetPage.html'
+  target = 'layouts/_partials/utilities/GetPage.html'
