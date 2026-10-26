@@ -1,6 +1,7 @@
 {{/* Catch both a lost explicit internal choice and leaked external site defaults.
      All expectations are checked against real rendered anchors, including the
-     two responsive copies emitted by assets/links.html for hero-style CTAs. */}}
+     two responsive copies emitted by assets/links.html for hero-style CTAs and
+     the production navbar helper that forwards menu choices to buttons. */}}
 {{ $page := . }}
 {{ $defaultTab := eq hugo.Environment "external-link-defaults" }}
 {{ $cases := slice
@@ -20,8 +21,10 @@
     {{ $case := . }}
     {{ $button := partial "assets/button.html" (merge .args (dict "page" $page "href" .href "title" "Continue")) }}
     {{ $links := partial "assets/links.html" (dict "page" $page "links" (slice (merge .args (dict "url" .href "title" "Continue")))) }}
-    {{ range slice (dict "path" "button" "html" $button "count" 1 "href" .href) (dict "path" "links" "html" $links "count" 2 "href" (cond (eq .href "https://example.org/internal-page/") "/internal-page/" .href)) }}
-        {{ $anchors := findRE `<a\b[^>]*>` .html }}
+    {{ $entry := dict "Name" "Continue" "PageRef" .href "URL" .href "Pre" "" "Post" "" "HasChildren" false "Params" (merge .args (dict "button" true)) }}
+    {{ $navbar := partial "assets/helpers/navbar-item.html" (dict "page" $page "menu-entry" $entry) }}
+    {{ range slice (dict "path" "button" "html" $button "count" 1 "href" .href) (dict "path" "links" "html" $links "count" 2 "href" (cond (eq .href "https://example.org/internal-page/") "/internal-page/" .href)) (dict "path" "navbar button" "html" $navbar "count" 1 "href" .href) }}
+        {{ $anchors := findRE `(?s)<a\b[^>]*>.*?</a>` .html }}
         {{ if ne (len $anchors) .count }}
             {{ errorf "button tabs %s/%s: want %d anchors, got %d" $case.name .path .count (len $anchors) }}
         {{ end }}
@@ -35,9 +38,9 @@
             {{ if or (ne $target $wantTarget) (ne $rel $wantRel) (not (strings.Contains . (printf `href="%s"` $href))) }}
                 {{ errorf "button tabs %s/%s: want target=%q rel=%q href=%q; got %s" $case.name $path $wantTarget $wantRel $href . }}
             {{ end }}
-        {{ end }}
-        {{ if ne (strings.Contains .html "fa-2xs") $case.cue }}
-            {{ errorf "button tabs %s/%s: want external cue=%t; got %s" $case.name .path $case.cue .html }}
+            {{ if ne (strings.Contains . "fa-2xs") $case.cue }}
+                {{ errorf "button tabs %s/%s: want external cue=%t on each anchor; got %s" $case.name $path $case.cue . }}
+            {{ end }}
         {{ end }}
 PASS button tabs: {{ $case.name }}/{{ .path }}
     {{ end }}
