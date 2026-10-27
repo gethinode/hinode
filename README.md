@@ -131,6 +131,29 @@ Set `[params.application]` to advertise your site's own release version in the d
 
 This renders `<meta name="application" content="My App <version>">`. The version resolves from `params.application.version`, else the `HUGO_APPLICATION_VERSION` environment variable (set this in your build / CI pipeline). Sites that omit `[params.application]`, or that set neither a config value nor the environment variable, render no such tag.
 
+### Color mode change hook
+
+When color mode is enabled, the shared color setter dispatches
+`hinode:color-mode:before-change` on `document` synchronously. Its `detail.theme`
+is the requested preference (`auto`, `light`, or `dark`); unsupported values
+normalize to `auto` before dispatch, and `auto` resolves to the system appearance
+after dispatch.
+
+Call `event.preventDefault()` to skip that setter's preference storage, root
+`data-bs-theme` / `data-bs-main-theme` attributes, and selector updates. Without
+cancellation, the existing behavior continues. Register before the critical
+bundle to intercept initialization, or later to intercept subsequent control,
+system appearance, and persisted `pageshow` setter calls. Cancellation does not
+undo native control changes or earlier preference fallback reads and writes.
+
+```js
+document.addEventListener('hinode:color-mode:before-change', event => {
+  if (document.documentElement.hasAttribute('data-external-color-mode')) {
+    event.preventDefault()
+  }
+})
+```
+
 ## Contributing
 
 See the [official documentation][contribute] on how to contribute to the open-source development of Hinode.
