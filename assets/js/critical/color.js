@@ -39,6 +39,15 @@ if (params.darkMode) {
     if (!supportedThemes.includes(theme)) {
       theme = 'auto'
     }
+    // Synchronous developer hook: cancellation skips this setter's persistence,
+    // root theme attributes and selector updates. detail.theme is the normalized
+    // preference, before 'auto' resolves to the current system appearance.
+    const beforeChange = new CustomEvent('hinode:color-mode:before-change', {
+      cancelable: true,
+      detail: { theme }
+    })
+    if (!document.dispatchEvent(beforeChange)) return
+
     setLocalStorage('theme', theme, 'functional')
 
     if (theme === 'auto') {

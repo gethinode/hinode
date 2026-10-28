@@ -1,0 +1,47 @@
+{{/* Catch both a lost explicit internal choice and leaked external site defaults.
+     All expectations are checked against real rendered anchors, including the
+     two responsive copies emitted by assets/links.html for hero-style CTAs and
+     the production navbar helper that forwards menu choices to buttons. */}}
+{{ $page := . }}
+{{ $defaultTab := eq hugo.Environment "external-link-defaults" }}
+{{ $cases := slice
+    (dict "name" "internal omitted" "href" "/internal-page/" "args" dict "blank" false "rel" "" "cue" false)
+    (dict "name" "internal false" "href" "/internal-page/" "args" (dict "tab" false) "blank" false "rel" "" "cue" false)
+    (dict "name" "internal true" "href" "/internal-page/" "args" (dict "tab" true) "blank" true "rel" "noopener noreferrer" "cue" false)
+    (dict "name" "same-origin omitted" "href" "https://example.org/internal-page/" "args" dict "blank" false "rel" "" "cue" false)
+    (dict "name" "same-origin false" "href" "https://example.org/internal-page/" "args" (dict "tab" false) "blank" false "rel" "" "cue" false)
+    (dict "name" "same-origin true" "href" "https://example.org/internal-page/" "args" (dict "tab" true "cue" true) "blank" true "rel" "noopener noreferrer" "cue" false)
+    (dict "name" "external inherited" "href" "https://other.example/" "args" dict "blank" $defaultTab "rel" (cond $defaultTab "noopener noreferrer nofollow" "") "cue" $defaultTab)
+    (dict "name" "external false" "href" "https://other.example/" "args" (dict "tab" false "cue" false) "blank" false "rel" "" "cue" false)
+    (dict "name" "external true" "href" "https://other.example/" "args" (dict "tab" true "cue" true) "blank" true "rel" "noopener noreferrer nofollow" "cue" true)
+    (dict "name" "external cue only" "href" "https://other.example/" "args" (dict "tab" false "cue" true) "blank" false "rel" "" "cue" true)
+    (dict "name" "external tab only" "href" "https://other.example/" "args" (dict "tab" true "cue" false) "blank" true "rel" "noopener noreferrer nofollow" "cue" false)
+}}
+{{ range $cases }}
+    {{ $case := . }}
+    {{ $button := partial "assets/button.html" (merge .args (dict "page" $page "href" .href "title" "Continue")) }}
+    {{ $links := partial "assets/links.html" (dict "page" $page "links" (slice (merge .args (dict "url" .href "title" "Continue")))) }}
+    {{ $entry := dict "Name" "Continue" "PageRef" .href "URL" .href "Pre" "" "Post" "" "HasChildren" false "Params" (merge .args (dict "button" true)) }}
+    {{ $navbar := partial "assets/helpers/navbar-item.html" (dict "page" $page "menu-entry" $entry) }}
+    {{ range slice (dict "path" "button" "html" $button "count" 1 "href" .href) (dict "path" "links" "html" $links "count" 2 "href" (cond (eq .href "https://example.org/internal-page/") "/internal-page/" .href)) (dict "path" "navbar button" "html" $navbar "count" 1 "href" .href) }}
+        {{ $anchors := findRE `(?s)<a\b[^>]*>.*?</a>` .html }}
+        {{ if ne (len $anchors) .count }}
+            {{ errorf "button tabs %s/%s: want %d anchors, got %d" $case.name .path .count (len $anchors) }}
+        {{ end }}
+        {{ $href := .href }}
+        {{ $path := .path }}
+        {{ range $anchors }}
+            {{ $target := index (findRE ` target="[^"]*"` . 1) 0 | default "" }}
+            {{ $rel := index (findRE ` rel="[^"]*"` . 1) 0 | default "" }}
+            {{ $wantTarget := cond $case.blank ` target="_blank"` "" }}
+            {{ $wantRel := cond (ne $case.rel "") (printf ` rel="%s"` $case.rel) "" }}
+            {{ if or (ne $target $wantTarget) (ne $rel $wantRel) (not (strings.Contains . (printf `href="%s"` $href))) }}
+                {{ errorf "button tabs %s/%s: want target=%q rel=%q href=%q; got %s" $case.name $path $wantTarget $wantRel $href . }}
+            {{ end }}
+            {{ if ne (strings.Contains . "fa-2xs") $case.cue }}
+                {{ errorf "button tabs %s/%s: want external cue=%t on each anchor; got %s" $case.name $path $case.cue . }}
+            {{ end }}
+        {{ end }}
+PASS button tabs: {{ $case.name }}/{{ .path }}
+    {{ end }}
+{{ end }}

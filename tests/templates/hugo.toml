@@ -20,6 +20,9 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
     # produces by coincidence - makes a reintroduction of the coupling visible as a `pb-5`.
     [params.main.padding]
       y = 5
+    [params.main.externalLinks]
+      tab = false
+      cue = false
   [params.navigation]
     toc = true
   [params.pages]
@@ -303,3 +306,23 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/image-definition.yml'
   target = 'data/structures/image-definition.yml'
+
+# Exercise the production link-group path used by hero CTAs, without a wrapper stub.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/links.html'
+  target = 'layouts/_partials/assets/links.html'
+[[module.mounts]]
+  source = '../../data/structures/links.yml'
+  target = 'data/structures/links.yml'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetLink.html'
+  target = 'layouts/_partials/utilities/GetLink.html'
+
+# The navbar button caller must preserve explicit choices; GetPage is provided by
+# the existing vendored mod-utils utilities mount above.
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/helpers/navbar-item.html'
+  target = 'layouts/_partials/assets/helpers/navbar-item.html'
+[[module.mounts]]
+  source = '../../data/structures/navbar-item.yml'
+  target = 'data/structures/navbar-item.yml'
