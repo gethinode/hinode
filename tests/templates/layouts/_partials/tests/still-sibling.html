@@ -1,0 +1,85 @@
+{{- /*
+    Assertions for the still variant of an animated image.
+
+    assets/helpers/image-definition.html wraps an <img> in a <picture>
+    whose reduced-motion source is the image's `-static` sibling, when
+    the site provides one. The first table calls
+    assets/helpers/still-sibling.html directly, for the names it looks
+    up and for the inputs it must leave alone. The second renders
+    assets/image.html and reads back the markup.
+
+    The fixtures are static/img/motion.svg with motion-static.svg, the
+    color-mode pair static/img/mode-{light,dark}.svg with
+    mode-static-{light,dark}.svg, and assets/img/asset-sibling.svg with
+    asset-sibling-static.svg. static/img/none.svg has no still variant.
+    These assertions render on the thumbnails page, so the
+    `strict-images` build shows that a missing still variant logs
+    nothing.
+*/ -}}
+{{- $ssFail := 0 -}}
+{{- $ssPage := site.GetPage "/thumbnails/none" -}}
+{{- $ssCases := slice
+  (dict "case" "static sibling" "src" "/img/motion.svg" "want" "/img/motion-static.svg")
+  (dict "case" "light mode sibling" "src" "/img/mode-light.svg" "want" "/img/mode-static-light.svg")
+  (dict "case" "dark mode sibling" "src" "/img/mode-dark.svg" "want" "/img/mode-static-dark.svg")
+  (dict "case" "global asset sibling" "src" "img/asset-sibling.svg" "want" "img/asset-sibling-static.svg")
+  (dict "case" "no sibling" "src" "/img/none.svg" "want" "")
+  (dict "case" "anchored sprite untouched" "src" "/img/motion.svg#logo" "want" "")
+  (dict "case" "protocol-relative url untouched" "src" "//example.org/img/motion.svg" "want" "")
+  (dict "case" "remote url untouched" "src" "https://example.org/img/motion.svg" "want" "")
+  (dict "case" "empty src" "src" "" "want" "")
+-}}
+{{- range $ssCases -}}
+{{- $got := partial "assets/helpers/still-sibling.html" (dict "src" .src "page" $ssPage) -}}
+{{- if eq $got .want }}
+PASS still sibling: {{ .case }}
+{{- else }}
+FAIL still sibling: {{ .case }}
+     want={{ .want }}
+     got ={{ $got }}
+{{- $ssFail = add $ssFail 1 -}}
+{{- errorf "still sibling mismatch: case=%q want=%q got=%q" .case .want $got -}}
+{{- end -}}
+{{- end }}
+
+{{- /*
+    `want` lists, in order, the still variant each <picture> offers
+    under reduced motion and the image its <img> falls back to. An
+    image without a still variant renders a bare <img>, and an inline
+    SVG renders no <img> at all, so neither yields a <picture>.
+*/ -}}
+{{- $picture := `<picture>\s*<source media="\(prefers-reduced-motion: reduce\)"\s*srcset="([^"]+)">\s*<img[^>]*\ssrc="([^"]+)"[^>]*>\s*</picture>` -}}
+{{- $renderCases := slice
+  (dict "case" "image with a still variant" "src" "/img/motion.svg"
+        "want" (slice "/img/motion-static.svg" "/img/motion.svg"))
+  (dict "case" "color-mode image with still variants" "src" "/img/mode.svg" "mode" true
+        "want" (slice "/img/mode-static-light.svg" "/img/mode-light.svg" "/img/mode-static-dark.svg" "/img/mode-dark.svg"))
+  (dict "case" "image without a still variant" "src" "/img/none.svg" "img" 1
+        "want" slice)
+  (dict "case" "inline svg asset" "src" "img/asset-sibling.svg" "img" 0
+        "want" slice)
+-}}
+{{- range $renderCases -}}
+{{- $html := partial "assets/image.html" (dict "page" $ssPage "src" .src "mode" (.mode | default false)) -}}
+{{- $got := slice -}}
+{{- /* The `strict-images` build renders these URLs without the leading slash. */ -}}
+{{- range findRESubmatch $picture $html -}}
+  {{- $got = $got | append (printf "/%s" (strings.TrimPrefix "/" (index . 1))) (printf "/%s" (strings.TrimPrefix "/" (index . 2))) -}}
+{{- end -}}
+{{- $ok := eq (delimit $got "|") (delimit .want "|") -}}
+{{- if isset . "img" -}}
+  {{- $ok = and $ok (eq (len (findRE `<img\s` $html)) .img) (not (strings.Contains $html "<picture")) -}}
+{{- end -}}
+{{- if $ok }}
+PASS still image: {{ .case }}
+{{- else }}
+FAIL still image: {{ .case }}
+     want={{ delimit .want "|" }}
+     got ={{ delimit $got "|" }}
+     html={{ $html }}
+{{- $ssFail = add $ssFail 1 -}}
+{{- errorf "still image mismatch: case=%q want=%q got=%q html=%q" .case (delimit .want "|") (delimit $got "|") $html -}}
+{{- end -}}
+{{- end }}
+
+STILL SIBLING FAILURES: {{ $ssFail }}

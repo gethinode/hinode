@@ -1,0 +1,48 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Finds the still variant of an animated image, when the site
+     provides one, so that a reader who prefers reduced motion gets an
+     image at rest. The still variant has the base name of the image
+     plus a `-static` suffix. For an image with a color-mode suffix,
+     the `-static` suffix goes before the mode: the still variant of
+     hero-dark.svg is hero-static-dark.svg. The modes are taken from
+     site.Params.main.modes, and default to light and dark.
+
+     The sibling is looked up with utilities/GetResource.html, as a
+     page resource and then as a global resource under assets/, and
+     then as a file under static/. Returns the path of the sibling, or
+     an empty string. A remote URL is not looked up, and neither is an
+     image with an #anchor (a sprite).
+
+     Arguments:
+     "src"   Path of the image.
+     "page"  The page the image belongs to. */}}
+
+{{- $page := .page -}}
+{{- $src := .src -}}
+{{- $modes := site.Params.main.modes | default (slice "light" "dark") -}}
+{{- $result := "" -}}
+
+{{- $remote := or (hasPrefix (lower $src) "http") (hasPrefix $src "//") -}}
+{{- if and $src (not $remote) (not (strings.Contains $src "#")) -}}
+    {{- $ext := path.Ext $src -}}
+    {{- $base := strings.TrimSuffix $ext $src -}}
+    {{- $candidate := printf "%s-static%s" $base $ext -}}
+    {{- range $modes -}}
+        {{- $suffix := printf "-%s" . -}}
+        {{- if hasSuffix $base $suffix -}}
+            {{- $candidate = printf "%s-static%s%s" (strings.TrimSuffix $suffix $base) $suffix $ext -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $found := partial "utilities/GetResource.html" (dict "url" $candidate "page" $page) -}}
+    {{- if not $found -}}
+        {{- $found = fileExists (path.Join "/static" (strings.TrimPrefix "/static" $candidate)) -}}
+    {{- end -}}
+    {{- if $found }}{{ $result = $candidate }}{{ end -}}
+{{- end -}}
+
+{{- return $result -}}

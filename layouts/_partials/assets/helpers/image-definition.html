@@ -51,6 +51,25 @@
 {{- $width := index $target "width" -}}
 {{- $data := index $target "data" -}}
 
+{{/* Obtain the still variant shown under reduced motion, when the site provides one */}}
+{{- $stillURL := "" -}}
+{{- $stillSet := "" -}}
+{{- if and (not $data) (not $fileAnchor) -}}
+    {{- with partial "assets/helpers/still-sibling.html" (dict "src" $src "page" $args.page) -}}
+        {{- $still := partial "assets/helpers/image-dimension.html" (dict
+            "page"     $args.page
+            "src"      .
+            "ratio"    $args.ratio
+            "portrait" $args.portrait
+            "plain"    $args.plain
+            "imageset" true
+            "anchor"   $args.anchor
+        ) -}}
+        {{- $stillURL = index $still "target" -}}
+        {{- $stillSet = index $still "set" -}}
+    {{- end -}}
+{{- end -}}
+
 {{ if and $args.imageWidth $args.imageHeight }}
     {{ $height = $args.imageHeight }}
     {{ $width = $args.imageWidth }}
@@ -83,6 +102,12 @@
         {{- with $args.class }}{{ $data = replace $data "<svg" (printf "<svg class=\"%s\"" .) }}{{ end -}}
         {{- $data | safeHTML -}}
     {{- else if not $fileAnchor -}}
+        {{- if $stillURL -}}
+            <picture>
+            <source media="(prefers-reduced-motion: reduce)"
+                srcset="{{ or $stillSet $stillURL }}"
+                {{- with $stillSet }} sizes="{{ $args.sizes }}"{{ end }}>
+        {{- end -}}
         <img class="img-fluid {{ $args.class }}"
             src="{{ $fallbackURL }}"
             {{ if eq $args.loading "lazy" }} loading="lazy"{{ end -}}
@@ -91,6 +116,7 @@
             {{ with $height }} height="{{ . }}"{{ end -}}
             {{ with $width }} width="{{ . }}"{{ end -}}
             {{ with $alt }} alt="{{ . }}"{{ end }}>
+        {{- if $stillURL }}</picture>{{ end -}}
     {{- else -}}
         <svg class="{{ $args.class }}"
         {{ if or $args.imageHeight $args.imageWidth }}
