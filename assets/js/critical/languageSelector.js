@@ -72,8 +72,11 @@ if (params.languageSelector) {
       // The pathname check is case-insensitive: hosts that normalize URL casing
       // (e.g. Netlify redirects to lowercase) would otherwise bounce between the
       // canonical href and the served URL in an endless reload loop.
-      onCanonical = canonical.origin === window.location.origin &&
-        canonical.pathname.toLowerCase() === window.location.pathname.toLowerCase()
+      // The origin takes no part: regular pages carry an absolute self-referencing
+      // canonical, so a page served from another host (e.g. a CMS editor proxy or a
+      // deploy preview) would otherwise be bounced to the baseURL host. Alias pages
+      // still redirect, as their pathname differs from the canonical one.
+      onCanonical = canonical.pathname.toLowerCase() === window.location.pathname.toLowerCase()
     }
 
     if (!onCanonical) {
