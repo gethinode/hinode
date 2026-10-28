@@ -37,6 +37,10 @@ arguments:
   clipboard:
   cue:
   tab:
+    comment: >-
+      Open the button link in a new tab. Explicit true also applies to internal
+      links. When omitted, only external links inherit `main.externalLinks.tab`;
+      internal links stay in the current tab. Explicit false disables the new tab.
   attributes:
   spacing:
   wrapper:

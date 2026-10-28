@@ -105,6 +105,7 @@
     {{ $title = partial "utilities/TitleCase.html" (dict "page" $args.page "text" $title "menu" true) }}
 
     {{ if $entry.Params.button }}
+        {{/* Preserve an omitted tab choice; the button resolves external defaults itself. */}}
         {{ partial "assets/button.html" (dict
             "page"        $page
             "title"       $title
@@ -112,7 +113,7 @@
             "href"        $menuURL
             "button-size" "sm"
             "cue"         $cue
-            "tab"         $tab
+            "tab"         $entry.Params.tab
             "outline"     $entry.Params.outline 
         )}}
     {{ else }}

@@ -76,6 +76,9 @@
         {{ $suffix := partial "assets/icon.html" (dict "page" $args.page "icon" $externalLink "class" "fa-2xs") }}
         {{- $title = printf "%s&nbsp;%s" $title $suffix | safeHTML -}}
     {{- end -}}
+{{- else if eq $args.tab true -}}
+    {{- $target = "_blank" -}}
+    {{- $rel = "noopener noreferrer" -}}
 {{- end -}}
 
 {{/* Main code */}}
