@@ -1,6 +1,9 @@
 comment: >-
   Displays a responsive image with an optional aspect ratio. Local and remote
-  images are automatically resized and converted to the WebP format.
+  images are automatically resized and converted to the WebP format. When a
+  file with the same base name plus a `-static` suffix exists, such as
+  `hero-static.svg` next to `hero.svg` (or `hero-static-dark.svg` next to
+  `hero-dark.svg`), it is shown instead to readers who prefer reduced motion.
 icon: image
 arguments:
   src:
