@@ -88,7 +88,7 @@
     {{- else if eq $keywords "tags" }}{{ $maxTags = 3 }}{{ end -}}
 
     {{ if ne $keywords "none" }}
-        <p class="card-text"><small class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }} text-uppercase">
+        <p class="card-text"><small class="{{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}{{ if ne $keywords "category" }} text-uppercase{{ end }}">
             {{- if eq $keywords "category" -}}
                 {{/* The category is the first entry of the page's categories parameter, rendered as plain text */}}
                 {{- $category := "" -}}
@@ -96,11 +96,10 @@
                     {{- if reflect.IsSlice . }}{{ $category = index . 0 }}{{ else }}{{ $category = . }}{{ end -}}
                 {{- end -}}
                 {{- with $category -}}
-                    <span{{ if not $color }} class="text-body-emphasis"{{ end }}>{{ . | humanize }}</span>
-                    {{- if $page.Date }}&nbsp;&bull;&nbsp;{{ end -}}
+                    <span class="{{ if not $color }}text-body-secondary{{ end }}{{ if $page.Date }} me-3{{ end }}">{{ . | humanize }}</span>
                 {{- end -}}
                 {{- with $page.Date -}}
-                    <span{{ if not $color }} class="text-body-secondary"{{ end }}>{{ partial "utilities/date.html" (dict "date" . "format" "long") }}</span>
+                    <span{{ if not $color }} class="text-body-secondary"{{ end }}>{{ partial "utilities/date.html" (dict "date" . "format" "medium") }}</span>
                 {{- end -}}
             {{- end -}}
 
