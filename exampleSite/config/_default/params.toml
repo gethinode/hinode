@@ -26,6 +26,7 @@
     [main.cards]
         linkIcon = false
         buttonIcon = false
+        captionStyle = "default"
 
 [icons]
     # Color mode toggle
