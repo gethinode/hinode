@@ -1,0 +1,5 @@
+# Overlay for the `test:templates` build with `--environment quiet-caption`. The caption style is
+# site-wide, so the quiet markup can only be shown by a build that sets it; the other builds leave
+# it at the default.
+[main.cards]
+  captionStyle = "quiet"

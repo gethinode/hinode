@@ -1,0 +1,39 @@
+{{- /* The category header defaults to an uppercase caption: emphasized category, a bullet and a
+       long date. `main.cards.captionStyle = "quiet"`, set by the quiet-caption overlay, turns it
+       into a sentence-case label: muted category, a margin instead of the bullet and a medium
+       date. Other header styles keep the uppercase transform in every build. */ -}}
+{{- $target := site.GetPage "/blog/card-category" -}}
+{{- $quiet := eq hugo.Environment "quiet-caption" -}}
+{{- $date := $target.Date | time.Format ":date_long" -}}
+{{- $expected := slice "text-uppercase" `<span class="text-body-emphasis">Announcements</span>` "&nbsp;&bull;&nbsp;" (printf `<span class="text-body-secondary">%s</span>` $date) -}}
+{{- $unexpected := slice "me-3" -}}
+{{- if $quiet -}}
+    {{- $unexpected = slice "text-uppercase" "text-body-emphasis" "&bull;" "•" $date -}}
+    {{- $date = $target.Date | time.Format ":date_medium" -}}
+    {{- $expected = slice `<span class="text-body-secondary me-3">Announcements</span>` (printf `<span class="text-body-secondary">%s</span>` $date) -}}
+{{- end -}}
+{{- $html := string (partial "assets/card.html" (dict
+      "page"         $target
+      "path"         $target.RelPermalink
+      "header-style" "category"
+      "footer-style" "none"
+)) -}}
+{{- range $expected -}}
+    {{- if not (strings.Contains $html .) -}}
+        {{- errorf "card category: missing %q in %s" . $html -}}
+    {{- end -}}
+{{- end -}}
+{{- range $unexpected -}}
+    {{- if strings.Contains $html . -}}
+        {{- errorf "card category: unexpected %q in %s" . $html -}}
+    {{- end -}}
+{{- end -}}
+{{- $dateHeader := string (partial "assets/card.html" (dict
+      "page"         $target
+      "path"         $target.RelPermalink
+      "header-style" "date"
+      "footer-style" "none"
+)) -}}
+{{- if not (strings.Contains $dateHeader "text-uppercase") -}}
+    {{- errorf "card category: date header lost its uppercase transform in %s" $dateHeader -}}
+{{- end -}}

@@ -32,6 +32,7 @@
     [main.cards]
         linkIcon = false
         buttonIcon = false
+        captionStyle = "default"
 # toml-docs-end main
 
 # toml-docs-start icons
