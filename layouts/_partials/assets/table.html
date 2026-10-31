@@ -175,6 +175,7 @@
              bare word where a row of buttons used to be - nothing about it reads as a control.
              The dropdown stays at the start of the row; `justify` positions only the button group. */}}
         {{ partial "assets/panel-dropdown.html" (dict
+            "page"        $args.page
             "id"          $filterId
             "class"       (printf "d-%s-none me-auto" $filterBreakpoint)
             "titles"      $titles

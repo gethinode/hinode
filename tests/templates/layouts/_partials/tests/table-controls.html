@@ -46,3 +46,16 @@ PASS table controls: responsive filter dropdowns use CSS positioning
     {{ end }}
 PASS table filter breakpoint: {{ .name }}
 {{ end }}
+
+{{/* A site that names a `panelDropdown` icon gets it on responsive dropdown toggles, with the
+     modifier class that retires the stylesheet's caret. A site that does not keeps that caret. */}}
+{{ $iconSet := eq hugo.Environment "theme-icons" }}
+{{ $toggleTable := partial "assets/table.html" (dict "page" $ "input" $input "filter" (slice "News") "filter-responsive" true) }}
+{{ $toggle := replaceRE `\s+` " " (index (findRE `(?s)<button type="button" class="dropdown-toggle.*?</button>` $toggleTable 1) 0) }}
+{{ if ne (strings.Contains $toggle `fa-caret-down`) $iconSet }}
+    {{ errorf "table filter toggle: theme icon must follow panelDropdown (set: %t): %s" $iconSet $toggle }}
+{{ end }}
+{{ if ne (strings.Contains $toggle `dropdown-toggle-icon`) $iconSet }}
+    {{ errorf "table filter toggle: modifier class must follow panelDropdown (set: %t): %s" $iconSet $toggle }}
+{{ end }}
+PASS dropdown toggle icon: table filter

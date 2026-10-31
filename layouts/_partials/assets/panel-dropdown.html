@@ -42,9 +42,17 @@
      can be opened. */}}
 {{ $toggleClass := .toggleClass | default "link-body-emphasis border-0 bg-transparent p-0" }}
 
+{{/* The `panelDropdown` theme icon replaces the stylesheet's caret, which `dropdown-toggle-icon`
+     retires. Unset, it falls back to `navbarDropdown`, so that a site naming only that icon gets
+     matching dropdown indicators throughout. */}}
+{{ $navbarIcon := partial "utilities/GetThemeIcon.html" (dict "id" "navbarDropdown") }}
+{{ $dropdownIcon := partial "utilities/GetThemeIcon.html" (dict "id" "panelDropdown" "alias" $navbarIcon) }}
+{{ if $dropdownIcon }}{{ $toggleClass = printf "%s dropdown-toggle-icon" $toggleClass }}{{ end }}
+
 <div id="dropdown-{{ $id }}" class="dropdown panel-dropdown {{ $class }}">
 <button type="button" class="dropdown-toggle {{ $toggleClass }}" data-bs-toggle="dropdown"{{ if .static }} data-bs-display="static"{{ end }} aria-expanded="false">
     {{ cond (gt (len $titles) 0) (index $titles $active) $label }}
+    {{- with $dropdownIcon }}&nbsp;{{ partial "assets/icon.html" (dict "page" $.page "icon" . "class" "fa-fw my-auto" "spacing" false) }}{{ end }}
 </button>
     <ul class="dropdown-menu">
         {{- range $index, $item := $titles -}}
