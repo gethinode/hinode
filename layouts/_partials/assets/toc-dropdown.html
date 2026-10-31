@@ -30,7 +30,7 @@
     {{ $headings := partial "assets/toc-headings.html" $args.page }}
     {{- with $headings }}
         {{- if and (not $error) (ge (len .) $minNumHeadings) }}
-        <div class="d-grid gap-2 mx-auto">
+        <div class="d-grid gap-2 mx-auto d-print-none">
             {{ partial "assets/button.html" (dict
                 "page"        $args.page
                 "title"       (T "toc")
@@ -45,7 +45,7 @@
             ) -}}
         </div>
 
-        <div class="collapse border bg-body-tertiary rounded p-1 navbar-nav-scroll" id="toc-collapse">
+        <div class="collapse border bg-body-tertiary rounded p-1 navbar-nav-scroll d-print-none" id="toc-collapse">
             <small>
                 <div class="toc toc-panel text-body p-2">
                     {{- range . }}
