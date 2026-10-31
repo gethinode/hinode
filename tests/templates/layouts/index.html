@@ -1596,6 +1596,7 @@ CARD ROW ALIGNMENT FAILURES: {{ $arFail }}
 {{- $navFail := 0 -}}
 {{- $navPage := site.GetPage "/blog/without-exact" -}}
 {{- $navBase := dict "page" $navPage "nav-titles" (slice "First" "Second") "nav-items" "<div></div>" -}}
+{{- $navIconClass := cond (eq hugo.Environment "theme-icons") " dropdown-toggle-icon" "" -}}
 {{- $navCases := slice
   (dict "case" "a responsive button group collapses into a companion dropdown"
         "args" (dict "tab-type" "buttons" "id" "btn-nav" "responsive" true)
@@ -1608,11 +1609,11 @@ CARD ROW ALIGNMENT FAILURES: {{ $arFail }}
   (dict "case" "the companion of a button group reads as a button"
         "args" (dict "tab-type" "buttons" "id" "btn-nav" "responsive" true)
         "find" `class="dropdown-toggle [^"]*"`
-        "want" `class="dropdown-toggle btn btn-outline-primary"`)
+        "want" (printf `class="dropdown-toggle btn btn-outline-primary%s"` $navIconClass))
   (dict "case" "the companion of a standard nav stays borderless"
         "args" (dict "tab-type" "pills" "id" "pill-nav" "responsive" true)
         "find" `class="dropdown-toggle [^"]*"`
-        "want" `class="dropdown-toggle link-body-emphasis border-0 bg-transparent p-0"`)
+        "want" (printf `class="dropdown-toggle link-body-emphasis border-0 bg-transparent p-0%s"` $navIconClass))
   (dict "case" "responsive defaults to true, so a button group collapses unasked"
         "args" (dict "tab-type" "buttons" "id" "default-nav")
         "find" `id="dropdown-[^"]*"`

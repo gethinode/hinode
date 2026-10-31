@@ -3,3 +3,5 @@
 # by a build that names it; the default build leaves every optional icon unset.
 [icons]
   sidebarGroup = "fas angle-down"
+  navbarDropdown = "fas angle-down"
+  panelDropdown = "fas caret-down"

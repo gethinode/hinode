@@ -64,6 +64,7 @@
      standard nav, which is the split assets/table.html already makes for its filter group: a control
      standing in for buttons has to read as a button rather than as body copy. */}}
 {{- $dropdownArgs := dict
+    "page"   $page
     "id"     $id
     "class"  (printf "d-%s-none py-%d" $breakpoint.current $padding.y)
     "titles" $titles

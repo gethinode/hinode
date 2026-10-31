@@ -46,6 +46,8 @@
     navbarVersionCheck   = "fas check"
     # Custom dropdown icon (replaces Bootstrap's default caret when set)
     # navbarDropdown    = "fas caret-down"
+    # Custom icon for responsive nav and table filter dropdowns (falls back to navbarDropdown)
+    # panelDropdown     = "fas caret-down"
     # Pagination
     paginationFirst      = "fas angles-left"
     paginationPrev       = "fas angle-left"
