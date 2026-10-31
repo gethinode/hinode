@@ -90,6 +90,8 @@ github.com/gethinode/mod-simple-datatables/v4 v4.4.3 h1:uaAzhTYpnrxW5zCW+Tv+JwOe
 github.com/gethinode/mod-simple-datatables/v4 v4.4.3/go.mod h1:W8sAf+vqvl7gUt5/d5uAald/+kWK4f8ru54EbbdOnVQ=
 github.com/gethinode/mod-simple-datatables/v4 v4.4.4 h1:gTk9FIFgaZho5wDLyKNtfz1ERyH6DG0DO7VhMwQWASU=
 github.com/gethinode/mod-simple-datatables/v4 v4.4.4/go.mod h1:81JsU0Gr7eGrGczZ7dFnnkJG4rLS+JH+v8guUQLHYfM=
+github.com/gethinode/mod-simple-datatables/v4 v4.5.0 h1:m1YoURkJ2Qr9teLNXsxjvJXUBnDIaWqdZs1yMwY7GGk=
+github.com/gethinode/mod-simple-datatables/v4 v4.5.0/go.mod h1:81JsU0Gr7eGrGczZ7dFnnkJG4rLS+JH+v8guUQLHYfM=
 github.com/gethinode/mod-utils/v6 v6.7.0 h1:DxqKUb13/6ydcntGIrUj1YD892VwarB8zGj+77CeUwM=
 github.com/gethinode/mod-utils/v6 v6.7.0/go.mod h1:E5tO9w3VKaidJpu1nI8zAKmh0bddFHOIIQnudAaXQTs=
 github.com/gethinode/mod-utils/v6 v6.8.0 h1:Rz/6DlPKVW0791jSsobxx4I4pKQ38H4JOEeOV+GeRzU=

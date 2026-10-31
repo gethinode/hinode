@@ -2,8 +2,8 @@ github.com/FortAwesome/Font-Awesome v0.0.0-20260715180930-14c65a3747d0 h1:4+bB2o
 github.com/FortAwesome/Font-Awesome v0.0.0-20260715180930-14c65a3747d0/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/cloudcannon/bookshop/hugo/v3 v3.20.0 h1:cplbvPKQhmRv+1gyaP61+mu5MEVoOGUEVvdoi4hmuYA=
 github.com/cloudcannon/bookshop/hugo/v3 v3.20.0/go.mod h1:s7mIonDhtsLcn10ZKuVXyqd6BDHI8vT1WQhZw8rPfY8=
-github.com/gethinode/mod-blocks/v2 v2.13.2 h1:+aZ2uGTG6VWPQq3NTs0MC8IYGZ6s5b4gR1CSSvpCtE8=
-github.com/gethinode/mod-blocks/v2 v2.13.2/go.mod h1:/tW/zbWxWOcVpBxO3ATj87J2gyCKgDyXy3LC/o9sdI4=
+github.com/gethinode/mod-blocks/v2 v2.14.0 h1:ea91ou9dx8YmckfDrnQp885Ab+zbitDkZ7P4oMIGvF4=
+github.com/gethinode/mod-blocks/v2 v2.14.0/go.mod h1:/tW/zbWxWOcVpBxO3ATj87J2gyCKgDyXy3LC/o9sdI4=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.3 h1:EisskJ88HIHEyb2iS3IMoVZllgxZd6+RtTPX+3L8bXo=
 github.com/gethinode/mod-bootstrap-icons/v2 v2.0.3/go.mod h1:kHpw4Jlnj4fZuGnjnvygBLMam4JJX8okVjse2lQa3Qo=
 github.com/gethinode/mod-cookieyes/v3 v3.1.2 h1:QlFaAD1QJRcomi5CPyRu1jvhuioDQ9DKWe0d9P+3vBU=
