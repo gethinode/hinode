@@ -1,0 +1,43 @@
+{{- /*
+    Assertions for the case of a link's text in assets/link.html.
+
+    Casing is for titles. Text an author wrote sits in a sentence and renders as written;
+    only a title retrieved for a link without text follows the title case rules. The first
+    three cases read the fixture's paragraphs, so they cover the Markdown render hook and
+    the shortcode, which reach the partial by separate routes.
+
+    The bookshop-live branch of the partial resolves nothing, so a link without text is
+    empty there and this table does not hold.
+*/ -}}
+{{- $fail := 0 -}}
+{{- if not site.Params.env_bookshop_live -}}
+{{- $page := . -}}
+{{- $got := findRESubmatch `<a [^>]*>([^<]*)</a>` .Content -}}
+{{- $href := "/blog/link-case/" -}}
+{{- $cases := slice
+  (dict "case" "markdown text" "got" (index (index $got 0) 1) "want" "next announcement")
+  (dict "case" "shortcode text" "got" (index (index $got 1) 1) "want" "more about us")
+  (dict "case" "shortcode without text" "got" (index (index $got 2) 1) "want" "Link Case Fixture")
+  (dict "case" "provided text" "args" (dict "href" $href "text" "read this") "want" "read this")
+  (dict "case" "provided text, case false" "args" (dict "href" $href "text" "Read This" "case" false) "want" "Read This")
+  (dict "case" "retrieved title" "args" (dict "href" $href) "want" "Link Case Fixture")
+  (dict "case" "retrieved title, case false" "args" (dict "href" $href "case" false) "want" "link case fixture")
+  (dict "case" "retrieved title, exact" "args" (dict "href" $href "exact" true) "want" "link case fixture")
+-}}
+{{- range $cases -}}
+{{- $text := .got -}}
+{{- with .args -}}
+  {{- $link := partial "assets/link.html" (merge (dict "page" $page) .) -}}
+  {{- $text = index (index (findRESubmatch `<a [^>]*>([^<]*)</a>` $link) 0) 1 -}}
+{{- end -}}
+{{- if eq $text .want }}
+PASS link case: {{ .case }}
+{{- else }}
+FAIL link case: {{ .case }}
+{{- $fail = add $fail 1 -}}
+{{- errorf "link case mismatch: case=%q want=%q got=%q" .case .want $text -}}
+{{- end -}}
+{{- end -}}
+{{- end }}
+
+LINK CASE FAILURES: {{ $fail }}

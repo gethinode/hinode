@@ -24,6 +24,9 @@
 {{- $target := "" -}}
 {{- $rel := "" -}}
 {{- $text := $args.text -}}
+{{- /* Casing is for titles. Text the caller wrote is prose, usually mid-sentence, so only a
+     title retrieved for a link without text is cased below. */ -}}
+{{- $retrieved := not $text -}}
 
 {{- if site.Params.env_bookshop_live -}}
     <a 
@@ -161,7 +164,7 @@
                 {{- end -}}
             {{- end -}}
 
-            {{- if not $args.exact }}
+            {{- if and $retrieved (not $args.exact) }}
                 {{- if not $args.case }}
                     {{- $text = lower $text }}
                 {{- else }}
