@@ -1,0 +1,60 @@
+{{- /*
+    Assertions for the whitespace around assets/link.html.
+
+    The partial is called inline, in the middle of a sentence, so nothing outside the anchor
+    may belong to it: a stray newline either side of the tag renders as a visible space
+    before whatever punctuation follows ("Read the announcement ."). The reduction keeps the
+    surrounding text byte for byte and replaces each anchor with [L], so a case reads as the
+    sentence it covers and pins the spaces the Markdown has as firmly as those it has not.
+    The anchor's own text is masked because link casing is not what is under test here.
+
+    The direct cases walk the partial's other destination kinds, which a paragraph cannot
+    tell apart.
+
+    This is a page template rather than a section of index.html so it can run twice. The
+    partial has a second branch for Bookshop's live editor, with its own anchor and tags,
+    selected by a site-wide param. The rest of the table does not hold under that param, so
+    the bookshop-live environment disables the home page and renders only the fixtures.
+*/ -}}
+{{- $fail := 0 -}}
+{{- $got := split (strings.TrimSpace (replaceRE `<a [^>]*>[^<]*</a>` "[L]" .Content)) "\n" -}}
+{{- $want := slice
+  "<p>Read the [L].</p>"
+  "<p>See [L] for more.</p>"
+  "<p>Open ([L]), then [L]!</p>"
+  "<p>No[L]here.</p>"
+  "<p>Wrapped"
+  "[L]"
+  "break.</p>"
+  "<p>Two [L][L] links.</p>"
+  "<p>Shortcode [L].</p>"
+-}}
+{{- if eq (delimit $got "|") (delimit $want "|") }}
+PASS link whitespace in a rendered paragraph
+{{- else }}
+FAIL link whitespace in a rendered paragraph
+     want={{ $want }}
+     got ={{ $got }}
+{{- $fail = add $fail 1 -}}
+{{- errorf "link whitespace mismatch: env=%q want=%q got=%q" hugo.Environment $want $got -}}
+{{- end -}}
+{{- $page := . -}}
+{{- $cases := slice
+  (dict "case" "internal link" "args" (dict "href" "/blog/toc-override/" "text" "Toc"))
+  (dict "case" "external link" "args" (dict "href" "https://external.example/x" "text" "Out"))
+  (dict "case" "special scheme" "args" (dict "href" "mailto:a@example.org" "text" "Mail"))
+  (dict "case" "local anchor" "args" (dict "href" "#intro" "text" "Intro"))
+  (dict "case" "unvalidated link" "args" (dict "href" "/missing/" "text" "Gone" "skip-validation" true))
+-}}
+{{- range $cases -}}
+{{- $link := partial "assets/link.html" (merge (dict "page" $page) .args) -}}
+{{- if eq $link (strings.TrimSpace $link) }}
+PASS link whitespace: {{ .case }}
+{{- else }}
+FAIL link whitespace: {{ .case }}
+{{- $fail = add $fail 1 -}}
+{{- errorf "link whitespace mismatch: env=%q case=%q got=%q" hugo.Environment .case $link -}}
+{{- end -}}
+{{- end }}
+
+LINK WHITESPACE FAILURES: {{ $fail }}

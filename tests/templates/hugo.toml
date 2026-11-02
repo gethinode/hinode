@@ -99,6 +99,16 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
   source = '../../data/structures/link.yml'
   target = 'data/structures/link.yml'
 
+# The Markdown render hook is what most links on a real site come through, and whether the
+# partial's output sits flush against the author's text can only be read from a rendered
+# paragraph. The link shortcode is the other inline path into the same partial.
+[[module.mounts]]
+  source = '../../layouts/_markup/render-link.html'
+  target = 'layouts/_markup/render-link.html'
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/link.html'
+  target = 'layouts/_shortcodes/link.html'
+
 # assets/sidebar.html renders real rows through assets/link.html and real icons through
 # mod-fontawesome, and both are what the assertions read, so neither is stubbed. The icon
 # module brings its own data (the structure it validates against plus the icon table), which
