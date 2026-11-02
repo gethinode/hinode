@@ -60,6 +60,12 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/GetLocale.html'
   target = 'layouts/_partials/utilities/GetLocale.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetRobots.html'
+  target = 'layouts/_partials/utilities/GetRobots.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetCanonical.html'
+  target = 'layouts/_partials/utilities/GetCanonical.html'
 
 # assets/section-title.html initializes its arguments through mod-utils (InitArgs and the
 # structure data it reads), so those come from the vendored module — `mod:vendor` populates

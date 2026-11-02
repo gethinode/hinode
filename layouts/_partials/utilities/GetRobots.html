@@ -1,0 +1,3 @@
+{{- /* Returns the robots directive that applies to the page in the context, or an empty
+       string if none is set. The page's own setting wins over the site's. */ -}}
+{{- return or .Params.robots .Params.meta.robots .Site.Params.meta.robots "" -}}
