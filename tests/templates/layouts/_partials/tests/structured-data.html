@@ -28,6 +28,15 @@
   (dict "name" "person publisher" "publisher" "Person" "profiles" (dict "github" "https://github.com/example")
         "author" (dict) "want" (slice "https://github.com/example") "wantAuthor" (slice)
         "date" "2026-01-15T10:20:30+01:00")
+  (dict "name" "organization details"
+        "profiles" (dict "legalname" `Example "Labs" B.V.` "description" "Example description"
+        "address" (dict "locality" "Houten" "country" "NL"))
+        "author" (dict) "want" (slice) "wantAuthor" (slice) "date" "2026-01-15T10:20:30Z"
+        "wantLegalName" `Example "Labs" B.V.` "wantDescription" "Example description"
+        "wantAddress" (dict "@type" "PostalAddress" "addressLocality" "Houten" "addressCountry" "NL"))
+  (dict "name" "details on a person publisher are ignored" "publisher" "Person"
+        "profiles" (dict "legalname" "Example B.V." "address" (dict "country" "NL"))
+        "author" (dict) "want" (slice) "wantAuthor" (slice) "date" "2026-01-15T10:20:30Z")
   (dict "name" "homepage without author settings" "home" true "omitAuthor" true
         "profiles" (dict) "want" (slice) "date" "2026-01-15T10:20:30Z")
 -}}
@@ -59,6 +68,15 @@
       {{- $publisher := index $graph 0 -}}
       {{- if ne (jsonify $publisher.sameAs) (jsonify $case.want) -}}
         {{- errorf "structured data %q publisher profiles: want=%s got=%s" $case.name (jsonify $case.want) (jsonify $publisher.sameAs) -}}
+      {{- end -}}
+      {{- if ne (index $publisher "legalName") $case.wantLegalName -}}
+        {{- errorf "structured data %q legal name: want=%v got=%v" $case.name $case.wantLegalName (index $publisher "legalName") -}}
+      {{- end -}}
+      {{- if ne (index $publisher "description") $case.wantDescription -}}
+        {{- errorf "structured data %q description: want=%v got=%v" $case.name $case.wantDescription (index $publisher "description") -}}
+      {{- end -}}
+      {{- if ne (jsonify (index $publisher "address")) (jsonify $case.wantAddress) -}}
+        {{- errorf "structured data %q address: want=%s got=%s" $case.name (jsonify $case.wantAddress) (jsonify (index $publisher "address")) -}}
       {{- end -}}
       {{- $author := dict -}}
       {{- $dates := 0 -}}
