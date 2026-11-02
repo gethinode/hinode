@@ -211,7 +211,12 @@
     # twitter = "https://twitter.com/gethinode"
     # linkedIn = ""
     github = "https://github.com/gethinode/hinode"
+    # legalName = "" # for an Organization only, as are description and address
+    # description = ""
     section = "blog"
+    # [schema.address] # street, postalCode, locality, region, country
+    #     locality = ""
+    #     country = ""
     [schema.author]
         name = "Mark Dumay"
         # twitter = "https://twitter.com/markdumay"

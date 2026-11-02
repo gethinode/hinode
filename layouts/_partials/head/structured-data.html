@@ -29,6 +29,15 @@
   {{ end }}
 {{ end }}
 
+{{ $address := dict -}}
+{{ with .Site.Params.schema.address -}}
+  {{ $fields := dict "streetAddress" .street "postalCode" .postalcode "addressLocality" .locality "addressRegion" .region "addressCountry" .country -}}
+  {{ range $key, $value := $fields -}}
+    {{ with $value }}{{ $address = merge $address (dict $key .) }}{{ end -}}
+  {{ end -}}
+{{ end -}}
+{{ with $address }}{{ $address = merge . (dict "@type" "PostalAddress") }}{{ end -}}
+
 {{ $locale := "" -}}
 {{ with .Site.Params.schema }}{{ $locale = .locale }}{{ end -}}
 {{ $locale = replace (partial "utilities/GetLocale.html" (dict "locale" $locale)) "_" "-" -}}
@@ -49,6 +58,9 @@
       "url": {{ print $baseURL }},
       "sameAs": {{ $alt | uniq }},
       {{ if eq .Site.Params.schema.type "Organization" -}}
+        {{ with .Site.Params.schema.legalname }}"legalName": {{ . }},{{ end }}
+        {{ with .Site.Params.schema.description }}"description": {{ . }},{{ end }}
+        {{ with $address }}"address": {{ . }},{{ end }}
         "logo": {
           "@type": "ImageObject",
           "@id": {{ print $baseURL "#/schema/image/1"}},
