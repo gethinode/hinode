@@ -1,0 +1,5 @@
+# Adds 'home' to the base list: see tests/templates/layouts/link-whitespace.html.
+disableKinds = ['home', 'taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
+
+[params]
+  env_bookshop_live = true
