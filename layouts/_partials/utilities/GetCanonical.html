@@ -1,0 +1,18 @@
+{{- /* Returns the canonical URL of the page in the context, or an empty value if it should
+       not have one. Set `canonical` in front matter to a URL, to true for the page's own
+       permalink, or to false for none. The value cascades, so a site can set true on its
+       home page and false on the sections that paginate. Taxonomy and term pages inherit
+       it too, so set false on those if they paginate. An empty value counts as unset.
+
+       Without a setting a regular page is its own canonical and a list page has none. On
+       a list page .Permalink is pager-invariant: while rendering /blog/page/2/ it still
+       reports /blog/, so it would canonicalize every pager onto page 1, which Google's
+       pagination guidance advises against. The URL of the current pager is reachable only
+       through .Paginator, and touching that here is not an option: it builds the paginator
+       with the site's default page size before a layout can call .Paginate with its own,
+       after which Hugo silently ignores the layout's size rather than raising an error. */ -}}
+{{- $canonical := .Params.canonical -}}
+{{- if eq $canonical nil "" }}{{ $canonical = .Params.meta.canonical }}{{ end -}}
+{{- if eq $canonical nil "" }}{{ $canonical = eq .Kind "page" }}{{ end -}}
+{{- if eq $canonical true }}{{ $canonical = .Permalink }}{{ end -}}
+{{- return $canonical -}}
