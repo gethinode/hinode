@@ -64,6 +64,9 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
   source = '../../layouts/_partials/utilities/GetRobots.html'
   target = 'layouts/_partials/utilities/GetRobots.html'
 [[module.mounts]]
+  source = '../../layouts/_partials/utilities/IsIndexable.html'
+  target = 'layouts/_partials/utilities/IsIndexable.html'
+[[module.mounts]]
   source = '../../layouts/_partials/utilities/GetCanonical.html'
   target = 'layouts/_partials/utilities/GetCanonical.html'
 

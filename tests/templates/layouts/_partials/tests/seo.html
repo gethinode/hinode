@@ -2,6 +2,7 @@
 {{- $base := "https://example.org" -}}
 {{- $canonical := slice
   (dict "path" "/seo/plain" "want" (printf "%s/seo/plain/" $base) "name" "a regular page is its own canonical")
+  (dict "path" "/seo/canonical-empty" "want" (printf "%s/seo/canonical-empty/" $base) "name" "an empty value counts as unset")
   (dict "path" "/seo" "want" false "name" "a list page has none by default")
   (dict "path" "/seo/canonical-false" "want" false "name" "false removes it from a regular page")
   (dict "path" "/seo/canonical-path" "want" "/elsewhere/" "name" "a URL is passed through")
@@ -29,5 +30,22 @@ PASS canonical: {{ .name }}
 PASS robots: {{ .name }}
   {{- else -}}
     {{- errorf "GetRobots mismatch: case=%q want=%q got=%q" .name .want $got -}}
+  {{- end -}}
+{{- end -}}
+{{- $indexable := slice
+  (dict "path" "/seo/plain" "want" true "name" "no directive")
+  (dict "path" "/seo/robots-top" "want" false "name" "noindex")
+  (dict "path" "/seo/robots-meta" "want" false "name" "noindex among directives")
+  (dict "path" "/seo/robots-list" "want" false "name" "a list of directives")
+  (dict "path" "/seo/robots-none" "want" false "name" "none")
+  (dict "path" "/seo/robots-upper" "want" false "name" "upper case")
+  (dict "path" "/seo/robots-follow" "want" true "name" "index, follow")
+-}}
+{{- range $indexable -}}
+  {{- $got := partial "utilities/IsIndexable.html" (site.GetPage .path) -}}
+  {{- if eq $got .want }}
+PASS indexable: {{ .name }}
+  {{- else -}}
+    {{- errorf "IsIndexable mismatch: case=%q want=%v got=%v" .name .want $got -}}
   {{- end -}}
 {{- end -}}

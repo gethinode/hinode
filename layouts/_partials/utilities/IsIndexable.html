@@ -1,0 +1,4 @@
+{{- /* Returns whether the robots directive of the page in the context allows indexing. The
+       directive can be a string or a list, and matches regardless of case. */ -}}
+{{- $robots := printf "%v" (partial "utilities/GetRobots.html" .) -}}
+{{- return not (findRE `(?i)\b(noindex|none)\b` $robots) -}}
