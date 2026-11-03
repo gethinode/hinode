@@ -1,6 +1,6 @@
 # toml-docs-start lang-main
 [en]
-languageName = "English"
+label = "English"
 contentDir = "content/en"
 weight = 1
 # toml-docs-end lang-main
@@ -14,7 +14,7 @@ caption = "I work on everything coding and tweet developer memes"
 # toml-docs-end lang-param
 
 [fr]
-languageName = "Français"
+label = "Français"
 contentDir = "content/fr"
 weight = 2
 [fr.params.opengraph]
@@ -26,7 +26,7 @@ title = "Suivez-moi"
 caption = "Je code et je tweet des mèmes de développeurs."
 
 [nl]
-languageName = "Nederlands"
+label = "Nederlands"
 contentDir = "content/nl"
 weight = 3
 [nl.params.head]

@@ -2,11 +2,9 @@ baseURL = 'https://example.org/'
 title = 'template tests'
 # Deliberately not 'en-us': utilities/GetLocale.html has to refine a matching language with
 # this setting and ignore it for every other one, and only a value differing from the region
-# it would otherwise guess for English tells those two branches apart. Set through the
-# deprecated `languageCode` rather than its v0.158.0 replacement `locale`, so the assertions
-# still run at the advertised v0.153.1 floor — v0.164 maps the old key onto the new one, so
-# both ends of the supported range agree. Swap it when #2049 moves the floor to v0.158.0.
-languageCode = 'en-gb'
+# it would otherwise guess for English tells those two branches apart. Set through `locale`,
+# which replaced `languageCode` in Hugo v0.158.0, the minimum version Hinode requires.
+locale = 'en-gb'
 disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [markup.goldmark.parser.attribute]
   block = true

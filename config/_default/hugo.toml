@@ -21,7 +21,7 @@ timeout = "180s"
 # toml-docs-end timeout
 
 # toml-docs-start language
-languageCode = "en-us"
+locale = "en-us"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 # toml-docs-end language
@@ -122,7 +122,7 @@ home = ["HTML", "RSS", "REDIR", "netlify", "server", "searchindex"]
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.153.1"
+    min = "0.158.0"
   [[module.mounts]]
     source = "archetypes"
     target = "archetypes"
