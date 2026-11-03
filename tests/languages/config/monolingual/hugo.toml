@@ -1,0 +1,2 @@
+# English only, so that head/head.html has a single language to count.
+disableLanguages = ['fr', 'de', 'nl']

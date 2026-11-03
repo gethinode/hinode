@@ -28,10 +28,11 @@
 {{ if not $error }}
     {{/* Try language-specific file first */}}
     {{ $path := path.Join (path.Dir $args.data) (printf "%s.%s" (path.BaseName $args.data) .Page.Language.Lang) (path.Ext $args.data) }}
-    {{ $entries = index site.Data $path }}
+    {{ $data := partial "utilities/GetData.html" . }}
+    {{ $entries = index $data $path }}
     {{/* Use exact provided path as backup */}}
     {{ if not $entries -}}
-        {{ $entries = index site.Data $args.data }}
+        {{ $entries = index $data $args.data }}
     {{ end }}
     {{ if not $entries -}}
         {{ errorf "Invalid abbrevation data '%s': %s" $args.data .Position -}}

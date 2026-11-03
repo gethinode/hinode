@@ -1,0 +1,73 @@
+{{- /*
+    Assertions for utilities/GetLanguages.html, assets/download.html, page/sharing.html,
+    assets/helpers/GetDimension.html and the abbr shortcode.
+    Each compares the partial with the deprecated API it replaces, which Hugo still runs.
+    `errorf` fails the build, which is what scripts/test-languages.mjs acts on. With
+    params.tests.oracle off (the quiet environment) the partials run without the comparisons,
+    so that the build log shows any deprecated API the partials themselves still call.
+*/ -}}
+{{- $where := printf "%s (%s)" .RelPermalink .Language.Lang -}}
+{{- $oracle := site.Params.tests.oracle -}}
+
+{{- $got := slice -}}
+{{- range partial "utilities/GetLanguages.html" . }}{{ $got = $got | append .Lang }}{{ end -}}
+{{- if $oracle -}}
+    {{- $want := slice -}}
+    {{- range site.Languages }}{{ $want = $want | append .Lang }}{{ end -}}
+    {{- if ne (delimit $got ",") (delimit $want ",") -}}
+        {{- errorf "GetLanguages on %s: got [%s], want site.Languages [%s]" $where (delimit $got ",") (delimit $want ",") -}}
+    {{- end -}}
+{{- end -}}
+<p id="languages">{{ delimit $got "," }}</p>
+
+{{- /* English has a locale (en-us) that differs from its code, so its file gets no language
+    name: .LanguageCode and .Locale return the locale, not the code. */ -}}
+{{- $.Scratch.Set "sharing" true -}}
+{{- range $file := slice "/files/sample.fr.pdf" "/files/sample.en.pdf" -}}
+    {{- $download := partial "assets/download.html" (dict "page" $ "download" $file) -}}
+    {{- /* sharing.html labels the page's own download. */ -}}
+    {{- $sharing := "" -}}
+    {{- if eq $file $.Params.download }}{{ $sharing = partial "page/sharing.html" $ }}{{ end -}}
+
+    {{- if $oracle -}}
+        {{- /* The label download.html and sharing.html derived through site.Languages and .LanguageCode. */ -}}
+        {{- $lang := strings.TrimPrefix "." (path.Ext (path.BaseName $file)) -}}
+        {{- $want := T "download" -}}
+        {{- if and $lang (ne site.Language.Lang $lang) -}}
+            {{- range site.Languages -}}
+                {{- if eq .LanguageCode $lang }}{{ $want = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}{{ end -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if not (strings.Contains $download (printf ">%s<" $want)) -}}
+            {{- errorf "download.html on %s: want title %q, got %s" $where $want $download -}}
+        {{- end -}}
+        {{- /* The label lands in an aria-label attribute, HTML-escaped. */ -}}
+        {{- if and $sharing (not (strings.Contains $sharing (printf "aria-label=\"%s\"" (htmlEscape $want)))) -}}
+            {{- errorf "sharing.html on %s: want label %q, got %s" $where $want $sharing -}}
+        {{- end -}}
+        <p id="download">{{ $want }}</p>
+    {{- end -}}
+{{- end -}}
+
+{{- /* GetDimension and abbr read the data files, compared with site.Data. */ -}}
+{{- $dims := partial "assets/helpers/GetDimension.html" (dict "ratio" "3x1") -}}
+{{- $abbr := "" -}}
+{{- with site.GetPage "/abbr" }}{{ $abbr = .Content }}{{ end -}}
+{{- if and $oracle (eq .Language.Lang "en") -}}
+    {{- $want := (index (where (index site.Data "dimensions") "ratio" "3x1") 0).dimensions -}}
+    {{- if ne (delimit $dims ",") (delimit $want ",") -}}
+        {{- errorf "GetDimension on %s: got [%s], want [%s]" $where (delimit $dims ",") (delimit $want ",") -}}
+    {{- end -}}
+    {{- $long := (index (where (index site.Data "abbr") "id" "cms") 0).long -}}
+    {{- if not (strings.Contains $abbr (printf "title=\"%s\"" $long)) -}}
+        {{- errorf "abbr on %s: want title %q, got %s" $where $long $abbr -}}
+    {{- end -}}
+{{- end -}}
+<p id="data">{{ delimit $dims "," }}</p>
+
+{{- /* head/head.html declares the language only on a multilingual site. It only defines the
+    head block, which baseof.html runs; the template call below runs it, and
+    scripts/test-languages.mjs reads the result. The partials the block reaches besides
+    GetLanguages are stubs, and the module configuration it requires is empty. */ -}}
+{{- page.Scratch.Set "modules" (dict "optional" slice) -}}
+<head-test>{{ template "head" . }}</head-test>

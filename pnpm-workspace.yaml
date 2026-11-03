@@ -1,6 +1,7 @@
 # pnpm reads this for repo-wide settings even without sub-packages.
 # allowBuilds is the v11 gate for which deps may run install scripts. Keep tight.
 allowBuilds:
+  esbuild: false # via @bookshop/hugo-engine; the renderer test loads only its full-hugo-renderer files
   hugo-extended: true # downloads the platform-specific Hugo binary
   # add more only when a postinstall failure is investigated and trusted
 minimumReleaseAgeExclude:
@@ -39,6 +40,9 @@ minimumReleaseAgeExclude:
 # undici: keep separate v6/v7 overrides. Versions 6.29.1 and 7.30.1 fix
 #   excessive-content-encoding and EventSource parser DoS; 7.30.1 also fixes
 #   the Subresource Integrity algorithm-token bypass.
+# liquidjs: @bookshop/hugo-engine pins vulnerable 10.17.0; keep the override on
+#   major 10 and require the patched >=10.27.2 release. The renderer test never
+#   loads liquidjs.
 # braces: stacked-exhaustion DoS advisory has no patched release yet (latest
 #   is the vulnerable 3.0.3); nothing to override until upstream ships a fix.
 # These are transitive: the relevant direct dependencies do not currently
@@ -52,6 +56,7 @@ overrides:
   js-yaml@4: "^4.3.2"
   js-yaml@5: ">=5.2.2"
   katex: ">=0.18.2"
+  liquidjs@10: "^10.27.2"
   shell-quote: ">=1.11.0"
   smol-toml: ">=1.9.0"
   svgo: ">=4.0.2"

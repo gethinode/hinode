@@ -1,0 +1,7 @@
+{{- /* index.redir's alias rules as it wrote them through site.AllPages: the oracle that
+    scripts/test-languages.mjs compares _redirects with. */ -}}
+{{ range $p := .Site.AllPages }}
+{{- range .Aliases -}}
+{{ if hasPrefix . "." }}{{ urls.JoinPath $p.RelPermalink . }}{{ else }}{{ . }}{{ end }} {{ $p.RelPermalink }}
+{{ end }}
+{{- end -}}

@@ -1,0 +1,6 @@
+# The partials without the comparisons and without the site.AllPages oracle, so that
+# scripts/test-languages.mjs can check the build log for deprecated APIs they still call.
+[params.tests]
+  oracle = false
+[outputs]
+  home = ['HTML', 'REDIR']

@@ -46,7 +46,7 @@
     {{- end -}}
     {{ partial "head/seo.html" . }}
     {{ partialCached "head/favicon.html" . -}}
-    {{ if gt (len .Site.Languages) 1}}
+    {{ if gt (len (partial "utilities/GetLanguages.html" .)) 1 }}
     <meta name="lang" content="{{ .Site.Language }}">
     {{ end }}
 {{ end }}

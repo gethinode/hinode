@@ -1,0 +1,25 @@
+{{- /*
+    Returns the project's languages, each once and in Hugo's language order, as
+    site.Languages does. Takes no arguments.
+
+    Hugo v0.156.0 deprecated site.Languages. From that release on the languages are
+    collected from hugo.Sites, which holds one site per language, version and role: only the
+    sites in the version and role of the first site are kept, so a project with versions or
+    roles still lists each language once. The guard keeps site.Languages for older Hugo,
+    including the v0.147.6 renderer that Bookshop uses for CloudCannon live editing, where
+    hugo.Sites fails. Use if/else, not cond: cond evaluates both arguments.
+*/ -}}
+
+{{- $languages := slice -}}
+{{- if le (hugo.Version.Compare "0.156.0") 0 -}}
+    {{- $first := index hugo.Sites 0 -}}
+    {{- range hugo.Sites -}}
+        {{- if and (eq .Version.Name $first.Version.Name) (eq .Role.Name $first.Role.Name) -}}
+            {{- $languages = $languages | append .Language -}}
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
+    {{- $languages = site.Languages -}}
+{{- end -}}
+
+{{- return $languages -}}

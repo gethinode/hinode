@@ -1,10 +1,11 @@
 {{- $args := partial "utilities/InitArgs.html" (dict "structure" "args" "args" .Params "named" .IsNamedParams "group" "shortcode") -}}
 {{- if not $args.err -}}
-{{- $structDef := index site.Data.structures $args.structure -}}
+{{- $data := partial "utilities/GetData.html" . -}}
+{{- $structDef := index $data.structures $args.structure -}}
 {{- /* Fallback: resolve bookshop-{name} from the mounted component blueprint */ -}}
 {{- if and (not $structDef) (strings.HasPrefix $args.structure "bookshop-") -}}
   {{- $compName := strings.TrimPrefix "bookshop-" $args.structure -}}
-  {{- $blueprint := index (index (index site.Data.structures.components $compName) (printf "%s.bookshop" $compName)) "blueprint" | default dict -}}
+  {{- $blueprint := index (index (index $data.structures.components $compName) (printf "%s.bookshop" $compName)) "blueprint" | default dict -}}
   {{- if $blueprint -}}
     {{- $bpArgs := dict -}}
     {{- range $k, $v := $blueprint -}}
@@ -15,7 +16,7 @@
   {{- end -}}
 {{- end -}}
 {{- with $structDef -}}
-{{- $globalArgs := ((index site.Data.structures "_arguments") | default dict).arguments | default dict -}}
+{{- $globalArgs := ((index $data.structures "_arguments") | default dict).arguments | default dict -}}
 {{- $rows := slice -}}
 {{- range $key, $val := .arguments -}}
 {{- if and $val (reflect.IsMap $val) -}}{{- if $val.deprecated }}{{ continue }}{{ end -}}{{- end -}}

@@ -37,7 +37,7 @@
     {{ with index site.Params "dam" }}{{ with index . "dimensions" }}{{ $config = . }}{{ end }}{{ end }}
     {{ $config = path.Join (path.Dir $config) (path.BaseName $config) }}
 
-    {{ with index site.Data $config }}
+    {{ with index (partial "utilities/GetData.html" .) $config }}
         {{ $matches := first 1 (where . "ratio" $args.ratio) }}
         {{ if eq ($matches | len) 1 }}
             {{ $dim = (index $matches 0).dimensions }}

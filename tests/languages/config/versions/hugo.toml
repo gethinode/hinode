@@ -1,0 +1,10 @@
+# Two versions. The default version (v2) is not the first in Hugo's sort order (v1, by weight).
+# The cascade puts every page in both versions.
+defaultContentVersion = 'v2'
+[versions.v1]
+  weight = 1
+[versions.v2]
+  weight = 2
+[[cascade]]
+  [cascade.sites.matrix]
+    versions = ['v1', 'v2']

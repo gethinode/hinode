@@ -1,0 +1,22 @@
+{{- /*
+    Assertions for assets/helpers/navbar-languages.html: the language menu of a translated
+    page lists its translations, and that of an untranslated page lists every language, with
+    the names the deprecated .LanguageName and site.Languages give. See home.html for
+    params.tests.oracle.
+*/ -}}
+{{- $where := printf "%s (%s)" .RelPermalink .Language.Lang -}}
+{{- $menu := partial "assets/helpers/navbar-languages.html" (dict "page" . "breakpoint" "md") -}}
+{{- $got := slice -}}
+{{- range findRESubmatch `hreflang="([^"]+)"[^>]*>([^<]*)<` $menu }}{{ $got = $got | append (printf "%s:%s" (index . 1) (index . 2)) }}{{ end -}}
+{{- if site.Params.tests.oracle -}}
+    {{- $want := slice -}}
+    {{- if .IsTranslated -}}
+        {{- range .AllTranslations }}{{ $want = $want | append (printf "%s:%s" .Language.Lang .Language.LanguageName) }}{{ end -}}
+    {{- else -}}
+        {{- range site.Languages }}{{ $want = $want | append (printf "%s:%s" .Lang (default .Lang .LanguageName)) }}{{ end -}}
+    {{- end -}}
+    {{- if ne (delimit $got ",") (delimit $want ",") -}}
+        {{- errorf "navbar-languages on %s: got [%s], want [%s]" $where (delimit $got ",") (delimit $want ",") -}}
+    {{- end -}}
+{{- end -}}
+<p id="menu">{{ delimit $got "," }}</p>

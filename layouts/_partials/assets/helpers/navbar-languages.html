@@ -29,16 +29,28 @@
                 <li>
                     {{- $state := cond (eq .Language.Lang $lang) "active" "" }}
                     <a class="dropdown-item {{ $state }}" hreflang="{{ .Language.Lang }}" href="{{ .RelPermalink }}">
-                        {{- cond $inline (upper .Language.Lang) .Language.LanguageName -}}
+                        {{- $label := "" -}}
+                        {{- if le (hugo.Version.Compare "0.158.0") 0 -}}
+                            {{- $label = .Language.Label -}}
+                        {{- else -}}
+                            {{- $label = .Language.LanguageName -}}
+                        {{- end -}}
+                        {{- cond $inline (upper .Language.Lang) $label -}}
                     </a>
                 </li>
             {{- end -}}
         {{- else -}}
-            {{- range site.Languages -}}
+            {{- range partial "utilities/GetLanguages.html" . -}}
                 <li>
                     {{- $state := cond (eq .Lang $lang) "active" "disabled" }}
                     <a class="dropdown-item {{ $state }}" href="{{ cond (eq $state "active") $page.RelPermalink "#!" }}" hreflang="{{ .Lang }}">
-                    {{- cond $inline (upper .Lang) (default .Lang .LanguageName) -}}
+                    {{- $label := "" -}}
+                    {{- if le (hugo.Version.Compare "0.158.0") 0 -}}
+                        {{- $label = .Label -}}
+                    {{- else -}}
+                        {{- $label = .LanguageName -}}
+                    {{- end -}}
+                    {{- cond $inline (upper .Lang) (default .Lang $label) -}}
                     </a>
                 </li>
             {{- end -}}

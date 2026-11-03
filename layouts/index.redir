@@ -3,7 +3,19 @@
 {{ urls.JoinPath .url "/*" }} {{ urls.JoinPath .redirect ":splat" }} 200
 {{ end }}
 {{- end -}}
-{{ range $p := .Site.AllPages }}
+{{- /* The pages site.AllPages returned before Hugo v0.156.0 deprecated it: those of every
+    language, in the version and role of the first site in hugo.Sites, sorted by weight as
+    site.AllPages sorted them. The order matters, since Netlify applies the first rule that
+    matches. The renderer that Bookshop uses for CloudCannon live editing never loads this
+    template, so it needs no guard. */ -}}
+{{- $pages := slice -}}
+{{- $first := index hugo.Sites 0 -}}
+{{- range hugo.Sites -}}
+    {{- if and (eq .Version.Name $first.Version.Name) (eq .Role.Name $first.Role.Name) -}}
+        {{- $pages = $pages | append .Pages -}}
+    {{- end -}}
+{{- end -}}
+{{ range $p := $pages.ByWeight }}
 {{- range .Aliases -}}
 {{ if hasPrefix . "." }}{{ urls.JoinPath $p.RelPermalink . }}{{ else }}{{ . }}{{ end }} {{ $p.RelPermalink }}
 {{ end }}
