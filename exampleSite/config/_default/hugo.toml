@@ -19,7 +19,7 @@ ignoreErrors = ["error-remote-getjson", "warn-preview-restricted"]
 ignoreLogs = ['warning-goldmark-raw-html']
 timeout = "180s"
 
-languageCode = "en-us"
+locale = "en-us"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 

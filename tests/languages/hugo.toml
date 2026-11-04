@@ -1,0 +1,90 @@
+# Fixture for scripts/test-languages.mjs: a multilingual site that renders hinode's language
+# partials and redirects on the current Hugo and compares them with the APIs Hugo v0.156.0 and
+# v0.158.0 deprecated (site.Languages, site.AllPages, .LanguageName and .LanguageCode). The
+# versions and roles environments under config/ add versions or roles, under which hugo.Sites
+# holds more than one site per language. The monolingual environment keeps English only. The
+# quiet environment leaves the comparisons out.
+baseURL = 'https://example.org/'
+title = 'language tests'
+disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
+locale = 'en-us'
+defaultContentLanguage = 'en'
+
+# German and French share a weight, so the order between them comes from Hugo's tie-break.
+# Dutch has no name: the language menu of an untranslated page falls back to its code, that
+# of a translated page leaves it empty.
+[languages.en]
+  label = 'English'
+  weight = 1
+[languages.fr]
+  label = 'Français'
+  weight = 2
+[languages.de]
+  label = 'Deutsch'
+  weight = 2
+[languages.nl]
+  weight = 3
+
+[params.sharing]
+  providers = []
+# Compare the partials with the deprecated APIs; the quiet environment turns this off.
+[params.tests]
+  oracle = true
+
+[outputFormats.REDIR]
+  mediaType = 'text/netlify'
+  baseName = '_redirects'
+  isPlainText = true
+  notAlternative = true
+# What index.redir wrote before it moved off site.AllPages, as the oracle to compare it with.
+[outputFormats.ALLPAGES]
+  mediaType = 'text/netlify'
+  baseName = 'allpages'
+  isPlainText = true
+  notAlternative = true
+[mediaTypes.'text/netlify']
+  delimiter = ''
+# Markdown output, so that the abbr and args pages render the shortcodes' .md variants.
+[outputFormats.markdown]
+  mediaType = 'text/markdown'
+  baseName = 'index'
+  isPlainText = true
+  notAlternative = true
+[outputs]
+  home = ['HTML', 'REDIR', 'ALLPAGES']
+
+# The fixture mounts no icon module, so its own assets/icon.html stands in for
+# mod-fontawesome's partial.
+[[module.mounts]]
+  source = 'content'
+  target = 'content'
+[[module.mounts]]
+  source = 'static'
+  target = 'static'
+[[module.mounts]]
+  source = 'layouts'
+  target = 'layouts'
+[[module.mounts]]
+  source = 'data'
+  target = 'data'
+[[module.mounts]]
+  source = '../../layouts/index.redir'
+  target = 'layouts/index.redir'
+[[module.mounts]]
+  source = '../../layouts/_partials'
+  target = 'layouts/_partials'
+[[module.mounts]]
+  source = '../../layouts/_shortcodes'
+  target = 'layouts/_shortcodes'
+[[module.mounts]]
+  source = '../../data'
+  target = 'data'
+[[module.mounts]]
+  source = '../../i18n'
+  target = 'i18n'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/layouts'
+  target = 'layouts'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/data'
+  target = 'data'

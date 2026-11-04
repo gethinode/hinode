@@ -11,9 +11,8 @@ const { spawn } = require('child_process');
 // pass unnoticed either.
 //
 // Hugo's own --panicOnWarning cannot do this: it also panics on Hugo's
-// deprecation notices, and tests/templates/hugo.toml keeps the
-// deprecated `languageCode` key on purpose. So the log is read instead,
-// and only lines that start with "WARN  deprecated:" are let through.
+// deprecation notices. So the log is read instead, and only lines that
+// start with "WARN  deprecated:" are let through.
 //
 // A remote thumbnail must be left alone, but a sibling lookup for a
 // remote URL that the helper fails to recognize does not show offline:

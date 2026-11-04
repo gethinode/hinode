@@ -72,9 +72,15 @@
             {{ $label := (T "download" ) }}
             {{ $lang := strings.TrimPrefix "." (path.Ext (path.BaseName .)) }}
             {{ if and $lang (ne site.Language.Lang $lang) }}
-                {{ range site.Languages }}
-                    {{ if eq .LanguageCode $lang }}
-                        {{ $label = printf "%s (%s)" (T "download") (T (printf "lang_%s" .LanguageCode)) }}
+                {{ range partial "utilities/GetLanguages.html" . }}
+                    {{ $code := "" }}
+                    {{ if le (hugo.Version.Compare "0.158.0") 0 }}
+                        {{ $code = .Locale }}
+                    {{ else }}
+                        {{ $code = .LanguageCode }}
+                    {{ end }}
+                    {{ if eq $code $lang }}
+                        {{ $label = printf "%s (%s)" (T "download") (T (printf "lang_%s" $code)) }}
                     {{ end }}
                 {{ end }}
             {{ end }}

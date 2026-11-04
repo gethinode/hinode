@@ -1,6 +1,6 @@
 # toml-docs-start lang-main
 [en]
-    languageName = "English"
+    label = "English"
     contentDir = "content"
     weight = 1
 # toml-docs-end lang-main

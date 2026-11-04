@@ -1,0 +1,10 @@
+# Two roles. The default role (guest) is not the first in Hugo's sort order (member, by weight).
+# The cascade puts every page in both roles.
+defaultContentRole = 'guest'
+[roles.guest]
+  weight = 2
+[roles.member]
+  weight = 1
+[[cascade]]
+  [cascade.sites.matrix]
+    roles = ['guest', 'member']
