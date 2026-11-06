@@ -44,11 +44,46 @@
     wins over both. That a
     processed file is 1280x640, and not only named so, is checked by
     scripts/test-strict-images.cjs.
+
+    A bundle image that Hugo cannot decode (an empty file, a truncated
+    JPEG, a Git LFS pointer) keeps its own file and type, as a bundle image
+    of an unsupported type does. One whose name Hugo cannot turn into a
+    URL, such as "feature 50%.png", has no permalink either, so the page
+    wants what the page without any image wants in the same build. These
+    cases run in every build, so the strict-images build, which fails on
+    any warning, shows that none of them logs one. The test:templates
+    builds share one image cache, so from the third build on, the cases
+    also show that the empty file that Fill leaves in the cache for an
+    image it cannot decode is not taken for a processed image.
+
+    The cases that log a warning on purpose run only in the image-warnings
+    build, which sets params.tests.imageWarnings and in which
+    scripts/test-strict-images.cjs compares the warnings with the ones it
+    expects. A front-matter thumbnail that names an AVIF or HEIC page
+    resource, or one Hugo cannot decode, keeps the image-dimension.html
+    path, which in this site resolves no image and logs a missing image.
+    An image whose bytes do not match its extension, here PNG bytes in a
+    .webp file, is processed, and Hugo logs that it cannot decode its
+    metadata.
 */ -}}
 {{- $ogFail := 0 -}}
 {{- $base := "https://example.org" -}}
 {{- $processed := dict "w" "1280" "h" "640" "type" "image/png" -}}
 {{- $none := dict "w" "-" "h" "-" "type" "-" -}}
+{{- $plain := dict "case" "no site-wide image leaves all four empty or absent" "page" "/og-image/plain" "url" "" "meta" $none -}}
+{{- if eq hugo.Environment "og-schema" -}}
+  {{- $plain = dict "case" "schema.image wins over opengraph.images with its dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.jpg" $base) "meta" (dict "w" "1200" "h" "630" "type" "image/jpeg") -}}
+{{- else if eq hugo.Environment "og-schema-partial" -}}
+  {{- $plain = dict "case" "schema.image without a height has a type but no dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.PNG" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
+{{- else if eq hugo.Environment "og-schema-height" -}}
+  {{- $plain = dict "case" "schema.image without a width has a type but no dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.jpeg" $base) "meta" (dict "w" "-" "h" "-" "type" "image/jpeg") -}}
+{{- else if eq hugo.Environment "og-fallback" -}}
+  {{- $plain = dict "case" "opengraph.images is the last fallback, with a type from its extension" "page" "/og-image/plain"
+        "url" (printf "%s/img/opengraph.png" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
+{{- end -}}
 {{- $cases := slice
   (dict "case" "front-matter thumbnail wins over a bundle feature image" "page" "/og-image/front-matter-wins"
         "url" (printf "%s/img/order.jpg" $base) "meta" $none)
@@ -84,7 +119,42 @@
         "match" `^https://example\.org/og-image/exif-thumbnail/feature_hu_[0-9a-z]+-1280x640\.png$` "meta" $processed)
   (dict "case" "front-matter thumbnail with a percent sign in its fragment does not fail the build" "page" "/og-image/percent-fragment"
         "url" (printf "%s/img/order.jpg" $base) "meta" $none)
+  (dict "case" "empty bundle image keeps its own image and type" "page" "/og-image/empty-bundle"
+        "url" (printf "%s/og-image/empty-bundle/feature.png" $base)
+        "meta" (dict "w" "-" "h" "-" "type" "image/png"))
+  (dict "case" "truncated bundle jpeg keeps its own image and type" "page" "/og-image/truncated-bundle"
+        "url" (printf "%s/og-image/truncated-bundle/feature.jpg" $base)
+        "meta" (dict "w" "-" "h" "-" "type" "image/jpeg"))
+  (dict "case" "bundle git lfs pointer keeps its own image and type" "page" "/og-image/lfs-bundle"
+        "url" (printf "%s/og-image/lfs-bundle/feature.jpg" $base)
+        "meta" (dict "w" "-" "h" "-" "type" "image/jpeg"))
+  (dict "case" "bundle avif image keeps its own image and type" "page" "/og-image/avif-bundle"
+        "url" (printf "%s/og-image/avif-bundle/feature.avif" $base)
+        "meta" (dict "w" "-" "h" "-" "type" "image/avif"))
+  (dict "case" "bundle image named with a space and a percent sign yields to the site-wide image" "page" "/og-image/percent-bundle"
+        "url" $plain.url "meta" $plain.meta)
+  (dict "case" "bundle image named with an invalid percent escape yields to the site-wide image" "page" "/og-image/percent-escape-bundle"
+        "url" $plain.url "meta" $plain.meta)
 -}}
+{{- if site.Params.tests.imageWarnings -}}
+  {{- $root := dict "url" (printf "%s/" $base) "meta" $none -}}
+  {{- $cases = $cases | append
+    (dict "case" "front-matter avif page resource keeps the image-dimension.html path" "page" "/og-image/avif-thumbnail"
+          "url" $root.url "meta" $root.meta)
+    (dict "case" "front-matter heic page resource keeps the image-dimension.html path" "page" "/og-image/heic-thumbnail"
+          "url" $root.url "meta" $root.meta)
+    (dict "case" "front-matter empty page resource keeps the image-dimension.html path" "page" "/og-image/empty-thumbnail"
+          "url" $root.url "meta" $root.meta)
+    (dict "case" "front-matter truncated page resource keeps the image-dimension.html path" "page" "/og-image/truncated-thumbnail"
+          "url" $root.url "meta" $root.meta)
+    (dict "case" "front-matter git lfs pointer keeps the image-dimension.html path" "page" "/og-image/lfs-thumbnail"
+          "url" $root.url "meta" $root.meta)
+    (dict "case" "bundle png bytes in a webp file are processed" "page" "/og-image/mislabeled-bundle"
+          "url" (printf "%s/og-image/mislabeled-bundle/feature-1280x640.png" $base) "meta" $processed)
+    (dict "case" "front-matter png bytes in a webp file are processed" "page" "/og-image/mislabeled-thumbnail"
+          "url" (printf "%s/og-image/mislabeled-thumbnail/x-1280x640.png" $base) "meta" $processed)
+  -}}
+{{- end -}}
 {{- if site.Params.tests.remoteThumbnail -}}
   {{- range slice "remote-thumbnail" "remote-thumbnail-upper" -}}
     {{- $p := site.GetPage (printf "/og-image/%s" .) -}}
@@ -93,20 +163,6 @@
     {{- $cases = $cases | append (dict "case" (printf "%s keeps the image-dimension.html path" .)
           "page" $p.Path "url" $want "meta" $none) -}}
   {{- end -}}
-{{- end -}}
-{{- $plain := dict "case" "no site-wide image leaves all four empty or absent" "page" "/og-image/plain" "url" "" "meta" $none -}}
-{{- if eq hugo.Environment "og-schema" -}}
-  {{- $plain = dict "case" "schema.image wins over opengraph.images with its dimensions" "page" "/og-image/plain"
-        "url" (printf "%s/img/site-image.jpg" $base) "meta" (dict "w" "1200" "h" "630" "type" "image/jpeg") -}}
-{{- else if eq hugo.Environment "og-schema-partial" -}}
-  {{- $plain = dict "case" "schema.image without a height has a type but no dimensions" "page" "/og-image/plain"
-        "url" (printf "%s/img/site-image.PNG" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
-{{- else if eq hugo.Environment "og-schema-height" -}}
-  {{- $plain = dict "case" "schema.image without a width has a type but no dimensions" "page" "/og-image/plain"
-        "url" (printf "%s/img/site-image.jpeg" $base) "meta" (dict "w" "-" "h" "-" "type" "image/jpeg") -}}
-{{- else if eq hugo.Environment "og-fallback" -}}
-  {{- $plain = dict "case" "opengraph.images is the last fallback, with a type from its extension" "page" "/og-image/plain"
-        "url" (printf "%s/img/opengraph.png" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
 {{- end -}}
 {{- $cases = $cases | append $plain -}}
 {{- range $cases -}}

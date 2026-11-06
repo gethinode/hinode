@@ -29,8 +29,8 @@ const { spawn } = require('child_process');
 // fixtures with EXIF orientation 6, it also reads four pixels of the
 // processed file, to show that the image came out upright.
 //
-// Last, a second build sets params.tests.remoteThumbnail, which adds
-// two pages whose front-matter thumbnail is a remote URL on the local
+// A second build sets params.tests.remoteThumbnail, which adds two
+// pages whose front-matter thumbnail is a remote URL on the local
 // server. head/seo.html hands such a thumbnail to
 // assets/helpers/image-dimension.html, and in this site that path logs
 // two warnings: image-set.html reports that it cannot find the mounted
@@ -39,11 +39,44 @@ const { spawn } = require('child_process');
 // the port. So the second build runs without the WARN check and the
 // request check of the first. Its og:image assertions fail it instead
 // when a remote thumbnail is resolved as a resource, which fetches it
-// from the local server and gives it dimensions.
+// from the local server and gives it dimensions. Those assertions run
+// only when the parameter reaches the build, so the script also reads
+// the rendered assertion table and fails the run unless both remote
+// cases passed in it.
+//
+// Last, the `image-warnings` build adds the og:image cases that log a
+// warning on purpose, and the script compares its warnings with
+// `expectedWarnings` below. The first build already shows that the
+// bundle images Hugo cannot decode or give a URL log no warning.
 const root = path.join(__dirname, '..');
 const site = path.join(root, 'tests', 'templates');
 const destination = path.join(site, 'public', 'strict-images');
 const remoteDestination = path.join(site, 'public', 'strict-images-remote');
+const warningsDestination = path.join(site, 'public', 'image-warnings');
+const remoteCases = ['remote-thumbnail', 'remote-thumbnail-upper'].map(
+  (page) => `PASS og image: ${page} keeps the image-dimension.html path`
+);
+// The warnings of the `image-warnings` build, each the first line of one
+// warning, in the order the build logs them. origin/main logs the first
+// six as well: its head/seo.html hands a front-matter thumbnail that
+// names a page resource to image-dimension.html, which in this site logs
+// that it cannot find the adapter and that the image is missing. This
+// build keeps that path for an AVIF or HEIC resource and for one Hugo
+// cannot decode. origin/main also logs a missing image for three pages
+// whose thumbnail this build processes. The last two warnings are new:
+// Hugo logs one when utilities/GetImage.html reads the metadata of an
+// image whose bytes do not match its extension, here PNG bytes in a .webp
+// file. For those two pages origin/main logged a missing image for the
+// thumbnail and nothing for the bundle image. Hugo appends a hash to the
+// file name in that warning, which the comparison leaves out.
+const expectedWarnings = [
+  'WARN  Cannot find adapter: /layouts/_partials/assets/adapters/hugo.html',
+  ...['avif', 'heic', 'empty', 'truncated', 'lfs'].map(
+    (name) => `WARN  partial [utilities/GetImage.html] - Missing image: og-image/${name}-thumbnail/index.md`
+  ),
+  'WARN  Unable to decode metadata from image: /og-image/mislabeled-bundle/feature.webp',
+  'WARN  Unable to decode metadata from image: /og-image/mislabeled-thumbnail/x.webp'
+];
 const png = fs.readFileSync(path.join(site, 'assets', 'img', 'asset-sibling.png'));
 const processed = [
   path.join('img', 'asset-sibling-1280x640.png'),
@@ -74,11 +107,20 @@ const samples = [
   [1120, 480, 'red']
 ];
 
-function build(origin, target, logLevel, env) {
+// Returns the WARN lines of a build log, without color codes, except
+// Hugo's deprecation notices.
+function warningLines(log) {
+  return log
+    .split(/\r?\n/)
+    .map((line) => line.replace(/\x1b\[[0-9;]*m/g, ''))
+    .filter((line) => /^WARN\b/.test(line) && !/^WARN\s+deprecated:/.test(line));
+}
+
+function build(origin, target, logLevel, env, environment = 'strict-images') {
   return new Promise((resolve) => {
     const child = spawn(
       'hugo',
-      ['-s', site, '-d', target, '--environment', 'strict-images', '--logLevel', logLevel],
+      ['-s', site, '-d', target, '--environment', environment, '--logLevel', logLevel],
       {
         cwd: root,
         env: { ...process.env, HUGO_PARAMS_TESTS_REMOTEORIGIN: origin, ...env },
@@ -170,10 +212,16 @@ async function main() {
   const remote = await build(origin, remoteDestination, 'error', {
     HUGO_PARAMS_TESTS_REMOTETHUMBNAIL: 'true'
   });
+  fs.rmSync(warningsDestination, { recursive: true, force: true });
+  const warnings = await build(origin, warningsDestination, 'warn', {}, 'image-warnings');
   await new Promise((resolve) => server.close(resolve));
 
   const failures = [];
-  for (const [name, run] of [['first build', result], ['remote thumbnail build', remote]]) {
+  for (const [name, run] of [
+    ['first build', result],
+    ['remote thumbnail build', remote],
+    ['image-warnings build', warnings]
+  ]) {
     if (run.error) {
       failures.push(`${name}: cannot run hugo: ${run.error.message}`);
     } else if (run.status !== 0) {
@@ -181,13 +229,27 @@ async function main() {
     }
   }
 
-  const lines = result.log
-    .split(/\r?\n/)
-    .map((line) => line.replace(/\x1b\[[0-9;]*m/g, ''));
-  for (const line of lines) {
-    if (/^WARN\b/.test(line) && !/^WARN\s+deprecated:/.test(line)) {
-      failures.push(`warning: ${line}`);
+  for (const line of warningLines(result.log)) {
+    failures.push(`warning: ${line}`);
+  }
+
+  const table = path.join(remoteDestination, 'thumbnails', 'index.html');
+  const rendered = fs.existsSync(table) ? fs.readFileSync(table, 'utf8') : '';
+  for (const line of remoteCases) {
+    if (!rendered.includes(line)) {
+      failures.push(`remote thumbnail build: no "${line}" in ${table}`);
     }
+  }
+
+  const got = warningLines(warnings.log).map((line) =>
+    line.replace(/^(WARN\s+Unable to decode metadata from image: .*)_\d+$/, '$1')
+  );
+  if (got.join('\n') !== expectedWarnings.join('\n')) {
+    failures.push(
+      'image-warnings build: the warnings differ from the expected ones',
+      ...expectedWarnings.map((line) => `  want ${line}`),
+      ...got.map((line) => `  got  ${line}`)
+    );
   }
 
   for (const url of fetched) {
