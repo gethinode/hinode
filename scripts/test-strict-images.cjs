@@ -89,8 +89,8 @@ const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a
 // PNG; a JPEG whose EXIF block Hugo cannot decode, such as one whose
 // Orientation tag has an invalid TIFF type, logs the same warning. For
 // those two pages origin/main logged a missing image for the thumbnail and
-// nothing for the bundle image. Hugo appends a hash to the file name in
-// that warning, which the comparison leaves out.
+// nothing for the bundle image. normalizeWarning below gives the lines
+// of a Windows build the form of these.
 const expectedWarnings = [
   'WARN  Cannot find adapter: /layouts/_partials/assets/adapters/hugo.html',
   ...['avif', 'heic', 'empty', 'truncated', 'lfs'].map(
@@ -136,6 +136,20 @@ function warningLines(log) {
     .split(/\r?\n/)
     .map((line) => line.replace(/\x1b\[[0-9;]*m/g, ''))
     .filter((line) => /^WARN\b/.test(line) && !/^WARN\s+deprecated:/.test(line));
+}
+
+// Returns a warning of the `image-warnings` build in the form that
+// `expectedWarnings` uses. It leaves out the hash that Hugo appends to
+// the file name in the metadata warning. A warning that
+// utilities/LogMsg.html logs for a partial ends with the path of the page
+// file, which Hugo gives with the separator of the operating system, so a
+// Windows build logs og-image\avif-thumbnail\index.md where
+// `expectedWarnings` has og-image/avif-thumbnail/index.md. Only that path
+// has its backslashes turned into slashes.
+function normalizeWarning(line) {
+  return line
+    .replace(/^(WARN\s+Unable to decode metadata from image: .*)_\d+$/, '$1')
+    .replace(/^(WARN\s+partial \[[^\]]*\] - [^:]*: )(.*)$/, (_, head, file) => head + file.replace(/\\/g, '/'));
 }
 
 function build(origin, target, logLevel, env, environment = 'strict-images') {
@@ -268,9 +282,14 @@ async function main() {
     }
   }
 
-  const got = warningLines(warnings.log).map((line) =>
-    line.replace(/^(WARN\s+Unable to decode metadata from image: .*)_\d+$/, '$1')
-  );
+  const got = warningLines(warnings.log).map(normalizeWarning);
+  // The line a Windows build logs for the first missing image, so that a
+  // run on any platform shows that normalizeWarning gives the expected one.
+  const windowsLine =
+    'WARN  partial [utilities/GetImage.html] - Missing image: og-image\\avif-thumbnail\\index.md';
+  if (normalizeWarning(windowsLine) !== expectedWarnings[1]) {
+    failures.push(`normalizeWarning gives "${normalizeWarning(windowsLine)}" for "${windowsLine}"`);
+  }
   if (got.join('\n') !== expectedWarnings.join('\n')) {
     failures.push(
       'image-warnings build: the warnings differ from the expected ones',
