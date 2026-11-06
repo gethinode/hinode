@@ -31,6 +31,9 @@
   (dict "name" "a clipboard provider gets the raw permalink"
     "args" (dict "url" $page "title" $title "provider" $copy "utm" $off)
     "want" $page)
+  (dict "name" "a clipboard template gets the raw title too"
+    "args" (dict "url" $page "title" $title "provider" (dict "name" "Quote" "url" "{title}: {url}" "clipboard" true) "utm" $off)
+    "want" (printf "%s: %s" $title $page))
   (dict "name" "utm on appends source, medium and campaign"
     "args" (dict "url" $page "title" $title "source" "webshare" "utm" $on)
     "want" (printf "%s?utm_source=webshare&utm_medium=social&utm_campaign=spring%%20launch" $page))

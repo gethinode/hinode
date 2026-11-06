@@ -12,7 +12,7 @@
        page URL, with `&` if it already has a query string. An empty campaign is left out. A
        provider's utm_source is its `utm-source`, or else its name, lowercased and anchorized.
 
-       A clipboard provider gets its url template with {url} replaced by the page URL as is, so
+       A clipboard provider gets its url template with {url} and {title} inserted as is, so
        the copied link stays readable. Any other provider gets its url template with {url} and
        {title} query-escaped. Go's urlquery writes a space as `+` and a literal `+` as `%2B`,
        so every `+` left in its output is a space and is rewritten to `%20`. */ -}}
@@ -48,7 +48,7 @@
         {{- $link = replace $link "{title}" (replace (urlquery ($.title | default "")) "+" "%20") -}}
         {{- $url = $link -}}
     {{- else -}}
-        {{- $url = replace .url "{url}" $url -}}
+        {{- $url = replace (replace .url "{url}" $url) "{title}" ($.title | default "") -}}
     {{- end -}}
 {{- end -}}
 {{- return $url -}}
