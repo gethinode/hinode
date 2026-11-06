@@ -40,12 +40,11 @@
 
     The site-wide sources take part only when set, so the page without a
     thumbnail or a bundle image has a different want in each build: the
-    og-schema, og-schema-partial, og-schema-height and og-fallback
-    overlays set them, and every other build sets neither. The bundle
-    cases want the same in every build, which shows that a bundle image
-    wins over both. That a
-    processed file is 1280x640, and not only named so, is checked by
-    scripts/test-strict-images.cjs.
+    og-schema, og-schema-partial, og-schema-height, og-schema-units and
+    og-fallback overlays set them, and every other build sets neither. The
+    bundle cases want the same in every build, which shows that a bundle
+    image wins over both. That a processed file is 1280x640, and not only
+    named so, is checked by scripts/test-strict-images.cjs.
 
     A bundle image that Hugo cannot decode (an empty file, a truncated
     JPEG, a Git LFS pointer) keeps its own file and type, as a bundle image
