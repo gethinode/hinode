@@ -1,0 +1,12 @@
+# Overlay for the `test:templates` build with `--environment og-schema`. The site-wide preview
+# image only takes part when it is set, so the og:image assertions need a build that sets
+# schema.image with both dimensions, plus an opengraph image it must win over. The width and
+# height are not the 1280x640 of a processed thumbnail, so an emitted value shows which source
+# it came from.
+[schema.image]
+  url = "img/site-image.jpg"
+  width = 1200
+  height = 630
+
+[opengraph]
+  images = ["img/opengraph.png"]

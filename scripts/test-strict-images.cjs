@@ -32,7 +32,12 @@ const png = fs.readFileSync(path.join(site, 'assets', 'img', 'asset-sibling.png'
 const processed = [
   path.join('img', 'asset-sibling-1280x640.png'),
   path.join('img', 'jpg-sibling-1280x640.png'),
-  path.join('thumbnails', 'bundle', 'feature-1280x640.png')
+  path.join('thumbnails', 'bundle', 'feature-1280x640.png'),
+  path.join('thumbnails', 'featured', 'feature-1280x640.png'),
+  path.join('thumbnails', 'featured-raster', 'feature-1280x640.png'),
+  path.join('og-image', 'feature-wins', 'feature-1280x640.png'),
+  path.join('og-image', 'cover-only', 'cover-1280x640.png'),
+  path.join('og-image', 'thumbnail-only', 'thumbnail-1280x640.png')
 ];
 
 function build(origin) {

@@ -1,0 +1,113 @@
+{{- /*
+    Assertions for the preview image in head/seo.html and its metadata in
+    head/opengraph.html.
+
+    The preview image comes from the first source that has one: the
+    front-matter thumbnail, then a page bundle image matching *feature*,
+    then one matching *cover* or *thumbnail*, then schema.image.url, then
+    the first of opengraph.images. A bundle image is filled to a 1280x640
+    png, like a front-matter thumbnail that resolves to a resource.
+
+    og:image:width, og:image:height and og:image:type are emitted only when
+    known, and each case reads back all four tags from the rendered head.
+    "-" means the tag must be absent, which a tag with an empty value is
+    not. The width and height are known for a processed image and for a
+    schema.image that declares both; the type is known for a processed
+    image, for a bundle image left as it is, and for schema.image, from the
+    extension of its url.
+
+    The site-wide sources take part only when set, so the page without a
+    thumbnail or a bundle image has a different want in each build: the
+    og-schema, og-schema-partial and og-fallback overlays set them, and
+    every other build sets neither. The bundle cases want the same in
+    every build, which shows that a bundle image wins over both. That a
+    processed file is 1280x640, and not only named so, is checked by
+    scripts/test-strict-images.cjs.
+*/ -}}
+{{- $ogFail := 0 -}}
+{{- $base := "https://example.org" -}}
+{{- $processed := dict "w" "1280" "h" "640" "type" "image/png" -}}
+{{- $none := dict "w" "-" "h" "-" "type" "-" -}}
+{{- $cases := slice
+  (dict "case" "front-matter thumbnail wins over a bundle feature image" "page" "/og-image/front-matter-wins"
+        "url" (printf "%s/img/order.jpg" $base) "meta" $none)
+  (dict "case" "front-matter thumbnail processed from a resource has dimensions" "page" "/thumbnails/bundle"
+        "url" (printf "%s/thumbnails/bundle/feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle feature image wins over a cover image and is processed" "page" "/og-image/feature-wins"
+        "url" (printf "%s/og-image/feature-wins/feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle cover image is processed" "page" "/og-image/cover-only"
+        "url" (printf "%s/og-image/cover-only/cover-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle thumbnail image is processed" "page" "/og-image/thumbnail-only"
+        "url" (printf "%s/og-image/thumbnail-only/thumbnail-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle raster sibling of an svg is processed" "page" "/thumbnails/featured"
+        "url" (printf "%s/thumbnails/featured/feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle svg without a sibling keeps its own image and type" "page" "/thumbnails/featured-only"
+        "url" (printf "%s/thumbnails/featured-only/feature.svg" $base)
+        "meta" (dict "w" "-" "h" "-" "type" "image/svg+xml"))
+-}}
+{{- $plain := dict "case" "no site-wide image leaves all four empty or absent" "page" "/og-image/plain" "url" "" "meta" $none -}}
+{{- if eq hugo.Environment "og-schema" -}}
+  {{- $plain = dict "case" "schema.image wins over opengraph.images with its dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.jpg" $base) "meta" (dict "w" "1200" "h" "630" "type" "image/jpeg") -}}
+{{- else if eq hugo.Environment "og-schema-partial" -}}
+  {{- $plain = dict "case" "schema.image without a height has a type but no dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.PNG" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
+{{- else if eq hugo.Environment "og-fallback" -}}
+  {{- $plain = dict "case" "opengraph.images is the last fallback" "page" "/og-image/plain"
+        "url" (printf "%s/img/opengraph.png" $base) "meta" $none -}}
+{{- end -}}
+{{- $cases = $cases | append $plain -}}
+{{- range $cases -}}
+  {{- $html := partial "head/seo.html" (site.GetPage .page) -}}
+  {{- $got := slice -}}
+  {{- range slice "og:image" "og:image:width" "og:image:height" "og:image:type" -}}
+    {{- $m := findRESubmatch (printf `<meta property="%s" content="([^"]*)">` .) $html -}}
+    {{- $got = $got | append (cond (gt (len $m) 0) (htmlUnescape (index (index $m 0) 1)) "-") -}}
+    {{- if gt (len $m) 1 }}{{ $got = $got | append "duplicate" }}{{ end -}}
+  {{- end -}}
+  {{- $want := delimit (slice .url .meta.w .meta.h .meta.type) "|" -}}
+  {{- $gotS := delimit $got "|" -}}
+  {{- if eq $gotS $want }}
+PASS og image: {{ .case }}
+  {{- else }}
+FAIL og image: {{ .case }}
+     want={{ $want }}
+     got ={{ $gotS }}
+    {{- $ogFail = add $ogFail 1 -}}
+    {{- errorf "og image mismatch: case=%q want=%q got=%q" .case $want $gotS -}}
+  {{- end -}}
+{{- end }}
+
+OG IMAGE FAILURES: {{ $ogFail }}
+{{- /*
+    assets/helpers/image-media-type.html, which gives schema.image.url its
+    type, called directly for each extension it knows and for inputs it
+    must not guess a type for.
+*/ -}}
+{{- $mtFail := 0 -}}
+{{- $mtCases := slice
+  (dict "src" "img/a.png" "want" "image/png")
+  (dict "src" "img/a.jpg" "want" "image/jpeg")
+  (dict "src" "img/a.jpeg" "want" "image/jpeg")
+  (dict "src" "img/a.gif" "want" "image/gif")
+  (dict "src" "img/a.webp" "want" "image/webp")
+  (dict "src" "img/a.avif" "want" "image/avif")
+  (dict "src" "img/a.svg" "want" "image/svg+xml")
+  (dict "src" "img/a.JPG" "want" "image/jpeg")
+  (dict "src" "https://example.org/a.png?v=2#top" "want" "image/png")
+  (dict "src" "img/a.bmp" "want" "")
+  (dict "src" "img/a" "want" "")
+  (dict "src" "" "want" "")
+-}}
+{{- range $mtCases -}}
+  {{- $got := partial "assets/helpers/image-media-type.html" (dict "src" .src) -}}
+  {{- if eq $got .want }}
+PASS image media type: {{ .src | default "(empty)" }}
+  {{- else }}
+FAIL image media type: {{ .src }}
+    {{- $mtFail = add $mtFail 1 -}}
+    {{- errorf "image media type mismatch: src=%q want=%q got=%q" .src .want $got -}}
+  {{- end -}}
+{{- end }}
+
+IMAGE MEDIA TYPE FAILURES: {{ $mtFail }}

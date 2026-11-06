@@ -20,6 +20,15 @@
 {{- $thumbnail := "" -}}
 {{ if reflect.IsMap .Params.Thumbnail }}{{ $thumbnail = .Params.Thumbnail.url }}{{ else }}{{ $thumbnail = .Params.Thumbnail }}{{ end }}
 
+{{/* The preview image comes from the first source that has one: the
+     front-matter thumbnail, a page bundle image matching *feature*, one
+     matching *cover* or *thumbnail*, schema.image.url, and last the first
+     of opengraph.images. Its width, height and media type are recorded
+     only when known, and head/opengraph.html emits only the known ones. */ -}}
+{{- $imgURL := "" -}}
+{{- $imgWidth := 0 -}}
+{{- $imgHeight := 0 -}}
+{{- $imgType := "" -}}
 {{ if $thumbnail -}}
     {{/* An SVG thumbnail yields to a raster file with the same base
          name when one exists, so that a link preview gets a raster
@@ -34,7 +43,6 @@
     {{ $raster := partial "assets/helpers/raster-sibling.html" (dict "src" $thumbnail "page" .) -}}
     {{ $res := "" -}}
     {{ if ne $raster $thumbnail }}{{ $res = partial "utilities/GetResource.html" (dict "url" $raster "page" .) }}{{ end -}}
-    {{ $imgURL := "" -}}
     {{ with $res -}}
         {{ $imgURL = partial "assets/adapters/hugo.html" (dict
             "page"         $
@@ -46,29 +54,66 @@
             "format"       "png"
             "absolute-url" true
         ) -}}
+        {{ if $imgURL }}{{ $imgWidth = 1280 }}{{ $imgHeight = 640 }}{{ $imgType = "image/png" }}{{ end -}}
     {{ else -}}
+        {{/* image-dimension.html returns the width and height it was
+             given whether or not it processed the image, so they are
+             not recorded. */ -}}
         {{ $imgURL = index (partial "assets/helpers/image-dimension.html" (dict "src" $raster "image-width" 1280 "image-height" 640 "page" .)) "target" -}}
     {{ end }}
-    {{ $.Scratch.Set "thumbnail" ($imgURL | absURL) -}}
+    {{ $imgURL = $imgURL | absURL -}}
 {{ else -}}
-    {{ with .Site.Params.schema.image.url -}}    
-        {{ $.Scratch.Set "thumbnail" (. | absURL) -}}
-    {{ else -}}
-        {{ $images := $.Resources.ByType "image" -}}
-        {{ $featured := $images.GetMatch "*feature*" -}}
-        {{ if not $featured -}}
-            {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+    {{ $images := $.Resources.ByType "image" -}}
+    {{ $featured := $images.GetMatch "*feature*" -}}
+    {{ if not $featured -}}
+        {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+    {{ end -}}
+    {{ with $featured -}}
+        {{/* A bundle image is filled to 1280x640 like a front-matter
+             thumbnail. An SVG without a raster sibling cannot be
+             processed and keeps its own image. */ -}}
+        {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" $featured "page" $) -}}
+        {{ if ne $featured.MediaType.SubType "svg" -}}
+            {{ $imgURL = partial "assets/adapters/hugo.html" (dict
+                "page"         $
+                "img"          $featured
+                "url-file"     $featured.Name
+                "transform"    "fill"
+                "image-width"  1280
+                "image-height" 640
+                "format"       "png"
+                "absolute-url" true
+            ) -}}
         {{ end -}}
-        {{ with $featured -}}
-            {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" $featured "page" $) -}}
-            {{ $.Scratch.Set "thumbnail" $featured.Permalink -}}
+        {{ if $imgURL -}}
+            {{ $imgWidth = 1280 }}{{ $imgHeight = 640 }}{{ $imgType = "image/png" -}}
         {{ else -}}
+            {{ $imgURL = $featured.Permalink -}}
+            {{ $imgType = $featured.MediaType.Type -}}
+        {{ end -}}
+    {{ else -}}
+        {{ with .Site.Params.schema.image -}}
+            {{ if .url -}}
+                {{ $imgURL = .url | absURL -}}
+                {{ $imgType = partial "assets/helpers/image-media-type.html" (dict "src" .url) -}}
+                {{ if and .width .height -}}
+                    {{ $imgWidth = int .width }}{{ $imgHeight = int .height -}}
+                {{ end -}}
+            {{ end -}}
+        {{ end -}}
+        {{ if not $imgURL -}}
             {{ with $.Site.Params.opengraph.images -}}
-                {{ $.Scratch.Set "thumbnail" (index . 0 | absURL) -}}
+                {{ $imgURL = index . 0 | absURL -}}
             {{ end -}}
         {{ end -}}
     {{ end -}}
 {{ end -}}
+{{/* Without any image, "thumbnail" stays unset, as it always has:
+     head/structured-data.html renders an unset value as null. */ -}}
+{{ with $imgURL }}{{ $.Scratch.Set "thumbnail" . }}{{ end -}}
+{{ $.Scratch.Set "thumbnail-width" $imgWidth -}}
+{{ $.Scratch.Set "thumbnail-height" $imgHeight -}}
+{{ $.Scratch.Set "thumbnail-type" $imgType -}}
 
 
 {{ if eq .Kind "404" -}}

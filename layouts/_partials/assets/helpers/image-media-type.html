@@ -1,0 +1,26 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Returns the media type of an image from the extension of its path,
+     for an image that is not a resource and so has no MediaType of its
+     own, such as the url of schema.image. The extension test is
+     case-insensitive and ignores a query string or fragment. Returns an
+     empty string for an extension not listed below, so that a caller
+     emits no type rather than a guessed one.
+
+     "src"  Path or URL of the image. */}}
+
+{{- $types := dict
+    "png"  "image/png"
+    "jpg"  "image/jpeg"
+    "jpeg" "image/jpeg"
+    "gif"  "image/gif"
+    "webp" "image/webp"
+    "avif" "image/avif"
+    "svg"  "image/svg+xml"
+-}}
+{{- $ext := lower (strings.TrimPrefix "." (path.Ext (urls.Parse (.src | default "")).Path)) -}}
+{{- return (index $types $ext | default "") -}}

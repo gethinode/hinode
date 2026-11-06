@@ -1,0 +1,9 @@
+# Overlay for the `test:templates` build with `--environment og-schema-partial`. schema.image
+# declares a width but no height, so neither dimension is known as a pair and none may be
+# emitted. The upper-case extension still yields a media type.
+[schema.image]
+  url = "img/site-image.PNG"
+  width = 1200
+
+[opengraph]
+  images = ["img/opengraph.png"]
