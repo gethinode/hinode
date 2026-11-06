@@ -99,39 +99,36 @@ function build(origin, target, logLevel, env) {
   });
 }
 
-// Decodes a non-interlaced 8-bit PNG, the kind Hugo writes, and returns
-// its size and a function that reads the RGB value of one pixel.
+// Decodes the non-interlaced 8-bit RGB PNG that Hugo writes for the two
+// JPEG fixtures, and returns its size and a function that reads the RGB
+// value of one pixel. Any other kind of PNG throws.
 function readPNG(file) {
   const data = fs.readFileSync(file);
   const idat = [];
   let header;
-  let palette;
   for (let pos = 8; pos < data.length; ) {
     const length = data.readUInt32BE(pos);
     const type = data.toString('ascii', pos + 4, pos + 8);
     const body = data.subarray(pos + 8, pos + 8 + length);
     if (type === 'IHDR') header = body;
-    if (type === 'PLTE') palette = body;
     if (type === 'IDAT') idat.push(body);
     pos += 12 + length;
   }
   const width = header.readUInt32BE(0);
   const height = header.readUInt32BE(4);
-  const colorType = header[9];
-  const channels = { 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 }[colorType];
-  if (header[8] !== 8 || header[12] !== 0 || !channels) {
-    throw new Error(`${file}: unsupported PNG (depth ${header[8]}, color type ${colorType})`);
+  if (header[8] !== 8 || header[9] !== 2 || header[12] !== 0) {
+    throw new Error(`${file} is not a non-interlaced 8-bit RGB PNG`);
   }
   const raw = zlib.inflateSync(Buffer.concat(idat));
-  const stride = width * channels;
+  const stride = width * 3;
   const pixels = Buffer.alloc(stride * height);
   for (let y = 0; y < height; y++) {
     const filter = raw[y * (stride + 1)];
     for (let x = 0; x < stride; x++) {
       const i = y * stride + x;
-      const a = x >= channels ? pixels[i - channels] : 0;
+      const a = x >= 3 ? pixels[i - 3] : 0;
       const b = y > 0 ? pixels[i - stride] : 0;
-      const c = x >= channels && y > 0 ? pixels[i - stride - channels] : 0;
+      const c = x >= 3 && y > 0 ? pixels[i - stride - 3] : 0;
       let predictor = 0;
       if (filter === 1) predictor = a;
       if (filter === 2) predictor = b;
@@ -146,12 +143,7 @@ function readPNG(file) {
       pixels[i] = (raw[y * (stride + 1) + 1 + x] + predictor) & 0xff;
     }
   }
-  const rgb = (x, y) => {
-    const i = y * stride + x * channels;
-    if (colorType === 3) return [...palette.subarray(pixels[i] * 3, pixels[i] * 3 + 3)];
-    if (colorType === 0 || colorType === 4) return [pixels[i], pixels[i], pixels[i]];
-    return [pixels[i], pixels[i + 1], pixels[i + 2]];
-  };
+  const rgb = (x, y) => [...pixels.subarray(y * stride + x * 3, y * stride + x * 3 + 3)];
   return { width, height, rgb };
 }
 
@@ -230,7 +222,13 @@ async function main() {
       continue;
     }
     const file = path.join(dir, names[0]);
-    const image = readPNG(path.join(destination, file));
+    let image;
+    try {
+      image = readPNG(path.join(destination, file));
+    } catch (error) {
+      failures.push(error.message);
+      continue;
+    }
     if (`${image.width}x${image.height}` !== '1280x640') {
       failures.push(`${file} is ${image.width}x${image.height}, want 1280x640`);
       continue;
