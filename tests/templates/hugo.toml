@@ -378,3 +378,7 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/toast.yml'
   target = 'data/structures/toast.yml'
+# The theme's shipped params, read as data so the default copy-link provider is asserted as shipped.
+[[module.mounts]]
+  source = '../../config/_default/params.toml'
+  target = 'data/themedefaults/params.toml'

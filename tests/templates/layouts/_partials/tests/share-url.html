@@ -90,3 +90,15 @@ PASS share render: {{ .name }}
     {{- errorf "page/sharing.html mismatch: case=%q want substring %q in %q" .name .want $html -}}
   {{- end -}}
 {{- end -}}
+{{- /* The shipped default copy-link provider, from the theme's own params.toml. */ -}}
+{{- $copyDefault := false -}}
+{{- range site.Data.themedefaults.params.sharing.providers -}}
+  {{- if .clipboard }}{{ $copyDefault = . }}{{ end -}}
+{{- end -}}
+{{- $want := printf "%s?utm_source=clipboard&utm_medium=social" $page -}}
+{{- $got := partial "utilities/GetShareURL.html" (dict "url" $page "title" $title "provider" $copyDefault "utm" $onNoCampaign) -}}
+{{- if and $copyDefault (eq $got $want) }}
+PASS share url: the shipped copy-link provider is sourced as clipboard
+{{- else -}}
+  {{- errorf "GetShareURL mismatch: case=%q want=%q got=%q" "the shipped copy-link provider is sourced as clipboard" $want $got -}}
+{{- end -}}

@@ -188,6 +188,7 @@
     icon = "link"
     weight = 50
     clipboard = true
+    utm-source = "clipboard"
 
 [favicon]
     logo = "img/favicon.png"

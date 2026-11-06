@@ -235,6 +235,7 @@
     icon = "fas link"
     weight = 50
     clipboard = true
+    utm-source = "clipboard"
 # toml-docs-end sharing
 
 [favicon]
