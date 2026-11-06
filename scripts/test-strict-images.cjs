@@ -86,8 +86,9 @@ const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a
 // og-image/hash-asset. The last two warnings are new: Hugo logs one when
 // utilities/GetImage.html reads the metadata of an image, for its EXIF
 // orientation, and cannot decode it. Here the bytes of a .webp file are
-// PNG; a JPEG with a corrupt EXIF block logs the same warning. For those
-// two pages origin/main logged a missing image for the thumbnail and
+// PNG; a JPEG whose EXIF block Hugo cannot decode, such as one whose
+// Orientation tag has an invalid TIFF type, logs the same warning. For
+// those two pages origin/main logged a missing image for the thumbnail and
 // nothing for the bundle image. Hugo appends a hash to the file name in
 // that warning, which the comparison leaves out.
 const expectedWarnings = [

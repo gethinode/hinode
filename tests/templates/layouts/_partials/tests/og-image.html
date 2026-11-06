@@ -81,7 +81,8 @@
     path, which in this site resolves no image and logs a missing image.
     An image whose metadata Hugo cannot decode, here PNG bytes in a .webp
     file, is processed, and Hugo logs that it cannot decode its metadata.
-    A JPEG with a corrupt EXIF block would log the same warning.
+    A JPEG whose EXIF block Hugo cannot decode, such as one whose
+    Orientation tag has an invalid TIFF type, logs the same warning.
 */ -}}
 {{- $ogFail := 0 -}}
 {{- $base := "https://example.org" -}}
