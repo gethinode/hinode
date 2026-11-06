@@ -80,13 +80,16 @@ const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a
 // names a page resource to image-dimension.html, which in this site logs
 // that it cannot find the adapter and that the image is missing. This
 // build keeps that path for an AVIF or HEIC resource and for one Hugo
-// cannot decode. origin/main also logs a missing image for three pages
-// whose thumbnail this build processes. The last two warnings are new:
-// Hugo logs one when utilities/GetImage.html reads the metadata of an
-// image whose bytes do not match its extension, here PNG bytes in a .webp
-// file. For those two pages origin/main logged a missing image for the
-// thumbnail and nothing for the bundle image. Hugo appends a hash to the
-// file name in that warning, which the comparison leaves out.
+// cannot decode. origin/main also logs a missing image for four pages
+// whose thumbnail this build processes: thumbnails/raster-bundle,
+// og-image/exif-thumbnail, og-image/space-thumbnail and
+// og-image/hash-asset. The last two warnings are new: Hugo logs one when
+// utilities/GetImage.html reads the metadata of an image, for its EXIF
+// orientation, and cannot decode it. Here the bytes of a .webp file are
+// PNG; a JPEG with a corrupt EXIF block logs the same warning. For those
+// two pages origin/main logged a missing image for the thumbnail and
+// nothing for the bundle image. Hugo appends a hash to the file name in
+// that warning, which the comparison leaves out.
 const expectedWarnings = [
   'WARN  Cannot find adapter: /layouts/_partials/assets/adapters/hugo.html',
   ...['avif', 'heic', 'empty', 'truncated', 'lfs'].map(

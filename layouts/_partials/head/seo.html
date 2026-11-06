@@ -178,15 +178,20 @@
      fill is made here, rather than by assets/adapters/hugo.html, because
      the adapter returns only a url and the guard needs the image.
 
-     The png is published next to the image, with "-1280x640.png" in place
-     of the extension, such as "feature-1280x640.png" for "feature.png",
-     the name the adapter gives it. The name comes from the decoded path of
-     the image rather than from its permalink, in which Hugo escapes a
+     The path of the png is the decoded path of the permalink of the image,
+     with "-1280x640.png" in place of the extension, such as
+     "feature-1280x640.png" for "feature.png", the name the adapter gives
+     it. Decoding undoes the escapes that Hugo puts in a permalink for a
      space or a non-ASCII letter. Hugo cuts a permalink short at a "#" or
      a "?", and does not escape a "%", so for an image named with one of
      them the file name comes from the name of the image instead, and in
      the path each of the three becomes a hyphen: "feature#1.png" gives
-     "feature-1-1280x640.png". */}}
+     "feature-1-1280x640.png". The png is not always next to the image.
+     The path of a permalink starts with the path of the baseURL, so with
+     a baseURL of "https://example.org/sub/" the png is published under
+     public/sub/. A "%2F" in the name of the image decodes to a "/", so
+     "feature%2F.png" gives "feature/feature-2F-1280x640.png", one
+     directory down. */}}
 {{ define "_partials/inline/seo/preview-fill.html" -}}
     {{- $url := "" -}}
     {{- with (partial "utilities/GetImage.html" (dict "url" .url "page" .page)).resource -}}

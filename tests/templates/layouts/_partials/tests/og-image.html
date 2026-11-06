@@ -57,9 +57,11 @@
     also show that the empty file that Fill leaves in the cache for an
     image it cannot decode is not taken for a processed image.
 
-    The processed png is published next to the image it is made from, with
-    "-1280x640.png" in place of the extension. Hugo escapes a space or a
-    non-ASCII letter in the url, so the url of the png made from
+    The path of the processed png is the decoded path of the permalink of
+    the image it is made from, with "-1280x640.png" in place of the
+    extension. The baseURL of this site has no path, and no fixture name
+    has a "%2F", so each png lands next to its image. Hugo escapes a space
+    or a non-ASCII letter in the url, so the url of the png made from
     "feature 1.png" has "%20" where the file name has a space;
     scripts/test-strict-images.cjs decodes each url on the site's host and
     checks that the file exists. Hugo cuts a url short at a "#" or "?", and
@@ -77,9 +79,9 @@
     expects. A front-matter thumbnail that names an AVIF or HEIC page
     resource, or one Hugo cannot decode, keeps the image-dimension.html
     path, which in this site resolves no image and logs a missing image.
-    An image whose bytes do not match its extension, here PNG bytes in a
-    .webp file, is processed, and Hugo logs that it cannot decode its
-    metadata.
+    An image whose metadata Hugo cannot decode, here PNG bytes in a .webp
+    file, is processed, and Hugo logs that it cannot decode its metadata.
+    A JPEG with a corrupt EXIF block would log the same warning.
 */ -}}
 {{- $ogFail := 0 -}}
 {{- $base := "https://example.org" -}}
