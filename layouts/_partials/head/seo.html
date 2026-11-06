@@ -72,7 +72,12 @@
     {{ with $featured -}}
         {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" . "page" $) -}}
         {{ $source = $featured -}}
-        {{ $sourceURL = $featured.Name -}}
+        {{/* utilities/GetResource.html takes a url that starts with
+             "http" for a remote one, and so would take a bundle image
+             named "http-feature.png" for one. It hands any other url
+             without a leading slash to Resources.Get, which finds
+             "./http-feature.png" as the resource of that name. */ -}}
+        {{ $sourceURL = printf "./%s" $featured.Name -}}
     {{ end -}}
 {{ end -}}
 {{ with $source -}}
@@ -107,8 +112,10 @@
             {{ if .url -}}
                 {{ $imgURL = .url | absURL -}}
                 {{ $imgType = partial "assets/helpers/image-media-type.html" (dict "src" .url) -}}
-                {{ if and .width .height -}}
-                    {{ $imgWidth = int .width }}{{ $imgHeight = int .height -}}
+                {{ $width := partial "assets/helpers/positive-integer.html" .width -}}
+                {{ $height := partial "assets/helpers/positive-integer.html" .height -}}
+                {{ if and $width $height -}}
+                    {{ $imgWidth = $width }}{{ $imgHeight = $height -}}
                 {{ end -}}
             {{ end -}}
         {{ end -}}
@@ -169,16 +176,27 @@
      the third build with that cache on it returns that file instead of an
      error: a png with a width of 0, which the guard below turns away. The
      fill is made here, rather than by assets/adapters/hugo.html, because
-     the adapter returns only a url and the guard needs the image. The png
-     is published under the name the adapter gives it, such as
-     "feature-1280x640.png" for "feature.png". */}}
+     the adapter returns only a url and the guard needs the image.
+
+     The png is published next to the image, with "-1280x640.png" in place
+     of the extension, such as "feature-1280x640.png" for "feature.png",
+     the name the adapter gives it. The name comes from the decoded path of
+     the image rather than from its permalink, in which Hugo escapes a
+     space or a non-ASCII letter. Hugo cuts a permalink short at a "#" or
+     a "?", and does not escape a "%", so for an image named with one of
+     them the file name comes from the name of the image instead, and in
+     the path each of the three becomes a hyphen: "feature#1.png" gives
+     "feature-1-1280x640.png". */}}
 {{ define "_partials/inline/seo/preview-fill.html" -}}
     {{- $url := "" -}}
     {{- with (partial "utilities/GetImage.html" (dict "url" .url "page" .page)).resource -}}
         {{- $fill := .Fill "1280x640 png" -}}
         {{- if $fill.Width -}}
-            {{- $name := replace .RelPermalink (path.Ext .RelPermalink) "-1280x640.png" -}}
-            {{- $url = ($fill | resources.Copy $name).Permalink -}}
+            {{- $path := (urls.Parse .RelPermalink).Path -}}
+            {{- $file := path.Base $path -}}
+            {{- if findRE `[#?%]` .Name 1 }}{{ $file = path.Base .Name }}{{ end -}}
+            {{- $name := path.Join (path.Dir $path) (printf "%s-1280x640.png" (strings.TrimSuffix (path.Ext $file) $file)) -}}
+            {{- $url = ($fill | resources.Copy (replaceRE `[#?%]` "-" $name)).Permalink -}}
         {{- end -}}
     {{- end -}}
     {{- return $url -}}

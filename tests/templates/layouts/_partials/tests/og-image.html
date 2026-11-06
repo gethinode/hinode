@@ -34,7 +34,9 @@
 
     Each case also reads back the url of the JSON-LD ImageObject, which
     must be the og:image, or null when there is no image at all, as
-    head/seo.html has always left it.
+    head/seo.html has always left it. A case that passes prints its
+    og:image, width and height, which scripts/test-strict-images.cjs
+    reads.
 
     The site-wide sources take part only when set, so the page without a
     thumbnail or a bundle image has a different want in each build: the
@@ -55,6 +57,20 @@
     builds share one image cache, so from the third build on, the cases
     also show that the empty file that Fill leaves in the cache for an
     image it cannot decode is not taken for a processed image.
+
+    The processed png is published next to the image it is made from, with
+    "-1280x640.png" in place of the extension. Hugo escapes a space or a
+    non-ASCII letter in the url, so the url of the png made from
+    "feature 1.png" has "%20" where the file name has a space;
+    scripts/test-strict-images.cjs decodes each url on the site's host and
+    checks that the file exists. Hugo cuts a url short at a "#" or "?", and leaves a "%"
+    unescaped, so in a png made from an image named with one of them, each
+    such character is a hyphen: "feature#1.png" gives
+    feature-1-1280x640.png. A bundle image named "http-feature.png" is
+    processed like any other, and is not looked up as a remote url. The
+    "?" case runs only where scripts/test-strict-images.cjs sets
+    params.tests.questionMark, as content/og-image/_content.gotmpl
+    explains.
 
     The cases that log a warning on purpose run only in the image-warnings
     build, which sets params.tests.imageWarnings and in which
@@ -80,6 +96,9 @@
 {{- else if eq hugo.Environment "og-schema-height" -}}
   {{- $plain = dict "case" "schema.image without a width has a type but no dimensions" "page" "/og-image/plain"
         "url" (printf "%s/img/site-image.jpeg" $base) "meta" (dict "w" "-" "h" "-" "type" "image/jpeg") -}}
+{{- else if eq hugo.Environment "og-schema-units" -}}
+  {{- $plain = dict "case" "schema.image with a width that is no integer has a type but no dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.webp" $base) "meta" (dict "w" "-" "h" "-" "type" "image/webp") -}}
 {{- else if eq hugo.Environment "og-fallback" -}}
   {{- $plain = dict "case" "opengraph.images is the last fallback, with a type from its extension" "page" "/og-image/plain"
         "url" (printf "%s/img/opengraph.png" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
@@ -135,7 +154,27 @@
         "url" $plain.url "meta" $plain.meta)
   (dict "case" "bundle image named with an invalid percent escape yields to the site-wide image" "page" "/og-image/percent-escape-bundle"
         "url" $plain.url "meta" $plain.meta)
+  (dict "case" "bundle image named with a space is processed under a url that keeps it" "page" "/og-image/space-bundle"
+        "url" (printf "%s/og-image/space-bundle/feature%%201-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle image named with a non-ASCII letter is processed under a url that keeps it" "page" "/og-image/accent-bundle"
+        "url" (printf "%s/og-image/accent-bundle/feature-%%C3%%A9-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle image named with a hash is processed with a hyphen in its place" "page" "/og-image/hash-bundle"
+        "url" (printf "%s/og-image/hash-bundle/feature-1-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle image named with a valid percent escape is processed with a hyphen in place of the percent sign" "page" "/og-image/percent-valid-bundle"
+        "url" (printf "%s/og-image/percent-valid-bundle/feature-25-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle feature image named http-* is processed" "page" "/og-image/http-bundle"
+        "url" (printf "%s/og-image/http-bundle/http-feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle cover image named https* is processed" "page" "/og-image/https-bundle"
+        "url" (printf "%s/og-image/https-bundle/https_cover-1280x640.png" $base) "meta" $processed)
+  (dict "case" "front-matter page resource named with a space is processed under a url that keeps it" "page" "/og-image/space-thumbnail"
+        "url" (printf "%s/og-image/space-thumbnail/x%%201-1280x640.png" $base) "meta" $processed)
 -}}
+{{- if site.Params.tests.questionMark -}}
+  {{- $cases = $cases | append
+    (dict "case" "bundle image named with a question mark is processed with a hyphen in its place" "page" "/og-image/question-bundle"
+          "url" (printf "%s/og-image/question-bundle/feature-1-1280x640.png" $base) "meta" $processed)
+  -}}
+{{- end -}}
 {{- if site.Params.tests.imageWarnings -}}
   {{- $root := dict "url" (printf "%s/" $base) "meta" $none -}}
   {{- $cases = $cases | append
@@ -183,6 +222,7 @@
   {{- $gotS := delimit $got "|" -}}
   {{- if eq $gotS $want }}
 PASS og image: {{ .case }}
+     og:image={{ index $got 0 }} width={{ index $got 1 }} height={{ index $got 2 }}
   {{- else }}
 FAIL og image: {{ .case }}
      want={{ $want }}
@@ -231,3 +271,47 @@ FAIL image media type: {{ .src }}
 {{- end }}
 
 IMAGE MEDIA TYPE FAILURES: {{ $mtFail }}
+{{- /*
+    assets/helpers/positive-integer.html, which reads the width and the
+    height of schema.image, called directly with ints, floats, strings, a
+    boolean, a list and nil. Only a positive
+    whole number counts, as an int, a float without a fraction, or a string
+    of decimal digits without a leading zero; any other value gives 0, and
+    none fails the build. "010" must not give 8, which int reads it as, and
+    "99999999999999999999" is too large for an int.
+*/ -}}
+{{- $piFail := 0 -}}
+{{- $piCases := slice
+  (dict "v" 1200 "want" 1200)
+  (dict "v" 1200.0 "want" 1200)
+  (dict "v" "1200" "want" 1200)
+  (dict "v" 1e6 "want" 1000000)
+  (dict "v" "1280px" "want" 0)
+  (dict "v" 1280.5 "want" 0)
+  (dict "v" 0 "want" 0)
+  (dict "v" -5 "want" 0)
+  (dict "v" "0" "want" 0)
+  (dict "v" "-5" "want" 0)
+  (dict "v" "010" "want" 0)
+  (dict "v" " 1200" "want" 0)
+  (dict "v" "1200.0" "want" 0)
+  (dict "v" "" "want" 0)
+  (dict "v" site.Params.tests.noSuchParam "want" 0)
+  (dict "v" true "want" 0)
+  (dict "v" (slice 1200 630) "want" 0)
+  (dict "v" "99999999999999999999" "want" 0)
+  (dict "v" 1e21 "want" 0)
+-}}
+{{- range $piCases -}}
+  {{- $got := partial "assets/helpers/positive-integer.html" .v -}}
+  {{- $label := printf "%T %v" .v .v -}}
+  {{- if eq $got .want }}
+PASS positive integer: {{ $label }}
+  {{- else }}
+FAIL positive integer: {{ $label }}
+    {{- $piFail = add $piFail 1 -}}
+    {{- errorf "positive integer mismatch: v=%q want=%d got=%v" $label .want $got -}}
+  {{- end -}}
+{{- end }}
+
+POSITIVE INTEGER FAILURES: {{ $piFail }}

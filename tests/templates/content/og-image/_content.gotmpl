@@ -14,3 +14,17 @@
           "params" (dict "thumbnail" (replace $url "http://" "HTTP://"))) -}}
   {{- end -}}
 {{- end -}}
+{{- /*
+    A page bundle whose feature image has a "?" in its name. A Go module
+    zip refuses a file named so, and Windows does not allow one, so the
+    image is added here rather than stored in the repository, and only in
+    the build for which scripts/test-strict-images.cjs sets
+    params.tests.questionMark, which it does except on Windows.
+*/ -}}
+{{- if site.Params.tests.questionMark -}}
+  {{- with resources.Get "img/asset-sibling.png" -}}
+    {{- $.AddPage (dict "path" "question-bundle" "title" "Question bundle") -}}
+    {{- $.AddResource (dict "path" "question-bundle/feature?1.png"
+          "content" (dict "mediaType" "image/png" "value" .Content)) -}}
+  {{- end -}}
+{{- end -}}

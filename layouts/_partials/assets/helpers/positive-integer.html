@@ -1,0 +1,26 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/* Returns the context as an int when it is a positive whole number: an
+     int, a float without a fraction, or a string of decimal digits
+     without a leading zero, such as the width of schema.image in a site
+     configuration or an environment variable. Returns 0 for any other
+     value, such as "1280px", 1280.5, "010" or a list, and for a number too
+     large for an int, without failing the build. int alone would not do:
+     it fails on "1280px", reads "010" as 8 and 1280.5 as 1280, and turns
+     true into 1. */}}
+
+{{- $s := printf "%v" . -}}
+{{- if and (eq (printf "%T" .) "float64") (eq (math.Floor .) .) -}}
+    {{- $s = printf "%.0f" . -}}
+{{- end -}}
+{{- $n := 0 -}}
+{{- if findRE `^[1-9][0-9]*$` $s 1 -}}
+    {{- with try (int $s) -}}
+        {{- if not .Err }}{{ $n = .Value }}{{ end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $n -}}

@@ -4,7 +4,7 @@ const path = require('path');
 const zlib = require('zlib');
 const { spawn } = require('child_process');
 
-// Fourth `test:templates` build: the template tests in the
+// The last step of `test:templates`: the template tests in the
 // `strict-images` environment, whose overlay sets
 // params.debugging.failOnMissingImage. In that mode a missing image is
 // an ERROR, which already fails the build. This script also fails the
@@ -44,6 +44,19 @@ const { spawn } = require('child_process');
 // the rendered assertion table and fails the run unless both remote
 // cases passed in it.
 //
+// The og:image assertions print the og:image of each case they pass.
+// The script decodes the path of each one on the site's host and checks
+// that it names a file in the output of the first build, and, unless
+// the case has neither a width nor a height, that the file is a PNG of
+// the size they give. A url
+// is a string, so an assertion on it alone does not show that the file
+// was published under that name. The script also fails the run on any
+// directory in that output whose name ends in an image extension, which
+// a file name taken for a directory path would leave. The first build
+// sets params.tests.questionMark except on Windows, which adds a bundle
+// image with a "?" in its name, and the script checks that its case
+// passed.
+//
 // Last, the `image-warnings` build adds the og:image cases that log a
 // warning on purpose, and the script compares its warnings with
 // `expectedWarnings` below. The first build already shows that the
@@ -56,6 +69,11 @@ const warningsDestination = path.join(site, 'public', 'image-warnings');
 const remoteCases = ['remote-thumbnail', 'remote-thumbnail-upper'].map(
   (page) => `PASS og image: ${page} keeps the image-dimension.html path`
 );
+const host = 'https://example.org/';
+const questionCase =
+  'PASS og image: bundle image named with a question mark is processed with a hyphen in its place';
+const questionMark = process.platform !== 'win32';
+const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 // The warnings of the `image-warnings` build, each the first line of one
 // warning, in the order the build logs them. origin/main logs the first
 // six as well: its head/seo.html hands a front-matter thumbnail that
@@ -206,7 +224,12 @@ async function main() {
   const origin = `http://127.0.0.1:${server.address().port}`;
 
   fs.rmSync(destination, { recursive: true, force: true });
-  const result = await build(origin, destination, 'warn', {});
+  const result = await build(
+    origin,
+    destination,
+    'warn',
+    questionMark ? { HUGO_PARAMS_TESTS_QUESTIONMARK: 'true' } : {}
+  );
   const fetched = requests.splice(0);
   fs.rmSync(remoteDestination, { recursive: true, force: true });
   const remote = await build(origin, remoteDestination, 'error', {
@@ -254,6 +277,52 @@ async function main() {
 
   for (const url of fetched) {
     failures.push(`the build fetched a remote image: ${origin}${url}`);
+  }
+
+  const ogTable = path.join(destination, 'thumbnails', 'index.html');
+  const ogRendered = fs.existsSync(ogTable) ? fs.readFileSync(ogTable, 'utf8') : '';
+  const passed = ogRendered.match(/^PASS og image: /gm) || [];
+  const previews = [...ogRendered.matchAll(/^\s*og:image=(\S*) width=(\S+) height=(\S+)$/gm)];
+  if (previews.length === 0 || previews.length !== passed.length) {
+    failures.push(`${ogTable}: ${passed.length} og image cases passed, but ${previews.length} print their og:image`);
+  }
+  if (questionMark && !ogRendered.includes(questionCase)) {
+    failures.push(`first build: no "${questionCase}" in ${ogTable}`);
+  }
+  for (const [, url, width, height] of previews) {
+    if (!url.startsWith(host)) continue;
+    const file = path.join(destination, ...decodeURIComponent(new URL(url).pathname).split('/'));
+    if (!fs.existsSync(file) || !fs.statSync(file).isFile()) {
+      failures.push(`og:image ${url} names no file in the first build`);
+      continue;
+    }
+    if (width === '-' && height === '-') continue;
+    const header = fs.readFileSync(file).subarray(0, 24);
+    if (header.length < 24 || !header.subarray(0, 8).equals(pngSignature)) {
+      failures.push(`og:image ${url} is no PNG, but its tags give ${width}x${height}`);
+      continue;
+    }
+    const size = `${header.readUInt32BE(16)}x${header.readUInt32BE(20)}`;
+    if (size !== `${width}x${height}`) {
+      failures.push(`og:image ${url} is ${size}, but its tags give ${width}x${height}`);
+    }
+  }
+
+  const imageDirs = [];
+  const walk = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const full = path.join(dir, entry.name);
+      if (/\.(png|jpe?g|gif|tiff?|bmp|webp|avif|heic|svg)$/i.test(entry.name)) {
+        imageDirs.push(path.relative(destination, full));
+      }
+      walk(full);
+    }
+  };
+  walk(destination);
+  for (const dir of imageDirs) {
+    failures.push(`first build: directory named like an image: ${dir}`);
   }
 
   // A PNG starts with an 8-byte signature and the IHDR chunk, whose
