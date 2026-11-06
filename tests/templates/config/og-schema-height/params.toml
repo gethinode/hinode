@@ -1,0 +1,9 @@
+# Overlay for the `test:templates` build with `--environment og-schema-height`. The mirror of
+# og-schema-partial: schema.image declares a height but no width, so again no dimension may be
+# emitted.
+[schema.image]
+  url = "img/site-image.jpeg"
+  height = 630
+
+[opengraph]
+  images = ["img/opengraph.png"]

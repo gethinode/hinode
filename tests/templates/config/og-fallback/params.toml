@@ -1,4 +1,9 @@
-# Overlay for the `test:templates` build with `--environment og-fallback`. Only an opengraph
-# image is set, so it is the last fallback for a page without a thumbnail or a bundle image.
+# Overlay for the `test:templates` build with `--environment og-fallback`. schema.image has
+# dimensions but no url, so it is no preview image, and its dimensions must not be emitted for
+# the opengraph image, the last fallback for a page without a thumbnail or a bundle image.
+[schema.image]
+  width = 1200
+  height = 630
+
 [opengraph]
   images = ["img/opengraph.png"]

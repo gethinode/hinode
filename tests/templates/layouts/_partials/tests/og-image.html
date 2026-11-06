@@ -16,11 +16,16 @@
     image, for a bundle image left as it is, and for schema.image, from the
     extension of its url.
 
+    Each case also reads back the url of the JSON-LD ImageObject, which
+    must be the og:image, or null when there is no image at all, as
+    head/seo.html has always left it.
+
     The site-wide sources take part only when set, so the page without a
     thumbnail or a bundle image has a different want in each build: the
-    og-schema, og-schema-partial and og-fallback overlays set them, and
-    every other build sets neither. The bundle cases want the same in
-    every build, which shows that a bundle image wins over both. That a
+    og-schema, og-schema-partial, og-schema-height and og-fallback
+    overlays set them, and every other build sets neither. The bundle
+    cases want the same in every build, which shows that a bundle image
+    wins over both. That a
     processed file is 1280x640, and not only named so, is checked by
     scripts/test-strict-images.cjs.
 */ -}}
@@ -52,6 +57,9 @@
 {{- else if eq hugo.Environment "og-schema-partial" -}}
   {{- $plain = dict "case" "schema.image without a height has a type but no dimensions" "page" "/og-image/plain"
         "url" (printf "%s/img/site-image.PNG" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
+{{- else if eq hugo.Environment "og-schema-height" -}}
+  {{- $plain = dict "case" "schema.image without a width has a type but no dimensions" "page" "/og-image/plain"
+        "url" (printf "%s/img/site-image.jpeg" $base) "meta" (dict "w" "-" "h" "-" "type" "image/jpeg") -}}
 {{- else if eq hugo.Environment "og-fallback" -}}
   {{- $plain = dict "case" "opengraph.images is the last fallback" "page" "/og-image/plain"
         "url" (printf "%s/img/opengraph.png" $base) "meta" $none -}}
@@ -65,7 +73,9 @@
     {{- $got = $got | append (cond (gt (len $m) 0) (htmlUnescape (index (index $m 0) 1)) "-") -}}
     {{- if gt (len $m) 1 }}{{ $got = $got | append "duplicate" }}{{ end -}}
   {{- end -}}
-  {{- $want := delimit (slice .url .meta.w .meta.h .meta.type) "|" -}}
+  {{- $ld := findRESubmatch `"@type": "ImageObject",\s*"@id": "[^"]*image/2",\s*"url":\s*([^,\s]*)\s*,` $html 1 -}}
+  {{- $got = $got | append (cond (gt (len $ld) 0) (index (index $ld 0) 1) "-") -}}
+  {{- $want := delimit (slice .url .meta.w .meta.h .meta.type (cond (eq .url "") "null" (printf "%q" .url))) "|" -}}
   {{- $gotS := delimit $got "|" -}}
   {{- if eq $gotS $want }}
 PASS og image: {{ .case }}
