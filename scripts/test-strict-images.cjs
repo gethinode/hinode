@@ -35,6 +35,7 @@ const processed = [
   path.join('thumbnails', 'bundle', 'feature-1280x640.png'),
   path.join('thumbnails', 'featured', 'feature-1280x640.png'),
   path.join('thumbnails', 'featured-raster', 'feature-1280x640.png'),
+  path.join('thumbnails', 'raster-bundle', 'feature-1280x640.png'),
   path.join('og-image', 'feature-wins', 'feature-1280x640.png'),
   path.join('og-image', 'cover-only', 'cover-1280x640.png'),
   path.join('og-image', 'thumbnail-only', 'thumbnail-1280x640.png')

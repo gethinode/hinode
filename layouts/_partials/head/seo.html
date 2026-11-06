@@ -32,17 +32,26 @@
 {{ if $thumbnail -}}
     {{/* An SVG thumbnail yields to a raster file with the same base
          name when one exists, so that a link preview gets a raster
-         image. A sibling that resolves to a resource, in the page
-         bundle or under assets, goes to the image adapter as that
-         resource, which fills it to 1280x640 like any other raster
-         thumbnail. image-dimension.html would hand the adapter a
-         root-relative path instead, which for a page bundle's
-         "feature.png" is "/feature.png": that path does not resolve,
-         so it would log a missing image. A sibling under static is not
-         processed, like any other static image. */ -}}
+         image. A raster thumbnail, or the raster sibling of an SVG,
+         that resolves to a resource in the page bundle or under assets
+         goes to the image adapter as that resource, which fills it to
+         1280x640. utilities/GetImage.html first turns an image upright
+         by its EXIF orientation. image-dimension.html would hand the
+         adapter a root-relative path instead, which for a page bundle's
+         "feature.png" is "/feature.png": that path does not resolve, so
+         it would log a missing image. A file under static and a remote
+         URL are not resources here and keep the image-dimension.html
+         path. */ -}}
     {{ $raster := partial "assets/helpers/raster-sibling.html" (dict "src" $thumbnail "page" .) -}}
     {{ $res := "" -}}
-    {{ if ne $raster $thumbnail }}{{ $res = partial "utilities/GetResource.html" (dict "url" $raster "page" .) }}{{ end -}}
+    {{ $u := urls.Parse $raster -}}
+    {{ if not (or $u.Scheme $u.Host) -}}
+        {{ with partial "utilities/GetResource.html" (dict "url" $raster "page" .) -}}
+            {{ if ne .MediaType.SubType "svg" -}}
+                {{ $res = (partial "utilities/GetImage.html" (dict "url" $raster "page" $)).resource -}}
+            {{ end -}}
+        {{ end -}}
+    {{ end -}}
     {{ with $res -}}
         {{ $imgURL = partial "assets/adapters/hugo.html" (dict
             "page"         $
@@ -104,6 +113,7 @@
         {{ if not $imgURL -}}
             {{ with $.Site.Params.opengraph.images -}}
                 {{ $imgURL = index . 0 | absURL -}}
+                {{ $imgType = partial "assets/helpers/image-media-type.html" (dict "src" (index . 0)) -}}
             {{ end -}}
         {{ end -}}
     {{ end -}}

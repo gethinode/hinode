@@ -36,6 +36,10 @@
 {{- $cases := slice
   (dict "case" "front-matter thumbnail wins over a bundle feature image" "page" "/og-image/front-matter-wins"
         "url" (printf "%s/img/order.jpg" $base) "meta" $none)
+  (dict "case" "front-matter raster asset is processed" "page" "/og-image/asset-raster"
+        "url" (printf "%s/img/jpg-sibling-1280x640.png" $base) "meta" $processed)
+  (dict "case" "front-matter raster page resource is processed" "page" "/thumbnails/raster-bundle"
+        "url" (printf "%s/thumbnails/raster-bundle/feature-1280x640.png" $base) "meta" $processed)
   (dict "case" "front-matter thumbnail processed from a resource has dimensions" "page" "/thumbnails/bundle"
         "url" (printf "%s/thumbnails/bundle/feature-1280x640.png" $base) "meta" $processed)
   (dict "case" "bundle feature image wins over a cover image and is processed" "page" "/og-image/feature-wins"
@@ -61,8 +65,8 @@
   {{- $plain = dict "case" "schema.image without a width has a type but no dimensions" "page" "/og-image/plain"
         "url" (printf "%s/img/site-image.jpeg" $base) "meta" (dict "w" "-" "h" "-" "type" "image/jpeg") -}}
 {{- else if eq hugo.Environment "og-fallback" -}}
-  {{- $plain = dict "case" "opengraph.images is the last fallback" "page" "/og-image/plain"
-        "url" (printf "%s/img/opengraph.png" $base) "meta" $none -}}
+  {{- $plain = dict "case" "opengraph.images is the last fallback, with a type from its extension" "page" "/og-image/plain"
+        "url" (printf "%s/img/opengraph.png" $base) "meta" (dict "w" "-" "h" "-" "type" "image/png") -}}
 {{- end -}}
 {{- $cases = $cases | append $plain -}}
 {{- range $cases -}}
