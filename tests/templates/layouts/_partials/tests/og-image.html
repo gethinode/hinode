@@ -199,7 +199,7 @@
   -}}
 {{- end -}}
 {{- if site.Params.tests.remoteThumbnail -}}
-  {{- range slice "remote-thumbnail" "remote-thumbnail-upper" -}}
+  {{- range slice "remote-thumbnail" "remote-thumbnail-upper" "remote-thumbnail-https-upper" -}}
     {{- $p := site.GetPage (printf "/og-image/%s" .) -}}
     {{- $want := index (partial "assets/helpers/image-dimension.html" (dict
           "src" $p.Params.thumbnail "image-width" 1280 "image-height" 640 "page" $p)) "target" | absURL -}}

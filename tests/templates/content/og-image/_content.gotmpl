@@ -1,7 +1,9 @@
 {{- /*
-    Two pages whose front-matter thumbnail is a remote URL on the local
-    server that scripts/test-strict-images.cjs runs, one with an
-    upper-case scheme. They exist only in the build for which that
+    Three pages whose front-matter thumbnail is a remote URL on the local
+    server that scripts/test-strict-images.cjs runs, two of them with an
+    upper-case scheme, HTTP:// and HTTPS://, so that each of the two
+    prefixes that assets/helpers/image-dimension.html takes for a url
+    meets an upper-case one. They exist only in the build for which that
     script sets params.tests.remoteThumbnail. The og:image assertions
     for them are in layouts/_partials/tests/og-image.html.
 */ -}}
@@ -12,6 +14,8 @@
           "params" (dict "thumbnail" $url)) -}}
     {{- $.AddPage (dict "path" "remote-thumbnail-upper" "title" "Upper-case remote thumbnail"
           "params" (dict "thumbnail" (replace $url "http://" "HTTP://"))) -}}
+    {{- $.AddPage (dict "path" "remote-thumbnail-https-upper" "title" "Upper-case https remote thumbnail"
+          "params" (dict "thumbnail" (replace $url "http://" "HTTPS://"))) -}}
   {{- end -}}
 {{- end -}}
 {{- /*

@@ -29,7 +29,7 @@ const { spawn } = require('child_process');
 // fixtures with EXIF orientation 6, it also reads four pixels of the
 // processed file, to show that the image came out upright.
 //
-// A second build sets params.tests.remoteThumbnail, which adds two
+// A second build sets params.tests.remoteThumbnail, which adds three
 // pages whose front-matter thumbnail is a remote URL on the local
 // server. head/seo.html hands such a thumbnail to
 // assets/helpers/image-dimension.html, and in this site that path logs
@@ -41,8 +41,8 @@ const { spawn } = require('child_process');
 // when a remote thumbnail is resolved as a resource, which fetches it
 // from the local server and gives it dimensions. Those assertions run
 // only when the parameter reaches the build, so the script also reads
-// the rendered assertion table and fails the run unless both remote
-// cases passed in it.
+// the rendered assertion table and fails the run unless each of the
+// three remote cases passed in it.
 //
 // The og:image assertions print the og:image of each case they pass.
 // The script decodes the path of each one on the site's host and checks
@@ -66,7 +66,7 @@ const site = path.join(root, 'tests', 'templates');
 const destination = path.join(site, 'public', 'strict-images');
 const remoteDestination = path.join(site, 'public', 'strict-images-remote');
 const warningsDestination = path.join(site, 'public', 'image-warnings');
-const remoteCases = ['remote-thumbnail', 'remote-thumbnail-upper'].map(
+const remoteCases = ['remote-thumbnail', 'remote-thumbnail-upper', 'remote-thumbnail-https-upper'].map(
   (page) => `PASS og image: ${page} keeps the image-dimension.html path`
 );
 const host = 'https://example.org/';
