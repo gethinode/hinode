@@ -1,0 +1,129 @@
+{{- /* Assertions for utilities/GetShareURL.html, the link a sharing button opens or copies. */ -}}
+{{- $page := "https://example.org/blog/post/" -}}
+{{- $title := "Tips & tricks: C++ for café owners" -}}
+{{- $encPage := "https%3A%2F%2Fexample.org%2Fblog%2Fpost%2F" -}}
+{{- $encTitle := "Tips%20%26%20tricks%3A%20C%2B%2B%20for%20caf%C3%A9%20owners" -}}
+{{- $x := dict "name" "X" "url" "https://x.com/intent/post?url={url}&text={title}" -}}
+{{- $whatsapp := dict "name" "WhatsApp" "url" "https://wa.me/?text={title}%20{url}" -}}
+{{- $linkedin := dict "name" "LinkedIn" "url" "https://www.linkedin.com/sharing/share-offsite/?url={url}" -}}
+{{- $linkedinOverride := merge $linkedin (dict "utm-source" "li") -}}
+{{- $copy := dict "name" "email" "url" "{url}" "clipboard" true -}}
+{{- $off := dict "enabled" false "medium" "social" "campaign" "spring launch" -}}
+{{- $on := dict "enabled" true "medium" "social" "campaign" "spring launch" -}}
+{{- $onNoCampaign := dict "enabled" true "medium" "social" "campaign" "" -}}
+{{- $onDefaults := dict "enabled" true -}}
+{{- $cases := slice
+  (dict "name" "title and url are query-escaped with %20 for spaces"
+    "args" (dict "url" $page "title" $title "provider" $x "utm" $off)
+    "want" (printf "https://x.com/intent/post?url=%s&text=%s" $encPage $encTitle))
+  (dict "name" "a template that joins title and url keeps its own separator"
+    "args" (dict "url" $page "title" $title "provider" $whatsapp "utm" $off)
+    "want" (printf "https://wa.me/?text=%s%%20%s" $encTitle $encPage))
+  (dict "name" "a url with a query string and a space stays one escaped parameter"
+    "args" (dict "url" "https://example.org/p/?q=a b&r=1" "title" "t" "provider" $x "utm" $off)
+    "want" "https://x.com/intent/post?url=https%3A%2F%2Fexample.org%2Fp%2F%3Fq%3Da%20b%26r%3D1&text=t")
+  (dict "name" "utm off gives the plain permalink"
+    "args" (dict "url" $page "title" $title "utm" $off)
+    "want" $page)
+  (dict "name" "without utm settings the site's apply, with their webshare source"
+    "args" (dict "url" $page "title" $title)
+    "want" (printf "%s?utm_source=native&utm_medium=social" $page))
+  (dict "name" "a clipboard provider gets the raw permalink"
+    "args" (dict "url" $page "title" $title "provider" $copy "utm" $off)
+    "want" $page)
+  (dict "name" "a clipboard template gets the raw title too"
+    "args" (dict "url" $page "title" $title "provider" (dict "name" "Quote" "url" "{title}: {url}" "clipboard" true) "utm" $off)
+    "want" (printf "%s: %s" $title $page))
+  (dict "name" "utm on appends source, medium and campaign"
+    "args" (dict "url" $page "title" $title "source" "webshare" "utm" $on)
+    "want" (printf "%s?utm_source=webshare&utm_medium=social&utm_campaign=spring%%20launch" $page))
+  (dict "name" "an empty campaign is omitted"
+    "args" (dict "url" $page "title" $title "source" "webshare" "utm" $onNoCampaign)
+    "want" (printf "%s?utm_source=webshare&utm_medium=social" $page))
+  (dict "name" "utm settings left out fall back to medium social and source webshare"
+    "args" (dict "url" $page "title" $title "utm" $onDefaults)
+    "want" (printf "%s?utm_source=webshare&utm_medium=social" $page))
+  (dict "name" "a permalink with a query string is extended with &"
+    "args" (dict "url" "https://example.org/p/?a=1" "title" $title "source" "webshare" "utm" $onNoCampaign)
+    "want" "https://example.org/p/?a=1&utm_source=webshare&utm_medium=social")
+  (dict "name" "utm values are query-escaped"
+    "args" (dict "url" $page "title" $title "source" "news & letters" "utm" (dict "enabled" true "medium" "a+b"))
+    "want" (printf "%s?utm_source=news%%20%%26%%20letters&utm_medium=a%%2Bb" $page))
+  (dict "name" "a clipboard provider gets the raw tagged url, sourced from its name"
+    "args" (dict "url" $page "title" $title "provider" $copy "utm" $on)
+    "want" (printf "%s?utm_source=email&utm_medium=social&utm_campaign=spring%%20launch" $page))
+  (dict "name" "an opened provider gets the tagged url escaped, sourced from its anchorized name"
+    "args" (dict "url" $page "title" $title "provider" $linkedin "utm" $onNoCampaign)
+    "want" (printf "https://www.linkedin.com/sharing/share-offsite/?url=%s%%3Futm_source%%3Dlinkedin%%26utm_medium%%3Dsocial" $encPage))
+  (dict "name" "a provider utm-source overrides its name"
+    "args" (dict "url" $page "title" $title "provider" $linkedinOverride "utm" $onNoCampaign)
+    "want" (printf "https://www.linkedin.com/sharing/share-offsite/?url=%s%%3Futm_source%%3Dli%%26utm_medium%%3Dsocial" $encPage))
+  (dict "name" "a two-word provider name is sourced anchorized"
+    "args" (dict "url" $page "title" "t" "provider" (dict "name" "Hacker News" "url" "{url}" "clipboard" true) "utm" $onNoCampaign)
+    "want" (printf "%s?utm_source=hacker-news&utm_medium=social" $page))
+  (dict "name" "a provider named X is sourced as x"
+    "args" (dict "url" $page "title" "t" "provider" $x "utm" $onNoCampaign)
+    "want" (printf "https://x.com/intent/post?url=%s%%3Futm_source%%3Dx%%26utm_medium%%3Dsocial&text=t" $encPage))
+-}}
+{{- range $cases -}}
+  {{- $got := partial "utilities/GetShareURL.html" .args -}}
+  {{- if eq $got .want }}
+PASS share url: {{ .name }}
+  {{- else -}}
+    {{- errorf "GetShareURL mismatch: case=%q want=%q got=%q" .name .want $got -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* page/sharing.html with the test site's [params.sharing]: the links each button carries. */ -}}
+{{- $p := site.GetPage "/share/post" -}}
+{{- $p.Store.Set "sharing" true -}}
+{{- $html := partial "page/sharing.html" $p -}}
+{{- $rendered := slice
+  (dict "name" "an opened provider links to its escaped, tagged url"
+    "want" (printf `href="https://x.com/intent/post?url=https%%3A%%2F%%2Fexample.org%%2Fshare%%2Fpost%%2F%%3Futm_source%%3Dx%%26utm_medium%%3Dsocial&amp;text=%s"` $encTitle))
+  (dict "name" "a clipboard provider copies the raw tagged url"
+    "want" `data-clipboard="https://example.org/share/post/?utm_source=copied&amp;utm_medium=social"`)
+  (dict "name" "the web share button shares the url tagged with the webshare source"
+    "want" `data-sharing-url="https://example.org/share/post/?utm_source=native&utm_medium=social"`)
+-}}
+{{- range $rendered -}}
+  {{- if strings.Contains $html .want }}
+PASS share render: {{ .name }}
+  {{- else -}}
+    {{- errorf "page/sharing.html mismatch: case=%q want substring %q in %q" .name .want $html -}}
+  {{- end -}}
+{{- end -}}
+{{- /* The shipped default copy-link provider, from the theme's own params.toml. */ -}}
+{{- $copyDefault := false -}}
+{{- range site.Data.themedefaults.params.sharing.providers -}}
+  {{- if .clipboard }}{{ $copyDefault = . }}{{ end -}}
+{{- end -}}
+{{- $want := printf "%s?utm_source=clipboard&utm_medium=social" $page -}}
+{{- $got := partial "utilities/GetShareURL.html" (dict "url" $page "title" $title "provider" $copyDefault "utm" $onNoCampaign) -}}
+{{- if and $copyDefault (eq $got $want) }}
+PASS share url: the shipped copy-link provider is sourced as clipboard
+{{- else -}}
+  {{- errorf "GetShareURL mismatch: case=%q want=%q got=%q" "the shipped copy-link provider is sourced as clipboard" $want $got -}}
+{{- end -}}
+{{- /* The shipped defaults this theme promises: UTM tagging off, and the X and WhatsApp links. */ -}}
+{{- $shipped := site.Data.themedefaults.params.sharing -}}
+{{- if eq $shipped.utm.enabled false }}
+PASS share defaults: utm tagging ships disabled
+{{- else -}}
+  {{- errorf "shipped sharing.utm.enabled: want=false got=%v" $shipped.utm.enabled -}}
+{{- end -}}
+{{- $shippedURLs := dict
+  "X" "https://x.com/intent/post?url={url}&text={title}"
+  "WhatsApp" "https://wa.me/?text={title}%20{url}"
+-}}
+{{- range $name, $want := $shippedURLs -}}
+  {{- $got := "" -}}
+  {{- range $shipped.providers -}}
+    {{- if eq .name $name }}{{ $got = .url }}{{ end -}}
+  {{- end -}}
+  {{- if eq $got $want }}
+PASS share defaults: {{ $name }} url
+  {{- else -}}
+    {{- errorf "shipped sharing provider url mismatch: name=%q want=%q got=%q" $name $want $got -}}
+  {{- end -}}
+{{- end -}}
