@@ -14,9 +14,8 @@
 
        A clipboard provider gets its url template with {url} replaced by the page URL as is, so
        the copied link stays readable. Any other provider gets its url template with {url} and
-       {title} query-escaped. Go's urlquery
-       writes a space as `+` and a literal `+` as `%2B`, so every `+` left in its output is a
-       space and is rewritten to `%20`, which every provider decodes as a space. */ -}}
+       {title} query-escaped. Go's urlquery writes a space as `+` and a literal `+` as `%2B`,
+       so every `+` left in its output is a space and is rewritten to `%20`. */ -}}
 {{- $url := .url -}}
 {{- $provider := .provider -}}
 {{- $utm := .utm | default (site.Params.sharing.utm | default dict) -}}

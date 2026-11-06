@@ -19,6 +19,9 @@
   (dict "name" "a template that joins title and url keeps its own separator"
     "args" (dict "url" $page "title" $title "provider" $whatsapp "utm" $off)
     "want" (printf "https://wa.me/?text=%s%%20%s" $encTitle $encPage))
+  (dict "name" "a url with a query string and a space stays one escaped parameter"
+    "args" (dict "url" "https://example.org/p/?q=a b&r=1" "title" "t" "provider" $x "utm" $off)
+    "want" "https://x.com/intent/post?url=https%3A%2F%2Fexample.org%2Fp%2F%3Fq%3Da%20b%26r%3D1&text=t")
   (dict "name" "utm off gives the plain permalink"
     "args" (dict "url" $page "title" $title "utm" $off)
     "want" $page)
