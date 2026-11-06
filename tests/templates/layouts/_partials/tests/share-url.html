@@ -58,6 +58,9 @@
   (dict "name" "a provider utm-source overrides its name"
     "args" (dict "url" $page "title" $title "provider" $linkedinOverride "utm" $onNoCampaign)
     "want" (printf "https://www.linkedin.com/sharing/share-offsite/?url=%s%%3Futm_source%%3Dli%%26utm_medium%%3Dsocial" $encPage))
+  (dict "name" "a two-word provider name is sourced anchorized"
+    "args" (dict "url" $page "title" "t" "provider" (dict "name" "Hacker News" "url" "{url}" "clipboard" true) "utm" $onNoCampaign)
+    "want" (printf "%s?utm_source=hacker-news&utm_medium=social" $page))
   (dict "name" "a provider named X is sourced as x"
     "args" (dict "url" $page "title" "t" "provider" $x "utm" $onNoCampaign)
     "want" (printf "https://x.com/intent/post?url=%s%%3Futm_source%%3Dx%%26utm_medium%%3Dsocial&text=t" $encPage))
@@ -101,4 +104,26 @@ PASS share render: {{ .name }}
 PASS share url: the shipped copy-link provider is sourced as clipboard
 {{- else -}}
   {{- errorf "GetShareURL mismatch: case=%q want=%q got=%q" "the shipped copy-link provider is sourced as clipboard" $want $got -}}
+{{- end -}}
+{{- /* The shipped defaults this theme promises: UTM tagging off, and the X and WhatsApp links. */ -}}
+{{- $shipped := site.Data.themedefaults.params.sharing -}}
+{{- if eq $shipped.utm.enabled false }}
+PASS share defaults: utm tagging ships disabled
+{{- else -}}
+  {{- errorf "shipped sharing.utm.enabled: want=false got=%v" $shipped.utm.enabled -}}
+{{- end -}}
+{{- $shippedURLs := dict
+  "X" "https://x.com/intent/post?url={url}&text={title}"
+  "WhatsApp" "https://wa.me/?text={title}%20{url}"
+-}}
+{{- range $name, $want := $shippedURLs -}}
+  {{- $got := "" -}}
+  {{- range $shipped.providers -}}
+    {{- if eq .name $name }}{{ $got = .url }}{{ end -}}
+  {{- end -}}
+  {{- if eq $got $want }}
+PASS share defaults: {{ $name }} url
+  {{- else -}}
+    {{- errorf "shipped sharing provider url mismatch: name=%q want=%q got=%q" $name $want $got -}}
+  {{- end -}}
 {{- end -}}
