@@ -34,18 +34,23 @@
          name when one exists, so that a link preview gets a raster
          image. A raster thumbnail, or the raster sibling of an SVG,
          that resolves to a resource in the page bundle or under assets
-         goes to the image adapter as that resource, which fills it to
-         1280x640. utilities/GetImage.html first turns an image upright
-         by its EXIF orientation. image-dimension.html would hand the
+         goes to utilities/GetImage.html, which rotates it as its EXIF
+         orientation requires and returns it only when it is a png,
+         jpeg, gif, tiff, bmp or webp image. The image adapter fills
+         that resource to 1280x640. image-dimension.html would hand the
          adapter a root-relative path instead, which for a page bundle's
          "feature.png" is "/feature.png": that path does not resolve, so
-         it would log a missing image. A file under static and a remote
-         URL are not resources here and keep the image-dimension.html
-         path. */ -}}
+         it would log a missing image. Every other thumbnail keeps the
+         image-dimension.html path, such as a resource of another type
+         (AVIF, HEIC, or an SVG without a raster sibling), a file under
+         static, or a remote URL. A remote URL is not looked up as a
+         resource, because utilities/GetResource.html fetches a url that
+         starts with "http" in any letter case. The test is on the
+         string rather than on a parsed URL, so that a literal "%",
+         which is no valid URL escape, cannot fail it. */ -}}
     {{ $raster := partial "assets/helpers/raster-sibling.html" (dict "src" $thumbnail "page" .) -}}
     {{ $res := "" -}}
-    {{ $u := urls.Parse $raster -}}
-    {{ if not (or $u.Scheme $u.Host) -}}
+    {{ if not (hasPrefix (lower $raster) "http") -}}
         {{ with partial "utilities/GetResource.html" (dict "url" $raster "page" .) -}}
             {{ if ne .MediaType.SubType "svg" -}}
                 {{ $res = (partial "utilities/GetImage.html" (dict "url" $raster "page" $)).resource -}}
@@ -78,14 +83,23 @@
         {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
     {{ end -}}
     {{ with $featured -}}
-        {{/* A bundle image is filled to 1280x640 like a front-matter
-             thumbnail. An SVG without a raster sibling cannot be
-             processed and keeps its own image. */ -}}
+        {{/* A bundle image goes through utilities/GetImage.html, which
+             rotates it as its EXIF orientation requires, and is filled
+             to 1280x640 like a front-matter thumbnail. Only a png, jpeg,
+             gif, tiff, bmp or webp image is passed to it: those are the
+             types GetImage.html supports, and it logs a warning for any
+             other. A bundle image of another type, such as AVIF or HEIC,
+             and an SVG without a raster sibling keep their own file and
+             media type, without dimensions. */ -}}
         {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" $featured "page" $) -}}
-        {{ if ne $featured.MediaType.SubType "svg" -}}
+        {{ $img := "" -}}
+        {{ if in (slice "image/png" "image/jpeg" "image/gif" "image/tiff" "image/bmp" "image/webp") (string $featured.MediaType) -}}
+            {{ $img = (partial "utilities/GetImage.html" (dict "url" $featured.Name "page" $)).resource -}}
+        {{ end -}}
+        {{ with $img -}}
             {{ $imgURL = partial "assets/adapters/hugo.html" (dict
                 "page"         $
-                "img"          $featured
+                "img"          .
                 "url-file"     $featured.Name
                 "transform"    "fill"
                 "image-width"  1280

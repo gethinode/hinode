@@ -6,10 +6,13 @@
 
 {{/* Returns the media type of an image from the extension of its path,
      for an image that is not a resource and so has no MediaType of its
-     own, such as the url of schema.image. The extension test is
-     case-insensitive and ignores a query string or fragment. Returns an
-     empty string for an extension not listed below, so that a caller
-     emits no type rather than a guessed one.
+     own, such as the url of schema.image or the first of
+     opengraph.images. The extension test is case-insensitive and ignores
+     a query string or fragment, which are cut off at the first "?" or
+     "#" rather than parsed as a URL: a literal "%", which is no valid URL
+     escape, then cannot fail the build. Returns an empty string for an
+     extension not listed below, so that a caller emits no type rather
+     than a guessed one.
 
      "src"  Path or URL of the image. */}}
 
@@ -22,5 +25,6 @@
     "avif" "image/avif"
     "svg"  "image/svg+xml"
 -}}
-{{- $ext := lower (strings.TrimPrefix "." (path.Ext (urls.Parse (.src | default "")).Path)) -}}
+{{- $path := replaceRE `(?s)[?#].*` "" (.src | default "") -}}
+{{- $ext := lower (strings.TrimPrefix "." (path.Ext $path)) -}}
 {{- return (index $types $ext | default "") -}}

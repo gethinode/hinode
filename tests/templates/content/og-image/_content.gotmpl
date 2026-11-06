@@ -1,0 +1,16 @@
+{{- /*
+    Two pages whose front-matter thumbnail is a remote URL on the local
+    server that scripts/test-strict-images.cjs runs, one with an
+    upper-case scheme. They exist only in the build for which that
+    script sets params.tests.remoteThumbnail. The og:image assertions
+    for them are in layouts/_partials/tests/og-image.html.
+*/ -}}
+{{- with site.Params.tests.remoteOrigin -}}
+  {{- if site.Params.tests.remoteThumbnail -}}
+    {{- $url := printf "%s/img/remote.png" . -}}
+    {{- $.AddPage (dict "path" "remote-thumbnail" "title" "Remote thumbnail"
+          "params" (dict "thumbnail" $url)) -}}
+    {{- $.AddPage (dict "path" "remote-thumbnail-upper" "title" "Upper-case remote thumbnail"
+          "params" (dict "thumbnail" (replace $url "http://" "HTTP://"))) -}}
+  {{- end -}}
+{{- end -}}

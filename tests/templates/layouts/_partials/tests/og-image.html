@@ -5,8 +5,15 @@
     The preview image comes from the first source that has one: the
     front-matter thumbnail, then a page bundle image matching *feature*,
     then one matching *cover* or *thumbnail*, then schema.image.url, then
-    the first of opengraph.images. A bundle image is filled to a 1280x640
-    png, like a front-matter thumbnail that resolves to a resource.
+    the first of opengraph.images. A bundle image of a type that
+    utilities/GetImage.html supports (png, jpeg, gif, tiff, bmp or webp)
+    is filled to a 1280x640 png, like a front-matter thumbnail of one of
+    those types that resolves to a resource. Both first go through
+    GetImage.html, which rotates an image as its EXIF orientation
+    requires. The rotation gives the processed file a hashed name, so the
+    two cases with EXIF orientation 6 match the url against a pattern. A
+    bundle image of any other type, such as HEIC, keeps its own file and
+    type.
 
     og:image:width, og:image:height and og:image:type are emitted only when
     known, and each case reads back all four tags from the rendered head.
@@ -15,6 +22,15 @@
     schema.image that declares both; the type is known for a processed
     image, for a bundle image left as it is, and for schema.image, from the
     extension of its url.
+
+    A remote front-matter thumbnail must not be resolved as a resource,
+    which would fetch it at that point and give it dimensions; it goes to
+    assets/helpers/image-dimension.html like a file under static. Offline,
+    a fetch fails and the thumbnail ends up on that path anyway, so the
+    remote cases run only in the build in which
+    scripts/test-strict-images.cjs serves the image from a local server
+    and sets params.tests.remoteThumbnail. Each want is the url
+    image-dimension.html returns for the thumbnail.
 
     Each case also reads back the url of the JSON-LD ImageObject, which
     must be the og:image, or null when there is no image at all, as
@@ -53,7 +69,31 @@
   (dict "case" "bundle svg without a sibling keeps its own image and type" "page" "/thumbnails/featured-only"
         "url" (printf "%s/thumbnails/featured-only/feature.svg" $base)
         "meta" (dict "w" "-" "h" "-" "type" "image/svg+xml"))
+  (dict "case" "bundle heic image keeps its own image and type" "page" "/og-image/heic-bundle"
+        "url" (printf "%s/og-image/heic-bundle/feature.heic" $base)
+        "meta" (dict "w" "-" "h" "-" "type" "image/heic"))
+  (dict "case" "bundle gif image is processed" "page" "/og-image/gif-bundle"
+        "url" (printf "%s/og-image/gif-bundle/feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle tiff image is processed" "page" "/og-image/tiff-bundle"
+        "url" (printf "%s/og-image/tiff-bundle/feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle bmp image is processed" "page" "/og-image/bmp-bundle"
+        "url" (printf "%s/og-image/bmp-bundle/feature-1280x640.png" $base) "meta" $processed)
+  (dict "case" "bundle jpeg with exif orientation 6 is turned upright and processed" "page" "/og-image/exif-bundle"
+        "match" `^https://example\.org/og-image/exif-bundle/feature_hu_[0-9a-z]+-1280x640\.png$` "meta" $processed)
+  (dict "case" "front-matter jpeg with exif orientation 6 is turned upright and processed" "page" "/og-image/exif-thumbnail"
+        "match" `^https://example\.org/og-image/exif-thumbnail/feature_hu_[0-9a-z]+-1280x640\.png$` "meta" $processed)
+  (dict "case" "front-matter thumbnail with a percent sign in its fragment does not fail the build" "page" "/og-image/percent-fragment"
+        "url" (printf "%s/img/order.jpg" $base) "meta" $none)
 -}}
+{{- if site.Params.tests.remoteThumbnail -}}
+  {{- range slice "remote-thumbnail" "remote-thumbnail-upper" -}}
+    {{- $p := site.GetPage (printf "/og-image/%s" .) -}}
+    {{- $want := index (partial "assets/helpers/image-dimension.html" (dict
+          "src" $p.Params.thumbnail "image-width" 1280 "image-height" 640 "page" $p)) "target" | absURL -}}
+    {{- $cases = $cases | append (dict "case" (printf "%s keeps the image-dimension.html path" .)
+          "page" $p.Path "url" $want "meta" $none) -}}
+  {{- end -}}
+{{- end -}}
 {{- $plain := dict "case" "no site-wide image leaves all four empty or absent" "page" "/og-image/plain" "url" "" "meta" $none -}}
 {{- if eq hugo.Environment "og-schema" -}}
   {{- $plain = dict "case" "schema.image wins over opengraph.images with its dimensions" "page" "/og-image/plain"
@@ -79,7 +119,11 @@
   {{- end -}}
   {{- $ld := findRESubmatch `"@type": "ImageObject",\s*"@id": "[^"]*image/2",\s*"url":\s*([^,\s]*)\s*,` $html 1 -}}
   {{- $got = $got | append (cond (gt (len $ld) 0) (index (index $ld 0) 1) "-") -}}
-  {{- $want := delimit (slice .url .meta.w .meta.h .meta.type (cond (eq .url "") "null" (printf "%q" .url))) "|" -}}
+  {{- $url := .url -}}
+  {{- with .match -}}
+    {{- $url = cond (gt (len (findRE . (index $got 0) 1)) 0) (index $got 0) (printf "(match %s)" .) -}}
+  {{- end -}}
+  {{- $want := delimit (slice $url .meta.w .meta.h .meta.type (cond (eq $url "") "null" (printf "%q" $url))) "|" -}}
   {{- $gotS := delimit $got "|" -}}
   {{- if eq $gotS $want }}
 PASS og image: {{ .case }}
@@ -94,9 +138,11 @@ FAIL og image: {{ .case }}
 
 OG IMAGE FAILURES: {{ $ogFail }}
 {{- /*
-    assets/helpers/image-media-type.html, which gives schema.image.url its
-    type, called directly for each extension it knows and for inputs it
-    must not guess a type for.
+    assets/helpers/image-media-type.html, which gives schema.image.url and
+    the first of opengraph.images their type, called directly for each
+    extension it knows, for inputs it must not guess a type for, and for
+    a literal percent sign, which is no valid URL escape and must not fail
+    the build.
 */ -}}
 {{- $mtFail := 0 -}}
 {{- $mtCases := slice
@@ -109,6 +155,10 @@ OG IMAGE FAILURES: {{ $ogFail }}
   (dict "src" "img/a.svg" "want" "image/svg+xml")
   (dict "src" "img/a.JPG" "want" "image/jpeg")
   (dict "src" "https://example.org/a.png?v=2#top" "want" "image/png")
+  (dict "src" "img/a.png?v=2" "want" "image/png")
+  (dict "src" "img/a.png#top" "want" "image/png")
+  (dict "src" "img/50%-off.png" "want" "image/png")
+  (dict "src" "https://example.org/50%-off.webp?q=%zz" "want" "image/webp")
   (dict "src" "img/a.bmp" "want" "")
   (dict "src" "img/a" "want" "")
   (dict "src" "" "want" "")
