@@ -1,0 +1,11 @@
+# Overlay for the `test:templates` build with `--environment og-schema-units`. schema.image
+# declares its width with a unit, so the width is no integer: neither dimension may be emitted,
+# and the build must not fail on it. The height alone is valid, which shows that one valid
+# dimension is not enough.
+[schema.image]
+  url = "img/site-image.webp"
+  width = "1280px"
+  height = 640
+
+[opengraph]
+  images = ["img/opengraph.png"]

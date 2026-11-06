@@ -1,0 +1,12 @@
+# Overlay for the image-warnings build in scripts/test-strict-images.cjs
+# (`--environment image-warnings`). It adds the og:image cases that log a
+# warning on purpose (see layouts/_partials/tests/og-image.html), and the
+# script compares the warnings of this build with the ones it expects.
+# Like the `strict-images` build, it leaves out the home page, whose
+# other assertion tables log warnings of their own. Unlike that build, it
+# does not set params.debugging.failOnMissingImage, so a missing image
+# stays a warning that the script can compare.
+disableKinds = ['home', 'taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
+
+[params.tests]
+  imageWarnings = true

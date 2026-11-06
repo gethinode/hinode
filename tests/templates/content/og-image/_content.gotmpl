@@ -1,0 +1,34 @@
+{{- /*
+    Three pages whose front-matter thumbnail is a remote URL on the local
+    server that scripts/test-strict-images.cjs runs, two of them with an
+    upper-case scheme, HTTP:// and HTTPS://, so that each of the two
+    prefixes that assets/helpers/image-dimension.html takes for a url
+    meets an upper-case one. They exist only in the build for which that
+    script sets params.tests.remoteThumbnail. The og:image assertions
+    for them are in layouts/_partials/tests/og-image.html.
+*/ -}}
+{{- with site.Params.tests.remoteOrigin -}}
+  {{- if site.Params.tests.remoteThumbnail -}}
+    {{- $url := printf "%s/img/remote.png" . -}}
+    {{- $.AddPage (dict "path" "remote-thumbnail" "title" "Remote thumbnail"
+          "params" (dict "thumbnail" $url)) -}}
+    {{- $.AddPage (dict "path" "remote-thumbnail-upper" "title" "Upper-case remote thumbnail"
+          "params" (dict "thumbnail" (replace $url "http://" "HTTP://"))) -}}
+    {{- $.AddPage (dict "path" "remote-thumbnail-https-upper" "title" "Upper-case https remote thumbnail"
+          "params" (dict "thumbnail" (replace $url "http://" "HTTPS://"))) -}}
+  {{- end -}}
+{{- end -}}
+{{- /*
+    A page bundle whose feature image has a "?" in its name. A Go module
+    zip refuses a file named so, and Windows does not allow one, so the
+    image is added here rather than stored in the repository, and only in
+    the build for which scripts/test-strict-images.cjs sets
+    params.tests.questionMark, which it does except on Windows.
+*/ -}}
+{{- if site.Params.tests.questionMark -}}
+  {{- with resources.Get "img/asset-sibling.png" -}}
+    {{- $.AddPage (dict "path" "question-bundle" "title" "Question bundle") -}}
+    {{- $.AddResource (dict "path" "question-bundle/feature?1.png"
+          "content" (dict "mediaType" "image/png" "value" .Content)) -}}
+  {{- end -}}
+{{- end -}}

@@ -20,55 +20,119 @@
 {{- $thumbnail := "" -}}
 {{ if reflect.IsMap .Params.Thumbnail }}{{ $thumbnail = .Params.Thumbnail.url }}{{ else }}{{ $thumbnail = .Params.Thumbnail }}{{ end }}
 
+{{/* The preview image comes from the first source that has one: the
+     front-matter thumbnail, a page bundle image matching *feature*, one
+     matching *cover* or *thumbnail*, schema.image.url, and last the first
+     of opengraph.images. Its width, height and media type are recorded
+     only when known, and head/opengraph.html emits only the known ones. */ -}}
+{{- $imgURL := "" -}}
+{{- $imgWidth := 0 -}}
+{{- $imgHeight := 0 -}}
+{{- $imgType := "" -}}
+
+{{/* The front-matter thumbnail and the bundle image go through the same
+     step when they are a resource, in the page bundle or under assets, of
+     one of the media types that utilities/GetImage.html supports. The
+     step rotates the image as its EXIF orientation requires and fills it
+     to a 1280x640 png, in inline/seo/preview-fill.html at the end of this
+     file. GetImage.html logs a warning for any other type, so a resource
+     of another type, such as AVIF, HEIC or an SVG without a raster
+     sibling, does not reach it.
+
+     The step runs inside try, so that it does not fail the build on an
+     image Hugo cannot decode, such as an empty file or a Git LFS pointer,
+     or on one whose name Hugo cannot turn into a URL, such as
+     "feature 50%.png". Such an image takes the fallback below: a
+     thumbnail the image-dimension.html path, a bundle image its own
+     file. */ -}}
+{{- $processable := slice "image/png" "image/jpeg" "image/gif" "image/tiff" "image/bmp" "image/webp" -}}
+{{- $source := "" -}}
+{{- $sourceURL := "" -}}
+{{- $raster := "" -}}
+{{- $featured := "" -}}
 {{ if $thumbnail -}}
     {{/* An SVG thumbnail yields to a raster file with the same base
          name when one exists, so that a link preview gets a raster
-         image. A sibling that resolves to a resource, in the page
-         bundle or under assets, goes to the image adapter as that
-         resource, which fills it to 1280x640 like any other raster
-         thumbnail. image-dimension.html would hand the adapter a
-         root-relative path instead, which for a page bundle's
-         "feature.png" is "/feature.png": that path does not resolve,
-         so it would log a missing image. A sibling under static is not
-         processed, like any other static image. */ -}}
-    {{ $raster := partial "assets/helpers/raster-sibling.html" (dict "src" $thumbnail "page" .) -}}
-    {{ $res := "" -}}
-    {{ if ne $raster $thumbnail }}{{ $res = partial "utilities/GetResource.html" (dict "url" $raster "page" .) }}{{ end -}}
-    {{ $imgURL := "" -}}
-    {{ with $res -}}
-        {{ $imgURL = partial "assets/adapters/hugo.html" (dict
-            "page"         $
-            "img"          .
-            "url-file"     (path.Base $raster)
-            "transform"    "fill"
-            "image-width"  1280
-            "image-height" 640
-            "format"       "png"
-            "absolute-url" true
-        ) -}}
-    {{ else -}}
-        {{ $imgURL = index (partial "assets/helpers/image-dimension.html" (dict "src" $raster "image-width" 1280 "image-height" 640 "page" .)) "target" -}}
-    {{ end }}
-    {{ $.Scratch.Set "thumbnail" ($imgURL | absURL) -}}
+         image. A remote URL is not looked up as a resource, because
+         utilities/GetResource.html fetches a url that starts with
+         "http" in any letter case. The test is on the string rather
+         than on a parsed URL, so that a literal "%", which is no valid
+         URL escape, cannot fail it. */ -}}
+    {{ $raster = partial "assets/helpers/raster-sibling.html" (dict "src" $thumbnail "page" .) -}}
+    {{ if not (hasPrefix (lower $raster) "http") -}}
+        {{ $source = partial "utilities/GetResource.html" (dict "url" $raster "page" .) -}}
+        {{ $sourceURL = $raster -}}
+    {{ end -}}
 {{ else -}}
-    {{ with .Site.Params.schema.image.url -}}    
-        {{ $.Scratch.Set "thumbnail" (. | absURL) -}}
-    {{ else -}}
-        {{ $images := $.Resources.ByType "image" -}}
-        {{ $featured := $images.GetMatch "*feature*" -}}
-        {{ if not $featured -}}
-            {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
-        {{ end -}}
-        {{ with $featured -}}
-            {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" $featured "page" $) -}}
-            {{ $.Scratch.Set "thumbnail" $featured.Permalink -}}
-        {{ else -}}
-            {{ with $.Site.Params.opengraph.images -}}
-                {{ $.Scratch.Set "thumbnail" (index . 0 | absURL) -}}
-            {{ end -}}
+    {{ $images := $.Resources.ByType "image" -}}
+    {{ $featured = $images.GetMatch "*feature*" -}}
+    {{ if not $featured -}}
+        {{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" -}}
+    {{ end -}}
+    {{ with $featured -}}
+        {{ $featured = partial "assets/helpers/raster-sibling.html" (dict "resource" . "page" $) -}}
+        {{ $source = $featured -}}
+        {{/* utilities/GetResource.html takes a url that starts with
+             "http" for a remote one, and so would take a bundle image
+             named "http-feature.png" for one. It hands any other url
+             without a leading slash to Resources.Get, which finds
+             "./http-feature.png" as the resource of that name. */ -}}
+        {{ $sourceURL = printf "./%s" $featured.Name -}}
+    {{ end -}}
+{{ end -}}
+{{ with $source -}}
+    {{ if in $processable (string .MediaType) -}}
+        {{ with try (partial "inline/seo/preview-fill.html" (dict "page" $ "url" $sourceURL)) -}}
+            {{ if not .Err }}{{ $imgURL = .Value }}{{ end -}}
         {{ end -}}
     {{ end -}}
 {{ end -}}
+
+{{ if $imgURL -}}
+    {{ $imgWidth = 1280 }}{{ $imgHeight = 640 }}{{ $imgType = "image/png" -}}
+{{ else if $thumbnail -}}
+    {{/* Any other thumbnail keeps the image-dimension.html path: a file
+         under static, a remote URL, a resource of another type, and one
+         the step above could not process. image-dimension.html returns
+         the width and height it was given whether or not it processed
+         the image, so they are not recorded. */ -}}
+    {{ $imgURL = index (partial "assets/helpers/image-dimension.html" (dict "src" $raster "image-width" 1280 "image-height" 640 "page" .)) "target" | absURL -}}
+{{ else -}}
+    {{/* A bundle image the step above did not process keeps its own file
+         and media type, without dimensions. Its permalink is read inside
+         try as well, because Hugo cannot build one for a name such as
+         "feature 50%.png"; the next source is used then. */ -}}
+    {{ with $featured -}}
+        {{ with try .Permalink -}}
+            {{ if not .Err }}{{ $imgURL = .Value }}{{ $imgType = $featured.MediaType.Type }}{{ end -}}
+        {{ end -}}
+    {{ end -}}
+    {{ if not $imgURL -}}
+        {{ with .Site.Params.schema.image -}}
+            {{ if .url -}}
+                {{ $imgURL = .url | absURL -}}
+                {{ $imgType = partial "assets/helpers/image-media-type.html" (dict "src" .url) -}}
+                {{ $width := partial "assets/helpers/positive-integer.html" .width -}}
+                {{ $height := partial "assets/helpers/positive-integer.html" .height -}}
+                {{ if and $width $height -}}
+                    {{ $imgWidth = $width }}{{ $imgHeight = $height -}}
+                {{ end -}}
+            {{ end -}}
+        {{ end -}}
+    {{ end -}}
+    {{ if not $imgURL -}}
+        {{ with $.Site.Params.opengraph.images -}}
+            {{ $imgURL = index . 0 | absURL -}}
+            {{ $imgType = partial "assets/helpers/image-media-type.html" (dict "src" (index . 0)) -}}
+        {{ end -}}
+    {{ end -}}
+{{ end -}}
+{{/* Without any image, "thumbnail" stays unset, as it always has:
+     head/structured-data.html renders an unset value as null. */ -}}
+{{ with $imgURL }}{{ $.Scratch.Set "thumbnail" . }}{{ end -}}
+{{ $.Scratch.Set "thumbnail-width" $imgWidth -}}
+{{ $.Scratch.Set "thumbnail-height" $imgHeight -}}
+{{ $.Scratch.Set "thumbnail-type" $imgType -}}
 
 
 {{ if eq .Kind "404" -}}
@@ -103,3 +167,42 @@
 {{ end }}
 
 {{ partial "head/structured-data.html" . }}
+
+{{/* Returns the url of a 1280x640 png filled from the image at "url",
+     after utilities/GetImage.html has looked it up and turned it upright,
+     or "" when there is no such png. head/seo.html calls it inside try,
+     which catches the error that Fill returns for an image it cannot
+     decode. Fill leaves an empty file in the image cache then, and from
+     the third build with that cache on it returns that file instead of an
+     error: a png with a width of 0, which the guard below turns away. The
+     fill is made here, rather than by assets/adapters/hugo.html, because
+     the adapter returns only a url and the guard needs the image.
+
+     The path of the png is the decoded path of the permalink of the image,
+     with "-1280x640.png" in place of the extension, such as
+     "feature-1280x640.png" for "feature.png", the name the adapter gives
+     it. Decoding undoes the escapes that Hugo puts in a permalink for a
+     space or a non-ASCII letter. Hugo cuts a permalink short at a "#" or
+     a "?", and does not escape a "%", so for an image named with one of
+     them the file name comes from the name of the image instead, and in
+     the path each of the three becomes a hyphen: "feature#1.png" gives
+     "feature-1-1280x640.png". The png is not always next to the image.
+     The path of a permalink starts with the path of the baseURL, so with
+     a baseURL of "https://example.org/sub/" the png is published under
+     public/sub/. A "%2F" in the name of the image decodes to a "/", so
+     "feature%2F.png" gives "feature/feature-2F-1280x640.png", one
+     directory down. */}}
+{{ define "_partials/inline/seo/preview-fill.html" -}}
+    {{- $url := "" -}}
+    {{- with (partial "utilities/GetImage.html" (dict "url" .url "page" .page)).resource -}}
+        {{- $fill := .Fill "1280x640 png" -}}
+        {{- if $fill.Width -}}
+            {{- $path := (urls.Parse .RelPermalink).Path -}}
+            {{- $file := path.Base $path -}}
+            {{- if findRE `[#?%]` .Name 1 }}{{ $file = path.Base .Name }}{{ end -}}
+            {{- $name := path.Join (path.Dir $path) (printf "%s-1280x640.png" (strings.TrimSuffix (path.Ext $file) $file)) -}}
+            {{- $url = ($fill | resources.Copy (replaceRE `[#?%]` "-" $name)).Permalink -}}
+        {{- end -}}
+    {{- end -}}
+    {{- return $url -}}
+{{- end }}
