@@ -63,9 +63,9 @@
     non-ASCII letter in the url, so the url of the png made from
     "feature 1.png" has "%20" where the file name has a space;
     scripts/test-strict-images.cjs decodes each url on the site's host and
-    checks that the file exists. Hugo cuts a url short at a "#" or "?", and leaves a "%"
-    unescaped, so in a png made from an image named with one of them, each
-    such character is a hyphen: "feature#1.png" gives
+    checks that the file exists. Hugo cuts a url short at a "#" or "?", and
+    leaves a "%" unescaped, so in a png made from an image named with one
+    of them, each such character is a hyphen: "feature#1.png" gives
     feature-1-1280x640.png. A bundle image named "http-feature.png" is
     processed like any other, and is not looked up as a remote url. The
     "?" case runs only where scripts/test-strict-images.cjs sets
@@ -276,10 +276,10 @@ IMAGE MEDIA TYPE FAILURES: {{ $mtFail }}
 {{- /*
     assets/helpers/positive-integer.html, which reads the width and the
     height of schema.image, called directly with ints, floats, strings, a
-    boolean, a list and nil. Only a positive
-    whole number counts, as an int, a float without a fraction, or a string
-    of decimal digits without a leading zero; any other value gives 0, and
-    none fails the build. "010" must not give 8, which int reads it as, and
+    boolean, a list and nil. Only a positive whole number counts, as an
+    int, a float without a fraction, or a string of decimal digits without
+    a leading zero; any other value gives 0, and none fails the build.
+    "010" must not give 8, which int reads it as, and
     "99999999999999999999" is too large for an int.
 */ -}}
 {{- $piFail := 0 -}}
