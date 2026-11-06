@@ -168,6 +168,8 @@
         "url" (printf "%s/og-image/https-bundle/https_cover-1280x640.png" $base) "meta" $processed)
   (dict "case" "front-matter page resource named with a space is processed under a url that keeps it" "page" "/og-image/space-thumbnail"
         "url" (printf "%s/og-image/space-thumbnail/x%%201-1280x640.png" $base) "meta" $processed)
+  (dict "case" "front-matter asset named with a hash is processed next to it" "page" "/og-image/hash-asset"
+        "url" (printf "%s/img/asset-1-1280x640.png" $base) "meta" $processed)
 -}}
 {{- if site.Params.tests.questionMark -}}
   {{- $cases = $cases | append
