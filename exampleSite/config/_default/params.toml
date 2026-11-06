@@ -149,6 +149,15 @@
     reverse = false
     webshare = true
 
+# Opt-in UTM tagging of shared links. Each provider sets utm_source through an optional
+# `utm-source`, defaulting to its name lowercased and anchorized ("LinkedIn" becomes "linkedin").
+# The web share button uses `webshare-source`. An empty campaign is left out of the link.
+[sharing.utm]
+    enabled = false
+    medium = "social"
+    campaign = ""
+    webshare-source = "webshare"
+
 [[sharing.providers]]
     name = "LinkedIn"
     url = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
@@ -156,8 +165,8 @@
     weight = 10
 
 [[sharing.providers]]
-    name = "Twitter"
-    url = "https://twitter.com/home?status={url}"
+    name = "X"
+    url = "https://x.com/intent/post?url={url}&text={title}"
     icon = "fab x-twitter"
     weight = 20
 
@@ -169,7 +178,7 @@
 
 [[sharing.providers]]
     name = "WhatsApp"
-    url = "whatsapp://send?text={title}%20{url}"
+    url = "https://wa.me/?text={title}%20{url}"
     icon = "fab whatsapp"
     weight = 40
 

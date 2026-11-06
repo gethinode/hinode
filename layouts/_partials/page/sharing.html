@@ -22,9 +22,7 @@
     
     <span class="hstack gap-2 text-body-secondary">
         {{- range $index, $item := $list -}}
-            {{- $url := $item.url -}}
-            {{- $url = replace $url "{url}" $.Permalink -}}
-            {{- $url = replace $url "{title}" (urlquery $.Title) -}}
+            {{- $url := partial "utilities/GetShareURL.html" (dict "url" $.Permalink "title" $.Title "provider" $item) -}}
             {{- $url = $url | safeURL -}}
             {{- $target := "" -}}
             {{- $clipboard := "" -}}
@@ -47,7 +45,7 @@
             ) }}
         {{- end -}}
         {{ if .Site.Params.sharing.webshare }}
-            {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" .Permalink }}
+            {{ $attr := dict "data-sharing-title" .Title "data-sharing-description" .Description "data-sharing-url" (partial "utilities/GetShareURL.html" (dict "url" .Permalink "title" .Title)) }}
             {{- with index site.Params.sharing "webshare-icon" -}}
                 {{- partial "utilities/LogWarn.html" (dict
                     "partial" "page/sharing.html"

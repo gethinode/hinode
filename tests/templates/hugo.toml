@@ -29,6 +29,27 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
     [params.pages.blog]
       readingTime = false
       includeToc = false
+  # Read by page/sharing.html, which the share-url assertions render. UTM tagging is on so the
+  # rendered links show the site settings reaching every button; the theme default is off.
+  [params.sharing]
+    webshare = true
+    [params.sharing.utm]
+      enabled = true
+      medium = "social"
+      campaign = ""
+      webshare-source = "native"
+    [[params.sharing.providers]]
+      name = "X"
+      url = "https://x.com/intent/post?url={url}&text={title}"
+      icon = "fab x-twitter"
+      weight = 10
+    [[params.sharing.providers]]
+      name = "Copy"
+      url = "{url}"
+      icon = "fas link"
+      weight = 20
+      clipboard = true
+      utm-source = "copied"
 
 # Defining any custom [[module.mounts]] disables Hugo's implicit default mounts, so the
 # ones this harness needs are restated explicitly. `content` provides the page fixtures
@@ -343,3 +364,17 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../data/structures/navbar-item.yml'
   target = 'data/structures/navbar-item.yml'
+
+# Share links are built by one utility, so the encoding and UTM rules are asserted on it directly.
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetShareURL.html'
+  target = 'layouts/_partials/utilities/GetShareURL.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/page/sharing.html'
+  target = 'layouts/_partials/page/sharing.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/assets/toast.html'
+  target = 'layouts/_partials/assets/toast.html'
+[[module.mounts]]
+  source = '../../data/structures/toast.yml'
+  target = 'data/structures/toast.yml'

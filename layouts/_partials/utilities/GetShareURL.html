@@ -1,0 +1,55 @@
+{{- /* Returns the link a sharing button opens or copies. Arguments:
+
+       url      the permalink of the page to share (required)
+       title    the title of the page to share
+       provider a [[sharing.providers]] entry; without one the shared page URL itself is
+                returned, as the web share button needs
+       source   the utm_source when no provider is given; defaults to
+                sharing.utm.webshare-source, then "webshare"
+       utm      the UTM settings; defaults to site.Params.sharing.utm
+
+       When UTM tagging is enabled, utm_source, utm_medium and utm_campaign are appended to the
+       page URL, with `&` if it already has a query string. An empty campaign is left out. A
+       provider's utm_source is its `utm-source`, or else its name, lowercased and anchorized.
+
+       A clipboard provider gets its url template with {url} replaced by the page URL as is, so
+       the copied link stays readable. Any other provider gets its url template with {url} and
+       {title} query-escaped. Go's urlquery
+       writes a space as `+` and a literal `+` as `%2B`, so every `+` left in its output is a
+       space and is rewritten to `%20`, which every provider decodes as a space. */ -}}
+{{- $url := .url -}}
+{{- $provider := .provider -}}
+{{- $utm := .utm | default (site.Params.sharing.utm | default dict) -}}
+
+{{- if $utm.enabled -}}
+    {{- $source := .source -}}
+    {{- with $provider -}}
+        {{- $source = index . "utm-source" | default (anchorize .name) -}}
+    {{- end -}}
+    {{- $source = $source | default (index $utm "webshare-source") | default "webshare" -}}
+    {{- $params := slice
+        (slice "utm_source" $source)
+        (slice "utm_medium" ($utm.medium | default "social"))
+        (slice "utm_campaign" $utm.campaign)
+    -}}
+    {{- $query := slice -}}
+    {{- range $params -}}
+        {{- $value := index . 1 -}}
+        {{- if $value -}}
+            {{- $query = $query | append (printf "%s=%s" (index . 0) (replace (urlquery $value) "+" "%20")) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $url = printf "%s%s%s" $url (cond (strings.Contains $url "?") "&" "?") (delimit $query "&") -}}
+{{- end -}}
+
+{{- with $provider -}}
+    {{- if not .clipboard -}}
+        {{- $link := .url -}}
+        {{- $link = replace $link "{url}" (replace (urlquery $url) "+" "%20") -}}
+        {{- $link = replace $link "{title}" (replace (urlquery ($.title | default "")) "+" "%20") -}}
+        {{- $url = $link -}}
+    {{- else -}}
+        {{- $url = replace .url "{url}" $url -}}
+    {{- end -}}
+{{- end -}}
+{{- return $url -}}
