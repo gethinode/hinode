@@ -1,0 +1,32 @@
+# Fixture for scripts/test-feeds.mjs: a site that renders the theme's layouts/rss.xml for the
+# home page, a section, a taxonomy and its terms. Pages marked noindex are newer than every
+# indexable page, so a feed that counts them toward the limit, or reads lastBuildDate from
+# them, shows it. The `empty` section and the `secret` term have no indexable page at all.
+# The `undated` section has a page without a date, so its own date is zero.
+baseURL = 'https://example.org/'
+title = 'feed tests'
+locale = 'en-us'
+timeZone = 'UTC'
+disableKinds = ['sitemap', 'robotsTXT', '404']
+
+[services.rss]
+  limit = 3
+
+[taxonomies]
+  tag = 'tags'
+
+[[module.mounts]]
+  source = 'content'
+  target = 'content'
+[[module.mounts]]
+  source = 'layouts'
+  target = 'layouts'
+[[module.mounts]]
+  source = '../../layouts/rss.xml'
+  target = 'layouts/rss.xml'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/IsIndexable.html'
+  target = 'layouts/_partials/utilities/IsIndexable.html'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetRobots.html'
+  target = 'layouts/_partials/utilities/GetRobots.html'

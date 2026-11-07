@@ -4,12 +4,17 @@
     Visit gethinode.com/license for more details.
 
     Override of Hugo's embedded RSS template (v0.164.0). Byte-compatible with the
-    embedded template except for the item <description>: it emits plain text — the
-    frontmatter description when set, else a plainified summary — instead of the
-    page's rendered HTML. Embedding rendered HTML forces a per-output-format
+    embedded template except for two changes. The item <description> emits plain
+    text — the frontmatter description when set, else a plainified summary — instead
+    of the page's rendered HTML. Embedding rendered HTML forces a per-output-format
     content render whose ambient context is the feed page, which made feed bytes
     depend on render order (non-deterministic builds). Plain text strips the
     order-sensitive markup (classes, generated element ids) so feeds are stable.
+
+    It also leaves out every page that utilities/IsIndexable.html rejects, as
+    sitemap.xml does, before the RSS limit applies, so the limit counts only the
+    pages the feed lists. lastBuildDate is read from those pages, and is left out
+    when there are none.
 */}}
 {{- $authorEmail := "" }}
 {{- with site.Params.author }}
@@ -39,6 +44,13 @@
 {{- else }}
 	{{- $pages = $pctx.Pages }}
 {{- end }}
+{{- $indexable := slice }}
+{{- range $pages }}
+	{{- if partial "utilities/IsIndexable.html" . }}
+		{{- $indexable = $indexable | append . }}
+	{{- end }}
+{{- end }}
+{{- $pages = $indexable }}
 {{- $limit := .Site.Config.Services.RSS.Limit }}
 {{- if ge $limit 1 }}
 	{{- $pages = $pages | first $limit }}
@@ -60,7 +72,7 @@
 		{{ with .Site.Copyright }}
 			<copyright>{{ . }}</copyright>
 		{{ end }}
-		{{ if not .Date.IsZero }}
+		{{ if and (not .Date.IsZero) $pages }}
 			<lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
 		{{ end }}
 		{{- with .OutputFormats.Get "RSS" }}
