@@ -1,16 +1,41 @@
 # Fixture for scripts/test-feeds.mjs: a site that renders the theme's layouts/rss.xml for the
-# home page, a section, a taxonomy and its terms. Pages marked noindex are newer than every
-# indexable page, so a feed that counts them toward the limit, or reads lastBuildDate from
-# them, shows it. The `empty` section and the `secret` term have no indexable page at all.
-# The `undated` section has a page without a date, so its own date is zero.
+# home page, a section, a taxonomy and its terms. In the English site, pages marked noindex
+# are newer than every indexable page, so a feed that counts them toward the limit, or reads
+# lastBuildDate from them, shows it. The `empty` section and the `secret` term have no
+# indexable page at all. The `undated` section has a page without a date, so its own date is
+# zero. The `mixed` section's only dated page is noindex, so its own date is not zero while
+# its listed page has no date. The `own-lastmod` section sets a lastmod of its own and, as
+# `date` below does not fall back to lastmod, Hugo leaves its date zero although its page is
+# dated, as it does for a section whose _index.md takes its lastmod from Git.
+#
+# posts/hidden-twin is noindex and has the title of posts/c, so a robots check cached on the
+# title, rather than on the page, either lists the twin or drops posts/c.
+#
+# The Dutch site has no limit (-1) and marks every page noindex unless the page says
+# otherwise. Its only dated page is noindex, so its home feed lists only undated pages. Its
+# mixed/undated page has the same front matter as the English one, which stays indexable.
 baseURL = 'https://example.org/'
 title = 'feed tests'
-locale = 'en-us'
 timeZone = 'UTC'
 disableKinds = ['sitemap', 'robotsTXT', '404']
+defaultContentLanguage = 'en'
 
 [services.rss]
   limit = 3
+
+[frontmatter]
+  date = ['date', 'publishDate']
+
+[languages.en]
+  locale = 'en-us'
+  weight = 1
+[languages.nl]
+  locale = 'nl-nl'
+  weight = 2
+  [languages.nl.params.meta]
+    robots = 'noindex, follow'
+  [languages.nl.services.rss]
+    limit = -1
 
 [taxonomies]
   tag = 'tags'

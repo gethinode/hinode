@@ -1,8 +1,9 @@
 // Builds the tests/feeds fixture and reads the RSS feeds that layouts/rss.xml writes for the
-// home page, a section, the tags taxonomy and two of its terms. A page whose robots setting is
-// noindex or none must be absent from every feed, the RSS limit must count only the pages that
-// are listed, and lastBuildDate must come from those pages. A feed whose pages are all noindex
-// must still build, without items and without a lastBuildDate.
+// home page, a section, the tags taxonomy and two of its terms, in English with a limit and in
+// Dutch without one. A page whose robots setting is noindex or none must be absent from every
+// feed, the RSS limit must count only the pages that are listed, and lastBuildDate must come
+// from those pages alone. A feed whose pages are all noindex must still build, without items
+// and without a lastBuildDate.
 // Run with: node --test scripts/test-feeds.mjs
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
@@ -78,8 +79,40 @@ test('feed of undated, whose node has no date, lists its page without lastBuildD
 	assert.equal(feed.lastBuildDate, undefined);
 });
 
+test('feed of mixed, whose only dated page is noindex, lists its undated page without lastBuildDate', () => {
+	const feed = readFeed('mixed');
+	assert.deepEqual(feed.items, [`${base}/mixed/undated/`]);
+	assert.equal(feed.lastBuildDate, undefined);
+});
+
+test('feed of own-lastmod, whose node Hugo leaves undated, lists its dated page without lastBuildDate', () => {
+	// Hugo's embedded template leaves lastBuildDate out when the feed's own date is zero.
+	const feed = readFeed('own-lastmod');
+	assert.deepEqual(feed.items, [`${base}/own-lastmod/page/`]);
+	assert.equal(feed.lastBuildDate, undefined);
+});
+
+test('Dutch home feed, whose only dated page is noindex, lists its undated pages without lastBuildDate', () => {
+	const feed = readFeed('nl');
+	assert.deepEqual(feed.items, [
+		...['a', 'b', 'c', 'd'].map(name => `${base}/nl/posts/${name}/`),
+		`${base}/nl/undated/page/`,
+	]);
+	assert.equal(feed.lastBuildDate, undefined);
+});
+
+test('Dutch section feed, whose limit is -1, lists every indexable page', () => {
+	const feed = readFeed('nl/posts');
+	assert.deepEqual(feed.items, ['a', 'b', 'c', 'd'].map(name => `${base}/nl/posts/${name}/`));
+});
+
+test('a translation is checked on its own robots setting, not on its counterpart', () => {
+	assert.deepEqual(readFeed('mixed').items, [`${base}/mixed/undated/`]);
+	assert.deepEqual(readFeed('nl/mixed').items, []);
+});
+
 test('no feed names a noindex page', () => {
-	for (const rel of ['', 'posts', 'empty', 'undated', 'tags', 'tags/shared', 'tags/secret']) {
+	for (const rel of ['', 'posts', 'empty', 'undated', 'mixed', 'own-lastmod', 'tags', 'tags/shared', 'tags/secret', 'nl', 'nl/posts', 'nl/mixed', 'nl/undated']) {
 		const {xml} = readFeed(rel);
 		assert.doesNotMatch(xml, /hidden|Hidden/, `feed ${rel || '/'} names a noindex page`);
 	}

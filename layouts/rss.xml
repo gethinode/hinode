@@ -13,8 +13,8 @@
 
     It also leaves out every page that utilities/IsIndexable.html rejects, as
     sitemap.xml does, before the RSS limit applies, so the limit counts only the
-    pages the feed lists. lastBuildDate is read from those pages, and is left out
-    when there are none.
+    pages the feed lists. lastBuildDate is the newest lastmod of those pages, and is
+    left out when there are none or that lastmod is zero.
 */}}
 {{- $authorEmail := "" }}
 {{- with site.Params.author }}
@@ -44,16 +44,39 @@
 {{- else }}
 	{{- $pages = $pctx.Pages }}
 {{- end }}
-{{- $indexable := slice }}
+{{- /* Walk the pages in their own order and stop at the limit-th indexable one, so the
+       pages kept are the first $limit indexable pages, as filtering every page and then
+       applying first would give. A limit below 1 means no limit. The noindex pages seen go
+       into a map, and complement drops them while it keeps the order and type of $pages;
+       appending every kept page to a slice instead copies the slice on each append. */}}
+{{- $limit := .Site.Config.Services.RSS.Limit }}
+{{- $scanned := 0 }}
+{{- $listed := 0 }}
+{{- $hidden := newScratch }}
 {{- range $pages }}
-	{{- if partial "utilities/IsIndexable.html" . }}
-		{{- $indexable = $indexable | append . }}
+	{{- $scanned = add $scanned 1 }}
+	{{- if partialCached "utilities/IsIndexable.html" . . }}
+		{{- $listed = add $listed 1 }}
+		{{- if and (ge $limit 1) (ge $listed $limit) }}
+			{{- break }}
+		{{- end }}
+	{{- else }}
+		{{- $hidden.SetInMap "pages" (string $scanned) . }}
 	{{- end }}
 {{- end }}
-{{- $pages = $indexable }}
-{{- $limit := .Site.Config.Services.RSS.Limit }}
-{{- if ge $limit 1 }}
-	{{- $pages = $pages | first $limit }}
+{{- $pages = $pages | first $scanned }}
+{{- with $hidden.GetSortedMapValues "pages" }}
+	{{- $pages = $pages | complement . }}
+{{- end }}
+{{- /* lastBuildDate is the newest lastmod of the listed pages, and is left out when that is
+       zero. As in the embedded template, it is also left out when the feed's own date is
+       zero, as it is for a section whose _index.md takes its lastmod from Git. */}}
+{{- $lastBuildDate := "" }}
+{{- with $pages }}
+	{{- $lastmod := (index .ByLastmod.Reverse 0).Lastmod }}
+	{{- if and (not $.Date.IsZero) (not $lastmod.IsZero) }}
+		{{- $lastBuildDate = $lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}
+	{{- end }}
 {{- end }}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -72,8 +95,8 @@
 		{{ with .Site.Copyright }}
 			<copyright>{{ . }}</copyright>
 		{{ end }}
-		{{ if and (not .Date.IsZero) $pages }}
-			<lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+		{{ with $lastBuildDate }}
+			<lastBuildDate>{{ . | safeHTML }}</lastBuildDate>
 		{{ end }}
 		{{- with .OutputFormats.Get "RSS" }}
 			{{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
