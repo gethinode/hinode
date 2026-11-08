@@ -1,0 +1,35 @@
+baseURL = 'https://example.org/'
+title = 'Date tests'
+timeZone = 'UTC'
+disableKinds = ['robotsTXT', '404']
+defaultContentLanguage = 'en'
+[services.rss]
+limit = -1
+[frontmatter]
+date = ['date', 'publishDate']
+lastmod = ['updated', 'lastmod', 'date', 'publishDate']
+[languages.en]
+locale = 'en-us'
+weight = 1
+[languages.nl]
+locale = 'nl-nl'
+weight = 2
+[languages.nl.params.meta]
+robots = 'NOINDEX, follow'
+[taxonomies]
+tag = 'tags'
+[[module.mounts]]
+source = 'content'
+target = 'content'
+[[module.mounts]]
+source = 'layouts'
+target = 'layouts'
+[[module.mounts]]
+source = '../../../layouts/rss.xml'
+target = 'layouts/rss.xml'
+[[module.mounts]]
+source = '../../../layouts/sitemap.xml'
+target = 'layouts/sitemap.xml'
+[[module.mounts]]
+source = '../../../layouts/_partials/utilities'
+target = 'layouts/_partials/utilities'

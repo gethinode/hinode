@@ -3,8 +3,7 @@
     Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
     Visit gethinode.com/license for more details.
 
-    Override of Hugo's embedded RSS template (v0.164.0). Byte-compatible with the
-    embedded template except for two changes. The item <description> emits plain
+    Override of Hugo's embedded RSS template (v0.164.0). The item <description> emits plain
     text — the frontmatter description when set, else a plainified summary — instead
     of the page's rendered HTML. Embedding rendered HTML forces a per-output-format
     content render whose ambient context is the feed page, which made feed bytes
@@ -14,7 +13,8 @@
     It also leaves out every page that utilities/IsIndexable.html rejects, as
     sitemap.xml does, before the RSS limit applies, so the limit counts only the
     pages the feed lists. lastBuildDate is the newest lastmod of those pages, and is
-    left out when there are none or that lastmod is zero.
+    left out when there are none or that lastmod is zero. Term dates use
+    utilities/GetIndexableDates.html so noindex members cannot supply inherited dates.
 */}}
 {{- $authorEmail := "" }}
 {{- with site.Params.author }}
@@ -73,7 +73,13 @@
        zero, as it is for a section whose _index.md takes its lastmod from Git. */}}
 {{- $lastBuildDate := "" }}
 {{- with $pages }}
-	{{- $lastmod := (index .ByLastmod.Reverse 0).Lastmod }}
+	{{- $lastmod := time.AsTime "0001-01-01T00:00:00Z" }}
+	{{- range . }}
+		{{- $dates := partialCached "utilities/GetIndexableDates.html" . . }}
+		{{- if $dates.lastmod.After $lastmod }}
+			{{- $lastmod = $dates.lastmod }}
+		{{- end }}
+	{{- end }}
 	{{- if and (not $.Date.IsZero) (not $lastmod.IsZero) }}
 		{{- $lastBuildDate = $lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}
 	{{- end }}
@@ -105,7 +111,10 @@
 			<item>
 				<title>{{ .Title }}</title>
 				<link>{{ .Permalink }}</link>
-				<pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+				{{- $dates := partialCached "utilities/GetIndexableDates.html" . . }}
+				{{- if or (ne .Kind "term") (not $dates.publishDate.IsZero) }}
+				<pubDate>{{ $dates.publishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+				{{- end }}
 				{{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
 				<guid>{{ .Permalink }}</guid>
 				<description>{{ with .Description }}{{ . | transform.XMLEscape | safeHTML }}{{ else }}{{ .Summary | plainify | htmlUnescape | transform.XMLEscape | safeHTML }}{{ end }}</description>
