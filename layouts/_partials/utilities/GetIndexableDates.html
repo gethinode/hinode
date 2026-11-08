@@ -26,7 +26,8 @@
     {{- range .Pages -}}
         {{- if partialCached "utilities/IsIndexable.html" . . -}}
             {{- range $field, $value := dict "date" .Date "publishDate" .PublishDate "lastmod" .Lastmod -}}
-                {{- if and (not (index $overrides $field)) ($value.After ($result.Get $field)) -}}
+                {{- $latest := $result.Get $field -}}
+                {{- if and (not (index $overrides $field)) (not $value.IsZero) (or $latest.IsZero ($value.After $latest)) -}}
                     {{- $result.Set $field $value -}}
                 {{- end -}}
             {{- end -}}

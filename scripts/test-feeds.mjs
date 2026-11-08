@@ -166,6 +166,23 @@ test('term dates independently derive from indexable members only', () => {
 	assert.equal(field(readDateFile('tags/index.xml'), 'lastBuildDate'), rssDate('2025-02-03'));
 });
 
+test('nonzero dates before the zero value retain independent term maxima', () => {
+	assertTerm('ancient', {date: '0000-01-04', publishDate: '0000-01-05', lastmod: '0000-01-06'});
+	// Hugo leaves this term's native Date zero, so the existing own-date guard still applies.
+	assert.equal(field(readDateFile('tags/ancient/index.xml'), 'lastBuildDate'), undefined);
+	assertTerm('ancient-zero', {});
+});
+
+test('ordinary RSS retains nonzero lastmod before the zero value', () => {
+	const xml = readDateFile('ancient/index.xml');
+	const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(match => match[1]);
+	assert.deepEqual(items.map(item => field(item, 'link')), ['first', 'second', 'undated'].map(name => `${base}/ancient/${name}/`));
+	assert.equal(field(items[0], 'pubDate'), 'Wed, 05 Jan 0000 00:00:00 +0000');
+	assert.equal(field(items[1], 'pubDate'), 'Sun, 02 Jan 0000 00:00:00 +0000');
+	assert.equal(field(items[2], 'pubDate'), 'Mon, 01 Jan 0001 00:00:00 +0000');
+	assert.equal(field(xml, 'lastBuildDate'), 'Thu, 06 Jan 0000 00:00:00 +0000');
+});
+
 test('resolved overrides keep full, date-only, partial and aliased term fields', () => {
 	assertTerm('full', {date: '2024-01-01', publishDate: '2024-02-01', lastmod: '2024-03-01'});
 	assertTerm('date-only', {date: '2024-04-01', publishDate: '2024-04-01', lastmod: '2024-04-01'});

@@ -76,7 +76,7 @@
 	{{- $lastmod := time.AsTime "0001-01-01T00:00:00Z" }}
 	{{- range . }}
 		{{- $dates := partialCached "utilities/GetIndexableDates.html" . . }}
-		{{- if $dates.lastmod.After $lastmod }}
+		{{- if and (not $dates.lastmod.IsZero) (or $lastmod.IsZero ($dates.lastmod.After $lastmod)) }}
 			{{- $lastmod = $dates.lastmod }}
 		{{- end }}
 	{{- end }}
