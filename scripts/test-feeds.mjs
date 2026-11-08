@@ -125,7 +125,10 @@ test('no feed names a noindex page', () => {
 let dateDestination;
 before(() => {
 	dateDestination = mkdtempSync(path.join(os.tmpdir(), 'hinode-term-dates-'));
-	const result = spawnSync('hugo', ['-s', path.join(site, 'dates'), '--logLevel', 'error', '-d', dateDestination], {cwd: root, encoding: 'utf8'});
+	// Use the shell so pnpm's Windows hugo.cmd launcher can run, as in the first fixture.
+	const command = `hugo -s "${path.join(site, 'dates')}" --logLevel error -d "${dateDestination}"`;
+	const result = spawnSync(command, {cwd: root, encoding: 'utf8', shell: true});
+	if (result.error) throw result.error;
 	assert.equal(result.status, 0, `date fixture build failed:\n${result.stdout}\n${result.stderr}`);
 });
 after(() => {
