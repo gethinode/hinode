@@ -154,6 +154,32 @@ document.addEventListener('hinode:color-mode:before-change', event => {
 })
 ```
 
+### Feed and sitemap term dates
+
+RSS and sitemap metadata derive taxonomy term dates from indexable member pages.
+Members marked `noindex` or `none` do not contribute dates. This does not change
+term visibility, member ordering, RSS limits, or ordinary page dates.
+
+Custom templates can use the same utility:
+
+```go-html-template
+{{ $dates := partialCached "utilities/GetIndexableDates.html" . . }}
+```
+
+The result contains `date`, `publishDate`, and `lastmod` as `time.Time` values.
+For terms, each field uses the newest corresponding member date unless the
+term's resolved Params contains a typed `time.Time` override for that field.
+This preserves Hugo's standard date fallbacks and configured aliases. Zero means
+absence; RSS term pubDate and sitemap lastmod are omitted when zero. Other page
+kinds return their native dates unchanged.
+
+Typed custom Params keys `date`, `publishDate`, and `lastmod` are also reserved
+for these overrides. For example, a TOML `[params]` datetime overrides that field,
+and a typed zero explicitly suppresses it. Use other custom names for unrelated
+timestamps. Non-time values, including date-like strings, are ignored by the
+utility rather than converted. Keep the Page itself as the cache variant, as
+shown above, to isolate different pages and site languages.
+
 ## Contributing
 
 See the [official documentation][contribute] on how to contribute to the open-source development of Hinode.
