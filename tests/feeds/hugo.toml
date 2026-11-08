@@ -17,7 +17,7 @@
 baseURL = 'https://example.org/'
 title = 'feed tests'
 timeZone = 'UTC'
-disableKinds = ['sitemap', 'robotsTXT', '404']
+disableKinds = ['robotsTXT', '404']
 defaultContentLanguage = 'en'
 
 [services.rss]
@@ -55,3 +55,11 @@ defaultContentLanguage = 'en'
 [[module.mounts]]
   source = '../../layouts/_partials/utilities/GetRobots.html'
   target = 'layouts/_partials/utilities/GetRobots.html'
+
+[[module.mounts]]
+  source = '../../layouts/sitemap.xml'
+  target = 'layouts/sitemap.xml'
+
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetIndexableDates.html'
+  target = 'layouts/_partials/utilities/GetIndexableDates.html'

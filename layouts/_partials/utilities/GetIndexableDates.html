@@ -1,0 +1,38 @@
+{{- /* Returns date, publishDate and lastmod time.Time values for a Page. Non-term pages
+       retain their native dates. A term derives each field from the newest corresponding
+       date among its indexable members, including branch pages.
+
+       Typed time.Time values in the term's Params are per-field overrides, including
+       Hugo's resolved standard fields, fallbacks and aliases. Typed zero suppresses that
+       field. These typed custom parameter keys are reserved for date overrides; use other
+       names for unrelated timestamps. Non-time values, including strings, are ignored.
+
+       Call with partialCached "utilities/GetIndexableDates.html" PAGE PAGE so different
+       pages and site languages never share an entry merely because their titles match. */ -}}
+{{- $dates := dict "date" .Date "publishDate" .PublishDate "lastmod" .Lastmod -}}
+{{- if eq .Kind "term" -}}
+    {{- $zero := time.AsTime "0001-01-01T00:00:00Z" -}}
+    {{- $result := newScratch -}}
+    {{- $overrides := dict -}}
+    {{- range $field := slice "date" "publishDate" "lastmod" -}}
+        {{- $value := index $.Params (lower $field) -}}
+        {{- if eq (printf "%T" $value) "time.Time" -}}
+            {{- $result.Set $field $value -}}
+            {{- $overrides = merge $overrides (dict $field true) -}}
+        {{- else -}}
+            {{- $result.Set $field $zero -}}
+        {{- end -}}
+    {{- end -}}
+    {{- range .Pages -}}
+        {{- if partialCached "utilities/IsIndexable.html" . . -}}
+            {{- range $field, $value := dict "date" .Date "publishDate" .PublishDate "lastmod" .Lastmod -}}
+                {{- $latest := $result.Get $field -}}
+                {{- if and (not (index $overrides $field)) (not $value.IsZero) (or $latest.IsZero ($value.After $latest)) -}}
+                    {{- $result.Set $field $value -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $dates = dict "date" ($result.Get "date") "publishDate" ($result.Get "publishDate") "lastmod" ($result.Get "lastmod") -}}
+{{- end -}}
+{{- return $dates -}}
