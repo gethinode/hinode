@@ -124,9 +124,9 @@ viewport, which is the case the argument exists for.
 | bravo | gadget | The second record. |
 {{< /table >}}
 
-## Table with list controls and custom search placeholder
+## Table with list controls and custom search text
 
-{{< table searchable="true" paginate="true" pagination="2" controls-layout="list" search-placeholder="Search records" class="fixture-list-controls" >}}
+{{< table searchable="true" paginate="true" pagination="2" controls-layout="list" search-placeholder="Search records" search-label="Search all records" class="fixture-list-controls" >}}
 
 | Name    | Type        |
 |---------|-------------|
