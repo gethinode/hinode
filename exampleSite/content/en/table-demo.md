@@ -124,6 +124,17 @@ viewport, which is the case the argument exists for.
 | bravo | gadget | The second record. |
 {{< /table >}}
 
+## Table with list controls and custom search text
+
+{{< table searchable="true" paginate="true" pagination="2" controls-layout="list" search-placeholder="Search records" search-label="Search all records" class="fixture-list-controls" >}}
+
+| Name    | Type        |
+|---------|-------------|
+| alpha   | widget      |
+| bravo   | gadget      |
+| charlie | doohickey   |
+{{< /table >}}
+
 ## Table with caption on top
 
 {{< table caption="Overview of *records*" caption-top="true" class="fixture-caption-top" >}}
