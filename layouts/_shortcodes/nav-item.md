@@ -4,5 +4,5 @@
 {{ with $title }}### {{ . }}
 
 {{ end -}}
-{{ partial "utilities/RenderShortcodes.html" (dict "page" .Page "body" (trim .InnerDeindent " \r\n")) }}
+{{ partial "utilities/RenderShortcodes.html" (dict "page" .Page "body" (trim .Inner " \r\n")) }}
 {{- end -}}

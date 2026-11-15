@@ -37,7 +37,25 @@
         {{ $pattern = printf `(?s)%s.*?\{\{<\s*/%s\s*>\}\}` $pattern $name }}
     {{ end }}
     {{ range findRE $pattern $body }}
-        {{ $output := strings.TrimRight "\n" ($page.RenderString (dict "display" "block") .) }}
+        {{/* A shortcode that starts a line, say inside a list item, is rendered as if it
+             started the line at column 0, and its output is indented back to its column as a
+             whole, so that a fenced block stays in the list item. Rendered on its own, the
+             shortcode cannot deindent its body itself: .InnerDeindent removes the indentation
+             of its opening tag, which is none. Blank lines get no trailing whitespace.
+             A body with a line indented less than the opening tag is left as written, as
+             the HTML renders it: deindenting only some of its lines would move them
+             relative to the others. */}}
+        {{ $match := . }}
+        {{ $indent := index (last 1 (split (index (split $body .) 0) "\n")) 0 }}
+        {{ if findRE `\S` $indent }}{{ $indent = "" }}{{ end }}
+        {{ range after 1 (split $match "\n") }}
+            {{ if and (findRE `\S` .) (not (hasPrefix . $indent)) }}{{ $indent = "" }}{{ end }}
+        {{ end }}
+        {{ if $indent }}{{ $match = replace $match (printf "\n%s" $indent) "\n" }}{{ end }}
+        {{ $output := strings.TrimRight "\n" ($page.RenderString (dict "display" "block") $match) }}
+        {{ if $indent }}
+            {{ $output = replace $output "\n" (printf "\n%s" $indent) | replaceRE `(?m)^[ \t]+$` "" }}
+        {{ end }}
         {{ $body = replace $body . $output 1 }}
     {{ end }}
 {{ end }}
