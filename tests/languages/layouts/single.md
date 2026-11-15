@@ -1,6 +1,7 @@
 {{- /*
-    The markdown output of the abbr, args and nested pages, which renders the shortcodes' .md
-    variants. The nested page escapes a command inside a nav-item and an accordion-item, which
+    The markdown output of the abbr, args, example and nested pages, which renders the
+    shortcodes' .md variants. The example page wraps a fenced block, so its own fence must be
+    longer. The nested page escapes a command inside a nav-item and an accordion-item, which
     must render it as a fenced block rather than print the shortcode, indented as a whole to
     the column it is written at: inside a list item, or indented with the accordion-item's
     body. The Steps item indents its tag but not its body, as gethinode.com does.
@@ -9,6 +10,7 @@
 {{- /* The download row's type and comment come from mod-utils' global _arguments.yml. */ -}}
 {{- $want := dict
     "/abbr/" (slice "cms (content management system)")
+    "/example/" (slice "````markdown\n```html\n<p>Hello</p>\n```\n````")
     "/args/" (slice
         "| `key` | string | yes |  |"
         "| `download` | string |  |  | Path to the download file, relative to the site's static folder. |"
