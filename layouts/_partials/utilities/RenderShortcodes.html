@@ -1,0 +1,44 @@
+{{/*
+    Copyright © 2026 The Hinode Team / Mark Dumay. All rights reserved.
+    Use of this source code is governed by The MIT License (MIT) that can be found in the LICENSE file.
+    Visit gethinode.com/license for more details.
+*/}}
+
+{{/*
+    Renders the shortcodes in a Markdown body and returns the rest of the body unchanged. Use in
+    a shortcode's .md variant whose .html variant passes its body through .Page.RenderString:
+    a nested shortcode written in its escaped form (with comment markers inside the
+    delimiters, so that Hugo leaves it to the enclosing shortcode) reaches .Inner as literal
+    shortcode text, which RenderString processes in HTML but the Markdown variant would print
+    as is.
+
+    RenderString converts its whole input, so the body cannot be passed to it in one go: the
+    prose would come back as HTML. Each shortcode is rendered on its own instead. The output of
+    a {{< >}} shortcode is inserted after Goldmark has run, so a lone shortcode comes back as
+    the raw output of its .md variant. The {{% %}} notation would send that output through
+    Goldmark, so it is rendered as {{< >}} here.
+
+    Arguments: page (the page to render with) and body (the Markdown body).
+*/}}
+
+{{ $page := .page }}
+{{ $body := replace (replace .body "{{%" "{{<") "%}}" ">}}" }}
+{{ $names := slice }}
+{{ range findRESubmatch `\{\{<\s*([\w.-][\w./-]*)` $body }}
+    {{ $names = $names | append (index . 1) }}
+{{ end }}
+
+{{/* An enclosing shortcode renders the shortcodes nested in it, so once it has been replaced
+     theirs are no longer in the body, and replacing them is a no-op. */}}
+{{ range uniq $names }}
+    {{ $name := replace . "." `\.` }}
+    {{ $pattern := printf `\{\{<\s*%s(?:\s.*?)?>\}\}` $name }}
+    {{ if findRE (printf `\{\{<\s*/%s\s*>\}\}` $name) $body 1 }}
+        {{ $pattern = printf `(?s)%s.*?\{\{<\s*/%s\s*>\}\}` $pattern $name }}
+    {{ end }}
+    {{ range findRE $pattern $body }}
+        {{ $output := strings.TrimRight "\n" ($page.RenderString (dict "display" "block") .) }}
+        {{ $body = replace $body . $output 1 }}
+    {{ end }}
+{{ end }}
+{{ return $body }}
