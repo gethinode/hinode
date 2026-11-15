@@ -10,6 +10,14 @@ In a terminal:
 brew install example
 {{</* /command */>}}
 {{< /nav-item >}}
+{{< nav-item title="Steps" >}}
+1. **Install**
+
+    {{</* command shell="bash" */>}}
+    brew install example
+    example --version
+    {{</* /command */>}}
+{{< /nav-item >}}
 {{< /nav >}}
 
 {{< accordion >}}
