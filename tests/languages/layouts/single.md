@@ -16,9 +16,11 @@
         "In a shell:\n\n```powershell\nwinget install example\n```"
     )
 -}}
+{{- /* A Windows checkout gives the content files CRLF line endings, which reach the output. */ -}}
+{{- $content := replace .Content "\r\n" "\n" -}}
 {{- range index $want .RelPermalink -}}
-    {{- if not (strings.Contains $.Content .) -}}
-        {{- errorf "markdown output of %s: want %q, got %s" $.RelPermalink . $.Content -}}
+    {{- if not (strings.Contains $content .) -}}
+        {{- errorf "markdown output of %s: want %q, got %s" $.RelPermalink . $content -}}
     {{- end -}}
 {{- end -}}
 {{ .Content }}
