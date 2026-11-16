@@ -44,7 +44,7 @@ defaultContentLanguage = 'en'
   notAlternative = true
 [mediaTypes.'text/netlify']
   delimiter = ''
-# Markdown output, so that the abbr, args and nested pages render the shortcodes' .md variants.
+# Markdown output, so that the abbr, args, example and nested pages render the shortcodes' .md variants.
 [outputFormats.markdown]
   mediaType = 'text/markdown'
   baseName = 'index'
