@@ -21,7 +21,15 @@ const addCopyButtons = clipboard => {
     button.type = 'button'
     button.innerHTML = svgCopy
     button.addEventListener('click', () => {
-      const text = codeBlock.innerText.split('\n').filter(Boolean).join('\n')
+      let lines = codeBlock.innerText.split('\n')
+      // The command shortcode gives each command line a prompt with data-prompt; output lines get none
+      if (codeBlock.closest('.command')) {
+        const prompts = codeBlock.querySelectorAll('.command-line-prompt > span')
+        lines = Array.from(codeBlock.querySelectorAll('.line'))
+          .filter((_line, index) => prompts[index] && prompts[index].hasAttribute('data-prompt'))
+          .map(line => line.textContent.replace(/\n$/, ''))
+      }
+      const text = lines.filter(Boolean).join('\n')
       clipboard.writeText(text).then(
         () => {
           button.blur()
