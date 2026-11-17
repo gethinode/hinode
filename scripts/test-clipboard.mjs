@@ -148,7 +148,7 @@ const copy = async index => {
   })
   vm.runInContext(clipboardSource, context, { filename: 'clipboard.js' })
   const buttons = document.querySelectorAll('button')
-  assert.equal(buttons.length, 5, 'one copy button per code block')
+  assert.equal(buttons.length, 6, 'one copy button per code block')
   await buttons[index].listeners.click()
   assert.equal(written.length, 1)
   return written[0]
@@ -172,4 +172,8 @@ test('copies every line of a command block without output', async () => {
 
 test('copies a plain code block in full', async () => {
   assert.equal(await copy(4), 'echo "hello"\n# hello')
+})
+
+test('copies every command of a block that interleaves commands and output', async () => {
+  assert.equal(await copy(5), 'cd /tmp\nls -la\necho one\necho two\npwd')
 })

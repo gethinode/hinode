@@ -2,7 +2,7 @@ baseURL = 'https://example.org/'
 title = 'clipboard tests'
 disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404', 'section']
 
-# The theme's own highlight settings, so the shortcode renders the markup a site gets.
+# Chroma emits CSS classes rather than inline styles, as with the theme's own noClasses = false.
 [markup.highlight]
   noClasses = false
 

@@ -27,3 +27,17 @@ echo "hello"
 echo "hello"
 # hello
 ```
+
+{{< command shell="bash" >}}
+cd /tmp
+ls -la
+
+(out)total 0
+(out)
+(out)┌───┐
+echo one
+echo two
+(out)one
+(out)two
+pwd
+{{< /command >}}
