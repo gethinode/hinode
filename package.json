@@ -58,7 +58,7 @@
     "mod:tidy": "hugo mod tidy && hugo mod tidy -s exampleSite",
     "mod:vendor": "node scripts/mod-vendor.cjs",
     "mod:vendor:force": "rimraf _vendor && hugo mod vendor",
-    "test": "npm-run-all lint test:color-mode test:templates test:languages test:renderer test:feeds test:command",
+    "test": "npm-run-all lint test:color-mode test:templates test:languages test:renderer test:feeds test:clipboard test:command",
     "test:color-mode": "node --test scripts/color-mode-events.test.mjs",
     "pretest:templates": "pnpm mod:vendor",
     "test:templates": "hugo -s tests/templates --logLevel error && hugo -s tests/templates --logLevel error --environment theme-icons && hugo -s tests/templates --logLevel error --environment menu-case && hugo -s tests/templates --logLevel error --environment quiet-caption && hugo -s tests/templates --logLevel error --environment external-link-defaults && hugo -s tests/templates --logLevel error --environment bookshop-live && hugo -s tests/templates --logLevel error --environment og-schema && hugo -s tests/templates --logLevel error --environment og-schema-partial && hugo -s tests/templates --logLevel error --environment og-schema-height && hugo -s tests/templates --logLevel error --environment og-schema-units && hugo -s tests/templates --logLevel error --environment og-fallback && node scripts/test-strict-images.cjs",
@@ -67,8 +67,8 @@
     "pretest:renderer": "pnpm mod:vendor",
     "test:renderer": "node --test tests/renderer/renderer.test.mjs",
     "test:feeds": "node --test scripts/test-feeds.mjs",
-    "pretest:command": "pnpm mod:vendor",
-    "test:command": "node --test scripts/test-command-output.mjs",
+    "pretest:clipboard": "pnpm mod:vendor",
+    "test:clipboard": "node --test scripts/test-clipboard.mjs",
     "env": "hugo env",
     "precheck": "npm version",
     "prepare": "node .husky/install.mjs",
@@ -85,7 +85,9 @@
     "update:syntax:dark4": "replace-in-files --string=\".na {  }\" --replacement=\".na { color: #00cccc }\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark5": "replace-in-files --string=\".nb {  }\" --replacement=\".nb { color: #00a2d8 }\" ./assets/scss/components/_syntax-dark.scss",
     "update:syntax:dark6": "replace-in-files --string=\"#6e7681\" --replacement=\"#999fa8\" ./assets/scss/components/_syntax-dark.scss",
-    "upgrade": "pnpm dlx npm-check-updates -u && pnpm mod:update"
+    "upgrade": "pnpm dlx npm-check-updates -u && pnpm mod:update",
+    "pretest:command": "pnpm mod:vendor",
+    "test:command": "node --test scripts/test-command-output.mjs"
   },
   "repository": {
     "type": "git",
