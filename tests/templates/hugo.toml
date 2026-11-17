@@ -382,3 +382,10 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../config/_default/params.toml'
   target = 'data/themedefaults/params.toml'
+
+# The icon shortcode runs its arguments through mod-utils' Args partial, the path on which a
+# digit string such as "0" used to be cast to an integer. It is mounted from mod-fontawesome
+# so the zero-icon fixture reaches the glyph through the real shortcode and icon partial.
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-fontawesome/v6/layouts/_shortcodes/icon.html'
+  target = 'layouts/_shortcodes/icon.html'

@@ -10,3 +10,12 @@ disableKinds = ['home', 'taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404'
 
 [params.tests]
   imageWarnings = true
+
+# The zero-icon fixture renders the icon shortcode, which logs warnings of its own that would
+# join the ones this build compares, so the build does not render the fixture.
+[[cascade]]
+  [cascade.build]
+    render = 'never'
+    list = 'never'
+  [cascade.target]
+    path = '/blog/zero-icon'

@@ -1,0 +1,27 @@
+{{- /*
+    Assertions for an icon named by the digit string "0".
+
+    Before mod-utils v6.18.3 the arguments check cast a digit string to an integer for an
+    argument that accepts both a string and an integer, so icon="0" became the falsy 0 and
+    the shortcode logged "Missing icon name", while icon="1" became the integer 1 and the icon
+    lookup failed. The fixture renders both through the icon shortcode and checks that each
+    produced its Font Awesome glyph, either as an svg whose use element points at it or, in
+    the builds that render icons as a font, as an i element carrying its class. It covers those two
+    shortcode calls only: other components and other digit strings are not exercised.
+*/ -}}
+{{- $fail := 0 -}}
+{{- $cases := slice
+  (dict "case" "digit string 0" "want" "0")
+  (dict "case" "digit string 1" "want" "1")
+-}}
+{{- range $cases -}}
+{{- if findRE (printf `<svg [^>]*><use href="#fas-%[1]s"></use></svg>|<i class="fas fa-%[1]s "` .want) $.Content }}
+PASS zero icon: {{ .case }}
+{{- else }}
+FAIL zero icon: {{ .case }}
+{{- $fail = add $fail 1 -}}
+{{- errorf "zero icon missing: case=%q want=%q content=%q" .case .want $.Content -}}
+{{- end -}}
+{{- end }}
+
+ZERO ICON FAILURES: {{ $fail }}

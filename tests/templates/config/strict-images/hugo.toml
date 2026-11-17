@@ -6,6 +6,15 @@
 # (layouts/thumbnails/list.html).
 disableKinds = ['home', 'taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 
+# The zero-icon fixture renders the icon shortcode, which logs warnings of its own that this
+# build would count as failures, so the build does not render the fixture.
+[[cascade]]
+  [cascade.build]
+    render = 'never'
+    list = 'never'
+  [cascade.target]
+    path = '/blog/zero-icon'
+
 # scripts/test-strict-images.cjs serves the live-host cases of the
 # thumbnail assertions from 127.0.0.1. Hugo's default policy refuses a
 # URL on an IP address, so this build allows that host, and no other.
