@@ -151,9 +151,10 @@ test('output lines and every token in them render upright and dimmed in both col
   }
 })
 
-test('no other declaration changes how output lines look', () => {
-  // An extra opacity, filter or color would undo the measured contrast of the secondary color,
-  // so every rule that targets an output line sets the output declarations and nothing else.
+test('the output rule sets only color, font-style and font-weight', () => {
+  // Every top-level rule that names command-output must set exactly those three declarations,
+  // so an opacity, filter or color added to the output rule fails. Rules that do not name
+  // command-output are not checked here.
   for (const rule of topLevelRules()) {
     if (!rule.selectors.some(selector => selector.includes('command-output'))) continue
     assert.deepEqual(rule.declarations, outputDeclarations, rule.selectors.join(', '))
