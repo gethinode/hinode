@@ -1,0 +1,29 @@
+baseURL = 'https://example.org/'
+title = 'clipboard tests'
+disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404', 'section']
+
+# The theme's own highlight settings, so the shortcode renders the markup a site gets.
+[markup.highlight]
+  noClasses = false
+
+# Custom mounts disable Hugo's implicit ones, so this site's own folders are restated. The
+# shortcode under test is mounted from its location in the theme, not copied; InitArgs and the
+# argument definitions it validates against come from the vendored mod-utils (pnpm mod:vendor).
+[[module.mounts]]
+  source = 'content'
+  target = 'content'
+[[module.mounts]]
+  source = 'layouts'
+  target = 'layouts'
+[[module.mounts]]
+  source = '../../layouts/_shortcodes/command.html'
+  target = 'layouts/_shortcodes/command.html'
+[[module.mounts]]
+  source = '../../data/structures/command.yml'
+  target = 'data/structures/command.yml'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/layouts/_partials/utilities'
+  target = 'layouts/_partials/utilities'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/data/structures'
+  target = 'data/structures'
