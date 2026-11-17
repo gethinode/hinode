@@ -1,0 +1,25 @@
+{{- /*
+    Resolves the rel attribute of an external link.
+
+    A link opening in a new tab gets "noopener noreferrer". "nofollow" is independent of
+    the tab choice: it applies to every external link unless the caller or the site
+    setting `main.externalLinks.nofollow` opts out. Like cue and tab, nofollow carries no
+    schema default, so an absent value is nil and an explicit false is a real choice.
+
+    @param {bool} tab       Whether the link opens in a new tab.
+    @param {bool} nofollow  Per-link override, nil to inherit the site setting.
+
+    @returns {string}
+*/ -}}
+
+{{- $nofollow := true -}}
+{{- with site.Params.main.externalLinks -}}
+    {{- if isset . "nofollow" }}{{ $nofollow = .nofollow }}{{ end -}}
+{{- end -}}
+{{- if ne .nofollow nil }}{{ $nofollow = .nofollow }}{{ end -}}
+
+{{- $rel := slice -}}
+{{- if .tab }}{{ $rel = $rel | append "noopener" "noreferrer" }}{{ end -}}
+{{- if $nofollow }}{{ $rel = $rel | append "nofollow" }}{{ end -}}
+
+{{- return delimit $rel " " -}}

@@ -67,10 +67,8 @@
 {{- $rel := "" -}}
 
 {{- if $isExternal -}}
-    {{- if $tab -}}
-        {{- $target = "_blank" -}}
-        {{- $rel = "noopener noreferrer nofollow" -}}
-    {{- end -}}
+    {{- if $tab }}{{ $target = "_blank" }}{{ end -}}
+    {{- $rel = partial "utilities/GetExternalRel.html" (dict "tab" $tab "nofollow" $args.nofollow) -}}
 
     {{- if and $title $cue -}}
         {{ $suffix := partial "assets/icon.html" (dict "page" $args.page "icon" $externalLink "class" "fa-2xs") }}

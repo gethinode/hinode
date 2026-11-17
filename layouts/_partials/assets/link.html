@@ -94,10 +94,8 @@
                 {{- $text = (urls.Parse (absURL $destination)).Host -}}
             {{- end -}}
 
-            {{- if $tab -}}
-                {{- $target = "_blank" -}}
-                {{- $rel = "noopener noreferrer nofollow" -}}
-            {{- end -}}
+            {{- if $tab }}{{ $target = "_blank" }}{{ end -}}
+            {{- $rel = partial "utilities/GetExternalRel.html" (dict "tab" $tab "nofollow" $args.nofollow) -}}
 
             {{- if $cue -}}
                 {{- $iconArgs := dict "page" $args.page "icon" $externalLink "class" "fa-2xs" "spacing" false -}}

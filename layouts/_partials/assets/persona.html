@@ -46,9 +46,9 @@
 {{- $isExternal := ne (urls.Parse (absURL $href)).Host (urls.Parse site.BaseURL).Host -}}
 {{- $target := "" -}}
 {{- $rel := "" -}}
-{{- if and $isExternal $tab -}}
-    {{- $target = "_blank" -}}
-    {{- $rel = "noopener noreferrer nofollow" -}}
+{{- if $isExternal -}}
+    {{- if $tab }}{{ $target = "_blank" }}{{ end -}}
+    {{- $rel = partial "utilities/GetExternalRel.html" (dict "tab" $tab) -}}
 {{- end -}}
 
 {{/* Inline partial to render the card's body */}}

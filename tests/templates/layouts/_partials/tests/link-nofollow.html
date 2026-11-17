@@ -1,0 +1,36 @@
+{{/* nofollow is decoupled from tab: every external link carries it unless the link or
+     the site opts out, and internal links never do. Covers assets/link.html (shortcode,
+     markdown render hook) and the plain navbar item, which builds its own attributes. */}}
+{{ $page := . }}
+{{ $defaultTab := eq hugo.Environment "external-link-defaults" }}
+{{ $cases := slice
+    (dict "name" "external inherited" "href" "https://other.example/" "args" dict "blank" $defaultTab "rel" (cond $defaultTab "noopener noreferrer nofollow" "nofollow"))
+    (dict "name" "external tab" "href" "https://other.example/" "args" (dict "tab" true) "blank" true "rel" "noopener noreferrer nofollow")
+    (dict "name" "external no tab" "href" "https://other.example/" "args" (dict "tab" false) "blank" false "rel" "nofollow")
+    (dict "name" "external follow tab" "href" "https://other.example/" "args" (dict "tab" true "nofollow" false) "blank" true "rel" "noopener noreferrer")
+    (dict "name" "external follow" "href" "https://other.example/" "args" (dict "tab" false "nofollow" false) "blank" false "rel" "")
+    (dict "name" "internal" "href" "/internal-page/" "args" (dict "nofollow" true) "blank" false "rel" "")
+}}
+{{ range $cases }}
+    {{ $case := . }}
+    {{ $link := partial "assets/link.html" (merge .args (dict "page" $page "href" .href "text" "Continue")) }}
+    {{ $entry := dict "Name" "Continue" "PageRef" .href "URL" .href "Pre" "" "Post" "" "HasChildren" false "Params" .args }}
+    {{ $navbar := partial "assets/helpers/navbar-item.html" (dict "page" $page "menu-entry" $entry) }}
+    {{ range slice (dict "path" "link" "html" $link) (dict "path" "navbar item" "html" $navbar) }}
+        {{ $anchors := findRE `(?s)<a\b[^>]*>` .html }}
+        {{ if ne (len $anchors) 1 }}
+            {{ errorf "link nofollow %s/%s: want 1 anchor, got %d in %s" $case.name .path (len $anchors) .html }}
+        {{ end }}
+        {{ $path := .path }}
+        {{ range $anchors }}
+            {{ $target := index (findRE ` target="[^"]*"` . 1) 0 | default "" }}
+            {{ $rel := index (findRE ` rel="[^"]*"` . 1) 0 | default "" }}
+            {{ $wantTarget := cond $case.blank ` target="_blank"` "" }}
+            {{ $wantRel := cond (ne $case.rel "") (printf ` rel="%s"` $case.rel) "" }}
+            {{ if or (ne $target $wantTarget) (ne $rel $wantRel) }}
+                {{ errorf "link nofollow %s/%s: want target=%q rel=%q; got %s" $case.name $path $wantTarget $wantRel . }}
+            {{ end }}
+        {{ end }}
+PASS link nofollow: {{ $case.name }}/{{ .path }}
+    {{ end }}
+{{ end }}

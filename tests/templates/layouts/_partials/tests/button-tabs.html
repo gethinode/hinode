@@ -11,11 +11,14 @@
     (dict "name" "same-origin omitted" "href" "https://example.org/internal-page/" "args" dict "blank" false "rel" "" "cue" false)
     (dict "name" "same-origin false" "href" "https://example.org/internal-page/" "args" (dict "tab" false) "blank" false "rel" "" "cue" false)
     (dict "name" "same-origin true" "href" "https://example.org/internal-page/" "args" (dict "tab" true "cue" true) "blank" true "rel" "noopener noreferrer" "cue" false)
-    (dict "name" "external inherited" "href" "https://other.example/" "args" dict "blank" $defaultTab "rel" (cond $defaultTab "noopener noreferrer nofollow" "") "cue" $defaultTab)
-    (dict "name" "external false" "href" "https://other.example/" "args" (dict "tab" false "cue" false) "blank" false "rel" "" "cue" false)
+    (dict "name" "external inherited" "href" "https://other.example/" "args" dict "blank" $defaultTab "rel" (cond $defaultTab "noopener noreferrer nofollow" "nofollow") "cue" $defaultTab)
+    (dict "name" "external false" "href" "https://other.example/" "args" (dict "tab" false "cue" false) "blank" false "rel" "nofollow" "cue" false)
     (dict "name" "external true" "href" "https://other.example/" "args" (dict "tab" true "cue" true) "blank" true "rel" "noopener noreferrer nofollow" "cue" true)
-    (dict "name" "external cue only" "href" "https://other.example/" "args" (dict "tab" false "cue" true) "blank" false "rel" "" "cue" true)
+    (dict "name" "external cue only" "href" "https://other.example/" "args" (dict "tab" false "cue" true) "blank" false "rel" "nofollow" "cue" true)
     (dict "name" "external tab only" "href" "https://other.example/" "args" (dict "tab" true "cue" false) "blank" true "rel" "noopener noreferrer nofollow" "cue" false)
+    (dict "name" "external follow tab" "href" "https://other.example/" "args" (dict "tab" true "cue" false "nofollow" false) "blank" true "rel" "noopener noreferrer" "cue" false)
+    (dict "name" "external follow" "href" "https://other.example/" "args" (dict "tab" false "cue" false "nofollow" false) "blank" false "rel" "" "cue" false)
+    (dict "name" "internal nofollow ignored" "href" "/internal-page/" "args" (dict "tab" true "nofollow" true) "blank" true "rel" "noopener noreferrer" "cue" false)
 }}
 {{ range $cases }}
     {{ $case := . }}
