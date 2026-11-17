@@ -62,7 +62,8 @@
 {{- $isDropdown := false -}}
 
 {{- if $isExternal }}
-    {{- if $tab }}{{ $externalHref = "target=\"_blank\" rel=\"noopener noreferrer nofollow\"" }}{{ end -}}
+    {{- $rel := partial "utilities/GetExternalRel.html" (dict "tab" $tab "nofollow" $params.nofollow) -}}
+    {{- $externalHref = delimit (slice (cond $tab `target="_blank"` "") (cond (ne $rel "") (printf `rel="%s"` $rel) "")) " " | strings.TrimSpace -}}
     {{- if $cue }}{{ $suffix = partial "assets/icon.html" (dict "page" $page "icon" $externalLink "class" "fa-2xs my-auto") }}{{ end -}}
 {{ else if $menuURL }}
     {{ $ref := partial "utilities/GetPage.html" (dict "url" $url.Path "page" $page) }}
@@ -114,6 +115,7 @@
             "button-size" "sm"
             "cue"         $cue
             "tab"         $entry.Params.tab
+            "nofollow"    $entry.Params.nofollow
             "outline"     $entry.Params.outline 
         )}}
     {{ else }}

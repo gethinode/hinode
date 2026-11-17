@@ -16,7 +16,8 @@
                 </div>
                 <div class="col col-6 text-sm-start">
                     {{ range .Site.Menus.social -}}
-                        <a href="{{ .URL }}" {{ if $tab }} target="_blank" rel="noopener noreferrer nofollow"{{ end }} aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
+                        {{- $rel := partial "utilities/GetExternalRel.html" (dict "tab" $tab "nofollow" .Params.nofollow) -}}
+                        <a href="{{ .URL }}" {{ if $tab }} target="_blank"{{ end }}{{ with $rel }} rel="{{ . }}"{{ end }} aria-label="{{ .Name | safeHTML }}" class="text-decoration-none link-secondary d-inline p-2">
                             {{ if hasPrefix .Pre "<i" }}
                                 {{ .Pre | safeHTML }}
                             {{ else }}

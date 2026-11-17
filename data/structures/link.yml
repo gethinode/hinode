@@ -9,6 +9,15 @@ arguments:
     preview: true
   cue:
   tab:
+  nofollow:
+    type: bool
+    optional: true
+    release: v3.54.0
+    comment: >-
+      Flag to indicate if an external link should carry `rel="nofollow"`,
+      defaults to the setting `main.externalLinks.nofollow` in the site's
+      parameters (true when unset). Applies whether or not the link opens in a
+      new tab.
   case:
   external:
   force:

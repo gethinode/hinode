@@ -114,6 +114,11 @@ disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap', 'robotsTXT', '404']
 [[module.mounts]]
   source = '../../layouts/_partials/assets/link.html'
   target = 'layouts/_partials/assets/link.html'
+# assets/link.html, assets/button.html and the navbar helper resolve their rel attribute
+# through this helper.
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/GetExternalRel.html'
+  target = 'layouts/_partials/utilities/GetExternalRel.html'
 [[module.mounts]]
   source = '../../data/structures/link.yml'
   target = 'data/structures/link.yml'
