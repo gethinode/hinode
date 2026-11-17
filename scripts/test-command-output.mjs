@@ -51,7 +51,8 @@ const blocks = {
   powershell: ['PS>', '>>', null, null, null, null, 'PS>', null],
   tokens: ['$', null, '$', null, '$'],
   sql: ['sql>', '->', null, null],
-  first: [null, '$']
+  first: [null, '$'],
+  indented: ['$', null, null, '$']
 }
 
 for (const [page, expected] of Object.entries(blocks)) {
@@ -90,8 +91,10 @@ test('output lines are marked whatever token the lexer gave them', () => {
   for (const index of [1, 3]) assert.ok(tokens.lines[index].classes.includes('command-output'))
 })
 
-// The compiled stylesheet as top-level rules: at-rule blocks are skipped, so a declaration
-// that holds only inside a media query or a color-mode block is not counted.
+// The compiled stylesheet as top-level rules. At-rule blocks such as media queries are skipped,
+// so a declaration that holds only inside one is not counted. A rule scoped to one color mode
+// with a [data-bs-theme] selector compiles to a top-level rule, so it is counted here and
+// rejected by the selector checks in the last test.
 function topLevelRules () {
   const css = readFileSync(path.join(destination, 'scss', 'command.css'), 'utf8')
     .replace(/\/\*[\s\S]*?\*\//g, '')
@@ -145,6 +148,15 @@ test('output lines and every token in them render upright and dimmed in both col
     for (const [property, value] of Object.entries(outputDeclarations)) {
       assert.equal(rule.declarations[property], value, `${rule.selectors.join(', ')} { ${property} }`)
     }
+  }
+})
+
+test('no other declaration changes how output lines look', () => {
+  // An extra opacity, filter or color would undo the measured contrast of the secondary color,
+  // so every rule that targets an output line sets the output declarations and nothing else.
+  for (const rule of topLevelRules()) {
+    if (!rule.selectors.some(selector => selector.includes('command-output'))) continue
+    assert.deepEqual(rule.declarations, outputDeclarations, rule.selectors.join(', '))
   }
 })
 
