@@ -1,0 +1,2 @@
+{{- /* Compiles the command stylesheet on its own and publishes it as scss/command.css. */ -}}
+{{ (resources.Get "scss/command.scss" | css.Sass).RelPermalink }}

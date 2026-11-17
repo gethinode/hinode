@@ -37,7 +37,13 @@ https://prismjs.com/download.html#themes=prism&plugins=command-line */
     content: attr(data-continuation-prompt);
 }
 
-.command-line span.token.output {
-    /* Make shell output lines a bit lighter to distinguish them from shell commands */
-    opacity: 0.7;
+// The command shortcode marks each output line with .command-output. The lexer still tokenizes
+// it, often as an italic comment, so the line and every token in it are reset to upright,
+// regular text in the secondary color, which Bootstrap defines for both color modes. Four
+// classes outrank the dark syntax theme's token rules, such as [data-bs-theme="dark"] .chroma .c1.
+.command .chroma .line.command-output,
+.command .chroma .line.command-output * {
+    color: var(--bs-secondary-color);
+    font-style: normal;
+    font-weight: normal;
 }

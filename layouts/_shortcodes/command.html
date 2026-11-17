@@ -39,8 +39,10 @@
     {{- $prefix := "" -}}
     {{- $prevLine := "" -}}
     {{- $refined := "" -}}
+    {{- $isOutput := slice -}}
     {{- range $line := $lines -}}
         {{- $line = trim $line " \t\r\n" -}}
+        {{- $isOutput = $isOutput | append (hasPrefix $line $filter) -}}
         {{- if hasPrefix $line $filter -}}
             {{- $prefix = printf "%s<span></span>" $prefix -}}
             {{- if eq $args.shell "sql" -}}
@@ -62,8 +64,20 @@
 
     {{- $refined := trim $refined "\r\n" -}}
     {{- $output := (transform.Highlight $refined $args.shell | safeHTML) -}}
-    {{- $insert := printf "<span class=\"command-line-prompt\">%s</span><span class=\"line\">" $prefix -}}
-    {{- $output := (replace $output ("<span class=\"line\">" | safeHTML) $insert 1 | safeHTML) -}}
+
+    {{/* Chroma emits one line span per input line. Mark each output line with command-output so
+        the stylesheet can render it upright and dimmed, and put the prompt column before the
+        first line. */}}
+    {{- $chunks := split (string $output) "<span class=\"line\">" -}}
+    {{- $marked := index $chunks 0 -}}
+    {{- range $i, $chunk := after 1 $chunks -}}
+        {{- if eq $i 0 -}}
+            {{- $marked = printf "%s<span class=\"command-line-prompt\">%s</span>" $marked $prefix -}}
+        {{- end -}}
+        {{- $class := cond (and (lt $i (len $isOutput)) (index $isOutput $i)) "line command-output" "line" -}}
+        {{- $marked = printf "%s<span class=\"%s\">%s" $marked $class $chunk -}}
+    {{- end -}}
+    {{- $output := $marked | safeHTML -}}
 
     {{- if eq $args.shell "sql" -}}
         {{- $output = (replace $output "<span class=\"c1\">--" "<span class=\"c1\">" | safeHTML) -}}
