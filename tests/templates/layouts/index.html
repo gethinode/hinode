@@ -940,9 +940,10 @@ GETLOCALE FAILURES: {{ $localeFail }}
     horizontal case below would still read `pt-{padding}` — so the wrapper is asserted in full
     rather than by absence, and the last column pins the negative margin that paired with it.
 
-    Each case renders the real partial and reduces it to four probes: the class list of the
-    `.card` element, of the row wrapper, of the column that spaces the button, and whether
-    `mb-n4` survives anywhere in the markup. A probe that matches nothing reads as "-", which
+    Each case renders the real partial and reduces it to six probes: the class list of the
+    `.card` element, of the row wrapper, of the column that spaces the button, of the body
+    column and the column around it that fill a card without a thumbnail, so its button sits at
+    the bottom of an equal-height card, and whether `mb-n4` survives anywhere in the markup. A probe that matches nothing reads as "-", which
     is how the stacked cases record that they have no row wrapper and the button-less case
     records that it opens no spacing column at all.
 
@@ -962,29 +963,32 @@ GETLOCALE FAILURES: {{ $localeFail }}
       "header-style" "none"
       "footer-style" "none"
 -}}
-{{- $cardProbes := slice `class="card[^"]*"` `class="[^"]*g-0 h-100[^"]*"` `class="[^"]*align-items-end[^"]*"` -}}
+{{- $cardProbes := slice `class="card[^"]*"` `class="[^"]*g-0 h-100[^"]*"` `class="[^"]*align-items-end[^"]*"` `class="d-flex flex-column align-self-stretch"` `class=" ?h-100"` -}}
 {{- $cardCases := slice
   (dict "case" "horizontal card spaces its button by the default padding"
         "args" (dict "orientation" "horizontal")
-        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-3" "-"))
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end mt-auto pt-3" "d-flex flex-column align-self-stretch" "h-100" "-"))
   (dict "case" "padding zero leaves no gap under the button"
         "args" (dict "orientation" "horizontal" "padding" 0)
-        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-0" "-"))
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end mt-auto pt-0" "d-flex flex-column align-self-stretch" "h-100" "-"))
   (dict "case" "padding five spaces the button by five"
         "args" (dict "orientation" "horizontal" "padding" 5)
-        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-5" "-"))
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end mt-auto pt-5" "d-flex flex-column align-self-stretch" "h-100" "-"))
   (dict "case" "horizontal-sm follows the same argument"
         "args" (dict "orientation" "horizontal-sm" "padding" 2)
-        "want" (slice "card" "g-0 h-100" "d-flex align-items-end pt-2" "-"))
+        "want" (slice "card" "g-0 h-100" "d-flex align-items-end mt-auto pt-2" "d-flex flex-column align-self-stretch" "h-100" "-"))
   (dict "case" "colour and caller class stay separate tokens"
         "args" (dict "orientation" "horizontal" "color" "light" "class" "pb-0")
-        "want" (slice "card bg-light text-bg-light pb-0" "g-0 h-100" "d-flex align-items-end pt-3" "-"))
+        "want" (slice "card bg-light text-bg-light pb-0" "g-0 h-100" "d-flex align-items-end mt-auto pt-3" "d-flex flex-column align-self-stretch" "h-100" "-"))
   (dict "case" "a horizontal card without a button opens no spacing column"
         "args" (dict "orientation" "horizontal" "button" false)
-        "want" (slice "card" "g-0 h-100" "-" "-"))
+        "want" (slice "card" "g-0 h-100" "-" "d-flex flex-column align-self-stretch" "h-100" "-"))
+  (dict "case" "with a thumbnail, the body keeps centering and the button follows the text"
+        "args" (dict "orientation" "horizontal" "thumbnail" "/img/probe.jpg" "hook" "tests/thumbnail-probe.html")
+        "want" (slice "card" "row-cols-2 row g-0 h-100" "d-flex align-items-end pt-3" "-" "-" "-"))
   (dict "case" "the stacked branch is unchanged"
         "args" (dict "padding" 3)
-        "want" (slice "card text-start p-3" "-" "col d-flex align-items-end pt-3" "-"))
+        "want" (slice "card text-start p-3" "-" "col d-flex align-items-end pt-3" "-" "-" "-"))
 -}}
 {{- range $cardCases -}}
 {{- $html := replaceRE `\s+` " " (partial "assets/card.html" (merge $cardBase .args)) -}}
