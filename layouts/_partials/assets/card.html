@@ -302,7 +302,12 @@
                     )) -}}
                 </div>
             {{- end -}}
-            <div class="{{ $col2 }}">
+            {{/* Without a thumbnail, the body column fills the card's height, so that in a row of
+                 equal-height cards each button sits at the bottom of its card, as it does in a
+                 stacked card. A card no taller than its content renders as before. With a
+                 thumbnail, the body keeps centering its content next to the image. */}}
+            {{ $fill := not $thumbnail }}
+            <div class="{{ $col2 }}{{ if $fill }} h-100{{ end }}">
                 {{ $padding := printf "p-%d" $args.padding }}
                 <div class="card-body {{ $padding }} h-100 hstack">
                     {{ if $icon }}
@@ -315,7 +320,7 @@
                             "class"        (printf "align-self-%s me-3 mt-1 col-auto" $args.align)
                         )}}
                     {{ end }}
-                    <div>
+                    <div{{ if $fill }} class="d-flex flex-column align-self-stretch"{{ end }}>
                         {{ if and $page (ne $args.headerStyle "none") }}
                             <div>{{ partial "inline/card-caption.html" (dict
                                 "page"     $page
@@ -351,7 +356,7 @@
                             {{ $buttonClass := "card-button" }}
                             {{ $buttonType := (or $args.linkType $args.buttonType) }}
                             {{ if eq $buttonType "link" }}{{ $buttonClass = "card-button card-button-link" }}{{ end }}
-                            <div class="d-flex align-items-end pt-{{ $args.padding }}">
+                            <div class="d-flex align-items-end{{ if $fill }} mt-auto{{ end }} pt-{{ $args.padding }}">
                                 {{ partial "assets/button.html" (dict
                                     "page"        $args.page
                                     "title"       $label
