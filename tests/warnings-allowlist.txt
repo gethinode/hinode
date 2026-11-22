@@ -1,0 +1,5 @@
+# Intentional example-site output notices, retained visibly while enforcing #2225's warning policy.
+# https://github.com/gethinode/hinode/issues/2225
+WARN Generating server headers: /netlify.toml
+# https://github.com/gethinode/hinode/issues/2225
+WARN Generating server headers: /server.toml
