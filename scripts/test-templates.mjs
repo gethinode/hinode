@@ -2,7 +2,8 @@
 // HTML parsing rules (including raw text, inert templates, comments and foreign namespaces).
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { readFileSync, rmSync } from 'node:fs'
+import { copyFileSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import parse5 from 'parse5'
@@ -56,6 +57,10 @@ function checkMetadata (environment) {
         'share metadata JSON-LD: expected nonempty graph')
       for (const node of container['@graph']) {
         assert.ok(node && typeof node === 'object' && !Array.isArray(node), 'share metadata JSON-LD: invalid node')
+        if (Object.hasOwn(node, '@context')) {
+          assert.ok(['https://schema.org', 'http://schema.org'].includes(node['@context']),
+            'share metadata JSON-LD: unexpected node-local context')
+        }
         if (Object.hasOwn(node, '@graph')) containers.push(node)
         else graph.push(node)
       }
@@ -75,9 +80,22 @@ function checkMetadata (environment) {
 }
 
 function run (command, args) {
-  const result = spawnSync(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' })
+  // Windows needs a shell for Hugo's .cmd shim, never for an absolute Node executable.
+  const result = spawnSync(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' && command === 'hugo' })
   if (result.error) throw result.error
   assert.equal(result.status, 0, `${command} ${args.join(' ')} failed`)
+}
+
+if (process.platform === 'win32') {
+  // Hosted Node paths may omit spaces; qualify the supported default installation case too.
+  const directory = mkdtempSync(path.join(os.tmpdir(), 'hinode node '))
+  try {
+    const executable = path.join(directory, 'node.exe')
+    copyFileSync(process.execPath, executable)
+    run(executable, ['-e', 'process.exit(0)'])
+  } finally {
+    rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
+  }
 }
 
 for (const environment of environments) {
