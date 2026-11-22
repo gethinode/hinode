@@ -8,6 +8,15 @@ import { fileURLToPath } from 'node:url'
 import * as floor from './test-hugo-floor.mjs'
 const { assertFloorBuild, assertFloorVersion, floorAsset, verifyFloorArchive } = floor
 
+test('Windows extraction selects the native archive reader independently of PATH', () => {
+  assert.equal(typeof floor.tarCommand, 'function')
+  assert.equal(floor.tarCommand('win32', { SystemRoot: 'C:\\Windows', PATH: 'C:\\Git\\usr\\bin' }),
+    'C:\\Windows\\System32\\tar.exe')
+  assert.equal(floor.tarCommand('win32', { SYSTEMROOT: 'D:\\OS' }), 'D:\\OS\\System32\\tar.exe')
+  assert.equal(floor.tarCommand('linux', {}), 'tar')
+  assert.throws(() => floor.tarCommand('win32', {}), /SystemRoot is required/)
+})
+
 test('accepts only the extended advertised floor, never the installed current version', () => {
   assert.doesNotThrow(() => assertFloorVersion('hugo v0.158.0-f41be79+extended darwin/arm64'))
   for (const version of ['hugo v0.169.0+extended darwin/arm64', 'hugo v0.158.0 linux/amd64', 'hugo v0.158.01+extended windows/amd64']) {

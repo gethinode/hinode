@@ -32,6 +32,14 @@ export function verifyFloorArchive (bytes, sha256) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'), sha256, 'Hugo floor archive SHA-256 mismatch')
 }
 
+export function tarCommand (platform = process.platform, env = process.env) {
+  if (platform !== 'win32') return 'tar'
+  // Git Bash can put GNU tar first; it treats a C: archive prefix as a remote host.
+  const systemRoot = env.SystemRoot || env.SYSTEMROOT
+  assert.ok(systemRoot && path.win32.isAbsolute(systemRoot), 'Windows SystemRoot is required for native ZIP extraction')
+  return path.win32.join(systemRoot, 'System32', 'tar.exe')
+}
+
 export function assertFloorVersion (version) {
   assert.ok(/^hugo v0\.158\.0[-+ ]/.test(version) && /\+extended(?:[ +]|$)/.test(version),
     `expected Hugo extended 0.158.0, got: ${version}`)
@@ -75,7 +83,7 @@ async function downloadFloor (scratch) {
     return path.join(expanded, 'Payload', 'hugo')
   }
   mkdirSync(expanded)
-  const result = run('tar', ['-xf', archive, '-C', expanded])
+  const result = run(tarCommand(), ['-xf', archive, '-C', expanded])
   assert.equal(result.status, 0, `floor archive extraction failed: ${result.stderr}`)
   return path.join(expanded, process.platform === 'win32' ? 'hugo.exe' : 'hugo')
 }
