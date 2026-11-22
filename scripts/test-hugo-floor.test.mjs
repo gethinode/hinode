@@ -1,5 +1,10 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
+import { mkdtempSync, rmSync, symlinkSync } from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
 import test from 'node:test'
+import { fileURLToPath } from 'node:url'
 import { assertFloorBuild, assertFloorVersion, floorAsset, verifyFloorArchive } from './test-hugo-floor.mjs'
 
 test('accepts only the extended advertised floor, never the installed current version', () => {
@@ -31,4 +36,23 @@ test('official archive selection is explicit for the three supported CI platform
   assert.equal(floorAsset('linux', 'x64').filename, 'hugo_extended_0.158.0_linux-amd64.tar.gz')
   assert.equal(floorAsset('win32', 'x64').filename, 'hugo_extended_0.158.0_windows-amd64.zip')
   assert.throws(() => floorAsset('linux', 'arm64'), /unsupported floor platform/)
+})
+
+test('CLI entry through a directory alias still runs checks and propagates failure', () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), 'hinode floor alias '))
+  try {
+    const scripts = path.dirname(fileURLToPath(import.meta.url))
+    const alias = path.join(directory, 'linked scripts')
+    symlinkSync(scripts, alias, process.platform === 'win32' ? 'junction' : 'dir')
+    for (const entry of [path.join(scripts, 'test-hugo-floor.mjs'), path.join(alias, 'test-hugo-floor.mjs')]) {
+      for (const flags of [[], ['--preserve-symlinks-main']]) {
+        const result = spawnSync(process.execPath, [...flags, entry], {
+          cwd: directory, encoding: 'utf8',
+          env: { ...process.env, HUGO_FLOOR_BIN: path.join(directory, 'absent-floor-binary') }
+        })
+        assert.equal(result.status, 1, 'every entry path must reject a missing floor binary')
+        assert.match(result.stderr, /Hugo floor check failed:.*ENOENT/)
+      }
+    }
+  } finally { rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }) }
 })

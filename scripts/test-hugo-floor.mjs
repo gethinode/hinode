@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -64,8 +64,10 @@ async function downloadFloor (scratch) {
   return path.join(expanded, process.platform === 'win32' ? 'hugo.exe' : 'hugo')
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const sourceFile = realpathSync(fileURLToPath(import.meta.url))
+const entryFile = process.argv[1]
+if (entryFile && entryFile !== '-' && realpathSync(path.resolve(entryFile)) === sourceFile) {
+  const root = path.resolve(path.dirname(sourceFile), '..')
   const scratch = mkdtempSync(path.join(os.tmpdir(), 'hinode-hugo-floor-'))
   try {
     const binary = process.env.HUGO_FLOOR_BIN ? path.resolve(process.env.HUGO_FLOOR_BIN) : await downloadFloor(scratch)

@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
-import { copyFileSync, mkdtempSync, rmSync, symlinkSync } from 'node:fs'
+import { copyFileSync, mkdtempSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
+import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import { auditWarnings, checkBuild } from './check-warnings.mjs'
 
 // Literal diagnostic expectations catch dropped severity/stream checks and stale allowances.
@@ -90,4 +92,36 @@ test('a native Node executable path containing spaces passes without shell quoti
   } finally {
     rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
   }
+})
+
+test('CLI aliases use the actual repository and preserve accepted-build success and failure', () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), 'hinode warning alias '))
+  try {
+    const scripts = path.dirname(fileURLToPath(import.meta.url))
+    const root = realpathSync(path.join(scripts, '..'))
+    const alias = path.join(directory, 'linked scripts')
+    symlinkSync(scripts, alias, process.platform === 'win32' ? 'junction' : 'dir')
+    const manager = path.join(directory, 'package manager.mjs')
+    writeFileSync(manager, `import assert from 'node:assert/strict';
+assert.equal(process.cwd(), ${JSON.stringify(root)});
+assert.deepEqual(process.argv.slice(2), ['run', 'build:example:ci']);
+console.log('controlled build reached');
+console.warn('WARN Generating server headers: /netlify.toml');
+console.warn('WARN Generating server headers: /server.toml');
+process.exitCode = Number(process.env.HINODE_TEST_CHILD_EXIT);
+`)
+    for (const entry of [path.join(scripts, 'check-warnings.mjs'), path.join(alias, 'check-warnings.mjs')]) {
+      for (const flags of [[], ['--preserve-symlinks-main']]) {
+        for (const exit of [0, 17]) {
+          const result = spawnSync(process.execPath, [...flags, entry], {
+            cwd: directory, encoding: 'utf8',
+            env: { ...process.env, npm_execpath: manager, HINODE_TEST_CHILD_EXIT: String(exit) }
+          })
+          assert.equal(result.status, exit, 'CLI must preserve the actual build result')
+          assert.match(result.stdout, /controlled build reached/)
+          if (exit === 0) assert.match(result.stdout, /PASS example Hugo warning guard/)
+        }
+      }
+    }
+  } finally { rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }) }
 })
