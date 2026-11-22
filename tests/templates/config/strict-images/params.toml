@@ -1,4 +1,4 @@
-# Overlay for the fourth `test:templates` build
+# Overlay for the strict-images `test:templates` build
 # (`--environment strict-images`). With `failOnMissingImage` set, an
 # image the pipeline cannot find is logged as an ERROR instead of a
 # WARN, and the build fails. The thumbnail assertions run in this build

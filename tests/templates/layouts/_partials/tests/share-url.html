@@ -76,6 +76,13 @@ PASS share url: {{ .name }}
 
 {{- /* page/sharing.html with the test site's [params.sharing]: the links each button carries. */ -}}
 {{- $p := site.GetPage "/share/post" -}}
+{{- if not ($p.Resources.GetMatch "feature.png") -}}
+  {{- errorf "share render fixture must have a bundle preview image" -}}
+{{- end -}}
+{{- $preview := $p.Scratch.Get "thumbnail" -}}
+{{- if or (not $preview) (eq $preview $p.Permalink) -}}
+  {{- errorf "share render fixture must have real SEO metadata with a distinct preview URL: got=%v" $preview -}}
+{{- end -}}
 {{- $p.Store.Set "sharing" true -}}
 {{- $html := partial "page/sharing.html" $p -}}
 {{- $rendered := slice

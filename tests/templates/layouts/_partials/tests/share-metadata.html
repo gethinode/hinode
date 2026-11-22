@@ -1,0 +1,66 @@
+{{- /* Real page metadata must stay untagged while sharing.utm is enabled. */ -}}
+{{- $page := . -}}
+{{- $want := "https://example.org/share/post/" -}}
+{{- if not site.Params.sharing.utm.enabled -}}
+  {{- errorf "share metadata fixture must enable UTM tagging" -}}
+{{- end -}}
+{{- if ne $page.Permalink $want -}}
+  {{- errorf "share metadata fixture URL: want=%q got=%q" $want $page.Permalink -}}
+{{- end -}}
+{{- $feature := $page.Resources.GetMatch "feature.png" -}}
+{{- if not $feature -}}
+  {{- errorf "share metadata fixture must have a bundle feature.png" -}}
+{{- else -}}
+  {{- $head := partial "head/seo.html" $page -}}
+  {{- $thumbnail := $page.Scratch.Get "thumbnail" -}}
+  {{- if or (not $thumbnail) (eq $thumbnail $want) -}}
+    {{- errorf "share metadata fixture must publish a distinct preview image: got=%v" $thumbnail -}}
+  {{- end -}}
+
+  {{- range slice
+      (dict "name" "canonical" "tag" `<link\b[^>]*\brel="canonical"[^>]*>` "attribute" "href")
+      (dict "name" "og:url" "tag" `<meta\b[^>]*\bproperty="og:url"[^>]*>` "attribute" "content") -}}
+    {{- $tags := findRE .tag $head -}}
+    {{- if ne (len $tags) 1 -}}
+      {{- errorf "share metadata %s: expected one carrier, got %d" .name (len $tags) -}}
+    {{- else -}}
+      {{- $pattern := printf `(?s).*?\b%s="([^"]*)".*` .attribute -}}
+      {{- $url := replaceRE $pattern "$1" (index $tags 0) -}}
+      {{- if or (ne $url $want) (strings.Contains $url "utm_") -}}
+        {{- errorf "share metadata %s: want clean page URL %q, got %q" .name $want $url -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $scripts := findRE `(?s)<script\b[^>]*\btype="application/ld\+json"[^>]*>.*?</script>` $head -}}
+  {{- if ne (len $scripts) 1 -}}
+    {{- errorf "share metadata JSON-LD: expected one carrier, got %d" (len $scripts) -}}
+  {{- else -}}
+    {{- $json := replaceRE `(?s)^<script[^>]*>(.*?)</script>$` "$1" (index $scripts 0) -}}
+    {{- with try (transform.Unmarshal $json) -}}
+      {{- if .Err -}}
+        {{- errorf "share metadata JSON-LD: invalid JSON: %s" .Err -}}
+      {{- else -}}
+        {{- $graph := index .Value "@graph" -}}
+        {{- if not $graph -}}
+          {{- errorf "share metadata JSON-LD: expected a nonempty graph" -}}
+        {{- end -}}
+        {{- if strings.Contains $json "utm_" -}}
+          {{- errorf "share metadata JSON-LD: UTM tags leaked into the graph" -}}
+        {{- end -}}
+        {{- $pages := 0 -}}
+        {{- range $graph -}}
+          {{- if eq (index . "@type") "WebPage" -}}
+            {{- $pages = add $pages 1 -}}
+            {{- if or (ne (index . "@id") $want) (ne .url $want) -}}
+              {{- errorf "share metadata JSON-LD: WebPage must identify %q, got id=%v url=%v" $want (index . "@id") .url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- if ne $pages 1 -}}
+          {{- errorf "share metadata JSON-LD: expected one WebPage, got %d" $pages -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
