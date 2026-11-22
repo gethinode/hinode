@@ -125,3 +125,11 @@ process.exitCode = Number(process.env.HINODE_TEST_CHILD_EXIT);
     }
   } finally { rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }) }
 })
+
+test('importing warning helpers from eval with data arguments stays passive', () => {
+  const url = new URL('./check-warnings.mjs', import.meta.url).href
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e',
+    `await import(${JSON.stringify(url)}); console.log('IMPORTED')`, 'ordinary-data-argument'], { encoding: 'utf8' })
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout, 'IMPORTED\n')
+})

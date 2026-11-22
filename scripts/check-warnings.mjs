@@ -30,7 +30,9 @@ export function checkBuild ({ command, args, cwd, env, allowlistText }) {
 
 const sourceFile = realpathSync(fileURLToPath(import.meta.url))
 const entryFile = process.argv[1]
-if (entryFile && entryFile !== '-' && realpathSync(path.resolve(entryFile)) === sourceFile) {
+const evalMode = process.execArgv.some(arg => /^(?:-e|-p|--eval(?:=|$)|--print(?:=|$))/.test(arg))
+const runAsMain = import.meta.main ?? Boolean(entryFile && entryFile !== '-' && !evalMode && realpathSync(path.resolve(entryFile)) === sourceFile)
+if (runAsMain) {
   const root = path.resolve(path.dirname(sourceFile), '..')
   try {
     if (!process.env.npm_execpath) throw new Error('Run this guard with pnpm run test:warnings')

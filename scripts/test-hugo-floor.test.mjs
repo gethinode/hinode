@@ -5,7 +5,8 @@ import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
-import { assertFloorBuild, assertFloorVersion, floorAsset, verifyFloorArchive } from './test-hugo-floor.mjs'
+import * as floor from './test-hugo-floor.mjs'
+const { assertFloorBuild, assertFloorVersion, floorAsset, verifyFloorArchive } = floor
 
 test('accepts only the extended advertised floor, never the installed current version', () => {
   assert.doesNotThrow(() => assertFloorVersion('hugo v0.158.0-f41be79+extended darwin/arm64'))
@@ -55,4 +56,21 @@ test('CLI entry through a directory alias still runs checks and propagates failu
       }
     }
   } finally { rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }) }
+})
+
+test('importing helpers from eval with data arguments stays passive', () => {
+  const url = new URL('./test-hugo-floor.mjs', import.meta.url).href
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e',
+    `await import(${JSON.stringify(url)}); console.log('IMPORTED')`, 'ordinary-data-argument'], { encoding: 'utf8' })
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout, 'IMPORTED\n')
+})
+
+test('CSS proof requires a real retained rule and removal of an unused rule', () => {
+  assert.equal(typeof floor.assertFloorCSS, 'function')
+  const markers = { kept: 'floor-kept-test', unused: 'floor-unused-test' }
+  assert.doesNotThrow(() => floor.assertFloorCSS('.other,.floor-kept-test{color:#010203}', markers))
+  assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}.floor-unused-test{color:blue}', markers), /unused probe rule survived/)
+  assert.throws(() => floor.assertFloorCSS('/* .floor-kept-test{} */.other{content:".floor-kept-test"}', markers), /retained probe rule missing/)
+  assert.throws(() => floor.assertFloorCSS('', markers), /retained probe rule missing/)
 })

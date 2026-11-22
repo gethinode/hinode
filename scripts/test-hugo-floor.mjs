@@ -1,12 +1,19 @@
 // Exercise the advertised floor with fresh CSS resources, alongside the pinned current CI build.
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { createHash } from 'node:crypto'
-import { mkdirSync, mkdtempSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
+import { createHash, randomBytes } from 'node:crypto'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { stripVTControlCharacters } from 'node:util'
+
+const sourceFile = realpathSync(fileURLToPath(import.meta.url))
+// Use the actual CLI's declared PostCSS peer, without changing this repository's peer graph.
+const require = createRequire(sourceFile)
+const cliRequire = createRequire(require.resolve('postcss-cli/package.json'))
+const postcss = cliRequire('postcss')
 
 export function floorAsset (platform = process.platform, arch = process.arch) {
   // Official v0.158.0 release SHA-256 digests; update only with a reviewed floor change.
@@ -37,6 +44,15 @@ export function assertFloorBuild (output, status) {
   assert.ok(!log.includes('No files found from the passed PurgeCSS option'), 'PostCSS could not read site stats')
 }
 
+export function assertFloorCSS (css, { kept, unused }) {
+  const selectors = new Set()
+  postcss.parse(css).walkRules(rule => {
+    for (const selector of rule.selector.split(',')) selectors.add(selector.trim())
+  })
+  assert.ok(selectors.has(`.${kept}`), 'retained probe rule missing from production CSS')
+  assert.ok(!selectors.has(`.${unused}`), 'unused probe rule survived production purge')
+}
+
 function run (command, args, options = {}) {
   const result = spawnSync(command, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, ...options })
   if (result.error) throw result.error
@@ -64,9 +80,35 @@ async function downloadFloor (scratch) {
   return path.join(expanded, process.platform === 'win32' ? 'hugo.exe' : 'hugo')
 }
 
-const sourceFile = realpathSync(fileURLToPath(import.meta.url))
+function createCSSProbe (root, scratch, resolved) {
+  const token = randomBytes(8).toString('hex')
+  const markers = { kept: `hinode-floor-kept-${token}`, unused: `hinode-floor-unused-${token}` }
+  const assets = path.join(scratch, 'probe-assets')
+  const content = path.join(scratch, 'probe-content')
+  mkdirSync(path.join(assets, 'scss/theme'), { recursive: true })
+  const pageDir = path.join(content, `floor-postcss-probe-${token}`)
+  mkdirSync(pageDir, { recursive: true })
+  const localStyle = path.join(root, 'exampleSite/assets/scss/theme/theme.scss')
+  const style = readFileSync(existsSync(localStyle) ? localStyle : path.join(root, 'assets/scss/theme/theme.scss'), 'utf8')
+  writeFileSync(path.join(assets, 'scss/theme/theme.scss'), `${style}\n.${markers.kept}{color:rgb(1,2,3)}\n.${markers.unused}{color:rgb(4,5,6)}\n`)
+  writeFileSync(path.join(pageDir, 'index.md'),
+    `+++\ntitle = "PostCSS floor probe"\n+++\n\n## Retained rule {.${markers.kept}}\n`)
+  const mounts = resolved.module?.mounts
+  assert.ok(Array.isArray(mounts), 'floor source mounts missing')
+  const language = mounts.find(mount => mount.target === 'content')
+  assert.ok(language, 'floor language content mount missing')
+  const config = path.join(scratch, 'probe.json')
+  // Retain the resolved multilingual/default mounts rather than flattening content languages.
+  writeFileSync(config, JSON.stringify({ module: { mounts: [
+    { source: assets, target: 'assets' }, { ...language, source: content }, ...mounts
+  ] } }))
+  return { config, markers }
+}
+
 const entryFile = process.argv[1]
-if (entryFile && entryFile !== '-' && realpathSync(path.resolve(entryFile)) === sourceFile) {
+const evalMode = process.execArgv.some(arg => /^(?:-e|-p|--eval(?:=|$)|--print(?:=|$))/.test(arg))
+const runAsMain = import.meta.main ?? Boolean(entryFile && entryFile !== '-' && !evalMode && realpathSync(path.resolve(entryFile)) === sourceFile)
+if (runAsMain) {
   const root = path.resolve(path.dirname(sourceFile), '..')
   const scratch = mkdtempSync(path.join(os.tmpdir(), 'hinode-hugo-floor-'))
   try {
@@ -75,14 +117,28 @@ if (entryFile && entryFile !== '-' && realpathSync(path.resolve(entryFile)) === 
     assert.equal(version.status, 0, 'floor version command failed')
     assertFloorVersion(version.stdout.trim())
     console.log(version.stdout.trim())
+    const site = path.join(root, 'exampleSite')
+    const configDir = path.join(site, 'config')
+    const config = run(binary, ['config', '--source', site, '--configDir', configDir,
+      '--environment', 'production', '--format', 'json'], { cwd: scratch })
+    assert.equal(config.status, 0, `floor config command failed: ${config.stderr}`)
+    process.stderr.write(config.stderr)
+    const probe = createCSSProbe(root, scratch, JSON.parse(config.stdout))
     const build = run(binary, ['--gc', '--minify', '--logLevel', 'info', '--environment', 'production',
-      '--source', path.join(root, 'exampleSite'), '--destination', path.join(scratch, 'public')], {
+      '--source', site, '--configDir', configDir, '--config', probe.config,
+      '--destination', path.join(scratch, 'public')], {
       // An empty parent cwd prevents root-site stats from masking an incorrect adapter cwd.
       cwd: scratch, env: { ...process.env, HUGO_RESOURCEDIR: path.join(scratch, 'resources') }
     })
     process.stdout.write(build.stdout)
     process.stderr.write(build.stderr)
     assertFloorBuild(`${build.stdout}\n${build.stderr}`, build.status)
+    const cssDir = path.join(scratch, 'public/css')
+    const stylesheets = readdirSync(cssDir).filter(name => name.endsWith('.css'))
+    assert.ok(stylesheets.length, 'production CSS output missing')
+    assertFloorCSS(stylesheets.map(filename => readFileSync(path.join(cssDir, filename), 'utf8')).join('\n'), probe.markers)
+    const classes = JSON.parse(readFileSync(path.join(site, 'hugo_stats.json'), 'utf8')).htmlElements.classes
+    assert.ok(classes.includes(probe.markers.kept) && !classes.includes(probe.markers.unused), 'fresh probe stats missing')
     console.log('PASS Hugo extended 0.158.0 production PostCSS build')
   } catch (error) {
     console.error(`Hugo floor check failed: ${error.message}`)
