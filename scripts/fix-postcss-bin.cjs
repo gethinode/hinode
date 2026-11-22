@@ -4,19 +4,27 @@ const cmdShim = require('cmd-shim');
 
 // The floor Hugo searches the site's own bin before npx and inherits the parent's
 // cwd. New Hugo resolves Node entries itself. A local Node adapter supports both:
-// select the known site's cwd for its stats, then import the real CLI unchanged.
+// honor Hugo's explicit site context for its stats, then import the real CLI.
 const adapter = `#!/usr/bin/env node
 const path = require('node:path');
 const fs = require('node:fs');
 const { pathToFileURL } = require('node:url');
 const root = path.dirname(__dirname);
-const configIndex = process.argv.indexOf('--config');
-if (configIndex >= 0 && process.argv[configIndex + 1]) {
-  const config = path.resolve(process.argv[configIndex + 1]);
+const args = process.argv.slice(2);
+const configIndex = args.indexOf('--config');
+// Hinode's stylesheet sends stdin to stdout with these options. File/glob/output
+// commands remain caller-relative even when Hugo-like variables are inherited.
+const hugoIO = args.length === 3 &&
+  ((args[0] === '--config' && args[2] === '--no-map') ||
+   (args[0] === '--no-map' && args[1] === '--config'));
+if (hugoIO && process.env.HUGO_ENVIRONMENT && process.env.PWD) {
+  const config = path.resolve(args[configIndex + 1]);
+  const cwd = path.resolve(process.env.PWD);
   for (const site of [root, path.join(root, 'exampleSite')]) {
     const expected = path.join(site, 'config');
-    if (fs.existsSync(config) && fs.existsSync(expected) &&
-        fs.realpathSync(config) === fs.realpathSync(expected)) { process.chdir(site); break; }
+    if (fs.existsSync(cwd) && fs.existsSync(config) && fs.existsSync(expected) &&
+        fs.realpathSync(config) === fs.realpathSync(expected) &&
+        fs.realpathSync(cwd) === fs.realpathSync(site)) { process.chdir(site); break; }
   }
 }
 import(pathToFileURL(path.join(__dirname, 'postcss-cli', 'index.js')).href)
