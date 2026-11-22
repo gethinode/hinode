@@ -1,0 +1,27 @@
+{{- /* Sharing is checked against real metadata from an image-bearing page. */ -}}
+{{- $page := . -}}
+{{- $want := "https://example.org/share/post/" -}}
+{{- if not site.Params.sharing.utm.enabled -}}
+  {{- errorf "share metadata fixture must enable UTM tagging" -}}
+{{- end -}}
+{{- if ne $page.Permalink $want -}}
+  {{- errorf "share metadata fixture URL: want=%q got=%q" $want $page.Permalink -}}
+{{- end -}}
+{{- if not ($page.Resources.GetMatch "feature.png") -}}
+  {{- errorf "share metadata fixture must have a bundle feature.png" -}}
+{{- else -}}
+  {{- $head := partial "head/seo.html" $page -}}
+  {{- $thumbnail := $page.Scratch.Get "thumbnail" -}}
+  {{- if or (not $thumbnail) (eq $thumbnail $want) -}}
+    {{- errorf "share metadata fixture must publish a distinct preview image: got=%v" $thumbnail -}}
+  {{- end -}}
+  <template data-share-metadata="page">{{ $head | safeHTML }}</template>
+  {{- /* The same real page data exercises the conditional Article graph without adding a
+        blog page that would change unrelated page-list fixtures. */ -}}
+  {{- $article := dict
+      "Site" $page.Site "Ancestors" $page.Ancestors "IsHome" $page.IsHome
+      "Title" $page.Title "LinkTitle" $page.LinkTitle "Description" $page.Description
+      "Permalink" $page.Permalink "Kind" $page.Kind "Section" "blog"
+      "Date" $page.Date "Lastmod" $page.Lastmod "Scratch" $page.Scratch -}}
+  <template data-share-metadata="article">{{ partial "head/structured-data.html" $article }}</template>
+{{- end -}}
