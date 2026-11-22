@@ -23,7 +23,7 @@ jobs:
       # conservative pick as CI runners have less RAM. The variable is prepended to the build
       # command because an `env:` block at this caller does not propagate into the reusable
       # workflow. The reusable workflow runs the command with `shell: bash` on every OS.
-      build-command: GOGC=400 pnpm run build:cache && pnpm run test:warnings:unit && GOGC=400 pnpm run test:warnings && pnpm run test:templates && pnpm run test:languages && pnpm run test:renderer && pnpm run test:feeds && pnpm run test:clipboard && pnpm run test:command
+      build-command: GOGC=400 pnpm run build:cache && pnpm run test:warnings:unit && GOGC=400 pnpm run test:warnings && pnpm run test:templates && pnpm run test:languages && pnpm run test:renderer && pnpm run test:feeds && pnpm run test:clipboard && pnpm run test:command && pnpm run test:postcss-bin && pnpm run test:hugo-floor:unit && GOGC=400 pnpm run test:hugo-floor
       cache-key: hugo-hinode
       dart-sass-version: "1.98.0"
     secrets: inherit

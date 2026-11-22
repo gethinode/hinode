@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { assertFloorBuild, assertFloorVersion, floorAsset, verifyFloorArchive } from './test-hugo-floor.mjs'
+
+test('accepts only the extended advertised floor, never the installed current version', () => {
+  assert.doesNotThrow(() => assertFloorVersion('hugo v0.158.0-f41be79+extended darwin/arm64'))
+  for (const version of ['hugo v0.169.0+extended darwin/arm64', 'hugo v0.158.0 linux/amd64', 'hugo v0.158.01+extended windows/amd64']) {
+    assert.throws(() => assertFloorVersion(version), /expected Hugo extended 0\.158\.0/)
+  }
+})
+
+test('an exit-zero build must actually resolve site-local PostCSS and read its stats', () => {
+  const trace = 'INFO exec: resolve "postcss" using node_modules/.bin\n'
+  assert.doesNotThrow(() => assertFloorBuild(trace, 0))
+  assert.throws(() => assertFloorBuild('Total in 100 ms', 0), /local PostCSS was not executed/)
+  assert.throws(() => assertFloorBuild('INFO exec: resolve "postcss" using npx', 0), /local PostCSS was not executed/)
+  assert.throws(() => assertFloorBuild(trace + "INFO postcss: No files found from the passed PurgeCSS option 'content'.", 0), /PostCSS could not read site stats/)
+  assert.throws(() => assertFloorBuild(trace, 2), /floor build failed/)
+  assert.throws(() => assertFloorBuild(trace, null), /floor build failed/)
+})
+
+test('archive checksum verification rejects changed bytes before extraction', () => {
+  const abc = 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'
+  assert.doesNotThrow(() => verifyFloorArchive(Buffer.from('abc'), abc))
+  assert.throws(() => verifyFloorArchive(Buffer.from('abd'), abc), /SHA-256 mismatch/)
+})
+
+test('official archive selection is explicit for the three supported CI platforms', () => {
+  assert.equal(floorAsset('darwin', 'arm64').filename, 'hugo_extended_0.158.0_darwin-universal.pkg')
+  assert.equal(floorAsset('darwin', 'x64').filename, 'hugo_extended_0.158.0_darwin-universal.pkg')
+  assert.equal(floorAsset('linux', 'x64').filename, 'hugo_extended_0.158.0_linux-amd64.tar.gz')
+  assert.equal(floorAsset('win32', 'x64').filename, 'hugo_extended_0.158.0_windows-amd64.zip')
+  assert.throws(() => floorAsset('linux', 'arm64'), /unsupported floor platform/)
+})
