@@ -1,6 +1,6 @@
 // Guard the existing example CI build without hiding its accepted Hugo diagnostics.
 import { spawnSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, realpathSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { stripVTControlCharacters } from 'node:util'
@@ -28,8 +28,12 @@ export function checkBuild ({ command, args, cwd, env, allowlistText }) {
   return { status, stdout, stderr, unexpected, stale, error: result.error }
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const sourceFile = realpathSync(fileURLToPath(import.meta.url))
+const entryFile = process.argv[1]
+const evalMode = process.execArgv.some(arg => /^(?:-e|-p|--eval(?:=|$)|--print(?:=|$))/.test(arg))
+const runAsMain = import.meta.main ?? Boolean(entryFile && entryFile !== '-' && !evalMode && realpathSync(path.resolve(entryFile)) === sourceFile)
+if (runAsMain) {
+  const root = path.resolve(path.dirname(sourceFile), '..')
   try {
     if (!process.env.npm_execpath) throw new Error('Run this guard with pnpm run test:warnings')
     const allowlistText = readFileSync(path.join(root, 'tests/warnings-allowlist.txt'), 'utf8')
