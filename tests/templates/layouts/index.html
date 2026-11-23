@@ -1902,6 +1902,11 @@ BACKGROUND FAILURES: {{ $bgFail }}
 
 {{ partial "tests/button-tabs.html" . }}
 
+<div data-button-attributes="download">
+  {{ partial "assets/button.html" (dict "page" . "title" "Download notes" "href" "/notes.txt"
+    "attributes" (dict "download" `notes &amp; "café" \ draft.txt` "data-empty" "")) }}
+</div>
+
 {{ partial "tests/link-nofollow.html" . }}
 
 {{ partial "tests/seo.html" . }}
