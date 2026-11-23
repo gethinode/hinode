@@ -85,13 +85,12 @@ PASS share url: {{ .name }}
 {{- end -}}
 {{- $p.Store.Set "sharing" true -}}
 {{- $html := partial "page/sharing.html" $p -}}
+<div data-button-attributes="sharing">{{ $html }}</div>
 {{- $rendered := slice
   (dict "name" "an opened provider links to its escaped, tagged url"
-    "want" (printf `href="https://x.com/intent/post?url=https%%3A%%2F%%2Fexample.org%%2Fshare%%2Fpost%%2F%%3Futm_source%%3Dx%%26utm_medium%%3Dsocial&amp;text=%s"` $encTitle))
+    "want" `href="https://x.com/intent/post?url=https%3A%2F%2Fexample.org%2Fshare%2Fpost%2F%3Futm_source%3Dx%26utm_medium%3Dsocial&amp;text=Tips%20%26%20tricks%3A%20%22C%2B%2B%22%20for%20caf%C3%A9%20owners"`)
   (dict "name" "a clipboard provider copies the raw tagged url"
     "want" `data-clipboard="https://example.org/share/post/?utm_source=copied&amp;utm_medium=social"`)
-  (dict "name" "the web share button shares the url tagged with the webshare source"
-    "want" `data-sharing-url="https://example.org/share/post/?utm_source=native&utm_medium=social"`)
 -}}
 {{- range $rendered -}}
   {{- if strings.Contains $html .want }}

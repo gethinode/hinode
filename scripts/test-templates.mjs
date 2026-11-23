@@ -23,8 +23,7 @@ function * descendants (node) {
   for (const child of node.childNodes || []) yield * descendants(child)
 }
 
-function checkMetadata (environment) {
-  const document = parse5.parseFragment(readFileSync(homepage, 'utf8'))
+function checkMetadata (document, environment) {
   const fixtures = [...descendants(document)].filter(node =>
     element(node, 'template') && Object.hasOwn(attributes(node), 'data-share-metadata'))
   assert.equal(fixtures.length, 2, 'share metadata: expected page and article fixtures')
@@ -79,6 +78,29 @@ function checkMetadata (environment) {
   console.log(`PASS sharing metadata DOM: ${environment}`)
 }
 
+function buttonAttributes (document, fixture, marker) {
+  const fixtures = [...descendants(document)].filter(node =>
+    element(node, 'div') && attributes(node)['data-button-attributes'] === fixture)
+  assert.equal(fixtures.length, 1, `button attributes: expected one ${fixture} fixture`)
+  const buttons = [...descendants(fixtures[0])].filter(node =>
+    element(node, 'a') && Object.hasOwn(attributes(node), marker))
+  assert.equal(buttons.length, 1, `button attributes: expected one ${fixture} button`)
+  return attributes(buttons[0])
+}
+
+function checkButtonAttributes (document, environment) {
+  const sharing = buttonAttributes(document, 'sharing', 'data-sharing-description')
+  assert.equal(sharing['data-sharing-title'], 'Tips & tricks: "C++" for café owners', 'button attributes: full share title')
+  assert.equal(sharing['data-sharing-description'], 'Read "C++" with <samples> & literal &amp; text.', 'button attributes: full share description')
+  assert.equal(sharing['data-sharing-url'], 'https://example.org/share/post/?utm_source=native&utm_medium=social',
+    'button attributes: tagged share URL')
+
+  const download = buttonAttributes(document, 'download', 'download')
+  assert.equal(download.download, String.raw`notes &amp; "café" \ draft.txt`, 'button attributes: literal download value')
+  assert.equal(download['data-empty'], '', 'button attributes: empty string stays present')
+  console.log(`PASS button attributes DOM: ${environment}`)
+}
+
 function run (command, args) {
   // Windows needs a shell for Hugo's .cmd shim, never for an absolute Node executable.
   const result = spawnSync(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' && command === 'hugo' })
@@ -104,7 +126,11 @@ for (const environment of environments) {
   run('hugo', ['-s', 'tests/templates', '--logLevel', 'error',
     ...(environment ? ['--environment', environment] : [])])
   // bookshop-live intentionally disables home to exercise its separate link-rendering fixture.
-  if (environment !== 'bookshop-live') checkMetadata(environment || 'production')
+  if (environment !== 'bookshop-live') {
+    const document = parse5.parseFragment(readFileSync(homepage, 'utf8'))
+    checkMetadata(document, environment || 'production')
+    checkButtonAttributes(document, environment || 'production')
+  }
 }
 // This separate fixture intentionally disables home; retain its existing strict-image checks.
 run(process.execPath, ['scripts/test-strict-images.cjs'])
