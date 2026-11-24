@@ -6,7 +6,7 @@ import { copyFileSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import parse5 from 'parse5'
+import { parseFragment } from 'parse5'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const homepage = path.join(root, 'tests/templates/public/index.html')
@@ -171,7 +171,7 @@ for (const environment of environments) {
     ...(environment ? ['--environment', environment] : [])])
   // bookshop-live intentionally disables home to exercise its separate link-rendering fixture.
   if (environment !== 'bookshop-live') {
-    const document = parse5.parseFragment(readFileSync(homepage, 'utf8'))
+    const document = parseFragment(readFileSync(homepage, 'utf8'))
     checkMetadata(document, environment || 'production')
     checkButtonAttributes(document, environment || 'production')
   }
