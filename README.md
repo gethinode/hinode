@@ -66,7 +66,8 @@ Hinode is a [Hugo theme that uses modules][hugo_modules] to install and maintain
 The installation instructions in this readme install Hinode as a regular Hugo theme. Hinode requires the following software to be installed on your local machine.
 
 - [Go binary][golang_download]
-- [Hugo][hugo_download] (extended version)
+- [Hugo][hugo_download] 0.158.0 or later. Use the standard edition from 0.170.0 onward and the Extended edition for earlier versions.
+- [Dart Sass CLI][dartsass_download] for Hinode's default Sass compiler. If your site sets `params.main.build.transpiler` to `libsass`, switch it to `dartsass` before upgrading to Hugo 0.170.0 or later.
 
 [Git][git_download] is recommended, but is not a strict requirement.
 
@@ -207,6 +208,7 @@ The `hinode`, `docs`, and `template` codebase is released under the [MIT license
 [blist]: https://github.com/apvarun/blist-hugo-theme
 [bootstrap]: https://getbootstrap.com
 [cc-by-nc-4.0]: https://creativecommons.org/licenses/by-nc/4.0/
+[dartsass_download]: https://gohugo.io/functions/css/sass/#dart-sass
 [doks]: https://github.com/h-enk/doks
 [flexsearch]: https://github.com/nextapps-de/flexsearch
 [git_download]: https://git-scm.com

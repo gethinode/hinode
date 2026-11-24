@@ -108,6 +108,50 @@ function run (command, args) {
   assert.equal(result.status, 0, `${command} ${args.join(' ')} failed`)
 }
 
+function checkSassTranspilers () {
+  const options = { cwd: root, encoding: 'utf8', shell: process.platform === 'win32' }
+  const version = spawnSync('hugo', ['version'], options)
+  if (version.error) throw version.error
+  assert.equal(version.status, 0, version.stderr)
+  const [, major, minor] = version.stdout.match(/^hugo v(\d+)\.(\d+)\./)
+  const supportsLibSass = Number(major) === 0 && Number(minor) < 170
+
+  const directory = mkdtempSync(path.join(os.tmpdir(), 'hinode-sass-'))
+  try {
+    for (const [transpiler, expected] of [
+      ['libsass', supportsLibSass ? 'libsass' : null],
+      ['dartsass', 'dartsass'],
+      ['', supportsLibSass ? 'libsass' : 'dartsass']
+    ]) {
+      const destination = path.join(directory, transpiler || 'default')
+      const result = spawnSync('hugo', ['-s', 'tests/sass', '-d', destination, '-e', 'development'], {
+        ...options,
+        env: {
+          ...process.env,
+          HUGO_PARAMS_MAIN_BUILD_TRANSPILER: transpiler,
+          HUGO_RESOURCEDIR: path.join(directory, 'resources')
+        }
+      })
+      if (result.error) throw result.error
+      const log = result.stdout + result.stderr
+      if (expected) {
+        assert.equal(result.status, 0, log)
+        const css = readFileSync(path.join(destination, 'css', 'main.css'), 'utf8')
+        assert.ok(css.includes(`.${expected}-fixture`), `expected ${expected} stylesheet for setting '${transpiler}'`)
+      } else {
+        assert.notEqual(result.status, 0, log)
+        assert.match(log, /partial \[head\/stylesheet\.html\].*main\.build\.transpiler.*libsass.*Hugo 0\.170\.0.*dartsass/)
+        assert.doesNotMatch(log, /error calling toCSS/)
+      }
+    }
+    console.log('PASS Sass transpiler selection')
+  } finally {
+    rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
+  }
+}
+
+checkSassTranspilers()
+
 if (process.platform === 'win32') {
   // Hosted Node paths may omit spaces; qualify the supported default installation case too.
   const directory = mkdtempSync(path.join(os.tmpdir(), 'hinode node '))

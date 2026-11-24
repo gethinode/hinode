@@ -1,0 +1,15 @@
+diff --git a/dist/lib/install.mjs b/dist/lib/install.mjs
+index 02fe0e0..0903dd6 100644
+--- a/dist/lib/install.mjs
++++ b/dist/lib/install.mjs
+@@ -152,2 +152 @@
+-		if (!isExtended(releaseFile)) if (envConfig.forceStandard) logger.info("Installing vanilla Hugo (HUGO_NO_EXTENDED is set).");
+-		else logger.warn("Hugo Extended isn't supported on this platform, downloading vanilla Hugo instead.");
++		if (!isExtended(releaseFile)) logger.info("Installing standard Hugo.");
+diff --git a/dist/lib/utils.mjs b/dist/lib/utils.mjs
+index 7c3d344..439fd3b 100644
+--- a/dist/lib/utils.mjs
++++ b/dist/lib/utils.mjs
+@@ -148 +148 @@
+-	const forceStandard = getEnvConfig().forceStandard;
++	const forceStandard = getEnvConfig().forceStandard || compareVersions(version, "0.170.0") >= 0;

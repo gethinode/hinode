@@ -1,9 +1,13 @@
 {{- $error := false -}}
-{{- $transpiler := site.Params.main.build.transpiler | default "libsass" -}}
+{{- $supportsLibSass := lt hugo.Version "0.170.0" -}}
+{{- $transpiler := site.Params.main.build.transpiler | default (cond $supportsLibSass "libsass" "dartsass") -}}
 {{- $silence := slice -}}
 {{- $supportedTranspilers := slice "libsass" "dartsass" -}}
 {{- if not (in $supportedTranspilers $transpiler) -}}
     {{- errorf "partial [head/stylesheet.html] - Invalid value for param 'transpiler': %s" $transpiler -}}
+    {{ $error = true }}
+{{- else if and (eq $transpiler "libsass") (not $supportsLibSass) -}}
+    {{- errorf "partial [head/stylesheet.html] - Param 'main.build.transpiler' cannot be set to 'libsass' on Hugo 0.170.0 or later. Set it to 'dartsass' and install the Dart Sass CLI." -}}
     {{ $error = true }}
 {{- end -}}
 {{- if site.Params.main.build.silenceDeprecations -}}

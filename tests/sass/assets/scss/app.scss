@@ -1,0 +1,4 @@
+$fixture-color: #123456;
+
+:hinode-theme { --fixture-color: #{$fixture-color}; }
+.libsass-fixture { color: $fixture-color; }
