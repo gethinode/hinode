@@ -123,15 +123,20 @@ const parse = html => {
 }
 
 let destination
-let html
+const pages = new Map()
 before(() => {
   destination = mkdtempSync(path.join(os.tmpdir(), 'hinode-clipboard-'))
+  const overlay = path.join(root, 'tests', 'command', 'highlighted.toml')
   // One command string through the shell, as package.json runs hugo.
-  const command = `hugo -s "${site}" --logLevel error -d "${destination}"`
-  const result = spawnSync(command, { cwd: root, encoding: 'utf8', shell: true })
-  if (result.error) throw result.error
-  assert.equal(result.status, 0, `hugo build failed:\n${result.stdout}\n${result.stderr}`)
-  html = readFileSync(path.join(destination, 'commands', 'index.html'), 'utf8')
+  for (const mode of ['plain', 'highlighted']) {
+    const config = mode === 'plain' ? '' : ` --config "${path.join(site, 'hugo.toml')},${overlay}"`
+    const output = path.join(destination, mode)
+    const command = `hugo -s "${site}" --logLevel error -d "${output}"${config}`
+    const result = spawnSync(command, { cwd: root, encoding: 'utf8', shell: true })
+    if (result.error) throw result.error
+    assert.equal(result.status, 0, `${mode}: Hugo build failed:\n${result.stdout}\n${result.stderr}`)
+    pages.set(mode, readFileSync(path.join(output, 'commands', 'index.html'), 'utf8'))
+  }
 })
 
 after(() => {
@@ -139,8 +144,8 @@ after(() => {
 })
 
 // Loads the page, runs clipboard.js on it and clicks the copy button of code block `index`.
-const copy = async index => {
-  const document = parse(html)
+const copy = async (index, mode = 'plain') => {
+  const document = parse(pages.get(mode))
   const written = []
   const clipboard = { writeText: text => { written.push(text); return Promise.resolve() } }
   const context = vm.createContext({
@@ -154,9 +159,11 @@ const copy = async index => {
   return written[0]
 }
 
-test('copies only commands, skipping (out) lines', async () => {
-  assert.equal(await copy(0), 'echo "$PWD/work/warehouse/jaffle.duckdb"')
-})
+for (const mode of ['plain', 'highlighted']) {
+  test(`${mode}: copies the real inline comment and skips output`, async () => {
+    assert.equal(await copy(0, mode), 'echo "$PWD/work/warehouse/jaffle.duckdb" # local database')
+  })
+}
 
 test('copies multi-line command with continuation', async () => {
   assert.equal(await copy(1), 'Get-ChildItem -Path . `\n-Filter *.duckdb')
@@ -176,4 +183,8 @@ test('copies a plain code block in full', async () => {
 
 test('copies every command of a block that interleaves commands and output', async () => {
   assert.equal(await copy(5), 'cd /tmp\nls -la\necho one\necho two\npwd')
+})
+
+test('copies highlighted and plain commands in order and skips output', async () => {
+  assert.equal(await copy(5, 'highlighted'), 'cd /tmp\nls -la\necho one\necho two\npwd')
 })

@@ -3,7 +3,7 @@ title: Clipboard fixtures
 ---
 
 {{< command shell="bash" >}}
-echo "$PWD/work/warehouse/jaffle.duckdb"
+echo "$PWD/work/warehouse/jaffle.duckdb" # local database
 (out)/home/<you>/examples/jaffle/work/warehouse/jaffle.duckdb
 {{< /command >}}
 
