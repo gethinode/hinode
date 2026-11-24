@@ -129,7 +129,7 @@
     "markdownlint-cli2": "^0.24.2",
     "netlify-plugin-hugo-cache-resources": "^0.2.1",
     "npm-run-all": "^4.1.5",
-    "parse5": "6.0.1",
+    "parse5": "8.1.1",
     "replace-in-files-cli": "^4.0.0",
     "semantic-release": "^26.0.1",
     "shx": "^0.4.0",
