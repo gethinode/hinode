@@ -1,0 +1,24 @@
+baseURL = 'https://example.org/'
+disableKinds = ['taxonomy', 'term', 'RSS', 'sitemap']
+
+[params.main.build]
+  transpiler = ''
+
+[[module.mounts]]
+  source = 'assets'
+  target = 'assets'
+[[module.mounts]]
+  source = 'layouts'
+  target = 'layouts'
+[[module.mounts]]
+  source = '../../layouts/_partials/head'
+  target = 'layouts/_partials/head'
+[[module.mounts]]
+  source = '../../layouts/_partials/utilities/ToStringSlice.html'
+  target = 'layouts/_partials/utilities/ToStringSlice.html'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/layouts/_partials/utilities'
+  target = 'layouts/_partials/utilities'
+[[module.mounts]]
+  source = '../../_vendor/github.com/gethinode/mod-utils/v6/data/structures'
+  target = 'data/structures'
