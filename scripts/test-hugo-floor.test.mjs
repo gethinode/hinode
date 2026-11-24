@@ -78,8 +78,16 @@ test('importing helpers from eval with data arguments stays passive', () => {
 test('CSS proof requires a real retained rule and removal of an unused rule', () => {
   assert.equal(typeof floor.assertFloorCSS, 'function')
   const markers = { kept: 'floor-kept-test', unused: 'floor-unused-test' }
-  assert.doesNotThrow(() => floor.assertFloorCSS('.other,.floor-kept-test{color:#010203}', markers))
+  const rules = `
+    .form-check-input[type=checkbox],.form-check-input[type=radio]{border-radius:4px}
+    .form-check-input:checked[type="checkbox"],.form-check-input:checked[type=radio]{background-image:url(icon.svg)}
+    h1[class*="display-"],[class*=display-].h1{margin-top:0}
+  `
+  assert.doesNotThrow(() => floor.assertFloorCSS(`.other,.floor-kept-test{color:#010203}${rules}`, markers))
   assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}.floor-unused-test{color:blue}', markers), /unused probe rule survived/)
+  assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}.floor-unused-test[type=checkbox]{color:blue}', markers),
+    /unused attribute probe rule survived/)
+  assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}', markers), /required attribute selector missing/)
   assert.throws(() => floor.assertFloorCSS('/* .floor-kept-test{} */.other{content:".floor-kept-test"}', markers), /retained probe rule missing/)
   assert.throws(() => floor.assertFloorCSS('', markers), /retained probe rule missing/)
 })

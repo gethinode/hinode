@@ -55,10 +55,23 @@ export function assertFloorBuild (output, status) {
 export function assertFloorCSS (css, { kept, unused }) {
   const selectors = new Set()
   postcss.parse(css).walkRules(rule => {
-    for (const selector of rule.selector.split(',')) selectors.add(selector.trim())
+    for (const selector of rule.selector.split(',')) {
+      selectors.add(selector.trim().replace(/=(["'])([\w-]+)\1\]/g, '=$2]'))
+    }
   })
   assert.ok(selectors.has(`.${kept}`), 'retained probe rule missing from production CSS')
   assert.ok(!selectors.has(`.${unused}`), 'unused probe rule survived production purge')
+  assert.ok(!selectors.has(`.${unused}[type=checkbox]`), 'unused attribute probe rule survived production purge')
+  for (const selector of [
+    '.form-check-input[type=checkbox]',
+    '.form-check-input[type=radio]',
+    '.form-check-input:checked[type=checkbox]',
+    '.form-check-input:checked[type=radio]',
+    'h1[class*=display-]',
+    '[class*=display-].h1'
+  ]) {
+    assert.ok(selectors.has(selector), `required attribute selector missing from production CSS: ${selector}`)
+  }
 }
 
 function run (command, args, options = {}) {
@@ -98,9 +111,33 @@ function createCSSProbe (root, scratch, resolved) {
   mkdirSync(pageDir, { recursive: true })
   const localStyle = path.join(root, 'exampleSite/assets/scss/theme/theme.scss')
   const style = readFileSync(existsSync(localStyle) ? localStyle : path.join(root, 'assets/scss/theme/theme.scss'), 'utf8')
-  writeFileSync(path.join(assets, 'scss/theme/theme.scss'), `${style}\n.${markers.kept}{color:rgb(1,2,3)}\n.${markers.unused}{color:rgb(4,5,6)}\n`)
+  writeFileSync(path.join(assets, 'scss/theme/theme.scss'), [
+    style,
+    `.${markers.kept}{color:rgb(1,2,3)}`,
+    `.${markers.unused}{color:rgb(4,5,6)}`,
+    `.${markers.unused}[type=checkbox]{color:rgb(7,8,9)}`,
+    ''
+  ].join('\n'))
   writeFileSync(path.join(pageDir, 'index.md'),
-    `+++\ntitle = "PostCSS floor probe"\n+++\n\n## Retained rule {.${markers.kept}}\n`)
+    `+++
+title = "PostCSS floor probe"
++++
+
+## Retained rule {.${markers.kept}}
+
+{{< floor-css-probe.inline >}}
+<div class="form-check">
+  <input class="form-check-input" id="probe-checkbox" type="checkbox" checked>
+  <label class="form-check-label" for="probe-checkbox">Checked checkbox</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" id="probe-radio" type="radio" checked>
+  <label class="form-check-label" for="probe-radio">Selected radio button</label>
+</div>
+<h1 class="display-4">Display heading</h1>
+<p class="h1 display-4">Display heading style</p>
+{{< /floor-css-probe.inline >}}
+`)
   const mounts = resolved.module?.mounts
   assert.ok(Array.isArray(mounts), 'floor source mounts missing')
   const language = mounts.find(mount => mount.target === 'content')
@@ -145,6 +182,7 @@ if (runAsMain) {
     const stylesheets = readdirSync(cssDir).filter(name => name.endsWith('.css'))
     assert.ok(stylesheets.length, 'production CSS output missing')
     assertFloorCSS(stylesheets.map(filename => readFileSync(path.join(cssDir, filename), 'utf8')).join('\n'), probe.markers)
+    console.log('PASS production CSS retains required type and class attribute selectors')
     const classes = JSON.parse(readFileSync(path.join(site, 'hugo_stats.json'), 'utf8')).htmlElements.classes
     assert.ok(classes.includes(probe.markers.kept) && !classes.includes(probe.markers.unused), 'fresh probe stats missing')
     console.log('PASS Hugo extended 0.158.0 production PostCSS build')
