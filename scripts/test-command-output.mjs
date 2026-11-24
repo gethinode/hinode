@@ -9,6 +9,7 @@ import { spawnSync } from 'node:child_process'
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import * as parse5 from 'parse5'
 import { after, before, test } from 'node:test'
 import { fileURLToPath } from 'node:url'
 
@@ -19,9 +20,12 @@ let destination
 before(() => {
   destination = mkdtempSync(path.join(os.tmpdir(), 'hinode-command-'))
   // One command string through the shell, as package.json runs hugo.
-  const command = `hugo -s "${site}" --logLevel error -d "${destination}"`
-  const result = spawnSync(command, { cwd: root, encoding: 'utf8', shell: true })
-  assert.equal(result.status, 0, `hugo build failed:\n${result.stdout}\n${result.stderr}`)
+  for (const mode of ['plain', 'highlighted']) {
+    const config = mode === 'plain' ? '' : ` --config "${path.join(site, 'hugo.toml')},${path.join(site, 'highlighted.toml')}"`
+    const command = `hugo -s "${site}" --logLevel error -d "${path.join(destination, mode)}"${config}`
+    const result = spawnSync(command, { cwd: root, encoding: 'utf8', shell: true })
+    assert.equal(result.status, 0, `${mode}: Hugo build failed:\n${result.stdout}\n${result.stderr}`)
+  }
 })
 
 after(() => {
@@ -30,8 +34,8 @@ after(() => {
 
 // Splits a page's single command block into its prompt-column spans and its Chroma lines. A
 // prompt is the span's data-prompt value, or null for a span without one (an output line).
-function parseBlock (page) {
-  const html = readFileSync(path.join(destination, page, 'index.html'), 'utf8')
+function parseBlock (page, mode = 'plain') {
+  const html = readFileSync(path.join(destination, mode, page, 'index.html'), 'utf8')
   const column = html.match(/<span class="command-line-prompt">((?:<span(?: data-prompt="[^"]*")?><\/span>)*)<\/span>/)
   assert.ok(column, `${page}: no prompt column`)
   assert.equal(html.match(/class="command-line-prompt"/g).length, 1, `${page}: one prompt column`)
@@ -43,6 +47,45 @@ function parseBlock (page) {
     return { classes, html: chunk.replace(/<\/code>[\s\S]*$/, '') }
   })
   return { prompts, lines }
+}
+
+function lineText (line) {
+  const text = node => node.nodeName === '#text' ? node.value : (node.childNodes ?? []).map(text).join('')
+  return text(parse5.parseFragment(line.html)).replace(/\n$/, '')
+}
+
+test('real comments survive and only the synthetic output marker is removed', () => {
+  const { lines } = parseBlock('quoted-output')
+  assert.deepEqual(lines.map(lineText), [
+    'echo "done" # a real comment',
+    '#literal',
+    'echo "open',
+    'b"'
+  ])
+})
+
+test('SQL comments and literal double-dash output survive', () => {
+  const { lines } = parseBlock('sql')
+  assert.equal(lineText(lines[1]), 'b FROM t; -- a real SQL comment')
+  assert.equal(lineText(lines[2]), '-- a literal output marker')
+})
+
+test('output inside a heredoc loses the synthetic marker', () => {
+  const { lines } = parseBlock('tokens')
+  assert.equal(lineText(lines[3]), 'inside a heredoc')
+})
+
+for (const [page, expected] of [
+  ['quoted-output', ['$', null, '$', null]],
+  ['tokens', ['$', null, '$', null, '$']]
+]) {
+  test(`${page}: highlighted rows keep Chroma classes and aligned prompts`, () => {
+    const { prompts, lines } = parseBlock(page, 'highlighted')
+    assert.deepEqual(prompts, expected)
+    assert.equal(lines.length, expected.length)
+    assert.deepEqual(lines.map(line => line.classes.includes('hl')), expected.map((_, index) => index < 4))
+    assert.deepEqual(lines.map(line => line.classes.includes('command-output')), expected.map(prompt => prompt === null))
+  })
 }
 
 // Each fixture page with the prompt the shortcode gives each of its lines, null for output.
@@ -96,7 +139,7 @@ test('output lines are marked whatever token the lexer gave them', () => {
 // with a [data-bs-theme] selector compiles to a top-level rule, so it is counted here and
 // rejected by the selector checks in the last test.
 function topLevelRules () {
-  const css = readFileSync(path.join(destination, 'scss', 'command.css'), 'utf8')
+  const css = readFileSync(path.join(destination, 'plain', 'scss', 'command.css'), 'utf8')
     .replace(/\/\*[\s\S]*?\*\//g, '')
   const rules = []
   let depth = 0
