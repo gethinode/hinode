@@ -27,9 +27,7 @@ if (params.webshare) {
 
       // show button if it supports webShareAPI
       btn.style.display = 'block'
-      btn.addEventListener('click', () =>
-        webShareAPI(title, description, url)
-      )
+      btn.addEventListener('click', () => webShareAPI(title, description, url))
     } else {
       // hide button if host does not support Web Share API
       btn.style.display = 'none'
