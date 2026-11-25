@@ -13,6 +13,10 @@ const purgecss = purgeCSSPlugin({
     'data-bs-theme-animate',
     'data-transparent',
     'role',
+    // Bootstrap form checks and mod-blocks display headings rely on these
+    // attributes, which Hugo's build stats do not record.
+    'type',
+    'class',
     // Command component (components/_command.scss): prompt text rendered via
     // `content: attr(data-prompt)` / `attr(data-continuation-prompt)` — the
     // attributes only ever appear as CSS attribute selectors, never as
