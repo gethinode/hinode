@@ -54,7 +54,8 @@ export function assertFloorBuild (output, status) {
 
 export function assertFloorCSS (css, { kept, unused }) {
   const selectors = new Set()
-  postcss.parse(css).walkRules(rule => {
+  const stylesheet = postcss.parse(css)
+  stylesheet.walkRules(rule => {
     for (const selector of rule.selector.split(',')) {
       selectors.add(selector.trim().replace(/=(["'])([\w-]+)\1\]/g, '=$2]'))
     }
@@ -71,6 +72,26 @@ export function assertFloorCSS (css, { kept, unused }) {
     '[class*=display-].h1'
   ]) {
     assert.ok(selectors.has(selector), `required attribute selector missing from production CSS: ${selector}`)
+  }
+
+  const cssWideKeywords = new Set(['inherit', 'initial', 'revert', 'revert-layer', 'unset'])
+  const caretBorders = new Set()
+  stylesheet.walkRules(/\.dropdown-toggle(?:-split)?:{1,2}(?:before|after)\b/, rule => {
+    const caretSelectors = rule.selectors.map(selector => selector.replace(/::/g, ':'))
+    rule.walkDecls(/^border(?:-|$)/, declaration => {
+      const values = declaration.value.toLowerCase().split(/\s+/)
+      assert.ok(values.length === 1 || !values.some(value => cssWideKeywords.has(value)),
+        `invalid dropdown caret border in production CSS: ${rule.selector}{${declaration.prop}:${declaration.value}}`)
+      for (const selector of caretSelectors) caretBorders.add(selector)
+    })
+  })
+  for (const selector of [
+    '.dropdown-toggle:after',
+    '.dropup .dropdown-toggle:after',
+    '.dropend .dropdown-toggle:after',
+    '.dropstart .dropdown-toggle:before'
+  ]) {
+    assert.ok(caretBorders.has(selector), `dropdown caret border missing from production CSS: ${selector}`)
   }
 }
 
@@ -136,6 +157,10 @@ title = "PostCSS floor probe"
 </div>
 <h1 class="display-4">Display heading</h1>
 <p class="h1 display-4">Display heading style</p>
+<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropdown</button>
+<div class="dropup"><button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropup</button></div>
+<div class="dropend"><button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropend</button></div>
+<div class="dropstart"><button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropstart</button></div>
 {{< /floor-css-probe.inline >}}
 `)
   const mounts = resolved.module?.mounts
@@ -183,6 +208,7 @@ if (runAsMain) {
     assert.ok(stylesheets.length, 'production CSS output missing')
     assertFloorCSS(stylesheets.map(filename => readFileSync(path.join(cssDir, filename), 'utf8')).join('\n'), probe.markers)
     console.log('PASS production CSS retains required type and class attribute selectors')
+    console.log('PASS production dropdown caret border declarations')
     const classes = JSON.parse(readFileSync(path.join(site, 'hugo_stats.json'), 'utf8')).htmlElements.classes
     assert.ok(classes.includes(probe.markers.kept) && !classes.includes(probe.markers.unused), 'fresh probe stats missing')
     console.log('PASS Hugo extended 0.158.0 production PostCSS build')
