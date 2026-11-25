@@ -83,7 +83,16 @@ test('CSS proof requires a real retained rule and removal of an unused rule', ()
     .form-check-input:checked[type="checkbox"],.form-check-input:checked[type=radio]{background-image:url(icon.svg)}
     h1[class*="display-"],[class*=display-].h1{margin-top:0}
   `
-  assert.doesNotThrow(() => floor.assertFloorCSS(`.other,.floor-kept-test{color:#010203}${rules}`, markers))
+  const required = `.other,.floor-kept-test{color:#010203}${rules}`
+  const caret = '.dropdown-toggle::after{border-width:.3em .3em 0;border-color:currentcolor transparent;border-image:inherit}'
+  const directions = `
+    .dropup .dropdown-toggle:after{border-bottom:.3em solid}
+    .dropend .dropdown-toggle:after,.dropstart .dropdown-toggle:before{border-left:.3em solid}
+  `
+  assert.doesNotThrow(() => floor.assertFloorCSS(required + caret + directions, markers))
+  assert.throws(() => floor.assertFloorCSS(required + caret, markers), /dropdown caret border missing.*\.dropup/)
+  assert.throws(() => floor.assertFloorCSS(required + caret + directions + '.dropup .dropdown-toggle:after{border-color:initial transparent}',
+    markers), /invalid dropdown caret border/)
   assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}.floor-unused-test{color:blue}', markers), /unused probe rule survived/)
   assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}.floor-unused-test[type=checkbox]{color:blue}', markers),
     /unused attribute probe rule survived/)

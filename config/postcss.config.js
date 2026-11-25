@@ -153,7 +153,9 @@ const cssnano = require('cssnano')({
   // Default preset: structural minification (rule/declaration merging) that Hugo's own
   // minify does not do. The `advanced` preset was measured to add < 0.2% over `default`,
   // so it — and the cssnano-preset-advanced dependency — was dropped.
-  preset: 'default'
+  // Preserve the caret's separate borders. Hugo's final minifier can turn
+  // border-color:currentcolor transparent into invalid border-color:initial transparent.
+  preset: ['default', { mergeLonghand: false }]
 })
 
 module.exports = {
