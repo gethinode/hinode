@@ -113,6 +113,51 @@ $fill-outline-buttons: ();
     }
 }
 
+@mixin fill-subtle-link-fallback($name, $property, $ink) {
+    $fallback: "--#{$prefix}fill-#{$name}-subtle-#{$property}";
+
+    // Reset the fallback at a light-mode boundary. A nested dark section can
+    // then supply its own fallback, regardless of the page's color mode.
+    @include color-mode(dark) {
+        #{$fallback}: #{$ink};
+        #{$fallback}-rgb: #{to-rgb($ink)};
+    }
+
+    @include color-mode(light) {
+        #{$fallback}: initial;
+        #{$fallback}-rgb: initial;
+    }
+
+    .fill-#{$name}-subtle:not([data-bs-theme="light"]) {
+        --#{$prefix}#{$property}: var(#{$fallback}, inherit);
+        --#{$prefix}#{$property}-rgb: var(#{$fallback}-rgb, inherit);
+    }
+}
+
+@mixin fill-subtle-dark-links($name) {
+    $subtle: map-get($fill-subtle-dark-values, $name);
+
+    // Ordinary links use Bootstrap's link ink, not the color that names the fill.
+    $low-link-contrast: contrast-ratio($subtle, $link-color-dark) < $min-contrast-ratio;
+    $low-hover-contrast: contrast-ratio($subtle, $link-hover-color-dark) < $min-contrast-ratio;
+
+    @if $low-link-contrast or $low-hover-contrast {
+        $ink: $body-color-dark;
+
+        @if contrast-ratio($subtle, $ink) < $min-contrast-ratio {
+            $ink: color-contrast($subtle);
+        }
+
+        @if $low-link-contrast {
+            @include fill-subtle-link-fallback($name, "link-color", $ink);
+        }
+
+        @if $low-hover-contrast {
+            @include fill-subtle-link-fallback($name, "link-hover-color", $ink);
+        }
+    }
+}
+
 // Light mode
 @each $name, $value in $theme-colors {
     $ink: color-contrast($value);
@@ -156,6 +201,8 @@ $fill-outline-buttons: ();
         .fill-#{$name}-subtle[data-bs-theme="dark"] {
             @include fill-subtle-dark-buttons($name, $dark-fill);
         }
+
+        @include fill-subtle-dark-links($name);
 
         // `text-bg-*` shares an element with `fill-*`, so a section that carries its
         // own mode needs its own ink, whatever the page's mode.
