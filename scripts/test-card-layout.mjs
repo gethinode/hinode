@@ -5,6 +5,63 @@ import { chromium } from 'playwright'
 const bandNames = ['media', 'title', 'subtitle', 'highlight', 'body', 'footer']
 const tolerance = 1
 
+async function readLinkColors (card) {
+  return card.evaluate(element => [
+    '.card-title',
+    '.card-text-subtitle',
+    '.card-text-highlight'
+  ].map(selector => getComputedStyle(element.querySelector(selector)).color))
+}
+
+async function verifyCardLinkColors (page, origin) {
+  const example = '/en/card-hover-demo/'
+  const response = await page.goto(origin + example, { timeout: 20000 })
+  assert.equal(response?.status(), 200, `could not load ${example} from the example build`)
+  const aligned = page.locator('.card.card-align-rows')
+  const ordinary = page.locator('.card:not(.card-align-rows)')
+  const heading = page.locator('#aligned-cards')
+  const variants = ['Primary', 'Warning', 'Adaptive', 'Zoom', 'Plain']
+  page.setDefaultTimeout(5000)
+  await page.evaluate(async () => { await document.fonts.ready })
+
+  for (const mode of ['light', 'dark']) {
+    await page.locator('html').evaluate((root, theme) => { root.dataset.bsTheme = theme }, mode)
+    for (const name of variants) {
+      const title = page.getByText(name, { exact: true }).and(page.locator('.card-title'))
+      const card = aligned.filter({ has: title })
+      const control = ordinary.filter({ has: title })
+      const label = `${mode} ${name}`
+      const link = card.locator('a.stretched-link')
+      const controlLink = control.locator('a.stretched-link')
+
+      await heading.hover()
+      const resting = await readLinkColors(card)
+      assert.deepEqual(resting, await readLinkColors(control), `${label}: resting color mismatch`)
+
+      await controlLink.hover()
+      const hovered = await readLinkColors(control)
+      assert.equal(hovered[0] !== resting[0], name !== 'Plain', `${label}: control hover did not exercise the expected state`)
+      await link.hover()
+      assert.deepEqual(await readLinkColors(card), hovered, `${label}: aligned hover colors`)
+
+      await heading.hover()
+      await controlLink.focus()
+      const focused = await readLinkColors(control)
+      assert.deepEqual(focused, hovered, `${label}: control focus colors`)
+      await link.focus()
+      assert.deepEqual(await readLinkColors(card), focused, `${label}: aligned focus colors`)
+      await link.evaluate(element => element.blur())
+      assert.deepEqual(await readLinkColors(card), resting, `${label}: resting colors after interaction`)
+    }
+
+    const unlinked = aligned.filter({ hasText: 'Unlinked' })
+    const resting = await readLinkColors(unlinked)
+    await unlinked.hover()
+    assert.deepEqual(await readLinkColors(unlinked), resting, `${mode}: unlinked card changed colors`)
+  }
+  console.log('PASS aligned card link colors on hover and focus in light and dark mode')
+}
+
 export async function verifyCardLayout (publicDir) {
   const origin = 'https://hinode.test'
   const browser = await chromium.launch()
@@ -72,6 +129,7 @@ export async function verifyCardLayout (publicDir) {
       assert.ok(varies, `${example}: expected a group with unequal body heights`)
       console.log(`PASS six-band card layout in ${example} (${groups.length} visible groups)`)
     }
+    await verifyCardLinkColors(page, origin)
   } finally {
     await browser.close()
   }

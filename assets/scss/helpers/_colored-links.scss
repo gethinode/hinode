@@ -34,6 +34,8 @@ $custom-colors: (
             color: $emphasize-color if($enable-important-utilities, !important, null);
         }
     }
+
+    @include aligned-card-link-color("link-bg-#{$color}", $emphasize-color);
 }
 
 // scss-docs-end colored-links
