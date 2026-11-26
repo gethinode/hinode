@@ -89,8 +89,25 @@ test('CSS proof requires a real retained rule and removal of an unused rule', ()
     .dropup .dropdown-toggle:after{border-bottom:.3em solid}
     .dropend .dropdown-toggle:after,.dropstart .dropdown-toggle:before{border-left:.3em solid}
   `
-  assert.doesNotThrow(() => floor.assertFloorCSS(required + caret + directions, markers))
+  const fallback = `
+    [data-bs-theme=dark]{
+      --bs-fill-primary-subtle-link-color:#dee2e6;--bs-fill-primary-subtle-link-color-rgb:222,226,230;
+      --bs-fill-primary-subtle-link-hover-color:#dee2e6;--bs-fill-primary-subtle-link-hover-color-rgb:222,226,230
+    }
+    [data-bs-theme=light]{
+      --bs-fill-primary-subtle-link-color:initial;--bs-fill-primary-subtle-link-color-rgb:initial;
+      --bs-fill-primary-subtle-link-hover-color:initial;--bs-fill-primary-subtle-link-hover-color-rgb:initial
+    }
+    .fill-primary-subtle:not([data-bs-theme=light]){
+      --bs-link-color:var(--bs-fill-primary-subtle-link-color,inherit);
+      --bs-link-color-rgb:var(--bs-fill-primary-subtle-link-color-rgb,inherit);
+      --bs-link-hover-color:var(--bs-fill-primary-subtle-link-hover-color,inherit);
+      --bs-link-hover-color-rgb:var(--bs-fill-primary-subtle-link-hover-color-rgb,inherit)
+    }
+  `
+  assert.doesNotThrow(() => floor.assertFloorCSS(required + caret + directions + fallback, markers))
   assert.throws(() => floor.assertFloorCSS(required + caret, markers), /dropdown caret border missing.*\.dropup/)
+  assert.throws(() => floor.assertFloorCSS(required + caret + directions, markers), /dark primary subtle link fallback missing/)
   assert.throws(() => floor.assertFloorCSS(required + caret + directions + '.dropup .dropdown-toggle:after{border-color:initial transparent}',
     markers), /invalid dropdown caret border/)
   assert.throws(() => floor.assertFloorCSS('.floor-kept-test{color:red}.floor-unused-test{color:blue}', markers), /unused probe rule survived/)

@@ -55,9 +55,24 @@ export function assertFloorBuild (output, status) {
 export function assertFloorCSS (css, { kept, unused }) {
   const selectors = new Set()
   const stylesheet = postcss.parse(css)
+  const darkSubtleLink = new Map()
+  const lightSubtleLink = new Map()
+  const subtleLink = new Map()
+  const linkScopes = new Map([
+    ['[data-bs-theme=dark]', darkSubtleLink],
+    ['[data-bs-theme=light]', lightSubtleLink],
+    ['.fill-primary-subtle:not([data-bs-theme=light])', subtleLink]
+  ])
   stylesheet.walkRules(rule => {
     for (const selector of rule.selector.split(',')) {
-      selectors.add(selector.trim().replace(/=(["'])([\w-]+)\1\]/g, '=$2]'))
+      const normalized = selector.trim().replace(/=(["'])([\w-]+)\1\]/g, '=$2]')
+      selectors.add(normalized)
+      const linkScope = linkScopes.get(normalized)
+      if (linkScope) {
+        rule.walkDecls(/^--bs-(?:fill-primary-subtle-)?link-/, declaration => {
+          linkScope.set(declaration.prop, declaration.value.replace(/\s/g, ''))
+        })
+      }
     }
   })
   assert.ok(selectors.has(`.${kept}`), 'retained probe rule missing from production CSS')
@@ -92,6 +107,12 @@ export function assertFloorCSS (css, { kept, unused }) {
     '.dropstart .dropdown-toggle:before'
   ]) {
     assert.ok(caretBorders.has(selector), `dropdown caret border missing from production CSS: ${selector}`)
+  }
+  for (const property of ['--bs-link-color', '--bs-link-color-rgb', '--bs-link-hover-color', '--bs-link-hover-color-rgb']) {
+    const fallback = property.replace('--bs-', '--bs-fill-primary-subtle-')
+    assert.ok(darkSubtleLink.has(fallback), `dark primary subtle link fallback missing from production CSS: ${property}`)
+    assert.equal(lightSubtleLink.get(fallback), 'initial', `light mode must reset ${fallback}`)
+    assert.equal(subtleLink.get(property), `var(${fallback},inherit)`, `subtle fill must use or inherit ${property}`)
   }
 }
 
@@ -161,6 +182,7 @@ title = "PostCSS floor probe"
 <div class="dropup"><button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropup</button></div>
 <div class="dropend"><button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropend</button></div>
 <div class="dropstart"><button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropstart</button></div>
+<div class="bg-primary-subtle fill-primary-subtle"><a href="#contrast">Dark subtle link</a></div>
 {{< /floor-css-probe.inline >}}
 `)
   const mounts = resolved.module?.mounts
@@ -198,7 +220,13 @@ if (runAsMain) {
       '--source', site, '--configDir', configDir, '--config', probe.config,
       '--destination', path.join(scratch, 'public')], {
       // An empty parent cwd prevents root-site stats from masking an incorrect adapter cwd.
-      cwd: scratch, env: { ...process.env, HUGO_RESOURCEDIR: path.join(scratch, 'resources') }
+      cwd: scratch,
+      env: {
+        ...process.env,
+        // Both accent link colors need fallback ink on this palette's dark fill.
+        HUGO_PARAMS_STYLE_PRIMARY: '#15122a',
+        HUGO_RESOURCEDIR: path.join(scratch, 'resources')
+      }
     })
     process.stdout.write(build.stdout)
     process.stderr.write(build.stderr)
@@ -209,6 +237,7 @@ if (runAsMain) {
     assertFloorCSS(stylesheets.map(filename => readFileSync(path.join(cssDir, filename), 'utf8')).join('\n'), probe.markers)
     console.log('PASS production CSS retains required type and class attribute selectors')
     console.log('PASS production dropdown caret border declarations')
+    console.log('PASS production dark subtle link fallback')
     const classes = JSON.parse(readFileSync(path.join(site, 'hugo_stats.json'), 'utf8')).htmlElements.classes
     assert.ok(classes.includes(probe.markers.kept) && !classes.includes(probe.markers.unused), 'fresh probe stats missing')
     console.log('PASS Hugo extended 0.158.0 production PostCSS build')
