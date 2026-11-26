@@ -216,9 +216,10 @@ if (runAsMain) {
     assert.equal(config.status, 0, `floor config command failed: ${config.stderr}`)
     process.stderr.write(config.stderr)
     const probe = createCSSProbe(root, scratch, JSON.parse(config.stdout))
+    const publicDir = path.join(scratch, 'public')
     const build = run(binary, ['--gc', '--minify', '--logLevel', 'info', '--environment', 'production',
       '--source', site, '--configDir', configDir, '--config', probe.config,
-      '--destination', path.join(scratch, 'public')], {
+      '--destination', publicDir], {
       // An empty parent cwd prevents root-site stats from masking an incorrect adapter cwd.
       cwd: scratch,
       env: {
@@ -231,7 +232,7 @@ if (runAsMain) {
     process.stdout.write(build.stdout)
     process.stderr.write(build.stderr)
     assertFloorBuild(`${build.stdout}\n${build.stderr}`, build.status)
-    const cssDir = path.join(scratch, 'public/css')
+    const cssDir = path.join(publicDir, 'css')
     const stylesheets = readdirSync(cssDir).filter(name => name.endsWith('.css'))
     assert.ok(stylesheets.length, 'production CSS output missing')
     assertFloorCSS(stylesheets.map(filename => readFileSync(path.join(cssDir, filename), 'utf8')).join('\n'), probe.markers)
@@ -241,6 +242,10 @@ if (runAsMain) {
     const classes = JSON.parse(readFileSync(path.join(site, 'hugo_stats.json'), 'utf8')).htmlElements.classes
     assert.ok(classes.includes(probe.markers.kept) && !classes.includes(probe.markers.unused), 'fresh probe stats missing')
     console.log('PASS Hugo extended 0.158.0 production PostCSS build')
+    if (process.argv.includes('--card-layout')) {
+      const { verifyCardLayout } = await import('./test-card-layout.mjs')
+      await verifyCardLayout(publicDir)
+    }
   } catch (error) {
     console.error(`Hugo floor check failed: ${error.message}`)
     process.exitCode = 1
