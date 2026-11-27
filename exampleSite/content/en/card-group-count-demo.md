@@ -11,7 +11,7 @@ build:
 
 ## Single card
 
-{{< card-group cols="1" wrapper="single-card-group-demo" header-style="none" footer-style="none" >}}
+{{< card-group cols="1" gutter="3" wrapper="single-card-group-demo" header-style="none" footer-style="none" >}}
 {{< card title="Alpha" href="/about/" >}}A card with **formatted text**.{{< /card >}}
 {{< /card-group >}}
 

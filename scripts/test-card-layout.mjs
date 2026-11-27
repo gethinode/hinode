@@ -166,6 +166,18 @@ async function verifyCardGroupCounts (page, origin) {
       assert.equal(await cards.locator(':scope > .card-band').count(), 6 * titles.length, `${name}: expected six bands per card`)
     }
     if (titles.length === 1) {
+      const { gutter, left, right } = await group.evaluate(element => {
+        const frame = element.getBoundingClientRect()
+        const card = element.querySelector('.card').getBoundingClientRect()
+        return {
+          gutter: getComputedStyle(element.firstElementChild).getPropertyValue('--bs-gutter-x').trim(),
+          left: card.left - frame.left,
+          right: frame.right - card.right
+        }
+      })
+      assert.ok(gutter, `${name}: gutter styles did not load`)
+      assert.ok(Math.abs(left) <= tolerance && Math.abs(right) <= tolerance,
+        `${name}: card extends beyond the group edges (left ${left}px, right ${right}px)`)
       assert.equal(await cards.getByRole('link', { name: new RegExp(titles[0]) }).count(), 1, `${name}: missing title link`)
       assert.deepEqual(await cards.locator('.card-text strong').allTextContents(), ['formatted text'],
         `${name}: nested card Markdown was not rendered as HTML`)
