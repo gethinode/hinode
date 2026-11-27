@@ -37,6 +37,8 @@
 {{ $linkType := or $args.linkType $args.buttonType }}
 
 {{ $inner := .Scratch.Get "inner" }}
+{{/* One card stores template.HTML, while the partial validates a string. */}}
+{{ with $inner }}{{ $inner = string . }}{{ end }}
 {{ $input := trim .Inner " \r\n" }}
 {{ if $input }}
     {{ $input = replace $input "\n" "\n  " }}

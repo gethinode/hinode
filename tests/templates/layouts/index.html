@@ -1304,8 +1304,7 @@ CARD SUBTITLE FAILURES: {{ $stFail }}
     rendered pages, because the inner cards resolve the group's arguments themselves and
     only a page runs that path: one has no gutter, so the cards sit directly in the row with
     no wrapper, and one holds a bento, a scroll, a horizontal and an `align-rows="false"`
-    group. Each of those groups has two cards, because a group with one inner card fails
-    its `cards` type check.
+    group.
 */ -}}
 {{- define "_partials/inline/test-align-cards.html" -}}
     {{- /* Checks every aligned card in .html; returns a list of problems (empty when fine). */ -}}

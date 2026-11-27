@@ -142,6 +142,50 @@ async function verifyImageOnlyCardSpacing (page, origin) {
   console.log('PASS image-only cards are full bleed and thumbnail cards with text retain their spacing')
 }
 
+async function verifyCardGroupCounts (page, origin) {
+  const example = '/en/card-group-count-demo/'
+  const response = await page.goto(origin + example, { timeout: 20000 })
+  assert.equal(response?.status(), 200, `could not load ${example} from the example build`)
+
+  assert.equal(await page.locator('#empty-group').count(), 1, 'expected the empty group fixture')
+  assert.equal(await page.locator('.empty-card-group-demo').count(), 0, 'empty group rendered a wrapper')
+
+  for (const [name, titles, aligned] of [
+    ['single-card-group-demo', ['Alpha'], false],
+    ['aligned-single-card-group-demo', ['Bravo'], true],
+    ['multi-card-group-demo', ['Charlie', 'Delta'], true]
+  ]) {
+    const group = page.locator(`.${name}`)
+    const cards = group.locator('.card')
+    assert.equal(await group.count(), 1, `${name}: expected one group wrapper`)
+    assert.equal(await cards.count(), titles.length, `${name}: unexpected card count`)
+    const renderedTitles = (await cards.locator('.card-title').allTextContents()).map(title => title.trim())
+    assert.deepEqual(renderedTitles, titles, `${name}: titles or order changed`)
+    assert.equal(await group.locator('.card-group-align-rows').count(), Number(aligned), `${name}: unexpected alignment`)
+    if (aligned) {
+      assert.equal(await cards.locator(':scope > .card-band').count(), 6 * titles.length, `${name}: expected six bands per card`)
+    }
+    if (titles.length === 1) {
+      const { gutter, left, right } = await group.evaluate(element => {
+        const frame = element.getBoundingClientRect()
+        const card = element.querySelector('.card').getBoundingClientRect()
+        return {
+          gutter: getComputedStyle(element.firstElementChild).getPropertyValue('--bs-gutter-x').trim(),
+          left: card.left - frame.left,
+          right: frame.right - card.right
+        }
+      })
+      assert.ok(gutter, `${name}: gutter styles did not load`)
+      assert.ok(Math.abs(left) <= tolerance && Math.abs(right) <= tolerance,
+        `${name}: card extends beyond the group edges (left ${left}px, right ${right}px)`)
+      assert.equal(await cards.getByRole('link', { name: new RegExp(titles[0]) }).count(), 1, `${name}: missing title link`)
+      assert.deepEqual(await cards.locator('.card-text strong').allTextContents(), ['formatted text'],
+        `${name}: nested card Markdown was not rendered as HTML`)
+    }
+  }
+  console.log('PASS empty, single and multiple nested card groups render as expected')
+}
+
 export async function verifyCardLayout (publicDir) {
   const origin = 'https://hinode.test'
   const browser = await chromium.launch()
@@ -211,6 +255,7 @@ export async function verifyCardLayout (publicDir) {
     }
     await verifyCardLinkColors(page, origin)
     await verifyImageOnlyCardSpacing(page, origin)
+    await verifyCardGroupCounts(page, origin)
   } finally {
     await browser.close()
   }
