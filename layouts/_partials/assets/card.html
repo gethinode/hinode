@@ -392,7 +392,7 @@
         {{- $padTitle = printf " pt-%d" $args.padding -}}
         {{- $padBody = printf " pb-%d" $args.padding -}}
     {{- end -}}
-    {{- $titleClass := cond (and $thumbnail (eq $args.headerStyle "none")) " pt-3" "" -}}
+    {{- $titleClass := cond (and $thumbnail (not $imgOnly) (eq $args.headerStyle "none")) " pt-3" "" -}}
     {{- $linkClass := "card-body-link" -}}
     {{- with $args.color }}{{ $linkClass = printf "link-bg-%s" . }}{{ end -}}
     {{- $cardTitle := cond $minimal "" $title -}}
@@ -419,7 +419,7 @@
         <div class="card-band card-band-title{{ $pad }}{{ $padTitle }}">
             {{- if $page }}{{ partial "inline/card-caption.html" (dict "page" $page "keywords" $args.headerStyle "color" $args.color) }}{{ end -}}
             {{- if $href -}}
-                <a href="{{ $href }}" class="{{ $linkClass }} stretched-link d-block{{ $titleClass }}"
+                <a href="{{ $href }}" class="{{ $linkClass }} stretched-link d-block{{ $titleClass }}{{ if and $thumbnail $imgOnly }} card-image-only-link{{ end }}"
                     {{- if and $ariaLabel (not (or $cardTitle $args.links)) }} aria-label="{{ $ariaLabel }}"{{ end }}>
                     {{- if or $cardTitle $args.links -}}
                         <p class="card-title fs-lg-5 fs-6">

@@ -214,6 +214,12 @@ div.card-container-wrapper::after {
 	scroll-snap-align: center;
 }
 
+// The stretched hit area carries the focus outline for an empty image link.
+.card-image-only-link:focus::after {
+    outline: auto;
+    outline-offset: -2px;
+}
+
 // Hover link icon: appears on card hover/focus to signal clickability
 .card-link-icon {
     display: inline-flex;
