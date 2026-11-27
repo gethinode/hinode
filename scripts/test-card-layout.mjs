@@ -62,6 +62,86 @@ async function verifyCardLinkColors (page, origin) {
   console.log('PASS aligned card link colors on hover and focus in light and dark mode')
 }
 
+async function decodeCardImage (card) {
+  const image = card.locator('.card-img-wrap img')
+  await image.scrollIntoViewIfNeeded()
+  assert.ok(await image.evaluate(async img => {
+    await img.decode()
+    return img.naturalWidth > 0
+  }), 'expected a decoded thumbnail')
+}
+
+async function verifyImageOnlyCardSpacing (page, origin) {
+  const example = '/en/card-image-spacing-demo/'
+  const response = await page.goto(origin + example, { timeout: 20000 })
+  assert.equal(response?.status(), 200, `could not load ${example} from the example build`)
+
+  const aligned = page.locator('.card.card-align-rows')
+  const ordinary = page.locator('.card:not(.card-align-rows)')
+  for (const [kind, cards] of [['aligned', aligned], ['ordinary', ordinary]]) {
+    for (const name of ['About the example', 'Meet the team']) {
+      const accessibleLink = page.getByRole('link', { name, exact: true })
+        .and(page.locator('a.stretched-link'))
+      const card = cards.filter({ has: accessibleLink })
+      const link = card.locator('a.stretched-link')
+      await decodeCardImage(card)
+      const geometry = await card.evaluate(element => {
+        const image = element.querySelector('.card-img-wrap img')
+        const link = element.querySelector('a.stretched-link')
+        const photo = image.getBoundingClientRect()
+        const hit = document.elementFromPoint(photo.left + photo.width / 2, photo.top + photo.height / 2)
+        const bottom = element.getBoundingClientRect().bottom - parseFloat(getComputedStyle(element).borderBottomWidth)
+        const bands = [...element.querySelectorAll(':scope > .card-band')]
+        return {
+          gap: bottom - photo.bottom,
+          imageHitsLink: hit?.closest('a') === link,
+          titlePadding: parseFloat(getComputedStyle(link).paddingTop),
+          emptyBands: bands.slice(1).map(band => band.getBoundingClientRect().height),
+          bandPadding: bands.map(band => ['top', 'right', 'bottom', 'left']
+            .map(side => parseFloat(getComputedStyle(band).getPropertyValue(`padding-${side}`))))
+        }
+      })
+
+      const label = `${kind} ${name}`
+      assert.ok(Math.abs(geometry.gap) <= tolerance, `${label}: ${geometry.gap}px gap below the image`)
+      assert.ok(geometry.imageHitsLink, `${label}: image center does not hit the stretched link`)
+      if (kind === 'aligned') {
+        assert.equal(geometry.titlePadding, 0, `${label}: image-only link padding`)
+        assert.deepEqual(geometry.emptyBands, [0, 0, 0, 0, 0], `${label}: empty band heights`)
+        assert.ok(geometry.bandPadding.flat().every(padding => padding === 0), `${label}: image-only band padding`)
+      }
+      await link.focus()
+      assert.ok(await link.evaluate(element => element === document.activeElement), `${label}: image link cannot receive focus`)
+      if (kind === 'aligned') {
+        const outline = await link.evaluate(element => {
+          const style = getComputedStyle(element, '::after')
+          return style.outlineStyle !== 'none' && parseFloat(style.outlineWidth) > 0
+        })
+        assert.ok(outline, `${label}: keyboard focus outline does not cover the image link`)
+      }
+      await link.evaluate(element => element.blur())
+    }
+  }
+
+  const caption = page.getByRole('link', { name: /About Hinode/ }).and(page.locator('a.stretched-link'))
+  const alignedCaption = aligned.filter({ has: caption })
+  const ordinaryCaption = ordinary.filter({ has: caption })
+  const bodyPadding = await ordinaryCaption.locator(':scope > .card-body').evaluate(element =>
+    parseFloat(getComputedStyle(element).paddingTop))
+  const linkPadding = await ordinaryCaption.locator('a.stretched-link').evaluate(element =>
+    parseFloat(getComputedStyle(element).paddingTop))
+  assert.ok(bodyPadding > 0 && linkPadding > 0, 'ordinary thumbnail card lost title spacing')
+  await decodeCardImage(alignedCaption)
+  const spacing = await alignedCaption.evaluate(element => {
+    const title = getComputedStyle(element.querySelector('.card-band-title'))
+    const link = getComputedStyle(element.querySelector('.card-band-title a'))
+    const body = getComputedStyle(element.querySelector('.card-band-body'))
+    return [title.paddingTop, title.paddingLeft, link.paddingTop, body.paddingBottom].map(parseFloat)
+  })
+  assert.deepEqual(spacing, [bodyPadding, bodyPadding, linkPadding, bodyPadding], 'aligned thumbnail card lost text padding')
+  console.log('PASS image-only cards are full bleed and thumbnail cards with text retain their spacing')
+}
+
 export async function verifyCardLayout (publicDir) {
   const origin = 'https://hinode.test'
   const browser = await chromium.launch()
@@ -130,6 +210,7 @@ export async function verifyCardLayout (publicDir) {
       console.log(`PASS six-band card layout in ${example} (${groups.length} visible groups)`)
     }
     await verifyCardLinkColors(page, origin)
+    await verifyImageOnlyCardSpacing(page, origin)
   } finally {
     await browser.close()
   }
