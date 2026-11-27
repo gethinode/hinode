@@ -25,6 +25,36 @@
     </span>
 {{- end -}}
 
+{{/* Render one Markdown paragraph, using Hugo's block output to retain the boundary. */}}
+{{- define "_partials/inline/card-markdown.html" -}}
+    {{- $html := .page.RenderString (dict "display" "block") .value | strings.TrimSpace -}}
+    {{- $inline := "" -}}
+    {{- $valid := not $html -}}
+    {{- if and (hasPrefix $html "<p>") (hasSuffix $html "</p>") -}}
+        {{- $inline = $html | strings.TrimPrefix "<p>" | strings.TrimSuffix "</p>" | strings.TrimSpace -}}
+        {{- $valid = true -}}
+        {{- /* Match tags with their quoted attributes and skip comments. Literal HTML in
+              a Markdown code span is escaped and cannot count as an element. */ -}}
+        {{- range findRE `(?is)<!--.*?-->|</?[a-z][a-z0-9:-]*(?:[^"'<>]|"[^"]*"|'[^']*')*>` $inline -}}
+            {{- if findRE `(?i)^</?(?:address|article|aside|blockquote|details|dialog|div|dl|fieldset|figure|footer|form|h[1-6]|header|hgroup|hr|main|menu|nav|ol|p|pre|search|section|table|ul)(?:[[:space:]/>])` . 1 -}}
+                {{- $valid = false -}}
+                {{- break -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if not $valid -}}
+        {{- $source := or .owner .page -}}
+        {{- partial "utilities/LogErr.html" (dict
+            "partial" "assets/card.html"
+            "msg" (printf "Card %s supports only inline Markdown" .field)
+            "details" (slice "Move block content to the card body.")
+            "file" $source.File
+        ) -}}
+        {{- $inline = "" -}}
+    {{- end -}}
+    {{- return ($inline | safeHTML) -}}
+{{- end -}}
+
 {{/* Inline partial to render the card's body */}}
 {{- define "_partials/inline/card-body.html" -}}
     {{- $page := .page -}}
@@ -53,8 +83,8 @@
                     {{- with $linkIcon -}}<span class="card-link-icon">{{- partial "assets/icon.html" (dict "page" $owner "icon" . "spacing" false) -}}</span>{{- end -}}
                 </p>
             {{ end -}}
-            {{ with $subtitle }}<p class="card-text-subtitle">{{ . | $page.RenderString }}</p>{{ end -}}
-            {{ with $highlight }}<p class="card-text-highlight">{{ . | $page.RenderString }}</p>{{ end -}}
+            {{ with $subtitle }}<p class="card-text-subtitle">{{ partial "inline/card-markdown.html" (dict "value" . "page" $page "owner" $owner "field" "subtitle") }}</p>{{ end -}}
+            {{ with $highlight }}<p class="card-text-highlight">{{ partial "inline/card-markdown.html" (dict "value" . "page" $page "owner" $owner "field" "highlight") }}</p>{{ end -}}
             {{ with $description }}
                 <div class="card-text {{ if $color }}link-bg-{{ $color }}{{ else }}card-body-link{{ end }}">
                 {{ . | safeHTML }}
@@ -69,8 +99,8 @@
                     {{ with $links }}{{ partial "inline/card-icons.html" (dict "links" . "page" $owner) }}{{ end -}}
                 </p>
             {{ end -}}
-            {{ with $subtitle }}<p class="card-text-subtitle">{{ . | $page.RenderString }}</p>{{ end -}}
-            {{ with $highlight }}<p class="card-text-highlight">{{ . | $page.RenderString }}</p>{{ end -}}
+            {{ with $subtitle }}<p class="card-text-subtitle">{{ partial "inline/card-markdown.html" (dict "value" . "page" $page "owner" $owner "field" "subtitle") }}</p>{{ end -}}
+            {{ with $highlight }}<p class="card-text-highlight">{{ partial "inline/card-markdown.html" (dict "value" . "page" $page "owner" $owner "field" "highlight") }}</p>{{ end -}}
             {{ with $description }}<div class="card-text">{{ . | safeHTML }}</div>{{ end -}}
         </div>
     {{- end -}}
@@ -437,10 +467,10 @@
             {{- end -}}
         </div>
         <div class="card-band card-band-subtitle{{ $pad }}">
-            {{- with $subtitle }}<p class="card-text-subtitle{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | $renderPage.RenderString }}</p>{{ end -}}
+            {{- with $subtitle }}<p class="card-text-subtitle{{ if $href }} {{ $linkClass }}{{ end }}">{{ partial "inline/card-markdown.html" (dict "value" . "page" $renderPage "owner" $args.page "field" "subtitle") }}</p>{{ end -}}
         </div>
         <div class="card-band card-band-highlight{{ $pad }}">
-            {{- with $highlight }}<p class="card-text-highlight{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | $renderPage.RenderString }}</p>{{ end -}}
+            {{- with $highlight }}<p class="card-text-highlight{{ if $href }} {{ $linkClass }}{{ end }}">{{ partial "inline/card-markdown.html" (dict "value" . "page" $renderPage "owner" $args.page "field" "highlight") }}</p>{{ end -}}
         </div>
         <div class="card-band card-band-body{{ $pad }}{{ $padBody }}">
             {{- with $cardText }}<div class="card-text{{ if $href }} {{ $linkClass }}{{ end }}">{{ . | safeHTML }}</div>{{ end -}}

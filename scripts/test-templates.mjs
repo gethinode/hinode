@@ -101,6 +101,42 @@ function checkButtonAttributes (document, environment) {
   console.log(`PASS button attributes DOM: ${environment}`)
 }
 
+function checkInlineCardMarkdown (document) {
+  const fixture = [...descendants(document)].find(node =>
+    element(node, 'div') && attributes(node)['data-card-markdown'] === 'inline')
+  assert.ok(fixture, 'card Markdown: missing inline fixture')
+  const field = name => [...descendants(fixture)].find(node =>
+    element(node, 'p') && attributes(node).class?.split(/\s+/).includes(`card-text-${name}`))
+  const subtitle = field('subtitle')
+  const highlight = field('highlight')
+  assert.ok(subtitle && highlight, 'card Markdown: expected both paragraph wrappers')
+  assert.ok([...descendants(subtitle)].some(node => element(node, 'em')), 'card Markdown: soft break lost emphasis')
+  assert.ok([...descendants(subtitle)].some(node =>
+    element(node, 'code') && node.childNodes[0]?.value === '<p>'), 'card Markdown: escaped code was rejected')
+  assert.ok([...descendants(highlight)].some(node => element(node, 'strong')), 'card Markdown: highlight lost strong text')
+}
+
+function checkInvalidCardMarkdown () {
+  for (const [fixture, field] of [
+    ['paragraphs', 'subtitle'], ['heading', 'subtitle'], ['list', 'highlight'],
+    ['fence', 'highlight'], ['mixed', 'subtitle']
+  ]) {
+    const result = spawnSync('hugo', ['-s', 'tests/templates', '--logLevel', 'error'], {
+      cwd: root,
+      encoding: 'utf8',
+      shell: process.platform === 'win32',
+      env: { ...process.env, HUGO_PARAMS_TESTS_CARDMARKDOWN: fixture }
+    })
+    if (result.error) throw result.error
+    const log = result.stdout + result.stderr
+    assert.equal(result.status, 1, `card Markdown: ${fixture} must fail the build\n${log}`)
+    assert.ok(log.includes(`Card ${field} supports only inline Markdown`), log)
+    assert.ok(log.includes('Move block content to the card body.'), log)
+    assert.doesNotMatch(log, /%!s\(/)
+  }
+  console.log('PASS card subtitle and highlight reject block Markdown')
+}
+
 function run (command, args) {
   // Windows needs a shell for Hugo's .cmd shim, never for an absolute Node executable.
   const result = spawnSync(command, args, { cwd: root, stdio: 'inherit', shell: process.platform === 'win32' && command === 'hugo' })
@@ -150,6 +186,7 @@ function checkSassTranspilers () {
   }
 }
 
+checkInvalidCardMarkdown()
 checkSassTranspilers()
 
 if (process.platform === 'win32') {
@@ -174,6 +211,7 @@ for (const environment of environments) {
     const document = parseFragment(readFileSync(homepage, 'utf8'))
     checkMetadata(document, environment || 'production')
     checkButtonAttributes(document, environment || 'production')
+    checkInlineCardMarkdown(document)
   }
 }
 // This separate fixture intentionally disables home; retain its existing strict-image checks.
