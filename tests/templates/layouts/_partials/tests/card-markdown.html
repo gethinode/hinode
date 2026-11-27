@@ -1,0 +1,18 @@
+{{- with site.Params.tests.cardmarkdown -}}
+    {{- $inputs := dict
+        "paragraphs" (dict "subtitle" "First paragraph.\n\nSecond paragraph.")
+        "heading"    (dict "subtitle" "## Heading")
+        "list"       (dict "highlight" "- One\n- Two")
+        "fence"      (dict "highlight" "```text\ncode\n```")
+        "mixed"      (dict "subtitle" "Before.\n\n> Quotation\n\nAfter.")
+    -}}
+    {{- partial "assets/card.html" (merge (dict "page" $ "title" "Invalid card Markdown") (index $inputs .)) -}}
+{{- else -}}
+    <div data-card-markdown="inline">
+        {{- partial "assets/card.html" (dict
+            "page" . "title" "Inline card Markdown"
+            "subtitle" "A *soft*\nline break and `<p>`."
+            "highlight" "**Strong** and `- inline code`."
+        ) -}}
+    </div>
+{{- end -}}
