@@ -112,12 +112,29 @@
     -webkit-box-orient: vertical;
 }
 
+// The stretched title link and text bands are siblings in the aligned grid.
+@mixin aligned-card-link-color($link-class, $active-color, $card: ".card-align-rows") {
+    @supports selector(:has(*)) {
+        // Separate states let WebKit update the bands as the title link gains or loses hover.
+        #{$card}:has(> .card-band-title > .stretched-link.#{$link-class}:hover),
+        #{$card}:has(> .card-band-title > .stretched-link.#{$link-class}:focus) {
+            > :is(.card-band-subtitle, .card-band-highlight) > .#{$link-class} {
+                color: $active-color if($enable-important-utilities, !important, null);
+            }
+        }
+    }
+}
+
+$card-zoom-link-hover-color: shade-color($primary, $link-shade-percentage);
+
 .card-zoom .card-body-link {
     &:hover,
     &:focus {
-        color: shade-color($primary, $link-shade-percentage) if($enable-important-utilities, !important, null);
+        color: $card-zoom-link-hover-color if($enable-important-utilities, !important, null);
     }
 }
+
+@include aligned-card-link-color("card-body-link", $card-zoom-link-hover-color, ".card-align-rows.card-zoom");
 
 @if $enable-dark-mode {
     @include color-mode(dark) {
@@ -127,6 +144,8 @@
                 color: $primary-bg-subtle-dark if($enable-important-utilities, !important, null);
             }
         }
+
+        @include aligned-card-link-color("card-body-link", $primary-bg-subtle-dark, ".card-align-rows.card-zoom");
     }
 }
 
