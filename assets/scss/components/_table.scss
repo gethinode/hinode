@@ -2,8 +2,18 @@
     border-bottom: none if($enable-important-utilities, !important, null);
 }
 
+// The list footer gets its spacing from mod-simple-datatables.
 .datatable-bottom {
-    padding-top: 0 if($enable-important-utilities, !important, null);
+    $list-layout: ".datatable-list";
+
+    // Keep the original selector specificity when utilities use normal priority.
+    @if not $enable-important-utilities {
+        $list-layout: ":where(#{$list-layout})";
+    }
+
+    :not(#{$list-layout}) > & {
+        padding-top: 0;
+    }
 }
 
 .datatable-sorter {
