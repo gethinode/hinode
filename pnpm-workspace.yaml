@@ -66,4 +66,5 @@ overrides:
 
 # Select standard Hugo archives from 0.170.0 and Extended archives for older Hugo.
 patchedDependencies:
-  hugo-extended@0.170.0: patches/hugo-extended@0.170.0.patch
+  # Keep the installer fix on 0.170.x patch releases.
+  "hugo-extended@~0.170.0": patches/hugo-extended@0.170.0.patch
