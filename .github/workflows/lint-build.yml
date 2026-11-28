@@ -38,7 +38,7 @@ jobs:
         # Reuse the production floor build in one required job for the browser check.
         if [[ "$RUNNER_OS" == "Linux" && "$(node -p 'process.versions.node.split(".")[0]')" == "24" ]]; then
           pnpm exec playwright install --with-deps --only-shell chromium
-          GOGC=400 pnpm run test:card-layout
+          GOGC=400 pnpm run test:hugo-floor --card-layout --table-footer
         else
           GOGC=400 pnpm run test:hugo-floor
         fi

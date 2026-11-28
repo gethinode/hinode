@@ -246,6 +246,10 @@ if (runAsMain) {
       const { verifyCardLayout } = await import('./test-card-layout.mjs')
       await verifyCardLayout(publicDir)
     }
+    if (process.argv.includes('--table-footer')) {
+      const { verifyTableFooter } = await import('./test-table-footer.mjs')
+      await verifyTableFooter(publicDir)
+    }
   } catch (error) {
     console.error(`Hugo floor check failed: ${error.message}`)
     process.exitCode = 1
