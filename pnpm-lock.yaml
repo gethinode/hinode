@@ -21,7 +21,7 @@ overrides:
   undici@7: ^7.30.1
 
 patchedDependencies:
-  hugo-extended@0.170.0: 92db866b70b875ea0aa801d7f7c13bb67aea8bd0a3bdab25c71135df07252bed
+  hugo-extended@~0.170.0: 92db866b70b875ea0aa801d7f7c13bb67aea8bd0a3bdab25c71135df07252bed
 
 importers:
 
