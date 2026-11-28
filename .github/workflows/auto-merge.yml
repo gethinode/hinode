@@ -8,5 +8,5 @@ permissions:
 
 jobs:
   auto-merge:
-    uses: gethinode/.github/.github/workflows/auto-merge.yml@v1
+    uses: gethinode/.github/.github/workflows/auto-merge.yml@5e3b4726b846a1b4887934ca11ba1e6a7534a8ab # Dependabot App pilot
     secrets: inherit
